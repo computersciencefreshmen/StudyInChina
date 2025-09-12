@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* Global base */
-html, body { @apply bg-slate-50 text-slate-900 antialiased; }
+html, body { @apply bg-slate-50 text-slate-900 antialiased; font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
 
 /* Reusable utility wrappers to keep JSX tidy */
 .container { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
@@ -15,7 +15,7 @@ html, body { @apply bg-slate-50 text-slate-900 antialiased; }
 .tab.active { @apply bg-brand text-white border-brand; }
 
 .grid-auto { @apply grid gap-4; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); }
-.card { @apply bg-white border border-slate-200 rounded-xl p-4 flex flex-col gap-3 shadow-sm; }
+.card { @apply bg-white border border-slate-200 rounded-xl p-4 flex flex-col gap-3 shadow-card transition-transform; }
 .muted { @apply text-slate-600 text-sm; }
 .chip { @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-slate-200 bg-slate-100 text-xs; }
 .row { @apply flex items-center gap-2 flex-wrap; }
