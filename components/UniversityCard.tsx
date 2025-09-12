@@ -14,7 +14,7 @@ export default function UniversityCard({ u, lang, toggleFav, isFav }: { u: Unive
           )}
         </div>
       </div>
-      {u.englishName && <div className="muted">{u.englishName}</div>}
+      {u.englishName && lang==='en' && <div className="muted">{u.englishName}</div>}
       {u.city && <div className="muted">{(lang==='en'? 'City': lang==='zh'? '城市':'Город')}: {pick(u.city)}</div>}
       <div className="row">
         {u.programs.map(p => (<span key={p} className="chip">{programLabel(lang, p)}</span>))}
