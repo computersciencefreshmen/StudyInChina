@@ -4,9 +4,10 @@ import UniversityCard from '../components/UniversityCard'
 import { UNIVERSITIES } from '../data/universities'
 import { Lang, RegionId, ProgramId, regionLabel, programLabel } from '../lib/i18n'
 import Footer from '../components/Footer'
+import { useLanguage } from '../lib/lang'
 
 export default function Universities() {
-  const [lang, setLang] = useState<Lang>('en')
+  const { lang, setLang } = useLanguage()
   const [region, setRegion] = useState<RegionId | 'ALL'>('ALL')
   const [program, setProgram] = useState<ProgramId | 'ALL'>('ALL')
   const [q, setQ] = useState('')

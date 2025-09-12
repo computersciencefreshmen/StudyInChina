@@ -3,9 +3,10 @@ import Nav from '../components/Nav'
 import type { Lang } from '../lib/i18n'
 import Footer from '../components/Footer'
 import { ClipboardDocumentListIcon, CheckCircleIcon, CurrencyDollarIcon, GlobeAltIcon, AcademicCapIcon } from '@heroicons/react/24/outline'
+import { useLanguage } from '../lib/lang'
 
 export default function Guide(){
-  const [lang, setLang] = useState<Lang>('en')
+  const { lang, setLang } = useLanguage()
   const t = (en:string, zh:string, ru:string) => lang==='en'? en: (lang==='zh'? zh: ru)
   const steps = [
     { icon: GlobeAltIcon, en: 'Assess HSK (target 4–5)', zh: '评估HSK（目标4–5）', ru: 'Оцените HSK (цель 4–5)' },

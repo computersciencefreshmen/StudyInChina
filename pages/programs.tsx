@@ -5,9 +5,10 @@ import { UNIVERSITIES } from '../data/universities'
 import { programLabel } from '../lib/i18n'
 import Footer from '../components/Footer'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
+import { useLanguage } from '../lib/lang'
 
 export default function Programs(){
-  const [lang, setLang] = useState<Lang>('en')
+  const { lang, setLang } = useLanguage()
   const t = (en:string, zh:string, ru:string) => lang==='en'? en: (lang==='zh'? zh: ru)
   return (
     <>

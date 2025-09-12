@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import type { Lang } from '../lib/i18n'
 import Nav from '../components/Nav'
+import { useLanguage } from '../lib/lang'
 import Link from 'next/link'
 import { UserCircleIcon, BookOpenIcon, AcademicCapIcon, MapPinIcon, BanknotesIcon, CloudIcon, SparklesIcon, ShieldCheckIcon } from '@heroicons/react/24/outline'
 import Footer from '../components/Footer'
 
 export default function Home() {
-  const [lang, setLang] = useState<Lang>('en')
+  const { lang, setLang } = useLanguage()
   const t = (en:string, zh:string, ru:string) => lang==='en'? en: (lang==='zh'? zh: ru)
   return (
     <>

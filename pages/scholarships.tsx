@@ -3,9 +3,10 @@ import type { Lang } from '../lib/i18n'
 import { AcademicCapIcon, ClipboardDocumentListIcon, CalendarDaysIcon, LightBulbIcon, CheckCircleIcon, GlobeAltIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import Footer from '../components/Footer'
 import Nav from '../components/Nav'
+import { useLanguage } from '../lib/lang'
 
 export default function Scholarships(){
-  const [lang, setLang] = useState<Lang>('en')
+  const { lang, setLang } = useLanguage()
   const t = (en:string, zh:string, ru:string) => lang==='en'? en: (lang==='zh'? zh: ru)
   return (
     <>

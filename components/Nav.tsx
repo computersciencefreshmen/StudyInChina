@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import type { Lang } from '../lib/i18n'
+import { useLanguage } from '../lib/lang'
 
-export default function Nav({ lang, setLang }: { lang: Lang, setLang: (l:Lang)=>void }) {
+export default function Nav() {
+  const { lang, setLang } = useLanguage()
   const router = useRouter()
   const path = router.pathname
   const t = (en: string, zh: string, ru: string) => lang === 'en' ? en : (lang==='zh'? zh : ru)
