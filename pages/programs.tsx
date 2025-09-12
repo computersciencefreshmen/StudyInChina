@@ -3,6 +3,8 @@ import type { Lang } from '../lib/i18n'
 import Nav from '../components/Nav'
 import { UNIVERSITIES } from '../data/universities'
 import { programLabel } from '../lib/i18n'
+import Footer from '../components/Footer'
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 
 export default function Programs(){
   const [lang, setLang] = useState<Lang>('en')
@@ -28,9 +30,12 @@ export default function Programs(){
                   <div className="text-lg font-semibold mb-2">{programLabel(lang, pg)}</div>
                   <div className="grid grid-cols-1 gap-3">
                     {view.map((c, i) => (
-                      <a key={i} href={c.url} target="_blank" rel="noopener noreferrer" className="p-4 border border-slate-200 rounded-xl bg-white hover:-translate-y-0.5 hover:shadow-lg transition">
-                        <div className="font-medium">{c.title}</div>
-                        <div className="muted">HSK: {c.hsk}</div>
+                      <a key={i} href={c.url} target="_blank" rel="noopener noreferrer" className="p-4 border border-slate-200 rounded-xl bg-white hover:-translate-y-0.5 hover:shadow-lg transition flex items-center justify-between">
+                        <div>
+                          <div className="font-medium">{c.title}</div>
+                          <div className="muted">HSK: {c.hsk}</div>
+                        </div>
+                        <ArrowTopRightOnSquareIcon className="w-5 h-5 text-slate-500"/>
                       </a>
                     ))}
                   </div>
@@ -39,7 +44,7 @@ export default function Programs(){
             })}
           </div>
         </section>
-        <div className="footer">Created with ❤️ for Elizabeth's study abroad journey</div>
+        <Footer lang={lang} />
       </main>
     </>
   )

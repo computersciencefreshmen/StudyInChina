@@ -3,6 +3,7 @@ import Nav from '../components/Nav'
 import UniversityCard from '../components/UniversityCard'
 import { UNIVERSITIES } from '../data/universities'
 import { Lang, RegionId, ProgramId, regionLabel, programLabel } from '../lib/i18n'
+import Footer from '../components/Footer'
 
 export default function Universities() {
   const [lang, setLang] = useState<Lang>('en')
@@ -89,6 +90,7 @@ export default function Universities() {
           ))}
         </div>
         <div className="footer">Created with ❤️ for Elizabeth's study abroad journey</div>
+        <Footer lang={lang} />
       </main>
     </>
   )

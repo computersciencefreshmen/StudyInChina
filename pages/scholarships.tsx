@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Lang } from '../lib/i18n'
 import { AcademicCapIcon, ClipboardDocumentListIcon, CalendarDaysIcon, LightBulbIcon, CheckCircleIcon, GlobeAltIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import Footer from '../components/Footer'
 import Nav from '../components/Nav'
 
 export default function Scholarships(){
@@ -102,6 +103,7 @@ export default function Scholarships(){
           </section>
         </div>
         <div className="footer">Created with ❤️ for Elizabeth's study abroad journey</div>
+        <Footer lang={lang} />
       </main>
     </>
   )

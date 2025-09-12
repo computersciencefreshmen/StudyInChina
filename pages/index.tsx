@@ -3,6 +3,7 @@ import type { Lang } from '../lib/i18n'
 import Nav from '../components/Nav'
 import Link from 'next/link'
 import { UserCircleIcon, BookOpenIcon, AcademicCapIcon, MapPinIcon, BanknotesIcon, CloudIcon, SparklesIcon, ShieldCheckIcon } from '@heroicons/react/24/outline'
+import Footer from '../components/Footer'
 
 export default function Home() {
   const [lang, setLang] = useState<Lang>('en')
@@ -95,7 +96,7 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="container"><div className="footer">Created with ❤️ for Elizabeth's study abroad journey</div></div>
+        <Footer lang={lang} />
       </main>
     </>
   )
