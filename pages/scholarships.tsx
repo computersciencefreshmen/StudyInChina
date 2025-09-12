@@ -102,7 +102,6 @@ export default function Scholarships(){
             </div>
           </section>
         </div>
-        <div className="footer">Created with ❤️ for Elizabeth's study abroad journey</div>
         <Footer lang={lang} />
       </main>
     </>

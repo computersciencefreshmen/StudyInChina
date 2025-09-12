@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Nav from '../components/Nav'
 import type { Lang } from '../lib/i18n'
+import Footer from '../components/Footer'
 import { ClipboardDocumentListIcon, CheckCircleIcon, CurrencyDollarIcon, GlobeAltIcon, AcademicCapIcon } from '@heroicons/react/24/outline'
 
 export default function Guide(){
@@ -35,7 +36,7 @@ export default function Guide(){
             })}
           </div>
         </div>
-        <div className="footer">Created with ❤️ for Elizabeth's study abroad journey</div>
+        <Footer lang={lang} />
       </main>
     </>
   )

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* Global base */
-html, body { @apply bg-slate-50 text-slate-900 antialiased; font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
+html, body { @apply bg-slate-50 text-slate-900 antialiased text-[15px]; font-family: var(--font-inter), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
 
 /* Reusable utility wrappers to keep JSX tidy */
 .container { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }

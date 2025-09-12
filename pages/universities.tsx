@@ -89,7 +89,6 @@ export default function Universities() {
             <UniversityCard key={u.viewUrl} u={u} lang={lang} toggleFav={toggleFav} isFav={favs.includes(pick(u.name))} />
           ))}
         </div>
-        <div className="footer">Created with ❤️ for Elizabeth's study abroad journey</div>
         <Footer lang={lang} />
       </main>
     </>
