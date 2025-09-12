@@ -399,4 +399,64 @@ export const UNIVERSITIES: University[] = [
     viewUrl: 'https://oia.henu.edu.cn/',
     applyUrl: 'https://henu.17gz.org/'
   },
+  // Added — EAST_CHINA
+  {
+    name: l('Shanghai International Studies University','上海外国语大学','Шанхайский университет иностранных языков (SISU)'),
+    englishName: 'Shanghai International Studies University (SISU)',
+    region: 'EAST_CHINA',
+    city: l('Shanghai','上海','Шанхай'),
+    programs: ['Translation','International Relations'],
+    hskNote: l('Language/translation strong; Chinese-taught often HSK4–5; foundation available.','语言/翻译实力强；中文授课多HSK4–5；可语言/预科过渡。','Сильный языковой/переводческий вуз; часто HSK4–5; возможна подготовка/язык.'),
+    bridgeNote: l('Language school with robust programs.','语言学院成熟。','Сильная языковая школа.'),
+    programsDetailed: [
+      { program: 'Translation', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'https://www.shisu.edu.cn/en/' },
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'https://www.shisu.edu.cn/en/' }
+    ],
+    viewUrl: 'https://www.shisu.edu.cn/en/',
+    applyUrl: 'https://apply.shisu.edu.cn/'
+  },
+  // Added — NORTH_CHINA
+  {
+    name: l('Nankai University','南开大学','Университет Нанкай'),
+    englishName: 'Nankai University',
+    region: 'NORTH_CHINA',
+    city: l('Tianjin','天津','Тяньцзинь'),
+    programs: ['International Relations'],
+    hskNote: l('IR commonly HSK5; language/foundation recommended for HSK3–4.','IR常见HSK5；HSK3–4建议语言/预科过渡。','МО обычно HSK5; с HSK3–4 — подготовка/язык.'),
+    bridgeNote: l('International school offers language courses; 17gz portal.','国际学院语言课程；17gz报名。','Языковые курсы; подача через 17gz.'),
+    programsDetailed: [
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK5 (common)','HSK5（常见）','HSK5 (часто)'), acceptsFoundation: true, url: 'https://is.nankai.edu.cn/' }
+    ],
+    viewUrl: 'https://is.nankai.edu.cn/',
+    applyUrl: 'https://nankai.17gz.org/'
+  },
+  {
+    name: l('Beijing International Studies University','北京第二外国语学院','Пекинский университет международных исследований (BISU)'),
+    englishName: 'Beijing International Studies University (BISU)',
+    region: 'NORTH_CHINA',
+    city: l('Beijing','北京','Пекин'),
+    programs: ['Translation','International Relations'],
+    hskNote: l('Translation/IR oriented; Chinese-taught HSK4–5; foundation supported.','翻译/国关向；中文授课HSK4–5；支持预科/语言。','Перевод/МО; HSK4–5; поддержка подготовит./языка.'),
+    bridgeNote: l('Language school and preparatory options available.','设有语言与预科项目。','Есть языковые и подготовительные программы.'),
+    programsDetailed: [
+      { program: 'Translation', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'https://sie.bisu.edu.cn/' },
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'https://sie.bisu.edu.cn/' }
+    ],
+    viewUrl: 'https://sie.bisu.edu.cn/',
+    applyUrl: 'https://bisu.17gz.org/'
+  },
+  {
+    name: l('Beijing Normal University','北京师范大学','Пекинский педагогический университет (BNU)'),
+    englishName: 'Beijing Normal University (BNU)',
+    region: 'NORTH_CHINA',
+    city: l('Beijing','北京','Пекин'),
+    programs: ['International Relations'],
+    hskNote: l('Chinese-taught often HSK5; language bridging possible.','中文授课多HSK5；可语言过渡。','Часто HSK5; возможна языковая подготовка.'),
+    bridgeNote: l('International college language programs; 17gz portal.','国际学院语言课程；17gz报名。','Языковые курсы; подача через 17gz.'),
+    programsDetailed: [
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK5','HSK5','HSK5'), acceptsFoundation: true, url: 'https://iso.bnu.edu.cn/' }
+    ],
+    viewUrl: 'https://iso.bnu.edu.cn/',
+    applyUrl: 'https://bnu.17gz.org/'
+  },
 ]

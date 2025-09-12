@@ -101,6 +101,47 @@ export default function Scholarships(){
               <a className="btn primary" href="https://studyinchina.csc.edu.cn/" target="_blank" rel="noopener noreferrer">{t('Apply on CampusChina','前往留学中国网申请','Подать на CampusChina')}</a>
             </div>
           </section>
+
+          {/* For Russian students */}
+          <section className="section">
+            <h3 className="font-semibold mb-3">{t('For Russian Students','面向俄罗斯学生','Для граждан РФ')}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 border border-slate-200 rounded-xl bg-white">
+                <div className="font-semibold mb-1">{t('CSC Bilateral Program (China–Russia)','CSC双边项目（中俄政府奖学金）','Гос. стипендия КНР: двусторонняя (Китай–Россия)')}</div>
+                <p className="text-slate-700 text-sm mb-2">
+                  {t('Intergovernmental program. Apply on CampusChina as “Bilateral Program (Type A)”. Russian side may publish additional notices each year.','两国政府间项目。通过留学中国网选择“双边项目（Type A）”申报。俄罗斯方每年也会发布相应通知。','Межправительственная программа. Подача на CampusChina: «Bilateral Program (Type A)». Российская сторона публикует ежегодные объявления.')}
+                </p>
+                <div className="row">
+                  <a className="btn" href="https://www.campuschina.org/" target="_blank" rel="noopener noreferrer">{t('Learn More','了解详情','Подробнее')}</a>
+                  <a className="btn primary" href="https://studyinchina.csc.edu.cn/" target="_blank" rel="noopener noreferrer">{t('Apply','申请','Подать')}</a>
+                </div>
+              </div>
+              <div className="p-4 border border-slate-200 rounded-xl bg-white">
+                <div className="font-semibold mb-1">{t('Shanghai Government Scholarship (SGS)','上海市政府奖学金（SGS）','Стипендия правительства Шанхая (SGS)')}</div>
+                <p className="text-slate-700 text-sm mb-2">
+                  {t('Open to outstanding international students including Russian citizens. Covers tuition, accommodation subsidy, and stipend (by category).','面向优秀国际生（含俄罗斯籍）。按类别覆盖学费、住宿补贴、生活费等。','Для иностранных студентов, в т.ч. граждан РФ. По категориям покрывает обучение, проживание и стипендию.')}
+                </p>
+                <div className="row">
+                  <a className="btn" href="https://study.edu.sh.gov.cn/" target="_blank" rel="noopener noreferrer">{t('Official Site','官方网站','Официальный сайт')}</a>
+                </div>
+              </div>
+              <div className="p-4 border border-slate-200 rounded-xl bg-white">
+                <div className="font-semibold mb-1">{t('Jiangsu Jasmine Scholarship','江苏省“茉莉花”政府奖学金','Провинц. стипендия Цзянсу Jasmine')}</div>
+                <p className="text-slate-700 text-sm mb-2">
+                  {t('Provincial scholarship supporting degree and language programs in Jiangsu.','支持在江苏就读学位/语言项目的优秀学生。','Провинциальный грант для обучения в пров. Цзянсу (языковые/степенные программы).')}
+                </p>
+                <div className="row">
+                  <a className="btn" href="https://www.studyinjiangsu.org/" target="_blank" rel="noopener noreferrer">{t('Official Site','官方网站','Официальный сайт')}</a>
+                </div>
+              </div>
+              <div className="p-4 border border-slate-200 rounded-xl bg-white">
+                <div className="font-semibold mb-1">{t('University/City Scholarships','高校/城市奖学金','Университетские/городские гранты')}</div>
+                <p className="text-slate-700 text-sm mb-2">
+                  {t('Many target universities offer their own or city-level scholarships (e.g., Beijing, Harbin). Check each OIA for details.','多数目标高校提供校级或城市奖学金（如北京、哈尔滨等），以各校国际处公告为准。','Многие вузы/города дают собственные гранты (Пекин, Харбин и др.); проверяйте сайты OIA вузов.')}
+                </p>
+              </div>
+            </div>
+          </section>
         </div>
         <Footer lang={lang} />
       </main>
