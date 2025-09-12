@@ -20,7 +20,7 @@ html, body { @apply bg-slate-50 text-slate-900 antialiased; font-family: var(--f
 .chip { @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-slate-200 bg-slate-100 text-xs; }
 .row { @apply flex items-center gap-2 flex-wrap; }
 .row-spread { @apply flex items-center justify-between gap-3; }
-.btn { @apply inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 bg-white cursor-pointer no-underline font-semibold text-slate-900; }
+.btn { @apply inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-slate-200 bg-white cursor-pointer no-underline font-semibold text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 transition; }
 .btn.primary { @apply bg-amber-500 text-slate-900 border-0; }
 .btn.link { @apply text-sky-800; }
 .btn:hover { @apply opacity-90; }
