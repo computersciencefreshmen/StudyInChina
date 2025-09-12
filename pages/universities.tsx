@@ -1,12 +1,13 @@
 import { useMemo, useState } from 'react'
 import Nav from '../components/Nav'
 import UniversityCard from '../components/UniversityCard'
-import { UNIVERSITIES, Region, Program } from '../data/universities'
+import { UNIVERSITIES } from '../data/universities'
+import { Lang, RegionId, ProgramId, regionLabel, programLabel } from '../lib/i18n'
 
 export default function Universities() {
-  const [lang, setLang] = useState<'en'|'zh'|'ru'>('zh')
-  const [region, setRegion] = useState<Region | '全部'>('全部')
-  const [program, setProgram] = useState<Program | '全部'>('全部')
+  const [lang, setLang] = useState<Lang>('zh')
+  const [region, setRegion] = useState<RegionId | 'ALL'>('ALL')
+  const [program, setProgram] = useState<ProgramId | 'ALL'>('ALL')
   const [q, setQ] = useState('')
   const [favs, setFavs] = useState<string[]>(() => {
     if (typeof window === 'undefined') return []
@@ -15,11 +16,11 @@ export default function Universities() {
 
   const list = useMemo(() => {
     const keyword = q.trim().toLowerCase()
-    return UNIVERSITIES.filter(u => (region==='全部' || u.region===region) && (program==='全部' || u.programs.includes(program))
-      && (!keyword || [u.name, u.englishName, u.city, u.region].filter(Boolean).some(x => String(x).toLowerCase().includes(keyword))))
-  }, [region, program, q])
+    return UNIVERSITIES.filter(u => (region==='ALL' || u.region===region) && (program==='ALL' || u.programs.includes(program))
+      && (!keyword || [u.name[lang], u.englishName, u.city?.[lang], regionLabel(lang, u.region)].filter(Boolean).some(x => String(x).toLowerCase().includes(keyword))))
+  }, [region, program, q, lang])
 
-  const t = (en:string, zh:string, ru?:string) => lang==='en'? en: (lang==='zh'? zh: (ru??en))
+  const t = (en:string, zh:string, ru:string) => (lang==='en'? en: (lang==='zh'? zh: ru))
 
   const toggleFav = (name:string) => {
     setFavs(prev => {
@@ -62,14 +63,16 @@ export default function Universities() {
         </div>
 
         <div className="filter">
-          {(['全部','华北','东北','华东','华中'] as const).map(r => (
-            <button key={r} className={"pill" + (region===r? ' active':'')} onClick={()=>setRegion(r as any)}>{r}</button>
+          {(['ALL','NORTH_CHINA','NORTHEAST','EAST_CHINA','CENTRAL_CHINA'] as const).map(r => (
+            <button key={r} className={"pill" + (region===r? ' active':'')} onClick={()=>setRegion(r as any)}>
+              {r==='ALL' ? (lang==='en'?'All':lang==='zh'?'全部':'Все') : regionLabel(lang, r)}
+            </button>
           ))}
         </div>
         <div className="filter" style={{marginTop:6}}>
-          {(['全部','Translation','International Relations'] as const).map(p => (
+          {(['ALL','Translation','International Relations'] as const).map(p => (
             <button key={p} className={"pill" + (program===p? ' active':'')} onClick={()=>setProgram(p as any)}>
-              {p==='Translation'? t('Translation','翻译/口译','Перевод/устный') : p==='International Relations' ? t('International Relations','国际关系','Международные отношения') : '全部'}
+              {p==='ALL' ? (lang==='en'?'All':lang==='zh'?'全部':'Все') : programLabel(lang, p as ProgramId)}
             </button>
           ))}
         </div>

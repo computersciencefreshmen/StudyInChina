@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import type { Lang } from '../lib/i18n'
 import Nav from '../components/Nav'
 
 export default function Scholarships(){
-  const [lang, setLang] = useState<'en'|'zh'|'ru'>('zh')
-  const t = (en:string, zh:string, ru?:string) => lang==='en'? en: (lang==='zh'? zh: (ru??en))
+  const [lang, setLang] = useState<Lang>('zh')
+  const t = (en:string, zh:string, ru:string) => lang==='en'? en: (lang==='zh'? zh: ru)
   return (
     <>
       <Nav lang={lang} setLang={setLang} />

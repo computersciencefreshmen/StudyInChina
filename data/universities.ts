@@ -1,18 +1,17 @@
-export type Program = 'Translation' | 'International Relations'
-export type Region = '华北' | '东北' | '华东' | '华中'
+import { LText, ProgramId, RegionId } from '../lib/i18n'
 
 export type University = {
-  name: string
+  name: LText
   englishName?: string
-  region: Region
-  city?: string
-  programs: Program[]
-  hskNote: string
-  bridgeNote?: string
+  region: RegionId
+  city?: LText
+  programs: ProgramId[]
+  hskNote: LText
+  bridgeNote?: LText
   programsDetailed?: Array<{
-    program: Program
+    program: ProgramId
     degree: 'BA' | 'MA' | 'Other'
-    hsk: string
+    hsk: LText
     acceptsFoundation: boolean
     url: string
   }>
@@ -20,277 +19,352 @@ export type University = {
   applyUrl: string
 }
 
+const zh = (s: string) => ({ zh: s, en: '', ru: '' } as LText)
+const en = (s: string) => ({ en: s, zh: '', ru: '' } as LText)
+const ru = (s: string) => ({ ru: s, en: '', zh: '' } as LText)
+const l = (enS:string, zhS:string, ruS:string): LText => ({ en: enS, zh: zhS, ru: ruS })
+
 export const UNIVERSITIES: University[] = [
-  // 华北
+  // 华北 NORTH_CHINA
   {
-    name: '北京外国语大学', englishName: 'Beijing Foreign Studies University (BFSU)', region: '华北', city: 'Beijing',
-    programs: ['Translation', 'International Relations'],
-    hskNote: '中文授课通常需HSK5；HSK3-4可先读预科/汉语进修再升本',
-    bridgeNote: '设有预科与汉语强化项目，常见路径为1年语言+升本（外语类/人文）',
+    name: l('Beijing Foreign Studies University','北京外国语大学','Пекинский университет иностранных языков'),
+    englishName: 'Beijing Foreign Studies University (BFSU)',
+    region: 'NORTH_CHINA',
+    city: l('Beijing','北京','Пекин'),
+    programs: ['Translation','International Relations'],
+    hskNote: l('Chinese-taught often HSK5; with HSK3–4, do foundation/language first.','中文授课通常需HSK5；HSK3–4可先预科/语言后升本。','Программы на китайском обычно требуют HSK5; с HSK3–4 — подготовительный/языковой год.'),
+    bridgeNote: l('Has foundation and intensive Chinese routes.','设有预科与汉语强化项目。','Есть подготовительные и языковые программы.'),
     programsDetailed: [
-      { program: 'Translation', degree: 'BA', hsk: 'HSK4–5（以院系当年公告为准）', acceptsFoundation: true, url: 'https://en.bfsu.edu.cn/Academics.htm' },
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK5（建议）', acceptsFoundation: true, url: 'https://en.bfsu.edu.cn/Academics.htm' }
+      { program: 'Translation', degree: 'BA', hsk: l('HSK4–5 (per school notice)','HSK4–5（以院系公告为准）','HSK4–5 (по правилам факультета)'), acceptsFoundation: true, url: 'https://en.bfsu.edu.cn/Academics.htm' },
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK5 (typical)','HSK5（常见）','HSK5 (обычно)'), acceptsFoundation: true, url: 'https://en.bfsu.edu.cn/Academics.htm' }
     ],
     viewUrl: 'https://en.bfsu.edu.cn/',
     applyUrl: 'https://admission.bfsu.edu.cn/'
   },
   {
-    name: '北京语言大学', englishName: 'Beijing Language and Culture University (BLCU)', region: '华北', city: 'Beijing',
-    programs: ['Translation', 'International Relations'],
-    hskNote: '多数本科中文授课HSK4-5；HSK3-4可走预科/汉语进修通道',
-    bridgeNote: '预科/汉语进修很成熟，支持语言过渡后申请人文专业',
+    name: l('Beijing Language and Culture University','北京语言大学','Пекинский университет языка и культуры'),
+    englishName: 'Beijing Language and Culture University (BLCU)',
+    region: 'NORTH_CHINA',
+    city: l('Beijing','北京','Пекин'),
+    programs: ['Translation','International Relations'],
+    hskNote: l('Most Chinese-taught need HSK4–5; HSK3–4 can do language/foundation first.','多数中文授课HSK4–5；HSK3–4可先语言/预科。','Обычно HSK4–5; с HSK3–4 — сначала язык/подготовительное.'),
+    bridgeNote: l('Very mature language/foundation pathways.','预科/汉语进修成熟。','Зрелые языковые/подготовительные маршруты.'),
     programsDetailed: [
-      { program: 'Translation', degree: 'BA', hsk: 'HSK4（部分方向HSK5）', acceptsFoundation: true, url: 'https://admission.blcu.edu.cn/' },
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4–5', acceptsFoundation: true, url: 'https://admission.blcu.edu.cn/' }
+      { program: 'Translation', degree: 'BA', hsk: l('HSK4 (some tracks 5)','HSK4（部分方向HSK5）','HSK4 (иногда 5)'), acceptsFoundation: true, url: 'https://admission.blcu.edu.cn/' },
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'https://admission.blcu.edu.cn/' }
     ],
     viewUrl: 'https://admission.blcu.edu.cn/',
     applyUrl: 'https://apply.blcu.edu.cn/'
   },
   {
-    name: '对外经济贸易大学', englishName: 'University of International Business and Economics (UIBE)', region: '华北', city: 'Beijing',
+    name: l('University of International Business and Economics','对外经济贸易大学','Университет международного бизнеса и экономики (UIBE)'),
+    englishName: 'University of International Business and Economics (UIBE)',
+    region: 'NORTH_CHINA',
+    city: l('Beijing','北京','Пекин'),
     programs: ['International Relations'],
-    hskNote: '中文授课常见HSK4-5；HSK3-4建议先读预科/语言班',
-    bridgeNote: '国际学院提供预科/语言强化路径',
+    hskNote: l('Chinese-taught often HSK4–5; HSK3–4 do language/foundation first.','中文授课常见HSK4–5；HSK3–4先语言/预科。','Обычно HSK4–5; с HSK3–4 — язык/подготовительное.'),
+    bridgeNote: l('Foundation/Language via School of International Education.','国际学院提供预科/语言强化。','Подготовительные/языковые курсы через институт международного образования.'),
     programsDetailed: [
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4–5', acceptsFoundation: true, url: 'https://sie.uibe.edu.cn/' }
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'https://sie.uibe.edu.cn/' }
     ],
     viewUrl: 'https://sie.uibe.edu.cn/',
     applyUrl: 'https://apply.uibe.edu.cn/'
   },
   {
-    name: '中央民族大学', englishName: 'Minzu University of China (MUC)', region: '华北', city: 'Beijing',
+    name: l('Minzu University of China','中央民族大学','Центральный университет национальностей (Minzu)'),
+    englishName: 'Minzu University of China (MUC)',
+    region: 'NORTH_CHINA',
+    city: l('Beijing','北京','Пекин'),
     programs: ['International Relations'],
-    hskNote: '中文授课通常HSK4-5；可先语言过渡',
-    bridgeNote: '国际教育学院提供语言/预科项目',
+    hskNote: l('Chinese-taught typically HSK4–5; language transition available.','中文授课通常HSK4–5；可语言过渡。','Обычно HSK4–5; возможен языковой переход.'),
+    bridgeNote: l('Language/Foundation via International Education College.','国际教育学院语言/预科项目。','Языковые/подготовительные программы в институте международного образования.'),
     programsDetailed: [
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4–5', acceptsFoundation: true, url: 'https://international.muc.edu.cn/' }
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'https://international.muc.edu.cn/' }
     ],
     viewUrl: 'https://international.muc.edu.cn/',
     applyUrl: 'https://international.muc.edu.cn/'
   },
   {
-    name: '天津外国语大学', englishName: 'Tianjin Foreign Studies University (TFSU)', region: '华北', city: 'Tianjin',
-    programs: ['Translation', 'International Relations'],
-    hskNote: '语言/外语类本科常见HSK4；不足者可先语言学习',
-    bridgeNote: '提供预科/语言课程，支持“先过渡”',
+    name: l('Tianjin Foreign Studies University','天津外国语大学','Тяньцзиньский университет иностранных языков'),
+    englishName: 'Tianjin Foreign Studies University (TFSU)',
+    region: 'NORTH_CHINA',
+    city: l('Tianjin','天津','Тяньцзинь'),
+    programs: ['Translation','International Relations'],
+    hskNote: l('Language/translation BA often HSK4; can do language first.','外语/翻译类本科常见HSK4；可先语言学习。','Для языковых/переводческих направлений часто HSK4; можно начать с языкового курса.'),
+    bridgeNote: l('Has foundation/language courses.','提供预科/语言课程。','Есть подготовительные/языковые курсы.'),
     programsDetailed: [
-      { program: 'Translation', degree: 'BA', hsk: 'HSK4', acceptsFoundation: true, url: 'https://sie.tjfsu.edu.cn/' },
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4–5', acceptsFoundation: true, url: 'https://sie.tjfsu.edu.cn/' }
+      { program: 'Translation', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'https://sie.tjfsu.edu.cn/' },
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'https://sie.tjfsu.edu.cn/' }
     ],
     viewUrl: 'https://sie.tjfsu.edu.cn/',
     applyUrl: 'https://apply.tjfsu.edu.cn/'
   },
   {
-    name: '河北大学', englishName: 'Hebei University (HBU)', region: '华北', city: 'Baoding',
+    name: l('Hebei University','河北大学','Университет Хэбэй'),
+    englishName: 'Hebei University (HBU)',
+    region: 'NORTH_CHINA',
+    city: l('Baoding','保定','Баодин'),
     programs: ['International Relations'],
-    hskNote: '中文授课一般HSK4起；可先预科/语言提分',
-    bridgeNote: '使用通用国际学生线上报名平台（17gz）',
+    hskNote: l('Chinese-taught usually HSK4+; foundation possible via 17gz.','中文授课一般HSK4+；17gz通道可预科。','Обычно HSK4+; возможны подготовительные через 17gz.'),
+    bridgeNote: l('Uses 17gz platform.','使用17gz报名平台。','Использует платформу 17gz.'),
     programsDetailed: [
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4', acceptsFoundation: true, url: 'http://iee.hbu.edu.cn/' }
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'http://iee.hbu.edu.cn/' }
     ],
     viewUrl: 'http://iee.hbu.edu.cn/',
     applyUrl: 'https://hebei.17gz.org/'
   },
 
-  // 东北
+  // 东北 NORTHEAST
   {
-    name: '哈尔滨工业大学', englishName: 'Harbin Institute of Technology (HIT)', region: '东北', city: 'Harbin',
+    name: l('Harbin Institute of Technology','哈尔滨工业大学','Харбинский политехнический университет (HIT)'),
+    englishName: 'Harbin Institute of Technology (HIT)',
+    region: 'NORTHEAST',
+    city: l('Harbin','哈尔滨','Харбин'),
     programs: ['International Relations'],
-    hskNote: '中文授课多为HSK4-5；人文类名额有限，建议先语言/预科',
-    bridgeNote: '国际教育学院设有语言学习渠道',
+    hskNote: l('Chinese-taught often HSK4–5; humanities seats limited; do language first.','中文授课多HSK4–5；人文名额有限，建议先语言。','Часто HSK4–5; мест мало, лучше начать с языка.'),
+    bridgeNote: l('Language study channel available.','国际教育学院有语言学习渠道。','Есть языковые курсы для иностранных студентов.'),
     programsDetailed: [
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4–5', acceptsFoundation: true, url: 'http://studyathit.hit.edu.cn/' }
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'http://studyathit.hit.edu.cn/' }
     ],
     viewUrl: 'http://studyathit.hit.edu.cn/',
     applyUrl: 'http://studyathit.hit.edu.cn/'
   },
   {
-    name: '吉林大学', englishName: 'Jilin University (JLU)', region: '东北', city: 'Changchun',
-    programs: ['Translation', 'International Relations'],
-    hskNote: '中文授课通常HSK4-5；不足者可先语言/预科',
-    bridgeNote: '采用17gz报名平台，提供语言学习过渡',
+    name: l('Jilin University','吉林大学','Университет Цзилинь'),
+    englishName: 'Jilin University (JLU)',
+    region: 'NORTHEAST',
+    city: l('Changchun','长春','Чанчунь'),
+    programs: ['Translation','International Relations'],
+    hskNote: l('Chinese-taught HSK4–5; language/foundation ok via 17gz.','中文授课HSK4–5；17gz语言/预科可行。','HSK4–5; возможен язык/подготовительное через 17gz.'),
+    bridgeNote: l('Uses 17gz; has language transition.','17gz报名；提供语言过渡。','17gz; есть языковой переход.'),
     programsDetailed: [
-      { program: 'Translation', degree: 'BA', hsk: 'HSK4', acceptsFoundation: true, url: 'http://cie.jlu.edu.cn/' },
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4–5', acceptsFoundation: true, url: 'http://cie.jlu.edu.cn/' }
+      { program: 'Translation', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'http://cie.jlu.edu.cn/' },
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'http://cie.jlu.edu.cn/' }
     ],
     viewUrl: 'http://cie.jlu.edu.cn/',
     applyUrl: 'https://jlu.17gz.org/'
   },
   {
-    name: '东北师范大学', englishName: 'Northeast Normal University (NENU)', region: '东北', city: 'Changchun',
-    programs: ['Translation', 'International Relations'],
-    hskNote: '中文授课一般HSK4-5；支持预科/语言班过渡',
-    bridgeNote: '17gz报名通道',
+    name: l('Northeast Normal University','东北师范大学','Северо-восточный педагогический университет (NENU)'),
+    englishName: 'Northeast Normal University (NENU)',
+    region: 'NORTHEAST',
+    city: l('Changchun','长春','Чанчунь'),
+    programs: ['Translation','International Relations'],
+    hskNote: l('Chinese-taught HSK4–5; foundation/language supported.','中文授课HSK4–5；支持预科/语言。','HSK4–5; поддерживаются подготовительные/язык.'),
+    bridgeNote: l('17gz admission.','17gz报名通道。','Подача через 17gz.'),
     programsDetailed: [
-      { program: 'Translation', degree: 'BA', hsk: 'HSK4', acceptsFoundation: true, url: 'http://iso.nenu.edu.cn/' },
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4–5', acceptsFoundation: true, url: 'http://iso.nenu.edu.cn/' }
+      { program: 'Translation', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'http://iso.nenu.edu.cn/' },
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'http://iso.nenu.edu.cn/' }
     ],
     viewUrl: 'http://iso.nenu.edu.cn/',
     applyUrl: 'https://nenu.17gz.org/'
   },
   {
-    name: '辽宁大学', englishName: 'Liaoning University (LNU)', region: '东北', city: 'Shenyang',
+    name: l('Liaoning University','辽宁大学','Университет Ляонин'),
+    englishName: 'Liaoning University (LNU)',
+    region: 'NORTHEAST',
+    city: l('Shenyang','沈阳','Шэньян'),
     programs: ['International Relations'],
-    hskNote: '中文授课多为HSK4-5；可先读语言/预科',
-    bridgeNote: '17gz报名通道',
+    hskNote: l('Chinese-taught HSK4–5; foundation/language ok.','中文授课HSK4–5；可语言/预科。','HSK4–5; возможны подготовительные/язык.'),
+    bridgeNote: l('17gz admission.','17gz报名通道。','Подача через 17gz.'),
     programsDetailed: [
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4–5', acceptsFoundation: true, url: 'http://liuxue.lnu.edu.cn/' }
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'http://liuxue.lnu.edu.cn/' }
     ],
     viewUrl: 'http://liuxue.lnu.edu.cn/',
     applyUrl: 'https://lnu.17gz.org/'
   },
   {
-    name: '大连外国语大学', englishName: 'Dalian University of Foreign Languages (DUFL)', region: '东北', city: 'Dalian',
-    programs: ['Translation', 'International Relations'],
-    hskNote: '外语类/翻译类院校，中文授课常见HSK4；不足者可先语言/预科',
-    bridgeNote: '17gz报名通道，语言过渡成熟',
+    name: l('Dalian University of Foreign Languages','大连外国语大学','Даляньский университет иностранных языков'),
+    englishName: 'Dalian University of Foreign Languages (DUFL)',
+    region: 'NORTHEAST',
+    city: l('Dalian','大连','Далянь'),
+    programs: ['Translation','International Relations'],
+    hskNote: l('Language/translation school; often HSK4; language/foundation path mature.','外语/翻译向；HSK4常见；语言/预科成熟。','Языковой/переводческий вуз; часто HSK4; зрелые подготовительные/язык.'),
+    bridgeNote: l('17gz admission.','17gz报名通道。','Подача через 17gz.'),
     programsDetailed: [
-      { program: 'Translation', degree: 'BA', hsk: 'HSK4', acceptsFoundation: true, url: 'https://admissions.dlufl.edu.cn/' },
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4', acceptsFoundation: true, url: 'https://admissions.dlufl.edu.cn/' }
+      { program: 'Translation', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'https://admissions.dlufl.edu.cn/' },
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'https://admissions.dlufl.edu.cn/' }
     ],
     viewUrl: 'https://admissions.dlufl.edu.cn/',
     applyUrl: 'https://dlufl.17gz.org/'
   },
   {
-    name: '黑龙江大学', englishName: 'Heilongjiang University (HLJU)', region: '东北', city: 'Harbin',
-    programs: ['Translation', 'International Relations'],
-    hskNote: '中文授课多为HSK4；支持语言/预科过渡',
-    bridgeNote: '17gz报名通道',
+    name: l('Heilongjiang University','黑龙江大学','Университет Хэйлунцзян'),
+    englishName: 'Heilongjiang University (HLJU)',
+    region: 'NORTHEAST',
+    city: l('Harbin','哈尔滨','Харбин'),
+    programs: ['Translation','International Relations'],
+    hskNote: l('Chinese-taught often HSK4; supports language/foundation.','中文授课多HSK4；支持语言/预科。','Часто HSK4; поддерживает язык/подготовительное.'),
+    bridgeNote: l('17gz admission.','17gz报名通道。','Подача через 17gz.'),
     programsDetailed: [
-      { program: 'Translation', degree: 'BA', hsk: 'HSK4', acceptsFoundation: true, url: 'http://sie.hlju.edu.cn/' },
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4', acceptsFoundation: true, url: 'http://sie.hlju.edu.cn/' }
+      { program: 'Translation', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'http://sie.hlju.edu.cn/' },
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'http://sie.hlju.edu.cn/' }
     ],
     viewUrl: 'http://sie.hlju.edu.cn/',
     applyUrl: 'https://hlju.17gz.org/'
   },
   {
-    name: '延边大学', englishName: 'Yanbian University (YBU)', region: '东北', city: 'Yanji',
-    programs: ['Translation', 'International Relations'],
-    hskNote: '中文授课一般HSK4；有语言学习与朝鲜语环境优势',
-    bridgeNote: '17gz报名通道',
+    name: l('Yanbian University','延边大学','Яньбяньский университет'),
+    englishName: 'Yanbian University (YBU)',
+    region: 'NORTHEAST',
+    city: l('Yanji','延吉','Яньцзи'),
+    programs: ['Translation','International Relations'],
+    hskNote: l('Chinese-taught usually HSK4; bilingual environment advantage.','中文授课一般HSK4；双语环境有优势。','Обычно HSK4; преимущества двуязычной среды.'),
+    bridgeNote: l('17gz admission.','17gz报名通道。','Подача через 17gz.'),
     programsDetailed: [
-      { program: 'Translation', degree: 'BA', hsk: 'HSK4', acceptsFoundation: true, url: 'http://sie.ybu.edu.cn/' },
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4', acceptsFoundation: true, url: 'http://sie.ybu.edu.cn/' }
+      { program: 'Translation', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'http://sie.ybu.edu.cn/' },
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'http://sie.ybu.edu.cn/' }
     ],
     viewUrl: 'http://sie.ybu.edu.cn/',
     applyUrl: 'https://ybu.17gz.org/'
   },
 
-  // 华东
+  // 华东 EAST_CHINA
   {
-    name: '复旦大学', englishName: 'Fudan University', region: '华东', city: 'Shanghai',
+    name: l('Fudan University','复旦大学','Фуданьский университет'),
+    englishName: 'Fudan University',
+    region: 'EAST_CHINA',
+    city: l('Shanghai','上海','Шанхай'),
     programs: ['International Relations'],
-    hskNote: '中文授课IR通常HSK5；建议先中文预科/语言进修再申',
-    bridgeNote: '国际文化交流学院提供语言课程',
+    hskNote: l('IR usually HSK5; suggest foundation/language first.','国际关系通常HSK5；建议先中文预科/语言。','МО обычно HSK5; рекомендуется подготовительный/язык.'),
+    bridgeNote: l('Language courses via International Cultural Exchange School.','国际文化交流学院语言课程。','Языковые курсы в школе международного обмена.'),
     programsDetailed: [
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK5（建议）', acceptsFoundation: true, url: 'https://iso.fudan.edu.cn/' }
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK5 (typical)','HSK5（常见）','HSK5 (обычно)'), acceptsFoundation: true, url: 'https://iso.fudan.edu.cn/' }
     ],
     viewUrl: 'https://iso.fudan.edu.cn/',
     applyUrl: 'https://admission.iso.fudan.edu.cn/'
   },
   {
-    name: '南京大学', englishName: 'Nanjing University (NJU)', region: '华东', city: 'Nanjing',
+    name: l('Nanjing University','南京大学','Нанькинский университет'),
+    englishName: 'Nanjing University (NJU)',
+    region: 'EAST_CHINA',
+    city: l('Nanjing','南京','Нанкин'),
     programs: ['International Relations'],
-    hskNote: '中文授课常见HSK5；HSK3-4建议走语言/预科过渡',
-    bridgeNote: '留学生院有系统语言课程；17gz报名通道',
+    hskNote: l('IR commonly HSK5; with HSK3–4 use language/foundation.','IR常见HSK5；HSK3–4建议语言/预科。','МО обычно HSK5; с HSK3–4 — язык/подготовительное.'),
+    bridgeNote: l('Language courses; 17gz portal.','留学生院语言课程；17gz报名。','Языковые курсы; подача через 17gz.'),
     programsDetailed: [
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK5（常见）', acceptsFoundation: true, url: 'https://stuex.nju.edu.cn/' }
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK5 (common)','HSK5（常见）','HSK5 (часто)'), acceptsFoundation: true, url: 'https://stuex.nju.edu.cn/' }
     ],
     viewUrl: 'https://stuex.nju.edu.cn/',
     applyUrl: 'https://nju.17gz.org/'
   },
   {
-    name: '浙江大学', englishName: 'Zhejiang University (ZJU)', region: '华东', city: 'Hangzhou',
+    name: l('Zhejiang University','浙江大学','Чжэцзянский университет'),
+    englishName: 'Zhejiang University (ZJU)',
+    region: 'EAST_CHINA',
+    city: l('Hangzhou','杭州','Ханчжоу'),
     programs: ['International Relations'],
-    hskNote: '中文授课一般HSK5；建议语言进修/预科后申人文类',
-    bridgeNote: '国际学院语言课程成熟',
+    hskNote: l('Chinese-taught commonly HSK5; do language/foundation for humanities.','中文授课一般HSK5；人文建议语言/预科。','Обычно HSK5; гуманитариям лучше пройти язык/подготовку.'),
+    bridgeNote: l('Mature language courses.','国际学院语言课程成熟。','Зрелые языковые курсы.'),
     programsDetailed: [
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK5', acceptsFoundation: true, url: 'https://is.zju.edu.cn/' }
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK5','HSK5','HSK5'), acceptsFoundation: true, url: 'https://is.zju.edu.cn/' }
     ],
     viewUrl: 'http://iczu.zju.edu.cn/english/',
     applyUrl: 'https://is.zju.edu.cn/'
   },
   {
-    name: '厦门大学', englishName: 'Xiamen University (XMU)', region: '华东', city: 'Xiamen',
-    programs: ['Translation', 'International Relations'],
-    hskNote: '中文授课多为HSK4-5；不足可先语言/预科',
-    bridgeNote: '有官方在线申请系统与语言班',
+    name: l('Xiamen University','厦门大学','Сямэньский университет'),
+    englishName: 'Xiamen University (XMU)',
+    region: 'EAST_CHINA',
+    city: l('Xiamen','厦门','Сямынь'),
+    programs: ['Translation','International Relations'],
+    hskNote: l('Chinese-taught often HSK4–5; language/foundation mature.','中文授课多HSK4–5；语言/预科成熟。','Часто HSK4–5; зрелые язык/подготовка.'),
+    bridgeNote: l('Official online application system and language programs.','官网网申系统与语言班。','Официальная онлайн-заявка и языковые курсы.'),
     programsDetailed: [
-      { program: 'Translation', degree: 'BA', hsk: 'HSK4–5', acceptsFoundation: true, url: 'https://admissions.xmu.edu.cn/' },
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4–5', acceptsFoundation: true, url: 'https://admissions.xmu.edu.cn/' }
+      { program: 'Translation', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'https://admissions.xmu.edu.cn/' },
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'https://admissions.xmu.edu.cn/' }
     ],
     viewUrl: 'https://admissions.xmu.edu.cn/',
     applyUrl: 'http://application.xmu.edu.cn/'
   },
   {
-    name: '山东大学', englishName: 'Shandong University (SDU)', region: '华东', city: 'Jinan',
-    programs: ['Translation', 'International Relations'],
-    hskNote: '中文授课常见HSK4-5；支持预科/语言过渡',
-    bridgeNote: 'iStudy/17gz通道',
+    name: l('Shandong University','山东大学','Шаньдунский университет'),
+    englishName: 'Shandong University (SDU)',
+    region: 'EAST_CHINA',
+    city: l('Jinan','济南','Цзинань'),
+    programs: ['Translation','International Relations'],
+    hskNote: l('Chinese-taught HSK4–5; supports foundation/language.','中文授课HSK4–5；支持预科/语言。','HSK4–5; поддерживает подготовит./язык.'),
+    bridgeNote: l('iStudy/17gz channel.','iStudy/17gz通道。','Каналы iStudy/17gz.'),
     programsDetailed: [
-      { program: 'Translation', degree: 'BA', hsk: 'HSK4–5', acceptsFoundation: true, url: 'https://www.istudy.sdu.edu.cn/' },
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4–5', acceptsFoundation: true, url: 'https://www.istudy.sdu.edu.cn/' }
+      { program: 'Translation', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'https://www.istudy.sdu.edu.cn/' },
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'https://www.istudy.sdu.edu.cn/' }
     ],
     viewUrl: 'https://www.istudy.sdu.edu.cn/',
     applyUrl: 'https://sduniv.17gz.org/'
   },
   {
-    name: '上海交通大学', englishName: 'Shanghai Jiao Tong University (SJTU)', region: '华东', city: 'Shanghai',
+    name: l('Shanghai Jiao Tong University','上海交通大学','Шанхайский университет Цзяотун'),
+    englishName: 'Shanghai Jiao Tong University (SJTU)',
+    region: 'EAST_CHINA',
+    city: l('Shanghai','上海','Шанхай'),
     programs: ['International Relations'],
-    hskNote: '中文授课普遍HSK5；人文类名额有限，建议语言过渡',
-    bridgeNote: '国际教育学院提供语言项目',
+    hskNote: l('Chinese-taught IR often HSK5; recommend language first.','中文授课IR多HSK5；建议语言过渡。','МО часто HSK5; лучше сначала язык.'),
+    bridgeNote: l('Language programs at ISC.','国际教育学院语言项目。','Языковые программы ISC.'),
     programsDetailed: [
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK5（建议）', acceptsFoundation: true, url: 'https://isc.sjtu.edu.cn/' }
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK5 (typical)','HSK5（常见）','HSK5 (обычно)'), acceptsFoundation: true, url: 'https://isc.sjtu.edu.cn/' }
     ],
     viewUrl: 'https://isc.sjtu.edu.cn/',
     applyUrl: 'https://apply.sjtu.edu.cn/'
   },
 
-  // 华中
+  // 华中 CENTRAL_CHINA
   {
-    name: '武汉大学', englishName: 'Wuhan University (WHU)', region: '华中', city: 'Wuhan',
+    name: l('Wuhan University','武汉大学','Уханьский университет'),
+    englishName: 'Wuhan University (WHU)',
+    region: 'CENTRAL_CHINA',
+    city: l('Wuhan','武汉','Ухань'),
     programs: ['International Relations'],
-    hskNote: '中文授课IR常见HSK5；HSK3-4建议先预科/语言后申',
-    bridgeNote: '有中文进修/预科路径',
+    hskNote: l('IR commonly HSK5; HSK3–4 do foundation/language first.','IR常见HSK5；HSK3–4先预科/语言。','МО обычно HSK5; с HSK3–4 — подготовительное/язык.'),
+    bridgeNote: l('Chinese language/foundation available.','中文进修/预科路径。','Есть китайский/подготовка.'),
     programsDetailed: [
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK5（常见）', acceptsFoundation: true, url: 'http://admission.whu.edu.cn/' }
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK5 (common)','HSK5（常见）','HSK5 (часто)'), acceptsFoundation: true, url: 'http://admission.whu.edu.cn/' }
     ],
     viewUrl: 'http://admission.whu.edu.cn/',
     applyUrl: 'http://admission.whu.edu.cn/apply'
   },
   {
-    name: '华中师范大学', englishName: 'Central China Normal University (CCNU)', region: '华中', city: 'Wuhan',
-    programs: ['Translation', 'International Relations'],
-    hskNote: '中文授课常见HSK4-5；支持语言/预科过渡',
-    bridgeNote: '17gz报名通道',
+    name: l('Central China Normal University','华中师范大学','Центрально-Китайский педагогический университет (CCNU)'),
+    englishName: 'Central China Normal University (CCNU)',
+    region: 'CENTRAL_CHINA',
+    city: l('Wuhan','武汉','Ухань'),
+    programs: ['Translation','International Relations'],
+    hskNote: l('Chinese-taught HSK4–5; supports language/foundation.','中文授课HSK4–5；支持语言/预科。','HSK4–5; поддерживает язык/подготовит.'),
+    bridgeNote: l('17gz admission channel.','17gz报名通道。','Подача через 17gz.'),
     programsDetailed: [
-      { program: 'Translation', degree: 'BA', hsk: 'HSK4', acceptsFoundation: true, url: 'http://iso.ccnu.edu.cn/' },
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4–5', acceptsFoundation: true, url: 'http://iso.ccnu.edu.cn/' }
+      { program: 'Translation', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'http://iso.ccnu.edu.cn/' },
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'http://iso.ccnu.edu.cn/' }
     ],
     viewUrl: 'http://iso.ccnu.edu.cn/',
     applyUrl: 'https://ccnu.17gz.org/'
   },
   {
-    name: '郑州大学', englishName: 'Zhengzhou University (ZZU)', region: '华中', city: 'Zhengzhou',
+    name: l('Zhengzhou University','郑州大学','Чжэнчжоуский университет'),
+    englishName: 'Zhengzhou University (ZZU)',
+    region: 'CENTRAL_CHINA',
+    city: l('Zhengzhou','郑州','Чжэнчжоу'),
     programs: ['International Relations'],
-    hskNote: '中文授课一般HSK4-5；支持语言/预科过渡',
-    bridgeNote: '17gz报名通道',
+    hskNote: l('Chinese-taught HSK4–5; supports language/foundation.','中文授课HSK4–5；支持语言/预科。','HSK4–5; поддерживает язык/подготовит.'),
+    bridgeNote: l('17gz admission channel.','17gz报名通道。','Подача через 17gz.'),
     programsDetailed: [
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4–5', acceptsFoundation: true, url: 'http://sie.zzu.edu.cn/' }
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'http://sie.zzu.edu.cn/' }
     ],
     viewUrl: 'http://sie.zzu.edu.cn/',
     applyUrl: 'https://zzu.17gz.org/'
   },
   {
-    name: '河南大学', englishName: 'Henan University (HENU)', region: '华中', city: 'Kaifeng',
-    programs: ['Translation', 'International Relations'],
-    hskNote: '中文授课常见HSK4；支持语言/预科过渡',
-    bridgeNote: '17gz报名通道',
+    name: l('Henan University','河南大学','Хэнаньский университет'),
+    englishName: 'Henan University (HENU)',
+    region: 'CENTRAL_CHINA',
+    city: l('Kaifeng','开封','Кайфэн'),
+    programs: ['Translation','International Relations'],
+    hskNote: l('Chinese-taught HSK4 common; supports language/foundation.','中文授课常见HSK4；支持语言/预科。','Часто HSK4; поддерживает язык/подготовит.'),
+    bridgeNote: l('17gz admission channel.','17gz报名通道。','Подача через 17gz.'),
     programsDetailed: [
-      { program: 'Translation', degree: 'BA', hsk: 'HSK4', acceptsFoundation: true, url: 'https://oia.henu.edu.cn/' },
-      { program: 'International Relations', degree: 'BA', hsk: 'HSK4', acceptsFoundation: true, url: 'https://oia.henu.edu.cn/' }
+      { program: 'Translation', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'https://oia.henu.edu.cn/' },
+      { program: 'International Relations', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'https://oia.henu.edu.cn/' }
     ],
     viewUrl: 'https://oia.henu.edu.cn/',
     applyUrl: 'https://henu.17gz.org/'
   },
 ]
+

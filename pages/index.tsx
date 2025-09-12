@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import type { Lang } from '../lib/i18n'
 import Nav from '../components/Nav'
 import Link from 'next/link'
 
 export default function Home() {
-  const [lang, setLang] = useState<'en'|'zh'|'ru'>('zh')
-  const t = (en:string, zh:string, ru?:string) => lang==='en'? en: (lang==='zh'? zh: (ru??en))
+  const [lang, setLang] = useState<Lang>('zh')
+  const t = (en:string, zh:string, ru:string) => lang==='en'? en: (lang==='zh'? zh: ru)
   return (
     <>
       <Nav lang={lang} setLang={setLang} />
@@ -16,7 +17,7 @@ export default function Home() {
               "A focused guide for humanities majors (Translation / International Relations) with HSK3–4 pathways (foundation/Chinese language first) and direct HSK4+ options.",
               "面向人文学科（翻译/国际关系）的留学选校指南，强调HSK3–4可行路径（先预科/语言再升本）与HSK4+直接入读方案。",
               "Путеводитель по гуманитарным направлениям (перевод/международные отношения) с вариантами HSK3–4 (подготовительное/язык) и прямым поступлением с HSK4+."
-            )}
+          )}
           </p>
           <div className="row" style={{marginTop:8}}>
             <Link className="btn" href="/universities">{t('Explore Universities','浏览大学','Смотреть университеты')}</Link>
