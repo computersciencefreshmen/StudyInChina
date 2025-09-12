@@ -17,10 +17,10 @@ export default function UniversityCard({ u, lang, toggleFav, isFav }: { u: Unive
   }
 
   return (
-    <div className="card hover:-translate-y-0.5 hover:shadow-lg">
+    <div className="card hover:-translate-y-0.5 hover:shadow-lg rounded-2xl">
       <div className="row-spread">
         <div>
-          <h3 className="text-lg font-semibold">{pick(u.name)}</h3>
+          <h3 className="text-lg font-semibold flex items-center gap-2">{pick(u.name)}{u.recommended && (<span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs border border-blue-200 bg-blue-50 text-blue-700"><StarSolid className="w-3.5 h-3.5"/> {(lang==='en'?'Recommended':lang==='zh'?'推荐':'Рекомендовано')}</span>)}</h3>
           {u.englishName && lang==='en' && <div className="muted">{u.englishName}</div>}
         </div>
         <div className="row">
@@ -50,6 +50,8 @@ export default function UniversityCard({ u, lang, toggleFav, isFav }: { u: Unive
         </div>
       </div>
 
+      {u.summary && <p className="text-sm text-slate-700">{pick(u.summary)}</p>}
+
       <div className="row">
         <span className={`chip ${hskColor(pick(u.hskNote))}`}>HSK: {pick(u.hskNote)}</span>
       </div>
@@ -57,13 +59,13 @@ export default function UniversityCard({ u, lang, toggleFav, isFav }: { u: Unive
 
       {u.programsDetailed && u.programsDetailed.length>0 && (
         <div className="section p-3">
-          <div className="font-semibold mb-2">{(lang==='en'? 'Program pages': lang==='zh'? '专业链接':'Страницы программ')}</div>
+          <div className="font-semibold mb-2">{(lang==='en'? 'Programs': lang==='zh'? '专业方向':'Программы')}</div>
           {u.programsDetailed.map((pd, idx)=> (
             <div key={idx} className="row-spread mb-2">
               <div className="muted">
                 {programLabel(lang, pd.program)} · {degreeLabel(lang, pd.degree)} · HSK: {pick(pd.hsk)} · {(pd.acceptsFoundation ? (lang==='en'?'Foundation accepted':lang==='zh'?'可预科/语言过渡':'Есть подготовительный/язык') : (lang==='en'?'No foundation':lang==='zh'?'不支持预科':'Без подготовительного'))}
               </div>
-              <a className="btn link" href={pd.url} target="_blank" rel="noopener noreferrer">{(lang==='en'?'Open':lang==='zh'?'打开':'Открыть')}<ArrowTopRightOnSquareIcon className="w-4 h-4"/></a>
+              <a className="btn link" href={(pd.url || u.viewUrl)} target="_blank" rel="noopener noreferrer">{(lang==='en'?'Open':lang==='zh'?'打开':'Открыть')}<ArrowTopRightOnSquareIcon className="w-4 h-4"/></a>
             </div>
           ))}
         </div>

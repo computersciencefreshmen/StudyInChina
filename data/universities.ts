@@ -8,6 +8,15 @@ export type University = {
   programs: ProgramId[]
   hskNote: LText
   bridgeNote?: LText
+  // UI details for card rendering
+  recommended?: boolean
+  summary?: LText
+  scholarshipsAvailable?: number
+  difficulty?: 'Low' | 'Medium' | 'High'
+  languageRequirement?: {
+    direct?: LText
+    preparatory?: LText
+  }
   programsDetailed?: Array<{
     program: ProgramId
     degree: 'BA' | 'MA' | 'Other'
@@ -34,6 +43,14 @@ export const UNIVERSITIES: University[] = [
     programs: ['Translation','International Relations'],
     hskNote: l('Chinese-taught often HSK5; with HSK3–4, do foundation/language first.','中文授课通常需HSK5；HSK3–4可先预科/语言后升本。','Программы на китайском обычно требуют HSK5; с HSK3–4 — подготовительный/языковой год.'),
     bridgeNote: l('Has foundation and intensive Chinese routes.','设有预科与汉语强化项目。','Есть подготовительные и языковые программы.'),
+    recommended: true,
+    summary: l("Known as the 'Cradle of Chinese Diplomats', leading in translation and international relations.", '被称为“外交官的摇篮”，翻译与国际关系优势明显。', 'Известен как «колыбель дипломатов Китая», силён в переводе и МО.'),
+    scholarshipsAvailable: 1,
+    difficulty: 'High',
+    languageRequirement: {
+      direct: l('Direct Entry: HSK 5','直入：HSK5','Прямой: HSK5'),
+      preparatory: l('Preparatory: HSK 4','预科：HSK4','Подготовительное: HSK4')
+    },
     programsDetailed: [
       { program: 'Translation', degree: 'BA', hsk: l('HSK4–5 (per school notice)','HSK4–5（以院系公告为准）','HSK4–5 (по правилам факультета)'), acceptsFoundation: true, url: 'https://en.bfsu.edu.cn/Academics.htm' },
       { program: 'International Relations', degree: 'BA', hsk: l('HSK5 (typical)','HSK5（常见）','HSK5 (обычно)'), acceptsFoundation: true, url: 'https://en.bfsu.edu.cn/Academics.htm' }
@@ -49,6 +66,14 @@ export const UNIVERSITIES: University[] = [
     programs: ['Translation','International Relations'],
     hskNote: l('Most Chinese-taught need HSK4–5; HSK3–4 can do language/foundation first.','多数中文授课HSK4–5；HSK3–4可先语言/预科。','Обычно HSK4–5; с HSK3–4 — сначала язык/подготовительное.'),
     bridgeNote: l('Very mature language/foundation pathways.','预科/汉语进修成熟。','Зрелые языковые/подготовительные маршруты.'),
+    recommended: true,
+    summary: l('The only Chinese university dedicated to Chinese language and culture for international students.','中国唯一专门面向来华留学生开展汉语和中华文化教育的大学。','Единственный вуз Китая, специализирующийся на китайском языке и культуре для иностранцев.'),
+    scholarshipsAvailable: 2,
+    difficulty: 'Medium',
+    languageRequirement: {
+      direct: l('Direct Entry: HSK 4','直入：HSK4','Прямой: HSK4'),
+      preparatory: l('Preparatory: HSK 3 (≥180+)','预科：HSK3（≥180+）','Подготовительное: HSK3 (≥180+)')
+    },
     programsDetailed: [
       { program: 'Translation', degree: 'BA', hsk: l('HSK4 (some tracks 5)','HSK4（部分方向HSK5）','HSK4 (иногда 5)'), acceptsFoundation: true, url: 'https://admission.blcu.edu.cn/' },
       { program: 'International Relations', degree: 'BA', hsk: l('HSK4–5','HSK4–5','HSK4–5'), acceptsFoundation: true, url: 'https://admission.blcu.edu.cn/' }
@@ -181,6 +206,14 @@ export const UNIVERSITIES: University[] = [
     programs: ['Translation','International Relations'],
     hskNote: l('Language/translation school; often HSK4; language/foundation path mature.','外语/翻译向；HSK4常见；语言/预科成熟。','Языковой/переводческий вуз; часто HSK4; зрелые подготовительные/язык.'),
     bridgeNote: l('17gz admission.','17gz报名通道。','Подача через 17gz.'),
+    recommended: true,
+    summary: l('International Politics and Translation majors with lower living cost in Dalian.','大连生活成本相对较低，设有国际政治与翻译专业。','В Даляне ниже стоимость жизни; есть МО и перевод.'),
+    scholarshipsAvailable: 2,
+    difficulty: 'Medium',
+    languageRequirement: {
+      direct: l('Direct Entry: HSK 4','直入：HSK4','Прямой: HSK4'),
+      preparatory: l('Preparatory: HSK 3','预科：HSK3','Подготовительное: HSK3')
+    },
     programsDetailed: [
       { program: 'Translation', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'https://admissions.dlufl.edu.cn/' },
       { program: 'International Relations', degree: 'BA', hsk: l('HSK4','HSK4','HSK4'), acceptsFoundation: true, url: 'https://admissions.dlufl.edu.cn/' }
@@ -367,4 +400,3 @@ export const UNIVERSITIES: University[] = [
     applyUrl: 'https://henu.17gz.org/'
   },
 ]
-

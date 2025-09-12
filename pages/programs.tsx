@@ -5,7 +5,7 @@ import { UNIVERSITIES } from '../data/universities'
 import { programLabel } from '../lib/i18n'
 
 export default function Programs(){
-  const [lang, setLang] = useState<Lang>('zh')
+  const [lang, setLang] = useState<Lang>('en')
   const t = (en:string, zh:string, ru:string) => lang==='en'? en: (lang==='zh'? zh: ru)
   return (
     <>
@@ -18,7 +18,8 @@ export default function Programs(){
               const cards = [] as Array<{title:string; hsk:string; url:string; uni:string}>
               UNIVERSITIES.forEach(u => u.programsDetailed?.forEach(pd => {
                 if (pd.program === pg && pd.degree==='BA') {
-                  cards.push({ title: `${u.name[lang]}`, hsk: pd.hsk[lang], url: pd.url, uni: u.englishName || '' })
+                  // Use university viewUrl as safer landing to avoid 404s on deep pages
+                  cards.push({ title: `${u.name[lang]}`, hsk: pd.hsk[lang], url: u.viewUrl, uni: u.englishName || '' })
                 }
               }))
               const view = cards.slice(0, 8)
@@ -38,6 +39,7 @@ export default function Programs(){
             })}
           </div>
         </section>
+        <div className="footer">Created with ❤️ for Elizabeth's study abroad journey</div>
       </main>
     </>
   )

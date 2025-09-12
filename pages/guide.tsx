@@ -4,7 +4,7 @@ import type { Lang } from '../lib/i18n'
 import { ClipboardDocumentListIcon, CheckCircleIcon, CurrencyDollarIcon, GlobeAltIcon, AcademicCapIcon } from '@heroicons/react/24/outline'
 
 export default function Guide(){
-  const [lang, setLang] = useState<Lang>('zh')
+  const [lang, setLang] = useState<Lang>('en')
   const t = (en:string, zh:string, ru:string) => lang==='en'? en: (lang==='zh'? zh: ru)
   const steps = [
     { icon: GlobeAltIcon, en: 'Assess HSK (target 4–5)', zh: '评估HSK（目标4–5）', ru: 'Оцените HSK (цель 4–5)' },
@@ -35,6 +35,7 @@ export default function Guide(){
             })}
           </div>
         </div>
+        <div className="footer">Created with ❤️ for Elizabeth's study abroad journey</div>
       </main>
     </>
   )

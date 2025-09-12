@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { UserCircleIcon, BookOpenIcon, AcademicCapIcon, MapPinIcon, BanknotesIcon, CloudIcon, SparklesIcon, ShieldCheckIcon } from '@heroicons/react/24/outline'
 
 export default function Home() {
-  const [lang, setLang] = useState<Lang>('zh')
+  const [lang, setLang] = useState<Lang>('en')
   const t = (en:string, zh:string, ru:string) => lang==='en'? en: (lang==='zh'? zh: ru)
   return (
     <>
@@ -95,7 +95,7 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="container"><div className="footer">{t('Last updated:','最后更新：','Последнее обновление:')} 2025-09 · {t('Built for Elizabeth','为Elizabeth定制','Для Elizabeth')}</div></div>
+        <div className="container"><div className="footer">Created with ❤️ for Elizabeth's study abroad journey</div></div>
       </main>
     </>
   )

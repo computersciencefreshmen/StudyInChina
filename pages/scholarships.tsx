@@ -4,7 +4,7 @@ import { AcademicCapIcon, ClipboardDocumentListIcon, CalendarDaysIcon, LightBulb
 import Nav from '../components/Nav'
 
 export default function Scholarships(){
-  const [lang, setLang] = useState<Lang>('zh')
+  const [lang, setLang] = useState<Lang>('en')
   const t = (en:string, zh:string, ru:string) => lang==='en'? en: (lang==='zh'? zh: ru)
   return (
     <>
@@ -101,6 +101,7 @@ export default function Scholarships(){
             </div>
           </section>
         </div>
+        <div className="footer">Created with ❤️ for Elizabeth's study abroad journey</div>
       </main>
     </>
   )

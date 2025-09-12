@@ -5,7 +5,7 @@ import { UNIVERSITIES } from '../data/universities'
 import { Lang, RegionId, ProgramId, regionLabel, programLabel } from '../lib/i18n'
 
 export default function Universities() {
-  const [lang, setLang] = useState<Lang>('zh')
+  const [lang, setLang] = useState<Lang>('en')
   const [region, setRegion] = useState<RegionId | 'ALL'>('ALL')
   const [program, setProgram] = useState<ProgramId | 'ALL'>('ALL')
   const [q, setQ] = useState('')
@@ -83,13 +83,13 @@ export default function Universities() {
           <button className="btn" onClick={exportPDF}>{t('Export PDF','导出PDF','Экспорт PDF')}</button>
         </div>
 
-        <div className="grid-auto mt-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-3">
           {list.map(u => (
             <UniversityCard key={u.viewUrl} u={u} lang={lang} toggleFav={toggleFav} isFav={favs.includes(pick(u.name))} />
           ))}
         </div>
+        <div className="footer">Created with ❤️ for Elizabeth's study abroad journey</div>
       </main>
     </>
   )
 }
-
