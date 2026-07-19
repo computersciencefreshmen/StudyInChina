@@ -1,17 +1,18 @@
-# Dependencies
-node_modules/
-
-# Production
 .next/
 out/
-
-# Logs
+node_modules/
+.npm-cache/
+coverage/
+playwright-report/
+test-results/
+.env*
+!.env.example
+next-env.d.ts
+*.tsbuildinfo
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-
-# OS/IDE
+.eslintcache
 .DS_Store
 .vscode/
-

@@ -1,0 +1,90 @@
+name: Report incorrect study information
+description: Suggest a correction using an official university or government source.
+title: "[Data correction]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping keep StudyInChina accurate. Please link to the official page that owns the fact. Do not upload or paste passports, transcripts, medical records, recommendation letters, or other personal application documents.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: What needs correction?
+      options:
+        - Application deadline or intake
+        - Tuition or application fee
+        - Program duration, degree, or teaching language
+        - Language or admission requirement
+        - Scholarship coverage or deadline
+        - Application or official link
+        - University or city information
+        - Translation
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: page-url
+    attributes:
+      label: StudyInChina page URL
+      description: Paste the page where you saw the problem.
+      placeholder: https://example.com/en/programs/example-program
+    validations:
+      required: true
+
+  - type: input
+    id: record-id
+    attributes:
+      label: Record ID or slug
+      description: Optional, but helpful if it is visible in the URL or page.
+
+  - type: textarea
+    id: current-problem
+    attributes:
+      label: What is currently wrong?
+      description: Quote only the short field or fact that needs review.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-correction
+    attributes:
+      label: Proposed correction
+      description: Include the academic year/intake and exact corrected fact if known.
+    validations:
+      required: true
+
+  - type: input
+    id: official-source
+    attributes:
+      label: Official source URL
+      description: Use the university admissions site, scholarship provider, or government website.
+      placeholder: https://admissions.example.edu.cn/...
+    validations:
+      required: true
+
+  - type: input
+    id: source-date
+    attributes:
+      label: Source publication or access date
+      description: Use YYYY-MM-DD. If no publication date is shown, enter the date you accessed it.
+      placeholder: "2026-07-16"
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional context
+      description: Optional context, such as a conflicting official page. Do not include personal application data.
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have not included sensitive personal or application documents.
+          required: true
+        - label: I understand that a maintainer will verify the official source before changing published facts.
+          required: true
