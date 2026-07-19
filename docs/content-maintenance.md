@@ -50,23 +50,23 @@ English is the base editorial version. English source text must exist before a r
 
 Machine translation may produce a draft, but a person must check names, degree level, admission terminology, negation, numbers, and application instructions before the translation is marked ready. Do not translate university names or degree names when the institution provides an official version. Facts such as dates, tuition, application fees, duration, and language scores live once in structured data and are formatted with `Intl`; they must not be copied into translated prose.
 
-Spanish, French, Arabic, and Portuguese routes remain private until navigation and legal pages are 100% complete and core content has reached 95% coverage. Arabic changes must also receive an RTL layout check. When optional translated copy is missing, the interface may show the English fallback with a “Translation pending” label; it must never silently fall back to a different language.
+German, Spanish, French, Arabic, and Portuguese routes remain private until navigation and legal pages are 100% complete and core content has reached 95% coverage. Arabic changes must also receive an RTL layout check. When optional translated copy is missing, the interface may show the English fallback with a “Translation pending” label; it must never silently fall back to a different language.
 
 ## Review cadence
 
+- **Daily:** the scheduled freshness gate checks verified records against `reviewAfter`. An overdue verified record fails the run; overdue programs, cycles and scholarships are excluded from current production data, while stable university and city profiles are labelled `stale` at runtime.
 - **Weekly:** the scheduled Data Health workflow checks links and audit dates. Confirmed 404/410 responses are hard failures. A 403, 429, timeout, or network error is a warning requiring a later manual check, not evidence that a fact is wrong.
-- **Monthly:** review the open Data Health issue, records whose `reviewAfter` date is due, missing sources, and application or scholarship deadlines within 45 days. Give deadlines within 14 days priority.
-- **January:** perform a full review for spring intakes and newly published annual scholarship notices.
-- **August–September:** perform a full review for autumn intakes and prepare the next admissions cycle.
+- **Monthly:** a dated Data Review issue is created on the first day of the month for records whose `reviewAfter` date is due, missing sources, and application or scholarship deadlines within 45 days. Give deadlines within 14 days priority.
+- **January and August:** scheduled semester audits perform a broader review for spring/autumn intakes and newly published annual scholarship notices.
 - **Before each release:** manually open all new application links and verify every changed deadline, fee, language requirement, and scholarship term against its cited source.
 
-Run a broader report manually from the Actions tab with the `monthly` or `semester` review mode. These modes widen the planning horizon; they do not alter content.
+All four modes can also be run manually from the Actions tab. They report or fail safely but never alter content.
 
 ## Data Health reports
 
 `scripts/check-links.mjs` scans HTTP(S) values in `content/data/*.json`. It tries `HEAD`, then a ranged small `GET`, with bounded retries and timeouts. `scripts/data-health.mjs` combines that result with `verifiedAt`, `reviewAfter`, deadline, source-reference, and status checks. The workflow updates one open `[Data Health] Content review` issue and uploads the complete machine-readable reports.
 
-The report is advisory. Maintainers must open the cited official page and submit a normal pull request to make a correction. Workflows and bots must never:
+The report is advisory except for the daily overdue gate and confirmed hard link failures, which fail their workflow. Maintainers must still open the cited official page and submit a normal pull request to make a correction. Workflows and bots must never:
 
 - update a deadline, fee, requirement, scholarship, program, or application link;
 - promote `draft` or `stale` content to `verified`;

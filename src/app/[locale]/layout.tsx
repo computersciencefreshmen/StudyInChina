@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   icons: { icon: '/icon.svg' },
 }
 
+export const revalidate = 86_400
+
 export function generateStaticParams() {
   return launchLocales.map((locale) => ({ locale }))
 }

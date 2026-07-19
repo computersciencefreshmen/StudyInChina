@@ -120,6 +120,21 @@ describe('content schemas', () => {
     expect(bundleSchema.safeParse(bundle).success).toBe(false)
   })
 
+  it('preserves an optional German translation through schema parsing', () => {
+    const bundle = validBundle()
+    const summary = bundle.universities[0].summary as {
+      en: string
+      zh: string
+      ru: string
+      de?: string
+    }
+    summary.de = 'Eine Beispieluniversität.'
+
+    const result = bundleSchema.parse(bundle)
+
+    expect(result.universities[0].summary.de).toBe('Eine Beispieluniversität.')
+  })
+
   it('rejects duplicate ids and broken foreign keys', () => {
     const bundle = validBundle()
     bundle.programs.push({ ...bundle.programs[0] })

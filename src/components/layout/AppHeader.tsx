@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { SiteHeader } from '@/components/layout'
-import { localeNames, launchLocales, type LaunchLocale } from '@/i18n/config'
+import { localeNames, localizePathname, publicLocales, type LaunchLocale } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 
 export function AppHeader({ locale }: { locale: LaunchLocale }) {
@@ -23,8 +23,6 @@ export function AppHeader({ locale }: { locale: LaunchLocale }) {
     ['guides', messages.nav.guides],
     ['favorites', messages.nav.favorites],
   ] as const
-  const remainder = pathname.replace(/^\/(en|zh|ru)(?=\/|$)/, '') || ''
-
   return <SiteHeader
     locale={locale}
     homeHref={`/${locale}`}
@@ -39,10 +37,10 @@ export function AppHeader({ locale }: { locale: LaunchLocale }) {
       href: segment ? `/${locale}/${segment}` : `/${locale}`,
       active: segment ? pathname.startsWith(`/${locale}/${segment}`) : pathname === `/${locale}`,
     }))}
-    languages={launchLocales.map((code) => ({
+    languages={publicLocales.map((code) => ({
       code,
       label: localeNames[code],
-      href: `/${code}${remainder}`,
+      href: localizePathname(pathname, code),
       active: code === locale,
     }))}
   />

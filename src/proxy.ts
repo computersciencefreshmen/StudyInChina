@@ -1,26 +1,37 @@
 import { NextResponse, type NextRequest } from 'next/server'
-import { defaultLocale, isLaunchLocale, launchLocales } from './i18n/config'
+import {
+  defaultLocale,
+  isPreviewLocale,
+  isPublicLocale,
+  localizePathname,
+  pathnameLocale,
+} from './i18n/config'
 
 function preferredLocale(request: NextRequest) {
   const saved = request.cookies.get('studycn-locale')?.value
-  if (saved && isLaunchLocale(saved)) return saved
+  if (saved && isPublicLocale(saved)) return saved
 
   const accepted = request.headers.get('accept-language') || ''
   for (const entry of accepted.split(',')) {
     const language = entry.trim().split(';')[0]?.split('-')[0]?.toLowerCase()
-    if (language && isLaunchLocale(language)) return language
+    if (language && isPublicLocale(language)) return language
   }
   return defaultLocale
 }
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const hasLocale = launchLocales.some((locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`))
-  if (hasLocale) return NextResponse.next()
+  const pathLocale = pathnameLocale(pathname)
 
-  const locale = preferredLocale(request)
+  if (pathLocale && isPublicLocale(pathLocale)) return NextResponse.next()
+
   const url = request.nextUrl.clone()
-  url.pathname = `/${locale}${pathname === '/' ? '' : pathname}`
+  // Preview routes are not public yet. Redirect directly to the same English
+  // path so /es/programs never becomes the misleading /en/es/programs.
+  const locale = pathLocale && isPreviewLocale(pathLocale)
+    ? defaultLocale
+    : preferredLocale(request)
+  url.pathname = localizePathname(pathname, locale)
   return NextResponse.redirect(url)
 }
 

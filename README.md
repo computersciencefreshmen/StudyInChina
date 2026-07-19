@@ -2,7 +2,7 @@
 
 An independent, source-led platform for international students comparing Chinese universities, programs, scholarships, cities and application routes.
 
-The public interface launches in English, Chinese and Russian. Spanish, French, Arabic and Portuguese are reserved in the locale model and remain unpublished until translation coverage and legal review meet the release thresholds described in [`docs/content-maintenance.md`](docs/content-maintenance.md).
+The public interface launches in English, Chinese and Russian. German, Spanish, French, Arabic and Portuguese are registered as preview locales and remain unpublished until translation coverage and legal review meet the release thresholds described in [`docs/content-maintenance.md`](docs/content-maintenance.md).
 
 ## Current release
 
@@ -16,9 +16,9 @@ The public interface launches in English, Chinese and Russian. Spanish, French, 
 - Source, verification and next-review metadata on factual records
 - Secure feedback endpoint with Zod, Origin checks, Turnstile, HMAC rate limiting and Resend
 - Sitemap, robots, canonical URLs, language alternates and structured detail-page data
-- CI, weekly link checks and a recurring Data Health issue
+- CI, a daily freshness gate, weekly link checks, monthly review records and semester audits
 
-The initial dataset is deliberately conservative. Program-cycle facts remain `draft` with fees and dates set to `null` / `not-announced` until a maintainer completes a publication-level review. Production pages, search, static routes, sitemap and structured data exclude `draft` and `archived` records; only `verified` and `stale` records are public.
+The initial dataset is deliberately conservative. Program-cycle facts remain `draft` with fees and dates set to `null` / `not-announced` until a maintainer completes a publication-level review. Production pages, search, static routes, sitemap and structured data exclude `draft` and `archived` records. Current programs, cycles and scholarships must also be `verified` and within `reviewAfter`; overdue university and city profiles remain available only with a runtime `stale` label.
 
 ## Stack
 

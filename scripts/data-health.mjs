@@ -6,6 +6,7 @@ import process from 'node:process'
 
 const DAY_MS = 24 * 60 * 60 * 1000
 const REVIEW_HORIZONS = {
+  daily: 0,
   weekly: 30,
   monthly: 90,
   semester: 210,
@@ -21,7 +22,7 @@ Builds an advisory content report from content/data/*.json.
 Options:
   --data-dir <path>       Data directory (default: content/data)
   --link-report <path>    JSON report produced by check-links.mjs
-  --mode <mode>           weekly, monthly, or semester (default: weekly)
+  --mode <mode>           daily, weekly, monthly, or semester (default: weekly)
   --today <YYYY-MM-DD>    Override today's UTC date for deterministic checks
   --json <path>           Write the complete JSON report
   --markdown <path>       Write the GitHub-friendly Markdown report
@@ -144,8 +145,13 @@ async function loadJsonFiles(dataDirectory) {
   )
 }
 
-function recordContext(file, jsonPath, recordId) {
-  return { file, path: jsonPath, recordId: recordId ?? null }
+function recordContext(file, jsonPath, recordId, recordStatus = null) {
+  return {
+    file,
+    path: jsonPath,
+    recordId: recordId ?? null,
+    recordStatus: recordStatus ?? null,
+  }
 }
 
 function auditLike(record) {
@@ -169,6 +175,16 @@ function inspectAuditRecord(record, context, state) {
     statusCounts[status] += 1
   }
 
+  // Draft records are never public. Keep their aggregate count in the report,
+  // but leave line-by-line cleanup to content validation and review PRs so the
+  // operational issue stays focused on facts visible to applicants.
+  if (status === 'draft') {
+    state.suppressedDraftRecords += 1
+    return
+  }
+
+  // Archived records remain available as history but do not need recurring
+  // review reminders or deadline noise.
   if (status === 'archived') {
     return
   }
@@ -246,6 +262,9 @@ function inspectAuditRecord(record, context, state) {
   } else if (reviewAfter) {
     const remainingDays = daysFrom(today, reviewAfter)
     if (remainingDays < 0) {
+      if (status === 'verified') {
+        state.overdueVerifiedRecords += 1
+      }
       addIssue(
         issues,
         'error',
@@ -277,8 +296,13 @@ function inspectAuditRecord(record, context, state) {
 
 function inspectDeadline(record, context, state) {
   const { issues, today } = state
+  const isDraft = record.status === 'draft'
   const isArchived = record.status === 'archived'
   const isHistorical = record.dateStatus === 'previous-cycle-reference'
+
+  if (isDraft || isArchived) {
+    return
+  }
 
   for (const field of ['closesOn', 'deadline']) {
     if (!Object.hasOwn(record, field)) {
@@ -311,7 +335,7 @@ function inspectDeadline(record, context, state) {
       continue
     }
 
-    if (isArchived || isHistorical) {
+    if (isHistorical) {
       continue
     }
 
@@ -371,7 +395,10 @@ function inspectValue(value, fileName, jsonPath, inheritedRecordId, state) {
   }
 
   const recordId = typeof value.id === 'string' ? value.id : inheritedRecordId
-  const context = recordContext(fileName, jsonPath, recordId)
+  const recordStatus = typeof value.status === 'string' && AUDIT_STATUSES.has(value.status)
+    ? value.status
+    : null
+  const context = recordContext(fileName, jsonPath, recordId, recordStatus)
 
   if (typeof value.id === 'string' && value.id.length > 0) {
     state.allIds.add(value.id)
@@ -439,7 +466,8 @@ function inlineCode(value) {
 
 function renderIssue(issue) {
   const identifier = issue.recordId ? `; record ${issue.recordId}` : ''
-  const location = `${issue.file}:${issue.path}${identifier}`
+  const status = issue.recordStatus ? `; status ${issue.recordStatus}` : ''
+  const location = `${issue.file}:${issue.path}${identifier}${status}`
   const url = issue.url ? ` — <${issue.url.replaceAll('>', '%3E')}>` : ''
   return `- **${issue.kind}** — ${issue.message}${url} — ${inlineCode(location)}`
 }
@@ -468,19 +496,21 @@ function renderMarkdown(report) {
   return `<!-- studyinchina-data-health -->
 # StudyInChina Data Health
 
-> This report is advisory. Automation never changes or publishes admissions facts; every correction requires official-source verification and a reviewed pull request.
+> Automation never changes or publishes admissions facts. Daily mode fails when verified data is overdue; every correction still requires official-source verification and a reviewed pull request.
 
 Generated: ${report.generatedAt}<br>
 Review mode: **${report.mode}** (${report.reviewHorizonDays}-day review horizon)<br>
 Data date: **${report.today}**
 
-| JSON files | Records | Audited records | Links checked | Errors | Warnings | Upcoming |
-| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| ${report.summary.documents} | ${report.summary.records} | ${report.summary.auditRecords} | ${report.summary.links.checked} | ${report.summary.errors} | ${report.summary.warnings} | ${report.summary.information} |
+| JSON files | Records | Audited records | Links checked | Overdue verified | Errors | Warnings | Upcoming |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| ${report.summary.documents} | ${report.summary.records} | ${report.summary.auditRecords} | ${report.summary.links.checked} | ${report.summary.overdueVerified} | ${report.summary.errors} | ${report.summary.warnings} | ${report.summary.information} |
 
 Status counts: ${Object.entries(report.summary.statuses)
     .map(([status, count]) => `${status} ${count}`)
     .join(' · ')}
+
+Draft details suppressed: **${report.summary.suppressedDraftRecords}** record(s). Drafts are never published and remain visible only as this aggregate workload.
 
 ${renderIssueSection('Action required', errors)}
 ${renderIssueSection('Manual checks', warnings)}
@@ -509,6 +539,8 @@ async function main() {
     allIds: new Set(),
     sourceReferences: [],
     statusCounts: { draft: 0, verified: 0, stale: 0, archived: 0 },
+    suppressedDraftRecords: 0,
+    overdueVerifiedRecords: 0,
     recordCount: 0,
     auditRecordCount: 0,
   }
@@ -551,6 +583,8 @@ async function main() {
       records: state.recordCount,
       auditRecords: state.auditRecordCount,
       statuses: state.statusCounts,
+      suppressedDraftRecords: state.suppressedDraftRecords,
+      overdueVerified: state.overdueVerifiedRecords,
       links: linkSummary,
       errors: issues.filter((issue) => issue.severity === 'error').length,
       warnings: issues.filter((issue) => issue.severity === 'warning').length,
@@ -567,6 +601,13 @@ async function main() {
   }
   if (options.markdownPath) {
     await writeOutput(options.markdownPath, markdown)
+  }
+
+  // Daily runs are a deployment-independent safety gate. They fail only when
+  // a currently verified record is past reviewAfter; reports in broader modes
+  // stay advisory so maintainers can work through upcoming review queues.
+  if (options.mode === 'daily' && state.overdueVerifiedRecords > 0) {
+    process.exitCode = 1
   }
 }
 

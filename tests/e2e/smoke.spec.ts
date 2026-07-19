@@ -30,6 +30,14 @@ test('the root route redirects using the accepted launch language', async ({ bro
   await context.close()
 })
 
+test('preview locales redirect to the equivalent English route without publishing untranslated pages', async ({ page }) => {
+  const response = await page.goto('/es/programs?degree=master', { waitUntil: 'domcontentloaded' })
+
+  expect(response?.ok()).toBe(true)
+  await expect(page).toHaveURL(/\/en\/programs\?degree=master$/)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+})
+
 test('primary navigation opens the program catalogue', async ({ page }) => {
   await page.goto('/en', { waitUntil: 'domcontentloaded' })
 

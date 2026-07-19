@@ -3,15 +3,17 @@ import { formatCny, formatDate, isCurrentlyOpen, localize } from '@/lib/data/for
 
 describe('localized fact formatting', () => {
   it('uses the requested translation and falls back to English', () => {
-    const value = { en: 'Computer Science', zh: '计算机科学' }
+    const value = { en: 'Computer Science', zh: '计算机科学', de: 'Informatik' }
 
     expect(localize(value, 'zh')).toBe('计算机科学')
+    expect(localize(value, 'de')).toBe('Informatik')
     expect(localize(value, 'ru')).toBe('Computer Science')
   })
 
   it('formats dates without a timezone day shift', () => {
     expect(formatDate('2026-01-05', 'en', 'Unknown')).toContain('2026')
     expect(formatDate('2026-01-05', 'zh', '未知')).toContain('1月5日')
+    expect(formatDate('2026-01-05', 'de', 'Unbekannt')).toContain('2026')
     expect(formatDate(null, 'ru', 'Не объявлено')).toBe('Не объявлено')
   })
 

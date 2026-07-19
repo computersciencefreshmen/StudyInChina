@@ -1,21 +1,26 @@
+import { getTodayDate, isCurrentVerifiedRecord, withRuntimeFreshness } from './freshness'
 import type { ContentStatus, DataBundle } from './types'
 
-const PUBLIC_STATUSES = new Set<ContentStatus>(['verified', 'stale'])
+const PROFILE_STATUSES = new Set<ContentStatus>(['verified', 'stale'])
 
 export function isPublicStatus(status: ContentStatus): boolean {
-  return PUBLIC_STATUSES.has(status)
+  return PROFILE_STATUSES.has(status)
 }
 
-export function selectPublishedData(data: DataBundle): DataBundle {
-  const cities = data.cities.filter((item) => isPublicStatus(item.status))
-  const cityIds = new Set(cities.map((item) => item.id))
-  const universities = data.universities.filter((item) => isPublicStatus(item.status) && cityIds.has(item.cityId))
-  const universityIds = new Set(universities.map((item) => item.id))
-  const programs = data.programs.filter((item) => isPublicStatus(item.status) && universityIds.has(item.universityId))
-  const programIds = new Set(programs.map((item) => item.id))
-  const admissionCycles = data.admissionCycles.filter((item) => isPublicStatus(item.status) && programIds.has(item.programId))
-  const scholarships = data.scholarships
+export function selectPublishedData(data: DataBundle, today = getTodayDate()): DataBundle {
+  const cities = data.cities
     .filter((item) => isPublicStatus(item.status))
+    .map((item) => withRuntimeFreshness(item, today))
+  const cityIds = new Set(cities.map((item) => item.id))
+  const universities = data.universities
+    .filter((item) => isPublicStatus(item.status) && cityIds.has(item.cityId))
+    .map((item) => withRuntimeFreshness(item, today))
+  const universityIds = new Set(universities.map((item) => item.id))
+  const programs = data.programs.filter((item) => isCurrentVerifiedRecord(item, today) && universityIds.has(item.universityId))
+  const programIds = new Set(programs.map((item) => item.id))
+  const admissionCycles = data.admissionCycles.filter((item) => isCurrentVerifiedRecord(item, today) && programIds.has(item.programId))
+  const scholarships = data.scholarships
+    .filter((item) => isCurrentVerifiedRecord(item, today))
     .map((item) => ({
       ...item,
       universityIds: item.universityIds.filter((id) => universityIds.has(id)),

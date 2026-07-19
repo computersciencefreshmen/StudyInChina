@@ -2,6 +2,7 @@ import 'server-only'
 import { cache } from 'react'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { getTodayDate } from './freshness'
 import { bundleSchema } from './schema'
 import { selectPublishedData } from './publication'
 import type { DataBundle } from './types'
@@ -19,11 +20,13 @@ export const getAllData = cache((): DataBundle => bundleSchema.parse({
   scholarships: readJson('scholarships'),
 }))
 
-export const getData = cache((): DataBundle => {
+const getPublishedData = cache((today: string): DataBundle => selectPublishedData(getAllData(), today))
+
+export function getData(): DataBundle {
   const data = getAllData()
   const previewEnabled = process.env.CONTENT_PREVIEW === 'true' && process.env.VERCEL_ENV !== 'production'
-  return previewEnabled ? data : selectPublishedData(data)
-})
+  return previewEnabled ? data : getPublishedData(getTodayDate())
+}
 
 export function getUniversityBySlug(slug: string) { return getData().universities.find((item) => item.slug === slug) }
 export function getProgramBySlug(slug: string) { return getData().programs.find((item) => item.slug === slug) }
