@@ -1,9 +1,11 @@
 import Link from 'next/link'
 
+import type { PublicLocale } from '@/i18n/config'
+
 import { cx } from './cx'
 
 export interface LanguageOption {
-  code: string
+  code: PublicLocale
   label: string
   href: string
   active?: boolean

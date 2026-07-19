@@ -7,7 +7,7 @@ const date = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine((value) => {
 const httpsUrl = z.url().refine((value) => new URL(value).protocol === 'https:', 'URL must use HTTPS')
 const localizedText = z.object({
   en: z.string().min(1), zh: z.string().min(1), ru: z.string().min(1),
-  es: z.string().min(1).optional(), fr: z.string().min(1).optional(), ar: z.string().min(1).optional(), pt: z.string().min(1).optional(),
+  de: z.string().min(1).optional(), es: z.string().min(1).optional(), fr: z.string().min(1).optional(), ar: z.string().min(1).optional(), pt: z.string().min(1).optional(),
 })
 const status = z.enum(['draft', 'verified', 'stale', 'archived'])
 const audit = z.object({ sourceIds: z.array(z.string().min(1)).min(1), verifiedAt: date, reviewAfter: date, status })

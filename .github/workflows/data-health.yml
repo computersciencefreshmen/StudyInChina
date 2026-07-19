@@ -2,15 +2,19 @@ name: Data health
 
 on:
   schedule:
+    - cron: "11 2 * * *"
     - cron: "17 3 * * 0"
+    - cron: "23 4 1 * *"
+    - cron: "29 5 1 1,8 *"
   workflow_dispatch:
     inputs:
       review_mode:
-        description: Review horizon to include in the report
+        description: Audit mode to run
         required: true
         default: weekly
         type: choice
         options:
+          - daily
           - weekly
           - monthly
           - semester
@@ -28,8 +32,6 @@ jobs:
     name: Audit links and review dates
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    env:
-      REVIEW_MODE: ${{ github.event.inputs.review_mode || 'weekly' }}
 
     steps:
       - name: Check out repository
@@ -40,8 +42,26 @@ jobs:
         with:
           node-version: 24
 
+      - name: Resolve audit mode
+        id: mode
+        shell: bash
+        env:
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+          REQUESTED_MODE: ${{ inputs.review_mode }}
+        run: |
+          case "$EVENT_SCHEDULE" in
+            "11 2 * * *") mode="daily" ;;
+            "17 3 * * 0") mode="weekly" ;;
+            "23 4 1 * *") mode="monthly" ;;
+            "29 5 1 1,8 *") mode="semester" ;;
+            *) mode="${REQUESTED_MODE:-weekly}" ;;
+          esac
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "Running $mode audit"
+
       - name: Check links
         id: link_check
+        if: steps.mode.outputs.mode != 'daily'
         continue-on-error: true
         run: >-
           node scripts/check-links.mjs
@@ -50,41 +70,74 @@ jobs:
           --fail-on-hard
 
       - name: Build data health report
-        run: >-
-          node scripts/data-health.mjs
-          --mode "$REVIEW_MODE"
-          --link-report "$RUNNER_TEMP/link-health.json"
-          --json "$RUNNER_TEMP/data-health.json"
-          --markdown "$RUNNER_TEMP/data-health.md"
+        id: data_health
+        continue-on-error: true
+        shell: bash
+        env:
+          REVIEW_MODE: ${{ steps.mode.outputs.mode }}
+        run: |
+          args=(
+            --mode "$REVIEW_MODE"
+            --json "$RUNNER_TEMP/data-health.json"
+            --markdown "$RUNNER_TEMP/data-health.md"
+          )
+          if [[ -f "$RUNNER_TEMP/link-health.json" ]]; then
+            args+=(--link-report "$RUNNER_TEMP/link-health.json")
+          fi
+          node scripts/data-health.mjs "${args[@]}"
 
       - name: Add report to workflow summary
-        run: cat "$RUNNER_TEMP/data-health.md" >> "$GITHUB_STEP_SUMMARY"
+        if: always()
+        shell: bash
+        run: |
+          if [[ -f "$RUNNER_TEMP/data-health.md" ]]; then
+            cat "$RUNNER_TEMP/data-health.md" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Data health report was not generated." >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       - name: Upload audit reports
+        if: always()
         uses: actions/upload-artifact@v6
         with:
-          name: data-health-${{ github.run_id }}
+          name: data-health-${{ steps.mode.outputs.mode }}-${{ github.run_id }}
           path: |
             ${{ runner.temp }}/link-health.json
             ${{ runner.temp }}/link-health.md
             ${{ runner.temp }}/data-health.json
             ${{ runner.temp }}/data-health.md
+          if-no-files-found: warn
           retention-days: 30
 
-      - name: Create or update Data Health issue
+      - name: Create or update review issue
+        if: always()
         uses: actions/github-script@v9
         env:
           REPORT_PATH: ${{ runner.temp }}/data-health.md
+          REPORT_JSON_PATH: ${{ runner.temp }}/data-health.json
+          REVIEW_MODE: ${{ steps.mode.outputs.mode }}
         with:
           script: |
             const fs = require('node:fs');
 
-            const title = '[Data Health] Content review';
-            const marker = '<!-- studyinchina-data-health -->';
-            let body = fs.readFileSync(process.env.REPORT_PATH, 'utf8');
+            if (!fs.existsSync(process.env.REPORT_PATH) || !fs.existsSync(process.env.REPORT_JSON_PATH)) {
+              core.warning('Data health report is unavailable; no issue was changed.');
+              return;
+            }
 
-            // GitHub issue bodies are limited to 65,536 characters. Leave room
-            // for a truncation notice and keep the full report in the artifact.
+            const report = JSON.parse(fs.readFileSync(process.env.REPORT_JSON_PATH, 'utf8'));
+            const mode = process.env.REVIEW_MODE;
+            const yearMonth = report.today.slice(0, 7);
+            const titles = {
+              daily: '[Data Health] Daily freshness gate',
+              weekly: '[Data Health] Weekly source check',
+              monthly: `[Data Review] ${yearMonth}`,
+              semester: `[Data Review] ${yearMonth} semester audit`,
+            };
+            const title = titles[mode];
+            if (!title) throw new Error(`Unsupported review mode: ${mode}`);
+
+            let body = fs.readFileSync(process.env.REPORT_PATH, 'utf8');
             if (body.length > 60000) {
               body = `${body.slice(0, 59500)}\n\n---\nReport truncated. Download the workflow artifact for the full results.`;
             }
@@ -93,31 +146,49 @@ jobs:
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner,
               repo,
-              state: 'open',
+              state: 'all',
               per_page: 100,
             });
+            const existing = issues.find((issue) => !issue.pull_request && issue.title === title);
+            const rolling = mode === 'daily' || mode === 'weekly';
+            const actionable = report.summary.errors > 0 || report.summary.warnings > 0;
 
-            const existing = issues.find((issue) =>
-              !issue.pull_request &&
-              (issue.title === title || issue.body?.includes(marker))
-            );
+            if (rolling && !existing && !actionable) {
+              core.notice(`${mode} audit is clean; no rolling issue is needed.`);
+              return;
+            }
 
             if (existing) {
-              await github.rest.issues.update({
+              const update = {
                 owner,
                 repo,
                 issue_number: existing.number,
                 title,
                 body,
-              });
-              core.notice(`Updated Data Health issue #${existing.number}`);
-            } else {
-              const created = await github.rest.issues.create({ owner, repo, title, body });
-              core.notice(`Created Data Health issue #${created.data.number}`);
+              };
+              if (rolling) update.state = actionable ? 'open' : 'closed';
+              await github.rest.issues.update(update);
+              core.notice(`Updated ${mode} review issue #${existing.number}`);
+              return;
             }
 
-      - name: Mark hard link failures
-        if: steps.link_check.outcome == 'failure'
+            const created = await github.rest.issues.create({ owner, repo, title, body });
+            core.notice(`Created ${mode} review issue #${created.data.number}`);
+
+      - name: Enforce audit result
+        if: always()
+        shell: bash
+        env:
+          DATA_HEALTH_OUTCOME: ${{ steps.data_health.outcome }}
+          LINK_CHECK_OUTCOME: ${{ steps.link_check.outcome }}
         run: |
-          echo "One or more links returned a confirmed 404 or 410. See the Data Health issue."
-          exit 1
+          failed=0
+          if [[ "$DATA_HEALTH_OUTCOME" == "failure" ]]; then
+            echo "The daily freshness gate found overdue verified data, or the audit script failed."
+            failed=1
+          fi
+          if [[ "$LINK_CHECK_OUTCOME" == "failure" ]]; then
+            echo "One or more links returned a confirmed 404 or 410."
+            failed=1
+          fi
+          exit "$failed"
