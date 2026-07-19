@@ -1,0 +1,11 @@
+import { notFound } from 'next/navigation'
+import { Badge, Card, LinkButton, PageHero, SectionHeading } from '@/components/ui'
+import { CityConstellation } from '@/components/features/CityConstellation'
+import { getMessages } from '@/i18n/messages'
+import { localize } from '@/lib/data/format'
+import { regionLabels } from '@/lib/data/labels'
+import { getData } from '@/lib/data/load'
+import { pageMetadata, requireLocale } from '@/lib/site'
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) { const locale = requireLocale((await params).locale) || 'en'; const m = getMessages(locale); return pageMetadata(locale, m.cities.title, m.cities.intro, 'cities') }
+export default async function CitiesPage({ params }: { params: Promise<{ locale: string }> }) { const locale = requireLocale((await params).locale); if (!locale) notFound(); const messages = getMessages(locale); const data = getData(); return <><PageHero variant="compact" eyebrow={`${data.cities.length} ${messages.nav.cities}`} title={messages.cities.title} description={messages.cities.intro} /><section className="atlas-container atlas-section"><SectionHeading title={messages.home.cityTitle} description={messages.cities.mapNote} /><CityConstellation cities={data.cities} locale={locale} /></section><section className="atlas-container atlas-section section-block--tight"><div className="content-grid">{data.cities.map((city) => <Card key={city.id} className="record-card"><div className="record-card__top"><Badge tone="jade">{regionLabels(locale)[city.region]}</Badge><span>{data.universities.filter((item) => item.cityId === city.id).length} {messages.nav.universities}</span></div><h2 className="record-card__title">{localize(city.name, locale)}</h2><p className="record-card__summary">{localize(city.overview, locale)}</p><div className="atlas-card__footer"><LinkButton href={`/${locale}/cities/${city.slug}`} variant="quiet">{messages.common.viewDetails} →</LinkButton></div></Card>)}</div></section></> }

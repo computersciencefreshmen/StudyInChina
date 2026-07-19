@@ -1,0 +1,12 @@
+import { notFound } from 'next/navigation'
+import { ScholarshipCard } from '@/components/features/ScholarshipCard'
+import { PageHero } from '@/components/ui'
+import { getMessages } from '@/i18n/messages'
+import { getData } from '@/lib/data/load'
+import { pageMetadata, requireLocale } from '@/lib/site'
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) { const locale = requireLocale((await params).locale) || 'en'; const m = getMessages(locale); return pageMetadata(locale, m.scholarships.title, m.scholarships.intro, 'scholarships') }
+export default async function ScholarshipsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = requireLocale((await params).locale); if (!locale) notFound(); const messages = getMessages(locale); const data = getData()
+  return <><PageHero variant="compact" eyebrow={`${data.scholarships.length} ${messages.nav.scholarships}`} title={messages.scholarships.title} description={messages.scholarships.intro} meta={<><span>{messages.common.authoritativeNotice}</span></>} /><section className="atlas-container atlas-section"><div className="notice scholarship-notice">{locale === 'zh' ? '公开目录只显示已经过官方来源核验的奖学金；列出名称并不代表当期一定开放。' : locale === 'ru' ? 'В открытом каталоге показаны только стипендии, проверенные по официальным источникам; наличие записи не означает открытый набор.' : 'The public catalogue only shows scholarships verified against official sources; a listing does not necessarily mean applications are open.'}</div><div className="content-grid">{data.scholarships.map((scholarship) => <ScholarshipCard key={scholarship.id} scholarship={scholarship} locale={locale} messages={messages} />)}</div></section></>
+}

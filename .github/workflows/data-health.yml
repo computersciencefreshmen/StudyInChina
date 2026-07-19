@@ -1,0 +1,123 @@
+name: Data health
+
+on:
+  schedule:
+    - cron: "17 3 * * 0"
+  workflow_dispatch:
+    inputs:
+      review_mode:
+        description: Review horizon to include in the report
+        required: true
+        default: weekly
+        type: choice
+        options:
+          - weekly
+          - monthly
+          - semester
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: data-health-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    name: Audit links and review dates
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      REVIEW_MODE: ${{ github.event.inputs.review_mode || 'weekly' }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Check links
+        id: link_check
+        continue-on-error: true
+        run: >-
+          node scripts/check-links.mjs
+          --json "$RUNNER_TEMP/link-health.json"
+          --markdown "$RUNNER_TEMP/link-health.md"
+          --fail-on-hard
+
+      - name: Build data health report
+        run: >-
+          node scripts/data-health.mjs
+          --mode "$REVIEW_MODE"
+          --link-report "$RUNNER_TEMP/link-health.json"
+          --json "$RUNNER_TEMP/data-health.json"
+          --markdown "$RUNNER_TEMP/data-health.md"
+
+      - name: Add report to workflow summary
+        run: cat "$RUNNER_TEMP/data-health.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload audit reports
+        uses: actions/upload-artifact@v6
+        with:
+          name: data-health-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/link-health.json
+            ${{ runner.temp }}/link-health.md
+            ${{ runner.temp }}/data-health.json
+            ${{ runner.temp }}/data-health.md
+          retention-days: 30
+
+      - name: Create or update Data Health issue
+        uses: actions/github-script@v9
+        env:
+          REPORT_PATH: ${{ runner.temp }}/data-health.md
+        with:
+          script: |
+            const fs = require('node:fs');
+
+            const title = '[Data Health] Content review';
+            const marker = '<!-- studyinchina-data-health -->';
+            let body = fs.readFileSync(process.env.REPORT_PATH, 'utf8');
+
+            // GitHub issue bodies are limited to 65,536 characters. Leave room
+            // for a truncation notice and keep the full report in the artifact.
+            if (body.length > 60000) {
+              body = `${body.slice(0, 59500)}\n\n---\nReport truncated. Download the workflow artifact for the full results.`;
+            }
+
+            const { owner, repo } = context.repo;
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100,
+            });
+
+            const existing = issues.find((issue) =>
+              !issue.pull_request &&
+              (issue.title === title || issue.body?.includes(marker))
+            );
+
+            if (existing) {
+              await github.rest.issues.update({
+                owner,
+                repo,
+                issue_number: existing.number,
+                title,
+                body,
+              });
+              core.notice(`Updated Data Health issue #${existing.number}`);
+            } else {
+              const created = await github.rest.issues.create({ owner, repo, title, body });
+              core.notice(`Created Data Health issue #${created.data.number}`);
+            }
+
+      - name: Mark hard link failures
+        if: steps.link_check.outcome == 'failure'
+        run: |
+          echo "One or more links returned a confirmed 404 or 410. See the Data Health issue."
+          exit 1
