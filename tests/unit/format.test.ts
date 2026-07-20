@@ -2,12 +2,14 @@ import { describe, expect, it } from 'vitest'
 import { formatCny, formatDate, isCurrentlyOpen, localize } from '@/lib/data/format'
 
 describe('localized fact formatting', () => {
-  it('uses the requested translation and falls back to English', () => {
+  it('uses the requested translation and marks a missing public translation', () => {
     const value = { en: 'Computer Science', zh: '计算机科学', de: 'Informatik' }
 
     expect(localize(value, 'zh')).toBe('计算机科学')
     expect(localize(value, 'de')).toBe('Informatik')
-    expect(localize(value, 'ru')).toBe('Computer Science')
+    expect(localize(value, 'ru')).toBe('Перевод готовится: Computer Science')
+    expect(localize(value, 'fr')).toBe('Traduction en attente: Computer Science')
+    expect(localize(value, 'fr')).not.toContain('计算机科学')
   })
 
   it('formats dates without a timezone day shift', () => {

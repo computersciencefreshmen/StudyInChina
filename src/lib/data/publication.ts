@@ -16,9 +16,18 @@ export function selectPublishedData(data: DataBundle, today = getTodayDate()): D
     .filter((item) => isPublicStatus(item.status) && cityIds.has(item.cityId))
     .map((item) => withRuntimeFreshness(item, today))
   const universityIds = new Set(universities.map((item) => item.id))
-  const programs = data.programs.filter((item) => isCurrentVerifiedRecord(item, today) && universityIds.has(item.universityId))
+  const candidatePrograms = data.programs.filter(
+    (item) => isCurrentVerifiedRecord(item, today) && universityIds.has(item.universityId),
+  )
+  const candidateProgramIds = new Set(candidatePrograms.map((item) => item.id))
+  const admissionCycles = data.admissionCycles.filter(
+    (item) => isCurrentVerifiedRecord(item, today)
+      && item.dateStatus !== 'previous-cycle-reference'
+      && candidateProgramIds.has(item.programId),
+  )
+  const programsWithCurrentCycles = new Set(admissionCycles.map((item) => item.programId))
+  const programs = candidatePrograms.filter((item) => programsWithCurrentCycles.has(item.id))
   const programIds = new Set(programs.map((item) => item.id))
-  const admissionCycles = data.admissionCycles.filter((item) => isCurrentVerifiedRecord(item, today) && programIds.has(item.programId))
   const scholarships = data.scholarships
     .filter((item) => isCurrentVerifiedRecord(item, today))
     .map((item) => ({

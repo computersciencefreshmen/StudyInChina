@@ -30,10 +30,8 @@ export default async function LocaleLayout({ children, params }: Readonly<{ chil
   const locale = requireLocale((await params).locale)
   if (!locale) notFound()
   const messages = getMessages(locale)
-  const guideLabel = locale === 'zh' ? '探索' : locale === 'ru' ? 'Навигация' : 'Explore'
-  const projectLabel = locale === 'zh' ? '项目' : locale === 'ru' ? 'Проект' : 'Project'
   const releaseDate = formatDate(getDataReleaseDate(getData()), locale, '—')
-  const releaseLabel = locale === 'zh' ? `数据版本 ${releaseDate}` : locale === 'ru' ? `Версия данных: ${releaseDate}` : `Data release ${releaseDate}`
+  const releaseLabel = `${messages.shell.dataRelease}: ${releaseDate}`
 
   return <html lang={locale} dir={localeDirection(locale)}>
     <body>
@@ -44,15 +42,15 @@ export default async function LocaleLayout({ children, params }: Readonly<{ chil
         homeHref={`/${locale}`}
         brandName={messages.brand}
         description={messages.footer.project}
-        creator={{ prefix: locale === 'zh' ? '创作者：' : locale === 'ru' ? 'Автор:' : 'Created by', label: 'Henry Yang', href: 'https://yanghanyu2023.wixsite.com/henry' }}
+        creator={{ prefix: messages.shell.creatorPrefix, label: 'Henry Yang', href: 'https://yanghanyu2023.wixsite.com/henry' }}
         columns={[
-          { title: guideLabel, links: [
+          { title: messages.shell.footerExplore, links: [
             { label: messages.nav.universities, href: `/${locale}/universities` },
             { label: messages.nav.programs, href: `/${locale}/programs` },
             { label: messages.nav.scholarships, href: `/${locale}/scholarships` },
             { label: messages.nav.cities, href: `/${locale}/cities` },
           ] },
-          { title: projectLabel, links: [
+          { title: messages.shell.footerProject, links: [
             { label: messages.nav.guides, href: `/${locale}/guides` },
             { label: messages.nav.about, href: `/${locale}/about` },
             { label: messages.nav.contact, href: `/${locale}/contact` },

@@ -54,6 +54,18 @@ export type LanguageRequirement = {
   minimum: string | null
 }
 
+export type ProgramDetails = {
+  faculty: LocalizedText
+  overview: LocalizedText
+  qualification: LocalizedText
+  studyMode: 'full-time' | 'part-time' | 'hybrid'
+  languagePolicy: LocalizedText
+  curriculumHighlights: LocalizedText[]
+  eligibility: LocalizedText[]
+  applicationMaterials: LocalizedText[]
+  campus?: LocalizedText
+}
+
 export type Program = AuditMeta & {
   id: string
   slug: string
@@ -63,9 +75,11 @@ export type Program = AuditMeta & {
   discipline: Discipline
   teachingLanguages: string[]
   durationMonths: number | null
+  durationMonthsMax?: number | null
   programUrl: string
   applyUrl: string
   languageRequirements: LanguageRequirement[]
+  details?: ProgramDetails
 }
 
 export type AdmissionCycle = AuditMeta & {
@@ -77,6 +91,9 @@ export type AdmissionCycle = AuditMeta & {
   closesOn: string | null
   dateStatus: 'published' | 'rolling' | 'not-announced' | 'previous-cycle-reference'
   tuitionCny: number | null
+  tuitionPeriod?: 'program' | 'semester' | 'academic-year' | 'month' | 'other' | null
+  tuitionStatus?: 'confirmed' | 'reference' | null
+  evidenceBasis?: 'cycle-specific' | 'recurring-official-rule'
   applicationFeeCny: number | null
 }
 

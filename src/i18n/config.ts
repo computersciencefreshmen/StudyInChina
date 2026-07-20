@@ -1,5 +1,5 @@
 export type LocaleDirection = 'ltr' | 'rtl'
-export type LocaleReleaseState = 'public' | 'preview'
+export type LocaleReleaseState = 'public' | 'beta' | 'preview'
 
 export interface LocaleConfig {
   code: string
@@ -19,9 +19,9 @@ export const localeRegistry = [
   { code: 'en', nativeName: 'English', intlLocale: 'en-US', openGraphLocale: 'en_US', direction: 'ltr', releaseState: 'public' },
   { code: 'zh', nativeName: '中文', intlLocale: 'zh-CN', openGraphLocale: 'zh_CN', direction: 'ltr', releaseState: 'public' },
   { code: 'ru', nativeName: 'Русский', intlLocale: 'ru-RU', openGraphLocale: 'ru_RU', direction: 'ltr', releaseState: 'public' },
-  { code: 'de', nativeName: 'Deutsch', intlLocale: 'de-DE', openGraphLocale: 'de_DE', direction: 'ltr', releaseState: 'preview' },
-  { code: 'fr', nativeName: 'Français', intlLocale: 'fr-FR', openGraphLocale: 'fr_FR', direction: 'ltr', releaseState: 'preview' },
-  { code: 'es', nativeName: 'Español', intlLocale: 'es-ES', openGraphLocale: 'es_ES', direction: 'ltr', releaseState: 'preview' },
+  { code: 'de', nativeName: 'Deutsch · Beta', intlLocale: 'de-DE', openGraphLocale: 'de_DE', direction: 'ltr', releaseState: 'beta' },
+  { code: 'fr', nativeName: 'Français · Bêta', intlLocale: 'fr-FR', openGraphLocale: 'fr_FR', direction: 'ltr', releaseState: 'beta' },
+  { code: 'es', nativeName: 'Español · Beta', intlLocale: 'es-ES', openGraphLocale: 'es_ES', direction: 'ltr', releaseState: 'beta' },
   { code: 'pt', nativeName: 'Português', intlLocale: 'pt-BR', openGraphLocale: 'pt_BR', direction: 'ltr', releaseState: 'preview' },
   { code: 'ar', nativeName: 'العربية', intlLocale: 'ar', openGraphLocale: 'ar_AR', direction: 'rtl', releaseState: 'preview' },
 ] as const satisfies readonly LocaleConfig[]
@@ -29,7 +29,9 @@ export const localeRegistry = [
 type RegistryEntry = (typeof localeRegistry)[number]
 
 export type Locale = RegistryEntry['code']
-export type PublicLocale = Extract<RegistryEntry, { releaseState: 'public' }>['code']
+export type IndexedLocale = Extract<RegistryEntry, { releaseState: 'public' }>['code']
+export type BetaLocale = Extract<RegistryEntry, { releaseState: 'beta' }>['code']
+export type PublicLocale = IndexedLocale | BetaLocale
 export type PreviewLocale = Extract<RegistryEntry, { releaseState: 'preview' }>['code']
 
 /** Kept as a compatibility alias while launch-language call sites migrate. */
@@ -46,7 +48,9 @@ function localeCodesByState<State extends LocaleReleaseState>(state: State) {
 }
 
 export const allLocales: readonly Locale[] = localeRegistry.map(({ code }) => code)
-export const publicLocales: readonly PublicLocale[] = localeCodesByState('public')
+export const indexedLocales: readonly IndexedLocale[] = localeCodesByState('public')
+export const betaLocales: readonly BetaLocale[] = localeCodesByState('beta')
+export const publicLocales: readonly PublicLocale[] = [...indexedLocales, ...betaLocales]
 export const previewLocales: readonly PreviewLocale[] = localeCodesByState('preview')
 
 /** Kept as a compatibility alias; publicLocales is the canonical name. */
@@ -59,7 +63,11 @@ export function isLocale(value: string): value is Locale {
 }
 
 export function isPublicLocale(value: string): value is PublicLocale {
-  return isLocale(value) && localeByCode[value].releaseState === 'public'
+  return isLocale(value) && localeByCode[value].releaseState !== 'preview'
+}
+
+export function isBetaLocale(value: string): value is BetaLocale {
+  return isLocale(value) && localeByCode[value].releaseState === 'beta'
 }
 
 export function isPreviewLocale(value: string): value is PreviewLocale {

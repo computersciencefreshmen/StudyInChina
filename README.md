@@ -2,14 +2,14 @@
 
 An independent, source-led platform for international students comparing Chinese universities, programs, scholarships, cities and application routes.
 
-The public interface launches in English, Chinese and Russian. German, Spanish, French, Arabic and Portuguese are registered as preview locales and remain unpublished until translation coverage and legal review meet the release thresholds described in [`docs/content-maintenance.md`](docs/content-maintenance.md).
+The public interface is available in English, Chinese, Russian, German, French and Spanish. German, French and Spanish are the first expansion batch: interface and legal copy are translated, while untranslated record prose is explicitly marked and falls back to English. Arabic and Portuguese remain registered preview locales until their review gates are complete.
 
 ## Current release
 
 - 39 verified universities across 12 student cities
 - 2 verified national scholarship routes
-- 120 program and admission-cycle working records retained privately as review drafts
-- English, Chinese and Russian routes with locale-aware dates and CNY values
+- 5 fully sourced 2026 program pages; 113 candidate drafts and 2 archived records remain private
+- Six public language routes with locale-aware dates, CNY values and explicit translation fallbacks
 - Search and filters for universities and programs
 - Versioned, browser-only favorites and comparison of up to four programs
 - Printable comparison sheets (use the browser’s **Save as PDF** option)
@@ -85,7 +85,7 @@ Do not edit an application date, fee, requirement or scholarship term without op
 4. Store unknown facts as `null`; use `not-announced` for an unpublished cycle.
 5. Update English first, then obtain human review for Chinese and Russian.
 6. Run `npm run validate:data` and the full quality gate.
-7. Inspect the Vercel Preview in all three launch languages before merging.
+7. Inspect the Vercel Preview in all six public languages before merging.
 
 Old cycles are archived rather than overwritten. Automation reports stale records and broken links but never modifies or publishes admissions facts. See the full [content maintenance policy](docs/content-maintenance.md).
 

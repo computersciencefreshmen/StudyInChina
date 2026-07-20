@@ -6,6 +6,7 @@ import programs from '../../content/data/programs.json'
 import admissionCycles from '../../content/data/admission-cycles.json'
 import scholarships from '../../content/data/scholarships.json'
 import { bundleSchema } from '@/lib/data/schema'
+import { selectPublishedData } from '@/lib/data/publication'
 
 const content = bundleSchema.parse({
   sources,
@@ -15,13 +16,49 @@ const content = bundleSchema.parse({
   admissionCycles,
   scholarships,
 })
+const published = selectPublishedData(content, '2026-07-20')
 
 describe('published content data', () => {
-  it('meets the first-release catalogue targets', () => {
+  it('retains the full candidate catalogue while only publishing reviewed facts', () => {
     expect(content.cities).toHaveLength(12)
     expect(content.universities.length).toBeGreaterThanOrEqual(40)
     expect(content.programs.length).toBeGreaterThanOrEqual(100)
     expect(content.scholarships.length).toBeGreaterThanOrEqual(20)
+
+    expect(published.cities).toHaveLength(12)
+    expect(published.universities.length).toBeGreaterThanOrEqual(39)
+    expect(published.programs).toHaveLength(5)
+    expect(published.admissionCycles).toHaveLength(5)
+  })
+
+  it('publishes no incomplete project templates', () => {
+    const officialProgramSources = new Map(
+      published.sources
+        .filter((source) => source.official && source.kind === 'program')
+        .map((source) => [source.id, source]),
+    )
+
+    for (const program of published.programs) {
+      expect(program.details).toBeDefined()
+      expect(program.durationMonths).not.toBeNull()
+      expect(program.teachingLanguages).not.toContain('To be confirmed')
+      expect(program.languageRequirements.length).toBeGreaterThan(0)
+      expect(program.programUrl).not.toBe(program.applyUrl)
+      expect(program.durationMonthsMax).not.toBeNull()
+      expect(program.sourceIds.some((id) => officialProgramSources.get(id)?.url === program.programUrl)).toBe(true)
+      expect(published.admissionCycles.some((cycle) => cycle.programId === program.id)).toBe(true)
+    }
+
+    for (const cycle of published.admissionCycles) {
+      expect(cycle.tuitionCny).not.toBeNull()
+      expect(cycle.tuitionPeriod).toBeTruthy()
+      expect(cycle.tuitionStatus).toMatch(/^(confirmed|reference)$/)
+      expect(cycle.evidenceBasis).toMatch(/^(cycle-specific|recurring-official-rule)$/)
+      expect(cycle.applicationFeeCny).not.toBeNull()
+    }
+
+    expect(published.admissionCycles.find((cycle) => cycle.programId === 'program-fudan-chinese-language-autumn-2026')?.tuitionStatus).toBe('reference')
+    expect(published.admissionCycles.find((cycle) => cycle.programId === 'program-nju-long-term-chinese-language')?.evidenceBasis).toBe('recurring-official-rule')
   })
 
   it('provides English, Chinese and Russian for public names', () => {

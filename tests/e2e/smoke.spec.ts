@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-const locales = ['en', 'zh', 'ru'] as const
+const locales = ['en', 'zh', 'ru', 'de', 'fr', 'es'] as const
 const coreRoutes = ['', 'universities', 'programs', 'scholarships', 'cities', 'guides'] as const
 
 for (const locale of locales) {
@@ -30,8 +30,8 @@ test('the root route redirects using the accepted launch language', async ({ bro
   await context.close()
 })
 
-test('preview locales redirect to the equivalent English route without publishing untranslated pages', async ({ page }) => {
-  const response = await page.goto('/es/programs?degree=master', { waitUntil: 'domcontentloaded' })
+test('preview locales redirect to the equivalent English route without publishing incomplete pages', async ({ page }) => {
+  const response = await page.goto('/pt/programs?degree=master', { waitUntil: 'domcontentloaded' })
 
   expect(response?.ok()).toBe(true)
   await expect(page).toHaveURL(/\/en\/programs\?degree=master$/)
@@ -51,11 +51,11 @@ test('primary navigation opens the program catalogue', async ({ page }) => {
   await expect(page.locator('[role="search"]')).toBeVisible()
 })
 
-test('the homepage does not publish unverified discipline links', async ({ page }) => {
+test('the homepage exposes disciplines backed by the public program catalogue', async ({ page }) => {
   await page.goto('/en', { waitUntil: 'domcontentloaded' })
 
-  await expect(page.getByTestId('program-publication-note')).toBeVisible()
-  await expect(page.locator('a[href^="/en/programs?discipline="]')).toHaveCount(0)
+  await expect(page.getByTestId('program-publication-note')).toHaveCount(0)
+  expect(await page.locator('a[href^="/en/programs?discipline="]').count()).toBeGreaterThan(0)
 })
 
 test('the public program catalogue excludes draft templates', async ({ page }) => {
@@ -63,9 +63,22 @@ test('the public program catalogue excludes draft templates', async ({ page }) =
   const search = page.locator('#program-search')
 
   await expect(search).toBeVisible()
-  await expect(page.getByTestId('program-publication-note')).toBeVisible()
-  await expect(page.locator('.empty-box')).toBeVisible()
+  await expect(page.getByTestId('program-publication-note')).toHaveCount(0)
+  expect(await page.locator('.record-card').count()).toBeGreaterThan(0)
+  await search.fill('Tsinghua University Computer Science and Technology')
   await expect(page.locator('.record-card')).toHaveCount(0)
+})
+
+test('a verified program page exposes complete facts, official sources and application route', async ({ page }) => {
+  const response = await page.goto('/en/programs/fudan-university-2026-autumn-chinese-language-program', { waitUntil: 'domcontentloaded' })
+
+  expect(response?.ok()).toBe(true)
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('2026 Autumn Chinese Language Program')
+  await expect(page.getByRole('heading', { name: 'Curriculum highlights' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Eligibility' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Application materials' })).toBeVisible()
+  await expect(page.getByRole('link', { name: /View official application portal/ })).toHaveAttribute('href', /istudent\.fudan\.edu\.cn/)
+  await expect(page.getByRole('link', { name: /Fudan University Chinese Language Program/ })).toHaveAttribute('href', /fudan\.edu\.cn/)
 })
 
 test('a draft program detail is not publicly routable', async ({ page }) => {

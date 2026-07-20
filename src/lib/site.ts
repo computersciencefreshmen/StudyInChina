@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getLocaleConfig, isPublicLocale, publicLocales, type LaunchLocale } from '@/i18n/config'
+import { getLocaleConfig, indexedLocales, isBetaLocale, isPublicLocale, type LaunchLocale } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 
 function resolveSiteUrl(): URL {
@@ -27,11 +27,12 @@ export function pageMetadata(locale: LaunchLocale, title: string, description: s
   const messages = getMessages(locale)
   const suffix = title === messages.brand ? title : `${title} | ${messages.brand}`
   const localizedPath = path ? `/${locale}/${path.replace(/^\//, '')}` : `/${locale}`
-  const languages = Object.fromEntries(publicLocales.map((code) => [code, path ? `/${code}/${path.replace(/^\//, '')}` : `/${code}`]))
+  const languages = Object.fromEntries(indexedLocales.map((code) => [code, path ? `/${code}/${path.replace(/^\//, '')}` : `/${code}`]))
 
   return {
     title: suffix,
     description,
+    robots: isBetaLocale(locale) ? { index: false, follow: true } : undefined,
     alternates: { canonical: localizedPath, languages: { ...languages, 'x-default': `/en${path ? `/${path.replace(/^\//, '')}` : ''}` } },
     openGraph: { title: suffix, description, url: localizedPath, siteName: messages.brand, type: 'website', locale: getLocaleConfig(locale).openGraphLocale },
     twitter: { card: 'summary_large_image', title: suffix, description },

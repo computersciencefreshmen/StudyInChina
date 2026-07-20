@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { launchLocales } from '@/i18n/config'
+import { indexedLocales } from '@/i18n/config'
 import { getData } from '@/lib/data/load'
 import { getDataReleaseDate } from '@/lib/data/release'
 import { guides } from '@/lib/guides'
@@ -17,8 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...data.cities.map((item) => ({ path: `cities/${item.slug}`, lastModified: item.verifiedAt })),
     ...guides.map((item) => ({ path: `guides/${item.slug}`, lastModified: item.updatedAt })),
   ]
-  return entries.flatMap(({ path, lastModified }) => launchLocales.map((locale) => {
+  return entries.flatMap(({ path, lastModified }) => indexedLocales.map((locale) => {
     const localized = `/${locale}${path ? `/${path}` : ''}`
-    return { url: new URL(localized, siteUrl).toString(), lastModified: new Date(`${lastModified}T00:00:00Z`), changeFrequency: path.startsWith('programs') || path.startsWith('scholarships') ? 'weekly' as const : 'monthly' as const, priority: path === '' ? 1 : path.includes('/') ? 0.7 : 0.8, alternates: { languages: Object.fromEntries(launchLocales.map((code) => [code, new URL(`/${code}${path ? `/${path}` : ''}`, siteUrl).toString()])) } }
+    return { url: new URL(localized, siteUrl).toString(), lastModified: new Date(`${lastModified}T00:00:00Z`), changeFrequency: path.startsWith('programs') || path.startsWith('scholarships') ? 'weekly' as const : 'monthly' as const, priority: path === '' ? 1 : path.includes('/') ? 0.7 : 0.8, alternates: { languages: Object.fromEntries(indexedLocales.map((code) => [code, new URL(`/${code}${path ? `/${path}` : ''}`, siteUrl).toString()])) } }
   }))
 }

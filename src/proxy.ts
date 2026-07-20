@@ -27,7 +27,7 @@ export function proxy(request: NextRequest) {
 
   const url = request.nextUrl.clone()
   // Preview routes are not public yet. Redirect directly to the same English
-  // path so /es/programs never becomes the misleading /en/es/programs.
+  // path so /pt/programs never becomes the misleading /en/pt/programs.
   const locale = pathLocale && isPreviewLocale(pathLocale)
     ? defaultLocale
     : preferredLocale(request)

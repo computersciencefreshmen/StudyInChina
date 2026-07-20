@@ -2,7 +2,9 @@ import { describe, expect, it } from 'vitest'
 
 import {
   allLocales,
+  betaLocales,
   getLocaleConfig,
+  indexedLocales,
   isLocale,
   isPreviewLocale,
   isPublicLocale,
@@ -18,17 +20,23 @@ import { pageMetadata, requireLocale } from '@/lib/site'
 describe('locale registry', () => {
   it('derives public and preview locale sets from one registry', () => {
     expect(allLocales).toEqual(['en', 'zh', 'ru', 'de', 'fr', 'es', 'pt', 'ar'])
-    expect(publicLocales).toEqual(['en', 'zh', 'ru'])
-    expect(previewLocales).toEqual(['de', 'fr', 'es', 'pt', 'ar'])
+    expect(indexedLocales).toEqual(['en', 'zh', 'ru'])
+    expect(betaLocales).toEqual(['de', 'fr', 'es'])
+    expect(publicLocales).toEqual(['en', 'zh', 'ru', 'de', 'fr', 'es'])
+    expect(previewLocales).toEqual(['pt', 'ar'])
     expect(launchLocales).toBe(publicLocales)
   })
 
-  it('recognizes German as preview data without publishing its route', () => {
+  it('publishes German, French and Spanish while keeping later locales in preview', () => {
     expect(isLocale('de')).toBe(true)
-    expect(isPreviewLocale('de')).toBe(true)
-    expect(isPublicLocale('de')).toBe(false)
-    expect(requireLocale('de')).toBeNull()
-    expect(getLocaleConfig('de').intlLocale).toBe('de-DE')
+    expect(isPreviewLocale('de')).toBe(false)
+    expect(isPublicLocale('de')).toBe(true)
+    expect(requireLocale('de')).toBe('de')
+    expect(requireLocale('fr')).toBe('fr')
+    expect(requireLocale('es')).toBe('es')
+    expect(isPreviewLocale('pt')).toBe(true)
+    expect(requireLocale('pt')).toBeNull()
+    expect(getLocaleConfig('de')).toMatchObject({ intlLocale: 'de-DE', releaseState: 'beta' })
   })
 
   it('keeps direction and path handling registry-driven', () => {
@@ -49,5 +57,13 @@ describe('locale registry', () => {
       'x-default': '/en/programs',
     })
     expect(metadata.openGraph).toMatchObject({ locale: 'zh_CN' })
+  })
+
+  it('keeps beta routes accessible but out of search indexing until content coverage is ready', () => {
+    const metadata = pageMetadata('de', 'Programme', 'Programmbeschreibung', 'programs')
+
+    expect(requireLocale('de')).toBe('de')
+    expect(metadata.robots).toEqual({ index: false, follow: true })
+    expect(metadata.alternates?.languages).not.toHaveProperty('de')
   })
 })

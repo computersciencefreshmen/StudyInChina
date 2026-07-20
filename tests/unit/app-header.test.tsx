@@ -17,7 +17,11 @@ describe('AppHeader locale navigation', () => {
       '/en/programs/software-engineering',
       '/zh/programs/software-engineering',
       '/ru/programs/software-engineering',
+      '/de/programs/software-engineering',
+      '/fr/programs/software-engineering',
+      '/es/programs/software-engineering',
     ]))
-    expect(hrefs.some((href) => href?.startsWith('/de'))).toBe(false)
+    expect(hrefs.some((href) => href?.startsWith('/pt'))).toBe(false)
+    expect(hrefs.some((href) => href?.startsWith('/ar'))).toBe(false)
   })
 })
