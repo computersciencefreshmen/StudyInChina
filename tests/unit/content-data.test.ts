@@ -57,8 +57,8 @@ describe('published content data', () => {
       expect(cycle.applicationFeeCny).not.toBeNull()
     }
 
-    expect(published.admissionCycles.find((cycle) => cycle.programId === 'program-fudan-chinese-language-autumn-2026')?.tuitionStatus).toBe('reference')
-    expect(published.admissionCycles.find((cycle) => cycle.programId === 'program-nju-long-term-chinese-language')?.evidenceBasis).toBe('recurring-official-rule')
+    expect(published.admissionCycles.find((cycle) => cycle.programId === 'program-fudan-university-chinese-language-program-language')?.tuitionStatus).toBe('reference')
+    expect(published.admissionCycles.find((cycle) => cycle.programId === 'program-nanjing-university-chinese-language-program-language')?.evidenceBasis).toBe('recurring-official-rule')
   })
 
   it('provides English, Chinese and Russian for public names', () => {

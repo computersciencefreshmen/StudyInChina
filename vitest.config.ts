@@ -10,5 +10,10 @@ export default defineConfig({
     include: ['./tests/**/*.test.{ts,tsx}'],
     coverage: { reporter: ['text', 'html'] },
   },
-  resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      'server-only': fileURLToPath(new URL('./tests/server-only-stub.ts', import.meta.url)),
+    },
+  },
 })
