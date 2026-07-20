@@ -81,6 +81,16 @@ test('a verified program page exposes complete facts, official sources and appli
   await expect(page.getByRole('link', { name: /Fudan University Chinese Language Program/ })).toHaveAttribute('href', /fudan\.edu\.cn/)
 })
 
+test('a multi-cycle program promotes the next upcoming intake', async ({ page }) => {
+  const response = await page.goto('/en/programs/shanghai-jiao-tong-university-chinese-language-program-language', { waitUntil: 'domcontentloaded' })
+
+  expect(response?.ok()).toBe(true)
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Long-term Chinese Language Course')
+  await expect(page.getByText('Opening soon', { exact: true }).first()).toBeVisible()
+  await expect(page.getByText('Dec 15, 2026', { exact: true })).toBeVisible()
+  await expect(page.getByRole('link', { name: /View official application portal/ })).toHaveAttribute('href', /applychinese\.sjtu\.edu\.cn/)
+})
+
 test('a draft program detail is not publicly routable', async ({ page }) => {
   const response = await page.goto('/en/programs/tsinghua-university-computer-science-bachelor', { waitUntil: 'domcontentloaded' })
 

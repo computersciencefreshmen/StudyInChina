@@ -65,9 +65,9 @@ describe('production publication policy', () => {
 
   it('keeps unverified program templates out while publishing the reviewed first batch', () => {
     expect(allData.programs.length).toBe(120)
-    expect(allData.programs.filter((program) => program.status === 'draft')).toHaveLength(113)
-    expect(published.programs).toHaveLength(5)
-    expect(published.admissionCycles).toHaveLength(5)
+    expect(allData.programs.filter((program) => program.status === 'draft')).toHaveLength(112)
+    expect(published.programs).toHaveLength(6)
+    expect(published.admissionCycles).toHaveLength(7)
     expect(published.programs.every((program) => program.status === 'verified')).toBe(true)
   })
 

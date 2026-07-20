@@ -27,8 +27,8 @@ describe('published content data', () => {
 
     expect(published.cities).toHaveLength(12)
     expect(published.universities.length).toBeGreaterThanOrEqual(39)
-    expect(published.programs).toHaveLength(5)
-    expect(published.admissionCycles).toHaveLength(5)
+    expect(published.programs).toHaveLength(6)
+    expect(published.admissionCycles).toHaveLength(7)
   })
 
   it('publishes no incomplete project templates', () => {
