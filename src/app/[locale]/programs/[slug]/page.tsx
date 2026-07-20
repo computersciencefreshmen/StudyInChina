@@ -5,7 +5,7 @@ import { ScholarshipCard } from '@/components/features/ScholarshipCard'
 import { Badge, Card, PageHero, SectionHeading, VerificationBadge } from '@/components/ui'
 import { launchLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
-import { getApplicationState } from '@/lib/data/admission'
+import { getApplicationState, selectAdmissionCycle } from '@/lib/data/admission'
 import { formatCny, formatDate, localize } from '@/lib/data/format'
 import { getTodayDate } from '@/lib/data/freshness'
 import { degreeLabels, disciplineLabels, languageLabel } from '@/lib/data/labels'
@@ -231,7 +231,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
               key={item.id}
               program={item}
               university={university}
-              cycle={data.admissionCycles.find((admission) => admission.programId === item.id)}
+              cycle={selectAdmissionCycle(data.admissionCycles, item.id, today)}
               locale={locale}
               messages={messages}
               today={today}

@@ -1,5 +1,5 @@
 import type { AdmissionCycle, City, Program, University } from '@/lib/data/types'
-import { getApplicationState } from './data/admission'
+import { getApplicationState, selectAdmissionCycle } from './data/admission'
 
 export type UniversityFilters = { query: string; cityId: string; region: string; discipline: string }
 export type ProgramFilters = { query: string; degree: string; discipline: string; language: string; dateStatus: string; tuition: string }
@@ -30,7 +30,7 @@ export function filterUniversities(universities: University[], programs: Program
 export function filterPrograms(programs: Program[], universities: University[], cycles: AdmissionCycle[], filters: ProgramFilters, today = new Date().toISOString().slice(0, 10)) {
   return programs.filter((program) => {
     const university = universities.find((item) => item.id === program.universityId)
-    const cycle = cycles.find((item) => item.programId === program.id)
+    const cycle = selectAdmissionCycle(cycles, program.id, today)
     const applicationState = getApplicationState(cycle, today)
     const matchesApplicationState = !filters.dateStatus
       || (filters.dateStatus === 'open' ? applicationState === 'open' || applicationState === 'rolling' : applicationState === filters.dateStatus)

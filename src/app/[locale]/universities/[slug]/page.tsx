@@ -3,7 +3,9 @@ import { Badge, Card, LinkButton, PageHero, SectionHeading, VerificationBadge } 
 import { ProgramCard } from '@/components/features/RecordCards'
 import { launchLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
+import { selectAdmissionCycle } from '@/lib/data/admission'
 import { formatDate, localize } from '@/lib/data/format'
+import { getTodayDate } from '@/lib/data/freshness'
 import { disciplineLabels, regionLabels } from '@/lib/data/labels'
 import { getData, getUniversityBySlug } from '@/lib/data/load'
 import { pageMetadata, requireLocale } from '@/lib/site'
@@ -20,6 +22,7 @@ export default async function UniversityDetailPage({ params }: { params: Promise
   const messages = getMessages(locale); const data = getData(); const city = data.cities.find((item) => item.id === university.cityId)
   const programs = data.programs.filter((item) => item.universityId === university.id); const fields = [...new Set(programs.map((item) => item.discipline))]
   const scholarships = data.scholarships.filter((item) => item.universityIds.includes(university.id))
+  const today = getTodayDate()
   const sources = data.sources.filter((source) => university.sourceIds.includes(source.id) || programs.some((program) => program.sourceIds.includes(source.id)))
   const copy = messages.universities
   const jsonLd = { '@context': 'https://schema.org', '@type': 'CollegeOrUniversity', name: localize(university.name, locale), url: university.officialUrl, address: city ? { '@type': 'PostalAddress', addressLocality: localize(city.name, locale), addressCountry: 'CN' } : undefined }
@@ -38,7 +41,7 @@ export default async function UniversityDetailPage({ params }: { params: Promise
     <section className="atlas-container section-block--tight detail-layout">
       <div className="detail-main">
         <div className="prose-panel"><h2>{copy.facts}</h2><p>{localize(university.summary, locale)}</p><div className="tag-list">{fields.map((field) => <Badge key={field} tone="neutral">{disciplineLabels(locale)[field]}</Badge>)}</div></div>
-        <div><SectionHeading title={copy.programs} description={messages.common.authoritativeNotice} level={2} />{programs.length ? <div className="content-grid content-grid--two">{programs.map((program) => <ProgramCard key={program.id} program={program} university={university} cycle={data.admissionCycles.find((cycle) => cycle.programId === program.id)} locale={locale} messages={messages} />)}</div> : null}</div>
+        <div><SectionHeading title={copy.programs} description={messages.common.authoritativeNotice} level={2} />{programs.length ? <div className="content-grid content-grid--two">{programs.map((program) => <ProgramCard key={program.id} program={program} university={university} cycle={selectAdmissionCycle(data.admissionCycles, program.id, today)} locale={locale} messages={messages} today={today} />)}</div> : null}</div>
         {scholarships.length ? <div><SectionHeading title={copy.funding} level={2} /><div className="content-grid content-grid--two">{scholarships.map((scholarship) => <Card key={scholarship.id}><Badge tone="gold">{scholarship.providerType.toUpperCase()}</Badge><h3 className="atlas-card__title">{localize(scholarship.name, locale)}</h3><p className="atlas-card__description">{localize(scholarship.summary, locale)}</p><div className="atlas-card__footer"><LinkButton href={`/${locale}/scholarships/${scholarship.slug}`} variant="quiet">{messages.common.viewDetails} →</LinkButton></div></Card>)}</div></div> : null}
       </div>
       <aside className="detail-aside">

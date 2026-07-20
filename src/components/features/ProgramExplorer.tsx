@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { Button } from '@/components/ui'
 import type { LaunchLocale } from '@/i18n/config'
 import type { Messages } from '@/i18n/messages'
+import { selectAdmissionCycle } from '@/lib/data/admission'
 import { degreeLabels, disciplineLabels, languageLabel } from '@/lib/data/labels'
 import type { AdmissionCycle, Program, University } from '@/lib/data/types'
 import { filterPrograms } from '@/lib/search'
@@ -25,6 +26,6 @@ export function ProgramExplorer({ programs, universities, cycles, locale, messag
       <Button variant="ghost" onClick={() => setFilters({ query: '', degree: '', discipline: '', language: '', dateStatus: '', tuition: '' })}>{messages.common.clear}</Button>
     </div>
     <p className="result-count" aria-live="polite">{filtered.length} {messages.programs.results}</p>
-    {filtered.length ? <div className="content-grid">{filtered.map((program) => <ProgramCard key={program.id} program={program} university={universities.find((university) => university.id === program.universityId)} cycle={cycles.find((cycle) => cycle.programId === program.id)} locale={locale} messages={messages} today={today} />)}</div> : <div className="empty-box">{messages.programs.noResults}</div>}
+    {filtered.length ? <div className="content-grid">{filtered.map((program) => <ProgramCard key={program.id} program={program} university={universities.find((university) => university.id === program.universityId)} cycle={selectAdmissionCycle(cycles, program.id, today || new Date().toISOString().slice(0, 10))} locale={locale} messages={messages} today={today} />)}</div> : <div className="empty-box">{messages.programs.noResults}</div>}
   </>
 }
