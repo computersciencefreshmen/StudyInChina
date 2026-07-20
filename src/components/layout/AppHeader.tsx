@@ -27,11 +27,11 @@ export function AppHeader({ locale }: { locale: LaunchLocale }) {
     locale={locale}
     homeHref={`/${locale}`}
     brandName={messages.brand}
-    brandTagline={locale === 'zh' ? '独立留学资料地图' : locale === 'ru' ? 'Независимый атлас' : 'Independent student atlas'}
-    navLabel={locale === 'zh' ? '主导航' : locale === 'ru' ? 'Основная навигация' : 'Primary navigation'}
+    brandTagline={messages.shell.brandTagline}
+    navLabel={messages.shell.navLabel}
     languageLabel={messages.common.language}
-    mobileMenuLabel={locale === 'zh' ? '打开菜单' : locale === 'ru' ? 'Открыть меню' : 'Open menu'}
-    skipLinkLabel={locale === 'zh' ? '跳到主要内容' : locale === 'ru' ? 'К основному содержанию' : 'Skip to main content'}
+    mobileMenuLabel={messages.shell.mobileMenuLabel}
+    skipLinkLabel={messages.shell.skipLinkLabel}
     navItems={nav.map(([segment, label]) => ({
       label,
       href: segment ? `/${locale}/${segment}` : `/${locale}`,

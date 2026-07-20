@@ -1,8 +1,17 @@
-import { localeIntlTag, type Locale } from '@/i18n/config'
+import { isPublicLocale, localeIntlTag, type Locale } from '@/i18n/config'
+import { getMessages } from '@/i18n/messages'
 import type { LocalizedText } from './types'
 
 export function localize(value: LocalizedText, locale: Locale): string {
-  return value[locale] || value.en
+  const translated = value[locale]?.trim()
+  if (translated) return translated
+  if (locale === 'en') return value.en
+
+  const pendingLabel = isPublicLocale(locale)
+    ? getMessages(locale).common.translationPending
+    : getMessages('en').common.translationPending
+
+  return `${pendingLabel}: ${value.en}`
 }
 
 export function formatDate(value: string | null, locale: Locale, fallback: string): string {

@@ -3,10 +3,15 @@ import { PolicyPage } from '@/components/features/PolicyPage'
 import { getMessages } from '@/i18n/messages'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) { const locale = requireLocale((await params).locale) || 'en'; const m = getMessages(locale); return pageMetadata(locale, m.footer.privacy, m.contact.intro, 'privacy') }
-export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) { const locale = requireLocale((await params).locale); if (!locale) notFound(); const zh = locale === 'zh'; const ru = locale === 'ru'; return <PolicyPage locale={locale} eyebrow={zh ? '最后更新：2026-07-16' : ru ? 'Обновлено: 16.07.2026' : 'Last updated: 16 July 2026'} title={zh ? '隐私政策' : ru ? 'Политика конфиденциальности' : 'Privacy policy'} intro={zh ? '本网站尽量少收集数据，不建立用户账号，也不存储留学申请材料。' : ru ? 'Сайт минимизирует сбор данных, не создаёт аккаунты и не хранит документы для поступления.' : 'This site minimizes data collection, creates no user accounts and stores no application documents.'} sections={[
-    { title: zh ? '本地保存' : ru ? 'Локальное хранение' : 'Local storage', paragraphs: [zh ? '收藏与对比清单只保存在你的浏览器中，不会上传到本站。清除浏览器数据会删除这些内容。' : ru ? 'Избранное и сравнение хранятся только в браузере и не загружаются на сайт.' : 'Favorites and comparison selections stay in your browser and are never uploaded. Clearing browser data removes them.'] },
-    { title: zh ? '反馈表单' : ru ? 'Форма обратной связи' : 'Feedback form', paragraphs: [zh ? '提交反馈时，消息、可选回复邮箱、相关页面和来源链接会通过 Resend 私密发送给作者，不建立反馈数据库。' : ru ? 'Сообщение, необязательный email, страница и ссылка на источник приватно отправляются автору через Resend; база обращений не создаётся.' : 'Your message, optional reply email, page and source link are privately sent to the creator through Resend. No feedback database is created.'], items: [zh ? '请勿提交护照、成绩单、健康资料、推荐信、付款资料或其他申请文件。' : ru ? 'Не отправляйте паспорт, оценки, медицинские, платёжные или иные документы.' : 'Do not submit passports, transcripts, health records, recommendations, payment data or other application files.', zh ? 'IP 地址经 HMAC 处理后仅用于一小时五次的限流；限流键在一小时后过期。' : ru ? 'IP преобразуется HMAC и используется только для лимита 5 сообщений в час; ключ истекает через час.' : 'IP addresses are HMAC-hashed only for a five-per-hour limit; the rate-limit key expires after one hour.'] },
-    { title: zh ? '分析与第三方' : ru ? 'Аналитика и третьи стороны' : 'Analytics and processors', paragraphs: [zh ? '本站使用 Vercel Web Analytics 和 Speed Insights 了解总体性能，不加入广告跟踪。Turnstile 用于防机器人，Resend 用于邮件转发。' : ru ? 'Используются Vercel Web Analytics и Speed Insights без рекламного отслеживания; Turnstile защищает от ботов, Resend доставляет почту.' : 'Vercel Web Analytics and Speed Insights measure aggregate performance without advertising trackers. Turnstile prevents bots and Resend delivers feedback.'] },
-    { title: zh ? '联系与删除' : ru ? 'Контакт и удаление' : 'Contact and deletion', paragraphs: [zh ? '如需查询或删除你发送的反馈，请通过联系表单提供可识别该消息的信息。' : ru ? 'Для запроса или удаления отправленного сообщения свяжитесь через форму и укажите данные для его идентификации.' : 'To ask about or delete feedback you sent, use the contact form and provide enough information to identify it.'] },
-  ]} /> }
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = requireLocale((await params).locale) || 'en'
+  const copy = getMessages(locale).legal.privacy
+  return pageMetadata(locale, copy.title, copy.intro, 'privacy')
+}
+
+export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = requireLocale((await params).locale)
+  if (!locale) notFound()
+  const copy = getMessages(locale).legal.privacy
+  return <PolicyPage locale={locale} eyebrow={copy.eyebrow} title={copy.title} intro={copy.intro} sections={copy.sections} />
+}

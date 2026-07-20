@@ -11,7 +11,7 @@ import { bundleSchema } from '@/lib/data/schema'
 import type { DataBundle } from '@/lib/data/types'
 
 const allData = bundleSchema.parse({ sources, cities, universities, programs, admissionCycles, scholarships })
-const TODAY = '2026-07-19'
+const TODAY = '2026-07-20'
 
 function publicationFixture(): DataBundle {
   const city = { ...allData.cities[0], status: 'verified' as const, reviewAfter: TODAY }
@@ -63,10 +63,12 @@ describe('production publication policy', () => {
     expect(profiles.every((record) => record.status === 'verified' || record.status === 'stale')).toBe(true)
   })
 
-  it('keeps the unverified program templates out of the public catalogue', () => {
+  it('keeps unverified program templates out while publishing the reviewed first batch', () => {
     expect(allData.programs.length).toBe(120)
-    expect(published.programs).toHaveLength(0)
-    expect(published.admissionCycles).toHaveLength(0)
+    expect(allData.programs.filter((program) => program.status === 'draft')).toHaveLength(113)
+    expect(published.programs).toHaveLength(5)
+    expect(published.admissionCycles).toHaveLength(5)
+    expect(published.programs.every((program) => program.status === 'verified')).toBe(true)
   })
 
   it('publishes only records whose related entities remain public', () => {
@@ -137,6 +139,17 @@ describe('production publication policy', () => {
     expect(result.scholarships[0].programIds).toEqual([])
   })
 
+  it('hides a program as soon as its current admission cycle expires', () => {
+    const fixture = publicationFixture()
+    fixture.admissionCycles[0] = { ...fixture.admissionCycles[0], reviewAfter: '2026-07-18' }
+
+    const result = selectPublishedData(fixture, TODAY)
+
+    expect(result.programs).toHaveLength(0)
+    expect(result.admissionCycles).toHaveLength(0)
+    expect(result.scholarships[0].programIds).toEqual([])
+  })
+
   it('filters relationship IDs and sources to the records that remain published', () => {
     const fixture = publicationFixture()
     const result = selectPublishedData(fixture, TODAY)
@@ -154,6 +167,6 @@ describe('production publication policy', () => {
   })
 
   it('uses the China calendar date when deriving today at runtime', () => {
-    expect(getTodayDate(new Date('2026-07-18T16:00:00.000Z'))).toBe(TODAY)
+    expect(getTodayDate(new Date('2026-07-19T16:00:00.000Z'))).toBe(TODAY)
   })
 })

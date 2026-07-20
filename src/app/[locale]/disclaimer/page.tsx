@@ -2,9 +2,16 @@ import { notFound } from 'next/navigation'
 import { PolicyPage } from '@/components/features/PolicyPage'
 import { getMessages } from '@/i18n/messages'
 import { pageMetadata, requireLocale } from '@/lib/site'
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) { const locale = requireLocale((await params).locale) || 'en'; const m = getMessages(locale); return pageMetadata(locale, m.footer.disclaimer, m.common.authoritativeNotice, 'disclaimer') }
-export default async function DisclaimerPage({ params }: { params: Promise<{ locale: string }> }) { const locale = requireLocale((await params).locale); if (!locale) notFound(); const z = locale === 'zh'; const r = locale === 'ru'; return <PolicyPage locale={locale} eyebrow={z ? '重要说明' : r ? 'Важная информация' : 'Important notice'} title={z ? '免责声明' : r ? 'Отказ от ответственности' : 'Disclaimer'} intro={z ? '本站是独立、非商业的资料整理项目，不代表任何大学、政府机构或奖学金机构。' : r ? 'Это независимый некоммерческий справочник, не представляющий вуз, государство или стипендиальную организацию.' : 'This is an independent, non-commercial information project. It does not represent any university, government or scholarship body.'} sections={[
-    { title: z ? '官方信息优先' : r ? 'Приоритет официальных данных' : 'Official information takes priority', paragraphs: [z ? '招生周期、费用、语言要求、奖学金和签证政策会变化。申请、付款或旅行安排前，必须在所链接的官方页面重新确认。' : r ? 'Сроки, цены, языковые требования, стипендии и визовые правила меняются. Перед подачей, оплатой или поездкой перепроверьте официальный источник.' : 'Cycles, fees, language requirements, scholarships and visa rules change. Reconfirm them on the linked official source before applying, paying or travelling.'] },
-    { title: z ? '不保证录取或资助' : r ? 'Нет гарантии поступления' : 'No admission or funding guarantee', paragraphs: [z ? '收录某个学校、项目或奖学金不构成推荐，也不保证资格、录取、签证或资助。' : r ? 'Наличие в каталоге не является рекомендацией и не гарантирует право участия, поступление, визу или финансирование.' : 'Listing a university, program or scholarship is not an endorsement and does not guarantee eligibility, admission, a visa or funding.'] },
-    { title: z ? '外部链接' : r ? 'Внешние ссылки' : 'External links', paragraphs: [z ? '外部网站由其运营方负责。本站会检查链接，但无法控制其内容、可用性或隐私做法。' : r ? 'За внешние сайты отвечают их владельцы; этот проект не контролирует их содержание, доступность или приватность.' : 'External sites are controlled by their operators. This project cannot control their content, availability or privacy practices.'] },
-  ]} /> }
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = requireLocale((await params).locale) || 'en'
+  const copy = getMessages(locale).legal.disclaimer
+  return pageMetadata(locale, copy.title, copy.intro, 'disclaimer')
+}
+
+export default async function DisclaimerPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = requireLocale((await params).locale)
+  if (!locale) notFound()
+  const copy = getMessages(locale).legal.disclaimer
+  return <PolicyPage locale={locale} eyebrow={copy.eyebrow} title={copy.title} intro={copy.intro} sections={copy.sections} />
+}

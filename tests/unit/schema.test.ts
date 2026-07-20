@@ -4,7 +4,7 @@ import { admissionCycleSchema, bundleSchema } from '@/lib/data/schema'
 const audit = {
   sourceIds: ['source-1'],
   verifiedAt: '2026-07-01',
-  reviewAfter: '2027-01-01',
+  reviewAfter: '2026-08-01',
   status: 'verified' as const,
 }
 
@@ -57,9 +57,21 @@ function validBundle() {
       discipline: 'engineering' as const,
       teachingLanguages: ['English'],
       durationMonths: 48,
+      durationMonthsMax: 48,
       programUrl: 'https://example.edu.cn/programs/computer-science',
       applyUrl: 'https://example.edu.cn/apply',
       languageRequirements: [{ test: 'IELTS' as const, minimum: '6.0' }],
+      details: {
+        faculty: localized('School of Computing'),
+        overview: localized('A source-backed computing program for international students.'),
+        qualification: localized('Bachelor of Engineering'),
+        studyMode: 'full-time' as const,
+        languagePolicy: localized('The program is taught in English and requires IELTS 6.0 or equivalent.'),
+        curriculumHighlights: [localized('Programming foundations'), localized('Algorithms and data structures')],
+        eligibility: [localized('International applicants with a high-school diploma')],
+        applicationMaterials: [localized('Passport copy'), localized('High-school transcript')],
+        campus: localized('Main Campus'),
+      },
     }],
     admissionCycles: [{
       ...audit,
@@ -71,6 +83,9 @@ function validBundle() {
       closesOn: '2026-05-31',
       dateStatus: 'published' as const,
       tuitionCny: 30000,
+      tuitionPeriod: 'academic-year' as const,
+      tuitionStatus: 'confirmed' as const,
+      evidenceBasis: 'cycle-specific' as const,
       applicationFeeCny: 600,
     }],
     scholarships: [{
@@ -133,6 +148,73 @@ describe('content schemas', () => {
     const result = bundleSchema.parse(bundle)
 
     expect(result.universities[0].summary.de).toBe('Eine Beispieluniversität.')
+  })
+
+  it('rejects a verified program whose detail content is incomplete', () => {
+    const bundle = validBundle()
+    delete (bundle.programs[0] as { details?: unknown }).details
+
+    const result = bundleSchema.safeParse(bundle)
+
+    expect(result.success).toBe(false)
+    if (!result.success) {
+      expect(result.error.issues.some((issue) => issue.message.includes('complete detail content'))).toBe(true)
+    }
+  })
+
+  it('rejects a verified program without a verified admission cycle', () => {
+    const bundle = validBundle()
+    ;(bundle.admissionCycles[0] as { status: 'verified' | 'draft' }).status = 'draft'
+
+    const result = bundleSchema.safeParse(bundle)
+
+    expect(result.success).toBe(false)
+    if (!result.success) {
+      expect(result.error.issues.some((issue) => issue.message.includes('verified admission cycle'))).toBe(true)
+    }
+  })
+
+  it('rejects a verified program without an explicit language policy result', () => {
+    const bundle = validBundle()
+    bundle.programs[0].languageRequirements = []
+
+    const result = bundleSchema.safeParse(bundle)
+
+    expect(result.success).toBe(false)
+    if (!result.success) {
+      expect(result.error.issues.some((issue) => issue.message.includes('explicit language requirement'))).toBe(true)
+    }
+  })
+
+  it('rejects published verified cycles whose fees were left as placeholders', () => {
+    const bundle = validBundle()
+    ;(bundle.admissionCycles[0] as { tuitionCny: number | null }).tuitionCny = null
+
+    const result = bundleSchema.safeParse(bundle)
+
+    expect(result.success).toBe(false)
+    if (!result.success) {
+      expect(result.error.issues.some((issue) => issue.message.includes('tuition and application fee'))).toBe(true)
+    }
+  })
+
+  it('accepts a verified deadline-only cycle without inventing an opening date', () => {
+    const bundle = validBundle()
+    ;(bundle.admissionCycles[0] as { opensOn: string | null }).opensOn = null
+
+    expect(bundleSchema.safeParse(bundle).success).toBe(true)
+  })
+
+  it('rejects a verified dynamic record that can skip the monthly review', () => {
+    const bundle = validBundle()
+    bundle.programs[0].reviewAfter = '2026-09-01'
+
+    const result = bundleSchema.safeParse(bundle)
+
+    expect(result.success).toBe(false)
+    if (!result.success) {
+      expect(result.error.issues.some((issue) => issue.message.includes('31-day review window'))).toBe(true)
+    }
   })
 
   it('rejects duplicate ids and broken foreign keys', () => {

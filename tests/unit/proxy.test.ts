@@ -9,30 +9,30 @@ function createRequest(path: string, headers: HeadersInit = {}) {
 
 describe('locale proxy', () => {
   it('passes public locale routes through unchanged', () => {
-    const response = proxy(createRequest('/zh/programs'))
+    const response = proxy(createRequest('/de/programs'))
 
     expect(response.headers.get('x-middleware-next')).toBe('1')
   })
 
   it('redirects preview locale paths directly to the equivalent English path', () => {
-    const response = proxy(createRequest('/es/programs?degree=master'))
+    const response = proxy(createRequest('/pt/programs?degree=master'))
 
     expect(response.status).toBe(307)
     expect(response.headers.get('location')).toBe('https://studyinchina.example/en/programs?degree=master')
   })
 
   it('does not nest a bare preview locale beneath English', () => {
-    const response = proxy(createRequest('/de'))
+    const response = proxy(createRequest('/ar'))
 
     expect(response.headers.get('location')).toBe('https://studyinchina.example/en')
   })
 
   it('ignores preview language preferences and chooses the next public language', () => {
     const response = proxy(createRequest('/programs', {
-      'accept-language': 'de-DE,de;q=0.9,zh-CN;q=0.8',
+      'accept-language': 'pt-BR,pt;q=0.9,de-DE;q=0.8',
     }))
 
-    expect(response.headers.get('location')).toBe('https://studyinchina.example/zh/programs')
+    expect(response.headers.get('location')).toBe('https://studyinchina.example/de/programs')
   })
 
   it('honors a saved public locale for unlocalized paths', () => {

@@ -2,5 +2,27 @@ import { notFound } from 'next/navigation'
 import { Badge, Card, PageHero } from '@/components/ui'
 import { getMessages } from '@/i18n/messages'
 import { pageMetadata, requireLocale } from '@/lib/site'
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) { const locale = requireLocale((await params).locale) || 'en'; const m = getMessages(locale); return pageMetadata(locale, m.footer.updates, 'Study in China Atlas data and product releases.', 'updates') }
-export default async function UpdatesPage({ params }: { params: Promise<{ locale: string }> }) { const locale = requireLocale((await params).locale); if (!locale) notFound(); const z = locale === 'zh'; const r = locale === 'ru'; return <><PageHero variant="compact" eyebrow="Changelog" title={z ? '更新记录' : r ? 'Обновления' : 'Updates'} description={z ? '公开记录产品、数据与政策的主要变化。' : r ? 'Публичный журнал изменений продукта, данных и политик.' : 'A public record of meaningful product, data and policy changes.'} /><section className="atlas-container atlas-section"><div className="update-timeline"><Card accent="vermilion"><div className="record-card__top"><Badge tone="vermilion">2026-07-16</Badge><Badge tone="warning">Preview data</Badge></div><h2 className="atlas-card__title">{z ? '通用平台首版架构' : r ? 'Первая универсальная версия' : 'Universal platform foundation'}</h2><ul><li>{z ? '迁移到 Next.js 16、React 19、Node.js 24 与严格 TypeScript。' : r ? 'Переход на Next.js 16, React 19, Node.js 24 и строгий TypeScript.' : 'Migrated to Next.js 16, React 19, Node.js 24 and strict TypeScript.'}</li><li>{z ? '建立 40 所大学、120 个项目、12 个城市和 24 项奖学金的结构化预览数据。' : r ? 'Структурированный предварительный набор: 40 вузов, 120 программ, 12 городов и 24 стипендии.' : 'Structured preview dataset: 40 universities, 120 programs, 12 cities and 24 scholarships.'}</li><li>{z ? '首发英中俄路由、收藏对比、反馈接口、SEO 和数据健康自动化。' : r ? 'Маршруты на EN/ZH/RU, избранное, сравнение, обратная связь, SEO и контроль качества.' : 'Added EN/ZH/RU routes, favorites, comparison, secure feedback, SEO and data-health automation.'}</li></ul></Card></div></section></> }
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = requireLocale((await params).locale) || 'en'
+  const copy = getMessages(locale).updates
+  return pageMetadata(locale, copy.title, copy.description, 'updates')
+}
+
+export default async function UpdatesPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = requireLocale((await params).locale)
+  if (!locale) notFound()
+  const copy = getMessages(locale).updates
+  return <>
+    <PageHero variant="compact" eyebrow={copy.eyebrow} title={copy.title} description={copy.description} />
+    <section className="atlas-container atlas-section">
+      <div className="update-timeline">
+        <Card accent="vermilion">
+          <div className="record-card__top"><Badge tone="vermilion">2026-07-20</Badge><Badge tone="jade">{copy.badge}</Badge></div>
+          <h2 className="atlas-card__title">{copy.releaseTitle}</h2>
+          <ul>{copy.items.map((item) => <li key={item}>{item}</li>)}</ul>
+        </Card>
+      </div>
+    </section>
+  </>
+}

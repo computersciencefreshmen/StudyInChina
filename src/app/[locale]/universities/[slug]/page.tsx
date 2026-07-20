@@ -21,7 +21,7 @@ export default async function UniversityDetailPage({ params }: { params: Promise
   const programs = data.programs.filter((item) => item.universityId === university.id); const fields = [...new Set(programs.map((item) => item.discipline))]
   const scholarships = data.scholarships.filter((item) => item.universityIds.includes(university.id))
   const sources = data.sources.filter((source) => university.sourceIds.includes(source.id) || programs.some((program) => program.sourceIds.includes(source.id)))
-  const copy = locale === 'zh' ? { programs: '可浏览项目', funding: '相关奖学金', facts: '学校概览', sources: '来源与复核', review: '下次复核', official: '大学官网', admission: '国际招生官网' } : locale === 'ru' ? { programs: 'Программы', funding: 'Стипендии', facts: 'О вузе', sources: 'Источники и проверка', review: 'Следующая проверка', official: 'Сайт вуза', admission: 'Приём иностранных студентов' } : { programs: 'Programs to explore', funding: 'Related scholarships', facts: 'University at a glance', sources: 'Sources and review', review: 'Review due', official: 'University website', admission: 'International admissions' }
+  const copy = messages.universities
   const jsonLd = { '@context': 'https://schema.org', '@type': 'CollegeOrUniversity', name: localize(university.name, locale), url: university.officialUrl, address: city ? { '@type': 'PostalAddress', addressLocality: localize(city.name, locale), addressCountry: 'CN' } : undefined }
 
   return <>

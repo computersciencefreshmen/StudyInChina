@@ -20,13 +20,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const messages = getMessages(locale); const data = getData()
   const featured = data.universities.filter((item) => item.featured).slice(0, 6)
   const fieldsByUniversity = Object.fromEntries(data.universities.map((university) => [university.id, [...new Set(data.programs.filter((program) => program.universityId === university.id).map((program) => program.discipline))]]))
-  const programVerificationNote = locale === 'zh' ? '项目资料正在逐项核验。未经官方项目页确认的草稿不会出现在公开目录或搜索引擎中。' : locale === 'ru' ? 'Программы проходят проверку. Черновики без официальной страницы программы не публикуются и не индексируются.' : 'Program records are being verified one by one. Drafts without an official program page are not published or indexed.'
 
   return <>
     <PageHero variant="feature" eyebrow={messages.home.eyebrow} title={messages.home.title} description={messages.home.intro}
       actions={<><LinkButton href={`/${locale}/universities`} size="large" iconEnd="→">{messages.home.findUniversity}</LinkButton><LinkButton href={`/${locale}/programs`} variant="ghost" size="large">{messages.home.explorePrograms}</LinkButton></>}
       meta={<><span>{data.universities.length} {messages.nav.universities}</span><span>{data.programs.length} {messages.nav.programs}</span><span>{data.cities.length} {messages.nav.cities}</span><span>{data.scholarships.length} {messages.nav.scholarships}</span></>}
-      aside={<div className="atlas-stack"><Badge tone="jade" dot>{messages.common.officialSource}</Badge><h2>{locale === 'zh' ? '每条事实都应能回到来源' : locale === 'ru' ? 'Каждый факт ведёт к источнику' : 'Every fact should lead back to a source'}</h2><p>{messages.common.authoritativeNotice}</p><Link className="text-link" href={`/${locale}/data-policy`}>{messages.footer.dataPolicy} →</Link></div>} />
+      aside={<div className="atlas-stack"><Badge tone="jade" dot>{messages.common.officialSource}</Badge><h2>{messages.home.sourceHeading}</h2><p>{messages.common.authoritativeNotice}</p><Link className="text-link" href={`/${locale}/data-policy`}>{messages.footer.dataPolicy} →</Link></div>} />
 
     <section className="atlas-container atlas-section">
       <SectionHeading eyebrow="01" title={messages.home.featured} description={messages.home.featuredIntro} action={<LinkButton href={`/${locale}/universities`} variant="quiet">{messages.common.explore} →</LinkButton>} />
@@ -36,7 +35,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <section className="atlas-section home-band">
       <div className="atlas-container">
         <SectionHeading eyebrow="02" title={messages.home.disciplines} />
-        {data.programs.length ? <div className="discipline-grid">{Object.entries(disciplineLabels(locale)).map(([key, label]) => <Link className="discipline-tile" href={`/${locale}/programs?discipline=${key}`} key={key}><b>{label}</b><span>{data.programs.filter((program) => program.discipline === key).length} {messages.nav.programs} →</span></Link>)}</div> : <div className="notice" data-testid="program-publication-note">{programVerificationNote}</div>}
+        {data.programs.length ? <div className="discipline-grid">{Object.entries(disciplineLabels(locale)).map(([key, label]) => <Link className="discipline-tile" href={`/${locale}/programs?discipline=${key}`} key={key}><b>{label}</b><span>{data.programs.filter((program) => program.discipline === key).length} {messages.nav.programs} →</span></Link>)}</div> : <div className="notice" data-testid="program-publication-note">{messages.home.programVerificationNote}</div>}
       </div>
     </section>
 

@@ -3,13 +3,11 @@
 import { FormEvent, useState } from 'react'
 import Script from 'next/script'
 import { Button } from '@/components/ui'
-import type { LaunchLocale } from '@/i18n/config'
 import type { Messages } from '@/i18n/messages'
 
-export function ContactForm({ locale, messages, siteKey }: { locale: LaunchLocale; messages: Messages; siteKey?: string }) {
+export function ContactForm({ messages, siteKey }: { messages: Messages; siteKey?: string }) {
   const [state, setState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const configured = Boolean(siteKey)
-  const configurationNote = locale === 'zh' ? '部署者配置 Turnstile、Resend 和限流环境变量后，私密反馈表单即可启用。' : locale === 'ru' ? 'Приватная форма станет доступна после настройки Turnstile, Resend и ограничения частоты.' : 'The private form becomes available after Turnstile, Resend and rate-limit variables are configured.'
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault(); if (!configured) return
@@ -30,7 +28,7 @@ export function ContactForm({ locale, messages, siteKey }: { locale: LaunchLocal
     <div className="field"><label htmlFor="feedback-email">{messages.contact.email}</label><input id="feedback-email" name="replyEmail" type="email" autoComplete="email" /></div>
     <div className="honeypot" aria-hidden="true"><label htmlFor="feedback-website">Website</label><input id="feedback-website" name="website" tabIndex={-1} autoComplete="off" /></div>
     <label className="checkbox-field"><input name="consent" type="checkbox" required /><span>{messages.contact.consent}</span></label>
-    {configured ? <><Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" /><div className="cf-turnstile" data-sitekey={siteKey} data-theme="light" /></> : <div className="notice">{configurationNote}</div>}
+    {configured ? <><Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" /><div className="cf-turnstile" data-sitekey={siteKey} data-theme="light" /></> : <div className="notice">{messages.contact.configurationNote}</div>}
     <Button type="submit" isLoading={state === 'sending'} loadingLabel={messages.contact.sending} disabled={!configured}>{messages.contact.submit}</Button>
     {state === 'success' ? <p className="form-status form-status--success" role="status">{messages.contact.success}</p> : null}
     {state === 'error' ? <p className="form-status form-status--error" role="alert">{messages.contact.error}</p> : null}

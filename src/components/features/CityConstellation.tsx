@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { LaunchLocale } from '@/i18n/config'
+import { getMessages } from '@/i18n/messages'
 import { localize } from '@/lib/data/format'
 import type { City } from '@/lib/data/types'
 
@@ -8,7 +9,7 @@ export function CityConstellation({ cities, locale }: { cities: City[]; locale: 
   const lats = cities.map((city) => city.coordinates.lat)
   const minLng = Math.min(...lngs); const maxLng = Math.max(...lngs)
   const minLat = Math.min(...lats); const maxLat = Math.max(...lats)
-  const note = locale === 'zh' ? '按经纬度绘制的示意点位，不是地图，也不表示边界；仅用于浏览城市入口。正式标准地图素材上线前不展示国界。' : locale === 'ru' ? 'Схема точек по координатам, не карта и не изображение границ. Используется только для перехода к городам.' : 'A coordinate-based point plot, not a map or boundary depiction. It is only a city index.'
+  const note = getMessages(locale).cities.mapNote
 
   return <div>
     <div className="city-map" aria-label={note}>
