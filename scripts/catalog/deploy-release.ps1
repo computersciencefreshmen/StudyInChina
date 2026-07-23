@@ -10,7 +10,6 @@ $wrangler = Join-Path $root "node_modules\.bin\wrangler.cmd"
 $config = Join-Path $root "workers\catalog-api\wrangler.jsonc"
 $output = Join-Path $root $OutputDirectory
 $targetFlag = if ($Remote) { "--remote" } else { "--local" }
-$env:XDG_CONFIG_HOME = Join-Path $root ".wrangler\config"
 
 if (-not (Test-Path -LiteralPath $tsx)) { throw "tsx is not installed. Run npm ci first." }
 if (-not (Test-Path -LiteralPath $wrangler)) { throw "wrangler is not installed. Run npm ci first." }
@@ -25,14 +24,14 @@ if ($actualEnvelopeHash -ne $expectedEnvelopeHash) {
   throw "Compatibility envelope checksum mismatch; the release was not uploaded or activated."
 }
 
-& $wrangler d1 migrations apply CATALOG_DB --config $config $targetFlag --yes
+& $wrangler d1 migrations apply CATALOG_DB --config $config $targetFlag
 if ($LASTEXITCODE -ne 0) { throw "Catalog D1 migration failed." }
 
 $objectPath = "studyinchina-releases/$($manifest.r2Key)"
 & $wrangler r2 object put $objectPath --file $manifest.envelopePath --content-type "application/json" --config $config $targetFlag
 if ($LASTEXITCODE -ne 0) { throw "Compatibility envelope upload failed; the release was not activated." }
 
-& $wrangler d1 execute CATALOG_DB --file $manifest.sqlPath --config $config $targetFlag --yes | Out-Null
+& $wrangler d1 execute CATALOG_DB --file $manifest.sqlPath --config $config $targetFlag | Out-Null
 if ($LASTEXITCODE -ne 0) { throw "Catalog release import failed." }
 
 & $wrangler d1 execute CATALOG_DB --command "SELECT release_id, data_date, generated_at, release_status FROM current_release;" --config $config $targetFlag
