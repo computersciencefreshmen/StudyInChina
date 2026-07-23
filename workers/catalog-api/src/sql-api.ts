@@ -2,6 +2,7 @@ import type { ActiveReleaseRow, D1Database } from './types'
 import { decodeCursor, encodeCursor } from './sql-cursor'
 import {
   applicationState,
+  chinaCalendarDate,
   fts5Query,
   loadRecordDecorations,
   normalizeLanguageFilter,
@@ -275,7 +276,7 @@ export class CatalogSqlApi {
   constructor(
     private readonly database: D1Database,
     activeRelease: ActiveReleaseRow,
-    private readonly today = new Date().toISOString().slice(0, 10),
+    private readonly today = chinaCalendarDate(),
   ) {
     this.release = releaseInfo(activeRelease)
   }

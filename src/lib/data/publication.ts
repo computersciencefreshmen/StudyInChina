@@ -1,4 +1,9 @@
-import { getTodayDate, isCurrentVerifiedRecord, withRuntimeFreshness } from './freshness'
+import {
+  getTodayDate,
+  isCurrentVerifiedRecord,
+  isWithinPostDeadlineGrace,
+  withRuntimeFreshness,
+} from './freshness'
 import type { ContentStatus, DataBundle } from './types'
 
 const PROFILE_STATUSES = new Set<ContentStatus>(['verified', 'stale'])
@@ -23,13 +28,15 @@ export function selectPublishedData(data: DataBundle, today = getTodayDate()): D
   const admissionCycles = data.admissionCycles.filter(
     (item) => isCurrentVerifiedRecord(item, today)
       && item.dateStatus !== 'previous-cycle-reference'
+      && (item.dateStatus === 'rolling' || isWithinPostDeadlineGrace(item.closesOn, today))
       && candidateProgramIds.has(item.programId),
   )
   const programsWithCurrentCycles = new Set(admissionCycles.map((item) => item.programId))
   const programs = candidatePrograms.filter((item) => programsWithCurrentCycles.has(item.id))
   const programIds = new Set(programs.map((item) => item.id))
   const scholarships = data.scholarships
-    .filter((item) => isCurrentVerifiedRecord(item, today))
+    .filter((item) => isCurrentVerifiedRecord(item, today)
+      && isWithinPostDeadlineGrace(item.deadline, today))
     .map((item) => ({
       ...item,
       universityIds: item.universityIds.filter((id) => universityIds.has(id)),

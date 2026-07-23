@@ -254,6 +254,91 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(wrongResource.status).toBe(400)
   })
 
+  it('keeps opportunities through day 30 and hides them everywhere on day 31', async () => {
+    database.exec('BEGIN')
+    try {
+      const program = database.prepare(`
+        SELECT visible.program_id, record.slug
+        FROM current_programs AS visible
+        JOIN current_catalog_records AS record
+          ON record.release_id = visible.release_id AND record.record_id = visible.program_id
+        WHERE EXISTS (
+          SELECT 1
+          FROM program_cycles AS cycle
+          JOIN application_routes AS route
+            ON route.release_id = cycle.release_id AND route.owner_record_id = cycle.program_cycle_id
+          JOIN application_windows AS window
+            ON window.release_id = route.release_id
+           AND window.application_route_id = route.application_route_id
+          WHERE cycle.release_id = visible.release_id AND cycle.program_id = visible.program_id
+        )
+        ORDER BY visible.program_id
+        LIMIT 1
+      `).get() as { program_id: string; slug: string }
+
+      const setDeadline = (modifier: string) => {
+        const deadline = database.prepare(
+          `SELECT date('now', '+8 hours', ?) AS value`,
+        ).get(modifier)!.value as string
+        database.prepare(`
+          UPDATE application_windows
+          SET closes_on = ?, rolling = 0
+          WHERE application_route_id IN (
+            SELECT route.application_route_id
+            FROM application_routes AS route
+            JOIN program_cycles AS cycle
+              ON cycle.release_id = route.release_id
+             AND cycle.program_cycle_id = route.owner_record_id
+            WHERE cycle.program_id = ?
+          )
+        `).run(deadline, program.program_id)
+        database.prepare(`
+          UPDATE record_field_status
+          SET field_status = 'known', value_json = json_quote(?), review_after = '9999-12-31'
+          WHERE field_path = 'closes_on'
+            AND record_id IN (
+              SELECT window.application_window_id
+              FROM application_windows AS window
+              JOIN application_routes AS route
+                ON route.release_id = window.release_id
+               AND route.application_route_id = window.application_route_id
+              JOIN program_cycles AS cycle
+                ON cycle.release_id = route.release_id
+               AND cycle.program_cycle_id = route.owner_record_id
+              WHERE cycle.program_id = ?
+            )
+        `).run(deadline, program.program_id)
+      }
+
+      setDeadline('-30 days')
+      expect(database.prepare(
+        'SELECT COUNT(*) AS count FROM current_programs WHERE program_id = ?',
+      ).get(program.program_id)!.count).toBe(1)
+      expect(database.prepare(
+        'SELECT COUNT(*) AS count FROM current_search_documents WHERE record_id = ?',
+      ).get(program.program_id)!.count).toBeGreaterThan(0)
+
+      setDeadline('-31 days')
+      expect(database.prepare(
+        'SELECT COUNT(*) AS count FROM current_programs WHERE program_id = ?',
+      ).get(program.program_id)!.count).toBe(0)
+      expect(database.prepare(
+        'SELECT COUNT(*) AS count FROM current_program_cycles WHERE program_id = ?',
+      ).get(program.program_id)!.count).toBe(0)
+      expect(database.prepare(
+        'SELECT COUNT(*) AS count FROM current_search_documents WHERE record_id = ?',
+      ).get(program.program_id)!.count).toBe(0)
+
+      const detail = await worker.fetch(
+        new Request(`https://catalog.test/api/v1/programs/${program.slug}`),
+        environment,
+      )
+      expect(detail.status).toBe(404)
+    } finally {
+      database.exec('ROLLBACK')
+    }
+  })
+
   it('reads the legacy R2 envelope only through the authenticated shadow endpoint', async () => {
     expect(r2Reads).toBe(0)
     const response = await worker.fetch(new Request(

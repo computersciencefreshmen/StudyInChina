@@ -45,6 +45,12 @@ type SourceRow = {
 export class CatalogQueryError extends Error {}
 export class InvalidSearchQueryError extends Error {}
 
+const CHINA_TIME_OFFSET_MS = 8 * 60 * 60 * 1_000
+
+export function chinaCalendarDate(now = new Date()) {
+  return new Date(now.getTime() + CHINA_TIME_OFFSET_MS).toISOString().slice(0, 10)
+}
+
 export async function queryAll<T>(
   database: D1Database,
   sql: string,

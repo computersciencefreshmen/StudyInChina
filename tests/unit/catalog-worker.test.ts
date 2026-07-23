@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { createHash } from 'node:crypto'
 import worker from '../../workers/catalog-api/src/index'
+import { chinaCalendarDate } from '../../workers/catalog-api/src/sql-data'
 import type {
   CatalogApiEnv,
   D1PreparedStatement,
@@ -47,6 +48,12 @@ describe('catalog API worker', () => {
     expect(response.status).toBe(200)
     expect(body.data.id).toBe(release.release_id)
     expect(body.data.recordCounts.programs).toBe(1)
+    expect(response.headers.get('etag')).toMatch(/^"[a-f0-9]{64}:\d{4}-\d{2}-\d{2}"$/u)
+  })
+
+  it('uses the China calendar date at the UTC day boundary', () => {
+    expect(chinaCalendarDate(new Date('2026-07-20T15:59:59.999Z'))).toBe('2026-07-20')
+    expect(chinaCalendarDate(new Date('2026-07-20T16:00:00.000Z'))).toBe('2026-07-21')
   })
 
   it('fails closed when the internal release artifact is requested without its bearer token', async () => {

@@ -1,4 +1,8 @@
-import { withRuntimeFreshness } from '@/lib/data/freshness'
+import {
+  isCurrentVerifiedRecord,
+  isWithinPostDeadlineGrace,
+  withRuntimeFreshness,
+} from '@/lib/data/freshness'
 import { isPublicStatus } from '@/lib/data/publication'
 import type { DataBundle } from '@/lib/data/types'
 
@@ -21,7 +25,12 @@ export function selectCatalogApiData(data: DataBundle, today: string): DataBundl
     .map((item) => withRuntimeFreshness(item, today))
   const programIds = new Set(programs.map((item) => item.id))
   const admissionCycles = data.admissionCycles
-    .filter((item) => isPublicStatus(item.status) && programIds.has(item.programId))
+    .filter((item) => isPublicStatus(item.status)
+      && item.dateStatus !== 'previous-cycle-reference'
+      && (!isCurrentVerifiedRecord(item, today)
+        || item.dateStatus === 'rolling'
+        || isWithinPostDeadlineGrace(item.closesOn, today))
+      && programIds.has(item.programId))
     .map((item) => withRuntimeFreshness(item, today))
   const scholarships = data.scholarships
     .filter((item) => isPublicStatus(item.status))

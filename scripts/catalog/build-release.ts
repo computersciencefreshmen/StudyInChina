@@ -6,6 +6,8 @@ import { bundleSchema } from '../../src/lib/data/schema'
 import { getDataReleaseDate } from '../../src/lib/data/release'
 import type { AuditMeta, DataBundle, LocalizedText, Program, Source } from '../../src/lib/data/types'
 
+const LEGACY_PROJECTION_VERSION = 2
+
 type SqlValue = string | number | boolean | null
 
 export type ReleaseArtifacts = {
@@ -236,8 +238,10 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
   const bundleSha256 = sha256(bundleJson)
   const dataDate = getDataReleaseDate(bundle)
   const generatedAt = `${dataDate}T00:00:00.000Z`
-  const releaseId = `legacy-${dataDate}-${bundleSha256.slice(0, 12)}`
-  const dataVersion = Number(dataDate.replaceAll('-', '')) * 100_000 + Number.parseInt(bundleSha256.slice(0, 4), 16)
+  const releaseId = `legacy-v${LEGACY_PROJECTION_VERSION}-${dataDate}-${bundleSha256.slice(0, 12)}`
+  const dataVersion = Number(dataDate.replaceAll('-', '')) * 1_000_000
+    + Number.parseInt(bundleSha256.slice(0, 4), 16) * 10
+    + LEGACY_PROJECTION_VERSION
   const recordCounts = {
     sources: bundle.sources.length,
     cities: bundle.cities.length,
@@ -258,9 +262,9 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
     insert('catalog_releases', {
       release_id: releaseId,
       data_version: dataVersion,
-      schema_version: 1,
+      schema_version: LEGACY_PROJECTION_VERSION,
       release_status: 'building',
-      source_pipeline_run_id: 'legacy-json-import',
+      source_pipeline_run_id: `legacy-json-import-v${LEGACY_PROJECTION_VERSION}`,
       data_date: dataDate,
       generated_at: generatedAt,
       content_sha256: contentSha256,
@@ -454,6 +458,10 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
       is_primary: true,
     }))
     addSources(statements, releaseId, routeId, cycle.sourceIds)
+    for (const [field, value] of Object.entries({
+      access_mode: 'public_individual',
+      apply_url: program.applyUrl,
+    })) addField(statements, releaseId, routeId, cycleRecord, field, value, dataDate, official)
     statements.push(recordRow(releaseId, { ...cycleRecord, id: windowId }, 'application_window', { cycle, windowId }))
     statements.push(insert('application_windows', {
       release_id: releaseId,
@@ -465,6 +473,12 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
       rolling: cycle.dateStatus === 'rolling',
     }))
     addSources(statements, releaseId, windowId, cycle.sourceIds)
+    for (const [field, value] of Object.entries({
+      round_label: null,
+      opens_on: cycle.dateStatus === 'rolling' ? null : cycle.opensOn,
+      closes_on: cycle.dateStatus === 'rolling' ? null : cycle.closesOn,
+      rolling: cycle.dateStatus === 'rolling',
+    })) addField(statements, releaseId, windowId, cycleRecord, field, value, dataDate, official)
 
     const fees: Array<{ type: 'tuition' | 'application'; value: number | null; period: string; status: string }> = [
       { type: 'tuition', value: cycle.tuitionCny, period: cycle.tuitionPeriod?.replace('-', '_') ?? 'academic_year', status: cycle.tuitionStatus ?? 'reference' },

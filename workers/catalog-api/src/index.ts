@@ -1,10 +1,10 @@
 import type { ActiveReleaseRow, CatalogApiEnv, R2ObjectBody } from './types'
 import { CatalogSqlApi } from './sql-api'
 import { InvalidCursorError } from './sql-cursor'
-import { InvalidSearchQueryError } from './sql-data'
+import { chinaCalendarDate, InvalidSearchQueryError } from './sql-data'
 
 const RELEASE_ID_PATTERN = /^[A-Za-z0-9._:-]{1,160}$/
-const PUBLIC_CACHE = 'public, max-age=60, s-maxage=300, stale-while-revalidate=3600'
+const PUBLIC_CACHE = 'public, max-age=60, s-maxage=300, stale-while-revalidate=300'
 const PRIVATE_CACHE = 'private, max-age=60, stale-while-revalidate=300'
 const MAX_RELEASE_ARTIFACT_BYTES = 20 * 1024 * 1024
 
@@ -43,7 +43,21 @@ function hasInternalAccess(request: Request, env: CatalogApiEnv) {
 
 async function getActiveRelease(env: CatalogApiEnv): Promise<ActiveReleaseRow | null> {
   return env.CATALOG_DB.prepare(`
-    SELECT release_id, data_date, generated_at, counts_json, content_sha256
+    SELECT
+      release_id,
+      data_date,
+      generated_at,
+      json_object(
+        'sources', (SELECT COUNT(*) FROM current_source_summaries),
+        'cities', (
+          SELECT COUNT(*) FROM current_locations WHERE location_type = 'city'
+        ),
+        'universities', (SELECT COUNT(*) FROM current_institutions),
+        'programs', (SELECT COUNT(*) FROM current_programs),
+        'admissionCycles', (SELECT COUNT(*) FROM current_program_cycles),
+        'scholarships', (SELECT COUNT(*) FROM current_scholarships)
+      ) AS counts_json,
+      content_sha256
     FROM current_release
     LIMIT 1
   `).first<ActiveReleaseRow>()
@@ -159,7 +173,8 @@ function publicResponse(request: Request, payload: unknown, etag: string) {
 async function publicCatalogResponse(request: Request, environment: CatalogApiEnv, url: URL) {
   const release = await getActiveRelease(environment)
   if (!release) return json({ error: { code: 'release_unavailable' } }, 503)
-  const etag = `"${release.content_sha256}"`
+  const today = chinaCalendarDate()
+  const etag = `"${release.content_sha256}:${today}"`
   if (request.headers.get('if-none-match') === etag) {
     return new Response(null, {
       status: 304,
@@ -171,7 +186,7 @@ async function publicCatalogResponse(request: Request, environment: CatalogApiEn
       },
     })
   }
-  const api = new CatalogSqlApi(environment.CATALOG_DB, release)
+  const api = new CatalogSqlApi(environment.CATALOG_DB, release, today)
   const parts = url.pathname.split('/').filter(Boolean)
   const resource = parts[2]
 
@@ -244,7 +259,8 @@ async function publicCatalogResponse(request: Request, environment: CatalogApiEn
 async function currentReleaseResponse(request: Request, env: CatalogApiEnv) {
   const release = await getActiveRelease(env)
   if (!release) return json({ error: { code: 'release_unavailable' } }, 503)
-  const etag = `"${release.content_sha256}"`
+  const today = chinaCalendarDate()
+  const etag = `"${release.content_sha256}:${today}"`
   if (request.headers.get('if-none-match') === etag) {
     return new Response(null, {
       status: 304,
@@ -256,7 +272,11 @@ async function currentReleaseResponse(request: Request, env: CatalogApiEnv) {
       },
     })
   }
-  return publicResponse(request, new CatalogSqlApi(env.CATALOG_DB, release).currentRelease(), etag)
+  return publicResponse(
+    request,
+    new CatalogSqlApi(env.CATALOG_DB, release, today).currentRelease(),
+    etag,
+  )
 }
 
 async function internalBundleResponse(request: Request, env: CatalogApiEnv) {

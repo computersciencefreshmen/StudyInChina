@@ -206,7 +206,12 @@ export class CatalogApiService {
       ...safeCycle,
       applicationState: safeCycle.dateStatus === null
         ? 'not-announced'
-        : getApplicationState(cycle, this.today),
+        : getApplicationState({
+          ...cycle,
+          opensOn: safeCycle.opensOn,
+          closesOn: safeCycle.closesOn,
+          dateStatus: safeCycle.dateStatus,
+        }, this.today),
       officialSources: officialSourcesFor(cycle.sourceIds, this.bundle.sources),
       fieldMeta: { ...identityMeta, ...dynamicMeta },
     }
