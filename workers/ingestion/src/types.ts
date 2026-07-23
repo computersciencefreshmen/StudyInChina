@@ -172,6 +172,32 @@ export type ExtractionCandidate = {
   createdAt: string
 }
 
+export type ExtractedEntityCandidate = {
+  candidateId: string
+  discoveryId: string
+  registryId: string
+  reconciliationId: string
+  institutionId: string
+  entityType: 'program' | 'scholarship'
+  entityKey: string
+  sourceId: string
+  snapshotId: string
+  ingestionJobId: string
+  extractor: string
+  officialUrl: string
+  urlSha256: string
+  identitySha256: string
+  entitySha256: string
+  facts: Record<string, unknown>
+  evidence: Array<{
+    fieldPath: string
+    quote: string
+    locator: string | null
+    officialUrl: string
+  }>
+  createdAt: string
+}
+
 export type QuarantineTask = {
   version: 1
   quarantineId: string

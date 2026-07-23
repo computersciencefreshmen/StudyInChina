@@ -11,6 +11,7 @@ import { infrastructureCostPolicy, permitsBrowserForSource } from './cost-policy
 import { runDualMiniMaxExtraction } from './minimax'
 import { miniMaxCandidateProvenance, ruleCandidateProvenance } from './provenance'
 import {
+  hasEntityExtraction,
   loadSourceState,
   persistChangedResult,
   readRobotsCache,
@@ -19,6 +20,7 @@ import {
 } from './repository'
 import { nextFetchAt, parseRetryAfter, boundedInteger } from './retry'
 import { htmlToText, extractWithRules } from './rules'
+import { parseOfficialCatalogHtml } from './catalog-parser'
 import { isRobotsPathAllowed } from './robots'
 import { fetchWithValidatedRedirects } from './security'
 import {
@@ -28,6 +30,7 @@ import {
 } from './rich-content'
 import type {
   ExtractionCandidate,
+  ExtractedEntityCandidate,
   ExtractionFact,
   Fetcher,
   IngestionEnv,
@@ -49,6 +52,18 @@ const TEXT_CONTENT_TYPES = [
   'text/',
 ]
 const MAX_IN_MEMORY_SOURCE_BYTES = 10 * 1024 * 1024
+const OFFICIAL_HTML_ENTITY_EXTRACTOR = 'official-html-v2'
+const ENTITY_CATALOG_CATEGORIES = new Set<SourceManifestV1['sourceCategory']>([
+  'undergraduate_catalog',
+  'masters_catalog',
+  'doctoral_catalog',
+  'non_degree_catalog',
+  'university_scholarship',
+  'faculty_scholarship',
+  'government_scholarship',
+  'program_detail',
+])
+
 
 function isTextContentType(contentType: string): boolean {
   const normalized = contentType.toLowerCase().split(';', 1)[0]?.trim() ?? ''
@@ -180,6 +195,107 @@ function statusError(response: Response, now: Date): IngestionError {
 
 function sourceTextForExtraction(rawText: string, contentType: string): string {
   return contentType.toLowerCase().includes('html') ? htmlToText(rawText) : rawText
+}
+
+function isOfficialEntityCatalog(
+  manifest: SourceManifestV1,
+  contentType: string,
+  rawText: string | null,
+): rawText is string {
+  return rawText !== null
+    && contentType.toLowerCase().includes('html')
+    && ENTITY_CATALOG_CATEGORIES.has(manifest.sourceCategory)
+}
+
+function normalizedEntityNameKey(value: string): string {
+  return value
+    .normalize('NFKC')
+    .toLocaleLowerCase('en-US')
+    .replace(/[^\p{L}\p{N}]+/gu, '-')
+    .replace(/^-+|-+$/gu, '')
+    .slice(0, 380)
+}
+
+export async function buildOfficialEntityExtraction(
+  manifest: SourceManifestV1,
+  snapshotId: string,
+  ingestionJobId: string,
+  sourceUrl: string,
+  rawText: string | null,
+  contentType: string,
+  checkedAt: string,
+): Promise<{
+  extractor: string
+  institutionId: string
+  candidates: ExtractedEntityCandidate[]
+} | null> {
+  if (!isOfficialEntityCatalog(manifest, contentType, rawText)) return null
+  const parsed = parseOfficialCatalogHtml(rawText, {
+    sourceUrl,
+    allowedHosts: [...manifest.allowedHosts, ...(manifest.allowedRedirectHosts ?? [])],
+    sourceCategory: manifest.sourceCategory,
+    maxCandidates: 2_000,
+  })
+  const candidates: ExtractedEntityCandidate[] = []
+  for (const item of parsed) {
+    const entityType = item.kind
+    const normalizedName = item.name.normalize('NFKC').replace(/\s+/gu, ' ').trim()
+    const identity = {
+      institutionId: manifest.institutionId,
+      entityType,
+      degreeLevel: item.degreeLevel,
+      normalizedName: normalizedName.toLocaleLowerCase('en-US'),
+    }
+    const identitySha256 = await sha256Hex(stableJson(identity))
+    const entityKey = [
+      item.degreeLevel ?? 'all',
+      normalizedEntityNameKey(normalizedName),
+      identitySha256.slice(0, 16),
+    ].join(':')
+    const facts: Record<string, unknown> = {
+      name: normalizedName,
+      degreeLevel: item.degreeLevel,
+      officialUrl: item.officialUrl,
+      sourceCategory: manifest.sourceCategory,
+      checkedAt,
+    }
+    const evidence = [{
+      fieldPath: 'name',
+      quote: item.evidence.quote,
+      locator: item.evidence.locator ?? null,
+      officialUrl: item.officialUrl,
+    }]
+    const urlSha256 = await sha256Hex(item.officialUrl)
+    candidates.push({
+      candidateId: await sha256Hex(
+        `entity-candidate:${snapshotId}:${OFFICIAL_HTML_ENTITY_EXTRACTOR}:${entityType}:${entityKey}`,
+      ),
+      discoveryId: await sha256Hex(`source-discovery:${manifest.institutionId}:${item.officialUrl}`),
+      registryId: await sha256Hex(`entity-registry:${manifest.institutionId}:${entityType}:${entityKey}`),
+      reconciliationId: await sha256Hex(
+        `catalog-reconciliation:${snapshotId}:${entityType}:${entityKey}`,
+      ),
+      institutionId: manifest.institutionId,
+      entityType,
+      entityKey,
+      sourceId: manifest.id,
+      snapshotId,
+      ingestionJobId,
+      extractor: OFFICIAL_HTML_ENTITY_EXTRACTOR,
+      officialUrl: item.officialUrl,
+      urlSha256,
+      identitySha256,
+      entitySha256: await sha256Hex(stableJson({ facts, evidence })),
+      facts,
+      evidence,
+      createdAt: checkedAt,
+    })
+  }
+  return {
+    extractor: OFFICIAL_HTML_ENTITY_EXTRACTOR,
+    institutionId: manifest.institutionId,
+    candidates,
+  }
 }
 
 function compareRuleFacts(ruleFacts: ExtractionFact[], modelFacts: ExtractionFact[]): string[] {
@@ -474,7 +590,16 @@ export async function processIngestionJob(
   }
 
   const rawSha256 = await sha256Hex(body)
-  if (rawSha256 === state.rawSha256) {
+  const snapshotId = await sha256Hex(`${manifest.id}:${rawSha256}`)
+  const entityCatalog = contentType.toLowerCase().includes('html')
+    && ENTITY_CATALOG_CATEGORIES.has(manifest.sourceCategory)
+  const entityExtractionCurrent = !entityCatalog || await hasEntityExtraction(
+    environment,
+    manifest.id,
+    snapshotId,
+    OFFICIAL_HTML_ENTITY_EXTRACTOR,
+  )
+  if (rawSha256 === state.rawSha256 && entityExtractionCurrent) {
     await recordNoChange(environment, {
       job,
       sourceId: manifest.id,
@@ -529,7 +654,7 @@ export async function processIngestionJob(
   const canonicalSha256 = rawText === null
     ? rawSha256
     : await sha256Hex(normalizeCanonicalText(rawText, manifest.canonicalization))
-  if (canonicalSha256 === state.canonicalSha256) {
+  if (canonicalSha256 === state.canonicalSha256 && entityExtractionCurrent) {
     await recordNoChange(environment, {
       job,
       sourceId: manifest.id,
@@ -543,7 +668,6 @@ export async function processIngestionJob(
     return
   }
 
-  const snapshotId = await sha256Hex(`${manifest.id}:${rawSha256}`)
   const r2Key = snapshotObjectKey(manifest.id, rawSha256, contentType)
   const snapshot: SnapshotRecord = {
     snapshotId,
@@ -563,6 +687,15 @@ export async function processIngestionJob(
   if (derivative && rawText !== null) {
     await putDerivativeText(environment, snapshot, rawText)
   }
+  const entityExtraction = await buildOfficialEntityExtraction(
+    manifest,
+    snapshotId,
+    job.jobId,
+    finalUrl.href,
+    rawText,
+    contentType,
+    checkedAt,
+  )
   const candidate = await buildCandidate(
     environment,
     manifest,
@@ -597,5 +730,6 @@ export async function processIngestionJob(
     snapshot,
     candidate,
     nextFetchAt: scheduledNextFetch,
+    entityExtraction: entityExtraction ?? undefined,
   })
 }

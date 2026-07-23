@@ -3,6 +3,7 @@ import type {
   D1PreparedStatement,
   D1Result,
   ExtractionCandidate,
+  ExtractedEntityCandidate,
   IngestionEnv,
   IngestionJob,
   SnapshotRecord,
@@ -39,6 +40,122 @@ function ensureSuccess(result: D1Result, operation: string): void {
 
 function ensureBatch(results: D1Result[], operation: string): void {
   for (const result of results) ensureSuccess(result, operation)
+}
+
+const MAX_D1_BATCH_STATEMENTS = 80
+
+function entityPersistenceStatements(
+  database: IngestionEnv['INGESTION_DB'],
+  candidate: ExtractedEntityCandidate,
+): D1PreparedStatement[] {
+  return [
+    database.prepare(
+      `INSERT INTO source_discoveries
+        (discovery_id, institution_id, discovered_from_source_id,
+         discovered_from_snapshot_id, canonical_url, url_sha256, source_role,
+         link_text, discovery_context_json, discovery_status, discovered_at,
+         last_seen_at, created_at, updated_at)
+       VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, 'discovered', ?10, ?10, ?10, ?10)
+       ON CONFLICT(institution_id, canonical_url) DO UPDATE SET
+         link_text = excluded.link_text,
+         discovery_context_json = excluded.discovery_context_json,
+         last_seen_at = excluded.last_seen_at,
+         updated_at = excluded.updated_at`,
+    ).bind(
+      candidate.discoveryId,
+      candidate.institutionId,
+      candidate.sourceId,
+      candidate.snapshotId,
+      candidate.officialUrl,
+      candidate.urlSha256,
+      candidate.entityType === 'program' ? 'program_detail' : 'scholarship_detail',
+      String(candidate.facts.name ?? '').slice(0, 1_000),
+      JSON.stringify({
+        entityKey: candidate.entityKey,
+        entityType: candidate.entityType,
+        extractor: candidate.extractor,
+      }),
+      candidate.createdAt,
+    ),
+    database.prepare(
+      `INSERT OR IGNORE INTO extracted_entity_candidates
+        (candidate_id, institution_id, entity_type, entity_key, source_id,
+         snapshot_id, source_discovery_id, ingestion_job_id, extractor,
+         candidate_status, facts_json, evidence_json, issues_json,
+         entity_sha256, confidence_ppm, created_at, processed_at, registered_at)
+       VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, 'registered',
+               ?10, ?11, '[]', ?12, 1000000, ?13, ?13, ?13)`,
+    ).bind(
+      candidate.candidateId,
+      candidate.institutionId,
+      candidate.entityType,
+      candidate.entityKey,
+      candidate.sourceId,
+      candidate.snapshotId,
+      candidate.discoveryId,
+      candidate.ingestionJobId,
+      candidate.extractor,
+      JSON.stringify(candidate.facts),
+      JSON.stringify(candidate.evidence),
+      candidate.entitySha256,
+      candidate.createdAt,
+    ),
+    database.prepare(
+      `INSERT INTO entity_registry
+        (registry_id, institution_id, entity_type, entity_key, identity_sha256,
+         registry_status, first_candidate_id, latest_candidate_id,
+         first_seen_at, last_seen_at, created_at, updated_at)
+       VALUES (?1, ?2, ?3, ?4, ?5, 'pending', ?6, ?6, ?7, ?7, ?7, ?7)
+       ON CONFLICT(institution_id, entity_type, entity_key) DO UPDATE SET
+         latest_candidate_id = excluded.latest_candidate_id,
+         last_seen_at = excluded.last_seen_at,
+         updated_at = excluded.updated_at`,
+    ).bind(
+      candidate.registryId,
+      candidate.institutionId,
+      candidate.entityType,
+      candidate.entityKey,
+      candidate.identitySha256,
+      candidate.candidateId,
+      candidate.createdAt,
+    ),
+    database.prepare(
+      `INSERT OR IGNORE INTO catalog_reconciliation_items
+        (reconciliation_id, institution_id, source_id, snapshot_id,
+         catalog_item_key, entity_type, entity_key, candidate_id, registry_id,
+         disposition, evidence_json, first_seen_at, last_seen_at,
+         created_at, updated_at)
+       VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?5, ?7, ?8, 'pending',
+               ?9, ?10, ?10, ?10, ?10)`,
+    ).bind(
+      candidate.reconciliationId,
+      candidate.institutionId,
+      candidate.sourceId,
+      candidate.snapshotId,
+      candidate.entityKey,
+      candidate.entityType,
+      candidate.candidateId,
+      candidate.registryId,
+      JSON.stringify(candidate.evidence),
+      candidate.createdAt,
+    ),
+  ]
+}
+
+
+export async function hasEntityExtraction(
+  environment: Pick<IngestionEnv, 'INGESTION_DB'>,
+  sourceId: string,
+  snapshotId: string,
+  extractor: string,
+): Promise<boolean> {
+  const row = await environment.INGESTION_DB.prepare(
+    `SELECT 1 AS present
+       FROM entity_extraction_runs
+      WHERE source_id = ?1 AND snapshot_id = ?2 AND extractor = ?3
+      LIMIT 1`,
+  ).bind(sourceId, snapshotId, extractor).first<{ present: number }>()
+  return row?.present === 1
 }
 
 export async function loadSourceState(
@@ -192,6 +309,11 @@ export async function persistChangedResult(
     job: IngestionJob
     snapshot: SnapshotRecord
     candidate: ExtractionCandidate
+    entityExtraction?: {
+      extractor: string
+      institutionId: string
+      candidates: ExtractedEntityCandidate[]
+    }
     nextFetchAt: string
   },
 ): Promise<void> {
@@ -232,6 +354,29 @@ export async function persistChangedResult(
         snapshot.fetchedAt,
       ),
     ] : []),
+    ...(parameters.entityExtraction?.candidates ?? []).flatMap((item) =>
+      entityPersistenceStatements(environment.INGESTION_DB, item)),
+    ...(parameters.entityExtraction ? [
+      environment.INGESTION_DB.prepare(
+        `INSERT INTO entity_extraction_runs
+          (snapshot_id, source_id, institution_id, extractor, extraction_status,
+           candidate_count, issues_json, completed_at)
+         VALUES (?1, ?2, ?3, ?4, 'completed', ?5, '[]', ?6)
+         ON CONFLICT(snapshot_id, extractor) DO UPDATE SET
+           extraction_status = excluded.extraction_status,
+           candidate_count = excluded.candidate_count,
+           issues_json = excluded.issues_json,
+           completed_at = excluded.completed_at`,
+      ).bind(
+        snapshot.snapshotId,
+        snapshot.sourceId,
+        parameters.entityExtraction.institutionId,
+        parameters.entityExtraction.extractor,
+        parameters.entityExtraction.candidates.length,
+        snapshot.fetchedAt,
+      ),
+    ] : []),
+
     environment.INGESTION_DB.prepare(
       `INSERT OR IGNORE INTO ingestion_candidates
         (candidate_id, source_id, snapshot_id, extractor, gate_status,
@@ -298,8 +443,14 @@ export async function persistChangedResult(
         WHERE job_id = ?1`,
     ).bind(job.jobId, candidate.gateStatus, snapshot.fetchedAt),
   ]
-  ensureBatch(await environment.INGESTION_DB.batch(statements), 'persist changed ingestion result')
+  for (let offset = 0; offset < statements.length; offset += MAX_D1_BATCH_STATEMENTS) {
+    const batch = statements.slice(offset, offset + MAX_D1_BATCH_STATEMENTS)
+    ensureBatch(
+      await environment.INGESTION_DB.batch(batch),
+      'persist changed ingestion result',
+    )
 }
+  }
 
 export async function recordJobFailure(
   environment: Pick<IngestionEnv, 'INGESTION_DB'>,

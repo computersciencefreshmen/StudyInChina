@@ -66,6 +66,11 @@ Apply the pipeline migrations in filename order:
 2. `infra/d1/pipeline/migrations/0002_evidence_workflow.sql`
 3. `infra/d1/pipeline/migrations/0003_indexes_guards.sql`
 4. `infra/d1/pipeline/migrations/0004_worker_runtime.sql`
+5. `infra/d1/pipeline/migrations/0005_domain_throttle.sql`
+6. `infra/d1/pipeline/migrations/0006_candidate_provenance_promotion.sql`
+7. `infra/d1/pipeline/migrations/0007_snapshot_derivatives.sql`
+8. `infra/d1/pipeline/migrations/0008_release_builder_contract.sql`
+9. `infra/d1/pipeline/migrations/0009_entity_discovery_registry.sql`
 
 ### Domain records
 
@@ -116,6 +121,17 @@ crawl_targets
 An ingestion identity cannot update canonical data directly. A blocker candidate is quarantined and cannot enter canonical fields or a public release. A later clean, automatically validated candidate may supersede it. `audit_log` records system, worker, migration, and release actions.
 
 `ingestion_sources`, `ingestion_jobs`, `ingestion_snapshots`, `ingestion_candidates`, and `ingestion_robots_cache` are the Worker-facing runtime contract. Jobs move through queued, running, retry, and terminal states; candidate rows are automatically classified as `validated` or `quarantined` by deterministic rule and dual-extractor gates. Runtime snapshots retain artifact digests and URIs rather than raw payloads.
+
+### Directory discovery and catalogue reconciliation
+
+Official directory pages can contain hundreds of programmes or scholarships. The discovery layer preserves that one-to-many shape without weakening the canonical evidence gates:
+
+1. `source_discoveries` records official links found in an immutable ingestion snapshot and tracks whether each link becomes a registered crawl source.
+2. `extracted_entity_candidates` stores one immutable, source-backed candidate per entity and snapshot. Facts are an object, evidence is a non-empty array, and the normalized candidate payload has a SHA-256 digest.
+3. `entity_registry` deduplicates recurring candidates into a stable institution-scoped identity and optionally binds that identity to a canonical record of the same kind.
+4. `catalog_reconciliation_items` accounts for every official directory item as pending, published, unavailable for individual application, discontinued, officially absent, or unparseable.
+
+Only the existing canonical claim, anomaly, promotion, and release workflow can make a registered entity public. Discovery or reconciliation status alone never bypasses those gates.
 
 ## Catalog database
 
