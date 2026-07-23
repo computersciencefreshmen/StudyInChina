@@ -26,6 +26,7 @@
     "check:worker:release-builder": "wrangler deploy --dry-run --config workers/release-builder/wrangler.jsonc",
     "check:worker:catalog": "wrangler deploy --dry-run --config workers/catalog-api/wrangler.jsonc",
     "catalog:build": "tsx scripts/catalog/build-release.ts",
+    "pipeline:build-sources": "tsx scripts/ingestion/build-source-import.ts",
     "benchmark:catalog": "tsx scripts/catalog/benchmark-catalog.ts",
     "benchmark:catalog:smoke": "tsx scripts/catalog/benchmark-catalog.ts --institutions 25 --programs 1000 --cycles 3000 --iterations 50 --warmup 10 --output .benchmark/catalog-performance-smoke.json",
     "cloudflare:retention": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cloudflare/configure-retention.ps1",

@@ -129,6 +129,17 @@ Reconciliation state is deliberately absent from Source Manifest. Coverage and c
 
 Invalid manifests fail closed before a source request is made.
 
+Validate and import the locked pilot manifests with:
+
+```powershell
+npm run validate:manifests
+.\scripts\ingestion\import-source-manifests.ps1 -Remote
+```
+
+The import is idempotent. It preserves fetch state for unchanged sources,
+reschedules changed sources, and disables pilot sources removed from the
+validated manifests.
+
 ## Network and robots policy
 
 The Worker performs these checks before requesting source content:
