@@ -14,8 +14,20 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:ingestion": "tsx --test workers/ingestion/tests/*.test.ts",
+    "test:publisher": "tsx --test workers/publisher/tests/*.test.ts",
     "test:e2e": "playwright test",
     "validate:data": "tsx scripts/validate-data.ts",
+    "validate:d1": "tsx scripts/validate-d1-migrations.ts",
+    "validate:manifests": "tsx scripts/validate-source-manifests.ts",
+    "check:worker:ingestion": "wrangler deploy --dry-run --config workers/ingestion/wrangler.jsonc",
+    "check:worker:publisher": "wrangler deploy --dry-run --config workers/publisher/wrangler.jsonc",
+    "check:worker:catalog": "wrangler deploy --dry-run --config workers/catalog-api/wrangler.jsonc",
+    "catalog:build": "tsx scripts/catalog/build-release.ts",
+    "benchmark:catalog": "tsx scripts/catalog/benchmark-catalog.ts",
+    "benchmark:catalog:smoke": "tsx scripts/catalog/benchmark-catalog.ts --institutions 25 --programs 1000 --cycles 3000 --iterations 50 --warmup 10 --output .benchmark/catalog-performance-smoke.json",
+    "cloudflare:retention": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cloudflare/configure-retention.ps1",
+    "cloudflare:restore-drill": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cloudflare/restore-drill.ps1",
     "check:links": "node scripts/check-links.mjs",
     "data:health": "node scripts/data-health.mjs --mode monthly"
   },
@@ -45,6 +57,7 @@
     "tailwindcss": "^3.4.0",
     "tsx": "^4.20.0",
     "typescript": "^5.9.0",
-    "vitest": "^3.2.0"
+    "vitest": "^3.2.0",
+    "wrangler": "^4.112.0"
   }
 }

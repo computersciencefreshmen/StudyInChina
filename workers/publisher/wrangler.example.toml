@@ -1,0 +1,34 @@
+# Copy to wrangler.toml and replace resource IDs before deployment.
+name = "studyinchina-publisher"
+main = "src/index.ts"
+compatibility_date = "2026-07-20"
+workers_dev = true
+
+[triggers]
+crons = ["37 * * * *"]
+
+[vars]
+SCHEDULE_BATCH_LIMIT = "20"
+MAX_QUEUE_ATTEMPTS = "4"
+
+[[d1_databases]]
+binding = "PIPELINE_DB"
+database_name = "studyinchina-pipeline"
+database_id = "replace-with-pipeline-d1-database-id"
+migrations_dir = "../../infra/d1/pipeline/migrations"
+
+[[queues.producers]]
+binding = "PROMOTION_QUEUE"
+queue = "studyinchina-promotion"
+
+[[queues.producers]]
+binding = "PUBLISHER_DLQ"
+queue = "studyinchina-publisher-dlq"
+
+[[queues.consumers]]
+queue = "studyinchina-promotion"
+max_batch_size = 5
+max_batch_timeout = 5
+max_retries = 4
+dead_letter_queue = "studyinchina-publisher-dlq"
+max_concurrency = 1

@@ -1,0 +1,23 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "studyinchina-catalog-api",
+  "main": "./src/index.ts",
+  "compatibility_date": "2026-07-20",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "observability": { "enabled": true },
+  "d1_databases": [
+    {
+      "binding": "CATALOG_DB",
+      "database_name": "studyinchina-catalog",
+      "database_id": "451c22ea-473e-4a71-a1b5-8b0a2de4176f",
+      "migrations_dir": "../../infra/d1/catalog/migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "RELEASES_BUCKET",
+      "bucket_name": "studyinchina-releases"
+    }
+  ]
+}

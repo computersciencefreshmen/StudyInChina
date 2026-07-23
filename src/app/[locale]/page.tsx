@@ -6,7 +6,7 @@ import { UniversityCard } from '@/components/features/RecordCards'
 import { getMessages } from '@/i18n/messages'
 import { localize } from '@/lib/data/format'
 import { disciplineLabels } from '@/lib/data/labels'
-import { getData } from '@/lib/data/load'
+import { getCatalogData } from '@/lib/data/load'
 import { guides } from '@/lib/guides'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = requireLocale((await params).locale); if (!locale) notFound()
-  const messages = getMessages(locale); const data = getData()
+  const messages = getMessages(locale); const data = await getCatalogData()
   const featured = data.universities.filter((item) => item.featured).slice(0, 6)
   const fieldsByUniversity = Object.fromEntries(data.universities.map((university) => [university.id, [...new Set(data.programs.filter((program) => program.universityId === university.id).map((program) => program.discipline))]]))
 

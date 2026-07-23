@@ -1,0 +1,91 @@
+import { describe, expect, it } from 'vitest'
+import { createHash } from 'node:crypto'
+import worker from '../../workers/catalog-api/src/index'
+import type {
+  CatalogApiEnv,
+  D1PreparedStatement,
+  R2ObjectBody,
+} from '../../workers/catalog-api/src/types'
+
+const release = {
+  release_id: 'release-2026-07-20',
+  data_date: '2026-07-20',
+  generated_at: '2026-07-20T12:00:00.000Z',
+  counts_json: JSON.stringify({ sources: 1, cities: 1, universities: 1, programs: 1, admissionCycles: 1, scholarships: 1 }),
+  content_sha256: 'a'.repeat(64),
+}
+
+function environment(): CatalogApiEnv {
+  const envelope = JSON.stringify({
+    data: { sources: [], cities: [], universities: [], programs: [], admissionCycles: [], scholarships: [] },
+    meta: { release: { id: release.release_id, dataDate: release.data_date, generatedAt: release.generated_at, recordCounts: JSON.parse(release.counts_json) } },
+  })
+  const activeRelease = {
+    ...release,
+    content_sha256: createHash('sha256').update(envelope).digest('hex'),
+  }
+  const statement: D1PreparedStatement = {
+    bind: () => statement,
+    first: async <T,>() => activeRelease as T,
+    all: async <T,>() => ({ success: true, results: [] as T[] }),
+  }
+  return {
+    CATALOG_DB: { prepare: () => statement },
+    RELEASES_BUCKET: {
+      get: async (key): Promise<R2ObjectBody | null> => key.endsWith('/compat-envelope.json')
+        ? { body: new Response(envelope).body }
+        : null,
+    },
+    CATALOG_API_TOKEN: 'test-secret',
+  }
+}
+
+describe('catalog API worker', () => {
+  it('returns current release metadata from D1', async () => {
+    const response = await worker.fetch(new Request('https://catalog.test/api/v1/releases/current'), environment())
+    const body = await response.json()
+    expect(response.status).toBe(200)
+    expect(body.data.id).toBe(release.release_id)
+    expect(body.data.recordCounts.programs).toBe(1)
+  })
+
+  it('fails closed when the internal release artifact is requested without its bearer token', async () => {
+    const response = await worker.fetch(new Request('https://catalog.test/internal/v1/catalog-bundle'), environment())
+    expect(response.status).toBe(403)
+  })
+
+  it('streams the immutable compatibility envelope for an authenticated server', async () => {
+    const response = await worker.fetch(new Request('https://catalog.test/internal/v1/catalog-bundle', {
+      headers: { authorization: 'Bearer test-secret' },
+    }), environment())
+    const body = await response.json()
+    expect(response.status).toBe(200)
+    expect(response.headers.get('x-catalog-release')).toBe(release.release_id)
+    expect(body.meta.release.id).toBe(release.release_id)
+  })
+
+  it('bounds public API query input before issuing a catalog list query', async () => {
+    const response = await worker.fetch(
+      new Request(`https://catalog.test/api/v1/programs?q=${'x'.repeat(201)}`),
+      environment(),
+    )
+    expect(response.status).toBe(400)
+  })
+
+  it('supports cacheable read-only CORS without opening the internal endpoint', async () => {
+    const preflight = await worker.fetch(
+      new Request('https://catalog.test/api/v1/programs', { method: 'OPTIONS' }),
+      environment(),
+    )
+    expect(preflight.status).toBe(204)
+    expect(preflight.headers.get('access-control-allow-origin')).toBe('*')
+    expect(preflight.headers.get('access-control-allow-methods')).toContain('GET')
+
+    const internalPreflight = await worker.fetch(
+      new Request('https://catalog.test/internal/v1/catalog-bundle', { method: 'OPTIONS' }),
+      environment(),
+    )
+    expect(internalPreflight.status).toBe(405)
+    expect(internalPreflight.headers.get('access-control-allow-origin')).toBeNull()
+  })
+})

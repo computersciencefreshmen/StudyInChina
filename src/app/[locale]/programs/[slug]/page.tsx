@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { FavoriteButton } from '@/components/features/FavoriteButton'
 import { ProgramCard } from '@/components/features/RecordCards'
 import { ScholarshipCard } from '@/components/features/ScholarshipCard'
+import { SourceTransparency } from '@/components/features/SourceTransparency'
 import { Badge, Card, PageHero, SectionHeading, VerificationBadge } from '@/components/ui'
 import { launchLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
@@ -113,6 +114,8 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   ))
   const sourceIds = new Set([...program.sourceIds, ...cycle.sourceIds])
   const sources = data.sources.filter((source) => sourceIds.has(source.id))
+  const lastSourceCheckedAt = sources.map((source) => source.accessedAt).sort().at(-1)
+    ?? program.verifiedAt
   const related = data.programs
     .filter((item) => item.universityId === university.id && item.id !== program.id)
     .slice(0, 3)
@@ -221,7 +224,6 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
             <div><dt>{messages.common.tuition}</dt><dd>{tuition}</dd></div>
             <div><dt>{messages.programs.fee}</dt><dd>{formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)}</dd></div>
           </dl>
-          <div className="notice">{messages.common.authoritativeNotice}</div>
         </article>
 
         {related.length ? <div>
@@ -269,9 +271,14 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
               <small>{source.publisher} · {formatDate(source.accessedAt, locale, '—')}</small>
             </li>)}
           </ul>
-          <div className="atlas-card__footer">
-            <a className="text-link" href={program.programUrl} target="_blank" rel="noreferrer">{messages.common.officialSource} ↗</a>
-          </div>
+          <SourceTransparency
+            locale={locale}
+            lastCheckedAt={lastSourceCheckedAt}
+            lastCheckedLabel={messages.common.sourcesLastChecked}
+            notice={messages.common.automatedCollectionNotice}
+            reportErrorLabel={messages.common.reportInformationError}
+            officialLink={{ href: program.programUrl, label: messages.common.officialSource }}
+          />
         </Card>
       </aside>
     </section>

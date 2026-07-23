@@ -18,7 +18,20 @@ The public interface is available in English, Chinese, Russian, German, French a
 - Sitemap, robots, canonical URLs, language alternates and structured detail-page data
 - CI, a daily freshness gate, weekly link checks, monthly review records and semester audits
 
-The initial dataset is deliberately conservative. Program-cycle facts remain `draft` with fees and dates set to `null` / `not-announced` until a maintainer completes a publication-level review. Production pages, search, static routes, sitemap and structured data exclude `draft` and `archived` records. Current programs, cycles and scholarships must also be `verified` and within `reviewAfter`; overdue university and city profiles remain available only with a runtime `stale` label.
+The repository is being migrated from that conservative JSON release to the automated
+Catalog platform. The implemented foundation now includes separate Pipeline and Catalog
+D1 schemas, immutable R2 snapshot/release contracts, queue-based ingestion, dual MiniMax
+validation, atomic Catalog release cutover, versioned public API routes, and `json` / `shadow`
+/ `d1` repository modes. Ten pilot institutions currently have validated Source Manifests
+covering 100 registered official sources. This is infrastructure and pilot coverage—not a
+claim that the full 120-school catalog has already been collected.
+
+The initial compatibility dataset remains deliberately conservative. In the automated
+Catalog, record identity and individual fact visibility are gated separately: an official
+program may remain visible while a stale, conflicting, unavailable, or unannounced fee or
+deadline is returned as `null` with explicit `fieldMeta` and an official entry link. Draft,
+archived, or unverified identities remain private everywhere, including API, search, SEO,
+JSON-LD, sitemap, and favorites.
 
 ## Stack
 
@@ -27,7 +40,8 @@ The initial dataset is deliberately conservative. Program-cycle facts remain `dr
 | Runtime | Node.js 24 LTS |
 | Application | Next.js 16 App Router, React 19, strict TypeScript |
 | Styling | Tailwind build pipeline plus a custom accessible atlas design system |
-| Content | Version-controlled JSON, parsed and cross-validated with Zod |
+| Content | Cloudflare D1 Catalog + versioned Release; JSON is a read-only compatibility snapshot |
+| Collection | Cloudflare Workers, Queues, private R2 snapshots, rules + MiniMax-M2.7 dual extraction |
 | Tests | Vitest, Testing Library and Playwright |
 | Production | Vercel; GitHub for code, reviews and scheduled quality checks |
 
@@ -50,6 +64,11 @@ npm run lint
 npm run typecheck
 npm test
 npm run validate:data
+npm run validate:manifests
+npm run validate:d1
+npm run test:ingestion
+npm run check:worker:catalog
+npm run check:worker:ingestion
 npm run build
 ```
 
@@ -63,8 +82,10 @@ npm run test:e2e
 ## Repository structure
 
 ```text
-content/data/                versioned sources and domain records
+content/data/                legacy/read-only Catalog compatibility snapshot
+content/source-manifests/    allowlisted official-source collection manifests
 docs/content-maintenance.md  editorial, translation and review workflow
+infra/d1/                    Pipeline and Catalog D1 migrations
 scripts/                     validation, link and data-health checks
 src/app/[locale]/            localized App Router pages
 src/app/api/feedback/        private feedback delivery endpoint
@@ -73,21 +94,27 @@ src/i18n/                    locale registry and launch messages
 src/lib/data/                schemas, formatters and server data loader
 tests/unit/                  data and browser-storage tests
 tests/e2e/                   multilingual critical-path smoke tests
+workers/catalog-api/         versioned public Catalog API Worker
+workers/ingestion/           collection, extraction, evidence and quarantine Worker
 ```
 
 ## Content updates
 
-Do not edit an application date, fee, requirement or scholarship term without opening the official source for the relevant cycle.
+Do not manually invent or copy an application date, fee, requirement, or scholarship
+term. Every dynamic fact belongs to an academic year/intake and must be traceable to a
+registered official source snapshot.
 
-1. Add or update the official record in `content/data/sources.json`.
-2. Reference its permanent source ID from the affected record.
-3. Set `verifiedAt`, `reviewAfter` and an honest `status`.
-4. Store unknown facts as `null`; use `not-announced` for an unpublished cycle.
-5. Update English first, then obtain human review for Chinese and Russian.
-6. Run `npm run validate:data` and the full quality gate.
-7. Inspect the Vercel Preview in all six public languages before merging.
+1. Register the official HTTPS source and its collection policy in the school's Source Manifest.
+2. Run it through snapshot, deterministic parsing, independent dual extraction,
+   evidence grounding, conflict, freshness, and release gates.
+3. Store unknown or rejected values as a non-`known` `FactStatus`; never substitute an old cycle.
+4. Publish a complete immutable Catalog Release and atomically advance the current pointer.
+5. Treat `content/data/*.json` as generated compatibility output after D1 cutover.
+6. Run the full data, migration, Worker, unit, type, lint, and build gates before deployment.
 
-Old cycles are archived rather than overwritten. Automation reports stale records and broken links but never modifies or publishes admissions facts. See the full [content maintenance policy](docs/content-maintenance.md).
+Old cycles are archived rather than overwritten. Automation may publish only facts that
+pass all automatic gates; failed fields stay value-less and link to the official entry.
+See the full [content maintenance policy](docs/content-maintenance.md).
 
 ## Vercel deployment
 
@@ -105,6 +132,10 @@ Old cycles are archived rather than overwritten. Automation reports stale record
 |---|---|
 | `NEXT_PUBLIC_SITE_URL` | Canonical production origin |
 | `CONTENT_PREVIEW` | Optional draft-content preview; keep `false` in Production |
+| `CATALOG_BACKEND` | `json`, `shadow`, or `d1` Catalog repository mode |
+| `CATALOG_API_URL` | Internal compatibility endpoint used during shadow/cutover |
+| `CATALOG_API_TOKEN` | Optional server-only bearer token for that endpoint |
+| `CATALOG_API_TOKEN_HOST` | Required exact hostname binding when the Catalog token is set |
 | `CONTACT_RECIPIENT` | Private destination email; never exposed to the client |
 | `RESEND_API_KEY` | Resend server API key |
 | `RESEND_FROM` | Verified Resend sender |
@@ -121,7 +152,8 @@ The feedback endpoint intentionally returns `502` in production if distributed r
 - `main` is the production branch; every pull request receives a Vercel Preview.
 - Tag each reviewed semester dataset as `data-YYYY-semester`.
 - Roll back application code from Vercel’s previous stable deployment.
-- Restore content using the Git tag or a focused revert; never delete historical admissions cycles.
+- Roll back Catalog data by atomically moving the pointer to the previous validated Release.
+- Restore checksum-verified D1/R2 exports into an isolated database before any production recovery.
 - Keep GitHub Pages disabled to avoid a duplicate, stale public copy.
 
 ## Creator
