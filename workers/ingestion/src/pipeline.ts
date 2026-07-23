@@ -14,6 +14,7 @@ import {
   hasEntityExtraction,
   loadSourceState,
   persistChangedResult,
+  persistSnapshotEntityExtraction,
   readRobotsCache,
   recordNoChange,
   writeRobotsCache,
@@ -696,6 +697,12 @@ export async function processIngestionJob(
     contentType,
     checkedAt,
   )
+  if (entityExtraction) {
+    await persistSnapshotEntityExtraction(environment, {
+      snapshot,
+      entityExtraction,
+    })
+  }
   const candidate = await buildCandidate(
     environment,
     manifest,
@@ -730,6 +737,5 @@ export async function processIngestionJob(
     snapshot,
     candidate,
     nextFetchAt: scheduledNextFetch,
-    entityExtraction: entityExtraction ?? undefined,
   })
 }

@@ -44,6 +44,49 @@ function ensureBatch(results: D1Result[], operation: string): void {
 
 const MAX_D1_BATCH_STATEMENTS = 80
 
+function snapshotPersistenceStatements(
+  database: IngestionEnv['INGESTION_DB'],
+  snapshot: SnapshotRecord,
+): D1PreparedStatement[] {
+  return [
+    database.prepare(
+      `INSERT OR IGNORE INTO ingestion_snapshots
+        (snapshot_id, source_id, r2_key, raw_sha256, canonical_sha256, content_type,
+         byte_length, final_url, fetched_at, etag, last_modified)
+       VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)`,
+    ).bind(
+      snapshot.snapshotId,
+      snapshot.sourceId,
+      snapshot.r2Key,
+      snapshot.rawSha256,
+      snapshot.canonicalSha256,
+      snapshot.contentType,
+      snapshot.byteLength,
+      snapshot.finalUrl,
+      snapshot.fetchedAt,
+      snapshot.etag,
+      snapshot.lastModified,
+    ),
+    ...(snapshot.derivative ? [
+      database.prepare(
+        `INSERT OR IGNORE INTO ingestion_snapshot_derivatives
+          (snapshot_id, source_id, derivative_kind, r2_key, content_sha256,
+           content_type, byte_length, created_at)
+         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)`,
+      ).bind(
+        snapshot.snapshotId,
+        snapshot.sourceId,
+        snapshot.derivative.kind,
+        snapshot.derivative.r2Key,
+        snapshot.derivative.contentSha256,
+        snapshot.derivative.contentType,
+        snapshot.derivative.byteLength,
+        snapshot.fetchedAt,
+      ),
+    ] : []),
+  ]
+}
+
 function entityPersistenceStatements(
   database: IngestionEnv['INGESTION_DB'],
   candidate: ExtractedEntityCandidate,
@@ -142,6 +185,17 @@ function entityPersistenceStatements(
   ]
 }
 
+async function persistInBatches(
+  database: IngestionEnv['INGESTION_DB'],
+  statements: D1PreparedStatement[],
+  operation: string,
+): Promise<void> {
+  for (let offset = 0; offset < statements.length; offset += MAX_D1_BATCH_STATEMENTS) {
+    const batch = statements.slice(offset, offset + MAX_D1_BATCH_STATEMENTS)
+    ensureBatch(await database.batch(batch), operation)
+  }
+}
+
 
 export async function hasEntityExtraction(
   environment: Pick<IngestionEnv, 'INGESTION_DB'>,
@@ -156,6 +210,48 @@ export async function hasEntityExtraction(
       LIMIT 1`,
   ).bind(sourceId, snapshotId, extractor).first<{ present: number }>()
   return row?.present === 1
+}
+
+export async function persistSnapshotEntityExtraction(
+  environment: Pick<IngestionEnv, 'INGESTION_DB'>,
+  parameters: {
+    snapshot: SnapshotRecord
+    entityExtraction: {
+      extractor: string
+      institutionId: string
+      candidates: ExtractedEntityCandidate[]
+    }
+  },
+): Promise<void> {
+  const { snapshot, entityExtraction } = parameters
+  const statements: D1PreparedStatement[] = [
+    ...snapshotPersistenceStatements(environment.INGESTION_DB, snapshot),
+    ...entityExtraction.candidates.flatMap((candidate) =>
+      entityPersistenceStatements(environment.INGESTION_DB, candidate)),
+    environment.INGESTION_DB.prepare(
+      `INSERT INTO entity_extraction_runs
+        (snapshot_id, source_id, institution_id, extractor, extraction_status,
+         candidate_count, issues_json, completed_at)
+       VALUES (?1, ?2, ?3, ?4, 'completed', ?5, '[]', ?6)
+       ON CONFLICT(snapshot_id, extractor) DO UPDATE SET
+         extraction_status = excluded.extraction_status,
+         candidate_count = excluded.candidate_count,
+         issues_json = excluded.issues_json,
+         completed_at = excluded.completed_at`,
+    ).bind(
+      snapshot.snapshotId,
+      snapshot.sourceId,
+      entityExtraction.institutionId,
+      entityExtraction.extractor,
+      entityExtraction.candidates.length,
+      snapshot.fetchedAt,
+    ),
+  ]
+  await persistInBatches(
+    environment.INGESTION_DB,
+    statements,
+    'persist snapshot entity extraction',
+  )
 }
 
 export async function loadSourceState(
