@@ -60,11 +60,20 @@ jobs:
       - name: Run publisher Worker tests
         run: npm run test:publisher
 
+      - name: Run release builder Worker tests
+        run: npm run test:release-builder
+
       - name: Validate ingestion Worker bundle and bindings
         run: npm run check:worker:ingestion
 
       - name: Validate publisher Worker bundle and bindings
         run: npm run check:worker:publisher
+
+      - name: Validate release builder Worker bundle and bindings
+        run: npm run check:worker:release-builder
+
+      - name: Validate Catalog API Worker bundle and bindings
+        run: npm run check:worker:catalog
 
       - name: Build production application
         run: npm run build
