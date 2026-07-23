@@ -281,7 +281,16 @@ export async function fetchWithValidatedRedirects(
     if (!location) {
       throw new IngestionError('Redirect response omitted Location', 'redirect_missing_location', false)
     }
-    const nextUrl = assertSafeRedirectUrl(new URL(location, currentUrl), manifest)
+    let nextUrl: URL
+    try {
+      nextUrl = assertSafeRedirectUrl(new URL(location, currentUrl), manifest)
+    } catch {
+      throw new IngestionError(
+        'Redirect target is not HTTPS or allowlisted',
+        'redirect_unsafe',
+        false,
+      )
+    }
     redirects.push(nextUrl)
     if (minimumRedirectDelayMs > 0) {
       await new Promise<void>((resolve) => setTimeout(resolve, minimumRedirectDelayMs))

@@ -7,7 +7,7 @@ import type {
   SourceManifestV1,
 } from './types'
 
-export const MINIMAX_PROMPT_SPEC_VERSION = 'studyinchina-minimax-dual-v1'
+export const MINIMAX_PROMPT_SPEC_VERSION = 'studyinchina-minimax-dual-v2'
 export const RULE_EXTRACTOR_VERSION = 'studyinchina-rules-v1'
 
 export const MINIMAX_SYSTEM_INSTRUCTIONS = [

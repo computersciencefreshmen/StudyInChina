@@ -4,6 +4,7 @@
   "main": "./src/index.ts",
   "compatibility_date": "2026-07-20",
   "workers_dev": true,
+  "preview_urls": false,
   "observability": { "enabled": true },
   "triggers": {
     "crons": ["17 * * * *"]
@@ -18,7 +19,7 @@
     "MINIMAX_MODEL": "MiniMax-M2.7",
     "MINIMAX_TIMEOUT_MS": "30000",
     "MINIMAX_MAX_INPUT_CHARS": "60000",
-    "MINIMAX_MAX_OUTPUT_TOKENS": "4096",
+    "MINIMAX_MAX_OUTPUT_TOKENS": "8192",
     "DOCUMENT_CONVERSION_TIMEOUT_MS": "45000",
     "DOCUMENT_MAX_TEXT_CHARACTERS": "1000000",
     "INFRA_FORECAST_CNY": "0"

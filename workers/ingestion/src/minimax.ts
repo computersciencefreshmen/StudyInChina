@@ -70,16 +70,38 @@ function isExtractionFact(value: unknown): value is ExtractionFact {
 }
 
 function parseEnvelope(value: string): ExtractionEnvelope {
-  const parsed = JSON.parse(stripCodeFence(value)) as unknown
-  if (!parsed || typeof parsed !== 'object') throw new Error('Extraction result is not an object')
-  const record = parsed as Record<string, unknown>
+  let parsed: unknown
+  try {
+    parsed = JSON.parse(stripCodeFence(value)) as unknown
+  } catch {
+    throw new IngestionError(
+      'MiniMax extraction output is not valid JSON',
+      'minimax_output_json_invalid',
+      true,
+    )
+  }
+  if (!parsed || typeof parsed !== 'object') {
+    throw new IngestionError(
+      'MiniMax extraction output is not an object',
+      'minimax_output_schema_invalid',
+      true,
+    )
+  }
+  const root = parsed as Record<string, unknown>
+  const record = root.output && typeof root.output === 'object' && !Array.isArray(root.output)
+    ? root.output as Record<string, unknown>
+    : root
   if (
     typeof record.schemaVersion !== 'string' ||
     typeof record.sourceId !== 'string' ||
     !Array.isArray(record.facts) ||
     !record.facts.every(isExtractionFact)
   ) {
-    throw new Error('Extraction result does not match the required envelope')
+    throw new IngestionError(
+      'MiniMax extraction output does not match the required envelope',
+      'minimax_output_schema_invalid',
+      true,
+    )
   }
   return {
     schemaVersion: record.schemaVersion,
@@ -106,6 +128,7 @@ function promptFor(
       role: 'user',
       content: JSON.stringify({
         task: `independent-${pass}-extraction`,
+        responseContract: 'Return the output object itself as the JSON root. Do not wrap it in an output property.',
         output: {
           schemaVersion: manifest.extraction.schemaVersion,
           sourceId: manifest.id,
@@ -183,7 +206,7 @@ async function callMiniMax(
         messages: promptFor(pass, manifest, sourceUrl, sourceText),
       }),
       cache: 'no-store',
-      redirect: 'error',
+      redirect: 'manual',
       signal: controller.signal,
     })
     if (!response.ok) {
@@ -194,15 +217,37 @@ async function callMiniMax(
       )
     }
     const responseBytes = await readBoundedBody(response, 1024 * 1024, controller.signal)
-    const payload = JSON.parse(new TextDecoder().decode(responseBytes)) as unknown
-    return parseEnvelope(decodeResponsePayload(payload))
+    let payload: unknown
+    try {
+      payload = JSON.parse(new TextDecoder().decode(responseBytes)) as unknown
+    } catch {
+      throw new IngestionError(
+        `MiniMax ${pass} response is not valid JSON`,
+        'minimax_response_json_invalid',
+        true,
+      )
+    }
+    let output: string
+    try {
+      output = decodeResponsePayload(payload)
+    } catch {
+      throw new IngestionError(
+        `MiniMax ${pass} response does not contain supported output`,
+        'minimax_response_shape_invalid',
+        true,
+      )
+    }
+    return parseEnvelope(output)
   } catch (error) {
     if (error instanceof IngestionError) throw error
     const timedOut = error instanceof Error && error.name === 'AbortError'
+    const detail = error instanceof Error ? error.message.slice(0, 300) : 'unknown runtime error'
     throw new IngestionError(
-      timedOut ? `MiniMax ${pass} extraction timed out` : `MiniMax ${pass} extraction failed`,
-      timedOut ? 'minimax_timeout' : 'minimax_invalid_response',
-      timedOut,
+      timedOut
+        ? `MiniMax ${pass} extraction timed out`
+        : `MiniMax ${pass} transport failed: ${detail}`,
+      timedOut ? 'minimax_timeout' : 'minimax_transport_error',
+      true,
     )
   } finally {
     clearTimeout(timeout)

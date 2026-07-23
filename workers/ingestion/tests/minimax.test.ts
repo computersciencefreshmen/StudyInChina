@@ -79,11 +79,86 @@ test('MiniMax adapter performs two independent passes through a configurable end
   )
   assert.equal(result.status, 'dual-pass')
   assert.deepEqual(passes.sort(), ['primary', 'secondary'])
-  assert.deepEqual(redirectModes, ['error', 'error'])
+  assert.deepEqual(redirectModes, ['manual', 'manual'])
   for (const body of requestBodies) {
     assert.equal(body.response_format, undefined)
     assert.equal(body.temperature, undefined)
     assert.equal(body.reasoning_split, true)
     assert.equal(body.max_completion_tokens, 4_096)
   }
+})
+
+test('MiniMax adapter classifies malformed model JSON as retryable without exposing output', async () => {
+  const fetcher = async () => Response.json({
+    choices: [{ message: { content: '{"schemaVersion":' } }],
+  })
+  const environment = {
+    MINIMAX_API_URL: 'https://api.minimaxi.com/v1/chat/completions',
+    MINIMAX_API_KEY: 'test-only',
+    MINIMAX_MODEL: 'minimax-test',
+  } as IngestionEnv
+
+  await assert.rejects(
+    runDualMiniMaxExtraction(
+      environment,
+      sourceManifest(),
+      'https://admissions.example.edu.cn/programs/computer-science',
+      sourceText,
+      fetcher,
+    ),
+    (error: unknown) => {
+      assert.equal((error as { code?: string }).code, 'minimax_output_json_invalid')
+      assert.equal((error as { retryable?: boolean }).retryable, true)
+      assert.equal(String((error as Error).message).includes('schemaVersion'), false)
+      return true
+    },
+  )
+})
+
+test('MiniMax adapter classifies request failures as retryable transport errors', async () => {
+  const fetcher = async () => {
+    throw new TypeError('controlled transport failure')
+  }
+  const environment = {
+    MINIMAX_API_URL: 'https://api.minimaxi.com/v1/chat/completions',
+    MINIMAX_API_KEY: 'test-only',
+    MINIMAX_MODEL: 'minimax-test',
+  } as IngestionEnv
+
+  await assert.rejects(
+    runDualMiniMaxExtraction(
+      environment,
+      sourceManifest(),
+      'https://admissions.example.edu.cn/programs/computer-science',
+      sourceText,
+      fetcher,
+    ),
+    (error: unknown) => {
+      assert.equal((error as { code?: string }).code, 'minimax_transport_error')
+      assert.equal((error as { retryable?: boolean }).retryable, true)
+      assert.match(String((error as Error).message), /controlled transport failure/)
+      return true
+    },
+  )
+})
+
+test('MiniMax adapter accepts a single output wrapper before applying the same envelope gate', async () => {
+  const fetcher = async () => Response.json({
+    choices: [{ message: { content: JSON.stringify({ output: extraction }) } }],
+  })
+  const environment = {
+    MINIMAX_API_URL: 'https://api.minimaxi.com/v1/chat/completions',
+    MINIMAX_API_KEY: 'test-only',
+    MINIMAX_MODEL: 'minimax-test',
+  } as IngestionEnv
+
+  const result = await runDualMiniMaxExtraction(
+    environment,
+    sourceManifest(),
+    'https://admissions.example.edu.cn/programs/computer-science',
+    sourceText,
+    fetcher,
+  )
+  assert.equal(result.status, 'dual-pass')
+  assert.equal(result.facts.length, 2)
 })

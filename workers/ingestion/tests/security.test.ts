@@ -136,7 +136,11 @@ test('validated fetch rejects a redirect outside the manifest before requesting 
       manifest,
       { method: 'GET' },
     ),
-    /forbidden|allowlisted/i,
+    (error: unknown) => {
+      assert.equal((error as { code?: string }).code, 'redirect_unsafe')
+      assert.equal((error as { retryable?: boolean }).retryable, false)
+      return true
+    },
   )
   assert.equal(calls, 1)
 })
