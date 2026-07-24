@@ -10,12 +10,14 @@ if ($StartChunk -lt 1) { throw "StartChunk must be at least 1." }
 if ($MaxChunkAttempts -lt 1 -or $MaxChunkAttempts -gt 10) {
   throw "MaxChunkAttempts must be between 1 and 10."
 }
-$root = Resolve-Path (Join-Path $PSScriptRoot "..\..")
-$tsx = Join-Path $root "node_modules\.bin\tsx.cmd"
-$wrangler = Join-Path $root "node_modules\.bin\wrangler.cmd"
-$commandRunner = Join-Path $root "scripts\cloudflare\execute-d1-command-file.mjs"
-$node = (Get-Command node.exe -ErrorAction Stop).Source
-$config = Join-Path $root "workers\ingestion\wrangler.jsonc"
+$root = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
+$isWindowsPlatform = $env:OS -eq "Windows_NT"
+$tsxName = if ($isWindowsPlatform) { "tsx.cmd" } else { "tsx" }
+$tsx = Join-Path $root (Join-Path "node_modules/.bin" $tsxName)
+$wrangler = Join-Path $root "node_modules/wrangler/bin/wrangler.js"
+$commandRunner = Join-Path $root "scripts/cloudflare/execute-d1-command-file.mjs"
+$node = (Get-Command node -CommandType Application -ErrorAction Stop).Source
+$config = Join-Path $root "workers/ingestion/wrangler.jsonc"
 $output = Join-Path $root $OutputDirectory
 $targetFlag = if ($Remote) { "--remote" } else { "--local" }
 $maxChunkLength = 24000
@@ -24,13 +26,13 @@ if (-not (Test-Path -LiteralPath $tsx)) { throw "tsx is not installed. Run npm c
 if (-not (Test-Path -LiteralPath $wrangler)) { throw "wrangler is not installed. Run npm ci first." }
 if (-not (Test-Path -LiteralPath $commandRunner)) { throw "D1 command runner is missing." }
 
-$manifestPath = (& $tsx (Join-Path $root "scripts\ingestion\build-pipeline-bootstrap.ts") --output $output | Select-Object -Last 1).Trim()
+$manifestPath = (& $tsx (Join-Path $root "scripts/ingestion/build-pipeline-bootstrap.ts") --output $output | Select-Object -Last 1).Trim()
 if ($LASTEXITCODE -ne 0) { throw "Pipeline bootstrap build failed." }
 if (-not (Test-Path -LiteralPath $manifestPath)) { throw "Pipeline bootstrap metadata was not generated." }
 $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
 if (-not (Test-Path -LiteralPath $manifest.sqlPath)) { throw "Pipeline bootstrap SQL was not generated." }
 
-& $wrangler d1 migrations apply INGESTION_DB --config $config $targetFlag
+& $node $wrangler d1 migrations apply INGESTION_DB --config $config $targetFlag
 if ($LASTEXITCODE -ne 0) { throw "Pipeline D1 migration failed." }
 
 $sqlText = Get-Content -Raw -LiteralPath $manifest.sqlPath
@@ -64,7 +66,7 @@ for ($chunkIndex = 0; $chunkIndex -lt $chunkPaths.Count; $chunkIndex += 1) {
     if ($Remote) {
       & $node $commandRunner $chunkPath $config $targetFlag
     } else {
-      & $wrangler d1 execute INGESTION_DB --file $chunkPath --config $config $targetFlag
+      & $node $wrangler d1 execute INGESTION_DB --file $chunkPath --config $config $targetFlag
     }
     $exitCode = $LASTEXITCODE
     if ($exitCode -eq 0) { break }
@@ -81,7 +83,7 @@ $verification = "SELECT " +
   "(SELECT COUNT(*) FROM ingestion_sources) AS ingestion_sources, " +
   "(SELECT COUNT(*) FROM promotion_source_bindings WHERE enabled = 1) AS enabled_source_bindings, " +
   "(SELECT COUNT(*) FROM programs) AS programs;"
-& $wrangler d1 execute INGESTION_DB --command $verification --config $config $targetFlag
+& $node $wrangler d1 execute INGESTION_DB --command $verification --config $config $targetFlag
 if ($LASTEXITCODE -ne 0) { throw "Pipeline bootstrap verification failed." }
 
 Write-Output (

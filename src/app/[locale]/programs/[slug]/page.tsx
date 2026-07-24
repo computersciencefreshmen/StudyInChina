@@ -10,7 +10,7 @@ import { getApplicationState, selectAdmissionCycle } from '@/lib/data/admission'
 import { formatCny, formatDate, localize } from '@/lib/data/format'
 import { getTodayDate } from '@/lib/data/freshness'
 import { degreeLabels, disciplineLabels, languageLabel } from '@/lib/data/labels'
-import { getData, getProgramBySlug } from '@/lib/data/load'
+import { getCatalogData, getCatalogProgramBySlug, getData } from '@/lib/data/load'
 import type { AdmissionCycle } from '@/lib/data/types'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
@@ -22,7 +22,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale: raw, slug } = await params
   const locale = requireLocale(raw) || 'en'
-  const program = getProgramBySlug(slug)
+  const program = await getCatalogProgramBySlug(slug)
   if (!program) return {}
 
   return pageMetadata(
@@ -42,12 +42,12 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   const locale = requireLocale(raw)
   if (!locale) notFound()
 
-  const program = getProgramBySlug(slug)
-  if (!program?.details || program.durationMonths === null) notFound()
+  const program = await getCatalogProgramBySlug(slug)
+  if (!program) notFound()
   const details = program.details
 
   const messages = getMessages(locale)
-  const data = getData()
+  const data = await getCatalogData()
   const university = data.universities.find((item) => item.id === program.universityId)
   if (!university) notFound()
 
@@ -56,7 +56,75 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
     .filter((item) => item.programId === program.id)
     .sort((left, right) => cycleRecency(right).localeCompare(cycleRecency(left)))
   const cycle = cycles[0]
-  if (!cycle) notFound()
+  if (!details || program.durationMonths === null || !cycle) {
+    const sources = data.sources.filter((source) => program.sourceIds.includes(source.id))
+    const lastSourceCheckedAt = sources.map((source) => source.accessedAt).sort().at(-1)
+      ?? program.verifiedAt
+    return <>
+      <PageHero
+        variant="compact"
+        eyebrow={`${degreeLabels(locale)[program.degreeLevel]} \u00b7 ${disciplineLabels(locale)[program.discipline]}`}
+        title={localize(program.name, locale)}
+        description={<>
+          <span>{localize(university.name, locale)}</span>
+          {city ? <span> {'\u00b7'} {localize(city.name, locale)}</span> : null}
+        </>}
+        actions={<a className="atlas-button atlas-button--secondary atlas-button--medium" href={program.programUrl} target="_blank" rel="noreferrer">
+          {messages.common.officialSource}{' \u2197'}
+        </a>}
+        meta={<VerificationBadge
+          status={program.status}
+          verifiedAt={program.verifiedAt}
+          locale={locale}
+          verifiedDateLabel={messages.common.lastVerified}
+          labels={{
+            verified: messages.common.verified,
+            stale: messages.common.stale,
+            draft: messages.common.draft,
+            archived: messages.common.archived,
+          }}
+        />}
+      />
+      <section className="atlas-container atlas-section detail-layout">
+        <div className="detail-main">
+          <article className="prose-panel">
+            <h2>{messages.programs.overview}</h2>
+            <div className="notice">{messages.programs.notAnnounced}</div>
+            <dl className="detail-facts">
+              <div><dt>{messages.programs.university}</dt><dd><a href={`/${locale}/universities/${university.slug}`}>{localize(university.name, locale)}</a></dd></div>
+              <div><dt>{messages.common.duration}</dt><dd>{messages.common.unknown}</dd></div>
+              <div><dt>{messages.common.language}</dt><dd>{program.teachingLanguages.length
+                ? program.teachingLanguages.map((item) => languageLabel(item, locale)).join(', ')
+                : messages.common.unknown}</dd></div>
+              <div><dt>{messages.programs.applicationStatus}</dt><dd>{messages.programs.notAnnounced}</dd></div>
+              <div><dt>{messages.programs.opens}</dt><dd>{messages.common.unknown}</dd></div>
+              <div><dt>{messages.common.deadline}</dt><dd>{messages.common.unknown}</dd></div>
+              <div><dt>{messages.common.tuition}</dt><dd>{messages.common.unknown}</dd></div>
+            </dl>
+          </article>
+        </div>
+        <aside className="detail-aside">
+          <Card accent="jade">
+            <h2 className="atlas-card__title">{messages.programs.sources}</h2>
+            <ul className="source-list">
+              {sources.map((source) => <li key={source.id}>
+                <a href={source.url} target="_blank" rel="noreferrer">{source.title}{' \u2197'}</a>
+                <small>{source.publisher} {'\u00b7'} {formatDate(source.accessedAt, locale, '\u2014')}</small>
+              </li>)}
+            </ul>
+            <SourceTransparency
+              locale={locale}
+              lastCheckedAt={lastSourceCheckedAt}
+              lastCheckedLabel={messages.common.sourcesLastChecked}
+              notice={messages.common.automatedCollectionNotice}
+              reportErrorLabel={messages.common.reportInformationError}
+              officialLink={{ href: program.programUrl, label: messages.common.officialSource }}
+            />
+          </Card>
+        </aside>
+      </section>
+    </>
+  }
 
   const today = getTodayDate()
   const applicationState = getApplicationState(cycle, today)
@@ -155,9 +223,11 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
         {city ? <span> · {localize(city.name, locale)}</span> : null}
       </>}
       actions={<>
-        <a className={`atlas-button atlas-button--${isAcceptingApplications ? 'primary' : 'secondary'} atlas-button--medium`} href={program.applyUrl} target="_blank" rel="noreferrer">
+        {program.applyUrl ? <a className={`atlas-button atlas-button--${isAcceptingApplications ? 'primary' : 'secondary'} atlas-button--medium`} href={program.applyUrl} target="_blank" rel="noreferrer">
           {isAcceptingApplications ? messages.common.applyOfficial : messages.programs.viewApplicationPortal} ↗
-        </a>
+        </a> : <a className="atlas-button atlas-button--secondary atlas-button--medium" href={program.programUrl} target="_blank" rel="noreferrer">
+          {messages.common.officialSource}{' \u2197'}
+        </a>}
         <FavoriteButton programId={program.id} saveLabel={messages.common.save} savedLabel={messages.common.saved} />
       </>}
       meta={<VerificationBadge

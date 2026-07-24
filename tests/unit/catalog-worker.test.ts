@@ -16,14 +16,26 @@ const release = {
   content_sha256: 'a'.repeat(64),
 }
 
-function environment(): CatalogApiEnv {
+function environment(options: {
+  compatibility?: boolean
+  corruptCompatibilityArtifact?: boolean
+} = {}): CatalogApiEnv {
   const envelope = JSON.stringify({
     data: { sources: [], cities: [], universities: [], programs: [], admissionCycles: [], scholarships: [] },
     meta: { release: { id: release.release_id, dataDate: release.data_date, generatedAt: release.generated_at, recordCounts: JSON.parse(release.counts_json) } },
   })
   const activeRelease = {
     ...release,
-    content_sha256: createHash('sha256').update(envelope).digest('hex'),
+    content_sha256: 'b'.repeat(64),
+    compatibility_artifact_key: options.compatibility === false
+      ? null
+      : `releases/${release.release_id}/compat-envelope.json`,
+    compatibility_content_sha256: options.compatibility === false
+      ? null
+      : createHash('sha256').update(envelope).digest('hex'),
+    compatibility_byte_length: options.compatibility === false
+      ? null
+      : new TextEncoder().encode(envelope).byteLength,
   }
   const statement: D1PreparedStatement = {
     bind: () => statement,
@@ -34,7 +46,11 @@ function environment(): CatalogApiEnv {
     CATALOG_DB: { prepare: () => statement },
     RELEASES_BUCKET: {
       get: async (key): Promise<R2ObjectBody | null> => key.endsWith('/compat-envelope.json')
-        ? { body: new Response(envelope).body }
+        ? {
+            body: new Response(
+              options.corruptCompatibilityArtifact ? `${envelope} ` : envelope,
+            ).body,
+          }
         : null,
     },
     CATALOG_API_TOKEN: 'test-secret',
@@ -69,8 +85,30 @@ describe('catalog API worker', () => {
     expect(response.status).toBe(200)
     expect(response.headers.get('x-catalog-release')).toBe(release.release_id)
     expect(body.meta.release.id).toBe(release.release_id)
+
+  })
+  it('fails closed when a normalized release has no lossless compatibility artifact', async () => {
+    const response = await worker.fetch(new Request(
+      'https://catalog.test/internal/v1/catalog-bundle',
+      { headers: { authorization: 'Bearer test-secret' } },
+    ), environment({ compatibility: false }))
+    expect(response.status).toBe(503)
+    await expect(response.json()).resolves.toEqual({
+      error: { code: 'release_compatibility_unavailable' },
+    })
   })
 
+
+  it('uses the compatibility checksum instead of the normalized artifact checksum', async () => {
+    const response = await worker.fetch(new Request(
+      'https://catalog.test/internal/v1/catalog-bundle',
+      { headers: { authorization: 'Bearer test-secret' } },
+    ), environment({ corruptCompatibilityArtifact: true }))
+    expect(response.status).toBe(503)
+    await expect(response.json()).resolves.toEqual({
+      error: { code: 'release_artifact_invalid' },
+    })
+  })
   it('bounds public API query input before issuing a catalog list query', async () => {
     const response = await worker.fetch(
       new Request(`https://catalog.test/api/v1/programs?q=${'x'.repeat(201)}`),

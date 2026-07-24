@@ -78,6 +78,17 @@ describe('Catalog D1 normalized v1 API', () => {
     const artifacts = buildLegacyRelease(readLegacyBundle())
     compatibilityEnvelope = artifacts.envelope
     database.exec(artifacts.sql)
+    database.prepare(`
+      INSERT OR IGNORE INTO release_compatibility_artifacts (
+        release_id, artifact_format, artifact_key, content_sha256, byte_length, created_at
+      ) VALUES (?, 'studyinchina.frontend.bundle.v1', ?, ?, ?, ?)
+    `).run(
+      artifacts.release.id,
+      artifacts.r2Key,
+      artifacts.contentSha256,
+      new TextEncoder().encode(compatibilityEnvelope).byteLength,
+      artifacts.release.generatedAt,
+    )
     r2Reads = 0
     queries = []
     environment = {
@@ -235,6 +246,64 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(r2Reads).toBe(0)
   })
 
+  it('lists and resolves an unannounced zero-cycle scholarship without fabricated values', async () => {
+    database.exec('BEGIN')
+    try {
+      const scholarship = database.prepare(`
+        SELECT visible.scholarship_id, record.slug
+        FROM current_scholarships AS visible
+        JOIN current_catalog_records AS record
+          ON record.release_id = visible.release_id
+         AND record.record_id = visible.scholarship_id
+        WHERE record.slug IS NOT NULL
+          AND NOT EXISTS (
+            SELECT 1 FROM scholarship_cycles AS cycle
+            WHERE cycle.release_id = visible.release_id
+              AND cycle.scholarship_id = visible.scholarship_id
+          )
+        ORDER BY visible.scholarship_id
+        LIMIT 1
+      `).get() as { scholarship_id: string; slug: string }
+      database.prepare(`
+        DELETE FROM record_field_status
+        WHERE record_id = ?
+          AND (
+            field_path IN ('deadline', 'closes_on')
+            OR field_path LIKE 'coverage.%'
+          )
+      `).run(scholarship.scholarship_id)
+
+      const listResponse = await worker.fetch(
+        new Request('https://catalog.test/api/v1/scholarships?limit=100'),
+        environment,
+      )
+      const list = await listResponse.json() as ApiEnvelopeDto<ScholarshipDto[]>
+      const listed = list.data.find((item) => item.id === scholarship.scholarship_id)!
+      expect(listResponse.status).toBe(200)
+      expect(listed.attributes).toMatchObject({
+        deadline: null,
+        coverage: { tuition: null, accommodation: null, insurance: null, stipendCnyPerMonth: null },
+      })
+      expect(listed.fieldMeta).toMatchObject({
+        deadline: { status: 'officially_not_announced' },
+        'coverage.tuition': { status: 'officially_not_announced' },
+        'coverage.accommodation': { status: 'officially_not_announced' },
+        'coverage.insurance': { status: 'officially_not_announced' },
+        'coverage.stipendCnyPerMonth': { status: 'officially_not_announced' },
+      })
+
+      const detailResponse = await worker.fetch(
+        new Request(`https://catalog.test/api/v1/scholarships/${scholarship.slug}`),
+        environment,
+      )
+      const detail = await detailResponse.json() as ApiEnvelopeDto<ScholarshipDto>
+      expect(detailResponse.status).toBe(200)
+      expect(detail.data).toEqual(listed)
+    } finally {
+      database.exec('ROLLBACK')
+    }
+  })
+
   it('lists identity-only programs as not announced without exposing a cycle or route', async () => {
     database.exec('BEGIN')
     try {
@@ -259,6 +328,24 @@ describe('Catalog D1 normalized v1 API', () => {
         SET cycle_status = 'archived'
         WHERE program_id = ?
       `).run(program.program_id)
+      database.prepare(`
+        UPDATE programs
+        SET duration_min = NULL, duration_max = NULL, duration_unit = NULL
+        WHERE program_id = ?
+      `).run(program.program_id)
+      database.prepare(`
+        DELETE FROM record_field_status
+        WHERE record_id = ?
+          AND field_path IN (
+            'duration_min', 'durationMonths', 'duration_max', 'durationMonthsMax',
+            'duration_unit', 'apply_url', 'applyUrl', 'teachingLanguages',
+            'teaching_languages'
+          )
+      `).run(program.program_id)
+      database.prepare(`
+        DELETE FROM program_teaching_languages WHERE program_id = ?
+      `).run(program.program_id)
+
 
       const response = await worker.fetch(new Request(
         `https://catalog.test/api/v1/programs?institution=${program.institution_id}&applicationState=not-announced&limit=100`,
@@ -266,6 +353,28 @@ describe('Catalog D1 normalized v1 API', () => {
       const programs = await response.json() as ApiEnvelopeDto<ProgramDto[]>
       expect(response.status).toBe(200)
       expect(programs.data.map((item) => item.id)).toContain(program.program_id)
+
+      const listed = programs.data.find((item) => item.id === program.program_id)!
+      expect(listed.attributes).toMatchObject({
+        duration: { minimum: null, maximum: null, unit: null },
+        teachingLanguageCodes: [],
+        applyUrl: null,
+      })
+      expect(listed.fieldMeta).toMatchObject({
+        'duration.minimum': { status: 'officially_not_announced' },
+        'duration.maximum': { status: 'officially_not_announced' },
+        'duration.unit': { status: 'officially_not_announced' },
+        teachingLanguageCodes: { status: 'officially_not_announced' },
+        applyUrl: { status: 'officially_not_announced' },
+      })
+
+      const detailResponse = await worker.fetch(
+        new Request(`https://catalog.test/api/v1/programs/${program.slug}`),
+        environment,
+      )
+      const detail = await detailResponse.json() as ApiEnvelopeDto<ProgramDto>
+      expect(detailResponse.status).toBe(200)
+      expect(detail.data).toEqual(listed)
 
       const cyclesResponse = await worker.fetch(
         new Request(`https://catalog.test/api/v1/programs/${program.slug}/cycles`),
@@ -392,7 +501,10 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(response.status).toBe(200)
     expect(r2Reads).toBe(1)
     expect(createHash('sha256').update(await response.text()).digest('hex')).toBe(
-      database.prepare('SELECT content_sha256 FROM current_release').get()!.content_sha256,
+      database.prepare(`
+        SELECT content_sha256 FROM release_compatibility_artifacts
+        WHERE release_id = (SELECT release_id FROM current_release)
+      `).get()!.content_sha256,
     )
   })
 })

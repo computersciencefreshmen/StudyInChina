@@ -44,9 +44,9 @@ function hasInternalAccess(request: Request, env: CatalogApiEnv) {
 async function getActiveRelease(env: CatalogApiEnv): Promise<ActiveReleaseRow | null> {
   return env.CATALOG_DB.prepare(`
     SELECT
-      release_id,
-      data_date,
-      generated_at,
+      release.release_id,
+      release.data_date,
+      release.generated_at,
       json_object(
         'sources', (SELECT COUNT(*) FROM current_source_summaries),
         'cities', (
@@ -57,8 +57,13 @@ async function getActiveRelease(env: CatalogApiEnv): Promise<ActiveReleaseRow | 
         'admissionCycles', (SELECT COUNT(*) FROM current_program_cycles),
         'scholarships', (SELECT COUNT(*) FROM current_scholarships)
       ) AS counts_json,
-      content_sha256
-    FROM current_release
+      release.content_sha256,
+      compatibility.artifact_key AS compatibility_artifact_key,
+      compatibility.content_sha256 AS compatibility_content_sha256,
+      compatibility.byte_length AS compatibility_byte_length
+    FROM current_release AS release
+    LEFT JOIN release_compatibility_artifacts AS compatibility
+      ON compatibility.release_id = release.release_id
     LIMIT 1
   `).first<ActiveReleaseRow>()
 }
@@ -247,6 +252,12 @@ async function publicCatalogResponse(request: Request, environment: CatalogApiEn
       limit: integerParam(url.searchParams, 'limit', 1, 100),
     }), etag)
   }
+  if (resource === 'scholarships' && parts.length === 4) {
+    const result = await api.getScholarship(safeSlug(parts[3]!))
+    return result
+      ? publicResponse(request, result, etag)
+      : json({ error: { code: 'not_found' } }, 404)
+  }
   if (resource === 'scholarships' && parts.length === 5 && parts[4] === 'cycles') {
     const result = await api.getScholarshipCycles(safeSlug(parts[3]!))
     return result
@@ -289,17 +300,40 @@ async function internalBundleResponse(request: Request, env: CatalogApiEnv) {
   if (!release || !RELEASE_ID_PATTERN.test(release.release_id)) {
     return json({ error: { code: 'release_unavailable' } }, 503)
   }
-  const etag = `"${release.content_sha256}"`
+  if (
+    !release.compatibility_artifact_key
+    || !release.compatibility_content_sha256
+    || release.compatibility_byte_length === null
+  ) {
+    return json({ error: { code: 'release_compatibility_unavailable' } }, 503)
+  }
+  const expectedKey = `releases/${release.release_id}/compat-envelope.json`
+  if (
+    release.compatibility_artifact_key !== expectedKey
+    || !/^[a-f0-9]{64}$/u.test(release.compatibility_content_sha256)
+    || release.compatibility_byte_length < 2
+    || release.compatibility_byte_length > MAX_RELEASE_ARTIFACT_BYTES
+  ) {
+    return json({ error: { code: 'release_compatibility_invalid' } }, 503)
+  }
+  const etag = `"${release.compatibility_content_sha256}"`
   if (request.headers.get('if-none-match') === etag) {
     return new Response(null, {
       status: 304,
       headers: { ETag: etag, 'Cache-Control': PRIVATE_CACHE },
     })
   }
-  const artifact = await env.RELEASES_BUCKET.get(
-    `releases/${release.release_id}/compat-envelope.json`,
-  )
+  const artifact = await env.RELEASES_BUCKET.get(release.compatibility_artifact_key)
   if (!artifact) return json({ error: { code: 'release_artifact_missing' } }, 503)
+  let bytes: Uint8Array
+  try {
+    bytes = await verifiedArtifactBytes(artifact, release.compatibility_content_sha256)
+    if (bytes.byteLength !== release.compatibility_byte_length) {
+      throw new Error('release compatibility artifact size mismatch')
+    }
+  } catch {
+    return json({ error: { code: 'release_artifact_invalid' } }, 503)
+  }
   const headers = {
     'Cache-Control': PRIVATE_CACHE,
     'Content-Type': 'application/json; charset=utf-8',
@@ -307,7 +341,6 @@ async function internalBundleResponse(request: Request, env: CatalogApiEnv) {
     'X-Catalog-Release': release.release_id,
   }
   if (request.method === 'HEAD') return new Response(null, { status: 200, headers })
-  const bytes = await verifiedArtifactBytes(artifact, release.content_sha256)
   return new Response(Uint8Array.from(bytes).buffer, {
     status: 200,
     headers,

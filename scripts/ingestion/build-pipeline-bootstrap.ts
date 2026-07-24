@@ -97,6 +97,7 @@ const CONTENT_SOURCE_KIND: Record<Source['kind'], string> = {
   scholarship: 'scholarship',
   government: 'government',
   city: 'city',
+  other: 'other',
 }
 
 const SOURCE_KIND_PRIORITY: Record<string, number> = {
@@ -213,10 +214,11 @@ function localizedStatements(
   statements: string[],
   recordId: string,
   fieldName: string,
-  value: LocalizedText,
+  value: LocalizedText | null,
   generatedAt: string,
 ): number {
   let count = 0
+  if (!value) return 0
   for (const [locale, text] of Object.entries(value).sort(([left], [right]) => left.localeCompare(right))) {
     if (!text) continue
     count += 1
@@ -250,9 +252,15 @@ function localizedListStatements(
   generatedAt: string,
 ): number {
   const locales = [...new Set(values.flatMap((value) => Object.keys(value)))].sort()
+  const localizedValue = (value: LocalizedText, locale: string) => (
+    value[locale as keyof LocalizedText]
+    ?? value.en
+    ?? Object.values(value).find((candidate): candidate is string => Boolean(candidate))
+    ?? ''
+  )
   const localized = Object.fromEntries(locales.map((locale) => [
     locale,
-    values.map((value) => value[locale as keyof LocalizedText] ?? value.en).join('\n'),
+    values.map((value) => localizedValue(value, locale)).filter(Boolean).join('\n'),
   ])) as LocalizedText
   return localizedStatements(statements, recordId, fieldName, localized, generatedAt)
 }
@@ -265,7 +273,7 @@ INSERT INTO locations (
   region_code, latitude, longitude
 ) VALUES (
   ${sqlValue(city.id)}, NULL, 'city', 'CN', ${sqlValue(city.region)},
-  ${sqlValue(city.coordinates.lat)}, ${sqlValue(city.coordinates.lng)}
+  ${sqlValue(city.coordinates?.lat ?? null)}, ${sqlValue(city.coordinates?.lng ?? null)}
 )
 ON CONFLICT(record_id) DO UPDATE SET
   parent_location_id = excluded.parent_location_id,

@@ -36,4 +36,7 @@ export type ActiveReleaseRow = {
   generated_at: string
   counts_json: string
   content_sha256: string
+  compatibility_artifact_key: string | null
+  compatibility_content_sha256: string | null
+  compatibility_byte_length: number | null
 }

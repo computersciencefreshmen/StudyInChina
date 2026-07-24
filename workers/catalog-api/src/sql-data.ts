@@ -171,7 +171,7 @@ export class RecordDecorations {
     )[0]
     const status = identity
       ? (fallbackSource ? 'known' : 'source_unavailable')
-      : (field?.field_status ?? 'source_unavailable')
+      : (field?.field_status ?? (fallbackSource ? 'officially_not_announced' : 'source_unavailable'))
     return {
       status,
       officialUrl: fallbackSource?.url ?? '',

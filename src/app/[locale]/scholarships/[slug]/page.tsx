@@ -4,7 +4,7 @@ import { Badge, Card, PageHero, VerificationBadge } from '@/components/ui'
 import { launchLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 import { formatCny, formatDate, localize } from '@/lib/data/format'
-import { getData, getScholarshipBySlug } from '@/lib/data/load'
+import { getCatalogData, getCatalogScholarshipBySlug, getData } from '@/lib/data/load'
 import { coverageLabel, providerLabel } from '@/lib/data/scholarship'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
@@ -22,7 +22,7 @@ export async function generateMetadata({
 }) {
   const { locale: raw, slug } = await params
   const locale = requireLocale(raw) || 'en'
-  const item = getScholarshipBySlug(slug)
+  const item = await getCatalogScholarshipBySlug(slug)
   if (!item) return {}
 
   return pageMetadata(
@@ -42,11 +42,11 @@ export default async function ScholarshipDetail({
   const locale = requireLocale(raw)
   if (!locale) notFound()
 
-  const item = getScholarshipBySlug(slug)
+  const item = await getCatalogScholarshipBySlug(slug)
   if (!item) notFound()
 
   const messages = getMessages(locale)
-  const data = getData()
+  const data = await getCatalogData()
   const universities = data.universities.filter((university) => (
     item.universityIds.includes(university.id)
   ))
@@ -61,7 +61,7 @@ export default async function ScholarshipDetail({
       eyebrow={providerLabel(item.providerType, locale)}
       title={localize(item.name, locale)}
       description={localize(item.summary, locale)}
-      actions={(
+      actions={item.applicationUrl ? (
         <a
           className="atlas-button atlas-button--primary atlas-button--medium"
           href={item.applicationUrl}
@@ -70,7 +70,7 @@ export default async function ScholarshipDetail({
         >
           {messages.common.applyOfficial} ↗
         </a>
-      )}
+      ) : undefined}
       meta={(
         <VerificationBadge
           status={item.status}

@@ -11,6 +11,6 @@ export function ScholarshipCard({ scholarship, locale, messages }: { scholarship
     <div><h3 className="record-card__title">{localize(scholarship.name, locale)}</h3></div>
     <p className="record-card__summary">{localize(scholarship.summary, locale)}</p>
     <dl className="record-facts"><div><dt>{messages.scholarships.tuition}</dt><dd>{coverageLabel(scholarship.coverage.tuition, locale)}</dd></div><div><dt>{messages.scholarships.stipend}</dt><dd>{formatCny(scholarship.coverage.stipendCnyPerMonth, locale, messages.common.unknown)}</dd></div><div><dt>{messages.common.deadline}</dt><dd>{formatDate(scholarship.deadline, locale, messages.common.unknown)}</dd></div><div><dt>{messages.common.university}</dt><dd>{scholarship.universityIds.length || messages.common.all}</dd></div></dl>
-    <div className="record-card__actions"><LinkButton href={`/${locale}/scholarships/${scholarship.slug}`} variant="secondary" size="small">{messages.common.viewDetails}</LinkButton><a className="text-link" href={scholarship.applicationUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a></div>
+    <div className="record-card__actions"><LinkButton href={`/${locale}/scholarships/${scholarship.slug}`} variant="secondary" size="small">{messages.common.viewDetails}</LinkButton>{scholarship.applicationUrl ? <a className="text-link" href={scholarship.applicationUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a> : null}</div>
   </Card>
 }

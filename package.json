@@ -33,7 +33,8 @@
     "cloudflare:restore-drill": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cloudflare/restore-drill.ps1",
     "check:links": "node scripts/check-links.mjs",
     "data:health": "node scripts/data-health.mjs --mode monthly",
-    "pipeline:build-bootstrap": "tsx scripts/ingestion/build-pipeline-bootstrap.ts"
+    "pipeline:build-bootstrap": "tsx scripts/ingestion/build-pipeline-bootstrap.ts",
+    "pipeline:materialize-official": "tsx scripts/ingestion/materialize-official-entities.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",

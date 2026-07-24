@@ -71,7 +71,7 @@ describe('published content data', () => {
     ]
 
     for (const name of names) {
-      expect(name.en.trim()).not.toBe('')
+      expect(name.en?.trim()).not.toBe('')
       expect(name.zh?.trim()).not.toBe('')
       expect(name.ru?.trim()).not.toBe('')
     }

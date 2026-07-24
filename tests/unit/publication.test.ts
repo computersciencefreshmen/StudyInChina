@@ -155,6 +155,16 @@ describe('production publication policy', () => {
     expect(result.scholarships[0].programIds).toEqual([])
   })
 
+  it('keeps a verified identity with no announced cycle distinct from an expired cycle', () => {
+    const fixture = publicationFixture()
+    fixture.admissionCycles = []
+
+    const result = selectPublishedData(fixture, TODAY)
+
+    expect(result.programs.map((program) => program.id)).toEqual([fixture.programs[0].id])
+    expect(result.admissionCycles).toEqual([])
+  })
+
   it('filters relationship IDs and sources to the records that remain published', () => {
     const fixture = publicationFixture()
     const result = selectPublishedData(fixture, TODAY)

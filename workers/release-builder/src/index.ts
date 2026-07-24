@@ -6,6 +6,11 @@ import {
   stableJson,
 } from './artifact'
 import { buildArtifactFromPipeline } from './snapshot'
+import {
+  buildCompatibilityArtifact,
+  ensureImmutableCompatibilityArtifact,
+  type CompatibilityArtifact,
+} from './compatibility'
 import type {
   D1Database,
   D1PreparedStatement,
@@ -42,6 +47,13 @@ type ClaimedEventRow = {
 type CatalogReleaseRow = {
   release_status: string
   content_sha256: string | null
+}
+
+type BuiltArtifacts = {
+  artifact: ReleaseArtifact
+  text: string
+  contentSha256: string
+  compatibility: CompatibilityArtifact
 }
 
 function boundedInteger(
@@ -223,9 +235,14 @@ async function readSnapshotArtifact(
 async function loadOrCreateArtifact(
   environment: ReleaseBuilderEnv,
   job: ReleaseQueueJob,
-): Promise<{ artifact: ReleaseArtifact; text: string; contentSha256: string }> {
+): Promise<BuiltArtifacts> {
   let snapshot = await loadSnapshot(environment.PIPELINE_DB, job.publicationJobId)
-  if (snapshot) return readSnapshotArtifact(environment, snapshot)
+  if (snapshot) {
+    const normalized = await readSnapshotArtifact(environment, snapshot)
+    const compatibility = await buildCompatibilityArtifact(normalized.artifact)
+    await ensureImmutableCompatibilityArtifact(environment.RELEASE_ARTIFACTS, compatibility)
+    return { ...normalized, compatibility }
+  }
 
   const capturedAt = new Date(job.requestedAt)
   const built = await buildArtifactFromPipeline(environment.PIPELINE_DB, job, capturedAt)
@@ -255,7 +272,50 @@ async function loadOrCreateArtifact(
   )
   snapshot = await loadSnapshot(environment.PIPELINE_DB, job.publicationJobId)
   if (!snapshot) throw new Error('release snapshot metadata was not persisted')
-  return readSnapshotArtifact(environment, snapshot)
+  const normalized = await readSnapshotArtifact(environment, snapshot)
+  const compatibility = await buildCompatibilityArtifact(normalized.artifact)
+  await ensureImmutableCompatibilityArtifact(environment.RELEASE_ARTIFACTS, compatibility)
+  return { ...normalized, compatibility }
+}
+
+async function ensureCompatibilityMetadata(
+  database: D1Database,
+  releaseId: string,
+  compatibility: CompatibilityArtifact,
+  createdAt: string,
+): Promise<void> {
+  await run(
+    database,
+    `INSERT OR IGNORE INTO release_compatibility_artifacts (
+       release_id, artifact_format, artifact_key, content_sha256, byte_length, created_at
+     ) VALUES (?1, 'studyinchina.frontend.bundle.v1', ?2, ?3, ?4, ?5)`,
+    releaseId,
+    compatibility.key,
+    compatibility.contentSha256,
+    compatibility.byteLength,
+    createdAt,
+  )
+  const persisted = await first<{
+    artifact_key: string
+    content_sha256: string
+    byte_length: number
+  }>(
+    database,
+    `SELECT artifact_key, content_sha256, byte_length
+       FROM release_compatibility_artifacts WHERE release_id = ?1`,
+    releaseId,
+  )
+  if (
+    !persisted
+    || persisted.artifact_key !== compatibility.key
+    || persisted.content_sha256 !== compatibility.contentSha256
+    || Number(persisted.byte_length) !== compatibility.byteLength
+  ) {
+    throw new ReleaseValidationError(
+      'compatibility_metadata_mismatch',
+      'release identity is bound to different compatibility artifact metadata',
+    )
+  }
 }
 
 function rowStatements(
@@ -288,6 +348,7 @@ async function importArtifact(
   artifact: ReleaseArtifact,
   contentSha256: string,
   now: Date,
+  compatibility: CompatibilityArtifact,
 ): Promise<'published' | 'already-published'> {
   const releaseId = artifact.manifest.releaseId
   const existing = await first<CatalogReleaseRow>(
@@ -302,6 +363,12 @@ async function importArtifact(
         'published release identity is bound to different content',
       )
     }
+    await ensureCompatibilityMetadata(
+      environment.CATALOG_DB,
+      releaseId,
+      compatibility,
+      now.toISOString(),
+    )
     return 'already-published'
   }
 
@@ -326,6 +393,12 @@ async function importArtifact(
     artifact.manifest.sourcePipelineRunId,
     contentSha256,
     stableJson(artifact.manifest.counts),
+    now.toISOString(),
+  )
+  await ensureCompatibilityMetadata(
+    environment.CATALOG_DB,
+    releaseId,
+    compatibility,
     now.toISOString(),
   )
 
@@ -477,7 +550,13 @@ export async function processReleaseJob(
   const leaseOwner = `release-builder-${crypto.randomUUID()}`
   if (!(await claimEvent(environment, job, leaseOwner, now))) return 'busy'
   const built = await loadOrCreateArtifact(environment, job)
-  const status = await importArtifact(environment, built.artifact, built.contentSha256, now)
+  const status = await importArtifact(
+    environment,
+    built.artifact,
+    built.contentSha256,
+    now,
+    built.compatibility,
+  )
   await markDelivered(environment, job, leaseOwner, built.artifact, built.contentSha256, now)
   return status
 }

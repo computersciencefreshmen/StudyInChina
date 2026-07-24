@@ -41,7 +41,7 @@ export type ZjuPdfProgramEntity = {
   instructionLanguage: ZjuInstructionLanguage
   name: string
   department: string
-  durationYears: number
+  durationYears: number | null
   tuition: ZjuProgramTuition | null
   officialUrl: string
   sourceCheckedAt: string
@@ -71,6 +71,7 @@ export type ZjuPdfCatalogReconciliation = {
   tuitionObservations: number
   verifiedRows: number
   quarantinedRows: number
+  quarantinedFieldFacts: number
   duplicateRows: number
   orphanDurationRows: number
   verificationRate: number
@@ -687,6 +688,21 @@ function isPotentialProgramText(text: string): boolean {
   return true
 }
 
+function programNameQualityReasons(text: string): string[] {
+  const normalized = normalizeText(text)
+  const reasons: string[] = []
+  if (/^(?:facult(?:y|ies)|program(?:me)?s?|disciplines?)$/iu.test(normalized)) {
+    reasons.push('generic_program_label')
+  }
+  const openingParentheses = [...normalized].filter((character) => character === '(').length
+  const closingParentheses = [...normalized].filter((character) => character === ')').length
+  if (openingParentheses !== closingParentheses) {
+    reasons.push('unbalanced_program_parentheses')
+  }
+  if (normalized.includes('*')) reasons.push('merged_program_separator')
+  return reasons
+}
+
 function extractProgramClusters(
   physicalLines: readonly PhysicalLine[],
   durations: readonly DurationObservation[],
@@ -1107,9 +1123,10 @@ export function parseZjuPdfCatalogTsv(
   const quarantined: ZjuQuarantinedPdfRow[] = []
   const usedDurationObservations = new Set<DurationObservation>()
   let duplicateRows = 0
+  let quarantinedFieldFacts = 0
 
   for (const row of programRows) {
-    const reasons: string[] = []
+    const reasons = programNameQualityReasons(row.name)
     if (!isPotentialProgramText(row.name) || row.name.length > 300 || row.lines.length > 8) {
       reasons.push('ambiguous_program_name')
     }
@@ -1117,13 +1134,14 @@ export function parseZjuPdfCatalogTsv(
     if (!assignment?.department) reasons.push('missing_department')
     if (assignment?.ambiguous) reasons.push('ambiguous_department_assignment')
     const durationMatch = closestDuration(row, durations)
-    if (!durationMatch.observation) reasons.push('missing_duration')
-    if (durationMatch.ambiguous) reasons.push('ambiguous_duration')
-    if (durationMatch.observation) usedDurationObservations.add(durationMatch.observation)
+    const safeDuration = durationMatch.observation && !durationMatch.ambiguous
+      ? durationMatch.observation
+      : null
+    if (safeDuration) usedDurationObservations.add(safeDuration)
 
     const rowLineStart = Math.min(...row.lines.map((line) => line.lineNumber))
     const rowLineEnd = Math.max(...row.lines.map((line) => line.lineNumber))
-    if (reasons.length > 0 || !assignment?.department || !durationMatch.observation) {
+    if (reasons.length > 0 || !assignment?.department) {
       quarantined.push(quarantine(
         row.page,
         row.name || null,
@@ -1134,26 +1152,37 @@ export function parseZjuPdfCatalogTsv(
       ))
       continue
     }
+    if (durationMatch.ambiguous) {
+      quarantinedFieldFacts += 1
+    }
 
-    const tuitionMatch = closestTuition(row, durationMatch.observation, tuitions)
+
+    const tuitionMatch = safeDuration
+      ? closestTuition(row, safeDuration, tuitions)
+      : { observation: null, ambiguous: false }
     const warnings: string[] = []
-    if (!tuitionMatch.observation) warnings.push(
-      tuitionMatch.ambiguous ? 'ambiguous_tuition' : 'tuition_not_located',
-    )
+    if (!safeDuration) {
+      warnings.push(
+        durationMatch.ambiguous ? 'ambiguous_duration' : 'duration_not_located',
+        'tuition_not_bound_without_duration',
+      )
+    } else if (!tuitionMatch.observation) {
+      warnings.push(tuitionMatch.ambiguous ? 'ambiguous_tuition' : 'tuition_not_located')
+    }
     const evidenceWords = [
       ...row.words,
-      ...durationMatch.observation.words,
+      ...(safeDuration?.words ?? []),
       ...(tuitionMatch.observation?.words ?? []),
     ]
     const evidenceBox = unionBox(evidenceWords)
     const evidenceLineStart = Math.min(
       rowLineStart,
-      durationMatch.observation.lineNumber,
+      safeDuration?.lineNumber ?? Number.POSITIVE_INFINITY,
       tuitionMatch.observation?.lineStart ?? Number.POSITIVE_INFINITY,
     )
     const evidenceLineEnd = Math.max(
       rowLineEnd,
-      durationMatch.observation.lineNumber,
+      safeDuration?.lineNumber ?? Number.NEGATIVE_INFINITY,
       tuitionMatch.observation?.lineEnd ?? Number.NEGATIVE_INFINITY,
     )
     const key = entityKey(
@@ -1162,7 +1191,10 @@ export function parseZjuPdfCatalogTsv(
       assignment.department.name,
       row.name,
     )
-    const confidence = round(tuitionMatch.observation ? 0.99 : 0.94, 2)
+    const confidence = round(
+      !safeDuration ? 0.9 : tuitionMatch.observation ? 0.99 : 0.94,
+      2,
+    )
     const entity: ZjuPdfProgramEntity = {
       entityKey: key,
       entityType: 'program',
@@ -1172,7 +1204,7 @@ export function parseZjuPdfCatalogTsv(
       instructionLanguage: options.instructionLanguage,
       name: row.name,
       department: assignment.department.name,
-      durationYears: durationMatch.observation.durationYears,
+      durationYears: safeDuration?.durationYears ?? null,
       tuition: tuitionMatch.observation?.tuition ?? null,
       officialUrl: options.officialUrl,
       sourceCheckedAt: options.checkedAt,
@@ -1189,7 +1221,7 @@ export function parseZjuPdfCatalogTsv(
         quote: normalizeText([
           assignment.department.name,
           row.name,
-          `${durationMatch.observation.durationYears} years`,
+          safeDuration ? `${safeDuration.durationYears} years` : '',
           tuitionMatch.observation?.tuition.raw ?? '',
         ].filter(Boolean).join(' — ')),
         officialUrl: options.officialUrl,
@@ -1199,11 +1231,20 @@ export function parseZjuPdfCatalogTsv(
     const existing = entitiesByKey.get(key)
     if (existing) {
       duplicateRows += 1
-      if (
-        existing.durationYears !== entity.durationYears ||
-        existing.tuition?.amount !== entity.tuition?.amount ||
-        existing.tuition?.period !== entity.tuition?.period
-      ) {
+      const durationConflict = (
+        existing.durationYears !== null &&
+        entity.durationYears !== null &&
+        existing.durationYears !== entity.durationYears
+      )
+      const tuitionConflict = (
+        existing.tuition !== null &&
+        entity.tuition !== null &&
+        (
+          existing.tuition.amount !== entity.tuition.amount ||
+          existing.tuition.period !== entity.tuition.period
+        )
+      )
+      if (durationConflict || tuitionConflict) {
         entitiesByKey.delete(key)
         quarantined.push(quarantine(
           row.page,
@@ -1213,6 +1254,12 @@ export function parseZjuPdfCatalogTsv(
           rowLineStart,
           rowLineEnd,
         ))
+      } else {
+        const existingCompleteness =
+          Number(existing.durationYears !== null) + Number(existing.tuition !== null)
+        const entityCompleteness =
+          Number(entity.durationYears !== null) + Number(entity.tuition !== null)
+        if (entityCompleteness > existingCompleteness) entitiesByKey.set(key, entity)
       }
       continue
     }
@@ -1259,6 +1306,7 @@ export function parseZjuPdfCatalogTsv(
       verifiedRows: entities.length,
       quarantinedRows: quarantined.length,
       duplicateRows,
+      quarantinedFieldFacts,
       orphanDurationRows: orphanDurations.length,
       verificationRate,
     },

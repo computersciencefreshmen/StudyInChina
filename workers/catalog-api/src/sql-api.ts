@@ -983,6 +983,12 @@ export class CatalogSqlApi {
     return this.envelope(data, { pageSize: data.length, nextCursor: page.nextCursor })
   }
 
+  async getScholarship(slug: string) {
+    const row = (await this.selectScholarships({}, slug))[0]
+    if (!row) return null
+    return this.envelope((await this.mapScholarships([row]))[0]!)
+  }
+
   private async routeWindows(ownerIds: string[]) {
     if (ownerIds.length === 0) return []
     const slots = placeholders(ownerIds.length)

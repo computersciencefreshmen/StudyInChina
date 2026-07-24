@@ -70,15 +70,15 @@ test('the public program catalogue excludes draft templates', async ({ page }) =
 })
 
 test('a verified program page exposes complete facts, official sources and application route', async ({ page }) => {
-  const response = await page.goto('/en/programs/fudan-university-2026-autumn-chinese-language-program', { waitUntil: 'domcontentloaded' })
+  const response = await page.goto('/en/programs/shanghai-jiao-tong-university-chinese-language-program-language', { waitUntil: 'domcontentloaded' })
 
   expect(response?.ok()).toBe(true)
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('2026 Autumn Chinese Language Program')
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Long-term Chinese Language Course')
   await expect(page.getByRole('heading', { name: 'Curriculum highlights' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Eligibility' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Application materials' })).toBeVisible()
-  await expect(page.getByRole('link', { name: /View official application portal/ })).toHaveAttribute('href', /istudent\.fudan\.edu\.cn/)
-  await expect(page.getByRole('link', { name: /Fudan University Chinese Language Program/ })).toHaveAttribute('href', /fudan\.edu\.cn/)
+  await expect(page.getByRole('link', { name: /View official application portal/ })).toHaveAttribute('href', /applychinese\.sjtu\.edu\.cn/)
+  await expect(page.getByRole('link', { name: /Long-term Chinese Language Course/ })).toHaveAttribute('href', /ichinese\.sjtu\.edu\.cn/)
 })
 
 test('a multi-cycle program promotes the next upcoming intake', async ({ page }) => {

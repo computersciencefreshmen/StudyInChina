@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest'
 import { buildLegacyRelease, readLegacyBundle } from '../../scripts/catalog/build-release'
 
 function applyMigrations(database: DatabaseSync) {
-  for (const file of ['0001_release_core.sql', '0002_programs_scholarships.sql', '0003_search_views.sql', '0004_atomic_release_cutover.sql']) {
+  for (const file of ['0001_release_core.sql', '0002_programs_scholarships.sql', '0003_search_views.sql', '0004_atomic_release_cutover.sql', '0009_release_compatibility_artifacts.sql']) {
     database.exec(readFileSync(join(process.cwd(), 'infra', 'd1', 'catalog', 'migrations', file), 'utf8'))
   }
 }
@@ -77,8 +77,17 @@ describe('legacy JSON release builder', () => {
         expected_counts_json, actor, requested_at
       ) VALUES (?, ?, ?, ?, 'test', '2026-07-21T00:00:00.000Z')
     `)
+    const addCompatibility = database.prepare(`
+      INSERT INTO release_compatibility_artifacts (
+        release_id, artifact_format, artifact_key, content_sha256,
+        byte_length, created_at
+      ) VALUES (?, 'studyinchina.frontend.bundle.v1',
+        'releases/' || ? || '/compat-envelope.json', ?, 2,
+        '2026-07-21T00:00:00.000Z')
+    `)
 
     addRelease.run('unvalidated-release', 2, 'ready', hash, zeroCounts, null)
+    addCompatibility.run('unvalidated-release', 'unvalidated-release', hash)
     expect(() => activate.run('activate-unvalidated', 'unvalidated-release', hash, zeroCounts))
       .toThrow(/ready and validated/)
 
@@ -98,6 +107,7 @@ describe('legacy JSON release builder', () => {
       mismatchedCounts,
       '2026-07-21T00:00:00.000Z',
     )
+    addCompatibility.run('count-mismatch-release', 'count-mismatch-release', hash)
     expect(() => activate.run(
       'activate-count-mismatch',
       'count-mismatch-release',

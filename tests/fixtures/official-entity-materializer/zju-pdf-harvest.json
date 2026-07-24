@@ -1,0 +1,146 @@
+{
+  "parserVersion": "zju-pdf-tsv-v1",
+  "sourceType": "official_pdf",
+  "sourcePdfName": "2026-master-catalog.pdf",
+  "officialUrl": "https://iczu.zju.edu.cn/_upload/article/files/official/2026-master-catalog.pdf",
+  "institutionId": "uni-zhejiang-university",
+  "checkedAt": "2026-07-23T10:00:00.000Z",
+  "degreeLevel": "master",
+  "instructionLanguage": "English",
+  "entities": [
+    {
+      "entityKey": "zju:master:english:school-of-economics:economics",
+      "entityType": "program",
+      "institutionId": "uni-zhejiang-university",
+      "programType": "degree",
+      "degreeLevel": "master",
+      "instructionLanguage": "English",
+      "name": "Economics",
+      "department": "School of Economics",
+      "durationYears": 2,
+      "tuition": {
+        "amount": 22800,
+        "currency": "CNY",
+        "period": "year",
+        "raw": "RMB 22,800 yuan/year"
+      },
+      "officialUrl": "https://iczu.zju.edu.cn/_upload/article/files/official/2026-master-catalog.pdf",
+      "sourceCheckedAt": "2026-07-23T10:00:00.000Z",
+      "verificationStatus": "verified",
+      "confidence": 0.99,
+      "warnings": [],
+      "evidence": {
+        "page": 1,
+        "lineStart": 4,
+        "lineEnd": 4,
+        "bbox": {
+          "left": 200,
+          "top": 160,
+          "width": 425,
+          "height": 10
+        },
+        "departmentBbox": {
+          "left": 60,
+          "top": 160,
+          "width": 104,
+          "height": 10
+        },
+        "locator": "pdf:page=1;lines=4-4;bbox=200,160,425,10",
+        "quote": "School of Economics — Economics — 2 years — RMB 22,800 yuan/year",
+        "officialUrl": "https://iczu.zju.edu.cn/_upload/article/files/official/2026-master-catalog.pdf",
+        "checkedAt": "2026-07-23T10:00:00.000Z"
+      }
+    },
+    {
+      "entityKey": "zju:master:english:school-of-management:innovation-entrepreneurship-and-global-leadership",
+      "entityType": "program",
+      "institutionId": "uni-zhejiang-university",
+      "programType": "degree",
+      "degreeLevel": "master",
+      "instructionLanguage": "English",
+      "name": "Innovation, Entrepreneurship and Global Leadership",
+      "department": "School of Management",
+      "durationYears": 2,
+      "tuition": {
+        "amount": 108000,
+        "currency": "CNY",
+        "period": "whole_program",
+        "raw": "RMB 108,000 yuan/ whole program"
+      },
+      "officialUrl": "https://iczu.zju.edu.cn/_upload/article/files/official/2026-master-catalog.pdf",
+      "sourceCheckedAt": "2026-07-23T10:00:00.000Z",
+      "verificationStatus": "verified",
+      "confidence": 0.99,
+      "warnings": [],
+      "evidence": {
+        "page": 2,
+        "lineStart": 1,
+        "lineEnd": 5,
+        "bbox": {
+          "left": 200,
+          "top": 200,
+          "width": 409,
+          "height": 34
+        },
+        "departmentBbox": {
+          "left": 60,
+          "top": 212,
+          "width": 116,
+          "height": 10
+        },
+        "locator": "pdf:page=2;lines=1-5;bbox=200,200,409,34",
+        "quote": "School of Management — Innovation, Entrepreneurship and Global Leadership — 2 years — RMB 108,000 yuan/ whole program",
+        "officialUrl": "https://iczu.zju.edu.cn/_upload/article/files/official/2026-master-catalog.pdf",
+        "checkedAt": "2026-07-23T10:00:00.000Z"
+      }
+    }
+  ],
+  "quarantined": [
+    {
+      "status": "quarantined",
+      "page": 3,
+      "candidateName": "Mystery Studies",
+      "reasons": [
+        "missing_department",
+        "ambiguous_department_assignment"
+      ],
+      "locator": "pdf:page=3;lines=1-1;bbox=200,160,86,10",
+      "bbox": {
+        "left": 200,
+        "top": 160,
+        "width": 86,
+        "height": 10
+      }
+    },
+    {
+      "status": "quarantined",
+      "page": 3,
+      "candidateName": null,
+      "reasons": [
+        "missing_program_name"
+      ],
+      "locator": "pdf:page=3;lines=2-2;bbox=440,300,40,10",
+      "bbox": {
+        "left": 440,
+        "top": 300,
+        "width": 40,
+        "height": 10
+      }
+    }
+  ],
+  "reconciliation": {
+    "tsvRows": 59,
+    "malformedTsvRows": 0,
+    "wordRows": 56,
+    "pages": 3,
+    "tableHeaderPages": 1,
+    "programCandidateRows": 4,
+    "durationObservations": 4,
+    "tuitionObservations": 4,
+    "verifiedRows": 2,
+    "quarantinedRows": 2,
+    "duplicateRows": 0,
+    "orphanDurationRows": 1,
+    "verificationRate": 50
+  }
+}

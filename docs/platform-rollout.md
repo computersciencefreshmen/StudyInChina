@@ -25,10 +25,28 @@ Implemented in this repository:
 - migration, manifest, Worker, API, release, security, and leakage regression tests;
 - checksum-verified daily/monthly backup retention and isolated restore-drill tooling.
 
-Not yet represented as completed production data:
+Verified staging checkpoint (not yet the active production Release):
+
+- `1,006` official program identities: Tsinghua master's/doctorate, Zhejiang
+  bachelor/master/doctorate in the registered Chinese and English catalogs, and
+  Peking University's Chinese-taught international master's directory;
+- `55` deduplicated scholarship identities from six registered official university
+  scholarship indexes;
+- `54` catalog source artifacts plus `10` institution/city dependency artifacts,
+  all live, private, content-addressed, and byte/hash verified;
+- `59` ambiguous PDF rows remain quarantined and cannot enter a Release.
+
+These are official catalog identities, not a claim that every program or scholarship
+is currently open. No admission cycle, deadline, fee, funding amount, or application
+route is created without its own current official evidence. Identity-only records are
+shown as `officially_not_announced`; announced opportunities expire from current
+discovery after the locked 30-day grace rule.
+
+Still not represented as completed production coverage:
 
 - full program and scholarship reconciliation for the ten pilots;
-- replacement of all legacy template programs with official catalogs;
+- production activation of the verified staging batch and replacement of legacy
+  template records;
 - selection and source registration for all 120 institutions;
 - two consecutive production monthly cycles meeting the expansion gates.
 

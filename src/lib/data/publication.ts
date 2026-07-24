@@ -32,7 +32,10 @@ export function selectPublishedData(data: DataBundle, today = getTodayDate()): D
       && candidateProgramIds.has(item.programId),
   )
   const programsWithCurrentCycles = new Set(admissionCycles.map((item) => item.programId))
-  const programs = candidatePrograms.filter((item) => programsWithCurrentCycles.has(item.id))
+  const programsWithAnyCycle = new Set(data.admissionCycles.map((item) => item.programId))
+  const programs = candidatePrograms.filter(
+    (item) => programsWithCurrentCycles.has(item.id) || !programsWithAnyCycle.has(item.id),
+  )
   const programIds = new Set(programs.map((item) => item.id))
   const scholarships = data.scholarships
     .filter((item) => isCurrentVerifiedRecord(item, today)

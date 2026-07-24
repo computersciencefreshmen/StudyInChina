@@ -49,6 +49,7 @@ export type ProgramType =
   | 'visiting'
   | 'short_term'
 
+  | 'other'
 export type InstitutionRecord = Omit<University, 'summary'> & {
   summary: University['summary'] | null
   city: Pick<City, 'id' | 'slug' | 'name' | 'province' | 'region'> | null

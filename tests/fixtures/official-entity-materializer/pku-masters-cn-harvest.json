@@ -1,0 +1,91 @@
+{
+  "parserVersion": "pku-pdf-directory-v1",
+  "sourceType": "official_pdf_directory",
+  "indexUrl": "https://admission.pku.edu.cn/zsxx/lxszs/lxszyml/2026/ss/zsml_ss_lxs_cn.html",
+  "institutionId": "uni-peking-university",
+  "checkedAt": "2026-07-23T16:45:36.8869512Z",
+  "degreeLevel": "master",
+  "instructionLanguage": "Chinese",
+  "entities": [
+    {
+      "entityKey": "pku:master:chinese:00mp4cj:070501",
+      "entityType": "program",
+      "institutionId": "uni-peking-university",
+      "programType": "degree",
+      "degreeLevel": "master",
+      "instructionLanguage": "Chinese",
+      "programCode": "070501",
+      "name": "自然地理学(Physical Geography)",
+      "department": "城市与环境学院",
+      "officialUrl": "https://admission.pku.edu.cn/zsxx/lxszs/lxszyml/2026/ss/zsml_ss_lxs_cn_00126.pdf",
+      "sourceCheckedAt": "2026-07-23T16:45:36.8869512Z",
+      "verificationStatus": "verified",
+      "confidence": 0.99,
+      "evidence": {
+        "page": 1,
+        "lineStart": 4,
+        "lineEnd": 6,
+        "locator": "pdf:page=1;lines=4-6;code=070501",
+        "quote": "城市与环境学院 — 自然地理学(Physical Geography) (070501)",
+        "officialUrl": "https://admission.pku.edu.cn/zsxx/lxszs/lxszyml/2026/ss/zsml_ss_lxs_cn_00126.pdf",
+        "checkedAt": "2026-07-23T16:45:36.8869512Z"
+      }
+    },
+    {
+      "entityKey": "pku:master:chinese:1vjjx8g:035102",
+      "entityType": "program",
+      "institutionId": "uni-peking-university",
+      "programType": "degree",
+      "degreeLevel": "master",
+      "instructionLanguage": "Chinese",
+      "programCode": "035102",
+      "name": "法律(法学)(Juris)",
+      "department": "法学院",
+      "officialUrl": "https://admission.pku.edu.cn/zsxx/lxszs/lxszyml/2026/ss/zsml_ss_lxs_cn_00029.pdf",
+      "sourceCheckedAt": "2026-07-23T16:45:36.8869512Z",
+      "verificationStatus": "verified",
+      "confidence": 0.99,
+      "evidence": {
+        "page": 1,
+        "lineStart": 43,
+        "lineEnd": 45,
+        "locator": "pdf:page=1;lines=43-45;code=035102",
+        "quote": "法学院 — 法律(法学)(Juris) (035102)",
+        "officialUrl": "https://admission.pku.edu.cn/zsxx/lxszs/lxszyml/2026/ss/zsml_ss_lxs_cn_00029.pdf",
+        "checkedAt": "2026-07-23T16:45:36.8869512Z"
+      }
+    }
+  ],
+  "quarantined": [
+    {
+      "status": "quarantined",
+      "scope": "index",
+      "department": "先进制造与机器人学院",
+      "officialUrl": "https://admission.pku.edu.cn/zsxx/lxszs/lxszyml/2026/ss/zsml_bs_lxs_cn_00240.pdf",
+      "candidateName": null,
+      "candidateCode": null,
+      "page": null,
+      "lineStart": null,
+      "lineEnd": null,
+      "locator": "html:line=207;a[href=\"./zsml_bs_lxs_cn_00240.pdf\"]",
+      "reasons": [
+        "catalog_prefix_mismatch"
+      ]
+    }
+  ],
+  "reconciliation": {
+    "indexAnchors": 3,
+    "acceptedDocuments": 2,
+    "loadedDocuments": 2,
+    "missingDocuments": 0,
+    "quarantinedIndexAnchors": 1,
+    "quarantinedDocuments": 0,
+    "programCandidates": 2,
+    "verifiedRows": 2,
+    "quarantinedRows": 0,
+    "duplicateRows": 0,
+    "uniqueVerifiedPrograms": 2,
+    "verificationRate": 100,
+    "documentCoverageRate": 100
+  }
+}

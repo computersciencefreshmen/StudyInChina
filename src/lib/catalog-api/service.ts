@@ -84,7 +84,16 @@ function knownValue<T>(
 function deriveProgramType(program: Program): ProgramType {
   if (program.degreeLevel === 'language') return 'language'
   if (program.degreeLevel === 'foundation') return 'foundation'
+  if (program.degreeLevel === 'other') return 'other'
   return 'degree'
+}
+
+function scholarshipFallback(scholarship: Scholarship, sources: DataBundle['sources']) {
+  const officialSource = officialSourcesFor(scholarship.sourceIds, sources)[0]
+  return {
+    url: scholarship.applicationUrl ?? officialSource?.url ?? '',
+    title: officialSource?.title ?? 'Official scholarship source',
+  }
 }
 
 export class CatalogApiService {
@@ -218,7 +227,7 @@ export class CatalogApiService {
   }
 
   private scholarshipRecord(scholarship: Scholarship): ScholarshipRecord {
-    const fallback = { url: scholarship.applicationUrl, title: 'Official scholarship page' }
+    const fallback = scholarshipFallback(scholarship, this.bundle.sources)
     const identityMeta = fieldMetaMap(scholarship, this.bundle.sources, fallback, {
       id: scholarship.id,
       slug: scholarship.slug,
@@ -367,7 +376,7 @@ export class CatalogApiService {
   getScholarshipCycles(slug: string): ApiEnvelope<ScholarshipCycleRecord[]> | null {
     const scholarship = this.bundle.scholarships.find((item) => item.slug === slug)
     if (!scholarship) return null
-    const fallback = { url: scholarship.applicationUrl, title: 'Official scholarship page' }
+    const fallback = scholarshipFallback(scholarship, this.bundle.sources)
     const identityMeta = fieldMetaMap(scholarship, this.bundle.sources, fallback, {
       id: `legacy:${scholarship.id}`,
       scholarshipId: scholarship.id,

@@ -1,6 +1,7 @@
 import { DatabaseSync } from 'node:sqlite'
 import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
+import { spawnSync } from 'node:child_process'
 import { describe, expect, it } from 'vitest'
 import {
   buildPipelineBootstrap,
@@ -249,5 +250,37 @@ describe('Pipeline stable-entity bootstrap', () => {
       FROM source_documents WHERE canonical_url = ?
     `).get(removable!.officialUrl)).toEqual({ active: 0 })
     database.close()
+  })
+
+  it('keeps the bootstrap importer parseable and cross-platform', () => {
+    const scriptPath = join(
+      process.cwd(),
+      'scripts',
+      'ingestion',
+      'import-pipeline-bootstrap.ps1',
+    )
+    const script = readFileSync(scriptPath, 'utf8')
+    expect(script).toContain('Get-Command node -CommandType Application')
+    expect(script).toContain('"tsx.cmd"')
+    expect(script).toContain('"tsx"')
+    expect(script).toContain('"node_modules/wrangler/bin/wrangler.js"')
+    expect(script).not.toContain('Get-Command node.exe')
+    expect(script).not.toContain('wrangler.cmd')
+
+    const escapedScriptPath = scriptPath.replaceAll("'", "''")
+    const parserScript = [
+      '$errors = $null',
+      `[System.Management.Automation.Language.Parser]::ParseFile('${escapedScriptPath}', `
+        + '[ref]$null, [ref]$errors) | Out-Null',
+      'if ($errors.Count -gt 0) {',
+      '  $errors | ForEach-Object { Write-Error $_.Message }',
+      '  exit 1',
+      '}',
+    ].join('; ')
+    const executable = process.platform === 'win32' ? 'powershell.exe' : 'pwsh'
+    const result = spawnSync(executable, [
+      '-NoProfile', '-NonInteractive', '-Command', parserScript,
+    ], { encoding: 'utf8' })
+    expect(result.status, result.stderr || result.stdout).toBe(0)
   })
 })

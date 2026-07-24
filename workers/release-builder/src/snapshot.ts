@@ -31,7 +31,23 @@ type PipelineRecord = {
   updatedAt: string
 }
 
-const ELIGIBLE_RECORD_FILTER = "record.workflow_status IN ('applied', 'published')"
+export const ELIGIBLE_RECORD_FILTER = `record.workflow_status IN ('applied', 'published')
+  AND NOT EXISTS (
+    SELECT 1
+    FROM materialization_batch_record_intents AS pending_intent
+    JOIN materialization_batches AS intent_batch
+      ON intent_batch.batch_id = pending_intent.batch_id
+    WHERE pending_intent.record_id = record.id
+      AND intent_batch.batch_status NOT IN ('applied', 'superseded')
+  )
+  AND NOT EXISTS (
+    SELECT 1
+    FROM materialization_batch_records AS pending_batch_record
+    JOIN materialization_batches AS pending_batch
+      ON pending_batch.batch_id = pending_batch_record.batch_id
+    WHERE pending_batch_record.record_id = record.id
+      AND pending_batch.batch_status NOT IN ('applied', 'superseded')
+  )`
 
 function fail(code: string, message: string): never {
   throw new ReleaseValidationError(code, message)
@@ -71,17 +87,6 @@ function nullableNumber(row: RawRow, key: string, label: string): number | null 
   return value
 }
 
-async function queryRows<T extends RawRow>(
-  database: D1Database,
-  sql: string,
-  label: string,
-): Promise<T[]> {
-  const result = await database.prepare(sql).all<T>()
-  if (!result.success) {
-    throw new Error(`${label} query failed: ${result.error ?? 'unknown D1 error'}`)
-  }
-  return result.results ?? []
-}
 
 function publicId(
   records: Map<string, PipelineRecord>,
@@ -147,7 +152,6 @@ function strictJsonColumn(row: RawRow, key: string, label: string): string | nul
 }
 
 async function loadPipelineTables(database: D1Database): Promise<{
-  checkpoint: RawRow[]
   records: RawRow[]
   canonicalFields: RawRow[]
   evidence: RawRow[]
@@ -159,14 +163,11 @@ async function loadPipelineTables(database: D1Database): Promise<{
                        FROM records record
                       WHERE ${ELIGIBLE_RECORD_FILTER}
                       ORDER BY record.id`
-  const records = await queryRows(database, recordSql, 'eligible records')
-  if (records.length === 0) {
-    fail('empty_release', 'Pipeline has no applied or published records; refusing an empty cutover')
-  }
-
-  const canonicalFields = await queryRows(
-    database,
-    `SELECT field.subject_record_id, field.field_path, field.locale,
+  const queries: Array<{ label: string; sql: string }> = [
+    { label: 'eligible records', sql: recordSql },
+    {
+      label: 'canonical fields',
+      sql: `SELECT field.subject_record_id, field.field_path, field.locale,
             field.field_status, field.claim_id, field.value_json,
             field.verified_at, field.review_after,
             definition.value_type, definition.required_for_publish,
@@ -182,12 +183,10 @@ async function loadPipelineTables(database: D1Database): Promise<{
         AND public_status.locale = field.locale
       WHERE ${ELIGIBLE_RECORD_FILTER}
       ORDER BY field.subject_record_id, field.field_path, field.locale`,
-    'canonical fields',
-  )
-
-  const evidence = await queryRows(
-    database,
-    `SELECT field.subject_record_id, field.field_path, field.locale, field.claim_id,
+    },
+    {
+      label: 'official evidence',
+      sql: `SELECT field.subject_record_id, field.field_path, field.locale, field.claim_id,
             evidence.evidence_role,
             source.id AS source_internal_id, source.public_id AS source_public_id,
             source.canonical_url, source.source_kind, source.authority_level,
@@ -207,19 +206,17 @@ async function loadPipelineTables(database: D1Database): Promise<{
         AND claim.claim_status = 'accepted'
       ORDER BY field.subject_record_id, field.field_path, field.locale,
                source.id, evidence.evidence_role, fragment.id`,
-    'official evidence',
-  )
-
-  const localized = await queryRows(
-    database,
-    `SELECT content.record_id, content.locale, content.field_name, content.text_value,
+    },
+    {
+      label: 'localized content',
+      sql: `SELECT content.record_id, content.locale, content.field_name, content.text_value,
             content.translation_status, content.source_locale
        FROM localized_content content
        JOIN records record ON record.id = content.record_id
       WHERE ${ELIGIBLE_RECORD_FILTER}
       ORDER BY content.record_id, content.locale, content.field_name`,
-    'localized content',
-  )
+    },
+  ]
 
   const oneToOneTables = [
     'organizations', 'locations', 'institutions', 'campuses', 'academic_units',
@@ -227,17 +224,15 @@ async function loadPipelineTables(database: D1Database): Promise<{
     'fee_items', 'requirements', 'required_documents', 'scholarships',
     'scholarship_cycles', 'scholarship_coverage_items',
   ]
-  const domain: Record<string, RawRow[]> = {}
   for (const table of oneToOneTables) {
-    domain[table] = await queryRows(
-      database,
-      `SELECT domain.*
+    queries.push({
+      label: table,
+      sql: `SELECT domain.*
          FROM ${table} domain
          JOIN records record ON record.id = domain.record_id
         WHERE ${ELIGIBLE_RECORD_FILTER}
         ORDER BY domain.record_id`,
-      table,
-    )
+    })
   }
 
   const relationQueries: Record<string, string> = {
@@ -273,16 +268,38 @@ async function loadPipelineTables(database: D1Database): Promise<{
     field_definitions: `SELECT record_kind, field_path, value_type, required_for_publish
       FROM field_definitions ORDER BY record_kind, field_path`,
   }
-  for (const [table, sql] of Object.entries(relationQueries)) {
-    domain[table] = await queryRows(database, sql, table)
+  for (const [label, sql] of Object.entries(relationQueries)) {
+    queries.push({ label, sql })
   }
 
-  const checkpoint = await queryRows(database, recordSql, 'eligible record checkpoint')
-  if (stableJson(records) !== stableJson(checkpoint)) {
-    fail('pipeline_changed_during_snapshot', 'eligible records changed while the release was captured')
+  const results = await database.batch<RawRow>(
+    queries.map(({ sql }) => database.prepare(sql)),
+  )
+  if (results.length !== queries.length) {
+    fail('pipeline_snapshot_incomplete', 'D1 returned an incomplete transactional snapshot')
+  }
+  for (const [index, result] of results.entries()) {
+    if (!result.success) {
+      throw new Error(
+        `${queries[index].label} query failed: ${result.error ?? 'unknown D1 error'}`,
+      )
+    }
   }
 
-  return { checkpoint, records, canonicalFields, evidence, localized, domain }
+  const rows = (index: number): RawRow[] => results[index].results ?? []
+  const records = rows(0)
+  if (records.length === 0) {
+    fail('empty_release', 'Pipeline has no applied or published records; refusing an empty cutover')
+  }
+  const canonicalFields = rows(1)
+  const evidence = rows(2)
+  const localized = rows(3)
+  const domain: Record<string, RawRow[]> = {}
+  let resultIndex = 4
+  for (const table of oneToOneTables) domain[table] = rows(resultIndex++)
+  for (const table of Object.keys(relationQueries)) domain[table] = rows(resultIndex++)
+
+  return { records, canonicalFields, evidence, localized, domain }
 }
 
 export async function buildArtifactFromPipeline(
