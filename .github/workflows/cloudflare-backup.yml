@@ -1,0 +1,92 @@
+name: Cloudflare D1 backup
+
+on:
+  schedule:
+    - cron: "37 18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-d1-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    name: Export D1 databases to private R2
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Require Cloudflare backup credentials
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+
+      - name: Export catalog and pipeline databases
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          export_data_tables() {
+            local database="$1"
+            local output="$2"
+            local query
+            query="SELECT name FROM pragma_table_list WHERE schema = 'main' AND type = 'table' AND name NOT LIKE 'sqlite_%' AND name NOT LIKE '_cf_%' AND name <> 'd1_migrations' ORDER BY name;"
+            local table_json
+            table_json="$(npx wrangler d1 execute "$database" --remote --command "$query" --json)"
+            local tables=()
+            mapfile -t tables < <(jq -r '.[] | select(.success == true) | .results[] | .name' <<< "$table_json")
+            if [ "${#tables[@]}" -eq 0 ]; then
+              echo "No exportable data tables found for $database" >&2
+              exit 1
+            fi
+            local table_args=()
+            for table in "${tables[@]}"; do
+              table_args+=(--table "$table")
+            done
+            npx wrangler d1 export "$database" --remote --no-schema --skip-confirmation --output="$output" "${table_args[@]}"
+            test -s "$output"
+          }
+
+          # D1 cannot export a database containing FTS5 as one full dump. The
+          # repository migrations are the schema backup; these files contain
+          # every ordinary data table while excluding virtual/shadow tables.
+          export_data_tables studyinchina-catalog "$RUNNER_TEMP/catalog.sql"
+          export_data_tables studyinchina-pipeline "$RUNNER_TEMP/pipeline.sql"
+          gzip -9 "$RUNNER_TEMP/catalog.sql" "$RUNNER_TEMP/pipeline.sql"
+          cd "$RUNNER_TEMP"
+          sha256sum catalog.sql.gz pipeline.sql.gz > backup-sha256.txt
+
+      - name: Upload daily and monthly copies
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          day="$(date -u +%F)"
+          month="$(date -u +%Y-%m)"
+          npx wrangler r2 object put "studyinchina-releases/backups/daily/$day/catalog.sql.gz" --file="$RUNNER_TEMP/catalog.sql.gz" --content-type="application/sql" --content-encoding="gzip" --remote
+          npx wrangler r2 object put "studyinchina-releases/backups/daily/$day/pipeline.sql.gz" --file="$RUNNER_TEMP/pipeline.sql.gz" --content-type="application/sql" --content-encoding="gzip" --remote
+          npx wrangler r2 object put "studyinchina-releases/backups/daily/$day/sha256.txt" --file="$RUNNER_TEMP/backup-sha256.txt" --content-type="text/plain" --remote
+          npx wrangler r2 object put "studyinchina-releases/backups/monthly/$month/catalog.sql.gz" --file="$RUNNER_TEMP/catalog.sql.gz" --content-type="application/sql" --content-encoding="gzip" --remote
+          npx wrangler r2 object put "studyinchina-releases/backups/monthly/$month/pipeline.sql.gz" --file="$RUNNER_TEMP/pipeline.sql.gz" --content-type="application/sql" --content-encoding="gzip" --remote
+          npx wrangler r2 object put "studyinchina-releases/backups/monthly/$month/sha256.txt" --file="$RUNNER_TEMP/backup-sha256.txt" --content-type="text/plain" --remote

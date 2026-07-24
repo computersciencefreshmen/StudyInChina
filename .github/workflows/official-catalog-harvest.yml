@@ -1,0 +1,398 @@
+name: Official catalog harvest
+
+on:
+  schedule:
+    - cron: '17 2 * * 1'
+    - cron: '43 3 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: official-catalog-harvest
+  cancel-in-progress: false
+
+jobs:
+  harvest:
+    name: Harvest and validate official catalogs
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      HARVEST_OUTPUT_DIR: artifacts/official-harvest
+      HARVEST_STATE_DIR: .harvest-state
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Install JavaScript dependencies
+        run: npm ci
+
+      - name: Install Poppler PDF tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends poppler-utils
+
+      - name: Restore prior official content hashes
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.HARVEST_STATE_DIR }}
+          key: ${{ runner.os }}-official-harvest-state-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-official-harvest-state-
+
+      - name: Detect optional Cloudflare import credentials
+        id: cloudflare
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          if [[ -n "${CLOUDFLARE_API_TOKEN}" && -n "${CLOUDFLARE_ACCOUNT_ID}" ]]; then
+            echo 'configured=true' >> "${GITHUB_OUTPUT}"
+          else
+            echo 'configured=false' >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Run serial official-source harvest
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "${HARVEST_STATE_DIR}"
+          npx tsx scripts/ingestion/run-priority-official-harvest.ts \
+            --output "${HARVEST_OUTPUT_DIR}" \
+            --state-file "${HARVEST_STATE_DIR}/source-hashes.json" \
+            --delay-ms 5000 \
+            --max-attempts 3 \
+            --pdftotext pdftotext
+
+      - name: Upload deterministic private R2 source snapshot
+        if: ${{ success() && steps.cloudflare.outputs.configured == 'true' }}
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          manifest="${HARVEST_OUTPUT_DIR}/run-manifest.json"
+          run_date="$(
+            node -e '
+              const fs = require("node:fs");
+              const manifest = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+              if (!/^\d{4}-\d{2}-\d{2}T/.test(manifest.checkedAt)) process.exit(1);
+              process.stdout.write(manifest.checkedAt.slice(0, 10));
+            ' "${manifest}"
+          )"
+          upload_plan="${RUNNER_TEMP}/priority-r2-upload-plan.tsv"
+          node - "${manifest}" "${HARVEST_OUTPUT_DIR}" > "${upload_plan}" <<'NODE'
+          const crypto = require('node:crypto')
+          const fs = require('node:fs')
+          const path = require('node:path')
+
+          const manifestPath = process.argv[2]
+          const outputRoot = path.resolve(process.argv[3])
+          const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
+          if (
+            manifest.status !== 'passed' ||
+            manifest.gate?.passed !== true ||
+            manifest.provenanceStatus !== 'complete'
+          ) {
+            throw new Error('Run manifest is not a passed, complete-provenance harvest')
+          }
+          const catalog = manifest.sourceArtifacts
+          const dependencies = manifest.dependencyArtifacts
+          if (!Array.isArray(catalog) || !Array.isArray(dependencies)) {
+            throw new Error('Run manifest artifact batches are missing')
+          }
+          if (
+            manifest.totals?.sourceArtifacts !== catalog.length ||
+            manifest.totals?.dependencies !== dependencies.length ||
+            catalog.length !== manifest.thresholds?.sourceArtifacts ||
+            dependencies.length !== 10
+          ) {
+            throw new Error('Run manifest artifact totals do not satisfy the locked contract')
+          }
+          if (!/^\d{4}-\d{2}-\d{2}T/u.test(manifest.checkedAt)) {
+            throw new Error('Run manifest checkedAt is invalid')
+          }
+          const planned = new Map()
+          for (const [scope, artifacts] of [
+            ['catalog', catalog],
+            ['dependency', dependencies],
+          ]) {
+            for (const artifact of artifacts) {
+              if (!artifact || typeof artifact !== 'object' || artifact.isFixture !== false) {
+                throw new Error(`${scope} artifact must be a live non-fixture object`)
+              }
+              if (
+                artifact.checkedAt !== manifest.checkedAt ||
+                artifact.httpStatus !== 200 ||
+                typeof artifact.byteLength !== 'number' ||
+                !Number.isSafeInteger(artifact.byteLength) ||
+                artifact.byteLength <= 0
+              ) {
+                throw new Error(`${scope} artifact has invalid capture metadata`)
+              }
+              const sha = scope === 'catalog' ? artifact.artifactSha256 : artifact.sha256
+              if (!/^[0-9a-f]{64}$/u.test(sha) || artifact.sha256 !== sha) {
+                throw new Error(`${scope} artifact has inconsistent SHA-256 metadata`)
+              }
+              if (
+                typeof artifact.localPath !== 'string' ||
+                artifact.localPath.includes('\\') ||
+                path.posix.normalize(artifact.localPath) !== artifact.localPath ||
+                !artifact.localPath.startsWith('raw/')
+              ) {
+                throw new Error(`${scope} artifact has an unsafe localPath`)
+              }
+              const local = path.resolve(outputRoot, artifact.localPath)
+              if (!local.startsWith(`${outputRoot}${path.sep}`)) {
+                throw new Error(`${scope} artifact escaped the harvest output root`)
+              }
+              const assetNamespace = typeof artifact.assetId === 'string'
+                ? crypto.createHash('sha256').update(artifact.assetId).digest('hex').slice(0, 24)
+                : ''
+              const keyMatch = typeof artifact.r2Key === 'string'
+                ? /^source-artifacts\/([0-9a-f]{24})\/([0-9a-f]{64})\.([a-z0-9]{1,12})$/u
+                  .exec(artifact.r2Key)
+                : null
+              if (
+                !keyMatch ||
+                keyMatch[1] !== assetNamespace ||
+                keyMatch[2] !== sha
+              ) {
+                throw new Error(`${scope} artifact has an unsafe or unstable R2 key`)
+              }
+              if (
+                typeof artifact.contentType !== 'string' ||
+                artifact.contentType.length < 1 ||
+                artifact.contentType.length > 200 ||
+                /[\t\r\n]/u.test(artifact.contentType)
+              ) {
+                throw new Error(`${scope} artifact has an unsafe content type`)
+              }
+              if (scope === 'catalog' && (
+                artifact.captureMode !== 'live' ||
+                artifact.provenanceStatus !== 'complete' ||
+                artifact.artifactUri !==
+                  `r2://studyinchina-source-snapshots/${artifact.r2Key}`
+              )) {
+                throw new Error('Catalog artifact is missing strict provenance metadata')
+              }
+              if (scope === 'dependency' && (
+                artifact.role !== 'dependency' ||
+                artifact.batchScope !== 'dependency' ||
+                typeof artifact.dependencyId !== 'string'
+              )) {
+                throw new Error('Dependency artifact is not isolated in dependency scope')
+              }
+              const bytes = fs.readFileSync(local)
+              const actualSha = crypto.createHash('sha256').update(bytes).digest('hex')
+              if (bytes.byteLength !== artifact.byteLength || actualSha !== sha) {
+                throw new Error(`${scope} artifact bytes changed after manifest creation`)
+              }
+              const item = {
+                localPath: artifact.localPath,
+                r2Key: artifact.r2Key,
+                contentType: artifact.contentType,
+                sha,
+                byteLength: artifact.byteLength,
+              }
+              const existing = planned.get(item.r2Key)
+              if (existing && JSON.stringify(existing) !== JSON.stringify(item)) {
+                throw new Error(`Conflicting duplicate R2 key: ${item.r2Key}`)
+              }
+              planned.set(item.r2Key, item)
+            }
+          }
+          if (planned.size !== catalog.length + dependencies.length) {
+            throw new Error('R2 upload plan unexpectedly collapsed catalog/dependency artifacts')
+          }
+          process.stdout.write([...planned.values()].map((item) => [
+            item.localPath,
+            item.r2Key,
+            item.contentType,
+            item.sha,
+            item.byteLength,
+          ].join('\t')).join('\n') + '\n')
+          NODE
+          upload_count=0
+          while IFS=$'\t' read -r local_path r2_key content_type expected_sha expected_bytes; do
+            source_path="${HARVEST_OUTPUT_DIR}/${local_path}"
+            actual_sha="$(sha256sum "${source_path}" | cut -d' ' -f1)"
+            actual_bytes="$(stat -c '%s' "${source_path}")"
+            if [[ "${actual_sha}" != "${expected_sha}" || "${actual_bytes}" != "${expected_bytes}" ]]; then
+              echo "Source artifact changed before R2 upload: ${local_path}" >&2
+              exit 1
+            fi
+            object="studyinchina-source-snapshots/${r2_key}"
+            probe_path="${RUNNER_TEMP}/priority-r2-probe-${upload_count}-${expected_sha}"
+            probe_log="${RUNNER_TEMP}/priority-r2-probe-${upload_count}-${expected_sha}.log"
+            verify_path="${RUNNER_TEMP}/priority-r2-verify-${upload_count}-${expected_sha}"
+            rm -f "${probe_path}" "${probe_log}" "${verify_path}"
+            if npx wrangler r2 object get \
+              "${object}" \
+              --config workers/ingestion/wrangler.jsonc \
+              --remote \
+              --file "${probe_path}" >"${probe_log}" 2>&1; then
+              probe_sha="$(sha256sum "${probe_path}" | cut -d' ' -f1)"
+              probe_bytes="$(stat -c '%s' "${probe_path}")"
+              if [[ "${probe_sha}" != "${expected_sha}" || "${probe_bytes}" != "${expected_bytes}" ]]; then
+                echo "Existing content-addressed R2 object conflicts; refusing overwrite: ${r2_key}" >&2
+                exit 1
+              fi
+              echo "Reusing verified R2 object: ${r2_key}"
+            elif grep -Fqi 'The specified key does not exist.' "${probe_log}"; then
+              rm -f "${probe_path}"
+              npx wrangler r2 object put \
+                "${object}" \
+                --config workers/ingestion/wrangler.jsonc \
+                --remote \
+                --file "${source_path}" \
+                --content-type "${content_type}"
+            else
+              cat "${probe_log}" >&2
+              echo "R2 object probe failed without a definitive missing-key response: ${r2_key}" >&2
+              exit 1
+            fi
+            npx wrangler r2 object get \
+              "${object}" \
+              --config workers/ingestion/wrangler.jsonc \
+              --remote \
+              --file "${verify_path}"
+            verify_sha="$(sha256sum "${verify_path}" | cut -d' ' -f1)"
+            verify_bytes="$(stat -c '%s' "${verify_path}")"
+            if [[ "${verify_sha}" != "${expected_sha}" || "${verify_bytes}" != "${expected_bytes}" ]]; then
+              echo "R2 read-back verification failed: ${r2_key}" >&2
+              exit 1
+            fi
+            upload_count=$((upload_count + 1))
+          done < "${upload_plan}"
+          if [[ "${upload_count}" -ne 64 ]]; then
+            echo "Expected exactly 64 verified catalog/dependency R2 objects; uploaded ${upload_count}." >&2
+            exit 1
+          fi
+          archive_temp="${RUNNER_TEMP}/priority-official-harvest.tar.gz"
+          tar \
+            --sort=name \
+            --mtime='UTC 1970-01-01' \
+            --owner=0 \
+            --group=0 \
+            --numeric-owner \
+            -cf - \
+            -C "${HARVEST_OUTPUT_DIR}" \
+            raw harvests run-manifest.json |
+            gzip -n > "${archive_temp}"
+          archive_sha="$(sha256sum "${archive_temp}" | cut -d' ' -f1)"
+          manifest_sha="$(sha256sum "${manifest}" | cut -d' ' -f1)"
+          archive="${RUNNER_TEMP}/${archive_sha}.tar.gz"
+          checksum="${RUNNER_TEMP}/${archive_sha}.sha256"
+          mv "${archive_temp}" "${archive}"
+          printf '%s  %s\n' "${archive_sha}" "${archive_sha}.tar.gz" > "${checksum}"
+          prefix="priority-harvests/${run_date}"
+          npx wrangler r2 object put \
+            "studyinchina-source-snapshots/${prefix}/${archive_sha}.tar.gz" \
+            --config workers/ingestion/wrangler.jsonc \
+            --remote \
+            --file "${archive}" \
+            --content-type application/gzip
+          npx wrangler r2 object put \
+            "studyinchina-source-snapshots/${prefix}/${archive_sha}.sha256" \
+            --config workers/ingestion/wrangler.jsonc \
+            --remote \
+            --file "${checksum}" \
+            --content-type text/plain
+          npx wrangler r2 object put \
+            "studyinchina-source-snapshots/${prefix}/run-manifest-${manifest_sha}.json" \
+            --config workers/ingestion/wrangler.jsonc \
+            --remote \
+            --file "${manifest}" \
+            --content-type application/json
+          echo "Uploaded and read-back verified ${upload_count} private R2 objects; deterministic archive and checksum recorded."
+
+      - name: Strictly import dependencies, then catalog, into Pipeline D1
+        if: ${{ success() && steps.cloudflare.outputs.configured == 'true' }}
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          harvest_root="$(cd "${HARVEST_OUTPUT_DIR}" && pwd)"
+          materialized_dir="${harvest_root}/materialized"
+          mkdir -p "${materialized_dir}"
+          pwsh -NoLogo -NoProfile -NonInteractive \
+            -File scripts/ingestion/import-pipeline-bootstrap.ps1 \
+            -Remote \
+            -OutputDirectory "${HARVEST_OUTPUT_DIR}/materialized/bootstrap" \
+            -MaxChunkAttempts 3
+
+          pushd "${harvest_root}" >/dev/null
+          dependency_output="$(
+            npx --no-install tsx \
+              "${GITHUB_WORKSPACE}/scripts/ingestion/materialize-official-dependencies.ts" \
+              --provenance-manifest run-manifest.json \
+              --output materialized/dependencies \
+              --remote-contract
+          )"
+          dependency_manifest="$(printf '%s\n' "${dependency_output}" | tail -n 1)"
+          if [[ -z "${dependency_manifest}" || ! -f "${dependency_manifest}" ]]; then
+            echo 'Dependency materializer did not produce an addressable manifest.' >&2
+            exit 1
+          fi
+          pwsh -NoLogo -NoProfile -NonInteractive \
+            -File "${GITHUB_WORKSPACE}/scripts/ingestion/import-official-entities.ps1" \
+            -ManifestPath "${dependency_manifest}" \
+            -Remote \
+            -OutputDirectory "${materialized_dir}/strict-dependency-import" \
+            -Transport auto
+
+          materializer_output="$(
+            npx --no-install tsx \
+              "${GITHUB_WORKSPACE}/scripts/ingestion/materialize-official-entities.ts" \
+              --input-directory harvests \
+              --provenance-manifest run-manifest.json \
+              --output materialized
+          )"
+          popd >/dev/null
+          materialization_manifest="$(printf '%s\n' "${materializer_output}" | tail -n 1)"
+          if [[ -z "${materialization_manifest}" || ! -f "${materialization_manifest}" ]]; then
+            echo 'Materializer did not produce exactly addressable manifest output.' >&2
+            exit 1
+          fi
+          pwsh -NoLogo -NoProfile -NonInteractive \
+            -File "${GITHUB_WORKSPACE}/scripts/ingestion/import-official-entities.ps1" \
+            -ManifestPath "${materialization_manifest}" \
+            -Remote \
+            -OutputDirectory "${materialized_dir}/strict-import" \
+            -Transport auto
+          pwsh -NoLogo -NoProfile -NonInteractive \
+            -File "${GITHUB_WORKSPACE}/scripts/ingestion/request-materialization-release.ps1" \
+            -CatalogManifestPath "${materialization_manifest}" \
+            -DependencyManifestPath "${dependency_manifest}" \
+            -Remote \
+            -OutputDirectory "${materialized_dir}/release-request"
+
+      - name: Report skipped Pipeline import
+        if: ${{ success() && steps.cloudflare.outputs.configured != 'true' }}
+        shell: bash
+        run: echo 'Cloudflare credentials are not both configured; harvest completed, while private R2 upload and Pipeline D1 import were skipped.'
+
+      - name: Upload private harvest evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-catalog-harvest-${{ github.run_id }}
+          path: ${{ env.HARVEST_OUTPUT_DIR }}
+          if-no-files-found: error
+          retention-days: 35
+          include-hidden-files: true

@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "id": "example-university-program-cycle",
+  "institutionId": "example-university",
+  "entityType": "program-cycle",
+  "sourceCategory": "dates_deadlines",
+  "officialUrl": "https://admissions.example.edu.cn/programs/example",
+  "allowedHosts": ["admissions.example.edu.cn"],
+  "allowedRedirectHosts": ["static.example.edu.cn"],
+  "enabled": true,
+  "schedule": {
+    "intervalHours": 168,
+    "jitterMinutes": 60
+  },
+  "fetch": {
+    "timeoutMs": 15000,
+    "maxBytes": 10485760,
+    "accept": "text/html,application/xhtml+xml,application/json,application/pdf;q=0.9,*/*;q=0.1",
+    "renderMode": "http",
+    "documentConversion": "auto"
+  },
+  "robots": {
+    "mode": "enforce"
+  },
+  "canonicalization": {
+    "ignorePatterns": ["csrf-token=\"[^\"]+\"", "data-build-time=\"[^\"]+\""],
+    "collapseWhitespace": true
+  },
+  "extraction": {
+    "mode": "rules-then-minimax",
+    "schemaVersion": "program-cycle-v1",
+    "fields": [
+      {
+        "path": "deadline",
+        "type": "date",
+        "required": true,
+        "critical": true
+      },
+      {
+        "path": "tuitionCny",
+        "type": "money",
+        "required": true,
+        "critical": true
+      }
+    ],
+    "rules": [
+      {
+        "kind": "regex",
+        "fieldPath": "deadline",
+        "pattern": "Deadline:\\s*(\\d{4}-\\d{2}-\\d{2})"
+      },
+      {
+        "kind": "regex",
+        "fieldPath": "tuitionCny",
+        "pattern": "Tuition:\\s*[¥￥]?([\\d,]+)"
+      }
+    ],
+    "minimaxModel": "MiniMax-M2.7"
+  }
+}

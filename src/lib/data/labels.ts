@@ -9,8 +9,10 @@ const pick = (locale: Locale, values: TranslationTuple) => values[isPublicLocale
 export const degreeLabels = (locale: Locale): Record<DegreeLevel, string> => ({
   bachelor: pick(locale, ['Bachelor', '本科', 'Бакалавриат', 'Bachelor', 'Licence', 'Grado']),
   master: pick(locale, ['Master', '硕士', 'Магистратура', 'Master', 'Master', 'Máster']),
+  doctorate: pick(locale, ['Doctorate', '\u535a\u58eb', '\u0414\u043e\u043a\u0442\u043e\u0440\u0430\u043d\u0442\u0443\u0440\u0430', 'Promotion', 'Doctorat', 'Doctorado']),
   language: pick(locale, ['Chinese language', '中文语言', 'Китайский язык', 'Chinesischkurs', 'Langue chinoise', 'Lengua china']),
   foundation: pick(locale, ['Foundation', '预科', 'Подготовительное', 'Studienkolleg', 'Année préparatoire', 'Programa preparatorio']),
+  other: pick(locale, ['Not announced', '\u5c1a\u672a\u516c\u5e03', '\u041d\u0435 \u043e\u0431\u044a\u044f\u0432\u043b\u0435\u043d\u043e', 'Nicht bekannt gegeben', 'Non annonc\u00e9', 'No anunciado']),
 })
 
 export const disciplineLabels = (locale: Locale): Record<Discipline, string> => ({
@@ -22,6 +24,7 @@ export const disciplineLabels = (locale: Locale): Record<Discipline, string> => 
   'law-ir': pick(locale, ['Law & international relations', '法律与国际关系', 'Право и МО', 'Recht & internationale Beziehungen', 'Droit et relations internationales', 'Derecho y relaciones internacionales']),
   science: pick(locale, ['Natural sciences', '自然科学', 'Естественные науки', 'Naturwissenschaften', 'Sciences naturelles', 'Ciencias naturales']),
   'art-design': pick(locale, ['Art & design', '艺术与设计', 'Искусство и дизайн', 'Kunst & Design', 'Arts et design', 'Arte y diseño']),
+  other: pick(locale, ['Not announced', '\u5c1a\u672a\u516c\u5e03', '\u041d\u0435 \u043e\u0431\u044a\u044f\u0432\u043b\u0435\u043d\u043e', 'Nicht bekannt gegeben', 'Non annonc\u00e9', 'No anunciado']),
 })
 
 export const regionLabels = (locale: Locale): Record<Region, string> => ({

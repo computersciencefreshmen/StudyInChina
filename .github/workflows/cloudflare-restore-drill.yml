@@ -1,0 +1,84 @@
+name: Cloudflare D1 quarterly restore drill
+
+on:
+  schedule:
+    - cron: "11 20 15 1,4,7,10 *"
+  workflow_dispatch:
+    inputs:
+      backup_month:
+        description: Monthly backup to test (YYYY-MM); blank uses the current UTC month
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-d1-restore-drill
+  cancel-in-progress: false
+
+jobs:
+  restore-drill:
+    name: Restore both D1 backups into local isolated databases
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Select backup month
+        id: backup
+        shell: bash
+        env:
+          REQUESTED_MONTH: ${{ inputs.backup_month }}
+        run: |
+          month="${REQUESTED_MONTH:-$(date -u +%Y-%m)}"
+          if ! [[ "$month" =~ ^[0-9]{4}-(0[1-9]|1[0-2])$ ]]; then
+            echo "backup_month must use YYYY-MM" >&2
+            exit 1
+          fi
+          echo "month=$month" >> "$GITHUB_OUTPUT"
+
+      - name: Download private monthly backup
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          BACKUP_MONTH: ${{ steps.backup.outputs.month }}
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          input="$RUNNER_TEMP/restore-input"
+          mkdir -p "$input"
+          npx wrangler r2 object get "studyinchina-releases/backups/monthly/$BACKUP_MONTH/catalog.sql.gz" --file "$input/catalog.sql.gz" --remote
+          npx wrangler r2 object get "studyinchina-releases/backups/monthly/$BACKUP_MONTH/pipeline.sql.gz" --file "$input/pipeline.sql.gz" --remote
+          npx wrangler r2 object get "studyinchina-releases/backups/monthly/$BACKUP_MONTH/sha256.txt" --file "$input/backup-sha256.txt" --remote
+
+      # This step intentionally receives no Cloudflare credentials. The script
+      # supports local isolated D1 only and cannot overwrite a remote database.
+      - name: Run local isolated restore drill
+        shell: pwsh
+        run: |
+          ./scripts/cloudflare/restore-drill.ps1 `
+            -BackupDirectory "$env:RUNNER_TEMP/restore-input" `
+            -WorkRoot "$env:RUNNER_TEMP/restore-work" `
+            -ReportPath "$env:RUNNER_TEMP/restore-report.json"
+
+      - name: Upload restore report
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: d1-restore-drill-${{ steps.backup.outputs.month }}
+          path: ${{ runner.temp }}/restore-report.json
+          if-no-files-found: warn
+          retention-days: 90

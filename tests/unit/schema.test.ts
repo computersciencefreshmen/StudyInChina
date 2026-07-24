@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { admissionCycleSchema, bundleSchema } from '@/lib/data/schema'
+import { admissionCycleSchema, bundleSchema, programSchema } from '@/lib/data/schema'
 
 const audit = {
   sourceIds: ['source-1'],
@@ -114,6 +114,12 @@ describe('content schemas', () => {
     expect(bundleSchema.safeParse(validBundle()).success).toBe(true)
   })
 
+  it('preserves doctorate as its own degree level', () => {
+    const program = { ...validBundle().programs[0], degreeLevel: 'doctorate' }
+
+    expect(programSchema.parse(program).degreeLevel).toBe('doctorate')
+  })
+
   it('rejects a cycle whose closing date precedes its opening date', () => {
     const cycle = validBundle().admissionCycles[0]
     const result = admissionCycleSchema.safeParse({
@@ -128,9 +134,9 @@ describe('content schemas', () => {
     }
   })
 
-  it('rejects missing required English content', () => {
+  it('rejects localized identity text with no official-language value', () => {
     const bundle = validBundle()
-    bundle.universities[0].summary.en = ''
+    ;(bundle.programs[0] as unknown as { name: unknown }).name = {}
 
     expect(bundleSchema.safeParse(bundle).success).toBe(false)
   })
@@ -147,19 +153,40 @@ describe('content schemas', () => {
 
     const result = bundleSchema.parse(bundle)
 
-    expect(result.universities[0].summary.de).toBe('Eine Beispieluniversität.')
+    expect(result.universities[0].summary?.de).toBe('Eine Beispieluniversität.')
   })
 
-  it('rejects a verified program whose detail content is incomplete', () => {
+  it('accepts a verified identity-only record without fabricating admissions facts', () => {
     const bundle = validBundle()
-    delete (bundle.programs[0] as { details?: unknown }).details
-
-    const result = bundleSchema.safeParse(bundle)
-
-    expect(result.success).toBe(false)
-    if (!result.success) {
-      expect(result.error.issues.some((issue) => issue.message.includes('complete detail content'))).toBe(true)
+    const identity = bundle.programs[0] as unknown as {
+      name: unknown
+      degreeLevel: string
+      discipline: string
+      teachingLanguages: string[]
+      durationMonths: number | null
+      durationMonthsMax: number | null
+      applyUrl: string | null
+      languageRequirements: unknown[]
+      details?: unknown
     }
+    identity.name = { zh: '\u5b98\u65b9\u9879\u76ee\u540d\u79f0' }
+    identity.degreeLevel = 'other'
+    identity.discipline = 'other'
+    identity.teachingLanguages = []
+    identity.durationMonths = null
+    identity.durationMonthsMax = null
+    identity.applyUrl = null
+    identity.languageRequirements = []
+    delete identity.details
+    bundle.admissionCycles = []
+
+    const result = bundleSchema.parse(bundle)
+
+    expect(result.programs[0]).toMatchObject({
+      teachingLanguages: [],
+      durationMonths: null,
+      applyUrl: null,
+    })
   })
 
   it('rejects a verified program without a verified admission cycle', () => {

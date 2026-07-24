@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "institutionId": "uni-nanjing-university",
+  "catalogStatus": "existing",
+  "checkedAt": "2026-07-20",
+  "sources": [
+    {
+      "version": 1, "id": "nju-intl-admissions-home", "institutionId": "uni-nanjing-university", "entityType": "university", "sourceCategory": "international_admissions_home",
+      "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/index.html", "allowedHosts": ["hwxy.nju.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 168, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-admissions-home-v1", "fields": [{ "path": "admissionsSections", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "nju-undergraduate-catalog", "institutionId": "uni-nanjing-university", "entityType": "program-cycle", "sourceCategory": "undergraduate_catalog",
+      "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/BachelorsPrograms/index.html", "allowedHosts": ["hwxy.nju.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 168, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-program-catalog-v1", "fields": [{ "path": "programs", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "nju-masters-catalog", "institutionId": "uni-nanjing-university", "entityType": "program-cycle", "sourceCategory": "masters_catalog",
+      "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/MastersPrograms/index.html", "allowedHosts": ["hwxy.nju.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 168, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-program-catalog-v1", "fields": [{ "path": "programs", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "nju-doctoral-catalog", "institutionId": "uni-nanjing-university", "entityType": "program-cycle", "sourceCategory": "doctoral_catalog",
+      "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DoctoratePrograms/index.html", "allowedHosts": ["hwxy.nju.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 168, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-program-catalog-v1", "fields": [{ "path": "programs", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "nju-official-tuition", "institutionId": "uni-nanjing-university", "entityType": "program-cycle", "sourceCategory": "fees",
+      "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Costs/Tuition/index.html", "allowedHosts": ["hwxy.nju.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 720, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-fees-v1", "fields": [{ "path": "fees", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "nju-application-portal", "institutionId": "uni-nanjing-university", "entityType": "university", "sourceCategory": "application_portal",
+      "officialUrl": "https://nju.17gz.org/", "allowedHosts": ["nju.17gz.org"], "enabled": false,
+      "schedule": { "intervalHours": 720, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "blocked" },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-application-portal-v1", "fields": [{ "path": "applicationUrl", "type": "string", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "nju-university-scholarship", "institutionId": "uni-nanjing-university", "entityType": "scholarship-cycle", "sourceCategory": "university_scholarship",
+      "officialUrl": "https://hwxy.nju.edu.cn/lxnd/zsxx/jxj/njszfjxj/20220628/i224252.html", "allowedHosts": ["hwxy.nju.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 168, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-scholarships-v1", "fields": [{ "path": "scholarships", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "nju-2026-chinese-government-scholarship", "institutionId": "uni-nanjing-university", "entityType": "scholarship-cycle", "sourceCategory": "government_scholarship",
+      "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Scholarships/ChineseGovernmentScholarship/20230414/i242759.html", "allowedHosts": ["hwxy.nju.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 168, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-government-scholarships-v1", "fields": [{ "path": "scholarships", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "nju-admissions-catalog-anchor", "institutionId": "uni-nanjing-university", "entityType": "university", "sourceCategory": "catalog_anchor",
+      "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/index.html", "allowedHosts": ["hwxy.nju.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 720, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-catalog-anchor-v1", "fields": [{ "path": "catalogLinks", "type": "string-array", "required": true, "critical": true }] }
+    }
+  ],
+  "coverage": [
+    { "sourceCategory": "international_admissions_home", "status": "registered", "sourceIds": ["nju-intl-admissions-home"] },
+    { "sourceCategory": "undergraduate_catalog", "status": "registered", "sourceIds": ["nju-undergraduate-catalog"] },
+    { "sourceCategory": "masters_catalog", "status": "registered", "sourceIds": ["nju-masters-catalog"] },
+    { "sourceCategory": "doctoral_catalog", "status": "registered", "sourceIds": ["nju-doctoral-catalog"] },
+    { "sourceCategory": "non_degree_catalog", "status": "discovery_pending", "note": "No distinct current official HTTPS non-degree catalog was confirmed without guessing a navigation URL." },
+    { "sourceCategory": "current_guide", "status": "discovery_pending", "note": "No stable current-cycle consolidated official guide page was confirmed in this pilot review." },
+    { "sourceCategory": "dates_deadlines", "status": "discovery_pending", "note": "Dates are embedded in program notices; no distinct current official dates page was confirmed." },
+    { "sourceCategory": "fees", "status": "registered", "sourceIds": ["nju-official-tuition"] },
+    { "sourceCategory": "eligibility_language", "status": "discovery_pending", "note": "Eligibility and language rules are embedded in program notices; no distinct stable page was confirmed." },
+    { "sourceCategory": "application_portal", "status": "source_unavailable", "sourceIds": ["nju-application-portal"], "note": "The official application entrance is a third-party-hosted interactive portal and is disabled because the worker has no browser-rendering or authenticated-session capability." },
+    { "sourceCategory": "university_scholarship", "status": "registered", "sourceIds": ["nju-university-scholarship"] },
+    { "sourceCategory": "faculty_scholarship", "status": "discovery_pending", "note": "No centralized current faculty-level scholarship page was confirmed." },
+    { "sourceCategory": "government_scholarship", "status": "registered", "sourceIds": ["nju-2026-chinese-government-scholarship"] },
+    { "sourceCategory": "program_detail", "status": "discovery_pending", "note": "Program-level pages will be discovered from the registered catalog anchors." },
+    { "sourceCategory": "contacts", "status": "discovery_pending", "note": "A distinct stable official admissions contact page was not confirmed in this pilot review." },
+    { "sourceCategory": "catalog_anchor", "status": "registered", "sourceIds": ["nju-admissions-catalog-anchor"] }
+  ]
+}

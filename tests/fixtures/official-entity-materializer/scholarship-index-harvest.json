@@ -1,0 +1,162 @@
+{
+  "checkedAt": "2026-07-23T08:00:00.000Z",
+  "sourceMode": "fixture",
+  "requestDelayMs": 5000,
+  "institutionsCovered": [
+    "uni-peking-university",
+    "uni-zhejiang-university",
+    "uni-fudan-university",
+    "uni-tsinghua-university",
+    "uni-shanghai-jiao-tong-university",
+    "uni-university-of-science-and-technology-of-china"
+  ],
+  "verifiedCandidateCount": 6,
+  "sources": [
+    {
+      "sourceId": "pku-scholarship-index",
+      "institutionId": "uni-peking-university",
+      "officialUrl": "https://isd.pku.edu.cn/en/scholarship.php",
+      "status": "ok",
+      "candidateCount": 1,
+      "reason": null
+    },
+    {
+      "sourceId": "zju-scholarship-index",
+      "institutionId": "uni-zhejiang-university",
+      "officialUrl": "https://iczu.zju.edu.cn/admissions/jxjjz/list.htm",
+      "status": "ok",
+      "candidateCount": 1,
+      "reason": null
+    },
+    {
+      "sourceId": "fudan-new-student-scholarship-index",
+      "institutionId": "uni-fudan-university",
+      "officialUrl": "https://iso.fudan.edu.cn/xsjxj/list.htm",
+      "status": "ok",
+      "candidateCount": 1,
+      "reason": null
+    },
+    {
+      "sourceId": "tsinghua-graduate-scholarship-index",
+      "institutionId": "uni-tsinghua-university",
+      "officialUrl": "https://yz.tsinghua.edu.cn/en/Financial_Aid/Scholarship_Application.htm",
+      "status": "ok",
+      "candidateCount": 1,
+      "reason": null
+    },
+    {
+      "sourceId": "sjtu-scholarship-index",
+      "institutionId": "uni-shanghai-jiao-tong-university",
+      "officialUrl": "https://isc.sjtu.edu.cn/cn/content.aspx?flag=82&info_lb=107",
+      "status": "ok",
+      "candidateCount": 1,
+      "reason": null
+    },
+    {
+      "sourceId": "ustc-fellowship-index",
+      "institutionId": "uni-university-of-science-and-technology-of-china",
+      "officialUrl": "https://ic.ustc.edu.cn/en/admission.php",
+      "status": "ok",
+      "candidateCount": 1,
+      "reason": null
+    }
+  ],
+  "entities": [
+    {
+      "entityKey": "uni-peking-university:chinese-government-scholarship",
+      "entityType": "scholarship",
+      "institutionId": "uni-peking-university",
+      "nameZh": null,
+      "nameEn": "Chinese Government Scholarship",
+      "schemeType": "government",
+      "officialUrl": "https://isd.pku.edu.cn/en/detail.php?id=101",
+      "sourceCheckedAt": "2026-07-23T08:00:00.000Z",
+      "evidence": {
+        "locator": "html:a[1]",
+        "quote": "Chinese Government Scholarship",
+        "officialUrl": "https://isd.pku.edu.cn/en/scholarship.php",
+        "checkedAt": "2026-07-23T08:00:00.000Z"
+      }
+    },
+    {
+      "entityKey": "uni-zhejiang-university:international-chinese-language-teachers-scholarship",
+      "entityType": "scholarship",
+      "institutionId": "uni-zhejiang-university",
+      "nameZh": "国际中文教师奖学金",
+      "nameEn": null,
+      "schemeType": "language",
+      "officialUrl": "https://iczu.zju.edu.cn/admissions/jxjjz/zhongwen.htm",
+      "sourceCheckedAt": "2026-07-23T08:00:00.000Z",
+      "evidence": {
+        "locator": "html:a[2]",
+        "quote": "国际中文教师奖学金",
+        "officialUrl": "https://iczu.zju.edu.cn/admissions/jxjjz/list.htm",
+        "checkedAt": "2026-07-23T08:00:00.000Z"
+      }
+    },
+    {
+      "entityKey": "uni-fudan-university:international-student-donation-scholarship",
+      "entityType": "scholarship",
+      "institutionId": "uni-fudan-university",
+      "nameZh": "国际学生社会捐赠奖学金",
+      "nameEn": null,
+      "schemeType": "donation",
+      "officialUrl": "https://iso.fudan.edu.cn/donation/list.htm",
+      "sourceCheckedAt": "2026-07-23T08:00:00.000Z",
+      "evidence": {
+        "locator": "html:a[3]",
+        "quote": "国际学生社会捐赠奖学金",
+        "officialUrl": "https://iso.fudan.edu.cn/xsjxj/list.htm",
+        "checkedAt": "2026-07-23T08:00:00.000Z"
+      }
+    },
+    {
+      "entityKey": "uni-tsinghua-university:campus-asia-scholarship",
+      "entityType": "scholarship",
+      "institutionId": "uni-tsinghua-university",
+      "nameZh": null,
+      "nameEn": "Scholarship for Campus Asia Program",
+      "schemeType": "exchange",
+      "officialUrl": "https://yz.tsinghua.edu.cn/en/Financial_Aid/Campus_Asia.htm",
+      "sourceCheckedAt": "2026-07-23T08:00:00.000Z",
+      "evidence": {
+        "locator": "html:text-identity[1]",
+        "quote": "Scholarship for Campus Asia Program",
+        "officialUrl": "https://yz.tsinghua.edu.cn/en/Financial_Aid/Scholarship_Application.htm",
+        "checkedAt": "2026-07-23T08:00:00.000Z"
+      }
+    },
+    {
+      "entityKey": "uni-shanghai-jiao-tong-university:shanghai-jiao-tong-university-scholarship",
+      "entityType": "scholarship",
+      "institutionId": "uni-shanghai-jiao-tong-university",
+      "nameZh": "上海交通大学奖学金",
+      "nameEn": null,
+      "schemeType": "university",
+      "officialUrl": "https://isc.sjtu.edu.cn/cn/content.aspx?info_lb=107&id=201",
+      "sourceCheckedAt": "2026-07-23T08:00:00.000Z",
+      "evidence": {
+        "locator": "html:text-identity[2]",
+        "quote": "上海交通大学奖学金",
+        "officialUrl": "https://isc.sjtu.edu.cn/cn/content.aspx?flag=82&info_lb=107",
+        "checkedAt": "2026-07-23T08:00:00.000Z"
+      }
+    },
+    {
+      "entityKey": "uni-university-of-science-and-technology-of-china:anso-scholarship",
+      "entityType": "scholarship",
+      "institutionId": "uni-university-of-science-and-technology-of-china",
+      "nameZh": null,
+      "nameEn": "ANSO Scholarship",
+      "schemeType": "program_specific",
+      "officialUrl": "https://ic.ustc.edu.cn/en/anso-scholarship.php",
+      "sourceCheckedAt": "2026-07-23T08:00:00.000Z",
+      "evidence": {
+        "locator": "html:text-identity[3]",
+        "quote": "ANSO Scholarship",
+        "officialUrl": "https://ic.ustc.edu.cn/en/admission.php",
+        "checkedAt": "2026-07-23T08:00:00.000Z"
+      }
+    }
+  ]
+}

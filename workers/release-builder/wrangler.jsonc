@@ -1,0 +1,61 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "studyinchina-release-builder",
+  "main": "./src/index.ts",
+  "compatibility_date": "2026-07-20",
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": true },
+  "triggers": {
+    "crons": ["47 * * * *"]
+  },
+  "vars": {
+    "SCHEDULE_BATCH_LIMIT": "20",
+    "PIPELINE_PAGE_SIZE": "500",
+    "CATALOG_WRITE_BATCH_SIZE": "50",
+    "MAX_QUEUE_ATTEMPTS": "4",
+    "EVENT_LEASE_SECONDS": "900"
+  },
+  "d1_databases": [
+    {
+      "binding": "PIPELINE_DB",
+      "database_name": "studyinchina-pipeline",
+      "database_id": "bb68098a-1429-44ad-869a-de9c3a5e478c",
+      "migrations_dir": "../../infra/d1/pipeline/migrations"
+    },
+    {
+      "binding": "CATALOG_DB",
+      "database_name": "studyinchina-catalog",
+      "database_id": "451c22ea-473e-4a71-a1b5-8b0a2de4176f",
+      "migrations_dir": "../../infra/d1/catalog/migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "RELEASE_ARTIFACTS",
+      "bucket_name": "studyinchina-releases"
+    }
+  ],
+  "queues": {
+    "producers": [
+      {
+        "binding": "RELEASE_QUEUE",
+        "queue": "studyinchina-release-builder"
+      },
+      {
+        "binding": "RELEASE_BUILDER_DLQ",
+        "queue": "studyinchina-release-builder-dlq"
+      }
+    ],
+    "consumers": [
+      {
+        "queue": "studyinchina-release-builder",
+        "max_batch_size": 5,
+        "max_batch_timeout": 5,
+        "max_retries": 4,
+        "dead_letter_queue": "studyinchina-release-builder-dlq",
+        "max_concurrency": 1
+      }
+    ]
+  }
+}

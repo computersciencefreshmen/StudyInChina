@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "institutionId": "uni-harbin-institute-of-technology",
+  "catalogStatus": "existing",
+  "checkedAt": "2026-07-20",
+  "sources": [
+    {
+      "version": 1, "id": "hit-intl-admissions-home", "institutionId": "uni-harbin-institute-of-technology", "entityType": "university", "sourceCategory": "international_admissions_home",
+      "officialUrl": "https://studyathit.hit.edu.cn/", "allowedHosts": ["studyathit.hit.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 168, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-admissions-home-v1", "fields": [{ "path": "admissionsSections", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "hit-undergraduate-catalog", "institutionId": "uni-harbin-institute-of-technology", "entityType": "program-cycle", "sourceCategory": "undergraduate_catalog",
+      "officialUrl": "https://studyathit.hit.edu.cn/18358/list.htm", "allowedHosts": ["studyathit.hit.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 168, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-program-catalog-v1", "fields": [{ "path": "programs", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "hit-masters-catalog", "institutionId": "uni-harbin-institute-of-technology", "entityType": "program-cycle", "sourceCategory": "masters_catalog",
+      "officialUrl": "https://studyathit.hit.edu.cn/18359/list.htm", "allowedHosts": ["studyathit.hit.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 168, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-program-catalog-v1", "fields": [{ "path": "programs", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "hit-doctoral-catalog", "institutionId": "uni-harbin-institute-of-technology", "entityType": "program-cycle", "sourceCategory": "doctoral_catalog",
+      "officialUrl": "https://studyathit.hit.edu.cn/18360/list.htm", "allowedHosts": ["studyathit.hit.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 168, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-program-catalog-v1", "fields": [{ "path": "programs", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "hit-non-degree-catalog", "institutionId": "uni-harbin-institute-of-technology", "entityType": "program", "sourceCategory": "non_degree_catalog",
+      "officialUrl": "https://studyathit.hit.edu.cn/LongwtermChineseLanguageProgram/list.htm", "allowedHosts": ["studyathit.hit.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 720, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-program-catalog-v1", "fields": [{ "path": "programs", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "hit-application-portal", "institutionId": "uni-harbin-institute-of-technology", "entityType": "university", "sourceCategory": "application_portal",
+      "officialUrl": "https://hit.at0086.cn/student", "allowedHosts": ["hit.at0086.cn"], "enabled": false,
+      "schedule": { "intervalHours": 720, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "blocked" },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-application-portal-v1", "fields": [{ "path": "applicationUrl", "type": "string", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "hit-university-scholarship-index", "institutionId": "uni-harbin-institute-of-technology", "entityType": "scholarship", "sourceCategory": "university_scholarship",
+      "officialUrl": "https://studyathit.hit.edu.cn/18367/list.htm", "allowedHosts": ["studyathit.hit.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 168, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-scholarships-v1", "fields": [{ "path": "scholarships", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "hit-government-scholarship-index", "institutionId": "uni-harbin-institute-of-technology", "entityType": "scholarship", "sourceCategory": "government_scholarship",
+      "officialUrl": "https://studyathit.hit.edu.cn/18340/list.htm", "allowedHosts": ["studyathit.hit.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 168, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-government-scholarships-v1", "fields": [{ "path": "scholarships", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "hit-admissions-catalog-anchor", "institutionId": "uni-harbin-institute-of-technology", "entityType": "university", "sourceCategory": "catalog_anchor",
+      "officialUrl": "https://studyathit.hit.edu.cn/", "allowedHosts": ["studyathit.hit.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 720, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-catalog-anchor-v1", "fields": [{ "path": "catalogLinks", "type": "string-array", "required": true, "critical": true }] }
+    }
+  ],
+  "coverage": [
+    { "sourceCategory": "international_admissions_home", "status": "registered", "sourceIds": ["hit-intl-admissions-home"] },
+    { "sourceCategory": "undergraduate_catalog", "status": "registered", "sourceIds": ["hit-undergraduate-catalog"] },
+    { "sourceCategory": "masters_catalog", "status": "registered", "sourceIds": ["hit-masters-catalog"] },
+    { "sourceCategory": "doctoral_catalog", "status": "registered", "sourceIds": ["hit-doctoral-catalog"] },
+    { "sourceCategory": "non_degree_catalog", "status": "registered", "sourceIds": ["hit-non-degree-catalog"] },
+    { "sourceCategory": "current_guide", "status": "discovery_pending", "note": "No stable current-cycle consolidated official guide page was confirmed in this pilot review." },
+    { "sourceCategory": "dates_deadlines", "status": "discovery_pending", "note": "Dates are embedded in current notices; no distinct stable official dates page was confirmed." },
+    { "sourceCategory": "fees", "status": "discovery_pending", "note": "Fees are embedded in program notices or attachments; no distinct directly parseable fee page was confirmed." },
+    { "sourceCategory": "eligibility_language", "status": "discovery_pending", "note": "Eligibility and language rules are embedded in program notices; no distinct stable page was confirmed." },
+    { "sourceCategory": "application_portal", "status": "source_unavailable", "sourceIds": ["hit-application-portal"], "note": "The officially linked third-party application portal is interactive and disabled because the worker has no browser-rendering or authenticated-session capability." },
+    { "sourceCategory": "university_scholarship", "status": "registered", "sourceIds": ["hit-university-scholarship-index"] },
+    { "sourceCategory": "faculty_scholarship", "status": "discovery_pending", "note": "No centralized current faculty-level scholarship page was confirmed." },
+    { "sourceCategory": "government_scholarship", "status": "registered", "sourceIds": ["hit-government-scholarship-index"] },
+    { "sourceCategory": "program_detail", "status": "discovery_pending", "note": "Program-level pages will be discovered from the registered catalog anchors." },
+    { "sourceCategory": "contacts", "status": "discovery_pending", "note": "A distinct stable official admissions contact page was not confirmed in this pilot review." },
+    { "sourceCategory": "catalog_anchor", "status": "registered", "sourceIds": ["hit-admissions-catalog-anchor"] }
+  ]
+}

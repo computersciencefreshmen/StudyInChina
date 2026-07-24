@@ -1,10 +1,10 @@
 import type { Locale } from '@/i18n/config'
 
-export type LocalizedText = { en: string } & Partial<Record<Exclude<Locale, 'en'>, string>>
+export type LocalizedText = Partial<Record<Locale, string>>
 export type ContentStatus = 'draft' | 'verified' | 'stale' | 'archived'
 export type Region = 'north' | 'northeast' | 'east' | 'south' | 'central' | 'southwest' | 'northwest'
-export type DegreeLevel = 'bachelor' | 'master' | 'language' | 'foundation'
-export type Discipline = 'engineering' | 'business' | 'medicine' | 'chinese-education' | 'humanities' | 'law-ir' | 'science' | 'art-design'
+export type DegreeLevel = 'bachelor' | 'master' | 'doctorate' | 'language' | 'foundation' | 'other'
+export type Discipline = 'engineering' | 'business' | 'medicine' | 'chinese-education' | 'humanities' | 'law-ir' | 'science' | 'art-design' | 'other'
 
 export type AuditMeta = {
   sourceIds: string[]
@@ -18,7 +18,7 @@ export type Source = {
   url: string
   title: string
   publisher: string
-  kind: 'university' | 'program' | 'admissions' | 'scholarship' | 'government' | 'city'
+  kind: 'university' | 'program' | 'admissions' | 'scholarship' | 'government' | 'city' | 'other'
   language: 'zh' | 'en' | 'ru' | 'other'
   official: boolean
   accessedAt: string
@@ -28,11 +28,11 @@ export type City = AuditMeta & {
   id: string
   slug: string
   name: LocalizedText
-  province: LocalizedText
-  region: Region
-  coordinates: { lat: number; lng: number }
-  overview: LocalizedText
-  climate: LocalizedText
+  province: LocalizedText | null
+  region: Region | null
+  coordinates: { lat: number; lng: number } | null
+  overview: LocalizedText | null
+  climate: LocalizedText | null
   foodHighlights: LocalizedText[]
   sights: LocalizedText[]
 }
@@ -42,10 +42,10 @@ export type University = AuditMeta & {
   slug: string
   name: LocalizedText
   cityId: string
-  region: Region
+  region: Region | null
   officialUrl: string
-  admissionsUrl: string
-  summary: LocalizedText
+  admissionsUrl: string | null
+  summary: LocalizedText | null
   featured: boolean
 }
 
@@ -77,7 +77,7 @@ export type Program = AuditMeta & {
   durationMonths: number | null
   durationMonthsMax?: number | null
   programUrl: string
-  applyUrl: string
+  applyUrl: string | null
   languageRequirements: LanguageRequirement[]
   details?: ProgramDetails
 }
@@ -111,8 +111,8 @@ export type Scholarship = AuditMeta & {
     stipendCnyPerMonth: number | null
   }
   deadline: string | null
-  applicationUrl: string
-  summary: LocalizedText
+  applicationUrl: string | null
+  summary: LocalizedText | null
 }
 
 export type DataBundle = {

@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "institutionId": "uni-wuhan-university",
+  "catalogStatus": "existing",
+  "checkedAt": "2026-07-20",
+  "sources": [
+    {
+      "version": 1, "id": "whu-intl-admissions-home", "institutionId": "uni-wuhan-university", "entityType": "university", "sourceCategory": "international_admissions_home",
+      "officialUrl": "https://en.whu.edu.cn/Admissions.htm", "allowedHosts": ["en.whu.edu.cn"], "enabled": true,
+      "schedule": { "intervalHours": 168, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "enforce" }, "canonicalization": { "collapseWhitespace": true },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-admissions-home-v1", "fields": [{ "path": "admissionsSections", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "whu-doctoral-catalog", "institutionId": "uni-wuhan-university", "entityType": "program-cycle", "sourceCategory": "doctoral_catalog",
+      "officialUrl": "https://admission.whu.edu.cn/ADMISSION/PROGRAMS/DEGREE_PROGRAM/DOCTORAL_PROGRAM.htm", "allowedHosts": ["admission.whu.edu.cn"], "enabled": false,
+      "schedule": { "intervalHours": 168, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "blocked" },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-program-catalog-v1", "fields": [{ "path": "programs", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "whu-application-portal", "institutionId": "uni-wuhan-university", "entityType": "university", "sourceCategory": "application_portal",
+      "officialUrl": "https://admission.whu.edu.cn/", "allowedHosts": ["admission.whu.edu.cn"], "enabled": false,
+      "schedule": { "intervalHours": 720, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "blocked" },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-application-portal-v1", "fields": [{ "path": "applicationUrl", "type": "string", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "whu-admissions-contacts", "institutionId": "uni-wuhan-university", "entityType": "university", "sourceCategory": "contacts",
+      "officialUrl": "https://admission.whu.edu.cn/index/NOTICES.htm", "allowedHosts": ["admission.whu.edu.cn"], "enabled": false,
+      "schedule": { "intervalHours": 720, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "blocked" },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-contacts-v1", "fields": [{ "path": "contacts", "type": "object", "required": true, "critical": true }] }
+    },
+    {
+      "version": 1, "id": "whu-admissions-catalog-anchor", "institutionId": "uni-wuhan-university", "entityType": "university", "sourceCategory": "catalog_anchor",
+      "officialUrl": "https://admission.whu.edu.cn/index.htm", "allowedHosts": ["admission.whu.edu.cn"], "enabled": false,
+      "schedule": { "intervalHours": 720, "jitterMinutes": 60 }, "fetch": { "timeoutMs": 15000, "maxBytes": 10485760 }, "robots": { "mode": "blocked" },
+      "extraction": { "mode": "minimax", "schemaVersion": "pilot-catalog-anchor-v1", "fields": [{ "path": "catalogLinks", "type": "string-array", "required": true, "critical": true }] }
+    }
+  ],
+  "coverage": [
+    { "sourceCategory": "international_admissions_home", "status": "registered", "sourceIds": ["whu-intl-admissions-home"] },
+    { "sourceCategory": "undergraduate_catalog", "status": "discovery_pending", "note": "No current official HTTPS undergraduate catalog URL was confirmed without guessing a path." },
+    { "sourceCategory": "masters_catalog", "status": "discovery_pending", "note": "No current official HTTPS master's catalog URL was confirmed without guessing a path." },
+    { "sourceCategory": "doctoral_catalog", "status": "source_unavailable", "sourceIds": ["whu-doctoral-catalog"], "note": "The official doctoral page is confirmed, but the admissions host rejected automated access during review; it remains disabled until an access policy is verified." },
+    { "sourceCategory": "non_degree_catalog", "status": "discovery_pending", "note": "No distinct current official HTTPS non-degree catalog was confirmed." },
+    { "sourceCategory": "current_guide", "status": "discovery_pending", "note": "No stable current-cycle consolidated official guide page was confirmed." },
+    { "sourceCategory": "dates_deadlines", "status": "discovery_pending", "note": "No distinct current official dates page was confirmed." },
+    { "sourceCategory": "fees", "status": "discovery_pending", "note": "No stable directly parseable current official fee page was confirmed." },
+    { "sourceCategory": "eligibility_language", "status": "discovery_pending", "note": "No distinct current official eligibility and language page was confirmed." },
+    { "sourceCategory": "application_portal", "status": "source_unavailable", "sourceIds": ["whu-application-portal"], "note": "The official admissions entrance rejects automated access and may require interactive browser behavior; it remains disabled." },
+    { "sourceCategory": "university_scholarship", "status": "discovery_pending", "note": "No centralized current university scholarship page was confirmed." },
+    { "sourceCategory": "faculty_scholarship", "status": "discovery_pending", "note": "No centralized current faculty-level scholarship page was confirmed." },
+    { "sourceCategory": "government_scholarship", "status": "discovery_pending", "note": "No current-cycle official government scholarship page was confirmed on the reviewed university domains." },
+    { "sourceCategory": "program_detail", "status": "discovery_pending", "note": "Program-level pages require a later access-approved discovery crawl." },
+    { "sourceCategory": "contacts", "status": "source_unavailable", "sourceIds": ["whu-admissions-contacts"], "note": "The official notices/contact anchor rejected automated access during review and is disabled pending policy verification." },
+    { "sourceCategory": "catalog_anchor", "status": "source_unavailable", "sourceIds": ["whu-admissions-catalog-anchor"], "note": "The official catalog anchor rejected automated access during review and is disabled pending policy verification." }
+  ]
+}

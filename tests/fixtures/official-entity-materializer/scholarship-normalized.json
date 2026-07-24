@@ -1,0 +1,37 @@
+{
+  "format": "studyinchina.official-entities",
+  "formatVersion": 1,
+  "checkedAt": "2026-07-23T12:00:00.000Z",
+  "source": {
+    "title": "Official Scholarship Fixture",
+    "publisher": "Official Scholarship Provider Fixture",
+    "reviewedBy": "official-catalog-automation",
+    "languageCode": "en",
+    "officialHosts": [
+      "campuschina.org"
+    ]
+  },
+  "entities": [
+    {
+      "entityType": "scholarship",
+      "entityKey": "fixture:government:scholarship",
+      "providerOrganizationId": "provider-china-scholarship-council",
+      "schemeType": "government",
+      "name": {
+        "en": "Official Scholarship Fixture",
+        "zh": "官方奖学金测试夹具"
+      },
+      "officialUrl": "https://www.campuschina.org/",
+      "sourceCheckedAt": "2026-07-23T12:00:00.000Z",
+      "evidence": [
+        {
+          "locatorType": "manual",
+          "locator": "fixture:official-scholarship-name",
+          "quote": "Official Scholarship Fixture",
+          "officialUrl": "https://www.campuschina.org/",
+          "checkedAt": "2026-07-23T12:00:00.000Z"
+        }
+      ]
+    }
+  ]
+}

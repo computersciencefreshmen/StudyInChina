@@ -5,7 +5,12 @@ import universities from '../../content/data/universities.json'
 import programs from '../../content/data/programs.json'
 import admissionCycles from '../../content/data/admission-cycles.json'
 import scholarships from '../../content/data/scholarships.json'
-import { getFreshnessState, getTodayDate, isCurrentVerifiedRecord } from '@/lib/data/freshness'
+import {
+  getFreshnessState,
+  getTodayDate,
+  isCurrentVerifiedRecord,
+  isWithinPostDeadlineGrace,
+} from '@/lib/data/freshness'
 import { selectPublishedData } from '@/lib/data/publication'
 import { bundleSchema } from '@/lib/data/schema'
 import type { DataBundle } from '@/lib/data/types'
@@ -66,8 +71,8 @@ describe('production publication policy', () => {
   it('keeps unverified program templates out while publishing the reviewed first batch', () => {
     expect(allData.programs.length).toBe(120)
     expect(allData.programs.filter((program) => program.status === 'draft')).toHaveLength(112)
-    expect(published.programs).toHaveLength(6)
-    expect(published.admissionCycles).toHaveLength(7)
+    expect(published.programs).toHaveLength(4)
+    expect(published.admissionCycles).toHaveLength(5)
     expect(published.programs.every((program) => program.status === 'verified')).toBe(true)
   })
 
@@ -150,6 +155,16 @@ describe('production publication policy', () => {
     expect(result.scholarships[0].programIds).toEqual([])
   })
 
+  it('keeps a verified identity with no announced cycle distinct from an expired cycle', () => {
+    const fixture = publicationFixture()
+    fixture.admissionCycles = []
+
+    const result = selectPublishedData(fixture, TODAY)
+
+    expect(result.programs.map((program) => program.id)).toEqual([fixture.programs[0].id])
+    expect(result.admissionCycles).toEqual([])
+  })
+
   it('filters relationship IDs and sources to the records that remain published', () => {
     const fixture = publicationFixture()
     const result = selectPublishedData(fixture, TODAY)
@@ -168,5 +183,38 @@ describe('production publication policy', () => {
 
   it('uses the China calendar date when deriving today at runtime', () => {
     expect(getTodayDate(new Date('2026-07-19T16:00:00.000Z'))).toBe(TODAY)
+  })
+
+  it('keeps a deadline through day 30 and removes programs and scholarships on day 31', () => {
+    expect(isWithinPostDeadlineGrace('2026-06-20', TODAY)).toBe(true)
+    expect(isWithinPostDeadlineGrace('2026-06-19', TODAY)).toBe(false)
+
+    const fixture = publicationFixture()
+    fixture.admissionCycles[0] = {
+      ...fixture.admissionCycles[0],
+      closesOn: '2026-06-19',
+      dateStatus: 'published',
+    }
+    fixture.scholarships[0] = { ...fixture.scholarships[0], deadline: '2026-06-19' }
+
+    const result = selectPublishedData(fixture, TODAY)
+    expect(result.programs).toHaveLength(0)
+    expect(result.admissionCycles).toHaveLength(0)
+    expect(result.scholarships).toHaveLength(0)
+  })
+
+  it('keeps rolling and officially unannounced deadlines public', () => {
+    const fixture = publicationFixture()
+    fixture.admissionCycles[0] = {
+      ...fixture.admissionCycles[0],
+      closesOn: null,
+      dateStatus: 'rolling',
+    }
+    fixture.scholarships[0] = { ...fixture.scholarships[0], deadline: null }
+
+    const result = selectPublishedData(fixture, TODAY)
+    expect(result.programs).toHaveLength(1)
+    expect(result.admissionCycles).toHaveLength(1)
+    expect(result.scholarships).toHaveLength(1)
   })
 })

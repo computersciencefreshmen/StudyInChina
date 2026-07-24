@@ -27,8 +27,8 @@ describe('published content data', () => {
 
     expect(published.cities).toHaveLength(12)
     expect(published.universities.length).toBeGreaterThanOrEqual(39)
-    expect(published.programs).toHaveLength(6)
-    expect(published.admissionCycles).toHaveLength(7)
+    expect(published.programs).toHaveLength(4)
+    expect(published.admissionCycles).toHaveLength(5)
   })
 
   it('publishes no incomplete project templates', () => {
@@ -57,7 +57,8 @@ describe('published content data', () => {
       expect(cycle.applicationFeeCny).not.toBeNull()
     }
 
-    expect(published.admissionCycles.find((cycle) => cycle.programId === 'program-fudan-university-chinese-language-program-language')?.tuitionStatus).toBe('reference')
+    expect(published.programs.map((program) => program.id))
+      .not.toContain('program-fudan-university-chinese-language-program-language')
     expect(published.admissionCycles.find((cycle) => cycle.programId === 'program-nanjing-university-chinese-language-program-language')?.evidenceBasis).toBe('recurring-official-rule')
   })
 
@@ -70,7 +71,7 @@ describe('published content data', () => {
     ]
 
     for (const name of names) {
-      expect(name.en.trim()).not.toBe('')
+      expect(name.en?.trim()).not.toBe('')
       expect(name.zh?.trim()).not.toBe('')
       expect(name.ru?.trim()).not.toBe('')
     }

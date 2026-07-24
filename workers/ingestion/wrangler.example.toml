@@ -1,0 +1,62 @@
+# Copy to wrangler.toml outside source control, then replace placeholder IDs.
+name = "studyinchina-ingestion"
+main = "src/index.ts"
+compatibility_date = "2026-07-20"
+workers_dev = true
+
+[triggers]
+crons = ["17 * * * *"]
+
+[vars]
+USER_AGENT = "StudyInChinaDataBot/1.0 (+https://example.com/crawler-policy; contact=data@example.com)"
+SCHEDULE_BATCH_LIMIT = "20"
+MAX_QUEUE_ATTEMPTS = "4"
+DEFAULT_FETCH_TIMEOUT_MS = "15000"
+DEFAULT_MAX_BYTES = "10485760"
+MINIMAX_API_URL = "https://api.minimax.io/v1/chat/completions"
+MINIMAX_MODEL = "MiniMax-M2.7"
+MINIMAX_TIMEOUT_MS = "30000"
+MINIMAX_MAX_INPUT_CHARS = "60000"
+MINIMAX_MAX_OUTPUT_TOKENS = "4096"
+DOCUMENT_CONVERSION_TIMEOUT_MS = "45000"
+DOCUMENT_MAX_TEXT_CHARACTERS = "1000000"
+INFRA_FORECAST_CNY = "0"
+
+[browser]
+binding = "BROWSER"
+
+[ai]
+binding = "AI"
+
+[[d1_databases]]
+binding = "INGESTION_DB"
+database_name = "studyinchina-ingestion"
+database_id = "replace-with-d1-database-id"
+
+[[r2_buckets]]
+binding = "SNAPSHOTS_BUCKET"
+bucket_name = "studyinchina-source-snapshots"
+
+[[queues.producers]]
+binding = "INGESTION_QUEUE"
+queue = "studyinchina-ingestion"
+
+[[queues.producers]]
+binding = "INGESTION_DLQ"
+queue = "studyinchina-ingestion-dlq"
+
+[[queues.producers]]
+binding = "QUARANTINE_QUEUE"
+queue = "studyinchina-ingestion-quarantine"
+
+[[queues.consumers]]
+queue = "studyinchina-ingestion"
+max_batch_size = 10
+max_batch_timeout = 5
+max_retries = 4
+dead_letter_queue = "studyinchina-ingestion-dlq"
+max_concurrency = 2
+
+# Set secrets separately; never put values in this file:
+#   npx wrangler secret put MINIMAX_API_KEY
+#   npx wrangler secret put INGESTION_ADMIN_TOKEN

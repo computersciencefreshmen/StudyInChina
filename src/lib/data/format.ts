@@ -2,16 +2,22 @@ import { isPublicLocale, localeIntlTag, type Locale } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 import type { LocalizedText } from './types'
 
-export function localize(value: LocalizedText, locale: Locale): string {
+export function localize(value: LocalizedText | null | undefined, locale: Locale): string {
+  const unknown = getMessages(isPublicLocale(locale) ? locale : 'en').common.unknown
+  if (!value) return unknown
   const translated = value[locale]?.trim()
   if (translated) return translated
-  if (locale === 'en') return value.en
+  const fallback = value.en?.trim()
+    || value.zh?.trim()
+    || value.ru?.trim()
+    || Object.values(value).find((item) => item?.trim())?.trim()
+  if (!fallback) return unknown
 
   const pendingLabel = isPublicLocale(locale)
     ? getMessages(locale).common.translationPending
     : getMessages('en').common.translationPending
 
-  return `${pendingLabel}: ${value.en}`
+  return `${pendingLabel}: ${fallback}`
 }
 
 export function formatDate(value: string | null, locale: Locale, fallback: string): string {

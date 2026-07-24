@@ -7,7 +7,7 @@ import { AppHeader } from '@/components/layout/AppHeader'
 import { localeDirection, launchLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 import { formatDate } from '@/lib/data/format'
-import { getData } from '@/lib/data/load'
+import { getCatalogData } from '@/lib/data/load'
 import { getDataReleaseDate } from '@/lib/data/release'
 import { requireLocale, siteUrl } from '@/lib/site'
 import '../globals.css'
@@ -30,7 +30,7 @@ export default async function LocaleLayout({ children, params }: Readonly<{ chil
   const locale = requireLocale((await params).locale)
   if (!locale) notFound()
   const messages = getMessages(locale)
-  const releaseDate = formatDate(getDataReleaseDate(getData()), locale, '—')
+  const releaseDate = formatDate(getDataReleaseDate(await getCatalogData()), locale, '—')
   const releaseLabel = `${messages.shell.dataRelease}: ${releaseDate}`
 
   return <html lang={locale} dir={localeDirection(locale)}>
