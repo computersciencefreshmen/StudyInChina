@@ -235,6 +235,50 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(r2Reads).toBe(0)
   })
 
+  it('lists identity-only programs as not announced without exposing a cycle or route', async () => {
+    database.exec('BEGIN')
+    try {
+      const program = database.prepare(`
+        SELECT visible.program_id, visible.institution_id, record.slug
+        FROM current_programs AS visible
+        JOIN current_catalog_records AS record
+          ON record.release_id = visible.release_id
+         AND record.record_id = visible.program_id
+        WHERE visible.program_type NOT IN ('exchange', 'visiting', 'short_term')
+          AND record.slug IS NOT NULL
+          AND EXISTS (
+            SELECT 1 FROM current_program_cycles AS cycle
+            WHERE cycle.release_id = visible.release_id
+              AND cycle.program_id = visible.program_id
+          )
+        ORDER BY visible.program_id
+        LIMIT 1
+      `).get() as { program_id: string; institution_id: string; slug: string }
+      database.prepare(`
+        UPDATE program_cycles
+        SET cycle_status = 'archived'
+        WHERE program_id = ?
+      `).run(program.program_id)
+
+      const response = await worker.fetch(new Request(
+        `https://catalog.test/api/v1/programs?institution=${program.institution_id}&applicationState=not-announced&limit=100`,
+      ), environment)
+      const programs = await response.json() as ApiEnvelopeDto<ProgramDto[]>
+      expect(response.status).toBe(200)
+      expect(programs.data.map((item) => item.id)).toContain(program.program_id)
+
+      const cyclesResponse = await worker.fetch(
+        new Request(`https://catalog.test/api/v1/programs/${program.slug}/cycles`),
+        environment,
+      )
+      const cycles = await cyclesResponse.json() as ApiEnvelopeDto<ProgramCycleDto[]>
+      expect(cyclesResponse.status).toBe(200)
+      expect(cycles.data).toEqual([])
+    } finally {
+      database.exec('ROLLBACK')
+    }
+  })
+
   it('rejects oversized limits and cursors bound to another resource', async () => {
     const oversized = await worker.fetch(
       new Request('https://catalog.test/api/v1/programs?limit=101'),

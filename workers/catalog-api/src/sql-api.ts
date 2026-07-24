@@ -627,13 +627,31 @@ export class CatalogSqlApi {
       )`, Math.round(query.tuitionMax * 100), query.tuitionMax)
     }
     if (cycleConditions.length > 0) {
-      addCondition(conditions, values, `EXISTS (
+      const matchingCycle = `EXISTS (
         SELECT 1
         FROM current_program_cycles AS cycle
         WHERE cycle.release_id = program.release_id
           AND cycle.program_id = program.program_id
           AND ${cycleConditions.join('\n          AND ')}
-      )`, ...cycleValues)
+      )`
+      const identityOnlyNotAnnounced = query.applicationState === 'not-announced'
+        && query.academicYear === undefined
+        && query.intake === undefined
+        && query.tuitionMin === undefined
+        && query.tuitionMax === undefined
+      addCondition(
+        conditions,
+        values,
+        identityOnlyNotAnnounced
+          ? `(NOT EXISTS (
+              SELECT 1
+              FROM current_program_cycles AS announced_cycle
+              WHERE announced_cycle.release_id = program.release_id
+                AND announced_cycle.program_id = program.program_id
+            ) OR ${matchingCycle})`
+          : matchingCycle,
+        ...cycleValues,
+      )
     }
     if (query.cursor && exactSlug === undefined) {
       const cursor = decodeCursor(query.cursor, 'programs', this.release.id)
