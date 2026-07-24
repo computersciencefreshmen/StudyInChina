@@ -110,6 +110,21 @@ const SOURCE_KIND_PRIORITY: Record<string, number> = {
   other: 0,
 }
 
+const USTC_PREREQUISITE = {
+  cityId: 'city-hefei',
+  citySlug: 'hefei',
+  cityName: { en: 'Hefei', zh: '\u5408\u80a5' },
+  institutionId: 'uni-university-of-science-and-technology-of-china',
+  institutionSlug: 'university-of-science-and-technology-of-china',
+  institutionName: {
+    en: 'University of Science and Technology of China',
+    zh: '\u4e2d\u56fd\u79d1\u5b66\u6280\u672f\u5927\u5b66',
+  },
+  officialUrl: 'https://www.ustc.edu.cn/',
+  admissionsUrl: 'https://ic.ustc.edu.cn/en/admission.php',
+  domains: ['ustc.edu.cn', 'ic.ustc.edu.cn'] as const,
+} as const
+
 function sqlValue(value: SqlValue): string {
   if (value === null) return 'NULL'
   if (typeof value === 'number') {
@@ -308,6 +323,99 @@ ON CONFLICT(record_id) DO UPDATE SET
   return localizedCount
 }
 
+function ustcPrerequisiteStatements(
+  statements: string[],
+  manifest: PilotSourceManifest,
+  generatedAt: string,
+): number {
+  const checkedAt = dateTimestamp(manifest.checkedAt)
+  const reviewAfterDate = new Date(checkedAt)
+  reviewAfterDate.setUTCDate(reviewAfterDate.getUTCDate() + 90)
+  const reviewAfter = reviewAfterDate.toISOString().slice(0, 10)
+
+  insertStableRecord(statements, {
+    id: USTC_PREREQUISITE.cityId,
+    slug: USTC_PREREQUISITE.citySlug,
+    reviewAfter,
+  }, 'location', generatedAt)
+  statements.push(`
+INSERT INTO locations (
+  record_id, parent_location_id, location_type, country_code,
+  region_code, latitude, longitude
+) VALUES (
+  ${sqlValue(USTC_PREREQUISITE.cityId)}, NULL, 'city', 'CN',
+  'CN-AH', NULL, NULL
+)
+ON CONFLICT(record_id) DO UPDATE SET
+  parent_location_id = NULL,
+  location_type = 'city',
+  country_code = 'CN',
+  region_code = 'CN-AH';`.trim())
+
+  insertStableRecord(statements, {
+    id: USTC_PREREQUISITE.institutionId,
+    slug: USTC_PREREQUISITE.institutionSlug,
+    reviewAfter,
+  }, 'organization', generatedAt)
+  statements.push(`
+INSERT INTO organizations (record_id, organization_type, official_url)
+VALUES (
+  ${sqlValue(USTC_PREREQUISITE.institutionId)}, 'university',
+  ${sqlValue(USTC_PREREQUISITE.officialUrl)}
+)
+ON CONFLICT(record_id) DO UPDATE SET
+  organization_type = 'university',
+  official_url = excluded.official_url;`.trim())
+  statements.push(`
+UPDATE organization_domains
+SET is_primary = 0
+WHERE organization_id = ${sqlValue(USTC_PREREQUISITE.institutionId)}
+  AND domain <> ${sqlValue(USTC_PREREQUISITE.domains[0])}
+  AND is_primary <> 0;`.trim())
+  for (const [index, domain] of USTC_PREREQUISITE.domains.entries()) {
+    statements.push(`
+INSERT INTO organization_domains (
+  organization_id, domain, is_primary, verified_at
+) VALUES (
+  ${sqlValue(USTC_PREREQUISITE.institutionId)}, ${sqlValue(domain)},
+  ${sqlValue(index === 0)}, ${sqlValue(checkedAt)}
+)
+ON CONFLICT(organization_id, domain) DO UPDATE SET
+  is_primary = excluded.is_primary,
+  verified_at = excluded.verified_at;`.trim())
+  }
+  statements.push(`
+INSERT INTO institutions (
+  record_id, city_id, institution_type, ministry_code, admissions_url, featured
+) VALUES (
+  ${sqlValue(USTC_PREREQUISITE.institutionId)},
+  ${sqlValue(USTC_PREREQUISITE.cityId)}, 'other', NULL,
+  ${sqlValue(USTC_PREREQUISITE.admissionsUrl)}, 0
+)
+ON CONFLICT(record_id) DO UPDATE SET
+  city_id = excluded.city_id,
+  institution_type = excluded.institution_type,
+  admissions_url = excluded.admissions_url,
+  featured = excluded.featured;`.trim())
+
+  let localizedCount = 0
+  localizedCount += localizedStatements(
+    statements,
+    USTC_PREREQUISITE.cityId,
+    'name',
+    USTC_PREREQUISITE.cityName,
+    generatedAt,
+  )
+  localizedCount += localizedStatements(
+    statements,
+    USTC_PREREQUISITE.institutionId,
+    'name',
+    USTC_PREREQUISITE.institutionName,
+    generatedAt,
+  )
+  return localizedCount
+}
+
 function sourceOwners(bundle: DataBundle): Map<string, string> {
   const owners = new Map<string, Set<string>>()
   const add = (sourceId: string, institutionId: string) => {
@@ -358,6 +466,10 @@ function collectSourceDocuments(
     })
   }
   const universityNames = new Map(bundle.universities.map((item) => [item.id, item.name.en]))
+  universityNames.set(
+    USTC_PREREQUISITE.institutionId,
+    USTC_PREREQUISITE.institutionName.en,
+  )
   for (const manifest of manifests) {
     for (const source of manifest.sources) {
       const publisher = universityNames.get(source.institutionId) ?? source.institutionId
@@ -508,6 +620,13 @@ export function buildPipelineBootstrap(
   const stableCities = bundle.cities.filter((item) => item.status === 'verified')
   const stableInstitutions = bundle.universities.filter((item) => item.status === 'verified')
   const stableInstitutionIds = new Set(stableInstitutions.map((item) => item.id))
+  const ustcManifest = manifests.find(
+    (manifest) => manifest.institutionId === USTC_PREREQUISITE.institutionId,
+  )
+  if (!ustcManifest) {
+    throw new Error('USTC pilot manifest is required for its materialization prerequisite')
+  }
+  stableInstitutionIds.add(USTC_PREREQUISITE.institutionId)
   const pilotSources = manifests
     .flatMap((manifest) => manifest.sources)
     .sort((left, right) => left.id.localeCompare(right.id))
@@ -527,6 +646,7 @@ export function buildPipelineBootstrap(
   for (const university of [...stableInstitutions].sort((left, right) => left.id.localeCompare(right.id))) {
     localizedContent += universityStatements(statements, university, generatedAt)
   }
+  localizedContent += ustcPrerequisiteStatements(statements, ustcManifest, generatedAt)
 
   fieldDefinitionStatements(statements)
 
@@ -606,9 +726,9 @@ ON CONFLICT(source_id) DO UPDATE SET
   return {
     sql: `${statements.join('\n')}\n`,
     generatedAt,
-    records: stableCities.length + stableInstitutions.length,
-    locations: stableCities.length,
-    institutions: stableInstitutions.length,
+    records: stableCities.length + stableInstitutions.length + 2,
+    locations: stableCities.length + 1,
+    institutions: stableInstitutions.length + 1,
     localizedContent,
     ingestionSources: pilotSources.length,
     enabledSources: enabledPilotSources.length,

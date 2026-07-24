@@ -1,5 +1,5 @@
 import { DatabaseSync } from 'node:sqlite'
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import {
@@ -10,18 +10,18 @@ import { validatePilotSourceManifestDirectory } from '../../scripts/validate-sou
 
 function databaseWithPipelineSchema() {
   const database = new DatabaseSync(':memory:')
-  for (const file of [
-    '0001_domain.sql',
-    '0002_evidence_workflow.sql',
-    '0003_indexes_guards.sql',
-    '0004_worker_runtime.sql',
-    '0005_domain_throttle.sql',
-    '0006_candidate_provenance_promotion.sql',
-    '0007_snapshot_derivatives.sql',
-    '0008_release_builder_contract.sql',
-  ]) {
+  const migrationDirectory = join(
+    process.cwd(),
+    'infra',
+    'd1',
+    'pipeline',
+    'migrations',
+  )
+  for (const file of readdirSync(migrationDirectory)
+    .filter((name) => /^\d{4}_[a-z0-9_]+\.sql$/u.test(name))
+    .sort((left, right) => left.localeCompare(right, 'en'))) {
     database.exec(readFileSync(
-      join(process.cwd(), 'infra', 'd1', 'pipeline', 'migrations', file),
+      join(migrationDirectory, file),
       'utf8',
     ))
   }
@@ -35,9 +35,9 @@ describe('Pipeline stable-entity bootstrap', () => {
     const firstGeneratedAt = '2026-07-23T12:00:00.000Z'
     const first = buildPipelineBootstrap(bundle, manifests, firstGeneratedAt)
     expect(first).toMatchObject({
-      records: 51,
-      locations: 12,
-      institutions: 39,
+      records: 53,
+      locations: 13,
+      institutions: 40,
       ingestionSources: 100,
       enabledSources: 86,
       sourceBindings: 86,
@@ -65,10 +65,10 @@ describe('Pipeline stable-entity bootstrap', () => {
         (SELECT COUNT(*) FROM programs) AS programs,
         (SELECT COUNT(*) FROM promotion_field_mappings) AS mappings
     `).get()).toEqual({
-      records: 51,
-      locations: 12,
-      organizations: 39,
-      institutions: 39,
+      records: 53,
+      locations: 13,
+      organizations: 40,
+      institutions: 40,
       programs: 0,
       mappings: 0,
     })
@@ -96,6 +96,48 @@ describe('Pipeline stable-entity bootstrap', () => {
       FROM records
       WHERE kind = 'program'
          OR id = 'uni-nanjing-normal-university'
+    `).get()).toEqual({ count: 0 })
+    expect(database.prepare(`
+      SELECT
+        record.workflow_status,
+        organization.official_url,
+        institution.city_id,
+        institution.admissions_url
+      FROM records record
+      JOIN organizations organization ON organization.record_id = record.id
+      JOIN institutions institution ON institution.record_id = record.id
+      WHERE record.id = 'uni-university-of-science-and-technology-of-china'
+    `).get()).toEqual({
+      workflow_status: 'validated',
+      official_url: 'https://www.ustc.edu.cn/',
+      city_id: 'city-hefei',
+      admissions_url: 'https://ic.ustc.edu.cn/en/admission.php',
+    })
+    expect(database.prepare(`
+      SELECT domain, is_primary
+      FROM organization_domains
+      WHERE organization_id =
+        'uni-university-of-science-and-technology-of-china'
+      ORDER BY domain
+    `).all()).toEqual([
+      { domain: 'ic.ustc.edu.cn', is_primary: 0 },
+      { domain: 'ustc.edu.cn', is_primary: 1 },
+    ])
+    expect(database.prepare(`
+      SELECT COUNT(*) AS count
+      FROM source_documents
+      WHERE canonical_url LIKE 'https://ic.ustc.edu.cn/%'
+         OR canonical_url LIKE 'https://isa.ustc.edu.cn/%'
+    `).get()).toEqual({ count: 9 })
+    expect(database.prepare(`
+      SELECT COUNT(*) AS count
+      FROM source_documents
+      WHERE (
+        canonical_url LIKE 'https://ic.ustc.edu.cn/%'
+        OR canonical_url LIKE 'https://isa.ustc.edu.cn/%'
+      )
+      AND publisher_organization_id IS NOT
+        'uni-university-of-science-and-technology-of-china'
     `).get()).toEqual({ count: 0 })
 
     database.prepare(`
@@ -147,11 +189,20 @@ describe('Pipeline stable-entity bootstrap', () => {
         (SELECT COUNT(*) FROM promotion_source_bindings WHERE enabled = 1) AS enabled_bindings,
         (SELECT COUNT(*) FROM field_definitions) AS field_definitions
     `).get()).toEqual({
-      records: 51,
+      records: 53,
       ingestion_sources: 100,
       enabled_bindings: 86,
       field_definitions: first.fieldDefinitions,
     })
+    expect(database.prepare(`
+      SELECT workflow_status
+      FROM records
+      WHERE id = 'uni-university-of-science-and-technology-of-china'
+    `).get()).toEqual({ workflow_status: 'validated' })
+    expect(database.prepare('PRAGMA foreign_key_check').all()).toHaveLength(0)
+    expect(database.prepare('PRAGMA integrity_check').all()).toEqual([
+      { integrity_check: 'ok' },
+    ])
     database.close()
   })
 

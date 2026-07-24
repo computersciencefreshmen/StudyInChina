@@ -18,7 +18,7 @@ $node = (Get-Command node.exe -ErrorAction Stop).Source
 $config = Join-Path $root "workers\ingestion\wrangler.jsonc"
 $output = Join-Path $root $OutputDirectory
 $targetFlag = if ($Remote) { "--remote" } else { "--local" }
-$maxChunkLength = if ($Remote) { 24000 } else { 180000 }
+$maxChunkLength = 24000
 
 if (-not (Test-Path -LiteralPath $tsx)) { throw "tsx is not installed. Run npm ci first." }
 if (-not (Test-Path -LiteralPath $wrangler)) { throw "wrangler is not installed. Run npm ci first." }

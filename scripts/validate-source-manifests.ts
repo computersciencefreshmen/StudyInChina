@@ -49,6 +49,7 @@ export const INSTITUTION_HOST_ALLOWLISTS: Record<
     'www.isd.pku.edu.cn',
     'isd.pku.edu.cn',
     'www.studyatpku.com',
+    'admission.pku.edu.cn',
   ],
   'uni-fudan-university': [
     'iso.fudan.edu.cn',
