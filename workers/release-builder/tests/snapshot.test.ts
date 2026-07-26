@@ -8,12 +8,12 @@ test('release snapshots exclude records that belong to an incomplete materializa
   let batchCalls = 0
   const database = {
     prepare(sql: string) {
-      queries.push(sql)
       return { sql }
     },
     async batch(statements: Array<{ sql: string }>) {
       batchCalls += 1
-      assert.equal(statements.length, queries.length)
+      assert.equal(statements.length, 1)
+      queries.push(statements[0].sql)
       return statements.map(() => ({ success: true, results: [] }))
     },
   }
@@ -33,7 +33,7 @@ test('release snapshots exclude records that belong to an incomplete materializa
     (error: Error & { code?: string }) => error.code === 'empty_release',
   )
 
-  assert.equal(batchCalls, 1)
+  assert.equal(batchCalls, queries.length)
   assert.ok(queries.length > 20)
   assert.match(queries[0] ?? '', /materialization_batch_record_intents AS pending_intent/u)
   assert.match(queries[0] ?? '', /materialization_batch_records AS pending_batch_record/u)

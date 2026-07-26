@@ -11,6 +11,7 @@ import {
 } from './artifact'
 import type {
   D1Database,
+  D1Result,
   ReleaseArtifact,
   ReleaseCounts,
   ReleaseQueueJob,
@@ -273,23 +274,30 @@ async function loadPipelineTables(database: D1Database): Promise<{
     queries.push({ label, sql })
   }
 
-  const results = await database.batch<RawRow>(
-    queries.map(({ sql }) => database.prepare(sql)),
-  )
-  if (results.length !== queries.length) {
-    fail('pipeline_snapshot_incomplete', 'D1 returned an incomplete transactional snapshot')
-  }
-  for (const [index, result] of results.entries()) {
-    if (!result.success) {
-      throw new Error(
-        `${queries[index].label} query failed: ${result.error ?? 'unknown D1 error'}`,
-      )
+  const results: Array<D1Result<RawRow>> = []
+  for (const query of queries) {
+    const batch = await database.batch<RawRow>([database.prepare(query.sql)])
+    if (batch.length !== 1) {
+      fail('pipeline_snapshot_incomplete', `${query.label} returned an incomplete D1 result`)
     }
+    const result = batch[0]
+    if (!result.success) {
+      throw new Error(`${query.label} query failed: ${result.error ?? 'unknown D1 error'}`)
+    }
+    results.push(result)
+  }
+
+  const verificationBatch = await database.batch<RawRow>([database.prepare(recordSql)])
+  if (verificationBatch.length !== 1 || !verificationBatch[0].success) {
+    fail('pipeline_snapshot_incomplete', 'D1 could not verify the Pipeline record boundary')
   }
 
   const rows = (index: number): RawRow[] => results[index].results ?? []
   const records = rows(0)
-  if (records.length === 0) {
+  const verifiedRecords = verificationBatch[0].results ?? []
+  if (stableJson(records) !== stableJson(verifiedRecords)) {
+    fail('pipeline_snapshot_changed', 'Pipeline records changed while the release was being read')
+  }  if (records.length === 0) {
     fail('empty_release', 'Pipeline has no applied or published records; refusing an empty cutover')
   }
   const canonicalFields = rows(1)
