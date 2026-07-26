@@ -1536,7 +1536,8 @@ ON CONFLICT(id) DO UPDATE SET
   END,
   parser_key = excluded.parser_key,
   parser_version = excluded.parser_version,
-  metadata_json = excluded.metadata_json;`.trim()
+  metadata_json = excluded.metadata_json
+WHERE source_fetches.status <> 'succeeded';`.trim()
 }
 
 

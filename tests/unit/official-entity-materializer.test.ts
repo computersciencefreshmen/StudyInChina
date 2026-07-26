@@ -164,6 +164,7 @@ describe('official program and scholarship entity materializer', () => {
     expect(tsinghua.sql.indexOf("claim_status = 'accepted'")).toBeLessThan(
       tsinghua.sql.indexOf('INSERT INTO canonical_fields'),
     )
+    expect(tsinghua.sql).toContain("WHERE source_fetches.status <> 'succeeded'")
     expect(tsinghua.sql).not.toContain('materialization_batches')
     expect(tsinghua.sql).not.toContain('materialization_batch_records')
     expect(tsinghua.sql).not.toContain('SET workflow_status')
