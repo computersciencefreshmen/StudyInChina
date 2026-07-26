@@ -10,6 +10,7 @@ import { pathToFileURL } from 'node:url'
 
 export type PkuDegreeLevel = 'master' | 'doctorate'
 export type PkuInstructionLanguage = 'Chinese' | 'English'
+export type PkuAttendanceMode = 'full_time' | 'part_time' | 'hybrid'
 
 export type PkuCatalogDocument = {
   department: string
@@ -28,6 +29,14 @@ export type PkuProgramEvidence = {
   checkedAt: string
 }
 
+export type PkuResearchDirection = {
+  code: string
+  name: string
+  attendanceMode: Exclude<PkuAttendanceMode, 'hybrid'>
+  instructionLanguage: PkuInstructionLanguage
+  evidence: PkuProgramEvidence
+}
+
 export type PkuProgramEntity = {
   entityKey: string
   entityType: 'program'
@@ -37,7 +46,11 @@ export type PkuProgramEntity = {
   instructionLanguage: PkuInstructionLanguage
   programCode: string
   name: string
+  nameZh: string | null
+  nameEn: string | null
   department: string
+  attendanceMode: PkuAttendanceMode | null
+  researchDirections: PkuResearchDirection[]
   officialUrl: string
   sourceCheckedAt: string
   verificationStatus: 'verified'
@@ -178,6 +191,56 @@ function normalizeIdentity(value: string): string {
   return normalizeText(value)
     .toLowerCase()
     .replace(/[\s()[\]{}（）【】《》·•,，.。:：;；'’"“”/_-]+/gu, '')
+}
+
+function finalParentheticalGroup(value: string): {
+  prefix: string
+  content: string
+} | null {
+  const normalized = normalizeText(value)
+  if (!normalized.endsWith(')')) return null
+  let depth = 0
+  for (let index = normalized.length - 1; index >= 0; index -= 1) {
+    const character = normalized[index]
+    if (character === ')') {
+      depth += 1
+      continue
+    }
+    if (character !== '(') continue
+    depth -= 1
+    if (depth === 0) {
+      const prefix = normalizeText(normalized.slice(0, index))
+      const content = normalizeText(normalized.slice(index + 1, -1))
+      return prefix && content ? { prefix, content } : null
+    }
+    if (depth < 0) return null
+  }
+  return null
+}
+
+export function splitPkuOfficialProgramName(
+  value: string,
+  instructionLanguage: PkuInstructionLanguage,
+): { nameZh: string | null; nameEn: string | null } {
+  const name = normalizeText(value)
+  const suffix = finalParentheticalGroup(name)
+  if (
+    suffix
+    && /\p{Script=Han}/u.test(suffix.prefix)
+    && /[A-Za-z]/u.test(suffix.content)
+  ) {
+    return {
+      nameZh: suffix.prefix,
+      nameEn: suffix.content,
+    }
+  }
+  const hasHan = /\p{Script=Han}/u.test(name)
+  const hasLatin = /[A-Za-z]/u.test(name)
+  if (hasHan && !hasLatin) return { nameZh: name, nameEn: null }
+  if (hasLatin && !hasHan) return { nameZh: null, nameEn: name }
+  return instructionLanguage === 'Chinese'
+    ? { nameZh: name, nameEn: null }
+    : { nameZh: null, nameEn: name }
 }
 
 function htmlDecode(value: string): string {
@@ -522,6 +585,126 @@ function joinNameFragments(fragments: readonly PendingNameFragment[]): string {
   return normalizeText(fragments.map((fragment) => fragment.text).join(' '))
 }
 
+type PositionedPkuLine = {
+  page: number
+  line: number
+  raw: string
+}
+
+type PkuProgramDetails = {
+  attendanceMode: PkuAttendanceMode | null
+  researchDirections: PkuResearchDirection[]
+  languageConflict: boolean
+}
+
+function attendanceModeFromLine(
+  value: string,
+): Exclude<PkuAttendanceMode, 'hybrid'> | null {
+  if (/\u975E\u5168\u65E5\u5236|Part[- ]?time/iu.test(value)) return 'part_time'
+  if (/\u5168\u65E5\u5236|Full[- ]?time/iu.test(value)) return 'full_time'
+  return null
+}
+
+function instructionLanguageFromLine(value: string): PkuInstructionLanguage | null {
+  if (/\u82F1\u6587|\bEnglish\b/iu.test(value)) return 'English'
+  if (/\u4E2D\u6587|\bChinese\b/iu.test(value)) return 'Chinese'
+  return null
+}
+
+function positionKey(page: number, line: number): number {
+  return page * 1_000_000 + line
+}
+
+function extractPkuProgramDetails(
+  pages: readonly string[],
+  entities: readonly PkuProgramEntity[],
+  document: PkuCatalogDocument,
+  checkedAt: string,
+  expectedInstructionLanguage: PkuInstructionLanguage,
+): Map<string, PkuProgramDetails> {
+  const lines: PositionedPkuLine[] = pages.flatMap((pageText, pageIndex) => (
+    pageText.split('\n').map((raw, lineIndex) => ({
+      page: pageIndex + 1,
+      line: lineIndex + 1,
+      raw,
+    }))
+  ))
+  const ordered = [...entities].sort((left, right) => (
+    positionKey(left.evidence.page, left.evidence.lineStart)
+      - positionKey(right.evidence.page, right.evidence.lineStart)
+  ))
+  const result = new Map<string, PkuProgramDetails>()
+  for (let index = 0; index < ordered.length; index += 1) {
+    const entity = ordered[index]!
+    const start = positionKey(entity.evidence.page, entity.evidence.lineStart)
+    const next = ordered[index + 1]
+    const end = next
+      ? positionKey(next.evidence.page, next.evidence.lineStart)
+      : Number.POSITIVE_INFINITY
+    const directions: PkuResearchDirection[] = []
+    let languageConflict = false
+    for (const line of lines) {
+      const position = positionKey(line.page, line.line)
+      if (position < start || position >= end) continue
+      const direction = DIRECTION_MARKER_PATTERN.exec(line.raw)
+      if (!direction?.[2]) continue
+      const attendanceMode = attendanceModeFromLine(line.raw)
+      const instructionLanguage = instructionLanguageFromLine(line.raw)
+      if (!attendanceMode || !instructionLanguage) continue
+      if (instructionLanguage !== expectedInstructionLanguage) {
+        languageConflict = true
+        continue
+      }
+      const modeStart = line.raw.search(
+        /(?:\u975E\u5168\u65E5\u5236|\u5168\u65E5\u5236|Part[- ]?time|Full[- ]?time)/iu,
+      )
+      const directionName = normalizeText(line.raw.slice(
+        direction.index + direction[0].length,
+        modeStart < 0 ? undefined : modeStart,
+      ))
+      if (!directionName) continue
+      const code = direction[2]
+      const evidence: PkuProgramEvidence = {
+        page: line.page,
+        lineStart: line.line,
+        lineEnd: line.line,
+        locator: rowLocator(line.page, line.line, line.line, entity.programCode)
+          + ';direction=' + code,
+        quote: normalizeText(line.raw),
+        officialUrl: document.officialUrl,
+        checkedAt,
+      }
+      const candidate: PkuResearchDirection = {
+        code,
+        name: directionName,
+        attendanceMode,
+        instructionLanguage,
+        evidence,
+      }
+      if (!directions.some((existing) => (
+        existing.code === candidate.code
+        && normalizeIdentity(existing.name) === normalizeIdentity(candidate.name)
+        && existing.attendanceMode === candidate.attendanceMode
+        && existing.instructionLanguage === candidate.instructionLanguage
+      ))) {
+        directions.push(candidate)
+      }
+    }
+    const modes = new Set(directions.map((direction) => direction.attendanceMode))
+    const attendanceMode = modes.size === 0
+      ? null
+      : modes.size === 1
+        ? [...modes][0]!
+        : 'hybrid'
+    result.set(entity.entityKey, {
+      attendanceMode,
+      researchDirections: directions,
+      languageConflict,
+    })
+  }
+  return result
+}
+
 export function parsePkuPdfCatalogText(
   layoutText: string,
   rawOptions: ParsePkuPdfCatalogOptions,
@@ -699,6 +882,7 @@ export function parsePkuPdfCatalogText(
         document.department,
         programCode,
       )
+      const localizedNames = splitPkuOfficialProgramName(name, instructionLanguage)
       const entity: PkuProgramEntity = {
         entityKey: key,
         entityType: 'program',
@@ -708,7 +892,10 @@ export function parsePkuPdfCatalogText(
         instructionLanguage,
         programCode,
         name,
+        ...localizedNames,
         department: document.department,
+        attendanceMode: null,
+        researchDirections: [],
         officialUrl: document.officialUrl,
         sourceCheckedAt: checkedAt,
         verificationStatus: 'verified',
@@ -781,7 +968,37 @@ export function parsePkuPdfCatalogText(
       ['missing_program_code'],
     ))
   }
-  const entities = [...entitiesByCode.values()]
+  const parsedEntities = [...entitiesByCode.values()]
+  const detailsByKey = extractPkuProgramDetails(
+    pages,
+    parsedEntities,
+    document,
+    checkedAt,
+    instructionLanguage,
+  )
+  const entities = parsedEntities
+    .filter((entity) => {
+      const details = detailsByKey.get(entity.entityKey)
+      if (!details?.languageConflict) return true
+      quarantined.push(rowQuarantine(
+        document,
+        entity.name,
+        entity.programCode,
+        entity.evidence.page,
+        entity.evidence.lineStart,
+        entity.evidence.lineEnd,
+        ['catalog_language_mismatch'],
+      ))
+      return false
+    })
+    .map((entity) => {
+      const details = detailsByKey.get(entity.entityKey)
+      return {
+        ...entity,
+        attendanceMode: details?.attendanceMode ?? null,
+        researchDirections: details?.researchDirections ?? [],
+      }
+    })
     .sort((left, right) => left.entityKey.localeCompare(right.entityKey))
   const quarantinedRows = quarantined.filter((item) => item.scope === 'row').length
   return {

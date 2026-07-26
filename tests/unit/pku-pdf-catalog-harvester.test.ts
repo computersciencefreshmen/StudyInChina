@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from 'vitest'
 import {
   parsePkuCatalogIndexHtml,
   parsePkuPdfCatalogText,
+  splitPkuOfficialProgramName,
   type ParsePkuPdfCatalogOptions,
 } from '../../scripts/ingestion/pku-pdf-catalog-harvester'
 
@@ -89,6 +90,67 @@ describe('PKU official PDF catalog harvester', () => {
     expect(result.entities[0]!.evidence.quote).toContain('数学科学学院')
     expect(result.entities[0]!.entityKey).toMatch(/^pku:master:chinese:/u)
     expect(result.quarantined).toEqual([])
+  })
+
+  it('preserves official Chinese and English names as separate localized facts', () => {
+    const result = parsePkuPdfCatalogText(mathLayout, baseDocumentOptions)
+    const finance = result.entities.find((entity) => entity.programCode === '025100')
+
+    expect(finance).toMatchObject({
+      nameZh: '\u91d1\u878d',
+      nameEn: 'Finance',
+      attendanceMode: 'full_time',
+      researchDirections: [
+        expect.objectContaining({
+          code: '00',
+          name: '\u4e0d\u533a\u5206\u7814\u7a76\u65b9\u5411',
+          attendanceMode: 'full_time',
+          instructionLanguage: 'Chinese',
+          evidence: expect.objectContaining({
+            officialUrl: baseDocumentOptions.document.officialUrl,
+          }),
+        }),
+        expect.objectContaining({ code: '01' }),
+      ],
+    })
+    expect(splitPkuOfficialProgramName(
+      '\u4e2d\u56fd\u5b66(\u7ecf\u6d4e\u4e0e\u7ba1\u7406)(China Studies (Economics and Management))',
+      'Chinese',
+    )).toEqual({
+      nameZh: '\u4e2d\u56fd\u5b66(\u7ecf\u6d4e\u4e0e\u7ba1\u7406)',
+      nameEn: 'China Studies (Economics and Management)',
+    })
+  })
+
+  it('derives mixed attendance per program and quarantines catalog language conflicts', () => {
+    const mixedLayout = [
+      '\u6570\u5b66\u79d1\u5b66\u5b66\u9662\u62db\u751f\u4e13\u4e1a\u53ca\u7814\u7a76\u65b9\u5411',
+      '',
+      '\u4e13\u4e1a\u540d\u79f0                          \u7814\u7a76\u65b9\u5411   \u5b66\u4e60\u65b9\u5f0f   \u6388\u8bfe\u8bed\u8a00',
+      'Program Alpha',
+      '                            00. Direction A        \u5168\u65e5\u5236     \u4e2d\u6587',
+      '(123456)',
+      '                            01. Direction B        \u975e\u5168\u65e5\u5236   \u4e2d\u6587',
+    ].join('\n')
+    const mixed = parsePkuPdfCatalogText(mixedLayout, baseDocumentOptions)
+    expect(mixed.entities).toEqual([
+      expect.objectContaining({
+        attendanceMode: 'hybrid',
+        researchDirections: [
+          expect.objectContaining({ code: '00', attendanceMode: 'full_time' }),
+          expect.objectContaining({ code: '01', attendanceMode: 'part_time' }),
+        ],
+      }),
+    ])
+
+    const conflict = parsePkuPdfCatalogText(
+      mixedLayout.replace(/\u4e2d\u6587/gu, '\u82f1\u6587'),
+      baseDocumentOptions,
+    )
+    expect(conflict.entities).toEqual([])
+    expect(conflict.quarantined).toEqual([
+      expect.objectContaining({ reasons: ['catalog_language_mismatch'] }),
+    ])
   })
 
   it('does not turn research directions into projects', () => {
