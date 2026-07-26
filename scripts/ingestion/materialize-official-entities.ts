@@ -41,12 +41,19 @@ type DurationUnit = 'days' | 'weeks' | 'months' | 'semesters' | 'academic_years'
 type TeachingLanguageCode = 'zh' | 'en'
 type TeachingLanguageRole = 'primary' | 'secondary' | 'bilingual' | 'support'
 type AttendanceMode = 'full_time' | 'part_time' | 'hybrid'
+type NormalizedLocalizedRequirement = {
+  en?: string
+  zh?: string
+}
 type NormalizedResearchDirection = {
   code: string
-  nameEn: string | null
-  nameZh: string | null
-  attendanceMode: Exclude<AttendanceMode, 'hybrid'>
-  instructionLanguages: TeachingLanguageCode[]
+  nameEn?: string
+  nameZh?: string
+  attendanceMode?: Exclude<AttendanceMode, 'hybrid'>
+  instructionLanguages?: TeachingLanguageCode[]
+  chineseLanguageRequirement?: NormalizedLocalizedRequirement
+  englishLanguageRequirement?: NormalizedLocalizedRequirement
+  applicationRemarks?: string
 }
 type SchemeType =
   | 'government'
@@ -526,25 +533,63 @@ function normalizeResearchDirections(
     if (!nameEn && !nameZh) {
       throw new Error(`${directionLabel} must provide nameEn, nameZh, or name.{en,zh}`)
     }
-    const attendanceMode = oneOf(
-      direction.attendanceMode,
-      new Set<Exclude<AttendanceMode, 'hybrid'>>(['full_time', 'part_time']),
-      `${directionLabel}.attendanceMode`,
-    )
+    const attendanceMode = direction.attendanceMode === undefined
+      || direction.attendanceMode === null
+      ? null
+      : oneOf(
+          direction.attendanceMode,
+          new Set<Exclude<AttendanceMode, 'hybrid'>>(['full_time', 'part_time']),
+          `${directionLabel}.attendanceMode`,
+        )
     const rawLanguages = direction.instructionLanguages
       ?? direction.instructionLanguage
-    const languageValues = Array.isArray(rawLanguages) ? rawLanguages : [rawLanguages]
-    if (rawLanguages === undefined || languageValues.length === 0) {
-      throw new Error(`${directionLabel}.instructionLanguages must not be empty`)
+    const instructionLanguages = rawLanguages === undefined || rawLanguages === null
+      ? null
+      : (() => {
+          const languageValues = Array.isArray(rawLanguages) ? rawLanguages : [rawLanguages]
+          if (languageValues.length === 0) {
+            throw new Error(`${directionLabel}.instructionLanguages must not be empty`)
+          }
+          return [...new Set(languageValues.map((language, languageIndex) => (
+            teachingLanguageCode(
+              language,
+              `${directionLabel}.instructionLanguages[${languageIndex}]`,
+            )
+          )))].sort((left, right) => left.localeCompare(right, 'en'))
+        })()
+    const requirement = (
+      rawValue: unknown,
+      requirementLabel: string,
+    ): NormalizedLocalizedRequirement | null => {
+      if (rawValue === undefined || rawValue === null) return null
+      const localized = asRecord(rawValue, requirementLabel)
+      const en = optionalString(localized.en)
+      const zh = optionalString(localized.zh) ?? optionalString(localized['zh-CN'])
+      if (!en && !zh) throw new Error(`${requirementLabel} must contain en or zh`)
+      return {
+        ...(en ? { en } : {}),
+        ...(zh ? { zh } : {}),
+      }
     }
-    const instructionLanguages = [...new Set(languageValues.map((
-      language,
-      languageIndex,
-    ) => teachingLanguageCode(
-      language,
-      `${directionLabel}.instructionLanguages[${languageIndex}]`,
-    )))].sort((left, right) => left.localeCompare(right, 'en'))
-    return { code, nameEn, nameZh, attendanceMode, instructionLanguages }
+    const chineseLanguageRequirement = requirement(
+      direction.chineseLanguageRequirement,
+      `${directionLabel}.chineseLanguageRequirement`,
+    )
+    const englishLanguageRequirement = requirement(
+      direction.englishLanguageRequirement,
+      `${directionLabel}.englishLanguageRequirement`,
+    )
+    const applicationRemarks = optionalString(direction.applicationRemarks)
+    return {
+      code,
+      ...(nameEn ? { nameEn } : {}),
+      ...(nameZh ? { nameZh } : {}),
+      ...(attendanceMode ? { attendanceMode } : {}),
+      ...(instructionLanguages ? { instructionLanguages } : {}),
+      ...(chineseLanguageRequirement ? { chineseLanguageRequirement } : {}),
+      ...(englishLanguageRequirement ? { englishLanguageRequirement } : {}),
+      ...(applicationRemarks ? { applicationRemarks } : {}),
+    }
   })
   const codes = new Set<string>()
   for (const direction of normalized) {

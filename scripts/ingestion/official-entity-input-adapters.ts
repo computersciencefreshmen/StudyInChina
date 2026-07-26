@@ -5,6 +5,10 @@ import {
   DEFAULT_SCHOLARSHIP_INDEX_SOURCES,
   assertOfficialHttpsUrl,
 } from './scholarship-index-harvester'
+import {
+  adaptEnrichedTsinghuaCatalog,
+  looksLikeEnrichedTsinghuaCatalog,
+} from './tsinghua-official-entity-adapter'
 
 type JsonRecord = Record<string, unknown>
 
@@ -652,6 +656,19 @@ function adaptZjuPdfHarvest(root: JsonRecord): JsonRecord {
         throw new Error(`${label}.evidence.checkedAt conflicts with the harvest`)
       }
       const name = nonEmptyString(entity.name, `${label}.name`)
+      const rawDurationYears = entity.durationYears
+      const durationMonths = rawDurationYears === undefined || rawDurationYears === null
+        ? null
+        : (() => {
+            const years = finiteNumber(rawDurationYears, `${label}.durationYears`)
+            const months = years * 12
+            if (years <= 0 || !Number.isSafeInteger(months)) {
+              throw new Error(
+                `${label}.durationYears must be positive and resolve to whole months`,
+              )
+            }
+            return months
+          })()
       return {
         entityType: 'program',
         entityKey: nonEmptyString(entity.entityKey, `${label}.entityKey`),
@@ -659,6 +676,14 @@ function adaptZjuPdfHarvest(root: JsonRecord): JsonRecord {
         programType: 'degree',
         degreeLevel,
         ...(instructionLanguage === 'English' ? { nameEn: name } : { nameZh: name }),
+        instructionLanguages: [instructionLanguage],
+        ...(durationMonths === null
+          ? {}
+          : {
+              durationMin: durationMonths,
+              durationMax: durationMonths,
+              durationUnit: 'months',
+            }),
         officialUrl: entityUrl,
         sourceCheckedAt: entityCheckedAt,
         evidence: {
@@ -791,6 +816,9 @@ function looksLikeScholarshipIndexHarvest(root: JsonRecord): boolean {
 
 export function adaptOfficialEntityInput(input: unknown): JsonRecord {
   const root = asRecord(input, 'input')
+  if (looksLikeEnrichedTsinghuaCatalog(root)) {
+    return adaptEnrichedTsinghuaCatalog(root)
+  }
   if (root.parserVersion === PKU_PDF_DIRECTORY_PARSER_VERSION) {
     return adaptPkuPdfDirectoryHarvest(root)
   }

@@ -189,6 +189,31 @@ function dateOnly(value: string): string {
   return value
 }
 
+export function minimumPublishableDeadlineAfterOneMonth(
+  checkedAt: string,
+): string {
+  const instant = new Date(timestamp(checkedAt, 'checkedAt'))
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Shanghai',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).formatToParts(instant).map((part) => [part.type, part.value]),
+  )
+  const year = Number(parts.year)
+  const month = Number(parts.month)
+  const day = Number(parts.day)
+  const targetYear = month === 12 ? year + 1 : year
+  const targetMonth = month === 12 ? 1 : month + 1
+  const lastTargetDay = new Date(Date.UTC(targetYear, targetMonth, 0)).getUTCDate()
+  return dateOnly([
+    String(targetYear).padStart(4, '0'),
+    String(targetMonth).padStart(2, '0'),
+    String(Math.min(day, lastTargetDay)).padStart(2, '0'),
+  ].join('-'))
+}
+
 function officialUrl(value: unknown, label: string): string {
   let parsed: URL
   try {

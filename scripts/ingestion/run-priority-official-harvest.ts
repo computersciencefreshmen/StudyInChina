@@ -28,6 +28,10 @@ import {
   type TsinghuaDegreeLevel,
 } from './tsinghua-catalog-harvester'
 import {
+  enrichTsinghuaCatalogHarvest,
+  minimumPublishableDeadlineAfterOneMonth,
+} from './tsinghua-program-detail-adapter'
+import {
   harvestZjuPdfCatalog,
   type ZjuDegreeLevel,
   type ZjuInstructionLanguage,
@@ -1153,17 +1157,22 @@ async function runTsinghuaSources(input: {
         contentType: 'application/json',
         bytes: bundleBytes,
       }))
+      const enrichedHarvest = enrichTsinghuaCatalogHarvest({
+        harvest,
+        sourceBundle: bundle,
+        minimumPublishableDeadline: minimumPublishableDeadlineAfterOneMonth(input.checkedAt),
+      })
       const harvestPath = await input.store.writeJson(
         join('harvests', `${source.id}.json`),
-        harvest,
+        enrichedHarvest,
       )
       const baseline = evaluateSourceCountBaseline({
         sourceId: source.id,
-        actual: harvest.entities.length,
+        actual: enrichedHarvest.entities.length,
         expected: source.expectedVerifiedCount,
       })
       const status: HarvestSourceStatus = baseline.status
-      projects += harvest.entities.length
+      projects += enrichedHarvest.entities.length
       sources.push({
         sourceId: source.id,
         kind: 'tsinghua_catalog',
@@ -1171,7 +1180,7 @@ async function runTsinghuaSources(input: {
         officialUrls: [source.officialUrl, TSINGHUA_CATALOG_QUERY_URL],
         status,
         contentState: contentStateOf(sourceArtifacts),
-        verified: harvest.entities.length,
+        verified: enrichedHarvest.entities.length,
         quarantined: 0,
         sourceArtifacts,
         primaryEvidenceOfficialUrls: [...new Set(

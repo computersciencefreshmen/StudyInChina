@@ -109,7 +109,7 @@ function count(database: DatabaseSync, sql: string): number {
 }
 
 describe('raw official entity input adapters', () => {
-  it('materializes raw ZJU PDF harvest evidence as English pdf_region facts only', () => {
+  it('materializes ZJU PDF language and exact duration without creating cycle facts', () => {
     const raw = fixture('zju-pdf-harvest.json')
     const artifacts = buildOfficialEntityMaterialization(raw)
 
@@ -125,8 +125,8 @@ describe('raw official entity input adapters', () => {
         sourceDocuments: 1,
         sourceFetches: 1,
         sourceFragments: 2,
-        claims: 8,
-        canonicalFields: 8,
+        claims: 16,
+        canonicalFields: 16,
         programCycles: 0,
         scholarshipCycles: 0,
       },
@@ -160,6 +160,20 @@ describe('raw official entity input adapters', () => {
       names_zh: 0,
       pdf_regions: 2,
     })
+    expect(database.prepare(`
+      SELECT duration_min, duration_max, duration_unit
+      FROM programs
+      ORDER BY record_id
+    `).all()).toEqual([
+      { duration_min: 24, duration_max: 24, duration_unit: 'months' },
+      { duration_min: 24, duration_max: 24, duration_unit: 'months' },
+    ])
+    expect(count(database, `
+      SELECT COUNT(*) AS count
+      FROM canonical_fields
+      WHERE field_path = 'instruction_languages'
+        AND value_json = '["en"]'
+    `)).toBe(2)
     expect(database.prepare('PRAGMA foreign_key_check').all()).toHaveLength(0)
     expect(database.prepare('PRAGMA integrity_check').all()).toEqual([
       { integrity_check: 'ok' },
