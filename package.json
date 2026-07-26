@@ -29,6 +29,7 @@
     "catalog:build": "tsx scripts/catalog/build-release.ts",
     "catalog:build-pipeline": "tsx scripts/catalog/build-pipeline-release.ts",
     "pipeline:build-double-first-class-targets": "tsx scripts/ingestion/build-double-first-class-target-import.ts",
+    "pipeline:build-source-cohorts": "tsx scripts/ingestion/build-official-source-cohort-import.ts",
     "pipeline:build-sources": "tsx scripts/ingestion/build-source-import.ts",
     "benchmark:catalog": "tsx scripts/catalog/benchmark-catalog.ts",
     "benchmark:catalog:smoke": "tsx scripts/catalog/benchmark-catalog.ts --institutions 25 --programs 1000 --cycles 3000 --iterations 50 --warmup 10 --output .benchmark/catalog-performance-smoke.json",
