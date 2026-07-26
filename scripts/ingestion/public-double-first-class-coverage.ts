@@ -32,6 +32,12 @@ type CohortSource = {
   verificationMethod: string
 }
 
+const PUBLIC_COVERAGE_EXCLUSIONS = new Set([
+  '国防科技大学',
+  '海军军医大学',
+  '空军军医大学',
+])
+
 function record(value: unknown, label: string): JsonRecord {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
     throw new Error(`${label} must be an object`)
@@ -100,7 +106,7 @@ export function buildPublicDoubleFirstClassCoverageV2(input: {
     }
   }
 
-  const institutions = [...targets]
+  const auditedInstitutions = [...targets]
     .sort((left, right) => left.ordinal - right.ordinal)
     .map((target) => {
       const coverage = sourcesByName.get(target.officialNameZh)
@@ -192,6 +198,16 @@ export function buildPublicDoubleFirstClassCoverageV2(input: {
         })),
       }
     })
+  const institutions = auditedInstitutions.filter(
+    (institution) => !PUBLIC_COVERAGE_EXCLUSIONS.has(institution.nameZh),
+  )
+  const excludedInstitutionCount = auditedInstitutions.length - institutions.length
+  if (
+    excludedInstitutionCount !== PUBLIC_COVERAGE_EXCLUSIONS.size
+    || [...PUBLIC_COVERAGE_EXCLUSIONS].some((name) => !targetNames.has(name))
+  ) {
+    throw new Error('Public military-institution exclusion must match exactly three registry targets')
+  }
   const completeCount = institutions.filter(
     (institution) => institution.status === 'source_manifest_complete',
   ).length
@@ -215,9 +231,12 @@ export function buildPublicDoubleFirstClassCoverageV2(input: {
       attachmentUrl: officialSource.attachmentUrl,
       publishedAt: officialSource.publishedAt,
       checkedAt: officialSource.checkedAt,
+      institutionTargets: targets.length,
     },
     totals: {
       institutionTargets: institutions.length,
+      officialRegistryTargets: targets.length,
+      militaryExcluded: excludedInstitutionCount,
       reconciledInstitutionTargets: completeCount + limitedCount,
       sourceManifestComplete: completeCount,
       reconciledLimited: limitedCount,
