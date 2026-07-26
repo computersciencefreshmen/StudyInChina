@@ -108,9 +108,14 @@
   color: var(--jade-dark, #0f594c);
 }
 
-.statusCollecting {
+.statusLimited {
   background: rgba(190, 128, 33, 0.13);
   color: var(--gold-dark, #805514);
+}
+
+.statusCollecting {
+  background: rgba(95, 104, 117, 0.12);
+  color: var(--ink-muted);
 }
 
 .sourceLinks {
@@ -133,6 +138,12 @@
 
 .sourceLinks a:hover {
   border-color: currentColor;
+}
+
+.sourceLinks .sourceUnavailable {
+  border-style: dashed;
+  background: rgba(190, 128, 33, 0.08);
+  color: var(--gold-dark, #805514);
 }
 
 .pending {

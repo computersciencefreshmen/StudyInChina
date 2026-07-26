@@ -14,8 +14,9 @@ type PageCopy = {
   title: string
   description: string
   eyebrow: string
+  reconciled: string
   complete: string
-  collecting: string
+  limited: string
   sources: string
   tableTitle: string
   tableDescription: string
@@ -27,78 +28,84 @@ type PageCopy = {
 const copyByLocale: Record<LaunchLocale, PageCopy> = {
   zh: {
     title: '147 所双一流高校数据表',
-    description: '直接查看每所高校的国际招生主页、官方项目目录和校级奖学金入口。已核验来源立即展示，其余学校持续采集中。',
+    description: '147/147 所高校已完成首轮官方来源对账：135 所已核验国际招生主页、项目目录和奖学金三类来源，12 所因官网有限公开保留核验记录和缺失状态。',
     eyebrow: '教育部第二轮“双一流”建设高校 · 全量目标库',
-    complete: '三类来源已完成',
-    collecting: '仍在采集',
+    reconciled: '已完成首轮对账',
+    complete: '三类来源完整',
+    limited: '官网有限公开',
     sources: '已核验官方来源',
     tableTitle: '高校与官方来源',
-    tableDescription: '表内链接只指向学校官方 HTTPS 网站。历史或已截止页面只作为目录发现锚点，不代表当前开放申请。',
+    tableDescription: '表内链接只指向学校官方 HTTPS 网站。135 所三类来源完整；其余 12 所明确显示官网未提供或来源暂不可用，不用历史页面补齐当前申请入口。',
     officialList: '教育部官方名单',
     api: '查看 JSON API',
     notice: '项目名称、费用、奖学金金额和截止日期只有通过字段级证据校验后才会进入正式项目页；未知值不会猜测。',
   },
   en: {
     title: '147 Double First-Class Universities',
-    description: 'Browse each university’s official international admissions, program catalog, and university scholarship sources. Verified links are published immediately while the remaining schools stay in collection.',
+    description: 'The first official-source reconciliation is complete for all 147/147 universities: 135 have all three source categories verified, while 12 retain audited missing or unavailable states because their official websites publish limited information.',
     eyebrow: 'MOE second-round Double First-Class list · complete target registry',
-    complete: 'Three sources complete',
-    collecting: 'Still collecting',
+    reconciled: 'First-pass reconciled',
+    complete: 'All three sources complete',
+    limited: 'Limited official disclosure',
     sources: 'Verified official sources',
     tableTitle: 'Universities and official sources',
-    tableDescription: 'Every link points to an official university HTTPS site. Historical or closed pages are discovery anchors and do not imply that applications are open.',
+    tableDescription: 'Every link points to an official university HTTPS site. All three categories are complete for 135 universities; the other 12 explicitly show officially missing or temporarily unavailable sources instead of using historical pages as current application links.',
     officialList: 'Official MOE list',
     api: 'View JSON API',
     notice: 'Program names, fees, funding amounts, and deadlines enter program pages only after field-level evidence checks. Unknown values are never guessed.',
   },
   ru: {
     title: '147 университетов программы Double First-Class',
-    description: 'Официальные страницы международного приёма, каталоги программ и университетские стипендии по каждому вузу.',
+    description: 'Первичная сверка официальных источников завершена для всех 147/147 вузов: у 135 проверены все три категории, а у 12 зафиксированы отсутствующие или недоступные источники из-за ограниченной публикации на официальных сайтах.',
     eyebrow: 'Полный перечень второго раунда Министерства образования КНР',
-    complete: 'Три источника готовы',
-    collecting: 'Сбор продолжается',
+    reconciled: 'Первичная сверка завершена',
+    complete: 'Все три источника проверены',
+    limited: 'Ограниченная публикация',
     sources: 'Проверенные источники',
     tableTitle: 'Университеты и официальные источники',
-    tableDescription: 'Все ссылки ведут на официальные HTTPS-сайты вузов. Историческая страница не означает, что приём открыт.',
+    tableDescription: 'Все ссылки ведут на официальные HTTPS-сайты вузов. Для 135 вузов заполнены все три категории; для остальных 12 явно указано отсутствие или временная недоступность источника, без подмены текущих заявок историческими страницами.',
     officialList: 'Официальный список',
     api: 'JSON API',
     notice: 'Названия программ, стоимость, суммы финансирования и сроки публикуются только после проверки доказательств по каждому полю.',
   },
   de: {
     title: '147 Double-First-Class-Hochschulen',
-    description: 'Offizielle internationale Zulassung, Programmkataloge und Hochschulstipendien für jede Zielhochschule.',
+    description: 'Die erste Prüfung offizieller Quellen ist für alle 147/147 Hochschulen abgeschlossen: Bei 135 sind alle drei Quellenarten verifiziert, bei 12 sind fehlende oder nicht verfügbare Quellen wegen begrenzter Veröffentlichung der offiziellen Website dokumentiert.',
     eyebrow: 'Vollständige Zielliste der zweiten MOE-Runde',
-    complete: 'Drei Quellen vollständig',
-    collecting: 'Noch in Erfassung',
+    reconciled: 'Erste Prüfung abgeschlossen',
+    complete: 'Alle drei Quellen vollständig',
+    limited: 'Begrenzte Veröffentlichung',
     sources: 'Geprüfte offizielle Quellen',
     tableTitle: 'Hochschulen und offizielle Quellen',
-    tableDescription: 'Alle Links führen zu offiziellen HTTPS-Seiten. Historische Seiten bedeuten nicht, dass Bewerbungen geöffnet sind.',
+    tableDescription: 'Alle Links führen zu offiziellen HTTPS-Seiten. Für 135 Hochschulen sind alle drei Kategorien vollständig; bei den übrigen 12 werden offiziell fehlende oder vorübergehend nicht verfügbare Quellen ausdrücklich ausgewiesen.',
     officialList: 'Offizielle MOE-Liste',
     api: 'JSON API',
     notice: 'Programme, Gebühren, Förderbeträge und Fristen erscheinen erst nach einer feldbezogenen Quellenprüfung.',
   },
   fr: {
     title: '147 établissements Double First-Class',
-    description: 'Admissions internationales, catalogues de programmes et bourses universitaires officielles pour chaque établissement.',
+    description: 'Le premier rapprochement des sources officielles est terminé pour les 147/147 établissements : 135 disposent des trois catégories vérifiées et 12 conservent des états manquants ou indisponibles en raison d’une publication officielle limitée.',
     eyebrow: 'Liste cible complète du deuxième cycle du ministère',
+    reconciled: 'Premier rapprochement terminé',
     complete: 'Trois sources complètes',
-    collecting: 'Collecte en cours',
+    limited: 'Publication officielle limitée',
     sources: 'Sources officielles vérifiées',
     tableTitle: 'Établissements et sources officielles',
-    tableDescription: 'Tous les liens pointent vers des sites HTTPS officiels. Une page historique ne signifie pas que les candidatures sont ouvertes.',
+    tableDescription: 'Tous les liens pointent vers des sites HTTPS officiels. Les trois catégories sont complètes pour 135 établissements ; pour les 12 autres, les sources officiellement absentes ou temporairement indisponibles sont indiquées sans remplacer les candidatures actuelles par des pages historiques.',
     officialList: 'Liste officielle',
     api: 'API JSON',
     notice: 'Les programmes, frais, financements et échéances ne sont publiés qu’après validation des preuves pour chaque champ.',
   },
   es: {
     title: '147 universidades Double First-Class',
-    description: 'Admisiones internacionales, catálogos de programas y becas universitarias oficiales para cada institución.',
+    description: 'La primera conciliación de fuentes oficiales está completa para las 147/147 universidades: 135 tienen verificadas las tres categorías y 12 conservan estados ausentes o no disponibles por la publicación limitada de sus sitios oficiales.',
     eyebrow: 'Registro completo de la segunda ronda del Ministerio de Educación',
+    reconciled: 'Primera conciliación completa',
     complete: 'Tres fuentes completas',
-    collecting: 'Aún recopilando',
+    limited: 'Publicación oficial limitada',
     sources: 'Fuentes oficiales verificadas',
     tableTitle: 'Universidades y fuentes oficiales',
-    tableDescription: 'Todos los enlaces apuntan a sitios HTTPS oficiales. Una página histórica no implica que las solicitudes estén abiertas.',
+    tableDescription: 'Todos los enlaces apuntan a sitios HTTPS oficiales. Las tres categorías están completas para 135 universidades; en las otras 12 se indican explícitamente las fuentes no publicadas o temporalmente no disponibles, sin sustituir solicitudes actuales por páginas históricas.',
     officialList: 'Lista oficial',
     api: 'API JSON',
     notice: 'Los programas, tasas, importes de becas y fechas límite solo se publican tras validar evidencias por campo.',
@@ -152,15 +159,19 @@ export default async function DoubleFirstClassPage({
         meta={(
           <>
             <span>{coverage.generatedAt.slice(0, 10)}</span>
-            <span>{totals.institutionTargets}/147</span>
+            <span>
+              {totals.reconciledInstitutionTargets}/{totals.institutionTargets}
+            </span>
           </>
         )}
       />
       <section className="atlas-container atlas-section section-block--tight">
         <div className="stat-strip">
           <div className="stat">
-            <strong>{totals.institutionTargets}</strong>
-            <span>{copy.title}</span>
+            <strong>
+              {totals.reconciledInstitutionTargets}/{totals.institutionTargets}
+            </strong>
+            <span>{copy.reconciled}</span>
           </div>
           <div className="stat">
             <strong>{totals.sourceManifestComplete}</strong>
@@ -171,8 +182,8 @@ export default async function DoubleFirstClassPage({
             <span>{copy.sources}</span>
           </div>
           <div className="stat">
-            <strong>{totals.collecting}</strong>
-            <span>{copy.collecting}</span>
+            <strong>{totals.reconciledLimited}</strong>
+            <span>{copy.limited}</span>
           </div>
         </div>
       </section>

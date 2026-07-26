@@ -39,7 +39,8 @@
     "data:health": "node scripts/data-health.mjs --mode monthly",
     "pipeline:build-bootstrap": "tsx scripts/ingestion/build-pipeline-bootstrap.ts",
     "pipeline:materialize-official": "tsx scripts/ingestion/materialize-official-entities.ts",
-    "data:build-double-first-class-coverage": "tsx scripts/ingestion/build-public-double-first-class-coverage.ts"
+    "data:build-double-first-class-coverage": "tsx scripts/ingestion/build-public-double-first-class-coverage.ts",
+    "pipeline:build-source-reconciliation": "tsx scripts/ingestion/build-source-reconciliation-import.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
