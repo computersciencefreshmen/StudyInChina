@@ -56,6 +56,19 @@ describe('official source cohort import', () => {
     )
 
     const cohorts = loadOfficialSourceCohorts()
+    const cohortSources = cohorts.flatMap((cohort) => cohort.sources)
+    const expectedInstitutionIds = new Set(
+      cohortSources.map((source) => source.institutionId),
+    )
+    const expectedMappedNames = new Set(
+      targetRegistry.targets
+        .filter((target) => target.catalogInstitutionId)
+        .map((target) => target.officialNameZh),
+    )
+    for (const source of cohortSources) {
+      expectedMappedNames.add(source.institutionNameZh)
+    }
+
     const artifact = buildOfficialSourceCohortImport(
       cohorts,
       targetRegistry,
@@ -64,7 +77,11 @@ describe('official source cohort import', () => {
     database.exec(artifact.sql)
     database.exec(artifact.sql)
 
-    expect(artifact).toMatchObject({ cohorts: 1, institutions: 6, sources: 18 })
+    expect(artifact).toMatchObject({
+      cohorts: cohorts.length,
+      institutions: expectedInstitutionIds.size,
+      sources: cohortSources.length,
+    })
     expect(database.prepare(`
       SELECT coverage_status, registered_source_id
       FROM institution_target_source_coverage
@@ -89,12 +106,16 @@ describe('official source cohort import', () => {
         SUM(CASE WHEN coverage_status = 'discovered' THEN 1 ELSE 0 END) AS discovered,
         SUM(CASE WHEN coverage_status = 'discovery_pending' THEN 1 ELSE 0 END) AS pending
       FROM institution_target_source_coverage
-    `).get()).toEqual({ registered: 1, discovered: 17, pending: 2334 })
+    `).get()).toEqual({
+      registered: 1,
+      discovered: cohortSources.length - 1,
+      pending: 2352 - cohortSources.length,
+    })
     expect(database.prepare(`
       SELECT COUNT(*) AS count
       FROM institution_targets
       WHERE catalog_institution_id IS NOT NULL
-    `).get()).toEqual({ count: 37 })
+    `).get()).toEqual({ count: expectedMappedNames.size })
   })
 
   it('rejects a source whose hostname is outside its explicit allowlist', () => {
