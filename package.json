@@ -21,6 +21,7 @@
     "validate:data": "tsx scripts/validate-data.ts",
     "validate:d1": "tsx scripts/validate-d1-migrations.ts",
     "validate:manifests": "tsx scripts/validate-source-manifests.ts",
+    "validate:double-first-class": "tsx scripts/ingestion/double-first-class-registry.ts --validate content/source-manifests/double-first-class/targets.v1.json",
     "check:worker:ingestion": "wrangler deploy --dry-run --config workers/ingestion/wrangler.jsonc",
     "check:worker:publisher": "wrangler deploy --dry-run --config workers/publisher/wrangler.jsonc",
     "check:worker:release-builder": "wrangler deploy --dry-run --config workers/release-builder/wrangler.jsonc",
