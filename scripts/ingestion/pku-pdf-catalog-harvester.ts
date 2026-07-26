@@ -621,7 +621,10 @@ function extractPkuProgramDetails(
   document: PkuCatalogDocument,
   checkedAt: string,
   expectedInstructionLanguage: PkuInstructionLanguage,
-): Map<string, PkuProgramDetails> {
+): {
+  details: Map<string, PkuProgramDetails>
+  alignmentMismatch: boolean
+} {
   const lines: PositionedPkuLine[] = pages.flatMap((pageText, pageIndex) => (
     pageText.split('\n').map((raw, lineIndex) => ({
       page: pageIndex + 1,
@@ -633,76 +636,83 @@ function extractPkuProgramDetails(
     positionKey(left.evidence.page, left.evidence.lineStart)
       - positionKey(right.evidence.page, right.evidence.lineStart)
   ))
-  const result = new Map<string, PkuProgramDetails>()
+  const directionRows = lines.flatMap((line) => {
+    const direction = DIRECTION_MARKER_PATTERN.exec(line.raw)
+    if (!direction?.[2]) return []
+    const attendanceMode = attendanceModeFromLine(line.raw)
+    const instructionLanguage = instructionLanguageFromLine(line.raw)
+    if (!attendanceMode || !instructionLanguage) return []
+    const modeStart = line.raw.search(
+      /(?:\u975E\u5168\u65E5\u5236|\u5168\u65E5\u5236|Part[- ]?time|Full[- ]?time)/iu,
+    )
+    const name = normalizeText(line.raw.slice(
+      direction.index + direction[0].length,
+      modeStart < 0 ? undefined : modeStart,
+    ))
+    if (!name) return []
+    return [{
+      code: direction[2],
+      name,
+      attendanceMode,
+      instructionLanguage,
+      page: line.page,
+      line: line.line,
+      quote: normalizeText(line.raw),
+    }]
+  })
+
+  const directionGroups: typeof directionRows[] = []
+  for (const row of directionRows) {
+    const current = directionGroups.at(-1)
+    const previousCode = current?.at(-1)?.code
+    const startsNewProgram = (
+      !current
+      || previousCode === '00'
+      || row.code === '00'
+      || Number(row.code) <= Number(previousCode)
+    )
+    if (startsNewProgram) directionGroups.push([row])
+    else current.push(row)
+  }
+
+  if (directionGroups.length !== ordered.length) {
+    return { details: new Map(), alignmentMismatch: true }
+  }
+
+  const details = new Map<string, PkuProgramDetails>()
   for (let index = 0; index < ordered.length; index += 1) {
     const entity = ordered[index]!
-    const start = positionKey(entity.evidence.page, entity.evidence.lineStart)
-    const next = ordered[index + 1]
-    const end = next
-      ? positionKey(next.evidence.page, next.evidence.lineStart)
-      : Number.POSITIVE_INFINITY
-    const directions: PkuResearchDirection[] = []
-    let languageConflict = false
-    for (const line of lines) {
-      const position = positionKey(line.page, line.line)
-      if (position < start || position >= end) continue
-      const direction = DIRECTION_MARKER_PATTERN.exec(line.raw)
-      if (!direction?.[2]) continue
-      const attendanceMode = attendanceModeFromLine(line.raw)
-      const instructionLanguage = instructionLanguageFromLine(line.raw)
-      if (!attendanceMode || !instructionLanguage) continue
-      if (instructionLanguage !== expectedInstructionLanguage) {
-        languageConflict = true
-        continue
-      }
-      const modeStart = line.raw.search(
-        /(?:\u975E\u5168\u65E5\u5236|\u5168\u65E5\u5236|Part[- ]?time|Full[- ]?time)/iu,
-      )
-      const directionName = normalizeText(line.raw.slice(
-        direction.index + direction[0].length,
-        modeStart < 0 ? undefined : modeStart,
-      ))
-      if (!directionName) continue
-      const code = direction[2]
-      const evidence: PkuProgramEvidence = {
-        page: line.page,
-        lineStart: line.line,
-        lineEnd: line.line,
-        locator: rowLocator(line.page, line.line, line.line, entity.programCode)
-          + ';direction=' + code,
-        quote: normalizeText(line.raw),
+    const rows = directionGroups[index]!
+    const researchDirections = rows.map((row): PkuResearchDirection => ({
+      code: row.code,
+      name: row.name,
+      attendanceMode: row.attendanceMode,
+      instructionLanguage: row.instructionLanguage,
+      evidence: {
+        page: row.page,
+        lineStart: row.line,
+        lineEnd: row.line,
+        locator: rowLocator(row.page, row.line, row.line, entity.programCode)
+          + ';direction=' + row.code,
+        quote: row.quote,
         officialUrl: document.officialUrl,
         checkedAt,
-      }
-      const candidate: PkuResearchDirection = {
-        code,
-        name: directionName,
-        attendanceMode,
-        instructionLanguage,
-        evidence,
-      }
-      if (!directions.some((existing) => (
-        existing.code === candidate.code
-        && normalizeIdentity(existing.name) === normalizeIdentity(candidate.name)
-        && existing.attendanceMode === candidate.attendanceMode
-        && existing.instructionLanguage === candidate.instructionLanguage
-      ))) {
-        directions.push(candidate)
-      }
-    }
-    const modes = new Set(directions.map((direction) => direction.attendanceMode))
-    const attendanceMode = modes.size === 0
-      ? null
-      : modes.size === 1
+      },
+    }))
+    const modes = new Set(
+      researchDirections.map((direction) => direction.attendanceMode),
+    )
+    details.set(entity.entityKey, {
+      attendanceMode: modes.size === 1
         ? [...modes][0]!
-        : 'hybrid'
-    result.set(entity.entityKey, {
-      attendanceMode,
-      researchDirections: directions,
-      languageConflict,
+        : 'hybrid',
+      researchDirections,
+      languageConflict: researchDirections.some(
+        (direction) => direction.instructionLanguage !== expectedInstructionLanguage,
+      ),
     })
   }
-  return result
+  return { details, alignmentMismatch: false }
 }
 
 export function parsePkuPdfCatalogText(
@@ -969,14 +979,21 @@ export function parsePkuPdfCatalogText(
     ))
   }
   const parsedEntities = [...entitiesByCode.values()]
-  const detailsByKey = extractPkuProgramDetails(
+  const detailExtraction = extractPkuProgramDetails(
     pages,
     parsedEntities,
     document,
     checkedAt,
     instructionLanguage,
   )
-  const entities = parsedEntities
+  const detailsByKey = detailExtraction.details
+  if (detailExtraction.alignmentMismatch) {
+    quarantined.push(documentQuarantine(
+      document,
+      ['direction_program_alignment_mismatch'],
+    ))
+  }
+  const entities = (detailExtraction.alignmentMismatch ? [] : parsedEntities)
     .filter((entity) => {
       const details = detailsByKey.get(entity.entityKey)
       if (!details?.languageConflict) return true

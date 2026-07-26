@@ -110,9 +110,13 @@ describe('PKU official PDF catalog harvester', () => {
             officialUrl: baseDocumentOptions.document.officialUrl,
           }),
         }),
-        expect.objectContaining({ code: '01' }),
       ],
     })
+    const pureMathematics = result.entities.find(
+      (entity) => entity.programCode === '070101',
+    )
+    expect(pureMathematics?.researchDirections.map((direction) => direction.code))
+      .toEqual(['01', '02'])
     expect(splitPkuOfficialProgramName(
       '\u4e2d\u56fd\u5b66(\u7ecf\u6d4e\u4e0e\u7ba1\u7406)(China Studies (Economics and Management))',
       'Chinese',
@@ -128,17 +132,17 @@ describe('PKU official PDF catalog harvester', () => {
       '',
       '\u4e13\u4e1a\u540d\u79f0                          \u7814\u7a76\u65b9\u5411   \u5b66\u4e60\u65b9\u5f0f   \u6388\u8bfe\u8bed\u8a00',
       'Program Alpha',
-      '                            00. Direction A        \u5168\u65e5\u5236     \u4e2d\u6587',
+      '                            01. Direction A        \u5168\u65e5\u5236     \u4e2d\u6587',
       '(123456)',
-      '                            01. Direction B        \u975e\u5168\u65e5\u5236   \u4e2d\u6587',
+      '                            02. Direction B        \u975e\u5168\u65e5\u5236   \u4e2d\u6587',
     ].join('\n')
     const mixed = parsePkuPdfCatalogText(mixedLayout, baseDocumentOptions)
     expect(mixed.entities).toEqual([
       expect.objectContaining({
         attendanceMode: 'hybrid',
         researchDirections: [
-          expect.objectContaining({ code: '00', attendanceMode: 'full_time' }),
-          expect.objectContaining({ code: '01', attendanceMode: 'part_time' }),
+          expect.objectContaining({ code: '01', attendanceMode: 'full_time' }),
+          expect.objectContaining({ code: '02', attendanceMode: 'part_time' }),
         ],
       }),
     ])
@@ -151,6 +155,40 @@ describe('PKU official PDF catalog harvester', () => {
     expect(conflict.quarantined).toEqual([
       expect.objectContaining({ reasons: ['catalog_language_mismatch'] }),
     ])
+  })
+
+  it('assigns directions that precede the next program name to that next program', () => {
+    const layout = [
+      '数学科学学院招生专业及研究方向',
+      '',
+      '专业名称                          研究方向   学习方式   授课语言',
+      '                            01. Alpha One         全日制     中文',
+      'Program Alpha               02. Alpha Two         全日制     中文',
+      '(123456)                    03. Alpha Three       全日制     中文',
+      '                            01. Beta One          全日制     中文',
+      'Program Beta                02. Beta Two          非全日制   中文',
+      '(234567)                    03. Beta Three        非全日制   中文',
+    ].join('\n')
+    const result = parsePkuPdfCatalogText(layout, baseDocumentOptions)
+    const alpha = result.entities.find((entity) => entity.programCode === '123456')
+    const beta = result.entities.find((entity) => entity.programCode === '234567')
+
+    expect(result.quarantined).toEqual([])
+    expect(alpha?.researchDirections.map((direction) => direction.name)).toEqual([
+      'Alpha One',
+      'Alpha Two',
+      'Alpha Three',
+    ])
+    expect(beta).toMatchObject({
+      attendanceMode: 'hybrid',
+      researchDirections: [
+        expect.objectContaining({ code: '01', name: 'Beta One' }),
+        expect.objectContaining({ code: '02', name: 'Beta Two' }),
+        expect.objectContaining({ code: '03', name: 'Beta Three' }),
+      ],
+    })
+    expect(new Set(beta?.researchDirections.map((direction) => direction.code)).size)
+      .toBe(beta?.researchDirections.length)
   })
 
   it('does not turn research directions into projects', () => {
