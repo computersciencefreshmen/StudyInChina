@@ -12,8 +12,7 @@ if ($MaxChunkAttempts -lt 1 -or $MaxChunkAttempts -gt 10) {
 }
 $root = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
 $isWindowsPlatform = $env:OS -eq "Windows_NT"
-$tsxName = if ($isWindowsPlatform) { "tsx.cmd" } else { "tsx" }
-$tsx = Join-Path $root (Join-Path "node_modules/.bin" $tsxName)
+$tsx = Join-Path $root "node_modules/tsx/dist/cli.mjs"
 $wrangler = Join-Path $root "node_modules/wrangler/bin/wrangler.js"
 $commandRunner = Join-Path $root "scripts/cloudflare/execute-d1-command-file.mjs"
 $node = (Get-Command node -CommandType Application -ErrorAction Stop).Source
@@ -26,7 +25,7 @@ if (-not (Test-Path -LiteralPath $tsx)) { throw "tsx is not installed. Run npm c
 if (-not (Test-Path -LiteralPath $wrangler)) { throw "wrangler is not installed. Run npm ci first." }
 if (-not (Test-Path -LiteralPath $commandRunner)) { throw "D1 command runner is missing." }
 
-$manifestPath = (& $tsx (Join-Path $root "scripts/ingestion/build-pipeline-bootstrap.ts") --output $output | Select-Object -Last 1).Trim()
+$manifestPath = (& $node $tsx (Join-Path $root "scripts/ingestion/build-pipeline-bootstrap.ts") --output $output | Select-Object -Last 1).Trim()
 if ($LASTEXITCODE -ne 0) { throw "Pipeline bootstrap build failed." }
 if (-not (Test-Path -LiteralPath $manifestPath)) { throw "Pipeline bootstrap metadata was not generated." }
 $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json

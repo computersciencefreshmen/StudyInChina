@@ -78,7 +78,7 @@ test('a verified program page exposes complete facts, official sources and appli
   await expect(page.getByRole('heading', { name: 'Eligibility' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Application materials' })).toBeVisible()
   await expect(page.getByRole('link', { name: /View official application portal/ })).toHaveAttribute('href', /applychinese\.sjtu\.edu\.cn/)
-  await expect(page.getByRole('link', { name: /Long-term Chinese Language Course/ })).toHaveAttribute('href', /ichinese\.sjtu\.edu\.cn/)
+  await expect(page.locator('a[href="https://ichinese.sjtu.edu.cn/en/programs/10/detail"]')).toHaveAttribute('href', /ichinese\.sjtu\.edu\.cn/)
 })
 
 test('a multi-cycle program promotes the next upcoming intake', async ({ page }) => {

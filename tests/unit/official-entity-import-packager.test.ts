@@ -428,7 +428,8 @@ describe('strict official entity import packager', () => {
       script.indexOf('function Sync-R2'),
       script.indexOf('function Import-Transport'),
     )
-    expect(r2Block).toContain('The specified key does not exist.')
+    expect(r2Block).toContain('The specified key does not exist')
+    expect(r2Block).toContain('($_ | Out-String)')
     expect(r2Block).not.toContain('404|not found|does not exist|NoSuchKey')
     expect(r2Block.indexOf('"r2", "object", "get"')).toBeLessThan(
       r2Block.indexOf('"r2", "object", "put"'),
@@ -443,7 +444,7 @@ describe('strict official entity import packager', () => {
     expect(script).not.toContain('Verified file marker was not produced')
     expect(script).toContain('"catalog_entities", "dependencies"')
     expect(script).toContain('Get-Command "node"')
-    expect(script).toContain('"tsx.cmd"')
+    expect(script).toContain('"node_modules/tsx/dist/cli.mjs"')
     expect(script).toContain('"tsx"')
     expect(script).toContain('"npx"')
     expect(script).not.toContain('Get-Command node.exe')

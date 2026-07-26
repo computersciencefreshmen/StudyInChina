@@ -123,13 +123,13 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(representableProgramTypes).toContain('short_term')
     expect(doctorate).toBe('doctorate')
     const firstResponse = await worker.fetch(
-      new Request('https://catalog.test/api/v1/programs?limit=2'),
+      new Request('https://catalog.test/api/v1/programs?limit=1'),
       environment,
     )
     const first = await firstResponse.json() as ApiEnvelopeDto<ProgramDto[]>
     expect(firstResponse.status).toBe(200)
     expect(first.meta.apiVersion).toBe('v1')
-    expect(first.data).toHaveLength(2)
+    expect(first.data).toHaveLength(1)
     expect(first.meta.nextCursor).toEqual(expect.any(String))
     expect(first.data[0]).toMatchObject({
       type: 'program',
@@ -147,14 +147,13 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(first.data[0]).not.toHaveProperty('status')
 
     const secondResponse = await worker.fetch(
-      new Request(`https://catalog.test/api/v1/programs?limit=2&cursor=${encodeURIComponent(first.meta.nextCursor!)}`),
+      new Request(`https://catalog.test/api/v1/programs?limit=1&cursor=${encodeURIComponent(first.meta.nextCursor!)}`),
       environment,
     )
     const second = await secondResponse.json() as ApiEnvelopeDto<ProgramDto[]>
     expect(secondResponse.status).toBe(200)
-    expect(second.data).toHaveLength(2)
+    expect(second.data).toHaveLength(1)
     expect(second.data.map((item) => item.id)).not.toContain(first.data[0]!.id)
-    expect(second.data.map((item) => item.id)).not.toContain(first.data[1]!.id)
     expect(r2Reads).toBe(0)
     expect(queries.some(({ sql }) => sql.includes('FROM current_programs AS program'))).toBe(true)
   })

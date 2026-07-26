@@ -608,12 +608,24 @@ describe('materialization Catalog release request', () => {
     const script = readFileSync(scriptPath, 'utf8')
     expect(script).toContain('$targetFlag = if ($Remote)')
     expect(script).toContain('Get-Command "node"')
-    expect(script).toContain('"tsx.cmd"')
+    expect(script).toContain('"node_modules/tsx/dist/cli.mjs"')
     expect(script).toContain('"tsx"')
     expect(script).toContain('"npx"')
     expect(script).toContain('"d1", "migrations", "apply"')
     expect(script).toContain('relational_contract_valid')
     expect(script).not.toContain('MINIMAX')
+
+    const requestExecution = script.slice(
+      script.indexOf('$requestSql ='),
+      script.indexOf('$verificationSql ='),
+    )
+    expect(requestExecution).toContain(
+      'Invoke-D1File ([string]$plan.requestSqlPath)',
+    )
+    expect(requestExecution).not.toContain('Invoke-D1Command $requestSql')
+    expect(script).toMatch(
+      /"d1", "execute", "INGESTION_DB", "--file", \$Path, "--yes"/u,
+    )
 
     const escapedScriptPath = scriptPath.replaceAll("'", "''")
     const parserScript = [

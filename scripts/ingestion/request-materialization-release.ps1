@@ -13,12 +13,12 @@ Set-StrictMode -Version Latest
 $root = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
 $isWindowsPlatform = $env:OS -eq "Windows_NT"
 $node = (Get-Command "node" -CommandType Application -ErrorAction Stop).Source
-$localTsxName = if ($isWindowsPlatform) { "tsx.cmd" } else { "tsx" }
-$localTsx = Join-Path $root (Join-Path "node_modules/.bin" $localTsxName)
+$localTsx = Join-Path $root "node_modules/tsx/dist/cli.mjs"
 $tsxExecutable = $null
 $tsxPrefixArguments = @()
 if (Test-Path -LiteralPath $localTsx -PathType Leaf) {
-  $tsxExecutable = $localTsx
+  $tsxExecutable = $node
+  $tsxPrefixArguments = @($localTsx)
 } else {
   $npxName = if ($isWindowsPlatform) { "npx.cmd" } else { "npx" }
   $tsxExecutable = (
@@ -47,6 +47,7 @@ foreach ($path in @($tsxExecutable, $node, $wrangler, $generator, $config)) {
 
 function Invoke-Tsx {
   param([string[]]$Arguments)
+  $global:LASTEXITCODE = 0
   $lines = @(& $tsxExecutable @tsxPrefixArguments @Arguments)
   if ($LASTEXITCODE -ne 0) {
     throw "tsx failed with exit code $LASTEXITCODE."
@@ -59,6 +60,7 @@ function Invoke-Wrangler {
   $previous = $ErrorActionPreference
   try {
     $ErrorActionPreference = "Continue"
+    $global:LASTEXITCODE = 0
     $lines = @(& $node $wrangler @Arguments 2>&1 | ForEach-Object { "$_" })
     $exitCode = $LASTEXITCODE
   } finally {
@@ -91,6 +93,14 @@ function Invoke-D1Command {
   param([string]$Sql)
   return Invoke-WranglerJson @(
     "d1", "execute", "INGESTION_DB", "--command", $Sql,
+    "--config", $config, $targetFlag
+  )
+}
+
+function Invoke-D1File {
+  param([string]$Path)
+  return Invoke-WranglerJson @(
+    "d1", "execute", "INGESTION_DB", "--file", $Path, "--yes",
     "--config", $config, $targetFlag
   )
 }
@@ -132,7 +142,7 @@ if (
 }
 
 Invoke-Wrangler @(
-  "d1", "migrations", "apply", "INGESTION_DB", "--yes",
+  "d1", "migrations", "apply", "INGESTION_DB",
   "--config", $config, $targetFlag
 ) | Out-Null
 
@@ -147,7 +157,7 @@ if (
 ) {
   throw "Release request is not a bounded single INSERT statement."
 }
-Invoke-D1Command $requestSql | Out-Null
+Invoke-D1File ([string]$plan.requestSqlPath) | Out-Null
 
 $verificationSql = [System.IO.File]::ReadAllText(
   [string]$plan.verificationSqlPath

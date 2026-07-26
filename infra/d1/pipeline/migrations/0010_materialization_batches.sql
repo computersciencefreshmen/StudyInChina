@@ -827,10 +827,12 @@ BEGIN
   )
   );
   UPDATE records
+  -- Wrangler's D1 SQL splitter closes CASE blocks only after whitespace.
+  -- Keep the space before the comma so the surrounding trigger stays intact.
   SET workflow_status = CASE
         WHEN workflow_status = 'published' THEN 'published'
         ELSE 'applied'
-      END,
+      END ,
       row_version = row_version + 1,
       updated_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now')
   WHERE id IN (

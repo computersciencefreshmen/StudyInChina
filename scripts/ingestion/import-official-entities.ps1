@@ -28,12 +28,12 @@ if (-not $ManifestPath -and $InputPath.Count -eq 0 -and -not $InputDirectory) {
 $root = (Resolve-Path (Join-Path $PSScriptRoot "../..")).Path
 $isWindowsPlatform = $env:OS -eq "Windows_NT"
 $node = (Get-Command "node" -CommandType Application -ErrorAction Stop).Source
-$localTsxName = if ($isWindowsPlatform) { "tsx.cmd" } else { "tsx" }
-$localTsx = Join-Path $root (Join-Path "node_modules/.bin" $localTsxName)
+$localTsx = Join-Path $root "node_modules/tsx/dist/cli.mjs"
 $tsxExecutable = $null
 $tsxPrefixArguments = @()
 if (Test-Path -LiteralPath $localTsx -PathType Leaf) {
-  $tsxExecutable = $localTsx
+  $tsxExecutable = $node
+  $tsxPrefixArguments = @($localTsx)
 } else {
   $npxName = if ($isWindowsPlatform) { "npx.cmd" } else { "npx" }
   $tsxExecutable = (
@@ -63,6 +63,7 @@ foreach ($path in @(
 
 function Invoke-Tsx {
   param([string[]]$Arguments)
+  $global:LASTEXITCODE = 0
   $lines = @(& $tsxExecutable @tsxPrefixArguments @Arguments)
   if ($LASTEXITCODE -ne 0) {
     throw "tsx failed with exit code $LASTEXITCODE."
@@ -75,6 +76,7 @@ function Invoke-Wrangler {
   $previous = $ErrorActionPreference
   try {
     $ErrorActionPreference = "Continue"
+    $global:LASTEXITCODE = 0
     $lines = @(& $node $wrangler @Arguments 2>&1 | ForEach-Object { "$_" })
     $exitCode = $LASTEXITCODE
   } finally {
@@ -251,6 +253,7 @@ function Sync-R2 {
   param([object]$Package, [switch]$Applied)
   $verifyDirectory = Join-Path $output ".r2-verify"
   [System.IO.Directory]::CreateDirectory($verifyDirectory) | Out-Null
+  $pendingVerification = @()
   foreach ($artifact in @($Package.sourceArtifacts)) {
     $uri = [string]$artifact.artifactUri
     $artifactSha = [string]$artifact.artifactSha256
@@ -276,23 +279,61 @@ function Sync-R2 {
       Invoke-Wrangler @("r2", "object", "get", $object, "--file", $download, "--config", $config, $targetFlag) | Out-Null
       $exists = $true
     } catch {
-      if (-not $_.Exception.Message.Contains("The specified key does not exist.")) {
+      $errorText = ($_ | Out-String)
+      if ($errorText -notmatch "(?i)The specified key does not exist[.]") {
         throw
       }
     }
-    if (-not $exists) {
-      if ($Applied) { throw "Applied batch is missing immutable R2 object: $object" }
-      Invoke-Wrangler @(
-        "r2", "object", "put", $object, "--file", $local,
-        "--content-type", [string]$artifact.contentType,
-        "--config", $config, $targetFlag
-      ) | Out-Null
-      Invoke-Wrangler @("r2", "object", "get", $object, "--file", $download, "--config", $config, $targetFlag) | Out-Null
+    if ($exists) {
+      $downloadFile = Get-Item -LiteralPath $download
+      $downloadSha = (Get-FileHash $download -Algorithm SHA256).Hash.ToLowerInvariant()
+      if ($downloadSha -ne $artifactSha -or [int64]$downloadFile.Length -ne [int64]$artifact.byteLength) {
+        throw "R2 byte/hash verification failed for $object."
+      }
+      continue
     }
-    $downloadFile = Get-Item -LiteralPath $download
-    $downloadSha = (Get-FileHash $download -Algorithm SHA256).Hash.ToLowerInvariant()
-    if ($downloadSha -ne $artifactSha -or [int64]$downloadFile.Length -ne [int64]$artifact.byteLength) {
-      throw "R2 byte/hash verification failed for $object."
+    if ($Applied) { throw "Applied batch is missing immutable R2 object: $object" }
+    Invoke-Wrangler @(
+      "r2", "object", "put", $object, "--file", $local,
+      "--content-type", [string]$artifact.contentType,
+      "--config", $config, $targetFlag
+    ) | Out-Null
+    $pendingVerification += [pscustomobject]@{
+      object = $object
+      download = $download
+      artifactSha = $artifactSha
+      byteLength = [int64]$artifact.byteLength
+    }
+  }
+  if ($pendingVerification.Count -eq 0) { return }
+  Start-Sleep -Seconds 30
+  foreach ($entry in $pendingVerification) {
+    $downloaded = $false
+    for ($verifyAttempt = 1; $verifyAttempt -le 8; $verifyAttempt += 1) {
+      if (Test-Path -LiteralPath $entry.download) { Remove-Item -LiteralPath $entry.download -Force }
+      try {
+        Invoke-Wrangler @(
+          "r2", "object", "get", $entry.object, "--file", $entry.download,
+          "--config", $config, $targetFlag
+        ) | Out-Null
+        $downloaded = $true
+        break
+      } catch {
+        $verifyErrorText = ($_ | Out-String)
+        if (
+          $verifyAttempt -eq 8 -or
+          $verifyErrorText -notmatch "(?i)The specified key does not exist[.]"
+        ) {
+          throw
+        }
+        Start-Sleep -Seconds ([Math]::Min(10, $verifyAttempt * 2))
+      }
+    }
+    if (-not $downloaded) { throw "Uploaded R2 object did not become readable: $($entry.object)" }
+    $downloadFile = Get-Item -LiteralPath $entry.download
+    $downloadSha = (Get-FileHash $entry.download -Algorithm SHA256).Hash.ToLowerInvariant()
+    if ($downloadSha -ne $entry.artifactSha -or [int64]$downloadFile.Length -ne [int64]$entry.byteLength) {
+      throw "R2 byte/hash verification failed for $($entry.object)."
     }
   }
 }
@@ -311,7 +352,8 @@ function Import-Transport {
   Assert-TransportCompatibility $batch $count
   if ($null -ne $batch -and [string]$batch.batch_status -eq "applied") { return $Mode }
   foreach ($chunk in $chunks) {
-    if (Test-Chunk (Get-Chunks ([string]$Package.batchId)) $chunk ([string]$Package.packageDigest) -MissingAllowed) { continue }
+    $serverChunks = @(Get-Chunks ([string]$Package.batchId))
+    if (Test-Chunk -Rows $serverChunks -Chunk $chunk -PackageDigest ([string]$Package.packageDigest) -MissingAllowed) { continue }
     $lastError = $null
     for ($attempt = 1; $attempt -le $MaxChunkAttempts; $attempt += 1) {
       try {
@@ -321,7 +363,8 @@ function Import-Transport {
         break
       } catch {
         $lastError = $_
-        if (Test-Chunk (Get-Chunks ([string]$Package.batchId)) $chunk ([string]$Package.packageDigest) -MissingAllowed) {
+        $serverChunks = @(Get-Chunks ([string]$Package.batchId))
+        if (Test-Chunk -Rows $serverChunks -Chunk $chunk -PackageDigest ([string]$Package.packageDigest) -MissingAllowed) {
           $lastError = $null
           break
         }
@@ -329,7 +372,8 @@ function Import-Transport {
       }
     }
     if ($null -ne $lastError) { throw $lastError }
-    Test-Chunk (Get-Chunks ([string]$Package.batchId)) $chunk ([string]$Package.packageDigest) | Out-Null
+    $serverChunks = @(Get-Chunks ([string]$Package.batchId))
+    Test-Chunk -Rows $serverChunks -Chunk $chunk -PackageDigest ([string]$Package.packageDigest) | Out-Null
   }
   return $Mode
 }
@@ -447,7 +491,7 @@ if (
 }
 
 Invoke-Wrangler @(
-  "d1", "migrations", "apply", "INGESTION_DB", "--yes",
+  "d1", "migrations", "apply", "INGESTION_DB",
   "--config", $config, $targetFlag
 ) | Out-Null
 
