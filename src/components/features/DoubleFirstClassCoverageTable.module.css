@@ -1,0 +1,147 @@
+.toolbar {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(180px, 240px);
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field label {
+  color: var(--ink-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  padding: 0.65rem 0.8rem;
+  background: var(--paper-light);
+  color: var(--ink);
+}
+
+.resultCount {
+  margin: 0 0 0.75rem;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+}
+
+.tableShell {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--paper-light);
+}
+
+.table {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.85rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--paper-deep);
+  color: var(--ink-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.table tr:last-child td {
+  border-bottom: 0;
+}
+
+.ordinal {
+  width: 4rem;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.schoolName {
+  display: grid;
+  gap: 0.18rem;
+  min-width: 220px;
+}
+
+.schoolName strong {
+  color: var(--ink);
+}
+
+.schoolName span,
+.location,
+.checkedAt {
+  color: var(--ink-muted);
+  font-size: 0.84rem;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+  border-radius: 999px;
+  padding: 0.34rem 0.58rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.statusComplete {
+  background: rgba(23, 106, 91, 0.12);
+  color: var(--jade-dark, #0f594c);
+}
+
+.statusCollecting {
+  background: rgba(190, 128, 33, 0.13);
+  color: var(--gold-dark, #805514);
+}
+
+.sourceLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  min-width: 300px;
+}
+
+.sourceLinks a {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.35rem 0.58rem;
+  background: white;
+  color: var(--jade-dark, #0f594c);
+  font-size: 0.78rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.sourceLinks a:hover {
+  border-color: currentColor;
+}
+
+.pending {
+  color: var(--ink-muted);
+  font-size: 0.84rem;
+}
+
+@media (max-width: 720px) {
+  .toolbar {
+    grid-template-columns: 1fr;
+  }
+}

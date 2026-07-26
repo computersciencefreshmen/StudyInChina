@@ -7,7 +7,7 @@ import { siteUrl } from '@/lib/site'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const data = getData()
-  const staticPaths = ['', 'universities', 'programs', 'scholarships', 'cities', 'guides', 'favorites', 'about', 'contact', 'privacy', 'disclaimer', 'data-policy', 'updates']
+  const staticPaths = ['', 'universities', 'double-first-class', 'programs', 'scholarships', 'cities', 'guides', 'favorites', 'about', 'contact', 'privacy', 'disclaimer', 'data-policy', 'updates']
   const releaseDate = getDataReleaseDate(data)
   const entries = [
     ...staticPaths.map((path) => ({ path, lastModified: releaseDate })),
