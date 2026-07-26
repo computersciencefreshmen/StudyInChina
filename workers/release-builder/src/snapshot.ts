@@ -186,7 +186,8 @@ async function loadPipelineTables(database: D1Database): Promise<{
     },
     {
       label: 'official evidence',
-      sql: `SELECT field.subject_record_id, field.field_path, field.locale, field.claim_id,
+      sql: `SELECT DISTINCT
+            field.subject_record_id, field.field_path, field.locale, field.claim_id,
             evidence.evidence_role,
             source.id AS source_internal_id, source.public_id AS source_public_id,
             source.canonical_url, source.source_kind, source.authority_level,
@@ -205,7 +206,7 @@ async function loadPipelineTables(database: D1Database): Promise<{
         AND field.field_status = 'accepted'
         AND claim.claim_status = 'accepted'
       ORDER BY field.subject_record_id, field.field_path, field.locale,
-               source.id, evidence.evidence_role, fragment.id`,
+               source.id, evidence.evidence_role`,
     },
     {
       label: 'localized content',
