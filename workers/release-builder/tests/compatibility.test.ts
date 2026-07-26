@@ -80,7 +80,7 @@ function fixture(): ReleaseArtifact {
     parent_location_id: null,
     location_type: 'city',
     country_code: 'CN',
-    region_code: null,
+    region_code: 'CN-AH',
     latitude: null,
     longitude: null,
   })
@@ -176,6 +176,8 @@ test('normalized identity facts produce a deterministic schema-valid compatibili
   assert.equal(data.programs[0]?.applyUrl, null)
   assert.notEqual(data.programs[0]?.applyUrl, data.programs[0]?.programUrl)
   assert.equal(data.cities[0]?.province, null)
+  assert.equal(data.cities[0]?.region, 'east')
+  assert.equal(data.universities[0]?.region, 'east')
   assert.equal(data.cities[0]?.overview, null)
   assert.equal(data.cities[0]?.climate, null)
   assert.equal(data.universities[0]?.summary, null)

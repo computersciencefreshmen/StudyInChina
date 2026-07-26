@@ -114,6 +114,17 @@ describe('content schemas', () => {
     expect(bundleSchema.safeParse(validBundle()).success).toBe(true)
   })
 
+  it('normalizes official Chinese subdivision codes to broad frontend regions', () => {
+    const bundle = validBundle()
+    ;(bundle.cities[0] as { region: string }).region = 'CN-AH'
+    ;(bundle.universities[0] as { region: string }).region = 'CN-AH'
+
+    const result = bundleSchema.parse(bundle)
+
+    expect(result.cities[0].region).toBe('east')
+    expect(result.universities[0].region).toBe('east')
+  })
+
   it('preserves doctorate as its own degree level', () => {
     const program = { ...validBundle().programs[0], degreeLevel: 'doctorate' }
 

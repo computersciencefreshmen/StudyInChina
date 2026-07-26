@@ -1,5 +1,6 @@
 import { ReleaseValidationError, sha256, stableJson } from './artifact'
 import type { R2Bucket, ReleaseArtifact, SqlRow } from './types'
+import { toBroadRegion } from '../../../src/lib/data/regions'
 
 export type CompatibilityArtifact = {
   key: string
@@ -166,7 +167,7 @@ export async function buildCompatibilityArtifact(
         slug: slug(id),
         name: localizations(id, 'name'),
         province: optionalLocalizations(id, 'province'),
-        region: text(row, 'region_code'),
+        region: toBroadRegion(text(row, 'region_code')),
         coordinates: latitude === null || longitude === null
           ? null
           : { lat: latitude, lng: longitude },

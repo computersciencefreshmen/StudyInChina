@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { broadRegions, normalizeRegionAlias } from './regions'
 
 const date = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine((value) => {
   const parsed = new Date(`${value}T00:00:00Z`)
@@ -11,7 +12,7 @@ const localizedText = z.object({
 }).refine((value) => Object.values(value).some(Boolean), 'At least one localized value is required')
 const status = z.enum(['draft', 'verified', 'stale', 'archived'])
 const audit = z.object({ sourceIds: z.array(z.string().min(1)).min(1), verifiedAt: date, reviewAfter: date, status })
-const region = z.enum(['north', 'northeast', 'east', 'south', 'central', 'southwest', 'northwest'])
+const region = z.preprocess(normalizeRegionAlias, z.enum(broadRegions))
 const DAY_MS = 24 * 60 * 60 * 1000
 const daysBetween = (start: string, end: string) => (
   (new Date(`${end}T00:00:00Z`).getTime() - new Date(`${start}T00:00:00Z`).getTime()) / DAY_MS
