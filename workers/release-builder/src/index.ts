@@ -542,13 +542,37 @@ async function recordFailure(
   )
 }
 
+async function releaseAlreadyDelivered(
+  environment: ReleaseBuilderEnv,
+  job: ReleaseQueueJob,
+): Promise<boolean> {
+  const row = await first<{ event_status: string; job_status: string }>(
+    environment.PIPELINE_DB,
+    `SELECT event.event_status, job.job_status
+       FROM outbox_events event
+       JOIN publication_jobs job ON job.id = event.aggregate_id
+      WHERE event.id = ?1
+        AND event.event_type = 'catalog.release.requested'
+        AND event.aggregate_id = ?2
+        AND job.catalog_release_id = ?3`,
+    job.outboxEventId,
+    job.publicationJobId,
+    job.catalogReleaseId,
+  )
+  return row?.event_status === 'delivered' && row.job_status === 'published'
+}
+
 export async function processReleaseJob(
   environment: ReleaseBuilderEnv,
   job: ReleaseQueueJob,
   now = new Date(),
 ): Promise<'published' | 'already-published' | 'busy'> {
+  if (await releaseAlreadyDelivered(environment, job)) return 'already-published'
   const leaseOwner = `release-builder-${crypto.randomUUID()}`
-  if (!(await claimEvent(environment, job, leaseOwner, now))) return 'busy'
+  if (!(await claimEvent(environment, job, leaseOwner, now))) {
+    if (await releaseAlreadyDelivered(environment, job)) return 'already-published'
+    return 'busy'
+  }
   const built = await loadOrCreateArtifact(environment, job)
   const status = await importArtifact(
     environment,

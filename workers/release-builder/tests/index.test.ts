@@ -23,12 +23,13 @@ function environmentWithRows(
     catalog_release_id: string
     created_at: string
   }> = [],
+  firstRow: Record<string, unknown> | null = null,
 ) {
   const sent: unknown[] = []
   const deadLetters: unknown[] = []
   const statement = {
     bind() { return this },
-    first: async () => null,
+    first: async () => firstRow,
     all: async () => ({ success: true, results: rows }),
     run: async () => ({ success: true, meta: { changes: 1 } }),
   }
@@ -99,6 +100,29 @@ test('invalid queue messages fail closed into the DLQ', async () => {
   assert.equal(retried, false)
   assert.equal(deadLetters.length, 1)
   assert.equal((deadLetters[0] as { code: string }).code, 'invalid_release_job')
+})
+
+test('already delivered release messages are acknowledged without retrying', async () => {
+  const { environment } = environmentWithRows([], {
+    event_status: 'delivered',
+    job_status: 'published',
+  })
+  let acknowledged = false
+  let retried = false
+  await handleQueue(
+    {
+      messages: [{
+        id: 'message-published',
+        body: validJob,
+        attempts: 1,
+        ack: () => { acknowledged = true },
+        retry: () => { retried = true },
+      }],
+    },
+    environment,
+  )
+  assert.equal(acknowledged, true)
+  assert.equal(retried, false)
 })
 
 test('health endpoint exposes only service identity', async () => {
