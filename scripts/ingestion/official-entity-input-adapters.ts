@@ -22,6 +22,8 @@ const SCHOLARSHIP_SCHEME_TYPES = new Set([
 ])
 const DEGREE_LEVELS = new Set(['bachelor', 'master', 'doctorate'])
 const INSTRUCTION_LANGUAGES = new Set(['Chinese', 'English'])
+const PKU_ATTENDANCE_MODES = new Set(['full_time', 'part_time', 'hybrid'])
+const PKU_DIRECTION_ATTENDANCE_MODES = new Set(['full_time', 'part_time'])
 
 function scholarshipInstitutionOfficialHosts():
 Readonly<Record<string, readonly string[]>> {
@@ -251,6 +253,31 @@ function pkuPdfLocator(
   return locator
 }
 
+function pkuResearchDirectionLocator(
+  evidence: JsonRecord,
+  programCode: string,
+  directionCode: string,
+  label: string,
+): string {
+  const page = integer(evidence.page, `${label}.page`)
+  const lineStart = integer(evidence.lineStart, `${label}.lineStart`)
+  const lineEnd = integer(evidence.lineEnd, `${label}.lineEnd`)
+  if (page < 1 || lineStart < 1 || lineEnd < lineStart) {
+    throw new Error(`${label} has invalid PDF page or line bounds`)
+  }
+  const expected = [
+    `pdf:page=${page}`,
+    `lines=${lineStart}-${lineEnd}`,
+    `code=${programCode}`,
+    `direction=${directionCode}`,
+  ].join(';')
+  const locator = nonEmptyString(evidence.locator, `${label}.locator`)
+  if (locator !== expected) {
+    throw new Error(`${label}.locator does not match its direction evidence`)
+  }
+  return locator
+}
+
 function adaptPkuPdfDirectoryHarvest(root: JsonRecord): JsonRecord {
   if (root.sourceType !== 'official_pdf_directory') {
     throw new Error('PKU PDF harvest sourceType must be official_pdf_directory')
@@ -401,22 +428,126 @@ function adaptPkuPdfDirectoryHarvest(root: JsonRecord): JsonRecord {
     if (evidenceCheckedAt !== checkedAt) {
       throw new Error(`${label}.evidence.checkedAt conflicts with the PKU harvest`)
     }
+    const officialName = nonEmptyString(entity.name, `${label}.name`)
+    const nameZh = entity.nameZh === undefined
+      ? officialName
+      : nullableString(entity.nameZh, `${label}.nameZh`)
+    const nameEn = entity.nameEn === undefined
+      ? null
+      : nullableString(entity.nameEn, `${label}.nameEn`)
+    if (!nameZh) throw new Error(`${label}.nameZh is required for the Chinese catalog`)
+    const expectedOfficialName = nameEn ? `${nameZh}(${nameEn})` : nameZh
+    if (normalizePkuIdentity(expectedOfficialName) !== normalizePkuIdentity(officialName)) {
+      throw new Error(`${label}.nameZh/nameEn conflict with the official program name`)
+    }
+    const rawAttendanceMode = entity.attendanceMode
+    const attendanceMode = rawAttendanceMode === undefined || rawAttendanceMode === null
+      ? null
+      : nonEmptyString(rawAttendanceMode, `${label}.attendanceMode`)
+    if (attendanceMode && !PKU_ATTENDANCE_MODES.has(attendanceMode)) {
+      throw new Error(`${label}.attendanceMode is unsupported`)
+    }
+    const rawDirections = entity.researchDirections === undefined
+      ? []
+      : array(entity.researchDirections, `${label}.researchDirections`)
+    const directionCodes = new Set<string>()
+    const directionEvidence: JsonRecord[] = []
+    const researchDirections = rawDirections.map((rawDirection, directionIndex) => {
+      const directionLabel = `${label}.researchDirections[${directionIndex}]`
+      const direction = asRecord(rawDirection, directionLabel)
+      const code = nonEmptyString(direction.code, `${directionLabel}.code`)
+      if (!/^[0-9]{2}$/u.test(code)) {
+        throw new Error(`${directionLabel}.code must be a two-digit official code`)
+      }
+      if (directionCodes.has(code)) {
+        throw new Error(`${label}.researchDirections contains duplicate code ${code}`)
+      }
+      directionCodes.add(code)
+      const directionAttendance = nonEmptyString(
+        direction.attendanceMode,
+        `${directionLabel}.attendanceMode`,
+      )
+      if (!PKU_DIRECTION_ATTENDANCE_MODES.has(directionAttendance)) {
+        throw new Error(`${directionLabel}.attendanceMode is unsupported`)
+      }
+      if (direction.instructionLanguage !== 'Chinese') {
+        throw new Error(`${directionLabel}.instructionLanguage conflicts with the catalog`)
+      }
+      const itemEvidence = asRecord(direction.evidence, `${directionLabel}.evidence`)
+      const itemEvidenceUrl = pkuMasterChinesePdfUrl(
+        itemEvidence.officialUrl,
+        indexUrl,
+        `${directionLabel}.evidence.officialUrl`,
+      )
+      if (itemEvidenceUrl !== entityUrl) {
+        throw new Error(`${directionLabel}.evidence.officialUrl conflicts with the program PDF`)
+      }
+      const itemEvidenceCheckedAt = isoTimestamp(
+        itemEvidence.checkedAt,
+        `${directionLabel}.evidence.checkedAt`,
+      )
+      if (itemEvidenceCheckedAt !== checkedAt) {
+        throw new Error(`${directionLabel}.evidence.checkedAt conflicts with the PKU harvest`)
+      }
+      directionEvidence.push({
+        locatorType: 'pdf_page',
+        locator: pkuResearchDirectionLocator(
+          itemEvidence,
+          programCode,
+          code,
+          `${directionLabel}.evidence`,
+        ),
+        quote: nonEmptyString(itemEvidence.quote, `${directionLabel}.evidence.quote`),
+        officialUrl: itemEvidenceUrl,
+        checkedAt: itemEvidenceCheckedAt,
+        fieldPaths: ['attendance_mode', 'instruction_languages', 'research_directions'],
+      })
+      return {
+        code,
+        nameZh: nonEmptyString(direction.name, `${directionLabel}.name`),
+        attendanceMode: directionAttendance,
+        instructionLanguages: ['Chinese'],
+      }
+    })
+    if ((attendanceMode === null) !== (researchDirections.length === 0)) {
+      throw new Error(
+        `${label}.attendanceMode and researchDirections must be verified together`,
+      )
+    }
+    if (attendanceMode !== null) {
+      const modes = new Set(researchDirections.map((direction) => direction.attendanceMode))
+      const expectedAttendanceMode = modes.size === 1
+        ? researchDirections[0].attendanceMode
+        : 'hybrid'
+      if (attendanceMode !== expectedAttendanceMode) {
+        throw new Error(`${label}.attendanceMode conflicts with its research directions`)
+      }
+    }
     return {
       entityType: 'program',
       entityKey,
       institutionId: 'uni-peking-university',
       programType: 'degree',
       degreeLevel: 'master',
-      nameZh: nonEmptyString(entity.name, `${label}.name`),
+      nameZh,
+      ...(nameEn ? { nameEn } : {}),
+      ...(attendanceMode ? { attendanceMode } : {}),
+      ...(researchDirections.length > 0
+        ? { instructionLanguages: ['Chinese'], researchDirections }
+        : {}),
       officialUrl: entityUrl,
       sourceCheckedAt: entityCheckedAt,
-      evidence: {
-        locatorType: 'pdf_page',
-        locator: pkuPdfLocator(evidence, programCode, `${label}.evidence`),
-        quote: nonEmptyString(evidence.quote, `${label}.evidence.quote`),
-        officialUrl: evidenceUrl,
-        checkedAt: evidenceCheckedAt,
-      },
+      evidence: [
+        {
+          locatorType: 'pdf_page',
+          locator: pkuPdfLocator(evidence, programCode, `${label}.evidence`),
+          quote: nonEmptyString(evidence.quote, `${label}.evidence.quote`),
+          officialUrl: evidenceUrl,
+          checkedAt: evidenceCheckedAt,
+          fieldPaths: ['localized.name', 'official_url', 'program_type', 'degree_level'],
+        },
+        ...directionEvidence,
+      ],
     }
   })
 

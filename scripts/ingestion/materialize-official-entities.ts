@@ -37,6 +37,17 @@ type ProgramType =
   | 'visiting'
   | 'short_term'
   | 'other'
+type DurationUnit = 'days' | 'weeks' | 'months' | 'semesters' | 'academic_years'
+type TeachingLanguageCode = 'zh' | 'en'
+type TeachingLanguageRole = 'primary' | 'secondary' | 'bilingual' | 'support'
+type AttendanceMode = 'full_time' | 'part_time' | 'hybrid'
+type NormalizedResearchDirection = {
+  code: string
+  nameEn: string | null
+  nameZh: string | null
+  attendanceMode: Exclude<AttendanceMode, 'hybrid'>
+  instructionLanguages: TeachingLanguageCode[]
+}
 type SchemeType =
   | 'government'
   | 'university'
@@ -71,8 +82,17 @@ type NormalizedEntity = {
   programType: ProgramType | null
   degreeLevel: DegreeLevel | null
   schemeType: SchemeType | null
-  attendanceMode: 'full_time' | 'part_time' | 'hybrid'
+  attendanceMode: AttendanceMode
   deliveryMode: 'on_campus' | 'online' | 'hybrid'
+  durationMin: number | null
+  durationMax: number | null
+  durationUnit: DurationUnit | null
+  teachingLanguages: Array<{
+    code: TeachingLanguageCode
+    role: TeachingLanguageRole
+  }> | null
+  researchDirections: NormalizedResearchDirection[] | null
+  explicitProgramFields: string[]
   nameEn: string | null
   nameZh: string | null
   officialUrl: string
@@ -146,8 +166,8 @@ type PreparedFact = {
   recordKind: EntityKind
   fieldPath: string
   locale: string
-  valueType: 'localized_string' | 'url' | 'string'
-  value: string
+  valueType: 'localized_string' | 'url' | 'string' | 'integer' | 'json'
+  value: string | number | string[] | NormalizedResearchDirection[]
   checkedAt: string
   reviewAfter: string
   fragmentIds: string[]
@@ -247,6 +267,19 @@ const SCHEME_TYPES = new Set<SchemeType>([
 ])
 const ATTENDANCE_MODES = new Set(['full_time', 'part_time', 'hybrid'])
 const DELIVERY_MODES = new Set(['on_campus', 'online', 'hybrid'])
+const DURATION_UNITS = new Set<DurationUnit>([
+  'days',
+  'weeks',
+  'months',
+  'semesters',
+  'academic_years',
+])
+const TEACHING_LANGUAGE_ROLES = new Set<TeachingLanguageRole>([
+  'primary',
+  'secondary',
+  'bilingual',
+  'support',
+])
 const INSTITUTION_LOCATION_DEPENDENCIES: Readonly<Record<string, string>> = {
   'uni-tsinghua-university': 'city-beijing',
   'uni-peking-university': 'city-beijing',
@@ -316,6 +349,62 @@ const FIELD_DEFINITIONS = [
     validationProfile: 'degree-level',
   },
   {
+    recordKind: 'program',
+    fieldPath: 'attendance_mode',
+    valueType: 'string',
+    riskClass: 'medium',
+    requiredForPublish: 0,
+    validationProfile: 'attendance-mode',
+  },
+  {
+    recordKind: 'program',
+    fieldPath: 'delivery_mode',
+    valueType: 'string',
+    riskClass: 'medium',
+    requiredForPublish: 0,
+    validationProfile: 'delivery-mode',
+  },
+  {
+    recordKind: 'program',
+    fieldPath: 'duration_min',
+    valueType: 'integer',
+    riskClass: 'high',
+    requiredForPublish: 0,
+    validationProfile: 'positive-duration',
+  },
+  {
+    recordKind: 'program',
+    fieldPath: 'duration_max',
+    valueType: 'integer',
+    riskClass: 'high',
+    requiredForPublish: 0,
+    validationProfile: 'positive-duration',
+  },
+  {
+    recordKind: 'program',
+    fieldPath: 'duration_unit',
+    valueType: 'string',
+    riskClass: 'high',
+    requiredForPublish: 0,
+    validationProfile: 'duration-unit',
+  },
+  {
+    recordKind: 'program',
+    fieldPath: 'instruction_languages',
+    valueType: 'json',
+    riskClass: 'high',
+    requiredForPublish: 0,
+    validationProfile: 'language-code-array',
+  },
+  {
+    recordKind: 'program',
+    fieldPath: 'research_directions',
+    valueType: 'json',
+    riskClass: 'medium',
+    requiredForPublish: 0,
+    validationProfile: 'research-direction-array',
+  },
+  {
     recordKind: 'scholarship',
     fieldPath: 'localized.name',
     valueType: 'localized_string',
@@ -367,6 +456,108 @@ function oneOf<T extends string>(
     throw new Error(`${label} has unsupported value ${JSON.stringify(normalized)}`)
   }
   return normalized
+}
+
+function optionalPositiveInteger(value: unknown, label: string): number | null {
+  if (value === undefined || value === null) return null
+  if (typeof value !== 'number' || !Number.isInteger(value) || value <= 0) {
+    throw new Error(`${label} must be a positive integer`)
+  }
+  return value
+}
+
+function teachingLanguageCode(value: unknown, label: string): TeachingLanguageCode {
+  const normalized = nonEmptyString(value, label).toLowerCase()
+  if (normalized === 'zh' || normalized === 'chinese') return 'zh'
+  if (normalized === 'en' || normalized === 'english') return 'en'
+  throw new Error(`${label} must be Chinese/zh or English/en`)
+}
+
+function normalizeTeachingLanguages(
+  entity: JsonRecord,
+  label: string,
+): Array<{ code: TeachingLanguageCode; role: TeachingLanguageRole }> | null {
+  const raw = entity.teachingLanguages
+    ?? entity.instructionLanguages
+    ?? entity.instructionLanguage
+  if (raw === undefined || raw === null) return null
+  const values = Array.isArray(raw) ? raw : [raw]
+  if (values.length === 0) throw new Error(`${label} must not be empty`)
+  const defaultRole: TeachingLanguageRole = values.length > 1 ? 'bilingual' : 'primary'
+  const normalized = values.map((value, index) => {
+    const item = optionalRecord(value)
+    const code = teachingLanguageCode(
+      item?.code ?? item?.languageCode ?? value,
+      `${label}[${index}].code`,
+    )
+    const role = item?.role === undefined
+      ? defaultRole
+      : oneOf(
+          item.role,
+          TEACHING_LANGUAGE_ROLES,
+          `${label}[${index}].role`,
+        )
+    return { code, role }
+  })
+  const unique = new Map(normalized.map((item) => [`${item.code}:${item.role}`, item]))
+  return [...unique.values()].sort((left, right) => (
+    `${left.code}:${left.role}`.localeCompare(
+      `${right.code}:${right.role}`,
+      'en',
+    )
+  ))
+}
+
+function normalizeResearchDirections(
+  value: unknown,
+  label: string,
+): NormalizedResearchDirection[] | null {
+  if (value === undefined || value === null) return null
+  if (!Array.isArray(value)) throw new Error(`${label} must be an array`)
+  if (value.length === 0) return null
+  const normalized = value.map((rawDirection, index) => {
+    const directionLabel = `${label}[${index}]`
+    const direction = asRecord(rawDirection, directionLabel)
+    const code = nonEmptyString(direction.code, `${directionLabel}.code`)
+    if (code.length > 64) throw new Error(`${directionLabel}.code is too long`)
+    const localizedName = optionalRecord(direction.name)
+    const nameEn = optionalString(direction.nameEn) ?? optionalString(localizedName?.en)
+    const nameZh = optionalString(direction.nameZh) ?? optionalString(localizedName?.zh)
+    if (!nameEn && !nameZh) {
+      throw new Error(`${directionLabel} must provide nameEn, nameZh, or name.{en,zh}`)
+    }
+    const attendanceMode = oneOf(
+      direction.attendanceMode,
+      new Set<Exclude<AttendanceMode, 'hybrid'>>(['full_time', 'part_time']),
+      `${directionLabel}.attendanceMode`,
+    )
+    const rawLanguages = direction.instructionLanguages
+      ?? direction.instructionLanguage
+    const languageValues = Array.isArray(rawLanguages) ? rawLanguages : [rawLanguages]
+    if (rawLanguages === undefined || languageValues.length === 0) {
+      throw new Error(`${directionLabel}.instructionLanguages must not be empty`)
+    }
+    const instructionLanguages = [...new Set(languageValues.map((
+      language,
+      languageIndex,
+    ) => teachingLanguageCode(
+      language,
+      `${directionLabel}.instructionLanguages[${languageIndex}]`,
+    )))].sort((left, right) => left.localeCompare(right, 'en'))
+    return { code, nameEn, nameZh, attendanceMode, instructionLanguages }
+  })
+  const codes = new Set<string>()
+  for (const direction of normalized) {
+    if (codes.has(direction.code)) {
+      throw new Error(`${label} contains duplicate code ${direction.code}`)
+    }
+    codes.add(direction.code)
+  }
+  return normalized.sort((left, right) => left.code.localeCompare(
+    right.code,
+    'en',
+    { numeric: true },
+  ))
 }
 
 function canonical(value: unknown): unknown {
@@ -750,6 +941,61 @@ function normalizeEntity(
       `entities[${index}].deliveryMode`,
     ) as NormalizedEntity['deliveryMode']
     : 'on_campus'
+  const durationMin = entityType === 'program'
+    ? optionalPositiveInteger(
+        entity.durationMin ?? entity.durationMonths,
+        `entities[${index}].durationMin`,
+      )
+    : null
+  const durationMax = entityType === 'program'
+    ? optionalPositiveInteger(
+        entity.durationMax ?? entity.durationMonthsMax,
+        `entities[${index}].durationMax`,
+      )
+    : null
+  const durationUnitValue = entityType === 'program'
+    ? optionalString(entity.durationUnit)
+      ?? (entity.durationMonths !== undefined ? 'months' : null)
+    : null
+  const durationUnit = durationUnitValue
+    ? oneOf(
+        durationUnitValue,
+        DURATION_UNITS,
+        `entities[${index}].durationUnit`,
+      )
+    : null
+  if (durationMax !== null && durationMin === null) {
+    throw new Error(`entities[${index}].durationMax requires durationMin`)
+  }
+  if (durationMax !== null && durationMax < durationMin!) {
+    throw new Error(`entities[${index}].durationMax must be at least durationMin`)
+  }
+  if ((durationMin === null) !== (durationUnit === null)) {
+    throw new Error(`entities[${index}] durationMin and durationUnit must be provided together`)
+  }
+  const teachingLanguages = entityType === 'program'
+    ? normalizeTeachingLanguages(
+        entity,
+        `entities[${index}].teachingLanguages`,
+      )
+    : null
+  const researchDirections = entityType === 'program'
+    ? normalizeResearchDirections(
+        entity.researchDirections,
+        `entities[${index}].researchDirections`,
+      )
+    : null
+  const explicitProgramFields = entityType === 'program'
+    ? [
+        entity.attendanceMode !== undefined ? 'attendance_mode' : null,
+        entity.deliveryMode !== undefined ? 'delivery_mode' : null,
+        durationMin !== null ? 'duration_min' : null,
+        durationMax !== null ? 'duration_max' : null,
+        durationUnit !== null ? 'duration_unit' : null,
+        teachingLanguages !== null ? 'instruction_languages' : null,
+        researchDirections !== null ? 'research_directions' : null,
+      ].filter((value): value is string => value !== null)
+    : []
   return {
     entityType,
     entityKey,
@@ -761,6 +1007,12 @@ function normalizeEntity(
     schemeType,
     attendanceMode,
     deliveryMode,
+    durationMin,
+    durationMax,
+    durationUnit,
+    teachingLanguages,
+    researchDirections,
+    explicitProgramFields,
     ...names,
     officialUrl: officialUrl(
       entity.officialUrl,
@@ -914,7 +1166,7 @@ function prepare(
       fieldPath: string,
       locale: string,
       valueType: PreparedFact['valueType'],
-      value: string,
+      value: PreparedFact['value'],
     ) => {
       const matchingEvidence = evidenceForField(entity, fieldPath)
       const fragmentIds: string[] = []
@@ -998,6 +1250,30 @@ function prepare(
     if (entity.entityType === 'program') {
       addFact('program_type', '', 'string', entity.programType!)
       if (entity.degreeLevel) addFact('degree_level', '', 'string', entity.degreeLevel)
+      if (entity.explicitProgramFields.includes('attendance_mode')) {
+        addFact('attendance_mode', '', 'string', entity.attendanceMode)
+      }
+      if (entity.explicitProgramFields.includes('delivery_mode')) {
+        addFact('delivery_mode', '', 'string', entity.deliveryMode)
+      }
+      if (entity.durationMin !== null) {
+        addFact('duration_min', '', 'integer', entity.durationMin)
+      }
+      if (entity.durationMax !== null) {
+        addFact('duration_max', '', 'integer', entity.durationMax)
+      }
+      if (entity.durationUnit !== null) {
+        addFact('duration_unit', '', 'string', entity.durationUnit)
+      }
+      if (entity.teachingLanguages !== null) {
+        const languageCodes = [...new Set(
+          entity.teachingLanguages.map((language) => language.code),
+        )].sort((left, right) => left.localeCompare(right, 'en'))
+        addFact('instruction_languages', '', 'json', languageCodes)
+      }
+      if (entity.researchDirections !== null) {
+        addFact('research_directions', '', 'json', entity.researchDirections)
+      }
     }
     records.push({
       id: recordId,
@@ -1269,7 +1545,8 @@ INSERT INTO programs (
   ${sqlValue(record.id)}, ${sqlValue(entity.institutionId)}, NULL, NULL,
   ${sqlValue(entity.programType)}, ${sqlValue(entity.degreeLevel)}, NULL,
   ${sqlValue(entity.attendanceMode)}, ${sqlValue(entity.deliveryMode)},
-  NULL, NULL, NULL, ${sqlValue(entity.officialUrl)}
+  ${sqlValue(entity.durationMin)}, ${sqlValue(entity.durationMax)},
+  ${sqlValue(entity.durationUnit)}, ${sqlValue(entity.officialUrl)}
 )
 ON CONFLICT(record_id) DO UPDATE SET
   institution_id = excluded.institution_id,
@@ -1277,7 +1554,32 @@ ON CONFLICT(record_id) DO UPDATE SET
   degree_level = excluded.degree_level,
   attendance_mode = excluded.attendance_mode,
   delivery_mode = excluded.delivery_mode,
+  duration_min = excluded.duration_min,
+  duration_max = excluded.duration_max,
+  duration_unit = excluded.duration_unit,
   official_url = excluded.official_url;`.trim())
+    if (entity.teachingLanguages !== null) {
+      statements.push(`
+DELETE FROM program_teaching_languages
+WHERE program_id = ${sqlValue(record.id)};`.trim())
+      for (const language of entity.teachingLanguages) {
+        const names = language.code === 'zh'
+          ? { en: 'Chinese', zh: '中文' }
+          : { en: 'English', zh: '英语' }
+        statements.push(`
+INSERT INTO languages (code, name_en, name_zh)
+VALUES (
+  ${sqlValue(language.code)}, ${sqlValue(names.en)}, ${sqlValue(names.zh)}
+)
+ON CONFLICT(code) DO NOTHING;`.trim())
+        statements.push(`
+INSERT INTO program_teaching_languages (program_id, language_code, role)
+VALUES (
+  ${sqlValue(record.id)}, ${sqlValue(language.code)}, ${sqlValue(language.role)}
+)
+ON CONFLICT(program_id, language_code, role) DO NOTHING;`.trim())
+      }
+    }
   } else {
     statements.push(`
 INSERT INTO scholarships (
@@ -1328,6 +1630,9 @@ ON CONFLICT(record_id, locale, field_name) DO UPDATE SET
 }
 
 function claimStatements(fact: PreparedFact): string[] {
+  const rawValueText = typeof fact.value === 'string'
+    ? fact.value
+    : stableJson(fact.value)
   const claimId = `claim-${sha256([
     fact.recordId,
     fact.fieldPath,
@@ -1345,7 +1650,7 @@ INSERT OR IGNORE INTO claims (
   provenance_precision, discovered_at, decided_at
 ) VALUES (
   ${sqlValue(claimId)}, ${sqlValue(fact.recordId)}, ${sqlValue(fact.fieldPath)},
-  ${sqlValue(fact.locale)}, ${sqlValue(fact.valueType)}, ${sqlValue(fact.value)},
+  ${sqlValue(fact.locale)}, ${sqlValue(fact.valueType)}, ${sqlValue(rawValueText)},
   ${sqlValue(stableJson(fact.value))}, 1.0, 'api',
   ${sqlValue(MATERIALIZER_VERSION)}, 'candidate', 'field',
   ${sqlValue(fact.checkedAt)}, NULL
