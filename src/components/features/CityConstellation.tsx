@@ -4,23 +4,65 @@ import { getMessages } from '@/i18n/messages'
 import { localize } from '@/lib/data/format'
 import type { City } from '@/lib/data/types'
 
-export function CityConstellation({ cities, locale }: { cities: City[]; locale: LaunchLocale }) {
-  const locatedCities = cities.filter(
-    (city): city is City & { coordinates: { lat: number; lng: number } } => city.coordinates !== null,
-  )
-  const lngs = locatedCities.map((city) => city.coordinates.lng)
-  const lats = locatedCities.map((city) => city.coordinates.lat)
-  const minLng = Math.min(...lngs); const maxLng = Math.max(...lngs)
-  const minLat = Math.min(...lats); const maxLat = Math.max(...lats)
-  const note = getMessages(locale).cities.mapNote
+const CHINA_COORDINATE_EXTENT = {
+  minLat: 18,
+  maxLat: 54,
+  minLng: 73,
+  maxLng: 135,
+} as const
+
+function hasUsableCoordinates(
+  city: City,
+): city is City & { coordinates: { lat: number; lng: number } } {
+  const { coordinates } = city
+  return coordinates !== null
+    && Number.isFinite(coordinates.lat)
+    && Number.isFinite(coordinates.lng)
+    && coordinates.lat >= CHINA_COORDINATE_EXTENT.minLat
+    && coordinates.lat <= CHINA_COORDINATE_EXTENT.maxLat
+    && coordinates.lng >= CHINA_COORDINATE_EXTENT.minLng
+    && coordinates.lng <= CHINA_COORDINATE_EXTENT.maxLng
+}
+
+export function CityConstellation({
+  cities,
+  locale,
+  universityCounts = {},
+}: {
+  cities: City[]
+  locale: LaunchLocale
+  universityCounts?: Readonly<Record<string, number>>
+}) {
+  const messages = getMessages(locale)
+  const locatedCities = cities.filter(hasUsableCoordinates)
+  const note = messages.cities.mapNote
 
   return <div>
     <div className="city-map" aria-label={note}>
       <span className="city-map__compass" aria-hidden="true">N ↑</span>
+      <span className="city-map__location-count">{locatedCities.length} {messages.nav.cities}</span>
+      {locatedCities.length === 0 && <p className="city-map__empty">{note}</p>}
       {locatedCities.map((city) => {
-        const left = 8 + ((city.coordinates.lng - minLng) / Math.max(maxLng - minLng, 1)) * 84
-        const top = 8 + ((maxLat - city.coordinates.lat) / Math.max(maxLat - minLat, 1)) * 84
-        return <Link className="city-marker" href={`/${locale}/cities/${city.slug}`} style={{ left: `${left}%`, top: `${top}%` }} key={city.id}>{localize(city.name, locale)}</Link>
+        const left = 6 + ((city.coordinates.lng - CHINA_COORDINATE_EXTENT.minLng)
+          / (CHINA_COORDINATE_EXTENT.maxLng - CHINA_COORDINATE_EXTENT.minLng)) * 88
+        const top = 7 + ((CHINA_COORDINATE_EXTENT.maxLat - city.coordinates.lat)
+          / (CHINA_COORDINATE_EXTENT.maxLat - CHINA_COORDINATE_EXTENT.minLat)) * 86
+        const universityCount = universityCounts[city.id]
+        const cityName = localize(city.name, locale)
+        const universityLabel = universityCount === undefined
+          ? undefined
+          : `${universityCount} ${messages.nav.universities}`
+
+        return <Link
+          aria-label={universityLabel ? `${cityName}: ${universityLabel}` : cityName}
+          className="city-marker"
+          href={`/${locale}/cities/${city.slug}`}
+          style={{ left: `${left}%`, top: `${top}%` }}
+          key={city.id}
+        >
+          <span>{cityName}</span>
+          {universityLabel && <small>{universityLabel}</small>}
+        </Link>
       })}
     </div>
     <p className="map-disclaimer">{note}</p>

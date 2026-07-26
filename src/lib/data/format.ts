@@ -7,17 +7,15 @@ export function localize(value: LocalizedText | null | undefined, locale: Locale
   if (!value) return unknown
   const translated = value[locale]?.trim()
   if (translated) return translated
+
+  // Record-level translations arrive incrementally. Keep the original or
+  // English title visible without adding a synthetic "translation pending"
+  // prefix that can be mistaken for part of the official program name.
   const fallback = value.en?.trim()
     || value.zh?.trim()
     || value.ru?.trim()
     || Object.values(value).find((item) => item?.trim())?.trim()
-  if (!fallback) return unknown
-
-  const pendingLabel = isPublicLocale(locale)
-    ? getMessages(locale).common.translationPending
-    : getMessages('en').common.translationPending
-
-  return `${pendingLabel}: ${fallback}`
+  return fallback || unknown
 }
 
 export function formatDate(value: string | null, locale: Locale, fallback: string): string {

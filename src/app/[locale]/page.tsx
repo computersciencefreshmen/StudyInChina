@@ -5,7 +5,7 @@ import { CityConstellation } from '@/components/features/CityConstellation'
 import { UniversityCard } from '@/components/features/RecordCards'
 import { getMessages } from '@/i18n/messages'
 import { localize } from '@/lib/data/format'
-import { disciplineLabels } from '@/lib/data/labels'
+import { classifyProgramField, programFieldTaxonomy } from '@/lib/data/fields'
 import { getCatalogData } from '@/lib/data/load'
 import { guides } from '@/lib/guides'
 import { pageMetadata, requireLocale } from '@/lib/site'
@@ -19,7 +19,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const locale = requireLocale((await params).locale); if (!locale) notFound()
   const messages = getMessages(locale); const data = await getCatalogData()
   const featured = data.universities.filter((item) => item.featured).slice(0, 6)
-  const fieldsByUniversity = Object.fromEntries(data.universities.map((university) => [university.id, [...new Set(data.programs.filter((program) => program.universityId === university.id).map((program) => program.discipline))]]))
+  const fieldsByUniversity = Object.fromEntries(data.universities.map((university) => [university.id, [...new Set(data.programs.filter((program) => program.universityId === university.id).map(classifyProgramField))]]))
+  const fields = programFieldTaxonomy(locale)
+  const fieldCounts = Object.fromEntries(fields.map(({ key }) => [key, data.programs.filter((program) => classifyProgramField(program) === key).length]))
 
   return <>
     <PageHero variant="feature" eyebrow={messages.home.eyebrow} title={messages.home.title} description={messages.home.intro}
@@ -35,7 +37,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <section className="atlas-section home-band">
       <div className="atlas-container">
         <SectionHeading eyebrow="02" title={messages.home.disciplines} />
-        {data.programs.length ? <div className="discipline-grid">{Object.entries(disciplineLabels(locale)).map(([key, label]) => <Link className="discipline-tile" href={`/${locale}/programs?discipline=${key}`} key={key}><b>{label}</b><span>{data.programs.filter((program) => program.discipline === key).length} {messages.nav.programs} →</span></Link>)}</div> : <div className="notice" data-testid="program-publication-note">{messages.home.programVerificationNote}</div>}
+        {data.programs.length ? <div className="discipline-grid">{fields.map(({ key, label, description }) => <Link className="discipline-tile" href={`/${locale}/programs?discipline=${key}`} key={key}><b>{label}</b><small>{description}</small><span>{fieldCounts[key]} {messages.nav.programs} →</span></Link>)}</div> : <div className="notice" data-testid="program-publication-note">{messages.home.programVerificationNote}</div>}
       </div>
     </section>
 
