@@ -1,0 +1,450 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-repair-18-programs",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion repair",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false
+  },
+  "scope": {
+    "schoolIds": [
+      "uni-renmin-university-of-china"
+    ],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-renmin-university-of-china",
+      "name": {
+        "en": "Renmin University of China",
+        "zh": "中国人民大学",
+        "ru": "Китайский народный университет"
+      },
+      "cityId": "city-beijing",
+      "region": "north",
+      "officialUrl": "https://iso.ruc.edu.cn/ENGLISH/index.htm",
+      "admissionsUrl": "https://iso.ruc.edu.cn/ENGLISH/index.htm"
+    }
+  ],
+  "programs": [
+    {
+      "institutionId": "uni-renmin-university-of-china",
+      "institutionName": {
+        "en": "Renmin University of China",
+        "zh": "中国人民大学",
+        "ru": "Китайский народный университет"
+      },
+      "programKey": "uni-renmin-university-of-china:program:chinese-language-program-language",
+      "nameOriginal": "Chinese Language Program",
+      "name": {
+        "zh": "Chinese Language Program",
+        "en": "Chinese Language Program",
+        "ru": "Программа китайского языка"
+      },
+      "generatedTranslations": [],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+        "sourceTitle": "Renmin University of China Chinese Language Program — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Renmin University of China's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iso.ruc.edu.cn/ENGLISH/Apply/Chineselanguageprogram/index.htm",
+        "sourceTitle": "Renmin University of China Chinese Language Program — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Renmin University of China's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+      "applyUrl": "https://iso.ruc.edu.cn/ENGLISH/Apply/Chineselanguageprogram/index.htm",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "publicationEligibility": "future",
+          "opensOn": {
+            "status": "known",
+            "value": "2026-10-15",
+            "rawValue": null,
+            "officialUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+            "sourceTitle": "Renmin University of China Chinese Language Program — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application opens 2026-10-15.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-11-15",
+            "rawValue": null,
+            "officialUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+            "sourceTitle": "Renmin University of China Chinese Language Program — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-11-15.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "known",
+            "value": 800,
+            "rawValue": "RMB 800",
+            "officialUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+            "sourceTitle": "Renmin University of China Chinese Language Program — Application Fee",
+            "checkedAt": "2026-07-27",
+            "quote": "Application fee: RMB 800.",
+            "locator": "Section: Application Fee"
+          },
+          "sourceUrls": [
+            "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-renmin-university-of-china",
+      "institutionName": {
+        "en": "Renmin University of China",
+        "zh": "中国人民大学",
+        "ru": "Китайский народный университет"
+      },
+      "programKey": "uni-renmin-university-of-china:program:finance-junior-visiting-program-other",
+      "nameOriginal": "Finance — Junior Visiting Program",
+      "name": {
+        "zh": "Finance — Junior Visiting Program",
+        "en": "Finance — Junior Visiting Program",
+        "ru": "Программа младшего приглашённого студента по финансам"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "other",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "English"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+        "sourceTitle": "Renmin University of China Finance — Junior Visiting Program — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Renmin University of China's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iso.ruc.edu.cn/docs/2025-12/1dbfbbb7263746c3836d62789faa206a.pdf",
+        "sourceTitle": "Renmin University of China Finance — Junior Visiting Program — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Renmin University of China's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+      "applyUrl": "https://iso.ruc.edu.cn/docs/2025-12/1dbfbbb7263746c3836d62789faa206a.pdf",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "publicationEligibility": "future",
+          "opensOn": {
+            "status": "known",
+            "value": "2026-10-15",
+            "rawValue": null,
+            "officialUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+            "sourceTitle": "Renmin University of China Finance — Junior Visiting Program — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application opens 2026-10-15.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-11-15",
+            "rawValue": null,
+            "officialUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+            "sourceTitle": "Renmin University of China Finance — Junior Visiting Program — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-11-15.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "sourceUrls": [
+            "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-renmin-university-of-china",
+      "institutionName": {
+        "en": "Renmin University of China",
+        "zh": "中国人民大学",
+        "ru": "Китайский народный университет"
+      },
+      "programKey": "uni-renmin-university-of-china:program:international-communication-senior-visiting-p",
+      "nameOriginal": "International Communication — Senior Visiting Program",
+      "name": {
+        "zh": "International Communication — Senior Visiting Program",
+        "en": "International Communication — Senior Visiting Program",
+        "ru": "Программа старшего приглашённого студента по международным коммуникациям"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "other",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "English"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+        "sourceTitle": "Renmin University of China International Communication — Senior Visiting Program — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Renmin University of China's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iso.ruc.edu.cn/docs/2025-12/1dbfbbb7263746c3836d62789faa206a.pdf",
+        "sourceTitle": "Renmin University of China International Communication — Senior Visiting Program — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Renmin University of China's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+      "applyUrl": "https://iso.ruc.edu.cn/docs/2025-12/1dbfbbb7263746c3836d62789faa206a.pdf",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "publicationEligibility": "future",
+          "opensOn": {
+            "status": "known",
+            "value": "2026-10-15",
+            "rawValue": null,
+            "officialUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+            "sourceTitle": "Renmin University of China International Communication — Senior Visiting Program — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application opens 2026-10-15.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-11-15",
+            "rawValue": null,
+            "officialUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+            "sourceTitle": "Renmin University of China International Communication — Senior Visiting Program — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-11-15.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "sourceUrls": [
+            "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf"
+          ]
+        }
+      ]
+    }
+  ],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-renmin-university-of-china",
+      "categories": {
+        "international_admissions_home": "collected",
+        "bachelor_catalog": "needs_follow_up",
+        "master_catalog": "needs_follow_up",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "collected",
+        "current_admission_guide": "collected",
+        "fees": "needs_follow_up",
+        "deadlines": "collected",
+        "application_system": "collected",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-renmin-university-of-china",
+      "category": "scholarships",
+      "reason": "Per-school scholarship enumeration was not in scope for this repair pass; only 3 program(s) were in scope.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://iso.ruc.edu.cn/ENGLISH/index.htm",
+          "outcome": "Admissions home; per-school scholarship page not surfaced in reviewed segment"
+        },
+        {
+          "officialUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+          "outcome": "Program detail page; scholarship section not present"
+        },
+        {
+          "officialUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+          "outcome": "Program detail page; scholarship section not present"
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 3,
+    "scholarshipsCollected": 0,
+    "programsPublishable": 3,
+    "programsQuarantined": 0,
+    "publishableDurationCoverageRate": 0,
+    "publishableTuitionCoverageRate": 0,
+    "publishableFutureDeadlineCoverageRate": 1,
+    "publishableInternationalEligibilityEvidenceRate": 1,
+    "publishableIndividualApplicationEvidenceRate": 1,
+    "publishableSpecificOfficialUrlRate": 1,
+    "exclusions": 0,
+    "sourceFailures": 1
+  }
+}
