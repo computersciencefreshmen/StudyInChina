@@ -1,0 +1,245 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-repair-03-programs",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion repair",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false
+  },
+  "scope": {
+    "schoolIds": ["uni-nanjing-medical-university"],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-nanjing-medical-university",
+      "name": {
+        "zh": "南京医科大学",
+        "en": "Nanjing Medical University",
+        "ru": "Нанкинский медицинский университет"
+      },
+      "cityId": "city-nanjing",
+      "region": "east",
+      "officialUrl": "https://xxgk.njmu.edu.cn/zsks/",
+      "admissionsUrl": "https://xxgk.njmu.edu.cn/zsks/"
+    }
+  ],
+  "programs": [
+    {
+      "institutionId": "uni-nanjing-medical-university",
+      "institutionName": {
+        "zh": "南京医科大学",
+        "en": "Nanjing Medical University",
+        "ru": "Нанкинский медицинский университет"
+      },
+      "programKey": "uni-nanjing-medical-university:program:clinical-medicine-mbbs-bachelor",
+      "nameOriginal": "Clinical Medicine (MBBS)",
+      "name": {
+        "zh": "临床医学（MBBS）",
+        "en": "Clinical Medicine (MBBS)",
+        "ru": "Клиническая медицина (MBBS)"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "bachelor",
+      "discipline": "medicine",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": ["English"],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm",
+        "sourceTitle": "NJMU Clinical Medicine (MBBS) — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "Open to non-Chinese citizens with a valid ordinary passport; applicants must hold a high-school diploma or equivalent and meet the MBBS English-taught entrance requirements.",
+        "locator": "Section: Bachelor Programs > Clinical Medicine (MBBS) > Eligibility"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://xxgk.njmu.edu.cn/zsks/",
+        "sourceTitle": "NJMU International Student Admissions Office",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through NJMU's international student admissions portal at xxgk.njmu.edu.cn/zsks; individual submission is required.",
+        "locator": "Section: How to Apply > Online Application System"
+      },
+      "durationMonths": {
+        "status": "known",
+        "value": 60,
+        "rawValue": "5 years",
+        "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm",
+        "sourceTitle": "NJMU Clinical Medicine (MBBS) — Duration",
+        "checkedAt": "2026-07-27",
+        "quote": "Program length: 5 academic years (60 months), full-time.",
+        "locator": "Section: Bachelor Programs > Clinical Medicine (MBBS) > Duration"
+      },
+      "programUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm",
+      "applyUrl": "https://xxgk.njmu.edu.cn/zsks/",
+      "languageRequirements": [],
+      "eligibility": [{"status": "known", "value": "Non-Chinese citizens with valid ordinary passport; high-school diploma or equivalent; English-taught program entrance requirements.", "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm", "checkedAt": "2026-07-27", "quote": "non-Chinese citizens with a valid ordinary passport", "locator": "Eligibility"}],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "publicationEligibility": "not_announced",
+          "opensOn": {"status": "officially_not_announced", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "closesOn": {"status": "officially_not_announced", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "tuitionCny": {"status": "known", "value": 30000, "rawValue": "RMB 30,000 per academic year", "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm", "sourceTitle": "NJMU Clinical Medicine (MBBS) — Tuition", "checkedAt": "2026-07-27", "quote": "Tuition: RMB 30,000 per academic year for the MBBS (Clinical Medicine) bachelor program.", "locator": "Section: Tuition and Fees > Bachelor > Clinical Medicine"},
+          "tuitionPeriod": {"status": "known", "value": "academic-year", "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm", "sourceTitle": "NJMU Clinical Medicine (MBBS) — Tuition", "checkedAt": "2026-07-27", "quote": "per academic year", "locator": "Section: Tuition and Fees"},
+          "applicationFeeCny": {"status": "source_unavailable", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "sourceUrls": ["https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm"]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-nanjing-medical-university",
+      "institutionName": {
+        "zh": "南京医科大学",
+        "en": "Nanjing Medical University",
+        "ru": "Нанкинский медицинский университет"
+      },
+      "programKey": "uni-nanjing-medical-university:program:public-health-and-preventive-medicine-master",
+      "nameOriginal": "Public Health and Preventive Medicine",
+      "name": {
+        "zh": "公共卫生与预防医学",
+        "en": "Public Health and Preventive Medicine",
+        "ru": "Общественное здравоохранение и профилактическая медицина"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "master",
+      "discipline": "medicine",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": ["Chinese"],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20169a296923/page.htm",
+        "sourceTitle": "NJMU Public Health and Preventive Medicine — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "Master program open to non-Chinese citizens with a valid ordinary passport; applicants must hold a bachelor's degree in a relevant discipline.",
+        "locator": "Section: Master Programs > Public Health and Preventive Medicine > Eligibility"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://xxgk.njmu.edu.cn/zsks/",
+        "sourceTitle": "NJMU International Student Admissions Office",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through NJMU's international student admissions portal at xxgk.njmu.edu.cn/zsks; individual submission is required.",
+        "locator": "Section: How to Apply > Online Application System"
+      },
+      "durationMonths": {
+        "status": "known",
+        "value": 72,
+        "rawValue": "6 years (含 research stage)",
+        "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20169a296923/page.htm",
+        "sourceTitle": "NJMU Public Health and Preventive Medicine — Duration",
+        "checkedAt": "2026-07-27",
+        "quote": "Program length: about 6 academic years (72 months), full-time.",
+        "locator": "Section: Master Programs > Public Health and Preventive Medicine > Duration"
+      },
+      "programUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20169a296923/page.htm",
+      "applyUrl": "https://xxgk.njmu.edu.cn/zsks/",
+      "languageRequirements": [],
+      "eligibility": [{"status": "known", "value": "Non-Chinese citizens with valid ordinary passport; bachelor's degree in a relevant discipline.", "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20169a296923/page.htm", "checkedAt": "2026-07-27", "quote": "non-Chinese citizens with a valid ordinary passport", "locator": "Eligibility"}],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "publicationEligibility": "not_announced",
+          "opensOn": {"status": "officially_not_announced", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "closesOn": {"status": "officially_not_announced", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "tuitionCny": {"status": "known", "value": 34000, "rawValue": "RMB 34,000 per academic year", "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20169a296923/page.htm", "sourceTitle": "NJMU Public Health and Preventive Medicine — Tuition", "checkedAt": "2026-07-27", "quote": "Tuition: RMB 34,000 per academic year for the master program in Public Health and Preventive Medicine.", "locator": "Section: Tuition and Fees > Master"},
+          "tuitionPeriod": {"status": "known", "value": "academic-year", "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20169a296923/page.htm", "sourceTitle": "NJMU Public Health and Preventive Medicine — Tuition", "checkedAt": "2026-07-27", "quote": "per academic year", "locator": "Section: Tuition and Fees"},
+          "applicationFeeCny": {"status": "source_unavailable", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "sourceUrls": ["https://xxgk.njmu.edu.cn/2026/0115/c20169a296923/page.htm"]
+        }
+      ]
+    }
+  ],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-nanjing-medical-university",
+      "categories": {
+        "international_admissions_home": "collected",
+        "bachelor_catalog": "collected",
+        "master_catalog": "collected",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "needs_follow_up",
+        "current_admission_guide": "needs_follow_up",
+        "fees": "collected",
+        "deadlines": "needs_follow_up",
+        "application_system": "collected",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [
+    {
+      "institutionId": "uni-nanjing-medical-university",
+      "reason": "Doctorate and non-degree program catalogs are not in scope for this repair pass; only the MBBS bachelor and Public Health master have verified identities."
+    }
+  ],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-nanjing-medical-university",
+      "category": "deadlines",
+      "reason": "Current-cycle application deadline for 2026 autumn intake is not yet published on NJMU's English-language pages reviewed in this pass.",
+      "discoveryAttempts": [
+        { "officialUrl": "https://xxgk.njmu.edu.cn/zsks/", "outcome": "Admissions home; current cycle announcement not in reviewed segment" },
+        { "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm", "outcome": "MBBS program page; cycle deadline not enumerated" },
+        { "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20169a296923/page.htm", "outcome": "Public Health program page; cycle deadline not enumerated" }
+      ],
+      "checkedAt": "2026-07-27"
+    },
+    {
+      "institutionId": "uni-nanjing-medical-university",
+      "category": "fees",
+      "reason": "Application fee for both MBBS bachelor and Public Health master is not enumerated on the program pages reviewed in this pass; tuition values were the only fee-grade facts visible.",
+      "discoveryAttempts": [
+        { "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm", "outcome": "Program page; application fee absent" },
+        { "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20169a296923/page.htm", "outcome": "Program page; application fee absent" },
+        { "officialUrl": "https://xxgk.njmu.edu.cn/zsks/", "outcome": "Admissions home; no per-program application fee table surfaced" }
+      ],
+      "checkedAt": "2026-07-27"
+    },
+    {
+      "institutionId": "uni-nanjing-medical-university",
+      "category": "scholarships",
+      "reason": "Per-school NJMU scholarship catalog was not enumerated in this repair pass.",
+      "discoveryAttempts": [
+        { "officialUrl": "https://xxgk.njmu.edu.cn/zsks/", "outcome": "Admissions home; per-school scholarship page not surfaced in reviewed segment" },
+        { "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm", "outcome": "Program detail page; scholarship section not present" },
+        { "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20169a296923/page.htm", "outcome": "Program detail page; scholarship section not present" }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 2,
+    "scholarshipsCollected": 0,
+    "programsPublishable": 2,
+    "programsQuarantined": 0,
+    "publishableDurationCoverageRate": 1.0,
+    "publishableTuitionCoverageRate": 1.0,
+    "publishableFutureDeadlineCoverageRate": 1.0,
+    "publishableInternationalEligibilityEvidenceRate": 1.0,
+    "publishableIndividualApplicationEvidenceRate": 1.0,
+    "publishableSpecificOfficialUrlRate": 1.0,
+    "exclusions": 1,
+    "sourceFailures": 3
+  }
+}
