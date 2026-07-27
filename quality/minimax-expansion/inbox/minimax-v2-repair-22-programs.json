@@ -1,0 +1,331 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-repair-22-programs",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion repair",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false
+  },
+  "scope": {
+    "schoolIds": [
+      "uni-inner-mongolia-university"
+    ],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-inner-mongolia-university",
+      "name": {
+        "en": "Inner Mongolia University",
+        "zh": "内蒙古大学",
+        "ru": "Университет Внутренней Монголии"
+      },
+      "cityId": "city-hohhot",
+      "region": "north",
+      "officialUrl": "https://iec.imu.edu.cn/",
+      "admissionsUrl": "https://iec.imu.edu.cn/"
+    }
+  ],
+  "programs": [
+    {
+      "institutionId": "uni-inner-mongolia-university",
+      "institutionName": {
+        "en": "Inner Mongolia University",
+        "zh": "内蒙古大学",
+        "ru": "Университет Внутренней Монголии"
+      },
+      "programKey": "uni-inner-mongolia-university:program:one-semester-study-program-chinese-medicine-an",
+      "nameOriginal": "One-Semester Study Program — Chinese Medicine and Taiji Culture",
+      "name": {
+        "zh": "一学期研修生（中医与太极文化方向）",
+        "en": "One-Semester Study Program — Chinese Medicine and Taiji Culture",
+        "ru": "Односеместровая программа — китайская медицина и культура тайцзи"
+      },
+      "generatedTranslations": [],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002",
+        "sourceTitle": "Inner Mongolia University One-Semester Study Program — Chinese Medicine and Taiji Culture — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Inner Mongolia University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002",
+        "sourceTitle": "Inner Mongolia University One-Semester Study Program — Chinese Medicine and Taiji Culture — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Inner Mongolia University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002",
+      "applyUrl": "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "publicationEligibility": "future",
+          "opensOn": {
+            "status": "known",
+            "value": "2026-03-02",
+            "rawValue": null,
+            "officialUrl": "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002",
+            "sourceTitle": "Inner Mongolia University One-Semester Study Program — Chinese Medicine and Taiji Culture — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application opens 2026-03-02.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-10-31",
+            "rawValue": null,
+            "officialUrl": "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002",
+            "sourceTitle": "Inner Mongolia University One-Semester Study Program — Chinese Medicine and Taiji Culture — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-10-31.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "sourceUrls": [
+            "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002"
+          ]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-inner-mongolia-university",
+      "institutionName": {
+        "en": "Inner Mongolia University",
+        "zh": "内蒙古大学",
+        "ru": "Университет Внутренней Монголии"
+      },
+      "programKey": "uni-inner-mongolia-university:program:one-semester-study-program-international-chine",
+      "nameOriginal": "One-Semester Study Program — International Chinese Language Education",
+      "name": {
+        "zh": "一学期研修生（国际中文教育方向）",
+        "en": "One-Semester Study Program — International Chinese Language Education",
+        "ru": "Односеместровая программа — международное образование в области китайского языка"
+      },
+      "generatedTranslations": [],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002",
+        "sourceTitle": "Inner Mongolia University One-Semester Study Program — International Chinese Language Education — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Inner Mongolia University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002",
+        "sourceTitle": "Inner Mongolia University One-Semester Study Program — International Chinese Language Education — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Inner Mongolia University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002",
+      "applyUrl": "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "publicationEligibility": "future",
+          "opensOn": {
+            "status": "known",
+            "value": "2026-03-02",
+            "rawValue": null,
+            "officialUrl": "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002",
+            "sourceTitle": "Inner Mongolia University One-Semester Study Program — International Chinese Language Education — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application opens 2026-03-02.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-10-31",
+            "rawValue": null,
+            "officialUrl": "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002",
+            "sourceTitle": "Inner Mongolia University One-Semester Study Program — International Chinese Language Education — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-10-31.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "sourceUrls": [
+            "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002"
+          ]
+        }
+      ]
+    }
+  ],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-inner-mongolia-university",
+      "categories": {
+        "international_admissions_home": "collected",
+        "bachelor_catalog": "needs_follow_up",
+        "master_catalog": "needs_follow_up",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "collected",
+        "current_admission_guide": "collected",
+        "fees": "needs_follow_up",
+        "deadlines": "collected",
+        "application_system": "collected",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-inner-mongolia-university",
+      "category": "scholarships",
+      "reason": "Per-school scholarship enumeration was not in scope for this repair pass; only 2 program(s) were in scope.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://iec.imu.edu.cn/",
+          "outcome": "Admissions home; per-school scholarship page not surfaced in reviewed segment"
+        },
+        {
+          "officialUrl": "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002",
+          "outcome": "Program detail page; scholarship section not present"
+        },
+        {
+          "officialUrl": "https://iec.imu.edu.cn/content.jsp?urltype=news.NewsContentUrl&wbnewsid=1865&wbtreeid=1002",
+          "outcome": "Program detail page; scholarship section not present"
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 2,
+    "scholarshipsCollected": 0,
+    "programsPublishable": 2,
+    "programsQuarantined": 0,
+    "publishableDurationCoverageRate": 0,
+    "publishableTuitionCoverageRate": 0,
+    "publishableFutureDeadlineCoverageRate": 1,
+    "publishableInternationalEligibilityEvidenceRate": 1,
+    "publishableIndividualApplicationEvidenceRate": 1,
+    "publishableSpecificOfficialUrlRate": 1,
+    "exclusions": 0,
+    "sourceFailures": 1
+  }
+}
