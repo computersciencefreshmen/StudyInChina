@@ -1,0 +1,205 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-expand-26-programs",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion (documented-gap pass)",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false,
+    "evidenceSource": "no live fetch succeeded; all known fields are source_unavailable"
+  },
+  "scope": {
+    "schoolIds": [
+      "uni-zhejiang-normal-university"
+    ],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-zhejiang-normal-university",
+      "name": {
+        "zh": "浙江师范大学",
+        "en": "Zhejiang Normal University",
+        "ru": null
+      },
+      "cityId": null,
+      "region": null,
+      "officialUrl": "https://www.zjnu.edu.cn/",
+      "admissionsUrl": "https://iso.zjnu.edu.cn/"
+    }
+  ],
+  "programs": [
+    {
+      "institutionId": "uni-zhejiang-normal-university",
+      "institutionName": {
+        "zh": "浙江师范大学",
+        "en": "Zhejiang Normal University",
+        "ru": null
+      },
+      "programKey": "uni-zhejiang-normal-university:program:identity-only",
+      "nameOriginal": null,
+      "name": {
+        "zh": null,
+        "en": null,
+        "ru": null
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "other",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [],
+      "internationalEligibility": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": "https://www.zjnu.edu.cn/",
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "individualApplication": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": "https://www.zjnu.edu.cn/",
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": "https://www.zjnu.edu.cn/",
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": null,
+      "applyUrl": null,
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "publishable": false,
+      "qualityReasons": [
+        "official text unreachable from this sandbox; awaiting re-collection in an environment with *.edu.cn fetch access"
+      ],
+      "cycles": []
+    }
+  ],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-zhejiang-normal-university",
+      "categories": {
+        "international_admissions_home": "needs_follow_up",
+        "bachelor_catalog": "needs_follow_up",
+        "master_catalog": "needs_follow_up",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "needs_follow_up",
+        "current_admission_guide": "needs_follow_up",
+        "fees": "needs_follow_up",
+        "deadlines": "needs_follow_up",
+        "application_system": "needs_follow_up",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [
+    {
+      "institutionId": "uni-zhejiang-normal-university",
+      "reason": "No publishable program entry could be produced for this school in the present pass because every WebFetch against the official *.edu.cn domain was blocked by the sandbox. The school is recorded with a placeholder identity-only program entry whose every field is source_unavailable; the next pass must perform real fetches and re-write each field."
+    }
+  ],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-zhejiang-normal-university",
+      "category": "fetch",
+      "reason": "Live WebFetch attempts against the official *.edu.cn domain were blocked by the sandbox in this session. All URL candidates returned the network policy error \"Unable to verify if domain ... is safe to fetch\" without a page body.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://www.zjnu.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for *.edu.cn domain (Anthropic claude.ai network policy: \"Unable to verify if domain ... is safe to fetch\"). No page body was retrieved; nothing can be cited as official evidence."
+        },
+        {
+          "officialUrl": "https://iso.zjnu.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for *.edu.cn domain (Anthropic claude.ai network policy: \"Unable to verify if domain ... is safe to fetch\"). No page body was retrieved; nothing can be cited as official evidence."
+        },
+        {
+          "officialUrl": "https://iie.zjnu.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for *.edu.cn domain (Anthropic claude.ai network policy: \"Unable to verify if domain ... is safe to fetch\"). No page body was retrieved; nothing can be cited as official evidence."
+        },
+        {
+          "officialUrl": "https://study.zjnu.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for *.edu.cn domain (Anthropic claude.ai network policy: \"Unable to verify if domain ... is safe to fetch\"). No page body was retrieved; nothing can be cited as official evidence."
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    },
+    {
+      "institutionId": "uni-zhejiang-normal-university",
+      "category": "fees",
+      "reason": "Tuition and application-fee values cannot be cited without an official page body.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://www.zjnu.edu.cn/",
+          "outcome": "WebFetch blocked"
+        },
+        {
+          "officialUrl": "https://iso.zjnu.edu.cn/",
+          "outcome": "WebFetch blocked"
+        },
+        {
+          "officialUrl": "https://iie.zjnu.edu.cn/",
+          "outcome": "WebFetch blocked"
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    },
+    {
+      "institutionId": "uni-zhejiang-normal-university",
+      "category": "deadlines",
+      "reason": "Current-cycle deadline cannot be cited without an official page body.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://www.zjnu.edu.cn/",
+          "outcome": "WebFetch blocked"
+        },
+        {
+          "officialUrl": "https://iso.zjnu.edu.cn/",
+          "outcome": "WebFetch blocked"
+        },
+        {
+          "officialUrl": "https://iie.zjnu.edu.cn/",
+          "outcome": "WebFetch blocked"
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 1,
+    "scholarshipsCollected": 0,
+    "programsPublishable": 0,
+    "programsQuarantined": 1,
+    "publishableDurationCoverageRate": 0,
+    "publishableTuitionCoverageRate": 0,
+    "publishableFutureDeadlineCoverageRate": 0,
+    "publishableInternationalEligibilityEvidenceRate": 0,
+    "publishableIndividualApplicationEvidenceRate": 0,
+    "publishableSpecificOfficialUrlRate": 0,
+    "exclusions": 1,
+    "sourceFailures": 3
+  }
+}
