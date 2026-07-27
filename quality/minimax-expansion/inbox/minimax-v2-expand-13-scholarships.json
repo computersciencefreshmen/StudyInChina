@@ -1,0 +1,98 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-expand-13-scholarships",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion (scholarship documented-gap pass)",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false,
+    "evidenceSource": "no live fetch succeeded; every scholarship is source_unavailable"
+  },
+  "scope": {
+    "schoolIds": [
+      "uni-chengdu-university-of-traditional-chinese-medicine"
+    ],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-chengdu-university-of-traditional-chinese-medicine",
+      "name": {
+        "zh": "成都中医药大学",
+        "en": "Chengdu University of Traditional Chinese Medicine",
+        "ru": null
+      },
+      "cityId": null,
+      "region": null,
+      "officialUrl": "https://www.cdutcm.edu.cn/",
+      "admissionsUrl": "https://iso.cdutcm.edu.cn/"
+    }
+  ],
+  "programs": [],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-chengdu-university-of-traditional-chinese-medicine",
+      "categories": {
+        "international_admissions_home": "needs_follow_up",
+        "bachelor_catalog": "needs_follow_up",
+        "master_catalog": "needs_follow_up",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "needs_follow_up",
+        "current_admission_guide": "needs_follow_up",
+        "fees": "needs_follow_up",
+        "deadlines": "needs_follow_up",
+        "application_system": "needs_follow_up",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [
+    {
+      "institutionId": "uni-chengdu-university-of-traditional-chinese-medicine",
+      "reason": "No verifiable scholarship identity could be produced for this school in the present pass because every WebFetch against the official *.edu.cn domain was blocked by the sandbox. The school is recorded with a documented-gap sourceFailure and the URL candidates that were attempted; the next pass must perform real fetches and re-write the field."
+    }
+  ],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-chengdu-university-of-traditional-chinese-medicine",
+      "category": "scholarships",
+      "reason": "University-level, faculty/department-level, and clearly-applicable government scholarship pages could not be read in this pass. Every WebFetch attempt was blocked by the sandbox.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://www.cdutcm.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for cdutcm.edu.cn; no page body retrieved; cannot cite as official evidence."
+        },
+        {
+          "officialUrl": "https://iso.cdutcm.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for cdutcm.edu.cn; no page body retrieved; cannot cite as official evidence."
+        },
+        {
+          "officialUrl": "https://iie.cdutcm.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for cdutcm.edu.cn; no page body retrieved; cannot cite as official evidence."
+        },
+        {
+          "officialUrl": "https://study.cdutcm.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for cdutcm.edu.cn; no page body retrieved; cannot cite as official evidence."
+        },
+        {
+          "officialUrl": "https://international.cdutcm.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for cdutcm.edu.cn; no page body retrieved; cannot cite as official evidence."
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 0,
+    "scholarshipsCollected": 0,
+    "publishableScholarships": 0,
+    "sourceFailures": 1
+  }
+}
