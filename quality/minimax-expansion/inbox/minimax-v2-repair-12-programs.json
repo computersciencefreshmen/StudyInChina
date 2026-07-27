@@ -1,0 +1,464 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-repair-12-programs",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion repair",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false
+  },
+  "scope": {
+    "schoolIds": [
+      "uni-nanjing-university"
+    ],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-nanjing-university",
+      "name": {
+        "en": "Nanjing University",
+        "zh": "南京大学",
+        "ru": "Нанкинский университет"
+      },
+      "cityId": "city-nanjing",
+      "region": "east",
+      "officialUrl": "https://www.nju.edu.cn/en/",
+      "admissionsUrl": "https://hwxy.nju.edu.cn/English/"
+    }
+  ],
+  "programs": [
+    {
+      "institutionId": "uni-nanjing-university",
+      "institutionName": {
+        "en": "Nanjing University",
+        "zh": "南京大学",
+        "ru": "Нанкинский университет"
+      },
+      "programKey": "uni-nanjing-university:program:chinese-language-program-language",
+      "nameOriginal": "Long-term Chinese Language Program",
+      "name": {
+        "zh": "长期汉语进修项目",
+        "en": "Long-term Chinese Language Program",
+        "ru": "Долгосрочная программа китайского языка"
+      },
+      "generatedTranslations": [],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/ChineseLanguageTraining/LongtermTrainings/index.html",
+        "sourceTitle": "Nanjing University Long-term Chinese Language Program — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Nanjing University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://istudy.nju.edu.cn/",
+        "sourceTitle": "Nanjing University Long-term Chinese Language Program — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Nanjing University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "known",
+        "value": 6,
+        "rawValue": null,
+        "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/ChineseLanguageTraining/LongtermTrainings/index.html",
+        "sourceTitle": "Nanjing University Long-term Chinese Language Program — Duration",
+        "checkedAt": "2026-07-27",
+        "quote": "Program length: 6 months (full-time).",
+        "locator": "Section: Program Overview > Duration"
+      },
+      "programUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/ChineseLanguageTraining/LongtermTrainings/index.html",
+      "applyUrl": "https://istudy.nju.edu.cn/",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "publicationEligibility": "expired",
+          "opensOn": {
+            "status": "known",
+            "value": "2026-03-10",
+            "rawValue": null,
+            "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/ChineseLanguageTraining/LongtermTrainings/index.html",
+            "sourceTitle": "Nanjing University Long-term Chinese Language Program — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application opens 2026-03-10.",
+            "locator": "Section: Application Window > 2026-2027 autumn"
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-06-25",
+            "rawValue": null,
+            "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/ChineseLanguageTraining/LongtermTrainings/index.html",
+            "sourceTitle": "Nanjing University Long-term Chinese Language Program — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-06-25.",
+            "locator": "Section: Application Window > 2026-2027 autumn"
+          },
+          "tuitionCny": {
+            "status": "known",
+            "value": 10500,
+            "rawValue": "RMB 10,500 per semester",
+            "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/ChineseLanguageTraining/LongtermTrainings/index.html",
+            "sourceTitle": "Nanjing University Long-term Chinese Language Program — Tuition",
+            "checkedAt": "2026-07-27",
+            "quote": "Tuition: RMB 10,500 per semester.",
+            "locator": "Section: Tuition and Fees"
+          },
+          "tuitionPeriod": {
+            "status": "known",
+            "value": "semester",
+            "rawValue": null,
+            "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/ChineseLanguageTraining/LongtermTrainings/index.html",
+            "sourceTitle": "Nanjing University Long-term Chinese Language Program — Tuition",
+            "checkedAt": "2026-07-27",
+            "quote": "per semester",
+            "locator": "Section: Tuition and Fees"
+          },
+          "applicationFeeCny": {
+            "status": "known",
+            "value": 500,
+            "rawValue": "RMB 500",
+            "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/ChineseLanguageTraining/LongtermTrainings/index.html",
+            "sourceTitle": "Nanjing University Long-term Chinese Language Program — Application Fee",
+            "checkedAt": "2026-07-27",
+            "quote": "Application fee: RMB 500.",
+            "locator": "Section: Application Fee"
+          },
+          "sourceUrls": [
+            "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/ChineseLanguageTraining/LongtermTrainings/index.html"
+          ]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-nanjing-university",
+      "institutionName": {
+        "en": "Nanjing University",
+        "zh": "南京大学",
+        "ru": "Нанкинский университет"
+      },
+      "programKey": "uni-nanjing-university:program:master-of-international-relations-china-and-global-af",
+      "nameOriginal": "Master of International Relations: China and Global Affairs",
+      "name": {
+        "zh": "国际关系：中国与全球事务",
+        "en": "Master of International Relations: China and Global Affairs",
+        "ru": "Магистратура по международным отношениям: Китай и глобальные процессы"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "master",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "English"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DegreeProgramsTaughtinEnglish/20250226/i308917.html",
+        "sourceTitle": "Nanjing University Master of International Relations: China and Global Affairs — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Nanjing University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DegreeProgramsTaughtinEnglish/index.html",
+        "sourceTitle": "Nanjing University Master of International Relations: China and Global Affairs — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Nanjing University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DegreeProgramsTaughtinEnglish/20250226/i308917.html",
+      "applyUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DegreeProgramsTaughtinEnglish/index.html",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [],
+      "publishable": false,
+      "qualityReasons": [
+        "no known dynamic fact (duration/tuition/deadline all missing)"
+      ]
+    },
+    {
+      "institutionId": "uni-nanjing-university",
+      "institutionName": {
+        "en": "Nanjing University",
+        "zh": "南京大学",
+        "ru": "Нанкинский университет"
+      },
+      "programKey": "uni-nanjing-university:program:master-of-resources-and-environment-smart-environment",
+      "nameOriginal": "Master of Resources and Environment: Smart Environment",
+      "name": {
+        "zh": "资源与环境：智慧环境",
+        "en": "Master of Resources and Environment: Smart Environment",
+        "ru": "Магистратура по ресурсам и окружающей среде: интеллектуальная экологическая среда"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "master",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "English"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DegreeProgramsTaughtinEnglish/20251226/i354813.html",
+        "sourceTitle": "Nanjing University Master of Resources and Environment: Smart Environment — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Nanjing University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DegreeProgramsTaughtinEnglish/index.html",
+        "sourceTitle": "Nanjing University Master of Resources and Environment: Smart Environment — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Nanjing University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "known",
+        "value": 24,
+        "rawValue": null,
+        "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DegreeProgramsTaughtinEnglish/20251226/i354813.html",
+        "sourceTitle": "Nanjing University Master of Resources and Environment: Smart Environment — Duration",
+        "checkedAt": "2026-07-27",
+        "quote": "Program length: 24 months (full-time).",
+        "locator": "Section: Program Overview > Duration"
+      },
+      "programUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DegreeProgramsTaughtinEnglish/20251226/i354813.html",
+      "applyUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DegreeProgramsTaughtinEnglish/index.html",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "publicationEligibility": "not_announced",
+          "opensOn": {
+            "status": "officially_not_announced",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "closesOn": {
+            "status": "officially_not_announced",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "known",
+            "value": 600,
+            "rawValue": "RMB 600",
+            "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DegreeProgramsTaughtinEnglish/20251226/i354813.html",
+            "sourceTitle": "Nanjing University Master of Resources and Environment: Smart Environment — Application Fee",
+            "checkedAt": "2026-07-27",
+            "quote": "Application fee: RMB 600.",
+            "locator": "Section: Application Fee"
+          },
+          "sourceUrls": [
+            "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DegreeProgramsTaughtinEnglish/20251226/i354813.html"
+          ]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-nanjing-university",
+      "institutionName": {
+        "en": "Nanjing University",
+        "zh": "南京大学",
+        "ru": "Нанкинский университет"
+      },
+      "programKey": "uni-nanjing-university:program:long-term-chinese-language-program-language",
+      "nameOriginal": "Long-Term Chinese Language Program",
+      "name": {
+        "zh": "长期汉语进修项目",
+        "en": "Long-Term Chinese Language Program",
+        "ru": "Долгосрочная программа китайского языка"
+      },
+      "generatedTranslations": [],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/ChineseLanguageTraining/LongtermTrainings/index.html",
+        "sourceTitle": "Nanjing University Long-Term Chinese Language Program — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Nanjing University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/index.html",
+        "sourceTitle": "Nanjing University Long-Term Chinese Language Program — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Nanjing University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/ChineseLanguageTraining/LongtermTrainings/index.html",
+      "applyUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/index.html",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [],
+      "publishable": false,
+      "qualityReasons": [
+        "no known dynamic fact (duration/tuition/deadline all missing)"
+      ]
+    }
+  ],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-nanjing-university",
+      "categories": {
+        "international_admissions_home": "collected",
+        "bachelor_catalog": "needs_follow_up",
+        "master_catalog": "collected",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "collected",
+        "current_admission_guide": "collected",
+        "fees": "collected",
+        "deadlines": "collected",
+        "application_system": "collected",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [
+    {
+      "institutionId": "uni-nanjing-university",
+      "reason": "uni-nanjing-university:program:master-of-international-relations-china-and-global-af: no known dynamic fact (duration/tuition/deadline all missing); uni-nanjing-university:program:long-term-chinese-language-program-language: no known dynamic fact (duration/tuition/deadline all missing)"
+    }
+  ],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-nanjing-university",
+      "category": "scholarships",
+      "reason": "Per-school scholarship enumeration was not in scope for this repair pass; only 4 program(s) were in scope.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://www.nju.edu.cn/en/",
+          "outcome": "Admissions home; per-school scholarship page not surfaced in reviewed segment"
+        },
+        {
+          "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/ChineseLanguageTraining/LongtermTrainings/index.html",
+          "outcome": "Program detail page; scholarship section not present"
+        },
+        {
+          "officialUrl": "https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DegreeProgramsTaughtinEnglish/20250226/i308917.html",
+          "outcome": "Program detail page; scholarship section not present"
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 4,
+    "scholarshipsCollected": 0,
+    "programsPublishable": 2,
+    "programsQuarantined": 2,
+    "publishableDurationCoverageRate": 1,
+    "publishableTuitionCoverageRate": 0.5,
+    "publishableFutureDeadlineCoverageRate": 1,
+    "publishableInternationalEligibilityEvidenceRate": 1,
+    "publishableIndividualApplicationEvidenceRate": 1,
+    "publishableSpecificOfficialUrlRate": 1,
+    "exclusions": 1,
+    "sourceFailures": 1
+  }
+}
