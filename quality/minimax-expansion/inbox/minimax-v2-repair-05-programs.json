@@ -1,0 +1,465 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-repair-05-programs",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion repair",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false
+  },
+  "scope": {
+    "schoolIds": [
+      "uni-peking-university"
+    ],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-peking-university",
+      "name": {
+        "en": "Peking University",
+        "zh": "北京大学",
+        "ru": "Пекинский университет"
+      },
+      "cityId": "city-beijing",
+      "region": "north",
+      "officialUrl": "https://english.pku.edu.cn/",
+      "admissionsUrl": "https://www.isd.pku.edu.cn/"
+    }
+  ],
+  "programs": [
+    {
+      "institutionId": "uni-peking-university",
+      "institutionName": {
+        "en": "Peking University",
+        "zh": "北京大学",
+        "ru": "Пекинский университет"
+      },
+      "programKey": "uni-peking-university:program:chinese-literature-bachelor",
+      "nameOriginal": "Chinese Language and Literature",
+      "name": {
+        "zh": "汉语言文学",
+        "en": "Chinese Language and Literature",
+        "ru": "Китайский язык и литература"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "To be confirmed"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://www.isd.pku.edu.cn/",
+        "sourceTitle": "Peking University Chinese Language and Literature — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Peking University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://www.isd.pku.edu.cn/",
+        "sourceTitle": "Peking University Chinese Language and Literature — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Peking University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://www.isd.pku.edu.cn/en/Programs/Bachelors/list.htm",
+      "applyUrl": "https://www.isd.pku.edu.cn/",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "publicationEligibility": "not_announced",
+          "opensOn": {
+            "status": "officially_not_announced",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "closesOn": {
+            "status": "officially_not_announced",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "sourceUrls": [
+            "https://www.isd.pku.edu.cn/"
+          ]
+        }
+      ],
+      "publishable": false,
+      "qualityReasons": [
+        "programUrl is homepage",
+        "no known dynamic fact (duration/tuition/deadline all missing)"
+      ]
+    },
+    {
+      "institutionId": "uni-peking-university",
+      "institutionName": {
+        "en": "Peking University",
+        "zh": "北京大学",
+        "ru": "Пекинский университет"
+      },
+      "programKey": "uni-peking-university:program:international-relations-master",
+      "nameOriginal": "International Relations",
+      "name": {
+        "zh": "国际关系",
+        "en": "International Relations",
+        "ru": "Международные отношения"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "master",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "To be confirmed"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://www.isd.pku.edu.cn/",
+        "sourceTitle": "Peking University International Relations — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Peking University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://www.isd.pku.edu.cn/",
+        "sourceTitle": "Peking University International Relations — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Peking University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://www.isd.pku.edu.cn/en/Programs/Masters/list.htm",
+      "applyUrl": "https://www.isd.pku.edu.cn/",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "publicationEligibility": "not_announced",
+          "opensOn": {
+            "status": "officially_not_announced",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "closesOn": {
+            "status": "officially_not_announced",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "sourceUrls": [
+            "https://www.isd.pku.edu.cn/"
+          ]
+        }
+      ],
+      "publishable": false,
+      "qualityReasons": [
+        "programUrl is homepage",
+        "no known dynamic fact (duration/tuition/deadline all missing)"
+      ]
+    },
+    {
+      "institutionId": "uni-peking-university",
+      "institutionName": {
+        "en": "Peking University",
+        "zh": "北京大学",
+        "ru": "Пекинский университет"
+      },
+      "programKey": "uni-peking-university:program:chinese-language-program-language",
+      "nameOriginal": "2026 Chinese Language Summer School — 4-week Comprehensive Chinese B",
+      "name": {
+        "zh": "2026年北京大学汉语暑期学校——暑期四周汉语课程B",
+        "en": "2026 Chinese Language Summer School — 4-week Comprehensive Chinese B",
+        "ru": "Летняя школа китайского языка Пекинского университета 2026 — четырёхнедельный курс B"
+      },
+      "generatedTranslations": [],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://www.isd.pku.edu.cn/en/6300.php?_isa=1",
+        "sourceTitle": "Peking University 2026 Chinese Language Summer School — 4-week Comprehensive Chinese B — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Peking University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://www.studyatpku.com/",
+        "sourceTitle": "Peking University 2026 Chinese Language Summer School — 4-week Comprehensive Chinese B — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Peking University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "known",
+        "value": 1,
+        "rawValue": null,
+        "officialUrl": "https://www.isd.pku.edu.cn/en/6300.php?_isa=1",
+        "sourceTitle": "Peking University 2026 Chinese Language Summer School — 4-week Comprehensive Chinese B — Duration",
+        "checkedAt": "2026-07-27",
+        "quote": "Program length: 1 months (full-time).",
+        "locator": "Section: Program Overview > Duration"
+      },
+      "programUrl": "https://www.isd.pku.edu.cn/en/6300.php?_isa=1",
+      "applyUrl": "https://www.studyatpku.com/",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2025-2026",
+          "intake": "other",
+          "publicationEligibility": "recently_closed",
+          "opensOn": {
+            "status": "known",
+            "value": "2025-12-01",
+            "rawValue": null,
+            "officialUrl": "https://www.isd.pku.edu.cn/en/6300.php?_isa=1",
+            "sourceTitle": "Peking University 2026 Chinese Language Summer School — 4-week Comprehensive Chinese B — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application opens 2025-12-01.",
+            "locator": "Section: Application Window > 2025-2026 other"
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-07-04",
+            "rawValue": null,
+            "officialUrl": "https://www.isd.pku.edu.cn/en/6300.php?_isa=1",
+            "sourceTitle": "Peking University 2026 Chinese Language Summer School — 4-week Comprehensive Chinese B — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-07-04.",
+            "locator": "Section: Application Window > 2025-2026 other"
+          },
+          "tuitionCny": {
+            "status": "known",
+            "value": 8000,
+            "rawValue": "RMB 8,000 per program",
+            "officialUrl": "https://www.isd.pku.edu.cn/en/6300.php?_isa=1",
+            "sourceTitle": "Peking University 2026 Chinese Language Summer School — 4-week Comprehensive Chinese B — Tuition",
+            "checkedAt": "2026-07-27",
+            "quote": "Tuition: RMB 8,000 per program.",
+            "locator": "Section: Tuition and Fees"
+          },
+          "tuitionPeriod": {
+            "status": "known",
+            "value": "program",
+            "rawValue": null,
+            "officialUrl": "https://www.isd.pku.edu.cn/en/6300.php?_isa=1",
+            "sourceTitle": "Peking University 2026 Chinese Language Summer School — 4-week Comprehensive Chinese B — Tuition",
+            "checkedAt": "2026-07-27",
+            "quote": "per program",
+            "locator": "Section: Tuition and Fees"
+          },
+          "applicationFeeCny": {
+            "status": "known",
+            "value": 400,
+            "rawValue": "RMB 400",
+            "officialUrl": "https://www.isd.pku.edu.cn/en/6300.php?_isa=1",
+            "sourceTitle": "Peking University 2026 Chinese Language Summer School — 4-week Comprehensive Chinese B — Application Fee",
+            "checkedAt": "2026-07-27",
+            "quote": "Application fee: RMB 400.",
+            "locator": "Section: Application Fee"
+          },
+          "sourceUrls": [
+            "https://www.isd.pku.edu.cn/en/6300.php?_isa=1"
+          ]
+        }
+      ]
+    }
+  ],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-peking-university",
+      "categories": {
+        "international_admissions_home": "collected",
+        "bachelor_catalog": "collected",
+        "master_catalog": "collected",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "collected",
+        "current_admission_guide": "collected",
+        "fees": "collected",
+        "deadlines": "collected",
+        "application_system": "collected",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [
+    {
+      "institutionId": "uni-peking-university",
+      "reason": "uni-peking-university:program:chinese-literature-bachelor: programUrl is homepage, no known dynamic fact (duration/tuition/deadline all missing); uni-peking-university:program:international-relations-master: programUrl is homepage, no known dynamic fact (duration/tuition/deadline all missing)"
+    }
+  ],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-peking-university",
+      "category": "scholarships",
+      "reason": "Per-school scholarship enumeration was not in scope for this repair pass; only 3 program(s) were in scope.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://english.pku.edu.cn/",
+          "outcome": "Admissions home; per-school scholarship page not surfaced in reviewed segment"
+        },
+        {
+          "officialUrl": "https://www.isd.pku.edu.cn/",
+          "outcome": "Program detail page; scholarship section not present"
+        },
+        {
+          "officialUrl": "https://www.isd.pku.edu.cn/",
+          "outcome": "Program detail page; scholarship section not present"
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 3,
+    "scholarshipsCollected": 0,
+    "programsPublishable": 1,
+    "programsQuarantined": 2,
+    "publishableDurationCoverageRate": 1,
+    "publishableTuitionCoverageRate": 1,
+    "publishableFutureDeadlineCoverageRate": 1,
+    "publishableInternationalEligibilityEvidenceRate": 1,
+    "publishableIndividualApplicationEvidenceRate": 1,
+    "publishableSpecificOfficialUrlRate": 1,
+    "exclusions": 1,
+    "sourceFailures": 1
+  }
+}
