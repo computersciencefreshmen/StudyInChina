@@ -1,0 +1,104 @@
+{
+  "format": "studyinchina.minimax-expansion-queue",
+  "formatVersion": 2,
+  "generatedAt": "2026-07-27T07:30:00.000Z",
+  "policy": {
+    "phase": "phase-2-expansion",
+    "sourcePrompt": "MINIMAX_EXPAND_SCHOOLS_AND_PROGRAMS_PROMPT.md",
+    "batchSize": 5,
+    "separateProgramAndScholarshipPasses": true,
+    "officialSourcesOnly": true,
+    "strictValidator": true
+  },
+  "summary": {
+    "schoolsInScopeInitial": 4,
+    "repairTasks": 4,
+    "expandTasks": 0
+  },
+  "tasks": [
+    {
+      "id": "minimax-v2-repair-01-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-ecnu",
+          "cohort": "regional_priority",
+          "officialNameZh": "华东师范大学",
+          "officialNameEn": "East China Normal University",
+          "institutionRef": "uni-east-china-normal-university",
+          "catalogInstitutionId": "uni-east-china-normal-university",
+          "province": "Shanghai",
+          "city": "Shanghai",
+          "focusTags": ["language", "degree"]
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-01-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-01-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-01-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-02-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-sufe",
+          "cohort": "regional_priority",
+          "officialNameZh": "上海财经大学",
+          "officialNameEn": "Shanghai University of Finance and Economics",
+          "institutionRef": "uni-shanghai-university-of-finance-and-economics",
+          "catalogInstitutionId": "uni-shanghai-university-of-finance-and-economics",
+          "province": "Shanghai",
+          "city": "Shanghai",
+          "focusTags": ["degree", "business"]
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-02-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-02-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-02-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-03-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-njmu",
+          "cohort": "regional_priority",
+          "officialNameZh": "南京医科大学",
+          "officialNameEn": "Nanjing Medical University",
+          "institutionRef": "uni-nanjing-medical-university",
+          "catalogInstitutionId": "uni-nanjing-medical-university",
+          "province": "Jiangsu",
+          "city": "Nanjing",
+          "focusTags": ["degree", "medicine"]
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-03-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-03-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-03-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-04-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-sjtu",
+          "cohort": "regional_priority",
+          "officialNameZh": "上海交通大学",
+          "officialNameEn": "Shanghai Jiao Tong University",
+          "institutionRef": "uni-shanghai-jiao-tong-university",
+          "catalogInstitutionId": "uni-shanghai-jiao-tong-university",
+          "province": "Shanghai",
+          "city": "Shanghai",
+          "focusTags": ["language", "degree"]
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-04-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-04-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-04-programs.md"
+    }
+  ]
+}

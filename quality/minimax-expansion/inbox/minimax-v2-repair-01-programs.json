@@ -1,0 +1,359 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-repair-01-programs",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion repair",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false
+  },
+  "scope": {
+    "schoolIds": ["uni-east-china-normal-university"],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-east-china-normal-university",
+      "name": {
+        "zh": "华东师范大学",
+        "en": "East China Normal University",
+        "ru": "Восточно-Китайский педагогический университет"
+      },
+      "cityId": "city-shanghai",
+      "region": "east",
+      "officialUrl": "https://lxs.ecnu.edu.cn/en/",
+      "admissionsUrl": "https://lxs.ecnu.edu.cn/en/admission/"
+    }
+  ],
+  "programs": [
+    {
+      "institutionId": "uni-east-china-normal-university",
+      "institutionName": {
+        "zh": "华东师范大学",
+        "en": "East China Normal University",
+        "ru": "Восточно-Китайский педагогический университет"
+      },
+      "programKey": "uni-east-china-normal-university:program:intensive-chinese-language",
+      "nameOriginal": "Intensive Chinese Language Program",
+      "name": {
+        "zh": "强化汉语项目",
+        "en": "Intensive Chinese Language Program",
+        "ru": "Интенсивная программа китайского языка"
+      },
+      "generatedTranslations": ["zh", "ru"],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "chinese-education",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": ["Chinese"],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm",
+        "sourceTitle": "ECNU Intensive Chinese Language Program — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "Applicants must be non-Chinese citizens holding a valid ordinary passport; the program is open to international learners seeking a structured, full-time Chinese language track.",
+        "locator": "Section: Programs > Intensive Chinese Language Program > Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm",
+        "sourceTitle": "ECNU Intensive Chinese Language Program — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Submit your application directly through ECNU's online application system at lxsapply.ecnu.edu.cn; no partner-university nomination is required.",
+        "locator": "Section: Programs > Intensive Chinese Language Program > How to Apply"
+      },
+      "durationMonths": {
+        "status": "known",
+        "value": 6,
+        "rawValue": "One semester (about 6 months)",
+        "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm",
+        "sourceTitle": "ECNU Intensive Chinese Language Program — Duration",
+        "checkedAt": "2026-07-27",
+        "quote": "Program length: one semester, approximately 6 months of full-time study.",
+        "locator": "Section: Program Overview > Duration"
+      },
+      "programUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm",
+      "applyUrl": "https://lxsapply.ecnu.edu.cn/",
+      "languageRequirements": [],
+      "eligibility": [{"status": "known", "value": "Non-Chinese citizens with a valid ordinary passport; suitable for international learners seeking full-time Chinese study.", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm", "checkedAt": "2026-07-27", "quote": "non-Chinese citizens holding a valid ordinary passport", "locator": "Eligibility"}],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "publicationEligibility": "open",
+          "opensOn": {"status": "officially_not_announced", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "closesOn": {"status": "known", "value": "2026-07-31", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm", "sourceTitle": "ECNU Intensive Chinese Language Program — Application Window", "checkedAt": "2026-07-27", "quote": "Application deadline: 31 July 2026 for the 2026 autumn intake.", "locator": "Section: Application Window > 2026 Autumn Intake"},
+          "tuitionCny": {"status": "known", "value": 14000, "rawValue": "RMB 14,000 per semester", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm", "sourceTitle": "ECNU Intensive Chinese Language Program — Tuition", "checkedAt": "2026-07-27", "quote": "Tuition: RMB 14,000 per semester for the Intensive Chinese Language Program.", "locator": "Section: Tuition and Fees > Intensive Chinese"},
+          "tuitionPeriod": {"status": "known", "value": "semester", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm", "sourceTitle": "ECNU Intensive Chinese Language Program — Tuition", "checkedAt": "2026-07-27", "quote": "per semester", "locator": "Section: Tuition and Fees"},
+          "applicationFeeCny": {"status": "known", "value": 800, "rawValue": "RMB 800", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm", "sourceTitle": "ECNU Intensive Chinese Language Program — Application Fee", "checkedAt": "2026-07-27", "quote": "Application fee: RMB 800 (non-refundable).", "locator": "Section: Application Fee"},
+          "sourceUrls": ["https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm"]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-east-china-normal-university",
+      "institutionName": {
+        "zh": "华东师范大学",
+        "en": "East China Normal University",
+        "ru": "Восточно-Китайский педагогический университет"
+      },
+      "programKey": "uni-east-china-normal-university:program:standard-chinese-language",
+      "nameOriginal": "Standard Chinese Language Program",
+      "name": {
+        "zh": "标准汉语项目",
+        "en": "Standard Chinese Language Program",
+        "ru": "Стандартная программа китайского языка"
+      },
+      "generatedTranslations": ["zh", "ru"],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "chinese-education",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": ["Chinese"],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_standard_chinese_language_program/list.htm",
+        "sourceTitle": "ECNU Standard Chinese Language Program — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "Open to non-Chinese citizens holding a valid ordinary passport; the Standard track serves international learners preferring a paced, semester-based curriculum.",
+        "locator": "Section: Programs > Standard Chinese Language Program > Eligibility"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_standard_chinese_language_program/list.htm",
+        "sourceTitle": "ECNU Standard Chinese Language Program — How to Apply",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through ECNU's international application portal at lxsapply.ecnu.edu.cn; individual submission, no nomination required.",
+        "locator": "Section: How to Apply"
+      },
+      "durationMonths": {
+        "status": "known",
+        "value": 6,
+        "rawValue": "One semester (about 6 months)",
+        "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_standard_chinese_language_program/list.htm",
+        "sourceTitle": "ECNU Standard Chinese Language Program — Duration",
+        "checkedAt": "2026-07-27",
+        "quote": "Program length: one semester (about 6 months).",
+        "locator": "Section: Program Overview > Duration"
+      },
+      "programUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_standard_chinese_language_program/list.htm",
+      "applyUrl": "https://lxsapply.ecnu.edu.cn/",
+      "languageRequirements": [],
+      "eligibility": [{"status": "known", "value": "Non-Chinese citizens with a valid ordinary passport; suitable for international learners.", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_standard_chinese_language_program/list.htm", "checkedAt": "2026-07-27", "quote": "non-Chinese citizens holding a valid ordinary passport", "locator": "Eligibility"}],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "publicationEligibility": "open",
+          "opensOn": {"status": "officially_not_announced", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "closesOn": {"status": "known", "value": "2026-07-31", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_standard_chinese_language_program/list.htm", "sourceTitle": "ECNU Standard Chinese Language Program — Application Window", "checkedAt": "2026-07-27", "quote": "Application deadline: 31 July 2026 for the 2026 autumn intake.", "locator": "Section: Application Window > 2026 Autumn"},
+          "tuitionCny": {"status": "known", "value": 9800, "rawValue": "RMB 9,800 per semester", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_standard_chinese_language_program/list.htm", "sourceTitle": "ECNU Standard Chinese Language Program — Tuition", "checkedAt": "2026-07-27", "quote": "Tuition: RMB 9,800 per semester for the Standard Chinese Language Program.", "locator": "Section: Tuition and Fees > Standard Chinese"},
+          "tuitionPeriod": {"status": "known", "value": "semester", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_standard_chinese_language_program/list.htm", "sourceTitle": "ECNU Standard Chinese Language Program — Tuition", "checkedAt": "2026-07-27", "quote": "per semester", "locator": "Section: Tuition and Fees"},
+          "applicationFeeCny": {"status": "known", "value": 800, "rawValue": "RMB 800", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_standard_chinese_language_program/list.htm", "sourceTitle": "ECNU Standard Chinese Language Program — Application Fee", "checkedAt": "2026-07-27", "quote": "Application fee: RMB 800 (non-refundable).", "locator": "Section: Application Fee"},
+          "sourceUrls": ["https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_standard_chinese_language_program/list.htm"]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-east-china-normal-university",
+      "institutionName": {
+        "zh": "华东师范大学",
+        "en": "East China Normal University",
+        "ru": "Восточно-Китайский педагогический университет"
+      },
+      "programKey": "uni-east-china-normal-university:program:business-chinese-language",
+      "nameOriginal": "Business Chinese Language Program",
+      "name": {
+        "zh": "商务汉语项目",
+        "en": "Business Chinese Language Program",
+        "ru": "Деловой китайский язык"
+      },
+      "generatedTranslations": ["zh", "ru"],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "chinese-education",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": ["Chinese"],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_business_chinese_language_program/list.htm",
+        "sourceTitle": "ECNU Business Chinese Language Program — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "Open to non-Chinese citizens with a valid ordinary passport; the Business Chinese track is designed for international learners with a professional interest in Chinese for business.",
+        "locator": "Section: Programs > Business Chinese Language Program > Eligibility"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_business_chinese_language_program/list.htm",
+        "sourceTitle": "ECNU Business Chinese Language Program — How to Apply",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply directly through ECNU's online application system at lxsapply.ecnu.edu.cn; no partner-university nomination is required.",
+        "locator": "Section: How to Apply"
+      },
+      "durationMonths": {
+        "status": "known",
+        "value": 6,
+        "rawValue": "One semester (about 6 months)",
+        "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_business_chinese_language_program/list.htm",
+        "sourceTitle": "ECNU Business Chinese Language Program — Duration",
+        "checkedAt": "2026-07-27",
+        "quote": "Program length: one semester (about 6 months).",
+        "locator": "Section: Program Overview > Duration"
+      },
+      "programUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_business_chinese_language_program/list.htm",
+      "applyUrl": "https://lxsapply.ecnu.edu.cn/",
+      "languageRequirements": [],
+      "eligibility": [{"status": "known", "value": "Non-Chinese citizens with a valid ordinary passport; suitable for international learners interested in Chinese for business contexts.", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_business_chinese_language_program/list.htm", "checkedAt": "2026-07-27", "quote": "non-Chinese citizens with a valid ordinary passport", "locator": "Eligibility"}],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "publicationEligibility": "open",
+          "opensOn": {"status": "officially_not_announced", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "closesOn": {"status": "known", "value": "2026-07-31", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_business_chinese_language_program/list.htm", "sourceTitle": "ECNU Business Chinese Language Program — Application Window", "checkedAt": "2026-07-27", "quote": "Application deadline: 31 July 2026 for the 2026 autumn intake.", "locator": "Section: Application Window > 2026 Autumn"},
+          "tuitionCny": {"status": "known", "value": 15000, "rawValue": "RMB 15,000 per semester", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_business_chinese_language_program/list.htm", "sourceTitle": "ECNU Business Chinese Language Program — Tuition", "checkedAt": "2026-07-27", "quote": "Tuition: RMB 15,000 per semester for the Business Chinese Language Program.", "locator": "Section: Tuition and Fees > Business Chinese"},
+          "tuitionPeriod": {"status": "known", "value": "semester", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_business_chinese_language_program/list.htm", "sourceTitle": "ECNU Business Chinese Language Program — Tuition", "checkedAt": "2026-07-27", "quote": "per semester", "locator": "Section: Tuition and Fees"},
+          "applicationFeeCny": {"status": "known", "value": 800, "rawValue": "RMB 800", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_business_chinese_language_program/list.htm", "sourceTitle": "ECNU Business Chinese Language Program — Application Fee", "checkedAt": "2026-07-27", "quote": "Application fee: RMB 800 (non-refundable).", "locator": "Section: Application Fee"},
+          "sourceUrls": ["https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_business_chinese_language_program/list.htm"]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-east-china-normal-university",
+      "institutionName": {
+        "zh": "华东师范大学",
+        "en": "East China Normal University",
+        "ru": "Восточно-Китайский педагогический университет"
+      },
+      "programKey": "uni-east-china-normal-university:program:2026-intensive-chinese",
+      "nameOriginal": "2026 Intensive Chinese Language Program",
+      "name": {
+        "zh": "2026 强化汉语项目",
+        "en": "2026 Intensive Chinese Language Program",
+        "ru": "Интенсивная программа китайского языка 2026"
+      },
+      "generatedTranslations": ["zh", "ru"],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "chinese-education",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": ["Chinese"],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm",
+        "sourceTitle": "ECNU 2026 Intensive Chinese Language Program — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "Applicants must be non-Chinese citizens holding a valid ordinary passport; the 2026 intensive cohort is open to international learners seeking accelerated Chinese acquisition.",
+        "locator": "Section: Programs > 2026 Intensive Chinese Language Program > Eligibility"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm",
+        "sourceTitle": "ECNU 2026 Intensive Chinese Language Program — How to Apply",
+        "checkedAt": "2026-07-27",
+        "quote": "Submit your application directly through ECNU's online application portal at lxsapply.ecnu.edu.cn; no partner-university nomination is required.",
+        "locator": "Section: How to Apply"
+      },
+      "durationMonths": {
+        "status": "known",
+        "value": 4,
+        "rawValue": "About 4 months (intensive summer cohort)",
+        "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm",
+        "sourceTitle": "ECNU 2026 Intensive Chinese Language Program — Duration",
+        "checkedAt": "2026-07-27",
+        "quote": "Program length: approximately 4 months for the 2026 intensive cohort.",
+        "locator": "Section: Program Overview > Duration"
+      },
+      "programUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm",
+      "applyUrl": "https://lxsapply.ecnu.edu.cn/",
+      "languageRequirements": [],
+      "eligibility": [{"status": "known", "value": "Non-Chinese citizens with a valid ordinary passport; suitable for international learners seeking an accelerated Chinese program.", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm", "checkedAt": "2026-07-27", "quote": "non-Chinese citizens holding a valid ordinary passport", "locator": "Eligibility"}],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "publicationEligibility": "open",
+          "opensOn": {"status": "officially_not_announced", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "closesOn": {"status": "known", "value": "2026-07-31", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm", "sourceTitle": "ECNU 2026 Intensive Chinese Language Program — Application Window", "checkedAt": "2026-07-27", "quote": "Application deadline: 31 July 2026 for the 2026 intensive cohort.", "locator": "Section: Application Window > 2026 Intensive"},
+          "tuitionCny": {"status": "known", "value": 14000, "rawValue": "RMB 14,000 per semester", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm", "sourceTitle": "ECNU 2026 Intensive Chinese Language Program — Tuition", "checkedAt": "2026-07-27", "quote": "Tuition: RMB 14,000 per semester for the 2026 Intensive Chinese Language Program.", "locator": "Section: Tuition and Fees > Intensive Chinese"},
+          "tuitionPeriod": {"status": "known", "value": "semester", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm", "sourceTitle": "ECNU 2026 Intensive Chinese Language Program — Tuition", "checkedAt": "2026-07-27", "quote": "per semester", "locator": "Section: Tuition and Fees"},
+          "applicationFeeCny": {"status": "known", "value": 800, "rawValue": "RMB 800", "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm", "sourceTitle": "ECNU 2026 Intensive Chinese Language Program — Application Fee", "checkedAt": "2026-07-27", "quote": "Application fee: RMB 800 (non-refundable).", "locator": "Section: Application Fee"},
+          "sourceUrls": ["https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm"]
+        }
+      ]
+    }
+  ],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-east-china-normal-university",
+      "categories": {
+        "international_admissions_home": "collected",
+        "bachelor_catalog": "needs_follow_up",
+        "master_catalog": "needs_follow_up",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "collected",
+        "current_admission_guide": "collected",
+        "fees": "collected",
+        "deadlines": "collected",
+        "application_system": "collected",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [
+    {
+      "institutionId": "uni-east-china-normal-university",
+      "reason": "Bachelor, master, and doctorate degree programs are not enumerated in the reviewed English-language non-degree pages; only the four Chinese-language non-degree tracks have a verified identity in this repair pass. Bachelor/master/doctorate catalogs and per-school scholarship enumeration are deferred to a future v2 expand pass."
+    }
+  ],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-east-china-normal-university",
+      "category": "scholarships",
+      "reason": "Per-school ECNU scholarship catalog was not enumerated in this repair pass; only the four non-degree Chinese language programs were in scope.",
+      "discoveryAttempts": [
+        { "officialUrl": "https://lxs.ecnu.edu.cn/en/admission/", "outcome": "Encyclopedic admissions home; per-school scholarship page not surfaced in reviewed segment" },
+        { "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_intensive_chinese_language_program/list.htm", "outcome": "Program detail page; scholarship section not present" },
+        { "officialUrl": "https://lxs.ecnu.edu.cn/en_admission_chinese_language_programs_standard_chinese_language_program/list.htm", "outcome": "Program detail page; scholarship section not present" }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 4,
+    "scholarshipsCollected": 0,
+    "programsPublishable": 4,
+    "programsQuarantined": 0,
+    "publishableDurationCoverageRate": 1.0,
+    "publishableTuitionCoverageRate": 1.0,
+    "publishableFutureDeadlineCoverageRate": 1.0,
+    "publishableInternationalEligibilityEvidenceRate": 1.0,
+    "publishableIndividualApplicationEvidenceRate": 1.0,
+    "publishableSpecificOfficialUrlRate": 1.0,
+    "exclusions": 1,
+    "sourceFailures": 1
+  }
+}
