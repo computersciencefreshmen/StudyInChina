@@ -1,0 +1,450 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-repair-06-programs",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion repair",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false
+  },
+  "scope": {
+    "schoolIds": [
+      "uni-beijing-foreign-studies-university"
+    ],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-beijing-foreign-studies-university",
+      "name": {
+        "en": "Beijing Foreign Studies University",
+        "zh": "北京外国语大学",
+        "ru": "Пекинский университет иностранных языков"
+      },
+      "cityId": "city-beijing",
+      "region": "north",
+      "officialUrl": "https://en.bfsu.edu.cn/",
+      "admissionsUrl": "https://osao.bfsu.edu.cn/"
+    }
+  ],
+  "programs": [
+    {
+      "institutionId": "uni-beijing-foreign-studies-university",
+      "institutionName": {
+        "en": "Beijing Foreign Studies University",
+        "zh": "北京外国语大学",
+        "ru": "Пекинский университет иностранных языков"
+      },
+      "programKey": "uni-beijing-foreign-studies-university:program:finance-bachelor",
+      "nameOriginal": "Finance",
+      "name": {
+        "zh": "Finance",
+        "en": "Finance",
+        "ru": "Финансы"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "English"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+        "sourceTitle": "Beijing Foreign Studies University Finance — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Beijing Foreign Studies University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://osao.bfsu.edu.cn/Academics/Admissions_Brochure.htm",
+        "sourceTitle": "Beijing Foreign Studies University Finance — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Beijing Foreign Studies University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+      "applyUrl": "https://osao.bfsu.edu.cn/Academics/Admissions_Brochure.htm",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "publicationEligibility": "future",
+          "opensOn": {
+            "status": "known",
+            "value": "2026-03-10",
+            "rawValue": null,
+            "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+            "sourceTitle": "Beijing Foreign Studies University Finance — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application opens 2026-03-10.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-12-15",
+            "rawValue": null,
+            "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+            "sourceTitle": "Beijing Foreign Studies University Finance — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-12-15.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "known",
+            "value": 800,
+            "rawValue": "RMB 800",
+            "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+            "sourceTitle": "Beijing Foreign Studies University Finance — Application Fee",
+            "checkedAt": "2026-07-27",
+            "quote": "Application fee: RMB 800.",
+            "locator": "Section: Application Fee"
+          },
+          "sourceUrls": [
+            "https://osao.bfsu.edu.cn/info/2612/7182.htm"
+          ]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-beijing-foreign-studies-university",
+      "institutionName": {
+        "en": "Beijing Foreign Studies University",
+        "zh": "北京外国语大学",
+        "ru": "Пекинский университет иностранных языков"
+      },
+      "programKey": "uni-beijing-foreign-studies-university:program:international-business-bachelor",
+      "nameOriginal": "International Business",
+      "name": {
+        "zh": "International Business",
+        "en": "International Business",
+        "ru": "Международный бизнес"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "English"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+        "sourceTitle": "Beijing Foreign Studies University International Business — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Beijing Foreign Studies University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://osao.bfsu.edu.cn/Academics/Admissions_Brochure.htm",
+        "sourceTitle": "Beijing Foreign Studies University International Business — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Beijing Foreign Studies University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+      "applyUrl": "https://osao.bfsu.edu.cn/Academics/Admissions_Brochure.htm",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "publicationEligibility": "future",
+          "opensOn": {
+            "status": "known",
+            "value": "2026-03-10",
+            "rawValue": null,
+            "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+            "sourceTitle": "Beijing Foreign Studies University International Business — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application opens 2026-03-10.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-12-15",
+            "rawValue": null,
+            "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+            "sourceTitle": "Beijing Foreign Studies University International Business — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-12-15.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "known",
+            "value": 800,
+            "rawValue": "RMB 800",
+            "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+            "sourceTitle": "Beijing Foreign Studies University International Business — Application Fee",
+            "checkedAt": "2026-07-27",
+            "quote": "Application fee: RMB 800.",
+            "locator": "Section: Application Fee"
+          },
+          "sourceUrls": [
+            "https://osao.bfsu.edu.cn/info/2612/7182.htm"
+          ]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-beijing-foreign-studies-university",
+      "institutionName": {
+        "en": "Beijing Foreign Studies University",
+        "zh": "北京外国语大学",
+        "ru": "Пекинский университет иностранных языков"
+      },
+      "programKey": "uni-beijing-foreign-studies-university:program:international-trade-bachelor",
+      "nameOriginal": "International Trade",
+      "name": {
+        "zh": "International Trade",
+        "en": "International Trade",
+        "ru": "Международная торговля"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "English"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+        "sourceTitle": "Beijing Foreign Studies University International Trade — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Beijing Foreign Studies University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://osao.bfsu.edu.cn/Academics/Admissions_Brochure.htm",
+        "sourceTitle": "Beijing Foreign Studies University International Trade — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Beijing Foreign Studies University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+      "applyUrl": "https://osao.bfsu.edu.cn/Academics/Admissions_Brochure.htm",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "publicationEligibility": "future",
+          "opensOn": {
+            "status": "known",
+            "value": "2026-03-10",
+            "rawValue": null,
+            "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+            "sourceTitle": "Beijing Foreign Studies University International Trade — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application opens 2026-03-10.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-12-15",
+            "rawValue": null,
+            "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+            "sourceTitle": "Beijing Foreign Studies University International Trade — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-12-15.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "known",
+            "value": 800,
+            "rawValue": "RMB 800",
+            "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+            "sourceTitle": "Beijing Foreign Studies University International Trade — Application Fee",
+            "checkedAt": "2026-07-27",
+            "quote": "Application fee: RMB 800.",
+            "locator": "Section: Application Fee"
+          },
+          "sourceUrls": [
+            "https://osao.bfsu.edu.cn/info/2612/7182.htm"
+          ]
+        }
+      ]
+    }
+  ],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-beijing-foreign-studies-university",
+      "categories": {
+        "international_admissions_home": "collected",
+        "bachelor_catalog": "collected",
+        "master_catalog": "needs_follow_up",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "needs_follow_up",
+        "current_admission_guide": "collected",
+        "fees": "needs_follow_up",
+        "deadlines": "collected",
+        "application_system": "collected",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-beijing-foreign-studies-university",
+      "category": "scholarships",
+      "reason": "Per-school scholarship enumeration was not in scope for this repair pass; only 3 program(s) were in scope.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://en.bfsu.edu.cn/",
+          "outcome": "Admissions home; per-school scholarship page not surfaced in reviewed segment"
+        },
+        {
+          "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+          "outcome": "Program detail page; scholarship section not present"
+        },
+        {
+          "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+          "outcome": "Program detail page; scholarship section not present"
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 3,
+    "scholarshipsCollected": 0,
+    "programsPublishable": 3,
+    "programsQuarantined": 0,
+    "publishableDurationCoverageRate": 0,
+    "publishableTuitionCoverageRate": 0,
+    "publishableFutureDeadlineCoverageRate": 1,
+    "publishableInternationalEligibilityEvidenceRate": 1,
+    "publishableIndividualApplicationEvidenceRate": 1,
+    "publishableSpecificOfficialUrlRate": 1,
+    "exclusions": 0,
+    "sourceFailures": 1
+  }
+}
