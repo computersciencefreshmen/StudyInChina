@@ -1,0 +1,212 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-repair-16-programs",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion repair",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false
+  },
+  "scope": {
+    "schoolIds": [
+      "uni-tianjin-university"
+    ],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-tianjin-university",
+      "name": {
+        "en": "Tianjin University",
+        "zh": "天津大学",
+        "ru": "Тяньцзиньский университет"
+      },
+      "cityId": "city-tianjin",
+      "region": "north",
+      "officialUrl": "https://en.tju.edu.cn/",
+      "admissionsUrl": "https://sie.tju.edu.cn/"
+    }
+  ],
+  "programs": [
+    {
+      "institutionId": "uni-tianjin-university",
+      "institutionName": {
+        "en": "Tianjin University",
+        "zh": "天津大学",
+        "ru": "Тяньцзиньский университет"
+      },
+      "programKey": "uni-tianjin-university:program:one-semester-chinese-language-study-spring-language",
+      "nameOriginal": "One-Semester Chinese Language Study (Spring)",
+      "name": {
+        "zh": "一学期汉语研修（春季）",
+        "en": "One-Semester Chinese Language Study (Spring)",
+        "ru": "Односеместровая программа изучения китайского языка (весна)"
+      },
+      "generatedTranslations": [],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://sie.tju.edu.cn/en/jxj/ChineseLanguageTeachers/202602/t20260206_324551.html",
+        "sourceTitle": "Tianjin University One-Semester Chinese Language Study (Spring) — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Tianjin University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://sie.tju.edu.cn/en/xwxm/CHINESELANGUAGEPRORAM/",
+        "sourceTitle": "Tianjin University One-Semester Chinese Language Study (Spring) — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Tianjin University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://sie.tju.edu.cn/en/jxj/ChineseLanguageTeachers/202602/t20260206_324551.html",
+      "applyUrl": "https://sie.tju.edu.cn/en/xwxm/CHINESELANGUAGEPRORAM/",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "publicationEligibility": "future",
+          "opensOn": {
+            "status": "known",
+            "value": "2026-03-01",
+            "rawValue": null,
+            "officialUrl": "https://sie.tju.edu.cn/en/jxj/ChineseLanguageTeachers/202602/t20260206_324551.html",
+            "sourceTitle": "Tianjin University One-Semester Chinese Language Study (Spring) — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application opens 2026-03-01.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-10-31",
+            "rawValue": null,
+            "officialUrl": "https://sie.tju.edu.cn/en/jxj/ChineseLanguageTeachers/202602/t20260206_324551.html",
+            "sourceTitle": "Tianjin University One-Semester Chinese Language Study (Spring) — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-10-31.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "sourceUrls": [
+            "https://sie.tju.edu.cn/en/jxj/ChineseLanguageTeachers/202602/t20260206_324551.html"
+          ]
+        }
+      ]
+    }
+  ],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-tianjin-university",
+      "categories": {
+        "international_admissions_home": "collected",
+        "bachelor_catalog": "needs_follow_up",
+        "master_catalog": "needs_follow_up",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "collected",
+        "current_admission_guide": "collected",
+        "fees": "needs_follow_up",
+        "deadlines": "collected",
+        "application_system": "collected",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-tianjin-university",
+      "category": "scholarships",
+      "reason": "Per-school scholarship enumeration was not in scope for this repair pass; only 1 program(s) were in scope.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://en.tju.edu.cn/",
+          "outcome": "Admissions home; per-school scholarship page not surfaced in reviewed segment"
+        },
+        {
+          "officialUrl": "https://sie.tju.edu.cn/en/jxj/ChineseLanguageTeachers/202602/t20260206_324551.html",
+          "outcome": "Program detail page; scholarship section not present"
+        },
+        {
+          "officialUrl": "https://sie.tju.edu.cn/en/jxj/ChineseLanguageTeachers/202602/t20260206_324551.html",
+          "outcome": "Program detail page; scholarship section not present"
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 1,
+    "scholarshipsCollected": 0,
+    "programsPublishable": 1,
+    "programsQuarantined": 0,
+    "publishableDurationCoverageRate": 0,
+    "publishableTuitionCoverageRate": 0,
+    "publishableFutureDeadlineCoverageRate": 1,
+    "publishableInternationalEligibilityEvidenceRate": 1,
+    "publishableIndividualApplicationEvidenceRate": 1,
+    "publishableSpecificOfficialUrlRate": 1,
+    "exclusions": 0,
+    "sourceFailures": 1
+  }
+}
