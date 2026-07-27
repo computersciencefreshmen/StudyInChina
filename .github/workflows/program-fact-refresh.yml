@@ -1,0 +1,86 @@
+name: Monthly official program fact refresh
+
+on:
+  schedule:
+    - cron: '19 4 2 * *'
+  workflow_dispatch:
+    inputs:
+      maximum_urls:
+        description: Maximum registered official source URLs to inspect
+        required: false
+        default: '148'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monthly-program-fact-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh grounded program facts
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      CI: 'true'
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install PDF text extraction
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends poppler-utils
+
+      - name: Set refresh date
+        id: date
+        shell: bash
+        run: echo "value=$(date -u +%F)" >> "$GITHUB_OUTPUT"
+
+      - name: Refresh official facts
+        shell: bash
+        env:
+          MAXIMUM_URLS: ${{ inputs.maximum_urls || '148' }}
+        run: |
+          npx tsx scripts/ingestion/enrich-international-program-facts.ts \
+            --review quality/international-program-review/expanded-250-2026-07-27.json \
+            --data-dir content/data \
+            --output-dir content/data \
+            --audit "quality/international-program-review/fact-enrichment-${{ steps.date.outputs.value }}.json" \
+            --checked-at "${{ steps.date.outputs.value }}" \
+            --max-urls "$MAXIMUM_URLS"
+
+      - name: Validate refreshed Catalog
+        run: |
+          npm run validate:data
+          npx vitest run \
+            tests/unit/international-program-fact-enrichment.test.ts \
+            tests/unit/content-data.test.ts \
+            tests/unit/publication.test.ts
+
+      - name: Commit verified changes
+        shell: bash
+        run: |
+          if git diff --quiet -- content/data quality/international-program-review; then
+            echo "No verified fact changes."
+            exit 0
+          fi
+          git config user.name "studyinchina-data-bot"
+          git config user.email "studyinchina-data-bot@users.noreply.github.com"
+          git add content/data/programs.json content/data/admission-cycles.json \
+            "quality/international-program-review/fact-enrichment-${{ steps.date.outputs.value }}.json"
+          git commit -m "data: refresh official program facts ${{ steps.date.outputs.value }}"
+          git push origin HEAD:main

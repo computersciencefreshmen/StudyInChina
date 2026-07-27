@@ -538,12 +538,8 @@ async function main(): Promise<void> {
   await mkdir(options.outputDirectory, { recursive: true })
   await mkdir(resolve(options.auditPath, '..'), { recursive: true })
   for (const [name, value] of [
-    ['sources', output.sources],
-    ['cities', output.cities],
-    ['universities', output.universities],
     ['programs', output.programs],
     ['admission-cycles', output.admissionCycles],
-    ['scholarships', output.scholarships],
   ] as const) {
     await writeFile(
       join(options.outputDirectory, `${name}.json`),
