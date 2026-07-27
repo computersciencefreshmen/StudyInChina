@@ -40,7 +40,10 @@
     "pipeline:build-bootstrap": "tsx scripts/ingestion/build-pipeline-bootstrap.ts",
     "pipeline:materialize-official": "tsx scripts/ingestion/materialize-official-entities.ts",
     "data:build-double-first-class-coverage": "tsx scripts/ingestion/build-public-double-first-class-coverage.ts",
-    "pipeline:build-source-reconciliation": "tsx scripts/ingestion/build-source-reconciliation-import.ts"
+    "pipeline:build-source-reconciliation": "tsx scripts/ingestion/build-source-reconciliation-import.ts",
+    "minimax:queue": "tsx scripts/ingestion/build-minimax-harvest-queue.ts",
+    "minimax:claim": "tsx scripts/ingestion/claim-minimax-harvest-task.ts",
+    "minimax:validate": "tsx scripts/ingestion/validate-minimax-harvest.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",

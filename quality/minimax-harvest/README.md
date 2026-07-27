@@ -2,6 +2,13 @@
 
 MiniMax Coding Plan 的官方项目与奖学金采集结果统一进入本目录的 `inbox/`。
 
+持续运行入口为仓库根目录的 `MINIMAX_CONTINUOUS_HARVEST_PROMPT.md`。队列将全部非军校双一流高校与地方国际学生项目优先高校拆成项目、奖学金两个独立通道。
+
+```powershell
+npm run minimax:queue
+npm run minimax:claim -- --worker minimax-worker-01
+```
+
 ## 推荐运行方式
 
 为每个 MiniMax 任务分配不重叠的 10–15 所学校。将下面这段话交给 MiniMax：

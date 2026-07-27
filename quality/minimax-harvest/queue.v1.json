@@ -1,0 +1,4334 @@
+{
+  "format": "studyinchina.minimax-harvest-queue",
+  "formatVersion": 1,
+  "generatedAt": "2026-07-27T05:46:46.590Z",
+  "policy": {
+    "batchSize": 8,
+    "separateProgramAndScholarshipPasses": true,
+    "militaryInstitutionsExcluded": true,
+    "officialSourcesOnly": true
+  },
+  "summary": {
+    "doubleFirstClassTargets": 144,
+    "regionalPriorityTargets": 25,
+    "uniqueSchools": 169,
+    "schoolBatches": 22,
+    "tasks": 44
+  },
+  "tasks": [
+    {
+      "id": "minimax-all-01-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-001",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京大学",
+          "officialNameEn": "Peking University",
+          "institutionRef": "uni-peking-university",
+          "catalogInstitutionId": "uni-peking-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-002",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国人民大学",
+          "officialNameEn": "Renmin University of China",
+          "institutionRef": "uni-renmin-university-of-china",
+          "catalogInstitutionId": "uni-renmin-university-of-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-003",
+          "cohort": "double_first_class",
+          "officialNameZh": "清华大学",
+          "officialNameEn": "Tsinghua University",
+          "institutionRef": "uni-tsinghua-university",
+          "catalogInstitutionId": "uni-tsinghua-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-004",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京交通大学",
+          "officialNameEn": "Beijing Jiaotong University",
+          "institutionRef": "uni-beijing-jiaotong-university",
+          "catalogInstitutionId": "uni-beijing-jiaotong-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-005",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京工业大学",
+          "officialNameEn": "Beijing University of Technology",
+          "institutionRef": "uni-beijing-university-of-technology",
+          "catalogInstitutionId": "uni-beijing-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-006",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京航空航天大学",
+          "officialNameEn": "Beihang University",
+          "institutionRef": "uni-beihang-university",
+          "catalogInstitutionId": "uni-beihang-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-007",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京理工大学",
+          "officialNameEn": "Beijing Institute of Technology",
+          "institutionRef": "uni-beijing-institute-of-technology",
+          "catalogInstitutionId": "uni-beijing-institute-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-008",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京科技大学",
+          "officialNameEn": "University of Science and Technology Beijing",
+          "institutionRef": "uni-university-of-science-and-technology-beijing",
+          "catalogInstitutionId": "uni-university-of-science-and-technology-beijing",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-01-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-01-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-01-programs.md"
+    },
+    {
+      "id": "minimax-all-01-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-001",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京大学",
+          "officialNameEn": "Peking University",
+          "institutionRef": "uni-peking-university",
+          "catalogInstitutionId": "uni-peking-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-002",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国人民大学",
+          "officialNameEn": "Renmin University of China",
+          "institutionRef": "uni-renmin-university-of-china",
+          "catalogInstitutionId": "uni-renmin-university-of-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-003",
+          "cohort": "double_first_class",
+          "officialNameZh": "清华大学",
+          "officialNameEn": "Tsinghua University",
+          "institutionRef": "uni-tsinghua-university",
+          "catalogInstitutionId": "uni-tsinghua-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-004",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京交通大学",
+          "officialNameEn": "Beijing Jiaotong University",
+          "institutionRef": "uni-beijing-jiaotong-university",
+          "catalogInstitutionId": "uni-beijing-jiaotong-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-005",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京工业大学",
+          "officialNameEn": "Beijing University of Technology",
+          "institutionRef": "uni-beijing-university-of-technology",
+          "catalogInstitutionId": "uni-beijing-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-006",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京航空航天大学",
+          "officialNameEn": "Beihang University",
+          "institutionRef": "uni-beihang-university",
+          "catalogInstitutionId": "uni-beihang-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-007",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京理工大学",
+          "officialNameEn": "Beijing Institute of Technology",
+          "institutionRef": "uni-beijing-institute-of-technology",
+          "catalogInstitutionId": "uni-beijing-institute-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-008",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京科技大学",
+          "officialNameEn": "University of Science and Technology Beijing",
+          "institutionRef": "uni-university-of-science-and-technology-beijing",
+          "catalogInstitutionId": "uni-university-of-science-and-technology-beijing",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-01-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-01-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-01-scholarships.md"
+    },
+    {
+      "id": "minimax-all-02-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-009",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京化工大学",
+          "officialNameEn": "Beijing University of Chemical Technology",
+          "institutionRef": "uni-beijing-university-of-chemical-technology",
+          "catalogInstitutionId": "uni-beijing-university-of-chemical-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-010",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京邮电大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-010",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-011",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国农业大学",
+          "officialNameEn": "China Agricultural University",
+          "institutionRef": "uni-china-agricultural-university",
+          "catalogInstitutionId": "uni-china-agricultural-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-012",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京林业大学",
+          "officialNameEn": "Beijing Forestry University",
+          "institutionRef": "uni-beijing-forestry-university",
+          "catalogInstitutionId": "uni-beijing-forestry-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-013",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京协和医学院",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-013",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-014",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京中医药大学",
+          "officialNameEn": "Beijing University of Chinese Medicine",
+          "institutionRef": "uni-beijing-university-of-chinese-medicine",
+          "catalogInstitutionId": "uni-beijing-university-of-chinese-medicine",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-015",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京师范大学",
+          "officialNameEn": "Beijing Normal University",
+          "institutionRef": "uni-beijing-normal-university",
+          "catalogInstitutionId": "uni-beijing-normal-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-016",
+          "cohort": "double_first_class",
+          "officialNameZh": "首都师范大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-016",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-02-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-02-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-02-programs.md"
+    },
+    {
+      "id": "minimax-all-02-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-009",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京化工大学",
+          "officialNameEn": "Beijing University of Chemical Technology",
+          "institutionRef": "uni-beijing-university-of-chemical-technology",
+          "catalogInstitutionId": "uni-beijing-university-of-chemical-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-010",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京邮电大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-010",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-011",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国农业大学",
+          "officialNameEn": "China Agricultural University",
+          "institutionRef": "uni-china-agricultural-university",
+          "catalogInstitutionId": "uni-china-agricultural-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-012",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京林业大学",
+          "officialNameEn": "Beijing Forestry University",
+          "institutionRef": "uni-beijing-forestry-university",
+          "catalogInstitutionId": "uni-beijing-forestry-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-013",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京协和医学院",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-013",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-014",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京中医药大学",
+          "officialNameEn": "Beijing University of Chinese Medicine",
+          "institutionRef": "uni-beijing-university-of-chinese-medicine",
+          "catalogInstitutionId": "uni-beijing-university-of-chinese-medicine",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-015",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京师范大学",
+          "officialNameEn": "Beijing Normal University",
+          "institutionRef": "uni-beijing-normal-university",
+          "catalogInstitutionId": "uni-beijing-normal-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-016",
+          "cohort": "double_first_class",
+          "officialNameZh": "首都师范大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-016",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-02-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-02-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-02-scholarships.md"
+    },
+    {
+      "id": "minimax-all-03-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-017",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京外国语大学",
+          "officialNameEn": "Beijing Foreign Studies University",
+          "institutionRef": "uni-beijing-foreign-studies-university",
+          "catalogInstitutionId": "uni-beijing-foreign-studies-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-018",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国传媒大学",
+          "officialNameEn": "Communication University of China",
+          "institutionRef": "uni-communication-university-of-china",
+          "catalogInstitutionId": "uni-communication-university-of-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-019",
+          "cohort": "double_first_class",
+          "officialNameZh": "中央财经大学",
+          "officialNameEn": "Central University of Finance and Economics",
+          "institutionRef": "uni-central-university-of-finance-and-economics",
+          "catalogInstitutionId": "uni-central-university-of-finance-and-economics",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-020",
+          "cohort": "double_first_class",
+          "officialNameZh": "对外经济贸易大学",
+          "officialNameEn": "University of International Business and Economics",
+          "institutionRef": "uni-university-of-international-business-and-economics",
+          "catalogInstitutionId": "uni-university-of-international-business-and-economics",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-021",
+          "cohort": "double_first_class",
+          "officialNameZh": "外交学院",
+          "officialNameEn": "China Foreign Affairs University",
+          "institutionRef": "uni-china-foreign-affairs-university",
+          "catalogInstitutionId": "uni-china-foreign-affairs-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-022",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国人民公安大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-022",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-023",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京体育大学",
+          "officialNameEn": "Beijing Sport University",
+          "institutionRef": "uni-beijing-sport-university",
+          "catalogInstitutionId": "uni-beijing-sport-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-024",
+          "cohort": "double_first_class",
+          "officialNameZh": "中央音乐学院",
+          "officialNameEn": "Central Conservatory of Music",
+          "institutionRef": "uni-central-conservatory-of-music",
+          "catalogInstitutionId": "uni-central-conservatory-of-music",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-03-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-03-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-03-programs.md"
+    },
+    {
+      "id": "minimax-all-03-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-017",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京外国语大学",
+          "officialNameEn": "Beijing Foreign Studies University",
+          "institutionRef": "uni-beijing-foreign-studies-university",
+          "catalogInstitutionId": "uni-beijing-foreign-studies-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-018",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国传媒大学",
+          "officialNameEn": "Communication University of China",
+          "institutionRef": "uni-communication-university-of-china",
+          "catalogInstitutionId": "uni-communication-university-of-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-019",
+          "cohort": "double_first_class",
+          "officialNameZh": "中央财经大学",
+          "officialNameEn": "Central University of Finance and Economics",
+          "institutionRef": "uni-central-university-of-finance-and-economics",
+          "catalogInstitutionId": "uni-central-university-of-finance-and-economics",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-020",
+          "cohort": "double_first_class",
+          "officialNameZh": "对外经济贸易大学",
+          "officialNameEn": "University of International Business and Economics",
+          "institutionRef": "uni-university-of-international-business-and-economics",
+          "catalogInstitutionId": "uni-university-of-international-business-and-economics",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-021",
+          "cohort": "double_first_class",
+          "officialNameZh": "外交学院",
+          "officialNameEn": "China Foreign Affairs University",
+          "institutionRef": "uni-china-foreign-affairs-university",
+          "catalogInstitutionId": "uni-china-foreign-affairs-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-022",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国人民公安大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-022",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-023",
+          "cohort": "double_first_class",
+          "officialNameZh": "北京体育大学",
+          "officialNameEn": "Beijing Sport University",
+          "institutionRef": "uni-beijing-sport-university",
+          "catalogInstitutionId": "uni-beijing-sport-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-024",
+          "cohort": "double_first_class",
+          "officialNameZh": "中央音乐学院",
+          "officialNameEn": "Central Conservatory of Music",
+          "institutionRef": "uni-central-conservatory-of-music",
+          "catalogInstitutionId": "uni-central-conservatory-of-music",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-03-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-03-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-03-scholarships.md"
+    },
+    {
+      "id": "minimax-all-04-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-025",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国音乐学院",
+          "officialNameEn": "China Conservatory of Music",
+          "institutionRef": "uni-china-conservatory-of-music",
+          "catalogInstitutionId": "uni-china-conservatory-of-music",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-026",
+          "cohort": "double_first_class",
+          "officialNameZh": "中央美术学院",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-026",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-027",
+          "cohort": "double_first_class",
+          "officialNameZh": "中央戏剧学院",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-027",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-028",
+          "cohort": "double_first_class",
+          "officialNameZh": "中央民族大学",
+          "officialNameEn": "Minzu University of China",
+          "institutionRef": "uni-minzu-university-of-china",
+          "catalogInstitutionId": "uni-minzu-university-of-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-029",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国政法大学",
+          "officialNameEn": "China University of Political Science and Law",
+          "institutionRef": "uni-china-university-of-political-science-and-law",
+          "catalogInstitutionId": "uni-china-university-of-political-science-and-law",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-030",
+          "cohort": "double_first_class",
+          "officialNameZh": "南开大学",
+          "officialNameEn": "Nankai University",
+          "institutionRef": "uni-nankai-university",
+          "catalogInstitutionId": "uni-nankai-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-031",
+          "cohort": "double_first_class",
+          "officialNameZh": "天津大学",
+          "officialNameEn": "Tianjin University",
+          "institutionRef": "uni-tianjin-university",
+          "catalogInstitutionId": "uni-tianjin-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-032",
+          "cohort": "double_first_class",
+          "officialNameZh": "天津工业大学",
+          "officialNameEn": "Tiangong University",
+          "institutionRef": "uni-tiangong-university",
+          "catalogInstitutionId": "uni-tiangong-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-04-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-04-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-04-programs.md"
+    },
+    {
+      "id": "minimax-all-04-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-025",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国音乐学院",
+          "officialNameEn": "China Conservatory of Music",
+          "institutionRef": "uni-china-conservatory-of-music",
+          "catalogInstitutionId": "uni-china-conservatory-of-music",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-026",
+          "cohort": "double_first_class",
+          "officialNameZh": "中央美术学院",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-026",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-027",
+          "cohort": "double_first_class",
+          "officialNameZh": "中央戏剧学院",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-027",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-028",
+          "cohort": "double_first_class",
+          "officialNameZh": "中央民族大学",
+          "officialNameEn": "Minzu University of China",
+          "institutionRef": "uni-minzu-university-of-china",
+          "catalogInstitutionId": "uni-minzu-university-of-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-029",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国政法大学",
+          "officialNameEn": "China University of Political Science and Law",
+          "institutionRef": "uni-china-university-of-political-science-and-law",
+          "catalogInstitutionId": "uni-china-university-of-political-science-and-law",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-030",
+          "cohort": "double_first_class",
+          "officialNameZh": "南开大学",
+          "officialNameEn": "Nankai University",
+          "institutionRef": "uni-nankai-university",
+          "catalogInstitutionId": "uni-nankai-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-031",
+          "cohort": "double_first_class",
+          "officialNameZh": "天津大学",
+          "officialNameEn": "Tianjin University",
+          "institutionRef": "uni-tianjin-university",
+          "catalogInstitutionId": "uni-tianjin-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-032",
+          "cohort": "double_first_class",
+          "officialNameZh": "天津工业大学",
+          "officialNameEn": "Tiangong University",
+          "institutionRef": "uni-tiangong-university",
+          "catalogInstitutionId": "uni-tiangong-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-04-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-04-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-04-scholarships.md"
+    },
+    {
+      "id": "minimax-all-05-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-033",
+          "cohort": "double_first_class",
+          "officialNameZh": "天津医科大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-033",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-034",
+          "cohort": "double_first_class",
+          "officialNameZh": "天津中医药大学",
+          "officialNameEn": "Tianjin University of Traditional Chinese Medicine",
+          "institutionRef": "uni-tianjin-university-of-traditional-chinese-medicine",
+          "catalogInstitutionId": "uni-tianjin-university-of-traditional-chinese-medicine",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-035",
+          "cohort": "double_first_class",
+          "officialNameZh": "华北电力大学",
+          "officialNameEn": "North China Electric Power University",
+          "institutionRef": "uni-north-china-electric-power-university",
+          "catalogInstitutionId": "uni-north-china-electric-power-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-036",
+          "cohort": "double_first_class",
+          "officialNameZh": "河北工业大学",
+          "officialNameEn": "Hebei University of Technology",
+          "institutionRef": "uni-hebei-university-of-technology",
+          "catalogInstitutionId": "uni-hebei-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-037",
+          "cohort": "double_first_class",
+          "officialNameZh": "山西大学",
+          "officialNameEn": "Shanxi University",
+          "institutionRef": "uni-shanxi-university",
+          "catalogInstitutionId": "uni-shanxi-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-038",
+          "cohort": "double_first_class",
+          "officialNameZh": "太原理工大学",
+          "officialNameEn": "Taiyuan University of Technology",
+          "institutionRef": "uni-taiyuan-university-of-technology",
+          "catalogInstitutionId": "uni-taiyuan-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-039",
+          "cohort": "double_first_class",
+          "officialNameZh": "内蒙古大学",
+          "officialNameEn": "Inner Mongolia University",
+          "institutionRef": "uni-inner-mongolia-university",
+          "catalogInstitutionId": "uni-inner-mongolia-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-040",
+          "cohort": "double_first_class",
+          "officialNameZh": "辽宁大学",
+          "officialNameEn": "Liaoning University",
+          "institutionRef": "uni-liaoning-university",
+          "catalogInstitutionId": "uni-liaoning-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-05-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-05-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-05-programs.md"
+    },
+    {
+      "id": "minimax-all-05-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-033",
+          "cohort": "double_first_class",
+          "officialNameZh": "天津医科大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-033",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-034",
+          "cohort": "double_first_class",
+          "officialNameZh": "天津中医药大学",
+          "officialNameEn": "Tianjin University of Traditional Chinese Medicine",
+          "institutionRef": "uni-tianjin-university-of-traditional-chinese-medicine",
+          "catalogInstitutionId": "uni-tianjin-university-of-traditional-chinese-medicine",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-035",
+          "cohort": "double_first_class",
+          "officialNameZh": "华北电力大学",
+          "officialNameEn": "North China Electric Power University",
+          "institutionRef": "uni-north-china-electric-power-university",
+          "catalogInstitutionId": "uni-north-china-electric-power-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-036",
+          "cohort": "double_first_class",
+          "officialNameZh": "河北工业大学",
+          "officialNameEn": "Hebei University of Technology",
+          "institutionRef": "uni-hebei-university-of-technology",
+          "catalogInstitutionId": "uni-hebei-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-037",
+          "cohort": "double_first_class",
+          "officialNameZh": "山西大学",
+          "officialNameEn": "Shanxi University",
+          "institutionRef": "uni-shanxi-university",
+          "catalogInstitutionId": "uni-shanxi-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-038",
+          "cohort": "double_first_class",
+          "officialNameZh": "太原理工大学",
+          "officialNameEn": "Taiyuan University of Technology",
+          "institutionRef": "uni-taiyuan-university-of-technology",
+          "catalogInstitutionId": "uni-taiyuan-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-039",
+          "cohort": "double_first_class",
+          "officialNameZh": "内蒙古大学",
+          "officialNameEn": "Inner Mongolia University",
+          "institutionRef": "uni-inner-mongolia-university",
+          "catalogInstitutionId": "uni-inner-mongolia-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-040",
+          "cohort": "double_first_class",
+          "officialNameZh": "辽宁大学",
+          "officialNameEn": "Liaoning University",
+          "institutionRef": "uni-liaoning-university",
+          "catalogInstitutionId": "uni-liaoning-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-05-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-05-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-05-scholarships.md"
+    },
+    {
+      "id": "minimax-all-06-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-041",
+          "cohort": "double_first_class",
+          "officialNameZh": "大连理工大学",
+          "officialNameEn": "Dalian University of Technology",
+          "institutionRef": "uni-dalian-university-of-technology",
+          "catalogInstitutionId": "uni-dalian-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-042",
+          "cohort": "double_first_class",
+          "officialNameZh": "东北大学",
+          "officialNameEn": "Northeastern University",
+          "institutionRef": "uni-northeastern-university-china",
+          "catalogInstitutionId": "uni-northeastern-university-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-043",
+          "cohort": "double_first_class",
+          "officialNameZh": "大连海事大学",
+          "officialNameEn": "Dalian Maritime University",
+          "institutionRef": "uni-dalian-maritime-university",
+          "catalogInstitutionId": "uni-dalian-maritime-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-044",
+          "cohort": "double_first_class",
+          "officialNameZh": "吉林大学",
+          "officialNameEn": "Jilin University",
+          "institutionRef": "uni-jilin-university",
+          "catalogInstitutionId": "uni-jilin-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-045",
+          "cohort": "double_first_class",
+          "officialNameZh": "延边大学",
+          "officialNameEn": "Yanbian University",
+          "institutionRef": "uni-yanbian-university",
+          "catalogInstitutionId": "uni-yanbian-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-046",
+          "cohort": "double_first_class",
+          "officialNameZh": "东北师范大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-046",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-047",
+          "cohort": "double_first_class",
+          "officialNameZh": "哈尔滨工业大学",
+          "officialNameEn": "Harbin Institute of Technology",
+          "institutionRef": "uni-harbin-institute-of-technology",
+          "catalogInstitutionId": "uni-harbin-institute-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-048",
+          "cohort": "double_first_class",
+          "officialNameZh": "哈尔滨工程大学",
+          "officialNameEn": "Harbin Engineering University",
+          "institutionRef": "uni-harbin-engineering-university",
+          "catalogInstitutionId": "uni-harbin-engineering-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-06-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-06-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-06-programs.md"
+    },
+    {
+      "id": "minimax-all-06-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-041",
+          "cohort": "double_first_class",
+          "officialNameZh": "大连理工大学",
+          "officialNameEn": "Dalian University of Technology",
+          "institutionRef": "uni-dalian-university-of-technology",
+          "catalogInstitutionId": "uni-dalian-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-042",
+          "cohort": "double_first_class",
+          "officialNameZh": "东北大学",
+          "officialNameEn": "Northeastern University",
+          "institutionRef": "uni-northeastern-university-china",
+          "catalogInstitutionId": "uni-northeastern-university-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-043",
+          "cohort": "double_first_class",
+          "officialNameZh": "大连海事大学",
+          "officialNameEn": "Dalian Maritime University",
+          "institutionRef": "uni-dalian-maritime-university",
+          "catalogInstitutionId": "uni-dalian-maritime-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-044",
+          "cohort": "double_first_class",
+          "officialNameZh": "吉林大学",
+          "officialNameEn": "Jilin University",
+          "institutionRef": "uni-jilin-university",
+          "catalogInstitutionId": "uni-jilin-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-045",
+          "cohort": "double_first_class",
+          "officialNameZh": "延边大学",
+          "officialNameEn": "Yanbian University",
+          "institutionRef": "uni-yanbian-university",
+          "catalogInstitutionId": "uni-yanbian-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-046",
+          "cohort": "double_first_class",
+          "officialNameZh": "东北师范大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-046",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-047",
+          "cohort": "double_first_class",
+          "officialNameZh": "哈尔滨工业大学",
+          "officialNameEn": "Harbin Institute of Technology",
+          "institutionRef": "uni-harbin-institute-of-technology",
+          "catalogInstitutionId": "uni-harbin-institute-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-048",
+          "cohort": "double_first_class",
+          "officialNameZh": "哈尔滨工程大学",
+          "officialNameEn": "Harbin Engineering University",
+          "institutionRef": "uni-harbin-engineering-university",
+          "catalogInstitutionId": "uni-harbin-engineering-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-06-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-06-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-06-scholarships.md"
+    },
+    {
+      "id": "minimax-all-07-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-049",
+          "cohort": "double_first_class",
+          "officialNameZh": "东北农业大学",
+          "officialNameEn": "Northeast Agricultural University",
+          "institutionRef": "uni-northeast-agricultural-university",
+          "catalogInstitutionId": "uni-northeast-agricultural-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-050",
+          "cohort": "double_first_class",
+          "officialNameZh": "东北林业大学",
+          "officialNameEn": "Northeast Forestry University",
+          "institutionRef": "uni-northeast-forestry-university",
+          "catalogInstitutionId": "uni-northeast-forestry-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-051",
+          "cohort": "double_first_class",
+          "officialNameZh": "复旦大学",
+          "officialNameEn": "Fudan University",
+          "institutionRef": "uni-fudan-university",
+          "catalogInstitutionId": "uni-fudan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-052",
+          "cohort": "double_first_class",
+          "officialNameZh": "同济大学",
+          "officialNameEn": "Tongji University",
+          "institutionRef": "uni-tongji-university",
+          "catalogInstitutionId": "uni-tongji-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-053",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海交通大学",
+          "officialNameEn": "Shanghai Jiao Tong University",
+          "institutionRef": "uni-shanghai-jiao-tong-university",
+          "catalogInstitutionId": "uni-shanghai-jiao-tong-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-054",
+          "cohort": "double_first_class",
+          "officialNameZh": "华东理工大学",
+          "officialNameEn": "East China University of Science and Technology",
+          "institutionRef": "uni-east-china-university-of-science-and-technology",
+          "catalogInstitutionId": "uni-east-china-university-of-science-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-055",
+          "cohort": "double_first_class",
+          "officialNameZh": "东华大学",
+          "officialNameEn": "Donghua University",
+          "institutionRef": "uni-donghua-university",
+          "catalogInstitutionId": "uni-donghua-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-056",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海海洋大学",
+          "officialNameEn": "Shanghai Ocean University",
+          "institutionRef": "uni-shanghai-ocean-university",
+          "catalogInstitutionId": "uni-shanghai-ocean-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-07-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-07-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-07-programs.md"
+    },
+    {
+      "id": "minimax-all-07-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-049",
+          "cohort": "double_first_class",
+          "officialNameZh": "东北农业大学",
+          "officialNameEn": "Northeast Agricultural University",
+          "institutionRef": "uni-northeast-agricultural-university",
+          "catalogInstitutionId": "uni-northeast-agricultural-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-050",
+          "cohort": "double_first_class",
+          "officialNameZh": "东北林业大学",
+          "officialNameEn": "Northeast Forestry University",
+          "institutionRef": "uni-northeast-forestry-university",
+          "catalogInstitutionId": "uni-northeast-forestry-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-051",
+          "cohort": "double_first_class",
+          "officialNameZh": "复旦大学",
+          "officialNameEn": "Fudan University",
+          "institutionRef": "uni-fudan-university",
+          "catalogInstitutionId": "uni-fudan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-052",
+          "cohort": "double_first_class",
+          "officialNameZh": "同济大学",
+          "officialNameEn": "Tongji University",
+          "institutionRef": "uni-tongji-university",
+          "catalogInstitutionId": "uni-tongji-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-053",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海交通大学",
+          "officialNameEn": "Shanghai Jiao Tong University",
+          "institutionRef": "uni-shanghai-jiao-tong-university",
+          "catalogInstitutionId": "uni-shanghai-jiao-tong-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-054",
+          "cohort": "double_first_class",
+          "officialNameZh": "华东理工大学",
+          "officialNameEn": "East China University of Science and Technology",
+          "institutionRef": "uni-east-china-university-of-science-and-technology",
+          "catalogInstitutionId": "uni-east-china-university-of-science-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-055",
+          "cohort": "double_first_class",
+          "officialNameZh": "东华大学",
+          "officialNameEn": "Donghua University",
+          "institutionRef": "uni-donghua-university",
+          "catalogInstitutionId": "uni-donghua-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-056",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海海洋大学",
+          "officialNameEn": "Shanghai Ocean University",
+          "institutionRef": "uni-shanghai-ocean-university",
+          "catalogInstitutionId": "uni-shanghai-ocean-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-07-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-07-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-07-scholarships.md"
+    },
+    {
+      "id": "minimax-all-08-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-057",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海中医药大学",
+          "officialNameEn": "Shanghai University of Traditional Chinese Medicine",
+          "institutionRef": "uni-shanghai-university-of-traditional-chinese-medicine",
+          "catalogInstitutionId": "uni-shanghai-university-of-traditional-chinese-medicine",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-058",
+          "cohort": "double_first_class",
+          "officialNameZh": "华东师范大学",
+          "officialNameEn": "East China Normal University",
+          "institutionRef": "uni-east-china-normal-university",
+          "catalogInstitutionId": "uni-east-china-normal-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-059",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海外国语大学",
+          "officialNameEn": "Shanghai International Studies University",
+          "institutionRef": "uni-shanghai-international-studies-university",
+          "catalogInstitutionId": "uni-shanghai-international-studies-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-060",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海财经大学",
+          "officialNameEn": "Shanghai University of Finance and Economics",
+          "institutionRef": "uni-shanghai-university-of-finance-and-economics",
+          "catalogInstitutionId": "uni-shanghai-university-of-finance-and-economics",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-061",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海体育学院",
+          "officialNameEn": "Shanghai University of Sport",
+          "institutionRef": "uni-shanghai-university-of-sport",
+          "catalogInstitutionId": "uni-shanghai-university-of-sport",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-062",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海音乐学院",
+          "officialNameEn": "Shanghai Conservatory of Music",
+          "institutionRef": "uni-shanghai-conservatory-of-music",
+          "catalogInstitutionId": "uni-shanghai-conservatory-of-music",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-063",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海大学",
+          "officialNameEn": "Shanghai University",
+          "institutionRef": "uni-shanghai-university",
+          "catalogInstitutionId": "uni-shanghai-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-064",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京大学",
+          "officialNameEn": "Nanjing University",
+          "institutionRef": "uni-nanjing-university",
+          "catalogInstitutionId": "uni-nanjing-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-08-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-08-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-08-programs.md"
+    },
+    {
+      "id": "minimax-all-08-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-057",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海中医药大学",
+          "officialNameEn": "Shanghai University of Traditional Chinese Medicine",
+          "institutionRef": "uni-shanghai-university-of-traditional-chinese-medicine",
+          "catalogInstitutionId": "uni-shanghai-university-of-traditional-chinese-medicine",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-058",
+          "cohort": "double_first_class",
+          "officialNameZh": "华东师范大学",
+          "officialNameEn": "East China Normal University",
+          "institutionRef": "uni-east-china-normal-university",
+          "catalogInstitutionId": "uni-east-china-normal-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-059",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海外国语大学",
+          "officialNameEn": "Shanghai International Studies University",
+          "institutionRef": "uni-shanghai-international-studies-university",
+          "catalogInstitutionId": "uni-shanghai-international-studies-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-060",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海财经大学",
+          "officialNameEn": "Shanghai University of Finance and Economics",
+          "institutionRef": "uni-shanghai-university-of-finance-and-economics",
+          "catalogInstitutionId": "uni-shanghai-university-of-finance-and-economics",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-061",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海体育学院",
+          "officialNameEn": "Shanghai University of Sport",
+          "institutionRef": "uni-shanghai-university-of-sport",
+          "catalogInstitutionId": "uni-shanghai-university-of-sport",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-062",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海音乐学院",
+          "officialNameEn": "Shanghai Conservatory of Music",
+          "institutionRef": "uni-shanghai-conservatory-of-music",
+          "catalogInstitutionId": "uni-shanghai-conservatory-of-music",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-063",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海大学",
+          "officialNameEn": "Shanghai University",
+          "institutionRef": "uni-shanghai-university",
+          "catalogInstitutionId": "uni-shanghai-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-064",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京大学",
+          "officialNameEn": "Nanjing University",
+          "institutionRef": "uni-nanjing-university",
+          "catalogInstitutionId": "uni-nanjing-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-08-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-08-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-08-scholarships.md"
+    },
+    {
+      "id": "minimax-all-09-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-065",
+          "cohort": "double_first_class",
+          "officialNameZh": "苏州大学",
+          "officialNameEn": "Soochow University",
+          "institutionRef": "uni-soochow-university",
+          "catalogInstitutionId": "uni-soochow-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-066",
+          "cohort": "double_first_class",
+          "officialNameZh": "东南大学",
+          "officialNameEn": "Southeast University",
+          "institutionRef": "uni-southeast-university",
+          "catalogInstitutionId": "uni-southeast-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-067",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京航空航天大学",
+          "officialNameEn": "Nanjing University of Aeronautics and Astronautics",
+          "institutionRef": "uni-nanjing-university-of-aeronautics-and-astronautics",
+          "catalogInstitutionId": "uni-nanjing-university-of-aeronautics-and-astronautics",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-068",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京理工大学",
+          "officialNameEn": "Nanjing University of Science and Technology",
+          "institutionRef": "uni-nanjing-university-of-science-and-technology",
+          "catalogInstitutionId": "uni-nanjing-university-of-science-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-069",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国矿业大学",
+          "officialNameEn": "China University of Mining and Technology",
+          "institutionRef": "uni-china-university-of-mining-and-technology",
+          "catalogInstitutionId": "uni-china-university-of-mining-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-070",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京邮电大学",
+          "officialNameEn": "Nanjing University of Posts and Telecommunications",
+          "institutionRef": "uni-nanjing-university-of-posts-and-telecommunications",
+          "catalogInstitutionId": "uni-nanjing-university-of-posts-and-telecommunications",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-071",
+          "cohort": "double_first_class",
+          "officialNameZh": "河海大学",
+          "officialNameEn": "Hohai University",
+          "institutionRef": "uni-hohai-university",
+          "catalogInstitutionId": "uni-hohai-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-072",
+          "cohort": "double_first_class",
+          "officialNameZh": "江南大学",
+          "officialNameEn": "Jiangnan University",
+          "institutionRef": "uni-jiangnan-university",
+          "catalogInstitutionId": "uni-jiangnan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-09-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-09-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-09-programs.md"
+    },
+    {
+      "id": "minimax-all-09-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-065",
+          "cohort": "double_first_class",
+          "officialNameZh": "苏州大学",
+          "officialNameEn": "Soochow University",
+          "institutionRef": "uni-soochow-university",
+          "catalogInstitutionId": "uni-soochow-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-066",
+          "cohort": "double_first_class",
+          "officialNameZh": "东南大学",
+          "officialNameEn": "Southeast University",
+          "institutionRef": "uni-southeast-university",
+          "catalogInstitutionId": "uni-southeast-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-067",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京航空航天大学",
+          "officialNameEn": "Nanjing University of Aeronautics and Astronautics",
+          "institutionRef": "uni-nanjing-university-of-aeronautics-and-astronautics",
+          "catalogInstitutionId": "uni-nanjing-university-of-aeronautics-and-astronautics",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-068",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京理工大学",
+          "officialNameEn": "Nanjing University of Science and Technology",
+          "institutionRef": "uni-nanjing-university-of-science-and-technology",
+          "catalogInstitutionId": "uni-nanjing-university-of-science-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-069",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国矿业大学",
+          "officialNameEn": "China University of Mining and Technology",
+          "institutionRef": "uni-china-university-of-mining-and-technology",
+          "catalogInstitutionId": "uni-china-university-of-mining-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-070",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京邮电大学",
+          "officialNameEn": "Nanjing University of Posts and Telecommunications",
+          "institutionRef": "uni-nanjing-university-of-posts-and-telecommunications",
+          "catalogInstitutionId": "uni-nanjing-university-of-posts-and-telecommunications",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-071",
+          "cohort": "double_first_class",
+          "officialNameZh": "河海大学",
+          "officialNameEn": "Hohai University",
+          "institutionRef": "uni-hohai-university",
+          "catalogInstitutionId": "uni-hohai-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-072",
+          "cohort": "double_first_class",
+          "officialNameZh": "江南大学",
+          "officialNameEn": "Jiangnan University",
+          "institutionRef": "uni-jiangnan-university",
+          "catalogInstitutionId": "uni-jiangnan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-09-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-09-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-09-scholarships.md"
+    },
+    {
+      "id": "minimax-all-10-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-073",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京林业大学",
+          "officialNameEn": "Nanjing Forestry University",
+          "institutionRef": "uni-nanjing-forestry-university",
+          "catalogInstitutionId": "uni-nanjing-forestry-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-074",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京信息工程大学",
+          "officialNameEn": "Nanjing University of Information Science and Technology",
+          "institutionRef": "uni-nanjing-university-of-information-science-and-technology",
+          "catalogInstitutionId": "uni-nanjing-university-of-information-science-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-075",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京农业大学",
+          "officialNameEn": "Nanjing Agricultural University",
+          "institutionRef": "uni-nanjing-agricultural-university",
+          "catalogInstitutionId": "uni-nanjing-agricultural-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-076",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京医科大学",
+          "officialNameEn": "Nanjing Medical University",
+          "institutionRef": "uni-nanjing-medical-university",
+          "catalogInstitutionId": "uni-nanjing-medical-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-077",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京中医药大学",
+          "officialNameEn": "Nanjing University of Chinese Medicine",
+          "institutionRef": "uni-nanjing-university-of-chinese-medicine",
+          "catalogInstitutionId": "uni-nanjing-university-of-chinese-medicine",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-078",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国药科大学",
+          "officialNameEn": "China Pharmaceutical University",
+          "institutionRef": "uni-china-pharmaceutical-university",
+          "catalogInstitutionId": "uni-china-pharmaceutical-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-079",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京师范大学",
+          "officialNameEn": "Nanjing Normal University",
+          "institutionRef": "uni-nanjing-normal-university",
+          "catalogInstitutionId": "uni-nanjing-normal-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-080",
+          "cohort": "double_first_class",
+          "officialNameZh": "浙江大学",
+          "officialNameEn": "Zhejiang University",
+          "institutionRef": "uni-zhejiang-university",
+          "catalogInstitutionId": "uni-zhejiang-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-10-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-10-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-10-programs.md"
+    },
+    {
+      "id": "minimax-all-10-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-073",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京林业大学",
+          "officialNameEn": "Nanjing Forestry University",
+          "institutionRef": "uni-nanjing-forestry-university",
+          "catalogInstitutionId": "uni-nanjing-forestry-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-074",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京信息工程大学",
+          "officialNameEn": "Nanjing University of Information Science and Technology",
+          "institutionRef": "uni-nanjing-university-of-information-science-and-technology",
+          "catalogInstitutionId": "uni-nanjing-university-of-information-science-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-075",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京农业大学",
+          "officialNameEn": "Nanjing Agricultural University",
+          "institutionRef": "uni-nanjing-agricultural-university",
+          "catalogInstitutionId": "uni-nanjing-agricultural-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-076",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京医科大学",
+          "officialNameEn": "Nanjing Medical University",
+          "institutionRef": "uni-nanjing-medical-university",
+          "catalogInstitutionId": "uni-nanjing-medical-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-077",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京中医药大学",
+          "officialNameEn": "Nanjing University of Chinese Medicine",
+          "institutionRef": "uni-nanjing-university-of-chinese-medicine",
+          "catalogInstitutionId": "uni-nanjing-university-of-chinese-medicine",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-078",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国药科大学",
+          "officialNameEn": "China Pharmaceutical University",
+          "institutionRef": "uni-china-pharmaceutical-university",
+          "catalogInstitutionId": "uni-china-pharmaceutical-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-079",
+          "cohort": "double_first_class",
+          "officialNameZh": "南京师范大学",
+          "officialNameEn": "Nanjing Normal University",
+          "institutionRef": "uni-nanjing-normal-university",
+          "catalogInstitutionId": "uni-nanjing-normal-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-080",
+          "cohort": "double_first_class",
+          "officialNameZh": "浙江大学",
+          "officialNameEn": "Zhejiang University",
+          "institutionRef": "uni-zhejiang-university",
+          "catalogInstitutionId": "uni-zhejiang-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-10-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-10-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-10-scholarships.md"
+    },
+    {
+      "id": "minimax-all-11-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-081",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国美术学院",
+          "officialNameEn": "China Academy of Art",
+          "institutionRef": "uni-china-academy-of-art",
+          "catalogInstitutionId": "uni-china-academy-of-art",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-082",
+          "cohort": "double_first_class",
+          "officialNameZh": "安徽大学",
+          "officialNameEn": "Anhui University",
+          "institutionRef": "uni-anhui-university",
+          "catalogInstitutionId": "uni-anhui-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-083",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国科学技术大学",
+          "officialNameEn": "University of Science and Technology of China",
+          "institutionRef": "uni-university-of-science-and-technology-of-china",
+          "catalogInstitutionId": "uni-university-of-science-and-technology-of-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-084",
+          "cohort": "double_first_class",
+          "officialNameZh": "合肥工业大学",
+          "officialNameEn": "Hefei University of Technology",
+          "institutionRef": "uni-hefei-university-of-technology",
+          "catalogInstitutionId": "uni-hefei-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-085",
+          "cohort": "double_first_class",
+          "officialNameZh": "厦门大学",
+          "officialNameEn": "Xiamen University",
+          "institutionRef": "uni-xiamen-university",
+          "catalogInstitutionId": "uni-xiamen-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-086",
+          "cohort": "double_first_class",
+          "officialNameZh": "福州大学",
+          "officialNameEn": "Fuzhou University",
+          "institutionRef": "uni-fuzhou-university",
+          "catalogInstitutionId": "uni-fuzhou-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-087",
+          "cohort": "double_first_class",
+          "officialNameZh": "南昌大学",
+          "officialNameEn": "Nanchang University",
+          "institutionRef": "uni-nanchang-university",
+          "catalogInstitutionId": "uni-nanchang-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-088",
+          "cohort": "double_first_class",
+          "officialNameZh": "山东大学",
+          "officialNameEn": "Shandong University",
+          "institutionRef": "uni-shandong-university",
+          "catalogInstitutionId": "uni-shandong-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-11-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-11-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-11-programs.md"
+    },
+    {
+      "id": "minimax-all-11-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-081",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国美术学院",
+          "officialNameEn": "China Academy of Art",
+          "institutionRef": "uni-china-academy-of-art",
+          "catalogInstitutionId": "uni-china-academy-of-art",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-082",
+          "cohort": "double_first_class",
+          "officialNameZh": "安徽大学",
+          "officialNameEn": "Anhui University",
+          "institutionRef": "uni-anhui-university",
+          "catalogInstitutionId": "uni-anhui-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-083",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国科学技术大学",
+          "officialNameEn": "University of Science and Technology of China",
+          "institutionRef": "uni-university-of-science-and-technology-of-china",
+          "catalogInstitutionId": "uni-university-of-science-and-technology-of-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-084",
+          "cohort": "double_first_class",
+          "officialNameZh": "合肥工业大学",
+          "officialNameEn": "Hefei University of Technology",
+          "institutionRef": "uni-hefei-university-of-technology",
+          "catalogInstitutionId": "uni-hefei-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-085",
+          "cohort": "double_first_class",
+          "officialNameZh": "厦门大学",
+          "officialNameEn": "Xiamen University",
+          "institutionRef": "uni-xiamen-university",
+          "catalogInstitutionId": "uni-xiamen-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-086",
+          "cohort": "double_first_class",
+          "officialNameZh": "福州大学",
+          "officialNameEn": "Fuzhou University",
+          "institutionRef": "uni-fuzhou-university",
+          "catalogInstitutionId": "uni-fuzhou-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-087",
+          "cohort": "double_first_class",
+          "officialNameZh": "南昌大学",
+          "officialNameEn": "Nanchang University",
+          "institutionRef": "uni-nanchang-university",
+          "catalogInstitutionId": "uni-nanchang-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-088",
+          "cohort": "double_first_class",
+          "officialNameZh": "山东大学",
+          "officialNameEn": "Shandong University",
+          "institutionRef": "uni-shandong-university",
+          "catalogInstitutionId": "uni-shandong-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-11-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-11-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-11-scholarships.md"
+    },
+    {
+      "id": "minimax-all-12-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-089",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国海洋大学",
+          "officialNameEn": "Ocean University of China",
+          "institutionRef": "uni-ocean-university-of-china",
+          "catalogInstitutionId": "uni-ocean-university-of-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-090",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国石油大学（华东）",
+          "officialNameEn": "China University of Petroleum (East China)",
+          "institutionRef": "uni-china-university-of-petroleum-east-china",
+          "catalogInstitutionId": "uni-china-university-of-petroleum-east-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-091",
+          "cohort": "double_first_class",
+          "officialNameZh": "郑州大学",
+          "officialNameEn": "Zhengzhou University",
+          "institutionRef": "uni-zhengzhou-university",
+          "catalogInstitutionId": "uni-zhengzhou-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-092",
+          "cohort": "double_first_class",
+          "officialNameZh": "河南大学",
+          "officialNameEn": "Henan University",
+          "institutionRef": "uni-henan-university",
+          "catalogInstitutionId": "uni-henan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-093",
+          "cohort": "double_first_class",
+          "officialNameZh": "武汉大学",
+          "officialNameEn": "Wuhan University",
+          "institutionRef": "uni-wuhan-university",
+          "catalogInstitutionId": "uni-wuhan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-094",
+          "cohort": "double_first_class",
+          "officialNameZh": "华中科技大学",
+          "officialNameEn": "Huazhong University of Science and Technology",
+          "institutionRef": "uni-huazhong-university-of-science-and-technology",
+          "catalogInstitutionId": "uni-huazhong-university-of-science-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-095",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国地质大学（武汉）",
+          "officialNameEn": "China University of Geosciences (Wuhan)",
+          "institutionRef": "uni-china-university-of-geosciences-wuhan",
+          "catalogInstitutionId": "uni-china-university-of-geosciences-wuhan",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-096",
+          "cohort": "double_first_class",
+          "officialNameZh": "武汉理工大学",
+          "officialNameEn": "Wuhan University of Technology",
+          "institutionRef": "uni-wuhan-university-of-technology",
+          "catalogInstitutionId": "uni-wuhan-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-12-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-12-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-12-programs.md"
+    },
+    {
+      "id": "minimax-all-12-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-089",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国海洋大学",
+          "officialNameEn": "Ocean University of China",
+          "institutionRef": "uni-ocean-university-of-china",
+          "catalogInstitutionId": "uni-ocean-university-of-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-090",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国石油大学（华东）",
+          "officialNameEn": "China University of Petroleum (East China)",
+          "institutionRef": "uni-china-university-of-petroleum-east-china",
+          "catalogInstitutionId": "uni-china-university-of-petroleum-east-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-091",
+          "cohort": "double_first_class",
+          "officialNameZh": "郑州大学",
+          "officialNameEn": "Zhengzhou University",
+          "institutionRef": "uni-zhengzhou-university",
+          "catalogInstitutionId": "uni-zhengzhou-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-092",
+          "cohort": "double_first_class",
+          "officialNameZh": "河南大学",
+          "officialNameEn": "Henan University",
+          "institutionRef": "uni-henan-university",
+          "catalogInstitutionId": "uni-henan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-093",
+          "cohort": "double_first_class",
+          "officialNameZh": "武汉大学",
+          "officialNameEn": "Wuhan University",
+          "institutionRef": "uni-wuhan-university",
+          "catalogInstitutionId": "uni-wuhan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-094",
+          "cohort": "double_first_class",
+          "officialNameZh": "华中科技大学",
+          "officialNameEn": "Huazhong University of Science and Technology",
+          "institutionRef": "uni-huazhong-university-of-science-and-technology",
+          "catalogInstitutionId": "uni-huazhong-university-of-science-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-095",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国地质大学（武汉）",
+          "officialNameEn": "China University of Geosciences (Wuhan)",
+          "institutionRef": "uni-china-university-of-geosciences-wuhan",
+          "catalogInstitutionId": "uni-china-university-of-geosciences-wuhan",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-096",
+          "cohort": "double_first_class",
+          "officialNameZh": "武汉理工大学",
+          "officialNameEn": "Wuhan University of Technology",
+          "institutionRef": "uni-wuhan-university-of-technology",
+          "catalogInstitutionId": "uni-wuhan-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-12-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-12-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-12-scholarships.md"
+    },
+    {
+      "id": "minimax-all-13-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-097",
+          "cohort": "double_first_class",
+          "officialNameZh": "华中农业大学",
+          "officialNameEn": "Huazhong Agricultural University",
+          "institutionRef": "uni-huazhong-agricultural-university",
+          "catalogInstitutionId": "uni-huazhong-agricultural-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-098",
+          "cohort": "double_first_class",
+          "officialNameZh": "华中师范大学",
+          "officialNameEn": "Central China Normal University",
+          "institutionRef": "uni-central-china-normal-university",
+          "catalogInstitutionId": "uni-central-china-normal-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-099",
+          "cohort": "double_first_class",
+          "officialNameZh": "中南财经政法大学",
+          "officialNameEn": "Zhongnan University of Economics and Law",
+          "institutionRef": "uni-zhongnan-university-of-economics-and-law",
+          "catalogInstitutionId": "uni-zhongnan-university-of-economics-and-law",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-100",
+          "cohort": "double_first_class",
+          "officialNameZh": "湘潭大学",
+          "officialNameEn": "Xiangtan University",
+          "institutionRef": "uni-xiangtan-university",
+          "catalogInstitutionId": "uni-xiangtan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-101",
+          "cohort": "double_first_class",
+          "officialNameZh": "湖南大学",
+          "officialNameEn": "Hunan University",
+          "institutionRef": "uni-hunan-university",
+          "catalogInstitutionId": "uni-hunan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-102",
+          "cohort": "double_first_class",
+          "officialNameZh": "中南大学",
+          "officialNameEn": "Central South University",
+          "institutionRef": "uni-central-south-university",
+          "catalogInstitutionId": "uni-central-south-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-103",
+          "cohort": "double_first_class",
+          "officialNameZh": "湖南师范大学",
+          "officialNameEn": "Hunan Normal University",
+          "institutionRef": "uni-hunan-normal-university",
+          "catalogInstitutionId": "uni-hunan-normal-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-104",
+          "cohort": "double_first_class",
+          "officialNameZh": "中山大学",
+          "officialNameEn": "Sun Yat-sen University",
+          "institutionRef": "uni-sun-yat-sen-university",
+          "catalogInstitutionId": "uni-sun-yat-sen-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-13-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-13-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-13-programs.md"
+    },
+    {
+      "id": "minimax-all-13-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-097",
+          "cohort": "double_first_class",
+          "officialNameZh": "华中农业大学",
+          "officialNameEn": "Huazhong Agricultural University",
+          "institutionRef": "uni-huazhong-agricultural-university",
+          "catalogInstitutionId": "uni-huazhong-agricultural-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-098",
+          "cohort": "double_first_class",
+          "officialNameZh": "华中师范大学",
+          "officialNameEn": "Central China Normal University",
+          "institutionRef": "uni-central-china-normal-university",
+          "catalogInstitutionId": "uni-central-china-normal-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-099",
+          "cohort": "double_first_class",
+          "officialNameZh": "中南财经政法大学",
+          "officialNameEn": "Zhongnan University of Economics and Law",
+          "institutionRef": "uni-zhongnan-university-of-economics-and-law",
+          "catalogInstitutionId": "uni-zhongnan-university-of-economics-and-law",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-100",
+          "cohort": "double_first_class",
+          "officialNameZh": "湘潭大学",
+          "officialNameEn": "Xiangtan University",
+          "institutionRef": "uni-xiangtan-university",
+          "catalogInstitutionId": "uni-xiangtan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-101",
+          "cohort": "double_first_class",
+          "officialNameZh": "湖南大学",
+          "officialNameEn": "Hunan University",
+          "institutionRef": "uni-hunan-university",
+          "catalogInstitutionId": "uni-hunan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-102",
+          "cohort": "double_first_class",
+          "officialNameZh": "中南大学",
+          "officialNameEn": "Central South University",
+          "institutionRef": "uni-central-south-university",
+          "catalogInstitutionId": "uni-central-south-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-103",
+          "cohort": "double_first_class",
+          "officialNameZh": "湖南师范大学",
+          "officialNameEn": "Hunan Normal University",
+          "institutionRef": "uni-hunan-normal-university",
+          "catalogInstitutionId": "uni-hunan-normal-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-104",
+          "cohort": "double_first_class",
+          "officialNameZh": "中山大学",
+          "officialNameEn": "Sun Yat-sen University",
+          "institutionRef": "uni-sun-yat-sen-university",
+          "catalogInstitutionId": "uni-sun-yat-sen-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-13-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-13-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-13-scholarships.md"
+    },
+    {
+      "id": "minimax-all-14-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-105",
+          "cohort": "double_first_class",
+          "officialNameZh": "暨南大学",
+          "officialNameEn": "Jinan University",
+          "institutionRef": "uni-jinan-university",
+          "catalogInstitutionId": "uni-jinan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-106",
+          "cohort": "double_first_class",
+          "officialNameZh": "华南理工大学",
+          "officialNameEn": "South China University of Technology",
+          "institutionRef": "uni-south-china-university-of-technology",
+          "catalogInstitutionId": "uni-south-china-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-107",
+          "cohort": "double_first_class",
+          "officialNameZh": "华南农业大学",
+          "officialNameEn": "South China Agricultural University",
+          "institutionRef": "uni-south-china-agricultural-university",
+          "catalogInstitutionId": "uni-south-china-agricultural-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-108",
+          "cohort": "double_first_class",
+          "officialNameZh": "广州医科大学",
+          "officialNameEn": "Guangzhou Medical University",
+          "institutionRef": "uni-guangzhou-medical-university",
+          "catalogInstitutionId": "uni-guangzhou-medical-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-109",
+          "cohort": "double_first_class",
+          "officialNameZh": "广州中医药大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-109",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-110",
+          "cohort": "double_first_class",
+          "officialNameZh": "华南师范大学",
+          "officialNameEn": "South China Normal University",
+          "institutionRef": "uni-south-china-normal-university",
+          "catalogInstitutionId": "uni-south-china-normal-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-111",
+          "cohort": "double_first_class",
+          "officialNameZh": "海南大学",
+          "officialNameEn": "Hainan University",
+          "institutionRef": "uni-hainan-university",
+          "catalogInstitutionId": "uni-hainan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-112",
+          "cohort": "double_first_class",
+          "officialNameZh": "广西大学",
+          "officialNameEn": "Guangxi University",
+          "institutionRef": "uni-guangxi-university",
+          "catalogInstitutionId": "uni-guangxi-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-14-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-14-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-14-programs.md"
+    },
+    {
+      "id": "minimax-all-14-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-105",
+          "cohort": "double_first_class",
+          "officialNameZh": "暨南大学",
+          "officialNameEn": "Jinan University",
+          "institutionRef": "uni-jinan-university",
+          "catalogInstitutionId": "uni-jinan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-106",
+          "cohort": "double_first_class",
+          "officialNameZh": "华南理工大学",
+          "officialNameEn": "South China University of Technology",
+          "institutionRef": "uni-south-china-university-of-technology",
+          "catalogInstitutionId": "uni-south-china-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-107",
+          "cohort": "double_first_class",
+          "officialNameZh": "华南农业大学",
+          "officialNameEn": "South China Agricultural University",
+          "institutionRef": "uni-south-china-agricultural-university",
+          "catalogInstitutionId": "uni-south-china-agricultural-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-108",
+          "cohort": "double_first_class",
+          "officialNameZh": "广州医科大学",
+          "officialNameEn": "Guangzhou Medical University",
+          "institutionRef": "uni-guangzhou-medical-university",
+          "catalogInstitutionId": "uni-guangzhou-medical-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-109",
+          "cohort": "double_first_class",
+          "officialNameZh": "广州中医药大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-109",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-110",
+          "cohort": "double_first_class",
+          "officialNameZh": "华南师范大学",
+          "officialNameEn": "South China Normal University",
+          "institutionRef": "uni-south-china-normal-university",
+          "catalogInstitutionId": "uni-south-china-normal-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-111",
+          "cohort": "double_first_class",
+          "officialNameZh": "海南大学",
+          "officialNameEn": "Hainan University",
+          "institutionRef": "uni-hainan-university",
+          "catalogInstitutionId": "uni-hainan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-112",
+          "cohort": "double_first_class",
+          "officialNameZh": "广西大学",
+          "officialNameEn": "Guangxi University",
+          "institutionRef": "uni-guangxi-university",
+          "catalogInstitutionId": "uni-guangxi-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-14-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-14-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-14-scholarships.md"
+    },
+    {
+      "id": "minimax-all-15-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-113",
+          "cohort": "double_first_class",
+          "officialNameZh": "四川大学",
+          "officialNameEn": "Sichuan University",
+          "institutionRef": "uni-sichuan-university",
+          "catalogInstitutionId": "uni-sichuan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-114",
+          "cohort": "double_first_class",
+          "officialNameZh": "重庆大学",
+          "officialNameEn": "Chongqing University",
+          "institutionRef": "uni-chongqing-university",
+          "catalogInstitutionId": "uni-chongqing-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-115",
+          "cohort": "double_first_class",
+          "officialNameZh": "西南交通大学",
+          "officialNameEn": "Southwest Jiaotong University",
+          "institutionRef": "uni-southwest-jiaotong-university",
+          "catalogInstitutionId": "uni-southwest-jiaotong-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-116",
+          "cohort": "double_first_class",
+          "officialNameZh": "电子科技大学",
+          "officialNameEn": "University of Electronic Science and Technology of China",
+          "institutionRef": "uni-university-of-electronic-science-and-technology-of-china",
+          "catalogInstitutionId": "uni-university-of-electronic-science-and-technology-of-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-117",
+          "cohort": "double_first_class",
+          "officialNameZh": "西南石油大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-117",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-118",
+          "cohort": "double_first_class",
+          "officialNameZh": "成都理工大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-118",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-119",
+          "cohort": "double_first_class",
+          "officialNameZh": "四川农业大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-119",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-120",
+          "cohort": "double_first_class",
+          "officialNameZh": "成都中医药大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-120",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-15-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-15-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-15-programs.md"
+    },
+    {
+      "id": "minimax-all-15-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-113",
+          "cohort": "double_first_class",
+          "officialNameZh": "四川大学",
+          "officialNameEn": "Sichuan University",
+          "institutionRef": "uni-sichuan-university",
+          "catalogInstitutionId": "uni-sichuan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-114",
+          "cohort": "double_first_class",
+          "officialNameZh": "重庆大学",
+          "officialNameEn": "Chongqing University",
+          "institutionRef": "uni-chongqing-university",
+          "catalogInstitutionId": "uni-chongqing-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-115",
+          "cohort": "double_first_class",
+          "officialNameZh": "西南交通大学",
+          "officialNameEn": "Southwest Jiaotong University",
+          "institutionRef": "uni-southwest-jiaotong-university",
+          "catalogInstitutionId": "uni-southwest-jiaotong-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-116",
+          "cohort": "double_first_class",
+          "officialNameZh": "电子科技大学",
+          "officialNameEn": "University of Electronic Science and Technology of China",
+          "institutionRef": "uni-university-of-electronic-science-and-technology-of-china",
+          "catalogInstitutionId": "uni-university-of-electronic-science-and-technology-of-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-117",
+          "cohort": "double_first_class",
+          "officialNameZh": "西南石油大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-117",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-118",
+          "cohort": "double_first_class",
+          "officialNameZh": "成都理工大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-118",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-119",
+          "cohort": "double_first_class",
+          "officialNameZh": "四川农业大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-119",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-120",
+          "cohort": "double_first_class",
+          "officialNameZh": "成都中医药大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-120",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-15-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-15-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-15-scholarships.md"
+    },
+    {
+      "id": "minimax-all-16-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-121",
+          "cohort": "double_first_class",
+          "officialNameZh": "西南大学",
+          "officialNameEn": "Southwest University",
+          "institutionRef": "uni-southwest-university",
+          "catalogInstitutionId": "uni-southwest-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-122",
+          "cohort": "double_first_class",
+          "officialNameZh": "西南财经大学",
+          "officialNameEn": "Southwestern University of Finance and Economics",
+          "institutionRef": "uni-southwestern-university-of-finance-and-economics",
+          "catalogInstitutionId": "uni-southwestern-university-of-finance-and-economics",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-123",
+          "cohort": "double_first_class",
+          "officialNameZh": "贵州大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-123",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-124",
+          "cohort": "double_first_class",
+          "officialNameZh": "云南大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-124",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-125",
+          "cohort": "double_first_class",
+          "officialNameZh": "西藏大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-125",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-126",
+          "cohort": "double_first_class",
+          "officialNameZh": "西北大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-126",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-127",
+          "cohort": "double_first_class",
+          "officialNameZh": "西安交通大学",
+          "officialNameEn": "Xi'an Jiaotong University",
+          "institutionRef": "uni-xian-jiaotong-university",
+          "catalogInstitutionId": "uni-xian-jiaotong-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-128",
+          "cohort": "double_first_class",
+          "officialNameZh": "西北工业大学",
+          "officialNameEn": "Northwestern Polytechnical University",
+          "institutionRef": "uni-northwestern-polytechnical-university",
+          "catalogInstitutionId": "uni-northwestern-polytechnical-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-16-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-16-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-16-programs.md"
+    },
+    {
+      "id": "minimax-all-16-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-121",
+          "cohort": "double_first_class",
+          "officialNameZh": "西南大学",
+          "officialNameEn": "Southwest University",
+          "institutionRef": "uni-southwest-university",
+          "catalogInstitutionId": "uni-southwest-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-122",
+          "cohort": "double_first_class",
+          "officialNameZh": "西南财经大学",
+          "officialNameEn": "Southwestern University of Finance and Economics",
+          "institutionRef": "uni-southwestern-university-of-finance-and-economics",
+          "catalogInstitutionId": "uni-southwestern-university-of-finance-and-economics",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-123",
+          "cohort": "double_first_class",
+          "officialNameZh": "贵州大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-123",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-124",
+          "cohort": "double_first_class",
+          "officialNameZh": "云南大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-124",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-125",
+          "cohort": "double_first_class",
+          "officialNameZh": "西藏大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-125",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-126",
+          "cohort": "double_first_class",
+          "officialNameZh": "西北大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-126",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-127",
+          "cohort": "double_first_class",
+          "officialNameZh": "西安交通大学",
+          "officialNameEn": "Xi'an Jiaotong University",
+          "institutionRef": "uni-xian-jiaotong-university",
+          "catalogInstitutionId": "uni-xian-jiaotong-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-128",
+          "cohort": "double_first_class",
+          "officialNameZh": "西北工业大学",
+          "officialNameEn": "Northwestern Polytechnical University",
+          "institutionRef": "uni-northwestern-polytechnical-university",
+          "catalogInstitutionId": "uni-northwestern-polytechnical-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-16-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-16-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-16-scholarships.md"
+    },
+    {
+      "id": "minimax-all-17-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-129",
+          "cohort": "double_first_class",
+          "officialNameZh": "西安电子科技大学",
+          "officialNameEn": "Xidian University",
+          "institutionRef": "uni-xidian-university",
+          "catalogInstitutionId": "uni-xidian-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-130",
+          "cohort": "double_first_class",
+          "officialNameZh": "长安大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-130",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-131",
+          "cohort": "double_first_class",
+          "officialNameZh": "西北农林科技大学",
+          "officialNameEn": "Northwest A&F University",
+          "institutionRef": "uni-northwest-a-and-f-university",
+          "catalogInstitutionId": "uni-northwest-a-and-f-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-132",
+          "cohort": "double_first_class",
+          "officialNameZh": "陕西师范大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-132",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-133",
+          "cohort": "double_first_class",
+          "officialNameZh": "兰州大学",
+          "officialNameEn": "Lanzhou University",
+          "institutionRef": "uni-lanzhou-university",
+          "catalogInstitutionId": "uni-lanzhou-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-134",
+          "cohort": "double_first_class",
+          "officialNameZh": "青海大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-134",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-135",
+          "cohort": "double_first_class",
+          "officialNameZh": "宁夏大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-135",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-136",
+          "cohort": "double_first_class",
+          "officialNameZh": "新疆大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-136",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-17-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-17-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-17-programs.md"
+    },
+    {
+      "id": "minimax-all-17-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-129",
+          "cohort": "double_first_class",
+          "officialNameZh": "西安电子科技大学",
+          "officialNameEn": "Xidian University",
+          "institutionRef": "uni-xidian-university",
+          "catalogInstitutionId": "uni-xidian-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-130",
+          "cohort": "double_first_class",
+          "officialNameZh": "长安大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-130",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-131",
+          "cohort": "double_first_class",
+          "officialNameZh": "西北农林科技大学",
+          "officialNameEn": "Northwest A&F University",
+          "institutionRef": "uni-northwest-a-and-f-university",
+          "catalogInstitutionId": "uni-northwest-a-and-f-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-132",
+          "cohort": "double_first_class",
+          "officialNameZh": "陕西师范大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-132",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-133",
+          "cohort": "double_first_class",
+          "officialNameZh": "兰州大学",
+          "officialNameEn": "Lanzhou University",
+          "institutionRef": "uni-lanzhou-university",
+          "catalogInstitutionId": "uni-lanzhou-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-134",
+          "cohort": "double_first_class",
+          "officialNameZh": "青海大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-134",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-135",
+          "cohort": "double_first_class",
+          "officialNameZh": "宁夏大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-135",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-136",
+          "cohort": "double_first_class",
+          "officialNameZh": "新疆大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-136",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-17-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-17-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-17-scholarships.md"
+    },
+    {
+      "id": "minimax-all-18-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-137",
+          "cohort": "double_first_class",
+          "officialNameZh": "石河子大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-137",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-138",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国矿业大学（北京）",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-138",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-139",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国石油大学（北京）",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-139",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-140",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国地质大学（北京）",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-140",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-141",
+          "cohort": "double_first_class",
+          "officialNameZh": "宁波大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-141",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-142",
+          "cohort": "double_first_class",
+          "officialNameZh": "南方科技大学",
+          "officialNameEn": "Southern University of Science and Technology",
+          "institutionRef": "uni-southern-university-of-science-and-technology",
+          "catalogInstitutionId": "uni-southern-university-of-science-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-143",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海科技大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-143",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-144",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国科学院大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-144",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-18-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-18-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-18-programs.md"
+    },
+    {
+      "id": "minimax-all-18-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "dfc-2022-137",
+          "cohort": "double_first_class",
+          "officialNameZh": "石河子大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-137",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-138",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国矿业大学（北京）",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-138",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-139",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国石油大学（北京）",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-139",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-140",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国地质大学（北京）",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-140",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-141",
+          "cohort": "double_first_class",
+          "officialNameZh": "宁波大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-141",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-142",
+          "cohort": "double_first_class",
+          "officialNameZh": "南方科技大学",
+          "officialNameEn": "Southern University of Science and Technology",
+          "institutionRef": "uni-southern-university-of-science-and-technology",
+          "catalogInstitutionId": "uni-southern-university-of-science-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-143",
+          "cohort": "double_first_class",
+          "officialNameZh": "上海科技大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-143",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        },
+        {
+          "targetId": "dfc-2022-144",
+          "cohort": "double_first_class",
+          "officialNameZh": "中国科学院大学",
+          "officialNameEn": null,
+          "institutionRef": "dfc-2022-144",
+          "catalogInstitutionId": null,
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-18-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-18-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-18-scholarships.md"
+    },
+    {
+      "id": "minimax-all-19-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "regional-001",
+          "cohort": "regional_priority",
+          "officialNameZh": "广东外语外贸大学",
+          "officialNameEn": "Guangdong University of Foreign Studies",
+          "institutionRef": "uni-guangdong-university-of-foreign-studies",
+          "catalogInstitutionId": null,
+          "province": "Guangdong",
+          "city": "Guangzhou",
+          "focusTags": [
+            "languages",
+            "business",
+            "international-studies"
+          ]
+        },
+        {
+          "targetId": "regional-002",
+          "cohort": "regional_priority",
+          "officialNameZh": "北京语言大学",
+          "officialNameEn": "Beijing Language and Culture University",
+          "institutionRef": "uni-beijing-language-and-culture-university",
+          "catalogInstitutionId": "uni-beijing-language-and-culture-university",
+          "province": "Beijing",
+          "city": "Beijing",
+          "focusTags": [
+            "languages",
+            "chinese-education"
+          ]
+        },
+        {
+          "targetId": "regional-003",
+          "cohort": "regional_priority",
+          "officialNameZh": "深圳大学",
+          "officialNameEn": "Shenzhen University",
+          "institutionRef": "uni-shenzhen-university",
+          "catalogInstitutionId": "uni-shenzhen-university",
+          "province": "Guangdong",
+          "city": "Shenzhen",
+          "focusTags": [
+            "engineering",
+            "business",
+            "medicine"
+          ]
+        },
+        {
+          "targetId": "regional-004",
+          "cohort": "regional_priority",
+          "officialNameZh": "汕头大学",
+          "officialNameEn": "Shantou University",
+          "institutionRef": "uni-shantou-university",
+          "catalogInstitutionId": null,
+          "province": "Guangdong",
+          "city": "Shantou",
+          "focusTags": [
+            "medicine",
+            "engineering",
+            "business"
+          ]
+        },
+        {
+          "targetId": "regional-005",
+          "cohort": "regional_priority",
+          "officialNameZh": "南方医科大学",
+          "officialNameEn": "Southern Medical University",
+          "institutionRef": "uni-southern-medical-university",
+          "catalogInstitutionId": null,
+          "province": "Guangdong",
+          "city": "Guangzhou",
+          "focusTags": [
+            "medicine"
+          ]
+        },
+        {
+          "targetId": "regional-006",
+          "cohort": "regional_priority",
+          "officialNameZh": "广州大学",
+          "officialNameEn": "Guangzhou University",
+          "institutionRef": "uni-guangzhou-university",
+          "catalogInstitutionId": null,
+          "province": "Guangdong",
+          "city": "Guangzhou",
+          "focusTags": [
+            "engineering",
+            "business",
+            "humanities"
+          ]
+        },
+        {
+          "targetId": "regional-007",
+          "cohort": "regional_priority",
+          "officialNameZh": "首都经济贸易大学",
+          "officialNameEn": "Capital University of Economics and Business",
+          "institutionRef": "uni-capital-university-of-economics-and-business",
+          "catalogInstitutionId": null,
+          "province": "Beijing",
+          "city": "Beijing",
+          "focusTags": [
+            "business",
+            "economics"
+          ]
+        },
+        {
+          "targetId": "regional-008",
+          "cohort": "regional_priority",
+          "officialNameZh": "浙江工业大学",
+          "officialNameEn": "Zhejiang University of Technology",
+          "institutionRef": "uni-zhejiang-university-of-technology",
+          "catalogInstitutionId": null,
+          "province": "Zhejiang",
+          "city": "Hangzhou",
+          "focusTags": [
+            "engineering",
+            "science"
+          ]
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-19-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-19-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-19-programs.md"
+    },
+    {
+      "id": "minimax-all-19-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "regional-001",
+          "cohort": "regional_priority",
+          "officialNameZh": "广东外语外贸大学",
+          "officialNameEn": "Guangdong University of Foreign Studies",
+          "institutionRef": "uni-guangdong-university-of-foreign-studies",
+          "catalogInstitutionId": null,
+          "province": "Guangdong",
+          "city": "Guangzhou",
+          "focusTags": [
+            "languages",
+            "business",
+            "international-studies"
+          ]
+        },
+        {
+          "targetId": "regional-002",
+          "cohort": "regional_priority",
+          "officialNameZh": "北京语言大学",
+          "officialNameEn": "Beijing Language and Culture University",
+          "institutionRef": "uni-beijing-language-and-culture-university",
+          "catalogInstitutionId": "uni-beijing-language-and-culture-university",
+          "province": "Beijing",
+          "city": "Beijing",
+          "focusTags": [
+            "languages",
+            "chinese-education"
+          ]
+        },
+        {
+          "targetId": "regional-003",
+          "cohort": "regional_priority",
+          "officialNameZh": "深圳大学",
+          "officialNameEn": "Shenzhen University",
+          "institutionRef": "uni-shenzhen-university",
+          "catalogInstitutionId": "uni-shenzhen-university",
+          "province": "Guangdong",
+          "city": "Shenzhen",
+          "focusTags": [
+            "engineering",
+            "business",
+            "medicine"
+          ]
+        },
+        {
+          "targetId": "regional-004",
+          "cohort": "regional_priority",
+          "officialNameZh": "汕头大学",
+          "officialNameEn": "Shantou University",
+          "institutionRef": "uni-shantou-university",
+          "catalogInstitutionId": null,
+          "province": "Guangdong",
+          "city": "Shantou",
+          "focusTags": [
+            "medicine",
+            "engineering",
+            "business"
+          ]
+        },
+        {
+          "targetId": "regional-005",
+          "cohort": "regional_priority",
+          "officialNameZh": "南方医科大学",
+          "officialNameEn": "Southern Medical University",
+          "institutionRef": "uni-southern-medical-university",
+          "catalogInstitutionId": null,
+          "province": "Guangdong",
+          "city": "Guangzhou",
+          "focusTags": [
+            "medicine"
+          ]
+        },
+        {
+          "targetId": "regional-006",
+          "cohort": "regional_priority",
+          "officialNameZh": "广州大学",
+          "officialNameEn": "Guangzhou University",
+          "institutionRef": "uni-guangzhou-university",
+          "catalogInstitutionId": null,
+          "province": "Guangdong",
+          "city": "Guangzhou",
+          "focusTags": [
+            "engineering",
+            "business",
+            "humanities"
+          ]
+        },
+        {
+          "targetId": "regional-007",
+          "cohort": "regional_priority",
+          "officialNameZh": "首都经济贸易大学",
+          "officialNameEn": "Capital University of Economics and Business",
+          "institutionRef": "uni-capital-university-of-economics-and-business",
+          "catalogInstitutionId": null,
+          "province": "Beijing",
+          "city": "Beijing",
+          "focusTags": [
+            "business",
+            "economics"
+          ]
+        },
+        {
+          "targetId": "regional-008",
+          "cohort": "regional_priority",
+          "officialNameZh": "浙江工业大学",
+          "officialNameEn": "Zhejiang University of Technology",
+          "institutionRef": "uni-zhejiang-university-of-technology",
+          "catalogInstitutionId": null,
+          "province": "Zhejiang",
+          "city": "Hangzhou",
+          "focusTags": [
+            "engineering",
+            "science"
+          ]
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-19-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-19-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-19-scholarships.md"
+    },
+    {
+      "id": "minimax-all-20-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "regional-009",
+          "cohort": "regional_priority",
+          "officialNameZh": "杭州电子科技大学",
+          "officialNameEn": "Hangzhou Dianzi University",
+          "institutionRef": "uni-hangzhou-dianzi-university",
+          "catalogInstitutionId": null,
+          "province": "Zhejiang",
+          "city": "Hangzhou",
+          "focusTags": [
+            "engineering",
+            "computer-science"
+          ]
+        },
+        {
+          "targetId": "regional-010",
+          "cohort": "regional_priority",
+          "officialNameZh": "江苏大学",
+          "officialNameEn": "Jiangsu University",
+          "institutionRef": "uni-jiangsu-university",
+          "catalogInstitutionId": null,
+          "province": "Jiangsu",
+          "city": "Zhenjiang",
+          "focusTags": [
+            "engineering",
+            "medicine",
+            "business"
+          ]
+        },
+        {
+          "targetId": "regional-011",
+          "cohort": "regional_priority",
+          "officialNameZh": "南京审计大学",
+          "officialNameEn": "Nanjing Audit University",
+          "institutionRef": "uni-nanjing-audit-university",
+          "catalogInstitutionId": null,
+          "province": "Jiangsu",
+          "city": "Nanjing",
+          "focusTags": [
+            "business",
+            "economics",
+            "law"
+          ]
+        },
+        {
+          "targetId": "regional-012",
+          "cohort": "regional_priority",
+          "officialNameZh": "华侨大学",
+          "officialNameEn": "Huaqiao University",
+          "institutionRef": "uni-huaqiao-university",
+          "catalogInstitutionId": null,
+          "province": "Fujian",
+          "city": "Quanzhou",
+          "focusTags": [
+            "chinese-education",
+            "business",
+            "engineering"
+          ]
+        },
+        {
+          "targetId": "regional-013",
+          "cohort": "regional_priority",
+          "officialNameZh": "福建师范大学",
+          "officialNameEn": "Fujian Normal University",
+          "institutionRef": "uni-fujian-normal-university",
+          "catalogInstitutionId": null,
+          "province": "Fujian",
+          "city": "Fuzhou",
+          "focusTags": [
+            "education",
+            "chinese-education",
+            "humanities"
+          ]
+        },
+        {
+          "targetId": "regional-014",
+          "cohort": "regional_priority",
+          "officialNameZh": "中国医科大学",
+          "officialNameEn": "China Medical University",
+          "institutionRef": "uni-china-medical-university",
+          "catalogInstitutionId": null,
+          "province": "Liaoning",
+          "city": "Shenyang",
+          "focusTags": [
+            "medicine"
+          ]
+        },
+        {
+          "targetId": "regional-015",
+          "cohort": "regional_priority",
+          "officialNameZh": "大连医科大学",
+          "officialNameEn": "Dalian Medical University",
+          "institutionRef": "uni-dalian-medical-university",
+          "catalogInstitutionId": null,
+          "province": "Liaoning",
+          "city": "Dalian",
+          "focusTags": [
+            "medicine"
+          ]
+        },
+        {
+          "targetId": "regional-016",
+          "cohort": "regional_priority",
+          "officialNameZh": "重庆医科大学",
+          "officialNameEn": "Chongqing Medical University",
+          "institutionRef": "uni-chongqing-medical-university",
+          "catalogInstitutionId": null,
+          "province": "Chongqing",
+          "city": "Chongqing",
+          "focusTags": [
+            "medicine"
+          ]
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-20-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-20-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-20-programs.md"
+    },
+    {
+      "id": "minimax-all-20-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "regional-009",
+          "cohort": "regional_priority",
+          "officialNameZh": "杭州电子科技大学",
+          "officialNameEn": "Hangzhou Dianzi University",
+          "institutionRef": "uni-hangzhou-dianzi-university",
+          "catalogInstitutionId": null,
+          "province": "Zhejiang",
+          "city": "Hangzhou",
+          "focusTags": [
+            "engineering",
+            "computer-science"
+          ]
+        },
+        {
+          "targetId": "regional-010",
+          "cohort": "regional_priority",
+          "officialNameZh": "江苏大学",
+          "officialNameEn": "Jiangsu University",
+          "institutionRef": "uni-jiangsu-university",
+          "catalogInstitutionId": null,
+          "province": "Jiangsu",
+          "city": "Zhenjiang",
+          "focusTags": [
+            "engineering",
+            "medicine",
+            "business"
+          ]
+        },
+        {
+          "targetId": "regional-011",
+          "cohort": "regional_priority",
+          "officialNameZh": "南京审计大学",
+          "officialNameEn": "Nanjing Audit University",
+          "institutionRef": "uni-nanjing-audit-university",
+          "catalogInstitutionId": null,
+          "province": "Jiangsu",
+          "city": "Nanjing",
+          "focusTags": [
+            "business",
+            "economics",
+            "law"
+          ]
+        },
+        {
+          "targetId": "regional-012",
+          "cohort": "regional_priority",
+          "officialNameZh": "华侨大学",
+          "officialNameEn": "Huaqiao University",
+          "institutionRef": "uni-huaqiao-university",
+          "catalogInstitutionId": null,
+          "province": "Fujian",
+          "city": "Quanzhou",
+          "focusTags": [
+            "chinese-education",
+            "business",
+            "engineering"
+          ]
+        },
+        {
+          "targetId": "regional-013",
+          "cohort": "regional_priority",
+          "officialNameZh": "福建师范大学",
+          "officialNameEn": "Fujian Normal University",
+          "institutionRef": "uni-fujian-normal-university",
+          "catalogInstitutionId": null,
+          "province": "Fujian",
+          "city": "Fuzhou",
+          "focusTags": [
+            "education",
+            "chinese-education",
+            "humanities"
+          ]
+        },
+        {
+          "targetId": "regional-014",
+          "cohort": "regional_priority",
+          "officialNameZh": "中国医科大学",
+          "officialNameEn": "China Medical University",
+          "institutionRef": "uni-china-medical-university",
+          "catalogInstitutionId": null,
+          "province": "Liaoning",
+          "city": "Shenyang",
+          "focusTags": [
+            "medicine"
+          ]
+        },
+        {
+          "targetId": "regional-015",
+          "cohort": "regional_priority",
+          "officialNameZh": "大连医科大学",
+          "officialNameEn": "Dalian Medical University",
+          "institutionRef": "uni-dalian-medical-university",
+          "catalogInstitutionId": null,
+          "province": "Liaoning",
+          "city": "Dalian",
+          "focusTags": [
+            "medicine"
+          ]
+        },
+        {
+          "targetId": "regional-016",
+          "cohort": "regional_priority",
+          "officialNameZh": "重庆医科大学",
+          "officialNameEn": "Chongqing Medical University",
+          "institutionRef": "uni-chongqing-medical-university",
+          "catalogInstitutionId": null,
+          "province": "Chongqing",
+          "city": "Chongqing",
+          "focusTags": [
+            "medicine"
+          ]
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-20-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-20-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-20-scholarships.md"
+    },
+    {
+      "id": "minimax-all-21-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "regional-017",
+          "cohort": "regional_priority",
+          "officialNameZh": "昆明医科大学",
+          "officialNameEn": "Kunming Medical University",
+          "institutionRef": "uni-kunming-medical-university",
+          "catalogInstitutionId": null,
+          "province": "Yunnan",
+          "city": "Kunming",
+          "focusTags": [
+            "medicine"
+          ]
+        },
+        {
+          "targetId": "regional-018",
+          "cohort": "regional_priority",
+          "officialNameZh": "云南师范大学",
+          "officialNameEn": "Yunnan Normal University",
+          "institutionRef": "uni-yunnan-normal-university",
+          "catalogInstitutionId": null,
+          "province": "Yunnan",
+          "city": "Kunming",
+          "focusTags": [
+            "education",
+            "chinese-education"
+          ]
+        },
+        {
+          "targetId": "regional-019",
+          "cohort": "regional_priority",
+          "officialNameZh": "西安外国语大学",
+          "officialNameEn": "Xi'an International Studies University",
+          "institutionRef": "uni-xian-international-studies-university",
+          "catalogInstitutionId": null,
+          "province": "Shaanxi",
+          "city": "Xi'an",
+          "focusTags": [
+            "languages",
+            "international-studies"
+          ]
+        },
+        {
+          "targetId": "regional-020",
+          "cohort": "regional_priority",
+          "officialNameZh": "四川外国语大学",
+          "officialNameEn": "Sichuan International Studies University",
+          "institutionRef": "uni-sichuan-international-studies-university",
+          "catalogInstitutionId": null,
+          "province": "Chongqing",
+          "city": "Chongqing",
+          "focusTags": [
+            "languages",
+            "international-studies"
+          ]
+        },
+        {
+          "targetId": "regional-021",
+          "cohort": "regional_priority",
+          "officialNameZh": "东北财经大学",
+          "officialNameEn": "Dongbei University of Finance and Economics",
+          "institutionRef": "uni-dongbei-university-of-finance-and-economics",
+          "catalogInstitutionId": null,
+          "province": "Liaoning",
+          "city": "Dalian",
+          "focusTags": [
+            "business",
+            "economics"
+          ]
+        },
+        {
+          "targetId": "regional-022",
+          "cohort": "regional_priority",
+          "officialNameZh": "上海理工大学",
+          "officialNameEn": "University of Shanghai for Science and Technology",
+          "institutionRef": "uni-university-of-shanghai-for-science-and-technology",
+          "catalogInstitutionId": null,
+          "province": "Shanghai",
+          "city": "Shanghai",
+          "focusTags": [
+            "engineering",
+            "business"
+          ]
+        },
+        {
+          "targetId": "regional-023",
+          "cohort": "regional_priority",
+          "officialNameZh": "上海师范大学",
+          "officialNameEn": "Shanghai Normal University",
+          "institutionRef": "uni-shanghai-normal-university",
+          "catalogInstitutionId": null,
+          "province": "Shanghai",
+          "city": "Shanghai",
+          "focusTags": [
+            "education",
+            "chinese-education",
+            "humanities"
+          ]
+        },
+        {
+          "targetId": "regional-024",
+          "cohort": "regional_priority",
+          "officialNameZh": "天津外国语大学",
+          "officialNameEn": "Tianjin Foreign Studies University",
+          "institutionRef": "uni-tianjin-foreign-studies-university",
+          "catalogInstitutionId": null,
+          "province": "Tianjin",
+          "city": "Tianjin",
+          "focusTags": [
+            "languages",
+            "international-studies"
+          ]
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-21-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-21-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-21-programs.md"
+    },
+    {
+      "id": "minimax-all-21-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "regional-017",
+          "cohort": "regional_priority",
+          "officialNameZh": "昆明医科大学",
+          "officialNameEn": "Kunming Medical University",
+          "institutionRef": "uni-kunming-medical-university",
+          "catalogInstitutionId": null,
+          "province": "Yunnan",
+          "city": "Kunming",
+          "focusTags": [
+            "medicine"
+          ]
+        },
+        {
+          "targetId": "regional-018",
+          "cohort": "regional_priority",
+          "officialNameZh": "云南师范大学",
+          "officialNameEn": "Yunnan Normal University",
+          "institutionRef": "uni-yunnan-normal-university",
+          "catalogInstitutionId": null,
+          "province": "Yunnan",
+          "city": "Kunming",
+          "focusTags": [
+            "education",
+            "chinese-education"
+          ]
+        },
+        {
+          "targetId": "regional-019",
+          "cohort": "regional_priority",
+          "officialNameZh": "西安外国语大学",
+          "officialNameEn": "Xi'an International Studies University",
+          "institutionRef": "uni-xian-international-studies-university",
+          "catalogInstitutionId": null,
+          "province": "Shaanxi",
+          "city": "Xi'an",
+          "focusTags": [
+            "languages",
+            "international-studies"
+          ]
+        },
+        {
+          "targetId": "regional-020",
+          "cohort": "regional_priority",
+          "officialNameZh": "四川外国语大学",
+          "officialNameEn": "Sichuan International Studies University",
+          "institutionRef": "uni-sichuan-international-studies-university",
+          "catalogInstitutionId": null,
+          "province": "Chongqing",
+          "city": "Chongqing",
+          "focusTags": [
+            "languages",
+            "international-studies"
+          ]
+        },
+        {
+          "targetId": "regional-021",
+          "cohort": "regional_priority",
+          "officialNameZh": "东北财经大学",
+          "officialNameEn": "Dongbei University of Finance and Economics",
+          "institutionRef": "uni-dongbei-university-of-finance-and-economics",
+          "catalogInstitutionId": null,
+          "province": "Liaoning",
+          "city": "Dalian",
+          "focusTags": [
+            "business",
+            "economics"
+          ]
+        },
+        {
+          "targetId": "regional-022",
+          "cohort": "regional_priority",
+          "officialNameZh": "上海理工大学",
+          "officialNameEn": "University of Shanghai for Science and Technology",
+          "institutionRef": "uni-university-of-shanghai-for-science-and-technology",
+          "catalogInstitutionId": null,
+          "province": "Shanghai",
+          "city": "Shanghai",
+          "focusTags": [
+            "engineering",
+            "business"
+          ]
+        },
+        {
+          "targetId": "regional-023",
+          "cohort": "regional_priority",
+          "officialNameZh": "上海师范大学",
+          "officialNameEn": "Shanghai Normal University",
+          "institutionRef": "uni-shanghai-normal-university",
+          "catalogInstitutionId": null,
+          "province": "Shanghai",
+          "city": "Shanghai",
+          "focusTags": [
+            "education",
+            "chinese-education",
+            "humanities"
+          ]
+        },
+        {
+          "targetId": "regional-024",
+          "cohort": "regional_priority",
+          "officialNameZh": "天津外国语大学",
+          "officialNameEn": "Tianjin Foreign Studies University",
+          "institutionRef": "uni-tianjin-foreign-studies-university",
+          "catalogInstitutionId": null,
+          "province": "Tianjin",
+          "city": "Tianjin",
+          "focusTags": [
+            "languages",
+            "international-studies"
+          ]
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-21-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-21-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-21-scholarships.md"
+    },
+    {
+      "id": "minimax-all-22-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "regional-025",
+          "cohort": "regional_priority",
+          "officialNameZh": "广西医科大学",
+          "officialNameEn": "Guangxi Medical University",
+          "institutionRef": "uni-guangxi-medical-university",
+          "catalogInstitutionId": null,
+          "province": "Guangxi",
+          "city": "Nanning",
+          "focusTags": [
+            "medicine"
+          ]
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-22-programs.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-22-programs.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-22-programs.md"
+    },
+    {
+      "id": "minimax-all-22-scholarships",
+      "kind": "scholarships",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "regional-025",
+          "cohort": "regional_priority",
+          "officialNameZh": "广西医科大学",
+          "officialNameEn": "Guangxi Medical University",
+          "institutionRef": "uni-guangxi-medical-university",
+          "catalogInstitutionId": null,
+          "province": "Guangxi",
+          "city": "Nanning",
+          "focusTags": [
+            "medicine"
+          ]
+        }
+      ],
+      "promptPath": "quality/minimax-harvest/tasks/minimax-all-22-scholarships.md",
+      "outputJsonPath": "quality/minimax-harvest/inbox/minimax-all-22-scholarships.json",
+      "outputMarkdownPath": "quality/minimax-harvest/inbox/minimax-all-22-scholarships.md"
+    }
+  ]
+}
