@@ -1,0 +1,98 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-expand-47-scholarships",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion (scholarship documented-gap pass)",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false,
+    "evidenceSource": "no live fetch succeeded; every scholarship is source_unavailable"
+  },
+  "scope": {
+    "schoolIds": [
+      "uni-east-china-normal-university"
+    ],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-east-china-normal-university",
+      "name": {
+        "en": "East China Normal University",
+        "zh": "华东师范大学",
+        "ru": "Восточно-Китайский педагогический университет"
+      },
+      "cityId": "city-shanghai",
+      "region": "east",
+      "officialUrl": "https://english.ecnu.edu.cn/",
+      "admissionsUrl": "https://lxs.ecnu.edu.cn/en/"
+    }
+  ],
+  "programs": [],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-east-china-normal-university",
+      "categories": {
+        "international_admissions_home": "needs_follow_up",
+        "bachelor_catalog": "needs_follow_up",
+        "master_catalog": "needs_follow_up",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "needs_follow_up",
+        "current_admission_guide": "needs_follow_up",
+        "fees": "needs_follow_up",
+        "deadlines": "needs_follow_up",
+        "application_system": "needs_follow_up",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [
+    {
+      "institutionId": "uni-east-china-normal-university",
+      "reason": "No verifiable scholarship identity could be produced for this school in the present pass because every WebFetch against the official *.edu.cn domain was blocked by the sandbox. The school is recorded with a documented-gap sourceFailure and the URL candidates that were attempted; the next pass must perform real fetches and re-write the field."
+    }
+  ],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-east-china-normal-university",
+      "category": "scholarships",
+      "reason": "University-level, faculty/department-level, and clearly-applicable government scholarship pages could not be read in this pass. Every WebFetch attempt was blocked by the sandbox.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://www.eastchinanormaluniversity.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for eastchinanormaluniversity.edu.cn; no page body retrieved; cannot cite as official evidence."
+        },
+        {
+          "officialUrl": "https://iso.eastchinanormaluniversity.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for eastchinanormaluniversity.edu.cn; no page body retrieved; cannot cite as official evidence."
+        },
+        {
+          "officialUrl": "https://iie.eastchinanormaluniversity.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for eastchinanormaluniversity.edu.cn; no page body retrieved; cannot cite as official evidence."
+        },
+        {
+          "officialUrl": "https://study.eastchinanormaluniversity.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for eastchinanormaluniversity.edu.cn; no page body retrieved; cannot cite as official evidence."
+        },
+        {
+          "officialUrl": "https://international.eastchinanormaluniversity.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for eastchinanormaluniversity.edu.cn; no page body retrieved; cannot cite as official evidence."
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 0,
+    "scholarshipsCollected": 0,
+    "publishableScholarships": 0,
+    "sourceFailures": 1
+  }
+}
