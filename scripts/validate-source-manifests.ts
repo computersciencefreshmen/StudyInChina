@@ -20,16 +20,14 @@ const EXPECTED_CATALOG_STATUS = {
   'uni-fudan-university': 'existing',
   'uni-shanghai-jiao-tong-university': 'existing',
   'uni-zhejiang-university': 'existing',
-  'uni-university-of-science-and-technology-of-china': 'planned_addition',
+  'uni-university-of-science-and-technology-of-china': 'existing',
   'uni-nanjing-university': 'existing',
   'uni-wuhan-university': 'existing',
   'uni-sun-yat-sen-university': 'existing',
   'uni-harbin-institute-of-technology': 'existing',
 } as const
 
-const LOCKED_EXISTING_CATALOG_SIZE = 40
-const RESERVED_USTC_ID =
-  'uni-university-of-science-and-technology-of-china'
+const MINIMUM_EXISTING_CATALOG_SIZE = 120
 
 export const EXPECTED_PILOT_INSTITUTION_IDS = Object.keys(
   EXPECTED_CATALOG_STATUS,
@@ -411,14 +409,9 @@ export function validatePilotSourceManifests(
       .map((university) => university.id)
       .filter((id): id is string => typeof id === 'string'),
   )
-  if (catalogIds.size !== LOCKED_EXISTING_CATALOG_SIZE) {
+  if (catalogIds.size < MINIMUM_EXISTING_CATALOG_SIZE) {
     errors.push(
-      `universities.json must retain the locked ${LOCKED_EXISTING_CATALOG_SIZE}-institution catalog; found ${catalogIds.size}`,
-    )
-  }
-  if (catalogIds.has(RESERVED_USTC_ID)) {
-    errors.push(
-      `${RESERVED_USTC_ID}: reserved planned_addition id must not appear in universities.json`,
+      `universities.json must contain at least ${MINIMUM_EXISTING_CATALOG_SIZE} institutions; found ${catalogIds.size}`,
     )
   }
   for (const record of records) {
@@ -427,11 +420,10 @@ export function validatePilotSourceManifests(
         `${record.institutionId}: catalogStatus is existing but the institution is absent from universities.json`,
       )
     }
-    if (
-      record.catalogStatus === 'planned_addition' &&
-      record.institutionId !== RESERVED_USTC_ID
-    ) {
-      errors.push(`${record.institutionId}: only the reserved USTC id may be planned_addition`)
+    if (record.catalogStatus === 'planned_addition' && catalogIds.has(record.institutionId)) {
+      errors.push(
+        `${record.institutionId}: catalogStatus is planned_addition but the institution already exists in universities.json`,
+      )
     }
   }
 

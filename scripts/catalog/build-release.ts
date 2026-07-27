@@ -50,6 +50,7 @@ const disciplineNames: Record<string, { en: string; zh: string }> = {
   'law-ir': { en: 'Law and International Relations', zh: '法律与国际关系' },
   science: { en: 'Science', zh: '理学' },
   'art-design': { en: 'Art and Design', zh: '艺术与设计' },
+  other: { en: 'Other', zh: '其他' },
 }
 
 function sha256(value: string) {
@@ -92,6 +93,7 @@ function localizedLines(values: LocalizedText[], locale: string) {
 function programProjection(program: Program) {
   if (program.degreeLevel === 'language') return { programType: 'language', degreeLevel: null }
   if (program.degreeLevel === 'foundation') return { programType: 'foundation', degreeLevel: null }
+  if (program.degreeLevel === 'other') return { programType: 'other', degreeLevel: null }
   return { programType: 'degree', degreeLevel: program.degreeLevel }
 }
 

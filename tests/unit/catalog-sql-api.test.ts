@@ -434,7 +434,7 @@ describe('Catalog D1 normalized v1 API', () => {
         ).get(modifier)!.value as string
         database.prepare(`
           UPDATE application_windows
-          SET closes_on = ?, rolling = 0
+          SET opens_on = NULL, closes_on = ?, rolling = 0
           WHERE application_route_id IN (
             SELECT route.application_route_id
             FROM application_routes AS route

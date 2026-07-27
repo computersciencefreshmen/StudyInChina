@@ -19,19 +19,22 @@ const content = bundleSchema.parse({
 const published = selectPublishedData(content, '2026-07-20')
 
 describe('published content data', () => {
-  it('retains the full candidate catalogue while only publishing reviewed facts', () => {
-    expect(content.cities).toHaveLength(12)
-    expect(content.universities.length).toBeGreaterThanOrEqual(40)
-    expect(content.programs.length).toBeGreaterThanOrEqual(100)
+  it('publishes the expanded institution and official program-identity layer', () => {
+    expect(content.cities.length).toBeGreaterThanOrEqual(35)
+    expect(content.universities.length).toBeGreaterThanOrEqual(120)
+    expect(content.programs.length).toBeGreaterThanOrEqual(280)
     expect(content.scholarships.length).toBeGreaterThanOrEqual(20)
 
-    expect(published.cities).toHaveLength(12)
-    expect(published.universities.length).toBeGreaterThanOrEqual(39)
-    expect(published.programs).toHaveLength(4)
-    expect(published.admissionCycles).toHaveLength(5)
+    expect(published.cities.length).toBeGreaterThanOrEqual(35)
+    expect(published.universities.length).toBeGreaterThanOrEqual(119)
+    expect(published.programs.length).toBeGreaterThanOrEqual(240)
+    expect(published.admissionCycles.length).toBeGreaterThanOrEqual(30)
+    expect(published.programs.filter(
+      (program) => program.verificationScope === 'identity',
+    ).length).toBeGreaterThanOrEqual(240)
   })
 
-  it('publishes no incomplete project templates', () => {
+  it('separates verified identities from complete program and cycle facts', () => {
     const officialProgramSources = new Map(
       published.sources
         .filter((source) => source.official && source.kind === 'program')
@@ -39,27 +42,42 @@ describe('published content data', () => {
     )
 
     for (const program of published.programs) {
+      expect(program.teachingLanguages).not.toContain('To be confirmed')
+      expect(program.sourceIds.some(
+        (id) => officialProgramSources.get(id)?.url === program.programUrl,
+      )).toBe(true)
+      if (program.verificationScope === 'identity') {
+        expect(program.details).toBeUndefined()
+        expect(program.durationMonths).toBeNull()
+        expect(program.languageRequirements).toHaveLength(0)
+        continue
+      }
       expect(program.details).toBeDefined()
       expect(program.durationMonths).not.toBeNull()
-      expect(program.teachingLanguages).not.toContain('To be confirmed')
       expect(program.languageRequirements.length).toBeGreaterThan(0)
       expect(program.programUrl).not.toBe(program.applyUrl)
       expect(program.durationMonthsMax).not.toBeNull()
-      expect(program.sourceIds.some((id) => officialProgramSources.get(id)?.url === program.programUrl)).toBe(true)
-      expect(published.admissionCycles.some((cycle) => cycle.programId === program.id)).toBe(true)
+      expect(published.admissionCycles.some(
+        (cycle) => cycle.programId === program.id,
+      )).toBe(true)
     }
 
     for (const cycle of published.admissionCycles) {
+      expect(cycle.evidenceBasis).toMatch(/^(cycle-specific|recurring-official-rule)$/)
+      if (cycle.factScope === 'dates-only') {
+        expect(cycle.tuitionCny).toBeNull()
+        expect(cycle.applicationFeeCny).toBeNull()
+        expect(cycle.dateStatus).toMatch(/^(published|rolling)$/)
+        continue
+      }
       expect(cycle.tuitionCny).not.toBeNull()
       expect(cycle.tuitionPeriod).toBeTruthy()
       expect(cycle.tuitionStatus).toMatch(/^(confirmed|reference)$/)
-      expect(cycle.evidenceBasis).toMatch(/^(cycle-specific|recurring-official-rule)$/)
       expect(cycle.applicationFeeCny).not.toBeNull()
     }
 
     expect(published.programs.map((program) => program.id))
       .not.toContain('program-fudan-university-chinese-language-program-language')
-    expect(published.admissionCycles.find((cycle) => cycle.programId === 'program-nanjing-university-chinese-language-program-language')?.evidenceBasis).toBe('recurring-official-rule')
   })
 
   it('provides English, Chinese and Russian for public names', () => {
@@ -74,22 +92,29 @@ describe('published content data', () => {
       expect(name.en?.trim()).not.toBe('')
       expect(name.zh?.trim()).not.toBe('')
       expect(name.ru?.trim()).not.toBe('')
+      expect(name.ru).not.toMatch(/translation pending/i)
     }
   })
 
   it('uses secure official links for every application path', () => {
     const urls = [
-      ...content.universities.flatMap((item) => [item.officialUrl, item.admissionsUrl]),
-      ...content.programs.flatMap((item) => [item.programUrl, item.applyUrl]),
+      ...content.universities.flatMap(
+        (item) => [item.officialUrl, item.admissionsUrl],
+      ),
+      ...content.programs.flatMap(
+        (item) => [item.programUrl, item.applyUrl],
+      ),
       ...content.scholarships.map((item) => item.applicationUrl),
-    ]
+    ].filter((url): url is string => typeof url === 'string')
 
     expect(urls.length).toBeGreaterThan(0)
     for (const url of urls) expect(url).toMatch(/^https:\/\//)
   })
 
   it('keeps unannounced dates and fees null instead of presenting estimates as facts', () => {
-    const unannounced = content.admissionCycles.filter((cycle) => cycle.dateStatus === 'not-announced')
+    const unannounced = content.admissionCycles.filter(
+      (cycle) => cycle.dateStatus === 'not-announced',
+    )
     expect(unannounced.length).toBeGreaterThan(0)
 
     for (const cycle of unannounced) {

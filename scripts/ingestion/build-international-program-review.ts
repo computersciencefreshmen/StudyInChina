@@ -1,8 +1,8 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
-import { dirname, join, resolve } from 'node:path'
+import { basename, dirname, join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-const CHECKED_AT = '2026-07-26'
+const CHECKED_AT = '2026-07-27'
 const DEFAULT_TARGET_COUNT = 100
 const DEFAULT_MAX_PER_INSTITUTION = 3
 const EXCLUDED_INSTITUTION_IDS = new Set([
@@ -40,10 +40,15 @@ type ReviewRecord = {
   institutionId: string
   institutionZh: string
   institutionEn: string
+  institutionRu: string
+  cityZh: string
+  cityEn: string
+  cityRu: string
   province: string
   targetOrdinal: number
   programNameOriginal: string
   programNameEn: string
+  programNameRu: string
   programType: string
   degreeLevel: string
   teachingLanguage: string
@@ -69,6 +74,10 @@ type ReviewExclusion = {
   reason: string
   sourceUrl: string | null
   sourceFile: string
+}
+
+function parseJson(value: string): unknown {
+  return JSON.parse(value.replace(/^\uFEFF/u, ''))
 }
 
 function object(value: unknown, label: string): JsonRecord {
@@ -113,6 +122,72 @@ function httpsUrl(value: unknown): string | null {
   }
 }
 
+function stableInstitutionId(
+  institution: CoverageInstitution,
+  fallbackName?: string,
+): string {
+  if (institution.institutionId) return institution.institutionId
+  const slug = (fallbackName || institution.nameEn || institution.nameZh)
+    .normalize('NFKD')
+    .toLocaleLowerCase('en')
+    .replace(/[\u0300-\u036f]/gu, '')
+    .replace(/[^a-z0-9]+/gu, '-')
+    .replace(/^-+|-+$/gu, '')
+  return slug ? `uni-${slug}` : institution.targetId
+}
+
+function registrableInstitutionDomain(hostname: string): string {
+  const parts = hostname.toLocaleLowerCase('en').split('.').filter(Boolean)
+  if (parts.length <= 2) return parts.join('.')
+  const suffix = parts.slice(-2).join('.')
+  if (suffix === 'edu.cn' || suffix === 'ac.cn') {
+    return parts.slice(-3).join('.')
+  }
+  return parts.slice(-2).join('.')
+}
+
+function isOfficialInstitutionUrl(
+  value: string,
+  institution: CoverageInstitution,
+): boolean {
+  let candidateHost: string
+  try {
+    candidateHost = new URL(value).hostname.toLocaleLowerCase('en')
+  } catch {
+    return false
+  }
+  const candidateDomain = registrableInstitutionDomain(candidateHost)
+  return institution.sources.some((source) => {
+    const officialUrl = httpsUrl(source.officialUrl)
+    if (!officialUrl) return false
+    const officialHost = new URL(officialUrl).hostname.toLocaleLowerCase('en')
+    return (
+      candidateHost === officialHost
+      || candidateHost.endsWith(`.${officialHost}`)
+      || officialHost.endsWith(`.${candidateHost}`)
+      || candidateDomain === registrableInstitutionDomain(officialHost)
+    )
+  })
+}
+
+function isGenericDegreeProgramName(
+  programName: string,
+  programType: string,
+): boolean {
+  if (programType.toLocaleLowerCase('en') !== 'degree') return false
+  const normalized = programName
+    .toLocaleLowerCase('en')
+    .replace(/[’']/gu, '')
+    .replace(/[\p{P}\p{S}_]+/gu, ' ')
+    .replace(/\s+/gu, ' ')
+    .trim()
+  return [
+    /^(?:international )?(?:undergraduate|bachelors?|masters?|doctoral|doctorate|phd) (?:degree )?programs?(?: for international students)?$/u,
+    /^(?:chinese|english)(?: taught)? (?:undergraduate|bachelors?|masters?|doctoral|doctorate|phd) (?:degree )?programs?$/u,
+    /^(?:undergraduate|bachelors?|masters?|doctoral|doctorate|phd) programs? for international students$/u,
+  ].some((pattern) => pattern.test(normalized))
+}
+
 function canonicalProgramKey(record: ReviewRecord): string {
   const name = record.programNameOriginal
     .toLocaleLowerCase('en')
@@ -133,6 +208,20 @@ function normalizeDegreeLevel(value: unknown): string {
     || level.includes('ph d')
   ) return 'doctorate'
   return level.replace(/\s+/g, '_')
+}
+
+function normalizeProgramType(value: unknown, degreeLevel: string): string {
+  const type = text(value).toLocaleLowerCase('en').replace(/[._-]+/gu, ' ').trim()
+  if (/degree|bachelor|undergraduate|master|doctor|ph\s*d/iu.test(type)) {
+    return 'degree'
+  }
+  if (/language|chinese/iu.test(type)) return 'language'
+  if (/foundation|preparator/iu.test(type)) return 'foundation'
+  if (/visit/iu.test(type)) return 'visiting'
+  if (/exchange/iu.test(type)) return 'exchange'
+  if (/short|summer|winter/iu.test(type)) return 'short_term'
+  if (type) return type.replace(/\s+/gu, '_')
+  return degreeLevel === 'not_applicable' ? 'short_term' : 'degree'
 }
 
 function publicationTier(
@@ -188,8 +277,11 @@ function normalizeCandidate(
     text(candidate.programNameOriginal)
     || text(candidate.programNameEn)
   )
+  const programNameEn = text(candidate.programNameEn) || programNameOriginal
+  const degreeLevel = normalizeDegreeLevel(candidate.degreeLevel)
+  const programType = normalizeProgramType(candidate.programType, degreeLevel)
   const officialUrl = httpsUrl(candidate.officialUrl)
-  const catalogUrl = httpsUrl(candidate.catalogUrl) ?? officialUrl
+  const submittedCatalogUrl = httpsUrl(candidate.catalogUrl)
   const exclusionBase = {
     institutionZh,
     programName: programNameOriginal,
@@ -219,12 +311,31 @@ function normalizeCandidate(
       exclusion: { ...exclusionBase, reason: 'program_name_missing' },
     }
   }
-  if (!officialUrl || !catalogUrl) {
+  if (
+    isGenericDegreeProgramName(programNameOriginal, programType)
+    || isGenericDegreeProgramName(programNameEn, programType)
+  ) {
+    return {
+      record: null,
+      exclusion: { ...exclusionBase, reason: 'generic_degree_catalog_not_concrete_program' },
+    }
+  }
+  if (!officialUrl) {
     return {
       record: null,
       exclusion: { ...exclusionBase, reason: 'official_https_evidence_missing' },
     }
   }
+  if (!isOfficialInstitutionUrl(officialUrl, institution)) {
+    return {
+      record: null,
+      exclusion: { ...exclusionBase, reason: 'source_domain_not_registered_official' },
+    }
+  }
+  const catalogUrl = (
+    submittedCatalogUrl
+    && isOfficialInstitutionUrl(submittedCatalogUrl, institution)
+  ) ? submittedCatalogUrl : officialUrl
   const internationalEvidence = text(candidate.internationalEligibilityEvidence)
   const individualEvidence = text(candidate.individualApplicationEvidence)
   if (!internationalEvidence || !individualEvidence) {
@@ -262,19 +373,29 @@ function normalizeCandidate(
   return {
     exclusion: null,
     record: {
-      institutionId: institution.institutionId ?? institution.targetId,
+      institutionId: stableInstitutionId(institution, text(candidate.institutionEn)),
       institutionZh: institution.nameZh,
       institutionEn: (
         text(candidate.institutionEn)
         || institution.nameEn
         || institution.nameZh
       ),
+      institutionRu: (
+        text(candidate.institutionRu)
+        || text(candidate.institutionEn)
+        || institution.nameEn
+        || institution.nameZh
+      ),
+      cityZh: text(candidate.cityZh),
+      cityEn: text(candidate.cityEn),
+      cityRu: text(candidate.cityRu),
       province: text(candidate.province) || institution.province || '',
       targetOrdinal: institution.ordinal,
       programNameOriginal,
-      programNameEn: text(candidate.programNameEn) || programNameOriginal,
-      programType: text(candidate.programType) || 'degree',
-      degreeLevel: normalizeDegreeLevel(candidate.degreeLevel),
+      programNameEn,
+      programNameRu: text(candidate.programNameRu) || programNameEn,
+      programType,
+      degreeLevel,
       teachingLanguage: text(candidate.teachingLanguage) || 'source_language',
       intake: text(candidate.intake) || 'not_applicable',
       applicationOpen,
@@ -381,7 +502,7 @@ function selectBroadBatch(
 
 function parseArguments(arguments_: string[]): {
   coveragePath: string
-  inputDirectory: string
+  inputDirectories: string[]
   outputPath: string
   targetCount: number
   maxPerInstitution: number
@@ -400,7 +521,10 @@ function parseArguments(arguments_: string[]): {
       values.get('coverage')
       ?? 'src/data/generated/double-first-class-coverage.json',
     ),
-    inputDirectory: resolve(values.get('input') ?? '.pipeline-build/first100'),
+    inputDirectories: (
+      values.get('input')
+      ?? '.pipeline-build/first100'
+    ).split(',').map((directory) => resolve(directory.trim())),
     outputPath: resolve(
       values.get('output')
       ?? 'quality/international-program-review/first-100-2026-07-26.json',
@@ -415,31 +539,45 @@ function parseArguments(arguments_: string[]): {
 
 async function main(): Promise<void> {
   const options = parseArguments(process.argv.slice(2))
-  const coverage = JSON.parse(
+  const coverage = parseJson(
     await readFile(options.coveragePath, 'utf8'),
   ) as CoverageDocument
   const coverageByName = new Map(
     coverage.institutions.map((institution) => [institution.nameZh, institution]),
   )
   const coverageById = new Map(
-    coverage.institutions
-      .filter((institution) => institution.institutionId)
-      .map((institution) => [institution.institutionId!, institution]),
+    coverage.institutions.map((institution) => [
+      stableInstitutionId(institution),
+      institution,
+    ]),
   )
 
-  const sourceFiles = (await readdir(options.inputDirectory))
-    .filter((fileName) => fileName.endsWith('.json'))
-    .sort((left, right) => left.localeCompare(right, 'en'))
+  const sourceFiles = (
+    await Promise.all(options.inputDirectories.map(async (inputDirectory) => (
+      (await readdir(inputDirectory))
+        .filter((fileName) => fileName.endsWith('.json'))
+        .map((fileName) => ({
+          inputDirectory,
+          fileName,
+          sourceFile: `${basename(inputDirectory)}/${fileName}`,
+        }))
+    )))
+  ).flat().sort((left, right) => (
+    left.sourceFile.localeCompare(right.sourceFile, 'en')
+  ))
   if (sourceFiles.length === 0) {
-    throw new Error(`No JSON review inputs found in ${options.inputDirectory}`)
+    throw new Error(
+      `No JSON review inputs found in ${options.inputDirectories.join(', ')}`,
+    )
   }
 
   const candidates: ReviewRecord[] = []
   const exclusions: ReviewExclusion[] = []
   let inputCandidateCount = 0
-  for (const sourceFile of sourceFiles) {
+  for (const source of sourceFiles) {
+    const { inputDirectory, fileName, sourceFile } = source
     const document = object(
-      JSON.parse(await readFile(join(options.inputDirectory, sourceFile), 'utf8')),
+      parseJson(await readFile(join(inputDirectory, fileName), 'utf8')),
       sourceFile,
     )
     const rawRecords = Array.isArray(document.records) ? document.records : []
@@ -527,6 +665,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
 
 export {
   canonicalProgramKey,
+  isGenericDegreeProgramName,
+  isOfficialInstitutionUrl,
   normalizeCandidate,
   publicationTier,
   selectBroadBatch,

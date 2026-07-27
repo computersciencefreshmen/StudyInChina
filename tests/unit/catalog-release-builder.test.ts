@@ -17,7 +17,7 @@ describe('legacy JSON release builder', () => {
     const artifacts = buildLegacyRelease(bundle)
     const envelope = JSON.parse(artifacts.envelope)
     expect(envelope.data).toEqual(bundle)
-    expect(envelope.meta.release.recordCounts.programs).toBe(120)
+    expect(envelope.meta.release.recordCounts.programs).toBe(bundle.programs.length)
     expect(artifacts.sql).not.toContain('BEGIN TRANSACTION')
     expect(artifacts.sql).not.toContain("SET release_status = 'retired'")
     expect(artifacts.sql).not.toContain('UPDATE release_pointer SET current_release_id')
@@ -44,7 +44,21 @@ describe('legacy JSON release builder', () => {
         (SELECT count(*) FROM program_cycles WHERE release_id = ?) AS cycles,
         (SELECT count(*) FROM scholarships WHERE release_id = ?) AS scholarships
     `).get(artifacts.release.id, artifacts.release.id, artifacts.release.id, artifacts.release.id) as Record<string, number>
-    expect(counts).toEqual({ universities: 40, programs: 120, cycles: 122, scholarships: 24 })
+    expect(counts).toEqual({
+      universities: bundle.universities.length,
+      programs: bundle.programs.length,
+      cycles: bundle.admissionCycles.length,
+      scholarships: bundle.scholarships.length,
+    })
+    const otherProgram = database.prepare(`
+      SELECT program_type, degree_level
+      FROM programs
+      WHERE release_id = ? AND program_id = ?
+    `).get(
+      artifacts.release.id,
+      'program-renmin-university-of-china-finance-junior-visiting-program-other',
+    ) as Record<string, unknown>
+    expect(otherProgram).toEqual({ program_type: 'other', degree_level: null })
     database.close()
   })
 

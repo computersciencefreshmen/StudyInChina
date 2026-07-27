@@ -1,6 +1,8 @@
 import { describe, expect, test } from 'vitest'
 
 import {
+  isGenericDegreeProgramName,
+  isOfficialInstitutionUrl,
   publicationTier,
   selectBroadBatch,
 } from '../../scripts/ingestion/build-international-program-review'
@@ -13,10 +15,15 @@ function candidate(
     institutionId: `uni-${institutionNumber}`,
     institutionZh: `学校${institutionNumber}`,
     institutionEn: `University ${institutionNumber}`,
+    institutionRu: `Университет ${institutionNumber}`,
+    cityZh: '测试市',
+    cityEn: 'Test City',
+    cityRu: 'Тестовый город',
     province: 'Test',
     targetOrdinal: institutionNumber,
     programNameOriginal: `Program ${programNumber}`,
     programNameEn: `Program ${programNumber}`,
+    programNameRu: `Программа ${programNumber}`,
     programType: 'degree',
     degreeLevel: 'master',
     teachingLanguage: 'English',
@@ -77,5 +84,48 @@ describe('international program review batch', () => {
     expect(publicationTier('closed', '2027-06-01')).toBe(
       'program_identity_only',
     )
+  })
+  test('rejects umbrella degree catalog labels but keeps concrete programs', () => {
+    expect(isGenericDegreeProgramName(
+      "English-taught Master's Programs",
+      'degree',
+    )).toBe(true)
+    expect(isGenericDegreeProgramName(
+      'Computer Science and Technology',
+      'degree',
+    )).toBe(false)
+    expect(isGenericDegreeProgramName(
+      'Chinese Language Program',
+      'language',
+    )).toBe(false)
+  })
+
+  test('accepts only the institution domain and its sibling subdomains', () => {
+    const institution = {
+      ordinal: 7,
+      targetId: 'dfc-2022-007',
+      institutionId: 'uni-beijing-institute-of-technology',
+      nameZh: 'Beijing Institute of Technology',
+      nameEn: 'Beijing Institute of Technology',
+      province: 'Beijing',
+      status: 'source_manifest_complete',
+      sources: [{
+        category: 'international_admissions_home',
+        officialUrl: 'https://isc.bit.edu.cn/',
+      }],
+    }
+
+    expect(isOfficialInstitutionUrl(
+      'https://apply.bit.edu.cn/program/1',
+      institution,
+    )).toBe(true)
+    expect(isOfficialInstitutionUrl(
+      'https://bit.edu.cn.evil.example/program/1',
+      institution,
+    )).toBe(false)
+    expect(isOfficialInstitutionUrl(
+      'https://aggregator.example/program/1',
+      institution,
+    )).toBe(false)
   })
 })

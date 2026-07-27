@@ -151,7 +151,7 @@ describe('pilot source manifests', () => {
     }
   })
 
-  it('locks USTC as the sole planned addition outside the existing 40 ids', () => {
+  it('keeps every pilot institution in the expanded catalog', () => {
     const records = validatePilotSourceManifests(clonedInputs())
     const planned = records.filter(
       (record) => record.catalogStatus === 'planned_addition',
@@ -163,18 +163,16 @@ describe('pilot source manifests', () => {
       ),
     ) as Array<{ id: string }>
 
-    expect(planned.map((record) => record.institutionId)).toEqual([
-      RESERVED_USTC_ID,
-    ])
-    expect(universities).toHaveLength(40)
+    expect(planned).toHaveLength(0)
+    expect(universities.length).toBeGreaterThanOrEqual(120)
     expect(universities.some((university) => university.id === RESERVED_USTC_ID)).toBe(
-      false,
+      true,
     )
 
     const inputs = clonedInputs()
-    findRecord(inputs, RESERVED_USTC_ID).catalogStatus = 'existing'
+    findRecord(inputs, RESERVED_USTC_ID).catalogStatus = 'planned_addition'
     expect(() => validatePilotSourceManifests(inputs)).toThrow(
-      /catalogStatus must be planned_addition/,
+      /catalogStatus must be existing/,
     )
   })
 })

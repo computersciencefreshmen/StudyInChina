@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { GET as listPrograms } from '@/app/api/v1/programs/route'
 import { GET as getCurrentRelease } from '@/app/api/v1/releases/current/route'
+import { createCatalogRepository } from '@/lib/catalog'
+import { selectCatalogApiData } from '@/lib/catalog-api/projection'
+import { getTodayDate } from '@/lib/data/freshness'
 
 describe('catalog API routes', () => {
   it('serves only publication-gated records with cache policy and release metadata', async () => {
@@ -33,11 +36,17 @@ describe('catalog API routes', () => {
   })
 
   it('reports record counts for the current public release', async () => {
+    const repository = createCatalogRepository()
+    const publicBundle = selectCatalogApiData(
+      await repository.getBundle(),
+      getTodayDate(),
+    )
     const response = await getCurrentRelease()
     const body = await response.json()
 
     expect(response.status).toBe(200)
     expect(body.data.recordCounts.universities).toBeGreaterThan(0)
-    expect(body.data.recordCounts.programs).toBeLessThan(120)
+    expect(body.data.recordCounts.programs).toBe(publicBundle.programs.length)
+    expect(body.data.recordCounts.programs).toBeGreaterThan(0)
   })
 })

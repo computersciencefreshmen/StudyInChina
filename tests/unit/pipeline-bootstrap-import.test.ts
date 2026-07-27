@@ -35,16 +35,28 @@ describe('Pipeline stable-entity bootstrap', () => {
     const manifests = validatePilotSourceManifestDirectory()
     const firstGeneratedAt = '2026-07-23T12:00:00.000Z'
     const first = buildPipelineBootstrap(bundle, manifests, firstGeneratedAt)
+    const verifiedCityIds = new Set(
+      bundle.cities.filter((item) => item.status === 'verified').map((item) => item.id),
+    )
+    verifiedCityIds.add('city-hefei')
+    const verifiedInstitutionIds = new Set(
+      bundle.universities.filter((item) => item.status === 'verified').map((item) => item.id),
+    )
+    verifiedInstitutionIds.add('uni-university-of-science-and-technology-of-china')
+    const manifestSources = manifests.flatMap((manifest) => manifest.sources)
+    const enabledManifestSources = manifestSources.filter((source) => source.enabled).length
+    const draftPrograms = bundle.programs.filter((item) => item.status === 'draft').length
     expect(first).toMatchObject({
-      records: 53,
-      locations: 13,
-      institutions: 40,
-      ingestionSources: 100,
-      enabledSources: 86,
-      sourceBindings: 86,
+      records: verifiedCityIds.size + verifiedInstitutionIds.size,
+      locations: verifiedCityIds.size,
+      institutions: verifiedInstitutionIds.size,
+      ingestionSources: manifestSources.length,
+      enabledSources: enabledManifestSources,
+      sourceBindings: enabledManifestSources,
       fieldMappings: 0,
-      excludedDraftPrograms: 112,
+      excludedDraftPrograms: draftPrograms,
     })
+    expect(bundle.universities.length).toBeGreaterThanOrEqual(120)
     expect(first.sourceDocuments).toBeLessThan(bundle.sources.length + first.ingestionSources)
 
     const database = databaseWithPipelineSchema()
@@ -66,10 +78,10 @@ describe('Pipeline stable-entity bootstrap', () => {
         (SELECT COUNT(*) FROM programs) AS programs,
         (SELECT COUNT(*) FROM promotion_field_mappings) AS mappings
     `).get()).toEqual({
-      records: 53,
-      locations: 13,
-      organizations: 40,
-      institutions: 40,
+      records: first.records,
+      locations: first.locations,
+      organizations: first.institutions,
+      institutions: first.institutions,
       programs: 0,
       mappings: 0,
     })
@@ -77,7 +89,7 @@ describe('Pipeline stable-entity bootstrap', () => {
       SELECT COUNT(*) AS count
       FROM promotion_source_bindings
       WHERE enabled = 1
-    `).get()).toEqual({ count: 86 })
+    `).get()).toEqual({ count: first.enabledSources })
     expect(database.prepare(`
       SELECT binding.source_document_id
       FROM promotion_source_bindings binding
@@ -91,7 +103,7 @@ describe('Pipeline stable-entity bootstrap', () => {
         AND document.official = 1
         AND document.active = 1
         AND document.authority_level IN ('primary_official', 'secondary_official')
-    `).get()).toEqual({ count: 86 })
+    `).get()).toEqual({ count: first.enabledSources })
     expect(database.prepare(`
       SELECT COUNT(*) AS count
       FROM records
@@ -124,12 +136,16 @@ describe('Pipeline stable-entity bootstrap', () => {
       { domain: 'ic.ustc.edu.cn', is_primary: 0 },
       { domain: 'ustc.edu.cn', is_primary: 1 },
     ])
+    const expectedUstcSourceDocuments = new Set([
+      ...bundle.sources.map((source) => source.url),
+      ...manifestSources.map((source) => source.officialUrl),
+    ].filter((url) => ['ic.ustc.edu.cn', 'isa.ustc.edu.cn'].includes(new URL(url).hostname)))
     expect(database.prepare(`
       SELECT COUNT(*) AS count
       FROM source_documents
       WHERE canonical_url LIKE 'https://ic.ustc.edu.cn/%'
          OR canonical_url LIKE 'https://isa.ustc.edu.cn/%'
-    `).get()).toEqual({ count: 9 })
+    `).get()).toEqual({ count: expectedUstcSourceDocuments.size })
     expect(database.prepare(`
       SELECT COUNT(*) AS count
       FROM source_documents
@@ -190,9 +206,9 @@ describe('Pipeline stable-entity bootstrap', () => {
         (SELECT COUNT(*) FROM promotion_source_bindings WHERE enabled = 1) AS enabled_bindings,
         (SELECT COUNT(*) FROM field_definitions) AS field_definitions
     `).get()).toEqual({
-      records: 53,
-      ingestion_sources: 100,
-      enabled_bindings: 86,
+      records: first.records,
+      ingestion_sources: first.ingestionSources,
+      enabled_bindings: first.enabledSources,
       field_definitions: first.fieldDefinitions,
     })
     expect(database.prepare(`

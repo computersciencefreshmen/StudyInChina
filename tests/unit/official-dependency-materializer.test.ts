@@ -348,8 +348,9 @@ describe('official dependency canonicalizer', () => {
     )
     executeAtomic(database, artifacts.sql)
 
-    expect(before).toBe(53)
-    expect(scalar(database, 'SELECT COUNT(*) AS count FROM records')).toBe(before)
+    expect(before).toBeGreaterThanOrEqual(artifacts.manifest.recordMappings.length)
+    const after = scalar(database, 'SELECT COUNT(*) AS count FROM records')
+    expect(after).toBe(before)
     expect(scalar(database, `
       SELECT
         (SELECT COUNT(*) FROM materialization_batches)

@@ -68,17 +68,24 @@ describe('production publication policy', () => {
     expect(profiles.every((record) => record.status === 'verified' || record.status === 'stale')).toBe(true)
   })
 
-  it('keeps unverified program templates out while publishing the reviewed first batch', () => {
-    expect(allData.programs.length).toBe(120)
-    expect(allData.programs.filter((program) => program.status === 'draft')).toHaveLength(112)
-    expect(published.programs).toHaveLength(4)
-    expect(published.admissionCycles).toHaveLength(5)
-    expect(published.programs.every((program) => program.status === 'verified')).toBe(true)
+  it('keeps unverified templates out while publishing verified identities', () => {
+    expect(allData.programs.length).toBeGreaterThanOrEqual(280)
+    expect(allData.programs.filter(
+      (program) => program.status === 'draft',
+    ).length).toBeLessThan(40)
+    expect(published.programs.length).toBeGreaterThanOrEqual(240)
+    expect(published.admissionCycles.length).toBeGreaterThanOrEqual(30)
+    expect(published.programs.filter(
+      (program) => program.verificationScope === 'identity',
+    ).length).toBeGreaterThanOrEqual(240)
+    expect(published.programs.every(
+      (program) => program.status === 'verified',
+    )).toBe(true)
   })
 
   it('publishes only records whose related entities remain public', () => {
-    expect(published.cities).toHaveLength(12)
-    expect(published.universities).toHaveLength(39)
+    expect(published.cities.length).toBeGreaterThanOrEqual(35)
+    expect(published.universities.length).toBeGreaterThanOrEqual(119)
     expect(published.scholarships).toHaveLength(2)
   })
 

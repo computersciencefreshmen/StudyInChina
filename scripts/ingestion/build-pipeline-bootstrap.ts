@@ -297,6 +297,7 @@ function universityStatements(
   university: University,
   generatedAt: string,
 ): number {
+  const primaryDomain = new URL(university.officialUrl).hostname.toLowerCase()
   insertStableRecord(statements, university, 'organization', generatedAt)
   statements.push(`
 INSERT INTO organizations (record_id, organization_type, official_url)
@@ -305,9 +306,15 @@ ON CONFLICT(record_id) DO UPDATE SET
   organization_type = excluded.organization_type,
   official_url = excluded.official_url;`.trim())
   statements.push(`
+UPDATE organization_domains
+SET is_primary = 0
+WHERE organization_id = ${sqlValue(university.id)}
+  AND domain <> ${sqlValue(primaryDomain)}
+  AND is_primary <> 0;`.trim())
+  statements.push(`
 INSERT INTO organization_domains (organization_id, domain, is_primary, verified_at)
 VALUES (
-  ${sqlValue(university.id)}, ${sqlValue(new URL(university.officialUrl).hostname.toLowerCase())},
+  ${sqlValue(university.id)}, ${sqlValue(primaryDomain)},
   1, ${sqlValue(dateTimestamp(university.verifiedAt))}
 )
 ON CONFLICT(organization_id, domain) DO UPDATE SET
@@ -627,6 +634,8 @@ export function buildPipelineBootstrap(
   const generatedAt = isoTimestamp(generatedAtInput)
   const stableCities = bundle.cities.filter((item) => item.status === 'verified')
   const stableInstitutions = bundle.universities.filter((item) => item.status === 'verified')
+  const stableCityIds = new Set(stableCities.map((item) => item.id))
+  stableCityIds.add(USTC_PREREQUISITE.cityId)
   const stableInstitutionIds = new Set(stableInstitutions.map((item) => item.id))
   const ustcManifest = manifests.find(
     (manifest) => manifest.institutionId === USTC_PREREQUISITE.institutionId,
@@ -734,9 +743,9 @@ ON CONFLICT(source_id) DO UPDATE SET
   return {
     sql: `${statements.join('\n')}\n`,
     generatedAt,
-    records: stableCities.length + stableInstitutions.length + 2,
-    locations: stableCities.length + 1,
-    institutions: stableInstitutions.length + 1,
+    records: stableCityIds.size + stableInstitutionIds.size,
+    locations: stableCityIds.size,
+    institutions: stableInstitutionIds.size,
     localizedContent,
     ingestionSources: pilotSources.length,
     enabledSources: enabledPilotSources.length,
