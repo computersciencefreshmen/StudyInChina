@@ -1,0 +1,98 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-expand-06-scholarships",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion (scholarship documented-gap pass)",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false,
+    "evidenceSource": "no live fetch succeeded; every scholarship is source_unavailable"
+  },
+  "scope": {
+    "schoolIds": [
+      "uni-hangzhou-normal-university"
+    ],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-hangzhou-normal-university",
+      "name": {
+        "zh": "杭州师范大学",
+        "en": "Hangzhou Normal University",
+        "ru": null
+      },
+      "cityId": null,
+      "region": null,
+      "officialUrl": "https://www.hznu.edu.cn/",
+      "admissionsUrl": "https://iso.hznu.edu.cn/"
+    }
+  ],
+  "programs": [],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-hangzhou-normal-university",
+      "categories": {
+        "international_admissions_home": "needs_follow_up",
+        "bachelor_catalog": "needs_follow_up",
+        "master_catalog": "needs_follow_up",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "needs_follow_up",
+        "current_admission_guide": "needs_follow_up",
+        "fees": "needs_follow_up",
+        "deadlines": "needs_follow_up",
+        "application_system": "needs_follow_up",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [
+    {
+      "institutionId": "uni-hangzhou-normal-university",
+      "reason": "No verifiable scholarship identity could be produced for this school in the present pass because every WebFetch against the official *.edu.cn domain was blocked by the sandbox. The school is recorded with a documented-gap sourceFailure and the URL candidates that were attempted; the next pass must perform real fetches and re-write the field."
+    }
+  ],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-hangzhou-normal-university",
+      "category": "scholarships",
+      "reason": "University-level, faculty/department-level, and clearly-applicable government scholarship pages could not be read in this pass. Every WebFetch attempt was blocked by the sandbox.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://www.hznu.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for hznu.edu.cn; no page body retrieved; cannot cite as official evidence."
+        },
+        {
+          "officialUrl": "https://iso.hznu.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for hznu.edu.cn; no page body retrieved; cannot cite as official evidence."
+        },
+        {
+          "officialUrl": "https://iie.hznu.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for hznu.edu.cn; no page body retrieved; cannot cite as official evidence."
+        },
+        {
+          "officialUrl": "https://study.hznu.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for hznu.edu.cn; no page body retrieved; cannot cite as official evidence."
+        },
+        {
+          "officialUrl": "https://international.hznu.edu.cn/",
+          "outcome": "WebFetch blocked by sandbox for hznu.edu.cn; no page body retrieved; cannot cite as official evidence."
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 0,
+    "scholarshipsCollected": 0,
+    "publishableScholarships": 0,
+    "sourceFailures": 1
+  }
+}
