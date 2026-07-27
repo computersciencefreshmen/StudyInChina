@@ -1,0 +1,463 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-repair-11-programs",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion repair",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false
+  },
+  "scope": {
+    "schoolIds": [
+      "uni-zhejiang-university"
+    ],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-zhejiang-university",
+      "name": {
+        "en": "Zhejiang University",
+        "zh": "浙江大学",
+        "ru": "Чжэцзянский университет"
+      },
+      "cityId": "city-hangzhou",
+      "region": "east",
+      "officialUrl": "https://www.zju.edu.cn/english/",
+      "admissionsUrl": "https://iczu.zju.edu.cn/admissionsen/"
+    }
+  ],
+  "programs": [
+    {
+      "institutionId": "uni-zhejiang-university",
+      "institutionName": {
+        "en": "Zhejiang University",
+        "zh": "浙江大学",
+        "ru": "Чжэцзянский университет"
+      },
+      "programKey": "uni-zhejiang-university:program:computer-science-bachelor",
+      "nameOriginal": "Computer Science and Technology",
+      "name": {
+        "zh": "计算机科学与技术",
+        "en": "Computer Science and Technology",
+        "ru": "Информатика и технологии"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "bachelor",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "To be confirmed"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iczu.zju.edu.cn/admissionsen/",
+        "sourceTitle": "Zhejiang University Computer Science and Technology — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Zhejiang University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iczu.zju.edu.cn/admissionsen/",
+        "sourceTitle": "Zhejiang University Computer Science and Technology — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Zhejiang University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://iczu.zju.edu.cn/admissionsen/",
+      "applyUrl": "https://iczu.zju.edu.cn/admissionsen/",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "publicationEligibility": "not_announced",
+          "opensOn": {
+            "status": "officially_not_announced",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "closesOn": {
+            "status": "officially_not_announced",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "sourceUrls": [
+            "https://iczu.zju.edu.cn/admissionsen/"
+          ]
+        }
+      ],
+      "publishable": false,
+      "qualityReasons": [
+        "no known dynamic fact (duration/tuition/deadline all missing)"
+      ]
+    },
+    {
+      "institutionId": "uni-zhejiang-university",
+      "institutionName": {
+        "en": "Zhejiang University",
+        "zh": "浙江大学",
+        "ru": "Чжэцзянский университет"
+      },
+      "programKey": "uni-zhejiang-university:program:business-administration-master",
+      "nameOriginal": "Business Administration",
+      "name": {
+        "zh": "工商管理",
+        "en": "Business Administration",
+        "ru": "Управление бизнесом"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "master",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "To be confirmed"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iczu.zju.edu.cn/admissionsen/",
+        "sourceTitle": "Zhejiang University Business Administration — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Zhejiang University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iczu.zju.edu.cn/admissionsen/",
+        "sourceTitle": "Zhejiang University Business Administration — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Zhejiang University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://iczu.zju.edu.cn/admissionsen/",
+      "applyUrl": "https://iczu.zju.edu.cn/admissionsen/",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "publicationEligibility": "not_announced",
+          "opensOn": {
+            "status": "officially_not_announced",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "closesOn": {
+            "status": "officially_not_announced",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "sourceUrls": [
+            "https://iczu.zju.edu.cn/admissionsen/"
+          ]
+        }
+      ],
+      "publishable": false,
+      "qualityReasons": [
+        "no known dynamic fact (duration/tuition/deadline all missing)"
+      ]
+    },
+    {
+      "institutionId": "uni-zhejiang-university",
+      "institutionName": {
+        "en": "Zhejiang University",
+        "zh": "浙江大学",
+        "ru": "Чжэцзянский университет"
+      },
+      "programKey": "uni-zhejiang-university:program:chinese-language-program-language",
+      "nameOriginal": "2026 Autumn & Winter Chinese Language and Culture Program",
+      "name": {
+        "zh": "2026年秋冬学期汉语言与中国文化进修项目",
+        "en": "2026 Autumn & Winter Chinese Language and Culture Program",
+        "ru": "Программа китайского языка и культуры, осень–зима 2026 года"
+      },
+      "generatedTranslations": [],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iczu.zju.edu.cn/admissionsen/2025/0408/c68991a3035616/page.psp",
+        "sourceTitle": "Zhejiang University 2026 Autumn & Winter Chinese Language and Culture Program — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Zhejiang University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://intlstudent.zju.edu.cn/",
+        "sourceTitle": "Zhejiang University 2026 Autumn & Winter Chinese Language and Culture Program — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Zhejiang University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "known",
+        "value": 4,
+        "rawValue": null,
+        "officialUrl": "https://iczu.zju.edu.cn/admissionsen/2025/0408/c68991a3035616/page.psp",
+        "sourceTitle": "Zhejiang University 2026 Autumn & Winter Chinese Language and Culture Program — Duration",
+        "checkedAt": "2026-07-27",
+        "quote": "Program length: 4 months (full-time).",
+        "locator": "Section: Program Overview > Duration"
+      },
+      "programUrl": "https://iczu.zju.edu.cn/admissionsen/2025/0408/c68991a3035616/page.psp",
+      "applyUrl": "https://intlstudent.zju.edu.cn/",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "publicationEligibility": "expired",
+          "opensOn": {
+            "status": "officially_not_announced",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-05-10",
+            "rawValue": null,
+            "officialUrl": "https://iczu.zju.edu.cn/admissionsen/2025/0408/c68991a3035616/page.psp",
+            "sourceTitle": "Zhejiang University 2026 Autumn & Winter Chinese Language and Culture Program — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-05-10.",
+            "locator": "Section: Application Window > 2026-2027 autumn"
+          },
+          "tuitionCny": {
+            "status": "known",
+            "value": 9000,
+            "rawValue": "RMB 9,000 per semester",
+            "officialUrl": "https://iczu.zju.edu.cn/admissionsen/2025/0408/c68991a3035616/page.psp",
+            "sourceTitle": "Zhejiang University 2026 Autumn & Winter Chinese Language and Culture Program — Tuition",
+            "checkedAt": "2026-07-27",
+            "quote": "Tuition: RMB 9,000 per semester.",
+            "locator": "Section: Tuition and Fees"
+          },
+          "tuitionPeriod": {
+            "status": "known",
+            "value": "semester",
+            "rawValue": null,
+            "officialUrl": "https://iczu.zju.edu.cn/admissionsen/2025/0408/c68991a3035616/page.psp",
+            "sourceTitle": "Zhejiang University 2026 Autumn & Winter Chinese Language and Culture Program — Tuition",
+            "checkedAt": "2026-07-27",
+            "quote": "per semester",
+            "locator": "Section: Tuition and Fees"
+          },
+          "applicationFeeCny": {
+            "status": "known",
+            "value": 400,
+            "rawValue": "RMB 400",
+            "officialUrl": "https://iczu.zju.edu.cn/admissionsen/2025/0408/c68991a3035616/page.psp",
+            "sourceTitle": "Zhejiang University 2026 Autumn & Winter Chinese Language and Culture Program — Application Fee",
+            "checkedAt": "2026-07-27",
+            "quote": "Application fee: RMB 400.",
+            "locator": "Section: Application Fee"
+          },
+          "sourceUrls": [
+            "https://iczu.zju.edu.cn/admissionsen/2025/0408/c68991a3035616/page.psp"
+          ]
+        }
+      ]
+    }
+  ],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-zhejiang-university",
+      "categories": {
+        "international_admissions_home": "collected",
+        "bachelor_catalog": "collected",
+        "master_catalog": "collected",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "collected",
+        "current_admission_guide": "collected",
+        "fees": "collected",
+        "deadlines": "collected",
+        "application_system": "collected",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [
+    {
+      "institutionId": "uni-zhejiang-university",
+      "reason": "uni-zhejiang-university:program:computer-science-bachelor: no known dynamic fact (duration/tuition/deadline all missing); uni-zhejiang-university:program:business-administration-master: no known dynamic fact (duration/tuition/deadline all missing)"
+    }
+  ],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-zhejiang-university",
+      "category": "scholarships",
+      "reason": "Per-school scholarship enumeration was not in scope for this repair pass; only 3 program(s) were in scope.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://www.zju.edu.cn/english/",
+          "outcome": "Admissions home; per-school scholarship page not surfaced in reviewed segment"
+        },
+        {
+          "officialUrl": "https://iczu.zju.edu.cn/admissionsen/",
+          "outcome": "Program detail page; scholarship section not present"
+        },
+        {
+          "officialUrl": "https://iczu.zju.edu.cn/admissionsen/",
+          "outcome": "Program detail page; scholarship section not present"
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 3,
+    "scholarshipsCollected": 0,
+    "programsPublishable": 1,
+    "programsQuarantined": 2,
+    "publishableDurationCoverageRate": 1,
+    "publishableTuitionCoverageRate": 1,
+    "publishableFutureDeadlineCoverageRate": 1,
+    "publishableInternationalEligibilityEvidenceRate": 1,
+    "publishableIndividualApplicationEvidenceRate": 1,
+    "publishableSpecificOfficialUrlRate": 1,
+    "exclusions": 1,
+    "sourceFailures": 1
+  }
+}
