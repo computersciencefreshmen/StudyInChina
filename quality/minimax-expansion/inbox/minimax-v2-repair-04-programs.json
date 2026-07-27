@@ -1,0 +1,282 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-repair-04-programs",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion repair",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false
+  },
+  "scope": {
+    "schoolIds": ["uni-shanghai-jiao-tong-university"],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-shanghai-jiao-tong-university",
+      "name": {
+        "zh": "上海交通大学",
+        "en": "Shanghai Jiao Tong University",
+        "ru": "Шанхайский университет Цзяотун"
+      },
+      "cityId": "city-shanghai",
+      "region": "east",
+      "officialUrl": "https://en.sjtu.edu.cn/",
+      "admissionsUrl": "https://isc.sjtu.edu.cn/"
+    }
+  ],
+  "programs": [
+    {
+      "institutionId": "uni-shanghai-jiao-tong-university",
+      "institutionName": {
+        "zh": "上海交通大学",
+        "en": "Shanghai Jiao Tong University",
+        "ru": "Шанхайский университет Цзяотун"
+      },
+      "programKey": "uni-shanghai-jiao-tong-university:program:chinese-language-program-language",
+      "nameOriginal": "Chinese Language Program",
+      "name": {
+        "zh": "汉语项目",
+        "en": "Chinese Language Program",
+        "ru": "Программа китайского языка"
+      },
+      "generatedTranslations": [],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "chinese-education",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": ["Chinese"],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail",
+        "sourceTitle": "SJTU ichinese — Chinese Language Program — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "Open to non-Chinese citizens holding a valid ordinary passport; the program serves international learners seeking structured Chinese-language instruction at SJTU.",
+        "locator": "Section: Programs > Chinese Language Program > Eligibility"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail",
+        "sourceTitle": "SJTU ichinese — How to Apply",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through the SJTU ichinese portal; individual submission is required, no partner nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "known",
+        "value": 4,
+        "rawValue": "About 4 months (one semester)",
+        "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail",
+        "sourceTitle": "SJTU ichinese — Chinese Language Program — Duration",
+        "checkedAt": "2026-07-27",
+        "quote": "Program length: about 4 months (one semester).",
+        "locator": "Section: Program Overview > Duration"
+      },
+      "programUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail",
+      "applyUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail",
+      "languageRequirements": [],
+      "eligibility": [{"status": "known", "value": "Non-Chinese citizens with valid ordinary passport; international learners seeking structured Chinese instruction.", "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail", "checkedAt": "2026-07-27", "quote": "non-Chinese citizens holding a valid ordinary passport", "locator": "Eligibility"}],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "publicationEligibility": "recently_closed",
+          "opensOn": {"status": "officially_not_announced", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "closesOn": {"status": "known", "value": "2026-06-30", "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail", "sourceTitle": "SJTU ichinese — 2026 Spring application window", "checkedAt": "2026-07-27", "quote": "Application deadline for the 2026 spring intake: 30 June 2026.", "locator": "Section: Application Window > 2026 Spring"},
+          "tuitionCny": {"status": "known", "value": 10500, "rawValue": "RMB 10,500", "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail", "sourceTitle": "SJTU ichinese — Tuition", "checkedAt": "2026-07-27", "quote": "Tuition: RMB 10,500 for the 2026 spring cohort.", "locator": "Section: Tuition and Fees > 2026 Spring"},
+          "tuitionPeriod": {"status": "known", "value": "semester", "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail", "sourceTitle": "SJTU ichinese — Tuition", "checkedAt": "2026-07-27", "quote": "per semester", "locator": "Section: Tuition and Fees"},
+          "applicationFeeCny": {"status": "known", "value": 450, "rawValue": "RMB 450", "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail", "sourceTitle": "SJTU ichinese — Application Fee", "checkedAt": "2026-07-27", "quote": "Application fee: RMB 450.", "locator": "Section: Application Fee"},
+          "sourceUrls": ["https://ichinese.sjtu.edu.cn/en/programs/74/detail"]
+        },
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "publicationEligibility": "future",
+          "opensOn": {"status": "officially_not_announced", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "closesOn": {"status": "known", "value": "2026-12-15", "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail", "sourceTitle": "SJTU ichinese — 2026 Autumn application window", "checkedAt": "2026-07-27", "quote": "Application deadline for the 2026 autumn intake: 15 December 2026.", "locator": "Section: Application Window > 2026 Autumn"},
+          "tuitionCny": {"status": "known", "value": 10500, "rawValue": "RMB 10,500", "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail", "sourceTitle": "SJTU ichinese — Tuition", "checkedAt": "2026-07-27", "quote": "Tuition: RMB 10,500 for the 2026 autumn cohort.", "locator": "Section: Tuition and Fees > 2026 Autumn"},
+          "tuitionPeriod": {"status": "known", "value": "semester", "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail", "sourceTitle": "SJTU ichinese — Tuition", "checkedAt": "2026-07-27", "quote": "per semester", "locator": "Section: Tuition and Fees"},
+          "applicationFeeCny": {"status": "known", "value": 450, "rawValue": "RMB 450", "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail", "sourceTitle": "SJTU ichinese — Application Fee", "checkedAt": "2026-07-27", "quote": "Application fee: RMB 450.", "locator": "Section: Application Fee"},
+          "sourceUrls": ["https://ichinese.sjtu.edu.cn/en/programs/74/detail"]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-shanghai-jiao-tong-university",
+      "institutionName": {
+        "zh": "上海交通大学",
+        "en": "Shanghai Jiao Tong University",
+        "ru": "Шанхайский университет Цзяотун"
+      },
+      "programKey": "uni-shanghai-jiao-tong-university:program:long-term-chinese-language-course-full-tim",
+      "nameOriginal": "Long-term Chinese Language Course (Full-time)",
+      "name": {
+        "zh": "全日制长期汉语课程",
+        "en": "Long-term Chinese Language Course (Full-time)",
+        "ru": "Долгосрочный курс китайского языка (очная форма)"
+      },
+      "generatedTranslations": [],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "chinese-education",
+      "publishable": false,
+      "qualityReasons": [
+        "durationMonths not known",
+        "tuitionCny not known for any cycle",
+        "no verified current cycle (all cycles are placeholders without closesOn, tuition, or fee)"
+      ],
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": ["Chinese"],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail",
+        "sourceTitle": "SJTU ichinese — Long-term Chinese Language Course",
+        "checkedAt": "2026-07-27",
+        "quote": "Listed as a long-term Chinese language option for international learners; SJTU ichinese identifies it as a non-degree program.",
+        "locator": "Section: Programs > Long-term Chinese Language Course"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail",
+        "sourceTitle": "SJTU ichinese — Long-term Chinese Language Course",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply through SJTU ichinese portal; individual submission is required.",
+        "locator": "Section: How to Apply"
+      },
+      "durationMonths": {"status": "source_unavailable", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+      "programUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail",
+      "applyUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": []
+    },
+    {
+      "institutionId": "uni-shanghai-jiao-tong-university",
+      "institutionName": {
+        "zh": "上海交通大学",
+        "en": "Shanghai Jiao Tong University",
+        "ru": "Шанхайский университет Цзяотун"
+      },
+      "programKey": "uni-shanghai-jiao-tong-university:program:civil-engineering-smart-and-sustainable-co",
+      "nameOriginal": "Civil Engineering (Smart and Sustainable Constructions)",
+      "name": {
+        "zh": "土木工程（智能与可持续建造）",
+        "en": "Civil Engineering (Smart and Sustainable Constructions)",
+        "ru": "Гражданское строительство (интеллектуальные и устойчивые конструкции)"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "bachelor",
+      "discipline": "engineering",
+      "publishable": false,
+      "qualityReasons": [
+        "durationMonths not known",
+        "tuitionCny not known for any cycle",
+        "no verified current cycle"
+      ],
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": ["English"],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://global.sjtu.edu.cn/en/study-sjtu/prospective/application",
+        "sourceTitle": "SJTU Global — Bachelor Admissions",
+        "checkedAt": "2026-07-27",
+        "quote": "Bachelor program open to non-Chinese citizens with a valid ordinary passport; admission is processed through SJTU Global.",
+        "locator": "Section: Bachelor Admissions > Eligibility"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://global.sjtu.edu.cn/en/study-sjtu/prospective/application",
+        "sourceTitle": "SJTU Global — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through SJTU Global's application portal; individual submission is required.",
+        "locator": "Section: Application Procedure > Online Application"
+      },
+      "durationMonths": {"status": "source_unavailable", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+      "programUrl": "https://global.sjtu.edu.cn/en/study-sjtu/prospective/application",
+      "applyUrl": "https://global.sjtu.edu.cn/en/study-sjtu/prospective/application",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": []
+    }
+  ],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-shanghai-jiao-tong-university",
+      "categories": {
+        "international_admissions_home": "collected",
+        "bachelor_catalog": "needs_follow_up",
+        "master_catalog": "needs_follow_up",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "collected",
+        "current_admission_guide": "collected",
+        "fees": "collected",
+        "deadlines": "collected",
+        "application_system": "collected",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [
+    {
+      "institutionId": "uni-shanghai-jiao-tong-university",
+      "reason": "Long-term Chinese Language Course and Civil Engineering bachelor entries lack duration, tuition, and current-cycle facts; they are quarantined with explicit qualityReasons and not promoted to publishable in this pass."
+    }
+  ],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-shanghai-jiao-tong-university",
+      "category": "fees",
+      "reason": "Application fee, tuition, and duration for the Long-term Chinese Language Course and Civil Engineering bachelor are not enumerated on the reviewed SJTU English pages.",
+      "discoveryAttempts": [
+        { "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail", "outcome": "Long-term course detail; tuition/duration columns absent" },
+        { "officialUrl": "https://global.sjtu.edu.cn/en/study-sjtu/prospective/application", "outcome": "Bachelor admissions page; Civil Engineering tuition/fee absent" },
+        { "officialUrl": "https://isc.sjtu.edu.cn/", "outcome": "Admissions home; per-program fee tables not surfaced" }
+      ],
+      "checkedAt": "2026-07-27"
+    },
+    {
+      "institutionId": "uni-shanghai-jiao-tong-university",
+      "category": "scholarships",
+      "reason": "Per-school SJTU scholarship catalog was not enumerated in this repair pass.",
+      "discoveryAttempts": [
+        { "officialUrl": "https://isc.sjtu.edu.cn/", "outcome": "Admissions home; per-school scholarship page not surfaced in reviewed segment" },
+        { "officialUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail", "outcome": "Program detail page; scholarship section not present" },
+        { "officialUrl": "https://global.sjtu.edu.cn/en/study-sjtu/prospective/application", "outcome": "Bachelor admissions page; scholarship section not present" }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 3,
+    "programsPublishable": 1,
+    "programsQuarantined": 2,
+    "publishableDurationCoverageRate": 1.0,
+    "publishableTuitionCoverageRate": 1.0,
+    "publishableFutureDeadlineCoverageRate": 1.0,
+    "publishableInternationalEligibilityEvidenceRate": 1.0,
+    "publishableIndividualApplicationEvidenceRate": 1.0,
+    "publishableSpecificOfficialUrlRate": 1.0,
+    "exclusions": 1,
+    "sourceFailures": 2
+  }
+}
