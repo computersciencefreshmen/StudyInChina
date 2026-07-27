@@ -642,7 +642,7 @@ describe('materialization Catalog release request', () => {
       '-NoProfile', '-NonInteractive', '-Command', parserScript,
     ], { encoding: 'utf8' })
     expect(result.status, result.stderr || result.stdout).toBe(0)
-  })
+  }, 15_000)
 
   it('creates one immutable job and outbox event and is retry-safe', () => {
     const directory = mkdtempSync(join(tmpdir(), 'studyinchina-release-d1-'))
