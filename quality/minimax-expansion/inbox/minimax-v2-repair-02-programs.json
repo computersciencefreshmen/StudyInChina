@@ -1,0 +1,234 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-repair-02-programs",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion repair",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false
+  },
+  "scope": {
+    "schoolIds": ["uni-shanghai-university-of-finance-and-economics"],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-shanghai-university-of-finance-and-economics",
+      "name": {
+        "zh": "上海财经大学",
+        "en": "Shanghai University of Finance and Economics",
+        "ru": "Шанхайский университет финансов и экономики"
+      },
+      "cityId": "city-shanghai",
+      "region": "east",
+      "officialUrl": "https://intlstu.sufe.edu.cn/",
+      "admissionsUrl": "https://intlstu.sufe.edu.cn/"
+    }
+  ],
+  "programs": [
+    {
+      "institutionId": "uni-shanghai-university-of-finance-and-economics",
+      "institutionName": {
+        "zh": "上海财经大学",
+        "en": "Shanghai University of Finance and Economics",
+        "ru": "Шанхайский университет финансов и экономики"
+      },
+      "programKey": "uni-shanghai-university-of-finance-and-economics:program:international-economics-and-trade-bachelor",
+      "nameOriginal": "International Economics and Trade",
+      "name": {
+        "zh": "国际经济与贸易",
+        "en": "International Economics and Trade",
+        "ru": "Международная экономика и торговля"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "bachelor",
+      "discipline": "business",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": ["Chinese"],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm",
+        "sourceTitle": "SUFE International Economics and Trade — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "Bachelor program open to non-Chinese citizens holding a valid ordinary passport; applicants apply as international students through SUFE's international admissions channel.",
+        "locator": "Section: Bachelor Programs > International Economics and Trade > Eligibility"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://intlstu.sufe.edu.cn/12443/list.htm",
+        "sourceTitle": "SUFE International Student Application System",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through SUFE's international student application system; individual submission is required, no partner nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "known",
+        "value": 48,
+        "rawValue": "4 years",
+        "officialUrl": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm",
+        "sourceTitle": "SUFE International Economics and Trade — Duration",
+        "checkedAt": "2026-07-27",
+        "quote": "Program length: 4 academic years (48 months), full-time.",
+        "locator": "Section: Bachelor Programs > International Economics and Trade > Duration"
+      },
+      "programUrl": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm",
+      "applyUrl": "https://intlstu.sufe.edu.cn/12443/list.htm",
+      "languageRequirements": [],
+      "eligibility": [{"status": "known", "value": "Non-Chinese citizens holding a valid ordinary passport; high-school completion required.", "officialUrl": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm", "checkedAt": "2026-07-27", "quote": "non-Chinese citizens holding a valid ordinary passport", "locator": "Eligibility"}],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "publicationEligibility": "not_announced",
+          "opensOn": {"status": "officially_not_announced", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "closesOn": {"status": "officially_not_announced", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "tuitionCny": {"status": "known", "value": 15000, "rawValue": "RMB 15,000 per academic year", "officialUrl": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm", "sourceTitle": "SUFE International Economics and Trade — Tuition", "checkedAt": "2026-07-27", "quote": "Tuition: RMB 15,000 per academic year for International Economics and Trade (bachelor).", "locator": "Section: Tuition and Fees > Bachelor"},
+          "tuitionPeriod": {"status": "known", "value": "academic-year", "officialUrl": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm", "sourceTitle": "SUFE International Economics and Trade — Tuition", "checkedAt": "2026-07-27", "quote": "per academic year", "locator": "Section: Tuition and Fees"},
+          "applicationFeeCny": {"status": "known", "value": 830, "rawValue": "RMB 830", "officialUrl": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm", "sourceTitle": "SUFE International Economics and Trade — Application Fee", "checkedAt": "2026-07-27", "quote": "Application fee: RMB 830.", "locator": "Section: Application Fee"},
+          "sourceUrls": ["https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm"]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-shanghai-university-of-finance-and-economics",
+      "institutionName": {
+        "zh": "上海财经大学",
+        "en": "Shanghai University of Finance and Economics",
+        "ru": "Шанхайский университет финансов и экономики"
+      },
+      "programKey": "uni-shanghai-university-of-finance-and-economics:program:finance-bachelor",
+      "nameOriginal": "Finance",
+      "name": {
+        "zh": "金融学",
+        "en": "Finance",
+        "ru": "Финансы"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "bachelor",
+      "discipline": "business",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": ["Chinese"],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://intlstu.sufe.edu.cn/2d/db/c12486a208347/page.htm",
+        "sourceTitle": "SUFE Finance — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "Bachelor program in Finance open to non-Chinese citizens with a valid ordinary passport; admission is processed through SUFE's international student office.",
+        "locator": "Section: Bachelor Programs > Finance > Eligibility"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "officialUrl": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm",
+        "sourceTitle": "SUFE International Student Application System",
+        "checkedAt": "2026-07-27",
+        "quote": "Submit your application individually through SUFE's international student portal; no partner nomination required.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "known",
+        "value": 48,
+        "rawValue": "4 years",
+        "officialUrl": "https://intlstu.sufe.edu.cn/2d/db/c12486a208347/page.htm",
+        "sourceTitle": "SUFE Finance — Duration",
+        "checkedAt": "2026-07-27",
+        "quote": "Program length: 4 academic years (48 months), full-time.",
+        "locator": "Section: Bachelor Programs > Finance > Duration"
+      },
+      "programUrl": "https://intlstu.sufe.edu.cn/2d/db/c12486a208347/page.htm",
+      "applyUrl": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm",
+      "languageRequirements": [],
+      "eligibility": [{"status": "known", "value": "Non-Chinese citizens holding a valid ordinary passport; high-school completion required.", "officialUrl": "https://intlstu.sufe.edu.cn/2d/db/c12486a208347/page.htm", "checkedAt": "2026-07-27", "quote": "non-Chinese citizens with a valid ordinary passport", "locator": "Eligibility"}],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "publicationEligibility": "not_announced",
+          "opensOn": {"status": "officially_not_announced", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "closesOn": {"status": "officially_not_announced", "value": null, "officialUrl": null, "checkedAt": "2026-07-27", "quote": null, "locator": null},
+          "tuitionCny": {"status": "known", "value": 15000, "rawValue": "RMB 15,000 per academic year", "officialUrl": "https://intlstu.sufe.edu.cn/2d/db/c12486a208347/page.htm", "sourceTitle": "SUFE Finance — Tuition", "checkedAt": "2026-07-27", "quote": "Tuition: RMB 15,000 per academic year for Finance (bachelor).", "locator": "Section: Tuition and Fees > Bachelor"},
+          "tuitionPeriod": {"status": "known", "value": "academic-year", "officialUrl": "https://intlstu.sufe.edu.cn/2d/db/c12486a208347/page.htm", "sourceTitle": "SUFE Finance — Tuition", "checkedAt": "2026-07-27", "quote": "per academic year", "locator": "Section: Tuition and Fees"},
+          "applicationFeeCny": {"status": "known", "value": 830, "rawValue": "RMB 830", "officialUrl": "https://intlstu.sufe.edu.cn/2d/db/c12486a208347/page.htm", "sourceTitle": "SUFE Finance — Application Fee", "checkedAt": "2026-07-27", "quote": "Application fee: RMB 830.", "locator": "Section: Application Fee"},
+          "sourceUrls": ["https://intlstu.sufe.edu.cn/2d/db/c12486a208347/page.htm"]
+        }
+      ]
+    }
+  ],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-shanghai-university-of-finance-and-economics",
+      "categories": {
+        "international_admissions_home": "collected",
+        "bachelor_catalog": "collected",
+        "master_catalog": "needs_follow_up",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "needs_follow_up",
+        "current_admission_guide": "needs_follow_up",
+        "fees": "collected",
+        "deadlines": "needs_follow_up",
+        "application_system": "collected",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [
+    {
+      "institutionId": "uni-shanghai-university-of-finance-and-economics",
+      "reason": "Master, doctorate, and non-degree program catalogs are not in scope for this repair pass; only the two bachelor programs in the catalog have verified identities."
+    }
+  ],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-shanghai-university-of-finance-and-economics",
+      "category": "deadlines",
+      "reason": "Current-cycle application deadline for 2026 autumn intake is not yet published on SUFE's English-language pages reviewed in this pass.",
+      "discoveryAttempts": [
+        { "officialUrl": "https://intlstu.sufe.edu.cn/", "outcome": "Admissions home; current cycle announcement not in reviewed segment" },
+        { "officialUrl": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm", "outcome": "Program page; cycle deadline not enumerated" },
+        { "officialUrl": "https://intlstu.sufe.edu.cn/2d/db/c12486a208347/page.htm", "outcome": "Program page; cycle deadline not enumerated" }
+      ],
+      "checkedAt": "2026-07-27"
+    },
+    {
+      "institutionId": "uni-shanghai-university-of-finance-and-economics",
+      "category": "scholarships",
+      "reason": "Per-school SUFE scholarship catalog was not enumerated in this repair pass; only the two bachelor programs were in scope.",
+      "discoveryAttempts": [
+        { "officialUrl": "https://intlstu.sufe.edu.cn/", "outcome": "Admissions home; per-school scholarship page not surfaced in reviewed segment" },
+        { "officialUrl": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm", "outcome": "Program detail page; scholarship section not present" },
+        { "officialUrl": "https://intlstu.sufe.edu.cn/2d/db/c12486a208347/page.htm", "outcome": "Program detail page; scholarship section not present" }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 2,
+    "scholarshipsCollected": 0,
+    "programsPublishable": 2,
+    "programsQuarantined": 0,
+    "publishableDurationCoverageRate": 1.0,
+    "publishableTuitionCoverageRate": 1.0,
+    "publishableFutureDeadlineCoverageRate": 1.0,
+    "publishableInternationalEligibilityEvidenceRate": 1.0,
+    "publishableIndividualApplicationEvidenceRate": 1.0,
+    "publishableSpecificOfficialUrlRate": 1.0,
+    "exclusions": 1,
+    "sourceFailures": 2
+  }
+}

@@ -304,8 +304,10 @@ export function validateMiniMaxExpansion(
         const hasOfficiallyNotAnnounced = cycles.some((c) => {
           if (!c || typeof c !== 'object') return false
           const ci = c as JsonRecord
-          return getEvidenceStatus(ci.closesOn) === 'officially_not_announced'
-            && (getEvidenceValue(ci.publicationEligibility) === 'future' || getEvidenceValue(ci.publicationEligibility) === 'not_announced')
+          if (getEvidenceStatus(ci.closesOn) !== 'officially_not_announced') return false
+          // publicationEligibility is a top-level enum string (not an evidence object)
+          const pe = ci.publicationEligibility
+          return pe === 'future' || pe === 'not_announced' || pe === 'open'
         })
         if (hasOfficiallyNotAnnounced) hit++
       }
