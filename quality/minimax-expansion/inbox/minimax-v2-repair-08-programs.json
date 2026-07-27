@@ -1,0 +1,519 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-repair-08-programs",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion repair",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false
+  },
+  "scope": {
+    "schoolIds": [
+      "uni-fudan-university"
+    ],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-fudan-university",
+      "name": {
+        "en": "Fudan University",
+        "zh": "复旦大学",
+        "ru": "Фуданьский университет"
+      },
+      "cityId": "city-shanghai",
+      "region": "east",
+      "officialUrl": "https://www.fudan.edu.cn/en/",
+      "admissionsUrl": "https://iso.fudan.edu.cn/"
+    }
+  ],
+  "programs": [
+    {
+      "institutionId": "uni-fudan-university",
+      "institutionName": {
+        "en": "Fudan University",
+        "zh": "复旦大学",
+        "ru": "Фуданьский университет"
+      },
+      "programKey": "uni-fudan-university:program:chinese-language-program-language",
+      "nameOriginal": "2026 Autumn Chinese Language Program",
+      "name": {
+        "zh": "2026年秋季汉语进修项目",
+        "en": "2026 Autumn Chinese Language Program",
+        "ru": "Программа китайского языка, осень 2026 года"
+      },
+      "generatedTranslations": [],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://ices.fudan.edu.cn/_upload/article/files/9e/6d/2ced2d9b44efbf4f18ad73e0e179/0edc7c15-a347-4224-b9cb-5db601fd2c59.pdf",
+        "sourceTitle": "Fudan University 2026 Autumn Chinese Language Program — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Fudan University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://istudent.fudan.edu.cn/apply/",
+        "sourceTitle": "Fudan University 2026 Autumn Chinese Language Program — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Fudan University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "known",
+        "value": 6,
+        "rawValue": null,
+        "officialUrl": "https://ices.fudan.edu.cn/_upload/article/files/9e/6d/2ced2d9b44efbf4f18ad73e0e179/0edc7c15-a347-4224-b9cb-5db601fd2c59.pdf",
+        "sourceTitle": "Fudan University 2026 Autumn Chinese Language Program — Duration",
+        "checkedAt": "2026-07-27",
+        "quote": "Program length: 6 months (full-time).",
+        "locator": "Section: Program Overview > Duration"
+      },
+      "programUrl": "https://ices.fudan.edu.cn/_upload/article/files/9e/6d/2ced2d9b44efbf4f18ad73e0e179/0edc7c15-a347-4224-b9cb-5db601fd2c59.pdf",
+      "applyUrl": "https://istudent.fudan.edu.cn/apply/",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "publicationEligibility": "expired",
+          "opensOn": {
+            "status": "known",
+            "value": "2026-03-23",
+            "rawValue": null,
+            "officialUrl": "https://ices.fudan.edu.cn/_upload/article/files/9e/6d/2ced2d9b44efbf4f18ad73e0e179/0edc7c15-a347-4224-b9cb-5db601fd2c59.pdf",
+            "sourceTitle": "Fudan University 2026 Autumn Chinese Language Program — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application opens 2026-03-23.",
+            "locator": "Section: Application Window > 2026-2027 autumn"
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-06-12",
+            "rawValue": null,
+            "officialUrl": "https://ices.fudan.edu.cn/_upload/article/files/9e/6d/2ced2d9b44efbf4f18ad73e0e179/0edc7c15-a347-4224-b9cb-5db601fd2c59.pdf",
+            "sourceTitle": "Fudan University 2026 Autumn Chinese Language Program — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-06-12.",
+            "locator": "Section: Application Window > 2026-2027 autumn"
+          },
+          "tuitionCny": {
+            "status": "known",
+            "value": 10500,
+            "rawValue": "RMB 10,500 per semester",
+            "officialUrl": "https://ices.fudan.edu.cn/_upload/article/files/9e/6d/2ced2d9b44efbf4f18ad73e0e179/0edc7c15-a347-4224-b9cb-5db601fd2c59.pdf",
+            "sourceTitle": "Fudan University 2026 Autumn Chinese Language Program — Tuition",
+            "checkedAt": "2026-07-27",
+            "quote": "Tuition: RMB 10,500 per semester.",
+            "locator": "Section: Tuition and Fees"
+          },
+          "tuitionPeriod": {
+            "status": "known",
+            "value": "semester",
+            "rawValue": null,
+            "officialUrl": "https://ices.fudan.edu.cn/_upload/article/files/9e/6d/2ced2d9b44efbf4f18ad73e0e179/0edc7c15-a347-4224-b9cb-5db601fd2c59.pdf",
+            "sourceTitle": "Fudan University 2026 Autumn Chinese Language Program — Tuition",
+            "checkedAt": "2026-07-27",
+            "quote": "per semester",
+            "locator": "Section: Tuition and Fees"
+          },
+          "applicationFeeCny": {
+            "status": "known",
+            "value": 400,
+            "rawValue": "RMB 400",
+            "officialUrl": "https://ices.fudan.edu.cn/_upload/article/files/9e/6d/2ced2d9b44efbf4f18ad73e0e179/0edc7c15-a347-4224-b9cb-5db601fd2c59.pdf",
+            "sourceTitle": "Fudan University 2026 Autumn Chinese Language Program — Application Fee",
+            "checkedAt": "2026-07-27",
+            "quote": "Application fee: RMB 400.",
+            "locator": "Section: Application Fee"
+          },
+          "sourceUrls": [
+            "https://ices.fudan.edu.cn/_upload/article/files/9e/6d/2ced2d9b44efbf4f18ad73e0e179/0edc7c15-a347-4224-b9cb-5db601fd2c59.pdf"
+          ]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-fudan-university",
+      "institutionName": {
+        "en": "Fudan University",
+        "zh": "复旦大学",
+        "ru": "Фуданьский университет"
+      },
+      "programKey": "uni-fudan-university:program:chinese-economy-and-business-program-language",
+      "nameOriginal": "Chinese Economy and Business Program",
+      "name": {
+        "zh": "Chinese Economy & Business Program",
+        "en": "Chinese Economy and Business Program",
+        "ru": "Программа «Экономика и бизнес Китая»"
+      },
+      "generatedTranslations": [],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://ices.fudan.edu.cn/69/0a/c6658a485642/page.htm",
+        "sourceTitle": "Fudan University Chinese Economy and Business Program — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Fudan University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iso.fudan.edu.cn/isoenglish/wonwwegree/list.htm",
+        "sourceTitle": "Fudan University Chinese Economy and Business Program — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Fudan University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://ices.fudan.edu.cn/69/0a/c6658a485642/page.htm",
+      "applyUrl": "https://iso.fudan.edu.cn/isoenglish/wonwwegree/list.htm",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [],
+      "publishable": false,
+      "qualityReasons": [
+        "no known dynamic fact (duration/tuition/deadline all missing)"
+      ]
+    },
+    {
+      "institutionId": "uni-fudan-university",
+      "institutionName": {
+        "en": "Fudan University",
+        "zh": "复旦大学",
+        "ru": "Фуданьский университет"
+      },
+      "programKey": "uni-fudan-university:program:fudan-international-winter-session-2026-other",
+      "nameOriginal": "Fudan International Winter Session 2026",
+      "name": {
+        "zh": "Fudan International Winter Session 2026",
+        "en": "Fudan International Winter Session 2026",
+        "ru": "Международная зимняя сессия Фуданьского университета 2026"
+      },
+      "generatedTranslations": [],
+      "programType": "degree",
+      "degreeLevel": "other",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "English"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iss.fudan.edu.cn/Winter/Application.htm",
+        "sourceTitle": "Fudan University Fudan International Winter Session 2026 — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Fudan University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iso.fudan.edu.cn/isoenglish/wonwwegree/list.htm",
+        "sourceTitle": "Fudan University Fudan International Winter Session 2026 — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Fudan University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://iss.fudan.edu.cn/Winter/Application.htm",
+      "applyUrl": "https://iso.fudan.edu.cn/isoenglish/wonwwegree/list.htm",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "publicationEligibility": "future",
+          "opensOn": {
+            "status": "officially_not_announced",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-11-09",
+            "rawValue": null,
+            "officialUrl": "https://iss.fudan.edu.cn/Winter/Application.htm",
+            "sourceTitle": "Fudan University Fudan International Winter Session 2026 — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-11-09.",
+            "locator": "Section: Application Window > 2026-2027 other"
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "sourceUrls": [
+            "https://iss.fudan.edu.cn/Winter/Application.htm"
+          ]
+        }
+      ]
+    },
+    {
+      "institutionId": "uni-fudan-university",
+      "institutionName": {
+        "en": "Fudan University",
+        "zh": "复旦大学",
+        "ru": "Фуданьский университет"
+      },
+      "programKey": "uni-fudan-university:program:international-chinese-language-teachers-scholarship-one",
+      "nameOriginal": "International Chinese Language Teachers Scholarship — One-Semester Chinese Language and Literature",
+      "name": {
+        "zh": "国际中文教师奖学金一学期汉语言文学研修项目",
+        "en": "International Chinese Language Teachers Scholarship — One-Semester Chinese Language and Literature",
+        "ru": "Семестровая программа китайского языка и литературы по стипендии для преподавателей китайского языка"
+      },
+      "generatedTranslations": [],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iso.fudan.edu.cn/_upload/article/files/ec/db/98f894064930aeeec752ae6440b4/c5ee1e57-ef19-4b80-824e-d52ce48a22b5.pdf",
+        "sourceTitle": "Fudan University International Chinese Language Teachers Scholarship — One-Semester Chinese Language and Literature — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Fudan University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://iso.fudan.edu.cn/isoenglish/wonwwegree/list.htm",
+        "sourceTitle": "Fudan University International Chinese Language Teachers Scholarship — One-Semester Chinese Language and Literature — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Fudan University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://iso.fudan.edu.cn/_upload/article/files/ec/db/98f894064930aeeec752ae6440b4/c5ee1e57-ef19-4b80-824e-d52ce48a22b5.pdf",
+      "applyUrl": "https://iso.fudan.edu.cn/isoenglish/wonwwegree/list.htm",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "publicationEligibility": "future",
+          "opensOn": {
+            "status": "known",
+            "value": "2026-03-01",
+            "rawValue": null,
+            "officialUrl": "https://iso.fudan.edu.cn/_upload/article/files/ec/db/98f894064930aeeec752ae6440b4/c5ee1e57-ef19-4b80-824e-d52ce48a22b5.pdf",
+            "sourceTitle": "Fudan University International Chinese Language Teachers Scholarship — One-Semester Chinese Language and Literature — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application opens 2026-03-01.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-10-31",
+            "rawValue": null,
+            "officialUrl": "https://iso.fudan.edu.cn/_upload/article/files/ec/db/98f894064930aeeec752ae6440b4/c5ee1e57-ef19-4b80-824e-d52ce48a22b5.pdf",
+            "sourceTitle": "Fudan University International Chinese Language Teachers Scholarship — One-Semester Chinese Language and Literature — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-10-31.",
+            "locator": "Section: Application Window > 2026-2027 spring"
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "sourceUrls": [
+            "https://iso.fudan.edu.cn/_upload/article/files/ec/db/98f894064930aeeec752ae6440b4/c5ee1e57-ef19-4b80-824e-d52ce48a22b5.pdf"
+          ]
+        }
+      ]
+    }
+  ],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-fudan-university",
+      "categories": {
+        "international_admissions_home": "collected",
+        "bachelor_catalog": "needs_follow_up",
+        "master_catalog": "needs_follow_up",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "collected",
+        "current_admission_guide": "collected",
+        "fees": "collected",
+        "deadlines": "collected",
+        "application_system": "collected",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [
+    {
+      "institutionId": "uni-fudan-university",
+      "reason": "uni-fudan-university:program:chinese-economy-and-business-program-language: no known dynamic fact (duration/tuition/deadline all missing)"
+    }
+  ],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-fudan-university",
+      "category": "scholarships",
+      "reason": "Per-school scholarship enumeration was not in scope for this repair pass; only 4 program(s) were in scope.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://www.fudan.edu.cn/en/",
+          "outcome": "Admissions home; per-school scholarship page not surfaced in reviewed segment"
+        },
+        {
+          "officialUrl": "https://ices.fudan.edu.cn/_upload/article/files/9e/6d/2ced2d9b44efbf4f18ad73e0e179/0edc7c15-a347-4224-b9cb-5db601fd2c59.pdf",
+          "outcome": "Program detail page; scholarship section not present"
+        },
+        {
+          "officialUrl": "https://ices.fudan.edu.cn/69/0a/c6658a485642/page.htm",
+          "outcome": "Program detail page; scholarship section not present"
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 4,
+    "scholarshipsCollected": 0,
+    "programsPublishable": 3,
+    "programsQuarantined": 1,
+    "publishableDurationCoverageRate": 0.3333333333333333,
+    "publishableTuitionCoverageRate": 0.3333333333333333,
+    "publishableFutureDeadlineCoverageRate": 1,
+    "publishableInternationalEligibilityEvidenceRate": 1,
+    "publishableIndividualApplicationEvidenceRate": 1,
+    "publishableSpecificOfficialUrlRate": 1,
+    "exclusions": 1,
+    "sourceFailures": 1
+  }
+}
