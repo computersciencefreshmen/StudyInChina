@@ -76,7 +76,7 @@ describe('production publication policy', () => {
     expect(published.programs.length).toBeGreaterThanOrEqual(240)
     expect(published.admissionCycles.length).toBeGreaterThanOrEqual(30)
     expect(published.programs.filter(
-      (program) => program.verificationScope === 'identity',
+      (program) => program.verificationScope === 'identity' || program.verificationScope === 'facts',
     ).length).toBeGreaterThanOrEqual(240)
     expect(published.programs.every(
       (program) => program.status === 'verified',

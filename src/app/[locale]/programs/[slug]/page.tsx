@@ -60,6 +60,33 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
     const sources = data.sources.filter((source) => program.sourceIds.includes(source.id))
     const lastSourceCheckedAt = sources.map((source) => source.accessedAt).sort().at(-1)
       ?? program.verifiedAt
+    const partialApplicationState = cycle
+      ? getApplicationState(cycle, getTodayDate())
+      : 'not-announced'
+    const partialApplicationStateLabels = {
+      open: messages.common.openNow,
+      upcoming: messages.programs.upcoming,
+      closed: messages.programs.applicationsClosed,
+      rolling: messages.programs.rolling,
+      'dates-published': messages.programs.datePublished,
+      'not-announced': messages.programs.notAnnounced,
+      'previous-cycle': messages.programs.previousCycle,
+    }
+    const partialTuitionPeriodLabels = {
+      program: messages.programs.tuitionProgram,
+      semester: messages.programs.tuitionSemester,
+      'academic-year': messages.programs.tuitionAcademicYear,
+      month: messages.programs.tuitionMonth,
+      other: messages.programs.tuitionOther,
+    }
+    const partialDuration = program.durationMonths === null
+      ? messages.common.unknown
+      : program.durationMonthsMax && program.durationMonthsMax !== program.durationMonths
+        ? `${program.durationMonths}–${program.durationMonthsMax} ${messages.common.months}`
+        : `${program.durationMonths} ${messages.common.months}`
+    const partialTuition = cycle?.tuitionCny == null
+      ? messages.common.unknown
+      : `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${partialTuitionPeriodLabels[cycle.tuitionPeriod || 'other']}`
     return <>
       <PageHero
         variant="compact"
@@ -92,14 +119,14 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
             <div className="notice">{messages.programs.notAnnounced}</div>
             <dl className="detail-facts">
               <div><dt>{messages.programs.university}</dt><dd><a href={`/${locale}/universities/${university.slug}`}>{localize(university.name, locale)}</a></dd></div>
-              <div><dt>{messages.common.duration}</dt><dd>{messages.common.unknown}</dd></div>
+              <div><dt>{messages.common.duration}</dt><dd>{partialDuration}</dd></div>
               <div><dt>{messages.common.language}</dt><dd>{program.teachingLanguages.length
                 ? program.teachingLanguages.map((item) => languageLabel(item, locale)).join(', ')
                 : messages.common.unknown}</dd></div>
-              <div><dt>{messages.programs.applicationStatus}</dt><dd>{messages.programs.notAnnounced}</dd></div>
-              <div><dt>{messages.programs.opens}</dt><dd>{messages.common.unknown}</dd></div>
-              <div><dt>{messages.common.deadline}</dt><dd>{messages.common.unknown}</dd></div>
-              <div><dt>{messages.common.tuition}</dt><dd>{messages.common.unknown}</dd></div>
+              <div><dt>{messages.programs.applicationStatus}</dt><dd>{partialApplicationStateLabels[partialApplicationState]}</dd></div>
+              <div><dt>{messages.programs.opens}</dt><dd>{formatDate(cycle?.opensOn ?? null, locale, messages.common.unknown)}</dd></div>
+              <div><dt>{messages.common.deadline}</dt><dd>{formatDate(cycle?.closesOn ?? null, locale, messages.common.unknown)}</dd></div>
+              <div><dt>{messages.common.tuition}</dt><dd>{partialTuition}</dd></div>
             </dl>
           </article>
         </div>

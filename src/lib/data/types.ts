@@ -79,7 +79,7 @@ export type Program = AuditMeta & {
   programUrl: string
   applyUrl: string | null
   languageRequirements: LanguageRequirement[]
-  verificationScope?: 'identity' | 'complete'
+  verificationScope?: 'identity' | 'facts' | 'complete'
   details?: ProgramDetails
 }
 
@@ -95,7 +95,7 @@ export type AdmissionCycle = AuditMeta & {
   tuitionPeriod?: 'program' | 'semester' | 'academic-year' | 'month' | 'other' | null
   tuitionStatus?: 'confirmed' | 'reference' | null
   evidenceBasis?: 'cycle-specific' | 'recurring-official-rule'
-  factScope?: 'dates-only' | 'complete'
+  factScope?: 'dates-only' | 'partial' | 'complete'
   applicationFeeCny: number | null
 }
 

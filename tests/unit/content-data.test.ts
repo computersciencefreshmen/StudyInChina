@@ -30,7 +30,7 @@ describe('published content data', () => {
     expect(published.programs.length).toBeGreaterThanOrEqual(240)
     expect(published.admissionCycles.length).toBeGreaterThanOrEqual(30)
     expect(published.programs.filter(
-      (program) => program.verificationScope === 'identity',
+      (program) => program.verificationScope === 'identity' || program.verificationScope === 'facts',
     ).length).toBeGreaterThanOrEqual(240)
   })
 
@@ -52,6 +52,11 @@ describe('published content data', () => {
         expect(program.languageRequirements).toHaveLength(0)
         continue
       }
+      if (program.verificationScope === 'facts') {
+        expect(program.details).toBeUndefined()
+        expect(program.durationMonths).not.toBeNull()
+        continue
+      }
       expect(program.details).toBeDefined()
       expect(program.durationMonths).not.toBeNull()
       expect(program.languageRequirements.length).toBeGreaterThan(0)
@@ -68,6 +73,12 @@ describe('published content data', () => {
         expect(cycle.tuitionCny).toBeNull()
         expect(cycle.applicationFeeCny).toBeNull()
         expect(cycle.dateStatus).toMatch(/^(published|rolling)$/)
+        continue
+      }
+      if (cycle.factScope === 'partial') {
+        expect(
+          cycle.tuitionCny !== null || cycle.applicationFeeCny !== null,
+        ).toBe(true)
         continue
       }
       expect(cycle.tuitionCny).not.toBeNull()
