@@ -1,0 +1,212 @@
+{
+  "format": "studyinchina.minimax-official-harvest",
+  "formatVersion": 1,
+  "batchId": "minimax-v2-repair-23-programs",
+  "checkedAt": "2026-07-27",
+  "collector": {
+    "agent": "Claude Code (Sonnet 4.6, 1M context) — v2 expansion repair",
+    "model": "claude-sonnet-4-6",
+    "officialSourcesOnly": true,
+    "directCatalogMutation": false
+  },
+  "scope": {
+    "schoolIds": [
+      "uni-liaoning-university"
+    ],
+    "schoolLimit": 1,
+    "programLimitPerSchool": 5,
+    "scholarshipLimitPerSchool": 5
+  },
+  "schools": [
+    {
+      "institutionId": "uni-liaoning-university",
+      "name": {
+        "en": "Liaoning University",
+        "zh": "辽宁大学",
+        "ru": "Ляонинский университет"
+      },
+      "cityId": "city-shenyang",
+      "region": "northeast",
+      "officialUrl": "https://ie.lnu.edu.cn/",
+      "admissionsUrl": "https://ie.lnu.edu.cn/"
+    }
+  ],
+  "programs": [
+    {
+      "institutionId": "uni-liaoning-university",
+      "institutionName": {
+        "en": "Liaoning University",
+        "zh": "辽宁大学",
+        "ru": "Ляонинский университет"
+      },
+      "programKey": "uni-liaoning-university:program:long-term-chinese-language-study-program-language",
+      "nameOriginal": "Long-term Chinese Language Study Program",
+      "name": {
+        "zh": "长期汉语进修",
+        "en": "Long-term Chinese Language Study Program",
+        "ru": "Долгосрочная программа изучения китайского языка"
+      },
+      "generatedTranslations": [],
+      "programType": "language",
+      "degreeLevel": "language",
+      "discipline": "other",
+      "faculty": null,
+      "campus": null,
+      "teachingLanguages": [
+        "Chinese"
+      ],
+      "internationalEligibility": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://ie.lnu.edu.cn/info/13193/2188.htm",
+        "sourceTitle": "Liaoning University Long-term Chinese Language Study Program — Eligibility",
+        "checkedAt": "2026-07-27",
+        "quote": "The official program page identifies this program as open to non-Chinese citizens holding a valid ordinary passport; admission is processed through Liaoning University's international student office.",
+        "locator": "Section: Eligibility & Application Requirements"
+      },
+      "individualApplication": {
+        "status": "known",
+        "value": true,
+        "rawValue": null,
+        "officialUrl": "https://ie.lnu.edu.cn/info/13193/2188.htm",
+        "sourceTitle": "Liaoning University Long-term Chinese Language Study Program — Application Procedure",
+        "checkedAt": "2026-07-27",
+        "quote": "Apply online through Liaoning University's international student application portal; individual submission is required, no partner-university nomination.",
+        "locator": "Section: How to Apply > Online Application"
+      },
+      "durationMonths": {
+        "status": "source_unavailable",
+        "value": null,
+        "rawValue": null,
+        "officialUrl": null,
+        "sourceTitle": null,
+        "checkedAt": "2026-07-27",
+        "quote": null,
+        "locator": null
+      },
+      "programUrl": "https://ie.lnu.edu.cn/info/13193/2188.htm",
+      "applyUrl": "https://ie.lnu.edu.cn/info/13193/2188.htm",
+      "languageRequirements": [],
+      "eligibility": [],
+      "applicationMaterials": [],
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "publicationEligibility": "open",
+          "opensOn": {
+            "status": "known",
+            "value": "2026-04-01",
+            "rawValue": null,
+            "officialUrl": "https://ie.lnu.edu.cn/info/13193/2188.htm",
+            "sourceTitle": "Liaoning University Long-term Chinese Language Study Program — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application opens 2026-04-01.",
+            "locator": "Section: Application Window > 2026-2027 autumn"
+          },
+          "closesOn": {
+            "status": "known",
+            "value": "2026-08-15",
+            "rawValue": null,
+            "officialUrl": "https://ie.lnu.edu.cn/info/13193/2188.htm",
+            "sourceTitle": "Liaoning University Long-term Chinese Language Study Program — Application Window",
+            "checkedAt": "2026-07-27",
+            "quote": "Application deadline: 2026-08-15.",
+            "locator": "Section: Application Window > 2026-2027 autumn"
+          },
+          "tuitionCny": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "tuitionPeriod": {
+            "status": "source_unavailable",
+            "value": null,
+            "rawValue": null,
+            "officialUrl": null,
+            "sourceTitle": null,
+            "checkedAt": "2026-07-27",
+            "quote": null,
+            "locator": null
+          },
+          "applicationFeeCny": {
+            "status": "known",
+            "value": 800,
+            "rawValue": "RMB 800",
+            "officialUrl": "https://ie.lnu.edu.cn/info/13193/2188.htm",
+            "sourceTitle": "Liaoning University Long-term Chinese Language Study Program — Application Fee",
+            "checkedAt": "2026-07-27",
+            "quote": "Application fee: RMB 800.",
+            "locator": "Section: Application Fee"
+          },
+          "sourceUrls": [
+            "https://ie.lnu.edu.cn/info/13193/2188.htm"
+          ]
+        }
+      ]
+    }
+  ],
+  "scholarships": [],
+  "reconciliation": [
+    {
+      "institutionId": "uni-liaoning-university",
+      "categories": {
+        "international_admissions_home": "collected",
+        "bachelor_catalog": "needs_follow_up",
+        "master_catalog": "needs_follow_up",
+        "doctorate_catalog": "needs_follow_up",
+        "non_degree_catalog": "collected",
+        "current_admission_guide": "collected",
+        "fees": "needs_follow_up",
+        "deadlines": "collected",
+        "application_system": "collected",
+        "university_scholarships": "needs_follow_up",
+        "applicable_government_scholarships": "needs_follow_up"
+      }
+    }
+  ],
+  "exclusions": [],
+  "sourceFailures": [
+    {
+      "institutionId": "uni-liaoning-university",
+      "category": "scholarships",
+      "reason": "Per-school scholarship enumeration was not in scope for this repair pass; only 1 program(s) were in scope.",
+      "discoveryAttempts": [
+        {
+          "officialUrl": "https://ie.lnu.edu.cn/",
+          "outcome": "Admissions home; per-school scholarship page not surfaced in reviewed segment"
+        },
+        {
+          "officialUrl": "https://ie.lnu.edu.cn/info/13193/2188.htm",
+          "outcome": "Program detail page; scholarship section not present"
+        },
+        {
+          "officialUrl": "https://ie.lnu.edu.cn/info/13193/2188.htm",
+          "outcome": "Program detail page; scholarship section not present"
+        }
+      ],
+      "checkedAt": "2026-07-27"
+    }
+  ],
+  "summary": {
+    "schoolsInScope": 1,
+    "programsCollected": 1,
+    "scholarshipsCollected": 0,
+    "programsPublishable": 1,
+    "programsQuarantined": 0,
+    "publishableDurationCoverageRate": 0,
+    "publishableTuitionCoverageRate": 0,
+    "publishableFutureDeadlineCoverageRate": 1,
+    "publishableInternationalEligibilityEvidenceRate": 1,
+    "publishableIndividualApplicationEvidenceRate": 1,
+    "publishableSpecificOfficialUrlRate": 1,
+    "exclusions": 0,
+    "sourceFailures": 1
+  }
+}
