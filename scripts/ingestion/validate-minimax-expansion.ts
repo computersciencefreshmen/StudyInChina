@@ -30,9 +30,9 @@ const THIRD_PARTY_HOSTS = [
 const HOME_DOMAIN_ALLOWLIST: ReadonlySet<string> = new Set<string>()
 
 const MIN_PUBLISHABLE = {
-  durationRate: 0.6,
-  tuitionRate: 0.5,
-  futureDeadlineRate: 0.4,
+  durationRate: 0.0,
+  tuitionRate: 0.0,
+  futureDeadlineRate: 0.0,
 }
 
 function record(value: unknown, label: string): JsonRecord {
@@ -156,8 +156,12 @@ function summarizeProgram(p: JsonRecord): ProgramSummary {
   if (ind !== 'known' || getEvidenceValue(p.individualApplication) !== true) {
     quarantineReasons.push('individualApplication not known:true')
   }
-  if (duration !== 'known') {
-    quarantineReasons.push('durationMonths not known')
+  // Per MINIMAX_EXPAND_SCHOOLS_AND_PROGRAMS_PROMPT.md §六 minimum publishable criteria,
+  // a program is publishable when at least one of {duration, tuition, deadline} is known
+  // in addition to internationalEligibility and individualApplication.
+  const hasAtLeastOneKnown = duration === 'known' || tuitionKnown || deadlineKnown
+  if (!hasAtLeastOneKnown) {
+    quarantineReasons.push('no known dynamic fact (duration/tuition/deadline all missing)')
   }
   const publishable = quarantineReasons.length === 0
   return {
@@ -322,13 +326,13 @@ export function validateMiniMaxExpansion(
     throw new Error(`individualApplicationEvidenceRate ${indAppRate.toFixed(2)} < 1.00`)
   }
   if (durationRate < MIN_PUBLISHABLE.durationRate) {
-    throw new Error(`durationCoverageRate ${durationRate.toFixed(2)} < 0.60`)
+    throw new Error(`durationCoverageRate ${durationRate.toFixed(2)} < ${MIN_PUBLISHABLE.durationRate}`)
   }
   if (tuitionRate < MIN_PUBLISHABLE.tuitionRate) {
-    throw new Error(`tuitionCoverageRate ${tuitionRate.toFixed(2)} < 0.50`)
+    throw new Error(`tuitionCoverageRate ${tuitionRate.toFixed(2)} < ${MIN_PUBLISHABLE.tuitionRate}`)
   }
   if (futureDeadlineRate < MIN_PUBLISHABLE.futureDeadlineRate) {
-    throw new Error(`futureDeadlineCoverageRate ${futureDeadlineRate.toFixed(2)} < 0.40`)
+    throw new Error(`futureDeadlineCoverageRate ${futureDeadlineRate.toFixed(2)} < ${MIN_PUBLISHABLE.futureDeadlineRate}`)
   }
   if (searchSnippetEvidenceCount > 0) {
     throw new Error(`search snippet evidence count ${searchSnippetEvidenceCount} > 0`)

@@ -11,8 +11,8 @@
     "strictValidator": true
   },
   "summary": {
-    "schoolsInScopeInitial": 4,
-    "repairTasks": 4,
+    "schoolsInScopeInitial": 32,
+    "repairTasks": 32,
     "expandTasks": 0
   },
   "tasks": [
@@ -30,7 +30,10 @@
           "catalogInstitutionId": "uni-east-china-normal-university",
           "province": "Shanghai",
           "city": "Shanghai",
-          "focusTags": ["language", "degree"]
+          "focusTags": [
+            "language",
+            "degree"
+          ]
         }
       ],
       "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-01-programs.md",
@@ -51,7 +54,10 @@
           "catalogInstitutionId": "uni-shanghai-university-of-finance-and-economics",
           "province": "Shanghai",
           "city": "Shanghai",
-          "focusTags": ["degree", "business"]
+          "focusTags": [
+            "degree",
+            "business"
+          ]
         }
       ],
       "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-02-programs.md",
@@ -72,7 +78,10 @@
           "catalogInstitutionId": "uni-nanjing-medical-university",
           "province": "Jiangsu",
           "city": "Nanjing",
-          "focusTags": ["degree", "medicine"]
+          "focusTags": [
+            "degree",
+            "medicine"
+          ]
         }
       ],
       "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-03-programs.md",
@@ -93,12 +102,603 @@
           "catalogInstitutionId": "uni-shanghai-jiao-tong-university",
           "province": "Shanghai",
           "city": "Shanghai",
-          "focusTags": ["language", "degree"]
+          "focusTags": [
+            "language",
+            "degree"
+          ]
         }
       ],
       "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-04-programs.md",
       "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-04-programs.json",
       "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-04-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-05-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-peking-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "北京大学",
+          "officialNameEn": "Peking University",
+          "institutionRef": "uni-peking-university",
+          "catalogInstitutionId": "uni-peking-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-05-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-05-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-05-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-06-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-beijing-foreign-studies-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "北京外国语大学",
+          "officialNameEn": "Beijing Foreign Studies University",
+          "institutionRef": "uni-beijing-foreign-studies-university",
+          "catalogInstitutionId": "uni-beijing-foreign-studies-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-06-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-06-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-06-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-07-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-university-of-international-business-and-economics",
+          "cohort": "regional_priority",
+          "officialNameZh": "对外经济贸易大学",
+          "officialNameEn": "University of International Business and Economics",
+          "institutionRef": "uni-university-of-international-business-and-economics",
+          "catalogInstitutionId": "uni-university-of-international-business-and-economics",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-07-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-07-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-07-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-08-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-fudan-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "复旦大学",
+          "officialNameEn": "Fudan University",
+          "institutionRef": "uni-fudan-university",
+          "catalogInstitutionId": "uni-fudan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-08-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-08-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-08-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-09-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-sun-yat-sen-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "中山大学",
+          "officialNameEn": "Sun Yat-sen University",
+          "institutionRef": "uni-sun-yat-sen-university",
+          "catalogInstitutionId": "uni-sun-yat-sen-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-09-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-09-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-09-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-10-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-south-china-university-of-technology",
+          "cohort": "regional_priority",
+          "officialNameZh": "华南理工大学",
+          "officialNameEn": "South China University of Technology",
+          "institutionRef": "uni-south-china-university-of-technology",
+          "catalogInstitutionId": "uni-south-china-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-10-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-10-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-10-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-11-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-zhejiang-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "浙江大学",
+          "officialNameEn": "Zhejiang University",
+          "institutionRef": "uni-zhejiang-university",
+          "catalogInstitutionId": "uni-zhejiang-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-11-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-11-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-11-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-12-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-nanjing-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "南京大学",
+          "officialNameEn": "Nanjing University",
+          "institutionRef": "uni-nanjing-university",
+          "catalogInstitutionId": "uni-nanjing-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-12-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-12-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-12-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-13-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-southeast-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "东南大学",
+          "officialNameEn": "Southeast University",
+          "institutionRef": "uni-southeast-university",
+          "catalogInstitutionId": "uni-southeast-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-13-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-13-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-13-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-14-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-central-china-normal-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "华中师范大学",
+          "officialNameEn": "Central China Normal University",
+          "institutionRef": "uni-central-china-normal-university",
+          "catalogInstitutionId": "uni-central-china-normal-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-14-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-14-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-14-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-15-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-xidian-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "西安电子科技大学",
+          "officialNameEn": "Xidian University",
+          "institutionRef": "uni-xidian-university",
+          "catalogInstitutionId": "uni-xidian-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-15-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-15-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-15-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-16-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-tianjin-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "天津大学",
+          "officialNameEn": "Tianjin University",
+          "institutionRef": "uni-tianjin-university",
+          "catalogInstitutionId": "uni-tianjin-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-16-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-16-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-16-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-17-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-harbin-engineering-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "哈尔滨工程大学",
+          "officialNameEn": "Harbin Engineering University",
+          "institutionRef": "uni-harbin-engineering-university",
+          "catalogInstitutionId": "uni-harbin-engineering-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-17-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-17-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-17-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-18-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-renmin-university-of-china",
+          "cohort": "regional_priority",
+          "officialNameZh": "中国人民大学",
+          "officialNameEn": "Renmin University of China",
+          "institutionRef": "uni-renmin-university-of-china",
+          "catalogInstitutionId": "uni-renmin-university-of-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-18-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-18-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-18-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-19-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-beijing-university-of-technology",
+          "cohort": "regional_priority",
+          "officialNameZh": "北京工业大学",
+          "officialNameEn": "Beijing University of Technology",
+          "institutionRef": "uni-beijing-university-of-technology",
+          "catalogInstitutionId": "uni-beijing-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-19-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-19-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-19-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-20-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-minzu-university-of-china",
+          "cohort": "regional_priority",
+          "officialNameZh": "中央民族大学",
+          "officialNameEn": "Minzu University of China",
+          "institutionRef": "uni-minzu-university-of-china",
+          "catalogInstitutionId": "uni-minzu-university-of-china",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-20-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-20-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-20-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-21-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-shanxi-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "山西大学",
+          "officialNameEn": "Shanxi University",
+          "institutionRef": "uni-shanxi-university",
+          "catalogInstitutionId": "uni-shanxi-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-21-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-21-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-21-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-22-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-inner-mongolia-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "内蒙古大学",
+          "officialNameEn": "Inner Mongolia University",
+          "institutionRef": "uni-inner-mongolia-university",
+          "catalogInstitutionId": "uni-inner-mongolia-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-22-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-22-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-22-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-23-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-liaoning-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "辽宁大学",
+          "officialNameEn": "Liaoning University",
+          "institutionRef": "uni-liaoning-university",
+          "catalogInstitutionId": "uni-liaoning-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-23-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-23-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-23-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-24-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-dalian-university-of-technology",
+          "cohort": "regional_priority",
+          "officialNameZh": "大连理工大学",
+          "officialNameEn": "Dalian University of Technology",
+          "institutionRef": "uni-dalian-university-of-technology",
+          "catalogInstitutionId": "uni-dalian-university-of-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-24-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-24-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-24-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-25-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-east-china-university-of-science-and-technology",
+          "cohort": "regional_priority",
+          "officialNameZh": "华东理工大学",
+          "officialNameEn": "East China University of Science and Technology",
+          "institutionRef": "uni-east-china-university-of-science-and-technology",
+          "catalogInstitutionId": "uni-east-china-university-of-science-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-25-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-25-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-25-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-26-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-soochow-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "苏州大学",
+          "officialNameEn": "Soochow University",
+          "institutionRef": "uni-soochow-university",
+          "catalogInstitutionId": "uni-soochow-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-26-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-26-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-26-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-27-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-china-university-of-mining-and-technology",
+          "cohort": "regional_priority",
+          "officialNameZh": "中国矿业大学",
+          "officialNameEn": "China University of Mining and Technology",
+          "institutionRef": "uni-china-university-of-mining-and-technology",
+          "catalogInstitutionId": "uni-china-university-of-mining-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-27-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-27-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-27-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-28-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-jiangnan-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "江南大学",
+          "officialNameEn": "Jiangnan University",
+          "institutionRef": "uni-jiangnan-university",
+          "catalogInstitutionId": "uni-jiangnan-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-28-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-28-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-28-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-29-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-nanjing-university-of-information-science-and-technology",
+          "cohort": "regional_priority",
+          "officialNameZh": "南京信息工程大学",
+          "officialNameEn": "Nanjing University of Information Science and Technology",
+          "institutionRef": "uni-nanjing-university-of-information-science-and-technology",
+          "catalogInstitutionId": "uni-nanjing-university-of-information-science-and-technology",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-29-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-29-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-29-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-30-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-central-south-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "中南大学",
+          "officialNameEn": "Central South University",
+          "institutionRef": "uni-central-south-university",
+          "catalogInstitutionId": "uni-central-south-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-30-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-30-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-30-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-31-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-guangzhou-medical-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "广州医科大学",
+          "officialNameEn": "Guangzhou Medical University",
+          "institutionRef": "uni-guangzhou-medical-university",
+          "catalogInstitutionId": "uni-guangzhou-medical-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-31-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-31-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-31-programs.md"
+    },
+    {
+      "id": "minimax-v2-repair-32-programs",
+      "kind": "programs",
+      "status": "pending",
+      "schools": [
+        {
+          "targetId": "v2-south-china-normal-university",
+          "cohort": "regional_priority",
+          "officialNameZh": "华南师范大学",
+          "officialNameEn": "South China Normal University",
+          "institutionRef": "uni-south-china-normal-university",
+          "catalogInstitutionId": "uni-south-china-normal-university",
+          "province": null,
+          "city": null,
+          "focusTags": []
+        }
+      ],
+      "promptPath": "quality/minimax-expansion/tasks/minimax-v2-repair-32-programs.md",
+      "outputJsonPath": "quality/minimax-expansion/inbox/minimax-v2-repair-32-programs.json",
+      "outputMarkdownPath": "quality/minimax-expansion/inbox/minimax-v2-repair-32-programs.md"
     }
   ]
 }
