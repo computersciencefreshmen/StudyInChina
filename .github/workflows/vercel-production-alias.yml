@@ -1,0 +1,80 @@
+name: Promote Vercel production alias
+
+on:
+  deployment_status:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vercel-production-alias
+  cancel-in-progress: true
+
+jobs:
+  promote:
+    name: Point studyinchina.vercel.app to the successful main deployment
+    if: >-
+      github.event.deployment_status.state == 'success' &&
+      github.event.deployment.environment == 'Production' &&
+      github.event.deployment.ref == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      DEPLOYMENT_URL: ${{ github.event.deployment_status.environment_url }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+    steps:
+      - name: Detect alias credential
+        id: credential
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -n "${VERCEL_TOKEN}" ]]; then
+            echo 'configured=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'configured=false' >> "$GITHUB_OUTPUT"
+            echo '::warning::VERCEL_TOKEN is not configured; the Vercel Git deployment succeeded but the explicit studyinchina.vercel.app alias was not reassigned.'
+          fi
+
+      - name: Validate deployment URL
+        if: steps.credential.outputs.configured == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! [[ "${DEPLOYMENT_URL}" =~ ^https://studyinchina-[a-z0-9-]+\.vercel\.app/?$ ]]; then
+            echo "Unexpected Vercel production URL: ${DEPLOYMENT_URL}" >&2
+            exit 1
+          fi
+
+      - name: Use Node.js 24
+        if: steps.credential.outputs.configured == 'true'
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Promote stable production alias
+        if: steps.credential.outputs.configured == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx --yes vercel@58.0.0 alias set \
+            "${DEPLOYMENT_URL}" \
+            studyinchina.vercel.app \
+            --scope henry-yangs-projects-c9706eac \
+            --token "${VERCEL_TOKEN}"
+
+      - name: Verify public release API
+        if: steps.credential.outputs.configured == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3 4 5 6; do
+            if curl --fail --silent --show-error \
+              https://studyinchina.vercel.app/api/v1/releases/current \
+              | jq -e '.data.id and .data.recordCounts.programs' >/dev/null; then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo 'The stable production alias did not pass the release API smoke test.' >&2
+          exit 1

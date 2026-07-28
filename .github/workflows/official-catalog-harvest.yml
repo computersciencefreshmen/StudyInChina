@@ -225,6 +225,11 @@ jobs:
             item.byteLength,
           ].join('\t')).join('\n') + '\n')
           NODE
+          expected_upload_count="$(awk 'NF { count += 1 } END { print count + 0 }' "${upload_plan}")"
+          if [[ "${expected_upload_count}" -le 0 ]]; then
+            echo "The validated manifest produced an empty R2 upload plan." >&2
+            exit 1
+          fi
           upload_count=0
           while IFS=$'\t' read -r local_path r2_key content_type expected_sha expected_bytes; do
             source_path="${HARVEST_OUTPUT_DIR}/${local_path}"
@@ -277,8 +282,8 @@ jobs:
             fi
             upload_count=$((upload_count + 1))
           done < "${upload_plan}"
-          if [[ "${upload_count}" -ne 64 ]]; then
-            echo "Expected exactly 64 verified catalog/dependency R2 objects; uploaded ${upload_count}." >&2
+          if [[ "${upload_count}" -ne "${expected_upload_count}" ]]; then
+            echo "Expected ${expected_upload_count} verified catalog/dependency R2 objects from the manifest; uploaded ${upload_count}." >&2
             exit 1
           fi
           archive_temp="${RUNNER_TEMP}/priority-official-harvest.tar.gz"

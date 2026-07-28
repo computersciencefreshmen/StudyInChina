@@ -1,27 +1,27 @@
-name: Monthly official program fact refresh
+name: Weekly official program fact refresh
 
 on:
   schedule:
-    - cron: '19 4 2 * *'
+    - cron: '19 4 * * 2'
   workflow_dispatch:
     inputs:
       maximum_urls:
-        description: Maximum registered official source URLs to inspect
+        description: Maximum current Catalog official URLs to inspect (0 means all)
         required: false
-        default: '148'
+        default: '1000'
 
 permissions:
   contents: write
 
 concurrency:
-  group: monthly-program-fact-refresh
+  group: weekly-program-fact-refresh
   cancel-in-progress: false
 
 jobs:
   refresh:
     name: Refresh grounded program facts
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 180
     env:
       CI: 'true'
       NEXT_TELEMETRY_DISABLED: '1'
@@ -50,18 +50,27 @@ jobs:
         shell: bash
         run: echo "value=$(date -u +%F)" >> "$GITHUB_OUTPUT"
 
+      - name: Build complete current Catalog review queue
+        shell: bash
+        run: |
+          npx tsx scripts/ingestion/build-current-program-review.ts \
+            --data-dir content/data \
+            --output "$RUNNER_TEMP/current-program-review.json" \
+            --generated-at "${{ steps.date.outputs.value }}T00:00:00.000Z"
+
       - name: Refresh official facts
         shell: bash
         env:
-          MAXIMUM_URLS: ${{ inputs.maximum_urls || '148' }}
+          MAXIMUM_URLS: ${{ inputs.maximum_urls || '1000' }}
         run: |
           npx tsx scripts/ingestion/enrich-international-program-facts.ts \
-            --review quality/international-program-review/expanded-250-2026-07-27.json \
+            --review "$RUNNER_TEMP/current-program-review.json" \
             --data-dir content/data \
             --output-dir content/data \
             --audit "quality/international-program-review/fact-enrichment-${{ steps.date.outputs.value }}.json" \
             --checked-at "${{ steps.date.outputs.value }}" \
-            --max-urls "$MAXIMUM_URLS"
+            --max-urls "$MAXIMUM_URLS" \
+            --minimum-domain-interval-ms 5000
 
       - name: Validate refreshed Catalog
         run: |

@@ -67,7 +67,7 @@ type EnrichmentRecord = {
   programNameEn: string
   officialUrl: string
   programId: string | null
-  status: 'enriched' | 'no-grounded-facts' | 'fetch-failed' | 'program-not-found'
+  status: 'enriched' | 'identity-confirmed' | 'no-grounded-facts' | 'fetch-failed' | 'program-not-found'
   facts: EvidenceFact[]
   issues: string[]
 }
@@ -79,6 +79,7 @@ type Options = {
   auditPath: string
   checkedAt: string
   maximumUrls: number
+  minimumDomainIntervalMs: number
 }
 
 function parseArguments(arguments_: string[]): Options {
@@ -103,7 +104,8 @@ function parseArguments(arguments_: string[]): Options {
       ?? 'quality/international-program-review/fact-enrichment-2026-07-27.json',
     ),
     checkedAt: values.get('checked-at') ?? new Date().toISOString().slice(0, 10),
-    maximumUrls: Number(values.get('max-urls') ?? '148'),
+    maximumUrls: Number(values.get('max-urls') ?? '1000'),
+    minimumDomainIntervalMs: Number(values.get('minimum-domain-interval-ms') ?? '5000'),
   }
 }
 
@@ -389,16 +391,29 @@ function inferAcademicYear(record: ReviewRecord, checkedAt: string): string {
 
 function enrichBundle(
   bundle: DataBundle,
-  recordFacts: Array<{ record: ReviewRecord; program: Program; facts: EvidenceFact[] }>,
+  recordFacts: Array<{
+    record: ReviewRecord
+    program: Program
+    facts: EvidenceFact[]
+    identityConfirmed: boolean
+  }>,
   checkedAt: string,
 ): DataBundle {
   const programs = new Map(bundle.programs.map((program) => [program.id, program]))
   const cycles = new Map(bundle.admissionCycles.map((cycle) => [cycle.id, cycle]))
   for (const item of recordFacts) {
+    if (item.identityConfirmed) {
+      programs.set(item.program.id, {
+        ...item.program,
+        verifiedAt: checkedAt,
+        reviewAfter: addDays(checkedAt, 30),
+        status: 'verified',
+      })
+    }
     const duration = factValue<number>(item.facts, 'durationMonths')
     if (duration !== null) {
       programs.set(item.program.id, {
-        ...item.program,
+        ...(programs.get(item.program.id) ?? item.program),
         durationMonths: duration,
         verificationScope: item.program.verificationScope === 'complete' || item.program.details ? 'complete' : 'facts',
         verifiedAt: checkedAt,
@@ -474,11 +489,24 @@ async function main(): Promise<void> {
     records.push(record)
     recordsByUrl.set(record.officialUrl, records)
   }
-  const selectedUrls = [...recordsByUrl.keys()].slice(0, options.maximumUrls)
+  const allUrls = [...recordsByUrl.keys()]
+  const selectedUrls = Number.isFinite(options.maximumUrls) && options.maximumUrls > 0
+    ? allUrls.slice(0, options.maximumUrls)
+    : allUrls
   const temporaryDirectory = resolve('.pipeline-build/program-fact-pages')
   const sourceTexts = new Map<string, { text: string | null; issue: string | null }>()
+  const lastRequestStartedAt = new Map<string, number>()
 
   for (const url of selectedUrls) {
+    const host = new URL(url).hostname
+    const previousStart = lastRequestStartedAt.get(host)
+    if (previousStart !== undefined && options.minimumDomainIntervalMs > 0) {
+      const remaining = options.minimumDomainIntervalMs - (Date.now() - previousStart)
+      if (remaining > 0) {
+        await new Promise((resolveDelay) => setTimeout(resolveDelay, remaining))
+      }
+    }
+    lastRequestStartedAt.set(host, Date.now())
     try {
       sourceTexts.set(url, { text: await fetchSourceText(url, temporaryDirectory), issue: null })
     } catch (error) {
@@ -489,7 +517,12 @@ async function main(): Promise<void> {
     }
   }
 
-  const enriched: Array<{ record: ReviewRecord; program: Program; facts: EvidenceFact[] }> = []
+  const enriched: Array<{
+    record: ReviewRecord
+    program: Program
+    facts: EvidenceFact[]
+    identityConfirmed: boolean
+  }> = []
   const auditRecords: EnrichmentRecord[] = []
   for (const url of selectedUrls) {
     const source = sourceTexts.get(url)!
@@ -521,13 +554,21 @@ async function main(): Promise<void> {
         continue
       }
       const facts = extractGroundedFacts(source.text, record, records.length)
-      if (facts.length > 0) enriched.push({ record, program, facts })
+      const normalizedSource = normalizedName(source.text)
+      const identityConfirmed = [record.programNameEn, record.programNameOriginal]
+        .map(normalizedName)
+        .some((name) => name.length >= 6 && normalizedSource.includes(name))
+      if (facts.length > 0 || identityConfirmed) {
+        enriched.push({ record, program, facts, identityConfirmed })
+      }
       auditRecords.push({
         institutionId: record.institutionId,
         programNameEn: record.programNameEn,
         officialUrl: url,
         programId: program.id,
-        status: facts.length > 0 ? 'enriched' : 'no-grounded-facts',
+        status: facts.length > 0
+          ? 'enriched'
+          : identityConfirmed ? 'identity-confirmed' : 'no-grounded-facts',
         facts,
         issues: [],
       })
@@ -552,6 +593,9 @@ async function main(): Promise<void> {
     selectedUrls: selectedUrls.length,
     records: auditRecords.length,
     enriched: auditRecords.filter((record) => record.status === 'enriched').length,
+    identityConfirmed: auditRecords.filter(
+      (record) => record.status === 'identity-confirmed',
+    ).length,
     fetchFailed: auditRecords.filter((record) => record.status === 'fetch-failed').length,
     programNotFound: auditRecords.filter((record) => record.status === 'program-not-found').length,
     durationFacts: auditRecords.filter((record) => (

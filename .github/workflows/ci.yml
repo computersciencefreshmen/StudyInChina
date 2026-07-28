@@ -54,6 +54,9 @@ jobs:
       - name: Validate pilot source manifests
         run: npm run validate:manifests
 
+      - name: Validate scheduled maintenance capacity
+        run: npm run validate:maintenance
+
       - name: Run ingestion Worker tests
         run: npm run test:ingestion
 

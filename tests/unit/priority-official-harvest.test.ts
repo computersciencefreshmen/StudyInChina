@@ -443,7 +443,13 @@ describe('priority official harvest orchestration contract', () => {
     expect(workflow).toContain(
       'planned.size !== catalog.length + dependencies.length',
     )
-    expect(workflow).toContain('if [[ "${upload_count}" -ne 64 ]]; then')
+    expect(workflow).toContain(
+      'if [[ "${upload_count}" -ne "${expected_upload_count}" ]]; then',
+    )
+    expect(workflow).toContain(
+      'expected_upload_count="$(awk \'NF { count += 1 } END { print count + 0 }\' "${upload_plan}")"',
+    )
+    expect(workflow).not.toContain('-ne 64')
     expect(bootstrap).toBeGreaterThan(pipelineStep)
     expect(dependencies).toBeGreaterThan(bootstrap)
     expect(dependencyImport).toBeGreaterThan(dependencies)
