@@ -86,7 +86,7 @@ describe('production publication policy', () => {
   it('publishes only records whose related entities remain public', () => {
     expect(published.cities.length).toBeGreaterThanOrEqual(35)
     expect(published.universities.length).toBeGreaterThanOrEqual(119)
-    expect(published.scholarships).toHaveLength(2)
+    expect(published.scholarships.length).toBeGreaterThanOrEqual(10)
   })
 
   it('treats reviewAfter as inclusive through the end of that calendar date', () => {

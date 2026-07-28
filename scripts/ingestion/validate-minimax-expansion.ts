@@ -54,6 +54,52 @@ function text(value: unknown, label: string): string {
   return value.trim()
 }
 
+function isKnownEvidence(value: unknown): boolean {
+  return getEvidenceStatus(value) === 'known'
+    && getEvidenceValue(value) !== null
+    && getEvidenceValue(value) !== undefined
+    && getEvidenceValue(value) !== ''
+}
+function scholarshipInstitutions(value: JsonRecord, label: string): string[] {
+  const institutions = array(value.institutionIds, `${label}.institutionIds`)
+  if (institutions.length === 0) {
+    throw new Error(`${label}.institutionIds must contain at least one institution`)
+  }
+  return institutions.map((institution, index) => (
+    text(institution, `${label}.institutionIds[${index}]`)
+  ))
+}
+
+function validateScholarship(value: JsonRecord, label: string): string[] {
+  text(value.scholarshipKey, `${label}.scholarshipKey`)
+  text(value.nameOriginal, `${label}.nameOriginal`)
+  const name = record(value.name, `${label}.name`)
+  for (const locale of ['zh', 'en', 'ru']) {
+    text(name[locale], `${label}.name.${locale}`)
+  }
+  const providerType = text(value.providerType, `${label}.providerType`)
+  if (!new Set(['csc', 'university', 'province', 'city', 'other']).has(providerType)) {
+    throw new Error(`${label}.providerType is not supported`)
+  }
+  const degreeLevels = array(value.applicableDegreeLevels, `${label}.applicableDegreeLevels`)
+  if (degreeLevels.length === 0) {
+    throw new Error(`${label}.applicableDegreeLevels must not be empty`)
+  }
+  degreeLevels.forEach((degree, index) => text(
+    degree,
+    `${label}.applicableDegreeLevels[${index}]`,
+  ))
+  const url = officialHttps(value.officialUrl, `${label}.officialUrl`)
+  if (isHomepageUrl(url)) throw new Error(`${label}.officialUrl must not be a homepage`)
+  const coverage = record(value.coverage, `${label}.coverage`)
+  if (!Object.values(coverage).some(isKnownEvidence)) {
+    throw new Error(`${label}.coverage must contain at least one known benefit`)
+  }
+  if (!isKnownEvidence(value.applicationRoute)) {
+    throw new Error(`${label}.applicationRoute must be known`)
+  }
+  return scholarshipInstitutions(value, label)
+}
 function officialHttps(value: unknown, label: string): string {
   const raw = text(value, label)
   let url: URL
@@ -293,7 +339,7 @@ export function validateMiniMaxExpansion(
       const expectedIds = task.schools.map((s) => s.institutionRef)
       const covered = new Set<string>()
       scholarships.forEach((scholarship, index) => {
-        for (const institution of scholarshipInstitutions(
+        for (const institution of validateScholarship(
           record(scholarship, `scholarships[${index}]`),
           `scholarships[${index}]`,
         )) {
@@ -326,6 +372,13 @@ export function validateMiniMaxExpansion(
   }
   const publishable = summaries.filter((s) => s.publishable)
   const quarantined = summaries.filter((s) => !s.publishable)
+
+  if (task.kind === 'programs' && publishable.length === 0) {
+    throw new Error('program task must contain a publishable program')
+  }
+  if (task.kind === 'scholarships' && scholarships.length === 0) {
+    throw new Error('scholarship task must contain at least one verified scholarship')
+  }
 
   const allJson = JSON.stringify(data)
   const searchSnippetEvidenceCount = (allJson.match(/search snippet|websearch snippet/giu) ?? []).length
@@ -390,6 +443,18 @@ export function validateMiniMaxExpansion(
     }
     return hit / publishable.length
   })()
+
+  if (task.kind === 'programs') {
+    if (durationRate < MIN_PUBLISHABLE.durationRate) {
+      throw new Error(`durationCoverageRate ${durationRate.toFixed(2)} < ${MIN_PUBLISHABLE.durationRate.toFixed(2)}`)
+    }
+    if (tuitionRate < MIN_PUBLISHABLE.tuitionRate) {
+      throw new Error(`tuitionCoverageRate ${tuitionRate.toFixed(2)} < ${MIN_PUBLISHABLE.tuitionRate.toFixed(2)}`)
+    }
+    if (futureDeadlineRate < MIN_PUBLISHABLE.futureDeadlineRate) {
+      throw new Error(`futureDeadlineCoverageRate ${futureDeadlineRate.toFixed(2)} < ${MIN_PUBLISHABLE.futureDeadlineRate.toFixed(2)}`)
+    }
+  }
 
   if (searchSnippetEvidenceCount > 0) {
     throw new Error(`search snippet evidence count ${searchSnippetEvidenceCount} > 0`)

@@ -62,6 +62,7 @@ export function ProgramCard({ program, university, cycle, locale, messages, toda
       <div><dt>{messages.common.tuition}</dt><dd>{tuition}</dd></div>
       <div><dt>{messages.common.deadline}</dt><dd>{formatDate(cycle?.closesOn ?? null, locale, messages.common.unknown)}</dd></div>
     </dl>
+    {cycle?.notes ? <p className="record-card__summary">{localize(cycle.notes, locale)}</p> : null}
     <div className="record-card__actions"><LinkButton href={`/${locale}/programs/${program.slug}`} variant="secondary" size="small">{messages.common.viewDetails}</LinkButton><FavoriteButton programId={program.id} saveLabel={messages.common.save} savedLabel={messages.common.saved} /></div>
   </Card>
 }

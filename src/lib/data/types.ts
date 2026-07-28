@@ -97,6 +97,7 @@ export type AdmissionCycle = AuditMeta & {
   evidenceBasis?: 'cycle-specific' | 'recurring-official-rule'
   factScope?: 'dates-only' | 'partial' | 'complete'
   applicationFeeCny: number | null
+  notes?: LocalizedText
 }
 
 export type Scholarship = AuditMeta & {

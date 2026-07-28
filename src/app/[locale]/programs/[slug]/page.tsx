@@ -128,6 +128,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
               <div><dt>{messages.common.deadline}</dt><dd>{formatDate(cycle?.closesOn ?? null, locale, messages.common.unknown)}</dd></div>
               <div><dt>{messages.common.tuition}</dt><dd>{partialTuition}</dd></div>
             </dl>
+            {cycle?.notes ? <p>{localize(cycle.notes, locale)}</p> : null}
           </article>
         </div>
         <aside className="detail-aside">
@@ -321,6 +322,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
             <div><dt>{messages.common.tuition}</dt><dd>{tuition}</dd></div>
             <div><dt>{messages.programs.fee}</dt><dd>{formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)}</dd></div>
           </dl>
+          {cycle.notes ? <p>{localize(cycle.notes, locale)}</p> : null}
         </article>
 
         {related.length ? <div>
