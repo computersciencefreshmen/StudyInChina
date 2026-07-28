@@ -15,11 +15,14 @@ official evidence, semantic checks and catalog reconciliation still have to pass
 | Layer | Cities | Universities | Programs | Cycles | Scholarships | Sources |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Stored catalog | 36 | 128 | 316 | 112 | 39 | 335 |
-| Public on 2026-07-28 | 36 | 127 | 284 | 82 | 16 | 329 |
+| Public website on 2026-07-28 | 36 | 127 | 284 | 82 | 16 | 329 |
+| Public API identity projection | 36 | 127 | 287 | 82 | 16 | 332 |
 
-The difference is intentional. The publication policy hides draft, stale, unsupported
-or expired records. A deadline more than 30 days in the past automatically removes the
-record from public results while retaining it in the historical catalog.
+The differences are intentional. The website opportunity view hides draft, stale,
+unsupported or expired records. The API keeps three additional verified program
+identities while masking their unavailable or expired cycle facts. Both surfaces
+remove scholarship opportunities more than 30 days past deadline while retaining
+them in the historical catalog.
 
 ## Scope inspected
 

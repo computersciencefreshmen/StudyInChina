@@ -33,7 +33,8 @@ export function selectCatalogApiData(data: DataBundle, today: string): DataBundl
       && programIds.has(item.programId))
     .map((item) => withRuntimeFreshness(item, today))
   const scholarships = data.scholarships
-    .filter((item) => isPublicStatus(item.status))
+    .filter((item) => isPublicStatus(item.status)
+      && isWithinPostDeadlineGrace(item.deadline, today))
     .map((item) => withRuntimeFreshness(item, today))
 
   const sourceIds = new Set([
