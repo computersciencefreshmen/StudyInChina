@@ -26,7 +26,10 @@ function publicationFixture(): DataBundle {
     reviewAfter: TODAY,
   }
   const program = {
-    ...allData.programs.find((item) => item.universityId === university.id)!,
+    ...allData.programs.find((item) => (
+      item.universityId === university.id
+      && allData.admissionCycles.some((cycle) => cycle.programId === item.id)
+    ))!,
     status: 'verified' as const,
     reviewAfter: TODAY,
   }

@@ -102,12 +102,12 @@ const newProgramIds = new Set([
 ])
 
 describe('2026-07-29 official catalog expansion', () => {
-  it('publishes 201 unique universities and exposes all 64 expansion identities', () => {
-    expect(data.universities).toHaveLength(201)
-    expect(new Set(data.universities.map((item) => item.id)).size).toBe(201)
-    expect(new Set(data.universities.map((item) => item.slug)).size).toBe(201)
-    expect(new Set(data.universities.map((item) => item.name.zh)).size).toBe(201)
-    expect(published.universities).toHaveLength(201)
+  it('publishes 202 unique universities and exposes all 64 expansion identities', () => {
+    expect(data.universities).toHaveLength(202)
+    expect(new Set(data.universities.map((item) => item.id)).size).toBe(202)
+    expect(new Set(data.universities.map((item) => item.slug)).size).toBe(202)
+    expect(new Set(data.universities.map((item) => item.name.zh)).size).toBe(202)
+    expect(published.universities).toHaveLength(202)
     expect(expansionUniversityIds.size).toBe(64)
 
     for (const id of expansionUniversityIds) {

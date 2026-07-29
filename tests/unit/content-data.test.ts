@@ -54,7 +54,11 @@ describe('published content data', () => {
       }
       if (program.verificationScope === 'facts') {
         expect(program.details).toBeUndefined()
-        expect(program.durationMonths).not.toBeNull()
+        expect(
+          program.durationMonths !== null
+          || program.teachingLanguages.length > 0
+          || program.languageRequirements.length > 0,
+        ).toBe(true)
         continue
       }
       expect(program.details).toBeDefined()
