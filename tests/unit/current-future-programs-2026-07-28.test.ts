@@ -64,7 +64,7 @@ describe('current future program expansion on 2026-07-28', () => {
     const expected = new Map([
       ['uni-xinjiang-university', 'city-urumqi'],
       ['uni-shaanxi-normal-university', 'city-xian'],
-      ['uni-beijing-language-university', 'city-beijing'],
+      ['uni-beijing-language-and-culture-university', 'city-beijing'],
     ])
 
     for (const [id, cityId] of expected) {
@@ -134,7 +134,7 @@ describe('current future program expansion on 2026-07-28', () => {
     const cases = [
       ['uni-xinjiang-university', 'Chinese Philosophy'],
       ['uni-shaanxi-normal-university', 'Chinese Philosophy'],
-      ['uni-beijing-language-university', 'Chinese Language and Literature'],
+      ['uni-beijing-language-and-culture-university', 'Chinese Language and Literature'],
       ['uni-shanghai-university', 'Traditional Chinese Medicine'],
       ['uni-tianjin-university', 'Taiji Culture'],
       ['uni-nankai-university', 'Chinese History'],

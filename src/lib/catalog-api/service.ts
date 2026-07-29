@@ -1,4 +1,5 @@
 import { getApplicationState } from '@/lib/data/admission'
+import { canonicalUniversitySlug } from '@/lib/data/slug-aliases'
 import type {
   AdmissionCycle,
   AuditMeta,
@@ -289,7 +290,8 @@ export class CatalogApiService {
   }
 
   getInstitution(slug: string): ApiEnvelope<InstitutionRecord> | null {
-    const university = this.bundle.universities.find((item) => item.slug === slug)
+    const canonicalSlug = canonicalUniversitySlug(slug)
+    const university = this.bundle.universities.find((item) => item.slug === canonicalSlug)
     return university ? this.envelope(this.institutionRecord(university)) : null
   }
 

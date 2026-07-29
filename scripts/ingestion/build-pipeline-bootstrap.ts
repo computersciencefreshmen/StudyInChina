@@ -325,7 +325,8 @@ INSERT INTO institutions (
   record_id, city_id, institution_type, ministry_code, admissions_url, featured
 ) VALUES (
   ${sqlValue(university.id)}, ${sqlValue(university.cityId)}, 'other', NULL,
-  ${sqlValue(university.admissionsUrl)}, ${sqlValue(university.featured)}
+  ${sqlValue(university.admissionsUrl ?? university.officialUrl)},
+  ${sqlValue(university.featured)}
 )
 ON CONFLICT(record_id) DO UPDATE SET
   city_id = excluded.city_id,

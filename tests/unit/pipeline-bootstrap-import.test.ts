@@ -108,8 +108,13 @@ describe('Pipeline stable-entity bootstrap', () => {
       SELECT COUNT(*) AS count
       FROM records
       WHERE kind = 'program'
-         OR id = 'uni-nanjing-normal-university'
     `).get()).toEqual({ count: 0 })
+    expect(database.prepare(`
+      SELECT workflow_status
+      FROM records
+      WHERE id = 'uni-nanjing-normal-university'
+        AND kind = 'organization'
+    `).get()).toEqual({ workflow_status: 'validated' })
     expect(database.prepare(`
       SELECT
         record.workflow_status,

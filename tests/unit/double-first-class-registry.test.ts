@@ -38,7 +38,7 @@ describe('official Double First-Class institution target registry', () => {
     expect(value.officialSource.contentSha256).toBe(
       '305f73ed08c091984a75e3c29289c166fbaf6778b87fb9802afa176104c1f7ac',
     )
-    expect(value.targets.filter((target) => target.catalogInstitutionId)).toHaveLength(35)
+    expect(value.targets.filter((target) => target.catalogInstitutionId)).toHaveLength(144)
   })
 
   it('round-trips all official names through the PDF text parser', () => {

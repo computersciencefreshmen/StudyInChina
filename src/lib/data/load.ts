@@ -7,6 +7,7 @@ import { createCatalogRepository, type CatalogRepository } from '@/lib/catalog'
 import { bundleSchema } from './schema'
 import { selectPublishedData } from './publication'
 import type { DataBundle } from './types'
+import { canonicalUniversitySlug } from './slug-aliases'
 
 function readJson(name: string): unknown {
   return JSON.parse(readFileSync(join(process.cwd(), 'content', 'data', `${name}.json`), 'utf8'))
@@ -68,7 +69,10 @@ export function resetCatalogRepositoryForTests() {
   catalogRepository = undefined
 }
 
-export function getUniversityBySlug(slug: string) { return getData().universities.find((item) => item.slug === slug) }
+export function getUniversityBySlug(slug: string) {
+  const canonicalSlug = canonicalUniversitySlug(slug)
+  return getData().universities.find((item) => item.slug === canonicalSlug)
+}
 export function getProgramBySlug(slug: string) { return getData().programs.find((item) => item.slug === slug) }
 export function getScholarshipBySlug(slug: string) { return getData().scholarships.find((item) => item.slug === slug) }
 export function getCityBySlug(slug: string) { return getData().cities.find((item) => item.slug === slug) }

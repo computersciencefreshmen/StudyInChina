@@ -275,15 +275,15 @@ const universities = [
     verifiedAt: VERIFIED_AT,
     reviewAfter: PROFILE_REVIEW_AFTER,
     status: 'verified',
-    id: 'uni-beijing-language-university',
-    slug: 'beijing-language-university',
-    name: localized('Beijing Language University', '北京语言大学', 'Пекинский университет языка и культуры'),
+    id: 'uni-beijing-language-and-culture-university',
+    slug: 'beijing-language-and-culture-university',
+    name: localized('Beijing Language and Culture University', '北京语言大学', 'Пекинский университет языка и культуры'),
     cityId: 'city-beijing',
     region: 'north',
     officialUrl: 'https://www.blcu.edu.cn/',
     admissionsUrl: 'https://admission.blcu.edu.cn/en/',
     summary: localized(
-      'Beijing Language University specialises in language education and publishes a verified Spring 2027 scholarship study route for international applicants.',
+      'Beijing Language and Culture University specialises in language education and publishes a verified Spring 2027 scholarship study route for international applicants.',
       '北京语言大学以语言教育见长，并已发布面向国际申请人的2027年春季奖学金研修项目。',
       'Пекинский университет языка и культуры специализируется на языковом образовании и опубликовал проверяемую стипендиальную программу на весну 2027 года.',
     ),
@@ -617,7 +617,7 @@ const snnu = icltProgram({
 
 const blcu = icltProgram({
   id: 'program-blcu-iclt-one-semester-spring-2027',
-  universityId: 'uni-beijing-language-university',
+  universityId: 'uni-beijing-language-and-culture-university',
   sourceId: 'src-blcu-iclt-2026',
   programUrl: 'https://admission.blcu.edu.cn/en/2026/0303/c1148a3044/page.htm',
   applyUrl: ICLT_PORTAL,

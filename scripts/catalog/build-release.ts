@@ -353,7 +353,10 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
       institution_id: university.id,
       city_id: university.cityId,
       institution_type: 'other',
-      admissions_url: university.admissionsUrl,
+      // Identity-only institution profiles may not yet expose a dedicated
+      // admissions page. Keep the institution in the catalog and use its
+      // verified official homepage as the safe public entry point.
+      admissions_url: university.admissionsUrl ?? university.officialUrl,
       featured: university.featured,
     }))
     addLocalized(statements, releaseId, university.id, 'name', university.name)
