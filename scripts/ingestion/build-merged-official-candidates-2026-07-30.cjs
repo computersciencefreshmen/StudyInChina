@@ -6,12 +6,21 @@ const candidateDir = path.join(root, 'quality', 'official-gap-wave-2026-07-30')
 const outputPath = path.join(candidateDir, 'merged-candidates.json')
 const checkedAt = '2026-07-30'
 
-const rawFiles = [
+const requiredRawFiles = [
   'local-candidates.json',
   'remaining-candidates.json',
   'scholarship-local-candidates.json',
   'confirmed-gap-candidates.json',
   'local-strong-expansion.json',
+  'pku-depth-wave.json',
+]
+const optionalRawFiles = [
+  'second-school-breadth-wave.json',
+  'breadth-fastpack.json',
+]
+const rawFiles = [
+  ...requiredRawFiles,
+  ...optionalRawFiles.filter((fileName) => fs.existsSync(path.join(candidateDir, fileName))),
 ]
 
 const archiveInstitutionSlugs = [
@@ -472,6 +481,10 @@ function normalizeCycles(candidate) {
     const normalized = normalizeCycle(candidate.cycle, 'canonical')
     if (normalized) cycles.push(normalized)
   }
+  for (const cycle of candidate.cycles ?? []) {
+    const normalized = normalizeCycle(cycle, cycle.sourceFormat ?? 'canonical-list')
+    if (normalized) cycles.push(normalized)
+  }
   for (const deadline of candidate.applicationDeadlines ?? []) {
     const normalized = normalizeCycle(deadline, 'alternate')
     if (normalized) cycles.push(normalized)
@@ -513,15 +526,29 @@ function normalizeEvidence(candidate) {
   }
 }
 
+function normalizeAdditionalEvidence(candidate, primaryUrl) {
+  const records = []
+  const seen = new Set([primaryUrl])
+  const add = (item, fallbackTitle = null) => {
+    const officialUrl = typeof item === 'string' ? item : item?.officialUrl ?? item?.url
+    if (typeof officialUrl !== 'string' || !officialUrl.startsWith('https://')) return
+    if (seen.has(officialUrl)) return
+    seen.add(officialUrl)
+    records.push({
+      officialUrl,
+      sourceTitle: typeof item === 'object' ? item.sourceTitle ?? item.title ?? fallbackTitle : fallbackTitle,
+    })
+  }
+  add(candidate.supportingOfficialUrl, 'Supporting official source')
+  for (const item of candidate.additionalEvidence ?? []) add(item)
+  return records
+}
 function normalizeProgram(candidate, sourceFile, existingRussianIndex) {
   const institutionSlug = candidate.institutionSlug ?? candidate.universitySlug
   if (!institutionSlug) throw new Error(`${candidate.candidateId} requires an institution slug`)
   const level = normalizeLevel(candidate)
   const evidence = normalizeEvidence(candidate)
-  const supportingUrls = [
-    candidate.supportingOfficialUrl,
-    ...(candidate.additionalEvidence ?? []).map((item) => item.officialUrl ?? item.url),
-  ].filter((url) => typeof url === 'string' && url.startsWith('https://'))
+  const additionalEvidence = normalizeAdditionalEvidence(candidate, evidence.officialUrl)
   return {
     candidateId: candidate.candidateId,
     candidateIds: [candidate.candidateId],
@@ -536,9 +563,7 @@ function normalizeProgram(candidate, sourceFile, existingRussianIndex) {
     tuition: normalizeTuition(candidate.tuition),
     cycles: normalizeCycles(candidate),
     evidence,
-    additionalEvidence: [...new Set(supportingUrls)]
-      .filter((url) => url !== evidence.officialUrl)
-      .map((officialUrl) => ({ officialUrl })),
+    additionalEvidence,
     applicationUrl: candidate.applicationUrl ?? null,
     recommendedAction: candidate.recommendedAction ?? 'upsert_verified_identity',
     qualityTier: candidate.qualityTier ?? 'official-source-normalized',
@@ -582,10 +607,7 @@ function normalizeScholarship(candidate, sourceFile, existingRussianIndex) {
   const institutionSlug = candidate.institutionSlug ?? candidate.universitySlug
   if (!institutionSlug) throw new Error(`${candidate.candidateId} requires an institution slug`)
   const evidence = normalizeEvidence(candidate)
-  const supportingUrls = [
-    candidate.supportingOfficialUrl,
-    ...(candidate.additionalEvidence ?? []).map((item) => item.officialUrl ?? item.url),
-  ].filter((url) => typeof url === 'string' && url.startsWith('https://'))
+  const additionalEvidence = normalizeAdditionalEvidence(candidate, evidence.officialUrl)
   return {
     candidateId: candidate.candidateId,
     candidateIds: [candidate.candidateId],
@@ -594,12 +616,11 @@ function normalizeScholarship(candidate, sourceFile, existingRussianIndex) {
     scholarshipType: candidate.scholarshipType ?? null,
     scope: candidate.scope ?? (candidate.applicableLevels ?? []).join(', '),
     applicableLevels: deepClone(candidate.applicableLevels ?? []),
+    programCandidateIds: deepClone(candidate.programCandidateIds ?? []),
     funding: normalizeFunding(candidate),
     cycles: normalizeCycles(candidate),
     evidence,
-    additionalEvidence: [...new Set(supportingUrls)]
-      .filter((url) => url !== evidence.officialUrl)
-      .map((officialUrl) => ({ officialUrl })),
+    additionalEvidence,
     recommendedAction: candidate.recommendedAction ?? 'upsert_verified_identity',
     qualityTier: candidate.qualityTier ?? 'official-source-normalized',
     riskFlags: deepClone(candidate.riskFlags ?? []),

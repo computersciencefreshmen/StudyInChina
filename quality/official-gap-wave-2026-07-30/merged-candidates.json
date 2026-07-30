@@ -6,7 +6,9 @@
     "remaining-candidates.json",
     "scholarship-local-candidates.json",
     "confirmed-gap-candidates.json",
-    "local-strong-expansion.json"
+    "local-strong-expansion.json",
+    "pku-depth-wave.json",
+    "breadth-fastpack.json"
   ],
   "cities": [
     {
@@ -672,6 +674,7 @@
     {
       "candidateId": "local-strong-ahmu-m-anesthesiology",
       "candidateIds": [
+        "breadth-ahmu-m-anesthesiology",
         "local-strong-ahmu-m-anesthesiology"
       ],
       "institutionSlug": "anhui-medical-university",
@@ -706,6 +709,16 @@
           "statusAsOfCheckedAt": "closed_or_not_current",
           "displayAsOpen": false,
           "sourceFormat": "canonical"
+        },
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
         }
       ],
       "evidence": {
@@ -724,7 +737,66 @@
       "qualityTier": "A",
       "riskFlags": [],
       "sourceFiles": [
+        "breadth-fastpack.json",
         "local-strong-expansion.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-ahmu-d-clinical-pharmacy",
+      "candidateIds": [
+        "breadth-ahmu-d-clinical-pharmacy"
+      ],
+      "institutionSlug": "anhui-medical-university",
+      "name": {
+        "en": "Clinical Pharmacy",
+        "zh": "临床药学",
+        "ru": "Клиническая фармация"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": null,
+        "status": "officially_not_announced"
+      },
+      "duration": {
+        "value": "3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "officially_not_announced"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+        "sourceTitle": "Anhui Medical University 2026 High-level Postgraduate International Admissions",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official international postgraduate notice lists Clinical Pharmacy as a three-year doctoral route; unsupported language and fee facts remain unannounced.",
+          "zh": "安徽医科大学国际研究生官方通知列明临床药学三年制博士项目；未核实的语言与费用保留为未公布。",
+          "ru": "Официальное объявление для иностранных аспирантов включает трёхлетнюю докторантуру по клинической фармации; неподтверждённые язык и стоимость оставлены не объявленными."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
       ]
     },
     {
@@ -875,7 +947,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://sie.cueb.edu.cn/Eng/admissionsaids/admissions/bachelordegreeprograms1/index.htm"
+          "officialUrl": "https://sie.cueb.edu.cn/Eng/admissionsaids/admissions/bachelordegreeprograms1/index.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -922,7 +995,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://www.chntheatre.edu.cn/cn/recruit/liuxue/detail/14907.html"
+          "officialUrl": "https://www.chntheatre.edu.cn/cn/recruit/liuxue/detail/14907.html",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -1066,7 +1140,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://english.cjlu.edu.cn/info/1033/3220.htm"
+          "officialUrl": "https://english.cjlu.edu.cn/info/1033/3220.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -1156,7 +1231,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://international.cumtb.edu.cn/info/1037/4473.htm"
+          "officialUrl": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -1312,6 +1388,64 @@
       ]
     },
     {
+      "candidateId": "breadth-dlmu-foundation-college-preparatory",
+      "candidateIds": [
+        "breadth-dlmu-foundation-college-preparatory"
+      ],
+      "institutionSlug": "dalian-maritime-university",
+      "name": {
+        "en": "College Preparatory Program",
+        "zh": "大学预科项目",
+        "ru": "Подготовительная программа"
+      },
+      "programType": "foundation",
+      "level": "foundation",
+      "teachingLanguage": {
+        "value": null,
+        "status": "officially_not_announced"
+      },
+      "duration": {
+        "value": "1 year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "officially_not_announced"
+      },
+      "cycles": [
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://iec.dlmu.edu.cn/English/ADMISSION/College_Preparatory.htm",
+        "sourceTitle": "Dalian Maritime University College Preparatory Program",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "DMU's official International Students' Education Center publishes a one-year college preparatory route that accepts foreign applicants through the university application system.",
+          "zh": "大连海事大学留学生教育中心官网公布一年制大学预科项目，并通过学校申请系统接受外国申请人申请。",
+          "ru": "Официальный Центр образования иностранных студентов DMU публикует годичную подготовительную программу с подачей через университетскую систему."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": "https://dlmu.17gz.org",
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
       "candidateId": "local-dmu-b-clinical-medicine-cn",
       "candidateIds": [
         "local-dmu-b-clinical-medicine-cn"
@@ -1412,7 +1546,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://iec.dmu.edu.cn/info/1012/1638.htm"
+          "officialUrl": "https://iec.dmu.edu.cn/info/1012/1638.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -1470,7 +1605,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://iec.dmu.edu.cn/info/1012/1638.htm"
+          "officialUrl": "https://iec.dmu.edu.cn/info/1012/1638.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -1836,7 +1972,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://sie.dufe.edu.cn/content_95765.html"
+          "officialUrl": "https://sie.dufe.edu.cn/content_95765.html",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -1894,7 +2031,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://sie.dufe.edu.cn/content_95765.html"
+          "officialUrl": "https://sie.dufe.edu.cn/content_95765.html",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -1952,7 +2090,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://sie.dufe.edu.cn/content_95765.html"
+          "officialUrl": "https://sie.dufe.edu.cn/content_95765.html",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -2014,7 +2153,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://fao.gdufe.edu.cn/2026/0228/c9112a233408/page.htm"
+          "officialUrl": "https://fao.gdufe.edu.cn/2026/0228/c9112a233408/page.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -2076,7 +2216,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://fao.gdufe.edu.cn/2026/0228/c9112a233408/page.htm"
+          "officialUrl": "https://fao.gdufe.edu.cn/2026/0228/c9112a233408/page.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -2574,7 +2715,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://studyoverseas.gzucm.edu.cn/__local/B/8A/53/9D531B3B0DC40045B0E47DFD76C_FC43920B_48C18.pdf"
+          "officialUrl": "https://studyoverseas.gzucm.edu.cn/__local/B/8A/53/9D531B3B0DC40045B0E47DFD76C_FC43920B_48C18.pdf",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -2704,6 +2846,7 @@
     {
       "candidateId": "local-strong-gmu-b-clinical-medicine-cn",
       "candidateIds": [
+        "breadth-gzmu-b-clinical-medicine",
         "local-strong-gmu-b-clinical-medicine-cn"
       ],
       "institutionSlug": "guizhou-medical-university",
@@ -2738,6 +2881,16 @@
           "statusAsOfCheckedAt": "closed_or_not_current",
           "displayAsOpen": false,
           "sourceFormat": "canonical"
+        },
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
         }
       ],
       "evidence": {
@@ -2756,7 +2909,66 @@
       "qualityTier": "A",
       "riskFlags": [],
       "sourceFiles": [
+        "breadth-fastpack.json",
         "local-strong-expansion.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-gzmu-b-stomatology",
+      "candidateIds": [
+        "breadth-gzmu-b-stomatology"
+      ],
+      "institutionSlug": "guizhou-medical-university",
+      "name": {
+        "en": "Stomatology",
+        "zh": "口腔医学",
+        "ru": "Стоматология"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "5 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "officially_not_announced"
+      },
+      "cycles": [
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://soe.gmc.edu.cn/info/1008/1702.htm",
+        "sourceTitle": "Guizhou Medical University International Admissions",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The university's official international admissions source identifies Stomatology as a five-year Chinese-taught bachelor program.",
+          "zh": "贵州医科大学国际招生官方来源确认口腔医学为五年制中文授课本科项目。",
+          "ru": "Официальный источник университета подтверждает стоматологию как пятилетнюю китайскоязычную программу бакалавриата."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
       ]
     },
     {
@@ -3205,7 +3417,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://iic.hrbnu.edu.cn/ru/?a=list&c=content&catid=49"
+          "officialUrl": "https://iic.hrbnu.edu.cn/ru/?a=list&c=content&catid=49",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -3252,7 +3465,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://ciee.hbu.edu.cn/show?id=0d606879-774b-496d-9930-476137a23de3"
+          "officialUrl": "https://ciee.hbu.edu.cn/show?id=0d606879-774b-496d-9930-476137a23de3",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -3466,6 +3680,64 @@
       ]
     },
     {
+      "candidateId": "breadth-jnmc-m-clinical-medicine",
+      "candidateIds": [
+        "breadth-jnmc-m-clinical-medicine"
+      ],
+      "institutionSlug": "jining-medical-university",
+      "name": {
+        "en": "Clinical Medicine (Professional Master's)",
+        "zh": "临床医学专业型硕士",
+        "ru": "Клиническая медицина (профессиональная магистратура)"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 26000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2026-03-01",
+          "applicationDeadline": "2026-06-30",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+        "sourceTitle": "Jining Medical University 2026 International Master's Admissions Guide",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 guide lists Clinical Medicine as a three-year professional master's route for foreign applicants, requires HSK 4, and sets annual tuition at CNY 26,000.",
+          "zh": "济宁医学院2026年官方简章列明临床医学为面向外国申请人的三年制专业型硕士，要求HSK四级，学费每年26000元。",
+          "ru": "Официальное руководство 2026 года указывает клиническую медицину как трёхлетнюю профессиональную магистратуру для иностранных абитуриентов с HSK 4 и платой 26 000 юаней в год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
       "candidateId": "local-strong-jnmc-m-clinical-medicine-cn",
       "candidateIds": [
         "local-strong-jnmc-m-clinical-medicine-cn"
@@ -3516,7 +3788,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf"
+          "officialUrl": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -3525,6 +3798,122 @@
       "riskFlags": [],
       "sourceFiles": [
         "local-strong-expansion.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-jnmc-m-pharmacy",
+      "candidateIds": [
+        "breadth-jnmc-m-pharmacy"
+      ],
+      "institutionSlug": "jining-medical-university",
+      "name": {
+        "en": "Pharmacy (Professional Master's)",
+        "zh": "药学专业型硕士",
+        "ru": "Фармация (профессиональная магистратура)"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 26000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2026-03-01",
+          "applicationDeadline": "2026-06-30",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+        "sourceTitle": "Jining Medical University 2026 International Master's Admissions Guide",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official guide lists Pharmacy as a three-year professional master's route for international applicants at CNY 26,000 per academic year.",
+          "zh": "官方简章列明药学专业型硕士面向国际申请人，学制三年，学费每学年26000元。",
+          "ru": "Официальное руководство включает фармацию как трёхлетнюю профессиональную магистратуру для иностранных абитуриентов стоимостью 26 000 юаней в учебный год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-jnmc-m-public-health",
+      "candidateIds": [
+        "breadth-jnmc-m-public-health"
+      ],
+      "institutionSlug": "jining-medical-university",
+      "name": {
+        "en": "Public Health (Professional Master's)",
+        "zh": "公共卫生专业型硕士",
+        "ru": "Общественное здравоохранение (профессиональная магистратура)"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 26000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2026-03-01",
+          "applicationDeadline": "2026-06-30",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+        "sourceTitle": "Jining Medical University 2026 International Master's Admissions Guide",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 international master's guide lists Public Health with a three-year duration and CNY 26,000 annual tuition.",
+          "zh": "济宁医学院2026年来华留学生硕士简章列明公共卫生专业，学制三年，学费每年26000元。",
+          "ru": "Официальное руководство для иностранных магистрантов на 2026 год включает общественное здравоохранение сроком три года и стоимостью 26 000 юаней в год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
       ]
     },
     {
@@ -3628,7 +4017,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://www.kmmc.cn/upload/20251120/2025112011480439.pdf"
+          "officialUrl": "https://www.kmmc.cn/upload/20251120/2025112011480439.pdf",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -3696,6 +4086,7 @@
     {
       "candidateId": "local-strong-kust-b-civil-engineering-en",
       "candidateIds": [
+        "breadth-kust-b-civil-engineering-en",
         "local-strong-kust-b-civil-engineering-en"
       ],
       "institutionSlug": "kunming-university-of-science-and-technology",
@@ -3730,6 +4121,16 @@
           "statusAsOfCheckedAt": "closed_or_not_current",
           "displayAsOpen": false,
           "sourceFormat": "canonical"
+        },
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
         }
       ],
       "evidence": {
@@ -3742,13 +4143,82 @@
           "ru": "Официальный источник международного института подтверждает англоязычную программу по гражданскому строительству; длительность, стоимость и цикл не объявлены."
         }
       },
-      "additionalEvidence": [],
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://gjxy.kust.edu.cn/info/1337/1722.htm",
+          "sourceTitle": "KUST International Program Catalogue"
+        }
+      ],
       "applicationUrl": null,
       "recommendedAction": "publish_program_identity_without_open_cycle",
       "qualityTier": "A",
       "riskFlags": [],
       "sourceFiles": [
+        "breadth-fastpack.json",
         "local-strong-expansion.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-kust-b-international-economics-trade-en",
+      "candidateIds": [
+        "breadth-kust-b-international-economics-trade-en"
+      ],
+      "institutionSlug": "kunming-university-of-science-and-technology",
+      "name": {
+        "en": "International Economics and Trade",
+        "zh": "国际经济与贸易",
+        "ru": "Международная экономика и торговля"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "officially_not_announced"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "officially_not_announced"
+      },
+      "cycles": [
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjxy.kust.edu.cn/info/1336/1351.htm",
+        "sourceTitle": "KUST English-taught International Programs",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official KUST international education page lists International Economics and Trade as an English-taught option.",
+          "zh": "昆明理工大学国际教育官网列明国际经济与贸易英文授课项目。",
+          "ru": "Официальная страница международного образования KUST указывает международную экономику и торговлю как англоязычную программу."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://gjxy.kust.edu.cn/info/1337/1722.htm",
+          "sourceTitle": "KUST International Program Catalogue"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
       ]
     },
     {
@@ -3967,6 +4437,7 @@
     {
       "candidateId": "local-strong-ncut-b-architecture-en",
       "candidateIds": [
+        "breadth-ncut-b-architecture-en",
         "local-strong-ncut-b-architecture-en"
       ],
       "institutionSlug": "north-china-university-of-technology",
@@ -4001,6 +4472,16 @@
           "statusAsOfCheckedAt": "closed_or_not_current",
           "displayAsOpen": false,
           "sourceFormat": "canonical"
+        },
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
         }
       ],
       "evidence": {
@@ -4019,7 +4500,124 @@
       "qualityTier": "A",
       "riskFlags": [],
       "sourceFiles": [
+        "breadth-fastpack.json",
         "local-strong-expansion.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-ncut-b-electronic-information-engineering-en",
+      "candidateIds": [
+        "breadth-ncut-b-electronic-information-engineering-en"
+      ],
+      "institutionSlug": "north-china-university-of-technology",
+      "name": {
+        "en": "Electronic Information Engineering",
+        "zh": "电子信息工程",
+        "ru": "Электронная информационная инженерия"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "officially_not_announced"
+      },
+      "cycles": [
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+        "sourceTitle": "NCUT International Undergraduate Admissions",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "NCUT's official international admissions page lists Electronic Information Engineering among four English-taught bachelor programs.",
+          "zh": "北方工业大学国际招生官网将电子信息工程列入四个英文授课本科项目。",
+          "ru": "Официальная страница международного приёма NCUT включает электронную информационную инженерию в четыре англоязычные программы бакалавриата."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": "https://ncut.17gz.org/member/login.do",
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-ncut-b-mechatronics-engineering-en",
+      "candidateIds": [
+        "breadth-ncut-b-mechatronics-engineering-en"
+      ],
+      "institutionSlug": "north-china-university-of-technology",
+      "name": {
+        "en": "Mechatronics Engineering",
+        "zh": "机械电子工程",
+        "ru": "Мехатроника"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "officially_not_announced"
+      },
+      "cycles": [
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+        "sourceTitle": "NCUT International Undergraduate Admissions",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official NCUT international undergraduate page identifies Mechatronics Engineering as English-taught and states bachelor programs normally last four years.",
+          "zh": "北方工业大学国际本科官网明确机械电子工程为英文授课，且本科项目通常为四年制。",
+          "ru": "Официальная страница NCUT указывает мехатронику как англоязычную программу и сообщает стандартную продолжительность бакалавриата четыре года."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": "https://ncut.17gz.org/member/login.do",
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
       ]
     },
     {
@@ -4109,6 +4707,842 @@
       ]
     },
     {
+      "candidateId": "pku-depth-cs-master-english",
+      "candidateIds": [
+        "pku-depth-cs-master-english"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "Computer Science and Technology (English-taught Master's)",
+        "zh": "计算机科学与技术（英文授课硕士）",
+        "ru": "Компьютерные науки и технологии (магистратура на английском языке)"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 50000,
+        "currency": "CNY",
+        "period": "year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2025-10-20",
+          "applicationDeadline": "2026-01-10",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=739",
+        "sourceTitle": "2026 Application Guide for International Graduate Students in Computer Science at Peking University",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 guide explicitly offers Computer Science and Technology to international master's applicants in English, with a three-year duration and tuition of CNY 50,000 per year.",
+          "zh": "2026年官方指南明确面向国际硕士申请人开设英文授课计算机科学与技术项目，学制三年，学费每年50000元。",
+          "ru": "Официальное руководство 2026 года прямо предлагает иностранным магистрантам программу по компьютерным наукам на английском языке сроком три года и стоимостью 50 000 юаней в год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-cs-doctorate-english",
+      "candidateIds": [
+        "pku-depth-cs-doctorate-english"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "Computer Science and Technology (English-taught PhD)",
+        "zh": "计算机科学与技术（英文授课博士）",
+        "ru": "Компьютерные науки и технологии (докторантура на английском языке)"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years; 5 years for direct PhD from bachelor's",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 50000,
+        "currency": "CNY",
+        "period": "year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2025-10-20",
+          "applicationDeadline": "2026-01-10",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=739",
+        "sourceTitle": "2026 Application Guide for International Graduate Students in Computer Science at Peking University",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 guide explicitly offers an English-taught Computer Science and Technology PhD to international applicants. The normal route is four years, the direct-from-bachelor route is five years, and tuition is CNY 50,000 per year.",
+          "zh": "2026年官方指南明确面向国际申请人开设英文授课计算机科学与技术博士项目；常规学制四年，本科直博五年，学费每年50000元。",
+          "ru": "Официальное руководство 2026 года подтверждает англоязычную докторантуру по компьютерным наукам для иностранных кандидатов: четыре года по обычной траектории, пять лет после бакалавриата и 50 000 юаней в год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-gvs-chinese-language",
+      "candidateIds": [
+        "pku-depth-gvs-chinese-language"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "General Visiting Student Program — Chinese Language Track",
+        "zh": "普通进修生项目—汉语课程方向",
+        "ru": "Программа общего визитинга — китайский язык"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 semester or 1 academic year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 18000,
+        "currency": "CNY",
+        "period": "semester",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2026-03-01",
+          "applicationDeadline": "2026-04-30",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/further_detail.php?tag=general_visiting_program",
+        "sourceTitle": "General Visiting Student Program",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official PKU page confirms an individually applicable General Visiting Student Chinese-language track lasting one semester or one academic year, with tuition of CNY 18,000 per semester.",
+          "zh": "北大官方页面确认普通进修生汉语方向可个人申请，学制一学期或一学年，学费每学期18000元。",
+          "ru": "Официальная страница PKU подтверждает индивидуально доступный языковой трек общей программы визитинга сроком один семестр или учебный год и стоимостью 18 000 юаней за семестр."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-gvs-credit-courses",
+      "candidateIds": [
+        "pku-depth-gvs-credit-courses"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "General Visiting Student Program — Credit Courses",
+        "zh": "普通进修生项目—专业学分课程方向",
+        "ru": "Программа общего визитинга — зачётные дисциплины"
+      },
+      "programType": "visiting",
+      "level": "other",
+      "teachingLanguage": {
+        "value": null,
+        "status": "officially_not_announced"
+      },
+      "duration": {
+        "value": "1 semester or 1 academic year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 24000,
+        "currency": "CNY",
+        "period": "semester",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2026-03-01",
+          "applicationDeadline": "2026-04-30",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/further_detail.php?tag=general_visiting_program",
+        "sourceTitle": "General Visiting Student Program",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official PKU page confirms an individually applicable visiting-student route for undergraduate credit courses, usually one semester or one academic year, at CNY 24,000 per semester. Course language is not generalized.",
+          "zh": "北大官方页面确认可个人申请的本科专业学分课程进修渠道，通常为一学期或一学年，学费每学期24000元；不对全部课程的授课语言作泛化。",
+          "ru": "Официальная страница PKU подтверждает индивидуальный маршрут визитинга с зачётными курсами бакалавриата, обычно на семестр или учебный год, стоимостью 24 000 юаней за семестр. Язык всех курсов не обобщается."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-impa-cppic-master",
+      "candidateIds": [
+        "pku-depth-impa-cppic-master"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "International Master of Public Administration (Comparative Public Policy and International Cooperation)",
+        "zh": "国际公共管理硕士（比较公共政策与国际合作）",
+        "ru": "Международная магистратура государственного управления (сравнительная публичная политика и международное сотрудничество)"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "2 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 190000,
+        "currency": "CNY",
+        "period": "year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-04-10",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=761",
+        "sourceTitle": "International Master of Public Administration Program at School of Government (2026 Entry)",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 notice welcomes international applicants to the English-taught, two-year IMPA-CPPIC program and states tuition of CNY 190,000 per year.",
+          "zh": "2026年官方通知明确欢迎国际申请人申请英文授课、两年制IMPA-CPPIC项目，学费每年190000元。",
+          "ru": "Официальное уведомление 2026 года приглашает иностранных кандидатов на двухлетнюю англоязычную программу IMPA-CPPIC стоимостью 190 000 юаней в год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-llm-chinese-law",
+      "candidateIds": [
+        "pku-depth-llm-chinese-law"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "Master of Laws (LL.M.) in Chinese Law",
+        "zh": "中国法法学硕士（LL.M.）",
+        "ru": "Магистр права (LL.M.) по китайскому праву"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1–2 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 160000,
+        "currency": "CNY",
+        "period": "program",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-31",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=749",
+        "sourceTitle": "The Master of Laws (LL.M.) Program in Chinese Law at Peking University for 2026 Entry",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 brochure confirms an English-taught LL.M. in Chinese Law for international applicants, lasting one to two years with total tuition of CNY 160,000.",
+          "zh": "2026年官方简章确认面向国际申请人的英文授课中国法LL.M.项目，学制一至两年，总学费160000元。",
+          "ru": "Официальная брошюра 2026 года подтверждает англоязычную программу LL.M. по китайскому праву для иностранных кандидатов сроком один-два года и общей стоимостью 160 000 юаней."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-chinese-language-summer-school",
+      "candidateIds": [
+        "pku-depth-chinese-language-summer-school"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "Peking University Chinese Language Summer School",
+        "zh": "北京大学汉语暑期学校",
+        "ru": "Летняя школа китайского языка Пекинского университета"
+      },
+      "programType": "short_term",
+      "level": "other",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4, 6, or 8 weeks",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "not_applicable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": "2025-12-01",
+          "applicationDeadline": "2026-07-04",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/6300.php?_isa=1",
+        "sourceTitle": "Peking University Chinese Language Summer School 2026 Admission Brochure",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 brochure offers one Chinese Language Summer School identity with four-, six-, and eight-week tracks, including Business Chinese. The formal month-granularity catalog stores a one-to-two-month range, while this summary preserves the exact options. Tuition is CNY 8,000, 11,000, or 14,000 by track.",
+          "zh": "2026年官方简章公布同一汉语暑期学校下四周、六周、八周课程（含商务汉语）。正式目录按月保存一至两个月区间，本摘要保留精确周数；各课程学费分别为8000元、11000元或14000元。",
+          "ru": "Официальная брошюра 2026 года описывает единую летнюю школу китайского языка с курсами на 4, 6 и 8 недель, включая деловой китайский. Каталог хранит диапазон 1–2 месяца, а точные варианты указаны здесь. Стоимость: 8 000, 11 000 или 14 000 юаней."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "multi_tier_tuition_not_reduced_to_single_value"
+      ],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-yuke-pre-university",
+      "candidateIds": [
+        "pku-depth-yuke-pre-university"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "PKU Yuke / Pre-university Program for International Students",
+        "zh": "北京大学外国留学生预科项目",
+        "ru": "Подготовительная программа PKU для иностранных студентов"
+      },
+      "programType": "foundation",
+      "level": "foundation",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "2 semesters (Fall entry) or 3 semesters (Spring entry)",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 27000,
+        "currency": "CNY",
+        "period": "semester",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2025-11-24",
+          "applicationDeadline": "2026-05-08",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=772",
+        "sourceTitle": "Application Notice of PKU Yuke/Pre-university Program for International Students (2026 Entry)",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official notice confirms a preparatory program for international high-school graduates, centered on Chinese with optional mathematics. Fall entrants study for two semesters and spring entrants for three semesters; tuition is CNY 27,000 per semester.",
+          "zh": "官方通知确认该预科项目面向国际高中毕业生，以汉语为主并可选数学；秋季入学学制两学期，春季入学学制三学期，学费每学期27000元。",
+          "ru": "Официальное уведомление подтверждает подготовительную программу для иностранных выпускников школ: основной предмет — китайский, математика по выбору. Осенний набор длится два семестра, весенний — три; стоимость составляет 27 000 юаней за семестр."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-lse-environmental-double-master",
+      "candidateIds": [
+        "pku-depth-lse-environmental-double-master"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "PKU–LSE Double Master's in Environmental Policy, Technology and Health",
+        "zh": "北大—伦敦政经环境政策、技术与健康双硕士项目",
+        "ru": "Двойная магистратура PKU–LSE по экологической политике, технологиям и здоровью"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "2 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 80000,
+        "currency": "CNY",
+        "period": "program",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-31",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=762",
+        "sourceTitle": "2026 Peking University-LSE Joint Double Master's Degree Program in Environmental Policy, Technology and Health",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 notice confirms a two-university, fully English-taught master's route for non-PRC applicants. The PKU-stage tuition is CNY 80,000; LSE tuition is separately set by LSE.",
+          "zh": "2026年官方通知确认面向非中国籍申请人的两校全英文双硕士项目；北大阶段学费为80000元，伦敦政经阶段学费另按其标准收取。",
+          "ru": "Официальное уведомление 2026 года подтверждает полностью англоязычную двойную магистратуру для иностранных кандидатов. Стоимость этапа в PKU составляет 80 000 юаней; плата LSE устанавливается отдельно."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "partner_university_has_separate_tuition"
+      ],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-research-scholar",
+      "candidateIds": [
+        "pku-depth-research-scholar"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "Research Scholar Program",
+        "zh": "研究学者项目",
+        "ru": "Программа исследователей"
+      },
+      "programType": "visiting",
+      "level": "other",
+      "teachingLanguage": {
+        "value": null,
+        "status": "officially_not_announced"
+      },
+      "duration": {
+        "value": null,
+        "status": "officially_not_announced"
+      },
+      "tuition": {
+        "amount": 3320,
+        "currency": "CNY",
+        "period": "month",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "open",
+          "displayAsOpen": true,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/further.php",
+        "sourceTitle": "Visiting Student Programs",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official visiting-program page states that international research scholars may apply all year round. PKU's official fee guidance lists CNY 3,320 per month; no fixed program duration or teaching language is inferred.",
+          "zh": "访问项目官方页面明确国际研究学者全年可申请；北大官方费用指南列明每月3320元，不推断固定学制或授课语言。",
+          "ru": "Официальная страница программ визитинга указывает, что иностранные исследователи могут подавать заявки круглый год. Официальное руководство PKU устанавливает плату 3 320 юаней в месяц; фиксированный срок и язык не выводятся."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://www.isd.pku.edu.cn/en/campus_detail.php?id=700",
+          "sourceTitle": "Expense — Tuition Fees"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "publish_with_verified_current_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "rolling_cycle_without_fixed_deadline"
+      ],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-senior-visiting-student",
+      "candidateIds": [
+        "pku-depth-senior-visiting-student"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "Senior Visiting Student Program",
+        "zh": "高级进修生项目",
+        "ru": "Программа старшего визитинга"
+      },
+      "programType": "visiting",
+      "level": "other",
+      "teachingLanguage": {
+        "value": null,
+        "status": "officially_not_announced"
+      },
+      "duration": {
+        "value": "1 year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "not_applicable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2026-03-01",
+          "applicationDeadline": "2026-03-31",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=536",
+        "sourceTitle": "Senior Visiting Student Program",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official PKU page confirms a one-year research-oriented program for non-Chinese applicants with a master's degree or above. Tuition is field-specific: CNY 30,000 for humanities or CNY 34,000 for sciences per academic year.",
+          "zh": "北大官方页面确认面向具有硕士及以上学历的非中国籍申请人的一年制研究型高级进修项目；文科学费每学年30000元，理科34000元。",
+          "ru": "Официальная страница PKU подтверждает годичную исследовательскую программу для иностранных кандидатов со степенью магистра или выше. Стоимость зависит от направления: 30 000 юаней для гуманитарных и 34 000 для естественно-научных дисциплин за учебный год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "field_specific_tuition_not_reduced_to_single_value"
+      ],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-spring-four-week-chinese",
+      "candidateIds": [
+        "pku-depth-spring-four-week-chinese"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "Spring Four-week Chinese Language Studies Program",
+        "zh": "春季四周汉语学习项目",
+        "ru": "Весенняя четырёхнедельная программа китайского языка"
+      },
+      "programType": "short_term",
+      "level": "other",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 weeks",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 8000,
+        "currency": "CNY",
+        "period": "program",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "intakeLabel": "spring",
+          "applicationOpen": "2025-11-15",
+          "applicationDeadline": "2026-01-10",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=609",
+        "sourceTitle": "PKU Spring Four-week Chinese Language Studies Program",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official notice confirms a four-week Chinese-language short course for international applicants, with 2026 tuition of CNY 8,000. Its 2026 application cycle is closed and retained only as identity evidence.",
+          "zh": "官方通知确认面向国际申请人的四周汉语短期项目，2026年学费8000元；该年度申请已截止，仅保留为项目身份依据。",
+          "ru": "Официальное уведомление подтверждает четырёхнедельный курс китайского для иностранных кандидатов стоимостью 8 000 юаней в 2026 году. Набор 2026 года закрыт и сохранён только как доказательство существования программы."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-undergraduate-international-degree-entry",
+      "candidateIds": [
+        "pku-depth-undergraduate-international-degree-entry"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "Undergraduate Degree Programs for International Students",
+        "zh": "外国留学生本科项目",
+        "ru": "Программы бакалавриата для иностранных студентов"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "officially_not_announced"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2025-12-19",
+          "applicationDeadline": "2026-07-10",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=813",
+        "sourceTitle": "2026 Undergraduate Program Without Written Examination",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 notices confirm direct and entrance-examination application routes for international undergraduates. PKU academic guidance states that undergraduate programs are Chinese-taught with a standard four-year duration; extensions up to six years are an academic limit, not the published program length. No individual major is inferred.",
+          "zh": "2026年官方通知确认外国留学生本科免笔试及入学考试两类申请渠道。北大学业指南说明本科项目采用中文授课，标准学制四年；最长六年属于修业年限上限，不作为项目学制发布。本记录不推断具体专业。",
+          "ru": "Официальные уведомления 2026 года подтверждают маршруты поступления иностранных бакалавров без письменного экзамена и через вступительный экзамен. Академическое руководство PKU указывает китайский язык и стандартный срок четыре года; шесть лет — предел продления, а не заявленная длительность программы. Конкретная специальность не выводится."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=818",
+          "sourceTitle": "2026 Undergraduate Program Entrance Examination"
+        },
+        {
+          "officialUrl": "https://www.isd.pku.edu.cn/en/campus_detail.php?id=699",
+          "sourceTitle": "Academic Guidance for Degree Students"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "umbrella_undergraduate_identity"
+      ],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-yenching-china-studies-master",
+      "candidateIds": [
+        "pku-depth-yenching-china-studies-master"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "Yenching Academy Master's Program in China Studies",
+        "zh": "燕京学堂中国学硕士项目",
+        "ru": "Магистерская программа Академии Яньцзин по китаеведению"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": null,
+        "status": "officially_not_announced"
+      },
+      "duration": {
+        "value": "2 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "officially_not_announced"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2025-09-10",
+          "applicationDeadline": "2025-12-01",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=756",
+        "sourceTitle": "Yenching Academy of Peking University Master's Program in China Studies for 2026 Entry",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 entry notice confirms a two-year interdisciplinary China Studies master's program open to non-Chinese applicants. All admitted students receive the Yenching Fellowship; teaching language is not inferred from application-language requirements.",
+          "zh": "2026年官方招生通知确认面向非中国籍申请人的两年制跨学科中国学硕士项目，所有录取者均获燕京奖学金；不根据申请材料语言推断授课语言。",
+          "ru": "Официальное уведомление о наборе 2026 года подтверждает двухлетнюю междисциплинарную магистратуру по китаеведению для иностранных кандидатов. Все принятые получают стипендию Yenching; язык обучения не выводится из требований к языку документов."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": "https://apply.yca.pku.edu.cn",
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
       "candidateId": "remaining-qdu-nondegree-chinese-language-fall-2025",
       "candidateIds": [
         "remaining-qdu-nondegree-chinese-language-fall-2025"
@@ -4155,7 +5589,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://admission.qdu.edu.cn/"
+          "officialUrl": "https://admission.qdu.edu.cn/",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -4326,8 +5761,67 @@
       ]
     },
     {
+      "candidateId": "breadth-sdjzu-language-chinese",
+      "candidateIds": [
+        "breadth-sdjzu-language-chinese"
+      ],
+      "institutionSlug": "shandong-jianzhu-university",
+      "name": {
+        "en": "Chinese Language Program",
+        "zh": "汉语语言项目",
+        "ru": "Программа китайского языка"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 semester",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 5000,
+        "currency": "CNY",
+        "period": "semester",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.sdjzu.edu.cn/english/International_Admissions/Academic_Education/Fees.htm",
+        "sourceTitle": "Shandong Jianzhu University International Admissions Fees",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official international admissions page publishes a Chinese Language Program option priced at CNY 5,000 for one semester.",
+          "zh": "学校国际招生官网公布汉语语言项目，一学期学费为5000元。",
+          "ru": "Официальная страница международного приёма публикует программу китайского языка стоимостью 5 000 юаней за семестр."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
       "candidateId": "local-strong-sdjzu-b-civil-engineering-en",
       "candidateIds": [
+        "breadth-sdjzu-b-civil-engineering-en",
         "local-strong-sdjzu-b-civil-engineering-en"
       ],
       "institutionSlug": "shandong-jianzhu-university",
@@ -4362,6 +5856,16 @@
           "statusAsOfCheckedAt": "closed_or_not_current",
           "displayAsOpen": false,
           "sourceFormat": "canonical"
+        },
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
         }
       ],
       "evidence": {
@@ -4376,7 +5880,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://www.sdjzu.edu.cn/english/International_Admissions/Academic_Education/Fees.htm"
+          "officialUrl": "https://www.sdjzu.edu.cn/english/International_Admissions/Academic_Education/Fees.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -4384,6 +5889,7 @@
       "qualityTier": "A",
       "riskFlags": [],
       "sourceFiles": [
+        "breadth-fastpack.json",
         "local-strong-expansion.json"
       ]
     },
@@ -4591,7 +6097,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://en.shmtu.edu.cn/UndergraduatePrograms/main.psp"
+          "officialUrl": "https://en.shmtu.edu.cn/UndergraduatePrograms/main.psp",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -4649,7 +6156,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://en.shmtu.edu.cn/UndergraduatePrograms/main.psp"
+          "officialUrl": "https://en.shmtu.edu.cn/UndergraduatePrograms/main.psp",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -4707,7 +6215,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://en.shmtu.edu.cn/UndergraduatePrograms/main.psp"
+          "officialUrl": "https://en.shmtu.edu.cn/UndergraduatePrograms/main.psp",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -4822,7 +6331,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://en.shmtu.edu.cn/UndergraduatePrograms/main.psp"
+          "officialUrl": "https://en.shmtu.edu.cn/UndergraduatePrograms/main.psp",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -4869,7 +6379,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://www.suibe.edu.cn/wsc/2025/1229/c19502a192099/page.htm"
+          "officialUrl": "https://www.suibe.edu.cn/wsc/2025/1229/c19502a192099/page.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -4985,7 +6496,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://en.syphu.edu.cn/Admissions/Admission_Requirement.htm"
+          "officialUrl": "https://en.syphu.edu.cn/Admissions/Admission_Requirement.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -5867,6 +7379,258 @@
       ]
     },
     {
+      "candidateId": "breadth-tju-b-chemical-engineering-en",
+      "candidateIds": [
+        "breadth-tju-b-chemical-engineering-en"
+      ],
+      "institutionSlug": "tianjin-university",
+      "name": {
+        "en": "Chemical Engineering and Technology",
+        "zh": "化学工程与工艺",
+        "ru": "Химическая инженерия и технология"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 20000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-04-15",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://sie.tju.edu.cn/lxtd/bk/202510/t20251013_324444.html",
+        "sourceTitle": "2026 Tianjin University International Undergraduate Admissions",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 international undergraduate guide lists Chemical Engineering and Technology among the English-taught programs; the university's official fee schedule gives the general English-taught bachelor tuition.",
+          "zh": "天津大学2026年国际本科招生简章将化学工程与工艺列为英文授课专业；学校官方收费表公布英文授课普通本科专业学费。",
+          "ru": "Официальное руководство Тяньцзиньского университета на 2026 год включает химическую инженерию и технологию в число англоязычных программ; официальный прейскурант указывает плату за обучение."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://sie.tju.edu.cn/en/xz/201609/P020160923548329465420.pdf",
+          "sourceTitle": "Tianjin University Official Fee Schedule"
+        }
+      ],
+      "applicationUrl": "https://tju.at0086.cn/StuApplication/Login.aspx",
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-tju-b-environmental-engineering-en",
+      "candidateIds": [
+        "breadth-tju-b-environmental-engineering-en"
+      ],
+      "institutionSlug": "tianjin-university",
+      "name": {
+        "en": "Environmental Engineering",
+        "zh": "环境工程",
+        "ru": "Экологическая инженерия"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 20000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-04-15",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://sie.tju.edu.cn/lxtd/bk/202510/t20251013_324444.html",
+        "sourceTitle": "2026 Tianjin University International Undergraduate Admissions",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 guide identifies Environmental Engineering as an English-taught international undergraduate option.",
+          "zh": "天津大学2026年官方招生简章将环境工程列为面向国际本科生的英文授课专业。",
+          "ru": "Официальное руководство на 2026 год указывает экологическую инженерию как англоязычную программу бакалавриата для иностранных студентов."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://sie.tju.edu.cn/en/xz/201609/P020160923548329465420.pdf",
+          "sourceTitle": "Tianjin University Official Fee Schedule"
+        }
+      ],
+      "applicationUrl": "https://tju.at0086.cn/StuApplication/Login.aspx",
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-tju-foundation-one-year",
+      "candidateIds": [
+        "breadth-tju-foundation-one-year"
+      ],
+      "institutionSlug": "tianjin-university",
+      "name": {
+        "en": "International Foundation Program (One Academic Year)",
+        "zh": "国际本科预科项目（一学年）",
+        "ru": "Международная подготовительная программа (один учебный год)"
+      },
+      "programType": "foundation",
+      "level": "foundation",
+      "teachingLanguage": {
+        "value": null,
+        "status": "officially_not_announced"
+      },
+      "duration": {
+        "value": "1 academic year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 24000,
+        "currency": "CNY",
+        "period": "program",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2026-03-15",
+          "applicationDeadline": "2026-07-15",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://sie.tju.edu.cn/en/xwxm/FOUNDATIONPROGRAM/202510/t20251013_324451.html",
+        "sourceTitle": "2026 Tianjin University Foundation Program",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 foundation page publishes the one-academic-year autumn route and its application period; tuition is cross-checked against the official fee schedule.",
+          "zh": "天津大学官方2026年预科项目页面公布一学年秋季项目及申请期；学费由学校官方收费表交叉核实。",
+          "ru": "Официальная страница подготовительной программы на 2026 год публикует годичный осенний маршрут и период подачи; стоимость сверена с официальным прейскурантом."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://sie.tju.edu.cn/en/xz/201609/P020160923548329465420.pdf",
+          "sourceTitle": "Tianjin University Official Fee Schedule"
+        }
+      ],
+      "applicationUrl": "https://tju.at0086.cn/StuApplication/Login.aspx",
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-tju-b-pharmacy-en",
+      "candidateIds": [
+        "breadth-tju-b-pharmacy-en"
+      ],
+      "institutionSlug": "tianjin-university",
+      "name": {
+        "en": "Pharmacy",
+        "zh": "药学",
+        "ru": "Фармация"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 20000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-04-15",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://sie.tju.edu.cn/lxtd/bk/202510/t20251013_324444.html",
+        "sourceTitle": "2026 Tianjin University International Undergraduate Admissions",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 international undergraduate guide states that Pharmacy is offered in English.",
+          "zh": "天津大学2026年国际本科招生简章明确药学专业提供英文授课。",
+          "ru": "Официальное руководство по международному бакалавриату на 2026 год указывает, что фармация преподаётся на английском языке."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://sie.tju.edu.cn/en/xz/201609/P020160923548329465420.pdf",
+          "sourceTitle": "Tianjin University Official Fee Schedule"
+        }
+      ],
+      "applicationUrl": "https://tju.at0086.cn/StuApplication/Login.aspx",
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
       "candidateId": "remaining-tjufe-b-international-economics-trade-china-commerce",
       "candidateIds": [
         "remaining-tjufe-b-international-economics-trade-china-commerce"
@@ -5956,7 +7720,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://gjc.utibet.edu.cn/info/1061/1369.htm"
+          "officialUrl": "https://gjc.utibet.edu.cn/info/1061/1369.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -6322,6 +8087,7 @@
     {
       "candidateId": "local-strong-xjau-b-animal-medicine",
       "candidateIds": [
+        "breadth-xjau-b-animal-medicine",
         "local-strong-xjau-b-animal-medicine"
       ],
       "institutionSlug": "xinjiang-agricultural-university",
@@ -6356,6 +8122,16 @@
           "statusAsOfCheckedAt": "closed_or_not_current",
           "displayAsOpen": false,
           "sourceFormat": "canonical"
+        },
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
         }
       ],
       "evidence": {
@@ -6368,13 +8144,135 @@
           "ru": "Официальный каталог на 2026 год подтверждает бакалавриат по ветеринарной медицине; не зафиксированные динамические сведения отмечены как не объявленные."
         }
       },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://cie.xjau.edu.cn/2026/0319/c1288a113905/pagem.htm",
+          "sourceTitle": "Xinjiang Agricultural University 2026 International Admissions"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json",
+        "local-strong-expansion.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-xjau-m-veterinary-medicine",
+      "candidateIds": [
+        "breadth-xjau-m-veterinary-medicine"
+      ],
+      "institutionSlug": "xinjiang-agricultural-university",
+      "name": {
+        "en": "Veterinary Medicine",
+        "zh": "兽医学",
+        "ru": "Ветеринария"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": null,
+        "status": "officially_not_announced"
+      },
+      "duration": {
+        "value": null,
+        "status": "officially_not_announced"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "officially_not_announced"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cie.xjau.edu.cn/_upload/article/files/82/2f/97478cf44d7799e481014ed1192e/57311611-14bb-4339-ad62-fb264298c9ee.pdf",
+        "sourceTitle": "Xinjiang Agricultural University 2026 International Program Catalogue",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 international program catalogue identifies Veterinary Medicine at master's level; unsupported language, duration, and fee facts are left unannounced.",
+          "zh": "新疆农业大学2026年国际项目官方目录列明兽医学硕士；语言、学制和费用等未充分核实字段保留为未公布。",
+          "ru": "Официальный международный каталог 2026 года включает магистратуру по ветеринарии; неподтверждённые язык, срок и стоимость оставлены как не объявленные."
+        }
+      },
       "additionalEvidence": [],
       "applicationUrl": null,
       "recommendedAction": "publish_program_identity_without_open_cycle",
       "qualityTier": "A",
       "riskFlags": [],
       "sourceFiles": [
-        "local-strong-expansion.json"
+        "breadth-fastpack.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-xzhmu-b-clinical-medicine-en",
+      "candidateIds": [
+        "breadth-xzhmu-b-clinical-medicine-en"
+      ],
+      "institutionSlug": "xuzhou-medical-university",
+      "name": {
+        "en": "Clinical Medicine (English-taught)",
+        "zh": "临床医学（英文授课）",
+        "ru": "Клиническая медицина (на английском языке)"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "officially_not_announced"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "officially_not_announced"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjjy.xzhmu.edu.cn/info/1010/2412.htm",
+        "sourceTitle": "Xuzhou Medical University 2026 International Clinical Medicine Admissions",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The International Education School's official 2026 notice confirms the English-taught undergraduate Clinical Medicine route for foreign students.",
+          "zh": "徐州医科大学国际教育学院2026年官方简章确认面向外国留学生的英文授课临床医学本科项目。",
+          "ru": "Официальное объявление Школы международного образования на 2026 год подтверждает англоязычный бакалавриат по клинической медицине для иностранных студентов."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": "https://xzhmu.17gz.org",
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
       ]
     },
     {
@@ -6433,6 +8331,64 @@
       "riskFlags": [],
       "sourceFiles": [
         "local-strong-expansion.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-xzhmu-b-stomatology",
+      "candidateIds": [
+        "breadth-xzhmu-b-stomatology"
+      ],
+      "institutionSlug": "xuzhou-medical-university",
+      "name": {
+        "en": "Stomatology",
+        "zh": "口腔医学",
+        "ru": "Стоматология"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": null,
+        "status": "officially_not_announced"
+      },
+      "duration": {
+        "value": null,
+        "status": "officially_not_announced"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "officially_not_announced"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjjy.xzhmu.edu.cn/info/1010/2411.htm",
+        "sourceTitle": "Xuzhou Medical University 2026 International Stomatology Admissions",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The university's official international undergraduate admissions section publishes a 2026 Stomatology route; unconfirmed dynamic facts are intentionally left blank.",
+          "zh": "学校国际本科招生官网公布2026年口腔医学项目；未能确认的动态事实按规则留空。",
+          "ru": "Официальный раздел международного бакалавриата публикует программу стоматологии на 2026 год; неподтверждённые динамические сведения намеренно оставлены пустыми."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": "https://xzhmu.17gz.org",
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
       ]
     },
     {
@@ -7049,7 +9005,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://sie.zjgsu.edu.cn/gjen/_t75/2128/listm.htm"
+          "officialUrl": "https://sie.zjgsu.edu.cn/gjen/_t75/2128/listm.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -7177,7 +9134,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://sie.zjgsu.edu.cn/gjen/_t75/2128/listm.htm"
+          "officialUrl": "https://sie.zjgsu.edu.cn/gjen/_t75/2128/listm.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -7235,7 +9193,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://sie.zjgsu.edu.cn/gjen/_t75/2128/listm.htm"
+          "officialUrl": "https://sie.zjgsu.edu.cn/gjen/_t75/2128/listm.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -7293,7 +9252,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://sie.zjgsu.edu.cn/gjen/_t75/2128/listm.htm"
+          "officialUrl": "https://sie.zjgsu.edu.cn/gjen/_t75/2128/listm.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -7562,7 +9522,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://english.zufe.edu.cn/Study_at_ZUFE/Application.htm"
+          "officialUrl": "https://english.zufe.edu.cn/Study_at_ZUFE/Application.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -7624,7 +9585,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://ies.zust.edu.cn/StudywithUS/Fees.htm"
+          "officialUrl": "https://ies.zust.edu.cn/StudywithUS/Fees.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -7686,7 +9648,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://ies.zust.edu.cn/StudywithUS/Fees.htm"
+          "officialUrl": "https://ies.zust.edu.cn/StudywithUS/Fees.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "applicationUrl": null,
@@ -7699,6 +9662,58 @@
     }
   ],
   "scholarshipCandidates": [
+    {
+      "candidateId": "breadth-sch-ahmu-high-level-postgraduate",
+      "candidateIds": [
+        "breadth-sch-ahmu-high-level-postgraduate"
+      ],
+      "institutionSlug": "anhui-medical-university",
+      "name": {
+        "en": "Chinese Government Scholarship – High-level Postgraduate Program",
+        "zh": "中国政府奖学金高水平研究生项目",
+        "ru": "Стипендия правительства Китая — программа подготовки аспирантов высокого уровня"
+      },
+      "scholarshipType": null,
+      "scope": "institution",
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "officially_not_announced",
+        "tiers": []
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+        "sourceTitle": "Anhui Medical University 2026 High-level Postgraduate Program",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official international education notice publishes Anhui Medical University's 2026 high-level postgraduate scholarship route for eligible master's and doctoral applicants.",
+          "zh": "安徽医科大学国际教育官方通知公布2026年高水平研究生奖学金渠道，适用于符合条件的硕士和博士申请人。",
+          "ru": "Официальное объявление международного образования публикует маршрут стипендии высокого уровня на 2026 год для подходящих магистрантов и докторантов."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
     {
       "candidateId": "local-strong-bipt-beijing-government-scholarship",
       "candidateIds": [
@@ -7713,6 +9728,7 @@
       "scholarshipType": null,
       "scope": "Eligible international applicants at BIPT under the current official university requirements.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": []
@@ -7761,6 +9777,7 @@
       "scholarshipType": null,
       "scope": "Eligible international applicants at Chongqing Normal University under the current official scholarship requirements.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": []
@@ -7811,6 +9828,7 @@
       "applicableLevels": [
         "bachelor"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": [],
@@ -7859,11 +9877,12 @@
       "name": {
         "en": "International Chinese Language Teachers Scholarship",
         "zh": "国际中文教师奖学金",
-        "ru": "Международная стипендия для преподавателей китайского языка"
+        "ru": "Стипендия для преподавателей китайского языка"
       },
       "scholarshipType": null,
       "scope": "Eligible Chinese-language and International Chinese Language Education applicants at DUFE; four-week study has different funding treatment.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -7913,6 +9932,7 @@
       "scholarshipType": null,
       "scope": "International students at GDUFE subject to the current annual university notice.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": []
@@ -7965,6 +9985,7 @@
         "master",
         "doctorate"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -8028,6 +10049,7 @@
         "master",
         "doctorate"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -8098,6 +10120,7 @@
         "master",
         "doctorate"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -8160,6 +10183,7 @@
       "scholarshipType": null,
       "scope": "ASEAN applicants to Chinese-taught programs at GXMU.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -8186,7 +10210,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html"
+          "officialUrl": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "recommendedAction": "publish_scholarship_identity_without_open_cycle",
@@ -8210,6 +10235,7 @@
       "scholarshipType": null,
       "scope": "Officially admitted self-funded international undergraduate freshmen; candidates are included and ranked after enrollment.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": []
@@ -8258,6 +10284,7 @@
         "master",
         "doctorate"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -8328,6 +10355,7 @@
       "scholarshipType": null,
       "scope": "The verified 2026 notice is primarily for continuing full-time degree students who have completed one year; it must not be presented as a general newcomer award.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -8363,6 +10391,55 @@
       ]
     },
     {
+      "candidateId": "breadth-sch-gzmu-csc-asean",
+      "candidateIds": [
+        "breadth-sch-gzmu-csc-asean"
+      ],
+      "institutionSlug": "guizhou-medical-university",
+      "name": {
+        "en": "Chinese Government Scholarship – China-ASEAN Program",
+        "zh": "中国政府奖学金中国—东盟项目",
+        "ru": "Стипендия правительства Китая — программа Китай–АСЕАН"
+      },
+      "scholarshipType": null,
+      "scope": "institution",
+      "applicableLevels": [],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "officially_not_announced",
+        "tiers": []
+      },
+      "cycles": [
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://soe.gmc.edu.cn/info/1008/1656.htm",
+        "sourceTitle": "Guizhou Medical University China-ASEAN Scholarship",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "Guizhou Medical University's official international education source publishes the China-ASEAN Chinese Government Scholarship route; unsupported current-cycle facts remain blank.",
+          "zh": "贵州医科大学国际教育官方来源公布中国—东盟中国政府奖学金渠道；未核实的当期事实保留为空。",
+          "ru": "Официальный источник Гуйчжоуского медицинского университета публикует маршрут стипендии Китай–АСЕАН; неподтверждённые сведения текущего цикла оставлены пустыми."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
       "candidateId": "local-strong-gmu-csc-asean-scholarship",
       "candidateIds": [
         "local-strong-gmu-csc-asean-scholarship"
@@ -8376,6 +10453,7 @@
       "scholarshipType": null,
       "scope": "Eligible ASEAN applicants to Guizhou Medical University under the official CSC notice.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": []
@@ -8424,6 +10502,7 @@
       "scholarshipType": null,
       "scope": "Eligible ASEAN applicants to Hainan Medical University subject to the official annual notice.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": []
@@ -8472,6 +10551,7 @@
       "scholarshipType": null,
       "scope": "Eligible international applicants to Hainan Medical University subject to the current official admission notice.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": []
@@ -8520,6 +10600,7 @@
       "scholarshipType": null,
       "scope": "International applicants at Jiangsu University of Science and Technology; exact annual tiers remain subject to the current official guide.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": []
@@ -8555,6 +10636,57 @@
       ]
     },
     {
+      "candidateId": "breadth-sch-jnmc-university-international",
+      "candidateIds": [
+        "breadth-sch-jnmc-university-international"
+      ],
+      "institutionSlug": "jining-medical-university",
+      "name": {
+        "en": "Jining Medical University International Student Scholarship",
+        "zh": "济宁医学院校级国际学生奖学金",
+        "ru": "Университетская стипендия Цзининского медицинского университета для иностранных студентов"
+      },
+      "scholarshipType": null,
+      "scope": "institution",
+      "applicableLevels": [
+        "master"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "officially_not_announced",
+        "tiers": []
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2026-03-01",
+          "applicationDeadline": "2026-06-30",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+        "sourceTitle": "Jining Medical University 2026 International Master's Admissions Guide",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 guide separately confirms a university-level international student scholarship; unsupported award amounts are not inferred.",
+          "zh": "2026年官方简章另行确认校级国际学生奖学金；未明确的资助金额不作推断。",
+          "ru": "Официальное руководство 2026 года отдельно подтверждает университетскую стипендию для иностранных студентов; неподтверждённые суммы не предполагаются."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
       "candidateId": "local-strong-jnmc-shandong-government-scholarship",
       "candidateIds": [
         "local-strong-jnmc-shandong-government-scholarship"
@@ -8568,6 +10700,7 @@
       "scholarshipType": null,
       "scope": "Eligible international applicants to Jining Medical University under the 2026 official guide.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": []
@@ -8603,6 +10736,60 @@
       ]
     },
     {
+      "candidateId": "breadth-sch-jnmc-shandong-government",
+      "candidateIds": [
+        "breadth-sch-jnmc-shandong-government"
+      ],
+      "institutionSlug": "jining-medical-university",
+      "name": {
+        "en": "Shandong Provincial Government Scholarship at Jining Medical University",
+        "zh": "济宁医学院山东省政府外国留学生奖学金",
+        "ru": "Стипендия правительства провинции Шаньдун в Цзининском медицинском университете"
+      },
+      "scholarshipType": null,
+      "scope": "institution",
+      "applicableLevels": [
+        "master"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Full scholarship: CNY 40,000 per person per year",
+          "Partial scholarship: CNY 5,000 per person per year"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2026-03-01",
+          "applicationDeadline": "2026-06-30",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+        "sourceTitle": "Jining Medical University 2026 International Master's Admissions Guide",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 guide states that international master's students may be assessed for a CNY 40,000 annual full award or CNY 5,000 partial award.",
+          "zh": "2026年官方简章说明国际硕士研究生可参与评定每年40000元全额或5000元部分奖学金。",
+          "ru": "Официальное руководство 2026 года предусматривает для иностранных магистрантов полную стипендию 40 000 либо частичную 5 000 юаней в год."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
       "candidateId": "local-kmmu-freshmen-aid",
       "candidateIds": [
         "local-kmmu-freshmen-aid"
@@ -8616,6 +10803,7 @@
       "scholarshipType": null,
       "scope": "Eligible international freshmen after paying full tuition and meeting enrollment and performance requirements.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -8665,6 +10853,7 @@
       "scholarshipType": null,
       "scope": "Continuing degree students from the second academic year onward.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -8702,6 +10891,7 @@
     {
       "candidateId": "local-strong-kust-scholarship-information",
       "candidateIds": [
+        "breadth-sch-kust-international-student",
         "local-strong-kust-scholarship-information"
       ],
       "institutionSlug": "kunming-university-of-science-and-technology",
@@ -8713,6 +10903,7 @@
       "scholarshipType": null,
       "scope": "International applicants at KUST subject to the current official scholarship notice.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": []
@@ -8722,6 +10913,16 @@
           "academicYear": null,
           "intake": "other",
           "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        },
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
           "applicationOpen": null,
           "applicationDeadline": null,
           "statusAsOfCheckedAt": "closed_or_not_current",
@@ -8744,7 +10945,482 @@
       "qualityTier": "B",
       "riskFlags": [],
       "sourceFiles": [
+        "breadth-fastpack.json",
         "local-strong-expansion.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-sch-ncut-beijing-government",
+      "candidateIds": [
+        "breadth-sch-ncut-beijing-government"
+      ],
+      "institutionSlug": "north-china-university-of-technology",
+      "name": {
+        "en": "Beijing Government Scholarship for International Students",
+        "zh": "北京市外国留学生奖学金",
+        "ru": "Стипендия правительства Пекина для иностранных студентов"
+      },
+      "scholarshipType": null,
+      "scope": "institution",
+      "applicableLevels": [
+        "bachelor"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "officially_not_announced",
+        "tiers": []
+      },
+      "cycles": [
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+        "sourceTitle": "NCUT International Undergraduate Admissions",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "NCUT's official international admissions instructions require freshmen who seek the Beijing Government Scholarship to upload the scholarship application form.",
+          "zh": "北方工业大学国际招生官方说明要求申请北京市政府奖学金的新生上传奖学金申请表。",
+          "ru": "Официальные инструкции NCUT требуют от первокурсников, претендующих на стипендию правительства Пекина, загрузить соответствующую форму."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-beijing-government-scholarship",
+      "candidateIds": [
+        "pku-depth-beijing-government-scholarship"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "Beijing Government Scholarship for International Students at PKU",
+        "zh": "北京来华留学生政府奖学金（北京大学）",
+        "ru": "Стипендия правительства Пекина для иностранных студентов в PKU"
+      },
+      "scholarshipType": null,
+      "scope": "Eligible prospective international degree students at Peking University under the 2026 official rules; recipients may not hold another conflicting scholarship.",
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Full or partial tuition waiver"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-09",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=819",
+        "sourceTitle": "2026 Scholarship Applications for Prospective International Graduate Students of Peking University",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "PKU's official 2026 graduate notice confirms full or partial tuition support through the Beijing Government Scholarship. The undergraduate notice separately confirms consideration for qualified international undergraduates.",
+          "zh": "北大2026年研究生官方通知确认北京市政府奖学金提供全额或部分学费资助；本科通知另确认符合条件的国际本科申请人可参评。",
+          "ru": "Официальное уведомление PKU 2026 года подтверждает полное или частичное покрытие обучения по стипендии правительства Пекина; уведомление для бакалавров отдельно подтверждает их участие."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=813",
+          "sourceTitle": "2026 Undergraduate Program Without Written Examination"
+        }
+      ],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-cgs-advanced-graduate",
+      "candidateIds": [
+        "pku-depth-cgs-advanced-graduate"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "Chinese Government Scholarship — Advanced Graduate Program at PKU",
+        "zh": "中国政府奖学金—北京大学高水平研究生项目",
+        "ru": "Стипендия правительства Китая — программа подготовки магистров и докторов высокого уровня в PKU"
+      },
+      "scholarshipType": null,
+      "scope": "Applicants who submitted a 2026 full-time self-funded international graduate application to Peking University and meet the official scholarship conditions.",
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Full or partial tuition waiver",
+          "Living stipend",
+          "Housing",
+          "Medical insurance"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-17",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=819",
+        "sourceTitle": "2026 Scholarship Applications for Prospective International Graduate Students of Peking University",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "PKU's official 2026 notice confirms the CSC Advanced Graduate Program for eligible international master's and doctoral applicants, covering full or partial tuition, stipend, housing and medical insurance.",
+          "zh": "北大2026年官方通知确认中国政府奖学金高水平研究生项目面向符合条件的国际硕博申请人，资助包括全额或部分学费、生活费、住宿和医疗保险。",
+          "ru": "Официальное уведомление PKU 2026 года подтверждает стипендию CSC для иностранных магистрантов и докторантов: полное или частичное покрытие обучения, стипендия, жильё и медицинская страховка."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-international-chinese-language-teachers-scholarship",
+      "candidateIds": [
+        "pku-depth-international-chinese-language-teachers-scholarship"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "International Chinese Language Teachers Scholarship at PKU",
+        "zh": "北京大学国际中文教师奖学金",
+        "ru": "Международная стипендия для преподавателей китайского языка в PKU"
+      },
+      "scholarshipType": null,
+      "scope": "Eligible non-Chinese applicants to PKU's general visiting, pre-university, or Master of International Chinese Language Education routes under the official 2026 notices.",
+      "applicableLevels": [
+        "master",
+        "non_degree"
+      ],
+      "programCandidateIds": [
+        "pku-depth-gvs-chinese-language",
+        "pku-depth-yuke-pre-university"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "Double-room accommodation at PKU Global Village",
+          "Living allowance",
+          "Comprehensive medical insurance"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-04-30",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        },
+        {
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "intakeLabel": "spring",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-10-31",
+          "statusAsOfCheckedAt": "open",
+          "displayAsOpen": true,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/cn/scholarship/detail.php?id=6",
+        "sourceTitle": "2026 PKU International Chinese Language Teachers Scholarship — General Visiting / Pre-university",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 PKU notice confirms tuition, double-room accommodation, living allowance and medical insurance. The February 2027 non-degree intake has a future October 31, 2026 deadline and is the only cycle displayed as open.",
+          "zh": "北大2026年官方通知确认资助包括学费、双人间住宿、生活费和医疗保险；2027年2月非学历项目截止日期为2026年10月31日，是本记录唯一展示为开放的周期。",
+          "ru": "Официальное уведомление PKU 2026 года подтверждает оплату обучения, двухместное общежитие, ежемесячную выплату и страховку. Для набора февраля 2027 года срок — 31 октября 2026 года; только этот цикл показывается открытым."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://www.isd.pku.edu.cn/cn/scholarship/detail.php?id=666",
+          "sourceTitle": "2026 PKU International Chinese Language Teachers Scholarship — MTCSOL"
+        }
+      ],
+      "recommendedAction": "publish_with_verified_current_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-pku-scholarship-international-students",
+      "candidateIds": [
+        "pku-depth-pku-scholarship-international-students"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "Peking University Scholarship for International Students",
+        "zh": "北京大学外国留学生奖学金",
+        "ru": "Стипендия Пекинского университета для иностранных студентов"
+      },
+      "scholarshipType": null,
+      "scope": "Eligible prospective international degree students under PKU's 2026 undergraduate or graduate scholarship rules; awards are mutually exclusive with other listed funding.",
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Full or partial tuition waiver",
+          "Living stipend",
+          "Medical insurance"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-09",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=819",
+        "sourceTitle": "2026 Scholarship Applications for Prospective International Graduate Students of Peking University",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 graduate notice states full or partial tuition, living stipend and medical insurance for eligible international graduate applicants. The undergraduate notice separately confirms undergraduate consideration without a separate scholarship application.",
+          "zh": "2026年研究生官方通知列明面向符合条件的国际研究生提供全额或部分学费、生活费和医疗保险；本科通知另确认合格本科申请人无需另行申请即可参评。",
+          "ru": "Официальное уведомление 2026 года для магистров и докторов предусматривает полное или частичное покрытие обучения, стипендию и страховку. Уведомление для бакалавров отдельно подтверждает рассмотрение без дополнительной заявки."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=813",
+          "sourceTitle": "2026 Undergraduate Program Without Written Examination"
+        }
+      ],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-law-international-student-scholarship",
+      "candidateIds": [
+        "pku-depth-law-international-student-scholarship"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "PKU Law International Student Scholarship",
+        "zh": "北京大学法学院国际学生奖学金",
+        "ru": "Стипендия Юридической школы PKU для иностранных студентов"
+      },
+      "scholarshipType": null,
+      "scope": "International applicants to the 2026 LL.M. Program in Chinese Law, subject to merit-based selection and the Law School's award rules.",
+      "applicableLevels": [
+        "master"
+      ],
+      "programCandidateIds": [
+        "pku-depth-llm-chinese-law"
+      ],
+      "funding": {
+        "status": "officially_not_announced",
+        "tiers": []
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-31",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=749",
+        "sourceTitle": "The Master of Laws (LL.M.) Program in Chinese Law at Peking University for 2026 Entry",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 LL.M. brochure explicitly lists the PKU Law International Student Scholarship among merit-based awards. It does not publish a standalone fixed award amount, so no amount is inferred.",
+          "zh": "2026年LL.M.官方简章明确列出北京大学法学院国际学生奖学金；简章未公布独立固定金额，因此不作推断。",
+          "ru": "Официальная брошюра LL.M. 2026 года прямо перечисляет стипендию Юридической школы PKU для иностранных студентов. Фиксированный размер отдельно не опубликован и не выводится."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-cs-international-phd-full-support",
+      "candidateIds": [
+        "pku-depth-cs-international-phd-full-support"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "School of Computer Science International PhD Full Financial Support",
+        "zh": "北京大学计算机学院国际博士生全额资助",
+        "ru": "Полное финансирование иностранных докторантов Школы компьютерных наук PKU"
+      },
+      "scholarshipType": null,
+      "scope": "All students admitted to the School of Computer Science PhD program under the official 2026 international graduate guide.",
+      "applicableLevels": [
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "pku-depth-cs-doctorate-english"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Full tuition support",
+          "Monthly stipend"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2025-10-20",
+          "applicationDeadline": "2026-01-10",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=739",
+        "sourceTitle": "2026 Application Guide for International Graduate Students in Computer Science at Peking University",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 School of Computer Science guide states that every admitted PhD student receives full financial support including tuition and a monthly stipend.",
+          "zh": "北京大学计算机学院2026年官方指南明确所有录取博士生均获全额资助，包括学费和每月生活补助。",
+          "ru": "Официальное руководство Школы компьютерных наук 2026 года указывает, что каждый принятый докторант получает полное финансирование, включая обучение и ежемесячную выплату."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
+      ]
+    },
+    {
+      "candidateId": "pku-depth-yenching-fellowship",
+      "candidateIds": [
+        "pku-depth-yenching-fellowship"
+      ],
+      "institutionSlug": "peking-university",
+      "name": {
+        "en": "Yenching Fellowship",
+        "zh": "燕京奖学金",
+        "ru": "Стипендия Yenching"
+      },
+      "scholarshipType": null,
+      "scope": "All admitted students in the Yenching Academy Master's Program in China Studies receive first-year funding; second-year support is conditional on academic standing and continued residence in Beijing.",
+      "applicableLevels": [
+        "master"
+      ],
+      "programCandidateIds": [
+        "pku-depth-yenching-china-studies-master"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition",
+          "On-campus accommodation",
+          "One round-trip travel stipend between the student's base city and Beijing",
+          "Monthly stipend",
+          "Medical insurance",
+          "Designated research-trip expenses"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": "2025-09-10",
+          "applicationDeadline": "2025-12-01",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=756",
+        "sourceTitle": "Yenching Academy of Peking University Master's Program in China Studies for 2026 Entry",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 program notice states that every admitted Yenching Scholar receives first-year tuition, accommodation, travel, stipend, insurance and designated research-trip support; second-year support is conditional.",
+          "zh": "2026年项目官方通知明确所有录取的燕京学者第一年均获学费、住宿、往返旅费、生活费、保险及指定调研资助，第二年资助需满足条件。",
+          "ru": "Официальное уведомление программы 2026 года гарантирует всем принятым стипендиатам первого года оплату обучения, жильё, поездку, ежемесячную выплату, страховку и исследовательские расходы; второй год предоставляется при выполнении условий."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "pku-depth-wave.json"
       ]
     },
     {
@@ -8761,6 +11437,7 @@
       "scholarshipType": null,
       "scope": "Eligible international applicants at QUST; route and annual conditions must be checked on the official notice.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": []
@@ -8796,6 +11473,115 @@
       ]
     },
     {
+      "candidateId": "breadth-sch-sdjzu-university",
+      "candidateIds": [
+        "breadth-sch-sdjzu-university"
+      ],
+      "institutionSlug": "shandong-jianzhu-university",
+      "name": {
+        "en": "Shandong Jianzhu University International Student Scholarship",
+        "zh": "山东建筑大学国际学生奖学金",
+        "ru": "Стипендия Шаньдунского архитектурно-строительного университета для иностранных студентов"
+      },
+      "scholarshipType": null,
+      "scope": "institution",
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Full scholarship for selected outstanding freshmen",
+          "Half scholarship for other selected admitted freshmen"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.sdjzu.edu.cn/english/International_Admissions/Academic_Education/Scholarship_policy.htm",
+        "sourceTitle": "Shandong Jianzhu University Scholarship Policy",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official policy states that outstanding freshmen may receive a full university scholarship and other admitted freshmen may receive a half scholarship.",
+          "zh": "学校官方政策说明优秀新生可获校级全额奖学金，其他符合条件的录取新生可获半额奖学金。",
+          "ru": "Официальная политика сообщает, что выдающиеся первокурсники могут получить полную, а другие отобранные зачисленные — половинную университетскую стипендию."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-sch-sdjzu-shandong-provincial",
+      "candidateIds": [
+        "breadth-sch-sdjzu-shandong-provincial"
+      ],
+      "institutionSlug": "shandong-jianzhu-university",
+      "name": {
+        "en": "Shandong Provincial Government Scholarship",
+        "zh": "山东省政府外国留学生奖学金",
+        "ru": "Стипендия правительства провинции Шаньдун"
+      },
+      "scholarshipType": null,
+      "scope": "institution",
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "officially_not_announced",
+        "tiers": []
+      },
+      "cycles": [
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.sdjzu.edu.cn/english/International_Admissions/Academic_Education/Scholarship_policy.htm",
+        "sourceTitle": "Shandong Jianzhu University Scholarship Policy",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The university's official scholarship policy explicitly includes the Shandong Provincial Scholarship; cycle-specific amounts are left unannounced.",
+          "zh": "学校官方奖学金政策明确包含山东省政府奖学金；具体年度金额保留为未公布。",
+          "ru": "Официальная политика университета прямо включает стипендию провинции Шаньдун; суммы конкретного цикла оставлены не объявленными."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
       "candidateId": "sch-shmtu-shanghai-government-2026",
       "candidateIds": [
         "sch-shmtu-shanghai-government-2026"
@@ -8813,6 +11599,7 @@
         "master",
         "doctorate"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -8870,6 +11657,7 @@
       "scholarshipType": null,
       "scope": "Eligible international applicants at Shanxi University of Chinese Medicine subject to the current official notice.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": []
@@ -8920,6 +11708,7 @@
       "applicableLevels": [
         "bachelor"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -8978,6 +11767,7 @@
       "applicableLevels": [
         "bachelor"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -9040,6 +11830,7 @@
       "applicableLevels": [
         "bachelor"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -9100,6 +11891,7 @@
         "master",
         "non_degree"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -9173,6 +11965,7 @@
         "master",
         "doctorate"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -9238,6 +12031,7 @@
         "master",
         "doctorate"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -9314,6 +12108,7 @@
         "master",
         "doctorate"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": [],
@@ -9356,6 +12151,7 @@
       "scholarshipType": null,
       "scope": "Short-term academic or research exchange under the China Link Scholarship Program; the current notice includes an official 2026 major list attachment.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": []
@@ -9400,6 +12196,7 @@
       "scholarshipType": null,
       "scope": "Eligible international degree and general scholar applicants at Tianjin Foreign Studies University.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -9437,6 +12234,220 @@
       ]
     },
     {
+      "candidateId": "breadth-sch-tju-silk-road-2026",
+      "candidateIds": [
+        "breadth-sch-tju-silk-road-2026"
+      ],
+      "institutionSlug": "tianjin-university",
+      "name": {
+        "en": "Chinese Government Scholarship – Silk Road Program",
+        "zh": "中国政府奖学金“丝绸之路”项目",
+        "ru": "Стипендия правительства Китая — программа «Шёлковый путь»"
+      },
+      "scholarshipType": null,
+      "scope": "institution",
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver, campus accommodation, comprehensive medical insurance, and monthly stipend by study level"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-18",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://sie.tju.edu.cn/en/jxj/zgzfjxj/202604/t20260409_324590.html",
+        "sourceTitle": "Tianjin University 2026 Chinese Government Scholarship – Silk Road Program",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official notice confirms the 2026 Silk Road scholarship, supported levels, eligible nationalities, full coverage, and the expired May 18 deadline.",
+          "zh": "官方通知确认天津大学2026年丝绸之路奖学金、资助层次、适用国籍、全额覆盖及已过期的5月18日截止日期。",
+          "ru": "Официальное объявление подтверждает стипендию «Шёлковый путь» на 2026 год, уровни, страны, полное покрытие и истёкший срок 18 мая."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-sch-tju-international-chinese-language-teachers",
+      "candidateIds": [
+        "breadth-sch-tju-international-chinese-language-teachers"
+      ],
+      "institutionSlug": "tianjin-university",
+      "name": {
+        "en": "International Chinese Language Teachers Scholarship",
+        "zh": "国际中文教师奖学金",
+        "ru": "Стипендия для преподавателей китайского языка"
+      },
+      "scholarshipType": null,
+      "scope": "institution",
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "non_degree"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver, campus accommodation, medical insurance, and monthly living allowance according to program category"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": "2026-03-01",
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://sie.tju.edu.cn/en/jxj/ChineseLanguageTeachers/202602/t20260206_324551.html",
+        "sourceTitle": "Tianjin University 2026 International Chinese Language Teachers Scholarship",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 notice publishes degree and non-degree categories, application routes, and scholarship coverage.",
+          "zh": "天津大学2026年官方通知公布学位与非学位资助类别、申请渠道及奖学金覆盖内容。",
+          "ru": "Официальное объявление на 2026 год публикует категории обучения, порядок подачи и покрытие стипендии."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-sch-tju-tianjin-government",
+      "candidateIds": [
+        "breadth-sch-tju-tianjin-government"
+      ],
+      "institutionSlug": "tianjin-university",
+      "name": {
+        "en": "Tianjin Government Scholarship",
+        "zh": "天津市政府奖学金",
+        "ru": "Стипендия правительства Тяньцзиня"
+      },
+      "scholarshipType": null,
+      "scope": "institution",
+      "applicableLevels": [
+        "bachelor",
+        "master"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "officially_not_announced",
+        "tiers": []
+      },
+      "cycles": [
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://sie.tju.edu.cn/en/jxj/tjszfjxj/",
+        "sourceTitle": "Tianjin University Tianjin Government Scholarship",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "Tianjin University's official scholarship page confirms that prospective bachelor and master's students may apply; cycle-specific funding is not inferred.",
+          "zh": "天津大学奖学金官网确认拟入学本科生和硕士生可申请；未推断具体年度资助金额。",
+          "ru": "Официальная страница TJU подтверждает возможность подачи для будущих бакалавров и магистров; суммы текущего цикла не предполагаются."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
+      "candidateId": "breadth-sch-tju-growth-steel-indonesia-2026",
+      "candidateIds": [
+        "breadth-sch-tju-growth-steel-indonesia-2026"
+      ],
+      "institutionSlug": "tianjin-university",
+      "name": {
+        "en": "Tianjin University Growth Steel Group Indonesia Scholarship",
+        "zh": "天津大学Growth Steel Group印度尼西亚奖学金",
+        "ru": "Индонезийская стипендия Tianjin University Growth Steel Group"
+      },
+      "scholarshipType": null,
+      "scope": "institution",
+      "applicableLevels": [
+        "bachelor",
+        "master"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "officially_not_announced",
+        "tiers": []
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "autumn",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-31",
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://sie.tju.edu.cn/en/jxj/OtherScholarships/202604/t20260416_324601.html",
+        "sourceTitle": "2026 Tianjin University Growth Steel Group Indonesia Scholarship",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official 2026 notice confirms an Indonesia-only scholarship route for bachelor and master's applicants and records the expired May 31 deadline.",
+          "zh": "天津大学2026年官方通知确认面向印度尼西亚籍本科及硕士申请人的奖学金渠道，并记录已过期的5月31日截止日期。",
+          "ru": "Официальное объявление на 2026 год подтверждает стипендию для индонезийских абитуриентов бакалавриата и магистратуры и истёкший срок 31 мая."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
       "candidateId": "sch-ujn-undergraduate-international",
       "candidateIds": [
         "sch-ujn-undergraduate-international"
@@ -9452,6 +12463,7 @@
       "applicableLevels": [
         "bachelor"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -9511,6 +12523,7 @@
       "scholarshipType": null,
       "scope": "Eligible international degree applicants to USST; exact annual opening dates must be checked in the next cycle notice.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -9544,6 +12557,58 @@
       ]
     },
     {
+      "candidateId": "breadth-sch-xzhmu-president-graduate-fund",
+      "candidateIds": [
+        "breadth-sch-xzhmu-president-graduate-fund"
+      ],
+      "institutionSlug": "xuzhou-medical-university",
+      "name": {
+        "en": "Xuzhou Medical University President's Fund Scholarship for International Graduate Students",
+        "zh": "徐州医科大学留学生研究生校长基金奖学金",
+        "ru": "Стипендия президентского фонда Сюйчжоуского медицинского университета для иностранных аспирантов"
+      },
+      "scholarshipType": null,
+      "scope": "institution",
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "officially_not_announced",
+        "tiers": []
+      },
+      "cycles": [
+        {
+          "academicYear": null,
+          "intake": "other",
+          "intakeLabel": "other",
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed_or_not_current",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjjy.xzhmu.edu.cn/jxj/xxjxj.htm",
+        "sourceTitle": "Xuzhou Medical University School Scholarships",
+        "checkedAt": "2026-07-30",
+        "summary": {
+          "en": "The official scholarship index lists the revised President's Fund Scholarship rules for international graduate students, published in 2025.",
+          "zh": "学校奖学金官网列出2025年发布的《留学生研究生校长基金奖学金管理办法（修订）》。",
+          "ru": "Официальный раздел стипендий публикует пересмотренные в 2025 году правила стипендии президентского фонда для иностранных аспирантов."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [],
+      "sourceFiles": [
+        "breadth-fastpack.json"
+      ]
+    },
+    {
       "candidateId": "local-strong-yzu-university-scholarship",
       "candidateIds": [
         "local-strong-yzu-university-scholarship"
@@ -9557,6 +12622,7 @@
       "scholarshipType": null,
       "scope": "International applicants at Yangzhou University; current award categories and eligibility must be checked on the official page.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "officially_not_announced",
         "tiers": []
@@ -9609,6 +12675,7 @@
         "master",
         "non_degree"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -9673,6 +12740,7 @@
       "applicableLevels": [
         "bachelor"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -9736,6 +12804,7 @@
         "doctorate",
         "non_degree"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -9802,6 +12871,7 @@
         "master",
         "doctorate"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -9860,6 +12930,7 @@
       "scholarshipType": null,
       "scope": "International degree and long-term students at ZJSU; exact annual type and quota remain subject to the current notice.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -9889,7 +12960,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://sie.zjgsu.edu.cn/gjen/_t75/2128/listm.htm"
+          "officialUrl": "https://sie.zjgsu.edu.cn/gjen/_t75/2128/listm.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "recommendedAction": "publish_scholarship_identity_without_open_cycle",
@@ -9913,6 +12985,7 @@
       "scholarshipType": null,
       "scope": "New and continuing international degree students, with separate award tiers.",
       "applicableLevels": [],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -9940,7 +13013,8 @@
       },
       "additionalEvidence": [
         {
-          "officialUrl": "https://sie.zjgsu.edu.cn/gjen/_t75/2128/listm.htm"
+          "officialUrl": "https://sie.zjgsu.edu.cn/gjen/_t75/2128/listm.htm",
+          "sourceTitle": "Supporting official source"
         }
       ],
       "recommendedAction": "publish_scholarship_identity_without_open_cycle",
@@ -9968,6 +13042,7 @@
         "master",
         "doctorate"
       ],
+      "programCandidateIds": [],
       "funding": {
         "status": "known",
         "tiers": [
@@ -10068,14 +13143,14 @@
   "mergeAudit": {
     "mergedCities": 6,
     "mergedUniversities": 20,
-    "rawProgramCandidates": 129,
-    "rawScholarshipCandidates": 42,
-    "mergedProgramCandidates": 125,
-    "mergedScholarshipCandidates": 42,
-    "institutionsRepresented": 76,
+    "rawProgramCandidates": 166,
+    "rawScholarshipCandidates": 62,
+    "mergedProgramCandidates": 156,
+    "mergedScholarshipCandidates": 61,
+    "institutionsRepresented": 79,
     "archiveInstitutions": 6,
-    "openProgramCycles": 8,
-    "openScholarshipCycles": 4,
+    "openProgramCycles": 9,
+    "openScholarshipCycles": 5,
     "programDuplicateGroups": [
       {
         "identityKey": "sichuan-international-studies-university|language|chineselanguageprogram",
@@ -10108,11 +13183,68 @@
           "prog-usst-chinese-language-preparatory-2026"
         ],
         "keptCandidateId": "local-usst-chinese-preparatory-spring-2027"
+      },
+      {
+        "identityKey": "north-china-university-of-technology|bachelor|architecture",
+        "candidateIds": [
+          "breadth-ncut-b-architecture-en",
+          "local-strong-ncut-b-architecture-en"
+        ],
+        "keptCandidateId": "local-strong-ncut-b-architecture-en"
+      },
+      {
+        "identityKey": "shandong-jianzhu-university|bachelor|civilengineering",
+        "candidateIds": [
+          "breadth-sdjzu-b-civil-engineering-en",
+          "local-strong-sdjzu-b-civil-engineering-en"
+        ],
+        "keptCandidateId": "local-strong-sdjzu-b-civil-engineering-en"
+      },
+      {
+        "identityKey": "guizhou-medical-university|bachelor|clinicalmedicine",
+        "candidateIds": [
+          "breadth-gzmu-b-clinical-medicine",
+          "local-strong-gmu-b-clinical-medicine-cn"
+        ],
+        "keptCandidateId": "local-strong-gmu-b-clinical-medicine-cn"
+      },
+      {
+        "identityKey": "xinjiang-agricultural-university|bachelor|animalmedicine",
+        "candidateIds": [
+          "breadth-xjau-b-animal-medicine",
+          "local-strong-xjau-b-animal-medicine"
+        ],
+        "keptCandidateId": "local-strong-xjau-b-animal-medicine"
+      },
+      {
+        "identityKey": "kunming-university-of-science-and-technology|bachelor|civilengineering",
+        "candidateIds": [
+          "breadth-kust-b-civil-engineering-en",
+          "local-strong-kust-b-civil-engineering-en"
+        ],
+        "keptCandidateId": "local-strong-kust-b-civil-engineering-en"
+      },
+      {
+        "identityKey": "anhui-medical-university|master|anesthesiology",
+        "candidateIds": [
+          "breadth-ahmu-m-anesthesiology",
+          "local-strong-ahmu-m-anesthesiology"
+        ],
+        "keptCandidateId": "local-strong-ahmu-m-anesthesiology"
       }
     ],
-    "scholarshipDuplicateGroups": [],
+    "scholarshipDuplicateGroups": [
+      {
+        "identityKey": "kunming-university-of-science-and-technology|kustinternationalstudentscholarship",
+        "candidateIds": [
+          "breadth-sch-kust-international-student",
+          "local-strong-kust-scholarship-information"
+        ],
+        "keptCandidateId": "local-strong-kust-scholarship-information"
+      }
+    ],
     "translationAudit": {
-      "raw": 109,
+      "raw": 166,
       "reusedCatalog": 57,
       "exactDictionary": 5,
       "phraseDictionary": 0,

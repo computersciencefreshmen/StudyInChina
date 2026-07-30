@@ -48,6 +48,19 @@ const LEGACY_DUPLICATE_PROGRAM_MERGES = [
   },
 ]
 
+const LEGACY_DUPLICATE_SCHOLARSHIP_MERGES = [
+  {
+    removeId: 'sch-gap-sch-gdufs-guangdong-government',
+    keepId: 'scholarship-gdufs-guangdong-government',
+    keepSlug: 'gdufs-guangdong-government',
+  },
+  {
+    removeId: 'sch-gap-pku-depth-pku-scholarship-international-students',
+    keepId: 'scholarship-peking-university-international-student',
+    keepSlug: 'peking-university-international-student',
+  },
+]
+
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'))
 }
@@ -132,7 +145,13 @@ function degreeLevel(candidate) {
 }
 
 function parseLanguages(candidate) {
-  const raw = candidate.teachingLanguage?.value ?? candidate.teachingLanguage ?? []
+  const fact = candidate.teachingLanguage
+  if (fact && typeof fact === 'object' && !Array.isArray(fact)) {
+    if (fact.status !== 'known') return []
+  }
+  const raw = fact && typeof fact === 'object' && !Array.isArray(fact)
+    ? fact.value ?? fact.values ?? []
+    : fact ?? []
   const values = Array.isArray(raw) ? raw : String(raw).split(/[,+/&]|\band\b/i)
   const result = []
   for (const value of values) {
@@ -155,7 +174,13 @@ function parseLanguages(candidate) {
 }
 
 function parseDuration(candidate) {
-  const raw = candidate.duration?.value ?? candidate.duration
+  const fact = candidate.duration
+  if (fact && typeof fact === 'object' && !Array.isArray(fact) && fact.status !== 'known') {
+    return { durationMonths: null }
+  }
+  const raw = fact && typeof fact === 'object' && !Array.isArray(fact)
+    ? fact.value ?? fact.options ?? []
+    : fact
   const values = Array.isArray(raw) ? raw : raw ? [raw] : []
   const months = []
   const numberWords = new Map([
@@ -166,17 +191,24 @@ function parseDuration(candidate) {
     ['five', 5],
     ['six', 6],
   ])
+  const addMonths = (amount, unit) => {
+    if (unit.startsWith('year') || unit.startsWith('academic')) months.push(Math.round(amount * 12))
+    else if (unit.startsWith('semester')) months.push(Math.round(amount * 6))
+    else if (unit.startsWith('week')) months.push(Math.max(1, Math.ceil(amount / 4)))
+    else months.push(Math.round(amount))
+  }
   for (const value of values) {
     const text = String(value)
       .toLowerCase()
       .replace(/\b(one|two|three|four|five|six)\b/g, (word) => String(numberWords.get(word)))
     for (const match of text.matchAll(/(\d+(?:\.\d+)?)\s*(academic\s+years?|years?|semesters?|months?|weeks?)/g)) {
-      const amount = Number(match[1])
-      const unit = match[2]
-      if (unit.startsWith('year') || unit.startsWith('academic')) months.push(Math.round(amount * 12))
-      else if (unit.startsWith('semester')) months.push(Math.round(amount * 6))
-      else if (unit.startsWith('week')) months.push(Math.max(1, Math.ceil(amount / 4)))
-      else months.push(Math.round(amount))
+      addMonths(Number(match[1]), match[2])
+    }
+    const groupedPattern = /((?:\d+(?:\.\d+)?)(?:\s*(?:[-–—]|,\s*(?:or\s*)?|\bor\b|\band\b)\s*\d+(?:\.\d+)?)+)\s*(academic\s+years?|years?|semesters?|months?|weeks?)/g
+    for (const match of text.matchAll(groupedPattern)) {
+      for (const amount of match[1].match(/\d+(?:\.\d+)?/g) ?? []) {
+        addMonths(Number(amount), match[2])
+      }
     }
   }
   const valid = months.filter((value) => Number.isInteger(value) && value > 0 && value <= 120)
@@ -261,26 +293,35 @@ function groupOpenCycles(candidate) {
   return [...grouped.values()]
 }
 
-function sourceRecord(id, candidate, kind) {
-  const url = httpsUrl(candidate.evidence?.officialUrl, `${candidate.candidateId} official URL`)
+function sourceRecord(id, candidate, kind, evidence = candidate.evidence) {
+  const url = httpsUrl(evidence?.officialUrl, `${candidate.candidateId} official URL`)
   const checkedAt = isoDate(candidate.evidence?.checkedAt, `${candidate.candidateId} checkedAt`)
+  const title = String(evidence?.sourceTitle ?? candidate.evidence?.sourceTitle ?? candidate.name?.en ?? candidate.candidateId)
   return {
     id,
     url,
-    title: String(candidate.evidence?.sourceTitle ?? candidate.name?.en ?? candidate.candidateId),
+    title,
     publisher: candidate.institutionSlug,
     kind,
-    language: /[\u4e00-\u9fff]/.test(candidate.evidence?.sourceTitle ?? '') ? 'zh' : 'en',
+    language: /[\u4e00-\u9fff]/.test(title) ? 'zh' : 'en',
     official: true,
     accessedAt: checkedAt,
   }
+}
+
+function sourceRecords(baseId, candidate, kind) {
+  const records = [sourceRecord(baseId, candidate, kind)]
+  for (const [index, evidence] of (candidate.additionalEvidence ?? []).entries()) {
+    records.push(sourceRecord(`${baseId}-support-${index + 1}`, candidate, kind, evidence))
+  }
+  return records
 }
 
 function providerType(candidate) {
   const text = `${candidate.name?.en ?? ''} ${candidate.name?.zh ?? ''}`.toLowerCase()
   if (/chinese government|china link|silk road|中国政府/.test(text)) return 'csc'
   if (/provincial|province|省政府/.test(text)) return 'province'
-  if (/municipal|city|市政府/.test(text)) return 'city'
+  if (/beijing government|municipal|city|北京市?政府|市政府/.test(text)) return 'city'
   if (/university|president|academic|freshmen|大学|校长|学业/.test(text)) return 'university'
   return 'other'
 }
@@ -288,7 +329,7 @@ function providerType(candidate) {
 function scholarshipCoverage(candidate) {
   const tiers = candidate.funding?.tiers ?? []
   const text = Array.isArray(tiers) ? tiers.join(' ').toLowerCase() : String(tiers).toLowerCase()
-  const fullTuition = /full scholarship|covers? tuition|tuition, accommodation|免.*学费|100%/.test(text)
+  const fullTuition = /full scholarship|full tuition|covers? tuition|tuition waiver|\btuition\b|免.*学费|100%/.test(text)
   const partialTuition = /partial|50%|70%|40%|30%|20%|10%|second prize/.test(text)
   const accommodation = /accommodation|housing|住宿/.test(text)
   const insurance = /insurance|医疗保险/.test(text)
@@ -488,6 +529,37 @@ function mergeLegacyDuplicatePrograms(state) {
   }
 }
 
+function mergeLegacyDuplicateScholarships(state) {
+  let removedScholarships = 0
+  let migratedScholarshipSources = 0
+
+  for (const rule of LEGACY_DUPLICATE_SCHOLARSHIP_MERGES) {
+    const duplicate = state.scholarships.find((scholarship) => scholarship.id === rule.removeId)
+    if (!duplicate) continue
+    let keeper = state.scholarships.find((scholarship) => scholarship.id === rule.keepId)
+    const previousSourceIds = keeper?.sourceIds ?? []
+    if (!keeper) {
+      const duplicateIndex = state.scholarships.indexOf(duplicate)
+      keeper = { ...duplicate, id: rule.keepId, slug: rule.keepSlug }
+      state.scholarships[duplicateIndex] = keeper
+    } else {
+      Object.assign(keeper, duplicate, { id: rule.keepId, slug: rule.keepSlug })
+      state.scholarships = state.scholarships.filter(
+        (scholarship) => scholarship.id !== duplicate.id,
+      )
+    }
+    const sourceIds = [...new Set([...previousSourceIds, ...duplicate.sourceIds])]
+    migratedScholarshipSources += Math.max(0, sourceIds.length - previousSourceIds.length)
+    keeper.sourceIds = sourceIds
+    removedScholarships += 1
+  }
+
+  return {
+    removedScholarships,
+    migratedScholarshipSources,
+  }
+}
+
 function importProgram(candidate, state) {
   const university = state.universityBySlug.get(candidate.institutionSlug)
   if (!university) throw new Error(`Unknown institution slug: ${candidate.institutionSlug}`)
@@ -506,7 +578,9 @@ function importProgram(candidate, state) {
   const officialUrl = httpsUrl(candidate.evidence?.officialUrl, `${candidate.candidateId} official URL`)
   const summary = localizedSummary(candidate.evidence?.summary, `Official international program: ${names.en ?? names.zh}`)
 
-  state.sources.push(sourceRecord(sourceId, candidate, 'program'))
+  const candidateSources = sourceRecords(sourceId, candidate, 'program')
+  const sourceIds = candidateSources.map((item) => item.id)
+  state.sources.push(...candidateSources)
   state.programs.push({
     id,
     slug,
@@ -522,7 +596,7 @@ function importProgram(candidate, state) {
       : null,
     languageRequirements: [],
     verificationScope: duration.durationMonths !== null || languages.length > 0 ? 'facts' : 'identity',
-    sourceIds: [sourceId],
+    sourceIds,
     verifiedAt: checkedAt,
     reviewAfter: addDays(checkedAt, 30),
     status: 'verified',
@@ -543,7 +617,7 @@ function importProgram(candidate, state) {
       factScope: cycleTuition.tuitionCny === null ? 'dates-only' : 'partial',
       applicationFeeCny: null,
       notes: summary,
-      sourceIds: [sourceId],
+      sourceIds,
       verifiedAt: checkedAt,
       reviewAfter: addDays(checkedAt, 7),
       status: 'verified',
@@ -572,19 +646,29 @@ function importScholarship(candidate, state) {
       .join(' '),
   )
 
-  state.sources.push(sourceRecord(sourceId, candidate, 'scholarship'))
+  const candidateSources = sourceRecords(sourceId, candidate, 'scholarship')
+  const sourceIds = candidateSources.map((item) => item.id)
+  const programIds = (candidate.programCandidateIds ?? []).map((candidateId) => {
+    const programId = `${WAVE_PREFIXES.program}${slugify(candidateId)}`
+    const program = state.programs.find((item) => item.id === programId)
+    if (!program || program.universityId !== university.id) {
+      throw new Error(`${candidate.candidateId} references unknown program candidate ${candidateId}`)
+    }
+    return programId
+  })
+  state.sources.push(...candidateSources)
   state.scholarships.push({
     id,
     slug: `gap-${token}`,
     name: names,
     providerType: providerType(candidate),
     universityIds: [university.id],
-    programIds: [],
+    programIds,
     coverage: scholarshipCoverage(candidate),
     deadline,
     applicationUrl: httpsUrl(candidate.evidence?.officialUrl, `${candidate.candidateId} official URL`),
     summary,
-    sourceIds: [sourceId],
+    sourceIds,
     verifiedAt: checkedAt,
     reviewAfter: addDays(checkedAt, deadline ? 7 : 30),
     status: 'verified',
@@ -623,7 +707,10 @@ function main() {
   }
   for (const candidate of merged.programCandidates) importProgram(candidate, state)
   for (const candidate of merged.scholarshipCandidates) importScholarship(candidate, state)
-  const duplicateCleanup = mergeLegacyDuplicatePrograms(state)
+  const duplicateCleanup = {
+    ...mergeLegacyDuplicatePrograms(state),
+    ...mergeLegacyDuplicateScholarships(state),
+  }
 
   assertUnique(state.sources, 'id', 'source')
   assertUnique(state.cities, 'id', 'city')
