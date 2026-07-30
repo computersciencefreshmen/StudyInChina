@@ -365,6 +365,12 @@ function upsertByIdAndSlug(items, record, label) {
   else items.push(record)
 }
 
+function upsertById(items, record) {
+  const existingIndex = items.findIndex((item) => item.id === record.id)
+  if (existingIndex >= 0) items[existingIndex] = record
+  else items.push(record)
+}
+
 function staticSource(id, url, title, publisher, kind, accessedAt) {
   return {
     id,
@@ -396,7 +402,7 @@ function importStaticCatalog(merged, state) {
       throw new Error(`${university.slug} requires an official source id`)
     }
     for (const sourceId of university.sourceIds) {
-      state.sources.push(staticSource(
+      upsertById(state.sources, staticSource(
         sourceId,
         university.officialUrl,
         `${university.name.en} official international admissions`,
@@ -422,7 +428,7 @@ function importStaticCatalog(merged, state) {
       throw new Error(`No official university source can ground new city ${city.slug}`)
     }
     for (const sourceId of city.sourceIds) {
-      state.sources.push(staticSource(
+      upsertById(state.sources, staticSource(
         sourceId,
         representative.officialUrl,
         `Official university source confirming ${city.name.en} location`,

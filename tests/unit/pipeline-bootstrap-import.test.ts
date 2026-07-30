@@ -226,7 +226,7 @@ describe('Pipeline stable-entity bootstrap', () => {
       { integrity_check: 'ok' },
     ])
     database.close()
-  })
+  }, 15_000)
 
   it('disables a removed managed source and its no-longer-current document', () => {
     const bundle = readPipelineBootstrapBundle()

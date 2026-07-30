@@ -17,6 +17,9 @@ const requiredRawFiles = [
 const optionalRawFiles = [
   'second-school-breadth-wave.json',
   'breadth-fastpack.json',
+  'wave3-east-south.json',
+  'wave3-north-west.json',
+  'wave3-depth.json',
 ]
 const rawFiles = [
   ...requiredRawFiles,
@@ -398,15 +401,35 @@ function normalizeTeachingLanguage(value) {
     : { status: 'officially_not_announced', value: null, values: [] }
 }
 
+function normalizeTuitionPeriod(value) {
+  const text = String(value ?? '').trim().toLowerCase().replace(/_/g, '-')
+  if (!text) return null
+  if (text.includes('semester')) return 'semester'
+  if (text.includes('month')) return 'month'
+  if (text.includes('program')) return 'program'
+  if (text.includes('year')) return 'year'
+  return 'other'
+}
+
 function normalizeTuition(value) {
   if (value && !Array.isArray(value) && typeof value === 'object' && value.status) {
-    return deepClone(value)
+    const normalized = deepClone(value)
+    if (Object.prototype.hasOwnProperty.call(normalized, 'period')) {
+      normalized.period = normalizeTuitionPeriod(normalized.period)
+    }
+    if (Array.isArray(normalized.options)) {
+      normalized.options = normalized.options.map((item) => ({
+        ...item,
+        period: normalizeTuitionPeriod(item?.period),
+      }))
+    }
+    return normalized
   }
   const options = (Array.isArray(value) ? value : [])
     .map((item) => ({
       amount: Number.isFinite(item?.amountCny) ? item.amountCny : null,
       currency: 'CNY',
-      period: item?.period ?? null,
+      period: normalizeTuitionPeriod(item?.period),
       qualifier: item?.qualifier ?? null,
     }))
     .filter((item) => item.amount !== null)
@@ -457,8 +480,11 @@ function normalizeCycle(cycle, sourceFormat) {
       : null
   const openDate = validDate(cycle.applicationOpen) ? cycle.applicationOpen : null
   const intakeLabel = cycle.intake ?? null
-  const statusAsOfCheckedAt = cycle.statusAsOfCheckedAt
+  const rawStatusAsOfCheckedAt = cycle.statusAsOfCheckedAt
     ?? (cycle.displayAsOpen ? 'open' : 'closed_or_not_current')
+  const statusAsOfCheckedAt = rawStatusAsOfCheckedAt === 'open'
+    ? 'open'
+    : 'closed_or_not_current'
   const displayAsOpen = statusAsOfCheckedAt === 'open'
     && (deadline === null || deadline >= checkedAt)
   return {
