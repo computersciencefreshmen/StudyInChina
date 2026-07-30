@@ -66,12 +66,10 @@ describe('published content data', () => {
       expect(program.languageRequirements.length).toBeGreaterThan(0)
       expect(program.programUrl).not.toBe(program.applyUrl)
       expect(program.durationMonthsMax).not.toBeNull()
-      expect(published.admissionCycles.some(
-        (cycle) => cycle.programId === program.id,
-      )).toBe(true)
     }
 
     for (const cycle of published.admissionCycles) {
+      expect(published.programs.some((program) => program.id === cycle.programId)).toBe(true)
       expect(cycle.evidenceBasis).toMatch(/^(cycle-specific|recurring-official-rule)$/)
       if (cycle.factScope === 'dates-only') {
         expect(cycle.tuitionCny).toBeNull()
@@ -91,8 +89,13 @@ describe('published content data', () => {
       expect(cycle.applicationFeeCny).not.toBeNull()
     }
 
-    expect(published.programs.map((program) => program.id))
-      .not.toContain('program-fudan-university-chinese-language-program-language')
+    const fudanStableIdentity = published.programs.find(
+      (program) => program.id === 'program-fudan-university-chinese-language-program-language',
+    )
+    expect(fudanStableIdentity).toBeDefined()
+    expect(published.admissionCycles.some(
+      (cycle) => cycle.programId === fudanStableIdentity?.id,
+    )).toBe(false)
   })
 
   it('provides English, Chinese and Russian for public names', () => {

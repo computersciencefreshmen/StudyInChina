@@ -1,0 +1,700 @@
+const fs = require('node:fs')
+const path = require('node:path')
+
+const root = path.resolve(__dirname, '..', '..')
+const dataDir = path.join(root, 'content', 'data')
+const mergedPath = path.join(
+  root,
+  'quality',
+  'official-gap-wave-2026-07-30',
+  'merged-candidates.json',
+)
+
+const WAVE_PREFIXES = {
+  program: 'prog-gap-',
+  cycle: 'cycle-gap-',
+  scholarship: 'sch-gap-',
+  programSource: 'src-gap-program-',
+  scholarshipSource: 'src-gap-scholarship-',
+  citySource: 'src-gap-city-',
+  universitySource: 'src-gap-university-',
+}
+
+const LEGACY_DUPLICATE_PROGRAM_MERGES = [
+  {
+    removeId: 'program-shanghai-jiao-tong-university-long-term-chinese-language-course-full-tim',
+    keepId: 'program-shanghai-jiao-tong-university-chinese-language-program-language',
+    migrateSupportingSources: true,
+  },
+  {
+    removeId: 'program-nanjing-university-long-term-chinese-language-program-language',
+    keepId: 'program-nanjing-university-chinese-language-program-language',
+    migrateSupportingSources: true,
+  },
+  {
+    removeId: 'program-zhejiang-gongshang-university-international-business-bachelor',
+    keepId: 'prog-gap-local-zjgsu-b-international-business-en',
+    migrateSupportingSources: false,
+  },
+  {
+    removeId: 'program-zhejiang-sci-tech-university-chinese-language-program-language',
+    keepId: 'prog-gap-prog-zstu-chinese-language-nondegree',
+    migrateSupportingSources: false,
+  },
+  {
+    removeId: 'program-heilongjiang-university-chinese-language-program-language',
+    keepId: 'prog-gap-confirmed-hlju-chinese-language',
+    migrateSupportingSources: false,
+  },
+]
+
+function readJson(filePath) {
+  return JSON.parse(fs.readFileSync(filePath, 'utf8'))
+}
+
+function writeJson(filePath, value) {
+  fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, 'utf8')
+}
+
+function readData(name) {
+  return readJson(path.join(dataDir, name))
+}
+
+function slugify(value) {
+  return String(value)
+    .toLowerCase()
+    .replace(/['’]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
+function isoDate(value, label) {
+  const date = String(value ?? '').slice(0, 10)
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    throw new Error(`${label} must contain a YYYY-MM-DD date`)
+  }
+  const parsed = new Date(`${date}T00:00:00.000Z`)
+  if (Number.isNaN(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== date) {
+    throw new Error(`${label} is not a real calendar date`)
+  }
+  return date
+}
+
+function addDays(date, days) {
+  const parsed = new Date(`${date}T00:00:00.000Z`)
+  parsed.setUTCDate(parsed.getUTCDate() + days)
+  return parsed.toISOString().slice(0, 10)
+}
+
+function httpsUrl(value, label) {
+  const url = new URL(String(value))
+  if (url.protocol !== 'https:') throw new Error(`${label} must use HTTPS`)
+  return url.toString()
+}
+
+function localizedText(value, fallback) {
+  const result = {}
+  for (const locale of ['en', 'zh', 'ru']) {
+    if (typeof value?.[locale] === 'string' && value[locale].trim()) {
+      result[locale] = value[locale].trim()
+    }
+  }
+  if (Object.keys(result).length === 0 && fallback) result.en = fallback
+  if (Object.keys(result).length === 0) throw new Error('Localized text is empty')
+  return result
+}
+
+function localizedSummary(value, fallback) {
+  if (typeof value === 'string' && value.trim()) {
+    return { en: value.trim(), zh: value.trim() }
+  }
+  try {
+    return localizedText(value, fallback)
+  } catch {
+    return { en: fallback, zh: fallback }
+  }
+}
+
+function normalizedName(value) {
+  return String(value ?? '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\u4e00-\u9fff]+/g, '')
+}
+
+function degreeLevel(candidate) {
+  const value = String(candidate.level ?? candidate.degreeLevel ?? '').toLowerCase()
+  if (candidate.programType === 'language' || value === 'non_degree') return 'language'
+  if (candidate.programType === 'foundation') return 'foundation'
+  if (value === 'bachelor' || value === 'undergraduate') return 'bachelor'
+  if (value === 'master' || value === 'graduate') return 'master'
+  if (['doctorate', 'doctoral', 'phd'].includes(value)) return 'doctorate'
+  return 'other'
+}
+
+function parseLanguages(candidate) {
+  const raw = candidate.teachingLanguage?.value ?? candidate.teachingLanguage ?? []
+  const values = Array.isArray(raw) ? raw : String(raw).split(/[,+/&]|\band\b/i)
+  const result = []
+  for (const value of values) {
+    const text = String(value).trim()
+    const lower = text.toLowerCase()
+    if (!text) continue
+    if (lower.includes('chinese') && !result.includes('Chinese')) result.push('Chinese')
+    if (lower.includes('english') && !result.includes('English')) result.push('English')
+    if (lower.includes('russian') && !result.includes('Russian')) result.push('Russian')
+    if (
+      !lower.includes('chinese')
+      && !lower.includes('english')
+      && !lower.includes('russian')
+      && !result.includes(text)
+    ) {
+      result.push(text)
+    }
+  }
+  return result
+}
+
+function parseDuration(candidate) {
+  const raw = candidate.duration?.value ?? candidate.duration
+  const values = Array.isArray(raw) ? raw : raw ? [raw] : []
+  const months = []
+  const numberWords = new Map([
+    ['one', 1],
+    ['two', 2],
+    ['three', 3],
+    ['four', 4],
+    ['five', 5],
+    ['six', 6],
+  ])
+  for (const value of values) {
+    const text = String(value)
+      .toLowerCase()
+      .replace(/\b(one|two|three|four|five|six)\b/g, (word) => String(numberWords.get(word)))
+    for (const match of text.matchAll(/(\d+(?:\.\d+)?)\s*(academic\s+years?|years?|semesters?|months?|weeks?)/g)) {
+      const amount = Number(match[1])
+      const unit = match[2]
+      if (unit.startsWith('year') || unit.startsWith('academic')) months.push(Math.round(amount * 12))
+      else if (unit.startsWith('semester')) months.push(Math.round(amount * 6))
+      else if (unit.startsWith('week')) months.push(Math.max(1, Math.ceil(amount / 4)))
+      else months.push(Math.round(amount))
+    }
+  }
+  const valid = months.filter((value) => Number.isInteger(value) && value > 0 && value <= 120)
+  if (valid.length === 0) return { durationMonths: null }
+  const minimum = Math.min(...valid)
+  const maximum = Math.max(...valid)
+  return maximum === minimum
+    ? { durationMonths: minimum }
+    : { durationMonths: minimum, durationMonthsMax: maximum }
+}
+
+function discipline(candidate) {
+  const text = `${candidate.name?.en ?? ''} ${candidate.name?.zh ?? ''}`.toLowerCase()
+  if (/medicine|medical|mbbs|stomat|pharmacy|pharmaceutical|中医|医学|口腔|药学/.test(text)) return 'medicine'
+  if (/business|econom|finance|account|management|commerce|trade|logistics|mba|经济|金融|管理|商务|贸易|会计|物流/.test(text)) return 'business'
+  if (/law|legal|法学|法律/.test(text)) return 'law-ir'
+  if (/chinese|汉语|中文|国际中文/.test(text)) return 'chinese-education'
+  if (/art|design|music|drama|film|theatre|美术|艺术|设计|音乐|戏剧|电影/.test(text)) return 'art-design'
+  if (/computer|software|engineering|technology|transport|marine|mining|artificial intelligence|计算机|软件|工程|技术|交通|海洋|矿业|人工智能/.test(text)) return 'engineering'
+  if (/science|mathemat|physics|chemistry|biology|environment|科学|数学|物理|化学|生物|环境/.test(text)) return 'science'
+  if (/history|literature|language|education|psychology|历史|文学|语言|教育|心理/.test(text)) return 'humanities'
+  return 'other'
+}
+
+function tuition(candidate) {
+  const value = candidate.tuition ?? {}
+  const amount = value.status === 'known'
+    ? Number(value.amount ?? value.amountCny)
+    : Number.NaN
+  if (!Number.isFinite(amount) || amount < 0) {
+    return { tuitionCny: null, tuitionPeriod: null, tuitionStatus: null }
+  }
+  const rawPeriod = String(value.period ?? '').toLowerCase()
+  let period = 'other'
+  if (rawPeriod.includes('semester')) period = 'semester'
+  else if (rawPeriod.includes('month')) period = 'month'
+  else if (rawPeriod.includes('program')) period = 'program'
+  else if (rawPeriod.includes('year')) period = 'academic-year'
+  return {
+    tuitionCny: amount,
+    tuitionPeriod: period,
+    tuitionStatus: value.qualifier ? 'reference' : 'confirmed',
+  }
+}
+
+function normalizeAcademicYear(value, deadline) {
+  const raw = String(value ?? '')
+  if (/^\d{4}-\d{4}$/.test(raw) && Number(raw.slice(5)) === Number(raw.slice(0, 4)) + 1) {
+    return raw
+  }
+  const year = Number(raw.match(/\d{4}/)?.[0] ?? String(deadline ?? '').slice(0, 4))
+  if (!Number.isInteger(year) || year < 2000 || year > 2100) {
+    throw new Error(`Cannot derive academic year from ${raw || deadline}`)
+  }
+  return `${year}-${year + 1}`
+}
+
+function normalizeIntake(value, deadline) {
+  const text = String(value ?? '').toLowerCase()
+  if (text === 'spring' || text.includes('spring') || /-(0[1-6])-/.test(`-${deadline ?? ''}-`)) return 'spring'
+  if (text === 'autumn' || text === 'fall' || text.includes('autumn') || text.includes('fall')) return 'autumn'
+  return 'other'
+}
+
+function groupOpenCycles(candidate) {
+  const grouped = new Map()
+  for (const cycle of candidate.cycles ?? []) {
+    if (!cycle.displayAsOpen) continue
+    const deadline = cycle.applicationDeadline ? isoDate(cycle.applicationDeadline, `${candidate.candidateId} deadline`) : null
+    const opensOn = cycle.applicationOpen ? isoDate(cycle.applicationOpen, `${candidate.candidateId} opens`) : null
+    const academicYear = normalizeAcademicYear(cycle.academicYear, deadline)
+    const intake = normalizeIntake(cycle.intake, deadline)
+    const key = `${academicYear}:${intake}`
+    const existing = grouped.get(key)
+    grouped.set(key, {
+      academicYear,
+      intake,
+      opensOn: [existing?.opensOn, opensOn].filter(Boolean).sort().at(0) ?? null,
+      closesOn: [existing?.closesOn, deadline].filter(Boolean).sort().at(-1) ?? null,
+    })
+  }
+  return [...grouped.values()]
+}
+
+function sourceRecord(id, candidate, kind) {
+  const url = httpsUrl(candidate.evidence?.officialUrl, `${candidate.candidateId} official URL`)
+  const checkedAt = isoDate(candidate.evidence?.checkedAt, `${candidate.candidateId} checkedAt`)
+  return {
+    id,
+    url,
+    title: String(candidate.evidence?.sourceTitle ?? candidate.name?.en ?? candidate.candidateId),
+    publisher: candidate.institutionSlug,
+    kind,
+    language: /[\u4e00-\u9fff]/.test(candidate.evidence?.sourceTitle ?? '') ? 'zh' : 'en',
+    official: true,
+    accessedAt: checkedAt,
+  }
+}
+
+function providerType(candidate) {
+  const text = `${candidate.name?.en ?? ''} ${candidate.name?.zh ?? ''}`.toLowerCase()
+  if (/chinese government|china link|silk road|中国政府/.test(text)) return 'csc'
+  if (/provincial|province|省政府/.test(text)) return 'province'
+  if (/municipal|city|市政府/.test(text)) return 'city'
+  if (/university|president|academic|freshmen|大学|校长|学业/.test(text)) return 'university'
+  return 'other'
+}
+
+function scholarshipCoverage(candidate) {
+  const tiers = candidate.funding?.tiers ?? []
+  const text = Array.isArray(tiers) ? tiers.join(' ').toLowerCase() : String(tiers).toLowerCase()
+  const fullTuition = /full scholarship|covers? tuition|tuition, accommodation|免.*学费|100%/.test(text)
+  const partialTuition = /partial|50%|70%|40%|30%|20%|10%|second prize/.test(text)
+  const accommodation = /accommodation|housing|住宿/.test(text)
+  const insurance = /insurance|医疗保险/.test(text)
+  const monthlyAmounts = [...text.matchAll(/(?:cny|rmb)\s*([\d,]+)\s*(?:monthly|per month)/g)]
+    .map((match) => Number(match[1].replaceAll(',', '')))
+  return {
+    tuition: fullTuition && !partialTuition ? 'full' : fullTuition || partialTuition ? 'partial' : 'unknown',
+    accommodation: accommodation ? 'full' : 'unknown',
+    insurance: insurance ? true : 'unknown',
+    stipendCnyPerMonth: monthlyAmounts.length === 1 ? monthlyAmounts[0] : null,
+  }
+}
+
+function assertUnique(items, field, label) {
+  const seen = new Set()
+  for (const item of items) {
+    if (seen.has(item[field])) throw new Error(`Duplicate ${label} ${field}: ${item[field]}`)
+    seen.add(item[field])
+  }
+}
+
+function upsertByIdAndSlug(items, record, label) {
+  const slugConflict = items.find(
+    (item) => item.slug === record.slug && item.id !== record.id,
+  )
+  if (slugConflict) {
+    throw new Error(
+      `Duplicate ${label} slug ${record.slug}: ${slugConflict.id} and ${record.id}`,
+    )
+  }
+  const existingIndex = items.findIndex((item) => item.id === record.id)
+  if (existingIndex >= 0) items[existingIndex] = record
+  else items.push(record)
+}
+
+function staticSource(id, url, title, publisher, kind, accessedAt) {
+  return {
+    id,
+    url: httpsUrl(url, `${id} official URL`),
+    title,
+    publisher,
+    kind,
+    language: /[\u4e00-\u9fff]/.test(title) ? 'zh' : 'en',
+    official: true,
+    accessedAt: isoDate(accessedAt, `${id} accessedAt`),
+  }
+}
+
+function importStaticCatalog(merged, state) {
+  const newCities = merged.cities ?? []
+  const newUniversities = merged.universities ?? []
+
+  for (const city of newCities) {
+    upsertByIdAndSlug(state.cities, city, 'city')
+  }
+  const cityIds = new Set(state.cities.map((city) => city.id))
+
+  for (const university of newUniversities) {
+    if (!cityIds.has(university.cityId)) {
+      throw new Error(`Unknown city ${university.cityId} for ${university.slug}`)
+    }
+    upsertByIdAndSlug(state.universities, university, 'university')
+    if (!Array.isArray(university.sourceIds) || university.sourceIds.length === 0) {
+      throw new Error(`${university.slug} requires an official source id`)
+    }
+    for (const sourceId of university.sourceIds) {
+      state.sources.push(staticSource(
+        sourceId,
+        university.officialUrl,
+        `${university.name.en} official international admissions`,
+        university.name.en,
+        'university',
+        university.verifiedAt,
+      ))
+    }
+  }
+
+  const newUniversitiesByCity = new Map()
+  for (const university of newUniversities) {
+    if (!newUniversitiesByCity.has(university.cityId)) {
+      newUniversitiesByCity.set(university.cityId, university)
+    }
+  }
+  for (const city of newCities) {
+    if (!Array.isArray(city.sourceIds) || city.sourceIds.length === 0) {
+      throw new Error(`${city.slug} requires an official source id`)
+    }
+    const representative = newUniversitiesByCity.get(city.id)
+    if (!representative) {
+      throw new Error(`No official university source can ground new city ${city.slug}`)
+    }
+    for (const sourceId of city.sourceIds) {
+      state.sources.push(staticSource(
+        sourceId,
+        representative.officialUrl,
+        `Official university source confirming ${city.name.en} location`,
+        representative.name.en,
+        'city',
+        city.verifiedAt,
+      ))
+    }
+  }
+
+  return {
+    cities: newCities.length,
+    universities: newUniversities.length,
+  }
+}
+
+function cleanPreviousWave(state) {
+  const oldProgramIds = new Set(
+    state.programs
+      .filter((item) => item.id.startsWith(WAVE_PREFIXES.program))
+      .map((item) => item.id),
+  )
+  state.programs = state.programs.filter((item) => !oldProgramIds.has(item.id))
+  state.cycles = state.cycles.filter(
+    (item) => !item.id.startsWith(WAVE_PREFIXES.cycle) && !oldProgramIds.has(item.programId),
+  )
+  state.scholarships = state.scholarships.filter(
+    (item) => !item.id.startsWith(WAVE_PREFIXES.scholarship),
+  )
+  state.sources = state.sources.filter(
+    (item) => !item.id.startsWith(WAVE_PREFIXES.programSource)
+      && !item.id.startsWith(WAVE_PREFIXES.scholarshipSource)
+      && !item.id.startsWith(WAVE_PREFIXES.citySource)
+      && !item.id.startsWith(WAVE_PREFIXES.universitySource),
+  )
+  return {
+    programs: oldProgramIds.size,
+  }
+}
+
+function mergeLegacyDuplicatePrograms(state) {
+  let removedPrograms = 0
+  let removedDraftCycles = 0
+  let migratedVerifiedCycles = 0
+  let migratedSupportingSources = 0
+
+  for (const rule of LEGACY_DUPLICATE_PROGRAM_MERGES) {
+    const keeper = state.programs.find((program) => program.id === rule.keepId)
+    if (!keeper) throw new Error(`Missing canonical program ${rule.keepId}`)
+    const duplicate = state.programs.find((program) => program.id === rule.removeId)
+    if (!duplicate) continue
+
+    if (rule.migrateSupportingSources) {
+      const previousCount = keeper.sourceIds.length
+      keeper.sourceIds = [...new Set([...keeper.sourceIds, ...duplicate.sourceIds])]
+      migratedSupportingSources += keeper.sourceIds.length - previousCount
+    }
+
+    const keeperCycleKeys = new Set(
+      state.cycles
+        .filter((cycle) => cycle.programId === keeper.id)
+        .map((cycle) => [
+          cycle.academicYear,
+          cycle.intake,
+          cycle.opensOn,
+          cycle.closesOn,
+        ].join('|')),
+    )
+    state.cycles = state.cycles.flatMap((cycle) => {
+      if (cycle.programId !== duplicate.id) return [cycle]
+      if (cycle.status !== 'verified') {
+        removedDraftCycles += 1
+        return []
+      }
+      const cycleKey = [
+        cycle.academicYear,
+        cycle.intake,
+        cycle.opensOn,
+        cycle.closesOn,
+      ].join('|')
+      if (keeperCycleKeys.has(cycleKey)) return []
+      keeperCycleKeys.add(cycleKey)
+      migratedVerifiedCycles += 1
+      return [{ ...cycle, programId: keeper.id }]
+    })
+
+    state.scholarships = state.scholarships.map((scholarship) => ({
+      ...scholarship,
+      programIds: [...new Set(
+        scholarship.programIds.map((programId) => (
+          programId === duplicate.id ? keeper.id : programId
+        )),
+      )],
+    }))
+    state.programs = state.programs.filter((program) => program.id !== duplicate.id)
+    removedPrograms += 1
+  }
+
+  return {
+    removedPrograms,
+    removedDraftCycles,
+    migratedVerifiedCycles,
+    migratedSupportingSources,
+  }
+}
+
+function importProgram(candidate, state) {
+  const university = state.universityBySlug.get(candidate.institutionSlug)
+  if (!university) throw new Error(`Unknown institution slug: ${candidate.institutionSlug}`)
+  if (university.status === 'archived') {
+    throw new Error(`Program candidate targets archived institution: ${candidate.institutionSlug}`)
+  }
+  const token = slugify(candidate.candidateId)
+  const level = degreeLevel(candidate)
+  const id = `${WAVE_PREFIXES.program}${token}`
+  const slug = `gap-${token}-${level}`
+  const sourceId = `${WAVE_PREFIXES.programSource}${token}`
+  const checkedAt = isoDate(candidate.evidence?.checkedAt, `${candidate.candidateId} checkedAt`)
+  const languages = parseLanguages(candidate)
+  const duration = parseDuration(candidate)
+  const names = localizedText(candidate.name, candidate.candidateId)
+  const officialUrl = httpsUrl(candidate.evidence?.officialUrl, `${candidate.candidateId} official URL`)
+  const summary = localizedSummary(candidate.evidence?.summary, `Official international program: ${names.en ?? names.zh}`)
+
+  state.sources.push(sourceRecord(sourceId, candidate, 'program'))
+  state.programs.push({
+    id,
+    slug,
+    universityId: university.id,
+    name: names,
+    degreeLevel: level,
+    discipline: discipline(candidate),
+    teachingLanguages: languages,
+    ...duration,
+    programUrl: officialUrl,
+    applyUrl: candidate.applicationUrl
+      ? httpsUrl(candidate.applicationUrl, `${candidate.candidateId} application URL`)
+      : null,
+    languageRequirements: [],
+    verificationScope: duration.durationMonths !== null || languages.length > 0 ? 'facts' : 'identity',
+    sourceIds: [sourceId],
+    verifiedAt: checkedAt,
+    reviewAfter: addDays(checkedAt, 30),
+    status: 'verified',
+  })
+
+  const cycleTuition = tuition(candidate)
+  for (const cycle of groupOpenCycles(candidate)) {
+    state.cycles.push({
+      id: `${WAVE_PREFIXES.cycle}${token}-${cycle.academicYear}-${cycle.intake}`,
+      programId: id,
+      academicYear: cycle.academicYear,
+      intake: cycle.intake,
+      opensOn: cycle.opensOn,
+      closesOn: cycle.closesOn,
+      dateStatus: cycle.opensOn || cycle.closesOn ? 'published' : 'rolling',
+      ...cycleTuition,
+      evidenceBasis: 'cycle-specific',
+      factScope: cycleTuition.tuitionCny === null ? 'dates-only' : 'partial',
+      applicationFeeCny: null,
+      notes: summary,
+      sourceIds: [sourceId],
+      verifiedAt: checkedAt,
+      reviewAfter: addDays(checkedAt, 7),
+      status: 'verified',
+    })
+  }
+}
+
+function importScholarship(candidate, state) {
+  const university = state.universityBySlug.get(candidate.institutionSlug)
+  if (!university) throw new Error(`Unknown scholarship institution: ${candidate.institutionSlug}`)
+  if (university.status === 'archived') return
+  const token = slugify(candidate.candidateId)
+  const id = `${WAVE_PREFIXES.scholarship}${token}`
+  const sourceId = `${WAVE_PREFIXES.scholarshipSource}${token}`
+  const checkedAt = isoDate(candidate.evidence?.checkedAt, `${candidate.candidateId} checkedAt`)
+  const names = localizedText(candidate.name, candidate.candidateId)
+  const openCycles = groupOpenCycles(candidate)
+  const deadline = openCycles.map((cycle) => cycle.closesOn).filter(Boolean).sort().at(-1) ?? null
+  const tierSummary = Array.isArray(candidate.funding?.tiers)
+    ? candidate.funding.tiers.join('; ')
+    : ''
+  const summary = localizedSummary(
+    candidate.evidence?.summary,
+    [candidate.scope, tierSummary, `Official scholarship: ${names.en ?? names.zh}`]
+      .filter(Boolean)
+      .join(' '),
+  )
+
+  state.sources.push(sourceRecord(sourceId, candidate, 'scholarship'))
+  state.scholarships.push({
+    id,
+    slug: `gap-${token}`,
+    name: names,
+    providerType: providerType(candidate),
+    universityIds: [university.id],
+    programIds: [],
+    coverage: scholarshipCoverage(candidate),
+    deadline,
+    applicationUrl: httpsUrl(candidate.evidence?.officialUrl, `${candidate.candidateId} official URL`),
+    summary,
+    sourceIds: [sourceId],
+    verifiedAt: checkedAt,
+    reviewAfter: addDays(checkedAt, deadline ? 7 : 30),
+    status: 'verified',
+  })
+}
+
+function main() {
+  if (!fs.existsSync(mergedPath)) {
+    throw new Error(`Merged candidate file is missing: ${mergedPath}`)
+  }
+  const merged = readJson(mergedPath)
+  if (!Array.isArray(merged.programCandidates) || !Array.isArray(merged.scholarshipCandidates)) {
+    throw new Error('Merged candidate file must contain programCandidates and scholarshipCandidates arrays')
+  }
+  const archiveInstitutionSlugs = new Set(merged.archiveInstitutionSlugs ?? [])
+  const state = {
+    sources: readData('sources.json'),
+    cities: readData('cities.json'),
+    universities: readData('universities.json'),
+    programs: readData('programs.json'),
+    cycles: readData('admission-cycles.json'),
+    scholarships: readData('scholarships.json'),
+  }
+
+  const removed = cleanPreviousWave(state)
+  const importedStatic = importStaticCatalog(merged, state)
+  state.universities = state.universities.map((university) => (
+    archiveInstitutionSlugs.has(university.slug)
+      ? { ...university, status: 'archived' }
+      : university
+  ))
+  state.universityBySlug = new Map(state.universities.map((item) => [item.slug, item]))
+
+  for (const slug of archiveInstitutionSlugs) {
+    if (!state.universityBySlug.has(slug)) throw new Error(`Unknown archive institution slug: ${slug}`)
+  }
+  for (const candidate of merged.programCandidates) importProgram(candidate, state)
+  for (const candidate of merged.scholarshipCandidates) importScholarship(candidate, state)
+  const duplicateCleanup = mergeLegacyDuplicatePrograms(state)
+
+  assertUnique(state.sources, 'id', 'source')
+  assertUnique(state.cities, 'id', 'city')
+  assertUnique(state.cities, 'slug', 'city')
+  assertUnique(state.universities, 'id', 'university')
+  assertUnique(state.universities, 'slug', 'university')
+  assertUnique(state.programs, 'id', 'program')
+  assertUnique(state.programs, 'slug', 'program')
+  assertUnique(state.cycles, 'id', 'cycle')
+  assertUnique(state.scholarships, 'id', 'scholarship')
+  assertUnique(state.scholarships, 'slug', 'scholarship')
+
+  const semanticProgramIdentities = new Map()
+  for (const program of state.programs) {
+    const key = [
+      program.universityId,
+      program.degreeLevel,
+      normalizedName(program.name.en ?? program.name.zh),
+    ].join(':')
+    const existingId = semanticProgramIdentities.get(key)
+    if (existingId) {
+      throw new Error(`Duplicate semantic program identity ${key}: ${existingId}, ${program.id}`)
+    }
+    semanticProgramIdentities.set(key, program.id)
+  }
+
+  const validCityIds = new Set(state.cities.map((city) => city.id))
+  for (const university of state.universities) {
+    if (!validCityIds.has(university.cityId)) {
+      throw new Error(`University ${university.slug} references missing city ${university.cityId}`)
+    }
+  }
+
+  const programIdentityKeys = new Set()
+  for (const candidate of merged.programCandidates) {
+    const level = degreeLevel(candidate)
+    const key = [
+      candidate.institutionSlug,
+      level,
+      normalizedName(candidate.name?.en ?? candidate.name?.zh),
+    ].join(':')
+    if (programIdentityKeys.has(key)) throw new Error(`Merged program identity is duplicated: ${key}`)
+    programIdentityKeys.add(key)
+  }
+
+  writeJson(path.join(dataDir, 'sources.json'), state.sources)
+  writeJson(path.join(dataDir, 'cities.json'), state.cities)
+  writeJson(path.join(dataDir, 'universities.json'), state.universities)
+  writeJson(path.join(dataDir, 'programs.json'), state.programs)
+  writeJson(path.join(dataDir, 'admission-cycles.json'), state.cycles)
+  writeJson(path.join(dataDir, 'scholarships.json'), state.scholarships)
+
+  console.log(JSON.stringify({
+    mergedPath: path.relative(root, mergedPath),
+    removedPreviousWave: removed,
+    duplicateCleanup,
+    archiveInstitutionSlugs: [...archiveInstitutionSlugs].sort(),
+    imported: {
+      ...importedStatic,
+      programs: merged.programCandidates.length,
+      scholarships: merged.scholarshipCandidates.length,
+    },
+    totals: {
+      sources: state.sources.length,
+      cities: state.cities.length,
+      universities: state.universities.length,
+      programs: state.programs.length,
+      cycles: state.cycles.length,
+      scholarships: state.scholarships.length,
+    },
+  }, null, 2))
+}
+
+main()

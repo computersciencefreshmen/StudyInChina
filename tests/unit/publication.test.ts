@@ -154,15 +154,15 @@ describe('production publication policy', () => {
     expect(result.scholarships[0].programIds).toEqual([])
   })
 
-  it('hides a program as soon as its current admission cycle expires', () => {
+  it('keeps a verified program identity when its admission cycle expires', () => {
     const fixture = publicationFixture()
     fixture.admissionCycles[0] = { ...fixture.admissionCycles[0], reviewAfter: '2026-07-18' }
 
     const result = selectPublishedData(fixture, TODAY)
 
-    expect(result.programs).toHaveLength(0)
+    expect(result.programs).toHaveLength(1)
     expect(result.admissionCycles).toHaveLength(0)
-    expect(result.scholarships[0].programIds).toEqual([])
+    expect(result.scholarships[0].programIds).toEqual([fixture.programs[0].id])
   })
 
   it('keeps a verified identity with no announced cycle distinct from an expired cycle', () => {
@@ -195,7 +195,7 @@ describe('production publication policy', () => {
     expect(getTodayDate(new Date('2026-07-19T16:00:00.000Z'))).toBe(TODAY)
   })
 
-  it('keeps a deadline through day 30 and removes programs and scholarships on day 31', () => {
+  it('keeps a deadline through day 30 and removes expired cycles and scholarships on day 31', () => {
     expect(isWithinPostDeadlineGrace('2026-06-20', TODAY)).toBe(true)
     expect(isWithinPostDeadlineGrace('2026-06-19', TODAY)).toBe(false)
 
@@ -208,7 +208,7 @@ describe('production publication policy', () => {
     fixture.scholarships[0] = { ...fixture.scholarships[0], deadline: '2026-06-19' }
 
     const result = selectPublishedData(fixture, TODAY)
-    expect(result.programs).toHaveLength(0)
+    expect(result.programs).toHaveLength(1)
     expect(result.admissionCycles).toHaveLength(0)
     expect(result.scholarships).toHaveLength(0)
   })

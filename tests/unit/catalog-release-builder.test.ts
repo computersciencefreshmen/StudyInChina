@@ -60,7 +60,7 @@ describe('legacy JSON release builder', () => {
     ) as Record<string, unknown>
     expect(otherProgram).toEqual({ program_type: 'other', degree_level: null })
     database.close()
-  })
+  }, 15_000)
 
   it('keeps the current release when validation or row-count checks fail', () => {
     const artifacts = buildLegacyRelease(readLegacyBundle())

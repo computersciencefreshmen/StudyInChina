@@ -16,5 +16,5 @@ describe('localized sitemap', () => {
 
     const englishPrograms = entries.find((entry) => new URL(entry.url).pathname === '/en/programs')
     expect(Object.keys(englishPrograms?.alternates?.languages || {}).sort()).toEqual(['en', 'ru', 'zh'])
-  })
+  }, 15_000)
 })

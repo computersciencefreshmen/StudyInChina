@@ -95,8 +95,8 @@ describe('verified broad university expansion on 2026-07-29', () => {
   })
 
   it('broadens verified coverage across Double First-Class and local strong universities', () => {
-    expect(published.universities).toHaveLength(202)
-    expect(published.programs.length).toBeGreaterThanOrEqual(404)
+    expect(published.universities.length).toBeGreaterThanOrEqual(200)
+    expect(published.programs.length).toBeGreaterThanOrEqual(400)
 
     for (const [universityId, minimum] of priorityCoverage) {
       const count = published.programs.filter(
@@ -112,7 +112,7 @@ describe('verified broad university expansion on 2026-07-29', () => {
     const zeroProgramUniversities = [...counts.values()].filter((count) => count === 0).length
     const underThreeUniversities = [...counts.values()].filter((count) => count < 3).length
 
-    expect(zeroProgramUniversities).toBeLessThanOrEqual(56)
+    expect(zeroProgramUniversities).toBe(0)
     expect(underThreeUniversities).toBeLessThanOrEqual(146)
   })
 

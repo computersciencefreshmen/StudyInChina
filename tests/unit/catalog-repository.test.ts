@@ -66,9 +66,9 @@ describe('CatalogRepository', () => {
     const repository = createJsonCatalogRepository(() => copyBundle())
 
     await expect(repository.getRelease()).resolves.toEqual({
-      id: 'json:2026-07-29',
-      dataDate: '2026-07-29',
-      generatedAt: '2026-07-29T00:00:00.000Z',
+      id: 'json:2026-07-30',
+      dataDate: '2026-07-30',
+      generatedAt: '2026-07-30T00:00:00.000Z',
       recordCounts: getCatalogRecordCounts(allData),
     })
   })

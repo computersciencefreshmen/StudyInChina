@@ -48,6 +48,9 @@ jobs:
       - name: Validate content data
         run: npm run validate:data
 
+      - name: Enforce one public program per university
+        run: npm run check:program-coverage:strict
+
       - name: Validate D1 migrations and database integrity
         run: npm run validate:d1
 

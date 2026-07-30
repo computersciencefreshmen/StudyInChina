@@ -44,7 +44,9 @@
     "pipeline:build-source-reconciliation": "tsx scripts/ingestion/build-source-reconciliation-import.ts",
     "minimax:queue": "tsx scripts/ingestion/build-minimax-harvest-queue.ts",
     "minimax:claim": "tsx scripts/ingestion/claim-minimax-harvest-task.ts",
-    "minimax:validate": "tsx scripts/ingestion/validate-minimax-harvest.ts"
+    "minimax:validate": "tsx scripts/ingestion/validate-minimax-harvest.ts",
+    "check:program-coverage": "tsx scripts/quality/check-program-coverage.ts --mode report",
+    "check:program-coverage:strict": "tsx scripts/quality/check-program-coverage.ts --mode strict --minimum 1"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",

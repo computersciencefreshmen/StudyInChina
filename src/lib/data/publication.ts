@@ -21,22 +21,16 @@ export function selectPublishedData(data: DataBundle, today = getTodayDate()): D
     .filter((item) => isPublicStatus(item.status) && cityIds.has(item.cityId))
     .map((item) => withRuntimeFreshness(item, today))
   const universityIds = new Set(universities.map((item) => item.id))
-  const candidatePrograms = data.programs.filter(
+  const programs = data.programs.filter(
     (item) => isCurrentVerifiedRecord(item, today) && universityIds.has(item.universityId),
   )
-  const candidateProgramIds = new Set(candidatePrograms.map((item) => item.id))
+  const programIds = new Set(programs.map((item) => item.id))
   const admissionCycles = data.admissionCycles.filter(
     (item) => isCurrentVerifiedRecord(item, today)
       && item.dateStatus !== 'previous-cycle-reference'
       && (item.dateStatus === 'rolling' || isWithinPostDeadlineGrace(item.closesOn, today))
-      && candidateProgramIds.has(item.programId),
+      && programIds.has(item.programId),
   )
-  const programsWithCurrentCycles = new Set(admissionCycles.map((item) => item.programId))
-  const programsWithAnyCycle = new Set(data.admissionCycles.map((item) => item.programId))
-  const programs = candidatePrograms.filter(
-    (item) => programsWithCurrentCycles.has(item.id) || !programsWithAnyCycle.has(item.id),
-  )
-  const programIds = new Set(programs.map((item) => item.id))
   const scholarships = data.scholarships
     .filter((item) => isCurrentVerifiedRecord(item, today)
       && isWithinPostDeadlineGrace(item.deadline, today))

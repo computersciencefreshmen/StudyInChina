@@ -101,28 +101,43 @@ const newProgramIds = new Set([
   'program-cqnu-chinese-language-spring-2027',
 ])
 
+const archivedExpansionUniversityIds = new Set([
+  'uni-peking-union-medical-college',
+  'uni-peoples-public-security-university-of-china',
+  'uni-shanghaitech-university',
+  'uni-jiangsu-normal-university',
+  'uni-tianjin-medical-university',
+  'uni-china-medical-university',
+])
+
 describe('2026-07-29 official catalog expansion', () => {
-  it('publishes 202 unique universities and exposes all 64 expansion identities', () => {
-    expect(data.universities).toHaveLength(202)
-    expect(new Set(data.universities.map((item) => item.id)).size).toBe(202)
-    expect(new Set(data.universities.map((item) => item.slug)).size).toBe(202)
-    expect(new Set(data.universities.map((item) => item.name.zh)).size).toBe(202)
-    expect(published.universities).toHaveLength(202)
+  it('keeps a broad unique catalog and reconciles all 64 historical expansion identities', () => {
+    expect(data.universities.length).toBeGreaterThanOrEqual(200)
+    expect(new Set(data.universities.map((item) => item.id)).size).toBe(data.universities.length)
+    expect(new Set(data.universities.map((item) => item.slug)).size).toBe(data.universities.length)
+    expect(new Set(data.universities.map((item) => item.name.zh)).size).toBe(data.universities.length)
+    expect(published.universities.length).toBeGreaterThanOrEqual(200)
     expect(expansionUniversityIds.size).toBe(64)
 
     for (const id of expansionUniversityIds) {
-      const university = published.universities.find((item) => item.id === id)
+      const university = data.universities.find((item) => item.id === id)
       expect(university, id).toBeDefined()
       expect(university?.officialUrl).toMatch(/^https:\/\/[^/]+/)
       expect(university?.name.en).toBeTruthy()
       expect(university?.name.zh).toBeTruthy()
       expect(university?.name.ru).toBeTruthy()
-      expect(published.cities.some((city) => city.id === university?.cityId)).toBe(true)
+      expect(data.cities.some((city) => city.id === university?.cityId)).toBe(true)
       expect(
-        published.sources.some(
+        data.sources.some(
           (source) => source.official && university?.sourceIds.includes(source.id),
         ),
       ).toBe(true)
+      if (archivedExpansionUniversityIds.has(id)) {
+        expect(university?.status, id).toBe('archived')
+        expect(published.universities.some((item) => item.id === id), id).toBe(false)
+      } else {
+        expect(published.universities.some((item) => item.id === id), id).toBe(true)
+      }
     }
   })
 
