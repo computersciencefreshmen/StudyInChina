@@ -227,7 +227,7 @@ function parseDuration(candidate) {
 
 function discipline(candidate) {
   const text = `${candidate.name?.en ?? ''} ${candidate.name?.zh ?? ''}`.toLowerCase()
-  if (/medicine|medical|mbbs|stomat|pharmacy|pharmaceutical|中医|医学|口腔|药学/.test(text)) return 'medicine'
+  if (/medicine|medical|mbbs|stomat|pharmacy|pharmaceutical|public health|中医|医学|口腔|药学|公共卫生/.test(text)) return 'medicine'
   if (/business|econom|finance|account|management|commerce|trade|logistics|mba|经济|金融|管理|商务|贸易|会计|物流/.test(text)) return 'business'
   if (/law|legal|法学|法律/.test(text)) return 'law-ir'
   if (/chinese|汉语|中文|国际中文/.test(text)) return 'chinese-education'

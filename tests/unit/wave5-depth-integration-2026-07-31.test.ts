@@ -45,7 +45,6 @@ const DEEPENED_TARGET_COUNTS = new Map([
 
 const REMAINING_TARGET_GAPS = new Map([
   ['guangzhou-university', 2],
-  ['university-of-chinese-academy-of-sciences', 1],
 ])
 
 type CandidateCycle = {
@@ -171,11 +170,10 @@ describe('official coverage wave 5 on 2026-07-31', () => {
     }
   })
 
-  it('records Guangzhou University and UCAS as explicit remaining coverage gaps', () => {
+  it('records Guangzhou University as the remaining Wave5 coverage gap', () => {
     expect([...REMAINING_TARGET_GAPS]).toEqual([
       ['guangzhou-university', 2],
-      ['university-of-chinese-academy-of-sciences', 1],
-    ])
+        ])
 
     for (const [slug, count] of REMAINING_TARGET_GAPS) {
       const university = published.universities.find((item) => item.slug === slug)

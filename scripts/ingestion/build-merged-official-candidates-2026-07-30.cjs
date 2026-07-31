@@ -28,6 +28,7 @@ const optionalRawFiles = [
   'wave5-depth-beijing.json',
   'wave5-depth-east-south.json',
   'wave5-depth-west.json',
+  'wave6-priority-singletons.json',
 ]
 const rawFiles = [
   ...requiredRawFiles,
