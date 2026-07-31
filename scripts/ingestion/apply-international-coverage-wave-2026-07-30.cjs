@@ -99,6 +99,11 @@ function addDays(date, days) {
   return parsed.toISOString().slice(0, 10)
 }
 
+const CATALOG_AS_OF_DATE = isoDate(
+  process.env.CATALOG_AS_OF_DATE,
+  'CATALOG_AS_OF_DATE',
+)
+
 function httpsUrl(value, label) {
   const url = new URL(String(value))
   if (url.protocol !== 'https:') throw new Error(`${label} must use HTTPS`)
@@ -136,8 +141,8 @@ function normalizedName(value) {
 
 function degreeLevel(candidate) {
   const value = String(candidate.level ?? candidate.degreeLevel ?? '').toLowerCase()
-  if (candidate.programType === 'language' || value === 'non_degree') return 'language'
   if (candidate.programType === 'foundation') return 'foundation'
+  if (candidate.programType === 'language' || value === 'non_degree') return 'language'
   if (value === 'bachelor' || value === 'undergraduate') return 'bachelor'
   if (value === 'master' || value === 'graduate') return 'master'
   if (['doctorate', 'doctoral', 'phd'].includes(value)) return 'doctorate'
@@ -226,6 +231,8 @@ function discipline(candidate) {
   if (/business|econom|finance|account|management|commerce|trade|logistics|mba|经济|金融|管理|商务|贸易|会计|物流/.test(text)) return 'business'
   if (/law|legal|法学|法律/.test(text)) return 'law-ir'
   if (/chinese|汉语|中文|国际中文/.test(text)) return 'chinese-education'
+  if (/educational technology|education|pedagog|curriculum|教育技术学?|教育学|课程与教学|学前教育|特殊教育/.test(text)) return 'humanities'
+  if (/artificial intelligence|人工智能/.test(text)) return 'engineering'
   if (/art|design|music|drama|film|theatre|美术|艺术|设计|音乐|戏剧|电影/.test(text)) return 'art-design'
   if (/computer|software|engineering|technology|transport|marine|mining|artificial intelligence|计算机|软件|工程|技术|交通|海洋|矿业|人工智能/.test(text)) return 'engineering'
   if (/science|mathemat|physics|chemistry|biology|environment|科学|数学|物理|化学|生物|环境/.test(text)) return 'science'
@@ -266,9 +273,9 @@ function normalizeAcademicYear(value, deadline) {
   return `${year}-${year + 1}`
 }
 
-function normalizeIntake(value, deadline) {
-  const text = String(value ?? '').toLowerCase()
-  if (text === 'spring' || text.includes('spring') || /-(0[1-6])-/.test(`-${deadline ?? ''}-`)) return 'spring'
+function normalizeIntake(value) {
+  const text = String(value ?? '').trim().toLowerCase()
+  if (text === 'spring' || text.includes('spring')) return 'spring'
   if (text === 'autumn' || text === 'fall' || text.includes('autumn') || text.includes('fall')) return 'autumn'
   return 'other'
 }
@@ -280,7 +287,7 @@ function groupOpenCycles(candidate) {
     const deadline = cycle.applicationDeadline ? isoDate(cycle.applicationDeadline, `${candidate.candidateId} deadline`) : null
     const opensOn = cycle.applicationOpen ? isoDate(cycle.applicationOpen, `${candidate.candidateId} opens`) : null
     const academicYear = normalizeAcademicYear(cycle.academicYear, deadline)
-    const intake = normalizeIntake(cycle.intake, deadline)
+    const intake = normalizeIntake(cycle.intake)
     const key = `${academicYear}:${intake}`
     const existing = grouped.get(key)
     grouped.set(key, {
@@ -291,6 +298,57 @@ function groupOpenCycles(candidate) {
     })
   }
   return [...grouped.values()]
+}
+
+function groupProgramCycles(candidate, checkedAt) {
+  const grouped = new Map()
+  for (const cycle of candidate.cycles ?? []) {
+    const deadline = cycle.applicationDeadline ? isoDate(cycle.applicationDeadline, `${candidate.candidateId} deadline`) : null
+    const opensOn = cycle.applicationOpen ? isoDate(cycle.applicationOpen, `${candidate.candidateId} opens`) : null
+    const academicYear = normalizeAcademicYear(cycle.academicYear, deadline ?? checkedAt)
+    const intake = normalizeIntake(cycle.intake)
+    const key = `${academicYear}:${intake}`
+    const existing = grouped.get(key)
+    grouped.set(key, {
+      academicYear,
+      intake,
+      opensOn: [existing?.opensOn, opensOn].filter(Boolean).sort().at(0) ?? null,
+      closesOn: [existing?.closesOn, deadline].filter(Boolean).sort().at(-1) ?? null,
+      displayAsOpen: Boolean(existing?.displayAsOpen || cycle.displayAsOpen),
+    })
+  }
+  return [...grouped.values()]
+}
+
+function normalizeExpiredTuitionCycles(state) {
+  let converted = 0
+  const cycleIds = new Set(state.cycles.map((cycle) => cycle.id))
+  state.cycles = state.cycles.map((cycle) => {
+    if (cycle.id.endsWith('-fee-reference')
+      || typeof cycle.tuitionCny !== 'number'
+      || cycle.closesOn === null
+      || addDays(cycle.closesOn, 30) >= CATALOG_AS_OF_DATE) {
+      return cycle
+    }
+    const referenceId = `${cycle.id}-fee-reference`
+    if (cycleIds.has(referenceId)) {
+      throw new Error(`Cannot convert expired tuition cycle ${cycle.id}: ${referenceId} already exists`)
+    }
+    cycleIds.delete(cycle.id)
+    cycleIds.add(referenceId)
+    const reference = {
+      ...cycle,
+      id: referenceId,
+      opensOn: null,
+      closesOn: null,
+      dateStatus: 'not-announced',
+      tuitionStatus: 'reference',
+    }
+    delete reference.notes
+    converted += 1
+    return reference
+  })
+  return converted
 }
 
 function sourceRecord(id, candidate, kind, evidence = candidate.evidence) {
@@ -318,6 +376,14 @@ function sourceRecords(baseId, candidate, kind) {
 }
 
 function providerType(candidate) {
+  const allowedTypes = new Set(['csc', 'province', 'city', 'university', 'other'])
+  for (const explicitType of [candidate.providerType, candidate.scholarshipType]) {
+    const normalized = String(explicitType ?? '').trim().toLowerCase()
+    if (allowedTypes.has(normalized)) return normalized
+    if (normalized.startsWith('municipal')) return 'city'
+    if (normalized.startsWith('provincial')) return 'province'
+    if (normalized.startsWith('university')) return 'university'
+  }
   const text = `${candidate.name?.en ?? ''} ${candidate.name?.zh ?? ''}`.toLowerCase()
   if (/chinese government|china link|silk road|中国政府/.test(text)) return 'csc'
   if (/provincial|province|省政府/.test(text)) return 'province'
@@ -329,6 +395,16 @@ function providerType(candidate) {
 function scholarshipCoverage(candidate) {
   const tiers = candidate.funding?.tiers ?? []
   const text = Array.isArray(tiers) ? tiers.join(' ').toLowerCase() : String(tiers).toLowerCase()
+  const hasFullTier = /\bfull\b|全额|一等奖|100%/.test(text)
+  const hasPartialTier = /\bpartial\b|部分|[二三]等奖|50%|70%|40%|30%|20%|10%/.test(text)
+  if (hasFullTier && hasPartialTier) {
+    return {
+      tuition: 'unknown',
+      accommodation: 'unknown',
+      insurance: 'unknown',
+      stipendCnyPerMonth: null,
+    }
+  }
   const fullTuition = /full scholarship|full tuition|covers? tuition|tuition waiver|\btuition\b|免.*学费|100%/.test(text)
   const partialTuition = /partial|50%|70%|40%|30%|20%|10%|second prize/.test(text)
   const accommodation = /accommodation|housing|住宿/.test(text)
@@ -609,20 +685,58 @@ function importProgram(candidate, state) {
   })
 
   const cycleTuition = tuition(candidate)
-  for (const cycle of groupOpenCycles(candidate)) {
+  const programCycles = groupProgramCycles(candidate, checkedAt)
+  const hasOpenCycle = (candidate.cycles ?? []).some((cycle) => cycle.displayAsOpen)
+  let feeReferenceCycle = null
+
+  if (cycleTuition.tuitionCny !== null && !hasOpenCycle) {
+    if (programCycles.length === 0) {
+      const checkedYear = Number(checkedAt.slice(0, 4))
+      feeReferenceCycle = {
+        academicYear: `${checkedYear}-${checkedYear + 1}`,
+        intake: 'other',
+        opensOn: null,
+        closesOn: null,
+        displayAsOpen: false,
+      }
+      programCycles.push(feeReferenceCycle)
+    } else {
+      const latestCycle = [...programCycles].sort((left, right) => (
+        left.academicYear.localeCompare(right.academicYear)
+        || (left.closesOn ?? left.opensOn ?? '').localeCompare(right.closesOn ?? right.opensOn ?? '')
+        || left.intake.localeCompare(right.intake)
+      )).at(-1)
+      const hasNoDates = latestCycle.opensOn === null && latestCycle.closesOn === null
+      const isPastGrace = latestCycle.closesOn !== null
+        && addDays(latestCycle.closesOn, 30) < CATALOG_AS_OF_DATE
+      if (hasNoDates || isPastGrace) feeReferenceCycle = latestCycle
+    }
+  }
+
+  for (const cycle of programCycles) {
+    const isFeeReference = cycle === feeReferenceCycle
     state.cycles.push({
-      id: `${WAVE_PREFIXES.cycle}${token}-${cycle.academicYear}-${cycle.intake}`,
+      id: isFeeReference
+        ? `${WAVE_PREFIXES.cycle}${token}-${cycle.academicYear}-${cycle.intake}-fee-reference`
+        : `${WAVE_PREFIXES.cycle}${token}-${cycle.academicYear}-${cycle.intake}`,
       programId: id,
       academicYear: cycle.academicYear,
       intake: cycle.intake,
-      opensOn: cycle.opensOn,
-      closesOn: cycle.closesOn,
-      dateStatus: cycle.opensOn || cycle.closesOn ? 'published' : 'rolling',
+      opensOn: isFeeReference ? null : cycle.opensOn,
+      closesOn: isFeeReference ? null : cycle.closesOn,
+      dateStatus: isFeeReference
+        ? 'not-announced'
+        : cycle.opensOn || cycle.closesOn
+          ? 'published'
+          : cycle.displayAsOpen
+            ? 'rolling'
+            : 'not-announced',
       ...cycleTuition,
+      tuitionStatus: isFeeReference ? 'reference' : cycleTuition.tuitionStatus,
       evidenceBasis: 'cycle-specific',
       factScope: cycleTuition.tuitionCny === null ? 'dates-only' : 'partial',
       applicationFeeCny: null,
-      notes: summary,
+      ...(isFeeReference ? {} : { notes: summary }),
       sourceIds,
       verifiedAt: checkedAt,
       reviewAfter: addDays(checkedAt, 7),
@@ -717,6 +831,7 @@ function main() {
     ...mergeLegacyDuplicatePrograms(state),
     ...mergeLegacyDuplicateScholarships(state),
   }
+  const normalizedExpiredTuitionCycles = normalizeExpiredTuitionCycles(state)
 
   assertUnique(state.sources, 'id', 'source')
   assertUnique(state.cities, 'id', 'city')
@@ -771,8 +886,10 @@ function main() {
 
   console.log(JSON.stringify({
     mergedPath: path.relative(root, mergedPath),
+    asOfDate: CATALOG_AS_OF_DATE,
     removedPreviousWave: removed,
     duplicateCleanup,
+    normalizedExpiredTuitionCycles,
     archiveInstitutionSlugs: [...archiveInstitutionSlugs].sort(),
     imported: {
       ...importedStatic,

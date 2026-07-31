@@ -25,6 +25,9 @@ const optionalRawFiles = [
   'wave4-depth-specialist.json',
   'wave4-depth-second-fastpack.json',
   'wave4-depth-medicine-fastpack.json',
+  'wave5-depth-beijing.json',
+  'wave5-depth-east-south.json',
+  'wave5-depth-west.json',
 ]
 const rawFiles = [
   ...requiredRawFiles,

@@ -5,8 +5,11 @@ import universities from '../../content/data/universities.json'
 import programs from '../../content/data/programs.json'
 import admissionCycles from '../../content/data/admission-cycles.json'
 import scholarships from '../../content/data/scholarships.json'
+import { getApplicationState } from '@/lib/data/admission'
 import { bundleSchema } from '@/lib/data/schema'
 import { selectPublishedData } from '@/lib/data/publication'
+
+const PUBLISHED_AS_OF = '2026-07-20'
 
 const content = bundleSchema.parse({
   sources,
@@ -16,7 +19,7 @@ const content = bundleSchema.parse({
   admissionCycles,
   scholarships,
 })
-const published = selectPublishedData(content, '2026-07-20')
+const published = selectPublishedData(content, PUBLISHED_AS_OF)
 
 describe('published content data', () => {
   it('publishes the expanded institution and official program-identity layer', () => {
@@ -74,7 +77,12 @@ describe('published content data', () => {
       if (cycle.factScope === 'dates-only') {
         expect(cycle.tuitionCny).toBeNull()
         expect(cycle.applicationFeeCny).toBeNull()
-        expect(cycle.dateStatus).toMatch(/^(published|rolling)$/)
+        if (cycle.dateStatus === 'not-announced') {
+          expect(cycle.opensOn).toBeNull()
+          expect(cycle.closesOn).toBeNull()
+        } else {
+          expect(cycle.dateStatus).toMatch(/^(published|rolling)$/)
+        }
         continue
       }
       if (cycle.factScope === 'partial') {
@@ -93,9 +101,22 @@ describe('published content data', () => {
       (program) => program.id === 'program-fudan-university-chinese-language-program-language',
     )
     expect(fudanStableIdentity).toBeDefined()
-    expect(published.admissionCycles.some(
+    const fudanCycles = published.admissionCycles.filter(
       (cycle) => cycle.programId === fudanStableIdentity?.id,
-    )).toBe(false)
+    )
+    expect(fudanCycles.length).toBeGreaterThan(0)
+    for (const cycle of fudanCycles) {
+      expect(cycle.id).toContain('fee-reference')
+      expect(cycle.opensOn).toBeNull()
+      expect(cycle.closesOn).toBeNull()
+      expect(cycle.dateStatus).toBe('not-announced')
+      expect(cycle.tuitionCny).not.toBeNull()
+      expect(cycle.tuitionStatus).toBe('reference')
+      expect(cycle).not.toHaveProperty('notes')
+      expect(['open', 'rolling']).not.toContain(
+        getApplicationState(cycle, PUBLISHED_AS_OF),
+      )
+    }
   })
 
   it('provides English, Chinese and Russian for public names', () => {

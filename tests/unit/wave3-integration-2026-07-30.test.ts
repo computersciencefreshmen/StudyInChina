@@ -7,8 +7,12 @@ import scholarships from '../../content/data/scholarships.json'
 import sources from '../../content/data/sources.json'
 import universities from '../../content/data/universities.json'
 import northWest from '../../quality/official-gap-wave-2026-07-30/wave3-north-west.json'
+import { getApplicationState } from '../../src/lib/data/admission'
+import { isWithinPostDeadlineGrace } from '../../src/lib/data/freshness'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import type { DataBundle } from '../../src/lib/data/types'
+
+const TODAY = '2026-07-31'
 
 const data = {
   admissionCycles,
@@ -36,7 +40,7 @@ function normalizedName(value: unknown): string {
     .replace(/[^a-z0-9\u4e00-\u9fff]+/gu, '')
 }
 
-describe('official coverage wave 3 on 2026-07-30', () => {
+describe('official coverage wave 3 on 2026-07-31', () => {
   it('keeps the expected formal breadth and source-backed language coverage', () => {
     expect(wavePrograms).toHaveLength(70)
     expect(waveScholarships).toHaveLength(40)
@@ -91,14 +95,49 @@ describe('official coverage wave 3 on 2026-07-30', () => {
     expect(new Set(scholarshipKeys).size).toBe(scholarshipKeys.length)
   })
 
-  it('does not leak closed wave-3 cycles into the current-cycle catalog', () => {
+  it('publishes only safe current, grace-period, or date-free wave-3 cycles', () => {
     const programIds = new Set(wavePrograms.map((item) => item.id))
-    expect(data.admissionCycles.filter((cycle) =>
-      programIds.has(cycle.programId))).toHaveLength(0)
+    const published = selectPublishedData(data, TODAY)
+    const cycles = published.admissionCycles.filter((cycle) =>
+      programIds.has(cycle.programId))
+
+    expect(cycles.length).toBeGreaterThan(0)
+    expect(cycles.filter((cycle) =>
+      cycle.closesOn !== null
+      && !isWithinPostDeadlineGrace(cycle.closesOn, TODAY))).toEqual([])
+
+    const datedCycles = cycles.filter((cycle) =>
+      cycle.opensOn !== null || cycle.closesOn !== null)
+    expect(datedCycles.length).toBeGreaterThan(0)
+    const datedClosedCycles = datedCycles.filter((cycle) =>
+      getApplicationState(cycle, TODAY) === 'closed')
+    for (const cycle of datedClosedCycles) {
+      expect(cycle.closesOn).not.toBeNull()
+      expect(isWithinPostDeadlineGrace(cycle.closesOn, TODAY)).toBe(true)
+      expect(['open', 'rolling']).not.toContain(
+        getApplicationState(cycle, TODAY),
+      )
+    }
+
+    const dateFreeCycles = cycles.filter((cycle) =>
+      cycle.opensOn === null && cycle.closesOn === null)
+    expect(dateFreeCycles.length).toBeGreaterThan(0)
+    for (const cycle of dateFreeCycles) {
+      if (cycle.id.includes('fee-reference')) {
+        expect(cycle.dateStatus).toBe('not-announced')
+        expect(cycle.tuitionCny).not.toBeNull()
+        expect(cycle.tuitionStatus).toBe('reference')
+        continue
+      }
+      expect(cycle.dateStatus).toBe('not-announced')
+      expect(cycle.factScope).toBe('dates-only')
+      expect(cycle.tuitionCny).toBeNull()
+      expect(cycle.applicationFeeCny).toBeNull()
+    }
   })
 
   it('deepens the four existing universities in the production selector', () => {
-    const published = selectPublishedData(data, '2026-07-30')
+    const published = selectPublishedData(data, TODAY)
     const expected = new Map([
       ['northeast-normal-university', 6],
       ['yunnan-university', 5],
