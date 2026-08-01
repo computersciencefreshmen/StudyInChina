@@ -3,8 +3,9 @@ const path = require('node:path')
 
 const root = path.resolve(__dirname, '..', '..')
 const candidateDir = path.join(root, 'quality', 'official-gap-wave-2026-07-30')
+const wave7CandidateDir = path.join(root, 'quality', 'official-gap-wave-2026-08-01')
 const outputPath = path.join(candidateDir, 'merged-candidates.json')
-const checkedAt = '2026-07-30'
+const checkedAt = '2026-08-01'
 
 const requiredRawFiles = [
   'local-candidates.json',
@@ -33,6 +34,21 @@ const optionalRawFiles = [
 const rawFiles = [
   ...requiredRawFiles,
   ...optionalRawFiles.filter((fileName) => fs.existsSync(path.join(candidateDir, fileName))),
+]
+const wave7RawFiles = [
+  'wave7-north-west.json',
+  'wave7-south-east.json',
+  'wave7-special-scholarships.json',
+].filter((fileName) => fs.existsSync(path.join(wave7CandidateDir, fileName)))
+const rawFileEntries = [
+  ...rawFiles.map((fileName) => ({
+    sourceFile: fileName,
+    filePath: path.join(candidateDir, fileName),
+  })),
+  ...wave7RawFiles.map((fileName) => ({
+    sourceFile: '../official-gap-wave-2026-08-01/' + fileName,
+    filePath: path.join(wave7CandidateDir, fileName),
+  })),
 ]
 
 const archiveInstitutionSlugs = [
@@ -827,8 +843,8 @@ function main() {
   const universitiesById = new Map()
   const universityIdsBySlug = new Map()
 
-  for (const fileName of rawFiles) {
-    const bundle = readJson(path.join(candidateDir, fileName))
+  for (const { sourceFile: fileName, filePath } of rawFileEntries) {
+    const bundle = readJson(filePath)
     for (const city of bundle.cities ?? []) {
       mergeStaticRecord(citiesById, cityIdsBySlug, city, 'city', fileName)
     }
@@ -874,9 +890,9 @@ function main() {
     ...scholarships.records.map((candidate) => candidate.institutionSlug),
   ])
   const output = {
-    schemaVersion: '2026-07-30.merged.v2',
+    schemaVersion: '2026-08-01.merged.v3',
     generatedAt: `${checkedAt}T00:00:00+08:00`,
-    sourceFiles: rawFiles,
+    sourceFiles: rawFileEntries.map(({ sourceFile }) => sourceFile),
     cities: [...citiesById.values()]
       .map(({ record }) => record)
       .sort((left, right) => left.slug.localeCompare(right.slug)),
