@@ -4,8 +4,9 @@ const path = require('node:path')
 const root = path.resolve(__dirname, '..', '..')
 const candidateDir = path.join(root, 'quality', 'official-gap-wave-2026-07-30')
 const wave7CandidateDir = path.join(root, 'quality', 'official-gap-wave-2026-08-01')
+const wave8CandidateDir = path.join(root, 'quality', 'official-gap-wave-2026-08-02')
 const outputPath = path.join(candidateDir, 'merged-candidates.json')
-const checkedAt = '2026-08-01'
+const checkedAt = '2026-08-02'
 
 const requiredRawFiles = [
   'local-candidates.json',
@@ -40,6 +41,15 @@ const wave7RawFiles = [
   'wave7-south-east.json',
   'wave7-special-scholarships.json',
 ].filter((fileName) => fs.existsSync(path.join(wave7CandidateDir, fileName)))
+const wave8RawFiles = [
+  'wave8-depth-flagships.json',
+  'wave8-singletons-north-west.json',
+  'wave8-singletons-south-east.json',
+  'wave8-new-local-strong.json',
+  'wave8-new-local-strong-2.json',
+  'wave8-scholarship-gaps.json',
+  'wave8-final-singletons.json',
+].filter((fileName) => fs.existsSync(path.join(wave8CandidateDir, fileName)))
 const rawFileEntries = [
   ...rawFiles.map((fileName) => ({
     sourceFile: fileName,
@@ -48,6 +58,10 @@ const rawFileEntries = [
   ...wave7RawFiles.map((fileName) => ({
     sourceFile: '../official-gap-wave-2026-08-01/' + fileName,
     filePath: path.join(wave7CandidateDir, fileName),
+  })),
+  ...wave8RawFiles.map((fileName) => ({
+    sourceFile: '../official-gap-wave-2026-08-02/' + fileName,
+    filePath: path.join(wave8CandidateDir, fileName),
   })),
 ]
 
@@ -890,7 +904,7 @@ function main() {
     ...scholarships.records.map((candidate) => candidate.institutionSlug),
   ])
   const output = {
-    schemaVersion: '2026-08-01.merged.v3',
+    schemaVersion: '2026-08-02.merged.v4',
     generatedAt: `${checkedAt}T00:00:00+08:00`,
     sourceFiles: rawFileEntries.map(({ sourceFile }) => sourceFile),
     cities: [...citiesById.values()]

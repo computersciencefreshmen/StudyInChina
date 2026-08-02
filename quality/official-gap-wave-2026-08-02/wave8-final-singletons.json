@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "wave8-final-singletons.v1",
+  "generatedAt": "2026-08-02T00:00:00+08:00",
+  "sourceFiles": ["wave8-final-singletons.json"],
+  "cities": [],
+  "universities": [],
+  "programCandidates": [
+    {
+      "candidateId": "wave8-final-nau-chinese-language-nondegree",
+      "candidateIds": ["wave8-final-nau-chinese-language-nondegree"],
+      "institutionSlug": "nanjing-audit-university",
+      "name": {"en": "Chinese Language Non-degree Program", "zh": "汉语语言非学历项目", "ru": "Нестепенная программа китайского языка"},
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {"value": null, "status": "officially_not_announced"},
+      "duration": {"value": null, "status": "officially_not_announced"},
+      "tuition": {"amount": null, "currency": "CNY", "period": null, "status": "officially_not_announced"},
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://lxsy.nau.edu.cn/SchoolofInternationalExchange/list.htm",
+        "sourceTitle": "Nanjing Audit University School of International Students",
+        "checkedAt": "2026-08-02",
+        "summary": {
+          "en": "NAU's current official School of International Students page states that its non-degree education includes Chinese-language courses. The official site also publishes an individual online-application procedure and a tuition document with a language-student category, but no language-specific next intake, duration or current fee is announced.",
+          "zh": "南京审计大学留学生院当前官网明确说明其非学历教育包含汉语课程；官网还公布个人在线申请流程及包含语言生类别的收费文件，但未公布下一轮汉语项目的具体周期、学制或当期学费。",
+          "ru": "Текущая официальная страница Института иностранных студентов NAU указывает курсы китайского языка в составе нестепенного обучения. Университет публикует порядок индивидуальной подачи и документ с категорией языковых студентов, однако следующий набор, длительность и актуальная стоимость не объявлены."
+        }
+      },
+      "additionalEvidence": [
+        {"officialUrl": "https://lxsy.nau.edu.cn/ApplicationProcedure/list.htm", "sourceTitle": "NAU Application Procedure"},
+        {"officialUrl": "https://lxsy.nau.edu.cn/_upload/article/files/b0/90/ed49c8d84eaaa3553ac06f947413/2ddd0d38-6895-429b-adcc-8c95105e4544.pdf", "sourceTitle": "NAU Tuition Standards for International Students"}
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": ["current_language_specific_cycle_not_announced", "current_language_specific_duration_not_announced", "current_language_specific_tuition_not_announced", "official_application_destination_published_as_http_only"],
+      "sourceFiles": ["wave8-final-singletons.json"]
+    },
+    {
+      "candidateId": "wave8-final-cdutcm-self-funded-international-doctoral-route",
+      "candidateIds": ["wave8-final-cdutcm-self-funded-international-doctoral-route"],
+      "institutionSlug": "chengdu-university-of-traditional-chinese-medicine",
+      "name": {"en": "Self-funded International Doctoral Program", "zh": "自费国际博士研究生项目", "ru": "Докторская программа для иностранных студентов на платной основе"},
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {"value": "Chinese / English", "status": "known"},
+      "duration": {"value": "4 years", "status": "known"},
+      "tuition": {"amount": 38000, "currency": "CNY", "period": "academic-year", "status": "known", "qualifier": "from; Chinese-taught CNY 38,000; English-taught CNY 45,000"},
+      "cycles": [{"academicYear": "2026-2027", "intake": "autumn", "intakeLabel": null, "applicationOpen": null, "applicationDeadline": "2026-06-30", "statusAsOfCheckedAt": "closed", "displayAsOpen": false, "sourceFormat": "canonical"}],
+      "evidence": {
+        "officialUrl": "https://zyd.cdutcm.edu.cn/gjjyxy/zsxx/wjxs/content_113491",
+        "sourceTitle": "2026 CDUTCM Admission Guide for Self-funded Foreign Graduate Students",
+        "checkedAt": "2026-08-02",
+        "summary": {
+          "en": "CDUTCM's official 2026 guide accepts personal online applications for full-time self-funded doctoral study, normally four years. Tuition is CNY 38,000 per year for Chinese-taught and CNY 45,000 for English-taught study; the 30 June 2026 deadline is closed. Specific disciplines remain governed by the linked official international-graduate catalog.",
+          "zh": "成都中医药大学2026年官方简章接受个人在线申请全日制自费博士项目，通常学制4年；中文授课每学年38000元、英文授课每学年45000元，2026年6月30日截止已关闭；具体专业以官方国际研究生专业目录为准。",
+          "ru": "Официальные правила CDUTCM 2026 года предусматривают индивидуальную онлайн-подачу на очную платную докторантуру сроком обычно четыре года. Стоимость — 38 000 юаней в год на китайском и 45 000 на английском; срок 30 июня 2026 года закрыт. Специальности определяются официальным каталогом."
+        }
+      },
+      "additionalEvidence": [{"officialUrl": "https://zyd.cdutcm.edu.cn/Upload/gjjyxy/ContentManage/Article/File/2026/06/03/202606031126078844.pdf", "sourceTitle": "2026 CDUTCM International Graduate Program Catalog"}],
+      "applicationUrl": "https://cdutcm.17gz.org/",
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": ["2026_application_cycle_closed", "route_level_record_specific_major_selection_in_official_attachment", "tuition_varies_by_teaching_language"],
+      "sourceFiles": ["wave8-final-singletons.json"]
+    }
+  ],
+  "scholarshipCandidates": [
+    {
+      "candidateId": "wave8-final-nau-nanjing-municipal-government-scholarship",
+      "candidateIds": ["wave8-final-nau-nanjing-municipal-government-scholarship"],
+      "institutionSlug": "nanjing-audit-university",
+      "name": {"en": "Nanjing Municipal Government Scholarship at Nanjing Audit University", "zh": "南京审计大学南京市政府外国留学生奖学金", "ru": "Стипендия правительства Нанкина в Нанкинском университете аудита"},
+      "scholarshipType": null,
+      "scope": "International bachelor's and master's applicants applying to Nanjing Audit University who meet the university's published municipal-scholarship requirements.",
+      "applicableLevels": ["bachelor", "master"],
+      "funding": {"status": "known", "tiers": ["Bachelor: CNY 10,000 per academic year", "Master: CNY 20,000 per academic year"]},
+      "cycles": [{"academicYear": "2026-2027", "intake": "autumn", "intakeLabel": null, "applicationOpen": "2026-03-01", "applicationDeadline": "2026-07-15", "statusAsOfCheckedAt": "closed", "displayAsOpen": false, "sourceFormat": "canonical"}],
+      "evidence": {
+        "officialUrl": "https://lxsy.nau.edu.cn/njszfjxj/list.htm",
+        "sourceTitle": "Nanjing Municipal Government Scholarship — Nanjing Audit University",
+        "checkedAt": "2026-08-02",
+        "summary": {
+          "en": "NAU's official page publishes CNY 10,000 per academic year for bachelor's students and CNY 20,000 for master's students, with an annual application window from 1 March through 15 July. The 2026 window is closed as of 2 August 2026; the page is a recurring rule rather than a separate intake notice.",
+          "zh": "南京审计大学官方页面公布本科生每学年10000元、硕士生每学年20000元，申请时间为每年3月1日至7月15日。按2026年8月2日核验，2026窗口已关闭；该页属于年度通用规则。",
+          "ru": "Официальная страница NAU устанавливает 10 000 юаней в год бакалаврам и 20 000 магистрантам, с ежегодной подачей с 1 марта по 15 июля. На 2 августа 2026 года окно закрыто; это повторяющееся правило, а не отдельное объявление набора."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": ["2026_application_cycle_closed", "recurring_window_without_intake_specific_notice"],
+      "sourceFiles": ["wave8-final-singletons.json"],
+      "programCandidateIds": []
+    },
+    {
+      "candidateId": "wave8-final-cdutcm-sichuan-government-freshman-scholarship",
+      "candidateIds": ["wave8-final-cdutcm-sichuan-government-freshman-scholarship"],
+      "institutionSlug": "chengdu-university-of-traditional-chinese-medicine",
+      "name": {"en": "Sichuan Government Scholarship for International Students — Freshman Scholarship", "zh": "四川省外国留学生政府奖学金——新生奖学金", "ru": "Стипендия правительства провинции Сычуань для новых иностранных студентов"},
+      "scholarshipType": null,
+      "scope": "New international master's and doctoral applicants to CDUTCM under the graduate categories and amounts explicitly published in the university's 2026 foreign-graduate guide.",
+      "applicableLevels": ["master", "doctorate"],
+      "funding": {"status": "known", "tiers": ["Master: CNY 25,000 per academic year", "Doctorate: CNY 30,000 per academic year"]},
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://zyd.cdutcm.edu.cn/gjjyxy/zsxx/wjxs/content_113491",
+        "sourceTitle": "2026 CDUTCM Admission Guide for Self-funded Foreign Graduate Students",
+        "checkedAt": "2026-08-02",
+        "summary": {
+          "en": "CDUTCM's official 2026 foreign-graduate guide lists the Sichuan Government freshman scholarship at CNY 25,000 per year for master's students and CNY 30,000 for doctoral students. Applications are submitted to the university, but no separate scholarship deadline is stated, so no open cycle is shown.",
+          "zh": "成都中医药大学2026年外国研究生简章列出四川省外国留学生政府新生奖学金，硕士每学年25000元、博士每学年30000元，并向学校提交申请；简章未单列奖学金截止日期，因此不展示开放周期。",
+          "ru": "Руководство CDUTCM 2026 года указывает стипендию правительства Сычуани для новых иностранных студентов: 25 000 юаней в год магистрантам и 30 000 докторантам. Заявление подаётся в университет, но отдельный срок не указан."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": ["scholarship_specific_deadline_not_announced", "scope_limited_to_explicit_master_and_doctorate_amounts"],
+      "sourceFiles": ["wave8-final-singletons.json"],
+      "programCandidateIds": ["wave8-final-cdutcm-self-funded-international-doctoral-route"]
+    },
+    {
+      "candidateId": "wave8-final-cdutcm-chengdu-government-freshman-scholarship",
+      "candidateIds": ["wave8-final-cdutcm-chengdu-government-freshman-scholarship"],
+      "institutionSlug": "chengdu-university-of-traditional-chinese-medicine",
+      "name": {"en": "Chengdu Government Scholarship for International Students — Freshman Scholarship", "zh": "成都市留学生政府奖学金——新生奖学金", "ru": "Стипендия правительства Чэнду для новых иностранных студентов"},
+      "scholarshipType": null,
+      "scope": "New international master's and doctoral applicants to CDUTCM, including the official sister-city and Belt and Road routes described by the university.",
+      "applicableLevels": ["master", "doctorate"],
+      "funding": {"status": "known", "tiers": ["Master: CNY 25,000 per academic year", "Doctorate: CNY 30,000 per academic year"]},
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://zyd.cdutcm.edu.cn/gjjyxy/zsxx/wjxs/content_113491",
+        "sourceTitle": "2026 CDUTCM Admission Guide for Self-funded Foreign Graduate Students",
+        "checkedAt": "2026-08-02",
+        "summary": {
+          "en": "CDUTCM's official guide lists the Chengdu Government freshman scholarship, including sister-city and Belt and Road routes, at CNY 25,000 per year for master's students and CNY 30,000 for doctoral students. The university defers exact application arrangements to later notices, so no deadline or open cycle is inferred.",
+          "zh": "成都中医药大学官方简章列出成都市留学生政府新生奖学金，包含国际友城及“一带一路”路线，硕士每学年25000元、博士每学年30000元；具体申请安排以后续通知为准，因此不推定截止日期或开放状态。",
+          "ru": "Официальное руководство CDUTCM указывает стипендию правительства Чэнду, включая маршруты городов-побратимов и «Пояса и пути»: 25 000 юаней в год магистрантам и 30 000 докторантам. Точные условия будут опубликованы позднее, поэтому срок не предполагается."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": ["application_arrangements_deferred_to_later_notice", "scholarship_specific_deadline_not_announced"],
+      "sourceFiles": ["wave8-final-singletons.json"],
+      "programCandidateIds": ["wave8-final-cdutcm-self-funded-international-doctoral-route"]
+    }
+  ],
+  "exclusions": [
+    {"institutionSlug": "hainan-medical-university", "reason": "Hainan Medical University's current 2026 official international degree-student guide lists only the already-catalogued five-year Chinese-taught Clinical Medicine bachelor's program. A Traditional Chinese Medicine route appears only in the closed 2025 guide and was not re-announced in 2026, so it remains withheld as historical/stale rather than being presented as current. The two applicable scholarships are already catalogued."},
+    {"institutionSlug": "tibet-university", "reason": "Xizang University's current official non-degree guide and 2025 enrollment evidence confirm only the already-catalogued Tibetan-language general-study program. No second concrete, individually applicable international program or current school-specific scholarship application route was located on an official page."},
+    {"institutionSlug": "nanjing-audit-university", "reason": "Official materials mention Auditing, Accounting, Economics and International Trade across international bachelor/master education, but do not map Accounting, Economics or International Trade to a specific degree level and current individual intake. Those ambiguous degree identities were withheld; only the explicit current Chinese-language non-degree identity was emitted."}
+  ],
+  "coverageSummary": {
+    "programCandidates": 2,
+    "scholarshipCandidates": 3,
+    "targetInstitutions": 4,
+    "institutionsRaisedAboveOneProgram": 2,
+    "institutionsWithExplicitNoSecondCurrentHighConfidenceProgram": 2,
+    "openProgramCycles": 0,
+    "openScholarshipCycles": 0,
+    "notes": [
+      "Nanjing Audit University gains one explicit Chinese-language non-degree identity and a nonduplicate municipal-government scholarship.",
+      "Chengdu University of Traditional Chinese Medicine gains a current official 2026 self-funded doctoral route plus Sichuan and Chengdu government freshman scholarships; the 2026 program cycle is closed.",
+      "Hainan Medical University and Xizang University remain single-current-program institutions because no second current high-confidence program could be verified.",
+      "No domestic-student catalog was used, no dynamic value was guessed, and no expired cycle is marked open."
+    ]
+  }
+}

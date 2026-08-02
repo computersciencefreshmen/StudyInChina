@@ -32,13 +32,15 @@ describe('official expansion semantic audit', () => {
     const nauPrograms = programs.filter(
       (program) => program.universityId === 'uni-nanjing-audit-university',
     )
-    expect(nauPrograms).toHaveLength(1)
-    expect(nauPrograms[0].id).toBe('program-nanjing-audit-university-master-of-auditing')
+    expect(nauPrograms.map((program) => program.id).sort()).toEqual([
+      'prog-gap-wave8-final-nau-chinese-language-nondegree',
+      'program-nanjing-audit-university-master-of-auditing',
+    ])
     expect(
       scholarships.find(
         (scholarship) => scholarship.id === 'scholarship-nanjing-audit-university-mofcom-maud',
       )?.programIds,
-    ).toEqual([nauPrograms[0].id])
+    ).toEqual(['program-nanjing-audit-university-master-of-auditing'])
   })
 
   it('keeps unsupported duration and teaching-language values unknown', () => {
