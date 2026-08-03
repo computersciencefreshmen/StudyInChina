@@ -1,6 +1,6 @@
 import type { AdmissionCycle, City, Program, University } from '@/lib/data/types'
 import { getApplicationState, selectAdmissionCycle } from './data/admission'
-import { classifyProgramField, isProgramField } from './data/fields'
+import { classifyProgramField, isProgramField, programSearchKeywords } from './data/fields'
 
 export type UniversityFilters = { query: string; cityId: string; region: string; discipline: string }
 export type ProgramFilters = { query: string; degree: string; discipline: string; language: string; dateStatus: string; tuition: string }
@@ -35,7 +35,7 @@ export function filterPrograms(programs: Program[], universities: University[], 
     const applicationState = getApplicationState(cycle, today)
     const matchesApplicationState = !filters.dateStatus
       || (filters.dateStatus === 'open' ? applicationState === 'open' || applicationState === 'rolling' : applicationState === filters.dateStatus)
-    return includesQuery([program.name, program.discipline, program.teachingLanguages, university?.name], filters.query)
+    return includesQuery([program.name, program.discipline, programSearchKeywords(program), program.teachingLanguages, university?.name], filters.query)
       && (!filters.degree || program.degreeLevel === filters.degree)
       && (!filters.discipline || (isProgramField(filters.discipline)
         ? classifyProgramField(program) === filters.discipline

@@ -62,6 +62,28 @@ describe('CatalogApiService', () => {
     expect(scholarships.data[0].fieldMeta['coverage.accommodation'].status).toBe('officially_not_announced')
   })
 
+  it('accepts the applicant-facing Chinese field and multilingual Chinese-program search aliases', () => {
+    const bundle = fixture()
+    bundle.programs.push({
+      ...bundle.programs[0],
+      id: 'program-mtcsol',
+      slug: 'international-chinese-language-education',
+      name: text('International Chinese Language Education', '国际中文教育', 'Международное преподавание китайского языка'),
+      degreeLevel: 'master',
+      discipline: 'chinese-education',
+    })
+    const service = new CatalogApiService(bundle, releaseFromBundle(bundle, '2026-07-20'), '2026-07-20')
+
+    expect(service.listPrograms({ degree: 'master', discipline: 'chinese-language' }).data.map((program) => program.id))
+      .toEqual(['program-mtcsol'])
+    expect(service.listPrograms({ degree: 'master', q: 'MTCSOL' }).data.map((program) => program.id))
+      .toEqual(['program-mtcsol'])
+    expect(service.listPrograms({ degree: 'master', q: '国际中文教育' }).data.map((program) => program.id))
+      .toEqual(['program-mtcsol'])
+    expect(service.listPrograms({ degree: 'master', q: 'Международное преподавание китайского языка' }).data.map((program) => program.id))
+      .toEqual(['program-mtcsol'])
+  })
+
   it('uses stable opaque cursor pagination and rejects unknown cursors', () => {
     const bundle = fixture()
     bundle.universities.push({ ...bundle.universities[0], id: 'uni-2', slug: 'second-university' })

@@ -1,4 +1,5 @@
 import { getApplicationState } from '@/lib/data/admission'
+import { classifyProgramField, isProgramField, programSearchKeywords } from '@/lib/data/fields'
 import { canonicalUniversitySlug } from '@/lib/data/slug-aliases'
 import type {
   AdmissionCycle,
@@ -68,6 +69,13 @@ function matchesQuery(values: unknown[], query?: string) {
 
 function matchesIdentity(value: { id: string; slug: string }, expected?: string) {
   return !expected || value.id === expected || value.slug === expected
+}
+
+function matchesProgramDiscipline(program: Program, expected?: string) {
+  if (!expected) return true
+  return isProgramField(expected)
+    ? classifyProgramField(program) === expected
+    : program.discipline === expected
 }
 
 function hasCurrentFacts(record: AuditMeta, today: string) {
@@ -283,7 +291,7 @@ export class CatalogApiService {
       return matchesQuery([university.name, currentSummary, city?.name, programs.map((item) => item.name)], query.q)
         && (!query.city || Boolean(city && matchesIdentity(city, query.city)))
         && (!query.region || university.region === query.region)
-        && (!query.discipline || programs.some((item) => item.discipline === query.discipline))
+        && (!query.discipline || programs.some((item) => matchesProgramDiscipline(item, query.discipline)))
     }).map((item) => this.institutionRecord(item))
     const page = paginateBySlug(filtered, query)
     return this.envelope(page.items, { pageSize: page.items.length, nextCursor: page.nextCursor })
@@ -321,12 +329,13 @@ export class CatalogApiService {
       const programFacts = hasCurrentFacts(program, this.today)
         ? [program.discipline, program.teachingLanguages]
         : []
-      return matchesQuery([program.name, university.name, programFacts], query.q)
+      return matchesQuery([program.name, university.name, programSearchKeywords(program), programFacts], query.q)
         && (!query.institution || matchesIdentity(university, query.institution))
         && (!query.city || Boolean(city && matchesIdentity(city, query.city)))
         && (!query.type || deriveProgramType(program) === query.type)
         && (!query.degree || program.degreeLevel === query.degree)
-        && (!query.discipline || (hasCurrentFacts(program, this.today) && program.discipline === query.discipline))
+        && (!query.discipline || (hasCurrentFacts(program, this.today)
+          && matchesProgramDiscipline(program, query.discipline)))
         && (!query.language || (hasCurrentFacts(program, this.today)
           && program.teachingLanguages.some((item) => item.toLocaleLowerCase() === query.language?.toLocaleLowerCase())))
         && (!query.scholarship || scholarships.some((item) => matchesIdentity(item, query.scholarship)))

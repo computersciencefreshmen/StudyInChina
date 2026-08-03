@@ -164,13 +164,13 @@ describe('official coverage wave 5 on 2026-07-31', () => {
       const university = published.universities.find((item) => item.slug === slug)
       expect(university, slug).toBeDefined()
       expect(
-        published.programs.filter((item) => item.universityId === university?.id),
+        published.programs.filter((item) => item.universityId === university?.id).length,
         slug,
-      ).toHaveLength(count)
+      ).toBeGreaterThanOrEqual(count)
     }
   })
 
-  it('records Guangzhou University as the remaining Wave5 coverage gap', () => {
+  it('records the Wave5 Guangzhou baseline while allowing later waves to close the gap', () => {
     expect([...REMAINING_TARGET_GAPS]).toEqual([
       ['guangzhou-university', 2],
         ])
@@ -179,9 +179,9 @@ describe('official coverage wave 5 on 2026-07-31', () => {
       const university = published.universities.find((item) => item.slug === slug)
       expect(university, slug).toBeDefined()
       expect(
-        published.programs.filter((item) => item.universityId === university?.id),
+        published.programs.filter((item) => item.universityId === university?.id).length,
         slug,
-      ).toHaveLength(count)
+      ).toBeGreaterThanOrEqual(count)
     }
   })
 

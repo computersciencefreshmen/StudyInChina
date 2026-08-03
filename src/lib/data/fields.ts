@@ -145,8 +145,14 @@ const LEGACY_DISCIPLINE_FIELDS: Record<Program['discipline'], ProgramField> = {
   other: 'interdisciplinary',
 }
 
+const CHINESE_LANGUAGE_PATTERNS: readonly RegExp[] = [
+  /\bchinese language\b|\bmandarin\b|\binternational chinese (?:language )?education\b|\binternational education of chinese language\b|\bteaching chinese to speakers of other languages\b|\b(?:mtcsol|tcsol)\b|\bchinese (?:linguistics?|literature|culture|studies|philology)\b/i,
+  /国际中文教育|汉语国际教育|对外汉语|汉语言(?:文学)?|汉语(?:进修|课程)|中文(?:进修|课程)|中国语言(?:文学)?|中国文化/i,
+  /китайск(?:ий|ого|ому|им|ом|ая|ой|ую|ое|ие|их)\s+(?:язык|языка|языку|языком|языке|литератур\w*|филолог\w*|культур\w*)|китаеведен\w*|преподаван\w*\s+китайск\w*/i,
+]
+
 const RULES: ReadonlyArray<{ field: ProgramField; patterns: readonly RegExp[] }> = [
-  { field: 'chinese-language', patterns: [/\bchinese language\b|\bmandarin\b|汉语(?:言|国际教育|进修|课程)|中文进修/i] },
+  { field: 'chinese-language', patterns: CHINESE_LANGUAGE_PATTERNS },
   { field: 'computing-data', patterns: [/\bcomputer\b|\bcomputing\b|\bsoftware\b|\bdata science\b|\bartificial intelligence\b|\bmachine learning\b|\bcyber(?:security|space)?\b|\binformatics\b|\binformation technology\b|计算机|软件|数据科学|人工智能|网络空间|信息技术/i] },
   { field: 'medicine-health', patterns: [/\bmedicine\b|\bmedical\b|\bclinical\b|\bsurgery\b|\bnursing\b|\bhealth\b|\bdent(?:al|istry)\b|\bstomatolog|\bpharmac|\bepidemiolog|\bimmunolog|\bpatholog|\bophthalm|\bpsychiatr|\bpaediatr|\bpediatr|\bgynecol|\bobstetric|\boncolog|\bcardiolog|\bneurolog|\bdermatolog|\bradiolog|\brehabilitation\b|医学|临床|口腔|护理|药学|公共卫生|免疫|病理|外科|内科|妇产|儿科|肿瘤|康复/i] },
   { field: 'agriculture-veterinary', patterns: [/\bagricultur|\bagronom|\bforestry\b|\bforest\b|\bveterinar|\banimal science\b|\bcrop\b|\bhorticultur|\bplant protection\b|\bplant patholog|\bsoil science\b|\bfood science\b|\bfood safety\b|\bfisher|\baquaculture\b|\btea science\b|农业|农学|作物|园艺|林学|森林|兽医|动物科学|水产|食品科学|植物保护|土壤学|茶学/i] },
@@ -187,17 +193,62 @@ export function programFieldLabel(field: ProgramField, locale: Locale): string {
   return definition ? localize(definition.label, locale) : field
 }
 
-export function classifyProgramField(program: Program): ProgramField {
-  if (program.degreeLevel === 'language') return 'chinese-language'
-  if (program.discipline !== 'other') return LEGACY_DISCIPLINE_FIELDS[program.discipline]
+const CHINESE_LANGUAGE_SEARCH_KEYWORDS = [
+  'Chinese language and culture',
+  'Chinese Language and Literature',
+  'International Chinese Language Education',
+  'International Chinese Education',
+  'Teaching Chinese to Speakers of Other Languages',
+  'MTCSOL',
+  'TCSOL',
+  '汉语与中国文化',
+  '汉语言',
+  '汉语言文学',
+  '国际中文教育',
+  '汉语国际教育',
+  '对外汉语',
+  'Китайский язык и культура',
+  'Китайский язык и литература',
+  'Международное преподавание китайского языка',
+] as const
 
-  const searchableName = Object.values(program.name)
+function programNameForClassification(program: Program): string {
+  return Object.values(program.name)
     .filter((value): value is string => typeof value === 'string' && value.trim().length > 0)
     .join(' ')
     .normalize('NFKC')
+}
+
+export function classifyProgramField(program: Program): ProgramField {
+  if (program.degreeLevel === 'language') return 'chinese-language'
+
+  const searchableName = programNameForClassification(program)
+
+  // Explicit Chinese-study titles outrank a broad legacy business/humanities
+  // tag. The pattern deliberately excludes a standalone "Chinese" adjective,
+  // so Chinese-English Computer Science remains a computing program.
+  if (CHINESE_LANGUAGE_PATTERNS.some((pattern) => pattern.test(searchableName))) return 'chinese-language'
+
+  // `chinese-education` historically combined language degrees, teacher-training
+  // degrees, foundation study and a few incorrectly tagged records. Resolve its
+  // clear multilingual titles before falling back to the legacy education field.
+  if (program.discipline === 'chinese-education') {
+    for (const rule of RULES) {
+      if (rule.patterns.some((pattern) => pattern.test(searchableName))) return rule.field
+    }
+    return LEGACY_DISCIPLINE_FIELDS[program.discipline]
+  }
+
+  if (program.discipline !== 'other') return LEGACY_DISCIPLINE_FIELDS[program.discipline]
 
   for (const rule of RULES) {
     if (rule.patterns.some((pattern) => pattern.test(searchableName))) return rule.field
   }
   return 'interdisciplinary'
+}
+
+export function programSearchKeywords(program: Program): readonly string[] {
+  return classifyProgramField(program) === 'chinese-language'
+    ? CHINESE_LANGUAGE_SEARCH_KEYWORDS
+    : []
 }

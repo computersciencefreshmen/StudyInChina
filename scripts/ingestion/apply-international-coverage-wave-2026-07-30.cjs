@@ -1,5 +1,6 @@
 const fs = require('node:fs')
 const path = require('node:path')
+const { classifyCandidateDiscipline } = require('./classify-candidate-discipline.cjs')
 
 const root = path.resolve(__dirname, '..', '..')
 const dataDir = path.join(root, 'content', 'data')
@@ -45,6 +46,11 @@ const LEGACY_DUPLICATE_PROGRAM_MERGES = [
     removeId: 'program-heilongjiang-university-chinese-language-program-language',
     keepId: 'prog-gap-confirmed-hlju-chinese-language',
     migrateSupportingSources: false,
+  },
+  {
+    removeId: 'program-south-china-normal-university-chinese-language-bachelor',
+    keepId: 'prog-gap-chinese-degree-scnu-chinese-language-bachelor',
+    migrateSupportingSources: true,
   },
 ]
 
@@ -226,18 +232,7 @@ function parseDuration(candidate) {
 }
 
 function discipline(candidate) {
-  const text = `${candidate.name?.en ?? ''} ${candidate.name?.zh ?? ''}`.toLowerCase()
-  if (/medicine|medical|mbbs|stomat|pharmacy|pharmaceutical|public health|中医|医学|口腔|药学|公共卫生/.test(text)) return 'medicine'
-  if (/business|econom|finance|account|management|commerce|trade|logistics|mba|经济|金融|管理|商务|贸易|会计|物流/.test(text)) return 'business'
-  if (/law|legal|法学|法律/.test(text)) return 'law-ir'
-  if (/chinese|汉语|中文|国际中文/.test(text)) return 'chinese-education'
-  if (/educational technology|education|pedagog|curriculum|教育技术学?|教育学|课程与教学|学前教育|特殊教育/.test(text)) return 'humanities'
-  if (/artificial intelligence|人工智能/.test(text)) return 'engineering'
-  if (/art|design|music|drama|film|theatre|美术|艺术|设计|音乐|戏剧|电影/.test(text)) return 'art-design'
-  if (/computer|software|engineering|technology|transport|marine|mining|artificial intelligence|计算机|软件|工程|技术|交通|海洋|矿业|人工智能/.test(text)) return 'engineering'
-  if (/science|mathemat|physics|chemistry|biology|environment|科学|数学|物理|化学|生物|环境/.test(text)) return 'science'
-  if (/history|literature|language|education|psychology|历史|文学|语言|教育|心理/.test(text)) return 'humanities'
-  return 'other'
+  return classifyCandidateDiscipline(candidate)
 }
 
 function tuition(candidate) {
