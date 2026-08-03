@@ -154,8 +154,8 @@ const CHINESE_LANGUAGE_PATTERNS: readonly RegExp[] = [
 const RULES: ReadonlyArray<{ field: ProgramField; patterns: readonly RegExp[] }> = [
   { field: 'chinese-language', patterns: CHINESE_LANGUAGE_PATTERNS },
   { field: 'computing-data', patterns: [/\bcomputer\b|\bcomputing\b|\bsoftware\b|\bdata science\b|\bartificial intelligence\b|\bmachine learning\b|\bcyber(?:security|space)?\b|\binformatics\b|\binformation technology\b|计算机|软件|数据科学|人工智能|网络空间|信息技术/i] },
-  { field: 'medicine-health', patterns: [/\bmedicine\b|\bmedical\b|\bclinical\b|\bsurgery\b|\bnursing\b|\bhealth\b|\bdent(?:al|istry)\b|\bstomatolog|\bpharmac|\bepidemiolog|\bimmunolog|\bpatholog|\bophthalm|\bpsychiatr|\bpaediatr|\bpediatr|\bgynecol|\bobstetric|\boncolog|\bcardiolog|\bneurolog|\bdermatolog|\bradiolog|\brehabilitation\b|医学|临床|口腔|护理|药学|公共卫生|免疫|病理|外科|内科|妇产|儿科|肿瘤|康复/i] },
   { field: 'agriculture-veterinary', patterns: [/\bagricultur|\bagronom|\bforestry\b|\bforest\b|\bveterinar|\banimal science\b|\bcrop\b|\bhorticultur|\bplant protection\b|\bplant patholog|\bsoil science\b|\bfood science\b|\bfood safety\b|\bfisher|\baquaculture\b|\btea science\b|农业|农学|作物|园艺|林学|森林|兽医|动物科学|水产|食品科学|植物保护|土壤学|茶学/i] },
+  { field: 'medicine-health', patterns: [/\bmedicine\b|\bmedical\b|\bclinical\b|\bsurgery\b|\bnursing\b|\bhealth\b|\bdent(?:al|istry)\b|\bstomatolog|\bpharmac|\bepidemiolog|\bimmunolog|\bpatholog|\bophthalm|\bpsychiatr|\bpaediatr|\bpediatr|\bgynecol|\bobstetric|\boncolog|\bcardiolog|\bneurolog|\bdermatolog|\bradiolog|\brehabilitation\b|医学|临床|口腔|护理|药学|公共卫生|免疫|病理|外科|内科|妇产|儿科|肿瘤|康复/i] },
   { field: 'architecture-built-environment', patterns: [/\barchitecture\b|\burban (?:and rural )?planning\b|\btown planning\b|\blandscape architecture\b|\bbuilt environment\b|建筑|城乡规划|城市规划|风景园林|景观建筑/i] },
   { field: 'business-economics', patterns: [/\bbusiness\b|\beconom|\bfinance\b|\baccounting\b|\bmanagement\b|\bmarketing\b|\bcommerce\b|\btrade\b|\blogistics\b|\bentrepreneur|\btourism management\b|工商管理|经济|金融|会计|管理|市场营销|国际贸易|物流/i] },
   { field: 'law-public-policy', patterns: [/\blaw\b|\blegal\b|\bjuris|\bgovernance\b|\bpublic policy\b|\bpublic administration\b|\binternational relations\b|\bdiplomacy\b|\bpolitic|\bstate security\b|\bmarxism\b|\bsocial security\b|法律|法学|公共政策|公共管理|行政管理|国际关系|外交|政治|国家安全|马克思主义/i] },
@@ -169,6 +169,22 @@ const RULES: ReadonlyArray<{ field: ProgramField; patterns: readonly RegExp[] }>
   { field: 'social-sciences', patterns: [/\bsociolog|\bpsycholog|\banthropolog|\bdemograph|\bsocial work\b|\bpopulation studies\b|\bwomen studies\b|\bgender studies\b|\bhuman geography\b|社会学|心理学|人类学|人口学|社会工作|女性研究|性别研究/i] },
   { field: 'humanities-languages', patterns: [/\bliterature\b|\blanguage\b|\blinguist|\bphilolog|\bhistory\b|\bphilosoph|\bethics\b|\blogic\b|\breligio|\bheritage\b|\bmuseolog|\bpaleograph|\baesthetics\b|\btranslation\b|\barea studies\b|文学|语言学|外国语|历史|哲学|伦理|逻辑|宗教|文化遗产|博物馆|古文字|美学|翻译/i] },
 ]
+
+// Older catalog records only stored one of eight broad disciplines. Refine the
+// titles that have an unambiguous applicant-facing field before preserving the
+// legacy fallback. The allow-list prevents a generic word in a title from
+// overriding a more trustworthy historical discipline.
+const LEGACY_DISCIPLINE_REFINEMENTS: Partial<Record<Program['discipline'], readonly ProgramField[]>> = {
+  engineering: ['computing-data', 'architecture-built-environment', 'environment-earth', 'agriculture-veterinary'],
+  science: ['computing-data', 'agriculture-veterinary', 'medicine-health', 'environment-earth'],
+  medicine: ['agriculture-veterinary'],
+  business: ['sport-services'],
+  humanities: ['education', 'media-communication', 'arts-design', 'sport-services', 'social-sciences'],
+}
+
+function matchesFieldRule(rule: (typeof RULES)[number], searchableName: string): boolean {
+  return rule.patterns.some((pattern) => pattern.test(searchableName))
+}
 
 export function isProgramField(value: string): value is ProgramField {
   return (PROGRAM_FIELD_KEYS as readonly string[]).includes(value)
@@ -237,6 +253,14 @@ export function classifyProgramField(program: Program): ProgramField {
       if (rule.patterns.some((pattern) => pattern.test(searchableName))) return rule.field
     }
     return LEGACY_DISCIPLINE_FIELDS[program.discipline]
+  }
+
+  const eligibleRefinements = LEGACY_DISCIPLINE_REFINEMENTS[program.discipline] ?? []
+  for (const rule of RULES) {
+    if (
+      eligibleRefinements.includes(rule.field)
+      && matchesFieldRule(rule, searchableName)
+    ) return rule.field
   }
 
   if (program.discipline !== 'other') return LEGACY_DISCIPLINE_FIELDS[program.discipline]

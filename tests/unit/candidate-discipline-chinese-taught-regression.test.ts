@@ -11,7 +11,7 @@ const { classifyCandidateDiscipline } = require(
   }) => string
 }
 
-it('keeps Chinese-taught Computer Science in engineering', () => {
+it('keeps Chinese-taught Computer Science out of the Chinese-study discipline', () => {
   expect(classifyCandidateDiscipline({
     name: {
       en: 'Computer Science and Technology (Chinese-taught Bachelor)',

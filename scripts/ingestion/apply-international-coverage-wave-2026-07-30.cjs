@@ -52,6 +52,26 @@ const LEGACY_DUPLICATE_PROGRAM_MERGES = [
     keepId: 'prog-gap-chinese-degree-scnu-chinese-language-bachelor',
     migrateSupportingSources: true,
   },
+  {
+    removeId: 'prog-gap-prog-mew-ne-upc-petroleum-engineering-bachelor-en',
+    keepId: 'program-china-university-of-petroleum-east-china-petroleum-engineering-bachelor',
+    migrateSupportingSources: true,
+  },
+  {
+    removeId: 'prog-gap-prog-mew-ne-neau-food-science-doctorate',
+    keepId: 'program-northeast-agricultural-university-food-science-doctorate',
+    migrateSupportingSources: true,
+  },
+  {
+    removeId: 'prog-gap-prog-mew-ne-nefu-forestry-bachelor',
+    keepId: 'program-northeast-forestry-university-forestry-bachelor',
+    migrateSupportingSources: true,
+  },
+  {
+    removeId: 'prog-gap-prog-mew-ne-tjutcm-chinese-medicine-bachelor',
+    keepId: 'program-tianjin-university-of-traditional-chinese-medicine-traditional-chinese-m',
+    migrateSupportingSources: true,
+  },
 ]
 
 const LEGACY_DUPLICATE_SCHOLARSHIP_MERGES = [

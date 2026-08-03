@@ -12,7 +12,7 @@ const { classifyCandidateDiscipline } = require(
 }
 
 describe('international coverage candidate discipline importer', () => {
-  it('does not treat Chinese as a teaching-language adjective for Computer Science', () => {
+  it('leaves Computer Science for the applicant-facing computing taxonomy', () => {
     expect(classifyCandidateDiscipline({
       name: {
         en: 'Computer Science and Technology (Chinese-English bilingual)',
@@ -37,5 +37,13 @@ describe('international coverage candidate discipline importer', () => {
     expect(classifyCandidateDiscipline({
       name: { en: 'Chinese-English Bilingual Computer Science' },
     })).toBe('engineering')
+  })
+
+  it.each([
+    'Clinical Veterinary Medicine',
+    'Food Science and Engineering',
+    'Environmental Science and Engineering',
+  ])('leaves the specialist field %s for precise frontend classification', (en) => {
+    expect(classifyCandidateDiscipline({ name: { en } })).toBe('other')
   })
 })
