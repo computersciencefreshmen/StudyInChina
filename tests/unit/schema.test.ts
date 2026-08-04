@@ -200,7 +200,7 @@ describe('content schemas', () => {
     })
   })
 
-  it('rejects a verified program without a verified admission cycle', () => {
+  it('rejects a complete verified program without an audited admission cycle', () => {
     const bundle = validBundle()
     ;(bundle.admissionCycles[0] as { status: 'verified' | 'draft' }).status = 'draft'
 
@@ -208,8 +208,17 @@ describe('content schemas', () => {
 
     expect(result.success).toBe(false)
     if (!result.success) {
-      expect(result.error.issues.some((issue) => issue.message.includes('verified admission cycle'))).toBe(true)
+      expect(result.error.issues.some((issue) => issue.message.includes('audited admission cycle'))).toBe(true)
     }
+  })
+
+  it('allows a current complete program to retain details when its audited cycle is stale', () => {
+    const bundle = validBundle()
+    ;(bundle.admissionCycles[0] as { status: 'verified' | 'stale' }).status = 'stale'
+
+    const result = bundleSchema.safeParse(bundle)
+
+    expect(result.success).toBe(true)
   })
 
   it('rejects a verified program without an explicit language policy result', () => {

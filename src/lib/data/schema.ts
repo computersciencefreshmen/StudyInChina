@@ -81,8 +81,8 @@ export const bundleSchema = z.object({
   for (const item of bundle.universities) if (!cityIds.has(item.cityId)) context.addIssue({ code: 'custom', message: `Unknown city ${item.cityId} on ${item.id}` })
   for (const item of bundle.programs) if (!universityIds.has(item.universityId)) context.addIssue({ code: 'custom', message: `Unknown university ${item.universityId} on ${item.id}` })
   for (const item of bundle.programs) if (item.status === 'verified' && !item.sourceIds.some((id) => officialProgramSources.get(id)?.url === item.programUrl)) context.addIssue({ code: 'custom', message: `Verified program lacks a matching program-level official source on ${item.id}` })
-  const verifiedCycleProgramIds = new Set(bundle.admissionCycles.filter((item) => item.status === 'verified').map((item) => item.programId))
-  for (const item of bundle.programs) if (item.status === 'verified' && item.details && !verifiedCycleProgramIds.has(item.id)) context.addIssue({ code: 'custom', message: `Complete verified program lacks a verified admission cycle on ${item.id}` })
+  const auditedCycleProgramIds = new Set(bundle.admissionCycles.filter((item) => item.status === 'verified' || item.status === 'stale').map((item) => item.programId))
+  for (const item of bundle.programs) if (item.status === 'verified' && item.details && !auditedCycleProgramIds.has(item.id)) context.addIssue({ code: 'custom', message: `Complete verified program lacks an audited admission cycle on ${item.id}` })
   for (const item of bundle.admissionCycles) if (!programIds.has(item.programId)) context.addIssue({ code: 'custom', message: `Unknown program ${item.programId} on ${item.id}` })
   const cycleKeys = new Set<string>()
   for (const item of bundle.admissionCycles) {

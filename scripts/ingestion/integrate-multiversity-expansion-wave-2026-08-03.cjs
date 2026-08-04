@@ -3,9 +3,30 @@ const path = require('node:path')
 
 const root = path.resolve(__dirname, '..', '..')
 const mergedPath = path.join(root, 'quality', 'official-gap-wave-2026-07-30', 'merged-candidates.json')
-const waveDir = path.join(root, 'quality', 'multiversity-expansion-wave-2026-08-03')
-const packNames = ['north-east.json', 'jiangzhehu.json', 'central-south-west.json']
-const today = '2026-08-03'
+const waveDirectoryName = process.env.CANDIDATE_WAVE_DIRECTORY ?? 'multiversity-expansion-wave-2026-08-03'
+const waveDir = path.join(root, 'quality', waveDirectoryName)
+const packNames = (process.env.CANDIDATE_WAVE_PACKS ?? 'north-east.json,jiangzhehu.json,central-south-west.json')
+  .split(',')
+  .map((value) => value.trim())
+  .filter(Boolean)
+const today = process.env.CANDIDATE_WAVE_DATE ?? '2026-08-03'
+const auditKey = process.env.CANDIDATE_WAVE_AUDIT_KEY ?? 'multiUniversityWave20260803'
+const schemaVersion = process.env.CANDIDATE_WAVE_SCHEMA_VERSION ?? '2026-08-03.merged.multiversity-expansion.v1'
+
+if (!/^[a-z0-9][a-z0-9-]*$/i.test(waveDirectoryName)) {
+  throw new Error('CANDIDATE_WAVE_DIRECTORY must be one directory name under quality/')
+}
+if (!/^\d{4}-\d{2}-\d{2}$/.test(today)) {
+  throw new Error('CANDIDATE_WAVE_DATE must use YYYY-MM-DD')
+}
+if (!/^[A-Za-z][A-Za-z0-9]*$/.test(auditKey)) {
+  throw new Error('CANDIDATE_WAVE_AUDIT_KEY must be a safe object key')
+}
+if (packNames.length === 0 || packNames.some((fileName) => (
+  path.basename(fileName) !== fileName || !fileName.endsWith('.json')
+))) {
+  throw new Error('CANDIDATE_WAVE_PACKS must contain comma-separated JSON basenames')
+}
 const factStatuses = new Set([
   'known',
   'officially_not_announced',
@@ -13,6 +34,15 @@ const factStatuses = new Set([
   'source_unavailable',
   'conflict',
   'stale',
+])
+const catalogRegions = new Set([
+  "north",
+  "northeast",
+  "east",
+  "south",
+  "central",
+  "southwest",
+  "northwest",
 ])
 const blockedSourceHosts = [
   'china-admissions.com',
@@ -113,16 +143,6 @@ function scholarshipScore(candidate) {
     + (candidate.qualityTier === 'A' ? 2 : 0)
 }
 
-function canonicalMergedCandidateId(primary, secondary) {
-  const candidateIds = [...new Set([
-    primary.candidateId,
-    secondary.candidateId,
-    ...(primary.candidateIds ?? []),
-    ...(secondary.candidateIds ?? []),
-  ])]
-  return candidateIds.find((candidateId) => !/^(?:(?:prog|sch)-mew-ne-|mve-jzh-|mew-csw-)/.test(candidateId)) ?? primary.candidateId
-}
-
 function evidenceUnion(primary, secondary) {
   const seen = new Set([primary.evidence?.officialUrl])
   const additionalEvidence = []
@@ -162,10 +182,15 @@ function mergeProgram(left, right) {
   const secondary = primary === left ? right : left
   return {
     ...primary,
-    candidateId: canonicalMergedCandidateId(primary, secondary),
+    // `left` is always the already-canonical record because existing catalog
+    // candidates are ordered before a new wave. Preserve its stable public ID
+    // even when the new source supplies richer facts.
+    candidateId: left.candidateId,
     candidateIds: [...new Set([
-      ...(primary.candidateIds ?? [primary.candidateId]),
-      ...(secondary.candidateIds ?? [secondary.candidateId]),
+      primary.candidateId,
+      secondary.candidateId,
+      ...(primary.candidateIds ?? []),
+      ...(secondary.candidateIds ?? []),
     ])].sort(),
     teachingLanguage: factKnown(primary.teachingLanguage) ? primary.teachingLanguage : secondary.teachingLanguage,
     duration: factKnown(primary.duration) ? primary.duration : secondary.duration,
@@ -183,10 +208,12 @@ function mergeScholarship(left, right) {
   const tiers = [...new Set([...(primary.funding?.tiers ?? []), ...(secondary.funding?.tiers ?? [])])]
   return {
     ...primary,
-    candidateId: canonicalMergedCandidateId(primary, secondary),
+    candidateId: left.candidateId,
     candidateIds: [...new Set([
-      ...(primary.candidateIds ?? [primary.candidateId]),
-      ...(secondary.candidateIds ?? [secondary.candidateId]),
+      primary.candidateId,
+      secondary.candidateId,
+      ...(primary.candidateIds ?? []),
+      ...(secondary.candidateIds ?? []),
     ])].sort(),
     applicableLevels: [...new Set([
       ...(primary.applicableLevels ?? []),
@@ -227,7 +254,10 @@ function deduplicate(records, keyFor, merge) {
     ]) aliases.set(candidateId, combined.candidateId)
     aliases.set(existing.candidateId, combined.candidateId)
     aliases.set(record.candidateId, combined.candidateId)
-    groups.push({ key, kept: combined.candidateId, merged: [existing.candidateId, record.candidateId] })
+    const mergedIds = [...new Set([existing.candidateId, record.candidateId])]
+    if (mergedIds.length > 1) {
+      groups.push({ key, kept: combined.candidateId, merged: mergedIds })
+    }
   }
   return { records: [...byKey.values()], aliases, groups }
 }
@@ -272,6 +302,58 @@ function assertCycle(cycle, label) {
     throw new Error(`${label} has inconsistent open-cycle state`)
   }
 }
+function mergeStaticEntities(base, additions, kind) {
+  const output = [...base]
+  const byId = new Map(output.map((entity) => [entity.id, entity]))
+  const bySlug = new Map(output.map((entity) => [entity.slug, entity]))
+  for (const entity of additions) {
+    const idMatch = byId.get(entity.id)
+    const slugMatch = bySlug.get(entity.slug)
+    if (idMatch && slugMatch && idMatch !== slugMatch) {
+      throw new Error(`${kind} ${entity.id}/${entity.slug} conflicts with two canonical entities`)
+    }
+    const existing = idMatch ?? slugMatch
+    if (!existing) {
+      output.push(entity)
+      byId.set(entity.id, entity)
+      bySlug.set(entity.slug, entity)
+      continue
+    }
+    const index = output.indexOf(existing)
+    const mergedEntity = {
+      ...existing,
+      ...entity,
+      id: existing.id,
+      slug: existing.slug,
+      sourceIds: [...new Set([...(existing.sourceIds ?? []), ...(entity.sourceIds ?? [])])],
+    }
+    output[index] = mergedEntity
+    byId.set(mergedEntity.id, mergedEntity)
+    bySlug.set(mergedEntity.slug, mergedEntity)
+  }
+  return output
+}
+
+function assertStaticCity(city) {
+  const label = `city ${city.id ?? city.slug ?? '<missing-id>'}`
+  if (!city.id || !city.slug) throw new Error(`${label} requires id and slug`)
+  assertLocalizedName(city.name, label)
+  if (!Array.isArray(city.sourceIds) || city.sourceIds.length === 0) throw new Error(`${label} requires sourceIds`)
+  if (city.verifiedAt !== today) throw new Error(`${label} must be verified on ${today}`)
+}
+
+function assertStaticUniversity(university, cityIds) {
+  const label = `university ${university.id ?? university.slug ?? '<missing-id>'}`
+  if (!university.id || !university.slug) throw new Error(`${label} requires id and slug`)
+  assertLocalizedName(university.name, label)
+  assertOfficialUrl(university.officialUrl, label)
+  if (university.admissionsUrl) assertOfficialUrl(university.admissionsUrl, `${label} admissionsUrl`)
+  if (!cityIds.has(university.cityId)) throw new Error(`${label} references an unknown city: ${university.cityId}`)
+  if (!catalogRegions.has(university.region)) throw new Error(`${label} has an invalid region: ${university.region}`)
+  if (!Array.isArray(university.sourceIds) || university.sourceIds.length === 0) throw new Error(`${label} requires sourceIds`)
+  if (university.verifiedAt !== today) throw new Error(`${label} must be verified on ${today}`)
+}
+
 
 function assertCandidate(candidate, kind, universitySlugs) {
   const label = `${kind} ${candidate.candidateId ?? '<missing-id>'}`
@@ -293,13 +375,27 @@ function assertCandidate(candidate, kind, universitySlugs) {
 
 function main() {
   const merged = readJson(mergedPath)
-  const universities = readJson(path.join(root, 'content', 'data', 'universities.json'))
-  const universitySlugs = new Set(universities.map((item) => item.slug))
+  const catalogUniversities = readJson(path.join(root, 'content', 'data', 'universities.json'))
+  const catalogCities = readJson(path.join(root, 'content', 'data', 'cities.json'))
   const packs = packNames.map((fileName) => {
     const filePath = path.join(waveDir, fileName)
     if (!fs.existsSync(filePath)) throw new Error(`Missing multi-university pack: ${fileName}`)
     return { fileName, bundle: readJson(filePath) }
   })
+  const rawNewCities = packs.flatMap(({ bundle }) => bundle.cities ?? [])
+  const rawNewUniversities = packs.flatMap(({ bundle }) => bundle.universities ?? [])
+  const mergedCities = mergeStaticEntities(merged.cities ?? [], rawNewCities, 'city')
+  const mergedUniversities = mergeStaticEntities(merged.universities ?? [], rawNewUniversities, 'university')
+  const cityIds = new Set([
+    ...catalogCities.map((city) => city.id),
+    ...mergedCities.map((city) => city.id),
+  ])
+  for (const city of rawNewCities) assertStaticCity(city)
+  for (const university of rawNewUniversities) assertStaticUniversity(university, cityIds)
+  const universitySlugs = new Set([
+    ...catalogUniversities.map((university) => university.slug),
+    ...mergedUniversities.map((university) => university.slug),
+  ])
   const rawNewPrograms = packs.flatMap(({ bundle }) => bundle.programCandidates ?? bundle.programs ?? [])
   const quarantinedPrograms = rawNewPrograms.filter((candidate) => (
     candidate.recommendedAction === 'quarantine'
@@ -352,10 +448,14 @@ function main() {
   const newScholarshipIds = new Set(newScholarships.map((item) => item.candidateId))
   const output = {
     ...merged,
-    schemaVersion: '2026-08-03.merged.multiversity-expansion.v1',
+    cities: mergedCities.sort((left, right) => left.slug.localeCompare(right.slug)),
+    universities: mergedUniversities.sort((left, right) => left.slug.localeCompare(right.slug)),
+    schemaVersion,
     sourceFiles: [...new Set([
       ...merged.sourceFiles,
-      ...packNames.map((fileName) => `../multiversity-expansion-wave-2026-08-03/${fileName}`),
+      ...packNames.map((fileName) => path
+        .relative(path.dirname(mergedPath), path.join(waveDir, fileName))
+        .replaceAll('\\', '/')),
     ])],
     programCandidates: programResult.records.sort((a, b) => (
       a.institutionSlug.localeCompare(b.institutionSlug) || a.name.en.localeCompare(b.name.en)
@@ -365,7 +465,9 @@ function main() {
     )),
     mergeAudit: {
       ...merged.mergeAudit,
-      multiUniversityWave20260803: {
+      [auditKey]: {
+        rawCities: rawNewCities.length,
+        rawUniversities: rawNewUniversities.length,
         rawPrograms: rawNewPrograms.length,
         publishablePrograms: newPrograms.length,
         quarantinedPrograms: quarantinedPrograms.map((item) => item.candidateId).sort(),
@@ -390,7 +492,7 @@ function main() {
     output: path.relative(root, mergedPath),
     programs: output.programCandidates.length,
     scholarships: output.scholarshipCandidates.length,
-    wave: output.mergeAudit.multiUniversityWave20260803,
+    wave: output.mergeAudit[auditKey],
   }, null, 2))
 }
 

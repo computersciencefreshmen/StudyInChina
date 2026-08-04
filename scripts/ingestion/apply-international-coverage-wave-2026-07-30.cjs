@@ -366,6 +366,32 @@ function normalizeExpiredTuitionCycles(state) {
   return converted
 }
 
+function markOverdueVerifiedRecordsStale(state) {
+  const staleCounts = {}
+  const recordCollections = [
+    ['cities', state.cities],
+    ['universities', state.universities],
+    ['programs', state.programs],
+    ['cycles', state.cycles],
+    ['scholarships', state.scholarships],
+  ]
+
+  for (const [kind, records] of recordCollections) {
+    let staleCount = 0
+    for (const record of records) {
+      if (record.status === 'verified'
+        && typeof record.reviewAfter === 'string'
+        && record.reviewAfter < CATALOG_AS_OF_DATE) {
+        record.status = 'stale'
+        staleCount += 1
+      }
+    }
+    staleCounts[kind] = staleCount
+  }
+
+  return staleCounts
+}
+
 function sourceRecord(id, candidate, kind, evidence = candidate.evidence) {
   const url = httpsUrl(evidence?.officialUrl, `${candidate.candidateId} official URL`)
   const checkedAt = isoDate(candidate.evidence?.checkedAt, `${candidate.candidateId} checkedAt`)
@@ -847,6 +873,7 @@ function main() {
     ...mergeLegacyDuplicateScholarships(state),
   }
   const normalizedExpiredTuitionCycles = normalizeExpiredTuitionCycles(state)
+  const staleOverdueRecords = markOverdueVerifiedRecordsStale(state)
 
   assertUnique(state.sources, 'id', 'source')
   assertUnique(state.cities, 'id', 'city')
@@ -905,6 +932,7 @@ function main() {
     removedPreviousWave: removed,
     duplicateCleanup,
     normalizedExpiredTuitionCycles,
+    staleOverdueRecords,
     archiveInstitutionSlugs: [...archiveInstitutionSlugs].sort(),
     imported: {
       ...importedStatic,

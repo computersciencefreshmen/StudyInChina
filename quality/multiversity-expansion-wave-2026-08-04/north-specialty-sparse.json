@@ -1,0 +1,4528 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-08-04T08:00:00.000Z",
+  "sourceFiles": [
+    "north-specialty-sparse.json"
+  ],
+  "cities": [],
+  "universities": [
+    {
+      "sourceIds": [
+        "src-mew-nss-university-shenyang-normal-university"
+      ],
+      "verifiedAt": "2026-08-04",
+      "reviewAfter": "2027-02-04",
+      "status": "verified",
+      "id": "uni-shenyang-normal-university",
+      "slug": "shenyang-normal-university",
+      "name": {
+        "en": "Shenyang Normal University",
+        "zh": "沈阳师范大学",
+        "ru": "Шэньянский педагогический университет"
+      },
+      "cityId": "city-shenyang",
+      "region": "northeast",
+      "officialUrl": "https://www.synu.edu.cn/",
+      "admissionsUrl": "https://cie.synu.edu.cn/zsjz/list.htm",
+      "summary": {
+        "en": "The official international-college site publishes current 2026 degree, Chinese-language and scholarship routes for international applicants.",
+        "zh": "学校国际教育学院官网发布2026年面向国际申请人的学历、中文学习与奖学金渠道。",
+        "ru": "Официальный сайт международного института публикует программы 2026 года и стипендии для иностранных абитуриентов."
+      },
+      "featured": false
+    },
+    {
+      "sourceIds": [
+        "src-mew-nss-university-liaoning-normal-university"
+      ],
+      "verifiedAt": "2026-08-04",
+      "reviewAfter": "2027-02-04",
+      "status": "verified",
+      "id": "uni-liaoning-normal-university",
+      "slug": "liaoning-normal-university",
+      "name": {
+        "en": "Liaoning Normal University",
+        "zh": "辽宁师范大学",
+        "ru": "Ляонинский педагогический университет"
+      },
+      "cityId": "city-dalian",
+      "region": "northeast",
+      "officialUrl": "https://www.lnnu.edu.cn/",
+      "admissionsUrl": "https://gjy.lnnu.edu.cn/info/1044/2066.htm",
+      "summary": {
+        "en": "The official international-education site identifies two bachelor programs for self-funded international students from the 2026 fall intake and publishes their tuition.",
+        "zh": "学校国际教育官网明确两项本科专业自2026年秋季起适用于自费来华留学生，并公布其学费标准。",
+        "ru": "Официальный сайт международного образования подтверждает две программы бакалавриата для иностранных студентов на самообеспечении с осени 2026 года и публикует их стоимость."
+      },
+      "featured": false
+    }
+  ],
+  "programCandidates": [
+    {
+      "candidateId": "prog-mew-nss-bsu-international-chinese-education-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-bsu-international-chinese-education-bachelor"
+      ],
+      "institutionSlug": "beijing-sport-university",
+      "name": {
+        "en": "International Chinese Education",
+        "zh": "汉语国际教育",
+        "ru": "Международное преподавание китайского языка"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 25000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://zs.bsu.edu.cn/docs/2025-11/42eac512d5c34329afba9e0b37abad2b.pdf",
+        "sourceTitle": "北京体育大学2026年外国留学生本科生专业目录",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists International Chinese Education for international applicants. The same source states teaching language: Chinese; duration: 4 academic years; tuition: CNY 25000 per academic year.",
+          "zh": "官方来源明确列出面向国际申请人的汉语国际教育。同一来源注明授课语言：Chinese；学制：4 academic years；学费：每学年25000元。",
+          "ru": "Официальный источник прямо указывает программу «Международное преподавание китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 4 academic years; стоимость: 25000 CNY за учебный год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-bsu-international-chinese-education-master",
+      "candidateIds": [
+        "prog-mew-nss-bsu-international-chinese-education-master"
+      ],
+      "institutionSlug": "beijing-sport-university",
+      "name": {
+        "en": "International Chinese Education",
+        "zh": "国际中文教育",
+        "ru": "Международное преподавание китайского языка"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "2 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+        "sourceTitle": "北京体育大学2026年外国留学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists International Chinese Education for international applicants. The same source states teaching language: Chinese; duration: 2 academic years; verified deadline: 2026-03-01.",
+          "zh": "官方来源明确列出面向国际申请人的国际中文教育。同一来源注明授课语言：Chinese；学制：2 academic years；已核实截止日期：2026-03-01。",
+          "ru": "Официальный источник прямо указывает программу «Международное преподавание китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 2 academic years; подтвержденный срок: 2026-03-01."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/20c48cea06c3422ba70e4c57d8d9b527.htm",
+          "sourceTitle": "北京体育大学2026年中国政府奖学金高水平研究生项目招生简章"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-bsu-chinese-language",
+      "candidateIds": [
+        "prog-mew-nss-bsu-chinese-language"
+      ],
+      "institutionSlug": "beijing-sport-university",
+      "name": {
+        "en": "Chinese Language Study",
+        "zh": "汉语进修",
+        "ru": "Изучение китайского языка"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 semester or 1 academic year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+        "sourceTitle": "北京体育大学2026年外国留学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Chinese Language Study for international applicants. The same source states teaching language: Chinese; duration: 1 semester or 1 academic year.",
+          "zh": "官方来源明确列出面向国际申请人的汉语进修。同一来源注明授课语言：Chinese；学制：1 semester or 1 academic year。",
+          "ru": "Официальный источник прямо указывает программу «Изучение китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 1 semester or 1 academic year."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-bsu-wushu-training",
+      "candidateIds": [
+        "prog-mew-nss-bsu-wushu-training"
+      ],
+      "institutionSlug": "beijing-sport-university",
+      "name": {
+        "en": "Wushu Training",
+        "zh": "武术进修",
+        "ru": "Стажировка по ушу"
+      },
+      "programType": "visiting",
+      "level": "other",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 semester or 1 academic year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+        "sourceTitle": "北京体育大学2026年外国留学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Wushu Training for international applicants. The same source states teaching language: Chinese; duration: 1 semester or 1 academic year.",
+          "zh": "官方来源明确列出面向国际申请人的武术进修。同一来源注明授课语言：Chinese；学制：1 semester or 1 academic year。",
+          "ru": "Официальный источник прямо указывает программу «Стажировка по ушу» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 1 semester or 1 academic year."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-bwu-supply-chain-management-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-bwu-supply-chain-management-bachelor"
+      ],
+      "institutionSlug": "beijing-wuzi-university",
+      "name": {
+        "en": "Supply Chain Management",
+        "zh": "供应链管理",
+        "ru": "Управление цепями поставок"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese / English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://is.bwu.edu.cn/info/1174/2816.htm",
+        "sourceTitle": "北京物资学院来华留学生本科项目介绍",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Supply Chain Management for international applicants. The same source states teaching language: Chinese / English; duration: 4 academic years.",
+          "zh": "官方来源明确列出面向国际申请人的供应链管理。同一来源注明授课语言：Chinese / English；学制：4 academic years。",
+          "ru": "Официальный источник прямо указывает программу «Управление цепями поставок» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese / English; продолжительность: 4 academic years."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_cycle_deadline_not_announced",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-bwu-international-trade-master",
+      "candidateIds": [
+        "prog-mew-nss-bwu-international-trade-master"
+      ],
+      "institutionSlug": "beijing-wuzi-university",
+      "name": {
+        "en": "International Trade",
+        "zh": "国际贸易学",
+        "ru": "Международная торговля"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://is.bwu.edu.cn/info/1175/2817.htm",
+        "sourceTitle": "北京物资学院来华留学生硕士项目介绍",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists International Trade for international applicants. The same source states teaching language: English; duration: 3 academic years.",
+          "zh": "官方来源明确列出面向国际申请人的国际贸易学。同一来源注明授课语言：English；学制：3 academic years。",
+          "ru": "Официальный источник прямо указывает программу «Международная торговля» для иностранных абитуриентов. В том же источнике указано: язык обучения: English; продолжительность: 3 academic years."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_cycle_deadline_not_announced",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-bwu-logistics-engineering-management-master",
+      "candidateIds": [
+        "prog-mew-nss-bwu-logistics-engineering-management-master"
+      ],
+      "institutionSlug": "beijing-wuzi-university",
+      "name": {
+        "en": "Logistics Engineering and Management",
+        "zh": "物流工程与管理",
+        "ru": "Логистическая инженерия и управление"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://is.bwu.edu.cn/info/1175/2817.htm",
+        "sourceTitle": "北京物资学院来华留学生硕士项目介绍",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Logistics Engineering and Management for international applicants. The same source states teaching language: English; duration: 3 academic years.",
+          "zh": "官方来源明确列出面向国际申请人的物流工程与管理。同一来源注明授课语言：English；学制：3 academic years。",
+          "ru": "Официальный источник прямо указывает программу «Логистическая инженерия и управление» для иностранных абитуриентов. В том же источнике указано: язык обучения: English; продолжительность: 3 academic years."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_cycle_deadline_not_announced",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-bwu-long-term-chinese-language",
+      "candidateIds": [
+        "prog-mew-nss-bwu-long-term-chinese-language"
+      ],
+      "institutionSlug": "beijing-wuzi-university",
+      "name": {
+        "en": "Long-term Chinese Language Study",
+        "zh": "长期汉语进修",
+        "ru": "Долгосрочное изучение китайского языка"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 semester or longer",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.bwu.edu.cn/info/1278/5945.htm",
+        "sourceTitle": "北京物资学院汉语培训项目",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Long-term Chinese Language Study for international applicants. The same source states teaching language: Chinese; duration: 1 semester or longer.",
+          "zh": "官方来源明确列出面向国际申请人的长期汉语进修。同一来源注明授课语言：Chinese；学制：1 semester or longer。",
+          "ru": "Официальный источник прямо указывает программу «Долгосрочное изучение китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 1 semester or longer."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_cycle_deadline_not_announced",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-dut-foundation",
+      "candidateIds": [
+        "prog-mew-nss-dut-foundation"
+      ],
+      "institutionSlug": "dalian-university-of-technology",
+      "name": {
+        "en": "International Student Foundation Program",
+        "zh": "国际学生预科项目",
+        "ru": "Подготовительная программа для иностранных студентов"
+      },
+      "programType": "foundation",
+      "level": "foundation",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 academic year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 28000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://sie.dlut.edu.cn/info/3731/21141.htm",
+        "sourceTitle": "大连理工大学国际学生预科项目",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists International Student Foundation Program for international applicants. The same source states teaching language: Chinese; duration: 1 academic year; tuition: CNY 28000 per academic year.",
+          "zh": "官方来源明确列出面向国际申请人的国际学生预科项目。同一来源注明授课语言：Chinese；学制：1 academic year；学费：每学年28000元。",
+          "ru": "Официальный источник прямо указывает программу «Подготовительная программа для иностранных студентов» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 1 academic year; стоимость: 28000 CNY за учебный год."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://iso.dlut.edu.cn/html/article_content/202511/89A38338906B4A999612DFE1C4653F97.shtml",
+          "sourceTitle": "大连理工大学2026年国际学生招生简章"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-dut-long-term-chinese-language",
+      "candidateIds": [
+        "prog-mew-nss-dut-long-term-chinese-language"
+      ],
+      "institutionSlug": "dalian-university-of-technology",
+      "name": {
+        "en": "Long-term Chinese Language Program",
+        "zh": "长期汉语进修项目",
+        "ru": "Долгосрочная программа китайского языка"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "16 weeks per semester",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://sie.dlut.edu.cn/info/1182/28592.htm",
+        "sourceTitle": "大连理工大学2026年长期汉语项目",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Long-term Chinese Language Program for international applicants. The same source states teaching language: Chinese; duration: 16 weeks per semester.",
+          "zh": "官方来源明确列出面向国际申请人的长期汉语进修项目。同一来源注明授课语言：Chinese；学制：16 weeks per semester。",
+          "ru": "Официальный источник прямо указывает программу «Долгосрочная программа китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 16 weeks per semester."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "current_cycle_deadline_not_announced",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-dut-international-chinese-education-master",
+      "candidateIds": [
+        "prog-mew-nss-dut-international-chinese-education-master"
+      ],
+      "institutionSlug": "dalian-university-of-technology",
+      "name": {
+        "en": "International Chinese Language Education",
+        "zh": "国际中文教育",
+        "ru": "Международное преподавание китайского языка"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://sie.dlut.edu.cn/English/Admissions/Degree_Programs/Master_Programs1.htm",
+        "sourceTitle": "DUT Master Programs for International Students",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists International Chinese Language Education for international applicants. The same source states teaching language: Chinese; duration: 3 academic years.",
+          "zh": "官方来源明确列出面向国际申请人的国际中文教育。同一来源注明授课语言：Chinese；学制：3 academic years。",
+          "ru": "Официальный источник прямо указывает программу «Международное преподавание китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 3 academic years."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://sie.dlut.edu.cn/English/Scholarship1/CIS_Scholarship/CIS_Scholarship.htm",
+          "sourceTitle": "DUT 2026 International Chinese Language Teachers Scholarship"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "current_cycle_deadline_not_announced",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-hebut-business-administration-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-hebut-business-administration-bachelor"
+      ],
+      "institutionSlug": "hebei-university-of-technology",
+      "name": {
+        "en": "Business Administration",
+        "zh": "工商管理",
+        "ru": "Деловое администрирование"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 14000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": "2025-11-27",
+          "applicationDeadline": "2026-05-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://eweb.hebut.edu.cn/admission/InternationalStudents/prospectus/c795f3af378e422ea89ea12c573eeb2f.htm",
+        "sourceTitle": "河北工业大学2026年国际学生本科生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Business Administration for international applicants. The same source states teaching language: Chinese; duration: 4 academic years; tuition: CNY 14000 per academic year; verified deadline: 2026-05-15.",
+          "zh": "官方来源明确列出面向国际申请人的工商管理。同一来源注明授课语言：Chinese；学制：4 academic years；学费：每学年14000元；已核实截止日期：2026-05-15。",
+          "ru": "Официальный источник прямо указывает программу «Деловое администрирование» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 4 academic years; стоимость: 14000 CNY за учебный год; подтвержденный срок: 2026-05-15."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-hebut-international-chinese-education-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-hebut-international-chinese-education-bachelor"
+      ],
+      "institutionSlug": "hebei-university-of-technology",
+      "name": {
+        "en": "International Chinese Language Education",
+        "zh": "国际中文教育",
+        "ru": "Международное преподавание китайского языка"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 14000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": "2025-11-27",
+          "applicationDeadline": "2026-05-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://eweb.hebut.edu.cn/admission/InternationalStudents/prospectus/c795f3af378e422ea89ea12c573eeb2f.htm",
+        "sourceTitle": "河北工业大学2026年国际学生本科生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists International Chinese Language Education for international applicants. The same source states teaching language: Chinese; duration: 4 academic years; tuition: CNY 14000 per academic year; verified deadline: 2026-05-15.",
+          "zh": "官方来源明确列出面向国际申请人的国际中文教育。同一来源注明授课语言：Chinese；学制：4 academic years；学费：每学年14000元；已核实截止日期：2026-05-15。",
+          "ru": "Официальный источник прямо указывает программу «Международное преподавание китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 4 academic years; стоимость: 14000 CNY за учебный год; подтвержденный срок: 2026-05-15."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-hebut-electronic-science-technology-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-hebut-electronic-science-technology-bachelor"
+      ],
+      "institutionSlug": "hebei-university-of-technology",
+      "name": {
+        "en": "Electronic Science and Technology",
+        "zh": "电子科学与技术",
+        "ru": "Электронная наука и техника"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 16000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": "2025-11-27",
+          "applicationDeadline": "2026-05-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://eweb.hebut.edu.cn/admission/InternationalStudents/prospectus/c795f3af378e422ea89ea12c573eeb2f.htm",
+        "sourceTitle": "河北工业大学2026年国际学生本科生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Electronic Science and Technology for international applicants. The same source states teaching language: English; duration: 4 academic years; tuition: CNY 16000 per academic year; verified deadline: 2026-05-15.",
+          "zh": "官方来源明确列出面向国际申请人的电子科学与技术。同一来源注明授课语言：English；学制：4 academic years；学费：每学年16000元；已核实截止日期：2026-05-15。",
+          "ru": "Официальный источник прямо указывает программу «Электронная наука и техника» для иностранных абитуриентов. В том же источнике указано: язык обучения: English; продолжительность: 4 academic years; стоимость: 16000 CNY за учебный год; подтвержденный срок: 2026-05-15."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-hebut-electrical-engineering-doctorate",
+      "candidateIds": [
+        "prog-mew-nss-hebut-electrical-engineering-doctorate"
+      ],
+      "institutionSlug": "hebei-university-of-technology",
+      "name": {
+        "en": "Electrical Engineering",
+        "zh": "电气工程",
+        "ru": "Электротехника"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 30000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": "2025-11-27",
+          "applicationDeadline": "2026-05-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://eweb.hebut.edu.cn/admission/InternationalStudents/prospectus/c2e3c53b6e504f73b64126923fe2a6a6.htm",
+        "sourceTitle": "河北工业大学2026年国际学生研究生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Electrical Engineering for international applicants. The same source states teaching language: English; duration: 4 academic years; tuition: CNY 30000 per academic year; verified deadline: 2026-05-15.",
+          "zh": "官方来源明确列出面向国际申请人的电气工程。同一来源注明授课语言：English；学制：4 academic years；学费：每学年30000元；已核实截止日期：2026-05-15。",
+          "ru": "Официальный источник прямо указывает программу «Электротехника» для иностранных абитуриентов. В том же источнике указано: язык обучения: English; продолжительность: 4 academic years; стоимость: 30000 CNY за учебный год; подтвержденный срок: 2026-05-15."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-ncepu-new-energy-science-engineering-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-ncepu-new-energy-science-engineering-bachelor"
+      ],
+      "institutionSlug": "north-china-electric-power-university",
+      "name": {
+        "en": "New Energy Science and Engineering",
+        "zh": "新能源科学与工程",
+        "ru": "Наука и инженерия новой энергетики"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese / English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4–6 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 22000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-02-25",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+        "sourceTitle": "华北电力大学2026年国际学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists New Energy Science and Engineering for international applicants. The same source states teaching language: Chinese / English; duration: 4–6 academic years; tuition: CNY 22000 per academic year; verified deadline: 2026-02-25.",
+          "zh": "官方来源明确列出面向国际申请人的新能源科学与工程。同一来源注明授课语言：Chinese / English；学制：4–6 academic years；学费：每学年22000元；已核实截止日期：2026-02-25。",
+          "ru": "Официальный источник прямо указывает программу «Наука и инженерия новой энергетики» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese / English; продолжительность: 4–6 academic years; стоимость: 22000 CNY за учебный год; подтвержденный срок: 2026-02-25."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-ncepu-power-engineering-thermophysics-master",
+      "candidateIds": [
+        "prog-mew-nss-ncepu-power-engineering-thermophysics-master"
+      ],
+      "institutionSlug": "north-china-electric-power-university",
+      "name": {
+        "en": "Power Engineering and Engineering Thermophysics",
+        "zh": "动力工程及工程热物理",
+        "ru": "Энергетическое машиностроение и инженерная теплофизика"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese / English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3–4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 30000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-30",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+        "sourceTitle": "华北电力大学2026年国际学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Power Engineering and Engineering Thermophysics for international applicants. The same source states teaching language: Chinese / English; duration: 3–4 academic years; tuition: CNY 30000 per academic year; verified deadline: 2026-05-30.",
+          "zh": "官方来源明确列出面向国际申请人的动力工程及工程热物理。同一来源注明授课语言：Chinese / English；学制：3–4 academic years；学费：每学年30000元；已核实截止日期：2026-05-30。",
+          "ru": "Официальный источник прямо указывает программу «Энергетическое машиностроение и инженерная теплофизика» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese / English; продолжительность: 3–4 academic years; стоимость: 30000 CNY за учебный год; подтвержденный срок: 2026-05-30."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-ncepu-electrical-engineering-doctorate",
+      "candidateIds": [
+        "prog-mew-nss-ncepu-electrical-engineering-doctorate"
+      ],
+      "institutionSlug": "north-china-electric-power-university",
+      "name": {
+        "en": "Electrical Engineering",
+        "zh": "电气工程",
+        "ru": "Электротехника"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": "Chinese / English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4–8 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 35000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-30",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+        "sourceTitle": "华北电力大学2026年国际学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Electrical Engineering for international applicants. The same source states teaching language: Chinese / English; duration: 4–8 academic years; tuition: CNY 35000 per academic year; verified deadline: 2026-05-30.",
+          "zh": "官方来源明确列出面向国际申请人的电气工程。同一来源注明授课语言：Chinese / English；学制：4–8 academic years；学费：每学年35000元；已核实截止日期：2026-05-30。",
+          "ru": "Официальный источник прямо указывает программу «Электротехника» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese / English; продолжительность: 4–8 academic years; стоимость: 35000 CNY за учебный год; подтвержденный срок: 2026-05-30."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-ncepu-chinese-language",
+      "candidateIds": [
+        "prog-mew-nss-ncepu-chinese-language"
+      ],
+      "institutionSlug": "north-china-electric-power-university",
+      "name": {
+        "en": "Chinese Language Program",
+        "zh": "汉语进修项目",
+        "ru": "Программа китайского языка"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 semester or 1 academic year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 18000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-30",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+        "sourceTitle": "华北电力大学2026年国际学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Chinese Language Program for international applicants. The same source states teaching language: Chinese; duration: 1 semester or 1 academic year; tuition: CNY 18000 per academic year; verified deadline: 2026-05-30.",
+          "zh": "官方来源明确列出面向国际申请人的汉语进修项目。同一来源注明授课语言：Chinese；学制：1 semester or 1 academic year；学费：每学年18000元；已核实截止日期：2026-05-30。",
+          "ru": "Официальный источник прямо указывает программу «Программа китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 1 semester or 1 academic year; стоимость: 18000 CNY за учебный год; подтвержденный срок: 2026-05-30."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "annual_tuition_selected_from_multi_period_fee_table",
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-sxu-foundation",
+      "candidateIds": [
+        "prog-mew-nss-sxu-foundation"
+      ],
+      "institutionSlug": "shanxi-university",
+      "name": {
+        "en": "1+4 International Student Foundation Program",
+        "zh": "1+4国际学生预科项目",
+        "ru": "Подготовительная программа 1+4 для иностранных студентов"
+      },
+      "programType": "foundation",
+      "level": "foundation",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 academic year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 5000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": "2025-12-31",
+          "applicationDeadline": "2026-06-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://siee.sxu.edu.cn/docs/2026-04/9e9a1838ee3e49c3aabd942d05cd4e32.pdf",
+        "sourceTitle": "山西大学2026年国际学生1+4预科项目招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists 1+4 International Student Foundation Program for international applicants. The same source states teaching language: Chinese; duration: 1 academic year; tuition: CNY 5000 per academic year; verified deadline: 2026-06-15.",
+          "zh": "官方来源明确列出面向国际申请人的1+4国际学生预科项目。同一来源注明授课语言：Chinese；学制：1 academic year；学费：每学年5000元；已核实截止日期：2026-06-15。",
+          "ru": "Официальный источник прямо указывает программу «Подготовительная программа 1+4 для иностранных студентов» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 1 academic year; стоимость: 5000 CNY за учебный год; подтвержденный срок: 2026-06-15."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-sxu-chinese-language",
+      "candidateIds": [
+        "prog-mew-nss-sxu-chinese-language"
+      ],
+      "institutionSlug": "shanxi-university",
+      "name": {
+        "en": "Chinese Language Program",
+        "zh": "汉语进修项目",
+        "ru": "Программа китайского языка"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "September 2026 to July 2027",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-06-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://siee.sxu.edu.cn/docs/2026-04/9d3eafca795d4d49a2b30cbe3436f913.pdf",
+        "sourceTitle": "山西大学2026年秋季汉语进修项目招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Chinese Language Program for international applicants. The same source states teaching language: Chinese; duration: September 2026 to July 2027; verified deadline: 2026-06-15.",
+          "zh": "官方来源明确列出面向国际申请人的汉语进修项目。同一来源注明授课语言：Chinese；学制：September 2026 to July 2027；已核实截止日期：2026-06-15。",
+          "ru": "Официальный источник прямо указывает программу «Программа китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: September 2026 to July 2027; подтвержденный срок: 2026-06-15."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "official_fee_table_appears_internally_inconsistent",
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-tyut-teaching-chinese-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-tyut-teaching-chinese-bachelor"
+      ],
+      "institutionSlug": "taiyuan-university-of-technology",
+      "name": {
+        "en": "Teaching Chinese to Speakers of Other Languages",
+        "zh": "汉语国际教育",
+        "ru": "Преподавание китайского языка носителям других языков"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 10000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf",
+        "sourceTitle": "太原理工大学2026年国际学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Teaching Chinese to Speakers of Other Languages for international applicants. The same source states teaching language: Chinese; duration: 4 academic years; tuition: CNY 10000 per academic year.",
+          "zh": "官方来源明确列出面向国际申请人的汉语国际教育。同一来源注明授课语言：Chinese；学制：4 academic years；学费：每学年10000元。",
+          "ru": "Официальный источник прямо указывает программу «Преподавание китайского языка носителям других языков» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 4 academic years; стоимость: 10000 CNY за учебный год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-tyut-mechanical-engineering-master",
+      "candidateIds": [
+        "prog-mew-nss-tyut-mechanical-engineering-master"
+      ],
+      "institutionSlug": "taiyuan-university-of-technology",
+      "name": {
+        "en": "Mechanical Engineering",
+        "zh": "机械工程",
+        "ru": "Машиностроение"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": "3 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 12000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf",
+        "sourceTitle": "太原理工大学2026年国际学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Mechanical Engineering for international applicants. The same source states duration: 3 academic years; tuition: CNY 12000 per academic year.",
+          "zh": "官方来源明确列出面向国际申请人的机械工程。同一来源注明学制：3 academic years；学费：每学年12000元。",
+          "ru": "Официальный источник прямо указывает программу «Машиностроение» для иностранных абитуриентов. В том же источнике указано: продолжительность: 3 academic years; стоимость: 12000 CNY за учебный год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-tyut-chemical-engineering-doctorate",
+      "candidateIds": [
+        "prog-mew-nss-tyut-chemical-engineering-doctorate"
+      ],
+      "institutionSlug": "taiyuan-university-of-technology",
+      "name": {
+        "en": "Chemical Engineering and Technology",
+        "zh": "化学工程与技术",
+        "ru": "Химическая инженерия и технология"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 15000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf",
+        "sourceTitle": "太原理工大学2026年国际学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Chemical Engineering and Technology for international applicants. The same source states duration: 4 academic years; tuition: CNY 15000 per academic year.",
+          "zh": "官方来源明确列出面向国际申请人的化学工程与技术。同一来源注明学制：4 academic years；学费：每学年15000元。",
+          "ru": "Официальный источник прямо указывает программу «Химическая инженерия и технология» для иностранных абитуриентов. В том же источнике указано: продолжительность: 4 academic years; стоимость: 15000 CNY за учебный год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-tyut-foundation",
+      "candidateIds": [
+        "prog-mew-nss-tyut-foundation"
+      ],
+      "institutionSlug": "taiyuan-university-of-technology",
+      "name": {
+        "en": "International Student Foundation Program",
+        "zh": "国际学生预科项目",
+        "ru": "Подготовительная программа для иностранных студентов"
+      },
+      "programType": "foundation",
+      "level": "foundation",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 academic year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 6000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf",
+        "sourceTitle": "太原理工大学2026年国际学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists International Student Foundation Program for international applicants. The same source states teaching language: Chinese; duration: 1 academic year; tuition: CNY 6000 per academic year.",
+          "zh": "官方来源明确列出面向国际申请人的国际学生预科项目。同一来源注明授课语言：Chinese；学制：1 academic year；学费：每学年6000元。",
+          "ru": "Официальный источник прямо указывает программу «Подготовительная программа для иностранных студентов» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 1 academic year; стоимость: 6000 CNY за учебный год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-tgu-chinese-language-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-tgu-chinese-language-bachelor"
+      ],
+      "institutionSlug": "tiangong-university",
+      "name": {
+        "en": "Chinese Language",
+        "zh": "汉语言",
+        "ru": "Китайский язык"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://en.tiangong.edu.cn/_upload/article/files/e8/01/fc1cbd7d4c4099af8b8c943ef98d/fd97d687-3787-4837-8499-86667d65e2eb.pdf",
+        "sourceTitle": "Tiangong University 2026 International Student Admission and Scholarship Guide",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Chinese Language for international applicants. The same source states teaching language: English; duration: 4 academic years; verified deadline: 2026-03-01.",
+          "zh": "官方来源明确列出面向国际申请人的汉语言。同一来源注明授课语言：English；学制：4 academic years；已核实截止日期：2026-03-01。",
+          "ru": "Официальный источник прямо указывает программу «Китайский язык» для иностранных абитуриентов. В том же источнике указано: язык обучения: English; продолжительность: 4 academic years; подтвержденный срок: 2026-03-01."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-tgu-performance-model-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-tgu-performance-model-bachelor"
+      ],
+      "institutionSlug": "tiangong-university",
+      "name": {
+        "en": "Performance (Fashion Modeling)",
+        "zh": "表演（服装表演）",
+        "ru": "Сценическое искусство (модный показ)"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://en.tiangong.edu.cn/_upload/article/files/e8/01/fc1cbd7d4c4099af8b8c943ef98d/fd97d687-3787-4837-8499-86667d65e2eb.pdf",
+        "sourceTitle": "Tiangong University 2026 International Student Admission and Scholarship Guide",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Performance (Fashion Modeling) for international applicants. The same source states teaching language: English; duration: 4 academic years; verified deadline: 2026-03-01.",
+          "zh": "官方来源明确列出面向国际申请人的表演（服装表演）。同一来源注明授课语言：English；学制：4 academic years；已核实截止日期：2026-03-01。",
+          "ru": "Официальный источник прямо указывает программу «Сценическое искусство (модный показ)» для иностранных абитуриентов. В том же источнике указано: язык обучения: English; продолжительность: 4 academic years; подтвержденный срок: 2026-03-01."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-tgu-artificial-intelligence-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-tgu-artificial-intelligence-bachelor"
+      ],
+      "institutionSlug": "tiangong-university",
+      "name": {
+        "en": "Artificial Intelligence",
+        "zh": "人工智能",
+        "ru": "Искусственный интеллект"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://en.tiangong.edu.cn/_upload/article/files/e8/01/fc1cbd7d4c4099af8b8c943ef98d/fd97d687-3787-4837-8499-86667d65e2eb.pdf",
+        "sourceTitle": "Tiangong University 2026 International Student Admission and Scholarship Guide",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Artificial Intelligence for international applicants. The same source states teaching language: English; duration: 4 academic years; verified deadline: 2026-03-01.",
+          "zh": "官方来源明确列出面向国际申请人的人工智能。同一来源注明授课语言：English；学制：4 academic years；已核实截止日期：2026-03-01。",
+          "ru": "Официальный источник прямо указывает программу «Искусственный интеллект» для иностранных абитуриентов. В том же источнике указано: язык обучения: English; продолжительность: 4 academic years; подтвержденный срок: 2026-03-01."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-tgu-chinese-language-general-scholar",
+      "candidateIds": [
+        "prog-mew-nss-tgu-chinese-language-general-scholar"
+      ],
+      "institutionSlug": "tiangong-university",
+      "name": {
+        "en": "Chinese Language General Scholar",
+        "zh": "汉语普通进修生",
+        "ru": "Общеобразовательная стажировка по китайскому языку"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 semester or 1 academic year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 16000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://en.tiangong.edu.cn/_upload/article/files/28/64/2300c19c414bbe3a237de2c5dfb8/9a9d6103-0dec-488b-9ece-a25dc841375f.pdf",
+        "sourceTitle": "Tiangong University Chinese Language General Scholar Program",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Chinese Language General Scholar for international applicants. The same source states teaching language: Chinese; duration: 1 semester or 1 academic year; tuition: CNY 16000 per academic year.",
+          "zh": "官方来源明确列出面向国际申请人的汉语普通进修生。同一来源注明授课语言：Chinese；学制：1 semester or 1 academic year；学费：每学年16000元。",
+          "ru": "Официальный источник прямо указывает программу «Общеобразовательная стажировка по китайскому языку» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 1 semester or 1 academic year; стоимость: 16000 CNY за учебный год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "next_application_cycle_not_announced",
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-cfau-international-law-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-cfau-international-law-bachelor"
+      ],
+      "institutionSlug": "china-foreign-affairs-university",
+      "name": {
+        "en": "International Law",
+        "zh": "国际法",
+        "ru": "Международное право"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://iss.cfau.edu.cn/col4183/col4187/19ca2dd7fdbb4f38aac785ae04cdf396.htm",
+        "sourceTitle": "外交学院2026年外国留学生本科生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists International Law for international applicants. The same source states teaching language: Chinese; duration: 4 academic years; verified deadline: 2026-05-01.",
+          "zh": "官方来源明确列出面向国际申请人的国际法。同一来源注明授课语言：Chinese；学制：4 academic years；已核实截止日期：2026-05-01。",
+          "ru": "Официальный источник прямо указывает программу «Международное право» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 4 academic years; подтвержденный срок: 2026-05-01."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-cfau-international-economics-trade-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-cfau-international-economics-trade-bachelor"
+      ],
+      "institutionSlug": "china-foreign-affairs-university",
+      "name": {
+        "en": "International Economics and Trade",
+        "zh": "国际经济与贸易",
+        "ru": "Международная экономика и торговля"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://iss.cfau.edu.cn/col4183/col4187/19ca2dd7fdbb4f38aac785ae04cdf396.htm",
+        "sourceTitle": "外交学院2026年外国留学生本科生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists International Economics and Trade for international applicants. The same source states teaching language: Chinese; duration: 4 academic years; verified deadline: 2026-05-01.",
+          "zh": "官方来源明确列出面向国际申请人的国际经济与贸易。同一来源注明授课语言：Chinese；学制：4 academic years；已核实截止日期：2026-05-01。",
+          "ru": "Официальный источник прямо указывает программу «Международная экономика и торговля» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 4 academic years; подтвержденный срок: 2026-05-01."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-cfau-chinese-language",
+      "candidateIds": [
+        "prog-mew-nss-cfau-chinese-language"
+      ],
+      "institutionSlug": "china-foreign-affairs-university",
+      "name": {
+        "en": "Chinese Language Program",
+        "zh": "汉语进修项目",
+        "ru": "Программа китайского языка"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 semester to 2 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://en.cfau.edu.cn/col2484/col2911/66704.htm",
+        "sourceTitle": "CFAU Chinese Language Program for International Students",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Chinese Language Program for international applicants. The same source states teaching language: Chinese; duration: 1 semester to 2 academic years.",
+          "zh": "官方来源明确列出面向国际申请人的汉语进修项目。同一来源注明授课语言：Chinese；学制：1 semester to 2 academic years。",
+          "ru": "Официальный источник прямо указывает программу «Программа китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 1 semester to 2 academic years."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "historical_official_program_identity",
+        "current_cycle_deadline_not_announced",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-cupl-law-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-cupl-law-bachelor"
+      ],
+      "institutionSlug": "china-university-of-political-science-and-law",
+      "name": {
+        "en": "Law",
+        "zh": "法学",
+        "ru": "Право"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://sis.cupl.edu.cn/lhlx/bk.htm",
+        "sourceTitle": "中国政法大学2026年外国留学生本科生招生信息",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Law for international applicants. The same source states teaching language: Chinese; duration: 4 academic years.",
+          "zh": "官方来源明确列出面向国际申请人的法学。同一来源注明授课语言：Chinese；学制：4 academic years。",
+          "ru": "Официальный источник прямо указывает программу «Право» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 4 academic years."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-cupl-international-law-master",
+      "candidateIds": [
+        "prog-mew-nss-cupl-international-law-master"
+      ],
+      "institutionSlug": "china-university-of-political-science-and-law",
+      "name": {
+        "en": "International Law",
+        "zh": "国际法",
+        "ru": "Международное право"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://sis.cupl.edu.cn/lhlx/ss.htm",
+        "sourceTitle": "CUPL International Student Master Programs",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists International Law for international applicants. The same source states teaching language: English.",
+          "zh": "官方来源明确列出面向国际申请人的国际法。同一来源注明授课语言：English。",
+          "ru": "Официальный источник прямо указывает программу «Международное право» для иностранных абитуриентов. В том же источнике указано: язык обучения: English."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_cycle_deadline_not_announced",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-cupl-international-law-doctorate",
+      "candidateIds": [
+        "prog-mew-nss-cupl-international-law-doctorate"
+      ],
+      "institutionSlug": "china-university-of-political-science-and-law",
+      "name": {
+        "en": "International Law",
+        "zh": "国际法",
+        "ru": "Международное право"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://sis.cupl.edu.cn/lhlx/bs.htm",
+        "sourceTitle": "CUPL International Student Doctoral Programs",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists International Law for international applicants. The same source states teaching language: English.",
+          "zh": "官方来源明确列出面向国际申请人的国际法。同一来源注明授课语言：English。",
+          "ru": "Официальный источник прямо указывает программу «Международное право» для иностранных абитуриентов. В том же источнике указано: язык обучения: English."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_cycle_deadline_not_announced",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-cupl-chinese-language",
+      "candidateIds": [
+        "prog-mew-nss-cupl-chinese-language"
+      ],
+      "institutionSlug": "china-university-of-political-science-and-law",
+      "name": {
+        "en": "Chinese Language Program",
+        "zh": "汉语进修项目",
+        "ru": "Программа китайского языка"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 semester or 1 academic year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2025-2026",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://sis.cupl.edu.cn/lhlx/hydqpx.htm",
+        "sourceTitle": "中国政法大学2025—2026学年汉语进修项目",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Chinese Language Program for international applicants. The same source states teaching language: Chinese; duration: 1 semester or 1 academic year.",
+          "zh": "官方来源明确列出面向国际申请人的汉语进修项目。同一来源注明授课语言：Chinese；学制：1 semester or 1 academic year。",
+          "ru": "Официальный источник прямо указывает программу «Программа китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 1 semester or 1 academic year."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "historical_official_cycle",
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-ccom-general-visiting-music",
+      "candidateIds": [
+        "prog-mew-nss-ccom-general-visiting-music"
+      ],
+      "institutionSlug": "central-conservatory-of-music",
+      "name": {
+        "en": "Music Professional Study – General Visiting Student",
+        "zh": "音乐专业进修（普通进修生）",
+        "ru": "Профессиональная музыкальная стажировка — обычный стажер"
+      },
+      "programType": "visiting",
+      "level": "other",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 semester or 1 academic year; maximum 2 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 43000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2025-2026",
+          "intake": "spring",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-01-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        },
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-06-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://liuxue.ccom.edu.cn/cn/article/detail?cid=167&id=255",
+        "sourceTitle": "中央音乐学院2026年来华留学生进修生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Music Professional Study – General Visiting Student for international applicants. The same source states teaching language: Chinese; duration: 1 semester or 1 academic year; maximum 2 years; tuition: CNY 43000 per academic year; verified deadline: 2026-01-01.",
+          "zh": "官方来源明确列出面向国际申请人的音乐专业进修（普通进修生）。同一来源注明授课语言：Chinese；学制：1 semester or 1 academic year; maximum 2 years；学费：每学年43000元；已核实截止日期：2026-01-01。",
+          "ru": "Официальный источник прямо указывает программу «Профессиональная музыкальная стажировка — обычный стажер» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 1 semester or 1 academic year; maximum 2 years; стоимость: 43000 CNY за учебный год; подтвержденный срок: 2026-01-01."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-ccom-senior-visiting-music",
+      "candidateIds": [
+        "prog-mew-nss-ccom-senior-visiting-music"
+      ],
+      "institutionSlug": "central-conservatory-of-music",
+      "name": {
+        "en": "Music Professional Study – Senior Visiting Student",
+        "zh": "音乐专业进修（高级进修生）",
+        "ru": "Профессиональная музыкальная стажировка — старший стажер"
+      },
+      "programType": "visiting",
+      "level": "other",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 semester or 1 academic year; maximum 2 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 48000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2025-2026",
+          "intake": "spring",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-01-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        },
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-06-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://liuxue.ccom.edu.cn/cn/article/detail?cid=167&id=255",
+        "sourceTitle": "中央音乐学院2026年来华留学生进修生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Music Professional Study – Senior Visiting Student for international applicants. The same source states teaching language: Chinese; duration: 1 semester or 1 academic year; maximum 2 years; tuition: CNY 48000 per academic year; verified deadline: 2026-01-01.",
+          "zh": "官方来源明确列出面向国际申请人的音乐专业进修（高级进修生）。同一来源注明授课语言：Chinese；学制：1 semester or 1 academic year; maximum 2 years；学费：每学年48000元；已核实截止日期：2026-01-01。",
+          "ru": "Официальный источник прямо указывает программу «Профессиональная музыкальная стажировка — старший стажер» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 1 semester or 1 academic year; maximum 2 years; стоимость: 48000 CNY за учебный год; подтвержденный срок: 2026-01-01."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-ccom-music-master",
+      "candidateIds": [
+        "prog-mew-nss-ccom-music-master"
+      ],
+      "institutionSlug": "central-conservatory-of-music",
+      "name": {
+        "en": "Music",
+        "zh": "音乐",
+        "ru": "Музыка"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://liuxue.ccom.edu.cn/cn/article?cid=167",
+        "sourceTitle": "中央音乐学院2026年外国留学生硕士研究生招生通知索引",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Music for international applicants. The same source states teaching language: Chinese.",
+          "zh": "官方来源明确列出面向国际申请人的音乐。同一来源注明授课语言：Chinese。",
+          "ru": "Официальный источник прямо указывает программу «Музыка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-ccom-music-doctorate",
+      "candidateIds": [
+        "prog-mew-nss-ccom-music-doctorate"
+      ],
+      "institutionSlug": "central-conservatory-of-music",
+      "name": {
+        "en": "Music",
+        "zh": "音乐",
+        "ru": "Музыка"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://liuxue.ccom.edu.cn/cn/article?cid=167",
+        "sourceTitle": "中央音乐学院2026年外国留学生博士研究生招生通知索引",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Music for international applicants. The same source states teaching language: Chinese.",
+          "zh": "官方来源明确列出面向国际申请人的音乐。同一来源注明授课语言：Chinese。",
+          "ru": "Официальный источник прямо указывает программу «Музыка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-cad-acting-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-cad-acting-bachelor"
+      ],
+      "institutionSlug": "central-academy-of-drama",
+      "name": {
+        "en": "Acting",
+        "zh": "表演",
+        "ru": "Актерское искусство"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.chntheatre.edu.cn/cn/recruit/liuxue/p/1.html",
+        "sourceTitle": "中央戏剧学院2026年外国留学生本科招生通知",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Acting for international applicants. The same source states teaching language: Chinese; duration: 4 academic years.",
+          "zh": "官方来源明确列出面向国际申请人的表演。同一来源注明授课语言：Chinese；学制：4 academic years。",
+          "ru": "Официальный источник прямо указывает программу «Актерское искусство» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 4 academic years."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://www.chntheatre.edu.cn/cn/recruit/liuxue/detail/14907.html",
+          "sourceTitle": "中央戏剧学院外国留学生招生管理规定"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-cad-drama-film-doctorate",
+      "candidateIds": [
+        "prog-mew-nss-cad-drama-film-doctorate"
+      ],
+      "institutionSlug": "central-academy-of-drama",
+      "name": {
+        "en": "Drama and Film",
+        "zh": "戏剧与影视",
+        "ru": "Театр и кино"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://www.chntheatre.edu.cn/cn/recruit/liuxue/p/1.html",
+        "sourceTitle": "中央戏剧学院2026年外国留学生博士研究生招生通知",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Drama and Film for international applicants. The same source states teaching language: Chinese.",
+          "zh": "官方来源明确列出面向国际申请人的戏剧与影视。同一来源注明授课语言：Chinese。",
+          "ru": "Официальный источник прямо указывает программу «Театр и кино» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://www.chntheatre.edu.cn/cn/recruit/liuxue/detail/14907.html",
+          "sourceTitle": "中央戏剧学院外国留学生招生管理规定"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-synu-international-chinese-education-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-synu-international-chinese-education-bachelor"
+      ],
+      "institutionSlug": "shenyang-normal-university",
+      "name": {
+        "en": "International Chinese Language Education",
+        "zh": "国际中文教育",
+        "ru": "Международное преподавание китайского языка"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cie.synu.edu.cn/2026/0415/c5760a112914/page.htm",
+        "sourceTitle": "沈阳师范大学2026年国际中文教师奖学金本科生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists International Chinese Language Education for international applicants. The same source states teaching language: Chinese; duration: 4 academic years; verified deadline: 2026-05-15.",
+          "zh": "官方来源明确列出面向国际申请人的国际中文教育。同一来源注明授课语言：Chinese；学制：4 academic years；已核实截止日期：2026-05-15。",
+          "ru": "Официальный источник прямо указывает программу «Международное преподавание китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 4 academic years; подтвержденный срок: 2026-05-15."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://cie.synu.edu.cn/2026/0415/c5760a112915/page.htm",
+          "sourceTitle": "沈阳师范大学2026年国际中文教师奖学金招生简章"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-synu-international-chinese-education-master",
+      "candidateIds": [
+        "prog-mew-nss-synu-international-chinese-education-master"
+      ],
+      "institutionSlug": "shenyang-normal-university",
+      "name": {
+        "en": "International Chinese Language Education",
+        "zh": "国际中文教育",
+        "ru": "Международное преподавание китайского языка"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 academic years; scholarship funds 2 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cie.synu.edu.cn/2026/0415/c5760a112915/page.htm",
+        "sourceTitle": "沈阳师范大学2026年国际中文教师奖学金招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists International Chinese Language Education for international applicants. The same source states teaching language: Chinese; duration: 3 academic years; scholarship funds 2 years; verified deadline: 2026-05-15.",
+          "zh": "官方来源明确列出面向国际申请人的国际中文教育。同一来源注明授课语言：Chinese；学制：3 academic years; scholarship funds 2 years；已核实截止日期：2026-05-15。",
+          "ru": "Официальный источник прямо указывает программу «Международное преподавание китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 3 academic years; scholarship funds 2 years; подтвержденный срок: 2026-05-15."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-synu-one-year-chinese-study",
+      "candidateIds": [
+        "prog-mew-nss-synu-one-year-chinese-study"
+      ],
+      "institutionSlug": "shenyang-normal-university",
+      "name": {
+        "en": "One-academic-year Chinese Language Study",
+        "zh": "一学年汉语研修",
+        "ru": "Годичная программа китайского языка"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "11 months",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cie.synu.edu.cn/2026/0415/c5760a112915/page.htm",
+        "sourceTitle": "沈阳师范大学2026年国际中文教师奖学金招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists One-academic-year Chinese Language Study for international applicants. The same source states teaching language: Chinese; duration: 11 months; verified deadline: 2026-05-15.",
+          "zh": "官方来源明确列出面向国际申请人的一学年汉语研修。同一来源注明授课语言：Chinese；学制：11 months；已核实截止日期：2026-05-15。",
+          "ru": "Официальный источник прямо указывает программу «Годичная программа китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 11 months; подтвержденный срок: 2026-05-15."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-synu-four-week-chinese-study",
+      "candidateIds": [
+        "prog-mew-nss-synu-four-week-chinese-study"
+      ],
+      "institutionSlug": "shenyang-normal-university",
+      "name": {
+        "en": "Four-week Chinese Language Study",
+        "zh": "四周汉语研修",
+        "ru": "Четырехнедельная программа китайского языка"
+      },
+      "programType": "short_term",
+      "level": "other",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 weeks",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "winter",
+          "intakeLabel": "December 2026",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-09-15",
+          "statusAsOfCheckedAt": "open",
+          "displayAsOpen": true,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cie.synu.edu.cn/2026/0415/c5760a112915/page.htm",
+        "sourceTitle": "沈阳师范大学2026年国际中文教师奖学金招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official source explicitly lists Four-week Chinese Language Study for international applicants. The same source states teaching language: Chinese; duration: 4 weeks; verified deadline: 2026-09-15.",
+          "zh": "官方来源明确列出面向国际申请人的四周汉语研修。同一来源注明授课语言：Chinese；学制：4 weeks；已核实截止日期：2026-09-15。",
+          "ru": "Официальный источник прямо указывает программу «Четырехнедельная программа китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 4 weeks; подтвержденный срок: 2026-09-15."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish the verified open cycle and recheck it before the deadline.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "deadline_recheck_required",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-lnnu-international-business-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-lnnu-international-business-bachelor"
+      ],
+      "institutionSlug": "liaoning-normal-university",
+      "name": {
+        "en": "International Business",
+        "zh": "国际商务",
+        "ru": "Международный бизнес"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": 50000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjy.lnnu.edu.cn/info/1044/2066.htm",
+        "sourceTitle": "关于辽宁师范大学国际商学院中外合作办学国际学生学费的公示",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official notice explicitly states that International Business applies to self-funded international students entering from fall 2026 and sets tuition at CNY 50,000 per academic year. The teaching language is not explicitly stated.",
+          "zh": "官方公示明确国际商务专业自2026年秋季起适用于自费来华留学生，学费为每学年50000元；正文未明确授课语言。",
+          "ru": "Официальное уведомление подтверждает, что программа «Международный бизнес» доступна иностранным студентам на самообеспечении с осени 2026 года, и устанавливает стоимость 50 000 CNY в учебный год; язык обучения прямо не указан."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "teaching_language_not_text_verified",
+        "current_cycle_deadline_not_text_verified",
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nss-lnnu-information-management-systems-bachelor",
+      "candidateIds": [
+        "prog-mew-nss-lnnu-information-management-systems-bachelor"
+      ],
+      "institutionSlug": "liaoning-normal-university",
+      "name": {
+        "en": "Information Management and Information Systems",
+        "zh": "信息管理与信息系统",
+        "ru": "Информационный менеджмент и информационные системы"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": 50000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjy.lnnu.edu.cn/info/1044/2066.htm",
+        "sourceTitle": "关于辽宁师范大学国际商学院中外合作办学国际学生学费的公示",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official notice explicitly states that Information Management and Information Systems applies to self-funded international students entering from fall 2026 and sets tuition at CNY 50,000 per academic year. The teaching language is not explicitly stated.",
+          "zh": "官方公示明确信息管理与信息系统专业自2026年秋季起适用于自费来华留学生，学费为每学年50000元；正文未明确授课语言。",
+          "ru": "Официальное уведомление подтверждает, что программа «Информационный менеджмент и информационные системы» доступна иностранным студентам на самообеспечении с осени 2026 года, и устанавливает стоимость 50 000 CNY в учебный год; язык обучения прямо не указан."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish stable facts only and keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "teaching_language_not_text_verified",
+        "current_cycle_deadline_not_text_verified",
+        "verified_cycle_closed",
+        "partial_fact_coverage"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    }
+  ],
+  "scholarshipCandidates": [
+    {
+      "candidateId": "sch-mew-nss-bsu-csc-high-level",
+      "candidateIds": [
+        "sch-mew-nss-bsu-csc-high-level"
+      ],
+      "institutionSlug": "beijing-sport-university",
+      "name": {
+        "en": "Chinese Government Scholarship – High-Level Postgraduate Program at BSU",
+        "zh": "北京体育大学中国政府奖学金高水平研究生项目",
+        "ru": "Стипендия правительства КНР — программа подготовки магистров и докторов высокого уровня в BSU"
+      },
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-bsu-international-chinese-education-master"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "University accommodation",
+          "Monthly living allowance",
+          "Comprehensive medical insurance"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/20c48cea06c3422ba70e4c57d8d9b527.htm",
+        "sourceTitle": "北京体育大学2026年中国政府奖学金高水平研究生项目招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official 2026 BSU guide confirms a full Chinese Government Scholarship route for international master and doctoral applicants, with a March 1 deadline.",
+          "zh": "北京体育大学2026年官方简章确认面向国际硕士、博士申请人的中国政府奖学金高水平研究生项目，截止日期为3月1日。",
+          "ru": "Официальный справочник BSU 2026 года подтверждает полную государственную стипендию КНР для иностранных магистрантов и докторантов со сроком подачи 1 марта."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-bsu-beijing-government",
+      "candidateIds": [
+        "sch-mew-nss-bsu-beijing-government"
+      ],
+      "institutionSlug": "beijing-sport-university",
+      "name": {
+        "en": "Beijing Government Scholarship at BSU",
+        "zh": "北京体育大学北京市外国留学生奖学金",
+        "ru": "Пекинская правительственная стипендия в BSU"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate",
+        "language",
+        "other"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://wsc.bsu.edu.cn/jxj/bjszfjxj/17609.htm",
+        "sourceTitle": "北京体育大学北京市外国留学生奖学金",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official BSU scholarship page confirms the Beijing Government Scholarship identity; a current application cycle and funding tier were not announced on the accessible page.",
+          "zh": "北京体育大学官方页面确认北京市外国留学生奖学金项目身份；可访问页面未公布当前申请周期和具体资助档位。",
+          "ru": "Официальная страница BSU подтверждает пекинскую правительственную стипендию; текущий цикл и размер финансирования на доступной странице не опубликованы."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "historical_official_framework",
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-bwu-beijing-government",
+      "candidateIds": [
+        "sch-mew-nss-bwu-beijing-government"
+      ],
+      "institutionSlug": "beijing-wuzi-university",
+      "name": {
+        "en": "Beijing Government Scholarship at BWU",
+        "zh": "北京物资学院北京市外国留学生奖学金",
+        "ru": "Пекинская правительственная стипендия в Пекинском университете материальных ресурсов"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "language"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-bwu-supply-chain-management-bachelor",
+        "prog-mew-nss-bwu-international-trade-master",
+        "prog-mew-nss-bwu-logistics-engineering-management-master",
+        "prog-mew-nss-bwu-long-term-chinese-language"
+      ],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://is.bwu.edu.cn/info/1189/2933.htm",
+        "sourceTitle": "北京物资学院北京市外国留学生奖学金",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official BWU page confirms a Beijing Government Scholarship route for international students; no current deadline or verified funding tier is exposed on the accessible page.",
+          "zh": "北京物资学院官方页面确认面向国际学生的北京市外国留学生奖学金渠道；可访问页面未提供当前截止日期或可核实资助档位。",
+          "ru": "Официальная страница BWU подтверждает пекинскую правительственную стипендию для иностранных студентов; текущий срок и размер финансирования не опубликованы."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-dut-president",
+      "candidateIds": [
+        "sch-mew-nss-dut-president"
+      ],
+      "institutionSlug": "dalian-university-of-technology",
+      "name": {
+        "en": "DUT President Scholarship",
+        "zh": "大连理工大学校长奖学金",
+        "ru": "Стипендия ректора Даляньского технологического университета"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-dut-international-chinese-education-master"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Full scholarship: tuition waiver, university accommodation and monthly allowance",
+          "Partial scholarship: tuition waiver",
+          "Master monthly allowance: CNY 1,500",
+          "Doctoral monthly allowance: CNY 1,800"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": "Bachelor route",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-06-30",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        },
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": "Postgraduate route",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-02-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://sie.dlut.edu.cn/English/Scholarship1/DUT_Scholarship/DUT_Scholarship.htm",
+        "sourceTitle": "DUT President Scholarship",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official DUT page publishes full and partial President Scholarship tiers and separate passed 2026 deadlines for bachelor and postgraduate applicants.",
+          "zh": "大连理工大学官方页面公布校长奖学金全额、部分资助档位，以及本科和研究生申请人已截止的2026年日期。",
+          "ru": "Официальная страница DUT публикует полную и частичную стипендии ректора и прошедшие сроки 2026 года для бакалавров и аспирантов."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-dut-csc-high-level",
+      "candidateIds": [
+        "sch-mew-nss-dut-csc-high-level"
+      ],
+      "institutionSlug": "dalian-university-of-technology",
+      "name": {
+        "en": "Chinese Government Scholarship – High-Level Postgraduate Program at DUT",
+        "zh": "大连理工大学中国政府奖学金高水平研究生项目",
+        "ru": "Стипендия правительства КНР — программа последипломного образования высокого уровня в DUT"
+      },
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-dut-international-chinese-education-master"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "University accommodation",
+          "Monthly living allowance",
+          "Comprehensive medical insurance"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://sie.dlut.edu.cn/English/Scholarship1/CSC_Scholarship/Chinese_University_Program.htm",
+        "sourceTitle": "DUT Chinese Government Scholarship – Chinese University Program",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official DUT scholarship page confirms the Chinese Government Scholarship university route for international master and doctoral applicants; the next deadline remains unannounced.",
+          "zh": "大连理工大学官方奖学金页面确认面向国际硕士、博士申请人的中国政府奖学金高校项目渠道；下一轮截止日期尚未公布。",
+          "ru": "Официальная страница DUT подтверждает университетский маршрут государственной стипендии КНР для магистров и докторантов; следующий срок пока не объявлен."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-dut-iclts",
+      "candidateIds": [
+        "sch-mew-nss-dut-iclts"
+      ],
+      "institutionSlug": "dalian-university-of-technology",
+      "name": {
+        "en": "International Chinese Language Teachers Scholarship at DUT",
+        "zh": "大连理工大学国际中文教师奖学金",
+        "ru": "Международная стипендия преподавателей китайского языка в DUT"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "language",
+        "other"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-dut-long-term-chinese-language",
+        "prog-mew-nss-dut-international-chinese-education-master"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "University accommodation",
+          "Living allowance except for four-week programs",
+          "Comprehensive medical insurance"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "winter",
+          "intakeLabel": "December 2026 four-week program",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-09-15",
+          "statusAsOfCheckedAt": "open",
+          "displayAsOpen": true,
+          "sourceFormat": "canonical"
+        },
+        {
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "intakeLabel": "March 2027 intake",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-10-31",
+          "statusAsOfCheckedAt": "open",
+          "displayAsOpen": true,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://sie.dlut.edu.cn/English/Scholarship1/CIS_Scholarship/CIS_Scholarship.htm",
+        "sourceTitle": "DUT 2026 International Chinese Language Teachers Scholarship",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official DUT page confirms scholarship routes for degree and non-degree Chinese-language study; the December 2026 and March 2027 application windows remain open as of the check date.",
+          "zh": "大连理工大学官方页面确认学历与非学历中文学习奖学金渠道；截至核验日，2026年12月和2027年3月入学申请窗口仍开放。",
+          "ru": "Официальная страница DUT подтверждает стипендиальные маршруты для программ китайского языка; окна на декабрь 2026 и март 2027 остаются открытыми."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish only the verified open cycle and official funding terms.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "deadline_recheck_required"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-hebut-csc",
+      "candidateIds": [
+        "sch-mew-nss-hebut-csc"
+      ],
+      "institutionSlug": "hebei-university-of-technology",
+      "name": {
+        "en": "Chinese Government Scholarship at HEBUT",
+        "zh": "河北工业大学中国政府奖学金项目",
+        "ru": "Стипендия правительства КНР в Хэбэйском технологическом университете"
+      },
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-hebut-electrical-engineering-doctorate"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "Off-campus accommodation subsidy",
+          "Master monthly allowance: CNY 3,000",
+          "Doctoral monthly allowance: CNY 3,500",
+          "Medical insurance: CNY 800 per year"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-02-10",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://eweb.hebut.edu.cn/admission/InternationalStudents/prospectus/4f0f206db54b4d67984fdd9b9b483394.htm",
+        "sourceTitle": "河北工业大学2026年中国政府奖学金项目招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official HEBUT guide confirms full scholarship components and a February 10, 2026 deadline for eligible international master and doctoral programs.",
+          "zh": "河北工业大学官方简章确认符合条件的国际硕士、博士项目全额资助内容，2026年截止日期为2月10日。",
+          "ru": "Официальный справочник HEBUT подтверждает полное финансирование для подходящих магистерских и докторских программ и срок 10 февраля 2026 года."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-hebut-hebei-government",
+      "candidateIds": [
+        "sch-mew-nss-hebut-hebei-government"
+      ],
+      "institutionSlug": "hebei-university-of-technology",
+      "name": {
+        "en": "Hebei Provincial Government – HEBUT Scholarship",
+        "zh": "河北省政府—河北工业大学外国留学生奖学金",
+        "ru": "Стипендия правительства провинции Хэбэй и HEBUT"
+      },
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-hebut-electrical-engineering-doctorate"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Full or partial tuition support",
+          "Accommodation support by tier",
+          "Living allowance by tier"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": "2025-11-27",
+          "applicationDeadline": "2026-05-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://eweb.hebut.edu.cn/admission/InternationalStudents/prospectus/c2e3c53b6e504f73b64126923fe2a6a6.htm",
+        "sourceTitle": "河北工业大学2026年国际学生研究生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official 2026 postgraduate guide publishes the Hebei Provincial Government–HEBUT scholarship and tiered tuition, accommodation and living support.",
+          "zh": "河北工业大学2026年官方研究生简章公布河北省政府—河北工业大学奖学金及分档学费、住宿和生活资助。",
+          "ru": "Официальный справочник HEBUT 2026 года публикует провинциально-университетскую стипендию с уровнями оплаты обучения, проживания и содержания."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-ncepu-csc-university",
+      "candidateIds": [
+        "sch-mew-nss-ncepu-csc-university"
+      ],
+      "institutionSlug": "north-china-electric-power-university",
+      "name": {
+        "en": "Chinese Government Scholarship – Chinese University Program at NCEPU",
+        "zh": "华北电力大学中国政府奖学金高校项目",
+        "ru": "Стипендия правительства КНР — университетская программа NCEPU"
+      },
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-ncepu-power-engineering-thermophysics-master",
+        "prog-mew-nss-ncepu-electrical-engineering-doctorate"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "Accommodation",
+          "Monthly living allowance",
+          "Medical insurance"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-30",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+        "sourceTitle": "华北电力大学2026年国际学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official 2026 NCEPU guide lists the Chinese Government Scholarship university route for international master and doctoral applicants; the verified cycle is closed.",
+          "zh": "华北电力大学2026年官方简章列出面向国际硕士、博士申请人的中国政府奖学金高校项目；已核实申请周期现已关闭。",
+          "ru": "Официальный справочник NCEPU 2026 года указывает университетский маршрут государственной стипендии КНР для магистров и докторантов; цикл закрыт."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-ncepu-beijing-government",
+      "candidateIds": [
+        "sch-mew-nss-ncepu-beijing-government"
+      ],
+      "institutionSlug": "north-china-electric-power-university",
+      "name": {
+        "en": "Beijing Government Scholarship at NCEPU",
+        "zh": "华北电力大学北京市外国留学生奖学金",
+        "ru": "Пекинская правительственная стипендия в NCEPU"
+      },
+      "applicableLevels": [
+        "bachelor"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-ncepu-new-energy-science-engineering-bachelor"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition support according to the university award result"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-02-25",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+        "sourceTitle": "华北电力大学2026年国际学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official 2026 NCEPU guide lists the Beijing Government Scholarship for international bachelor applicants; the February 25 cycle is closed.",
+          "zh": "华北电力大学2026年官方简章列出面向国际本科申请人的北京市外国留学生奖学金；2月25日申请周期已关闭。",
+          "ru": "Официальный справочник NCEPU 2026 года указывает пекинскую правительственную стипендию для иностранных бакалавров; срок 25 февраля прошел."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-ncepu-iclts",
+      "candidateIds": [
+        "sch-mew-nss-ncepu-iclts"
+      ],
+      "institutionSlug": "north-china-electric-power-university",
+      "name": {
+        "en": "International Chinese Language Teachers Scholarship at NCEPU",
+        "zh": "华北电力大学国际中文教师奖学金",
+        "ru": "Международная стипендия преподавателей китайского языка в NCEPU"
+      },
+      "applicableLevels": [
+        "language",
+        "other"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-ncepu-chinese-language"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "Accommodation",
+          "Living allowance for eligible routes",
+          "Medical insurance"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+        "sourceTitle": "华北电力大学2026年国际学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official 2026 NCEPU guide identifies the International Chinese Language Teachers Scholarship for Chinese-language routes; no future deadline is stated in the accessible guide.",
+          "zh": "华北电力大学2026年官方简章确认中文项目可对应国际中文教师奖学金；可访问简章未公布下一轮截止日期。",
+          "ru": "Официальный справочник NCEPU 2026 года подтверждает международную стипендию преподавателей китайского языка; будущий срок не указан."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-sxu-undergraduate-ab",
+      "candidateIds": [
+        "sch-mew-nss-sxu-undergraduate-ab"
+      ],
+      "institutionSlug": "shanxi-university",
+      "name": {
+        "en": "Shanxi University International Undergraduate Scholarship (Types A and B)",
+        "zh": "山西大学国际本科生奖学金（A类、B类）",
+        "ru": "Стипендия Шаньсийского университета для иностранных бакалавров (A и B)"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "foundation"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-sxu-foundation"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Type A: tuition waiver, accommodation and CNY 7,500 annual living allowance",
+          "Type B: tuition waiver and accommodation"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": "2025-12-31",
+          "applicationDeadline": "2026-06-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://siee.sxu.edu.cn/docs/2026-04/9e9a1838ee3e49c3aabd942d05cd4e32.pdf",
+        "sourceTitle": "山西大学2026年国际学生1+4预科项目招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official 2026 foundation guide publishes Type A and B undergraduate awards, including tuition, accommodation and the stated Type A living allowance.",
+          "zh": "山西大学2026年官方预科简章公布本科A类、B类奖学金，包括学费、住宿及A类明确的生活费资助。",
+          "ru": "Официальный справочник 2026 года публикует стипендии типов A и B для бакалавров, включая обучение, проживание и указанное пособие типа A."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-sxu-shanxi-government",
+      "candidateIds": [
+        "sch-mew-nss-sxu-shanxi-government"
+      ],
+      "institutionSlug": "shanxi-university",
+      "name": {
+        "en": "Shanxi Government Scholarship at Shanxi University",
+        "zh": "山西大学山西省政府外国留学生奖学金",
+        "ru": "Стипендия правительства провинции Шаньси в Шаньсийском университете"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition support",
+          "Application fee support",
+          "Accommodation support",
+          "Living allowance"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://siee.sxu.edu.cn/lxsxm/jxjjs/12ac47005d3f4791b45d7d59f8e8af0c.htm",
+        "sourceTitle": "山西大学山西省政府外国留学生奖学金",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official university page confirms the Shanxi Government Scholarship and its tuition, application-fee, accommodation and living-support components; no future deadline is verified.",
+          "zh": "山西大学官方页面确认山西省政府外国留学生奖学金及学费、申请费、住宿、生活费资助内容；尚未核实下一轮截止日期。",
+          "ru": "Официальная страница университета подтверждает стипендию правительства Шаньси и поддержку обучения, подачи заявления, проживания и содержания; будущий срок не подтвержден."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "latest_accessible_framework_2025",
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-tyut-csc-high-level",
+      "candidateIds": [
+        "sch-mew-nss-tyut-csc-high-level"
+      ],
+      "institutionSlug": "taiyuan-university-of-technology",
+      "name": {
+        "en": "Chinese Government Scholarship – High-Level Postgraduate Program at TYUT",
+        "zh": "太原理工大学中国政府奖学金高水平研究生项目",
+        "ru": "Стипендия правительства КНР — программа последипломного образования высокого уровня в TYUT"
+      },
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-tyut-mechanical-engineering-master",
+        "prog-mew-nss-tyut-chemical-engineering-doctorate"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "Accommodation",
+          "Master monthly allowance: CNY 3,000",
+          "Doctoral monthly allowance: CNY 3,500",
+          "Medical insurance"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-10",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://is.tyut.edu.cn/html/article_content/202512/B032B115B48B464FA0613251289ADB9F.shtml",
+        "sourceTitle": "太原理工大学2026年中国政府奖学金高水平研究生项目招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official TYUT 2026 guide publishes a full Chinese Government Scholarship route for international master and doctoral applicants with a March 10 deadline.",
+          "zh": "太原理工大学2026年官方简章公布面向国际硕士、博士申请人的中国政府奖学金全额资助渠道，截止日期为3月10日。",
+          "ru": "Официальный справочник TYUT 2026 года публикует полную государственную стипендию КНР для магистров и докторантов со сроком 10 марта."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-tyut-shanxi-government",
+      "candidateIds": [
+        "sch-mew-nss-tyut-shanxi-government"
+      ],
+      "institutionSlug": "taiyuan-university-of-technology",
+      "name": {
+        "en": "Shanxi Government Scholarship at TYUT",
+        "zh": "太原理工大学山西省政府外国留学生奖学金",
+        "ru": "Стипендия правительства провинции Шаньси в TYUT"
+      },
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-tyut-mechanical-engineering-master",
+        "prog-mew-nss-tyut-chemical-engineering-doctorate"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Master monthly allowance: CNY 2,000",
+          "Doctoral monthly allowance: CNY 2,500",
+          "Tuition support according to the official tier table"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": null,
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf",
+        "sourceTitle": "太原理工大学2026年国际学生招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official 2026 TYUT guide lists the Shanxi Government Scholarship and monthly allowances for eligible international master and doctoral students.",
+          "zh": "太原理工大学2026年官方简章列出山西省政府外国留学生奖学金及符合条件的国际硕士、博士月度补助。",
+          "ru": "Официальный справочник TYUT 2026 года указывает стипендию правительства Шаньси и ежемесячные пособия для магистров и докторантов."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-tyut-university",
+      "candidateIds": [
+        "sch-mew-nss-tyut-university"
+      ],
+      "institutionSlug": "taiyuan-university-of-technology",
+      "name": {
+        "en": "TYUT International Student Scholarship",
+        "zh": "太原理工大学国际学生奖学金",
+        "ru": "Стипендия TYUT для иностранных студентов"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-tyut-teaching-chinese-bachelor",
+        "prog-mew-nss-tyut-mechanical-engineering-master",
+        "prog-mew-nss-tyut-chemical-engineering-doctorate"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Bachelor Types A/B/C/D: monthly allowances CNY 1,200 / 800 / 500 / 0",
+          "Master Types B/C: monthly allowances CNY 1,500 / 1,000",
+          "Doctoral Types B/C: monthly allowances CNY 2,000 / 1,500",
+          "Tuition support according to award tier"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://ciee.tyut.edu.cn/info/1016/3436.htm",
+        "sourceTitle": "太原理工大学国际学生奖学金介绍",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official TYUT scholarship page and 2026 guide publish university award tiers for bachelor, master and doctoral international students; the next deadline is unannounced.",
+          "zh": "太原理工大学官方奖学金页面及2026年简章公布国际本科、硕士、博士校级奖学金档位；下一轮截止日期尚未公布。",
+          "ru": "Официальная страница TYUT и справочник 2026 года публикуют университетские уровни стипендии для бакалавров, магистров и докторантов; следующий срок не объявлен."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf",
+          "sourceTitle": "太原理工大学2026年国际学生招生简章"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-tgu-tianjin-government",
+      "candidateIds": [
+        "sch-mew-nss-tgu-tianjin-government"
+      ],
+      "institutionSlug": "tiangong-university",
+      "name": {
+        "en": "Tianjin Government Scholarship at Tiangong University",
+        "zh": "天津工业大学天津市外国留学生政府奖学金",
+        "ru": "Стипендия правительства Тяньцзиня в Тяньгунском университете"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-tgu-chinese-language-bachelor",
+        "prog-mew-nss-tgu-performance-model-bachelor",
+        "prog-mew-nss-tgu-artificial-intelligence-bachelor"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "First year: tuition waiver",
+          "Later bachelor years: CNY 5,000 tuition contribution",
+          "Later master and doctoral years: tuition waiver",
+          "Accommodation paid by the student"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://en.tiangong.edu.cn/_upload/article/files/e8/01/fc1cbd7d4c4099af8b8c943ef98d/fd97d687-3787-4837-8499-86667d65e2eb.pdf",
+        "sourceTitle": "Tiangong University 2026 International Student Admission and Scholarship Guide",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official 2026 Tiangong guide publishes the Tianjin Government Scholarship tuition rules and confirms that accommodation remains self-funded.",
+          "zh": "天津工业大学2026年官方简章公布天津市外国留学生政府奖学金学费资助规则，并确认住宿费由学生自理。",
+          "ru": "Официальный справочник Tiangong 2026 года публикует правила оплаты обучения по стипендии правительства Тяньцзиня; проживание оплачивает студент."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-tgu-university-first",
+      "candidateIds": [
+        "sch-mew-nss-tgu-university-first"
+      ],
+      "institutionSlug": "tiangong-university",
+      "name": {
+        "en": "Tiangong University First-Class Scholarship",
+        "zh": "天津工业大学一等奖学金",
+        "ru": "Стипендия первой категории Тяньгунского университета"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-tgu-chinese-language-bachelor",
+        "prog-mew-nss-tgu-performance-model-bachelor",
+        "prog-mew-nss-tgu-artificial-intelligence-bachelor"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Bachelor award leaves CNY 5,500 annual tuition payable",
+          "Master award leaves CNY 10,000 annual tuition payable"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://en.tiangong.edu.cn/_upload/article/files/e8/01/fc1cbd7d4c4099af8b8c943ef98d/fd97d687-3787-4837-8499-86667d65e2eb.pdf",
+        "sourceTitle": "Tiangong University 2026 International Student Admission and Scholarship Guide",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official 2026 guide defines the university first-class scholarship by the remaining annual tuition payable for bachelor and master recipients.",
+          "zh": "天津工业大学2026年官方简章以获奖后仍需缴纳的年度学费明确校级一等奖学金本科、硕士档位。",
+          "ru": "Официальный справочник 2026 года определяет стипендию первой категории через остаток годовой платы для бакалавров и магистров."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-tgu-university-second",
+      "candidateIds": [
+        "sch-mew-nss-tgu-university-second"
+      ],
+      "institutionSlug": "tiangong-university",
+      "name": {
+        "en": "Tiangong University Second-Class Scholarship",
+        "zh": "天津工业大学二等奖学金",
+        "ru": "Стипендия второй категории Тяньгунского университета"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-tgu-chinese-language-bachelor",
+        "prog-mew-nss-tgu-performance-model-bachelor",
+        "prog-mew-nss-tgu-artificial-intelligence-bachelor"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Bachelor award leaves CNY 6,500 annual tuition payable",
+          "Master award leaves CNY 10,000 annual tuition payable",
+          "Doctoral award leaves CNY 15,000 annual tuition payable"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://en.tiangong.edu.cn/_upload/article/files/e8/01/fc1cbd7d4c4099af8b8c943ef98d/fd97d687-3787-4837-8499-86667d65e2eb.pdf",
+        "sourceTitle": "Tiangong University 2026 International Student Admission and Scholarship Guide",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official 2026 guide defines second-class university scholarship tiers for bachelor, master and doctoral recipients by remaining annual tuition.",
+          "zh": "天津工业大学2026年官方简章按获奖后剩余年度学费明确本科、硕士、博士校级二等奖学金档位。",
+          "ru": "Официальный справочник 2026 года определяет вторую категорию стипендии для бакалавров, магистров и докторантов по остаточной годовой плате."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-cfau-beijing-government",
+      "candidateIds": [
+        "sch-mew-nss-cfau-beijing-government"
+      ],
+      "institutionSlug": "china-foreign-affairs-university",
+      "name": {
+        "en": "Beijing Government Scholarship at CFAU",
+        "zh": "外交学院北京市外国留学生奖学金",
+        "ru": "Пекинская правительственная стипендия в Китайском университете иностранных дел"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-cfau-international-law-bachelor",
+        "prog-mew-nss-cfau-international-economics-trade-bachelor"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition support",
+          "Accommodation support according to the official annual award"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://iss.cfau.edu.cn/col4185/col4273/24d1b5fa0831489bbca67ee17d5398c6.htm",
+        "sourceTitle": "外交学院2026年北京市外国留学生奖学金",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official CFAU page confirms the 2026 Beijing Government Scholarship for international degree applicants, covering tuition and accommodation under the published award.",
+          "zh": "外交学院官方页面确认2026年北京市外国留学生奖学金面向国际学历生，并按公布档位资助学费和住宿。",
+          "ru": "Официальная страница CFAU подтверждает пекинскую правительственную стипендию 2026 года для иностранных студентов с поддержкой обучения и проживания."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-cfau-csc",
+      "candidateIds": [
+        "sch-mew-nss-cfau-csc"
+      ],
+      "institutionSlug": "china-foreign-affairs-university",
+      "name": {
+        "en": "Chinese Government Scholarship at CFAU",
+        "zh": "外交学院中国政府奖学金",
+        "ru": "Стипендия правительства КНР в Китайском университете иностранных дел"
+      },
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "Accommodation",
+          "Living allowance",
+          "Medical insurance"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iss.cfau.edu.cn/col4185/col4274/9cabfdbd76e74c4fa60b06c948b9502f.htm",
+        "sourceTitle": "外交学院中国政府奖学金项目",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official CFAU page confirms a Chinese Government Scholarship route for international postgraduate applicants; no future application deadline is displayed.",
+          "zh": "外交学院官方页面确认面向国际研究生申请人的中国政府奖学金渠道；页面未显示下一轮申请截止日期。",
+          "ru": "Официальная страница CFAU подтверждает государственную стипендию КНР для иностранных аспирантов; будущий срок подачи не указан."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-cupl-csc",
+      "candidateIds": [
+        "sch-mew-nss-cupl-csc"
+      ],
+      "institutionSlug": "china-university-of-political-science-and-law",
+      "name": {
+        "en": "Chinese Government Scholarship at CUPL",
+        "zh": "中国政法大学中国政府奖学金",
+        "ru": "Стипендия правительства КНР в Китайском университете политологии и права"
+      },
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-cupl-international-law-master",
+        "prog-mew-nss-cupl-international-law-doctorate"
+      ],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://sis.cupl.edu.cn/",
+        "sourceTitle": "中国政法大学国际学生奖学金官方入口",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official CUPL international-student site lists the Chinese Government Scholarship category; the accessible index does not expose a future deadline or a complete funding table.",
+          "zh": "中国政法大学国际学生官网列出中国政府奖学金类别；可访问索引未公布下一轮截止日期或完整资助表。",
+          "ru": "Официальный сайт CUPL для иностранных студентов указывает государственную стипендию КНР; будущий срок и полная таблица финансирования не опубликованы."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "official_index_identity_only",
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-cupl-beijing-government",
+      "candidateIds": [
+        "sch-mew-nss-cupl-beijing-government"
+      ],
+      "institutionSlug": "china-university-of-political-science-and-law",
+      "name": {
+        "en": "Beijing Government Scholarship at CUPL",
+        "zh": "中国政法大学北京市外国留学生奖学金",
+        "ru": "Пекинская правительственная стипендия в CUPL"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-cupl-law-bachelor",
+        "prog-mew-nss-cupl-international-law-master",
+        "prog-mew-nss-cupl-international-law-doctorate"
+      ],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://sis.cupl.edu.cn/",
+        "sourceTitle": "中国政法大学国际学生奖学金官方入口",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official CUPL international-student site lists the Beijing Government Scholarship category; current funding tiers and the next deadline remain unavailable.",
+          "zh": "中国政法大学国际学生官网列出北京市外国留学生奖学金类别；当前资助档位和下一轮截止日期尚不可得。",
+          "ru": "Официальный сайт CUPL указывает пекинскую правительственную стипендию; текущие уровни финансирования и следующий срок недоступны."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "official_index_identity_only",
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-cupl-iclts",
+      "candidateIds": [
+        "sch-mew-nss-cupl-iclts"
+      ],
+      "institutionSlug": "china-university-of-political-science-and-law",
+      "name": {
+        "en": "International Chinese Language Teachers Scholarship at CUPL",
+        "zh": "中国政法大学国际中文教师奖学金",
+        "ru": "Международная стипендия преподавателей китайского языка в CUPL"
+      },
+      "applicableLevels": [
+        "language",
+        "other"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-cupl-chinese-language"
+      ],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://sis.cupl.edu.cn/",
+        "sourceTitle": "中国政法大学国际学生奖学金官方入口",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official CUPL international-student site lists the International Chinese Language Teachers Scholarship category; a future intake deadline is not shown.",
+          "zh": "中国政法大学国际学生官网列出国际中文教师奖学金类别；未显示下一轮入学申请截止日期。",
+          "ru": "Официальный сайт CUPL указывает международную стипендию преподавателей китайского языка; будущий срок не показан."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "official_index_identity_only",
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-cad-csc",
+      "candidateIds": [
+        "sch-mew-nss-cad-csc"
+      ],
+      "institutionSlug": "central-academy-of-drama",
+      "name": {
+        "en": "Chinese Government Scholarship at the Central Academy of Drama",
+        "zh": "中央戏剧学院中国政府奖学金",
+        "ru": "Стипендия правительства КНР в Центральной академии драмы"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-cad-acting-bachelor",
+        "prog-mew-nss-cad-drama-film-doctorate"
+      ],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://chntheatre.edu.cn/cn/liuxue/zhuanye/detail/11795.html",
+        "sourceTitle": "中央戏剧学院留学生奖学金介绍",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official academy page confirms the Chinese Government Scholarship as an available international-student funding route; a future deadline and complete tier table are not published.",
+          "zh": "中央戏剧学院官方页面确认中国政府奖学金是国际学生可用资助渠道；下一轮截止日期和完整资助档位未公布。",
+          "ru": "Официальная страница академии подтверждает государственную стипендию КНР для иностранных студентов; будущий срок и полные уровни не опубликованы."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "latest_accessible_framework_2025",
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-cad-beijing-government",
+      "candidateIds": [
+        "sch-mew-nss-cad-beijing-government"
+      ],
+      "institutionSlug": "central-academy-of-drama",
+      "name": {
+        "en": "Beijing Government Scholarship at the Central Academy of Drama",
+        "zh": "中央戏剧学院北京市外国留学生奖学金",
+        "ru": "Пекинская правительственная стипендия в Центральной академии драмы"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-cad-acting-bachelor",
+        "prog-mew-nss-cad-drama-film-doctorate"
+      ],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://chntheatre.edu.cn/cn/liuxue/zhuanye/detail/11795.html",
+        "sourceTitle": "中央戏剧学院留学生奖学金介绍",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official academy page confirms the Beijing Government Scholarship for international students; a current application cycle and verified funding tier remain unannounced.",
+          "zh": "中央戏剧学院官方页面确认面向国际学生的北京市外国留学生奖学金；当前申请周期和可核实资助档位尚未公布。",
+          "ru": "Официальная страница академии подтверждает пекинскую правительственную стипендию; текущий цикл и подтвержденный размер пока не объявлены."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "latest_accessible_framework_2025",
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-synu-iclts",
+      "candidateIds": [
+        "sch-mew-nss-synu-iclts"
+      ],
+      "institutionSlug": "shenyang-normal-university",
+      "name": {
+        "en": "International Chinese Language Teachers Scholarship at Shenyang Normal University",
+        "zh": "沈阳师范大学国际中文教师奖学金",
+        "ru": "Международная стипендия преподавателей китайского языка в Шэньянском педагогическом университете"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "language",
+        "other"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nss-synu-international-chinese-education-bachelor",
+        "prog-mew-nss-synu-international-chinese-education-master",
+        "prog-mew-nss-synu-one-year-chinese-study",
+        "prog-mew-nss-synu-four-week-chinese-study"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "University accommodation",
+          "Comprehensive medical insurance",
+          "Monthly allowance: CNY 2,500 for bachelor, one-year and one-semester routes",
+          "Monthly allowance: CNY 3,000 for master route"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "winter",
+          "intakeLabel": "December 2026 four-week program",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-09-15",
+          "statusAsOfCheckedAt": "open",
+          "displayAsOpen": true,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cie.synu.edu.cn/2026/0415/c5760a112915/page.htm",
+        "sourceTitle": "沈阳师范大学2026年国际中文教师奖学金招生简章",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official 2026 Shenyang Normal guide publishes degree and non-degree routes, full funding components and a still-open September 15 deadline for the December four-week program.",
+          "zh": "沈阳师范大学2026年官方简章公布学历与非学历渠道、完整资助内容，以及12月四周项目仍开放的9月15日截止日期。",
+          "ru": "Официальный справочник Шэньянского педагогического университета 2026 года публикует учебные маршруты, полное финансирование и открытый срок 15 сентября для декабрьской четырехнедельной программы."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge after semantic deduplication; publish only the verified open cycle and official funding terms.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "deadline_recheck_required"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nss-synu-csc-high-level",
+      "candidateIds": [
+        "sch-mew-nss-synu-csc-high-level"
+      ],
+      "institutionSlug": "shenyang-normal-university",
+      "name": {
+        "en": "Chinese Government Scholarship – High-Level Postgraduate Program at Shenyang Normal University",
+        "zh": "沈阳师范大学中国政府奖学金高水平研究生项目",
+        "ru": "Стипендия правительства КНР — программа последипломного образования высокого уровня в Шэньянском педагогическом университете"
+      },
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://cie.synu.edu.cn/zsjz/list.htm",
+        "sourceTitle": "沈阳师范大学国际学生招生简章官方索引",
+        "checkedAt": "2026-08-04",
+        "summary": {
+          "en": "The official 2026 admissions index lists the Chinese Government Scholarship high-level postgraduate route; the accessible index does not expose the next deadline or full funding table.",
+          "zh": "沈阳师范大学2026年官方招生索引列出中国政府奖学金高水平研究生项目；可访问索引未显示下一轮截止日期或完整资助表。",
+          "ru": "Официальный индекс приема 2026 года указывает программу государственной стипендии КНР высокого уровня; следующий срок и полная таблица финансирования не показаны."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and verified funding terms; keep passed or unannounced cycles closed.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "official_index_identity_only",
+        "current_cycle_deadline_not_announced"
+      ],
+      "sourceFiles": [
+        "north-specialty-sparse.json"
+      ]
+    }
+  ],
+  "exclusions": [
+    {
+      "institutionSlug": "china-conservatory-of-music",
+      "reason": "The current official 2026 PDF could not be reliably retrieved during this pass, so no domestic-program inference or third-party record was added; the two existing formal international program records remain unduplicated."
+    },
+    {
+      "institutionSlug": "central-conservatory-of-music",
+      "reason": "No current official scholarship page with an institution-specific funding identity and usable terms was verified. Government scholarship names were not inferred from general policy."
+    },
+    {
+      "institutionSlug": "liaoning-normal-university",
+      "reason": "The current official notice verifies two bachelor programs for self-funded international students and their tuition, but it does not explicitly state teaching language or an application deadline; no current institution-specific scholarship cycle was verified in this pass."
+    },
+    {
+      "institutionSlug": "hebei-normal-university",
+      "reason": "No sufficiently explicit current official international-admission page proving an additional personally applicable program was verified during the bounded pass; third-party catalog entries were excluded."
+    },
+    {
+      "institutionSlug": "shanxi-medical-university",
+      "reason": "No sufficiently explicit current official international-admission page proving an additional personally applicable program was verified during the bounded pass; domestic medical catalogs and aggregators were excluded."
+    },
+    {
+      "institutionSlug": "all-targets",
+      "reason": "Domestic-student catalogs, discipline authorization lists, department pages without explicit international eligibility, non-official aggregators and inferred fees or deadlines were not used as publishable facts."
+    }
+  ],
+  "coverageSummary": {
+    "programCandidates": 48,
+    "scholarshipCandidates": 28,
+    "targetInstitutions": 17,
+    "newUniversities": 2,
+    "programsByInstitution": {
+      "beijing-sport-university": 4,
+      "beijing-wuzi-university": 4,
+      "dalian-university-of-technology": 3,
+      "hebei-university-of-technology": 4,
+      "north-china-electric-power-university": 4,
+      "shanxi-university": 2,
+      "taiyuan-university-of-technology": 4,
+      "tiangong-university": 4,
+      "china-foreign-affairs-university": 3,
+      "china-university-of-political-science-and-law": 4,
+      "china-conservatory-of-music": 0,
+      "central-conservatory-of-music": 4,
+      "central-academy-of-drama": 2,
+      "shenyang-normal-university": 4,
+      "liaoning-normal-university": 2,
+      "hebei-normal-university": 0,
+      "shanxi-medical-university": 0
+    },
+    "verifiedOpenProgramCycles": 1,
+    "verifiedOpenScholarshipCycles": 3,
+    "notes": [
+      "This package adds cross-pack-deduplicated international-student candidates across north-China, specialist and sparse formal-catalog institutions, plus two previously absent regional normal universities.",
+      "Every candidate has trilingual display names and trilingual official-evidence summaries; all source URLs are official HTTPS pages or official university-hosted PDFs.",
+      "Only Shenyang Normal University's December 2026 four-week program and the explicitly dated DUT/Shenyang Normal scholarship windows remain open as of 2026-08-04.",
+      "All passed 2026 deadlines are explicitly closed and must not be surfaced as currently open.",
+      "China Conservatory of Music, Hebei Normal University and Shanxi Medical University were not padded with domestic or third-party records.",
+      "All scholarship-to-program references resolve to candidate IDs inside this package, and same-school same-level semantic duplicates were excluded against the formal catalog."
+    ]
+  }
+}

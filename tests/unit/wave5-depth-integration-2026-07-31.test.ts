@@ -302,7 +302,7 @@ describe('official coverage wave 5 on 2026-07-31', () => {
     expect(supersededDeadlineCount).toBeGreaterThan(0)
   })
 
-  it('keeps day-31 Wave5 and legacy tuition references in published data', () => {
+  it('keeps the day-31 Wave5 reference published and quarantines stale legacy evidence', () => {
     const candidateId = 'wave5-depth-cupb-chinese-language-one-year-2026'
     const candidate = waveProgramCandidates.find((item) =>
       item.candidateId === candidateId)
@@ -332,14 +332,17 @@ describe('official coverage wave 5 on 2026-07-31', () => {
     expect(selectedCycle?.opensOn).toBeNull()
     expect(selectedCycle?.closesOn).toBeNull()
 
-    const legacy = published.admissionCycles.find((cycle) =>
-      cycle.id === 'cycle-2026-sjtu-long-term-chinese-autumn-fee-reference')
-    expect(legacy).toBeDefined()
-    expect(legacy?.tuitionCny).toBe(10500)
-    expect(legacy?.tuitionStatus).toBe('reference')
-    expect(legacy?.opensOn).toBeNull()
-    expect(legacy?.closesOn).toBeNull()
-    expect(legacy).not.toHaveProperty('notes')
+    const legacyId = 'cycle-2026-sjtu-long-term-chinese-autumn-fee-reference'
+    const rawLegacy = data.admissionCycles.find((cycle) => cycle.id === legacyId)
+    expect(rawLegacy).toBeDefined()
+    expect(rawLegacy?.status).toBe('stale')
+    expect(rawLegacy?.tuitionCny).toBe(10500)
+    expect(rawLegacy?.tuitionStatus).toBe('reference')
+    expect(rawLegacy?.opensOn).toBeNull()
+    expect(rawLegacy?.closesOn).toBeNull()
+    expect(rawLegacy).not.toHaveProperty('notes')
+    expect(published.admissionCycles.some((cycle) => cycle.id === legacyId))
+      .toBe(false)
   })
 
   it('requires an explicit catalog date without a wall-clock fallback', () => {
