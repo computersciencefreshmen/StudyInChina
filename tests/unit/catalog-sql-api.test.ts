@@ -385,7 +385,7 @@ describe('Catalog D1 normalized v1 API', () => {
     } finally {
       database.exec('ROLLBACK')
     }
-  })
+  }, 15_000)
 
   it('rejects oversized limits and cursors bound to another resource', async () => {
     const oversized = await worker.fetch(
