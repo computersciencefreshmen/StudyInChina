@@ -229,6 +229,8 @@ describe('CatalogRepository', () => {
       mode: 'd1',
       getBundle: async () => { throw new Error('shadow unavailable') },
       getRelease: async () => { throw new Error('shadow unavailable') },
+      listPrograms: async () => { throw new Error('shadow unavailable') },
+      listScholarships: async () => { throw new Error('shadow unavailable') },
     }
     const repository = createShadowCatalogRepository({ primary, shadow: failingShadow })
 

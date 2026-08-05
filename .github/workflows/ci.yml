@@ -36,6 +36,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+
       - name: Lint
         run: npm run lint
 
@@ -54,14 +57,20 @@ jobs:
       - name: Validate D1 migrations and database integrity
         run: npm run validate:d1
 
-      - name: Validate pilot source manifests
+      - name: Validate recursive source manifests
         run: npm run validate:manifests
+
+      - name: Run isolated extraction and prompt-injection regressions
+        run: npm run quality:synthetic-regression
 
       - name: Validate scheduled maintenance capacity
         run: npm run validate:maintenance
 
       - name: Run ingestion Worker tests
         run: npm run test:ingestion
+
+      - name: Run Entity Materializer tests
+        run: npm run test:entity-materializer
 
       - name: Run publisher Worker tests
         run: npm run test:publisher
@@ -71,6 +80,9 @@ jobs:
 
       - name: Validate ingestion Worker bundle and bindings
         run: npm run check:worker:ingestion
+
+      - name: Validate Entity Materializer Worker bundle and bindings
+        run: npm run check:worker:entity-materializer
 
       - name: Validate publisher Worker bundle and bindings
         run: npm run check:worker:publisher

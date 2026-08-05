@@ -2,9 +2,9 @@ import { mkdirSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import {
-  validatePilotSourceManifestDirectory,
-  type PilotSourceManifest,
-} from '../validate-source-manifests'
+  validateSourceManifestDirectory,
+  type SourceManifestRecord,
+} from '../source-manifest-registry'
 
 type SqlValue = string | number | null
 
@@ -23,7 +23,7 @@ function sqlValue(value: SqlValue) {
 }
 
 export function buildPilotSourceImport(
-  records: PilotSourceManifest[],
+  records: SourceManifestRecord[],
   generatedAt = new Date().toISOString(),
 ): SourceImportArtifacts {
   if (Number.isNaN(Date.parse(generatedAt))) throw new Error('generatedAt must be an ISO timestamp')
@@ -100,7 +100,7 @@ function argument(name: string) {
 function main() {
   const outputDirectory = resolve(argument('--output') ?? '.pipeline-build')
   const generatedAt = argument('--generated-at') ?? new Date().toISOString()
-  const records = validatePilotSourceManifestDirectory()
+  const records = validateSourceManifestDirectory()
   const artifacts = buildPilotSourceImport(records, generatedAt)
   mkdirSync(outputDirectory, { recursive: true })
   const sqlPaths = records.map((record) => {
@@ -108,7 +108,7 @@ function main() {
     writeFileSync(sqlPath, buildPilotSourceImport([record], generatedAt).sql, 'utf8')
     return sqlPath
   })
-  const manifestPath = join(outputDirectory, 'pilot-source-manifests.manifest.json')
+  const manifestPath = join(outputDirectory, 'source-manifests.manifest.json')
   writeFileSync(manifestPath, JSON.stringify({
     institutions: artifacts.institutions,
     sources: artifacts.sources,

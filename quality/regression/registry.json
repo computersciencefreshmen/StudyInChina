@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "datasetKind": "synthetic_regression_registry",
+  "officialGoldContribution": 0,
+  "fixtures": [
+    {
+      "fixtureId": "static-html-directory-v1",
+      "caseKind": "static_html",
+      "inputPath": "quality/regression/fixtures/static-html.html",
+      "sha256": "a6f1c606864507e38c1c6f0c482a940ab34eda89dfb6e6f2f6ab35e01f8dc285",
+      "officialGoldEligible": false,
+      "expected": { "disposition": "process", "signals": ["static_html_detected"] }
+    },
+    {
+      "fixtureId": "converted-pdf-v1",
+      "caseKind": "pdf_converted",
+      "inputPath": "quality/regression/fixtures/pdf-converted.txt",
+      "sha256": "d3f2e90eb321ef2429e91d3d5186e92a97a02b611c95929f43060d66d0e4d0a6",
+      "officialGoldEligible": false,
+      "expected": { "disposition": "process", "signals": ["pdf_converted_text_detected"] }
+    },
+    {
+      "fixtureId": "browser-rendered-v1",
+      "caseKind": "dynamic_rendered",
+      "inputPath": "quality/regression/fixtures/dynamic-rendered.html",
+      "sha256": "216646818fa924cb954fb617811e525a302add1ea5d80d6d9471746f4170fa1e",
+      "officialGoldEligible": false,
+      "expected": { "disposition": "process", "signals": ["browser_render_detected"] }
+    },
+    {
+      "fixtureId": "scanned-ocr-low-confidence-v1",
+      "caseKind": "scanned",
+      "inputPath": "quality/regression/fixtures/scanned.ocr.txt",
+      "sha256": "809d1d04cf6422560d947334b00805a0788d316b112c6a48a478e4ea2583e282",
+      "officialGoldEligible": false,
+      "expected": { "disposition": "manual_review", "signals": ["ocr_low_confidence"] }
+    },
+    {
+      "fixtureId": "official-source-conflict-v1",
+      "caseKind": "conflict",
+      "inputPath": "quality/regression/fixtures/conflict.json",
+      "sha256": "7442d72cf2db56ee2cee51057ee531dcf438f56d80c3dca3cb060bccf92862c9",
+      "officialGoldEligible": false,
+      "expected": { "disposition": "quarantine", "signals": ["conflict_detected"] }
+    },
+    {
+      "fixtureId": "official-http-404-v1",
+      "caseKind": "http_404",
+      "inputPath": "quality/regression/fixtures/http-404.json",
+      "sha256": "7e84fa2687dd02910f10effb60f3f7db5bb318c42297713c72cfb7ba30b32a24",
+      "officialGoldEligible": false,
+      "expected": { "disposition": "unavailable", "signals": ["http_404"] }
+    },
+    {
+      "fixtureId": "prompt-injection-v1",
+      "caseKind": "prompt_injection",
+      "inputPath": "quality/regression/fixtures/prompt-injection.html",
+      "sha256": "6fbe6c7ed6c5e0e711336dff1816bf15e385ac73b75fee4bb754c00463ebb681",
+      "officialGoldEligible": false,
+      "expected": { "disposition": "quarantine", "signals": ["prompt_injection_detected"] }
+    }
+  ]
+}

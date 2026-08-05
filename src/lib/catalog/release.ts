@@ -30,7 +30,7 @@ function isObject(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
 }
 
-export function parseCatalogRelease(value: unknown, bundle: DataBundle): CatalogRelease {
+export function parseCatalogReleaseInfo(value: unknown): CatalogRelease {
   if (!isObject(value)) {
     throw new CatalogRepositoryError('INVALID_RELEASE', 'Catalog API release metadata is missing.')
   }
@@ -49,7 +49,6 @@ export function parseCatalogRelease(value: unknown, bundle: DataBundle): Catalog
     throw new CatalogRepositoryError('INVALID_RELEASE', 'Catalog release recordCounts is missing.')
   }
 
-  const actualCounts = getCatalogRecordCounts(bundle)
   const parsedCounts = {} as CatalogRecordCounts
   for (const collection of CATALOG_COLLECTIONS) {
     const count = recordCounts[collection]
@@ -59,14 +58,23 @@ export function parseCatalogRelease(value: unknown, bundle: DataBundle): Catalog
         `Catalog release count for ${collection} must be a non-negative integer.`,
       )
     }
+    parsedCounts[collection] = count as number
+  }
+
+  return { id, dataDate, generatedAt, recordCounts: parsedCounts }
+}
+
+export function parseCatalogRelease(value: unknown, bundle: DataBundle): CatalogRelease {
+  const release = parseCatalogReleaseInfo(value)
+  const actualCounts = getCatalogRecordCounts(bundle)
+  for (const collection of CATALOG_COLLECTIONS) {
+    const count = release.recordCounts[collection]
     if (count !== actualCounts[collection]) {
       throw new CatalogRepositoryError(
         'RELEASE_COUNT_MISMATCH',
         `Catalog release count for ${collection} is ${String(count)}; bundle contains ${actualCounts[collection]}.`,
       )
     }
-    parsedCounts[collection] = count as number
   }
-
-  return { id, dataDate, generatedAt, recordCounts: parsedCounts }
+  return release
 }

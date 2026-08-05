@@ -429,7 +429,11 @@ describe('sparse-school and regional university expansion on 2026-08-04', () => 
       ...data.scholarships,
     ]
     const overdueVerifiedRecords = formalRecords.filter(
-      (record) => record.status === 'verified' && record.reviewAfter < TODAY,
+      (record): record is (typeof formalRecords)[number] & { status: 'verified'; reviewAfter: string } => (
+        'status' in record
+        && record.status === 'verified'
+        && record.reviewAfter < TODAY
+      ),
     )
 
     expect(overdueVerifiedRecords.map((record) => ({

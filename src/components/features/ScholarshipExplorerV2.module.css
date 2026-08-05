@@ -1,0 +1,37 @@
+.panel {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  position: static;
+}
+
+.search {
+  grid-column: span 2;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+
+.pagination {
+  display: grid;
+  grid-template-columns: minmax(7rem, 1fr) auto minmax(7rem, 1fr);
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.pagination > :last-child {
+  justify-self: end;
+}
+
+@media (max-width: 560px) {
+  .search {
+    grid-column: auto;
+  }
+
+  .actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
