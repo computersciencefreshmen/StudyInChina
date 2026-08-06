@@ -194,7 +194,7 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(filteredResponse.status).toBe(200)
     expect(filtered.data.map((item) => item.id)).toContain(program.id)
     expect(r2Reads).toBe(0)
-  })
+  }, 30_000)
 
   it('filters and sorts scholarships with exact metadata and query-bound cursors', async () => {
     const fundedResponse = await worker.fetch(

@@ -20,7 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      ARTIFACT_DIRECTORY: ${{ runner.temp }}/source-manifest-cohort-candidates
       CHECKED_AT: ${{ inputs.checked_at }}
     steps:
       - name: Checkout repository
@@ -40,6 +39,8 @@ jobs:
 
       - name: Build review-only candidate artifact
         shell: bash
+        env:
+          ARTIFACT_DIRECTORY: ${{ runner.temp }}/source-manifest-cohort-candidates
         run: |
           set -euo pipefail
           npm run pipeline:build-source-manifest-candidates -- \
@@ -48,6 +49,8 @@ jobs:
 
       - name: Verify checksums and publication safety
         shell: bash
+        env:
+          ARTIFACT_DIRECTORY: ${{ runner.temp }}/source-manifest-cohort-candidates
         run: |
           set -euo pipefail
           npm run pipeline:verify-source-manifest-candidates -- "$ARTIFACT_DIRECTORY"
@@ -57,6 +60,6 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: source-manifest-candidates-${{ github.run_id }}
-          path: ${{ env.ARTIFACT_DIRECTORY }}
+          path: ${{ runner.temp }}/source-manifest-cohort-candidates
           if-no-files-found: error
           retention-days: 14

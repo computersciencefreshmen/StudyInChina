@@ -12,11 +12,16 @@ const workflowPath = join(
 describe('source-manifest candidate cohort workflow', () => {
   it('is manually triggered, read-only, and uploads a runner-temp artifact', () => {
     const workflow = readFileSync(workflowPath, 'utf8')
+    const jobConfiguration = workflow.slice(
+      workflow.indexOf('jobs:'),
+      workflow.indexOf('    steps:'),
+    )
 
     expect(workflow).toContain('workflow_dispatch:')
     expect(workflow).toContain('contents: read')
     expect(workflow).not.toContain('contents: write')
     expect(workflow).toContain('${{ runner.temp }}/source-manifest-cohort-candidates')
+    expect(jobConfiguration).not.toContain('runner.temp')
     expect(workflow).toContain('npm run validate:double-first-class')
     expect(workflow).not.toContain('npm run validate:data')
     expect(workflow).toContain('--artifact-output "$ARTIFACT_DIRECTORY"')
