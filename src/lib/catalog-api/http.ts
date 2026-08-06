@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { CatalogRepositoryError } from '@/lib/catalog'
 import { InvalidCursorError } from './cursor'
+import { InvalidSearchQueryError } from './service'
 
 const responseHeaders = {
   'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=3600',
@@ -68,7 +69,11 @@ export async function handleCatalogRequest(operation: () => Promise<NextResponse
   try {
     return await operation()
   } catch (error) {
-    if (error instanceof InvalidCursorError || error instanceof InvalidQueryError) {
+    if (
+      error instanceof InvalidCursorError
+      || error instanceof InvalidQueryError
+      || error instanceof InvalidSearchQueryError
+    ) {
       return NextResponse.json(
         { error: { code: 'invalid_request', message: error.message } },
         { status: 400, headers: { ...responseHeaders, 'Cache-Control': 'no-store' } },

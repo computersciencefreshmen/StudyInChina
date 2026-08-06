@@ -1,13 +1,15 @@
 import { bundleSchema } from '@/lib/data/schema'
 import type { DataBundle } from '@/lib/data/types'
 import { getTodayDate } from '@/lib/data/freshness'
-import { parseD1ProgramList, parseD1ScholarshipList } from './d1-list'
+import { parseD1InstitutionList, parseD1ProgramList, parseD1ScholarshipList } from './d1-list'
 import { deriveCatalogRelease, parseCatalogRelease } from './release'
 import {
   CATALOG_LIST_DEFAULT_LIMIT,
   CATALOG_LIST_MAX_LIMIT,
   CatalogRepositoryError,
   type CatalogFetch,
+  type CatalogInstitutionListPage,
+  type CatalogInstitutionListQuery,
   type CatalogProgramListPage,
   type CatalogProgramListQuery,
   type CatalogRelease,
@@ -193,6 +195,24 @@ export class D1CatalogRepository implements CatalogRepository {
     return (await this.getSnapshot()).release
   }
 
+  async listInstitutions(
+    query: CatalogInstitutionListQuery = {},
+  ): Promise<CatalogInstitutionListPage> {
+    const url = this.publicEndpoint('institutions')
+    addParam(url, 'q', query.q)
+    addParam(url, 'city', query.city)
+    addParam(url, 'region', query.region)
+    addParam(url, 'discipline', query.discipline)
+    addParam(url, 'sort', query.sort)
+    addParam(url, 'cursor', query.cursor)
+    addParam(url, 'limit', listLimit(query.limit))
+    return parseD1InstitutionList(
+      await this.fetchListPayload(url),
+      query.today ?? getTodayDate(),
+    )
+  }
+
+
   async listPrograms(
     query: CatalogProgramListQuery = {},
   ): Promise<CatalogProgramListPage> {
@@ -241,7 +261,7 @@ export class D1CatalogRepository implements CatalogRepository {
     )
   }
 
-  private publicEndpoint(resource: 'programs' | 'scholarships'): URL {
+  private publicEndpoint(resource: 'institutions' | 'programs' | 'scholarships'): URL {
     const url = new URL(this.parsedApiUrl)
     url.search = ''
     url.hash = ''

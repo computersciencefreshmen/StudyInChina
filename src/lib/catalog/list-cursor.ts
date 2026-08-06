@@ -4,7 +4,7 @@ import { CatalogRepositoryError } from './types'
 type JsonListCursor = {
   v: 1
   backend: 'json'
-  resource: 'programs' | 'scholarships'
+  resource: 'institutions' | 'programs' | 'scholarships'
   fingerprint: string
   page: number
 }
@@ -12,7 +12,7 @@ type JsonListCursor = {
 type ShadowListCursor = {
   v: 1
   backend: 'shadow'
-  resource: 'programs' | 'scholarships'
+  resource: 'institutions' | 'programs' | 'scholarships'
   primary: string | null
   shadow: string | null
 }

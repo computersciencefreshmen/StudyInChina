@@ -214,6 +214,11 @@ async function publicCatalogResponse(request: Request, environment: CatalogApiEn
       city: stringParam(url.searchParams, 'city'),
       region: stringParam(url.searchParams, 'region'),
       discipline: stringParam(url.searchParams, 'discipline'),
+      sort: enumParam(
+        url.searchParams,
+        'sort',
+        new Set(['default', 'name', 'programs-desc', 'scholarships-desc']),
+      ),
       cursor: stringParam(url.searchParams, 'cursor', 1_024),
       limit: integerParam(url.searchParams, 'limit', 1, 100),
     }), etag)

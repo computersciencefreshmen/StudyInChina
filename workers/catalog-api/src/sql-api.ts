@@ -41,8 +41,8 @@ type SortableRow = RecordAuditRow & {
 }
 
 type InstitutionRow = SortableRow & {
+  slug: string | null
   institution_type: string
-  admissions_url: string
   featured: number
   official_url: string
   city_id: string
@@ -92,6 +92,11 @@ type FacetRow = {
 
 type ProgramCodeRow = {
   program_id: string
+  code: string
+}
+
+type InstitutionCodeRow = {
+  institution_id: string
   code: string
 }
 
@@ -276,6 +281,43 @@ function facetOptions(rows: FacetRow[]): ApiFacetOptionDto[] {
   return [...options.values()].sort((left, right) => left.value.localeCompare(right.value))
 }
 
+function institutionProgramCountSql() {
+  return `(
+    SELECT COUNT(*)
+    FROM current_programs AS counted_program
+    WHERE counted_program.release_id = institution.release_id
+      AND counted_program.institution_id = institution.institution_id
+  )`
+}
+
+function institutionScholarshipCountSql() {
+  return `(
+    SELECT COUNT(DISTINCT counted_scholarship.scholarship_id)
+    FROM current_scholarships AS counted_scholarship
+    JOIN current_record_fields AS scope
+      ON scope.release_id = counted_scholarship.release_id
+     AND scope.record_id = counted_scholarship.scholarship_id
+     AND scope.field_path IN ('universityIds', 'institution_ids')
+    JOIN json_each(scope.value_json) AS scoped_institution ON 1 = 1
+    WHERE counted_scholarship.release_id = institution.release_id
+      AND CAST(scoped_institution.value AS TEXT) = institution.institution_id
+  )`
+}
+
+
+function institutionSortSql(sort: InstitutionQuery['sort']) {
+  const slug = `COALESCE(record.slug, '')`
+  if (sort === 'name') return slug
+  if (sort === 'programs-desc') {
+    return `printf('%015d', 999999999999999 - CAST(${institutionProgramCountSql()} AS INTEGER))
+      || ':' || ${slug}`
+  }
+  if (sort === 'scholarships-desc') {
+    return `printf('%015d', 999999999999999 - CAST(${institutionScholarshipCountSql()} AS INTEGER))
+      || ':' || ${slug}`
+  }
+  return slug
+}
 function scholarshipDeadlineSql() {
   return `COALESCE(
     (
@@ -519,7 +561,7 @@ export class CatalogSqlApi {
           AND search_document.release_id = institution.release_id
           AND search_document.record_id = institution.institution_id
           AND search_document.record_kind = 'organization'
-      )`, fts5Query(query.q))
+      )`, fts5Query(query.q, 'title'))
     }
     if (query.city) {
       addCondition(
@@ -543,13 +585,17 @@ export class CatalogSqlApi {
           AND related_discipline.discipline_code = ?
       )`, query.discipline)
     }
+    const sortSql = institutionSortSql(query.sort)
+    const filteredConditions = [...conditions]
+    const filteredValues = [...values]
+    const context = cursorContext({ ...query })
     if (query.cursor && exactSlug === undefined) {
-      const cursor = decodeCursor(query.cursor, 'institutions', this.release.id)
+      const cursor = decodeCursor(query.cursor, 'institutions', this.release.id, context)
       addCondition(
         conditions,
         values,
-        `(COALESCE(record.slug, '') > ?
-          OR (COALESCE(record.slug, '') = ? AND record.record_id > ?))`,
+        `(${sortSql} > ?
+          OR (${sortSql} = ? AND record.record_id > ?))`,
         cursor.sortKey,
         cursor.sortKey,
         cursor.id,
@@ -557,37 +603,22 @@ export class CatalogSqlApi {
     }
     const limit = exactSlug === undefined ? pageLimit(query.limit) + 1 : 1
     values.push(limit)
-    return queryAll<InstitutionRow>(this.database, `
+    const rows = await queryAll<InstitutionRow>(this.database, `
       SELECT
         record.record_id,
-        COALESCE(record.slug, '') AS sort_slug,
+        record.slug,
+        ${sortSql} AS sort_slug,
         record.verified_at AS record_verified_at,
         record.review_after AS record_review_after,
         institution.institution_type,
-        institution.admissions_url,
         institution.featured,
         organization.official_url,
         institution.city_id,
         city_record.slug AS city_slug,
         city.country_code,
         city.region_code,
-        (
-          SELECT COUNT(*)
-          FROM current_programs AS counted_program
-          WHERE counted_program.release_id = institution.release_id
-            AND counted_program.institution_id = institution.institution_id
-        ) AS program_count,
-        (
-          SELECT COUNT(DISTINCT counted_scholarship.scholarship_id)
-          FROM current_scholarships AS counted_scholarship
-          JOIN current_record_fields AS scope
-            ON scope.release_id = counted_scholarship.release_id
-           AND scope.record_id = counted_scholarship.scholarship_id
-           AND scope.field_path IN ('universityIds', 'institution_ids')
-          JOIN json_each(scope.value_json) AS scoped_institution ON 1 = 1
-          WHERE counted_scholarship.release_id = institution.release_id
-            AND CAST(scoped_institution.value AS TEXT) = institution.institution_id
-        ) AS scholarship_count
+        ${institutionProgramCountSql()} AS program_count,
+        ${institutionScholarshipCountSql()} AS scholarship_count
       FROM current_institutions AS institution
       JOIN current_organizations AS organization
         ON organization.release_id = institution.release_id
@@ -602,73 +633,158 @@ export class CatalogSqlApi {
         ON city_record.release_id = city.release_id
        AND city_record.record_id = city.location_id
       WHERE ${conditions.join('\n        AND ')}
-      ORDER BY COALESCE(record.slug, ''), record.record_id
+      ORDER BY sort_slug, record.record_id
       LIMIT ?
     `, values)
+    return { rows, filteredConditions, filteredValues, context }
   }
 
   private async mapInstitutions(rows: InstitutionRow[]) {
-    const decorations = await loadRecordDecorations(
-      this.database,
-      this.release.id,
-      rows.flatMap((row) => [row.record_id, row.city_id]),
-    )
-    return rows.map((row): InstitutionDto => ({
-      type: 'institution',
-      id: row.record_id,
-      slug: row.sort_slug || null,
-      attributes: {
-        name: decorations.localized(row.record_id, 'name') ?? {},
-        summary: decorations.localized(row.record_id, 'summary'),
-        institutionType: row.institution_type,
-        officialUrl: row.official_url,
-        admissionsUrl: row.admissions_url,
-        featured: row.featured === 1,
-      },
-      relationships: {
-        location: {
-          id: row.city_id,
-          slug: row.city_slug,
-          name: decorations.localized(row.city_id, 'name') ?? {},
-          countryCode: row.country_code,
-          regionCode: row.region_code,
+    const institutionIds = rows.map((row) => row.record_id)
+    const cityIds = rows.map((row) => row.city_id)
+    const slots = institutionIds.length > 0 ? placeholders(institutionIds.length) : ''
+    const [institutionDecorations, cityDecorations, disciplines] = await Promise.all([
+      loadRecordDecorations(this.database, this.release.id, institutionIds),
+      loadRecordDecorations(this.database, this.release.id, cityIds),
+      institutionIds.length === 0
+        ? Promise.resolve([] as InstitutionCodeRow[])
+        : queryAll<InstitutionCodeRow>(this.database, `
+            SELECT DISTINCT
+              program.institution_id,
+              discipline.discipline_code AS code
+            FROM current_programs AS program
+            JOIN current_program_disciplines AS discipline
+              ON discipline.release_id = program.release_id
+             AND discipline.program_id = program.program_id
+            WHERE program.release_id = ?
+              AND program.institution_id IN (${slots})
+            ORDER BY program.institution_id, discipline.discipline_code
+          `, [this.release.id, ...institutionIds]),
+    ])
+    return rows.map((row): InstitutionDto => {
+      const disciplineCodes = disciplines
+        .filter((item) => item.institution_id === row.record_id)
+        .map((item) => item.code)
+      return {
+        type: 'institution',
+        id: row.record_id,
+        slug: row.slug,
+        attributes: {
+          name: institutionDecorations.localized(row.record_id, 'name') ?? {},
+          summary: institutionDecorations.localized(row.record_id, 'summary'),
+          institutionType: row.institution_type,
+          disciplineCodes,
+          officialUrl: row.official_url,
+          admissionsUrl: institutionDecorations.value<string>(
+            row.record_id,
+            ['admissionsUrl', 'admissions_url'],
+          ),
+          featured: row.featured === 1,
         },
-        programs: { count: Number(row.program_count) },
-        scholarships: { count: Number(row.scholarship_count) },
-      },
-      sources: decorations.sources(row.record_id),
-      fieldMeta: {
-        name: identityMeta(decorations, row, 'name'),
-        summary: decorations.meta(row, ['summary', 'localized.summary']),
-        institutionType: identityMeta(decorations, row, 'institution_type'),
-        officialUrl: identityMeta(decorations, row, 'official_url'),
-        admissionsUrl: identityMeta(decorations, row, 'admissions_url'),
-        featured: identityMeta(decorations, row, 'featured'),
-        location: identityMeta(decorations, row, 'city_id'),
-        programCount: identityMeta(decorations, row, 'program_count'),
-        scholarshipCount: identityMeta(decorations, row, 'scholarship_count'),
-      },
-    }))
+        relationships: {
+          location: {
+            id: row.city_id,
+            slug: row.city_slug,
+            name: cityDecorations.localized(row.city_id, 'name') ?? {},
+            countryCode: row.country_code,
+            regionCode: row.region_code,
+          },
+          programs: { count: Number(row.program_count) },
+          scholarships: { count: Number(row.scholarship_count) },
+        },
+        sources: institutionDecorations.sources(row.record_id),
+        fieldMeta: {
+          name: identityMeta(institutionDecorations, row, 'name'),
+          summary: institutionDecorations.meta(row, ['summary', 'localized.summary']),
+          institutionType: identityMeta(institutionDecorations, row, 'institution_type'),
+          disciplineCodes: identityMeta(institutionDecorations, row, 'disciplineCodes'),
+          officialUrl: identityMeta(institutionDecorations, row, 'official_url'),
+          admissionsUrl: institutionDecorations.meta(
+            row,
+            ['admissionsUrl', 'admissions_url'],
+          ),
+          featured: identityMeta(institutionDecorations, row, 'featured'),
+          location: identityMeta(institutionDecorations, row, 'city_id'),
+          programCount: identityMeta(institutionDecorations, row, 'program_count'),
+          scholarshipCount: identityMeta(institutionDecorations, row, 'scholarship_count'),
+        },
+      }
+    })
+  }
+
+  private async institutionListMetadata(
+    conditions: readonly string[],
+    values: readonly unknown[],
+  ) {
+    const where = conditions.join('\n        AND ')
+    const joins = `
+      FROM current_institutions AS institution
+      JOIN current_organizations AS organization
+        ON organization.release_id = institution.release_id
+       AND organization.organization_id = institution.institution_id
+      JOIN current_catalog_records AS record
+        ON record.release_id = institution.release_id
+       AND record.record_id = institution.institution_id
+      JOIN current_locations AS city
+        ON city.release_id = institution.release_id
+       AND city.location_id = institution.city_id
+      JOIN current_catalog_records AS city_record
+        ON city_record.release_id = city.release_id
+       AND city_record.record_id = city.location_id
+    `
+    const [count, cities] = await Promise.all([
+      queryFirst<CountRow>(this.database, `
+        SELECT COUNT(*) AS total
+        ${joins}
+        WHERE ${where}
+      `, [...values]),
+      queryAll<FacetRow>(this.database, `
+        SELECT DISTINCT
+          city.location_id AS option_id,
+          city_record.slug AS option_slug,
+          localized.locale,
+          localized.text_value
+        ${joins}
+        LEFT JOIN current_localized_content AS localized
+          ON localized.release_id = city.release_id
+         AND localized.record_id = city.location_id
+         AND localized.field_name = 'name'
+        WHERE ${where}
+        ORDER BY option_slug, option_id, localized.locale
+      `, [...values]),
+    ])
+    return {
+      total: Number(count?.total ?? 0),
+      facets: { cities: facetOptions(cities) },
+    }
   }
 
   async listInstitutions(query: InstitutionQuery = {}) {
     const limit = pageLimit(query.limit)
+    const selected = await this.selectInstitutions(query)
     const page = pagination(
-      await this.selectInstitutions(query),
+      selected.rows,
       limit,
       'institutions',
       this.release.id,
+      selected.context,
     )
-    const data = await this.mapInstitutions(page.items)
-    return this.envelope(data, { pageSize: data.length, nextCursor: page.nextCursor })
+    const [data, metadata] = await Promise.all([
+      this.mapInstitutions(page.items),
+      this.institutionListMetadata(selected.filteredConditions, selected.filteredValues),
+    ])
+    return this.envelope(data, {
+      pageSize: data.length,
+      nextCursor: page.nextCursor,
+      ...metadata,
+    })
   }
 
   async getInstitution(slug: string) {
-    const row = (await this.selectInstitutions({}, slug))[0]
+    const row = (await this.selectInstitutions({}, slug)).rows[0]
     if (!row) return null
     return this.envelope((await this.mapInstitutions([row]))[0]!)
   }
-
   private async selectPrograms(query: ProgramQuery, exactSlug?: string) {
     const conditions = ['record.release_id = ?']
     const values: unknown[] = [this.release.id]

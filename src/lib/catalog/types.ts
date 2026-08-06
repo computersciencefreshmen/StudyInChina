@@ -1,5 +1,6 @@
 import type {
   AdmissionCycle,
+  City,
   DataBundle,
   LocalizedText,
   Program,
@@ -37,6 +38,45 @@ export type CatalogListPage<T, Facets> = {
   facets: Facets
   release: CatalogRelease | null
 }
+
+export type CatalogInstitutionListSort =
+  | 'default'
+  | 'name'
+  | 'programs-desc'
+  | 'scholarships-desc'
+
+export type CatalogInstitutionListQuery = {
+  q?: string
+  city?: string
+  region?: string
+  discipline?: string
+  sort?: CatalogInstitutionListSort
+  cursor?: string
+  limit?: number
+  today?: string
+}
+
+export type CatalogInstitutionCity = Pick<
+  City,
+  'id' | 'slug' | 'name' | 'region'
+>
+
+export type CatalogInstitutionListItem = {
+  institution: University
+  city: CatalogInstitutionCity | null
+  programCount: number
+  scholarshipCount: number
+  disciplines: string[]
+}
+
+export type CatalogInstitutionListFacets = {
+  cities: CatalogListOption[]
+}
+
+export type CatalogInstitutionListPage = CatalogListPage<
+  CatalogInstitutionListItem,
+  CatalogInstitutionListFacets
+>
 
 export type CatalogProgramListQuery = {
   q?: string
@@ -128,6 +168,7 @@ export interface CatalogRepository {
   readonly mode: CatalogBackendMode
   getBundle(): Promise<DataBundle>
   getRelease(): Promise<CatalogRelease>
+  listInstitutions(query?: CatalogInstitutionListQuery): Promise<CatalogInstitutionListPage>
   listPrograms(query?: CatalogProgramListQuery): Promise<CatalogProgramListPage>
   listScholarships(query?: CatalogScholarshipListQuery): Promise<CatalogScholarshipListPage>
 }

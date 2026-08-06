@@ -3,6 +3,8 @@ import {
   CATALOG_COLLECTIONS,
   type CatalogBackendMode,
   type CatalogCollection,
+  type CatalogInstitutionListPage,
+  type CatalogInstitutionListQuery,
   type CatalogProgramListPage,
   type CatalogProgramListQuery,
   type CatalogRelease,
@@ -18,6 +20,7 @@ import {
 export type CatalogShadowOperation =
   | 'getBundle'
   | 'getRelease'
+  | 'listInstitutions'
   | 'listPrograms'
   | 'listScholarships'
 export type CatalogShadowStatus = 'match' | 'different' | 'shadow-error'
@@ -251,7 +254,7 @@ function compareRelease(
 }
 
 function comparableListPage(
-  page: CatalogProgramListPage | CatalogScholarshipListPage,
+  page: CatalogInstitutionListPage | CatalogProgramListPage | CatalogScholarshipListPage,
 ): unknown {
   const facets = Object.fromEntries(
     Object.entries(page.facets).map(([name, values]) => [
@@ -267,9 +270,9 @@ function comparableListPage(
 }
 
 function compareListPage(
-  scope: 'programs' | 'scholarships',
-  primary: CatalogProgramListPage | CatalogScholarshipListPage,
-  shadow: CatalogProgramListPage | CatalogScholarshipListPage,
+  scope: 'universities' | 'programs' | 'scholarships',
+  primary: CatalogInstitutionListPage | CatalogProgramListPage | CatalogScholarshipListPage,
+  shadow: CatalogInstitutionListPage | CatalogProgramListPage | CatalogScholarshipListPage,
   maxDifferences: number,
 ): DifferenceCollector {
   const collector = new DifferenceCollector(maxDifferences)
@@ -286,7 +289,7 @@ function compareListPage(
 
 function cursorInputs(
   cursor: string | undefined,
-  resource: 'programs' | 'scholarships',
+  resource: 'institutions' | 'programs' | 'scholarships',
 ): { primary?: string; shadow?: string } {
   if (!cursor) return {}
   try {
@@ -302,7 +305,7 @@ function cursorInputs(
 }
 
 function combinedCursor(
-  resource: 'programs' | 'scholarships',
+  resource: 'institutions' | 'programs' | 'scholarships',
   primary: string | null,
   shadow: string | null,
 ): string | null {
@@ -372,6 +375,39 @@ export class ShadowCatalogRepository implements CatalogRepository {
     )
     return primaryResult.value
   }
+
+  async listInstitutions(
+    query: CatalogInstitutionListQuery = {},
+  ): Promise<CatalogInstitutionListPage> {
+    const cursors = cursorInputs(query.cursor, 'institutions')
+    const [primaryResult, shadowResult] = await Promise.allSettled([
+      this.primary.listInstitutions({ ...query, cursor: cursors.primary }),
+      this.shadow.listInstitutions({ ...query, cursor: cursors.shadow }),
+    ])
+    if (primaryResult.status === 'rejected') throw primaryResult.reason
+
+    if (shadowResult.status === 'rejected') {
+      await this.recordShadowError('listInstitutions', shadowResult.reason)
+      return {
+        ...primaryResult.value,
+        nextCursor: combinedCursor('institutions', primaryResult.value.nextCursor, null),
+      }
+    }
+
+    await this.recordComparison(
+      'listInstitutions',
+      compareListPage('universities', primaryResult.value, shadowResult.value, this.maxDifferences),
+    )
+    return {
+      ...primaryResult.value,
+      nextCursor: combinedCursor(
+        'institutions',
+        primaryResult.value.nextCursor,
+        shadowResult.value.nextCursor,
+      ),
+    }
+  }
+
 
   async listPrograms(
     query: CatalogProgramListQuery = {},

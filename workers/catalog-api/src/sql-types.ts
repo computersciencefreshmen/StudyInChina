@@ -93,8 +93,9 @@ export type InstitutionDto = RecordDto<
     name: LocalizedValue
     summary: LocalizedValue | null
     institutionType: string
+    disciplineCodes: string[]
     officialUrl: string
-    admissionsUrl: string
+    admissionsUrl: string | null
     featured: boolean
   },
   {
@@ -271,6 +272,7 @@ export type InstitutionQuery = ListOptions & {
   city?: string
   region?: string
   discipline?: string
+  sort?: 'default' | 'name' | 'programs-desc' | 'scholarships-desc'
 }
 
 export type ProgramQuery = ListOptions & {

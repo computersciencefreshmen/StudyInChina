@@ -258,6 +258,275 @@ describe('Catalog D1 normalized v1 API', () => {
     )).toBe(true)
   }, 30_000)
 
+  it('lists institutions with exact metadata, disciplines, sorting, and query-bound cursors', async () => {
+    const defaultResponse = await worker.fetch(
+      new Request('https://catalog.test/api/v1/institutions'),
+      environment,
+    )
+    const defaults = await defaultResponse.json() as ApiEnvelopeDto<InstitutionDto[]>
+    expect(defaultResponse.status).toBe(200)
+    expect(defaults.data).toHaveLength(24)
+    expect(defaults.meta.total).toBeGreaterThan(defaults.data.length)
+    expect(defaults.meta.facets?.cities?.length).toBeGreaterThan(1)
+    expect(defaults.meta.nextCursor).toEqual(expect.any(String))
+    expect(defaults.data[0]!.attributes.disciplineCodes).toEqual(expect.any(Array))
+    expect(defaults.data[0]!.fieldMeta.disciplineCodes.status).toBe('known')
+
+    const secondResponse = await worker.fetch(
+      new Request(
+        `https://catalog.test/api/v1/institutions?sort=default&cursor=${encodeURIComponent(defaults.meta.nextCursor!)}`,
+      ),
+      environment,
+    )
+    const second = await secondResponse.json() as ApiEnvelopeDto<InstitutionDto[]>
+    expect(secondResponse.status).toBe(200)
+    expect(second.data.map((item) => item.id)).not.toContain(defaults.data[0]!.id)
+
+    const mismatchedCursor = await worker.fetch(
+      new Request(
+        `https://catalog.test/api/v1/institutions?sort=programs-desc&cursor=${encodeURIComponent(defaults.meta.nextCursor!)}`,
+      ),
+      environment,
+    )
+    expect(mismatchedCursor.status).toBe(400)
+
+    const programSortResponse = await worker.fetch(
+      new Request('https://catalog.test/api/v1/institutions?sort=programs-desc&limit=100'),
+      environment,
+    )
+    const programSort = await programSortResponse.json() as ApiEnvelopeDto<InstitutionDto[]>
+    expect(programSortResponse.status).toBe(200)
+    const programCounts = programSort.data.map((item) => item.relationships.programs.count)
+    expect(programCounts).toEqual([...programCounts].sort((left, right) => right - left))
+    expect(programSort.data.every((item) =>
+      item.slug !== null && /^[a-z0-9][a-z0-9-]*$/u.test(item.slug)
+    )).toBe(true)
+
+    const scholarshipSortResponse = await worker.fetch(
+      new Request('https://catalog.test/api/v1/institutions?sort=scholarships-desc&limit=100'),
+      environment,
+    )
+    const scholarshipSort = await scholarshipSortResponse.json() as ApiEnvelopeDto<InstitutionDto[]>
+    const scholarshipCounts = scholarshipSort.data.map(
+      (item) => item.relationships.scholarships.count,
+    )
+    expect(scholarshipSortResponse.status).toBe(200)
+    expect(scholarshipCounts).toEqual(
+      [...scholarshipCounts].sort((left, right) => right - left),
+    )
+
+    const candidate = database.prepare(`
+      SELECT
+        institution.institution_id,
+        city_record.slug AS city_slug,
+        city.region_code,
+        discipline.discipline_code
+      FROM current_institutions AS institution
+      JOIN current_locations AS city
+        ON city.release_id = institution.release_id
+       AND city.location_id = institution.city_id
+      JOIN current_catalog_records AS city_record
+        ON city_record.release_id = city.release_id
+       AND city_record.record_id = city.location_id
+      JOIN current_programs AS program
+        ON program.release_id = institution.release_id
+       AND program.institution_id = institution.institution_id
+      JOIN current_program_disciplines AS discipline
+        ON discipline.release_id = program.release_id
+       AND discipline.program_id = program.program_id
+      WHERE city_record.slug IS NOT NULL AND city.region_code IS NOT NULL
+      ORDER BY institution.institution_id, discipline.discipline_code
+      LIMIT 1
+    `).get() as {
+      institution_id: string
+      city_slug: string
+      region_code: string
+      discipline_code: string
+    }
+    const filteredResponse = await worker.fetch(
+      new Request(
+        `https://catalog.test/api/v1/institutions?city=${candidate.city_slug}&region=${candidate.region_code}&discipline=${candidate.discipline_code}&limit=100`,
+      ),
+      environment,
+    )
+    const filtered = await filteredResponse.json() as ApiEnvelopeDto<InstitutionDto[]>
+    expect(filteredResponse.status).toBe(200)
+    expect(filtered.data.map((item) => item.id)).toContain(candidate.institution_id)
+    expect(filtered.data.every((item) =>
+      item.relationships.location.slug === candidate.city_slug
+      && item.relationships.location.regionCode === candidate.region_code
+      && item.attributes.disciplineCodes.includes(candidate.discipline_code)
+    )).toBe(true)
+    expect(filtered.meta.total).toBe(filtered.data.length)
+    expect(filtered.meta.facets?.cities?.map((item) => item.value)).toEqual([
+      candidate.city_slug,
+    ])
+
+    const invalidSort = await worker.fetch(
+      new Request('https://catalog.test/api/v1/institutions?sort=featured'),
+      environment,
+    )
+    expect(invalidSort.status).toBe(400)
+    expect(r2Reads).toBe(0)
+  }, 30_000)
+
+  it('publishes current institution summaries and withholds all 14 missing admissions URLs', async () => {
+    const missingAdmissions = readLegacyBundle().universities.filter(
+      (university) => university.admissionsUrl === null,
+    )
+    expect(missingAdmissions).toHaveLength(14)
+
+    const currentSummary = database.prepare(`
+      SELECT record.slug, localized.locale, localized.text_value
+      FROM current_institutions AS institution
+      JOIN current_catalog_records AS record
+        ON record.release_id = institution.release_id
+       AND record.record_id = institution.institution_id
+      JOIN current_localized_content AS localized
+        ON localized.release_id = institution.release_id
+       AND localized.record_id = institution.institution_id
+       AND localized.field_name = 'summary'
+      WHERE record.slug IS NOT NULL
+      ORDER BY record.slug, localized.locale
+      LIMIT 1
+    `).get() as { slug: string; locale: string; text_value: string }
+    const summaryResponse = await worker.fetch(
+      new Request(`https://catalog.test/api/v1/institutions/${currentSummary.slug}`),
+      environment,
+    )
+    const summary = await summaryResponse.json() as ApiEnvelopeDto<InstitutionDto>
+    expect(summaryResponse.status).toBe(200)
+    expect(summary.data.attributes.summary?.[currentSummary.locale]).toBe(currentSummary.text_value)
+    expect(summary.data.fieldMeta.summary.status).toBe('known')
+
+    const allInstitutions: InstitutionDto[] = []
+    let cursor: string | null = null
+    do {
+      const url = new URL('https://catalog.test/api/v1/institutions')
+      url.searchParams.set('limit', '100')
+      if (cursor) url.searchParams.set('cursor', cursor)
+      const response = await worker.fetch(new Request(url), environment)
+      const page = await response.json() as ApiEnvelopeDto<InstitutionDto[]>
+      expect(response.status).toBe(200)
+      allInstitutions.push(...page.data)
+      cursor = page.meta.nextCursor ?? null
+    } while (cursor)
+
+    const missingIds = new Set(missingAdmissions.map((university) => university.id))
+    const publiclyEligibleMissing = missingAdmissions.filter(
+      (university) => university.status === 'verified' || university.status === 'stale',
+    )
+    const publishedMissing = allInstitutions.filter(
+      (institution) => missingIds.has(institution.id),
+    )
+    expect(publishedMissing).toHaveLength(publiclyEligibleMissing.length)
+    expect(publishedMissing.every((institution) =>
+      institution.attributes.admissionsUrl === null
+      && institution.fieldMeta.admissionsUrl.status === 'officially_not_announced'
+    )).toBe(true)
+
+    const hiddenMissing = missingAdmissions.filter(
+      (university) => !publiclyEligibleMissing.some((item) => item.id === university.id),
+    )
+    for (const university of hiddenMissing) {
+      const hiddenResponse = await worker.fetch(
+        new Request(`https://catalog.test/api/v1/institutions/${university.slug}`),
+        environment,
+      )
+      expect(hiddenResponse.status).toBe(404)
+    }
+
+    const detailResponse = await worker.fetch(
+      new Request(`https://catalog.test/api/v1/institutions/${publishedMissing[0]!.slug!}`),
+      environment,
+    )
+    const detail = await detailResponse.json() as ApiEnvelopeDto<InstitutionDto>
+    expect(detailResponse.status).toBe(200)
+    expect(detail.data.attributes.officialUrl).toMatch(/^https:\/\//u)
+    expect(detail.data.attributes.admissionsUrl).toBeNull()
+    expect(detail.data.fieldMeta.admissionsUrl.status).toBe('officially_not_announced')
+    expect(r2Reads).toBe(0)
+  }, 30_000)
+
+  it('restricts institution search to normalized name-title tokens', async () => {
+    database.exec('BEGIN')
+    try {
+      const candidate = database.prepare(`
+        SELECT
+          institution.institution_id,
+          organization_search.search_rowid AS organization_search_rowid,
+          organization_search.title,
+          program_search.search_rowid AS program_search_rowid
+        FROM current_institutions AS institution
+        JOIN current_search_documents AS organization_search
+          ON organization_search.release_id = institution.release_id
+         AND organization_search.record_id = institution.institution_id
+         AND organization_search.record_kind = 'organization'
+         AND organization_search.locale = 'en'
+        JOIN current_programs AS program
+          ON program.release_id = institution.release_id
+         AND program.institution_id = institution.institution_id
+        JOIN current_search_documents AS program_search
+          ON program_search.release_id = program.release_id
+         AND program_search.record_id = program.program_id
+         AND program_search.record_kind = 'program'
+         AND program_search.locale = 'en'
+        ORDER BY institution.institution_id, program.program_id
+        LIMIT 1
+      `).get() as {
+        institution_id: string
+        organization_search_rowid: number
+        title: string
+        program_search_rowid: number
+      }
+      database.prepare(`
+        UPDATE search_documents
+        SET body = 'StaleSummaryLeakCanary', filter_text = 'CityNameLeakCanary'
+        WHERE search_rowid = ?
+      `).run(candidate.organization_search_rowid)
+      database.prepare(`
+        UPDATE record_field_status
+        SET field_status = 'stale', value_json = NULL, review_after = '2020-01-01'
+        WHERE record_id = ? AND field_path = 'summary'
+      `).run(candidate.institution_id)
+      database.prepare(`
+        UPDATE search_documents
+        SET title = 'ProgramNameLeakCanary'
+        WHERE search_rowid = ?
+      `).run(candidate.program_search_rowid)
+
+      const search = async (query: string) => {
+        const response = await worker.fetch(
+          new Request(`https://catalog.test/api/v1/institutions?q=${encodeURIComponent(query)}`),
+          environment,
+        )
+        return {
+          response,
+          envelope: await response.json() as ApiEnvelopeDto<InstitutionDto[]>,
+        }
+      }
+      const nameResult = await search(candidate.title)
+      expect(nameResult.response.status).toBe(200)
+      expect(nameResult.envelope.data.map((institution) => institution.id))
+        .toContain(candidate.institution_id)
+
+      for (const query of [
+        'StaleSummaryLeakCanary',
+        'CityNameLeakCanary',
+        'ProgramNameLeakCanary',
+      ]) {
+        const result = await search(query)
+        expect(result.response.status).toBe(200)
+        expect(result.envelope.data).toEqual([])
+      }
+
+      const tooManyTerms = await search(Array.from({ length: 21 }, () => 'term').join(' '))
+      expect(tooManyTerms.response.status).toBe(400)
+      expect(r2Reads).toBe(0)
+    } finally {
+      database.exec('ROLLBACK')
+    }
+  }, 30_000)
   it('serves normalized institution, program-cycle, and scholarship projections from D1', async () => {
     const institutionResponse = await worker.fetch(
       new Request('https://catalog.test/api/v1/institutions?limit=1'),

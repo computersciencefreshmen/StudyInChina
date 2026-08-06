@@ -52,6 +52,7 @@ export type ProgramType =
   | 'other'
 export type InstitutionRecord = Omit<University, 'summary'> & {
   summary: University['summary'] | null
+  disciplines: string[]
   city: Pick<City, 'id' | 'slug' | 'name' | 'province' | 'region'> | null
   programCount: number
   scholarshipCount: number
@@ -144,10 +145,19 @@ export type ScholarshipCycleRecord = {
   fieldMeta: Record<string, FieldMeta>
 }
 
+export type ApiFacetOption = {
+  value: string
+  name: City['name']
+}
+
 export type ApiMeta = {
   release: ReleaseInfo
   pageSize?: number
   nextCursor?: string | null
+  total?: number
+  facets?: {
+    cities?: ApiFacetOption[]
+  }
   notice: string
 }
 

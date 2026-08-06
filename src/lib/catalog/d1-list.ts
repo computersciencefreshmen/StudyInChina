@@ -15,6 +15,9 @@ import type {
 import { parseCatalogReleaseInfo } from './release'
 import {
   CatalogRepositoryError,
+  type CatalogInstitutionCity,
+  type CatalogInstitutionListItem,
+  type CatalogInstitutionListPage,
   type CatalogListOption,
   type CatalogProgramListItem,
   type CatalogProgramListPage,
@@ -69,11 +72,14 @@ function dateOnly(value: unknown, fallback: string): string {
 function fieldAudit(value: UnknownRecord, today: string) {
   const fieldMeta = isObject(value.fieldMeta) ? value.fieldMeta : {}
   const name = isObject(fieldMeta.name) ? fieldMeta.name : {}
+  const verifiedAt = dateOnly(value.verifiedAt ?? name.verifiedAt ?? name.checkedAt, today)
+  const reviewAfter = dateOnly(value.reviewAfter ?? name.reviewAfter, today)
+  const stale = value.status === 'stale' || name.status === 'stale' || reviewAfter < today
   return {
-    sourceIds: sourceIds(value),
-    verifiedAt: dateOnly(value.verifiedAt ?? name.verifiedAt ?? name.checkedAt, today),
-    reviewAfter: dateOnly(value.reviewAfter ?? name.reviewAfter, today),
-    status: value.status === 'stale' ? 'stale' as const : 'verified' as const,
+    sourceIds: sourceIds(value).sort(),
+    verifiedAt,
+    reviewAfter,
+    status: stale ? 'stale' as const : 'verified' as const,
   }
 }
 
@@ -381,6 +387,130 @@ function pageMeta(meta: UnknownRecord) {
   const release = meta.release === undefined ? null : parseCatalogReleaseInfo(meta.release)
   return { nextCursor, total, release }
 }
+
+function regionValue(value: unknown): University['region'] {
+  return value === 'north'
+    || value === 'northeast'
+    || value === 'east'
+    || value === 'south'
+    || value === 'central'
+    || value === 'southwest'
+    || value === 'northwest'
+    ? value
+    : null
+}
+
+function relationshipCount(
+  value: UnknownRecord,
+  relationshipName: 'programs' | 'scholarships',
+  fallbackName: 'programCount' | 'scholarshipCount',
+): number {
+  const relationships = isObject(value.relationships) ? value.relationships : {}
+  const relationship = isObject(relationships[relationshipName])
+    ? relationships[relationshipName]
+    : {}
+  const count = relationship.count ?? value[fallbackName]
+  if (!Number.isInteger(count) || (count as number) < 0) {
+    invalid(`Institution list item has an invalid ${fallbackName}.`)
+  }
+  return count as number
+}
+
+function institutionDisciplines(value: UnknownRecord): string[] {
+  const attributes = isObject(value.attributes) ? value.attributes : {}
+  const candidate = Array.isArray(attributes.disciplineCodes)
+    ? attributes.disciplineCodes
+    : Array.isArray(value.disciplines)
+      ? value.disciplines
+      : []
+  return [...new Set(candidate.filter((item): item is string => (
+    typeof item === 'string' && item.length > 0
+  )))].sort()
+}
+
+function normalizeInstitutionCity(value: unknown): CatalogInstitutionCity | null {
+  if (value === null || value === undefined) return null
+  if (!isObject(value)) invalid('Institution location relationship is invalid.')
+  const id = stringValue(value.id)
+  const slug = stringValue(value.slug) ?? id
+  if (!id || !slug) invalid('Institution location identity is invalid.')
+  return {
+    id,
+    slug,
+    name: localized(value.name, slug),
+    region: regionValue(value.region ?? value.regionCode),
+  }
+}
+
+function normalizeInstitution(value: unknown, today: string): CatalogInstitutionListItem {
+  if (!isObject(value)) invalid('Catalog API returned an invalid institution list item.')
+  const nestedInstitution = isObject(value.institution) ? value.institution : value
+  const parsedInstitution = universitySchema.safeParse(nestedInstitution)
+  const relationships = isObject(value.relationships) ? value.relationships : {}
+  const cityValue = value.city ?? relationships.location
+
+  if (parsedInstitution.success) {
+    return {
+      institution: parsedInstitution.data,
+      city: normalizeInstitutionCity(cityValue),
+      programCount: relationshipCount(value, 'programs', 'programCount'),
+      scholarshipCount: relationshipCount(value, 'scholarships', 'scholarshipCount'),
+      disciplines: institutionDisciplines(value),
+    }
+  }
+
+  const attributes = isObject(value.attributes) ? value.attributes : value
+  const city = normalizeInstitutionCity(cityValue)
+  const id = stringValue(value.id)
+  const slug = stringValue(value.slug)
+  const officialUrl = safeHttps(attributes.officialUrl)
+  if (!id || !slug || !/^[a-z0-9-]+$/u.test(slug) || !officialUrl || !city) {
+    invalid('Catalog API institution identity is incomplete.')
+  }
+  const summary = attributes.summary === null || attributes.summary === undefined
+    ? null
+    : localized(attributes.summary, slug)
+  const institution = universitySchema.parse({
+    ...fieldAudit(value, today),
+    id,
+    slug,
+    name: localized(attributes.name, slug),
+    cityId: city.id,
+    region: regionValue(attributes.region ?? city.region),
+    officialUrl,
+    admissionsUrl: safeHttps(attributes.admissionsUrl),
+    summary,
+    featured: attributes.featured === true,
+  })
+  return {
+    institution,
+    city,
+    programCount: relationshipCount(value, 'programs', 'programCount'),
+    scholarshipCount: relationshipCount(value, 'scholarships', 'scholarshipCount'),
+    disciplines: institutionDisciplines(value),
+  }
+}
+
+export function parseD1InstitutionList(
+  payload: unknown,
+  today: string,
+): CatalogInstitutionListPage {
+  const { rows, meta, facets } = envelopeParts(payload)
+  const items = rows.map((row) => normalizeInstitution(row, today))
+  const cities = Array.isArray(facets.cities)
+    ? facets.cities.flatMap((item) => option(item) ?? [])
+    : items.flatMap((item) => (
+      item.city ? [{ value: item.city.slug, name: item.city.name }] : []
+    ))
+  return {
+    items,
+    ...pageMeta(meta),
+    facets: {
+      cities: [...new Map(cities.map((item) => [item.value, item])).values()],
+    },
+  }
+}
+
 
 export function parseD1ProgramList(payload: unknown, today: string): CatalogProgramListPage {
   const { rows, meta, facets } = envelopeParts(payload)

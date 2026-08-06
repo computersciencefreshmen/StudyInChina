@@ -65,7 +65,9 @@ test('the public program catalogue excludes draft templates', async ({ page }) =
   await expect(search).toBeVisible()
   await expect(page.getByTestId('program-publication-note')).toHaveCount(0)
   expect(await page.locator('.record-card').count()).toBeGreaterThan(0)
-  await search.fill('Tsinghua University Computer Science and Technology')
+  await search.fill('Tsinghua University Business Administration')
+  await search.press('Enter')
+  await page.waitForURL(/q=Tsinghua\+University\+Business\+Administration/)
   await expect(page.locator('.record-card')).toHaveCount(0)
 })
 
@@ -92,7 +94,7 @@ test('a multi-cycle program promotes the next upcoming intake', async ({ page })
 })
 
 test('a draft program detail is not publicly routable', async ({ page }) => {
-  const response = await page.goto('/en/programs/tsinghua-university-computer-science-bachelor', { waitUntil: 'domcontentloaded' })
+  const response = await page.goto('/en/programs/tsinghua-university-business-administration-master', { waitUntil: 'domcontentloaded' })
 
   expect(response?.status()).toBe(404)
   await expect(page.locator('main')).toBeVisible()
