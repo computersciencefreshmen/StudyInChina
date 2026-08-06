@@ -395,6 +395,19 @@ export function scholarshipCatalogHref(
   page = filters.page,
 ): string {
   const params = new URLSearchParams()
+  let targetCursor = filters.cursor
+  let targetHistory = [...filters.cursorHistory]
+  if (page === filters.page + 1 && filters.nextCursor) {
+    targetHistory.push(filters.cursor || '~')
+    targetCursor = filters.nextCursor
+  } else if (page === filters.page - 1) {
+    const previous = targetHistory.pop()
+    targetCursor = previous && previous !== '~' ? previous : ''
+  } else if (page !== filters.page) {
+    targetCursor = ''
+    targetHistory = []
+  }
+
   const values: Array<[string, string]> = [
     ['q', filters.query],
     ['institution', filters.institution],
@@ -404,6 +417,8 @@ export function scholarshipCatalogHref(
     ['sort', filters.sort === 'default' ? '' : filters.sort],
   ]
   for (const [key, value] of values) if (value) params.set(key, value)
+  if (targetCursor) params.set('cursor', targetCursor)
+  if (targetHistory.length > 0) params.set('cursorHistory', targetHistory.join(','))
   if (page > 1) params.set('page', String(page))
   const query = params.toString()
   return `/${locale}/scholarships${query ? `?${query}` : ''}`

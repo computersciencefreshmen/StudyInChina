@@ -24,6 +24,12 @@ import {
   validateDoubleFirstClassRegistry,
   type DoubleFirstClassRegistry,
 } from './double-first-class-registry'
+import {
+  loadSourceReconciliations,
+  type ReconciledInstitution,
+  type ReconciledSourceCategory,
+} from './source-reconciliation'
+
 export const CURRENT_SOURCE_MANIFEST_COHORT_INPUTS = {
   registry: 'content/source-manifests/double-first-class/targets.v1.json',
   universities: 'content/data/universities.json',
@@ -33,10 +39,17 @@ export const CURRENT_SOURCE_MANIFEST_COHORT_INPUTS = {
   scholarships: 'content/data/scholarships.json',
 } as const
 
-export type SourceManifestCohortInputName =
+export const SOURCE_MANIFEST_COHORT_RECONCILIATION_DIRECTORY =
+  'content/source-registry/reconciliation'
+
+type SourceManifestCohortCatalogInputName =
   keyof typeof CURRENT_SOURCE_MANIFEST_COHORT_INPUTS
 
-const SOURCE_MANIFEST_COHORT_INPUT_ORDER: SourceManifestCohortInputName[] = [
+export type SourceManifestCohortInputName =
+  | SourceManifestCohortCatalogInputName
+  | `sourceReconciliation:${string}`
+
+const SOURCE_MANIFEST_COHORT_INPUT_ORDER: SourceManifestCohortCatalogInputName[] = [
   'registry',
   'universities',
   'sources',
@@ -160,6 +173,7 @@ export type BuildSourceManifestCohortInput = {
   sources: CatalogSourceInput[]
   programs: CatalogProgramInput[]
   admissionCycles: CatalogAdmissionCycleInput[]
+  sourceReconciliations: ReconciledInstitution[]
   scholarships: CatalogScholarshipInput[]
   checkedAt: string
 }
@@ -209,6 +223,8 @@ export type SourceManifestCohortGapReport = {
     officialTargets: number
     militaryExcluded: number
     eligibleTargets: number
+    catalogLinkedManifests: number
+    reconciliationFallbackManifests: number
     candidateManifests: number
     exactOfficialHttpsSources: number
     targetsWithoutCandidate: number
@@ -381,6 +397,134 @@ function addReconciliationCandidate(
   candidates.set(mapKey, existing)
 }
 
+function exactReconciliationSourceUrl(
+  category: ReconciledSourceCategory,
+): { url: string; host: string } {
+  const sourceUrl = category.status === 'verified_official'
+    ? category.officialUrl
+    : category.evidenceUrl
+  if (!sourceUrl) {
+    throw new Error(
+      `${category.sourceCategory} verified reconciliation is missing officialUrl`,
+    )
+  }
+  let parsed: URL
+  try {
+    parsed = new URL(sourceUrl)
+  } catch {
+    throw new Error(`${category.sourceCategory} reconciliation URL is invalid`)
+  }
+  if (
+    parsed.protocol !== 'https:'
+    || parsed.username
+    || parsed.password
+    || parsed.port
+    || !parsed.hostname
+  ) {
+    throw new Error(
+      `${category.sourceCategory} reconciliation URL must be credential-free HTTPS`,
+    )
+  }
+  return { url: sourceUrl, host: parsed.hostname.toLowerCase() }
+}
+
+function reconciliationFallbackSourceId(
+  institutionId: string,
+  sourceCategory: ReconciledSourceCategory['sourceCategory'],
+): string {
+  return manifestSourceId(
+    `source-reconciliation-${sourceCategory.replaceAll('_', '-')}`,
+    institutionId,
+  )
+}
+
+function buildReconciliationFallbackManifest(
+  institutionId: string,
+  officialNameZh: string,
+  checkedAt: string,
+  reconciliation: ReconciledInstitution,
+): SourceManifestV2 {
+  const sources = reconciliation.categories.map((category): SourceManifestV1 => {
+    const exact = exactReconciliationSourceUrl(category)
+    return {
+      version: 1,
+      id: reconciliationFallbackSourceId(institutionId, category.sourceCategory),
+      institutionId,
+      entityType: 'program',
+      sourceCategory: category.sourceCategory,
+      officialUrl: exact.url,
+      allowedHosts: [exact.host],
+      enabled: false,
+      schedule: {
+        intervalHours: category.sourceCategory.includes('scholarship') ? 168 : 720,
+      },
+      fetch: {},
+      robots: { mode: 'blocked' },
+      extraction: {
+        mode: 'rules-only',
+        schemaVersion: 'source-manifest-v2-reconciliation-fallback-v1',
+        fields: [{ path: 'candidateEvidence', type: 'object' }],
+      },
+    }
+  })
+  const sourceByCategory = new Map(
+    sources.map((source) => [source.sourceCategory, source]),
+  )
+  const reconciliationByCategory = new Map<
+    SourceCategory,
+    ReconciledSourceCategory
+  >(
+    reconciliation.categories.map((category) => [category.sourceCategory, category]),
+  )
+  const coverage: SourceManifestV2['coverage'] = SOURCE_CATEGORIES.map((sourceCategory) => {
+    const category = reconciliationByCategory.get(sourceCategory)
+    const source = sourceByCategory.get(sourceCategory)
+    if (!category || !source) {
+      return {
+        sourceCategory,
+        status: 'discovery_pending' as const,
+        note: 'This category is outside the validated three-category reconciliation fallback and still requires official-source discovery.',
+      }
+    }
+    const status = category.status === 'verified_official'
+      ? 'parser_pending' as const
+      : category.status
+    return {
+      sourceCategory,
+      status,
+      sourceIds: [source.id],
+      note: `Validated official reconciliation recorded ${category.status} on ${category.checkedAt}. The exact audit source remains disabled. ${category.note}`,
+    }
+  })
+  const auditSource = sourceByCategory.get('catalog_anchor') ?? sources[0]
+  if (!auditSource) {
+    throw new Error(`No reconciliation fallback source for ${officialNameZh}`)
+  }
+
+  return sourceManifestV2Schema.parse({
+    version: 2,
+    institutionId,
+    catalogStatus: 'existing',
+    manifestStatus: 'in_progress',
+    checkedAt,
+    officialHosts: [...new Set(sources.flatMap((source) => source.allowedHosts))].sort(),
+    sources,
+    coverage,
+    catalogReconciliation: {
+      scope: 'limited_official_catalog',
+      status: 'in_progress',
+      entries: [{
+        sourceId: auditSource.id,
+        officialKey: `audit-only:${institutionId}:international-catalog`,
+        officialName: `AUDIT ONLY - ${officialNameZh} institution-level international catalog`,
+        entityType: 'program',
+        status: 'pending',
+        note: 'Synthetic institution-level catalog audit placeholder; this is not a publishable program and must never be materialized as one.',
+      }],
+      note: 'Fallback candidate generated only from the exact validated official reconciliation registry. It is limited, disabled, pending review, and does not assert that a publishable international program exists.',
+    },
+  })
+}
 function fileNameForTarget(target: InstitutionTarget, institutionId: string): string {
   return `${String(target.ordinal).padStart(3, '0')}-${institutionId.replace(/^uni-/, '')}.v2.candidate.json`
 }
@@ -404,6 +548,20 @@ export function buildSourceManifestCohort(
       typeof program.id === 'string' ? [[program.id, program] as const] : []
     )),
   )
+  const sourceReconciliationByName = new Map<string, ReconciledInstitution>()
+  for (const reconciliation of input.sourceReconciliations) {
+    if (sourceReconciliationByName.has(reconciliation.institutionNameZh)) {
+      throw new Error(
+        `Duplicate reconciled institution ${reconciliation.institutionNameZh}`,
+      )
+    }
+    sourceReconciliationByName.set(
+      reconciliation.institutionNameZh,
+      reconciliation,
+    )
+  }
+  let catalogLinkedManifests = 0
+  let reconciliationFallbackManifests = 0
   const candidates: CandidateManifestFile[] = []
   const gaps: CohortGap[] = []
   const militaryExclusions: SourceManifestCohortGapReport['militaryExclusions'] = []
@@ -528,6 +686,43 @@ export function buildSourceManifestCohort(
           status: 'pending' as const,
         }]
       })
+    if (reconciliationEntries.length === 0) {
+      const officialReconciliation = sourceReconciliationByName.get(
+        target.officialNameZh,
+      )
+      if (officialReconciliation) {
+        const manifest = buildReconciliationFallbackManifest(
+          institutionId,
+          target.officialNameZh,
+          input.checkedAt,
+          officialReconciliation,
+        )
+        const mappedCategories = manifest.sources.map(
+          (source) => source.sourceCategory,
+        )
+        institutionCoverage.push({
+          targetId: target.targetId,
+          ordinal: target.ordinal,
+          officialNameZh: target.officialNameZh,
+          institutionId,
+          mappedSourceCount: manifest.sources.length,
+          reconciliationEntryCount: manifest.catalogReconciliation.entries.length,
+          mappedCategories,
+          discoveryPendingCategories: SOURCE_CATEGORIES.filter(
+            (category) => !mappedCategories.includes(category),
+          ),
+          rejectedSources: rejectedSources.sort(
+            (left, right) => left.sourceId.localeCompare(right.sourceId),
+          ),
+        })
+        candidates.push({
+          fileName: fileNameForTarget(target, institutionId),
+          manifest,
+        })
+        reconciliationFallbackManifests += 1
+        continue
+      }
+    }
     const sourcesByCategory = new Map<SourceCategory, string[]>()
     for (const source of manifestSources) {
       const ids = sourcesByCategory.get(source.sourceCategory) ?? []
@@ -592,6 +787,7 @@ export function buildSourceManifestCohort(
       fileName: fileNameForTarget(target, institutionId),
       manifest,
     })
+    catalogLinkedManifests += 1
   }
 
   const summary = {
@@ -599,6 +795,8 @@ export function buildSourceManifestCohort(
     militaryExcluded: militaryExclusions.length,
     eligibleTargets: input.registry.targets.length - militaryExclusions.length,
     candidateManifests: candidates.length,
+    catalogLinkedManifests,
+    reconciliationFallbackManifests,
     exactOfficialHttpsSources: candidates.reduce(
       (total, candidate) => total + candidate.manifest.sources.length,
       0,
@@ -611,7 +809,7 @@ export function buildSourceManifestCohort(
     cohortId: input.registry.cohort.id,
     checkedAt: input.checkedAt,
     policy: {
-      mapping: 'Only exact sourceIds already related by current university, program, admission-cycle, or scholarship records are eligible; publisher and institution names are never fuzzy-matched.',
+      mapping: 'Exact current catalog relationships are preferred. Only when no safe program or scholarship source exists may an exact-name record from the validated official reconciliation registry create a disabled audit-only fallback; fuzzy matching remains forbidden.',
       missingCoverage: 'Unmapped categories are discovery_pending with an explicit note.',
       officialAbsence: 'officially_not_provided is never inferred; it requires separate explicit official evidence.',
     },
@@ -633,7 +831,7 @@ function serializeJson(value: unknown): string {
 
 function readFingerprintedJson<T>(
   repositoryRoot: string,
-  name: SourceManifestCohortInputName,
+  name: SourceManifestCohortCatalogInputName,
 ): { value: T; fingerprint: SourceManifestCohortInputFingerprint } {
   const repositoryPath = CURRENT_SOURCE_MANIFEST_COHORT_INPUTS[name]
   const bytes = readFileSync(resolve(repositoryRoot, repositoryPath))
@@ -647,6 +845,47 @@ function readFingerprintedJson<T>(
     },
   }
 }
+function readSourceReconciliationInputs(
+  repositoryRoot: string,
+): {
+  value: ReconciledInstitution[]
+  fingerprints: SourceManifestCohortInputFingerprint[]
+} {
+  const directory = resolve(
+    repositoryRoot,
+    SOURCE_MANIFEST_COHORT_RECONCILIATION_DIRECTORY,
+  )
+  const entries = readdirSync(directory, { withFileTypes: true })
+    .filter((entry) => entry.name.endsWith('.v1.json'))
+    .sort((left, right) => left.name.localeCompare(right.name, 'en'))
+  if (entries.length === 0) {
+    throw new Error('Validated official reconciliation registry is empty')
+  }
+  const unsupported = entries.find((entry) => !entry.isFile())
+  if (unsupported) {
+    throw new Error(
+      `Reconciliation input must be a regular file: ${unsupported.name}`,
+    )
+  }
+  const fingerprints = entries.map((entry): SourceManifestCohortInputFingerprint => {
+    const repositoryPath = posix.join(
+      SOURCE_MANIFEST_COHORT_RECONCILIATION_DIRECTORY,
+      entry.name,
+    )
+    const bytes = readFileSync(resolve(repositoryRoot, repositoryPath))
+    return {
+      name: `sourceReconciliation:${entry.name}`,
+      repositoryPath,
+      sha256: sha256(bytes),
+      byteLength: bytes.byteLength,
+    }
+  })
+  return {
+    value: loadSourceReconciliations(directory),
+    fingerprints,
+  }
+}
+
 
 export function buildCurrentSourceManifestCohort(
   checkedAt: string,
@@ -670,6 +909,9 @@ export function buildCurrentSourceManifestCohort(
     repositoryRoot,
     'scholarships',
   )
+  const sourceReconciliations = readSourceReconciliationInputs(
+    repositoryRoot,
+  )
   const build = buildSourceManifestCohort({
     registry: validateDoubleFirstClassRegistry(registry.value) as DoubleFirstClassRegistry,
     universities: universities.value,
@@ -677,6 +919,7 @@ export function buildCurrentSourceManifestCohort(
     programs: programs.value,
     admissionCycles: admissionCycles.value,
     scholarships: scholarships.value,
+    sourceReconciliations: sourceReconciliations.value,
     checkedAt,
   })
   return {
@@ -688,6 +931,7 @@ export function buildCurrentSourceManifestCohort(
       programs.fingerprint,
       admissionCycles.fingerprint,
       scholarships.fingerprint,
+      ...sourceReconciliations.fingerprints,
     ],
   }
 }
@@ -741,25 +985,57 @@ function sortedInputFingerprints(
   inputFingerprints: SourceManifestCohortInputFingerprint[],
 ): SourceManifestCohortInputFingerprint[] {
   const byName = new Map(inputFingerprints.map((input) => [input.name, input]))
-  if (
-    inputFingerprints.length !== SOURCE_MANIFEST_COHORT_INPUT_ORDER.length
-    || byName.size !== SOURCE_MANIFEST_COHORT_INPUT_ORDER.length
-  ) {
-    throw new Error('Candidate artifact requires one fingerprint for every locked input')
+  if (byName.size !== inputFingerprints.length) {
+    throw new Error('Candidate artifact input fingerprints contain duplicate names')
   }
-  return SOURCE_MANIFEST_COHORT_INPUT_ORDER.map((name) => {
+  const validFingerprint = (input: SourceManifestCohortInputFingerprint): boolean => (
+    /^[a-f0-9]{64}$/u.test(input.sha256)
+    && Number.isSafeInteger(input.byteLength)
+    && input.byteLength > 0
+  )
+  const lockedInputs = SOURCE_MANIFEST_COHORT_INPUT_ORDER.map((name) => {
     const input = byName.get(name)
     if (
       !input
       || input.repositoryPath !== CURRENT_SOURCE_MANIFEST_COHORT_INPUTS[name]
-      || !/^[a-f0-9]{64}$/u.test(input.sha256)
-      || !Number.isSafeInteger(input.byteLength)
-      || input.byteLength <= 0
+      || !validFingerprint(input)
     ) {
       throw new Error('Invalid locked input fingerprint: ' + name)
     }
     return input
   })
+  const lockedNames = new Set<string>(SOURCE_MANIFEST_COHORT_INPUT_ORDER)
+  const unexpected = inputFingerprints.find((input) => (
+    !lockedNames.has(input.name)
+    && !input.name.startsWith('sourceReconciliation:')
+  ))
+  if (unexpected) {
+    throw new Error('Unexpected candidate artifact input: ' + unexpected.name)
+  }
+  const reconciliationInputs = inputFingerprints
+    .filter((input) => input.name.startsWith('sourceReconciliation:'))
+    .sort((left, right) => left.name.localeCompare(right.name, 'en'))
+  if (reconciliationInputs.length === 0) {
+    throw new Error('Candidate artifact requires reconciliation input fingerprints')
+  }
+  const repositoryPaths = new Set(lockedInputs.map((input) => input.repositoryPath))
+  for (const input of reconciliationInputs) {
+    const fileName = input.name.slice('sourceReconciliation:'.length)
+    const expectedPath = posix.join(
+      SOURCE_MANIFEST_COHORT_RECONCILIATION_DIRECTORY,
+      fileName,
+    )
+    if (
+      !/^[a-z0-9][a-z0-9.-]*\.v1\.json$/u.test(fileName)
+      || input.repositoryPath !== expectedPath
+      || !validFingerprint(input)
+      || repositoryPaths.has(input.repositoryPath)
+    ) {
+      throw new Error('Invalid reconciliation input fingerprint: ' + input.name)
+    }
+    repositoryPaths.add(input.repositoryPath)
+  }
+  return [...lockedInputs, ...reconciliationInputs]
 }
 
 function assertSafeArtifactRelativePath(path: string): void {
@@ -989,7 +1265,7 @@ export function writeSourceManifestCohort(
     summary: build.summary,
     policy: {
       sourceOfTruth:
-        'Read-only current catalog JSON and the locked Ministry of Education target registry.',
+        'Read-only current catalog JSON, the locked Ministry of Education target registry, and the validated official reconciliation registry.',
       publication:
         'This bundle is review-only and must never be copied directly into content/source-manifests.',
       network:

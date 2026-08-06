@@ -16,6 +16,7 @@ import {
   type CatalogFetch,
   type CatalogRepository,
 } from '@/lib/catalog'
+import { getDataReleaseDate } from '@/lib/data/release'
 import { bundleSchema } from '@/lib/data/schema'
 import type { DataBundle } from '@/lib/data/types'
 
@@ -65,10 +66,11 @@ describe('CatalogRepository', () => {
   it('derives release metadata and all six record counts for JSON compatibility', async () => {
     const repository = createJsonCatalogRepository(() => copyBundle())
 
+    const expectedDataDate = getDataReleaseDate(allData)
     await expect(repository.getRelease()).resolves.toEqual({
-      id: 'json:2026-08-05',
-      dataDate: '2026-08-05',
-      generatedAt: '2026-08-05T00:00:00.000Z',
+      id: `json:${expectedDataDate}`,
+      dataDate: expectedDataDate,
+      generatedAt: `${expectedDataDate}T00:00:00.000Z`,
       recordCounts: getCatalogRecordCounts(allData),
     })
   })

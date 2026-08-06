@@ -35,6 +35,7 @@
     "pipeline:build-source-cohorts": "tsx scripts/ingestion/build-official-source-cohort-import.ts",
     "pipeline:build-source-manifest-candidates": "tsx scripts/ingestion/build-source-manifest-cohort.ts",
     "pipeline:verify-source-manifest-candidates": "tsx scripts/ingestion/build-source-manifest-cohort.ts --verify-artifact",
+    "pipeline:promote-source-manifest-candidate": "tsx scripts/ingestion/promote-source-manifest-candidate.ts",
     "pipeline:build-sources": "tsx scripts/ingestion/build-source-import.ts",
     "benchmark:catalog": "tsx scripts/catalog/benchmark-catalog.ts",
     "benchmark:catalog:smoke": "tsx scripts/catalog/benchmark-catalog.ts --institutions 25 --programs 1000 --cycles 3000 --iterations 50 --warmup 10 --output .benchmark/catalog-performance-smoke.json",

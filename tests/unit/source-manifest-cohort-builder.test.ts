@@ -1,4 +1,10 @@
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import {
+  mkdtempSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
@@ -7,6 +13,7 @@ import {
   buildCurrentSourceManifestCohort,
   buildSourceManifestCohort,
   CURRENT_SOURCE_MANIFEST_COHORT_INPUTS,
+  SOURCE_MANIFEST_COHORT_RECONCILIATION_DIRECTORY,
   dryRunSummary,
   parseSourceManifestCohortCli,
   verifySourceManifestCohortArtifact,
@@ -14,7 +21,6 @@ import {
   type BuildSourceManifestCohortInput,
   type SourceManifestCohortArtifactManifest,
   type SourceManifestCohortInputFingerprint,
-  type SourceManifestCohortInputName,
 } from '../../scripts/ingestion/build-source-manifest-cohort'
 
 const temporaryDirectories: string[] = []
@@ -132,6 +138,7 @@ function fixture(): BuildSourceManifestCohortInput {
       universityIds: ['uni-test-university'],
       sourceIds: ['src-test-scholarship'],
     }],
+    sourceReconciliations: [],
   }
 }
 
@@ -142,14 +149,22 @@ function temporaryDirectory(): string {
 }
 
 function inputFingerprints(): SourceManifestCohortInputFingerprint[] {
-  return (
-    Object.keys(CURRENT_SOURCE_MANIFEST_COHORT_INPUTS) as SourceManifestCohortInputName[]
-  ).map((name, index) => ({
+  const locked = (
+    Object.keys(CURRENT_SOURCE_MANIFEST_COHORT_INPUTS) as Array<
+      keyof typeof CURRENT_SOURCE_MANIFEST_COHORT_INPUTS
+    >
+  ).map((name, index): SourceManifestCohortInputFingerprint => ({
     name,
     repositoryPath: CURRENT_SOURCE_MANIFEST_COHORT_INPUTS[name],
     sha256: (index + 1).toString(16).padStart(64, '0'),
     byteLength: index + 1,
   }))
+  return [...locked, {
+    name: 'sourceReconciliation:test.v1.json',
+    repositoryPath: `${SOURCE_MANIFEST_COHORT_RECONCILIATION_DIRECTORY}/test.v1.json`,
+    sha256: '7'.padStart(64, '0'),
+    byteLength: 7,
+  }]
 }
 
 function readJson<T>(path: string): T {
@@ -195,6 +210,81 @@ describe('SourceManifestV2 cohort candidate builder', () => {
     )).toBe(false)
   })
 
+  it('uses exact official reconciliation only as an audit fallback', () => {
+    const input = fixture()
+    input.sourceReconciliations = [{
+      institutionNameZh: '缺口大学',
+      checkedAt: '2026-08-05',
+      categories: [
+        {
+          sourceCategory: 'international_admissions_home',
+          status: 'verified_official',
+          officialUrl: 'https://international.gap.edu.cn/admissions',
+          evidenceUrl: 'https://international.gap.edu.cn/admissions',
+          note: 'Official international admissions entry exists.',
+          checkedAt: '2026-08-05',
+        },
+        {
+          sourceCategory: 'catalog_anchor',
+          status: 'source_unavailable',
+          officialUrl: null,
+          evidenceUrl: 'https://www.gap.edu.cn/evidence/catalog-audit.pdf',
+          note: 'The official evidence records an unavailable catalog source.',
+          checkedAt: '2026-08-05',
+        },
+        {
+          sourceCategory: 'university_scholarship',
+          status: 'officially_not_provided',
+          officialUrl: null,
+          evidenceUrl: 'https://international.gap.edu.cn/admissions',
+          note: 'The audited official section does not provide a scholarship catalog.',
+          checkedAt: '2026-08-05',
+        },
+      ],
+    }]
+
+    const build = buildSourceManifestCohort(input)
+    const fallback = build.candidates.find(
+      (candidate) => candidate.manifest.institutionId === 'uni-gap-university',
+    )?.manifest
+
+    expect(build.summary).toMatchObject({
+      candidateManifests: 2,
+      catalogLinkedManifests: 1,
+      reconciliationFallbackManifests: 1,
+      exactOfficialHttpsSources: 6,
+      targetsWithoutCandidate: 1,
+    })
+    expect(fallback).toBeDefined()
+    expect(fallback?.manifestStatus).toBe('in_progress')
+    expect(fallback?.catalogReconciliation.scope).toBe('limited_official_catalog')
+    expect(fallback?.sources.map((source) => source.officialUrl)).toEqual([
+      'https://international.gap.edu.cn/admissions',
+      'https://www.gap.edu.cn/evidence/catalog-audit.pdf',
+      'https://international.gap.edu.cn/admissions',
+    ])
+    expect(fallback?.sources.every(
+      (source) => source.enabled === false && source.robots.mode === 'blocked',
+    )).toBe(true)
+    expect(fallback?.coverage.filter((entry) => (
+      entry.sourceCategory === 'international_admissions_home'
+      || entry.sourceCategory === 'catalog_anchor'
+      || entry.sourceCategory === 'university_scholarship'
+    )).map((entry) => [entry.sourceCategory, entry.status])).toEqual([
+      ['international_admissions_home', 'parser_pending'],
+      ['university_scholarship', 'officially_not_provided'],
+      ['catalog_anchor', 'source_unavailable'],
+    ])
+    expect(fallback?.catalogReconciliation.entries).toEqual([
+      expect.objectContaining({
+        officialKey: 'audit-only:uni-gap-university:international-catalog',
+        entityType: 'program',
+        status: 'pending',
+        note: expect.stringMatching(/not a publishable program/),
+      }),
+    ])
+  })
+
   it('reports military, mapping, source-quality, and no-safe-entity gaps explicitly', () => {
     const build = buildSourceManifestCohort(fixture())
 
@@ -203,6 +293,8 @@ describe('SourceManifestV2 cohort candidate builder', () => {
       militaryExcluded: 1,
       eligibleTargets: 3,
       candidateManifests: 1,
+      catalogLinkedManifests: 1,
+      reconciliationFallbackManifests: 0,
       exactOfficialHttpsSources: 3,
       targetsWithoutCandidate: 2,
     })
@@ -261,14 +353,29 @@ describe('SourceManifestV2 cohort candidate builder', () => {
       officialTargets: 147,
       militaryExcluded: 3,
       eligibleTargets: 144,
+      candidateManifests: 144,
+      catalogLinkedManifests: 140,
+      reconciliationFallbackManifests: 4,
+      exactOfficialHttpsSources: 980,
+      targetsWithoutCandidate: 0,
     })
     expect(
       current.build.summary.candidateManifests
       + current.build.summary.targetsWithoutCandidate,
     ).toBe(144)
-    expect(current.inputFingerprints.map((input) => input.repositoryPath)).toEqual(
-      Object.values(CURRENT_SOURCE_MANIFEST_COHORT_INPUTS),
-    )
+    expect(current.inputFingerprints.slice(0, 6).map(
+      (input) => input.repositoryPath,
+    )).toEqual(Object.values(CURRENT_SOURCE_MANIFEST_COHORT_INPUTS))
+    const reconciliationPaths = readdirSync(resolve(
+      SOURCE_MANIFEST_COHORT_RECONCILIATION_DIRECTORY,
+    )).filter((fileName) => fileName.endsWith('.v1.json'))
+      .sort((left, right) => left.localeCompare(right, 'en'))
+      .map((fileName) => (
+        `${SOURCE_MANIFEST_COHORT_RECONCILIATION_DIRECTORY}/${fileName}`
+      ))
+    expect(current.inputFingerprints.slice(6).map(
+      (input) => input.repositoryPath,
+    )).toEqual(reconciliationPaths)
     expect(current.inputFingerprints.every(
       (input) => /^[a-f0-9]{64}$/u.test(input.sha256) && input.byteLength > 0,
     )).toBe(true)
@@ -303,6 +410,7 @@ describe('SourceManifestV2 cohort candidate builder', () => {
       'programs',
       'admissionCycles',
       'scholarships',
+      'sourceReconciliation:test.v1.json',
     ])
     expect(artifact.files.map((file) => file.path)).toEqual([
       'gap-report.v1.json',

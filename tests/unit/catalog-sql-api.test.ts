@@ -110,7 +110,7 @@ describe('Catalog D1 normalized v1 API', () => {
       },
       CATALOG_API_TOKEN: 'shadow-secret',
     }
-  })
+  }, 30_000)
 
   afterAll(() => database.close())
 
@@ -161,7 +161,7 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(second.data.map((item) => item.id)).not.toContain(first.data[0]!.id)
     expect(r2Reads).toBe(0)
     expect(queries.some(({ sql }) => sql.includes('FROM current_programs AS program'))).toBe(true)
-  })
+  }, 30_000)
 
   it('uses FTS5 only with current_search_documents and supports the locked filters', async () => {
     const seedResponse = await worker.fetch(

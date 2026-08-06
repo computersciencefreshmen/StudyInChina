@@ -95,6 +95,28 @@ describe('server-side scholarship catalogue', () => {
     expect(href).toContain('page=2')
   })
 
+  it('uses cursor links for adjacent repository pages without replaying earlier pages', () => {
+    const filters = {
+      ...parseScholarshipCatalogFilters({
+        q: 'government',
+        page: '2',
+        cursor: 'page-2-cursor',
+        cursorHistory: '~',
+      }),
+      nextCursor: 'page-3-cursor',
+    }
+
+    const next = new URL(scholarshipCatalogHref('en', filters, 3), 'https://example.test')
+    expect(next.searchParams.get('page')).toBe('3')
+    expect(next.searchParams.get('cursor')).toBe('page-3-cursor')
+    expect(next.searchParams.get('cursorHistory')).toBe('~,page-2-cursor')
+
+    const previous = new URL(scholarshipCatalogHref('en', filters, 1), 'https://example.test')
+    expect(previous.searchParams.get('page')).toBeNull()
+    expect(previous.searchParams.get('cursor')).toBeNull()
+    expect(previous.searchParams.get('cursorHistory')).toBeNull()
+  })
+
   it('rejects unsupported filter values instead of passing them to queries', () => {
     const filters = parseScholarshipCatalogFilters({
       degree: 'invalid',

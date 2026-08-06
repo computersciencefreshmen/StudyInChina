@@ -1,0 +1,71 @@
+{
+  "format": "studyinchina.source-reconciliation",
+  "formatVersion": 1,
+  "groupId": "final-group-a-medical-refresh",
+  "checkedAt": "2026-08-07",
+  "requiredCategories": [
+    "international_admissions_home",
+    "catalog_anchor",
+    "university_scholarship"
+  ],
+  "institutions": [
+    {
+      "officialNameZh": "北京协和医学院",
+      "categories": [
+        {
+          "category": "international_admissions_home",
+          "status": "officially_not_provided",
+          "officialUrl": null,
+          "evidenceUrl": "https://graduate.pumc.edu.cn/zsw/",
+          "note": "重新核验北京协和医学院研究生招生官网、本科招生网、港澳台招生和国际合作栏目，未发现面向外国国籍学生的公开招生主页或个人申请入口；港澳台招生不等同于国际学生招生。",
+          "checkedAt": "2026-08-07"
+        },
+        {
+          "category": "catalog_anchor",
+          "status": "officially_not_provided",
+          "officialUrl": null,
+          "evidenceUrl": "https://graduate.pumc.edu.cn/zsw/info/1003/2117.htm",
+          "note": "学校 2026 年硕士招生简章明确要求申请人为中华人民共和国公民；同年度博士和临床医学培养模式改革试点班简章也设置相同国籍条件，因此这些国内招生目录不能作为国际学生项目目录，官网未公开可核验的外国学生项目目录锚点。",
+          "checkedAt": "2026-08-07"
+        },
+        {
+          "category": "university_scholarship",
+          "status": "officially_not_provided",
+          "officialUrl": null,
+          "evidenceUrl": "https://graduate.pumc.edu.cn/zsw/info/1003/2117.htm",
+          "note": "当前招生简章公布的是适用于中国公民招生路线的研究生奖助政策；原研究生奖助学金管理办法链接现已失效，在已核验的官方栏目中未发现面向外国学生的学校奖学金公开入口。",
+          "checkedAt": "2026-08-07"
+        }
+      ]
+    },
+    {
+      "officialNameZh": "天津医科大学",
+      "categories": [
+        {
+          "category": "international_admissions_home",
+          "status": "known",
+          "officialUrl": "https://www.imstmu.edu.cn/",
+          "evidenceUrl": "https://www.imstmu.edu.cn/",
+          "note": "天津医科大学国际医学院官方中英文网站现已通过 HTTPS 核验，网站页脚标注 International Medical School of Tianjin Medical University，并提供本科、研究生、短期项目和招生咨询入口。",
+          "checkedAt": "2026-08-07"
+        },
+        {
+          "category": "catalog_anchor",
+          "status": "known",
+          "officialUrl": "https://www.imstmu.edu.cn/admission",
+          "evidenceUrl": "https://www.imstmu.edu.cn/archives/507",
+          "note": "国际医学院官方 Admission 索引汇总本科申请、2026 年研究生招生和短期项目；官方 Undergraduate Programs 页面列出专业、学制、授课语言与学位，可作为国际学生项目发现及逐项对账锚点。",
+          "checkedAt": "2026-08-07"
+        },
+        {
+          "category": "university_scholarship",
+          "status": "officially_not_provided",
+          "officialUrl": null,
+          "evidenceUrl": "https://www.imstmu.edu.cn/archives/252",
+          "note": "已核验国际医学院招生索引、2026 年国际研究生招生简章及 2024 年费用与奖学金旧页；当前简章确认的是中国政府奖学金申请路线，未发现可作为当前事实发布的天津医科大学校级国际学生奖学金目录或当期指南。",
+          "checkedAt": "2026-08-07"
+        }
+      ]
+    }
+  ]
+}

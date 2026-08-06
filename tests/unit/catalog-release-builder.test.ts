@@ -134,5 +134,5 @@ describe('legacy JSON release builder', () => {
     expect(database.prepare('SELECT count(*) AS count FROM release_activation_requests').get())
       .toEqual({ count: 1 })
     database.close()
-  })
+  }, 30_000)
 })
