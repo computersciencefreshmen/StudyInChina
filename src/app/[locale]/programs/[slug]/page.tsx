@@ -4,9 +4,10 @@ import { ProgramCard } from '@/components/features/RecordCards'
 import { ScholarshipCard } from '@/components/features/ScholarshipCard'
 import { SourceTransparency } from '@/components/features/SourceTransparency'
 import { Badge, Card, PageHero, SectionHeading, VerificationBadge } from '@/components/ui'
-import { launchLocales } from '@/i18n/config'
+import { indexedLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 import { getApplicationState, selectAdmissionCycle } from '@/lib/data/admission'
+import { selectProgramPrebuildSlugs } from '@/lib/data/detail-prebuild'
 import { formatCny, formatDate, localize } from '@/lib/data/format'
 import { getTodayDate } from '@/lib/data/freshness'
 import { degreeLabels, disciplineLabels, languageLabel } from '@/lib/data/labels'
@@ -14,9 +15,12 @@ import { getCatalogData, getCatalogProgramBySlug, getData } from '@/lib/data/loa
 import type { AdmissionCycle } from '@/lib/data/types'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
+export const dynamicParams = true
+
 export function generateStaticParams() {
   const data = getData()
-  return launchLocales.flatMap((locale) => data.programs.map(({ slug }) => ({ locale, slug })))
+  const slugs = selectProgramPrebuildSlugs(data, getTodayDate())
+  return indexedLocales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {

@@ -5,6 +5,7 @@ import { join } from 'node:path'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { buildLegacyRelease, readLegacyBundle } from '../../scripts/catalog/build-release'
 import worker from '../../workers/catalog-api/src/index'
+import { chinaCalendarDate } from '../../workers/catalog-api/src/sql-data'
 import type {
   CatalogApiEnv,
   D1PreparedStatement,
@@ -130,6 +131,10 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(firstResponse.status).toBe(200)
     expect(first.meta.apiVersion).toBe('v1')
     expect(first.data).toHaveLength(1)
+    expect(first.meta.total).toBeGreaterThan(first.data.length)
+    expect(first.meta.facets?.universities?.length).toBeGreaterThan(1)
+    expect(first.meta.facets?.cities?.length).toBeGreaterThan(1)
+    expect(first.data[0]).toHaveProperty('currentCycle')
     expect(first.meta.nextCursor).toEqual(expect.any(String))
     expect(first.data[0]).toMatchObject({
       type: 'program',
@@ -190,6 +195,68 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(filtered.data.map((item) => item.id)).toContain(program.id)
     expect(r2Reads).toBe(0)
   })
+
+  it('filters and sorts scholarships with exact metadata and query-bound cursors', async () => {
+    const fundedResponse = await worker.fetch(
+      new Request('https://catalog.test/api/v1/scholarships?funding=full-tuition&limit=1'),
+      environment,
+    )
+    const funded = await fundedResponse.json() as ApiEnvelopeDto<ScholarshipDto[]>
+    expect(fundedResponse.status).toBe(200)
+    expect(funded.data).toHaveLength(1)
+    expect(funded.data[0]!.attributes.coverage.tuition).toBe('full')
+    expect(funded.meta.total).toBeGreaterThan(funded.data.length)
+    expect(funded.meta.facets?.universities?.length).toBeGreaterThan(0)
+
+    const mismatchedCursor = await worker.fetch(
+      new Request(
+        `https://catalog.test/api/v1/scholarships?funding=partial-tuition&limit=1&cursor=${encodeURIComponent(funded.meta.nextCursor!)}`,
+      ),
+      environment,
+    )
+    expect(mismatchedCursor.status).toBe(400)
+
+    const stipendResponse = await worker.fetch(
+      new Request('https://catalog.test/api/v1/scholarships?funding=stipend&sort=stipend-desc&limit=20'),
+      environment,
+    )
+    const stipend = await stipendResponse.json() as ApiEnvelopeDto<ScholarshipDto[]>
+    const amounts = stipend.data.map((item) => item.attributes.coverage.stipendCnyPerMonth!)
+    expect(stipendResponse.status).toBe(200)
+    expect(amounts.length).toBeGreaterThan(1)
+    expect(amounts.every((amount) => amount > 0)).toBe(true)
+    expect(amounts).toEqual([...amounts].sort((left, right) => right - left))
+    expect(stipend.data.every((item) => item.slug && /^[a-z0-9][a-z0-9-]*$/u.test(item.slug))).toBe(true)
+    const sortedDetailResponse = await worker.fetch(
+      new Request(`https://catalog.test/api/v1/scholarships/${stipend.data[0]!.slug}`),
+      environment,
+    )
+    const sortedDetail = await sortedDetailResponse.json() as ApiEnvelopeDto<ScholarshipDto>
+    expect(sortedDetailResponse.status).toBe(200)
+    expect(sortedDetail.data.id).toBe(stipend.data[0]!.id)
+
+    const futureResponse = await worker.fetch(
+      new Request('https://catalog.test/api/v1/scholarships?deadline=future&limit=100'),
+      environment,
+    )
+    const future = await futureResponse.json() as ApiEnvelopeDto<ScholarshipDto[]>
+    expect(futureResponse.status).toBe(200)
+    expect(future.data.length).toBeGreaterThan(0)
+    expect(future.data.every((item) =>
+      item.attributes.deadline !== null && item.attributes.deadline >= chinaCalendarDate(),
+    )).toBe(true)
+
+    const beforeDegree = queries.length
+    const degreeResponse = await worker.fetch(
+      new Request('https://catalog.test/api/v1/scholarships?degree=master&limit=100'),
+      environment,
+    )
+    expect(degreeResponse.status).toBe(200)
+    expect(queries.slice(beforeDegree).some(({ sql }) =>
+      sql.includes('matched_program.degree_level = ?')
+      && sql.includes('scholarship_cycle_degree_levels'),
+    )).toBe(true)
+  }, 30_000)
 
   it('serves normalized institution, program-cycle, and scholarship projections from D1', async () => {
     const institutionResponse = await worker.fetch(

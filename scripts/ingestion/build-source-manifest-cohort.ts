@@ -1,5 +1,14 @@
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { join, relative, resolve } from 'node:path'
+import { createHash } from 'node:crypto'
+import {
+  existsSync,
+  lstatSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  realpathSync,
+  writeFileSync,
+} from 'node:fs'
+import { dirname, isAbsolute, join, posix, relative, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { SOURCE_CATEGORIES } from '../../workers/ingestion/src/manifest-schema'
 import type {
@@ -15,6 +24,81 @@ import {
   validateDoubleFirstClassRegistry,
   type DoubleFirstClassRegistry,
 } from './double-first-class-registry'
+export const CURRENT_SOURCE_MANIFEST_COHORT_INPUTS = {
+  registry: 'content/source-manifests/double-first-class/targets.v1.json',
+  universities: 'content/data/universities.json',
+  sources: 'content/data/sources.json',
+  programs: 'content/data/programs.json',
+  admissionCycles: 'content/data/admission-cycles.json',
+  scholarships: 'content/data/scholarships.json',
+} as const
+
+export type SourceManifestCohortInputName =
+  keyof typeof CURRENT_SOURCE_MANIFEST_COHORT_INPUTS
+
+const SOURCE_MANIFEST_COHORT_INPUT_ORDER: SourceManifestCohortInputName[] = [
+  'registry',
+  'universities',
+  'sources',
+  'programs',
+  'admissionCycles',
+  'scholarships',
+]
+
+export type SourceManifestCohortInputFingerprint = {
+  name: SourceManifestCohortInputName
+  repositoryPath: string
+  sha256: string
+  byteLength: number
+}
+
+export type SourceManifestCohortArtifactFile = {
+  path: string
+  mediaType: 'application/json'
+  sha256: string
+  byteLength: number
+}
+
+export type SourceManifestCohortArtifactManifest = {
+  format: 'studyinchina.source-manifest-v2-candidate-bundle'
+  formatVersion: 1
+  cohortId: string
+  checkedAt: string
+  disposition: 'candidate_only'
+  summary: SourceManifestCohortGapReport['summary']
+  policy: {
+    sourceOfTruth: string
+    publication: string
+    network: string
+  }
+  inputs: SourceManifestCohortInputFingerprint[]
+  files: SourceManifestCohortArtifactFile[]
+}
+
+export type SourceManifestCohortArtifactWrite = {
+  outputDirectory: string
+  manifestDirectory: string
+  gapReportPath: string
+  artifactManifestPath: string
+  checksumPath: string
+  verifiedFiles: number
+}
+
+export type SourceManifestCohortArtifactVerification = {
+  outputDirectory: string
+  cohortId: string
+  checkedAt: string
+  candidateManifests: number
+  exactOfficialHttpsSources: number
+  verifiedFiles: number
+}
+
+type SourceManifestCohortCli =
+  | { mode: 'dry-run'; checkedAt: string }
+  | { mode: 'write-artifact'; checkedAt: string; artifactOutput: string }
+  | { mode: 'verify-artifact'; artifactOutput: string }
+
+
 
 export const EXCLUDED_MILITARY_INSTITUTION_NAMES = new Set([
   '国防科技大学',
@@ -539,75 +623,486 @@ export function buildSourceManifestCohort(
   return { candidates, gapReport, summary }
 }
 
+function sha256(value: string | Buffer): string {
+  return createHash('sha256').update(value).digest('hex')
+}
+
+function serializeJson(value: unknown): string {
+  return JSON.stringify(value, null, 2) + '\n'
+}
+
+function readFingerprintedJson<T>(
+  repositoryRoot: string,
+  name: SourceManifestCohortInputName,
+): { value: T; fingerprint: SourceManifestCohortInputFingerprint } {
+  const repositoryPath = CURRENT_SOURCE_MANIFEST_COHORT_INPUTS[name]
+  const bytes = readFileSync(resolve(repositoryRoot, repositoryPath))
+  return {
+    value: JSON.parse(bytes.toString('utf8')) as T,
+    fingerprint: {
+      name,
+      repositoryPath,
+      sha256: sha256(bytes),
+      byteLength: bytes.byteLength,
+    },
+  }
+}
+
+export function buildCurrentSourceManifestCohort(
+  checkedAt: string,
+  repositoryRoot = resolve('.'),
+): {
+  build: SourceManifestCohortBuild
+  inputFingerprints: SourceManifestCohortInputFingerprint[]
+} {
+  const registry = readFingerprintedJson<unknown>(repositoryRoot, 'registry')
+  const universities = readFingerprintedJson<CatalogUniversityInput[]>(
+    repositoryRoot,
+    'universities',
+  )
+  const sources = readFingerprintedJson<CatalogSourceInput[]>(repositoryRoot, 'sources')
+  const programs = readFingerprintedJson<CatalogProgramInput[]>(repositoryRoot, 'programs')
+  const admissionCycles = readFingerprintedJson<CatalogAdmissionCycleInput[]>(
+    repositoryRoot,
+    'admissionCycles',
+  )
+  const scholarships = readFingerprintedJson<CatalogScholarshipInput[]>(
+    repositoryRoot,
+    'scholarships',
+  )
+  const build = buildSourceManifestCohort({
+    registry: validateDoubleFirstClassRegistry(registry.value) as DoubleFirstClassRegistry,
+    universities: universities.value,
+    sources: sources.value,
+    programs: programs.value,
+    admissionCycles: admissionCycles.value,
+    scholarships: scholarships.value,
+    checkedAt,
+  })
+  return {
+    build,
+    inputFingerprints: [
+      registry.fingerprint,
+      universities.fingerprint,
+      sources.fingerprint,
+      programs.fingerprint,
+      admissionCycles.fingerprint,
+      scholarships.fingerprint,
+    ],
+  }
+}
+
 function isInside(parent: string, child: string): boolean {
   const path = relative(parent, child)
-  return path === '' || (!path.startsWith('..') && !path.startsWith(`..\\`) && !path.startsWith('../'))
+  return path === ''
+    || (path !== '..' && !path.startsWith('..' + sep) && !isAbsolute(path))
+}
+
+function resolveThroughExistingAncestor(path: string): string {
+  let ancestor = resolve(path)
+  const suffix: string[] = []
+  while (!existsSync(ancestor)) {
+    const parent = dirname(ancestor)
+    if (parent === ancestor) {
+      throw new Error('Unable to resolve artifact output ancestor for ' + path)
+    }
+    suffix.unshift(relative(parent, ancestor))
+    ancestor = parent
+  }
+  return resolve(realpathSync(ancestor), ...suffix)
+}
+
+function assertSafeEmptyArtifactOutput(
+  outputDirectory: string,
+  repositoryRoot: string,
+): string {
+  const output = resolve(outputDirectory)
+  const formalManifestDirectory = resolve(repositoryRoot, 'content/source-manifests')
+  const effectiveOutput = resolveThroughExistingAncestor(output)
+  const effectiveFormalManifestDirectory = realpathSync(formalManifestDirectory)
+  if (
+    isInside(formalManifestDirectory, output)
+    || isInside(effectiveFormalManifestDirectory, effectiveOutput)
+  ) {
+    throw new Error('Candidate artifact output must not be inside content/source-manifests')
+  }
+  if (!existsSync(output)) return output
+  const stats = lstatSync(output)
+  if (stats.isSymbolicLink() || !stats.isDirectory()) {
+    throw new Error('Candidate artifact output must be a real directory')
+  }
+  if (readdirSync(output).length > 0) {
+    throw new Error('Candidate artifact output must be empty to prevent stale-file leakage')
+  }
+  return output
+}
+
+function sortedInputFingerprints(
+  inputFingerprints: SourceManifestCohortInputFingerprint[],
+): SourceManifestCohortInputFingerprint[] {
+  const byName = new Map(inputFingerprints.map((input) => [input.name, input]))
+  if (
+    inputFingerprints.length !== SOURCE_MANIFEST_COHORT_INPUT_ORDER.length
+    || byName.size !== SOURCE_MANIFEST_COHORT_INPUT_ORDER.length
+  ) {
+    throw new Error('Candidate artifact requires one fingerprint for every locked input')
+  }
+  return SOURCE_MANIFEST_COHORT_INPUT_ORDER.map((name) => {
+    const input = byName.get(name)
+    if (
+      !input
+      || input.repositoryPath !== CURRENT_SOURCE_MANIFEST_COHORT_INPUTS[name]
+      || !/^[a-f0-9]{64}$/u.test(input.sha256)
+      || !Number.isSafeInteger(input.byteLength)
+      || input.byteLength <= 0
+    ) {
+      throw new Error('Invalid locked input fingerprint: ' + name)
+    }
+    return input
+  })
+}
+
+function assertSafeArtifactRelativePath(path: string): void {
+  if (
+    path.length === 0
+    || path.includes('\\')
+    || isAbsolute(path)
+    || posix.normalize(path) !== path
+    || path === '..'
+    || path.startsWith('../')
+  ) {
+    throw new Error('Unsafe artifact-relative path: ' + path)
+  }
+}
+
+function writeJsonArtifact(
+  outputDirectory: string,
+  path: string,
+  value: unknown,
+): SourceManifestCohortArtifactFile {
+  assertSafeArtifactRelativePath(path)
+  const body = serializeJson(value)
+  const destination = join(outputDirectory, ...path.split('/'))
+  mkdirSync(dirname(destination), { recursive: true })
+  writeFileSync(destination, body, 'utf8')
+  return {
+    path,
+    mediaType: 'application/json',
+    sha256: sha256(body),
+    byteLength: Buffer.byteLength(body),
+  }
+}
+
+function walkArtifactFiles(directory: string, prefix = ''): string[] {
+  const files: string[] = []
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    if (entry.isSymbolicLink()) {
+      throw new Error('Artifact bundle contains a symbolic link: ' + entry.name)
+    }
+    const relativePath = prefix ? posix.join(prefix, entry.name) : entry.name
+    const absolutePath = join(directory, entry.name)
+    if (entry.isDirectory()) {
+      files.push(...walkArtifactFiles(absolutePath, relativePath))
+    } else if (entry.isFile()) {
+      files.push(relativePath)
+    } else {
+      throw new Error('Artifact bundle contains an unsupported file: ' + relativePath)
+    }
+  }
+  return files.sort()
+}
+
+function readArtifactManifest(outputDirectory: string): SourceManifestCohortArtifactManifest {
+  const raw = JSON.parse(
+    readFileSync(join(outputDirectory, 'artifact-manifest.v1.json'), 'utf8'),
+  ) as Partial<SourceManifestCohortArtifactManifest>
+  if (
+    raw.format !== 'studyinchina.source-manifest-v2-candidate-bundle'
+    || raw.formatVersion !== 1
+    || raw.disposition !== 'candidate_only'
+    || typeof raw.cohortId !== 'string'
+    || typeof raw.checkedAt !== 'string'
+    || !raw.summary
+    || !Array.isArray(raw.inputs)
+    || !Array.isArray(raw.files)
+  ) {
+    throw new Error('Invalid source-manifest candidate artifact manifest')
+  }
+  sortedInputFingerprints(raw.inputs)
+  return raw as SourceManifestCohortArtifactManifest
+}
+
+export function verifySourceManifestCohortArtifact(
+  outputDirectory: string,
+): SourceManifestCohortArtifactVerification {
+  const output = resolve(outputDirectory)
+  if (!existsSync(output) || lstatSync(output).isSymbolicLink()) {
+    throw new Error('Candidate artifact directory is missing or is a symbolic link')
+  }
+  const artifactManifest = readArtifactManifest(output)
+  const checksumBody = readFileSync(join(output, 'SHA256SUMS'), 'utf8')
+  const checksumEntries = checksumBody.split(/\r?\n/u).filter(Boolean).map((line) => {
+    const match = /^([a-f0-9]{64})  (.+)$/u.exec(line)
+    if (!match) throw new Error('Invalid SHA256SUMS line: ' + line)
+    const path = match[2]!
+    assertSafeArtifactRelativePath(path)
+    return { sha256: match[1]!, path }
+  })
+  const checksumByPath = new Map(
+    checksumEntries.map((entry) => [entry.path, entry.sha256]),
+  )
+  if (checksumByPath.size !== checksumEntries.length) {
+    throw new Error('SHA256SUMS contains duplicate paths')
+  }
+
+  const describedPaths = artifactManifest.files.map((file) => file.path)
+  const expectedChecksummedPaths = [
+    'artifact-manifest.v1.json',
+    ...describedPaths,
+  ].sort()
+  if (
+    JSON.stringify([...checksumByPath.keys()].sort())
+    !== JSON.stringify(expectedChecksummedPaths)
+  ) {
+    throw new Error('SHA256SUMS paths do not match the artifact manifest')
+  }
+  const expectedDiskPaths = [...expectedChecksummedPaths, 'SHA256SUMS'].sort()
+  if (JSON.stringify(walkArtifactFiles(output)) !== JSON.stringify(expectedDiskPaths)) {
+    throw new Error('Candidate artifact contains missing or unexpected files')
+  }
+
+  for (const entry of checksumEntries) {
+    const bytes = readFileSync(join(output, ...entry.path.split('/')))
+    if (sha256(bytes) !== entry.sha256) {
+      throw new Error('Artifact checksum mismatch: ' + entry.path)
+    }
+  }
+  for (const file of artifactManifest.files) {
+    assertSafeArtifactRelativePath(file.path)
+    const bytes = readFileSync(join(output, ...file.path.split('/')))
+    if (
+      file.mediaType !== 'application/json'
+      || file.sha256 !== sha256(bytes)
+      || file.byteLength !== bytes.byteLength
+      || checksumByPath.get(file.path) !== file.sha256
+    ) {
+      throw new Error('Artifact manifest metadata mismatch: ' + file.path)
+    }
+  }
+
+  const gapFile = artifactManifest.files.find((file) => file.path === 'gap-report.v1.json')
+  if (!gapFile) throw new Error('Candidate artifact is missing gap-report.v1.json')
+  const gapReport = JSON.parse(
+    readFileSync(join(output, gapFile.path), 'utf8'),
+  ) as Partial<SourceManifestCohortGapReport>
+  if (
+    gapReport.format !== 'studyinchina.source-manifest-v2-gap-report'
+    || gapReport.cohortId !== artifactManifest.cohortId
+    || gapReport.checkedAt !== artifactManifest.checkedAt
+    || JSON.stringify(gapReport.summary) !== JSON.stringify(artifactManifest.summary)
+  ) {
+    throw new Error('Gap report does not match the artifact manifest')
+  }
+
+  const candidateFiles = artifactManifest.files.filter(
+    (file) => file.path.startsWith('manifests/'),
+  )
+  if (candidateFiles.length !== artifactManifest.summary.candidateManifests) {
+    throw new Error('Candidate manifest count does not match the artifact summary')
+  }
+  const institutions = new Set<string>()
+  let exactOfficialHttpsSources = 0
+  for (const file of candidateFiles) {
+    if (!/^manifests\/\d{3}-[a-z0-9-]+\.v2\.candidate\.json$/u.test(file.path)) {
+      throw new Error('Unexpected candidate manifest filename: ' + file.path)
+    }
+    const candidate = sourceManifestV2Schema.parse(JSON.parse(
+      readFileSync(join(output, ...file.path.split('/')), 'utf8'),
+    ))
+    if (
+      candidate.manifestStatus !== 'in_progress'
+      || candidate.catalogReconciliation.status !== 'in_progress'
+      || candidate.catalogReconciliation.entries.some((entry) => entry.status !== 'pending')
+      || candidate.sources.some(
+        (source) => source.enabled !== false || source.robots.mode !== 'blocked',
+      )
+    ) {
+      throw new Error(
+        'Candidate manifest is not safely disabled and pending: ' + file.path,
+      )
+    }
+    if (institutions.has(candidate.institutionId)) {
+      throw new Error('Duplicate candidate institution: ' + candidate.institutionId)
+    }
+    institutions.add(candidate.institutionId)
+    exactOfficialHttpsSources += candidate.sources.length
+  }
+  if (exactOfficialHttpsSources !== artifactManifest.summary.exactOfficialHttpsSources) {
+    throw new Error('Official HTTPS source count does not match the artifact summary')
+  }
+
+  return {
+    outputDirectory: output,
+    cohortId: artifactManifest.cohortId,
+    checkedAt: artifactManifest.checkedAt,
+    candidateManifests: candidateFiles.length,
+    exactOfficialHttpsSources,
+    verifiedFiles: checksumEntries.length,
+  }
 }
 
 export function writeSourceManifestCohort(
   build: SourceManifestCohortBuild,
   outputDirectory: string,
-): { outputDirectory: string; manifestDirectory: string; gapReportPath: string } {
-  const output = resolve(outputDirectory)
-  const formalManifestDirectory = resolve('content/source-manifests')
-  if (isInside(formalManifestDirectory, output)) {
-    throw new Error('Candidate output must not be inside content/source-manifests')
-  }
+  inputFingerprints: SourceManifestCohortInputFingerprint[],
+  repositoryRoot = resolve('.'),
+): SourceManifestCohortArtifactWrite {
+  const output = assertSafeEmptyArtifactOutput(outputDirectory, repositoryRoot)
   const manifestDirectory = join(output, 'manifests')
-  mkdirSync(manifestDirectory, { recursive: true })
-  for (const candidate of build.candidates) {
-    writeFileSync(
-      join(manifestDirectory, candidate.fileName),
-      `${JSON.stringify(candidate.manifest, null, 2)}\n`,
-      'utf8',
-    )
+  const files: SourceManifestCohortArtifactFile[] = []
+  const candidateNames = new Set<string>()
+  for (const candidate of [...build.candidates].sort(
+    (left, right) => left.fileName.localeCompare(right.fileName),
+  )) {
+    if (
+      candidateNames.has(candidate.fileName)
+      || !/^\d{3}-[a-z0-9-]+\.v2\.candidate\.json$/u.test(candidate.fileName)
+    ) {
+      throw new Error('Unsafe or duplicate candidate filename: ' + candidate.fileName)
+    }
+    candidateNames.add(candidate.fileName)
+    files.push(writeJsonArtifact(
+      output,
+      posix.join('manifests', candidate.fileName),
+      candidate.manifest,
+    ))
   }
-  const gapReportPath = join(output, 'gap-report.v1.json')
-  writeFileSync(gapReportPath, `${JSON.stringify(build.gapReport, null, 2)}\n`, 'utf8')
-  return { outputDirectory: output, manifestDirectory, gapReportPath }
+  files.push(writeJsonArtifact(output, 'gap-report.v1.json', build.gapReport))
+  files.sort((left, right) => left.path.localeCompare(right.path))
+
+  const artifactManifest: SourceManifestCohortArtifactManifest = {
+    format: 'studyinchina.source-manifest-v2-candidate-bundle',
+    formatVersion: 1,
+    cohortId: build.gapReport.cohortId,
+    checkedAt: build.gapReport.checkedAt,
+    disposition: 'candidate_only',
+    summary: build.summary,
+    policy: {
+      sourceOfTruth:
+        'Read-only current catalog JSON and the locked Ministry of Education target registry.',
+      publication:
+        'This bundle is review-only and must never be copied directly into content/source-manifests.',
+      network:
+        'Generation performs no network requests and never invents or fuzzy-matches sources.',
+    },
+    inputs: sortedInputFingerprints(inputFingerprints),
+    files,
+  }
+  const artifactManifestFile = writeJsonArtifact(
+    output,
+    'artifact-manifest.v1.json',
+    artifactManifest,
+  )
+  const checksummedFiles = [...files, artifactManifestFile].sort(
+    (left, right) => left.path.localeCompare(right.path),
+  )
+  const checksumBody = checksummedFiles.map(
+    (file) => file.sha256 + '  ' + file.path,
+  ).join('\n')
+  const checksumPath = join(output, 'SHA256SUMS')
+  writeFileSync(checksumPath, checksumBody + '\n', 'utf8')
+  const verification = verifySourceManifestCohortArtifact(output)
+  return {
+    outputDirectory: output,
+    manifestDirectory,
+    gapReportPath: join(output, 'gap-report.v1.json'),
+    artifactManifestPath: join(output, 'artifact-manifest.v1.json'),
+    checksumPath,
+    verifiedFiles: verification.verifiedFiles,
+  }
 }
 
 export function dryRunSummary(build: SourceManifestCohortBuild): string {
   return JSON.stringify({ mode: 'dry-run', ...build.summary })
 }
 
-function option(name: string): string | undefined {
-  const index = process.argv.indexOf(name)
-  return index >= 0 ? process.argv[index + 1] : undefined
-}
+const CLI_USAGE = [
+  'Usage:',
+  '  --checked-at <YYYY-MM-DD> --dry-run',
+  '  --checked-at <YYYY-MM-DD> --artifact-output <empty-directory>',
+  '  --verify-artifact <artifact-directory>',
+].join('\n')
 
-function readJson<T>(path: string): T {
-  return JSON.parse(readFileSync(resolve(path), 'utf8')) as T
+export function parseSourceManifestCohortCli(argv: string[]): SourceManifestCohortCli {
+  let checkedAt: string | undefined
+  let artifactOutput: string | undefined
+  let verifyArtifact: string | undefined
+  let dryRun = false
+  const seen = new Set<string>()
+  for (let index = 0; index < argv.length; index += 1) {
+    const argument = argv[index]!
+    if (seen.has(argument)) {
+      throw new Error('Duplicate CLI option: ' + argument + '\n' + CLI_USAGE)
+    }
+    seen.add(argument)
+    if (argument === '--dry-run') {
+      dryRun = true
+      continue
+    }
+    if (
+      argument !== '--checked-at'
+      && argument !== '--artifact-output'
+      && argument !== '--verify-artifact'
+    ) {
+      throw new Error('Unknown CLI option: ' + argument + '\n' + CLI_USAGE)
+    }
+    const value = argv[index + 1]
+    if (!value || value.startsWith('--')) {
+      throw new Error('Missing value for ' + argument + '\n' + CLI_USAGE)
+    }
+    index += 1
+    if (argument === '--checked-at') checkedAt = value
+    if (argument === '--artifact-output') artifactOutput = value
+    if (argument === '--verify-artifact') verifyArtifact = value
+  }
+  if (verifyArtifact) {
+    if (checkedAt || artifactOutput || dryRun) {
+      throw new Error('--verify-artifact is an exclusive mode\n' + CLI_USAGE)
+    }
+    return { mode: 'verify-artifact', artifactOutput: verifyArtifact }
+  }
+  if (!checkedAt || dryRun === Boolean(artifactOutput)) {
+    throw new Error(CLI_USAGE)
+  }
+  return dryRun
+    ? { mode: 'dry-run', checkedAt }
+    : { mode: 'write-artifact', checkedAt, artifactOutput: artifactOutput! }
 }
 
 function runCli(): void {
-  const checkedAt = option('--checked-at')
-  if (!checkedAt) {
-    throw new Error('Usage requires --checked-at <YYYY-MM-DD> and either --dry-run or --output <directory>')
-  }
-  const dryRun = process.argv.includes('--dry-run')
-  const output = option('--output')
-  if (!dryRun && !output) {
-    throw new Error('Refusing to write without an explicit --output directory; use --dry-run for a no-write summary')
-  }
-  const registry = validateDoubleFirstClassRegistry(readJson(
-    option('--registry') ?? 'content/source-manifests/double-first-class/targets.v1.json',
-  ))
-  const build = buildSourceManifestCohort({
-    registry: registry as DoubleFirstClassRegistry,
-    universities: readJson(option('--universities') ?? 'content/data/universities.json'),
-    sources: readJson(option('--sources') ?? 'content/data/sources.json'),
-    programs: readJson(option('--programs') ?? 'content/data/programs.json'),
-    admissionCycles: readJson(option('--cycles') ?? 'content/data/admission-cycles.json'),
-    scholarships: readJson(option('--scholarships') ?? 'content/data/scholarships.json'),
-    checkedAt,
-  })
-  if (dryRun) {
-    process.stdout.write(`${dryRunSummary(build)}\n`)
+  const cli = parseSourceManifestCohortCli(process.argv.slice(2))
+  if (cli.mode === 'verify-artifact') {
+    process.stdout.write(JSON.stringify({
+      mode: 'verify-artifact',
+      ...verifySourceManifestCohortArtifact(cli.artifactOutput),
+    }) + '\n')
     return
   }
-  const written = writeSourceManifestCohort(build, output!)
-  process.stdout.write(`${JSON.stringify({ mode: 'write', ...build.summary, ...written })}\n`)
+  const current = buildCurrentSourceManifestCohort(cli.checkedAt)
+  if (cli.mode === 'dry-run') {
+    process.stdout.write(dryRunSummary(current.build) + '\n')
+    return
+  }
+  const written = writeSourceManifestCohort(
+    current.build,
+    cli.artifactOutput,
+    current.inputFingerprints,
+  )
+  process.stdout.write(JSON.stringify({
+    mode: 'write-artifact',
+    ...current.build.summary,
+    ...written,
+  }) + '\n')
 }
 
 if (resolve(process.argv[1] ?? '') === fileURLToPath(import.meta.url)) {

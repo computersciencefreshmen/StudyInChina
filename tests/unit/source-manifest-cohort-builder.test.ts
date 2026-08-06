@@ -1,10 +1,29 @@
-import { describe, expect, it } from 'vitest'
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join, resolve } from 'node:path'
+import { afterEach, describe, expect, it } from 'vitest'
 import { SOURCE_CATEGORIES } from '../../workers/ingestion/src/manifest-schema'
 import {
+  buildCurrentSourceManifestCohort,
   buildSourceManifestCohort,
+  CURRENT_SOURCE_MANIFEST_COHORT_INPUTS,
   dryRunSummary,
+  parseSourceManifestCohortCli,
+  verifySourceManifestCohortArtifact,
+  writeSourceManifestCohort,
   type BuildSourceManifestCohortInput,
+  type SourceManifestCohortArtifactManifest,
+  type SourceManifestCohortInputFingerprint,
+  type SourceManifestCohortInputName,
 } from '../../scripts/ingestion/build-source-manifest-cohort'
+
+const temporaryDirectories: string[] = []
+
+afterEach(() => {
+  for (const directory of temporaryDirectories.splice(0)) {
+    rmSync(directory, { recursive: true, force: true })
+  }
+})
 
 function fixture(): BuildSourceManifestCohortInput {
   return {
@@ -116,6 +135,27 @@ function fixture(): BuildSourceManifestCohortInput {
   }
 }
 
+function temporaryDirectory(): string {
+  const directory = mkdtempSync(join(tmpdir(), 'studyinchina-manifest-cohort-'))
+  temporaryDirectories.push(directory)
+  return directory
+}
+
+function inputFingerprints(): SourceManifestCohortInputFingerprint[] {
+  return (
+    Object.keys(CURRENT_SOURCE_MANIFEST_COHORT_INPUTS) as SourceManifestCohortInputName[]
+  ).map((name, index) => ({
+    name,
+    repositoryPath: CURRENT_SOURCE_MANIFEST_COHORT_INPUTS[name],
+    sha256: (index + 1).toString(16).padStart(64, '0'),
+    byteLength: index + 1,
+  }))
+}
+
+function readJson<T>(path: string): T {
+  return JSON.parse(readFileSync(path, 'utf8')) as T
+}
+
 describe('SourceManifestV2 cohort candidate builder', () => {
   it('maps only exact official HTTPS relationships and leaves every candidate pending', () => {
     const build = buildSourceManifestCohort(fixture())
@@ -212,5 +252,128 @@ describe('SourceManifestV2 cohort candidate builder', () => {
     input.checkedAt = '2026-02-30'
 
     expect(() => buildSourceManifestCohort(input)).toThrow(/checkedAt/)
+  })
+
+  it('loads the locked non-military cohort from the current catalog without network input', () => {
+    const current = buildCurrentSourceManifestCohort('2026-08-06', resolve('.'))
+
+    expect(current.build.summary).toMatchObject({
+      officialTargets: 147,
+      militaryExcluded: 3,
+      eligibleTargets: 144,
+    })
+    expect(
+      current.build.summary.candidateManifests
+      + current.build.summary.targetsWithoutCandidate,
+    ).toBe(144)
+    expect(current.inputFingerprints.map((input) => input.repositoryPath)).toEqual(
+      Object.values(CURRENT_SOURCE_MANIFEST_COHORT_INPUTS),
+    )
+    expect(current.inputFingerprints.every(
+      (input) => /^[a-f0-9]{64}$/u.test(input.sha256) && input.byteLength > 0,
+    )).toBe(true)
+  })
+
+  it('writes and verifies a candidate-only bundle with an input ledger and checksums', () => {
+    const build = buildSourceManifestCohort(fixture())
+    const output = temporaryDirectory()
+    const written = writeSourceManifestCohort(
+      build,
+      output,
+      inputFingerprints(),
+      resolve('.'),
+    )
+    const artifact = readJson<SourceManifestCohortArtifactManifest>(
+      written.artifactManifestPath,
+    )
+    const verification = verifySourceManifestCohortArtifact(output)
+    const repeatedOutput = temporaryDirectory()
+    const repeated = writeSourceManifestCohort(
+      build,
+      repeatedOutput,
+      inputFingerprints(),
+      resolve('.'),
+    )
+
+    expect(artifact.disposition).toBe('candidate_only')
+    expect(artifact.inputs.map((input) => input.name)).toEqual([
+      'registry',
+      'universities',
+      'sources',
+      'programs',
+      'admissionCycles',
+      'scholarships',
+    ])
+    expect(artifact.files.map((file) => file.path)).toEqual([
+      'gap-report.v1.json',
+      'manifests/001-test-university.v2.candidate.json',
+    ])
+    expect(readFileSync(written.checksumPath, 'utf8').trim().split('\n')).toHaveLength(3)
+    expect(verification).toMatchObject({
+      cohortId: 'test-double-first-class',
+      checkedAt: '2026-08-06',
+      candidateManifests: 1,
+      exactOfficialHttpsSources: 3,
+      verifiedFiles: 3,
+    })
+    expect(readFileSync(repeated.artifactManifestPath, 'utf8')).toBe(
+      readFileSync(written.artifactManifestPath, 'utf8'),
+    )
+    expect(readFileSync(repeated.checksumPath, 'utf8')).toBe(
+      readFileSync(written.checksumPath, 'utf8'),
+    )
+  })
+
+  it('fails closed for tampering, stale output, or formal-manifest output', () => {
+    const build = buildSourceManifestCohort(fixture())
+    const tamperedOutput = temporaryDirectory()
+    const written = writeSourceManifestCohort(
+      build,
+      tamperedOutput,
+      inputFingerprints(),
+      resolve('.'),
+    )
+    writeFileSync(
+      join(written.manifestDirectory, '001-test-university.v2.candidate.json'),
+      '{}\n',
+      'utf8',
+    )
+    expect(() => verifySourceManifestCohortArtifact(tamperedOutput))
+      .toThrow(/checksum mismatch/)
+
+    const staleOutput = temporaryDirectory()
+    writeFileSync(join(staleOutput, 'stale.json'), '{}\n', 'utf8')
+    expect(() => writeSourceManifestCohort(
+      build,
+      staleOutput,
+      inputFingerprints(),
+      resolve('.'),
+    )).toThrow(/must be empty/)
+
+    expect(() => writeSourceManifestCohort(
+      build,
+      join(resolve('.'), 'content/source-manifests/candidate-artifact'),
+      inputFingerprints(),
+      resolve('.'),
+    )).toThrow(/must not be inside/)
+  })
+
+  it('accepts only one explicit CLI mode and rejects the former generic output flag', () => {
+    expect(parseSourceManifestCohortCli([
+      '--checked-at', '2026-08-06', '--dry-run',
+    ])).toEqual({ mode: 'dry-run', checkedAt: '2026-08-06' })
+    expect(parseSourceManifestCohortCli([
+      '--checked-at', '2026-08-06', '--artifact-output', 'candidate-bundle',
+    ])).toEqual({
+      mode: 'write-artifact',
+      checkedAt: '2026-08-06',
+      artifactOutput: 'candidate-bundle',
+    })
+    expect(parseSourceManifestCohortCli([
+      '--verify-artifact', 'candidate-bundle',
+    ])).toEqual({ mode: 'verify-artifact', artifactOutput: 'candidate-bundle' })
+    expect(() => parseSourceManifestCohortCli([
+      '--checked-at', '2026-08-06', '--output', 'content/source-manifests',
+    ])).toThrow(/Unknown CLI option/)
   })
 })

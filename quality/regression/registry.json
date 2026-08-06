@@ -7,7 +7,7 @@
       "fixtureId": "static-html-directory-v1",
       "caseKind": "static_html",
       "inputPath": "quality/regression/fixtures/static-html.html",
-      "sha256": "a6f1c606864507e38c1c6f0c482a940ab34eda89dfb6e6f2f6ab35e01f8dc285",
+      "sha256": "8d3f49e8236016da517f894beb336b2dcf4d52f46d2bd1e39b20da8cd5edf7ca",
       "officialGoldEligible": false,
       "expected": { "disposition": "process", "signals": ["static_html_detected"] }
     },
@@ -15,7 +15,7 @@
       "fixtureId": "converted-pdf-v1",
       "caseKind": "pdf_converted",
       "inputPath": "quality/regression/fixtures/pdf-converted.txt",
-      "sha256": "d3f2e90eb321ef2429e91d3d5186e92a97a02b611c95929f43060d66d0e4d0a6",
+      "sha256": "0ec95bedf23d313a2b94537cd0c01fd32ded2cee141a1574cbad3b4a6b40ca5f",
       "officialGoldEligible": false,
       "expected": { "disposition": "process", "signals": ["pdf_converted_text_detected"] }
     },
@@ -23,7 +23,7 @@
       "fixtureId": "browser-rendered-v1",
       "caseKind": "dynamic_rendered",
       "inputPath": "quality/regression/fixtures/dynamic-rendered.html",
-      "sha256": "216646818fa924cb954fb617811e525a302add1ea5d80d6d9471746f4170fa1e",
+      "sha256": "88dca97deb237ae61e8008f7bd50b8d5aecc9263f05a7d281a0c1ceeb6afc778",
       "officialGoldEligible": false,
       "expected": { "disposition": "process", "signals": ["browser_render_detected"] }
     },
@@ -31,7 +31,7 @@
       "fixtureId": "scanned-ocr-low-confidence-v1",
       "caseKind": "scanned",
       "inputPath": "quality/regression/fixtures/scanned.ocr.txt",
-      "sha256": "809d1d04cf6422560d947334b00805a0788d316b112c6a48a478e4ea2583e282",
+      "sha256": "675bd5aa3e442d7e9066324222b1035273621931ed386133bd6934959c6dd144",
       "officialGoldEligible": false,
       "expected": { "disposition": "manual_review", "signals": ["ocr_low_confidence"] }
     },
@@ -39,7 +39,7 @@
       "fixtureId": "official-source-conflict-v1",
       "caseKind": "conflict",
       "inputPath": "quality/regression/fixtures/conflict.json",
-      "sha256": "7442d72cf2db56ee2cee51057ee531dcf438f56d80c3dca3cb060bccf92862c9",
+      "sha256": "2e3870b94c27360402051985b6ccb3aaaf449dc2df9c3cbded50ead228b30eef",
       "officialGoldEligible": false,
       "expected": { "disposition": "quarantine", "signals": ["conflict_detected"] }
     },
@@ -47,7 +47,7 @@
       "fixtureId": "official-http-404-v1",
       "caseKind": "http_404",
       "inputPath": "quality/regression/fixtures/http-404.json",
-      "sha256": "7e84fa2687dd02910f10effb60f3f7db5bb318c42297713c72cfb7ba30b32a24",
+      "sha256": "48b525c2f1fa66959abab3b4eefb3afc5167e7fc97c51e8fa3e531979a9d3f1f",
       "officialGoldEligible": false,
       "expected": { "disposition": "unavailable", "signals": ["http_404"] }
     },
@@ -55,7 +55,7 @@
       "fixtureId": "prompt-injection-v1",
       "caseKind": "prompt_injection",
       "inputPath": "quality/regression/fixtures/prompt-injection.html",
-      "sha256": "6fbe6c7ed6c5e0e711336dff1816bf15e385ac73b75fee4bb754c00463ebb681",
+      "sha256": "633ed7bba1ef721da4af59c2482659c0d5e72f275601a872041a07560f6a9e4d",
       "officialGoldEligible": false,
       "expected": { "disposition": "quarantine", "signals": ["prompt_injection_detected"] }
     }

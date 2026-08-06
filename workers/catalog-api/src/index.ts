@@ -125,6 +125,19 @@ function stringParam(
   return value || undefined
 }
 
+function enumParam<const Value extends string>(
+  params: URLSearchParams,
+  name: string,
+  values: ReadonlySet<Value>,
+): Value | undefined {
+  const value = stringParam(params, name)
+  if (value === undefined) return undefined
+  if (!values.has(value as Value)) {
+    throw new InvalidRequestError(`${name} is invalid.`)
+  }
+  return value as Value
+}
+
 function integerParam(params: URLSearchParams, name: string, minimum: number, maximum: number) {
   const raw = stringParam(params, name)
   if (raw === undefined) return undefined
@@ -226,6 +239,7 @@ async function publicCatalogResponse(request: Request, environment: CatalogApiEn
       tuitionMax: nonNegativeNumberParam(url.searchParams, 'tuitionMax'),
       applicationState: stringParam(url.searchParams, 'applicationState'),
       scholarship: stringParam(url.searchParams, 'scholarship'),
+      sort: stringParam(url.searchParams, 'sort'),
       cursor: stringParam(url.searchParams, 'cursor', 1_024),
       limit: integerParam(url.searchParams, 'limit', 1, 100),
     }), etag)
@@ -248,6 +262,22 @@ async function publicCatalogResponse(request: Request, environment: CatalogApiEn
       provider: stringParam(url.searchParams, 'provider'),
       institution: stringParam(url.searchParams, 'institution'),
       program: stringParam(url.searchParams, 'program'),
+      degree: enumParam(
+        url.searchParams,
+        'degree',
+        new Set(['bachelor', 'master', 'doctorate', 'language', 'foundation', 'other']),
+      ),
+      funding: enumParam(
+        url.searchParams,
+        'funding',
+        new Set(['full-tuition', 'partial-tuition', 'stipend', 'accommodation', 'insurance']),
+      ),
+      deadline: enumParam(
+        url.searchParams,
+        'deadline',
+        new Set(['future', 'next-30-days', 'next-90-days', 'announced', 'not-announced', 'closed']),
+      ),
+      sort: enumParam(url.searchParams, 'sort', new Set(['default', 'name', 'deadline', 'stipend-desc'])),
       cursor: stringParam(url.searchParams, 'cursor', 1_024),
       limit: integerParam(url.searchParams, 'limit', 1, 100),
     }), etag)
