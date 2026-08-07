@@ -1,11 +1,21 @@
 import { bundleSchema } from '@/lib/data/schema'
 import type { DataBundle } from '@/lib/data/types'
+import { getTodayDate } from '@/lib/data/freshness'
+import { parseD1InstitutionList, parseD1ProgramList, parseD1ScholarshipList } from './d1-list'
 import { deriveCatalogRelease, parseCatalogRelease } from './release'
 import {
+  CATALOG_LIST_DEFAULT_LIMIT,
+  CATALOG_LIST_MAX_LIMIT,
   CatalogRepositoryError,
   type CatalogFetch,
+  type CatalogInstitutionListPage,
+  type CatalogInstitutionListQuery,
+  type CatalogProgramListPage,
+  type CatalogProgramListQuery,
   type CatalogRelease,
   type CatalogRepository,
+  type CatalogScholarshipListPage,
+  type CatalogScholarshipListQuery,
 } from './types'
 
 type CatalogSnapshot = {
@@ -94,10 +104,33 @@ function parseApiPayload(value: unknown): { bundleValue: unknown; releaseValue?:
   return { bundleValue: value }
 }
 
+function listLimit(value: number | undefined): number {
+  if (value === undefined) return CATALOG_LIST_DEFAULT_LIMIT
+  if (!Number.isSafeInteger(value) || value < 1) {
+    throw new CatalogRepositoryError(
+      'INVALID_LIST_LIMIT',
+      'Catalog list limit must be a positive integer.',
+    )
+  }
+  return Math.min(value, CATALOG_LIST_MAX_LIMIT)
+}
+
+function addParam(url: URL, name: string, value: string | number | undefined): void {
+  if (value !== undefined && value !== '') url.searchParams.set(name, String(value))
+}
+
+function tuitionRange(value: string | undefined): { minimum?: number; maximum?: number } {
+  if (value === 'under-20000') return { maximum: 20_000 }
+  if (value === '20000-40000') return { minimum: 20_001, maximum: 40_000 }
+  if (value === 'over-40000') return { minimum: 40_001 }
+  return {}
+}
+
 export class D1CatalogRepository implements CatalogRepository {
   readonly mode = 'd1' as const
   private readonly apiUrl: string
   private readonly apiToken: string | undefined
+  private readonly parsedApiUrl: URL
   private readonly fetcher: CatalogFetch
   private readonly cacheTtlMs: number
   private readonly timeoutMs: number
@@ -125,6 +158,7 @@ export class D1CatalogRepository implements CatalogRepository {
     if (parsedApiUrl.username || parsedApiUrl.password) {
       throw new CatalogRepositoryError('INVALID_API_URL', 'CATALOG_API_URL must not contain credentials.')
     }
+    this.parsedApiUrl = parsedApiUrl
     this.apiToken = options.apiToken?.trim() || undefined
     if (this.apiToken) {
       const expectedHost = options.apiTokenHost?.trim().toLowerCase()
@@ -159,6 +193,134 @@ export class D1CatalogRepository implements CatalogRepository {
 
   async getRelease(): Promise<CatalogRelease> {
     return (await this.getSnapshot()).release
+  }
+
+  async listInstitutions(
+    query: CatalogInstitutionListQuery = {},
+  ): Promise<CatalogInstitutionListPage> {
+    const url = this.publicEndpoint('institutions')
+    addParam(url, 'q', query.q)
+    addParam(url, 'city', query.city)
+    addParam(url, 'region', query.region)
+    addParam(url, 'discipline', query.discipline)
+    addParam(url, 'sort', query.sort)
+    addParam(url, 'cursor', query.cursor)
+    addParam(url, 'limit', listLimit(query.limit))
+    return parseD1InstitutionList(
+      await this.fetchListPayload(url),
+      query.today ?? getTodayDate(),
+    )
+  }
+
+
+  async listPrograms(
+    query: CatalogProgramListQuery = {},
+  ): Promise<CatalogProgramListPage> {
+    const url = this.publicEndpoint('programs')
+    const range = tuitionRange(query.tuition)
+    addParam(url, 'q', query.q)
+    addParam(url, 'institution', query.institution)
+    addParam(url, 'city', query.city)
+    addParam(url, 'type', query.type)
+    addParam(url, 'degree', query.degree)
+    addParam(url, 'discipline', query.discipline)
+    addParam(url, 'language', query.language)
+    addParam(url, 'academicYear', query.academicYear)
+    addParam(url, 'intake', query.intake)
+    addParam(url, 'tuition', query.tuition)
+    addParam(url, 'tuitionMin', query.tuitionMin ?? range.minimum)
+    addParam(url, 'tuitionMax', query.tuitionMax ?? range.maximum)
+    addParam(url, 'applicationState', query.applicationState)
+    addParam(url, 'scholarship', query.scholarship)
+    addParam(url, 'sort', query.sort)
+    addParam(url, 'cursor', query.cursor)
+    addParam(url, 'limit', listLimit(query.limit))
+    return parseD1ProgramList(
+      await this.fetchListPayload(url),
+      query.today ?? getTodayDate(),
+    )
+  }
+
+  async listScholarships(
+    query: CatalogScholarshipListQuery = {},
+  ): Promise<CatalogScholarshipListPage> {
+    const url = this.publicEndpoint('scholarships')
+    addParam(url, 'q', query.q)
+    addParam(url, 'provider', query.provider)
+    addParam(url, 'institution', query.institution)
+    addParam(url, 'program', query.program)
+    addParam(url, 'degree', query.degree)
+    addParam(url, 'funding', query.funding)
+    addParam(url, 'deadline', query.deadline)
+    addParam(url, 'sort', query.sort)
+    addParam(url, 'cursor', query.cursor)
+    addParam(url, 'limit', listLimit(query.limit))
+    return parseD1ScholarshipList(
+      await this.fetchListPayload(url),
+      query.today ?? getTodayDate(),
+    )
+  }
+
+  private publicEndpoint(resource: 'institutions' | 'programs' | 'scholarships'): URL {
+    const url = new URL(this.parsedApiUrl)
+    url.search = ''
+    url.hash = ''
+    const path = url.pathname.replace(/\/+$/u, '')
+    if (path.endsWith('/internal/v1/catalog-bundle')) {
+      url.pathname = path.slice(0, -'/internal/v1/catalog-bundle'.length) + `/api/v1/${resource}`
+    } else if (/\/api\/v1(?:\/[^/]+)?$/u.test(path)) {
+      url.pathname = path.replace(/\/api\/v1(?:\/[^/]+)?$/u, `/api/v1/${resource}`)
+    } else {
+      url.pathname = `${path}/api/v1/${resource}`.replace(/^\/\//u, '/')
+    }
+    return url
+  }
+
+  private async fetchListPayload(url: URL): Promise<unknown> {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), this.timeoutMs)
+    let response: Response
+    try {
+      response = await this.fetcher(url.toString(), {
+        method: 'GET',
+        headers: { accept: 'application/json' },
+        redirect: 'error',
+        signal: controller.signal,
+      })
+    } catch (error) {
+      clearTimeout(timeout)
+      throw new CatalogRepositoryError(
+        controller.signal.aborted ? 'CATALOG_API_TIMEOUT' : 'CATALOG_API_UNAVAILABLE',
+        controller.signal.aborted
+          ? `Catalog API request exceeded ${this.timeoutMs}ms.`
+          : `Catalog API request failed for ${url.origin}.`,
+        { cause: error },
+      )
+    }
+
+    try {
+      if (!response.ok) {
+        throw new CatalogRepositoryError(
+          'CATALOG_API_HTTP_ERROR',
+          `Catalog API returned HTTP ${response.status} ${response.statusText}`.trim(),
+        )
+      }
+      try {
+        const bytes = await readBoundedResponse(response, this.maxResponseBytes)
+        return JSON.parse(new TextDecoder().decode(bytes)) as unknown
+      } catch (error) {
+        if (error instanceof CatalogRepositoryError) throw error
+        throw new CatalogRepositoryError(
+          controller.signal.aborted ? 'CATALOG_API_TIMEOUT' : 'INVALID_API_RESPONSE',
+          controller.signal.aborted
+            ? `Catalog API request exceeded ${this.timeoutMs}ms.`
+            : 'Catalog API did not return valid JSON.',
+          { cause: error },
+        )
+      }
+    } finally {
+      clearTimeout(timeout)
+    }
   }
 
   private getSnapshot(): Promise<CatalogSnapshot> {

@@ -10,10 +10,11 @@ import type {
   Scholarship,
 } from '@/lib/data/types'
 import { fieldMetaMap, officialSourcesFor } from './field-meta'
-import { paginateBySlug } from './cursor'
+import { decodeCursor, encodeCursor, InvalidCursorError, paginateBySlug } from './cursor'
 import type {
   AdmissionCycleRecord,
   ApiEnvelope,
+  ApiMeta,
   InstitutionRecord,
   ProgramRecord,
   ProgramType,
@@ -25,11 +26,14 @@ import { AUTOMATED_COLLECTION_NOTICE } from './types'
 
 export type ListOptions = { cursor?: string; limit?: number }
 
+export type InstitutionSort = 'default' | 'name' | 'programs-desc' | 'scholarships-desc'
+
 export type InstitutionQuery = ListOptions & {
   q?: string
   city?: string
   region?: string
   discipline?: string
+  sort?: InstitutionSort
 }
 
 export type ProgramQuery = ListOptions & {
@@ -55,6 +59,13 @@ export type ScholarshipQuery = ListOptions & {
   program?: string
 }
 
+export class InvalidSearchQueryError extends Error {
+  constructor() {
+    super('Invalid search query.')
+    this.name = 'InvalidSearchQueryError'
+  }
+}
+
 function searchable(value: unknown): string {
   if (typeof value === 'string') return value
   if (Array.isArray(value)) return value.map(searchable).join(' ')
@@ -67,10 +78,86 @@ function matchesQuery(values: unknown[], query?: string) {
   return !normalized || searchable(values).toLocaleLowerCase().includes(normalized)
 }
 
+function institutionSearchTerms(query?: string) {
+  const normalized = query?.normalize('NFKC').trim()
+  if (!normalized) return null
+  const terms = normalized.match(/[\p{L}\p{N}]+/gu) ?? []
+  if (terms.length === 0 || terms.length > 20) throw new InvalidSearchQueryError()
+  return terms.map((term) => term.toLocaleLowerCase())
+}
+
+function matchesInstitutionName(name: LocalizedText, query?: string) {
+  const terms = institutionSearchTerms(query)
+  if (!terms) return true
+  const tokens = searchable(name)
+    .normalize('NFKC')
+    .toLocaleLowerCase()
+    .match(/[\p{L}\p{N}]+/gu) ?? []
+  return terms.every((term) => tokens.some((token) => token.startsWith(term)))
+}
+
 function matchesIdentity(value: { id: string; slug: string }, expected?: string) {
   return !expected || value.id === expected || value.slug === expected
 }
 
+function institutionCursorContext(query: InstitutionQuery) {
+  const entries = Object.entries(query)
+    .filter(([key, value]) =>
+      key !== 'cursor'
+      && key !== 'limit'
+      && value !== undefined
+      && value !== ''
+      && value !== 'default',
+    )
+    .sort(([left], [right]) => left.localeCompare(right))
+  if (entries.length === 0) return 'default'
+  const input = JSON.stringify(entries)
+  let hash = 2_166_136_261
+  for (let index = 0; index < input.length; index += 1) {
+    hash ^= input.charCodeAt(index)
+    hash = Math.imul(hash, 16_777_619)
+  }
+  return `q-${(hash >>> 0).toString(16).padStart(8, '0')}`
+}
+
+
+function institutionSortKey(record: InstitutionRecord, sort: InstitutionSort = 'default') {
+  if (sort === 'name') return record.slug
+  if (sort === 'programs-desc') {
+    return `${String(999_999_999_999_999 - record.programCount).padStart(15, '0')}:${record.slug}`
+  }
+  if (sort === 'scholarships-desc') {
+    return `${String(999_999_999_999_999 - record.scholarshipCount).padStart(15, '0')}:${record.slug}`
+  }
+  return record.slug
+}
+
+function paginateInstitutions(
+  records: InstitutionRecord[],
+  query: InstitutionQuery,
+) {
+  const limit = Math.min(Math.max(query.limit ?? 24, 1), 100)
+  const context = institutionCursorContext(query)
+  const key = (record: InstitutionRecord) =>
+    `${context}:${institutionSortKey(record, query.sort)}`
+  const sorted = [...records].sort((left, right) =>
+    institutionSortKey(left, query.sort).localeCompare(institutionSortKey(right, query.sort))
+    || left.id.localeCompare(right.id),
+  )
+  const cursor = query.cursor ? decodeCursor(query.cursor) : null
+  const start = cursor
+    ? sorted.findIndex((item) => key(item) === cursor.sortKey && item.id === cursor.id) + 1
+    : 0
+  if (cursor && start === 0) throw new InvalidCursorError()
+
+  const items = sorted.slice(start, start + limit)
+  const hasMore = start + items.length < sorted.length
+  const last = items.at(-1)
+  return {
+    items,
+    nextCursor: hasMore && last ? encodeCursor(key(last), last.id) : null,
+  }
+}
 function matchesProgramDiscipline(program: Program, expected?: string) {
   if (!expected) return true
   return isProgramField(expected)
@@ -112,13 +199,28 @@ export class CatalogApiService {
     private readonly today = new Date().toISOString().slice(0, 10),
   ) {}
 
-  private envelope<T>(data: T, page?: { pageSize: number; nextCursor: string | null }): ApiEnvelope<T> {
+  private envelope<T>(
+    data: T,
+    page?: {
+      pageSize: number
+      nextCursor: string | null
+      total?: number
+      facets?: ApiMeta['facets']
+    },
+  ): ApiEnvelope<T> {
     return {
       data,
       meta: {
         release: this.release,
         notice: AUTOMATED_COLLECTION_NOTICE,
-        ...(page ? { pageSize: page.pageSize, nextCursor: page.nextCursor } : {}),
+        ...(page
+          ? {
+              pageSize: page.pageSize,
+              nextCursor: page.nextCursor,
+              ...(page.total === undefined ? {} : { total: page.total }),
+              ...(page.facets === undefined ? {} : { facets: page.facets }),
+            }
+          : {}),
       },
     }
   }
@@ -126,6 +228,9 @@ export class CatalogApiService {
   private institutionRecord(university: DataBundle['universities'][number]): InstitutionRecord {
     const city = this.bundle.cities.find((item) => item.id === university.cityId) ?? null
     const relatedPrograms = this.bundle.programs.filter((item) => item.universityId === university.id)
+    const disciplines = [...new Set(relatedPrograms
+      .filter((item) => hasCurrentFacts(item, this.today))
+      .map((item) => classifyProgramField(item)))].sort()
     const relatedScholarships = this.bundle.scholarships.filter((item) =>
       item.universityIds.includes(university.id),
     )
@@ -145,6 +250,7 @@ export class CatalogApiService {
     return {
       ...university,
       summary: knownValue(dynamicMeta, 'summary', university.summary),
+      disciplines,
       city: city ? { id: city.id, slug: city.slug, name: city.name, province: city.province, region: city.region } : null,
       programCount: relatedPrograms.length,
       scholarshipCount: relatedScholarships.length,
@@ -287,14 +393,26 @@ export class CatalogApiService {
     const filtered = this.bundle.universities.filter((university) => {
       const city = this.bundle.cities.find((item) => item.id === university.cityId)
       const programs = this.bundle.programs.filter((item) => item.universityId === university.id)
-      const currentSummary = hasCurrentFacts(university, this.today) ? university.summary : null
-      return matchesQuery([university.name, currentSummary, city?.name, programs.map((item) => item.name)], query.q)
+      return matchesInstitutionName(university.name, query.q)
         && (!query.city || Boolean(city && matchesIdentity(city, query.city)))
         && (!query.region || university.region === query.region)
-        && (!query.discipline || programs.some((item) => matchesProgramDiscipline(item, query.discipline)))
+        && (!query.discipline || programs.some((item) =>
+          hasCurrentFacts(item, this.today)
+          && matchesProgramDiscipline(item, query.discipline)
+        ))
     }).map((item) => this.institutionRecord(item))
-    const page = paginateBySlug(filtered, query)
-    return this.envelope(page.items, { pageSize: page.items.length, nextCursor: page.nextCursor })
+    const cityIds = new Set(filtered.map((item) => item.city?.id).filter(Boolean))
+    const cities = this.bundle.cities
+      .filter((city) => cityIds.has(city.id))
+      .sort((left, right) => left.slug.localeCompare(right.slug) || left.id.localeCompare(right.id))
+      .map((city) => ({ value: city.slug || city.id, name: city.name }))
+    const page = paginateInstitutions(filtered, query)
+    return this.envelope(page.items, {
+      pageSize: page.items.length,
+      nextCursor: page.nextCursor,
+      total: filtered.length,
+      facets: { cities },
+    })
   }
 
   getInstitution(slug: string): ApiEnvelope<InstitutionRecord> | null {

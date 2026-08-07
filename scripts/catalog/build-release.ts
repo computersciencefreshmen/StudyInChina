@@ -2,11 +2,12 @@ import { createHash } from 'node:crypto'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
+import { classifyProgramField, programFieldTaxonomy } from '../../src/lib/data/fields'
 import { bundleSchema } from '../../src/lib/data/schema'
 import { getDataReleaseDate } from '../../src/lib/data/release'
 import type { AuditMeta, DataBundle, LocalizedText, Program, Source } from '../../src/lib/data/types'
 
-const LEGACY_PROJECTION_VERSION = 2
+const LEGACY_PROJECTION_VERSION = 3
 
 type SqlValue = string | number | boolean | null
 
@@ -41,7 +42,7 @@ const sourceKind: Record<Source['kind'], string> = {
   other: 'other',
 }
 
-const disciplineNames: Record<string, { en: string; zh: string }> = {
+const legacyDisciplineNames: Record<string, { en: string; zh: string }> = {
   engineering: { en: 'Engineering', zh: '工学' },
   business: { en: 'Business', zh: '商科' },
   medicine: { en: 'Medicine', zh: '医学' },
@@ -51,6 +52,20 @@ const disciplineNames: Record<string, { en: string; zh: string }> = {
   science: { en: 'Science', zh: '理学' },
   'art-design': { en: 'Art and Design', zh: '艺术与设计' },
   other: { en: 'Other', zh: '其他' },
+}
+
+const programFieldNamesZh = new Map(
+  programFieldTaxonomy('zh').map((field) => [field.key, field.label]),
+)
+const disciplineNames: Record<string, { en: string; zh: string }> = {
+  ...legacyDisciplineNames,
+  ...Object.fromEntries(programFieldTaxonomy('en').map((field) => [
+    field.key,
+    {
+      en: field.label,
+      zh: programFieldNamesZh.get(field.key) ?? field.label,
+    },
+  ])),
 }
 
 function sha256(value: string) {
@@ -362,7 +377,11 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
     addLocalized(statements, releaseId, university.id, 'name', university.name)
     addLocalized(statements, releaseId, university.id, 'summary', university.summary)
     addSources(statements, releaseId, university.id, university.sourceIds)
-    for (const [field, value] of Object.entries({ officialUrl: university.officialUrl, admissionsUrl: university.admissionsUrl })) {
+    for (const [field, value] of Object.entries({
+      summary: university.summary,
+      officialUrl: university.officialUrl,
+      admissionsUrl: university.admissionsUrl,
+    })) {
       addField(statements, releaseId, university.id, university, field, value, dataDate, hasOfficialSource(bundle, university.sourceIds))
     }
     addSearch(statements, releaseId, university.id, 'organization', university.name, university.summary, `${university.region} ${university.cityId}`)
@@ -393,6 +412,7 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
 
   for (const program of bundle.programs) {
     const projection = programProjection(program)
+    const discipline = classifyProgramField(program)
     statements.push(recordRow(releaseId, program, 'program', program))
     statements.push(insert('programs', {
       release_id: releaseId,
@@ -413,7 +433,7 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
     statements.push(insert('program_disciplines', {
       release_id: releaseId,
       program_id: program.id,
-      discipline_code: program.discipline,
+      discipline_code: discipline,
       is_primary: true,
     }))
     for (const language of program.teachingLanguages) {
@@ -437,6 +457,7 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
     addSources(statements, releaseId, program.id, program.sourceIds)
     const official = hasOfficialSource(bundle, program.sourceIds)
     for (const [field, value] of Object.entries({
+      discipline,
       teachingLanguages: program.teachingLanguages,
       durationMonths: program.durationMonths,
       durationMonthsMax: program.durationMonthsMax ?? null,

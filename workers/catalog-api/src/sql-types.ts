@@ -48,6 +48,16 @@ export type ApiMetaDto = {
   notice: string
   pageSize?: number
   nextCursor?: string | null
+  total?: number
+  facets?: {
+    universities?: ApiFacetOptionDto[]
+    cities?: ApiFacetOptionDto[]
+  }
+}
+
+export type ApiFacetOptionDto = {
+  value: string
+  name: LocalizedValue
 }
 
 export type ApiEnvelopeDto<T> = {
@@ -83,8 +93,9 @@ export type InstitutionDto = RecordDto<
     name: LocalizedValue
     summary: LocalizedValue | null
     institutionType: string
+    disciplineCodes: string[]
     officialUrl: string
-    admissionsUrl: string
+    admissionsUrl: string | null
     featured: boolean
   },
   {
@@ -136,6 +147,10 @@ export type ProgramDto = RecordDto<
     institution: InstitutionSummaryDto
   }
 >
+
+export type ProgramListDto = ProgramDto & {
+  currentCycle: ProgramCycleDto | null
+}
 
 export type ApplicationState =
   | 'open'
@@ -257,6 +272,7 @@ export type InstitutionQuery = ListOptions & {
   city?: string
   region?: string
   discipline?: string
+  sort?: 'default' | 'name' | 'programs-desc' | 'scholarships-desc'
 }
 
 export type ProgramQuery = ListOptions & {
@@ -273,6 +289,7 @@ export type ProgramQuery = ListOptions & {
   tuitionMax?: number
   applicationState?: string
   scholarship?: string
+  sort?: string
 }
 
 export type ScholarshipQuery = ListOptions & {
@@ -280,4 +297,8 @@ export type ScholarshipQuery = ListOptions & {
   provider?: string
   institution?: string
   program?: string
+  degree?: string
+  funding?: string
+  deadline?: string
+  sort?: string
 }

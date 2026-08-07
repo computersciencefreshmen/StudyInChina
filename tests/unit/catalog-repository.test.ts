@@ -16,6 +16,7 @@ import {
   type CatalogFetch,
   type CatalogRepository,
 } from '@/lib/catalog'
+import { getDataReleaseDate } from '@/lib/data/release'
 import { bundleSchema } from '@/lib/data/schema'
 import type { DataBundle } from '@/lib/data/types'
 
@@ -65,10 +66,11 @@ describe('CatalogRepository', () => {
   it('derives release metadata and all six record counts for JSON compatibility', async () => {
     const repository = createJsonCatalogRepository(() => copyBundle())
 
+    const expectedDataDate = getDataReleaseDate(allData)
     await expect(repository.getRelease()).resolves.toEqual({
-      id: 'json:2026-08-05',
-      dataDate: '2026-08-05',
-      generatedAt: '2026-08-05T00:00:00.000Z',
+      id: `json:${expectedDataDate}`,
+      dataDate: expectedDataDate,
+      generatedAt: `${expectedDataDate}T00:00:00.000Z`,
       recordCounts: getCatalogRecordCounts(allData),
     })
   })
@@ -229,6 +231,9 @@ describe('CatalogRepository', () => {
       mode: 'd1',
       getBundle: async () => { throw new Error('shadow unavailable') },
       getRelease: async () => { throw new Error('shadow unavailable') },
+      listInstitutions: async () => { throw new Error('shadow unavailable') },
+      listPrograms: async () => { throw new Error('shadow unavailable') },
+      listScholarships: async () => { throw new Error('shadow unavailable') },
     }
     const repository = createShadowCatalogRepository({ primary, shadow: failingShadow })
 

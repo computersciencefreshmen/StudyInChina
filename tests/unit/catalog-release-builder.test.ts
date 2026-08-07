@@ -3,10 +3,11 @@ import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
+import { classifyProgramField, programFieldTaxonomy } from '../../src/lib/data/fields'
 import { buildLegacyRelease, readLegacyBundle } from '../../scripts/catalog/build-release'
 
 function applyMigrations(database: DatabaseSync) {
-  for (const file of ['0001_release_core.sql', '0002_programs_scholarships.sql', '0003_search_views.sql', '0004_atomic_release_cutover.sql', '0009_release_compatibility_artifacts.sql']) {
+  for (const file of ['0001_release_core.sql', '0002_programs_scholarships.sql', '0003_search_views.sql', '0004_atomic_release_cutover.sql', '0005_public_projection_hardening.sql', '0009_release_compatibility_artifacts.sql']) {
     database.exec(readFileSync(join(process.cwd(), 'infra', 'd1', 'catalog', 'migrations', file), 'utf8'))
   }
 }
@@ -22,6 +23,7 @@ describe('legacy JSON release builder', () => {
     expect(artifacts.sql).not.toContain("SET release_status = 'retired'")
     expect(artifacts.sql).not.toContain('UPDATE release_pointer SET current_release_id')
     expect(artifacts.sql).toContain('INSERT OR IGNORE INTO release_activation_requests')
+    expect(artifacts.release.id).toMatch(/^legacy-v3-/u)
     expect(artifacts.r2Key).toContain(artifacts.release.id)
     expect(artifacts.contentSha256).toBe(
       createHash('sha256').update(Buffer.from(artifacts.envelope, 'utf8')).digest('hex'),
@@ -31,10 +33,11 @@ describe('legacy JSON release builder', () => {
     applyMigrations(database)
     database.exec(artifacts.sql)
     database.exec(artifacts.sql)
-    const release = database.prepare('SELECT release_id, release_status, content_sha256 FROM current_release').get() as Record<string, unknown>
+    const release = database.prepare('SELECT release_id, release_status, schema_version, content_sha256 FROM current_release').get() as Record<string, unknown>
     expect(release).toEqual({
       release_id: artifacts.release.id,
       release_status: 'active',
+      schema_version: 3,
       content_sha256: artifacts.contentSha256,
     })
     const counts = database.prepare(`
@@ -50,6 +53,106 @@ describe('legacy JSON release builder', () => {
       cycles: bundle.admissionCycles.length,
       scholarships: bundle.scholarships.length,
     })
+    const programFieldCodes = programFieldTaxonomy('en').map((field) => field.key)
+    expect(programFieldCodes).toHaveLength(17)
+    const disciplineDimensions = new Set(
+      (database.prepare(`
+        SELECT code FROM disciplines WHERE release_id = ? ORDER BY code
+      `).all(artifacts.release.id) as Array<{ code: string }>).map((item) => item.code),
+    )
+    for (const code of programFieldCodes) expect(disciplineDimensions.has(code)).toBe(true)
+    for (const legacyCode of [
+      'engineering',
+      'business',
+      'medicine',
+      'chinese-education',
+      'humanities',
+      'law-ir',
+      'science',
+      'art-design',
+      'other',
+    ]) expect(disciplineDimensions.has(legacyCode)).toBe(true)
+
+    const projectedDisciplines = database.prepare(`
+      SELECT program_id, discipline_code
+      FROM program_disciplines
+      WHERE release_id = ?
+      ORDER BY program_id
+    `).all(artifacts.release.id) as Array<{ program_id: string; discipline_code: string }>
+    expect(projectedDisciplines).toHaveLength(bundle.programs.length)
+    expect(projectedDisciplines.every((item) =>
+      programFieldCodes.includes(item.discipline_code as (typeof programFieldCodes)[number])
+    )).toBe(true)
+
+    const disciplineFacts = database.prepare(`
+      SELECT
+        COUNT(*) AS total,
+        SUM(field_status = 'known') AS known
+      FROM record_field_status
+      WHERE release_id = ? AND field_path = 'discipline'
+    `).get(artifacts.release.id) as { total: number; known: number }
+    expect(disciplineFacts.total).toBe(bundle.programs.length)
+    expect(disciplineFacts.known).toBeGreaterThan(0)
+
+    const currentDiscipline = database.prepare(`
+      SELECT program_id, discipline_code
+      FROM current_program_disciplines
+      ORDER BY program_id
+      LIMIT 1
+    `).get() as { program_id: string; discipline_code: string }
+    expect(currentDiscipline).toBeTruthy()
+    const sourceProgram = bundle.programs.find(
+      (program) => program.id === currentDiscipline.program_id,
+    )
+    expect(sourceProgram).toBeTruthy()
+    expect(currentDiscipline.discipline_code).toBe(classifyProgramField(sourceProgram!))
+    expect(database.prepare(`
+      SELECT field_status, value_json
+      FROM current_record_fields
+      WHERE record_id = ? AND field_path = 'discipline'
+    `).get(currentDiscipline.program_id)).toEqual({
+      field_status: 'known',
+      value_json: JSON.stringify(currentDiscipline.discipline_code),
+    })
+
+    const summaryFacts = database.prepare(`
+      SELECT
+        COUNT(*) AS total,
+        SUM(field_status = 'known') AS known
+      FROM record_field_status
+      WHERE release_id = ? AND field_path = 'summary'
+        AND record_id IN (
+          SELECT institution_id FROM institutions WHERE release_id = ?
+        )
+    `).get(artifacts.release.id, artifacts.release.id) as { total: number; known: number }
+    expect(summaryFacts.total).toBe(bundle.universities.length)
+    expect(summaryFacts.known).toBeGreaterThan(0)
+
+    const currentSummary = database.prepare(`
+      SELECT localized.record_id, localized.locale, localized.text_value
+      FROM current_localized_content AS localized
+      JOIN current_institutions AS institution
+        ON institution.release_id = localized.release_id
+       AND institution.institution_id = localized.record_id
+      WHERE localized.field_name = 'summary'
+      ORDER BY localized.record_id, localized.locale
+      LIMIT 1
+    `).get() as { record_id: string; locale: string; text_value: string }
+    expect(currentSummary.text_value.length).toBeGreaterThan(0)
+    const summaryUniversity = bundle.universities.find(
+      (university) => university.id === currentSummary.record_id,
+    )
+    expect(summaryUniversity).toBeTruthy()
+    expect(Object.values(summaryUniversity!.summary!)).toContain(currentSummary.text_value)
+    expect(database.prepare(`
+      SELECT field_status, value_json
+      FROM current_record_fields
+      WHERE record_id = ? AND field_path = 'summary'
+    `).get(currentSummary.record_id)).toEqual({
+      field_status: 'known',
+      value_json: JSON.stringify(summaryUniversity!.summary),
+    })
+
     const otherProgram = database.prepare(`
       SELECT program_type, degree_level
       FROM programs
@@ -134,5 +237,5 @@ describe('legacy JSON release builder', () => {
     expect(database.prepare('SELECT count(*) AS count FROM release_activation_requests').get())
       .toEqual({ count: 1 })
     database.close()
-  })
+  }, 30_000)
 })

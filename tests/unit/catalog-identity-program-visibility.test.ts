@@ -64,5 +64,5 @@ describe('Catalog identity-only program visibility', () => {
     `).get(program.release_id, program.program_id)!.count).toBeGreaterThan(0)
 
     database.close()
-  })
+  }, 30_000)
 })

@@ -1,16 +1,22 @@
 import { notFound } from 'next/navigation'
 import { Badge, Card, LinkButton, PageHero, SectionHeading, VerificationBadge } from '@/components/ui'
 import { ProgramCard } from '@/components/features/RecordCards'
-import { launchLocales } from '@/i18n/config'
+import { indexedLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 import { selectAdmissionCycle } from '@/lib/data/admission'
+import { selectUniversityPrebuildSlugs } from '@/lib/data/detail-prebuild'
 import { formatDate, localize } from '@/lib/data/format'
 import { getTodayDate } from '@/lib/data/freshness'
 import { disciplineLabels, regionLabels } from '@/lib/data/labels'
 import { getData, getUniversityBySlug } from '@/lib/data/load'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
-export function generateStaticParams() { const data = getData(); return launchLocales.flatMap((locale) => data.universities.map(({ slug }) => ({ locale, slug }))) }
+export const dynamicParams = true
+
+export function generateStaticParams() {
+  const slugs = selectUniversityPrebuildSlugs(getData())
+  return indexedLocales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })))
+}
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale: raw, slug } = await params; const locale = requireLocale(raw) || 'en'; const university = getUniversityBySlug(slug)
   if (!university) return {}; return pageMetadata(locale, localize(university.name, locale), localize(university.summary, locale), `universities/${slug}`)

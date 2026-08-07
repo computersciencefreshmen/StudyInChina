@@ -144,17 +144,20 @@ describe('regional depth wave on 2026-08-05', () => {
     }
   })
 
-  it('preserves public catalog floors and leaves no university without a program', () => {
-    expect(published.universities.length).toBeGreaterThanOrEqual(257)
-    expect(published.programs.length).toBeGreaterThanOrEqual(1_152)
-    expect(published.scholarships.length).toBeGreaterThanOrEqual(334)
+  it('preserves catalog identity floors and leaves no university without a program identity', () => {
+    expect(data.universities.length).toBeGreaterThanOrEqual(263)
+    expect(data.programs.length).toBeGreaterThanOrEqual(1_173)
+    expect(data.scholarships.length).toBeGreaterThanOrEqual(358)
 
     const programCounts = new Map<string, number>()
-    for (const program of published.programs) {
+    for (const program of data.programs) {
       programCounts.set(program.universityId, (programCounts.get(program.universityId) ?? 0) + 1)
     }
     expect(published.universities.every(
       (university) => (programCounts.get(university.id) ?? 0) >= 1,
+    )).toBe(true)
+    expect(published.scholarships.every(
+      (scholarship) => scholarship.status === 'verified' && scholarship.reviewAfter >= TODAY,
     )).toBe(true)
   })
 })

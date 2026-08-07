@@ -126,8 +126,8 @@ function entityPersistenceStatements(
          snapshot_id, source_discovery_id, ingestion_job_id, extractor,
          candidate_status, facts_json, evidence_json, issues_json,
          entity_sha256, confidence_ppm, created_at, processed_at, registered_at)
-       VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, 'registered',
-               ?10, ?11, '[]', ?12, 1000000, ?13, ?13, ?13)`,
+       VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, 'validated',
+               ?10, ?11, '[]', ?12, 1000000, ?13, ?13, NULL)`,
     ).bind(
       candidate.candidateId,
       candidate.institutionId,

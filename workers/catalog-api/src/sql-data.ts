@@ -76,12 +76,13 @@ export function placeholders(count: number) {
   return Array.from({ length: count }, () => '?').join(', ')
 }
 
-export function fts5Query(value: string) {
+export function fts5Query(value: string, column?: 'title') {
   const terms = value.normalize('NFKC').match(/[\p{L}\p{N}]+/gu) ?? []
   if (terms.length === 0 || terms.length > 20) {
     throw new InvalidSearchQueryError('Invalid search query.')
   }
-  return terms.map((term) => `"${term}"*`).join(' AND ')
+  const columnFilter = column ? `${column} : ` : ''
+  return terms.map((term) => `${columnFilter}"${term}"*`).join(' AND ')
 }
 
 export function normalizeLanguageFilter(value: string) {

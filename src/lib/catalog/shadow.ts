@@ -3,11 +3,26 @@ import {
   CATALOG_COLLECTIONS,
   type CatalogBackendMode,
   type CatalogCollection,
+  type CatalogInstitutionListPage,
+  type CatalogInstitutionListQuery,
+  type CatalogProgramListPage,
+  type CatalogProgramListQuery,
   type CatalogRelease,
   type CatalogRepository,
+  type CatalogScholarshipListPage,
+  type CatalogScholarshipListQuery,
 } from './types'
+import {
+  decodeShadowListCursor,
+  encodeShadowListCursor,
+} from './list-cursor'
 
-export type CatalogShadowOperation = 'getBundle' | 'getRelease'
+export type CatalogShadowOperation =
+  | 'getBundle'
+  | 'getRelease'
+  | 'listInstitutions'
+  | 'listPrograms'
+  | 'listScholarships'
 export type CatalogShadowStatus = 'match' | 'different' | 'shadow-error'
 export type CatalogShadowDifferenceKind = 'missing-in-shadow' | 'extra-in-shadow' | 'value-mismatch'
 export type CatalogShadowScope = CatalogCollection | 'release'
@@ -238,6 +253,65 @@ function compareRelease(
   return collector
 }
 
+function comparableListPage(
+  page: CatalogInstitutionListPage | CatalogProgramListPage | CatalogScholarshipListPage,
+): unknown {
+  const facets = Object.fromEntries(
+    Object.entries(page.facets).map(([name, values]) => [
+      name,
+      [...values].sort((left, right) => left.value.localeCompare(right.value)),
+    ]),
+  )
+  return {
+    items: page.items,
+    total: page.total,
+    facets,
+  }
+}
+
+function compareListPage(
+  scope: 'universities' | 'programs' | 'scholarships',
+  primary: CatalogInstitutionListPage | CatalogProgramListPage | CatalogScholarshipListPage,
+  shadow: CatalogInstitutionListPage | CatalogProgramListPage | CatalogScholarshipListPage,
+  maxDifferences: number,
+): DifferenceCollector {
+  const collector = new DifferenceCollector(maxDifferences)
+  compareValue(
+    collector,
+    scope,
+    'page',
+    '',
+    comparableListPage(primary),
+    comparableListPage(shadow),
+  )
+  return collector
+}
+
+function cursorInputs(
+  cursor: string | undefined,
+  resource: 'institutions' | 'programs' | 'scholarships',
+): { primary?: string; shadow?: string } {
+  if (!cursor) return {}
+  try {
+    const decoded = decodeShadowListCursor(cursor, resource)
+    return {
+      ...(decoded.primary ? { primary: decoded.primary } : {}),
+      ...(decoded.shadow ? { shadow: decoded.shadow } : {}),
+    }
+  } catch {
+    // URLs created before shadow mode remain usable by the primary backend.
+    return { primary: cursor }
+  }
+}
+
+function combinedCursor(
+  resource: 'institutions' | 'programs' | 'scholarships',
+  primary: string | null,
+  shadow: string | null,
+): string | null {
+  return primary ? encodeShadowListCursor(resource, primary, shadow) : null
+}
+
 function serializeError(error: unknown): { name: string; message: string } {
   if (error instanceof Error) return { name: error.name, message: error.message }
   return { name: 'Error', message: String(error) }
@@ -300,6 +374,108 @@ export class ShadowCatalogRepository implements CatalogRepository {
       compareRelease(primaryResult.value, shadowResult.value, this.maxDifferences),
     )
     return primaryResult.value
+  }
+
+  async listInstitutions(
+    query: CatalogInstitutionListQuery = {},
+  ): Promise<CatalogInstitutionListPage> {
+    const cursors = cursorInputs(query.cursor, 'institutions')
+    const [primaryResult, shadowResult] = await Promise.allSettled([
+      this.primary.listInstitutions({ ...query, cursor: cursors.primary }),
+      this.shadow.listInstitutions({ ...query, cursor: cursors.shadow }),
+    ])
+    if (primaryResult.status === 'rejected') throw primaryResult.reason
+
+    if (shadowResult.status === 'rejected') {
+      await this.recordShadowError('listInstitutions', shadowResult.reason)
+      return {
+        ...primaryResult.value,
+        nextCursor: combinedCursor('institutions', primaryResult.value.nextCursor, null),
+      }
+    }
+
+    await this.recordComparison(
+      'listInstitutions',
+      compareListPage('universities', primaryResult.value, shadowResult.value, this.maxDifferences),
+    )
+    return {
+      ...primaryResult.value,
+      nextCursor: combinedCursor(
+        'institutions',
+        primaryResult.value.nextCursor,
+        shadowResult.value.nextCursor,
+      ),
+    }
+  }
+
+
+  async listPrograms(
+    query: CatalogProgramListQuery = {},
+  ): Promise<CatalogProgramListPage> {
+    const cursors = cursorInputs(query.cursor, 'programs')
+    const [primaryResult, shadowResult] = await Promise.allSettled([
+      this.primary.listPrograms({ ...query, cursor: cursors.primary }),
+      this.shadow.listPrograms({ ...query, cursor: cursors.shadow }),
+    ])
+    if (primaryResult.status === 'rejected') throw primaryResult.reason
+
+    if (shadowResult.status === 'rejected') {
+      await this.recordShadowError('listPrograms', shadowResult.reason)
+      return {
+        ...primaryResult.value,
+        nextCursor: combinedCursor('programs', primaryResult.value.nextCursor, null),
+      }
+    }
+
+    await this.recordComparison(
+      'listPrograms',
+      compareListPage('programs', primaryResult.value, shadowResult.value, this.maxDifferences),
+    )
+    return {
+      ...primaryResult.value,
+      nextCursor: combinedCursor(
+        'programs',
+        primaryResult.value.nextCursor,
+        shadowResult.value.nextCursor,
+      ),
+    }
+  }
+
+  async listScholarships(
+    query: CatalogScholarshipListQuery = {},
+  ): Promise<CatalogScholarshipListPage> {
+    const cursors = cursorInputs(query.cursor, 'scholarships')
+    const [primaryResult, shadowResult] = await Promise.allSettled([
+      this.primary.listScholarships({ ...query, cursor: cursors.primary }),
+      this.shadow.listScholarships({ ...query, cursor: cursors.shadow }),
+    ])
+    if (primaryResult.status === 'rejected') throw primaryResult.reason
+
+    if (shadowResult.status === 'rejected') {
+      await this.recordShadowError('listScholarships', shadowResult.reason)
+      return {
+        ...primaryResult.value,
+        nextCursor: combinedCursor('scholarships', primaryResult.value.nextCursor, null),
+      }
+    }
+
+    await this.recordComparison(
+      'listScholarships',
+      compareListPage(
+        'scholarships',
+        primaryResult.value,
+        shadowResult.value,
+        this.maxDifferences,
+      ),
+    )
+    return {
+      ...primaryResult.value,
+      nextCursor: combinedCursor(
+        'scholarships',
+        primaryResult.value.nextCursor,
+        shadowResult.value.nextCursor,
+      ),
+    }
   }
 
   private async recordComparison(

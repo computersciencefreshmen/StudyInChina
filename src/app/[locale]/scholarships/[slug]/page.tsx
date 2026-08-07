@@ -1,18 +1,21 @@
 import { notFound } from 'next/navigation'
 import { SourceTransparency } from '@/components/features/SourceTransparency'
 import { Badge, Card, PageHero, VerificationBadge } from '@/components/ui'
-import { launchLocales } from '@/i18n/config'
+import { indexedLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
+import { selectScholarshipPrebuildSlugs } from '@/lib/data/detail-prebuild'
 import { formatCny, formatDate, localize } from '@/lib/data/format'
+import { getTodayDate } from '@/lib/data/freshness'
 import { getCatalogData, getCatalogScholarshipBySlug, getData } from '@/lib/data/load'
 import { coverageLabel, providerLabel } from '@/lib/data/scholarship'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
+export const dynamicParams = true
+
 export function generateStaticParams() {
   const data = getData()
-  return launchLocales.flatMap((locale) => (
-    data.scholarships.map(({ slug }) => ({ locale, slug }))
-  ))
+  const slugs = selectScholarshipPrebuildSlugs(data, getTodayDate())
+  return indexedLocales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })))
 }
 
 export async function generateMetadata({

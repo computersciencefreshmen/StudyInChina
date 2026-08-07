@@ -7,6 +7,10 @@ import {
 } from './artifact'
 import { buildArtifactFromPipeline } from './snapshot'
 import {
+  enforceCatalogReleaseRetention,
+  readCatalogReadiness,
+} from './retention'
+import {
   buildCompatibilityArtifact,
   ensureImmutableCompatibilityArtifact,
   type CompatibilityArtifact,
@@ -369,6 +373,7 @@ async function importArtifact(
       compatibility,
       now.toISOString(),
     )
+    await enforceCatalogReleaseRetention(environment.CATALOG_DB, now)
     return 'already-published'
   }
 
@@ -460,6 +465,7 @@ async function importArtifact(
   if (current?.current_release_id !== releaseId) {
     throw new ReleaseValidationError('release_activation_failed', 'catalog release pointer did not switch')
   }
+  await enforceCatalogReleaseRetention(environment.CATALOG_DB, now)
   return 'published'
 }
 
@@ -679,13 +685,63 @@ export async function handleQueue(
   }
 }
 
-export function handleFetch(request: Request): Response {
+async function readinessResponse(environment?: ReleaseBuilderEnv): Promise<Response> {
+  const headers = { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' }
+  if (!environment) {
+    return Response.json({
+      ok: false,
+      service: 'studyinchina-release-builder',
+      version: SERVICE_VERSION,
+      checks: {
+        database: false,
+        activeRelease: false,
+        pointerConsistency: false,
+        retention: false,
+      },
+    }, { status: 503, headers })
+  }
+  try {
+    const checks = await readCatalogReadiness(environment.CATALOG_DB)
+    const ok = Object.values(checks).every(Boolean)
+    return Response.json({
+      ok,
+      service: 'studyinchina-release-builder',
+      version: SERVICE_VERSION,
+      checks: { database: true, ...checks },
+    }, { status: ok ? 200 : 503, headers })
+  } catch {
+    return Response.json({
+      ok: false,
+      service: 'studyinchina-release-builder',
+      version: SERVICE_VERSION,
+      checks: {
+        database: false,
+        activeRelease: false,
+        pointerConsistency: false,
+        retention: false,
+      },
+    }, { status: 503, headers })
+  }
+}
+
+export function handleFetch(request: Request): Response
+export function handleFetch(
+  request: Request,
+  environment: ReleaseBuilderEnv,
+): Response | Promise<Response>
+export function handleFetch(
+  request: Request,
+  environment?: ReleaseBuilderEnv,
+): Response | Promise<Response> {
   const url = new URL(request.url)
   if (request.method === 'GET' && url.pathname === '/health') {
     return Response.json(
       { ok: true, service: 'studyinchina-release-builder', version: SERVICE_VERSION },
       { headers: { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' } },
     )
+  }
+  if (request.method === 'GET' && url.pathname === '/ready') {
+    return readinessResponse(environment)
   }
   return Response.json({ ok: false, error: 'not_found' }, { status: 404 })
 }

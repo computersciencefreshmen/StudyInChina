@@ -11,9 +11,9 @@ import type {
   University,
 } from '../../src/lib/data/types'
 import {
-  validatePilotSourceManifestDirectory,
-  type PilotSourceManifest,
-} from '../validate-source-manifests'
+  validateSourceManifestDirectory,
+  type SourceManifestRecord,
+} from '../source-manifest-registry'
 import { buildPilotSourceImport } from './build-source-import'
 
 type SqlValue = string | number | boolean | null
@@ -149,7 +149,7 @@ function urlHash(url: string): string {
   return createHash('sha256').update(url).digest('hex').slice(0, 24)
 }
 
-function sourceKindForCategory(category: PilotSourceManifest['sources'][number]['sourceCategory']): string {
+function sourceKindForCategory(category: SourceManifestRecord['sources'][number]['sourceCategory']): string {
   if (category === 'application_portal') return 'application_portal'
   if (category.includes('scholarship')) return 'scholarship'
   if (['undergraduate_catalog', 'masters_catalog', 'doctoral_catalog', 'non_degree_catalog', 'program_detail'].includes(category)) return 'program'
@@ -341,7 +341,7 @@ ON CONFLICT(record_id) DO UPDATE SET
 
 function ustcPrerequisiteStatements(
   statements: string[],
-  manifest: PilotSourceManifest,
+  manifest: SourceManifestRecord,
   generatedAt: string,
 ): number {
   const checkedAt = dateTimestamp(manifest.checkedAt)
@@ -454,7 +454,7 @@ function sourceOwners(bundle: DataBundle): Map<string, string> {
 
 function collectSourceDocuments(
   bundle: DataBundle,
-  manifests: PilotSourceManifest[],
+  manifests: SourceManifestRecord[],
   stableInstitutionIds: Set<string>,
 ): SourceDocument[] {
   type Candidate = SourceDocument & { preference: number }
@@ -628,7 +628,7 @@ ON CONFLICT(record_kind, field_path) DO NOTHING;`.trim())
 
 export function buildPipelineBootstrap(
   bundleInput: DataBundle,
-  manifests: PilotSourceManifest[],
+  manifests: SourceManifestRecord[],
   generatedAtInput = new Date().toISOString(),
 ): PipelineBootstrapArtifacts {
   const bundle = bundleSchema.parse(bundleInput)
@@ -784,7 +784,7 @@ function main() {
   const generatedAt = argument('--generated-at') ?? new Date().toISOString()
   const artifacts = buildPipelineBootstrap(
     readPipelineBootstrapBundle(),
-    validatePilotSourceManifestDirectory(),
+    validateSourceManifestDirectory(),
     generatedAt,
   )
   mkdirSync(outputDirectory, { recursive: true })

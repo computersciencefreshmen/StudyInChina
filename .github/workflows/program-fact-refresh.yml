@@ -11,7 +11,7 @@ on:
         default: '1000'
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: weekly-program-fact-refresh
@@ -30,6 +30,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           ref: main
+          persist-credentials: false
 
       - name: Use Node.js 24
         uses: actions/setup-node@v6
@@ -67,7 +68,7 @@ jobs:
             --review "$RUNNER_TEMP/current-program-review.json" \
             --data-dir content/data \
             --output-dir content/data \
-            --audit "quality/international-program-review/fact-enrichment-${{ steps.date.outputs.value }}.json" \
+            --audit "$RUNNER_TEMP/fact-enrichment-${{ steps.date.outputs.value }}.json" \
             --checked-at "${{ steps.date.outputs.value }}" \
             --max-urls "$MAXIMUM_URLS" \
             --minimum-domain-interval-ms 5000
@@ -80,16 +81,40 @@ jobs:
             tests/unit/content-data.test.ts \
             tests/unit/publication.test.ts
 
-      - name: Commit verified changes
+      - name: Prepare validated refresh candidate
         shell: bash
         run: |
-          if git diff --quiet -- content/data quality/international-program-review; then
-            echo "No verified fact changes."
-            exit 0
+          set -euo pipefail
+          artifact_dir="$RUNNER_TEMP/program-fact-refresh-candidate"
+          mkdir -p "$artifact_dir/content/data" \
+            "$artifact_dir/quality/international-program-review"
+
+          cp "$RUNNER_TEMP/current-program-review.json" \
+            "$artifact_dir/current-program-review.json"
+          cp "$RUNNER_TEMP/fact-enrichment-${{ steps.date.outputs.value }}.json" \
+            "$artifact_dir/quality/international-program-review/"
+          cp content/data/programs.json content/data/admission-cycles.json \
+            "$artifact_dir/content/data/"
+
+          git diff --binary -- \
+            content/data/programs.json \
+            content/data/admission-cycles.json \
+            > "$artifact_dir/catalog-changes.patch"
+          git diff --stat -- \
+            content/data/programs.json \
+            content/data/admission-cycles.json \
+            > "$artifact_dir/change-summary.txt"
+
+          if git diff --quiet -- \
+            content/data/programs.json \
+            content/data/admission-cycles.json; then
+            echo 'No verified fact changes.' >> "$artifact_dir/change-summary.txt"
           fi
-          git config user.name "studyinchina-data-bot"
-          git config user.email "studyinchina-data-bot@users.noreply.github.com"
-          git add content/data/programs.json content/data/admission-cycles.json \
-            "quality/international-program-review/fact-enrichment-${{ steps.date.outputs.value }}.json"
-          git commit -m "data: refresh official program facts ${{ steps.date.outputs.value }}"
-          git push origin HEAD:main
+
+      - name: Upload validated refresh candidate
+        uses: actions/upload-artifact@v6
+        with:
+          name: program-fact-refresh-${{ steps.date.outputs.value }}
+          path: ${{ runner.temp }}/program-fact-refresh-candidate
+          if-no-files-found: error
+          retention-days: 35

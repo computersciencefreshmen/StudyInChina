@@ -15,16 +15,41 @@ jobs:
     name: Point studyinchina.vercel.app to the successful main deployment
     if: >-
       github.event.deployment_status.state == 'success' &&
-      github.event.deployment.environment == 'Production' &&
-      github.event.deployment.ref == 'main'
+      github.event.deployment.environment == 'Production'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
+      DEPLOYMENT_SHA: ${{ github.event.deployment.sha }}
       DEPLOYMENT_URL: ${{ github.event.deployment_status.environment_url }}
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
     steps:
+      - name: Check out current main
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Verify deployment commit is current main
+        id: main
+        shell: bash
+        run: |
+          set -euo pipefail
+          main_sha="$(git rev-parse HEAD)"
+          if ! [[ "${DEPLOYMENT_SHA}" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "Unexpected deployment SHA: ${DEPLOYMENT_SHA}" >&2
+            exit 1
+          fi
+          if [[ "${DEPLOYMENT_SHA}" == "${main_sha}" ]]; then
+            echo 'matches=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo 'matches=false' >> "$GITHUB_OUTPUT"
+          echo "::notice::Deployment ${DEPLOYMENT_SHA} is not current main ${main_sha}; the stable alias will not be changed."
+
       - name: Detect alias credential
+        if: steps.main.outputs.matches == 'true'
         id: credential
         shell: bash
         run: |
@@ -37,7 +62,9 @@ jobs:
           fi
 
       - name: Validate deployment URL
-        if: steps.credential.outputs.configured == 'true'
+        if: >-
+          steps.main.outputs.matches == 'true' &&
+          steps.credential.outputs.configured == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -47,13 +74,17 @@ jobs:
           fi
 
       - name: Use Node.js 24
-        if: steps.credential.outputs.configured == 'true'
+        if: >-
+          steps.main.outputs.matches == 'true' &&
+          steps.credential.outputs.configured == 'true'
         uses: actions/setup-node@v6
         with:
           node-version: 24
 
       - name: Promote stable production alias
-        if: steps.credential.outputs.configured == 'true'
+        if: >-
+          steps.main.outputs.matches == 'true' &&
+          steps.credential.outputs.configured == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -64,7 +95,9 @@ jobs:
             --token "${VERCEL_TOKEN}"
 
       - name: Verify public release API
-        if: steps.credential.outputs.configured == 'true'
+        if: >-
+          steps.main.outputs.matches == 'true' &&
+          steps.credential.outputs.configured == 'true'
         shell: bash
         run: |
           set -euo pipefail

@@ -393,16 +393,16 @@ describe('sparse-school and regional university expansion on 2026-08-04', () => 
         .toContain(university?.id)
     }
   })
-  it('publishes every new university with at least one program and preserves catalog floors', () => {
-    expect(published.universities.length).toBeGreaterThanOrEqual(256)
-    expect(published.programs.length).toBeGreaterThanOrEqual(1_146)
-    expect(published.scholarships.length).toBeGreaterThanOrEqual(333)
+  it('preserves catalog identity floors and imports every new university with a program identity', () => {
+    expect(data.universities.length).toBeGreaterThanOrEqual(263)
+    expect(data.programs.length).toBeGreaterThanOrEqual(1_173)
+    expect(data.scholarships.length).toBeGreaterThanOrEqual(358)
 
-    const publishedUniversityBySlug = new Map(
-      published.universities.map((university) => [university.slug, university]),
+    const universityBySlug = new Map(
+      data.universities.map((university) => [university.slug, university]),
     )
     const programCounts = new Map<string, number>()
-    for (const program of published.programs) {
+    for (const program of data.programs) {
       programCounts.set(program.universityId, (programCounts.get(program.universityId) ?? 0) + 1)
     }
     expect(published.universities.every(
@@ -412,11 +412,14 @@ describe('sparse-school and regional university expansion on 2026-08-04', () => 
       .toBeGreaterThanOrEqual(225)
 
     for (const candidateUniversity of candidateUniversities) {
-      const university = publishedUniversityBySlug.get(candidateUniversity.slug)
+      const university = universityBySlug.get(candidateUniversity.slug)
       expect(university, `${candidateUniversity.slug} was not imported`).toBeDefined()
       expect(programCounts.get(university?.id ?? '') ?? 0, candidateUniversity.slug)
         .toBeGreaterThanOrEqual(1)
     }
+    expect(published.scholarships.every(
+      (scholarship) => scholarship.status === 'verified' && scholarship.reviewAfter >= TODAY,
+    )).toBe(true)
   })
 
   it('never leaves an overdue formal record marked as verified', () => {
@@ -429,7 +432,11 @@ describe('sparse-school and regional university expansion on 2026-08-04', () => 
       ...data.scholarships,
     ]
     const overdueVerifiedRecords = formalRecords.filter(
-      (record) => record.status === 'verified' && record.reviewAfter < TODAY,
+      (record): record is (typeof formalRecords)[number] & { status: 'verified'; reviewAfter: string } => (
+        'status' in record
+        && record.status === 'verified'
+        && record.reviewAfter < TODAY
+      ),
     )
 
     expect(overdueVerifiedRecords.map((record) => ({

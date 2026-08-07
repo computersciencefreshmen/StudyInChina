@@ -1,20 +1,59 @@
 import { notFound } from 'next/navigation'
-import { UniversityExplorer } from '@/components/features/UniversityExplorer'
+import { UniversityExplorerV2 } from '@/components/features/UniversityExplorerV2'
 import { PageHero } from '@/components/ui'
 import { getMessages } from '@/i18n/messages'
-import { getCatalogData } from '@/lib/data/load'
+import { getCatalogRepository } from '@/lib/catalog'
+import {
+  parseUniversityCatalogFilters,
+  queryUniversityCatalogRepository,
+  type UniversityCatalogSearchParams,
+} from '@/lib/university-catalog'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) { const locale = requireLocale((await params).locale) || 'en'; const m = getMessages(locale); return pageMetadata(locale, m.universities.title, m.universities.intro, 'universities') }
-export default async function UniversitiesPage({ params }: { params: Promise<{ locale: string }> }) {
-  const locale = requireLocale((await params).locale); if (!locale) notFound(); const messages = getMessages(locale); const data = await getCatalogData()
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = requireLocale((await params).locale) || 'en'
+  const messages = getMessages(locale)
+  return pageMetadata(
+    locale,
+    messages.universities.title,
+    messages.universities.intro,
+    'universities',
+  )
+}
+
+export default async function UniversitiesPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>
+  searchParams: Promise<UniversityCatalogSearchParams>
+}) {
+  const locale = requireLocale((await params).locale)
+  if (!locale) notFound()
+  const messages = getMessages(locale)
+  const filters = parseUniversityCatalogFilters(await searchParams)
+  const result = await queryUniversityCatalogRepository(getCatalogRepository(), filters)
   const coverageLabel = {
-    zh: '查看 147 所双一流高校数据表',
-    en: 'View all 147 Double First-Class universities',
-    ru: 'Все 147 университетов Double First-Class',
-    de: 'Alle 147 Double-First-Class-Hochschulen',
-    fr: 'Voir les 147 établissements Double First-Class',
-    es: 'Ver las 147 universidades Double First-Class',
+    zh: '查看非军校双一流高校数据表',
+    en: 'View non-military Double First-Class coverage',
+    ru: 'Охват невоенных вузов Double First-Class',
+    de: 'Abdeckung ziviler Double-First-Class-Hochschulen',
+    fr: 'Couverture des universités civiles Double First-Class',
+    es: 'Cobertura de universidades civiles Double First-Class',
   }[locale]
-  return <><PageHero variant="compact" eyebrow={`${data.universities.length} ${messages.nav.universities}`} title={messages.universities.title} description={messages.universities.intro} actions={<a className="atlas-button atlas-button--primary atlas-button--medium" href={`/${locale}/double-first-class`}>{coverageLabel} →</a>} meta={<><span>{messages.common.authoritativeNotice}</span></>} /><section className="atlas-container atlas-section"><UniversityExplorer universities={data.universities} programs={data.programs} cities={data.cities} locale={locale} messages={messages} /></section></>
+  const totalLabel = `${result.total}${result.totalExact ? '' : '+'}`
+
+  return <>
+    <PageHero
+      variant="compact"
+      eyebrow={`${totalLabel} ${messages.nav.universities}`}
+      title={messages.universities.title}
+      description={messages.universities.intro}
+      actions={<a className="atlas-button atlas-button--primary atlas-button--medium" href={`/${locale}/double-first-class`}>{coverageLabel} →</a>}
+      meta={<><span>{messages.common.authoritativeNotice}</span></>}
+    />
+    <section className="atlas-container atlas-section">
+      <UniversityExplorerV2 result={result} locale={locale} messages={messages} />
+    </section>
+  </>
 }

@@ -41,6 +41,10 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
 
       - name: Resolve audit mode
         id: mode
@@ -86,6 +90,13 @@ jobs:
           fi
           node scripts/data-health.mjs "${args[@]}"
 
+      - name: Build platform quality scorecard
+        id: platform_scorecard
+        continue-on-error: true
+        run: >-
+          npm run quality:platform-scorecard --
+          --output "$RUNNER_TEMP/platform-data-quality.json"
+
       - name: Add report to workflow summary
         if: always()
         shell: bash
@@ -106,6 +117,7 @@ jobs:
             ${{ runner.temp }}/link-health.md
             ${{ runner.temp }}/data-health.json
             ${{ runner.temp }}/data-health.md
+            ${{ runner.temp }}/platform-data-quality.json
           if-no-files-found: warn
           retention-days: 30
 
@@ -181,6 +193,7 @@ jobs:
         env:
           DATA_HEALTH_OUTCOME: ${{ steps.data_health.outcome }}
           LINK_CHECK_OUTCOME: ${{ steps.link_check.outcome }}
+          PLATFORM_SCORECARD_OUTCOME: ${{ steps.platform_scorecard.outcome }}
         run: |
           failed=0
           if [[ "$DATA_HEALTH_OUTCOME" == "failure" ]]; then
@@ -189,6 +202,10 @@ jobs:
           fi
           if [[ "$LINK_CHECK_OUTCOME" == "failure" ]]; then
             echo "One or more links returned a confirmed 404 or 410."
+            failed=1
+          fi
+          if [[ "$PLATFORM_SCORECARD_OUTCOME" == "failure" ]]; then
+            echo "The platform quality scorecard could not be generated."
             failed=1
           fi
           exit "$failed"

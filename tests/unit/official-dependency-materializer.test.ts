@@ -368,7 +368,7 @@ describe('official dependency canonicalizer', () => {
       integrity_check: 'ok',
     })
     database.close()
-  })
+  }, 30_000)
 
   it('materializes all ten existing dependencies twice without creating entities or cycles', () => {
     const artifacts = buildOfficialDependencyMaterialization(

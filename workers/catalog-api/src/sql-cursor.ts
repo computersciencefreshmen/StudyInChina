@@ -1,12 +1,15 @@
 type CursorResource = 'institutions' | 'programs' | 'scholarships'
 
 type CursorPayload = {
-  v: 1
+  v: 2
   resource: CursorResource
   releaseId: string
+  context: string
   sortKey: string
   id: string
 }
+
+type DecodedCursor = Pick<CursorPayload, 'sortKey' | 'id'>
 
 export class InvalidCursorError extends Error {
   constructor() {
@@ -35,31 +38,53 @@ export function encodeCursor(
   releaseId: string,
   sortKey: string,
   id: string,
+  context = 'default',
 ) {
-  return toBase64Url(JSON.stringify({ v: 1, resource, releaseId, sortKey, id } satisfies CursorPayload))
+  return toBase64Url(JSON.stringify({ v: 2, resource, releaseId, context, sortKey, id } satisfies CursorPayload))
 }
 
 export function decodeCursor(
   value: string,
   resource: CursorResource,
   releaseId: string,
-): CursorPayload {
+  context = 'default',
+): DecodedCursor {
   if (value.length > 1_024) throw new InvalidCursorError()
   try {
-    const parsed = JSON.parse(fromBase64Url(value)) as Partial<CursorPayload>
+    const parsed = JSON.parse(fromBase64Url(value)) as {
+      v?: unknown
+      resource?: unknown
+      releaseId?: unknown
+      context?: unknown
+      sortKey?: unknown
+      id?: unknown
+    }
     if (
-      parsed.v !== 1
-      || parsed.resource !== resource
+      parsed.resource !== resource
       || parsed.releaseId !== releaseId
       || typeof parsed.sortKey !== 'string'
       || typeof parsed.id !== 'string'
-      || parsed.sortKey.length > 160
+      || parsed.sortKey.length > 320
       || parsed.id.length === 0
       || parsed.id.length > 200
+    ) throw new InvalidCursorError()
+    const { sortKey, id } = parsed
+
+    if (parsed.v === 1) {
+      if (context !== 'default') throw new InvalidCursorError()
+      return { sortKey, id }
+    }
+
+    if (
+      parsed.v !== 2
+      || parsed.context !== context
+      || typeof parsed.context !== 'string'
+      || parsed.context.length === 0
+      || parsed.context.length > 80
     ) {
       throw new InvalidCursorError()
     }
-    return parsed as CursorPayload
+    return { sortKey, id }
   } catch (error) {
     if (error instanceof InvalidCursorError) throw error
     throw new InvalidCursorError()

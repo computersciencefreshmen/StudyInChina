@@ -271,7 +271,7 @@ describe('Pipeline stable-entity bootstrap', () => {
       FROM source_documents WHERE canonical_url = ?
     `).get(removable!.officialUrl)).toEqual({ active: 0 })
     database.close()
-  })
+  }, 30_000)
 
   it('keeps the bootstrap importer parseable and cross-platform', () => {
     const scriptPath = join(

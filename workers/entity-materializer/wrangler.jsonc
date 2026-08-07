@@ -1,0 +1,24 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "studyinchina-entity-materializer",
+  "main": "./src/index.ts",
+  "compatibility_date": "2026-07-20",
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": true },
+  "triggers": {
+    "crons": ["47 * * * *", "17 19 * * *"]
+  },
+  "vars": {
+    "MATERIALIZATION_BATCH_LIMIT": "20",
+    "RELEASE_CANDIDATE_LIMIT": "500"
+  },
+  "d1_databases": [
+    {
+      "binding": "PIPELINE_DB",
+      "database_name": "studyinchina-pipeline",
+      "database_id": "bb68098a-1429-44ad-869a-de9c3a5e478c",
+      "migrations_dir": "../../infra/d1/pipeline/migrations"
+    }
+  ]
+}

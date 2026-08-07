@@ -14,13 +14,14 @@ import {
 } from './sql-data'
 import type {
   ApiEnvelopeDto,
+  ApiFacetOptionDto,
   ApiMetaDto,
   ApplicationDto,
   InstitutionDto,
   InstitutionQuery,
   MoneyDto,
   ProgramCycleDto,
-  ProgramDto,
+  ProgramListDto,
   ProgramQuery,
   ProgramType,
   ReleaseInfoDto,
@@ -40,8 +41,8 @@ type SortableRow = RecordAuditRow & {
 }
 
 type InstitutionRow = SortableRow & {
+  slug: string | null
   institution_type: string
-  admissions_url: string
   featured: number
   official_url: string
   city_id: string
@@ -69,6 +70,7 @@ type ProgramRow = SortableRow & {
 }
 
 type ScholarshipRow = SortableRow & {
+  slug: string | null
   provider_organization_id: string
   provider_slug: string | null
   provider_organization_type: string
@@ -77,8 +79,24 @@ type ScholarshipRow = SortableRow & {
   official_url: string
 }
 
+type CountRow = {
+  total: number
+}
+
+type FacetRow = {
+  option_id: string
+  option_slug: string | null
+  locale: string | null
+  text_value: string | null
+}
+
 type ProgramCodeRow = {
   program_id: string
+  code: string
+}
+
+type InstitutionCodeRow = {
+  institution_id: string
   code: string
 }
 
@@ -211,11 +229,32 @@ function routeApplication(
   }
 }
 
+function cursorContext(query: Record<string, unknown>) {
+  const entries = Object.entries(query)
+    .filter(([key, value]) =>
+      key !== 'cursor'
+      && key !== 'limit'
+      && value !== undefined
+      && value !== ''
+      && value !== 'default',
+    )
+    .sort(([left], [right]) => left.localeCompare(right))
+  if (entries.length === 0) return 'default'
+  const input = JSON.stringify(entries)
+  let hash = 2_166_136_261
+  for (let index = 0; index < input.length; index += 1) {
+    hash ^= input.charCodeAt(index)
+    hash = Math.imul(hash, 16_777_619)
+  }
+  return `q-${(hash >>> 0).toString(16).padStart(8, '0')}`
+}
+
 function pagination<Row extends SortableRow>(
   rows: Row[],
   limit: number,
   resource: 'institutions' | 'programs' | 'scholarships',
   releaseId: string,
+  context = 'default',
 ) {
   const hasMore = rows.length > limit
   const items = hasMore ? rows.slice(0, limit) : rows
@@ -223,9 +262,207 @@ function pagination<Row extends SortableRow>(
   return {
     items,
     nextCursor: hasMore && last
-      ? encodeCursor(resource, releaseId, last.sort_slug, last.record_id)
+      ? encodeCursor(resource, releaseId, last.sort_slug, last.record_id, context)
       : null,
   }
+}
+
+function facetOptions(rows: FacetRow[]): ApiFacetOptionDto[] {
+  const options = new Map<string, ApiFacetOptionDto>()
+  for (const row of rows) {
+    const value = row.option_slug || row.option_id
+    const current = options.get(value) ?? { value, name: {} }
+    if (row.locale && row.text_value) current.name[row.locale] = row.text_value
+    options.set(value, current)
+  }
+  for (const option of options.values()) {
+    if (Object.keys(option.name).length === 0) option.name.en = option.value
+  }
+  return [...options.values()].sort((left, right) => left.value.localeCompare(right.value))
+}
+
+function institutionProgramCountSql() {
+  return `(
+    SELECT COUNT(*)
+    FROM current_programs AS counted_program
+    WHERE counted_program.release_id = institution.release_id
+      AND counted_program.institution_id = institution.institution_id
+  )`
+}
+
+function institutionScholarshipCountSql() {
+  return `(
+    SELECT COUNT(DISTINCT counted_scholarship.scholarship_id)
+    FROM current_scholarships AS counted_scholarship
+    JOIN current_record_fields AS scope
+      ON scope.release_id = counted_scholarship.release_id
+     AND scope.record_id = counted_scholarship.scholarship_id
+     AND scope.field_path IN ('universityIds', 'institution_ids')
+    JOIN json_each(scope.value_json) AS scoped_institution ON 1 = 1
+    WHERE counted_scholarship.release_id = institution.release_id
+      AND CAST(scoped_institution.value AS TEXT) = institution.institution_id
+  )`
+}
+
+
+function institutionSortSql(sort: InstitutionQuery['sort']) {
+  const slug = `COALESCE(record.slug, '')`
+  if (sort === 'name') return slug
+  if (sort === 'programs-desc') {
+    return `printf('%015d', 999999999999999 - CAST(${institutionProgramCountSql()} AS INTEGER))
+      || ':' || ${slug}`
+  }
+  if (sort === 'scholarships-desc') {
+    return `printf('%015d', 999999999999999 - CAST(${institutionScholarshipCountSql()} AS INTEGER))
+      || ':' || ${slug}`
+  }
+  return slug
+}
+function scholarshipDeadlineSql() {
+  return `COALESCE(
+    (
+      SELECT window.closes_on
+      FROM current_scholarship_cycles AS cycle
+      LEFT JOIN current_application_routes AS route
+        ON route.release_id = cycle.release_id
+       AND route.owner_record_id = cycle.scholarship_cycle_id
+      LEFT JOIN current_application_windows AS window
+        ON window.release_id = route.release_id
+       AND window.application_route_id = route.application_route_id
+      WHERE cycle.release_id = scholarship.release_id
+        AND cycle.scholarship_id = scholarship.scholarship_id
+        AND window.closes_on IS NOT NULL
+      ORDER BY
+        CASE window.application_state
+          WHEN 'open' THEN 0
+          WHEN 'rolling' THEN 1
+          WHEN 'upcoming' THEN 2
+          WHEN 'not_announced' THEN 3
+          ELSE 4
+        END,
+        window.closes_on,
+        cycle.academic_year DESC,
+        cycle.scholarship_cycle_id
+      LIMIT 1
+    ),
+    (
+      SELECT CAST(json_extract(deadline.value_json, '$') AS TEXT)
+      FROM current_record_fields AS deadline
+      WHERE deadline.release_id = scholarship.release_id
+        AND deadline.record_id = scholarship.scholarship_id
+        AND deadline.field_path IN ('deadline', 'closes_on')
+      ORDER BY CASE deadline.field_path WHEN 'deadline' THEN 0 ELSE 1 END
+      LIMIT 1
+    )
+  )`
+}
+
+function scholarshipStipendMinorSql() {
+  return `COALESCE(
+    (
+      SELECT MAX(COALESCE(coverage.amount_max_minor, coverage.amount_min_minor))
+      FROM current_scholarship_cycles AS cycle
+      JOIN current_scholarship_coverage AS coverage
+        ON coverage.release_id = cycle.release_id
+       AND coverage.scholarship_cycle_id = cycle.scholarship_cycle_id
+      WHERE cycle.release_id = scholarship.release_id
+        AND cycle.scholarship_id = scholarship.scholarship_id
+        AND coverage.coverage_type = 'stipend'
+    ),
+    (
+      SELECT CAST(json_extract(stipend.value_json, '$') AS INTEGER) * 100
+      FROM current_record_fields AS stipend
+      WHERE stipend.release_id = scholarship.release_id
+        AND stipend.record_id = scholarship.scholarship_id
+        AND stipend.field_path = 'coverage.stipendCnyPerMonth'
+      LIMIT 1
+    )
+  )`
+}
+
+function scholarshipNameSql() {
+  return `COALESCE(
+    (
+      SELECT localized.text_value
+      FROM current_localized_content AS localized
+      WHERE localized.release_id = scholarship.release_id
+        AND localized.record_id = scholarship.scholarship_id
+        AND localized.field_name = 'name'
+      ORDER BY CASE localized.locale WHEN 'en' THEN 0 WHEN 'zh' THEN 1 ELSE 2 END,
+               localized.locale
+      LIMIT 1
+    ),
+    record.slug,
+    ''
+  )`
+}
+
+function scholarshipSortSql(sort: ScholarshipQuery['sort']) {
+  const slug = `COALESCE(record.slug, '')`
+  if (sort === 'name') return `${scholarshipNameSql()} || ':' || ${slug}`
+  if (sort === 'deadline') {
+    const deadline = scholarshipDeadlineSql()
+    return `CASE
+      WHEN ${deadline} >= date('now', '+8 hours') THEN '0:' || ${deadline}
+      WHEN ${deadline} IS NOT NULL THEN '1:' || ${deadline}
+      ELSE '2:9999-12-31'
+    END || ':' || ${slug}`
+  }
+  if (sort === 'stipend-desc') {
+    const stipend = scholarshipStipendMinorSql()
+    return `CASE
+      WHEN ${stipend} IS NULL THEN '1:'
+      ELSE '0:' || printf('%015d', 999999999999999 - CAST(${stipend} AS INTEGER))
+    END || ':' || ${slug}`
+  }
+  return slug
+}
+
+function scholarshipFundingSql(funding: NonNullable<ScholarshipQuery['funding']>) {
+  if (funding === 'stipend') return `${scholarshipStipendMinorSql()} > 0`
+  const legacyField = funding === 'full-tuition' || funding === 'partial-tuition'
+    ? 'coverage.tuition'
+    : funding === 'accommodation'
+      ? 'coverage.accommodation'
+      : 'coverage.insurance'
+  const legacyValues = funding === 'full-tuition'
+    ? `'full'`
+    : funding === 'partial-tuition'
+      ? `'partial'`
+      : funding === 'accommodation'
+        ? `'full', 'partial'`
+        : `1, 'true'`
+  const coverageType = funding === 'full-tuition' || funding === 'partial-tuition'
+    ? 'tuition'
+    : funding
+  const coverageModes = funding === 'full-tuition'
+    ? `'full', 'waiver'`
+    : funding === 'partial-tuition'
+      ? `'partial', 'fixed'`
+      : funding === 'accommodation'
+        ? `'full', 'partial', 'waiver'`
+        : `'full', 'partial', 'fixed', 'waiver'`
+  return `(
+    EXISTS (
+      SELECT 1
+      FROM current_scholarship_cycles AS cycle
+      JOIN current_scholarship_coverage AS coverage
+        ON coverage.release_id = cycle.release_id
+       AND coverage.scholarship_cycle_id = cycle.scholarship_cycle_id
+      WHERE cycle.release_id = scholarship.release_id
+        AND cycle.scholarship_id = scholarship.scholarship_id
+        AND coverage.coverage_type = '${coverageType}'
+        AND coverage.coverage_mode IN (${coverageModes})
+    )
+    OR EXISTS (
+      SELECT 1
+      FROM current_record_fields AS legacy_coverage
+      WHERE legacy_coverage.release_id = scholarship.release_id
+        AND legacy_coverage.record_id = scholarship.scholarship_id
+        AND legacy_coverage.field_path = '${legacyField}'
+        AND json_extract(legacy_coverage.value_json, '$') IN (${legacyValues})
+    )
+  )`
 }
 
 function identityMeta(
@@ -283,13 +520,25 @@ export class CatalogSqlApi {
 
   private envelope<T>(
     data: T,
-    page?: { pageSize: number; nextCursor: string | null },
+    page?: {
+      pageSize: number
+      nextCursor: string | null
+      total?: number
+      facets?: ApiMetaDto['facets']
+    },
   ): ApiEnvelopeDto<T> {
     const meta: ApiMetaDto = {
       apiVersion: 'v1',
       release: this.release,
       notice: AUTOMATED_COLLECTION_NOTICE,
-      ...(page ? { pageSize: page.pageSize, nextCursor: page.nextCursor } : {}),
+      ...(page
+        ? {
+            pageSize: page.pageSize,
+            nextCursor: page.nextCursor,
+            ...(page.total === undefined ? {} : { total: page.total }),
+            ...(page.facets === undefined ? {} : { facets: page.facets }),
+          }
+        : {}),
     }
     return { data, meta }
   }
@@ -312,7 +561,7 @@ export class CatalogSqlApi {
           AND search_document.release_id = institution.release_id
           AND search_document.record_id = institution.institution_id
           AND search_document.record_kind = 'organization'
-      )`, fts5Query(query.q))
+      )`, fts5Query(query.q, 'title'))
     }
     if (query.city) {
       addCondition(
@@ -336,13 +585,17 @@ export class CatalogSqlApi {
           AND related_discipline.discipline_code = ?
       )`, query.discipline)
     }
+    const sortSql = institutionSortSql(query.sort)
+    const filteredConditions = [...conditions]
+    const filteredValues = [...values]
+    const context = cursorContext({ ...query })
     if (query.cursor && exactSlug === undefined) {
-      const cursor = decodeCursor(query.cursor, 'institutions', this.release.id)
+      const cursor = decodeCursor(query.cursor, 'institutions', this.release.id, context)
       addCondition(
         conditions,
         values,
-        `(COALESCE(record.slug, '') > ?
-          OR (COALESCE(record.slug, '') = ? AND record.record_id > ?))`,
+        `(${sortSql} > ?
+          OR (${sortSql} = ? AND record.record_id > ?))`,
         cursor.sortKey,
         cursor.sortKey,
         cursor.id,
@@ -350,37 +603,22 @@ export class CatalogSqlApi {
     }
     const limit = exactSlug === undefined ? pageLimit(query.limit) + 1 : 1
     values.push(limit)
-    return queryAll<InstitutionRow>(this.database, `
+    const rows = await queryAll<InstitutionRow>(this.database, `
       SELECT
         record.record_id,
-        COALESCE(record.slug, '') AS sort_slug,
+        record.slug,
+        ${sortSql} AS sort_slug,
         record.verified_at AS record_verified_at,
         record.review_after AS record_review_after,
         institution.institution_type,
-        institution.admissions_url,
         institution.featured,
         organization.official_url,
         institution.city_id,
         city_record.slug AS city_slug,
         city.country_code,
         city.region_code,
-        (
-          SELECT COUNT(*)
-          FROM current_programs AS counted_program
-          WHERE counted_program.release_id = institution.release_id
-            AND counted_program.institution_id = institution.institution_id
-        ) AS program_count,
-        (
-          SELECT COUNT(DISTINCT counted_scholarship.scholarship_id)
-          FROM current_scholarships AS counted_scholarship
-          JOIN current_record_fields AS scope
-            ON scope.release_id = counted_scholarship.release_id
-           AND scope.record_id = counted_scholarship.scholarship_id
-           AND scope.field_path IN ('universityIds', 'institution_ids')
-          JOIN json_each(scope.value_json) AS scoped_institution ON 1 = 1
-          WHERE counted_scholarship.release_id = institution.release_id
-            AND CAST(scoped_institution.value AS TEXT) = institution.institution_id
-        ) AS scholarship_count
+        ${institutionProgramCountSql()} AS program_count,
+        ${institutionScholarshipCountSql()} AS scholarship_count
       FROM current_institutions AS institution
       JOIN current_organizations AS organization
         ON organization.release_id = institution.release_id
@@ -395,73 +633,158 @@ export class CatalogSqlApi {
         ON city_record.release_id = city.release_id
        AND city_record.record_id = city.location_id
       WHERE ${conditions.join('\n        AND ')}
-      ORDER BY COALESCE(record.slug, ''), record.record_id
+      ORDER BY sort_slug, record.record_id
       LIMIT ?
     `, values)
+    return { rows, filteredConditions, filteredValues, context }
   }
 
   private async mapInstitutions(rows: InstitutionRow[]) {
-    const decorations = await loadRecordDecorations(
-      this.database,
-      this.release.id,
-      rows.flatMap((row) => [row.record_id, row.city_id]),
-    )
-    return rows.map((row): InstitutionDto => ({
-      type: 'institution',
-      id: row.record_id,
-      slug: row.sort_slug || null,
-      attributes: {
-        name: decorations.localized(row.record_id, 'name') ?? {},
-        summary: decorations.localized(row.record_id, 'summary'),
-        institutionType: row.institution_type,
-        officialUrl: row.official_url,
-        admissionsUrl: row.admissions_url,
-        featured: row.featured === 1,
-      },
-      relationships: {
-        location: {
-          id: row.city_id,
-          slug: row.city_slug,
-          name: decorations.localized(row.city_id, 'name') ?? {},
-          countryCode: row.country_code,
-          regionCode: row.region_code,
+    const institutionIds = rows.map((row) => row.record_id)
+    const cityIds = rows.map((row) => row.city_id)
+    const slots = institutionIds.length > 0 ? placeholders(institutionIds.length) : ''
+    const [institutionDecorations, cityDecorations, disciplines] = await Promise.all([
+      loadRecordDecorations(this.database, this.release.id, institutionIds),
+      loadRecordDecorations(this.database, this.release.id, cityIds),
+      institutionIds.length === 0
+        ? Promise.resolve([] as InstitutionCodeRow[])
+        : queryAll<InstitutionCodeRow>(this.database, `
+            SELECT DISTINCT
+              program.institution_id,
+              discipline.discipline_code AS code
+            FROM current_programs AS program
+            JOIN current_program_disciplines AS discipline
+              ON discipline.release_id = program.release_id
+             AND discipline.program_id = program.program_id
+            WHERE program.release_id = ?
+              AND program.institution_id IN (${slots})
+            ORDER BY program.institution_id, discipline.discipline_code
+          `, [this.release.id, ...institutionIds]),
+    ])
+    return rows.map((row): InstitutionDto => {
+      const disciplineCodes = disciplines
+        .filter((item) => item.institution_id === row.record_id)
+        .map((item) => item.code)
+      return {
+        type: 'institution',
+        id: row.record_id,
+        slug: row.slug,
+        attributes: {
+          name: institutionDecorations.localized(row.record_id, 'name') ?? {},
+          summary: institutionDecorations.localized(row.record_id, 'summary'),
+          institutionType: row.institution_type,
+          disciplineCodes,
+          officialUrl: row.official_url,
+          admissionsUrl: institutionDecorations.value<string>(
+            row.record_id,
+            ['admissionsUrl', 'admissions_url'],
+          ),
+          featured: row.featured === 1,
         },
-        programs: { count: Number(row.program_count) },
-        scholarships: { count: Number(row.scholarship_count) },
-      },
-      sources: decorations.sources(row.record_id),
-      fieldMeta: {
-        name: identityMeta(decorations, row, 'name'),
-        summary: decorations.meta(row, ['summary', 'localized.summary']),
-        institutionType: identityMeta(decorations, row, 'institution_type'),
-        officialUrl: identityMeta(decorations, row, 'official_url'),
-        admissionsUrl: identityMeta(decorations, row, 'admissions_url'),
-        featured: identityMeta(decorations, row, 'featured'),
-        location: identityMeta(decorations, row, 'city_id'),
-        programCount: identityMeta(decorations, row, 'program_count'),
-        scholarshipCount: identityMeta(decorations, row, 'scholarship_count'),
-      },
-    }))
+        relationships: {
+          location: {
+            id: row.city_id,
+            slug: row.city_slug,
+            name: cityDecorations.localized(row.city_id, 'name') ?? {},
+            countryCode: row.country_code,
+            regionCode: row.region_code,
+          },
+          programs: { count: Number(row.program_count) },
+          scholarships: { count: Number(row.scholarship_count) },
+        },
+        sources: institutionDecorations.sources(row.record_id),
+        fieldMeta: {
+          name: identityMeta(institutionDecorations, row, 'name'),
+          summary: institutionDecorations.meta(row, ['summary', 'localized.summary']),
+          institutionType: identityMeta(institutionDecorations, row, 'institution_type'),
+          disciplineCodes: identityMeta(institutionDecorations, row, 'disciplineCodes'),
+          officialUrl: identityMeta(institutionDecorations, row, 'official_url'),
+          admissionsUrl: institutionDecorations.meta(
+            row,
+            ['admissionsUrl', 'admissions_url'],
+          ),
+          featured: identityMeta(institutionDecorations, row, 'featured'),
+          location: identityMeta(institutionDecorations, row, 'city_id'),
+          programCount: identityMeta(institutionDecorations, row, 'program_count'),
+          scholarshipCount: identityMeta(institutionDecorations, row, 'scholarship_count'),
+        },
+      }
+    })
+  }
+
+  private async institutionListMetadata(
+    conditions: readonly string[],
+    values: readonly unknown[],
+  ) {
+    const where = conditions.join('\n        AND ')
+    const joins = `
+      FROM current_institutions AS institution
+      JOIN current_organizations AS organization
+        ON organization.release_id = institution.release_id
+       AND organization.organization_id = institution.institution_id
+      JOIN current_catalog_records AS record
+        ON record.release_id = institution.release_id
+       AND record.record_id = institution.institution_id
+      JOIN current_locations AS city
+        ON city.release_id = institution.release_id
+       AND city.location_id = institution.city_id
+      JOIN current_catalog_records AS city_record
+        ON city_record.release_id = city.release_id
+       AND city_record.record_id = city.location_id
+    `
+    const [count, cities] = await Promise.all([
+      queryFirst<CountRow>(this.database, `
+        SELECT COUNT(*) AS total
+        ${joins}
+        WHERE ${where}
+      `, [...values]),
+      queryAll<FacetRow>(this.database, `
+        SELECT DISTINCT
+          city.location_id AS option_id,
+          city_record.slug AS option_slug,
+          localized.locale,
+          localized.text_value
+        ${joins}
+        LEFT JOIN current_localized_content AS localized
+          ON localized.release_id = city.release_id
+         AND localized.record_id = city.location_id
+         AND localized.field_name = 'name'
+        WHERE ${where}
+        ORDER BY option_slug, option_id, localized.locale
+      `, [...values]),
+    ])
+    return {
+      total: Number(count?.total ?? 0),
+      facets: { cities: facetOptions(cities) },
+    }
   }
 
   async listInstitutions(query: InstitutionQuery = {}) {
     const limit = pageLimit(query.limit)
+    const selected = await this.selectInstitutions(query)
     const page = pagination(
-      await this.selectInstitutions(query),
+      selected.rows,
       limit,
       'institutions',
       this.release.id,
+      selected.context,
     )
-    const data = await this.mapInstitutions(page.items)
-    return this.envelope(data, { pageSize: data.length, nextCursor: page.nextCursor })
+    const [data, metadata] = await Promise.all([
+      this.mapInstitutions(page.items),
+      this.institutionListMetadata(selected.filteredConditions, selected.filteredValues),
+    ])
+    return this.envelope(data, {
+      pageSize: data.length,
+      nextCursor: page.nextCursor,
+      ...metadata,
+    })
   }
 
   async getInstitution(slug: string) {
-    const row = (await this.selectInstitutions({}, slug))[0]
+    const row = (await this.selectInstitutions({}, slug)).rows[0]
     if (!row) return null
     return this.envelope((await this.mapInstitutions([row]))[0]!)
   }
-
   private async selectPrograms(query: ProgramQuery, exactSlug?: string) {
     const conditions = ['record.release_id = ?']
     const values: unknown[] = [this.release.id]
@@ -653,8 +976,11 @@ export class CatalogSqlApi {
         ...cycleValues,
       )
     }
+    const filteredConditions = [...conditions]
+    const filteredValues = [...values]
+    const context = cursorContext({ ...query })
     if (query.cursor && exactSlug === undefined) {
-      const cursor = decodeCursor(query.cursor, 'programs', this.release.id)
+      const cursor = decodeCursor(query.cursor, 'programs', this.release.id, context)
       addCondition(
         conditions,
         values,
@@ -667,7 +993,7 @@ export class CatalogSqlApi {
     }
     const limit = exactSlug === undefined ? pageLimit(query.limit) + 1 : 1
     values.push(limit)
-    return queryAll<ProgramRow>(this.database, `
+    const rows = await queryAll<ProgramRow>(this.database, `
       SELECT
         record.record_id,
         COALESCE(record.slug, '') AS sort_slug,
@@ -706,12 +1032,13 @@ export class CatalogSqlApi {
       ORDER BY COALESCE(record.slug, ''), record.record_id
       LIMIT ?
     `, values)
+    return { rows, filteredConditions, filteredValues, context }
   }
 
   private async mapPrograms(rows: ProgramRow[]) {
     const programIds = rows.map((row) => row.record_id)
     const slots = programIds.length > 0 ? placeholders(programIds.length) : ''
-    const [decorations, disciplines, languages] = await Promise.all([
+    const [decorations, disciplines, languages, currentCycles] = await Promise.all([
       loadRecordDecorations(
         this.database,
         this.release.id,
@@ -733,8 +1060,9 @@ export class CatalogSqlApi {
             WHERE release_id = ? AND program_id IN (${slots})
             ORDER BY program_id, role, language_code
           `, [this.release.id, ...programIds]),
+      this.currentProgramCycles(rows),
     ])
-    return rows.map((row): ProgramDto => {
+    return rows.map((row): ProgramListDto => {
       const disciplineCodes = disciplines
         .filter((item) => item.program_id === row.record_id)
         .map((item) => item.code)
@@ -786,24 +1114,101 @@ export class CatalogSqlApi {
           applyUrl: decorations.meta(row, ['apply_url', 'applyUrl']),
           institution: identityMeta(decorations, row, 'institution_id'),
         },
+        currentCycle: currentCycles.get(row.record_id) ?? null,
       }
     })
   }
 
+  private async programListMetadata(
+    conditions: readonly string[],
+    values: readonly unknown[],
+  ) {
+    const where = conditions.join('\n        AND ')
+    const joins = `
+      FROM current_programs AS program
+      JOIN current_catalog_records AS record
+        ON record.release_id = program.release_id
+       AND record.record_id = program.program_id
+      JOIN current_institutions AS institution
+        ON institution.release_id = program.release_id
+       AND institution.institution_id = program.institution_id
+      JOIN current_catalog_records AS institution_record
+        ON institution_record.release_id = institution.release_id
+       AND institution_record.record_id = institution.institution_id
+      JOIN current_locations AS city
+        ON city.release_id = institution.release_id
+       AND city.location_id = institution.city_id
+      JOIN current_catalog_records AS city_record
+        ON city_record.release_id = city.release_id
+       AND city_record.record_id = city.location_id
+    `
+    const [count, universities, cities] = await Promise.all([
+      queryFirst<CountRow>(this.database, `
+        SELECT COUNT(*) AS total
+        ${joins}
+        WHERE ${where}
+      `, [...values]),
+      queryAll<FacetRow>(this.database, `
+        SELECT DISTINCT
+          institution.institution_id AS option_id,
+          institution_record.slug AS option_slug,
+          localized.locale,
+          localized.text_value
+        ${joins}
+        LEFT JOIN current_localized_content AS localized
+          ON localized.release_id = institution.release_id
+         AND localized.record_id = institution.institution_id
+         AND localized.field_name = 'name'
+        WHERE ${where}
+        ORDER BY option_slug, option_id, localized.locale
+      `, [...values]),
+      queryAll<FacetRow>(this.database, `
+        SELECT DISTINCT
+          city.location_id AS option_id,
+          city_record.slug AS option_slug,
+          localized.locale,
+          localized.text_value
+        ${joins}
+        LEFT JOIN current_localized_content AS localized
+          ON localized.release_id = city.release_id
+         AND localized.record_id = city.location_id
+         AND localized.field_name = 'name'
+        WHERE ${where}
+        ORDER BY option_slug, option_id, localized.locale
+      `, [...values]),
+    ])
+    return {
+      total: Number(count?.total ?? 0),
+      facets: {
+        universities: facetOptions(universities),
+        cities: facetOptions(cities),
+      },
+    }
+  }
+
   async listPrograms(query: ProgramQuery = {}) {
     const limit = pageLimit(query.limit)
+    const selected = await this.selectPrograms(query)
     const page = pagination(
-      await this.selectPrograms(query),
+      selected.rows,
       limit,
       'programs',
       this.release.id,
+      selected.context,
     )
-    const data = await this.mapPrograms(page.items)
-    return this.envelope(data, { pageSize: data.length, nextCursor: page.nextCursor })
+    const [data, metadata] = await Promise.all([
+      this.mapPrograms(page.items),
+      this.programListMetadata(selected.filteredConditions, selected.filteredValues),
+    ])
+    return this.envelope(data, {
+      pageSize: data.length,
+      nextCursor: page.nextCursor,
+      ...metadata,
+    })
   }
 
   async getProgram(slug: string) {
-    const row = (await this.selectPrograms({}, slug))[0]
+    const row = (await this.selectPrograms({}, slug)).rows[0]
     if (!row) return null
     return this.envelope((await this.mapPrograms([row]))[0]!)
   }
@@ -870,13 +1275,93 @@ export class CatalogSqlApi {
           AND (matched_program.program_id = ? OR matched_record.slug = ?)
       )`, query.program, query.program)
     }
+    if (query.degree) {
+      const degreeValues: unknown[] = []
+      const programDegree = ['bachelor', 'master', 'doctorate'].includes(query.degree)
+        ? (degreeValues.push(query.degree), 'matched_program.degree_level = ?')
+        : query.degree === 'language'
+          ? `matched_program.program_type = 'language'`
+          : query.degree === 'foundation'
+            ? `matched_program.program_type = 'foundation'`
+            : `matched_program.degree_level IS NULL
+                AND matched_program.program_type NOT IN ('language', 'foundation')`
+      const normalizedDegree = ['bachelor', 'master', 'doctorate'].includes(query.degree)
+        ? `OR EXISTS (
+            SELECT 1
+            FROM current_scholarship_cycles AS cycle
+            WHERE cycle.release_id = scholarship.release_id
+              AND cycle.scholarship_id = scholarship.scholarship_id
+              AND (
+                (
+                  cycle.degree_scope = 'all'
+                  AND NOT EXISTS (
+                    SELECT 1 FROM scholarship_cycle_degree_levels AS excluded
+                    WHERE excluded.release_id = cycle.release_id
+                      AND excluded.scholarship_cycle_id = cycle.scholarship_cycle_id
+                      AND excluded.degree_level = ?
+                      AND excluded.inclusion = 'exclude'
+                  )
+                )
+                OR EXISTS (
+                  SELECT 1 FROM scholarship_cycle_degree_levels AS included
+                  WHERE included.release_id = cycle.release_id
+                    AND included.scholarship_cycle_id = cycle.scholarship_cycle_id
+                    AND included.degree_level = ?
+                    AND included.inclusion = 'include'
+                )
+              )
+          )`
+        : ''
+      if (normalizedDegree) degreeValues.push(query.degree, query.degree)
+      addCondition(conditions, values, `(
+        EXISTS (
+          SELECT 1
+          FROM current_record_fields AS scope
+          JOIN json_each(scope.value_json) AS scoped_program ON 1 = 1
+          JOIN current_programs AS matched_program
+            ON matched_program.release_id = scope.release_id
+           AND matched_program.program_id = CAST(scoped_program.value AS TEXT)
+          WHERE scope.release_id = scholarship.release_id
+            AND scope.record_id = scholarship.scholarship_id
+            AND scope.field_path IN ('programIds', 'program_ids')
+            AND ${programDegree}
+        )
+        ${normalizedDegree}
+      )`, ...degreeValues)
+    }
+    if (query.funding) addCondition(conditions, values, scholarshipFundingSql(query.funding))
+    if (query.deadline) {
+      const deadline = scholarshipDeadlineSql()
+      if (query.deadline === 'not-announced') {
+        addCondition(conditions, values, `${deadline} IS NULL`)
+      } else if (query.deadline === 'announced') {
+        addCondition(conditions, values, `${deadline} IS NOT NULL`)
+      } else if (query.deadline === 'closed') {
+        addCondition(conditions, values, `${deadline} < ?`, this.today)
+      } else if (query.deadline === 'future') {
+        addCondition(conditions, values, `${deadline} >= ?`, this.today)
+      } else {
+        const days = query.deadline === 'next-30-days' ? 30 : 90
+        addCondition(
+          conditions,
+          values,
+          `${deadline} >= ? AND ${deadline} <= date(?, '+${days} days')`,
+          this.today,
+          this.today,
+        )
+      }
+    }
+    const sortSql = scholarshipSortSql(query.sort)
+    const filteredConditions = [...conditions]
+    const filteredValues = [...values]
+    const context = cursorContext({ ...query })
     if (query.cursor && exactSlug === undefined) {
-      const cursor = decodeCursor(query.cursor, 'scholarships', this.release.id)
+      const cursor = decodeCursor(query.cursor, 'scholarships', this.release.id, context)
       addCondition(
         conditions,
         values,
-        `(COALESCE(record.slug, '') > ?
-          OR (COALESCE(record.slug, '') = ? AND record.record_id > ?))`,
+        `(${sortSql} > ?
+          OR (${sortSql} = ? AND record.record_id > ?))`,
         cursor.sortKey,
         cursor.sortKey,
         cursor.id,
@@ -884,10 +1369,11 @@ export class CatalogSqlApi {
     }
     const limit = exactSlug === undefined ? pageLimit(query.limit) + 1 : 1
     values.push(limit)
-    return queryAll<ScholarshipRow>(this.database, `
+    const rows = await queryAll<ScholarshipRow>(this.database, `
       SELECT
         record.record_id,
-        COALESCE(record.slug, '') AS sort_slug,
+        record.slug,
+        ${sortSql} AS sort_slug,
         record.verified_at AS record_verified_at,
         record.review_after AS record_review_after,
         scholarship.provider_organization_id,
@@ -907,9 +1393,10 @@ export class CatalogSqlApi {
         ON provider_record.release_id = provider.release_id
        AND provider_record.record_id = provider.organization_id
       WHERE ${conditions.join('\n        AND ')}
-      ORDER BY COALESCE(record.slug, ''), record.record_id
+      ORDER BY sort_slug, record.record_id
       LIMIT ?
     `, values)
+    return { rows, filteredConditions, filteredValues, context }
   }
 
   private async mapScholarships(rows: ScholarshipRow[]) {
@@ -921,7 +1408,7 @@ export class CatalogSqlApi {
     return rows.map((row): ScholarshipDto => ({
       type: 'scholarship',
       id: row.record_id,
-      slug: row.sort_slug || null,
+      slug: row.slug,
       attributes: {
         name: decorations.localized(row.record_id, 'name') ?? {},
         summary: decorations.localized(row.record_id, 'summary'),
@@ -971,20 +1458,86 @@ export class CatalogSqlApi {
     }))
   }
 
+  private async scholarshipListMetadata(
+    conditions: readonly string[],
+    values: readonly unknown[],
+  ) {
+    const where = conditions.join('\n        AND ')
+    const joins = `
+      FROM current_scholarships AS scholarship
+      JOIN current_catalog_records AS record
+        ON record.release_id = scholarship.release_id
+       AND record.record_id = scholarship.scholarship_id
+      JOIN current_organizations AS provider
+        ON provider.release_id = scholarship.release_id
+       AND provider.organization_id = scholarship.provider_organization_id
+      JOIN current_catalog_records AS provider_record
+        ON provider_record.release_id = provider.release_id
+       AND provider_record.record_id = provider.organization_id
+    `
+    const [count, universities] = await Promise.all([
+      queryFirst<CountRow>(this.database, `
+        SELECT COUNT(*) AS total
+        ${joins}
+        WHERE ${where}
+      `, [...values]),
+      queryAll<FacetRow>(this.database, `
+        SELECT DISTINCT
+          matched_institution.institution_id AS option_id,
+          matched_record.slug AS option_slug,
+          localized.locale,
+          localized.text_value
+        ${joins}
+        JOIN current_record_fields AS scope
+          ON scope.release_id = scholarship.release_id
+         AND scope.record_id = scholarship.scholarship_id
+         AND scope.field_path IN ('universityIds', 'institution_ids')
+        JOIN json_each(scope.value_json) AS scoped_institution ON 1 = 1
+        JOIN current_institutions AS matched_institution
+          ON matched_institution.release_id = scope.release_id
+         AND matched_institution.institution_id = CAST(scoped_institution.value AS TEXT)
+        JOIN current_catalog_records AS matched_record
+          ON matched_record.release_id = matched_institution.release_id
+         AND matched_record.record_id = matched_institution.institution_id
+        LEFT JOIN current_localized_content AS localized
+          ON localized.release_id = matched_institution.release_id
+         AND localized.record_id = matched_institution.institution_id
+         AND localized.field_name = 'name'
+        WHERE ${where}
+        ORDER BY option_slug, option_id, localized.locale
+      `, [...values]),
+    ])
+    return {
+      total: Number(count?.total ?? 0),
+      facets: {
+        universities: facetOptions(universities),
+      },
+    }
+  }
+
   async listScholarships(query: ScholarshipQuery = {}) {
     const limit = pageLimit(query.limit)
+    const selected = await this.selectScholarships(query)
     const page = pagination(
-      await this.selectScholarships(query),
+      selected.rows,
       limit,
       'scholarships',
       this.release.id,
+      selected.context,
     )
-    const data = await this.mapScholarships(page.items)
-    return this.envelope(data, { pageSize: data.length, nextCursor: page.nextCursor })
+    const [data, metadata] = await Promise.all([
+      this.mapScholarships(page.items),
+      this.scholarshipListMetadata(selected.filteredConditions, selected.filteredValues),
+    ])
+    return this.envelope(data, {
+      pageSize: data.length,
+      nextCursor: page.nextCursor,
+      ...metadata,
+    })
   }
 
   async getScholarship(slug: string) {
-    const row = (await this.selectScholarships({}, slug))[0]
+    const row = (await this.selectScholarships({}, slug)).rows[0]
     if (!row) return null
     return this.envelope((await this.mapScholarships([row]))[0]!)
   }
@@ -1028,6 +1581,172 @@ export class CatalogSqlApi {
       WHERE release_id = ? AND owner_record_id IN (${slots})
       ORDER BY owner_record_id, fee_type, fee_id
     `, [this.release.id, ...ownerIds])
+  }
+
+  private async programCycleRows(programIds: string[]) {
+    if (programIds.length === 0) return []
+    const slots = placeholders(programIds.length)
+    return queryAll<ProgramCycleRow>(this.database, `
+      SELECT
+        record.record_id,
+        record.slug,
+        record.verified_at AS record_verified_at,
+        record.review_after AS record_review_after,
+        cycle.program_cycle_id,
+        cycle.program_id,
+        cycle.academic_year,
+        cycle.intake_code,
+        cycle.sequence,
+        cycle.starts_on,
+        cycle.ends_on,
+        cycle.cycle_status
+      FROM current_program_cycles AS cycle
+      JOIN current_catalog_records AS record
+        ON record.release_id = cycle.release_id
+       AND record.record_id = cycle.program_cycle_id
+      WHERE cycle.release_id = ? AND cycle.program_id IN (${slots})
+      ORDER BY cycle.program_id, cycle.academic_year DESC,
+               cycle.intake_code, cycle.sequence, cycle.program_cycle_id
+    `, [this.release.id, ...programIds])
+  }
+
+  private async mapProgramCycleRows(
+    rows: ProgramCycleRow[],
+    programSlugs: ReadonlyMap<string, string | null>,
+  ) {
+    const ids = rows.map((row) => row.record_id)
+    const [decorations, routes, fees] = await Promise.all([
+      loadRecordDecorations(this.database, this.release.id, ids),
+      this.routeWindows(ids),
+      this.fees(ids),
+    ])
+    return rows.map((row): ProgramCycleDto => {
+      const route = routes.find((item) => item.owner_record_id === row.record_id)
+      const opensOn = route?.opens_on
+        ?? decorations.value<string>(row.record_id, ['opens_on', 'opensOn'])
+      const closesOn = route?.closes_on
+        ?? decorations.value<string>(row.record_id, ['closes_on', 'closesOn'])
+      const tuitionFee = moneyFromFee(
+        fees.find((item) => item.owner_record_id === row.record_id && item.fee_type === 'tuition'),
+      ) ?? legacyMoney(
+        decorations.value<number>(row.record_id, ['tuitionCny', 'tuition_amount']),
+        decorations.value<string>(row.record_id, ['tuitionPeriod', 'billing_period']),
+      )
+      const applicationFee = moneyFromFee(
+        fees.find((item) => item.owner_record_id === row.record_id && item.fee_type === 'application'),
+      ) ?? legacyMoney(
+        decorations.value<number>(row.record_id, ['applicationFeeCny', 'application_fee']),
+        'one_time',
+      )
+      return {
+        type: 'program_cycle',
+        id: row.record_id,
+        slug: row.slug,
+        attributes: {
+          academicYear: row.academic_year,
+          intake: row.intake_code,
+          sequence: Number(row.sequence),
+          cycleStatus: row.cycle_status,
+          startsOn: row.starts_on,
+          endsOn: row.ends_on,
+          application: routeApplication(route, {
+            opensOn,
+            closesOn,
+            applyUrl: decorations.value<string>(row.record_id, ['apply_url', 'applyUrl']),
+          }, this.today),
+          tuition: tuitionFee,
+          applicationFee,
+        },
+        relationships: {
+          program: {
+            id: row.program_id,
+            slug: programSlugs.get(row.program_id) ?? null,
+          },
+        },
+        sources: decorations.sources(row.record_id),
+        fieldMeta: {
+          academicYear: identityMeta(decorations, row, 'academic_year'),
+          intake: identityMeta(decorations, row, 'intake_code'),
+          sequence: identityMeta(decorations, row, 'sequence'),
+          cycleStatus: identityMeta(decorations, row, 'cycle_status'),
+          startsOn: decorations.meta(row, ['starts_on', 'startsOn']),
+          endsOn: decorations.meta(row, ['ends_on', 'endsOn']),
+          'application.opensOn': decorations.meta(row, ['opens_on', 'opensOn']),
+          'application.closesOn': decorations.meta(row, ['closes_on', 'closesOn']),
+          'application.routeType': decorations.meta(row, ['route_type'], route !== undefined),
+          'application.accessMode': decorations.meta(
+            row,
+            ['access_mode'],
+            route?.access_mode !== null && route?.access_mode !== undefined,
+          ),
+          'application.applyUrl': decorations.meta(row, ['apply_url', 'applyUrl']),
+          'application.rolling': decorations.meta(
+            row,
+            ['rolling'],
+            route?.rolling !== null && route?.rolling !== undefined,
+          ),
+          'application.state': decorations.meta(
+            row,
+            ['application_state', 'opens_on', 'opensOn', 'closes_on', 'closesOn'],
+            route !== undefined,
+          ),
+          tuition: decorations.meta(row, ['tuitionCny', 'tuition_amount', 'amount_min_minor']),
+          applicationFee: decorations.meta(row, ['applicationFeeCny', 'application_fee']),
+          program: identityMeta(decorations, row, 'program_id'),
+        },
+      }
+    })
+  }
+
+  private compareProgramCycles(left: ProgramCycleDto, right: ProgramCycleDto) {
+    const priority: Record<ApplicationDto['state'], number> = {
+      open: 0,
+      rolling: 1,
+      upcoming: 2,
+      'dates-published': 3,
+      'not-announced': 4,
+      closed: 5,
+      'previous-cycle': 6,
+    }
+    const leftState = left.attributes.application.state
+    const rightState = right.attributes.application.state
+    const stateOrder = priority[leftState] - priority[rightState]
+    if (stateOrder !== 0) return stateOrder
+    if (leftState === 'open') {
+      const order = (left.attributes.application.closesOn ?? '9999-12-31')
+        .localeCompare(right.attributes.application.closesOn ?? '9999-12-31')
+      if (order !== 0) return order
+    } else if (leftState === 'upcoming') {
+      const order = (left.attributes.application.opensOn ?? '9999-12-31')
+        .localeCompare(right.attributes.application.opensOn ?? '9999-12-31')
+      if (order !== 0) return order
+    } else {
+      const leftDate = left.attributes.application.closesOn
+        ?? left.attributes.application.opensOn
+        ?? left.attributes.academicYear
+      const rightDate = right.attributes.application.closesOn
+        ?? right.attributes.application.opensOn
+        ?? right.attributes.academicYear
+      const order = rightDate.localeCompare(leftDate)
+      if (order !== 0) return order
+    }
+    return left.id.localeCompare(right.id)
+  }
+
+  private async currentProgramCycles(rows: ProgramRow[]) {
+    const slugs = new Map(rows.map((row) => [row.record_id, row.sort_slug || null]))
+    const cycles = await this.mapProgramCycleRows(
+      await this.programCycleRows(rows.map((row) => row.record_id)),
+      slugs,
+    )
+    const selected = new Map<string, ProgramCycleDto>()
+    for (const cycle of cycles) {
+      const current = selected.get(cycle.relationships.program.id)
+      if (!current || this.compareProgramCycles(cycle, current) < 0) {
+        selected.set(cycle.relationships.program.id, cycle)
+      }
+    }
+    return selected
   }
 
   async getProgramCycles(slug: string) {
