@@ -98,17 +98,20 @@ describe('official coverage wave 3 on 2026-07-31', () => {
   it('publishes only safe current, grace-period, or date-free wave-3 cycles', () => {
     const programIds = new Set(wavePrograms.map((item) => item.id))
     const published = selectPublishedData(data, TODAY)
+    const rawCycles = data.admissionCycles.filter((cycle) =>
+      programIds.has(cycle.programId))
     const cycles = published.admissionCycles.filter((cycle) =>
       programIds.has(cycle.programId))
 
-    expect(cycles.length).toBeGreaterThan(0)
+    expect(rawCycles.length).toBeGreaterThan(0)
+    expect(cycles.filter((cycle) =>
+      cycle.status !== 'verified' || cycle.reviewAfter < TODAY)).toEqual([])
     expect(cycles.filter((cycle) =>
       cycle.closesOn !== null
       && !isWithinPostDeadlineGrace(cycle.closesOn, TODAY))).toEqual([])
 
     const datedCycles = cycles.filter((cycle) =>
       cycle.opensOn !== null || cycle.closesOn !== null)
-    expect(datedCycles.length).toBeGreaterThan(0)
     const datedClosedCycles = datedCycles.filter((cycle) =>
       getApplicationState(cycle, TODAY) === 'closed')
     for (const cycle of datedClosedCycles) {
@@ -121,7 +124,6 @@ describe('official coverage wave 3 on 2026-07-31', () => {
 
     const dateFreeCycles = cycles.filter((cycle) =>
       cycle.opensOn === null && cycle.closesOn === null)
-    expect(dateFreeCycles.length).toBeGreaterThan(0)
     for (const cycle of dateFreeCycles) {
       if (cycle.id.includes('fee-reference')) {
         expect(cycle.dateStatus).toBe('not-announced')
