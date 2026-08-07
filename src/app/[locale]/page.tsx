@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { Badge, Card, LinkButton, PageHero, SectionHeading } from '@/components/ui'
 import { CityConstellation } from '@/components/features/CityConstellation'
 import { UniversityCard } from '@/components/features/RecordCards'
+import { getHomeExperienceCopy } from '@/i18n/home-experience'
 import { getMessages } from '@/i18n/messages'
 import { localize } from '@/lib/data/format'
 import { classifyProgramField, programFieldTaxonomy } from '@/lib/data/fields'
@@ -17,17 +18,57 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const locale = requireLocale((await params).locale); if (!locale) notFound()
-  const messages = getMessages(locale); const data = await getCatalogData()
+  const messages = getMessages(locale); const experience = getHomeExperienceCopy(locale); const data = await getCatalogData()
   const featured = data.universities.filter((item) => item.featured).slice(0, 6)
   const fieldsByUniversity = Object.fromEntries(data.universities.map((university) => [university.id, [...new Set(data.programs.filter((program) => program.universityId === university.id).map(classifyProgramField))]]))
   const fields = programFieldTaxonomy(locale)
   const fieldCounts = Object.fromEntries(fields.map(({ key }) => [key, data.programs.filter((program) => classifyProgramField(program) === key).length]))
+  const officialSourceCount = data.sources.filter((source) => source.official).length
+  const latestSourceCheck = data.sources.reduce<string | null>((latest, source) => !latest || source.accessedAt > latest ? source.accessedAt : latest, null)
+  const sourceCheckLabel = latestSourceCheck
+    ? new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(`${latestSourceCheck}T00:00:00Z`))
+    : messages.common.unknown
+  const pathwayHrefs = ['universities', 'programs', 'data-policy', 'guides'] as const
 
   return <>
     <PageHero variant="feature" eyebrow={messages.home.eyebrow} title={messages.home.title} description={messages.home.intro}
       actions={<><LinkButton href={`/${locale}/universities`} size="large" iconEnd="→">{messages.home.findUniversity}</LinkButton><LinkButton href={`/${locale}/programs`} variant="ghost" size="large">{messages.home.explorePrograms}</LinkButton></>}
       meta={<><span>{data.universities.length} {messages.nav.universities}</span><span>{data.programs.length} {messages.nav.programs}</span><span>{data.cities.length} {messages.nav.cities}</span><span>{data.scholarships.length} {messages.nav.scholarships}</span></>}
       aside={<div className="atlas-stack"><Badge tone="jade" dot>{messages.common.officialSource}</Badge><h2>{messages.home.sourceHeading}</h2><p>{messages.common.authoritativeNotice}</p><Link className="text-link" href={`/${locale}/data-policy`}>{messages.footer.dataPolicy} →</Link></div>} />
+
+    <section className="atlas-home-ledger" aria-labelledby="catalog-ledger-title">
+      <div className="atlas-container atlas-home-ledger__grid">
+        <div className="atlas-home-ledger__intro">
+          <div className="atlas-kicker">{experience.catalogEyebrow}</div>
+          <h2 id="catalog-ledger-title">{experience.catalogTitle}</h2>
+          <p>{experience.catalogIntro}</p>
+          <div className="atlas-home-ledger__freshness">
+            <span><i aria-hidden="true" />{experience.latestSourceCheck}: <time dateTime={latestSourceCheck || undefined}>{sourceCheckLabel}</time></span>
+            <Link href={`/${locale}/data-policy`}>{experience.policyLink} →</Link>
+          </div>
+        </div>
+        <dl className="atlas-home-ledger__metrics">
+          <div><dt>{messages.nav.universities}</dt><dd>{data.universities.length.toLocaleString(locale)}</dd></div>
+          <div><dt>{messages.nav.programs}</dt><dd>{data.programs.length.toLocaleString(locale)}</dd></div>
+          <div><dt>{messages.nav.scholarships}</dt><dd>{data.scholarships.length.toLocaleString(locale)}</dd></div>
+          <div><dt>{experience.officialSources}</dt><dd>{officialSourceCount.toLocaleString(locale)}</dd></div>
+        </dl>
+        <p className="atlas-home-ledger__principle"><span aria-hidden="true">※</span>{experience.noGuessing}</p>
+      </div>
+    </section>
+
+    <section className="atlas-container atlas-section atlas-home-pathway" aria-labelledby="applicant-pathway-title">
+      <SectionHeading eyebrow={experience.pathwayEyebrow} title={<span id="applicant-pathway-title">{experience.pathwayTitle}</span>} description={experience.pathwayIntro} />
+      <ol className="atlas-home-pathway__steps">
+        {experience.steps.map((step, index) => <li key={step.title}>
+          <Link href={`/${locale}/${pathwayHrefs[index]}`}>
+            <span className="atlas-home-pathway__number" aria-hidden="true">0{index + 1}</span>
+            <div><h3>{step.title}</h3><p>{step.description}</p></div>
+            <span className="atlas-home-pathway__arrow" aria-hidden="true">↗</span>
+          </Link>
+        </li>)}
+      </ol>
+    </section>
 
     <section className="atlas-container atlas-section">
       <SectionHeading eyebrow="01" title={messages.home.featured} description={messages.home.featuredIntro} action={<LinkButton href={`/${locale}/universities`} variant="quiet">{messages.common.explore} →</LinkButton>} />

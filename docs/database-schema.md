@@ -71,6 +71,11 @@ Apply the pipeline migrations in filename order:
 7. `infra/d1/pipeline/migrations/0007_snapshot_derivatives.sql`
 8. `infra/d1/pipeline/migrations/0008_release_builder_contract.sql`
 9. `infra/d1/pipeline/migrations/0009_entity_discovery_registry.sql`
+10. `infra/d1/pipeline/migrations/0010_materialization_batches.sql`
+11. `infra/d1/pipeline/migrations/0011_materialization_release_requests.sql`
+12. `infra/d1/pipeline/migrations/0012_localization_pipeline.sql`
+13. `infra/d1/pipeline/migrations/0013_institution_target_coverage.sql`
+14. `infra/d1/pipeline/migrations/0014_entity_candidate_materialization.sql`
 
 ### Domain records
 
@@ -141,6 +146,12 @@ Apply the catalog migrations in filename order:
 2. `infra/d1/catalog/migrations/0002_programs_scholarships.sql`
 3. `infra/d1/catalog/migrations/0003_search_views.sql`
 4. `infra/d1/catalog/migrations/0004_atomic_release_cutover.sql`
+5. `infra/d1/catalog/migrations/0005_public_projection_hardening.sql`
+6. `infra/d1/catalog/migrations/0006_field_meta_projection.sql`
+7. `infra/d1/catalog/migrations/0007_deadline_grace_publication.sql`
+8. `infra/d1/catalog/migrations/0008_identity_only_program_visibility.sql`
+9. `infra/d1/catalog/migrations/0009_release_compatibility_artifacts.sql`
+10. `infra/d1/catalog/migrations/0010_release_retention.sql`
 
 Every catalog domain row includes `release_id`. A release is an immutable public snapshot. Building a new release does not affect readers because all `current_*` views start from the singleton `release_pointer` and require its target release to be `active`.
 

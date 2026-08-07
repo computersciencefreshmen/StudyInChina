@@ -13,6 +13,7 @@ describe('localized sitemap', () => {
     expect(paths.some((path) => ['de', 'fr', 'es'].some((locale) => path === `/${locale}` || path.startsWith(`/${locale}/`)))).toBe(false)
     expect(paths.some((path) => path === '/pt' || path.startsWith('/pt/'))).toBe(false)
     expect(paths.some((path) => path === '/ar' || path.startsWith('/ar/'))).toBe(false)
+    expect(paths.some((path) => path.endsWith('/favorites'))).toBe(false)
 
     const englishPrograms = entries.find((entry) => new URL(entry.url).pathname === '/en/programs')
     expect(Object.keys(englishPrograms?.alternates?.languages || {}).sort()).toEqual(['en', 'ru', 'zh'])

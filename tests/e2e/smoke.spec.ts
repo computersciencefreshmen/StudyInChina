@@ -30,6 +30,18 @@ test('the root route redirects using the accepted launch language', async ({ bro
   await context.close()
 })
 
+test('the skip link moves keyboard focus into the main content', async ({ page }) => {
+  await page.goto('/en', { waitUntil: 'domcontentloaded' })
+
+  await page.keyboard.press('Tab')
+  const skipLink = page.locator('.atlas-skip-link')
+  await expect(skipLink).toBeFocused()
+  await page.keyboard.press('Enter')
+
+  await expect(page).toHaveURL(/#main-content$/)
+  await expect(page.locator('main#main-content')).toBeFocused()
+})
+
 test('preview locales redirect to the equivalent English route without publishing incomplete pages', async ({ page }) => {
   const response = await page.goto('/pt/programs?degree=master', { waitUntil: 'domcontentloaded' })
 
