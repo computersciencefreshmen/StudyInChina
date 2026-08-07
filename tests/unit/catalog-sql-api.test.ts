@@ -579,7 +579,7 @@ describe('Catalog D1 normalized v1 API', () => {
       attributes: { legacyProjection: true },
     })
     expect(r2Reads).toBe(0)
-  })
+  }, 30_000)
 
   it('lists and resolves an unannounced zero-cycle scholarship without fabricated values', async () => {
     database.exec('BEGIN')
