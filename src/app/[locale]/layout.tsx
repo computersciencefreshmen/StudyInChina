@@ -36,7 +36,7 @@ export default async function LocaleLayout({ children, params }: Readonly<{ chil
   return <html lang={locale} dir={localeDirection(locale)}>
     <body>
       <AppHeader locale={locale} />
-      <main id="main-content" className="atlas-main">{children}</main>
+      <main id="main-content" className="atlas-main" tabIndex={-1}>{children}</main>
       <SiteFooter
         locale={locale}
         homeHref={`/${locale}`}
