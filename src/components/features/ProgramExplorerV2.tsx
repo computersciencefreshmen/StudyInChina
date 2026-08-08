@@ -24,13 +24,14 @@ const labels: Record<LaunchLocale, {
   pagination: string
   previous: string
   sortBy: string
+  linkedScholarship: string
 }> = {
-  en: { apply: 'Apply filters', defaultOrder: 'Default order', next: 'Next', pagination: 'Program catalogue pages', previous: 'Previous', sortBy: 'Sort by' },
-  zh: { apply: '应用筛选', defaultOrder: '默认顺序', next: '下一页', pagination: '项目目录分页', previous: '上一页', sortBy: '排序方式' },
-  ru: { apply: 'Применить фильтры', defaultOrder: 'По умолчанию', next: 'Далее', pagination: 'Страницы каталога программ', previous: 'Назад', sortBy: 'Сортировка' },
-  de: { apply: 'Filter anwenden', defaultOrder: 'Standardreihenfolge', next: 'Weiter', pagination: 'Studiengangseiten', previous: 'Zurück', sortBy: 'Sortieren nach' },
-  fr: { apply: 'Appliquer les filtres', defaultOrder: 'Ordre par défaut', next: 'Suivant', pagination: 'Pages du catalogue des programmes', previous: 'Précédent', sortBy: 'Trier par' },
-  es: { apply: 'Aplicar filtros', defaultOrder: 'Orden predeterminado', next: 'Siguiente', pagination: 'Páginas del catálogo de programas', previous: 'Anterior', sortBy: 'Ordenar por' },
+  en: { apply: 'Apply filters', defaultOrder: 'Default order', next: 'Next', pagination: 'Program catalogue pages', previous: 'Previous', sortBy: 'Sort by', linkedScholarship: 'Linked scholarship' },
+  zh: { apply: '应用筛选', defaultOrder: '默认顺序', next: '下一页', pagination: '项目目录分页', previous: '上一页', sortBy: '排序方式', linkedScholarship: '有关联奖学金' },
+  ru: { apply: 'Применить фильтры', defaultOrder: 'По умолчанию', next: 'Далее', pagination: 'Страницы каталога программ', previous: 'Назад', sortBy: 'Сортировка', linkedScholarship: 'Есть связанная стипендия' },
+  de: { apply: 'Filter anwenden', defaultOrder: 'Standardreihenfolge', next: 'Weiter', pagination: 'Studiengangseiten', previous: 'Zurück', sortBy: 'Sortieren nach', linkedScholarship: 'Verknüpftes Stipendium' },
+  fr: { apply: 'Appliquer les filtres', defaultOrder: 'Ordre par défaut', next: 'Suivant', pagination: 'Pages du catalogue des programmes', previous: 'Précédent', sortBy: 'Trier par', linkedScholarship: 'Bourse associée' },
+  es: { apply: 'Aplicar filtros', defaultOrder: 'Orden predeterminado', next: 'Siguiente', pagination: 'Páginas del catálogo de programas', previous: 'Anterior', sortBy: 'Ordenar por', linkedScholarship: 'Beca vinculada' },
 }
 
 type SelectOption = { value: string; label: string }
@@ -44,6 +45,7 @@ type ProgramFilterKey =
   | 'intake'
   | 'applicationState'
   | 'tuition'
+  | 'scholarship'
   | 'sort'
 
 function selectedLabel(options: SelectOption[], value: string): string {
@@ -120,6 +122,7 @@ export function ProgramExplorerV2({
   addFilter('intake', messages.programs.intake, selectedLabel(intakeOptions, filters.intake))
   addFilter('applicationState', messages.programs.statusFilter, selectedLabel(statusOptions, filters.applicationState))
   addFilter('tuition', messages.programs.tuitionFilter, selectedLabel(tuitionOptions, filters.tuition))
+  addFilter('scholarship', messages.nav.scholarships, filters.scholarship ? text.linkedScholarship : '')
   if (filters.sort !== 'default') addFilter('sort', text.sortBy, selectedLabel(sortOptions, filters.sort))
   const advancedFilterCount = [
     filters.institution,
@@ -127,6 +130,7 @@ export function ProgramExplorerV2({
     filters.intake,
     filters.applicationState,
     filters.tuition,
+    filters.scholarship,
     filters.sort === 'default' ? '' : filters.sort,
   ].filter(Boolean).length
 
@@ -210,6 +214,13 @@ export function ProgramExplorerV2({
           <option value="under-20000">≤ ¥20,000</option>
           <option value="20000-40000">¥20,001–40,000</option>
           <option value="over-40000">&gt; ¥40,000</option>
+        </select>
+      </div>
+      <div className="field">
+        <label htmlFor="program-scholarship">{messages.nav.scholarships}</label>
+        <select id="program-scholarship" name="scholarship" defaultValue={filters.scholarship}>
+          <option value="">{messages.common.all}</option>
+          <option value="linked">{text.linkedScholarship}</option>
         </select>
       </div>
       <div className="field">

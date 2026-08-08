@@ -101,6 +101,15 @@ test('catalogue filters remain shareable and removable through browser history',
   expect(new URL(page.url()).searchParams.get('tuition')).toBe('known')
 })
 
+test('the program catalogue exposes linked scholarships as a shareable evidence relationship', async ({ page }) => {
+  await page.goto('/en/programs?scholarship=linked', { waitUntil: 'domcontentloaded' })
+
+  await expect(page.locator('#program-scholarship')).toHaveValue('linked')
+  await expect(page.getByRole('link', { name: /Remove filter: Scholarships/ })).toBeVisible()
+  expect(await page.locator('.record-card').count()).toBeGreaterThan(0)
+  expect(new URL(page.url()).searchParams.get('scholarship')).toBe('linked')
+})
+
 test('a thin verified program stays reachable but is excluded from search indexing', async ({ page }) => {
   const response = await page.goto('/en/programs/tsinghua-university-computer-science-bachelor', { waitUntil: 'domcontentloaded' })
 

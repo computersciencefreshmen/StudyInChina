@@ -849,7 +849,12 @@ function importScholarship(candidate, state) {
     programIds,
     coverage: scholarshipCoverage(candidate),
     deadline,
-    applicationUrl: httpsUrl(candidate.evidence?.officialUrl, `${candidate.candidateId} official URL`),
+    applicationUrl: candidate.applicationRouteStatus === 'not_confirmed'
+      ? null
+      : httpsUrl(
+          candidate.evidence?.officialUrl,
+          `${candidate.candidateId} official URL`,
+        ),
     summary,
     sourceIds,
     verifiedAt: checkedAt,

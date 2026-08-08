@@ -75,6 +75,21 @@ requirePattern(
   'Daily D1 backups are required.',
 )
 requirePattern(
+  backup,
+  /node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts\/cloudflare\/backup-preflight\.ts --phase credentials[\s\S]*Install dependencies/,
+  'The backup must validate configuration before installing dependencies.',
+)
+requirePattern(
+  backup,
+  /Verify read access to both remote D1 databases/,
+  'The backup must verify both remote D1 resources before export.',
+)
+requirePattern(
+  backup,
+  /if:\s*\$\{\{ failure\(\) \}\}[\s\S]*does \*\*not\*\* satisfy/,
+  'Failed backup runs must publish explicit incomplete-checkpoint guidance.',
+)
+requirePattern(
   restore,
   /15 1,4,7,10 \*/,
   'A quarterly restore drill is required.',
@@ -88,6 +103,11 @@ requirePattern(
   alias,
   /api\/v1\/releases\/current/,
   'Vercel alias promotion must smoke-test the public release API.',
+)
+requirePattern(
+  alias,
+  /VERCEL_TOKEN is not configured[\s\S]*exit 1/,
+  'A missing Vercel token must fail the alias workflow instead of producing a false green result.',
 )
 
 const programs = JSON.parse(await text('content/data/programs.json'))

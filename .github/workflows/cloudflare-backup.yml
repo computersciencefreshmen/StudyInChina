@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Use Node.js 24
         uses: actions/setup-node@v6
@@ -28,16 +30,33 @@ jobs:
           node-version: 24
           cache: npm
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Require Cloudflare backup credentials
+      - name: Validate backup configuration before installing dependencies
         shell: bash
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          npx tsx scripts/cloudflare/backup-preflight.ts --phase credentials
+          node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/cloudflare/backup-preflight.ts --phase credentials
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify read access to both remote D1 databases
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          verify_database() {
+            local database="$1"
+            if ! npx wrangler d1 info "$database" --json >/dev/null; then
+              echo "::error title=Cloudflare D1 access check failed::Unable to read metadata for ${database}. Verify token scope, account selection, database name and Cloudflare availability. No backup was created."
+              exit 1
+            fi
+          }
+          verify_database studyinchina-catalog
+          verify_database studyinchina-pipeline
 
       - name: Export catalog and pipeline databases
         shell: bash
@@ -45,25 +64,39 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
+          set -euo pipefail
           export_data_tables() {
             local database="$1"
             local output="$2"
             local query
             query="SELECT name FROM pragma_table_list WHERE schema = 'main' AND type = 'table' AND name NOT LIKE 'sqlite_%' AND name NOT LIKE '_cf_%' AND name <> 'd1_migrations' ORDER BY name;"
             local table_json
-            table_json="$(npx wrangler d1 execute "$database" --remote --command "$query" --json)"
+            if ! table_json="$(npx wrangler d1 execute "$database" --remote --command "$query" --json)"; then
+              echo "::error title=D1 table discovery failed::Unable to enumerate ordinary tables in ${database}. Verify remote access and inspect the Wrangler error above. No backup was uploaded."
+              exit 1
+            fi
+            if ! jq -e 'length > 0 and all(.[]; .success == true)' <<< "$table_json" >/dev/null; then
+              echo "::error title=D1 table discovery returned an error::Wrangler did not return a successful result for ${database}. No backup was uploaded."
+              exit 1
+            fi
             local tables=()
-            mapfile -t tables < <(jq -r '.[] | select(.success == true) | .results[] | .name' <<< "$table_json")
+            mapfile -t tables < <(jq -r '.[] | .results[] | .name' <<< "$table_json")
             if [ "${#tables[@]}" -eq 0 ]; then
-              echo "No exportable data tables found for $database" >&2
+              echo "::error title=D1 database has no exportable tables::No ordinary data tables were found for ${database}. No backup was uploaded."
               exit 1
             fi
             local table_args=()
             for table in "${tables[@]}"; do
               table_args+=(--table "$table")
             done
-            npx wrangler d1 export "$database" --remote --no-schema --skip-confirmation --output="$output" "${table_args[@]}"
-            test -s "$output"
+            if ! npx wrangler d1 export "$database" --remote --no-schema --skip-confirmation --output="$output" "${table_args[@]}"; then
+              echo "::error title=D1 export failed::Unable to export ${database}. No backup was uploaded."
+              exit 1
+            fi
+            if [ ! -s "$output" ]; then
+              echo "::error title=D1 export is empty::Wrangler returned no data for ${database}. No backup was uploaded."
+              exit 1
+            fi
           }
 
           # D1 cannot export a database containing FTS5 as one full dump. The
@@ -77,7 +110,7 @@ jobs:
 
       - name: Verify backup artifacts
         shell: bash
-        run: npx tsx scripts/cloudflare/backup-preflight.ts --phase artifacts --directory "$RUNNER_TEMP"
+        run: node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/cloudflare/backup-preflight.ts --phase artifacts --directory "$RUNNER_TEMP"
 
       - name: Upload daily and monthly copies
         shell: bash
@@ -85,11 +118,39 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
+          set -euo pipefail
+          upload_object() {
+            local object="$1"
+            local file="$2"
+            shift 2
+            if ! npx wrangler r2 object put "$object" --file="$file" "$@" --remote; then
+              echo "::error title=R2 backup upload failed::Unable to upload ${object}. The checkpoint is incomplete and must not be counted toward RPO."
+              exit 1
+            fi
+          }
+
           day="$(date -u +%F)"
           month="$(date -u +%Y-%m)"
-          npx wrangler r2 object put "studyinchina-releases/backups/daily/$day/catalog.sql.gz" --file="$RUNNER_TEMP/catalog.sql.gz" --content-type="application/sql" --content-encoding="gzip" --remote
-          npx wrangler r2 object put "studyinchina-releases/backups/daily/$day/pipeline.sql.gz" --file="$RUNNER_TEMP/pipeline.sql.gz" --content-type="application/sql" --content-encoding="gzip" --remote
-          npx wrangler r2 object put "studyinchina-releases/backups/daily/$day/sha256.txt" --file="$RUNNER_TEMP/backup-sha256.txt" --content-type="text/plain" --remote
-          npx wrangler r2 object put "studyinchina-releases/backups/monthly/$month/catalog.sql.gz" --file="$RUNNER_TEMP/catalog.sql.gz" --content-type="application/sql" --content-encoding="gzip" --remote
-          npx wrangler r2 object put "studyinchina-releases/backups/monthly/$month/pipeline.sql.gz" --file="$RUNNER_TEMP/pipeline.sql.gz" --content-type="application/sql" --content-encoding="gzip" --remote
-          npx wrangler r2 object put "studyinchina-releases/backups/monthly/$month/sha256.txt" --file="$RUNNER_TEMP/backup-sha256.txt" --content-type="text/plain" --remote
+          upload_object "studyinchina-releases/backups/daily/$day/catalog.sql.gz" "$RUNNER_TEMP/catalog.sql.gz" --content-type="application/sql" --content-encoding="gzip"
+          upload_object "studyinchina-releases/backups/daily/$day/pipeline.sql.gz" "$RUNNER_TEMP/pipeline.sql.gz" --content-type="application/sql" --content-encoding="gzip"
+          upload_object "studyinchina-releases/backups/daily/$day/sha256.txt" "$RUNNER_TEMP/backup-sha256.txt" --content-type="text/plain"
+          upload_object "studyinchina-releases/backups/monthly/$month/catalog.sql.gz" "$RUNNER_TEMP/catalog.sql.gz" --content-type="application/sql" --content-encoding="gzip"
+          upload_object "studyinchina-releases/backups/monthly/$month/pipeline.sql.gz" "$RUNNER_TEMP/pipeline.sql.gz" --content-type="application/sql" --content-encoding="gzip"
+          upload_object "studyinchina-releases/backups/monthly/$month/sha256.txt" "$RUNNER_TEMP/backup-sha256.txt" --content-type="text/plain"
+
+      - name: Explain an incomplete backup
+        if: ${{ failure() }}
+        shell: bash
+        run: |
+          {
+            echo '## Cloudflare D1 backup did not complete'
+            echo
+            echo 'This run does **not** satisfy the 24-hour RPO and created no verified backup checkpoint.'
+            echo
+            echo '- Configuration failure: add or correct the named GitHub Actions repository secret, then rerun.'
+            echo '- D1 access failure: verify token scope, account, database names and Cloudflare availability.'
+            echo '- Export/artifact failure: inspect the first failing step; nothing is uploaded before checksum verification.'
+            echo '- R2 upload failure: treat the checkpoint as incomplete even if some objects were written, then rerun the whole job.'
+            echo
+            echo 'Runbook: `docs/backup-and-restore.md#failure-semantics-and-triage`.'
+          } >> "$GITHUB_STEP_SUMMARY"
