@@ -4,6 +4,8 @@ import { getMessages } from '@/i18n/messages'
 import { localize } from '@/lib/data/format'
 import type { City } from '@/lib/data/types'
 
+export type CityPlotItem = Pick<City, 'id' | 'slug' | 'name' | 'coordinates'>
+
 const CHINA_COORDINATE_EXTENT = {
   minLat: 18,
   maxLat: 54,
@@ -12,8 +14,8 @@ const CHINA_COORDINATE_EXTENT = {
 } as const
 
 function hasUsableCoordinates(
-  city: City,
-): city is City & { coordinates: { lat: number; lng: number } } {
+  city: CityPlotItem,
+): city is CityPlotItem & { coordinates: { lat: number; lng: number } } {
   const { coordinates } = city
   return coordinates !== null
     && Number.isFinite(coordinates.lat)
@@ -29,7 +31,7 @@ export function CityConstellation({
   locale,
   universityCounts = {},
 }: {
-  cities: City[]
+  cities: CityPlotItem[]
   locale: LaunchLocale
   universityCounts?: Readonly<Record<string, number>>
 }) {
@@ -60,7 +62,8 @@ export function CityConstellation({
           style={{ left: `${left}%`, top: `${top}%` }}
           key={city.id}
         >
-          <span>{cityName}</span>
+          <span className="city-marker__bubble" aria-hidden="true">{universityCount ?? '·'}</span>
+          <span className="city-marker__label">{cityName}</span>
           {universityLabel && <small>{universityLabel}</small>}
         </Link>
       })}

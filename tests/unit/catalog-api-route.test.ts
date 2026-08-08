@@ -18,6 +18,14 @@ describe('catalog API routes', () => {
     expect(body.meta.release.id).toMatch(/^json:/)
   })
 
+  it('exposes the linked-scholarship program filter through the compatibility API', async () => {
+    const response = await listPrograms(new Request('https://example.test/api/v1/programs?scholarship=linked&limit=100'))
+    const body = await response.json() as { data: unknown[] }
+
+    expect(response.status).toBe(200)
+    expect(body.data.length).toBeGreaterThan(0)
+  })
+
   it('rejects invalid pagination input without exposing an internal error', async () => {
     const response = await listPrograms(new Request('https://example.test/api/v1/programs?limit=1000'))
     const body = await response.json()

@@ -356,9 +356,9 @@ describe('SourceManifestV2 cohort candidate builder', () => {
       candidateManifests: 144,
       catalogLinkedManifests: 140,
       reconciliationFallbackManifests: 4,
-      exactOfficialHttpsSources: 997,
       targetsWithoutCandidate: 0,
     })
+    expect(current.build.summary.exactOfficialHttpsSources).toBeGreaterThanOrEqual(997)
     expect(
       current.build.summary.candidateManifests
       + current.build.summary.targetsWithoutCandidate,

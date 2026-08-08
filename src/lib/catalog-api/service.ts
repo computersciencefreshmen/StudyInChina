@@ -100,27 +100,6 @@ function matchesIdentity(value: { id: string; slug: string }, expected?: string)
   return !expected || value.id === expected || value.slug === expected
 }
 
-function institutionCursorContext(query: InstitutionQuery) {
-  const entries = Object.entries(query)
-    .filter(([key, value]) =>
-      key !== 'cursor'
-      && key !== 'limit'
-      && value !== undefined
-      && value !== ''
-      && value !== 'default',
-    )
-    .sort(([left], [right]) => left.localeCompare(right))
-  if (entries.length === 0) return 'default'
-  const input = JSON.stringify(entries)
-  let hash = 2_166_136_261
-  for (let index = 0; index < input.length; index += 1) {
-    hash ^= input.charCodeAt(index)
-    hash = Math.imul(hash, 16_777_619)
-  }
-  return `q-${(hash >>> 0).toString(16).padStart(8, '0')}`
-}
-
-
 function institutionSortKey(record: InstitutionRecord, sort: InstitutionSort = 'default') {
   if (sort === 'name') return record.slug
   if (sort === 'programs-desc') {
@@ -137,14 +116,12 @@ function paginateInstitutions(
   query: InstitutionQuery,
 ) {
   const limit = Math.min(Math.max(query.limit ?? 24, 1), 100)
-  const context = institutionCursorContext(query)
-  const key = (record: InstitutionRecord) =>
-    `${context}:${institutionSortKey(record, query.sort)}`
+  const key = (record: InstitutionRecord) => institutionSortKey(record, query.sort)
   const sorted = [...records].sort((left, right) =>
     institutionSortKey(left, query.sort).localeCompare(institutionSortKey(right, query.sort))
     || left.id.localeCompare(right.id),
   )
-  const cursor = query.cursor ? decodeCursor(query.cursor) : null
+  const cursor = query.cursor ? decodeCursor(query.cursor, 'institutions', query) : null
   const start = cursor
     ? sorted.findIndex((item) => key(item) === cursor.sortKey && item.id === cursor.id) + 1
     : 0
@@ -155,7 +132,7 @@ function paginateInstitutions(
   const last = items.at(-1)
   return {
     items,
-    nextCursor: hasMore && last ? encodeCursor(key(last), last.id) : null,
+    nextCursor: hasMore && last ? encodeCursor('institutions', query, key(last), last.id) : null,
   }
 }
 function matchesProgramDiscipline(program: Program, expected?: string) {
@@ -456,10 +433,12 @@ export class CatalogApiService {
           && matchesProgramDiscipline(program, query.discipline)))
         && (!query.language || (hasCurrentFacts(program, this.today)
           && program.teachingLanguages.some((item) => item.toLocaleLowerCase() === query.language?.toLocaleLowerCase())))
-        && (!query.scholarship || scholarships.some((item) => matchesIdentity(item, query.scholarship)))
+        && (!query.scholarship
+          || (query.scholarship === 'linked' && scholarships.length > 0)
+          || scholarships.some((item) => matchesIdentity(item, query.scholarship)))
         && matchesCycle
     }).map((item) => this.programRecord(item)).filter((item): item is ProgramRecord => item !== null)
-    const page = paginateBySlug(filtered, query)
+    const page = paginateBySlug(filtered, 'programs', query)
     return this.envelope(page.items, { pageSize: page.items.length, nextCursor: page.nextCursor })
   }
 
@@ -498,7 +477,7 @@ export class CatalogApiService {
         && (!query.institution || institutions.some((item) => matchesIdentity(item, query.institution)))
         && (!query.program || programs.some((item) => matchesIdentity(item, query.program)))
     }).map((item) => this.scholarshipRecord(item))
-    const page = paginateBySlug(filtered, query)
+    const page = paginateBySlug(filtered, 'scholarships', query)
     return this.envelope(page.items, { pageSize: page.items.length, nextCursor: page.nextCursor })
   }
 

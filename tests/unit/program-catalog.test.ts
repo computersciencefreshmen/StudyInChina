@@ -37,6 +37,7 @@ describe('server-side program catalogue', () => {
       q: 'Chinese',
       degree: 'master',
       city: 'beijing',
+      scholarship: 'linked',
       sort: 'deadline',
     })
     const href = programCatalogHref('en', filters, 2)
@@ -45,14 +46,16 @@ describe('server-side program catalogue', () => {
     expect(href).toContain('q=Chinese')
     expect(href).toContain('degree=master')
     expect(href).toContain('city=beijing')
+    expect(href).toContain('scholarship=linked')
     expect(href).toContain('sort=deadline')
     expect(href).toContain('page=2')
   })
 
   it('rejects unsupported filter values instead of passing them to queries', () => {
-    const filters = parseProgramCatalogFilters({ degree: 'invalid', sort: 'drop-table' })
+    const filters = parseProgramCatalogFilters({ degree: 'invalid', scholarship: 'anything', sort: 'drop-table' })
 
     expect(filters.degree).toBe('')
+    expect(filters.scholarship).toBe('')
     expect(filters.sort).toBe('default')
   })
 })

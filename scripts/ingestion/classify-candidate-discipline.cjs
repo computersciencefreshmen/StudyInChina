@@ -26,7 +26,10 @@ function classifyCandidateDiscipline(candidate) {
   if (/business|econom|finance|account|management|commerce|trade|logistics|mba|经济|金融|管理|商务|贸易|会计|物流/i.test(text)) return 'business'
   if (/law|legal|法学|法律/i.test(text)) return 'law-ir'
   if (/educational technology|education|pedagog|curriculum|教育技术学?|教育学|课程与教学|学前教育|特殊教育/i.test(text)) return 'humanities'
-  if (/art|design|music|drama|film|theatre|美术|艺术|设计|音乐|戏剧|电影/i.test(text)) return 'art-design'
+  // Match composition, conducting and vocal-study titles before the generic
+  // Chinese `技术` fallback below. Otherwise a title such as
+  // `作曲与作曲技术理论` is incorrectly classified as engineering.
+  if (/art|design|music|composition|conducting|vocal|drama|film|theatre|美术|艺术|设计|音乐|作曲|指挥|声乐|戏剧|电影/i.test(text)) return 'art-design'
   if (/technology|marine|mining|electrical|electronic|mechanical|automation|技术|海洋|矿业|电气|电子|机械|自动化/i.test(text)) return 'engineering'
   if (/science|mathemat|physics|chemistry|biology|environment|科学|数学|物理|化学|生物|环境/i.test(text)) return 'science'
   if (/history|literature|language|education|psychology|历史|文学|语言|教育|心理/i.test(text)) return 'humanities'

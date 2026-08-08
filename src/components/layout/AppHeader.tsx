@@ -1,10 +1,30 @@
 'use client'
 
 import { useEffect } from 'react'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { SiteHeader } from '@/components/layout'
+import { useFavorites } from '@/components/features/useFavorites'
+import { cx } from '@/components/ui/cx'
 import { localeNames, localizePathname, publicLocales, type LaunchLocale } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
+
+function ShortlistLink({ href, label, active }: { href: string; label: string; active: boolean }) {
+  const { favorites, ready } = useFavorites()
+  const count = ready ? favorites.length : 0
+
+  return (
+    <Link
+      className={cx('atlas-site-header__shortlist', active && 'is-active')}
+      href={href}
+      aria-current={active ? 'page' : undefined}
+    >
+      <span aria-hidden="true">☆</span>
+      <span>{label}</span>
+      {count > 0 ? <strong aria-label={`${count}`}>{count}</strong> : null}
+    </Link>
+  )
+}
 
 export function AppHeader({ locale }: { locale: LaunchLocale }) {
   const pathname = usePathname()
@@ -21,8 +41,10 @@ export function AppHeader({ locale }: { locale: LaunchLocale }) {
     ['scholarships', messages.nav.scholarships],
     ['cities', messages.nav.cities],
     ['guides', messages.nav.guides],
-    ['favorites', messages.nav.favorites],
   ] as const
+  const favoritesHref = `/${locale}/favorites`
+  const favoritesActive = pathname.startsWith(favoritesHref)
+
   return <SiteHeader
     locale={locale}
     homeHref={`/${locale}`}
@@ -43,5 +65,6 @@ export function AppHeader({ locale }: { locale: LaunchLocale }) {
       href: localizePathname(pathname, code),
       active: code === locale,
     }))}
+    actions={<ShortlistLink href={favoritesHref} label={messages.nav.favorites} active={favoritesActive} />}
   />
 }

@@ -44,9 +44,22 @@ Enter each value only at the hidden prompt. Never place a token in a command
 argument, committed file, issue, log or workflow output.
 
 `VERCEL_TOKEN` allows the successful main deployment to reassign the stable
-`studyinchina.vercel.app` alias and run a public release-API smoke test. Until
-it is configured, the Vercel Git integration still builds production, and the
-alias workflow emits a visible warning instead of handling a secret implicitly.
+`studyinchina.vercel.app` alias. The secret is injected only into the credential
+gate and the `vercel alias set` step; checkout, URL validation, smoke tests and
+other commands cannot read it. Until it is configured, the Vercel Git integration
+can still build a deployment, but the alias workflow fails deliberately: a green
+workflow must mean that the immutable deployment and stable alias were both
+smoke-tested. A successful deployment and a successful stable-alias promotion
+are therefore two separate signals.
+
+When a successful Production deployment does not match the current `main` SHA,
+the alias workflow remains a deliberate no-op and records a notice. When it does
+match `main`, the workflow first validates the immutable Vercel deployment URL
+and its `/api/v1/releases/current` response. Only a healthy candidate may receive
+the stable alias; the same endpoint is checked again through
+`studyinchina.vercel.app` after promotion. A missing token, invalid URL, failed
+candidate smoke test, failed alias command or failed stable-alias smoke test is a
+red workflow and requires operator action.
 
 The Cloudflare token should be limited to the StudyInChina account and only the
 D1/R2/Workers capabilities required by the workflows. `MINIMAX_API_KEY` remains
@@ -101,6 +114,10 @@ npm run build
 - Failed AI extraction never creates a guessed value.
 - Roll back by reverting the data commit or switching the release pointer to the
   previous verified release.
+- Never infer a backup from a green setup step or a deployment from a Ready
+  preview URL. A backup exists only after checksum verification and all R2
+  uploads succeed; production promotion exists only after the stable-alias
+  workflow completes both the immutable-deployment and stable-domain smoke tests.
 
 Code and schedules can guarantee that failures become visible and that unsafe
 facts do not publish. External execution still depends on GitHub, Vercel,

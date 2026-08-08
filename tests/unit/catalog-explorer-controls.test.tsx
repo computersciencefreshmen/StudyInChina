@@ -22,7 +22,7 @@ const locales: LaunchLocale[] = ['en', 'zh', 'ru', 'de', 'fr', 'es']
 function programResult(): ProgramCatalogResult {
   return {
     items: [],
-    filters: parseProgramCatalogFilters({ institution: 'tsinghua', sort: 'deadline' }),
+    filters: parseProgramCatalogFilters({ institution: 'tsinghua', scholarship: 'linked', sort: 'deadline' }),
     total: 48,
     totalExact: true,
     page: 1,
@@ -57,9 +57,10 @@ describe('catalogue explorer controls', () => {
       today="2026-08-08"
     />)
 
-    const summary = screen.getByText(`${text.advancedFilters} (2)`)
+    const summary = screen.getByText(`${text.advancedFilters} (3)`)
     expect(summary.closest('details')).toHaveAttribute('open')
-    expect(screen.getAllByLabelText(new RegExp(`^${text.removeFilter}:`))).toHaveLength(2)
+    expect(screen.getAllByLabelText(new RegExp(`^${text.removeFilter}:`))).toHaveLength(3)
+    expect(screen.getByRole('combobox', { name: messages.nav.scholarships })).toHaveValue('linked')
     expect(screen.getAllByRole('navigation')).toHaveLength(2)
     expect(screen.getByRole('navigation', { name: new RegExp(text.topPagination) })).toBeVisible()
     expect(screen.getByRole('navigation', { name: new RegExp(text.bottomPagination) })).toBeVisible()

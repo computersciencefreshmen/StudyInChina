@@ -14,6 +14,24 @@ R2 生命周期由 `npm run cloudflare:retention` 配置。备份 Token 应只�
 
 Catalog 使用 FTS5；Wrangler 不能把包含虚拟表的 D1 直接导出为完整 SQL。因此仓库中的版本化 migrations 是 Schema 备份，R2 SQL 是排除 FTS 虚拟表、影子表、Cloudflare 内部表和 `d1_migrations` 的普通表数据备份。恢复时先按顺序应用 migrations，再导入数据，最后从 `search_documents` 重建 FTS。新增持久化表时，备份工作流会通过 `pragma_table_list` 自动纳入，无需维护静态表清单。
 
+## GitHub Actions configuration
+
+每日备份要求仓库 Actions secrets 中同时存在 `CLOUDFLARE_API_TOKEN` 与 `CLOUDFLARE_ACCOUNT_ID`。只应在 GitHub 的隐藏输入框或 `gh secret set` 的隐藏提示符中输入值；不得把值放入命令参数、工作流输出、Issue 或仓库文件。
+
+工作流在安装 npm 依赖和访问 Cloudflare 之前运行无第三方依赖的配置检查。它只报告缺少的 secret 名称，不回显值。配置通过后，还会分别读取两个 D1 的远程元数据，以提前区分“凭据存在但权限、账号或数据库名称错误”与“导出过程失败”。
+
+需要的最小外部配置和隐藏输入命令见 [`operations/data-maintenance.md`](./operations/data-maintenance.md#required-github-actions-secrets)。设置后手动重跑一次 `Cloudflare D1 backup`，只有完整导出、校验和六个 R2 对象上传全部成功，才能把该次运行记作新的恢复点。
+
+## Failure semantics and triage
+
+- 红色且失败于配置检查：必要的 repository secret 缺失或账号 ID 格式无效；没有创建备份。
+- 红色且失败于远程 D1 检查：token 无权访问目标账号/数据库、名称错误或 Cloudflare 不可用；没有开始导出。
+- 红色且失败于导出或 artifact 校验：不得使用部分文件，且不会开始 R2 上传。
+- 红色且失败于 R2 上传：即使已经写入部分对象，也不能把该日期视为完整恢复点；应修复后整项重跑。
+- 任务显示 `runner_id=0` 且没有步骤：GitHub-hosted runner 从未分配，属于执行平台取消/排队问题，不是 D1 失败；应直接重跑并继续按 24 小时 RPO 计时。
+
+任何失败或取消都不满足 `RPO <= 24 小时`。工作流会在可执行失败时写入 Job Summary，但在 runner 未分配的情况下没有代码能够运行，因此必须依靠 Actions 告警和人工重跑。
+
 ## 本地隔离恢复演练
 
 下载同一批次的三个文件到一个目录，然后运行：

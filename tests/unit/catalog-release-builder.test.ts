@@ -53,6 +53,34 @@ describe('legacy JSON release builder', () => {
       cycles: bundle.admissionCycles.length,
       scholarships: bundle.scholarships.length,
     })
+
+    const scholarshipWithoutApplication = bundle.scholarships.find((item) => item.applicationUrl === null)
+    expect(scholarshipWithoutApplication).toBeTruthy()
+    const scholarshipSource = bundle.sources.find((source) =>
+      source.official && scholarshipWithoutApplication!.sourceIds.includes(source.id)
+    )
+    expect(scholarshipSource).toBeTruthy()
+    expect(database.prepare(`
+      SELECT
+        scholarship.official_url AS scholarship_url,
+        provider.official_url AS provider_url
+      FROM scholarships AS scholarship
+      JOIN organizations AS provider
+        ON provider.release_id = scholarship.release_id
+       AND provider.organization_id = scholarship.provider_organization_id
+      WHERE scholarship.release_id = ? AND scholarship.scholarship_id = ?
+    `).get(artifacts.release.id, scholarshipWithoutApplication!.id)).toEqual({
+      scholarship_url: scholarshipSource!.url,
+      provider_url: scholarshipSource!.url,
+    })
+    expect(database.prepare(`
+      SELECT field_status, value_json
+      FROM record_field_status
+      WHERE release_id = ? AND record_id = ? AND field_path = 'applicationUrl'
+    `).get(artifacts.release.id, scholarshipWithoutApplication!.id)).toEqual({
+      field_status: 'officially_not_announced',
+      value_json: null,
+    })
     const programFieldCodes = programFieldTaxonomy('en').map((field) => field.key)
     expect(programFieldCodes).toHaveLength(17)
     const disciplineDimensions = new Set(
