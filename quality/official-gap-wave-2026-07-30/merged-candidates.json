@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "2026-08-05.merged.regional-depth.v1",
+  "schemaVersion": "2026-08-05.merged.regional-breadth.v1",
   "generatedAt": "2026-08-02T00:00:00+08:00",
   "sourceFiles": [
     "local-candidates.json",
@@ -40,7 +40,10 @@
     "../multiversity-expansion-wave-2026-08-04/north-specialty-sparse.json",
     "../multiversity-expansion-wave-2026-08-04/east-coast-sparse.json",
     "../multiversity-expansion-wave-2026-08-04/south-central-west-sparse.json",
-    "../multiversity-expansion-wave-2026-08-05/root-specialty-arts.json"
+    "../multiversity-expansion-wave-2026-08-05/root-specialty-arts.json",
+    "../multiversity-expansion-wave-2026-08-05/east-coast-medical-art.json",
+    "../multiversity-expansion-wave-2026-08-05/north-northeast-west.json",
+    "../multiversity-expansion-wave-2026-08-05/south-central-west.json"
   ],
   "cities": [
     {
@@ -91,6 +94,36 @@
       "region": "south",
       "coordinates": null,
       "overview": null,
+      "climate": null,
+      "foodHighlights": [],
+      "sights": []
+    },
+    {
+      "sourceIds": [
+        "src-mew-nnw-city-jilin"
+      ],
+      "verifiedAt": "2026-08-05",
+      "reviewAfter": "2027-08-05",
+      "status": "verified",
+      "id": "city-jilin",
+      "slug": "jilin",
+      "name": {
+        "en": "Jilin",
+        "zh": "吉林",
+        "ru": "Цзилинь"
+      },
+      "province": {
+        "en": "Jilin Province",
+        "zh": "吉林省",
+        "ru": "провинция Цзилинь"
+      },
+      "region": "northeast",
+      "coordinates": null,
+      "overview": {
+        "en": "Jilin is a major higher-education and energy-industry city in northeast China.",
+        "zh": "吉林市是中国东北地区重要的高等教育与能源工业城市。",
+        "ru": "Цзилинь — важный центр высшего образования и энергетической промышленности Северо-Восточного Китая."
+      },
       "climate": null,
       "foodHighlights": [],
       "sights": []
@@ -271,6 +304,32 @@
         "ru": "Цзянсу"
       },
       "region": "east",
+      "coordinates": null,
+      "overview": null,
+      "climate": null,
+      "foodHighlights": [],
+      "sights": []
+    },
+    {
+      "sourceIds": [
+        "src-mew-0805-scw-city-zhanjiang"
+      ],
+      "verifiedAt": "2026-08-05",
+      "reviewAfter": "2027-08-05",
+      "status": "verified",
+      "id": "city-zhanjiang",
+      "slug": "zhanjiang",
+      "name": {
+        "en": "Zhanjiang",
+        "zh": "湛江",
+        "ru": "Чжаньцзян"
+      },
+      "province": {
+        "en": "Guangdong",
+        "zh": "广东省",
+        "ru": "Гуандун"
+      },
+      "region": "south",
       "coordinates": null,
       "overview": null,
       "climate": null,
@@ -631,6 +690,56 @@
     },
     {
       "sourceIds": [
+        "src-mew-0805-scw-university-gdou"
+      ],
+      "verifiedAt": "2026-08-05",
+      "reviewAfter": "2026-11-05",
+      "status": "verified",
+      "id": "uni-guangdong-ocean-university",
+      "slug": "guangdong-ocean-university",
+      "name": {
+        "en": "Guangdong Ocean University",
+        "zh": "广东海洋大学",
+        "ru": "Гуандунский океанический университет"
+      },
+      "cityId": "city-zhanjiang",
+      "region": "south",
+      "officialUrl": "https://www.gdou.edu.cn/",
+      "admissionsUrl": "https://iod.gdou.edu.cn/lxhd/zsjz.htm",
+      "summary": {
+        "en": "The official international office publishes international undergraduate, graduate and Chinese-language routes, including a 2026 graduate admissions guide.",
+        "zh": "学校国际交流合作部官方发布国际本科、研究生和汉语课程，并已发布2026年研究生国际学生简章。",
+        "ru": "Официальный международный отдел публикует программы бакалавриата, магистратуры, докторантуры и китайского языка, включая прием 2026 года."
+      },
+      "featured": false
+    },
+    {
+      "sourceIds": [
+        "src-mew-0805-scw-university-gdpu"
+      ],
+      "verifiedAt": "2026-08-05",
+      "reviewAfter": "2026-11-05",
+      "status": "verified",
+      "id": "uni-guangdong-pharmaceutical-university",
+      "slug": "guangdong-pharmaceutical-university",
+      "name": {
+        "en": "Guangdong Pharmaceutical University",
+        "zh": "广东药科大学",
+        "ru": "Гуандунский фармацевтический университет"
+      },
+      "cityId": "city-guangzhou",
+      "region": "south",
+      "officialUrl": "https://www.gdpu.edu.cn/",
+      "admissionsUrl": "https://www.gdpu.edu.cn/zsyjy/gjxszs.htm",
+      "summary": {
+        "en": "The official international admissions page states that five academic master's disciplines, six professional master's categories and the university's undergraduate majors accept international students.",
+        "zh": "学校国际学生招生官网明确五个学术硕士一级学科、六个专业硕士类别及本科专业接收国际学生。",
+        "ru": "Официальная страница подтверждает прием иностранцев на пять академических и шесть профессиональных категорий магистратуры, а также бакалавриат."
+      },
+      "featured": false
+    },
+    {
+      "sourceIds": [
         "src-gap-university-guangdong-university-of-finance-and-economics"
       ],
       "verifiedAt": "2026-07-30",
@@ -731,6 +840,31 @@
     },
     {
       "sourceIds": [
+        "src-mve-ecma-university-guangzhou-academy-of-fine-arts"
+      ],
+      "verifiedAt": "2026-08-05",
+      "reviewAfter": "2026-11-05",
+      "status": "verified",
+      "id": "uni-guangzhou-academy-of-fine-arts",
+      "slug": "guangzhou-academy-of-fine-arts",
+      "name": {
+        "en": "Guangzhou Academy of Fine Arts",
+        "zh": "广州美术学院",
+        "ru": "Гуанчжоуская академия изящных искусств"
+      },
+      "cityId": "city-guangzhou",
+      "region": "south",
+      "officialUrl": "https://www.gzarts.edu.cn/",
+      "admissionsUrl": "https://wsc.gzarts.edu.cn/info/1497/3952.htm",
+      "summary": {
+        "en": "The academy publishes current 2026 international bachelor and doctoral routes in fine arts and design.",
+        "zh": "学校官网发布2026年国际学生美术与设计类本科和博士招生项目。",
+        "ru": "Академия публикует актуальные программы бакалавриата и докторантуры 2026 года для иностранных студентов в области искусства и дизайна."
+      },
+      "featured": false
+    },
+    {
+      "sourceIds": [
         "src-gap-university-guilin-medical-university"
       ],
       "verifiedAt": "2026-07-30",
@@ -776,6 +910,31 @@
         "en": "The official international applicant guide lists degree and language programs with teaching language, duration and tuition.",
         "zh": "学校国际申请官方指南列出了学位与语言项目及其授课语言、学制和学费。",
         "ru": "Официальное руководство для иностранных абитуриентов перечисляет программы, язык, срок и стоимость обучения."
+      },
+      "featured": false
+    },
+    {
+      "sourceIds": [
+        "src-mew-0805-scw-university-glut"
+      ],
+      "verifiedAt": "2026-08-05",
+      "reviewAfter": "2026-11-05",
+      "status": "verified",
+      "id": "uni-guilin-university-of-technology",
+      "slug": "guilin-university-of-technology",
+      "name": {
+        "en": "Guilin University of Technology",
+        "zh": "桂林理工大学",
+        "ru": "Гуйлиньский технологический университет"
+      },
+      "cityId": "city-guilin",
+      "region": "south",
+      "officialUrl": "https://www.glut.edu.cn/",
+      "admissionsUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+      "summary": {
+        "en": "The official 2026 guide offers Chinese- and English-taught degree programs, long-term Chinese courses and four scholarship routes for international applicants.",
+        "zh": "官方2026国际学生指南提供中英文授课学历项目、长期汉语课程及四类奖学金渠道。",
+        "ru": "Официальное руководство 2026 предлагает программы степени на китайском и английском, длительные курсы китайского и четыре стипендии."
       },
       "featured": false
     },
@@ -901,6 +1060,31 @@
         "en": "The official international college publishes a 2026 admissions guide for international undergraduate, academic master's and doctoral applicants.",
         "zh": "学校国际教育学院官网发布2026年国际学生本科、学术型硕士和博士招生简章。",
         "ru": "Официальный международный колледж публикует руководство 2026 года для иностранных абитуриентов бакалавриата, академической магистратуры и докторантуры."
+      },
+      "featured": false
+    },
+    {
+      "sourceIds": [
+        "src-mew-nnw-university-hebei-normal-university"
+      ],
+      "verifiedAt": "2026-08-05",
+      "reviewAfter": "2026-11-05",
+      "status": "verified",
+      "id": "uni-hebei-normal-university",
+      "slug": "hebei-normal-university",
+      "name": {
+        "en": "Hebei Normal University",
+        "zh": "河北师范大学",
+        "ru": "Хэбэйский педагогический университет"
+      },
+      "cityId": "city-shijiazhuang",
+      "region": "north",
+      "officialUrl": "https://www.hebtu.edu.cn/",
+      "admissionsUrl": "https://cice.hebtu.edu.cn/a/lxsd/zsxx/xlxw/index.html",
+      "summary": {
+        "en": "The official international-college site publishes degree, Chinese-language and scholarship routes for international applicants, including current 2026 International Chinese Language Teachers Scholarship programs.",
+        "zh": "学校国际文化交流学院官网发布面向国际申请人的学历、汉语学习和奖学金渠道，并公布了2026年国际中文教师奖学金项目。",
+        "ru": "Официальный сайт международного института публикует программы высшего образования, китайского языка и стипендии для иностранных абитуриентов, включая программы стипендии преподавателей китайского языка 2026 года."
       },
       "featured": false
     },
@@ -1206,6 +1390,31 @@
     },
     {
       "sourceIds": [
+        "src-mew-nnw-university-ningxia-medical-university"
+      ],
+      "verifiedAt": "2026-08-05",
+      "reviewAfter": "2026-11-05",
+      "status": "verified",
+      "id": "uni-ningxia-medical-university",
+      "slug": "ningxia-medical-university",
+      "name": {
+        "en": "Ningxia Medical University",
+        "zh": "宁夏医科大学",
+        "ru": "Нинсяский медицинский университет"
+      },
+      "cityId": "city-yinchuan",
+      "region": "northwest",
+      "officialUrl": "https://www.nxmu.edu.cn/",
+      "admissionsUrl": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+      "summary": {
+        "en": "The official School of International Education catalog confirms English- and Chinese-taught medical degrees, Chinese-language training and multiple scholarship routes for international students.",
+        "zh": "学校国际教育学院官方目录确认面向国际学生开设中英文医学学历项目、汉语进修项目及多类奖学金。",
+        "ru": "Официальный каталог Института международного образования подтверждает медицинские программы на китайском и английском языках, языковую подготовку и несколько стипендий для иностранных студентов."
+      },
+      "featured": false
+    },
+    {
+      "sourceIds": [
         "src-gap-university-north-china-university-of-technology"
       ],
       "verifiedAt": "2026-07-30",
@@ -1226,6 +1435,31 @@
         "en": "The official English admissions site publishes undergraduate program identities for international applicants.",
         "zh": "学校英文招生官网公布了面向国际申请人的本科项目。",
         "ru": "Официальный англоязычный сайт приёма публикует программы бакалавриата для иностранных абитуриентов."
+      },
+      "featured": false
+    },
+    {
+      "sourceIds": [
+        "src-mew-nnw-university-northeast-electric-power-university"
+      ],
+      "verifiedAt": "2026-08-05",
+      "reviewAfter": "2026-11-05",
+      "status": "verified",
+      "id": "uni-northeast-electric-power-university",
+      "slug": "northeast-electric-power-university",
+      "name": {
+        "en": "Northeast Electric Power University",
+        "zh": "东北电力大学",
+        "ru": "Северо-Восточный электроэнергетический университет"
+      },
+      "cityId": "city-jilin",
+      "region": "northeast",
+      "officialUrl": "https://www.neepu.edu.cn/",
+      "admissionsUrl": "https://cie.neepu.edu.cn/zsxx/zsjz.htm",
+      "summary": {
+        "en": "The official international-college site publishes a current 2026 international undergraduate catalog with program-level language, duration, tuition and deadline evidence.",
+        "zh": "学校国际交流学院官网发布当前2026年国际本科目录，逐项列明授课语言、学制、学费与截止日期。",
+        "ru": "Официальный сайт международного института публикует каталог бакалавриата для иностранных студентов на 2026 год с языком обучения, сроком, стоимостью и датой подачи."
       },
       "featured": false
     },
@@ -1351,6 +1585,31 @@
         "en": "The official international portal publishes 2026 undergraduate, postgraduate and Chinese-language routes for non-Chinese applicants.",
         "zh": "学校国际招生官网公布了面向非中国籍申请人的2026本科、研究生和汉语项目。",
         "ru": "Официальный международный портал публикует набор 2026 года на бакалавриат, последипломные и языковые программы для иностранцев."
+      },
+      "featured": false
+    },
+    {
+      "sourceIds": [
+        "src-mve-ecma-university-shandong-university-of-traditional-chinese-medicine"
+      ],
+      "verifiedAt": "2026-08-05",
+      "reviewAfter": "2026-11-05",
+      "status": "verified",
+      "id": "uni-shandong-university-of-traditional-chinese-medicine",
+      "slug": "shandong-university-of-traditional-chinese-medicine",
+      "name": {
+        "en": "Shandong University of Traditional Chinese Medicine",
+        "zh": "山东中医药大学",
+        "ru": "Шаньдунский университет традиционной китайской медицины"
+      },
+      "cityId": "city-jinan",
+      "region": "east",
+      "officialUrl": "https://www.sdutcm.edu.cn/",
+      "admissionsUrl": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm",
+      "summary": {
+        "en": "The university publishes a detailed 2026 international catalogue spanning Chinese medicine, acupuncture, pharmacy and preparatory study.",
+        "zh": "学校官网发布详细的2026年国际学生目录，覆盖中医学、针灸推拿、中药学及预科。",
+        "ru": "Университет публикует подробный международный каталог 2026 года по китайской медицине, иглоукалыванию, фармации и подготовительному обучению."
       },
       "featured": false
     },
@@ -1551,6 +1810,31 @@
         "en": "The official 2026 international undergraduate brochure publishes eligible majors, language, duration, tuition and scholarship identities.",
         "zh": "学校2026国际本科官方简章公布了招生专业、授课语言、学制、学费与奖学金。",
         "ru": "Официальная брошюра 2026 года публикует специальности, язык, срок, стоимость и стипендии для иностранных бакалавров."
+      },
+      "featured": false
+    },
+    {
+      "sourceIds": [
+        "src-mew-0805-scw-university-scfai"
+      ],
+      "verifiedAt": "2026-08-05",
+      "reviewAfter": "2026-11-05",
+      "status": "verified",
+      "id": "uni-sichuan-fine-arts-institute",
+      "slug": "sichuan-fine-arts-institute",
+      "name": {
+        "en": "Sichuan Fine Arts Institute",
+        "zh": "四川美术学院",
+        "ru": "Сычуаньский институт изящных искусств"
+      },
+      "cityId": "city-chongqing",
+      "region": "southwest",
+      "officialUrl": "https://www.scfai.edu.cn/",
+      "admissionsUrl": "https://www.scfai.edu.cn/gjjl/",
+      "summary": {
+        "en": "The official international office publishes separate 2026 bachelor, master's and doctoral admission guides for international students.",
+        "zh": "学校国际交流合作处分别发布2026国际学生本科、硕士和博士招生简章。",
+        "ru": "Официальный международный отдел опубликовал отдельные правила приема иностранных студентов 2026 на бакалавриат, магистратуру и докторантуру."
       },
       "featured": false
     },
@@ -7124,6 +7408,131 @@
       ]
     },
     {
+      "candidateId": "mve-ecma-caa-art-studies-doctorate",
+      "candidateIds": [
+        "mve-ecma-caa-art-studies-doctorate"
+      ],
+      "institutionSlug": "china-academy-of-art",
+      "name": {
+        "en": "Art Studies",
+        "zh": "艺术学",
+        "ru": "Искусствоведение"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 68000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-06-20",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://admission.caa.edu.cn/en/Admissions/CAA_2026_Admissions_Guide_for_International_Stud.htm",
+        "sourceTitle": "China Academy of Art 2026 English-taught International Doctoral Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official English-batch doctoral guide lists Art Studies, a three-year duration, CNY 68,000 annual tuition and the closed June 20 deadline.",
+          "zh": "英文批次博士官方简章列出艺术学，学制三年、学费每年68000元，6月20日已截止。",
+          "ru": "Официальный справочник англоязычной докторантуры указывает искусствоведение, три года, 68 000 юаней в год и закрытый срок 20 июня."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-caa-product-design-bachelor",
+      "candidateIds": [
+        "mve-ecma-caa-product-design-bachelor"
+      ],
+      "institutionSlug": "china-academy-of-art",
+      "name": {
+        "en": "Product Design",
+        "zh": "产品设计",
+        "ru": "Промышленный дизайн"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 52000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-04-30",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://admission.caa.edu.cn/en/Admissions/CAA_2026_Admission_Guide_for_International_Stude.htm",
+        "sourceTitle": "China Academy of Art 2026 International Undergraduate Admission Guide",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "CAA's official 2026 guide and catalogue list the Chinese-taught four-year Product Design bachelor at CNY 52,000 per year with the postponed April 30 deadline.",
+          "zh": "国美2026官方简章及目录列出中文授课产品设计四年制本科，学费每年52000元，延期后截止日期为4月30日。",
+          "ru": "Официальный справочник CAA 2026 года указывает четырёхлетний дизайн продукта на китайском за 52 000 юаней в год и перенесённый срок 30 апреля."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://admission.caa.edu.cn/en/Admissions/Tuition_and_Fee.htm",
+          "sourceTitle": "CAA Tuition and Fee"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
       "candidateId": "prog-mew-nss-cfau-chinese-language",
       "candidateIds": [
         "prog-mew-nss-cfau-chinese-language"
@@ -12630,6 +13039,60 @@
       ]
     },
     {
+      "candidateId": "mve-ecma-fjmu-pharmacology-master",
+      "candidateIds": [
+        "mve-ecma-fjmu-pharmacology-master"
+      ],
+      "institutionSlug": "fujian-medical-university",
+      "name": {
+        "en": "Pharmacology",
+        "zh": "药理学",
+        "ru": "Фармакология"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://oec.fjmu.edu.cn/_upload/article/files/81/13/c828066b45a69ad08404b4e0c6e3/0e8eeea7-ef0e-4b3b-83a4-6358f2608fc9.pdf",
+        "sourceTitle": "Fujian Medical University International Graduate Supervisor Profile — Pharmacology",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international-education PDF identifies Pharmacology as a master's field open to international graduate students; unlinked cycle and fee values are withheld.",
+          "zh": "国际教育学院官方材料确认药理学为面向国际研究生的硕士方向；未能逐项对应的周期和费用不填。",
+          "ru": "Официальный документ международного факультета подтверждает магистратуру по фармакологии для иностранных студентов; несопоставленные сроки и стоимость не указываются."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://oec.fjmu.edu.cn/pyjh/",
+          "sourceTitle": "FJMU International Graduate Training Plans"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_exact_cycle_fee_duration_and_medium_unavailable"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
       "candidateId": "wave5-fjnu-computer-science-and-technology-bachelor",
       "candidateIds": [
         "wave5-fjnu-computer-science-and-technology-bachelor"
@@ -13267,6 +13730,516 @@
       ]
     },
     {
+      "candidateId": "mew-0805-scw-gdou-aquaculture-bachelor",
+      "candidateIds": [
+        "mew-0805-scw-gdou-aquaculture-bachelor"
+      ],
+      "institutionSlug": "guangdong-ocean-university",
+      "name": {
+        "en": "Aquaculture",
+        "zh": "水产养殖学",
+        "ru": "Аквакультура"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 20000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iecd.gdou.edu.cn/info/1022/1050.htm",
+        "sourceTitle": "Guangdong Ocean University International Undergraduate Programs",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international page lists Aquaculture among four-year Chinese-taught science bachelor's programs with annual tuition of CNY 20,000.",
+          "zh": "学校国际招生官网列出四年制中文授课水产养殖学本科，理科专业学费每年20000元。",
+          "ru": "Официальная страница указывает четырехлетний бакалавриат по аквакультуре на китайском языке, 20 000 юаней в год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "exact_current_application_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-gdou-aquaculture-doctorate",
+      "candidateIds": [
+        "mew-0805-scw-gdou-aquaculture-doctorate"
+      ],
+      "institutionSlug": "guangdong-ocean-university",
+      "name": {
+        "en": "Aquaculture",
+        "zh": "水产养殖学",
+        "ru": "Аквакультура"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": "Chinese/English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 31500,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iod.gdou.edu.cn/info/1190/2273.htm",
+        "sourceTitle": "Guangdong Ocean University Official International Admission Handbook",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official handbook identifies a three-year Chinese/English Aquaculture doctorate at CNY 31,500 per year; it is retained as identity evidence only.",
+          "zh": "官方招生手册列出三年制中英文水产养殖学博士，学费每年31500元；本包仅作为项目身份依据。",
+          "ru": "Официальный справочник указывает трехлетнюю докторантуру по аквакультуре на китайском/английском, 31 500 юаней в год."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://iod.gdou.edu.cn/info/1271/5123.htm",
+          "sourceTitle": "Guangdong Ocean University 2026 Graduate International Student Admissions Guide"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "program_facts_from_2021_handbook",
+        "2026_program_directory_attachment_captcha_protected",
+        "no_current_open_cycle_claimed"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-gdou-chinese-language-year",
+      "candidateIds": [
+        "mew-0805-scw-gdou-chinese-language-year"
+      ],
+      "institutionSlug": "guangdong-ocean-university",
+      "name": {
+        "en": "Chinese Language Course — One Year",
+        "zh": "汉语课程（一年制）",
+        "ru": "Курс китайского языка — один год"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 16000,
+        "currency": "CNY",
+        "period": "program",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iod.gdou.edu.cn/info/1190/2273.htm",
+        "sourceTitle": "Guangdong Ocean University Official International Admission Handbook",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official handbook lists distinct one-, three-, six- and twelve-month Chinese courses; this candidate represents the one-year route at CNY 16,000.",
+          "zh": "官方手册列出1、3、6、12个月汉语课程；本记录对应一年制项目，项目学费16000元。",
+          "ru": "Официальный справочник перечисляет курсы на 1, 3, 6 и 12 месяцев; эта запись относится к годовому курсу за 16 000 юаней."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://iod.gdou.edu.cn/lxhd/hykcxm.htm",
+          "sourceTitle": "Guangdong Ocean University Official Chinese Course Index"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "program_facts_from_2021_handbook",
+        "current_course_cycle_and_fee_not_reconfirmed"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-gdou-marine-biology-master",
+      "candidateIds": [
+        "mew-0805-scw-gdou-marine-biology-master"
+      ],
+      "institutionSlug": "guangdong-ocean-university",
+      "name": {
+        "en": "Marine Biology",
+        "zh": "海洋生物学",
+        "ru": "Морская биология"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese/English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 22000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iod.gdou.edu.cn/info/1190/2273.htm",
+        "sourceTitle": "Guangdong Ocean University Official International Admission Handbook",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official handbook identifies a three-year Chinese/English Marine Biology master's route at CNY 22,000 per year; it is retained as identity evidence only.",
+          "zh": "官方招生手册列出三年制中英文海洋生物学硕士，学费每年22000元；本包仅作为项目身份依据。",
+          "ru": "Официальный справочник указывает трехлетнюю магистратуру по морской биологии на китайском/английском, 22 000 юаней в год."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://iod.gdou.edu.cn/info/1271/5123.htm",
+          "sourceTitle": "Guangdong Ocean University 2026 Graduate International Student Admissions Guide"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "program_facts_from_2021_handbook",
+        "2026_program_directory_attachment_captcha_protected",
+        "no_current_open_cycle_claimed"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-gdou-tcsol-bachelor",
+      "candidateIds": [
+        "mew-0805-scw-gdou-tcsol-bachelor"
+      ],
+      "institutionSlug": "guangdong-ocean-university",
+      "name": {
+        "en": "Teaching Chinese to Speakers of Other Languages",
+        "zh": "汉语国际教育",
+        "ru": "Преподавание китайского языка как иностранного"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 18000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iecd.gdou.edu.cn/info/1022/1050.htm",
+        "sourceTitle": "Guangdong Ocean University International Undergraduate Programs",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international page lists the four-year Chinese-taught TCSOL bachelor route; the published liberal-arts tuition is CNY 18,000 per year.",
+          "zh": "学校国际招生官网列出四年制中文授课汉语国际教育本科，文科专业学费每年18000元。",
+          "ru": "Официальная страница подтверждает четырехлетний бакалавриат по преподаванию китайского языка, 18 000 юаней в год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "exact_current_application_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-gdpu-basic-medicine-master",
+      "candidateIds": [
+        "mew-0805-scw-gdpu-basic-medicine-master"
+      ],
+      "institutionSlug": "guangdong-pharmaceutical-university",
+      "name": {
+        "en": "Basic Medicine (Academic Master)",
+        "zh": "基础医学（学术硕士）",
+        "ru": "Фундаментальная медицина (академическая магистратура)"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.gdpu.edu.cn/zsyjy/gjxszs.htm",
+        "sourceTitle": "Guangdong Pharmaceutical University International Student Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official page explicitly lists Basic Medicine as an academic master's discipline accepting international students.",
+          "zh": "官方页面明确基础医学硕士一级学科接收国际学生。",
+          "ru": "Официальная страница подтверждает академическую магистратуру по фундаментальной медицине для иностранных студентов."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "program_specific_language_duration_tuition_and_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-gdpu-bioengineering-master",
+      "candidateIds": [
+        "mew-0805-scw-gdpu-bioengineering-master"
+      ],
+      "institutionSlug": "guangdong-pharmaceutical-university",
+      "name": {
+        "en": "Bioengineering (Academic Master)",
+        "zh": "生物工程（学术硕士）",
+        "ru": "Биоинженерия (академическая магистратура)"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.gdpu.edu.cn/zsyjy/gjxszs.htm",
+        "sourceTitle": "Guangdong Pharmaceutical University International Student Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official page explicitly lists Bioengineering as an academic master's discipline accepting international students.",
+          "zh": "官方页面明确生物工程硕士一级学科接收国际学生。",
+          "ru": "Официальная страница подтверждает академическую магистратуру по биоинженерии для иностранных студентов."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "program_specific_language_duration_tuition_and_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-gdpu-integrated-medicine-master",
+      "candidateIds": [
+        "mew-0805-scw-gdpu-integrated-medicine-master"
+      ],
+      "institutionSlug": "guangdong-pharmaceutical-university",
+      "name": {
+        "en": "Integrated Chinese and Western Medicine (Academic Master)",
+        "zh": "中西医结合（学术硕士）",
+        "ru": "Интегративная китайская и западная медицина (академическая магистратура)"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.gdpu.edu.cn/zsyjy/gjxszs.htm",
+        "sourceTitle": "Guangdong Pharmaceutical University International Student Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official page explicitly identifies Integrated Chinese and Western Medicine as an academic master's discipline open to international students.",
+          "zh": "官方页面明确中西医结合硕士一级学科接收国际学生。",
+          "ru": "Официальная страница подтверждает академическую магистратуру по интегративной китайской и западной медицине для иностранцев."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "program_specific_language_duration_tuition_and_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-gdpu-pharmacy-academic-master",
+      "candidateIds": [
+        "mew-0805-scw-gdpu-pharmacy-academic-master"
+      ],
+      "institutionSlug": "guangdong-pharmaceutical-university",
+      "name": {
+        "en": "Pharmacy (Academic Master)",
+        "zh": "药学（学术硕士）",
+        "ru": "Фармация (академическая магистратура)"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.gdpu.edu.cn/zsyjy/gjxszs.htm",
+        "sourceTitle": "Guangdong Pharmaceutical University International Student Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The university's official international-admissions page explicitly lists Pharmacy among five first-level academic master's disciplines that accept international students.",
+          "zh": "学校国际招生官网明确将药学列为接收国际学生的五个硕士学位授权一级学科之一。",
+          "ru": "Официальная страница прямо включает фармацию в пять академических магистерских дисциплин для иностранных студентов."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "program_specific_language_duration_tuition_and_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-gdpu-public-health-preventive-master",
+      "candidateIds": [
+        "mew-0805-scw-gdpu-public-health-preventive-master"
+      ],
+      "institutionSlug": "guangdong-pharmaceutical-university",
+      "name": {
+        "en": "Public Health and Preventive Medicine (Academic Master)",
+        "zh": "公共卫生与预防医学（学术硕士）",
+        "ru": "Общественное здравоохранение и профилактическая медицина (академическая магистратура)"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.gdpu.edu.cn/zsyjy/gjxszs.htm",
+        "sourceTitle": "Guangdong Pharmaceutical University International Student Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official page explicitly lists Public Health and Preventive Medicine as an academic master's discipline accepting international students.",
+          "zh": "官方页面明确公共卫生与预防医学硕士一级学科接收国际学生。",
+          "ru": "Официальная страница подтверждает академическую магистратуру по общественному здравоохранению и профилактической медицине."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "program_specific_language_duration_tuition_and_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
       "candidateId": "mew-csw-gdufe-digital-economy-master",
       "candidateIds": [
         "mew-csw-gdufe-digital-economy-master"
@@ -13845,67 +14818,6 @@
       ]
     },
     {
-      "candidateId": "clw-sw-gdufs-chinese-four-week-december",
-      "candidateIds": [
-        "clw-sw-gdufs-chinese-four-week-december"
-      ],
-      "institutionSlug": "guangdong-university-of-foreign-studies",
-      "name": {
-        "en": "Chinese Language Study — Four-Week December Program",
-        "zh": "汉语研修四周项目（十二月）",
-        "ru": "Четырехнедельная декабрьская программа китайского языка"
-      },
-      "programType": "short_term",
-      "level": "language",
-      "teachingLanguage": {
-        "value": "Chinese",
-        "status": "known"
-      },
-      "duration": {
-        "value": "4 weeks",
-        "status": "known"
-      },
-      "tuition": {
-        "amount": null,
-        "currency": "CNY",
-        "period": null,
-        "status": "not_applicable"
-      },
-      "cycles": [
-        {
-          "academicYear": "2026-2027",
-          "intake": "winter",
-          "intakeLabel": "December 2026",
-          "applicationOpen": "2026-03-04",
-          "applicationDeadline": "2026-09-15",
-          "statusAsOfCheckedAt": "open",
-          "displayAsOpen": true,
-          "sourceFormat": "canonical"
-        }
-      ],
-      "evidence": {
-        "officialUrl": "https://iie-en.gdufs.edu.cn/info/1143/2635.htm",
-        "sourceTitle": "GDUFS 2026 International Chinese Language Teachers Scholarship Guide",
-        "checkedAt": "2026-08-02",
-        "summary": {
-          "en": "GDUFS 2026 International Chinese Language Teachers Scholarship Guide confirms Chinese Language Study — Four-Week December Program as an international-student offering. Only explicitly published facts are structured; unavailable fields are not inferred.",
-          "zh": "GDUFS 2026 International Chinese Language Teachers Scholarship Guide确认“汉语研修四周项目（十二月）”面向国际学生。仅录入官网明确公布的事实，未公开字段不作推断。",
-          "ru": "GDUFS 2026 International Chinese Language Teachers Scholarship Guide подтверждает программу «Четырехнедельная декабрьская программа китайского языка» для иностранных студентов. Непубликованные данные не выводятся."
-        }
-      },
-      "additionalEvidence": [],
-      "applicationUrl": null,
-      "recommendedAction": "publish_program_identity_with_open_cycle",
-      "qualityTier": "A",
-      "riskFlags": [
-        "group_application_only",
-        "scholarship_route_program"
-      ],
-      "sourceFiles": [
-        "south-west.json"
-      ]
-    },
-    {
       "candidateId": "clw-sw-gdufs-iclt-year",
       "candidateIds": [
         "clw-sw-gdufs-iclt-year"
@@ -14300,6 +15212,55 @@
       ]
     },
     {
+      "candidateId": "mew-0805-scw-gxmzu-iclt-bachelor",
+      "candidateIds": [
+        "mew-0805-scw-gxmzu-iclt-bachelor"
+      ],
+      "institutionSlug": "guangxi-minzu-university",
+      "name": {
+        "en": "International Chinese Language Education",
+        "zh": "汉语国际教育",
+        "ru": "Международное образование китайского языка"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese with multilingual support",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://gjjy.gxmzu.edu.cn/zsjy/hygjjy.htm",
+        "sourceTitle": "Guangxi Minzu University International Chinese Language Education Program",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official program page explicitly identifies a four-year bachelor route for international students, taught mainly in Chinese with English, French and ASEAN-language support.",
+          "zh": "官方专业页明确该项目为面向来华留学生的四年制本科，以中文授课为主并辅以英语、法语和东盟国家语言。",
+          "ru": "Официальная страница подтверждает четырехлетний бакалавриат для иностранцев: основное обучение на китайском с языковой поддержкой."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "current_tuition_and_exact_application_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
       "candidateId": "mew-scws-gxmzu-nondegree-chinese-language",
       "candidateIds": [
         "mew-scws-gxmzu-nondegree-chinese-language"
@@ -14347,6 +15308,55 @@
       ],
       "sourceFiles": [
         "south-central-west-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-gxmzu-short-chinese-culture",
+      "candidateIds": [
+        "mew-0805-scw-gxmzu-short-chinese-culture"
+      ],
+      "institutionSlug": "guangxi-minzu-university",
+      "name": {
+        "en": "Short-term Chinese Culture Experience Program",
+        "zh": "短期中国文化体验项目",
+        "ru": "Краткосрочная программа знакомства с китайской культурой"
+      },
+      "programType": "short_term",
+      "level": "other",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": "program",
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://gjjy.gxmzu.edu.cn/zsjy/hygjjy.htm",
+        "sourceTitle": "Guangxi Minzu University International Chinese Non-degree Programs",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official page names a distinct short-term Chinese culture experience route under its non-degree international Chinese offering and describes tiered Chinese and culture courses.",
+          "zh": "官方页面在国际中文非学历项目中明确列出短期中国文化体验项目，并说明分层汉语及文化课程。",
+          "ru": "Официальная страница отдельно называет краткосрочную культурную программу с курсами китайского языка и культуры по уровням."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "duration_tuition_and_current_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
       ]
     },
     {
@@ -14861,6 +15871,188 @@
       "riskFlags": [],
       "sourceFiles": [
         "wave3-east-south.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-gafa-art-studies-doctorate",
+      "candidateIds": [
+        "mve-ecma-gafa-art-studies-doctorate"
+      ],
+      "institutionSlug": "guangzhou-academy-of-fine-arts",
+      "name": {
+        "en": "Art Studies",
+        "zh": "艺术学",
+        "ru": "Искусствоведение"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 68000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-04-17",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://wsc.gzarts.edu.cn/info/1497/3972.htm",
+        "sourceTitle": "Guangzhou Academy of Fine Arts 2026 International Doctoral Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 international doctoral guide lists Chinese-taught Art Studies, a three-year duration, CNY 68,000 annual tuition and the closed April 17 deadline.",
+          "zh": "2026国际博士官方简章列出中文授课艺术学，学制三年、学费每年68000元，4月17日已截止。",
+          "ru": "Официальный справочник международной докторантуры 2026 года указывает искусствоведение на китайском, три года, 68 000 юаней в год и закрытый срок 17 апреля."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-gafa-chinese-painting-bachelor",
+      "candidateIds": [
+        "mve-ecma-gafa-chinese-painting-bachelor"
+      ],
+      "institutionSlug": "guangzhou-academy-of-fine-arts",
+      "name": {
+        "en": "Chinese Painting",
+        "zh": "中国画",
+        "ru": "Китайская живопись"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": 38000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-31",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://wsc.gzarts.edu.cn/info/1497/3952.htm",
+        "sourceTitle": "Guangzhou Academy of Fine Arts 2026 International Undergraduate Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "GAFA's official 2026 international guide lists Chinese Painting among Chinese-language bachelor majors, with CNY 38,000 annual tuition and the closed May 31 deadline.",
+          "zh": "广美2026国际学生官方简章列出中文授课中国画本科，学费每年38000元，5月31日已截止。",
+          "ru": "Официальный международный справочник GAFA 2026 года указывает китайскую живопись на китайском за 38 000 юаней в год и закрытый срок 31 мая."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed",
+        "program_duration_not_itemized"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-gafa-visual-communication-bachelor",
+      "candidateIds": [
+        "mve-ecma-gafa-visual-communication-bachelor"
+      ],
+      "institutionSlug": "guangzhou-academy-of-fine-arts",
+      "name": {
+        "en": "Visual Communication Design",
+        "zh": "视觉传达设计",
+        "ru": "Дизайн визуальных коммуникаций"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": 38000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-31",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://wsc.gzarts.edu.cn/info/1497/3952.htm",
+        "sourceTitle": "Guangzhou Academy of Fine Arts 2026 International Undergraduate Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The current official foreign-student major list includes Chinese-taught Visual Communication Design, CNY 38,000 annual tuition and a May 31 deadline.",
+          "zh": "当期外国学生官方专业目录列出中文授课视觉传达设计，学费每年38000元，截止日期为5月31日。",
+          "ru": "Текущий официальный список для иностранных студентов включает дизайн визуальных коммуникаций на китайском за 38 000 юаней в год и срок 31 мая."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed",
+        "program_duration_not_itemized"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
       ]
     },
     {
@@ -15930,6 +17122,271 @@
       ],
       "sourceFiles": [
         "wave3-east-south.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-glut-civil-engineering-master-chinese",
+      "candidateIds": [
+        "mew-0805-scw-glut-civil-engineering-master-chinese"
+      ],
+      "institutionSlug": "guilin-university-of-technology",
+      "name": {
+        "en": "Civil Engineering (Chinese-taught)",
+        "zh": "土木工程（中文授课硕士）",
+        "ru": "Гражданское строительство (магистратура на китайском языке)"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": 16000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://gj.glut.edu.cn/info/1072/2751.htm",
+        "sourceTitle": "Guilin University of Technology International College and Major Directory",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official directory lists Civil Engineering among Chinese-taught master's programs; the 2026 guide gives annual tuition of CNY 16,000 for this tier.",
+          "zh": "官方目录列出中文授课土木工程硕士；2026指南公布中文硕士每年16000元。",
+          "ru": "Официальный каталог включает магистратуру по строительству на китайском языке; тариф 2026 — 16 000 юаней в год."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+          "sourceTitle": "Guilin University of Technology 2026 International Students Admissions Guide"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "exact_duration_and_current_application_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-glut-cs-bachelor-english",
+      "candidateIds": [
+        "mew-0805-scw-glut-cs-bachelor-english"
+      ],
+      "institutionSlug": "guilin-university-of-technology",
+      "name": {
+        "en": "Computer Science and Technology (English-taught)",
+        "zh": "计算机科学与技术（英文授课）",
+        "ru": "Компьютерные науки и технологии (на английском языке)"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": 16800,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://gj.glut.edu.cn/info/1072/2751.htm",
+        "sourceTitle": "Guilin University of Technology International College and Major Directory",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official directory lists Computer Science and Technology as an English-taught bachelor; the 2026 guide sets this fee tier at CNY 16,800 per year.",
+          "zh": "官方目录列出英文授课计算机科学与技术本科；2026指南公布该类别每年16800元。",
+          "ru": "Официальный каталог включает англоязычный бакалавриат по компьютерным наукам; тариф 2026 — 16 800 юаней в год."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+          "sourceTitle": "Guilin University of Technology 2026 International Students Admissions Guide"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "exact_duration_and_current_application_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-glut-environmental-doctorate",
+      "candidateIds": [
+        "mew-0805-scw-glut-environmental-doctorate"
+      ],
+      "institutionSlug": "guilin-university-of-technology",
+      "name": {
+        "en": "Environmental Science and Engineering",
+        "zh": "环境科学与工程",
+        "ru": "Экологическая наука и инженерия"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": "Chinese/English",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://gj.glut.edu.cn/info/1072/2751.htm",
+        "sourceTitle": "Guilin University of Technology International College and Major Directory",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international directory lists Environmental Science and Engineering among Chinese/English doctoral programs; the 2026 guide directs applicants to contact the university for tuition.",
+          "zh": "官方国际目录列出中英文授课环境科学与工程博士；2026指南要求联系学校确认博士学费。",
+          "ru": "Официальный каталог включает докторантуру по экологической науке и инженерии на китайском/английском; стоимость уточняется в университете."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+          "sourceTitle": "Guilin University of Technology 2026 International Students Admissions Guide"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "duration_tuition_and_current_application_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-glut-long-chinese-year",
+      "candidateIds": [
+        "mew-0805-scw-glut-long-chinese-year"
+      ],
+      "institutionSlug": "guilin-university-of-technology",
+      "name": {
+        "en": "Long-term Chinese Language Course — One Academic Year",
+        "zh": "长期汉语课程（一学年）",
+        "ru": "Длительный курс китайского языка — один учебный год"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 academic year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 11800,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+        "sourceTitle": "Guilin University of Technology 2026 International Students Admissions Guide",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The current 2026 guide lists long-term Chinese courses at CNY 7,000 per semester or CNY 11,800 per academic year; this record represents the academic-year option.",
+          "zh": "当前2026指南列出长期汉语课程每学期7000元或每学年11800元；本记录对应一学年方案。",
+          "ru": "Руководство 2026 указывает 7 000 юаней за семестр или 11 800 за учебный год; запись относится к годовому варианту."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "exact_current_application_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-glut-tcsol-bachelor",
+      "candidateIds": [
+        "mew-0805-scw-glut-tcsol-bachelor"
+      ],
+      "institutionSlug": "guilin-university-of-technology",
+      "name": {
+        "en": "Teaching Chinese to Speakers of Other Languages",
+        "zh": "汉语国际教育",
+        "ru": "Преподавание китайского языка как иностранного"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": 13800,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://gj.glut.edu.cn/info/1072/2751.htm",
+        "sourceTitle": "Guilin University of Technology International College and Major Directory",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international directory lists TCSOL among Chinese-taught bachelor's programs; the current 2026 guide sets Chinese-taught bachelor tuition at CNY 13,800 per year.",
+          "zh": "国际招生官方目录列出中文授课汉语国际教育本科；2026指南公布中文本科每年13800元。",
+          "ru": "Официальный каталог включает бакалавриат по преподаванию китайского языка; тариф 2026 — 13 800 юаней в год."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+          "sourceTitle": "Guilin University of Technology 2026 International Students Admissions Guide"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "exact_duration_and_current_application_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
       ]
     },
     {
@@ -18329,6 +19786,204 @@
       ],
       "sourceFiles": [
         "wave3-north-west.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nnw-hebtu-chinese-language-literature-bachelor",
+      "candidateIds": [
+        "prog-mew-nnw-hebtu-chinese-language-literature-bachelor"
+      ],
+      "institutionSlug": "hebei-normal-university",
+      "name": {
+        "en": "Chinese Language and Literature (International Chinese Education)",
+        "zh": "中国语言文学类（汉语国际教育）",
+        "ru": "Китайский язык и литература (международное преподавание китайского языка)"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 15000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cice.hebtu.edu.cn/a/2026/03/16/79B9583412714650B3F324591E32603F.html",
+        "sourceTitle": "河北师范大学2026年国际中文教师奖学金申请指引",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The current official guide explicitly lists a four-year Chinese Language and Literature bachelor in the International Chinese Education direction for non-Chinese applicants entering in September 2026.",
+          "zh": "当前官方指引明确列出面向非中国籍申请人的四年制中国语言文学类（汉语国际教育）本科，2026年9月入学。",
+          "ru": "Текущий официальный справочник прямо указывает четырехлетний бакалавриат по китайскому языку и литературе в направлении международного преподавания китайского языка для набора сентября 2026 года."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://cice.hebtu.edu.cn/a/2025/03/06/352AABF54239434EB3DB603E6C56D84E.html",
+          "sourceTitle": "2025年河北师范大学国际学生申请指引（自费项目）"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "Merge the program and stable self-funded humanities tuition; retain the 2026 scholarship cycle only as closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "tuition_from_official_category_table"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nnw-hebtu-international-chinese-education-doctorate",
+      "candidateIds": [
+        "prog-mew-nnw-hebtu-international-chinese-education-doctorate"
+      ],
+      "institutionSlug": "hebei-normal-university",
+      "name": {
+        "en": "International Chinese Language Education",
+        "zh": "国际中文教育",
+        "ru": "Международное преподавание китайского языка"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 26000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cice.hebtu.edu.cn/a/2026/03/16/79B9583412714650B3F324591E32603F.html",
+        "sourceTitle": "河北师范大学2026年国际中文教师奖学金申请指引",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The current official guide explicitly offers a four-year International Chinese Language Education doctorate to non-Chinese applicants for September 2026; the degree deadline was May 15.",
+          "zh": "当前官方指引明确面向非中国籍申请人开设四年制国际中文教育博士，2026年9月入学，学历项目截止5月15日。",
+          "ru": "Текущий официальный справочник предлагает иностранным абитуриентам четырехлетнюю докторантуру по международному преподаванию китайского языка с началом в сентябре 2026 года; срок подачи — 15 мая."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://cice.hebtu.edu.cn/a/2025/03/06/352AABF54239434EB3DB603E6C56D84E.html",
+          "sourceTitle": "2025年河北师范大学国际学生申请指引（自费项目）"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "Merge the program and stable self-funded humanities tuition; retain the 2026 scholarship cycle only as closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "tuition_from_official_category_table"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nnw-hebtu-international-chinese-education-master",
+      "candidateIds": [
+        "prog-mew-nnw-hebtu-international-chinese-education-master"
+      ],
+      "institutionSlug": "hebei-normal-university",
+      "name": {
+        "en": "International Chinese Language Education",
+        "zh": "国际中文教育",
+        "ru": "Международное преподавание китайского языка"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "2 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 20000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cice.hebtu.edu.cn/a/2026/03/16/79B9583412714650B3F324591E32603F.html",
+        "sourceTitle": "河北师范大学2026年国际中文教师奖学金申请指引",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The current official guide explicitly offers a two-year International Chinese Language Education master's degree to non-Chinese applicants for September 2026; the degree deadline was May 15.",
+          "zh": "当前官方指引明确面向非中国籍申请人开设两年制国际中文教育硕士，2026年9月入学，学历项目截止5月15日。",
+          "ru": "Текущий официальный справочник предлагает иностранным абитуриентам двухлетнюю магистратуру по международному преподаванию китайского языка с началом в сентябре 2026 года; срок подачи — 15 мая."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://cice.hebtu.edu.cn/a/2025/03/06/352AABF54239434EB3DB603E6C56D84E.html",
+          "sourceTitle": "2025年河北师范大学国际学生申请指引（自费项目）"
+        }
+      ],
+      "applicationUrl": null,
+      "recommendedAction": "Merge the program and stable self-funded humanities tuition; retain the 2026 scholarship cycle only as closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "tuition_from_official_category_table"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
       ]
     },
     {
@@ -22965,6 +24620,104 @@
       ]
     },
     {
+      "candidateId": "prog-mew-nnw-lnnu-chinese-language-bachelor",
+      "candidateIds": [
+        "prog-mew-nnw-lnnu-chinese-language-bachelor"
+      ],
+      "institutionSlug": "liaoning-normal-university",
+      "name": {
+        "en": "Chinese Language",
+        "zh": "汉语言",
+        "ru": "Китайский язык"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 18000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://gjy.lnnu.edu.cn/zsxx/bkzy.htm",
+        "sourceTitle": "辽宁师范大学国际教育学院本科专业",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international-student page lists the four-year Chinese Language bachelor with cultural and business tracks, Chinese instruction and tuition of CNY 18,000 per year; its generic dates have no intake year.",
+          "zh": "国际学生官方页面列出四年制汉语言本科（文化与商贸方向），中文授课，学费每年18,000元；通用日期未注明招生年度。",
+          "ru": "Официальная страница для иностранных студентов указывает четырехлетний бакалавриат по китайскому языку с культурным и деловым профилями, обучение на китайском и стоимость 18 000 CNY в год; год набора не указан."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge stable program facts; keep the intake unannounced until a year-specific notice is published.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "cycle_year_not_announced"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nnw-lnnu-chinese-language-study",
+      "candidateIds": [
+        "prog-mew-nnw-lnnu-chinese-language-study"
+      ],
+      "institutionSlug": "liaoning-normal-university",
+      "name": {
+        "en": "Chinese Language Study",
+        "zh": "汉语语言进修",
+        "ru": "Изучение китайского языка"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 academic year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 15000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://gjy.lnnu.edu.cn/zsxx/yyjx.htm",
+        "sourceTitle": "辽宁师范大学国际教育学院语言进修",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international-college page explicitly accepts non-Chinese applicants, lists one-year Chinese-language study at CNY 15,000 and describes spring and autumn entry; no intake year is announced.",
+          "zh": "国际教育学院官网明确面向非中国籍申请人，列明一年汉语进修学费15,000元及春秋两季入学；页面未公布具体招生年度。",
+          "ru": "Официальная страница принимает иностранных граждан и указывает годовой курс китайского языка стоимостью 15 000 CNY с весенним и осенним набором; конкретный год набора не объявлен."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge stable program facts; do not surface a current cycle until the university publishes an intake year.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "cycle_year_not_announced"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
       "candidateId": "prog-mew-nss-lnnu-information-management-systems-bachelor",
       "candidateIds": [
         "prog-mew-nss-lnnu-information-management-systems-bachelor"
@@ -23088,6 +24841,55 @@
       ],
       "sourceFiles": [
         "north-specialty-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nnw-lnnu-international-chinese-education-master",
+      "candidateIds": [
+        "prog-mew-nnw-lnnu-international-chinese-education-master"
+      ],
+      "institutionSlug": "liaoning-normal-university",
+      "name": {
+        "en": "International Chinese Language Education",
+        "zh": "汉语国际教育",
+        "ru": "Международное преподавание китайского языка"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "2 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 25000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://gjy.lnnu.edu.cn/zsxx/sszhuany.htm",
+        "sourceTitle": "辽宁师范大学国际教育学院硕士专业",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international-student page lists the two-year International Chinese Language Education master's degree, HSK 5 entry requirement and annual tuition of CNY 25,000; the deadline has no year.",
+          "zh": "国际学生官方页面列出两年制汉语国际教育硕士，要求HSK五级，年学费25,000元；截止日期未标明年度。",
+          "ru": "Официальная страница указывает двухлетнюю магистратуру по международному преподаванию китайского языка, требование HSK 5 и стоимость 25 000 CNY в год; год крайнего срока не указан."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge stable program facts; keep the intake unannounced until a year-specific notice is published.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "cycle_year_not_announced"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
       ]
     },
     {
@@ -23501,6 +25303,128 @@
       ]
     },
     {
+      "candidateId": "mve-ecma-njau-food-science-bachelor",
+      "candidateIds": [
+        "mve-ecma-njau-food-science-bachelor"
+      ],
+      "institutionSlug": "nanjing-agricultural-university",
+      "name": {
+        "en": "Food Science and Engineering",
+        "zh": "食品科学与工程",
+        "ru": "Пищевая наука и инженерия"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-31",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://coieen.njau.edu.cn/__local/9/4F/1D/531A52D593668E50F3C90B340EB_D9DB1472_5E022.pdf",
+        "sourceTitle": "Nanjing Agricultural University 2026 International Undergraduate Admission Guide",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "NAU's official foreign-undergraduate table includes Chinese-taught Food Science and Engineering for the 2026 intake; the cycle is closed and unitemized facts are not inferred.",
+          "zh": "南农官方外国本科生表列出2026年中文授课食品科学与工程；当期已截止，未逐项列明的事实不推断。",
+          "ru": "Официальная таблица NAU включает китайскоязычную пищевую инженерию для набора 2026 года; цикл закрыт, отсутствующие данные не выводятся."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed",
+        "program_level_fee_and_duration_not_itemized"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-njau-seed-science-bachelor",
+      "candidateIds": [
+        "mve-ecma-njau-seed-science-bachelor"
+      ],
+      "institutionSlug": "nanjing-agricultural-university",
+      "name": {
+        "en": "Seed Science and Engineering",
+        "zh": "种子科学与工程",
+        "ru": "Наука и инженерия семян"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-31",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://coieen.njau.edu.cn/__local/9/4F/1D/531A52D593668E50F3C90B340EB_D9DB1472_5E022.pdf",
+        "sourceTitle": "Nanjing Agricultural University 2026 International Undergraduate Admission Guide",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 foreign-undergraduate catalogue lists the Chinese-taught Seed Science and Engineering major and the closed May 31 deadline; unsupported fee and duration values are withheld.",
+          "zh": "2026外国本科生官方目录列出中文授课种子科学与工程专业，5月31日已截止；未在材料中对应的学费和学制不填。",
+          "ru": "Официальный каталог 2026 года указывает китайскоязычную программу по семеноводству и закрытый срок 31 мая; неподтверждённые стоимость и длительность скрыты."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed",
+        "program_level_fee_and_duration_not_itemized"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
       "candidateId": "wave8-final-nau-chinese-language-nondegree",
       "candidateIds": [
         "wave8-final-nau-chinese-language-nondegree"
@@ -23559,6 +25483,236 @@
       ],
       "sourceFiles": [
         "../official-gap-wave-2026-08-02/wave8-final-singletons.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-nau-finance-master",
+      "candidateIds": [
+        "mve-ecma-nau-finance-master"
+      ],
+      "institutionSlug": "nanjing-audit-university",
+      "name": {
+        "en": "Finance",
+        "zh": "金融学",
+        "ru": "Финансы"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese or English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "2 or 3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "source_unavailable"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://lxsy.nau.edu.cn/_upload/article/files/b0/90/ed49c8d84eaaa3553ac06f947413/2ddd0d38-6895-429b-adcc-8c95105e4544.pdf",
+        "sourceTitle": "Nanjing Audit University International Student Fee Standard",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international-student standard identifies Finance master's routes in Chinese or English, with two-year professional or three-year academic study; different tuition by medium is not collapsed into one value.",
+          "zh": "国际学生官方收费标准确认金融学硕士可选中英文，专业型两年或学术型三年；不同授课语言对应的学费不合并为单一数值。",
+          "ru": "Официальный стандарт подтверждает магистратуру по финансам на китайском или английском: два года для профессиональной и три для академической траектории; разные ставки не объединяются."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "official_fee_standard_does_not_confirm_current_open_cycle",
+        "academic_or_professional_track_not_disambiguated"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-njfu-forest-genetics-master",
+      "candidateIds": [
+        "mve-ecma-njfu-forest-genetics-master"
+      ],
+      "institutionSlug": "nanjing-forestry-university",
+      "name": {
+        "en": "Forest Genetics and Tree Breeding",
+        "zh": "林木遗传育种",
+        "ru": "Лесная генетика и селекция деревьев"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese or English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3–4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 27000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-31",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://ieceng.njfu.edu.cn/Notice/20251024/i346469.html",
+        "sourceTitle": "Nanjing Forestry University 2026 International Graduate Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The current international graduate catalogue lists Forest Genetics and Tree Breeding in Chinese or English, with CNY 27,000 annual tuition, 3–4 years and a May 31 deadline.",
+          "zh": "当期国际研究生目录列出林木遗传育种，可中英文授课，学费每年27000元、学制3至4年，5月31日截止。",
+          "ru": "Текущий международный каталог указывает лесную генетику и селекцию на китайском или английском, 27 000 юаней в год, 3–4 года и срок 31 мая."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": "https://njfu.17gz.org/",
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-njfu-wood-science-bachelor",
+      "candidateIds": [
+        "mve-ecma-njfu-wood-science-bachelor"
+      ],
+      "institutionSlug": "nanjing-forestry-university",
+      "name": {
+        "en": "Wood Science and Engineering",
+        "zh": "木材科学与工程",
+        "ru": "Наука и инженерия древесины"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4–6 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 16500,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-31",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://ieceng.njfu.edu.cn/Notice/20251024/i346468.html",
+        "sourceTitle": "Nanjing Forestry University 2026 English-taught Undergraduate Programs",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international-college guide lists the English-taught Wood Science and Engineering bachelor, CNY 16,500 annual tuition, a 4–6 year duration and the closed May 31 deadline.",
+          "zh": "国际教育学院官方简章列出英文授课木材科学与工程本科，学费每年16500元、学制4至6年，5月31日已截止。",
+          "ru": "Официальный справочник указывает англоязычный бакалавриат по древесиноведению: 16 500 юаней в год, 4–6 лет, срок 31 мая закрыт."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": "https://njfu.17gz.org/",
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-njmu-clinical-medicine-chinese-bachelor",
+      "candidateIds": [
+        "mve-ecma-njmu-clinical-medicine-chinese-bachelor"
+      ],
+      "institutionSlug": "nanjing-medical-university",
+      "name": {
+        "en": "Clinical Medicine (Chinese-taught)",
+        "zh": "临床医学（中文授课）",
+        "ru": "Клиническая медицина (на китайском языке)"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "5 years including internship",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 30000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": "2026-01-01",
+          "applicationDeadline": "2026-06-30",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm",
+        "sourceTitle": "Nanjing Medical University 2026 Chinese-taught Clinical Medicine Admission Guide",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 international guide confirms the Chinese-taught five-year Clinical Medicine bachelor, CNY 30,000 annual tuition and January 1–June 30 application window.",
+          "zh": "2026国际学生官方简章确认中文授课临床医学本科，学制五年（含实习）、学费每年30000元，申请期为1月1日至6月30日。",
+          "ru": "Официальный справочник 2026 года подтверждает пятилетнюю клиническую медицину на китайском, 30 000 юаней в год и приём с 1 января по 30 июня."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
       ]
     },
     {
@@ -24084,6 +26238,126 @@
       ],
       "sourceFiles": [
         "east-coast-sparse.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-njucm-materia-medica-pharmacy-bachelor",
+      "candidateIds": [
+        "mve-ecma-njucm-materia-medica-pharmacy-bachelor"
+      ],
+      "institutionSlug": "nanjing-university-of-chinese-medicine",
+      "name": {
+        "en": "Chinese Materia Medica Pharmacy",
+        "zh": "中药学",
+        "ru": "Фармация китайской лекарственной материи"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 24000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": "2025-12-01",
+          "applicationDeadline": "2026-05-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://iec.njucm.edu.cn/en/detail/1375.html",
+        "sourceTitle": "Nanjing University of Chinese Medicine 2026 International Undergraduate Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international catalogue lists Chinese Materia Medica Pharmacy as a four-year Chinese-taught bachelor with CNY 24,000 annual tuition and the May 15 deadline.",
+          "zh": "国际学生官方目录列出中文授课中药学四年制本科，学费每年24000元，申请截止5月15日。",
+          "ru": "Официальный каталог указывает четырёхлетнюю китайскоязычную фармацию китайских лекарств за 24 000 юаней в год и срок 15 мая."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-njucm-health-preservation-bachelor",
+      "candidateIds": [
+        "mve-ecma-njucm-health-preservation-bachelor"
+      ],
+      "institutionSlug": "nanjing-university-of-chinese-medicine",
+      "name": {
+        "en": "Traditional Chinese Medicine Health Preservation",
+        "zh": "中医养生学",
+        "ru": "Оздоровление в традиционной китайской медицине"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "5 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 24000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": "2025-12-01",
+          "applicationDeadline": "2026-05-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://iec.njucm.edu.cn/en/detail/1375.html",
+        "sourceTitle": "Nanjing University of Chinese Medicine 2026 International Undergraduate Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The current official international guide lists the Chinese-taught five-year TCM Health Preservation bachelor at CNY 24,000 per year and the closed May 15 deadline.",
+          "zh": "当期国际学生官方简章列出中文授课中医养生学五年制本科，学费每年24000元，5月15日已截止。",
+          "ru": "Текущий официальный справочник указывает пятилетний бакалавриат по оздоровлению в ТКМ на китайском за 24 000 юаней в год; срок 15 мая закрыт."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
       ]
     },
     {
@@ -25529,6 +27803,153 @@
       ]
     },
     {
+      "candidateId": "prog-mew-nnw-nxmu-chinese-language-training",
+      "candidateIds": [
+        "prog-mew-nnw-nxmu-chinese-language-training"
+      ],
+      "institutionSlug": "ningxia-medical-university",
+      "name": {
+        "en": "Chinese Language Training",
+        "zh": "汉语进修",
+        "ru": "Курс китайского языка"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese with English support",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 academic year",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 10000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+        "sourceTitle": "宁夏医科大学来华留学生招生简章",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official catalog lists one-year, semester, month and week Chinese-language training options; the one-year route costs CNY 10,000, while no current deadline is stated.",
+          "zh": "官方目录列出一年、一学期、一个月和一周汉语进修选择，其中一年项目学费10,000元；未注明当前截止日期。",
+          "ru": "Официальный каталог предлагает годовой, семестровый, месячный и недельный курсы китайского языка; годовой курс стоит 10 000 CNY, актуальный срок подачи не указан."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge stable catalog facts; wait for a current official deadline before opening an intake.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_cycle_not_announced"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nnw-nxmu-clinical-medicine-master",
+      "candidateIds": [
+        "prog-mew-nnw-nxmu-clinical-medicine-master"
+      ],
+      "institutionSlug": "ningxia-medical-university",
+      "name": {
+        "en": "Clinical Medicine",
+        "zh": "临床医学",
+        "ru": "Клиническая медицина"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese or English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 34000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+        "sourceTitle": "宁夏医科大学来华留学生招生简章",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international-student catalog lists a three-year Clinical Medicine master's degree in Chinese or English with tuition of CNY 34,000 per year; no current deadline is stated.",
+          "zh": "官方国际生目录列出三年制中英文临床医学硕士，年学费34,000元；未注明当前截止日期。",
+          "ru": "Официальный каталог указывает трехлетнюю магистратуру по клинической медицине на китайском или английском языке стоимостью 34 000 CNY в год; актуальный срок не указан."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge stable catalog facts; wait for a current official deadline before opening an intake.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_cycle_not_announced"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nnw-nxmu-mbbs-english-bachelor",
+      "candidateIds": [
+        "prog-mew-nnw-nxmu-mbbs-english-bachelor"
+      ],
+      "institutionSlug": "ningxia-medical-university",
+      "name": {
+        "en": "Clinical Medicine (MBBS, English-taught)",
+        "zh": "临床医学（MBBS，英文授课）",
+        "ru": "Клиническая медицина (MBBS, обучение на английском)"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "6 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 29800,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+        "sourceTitle": "宁夏医科大学来华留学生招生简章",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international-student catalog confirms an English-taught six-year Clinical Medicine MBBS bachelor and annual tuition of CNY 29,800; a current intake deadline is not published on this page.",
+          "zh": "官方国际生目录确认六年制英文授课临床医学MBBS本科，年学费29,800元；该页面未公布当前招生截止日期。",
+          "ru": "Официальный каталог подтверждает шестилетний англоязычный бакалавриат Clinical Medicine MBBS стоимостью 29 800 CNY в год; актуальный срок подачи на странице не указан."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge stable catalog facts; wait for a current official deadline before opening an intake.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_cycle_not_announced"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
       "candidateId": "confirmed-nxu-chinese-language",
       "candidateIds": [
         "confirmed-nxu-chinese-language"
@@ -26476,6 +28897,186 @@
       ]
     },
     {
+      "candidateId": "prog-mew-nnw-neepu-computer-science-bachelor",
+      "candidateIds": [
+        "prog-mew-nnw-neepu-computer-science-bachelor"
+      ],
+      "institutionSlug": "northeast-electric-power-university",
+      "name": {
+        "en": "Computer Science and Technology",
+        "zh": "计算机科学与技术",
+        "ru": "Компьютерные науки и технологии"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese or English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 19000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": "2025-10-15",
+          "applicationDeadline": "2026-05-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cie.neepu.edu.cn/zsxx/zsjz.htm",
+        "sourceTitle": "东北电力大学国际本科学生招生简章",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 international catalog lists Computer Science and Technology in Chinese or English, four years and CNY 19,000 per year, with applications closing May 1, 2026.",
+          "zh": "2026年官方国际本科目录列出中英文授课计算机科学与技术，学制四年，年学费19,000元，申请截止2026年5月1日。",
+          "ru": "Официальный каталог 2026 года указывает бакалавриат по компьютерным наукам и технологиям на китайском или английском языке, 4 года и 19 000 CNY в год; срок подачи — 1 мая 2026 года."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge verified facts and retain the 2026 cycle only as closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nnw-neepu-electrical-engineering-bachelor",
+      "candidateIds": [
+        "prog-mew-nnw-neepu-electrical-engineering-bachelor"
+      ],
+      "institutionSlug": "northeast-electric-power-university",
+      "name": {
+        "en": "Electrical Engineering and Automation",
+        "zh": "电气工程及其自动化",
+        "ru": "Электроэнергетика и автоматизация"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 19000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": "2025-10-15",
+          "applicationDeadline": "2026-05-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cie.neepu.edu.cn/zsxx/zsjz.htm",
+        "sourceTitle": "东北电力大学国际本科学生招生简章",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 international bachelor catalog lists Electrical Engineering and Automation in Chinese, four years, CNY 19,000 per year, with applications from October 15, 2025 to May 1, 2026.",
+          "zh": "2026年官方国际本科目录列出中文授课电气工程及其自动化，学制四年，年学费19,000元，申请期为2025年10月15日至2026年5月1日。",
+          "ru": "Официальный каталог бакалавриата 2026 года указывает программу «Электроэнергетика и автоматизация» на китайском языке, 4 года, 19 000 CNY в год; прием заявок проходил с 15 октября 2025 года по 1 мая 2026 года."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge verified facts and retain the 2026 cycle only as closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nnw-neepu-energy-power-engineering-bachelor",
+      "candidateIds": [
+        "prog-mew-nnw-neepu-energy-power-engineering-bachelor"
+      ],
+      "institutionSlug": "northeast-electric-power-university",
+      "name": {
+        "en": "Energy and Power Engineering",
+        "zh": "能源与动力工程",
+        "ru": "Энергетика и теплоэнергетика"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 19000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": "2025-10-15",
+          "applicationDeadline": "2026-05-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cie.neepu.edu.cn/zsxx/zsjz.htm",
+        "sourceTitle": "东北电力大学国际本科学生招生简章",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 international catalog lists Energy and Power Engineering in Chinese, four years and CNY 19,000 per year, with applications closing May 1, 2026.",
+          "zh": "2026年官方国际本科目录列出中文授课能源与动力工程，学制四年，年学费19,000元，申请截止2026年5月1日。",
+          "ru": "Официальный каталог 2026 года указывает бакалавриат по энергетике и теплоэнергетике на китайском языке, 4 года и 19 000 CNY в год; срок подачи — 1 мая 2026 года."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge verified facts and retain the 2026 cycle only as closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
       "candidateId": "prog-mew-ne-nefu-ecology-master",
       "candidateIds": [
         "prog-mew-ne-nefu-ecology-master"
@@ -27415,6 +30016,66 @@
       ]
     },
     {
+      "candidateId": "prog-mew-nnw-nwupl-chinese-language",
+      "candidateIds": [
+        "prog-mew-nnw-nwupl-chinese-language"
+      ],
+      "institutionSlug": "northwest-university-of-political-science-and-law",
+      "name": {
+        "en": "Chinese Language Program",
+        "zh": "汉语进修项目",
+        "ru": "Программа китайского языка"
+      },
+      "programType": "language",
+      "level": "language",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "1 semester",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 8000,
+        "currency": "CNY",
+        "period": "semester",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-06-20",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+        "sourceTitle": "西北政法大学2026年秋季学期来华留学生招生简章",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 guide confirms a one-semester Chinese-language route for international applicants with no language prerequisite, tuition of CNY 8,000 per semester and a June 20 deadline.",
+          "zh": "2026年官方简章确认面向国际申请人的一学期汉语进修项目，无语言门槛，学费每学期8,000元，截止6月20日。",
+          "ru": "Официальный справочник 2026 года подтверждает семестровую программу китайского языка без языкового требования, стоимостью 8 000 CNY и сроком подачи до 20 июня."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge verified facts and retain the 2026 cycle only as closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
       "candidateId": "wave8-2-nwupl-cross-border-ecommerce-bachelor",
       "candidateIds": [
         "wave8-2-nwupl-cross-border-ecommerce-bachelor"
@@ -27473,6 +30134,126 @@
       ],
       "sourceFiles": [
         "../official-gap-wave-2026-08-02/wave8-new-local-strong-2.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nnw-nwupl-law-master",
+      "candidateIds": [
+        "prog-mew-nnw-nwupl-law-master"
+      ],
+      "institutionSlug": "northwest-university-of-political-science-and-law",
+      "name": {
+        "en": "Law",
+        "zh": "法学",
+        "ru": "Право"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3-5 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 18000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-06-20",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+        "sourceTitle": "西北政法大学2026年秋季学期来华留学生招生简章",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The university's 2026 international guide lists Law among its master's fields, with Chinese HSK 5, a 3-5 year study period, annual tuition of CNY 18,000 and a June 20 deadline.",
+          "zh": "学校2026年国际生简章将法学列为硕士招生方向，要求中文HSK五级，学制3至5年，年学费18,000元，截止6月20日。",
+          "ru": "Справочник для иностранных студентов 2026 года включает право в магистратуру: HSK 5, срок 3–5 лет, стоимость 18 000 CNY в год и подача до 20 июня."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge verified facts and retain the 2026 cycle only as closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
+      "candidateId": "prog-mew-nnw-nwupl-law-doctorate",
+      "candidateIds": [
+        "prog-mew-nnw-nwupl-law-doctorate"
+      ],
+      "institutionSlug": "northwest-university-of-political-science-and-law",
+      "name": {
+        "en": "Law",
+        "zh": "法学",
+        "ru": "Право"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": "Chinese or English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4-6 academic years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 26000,
+        "currency": "CNY",
+        "period": "academic_year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-06-20",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+        "sourceTitle": "西北政法大学2026年秋季学期来华留学生招生简章",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 guide lists a Law doctorate available in English, with a 4-6 year duration, annual tuition of CNY 26,000 and a June 20 deadline; Chinese-taught applicants require HSK 5.",
+          "zh": "2026年官方简章列出法学博士且可英文授课，学制4至6年，年学费26,000元，截止6月20日；中文授课申请人需HSK五级。",
+          "ru": "Официальный справочник 2026 года указывает докторантуру по праву с возможностью обучения на английском, сроком 4–6 лет, стоимостью 26 000 CNY в год и подачей до 20 июня; для китайского трека требуется HSK 5."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge verified facts and retain the 2026 cycle only as closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
       ]
     },
     {
@@ -30254,6 +33035,308 @@
       ]
     },
     {
+      "candidateId": "mve-ecma-sdutcm-acupuncture-master",
+      "candidateIds": [
+        "mve-ecma-sdutcm-acupuncture-master"
+      ],
+      "institutionSlug": "shandong-university-of-traditional-chinese-medicine",
+      "name": {
+        "en": "Acupuncture and Tuina",
+        "zh": "针灸推拿学",
+        "ru": "Иглоукалывание и туйна"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 30000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-06-30",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm",
+        "sourceTitle": "Shandong University of Traditional Chinese Medicine 2026 International Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international catalogue lists the English-taught three-year Acupuncture and Tuina master's at CNY 30,000 per year and the June 30 deadline.",
+          "zh": "国际学生官方目录列出英文授课针灸推拿学三年制硕士，学费每年30000元，截止日期为6月30日。",
+          "ru": "Официальный международный каталог указывает трёхлетнюю англоязычную магистратуру по иглоукалыванию и туйна за 30 000 юаней в год и срок 30 июня."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-sdutcm-materia-medica-doctorate",
+      "candidateIds": [
+        "mve-ecma-sdutcm-materia-medica-doctorate"
+      ],
+      "institutionSlug": "shandong-university-of-traditional-chinese-medicine",
+      "name": {
+        "en": "Chinese Materia Medica",
+        "zh": "中药学",
+        "ru": "Китайская лекарственная материя"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 38000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-06-30",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm",
+        "sourceTitle": "Shandong University of Traditional Chinese Medicine 2026 International Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 table lists the English-taught three-year Chinese Materia Medica doctorate at CNY 38,000 per year with a June 30 deadline.",
+          "zh": "2026官方表列出英文授课中药学三年制博士，学费每年38000元，截止日期为6月30日。",
+          "ru": "Официальная таблица 2026 года указывает трёхлетнюю англоязычную докторантуру по китайской лекарственной материи за 38 000 юаней в год и срок 30 июня."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-sdutcm-tcm-bachelor",
+      "candidateIds": [
+        "mve-ecma-sdutcm-tcm-bachelor"
+      ],
+      "institutionSlug": "shandong-university-of-traditional-chinese-medicine",
+      "name": {
+        "en": "Traditional Chinese Medicine",
+        "zh": "中医学",
+        "ru": "Традиционная китайская медицина"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "5 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 23000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-06-30",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm",
+        "sourceTitle": "Shandong University of Traditional Chinese Medicine 2026 International Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 international table lists the five-year Chinese-taught TCM bachelor, CNY 23,000 annual tuition and the closed June 30 deadline.",
+          "zh": "2026国际学生官方表列出中文授课中医学五年制本科，学费每年23000元，6月30日已截止。",
+          "ru": "Официальная таблица 2026 года указывает пятилетнюю ТКМ на китайском за 23 000 юаней в год и закрытый срок 30 июня."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-shcm-art-theory-doctorate",
+      "candidateIds": [
+        "mve-ecma-shcm-art-theory-doctorate"
+      ],
+      "institutionSlug": "shanghai-conservatory-of-music",
+      "name": {
+        "en": "Art Theory",
+        "zh": "艺术学理论",
+        "ru": "Теория искусства"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": "3–6 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 48000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": "2026-01-04",
+          "applicationDeadline": "2026-01-23",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://yjsb.shcmusic.edu.cn/_upload/article/files/1b/ec/b0ca02bc4d6fba1d5f980afbec4c/d27c9cc3-4989-4a24-8a99-9c9edf60fa4d.pdf",
+        "sourceTitle": "Shanghai Conservatory of Music 2026 International Graduate Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official foreign-graduate brochure lists Art Theory at doctoral level, CNY 48,000 annual tuition, 3–6 years and the closed January 23 deadline; teaching medium is not inferred from HSK requirements.",
+          "zh": "外国研究生官方简章列出艺术学理论博士，学费每年48000元、学制3至6年，1月23日已截止；不以HSK要求推断授课语言。",
+          "ru": "Официальный справочник указывает докторантуру по теории искусства: 48 000 юаней в год, 3–6 лет, срок 23 января закрыт; язык не выводится из требования HSK."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed",
+        "brochure_requires_hsk_but_does_not_label_teaching_medium"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-shcm-music-therapy-master",
+      "candidateIds": [
+        "mve-ecma-shcm-music-therapy-master"
+      ],
+      "institutionSlug": "shanghai-conservatory-of-music",
+      "name": {
+        "en": "Music Therapy",
+        "zh": "音乐治疗",
+        "ru": "Музыкальная терапия"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": "3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 40000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": "2026-01-04",
+          "applicationDeadline": "2026-01-23",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://yjsb.shcmusic.edu.cn/_upload/article/files/1b/ec/b0ca02bc4d6fba1d5f980afbec4c/d27c9cc3-4989-4a24-8a99-9c9edf60fa4d.pdf",
+        "sourceTitle": "Shanghai Conservatory of Music 2026 International Graduate Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 foreign-graduate brochure lists the three-year Music Therapy master's with CNY 40,000 annual tuition and a January 23 deadline; medium is not explicitly labelled.",
+          "zh": "2026外国研究生官方简章列出音乐治疗三年制硕士，学费每年40000元，1月23日截止；授课语言未明确标注。",
+          "ru": "Официальный справочник 2026 года указывает трёхлетнюю магистратуру по музыкальной терапии за 40 000 юаней в год и срок 23 января; язык прямо не указан."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed",
+        "brochure_requires_hsk_but_does_not_label_teaching_medium"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
       "candidateId": "shisu-2026-bachelor-tcsol",
       "candidateIds": [
         "shisu-2026-bachelor-tcsol"
@@ -32548,6 +35631,104 @@
       ]
     },
     {
+      "candidateId": "mve-ecma-shupl-iclte-bachelor",
+      "candidateIds": [
+        "mve-ecma-shupl-iclte-bachelor"
+      ],
+      "institutionSlug": "shanghai-university-of-political-science-and-law",
+      "name": {
+        "en": "International Chinese Language Education",
+        "zh": "国际中文教育",
+        "ru": "Международное преподавание китайского языка"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 21500,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iso.shupl.edu.cn/2025/1029/c3326a143594/page.htm",
+        "sourceTitle": "Shanghai University of Political Science and Law 2026 International Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 catalogue lists a four-year Chinese-taught International Chinese Language Education bachelor with CNY 21,500 annual tuition; the exact deadline is withheld.",
+          "zh": "2026官方目录列出中文授课国际中文教育四年制本科，学费每年21500元；未明确的截止日期不填。",
+          "ru": "Официальный каталог 2026 года указывает четырёхлетнее обучение международному преподаванию китайского языка на китайском за 21 500 юаней в год; срок не указан."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "current_exact_application_deadline_not_published"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-shupl-international-politics-bachelor",
+      "candidateIds": [
+        "mve-ecma-shupl-international-politics-bachelor"
+      ],
+      "institutionSlug": "shanghai-university-of-political-science-and-law",
+      "name": {
+        "en": "International Politics",
+        "zh": "国际政治",
+        "ru": "Международная политика"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": "English",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 32000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iso.shupl.edu.cn/2025/1029/c3326a143594/page.htm",
+        "sourceTitle": "Shanghai University of Political Science and Law 2026 International Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The current official international catalogue lists the four-year English-taught International Politics bachelor at CNY 32,000 per year; no exact current deadline is asserted.",
+          "zh": "当期国际学生官方目录列出英文授课国际政治四年制本科，学费每年32000元；不填未明确的当期截止日期。",
+          "ru": "Текущий официальный каталог указывает четырёхлетнюю англоязычную международную политику за 32 000 юаней в год; точный срок не заявляется."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "current_exact_application_deadline_not_published"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
       "candidateId": "wave8-2-shupl-international-law-bachelor",
       "candidateIds": [
         "wave8-2-shupl-international-law-bachelor"
@@ -32595,6 +35776,128 @@
       ],
       "sourceFiles": [
         "../official-gap-wave-2026-08-02/wave8-new-local-strong-2.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-sus-sport-rehabilitation-doctorate",
+      "candidateIds": [
+        "mve-ecma-sus-sport-rehabilitation-doctorate"
+      ],
+      "institutionSlug": "shanghai-university-of-sport",
+      "name": {
+        "en": "Sport Rehabilitation",
+        "zh": "运动康复学",
+        "ru": "Спортивная реабилитация"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": "2026-01-01",
+          "applicationDeadline": "2026-05-30",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://admission.sus.edu.cn/html/article_content/202602/AC4EED1ECB594C5C976B789349A48E31.shtml",
+        "sourceTitle": "Shanghai University of Sport 2026 International Graduate Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international doctorate table lists Sport Rehabilitation, confirms the four-year Chinese-language doctoral route and the closed May 30 deadline.",
+          "zh": "国际博士官方表列出运动康复学，确认中文授课四年制博士及已截止的5月30日申请日期。",
+          "ru": "Официальная международная таблица указывает четырёхлетнюю докторантуру по спортивной реабилитации на китайском и закрытый срок 30 мая."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed",
+        "program_level_tuition_not_published_in_source"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-sus-traditional-chinese-sports-master",
+      "candidateIds": [
+        "mve-ecma-sus-traditional-chinese-sports-master"
+      ],
+      "institutionSlug": "shanghai-university-of-sport",
+      "name": {
+        "en": "Traditional Chinese Sports",
+        "zh": "民族传统体育学",
+        "ru": "Традиционные китайские виды спорта"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": "Chinese",
+        "status": "known"
+      },
+      "duration": {
+        "value": "3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": null,
+        "currency": "CNY",
+        "period": null,
+        "status": "source_unavailable"
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": "2026-01-01",
+          "applicationDeadline": "2026-05-30",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://admission.sus.edu.cn/html/article_content/202602/AC4EED1ECB594C5C976B789349A48E31.shtml",
+        "sourceTitle": "Shanghai University of Sport 2026 International Graduate Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 international graduate catalogue lists a three-year Chinese-taught master's in Traditional Chinese Sports and the January 1–May 30 application window.",
+          "zh": "2026国际研究生官方目录列出中文授课民族传统体育学三年制硕士，申请期为1月1日至5月30日。",
+          "ru": "Официальный каталог 2026 года указывает трёхлетнюю магистратуру по традиционным китайским видам спорта на китайском и приём с 1 января по 30 мая."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed",
+        "program_level_tuition_not_published_in_source"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
       ]
     },
     {
@@ -34408,6 +37711,158 @@
       ],
       "sourceFiles": [
         "wave3-depth.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-scfai-art-studies-doctorate",
+      "candidateIds": [
+        "mew-0805-scw-scfai-art-studies-doctorate"
+      ],
+      "institutionSlug": "sichuan-fine-arts-institute",
+      "name": {
+        "en": "Art Studies (Academic Doctorate)",
+        "zh": "艺术学（学术博士）",
+        "ru": "Искусствоведение (академическая докторантура)"
+      },
+      "programType": "degree",
+      "level": "doctorate",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 35000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm",
+        "sourceTitle": "Sichuan Fine Arts Institute 2026 International Doctoral Admissions Guide",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The 2026 guide identifies Art Studies among its first-level doctoral disciplines, confirms four-year full-time international doctoral admission and tuition of CNY 35,000 per year.",
+          "zh": "2026简章列明艺术学博士学位授权一级学科，确认国际全日制博士学制四年、学费每年35000元。",
+          "ru": "Руководство 2026 указывает искусствоведение среди докторских дисциплин, срок четыре года и плату 35 000 юаней в год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "2026_application_cycle_closed",
+        "detailed_program_directory_captcha_protected",
+        "teaching_language_not_explicitly_stated"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-scfai-art-studies-master",
+      "candidateIds": [
+        "mew-0805-scw-scfai-art-studies-master"
+      ],
+      "institutionSlug": "sichuan-fine-arts-institute",
+      "name": {
+        "en": "Art Studies (Academic Master)",
+        "zh": "艺术学（学术硕士）",
+        "ru": "Искусствоведение (академическая магистратура)"
+      },
+      "programType": "degree",
+      "level": "master",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": "3 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 30000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+        "sourceTitle": "Sichuan Fine Arts Institute 2026 International Master's Admissions Guide",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The 2026 guide identifies Art Studies among the institute's academic master's disciplines, confirms three-year full-time international master's admission and tuition of CNY 30,000 per year.",
+          "zh": "2026简章列明艺术学硕士学位授权一级学科，确认国际全日制硕士学制三年、学费每年30000元。",
+          "ru": "Руководство 2026 указывает искусствоведение среди академических магистерских дисциплин, срок три года и плату 30 000 юаней в год."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "2026_application_cycle_closed",
+        "detailed_program_directory_captcha_protected",
+        "teaching_language_not_explicitly_stated"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-scfai-painting-bachelor",
+      "candidateIds": [
+        "mew-0805-scw-scfai-painting-bachelor"
+      ],
+      "institutionSlug": "sichuan-fine-arts-institute",
+      "name": {
+        "en": "Painting",
+        "zh": "绘画",
+        "ru": "Живопись"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": "4 years",
+        "status": "known"
+      },
+      "tuition": {
+        "amount": 25000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
+        "sourceTitle": "Sichuan Fine Arts Institute 2026 International Bachelor Admissions Guide",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 guide lists Painting as a four-year international bachelor program and sets bachelor tuition at CNY 25,000 per academic year; the May 31 deadline is closed.",
+          "zh": "官方2026国际本科简章列出四年制绘画专业，学费每学年25000元；5月31日截止期已结束。",
+          "ru": "Официальное руководство 2026 включает четырехлетний бакалавриат по живописи за 25 000 юаней в год; срок 31 мая закрыт."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed",
+        "teaching_language_not_explicitly_stated"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
       ]
     },
     {
@@ -44157,6 +47612,56 @@
       ]
     },
     {
+      "candidateId": "mve-ecma-zcmu-chinese-medicine-bachelor",
+      "candidateIds": [
+        "mve-ecma-zcmu-chinese-medicine-bachelor"
+      ],
+      "institutionSlug": "zhejiang-chinese-medical-university",
+      "name": {
+        "en": "Chinese Medicine",
+        "zh": "中医学",
+        "ru": "Китайская медицина"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": 25000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iec.zcmu.edu.cn/en/specialprogram/undergraduate2026spring",
+        "sourceTitle": "Zhejiang Chinese Medical University 2026 International Undergraduate Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 international undergraduate list includes Chinese Medicine at CNY 25,000 per year; the page states admission until seats are filled, so no synthetic deadline is created.",
+          "zh": "2026国际本科官方目录列出中医学，学费每年25000元；页面写明招满即止，因此不生成虚构截止日期。",
+          "ru": "Официальный список 2026 года включает китайскую медицину за 25 000 юаней в год; поскольку приём идёт до заполнения мест, искусственный срок не создаётся."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "rolling_until_seats_filled_without_exact_deadline",
+        "program_medium_and_duration_not_itemized"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ]
+    },
+    {
       "candidateId": "local-strong-zcmu-b-clinical-medicine",
       "candidateIds": [
         "local-strong-zcmu-b-clinical-medicine"
@@ -44212,6 +47717,56 @@
       "riskFlags": [],
       "sourceFiles": [
         "local-strong-expansion.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-zcmu-pharmacy-bachelor",
+      "candidateIds": [
+        "mve-ecma-zcmu-pharmacy-bachelor"
+      ],
+      "institutionSlug": "zhejiang-chinese-medical-university",
+      "name": {
+        "en": "Pharmacy",
+        "zh": "药学",
+        "ru": "Фармация"
+      },
+      "programType": "degree",
+      "level": "bachelor",
+      "teachingLanguage": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "duration": {
+        "value": null,
+        "status": "source_unavailable"
+      },
+      "tuition": {
+        "amount": 20000,
+        "currency": "CNY",
+        "period": "academic-year",
+        "status": "known"
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iec.zcmu.edu.cn/en/specialprogram/undergraduate2026spring",
+        "sourceTitle": "Zhejiang Chinese Medical University 2026 International Undergraduate Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official international list publishes Pharmacy at CNY 20,000 per academic year for 2026; exact duration, medium and deadline are not inferred.",
+          "zh": "国际学生官方目录发布2026年药学本科，学费每学年20000元；不推断未明确的学制、授课语言和截止日期。",
+          "ru": "Официальный международный список публикует фармацию за 20 000 юаней в год; длительность, язык и срок не выводятся."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "publish_program_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "rolling_until_seats_filled_without_exact_deadline",
+        "program_medium_and_duration_not_itemized"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
       ]
     },
     {
@@ -49372,6 +52927,156 @@
       ]
     },
     {
+      "candidateId": "mew-0805-scw-gdou-outstanding-new-students-scholarship",
+      "candidateIds": [
+        "mew-0805-scw-gdou-outstanding-new-students-scholarship"
+      ],
+      "institutionSlug": "guangdong-ocean-university",
+      "name": {
+        "en": "Guangdong Ocean University Outstanding New Students Scholarship",
+        "zh": "广东海洋大学优秀新生奖学金",
+        "ru": "Стипендия выдающимся новым студентам Гуандунского океанического университета"
+      },
+      "scholarshipType": null,
+      "scope": "Historically published for selected international bachelor, master's and doctoral entrants; current rules must be reconfirmed.",
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Full tuition within the prescribed study period",
+          "Accommodation support up to CNY 6,000/year",
+          "Master living allowance: CNY 1,000/month",
+          "Doctoral living allowance: CNY 2,000/month"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iod.gdou.edu.cn/info/1190/2273.htm",
+        "sourceTitle": "Guangdong Ocean University Official International Admission Handbook",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official handbook defines the university scholarship and its historical benefit structure; no current application window or unchanged funding is claimed.",
+          "zh": "官方手册定义该校奖学金及历史资助结构；本包不声称当前申请期或资助标准未变。",
+          "ru": "Официальный справочник описывает стипендию и прежнюю структуру льгот; текущие сроки и неизменность сумм не утверждаются."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "funding_details_from_2021_handbook",
+        "current_cycle_and_terms_not_reconfirmed"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ],
+      "programCandidateIds": [
+        "mew-0805-scw-gdou-aquaculture-bachelor",
+        "mew-0805-scw-gdou-marine-biology-master",
+        "mew-0805-scw-gdou-aquaculture-doctorate"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-gdou-provincial-new-students-scholarship",
+      "candidateIds": [
+        "mew-0805-scw-gdou-provincial-new-students-scholarship"
+      ],
+      "institutionSlug": "guangdong-ocean-university",
+      "name": {
+        "en": "Provincial-level New Students Scholarship at Guangdong Ocean University",
+        "zh": "广东海洋大学省级新生奖学金",
+        "ru": "Провинциальная стипендия новым студентам в Гуандунском океаническом университете"
+      },
+      "scholarshipType": null,
+      "scope": "Historically published for selected international bachelor, master's and doctoral entrants; current rules must be reconfirmed.",
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Bachelor award: CNY 10,000",
+          "Master award: CNY 20,000",
+          "Doctoral award: CNY 30,000"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iod.gdou.edu.cn/info/1190/2273.htm",
+        "sourceTitle": "Guangdong Ocean University Official International Admission Handbook",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official handbook identifies a provincial new-student award and its historical level-based amounts; no current application window is claimed.",
+          "zh": "官方手册列出省级新生奖学金及历史分层金额；本包不声称当前开放申请。",
+          "ru": "Официальный справочник называет провинциальную стипендию и прежние суммы по уровням; текущий прием не заявляется."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "funding_details_from_2021_handbook",
+        "current_cycle_and_terms_not_reconfirmed"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ],
+      "programCandidateIds": [
+        "mew-0805-scw-gdou-aquaculture-bachelor",
+        "mew-0805-scw-gdou-marine-biology-master",
+        "mew-0805-scw-gdou-aquaculture-doctorate"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-gdpu-guangdong-government-scholarship",
+      "candidateIds": [
+        "mew-0805-scw-gdpu-guangdong-government-scholarship"
+      ],
+      "institutionSlug": "guangdong-pharmaceutical-university",
+      "name": {
+        "en": "Guangdong Government Outstanding International Student Scholarship",
+        "zh": "广东省政府来粤留学生奖学金",
+        "ru": "Стипендия правительства Гуандуна для иностранных студентов"
+      },
+      "scholarshipType": null,
+      "scope": "International applicants and students subject to the university's published provincial-scholarship rules.",
+      "applicableLevels": [],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.gdpu.edu.cn/zsyjy/gjxszs.htm",
+        "sourceTitle": "Guangdong Pharmaceutical University International Student Admissions — Scholarship",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The university's official international-admissions page confirms the Guangdong Government scholarship route; current funding and exact cycle are not exposed in accessible text.",
+          "zh": "学校国际招生官网确认广东省政府来粤留学生奖学金渠道；可访问正文未给出当前资助和精确周期。",
+          "ru": "Официальная страница подтверждает провинциальную стипендию; текущие суммы и точные сроки в доступном тексте отсутствуют."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_funding_eligibility_and_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ],
+      "programCandidateIds": [
+        "mew-0805-scw-gdpu-pharmacy-academic-master",
+        "mew-0805-scw-gdpu-public-health-preventive-master"
+      ]
+    },
+    {
       "candidateId": "mew-csw-gdufe-doctoral-academic-scholarship-2026",
       "candidateIds": [
         "mew-csw-gdufe-doctoral-academic-scholarship-2026"
@@ -50295,6 +54000,51 @@
       ]
     },
     {
+      "candidateId": "mve-ecma-gafa-guangdong-government-scholarship",
+      "candidateIds": [
+        "mve-ecma-gafa-guangdong-government-scholarship"
+      ],
+      "institutionSlug": "guangzhou-academy-of-fine-arts",
+      "name": {
+        "en": "Guangdong Government Outstanding International Student Scholarship at GAFA",
+        "zh": "广州美术学院广东省政府来粤留学生奖学金",
+        "ru": "Стипендия правительства Гуандуна для выдающихся иностранных студентов в GAFA"
+      },
+      "scholarshipType": null,
+      "scope": "Eligible newly admitted international bachelor students nominated by GAFA.",
+      "applicableLevels": [
+        "bachelor"
+      ],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://wsc.gzarts.edu.cn/info/1497/3952.htm",
+        "sourceTitle": "GAFA 2026 International Undergraduate Admissions",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "GAFA's official 2026 guide confirms that newly admitted international undergraduates may be nominated for the Guangdong Government award; unlisted funding and dates are withheld.",
+          "zh": "广美2026官方简章确认新录取国际本科生可获学校推荐参评广东省政府奖学金；未列明的金额和日期不填。",
+          "ru": "Официальный справочник GAFA 2026 года подтверждает возможность номинации новых иностранных бакалавров на стипендию Гуандуна; суммы и даты не указаны."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "funding_and_exact_cycle_not_published_on_current_guide"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ],
+      "programCandidateIds": [
+        "mve-ecma-gafa-chinese-painting-bachelor",
+        "mve-ecma-gafa-visual-communication-bachelor"
+      ]
+    },
+    {
       "candidateId": "clw-sw-gzhu-belt-road-scholarship",
       "candidateIds": [
         "clw-sw-gzhu-belt-road-scholarship"
@@ -50641,6 +54391,97 @@
       ],
       "sourceFiles": [
         "wave3-east-south.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-glut-guangxi-asean-scholarship",
+      "candidateIds": [
+        "mew-0805-scw-glut-guangxi-asean-scholarship"
+      ],
+      "institutionSlug": "guilin-university-of-technology",
+      "name": {
+        "en": "Guangxi Government Scholarship for ASEAN Students",
+        "zh": "广西政府东盟国家留学生奖学金",
+        "ru": "Стипендия правительства Гуанси для студентов стран АСЕАН"
+      },
+      "scholarshipType": null,
+      "scope": "Eligible citizens of ASEAN member states applying through Guilin University of Technology.",
+      "applicableLevels": [],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+        "sourceTitle": "Guilin University of Technology 2026 International Students Admissions Guide",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The current 2026 guide lists the Guangxi Government ASEAN scholarship as an international-student route; funding and exact dates are not stated in accessible text.",
+          "zh": "当前2026指南列出广西政府东盟国家留学生奖学金；可访问正文未给出资助和精确日期。",
+          "ru": "Руководство 2026 перечисляет стипендию правительства Гуанси для АСЕАН; суммы и точные даты не указаны."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "asean_nationality_restriction",
+        "funding_and_exact_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ],
+      "programCandidateIds": [
+        "mew-0805-scw-glut-tcsol-bachelor",
+        "mew-0805-scw-glut-cs-bachelor-english",
+        "mew-0805-scw-glut-civil-engineering-master-chinese",
+        "mew-0805-scw-glut-environmental-doctorate"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-glut-belt-road-president-scholarship",
+      "candidateIds": [
+        "mew-0805-scw-glut-belt-road-president-scholarship"
+      ],
+      "institutionSlug": "guilin-university-of-technology",
+      "name": {
+        "en": "GUT Belt and Road President Scholarship",
+        "zh": "桂林理工大学“一带一路”校长奖学金",
+        "ru": "Президентская стипендия GUT «Пояс и путь»"
+      },
+      "scholarshipType": null,
+      "scope": "Eligible international applicants subject to the university's scholarship rules.",
+      "applicableLevels": [],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+        "sourceTitle": "Guilin University of Technology 2026 International Students Admissions Guide",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The current 2026 official guide lists the Belt and Road President Scholarship as a distinct international-student route; benefit and cycle details are not inferred.",
+          "zh": "当前2026官方指南明确列出“一带一路”校长奖学金；未推断资助和周期细节。",
+          "ru": "Текущее руководство 2026 отдельно называет Президентскую стипендию «Пояс и путь»; суммы и сроки не выводятся."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "funding_eligibility_and_exact_cycle_unavailable"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ],
+      "programCandidateIds": [
+        "mew-0805-scw-glut-tcsol-bachelor",
+        "mew-0805-scw-glut-cs-bachelor-english",
+        "mew-0805-scw-glut-civil-engineering-master-chinese",
+        "mew-0805-scw-glut-environmental-doctorate"
       ]
     },
     {
@@ -51420,6 +55261,139 @@
       ],
       "sourceFiles": [
         "wave3-north-west.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nnw-hebtu-csc-high-level-postgraduate",
+      "candidateIds": [
+        "sch-mew-nnw-hebtu-csc-high-level-postgraduate"
+      ],
+      "institutionSlug": "hebei-normal-university",
+      "name": {
+        "en": "Chinese Government Scholarship – High-Level Postgraduate Program at Hebei Normal University",
+        "zh": "河北师范大学中国政府奖学金高水平研究生项目",
+        "ru": "Стипендия правительства КНР — программа подготовки магистров и докторов высокого уровня в Хэбэйском педагогическом университете"
+      },
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nnw-hebtu-international-chinese-education-doctorate",
+        "prog-mew-nnw-hebtu-international-chinese-education-master"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "University accommodation",
+          "Comprehensive medical insurance",
+          "Monthly allowance: CNY 3,000 for master's students",
+          "Monthly allowance: CNY 3,500 for doctoral students"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-02-28",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cice.hebtu.edu.cn/a/2025/11/27/6EFE88E38B8F41739568513CC10C148A.html",
+        "sourceTitle": "河北师范大学2026/2027学年中国政府奖学金“高水平研究生”项目申请指引",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026/27 guide confirms full funding for international master's and doctoral applicants, including tuition, accommodation, insurance and monthly allowances; applications closed February 28, 2026.",
+          "zh": "2026/27学年官方指引确认面向国际硕士、博士申请人的全额资助，包括学费、住宿、保险及月生活费，申请于2026年2月28日截止。",
+          "ru": "Официальный справочник 2026/27 подтверждает полное финансирование для иностранных магистрантов и докторантов, включая обучение, проживание, страховку и ежемесячное пособие; прием завершился 28 февраля 2026 года."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge verified funding and retain the 2026/27 cycle only as closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nnw-hebtu-international-chinese-language-teachers",
+      "candidateIds": [
+        "sch-mew-nnw-hebtu-international-chinese-language-teachers"
+      ],
+      "institutionSlug": "hebei-normal-university",
+      "name": {
+        "en": "International Chinese Language Teachers Scholarship at Hebei Normal University",
+        "zh": "河北师范大学国际中文教师奖学金",
+        "ru": "Стипендия преподавателей китайского языка в Хэбэйском педагогическом университете"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate",
+        "language"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nnw-hebtu-international-chinese-education-doctorate",
+        "prog-mew-nnw-hebtu-international-chinese-education-master",
+        "prog-mew-nnw-hebtu-chinese-language-literature-bachelor"
+      ],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": "September 2026 degree routes",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-05-15",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        },
+        {
+          "academicYear": "2026-2027",
+          "intake": "winter",
+          "intakeLabel": "December 2026 four-week route",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-09-15",
+          "statusAsOfCheckedAt": "open",
+          "displayAsOpen": true,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cice.hebtu.edu.cn/a/2026/03/16/79B9583412714650B3F324591E32603F.html",
+        "sourceTitle": "河北师范大学2026年国际中文教师奖学金申请指引",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 guide confirms doctoral, master's, bachelor's, one-year, semester and four-week scholarship routes. Degree applications closed May 15; the December four-week route remains open through September 15, subject to group recommendation.",
+          "zh": "2026年官方指引确认博士、硕士、本科、一学年、一学期和四周奖学金渠道。学历项目已于5月15日截止；12月四周团组项目开放至9月15日。",
+          "ru": "Официальный справочник 2026 года подтверждает докторские, магистерские, бакалаврские, годовые, семестровые и четырехнедельные направления. Прием на степени завершился 15 мая; четырехнедельный декабрьский маршрут открыт до 15 сентября при групповой рекомендации."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Publish only the December four-week scholarship cycle as open; leave funding values empty until the official page states them.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_open",
+        "funding_terms_not_published",
+        "group_application_only_for_open_route"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
       ]
     },
     {
@@ -53082,6 +57056,61 @@
       ]
     },
     {
+      "candidateId": "sch-mew-nnw-lnnu-international-chinese-language-teachers",
+      "candidateIds": [
+        "sch-mew-nnw-lnnu-international-chinese-language-teachers"
+      ],
+      "institutionSlug": "liaoning-normal-university",
+      "name": {
+        "en": "International Chinese Language Teachers Scholarship at LNNU",
+        "zh": "辽宁师范大学国际中文教师奖学金",
+        "ru": "Стипендия преподавателей китайского языка в Ляонинском педагогическом университете"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate",
+        "language"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nnw-lnnu-chinese-language-study",
+        "prog-mew-nnw-lnnu-chinese-language-bachelor",
+        "prog-mew-nnw-lnnu-international-chinese-education-master"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "University accommodation",
+          "Comprehensive medical insurance",
+          "Monthly allowance: CNY 2,500 for bachelor, one-year and semester students",
+          "Monthly allowance: CNY 3,000 for master's students",
+          "Monthly allowance: CNY 3,500 for doctoral students"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://gjy.lnnu.edu.cn/jxj/gjzwjsjxj.htm",
+        "sourceTitle": "辽宁师范大学国际中文教师奖学金",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official university page confirms the scholarship for international bachelor, master, doctoral and Chinese-language routes and states tuition, accommodation, insurance and monthly allowances; its published intake dates are historical, so no current cycle is opened.",
+          "zh": "学校官网确认该奖学金适用于国际本科、硕士、博士及汉语研修渠道，并列明学费、住宿、保险和月生活费资助；已公布日期均为历史周期，因此不开放当前申请。",
+          "ru": "Официальная страница подтверждает стипендию для бакалавриата, магистратуры, докторантуры и языковых программ с оплатой обучения, проживания, страховки и ежемесячным пособием; опубликованные даты относятся к прошлым наборам."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and funding; wait for a year-specific current guide before publishing an open cycle.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_cycle_not_announced"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
       "candidateId": "wave8-mnnu-fujian-government-scholarship-2026",
       "candidateIds": [
         "wave8-mnnu-fujian-government-scholarship-2026"
@@ -53251,6 +57280,52 @@
       ]
     },
     {
+      "candidateId": "mve-ecma-njau-international-student-scholarship",
+      "candidateIds": [
+        "mve-ecma-njau-international-student-scholarship"
+      ],
+      "institutionSlug": "nanjing-agricultural-university",
+      "name": {
+        "en": "Nanjing Agricultural University Scholarship for International Graduate Students",
+        "zh": "南京农业大学国际研究生奖学金",
+        "ru": "Стипендия Нанкинского сельскохозяйственного университета для иностранных магистрантов и докторантов"
+      },
+      "scholarshipType": null,
+      "scope": "International master's and doctoral applicants to Nanjing Agricultural University.",
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Full: tuition waiver, CNY 10,000/year accommodation subsidy, CNY 1,500/month stipend and comprehensive insurance",
+          "Partial: tuition waiver"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://coieen.njau.edu.cn/__local/C/3E/FD/BED3BCA3D7C1EDEEAACA6D7AD91_553F91D1_24055.pdf",
+        "sourceTitle": "NAU Scholarship for International Graduate Students",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official scholarship PDF defines full and partial awards for international master's and doctoral students, including the published subsidy and stipend values.",
+          "zh": "官方奖学金PDF明确适用于国际硕士和博士生的全额与部分资助，并公布住宿补助和生活费标准。",
+          "ru": "Официальный PDF определяет полную и частичную поддержку иностранных магистрантов и докторантов с указанными субсидиями и стипендией."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "current_exact_application_cycle_not_published"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ],
+      "programCandidateIds": []
+    },
+    {
       "candidateId": "wave7-nau-international-student-scholarship",
       "candidateIds": [
         "wave7-nau-international-student-scholarship"
@@ -53359,6 +57434,66 @@
       ],
       "sourceFiles": [
         "../official-gap-wave-2026-08-02/wave8-final-singletons.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-njmu-tuition-scholarships-2026",
+      "candidateIds": [
+        "mve-ecma-njmu-tuition-scholarships-2026"
+      ],
+      "institutionSlug": "nanjing-medical-university",
+      "name": {
+        "en": "Nanjing Medical University Tuition Scholarships",
+        "zh": "南京医科大学学费奖学金",
+        "ru": "Стипендии Нанкинского медицинского университета на оплату обучения"
+      },
+      "scholarshipType": null,
+      "scope": "New 2026 international bachelor applicants to the Chinese-taught Clinical Medicine program.",
+      "applicableLevels": [
+        "bachelor"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Full tuition: CNY 30,000",
+          "Half tuition: CNY 15,000",
+          "Quarter tuition: CNY 7,500"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "intakeLabel": "Autumn 2026",
+          "applicationOpen": "2026-01-01",
+          "applicationDeadline": "2026-06-30",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm",
+        "sourceTitle": "Nanjing Medical University 2026 Chinese-taught Clinical Medicine Admission Guide",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official guide publishes full, half and quarter tuition awards of CNY 30,000, 15,000 and 7,500 for the 2026 international Clinical Medicine intake.",
+          "zh": "官方简章公布2026国际临床医学新生全额、半额及四分之一学费奖学金，金额分别为30000、15000和7500元。",
+          "ru": "Официальный справочник публикует полную, половинную и четвертную оплату обучения: 30 000, 15 000 и 7 500 юаней для набора 2026 года."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_with_closed_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed",
+        "competitive_award"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ],
+      "programCandidateIds": [
+        "mve-ecma-njmu-clinical-medicine-chinese-bachelor"
       ]
     },
     {
@@ -53541,6 +57676,53 @@
         "mve-ecs-nuaa-mechanical-engineering-master",
         "mve-ecs-nuaa-software-engineering-master",
         "mve-ecs-nuaa-transportation-engineering-master"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-njucm-study-in-jiangsu-2026",
+      "candidateIds": [
+        "mve-ecma-njucm-study-in-jiangsu-2026"
+      ],
+      "institutionSlug": "nanjing-university-of-chinese-medicine",
+      "name": {
+        "en": "Study in Jiangsu Provincial Government Scholarship at NJUCM",
+        "zh": "南京中医药大学留学江苏政府奖学金",
+        "ru": "Стипендия правительства Цзянсу в NJUCM"
+      },
+      "scholarshipType": null,
+      "scope": "New international undergraduate applicants admitted by Nanjing University of Chinese Medicine.",
+      "applicableLevels": [
+        "bachelor"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "CNY 18,000 per recipient"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iec.njucm.edu.cn/en/detail/1375.html",
+        "sourceTitle": "NJUCM 2026 International Undergraduate Admissions and Scholarships",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official current undergraduate guide lists the Study in Jiangsu award and states CNY 18,000 per recipient.",
+          "zh": "当期国际本科官方简章列出留学江苏政府奖学金，并明确每人18000元。",
+          "ru": "Текущий официальный справочник указывает стипендию Study in Jiangsu в размере 18 000 юаней на получателя."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "separate_exact_scholarship_deadline_not_published"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ],
+      "programCandidateIds": [
+        "mve-ecma-njucm-health-preservation-bachelor",
+        "mve-ecma-njucm-materia-medica-pharmacy-bachelor"
       ]
     },
     {
@@ -53898,6 +58080,113 @@
         "mve-ecs-ntu-iclt-bachelor",
         "mve-ecs-ntu-stomatology-bachelor",
         "mve-ecs-ntu-pharmacy-bachelor"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nnw-nxmu-ningxia-government",
+      "candidateIds": [
+        "sch-mew-nnw-nxmu-ningxia-government"
+      ],
+      "institutionSlug": "ningxia-medical-university",
+      "name": {
+        "en": "Ningxia Government Scholarship",
+        "zh": "宁夏回族自治区政府奖学金",
+        "ru": "Стипендия правительства Нинся-Хуэйского автономного района"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nnw-nxmu-mbbs-english-bachelor",
+        "prog-mew-nnw-nxmu-clinical-medicine-master"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver for funded postgraduate students",
+          "University accommodation",
+          "Comprehensive medical insurance",
+          "Monthly allowance: CNY 2,500 for master's students",
+          "Monthly allowance: CNY 3,000 for doctoral students",
+          "CNY 20,000 award for outstanding self-funded undergraduate entrants"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+        "sourceTitle": "宁夏医科大学来华留学生招生简章",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official university guide confirms full regional-government funding for international postgraduate students and a CNY 20,000 award for outstanding self-funded undergraduate entrants; no current application dates are stated.",
+          "zh": "学校官方简章确认自治区政府为国际研究生提供全额资助，并为优秀自费本科新生提供20,000元奖学金；未公布当前申请日期。",
+          "ru": "Официальный справочник подтверждает полное региональное финансирование иностранных аспирантов и выплату 20 000 CNY лучшим новым студентам бакалавриата на самофинансировании; актуальные даты не указаны."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and funding; wait for a current official cycle before opening applications.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_cycle_not_announced"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nnw-nxmu-silk-road-csc",
+      "candidateIds": [
+        "sch-mew-nnw-nxmu-silk-road-csc"
+      ],
+      "institutionSlug": "ningxia-medical-university",
+      "name": {
+        "en": "Silk Road Chinese Government Scholarship at NXMU",
+        "zh": "宁夏医科大学“丝绸之路”中国政府奖学金",
+        "ru": "Стипендия правительства КНР «Шелковый путь» в Нинсяском медицинском университете"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nnw-nxmu-mbbs-english-bachelor",
+        "prog-mew-nnw-nxmu-clinical-medicine-master"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "University accommodation",
+          "Comprehensive medical insurance",
+          "Monthly allowance: CNY 2,500 for bachelor's students",
+          "Monthly allowance: CNY 3,000 for master's students",
+          "Monthly allowance: CNY 3,500 for doctoral students"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+        "sourceTitle": "宁夏医科大学来华留学生招生简章",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official guide confirms the full Silk Road Chinese Government Scholarship for international students from Belt and Road countries, covering tuition, accommodation, insurance and level-based monthly allowances; no current dates are stated.",
+          "zh": "官方简章确认“丝绸之路”中国政府奖学金面向“一带一路”沿线国家国际学生，覆盖学费、住宿、保险和按学历层次发放的月生活费；未公布当前日期。",
+          "ru": "Официальный справочник подтверждает полную стипендию правительства КНР «Шелковый путь» для студентов из стран инициативы «Пояс и путь», включая обучение, проживание, страховку и ежемесячное пособие; актуальные даты не указаны."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and funding; wait for a current official cycle before opening applications.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "current_cycle_not_announced",
+        "nationality_scope_restricted"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
       ]
     },
     {
@@ -54332,6 +58621,111 @@
       ]
     },
     {
+      "candidateId": "sch-mew-nnw-neepu-csc-high-level-postgraduate",
+      "candidateIds": [
+        "sch-mew-nnw-neepu-csc-high-level-postgraduate"
+      ],
+      "institutionSlug": "northeast-electric-power-university",
+      "name": {
+        "en": "Chinese Government Scholarship – High-Level Postgraduate Program at NEEPU",
+        "zh": "东北电力大学中国政府奖学金高水平研究生项目",
+        "ru": "Стипендия правительства КНР — программа подготовки магистров и докторов высокого уровня в Северо-Восточном электроэнергетическом университете"
+      },
+      "applicableLevels": [
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "University accommodation",
+          "Monthly living allowance",
+          "Comprehensive medical insurance"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": "August-September 2026",
+          "applicationOpen": null,
+          "applicationDeadline": "2026-03-01",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://cie.neepu.edu.cn/info/1159/2942.htm",
+        "sourceTitle": "2026年东北电力大学中国政府奖学金“高水平研究生”项目招生简章（Type B）",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 guide confirms a full Chinese Government Scholarship for international master's and doctoral applicants, covering tuition, campus accommodation, living allowance and medical insurance; applications closed March 1.",
+          "zh": "2026年官方简章确认面向国际硕士、博士申请人的全额中国政府奖学金，覆盖学费、校内住宿、生活费和医疗保险，申请于3月1日截止。",
+          "ru": "Официальный справочник 2026 года подтверждает полную государственную стипендию КНР для иностранных магистрантов и докторантов с оплатой обучения, проживания, пособия и страховки; прием завершился 1 марта."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge verified funding and retain the 2026 cycle only as closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "monthly_allowance_amount_not_published"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nnw-neepu-changbaishan",
+      "candidateIds": [
+        "sch-mew-nnw-neepu-changbaishan"
+      ],
+      "institutionSlug": "northeast-electric-power-university",
+      "name": {
+        "en": "Jilin Provincial Government Changbaishan Scholarship",
+        "zh": "吉林省政府来华留学生“长白山奖学金”",
+        "ru": "Стипендия правительства провинции Цзилинь «Чанбайшань»"
+      },
+      "applicableLevels": [
+        "master"
+      ],
+      "programCandidateIds": [],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "University accommodation",
+          "Comprehensive medical insurance",
+          "Monthly living allowance of CNY 1,700"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://cie.neepu.edu.cn/info/1159/1079.htm",
+        "sourceTitle": "东北电力大学吉林省政府来华留学生“长白山奖学金”招生简章",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official university page confirms a full two-year master's scholarship covering tuition, accommodation, insurance and a CNY 1,700 monthly allowance; its June 15 deadline is not tied to a stated intake year, so no cycle is opened.",
+          "zh": "学校官网确认该两年制硕士全额奖学金覆盖学费、住宿、保险和每月1,700元生活费；6月15日截止日期未绑定明确招生年度，因此不开放周期。",
+          "ru": "Официальная страница подтверждает полную двухлетнюю магистерскую стипендию с оплатой обучения, проживания, страховки и пособием 1 700 CNY в месяц; срок 15 июня не привязан к году набора, поэтому цикл не открыт."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge scholarship identity and funding; wait for a year-specific notice before publishing an open cycle.",
+      "qualityTier": "B",
+      "riskFlags": [
+        "cycle_year_not_announced"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
       "candidateId": "sch-mew-ne-nefu-president",
       "candidateIds": [
         "sch-mew-ne-nefu-president"
@@ -54632,6 +59026,132 @@
       ],
       "sourceFiles": [
         "../official-gap-wave-2026-08-02/wave8-new-local-strong-2.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nnw-nwupl-xian-belt-road",
+      "candidateIds": [
+        "sch-mew-nnw-nwupl-xian-belt-road"
+      ],
+      "institutionSlug": "northwest-university-of-political-science-and-law",
+      "name": {
+        "en": "Xi'an Belt and Road International Student Scholarship",
+        "zh": "西安市“一带一路”外国留学生奖学金",
+        "ru": "Сианьская стипендия «Пояс и путь» для иностранных студентов"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate",
+        "language"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nnw-nwupl-chinese-language",
+        "prog-mew-nnw-nwupl-law-master",
+        "prog-mew-nnw-nwupl-law-doctorate"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Monthly living allowance for 10 months"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-06-20",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+        "sourceTitle": "西北政法大学2026年秋季学期来华留学生招生简章",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 guide confirms this scholarship for new international students at all levels, providing a monthly allowance for ten months and requiring submission with the admission application by June 20.",
+          "zh": "2026年官方简章确认该奖学金面向所有层次国际新生，连续10个月发放月生活补贴，并须随入学申请于6月20日前提交。",
+          "ru": "Официальный справочник 2026 года подтверждает стипендию для новых иностранных студентов всех уровней с ежемесячным пособием в течение 10 месяцев; заявление подавалось до 20 июня вместе с поступлением."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge verified funding and retain the 2026 cycle only as closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "allowance_amount_not_published"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
+      ]
+    },
+    {
+      "candidateId": "sch-mew-nnw-nwupl-central-asian-five-countries",
+      "candidateIds": [
+        "sch-mew-nnw-nwupl-central-asian-five-countries"
+      ],
+      "institutionSlug": "northwest-university-of-political-science-and-law",
+      "name": {
+        "en": "Xi'an Central Asian Five Countries Education and Training Plan Scholarship",
+        "zh": "西安市“中亚五国”留学生教育培训计划项目专项奖学金",
+        "ru": "Стипендия Сианя по программе обучения студентов из пяти стран Центральной Азии"
+      },
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "programCandidateIds": [
+        "prog-mew-nnw-nwupl-law-master",
+        "prog-mew-nnw-nwupl-law-doctorate"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Tuition waiver",
+          "Accommodation waiver",
+          "Residence permit and physical-examination reimbursement",
+          "International travel reimbursement",
+          "Annual living allowance"
+        ]
+      },
+      "cycles": [
+        {
+          "academicYear": "2026-2027",
+          "intake": "fall",
+          "intakeLabel": null,
+          "applicationOpen": null,
+          "applicationDeadline": "2026-06-20",
+          "statusAsOfCheckedAt": "closed",
+          "displayAsOpen": false,
+          "sourceFormat": "canonical"
+        }
+      ],
+      "evidence": {
+        "officialUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+        "sourceTitle": "西北政法大学2026年秋季学期来华留学生招生简章",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 guide confirms this scholarship for international bachelor, master and doctoral students, covering tuition, accommodation and listed study-related costs; it is submitted with admission by June 20.",
+          "zh": "2026年官方简章确认该专项奖学金面向国际本硕博学生，覆盖学费、住宿及列明的学习相关费用，须随入学申请于6月20日前提交。",
+          "ru": "Официальный справочник 2026 года подтверждает стипендию для иностранных бакалавров, магистрантов и докторантов с оплатой обучения, проживания и указанных расходов; заявление подавалось вместе с поступлением до 20 июня."
+        }
+      },
+      "additionalEvidence": [],
+      "applicationUrl": null,
+      "recommendedAction": "Merge verified funding and retain the 2026 cycle only as closed.",
+      "qualityTier": "A",
+      "riskFlags": [
+        "verified_cycle_closed",
+        "nationality_scope_restricted"
+      ],
+      "sourceFiles": [
+        "north-northeast-west.json"
       ]
     },
     {
@@ -55724,6 +60244,55 @@
       ]
     },
     {
+      "candidateId": "mve-ecma-sdutcm-president-scholarship-2026",
+      "candidateIds": [
+        "mve-ecma-sdutcm-president-scholarship-2026"
+      ],
+      "institutionSlug": "shandong-university-of-traditional-chinese-medicine",
+      "name": {
+        "en": "SDUTCM International Student President Scholarship",
+        "zh": "山东中医药大学国际学生校长奖学金",
+        "ru": "Президентская стипендия SDUTCM для иностранных студентов"
+      },
+      "scholarshipType": null,
+      "scope": "International students admitted to eligible SDUTCM programs.",
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate",
+        "foundation"
+      ],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm",
+        "sourceTitle": "SDUTCM 2026 International Admissions and Scholarships",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official 2026 international guide names the university President Scholarship and states that scholarship applications follow registration; amounts and exact dates are not supplied.",
+          "zh": "2026国际招生官方简章列出国际学生校长奖学金，并说明入学注册后申请；未公布的金额和具体日期不填。",
+          "ru": "Официальный справочник 2026 года называет президентскую стипендию и указывает подачу после регистрации; суммы и точные даты не опубликованы."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "B",
+      "riskFlags": [
+        "funding_and_exact_post_registration_cycle_not_published"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ],
+      "programCandidateIds": [
+        "mve-ecma-sdutcm-tcm-bachelor",
+        "mve-ecma-sdutcm-acupuncture-master",
+        "mve-ecma-sdutcm-materia-medica-doctorate"
+      ]
+    },
+    {
       "candidateId": "wave8-lixin-shanghai-government-scholarship",
       "candidateIds": [
         "wave8-lixin-shanghai-government-scholarship"
@@ -56294,6 +60863,55 @@
       ],
       "sourceFiles": [
         "../official-gap-wave-2026-08-02/wave8-scholarship-gaps.json"
+      ]
+    },
+    {
+      "candidateId": "mve-ecma-shupl-shanghai-government-scholarship-2026",
+      "candidateIds": [
+        "mve-ecma-shupl-shanghai-government-scholarship-2026"
+      ],
+      "institutionSlug": "shanghai-university-of-political-science-and-law",
+      "name": {
+        "en": "Shanghai Government Scholarship at SHUPL",
+        "zh": "上海政法学院上海市政府奖学金",
+        "ru": "Стипендия правительства Шанхая в SHUPL"
+      },
+      "scholarshipType": null,
+      "scope": "Eligible international degree applicants to SHUPL.",
+      "applicableLevels": [
+        "bachelor",
+        "master"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Class A: tuition, accommodation, comprehensive insurance and living allowance",
+          "Class B: tuition and comprehensive insurance"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iso.shupl.edu.cn/2025/1029/c3326a143594/page.htm",
+        "sourceTitle": "SHUPL 2026 International Admissions and Scholarships",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official current admissions page confirms Shanghai Government Scholarship Class A and B coverage for eligible international applicants; no exact deadline is invented.",
+          "zh": "当期国际招生官网确认上海市政府奖学金A类和B类的资助范围；不虚构未明确的截止日期。",
+          "ru": "Текущая официальная страница подтверждает покрытие классов A и B для иностранных абитуриентов; точный срок не выдумывается."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "current_exact_scholarship_deadline_not_published"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ],
+      "programCandidateIds": [
+        "mve-ecma-shupl-international-politics-bachelor",
+        "mve-ecma-shupl-iclte-bachelor"
       ]
     },
     {
@@ -57313,6 +61931,124 @@
       "riskFlags": [],
       "sourceFiles": [
         "wave3-depth.json"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-scfai-chongqing-mayor-scholarship",
+      "candidateIds": [
+        "mew-0805-scw-scfai-chongqing-mayor-scholarship"
+      ],
+      "institutionSlug": "sichuan-fine-arts-institute",
+      "name": {
+        "en": "Chongqing Municipal Government Mayor's Scholarship for International Students",
+        "zh": "重庆市人民政府外国留学生市长奖学金",
+        "ru": "Стипендия мэра муниципалитета Чунцин для иностранных студентов"
+      },
+      "scholarshipType": null,
+      "scope": "International bachelor, master's and doctoral applicants to Sichuan Fine Arts Institute; it cannot be held together with the institute President's Scholarship.",
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+        "sourceTitle": "Sichuan Fine Arts Institute 2026 International Master's Admissions Guide",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The 2026 bachelor, master's and doctoral guides confirm the Mayor's Scholarship route and prohibit stacking with the President's Scholarship; the linked application cycle closed May 31.",
+          "zh": "2026本硕博简章确认市长奖学金渠道且不可与校长奖学金重复获得；关联申请期已于5月31日结束。",
+          "ru": "Руководства 2026 подтверждают стипендию мэра и запрет совмещения с Президентской стипендией; прием завершен 31 мая."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
+          "sourceTitle": "SCFAI 2026 International Bachelor Admissions Guide"
+        },
+        {
+          "officialUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm",
+          "sourceTitle": "SCFAI 2026 International Doctoral Admissions Guide"
+        }
+      ],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed",
+        "funding_details_unavailable",
+        "cannot_stack_with_president_scholarship"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ],
+      "programCandidateIds": [
+        "mew-0805-scw-scfai-painting-bachelor",
+        "mew-0805-scw-scfai-art-studies-master",
+        "mew-0805-scw-scfai-art-studies-doctorate"
+      ]
+    },
+    {
+      "candidateId": "mew-0805-scw-scfai-president-scholarship",
+      "candidateIds": [
+        "mew-0805-scw-scfai-president-scholarship"
+      ],
+      "institutionSlug": "sichuan-fine-arts-institute",
+      "name": {
+        "en": "Sichuan Fine Arts Institute President's Scholarship for International Students",
+        "zh": "四川美术学院国际学生校长奖学金",
+        "ru": "Президентская стипендия Сычуаньского института изящных искусств для иностранных студентов"
+      },
+      "scholarshipType": null,
+      "scope": "International bachelor, master's and doctoral applicants to Sichuan Fine Arts Institute; it cannot be held together with the Chongqing Mayor's Scholarship.",
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate"
+      ],
+      "funding": {
+        "status": "source_unavailable",
+        "tiers": []
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm",
+        "sourceTitle": "Sichuan Fine Arts Institute 2026 International Doctoral Admissions Guide",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The 2026 guides confirm the institute President's Scholarship and prohibit stacking with the Mayor's Scholarship; funding is in a captcha-protected appendix and the linked cycle is closed.",
+          "zh": "2026简章确认国际学生校长奖学金且不可与市长奖学金重复获得；资助细则附件受验证码保护，关联申请期已关闭。",
+          "ru": "Руководства 2026 подтверждают Президентскую стипендию и запрет совмещения; детали в защищенном приложении, прием закрыт."
+        }
+      },
+      "additionalEvidence": [
+        {
+          "officialUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
+          "sourceTitle": "SCFAI 2026 International Bachelor Admissions Guide"
+        },
+        {
+          "officialUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+          "sourceTitle": "SCFAI 2026 International Master's Admissions Guide"
+        }
+      ],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "2026_application_cycle_closed",
+        "funding_appendix_captcha_protected",
+        "cannot_stack_with_mayor_scholarship"
+      ],
+      "sourceFiles": [
+        "south-central-west.json"
+      ],
+      "programCandidateIds": [
+        "mew-0805-scw-scfai-painting-bachelor",
+        "mew-0805-scw-scfai-art-studies-master",
+        "mew-0805-scw-scfai-art-studies-doctorate"
       ]
     },
     {
@@ -60552,6 +65288,58 @@
       ]
     },
     {
+      "candidateId": "mve-ecma-zcmu-zhejiang-government-scholarship",
+      "candidateIds": [
+        "mve-ecma-zcmu-zhejiang-government-scholarship"
+      ],
+      "institutionSlug": "zhejiang-chinese-medical-university",
+      "name": {
+        "en": "Zhejiang Provincial Government Scholarship at ZCMU",
+        "zh": "浙江中医药大学浙江省政府来华留学生奖学金",
+        "ru": "Стипендия правительства провинции Чжэцзян в ZCMU"
+      },
+      "scholarshipType": null,
+      "scope": "Eligible international degree and long-term non-degree students at ZCMU.",
+      "applicableLevels": [
+        "bachelor",
+        "master",
+        "doctorate",
+        "language"
+      ],
+      "funding": {
+        "status": "known",
+        "tiers": [
+          "Type A postgraduate award: CNY 30,000",
+          "Type B undergraduate award: CNY 20,000",
+          "Type C long-term non-degree award: CNY 6,000"
+        ]
+      },
+      "cycles": [],
+      "evidence": {
+        "officialUrl": "https://iec.zcmu.edu.cn/en/scholarship/zhejiang-provincial-government-scholarship",
+        "sourceTitle": "ZCMU Zhejiang Provincial Government Scholarship",
+        "checkedAt": "2026-08-05",
+        "summary": {
+          "en": "The official scholarship page publishes the A, B and C award amounts for postgraduate, undergraduate and long-term non-degree international students.",
+          "zh": "官方奖学金页面公布A、B、C三类资助，分别适用于研究生、本科生及长期非学历国际学生。",
+          "ru": "Официальная страница публикует суммы типов A, B и C для аспирантов, бакалавров и долгосрочных неакадемических иностранных студентов."
+        }
+      },
+      "additionalEvidence": [],
+      "recommendedAction": "publish_scholarship_identity_without_open_cycle",
+      "qualityTier": "A",
+      "riskFlags": [
+        "exact_current_application_deadline_not_published"
+      ],
+      "sourceFiles": [
+        "east-coast-medical-art.json"
+      ],
+      "programCandidateIds": [
+        "mve-ecma-zcmu-chinese-medicine-bachelor",
+        "mve-ecma-zcmu-pharmacy-bachelor"
+      ]
+    },
+    {
       "candidateId": "sch-zjgsu-international-student-general",
       "candidateIds": [
         "sch-zjgsu-international-student-general"
@@ -61560,6 +66348,26 @@
       "droppedScholarshipProgramReferences": [],
       "representedProgramCandidates": 6,
       "representedScholarshipCandidates": 1,
+      "programDuplicateGroups": [],
+      "scholarshipDuplicateGroups": []
+    },
+    "regionalBreadthWave20260805": {
+      "rawCities": 2,
+      "rawUniversities": 9,
+      "rawPrograms": 61,
+      "publishablePrograms": 60,
+      "quarantinedPrograms": [
+        "prog-mew-nnw-hebtu-four-week-chinese-study"
+      ],
+      "rawScholarships": 23,
+      "droppedScholarshipProgramReferences": [
+        {
+          "scholarshipCandidateId": "sch-mew-nnw-hebtu-international-chinese-language-teachers",
+          "programCandidateId": "prog-mew-nnw-hebtu-four-week-chinese-study"
+        }
+      ],
+      "representedProgramCandidates": 60,
+      "representedScholarshipCandidates": 23,
       "programDuplicateGroups": [],
       "scholarshipDuplicateGroups": []
     }

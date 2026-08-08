@@ -66,4 +66,10 @@ describe('locale registry', () => {
     expect(metadata.robots).toEqual({ index: false, follow: true })
     expect(metadata.alternates?.languages).not.toHaveProperty('de')
   })
+
+  it('keeps a thin public record reachable while preventing search indexing', () => {
+    const metadata = pageMetadata('en', 'Program', 'Official entry point', 'programs/example', { indexable: false })
+
+    expect(metadata.robots).toEqual({ index: false, follow: true })
+  })
 })

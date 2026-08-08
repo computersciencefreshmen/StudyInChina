@@ -1,0 +1,90 @@
+.card {
+  gap: .9rem;
+}
+
+.identityRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+.signal {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: 1px;
+  padding: 1px;
+  margin: 0;
+  overflow: hidden;
+  background: var(--atlas-line);
+  border: 1px solid var(--atlas-line);
+  border-radius: .8rem;
+}
+
+.signal > div {
+  display: grid;
+  align-content: center;
+  min-width: 0;
+  min-height: 4.8rem;
+  padding: .8rem .9rem;
+  background: var(--atlas-paper-bright);
+}
+
+.signal > div:first-child {
+  background: color-mix(in srgb, var(--atlas-jade-pale) 58%, var(--atlas-paper-bright));
+}
+
+.signal dt {
+  color: var(--atlas-muted);
+  font-size: .67rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.signal dd {
+  margin: .3rem 0 0;
+  color: var(--atlas-ink);
+  font-size: .95rem;
+  font-weight: 760;
+  line-height: 1.3;
+}
+
+.signal time {
+  font-family: var(--atlas-font-display);
+  font-size: 1.08rem;
+}
+
+.deadlineValue {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+.supportingFacts {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .65rem;
+  flex-wrap: wrap;
+  padding-top: .75rem;
+  border-top: 1px solid var(--atlas-line);
+}
+
+.fundingSignal {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 560px) {
+  .signal,
+  .fundingSignal,
+  .supportingFacts {
+    grid-template-columns: 1fr;
+  }
+}

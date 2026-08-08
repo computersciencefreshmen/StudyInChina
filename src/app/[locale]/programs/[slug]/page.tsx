@@ -1,18 +1,20 @@
 import { notFound } from 'next/navigation'
+import { ApplicationSummaryCard } from '@/components/features/ApplicationSummaryCard'
 import { FavoriteButton } from '@/components/features/FavoriteButton'
 import { ProgramCard } from '@/components/features/RecordCards'
 import { ScholarshipCard } from '@/components/features/ScholarshipCard'
 import { SourceTransparency } from '@/components/features/SourceTransparency'
 import { Badge, Card, PageHero, SectionHeading, VerificationBadge } from '@/components/ui'
 import { indexedLocales } from '@/i18n/config'
+import { getDecisionExperienceCopy } from '@/i18n/decision-experience'
 import { getMessages } from '@/i18n/messages'
 import { getApplicationState, selectAdmissionCycle } from '@/lib/data/admission'
 import { selectProgramPrebuildSlugs } from '@/lib/data/detail-prebuild'
 import { formatCny, formatDate, localize } from '@/lib/data/format'
 import { getTodayDate } from '@/lib/data/freshness'
 import { degreeLabels, disciplineLabels, languageLabel } from '@/lib/data/labels'
-import { getCatalogData, getCatalogProgramBySlug, getData } from '@/lib/data/load'
-import type { AdmissionCycle } from '@/lib/data/types'
+import { getCatalogData, getData } from '@/lib/data/load'
+import { isIndexableProgram } from '@/lib/seo/indexability'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
 export const dynamicParams = true
@@ -26,7 +28,8 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale: raw, slug } = await params
   const locale = requireLocale(raw) || 'en'
-  const program = await getCatalogProgramBySlug(slug)
+  const data = await getCatalogData()
+  const program = data.programs.find((item) => item.slug === slug)
   if (!program) return {}
 
   return pageMetadata(
@@ -34,11 +37,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     localize(program.name, locale),
     `${degreeLabels(locale)[program.degreeLevel]} · ${disciplineLabels(locale)[program.discipline]}`,
     `programs/${slug}`,
+    { indexable: isIndexableProgram(program, data.admissionCycles, getTodayDate()) },
   )
-}
-
-function cycleRecency(cycle: AdmissionCycle): string {
-  return cycle.closesOn || cycle.opensOn || cycle.academicYear
 }
 
 export default async function ProgramDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
@@ -46,26 +46,25 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   const locale = requireLocale(raw)
   if (!locale) notFound()
 
-  const program = await getCatalogProgramBySlug(slug)
+  const data = await getCatalogData()
+  const program = data.programs.find((item) => item.slug === slug)
   if (!program) notFound()
   const details = program.details
 
   const messages = getMessages(locale)
-  const data = await getCatalogData()
+  const decisionCopy = getDecisionExperienceCopy(locale)
   const university = data.universities.find((item) => item.id === program.universityId)
   if (!university) notFound()
 
   const city = data.cities.find((item) => item.id === university.cityId)
-  const cycles = data.admissionCycles
-    .filter((item) => item.programId === program.id)
-    .sort((left, right) => cycleRecency(right).localeCompare(cycleRecency(left)))
-  const cycle = cycles[0]
+  const today = getTodayDate()
+  const cycle = selectAdmissionCycle(data.admissionCycles, program.id, today)
   if (!details || program.durationMonths === null || !cycle) {
     const sources = data.sources.filter((source) => program.sourceIds.includes(source.id))
     const lastSourceCheckedAt = sources.map((source) => source.accessedAt).sort().at(-1)
       ?? program.verifiedAt
     const partialApplicationState = cycle
-      ? getApplicationState(cycle, getTodayDate())
+      ? getApplicationState(cycle, today)
       : 'not-announced'
     const partialApplicationStateLabels = {
       open: messages.common.openNow,
@@ -76,6 +75,15 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
       'not-announced': messages.programs.notAnnounced,
       'previous-cycle': messages.programs.previousCycle,
     }
+    const partialApplicationStateTones = {
+      open: 'jade',
+      upcoming: 'gold',
+      closed: 'neutral',
+      rolling: 'jade',
+      'dates-published': 'blue',
+      'not-announced': 'warning',
+      'previous-cycle': 'neutral',
+    } as const
     const partialTuitionPeriodLabels = {
       program: messages.programs.tuitionProgram,
       semester: messages.programs.tuitionSemester,
@@ -90,7 +98,12 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
         : `${program.durationMonths} ${messages.common.months}`
     const partialTuition = cycle?.tuitionCny == null
       ? messages.common.unknown
-      : `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${partialTuitionPeriodLabels[cycle.tuitionPeriod || 'other']}`
+      : `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${partialTuitionPeriodLabels[cycle.tuitionPeriod || 'other']}${cycle.tuitionStatus === 'reference' ? ` · ${messages.programs.tuitionReference}` : ''}`
+    const partialApplicationFee = cycle?.applicationFeeCny == null
+      ? messages.common.unknown
+      : `${formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)}${cycle.tuitionStatus === 'reference' ? ` · ${messages.programs.tuitionReference}` : ''}`
+    const partialCanApply = (partialApplicationState === 'open' || partialApplicationState === 'rolling')
+      && Boolean(program.applyUrl)
     return <>
       <PageHero
         variant="compact"
@@ -100,9 +113,11 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
           <span>{localize(university.name, locale)}</span>
           {city ? <span> {'\u00b7'} {localize(city.name, locale)}</span> : null}
         </>}
-        actions={<a className="atlas-button atlas-button--secondary atlas-button--medium" href={program.programUrl} target="_blank" rel="noreferrer">
-          {messages.common.officialSource}{' \u2197'}
-        </a>}
+        actions={partialCanApply && program.applyUrl
+          ? <a className="atlas-button atlas-button--primary atlas-button--medium" href={program.applyUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
+          : <a className="atlas-button atlas-button--secondary atlas-button--medium" href={program.programUrl} target="_blank" rel="noreferrer">
+              {messages.common.officialSource} ↗
+            </a>}
         meta={<VerificationBadge
           status={program.status}
           verifiedAt={program.verifiedAt}
@@ -120,7 +135,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
         <div className="detail-main">
           <article className="prose-panel">
             <h2>{messages.programs.overview}</h2>
-            <div className="notice">{messages.programs.notAnnounced}</div>
+            <div className="notice">{decisionCopy.verifiedFactsOnly}</div>
             <dl className="detail-facts">
               <div><dt>{messages.programs.university}</dt><dd><a href={`/${locale}/universities/${university.slug}`}>{localize(university.name, locale)}</a></dd></div>
               <div><dt>{messages.common.duration}</dt><dd>{partialDuration}</dd></div>
@@ -136,6 +151,25 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
           </article>
         </div>
         <aside className="detail-aside">
+          <ApplicationSummaryCard
+            eyebrow={degreeLabels(locale)[program.degreeLevel]}
+            title={decisionCopy.applicationSnapshot}
+            status={<Badge tone={partialApplicationStateTones[partialApplicationState]} dot>{partialApplicationStateLabels[partialApplicationState]}</Badge>}
+            accent={partialCanApply ? 'jade' : 'none'}
+            facts={[
+              { label: decisionCopy.currentCycle, value: cycle?.academicYear ?? messages.common.unknown },
+              { label: messages.common.deadline, value: cycle?.closesOn
+                ? <time dateTime={cycle.closesOn}>{formatDate(cycle.closesOn, locale, messages.common.unknown)}</time>
+                : messages.common.unknown },
+              { label: messages.common.tuition, value: partialTuition },
+              { label: decisionCopy.applicationFee, value: partialApplicationFee },
+              { label: messages.common.lastVerified, value: formatDate(lastSourceCheckedAt, locale, '—') },
+            ]}
+            notice={decisionCopy.verifiedFactsOnly}
+            actions={partialCanApply && program.applyUrl
+              ? <a className="atlas-button atlas-button--primary atlas-button--small" href={program.applyUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
+              : <a className="atlas-button atlas-button--secondary atlas-button--small" href={program.programUrl} target="_blank" rel="noreferrer">{messages.common.officialSource} ↗</a>}
+          />
           <Card accent="jade">
             <h2 className="atlas-card__title">{messages.programs.sources}</h2>
             <ul className="source-list">
@@ -158,7 +192,6 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
     </>
   }
 
-  const today = getTodayDate()
   const applicationState = getApplicationState(cycle, today)
   const applicationStateLabels = {
     open: messages.common.openNow,
@@ -255,11 +288,11 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
         {city ? <span> · {localize(city.name, locale)}</span> : null}
       </>}
       actions={<>
-        {program.applyUrl ? <a className={`atlas-button atlas-button--${isAcceptingApplications ? 'primary' : 'secondary'} atlas-button--medium`} href={program.applyUrl} target="_blank" rel="noreferrer">
-          {isAcceptingApplications ? messages.common.applyOfficial : messages.programs.viewApplicationPortal} ↗
-        </a> : <a className="atlas-button atlas-button--secondary atlas-button--medium" href={program.programUrl} target="_blank" rel="noreferrer">
+        {isAcceptingApplications && program.applyUrl
+          ? <a className="atlas-button atlas-button--primary atlas-button--medium" href={program.applyUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
+          : <a className="atlas-button atlas-button--secondary atlas-button--medium" href={program.programUrl} target="_blank" rel="noreferrer">
           {messages.common.officialSource}{' \u2197'}
-        </a>}
+          </a>}
         <FavoriteButton programId={program.id} saveLabel={messages.common.save} savedLabel={messages.common.saved} />
       </>}
       meta={<VerificationBadge
@@ -324,7 +357,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
             <div><dt>{messages.programs.opens}</dt><dd>{formatDate(cycle.opensOn, locale, messages.common.unknown)}</dd></div>
             <div><dt>{messages.common.deadline}</dt><dd>{formatDate(cycle.closesOn, locale, messages.common.unknown)}</dd></div>
             <div><dt>{messages.common.tuition}</dt><dd>{tuition}</dd></div>
-            <div><dt>{messages.programs.fee}</dt><dd>{formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)}</dd></div>
+            <div><dt>{messages.programs.fee}</dt><dd>{cycle.applicationFeeCny === null ? messages.common.unknown : `${formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)}${cycle.tuitionStatus === 'reference' ? ` · ${messages.programs.tuitionReference}` : ''}`}</dd></div>
           </dl>
           {cycle.notes ? <p>{localize(cycle.notes, locale)}</p> : null}
         </article>
@@ -356,12 +389,32 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
               scholarship={scholarship}
               locale={locale}
               messages={messages}
+              today={today}
             />)}
           </div>
         </div> : null}
       </div>
 
       <aside className="detail-aside">
+        <ApplicationSummaryCard
+          eyebrow={degreeLabels(locale)[program.degreeLevel]}
+          title={decisionCopy.applicationSnapshot}
+          status={<Badge tone={applicationStateTones[applicationState]} dot>{applicationStateLabel}</Badge>}
+          accent={isAcceptingApplications ? 'jade' : 'none'}
+          facts={[
+            { label: decisionCopy.currentCycle, value: cycle.academicYear },
+            { label: messages.common.deadline, value: cycle.closesOn
+              ? <time dateTime={cycle.closesOn}>{formatDate(cycle.closesOn, locale, messages.common.unknown)}</time>
+              : messages.common.unknown },
+            { label: messages.common.tuition, value: tuition },
+            { label: decisionCopy.applicationFee, value: cycle.applicationFeeCny === null ? messages.common.unknown : `${formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)}${cycle.tuitionStatus === 'reference' ? ` · ${messages.programs.tuitionReference}` : ''}` },
+            { label: messages.common.lastVerified, value: formatDate(lastSourceCheckedAt, locale, '—') },
+          ]}
+          notice={decisionCopy.verifiedFactsOnly}
+          actions={isAcceptingApplications && program.applyUrl
+            ? <a className="atlas-button atlas-button--primary atlas-button--small" href={program.applyUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
+            : <a className="atlas-button atlas-button--secondary atlas-button--small" href={program.programUrl} target="_blank" rel="noreferrer">{messages.common.officialSource} ↗</a>}
+        />
         <Card accent="jade">
           <h2 className="atlas-card__title">{messages.programs.sources}</h2>
           <dl className="record-facts">

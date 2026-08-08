@@ -1,31 +1,58 @@
 .panel {
-  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  display: block;
   position: static;
+}
+
+.primaryGrid,
+.advancedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: .8rem;
+  align-items: end;
 }
 
 .search {
   grid-column: span 2;
 }
 
+.advanced {
+  margin-top: .8rem;
+  border-block: 1px solid var(--line);
+}
+
+.advanced summary {
+  width: max-content;
+  padding: .78rem 0;
+  color: var(--jade-dark);
+  cursor: pointer;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+.advanced summary:focus-visible {
+  border-radius: .2rem;
+  outline: 3px solid color-mix(in srgb, var(--jade) 25%, transparent);
+  outline-offset: 3px;
+}
+
+.advancedGrid {
+  padding: 0 0 .9rem;
+}
+
 .actions {
   display: flex;
   align-items: center;
   gap: .55rem;
-}
-
-.pagination {
-  display: grid;
-  grid-template-columns: minmax(7rem, 1fr) auto minmax(7rem, 1fr);
-  align-items: center;
-  gap: 1rem;
   margin-top: 1.5rem;
 }
 
-.pagination > :last-child {
-  justify-self: end;
-}
-
 @media (max-width: 560px) {
+  .primaryGrid,
+  .advancedGrid {
+    grid-template-columns: 1fr;
+  }
+
   .search {
     grid-column: auto;
   }

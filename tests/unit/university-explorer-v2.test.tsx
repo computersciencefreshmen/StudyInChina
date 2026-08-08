@@ -58,14 +58,20 @@ describe('UniversityExplorerV2', () => {
       messages={messages}
     />)
 
-    const previous = screen.getByRole('link', { name: 'Previous' })
-    const next = screen.getByRole('link', { name: 'Next' })
-    expect(previous).toHaveAttribute('rel', 'prev')
-    expect(previous.getAttribute('href')).not.toContain('page=')
-    expect(previous.getAttribute('href')).not.toContain('cursor=')
-    expect(next).toHaveAttribute('rel', 'next')
-    expect(next.getAttribute('href')).toContain('cursor=cursor-page-3')
-    expect(next.getAttribute('href')).toContain('cursorHistory=%7E%2Ccursor-page-2')
-    expect(next.getAttribute('href')).toContain('page=3')
+    const previousLinks = screen.getAllByRole('link', { name: 'Previous' })
+    const nextLinks = screen.getAllByRole('link', { name: 'Next' })
+    expect(previousLinks).toHaveLength(2)
+    expect(nextLinks).toHaveLength(2)
+    for (const previous of previousLinks) {
+      expect(previous).toHaveAttribute('rel', 'prev')
+      expect(previous.getAttribute('href')).not.toContain('page=')
+      expect(previous.getAttribute('href')).not.toContain('cursor=')
+    }
+    for (const next of nextLinks) {
+      expect(next).toHaveAttribute('rel', 'next')
+      expect(next.getAttribute('href')).toContain('cursor=cursor-page-3')
+      expect(next.getAttribute('href')).toContain('cursorHistory=%7E%2Ccursor-page-2')
+      expect(next.getAttribute('href')).toContain('page=3')
+    }
   })
 })

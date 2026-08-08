@@ -255,6 +255,7 @@ function pagination<Row extends SortableRow>(
   resource: 'institutions' | 'programs' | 'scholarships',
   releaseId: string,
   context = 'default',
+  pageIndex: number | null = null,
 ) {
   const hasMore = rows.length > limit
   const items = hasMore ? rows.slice(0, limit) : rows
@@ -262,7 +263,7 @@ function pagination<Row extends SortableRow>(
   return {
     items,
     nextCursor: hasMore && last
-      ? encodeCursor(resource, releaseId, last.sort_slug, last.record_id, context)
+      ? encodeCursor(resource, releaseId, last.sort_slug, last.record_id, context, pageIndex)
       : null,
   }
 }
@@ -589,8 +590,10 @@ export class CatalogSqlApi {
     const filteredConditions = [...conditions]
     const filteredValues = [...values]
     const context = cursorContext({ ...query })
+    let pageIndex: number | null = 1
     if (query.cursor && exactSlug === undefined) {
       const cursor = decodeCursor(query.cursor, 'institutions', this.release.id, context)
+      pageIndex = cursor.pageIndex
       addCondition(
         conditions,
         values,
@@ -636,7 +639,7 @@ export class CatalogSqlApi {
       ORDER BY sort_slug, record.record_id
       LIMIT ?
     `, values)
-    return { rows, filteredConditions, filteredValues, context }
+    return { rows, filteredConditions, filteredValues, context, pageIndex }
   }
 
   private async mapInstitutions(rows: InstitutionRow[]) {
@@ -768,6 +771,7 @@ export class CatalogSqlApi {
       'institutions',
       this.release.id,
       selected.context,
+      selected.pageIndex === null ? null : selected.pageIndex + 1,
     )
     const [data, metadata] = await Promise.all([
       this.mapInstitutions(page.items),
@@ -979,8 +983,10 @@ export class CatalogSqlApi {
     const filteredConditions = [...conditions]
     const filteredValues = [...values]
     const context = cursorContext({ ...query })
+    let pageIndex: number | null = 1
     if (query.cursor && exactSlug === undefined) {
       const cursor = decodeCursor(query.cursor, 'programs', this.release.id, context)
+      pageIndex = cursor.pageIndex
       addCondition(
         conditions,
         values,
@@ -1032,7 +1038,7 @@ export class CatalogSqlApi {
       ORDER BY COALESCE(record.slug, ''), record.record_id
       LIMIT ?
     `, values)
-    return { rows, filteredConditions, filteredValues, context }
+    return { rows, filteredConditions, filteredValues, context, pageIndex }
   }
 
   private async mapPrograms(rows: ProgramRow[]) {
@@ -1195,6 +1201,7 @@ export class CatalogSqlApi {
       'programs',
       this.release.id,
       selected.context,
+      selected.pageIndex === null ? null : selected.pageIndex + 1,
     )
     const [data, metadata] = await Promise.all([
       this.mapPrograms(page.items),
@@ -1355,8 +1362,10 @@ export class CatalogSqlApi {
     const filteredConditions = [...conditions]
     const filteredValues = [...values]
     const context = cursorContext({ ...query })
+    let pageIndex: number | null = 1
     if (query.cursor && exactSlug === undefined) {
       const cursor = decodeCursor(query.cursor, 'scholarships', this.release.id, context)
+      pageIndex = cursor.pageIndex
       addCondition(
         conditions,
         values,
@@ -1396,7 +1405,7 @@ export class CatalogSqlApi {
       ORDER BY sort_slug, record.record_id
       LIMIT ?
     `, values)
-    return { rows, filteredConditions, filteredValues, context }
+    return { rows, filteredConditions, filteredValues, context, pageIndex }
   }
 
   private async mapScholarships(rows: ScholarshipRow[]) {
@@ -1524,6 +1533,7 @@ export class CatalogSqlApi {
       'scholarships',
       this.release.id,
       selected.context,
+      selected.pageIndex === null ? null : selected.pageIndex + 1,
     )
     const [data, metadata] = await Promise.all([
       this.mapScholarships(page.items),

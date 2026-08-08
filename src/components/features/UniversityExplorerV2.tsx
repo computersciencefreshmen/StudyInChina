@@ -12,6 +12,12 @@ import {
   universityCatalogHref,
   type UniversityCatalogResult,
 } from '@/lib/university-catalog'
+import {
+  CatalogFilterSummary,
+  catalogExplorerText,
+  type CatalogFilterChip,
+} from './CatalogFilterSummary'
+import { CatalogPagination } from './CatalogPagination'
 import styles from './ProgramExplorerV2.module.css'
 
 type ExplorerLabels = {
@@ -35,6 +41,13 @@ const labels: Record<LaunchLocale, ExplorerLabels> = {
   es: { apply: 'Aplicar filtros', defaultOrder: 'Orden predeterminado', nameOrder: 'Universidad A–Z', next: 'Siguiente', pagination: 'Páginas del catálogo de universidades', previous: 'Anterior', programsMost: 'Más programas', scholarshipsMost: 'Más becas', sortBy: 'Ordenar por' },
 }
 
+type SelectOption = { value: string; label: string }
+type UniversityFilterKey = 'query' | 'city' | 'region' | 'discipline' | 'sort'
+
+function selectedLabel(options: SelectOption[], value: string): string {
+  return options.find((option) => option.value === value)?.label ?? value
+}
+
 function disciplineLabel(value: string, locale: LaunchLocale): string {
   const normalized = normalizeProgramField(value)
   return normalized ? programFieldLabel(normalized, locale) : value
@@ -51,6 +64,40 @@ export function UniversityExplorerV2({
 }) {
   const text = labels[locale]
   const filters = result.filters
+  const controls = catalogExplorerText(locale)
+  const cityOptions = result.cityOptions
+    .map((option) => ({ value: option.value, label: localize(option.name, locale) }))
+  const regionOptions = Object.entries(regionLabels(locale))
+    .map(([value, label]) => ({ value, label }))
+  const disciplineOptions = programFieldTaxonomy(locale)
+    .map(({ key, label }) => ({ value: key, label }))
+  const sortOptions: SelectOption[] = [
+    { value: 'default', label: text.defaultOrder },
+    { value: 'name', label: text.nameOrder },
+    { value: 'programs-desc', label: text.programsMost },
+    { value: 'scholarships-desc', label: text.scholarshipsMost },
+  ]
+  const chipHref = (key: UniversityFilterKey) => universityCatalogHref(locale, {
+    ...filters,
+    [key]: key === 'sort' ? 'default' : '',
+    page: 1,
+    cursor: '',
+    cursorHistory: [],
+    nextCursor: '',
+  }, 1)
+  const activeFilters: CatalogFilterChip[] = []
+  const addFilter = (key: UniversityFilterKey, label: string, value: string) => {
+    if (value) activeFilters.push({ key, label, value, href: chipHref(key) })
+  }
+  addFilter('query', messages.common.search, filters.query)
+  addFilter('city', messages.universities.cityFilter, selectedLabel(cityOptions, filters.city))
+  addFilter('region', messages.universities.regionFilter, selectedLabel(regionOptions, filters.region))
+  addFilter('discipline', messages.universities.fieldFilter, selectedLabel(disciplineOptions, filters.discipline))
+  if (filters.sort !== 'default') addFilter('sort', text.sortBy, selectedLabel(sortOptions, filters.sort))
+  const advancedFilterCount = [
+    filters.region,
+    filters.sort === 'default' ? '' : filters.sort,
+  ].filter(Boolean).length
 
   return <>
     <form
@@ -60,6 +107,7 @@ export function UniversityExplorerV2({
       action={`/${locale}/universities`}
       method="get"
     >
+      <div className={styles.primaryGrid}>
       <div className={`field ${styles.search}`}>
         <label htmlFor="university-search">{messages.common.search}</label>
         <input id="university-search" name="q" defaultValue={filters.query} placeholder={messages.universities.searchPlaceholder} />
@@ -72,17 +120,21 @@ export function UniversityExplorerV2({
         </select>
       </div>
       <div className="field">
-        <label htmlFor="university-region">{messages.universities.regionFilter}</label>
-        <select id="university-region" name="region" defaultValue={filters.region}>
-          <option value="">{messages.common.all}</option>
-          {Object.entries(regionLabels(locale)).map(([key, label]) => <option value={key} key={key}>{label}</option>)}
-        </select>
-      </div>
-      <div className="field">
         <label htmlFor="university-discipline">{messages.universities.fieldFilter}</label>
         <select id="university-discipline" name="discipline" defaultValue={filters.discipline}>
           <option value="">{messages.common.all}</option>
           {programFieldTaxonomy(locale).map(({ key, label }) => <option value={key} key={key}>{label}</option>)}
+        </select>
+      </div>
+      </div>
+      <details className={styles.advanced} open={advancedFilterCount > 0}>
+        <summary>{controls.advancedFilters}{advancedFilterCount ? ` (${advancedFilterCount})` : ''}</summary>
+        <div className={styles.advancedGrid}>
+      <div className="field">
+        <label htmlFor="university-region">{messages.universities.regionFilter}</label>
+        <select id="university-region" name="region" defaultValue={filters.region}>
+          <option value="">{messages.common.all}</option>
+          {Object.entries(regionLabels(locale)).map(([key, label]) => <option value={key} key={key}>{label}</option>)}
         </select>
       </div>
       <div className="field">
@@ -94,15 +146,41 @@ export function UniversityExplorerV2({
           <option value="scholarships-desc">{text.scholarshipsMost}</option>
         </select>
       </div>
+        </div>
+      </details>
       <div className={styles.actions}>
         <Button type="submit">{text.apply}</Button>
         <LinkButton variant="ghost" href={`/${locale}/universities`}>{messages.common.clear}</LinkButton>
       </div>
     </form>
 
-    <p className="result-count" aria-live="polite">
-      {result.total}{result.totalExact ? '' : '+'} {messages.universities.results}
-    </p>
+    <CatalogFilterSummary
+      activeFilters={activeFilters}
+      clearAllHref={`/${locale}/universities`}
+      clearAllLabel={messages.common.clear}
+      itemCount={result.items.length}
+      page={result.page}
+      pageSize={result.pageSize}
+      resultLabel={messages.universities.results}
+      text={controls}
+      total={result.total}
+      totalExact={result.totalExact}
+    />
+    <CatalogPagination
+      ariaLabel={text.pagination}
+      nextHref={result.page < result.pageCount
+        ? universityCatalogHref(locale, filters, result.page + 1)
+        : undefined}
+      nextLabel={text.next}
+      page={result.page}
+      pageCount={result.pageCount}
+      position="top"
+      previousHref={result.page > 1 && filters.cursorHistory.length > 0
+        ? universityCatalogHref(locale, filters, result.page - 1)
+        : undefined}
+      previousLabel={text.previous}
+      text={controls}
+    />
 
     {result.items.length ? (
       <div className="content-grid">
@@ -136,7 +214,7 @@ export function UniversityExplorerV2({
             <div className="record-card__actions">
               <LinkButton href={`/${locale}/universities/${institution.slug}`} variant="secondary" size="small">{messages.common.viewDetails}</LinkButton>
               {institution.admissionsUrl
-                ? <a className="text-link" href={institution.admissionsUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
+                ? <a className="text-link" href={institution.admissionsUrl} target="_blank" rel="noreferrer">{messages.universities.admission} ↗</a>
                 : <a className="text-link" href={institution.officialUrl} target="_blank" rel="noreferrer">{messages.common.officialSource} ↗</a>}
             </div>
           </Card>
@@ -144,16 +222,20 @@ export function UniversityExplorerV2({
       </div>
     ) : <div className="empty-box">{messages.universities.noResults}</div>}
 
-    {result.pageCount > 1 ? (
-      <nav className={styles.pagination} aria-label={text.pagination}>
-        {result.page > 1
-          ? <LinkButton variant="ghost" rel="prev" href={universityCatalogHref(locale, filters, result.page - 1)}>{text.previous}</LinkButton>
-          : <span />}
-        <strong>{result.page} / {result.pageCount}</strong>
-        {result.page < result.pageCount
-          ? <LinkButton variant="ghost" rel="next" href={universityCatalogHref(locale, filters, result.page + 1)}>{text.next}</LinkButton>
-          : <span />}
-      </nav>
-    ) : null}
+    <CatalogPagination
+      ariaLabel={text.pagination}
+      nextHref={result.page < result.pageCount
+        ? universityCatalogHref(locale, filters, result.page + 1)
+        : undefined}
+      nextLabel={text.next}
+      page={result.page}
+      pageCount={result.pageCount}
+      position="bottom"
+      previousHref={result.page > 1 && filters.cursorHistory.length > 0
+        ? universityCatalogHref(locale, filters, result.page - 1)
+        : undefined}
+      previousLabel={text.previous}
+      text={controls}
+    />
   </>
 }

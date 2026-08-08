@@ -1,15 +1,16 @@
 type CursorResource = 'institutions' | 'programs' | 'scholarships'
 
 type CursorPayload = {
-  v: 2
+  v: 3
   resource: CursorResource
   releaseId: string
   context: string
   sortKey: string
   id: string
+  pageIndex: number | null
 }
 
-type DecodedCursor = Pick<CursorPayload, 'sortKey' | 'id'>
+type DecodedCursor = Pick<CursorPayload, 'sortKey' | 'id' | 'pageIndex'>
 
 export class InvalidCursorError extends Error {
   constructor() {
@@ -39,8 +40,14 @@ export function encodeCursor(
   sortKey: string,
   id: string,
   context = 'default',
+  pageIndex: number | null = null,
 ) {
-  return toBase64Url(JSON.stringify({ v: 2, resource, releaseId, context, sortKey, id } satisfies CursorPayload))
+  if (pageIndex !== null && (!Number.isSafeInteger(pageIndex) || pageIndex < 2)) {
+    throw new InvalidCursorError()
+  }
+  return toBase64Url(JSON.stringify({
+    v: 3, resource, releaseId, context, sortKey, id, pageIndex,
+  } satisfies CursorPayload))
 }
 
 export function decodeCursor(
@@ -58,6 +65,7 @@ export function decodeCursor(
       context?: unknown
       sortKey?: unknown
       id?: unknown
+      pageIndex?: unknown
     }
     if (
       parsed.resource !== resource
@@ -72,11 +80,11 @@ export function decodeCursor(
 
     if (parsed.v === 1) {
       if (context !== 'default') throw new InvalidCursorError()
-      return { sortKey, id }
+      return { sortKey, id, pageIndex: null }
     }
 
     if (
-      parsed.v !== 2
+      (parsed.v !== 2 && parsed.v !== 3)
       || parsed.context !== context
       || typeof parsed.context !== 'string'
       || parsed.context.length === 0
@@ -84,7 +92,18 @@ export function decodeCursor(
     ) {
       throw new InvalidCursorError()
     }
-    return { sortKey, id }
+    if (parsed.v === 2) return { sortKey, id, pageIndex: null }
+    if (
+      parsed.pageIndex !== null
+      && (!Number.isSafeInteger(parsed.pageIndex) || Number(parsed.pageIndex) < 2)
+    ) {
+      throw new InvalidCursorError()
+    }
+    return {
+      sortKey,
+      id,
+      pageIndex: parsed.pageIndex === null ? null : Number(parsed.pageIndex),
+    }
   } catch (error) {
     if (error instanceof InvalidCursorError) throw error
     throw new InvalidCursorError()
