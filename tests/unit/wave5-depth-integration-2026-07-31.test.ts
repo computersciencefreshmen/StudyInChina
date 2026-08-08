@@ -13,10 +13,6 @@ import eastSouth from '../../quality/official-gap-wave-2026-07-30/wave5-depth-ea
 import west from '../../quality/official-gap-wave-2026-07-30/wave5-depth-west.json'
 import mergedCandidates from '../../quality/official-gap-wave-2026-07-30/merged-candidates.json'
 import { findSemanticProgramDuplicates } from '../../scripts/quality/check-program-coverage'
-import {
-  getApplicationState,
-  selectAdmissionCycle,
-} from '../../src/lib/data/admission'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
 import type { DataBundle } from '../../src/lib/data/types'
@@ -229,7 +225,7 @@ describe('official coverage wave 5 on 2026-07-31', () => {
     }
   })
 
-  it('publishes all eighteen known fees only through non-open reference cycles', () => {
+  it('retains all eighteen known fees only as stale, non-public reference cycles', () => {
     const tuitionKnownCandidates = waveProgramCandidates.filter((candidate) =>
       candidate.tuition?.status === 'known'
       && candidate.tuition.amount !== null
@@ -244,25 +240,23 @@ describe('official coverage wave 5 on 2026-07-31', () => {
         candidate.candidateId,
       ).toBe(true)
 
-      const selectedCycle = selectAdmissionCycle(
-        published.admissionCycles,
-        programId,
-        TODAY,
-      )
-      expect(selectedCycle, candidate.candidateId).toBeDefined()
-      expect(selectedCycle?.id, candidate.candidateId).toContain('fee-reference')
-      expect(selectedCycle?.tuitionCny, candidate.candidateId).not.toBeNull()
-      expect(selectedCycle?.opensOn, candidate.candidateId).toBeNull()
-      expect(selectedCycle?.closesOn, candidate.candidateId).toBeNull()
-      expect(
-        ['open', 'rolling'],
+      const referenceCycles = data.admissionCycles.filter((cycle) => (
+        cycle.programId === programId && cycle.id.includes('fee-reference')
+      ))
+      expect(referenceCycles, candidate.candidateId).toHaveLength(1)
+      const referenceCycle = referenceCycles[0]
+      expect(referenceCycle?.status, candidate.candidateId).toBe('stale')
+      expect(referenceCycle?.tuitionCny, candidate.candidateId).not.toBeNull()
+      expect(referenceCycle?.opensOn, candidate.candidateId).toBeNull()
+      expect(referenceCycle?.closesOn, candidate.candidateId).toBeNull()
+      expect(published.admissionCycles.some((cycle) => cycle.programId === programId),
         candidate.candidateId,
-      ).not.toContain(getApplicationState(selectedCycle, TODAY))
+      ).toBe(false)
 
       for (const cycle of candidate.cycles ?? []) {
         const deadline = cycle.applicationDeadline
         if (deadline && isMoreThanThirtyDaysBefore(deadline, TODAY)) {
-          expect(selectedCycle?.closesOn, `${candidate.candidateId}:${deadline}`)
+          expect(referenceCycle?.closesOn, `${candidate.candidateId}:${deadline}`)
             .not.toBe(deadline)
         }
       }
@@ -302,7 +296,7 @@ describe('official coverage wave 5 on 2026-07-31', () => {
     expect(supersededDeadlineCount).toBeGreaterThan(0)
   })
 
-  it('keeps the day-31 Wave5 reference published and quarantines stale legacy evidence', () => {
+  it('keeps the day-31 Wave5 reference in stale history and out of the public catalog', () => {
     const candidateId = 'wave5-depth-cupb-chinese-language-one-year-2026'
     const candidate = waveProgramCandidates.find((item) =>
       item.candidateId === candidateId)
@@ -320,17 +314,18 @@ describe('official coverage wave 5 on 2026-07-31', () => {
       ) / (24 * 60 * 60 * 1000),
     ).toBe(31)
 
-    const selectedCycle = selectAdmissionCycle(
-      published.admissionCycles,
-      formalProgramId(candidateId),
-      TODAY,
+    const programId = formalProgramId(candidateId)
+    const storedCycle = data.admissionCycles.find(
+      (cycle) => cycle.programId === programId && cycle.id.includes('fee-reference'),
     )
-    expect(selectedCycle, candidateId).toBeDefined()
-    expect(selectedCycle?.id).toContain('fee-reference')
-    expect(selectedCycle?.tuitionCny).toBe(21000)
-    expect(selectedCycle?.tuitionStatus).toBe('reference')
-    expect(selectedCycle?.opensOn).toBeNull()
-    expect(selectedCycle?.closesOn).toBeNull()
+    expect(storedCycle, candidateId).toBeDefined()
+    expect(storedCycle?.status).toBe('stale')
+    expect(storedCycle?.tuitionCny).toBe(21000)
+    expect(storedCycle?.tuitionStatus).toBe('reference')
+    expect(storedCycle?.opensOn).toBeNull()
+    expect(storedCycle?.closesOn).toBeNull()
+    expect(published.admissionCycles.some((cycle) => cycle.programId === programId))
+      .toBe(false)
 
     const legacyId = 'cycle-2026-sjtu-long-term-chinese-autumn-fee-reference'
     const rawLegacy = data.admissionCycles.find((cycle) => cycle.id === legacyId)

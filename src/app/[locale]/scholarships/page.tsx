@@ -36,7 +36,7 @@ export default async function ScholarshipsPage({
     />
     <section className="atlas-container atlas-section">
       <div className="notice scholarship-notice">{messages.scholarships.catalogueNotice}</div>
-      <ScholarshipExplorerV2 result={result} locale={locale} messages={messages} />
+      <ScholarshipExplorerV2 result={result} locale={locale} messages={messages} today={today} />
     </section>
   </>
 }

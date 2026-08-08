@@ -1,13 +1,17 @@
 import { notFound } from 'next/navigation'
+import { ApplicationSummaryCard } from '@/components/features/ApplicationSummaryCard'
 import { SourceTransparency } from '@/components/features/SourceTransparency'
 import { Badge, Card, PageHero, VerificationBadge } from '@/components/ui'
 import { indexedLocales } from '@/i18n/config'
+import { formatUniversityCoverage, getDecisionExperienceCopy } from '@/i18n/decision-experience'
 import { getMessages } from '@/i18n/messages'
 import { selectScholarshipPrebuildSlugs } from '@/lib/data/detail-prebuild'
 import { formatCny, formatDate, localize } from '@/lib/data/format'
 import { getTodayDate } from '@/lib/data/freshness'
-import { getCatalogData, getCatalogScholarshipBySlug, getData } from '@/lib/data/load'
+import { getCatalogData, getData } from '@/lib/data/load'
 import { coverageLabel, providerLabel } from '@/lib/data/scholarship'
+import { isIndexableScholarship } from '@/lib/seo/indexability'
+import { selectScholarshipCurrentCycle } from '@/lib/scholarship-catalog'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
 export const dynamicParams = true
@@ -25,7 +29,8 @@ export async function generateMetadata({
 }) {
   const { locale: raw, slug } = await params
   const locale = requireLocale(raw) || 'en'
-  const item = await getCatalogScholarshipBySlug(slug)
+  const data = await getCatalogData()
+  const item = data.scholarships.find((scholarship) => scholarship.slug === slug)
   if (!item) return {}
 
   return pageMetadata(
@@ -33,6 +38,7 @@ export async function generateMetadata({
     localize(item.name, locale),
     localize(item.summary, locale),
     `scholarships/${slug}`,
+    { indexable: isIndexableScholarship(item) },
   )
 }
 
@@ -45,11 +51,12 @@ export default async function ScholarshipDetail({
   const locale = requireLocale(raw)
   if (!locale) notFound()
 
-  const item = await getCatalogScholarshipBySlug(slug)
+  const data = await getCatalogData()
+  const item = data.scholarships.find((scholarship) => scholarship.slug === slug)
   if (!item) notFound()
 
   const messages = getMessages(locale)
-  const data = await getCatalogData()
+  const decisionCopy = getDecisionExperienceCopy(locale)
   const universities = data.universities.filter((university) => (
     item.universityIds.includes(university.id)
   ))
@@ -57,6 +64,19 @@ export default async function ScholarshipDetail({
   const lastSourceCheckedAt = sources.map((source) => source.accessedAt).sort().at(-1)
     ?? item.verifiedAt
   const copy = messages.scholarships
+  const universityCoverage = formatUniversityCoverage(item.universityIds.length, locale, messages.common.all)
+  const fundingHighlights = `${coverageLabel(item.coverage.tuition, locale)} · ${formatCny(item.coverage.stipendCnyPerMonth, locale, messages.common.unknown)}`
+  const currentCycle = selectScholarshipCurrentCycle(item, getTodayDate())
+  const deadlineLabels = {
+    future: decisionCopy.deadlineAhead,
+    closed: decisionCopy.deadlineClosed,
+    'not-announced': messages.programs.notAnnounced,
+  }
+  const deadlineTones = {
+    future: 'jade',
+    closed: 'neutral',
+    'not-announced': 'warning',
+  } as const
 
   return <>
     <PageHero
@@ -66,12 +86,12 @@ export default async function ScholarshipDetail({
       description={localize(item.summary, locale)}
       actions={item.applicationUrl ? (
         <a
-          className="atlas-button atlas-button--primary atlas-button--medium"
+          className="atlas-button atlas-button--secondary atlas-button--medium"
           href={item.applicationUrl}
           target="_blank"
           rel="noreferrer"
         >
-          {messages.common.applyOfficial} ↗
+          {decisionCopy.officialApplicationRoute} ↗
         </a>
       ) : undefined}
       meta={(
@@ -112,7 +132,7 @@ export default async function ScholarshipDetail({
             </div>
             <div>
               <dt>{messages.common.deadline}</dt>
-              <dd>{formatDate(item.deadline, locale, messages.common.unknown)}</dd>
+              <dd>{formatDate(currentCycle.deadline, locale, messages.common.unknown)}</dd>
             </div>
           </dl>
         </div>
@@ -132,10 +152,42 @@ export default async function ScholarshipDetail({
         </div>
       </div>
       <aside className="detail-aside">
+        <ApplicationSummaryCard
+          eyebrow={providerLabel(item.providerType, locale)}
+          title={decisionCopy.fundingSnapshot}
+          status={<Badge tone={deadlineTones[currentCycle.deadlineState]} dot>{deadlineLabels[currentCycle.deadlineState]}</Badge>}
+          accent="none"
+          facts={[
+            { label: messages.common.deadline, value: currentCycle.deadline
+              ? <time dateTime={currentCycle.deadline}>{formatDate(currentCycle.deadline, locale, messages.common.unknown)}</time>
+              : messages.common.unknown },
+            { label: decisionCopy.fundingHighlights, value: fundingHighlights },
+            { label: copy.accommodation, value: coverageLabel(item.coverage.accommodation, locale) },
+            { label: messages.common.university, value: universityCoverage },
+            { label: messages.common.lastVerified, value: formatDate(lastSourceCheckedAt, locale, '—') },
+          ]}
+          notice={decisionCopy.verifiedFactsOnly}
+          actions={item.applicationUrl
+            ? <a className="atlas-button atlas-button--secondary atlas-button--small" href={item.applicationUrl} target="_blank" rel="noreferrer">
+                {decisionCopy.officialApplicationRoute} ↗
+              </a>
+            : sources[0]
+              ? <a className="atlas-button atlas-button--secondary atlas-button--small" href={sources[0].url} target="_blank" rel="noreferrer">{messages.common.officialSource} ↗</a>
+              : undefined}
+        />
         <Card accent="jade">
           <h2 className="atlas-card__title">{copy.sources}</h2>
           <div className="tag-list">
-            <Badge tone={item.status === 'verified' ? 'jade' : 'warning'}>{item.status}</Badge>
+            <VerificationBadge
+              status={item.status}
+              labels={{
+                verified: messages.common.verified,
+                stale: messages.common.stale,
+                draft: messages.common.draft,
+                archived: messages.common.archived,
+              }}
+              showDate={false}
+            />
             <Badge tone="neutral">{formatDate(item.verifiedAt, locale, '—')}</Badge>
           </div>
           <ul className="source-list">

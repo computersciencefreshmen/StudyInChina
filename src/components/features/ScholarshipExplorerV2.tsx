@@ -7,6 +7,12 @@ import {
   scholarshipCatalogHref,
   type ScholarshipCatalogResult,
 } from '@/lib/scholarship-catalog'
+import {
+  CatalogFilterSummary,
+  catalogExplorerText,
+  type CatalogFilterChip,
+} from './CatalogFilterSummary'
+import { CatalogPagination } from './CatalogPagination'
 import { ScholarshipCard } from './ScholarshipCard'
 import styles from './ScholarshipExplorerV2.module.css'
 
@@ -48,17 +54,74 @@ const labels: Record<LaunchLocale, ExplorerLabels> = {
   es: { apply: 'Aplicar filtros', deadline: 'Fecha límite', deadlineAnnounced: 'Fecha publicada', deadlineClosed: 'Cerradas recientemente', deadlineFuture: 'Fecha futura', deadlineNext30: 'Próximos 30 días', deadlineNext90: 'Próximos 90 días', deadlineUnknown: 'No anunciada', defaultOrder: 'Orden predeterminado', degree: 'Nivel vinculado', funding: 'Financiación', fundingAccommodation: 'Alojamiento cubierto', fundingFullTuition: 'Matrícula completa', fundingInsurance: 'Seguro cubierto', fundingPartialTuition: 'Matrícula parcial', fundingStipend: 'Estipendio mensual', next: 'Siguiente', noResults: 'Ninguna beca coincide con estos filtros.', pagination: 'Páginas del catálogo de becas', previous: 'Anterior', results: 'becas', scholarshipName: 'Beca A–Z', school: 'Universidad', searchPlaceholder: 'Buscar beca o universidad', sortBy: 'Ordenar por', stipendHigh: 'Mayor estipendio' },
 }
 
+type SelectOption = { value: string; label: string }
+type ScholarshipFilterKey = 'query' | 'institution' | 'degree' | 'funding' | 'deadline' | 'sort'
+
+function selectedLabel(options: SelectOption[], value: string): string {
+  return options.find((option) => option.value === value)?.label ?? value
+}
+
 export function ScholarshipExplorerV2({
   result,
   locale,
   messages,
+  today,
 }: {
   result: ScholarshipCatalogResult
   locale: LaunchLocale
   messages: Messages
+  today: string
 }) {
   const text = labels[locale]
   const filters = result.filters
+  const controls = catalogExplorerText(locale)
+  const universityOptions = result.universityOptions
+    .map((option) => ({ value: option.value, label: localize(option.name, locale) }))
+  const degreeOptions = Object.entries(degreeLabels(locale))
+    .map(([value, label]) => ({ value, label }))
+  const fundingOptions: SelectOption[] = [
+    { value: 'full-tuition', label: text.fundingFullTuition },
+    { value: 'partial-tuition', label: text.fundingPartialTuition },
+    { value: 'stipend', label: text.fundingStipend },
+    { value: 'accommodation', label: text.fundingAccommodation },
+    { value: 'insurance', label: text.fundingInsurance },
+  ]
+  const deadlineOptions: SelectOption[] = [
+    { value: 'future', label: text.deadlineFuture },
+    { value: 'next-30-days', label: text.deadlineNext30 },
+    { value: 'next-90-days', label: text.deadlineNext90 },
+    { value: 'announced', label: text.deadlineAnnounced },
+    { value: 'not-announced', label: text.deadlineUnknown },
+    { value: 'closed', label: text.deadlineClosed },
+  ]
+  const sortOptions: SelectOption[] = [
+    { value: 'default', label: text.defaultOrder },
+    { value: 'name', label: text.scholarshipName },
+    { value: 'deadline', label: text.deadline },
+    { value: 'stipend-desc', label: text.stipendHigh },
+  ]
+  const chipHref = (key: ScholarshipFilterKey) => scholarshipCatalogHref(locale, {
+    ...filters,
+    [key]: key === 'sort' ? 'default' : '',
+    page: 1,
+    cursor: '',
+    cursorHistory: [],
+    nextCursor: '',
+  }, 1)
+  const activeFilters: CatalogFilterChip[] = []
+  const addFilter = (key: ScholarshipFilterKey, label: string, value: string) => {
+    if (value) activeFilters.push({ key, label, value, href: chipHref(key) })
+  }
+  addFilter('query', messages.common.search, filters.query)
+  addFilter('institution', text.school, selectedLabel(universityOptions, filters.institution))
+  addFilter('degree', text.degree, selectedLabel(degreeOptions, filters.degree))
+  addFilter('funding', text.funding, selectedLabel(fundingOptions, filters.funding))
+  addFilter('deadline', text.deadline, selectedLabel(deadlineOptions, filters.deadline))
+  if (filters.sort !== 'default') addFilter('sort', text.sortBy, selectedLabel(sortOptions, filters.sort))
+  const advancedFilterCount = [
+    filters.institution,
+    filters.sort === 'default' ? '' : filters.sort,
+  ].filter(Boolean).length
 
   return <>
     <form
@@ -68,16 +131,10 @@ export function ScholarshipExplorerV2({
       action={`/${locale}/scholarships`}
       method="get"
     >
+      <div className={styles.primaryGrid}>
       <div className={`field ${styles.search}`}>
         <label htmlFor="scholarship-search">{messages.common.search}</label>
         <input id="scholarship-search" name="q" defaultValue={filters.query} placeholder={text.searchPlaceholder} />
-      </div>
-      <div className="field">
-        <label htmlFor="scholarship-institution">{text.school}</label>
-        <select id="scholarship-institution" name="institution" defaultValue={filters.institution}>
-          <option value="">{messages.common.all}</option>
-          {result.universityOptions.map((option) => <option value={option.value} key={option.value}>{localize(option.name, locale)}</option>)}
-        </select>
       </div>
       <div className="field">
         <label htmlFor="scholarship-degree">{text.degree}</label>
@@ -109,6 +166,17 @@ export function ScholarshipExplorerV2({
           <option value="closed">{text.deadlineClosed}</option>
         </select>
       </div>
+      </div>
+      <details className={styles.advanced} open={advancedFilterCount > 0}>
+        <summary>{controls.advancedFilters}{advancedFilterCount ? ` (${advancedFilterCount})` : ''}</summary>
+        <div className={styles.advancedGrid}>
+      <div className="field">
+        <label htmlFor="scholarship-institution">{text.school}</label>
+        <select id="scholarship-institution" name="institution" defaultValue={filters.institution}>
+          <option value="">{messages.common.all}</option>
+          {result.universityOptions.map((option) => <option value={option.value} key={option.value}>{localize(option.name, locale)}</option>)}
+        </select>
+      </div>
       <div className="field">
         <label htmlFor="scholarship-sort">{text.sortBy}</label>
         <select id="scholarship-sort" name="sort" defaultValue={filters.sort}>
@@ -118,31 +186,63 @@ export function ScholarshipExplorerV2({
           <option value="stipend-desc">{text.stipendHigh}</option>
         </select>
       </div>
+        </div>
+      </details>
       <div className={styles.actions}>
         <Button type="submit">{text.apply}</Button>
         <LinkButton variant="ghost" href={`/${locale}/scholarships`}>{messages.common.clear}</LinkButton>
       </div>
     </form>
 
-    <p className="result-count" aria-live="polite">{result.total} {text.results}</p>
+    <CatalogFilterSummary
+      activeFilters={activeFilters}
+      clearAllHref={`/${locale}/scholarships`}
+      clearAllLabel={messages.common.clear}
+      itemCount={result.items.length}
+      page={result.page}
+      pageSize={result.pageSize}
+      resultLabel={text.results}
+      text={controls}
+      total={result.total}
+      totalExact={result.totalExact}
+    />
+    <CatalogPagination
+      ariaLabel={text.pagination}
+      nextHref={result.page < result.pageCount
+        ? scholarshipCatalogHref(locale, filters, result.page + 1)
+        : undefined}
+      nextLabel={text.next}
+      page={result.page}
+      pageCount={result.pageCount}
+      position="top"
+      previousHref={result.page > 1 && filters.cursorHistory.length > 0
+        ? scholarshipCatalogHref(locale, filters, result.page - 1)
+        : undefined}
+      previousLabel={text.previous}
+      text={controls}
+    />
     {result.items.length ? (
       <div className="content-grid">
         {result.items.map(({ scholarship }) => (
-          <ScholarshipCard key={scholarship.id} scholarship={scholarship} locale={locale} messages={messages} />
+          <ScholarshipCard key={scholarship.id} scholarship={scholarship} locale={locale} messages={messages} today={today} />
         ))}
       </div>
     ) : <div className="empty-box">{text.noResults}</div>}
 
-    {result.pageCount > 1 ? (
-      <nav className={styles.pagination} aria-label={text.pagination}>
-        {result.page > 1
-          ? <LinkButton variant="ghost" rel="prev" href={scholarshipCatalogHref(locale, filters, result.page - 1)}>{text.previous}</LinkButton>
-          : <span />}
-        <strong>{result.page} / {result.pageCount}</strong>
-        {result.page < result.pageCount
-          ? <LinkButton variant="ghost" rel="next" href={scholarshipCatalogHref(locale, filters, result.page + 1)}>{text.next}</LinkButton>
-          : <span />}
-      </nav>
-    ) : null}
+    <CatalogPagination
+      ariaLabel={text.pagination}
+      nextHref={result.page < result.pageCount
+        ? scholarshipCatalogHref(locale, filters, result.page + 1)
+        : undefined}
+      nextLabel={text.next}
+      page={result.page}
+      pageCount={result.pageCount}
+      position="bottom"
+      previousHref={result.page > 1 && filters.cursorHistory.length > 0
+        ? scholarshipCatalogHref(locale, filters, result.page - 1)
+        : undefined}
+      previousLabel={text.previous}
+      text={controls}
+    />
   </>
 }

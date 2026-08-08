@@ -3,12 +3,14 @@ import { Badge, Card, LinkButton, PageHero, SectionHeading, VerificationBadge } 
 import { ProgramCard } from '@/components/features/RecordCards'
 import { indexedLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
-import { selectAdmissionCycle } from '@/lib/data/admission'
+import { getApplicationState, selectAdmissionCycle } from '@/lib/data/admission'
 import { selectUniversityPrebuildSlugs } from '@/lib/data/detail-prebuild'
 import { formatDate, localize } from '@/lib/data/format'
 import { getTodayDate } from '@/lib/data/freshness'
 import { disciplineLabels, regionLabels } from '@/lib/data/labels'
-import { getData, getUniversityBySlug } from '@/lib/data/load'
+import { getCatalogData, getData } from '@/lib/data/load'
+import { providerLabel } from '@/lib/data/scholarship'
+import { canonicalUniversitySlug } from '@/lib/data/slug-aliases'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
 export const dynamicParams = true
@@ -18,18 +20,41 @@ export function generateStaticParams() {
   return indexedLocales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })))
 }
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
-  const { locale: raw, slug } = await params; const locale = requireLocale(raw) || 'en'; const university = getUniversityBySlug(slug)
-  if (!university) return {}; return pageMetadata(locale, localize(university.name, locale), localize(university.summary, locale), `universities/${slug}`)
+  const { locale: raw, slug } = await params
+  const locale = requireLocale(raw) || 'en'
+  const data = await getCatalogData()
+  const university = data.universities.find((item) => item.slug === canonicalUniversitySlug(slug))
+  if (!university) return {}
+  return pageMetadata(locale, localize(university.name, locale), localize(university.summary, locale), `universities/${university.slug}`)
 }
 
 export default async function UniversityDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
-  const { locale: raw, slug } = await params; const locale = requireLocale(raw); if (!locale) notFound()
-  const university = getUniversityBySlug(slug); if (!university) notFound()
-  const messages = getMessages(locale); const data = getData(); const city = data.cities.find((item) => item.id === university.cityId)
-  const programs = data.programs.filter((item) => item.universityId === university.id); const fields = [...new Set(programs.map((item) => item.discipline))]
+  const { locale: raw, slug } = await params
+  const locale = requireLocale(raw)
+  if (!locale) notFound()
+  const data = await getCatalogData()
+  const university = data.universities.find((item) => item.slug === canonicalUniversitySlug(slug))
+  if (!university) notFound()
+  const messages = getMessages(locale)
+  const city = data.cities.find((item) => item.id === university.cityId)
+  const programs = data.programs.filter((item) => item.universityId === university.id)
+  const fields = [...new Set(programs.map((item) => item.discipline))]
   const scholarships = data.scholarships.filter((item) => item.universityIds.includes(university.id))
   const today = getTodayDate()
-  const sources = data.sources.filter((source) => university.sourceIds.includes(source.id) || programs.some((program) => program.sourceIds.includes(source.id)))
+  const stateScores = { open: 7, rolling: 6, upcoming: 5, 'dates-published': 4, 'not-announced': 3, closed: 2, 'previous-cycle': 1 } as const
+  const programEntries = programs
+    .map((program) => {
+      const cycle = selectAdmissionCycle(data.admissionCycles, program.id, today)
+      return { program, cycle, score: stateScores[getApplicationState(cycle, today)] + (program.details ? 4 : 0) }
+    })
+    .sort((left, right) => right.score - left.score || left.program.slug.localeCompare(right.program.slug))
+  const visibleProgramEntries = programEntries.slice(0, 8)
+  const visibleScholarships = scholarships.slice(0, 6)
+  const visibleProgramIds = new Set(visibleProgramEntries.map(({ program }) => program.id))
+  const sources = data.sources.filter((source) => (
+    university.sourceIds.includes(source.id)
+    || programs.some((program) => visibleProgramIds.has(program.id) && program.sourceIds.includes(source.id))
+  ))
   const copy = messages.universities
   const jsonLd = { '@context': 'https://schema.org', '@type': 'CollegeOrUniversity', name: localize(university.name, locale), url: university.officialUrl, address: city ? { '@type': 'PostalAddress', addressLocality: localize(city.name, locale), addressCountry: 'CN' } : undefined }
 
@@ -47,8 +72,8 @@ export default async function UniversityDetailPage({ params }: { params: Promise
     <section className="atlas-container section-block--tight detail-layout">
       <div className="detail-main">
         <div className="prose-panel"><h2>{copy.facts}</h2><p>{localize(university.summary, locale)}</p><div className="tag-list">{fields.map((field) => <Badge key={field} tone="neutral">{disciplineLabels(locale)[field]}</Badge>)}</div></div>
-        <div><SectionHeading title={copy.programs} description={messages.common.authoritativeNotice} level={2} />{programs.length ? <div className="content-grid content-grid--two">{programs.map((program) => <ProgramCard key={program.id} program={program} university={university} cycle={selectAdmissionCycle(data.admissionCycles, program.id, today)} locale={locale} messages={messages} today={today} />)}</div> : null}</div>
-        {scholarships.length ? <div><SectionHeading title={copy.funding} level={2} /><div className="content-grid content-grid--two">{scholarships.map((scholarship) => <Card key={scholarship.id}><Badge tone="gold">{scholarship.providerType.toUpperCase()}</Badge><h3 className="atlas-card__title">{localize(scholarship.name, locale)}</h3><p className="atlas-card__description">{localize(scholarship.summary, locale)}</p><div className="atlas-card__footer"><LinkButton href={`/${locale}/scholarships/${scholarship.slug}`} variant="quiet">{messages.common.viewDetails} →</LinkButton></div></Card>)}</div></div> : null}
+        <div><SectionHeading title={copy.programs} description={messages.common.authoritativeNotice} level={2} />{visibleProgramEntries.length ? <div className="content-grid content-grid--two">{visibleProgramEntries.map(({ program, cycle }) => <ProgramCard key={program.id} program={program} university={university} cycle={cycle} locale={locale} messages={messages} today={today} />)}</div> : null}{programs.length > visibleProgramEntries.length ? <div className="atlas-card__footer"><LinkButton href={`/${locale}/programs?institution=${encodeURIComponent(university.slug)}`} variant="secondary">{messages.common.explore} ({programs.length}) →</LinkButton></div> : null}</div>
+        {visibleScholarships.length ? <div><SectionHeading title={copy.funding} level={2} /><div className="content-grid content-grid--two">{visibleScholarships.map((scholarship) => <Card key={scholarship.id}><Badge tone="gold">{providerLabel(scholarship.providerType, locale)}</Badge><h3 className="atlas-card__title">{localize(scholarship.name, locale)}</h3><p className="atlas-card__description">{localize(scholarship.summary, locale)}</p><div className="atlas-card__footer"><LinkButton href={`/${locale}/scholarships/${scholarship.slug}`} variant="quiet">{messages.common.viewDetails} →</LinkButton></div></Card>)}</div>{scholarships.length > visibleScholarships.length ? <div className="atlas-card__footer"><LinkButton href={`/${locale}/scholarships?institution=${encodeURIComponent(university.slug)}`} variant="secondary">{messages.common.explore} ({scholarships.length}) →</LinkButton></div> : null}</div> : null}
       </div>
       <aside className="detail-aside">
         <Card accent="jade"><h2 className="atlas-card__title">{copy.sources}</h2><dl className="record-facts"><div><dt>{messages.common.lastVerified}</dt><dd>{formatDate(university.verifiedAt, locale, '—')}</dd></div><div><dt>{copy.review}</dt><dd>{formatDate(university.reviewAfter, locale, '—')}</dd></div></dl><ul className="source-list">{sources.map((source) => <li key={source.id}><a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a><small>{source.publisher}</small></li>)}</ul></Card>

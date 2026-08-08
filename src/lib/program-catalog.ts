@@ -8,6 +8,10 @@ import type {
   Program,
   University,
 } from '@/lib/data/types'
+import {
+  readCatalogListCursorPageIndex,
+  validatedCatalogCursorHistory,
+} from '@/lib/catalog/list-cursor'
 import type { CatalogProgramListQuery, CatalogRepository } from '@/lib/catalog/types'
 
 export const PROGRAM_CATALOG_PAGE_SIZE = 24
@@ -347,9 +351,9 @@ function repositoryProgramResult(
 }
 
 /**
- * Repository-backed request path. Cursor links make normal navigation one
- * bounded backend request; old page-number URLs are replayed only for
- * compatibility and immediately emit cursor-based links.
+ * Repository-backed request path. Only a locally indexed opaque cursor can
+ * select a later page. Bare page numbers and legacy cursors fail closed to
+ * page one, so every request performs exactly one bounded Repository call.
  */
 export async function queryProgramCatalogRepository(
   repository: CatalogRepository,
@@ -357,20 +361,14 @@ export async function queryProgramCatalogRepository(
   today: string,
 ): Promise<ProgramCatalogResult> {
   let cursor = filters.cursor || undefined
-  const history = [...filters.cursorHistory]
-  let page = cursor ? filters.page : 1
-
-  while (!filters.cursor && page < filters.page) {
-    const preceding = await repository.listPrograms(
-      repositoryProgramQuery(filters, today, cursor),
-    )
-    if (!preceding.nextCursor) {
-      return repositoryProgramResult(preceding, filters, page, cursor, history)
-    }
-    history.push(cursor ?? '~')
-    cursor = preceding.nextCursor
-    page += 1
-  }
+  const cursorPageIndex = cursor
+    ? readCatalogListCursorPageIndex(cursor, 'programs')
+    : null
+  if (cursorPageIndex === null) cursor = undefined
+  const history = cursor
+    ? validatedCatalogCursorHistory(cursor, filters.cursorHistory, cursorPageIndex)
+    : []
+  const page = cursor && cursorPageIndex !== null ? cursorPageIndex : 1
 
   const result = await repository.listPrograms(
     repositoryProgramQuery(filters, today, cursor),

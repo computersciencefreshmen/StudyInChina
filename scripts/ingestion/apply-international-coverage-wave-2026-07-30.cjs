@@ -255,6 +255,11 @@ function discipline(candidate) {
   return classifyCandidateDiscipline(candidate)
 }
 
+function hasRiskFlag(candidate, ...riskFlags) {
+  const candidateRiskFlags = new Set(candidate.riskFlags ?? [])
+  return riskFlags.some((riskFlag) => candidateRiskFlags.has(riskFlag))
+}
+
 function tuition(candidate) {
   const value = candidate.tuition ?? {}
   const amount = value.status === 'known'
@@ -296,6 +301,8 @@ function normalizeIntake(value) {
 }
 
 function groupOpenCycles(candidate) {
+  if (hasRiskFlag(candidate, 'group_application_only_for_open_route')) return []
+
   const grouped = new Map()
   for (const cycle of candidate.cycles ?? []) {
     if (!cycle.displayAsOpen) continue
@@ -434,6 +441,14 @@ function providerType(candidate) {
 }
 
 function scholarshipCoverage(candidate) {
+  if (hasRiskFlag(
+    candidate,
+    'funding_details_from_2021_handbook',
+    'current_cycle_and_terms_not_reconfirmed',
+  )) return {
+    tuition: 'unknown', accommodation: 'unknown', insurance: 'unknown', stipendCnyPerMonth: null,
+  }
+
   const tiers = candidate.funding?.tiers ?? []
   const text = Array.isArray(tiers) ? tiers.join(' ').toLowerCase() : String(tiers).toLowerCase()
   const hasFullTier = /\bfull\b|全额|一等奖|100%/.test(text)
@@ -695,8 +710,13 @@ function importProgram(candidate, state) {
   const slug = `gap-${token}-${level}`
   const sourceId = `${WAVE_PREFIXES.programSource}${token}`
   const checkedAt = isoDate(candidate.evidence?.checkedAt, `${candidate.candidateId} checkedAt`)
-  const languages = parseLanguages(candidate)
-  const duration = parseDuration(candidate)
+  const historicalFactsOnly = hasRiskFlag(
+    candidate,
+    'program_facts_from_2021_handbook',
+    'current_course_cycle_and_fee_not_reconfirmed',
+  )
+  const languages = historicalFactsOnly ? [] : parseLanguages(candidate)
+  const duration = historicalFactsOnly ? { durationMonths: null } : parseDuration(candidate)
   const names = localizedText(candidate.name, candidate.candidateId)
   const officialUrl = httpsUrl(candidate.evidence?.officialUrl, `${candidate.candidateId} official URL`)
   const summary = localizedSummary(candidate.evidence?.summary, `Official international program: ${names.en ?? names.zh}`)
@@ -725,7 +745,9 @@ function importProgram(candidate, state) {
     status: 'verified',
   })
 
-  const cycleTuition = tuition(candidate)
+  const cycleTuition = historicalFactsOnly
+    ? { tuitionCny: null, tuitionPeriod: null, tuitionStatus: null }
+    : tuition(candidate)
   const programCycles = groupProgramCycles(candidate, checkedAt)
   const hasOpenCycle = (candidate.cycles ?? []).some((cycle) => cycle.displayAsOpen)
   let feeReferenceCycle = null
@@ -866,7 +888,12 @@ function main() {
   for (const slug of archiveInstitutionSlugs) {
     if (!state.universityBySlug.has(slug)) throw new Error(`Unknown archive institution slug: ${slug}`)
   }
-  for (const candidate of merged.programCandidates) importProgram(candidate, state)
+  for (const candidate of merged.programCandidates) {
+    if (hasRiskFlag(candidate, 'group_application_only')) {
+      throw new Error(`Group-only candidate must remain quarantined: ${candidate.candidateId}`)
+    }
+    importProgram(candidate, state)
+  }
   for (const candidate of merged.scholarshipCandidates) importScholarship(candidate, state)
   const duplicateCleanup = {
     ...mergeLegacyDuplicatePrograms(state),

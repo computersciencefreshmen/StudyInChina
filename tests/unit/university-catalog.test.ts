@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import type { CatalogRepository } from '@/lib/catalog/types'
+import { encodeJsonListCursor } from '@/lib/catalog/list-cursor'
 import {
   parseUniversityCatalogFilters,
   queryUniversityCatalogRepository,
@@ -68,8 +69,9 @@ describe('repository-backed university catalogue', () => {
     }).query).toBe('')
   })
 
-  it('uses one bounded repository request for a cursor URL', async () => {
+  it('serves a locally indexed cursor URL with one Repository request', async () => {
     const { repository, listInstitutions } = repositoryWithPage()
+    const cursor = encodeJsonListCursor('institutions', 'test-fingerprint', 3)
     const filters = parseUniversityCatalogFilters({
       q: 'medicine',
       city: 'guangzhou',
@@ -77,20 +79,20 @@ describe('repository-backed university catalogue', () => {
       discipline: 'medicine-health',
       sort: 'scholarships-desc',
       page: '3',
-      cursor: 'cursor-page-3',
+      cursor,
       cursorHistory: '~,cursor-page-2',
     })
 
     const result = await queryUniversityCatalogRepository(repository, filters)
 
     expect(listInstitutions).toHaveBeenCalledTimes(1)
-    expect(listInstitutions).toHaveBeenCalledWith({
+    expect(listInstitutions).toHaveBeenLastCalledWith({
       q: 'medicine',
       city: 'guangzhou',
       region: 'south',
       discipline: 'medicine-health',
       sort: 'scholarships-desc',
-      cursor: 'cursor-page-3',
+      cursor,
       limit: UNIVERSITY_CATALOG_PAGE_SIZE,
     })
     expect(result.page).toBe(3)

@@ -356,7 +356,7 @@ describe('SourceManifestV2 cohort candidate builder', () => {
       candidateManifests: 144,
       catalogLinkedManifests: 140,
       reconciliationFallbackManifests: 4,
-      exactOfficialHttpsSources: 980,
+      exactOfficialHttpsSources: 997,
       targetsWithoutCandidate: 0,
     })
     expect(

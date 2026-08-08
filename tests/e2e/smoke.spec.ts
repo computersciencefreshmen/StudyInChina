@@ -83,7 +83,32 @@ test('the public program catalogue excludes draft templates', async ({ page }) =
   await expect(page.locator('.record-card')).toHaveCount(0)
 })
 
-test('a verified program page exposes complete facts, official sources and application route', async ({ page }) => {
+test('catalogue filters remain shareable and removable through browser history', async ({ page }) => {
+  await page.goto('/en/programs?degree=master&tuition=known', { waitUntil: 'domcontentloaded' })
+
+  await expect(page.locator('form[role="search"] details')).toHaveAttribute('open', '')
+  await expect(page.getByRole('link', { name: /Remove filter: Degree level/ })).toBeVisible()
+  const tuitionFilter = page.getByRole('link', { name: /Remove filter: Tuition data/ })
+  await expect(tuitionFilter).toBeVisible()
+  await Promise.all([
+    page.waitForURL((url) => url.searchParams.get('degree') === 'master' && !url.searchParams.has('tuition')),
+    tuitionFilter.click(),
+  ])
+
+  await expect(page).toHaveURL(/degree=master/)
+  expect(new URL(page.url()).searchParams.has('tuition')).toBe(false)
+  await page.goBack({ waitUntil: 'domcontentloaded' })
+  expect(new URL(page.url()).searchParams.get('tuition')).toBe('known')
+})
+
+test('a thin verified program stays reachable but is excluded from search indexing', async ({ page }) => {
+  const response = await page.goto('/en/programs/tsinghua-university-computer-science-bachelor', { waitUntil: 'domcontentloaded' })
+
+  expect(response?.ok()).toBe(true)
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
+})
+
+test('a complete program page exposes facts and a conservative official route', async ({ page }) => {
   const response = await page.goto('/en/programs/shanghai-jiao-tong-university-chinese-language-program-language', { waitUntil: 'domcontentloaded' })
 
   expect(response?.ok()).toBe(true)
@@ -91,7 +116,9 @@ test('a verified program page exposes complete facts, official sources and appli
   await expect(page.getByRole('heading', { name: 'Curriculum highlights' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Eligibility' })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Application materials' })).toBeVisible()
-  await expect(page.getByRole('link', { name: /View official application portal/ })).toHaveAttribute('href', /applychinese\.sjtu\.edu\.cn/)
+  await expect(page.getByRole('link', { name: /Official source/ }).first()).toHaveAttribute('href', /ichinese\.sjtu\.edu\.cn/)
+  await expect(page.getByRole('link', { name: /Apply on official site/ })).toHaveCount(0)
+  await expect(page.locator('meta[name="robots"]')).toHaveCount(0)
   await expect(page.locator('a[href="https://ichinese.sjtu.edu.cn/en/programs/10/detail"]')).toHaveAttribute('href', /ichinese\.sjtu\.edu\.cn/)
 })
 
@@ -101,8 +128,19 @@ test('a multi-cycle program promotes the next upcoming intake', async ({ page })
   expect(response?.ok()).toBe(true)
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Long-term Chinese Language Course')
   await expect(page.getByText('Opening soon', { exact: true }).first()).toBeVisible()
-  await expect(page.getByText('Dec 15, 2026', { exact: true })).toBeVisible()
-  await expect(page.getByRole('link', { name: /View official application portal/ })).toHaveAttribute('href', /applychinese\.sjtu\.edu\.cn/)
+  await expect(page.getByText('Dec 15, 2026', { exact: true }).first()).toBeVisible()
+  await expect(page.getByRole('link', { name: /Apply on official site/ })).toHaveCount(0)
+  await expect(page.getByRole('link', { name: /Official source/ }).first()).toHaveAttribute('href', /ichinese\.sjtu\.edu\.cn/)
+})
+
+test('a future scholarship deadline does not claim that applications are already open', async ({ page }) => {
+  const response = await page.goto('/en/scholarships/gdufs-iclt-one-semester-2027', { waitUntil: 'domcontentloaded' })
+
+  expect(response?.ok()).toBe(true)
+  await expect(page.getByText('Deadline ahead', { exact: true }).first()).toBeVisible()
+  await expect(page.getByRole('link', { name: /Apply on official site/ })).toHaveCount(0)
+  await expect(page.getByRole('link', { name: /Official application route/ }).first())
+    .toHaveClass(/atlas-button--secondary/)
 })
 
 test('a draft program detail is not publicly routable', async ({ page }) => {

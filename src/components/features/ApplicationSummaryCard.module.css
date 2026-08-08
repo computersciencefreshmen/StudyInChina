@@ -1,0 +1,122 @@
+.summary {
+  position: relative;
+  display: grid;
+  gap: 1.15rem;
+  overflow: hidden;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--atlas-jade-pale) 42%, transparent), transparent 48%),
+    var(--atlas-paper-bright);
+}
+
+.summary::after {
+  position: absolute;
+  inset: 0 0 auto auto;
+  width: 5.5rem;
+  aspect-ratio: 1;
+  content: '';
+  pointer-events: none;
+  opacity: .4;
+  background-image:
+    linear-gradient(90deg, var(--atlas-line) 1px, transparent 1px),
+    linear-gradient(var(--atlas-line) 1px, transparent 1px);
+  background-size: 1.1rem 1.1rem;
+  mask-image: linear-gradient(225deg, #000, transparent 72%);
+}
+
+.header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .8rem;
+}
+
+.eyebrow {
+  margin: 0 0 .35rem;
+  color: var(--atlas-vermilion-dark);
+  font-size: .69rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.title {
+  max-width: 14ch;
+  margin: 0;
+  color: var(--atlas-ink);
+  font-family: var(--atlas-font-display);
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  line-height: 1.08;
+}
+
+.facts {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  padding: 1px;
+  margin: 0;
+  overflow: hidden;
+  background: var(--atlas-line);
+  border: 1px solid var(--atlas-line);
+  border-radius: .75rem;
+}
+
+.fact {
+  min-width: 0;
+  padding: .85rem;
+  background: color-mix(in srgb, var(--atlas-paper-bright) 94%, transparent);
+}
+
+.fact:first-child {
+  grid-column: 1 / -1;
+  background: color-mix(in srgb, var(--atlas-jade-pale) 58%, var(--atlas-paper-bright));
+}
+
+.fact dt {
+  color: var(--atlas-muted);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.fact dd {
+  margin: .28rem 0 0;
+  overflow-wrap: anywhere;
+  color: var(--atlas-ink);
+  font-size: .92rem;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.fact:first-child dd {
+  font-family: var(--atlas-font-display);
+  font-size: 1.15rem;
+}
+
+.notice {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--atlas-muted);
+  font-size: .76rem;
+  line-height: 1.55;
+}
+
+.actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .65rem;
+  padding-top: .1rem;
+}
+
+@media (max-width: 560px) {
+  .facts { grid-template-columns: 1fr; }
+  .fact:first-child { grid-column: auto; }
+  .actions > * { width: 100%; justify-content: center; }
+}

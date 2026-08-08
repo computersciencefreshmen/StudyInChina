@@ -33,6 +33,7 @@ describe('official expansion semantic audit', () => {
       (program) => program.universityId === 'uni-nanjing-audit-university',
     )
     expect(nauPrograms.map((program) => program.id).sort()).toEqual([
+      'prog-gap-mve-ecma-nau-finance-master',
       'prog-gap-wave8-final-nau-chinese-language-nondegree',
       'program-nanjing-audit-university-master-of-auditing',
     ])

@@ -8,7 +8,6 @@ import sources from '../../content/data/sources.json'
 import universities from '../../content/data/universities.json'
 import wave6 from '../../quality/official-gap-wave-2026-07-30/wave6-priority-singletons.json'
 import { findSemanticProgramDuplicates } from '../../scripts/quality/check-program-coverage'
-import { selectAdmissionCycle } from '../../src/lib/data/admission'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
 
@@ -145,18 +144,22 @@ describe('priority singleton coverage wave 6 on 2026-07-31', () => {
       'wave6-ucas-computer-science-engineering-master',
       'wave6-ucas-environmental-science-engineering-master',
     ]) {
-      const selected = selectAdmissionCycle(
-        published.admissionCycles,
-        programId(candidateId),
-        TODAY,
+      const formalProgramId = programId(candidateId)
+      const stored = data.admissionCycles.find(
+        (cycle) => (
+          cycle.programId === formalProgramId && cycle.id.includes('fee-reference')
+        ),
       )
-      expect(selected, candidateId).toBeDefined()
-      expect(selected?.id, candidateId).toContain('fee-reference')
-      expect(selected?.tuitionCny, candidateId).toBe(30000)
-      expect(selected?.opensOn, candidateId).toBeNull()
-      expect(selected?.closesOn, candidateId).toBeNull()
-      expect(selected?.dateStatus, candidateId).toBe('not-announced')
-      expect(selected?.tuitionStatus, candidateId).toBe('reference')
+      expect(stored, candidateId).toBeDefined()
+      expect(stored?.status, candidateId).toBe('stale')
+      expect(stored?.tuitionCny, candidateId).toBe(30000)
+      expect(stored?.opensOn, candidateId).toBeNull()
+      expect(stored?.closesOn, candidateId).toBeNull()
+      expect(stored?.dateStatus, candidateId).toBe('not-announced')
+      expect(stored?.tuitionStatus, candidateId).toBe('reference')
+      expect(published.admissionCycles.some(
+        (cycle) => cycle.programId === formalProgramId,
+      ), candidateId).toBe(false)
     }
   })
 

@@ -6,6 +6,10 @@ import type {
   Scholarship,
   University,
 } from '@/lib/data/types'
+import {
+  readCatalogListCursorPageIndex,
+  validatedCatalogCursorHistory,
+} from '@/lib/catalog/list-cursor'
 import type { CatalogRepository, CatalogScholarshipListQuery } from '@/lib/catalog/types'
 
 export const SCHOLARSHIP_CATALOG_PAGE_SIZE = 24
@@ -370,19 +374,14 @@ export async function queryScholarshipCatalogRepository(
   today: string,
 ): Promise<ScholarshipCatalogResult> {
   let cursor = filters.cursor || undefined
-  const history = [...filters.cursorHistory]
-  let page = cursor ? filters.page : 1
-  while (!filters.cursor && page < filters.page) {
-    const preceding = await repository.listScholarships(
-      repositoryScholarshipQuery(filters, today, cursor),
-    )
-    if (!preceding.nextCursor) {
-      return repositoryScholarshipResult(preceding, filters, page, cursor, history)
-    }
-    history.push(cursor ?? '~')
-    cursor = preceding.nextCursor
-    page += 1
-  }
+  const cursorPageIndex = cursor
+    ? readCatalogListCursorPageIndex(cursor, 'scholarships')
+    : null
+  if (cursorPageIndex === null) cursor = undefined
+  const history = cursor
+    ? validatedCatalogCursorHistory(cursor, filters.cursorHistory, cursorPageIndex)
+    : []
+  const page = cursor && cursorPageIndex !== null ? cursorPageIndex : 1
   const result = await repository.listScholarships(
     repositoryScholarshipQuery(filters, today, cursor),
   )

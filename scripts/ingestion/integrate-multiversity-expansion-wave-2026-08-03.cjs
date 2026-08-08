@@ -302,6 +302,13 @@ function assertCycle(cycle, label) {
     throw new Error(`${label} has inconsistent open-cycle state`)
   }
 }
+
+function shouldQuarantineProgram(candidate) {
+  return candidate.recommendedAction === 'quarantine'
+    || candidate.riskFlags?.includes('catalog_level_candidate_requires_major_reconciliation')
+    || candidate.riskFlags?.includes('group_application_only')
+}
+
 function mergeStaticEntities(base, additions, kind) {
   const output = [...base]
   const byId = new Map(output.map((entity) => [entity.id, entity]))
@@ -397,11 +404,13 @@ function main() {
     ...mergedUniversities.map((university) => university.slug),
   ])
   const rawNewPrograms = packs.flatMap(({ bundle }) => bundle.programCandidates ?? bundle.programs ?? [])
-  const quarantinedPrograms = rawNewPrograms.filter((candidate) => (
-    candidate.recommendedAction === 'quarantine'
-      || candidate.riskFlags?.includes('catalog_level_candidate_requires_major_reconciliation')
-  ))
-  const newPrograms = rawNewPrograms.filter((candidate) => !quarantinedPrograms.includes(candidate))
+  const quarantinedPrograms = [...new Map(
+    [...merged.programCandidates, ...rawNewPrograms]
+      .filter(shouldQuarantineProgram)
+      .map((candidate) => [candidate.candidateId, candidate]),
+  ).values()]
+  const existingPrograms = merged.programCandidates.filter((candidate) => !shouldQuarantineProgram(candidate))
+  const newPrograms = rawNewPrograms.filter((candidate) => !shouldQuarantineProgram(candidate))
   const quarantinedProgramIds = new Set(quarantinedPrograms.map((item) => item.candidateId))
   const newScholarships = packs.flatMap(({ bundle }) => bundle.scholarshipCandidates ?? bundle.scholarships ?? [])
 
@@ -413,7 +422,7 @@ function main() {
   for (const candidate of rawNewPrograms) assertCandidate(candidate, 'program', universitySlugs)
   for (const candidate of newScholarships) assertCandidate(candidate, 'scholarship', universitySlugs)
 
-  const programResult = deduplicate([...merged.programCandidates, ...newPrograms], programKey, mergeProgram)
+  const programResult = deduplicate([...existingPrograms, ...newPrograms], programKey, mergeProgram)
   const canonicalPrograms = new Map(programResult.records.map((item) => [item.candidateId, item]))
   const droppedScholarshipProgramReferences = []
   const scholarshipInput = [...merged.scholarshipCandidates, ...newScholarships].map((candidate) => {

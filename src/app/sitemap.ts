@@ -1,20 +1,33 @@
 import type { MetadataRoute } from 'next'
 import { indexedLocales } from '@/i18n/config'
-import { getData } from '@/lib/data/load'
+import { getTodayDate } from '@/lib/data/freshness'
+import { getCatalogData } from '@/lib/data/load'
 import { getDataReleaseDate } from '@/lib/data/release'
 import { guides } from '@/lib/guides'
+import {
+  isIndexableCity,
+  isIndexableProgram,
+  isIndexableScholarship,
+} from '@/lib/seo/indexability'
 import { siteUrl } from '@/lib/site'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const data = getData()
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const data = await getCatalogData()
   const staticPaths = ['', 'universities', 'double-first-class', 'programs', 'scholarships', 'cities', 'guides', 'about', 'contact', 'privacy', 'disclaimer', 'data-policy', 'updates']
   const releaseDate = getDataReleaseDate(data)
+  const today = getTodayDate()
   const entries = [
     ...staticPaths.map((path) => ({ path, lastModified: releaseDate })),
     ...data.universities.map((item) => ({ path: `universities/${item.slug}`, lastModified: item.verifiedAt })),
-    ...data.programs.map((item) => ({ path: `programs/${item.slug}`, lastModified: item.verifiedAt })),
-    ...data.scholarships.map((item) => ({ path: `scholarships/${item.slug}`, lastModified: item.verifiedAt })),
-    ...data.cities.map((item) => ({ path: `cities/${item.slug}`, lastModified: item.verifiedAt })),
+    ...data.programs
+      .filter((item) => isIndexableProgram(item, data.admissionCycles, today))
+      .map((item) => ({ path: `programs/${item.slug}`, lastModified: item.verifiedAt })),
+    ...data.scholarships
+      .filter(isIndexableScholarship)
+      .map((item) => ({ path: `scholarships/${item.slug}`, lastModified: item.verifiedAt })),
+    ...data.cities
+      .filter((item) => isIndexableCity(item, data.universities))
+      .map((item) => ({ path: `cities/${item.slug}`, lastModified: item.verifiedAt })),
     ...guides.map((item) => ({ path: `guides/${item.slug}`, lastModified: item.updatedAt })),
   ]
   return entries.flatMap(({ path, lastModified }) => indexedLocales.map((locale) => {

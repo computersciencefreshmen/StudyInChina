@@ -128,16 +128,18 @@ describe('Chinese-language degree and scholarship expansion on 2026-08-02', () =
     }
   })
 
-  it('retains the two newly verified future Chinese-study application cycles', () => {
+  it('retains only the individually applicable future Chinese-study cycle', () => {
     const expectedProgramIds = new Set([
-      'prog-gap-clw-sw-gdufs-chinese-four-week-december',
       'prog-gap-clw-sw-hainanu-chinese-culture-semester',
     ])
+    const groupOnlyProgramId = 'prog-gap-clw-sw-gdufs-chinese-four-week-december'
     const futureCycles = published.admissionCycles.filter((cycle) => (
       expectedProgramIds.has(cycle.programId)
         && cycle.closesOn !== null
         && cycle.closesOn >= TODAY
     ))
     expect(new Set(futureCycles.map((cycle) => cycle.programId))).toEqual(expectedProgramIds)
+    expect(published.programs.some((program) => program.id === groupOnlyProgramId)).toBe(false)
+    expect(published.admissionCycles.some((cycle) => cycle.programId === groupOnlyProgramId)).toBe(false)
   })
 })

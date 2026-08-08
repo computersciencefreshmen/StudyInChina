@@ -35,12 +35,12 @@ The product is built around three promises:
 
 <div align="center">
 
-| **257** universities | **1,152** programs | **332** scholarships | **60** cities |
+| **266** universities | **1,211** programs | **355** scholarships | **62** cities |
 |:---:|:---:|:---:|:---:|
 
 </div>
 
-The public catalogue also contains **326 published admission-cycle records** and is backed by **1,928 registered official source records**. Snapshot evaluated for **2026-08-07** with `npm run quality:platform-scorecard`.
+The public catalogue also contains **345 published admission-cycle records** and is backed by **2,037 registered official source records**. Snapshot evaluated for **2026-08-08** with `npm run quality:platform-scorecard`.
 
 <details>
 <summary><strong>Open the honest data-depth scorecard</strong></summary>
@@ -49,18 +49,18 @@ Record count is not the same as record completeness. These are the current depth
 
 | Quality indicator | Current baseline | Next gate |
 |---|---:|---:|
-| Programs with a current public cycle | 318 / 1,152 · **27.6%** | ≥ 70% |
-| Programs with duration | **61.72%** | ≥ 90% |
-| Programs with an official application route | **53.3%** | ≥ 80% |
-| Programs with known teaching language | **86.63%** | ≥ 95% |
-| Programs with eligibility/language evidence | **6.42%** | ≥ 50% |
-| Universities connected to scholarships | 192 / 257 | ≥ 230 |
-| Cities with reviewed coordinates | 27 / 60 | 60 / 60 |
-| Complete Source Manifests | 10 / 257 | 257 / 257 |
-| Complete catalogue reconciliation | 0 / 257 | 257 / 257 |
+| Programs with a current public cycle | 337 / 1,211 · **27.83%** | ≥ 70% |
+| Programs with duration | **61.93%** | ≥ 90% |
+| Programs with an official application route | **50.87%** | ≥ 80% |
+| Programs with known teaching language | **85.96%** | ≥ 95% |
+| Programs with eligibility/language evidence | **6.11%** | ≥ 50% |
+| Universities connected to scholarships | 205 / 266 | ≥ 230 |
+| Cities with reviewed coordinates | 27 / 62 | 62 / 62 |
+| Complete Source Manifests | 10 / 266 | 266 / 266 |
+| Complete catalogue reconciliation | 0 / 266 | 266 / 266 |
 | Platform quality gates passing | 3 / 14 | 14 / 14 |
 
-The raw compatibility dataset contains 263 universities, 1,173 programs and 358 scholarships. Draft, archived, identity-conflicting or publication-ineligible records are intentionally excluded from the public numbers above.
+The raw compatibility dataset contains 272 universities, 1,232 programs and 381 scholarships. Draft, archived, identity-conflicting or publication-ineligible records are intentionally excluded from the public numbers above.
 
 </details>
 
@@ -68,7 +68,9 @@ The raw compatibility dataset contains 263 universities, 1,173 programs and 358 
 
 - Browse universities, programs, scholarships and student cities in one coherent interface.
 - Explore programs through a 17-field, applicant-oriented taxonomy, including Chinese language and international Chinese education.
-- Share URL-based filters, sorting and pagination without losing search state.
+- Share URL-based filters, sorting and pagination; remove active filters individually and preserve browser history.
+- Move from application state and deadline to fees, language and duration through decision-first cards and detail-page application snapshots.
+- Keep identity-only records available for official discovery while excluding thin pages from search-engine indexing until they meet deterministic completeness gates.
 - Save records locally, compare up to four programs and print a compact comparison sheet.
 - Inspect field-level source links, last-check dates and uncertainty states.
 - Use English, Chinese and Russian public routes; German, French and Spanish are the first reviewed expansion routes.
@@ -267,8 +269,8 @@ See [`docs/platform-rollout.md`](./docs/platform-rollout.md), [`docs/backup-and-
 
 ```mermaid
 flowchart LR
-    N["Now<br/>257 public universities"] --> D["Data depth<br/>70% current-cycle coverage"]
-    D --> T["Trust coverage<br/>257 manifests + reconciliations"]
+    N["Now<br/>266 public universities"] --> D["Data depth<br/>70% current-cycle coverage"]
+    D --> T["Trust coverage<br/>266 manifests + reconciliations"]
     T --> C["D1 cutover<br/>3 releases / 72h shadow parity"]
     C --> F["500 universities<br/>after 2 healthy monthly cycles"]
     F --> K["1000+ universities<br/>quality- and cost-gated"]
@@ -276,11 +278,11 @@ flowchart LR
 
 Near-term work is measured by:
 
-- raising the remaining 31 sparse universities to 3–5 verified international-student programs or a documented `limited` reconciliation;
-- increasing current-cycle coverage from 27.6% to at least 70%;
+- raising the remaining 17 sparse universities to 3–5 verified international-student programs or a documented `limited` reconciliation;
+- increasing current-cycle coverage from 27.83% to at least 70%;
 - reaching 90% duration, 80% official application-route and 95% teaching-language coverage;
-- expanding scholarship-connected institutions from 192 to at least 230;
-- completing 257 Source Manifests and 257 catalogue reconciliations;
+- expanding scholarship-connected institutions from 205 to at least 230;
+- completing 266 Source Manifests and 266 catalogue reconciliations;
 - completing three matching shadow releases over at least 72 hours before Production switches to D1;
 - passing two full monthly update cycles before expansion to 500, then 1,000+ institutions.
 

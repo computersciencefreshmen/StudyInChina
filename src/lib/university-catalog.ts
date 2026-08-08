@@ -1,5 +1,9 @@
 import { normalizeProgramField } from '@/lib/data/fields'
 import type { Region } from '@/lib/data/types'
+import {
+  readCatalogListCursorPageIndex,
+  validatedCatalogCursorHistory,
+} from '@/lib/catalog/list-cursor'
 import type {
   CatalogInstitutionListItem,
   CatalogInstitutionListQuery,
@@ -132,9 +136,15 @@ export async function queryUniversityCatalogRepository(
   repository: CatalogRepository,
   filters: UniversityCatalogFilters,
 ): Promise<UniversityCatalogResult> {
-  const cursor = filters.cursor || undefined
-  const page = cursor ? filters.page : 1
-  const history = cursor ? [...filters.cursorHistory] : []
+  let cursor = filters.cursor || undefined
+  const cursorPageIndex = cursor
+    ? readCatalogListCursorPageIndex(cursor, 'institutions')
+    : null
+  if (cursorPageIndex === null) cursor = undefined
+  const history = cursor
+    ? validatedCatalogCursorHistory(cursor, filters.cursorHistory, cursorPageIndex)
+    : []
+  const page = cursor && cursorPageIndex !== null ? cursorPageIndex : 1
   const pageResult = await repository.listInstitutions(
     repositoryInstitutionQuery(filters, cursor),
   )

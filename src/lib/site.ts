@@ -23,7 +23,17 @@ export function requireLocale(value: string): LaunchLocale | null {
   return isPublicLocale(value) ? value : null
 }
 
-export function pageMetadata(locale: LaunchLocale, title: string, description: string, path = ''): Metadata {
+type PageMetadataOptions = {
+  indexable?: boolean
+}
+
+export function pageMetadata(
+  locale: LaunchLocale,
+  title: string,
+  description: string,
+  path = '',
+  options: PageMetadataOptions = {},
+): Metadata {
   const messages = getMessages(locale)
   const suffix = title === messages.brand ? title : `${title} | ${messages.brand}`
   const localizedPath = path ? `/${locale}/${path.replace(/^\//, '')}` : `/${locale}`
@@ -32,7 +42,9 @@ export function pageMetadata(locale: LaunchLocale, title: string, description: s
   return {
     title: suffix,
     description,
-    robots: isBetaLocale(locale) ? { index: false, follow: true } : undefined,
+    robots: isBetaLocale(locale) || options.indexable === false
+      ? { index: false, follow: true }
+      : undefined,
     alternates: { canonical: localizedPath, languages: { ...languages, 'x-default': `/en${path ? `/${path.replace(/^\//, '')}` : ''}` } },
     openGraph: { title: suffix, description, url: localizedPath, siteName: messages.brand, type: 'website', locale: getLocaleConfig(locale).openGraphLocale },
     twitter: { card: 'summary_large_image', title: suffix, description },

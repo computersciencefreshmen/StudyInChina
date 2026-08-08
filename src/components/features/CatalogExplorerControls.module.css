@@ -1,0 +1,149 @@
+.summary {
+  display: grid;
+  gap: .75rem;
+  margin: 0 0 1rem;
+  padding-block: .85rem;
+  border-block: 1px solid var(--line);
+}
+
+.range {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .25rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.range strong {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: -.02em;
+}
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+}
+
+.filterTitle {
+  color: var(--muted);
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.chipList {
+  display: flex;
+  flex: 1 1 20rem;
+  flex-wrap: wrap;
+  gap: .4rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.chip {
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  gap: .35rem;
+  padding: .32rem .62rem;
+  color: var(--ink-soft);
+  background: color-mix(in srgb, var(--jade) 7%, var(--paper-light));
+  border: 1px solid color-mix(in srgb, var(--jade) 45%, var(--line));
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.chip span {
+  color: var(--jade-dark);
+  font-size: .9rem;
+}
+
+.chip:hover {
+  background: color-mix(in srgb, var(--jade) 13%, var(--paper-light));
+  border-color: var(--jade);
+  transform: translateY(-1px);
+}
+
+.chip:focus-visible,
+.clear:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--jade) 25%, transparent);
+  outline-offset: 2px;
+}
+
+.clear {
+  color: var(--vermilion-dark);
+  font-size: .75rem;
+  font-weight: 800;
+  text-underline-offset: .22rem;
+}
+
+.pagination {
+  display: grid;
+  grid-template-columns: minmax(7rem, 1fr) auto minmax(7rem, 1fr);
+  align-items: center;
+  gap: 1rem;
+}
+
+.paginationTop {
+  margin: 0 0 1.2rem;
+}
+
+.paginationBottom {
+  margin: 1.5rem 0 0;
+}
+
+.pagination > :last-child {
+  justify-self: end;
+}
+
+.page {
+  color: var(--ink-soft);
+  font-size: .8rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.placeholder {
+  min-width: 1px;
+  min-height: 1px;
+}
+
+@media (max-width: 560px) {
+  .filterRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .chipList {
+    flex-basis: auto;
+  }
+
+  .pagination {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: .45rem;
+  }
+
+  .pagination a {
+    min-width: 0;
+    padding-inline: .65rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip {
+    transition: none;
+  }
+}
