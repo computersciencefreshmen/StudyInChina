@@ -394,7 +394,7 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(r2Reads).toBe(0)
   }, 30_000)
 
-  it('filters and sorts scholarships with exact metadata and query-bound cursors', async () => {
+  it('filters scholarship funding with exact metadata and query-bound cursors', async () => {
     const fundedResponse = await worker.fetch(
       new Request('https://catalog.test/api/v1/scholarships?funding=full-tuition&limit=1'),
       environment,
@@ -413,7 +413,9 @@ describe('Catalog D1 normalized v1 API', () => {
       environment,
     )
     expect(mismatchedCursor.status).toBe(400)
+  }, 30_000)
 
+  it('sorts scholarship stipends and resolves the selected detail slug', async () => {
     const stipendResponse = await worker.fetch(
       new Request('https://catalog.test/api/v1/scholarships?funding=stipend&sort=stipend-desc&limit=20'),
       environment,
@@ -432,7 +434,9 @@ describe('Catalog D1 normalized v1 API', () => {
     const sortedDetail = await sortedDetailResponse.json() as ApiEnvelopeDto<ScholarshipDto>
     expect(sortedDetailResponse.status).toBe(200)
     expect(sortedDetail.data.id).toBe(stipend.data[0]!.id)
+  }, 30_000)
 
+  it('filters scholarships by future deadline and normalized degree scope', async () => {
     const futureResponse = await worker.fetch(
       new Request('https://catalog.test/api/v1/scholarships?deadline=future&limit=100'),
       environment,
