@@ -19,6 +19,14 @@ export function getTodayDate(now = new Date()): string {
   return `${values.year}-${values.month}-${values.day}`
 }
 
+/** Resolves an optional deterministic override against the canonical China calendar. */
+export function resolveDataValidationDate(
+  explicitDate: string | undefined,
+  now = new Date(),
+): string {
+  return (explicitDate || getTodayDate(now)).slice(0, 10)
+}
+
 export function getFreshnessState(
   record: Pick<AuditMeta, 'reviewAfter'>,
   today = getTodayDate(),

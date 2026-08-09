@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { resolveDataValidationDate } from '../../scripts/quality/data-validation-date'
+import { resolveDataValidationDate } from '../../src/lib/data/freshness'
 
 describe('data validation calendar date', () => {
   it('rolls over at midnight in Asia/Shanghai rather than midnight UTC', () => {
