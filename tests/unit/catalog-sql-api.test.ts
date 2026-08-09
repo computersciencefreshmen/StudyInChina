@@ -173,7 +173,29 @@ describe('Catalog D1 normalized v1 API', () => {
 
     expect(response.status, JSON.stringify(payload)).toBe(200)
     expect(payload.data.length).toBeGreaterThan(0)
-    expect(queries.some(({ sql }) => sql.includes('FROM current_scholarships AS scholarship'))).toBe(true)
+    const linkedScopeQueries = queries.filter(({ sql }) =>
+      sql.includes('selected_scholarships AS MATERIALIZED'),
+    )
+    expect(linkedScopeQueries).toHaveLength(4)
+    expect(linkedScopeQueries.every(({ sql }) =>
+      (sql.match(/selected_scholarships AS MATERIALIZED/gu) ?? []).length === 1,
+    )).toBe(true)
+    expect(linkedScopeQueries.every(({ sql }) =>
+      sql.includes('FROM current_scholarships AS scholarship'),
+    )).toBe(true)
+    expect(linkedScopeQueries.every(({ sql }) =>
+      sql.includes('normalized_cycles AS MATERIALIZED'),
+    )).toBe(true)
+    expect(linkedScopeQueries.every(({ sql }) =>
+      sql.includes('CROSS JOIN record_field_status AS scope'),
+    )).toBe(true)
+    expect(linkedScopeQueries.every(({ sql }) =>
+      sql.includes('CROSS JOIN programs AS scoped_program'),
+    )).toBe(true)
+    expect(linkedScopeQueries.some(({ sql }) =>
+      sql.includes('FROM current_programs AS scoped_program')
+      || sql.includes('FROM current_scholarship_cycles AS'),
+    )).toBe(false)
     expect(queries.some(({ values }) => values.includes('linked'))).toBe(false)
   }, 30_000)
 
