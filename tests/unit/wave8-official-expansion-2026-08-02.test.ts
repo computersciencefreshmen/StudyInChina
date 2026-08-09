@@ -15,6 +15,7 @@ import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
 
 const TODAY = '2026-08-02'
+const CURRENT_PUBLICATION_DATE = '2026-08-10'
 const packDirectory = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '../../quality/official-gap-wave-2026-08-02',
@@ -62,15 +63,25 @@ describe('official catalog expansion wave 8 on 2026-08-02', () => {
     expect(published.programs.length).toBeGreaterThanOrEqual(845)
   })
 
-  it('publishes every non-duplicate wave 8 candidate', () => {
-    const programIds = new Set(published.programs.map((item) => item.id))
-    const scholarshipIds = new Set(published.scholarships.map((item) => item.id))
+  it('materializes every non-duplicate candidate and excludes stale scholarships', () => {
+    const programIds = new Set(data.programs.map((item) => item.id))
+    const scholarshipById = new Map(data.scholarships.map((item) => [item.id, item]))
+    const currentScholarshipIds = new Set(
+      selectPublishedData(data, CURRENT_PUBLICATION_DATE).scholarships.map((item) => item.id),
+    )
 
     for (const candidate of programCandidates) {
       expect(programIds.has(`prog-gap-${candidate.candidateId}`), candidate.candidateId).toBe(true)
     }
     for (const candidate of scholarshipCandidates) {
-      expect(scholarshipIds.has(`sch-gap-${candidate.candidateId}`), candidate.candidateId).toBe(true)
+      const scholarshipId = `sch-gap-${candidate.candidateId}`
+      const scholarship = scholarshipById.get(scholarshipId)
+      expect(scholarship, candidate.candidateId).toBeDefined()
+      if (scholarship?.status === 'stale') {
+        expect(currentScholarshipIds.has(scholarshipId), candidate.candidateId).toBe(false)
+      } else {
+        expect(currentScholarshipIds.has(scholarshipId), candidate.candidateId).toBe(true)
+      }
     }
   })
 

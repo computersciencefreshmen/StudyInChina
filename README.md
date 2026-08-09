@@ -35,12 +35,12 @@ The product is built around three promises:
 
 <div align="center">
 
-| **266** universities | **1,234** programs | **358** scholarships | **62** cities |
+| **266** universities | **1,234** programs | **356** scholarships | **62** cities |
 |:---:|:---:|:---:|:---:|
 
 </div>
 
-The public catalogue also contains **356 published admission-cycle records** and is backed by **2,070 registered official source records**. Snapshot evaluated for **2026-08-08** with `npm run quality:platform-scorecard`.
+The public catalogue also contains **256 published admission-cycle records** and is backed by **2,070 registered official source records**. Snapshot evaluated for **2026-08-10** with `npm run quality:platform-scorecard`.
 
 <details>
 <summary><strong>Open the honest data-depth scorecard</strong></summary>
@@ -50,12 +50,12 @@ Record count is not the same as record completeness. These are the current depth
 | Quality indicator | Current baseline | Next gate |
 |---|---:|---:|
 | Universities below three published programs | **8** | 0 |
-| Programs with a current public cycle | 348 / 1,234 · **28.20%** | ≥ 70% |
+| Programs with a current public cycle | 253 / 1,234 · **20.50%** | ≥ 70% |
 | Programs with duration | **61.59%** | ≥ 90% |
 | Programs with an official application route | **50.89%** | ≥ 80% |
 | Programs with known teaching language | **85.09%** | ≥ 95% |
 | Programs with eligibility/language evidence | **6.00%** | ≥ 50% |
-| Universities connected to scholarships | 208 / 266 | ≥ 230 |
+| Universities connected to scholarships | 207 / 266 | ≥ 230 |
 | Cities with reviewed coordinates | 27 / 62 | 62 / 62 |
 | Source Manifests registered | 10 / 266 | 266 / 266 |
 | Completed V2 Source Manifests | 0 / 266 | 266 / 266 |
@@ -283,9 +283,9 @@ flowchart LR
 Near-term work is measured by:
 
 - raising the remaining 8 sparse universities to 3–5 verified international-student programs or a documented `limited` reconciliation;
-- increasing current-cycle coverage from 28.20% to at least 70%;
+- increasing current-cycle coverage from 20.50% to at least 70%;
 - reaching 90% duration, 80% official application-route and 95% teaching-language coverage;
-- expanding scholarship-connected institutions from 208 to at least 230;
+- expanding scholarship-connected institutions from 207 to at least 230;
 - completing 266 Source Manifests and 266 catalogue reconciliations;
 - completing three matching shadow releases over at least 72 hours before Production switches to D1;
 - passing two full monthly update cycles before expansion to 500, then 1,000+ institutions.

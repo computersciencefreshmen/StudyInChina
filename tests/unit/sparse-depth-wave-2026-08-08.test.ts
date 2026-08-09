@@ -240,7 +240,9 @@ describe('evidence-first sparse-school depth wave on 2026-08-08', () => {
       .toBeLessThanOrEqual(8)
     expect(published.universities.length).toBeGreaterThanOrEqual(266)
     expect(published.programs.length).toBeGreaterThanOrEqual(1_234)
-    expect(published.scholarships.length).toBeGreaterThanOrEqual(358)
+    expect(data.scholarships.filter(
+      (scholarship) => scholarship.status === 'verified' || scholarship.status === 'stale',
+    ).length).toBeGreaterThanOrEqual(358)
   })
 
   it('keeps all eleven fee references explicitly date-free and non-open', () => {

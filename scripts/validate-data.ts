@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { bundleSchema } from '../src/lib/data/schema'
+import { resolveDataValidationDate } from './quality/data-validation-date'
 
 const read = (name: string) => JSON.parse(readFileSync(join(process.cwd(), 'content', 'data', `${name}.json`), 'utf8'))
 const result = bundleSchema.safeParse({ sources: read('sources'), cities: read('cities'), universities: read('universities'), programs: read('programs'), admissionCycles: read('admission-cycles'), scholarships: read('scholarships') })
@@ -11,7 +12,7 @@ if (!result.success) {
 }
 
 const data = result.data
-const today = (process.env.DATA_VALIDATION_DATE || new Date().toISOString()).slice(0, 10)
+const today = resolveDataValidationDate()
 const audited = [...data.cities, ...data.universities, ...data.programs, ...data.admissionCycles, ...data.scholarships]
 const overdueVerified = audited.filter((item) => item.status === 'verified' && item.reviewAfter < today)
 if (overdueVerified.length) {
