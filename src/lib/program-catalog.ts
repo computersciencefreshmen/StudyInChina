@@ -34,6 +34,7 @@ const TUITION_FILTERS = new Set([
   '20000-40000',
   'over-40000',
 ])
+const SCHOLARSHIP_FILTERS = new Set(['linked'])
 const SORT_ORDERS = new Set([
   'default',
   'name',
@@ -53,6 +54,7 @@ export type ProgramCatalogFilters = {
   intake: string
   tuition: string
   applicationState: string
+  scholarship: string
   sort: string
   page: number
   cursor: string
@@ -129,6 +131,7 @@ export function parseProgramCatalogFilters(
     intake: allowed(bounded(params.intake), INTAKES),
     tuition: allowed(bounded(params.tuition), TUITION_FILTERS),
     applicationState: allowed(applicationState, APPLICATION_STATES),
+    scholarship: allowed(bounded(params.scholarship), SCHOLARSHIP_FILTERS),
     sort: allowed(bounded(params.sort), SORT_ORDERS) || 'default',
     cursor: cursorValue(params.cursor),
     cursorHistory: cursorHistory(params.cursorHistory),
@@ -305,6 +308,7 @@ function repositoryProgramQuery(
     intake: filters.intake || undefined,
     tuition: filters.tuition || undefined,
     applicationState: filters.applicationState || undefined,
+    scholarship: filters.scholarship || undefined,
     sort: filters.sort === 'default' ? undefined : filters.sort,
     cursor,
     limit: PROGRAM_CATALOG_PAGE_SIZE,
@@ -405,6 +409,7 @@ export function programCatalogHref(
     ['intake', filters.intake],
     ['tuition', filters.tuition],
     ['applicationState', filters.applicationState],
+    ['scholarship', filters.scholarship],
     ['sort', filters.sort === 'default' ? '' : filters.sort],
   ]
   for (const [key, value] of values) if (value) params.set(key, value)

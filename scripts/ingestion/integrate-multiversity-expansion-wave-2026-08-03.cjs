@@ -178,7 +178,9 @@ function cycleUnion(left = [], right = []) {
 }
 
 function mergeProgram(left, right) {
-  const primary = candidateScore(right) > candidateScore(left) ? right : left
+  const primary = left.candidateId === right.candidateId
+    ? right
+    : candidateScore(right) > candidateScore(left) ? right : left
   const secondary = primary === left ? right : left
   return {
     ...primary,
@@ -203,7 +205,9 @@ function mergeProgram(left, right) {
 }
 
 function mergeScholarship(left, right) {
-  const primary = scholarshipScore(right) > scholarshipScore(left) ? right : left
+  const primary = left.candidateId === right.candidateId
+    ? right
+    : scholarshipScore(right) > scholarshipScore(left) ? right : left
   const secondary = primary === left ? right : left
   const tiers = [...new Set([...(primary.funding?.tiers ?? []), ...(secondary.funding?.tiers ?? [])])]
   return {
@@ -228,6 +232,9 @@ function mergeScholarship(left, right) {
       status: tiers.length > 0 ? 'known' : primary.funding?.status ?? secondary.funding?.status,
       tiers,
     },
+    applicationUrl: Object.hasOwn(right, 'applicationUrl')
+      ? right.applicationUrl
+      : primary.applicationUrl ?? secondary.applicationUrl,
     cycles: cycleUnion(primary.cycles, secondary.cycles),
     additionalEvidence: evidenceUnion(primary, secondary),
     sourceFiles: [...new Set([...(primary.sourceFiles ?? []), ...(secondary.sourceFiles ?? [])])].sort(),

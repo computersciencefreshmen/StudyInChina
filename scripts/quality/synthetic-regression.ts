@@ -70,6 +70,13 @@ function digest(value: Buffer): string {
   return createHash('sha256').update(value).digest('hex')
 }
 
+export function canonicalSyntheticFixtureBytes(value: Buffer): Buffer {
+  // These fixtures are text/HTML/JSON. Git may materialize them with CRLF on
+  // Windows, so the integrity contract hashes canonical UTF-8 with LF endings.
+  // Content changes remain protected while checkout policy stays irrelevant.
+  return Buffer.from(value.toString('utf8').replaceAll('\r\n', '\n'), 'utf8')
+}
+
 function sorted(values: readonly string[]): string[] {
   return [...values].sort((left, right) => left.localeCompare(right))
 }
@@ -207,7 +214,9 @@ export function runSyntheticRegression(
     if (fixture.officialGoldEligible !== false) {
       throw new Error(`${fixture.fixtureId}: synthetic fixture cannot be official gold`)
     }
-    const bytes = readFileSync(fixturePath(projectRoot, fixture.inputPath))
+    const bytes = canonicalSyntheticFixtureBytes(
+      readFileSync(fixturePath(projectRoot, fixture.inputPath)),
+    )
     if (digest(bytes) !== fixture.sha256) {
       throw new Error(`${fixture.fixtureId}: fixture checksum mismatch`)
     }

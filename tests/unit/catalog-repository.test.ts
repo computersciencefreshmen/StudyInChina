@@ -17,6 +17,7 @@ import {
   type CatalogRepository,
 } from '@/lib/catalog'
 import { getDataReleaseDate } from '@/lib/data/release'
+import { selectPublishedData } from '@/lib/data/publication'
 import { bundleSchema } from '@/lib/data/schema'
 import type { DataBundle } from '@/lib/data/types'
 
@@ -73,6 +74,37 @@ describe('CatalogRepository', () => {
       generatedAt: `${expectedDataDate}T00:00:00.000Z`,
       recordCounts: getCatalogRecordCounts(allData),
     })
+  })
+
+  it('filters JSON programs by linked or specifically selected published scholarship scopes', async () => {
+    const today = '2026-08-08'
+    const repository = createJsonCatalogRepository(() => copyBundle())
+    const published = selectPublishedData(copyBundle(), today)
+    const linked = await repository.listPrograms({
+      scholarship: 'linked',
+      today,
+      limit: 100,
+    })
+
+    expect(linked.total).toBeGreaterThan(0)
+    expect(linked.items.every(({ program }) => published.scholarships.some((scholarship) => (
+      scholarship.programIds.includes(program.id)
+      || scholarship.universityIds.includes(program.universityId)
+    )))).toBe(true)
+
+    const selected = published.scholarships.find((scholarship) => (
+      scholarship.programIds.length > 0 || scholarship.universityIds.length > 0
+    ))!
+    const scoped = await repository.listPrograms({
+      scholarship: selected.slug,
+      today,
+      limit: 100,
+    })
+    expect(scoped.total).toBeGreaterThan(0)
+    expect(scoped.items.every(({ program }) => (
+      selected.programIds.includes(program.id)
+      || selected.universityIds.includes(program.universityId)
+    ))).toBe(true)
   })
 
   it('reads the internal D1 Catalog API envelope with an optional bearer token', async () => {

@@ -221,6 +221,23 @@ export class JsonCatalogRepository implements CatalogRepository {
   async listPrograms(query: CatalogProgramListQuery = {}): Promise<CatalogProgramListPage> {
     const today = query.today ?? getTodayDate()
     const data = selectPublishedData(await this.getBundle(), today)
+    const requestedScholarships = query.scholarship === 'linked'
+      ? data.scholarships
+      : query.scholarship
+        ? data.scholarships.filter((item) => (
+            item.id === query.scholarship || item.slug === query.scholarship
+          ))
+        : []
+    const linkedProgramIds = new Set(requestedScholarships.flatMap((item) => item.programIds))
+    const linkedUniversityIds = new Set(requestedScholarships.flatMap((item) => item.universityIds))
+    const filteredData = query.scholarship
+      ? {
+          ...data,
+          programs: data.programs.filter((program) => (
+            linkedProgramIds.has(program.id) || linkedUniversityIds.has(program.universityId)
+          )),
+        }
+      : data
     const limit = listLimit(query.limit)
     const page = requestedPage('programs', query)
     const degree = query.degree
@@ -236,11 +253,12 @@ export class JsonCatalogRepository implements CatalogRepository {
         intake: query.intake,
         tuition: query.tuition,
         applicationState: query.applicationState,
+        scholarship: query.scholarship,
         sort: query.sort,
       }),
       page,
     }
-    const result = queryProgramCatalog(data, filters, today, limit)
+    const result = queryProgramCatalog(filteredData, filters, today, limit)
     if (page > 1 && result.page !== page) {
       throw new CatalogRepositoryError('INVALID_LIST_CURSOR', 'Catalog list cursor is outside the result set.')
     }

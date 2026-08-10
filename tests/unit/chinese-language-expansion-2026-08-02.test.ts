@@ -15,6 +15,7 @@ import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
 
 const TODAY = '2026-08-02'
+const CURRENT_PUBLICATION_DATE = '2026-08-10'
 const packDirectory = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '../../quality/chinese-language-wave-2026-08-02',
@@ -128,18 +129,24 @@ describe('Chinese-language degree and scholarship expansion on 2026-08-02', () =
     }
   })
 
-  it('retains only the individually applicable future Chinese-study cycle', () => {
+  it('retains the reviewed future-cycle facts while excluding their stale release', () => {
     const expectedProgramIds = new Set([
       'prog-gap-clw-sw-hainanu-chinese-culture-semester',
     ])
     const groupOnlyProgramId = 'prog-gap-clw-sw-gdufs-chinese-four-week-december'
-    const futureCycles = published.admissionCycles.filter((cycle) => (
+    const storedFutureCycles = data.admissionCycles.filter((cycle) => (
       expectedProgramIds.has(cycle.programId)
         && cycle.closesOn !== null
         && cycle.closesOn >= TODAY
     ))
-    expect(new Set(futureCycles.map((cycle) => cycle.programId))).toEqual(expectedProgramIds)
-    expect(published.programs.some((program) => program.id === groupOnlyProgramId)).toBe(false)
-    expect(published.admissionCycles.some((cycle) => cycle.programId === groupOnlyProgramId)).toBe(false)
+    expect(new Set(storedFutureCycles.map((cycle) => cycle.programId))).toEqual(expectedProgramIds)
+    expect(storedFutureCycles.every((cycle) => cycle.status === 'stale')).toBe(true)
+
+    const currentPublished = selectPublishedData(data, CURRENT_PUBLICATION_DATE)
+    expect(currentPublished.admissionCycles.some(
+      (cycle) => expectedProgramIds.has(cycle.programId),
+    )).toBe(false)
+    expect(data.programs.some((program) => program.id === groupOnlyProgramId)).toBe(false)
+    expect(data.admissionCycles.some((cycle) => cycle.programId === groupOnlyProgramId)).toBe(false)
   })
 })

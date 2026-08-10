@@ -21,7 +21,6 @@ jobs:
     env:
       DEPLOYMENT_SHA: ${{ github.event.deployment.sha }}
       DEPLOYMENT_URL: ${{ github.event.deployment_status.environment_url }}
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
     steps:
       - name: Check out current main
@@ -48,17 +47,26 @@ jobs:
           echo 'matches=false' >> "$GITHUB_OUTPUT"
           echo "::notice::Deployment ${DEPLOYMENT_SHA} is not current main ${main_sha}; the stable alias will not be changed."
 
-      - name: Detect alias credential
+      - name: Require stable-alias credential
         if: steps.main.outputs.matches == 'true'
         id: credential
         shell: bash
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           set -euo pipefail
           if [[ -n "${VERCEL_TOKEN}" ]]; then
             echo 'configured=true' >> "$GITHUB_OUTPUT"
           else
-            echo 'configured=false' >> "$GITHUB_OUTPUT"
-            echo '::warning::VERCEL_TOKEN is not configured; the Vercel Git deployment succeeded but the explicit studyinchina.vercel.app alias was not reassigned.'
+            echo '::error title=Stable production alias was not promoted::VERCEL_TOKEN is not configured. The Vercel deployment may be Ready, but studyinchina.vercel.app was not reassigned or smoke-tested by this workflow. See docs/operations/data-maintenance.md#required-github-actions-secrets.'
+            {
+              echo '## Stable production alias was not promoted'
+              echo
+              echo 'The deployment succeeded, but this workflow cannot reassign or verify `studyinchina.vercel.app` without the `VERCEL_TOKEN` repository secret.'
+              echo
+              echo 'This job fails intentionally so a green check cannot be mistaken for a completed production promotion.'
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 1
           fi
 
       - name: Validate deployment URL
@@ -73,6 +81,24 @@ jobs:
             exit 1
           fi
 
+      - name: Verify immutable deployment release API
+        if: >-
+          steps.main.outputs.matches == 'true' &&
+          steps.credential.outputs.configured == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          release_api="${DEPLOYMENT_URL%/}/api/v1/releases/current"
+          for attempt in 1 2 3 4 5 6; do
+            if curl --fail --silent --show-error "${release_api}" \
+              | jq -e '.data.id and .data.recordCounts.programs' >/dev/null; then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo 'The immutable Vercel deployment did not pass the release API smoke test; the stable alias was not changed.' >&2
+          exit 1
+
       - name: Use Node.js 24
         if: >-
           steps.main.outputs.matches == 'true' &&
@@ -86,6 +112,8 @@ jobs:
           steps.main.outputs.matches == 'true' &&
           steps.credential.outputs.configured == 'true'
         shell: bash
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           set -euo pipefail
           npx --yes vercel@58.0.0 alias set \
@@ -94,7 +122,7 @@ jobs:
             --scope henry-yangs-projects-c9706eac \
             --token "${VERCEL_TOKEN}"
 
-      - name: Verify public release API
+      - name: Verify stable alias release API
         if: >-
           steps.main.outputs.matches == 'true' &&
           steps.credential.outputs.configured == 'true'

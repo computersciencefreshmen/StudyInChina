@@ -12,6 +12,8 @@ export const BACKUP_DATABASES = [
   'studyinchina-pipeline',
 ] as const
 export const BACKUP_BUCKET = 'studyinchina-releases'
+export const BACKUP_CONFIGURATION_DOC =
+  'docs/backup-and-restore.md#github-actions-configuration'
 const BACKUP_FILES = ['catalog.sql.gz', 'pipeline.sql.gz'] as const
 
 export type BackupArtifactReport = {
@@ -25,12 +27,40 @@ export function validateBackupCredentials(
 ): { databases: number; bucket: string } {
   const token = environment.CLOUDFLARE_API_TOKEN?.trim()
   const accountId = environment.CLOUDFLARE_ACCOUNT_ID?.trim()
-  if (!token) throw new Error('CLOUDFLARE_API_TOKEN is not configured')
-  if (!accountId) throw new Error('CLOUDFLARE_ACCOUNT_ID is not configured')
+  if (!token || !accountId) {
+    const missing = [
+      !token ? 'CLOUDFLARE_API_TOKEN' : undefined,
+      !accountId ? 'CLOUDFLARE_ACCOUNT_ID' : undefined,
+    ].filter((name): name is string => Boolean(name))
+    throw new Error(
+      `Missing required GitHub Actions repository secret(s): ${missing.join(', ')}. `
+      + `Configure them before rerunning; see ${BACKUP_CONFIGURATION_DOC}. No backup was created.`,
+    )
+  }
   if (!/^[0-9a-f]{32}$/iu.test(accountId)) {
-    throw new Error('CLOUDFLARE_ACCOUNT_ID must be a 32-character hexadecimal identifier')
+    throw new Error(
+      'CLOUDFLARE_ACCOUNT_ID must be a 32-character hexadecimal identifier. '
+      + `See ${BACKUP_CONFIGURATION_DOC}. No backup was created.`,
+    )
   }
   return { databases: BACKUP_DATABASES.length, bucket: BACKUP_BUCKET }
+}
+
+function escapeWorkflowCommand(value: string): string {
+  return value
+    .replaceAll('%', '%25')
+    .replaceAll('\r', '%0D')
+    .replaceAll('\n', '%0A')
+}
+
+export function formatBackupPreflightError(
+  error: unknown,
+  githubActions = false,
+): string {
+  const detail = error instanceof Error ? error.message : String(error)
+  const message = `Cloudflare D1 backup preflight failed: ${detail}`
+  if (!githubActions) return `${message}\n`
+  return `::error title=Cloudflare D1 backup preflight failed::${escapeWorkflowCommand(message)}\n${message}\n`
 }
 
 function checksum(path: string): string {
@@ -118,7 +148,7 @@ if (isMainModule()) {
   try {
     main()
   } catch (error) {
-    process.stderr.write(`${error instanceof Error ? error.message : String(error)}\n`)
+    process.stderr.write(formatBackupPreflightError(error, process.env.GITHUB_ACTIONS === 'true'))
     process.exitCode = 1
   }
 }

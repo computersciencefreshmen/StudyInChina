@@ -842,27 +842,189 @@ export class CatalogSqlApi {
       )`, normalizeLanguageFilter(query.language))
     }
     if (query.scholarship) {
-      addCondition(conditions, values, `EXISTS (
-        SELECT 1
+      const isAnyLinkedScholarship = query.scholarship === 'linked'
+      const scholarshipRecordJoin = isAnyLinkedScholarship
+        ? ''
+        : `JOIN current_catalog_records AS scholarship_record
+            ON scholarship_record.release_id = scholarship.release_id
+           AND scholarship_record.record_id = scholarship.scholarship_id`
+      const scholarshipSelector = isAnyLinkedScholarship
+        ? ''
+        : 'AND (scholarship.scholarship_id = ? OR scholarship_record.slug = ?)'
+      const scholarshipValues = isAnyLinkedScholarship
+        ? [this.release.id]
+        : [this.release.id, query.scholarship, query.scholarship]
+      const selectedScholarships = `
+        SELECT scholarship.release_id, scholarship.scholarship_id
         FROM current_scholarships AS scholarship
-        JOIN current_catalog_records AS scholarship_record
-          ON scholarship_record.release_id = scholarship.release_id
-         AND scholarship_record.record_id = scholarship.scholarship_id
-        JOIN current_record_fields AS scope
-          ON scope.release_id = scholarship.release_id
-         AND scope.record_id = scholarship.scholarship_id
-         AND scope.field_path IN ('programIds', 'program_ids', 'universityIds', 'institution_ids')
-        JOIN json_each(scope.value_json) AS scoped_record ON 1 = 1
-        WHERE scholarship.release_id = program.release_id
-          AND (scholarship.scholarship_id = ? OR scholarship_record.slug = ?)
-          AND (
-            (scope.field_path IN ('programIds', 'program_ids')
-              AND CAST(scoped_record.value AS TEXT) = program.program_id)
-            OR
-            (scope.field_path IN ('universityIds', 'institution_ids')
-              AND CAST(scoped_record.value AS TEXT) = program.institution_id)
-          )
-      )`, query.scholarship, query.scholarship)
+        ${scholarshipRecordJoin}
+        WHERE scholarship.release_id = ?
+          ${scholarshipSelector}`
+      // The legacy CROSS JOIN order below is intentional: without it, SQLite can
+      // reverse the lookup into full record_field_status/program scans. The outer
+      // current_programs query remains the final public-visibility gate.
+
+      addCondition(conditions, values, `program.program_id IN (
+        WITH
+        selected_scholarships AS MATERIALIZED (${selectedScholarships}),
+        normalized_cycles AS MATERIALIZED (
+          SELECT cycle.*
+          FROM selected_scholarships AS selected
+          JOIN scholarship_cycles AS cycle
+            ON cycle.release_id = selected.release_id
+           AND cycle.scholarship_id = selected.scholarship_id
+          JOIN public_scholarship_cycle_ids AS visible_cycle
+            ON visible_cycle.release_id = cycle.release_id
+           AND visible_cycle.scholarship_cycle_id = cycle.scholarship_cycle_id
+        ),
+        linked_programs AS (
+          SELECT scoped_program.program_id
+          FROM normalized_cycles AS cycle
+          JOIN scholarship_cycle_programs AS included_program
+            ON included_program.release_id = cycle.release_id
+           AND included_program.scholarship_cycle_id = cycle.scholarship_cycle_id
+           AND included_program.inclusion = 'include'
+          JOIN programs AS scoped_program
+            ON scoped_program.release_id = included_program.release_id
+           AND scoped_program.program_id = included_program.program_id
+          WHERE cycle.program_scope = 'listed'
+            AND EXISTS (
+              SELECT 1
+              FROM record_field_status AS program_scope_fact
+              WHERE program_scope_fact.release_id = cycle.release_id
+                AND program_scope_fact.record_id = cycle.scholarship_cycle_id
+                AND program_scope_fact.field_path = 'program_scope'
+                AND program_scope_fact.field_status = 'known'
+                AND program_scope_fact.review_after >= date('now', '+8 hours')
+            )
+            AND EXISTS (
+              SELECT 1
+              FROM record_field_status AS institution_scope_fact
+              WHERE institution_scope_fact.release_id = cycle.release_id
+                AND institution_scope_fact.record_id = cycle.scholarship_cycle_id
+                AND institution_scope_fact.field_path = 'institution_scope'
+                AND institution_scope_fact.field_status = 'known'
+                AND institution_scope_fact.review_after >= date('now', '+8 hours')
+            )
+            AND (
+              (cycle.institution_scope = 'all' AND NOT EXISTS (
+                SELECT 1
+                FROM scholarship_cycle_institutions AS excluded_institution
+                WHERE excluded_institution.release_id = cycle.release_id
+                  AND excluded_institution.scholarship_cycle_id = cycle.scholarship_cycle_id
+                  AND excluded_institution.institution_id = scoped_program.institution_id
+                  AND excluded_institution.inclusion = 'exclude'
+              ))
+              OR (cycle.institution_scope = 'listed' AND EXISTS (
+                SELECT 1
+                FROM scholarship_cycle_institutions AS included_institution
+                WHERE included_institution.release_id = cycle.release_id
+                  AND included_institution.scholarship_cycle_id = cycle.scholarship_cycle_id
+                  AND included_institution.institution_id = scoped_program.institution_id
+                  AND included_institution.inclusion = 'include'
+              ))
+            )
+
+          UNION ALL
+
+          SELECT scoped_program.program_id
+          FROM programs AS scoped_program
+          WHERE scoped_program.release_id IN (
+              SELECT selected.release_id FROM selected_scholarships AS selected
+            )
+            AND EXISTS (
+              SELECT 1
+              FROM normalized_cycles AS cycle
+              WHERE cycle.release_id = scoped_program.release_id
+                AND cycle.program_scope = 'all'
+                AND EXISTS (
+                  SELECT 1
+                  FROM record_field_status AS program_scope_fact
+                  WHERE program_scope_fact.release_id = cycle.release_id
+                    AND program_scope_fact.record_id = cycle.scholarship_cycle_id
+                    AND program_scope_fact.field_path = 'program_scope'
+                    AND program_scope_fact.field_status = 'known'
+                    AND program_scope_fact.review_after >= date('now', '+8 hours')
+                )
+                AND EXISTS (
+                  SELECT 1
+                  FROM record_field_status AS institution_scope_fact
+                  WHERE institution_scope_fact.release_id = cycle.release_id
+                    AND institution_scope_fact.record_id = cycle.scholarship_cycle_id
+                    AND institution_scope_fact.field_path = 'institution_scope'
+                    AND institution_scope_fact.field_status = 'known'
+                    AND institution_scope_fact.review_after >= date('now', '+8 hours')
+                )
+                AND NOT EXISTS (
+                  SELECT 1
+                  FROM scholarship_cycle_programs AS excluded_program
+                  WHERE excluded_program.release_id = cycle.release_id
+                    AND excluded_program.scholarship_cycle_id = cycle.scholarship_cycle_id
+                    AND excluded_program.program_id = scoped_program.program_id
+                    AND excluded_program.inclusion = 'exclude'
+                )
+                AND (
+                  (cycle.institution_scope = 'all' AND NOT EXISTS (
+                    SELECT 1
+                    FROM scholarship_cycle_institutions AS excluded_institution
+                    WHERE excluded_institution.release_id = cycle.release_id
+                      AND excluded_institution.scholarship_cycle_id = cycle.scholarship_cycle_id
+                      AND excluded_institution.institution_id = scoped_program.institution_id
+                      AND excluded_institution.inclusion = 'exclude'
+                  ))
+                  OR (cycle.institution_scope = 'listed' AND EXISTS (
+                    SELECT 1
+                    FROM scholarship_cycle_institutions AS included_institution
+                    WHERE included_institution.release_id = cycle.release_id
+                      AND included_institution.scholarship_cycle_id = cycle.scholarship_cycle_id
+                      AND included_institution.institution_id = scoped_program.institution_id
+                      AND included_institution.inclusion = 'include'
+                  ))
+                )
+            )
+
+          UNION ALL
+
+          SELECT CAST(scoped_program.value AS TEXT)
+          FROM selected_scholarships AS selected
+          CROSS JOIN record_field_status AS scope
+          CROSS JOIN json_each(scope.value_json) AS scoped_program
+          WHERE scope.release_id = selected.release_id
+            AND scope.record_id = selected.scholarship_id
+            AND scope.field_path IN ('programIds', 'program_ids')
+            AND scope.field_status = 'known'
+            AND scope.review_after >= date('now', '+8 hours')
+            AND NOT EXISTS (
+              SELECT 1
+              FROM normalized_cycles AS normalized_cycle
+              WHERE normalized_cycle.release_id = selected.release_id
+                AND normalized_cycle.scholarship_id = selected.scholarship_id
+            )
+
+          UNION ALL
+
+          SELECT scoped_program.program_id
+          FROM selected_scholarships AS selected
+          CROSS JOIN record_field_status AS scope
+          CROSS JOIN json_each(scope.value_json) AS scoped_institution
+          CROSS JOIN programs AS scoped_program
+          WHERE scope.release_id = selected.release_id
+            AND scope.record_id = selected.scholarship_id
+            AND scope.field_path IN ('universityIds', 'institution_ids')
+            AND scope.field_status = 'known'
+            AND scope.review_after >= date('now', '+8 hours')
+            AND scoped_program.release_id = selected.release_id
+            AND scoped_program.institution_id = CAST(scoped_institution.value AS TEXT)
+            AND NOT EXISTS (
+              SELECT 1
+              FROM normalized_cycles AS normalized_cycle
+              WHERE normalized_cycle.release_id = selected.release_id
+                AND normalized_cycle.scholarship_id = selected.scholarship_id
+            )
+        )
+        SELECT DISTINCT linked_program.program_id
+        FROM linked_programs AS linked_program
+      )`, ...scholarshipValues)
     }
 
     const cycleConditions: string[] = []

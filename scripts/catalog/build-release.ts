@@ -264,6 +264,11 @@ function hasOfficialSource(bundle: DataBundle, sourceIds: string[]) {
   return bundle.sources.some((source) => source.official && wanted.has(source.id))
 }
 
+function officialSourceUrl(bundle: DataBundle, sourceIds: string[]) {
+  const wanted = new Set(sourceIds)
+  return bundle.sources.find((source) => source.official && wanted.has(source.id))?.url ?? null
+}
+
 export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
   const bundle = bundleSchema.parse(bundleInput)
   const bundleJson = JSON.stringify(bundle)
@@ -558,12 +563,14 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
 
   for (const scholarship of bundle.scholarships) {
     const providerId = `provider-${scholarship.id}`
+    const officialUrl = scholarship.applicationUrl ?? officialSourceUrl(bundle, scholarship.sourceIds)
+    if (!officialUrl) throw new Error(`Official source not found for scholarship ${scholarship.id}`)
     statements.push(recordRow(releaseId, { ...scholarship, id: providerId, slug: `provider-${scholarship.slug}` }, 'organization', { providerId, scholarship }))
     statements.push(insert('organizations', {
       release_id: releaseId,
       organization_id: providerId,
       organization_type: scholarship.providerType === 'university' ? 'university' : 'scholarship_provider',
-      official_url: scholarship.applicationUrl,
+      official_url: officialUrl,
     }))
     addSources(statements, releaseId, providerId, scholarship.sourceIds)
     statements.push(recordRow(releaseId, scholarship, 'scholarship', scholarship))
@@ -572,7 +579,7 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
       scholarship_id: scholarship.id,
       provider_organization_id: providerId,
       scheme_type: scholarship.providerType === 'csc' ? 'government' : scholarship.providerType,
-      official_url: scholarship.applicationUrl,
+      official_url: officialUrl,
     }))
     addLocalized(statements, releaseId, scholarship.id, 'name', scholarship.name)
     addLocalized(statements, releaseId, scholarship.id, 'summary', scholarship.summary)
