@@ -3,6 +3,45 @@
   position: static;
 }
 
+.quickFilters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: 1rem;
+}
+
+.quickFilters > span {
+  margin-inline-end: .15rem;
+  color: var(--ink-soft);
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.quickFilter {
+  padding: .48rem .78rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--jade-dark);
+  background: color-mix(in srgb, var(--paper-light) 84%, transparent);
+  font-size: .82rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.quickFilter:hover,
+.isActive {
+  border-color: var(--jade);
+  background: var(--atlas-jade-pale);
+}
+
+.quickFilter:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--jade) 28%, transparent);
+  outline-offset: 3px;
+}
+
 .primaryGrid,
 .advancedGrid {
   display: grid;

@@ -1,4 +1,5 @@
-import { getApplicationState } from '@/lib/data/admission'
+import { getApplicationState, selectAdmissionCycle } from '@/lib/data/admission'
+import { getTodayDate } from '@/lib/data/freshness'
 import { classifyProgramField, isProgramField, programSearchKeywords } from '@/lib/data/fields'
 import { canonicalUniversitySlug } from '@/lib/data/slug-aliases'
 import type {
@@ -173,7 +174,7 @@ export class CatalogApiService {
   constructor(
     private readonly bundle: DataBundle,
     private readonly release: ReleaseInfo,
-    private readonly today = new Date().toISOString().slice(0, 10),
+    private readonly today = getTodayDate(),
   ) {}
 
   private envelope<T>(
@@ -459,6 +460,43 @@ export class CatalogApiService {
     return this.envelope(cycles)
   }
 
+  comparePrograms(ids: string[]): ApiEnvelope<{
+    items: Array<{
+      program: ProgramRecord
+      currentCycle: AdmissionCycleRecord | null
+      linkedScholarshipCount: number
+    }>
+    missingIds: string[]
+  }> {
+    const uniqueIds = [...new Set(ids)]
+    const programsById = new Map(this.bundle.programs.map((program) => [program.id, program]))
+    const currentCycles = this.bundle.admissionCycles.filter(
+      (cycle) => hasCurrentFacts(cycle, this.today),
+    )
+    const items = uniqueIds.flatMap((id) => {
+      const program = programsById.get(id)
+      if (!program) return []
+      const record = this.programRecord(program)
+      if (!record) return []
+      const currentCycle = selectAdmissionCycle(currentCycles, program.id, this.today)
+      const linkedScholarshipCount = this.bundle.scholarships.filter((scholarship) => (
+        hasCurrentFacts(scholarship, this.today)
+        && (scholarship.programIds.includes(program.id)
+          || scholarship.universityIds.includes(program.universityId))
+      )).length
+      return [{
+        program: record,
+        currentCycle: currentCycle ? this.cycleRecord(currentCycle, program) : null,
+        linkedScholarshipCount,
+      }]
+    })
+    const returnedIds = new Set(items.map((item) => item.program.id))
+    return this.envelope({
+      items,
+      missingIds: uniqueIds.filter((id) => !returnedIds.has(id)),
+    })
+  }
+
   listScholarships(query: ScholarshipQuery = {}): ApiEnvelope<ScholarshipRecord[]> {
     const filtered = this.bundle.scholarships.filter((scholarship) => {
       const factsAreCurrent = hasCurrentFacts(scholarship, this.today)
@@ -525,19 +563,45 @@ export class CatalogApiService {
   }
 }
 
-export function releaseFromBundle(bundle: DataBundle, dataDate: string): ReleaseInfo {
+type ReleaseFromBundleOptions = {
+  rawBundle?: DataBundle
+  dataCheckedThrough?: string
+  evaluatedForDate?: string
+  activatedAt?: string
+  catalogBackend?: ReleaseInfo['catalogBackend']
+  deploymentSha?: string | null
+}
+
+function releaseRecordCounts(bundle: DataBundle): ReleaseInfo['recordCounts'] {
+  return {
+    sources: bundle.sources.length,
+    cities: bundle.cities.length,
+    universities: bundle.universities.length,
+    programs: bundle.programs.length,
+    admissionCycles: bundle.admissionCycles.length,
+    scholarships: bundle.scholarships.length,
+  }
+}
+
+export function releaseFromBundle(
+  bundle: DataBundle,
+  dataDate: string,
+  options: ReleaseFromBundleOptions = {},
+): ReleaseInfo {
+  const generatedAt = `${dataDate}T00:00:00.000Z`
+  const publicCounts = releaseRecordCounts(bundle)
   return {
     id: `json:${dataDate}`,
     dataDate,
-    generatedAt: `${dataDate}T00:00:00.000Z`,
-    recordCounts: {
-      sources: bundle.sources.length,
-      cities: bundle.cities.length,
-      universities: bundle.universities.length,
-      programs: bundle.programs.length,
-      admissionCycles: bundle.admissionCycles.length,
-      scholarships: bundle.scholarships.length,
-    },
+    generatedAt,
+    recordCounts: publicCounts,
+    rawCounts: releaseRecordCounts(options.rawBundle ?? bundle),
+    publicCounts,
+    dataCheckedThrough: options.dataCheckedThrough ?? dataDate,
+    evaluatedForDate: options.evaluatedForDate ?? getTodayDate(),
+    activatedAt: options.activatedAt ?? generatedAt,
+    catalogBackend: options.catalogBackend ?? 'json',
+    deploymentSha: options.deploymentSha ?? null,
   }
 }
 

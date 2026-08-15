@@ -1,15 +1,29 @@
 import { notFound } from 'next/navigation'
 import { CityExplorer } from '@/components/features/CityExplorer'
 import { PageHero, SectionHeading } from '@/components/ui'
+import { formatStudentCityTitle } from '@/i18n/home-experience'
 import { getMessages } from '@/i18n/messages'
 import {
   parseCityExplorerSearchParams,
   type CityExplorerSearchParams,
 } from '@/lib/city-explorer'
 import { getCatalogData, getData } from '@/lib/data/load'
-import { pageMetadata, requireLocale } from '@/lib/site'
+import { hasSearchParameters, pageMetadata, requireLocale } from '@/lib/site'
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) { const locale = requireLocale((await params).locale) || 'en'; const m = getMessages(locale); return pageMetadata(locale, m.cities.title, m.cities.intro, 'cities') }
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>
+  searchParams?: Promise<CityExplorerSearchParams>
+}) {
+  const locale = requireLocale((await params).locale) || 'en'
+  const messages = getMessages(locale)
+  const parameterized = searchParams ? hasSearchParameters(await searchParams) : false
+  return pageMetadata(locale, messages.cities.title, messages.cities.intro, 'cities', {
+    indexable: !parameterized,
+  })
+}
 export default async function CitiesPage({
   params,
   searchParams,
@@ -53,7 +67,7 @@ export default async function CitiesPage({
       description={messages.cities.intro}
     />
     <section className="atlas-container atlas-section">
-      <SectionHeading title={messages.home.cityTitle} description={messages.cities.mapNote} />
+      <SectionHeading title={formatStudentCityTitle(cities.length, locale)} description={messages.cities.mapNote} />
       <CityExplorer
         cities={explorerCities}
         initialState={explorerState}

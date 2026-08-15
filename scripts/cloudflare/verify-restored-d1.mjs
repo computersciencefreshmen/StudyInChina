@@ -108,6 +108,7 @@ try {
           cr.release_status,
           cr.data_date,
           cr.generated_at,
+          cr.counts_json,
           (SELECT COUNT(*) FROM institutions WHERE release_id = rp.current_release_id) AS institutions,
           (SELECT COUNT(*) FROM programs WHERE release_id = rp.current_release_id) AS programs,
           (SELECT COUNT(*) FROM program_cycles WHERE release_id = rp.current_release_id) AS program_cycles,
@@ -122,8 +123,35 @@ try {
     }
     const release = releases[0]
     if (release.release_status !== 'active') throw new Error('Catalog current release is not active')
-    for (const countName of ['institutions', 'programs', 'program_cycles', 'scholarships']) {
-      if (release[countName] <= 0) throw new Error(`Catalog current release has no ${countName} rows`)
+
+    let declaredCounts
+    try {
+      declaredCounts = JSON.parse(release.counts_json)
+    } catch {
+      throw new Error('Catalog current release has invalid counts_json')
+    }
+    const countContracts = [
+      ['institutions', 'universities'],
+      ['programs', 'programs'],
+      ['program_cycles', 'admissionCycles'],
+      ['scholarships', 'scholarships'],
+    ]
+    for (const [actualName, declaredName] of countContracts) {
+      const actual = Number(release[actualName])
+      const declared = Number(declaredCounts[declaredName])
+      if (!Number.isSafeInteger(declared) || declared < 0) {
+        throw new Error(`Catalog current release has invalid declared ${declaredName} count`)
+      }
+      if (actual !== declared) {
+        throw new Error(
+          `Catalog current release ${actualName} count mismatch: expected ${declared}, restored ${actual}`,
+        )
+      }
+    }
+    for (const countName of ['institutions', 'programs', 'scholarships']) {
+      if (release[countName] <= 0) {
+        throw new Error(`Catalog current release has no ${countName} rows`)
+      }
     }
 
     const fts = database

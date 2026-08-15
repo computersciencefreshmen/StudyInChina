@@ -14,6 +14,7 @@ import {
   type FieldMeta,
   type InstitutionRecord,
 } from '@/lib/catalog-api/types'
+import { deploymentShaFromEnvironment } from '@/lib/catalog-api/runtime'
 import { getTodayDate } from '@/lib/data/freshness'
 
 export const runtime = 'nodejs'
@@ -136,7 +137,11 @@ function envelope(
   return {
     data: page.items.map((item) => institutionRecord(item, today)),
     meta: {
-      release: page.release,
+      release: {
+        ...page.release,
+        catalogBackend: getCatalogRepository().mode,
+        deploymentSha: deploymentShaFromEnvironment(),
+      },
       notice: AUTOMATED_COLLECTION_NOTICE,
       pageSize: page.items.length,
       nextCursor: page.nextCursor,

@@ -1,10 +1,8 @@
 import { readdirSync, readFileSync } from 'node:fs'
 import { basename, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { z } from 'zod'
 import {
   SOURCE_CATEGORIES,
-  sourceManifestSchema,
 } from '../workers/ingestion/src/manifest-schema'
 import {
   normalizeAllowedHost,
@@ -13,77 +11,25 @@ import {
 import type { SourceCategory, SourceManifestV1 } from '../workers/ingestion/src/types'
 import {
   INSTITUTION_HOST_ALLOWLISTS,
-  pilotSourceManifestSchema,
-  type PilotSourceManifest,
 } from './validate-source-manifests'
+import {
+  CATALOG_RECONCILIATION_STATUSES,
+  pilotSourceManifestSchema,
+  sourceManifestV2Schema,
+  type CatalogReconciliationStatus,
+  type SourceManifestRecord,
+  type SourceManifestV2,
+} from './source-manifest-contract'
 
-export const CATALOG_RECONCILIATION_STATUSES = [
-  'published',
-  'individual_application_unavailable',
-  'discontinued',
-  'not_announced',
-  'source_unavailable',
-  'pending',
-] as const
-
-export type CatalogReconciliationStatus =
-  (typeof CATALOG_RECONCILIATION_STATUSES)[number]
-
-const coverageStatusSchema = z.enum([
-  'registered',
-  'parser_pending',
-  'source_unavailable',
-  'discovery_pending',
-  'officially_not_provided',
-])
-
-const coverageSchema = z.object({
-  sourceCategory: z.enum(SOURCE_CATEGORIES),
-  status: coverageStatusSchema,
-  sourceIds: z.array(z.string().min(1)).optional(),
-  note: z.string().min(1).optional(),
-}).strict()
-
-const checkedAtSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(
-  (value) => !Number.isNaN(Date.parse(`${value}T00:00:00Z`)),
-  { message: 'checkedAt must be a real ISO calendar date' },
-)
-
-const reconciliationEntrySchema = z.object({
-  sourceId: z.string().min(1),
-  officialKey: z.string().min(1),
-  officialName: z.string().min(1),
-  entityType: z.enum(['program', 'scholarship']),
-  status: z.enum(CATALOG_RECONCILIATION_STATUSES),
-  recordId: z.string().min(1).optional(),
-  note: z.string().min(1).optional(),
-}).strict()
-
-export const sourceManifestV2Schema = z.object({
-  version: z.literal(2),
-  institutionId: z.string().min(1),
-  catalogStatus: z.enum(['existing', 'planned_addition']),
-  manifestStatus: z.enum(['complete', 'in_progress']),
-  checkedAt: checkedAtSchema,
-  officialHosts: z.array(z.string().min(1)).min(1),
-  // Individual fetch manifests remain V1 because this is the format consumed
-  // by the ingestion Worker. V2 describes the institution-level contract.
-  sources: z.array(sourceManifestSchema).min(1),
-  coverage: z.array(coverageSchema).length(SOURCE_CATEGORIES.length),
-  catalogReconciliation: z.object({
-    scope: z.enum([
-      'full_official_catalog',
-      'representative_international_programs',
-      'limited_official_catalog',
-    ]),
-    status: z.enum(['complete', 'in_progress']),
-    entries: z.array(reconciliationEntrySchema).min(1),
-    note: z.string().min(1).optional(),
-  }).strict(),
-}).strict()
-
-export type SourceManifestV2 = z.infer<typeof sourceManifestV2Schema>
-export type SourceManifestRecord = PilotSourceManifest | SourceManifestV2
+export {
+  CATALOG_RECONCILIATION_STATUSES,
+  sourceManifestV2Schema,
+}
+export type {
+  CatalogReconciliationStatus,
+  SourceManifestRecord,
+  SourceManifestV2,
+}
 
 export type LoadedSourceManifest = {
   filePath: string
@@ -240,7 +186,10 @@ export function isCatalogReconciliationComplete(
   record: SourceManifestRecord,
 ): boolean {
   if (record.version !== 2) return false
-  return record.manifestStatus === 'complete'
+  const terminalScope = record.catalogReconciliation.scope === 'full_official_catalog'
+    || record.catalogReconciliation.scope === 'limited_official_catalog'
+  return terminalScope
+    && record.manifestStatus === 'complete'
     && record.catalogReconciliation.status === 'complete'
     && !record.catalogReconciliation.entries.some((entry) => entry.status === 'pending')
 }

@@ -27,18 +27,28 @@ export type OfficialSourceLink = {
   checkedAt: string
 }
 
+export type ReleaseRecordCounts = {
+  sources: number
+  cities: number
+  universities: number
+  programs: number
+  admissionCycles: number
+  scholarships: number
+}
+
 export type ReleaseInfo = {
   id: string
   dataDate: string
   generatedAt: string
-  recordCounts: {
-    sources: number
-    cities: number
-    universities: number
-    programs: number
-    admissionCycles: number
-    scholarships: number
-  }
+  // Deprecated compatibility alias of publicCounts.
+  recordCounts: ReleaseRecordCounts
+  rawCounts: ReleaseRecordCounts
+  publicCounts: ReleaseRecordCounts
+  dataCheckedThrough: string
+  evaluatedForDate: string
+  activatedAt: string
+  catalogBackend: 'json' | 'shadow' | 'd1'
+  deploymentSha: string | null
 }
 
 export type ProgramType =

@@ -4,11 +4,12 @@ on:
   deployment_status:
 
 permissions:
+  actions: read
   contents: read
 
 concurrency:
   group: vercel-production-alias
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   promote:
@@ -17,7 +18,7 @@ jobs:
       github.event.deployment_status.state == 'success' &&
       github.event.deployment.environment == 'Production'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 40
     env:
       DEPLOYMENT_SHA: ${{ github.event.deployment.sha }}
       DEPLOYMENT_URL: ${{ github.event.deployment_status.environment_url }}
@@ -47,8 +48,70 @@ jobs:
           echo 'matches=false' >> "$GITHUB_OUTPUT"
           echo "::notice::Deployment ${DEPLOYMENT_SHA} is not current main ${main_sha}; the stable alias will not be changed."
 
-      - name: Require stable-alias credential
+      - name: Wait for successful CI on the exact deployment SHA
         if: steps.main.outputs.matches == 'true'
+        id: ci
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          api="${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/workflows/ci.yml/runs?branch=main&event=push&per_page=20"
+          for attempt in $(seq 1 60); do
+            response="$(curl --fail --silent --show-error \
+              --header 'Accept: application/vnd.github+json' \
+              --header "Authorization: Bearer ${GITHUB_TOKEN}" \
+              --header 'X-GitHub-Api-Version: 2022-11-28' \
+              "${api}")"
+            if jq -e --arg sha "${DEPLOYMENT_SHA}" \
+              '.workflow_runs | any(.head_sha == $sha and .status == "completed" and .conclusion == "success")' \
+              <<< "${response}" >/dev/null; then
+              echo 'passed=true' >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            if jq -e --arg sha "${DEPLOYMENT_SHA}" \
+              '.workflow_runs | any(.head_sha == $sha and .status == "completed" and (.conclusion | IN("failure", "cancelled", "timed_out", "action_required")))' \
+              <<< "${response}" >/dev/null; then
+              echo "::error title=Production promotion blocked::CI completed unsuccessfully for deployment SHA ${DEPLOYMENT_SHA}; the stable alias was not changed."
+              exit 1
+            fi
+            echo "Waiting for successful CI on ${DEPLOYMENT_SHA} (${attempt}/60)."
+            sleep 30
+          done
+          echo "::error title=Production promotion timed out::No successful main push CI run was observed for deployment SHA ${DEPLOYMENT_SHA}; the stable alias was not changed."
+          exit 1
+
+      - name: Reconfirm deployment SHA is still current main
+        if: >-
+          steps.main.outputs.matches == 'true' &&
+          steps.ci.outputs.passed == 'true'
+        id: current
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          ref_api="${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/git/ref/heads/main"
+          current_sha="$(curl --fail --silent --show-error \
+            --header 'Accept: application/vnd.github+json' \
+            --header "Authorization: Bearer ${GITHUB_TOKEN}" \
+            --header 'X-GitHub-Api-Version: 2022-11-28' \
+            "${ref_api}" | jq -r '.object.sha // empty')"
+          if ! [[ "${current_sha}" =~ ^[0-9a-f]{40}$ ]]; then
+            echo '::error title=Production promotion blocked::GitHub did not return a valid current main SHA; the stable alias was not changed.'
+            exit 1
+          fi
+          if [[ "${DEPLOYMENT_SHA}" == "${current_sha}" ]]; then
+            echo 'matches=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo 'matches=false' >> "$GITHUB_OUTPUT"
+          echo "::notice::Main advanced to ${current_sha} while CI was running; deployment ${DEPLOYMENT_SHA} will not receive the stable alias."
+
+      - name: Require stable-alias credential
+        if: >-
+          steps.current.outputs.matches == 'true' &&
+          steps.ci.outputs.passed == 'true'
         id: credential
         shell: bash
         env:
@@ -71,7 +134,8 @@ jobs:
 
       - name: Validate deployment URL
         if: >-
-          steps.main.outputs.matches == 'true' &&
+          steps.current.outputs.matches == 'true' &&
+          steps.ci.outputs.passed == 'true' &&
           steps.credential.outputs.configured == 'true'
         shell: bash
         run: |
@@ -83,7 +147,8 @@ jobs:
 
       - name: Verify immutable deployment release API
         if: >-
-          steps.main.outputs.matches == 'true' &&
+          steps.current.outputs.matches == 'true' &&
+          steps.ci.outputs.passed == 'true' &&
           steps.credential.outputs.configured == 'true'
         shell: bash
         run: |
@@ -91,7 +156,9 @@ jobs:
           release_api="${DEPLOYMENT_URL%/}/api/v1/releases/current"
           for attempt in 1 2 3 4 5 6; do
             if curl --fail --silent --show-error "${release_api}" \
-              | jq -e '.data.id and .data.recordCounts.programs' >/dev/null; then
+              | jq -e --arg sha "${DEPLOYMENT_SHA}" \
+                '.data.deploymentSha == $sha and .data.id
+                  and (.data.publicCounts.programs | type == "number" and . > 0)' >/dev/null; then
               exit 0
             fi
             sleep 10
@@ -101,41 +168,121 @@ jobs:
 
       - name: Use Node.js 24
         if: >-
-          steps.main.outputs.matches == 'true' &&
+          steps.current.outputs.matches == 'true' &&
+          steps.ci.outputs.passed == 'true' &&
           steps.credential.outputs.configured == 'true'
         uses: actions/setup-node@v6
         with:
           node-version: 24
 
-      - name: Promote stable production alias
+      - name: Promote stable production alias transaction and verify release API
         if: >-
-          steps.main.outputs.matches == 'true' &&
+          steps.current.outputs.matches == 'true' &&
+          steps.ci.outputs.passed == 'true' &&
           steps.credential.outputs.configured == 'true'
         shell: bash
         env:
+          GITHUB_TOKEN: ${{ github.token }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           set -euo pipefail
+
+          previous_target=''
+          mutation_attempted=false
+          transaction_committed=false
+
+          github_main_sha() {
+            curl --fail --silent --show-error \
+              --header 'Accept: application/vnd.github+json' \
+              --header "Authorization: Bearer ${GITHUB_TOKEN}" \
+              --header 'X-GitHub-Api-Version: 2022-11-28' \
+              "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/git/ref/heads/main" \
+              | jq -r '.object.sha // empty'
+          }
+
+          current_stable_target() {
+            npx --yes vercel@58.0.0 alias list \
+              --format json \
+              --limit 100 \
+              --scope henry-yangs-projects-c9706eac \
+              --token "${VERCEL_TOKEN}" \
+              | jq -er '
+                  [.aliases[] | select(.alias == "studyinchina.vercel.app")] as $matches
+                  | if ($matches | length) == 1 then $matches[0].url
+                    else error("stable alias must have exactly one current target")
+                    end
+                '
+          }
+
+          rollback_on_failure() {
+            status=$?
+            trap - EXIT
+            if [[ "${status}" -eq 0 || "${mutation_attempted}" != 'true' || "${transaction_committed}" == 'true' ]]; then
+              exit "${status}"
+            fi
+
+            echo "::error title=Stable alias transaction failed::Rolling studyinchina.vercel.app back to ${previous_target}."
+            if ! npx --yes vercel@58.0.0 alias set \
+              "${previous_target}" \
+              studyinchina.vercel.app \
+              --scope henry-yangs-projects-c9706eac \
+              --token "${VERCEL_TOKEN}"; then
+              echo '::error title=Stable alias rollback failed::The previous target could not be restored; immediate operator action is required.'
+              exit 1
+            fi
+
+            for attempt in 1 2 3 4 5 6; do
+              restored_target="$(current_stable_target || true)"
+              if [[ "${restored_target}" == "${previous_target}" ]]; then
+                echo "::notice title=Stable alias rollback verified::studyinchina.vercel.app again targets ${previous_target}."
+                exit "${status}"
+              fi
+              sleep 10
+            done
+
+            echo "::error title=Stable alias rollback verification failed::Expected ${previous_target}, but the stable alias did not return to that immutable target. Immediate operator action is required."
+            exit 1
+          }
+
+          trap rollback_on_failure EXIT
+
+          previous_target="$(current_stable_target)"
+          if ! [[ "${previous_target}" =~ ^studyinchina-[a-z0-9-]+\.vercel\.app$ ]]; then
+            echo "Unexpected previous stable-alias target: ${previous_target}" >&2
+            exit 1
+          fi
+
+          final_main_sha="$(github_main_sha || true)"
+          if ! [[ "${final_main_sha}" =~ ^[0-9a-f]{40}$ ]] || [[ "${final_main_sha}" != "${DEPLOYMENT_SHA}" ]]; then
+            echo "::error title=Production promotion blocked::Main is ${final_main_sha:-unavailable}, not deployment ${DEPLOYMENT_SHA}; the stable alias was not changed."
+            exit 1
+          fi
+
+          mutation_attempted=true
           npx --yes vercel@58.0.0 alias set \
             "${DEPLOYMENT_URL}" \
             studyinchina.vercel.app \
             --scope henry-yangs-projects-c9706eac \
             --token "${VERCEL_TOKEN}"
 
-      - name: Verify stable alias release API
-        if: >-
-          steps.main.outputs.matches == 'true' &&
-          steps.credential.outputs.configured == 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
+          post_promotion_main_sha="$(github_main_sha || true)"
+          if ! [[ "${post_promotion_main_sha}" =~ ^[0-9a-f]{40}$ ]] || [[ "${post_promotion_main_sha}" != "${DEPLOYMENT_SHA}" ]]; then
+            echo "::error title=Production promotion raced with main::Main advanced to ${post_promotion_main_sha:-unavailable} while the alias was changing."
+            exit 1
+          fi
+
           for attempt in 1 2 3 4 5 6; do
             if curl --fail --silent --show-error \
               https://studyinchina.vercel.app/api/v1/releases/current \
-              | jq -e '.data.id and .data.recordCounts.programs' >/dev/null; then
+              | jq -e --arg sha "${DEPLOYMENT_SHA}" \
+                '.data.deploymentSha == $sha
+                  and (.data.id | type == "string" and length > 0)
+                  and (.data.publicCounts.programs | type == "number" and . > 0)' >/dev/null; then
+              transaction_committed=true
+              echo "::notice title=Stable alias promotion verified::studyinchina.vercel.app serves deployment ${DEPLOYMENT_SHA}."
               exit 0
             fi
             sleep 10
           done
-          echo 'The stable production alias did not pass the release API smoke test.' >&2
+          echo 'The stable production alias did not pass the release API smoke test; the previous immutable target will be restored.' >&2
           exit 1

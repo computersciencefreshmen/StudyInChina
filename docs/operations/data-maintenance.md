@@ -31,14 +31,21 @@ URLs exceeds the scheduled weekly capacity.
 
 ## Required GitHub Actions secrets
 
-The Vercel Git integration deploys `main` without an Action secret. Cloudflare
-backup, restore and remote Pipeline import require these repository secrets:
+The Vercel Git integration deploys `main` without an Action secret. Configure
+the daily backup and stable-alias repository secrets through hidden prompts:
 
 ```powershell
-gh secret set CLOUDFLARE_API_TOKEN --repo computersciencefreshmen/StudyInChina
+gh secret set CLOUDFLARE_D1_BACKUP_TOKEN --repo computersciencefreshmen/StudyInChina
 gh secret set CLOUDFLARE_ACCOUNT_ID --repo computersciencefreshmen/StudyInChina
 gh secret set VERCEL_TOKEN --repo computersciencefreshmen/StudyInChina
 ```
+
+Create the private backup-only R2 Bucket `studyinchina-backups`. Create a protected
+GitHub Environment named `cloudflare-restore-drill`, enable a required reviewer,
+and add `CLOUDFLARE_D1_RESTORE_TOKEN` as an Environment secret. The backup token
+needs only D1 Read plus write access to that Bucket; the restore token needs only
+read access to that Bucket. Remote deployment/import credentials remain separate
+from both backup credentials.
 
 Enter each value only at the hidden prompt. Never place a token in a command
 argument, committed file, issue, log or workflow output.
@@ -54,15 +61,26 @@ are therefore two separate signals.
 
 When a successful Production deployment does not match the current `main` SHA,
 the alias workflow remains a deliberate no-op and records a notice. When it does
-match `main`, the workflow first validates the immutable Vercel deployment URL
-and its `/api/v1/releases/current` response. Only a healthy candidate may receive
-the stable alias; the same endpoint is checked again through
-`studyinchina.vercel.app` after promotion. A missing token, invalid URL, failed
-candidate smoke test, failed alias command or failed stable-alias smoke test is a
-red workflow and requires operator action.
+match `main`, the workflow waits for the `ci.yml` main push run for that exact
+SHA to complete successfully. A failed, cancelled or timed-out CI run blocks
+promotion; Vercel Ready arriving before CI therefore cannot win the race. Only
+then does the workflow validate the immutable Vercel deployment URL
+and its `/api/v1/releases/current` response. Immediately before mutation, the
+workflow records the current immutable target of `studyinchina.vercel.app` and
+re-reads the GitHub `main` ref in the same shell step. Only a healthy candidate
+that is still the exact current SHA may receive the stable alias. It re-reads
+`main` again immediately after the Vercel command; if `main` advanced during the
+mutation, it restores the recorded target and fails. Concurrent promotion runs
+are serialized and an active mutation is never cancelled by a later deployment
+status event. The release endpoint is then checked again through the stable
+alias, including the exact deployment SHA and a positive numeric public program
+count. A missing token, invalid URL, failed candidate smoke, failed or rolled-back
+alias command, or failed stable smoke is a red workflow and requires operator
+action.
 
-The Cloudflare token should be limited to the StudyInChina account and only the
-D1/R2/Workers capabilities required by the workflows. `MINIMAX_API_KEY` remains
+Each Cloudflare token is limited to the StudyInChina account and one operational
+role. The generic `CLOUDFLARE_API_TOKEN` is intentionally not consumed by backup
+or restore workflows. `MINIMAX_API_KEY` remains
 a Cloudflare Worker secret; it is not needed by the deterministic GitHub
 refresh job.
 
@@ -76,13 +94,51 @@ refresh job.
 - Smoke-test `/api/v1/releases/current`, `/api/v1/programs` and
   `/api/v1/scholarships`.
 
+## Machine-readable P0 reliability audit
+
+`scripts/operations/evaluate-p0-reliability.mjs` evaluates an explicit local
+observation document and never fetches production state itself. A collector or
+operator must supply real timestamps and counts from these named sources:
+
+- the successful D1 backup readback verification artifact;
+- the active Catalog Release activation record;
+- the hourly ingestion scheduler heartbeat;
+- current Cloudflare Queue DLQ metrics;
+- the Pipeline D1 pending outbox query.
+
+The observation document uses format
+`studyinchina.p0-reliability-observations`, version `1`. Every section includes a
+bounded `source` identifier. Empty DLQ and outbox observations explicitly use a
+zero count and a `null` oldest timestamp; missing values are never inferred as
+zero.
+
+Run the evaluator without credentials or network access:
+
+```powershell
+node scripts/operations/evaluate-p0-reliability.mjs `
+  --input C:\secure\studyinchina-p0-observations.json `
+  --output C:\secure\studyinchina-p0-audit.json
+```
+
+Exit code `0` means every observation passed. Exit code `1` means a value was
+missing, inconsistent or outside its threshold: verified backup age at most 26
+hours, active Release age at most 48 hours, scheduler heartbeat age at most 90
+minutes, DLQ backlog exactly zero, and oldest pending outbox event younger than
+168 hours. The observation document itself must be no older than 15 minutes.
+The evaluator output is evidence, not telemetry collection; never populate it
+with guessed values or reuse a previous zero-backlog observation.
+
 ## Monthly checks
 
 - Verify every public dynamic record has a future `reviewAfter`.
 - Review all deadlines inside the 45-day window and all recurring-rule cycles.
 - Re-run source discovery for new program and scholarship notices.
-- Confirm the daily D1 backup has both `catalog.sql.gz`, `pipeline.sql.gz` and
-  a SHA-256 manifest; retain monthly copies for 12 months.
+- Confirm the daily D1 backup has `catalog.sql.gz`, `pipeline.sql.gz` and the
+  SHA-256 manifest together under `backups/daily/YYYY-MM-DD/raw-v1/` in
+  `studyinchina-backups`; verify that the readback artifact proves raw gzip
+  bytes and matching hashes before counting the checkpoint toward RPO. Restore
+  drills must consume `backups/monthly/YYYY-MM/raw-v1/`; retain monthly copies
+  for 12 months.
 - Review infrastructure usage against the ¥60/¥80/¥95 cost thresholds.
 
 ## Adding a school

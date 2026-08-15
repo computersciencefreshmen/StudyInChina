@@ -3,6 +3,7 @@ import { writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { bundleSchema } from '../../src/lib/data/schema'
+import { getApplicationState } from '../../src/lib/data/admission'
 import { getTodayDate } from '../../src/lib/data/freshness'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import type { DataBundle } from '../../src/lib/data/types'
@@ -15,6 +16,8 @@ import {
 export const FOUR_WEEK_QUALITY_THRESHOLDS = {
   publicUniversities: 257,
   schoolsBelowThreePrograms: 0,
+  freshDispositionCoveragePct: 70,
+  // Deprecated compatibility target; the gate uses freshDispositionCoveragePct.
   currentCycleCoveragePct: 70,
   durationCoveragePct: 90,
   applicationUrlCoveragePct: 80,
@@ -38,7 +41,7 @@ export type QualityGate = {
 }
 
 export type PlatformDataQualityScorecard = {
-  schemaVersion: 1
+  schemaVersion: 2
   generatedAt: string
   evaluatedForDate: string
   metrics: {
@@ -52,8 +55,19 @@ export type PlatformDataQualityScorecard = {
     programCoverage: {
       schoolsBelowThreePrograms: number
       schoolIdsBelowThreePrograms: string[]
+      programsWithVerifiedIdentity: number
+      identityCoveragePct: number
+      programsWithFreshDisposition: number
+      freshDispositionCoveragePct: number
+      programsWithDatedOrRollingCycle: number
+      datedOrRollingCoveragePct: number
+      programsActiveOrUpcoming: number
+      activeUpcomingCoveragePct: number
+      // Deprecated alias of programsWithDatedOrRollingCycle.
       programsWithCurrentCycle: number
+      // Deprecated alias of datedOrRollingCoveragePct.
       currentCycleCoveragePct: number
+      currentCycleCoverageSemantics: 'deprecated_alias_of_dated_or_rolling'
       programsWithDuration: number
       durationCoveragePct: number
       programsWithApplicationUrl: number
@@ -112,6 +126,21 @@ function percent(numerator: number, denominator: number): number {
   return Math.round((numerator / denominator) * 10_000) / 100
 }
 
+function shiftIsoDate(value: string, days: number): string {
+  const date = new Date(`${value}T00:00:00.000Z`)
+  date.setUTCDate(date.getUTCDate() + days)
+  return date.toISOString().slice(0, 10)
+}
+
+function isDateFreeFeeReference(
+  cycle: DataBundle['admissionCycles'][number],
+): boolean {
+  return cycle.tuitionStatus === 'reference'
+    && cycle.opensOn === null
+    && cycle.closesOn === null
+    && cycle.dateStatus !== 'rolling'
+}
+
 function allAuditedRecords(bundle: DataBundle) {
   return [
     ...bundle.cities,
@@ -154,8 +183,24 @@ export function buildPlatformDataQualityScorecard(
     .filter((university) => (programCounts.get(university.id) ?? 0) < 3)
     .map((university) => university.id)
     .sort()
-  const programsWithCycles = new Set(
-    publicBundle.admissionCycles.map((cycle) => cycle.programId),
+  const admissionCycles = publicBundle.admissionCycles.filter(
+    (cycle) => !isDateFreeFeeReference(cycle),
+  )
+  const freshDispositionCutoff = shiftIsoDate(today, -30)
+  const programsWithFreshDisposition = new Set(
+    admissionCycles
+      .filter((cycle) => cycle.verifiedAt >= freshDispositionCutoff && cycle.verifiedAt <= today)
+      .map((cycle) => cycle.programId),
+  )
+  const programsWithDatedOrRollingCycle = new Set(
+    admissionCycles
+      .filter((cycle) => cycle.dateStatus === 'rolling' || cycle.opensOn !== null || cycle.closesOn !== null)
+      .map((cycle) => cycle.programId),
+  )
+  const programsActiveOrUpcoming = new Set(
+    admissionCycles
+      .filter((cycle) => ['open', 'upcoming', 'rolling'].includes(getApplicationState(cycle, today)))
+      .map((cycle) => cycle.programId),
   )
   const programsWithDuration = publicBundle.programs.filter(
     (program) => program.durationMonths !== null && program.durationMonths > 0,
@@ -219,8 +264,17 @@ export function buildPlatformDataQualityScorecard(
     programCoverage: {
       schoolsBelowThreePrograms: schoolIdsBelowThreePrograms.length,
       schoolIdsBelowThreePrograms,
-      programsWithCurrentCycle: programsWithCycles.size,
-      currentCycleCoveragePct: percent(programsWithCycles.size, programTotal),
+      programsWithVerifiedIdentity: programTotal,
+      identityCoveragePct: percent(programTotal, programTotal),
+      programsWithFreshDisposition: programsWithFreshDisposition.size,
+      freshDispositionCoveragePct: percent(programsWithFreshDisposition.size, programTotal),
+      programsWithDatedOrRollingCycle: programsWithDatedOrRollingCycle.size,
+      datedOrRollingCoveragePct: percent(programsWithDatedOrRollingCycle.size, programTotal),
+      programsActiveOrUpcoming: programsActiveOrUpcoming.size,
+      activeUpcomingCoveragePct: percent(programsActiveOrUpcoming.size, programTotal),
+      programsWithCurrentCycle: programsWithDatedOrRollingCycle.size,
+      currentCycleCoveragePct: percent(programsWithDatedOrRollingCycle.size, programTotal),
+      currentCycleCoverageSemantics: 'deprecated_alias_of_dated_or_rolling',
       programsWithDuration,
       durationCoveragePct: percent(programsWithDuration, programTotal),
       programsWithApplicationUrl,
@@ -262,7 +316,7 @@ export function buildPlatformDataQualityScorecard(
   const checks = [
     atLeast('publicUniversities', metrics.publicRecords.universities),
     atMost('schoolsBelowThreePrograms', metrics.programCoverage.schoolsBelowThreePrograms),
-    atLeast('currentCycleCoveragePct', metrics.programCoverage.currentCycleCoveragePct),
+    atLeast('freshDispositionCoveragePct', metrics.programCoverage.freshDispositionCoveragePct),
     atLeast('durationCoveragePct', metrics.programCoverage.durationCoveragePct),
     atLeast('applicationUrlCoveragePct', metrics.programCoverage.applicationUrlCoveragePct),
     atLeast('teachingLanguageCoveragePct', metrics.programCoverage.teachingLanguageCoveragePct),
@@ -278,7 +332,7 @@ export function buildPlatformDataQualityScorecard(
   const passed = checks.filter((check) => check.passed).length
 
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     generatedAt: options.generatedAt ?? new Date().toISOString(),
     evaluatedForDate: today,
     metrics,
@@ -332,7 +386,10 @@ export function conciseScorecardSummary(report: PlatformDataQualityScorecard): s
   const { publicRecords, programCoverage, scholarships, cities, sourceManifests } = report.metrics
   return [
     `Data quality: ${publicRecords.universities} universities / ${publicRecords.programs} programs / ${publicRecords.scholarships} scholarships`,
-    `current cycles ${programCoverage.currentCycleCoveragePct}%`,
+    `identities ${programCoverage.identityCoveragePct}%`,
+    `fresh dispositions ${programCoverage.freshDispositionCoveragePct}%`,
+    `dated/rolling ${programCoverage.datedOrRollingCoveragePct}%`,
+    `active/upcoming ${programCoverage.activeUpcomingCoveragePct}%`,
     `scholarship schools ${scholarships.universitiesCovered}`,
     `city coordinates ${cities.withCoordinates}/${publicRecords.cities}`,
     `manifests ${sourceManifests.institutionsRegistered} (${sourceManifests.completedReconciliations} reconciled)`,

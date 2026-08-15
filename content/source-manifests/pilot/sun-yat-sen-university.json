@@ -1,8 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "institutionId": "uni-sun-yat-sen-university",
   "catalogStatus": "existing",
+  "manifestStatus": "in_progress",
   "checkedAt": "2026-07-20",
+  "officialHosts": ["apply.sysu.edu.cn","iso.sysu.edu.cn"],
   "sources": [
     {
       "version": 1, "id": "sysu-intl-admissions-home", "institutionId": "uni-sun-yat-sen-university", "entityType": "university", "sourceCategory": "international_admissions_home",
@@ -82,5 +84,36 @@
     { "sourceCategory": "program_detail", "status": "discovery_pending", "note": "Program-level pages will be discovered from the registered catalog anchors." },
     { "sourceCategory": "contacts", "status": "discovery_pending", "note": "A distinct stable official admissions contact page was not confirmed in this pilot review." },
     { "sourceCategory": "catalog_anchor", "status": "registered", "sourceIds": ["sysu-application-guide-anchor"] }
-  ]
+  ],
+  "catalogReconciliation": {
+    "scope": "representative_international_programs",
+    "status": "in_progress",
+    "entries": [
+      {
+        "sourceId": "sysu-2026-non-degree-program",
+        "officialKey": "program-sun-yat-sen-university-2026-one-academic-year-pre-university-program-fou",
+        "officialName": "2026 One-Academic-Year Pre-university Program",
+        "entityType": "program",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "sysu-2026-non-degree-program",
+        "officialKey": "program-sun-yat-sen-university-one-semester-pre-university-program-foundation",
+        "officialName": "One-Semester Pre-university Program",
+        "entityType": "program",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "sysu-2026-university-scholarship",
+        "officialKey": "sch-gap-clw-sw-sysu-international-student-scholarship-2026",
+        "officialName": "SYSU Scholarship for International Students 2026",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      }
+    ],
+    "note": "V2 migration preserves the 2026-07-20 source audit. 3 exact-URL or same-host/same-category catalog relationships are queued for evidence review; all other identities and full-directory reconciliation remain unresolved."
+  }
 }

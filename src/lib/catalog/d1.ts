@@ -1,8 +1,9 @@
 import { bundleSchema } from '@/lib/data/schema'
 import type { DataBundle } from '@/lib/data/types'
 import { getTodayDate } from '@/lib/data/freshness'
+import { parseD1ProgramComparison } from './d1-compare'
 import { parseD1InstitutionList, parseD1ProgramList, parseD1ScholarshipList } from './d1-list'
-import { deriveCatalogRelease, parseCatalogRelease } from './release'
+import { deriveCatalogRelease, parseCatalogRelease, parseCatalogReleaseInfo } from './release'
 import {
   CATALOG_LIST_DEFAULT_LIMIT,
   CATALOG_LIST_MAX_LIMIT,
@@ -138,6 +139,8 @@ export class D1CatalogRepository implements CatalogRepository {
   private readonly now: () => number
   private cached: { snapshot: CatalogSnapshot; expiresAt: number } | undefined
   private inFlight: Promise<CatalogSnapshot> | undefined
+  private operationalReleaseCached: { release: CatalogRelease; expiresAt: number } | undefined
+  private operationalReleaseInFlight: Promise<CatalogRelease> | undefined
 
   constructor(options: D1CatalogRepositoryOptions) {
     this.apiUrl = options.apiUrl.trim()
@@ -193,6 +196,47 @@ export class D1CatalogRepository implements CatalogRepository {
 
   async getRelease(): Promise<CatalogRelease> {
     return (await this.getSnapshot()).release
+  }
+
+  getOperationalRelease(): Promise<CatalogRelease> {
+    const now = this.now()
+    if (this.operationalReleaseCached && this.operationalReleaseCached.expiresAt >= now) {
+      return Promise.resolve(this.operationalReleaseCached.release)
+    }
+    if (this.operationalReleaseInFlight) return this.operationalReleaseInFlight
+    this.operationalReleaseInFlight = this.fetchOperationalRelease()
+      .then((release) => {
+        this.operationalReleaseCached = {
+          release,
+          expiresAt: this.now() + this.cacheTtlMs,
+        }
+        return release
+      })
+      .finally(() => {
+        this.operationalReleaseInFlight = undefined
+      })
+    return this.operationalReleaseInFlight
+  }
+
+  async comparePrograms(ids: string[]): Promise<unknown> {
+    const uniqueIds = [...new Set(ids)]
+    if (
+      uniqueIds.length < 1
+      || uniqueIds.length > 4
+      || uniqueIds.some((id) => !/^[a-z0-9][a-z0-9:_-]{0,199}$/u.test(id))
+    ) {
+      throw new CatalogRepositoryError(
+        'INVALID_COMPARE_IDS',
+        'Program comparison requires between one and four valid program ids.',
+      )
+    }
+    const url = this.publicEndpoint('programs/compare')
+    url.searchParams.set('ids', uniqueIds.join(','))
+    return parseD1ProgramComparison(
+      await this.fetchListPayload(url),
+      uniqueIds,
+      getTodayDate(),
+    )
   }
 
   async listInstitutions(
@@ -261,7 +305,14 @@ export class D1CatalogRepository implements CatalogRepository {
     )
   }
 
-  private publicEndpoint(resource: 'institutions' | 'programs' | 'scholarships'): URL {
+  private publicEndpoint(
+    resource:
+      | 'institutions'
+      | 'programs'
+      | 'programs/compare'
+      | 'scholarships'
+      | 'releases/current',
+  ): URL {
     const url = new URL(this.parsedApiUrl)
     url.search = ''
     url.hash = ''
@@ -321,6 +372,18 @@ export class D1CatalogRepository implements CatalogRepository {
     } finally {
       clearTimeout(timeout)
     }
+  }
+
+  private async fetchOperationalRelease(): Promise<CatalogRelease> {
+    const payload = await this.fetchListPayload(this.publicEndpoint('releases/current'))
+    if (!isObject(payload) || !Object.hasOwn(payload, 'data')) {
+      throw new CatalogRepositoryError(
+        'INVALID_RELEASE',
+        'Catalog release endpoint did not return an API envelope.',
+      )
+    }
+    const release = parseCatalogReleaseInfo(payload.data)
+    return { ...release, catalogBackend: 'd1' }
   }
 
   private getSnapshot(): Promise<CatalogSnapshot> {

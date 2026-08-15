@@ -1,8 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "institutionId": "uni-peking-university",
   "catalogStatus": "existing",
+  "manifestStatus": "in_progress",
   "checkedAt": "2026-07-20",
+  "officialHosts": ["isd.pku.edu.cn","www.isd.pku.edu.cn","www.studyatpku.com"],
   "sources": [
     {
       "version": 1, "id": "pku-intl-admissions-home", "institutionId": "uni-peking-university", "entityType": "university", "sourceCategory": "international_admissions_home",
@@ -94,5 +96,84 @@
     { "sourceCategory": "program_detail", "status": "discovery_pending", "note": "Program-level pages will be discovered from the registered catalog anchor in a later crawl." },
     { "sourceCategory": "contacts", "status": "registered", "sourceIds": ["pku-admissions-contacts"] },
     { "sourceCategory": "catalog_anchor", "status": "registered", "sourceIds": ["pku-admissions-catalog-anchor"] }
-  ]
+  ],
+  "catalogReconciliation": {
+    "scope": "representative_international_programs",
+    "status": "in_progress",
+    "entries": [
+      {
+        "sourceId": "pku-intl-admissions-home",
+        "officialKey": "program-peking-university-chinese-literature-bachelor",
+        "officialName": "Chinese Language and Literature",
+        "entityType": "program",
+        "status": "pending",
+        "note": "Current public catalog identity is linked only to an official source on the same host and in the same category; exact page evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "pku-intl-admissions-home",
+        "officialKey": "program-peking-university-international-relations-master",
+        "officialName": "International Relations",
+        "entityType": "program",
+        "status": "pending",
+        "note": "Current public catalog identity is linked only to an official source on the same host and in the same category; exact page evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "pku-2026-university-scholarships",
+        "officialKey": "sch-gap-pku-depth-beijing-government-scholarship",
+        "officialName": "Beijing Government Scholarship for International Students at PKU",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "pku-2026-university-scholarships",
+        "officialKey": "sch-gap-pku-depth-cgs-advanced-graduate",
+        "officialName": "Chinese Government Scholarship — Advanced Graduate Program at PKU",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "pku-2026-university-scholarships",
+        "officialKey": "sch-gap-pku-depth-cs-international-phd-full-support",
+        "officialName": "School of Computer Science International PhD Full Financial Support",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked only to an official source on the same host and in the same category; exact page evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "pku-2026-university-scholarships",
+        "officialKey": "sch-gap-pku-depth-international-chinese-language-teachers-scholarship",
+        "officialName": "International Chinese Language Teachers Scholarship at PKU",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked only to an official source on the same host and in the same category; exact page evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "pku-2026-university-scholarships",
+        "officialKey": "sch-gap-pku-depth-law-international-student-scholarship",
+        "officialName": "PKU Law International Student Scholarship",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked only to an official source on the same host and in the same category; exact page evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "pku-2026-government-scholarships",
+        "officialKey": "sch-gap-pku-depth-yenching-fellowship",
+        "officialName": "Yenching Fellowship",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked only to an official source on the same host and in the same category; exact page evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "pku-2026-university-scholarships",
+        "officialKey": "scholarship-peking-university-international-student",
+        "officialName": "Peking University Scholarship for International Students",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      }
+    ],
+    "note": "V2 migration preserves the 2026-07-20 source audit. 9 exact-URL or same-host/same-category catalog relationships are queued for evidence review; all other identities and full-directory reconciliation remain unresolved."
+  }
 }

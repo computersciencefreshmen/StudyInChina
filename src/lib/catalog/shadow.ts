@@ -1,6 +1,7 @@
 import type { DataBundle } from '@/lib/data/types'
 import {
   CATALOG_COLLECTIONS,
+  CatalogRepositoryError,
   type CatalogBackendMode,
   type CatalogCollection,
   type CatalogInstitutionListPage,
@@ -20,6 +21,7 @@ import {
 export type CatalogShadowOperation =
   | 'getBundle'
   | 'getRelease'
+  | 'comparePrograms'
   | 'listInstitutions'
   | 'listPrograms'
   | 'listScholarships'
@@ -287,6 +289,27 @@ function compareListPage(
   return collector
 }
 
+function comparableProjection(value: unknown): unknown {
+  return isObject(value) && Object.hasOwn(value, 'data') ? value.data : value
+}
+
+function compareProgramProjection(
+  primary: unknown,
+  shadow: unknown,
+  maxDifferences: number,
+): DifferenceCollector {
+  const collector = new DifferenceCollector(maxDifferences)
+  compareValue(
+    collector,
+    'programs',
+    'compare',
+    '',
+    comparableProjection(primary),
+    comparableProjection(shadow),
+  )
+  return collector
+}
+
 function cursorInputs(
   cursor: string | undefined,
   resource: 'institutions' | 'programs' | 'scholarships',
@@ -372,6 +395,51 @@ export class ShadowCatalogRepository implements CatalogRepository {
     await this.recordComparison(
       'getRelease',
       compareRelease(primaryResult.value, shadowResult.value, this.maxDifferences),
+    )
+    return primaryResult.value
+  }
+
+  async getOperationalRelease(): Promise<CatalogRelease> {
+    const [primaryResult, shadowResult] = await Promise.allSettled([
+      this.primary.getRelease(),
+      this.shadow.getOperationalRelease
+        ? this.shadow.getOperationalRelease()
+        : this.shadow.getRelease(),
+    ])
+    if (primaryResult.status === 'fulfilled' && shadowResult.status === 'fulfilled') {
+      await this.recordComparison(
+        'getRelease',
+        compareRelease(primaryResult.value, shadowResult.value, this.maxDifferences),
+      )
+    } else if (shadowResult.status === 'rejected') {
+      await this.recordShadowError('getRelease', shadowResult.reason)
+      if (primaryResult.status === 'rejected') throw primaryResult.reason
+      return { ...primaryResult.value, catalogBackend: 'shadow' }
+    }
+    return { ...shadowResult.value, catalogBackend: 'shadow' }
+  }
+
+  async comparePrograms(ids: string[]): Promise<unknown> {
+    const compare = (repository: CatalogRepository, role: 'primary' | 'shadow') => (
+      repository.comparePrograms
+        ? Promise.resolve().then(() => repository.comparePrograms!(ids))
+        : Promise.reject(new CatalogRepositoryError(
+            'COMPARE_UNAVAILABLE',
+            `The ${role} catalog does not support lightweight program comparison.`,
+          ))
+    )
+    const [primaryResult, shadowResult] = await Promise.allSettled([
+      compare(this.primary, 'primary'),
+      compare(this.shadow, 'shadow'),
+    ])
+    if (primaryResult.status === 'rejected') throw primaryResult.reason
+    if (shadowResult.status === 'rejected') {
+      await this.recordShadowError('comparePrograms', shadowResult.reason)
+      return primaryResult.value
+    }
+    await this.recordComparison(
+      'comparePrograms',
+      compareProgramProjection(primaryResult.value, shadowResult.value, this.maxDifferences),
     )
     return primaryResult.value
   }

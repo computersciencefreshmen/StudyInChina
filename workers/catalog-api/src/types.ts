@@ -34,6 +34,9 @@ export type ActiveReleaseRow = {
   release_id: string
   data_date: string
   generated_at: string
+  raw_counts_json: string
+  data_checked_through: string | null
+  activated_at: string
   counts_json: string
   content_sha256: string
   compatibility_artifact_key: string | null

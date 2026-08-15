@@ -33,7 +33,7 @@ jobs:
       - name: Validate backup configuration before installing dependencies
         shell: bash
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_D1_BACKUP_TOKEN: ${{ secrets.CLOUDFLARE_D1_BACKUP_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/cloudflare/backup-preflight.ts --phase credentials
@@ -44,7 +44,7 @@ jobs:
       - name: Verify read access to both remote D1 databases
         shell: bash
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_D1_BACKUP_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
@@ -61,7 +61,7 @@ jobs:
       - name: Export catalog and pipeline databases
         shell: bash
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_D1_BACKUP_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
@@ -115,7 +115,7 @@ jobs:
       - name: Upload daily and monthly copies
         shell: bash
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_D1_BACKUP_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           set -euo pipefail
@@ -131,12 +131,45 @@ jobs:
 
           day="$(date -u +%F)"
           month="$(date -u +%Y-%m)"
-          upload_object "studyinchina-releases/backups/daily/$day/catalog.sql.gz" "$RUNNER_TEMP/catalog.sql.gz" --content-type="application/sql" --content-encoding="gzip"
-          upload_object "studyinchina-releases/backups/daily/$day/pipeline.sql.gz" "$RUNNER_TEMP/pipeline.sql.gz" --content-type="application/sql" --content-encoding="gzip"
-          upload_object "studyinchina-releases/backups/daily/$day/sha256.txt" "$RUNNER_TEMP/backup-sha256.txt" --content-type="text/plain"
-          upload_object "studyinchina-releases/backups/monthly/$month/catalog.sql.gz" "$RUNNER_TEMP/catalog.sql.gz" --content-type="application/sql" --content-encoding="gzip"
-          upload_object "studyinchina-releases/backups/monthly/$month/pipeline.sql.gz" "$RUNNER_TEMP/pipeline.sql.gz" --content-type="application/sql" --content-encoding="gzip"
-          upload_object "studyinchina-releases/backups/monthly/$month/sha256.txt" "$RUNNER_TEMP/backup-sha256.txt" --content-type="text/plain"
+          upload_object "studyinchina-backups/backups/daily/$day/raw-v1/catalog.sql.gz" "$RUNNER_TEMP/catalog.sql.gz" --content-type="application/gzip" --content-encoding="identity"
+          upload_object "studyinchina-backups/backups/daily/$day/raw-v1/pipeline.sql.gz" "$RUNNER_TEMP/pipeline.sql.gz" --content-type="application/gzip" --content-encoding="identity"
+          upload_object "studyinchina-backups/backups/daily/$day/raw-v1/sha256.txt" "$RUNNER_TEMP/backup-sha256.txt" --content-type="text/plain"
+          upload_object "studyinchina-backups/backups/monthly/$month/raw-v1/catalog.sql.gz" "$RUNNER_TEMP/catalog.sql.gz" --content-type="application/gzip" --content-encoding="identity"
+          upload_object "studyinchina-backups/backups/monthly/$month/raw-v1/pipeline.sql.gz" "$RUNNER_TEMP/pipeline.sql.gz" --content-type="application/gzip" --content-encoding="identity"
+          upload_object "studyinchina-backups/backups/monthly/$month/raw-v1/sha256.txt" "$RUNNER_TEMP/backup-sha256.txt" --content-type="text/plain"
+
+      - name: Read back and cryptographically verify daily checkpoint
+        shell: bash
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_D1_BACKUP_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          day="$(date -u +%F)"
+          readback="$RUNNER_TEMP/backup-readback"
+          mkdir -p "$readback"
+          download_object() {
+            local object="$1"
+            local file="$2"
+            if ! npx wrangler r2 object get "$object" --file "$file" --remote; then
+              echo "::error title=R2 backup readback failed::Unable to read back ${object}. The checkpoint must not be counted toward RPO."
+              exit 1
+            fi
+          }
+          download_object "studyinchina-backups/backups/daily/$day/raw-v1/catalog.sql.gz" "$readback/catalog.sql.gz"
+          download_object "studyinchina-backups/backups/daily/$day/raw-v1/pipeline.sql.gz" "$readback/pipeline.sql.gz"
+          download_object "studyinchina-backups/backups/daily/$day/raw-v1/sha256.txt" "$readback/backup-sha256.txt"
+          node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/cloudflare/backup-preflight.ts \
+            --phase artifacts --directory "$readback" \
+            | tee "$RUNNER_TEMP/backup-verification.json"
+
+      - name: Upload machine-readable backup verification
+        uses: actions/upload-artifact@v6
+        with:
+          name: d1-backup-verification-${{ github.run_id }}
+          path: ${{ runner.temp }}/backup-verification.json
+          if-no-files-found: error
+          retention-days: 35
 
       - name: Explain an incomplete backup
         if: ${{ failure() }}
@@ -150,7 +183,7 @@ jobs:
             echo '- Configuration failure: add or correct the named GitHub Actions repository secret, then rerun.'
             echo '- D1 access failure: verify token scope, account, database names and Cloudflare availability.'
             echo '- Export/artifact failure: inspect the first failing step; nothing is uploaded before checksum verification.'
-            echo '- R2 upload failure: treat the checkpoint as incomplete even if some objects were written, then rerun the whole job.'
+            echo '- R2 upload/readback failure: treat the checkpoint as incomplete even if some objects were written, then rerun the whole job.'
             echo
             echo 'Runbook: `docs/backup-and-restore.md#failure-semantics-and-triage`.'
           } >> "$GITHUB_STEP_SUMMARY"

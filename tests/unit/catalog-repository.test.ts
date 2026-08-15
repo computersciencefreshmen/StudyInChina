@@ -12,11 +12,9 @@ import {
   createJsonCatalogRepository,
   createShadowCatalogRepository,
   deriveCatalogRelease,
-  getCatalogRecordCounts,
   type CatalogFetch,
   type CatalogRepository,
 } from '@/lib/catalog'
-import { getDataReleaseDate } from '@/lib/data/release'
 import { selectPublishedData } from '@/lib/data/publication'
 import { bundleSchema } from '@/lib/data/schema'
 import type { DataBundle } from '@/lib/data/types'
@@ -67,13 +65,7 @@ describe('CatalogRepository', () => {
   it('derives release metadata and all six record counts for JSON compatibility', async () => {
     const repository = createJsonCatalogRepository(() => copyBundle())
 
-    const expectedDataDate = getDataReleaseDate(allData)
-    await expect(repository.getRelease()).resolves.toEqual({
-      id: `json:${expectedDataDate}`,
-      dataDate: expectedDataDate,
-      generatedAt: `${expectedDataDate}T00:00:00.000Z`,
-      recordCounts: getCatalogRecordCounts(allData),
-    })
+    await expect(repository.getRelease()).resolves.toEqual(deriveCatalogRelease(allData))
   })
 
   it('filters JSON programs by linked or specifically selected published scholarship scopes', async () => {

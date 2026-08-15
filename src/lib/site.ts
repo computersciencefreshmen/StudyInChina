@@ -23,6 +23,12 @@ export function requireLocale(value: string): LaunchLocale | null {
   return isPublicLocale(value) ? value : null
 }
 
+export type PageSearchParams = Record<string, string | string[] | undefined>
+
+export function hasSearchParameters(params: PageSearchParams): boolean {
+  return Object.keys(params).length > 0
+}
+
 type PageMetadataOptions = {
   indexable?: boolean
 }

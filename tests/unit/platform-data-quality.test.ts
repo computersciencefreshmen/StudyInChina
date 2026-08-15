@@ -50,8 +50,17 @@ describe('platform data-quality scorecard', () => {
     expect(report.metrics.publicRecords).toMatchObject({ universities: 2, programs: 3, scholarships: 1 })
     expect(report.metrics.programCoverage).toMatchObject({
       schoolsBelowThreePrograms: 2,
+      programsWithVerifiedIdentity: 3,
+      identityCoveragePct: 100,
+      programsWithFreshDisposition: 1,
+      freshDispositionCoveragePct: 33.33,
+      programsWithDatedOrRollingCycle: 1,
+      datedOrRollingCoveragePct: 33.33,
+      programsActiveOrUpcoming: 1,
+      activeUpcomingCoveragePct: 33.33,
       programsWithCurrentCycle: 1,
       currentCycleCoveragePct: 33.33,
+      currentCycleCoverageSemantics: 'deprecated_alias_of_dated_or_rolling',
       durationCoveragePct: 33.33,
       applicationUrlCoveragePct: 33.33,
       teachingLanguageCoveragePct: 66.67,
@@ -61,6 +70,31 @@ describe('platform data-quality scorecard', () => {
     expect(report.metrics.cities).toEqual({ withCoordinates: 1, coordinateCoveragePct: 50 })
     expect(report.gates.allPassed).toBe(false)
     expect(JSON.stringify(data)).toBe(snapshot)
+  })
+
+  it('does not let a date-free fee reference raise actionable cycle coverage', () => {
+    const data = fixture()
+    data.admissionCycles.push({
+      ...data.admissionCycles[0],
+      id: 'cycle-program-2-fee-reference',
+      programId: 'program-2',
+      opensOn: null,
+      closesOn: null,
+      dateStatus: 'not-announced',
+      tuitionCny: 24_000,
+      tuitionStatus: 'reference',
+      evidenceBasis: 'recurring-official-rule',
+    })
+
+    const report = buildPlatformDataQualityScorecard(data, [], { today: '2026-08-06' })
+
+    expect(report.metrics.publicRecords.admissionCycles).toBe(2)
+    expect(report.metrics.programCoverage).toMatchObject({
+      programsWithFreshDisposition: 1,
+      programsWithDatedOrRollingCycle: 1,
+      programsActiveOrUpcoming: 1,
+      programsWithCurrentCycle: 1,
+    })
   })
 
   it('reports overdue verified data and published cycles with no dates', () => {

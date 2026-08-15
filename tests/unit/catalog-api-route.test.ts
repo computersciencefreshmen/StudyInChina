@@ -55,6 +55,29 @@ describe('catalog API routes', () => {
     expect(response.status).toBe(200)
     expect(body.data.recordCounts.universities).toBeGreaterThan(0)
     expect(body.data.recordCounts.programs).toBe(publicBundle.programs.length)
+    expect(body.data.recordCounts).toEqual(body.data.publicCounts)
+    expect(body.data.rawCounts.programs).toBeGreaterThanOrEqual(body.data.publicCounts.programs)
+    expect(body.data.dataCheckedThrough).toMatch(/^\d{4}-\d{2}-\d{2}$/u)
+    expect(body.data.evaluatedForDate).toBe(getTodayDate())
+    expect(body.data.activatedAt).toMatch(/^\d{4}-\d{2}-\d{2}T/u)
+    expect(body.data.catalogBackend).toBe('json')
     expect(body.data.recordCounts.programs).toBeGreaterThan(0)
+  })
+
+  it('reports the immutable Vercel deployment SHA separately from release identity', async () => {
+    const previous = process.env.VERCEL_GIT_COMMIT_SHA
+    const sha = 'b'.repeat(40)
+    process.env.VERCEL_GIT_COMMIT_SHA = sha
+    try {
+      const response = await getCurrentRelease()
+      const body = await response.json()
+      expect(response.status).toBe(200)
+      expect(body.data.deploymentSha).toBe(sha)
+      expect(body.meta.release.deploymentSha).toBe(sha)
+      expect(body.data.id).not.toBe(sha)
+      expect(body.data.dataDate).toMatch(/^\d{4}-\d{2}-\d{2}$/u)
+    } finally {
+      process.env.VERCEL_GIT_COMMIT_SHA = previous
+    }
   })
 })

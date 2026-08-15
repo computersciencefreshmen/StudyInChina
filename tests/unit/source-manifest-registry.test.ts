@@ -14,10 +14,6 @@ import {
   type LoadedSourceManifest,
   type SourceManifestV2,
 } from '../../scripts/source-manifest-registry'
-import {
-  loadPilotSourceManifestFiles,
-  type PilotSourceManifest,
-} from '../../scripts/validate-source-manifests'
 
 const temporaryDirectories: string[] = []
 
@@ -27,33 +23,28 @@ afterEach(() => {
   }
 })
 
-function legacyInputs(): LoadedSourceManifest[] {
-  return loadPilotSourceManifestFiles().map((input) => ({
+function formalInputs(): LoadedSourceManifest[] {
+  return loadSourceManifestFiles(join(
+    process.cwd(),
+    'content',
+    'source-manifests',
+    'pilot',
+  )).map((input) => ({
     filePath: input.filePath,
     value: structuredClone(input.value),
   }))
 }
 
 function v2Fixture(): SourceManifestV2 {
-  const legacy = structuredClone(legacyInputs()[0]!.value) as PilotSourceManifest
-  const officialHosts = [
-    ...new Set(
-      legacy.sources.flatMap((source) => [
-        ...source.allowedHosts,
-        ...(source.allowedRedirectHosts ?? []),
-      ]),
-    ),
-  ]
+  const formal = structuredClone(formalInputs()[0]!.value) as SourceManifestV2
   return {
-    ...legacy,
-    version: 2,
+    ...formal,
     manifestStatus: 'in_progress',
-    officialHosts,
     catalogReconciliation: {
       scope: 'full_official_catalog',
       status: 'in_progress',
       entries: [{
-        sourceId: legacy.sources[0]!.id,
+        sourceId: formal.sources[0]!.id,
         officialKey: 'official-program-001',
         officialName: 'Official international programme',
         entityType: 'program',
@@ -75,7 +66,7 @@ describe('recursive source manifest registry', () => {
     )
     writeFileSync(
       join(nested, 'school.json'),
-      JSON.stringify(legacyInputs()[0]!.value),
+      JSON.stringify(formalInputs()[0]!.value),
     )
 
     const files = loadSourceManifestFiles(directory)
@@ -85,17 +76,19 @@ describe('recursive source manifest registry', () => {
   })
 
   it('does not require the old exact ten-school pilot set', () => {
-    const records = validateSourceManifests(legacyInputs().slice(0, 3))
+    const records = validateSourceManifests(formalInputs().slice(0, 3))
 
     expect(records).toHaveLength(3)
-    expect(records.every((record) => record.version === 1)).toBe(true)
+    expect(records.every((record) => (
+      record.version === 2 && record.manifestStatus === 'in_progress'
+    ))).toBe(true)
     expect(records.every((record) => !isCatalogReconciliationComplete(record))).toBe(true)
   })
 
   it('still rejects institution and source identities reused across manifests', () => {
-    const inputs = legacyInputs().slice(0, 2)
-    const first = inputs[0]!.value as PilotSourceManifest
-    const second = inputs[1]!.value as PilotSourceManifest
+    const inputs = formalInputs().slice(0, 2)
+    const first = inputs[0]!.value as SourceManifestV2
+    const second = inputs[1]!.value as SourceManifestV2
     second.institutionId = first.institutionId
     for (const source of second.sources) source.institutionId = first.institutionId
 
@@ -133,5 +126,24 @@ describe('recursive source manifest registry', () => {
 
     expect(validated).toBeDefined()
     expect(isCatalogReconciliationComplete(validated!)).toBe(true)
+
+    const limited = structuredClone(complete)
+    limited.catalogReconciliation.scope = 'limited_official_catalog'
+    const [validatedLimited] = validateSourceManifests([{
+      filePath: 'v2-limited-complete.json',
+      value: limited,
+    }])
+    expect(isCatalogReconciliationComplete(validatedLimited!)).toBe(true)
+
+    const representative = structuredClone(complete)
+    representative.catalogReconciliation.scope = 'representative_international_programs'
+
+    expect(isCatalogReconciliationComplete(representative)).toBe(false)
+    expect(() => validateSourceManifests([{
+      filePath: 'v2-representative-complete.json',
+      value: representative,
+    }])).toThrow(
+      /representative_international_programs cannot claim complete catalog reconciliation/,
+    )
   })
 })

@@ -11,7 +11,9 @@ export const BACKUP_DATABASES = [
   'studyinchina-catalog',
   'studyinchina-pipeline',
 ] as const
-export const BACKUP_BUCKET = 'studyinchina-releases'
+export const BACKUP_BUCKET = 'studyinchina-backups'
+export const BACKUP_TOKEN_SECRET = 'CLOUDFLARE_D1_BACKUP_TOKEN'
+export const RESTORE_TOKEN_SECRET = 'CLOUDFLARE_D1_RESTORE_TOKEN'
 export const BACKUP_CONFIGURATION_DOC =
   'docs/backup-and-restore.md#github-actions-configuration'
 const BACKUP_FILES = ['catalog.sql.gz', 'pipeline.sql.gz'] as const
@@ -25,11 +27,11 @@ export type BackupArtifactReport = {
 export function validateBackupCredentials(
   environment: Readonly<Record<string, string | undefined>>,
 ): { databases: number; bucket: string } {
-  const token = environment.CLOUDFLARE_API_TOKEN?.trim()
+  const token = environment[BACKUP_TOKEN_SECRET]?.trim()
   const accountId = environment.CLOUDFLARE_ACCOUNT_ID?.trim()
   if (!token || !accountId) {
     const missing = [
-      !token ? 'CLOUDFLARE_API_TOKEN' : undefined,
+      !token ? BACKUP_TOKEN_SECRET : undefined,
       !accountId ? 'CLOUDFLARE_ACCOUNT_ID' : undefined,
     ].filter((name): name is string => Boolean(name))
     throw new Error(
@@ -44,6 +46,30 @@ export function validateBackupCredentials(
     )
   }
   return { databases: BACKUP_DATABASES.length, bucket: BACKUP_BUCKET }
+}
+
+export function validateRestoreCredentials(
+  environment: Readonly<Record<string, string | undefined>>,
+): { bucket: string } {
+  const token = environment[RESTORE_TOKEN_SECRET]?.trim()
+  const accountId = environment.CLOUDFLARE_ACCOUNT_ID?.trim()
+  if (!token || !accountId) {
+    const missing = [
+      !token ? RESTORE_TOKEN_SECRET : undefined,
+      !accountId ? 'CLOUDFLARE_ACCOUNT_ID' : undefined,
+    ].filter((name): name is string => Boolean(name))
+    throw new Error(
+      `Missing required protected-environment secret(s): ${missing.join(', ')}. `
+      + `Configure them before rerunning; see ${BACKUP_CONFIGURATION_DOC}. No restore artifact was downloaded.`,
+    )
+  }
+  if (!/^[0-9a-f]{32}$/iu.test(accountId)) {
+    throw new Error(
+      'CLOUDFLARE_ACCOUNT_ID must be a 32-character hexadecimal identifier. '
+      + `See ${BACKUP_CONFIGURATION_DOC}. No restore artifact was downloaded.`,
+    )
+  }
+  return { bucket: BACKUP_BUCKET }
 }
 
 function escapeWorkflowCommand(value: string): string {
@@ -134,6 +160,11 @@ function main(): void {
     process.stdout.write(`${JSON.stringify({ ok: true, phase, ...result })}\n`)
     return
   }
+  if (phase === 'restore-credentials') {
+    const result = validateRestoreCredentials(process.env)
+    process.stdout.write(`${JSON.stringify({ ok: true, phase, ...result })}\n`)
+    return
+  }
   if (phase === 'artifacts') {
     const directory = argument(args, '--directory')
     if (!directory) throw new Error('--directory is required for artifact preflight')
@@ -141,7 +172,7 @@ function main(): void {
     process.stdout.write(`${JSON.stringify({ ok: true, phase, artifacts })}\n`)
     return
   }
-  throw new Error('Use --phase credentials or --phase artifacts')
+  throw new Error('Use --phase credentials, --phase restore-credentials or --phase artifacts')
 }
 
 if (isMainModule()) {

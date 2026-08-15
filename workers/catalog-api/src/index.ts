@@ -47,6 +47,9 @@ async function getActiveRelease(env: CatalogApiEnv): Promise<ActiveReleaseRow | 
       release.release_id,
       release.data_date,
       release.generated_at,
+      release.counts_json AS raw_counts_json,
+      (SELECT MAX(checked_at) FROM current_source_summaries) AS data_checked_through,
+      release.activated_at,
       json_object(
         'sources', (SELECT COUNT(*) FROM current_source_summaries),
         'cities', (
@@ -172,6 +175,19 @@ function safeSlug(value: string) {
   return decoded
 }
 
+function programIdsParam(params: URLSearchParams): string[] {
+  const raw = stringParam(params, 'ids', 804)
+  if (!raw) throw new InvalidRequestError('ids is required.')
+  const ids = [...new Set(raw.split(',').map((id) => id.trim()).filter(Boolean))]
+  if (ids.length < 1 || ids.length > 4) {
+    throw new InvalidRequestError('ids must contain between 1 and 4 unique program ids.')
+  }
+  if (ids.some((id) => !/^[a-z0-9][a-z0-9:_-]{0,199}$/u.test(id))) {
+    throw new InvalidRequestError('ids contains an invalid program id.')
+  }
+  return ids
+}
+
 function publicResponse(request: Request, payload: unknown, etag: string) {
   if (request.method === 'HEAD') {
     return new Response(null, {
@@ -248,6 +264,9 @@ async function publicCatalogResponse(request: Request, environment: CatalogApiEn
       cursor: stringParam(url.searchParams, 'cursor', 1_024),
       limit: integerParam(url.searchParams, 'limit', 1, 100),
     }), etag)
+  }
+  if (resource === 'programs' && parts.length === 4 && parts[3] === 'compare') {
+    return publicResponse(request, await api.comparePrograms(programIdsParam(url.searchParams)), etag)
   }
   if (resource === 'programs' && parts.length === 4) {
     const result = await api.getProgram(safeSlug(parts[3]!))

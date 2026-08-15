@@ -15,11 +15,17 @@ const admissionCycles = admissionCyclesJson as AdmissionCycle[]
 
 describe('ProgramExplorer', () => {
   it('normalizes a legacy discipline deep link into the complete field taxonomy', () => {
-    const expectedCount = programs.filter((program) => classifyProgramField(program) === 'engineering-technology').length
+    const engineeringPrograms = programs
+      .filter((program) => classifyProgramField(program) === 'engineering-technology')
+      .slice(0, 8)
+    const comparisonPrograms = programs
+      .filter((program) => classifyProgramField(program) !== 'engineering-technology')
+      .slice(0, 2)
+    const samplePrograms = [...engineeringPrograms, ...comparisonPrograms]
 
     render(
       <ProgramExplorer
-        programs={programs}
+        programs={samplePrograms}
         universities={universities}
         cycles={admissionCycles}
         locale="en"
@@ -29,7 +35,7 @@ describe('ProgramExplorer', () => {
     )
 
     expect(screen.getByLabelText('Field')).toHaveValue('engineering-technology')
-    expect(screen.getByText(`${expectedCount} programs`)).toBeVisible()
+    expect(screen.getByText(`${engineeringPrograms.length} programs`)).toBeVisible()
   })
 
   it('surfaces verified Chinese degree programs in the Chinese language and culture field', () => {

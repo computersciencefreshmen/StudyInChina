@@ -8,16 +8,24 @@ import {
   queryUniversityCatalogRepository,
   type UniversityCatalogSearchParams,
 } from '@/lib/university-catalog'
-import { pageMetadata, requireLocale } from '@/lib/site'
+import { hasSearchParameters, pageMetadata, requireLocale } from '@/lib/site'
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>
+  searchParams?: Promise<UniversityCatalogSearchParams>
+}) {
   const locale = requireLocale((await params).locale) || 'en'
   const messages = getMessages(locale)
+  const parameterized = searchParams ? hasSearchParameters(await searchParams) : false
   return pageMetadata(
     locale,
     messages.universities.title,
     messages.universities.intro,
     'universities',
+    { indexable: !parameterized },
   )
 }
 

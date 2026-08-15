@@ -1,8 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "institutionId": "uni-nanjing-university",
   "catalogStatus": "existing",
+  "manifestStatus": "in_progress",
   "checkedAt": "2026-07-20",
+  "officialHosts": ["hwxy.nju.edu.cn","nju.17gz.org"],
   "sources": [
     {
       "version": 1, "id": "nju-intl-admissions-home", "institutionId": "uni-nanjing-university", "entityType": "university", "sourceCategory": "international_admissions_home",
@@ -76,5 +78,36 @@
     { "sourceCategory": "program_detail", "status": "discovery_pending", "note": "Program-level pages will be discovered from the registered catalog anchors." },
     { "sourceCategory": "contacts", "status": "discovery_pending", "note": "A distinct stable official admissions contact page was not confirmed in this pilot review." },
     { "sourceCategory": "catalog_anchor", "status": "registered", "sourceIds": ["nju-admissions-catalog-anchor"] }
-  ]
+  ],
+  "catalogReconciliation": {
+    "scope": "representative_international_programs",
+    "status": "in_progress",
+    "entries": [
+      {
+        "sourceId": "nju-2026-chinese-government-scholarship",
+        "officialKey": "sch-gap-nju-2026-iclts-degree-coverage",
+        "officialName": "International Chinese Language Teachers Scholarship — NJU",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked only to an official source on the same host and in the same category; exact page evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "nju-intl-admissions-home",
+        "officialKey": "scholarship-jiangsu-government",
+        "officialName": "Jiangsu Government Scholarship",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked only to an official source on the same host and in the same category; exact page evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "nju-intl-admissions-home",
+        "officialKey": "scholarship-nanjing-university-international-student",
+        "officialName": "Nanjing University Scholarship for International Students",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked only to an official source on the same host and in the same category; exact page evidence and catalog completeness remain pending."
+      }
+    ],
+    "note": "V2 migration preserves the 2026-07-20 source audit. 3 exact-URL or same-host/same-category catalog relationships are queued for evidence review; all other identities and full-directory reconciliation remain unresolved."
+  }
 }

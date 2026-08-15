@@ -163,6 +163,47 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(queries.some(({ sql }) => sql.includes('FROM current_programs AS program'))).toBe(true)
   }, 30_000)
 
+  it('compares at most four programs from normalized SQL without reading the R2 bundle', async () => {
+    const listResponse = await worker.fetch(
+      new Request('https://catalog.test/api/v1/programs?limit=2'),
+      environment,
+    )
+    const list = await listResponse.json() as ApiEnvelopeDto<ProgramDto[]>
+    const ids = list.data.map((program) => program.id)
+    expect(ids).toHaveLength(2)
+
+    queries.length = 0
+    const readsBefore = r2Reads
+    const response = await worker.fetch(
+      new Request(
+        `https://catalog.test/api/v1/programs/compare?ids=${encodeURIComponent(`${ids.join(',')},prog-missing-record`)}`,
+      ),
+      environment,
+    )
+    const payload = await response.json() as ApiEnvelopeDto<{
+      items: Array<{
+        program: ProgramDto
+        currentCycle: ProgramCycleDto | null
+        linkedScholarshipCount: number
+      }>
+      missingIds: string[]
+    }>
+
+    expect(response.status, JSON.stringify(payload)).toBe(200)
+    expect(payload.data.items.map((item) => item.program.id)).toEqual(ids)
+    expect(payload.data.missingIds).toEqual(['prog-missing-record'])
+    expect(payload.data.items.every((item) => (
+      Number.isInteger(item.linkedScholarshipCount)
+      && item.linkedScholarshipCount >= 0
+      && item.program.attributes.officialUrl.startsWith('https://')
+      && (item.program.attributes.applyUrl === null
+        || item.program.attributes.applyUrl.startsWith('https://'))
+    ))).toBe(true)
+    expect(JSON.stringify(payload).length).toBeLessThan(150_000)
+    expect(r2Reads).toBe(readsBefore)
+    expect(queries.some(({ sql }) => sql.includes('target_programs AS MATERIALIZED'))).toBe(true)
+  }, 30_000)
+
   it('filters programs to any explicitly linked scholarship without treating linked as a slug', async () => {
     queries.length = 0
     const response = await worker.fetch(

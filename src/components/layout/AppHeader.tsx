@@ -1,13 +1,14 @@
 'use client'
 
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { SiteHeader } from '@/components/layout'
 import { useFavorites } from '@/components/features/useFavorites'
 import { cx } from '@/components/ui/cx'
-import { localeNames, localizePathname, publicLocales, type LaunchLocale } from '@/i18n/config'
+import { isBetaLocale, localeNames, localizeNavigationHref, publicLocales, type LaunchLocale } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
+import { betaContentFallbackNotice } from '@/i18n/navigation-experience'
 
 function ShortlistLink({ href, label, active }: { href: string; label: string; active: boolean }) {
   const { favorites, ready } = useFavorites()
@@ -26,14 +27,16 @@ function ShortlistLink({ href, label, active }: { href: string; label: string; a
   )
 }
 
-export function AppHeader({ locale }: { locale: LaunchLocale }) {
-  const pathname = usePathname()
+function HeaderContent({
+  locale,
+  pathname,
+  searchParams,
+}: {
+  locale: LaunchLocale
+  pathname: string
+  searchParams: URLSearchParams
+}) {
   const messages = getMessages(locale)
-
-  useEffect(() => {
-    document.cookie = `studycn-locale=${locale}; Path=/; Max-Age=31536000; SameSite=Lax`
-  }, [locale])
-
   const nav = [
     ['', messages.nav.home],
     ['universities', messages.nav.universities],
@@ -44,27 +47,54 @@ export function AppHeader({ locale }: { locale: LaunchLocale }) {
   ] as const
   const favoritesHref = `/${locale}/favorites`
   const favoritesActive = pathname.startsWith(favoritesHref)
+  const routeSegment = pathname.split('/')[2]
+  const showsCatalogData = ['universities', 'programs', 'scholarships', 'cities']
+    .includes(routeSegment || '')
 
-  return <SiteHeader
-    locale={locale}
-    homeHref={`/${locale}`}
-    brandName={messages.brand}
-    brandTagline={messages.shell.brandTagline}
-    navLabel={messages.shell.navLabel}
-    languageLabel={messages.common.language}
-    mobileMenuLabel={messages.shell.mobileMenuLabel}
-    skipLinkLabel={messages.shell.skipLinkLabel}
-    navItems={nav.map(([segment, label]) => ({
-      label,
-      href: segment ? `/${locale}/${segment}` : `/${locale}`,
-      active: segment ? pathname.startsWith(`/${locale}/${segment}`) : pathname === `/${locale}`,
-    }))}
-    languages={publicLocales.map((code) => ({
-      code,
-      label: localeNames[code],
-      href: localizePathname(pathname, code),
-      active: code === locale,
-    }))}
-    actions={<ShortlistLink href={favoritesHref} label={messages.nav.favorites} active={favoritesActive} />}
-  />
+  return <>
+    <SiteHeader
+      locale={locale}
+      homeHref={`/${locale}`}
+      brandName={messages.brand}
+      brandTagline={messages.shell.brandTagline}
+      navLabel={messages.shell.navLabel}
+      languageLabel={messages.common.language}
+      mobileMenuLabel={messages.shell.mobileMenuLabel}
+      skipLinkLabel={messages.shell.skipLinkLabel}
+      navItems={nav.map(([segment, label]) => ({
+        label,
+        href: segment ? `/${locale}/${segment}` : `/${locale}`,
+        active: segment ? pathname.startsWith(`/${locale}/${segment}`) : pathname === `/${locale}`,
+      }))}
+      languages={publicLocales.map((code) => ({
+        code,
+        label: localeNames[code],
+        href: localizeNavigationHref(pathname, searchParams, code),
+        active: code === locale,
+      }))}
+      actions={<ShortlistLink href={favoritesHref} label={messages.nav.favorites} active={favoritesActive} />}
+    />
+    {isBetaLocale(locale) && showsCatalogData ? (
+      <div className="atlas-container" role="note">
+        <p className="notice">{betaContentFallbackNotice(locale)}</p>
+      </div>
+    ) : null}
+  </>
+}
+
+function QueryAwareHeader({ locale, pathname }: { locale: LaunchLocale; pathname: string }) {
+  const searchParams = useSearchParams()
+  return <HeaderContent locale={locale} pathname={pathname} searchParams={new URLSearchParams(searchParams.toString())} />
+}
+
+export function AppHeader({ locale }: { locale: LaunchLocale }) {
+  const pathname = usePathname()
+
+  useEffect(() => {
+    document.cookie = `studycn-locale=${locale}; Path=/; Max-Age=31536000; SameSite=Lax`
+  }, [locale])
+
+  return <Suspense fallback={<HeaderContent locale={locale} pathname={pathname} searchParams={new URLSearchParams()} />}>
+    <QueryAwareHeader locale={locale} pathname={pathname} />
+  </Suspense>
 }

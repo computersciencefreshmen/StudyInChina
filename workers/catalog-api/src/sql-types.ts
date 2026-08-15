@@ -28,18 +28,28 @@ export type FieldMetaDto = {
   sourceIds: string[]
 }
 
+export type ReleaseRecordCountsDto = {
+  sources: number
+  cities: number
+  universities: number
+  programs: number
+  admissionCycles: number
+  scholarships: number
+}
+
 export type ReleaseInfoDto = {
   id: string
   dataDate: string
   generatedAt: string
-  recordCounts: {
-    sources: number
-    cities: number
-    universities: number
-    programs: number
-    admissionCycles: number
-    scholarships: number
-  }
+  // Deprecated compatibility alias of publicCounts.
+  recordCounts: ReleaseRecordCountsDto
+  rawCounts: ReleaseRecordCountsDto
+  publicCounts: ReleaseRecordCountsDto
+  dataCheckedThrough: string
+  evaluatedForDate: string
+  activatedAt: string
+  catalogBackend: 'd1'
+  deploymentSha: null
 }
 
 export type ApiMetaDto = {

@@ -50,6 +50,11 @@ if (-not (Test-Path -LiteralPath $localVerifier -PathType Leaf)) {
   throw 'Local D1 verifier is missing.'
 }
 
+$localImporter = Join-Path (Join-Path (Join-Path $repositoryRoot 'scripts') 'cloudflare') 'import-restored-d1.mjs'
+if (-not (Test-Path -LiteralPath $localImporter -PathType Leaf)) {
+  throw 'Local D1 bulk importer is missing.'
+}
+
 # Keep all Wrangler state inside the disposable drill directory. The script has
 # no remote mode and every D1 invocation below includes --local explicitly.
 $env:XDG_CONFIG_HOME = Join-Path $runDirectory 'xdg-config'
@@ -151,6 +156,23 @@ function Expand-GzipBounded {
   }
 }
 
+function Write-RestoreProgress {
+  param(
+    [string]$Kind,
+    [string]$Phase,
+    [string]$Status,
+    [long]$ElapsedMilliseconds = -1
+  )
+
+  $elapsed = if ($ElapsedMilliseconds -ge 0) {
+    " elapsedMs=$ElapsedMilliseconds"
+  } else {
+    ''
+  }
+  $timestamp = (Get-Date).ToUniversalTime().ToString('o')
+  [Console]::Error.WriteLine("[restore-drill] timestamp=$timestamp database=$Kind phase=$Phase status=$Status$elapsed")
+}
+
 function Invoke-Wrangler {
   param([string[]]$Arguments)
 
@@ -217,7 +239,11 @@ function Initialize-IsolatedSchema {
   if ($migrationFiles.Count -eq 0) {
     throw "No migrations found for $Kind."
   }
+  $migrationIndex = 0
   foreach ($migration in $migrationFiles) {
+    $migrationIndex += 1
+    $migrationWatch = [System.Diagnostics.Stopwatch]::StartNew()
+    Write-RestoreProgress $Kind "migration-$migrationIndex-$($migration.Name)" 'started'
     Invoke-Wrangler @(
       'd1', 'execute', $Binding,
       '--local',
@@ -226,6 +252,8 @@ function Initialize-IsolatedSchema {
       '--file', $migration.FullName,
       '--yes'
     ) | Out-Null
+    $migrationWatch.Stop()
+    Write-RestoreProgress $Kind "migration-$migrationIndex-$($migration.Name)" 'completed' $migrationWatch.ElapsedMilliseconds
   }
 
   # A data-only export may contain rows that would correctly be rejected by
@@ -311,6 +339,35 @@ function Invoke-LocalDatabaseVerifier {
   }
 }
 
+function Invoke-LocalDataImporter {
+  param(
+    [string]$Kind,
+    [string]$SqlPath
+  )
+
+  $previousErrorPreference = $ErrorActionPreference
+  try {
+    $ErrorActionPreference = 'Continue'
+    $output = @(& $node --no-warnings $localImporter $stateDirectory $Kind $SqlPath 2>&1 | ForEach-Object { "$_" })
+    $exitCode = $LASTEXITCODE
+  } finally {
+    $ErrorActionPreference = $previousErrorPreference
+  }
+  $json = ($output -join "`n").Trim()
+  if ($exitCode -ne 0) {
+    throw "Local SQLite data import failed for $Kind`n$json"
+  }
+  try {
+    $result = $json | ConvertFrom-Json
+  } catch {
+    throw "Local SQLite data importer returned invalid JSON for $Kind`n$json"
+  }
+  if ([string]$result.engine -ne 'node:sqlite') {
+    throw "Local SQLite data importer returned an unexpected engine for $Kind"
+  }
+  return $result
+}
+
 function Test-RestoredDatabase {
   param([System.Collections.IDictionary]$Definition)
 
@@ -318,6 +375,11 @@ function Test-RestoredDatabase {
   $binding = [string]$Definition.binding
   $archiveName = "$kind.sql.gz"
   $archivePath = Join-Path $backupRoot $archiveName
+  $databaseWatch = [System.Diagnostics.Stopwatch]::StartNew()
+  $phaseDurations = [ordered]@{}
+  Write-RestoreProgress $kind 'database' 'started'
+  $phaseWatch = [System.Diagnostics.Stopwatch]::StartNew()
+
   if (-not (Test-Path -LiteralPath $archivePath -PathType Leaf)) {
     throw "Backup archive is missing: $archiveName"
   }
@@ -330,28 +392,56 @@ function Test-RestoredDatabase {
   if ($actualSha256 -ne $expectedSha256) {
     throw "SHA-256 mismatch for $archiveName"
   }
+  $phaseWatch.Stop()
+  $phaseDurations['archiveVerification'] = $phaseWatch.ElapsedMilliseconds
+  Write-RestoreProgress $kind 'archive-verification' 'completed' $phaseWatch.ElapsedMilliseconds
 
+  $phaseWatch.Restart()
+  Write-RestoreProgress $kind 'decompression' 'started'
   $sqlPath = Join-Path $runDirectory "$kind.sql"
   $uncompressedBytes = Expand-GzipBounded $archivePath $sqlPath $MaxUncompressedBytes
   if ($uncompressedBytes -le 0) {
     throw "Backup archive is empty after decompression: $archiveName"
   }
+  $phaseWatch.Stop()
+  $phaseDurations['decompression'] = $phaseWatch.ElapsedMilliseconds
+  Write-RestoreProgress $kind 'decompression' 'completed' $phaseWatch.ElapsedMilliseconds
 
+  $phaseWatch.Restart()
+  Write-RestoreProgress $kind 'schema-initialization' 'started'
   $triggerRows = @(Initialize-IsolatedSchema $binding $kind)
-  Invoke-Wrangler @(
-    'd1', 'execute', $binding,
-    '--local',
-    '--persist-to', $stateDirectory,
-    '--config', $configPath,
-    '--file', $sqlPath,
-    '--yes'
-  ) | Out-Null
+  $phaseWatch.Stop()
+  $phaseDurations['schemaInitialization'] = $phaseWatch.ElapsedMilliseconds
+  Write-RestoreProgress $kind 'schema-initialization' 'completed' $phaseWatch.ElapsedMilliseconds
+
+  $phaseWatch.Restart()
+  Write-RestoreProgress $kind 'data-import' 'started'
+  $dataImport = Invoke-LocalDataImporter $kind $sqlPath
+  if ([long]$dataImport.sqlBytes -ne [long]$uncompressedBytes) {
+    throw "$kind data importer byte count does not match decompressed backup"
+  }
+  $phaseWatch.Stop()
+  $phaseDurations['dataImport'] = $phaseWatch.ElapsedMilliseconds
+  Write-RestoreProgress $kind 'data-import' 'completed' $phaseWatch.ElapsedMilliseconds
+
+  $phaseWatch.Restart()
+  Write-RestoreProgress $kind 'trigger-search-restore' 'started'
   Restore-IsolatedTriggersAndSearch $binding $kind $triggerRows
+  $phaseWatch.Stop()
+  $phaseDurations['triggerAndSearchRestore'] = $phaseWatch.ElapsedMilliseconds
+  Write-RestoreProgress $kind 'trigger-search-restore' 'completed' $phaseWatch.ElapsedMilliseconds
 
   # D1 deliberately blocks integrity_check through its query API. The verifier
   # opens only Wrangler's isolated local SQLite file in read-only mode so both
   # integrity_check and foreign_key_check can still be executed exactly.
+  $phaseWatch.Restart()
+  Write-RestoreProgress $kind 'verification' 'started'
   $verification = Invoke-LocalDatabaseVerifier $kind
+  $phaseWatch.Stop()
+  $phaseDurations['verification'] = $phaseWatch.ElapsedMilliseconds
+  Write-RestoreProgress $kind 'verification' 'completed' $phaseWatch.ElapsedMilliseconds
+  $databaseWatch.Stop()
+  $phaseDurations['total'] = $databaseWatch.ElapsedMilliseconds
   $databaseReport = [ordered]@{
     kind = $kind
     isolatedDatabaseName = [string]$Definition.databaseName
@@ -363,6 +453,14 @@ function Test-RestoredDatabase {
     integrityCheck = [string]$verification.integrityCheck
     coreTables = @($verification.coreTables)
     triggerCount = [long]$verification.triggerCount
+    dataImport = [ordered]@{
+      engine = [string]$dataImport.engine
+      transactionMode = [string]$dataImport.transactionMode
+      sqlBytes = [long]$dataImport.sqlBytes
+      elapsedMs = [double]$dataImport.elapsedMs
+      databaseFile = [string]$dataImport.databaseFile
+    }
+    phaseDurationsMs = $phaseDurations
   }
 
   if ($kind -eq 'catalog') {
@@ -389,6 +487,7 @@ function Test-RestoredDatabase {
     }
   }
 
+  Write-RestoreProgress $kind 'database' 'completed' $databaseWatch.ElapsedMilliseconds
   return $databaseReport
 }
 
