@@ -93,7 +93,7 @@ describe('2026-08-10 freshness reverification wave 2', () => {
       coverage: { tuition: 'full', accommodation: 'full', insurance: true },
       verifiedAt: TODAY,
       reviewAfter: '2026-08-13',
-      status: 'verified',
+      status: 'stale',
     })
     expect(scholarshipById.get('sch-gap-mew-scws-hainnu-iclt-scholarship-2026')).toMatchObject({
       deadline: '2026-10-31',

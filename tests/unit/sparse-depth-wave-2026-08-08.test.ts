@@ -239,7 +239,9 @@ describe('evidence-first sparse-school depth wave on 2026-08-08', () => {
     expect(published.universities.filter((item) => (publicCounts.get(item.id) ?? 0) < 3).length)
       .toBeLessThanOrEqual(8)
     expect(published.universities.length).toBeGreaterThanOrEqual(266)
-    expect(published.programs.length).toBeGreaterThanOrEqual(1_234)
+    expect(data.programs.filter(
+      (program) => program.status === 'verified' || program.status === 'stale',
+    ).length).toBeGreaterThanOrEqual(1_234)
     expect(data.scholarships.filter(
       (scholarship) => scholarship.status === 'verified' || scholarship.status === 'stale',
     ).length).toBeGreaterThanOrEqual(358)

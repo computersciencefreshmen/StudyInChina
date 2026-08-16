@@ -55,8 +55,9 @@ export async function getCurrentCatalogRelease(): Promise<ApiEnvelope<ReleaseInf
   const operational = await operationalRelease(activeRepository)
   let release = releaseInfo(operational, activeRepository.mode)
   if (activeRepository.mode === 'json') {
+    const evaluatedForDate = getTodayDate()
     const rawBundle = await activeRepository.getBundle()
-    const publicBundle = selectCatalogApiData(rawBundle, getTodayDate())
+    const publicBundle = selectCatalogApiData(rawBundle, evaluatedForDate)
     const rawCounts = getCatalogRecordCounts(rawBundle)
     const publicCounts = getCatalogRecordCounts(publicBundle)
     release = {
@@ -64,6 +65,7 @@ export async function getCurrentCatalogRelease(): Promise<ApiEnvelope<ReleaseInf
       recordCounts: publicCounts,
       rawCounts,
       publicCounts,
+      evaluatedForDate,
     }
   }
   return {

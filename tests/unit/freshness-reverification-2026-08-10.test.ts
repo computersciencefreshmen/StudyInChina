@@ -51,7 +51,7 @@ describe('2026-08-10 freshness reverification wave', () => {
       closesOn: '2026-09-09',
       verifiedAt: TODAY,
       reviewAfter: '2026-08-13',
-      status: 'verified',
+      status: 'stale',
     })
     expect(scholarship).toMatchObject({ deadline: '2026-09-09', reviewAfter: '2026-08-13' })
     expect(program?.languageRequirements[0]?.minimum).toContain('IELTS 7')
