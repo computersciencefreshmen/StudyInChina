@@ -11,7 +11,9 @@ for (const locale of locales) {
       expect(response?.ok(), `${locale}/${route || 'home'} should respond successfully`).toBe(true)
       await expect(page.locator('html')).toHaveAttribute('lang', locale)
       await expect(page.locator('html')).toHaveAttribute('dir', 'ltr')
-      await expect(page.locator('header.atlas-site-header')).toBeVisible()
+      const header = page.locator('header.atlas-site-header')
+      await expect(header).toHaveCount(1)
+      await expect(header).toBeVisible()
       await expect(page.locator('main#main-content')).toBeVisible()
     }
   })
@@ -33,8 +35,9 @@ test('the root route redirects using the accepted launch language', async ({ bro
 test('the skip link moves keyboard focus into the main content', async ({ page }) => {
   await page.goto('/en', { waitUntil: 'domcontentloaded' })
 
-  await page.keyboard.press('Tab')
   const skipLink = page.locator('.atlas-skip-link')
+  await expect(skipLink).toHaveCount(1)
+  await page.keyboard.press('Tab')
   await expect(skipLink).toBeFocused()
   await page.keyboard.press('Enter')
 
