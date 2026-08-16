@@ -40,7 +40,7 @@ The product is built around three promises:
 
 </div>
 
-The public catalogue contains **63 published cycle or fee-reference records** and is backed by **2,070 registered official source records**. A published record is not automatically an open application window; the decision-oriented metrics below are evaluated for **2026-08-15** with `npm run quality:platform-scorecard`.
+The public catalogue contains **52 published cycle or fee-reference records** and is backed by **2,070 registered official source records**. A published record is not automatically an open application window; the decision-oriented metrics below are evaluated for **2026-08-16** with `npm run quality:platform-scorecard`.
 
 <details>
 <summary><strong>Open the honest data-depth scorecard</strong></summary>
@@ -290,7 +290,7 @@ See [`docs/platform-rollout.md`](./docs/platform-rollout.md), [`docs/backup-and-
 
 ```mermaid
 flowchart LR
-    N["Now<br/>266 public universities"] --> D["Data depth<br/>70% current-cycle coverage"]
+    N["Now<br/>266 public universities"] --> D["Data depth<br/>70% fresh dispositions"]
     D --> T["Trust coverage<br/>266 manifests + reconciliations"]
     T --> C["D1 cutover<br/>3 releases / 72h shadow parity"]
     C --> F["500 universities<br/>after 2 healthy monthly cycles"]

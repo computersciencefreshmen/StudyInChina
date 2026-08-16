@@ -260,7 +260,7 @@ describe('evidence-first sparse-school depth wave on 2026-08-08', () => {
       expect(cycle.closesOn, cycle.id).toBeNull()
       expect(cycle.dateStatus, cycle.id).toBe('not-announced')
       expect(cycle.tuitionStatus, cycle.id).toBe('reference')
-      expect(cycle.status, cycle.id).toBe('verified')
+      expect(cycle.status, cycle.id).toBe('stale')
     }
     expect(JSON.stringify({ admissionCycles, programs, scholarships })).not.toMatch(/2026-06-31|June 31/iu)
   })
