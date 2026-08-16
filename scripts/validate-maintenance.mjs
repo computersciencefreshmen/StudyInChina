@@ -161,21 +161,30 @@ requirePattern(
   /concurrency:[\s\S]*group:\s*vercel-production-alias[\s\S]*cancel-in-progress:\s*false/,
   'Vercel alias promotion must serialize runs without cancelling an in-progress mutation.',
 )
-const aliasPromotionStart = alias.indexOf('- name: Promote stable production alias')
-const aliasStableSmokeStart = alias.indexOf('- name: Verify stable alias release API')
-if (aliasPromotionStart < 0 || aliasStableSmokeStart <= aliasPromotionStart) {
-  throw new Error('The Vercel alias mutation and stable smoke steps are missing or misordered.')
+const aliasPromotionStart = alias.indexOf('- name: Promote stable production alias transaction and verify release API')
+if (aliasPromotionStart < 0) {
+  throw new Error('The fail-closed Vercel alias transaction is missing.')
 }
-const aliasPromotionBlock = alias.slice(aliasPromotionStart, aliasStableSmokeStart)
+const aliasPromotionBlock = alias.slice(aliasPromotionStart)
 requirePattern(
   aliasPromotionBlock,
-  /alias list[\s\S]*previous_target=[\s\S]*final_main_sha=[\s\S]*vercel@58\.0\.0 alias set[\s\S]*post_promotion_main_sha=[\s\S]*vercel@58\.0\.0 alias set[\s\S]*previous_target/,
+  /alias list[\s\S]*rollback_on_failure\(\)[\s\S]*vercel@58\.0\.0 alias set[\s\S]*previous_target[\s\S]*trap rollback_on_failure EXIT[\s\S]*previous_target=[\s\S]*final_main_sha=[\s\S]*mutation_attempted=true[\s\S]*vercel@58\.0\.0 alias set[\s\S]*DEPLOYMENT_URL[\s\S]*post_promotion_main_sha=[\s\S]*studyinchina\.vercel\.app\/api\/v1\/releases\/current[\s\S]*transaction_committed=true/,
   'Alias mutation must capture the previous target, recheck main immediately, and retain a rollback path.',
 )
 requirePattern(
   aliasPromotionBlock,
-  /\/git\/ref\/heads\/main[\s\S]*Production promotion raced with main[\s\S]*Stable alias rollback failed/,
-  'Alias mutation must fail closed and roll back when main advances during promotion.',
+  /\/git\/ref\/heads\/main/,
+  'Alias mutation must re-read the current main SHA inside the transaction.',
+)
+requirePattern(
+  aliasPromotionBlock,
+  /Production promotion raced with main/,
+  'Alias mutation must fail closed when main advances during promotion.',
+)
+requirePattern(
+  aliasPromotionBlock,
+  /Stable alias rollback failed[\s\S]*Stable alias rollback verification failed/,
+  'Alias mutation must retain explicit rollback and rollback-verification failure paths.',
 )
 if ((aliasPromotionBlock.match(/vercel@58\.0\.0 alias set/gu) ?? []).length !== 2) {
   throw new Error('The alias mutation step must contain one promotion and one rollback command.')
@@ -186,7 +195,7 @@ requirePattern(
   'Immutable and stable release smokes must prove the exact deployment SHA.',
 )
 requirePattern(
-  alias.slice(aliasStableSmokeStart),
+  aliasPromotionBlock,
   /\.data\.publicCounts\.programs \| type == "number" and \. > 0/,
   'The stable release smoke must reject an empty or non-numeric public program count.',
 )
