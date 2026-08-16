@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Button, LinkButton } from '@/components/ui'
 import type { LaunchLocale } from '@/i18n/config'
 import type { Messages } from '@/i18n/messages'
@@ -25,13 +26,14 @@ const labels: Record<LaunchLocale, {
   previous: string
   sortBy: string
   linkedScholarship: string
+  statusShortcuts: string
 }> = {
-  en: { apply: 'Apply filters', defaultOrder: 'Default order', next: 'Next', pagination: 'Program catalogue pages', previous: 'Previous', sortBy: 'Sort by', linkedScholarship: 'Linked scholarship' },
-  zh: { apply: '应用筛选', defaultOrder: '默认顺序', next: '下一页', pagination: '项目目录分页', previous: '上一页', sortBy: '排序方式', linkedScholarship: '有关联奖学金' },
-  ru: { apply: 'Применить фильтры', defaultOrder: 'По умолчанию', next: 'Далее', pagination: 'Страницы каталога программ', previous: 'Назад', sortBy: 'Сортировка', linkedScholarship: 'Есть связанная стипендия' },
-  de: { apply: 'Filter anwenden', defaultOrder: 'Standardreihenfolge', next: 'Weiter', pagination: 'Studiengangseiten', previous: 'Zurück', sortBy: 'Sortieren nach', linkedScholarship: 'Verknüpftes Stipendium' },
-  fr: { apply: 'Appliquer les filtres', defaultOrder: 'Ordre par défaut', next: 'Suivant', pagination: 'Pages du catalogue des programmes', previous: 'Précédent', sortBy: 'Trier par', linkedScholarship: 'Bourse associée' },
-  es: { apply: 'Aplicar filtros', defaultOrder: 'Orden predeterminado', next: 'Siguiente', pagination: 'Páginas del catálogo de programas', previous: 'Anterior', sortBy: 'Ordenar por', linkedScholarship: 'Beca vinculada' },
+  en: { apply: 'Apply filters', defaultOrder: 'Default order', next: 'Next', pagination: 'Program catalogue pages', previous: 'Previous', sortBy: 'Sort by', linkedScholarship: 'Linked scholarship', statusShortcuts: 'Application status shortcuts' },
+  zh: { apply: '应用筛选', defaultOrder: '默认顺序', next: '下一页', pagination: '项目目录分页', previous: '上一页', sortBy: '排序方式', linkedScholarship: '有关联奖学金', statusShortcuts: '申请状态快捷筛选' },
+  ru: { apply: 'Применить фильтры', defaultOrder: 'По умолчанию', next: 'Далее', pagination: 'Страницы каталога программ', previous: 'Назад', sortBy: 'Сортировка', linkedScholarship: 'Есть связанная стипендия', statusShortcuts: 'Быстрый выбор статуса заявки' },
+  de: { apply: 'Filter anwenden', defaultOrder: 'Standardreihenfolge', next: 'Weiter', pagination: 'Studiengangseiten', previous: 'Zurück', sortBy: 'Sortieren nach', linkedScholarship: 'Verknüpftes Stipendium', statusShortcuts: 'Schnellfilter für Bewerbungsstatus' },
+  fr: { apply: 'Appliquer les filtres', defaultOrder: 'Ordre par défaut', next: 'Suivant', pagination: 'Pages du catalogue des programmes', previous: 'Précédent', sortBy: 'Trier par', linkedScholarship: 'Bourse associée', statusShortcuts: 'Filtres rapides du statut de candidature' },
+  es: { apply: 'Aplicar filtros', defaultOrder: 'Orden predeterminado', next: 'Siguiente', pagination: 'Páginas del catálogo de programas', previous: 'Anterior', sortBy: 'Ordenar por', linkedScholarship: 'Beca vinculada', statusShortcuts: 'Filtros rápidos del estado de solicitud' },
 }
 
 type SelectOption = { value: string; label: string }
@@ -134,7 +136,29 @@ export function ProgramExplorerV2({
     filters.sort === 'default' ? '' : filters.sort,
   ].filter(Boolean).length
 
+  const statusHref = (applicationState: 'open' | 'upcoming') => programCatalogHref(locale, {
+    ...filters,
+    applicationState,
+    page: 1,
+    cursor: '',
+    cursorHistory: [],
+    nextCursor: '',
+  }, 1)
+
   return <>
+    <nav className={styles.quickFilters} aria-label={text.statusShortcuts}>
+      <span>{messages.programs.statusFilter}</span>
+      {(['open', 'upcoming'] as const).map((state) => (
+        <Link
+          key={state}
+          href={statusHref(state)}
+          aria-current={filters.applicationState === state ? 'page' : undefined}
+          className={`${styles.quickFilter} ${filters.applicationState === state ? styles.isActive : ''}`}
+        >
+          {state === 'open' ? messages.common.openNow : messages.programs.upcoming}
+        </Link>
+      ))}
+    </nav>
     <form
       className={`filter-panel filter-panel--programs ${styles.panel}`}
       role="search"

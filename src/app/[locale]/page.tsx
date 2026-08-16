@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { Badge, Card, LinkButton, PageHero, SectionHeading } from '@/components/ui'
 import { CityConstellation } from '@/components/features/CityConstellation'
 import { UniversityCard } from '@/components/features/RecordCards'
-import { getHomeExperienceCopy } from '@/i18n/home-experience'
+import { formatStudentCityTitle, getHomeExperienceCopy } from '@/i18n/home-experience'
 import { getMessages } from '@/i18n/messages'
 import { localize } from '@/lib/data/format'
 import { classifyProgramField, programFieldTaxonomy } from '@/lib/data/fields'
@@ -28,7 +28,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const sourceCheckLabel = latestSourceCheck
     ? new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(`${latestSourceCheck}T00:00:00Z`))
     : messages.common.unknown
-  const pathwayHrefs = ['universities', 'programs', 'data-policy', 'guides'] as const
+  const pathwayHrefs = [
+    'universities',
+    'programs',
+    'guides/verify-admissions-data',
+    'programs?applicationState=open',
+  ] as const
 
   return <>
     <PageHero variant="feature" eyebrow={messages.home.eyebrow} title={messages.home.title} description={messages.home.intro}
@@ -83,7 +88,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     </section>
 
     <section className="atlas-container atlas-section">
-      <SectionHeading eyebrow="03" title={messages.home.cityTitle} description={messages.cities.intro} action={<LinkButton href={`/${locale}/cities`} variant="quiet">{messages.common.explore} →</LinkButton>} />
+      <SectionHeading eyebrow="03" title={formatStudentCityTitle(data.cities.length, locale)} description={messages.cities.intro} action={<LinkButton href={`/${locale}/cities`} variant="quiet">{messages.common.explore} →</LinkButton>} />
       <CityConstellation cities={data.cities} locale={locale} />
     </section>
 

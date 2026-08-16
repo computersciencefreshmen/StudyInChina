@@ -17,6 +17,9 @@ const data = bundleSchema.parse({
   scholarships,
 })
 const published = selectPublishedData(data, '2026-07-29')
+const auditedPrograms = data.programs.filter(
+  (program) => program.status === 'verified' || program.status === 'stale',
+)
 
 const priorityCoverage = new Map([
   ['uni-tsinghua-university', 42],
@@ -32,7 +35,7 @@ const priorityCoverage = new Map([
 
 describe('verified broad university expansion on 2026-07-29', () => {
   it('restores Tsinghua with official program-level evidence', () => {
-    const tsinghuaPrograms = published.programs.filter(
+    const tsinghuaPrograms = auditedPrograms.filter(
       (program) => program.universityId === 'uni-tsinghua-university',
     )
 
@@ -71,7 +74,7 @@ describe('verified broad university expansion on 2026-07-29', () => {
       (cycle) => cycle.id === 'cycle-2027-tsinghua-university-chinese-language-program-language',
     )).toBe(false)
 
-    const schwarzmanCycle = published.admissionCycles.find(
+    const schwarzmanCycle = data.admissionCycles.find(
       (cycle) => cycle.id === 'cycle-2027-schwarzman-scholars-global',
     )
     expect(schwarzmanCycle).toMatchObject({
@@ -79,13 +82,18 @@ describe('verified broad university expansion on 2026-07-29', () => {
       opensOn: '2026-04-08',
       closesOn: '2026-09-09',
       dateStatus: 'published',
+      status: 'stale',
     })
+    expect(published.admissionCycles.some(
+      (cycle) => cycle.id === 'cycle-2027-schwarzman-scholars-global',
+    )).toBe(false)
 
-    const schwarzmanScholarship = published.scholarships.find(
+    const schwarzmanScholarship = data.scholarships.find(
       (scholarship) => scholarship.id === 'scholarship-schwarzman-scholars-2027',
     )
     expect(schwarzmanScholarship).toMatchObject({
       deadline: '2026-09-09',
+      status: 'stale',
       coverage: {
         tuition: 'full',
         accommodation: 'full',
@@ -95,11 +103,14 @@ describe('verified broad university expansion on 2026-07-29', () => {
   })
 
   it('broadens verified coverage across Double First-Class and local strong universities', () => {
+    expect(published.scholarships.some(
+      (scholarship) => scholarship.id === 'scholarship-schwarzman-scholars-2027',
+    )).toBe(false)
     expect(published.universities.length).toBeGreaterThanOrEqual(200)
     expect(published.programs.length).toBeGreaterThanOrEqual(400)
 
     for (const [universityId, minimum] of priorityCoverage) {
-      const count = published.programs.filter(
+      const count = auditedPrograms.filter(
         (program) => program.universityId === universityId,
       ).length
       expect(count, universityId).toBeGreaterThanOrEqual(minimum)
@@ -107,7 +118,7 @@ describe('verified broad university expansion on 2026-07-29', () => {
 
     const counts = new Map(published.universities.map((university) => [
       university.id,
-      published.programs.filter((program) => program.universityId === university.id).length,
+      auditedPrograms.filter((program) => program.universityId === university.id).length,
     ]))
     const zeroProgramUniversities = [...counts.values()].filter((count) => count === 0).length
     const underThreeUniversities = [...counts.values()].filter((count) => count < 3).length
@@ -118,7 +129,7 @@ describe('verified broad university expansion on 2026-07-29', () => {
 
   it('keeps every new priority record multilingual and tied to an exact official source', () => {
     const priorityIds = new Set(priorityCoverage.keys())
-    const priorityPrograms = published.programs.filter(
+    const priorityPrograms = auditedPrograms.filter(
       (program) => priorityIds.has(program.universityId),
     )
 

@@ -100,6 +100,11 @@ type InstitutionCodeRow = {
   code: string
 }
 
+type ProgramScholarshipCountRow = {
+  program_id: string
+  scholarship_count: number
+}
+
 type ProgramCycleRow = RecordAuditRow & {
   slug: string | null
   program_cycle_id: string
@@ -474,8 +479,20 @@ function identityMeta(
   return decorations.meta(row, [key], true)
 }
 
-export function releaseInfo(release: ActiveReleaseRow): ReleaseInfoDto {
-  const parsed: unknown = JSON.parse(release.counts_json)
+function strictHttpsUrl(value: string | null): string | null {
+  if (!value) return null
+  try {
+    const url = new URL(value)
+    return url.protocol === 'https:' && !url.username && !url.password
+      ? url.toString()
+      : null
+  } catch {
+    return null
+  }
+}
+
+function parseReleaseCounts(value: string): ReleaseInfoDto['recordCounts'] {
+  const parsed: unknown = JSON.parse(value)
   if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
     throw new Error('Invalid release counts.')
   }
@@ -494,17 +511,33 @@ export function releaseInfo(release: ActiveReleaseRow): ReleaseInfoDto {
     }
   }
   return {
+    sources: Number(counts.sources),
+    cities: Number(counts.cities),
+    universities: Number(counts.universities),
+    programs: Number(counts.programs),
+    admissionCycles: Number(counts.admissionCycles),
+    scholarships: Number(counts.scholarships),
+  }
+}
+
+export function releaseInfo(
+  release: ActiveReleaseRow,
+  today = chinaCalendarDate(),
+): ReleaseInfoDto {
+  const publicCounts = parseReleaseCounts(release.counts_json)
+  const rawCounts = parseReleaseCounts(release.raw_counts_json)
+  return {
     id: release.release_id,
     dataDate: release.data_date,
     generatedAt: release.generated_at,
-    recordCounts: {
-      sources: Number(counts.sources),
-      cities: Number(counts.cities),
-      universities: Number(counts.universities),
-      programs: Number(counts.programs),
-      admissionCycles: Number(counts.admissionCycles),
-      scholarships: Number(counts.scholarships),
-    },
+    recordCounts: publicCounts,
+    rawCounts,
+    publicCounts,
+    dataCheckedThrough: release.data_checked_through ?? release.data_date,
+    evaluatedForDate: today,
+    activatedAt: release.activated_at,
+    catalogBackend: 'd1',
+    deploymentSha: null,
   }
 }
 
@@ -516,7 +549,7 @@ export class CatalogSqlApi {
     activeRelease: ActiveReleaseRow,
     private readonly today = chinaCalendarDate(),
   ) {
-    this.release = releaseInfo(activeRelease)
+    this.release = releaseInfo(activeRelease, today)
   }
 
   private envelope<T>(
@@ -789,10 +822,17 @@ export class CatalogSqlApi {
     if (!row) return null
     return this.envelope((await this.mapInstitutions([row]))[0]!)
   }
-  private async selectPrograms(query: ProgramQuery, exactSlug?: string) {
+  private async selectPrograms(
+    query: ProgramQuery,
+    exactSlug?: string,
+    exactIds?: readonly string[],
+  ) {
     const conditions = ['record.release_id = ?']
     const values: unknown[] = [this.release.id]
     if (exactSlug !== undefined) addCondition(conditions, values, 'record.slug = ?', exactSlug)
+    if (exactIds && exactIds.length > 0) {
+      addCondition(conditions, values, `record.record_id IN (${placeholders(exactIds.length)})`, ...exactIds)
+    }
     if (query.q) {
       addCondition(conditions, values, `EXISTS (
         SELECT 1
@@ -1159,7 +1199,9 @@ export class CatalogSqlApi {
         cursor.id,
       )
     }
-    const limit = exactSlug === undefined ? pageLimit(query.limit) + 1 : 1
+    const limit = exactIds && exactIds.length > 0
+      ? exactIds.length
+      : exactSlug === undefined ? pageLimit(query.limit) + 1 : 1
     values.push(limit)
     const rows = await queryAll<ProgramRow>(this.database, `
       SELECT
@@ -1287,6 +1329,117 @@ export class CatalogSqlApi {
     })
   }
 
+  private async linkedScholarshipCounts(programIds: readonly string[]) {
+    if (programIds.length === 0) return new Map<string, number>()
+    const slots = placeholders(programIds.length)
+    const rows = await queryAll<ProgramScholarshipCountRow>(this.database, `
+      WITH target_programs AS MATERIALIZED (
+        SELECT program_id, institution_id, release_id
+        FROM current_programs
+        WHERE release_id = ? AND program_id IN (${slots})
+      ),
+      linked AS (
+        SELECT target.program_id, scholarship.scholarship_id
+        FROM target_programs AS target
+        JOIN current_scholarships AS scholarship
+          ON scholarship.release_id = target.release_id
+        JOIN current_record_fields AS scope
+          ON scope.release_id = scholarship.release_id
+         AND scope.record_id = scholarship.scholarship_id
+         AND scope.field_path IN ('programIds', 'program_ids')
+        JOIN json_each(scope.value_json) AS scoped_program ON 1 = 1
+        WHERE CAST(scoped_program.value AS TEXT) = target.program_id
+          AND NOT EXISTS (
+            SELECT 1 FROM current_scholarship_cycles AS normalized_cycle
+            WHERE normalized_cycle.release_id = scholarship.release_id
+              AND normalized_cycle.scholarship_id = scholarship.scholarship_id
+          )
+
+        UNION
+
+        SELECT target.program_id, scholarship.scholarship_id
+        FROM target_programs AS target
+        JOIN current_scholarships AS scholarship
+          ON scholarship.release_id = target.release_id
+        JOIN current_record_fields AS scope
+          ON scope.release_id = scholarship.release_id
+         AND scope.record_id = scholarship.scholarship_id
+         AND scope.field_path IN ('universityIds', 'institution_ids')
+        JOIN json_each(scope.value_json) AS scoped_institution ON 1 = 1
+        WHERE CAST(scoped_institution.value AS TEXT) = target.institution_id
+          AND NOT EXISTS (
+            SELECT 1 FROM current_scholarship_cycles AS normalized_cycle
+            WHERE normalized_cycle.release_id = scholarship.release_id
+              AND normalized_cycle.scholarship_id = scholarship.scholarship_id
+          )
+
+        UNION
+
+        SELECT target.program_id, cycle.scholarship_id
+        FROM target_programs AS target
+        JOIN current_scholarship_cycles AS cycle
+          ON cycle.release_id = target.release_id
+        JOIN scholarship_cycle_programs AS included_program
+          ON included_program.release_id = cycle.release_id
+         AND included_program.scholarship_cycle_id = cycle.scholarship_cycle_id
+         AND included_program.program_id = target.program_id
+         AND included_program.inclusion = 'include'
+        WHERE cycle.program_scope = 'listed'
+          AND (
+            (cycle.institution_scope = 'all' AND NOT EXISTS (
+              SELECT 1 FROM scholarship_cycle_institutions AS excluded_institution
+              WHERE excluded_institution.release_id = cycle.release_id
+                AND excluded_institution.scholarship_cycle_id = cycle.scholarship_cycle_id
+                AND excluded_institution.institution_id = target.institution_id
+                AND excluded_institution.inclusion = 'exclude'
+            ))
+            OR (cycle.institution_scope = 'listed' AND EXISTS (
+              SELECT 1 FROM scholarship_cycle_institutions AS included_institution
+              WHERE included_institution.release_id = cycle.release_id
+                AND included_institution.scholarship_cycle_id = cycle.scholarship_cycle_id
+                AND included_institution.institution_id = target.institution_id
+                AND included_institution.inclusion = 'include'
+            ))
+          )
+
+        UNION
+
+        SELECT target.program_id, cycle.scholarship_id
+        FROM target_programs AS target
+        JOIN current_scholarship_cycles AS cycle
+          ON cycle.release_id = target.release_id
+        WHERE cycle.program_scope = 'all'
+          AND NOT EXISTS (
+            SELECT 1 FROM scholarship_cycle_programs AS excluded_program
+            WHERE excluded_program.release_id = cycle.release_id
+              AND excluded_program.scholarship_cycle_id = cycle.scholarship_cycle_id
+              AND excluded_program.program_id = target.program_id
+              AND excluded_program.inclusion = 'exclude'
+          )
+          AND (
+            (cycle.institution_scope = 'all' AND NOT EXISTS (
+              SELECT 1 FROM scholarship_cycle_institutions AS excluded_institution
+              WHERE excluded_institution.release_id = cycle.release_id
+                AND excluded_institution.scholarship_cycle_id = cycle.scholarship_cycle_id
+                AND excluded_institution.institution_id = target.institution_id
+                AND excluded_institution.inclusion = 'exclude'
+            ))
+            OR (cycle.institution_scope = 'listed' AND EXISTS (
+              SELECT 1 FROM scholarship_cycle_institutions AS included_institution
+              WHERE included_institution.release_id = cycle.release_id
+                AND included_institution.scholarship_cycle_id = cycle.scholarship_cycle_id
+                AND included_institution.institution_id = target.institution_id
+                AND included_institution.inclusion = 'include'
+            ))
+          )
+      )
+      SELECT program_id, COUNT(DISTINCT scholarship_id) AS scholarship_count
+      FROM linked
+      GROUP BY program_id
+    `, [this.release.id, ...programIds])
+    return new Map(rows.map((row) => [row.program_id, Number(row.scholarship_count)]))
+  }
+
   private async programListMetadata(
     conditions: readonly string[],
     values: readonly unknown[],
@@ -1380,6 +1533,54 @@ export class CatalogSqlApi {
     const row = (await this.selectPrograms({}, slug)).rows[0]
     if (!row) return null
     return this.envelope((await this.mapPrograms([row]))[0]!)
+  }
+
+  async comparePrograms(ids: readonly string[]) {
+    const uniqueIds = [...new Set(ids)]
+    const rows = (await this.selectPrograms({}, undefined, uniqueIds)).rows
+    const [mapped, scholarshipCounts] = await Promise.all([
+      this.mapPrograms(rows),
+      this.linkedScholarshipCounts(uniqueIds),
+    ])
+    const mappedById = new Map(mapped.flatMap((item) => {
+      const officialUrl = strictHttpsUrl(item.attributes.officialUrl)
+      if (!officialUrl) return []
+      const { currentCycle, ...program } = item
+      const safeCycle = currentCycle ? {
+        ...currentCycle,
+        attributes: {
+          ...currentCycle.attributes,
+          application: {
+            ...currentCycle.attributes.application,
+            applyUrl: strictHttpsUrl(currentCycle.attributes.application.applyUrl),
+          },
+        },
+        sources: currentCycle.sources.filter((source) => strictHttpsUrl(source.url) !== null),
+      } : null
+      return [[item.id, {
+        program: {
+          ...program,
+          attributes: {
+            ...program.attributes,
+            officialUrl,
+            applyUrl: strictHttpsUrl(program.attributes.applyUrl)
+              ?? safeCycle?.attributes.application.applyUrl
+              ?? null,
+          },
+          sources: program.sources.filter((source) => strictHttpsUrl(source.url) !== null),
+        },
+        currentCycle: safeCycle,
+        linkedScholarshipCount: scholarshipCounts.get(item.id) ?? 0,
+      }] as const]
+    }))
+    const items = uniqueIds.flatMap((id) => {
+      const item = mappedById.get(id)
+      return item ? [item] : []
+    })
+    return this.envelope({
+      items,
+      missingIds: uniqueIds.filter((id) => !mappedById.has(id)),
+    })
   }
 
   private async selectScholarships(query: ScholarshipQuery, exactSlug?: string) {

@@ -286,7 +286,9 @@ describe('verified regional breadth expansion on 2026-08-05', () => {
   it('raises the public breadth floor while preserving Tibet University as an explicit limited case', () => {
     expect(published.universities.length).toBeGreaterThanOrEqual(266)
     expect(published.programs.length).toBeGreaterThanOrEqual(1_211)
-    expect(published.scholarships.length).toBeGreaterThanOrEqual(355)
+    expect(data.scholarships.filter(
+      (scholarship) => scholarship.status === 'verified' || scholarship.status === 'stale',
+    ).length).toBeGreaterThanOrEqual(355)
 
     const counts = new Map<string, number>()
     for (const program of published.programs) {

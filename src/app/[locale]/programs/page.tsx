@@ -9,9 +9,22 @@ import {
   queryProgramCatalogRepository,
   type ProgramCatalogSearchParams,
 } from '@/lib/program-catalog'
-import { pageMetadata, requireLocale } from '@/lib/site'
+import { hasSearchParameters, pageMetadata, requireLocale } from '@/lib/site'
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) { const locale = requireLocale((await params).locale) || 'en'; const m = getMessages(locale); return pageMetadata(locale, m.programs.title, m.programs.intro, 'programs') }
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>
+  searchParams?: Promise<ProgramCatalogSearchParams>
+}) {
+  const locale = requireLocale((await params).locale) || 'en'
+  const messages = getMessages(locale)
+  const parameterized = searchParams ? hasSearchParameters(await searchParams) : false
+  return pageMetadata(locale, messages.programs.title, messages.programs.intro, 'programs', {
+    indexable: !parameterized,
+  })
+}
 export default async function ProgramsPage({
   params,
   searchParams,

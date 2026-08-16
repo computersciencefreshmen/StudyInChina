@@ -131,3 +131,16 @@ const copy = {
 export function getHomeExperienceCopy(locale: LaunchLocale): HomeExperienceCopy {
   return copy[locale]
 }
+
+export function formatStudentCityTitle(count: number, locale: LaunchLocale): string {
+  const formatted = count.toLocaleString(locale)
+  const templates: Record<LaunchLocale, string> = {
+    en: `${formatted} student cities, one connected journey`,
+    zh: `${formatted} 座留学城市，一条贯通中国的旅程`,
+    ru: `${formatted} городов для учёбы — один маршрут по Китаю`,
+    de: `${formatted} Studienstädte, eine gemeinsame Reise`,
+    fr: `${formatted} villes étudiantes, un même parcours`,
+    es: `${formatted} ciudades estudiantiles, un viaje conectado`,
+  }
+  return templates[locale]
+}

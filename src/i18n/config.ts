@@ -108,3 +108,30 @@ export function localizePathname(pathname: string, locale: PublicLocale): string
 
   return `/${locale}${remainder === '/' ? '' : remainder}`
 }
+
+const transientNavigationParameters = new Set([
+  'cursor',
+  'cursorHistory',
+  'nextCursor',
+  'page',
+])
+
+/**
+ * Keep shareable catalogue filters when changing language while resetting
+ * pagination state, whose opaque cursors are bound to the previous request.
+ */
+export function localizeNavigationHref(
+  pathname: string,
+  searchParams: URLSearchParams,
+  locale: PublicLocale,
+): string {
+  const localizedPath = localizePathname(pathname, locale)
+  const semanticParams = new URLSearchParams()
+
+  searchParams.forEach((value, key) => {
+    if (!transientNavigationParameters.has(key)) semanticParams.append(key, value)
+  })
+
+  const query = semanticParams.toString()
+  return `${localizedPath}${query ? `?${query}` : ''}`
+}

@@ -12,6 +12,9 @@ const release = {
   release_id: 'release-2026-07-20',
   data_date: '2026-07-20',
   generated_at: '2026-07-20T12:00:00.000Z',
+  raw_counts_json: JSON.stringify({ sources: 2, cities: 1, universities: 1, programs: 2, admissionCycles: 1, scholarships: 1 }),
+  data_checked_through: '2026-07-19',
+  activated_at: '2026-07-20T12:05:00.000Z',
   counts_json: JSON.stringify({ sources: 1, cities: 1, universities: 1, programs: 1, admissionCycles: 1, scholarships: 1 }),
   content_sha256: 'a'.repeat(64),
 }
@@ -64,6 +67,14 @@ describe('catalog API worker', () => {
     expect(response.status).toBe(200)
     expect(body.data.id).toBe(release.release_id)
     expect(body.data.recordCounts.programs).toBe(1)
+    expect(body.data.publicCounts.programs).toBe(1)
+    expect(body.data.rawCounts.programs).toBe(2)
+    expect(body.data.recordCounts).toEqual(body.data.publicCounts)
+    expect(body.data.dataCheckedThrough).toBe('2026-07-19')
+    expect(body.data.evaluatedForDate).toMatch(/^\d{4}-\d{2}-\d{2}$/u)
+    expect(body.data.activatedAt).toBe(release.activated_at)
+    expect(body.data.catalogBackend).toBe('d1')
+    expect(body.data.deploymentSha).toBeNull()
     expect(response.headers.get('etag')).toMatch(/^"[a-f0-9]{64}:\d{4}-\d{2}-\d{2}"$/u)
   })
 
@@ -115,6 +126,21 @@ describe('catalog API worker', () => {
       environment(),
     )
     expect(response.status).toBe(400)
+  })
+
+  it('validates lightweight comparison ids before returning a public projection', async () => {
+    for (const query of [
+      '',
+      '?ids=bad%20id',
+      '?ids=prog-1,prog-2,prog-3,prog-4,prog-5',
+    ]) {
+      const response = await worker.fetch(
+        new Request(`https://catalog.test/api/v1/programs/compare${query}`),
+        environment(),
+      )
+      expect(response.status).toBe(400)
+      expect(response.headers.get('cache-control')).toBe('no-store')
+    }
   })
 
   it('supports cacheable read-only CORS without opening the internal endpoint', async () => {

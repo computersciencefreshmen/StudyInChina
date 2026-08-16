@@ -5,6 +5,7 @@ import { AppHeader } from '@/components/layout/AppHeader'
 
 vi.mock('next/navigation', () => ({
   usePathname: () => '/en/programs/software-engineering',
+  useSearchParams: () => new URLSearchParams('degree=master&applicationState=open&page=3&cursor=opaque&cursorHistory=%7E%2Cprevious'),
 }))
 
 describe('AppHeader locale navigation', () => {
@@ -14,12 +15,12 @@ describe('AppHeader locale navigation', () => {
       .map((link) => link.getAttribute('href'))
 
     expect(new Set(hrefs)).toEqual(new Set([
-      '/en/programs/software-engineering',
-      '/zh/programs/software-engineering',
-      '/ru/programs/software-engineering',
-      '/de/programs/software-engineering',
-      '/fr/programs/software-engineering',
-      '/es/programs/software-engineering',
+      '/en/programs/software-engineering?degree=master&applicationState=open',
+      '/zh/programs/software-engineering?degree=master&applicationState=open',
+      '/ru/programs/software-engineering?degree=master&applicationState=open',
+      '/de/programs/software-engineering?degree=master&applicationState=open',
+      '/fr/programs/software-engineering?degree=master&applicationState=open',
+      '/es/programs/software-engineering?degree=master&applicationState=open',
     ]))
     expect(hrefs.some((href) => href?.startsWith('/pt'))).toBe(false)
     expect(hrefs.some((href) => href?.startsWith('/ar'))).toBe(false)
@@ -44,5 +45,11 @@ describe('AppHeader locale navigation', () => {
     const savedLinks = screen.getAllByRole('link', { name: /saved/i })
     expect(savedLinks).toHaveLength(2)
     expect(savedLinks.every((link) => link.getAttribute('href') === '/en/favorites')).toBe(true)
+  })
+
+  it('discloses possible English record fallbacks on beta-language data routes', () => {
+    render(<AppHeader locale="de" />)
+
+    expect(screen.getByRole('note')).toHaveTextContent(/Englisch/)
   })
 })

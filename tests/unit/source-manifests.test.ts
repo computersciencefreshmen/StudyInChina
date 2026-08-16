@@ -2,33 +2,41 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import {
+  isCatalogReconciliationComplete,
+  loadSourceManifestFiles,
+  validateSourceManifests,
+  type LoadedSourceManifest,
+  type SourceManifestV2,
+} from '../../scripts/source-manifest-registry'
+import {
   EXPECTED_PILOT_INSTITUTION_IDS,
   INSTITUTION_HOST_ALLOWLISTS,
   SOURCE_CATEGORIES,
-  loadPilotSourceManifestFiles,
-  validatePilotSourceManifests,
-  type LoadedPilotSourceManifest,
-  type PilotSourceManifest,
 } from '../../scripts/validate-source-manifests'
 
 const RESERVED_USTC_ID =
   'uni-university-of-science-and-technology-of-china'
 
-function clonedInputs(): LoadedPilotSourceManifest[] {
-  return loadPilotSourceManifestFiles().map((input) => ({
+function clonedInputs(): LoadedSourceManifest[] {
+  return loadSourceManifestFiles(join(
+    process.cwd(),
+    'content',
+    'source-manifests',
+    'pilot',
+  )).map((input) => ({
     filePath: input.filePath,
     value: structuredClone(input.value),
   }))
 }
 
-function recordOf(input: LoadedPilotSourceManifest): PilotSourceManifest {
-  return input.value as PilotSourceManifest
+function recordOf(input: LoadedSourceManifest): SourceManifestV2 {
+  return input.value as SourceManifestV2
 }
 
 function findRecord(
-  inputs: LoadedPilotSourceManifest[],
+  inputs: LoadedSourceManifest[],
   institutionId: string,
-): PilotSourceManifest {
+): SourceManifestV2 {
   const record = inputs
     .map(recordOf)
     .find((candidate) => candidate.institutionId === institutionId)
@@ -37,14 +45,23 @@ function findRecord(
 }
 
 describe('pilot source manifests', () => {
-  it('validates the exact ten-school pilot and all sixteen coverage categories', () => {
-    const records = validatePilotSourceManifests(clonedInputs())
+  it('validates ten fail-closed V2 pilot manifests and all source categories', () => {
+    const records = validateSourceManifests(clonedInputs())
 
     expect(records).toHaveLength(10)
     expect(records.map((record) => record.institutionId).sort()).toEqual(
       [...EXPECTED_PILOT_INSTITUTION_IDS].sort(),
     )
     for (const record of records) {
+      expect(record.version).toBe(2)
+      if (record.version !== 2) throw new Error('Expected a V2 pilot manifest')
+      expect(record.manifestStatus).toBe('in_progress')
+      expect(record.catalogReconciliation.status).toBe('in_progress')
+      expect(record.catalogReconciliation.entries.length).toBeGreaterThan(0)
+      expect(record.catalogReconciliation.entries.every(
+        (entry) => entry.status === 'pending',
+      )).toBe(true)
+      expect(isCatalogReconciliationComplete(record)).toBe(false)
       expect(record.coverage.map((entry) => entry.sourceCategory).sort()).toEqual(
         [...SOURCE_CATEGORIES].sort(),
       )
@@ -52,9 +69,11 @@ describe('pilot source manifests', () => {
   })
 
   it('uses only HTTPS URLs and institution-scoped official host allowlists', () => {
-    const records = validatePilotSourceManifests(clonedInputs())
+    const records = validateSourceManifests(clonedInputs())
 
     for (const record of records) {
+      expect(record.version).toBe(2)
+      if (record.version !== 2) throw new Error('Expected a V2 pilot manifest')
       const approvedHosts = new Set(
         INSTITUTION_HOST_ALLOWLISTS[
           record.institutionId as keyof typeof INSTITUTION_HOST_ALLOWLISTS
@@ -69,17 +88,19 @@ describe('pilot source manifests', () => {
           ...(source.allowedRedirectHosts ?? []),
         ]) {
           expect(approvedHosts.has(host)).toBe(true)
+          expect(record.officialHosts).toContain(host)
         }
       }
     }
   })
 
   it('keeps source ids globally unique', () => {
-    const records = validatePilotSourceManifests(clonedInputs())
+    const records = validateSourceManifests(clonedInputs())
     const ids = records.flatMap((record) =>
       record.sources.map((source) => source.id),
     )
 
+    expect(ids).toHaveLength(100)
     expect(new Set(ids).size).toBe(ids.length)
   })
 
@@ -89,8 +110,8 @@ describe('pilot source manifests', () => {
     record.sources[0]!.officialUrl = 'https://attacker.example/admissions'
     record.sources[0]!.allowedHosts = ['attacker.example']
 
-    expect(() => validatePilotSourceManifests(inputs)).toThrow(
-      /uses unapproved host attacker\.example/,
+    expect(() => validateSourceManifests(inputs)).toThrow(
+      /uses undeclared official host attacker\.example/,
     )
   })
 
@@ -100,7 +121,7 @@ describe('pilot source manifests', () => {
     const second = recordOf(inputs[1]!)
     second.sources[0]!.id = first.sources[0]!.id
 
-    expect(() => validatePilotSourceManifests(inputs)).toThrow(
+    expect(() => validateSourceManifests(inputs)).toThrow(
       /duplicate source id/,
     )
   })
@@ -109,8 +130,8 @@ describe('pilot source manifests', () => {
     const inputs = clonedInputs()
     recordOf(inputs[0]!).coverage.pop()
 
-    expect(() => validatePilotSourceManifests(inputs)).toThrow(
-      /coverage: Too small|coverage: Array must contain exactly/,
+    expect(() => validateSourceManifests(inputs)).toThrow(
+      /coverage/,
     )
   })
 
@@ -123,13 +144,13 @@ describe('pilot source manifests', () => {
     if (!unavailableSource) throw new Error('Missing Peking unavailable source fixture')
     unavailableSource.enabled = true
 
-    expect(() => validatePilotSourceManifests(inputs)).toThrow(
+    expect(() => validateSourceManifests(inputs)).toThrow(
       /must be disabled while coverage is source_unavailable/,
     )
   })
 
   it('requires a confirmed official admissions home and application entrance', () => {
-    const records = validatePilotSourceManifests(clonedInputs())
+    const records = validateSourceManifests(clonedInputs())
     const knownStatuses = new Set([
       'registered',
       'parser_pending',
@@ -152,7 +173,7 @@ describe('pilot source manifests', () => {
   })
 
   it('keeps every pilot institution in the expanded catalog', () => {
-    const records = validatePilotSourceManifests(clonedInputs())
+    const records = validateSourceManifests(clonedInputs())
     const planned = records.filter(
       (record) => record.catalogStatus === 'planned_addition',
     )
@@ -171,8 +192,8 @@ describe('pilot source manifests', () => {
 
     const inputs = clonedInputs()
     findRecord(inputs, RESERVED_USTC_ID).catalogStatus = 'planned_addition'
-    expect(() => validatePilotSourceManifests(inputs)).toThrow(
-      /catalogStatus must be existing/,
+    expect(() => validateSourceManifests(inputs)).toThrow(
+      /planned institution already exists/,
     )
   })
 })

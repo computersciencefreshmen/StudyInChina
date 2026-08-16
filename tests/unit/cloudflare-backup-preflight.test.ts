@@ -9,6 +9,7 @@ import {
   formatBackupPreflightError,
   inspectBackupArtifacts,
   validateBackupCredentials,
+  validateRestoreCredentials,
 } from '../../scripts/cloudflare/backup-preflight'
 
 function digest(value: Buffer): string {
@@ -32,26 +33,37 @@ describe('Cloudflare backup preflight', () => {
   it('validates credential presence without returning secret values', () => {
     const token = 'secret-token-that-must-not-be-printed'
     const result = validateBackupCredentials({
-      CLOUDFLARE_API_TOKEN: token,
+      CLOUDFLARE_D1_BACKUP_TOKEN: token,
       CLOUDFLARE_ACCOUNT_ID: '78969c65bfdd892bb12c116869ea91cf',
     })
-    expect(result).toEqual({ databases: 2, bucket: 'studyinchina-releases' })
+    expect(result).toEqual({ databases: 2, bucket: 'studyinchina-backups' })
     expect(JSON.stringify(result)).not.toContain(token)
     expect(() => validateBackupCredentials({})).toThrow(
-      /CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID/u,
+      /CLOUDFLARE_D1_BACKUP_TOKEN, CLOUDFLARE_ACCOUNT_ID/u,
     )
     expect(() => validateBackupCredentials({})).toThrow(BACKUP_CONFIGURATION_DOC)
     expect(() => validateBackupCredentials({
-      CLOUDFLARE_API_TOKEN: token,
+      CLOUDFLARE_D1_BACKUP_TOKEN: token,
       CLOUDFLARE_ACCOUNT_ID: 'invalid',
     })).toThrow(/32-character hexadecimal/u)
+  })
+
+  it('requires a separate protected restore credential without exposing it', () => {
+    const token = 'restore-token-that-must-not-be-printed'
+    expect(validateRestoreCredentials({
+      CLOUDFLARE_D1_RESTORE_TOKEN: token,
+      CLOUDFLARE_ACCOUNT_ID: '78969c65bfdd892bb12c116869ea91cf',
+    })).toEqual({ bucket: 'studyinchina-backups' })
+    expect(() => validateRestoreCredentials({})).toThrow(
+      /CLOUDFLARE_D1_RESTORE_TOKEN, CLOUDFLARE_ACCOUNT_ID/u,
+    )
   })
 
   it('formats an actionable GitHub error without exposing credential values', () => {
     const credentialValue = 'credential-value-that-must-stay-private'
     let failure: unknown
     try {
-      validateBackupCredentials({ CLOUDFLARE_API_TOKEN: credentialValue })
+      validateBackupCredentials({ CLOUDFLARE_D1_BACKUP_TOKEN: credentialValue })
     } catch (error) {
       failure = error
     }
@@ -92,13 +104,63 @@ describe('Cloudflare backup preflight', () => {
     const exportStep = workflow.indexOf('Export catalog and pipeline databases')
     const artifactPreflight = workflow.indexOf('--phase artifacts')
     const uploadStep = workflow.indexOf('Upload daily and monthly copies')
+    const readbackStep = workflow.indexOf('Read back and cryptographically verify daily checkpoint')
     expect(credentialPreflight).toBeGreaterThan(0)
     expect(dependencyInstall).toBeGreaterThan(credentialPreflight)
     expect(remoteAccess).toBeGreaterThan(dependencyInstall)
     expect(exportStep).toBeGreaterThan(remoteAccess)
     expect(artifactPreflight).toBeGreaterThan(exportStep)
     expect(uploadStep).toBeGreaterThan(artifactPreflight)
+    expect(readbackStep).toBeGreaterThan(uploadStep)
+    const uploadBlock = workflow.slice(uploadStep, readbackStep)
+    const readbackBlock = workflow.slice(readbackStep)
+    expect(readbackBlock).toContain('--phase artifacts')
+    expect(uploadBlock).toContain('studyinchina-backups/backups/daily/$day/raw-v1/catalog.sql.gz')
+    expect(uploadBlock).toContain('studyinchina-backups/backups/daily/$day/raw-v1/pipeline.sql.gz')
+    expect(uploadBlock).toContain('studyinchina-backups/backups/daily/$day/raw-v1/sha256.txt')
+    expect(uploadBlock).toContain('studyinchina-backups/backups/monthly/$month/raw-v1/catalog.sql.gz')
+    expect(uploadBlock).toContain('studyinchina-backups/backups/monthly/$month/raw-v1/pipeline.sql.gz')
+    expect(uploadBlock).toContain('studyinchina-backups/backups/monthly/$month/raw-v1/sha256.txt')
+    expect(readbackBlock).toContain('backups/daily/$day/raw-v1/catalog.sql.gz')
+    expect(readbackBlock).toContain('backups/daily/$day/raw-v1/pipeline.sql.gz')
+    expect(readbackBlock).toContain('backups/daily/$day/raw-v1/sha256.txt')
+    expect(workflow.match(/--content-encoding="identity"/gu)).toHaveLength(4)
+    expect(workflow).not.toContain('--content-encoding="gzip"')
+    const retention = readFileSync(
+      join(process.cwd(), 'scripts', 'cloudflare', 'configure-retention.ps1'),
+      'utf8',
+    )
+    expect(retention).toContain("[string]$Bucket = 'studyinchina-backups'")
+    expect(workflow).toContain('secrets.CLOUDFLARE_D1_BACKUP_TOKEN')
+    expect(workflow).not.toContain('secrets.CLOUDFLARE_API_TOKEN')
     expect(workflow).toContain('if: ${{ failure() }}')
     expect(workflow).toContain('does **not** satisfy the 24-hour RPO')
+  })
+
+  it('protects restore access with a distinct environment credential', () => {
+    const workflow = readFileSync(
+      join(process.cwd(), '.github', 'workflows', 'cloudflare-restore-drill.yml'),
+      'utf8',
+    )
+    expect(workflow).toContain('environment: cloudflare-restore-drill')
+    expect(workflow).toContain('secrets.CLOUDFLARE_D1_RESTORE_TOKEN')
+    expect(workflow).not.toContain('secrets.CLOUDFLARE_D1_BACKUP_TOKEN')
+    expect(workflow).not.toContain('secrets.CLOUDFLARE_API_TOKEN')
+    expect(workflow).toContain(
+      'studyinchina-backups/backups/monthly/$BACKUP_MONTH/raw-v1/catalog.sql.gz',
+    )
+    expect(workflow).toContain('monthly/$BACKUP_MONTH/raw-v1/pipeline.sql.gz')
+    expect(workflow).toContain('monthly/$BACKUP_MONTH/raw-v1/sha256.txt')
+    const credentialGate = workflow.indexOf('--phase restore-credentials')
+    const dependencyInstall = workflow.indexOf('Install dependencies')
+    const download = workflow.indexOf('Download private monthly backup')
+    const isolatedRestore = workflow.indexOf('Run local isolated restore drill')
+    expect(credentialGate).toBeGreaterThan(-1)
+    expect(dependencyInstall).toBeGreaterThan(credentialGate)
+    expect(download).toBeGreaterThan(dependencyInstall)
+    expect(isolatedRestore).toBeGreaterThan(download)
+    expect(workflow.slice(isolatedRestore)).not.toContain(
+      'CLOUDFLARE_API_TOKEN: ${{ secrets.',
+    )
   })
 })

@@ -1,8 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "institutionId": "uni-harbin-institute-of-technology",
   "catalogStatus": "existing",
+  "manifestStatus": "in_progress",
   "checkedAt": "2026-07-20",
+  "officialHosts": ["hit.at0086.cn","studyathit.hit.edu.cn"],
   "sources": [
     {
       "version": 1, "id": "hit-intl-admissions-home", "institutionId": "uni-harbin-institute-of-technology", "entityType": "university", "sourceCategory": "international_admissions_home",
@@ -76,5 +78,52 @@
     { "sourceCategory": "program_detail", "status": "discovery_pending", "note": "Program-level pages will be discovered from the registered catalog anchors." },
     { "sourceCategory": "contacts", "status": "discovery_pending", "note": "A distinct stable official admissions contact page was not confirmed in this pilot review." },
     { "sourceCategory": "catalog_anchor", "status": "registered", "sourceIds": ["hit-admissions-catalog-anchor"] }
-  ]
+  ],
+  "catalogReconciliation": {
+    "scope": "representative_international_programs",
+    "status": "in_progress",
+    "entries": [
+      {
+        "sourceId": "hit-non-degree-catalog",
+        "officialKey": "prog-gap-wave8-hit-long-term-chinese-language",
+        "officialName": "Long-Term Chinese Language Program",
+        "entityType": "program",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "hit-masters-catalog",
+        "officialKey": "program-harbin-institute-of-technology-civil-engineering-master",
+        "officialName": "Civil Engineering",
+        "entityType": "program",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "hit-masters-catalog",
+        "officialKey": "program-harbin-institute-of-technology-mechanical-engineering-master",
+        "officialName": "Mechanical Engineering",
+        "entityType": "program",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "hit-intl-admissions-home",
+        "officialKey": "scholarship-harbin-institute-of-technology",
+        "officialName": "Harbin Institute of Technology Scholarship",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "hit-intl-admissions-home",
+        "officialKey": "scholarship-heilongjiang-government",
+        "officialName": "Heilongjiang Provincial Government Scholarship",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      }
+    ],
+    "note": "V2 migration preserves the 2026-07-20 source audit. 5 exact-URL or same-host/same-category catalog relationships are queued for evidence review; all other identities and full-directory reconciliation remain unresolved."
+  }
 }

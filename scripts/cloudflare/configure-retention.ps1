@@ -1,5 +1,5 @@
 param(
-  [string]$Bucket = 'studyinchina-releases'
+  [string]$Bucket = 'studyinchina-backups'
 )
 
 $ErrorActionPreference = 'Stop'

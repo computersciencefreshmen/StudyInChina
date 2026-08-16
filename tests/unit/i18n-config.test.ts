@@ -10,6 +10,7 @@ import {
   isPublicLocale,
   launchLocales,
   localeDirection,
+  localizeNavigationHref,
   localizePathname,
   pathnameLocale,
   previewLocales,
@@ -45,6 +46,17 @@ describe('locale registry', () => {
     expect(localizePathname('/es/programs/software-engineering', 'zh')).toBe('/zh/programs/software-engineering')
     expect(localizePathname('/programs', 'ru')).toBe('/ru/programs')
     expect(localizePathname('/', 'en')).toBe('/en')
+  })
+
+  it('keeps semantic filters and resets opaque pagination when changing language', () => {
+    const searchParams = new URLSearchParams(
+      'degree=master&applicationState=open&page=3&cursor=opaque&cursorHistory=%7E%2Cprevious',
+    )
+
+    expect(localizeNavigationHref('/en/programs', searchParams, 'zh')).toBe(
+      '/zh/programs?degree=master&applicationState=open',
+    )
+    expect(searchParams.get('page')).toBe('3')
   })
 
   it('publishes alternates and Open Graph metadata for public locales only', () => {

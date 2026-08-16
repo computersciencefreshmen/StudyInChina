@@ -35,12 +35,12 @@ The product is built around three promises:
 
 <div align="center">
 
-| **266** universities | **1,234** programs | **356** scholarships | **62** cities |
+| **266** universities | **1,233** programs | **351** scholarships | **62** cities |
 |:---:|:---:|:---:|:---:|
 
 </div>
 
-The public catalogue also contains **256 published admission-cycle records** and is backed by **2,070 registered official source records**. Snapshot evaluated for **2026-08-10** with `npm run quality:platform-scorecard`.
+The public catalogue contains **52 published cycle or fee-reference records** and is backed by **2,070 registered official source records**. A published record is not automatically an open application window; the decision-oriented metrics below are evaluated for **2026-08-16** with `npm run quality:platform-scorecard`.
 
 <details>
 <summary><strong>Open the honest data-depth scorecard</strong></summary>
@@ -50,12 +50,15 @@ Record count is not the same as record completeness. These are the current depth
 | Quality indicator | Current baseline | Next gate |
 |---|---:|---:|
 | Universities below three published programs | **8** | 0 |
-| Programs with a current public cycle | 253 / 1,234 · **20.50%** | ≥ 70% |
-| Programs with duration | **61.59%** | ≥ 90% |
-| Programs with an official application route | **50.89%** | ≥ 80% |
-| Programs with known teaching language | **85.09%** | ≥ 95% |
-| Programs with eligibility/language evidence | **6.00%** | ≥ 50% |
-| Universities connected to scholarships | 207 / 266 | ≥ 230 |
+| Verified international-program identities | 1,233 / 1,233 · **100%** | Maintain 100% |
+| Programs with a fresh 30-day disposition | 49 / 1,233 · **3.97%** | ≥ 70% |
+| Programs with dated or rolling admissions | 49 / 1,233 · **3.97%** | Report honestly |
+| Programs open or upcoming on the evaluation date | 10 / 1,233 · **0.81%** | Report honestly |
+| Programs with duration | **61.64%** | ≥ 90% |
+| Programs with an official application route | **50.85%** | ≥ 80% |
+| Programs with known teaching language | **85.08%** | ≥ 95% |
+| Programs with eligibility/language evidence | **6.16%** | ≥ 50% |
+| Universities connected to scholarships | 204 / 266 | ≥ 230 |
 | Cities with reviewed coordinates | 27 / 62 | 62 / 62 |
 | Source Manifests registered | 10 / 266 | 266 / 266 |
 | Completed V2 Source Manifests | 0 / 266 | 266 / 266 |
@@ -65,6 +68,20 @@ Record count is not the same as record completeness. These are the current depth
 The raw compatibility dataset contains 272 universities, 1,255 programs and 384 scholarships. Draft, archived, identity-conflicting or publication-ineligible records are intentionally excluded from the public numbers above.
 
 </details>
+
+## Current trust-platform milestone
+
+The current release moves the project from a large static directory toward a measurable decision platform:
+
+- quality reporting now separates verified identity, fresh disposition, dated or rolling admissions, and active or upcoming applications;
+- the program explorer exposes “Open now” and “Upcoming” as first-level routes, while language switching preserves semantic filters and resets release-bound cursors;
+- Favorites loads only requested IDs through a four-program comparison projection instead of serializing the entire catalogue to the browser;
+- Release metadata distinguishes raw and public counts, the data-check date, evaluation date, activation time, backend and Vercel deployment SHA;
+- ten pilot universities now use strict Source Manifest V2 ledgers in `in_progress` state—none is mislabeled as fully reconciled;
+- daily and monthly `raw-v1` backups for both D1 databases were uploaded to private R2, read back byte-for-byte and restored into isolated local databases in **101.198 seconds** with zero foreign-key violations;
+- Catalog remains on the JSON compatibility backend while D1 Shadow parity, credentials and rollback evidence are completed.
+
+This milestone deliberately exposes the freshness gap: a fact becoming stale reduces the public count instead of silently remaining visible. That makes the lower current figures a trustworthy operational signal, not a regression hidden by optimistic counting.
 
 ## What applicants can do
 
@@ -273,7 +290,7 @@ See [`docs/platform-rollout.md`](./docs/platform-rollout.md), [`docs/backup-and-
 
 ```mermaid
 flowchart LR
-    N["Now<br/>266 public universities"] --> D["Data depth<br/>70% current-cycle coverage"]
+    N["Now<br/>266 public universities"] --> D["Data depth<br/>70% fresh dispositions"]
     D --> T["Trust coverage<br/>266 manifests + reconciliations"]
     T --> C["D1 cutover<br/>3 releases / 72h shadow parity"]
     C --> F["500 universities<br/>after 2 healthy monthly cycles"]
@@ -283,9 +300,10 @@ flowchart LR
 Near-term work is measured by:
 
 - raising the remaining 8 sparse universities to 3–5 verified international-student programs or a documented `limited` reconciliation;
-- increasing current-cycle coverage from 20.50% to at least 70%;
-- reaching 90% duration, 80% official application-route and 95% teaching-language coverage;
-- expanding scholarship-connected institutions from 207 to at least 230;
+- increasing fresh-disposition coverage from 3.97% to at least 70%, without counting date-free fee references as application cycles;
+- reaching the six-week gates of 75% duration, 65% official application-route, 90% teaching-language and 25% requirements coverage;
+- continuing after that toward the expansion gates of 90% duration, 80% application-route, 95% teaching-language and 50% requirements coverage;
+- expanding scholarship-connected institutions from 204 to at least 230;
 - completing 266 Source Manifests and 266 catalogue reconciliations;
 - completing three matching shadow releases over at least 72 hours before Production switches to D1;
 - passing two full monthly update cycles before expansion to 500, then 1,000+ institutions.

@@ -144,6 +144,7 @@ function completeManifest(candidate: SourceManifestV2): SourceManifestV2 {
     ),
     catalogReconciliation: {
       ...structuredClone(candidate.catalogReconciliation),
+      scope: "full_official_catalog",
       status: "complete",
       entries: candidate.catalogReconciliation.entries.map((entry, index) => ({
         ...entry,
@@ -329,6 +330,27 @@ describe("SourceManifestV2 candidate promotion gate", () => {
         repositoryRoot: incomplete.repositoryRoot,
       }),
     ).toThrow(/requires a complete manifest/);
+  });
+
+  it("rejects representative discovery mislabeled as complete reconciliation", () => {
+    const representative = setupPromotion();
+    representative.review.manifest.catalogReconciliation.scope =
+      "representative_international_programs";
+    writeFileSync(
+      representative.reviewDecisionPath,
+      JSON.stringify(representative.review, null, 2) + "\n",
+      "utf8",
+    );
+
+    expect(() =>
+      promoteSourceManifestCandidate({
+        artifactDirectory: representative.artifactDirectory,
+        reviewDecisionPath: representative.reviewDecisionPath,
+        repositoryRoot: representative.repositoryRoot,
+      }),
+    ).toThrow(
+      /representative_international_programs cannot claim complete catalog reconciliation/,
+    );
   });
 
   it("rejects a second formal manifest for the same institution", () => {

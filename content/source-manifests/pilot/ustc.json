@@ -1,8 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "institutionId": "uni-university-of-science-and-technology-of-china",
   "catalogStatus": "existing",
+  "manifestStatus": "in_progress",
   "checkedAt": "2026-07-20",
+  "officialHosts": ["ic.ustc.edu.cn","isa.ustc.edu.cn"],
   "sources": [
     {
       "version": 1, "id": "ustc-intl-admissions-home", "institutionId": "uni-university-of-science-and-technology-of-china", "entityType": "university", "sourceCategory": "international_admissions_home",
@@ -88,5 +90,36 @@
     { "sourceCategory": "program_detail", "status": "discovery_pending", "note": "Program-level pages will be discovered from the registered catalog anchors." },
     { "sourceCategory": "contacts", "status": "registered", "sourceIds": ["ustc-admissions-contacts"] },
     { "sourceCategory": "catalog_anchor", "status": "registered", "sourceIds": ["ustc-admissions-catalog-anchor"] }
-  ]
+  ],
+  "catalogReconciliation": {
+    "scope": "representative_international_programs",
+    "status": "in_progress",
+    "entries": [
+      {
+        "sourceId": "ustc-intl-admissions-home",
+        "officialKey": "program-university-of-science-and-technology-of-china-chemistry-bachelor",
+        "officialName": "Chemistry",
+        "entityType": "program",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "ustc-intl-admissions-home",
+        "officialKey": "program-university-of-science-and-technology-of-china-physics-bachelor",
+        "officialName": "Physics",
+        "entityType": "program",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "ustc-government-scholarship",
+        "officialKey": "sch-gap-wave8-ustc-youth-excellence-full-scholarship",
+        "officialName": "USTC Youth of Excellence Scheme Full Scholarship",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked only to an official source on the same host and in the same category; exact page evidence and catalog completeness remain pending."
+      }
+    ],
+    "note": "V2 migration preserves the 2026-07-20 source audit. 3 exact-URL or same-host/same-category catalog relationships are queued for evidence review; all other identities and full-directory reconciliation remain unresolved."
+  }
 }

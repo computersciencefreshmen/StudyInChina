@@ -162,12 +162,23 @@ export type CatalogRelease = {
   dataDate: string
   generatedAt: string
   recordCounts: CatalogRecordCounts
+  rawCounts: CatalogRecordCounts
+  publicCounts: CatalogRecordCounts
+  dataCheckedThrough: string
+  evaluatedForDate: string
+  activatedAt: string
+  catalogBackend: CatalogBackendMode
+  deploymentSha: string | null
 }
 
 export interface CatalogRepository {
   readonly mode: CatalogBackendMode
   getBundle(): Promise<DataBundle>
   getRelease(): Promise<CatalogRelease>
+  /** Runtime release truth; remote backends may read the live Worker endpoint. */
+  getOperationalRelease?(): Promise<CatalogRelease>
+  /** Optional lightweight API projection that must not load the compatibility bundle. */
+  comparePrograms?(ids: string[]): Promise<unknown>
   listInstitutions(query?: CatalogInstitutionListQuery): Promise<CatalogInstitutionListPage>
   listPrograms(query?: CatalogProgramListQuery): Promise<CatalogProgramListPage>
   listScholarships(query?: CatalogScholarshipListQuery): Promise<CatalogScholarshipListPage>

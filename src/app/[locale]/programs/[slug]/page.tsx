@@ -31,10 +31,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const data = await getCatalogData()
   const program = data.programs.find((item) => item.slug === slug)
   if (!program) return {}
+  const university = data.universities.find((item) => item.id === program.universityId)
+  const title = university
+    ? `${localize(program.name, locale)} — ${localize(university.name, locale)}`
+    : localize(program.name, locale)
 
   return pageMetadata(
     locale,
-    localize(program.name, locale),
+    title,
     `${degreeLabels(locale)[program.degreeLevel]} · ${disciplineLabels(locale)[program.discipline]}`,
     `programs/${slug}`,
     { indexable: isIndexableProgram(program, data.admissionCycles, getTodayDate()) },

@@ -1,8 +1,10 @@
 {
-  "version": 1,
+  "version": 2,
   "institutionId": "uni-zhejiang-university",
   "catalogStatus": "existing",
+  "manifestStatus": "in_progress",
   "checkedAt": "2026-07-20",
+  "officialHosts": ["iczu.zju.edu.cn","intlstudent.zju.edu.cn"],
   "sources": [
     {
       "version": 1, "id": "zju-intl-admissions-home", "institutionId": "uni-zhejiang-university", "entityType": "university", "sourceCategory": "international_admissions_home",
@@ -88,5 +90,44 @@
     { "sourceCategory": "program_detail", "status": "discovery_pending", "note": "Program-level pages will be discovered from the registered catalog anchors." },
     { "sourceCategory": "contacts", "status": "registered", "sourceIds": ["zju-admissions-contacts"] },
     { "sourceCategory": "catalog_anchor", "status": "registered", "sourceIds": ["zju-application-guide-anchor"] }
-  ]
+  ],
+  "catalogReconciliation": {
+    "scope": "representative_international_programs",
+    "status": "in_progress",
+    "entries": [
+      {
+        "sourceId": "zju-intl-admissions-home",
+        "officialKey": "program-zhejiang-university-business-administration-master",
+        "officialName": "Business Administration",
+        "entityType": "program",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "zju-intl-admissions-home",
+        "officialKey": "program-zhejiang-university-computer-science-bachelor",
+        "officialName": "Computer Science and Technology",
+        "entityType": "program",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "zju-intl-admissions-home",
+        "officialKey": "scholarship-zhejiang-provincial-government",
+        "officialName": "Zhejiang Provincial Government Scholarship",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      },
+      {
+        "sourceId": "zju-intl-admissions-home",
+        "officialKey": "scholarship-zhejiang-university-international-student",
+        "officialName": "Zhejiang University Scholarship for International Students",
+        "entityType": "scholarship",
+        "status": "pending",
+        "note": "Current public catalog identity is linked to this exact official URL; entity-level evidence and catalog completeness remain pending."
+      }
+    ],
+    "note": "V2 migration preserves the 2026-07-20 source audit. 4 exact-URL or same-host/same-category catalog relationships are queued for evidence review; all other identities and full-directory reconciliation remain unresolved."
+  }
 }

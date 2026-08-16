@@ -5,6 +5,7 @@ import type { DataBundle } from '@/lib/data/types'
 import { getTodayDate, isCurrentVerifiedRecord } from '@/lib/data/freshness'
 import { classifyProgramField } from '@/lib/data/fields'
 import { selectCatalogApiData } from '@/lib/catalog-api/projection'
+import { CatalogApiService } from '@/lib/catalog-api/service'
 import { selectPublishedData } from '@/lib/data/publication'
 import {
   parseProgramCatalogFilters,
@@ -18,7 +19,7 @@ import {
   decodeJsonListCursor,
   encodeJsonListCursor,
 } from './list-cursor'
-import { deriveCatalogRelease } from './release'
+import { deriveCatalogRelease, getCatalogRecordCounts } from './release'
 import {
   CATALOG_LIST_DEFAULT_LIMIT,
   CATALOG_LIST_MAX_LIMIT,
@@ -118,6 +119,32 @@ export class JsonCatalogRepository implements CatalogRepository {
   async getRelease(): Promise<CatalogRelease> {
     return deriveCatalogRelease(await this.getBundle())
   }
+
+  async comparePrograms(ids: string[]): Promise<unknown> {
+    const uniqueIds = [...new Set(ids)]
+    if (
+      uniqueIds.length < 1
+      || uniqueIds.length > 4
+      || uniqueIds.some((id) => !/^[a-z0-9][a-z0-9:_-]{0,199}$/u.test(id))
+    ) {
+      throw new CatalogRepositoryError(
+        'INVALID_COMPARE_IDS',
+        'Program comparison requires between one and four valid program ids.',
+      )
+    }
+    const today = getTodayDate()
+    const rawBundle = await this.getBundle()
+    const publicBundle = selectCatalogApiData(rawBundle, today)
+    const release = deriveCatalogRelease(rawBundle)
+    const publicCounts = getCatalogRecordCounts(publicBundle)
+    return new CatalogApiService(publicBundle, {
+      ...release,
+      recordCounts: publicCounts,
+      rawCounts: getCatalogRecordCounts(rawBundle),
+      publicCounts,
+    }, today).comparePrograms(uniqueIds)
+  }
+
   async listInstitutions(
     query: CatalogInstitutionListQuery = {},
   ): Promise<CatalogInstitutionListPage> {

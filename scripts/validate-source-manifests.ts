@@ -1,7 +1,6 @@
 import { readdirSync, readFileSync } from 'node:fs'
 import { basename, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { z } from 'zod'
 import {
   SOURCE_CATEGORIES,
   sourceManifestSchema,
@@ -11,8 +10,17 @@ import type {
   SourceCategory,
   SourceManifestV1,
 } from '../workers/ingestion/src/types'
+import {
+  pilotSourceManifestSchema,
+  sourceManifestV2Schema,
+  type PilotSourceManifest,
+  type SourceManifestRecord,
+  type SourceManifestV2,
+} from './source-manifest-contract'
 
 export { SOURCE_CATEGORIES, sourceManifestSchema }
+export { pilotSourceManifestSchema }
+export type { PilotSourceManifest, SourceManifestRecord, SourceManifestV2 }
 
 const EXPECTED_CATALOG_STATUS = {
   'uni-tsinghua-university': 'existing',
@@ -78,39 +86,6 @@ export const INSTITUTION_HOST_ALLOWLISTS: Record<
   ],
 }
 
-const coverageSchema = z
-  .object({
-    sourceCategory: z.enum(SOURCE_CATEGORIES),
-    status: z.enum([
-      'registered',
-      'parser_pending',
-      'source_unavailable',
-      'discovery_pending',
-      'officially_not_provided',
-    ]),
-    sourceIds: z.array(z.string().min(1)).optional(),
-    note: z.string().min(1).optional(),
-  })
-  .strict()
-
-export const pilotSourceManifestSchema = z
-  .object({
-    version: z.literal(1),
-    institutionId: z.string().min(1),
-    catalogStatus: z.enum(['existing', 'planned_addition']),
-    checkedAt: z
-      .string()
-      .regex(/^\d{4}-\d{2}-\d{2}$/)
-      .refine((value) => !Number.isNaN(Date.parse(`${value}T00:00:00Z`)), {
-        message: 'checkedAt must be a real ISO calendar date',
-      }),
-    sources: z.array(sourceManifestSchema).min(1),
-    coverage: z.array(coverageSchema).length(SOURCE_CATEGORIES.length),
-  })
-  .strict()
-
-export type PilotSourceManifest = z.infer<typeof pilotSourceManifestSchema>
-
 export type LoadedPilotSourceManifest = {
   filePath: string
   value: unknown
@@ -135,14 +110,78 @@ export function loadPilotSourceManifestFiles(
     })
 }
 
+function validatePilotReconciliation(
+  record: SourceManifestV2,
+  filePath: string,
+  errors: string[],
+): void {
+  const sources = new Set(record.sources.map((source) => source.id))
+  const officialKeys = new Set<string>()
+  for (const entry of record.catalogReconciliation.entries) {
+    if (officialKeys.has(entry.officialKey)) {
+      errors.push(errorMessage(
+        filePath,
+        `catalog reconciliation repeats officialKey ${entry.officialKey}`,
+      ))
+    }
+    officialKeys.add(entry.officialKey)
+    if (!sources.has(entry.sourceId)) {
+      errors.push(errorMessage(
+        filePath,
+        `catalog reconciliation references unknown source ${entry.sourceId}`,
+      ))
+    }
+    if (entry.status === 'published' && !entry.recordId) {
+      errors.push(errorMessage(
+        filePath,
+        `${entry.officialKey} published reconciliation requires recordId`,
+      ))
+    }
+    if (entry.status !== 'published' && entry.status !== 'pending' && !entry.note) {
+      errors.push(errorMessage(
+        filePath,
+        `${entry.officialKey} ${entry.status} reconciliation requires a note`,
+      ))
+    }
+  }
+  if (record.catalogReconciliation.status === 'complete'
+    && record.catalogReconciliation.entries.some((entry) => entry.status === 'pending')) {
+    errors.push(errorMessage(
+      filePath,
+      'complete catalog reconciliation cannot contain pending entries',
+    ))
+  }
+  if (record.manifestStatus === 'complete') {
+    if (record.coverage.some((coverage) => coverage.status === 'discovery_pending')) {
+      errors.push(errorMessage(
+        filePath,
+        'complete manifest cannot contain discovery_pending coverage',
+      ))
+    }
+    if (record.catalogReconciliation.status !== 'complete') {
+      errors.push(errorMessage(
+        filePath,
+        'complete manifest requires complete catalog reconciliation',
+      ))
+    }
+  }
+}
+
 export function validatePilotSourceManifests(
   inputs: LoadedPilotSourceManifest[],
-): PilotSourceManifest[] {
+): SourceManifestRecord[] {
   const errors: string[] = []
-  const records: PilotSourceManifest[] = []
+  const records: SourceManifestRecord[] = []
 
   for (const input of inputs) {
-    const parsed = pilotSourceManifestSchema.safeParse(input.value)
+    const version = typeof input.value === 'object'
+      && input.value !== null
+      && 'version' in input.value
+      ? input.value.version
+      : undefined
+    const parsed = version === 2
+      ? sourceManifestV2Schema.safeParse(input.value)
+      : pilotSourceManifestSchema.safeParse(input.value)
     if (!parsed.success) {
       for (const issue of parsed.error.issues) {
         errors.push(
@@ -209,6 +248,14 @@ export function validatePilotSourceManifests(
         record.institutionId as keyof typeof EXPECTED_CATALOG_STATUS
       ],
     )
+    if (record.version === 2) {
+      for (const host of record.officialHosts) {
+        if (!approvedHosts.has(host.toLowerCase())) {
+          errors.push(errorMessage(filePath, `declares unapproved official host ${host}`))
+        }
+      }
+      validatePilotReconciliation(record, filePath, errors)
+    }
     const sourcesById = new Map(record.sources.map((source) => [source.id, source]))
     const coverageByCategory = new Map<SourceCategory, typeof record.coverage[number]>()
 
@@ -435,7 +482,7 @@ export function validatePilotSourceManifests(
 
 export function validatePilotSourceManifestDirectory(
   directory?: string,
-): PilotSourceManifest[] {
+): SourceManifestRecord[] {
   return validatePilotSourceManifests(loadPilotSourceManifestFiles(directory))
 }
 

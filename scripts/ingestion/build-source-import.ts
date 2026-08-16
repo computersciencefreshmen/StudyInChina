@@ -2,9 +2,11 @@ import { mkdirSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import {
+  isCatalogReconciliationComplete,
   validateSourceManifestDirectory,
   type SourceManifestRecord,
 } from '../source-manifest-registry'
+import type { SourceManifestV1 } from '../../workers/ingestion/src/types'
 
 type SqlValue = string | number | null
 
@@ -14,6 +16,28 @@ export type SourceImportArtifacts = {
   sources: number
   enabledSources: number
   generatedAt: string
+}
+
+export type NormalizedSourceManifestImport = {
+  institutionId: string
+  manifestVersion: 1 | 2
+  checkedAt: string
+  catalogReconciliationComplete: boolean
+  sources: readonly SourceManifestV1[]
+}
+
+export function normalizeSourceManifestsForImport(
+  records: readonly SourceManifestRecord[],
+): NormalizedSourceManifestImport[] {
+  return records.map((record) => ({
+    institutionId: record.institutionId,
+    manifestVersion: record.version,
+    checkedAt: record.checkedAt,
+    // V1 never claimed reconciliation completeness. A V2 in_progress
+    // envelope is importable, but remains explicitly incomplete.
+    catalogReconciliationComplete: isCatalogReconciliationComplete(record),
+    sources: record.sources,
+  }))
 }
 
 function sqlValue(value: SqlValue) {
@@ -27,10 +51,11 @@ export function buildPilotSourceImport(
   generatedAt = new Date().toISOString(),
 ): SourceImportArtifacts {
   if (Number.isNaN(Date.parse(generatedAt))) throw new Error('generatedAt must be an ISO timestamp')
-  const sources = records
+  const normalized = normalizeSourceManifestsForImport(records)
+  const sources = normalized
     .flatMap((record) => record.sources)
     .sort((left, right) => left.id.localeCompare(right.id))
-  const institutionIds = [...new Set(records.map((record) => record.institutionId))].sort()
+  const institutionIds = [...new Set(normalized.map((record) => record.institutionId))].sort()
   const sourceIds = new Set<string>()
   for (const source of sources) {
     if (sourceIds.has(source.id)) throw new Error(`Duplicate source id: ${source.id}`)

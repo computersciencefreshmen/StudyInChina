@@ -78,3 +78,9 @@ short-lived review artifact.
 
 Promotion remains a separate evidence-review action. Candidate artifacts must
 never be copied wholesale into the formal manifest directory.
+
+A `representative_international_programs` scope is discovery evidence, never a
+complete catalogue reconciliation, even if an upstream artifact incorrectly
+labels it `complete`. The completion and publication gates accept only
+`full_official_catalog`, or an explicitly final `limited_official_catalog`,
+with terminal reconciliation entries and no pending outcomes.
