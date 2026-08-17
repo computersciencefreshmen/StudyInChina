@@ -9,6 +9,9 @@
     · <a href="./docs/content-maintenance.md">Data policy</a>
   </p>
   <p>
+    <strong>English</strong> · <a href="./README.zh-CN.md">简体中文</a>
+  </p>
+  <p>
     <a href="https://github.com/computersciencefreshmen/StudyInChina/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/computersciencefreshmen/StudyInChina/actions/workflows/ci.yml/badge.svg" /></a>
     <img alt="Node 24" src="https://img.shields.io/badge/Node.js-24-233056?logo=nodedotjs&logoColor=white" />
     <img alt="Next.js 16" src="https://img.shields.io/badge/Next.js-16-111111?logo=nextdotjs&logoColor=white" />
@@ -27,43 +30,44 @@ International applicants often have to compare hundreds of differently structure
 
 The product is built around three promises:
 
-| Discover broadly | Verify precisely | Understand uncertainty |
-|---|---|---|
+| Discover broadly                                                          | Verify precisely                                                           | Understand uncertainty                                                                      |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | Explore a national selection instead of a handful of famous universities. | Dynamic facts carry an official source, check date and publication status. | Unknown, conflicting or stale values stay empty; old cycles and guesses never fill the gap. |
 
 ## Public catalogue snapshot
 
 <div align="center">
 
-| **266** universities | **1,233** programs | **351** scholarships | **62** cities |
-|:---:|:---:|:---:|:---:|
+| **266** universities | **1,233** programs | **350** scholarships | **62** cities |
+| :------------------: | :----------------: | :------------------: | :-----------: |
 
 </div>
 
-The public catalogue contains **52 published cycle or fee-reference records** and is backed by **2,070 registered official source records**. A published record is not automatically an open application window; the decision-oriented metrics below are evaluated for **2026-08-16** with `npm run quality:platform-scorecard`.
+The public catalogue contains **52 published cycle or fee-reference records** and is backed by **2,070 registered official source records**. A published record is not automatically an open application window; the decision-oriented metrics below are evaluated for **2026-08-17** with `npm run quality:platform-scorecard`.
 
 <details>
 <summary><strong>Open the honest data-depth scorecard</strong></summary>
 
 Record count is not the same as record completeness. These are the current depth and platform-readiness indicators:
 
-| Quality indicator | Current baseline | Next gate |
-|---|---:|---:|
-| Universities below three published programs | **8** | 0 |
-| Verified international-program identities | 1,233 / 1,233 · **100%** | Maintain 100% |
-| Programs with a fresh 30-day disposition | 49 / 1,233 · **3.97%** | ≥ 70% |
-| Programs with dated or rolling admissions | 49 / 1,233 · **3.97%** | Report honestly |
-| Programs open or upcoming on the evaluation date | 10 / 1,233 · **0.81%** | Report honestly |
-| Programs with duration | **61.64%** | ≥ 90% |
-| Programs with an official application route | **50.85%** | ≥ 80% |
-| Programs with known teaching language | **85.08%** | ≥ 95% |
-| Programs with eligibility/language evidence | **6.16%** | ≥ 50% |
-| Universities connected to scholarships | 204 / 266 | ≥ 230 |
-| Cities with reviewed coordinates | 27 / 62 | 62 / 62 |
-| Source Manifests registered | 10 / 266 | 266 / 266 |
-| Completed V2 Source Manifests | 0 / 266 | 266 / 266 |
-| Complete catalogue reconciliation | 0 / 266 | 266 / 266 |
-| Platform quality gates passing | 3 / 14 | 14 / 14 |
+| Quality indicator                                |         Current baseline |       Next gate |
+| ------------------------------------------------ | -----------------------: | --------------: |
+| Universities below three published programs      |                    **8** |               0 |
+| Verified international-program identities        | 1,233 / 1,233 · **100%** |   Maintain 100% |
+| Programs with a fresh 30-day disposition         |   49 / 1,233 · **3.97%** |           ≥ 70% |
+| Programs with dated or rolling admissions        |   49 / 1,233 · **3.97%** | Report honestly |
+| Programs open or upcoming on the evaluation date |   10 / 1,233 · **0.81%** | Report honestly |
+| Programs with duration                           |               **61.64%** |           ≥ 90% |
+| Programs with an official application route      |               **50.85%** |           ≥ 80% |
+| Programs with known teaching language            |               **85.08%** |           ≥ 95% |
+| Programs with eligibility/language evidence      |                **6.16%** |           ≥ 50% |
+| Universities connected to scholarships           |                204 / 266 |           ≥ 230 |
+| Cities with reviewed coordinates                 |                  27 / 62 |         62 / 62 |
+| Source Manifests registered                      |                 10 / 266 |       266 / 266 |
+| Completed V2 Source Manifests                    |                  0 / 266 |       266 / 266 |
+| Complete catalogue reconciliation                |                  0 / 266 |       266 / 266 |
+| Verified records overdue for review              |                    **0** |               0 |
+| Platform quality gates passing                   |                   3 / 14 |         14 / 14 |
 
 The raw compatibility dataset contains 272 universities, 1,255 programs and 384 scholarships. Draft, archived, identity-conflicting or publication-ineligible records are intentionally excluded from the public numbers above.
 
@@ -78,10 +82,21 @@ The current release moves the project from a large static directory toward a mea
 - Favorites loads only requested IDs through a four-program comparison projection instead of serializing the entire catalogue to the browser;
 - Release metadata distinguishes raw and public counts, the data-check date, evaluation date, activation time, backend and Vercel deployment SHA;
 - ten pilot universities now use strict Source Manifest V2 ledgers in `in_progress` state—none is mislabeled as fully reconciled;
-- daily and monthly `raw-v1` backups for both D1 databases were uploaded to private R2, read back byte-for-byte and restored into isolated local databases in **101.198 seconds** with zero foreign-key violations;
-- Catalog remains on the JSON compatibility backend while D1 Shadow parity, credentials and rollback evidence are completed.
+- the `raw-v1` backup format, checksum/readback path and isolated restore procedure have been exercised locally in **101.198 seconds** with zero foreign-key violations; a production RPO/RTO claim waits for dedicated credentials and verified R2 checkpoints;
+- Catalog remains on the JSON compatibility backend while D1 Shadow parity, remote credential proof and production rollback evidence remain explicit cutover gates.
 
 This milestone deliberately exposes the freshness gap: a fact becoming stale reduces the public count instead of silently remaining visible. That makes the lower current figures a trustworthy operational signal, not a regression hidden by optimistic counting.
+
+### Operational status: implemented versus proven
+
+| Surface           | Current state                                                                                               | Deliberately not claimed yet                                                                     |
+| ----------------- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Public catalogue  | Vercel serves the generated JSON compatibility snapshot with publication gates and official-source links.   | That Catalog D1 is the production read path.                                                     |
+| Data platform     | Pipeline/Catalog D1 schemas, Workers, versioned releases and Shadow comparison are implemented.             | Three matching releases over 72 hours with zero critical Shadow differences.                     |
+| Recovery          | `raw-v1` export, checksum/readback validation and isolated restore are implemented and locally exercised.   | A live 7/7 backup record, a measured production RPO/RTO, or a completed remote restore drill.    |
+| Stable deployment | Production promotion is designed to require an exact main SHA, successful CI and a stable-alias smoke test. | An automatic-promotion guarantee before the dedicated GitHub secret is configured and exercised. |
+
+This distinction is intentional: implementation, local verification and production evidence are different stages of an operational claim.
 
 ## What applicants can do
 
@@ -105,12 +120,12 @@ The catalogue separates **record identity** from **field visibility**. A verifie
 
 ```ts
 type FactStatus =
-  | 'known'
-  | 'officially_not_announced'
-  | 'not_applicable'
-  | 'source_unavailable'
-  | 'conflict'
-  | 'stale'
+  | "known"
+  | "officially_not_announced"
+  | "not_applicable"
+  | "source_unavailable"
+  | "conflict"
+  | "stale";
 ```
 
 Publication follows these rules:
@@ -160,51 +175,54 @@ flowchart LR
 
 ### Why the platform is split this way
 
-| Layer | Responsibility | Engineering reason |
-|---|---|---|
-| Pipeline D1 | Jobs, candidates, evidence, conflicts and quarantine | Frequent internal writes never compete with public reads. |
-| Private R2 | Compressed source snapshots, PDFs, evidence assets and release exports | Cheap immutable storage makes audit and recovery possible. |
-| Catalog D1 | Validated, versioned public projection | The website reads a stable release instead of half-written ingestion state. |
-| Catalog Repository | `json`, `shadow` and `d1` backends | The application can compare backends and roll back without rewriting pages. |
-| Next.js on Vercel | Multilingual pages, SEO, feedback and web delivery | App Router provides server rendering while Vercel supplies previews and production delivery. |
+| Layer              | Responsibility                                                         | Engineering reason                                                                           |
+| ------------------ | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Pipeline D1        | Jobs, candidates, evidence, conflicts and quarantine                   | Frequent internal writes never compete with public reads.                                    |
+| Private R2         | Compressed source snapshots, PDFs, evidence assets and release exports | Cheap immutable storage makes audit and recovery possible.                                   |
+| Catalog D1         | Validated, versioned public projection                                 | The website reads a stable release instead of half-written ingestion state.                  |
+| Catalog Repository | `json`, `shadow` and `d1` backends                                     | The application can compare backends and roll back without rewriting pages.                  |
+| Next.js on Vercel  | Multilingual pages, SEO, feedback and web delivery                     | App Router provides server rendering while Vercel supplies previews and production delivery. |
 
 The platform foundation is implemented, but production remains deliberately compatible with the generated JSON repository while D1 shadow comparison and release-readiness gates continue. MiniMax credentials exist only as Cloudflare secrets; source content never receives database, network or execution privileges.
 
 ## Technology map
 
-| Concern | Choice |
-|---|---|
-| Web application | Next.js 16 App Router, React 19, strict TypeScript 5.9 |
-| Design system | Accessible custom “academic atlas” CSS, progressive enhancement |
-| Collection | Cloudflare Workers, Queues, allowlisted fetch policies |
-| Data and evidence | Pipeline D1, Catalog D1, private R2, immutable releases |
-| Extraction | Deterministic parsers + MiniMax dual extraction + evidence grounding |
-| Validation | Zod schemas, deterministic conflict/freshness/publication gates |
-| Testing | Vitest 4, Testing Library, Node test runner, Playwright |
-| Delivery | GitHub Actions, Vercel Preview and Production deployments |
-| Observability | Release age, queue/DLQ state, source health, backup and cost signals |
+| Concern           | Choice                                                               |
+| ----------------- | -------------------------------------------------------------------- |
+| Web application   | Next.js 16 App Router, React 19, strict TypeScript 5.9               |
+| Design system     | Accessible custom “academic atlas” CSS, progressive enhancement      |
+| Collection        | Cloudflare Workers, Queues, allowlisted fetch policies               |
+| Data and evidence | Pipeline D1, Catalog D1, private R2, immutable releases              |
+| Extraction        | Deterministic parsers + MiniMax dual extraction + evidence grounding |
+| Validation        | Zod schemas, deterministic conflict/freshness/publication gates      |
+| Testing           | Vitest 4, Testing Library, Node test runner, Playwright              |
+| Delivery          | GitHub Actions, Vercel Preview and Production deployments            |
+| Observability     | Release age, queue/DLQ state, source health, backup and cost signals |
 
 ## Public API
 
 Versioned endpoints use cursor pagination. List endpoints default to `limit=24` and accept at most 100 records per request.
 
-| Endpoint | Purpose |
-|---|---|
-| `GET /api/v1/institutions` | Search and filter institutions |
-| `GET /api/v1/institutions/{slug}` | Institution detail |
-| `GET /api/v1/programs` | Search and filter programs |
-| `GET /api/v1/programs/{slug}` | Program detail |
-| `GET /api/v1/programs/{slug}/cycles` | Program admission cycles |
-| `GET /api/v1/scholarships` | Search and filter scholarships |
-| `GET /api/v1/scholarships/{slug}/cycles` | Scholarship cycles |
-| `GET /api/v1/releases/current` | Current public release metadata |
-| `GET /api/v1/double-first-class` | Double First-Class coverage view |
+| Endpoint                                 | Purpose                                                    |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| `GET /api/v1/institutions`               | Search and filter institutions                             |
+| `GET /api/v1/institutions/{slug}`        | Institution detail                                         |
+| `GET /api/v1/programs`                   | Search and filter programs                                 |
+| `GET /api/v1/programs/{slug}`            | Program detail                                             |
+| `GET /api/v1/programs/{slug}/cycles`     | Program admission cycles                                   |
+| `GET /api/v1/programs/compare?ids=...`   | Lightweight comparison projection for one to four programs |
+| `GET /api/v1/scholarships`               | Search and filter scholarships                             |
+| `GET /api/v1/scholarships/{slug}/cycles` | Scholarship cycles                                         |
+| `GET /api/v1/releases/current`           | Current public release metadata                            |
+| `GET /api/v1/double-first-class`         | Double First-Class coverage view                           |
 
 ```bash
 curl "https://studyinchina.vercel.app/api/v1/institutions?discipline=chinese-language&limit=3"
 ```
 
 Program filtering supports institution, city, program type, degree, field, teaching language, academic year, intake, tuition range, application state and scholarship availability.
+
+`GET /api/v1/releases/current` keeps release identity separate from website deployment identity: it returns raw and public counts, `dataCheckedThrough`, `evaluatedForDate`, `activatedAt`, `catalogBackend` and, when available, the Vercel deployment SHA.
 
 ## Run locally
 
@@ -282,7 +300,7 @@ workers/localization/              gated translation pipeline (disabled by defau
 - Catalog D1 retains the active release and two rollback releases; full history remains in private R2.
 - A data rollback moves `currentReleaseId` back to a validated release without redeploying the application.
 - An application rollback promotes the previous healthy Vercel deployment.
-- Daily exports target a 24-hour recovery point; recovery restores into an isolated database before any production cutover.
+- Once the dedicated backup credentials are configured, daily exports target a 24-hour recovery point; recovery restores into an isolated database before any production cutover.
 
 See [`docs/platform-rollout.md`](./docs/platform-rollout.md), [`docs/backup-and-restore.md`](./docs/backup-and-restore.md) and [`docs/database-schema.md`](./docs/database-schema.md) for operational detail.
 
