@@ -66,8 +66,8 @@ Record count is not the same as record completeness. These are the current depth
 | Source Manifests registered                      |                 10 / 266 |       266 / 266 |
 | Completed V2 Source Manifests                    |                  0 / 266 |       266 / 266 |
 | Complete catalogue reconciliation                |                  0 / 266 |       266 / 266 |
-| Verified records overdue for review              |                    **1** |               0 |
-| Platform quality gates passing                   |                   2 / 14 |         14 / 14 |
+| Verified records overdue for review              |                    **0** |               0 |
+| Platform quality gates passing                   |                   3 / 14 |         14 / 14 |
 
 The raw compatibility dataset contains 272 universities, 1,255 programs and 384 scholarships. Draft, archived, identity-conflicting or publication-ineligible records are intentionally excluded from the public numbers above.
 
