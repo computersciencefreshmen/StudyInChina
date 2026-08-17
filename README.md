@@ -34,7 +34,7 @@ The product is built around three promises:
 | ------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | Explore a national selection instead of a handful of famous universities. | Dynamic facts carry an official source, check date and publication status. | Unknown, conflicting or stale values stay empty; old cycles and guesses never fill the gap. |
 
-## Public catalogue snapshot
+## Public identity catalogue snapshot
 
 <div align="center">
 
