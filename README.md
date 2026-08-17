@@ -34,42 +34,44 @@ The product is built around three promises:
 | ------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | Explore a national selection instead of a handful of famous universities. | Dynamic facts carry an official source, check date and publication status. | Unknown, conflicting or stale values stay empty; old cycles and guesses never fill the gap. |
 
-## Public catalogue snapshot
+## Public identity catalogue snapshot
 
 <div align="center">
 
-| **266** universities | **1,233** programs | **350** scholarships | **62** cities |
-| :------------------: | :----------------: | :------------------: | :-----------: |
+| **266** universities | **1,234** program identities | **360** scholarship identities | **62** cities |
+| :------------------: | :--------------------------: | :----------------------------: | :-----------: |
 
 </div>
 
-The public catalogue contains **52 published cycle or fee-reference records** and is backed by **2,070 registered official source records**. A published record is not automatically an open application window; the decision-oriented metrics below are evaluated for **2026-08-17** with `npm run quality:platform-scorecard`.
+The public identity catalogue contains **52 published cycle or fee-reference records** and is backed by **2,070 registered official source records**. It deliberately retains verified and stale identities as official discovery paths, so its counts differ from the stricter fresh-data scorecard below. A published record is not automatically an open application window; the decision-oriented metrics are evaluated for **2026-08-17** with `npm run quality:platform-scorecard`.
 
 <details>
 <summary><strong>Open the honest data-depth scorecard</strong></summary>
 
-Record count is not the same as record completeness. These are the current depth and platform-readiness indicators:
+Record count is not the same as record completeness. This stricter scorecard measures fresh, current evidence rather than every public discovery identity:
 
-| Quality indicator                                |         Current baseline |       Next gate |
-| ------------------------------------------------ | -----------------------: | --------------: |
-| Universities below three published programs      |                    **8** |               0 |
-| Verified international-program identities        | 1,233 / 1,233 · **100%** |   Maintain 100% |
-| Programs with a fresh 30-day disposition         |   49 / 1,233 · **3.97%** |           ≥ 70% |
-| Programs with dated or rolling admissions        |   49 / 1,233 · **3.97%** | Report honestly |
-| Programs open or upcoming on the evaluation date |   10 / 1,233 · **0.81%** | Report honestly |
-| Programs with duration                           |               **61.64%** |           ≥ 90% |
-| Programs with an official application route      |               **50.85%** |           ≥ 80% |
-| Programs with known teaching language            |               **85.08%** |           ≥ 95% |
-| Programs with eligibility/language evidence      |                **6.16%** |           ≥ 50% |
-| Universities connected to scholarships           |                204 / 266 |           ≥ 230 |
-| Cities with reviewed coordinates                 |                  27 / 62 |         62 / 62 |
-| Source Manifests registered                      |                 10 / 266 |       266 / 266 |
-| Completed V2 Source Manifests                    |                  0 / 266 |       266 / 266 |
-| Complete catalogue reconciliation                |                  0 / 266 |       266 / 266 |
-| Verified records overdue for review              |                    **0** |               0 |
-| Platform quality gates passing                   |                   3 / 14 |         14 / 14 |
+| Quality indicator                                       |           Current baseline |       Next gate |
+| ------------------------------------------------------- | -------------------------: | --------------: |
+| Universities below three published programs             |                      **8** |               0 |
+| Freshly verified international-program identities       | 1,233 / 1,234 · **99.92%** |    Restore 100% |
+| Programs with a fresh 30-day disposition                |     49 / 1,233 · **3.97%** |           ≥ 70% |
+| Programs with dated or rolling admissions               |     49 / 1,233 · **3.97%** | Report honestly |
+| Programs open or upcoming on the evaluation date        |     10 / 1,233 · **0.81%** | Report honestly |
+| Programs with duration                                  |                 **61.64%** |           ≥ 90% |
+| Programs with an official application route             |                 **50.85%** |           ≥ 80% |
+| Programs with known teaching language                   |                 **85.08%** |           ≥ 95% |
+| Programs with eligibility/language evidence             |                  **6.16%** |           ≥ 50% |
+| Universities connected to freshly verified scholarships |                  204 / 266 |           ≥ 230 |
+| Cities with reviewed coordinates                        |                    27 / 62 |         62 / 62 |
+| Source Manifests registered                             |                   10 / 266 |       266 / 266 |
+| Completed V2 Source Manifests                           |                    0 / 266 |       266 / 266 |
+| Complete catalogue reconciliation                       |                    0 / 266 |       266 / 266 |
+| Verified records overdue for review                     |                      **0** |               0 |
+| Platform quality gates passing                          |                     3 / 14 |         14 / 14 |
 
 The raw compatibility dataset contains 272 universities, 1,255 programs and 384 scholarships. Draft, archived, identity-conflicting or publication-ineligible records are intentionally excluded from the public numbers above.
+
+The public Release API reports the wider 1,234-program / 360-scholarship identity catalogue; the scorecard intentionally reports the smaller fresh-verification subset. Do not substitute one metric for the other.
 
 </details>
 
