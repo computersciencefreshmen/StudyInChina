@@ -21,6 +21,45 @@ const data = {
   universities,
 } as DataBundle
 
+function tuitionFixture(): DataBundle {
+  const fixturePrograms = data.programs.slice(0, 4).map((program, index) => ({
+    ...program,
+    id: `tuition-program-${index + 1}`,
+    slug: `tuition-program-${index + 1}`,
+    name: { en: `Tuition program ${index + 1}` },
+    status: 'verified' as const,
+  }))
+  const cycleFacts = [
+    { tuitionCny: 50_000, tuitionStatus: 'reference' as const },
+    { tuitionCny: 30_000, tuitionStatus: 'confirmed' as const },
+    { tuitionCny: null, tuitionStatus: null },
+    { tuitionCny: 10_000, tuitionStatus: 'confirmed' as const },
+  ]
+
+  return {
+    ...data,
+    programs: fixturePrograms,
+    admissionCycles: fixturePrograms.map((program, index) => ({
+      id: `tuition-cycle-${index + 1}`,
+      programId: program.id,
+      academicYear: '2026-2027',
+      intake: 'autumn' as const,
+      opensOn: null,
+      closesOn: null,
+      dateStatus: 'not-announced' as const,
+      tuitionPeriod: cycleFacts[index]!.tuitionCny === null
+        ? null
+        : 'academic-year' as const,
+      applicationFeeCny: null,
+      sourceIds: [],
+      verifiedAt: '2026-08-25',
+      reviewAfter: '2026-09-25',
+      status: 'verified' as const,
+      ...cycleFacts[index]!,
+    })),
+  }
+}
+
 describe('server-side program catalogue', () => {
   it('normalizes filters and returns only the requested 24-record page', () => {
     const filters = parseProgramCatalogFilters({ discipline: 'engineering', page: '1' })
@@ -77,6 +116,67 @@ describe('server-side program catalogue', () => {
       parseProgramCatalogFilters({ tuition: 'unknown' }),
       '2026-08-25',
     ).total).toBe(0)
+  })
+
+  it('treats reference tuition as unknown rather than as a current known or ranged fee', () => {
+    const fixture = tuitionFixture()
+
+    expect(queryProgramCatalog(
+      fixture,
+      parseProgramCatalogFilters({ tuition: 'known' }),
+      '2026-08-25',
+    ).items.map(({ program }) => program.id)).toEqual([
+      'tuition-program-2',
+      'tuition-program-4',
+    ])
+    expect(queryProgramCatalog(
+      fixture,
+      parseProgramCatalogFilters({ tuition: 'unknown' }),
+      '2026-08-25',
+    ).items.map(({ program }) => program.id)).toEqual([
+      'tuition-program-1',
+      'tuition-program-3',
+    ])
+    expect(queryProgramCatalog(
+      fixture,
+      parseProgramCatalogFilters({ tuition: 'under-20000' }),
+      '2026-08-25',
+    ).items.map(({ program }) => program.id)).toEqual(['tuition-program-4'])
+    expect(queryProgramCatalog(
+      fixture,
+      parseProgramCatalogFilters({ tuition: '20000-40000' }),
+      '2026-08-25',
+    ).items.map(({ program }) => program.id)).toEqual(['tuition-program-2'])
+    expect(queryProgramCatalog(
+      fixture,
+      parseProgramCatalogFilters({ tuition: 'over-40000' }),
+      '2026-08-25',
+    ).total).toBe(0)
+  })
+
+  it('sorts only confirmed current tuition and keeps reference and unknown fees stably last', () => {
+    const fixture = tuitionFixture()
+
+    expect(queryProgramCatalog(
+      fixture,
+      parseProgramCatalogFilters({ sort: 'tuition-asc' }),
+      '2026-08-25',
+    ).items.map(({ program }) => program.id)).toEqual([
+      'tuition-program-4',
+      'tuition-program-2',
+      'tuition-program-1',
+      'tuition-program-3',
+    ])
+    expect(queryProgramCatalog(
+      fixture,
+      parseProgramCatalogFilters({ sort: 'tuition-desc' }),
+      '2026-08-25',
+    ).items.map(({ program }) => program.id)).toEqual([
+      'tuition-program-2',
+      'tuition-program-4',
+      'tuition-program-1',
+      'tuition-program-3',
+    ])
   })
 
   it('rejects unsupported filter values instead of passing them to queries', () => {

@@ -195,19 +195,24 @@ describe('priority singleton coverage wave 6 on 2026-07-31', () => {
     }
   })
 
-  it('adds the Guangzhou University and CUEB scholarships without fake program binding', () => {
-    const expectedIds = [
-      'wave6-gzhu-international-student-scholarship-2026',
-      'wave6-cueb-new-foreign-student-scholarship',
-    ]
+  it('keeps CUEB unbound and applies the later GZHU program scope without backdating it', () => {
+    const cuebCandidateId = 'wave6-cueb-new-foreign-student-scholarship'
+    const cueb = published.scholarships.find((item) =>
+      item.id === scholarshipId(cuebCandidateId))
+    expect(cueb, cuebCandidateId).toBeDefined()
+    expect(cueb?.providerType, cuebCandidateId).toBe('university')
+    expect(cueb?.programIds, cuebCandidateId).toEqual([])
 
-    for (const candidateId of expectedIds) {
-      const scholarship = published.scholarships.find((item) =>
-        item.id === scholarshipId(candidateId))
-      expect(scholarship, candidateId).toBeDefined()
-      expect(scholarship?.providerType, candidateId).toBe('university')
-      expect(scholarship?.programIds, candidateId).toEqual([])
-    }
+    const gzhuCandidateId = 'wave6-gzhu-international-student-scholarship-2026'
+    const gzhuId = scholarshipId(gzhuCandidateId)
+    const gzhu = data.scholarships.find((item) => item.id === gzhuId)
+    expect(gzhu, gzhuCandidateId).toBeDefined()
+    expect(gzhu?.providerType, gzhuCandidateId).toBe('university')
+    expect(gzhu?.programIds, gzhuCandidateId).toEqual([
+      'program-guangzhou-university-public-administration-smart-governance-bachelor',
+    ])
+    expect(gzhu?.verifiedAt, gzhuCandidateId).toBe('2026-08-25')
+    expect(published.scholarships.some((item) => item.id === gzhuId)).toBe(false)
   })
 
   it('keeps the published catalog free of same-school semantic duplicates', () => {

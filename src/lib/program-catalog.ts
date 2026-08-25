@@ -167,13 +167,17 @@ function matchesApplicationState(
 
 function matchesTuition(cycle: AdmissionCycle | undefined, expected: string): boolean {
   if (!expected) return true
-  const tuition = cycle?.tuitionCny
+  const tuition = currentTuitionCny(cycle)
   if (expected === 'known') return tuition !== null && tuition !== undefined
   if (expected === 'unknown') return tuition === null || tuition === undefined
   if (tuition === null || tuition === undefined) return false
   if (expected === 'under-20000') return tuition <= 20_000
   if (expected === '20000-40000') return tuition > 20_000 && tuition <= 40_000
   return tuition > 40_000
+}
+
+function currentTuitionCny(cycle: AdmissionCycle | undefined): number | null | undefined {
+  return cycle?.tuitionStatus === 'reference' ? undefined : cycle?.tuitionCny
 }
 
 function localizedSortValue(value: LocalizedText): string {
@@ -207,8 +211,8 @@ function sortEntries(
         .localeCompare(right.cycle?.closesOn || '9999-12-31')
     }
     return compareNullableNumbers(
-      left.cycle?.tuitionCny,
-      right.cycle?.tuitionCny,
+      currentTuitionCny(left.cycle),
+      currentTuitionCny(right.cycle),
       sort === 'tuition-desc' ? 'desc' : 'asc',
     )
   })
