@@ -1,0 +1,56 @@
+.value {
+  min-width: 0;
+}
+
+.state {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .38rem;
+  max-width: 100%;
+  color: var(--atlas-muted);
+  font-size: .88em;
+  font-weight: 680;
+  line-height: 1.35;
+}
+
+.marker {
+  flex: 0 0 auto;
+  width: .48rem;
+  height: .48rem;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  transform: translateY(-.02em);
+}
+
+.notApplicable .marker {
+  width: .55rem;
+  height: 1px;
+  border: 0;
+  border-radius: 0;
+  background: currentColor;
+}
+
+.sourceUnavailable {
+  color: var(--atlas-ink-soft);
+}
+
+.sourceUnavailable .marker {
+  border-style: dashed;
+}
+
+.conflict {
+  color: var(--atlas-danger);
+}
+
+.conflict .marker {
+  border-radius: 1px;
+  transform: rotate(45deg) translateY(-.05em);
+}
+
+.stale {
+  color: var(--atlas-gold);
+}
+
+.stale .marker {
+  background: color-mix(in srgb, var(--atlas-gold-pale) 72%, transparent);
+}

@@ -264,8 +264,10 @@ describe('official coverage wave 5 on 2026-07-31', () => {
   })
 
   it('sanitizes every fee-reference cycle and removes superseded deadlines', () => {
-    const feeReferenceCycles = data.admissionCycles.filter((cycle) =>
-      cycle.id.includes('fee-reference'))
+    const feeReferenceCycles = data.admissionCycles.filter((cycle) => (
+      cycle.id.includes('fee-reference')
+      && cycle.tuitionStatus === 'reference'
+    ))
     let supersededDeadlineCount = 0
 
     expect(feeReferenceCycles.length).toBeGreaterThan(0)
@@ -433,12 +435,12 @@ describe('official coverage wave 5 on 2026-07-31', () => {
       const academicYear = normalizedAcademicYear(candidate, cycle)
       const formalCycles = data.admissionCycles.filter((item) =>
         item.programId === formalProgramId(candidate.candidateId)
-        && item.academicYear === academicYear
-        && item.intake === 'other')
+        && item.academicYear === academicYear)
+      const nonSpringCycles = formalCycles.filter((item) => item.intake !== 'spring')
       const deadline = cycle.applicationDeadline
       const preservesAmbiguousIntake = deadline === null || deadline === undefined
-        ? formalCycles.length > 0
-        : formalCycles.some((item) =>
+        ? nonSpringCycles.length > 0
+        : nonSpringCycles.some((item) =>
             item.closesOn === deadline
             || (
               isMoreThanThirtyDaysBefore(deadline, TODAY)

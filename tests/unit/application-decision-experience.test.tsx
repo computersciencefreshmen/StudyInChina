@@ -88,7 +88,7 @@ describe('decision experience copy', () => {
 
 describe('decision-oriented cards', () => {
   it('shows the official apply CTA only for a verified open or rolling program cycle', () => {
-    const { rerender } = render(
+    const { container, rerender } = render(
       <ProgramCard
         program={program}
         cycle={openCycle}
@@ -135,7 +135,9 @@ describe('decision-oriented cards', () => {
         today="2026-08-08"
       />,
     )
-    expect(screen.getAllByText(/Reference amount—confirm with university/)).toHaveLength(2)
+    expect(container.querySelectorAll('[data-fact-status=\"officially_not_announced\"]')).toHaveLength(3)
+    expect(screen.queryByText(/28,000/)).not.toBeInTheDocument()
+    expect(screen.queryByText(/600/)).not.toBeInTheDocument()
   })
 
   it('puts scholarship deadline and funding first and localizes its university scope', () => {

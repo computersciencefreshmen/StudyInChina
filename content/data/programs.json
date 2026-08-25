@@ -831,28 +831,47 @@
   },
   {
     "sourceIds": [
-      "src-uni-zhejiang-university"
+      "source-zju-2026-english-master-catalog",
+      "source-zju-2026-master-guide",
+      "source-zju-2026-graduate-language-requirements"
     ],
-    "verifiedAt": "2026-07-16",
-    "reviewAfter": "2026-10-01",
-    "status": "draft",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified",
     "id": "program-zhejiang-university-business-administration-master",
     "slug": "zhejiang-university-business-administration-master",
     "universityId": "uni-zhejiang-university",
     "name": {
-      "en": "Business Administration",
-      "zh": "工商管理",
-      "ru": "Управление бизнесом"
+      "en": "Business Administration (iMBA)",
+      "zh": "工商管理（iMBA）",
+      "ru": "Деловое администрирование (iMBA)",
+      "de": "Betriebswirtschaftslehre (iMBA)",
+      "fr": "Administration des affaires (iMBA)",
+      "es": "Administración de empresas (iMBA)"
     },
     "degreeLevel": "master",
     "discipline": "business",
     "teachingLanguages": [
-      "To be confirmed"
+      "English"
     ],
-    "durationMonths": null,
-    "programUrl": "https://iczu.zju.edu.cn/admissionsen/",
-    "applyUrl": "https://iczu.zju.edu.cn/admissionsen/",
-    "languageRequirements": []
+    "durationMonths": 24,
+    "programUrl": "https://iczu.zju.edu.cn/_upload/article/files/32/c1/d48dfe1349279755c872b98ce7e1/aae5a919-1f07-4115-bb1c-db41ea36e1b0.pdf",
+    "applyUrl": "https://intlstudent.zju.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "6.5"
+      },
+      {
+        "test": "TOEFL",
+        "minimum": "90"
+      },
+      {
+        "test": "other",
+        "minimum": "Duolingo 120, CAE/CPE 180, or qualifying English-medium degree proof; applicants from recognized native-English countries are exempt."
+      }
+    ],
+    "verificationScope": "facts"
   },
   {
     "sourceIds": [
@@ -12572,22 +12591,33 @@
     "name": {
       "en": "Public Administration (Smart Governance)",
       "zh": "行政管理（智慧治理方向）",
-      "ru": "Государственное управление (умное управление)"
+      "ru": "Государственное управление (умное управление)",
+      "de": "Öffentliche Verwaltung (Smart Governance)",
+      "fr": "Administration publique (gouvernance intelligente)",
+      "es": "Administración pública (gobernanza inteligente)"
     },
     "degreeLevel": "bachelor",
     "discipline": "law-ir",
-    "teachingLanguages": [],
+    "teachingLanguages": [
+      "Chinese"
+    ],
     "durationMonths": 48,
-    "programUrl": "https://gjjyxy.gzhu.edu.cn/info/1015/4924.htm",
-    "applyUrl": "https://gjjyxy.gzhu.edu.cn/",
-    "languageRequirements": [],
+    "programUrl": "https://gupa.gzhu.edu.cn/info/1299/19339.htm",
+    "applyUrl": null,
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 4 or higher; some Chinese-taught disciplines may require Level 5"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gzhu-smart-governance-2026"
+      "source-gzhu-2026-public-administration-admission"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified",
+    "durationMonthsMax": 84
   },
   {
     "id": "program-shantou-university-clinical-medicine-english-taught-bachelor",
@@ -20864,23 +20894,32 @@
     "name": {
       "en": "Artificial Intelligence",
       "zh": "人工智能",
-      "ru": "Искусственный интеллект"
+      "ru": "Искусственный интеллект",
+      "de": "Künstliche Intelligenz",
+      "fr": "Intelligence artificielle",
+      "es": "Inteligencia artificial"
     },
     "degreeLevel": "bachelor",
     "discipline": "engineering",
     "teachingLanguages": [
       "English"
     ],
-    "durationMonths": null,
-    "programUrl": "https://intedu.hdu.edu.cn/2026/0323/c12669a290539/page.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "durationMonths": 48,
+    "programUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+    "applyUrl": "https://lxsgl.hdu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "A valid IELTS, TOEFL, Duolingo or EF SET result is required; the 2026 guide does not publish one universal minimum score."
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-prog-hdu-artificial-intelligence-bachelor-2026"
+      "source-hdu-2026-international-admission-guide",
+      "source-hdu-international-student-regulations"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -20890,7 +20929,10 @@
     "name": {
       "en": "Business Management",
       "zh": "工商管理",
-      "ru": "Управление бизнесом"
+      "ru": "Управление бизнесом",
+      "de": "Betriebswirtschaft",
+      "fr": "Gestion des entreprises",
+      "es": "Gestión empresarial"
     },
     "degreeLevel": "bachelor",
     "discipline": "business",
@@ -20898,16 +20940,22 @@
       "English",
       "Chinese"
     ],
-    "durationMonths": null,
-    "programUrl": "https://intedu.hdu.edu.cn/2026/0323/c12669a290539/page.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "durationMonths": 48,
+    "programUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+    "applyUrl": "https://lxsgl.hdu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "A valid IELTS, TOEFL, Duolingo or EF SET result is required; the 2026 guide does not publish one universal minimum score."
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-prog-hdu-business-management-bachelor-2026"
+      "source-hdu-2026-international-admission-guide",
+      "source-hdu-international-student-regulations"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -20917,23 +20965,32 @@
     "name": {
       "en": "Computer Science and Technology",
       "zh": "计算机科学与技术",
-      "ru": "Компьютерные науки и технологии"
+      "ru": "Компьютерные науки и технологии",
+      "de": "Informatik und Technologie",
+      "fr": "Informatique et technologie",
+      "es": "Informática y tecnología"
     },
     "degreeLevel": "bachelor",
     "discipline": "engineering",
     "teachingLanguages": [
       "English"
     ],
-    "durationMonths": null,
-    "programUrl": "https://intedu.hdu.edu.cn/2026/0323/c12669a290539/page.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "durationMonths": 48,
+    "programUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+    "applyUrl": "https://lxsgl.hdu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "A valid IELTS, TOEFL, Duolingo or EF SET result is required; the 2026 guide does not publish one universal minimum score."
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-prog-hdu-computer-science-bachelor-2026"
+      "source-hdu-2026-international-admission-guide",
+      "source-hdu-international-student-regulations"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -20943,7 +21000,10 @@
     "name": {
       "en": "Digital Economy (Digital Trade)",
       "zh": "数字经济（数字贸易方向）",
-      "ru": "Цифровая экономика (цифровая торговля)"
+      "ru": "Цифровая экономика (цифровая торговля)",
+      "de": "Digitale Wirtschaft (Digitaler Handel)",
+      "fr": "Économie numérique (commerce numérique)",
+      "es": "Economía digital (comercio digital)"
     },
     "degreeLevel": "bachelor",
     "discipline": "business",
@@ -20951,16 +21011,22 @@
       "English",
       "Chinese"
     ],
-    "durationMonths": null,
-    "programUrl": "https://intedu.hdu.edu.cn/2026/0323/c12669a290539/page.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "durationMonths": 48,
+    "programUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+    "applyUrl": "https://lxsgl.hdu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "A valid IELTS, TOEFL, Duolingo or EF SET result is required; the 2026 guide does not publish one universal minimum score."
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-prog-hdu-digital-economy-bachelor-2026"
+      "source-hdu-2026-international-admission-guide",
+      "source-hdu-international-student-regulations"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -20968,25 +21034,34 @@
     "slug": "gap-prog-hdu-mechanical-bachelor-2026-bachelor",
     "universityId": "uni-hangzhou-dianzi-university",
     "name": {
-      "en": "Mechanical Design and Manufacturing and Automation",
+      "en": "Mechanical Design, Manufacturing and Automation",
       "zh": "机械设计制造及其自动化",
-      "ru": "Проектирование, производство и автоматизация машин"
+      "ru": "Проектирование, производство и автоматизация машин",
+      "de": "Maschinenkonstruktion, Fertigung und Automatisierung",
+      "fr": "Conception mécanique, fabrication et automatisation",
+      "es": "Diseño mecánico, fabricación y automatización"
     },
     "degreeLevel": "bachelor",
     "discipline": "engineering",
     "teachingLanguages": [
       "English"
     ],
-    "durationMonths": null,
-    "programUrl": "https://intedu.hdu.edu.cn/2026/0323/c12669a290539/page.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "durationMonths": 48,
+    "programUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+    "applyUrl": "https://lxsgl.hdu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "A valid IELTS, TOEFL, Duolingo or EF SET result is required; the 2026 guide does not publish one universal minimum score."
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-prog-hdu-mechanical-bachelor-2026"
+      "source-hdu-2026-international-admission-guide",
+      "source-hdu-international-student-regulations"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -22570,7 +22645,10 @@
     "name": {
       "en": "Chinese Language Program",
       "zh": "汉语言进修项目",
-      "ru": "Программа китайского языка"
+      "ru": "Программа китайского языка",
+      "de": "Chinesisch-Sprachprogramm",
+      "fr": "Programme de langue chinoise",
+      "es": "Programa de lengua china"
     },
     "degreeLevel": "language",
     "discipline": "chinese-education",
@@ -22586,8 +22664,8 @@
     "sourceIds": [
       "src-gap-program-wave8-2-hutb-chinese-language"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -22597,7 +22675,10 @@
     "name": {
       "en": "International Business (English-taught Master's Program)",
       "zh": "国际商务（英文授课硕士）",
-      "ru": "Международный бизнес (магистратура на английском языке)"
+      "ru": "Международный бизнес (магистратура на английском языке)",
+      "de": "International Business (englischsprachiger Master)",
+      "fr": "Commerce international (master en anglais)",
+      "es": "Negocios internacionales (máster en inglés)"
     },
     "degreeLevel": "master",
     "discipline": "business",
@@ -22607,13 +22688,26 @@
     "durationMonths": 36,
     "programUrl": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
     "applyUrl": "https://hutb.at0086.cn/student",
-    "languageRequirements": [],
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "5.5"
+      },
+      {
+        "test": "TOEFL",
+        "minimum": "50"
+      },
+      {
+        "test": "other",
+        "minimum": "Equivalent English certificate or proof of English-medium high-school study"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
       "src-gap-program-wave8-2-hutb-international-business-master"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -35272,5 +35366,355 @@
     "applyUrl": "https://wtu.17gz.org/",
     "languageRequirements": [],
     "verificationScope": "facts"
+  },
+  {
+    "id": "program-zhejiang-university-clinical-medicine-mbbs-bachelor",
+    "slug": "zhejiang-university-clinical-medicine-mbbs-bachelor",
+    "universityId": "uni-zhejiang-university",
+    "name": {
+      "en": "Clinical Medicine (MBBS)",
+      "zh": "临床医学（MBBS）",
+      "ru": "Клиническая медицина (MBBS)",
+      "de": "Klinische Medizin (MBBS)",
+      "fr": "Médecine clinique (MBBS)",
+      "es": "Medicina clínica (MBBS)"
+    },
+    "degreeLevel": "bachelor",
+    "discipline": "medicine",
+    "teachingLanguages": [
+      "English"
+    ],
+    "durationMonths": 72,
+    "programUrl": "https://iczu.zju.edu.cn/_upload/article/files/e7/8c/1be7b2df433fb9427df707571d84/f8f1cb33-05a5-4fec-a602-3eac6caf8e14.pdf",
+    "applyUrl": "https://intlstudent.zju.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "6.0 overall (academic), with at least 5.0 in each component"
+      },
+      {
+        "test": "TOEFL",
+        "minimum": "75 iBT, with at least 15 in each component"
+      },
+      {
+        "test": "other",
+        "minimum": "CAE 170 or Duolingo 100; IB/A-level or another accepted standardized score may support exemption. Math, Physics, Chemistry and Biology high-school results must each be at least 70%."
+      }
+    ],
+    "sourceIds": [
+      "source-zju-2026-english-undergraduate-catalog",
+      "source-zju-2026-undergraduate-guide"
+    ],
+    "verificationScope": "facts",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified"
+  },
+  {
+    "id": "program-zhejiang-university-biomedical-engineering-bachelor",
+    "slug": "zhejiang-university-biomedical-engineering-bachelor",
+    "universityId": "uni-zhejiang-university",
+    "name": {
+      "en": "Biomedical Engineering",
+      "zh": "生物医学工程",
+      "ru": "Биомедицинская инженерия",
+      "de": "Biomedizintechnik",
+      "fr": "Génie biomédical",
+      "es": "Ingeniería biomédica"
+    },
+    "degreeLevel": "bachelor",
+    "discipline": "engineering",
+    "teachingLanguages": [
+      "English"
+    ],
+    "durationMonths": 48,
+    "programUrl": "https://iczu.zju.edu.cn/_upload/article/files/e7/8c/1be7b2df433fb9427df707571d84/f8f1cb33-05a5-4fec-a602-3eac6caf8e14.pdf",
+    "applyUrl": "https://intlstudent.zju.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "6.0 overall (academic), with at least 5.0 in each component"
+      },
+      {
+        "test": "TOEFL",
+        "minimum": "75 iBT, with at least 15 in each component"
+      },
+      {
+        "test": "other",
+        "minimum": "CAE 170 or Duolingo 100; IB/A-level or another accepted standardized score may support exemption. Math, Physics, Chemistry and Biology high-school results must each be at least 70%."
+      }
+    ],
+    "sourceIds": [
+      "source-zju-2026-english-undergraduate-catalog",
+      "source-zju-2026-undergraduate-guide"
+    ],
+    "verificationScope": "facts",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified"
+  },
+  {
+    "id": "program-zhejiang-university-china-studies-mcs-master",
+    "slug": "zhejiang-university-china-studies-mcs-master",
+    "universityId": "uni-zhejiang-university",
+    "name": {
+      "en": "China Studies (MCS)",
+      "zh": "中国学硕士（MCS）",
+      "ru": "Китаеведение (MCS)",
+      "de": "Chinastudien (MCS)",
+      "fr": "Études chinoises (MCS)",
+      "es": "Estudios sobre China (MCS)"
+    },
+    "degreeLevel": "master",
+    "discipline": "humanities",
+    "teachingLanguages": [
+      "English"
+    ],
+    "durationMonths": 24,
+    "programUrl": "https://iczu.zju.edu.cn/_upload/article/files/32/c1/d48dfe1349279755c872b98ce7e1/aae5a919-1f07-4115-bb1c-db41ea36e1b0.pdf",
+    "applyUrl": "https://intlstudent.zju.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "6.5"
+      },
+      {
+        "test": "TOEFL",
+        "minimum": "90"
+      },
+      {
+        "test": "other",
+        "minimum": "Duolingo 120, CAE/CPE 180, or qualifying English-medium degree proof; applicants from recognized native-English countries are exempt."
+      }
+    ],
+    "sourceIds": [
+      "source-zju-2026-english-master-catalog",
+      "source-zju-2026-master-guide",
+      "source-zju-2026-graduate-language-requirements"
+    ],
+    "verificationScope": "facts",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified"
+  },
+  {
+    "id": "program-zhejiang-university-finance-imf-master",
+    "slug": "zhejiang-university-finance-imf-master",
+    "universityId": "uni-zhejiang-university",
+    "name": {
+      "en": "Finance (iMF)",
+      "zh": "金融（iMF）",
+      "ru": "Финансы (iMF)",
+      "de": "Finanzen (iMF)",
+      "fr": "Finance (iMF)",
+      "es": "Finanzas (iMF)"
+    },
+    "degreeLevel": "master",
+    "discipline": "business",
+    "teachingLanguages": [
+      "English"
+    ],
+    "durationMonths": 24,
+    "programUrl": "https://iczu.zju.edu.cn/_upload/article/files/32/c1/d48dfe1349279755c872b98ce7e1/aae5a919-1f07-4115-bb1c-db41ea36e1b0.pdf",
+    "applyUrl": "https://intlstudent.zju.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "6.5"
+      },
+      {
+        "test": "TOEFL",
+        "minimum": "90"
+      },
+      {
+        "test": "other",
+        "minimum": "Duolingo 120, CAE/CPE 180, or qualifying English-medium degree proof; applicants from recognized native-English countries are exempt."
+      }
+    ],
+    "sourceIds": [
+      "source-zju-2026-english-master-catalog",
+      "source-zju-2026-master-guide",
+      "source-zju-2026-graduate-language-requirements"
+    ],
+    "verificationScope": "facts",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified"
+  },
+  {
+    "id": "program-zhejiang-university-data-science-imds-master",
+    "slug": "zhejiang-university-data-science-imds-master",
+    "universityId": "uni-zhejiang-university",
+    "name": {
+      "en": "Data Science (iMDS)",
+      "zh": "数据科学（iMDS）",
+      "ru": "Наука о данных (iMDS)",
+      "de": "Datenwissenschaft (iMDS)",
+      "fr": "Science des données (iMDS)",
+      "es": "Ciencia de datos (iMDS)"
+    },
+    "degreeLevel": "master",
+    "discipline": "engineering",
+    "teachingLanguages": [
+      "English"
+    ],
+    "durationMonths": 36,
+    "programUrl": "https://iczu.zju.edu.cn/_upload/article/files/32/c1/d48dfe1349279755c872b98ce7e1/aae5a919-1f07-4115-bb1c-db41ea36e1b0.pdf",
+    "applyUrl": "https://intlstudent.zju.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "6.5"
+      },
+      {
+        "test": "TOEFL",
+        "minimum": "90"
+      },
+      {
+        "test": "other",
+        "minimum": "Duolingo 120, CAE/CPE 180, or qualifying English-medium degree proof; applicants from recognized native-English countries are exempt."
+      }
+    ],
+    "sourceIds": [
+      "source-zju-2026-english-master-catalog",
+      "source-zju-2026-master-guide",
+      "source-zju-2026-graduate-language-requirements"
+    ],
+    "verificationScope": "facts",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified"
+  },
+  {
+    "id": "program-hangzhou-dianzi-university-software-engineering-bachelor",
+    "slug": "hangzhou-dianzi-university-software-engineering-bachelor",
+    "universityId": "uni-hangzhou-dianzi-university",
+    "name": {
+      "en": "Software Engineering",
+      "zh": "软件工程",
+      "ru": "Программная инженерия",
+      "de": "Softwaretechnik",
+      "fr": "Génie logiciel",
+      "es": "Ingeniería de software"
+    },
+    "degreeLevel": "bachelor",
+    "discipline": "engineering",
+    "teachingLanguages": [
+      "English"
+    ],
+    "durationMonths": 48,
+    "programUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+    "applyUrl": "https://lxsgl.hdu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "A valid IELTS, TOEFL, Duolingo or EF SET result is required; the 2026 guide does not publish one universal minimum score."
+      }
+    ],
+    "sourceIds": [
+      "source-hdu-2026-international-admission-guide",
+      "source-hdu-international-student-regulations"
+    ],
+    "verificationScope": "facts",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified"
+  },
+  {
+    "id": "program-hangzhou-dianzi-university-mechanical-engineering-master",
+    "slug": "hangzhou-dianzi-university-mechanical-engineering-master",
+    "universityId": "uni-hangzhou-dianzi-university",
+    "name": {
+      "en": "Mechanical Engineering",
+      "zh": "机械工程",
+      "ru": "Механическая инженерия",
+      "de": "Maschinenbau",
+      "fr": "Génie mécanique",
+      "es": "Ingeniería mecánica"
+    },
+    "degreeLevel": "master",
+    "discipline": "engineering",
+    "teachingLanguages": [
+      "English"
+    ],
+    "durationMonths": null,
+    "programUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+    "applyUrl": "https://lxsgl.hdu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "A valid IELTS, TOEFL, Duolingo or EF SET result is required; the 2026 guide does not publish one universal minimum score."
+      }
+    ],
+    "sourceIds": [
+      "source-hdu-2026-international-admission-guide"
+    ],
+    "verificationScope": "facts",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified"
+  },
+  {
+    "id": "program-hangzhou-dianzi-university-international-chinese-language-education-master",
+    "slug": "hangzhou-dianzi-university-international-chinese-language-education-master",
+    "universityId": "uni-hangzhou-dianzi-university",
+    "name": {
+      "en": "International Chinese Language Education",
+      "zh": "国际中文教育",
+      "ru": "Международное преподавание китайского языка",
+      "de": "Internationale chinesische Sprachausbildung",
+      "fr": "Éducation internationale de la langue chinoise",
+      "es": "Educación internacional de la lengua china"
+    },
+    "degreeLevel": "master",
+    "discipline": "chinese-education",
+    "teachingLanguages": [
+      "Chinese"
+    ],
+    "durationMonths": null,
+    "programUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+    "applyUrl": "https://lxsgl.hdu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 5, 180"
+      }
+    ],
+    "sourceIds": [
+      "source-hdu-2026-international-admission-guide"
+    ],
+    "verificationScope": "facts",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified"
+  },
+  {
+    "id": "program-hangzhou-dianzi-university-chinese-language-program-language",
+    "slug": "hangzhou-dianzi-university-chinese-language-program-language",
+    "universityId": "uni-hangzhou-dianzi-university",
+    "name": {
+      "en": "Chinese Language Program",
+      "zh": "汉语言进修项目",
+      "ru": "Программа китайского языка",
+      "de": "Chinesisch-Sprachprogramm",
+      "fr": "Programme de langue chinoise",
+      "es": "Programa de lengua china"
+    },
+    "degreeLevel": "language",
+    "discipline": "chinese-education",
+    "teachingLanguages": [
+      "Chinese"
+    ],
+    "durationMonths": null,
+    "programUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+    "applyUrl": "https://lxsgl.hdu.edu.cn/",
+    "languageRequirements": [],
+    "sourceIds": [
+      "source-hdu-2026-international-admission-guide"
+    ],
+    "verificationScope": "facts",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified"
   }
 ]

@@ -38,12 +38,12 @@ The product is built around three promises:
 
 <div align="center">
 
-| **266** universities | **1,245** program identities | **364** scholarship identities | **62** cities |
+| **266** universities | **1,255** program identities | **364** scholarship identities | **62** cities |
 | :------------------: | :--------------------------: | :----------------------------: | :-----------: |
 
 </div>
 
-The public identity catalogue contains **37 current published-cycle records** and is backed by **2,078 registered official source records**. It deliberately retains verified and stale identities as official discovery paths, so its counts differ from the stricter fresh-data scorecard below. Only **6** of those program cycles are open, upcoming or rolling on the evaluation date; a published record is not automatically an open application window. The decision-oriented metrics are evaluated for **2026-08-25** with `npm run quality:platform-scorecard`.
+The public identity catalogue contains **37 public admission-cycle records evaluated for 2026-08-25** and is backed by **2,087 registered official source records**. It deliberately retains verified and stale identities as official discovery paths, while the stricter scorecard separately measures evidence freshness and field depth. Only **6** program identities are open, upcoming or rolling on the evaluation date; a public cycle is not automatically an open application window. Reproduce the metrics with `npm run quality:platform-scorecard`.
 
 <details>
 <summary><strong>Open the honest data-depth scorecard</strong></summary>
@@ -52,15 +52,15 @@ Record count is not the same as record completeness. This stricter scorecard mea
 
 | Quality indicator                                       |           Current baseline |       Next gate |
 | ------------------------------------------------------- | -------------------------: | --------------: |
-| Universities below three published programs             | **3** · 1 documented `limited` | 0 unresolved |
-| Freshly verified international-program identities       | 1,239 / 1,245 · **99.52%** |    Restore 100% |
-| Programs with a fresh 30-day disposition                |     37 / 1,245 · **2.97%** |           ≥ 70% |
-| Programs with dated or rolling admissions               |     37 / 1,245 · **2.97%** | Report honestly |
-| Programs open or upcoming on the evaluation date        |      6 / 1,245 · **0.48%** | Report honestly |
-| Programs with duration                                  |    765 / 1,245 · **61.45%** |           ≥ 90% |
-| Programs with an official application route             |    630 / 1,245 · **50.60%** |           ≥ 80% |
-| Programs with known teaching language                   |  1,055 / 1,245 · **84.74%** |           ≥ 95% |
-| Programs with eligibility/language evidence             |      76 / 1,245 · **6.10%** |           ≥ 50% |
+| Universities below three published programs             | **2** · 1 documented `limited` | 0 unresolved |
+| Published identities passing the identity gate          | 1,255 / 1,255 · **100%** |    Maintain 100% |
+| Programs with a fresh 30-day disposition                |     37 / 1,255 · **2.95%** |           ≥ 70% |
+| Programs with dated or rolling admissions               |     37 / 1,255 · **2.95%** | Report honestly |
+| Programs open, upcoming or rolling on the evaluation date |      6 / 1,255 · **0.48%** | Report honestly |
+| Programs with duration                                  |    777 / 1,255 · **61.91%** |           ≥ 90% |
+| Programs with an official application route             |    644 / 1,255 · **51.31%** |           ≥ 80% |
+| Programs with known teaching language                   |  1,066 / 1,255 · **84.94%** |           ≥ 95% |
+| Programs with eligibility/language evidence             |      92 / 1,255 · **7.33%** |           ≥ 50% |
 | Universities connected to freshly verified scholarships |     205 / 266 · **77.07%** |           ≥ 230 |
 | Fresh scholarships with an explicit deadline            |      37 / 348 · **10.63%** | Improve with current cycles |
 | Cities with reviewed coordinates                        |                    27 / 62 |         62 / 62 |
@@ -70,9 +70,9 @@ Record count is not the same as record completeness. This stricter scorecard mea
 | Verified records overdue for review                     |                      **0** |               0 |
 | Platform quality gates passing                          |                     3 / 14 |         14 / 14 |
 
-The raw compatibility dataset contains 272 universities, 1,266 programs and 388 scholarships. Draft, archived, identity-conflicting or publication-ineligible records are intentionally excluded from the public numbers above.
+The raw compatibility dataset contains 272 universities, 1,275 programs and 390 scholarships. Draft, archived, identity-conflicting or publication-ineligible records are intentionally excluded from the public numbers above.
 
-The public Release API reports the wider 1,245-program / 364-scholarship identity catalogue; the scorecard intentionally reports the smaller fresh-verification subset. Do not substitute one metric for the other.
+The public Release API and scorecard agree on the **1,255-program / 364-scholarship identity catalogue**. The scorecard then measures smaller fresh-evidence subsets separately. Never substitute an identity total for current-cycle completeness or open-application availability.
 
 </details>
 
@@ -80,6 +80,10 @@ The public Release API reports the wider 1,245-program / 364-scholarship identit
 
 The current release moves the project from a large static directory toward a measurable decision platform:
 
+- an official decision-facts wave deepens **18 programs across Zhejiang University, Hunan University of Technology and Business, Hangzhou Dianzi University and Guangzhou University**, plus six scholarship records; every captured 2026 deadline is published as closed rather than silently rolled into 2027;
+- program cards now render six explicit fact states in English, Chinese, Russian, German, French and Spanish, with visible text and shape markers rather than color alone;
+- stale, conflicting, unavailable and historical-cycle values are withheld, while date-free reference tuition is excluded from “known tuition” filters and price sorting;
+- registration charges are not relabeled as application fees, and a university-wide tuition range is retained in evidence instead of being converted into a fabricated program-level number;
 - quality reporting now separates verified identity, fresh disposition, dated or rolling admissions, and active or upcoming applications;
 - the program explorer exposes “Open now” and “Upcoming” as first-level routes, while language switching preserves semantic filters and resets release-bound cursors;
 - Favorites loads only requested IDs through a four-program comparison projection instead of serializing the entire catalogue to the browser;
@@ -119,7 +123,7 @@ Portuguese and Arabic remain registered preview locales and are not publicly ind
 
 ## Trust model: evidence before completeness
 
-The catalogue separates **record identity** from **field visibility**. A verified program identity may remain discoverable even when its tuition or deadline cannot safely be shown. Each dynamic field uses one of six explicit states:
+The catalogue separates **record identity** from **field visibility**. A verified program identity may remain discoverable even when its tuition or deadline cannot safely be shown. The public fact contract supports six explicit states; program cards now apply them to duration, tuition, deadline and application fee:
 
 ```ts
 type FactStatus =
@@ -131,6 +135,8 @@ type FactStatus =
   | "stale";
 ```
 
+These states are now visible on program cards in six languages. Stale and reference-only values cannot surface there as current tuition, deadline, duration or application-fee facts, while the official route remains available for final verification. Detail and comparison surfaces will adopt the same contract incrementally.
+
 Publication follows these rules:
 
 1. Only allowlisted university, government and scholarship-provider sources can support a fact.
@@ -141,7 +147,7 @@ Publication follows these rules:
 6. A failed field is published as an empty value with status metadata and an official entry link—not as a guess.
 7. Immutable releases are relationship-, count- and hash-validated before the public pointer moves atomically.
 
-Raw HTML, PDFs and screenshots stay private in R2. The public platform exposes only structured facts and the shortest necessary source context.
+When captured by the ingestion pipeline, raw HTML, PDFs and screenshots are kept private in R2. The public platform exposes only validated structured facts and the shortest necessary source context; source registration alone does not imply that every asset already has a stored snapshot.
 
 ## System architecture
 
@@ -261,13 +267,14 @@ npm test
 npm run validate:data
 npm run validate:d1
 npm run validate:manifests
+npm run quality:platform-scorecard
 npm run build
 npm run test:e2e
 ```
 
 CI additionally validates Source Manifests, prompt-injection fixtures, maintenance capacity, all Worker test suites and Worker deployment dry-runs. The complete executable matrix lives in [`.github/workflows/ci.yml`](./.github/workflows/ci.yml).
 
-Data changes must satisfy a stricter rule: an increase in row count is not progress unless source coverage, current-cycle coverage, field completeness and update success improve with it.
+Data changes must satisfy a stricter rule: an increase in row count is not progress unless source coverage, fresh disposition, dated-or-rolling and active-upcoming evidence, field completeness and update success improve with it.
 
 ## Repository map
 
@@ -320,9 +327,9 @@ flowchart LR
 
 Near-term work is measured by:
 
-- resolving the two remaining expansion targets—Hunan University of Technology and Business and Zhejiang University—while retaining Tibet University as a documented `limited` official catalogue rather than padding it with unsupported identities;
-- increasing fresh-disposition coverage from 2.97% to at least 70%, without counting date-free fee references as application cycles;
-- reaching the six-week gates of 75% duration, 65% official application-route, 90% teaching-language and 25% requirements coverage;
+- raising Hunan University of Technology and Business from two to at least three official international-student programs, while retaining Tibet University as a documented `limited` catalogue unless another individually applicable official program is found; Zhejiang University now has six decision-ready identities in this wave;
+- increasing fresh-disposition coverage from 2.95% to at least 70%, without counting date-free fee references as application cycles;
+- moving from the measured baselines of 61.91% duration, 51.31% official application-route, 84.94% teaching-language and 7.33% requirements coverage to the six-week gates of 75% / 65% / 90% / 25%;
 - continuing after that toward the expansion gates of 90% duration, 80% application-route, 95% teaching-language and 50% requirements coverage;
 - expanding institutions connected to freshly verified scholarships from 205 to at least 230;
 - completing 266 Source Manifests and 266 catalogue reconciliations;
