@@ -230,14 +230,141 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(linkedScopeQueries.every(({ sql }) =>
       sql.includes('CROSS JOIN record_field_status AS scope'),
     )).toBe(true)
-    expect(linkedScopeQueries.every(({ sql }) =>
-      sql.includes('CROSS JOIN programs AS scoped_program'),
-    )).toBe(true)
+    expect(linkedScopeQueries.some(({ sql }) =>
+      sql.includes("scope.field_path IN ('universityIds', 'institution_ids')"),
+    )).toBe(false)
     expect(linkedScopeQueries.some(({ sql }) =>
       sql.includes('FROM current_programs AS scoped_program')
       || sql.includes('FROM current_scholarship_cycles AS'),
     )).toBe(false)
     expect(queries.some(({ values }) => values.includes('linked'))).toBe(false)
+  }, 30_000)
+
+  it('keeps legacy university attribution from broadening an explicit program subset', async () => {
+    database.exec('BEGIN')
+    try {
+      const release = database.prepare(`
+        SELECT current_release_id AS release_id
+        FROM release_pointer
+        WHERE singleton_id = 1
+      `).get() as { release_id: string }
+      const institution = database.prepare(`
+        SELECT institution_id
+        FROM current_programs
+        WHERE release_id = ?
+        GROUP BY institution_id
+        HAVING COUNT(*) >= 2
+        ORDER BY institution_id
+        LIMIT 1
+      `).get(release.release_id) as { institution_id: string }
+      const programs = database.prepare(`
+        SELECT program_id
+        FROM current_programs
+        WHERE release_id = ? AND institution_id = ?
+        ORDER BY program_id
+        LIMIT 2
+      `).all(
+        release.release_id,
+        institution.institution_id,
+      ) as Array<{ program_id: string }>
+      const targetProgram = programs[0]!
+      const siblingProgram = programs[1]!
+      const scholarship = database.prepare(`
+        SELECT visible.scholarship_id, record.slug
+        FROM current_scholarships AS visible
+        JOIN current_catalog_records AS record
+          ON record.release_id = visible.release_id
+         AND record.record_id = visible.scholarship_id
+        WHERE visible.release_id = ?
+          AND record.slug IS NOT NULL
+          AND NOT EXISTS (
+            SELECT 1
+            FROM current_scholarship_cycles AS cycle
+            WHERE cycle.release_id = visible.release_id
+              AND cycle.scholarship_id = visible.scholarship_id
+          )
+        ORDER BY visible.scholarship_id
+        LIMIT 1
+      `).get(release.release_id) as { scholarship_id: string; slug: string }
+
+      database.prepare(`
+        DELETE FROM record_field_status
+        WHERE release_id = ?
+          AND record_id = ?
+          AND field_path IN ('programIds', 'program_ids', 'universityIds', 'institution_ids')
+      `).run(release.release_id, scholarship.scholarship_id)
+      const insertScope = database.prepare(`
+        INSERT INTO record_field_status (
+          release_id, record_id, field_path, locale, field_status,
+          required_for_publish, value_json, verified_at, review_after
+        ) VALUES (?, ?, ?, '', 'known', 0, ?, '2026-08-25', '2030-08-25')
+      `)
+      insertScope.run(
+        release.release_id,
+        scholarship.scholarship_id,
+        'universityIds',
+        JSON.stringify([institution.institution_id]),
+      )
+      insertScope.run(
+        release.release_id,
+        scholarship.scholarship_id,
+        'programIds',
+        JSON.stringify([]),
+      )
+
+      const compare = async () => {
+        const response = await worker.fetch(
+          new Request(
+            `https://catalog.test/api/v1/programs/compare?ids=${encodeURIComponent(`${targetProgram.program_id},${siblingProgram.program_id}`)}`,
+          ),
+          environment,
+        )
+        const payload = await response.json() as ApiEnvelopeDto<{
+          items: Array<{
+            program: ProgramDto
+            currentCycle: ProgramCycleDto | null
+            linkedScholarshipCount: number
+          }>
+          missingIds: string[]
+        }>
+        expect(response.status, JSON.stringify(payload)).toBe(200)
+        return new Map(payload.data.items.map((item) => [
+          item.program.id,
+          item.linkedScholarshipCount,
+        ]))
+      }
+
+      const before = await compare()
+      database.prepare(`
+        UPDATE record_field_status
+        SET value_json = ?
+        WHERE release_id = ?
+          AND record_id = ?
+          AND field_path = 'programIds'
+          AND locale = ''
+      `).run(
+        JSON.stringify([targetProgram.program_id]),
+        release.release_id,
+        scholarship.scholarship_id,
+      )
+
+      const filteredResponse = await worker.fetch(
+        new Request(
+          `https://catalog.test/api/v1/programs?scholarship=${encodeURIComponent(scholarship.slug)}&limit=100`,
+        ),
+        environment,
+      )
+      const filtered = await filteredResponse.json() as ApiEnvelopeDto<ProgramDto[]>
+      expect(filteredResponse.status, JSON.stringify(filtered)).toBe(200)
+      expect(filtered.data.map((program) => program.id)).toEqual([targetProgram.program_id])
+      expect(filtered.data.map((program) => program.id)).not.toContain(siblingProgram.program_id)
+
+      const after = await compare()
+      expect(after.get(targetProgram.program_id)).toBe((before.get(targetProgram.program_id) ?? 0) + 1)
+      expect(after.get(siblingProgram.program_id)).toBe(before.get(siblingProgram.program_id))
+    } finally {
+      database.exec('ROLLBACK')
+    }
   }, 30_000)
 
   it('uses current normalized scholarship cycle scopes without legacy scope fields', async () => {

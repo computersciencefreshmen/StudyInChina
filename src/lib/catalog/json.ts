@@ -4,6 +4,7 @@ import { bundleSchema } from '@/lib/data/schema'
 import type { DataBundle } from '@/lib/data/types'
 import { getTodayDate, isCurrentVerifiedRecord } from '@/lib/data/freshness'
 import { classifyProgramField } from '@/lib/data/fields'
+import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
 import { selectCatalogApiData } from '@/lib/catalog-api/projection'
 import { CatalogApiService } from '@/lib/catalog-api/service'
 import { selectPublishedData } from '@/lib/data/publication'
@@ -256,13 +257,11 @@ export class JsonCatalogRepository implements CatalogRepository {
             item.id === query.scholarship || item.slug === query.scholarship
           ))
         : []
-    const linkedProgramIds = new Set(requestedScholarships.flatMap((item) => item.programIds))
-    const linkedUniversityIds = new Set(requestedScholarships.flatMap((item) => item.universityIds))
     const filteredData = query.scholarship
       ? {
           ...data,
-          programs: data.programs.filter((program) => (
-            linkedProgramIds.has(program.id) || linkedUniversityIds.has(program.universityId)
+          programs: data.programs.filter((program) => requestedScholarships.some(
+            (scholarship) => scholarshipAppliesToProgram(scholarship, program),
           )),
         }
       : data

@@ -54,7 +54,11 @@ describe('legacy JSON release builder', () => {
       scholarships: bundle.scholarships.length,
     })
 
-    const scholarshipWithoutApplication = bundle.scholarships.find((item) => item.applicationUrl === null)
+    const scholarshipWithoutApplication = bundle.scholarships.find((item) => (
+      item.applicationUrl === null
+      && item.status === 'verified'
+      && item.reviewAfter >= artifacts.release.dataDate
+    ))
     expect(scholarshipWithoutApplication).toBeTruthy()
     const scholarshipSource = bundle.sources.find((source) =>
       source.official && scholarshipWithoutApplication!.sourceIds.includes(source.id)

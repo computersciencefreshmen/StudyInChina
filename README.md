@@ -38,12 +38,12 @@ The product is built around three promises:
 
 <div align="center">
 
-| **266** universities | **1,255** program identities | **364** scholarship identities | **62** cities |
+| **266** universities | **1,260** program identities | **367** scholarship identities | **62** cities |
 | :------------------: | :--------------------------: | :----------------------------: | :-----------: |
 
 </div>
 
-The public identity catalogue contains **37 public admission-cycle records evaluated for 2026-08-25** and is backed by **2,087 registered official source records**. It deliberately retains verified and stale identities as official discovery paths, while the stricter scorecard separately measures evidence freshness and field depth. Only **6** program identities are open, upcoming or rolling on the evaluation date; a public cycle is not automatically an open application window. Reproduce the metrics with `npm run quality:platform-scorecard`.
+The public identity catalogue contains **39 public admission-cycle records evaluated for 2026-08-25** and is backed by **2,109 registered official source records**. It deliberately retains verified and stale identities as official discovery paths, while the stricter scorecard separately measures evidence freshness and field depth. Only **6** program identities are open, upcoming or rolling on the evaluation date; a public cycle is not automatically an open application window. Reproduce the metrics with `npm run quality:platform-scorecard`.
 
 <details>
 <summary><strong>Open the honest data-depth scorecard</strong></summary>
@@ -53,16 +53,16 @@ Record count is not the same as record completeness. This stricter scorecard mea
 | Quality indicator                                       |           Current baseline |       Next gate |
 | ------------------------------------------------------- | -------------------------: | --------------: |
 | Universities below three published programs             | **2** · 1 documented `limited` | 0 unresolved |
-| Published identities passing the identity gate          | 1,255 / 1,255 · **100%** |    Maintain 100% |
-| Programs with a fresh 30-day disposition                |     37 / 1,255 · **2.95%** |           ≥ 70% |
-| Programs with dated or rolling admissions               |     37 / 1,255 · **2.95%** | Report honestly |
-| Programs open, upcoming or rolling on the evaluation date |      6 / 1,255 · **0.48%** | Report honestly |
-| Programs with duration                                  |    777 / 1,255 · **61.91%** |           ≥ 90% |
-| Programs with an official application route             |    644 / 1,255 · **51.31%** |           ≥ 80% |
-| Programs with known teaching language                   |  1,066 / 1,255 · **84.94%** |           ≥ 95% |
-| Programs with eligibility/language evidence             |      92 / 1,255 · **7.33%** |           ≥ 50% |
-| Universities connected to freshly verified scholarships |     205 / 266 · **77.07%** |           ≥ 230 |
-| Fresh scholarships with an explicit deadline            |      37 / 348 · **10.63%** | Improve with current cycles |
+| Published identities passing the identity gate          | 1,260 / 1,260 · **100%** |    Maintain 100% |
+| Programs with a fresh 30-day disposition                |     39 / 1,260 · **3.10%** |           ≥ 70% |
+| Programs with dated or rolling admissions               |     39 / 1,260 · **3.10%** | Report honestly |
+| Programs open, upcoming or rolling on the evaluation date |      6 / 1,260 · **0.48%** | Report honestly |
+| Programs with duration                                  |    791 / 1,260 · **62.78%** |           ≥ 90% |
+| Programs with an official application route             |    656 / 1,260 · **52.06%** |           ≥ 80% |
+| Programs with known teaching language                   |  1,073 / 1,260 · **85.16%** |           ≥ 95% |
+| Programs with eligibility/language evidence             |      113 / 1,260 · **8.97%** |           ≥ 50% |
+| Universities connected to freshly verified scholarships |     206 / 266 · **77.44%** |           ≥ 230 |
+| Fresh scholarships with an explicit deadline            |      38 / 349 · **10.89%** | Improve with current cycles |
 | Cities with reviewed coordinates                        |                    27 / 62 |         62 / 62 |
 | Source Manifests registered                             |                   10 / 266 |       266 / 266 |
 | Completed V2 Source Manifests                           |                    0 / 266 |       266 / 266 |
@@ -70,9 +70,9 @@ Record count is not the same as record completeness. This stricter scorecard mea
 | Verified records overdue for review                     |                      **0** |               0 |
 | Platform quality gates passing                          |                     3 / 14 |         14 / 14 |
 
-The raw compatibility dataset contains 272 universities, 1,275 programs and 390 scholarships. Draft, archived, identity-conflicting or publication-ineligible records are intentionally excluded from the public numbers above.
+The raw compatibility dataset contains 272 universities, 1,280 programs and 394 scholarships. Draft, archived, identity-conflicting or publication-ineligible records are intentionally excluded from the public numbers above.
 
-The public Release API and scorecard agree on the **1,255-program / 364-scholarship identity catalogue**. The scorecard then measures smaller fresh-evidence subsets separately. Never substitute an identity total for current-cycle completeness or open-application availability.
+The public Release API and scorecard agree on the **1,260-program / 367-scholarship identity catalogue**. The scorecard then measures smaller fresh-evidence subsets separately. Never substitute an identity total for current-cycle completeness or open-application availability.
 
 </details>
 
@@ -81,6 +81,9 @@ The public Release API and scorecard agree on the **1,255-program / 364-scholars
 The current release moves the project from a large static directory toward a measurable decision platform:
 
 - an official decision-facts wave deepens **18 programs across Zhejiang University, Hunan University of Technology and Business, Hangzhou Dianzi University and Guangzhou University**, plus six scholarship records; every captured 2026 deadline is published as closed rather than silently rolled into 2027;
+- a second official-depth wave hardens **34 program identities and 11 scholarship identities across GDUFS, SISU, Anhui University, Chongqing University, HIT and XJTU**, with exact scope and freshness semantics carried by idempotent importers;
+- five GDUFS official assets now have checksum-addressed private-R2 metadata recorded, while XJTU PDF-dependent facts remain quarantined because the original PDF bytes and browser snapshots were not captured;
+- legacy programIds now pass strict relationship validation instead of being silently accepted when a scholarship-to-program link is missing or invalid;
 - program cards now render six explicit fact states in English, Chinese, Russian, German, French and Spanish, with visible text and shape markers rather than color alone;
 - stale, conflicting, unavailable and historical-cycle values are withheld, while date-free reference tuition is excluded from “known tuition” filters and price sorting;
 - registration charges are not relabeled as application fees, and a university-wide tuition range is retained in evidence instead of being converted into a fabricated program-level number;
@@ -328,10 +331,10 @@ flowchart LR
 Near-term work is measured by:
 
 - raising Hunan University of Technology and Business from two to at least three official international-student programs, while retaining Tibet University as a documented `limited` catalogue unless another individually applicable official program is found; Zhejiang University now has six decision-ready identities in this wave;
-- increasing fresh-disposition coverage from 2.95% to at least 70%, without counting date-free fee references as application cycles;
-- moving from the measured baselines of 61.91% duration, 51.31% official application-route, 84.94% teaching-language and 7.33% requirements coverage to the six-week gates of 75% / 65% / 90% / 25%;
+- increasing fresh-disposition coverage from 3.10% to at least 70%, without counting date-free fee references as application cycles;
+- moving from the measured baselines of 62.78% duration, 52.06% official application-route, 85.16% teaching-language and 8.97% requirements coverage to the six-week gates of 75% / 65% / 90% / 25%;
 - continuing after that toward the expansion gates of 90% duration, 80% application-route, 95% teaching-language and 50% requirements coverage;
-- expanding institutions connected to freshly verified scholarships from 205 to at least 230;
+- expanding institutions connected to freshly verified scholarships from 206 to at least 230;
 - completing 266 Source Manifests and 266 catalogue reconciliations;
 - completing three matching shadow releases over at least 72 hours before Production switches to D1;
 - passing two full monthly update cycles before expansion to 500, then 1,000+ institutions.
