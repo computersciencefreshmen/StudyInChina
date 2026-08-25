@@ -1,10 +1,12 @@
 <div align="center">
   <img src="./public/icon.svg" width="88" height="88" alt="Study in China Atlas" />
   <h1>Study in China Atlas</h1>
-  <p><strong>Source-led discovery for international students exploring Chinese universities, programs, scholarships and study cities.</strong></p>
+  <p><strong>An evidence-first, multilingual decision atlas for international students exploring Chinese universities, programs, scholarships and study cities.</strong></p>
   <p>
     <a href="https://studyinchina.vercel.app/en"><strong>Explore the live atlas</strong></a>
     · <a href="https://studyinchina.vercel.app/en/programs">Browse programs</a>
+    · <a href="https://studyinchina.vercel.app/en/scholarships">Find scholarships</a>
+    · <a href="https://studyinchina.vercel.app/en/guides">Read the guides</a>
     · <a href="https://studyinchina.vercel.app/api/v1/releases/current">Public API</a>
     · <a href="./docs/content-maintenance.md">Data policy</a>
   </p>
@@ -23,6 +25,19 @@
 
 > [!IMPORTANT]
 > Study in China Atlas is an independent, non-commercial public-interest directory—not a university, scholarship provider or application portal. Always confirm deadlines, fees and eligibility on the linked official source before applying or paying.
+
+> [!NOTE]
+> **Reproducible catalogue baseline · 2026-08-26:** 266 public universities, 1,260 program identities and 367 scholarship identities. Run `npm run quality:platform-scorecard` to reproduce the quality metrics; use the [Release API](https://studyinchina.vercel.app/api/v1/releases/current) for live publication metadata. Executable validation and official evidence take precedence over prose if they ever differ.
+
+## Choose your path
+
+| You are… | Start here | What you will find |
+| -------- | ---------- | ------------------ |
+| An applicant | [Program explorer](https://studyinchina.vercel.app/en/programs) · [Scholarships](https://studyinchina.vercel.app/en/scholarships) · [Guides](https://studyinchina.vercel.app/en/guides) | URL-shareable filters, up to four-program comparison, official application routes and field-level evidence. |
+| A data contributor | [Data policy](./docs/content-maintenance.md) · [Correction form](./.github/ISSUE_TEMPLATE/data-correction.yml) · [Source Manifest audit](./docs/operations/pilot-source-manifest-v2-audit.md) | Rules for proposing official sources without turning old, conflicting or unsupported values into current facts. |
+| An engineer or operator | [Data architecture](./docs/database-schema.md) · [Rollout](./docs/platform-rollout.md) · [Backup and restore](./docs/backup-and-restore.md) | The ingestion, D1/R2, immutable-release, shadow-read, deployment and recovery design behind the public product. |
+
+The central engineering problem is not collecting the largest possible row count. It is keeping each decision-critical fact attributable, current, queryable and reversible while preserving a broad official discovery surface.
 
 ## Why this atlas exists
 
@@ -43,7 +58,7 @@ The product is built around three promises:
 
 </div>
 
-The public identity catalogue contains **39 public admission-cycle records evaluated for 2026-08-25** and is backed by **2,109 registered official source records**. It deliberately retains verified and stale identities as official discovery paths, while the stricter scorecard separately measures evidence freshness and field depth. Only **6** program identities are open, upcoming or rolling on the evaluation date; a public cycle is not automatically an open application window. Reproduce the metrics with `npm run quality:platform-scorecard`.
+The public identity catalogue contains **39 public admission-cycle records evaluated for 2026-08-26** and is backed by **2,109 registered official source records**. It deliberately retains verified and stale identities as official discovery paths, while the stricter scorecard separately measures evidence freshness and field depth. Only **6** program identities are open, upcoming or rolling on the evaluation date; a public cycle is not automatically an open application window. Reproduce the metrics with `npm run quality:platform-scorecard`.
 
 <details>
 <summary><strong>Open the honest data-depth scorecard</strong></summary>
@@ -68,7 +83,7 @@ Record count is not the same as record completeness. This stricter scorecard mea
 | Completed V2 Source Manifests                           |                    0 / 266 |       266 / 266 |
 | Complete catalogue reconciliation                       |                    0 / 266 |       266 / 266 |
 | Verified records overdue for review                     |                      **0** |               0 |
-| Platform quality gates passing                          |                     3 / 14 |         14 / 14 |
+| Platform quality gates passing                          |                     2 / 14 |         14 / 14 |
 
 The raw compatibility dataset contains 272 universities, 1,280 programs and 394 scholarships. Draft, archived, identity-conflicting or publication-ineligible records are intentionally excluded from the public numbers above.
 

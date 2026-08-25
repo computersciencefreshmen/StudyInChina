@@ -1,10 +1,12 @@
 <div align="center">
   <img src="./public/icon.svg" width="88" height="88" alt="Study in China Atlas 标志" />
   <h1>Study in China Atlas</h1>
-  <p><strong>面向国际学生的中国高校、项目、奖学金与留学城市的官方来源导向目录。</strong></p>
+  <p><strong>面向国际学生、以官方证据为先的中国高校、项目、奖学金与留学城市多语言决策图谱。</strong></p>
   <p>
     <a href="https://studyinchina.vercel.app/zh"><strong>访问在线图谱</strong></a>
     · <a href="https://studyinchina.vercel.app/zh/programs">浏览项目</a>
+    · <a href="https://studyinchina.vercel.app/zh/scholarships">查找奖学金</a>
+    · <a href="https://studyinchina.vercel.app/zh/guides">阅读指南</a>
     · <a href="https://studyinchina.vercel.app/api/v1/releases/current">公开 API</a>
     · <a href="./README.md">English README</a>
     · <a href="./docs/content-maintenance.md">数据政策</a>
@@ -23,7 +25,17 @@
 > Study in China Atlas 是独立、非商业、公益性质的信息目录，不是高校、奖学金资助方或申请平台。申请或缴费前，务必在本项目链接的官方来源中再次核实截止日期、费用与资格条件。
 
 > [!NOTE]
-> 本文件是 [English README](./README.md) 的中文说明。若中英文文案与可执行校验结果不一致，以仓库中的数据校验、源文件与官方来源为准。
+> **可复现目录基线 · 2026-08-26：**266 所公开高校、1,260 个项目身份、367 项奖学金身份。运行 `npm run quality:platform-scorecard` 可复现质量指标；[Release API](https://studyinchina.vercel.app/api/v1/releases/current) 提供线上发布元数据。本文件与 [English README](./README.md) 同步维护；若文案与可执行校验不一致，以数据校验和官方证据为准。
+
+## 按角色开始
+
+| 你的角色 | 建议入口 | 可以获得什么 |
+| -------- | -------- | ------------ |
+| 国际申请者 | [项目检索](https://studyinchina.vercel.app/zh/programs) · [奖学金](https://studyinchina.vercel.app/zh/scholarships) · [申请指南](https://studyinchina.vercel.app/zh/guides) | 可分享的筛选链接、最多四项对比、官方申请入口和字段级证据。 |
+| 数据贡献者 | [数据政策](./docs/content-maintenance.md) · [纠错表单](./.github/ISSUE_TEMPLATE/data-correction.yml) · [Source Manifest 审计](./docs/operations/pilot-source-manifest-v2-audit.md) | 提交官方来源的规则，以及如何避免把过期、冲突或缺少证据的值误写为当前事实。 |
+| 工程师或运维者 | [数据架构](./docs/database-schema.md) · [上线方案](./docs/platform-rollout.md) · [备份恢复](./docs/backup-and-restore.md) | 公开产品背后的采集、D1/R2、不可变 Release、Shadow 读取、部署和恢复设计。 |
+
+平台真正要解决的工程问题，不是把行数做得尽可能大，而是在保留广泛官方发现入口的同时，让每个影响决策的事实都可追溯、够新鲜、可查询并且可回滚。
 
 ## 为什么要做这个图谱
 
@@ -39,7 +51,7 @@
 
 ## 当前公开身份目录快照
 
-公开 API 与本地执行的 `npm run quality:platform-scorecard` 使用同一公开身份分母，评估日期为 **2026-08-25**；分数卡再单独拆分新鲜度、字段完整度与质量门禁。身份总数不等于“所有字段都完整”，更不等于“所有项目都正在开放申请”。
+公开 API 与本地执行的 `npm run quality:platform-scorecard` 使用同一公开身份分母，评估日期为 **2026-08-26**；分数卡再单独拆分新鲜度、字段完整度与质量门禁。身份总数不等于“所有字段都完整”，更不等于“所有项目都正在开放申请”。
 
 <div align="center">
 
@@ -48,7 +60,7 @@
 
 </div>
 
-截至 **2026-08-25**，当前公开身份目录包含 **39** 条公开招生周期记录，并由 **2,109** 条已登记官方来源记录支撑；其中只有 **6** 个项目身份处于开放、即将开放或滚动招生状态。“公开周期”不等于“正在开放申请”。目录保留可发现的已核验或 `stale` 身份；下方质量分数卡则单独衡量当前新鲜证据。项目身份、招生动态、费用、要求和奖学金资格属于不同数据层，不能用一条总数混为一谈。
+截至 **2026-08-26**，当前公开身份目录包含 **39** 条公开招生周期记录，并由 **2,109** 条已登记官方来源记录支撑；其中只有 **6** 个项目身份处于开放、即将开放或滚动招生状态。“公开周期”不等于“正在开放申请”。目录保留可发现的已核验或 `stale` 身份；下方质量分数卡则单独衡量当前新鲜证据。项目身份、招生动态、费用、要求和奖学金资格属于不同数据层，不能用一条总数混为一谈。
 
 ### 数据质量口径：先诚实，再扩张
 
@@ -71,7 +83,7 @@
 | 已登记 Source Manifest 的高校      |       10 / 266 · **3.76%** |                       266 / 266 |
 | 完成 V2 Manifest 的高校            |                    0 / 266 |                       266 / 266 |
 | 完成目录对账的高校                 |                    0 / 266 |                       266 / 266 |
-| 通过的平台质量门禁                 |                 **3 / 14** |                         14 / 14 |
+| 通过的平台质量门禁                 |                 **2 / 14** |                         14 / 14 |
 
 补充说明：已过复核期但仍标为 `verified` 的记录为 **0**。一旦超过复核期，记录会降为 `stale`；身份可以继续作为官方发现入口，但截止日期、费用、要求、资助与申请入口等动态事实会被遮蔽。`published` 且完全没有日期的招生周期记录为 **0**。
 
