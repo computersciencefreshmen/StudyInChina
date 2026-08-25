@@ -17,6 +17,7 @@ import {
 } from '@/lib/catalog'
 import { selectPublishedData } from '@/lib/data/publication'
 import { bundleSchema } from '@/lib/data/schema'
+import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
 import type { DataBundle } from '@/lib/data/types'
 
 const allData = bundleSchema.parse({
@@ -80,12 +81,11 @@ describe('CatalogRepository', () => {
 
     expect(linked.total).toBeGreaterThan(0)
     expect(linked.items.every(({ program }) => published.scholarships.some((scholarship) => (
-      scholarship.programIds.includes(program.id)
-      || scholarship.universityIds.includes(program.universityId)
+      scholarshipAppliesToProgram(scholarship, program)
     )))).toBe(true)
 
     const selected = published.scholarships.find((scholarship) => (
-      scholarship.programIds.length > 0 || scholarship.universityIds.length > 0
+      scholarship.programIds.length > 0
     ))!
     const scoped = await repository.listPrograms({
       scholarship: selected.slug,
@@ -94,9 +94,82 @@ describe('CatalogRepository', () => {
     })
     expect(scoped.total).toBeGreaterThan(0)
     expect(scoped.items.every(({ program }) => (
-      selected.programIds.includes(program.id)
-      || selected.universityIds.includes(program.universityId)
+      scholarshipAppliesToProgram(selected, program)
     ))).toBe(true)
+  })
+
+  it('keeps JSON program scope strict while preserving institution scholarship search', async () => {
+    const today = '2026-08-25'
+    const bundle = copyBundle()
+    const publicPrograms = selectPublishedData(bundle, today).programs
+    const byUniversity = new Map<string, typeof publicPrograms>()
+    for (const program of publicPrograms) {
+      const programsAtUniversity = byUniversity.get(program.universityId) ?? []
+      programsAtUniversity.push(program)
+      byUniversity.set(program.universityId, programsAtUniversity)
+    }
+    const siblings = [...byUniversity.values()].find((items) => items.length >= 2)!
+    const target = siblings[0]!
+    const sibling = siblings[1]!
+    const university = bundle.universities.find((item) => item.id === target.universityId)!
+    const base = bundle.scholarships[0]!
+    const scoped = {
+      ...base,
+      id: 'scholarship-strict-program-scope',
+      slug: 'strict-program-scope',
+      universityIds: [university.id],
+      programIds: [target.id],
+      deadline: null,
+      verifiedAt: today,
+      reviewAfter: '2026-09-24',
+      status: 'verified' as const,
+    }
+    const universityOnly = {
+      ...scoped,
+      id: 'scholarship-university-attribution-only',
+      slug: 'university-attribution-only',
+      programIds: [],
+    }
+    const unscoped = {
+      ...scoped,
+      id: 'scholarship-unscoped-legacy',
+      slug: 'unscoped-legacy',
+      universityIds: [],
+      programIds: [],
+    }
+    bundle.scholarships = [scoped, universityOnly, unscoped]
+    const repository = createJsonCatalogRepository(() => bundle)
+
+    const linked = await repository.listPrograms({ scholarship: 'linked', today, limit: 100 })
+    expect(linked.items.map(({ program }) => program.id)).toEqual([target.id])
+    expect(linked.items.map(({ program }) => program.id)).not.toContain(sibling.id)
+
+    const selected = await repository.listPrograms({
+      scholarship: scoped.slug,
+      today,
+      limit: 100,
+    })
+    expect(selected.items.map(({ program }) => program.id)).toEqual([target.id])
+    await expect(repository.listPrograms({
+      scholarship: universityOnly.slug,
+      today,
+      limit: 100,
+    })).resolves.toMatchObject({ total: 0, items: [] })
+    await expect(repository.listPrograms({
+      scholarship: unscoped.slug,
+      today,
+      limit: 100,
+    })).resolves.toMatchObject({ total: 0, items: [] })
+
+    const institutionalSearch = await repository.listScholarships({
+      institution: university.slug,
+      today,
+      limit: 100,
+    })
+    expect(institutionalSearch.items.map(({ scholarship }) => scholarship.id).sort()).toEqual([
+      scoped.id,
+      universityOnly.id,
+    ].sort())
   })
 
   it('does not use stale scholarship relationships for the linked-program filter', async () => {

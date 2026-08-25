@@ -14,6 +14,7 @@ import { formatCny, formatDate, localize } from '@/lib/data/format'
 import { getTodayDate } from '@/lib/data/freshness'
 import { degreeLabels, disciplineLabels, languageLabel } from '@/lib/data/labels'
 import { getCatalogData, getData } from '@/lib/data/load'
+import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
 import { isIndexableProgram } from '@/lib/seo/indexability'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
@@ -260,11 +261,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   const related = data.programs
     .filter((item) => item.universityId === university.id && item.id !== program.id)
     .slice(0, 3)
-  const scholarships = data.scholarships.filter((item) => (
-    item.programIds.includes(program.id)
-    || item.universityIds.includes(university.id)
-    || (item.programIds.length === 0 && item.universityIds.length === 0)
-  ))
+  const scholarships = data.scholarships.filter((item) => scholarshipAppliesToProgram(item, program))
 
   const jsonLd = {
     '@context': 'https://schema.org',

@@ -298,6 +298,60 @@ describe('CatalogApiService', () => {
     expect(program?.fieldMeta.durationMonths.status).toBe('source_unavailable')
   })
 
+  it('uses only explicit legacy programIds for program filters and comparison counts', () => {
+    const bundle = fixture()
+    bundle.programs.push({
+      ...bundle.programs[0],
+      id: 'program-2',
+      slug: 'software-engineering',
+      name: text('Software Engineering'),
+    })
+    bundle.scholarships.push(
+      {
+        ...bundle.scholarships[0],
+        id: 'scholarship-university-only',
+        slug: 'university-only-scholarship',
+        programIds: [],
+      },
+      {
+        ...bundle.scholarships[0],
+        id: 'scholarship-unscoped',
+        slug: 'unscoped-scholarship',
+        universityIds: [],
+        programIds: [],
+      },
+    )
+    const service = new CatalogApiService(
+      bundle,
+      releaseFromBundle(bundle, '2026-07-20'),
+      '2026-07-20',
+    )
+
+    expect(service.listPrograms({ scholarship: 'linked' }).data.map((item) => item.id))
+      .toEqual(['program-1'])
+    expect(service.listPrograms({ scholarship: 'example-scholarship' }).data.map((item) => item.id))
+      .toEqual(['program-1'])
+    expect(service.listPrograms({ scholarship: 'university-only-scholarship' }).data)
+      .toEqual([])
+    expect(service.listPrograms({ scholarship: 'unscoped-scholarship' }).data)
+      .toEqual([])
+
+    const compared = service.comparePrograms(['program-1', 'program-2']).data.items
+    expect(Object.fromEntries(compared.map((item) => [
+      item.program.id,
+      item.linkedScholarshipCount,
+    ]))).toEqual({
+      'program-1': 1,
+      'program-2': 0,
+    })
+
+    expect(service.listScholarships({ institution: 'example-university' }).data.map((item) => item.id))
+      .toEqual([
+        'scholarship-1',
+        'scholarship-university-only',
+      ])
+  })
+
   it('keeps confirmed identity but masks stale dynamic facts everywhere', () => {
     const bundle = fixture()
     const service = new CatalogApiService(bundle, releaseFromBundle(bundle, '2026-07-20'), '2026-11-01')

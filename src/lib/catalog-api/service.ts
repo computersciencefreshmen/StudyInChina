@@ -1,6 +1,7 @@
 import { getApplicationState, selectAdmissionCycle } from '@/lib/data/admission'
 import { getTodayDate } from '@/lib/data/freshness'
 import { classifyProgramField, isProgramField, programSearchKeywords } from '@/lib/data/fields'
+import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
 import { canonicalUniversitySlug } from '@/lib/data/slug-aliases'
 import type {
   AdmissionCycle,
@@ -407,7 +408,7 @@ export class CatalogApiService {
       const cycles = this.bundle.admissionCycles.filter((item) => item.programId === program.id)
       const scholarships = this.bundle.scholarships.filter((item) =>
         hasCurrentFacts(item, this.today)
-          && (item.programIds.includes(program.id) || item.universityIds.includes(program.universityId)),
+          && scholarshipAppliesToProgram(item, program),
       )
       const hasCycleFilters = Boolean(
         query.academicYear || query.intake || query.applicationState
@@ -481,8 +482,7 @@ export class CatalogApiService {
       const currentCycle = selectAdmissionCycle(currentCycles, program.id, this.today)
       const linkedScholarshipCount = this.bundle.scholarships.filter((scholarship) => (
         hasCurrentFacts(scholarship, this.today)
-        && (scholarship.programIds.includes(program.id)
-          || scholarship.universityIds.includes(program.universityId))
+        && scholarshipAppliesToProgram(scholarship, program)
       )).length
       return [{
         program: record,

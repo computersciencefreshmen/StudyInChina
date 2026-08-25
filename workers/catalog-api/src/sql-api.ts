@@ -1040,27 +1040,6 @@ export class CatalogSqlApi {
               WHERE normalized_cycle.release_id = selected.release_id
                 AND normalized_cycle.scholarship_id = selected.scholarship_id
             )
-
-          UNION ALL
-
-          SELECT scoped_program.program_id
-          FROM selected_scholarships AS selected
-          CROSS JOIN record_field_status AS scope
-          CROSS JOIN json_each(scope.value_json) AS scoped_institution
-          CROSS JOIN programs AS scoped_program
-          WHERE scope.release_id = selected.release_id
-            AND scope.record_id = selected.scholarship_id
-            AND scope.field_path IN ('universityIds', 'institution_ids')
-            AND scope.field_status = 'known'
-            AND scope.review_after >= date('now', '+8 hours')
-            AND scoped_program.release_id = selected.release_id
-            AND scoped_program.institution_id = CAST(scoped_institution.value AS TEXT)
-            AND NOT EXISTS (
-              SELECT 1
-              FROM normalized_cycles AS normalized_cycle
-              WHERE normalized_cycle.release_id = selected.release_id
-                AND normalized_cycle.scholarship_id = selected.scholarship_id
-            )
         )
         SELECT DISTINCT linked_program.program_id
         FROM linked_programs AS linked_program
@@ -1349,24 +1328,6 @@ export class CatalogSqlApi {
          AND scope.field_path IN ('programIds', 'program_ids')
         JOIN json_each(scope.value_json) AS scoped_program ON 1 = 1
         WHERE CAST(scoped_program.value AS TEXT) = target.program_id
-          AND NOT EXISTS (
-            SELECT 1 FROM current_scholarship_cycles AS normalized_cycle
-            WHERE normalized_cycle.release_id = scholarship.release_id
-              AND normalized_cycle.scholarship_id = scholarship.scholarship_id
-          )
-
-        UNION
-
-        SELECT target.program_id, scholarship.scholarship_id
-        FROM target_programs AS target
-        JOIN current_scholarships AS scholarship
-          ON scholarship.release_id = target.release_id
-        JOIN current_record_fields AS scope
-          ON scope.release_id = scholarship.release_id
-         AND scope.record_id = scholarship.scholarship_id
-         AND scope.field_path IN ('universityIds', 'institution_ids')
-        JOIN json_each(scope.value_json) AS scoped_institution ON 1 = 1
-        WHERE CAST(scoped_institution.value AS TEXT) = target.institution_id
           AND NOT EXISTS (
             SELECT 1 FROM current_scholarship_cycles AS normalized_cycle
             WHERE normalized_cycle.release_id = scholarship.release_id

@@ -1,0 +1,460 @@
+{
+  "schemaVersion": "1.0",
+  "checkedAt": "2026-08-25",
+  "universityId": "uni-guangdong-university-of-foreign-studies",
+  "universityName": "Guangdong University of Foreign Studies",
+  "policy": {
+    "officialSourcesOnly": true,
+    "unknownValuesInferred": false,
+    "closed2026CyclesPublishedAsCurrent": false,
+    "projected2027CyclesAllowed": false,
+    "privateSnapshotsPublic": false
+  },
+  "sources": [
+    {
+      "sourceId": "src-gdufs-2026-degree-admissions",
+      "officialUrl": "https://iie.gdufs.edu.cn/info/1099/5488.htm",
+      "sourceTitle": "2026年秋季国际学生·学历生报名通知",
+      "attachmentUrl": "https://iie.gdufs.edu.cn/virtual_attach_file.vsb?afc=pM7rvknlW7MzfRo6l78o7laMmWknRN_8nR67UzQVU8lZUm70gihFp2hmCIa0L1yiUSyiLkyYU49DMmvbUm-sLmviL8U8MNMfoz-4o7W7MzAFnzN4L8-PUz6FoRvYMzLJqjfjo4OeoDPZvsAbgDTJQty0LzGboSyiMR9ZgtA8pUFcc&oid=962243922&tid=1099&nid=5488&e=.jpg",
+      "locators": [
+        {
+          "locator": "Application period and degree-program requirements sections",
+          "supports": [
+            "2026-03-01 opening date",
+            "2026-06-20 closing date",
+            "degree duration",
+            "teaching language",
+            "language requirements",
+            "official application system"
+          ]
+        },
+        {
+          "locator": "Official image attachment, Appendix 1 / [GDUFS] List of Tuition Fees of Degree Programs for International Students, table rows 1–11",
+          "supports": [
+            "CNY 500 one-time application fee",
+            "CNY 20,000/year Chinese-taught bachelor tuition",
+            "CNY 33,800/year English-taught bachelor tuition",
+            "CNY 28,000/year MTCOSL tuition",
+            "CNY 54,000/year full-time MBA tuition",
+            "CNY 30,000/year doctorate tuition"
+          ]
+        },
+        {
+          "locator": "Scholarship summary in the degree admissions guide",
+          "supports": [
+            "Guangdong Government award amounts by degree level"
+          ]
+        }
+      ],
+      "feeRows": [
+        {
+          "row": 1,
+          "programRaw": "报名费 / Application fee",
+          "amountRaw": "500",
+          "periodRaw": "新生入学一次性收取 / 1-time fee charged for new students",
+          "structuredAmountCny": 500,
+          "structuredPeriod": "one-time"
+        },
+        {
+          "row": 2,
+          "programRaw": "汉语言本科 / Chinese B.A. programs",
+          "amountRaw": "20,000",
+          "periodRaw": "年 year",
+          "structuredAmountCny": 20000,
+          "structuredPeriod": "academic-year"
+        },
+        {
+          "row": 3,
+          "programRaw": "全英授课本科 / English-taught undergraduate programs",
+          "amountRaw": "33,800",
+          "periodRaw": "年 year",
+          "structuredAmountCny": 33800,
+          "structuredPeriod": "academic-year"
+        },
+        {
+          "row": 4,
+          "programRaw": "中文授课本科 / Chinese-taught undergraduate programs",
+          "amountRaw": "20,000",
+          "periodRaw": "年 year",
+          "structuredAmountCny": 20000,
+          "structuredPeriod": "academic-year"
+        },
+        {
+          "row": 7,
+          "programRaw": "国际中文教育硕士 / MTCSOL (Master of Teaching Chinese to Speakers of Other Languages)",
+          "amountRaw": "28,000",
+          "periodRaw": "年 year",
+          "structuredAmountCny": 28000,
+          "structuredPeriod": "academic-year"
+        },
+        {
+          "row": 8,
+          "programRaw": "MBA（工商管理硕士）（2年全日制） / MBA (Master of Business Administration) (2-years’ full-time program)",
+          "amountRaw": "54,000",
+          "periodRaw": "年 year",
+          "structuredAmountCny": 54000,
+          "structuredPeriod": "academic-year"
+        },
+        {
+          "row": 9,
+          "programRaw": "MBA（工商管理硕士）（3年非全日制） / MBA (Master of Business Administration) (3-years’ part-time program)",
+          "amountRaw": "36,000",
+          "periodRaw": "年 year",
+          "structuredAmountCny": 36000,
+          "structuredPeriod": "academic-year"
+        },
+        {
+          "row": 11,
+          "programRaw": "博士研究生（4年制） / Doctorate programs (4-years’ program)",
+          "amountRaw": "30,000",
+          "periodRaw": "年 year",
+          "structuredAmountCny": 30000,
+          "structuredPeriod": "academic-year"
+        }
+      ],
+      "derivations": [
+        {
+          "targetProgramId": "prog-gap-prog-gdufs-mba-international-2026",
+          "structuredAmountCny": 108000,
+          "structuredPeriod": "program",
+          "formula": "54,000 × 2 years = 108,000; 36,000 × 3 years = 108,000",
+          "reason": "The catalog currently has one MBA identity spanning both official study modes, so the equal total program price is safer than one annual rate."
+        }
+      ],
+      "snapshotStatus": "stored_private_r2",
+      "contentSha256": "e56545a3662b45f750bf2a299b2f33cabc7cd49bc8741e11dcce97a8573a4b17",
+      "r2ObjectKey": "snapshots/e5/src-gdufs-2026-degree-admissions/e56545a3662b45f750bf2a299b2f33cabc7cd49bc8741e11dcce97a8573a4b17.html",
+      "snapshotMimeType": "text/html",
+      "snapshotSizeBytes": null,
+      "snapshotNote": "Official response bytes are stored in private R2; this ledger exposes only the content hash and private object key, not a public mirror.",
+      "attachmentSnapshot": {
+        "snapshotStatus": "stored_private_r2",
+        "officialUrl": "https://iie.gdufs.edu.cn/virtual_attach_file.vsb?afc=pM7rvknlW7MzfRo6l78o7laMmWknRN_8nR67UzQVU8lZUm70gihFp2hmCIa0L1yiUSyiLkyYU49DMmvbUm-sLmviL8U8MNMfoz-4o7W7MzAFnzN4L8-PUz6FoRvYMzLJqjfjo4OeoDPZvsAbgDTJQty0LzGboSyiMR9ZgtA8pUFcc&oid=962243922&tid=1099&nid=5488&e=.jpg",
+        "contentSha256": "06fdb5f5c6eb93f076a8fd6043310e686e6412455da1503a388953f1b128cd1f",
+        "sizeBytes": 553555,
+        "r2ObjectKey": "snapshots/06/src-gdufs-2026-degree-admissions/06fdb5f5c6eb93f076a8fd6043310e686e6412455da1503a388953f1b128cd1f.jpg",
+        "mimeType": "image/jpeg"
+      }
+    },
+    {
+      "sourceId": "source-gdufs-2026-autumn-chinese-language-program",
+      "officialUrl": "https://iie.gdufs.edu.cn/info/1099/5508.htm",
+      "sourceTitle": "GDUFS 2026 Autumn Chinese Language Program Admissions",
+      "locators": [
+        {
+          "locator": "Applicant, application-period, study-period and fee sections",
+          "supports": [
+            "age 18–35 and study-visa eligibility",
+            "2026-03-23 opening date",
+            "2026-06-30 closing date",
+            "2026-09-03 to 2026-12-31 study period",
+            "CNY 8,600/semester tuition",
+            "CNY 17,200/year tuition reference",
+            "CNY 500 one-time application fee",
+            "insurance and accommodation fee references"
+          ]
+        }
+      ],
+      "snapshotStatus": "stored_private_r2",
+      "contentSha256": "ce127ef83244a7f375240344c4bddd1cd28a315d1b3a361de28671d1a0b13161",
+      "r2ObjectKey": "snapshots/ce/source-gdufs-2026-autumn-chinese-language-program/ce127ef83244a7f375240344c4bddd1cd28a315d1b3a361de28671d1a0b13161.html",
+      "snapshotMimeType": "text/html",
+      "snapshotSizeBytes": null,
+      "snapshotNote": "Official response bytes are stored in private R2; this ledger exposes only the content hash and private object key, not a public mirror."
+    },
+    {
+      "sourceId": "src-gdufs-iclt-scholarship",
+      "officialUrl": "https://iie.gdufs.edu.cn/info/1087/1536.htm",
+      "sourceTitle": "国际中文教师奖学金（研修生及本科生奖学金）申请办法",
+      "locators": [
+        {
+          "locator": "One-semester scholarship route, language-score and recommending-institution requirements",
+          "supports": [
+            "five-month one-semester scholarship identity",
+            "HSK Level 3 score 180",
+            "HSKK result requirement",
+            "recommendation from an eligible recommending institution",
+            "spring 2027 application route"
+          ]
+        }
+      ],
+      "snapshotStatus": "stored_private_r2",
+      "contentSha256": "aae000231cd67e30677434c5f3085a448146209a49eae220ff4bcc5868c0f7d5",
+      "r2ObjectKey": "snapshots/aa/src-gdufs-iclt-scholarship/aae000231cd67e30677434c5f3085a448146209a49eae220ff4bcc5868c0f7d5.html",
+      "snapshotMimeType": "text/html",
+      "snapshotSizeBytes": null,
+      "snapshotNote": "Official response bytes are stored in private R2; this ledger exposes only the content hash and private object key, not a public mirror."
+    },
+    {
+      "sourceId": "source-gdufs-2026-university-scholarship",
+      "officialUrl": "https://iie.gdufs.edu.cn/info/1126/5578.htm",
+      "sourceTitle": "GDUFS 2026 International Student Scholarship",
+      "locators": [
+        {
+          "locator": "Deadline, award tiers and eligibility sections",
+          "supports": [
+            "2026-07-05 deadline",
+            "full or 50% first-year tuition for selected new degree students",
+            "full or 50% next-year tuition for eligible continuing degree students",
+            "language-student scholarship constraints"
+          ]
+        }
+      ],
+      "snapshotStatus": "stored_private_r2",
+      "contentSha256": "efc1df3d774f6bfe3a937e0048a542a3e1f221cf7a615ebdc71d85abeba16927",
+      "r2ObjectKey": "snapshots/ef/source-gdufs-2026-university-scholarship/efc1df3d774f6bfe3a937e0048a542a3e1f221cf7a615ebdc71d85abeba16927.html",
+      "snapshotMimeType": "text/html",
+      "snapshotSizeBytes": null,
+      "snapshotNote": "Official response bytes are stored in private R2; this ledger exposes only the content hash and private object key, not a public mirror."
+    }
+  ],
+  "programCoverage": [
+    {
+      "programId": "program-guangdong-university-of-foreign-studies-chinese-language-bachelor",
+      "publishedFacts": [
+        "duration",
+        "teachingLanguage",
+        "HSK placement rule",
+        "officialApplyUrl"
+      ],
+      "historicalCycleFacts": [
+        "2026 application dates",
+        "CNY 20,000/year tuition",
+        "CNY 500 application fee"
+      ],
+      "withheldFacts": [
+        "2027 application dates"
+      ]
+    },
+    {
+      "programId": "program-guangdong-university-of-foreign-studies-international-business-bachelor",
+      "publishedFacts": [
+        "duration",
+        "teachingLanguage",
+        "English requirement",
+        "graduation HSK rule",
+        "officialApplyUrl"
+      ],
+      "historicalCycleFacts": [
+        "2026 application dates",
+        "CNY 33,800/year tuition",
+        "CNY 500 application fee"
+      ],
+      "withheldFacts": [
+        "2027 application dates"
+      ]
+    },
+    {
+      "programId": "program-guangdong-university-of-foreign-studies-global-economic-governance-doctorate",
+      "publishedFacts": [
+        "duration",
+        "teachingLanguage",
+        "HSK requirement",
+        "officialApplyUrl"
+      ],
+      "historicalCycleFacts": [
+        "2026 application dates",
+        "CNY 30,000/year tuition",
+        "CNY 500 application fee"
+      ],
+      "withheldFacts": [
+        "2027 application dates"
+      ]
+    },
+    {
+      "programId": "program-guangdong-university-of-foreign-studies-iclt-one-semester-language",
+      "publishedFacts": [
+        "scholarship-specific identity",
+        "five-month duration",
+        "teachingLanguage",
+        "HSK 3 score 180",
+        "HSKK requirement",
+        "eligible recommending institution",
+        "officialApplyUrl"
+      ],
+      "preservedFacts": [
+        "spring 2027 International Chinese Language Teachers Scholarship cycle"
+      ],
+      "withheldFacts": [
+        "self-funded tuition and dates, which belong to a separate identity"
+      ]
+    },
+    {
+      "programId": "program-guangdong-university-of-foreign-studies-chinese-language-semester-language",
+      "publishedFacts": [
+        "self-funded semester identity",
+        "four-month 2026 study period",
+        "teachingLanguage",
+        "eligibility",
+        "officialApplyUrl"
+      ],
+      "historicalCycleFacts": [
+        "2026 application dates",
+        "CNY 8,600/semester tuition",
+        "CNY 500 application fee"
+      ],
+      "withheldFacts": [
+        "future self-funded semester dates and fees",
+        "scholarship eligibility, which belongs to a separate identity"
+      ]
+    },
+    {
+      "programId": "prog-gap-prog-gdufs-chinese-thai-translation-bachelor",
+      "publishedFacts": [
+        "duration",
+        "teachingLanguage",
+        "HSK placement rule",
+        "officialApplyUrl"
+      ],
+      "historicalCycleFacts": [
+        "2026 application dates",
+        "CNY 20,000/year tuition",
+        "CNY 500 application fee"
+      ],
+      "withheldFacts": [
+        "2027 application dates"
+      ]
+    },
+    {
+      "programId": "prog-gap-prog-gdufs-chinese-business-bachelor",
+      "publishedFacts": [
+        "duration",
+        "teachingLanguage",
+        "HSK placement rule",
+        "officialApplyUrl"
+      ],
+      "historicalCycleFacts": [
+        "2026 application dates",
+        "CNY 20,000/year tuition",
+        "CNY 500 application fee"
+      ],
+      "withheldFacts": [
+        "2027 application dates"
+      ]
+    },
+    {
+      "programId": "prog-gap-prog-gdufs-chinese-culture-communication-bachelor",
+      "publishedFacts": [
+        "duration",
+        "teachingLanguage",
+        "HSK placement rule",
+        "officialApplyUrl"
+      ],
+      "historicalCycleFacts": [
+        "2026 application dates",
+        "CNY 20,000/year tuition",
+        "CNY 500 application fee"
+      ],
+      "withheldFacts": [
+        "2027 application dates"
+      ]
+    },
+    {
+      "programId": "prog-gap-clw-sw-gdufs-iclt-year",
+      "publishedFacts": [
+        "existing verified identity",
+        "six-language name",
+        "duration",
+        "teachingLanguage"
+      ],
+      "historicalCycleFacts": [
+        "existing closed scholarship application dates"
+      ],
+      "withheldFacts": [
+        "self-funded tuition",
+        "application fee",
+        "current application route"
+      ],
+      "withheldReason": "The three rechecked sources do not safely map the self-funded fee table to this scholarship-specific one-academic-year identity."
+    },
+    {
+      "programId": "prog-gap-chinese-degree-gdufs-international-chinese-education-master",
+      "publishedFacts": [
+        "duration",
+        "teachingLanguage",
+        "HSK requirement",
+        "officialApplyUrl"
+      ],
+      "historicalCycleFacts": [
+        "2026 application dates",
+        "CNY 28,000/year tuition",
+        "CNY 500 application fee"
+      ],
+      "withheldFacts": [
+        "2027 application dates"
+      ]
+    },
+    {
+      "programId": "prog-gap-prog-gdufs-mba-international-2026",
+      "publishedFacts": [
+        "duration range",
+        "teachingLanguage",
+        "English/work-experience requirement",
+        "graduation HSK rule",
+        "officialApplyUrl"
+      ],
+      "historicalCycleFacts": [
+        "2026 application dates",
+        "CNY 108,000/program total",
+        "CNY 54,000/year × 2 full-time evidence",
+        "CNY 36,000/year × 3 part-time evidence",
+        "CNY 500 application fee"
+      ],
+      "withheldFacts": [
+        "2027 application dates",
+        "separate full-time and part-time program identities"
+      ]
+    }
+  ],
+  "scholarshipCoverage": [
+    {
+      "scholarshipId": "scholarship-gdufs-international-student",
+      "publishedFacts": [
+        "audited degree-program mappings",
+        "full/50% tuition tiers",
+        "2026-07-05 deadline",
+        "official source also covers Chinese-language students enrolled for at least one academic year"
+      ],
+      "stateAtCheckedAt": "closed",
+      "withheldFacts": [
+        "language-program association pending safe mapping to an eligible identity with a study duration of at least one academic year"
+      ],
+      "mappingStatus": "partial_official_scope"
+    },
+    {
+      "scholarshipId": "scholarship-gdufs-guangdong-government",
+      "publishedFacts": [
+        "degree-only program scope",
+        "CNY 10,000/20,000/30,000 one-time award amounts"
+      ],
+      "withheldFacts": [
+        "current deadline",
+        "current application route",
+        "tuition-specific coverage classification"
+      ]
+    },
+    {
+      "scholarshipId": "scholarship-gdufs-iclt-one-semester-2027",
+      "publishedFacts": [
+        "spring 2027 five-month identity",
+        "2026-10-31 deadline",
+        "full tuition and accommodation",
+        "medical insurance",
+        "CNY 2,500 monthly stipend",
+        "dual scholarship-platform and GDUFS application route"
+      ],
+      "stateAtCheckedAt": "upcoming_deadline",
+      "verifiedAt": "2026-08-25",
+      "reviewAfter": "2026-09-01"
+    }
+  ],
+  "publicationDecisions": [
+    "All exact 2026 degree and self-funded language cycles are stored as stale previous-cycle references because their deadlines passed before 2026-08-25.",
+    "Three unsupported projected 2027 fee-reference cycles are removed.",
+    "No 2027 degree dates, tuition or application fee is inferred from the 2026 guide.",
+    "The existing International Chinese Language Teachers Scholarship one-semester identity and spring 2027 cycle are refreshed from the stored official snapshot and reviewed again by 2026-09-01.",
+    "A new stable self-funded Chinese-language semester identity owns the closed 2026 autumn CNY 8,600 cycle; scholarship and self-funded facts are never merged.",
+    "The university scholarship official scope includes eligible Chinese-language students studying for at least one academic year, but public programIds remain limited to audited degree identities until a qualifying language identity is safely mapped.",
+    "Four official HTML responses and the official tuition JPG are stored in private R2 with the hashes and object keys recorded in this ledger; raw snapshots are not publicly mirrored."
+  ]
+}
