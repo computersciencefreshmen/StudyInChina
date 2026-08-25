@@ -156,8 +156,31 @@ describe('regional depth wave on 2026-08-05', () => {
     expect(published.universities.every(
       (university) => (programCounts.get(university.id) ?? 0) >= 1,
     )).toBe(true)
-    expect(published.scholarships.every(
-      (scholarship) => scholarship.status === 'verified' && scholarship.reviewAfter >= TODAY,
-    )).toBe(true)
+    const staleScholarships = published.scholarships.filter(
+      (scholarship) => scholarship.status === 'stale',
+    )
+    expect(staleScholarships.length).toBeGreaterThan(0)
+    for (const scholarship of published.scholarships) {
+      if (scholarship.status === 'verified') {
+        expect(
+          (scholarship.reviewAfter ?? '').localeCompare(TODAY) >= 0,
+          scholarship.id,
+        ).toBe(true)
+        continue
+      }
+
+      expect(scholarship.status, scholarship.id).toBe('stale')
+      expect(scholarship.name.en, scholarship.id).toBeTruthy()
+      expect(scholarship.sourceIds.length, scholarship.id).toBeGreaterThan(0)
+      expect(scholarship.coverage, scholarship.id).toEqual({
+        tuition: 'unknown',
+        accommodation: 'unknown',
+        insurance: 'unknown',
+        stipendCnyPerMonth: null,
+      })
+      expect(scholarship.deadline, scholarship.id).toBeNull()
+      expect(scholarship.applicationUrl, scholarship.id).toBeNull()
+      expect(scholarship.summary, scholarship.id).toBeNull()
+    }
   })
 })

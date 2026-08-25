@@ -10,6 +10,7 @@ import styles from './DecisionRecordCards.module.css'
 
 export function ScholarshipCard({ scholarship, locale, messages, today }: { scholarship: Scholarship; locale: LaunchLocale; messages: Messages; today: string }) {
   const decisionCopy = getDecisionExperienceCopy(locale)
+  const isStaleIdentity = scholarship.status === 'stale'
   const currentCycle = selectScholarshipCurrentCycle(scholarship, today)
   const deadlineLabels = {
     future: decisionCopy.deadlineAhead,
@@ -21,6 +22,8 @@ export function ScholarshipCard({ scholarship, locale, messages, today }: { scho
     closed: 'neutral',
     'not-announced': 'warning',
   } as const
+  const deadlineLabel = isStaleIdentity ? messages.common.stale : deadlineLabels[currentCycle.deadlineState]
+  const deadlineTone = isStaleIdentity ? 'warning' as const : deadlineTones[currentCycle.deadlineState]
   const stipend = formatCny(scholarship.coverage.stipendCnyPerMonth, locale, messages.common.unknown)
   const funding = `${coverageLabel(scholarship.coverage.tuition, locale)} · ${stipend}`
   const universities = formatUniversityCoverage(
@@ -35,7 +38,7 @@ export function ScholarshipCard({ scholarship, locale, messages, today }: { scho
     <p className="record-card__summary">{localize(scholarship.summary, locale)}</p>
     <dl className={`${styles.signal} ${styles.fundingSignal}`}>
       <div><dt>{messages.common.deadline}</dt><dd className={styles.deadlineValue}>
-        <Badge tone={deadlineTones[currentCycle.deadlineState]}>{deadlineLabels[currentCycle.deadlineState]}</Badge>
+        <Badge tone={deadlineTone}>{deadlineLabel}</Badge>
         {currentCycle.deadline
           ? <time dateTime={currentCycle.deadline}>{formatDate(currentCycle.deadline, locale, messages.common.unknown)}</time>
           : messages.common.unknown}
@@ -51,7 +54,7 @@ export function ScholarshipCard({ scholarship, locale, messages, today }: { scho
     </dl>
     <div className="record-card__actions">
       <LinkButton href={`/${locale}/scholarships/${scholarship.slug}`} variant="secondary" size="small">{messages.common.viewDetails}</LinkButton>
-      {scholarship.applicationUrl ? <a className="atlas-button atlas-button--secondary atlas-button--small" href={scholarship.applicationUrl} target="_blank" rel="noreferrer">
+      {scholarship.status === 'verified' && scholarship.applicationUrl ? <a className="atlas-button atlas-button--secondary atlas-button--small" href={scholarship.applicationUrl} target="_blank" rel="noreferrer">
         {decisionCopy.officialApplicationRoute} ↗
       </a> : null}
     </div>

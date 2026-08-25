@@ -269,8 +269,10 @@ export function queryProgramCatalog(
         || university.id === filters.institution)
       && (!filters.city || city?.slug === filters.city || city?.id === filters.city)
       && (!filters.intake || cycle?.intake === filters.intake)
-      && matchesApplicationState(cycle, filters.applicationState, today)
-      && matchesTuition(cycle, filters.tuition)
+      && (!filters.applicationState || (
+        program.status === 'verified' && matchesApplicationState(cycle, filters.applicationState, today)
+      ))
+      && (!filters.tuition || (program.status === 'verified' && matchesTuition(cycle, filters.tuition)))
 
     return matches ? [{ program, university, cycle }] : []
   })

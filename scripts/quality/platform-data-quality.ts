@@ -4,7 +4,11 @@ import { join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { bundleSchema } from '../../src/lib/data/schema'
 import { getApplicationState } from '../../src/lib/data/admission'
-import { getTodayDate } from '../../src/lib/data/freshness'
+import {
+  getTodayDate,
+  isCurrentVerifiedRecord,
+  isWithinPostDeadlineGrace,
+} from '../../src/lib/data/freshness'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import type { DataBundle } from '../../src/lib/data/types'
 import {
@@ -78,6 +82,8 @@ export type PlatformDataQualityScorecard = {
       requirementsCoveragePct: number
     }
     scholarships: {
+      identityRecords: number
+      freshRecords: number
       universitiesCovered: number
       universityCoveragePct: number
       recordsWithDeadline: number
@@ -217,12 +223,16 @@ export function buildPlatformDataQualityScorecard(
   ).length
 
   const publicUniversityIds = new Set(publicBundle.universities.map((item) => item.id))
+  const currentScholarships = rawBundle.scholarships.filter(
+    (scholarship) => isCurrentVerifiedRecord(scholarship, today)
+      && isWithinPostDeadlineGrace(scholarship.deadline, today),
+  )
   const scholarshipUniversityIds = new Set(
-    publicBundle.scholarships
+    currentScholarships
       .flatMap((scholarship) => scholarship.universityIds)
       .filter((id) => publicUniversityIds.has(id)),
   )
-  const scholarshipsWithDeadline = publicBundle.scholarships.filter(
+  const scholarshipsWithDeadline = currentScholarships.filter(
     (scholarship) => scholarship.deadline !== null,
   ).length
   const citiesWithCoordinates = publicBundle.cities.filter(
@@ -285,10 +295,12 @@ export function buildPlatformDataQualityScorecard(
       requirementsCoveragePct: percent(programsWithRequirements, programTotal),
     },
     scholarships: {
+      identityRecords: scholarshipTotal,
+      freshRecords: currentScholarships.length,
       universitiesCovered: scholarshipUniversityIds.size,
       universityCoveragePct: percent(scholarshipUniversityIds.size, universityTotal),
       recordsWithDeadline: scholarshipsWithDeadline,
-      deadlineCoveragePct: percent(scholarshipsWithDeadline, scholarshipTotal),
+      deadlineCoveragePct: percent(scholarshipsWithDeadline, currentScholarships.length),
     },
     cities: {
       withCoordinates: citiesWithCoordinates,

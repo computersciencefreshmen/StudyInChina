@@ -37,7 +37,8 @@ export function ProgramCard({ program, university, cycle, locale, messages, toda
       : `${program.durationMonths} ${messages.common.months}`
     : messages.common.unknown
   const applicationState = getApplicationState(cycle, today)
-  const canApply = (applicationState === 'open' || applicationState === 'rolling') && Boolean(program.applyUrl)
+  const isStaleIdentity = program.status === 'stale'
+  const canApply = program.status === 'verified' && (applicationState === 'open' || applicationState === 'rolling') && Boolean(program.applyUrl)
   const stateLabels = {
     open: messages.common.openNow,
     upcoming: messages.programs.upcoming,
@@ -47,7 +48,10 @@ export function ProgramCard({ program, university, cycle, locale, messages, toda
     'not-announced': messages.programs.notAnnounced,
     'previous-cycle': messages.programs.previousCycle,
   }
-  const stateTone = applicationState === 'open' || applicationState === 'rolling'
+  const stateLabel = isStaleIdentity ? messages.common.stale : stateLabels[applicationState]
+  const stateTone = isStaleIdentity
+    ? 'warning' as const
+    : applicationState === 'open' || applicationState === 'rolling'
     ? 'jade' as const
     : applicationState === 'upcoming'
       ? 'gold' as const
@@ -59,7 +63,7 @@ export function ProgramCard({ program, university, cycle, locale, messages, toda
     <div className={styles.identityRow}><Badge tone="vermilion">{degreeLabels(locale)[program.degreeLevel]}</Badge></div>
     <div><h3 className="record-card__title">{localize(program.name, locale)}</h3>{university ? <p className="record-card__place">{localize(university.name, locale)}</p> : null}</div>
     <dl className={styles.signal}>
-      <div><dt>{messages.programs.applicationStatus}</dt><dd><Badge tone={stateTone}>{stateLabels[applicationState]}</Badge></dd></div>
+      <div><dt>{messages.programs.applicationStatus}</dt><dd><Badge tone={stateTone}>{stateLabel}</Badge></dd></div>
       <div><dt>{messages.common.deadline}</dt><dd>{cycle?.closesOn
         ? <time dateTime={cycle.closesOn}>{formatDate(cycle.closesOn, locale, messages.common.unknown)}</time>
         : messages.common.unknown}</dd></div>

@@ -417,9 +417,32 @@ describe('sparse-school and regional university expansion on 2026-08-04', () => 
       expect(programCounts.get(university?.id ?? '') ?? 0, candidateUniversity.slug)
         .toBeGreaterThanOrEqual(1)
     }
-    expect(published.scholarships.every(
-      (scholarship) => scholarship.status === 'verified' && scholarship.reviewAfter >= TODAY,
-    )).toBe(true)
+    const staleScholarships = published.scholarships.filter(
+      (scholarship) => scholarship.status === 'stale',
+    )
+    expect(staleScholarships.length).toBeGreaterThan(0)
+    for (const scholarship of published.scholarships) {
+      if (scholarship.status === 'verified') {
+        expect(
+          (scholarship.reviewAfter ?? '').localeCompare(TODAY) >= 0,
+          scholarship.id,
+        ).toBe(true)
+        continue
+      }
+
+      expect(scholarship.status, scholarship.id).toBe('stale')
+      expect(scholarship.name.en, scholarship.id).toBeTruthy()
+      expect(scholarship.sourceIds.length, scholarship.id).toBeGreaterThan(0)
+      expect(scholarship.coverage, scholarship.id).toEqual({
+        tuition: 'unknown',
+        accommodation: 'unknown',
+        insurance: 'unknown',
+        stipendCnyPerMonth: null,
+      })
+      expect(scholarship.deadline, scholarship.id).toBeNull()
+      expect(scholarship.applicationUrl, scholarship.id).toBeNull()
+      expect(scholarship.summary, scholarship.id).toBeNull()
+    }
   })
 
   it('never leaves an overdue formal record marked as verified', () => {
@@ -453,7 +476,9 @@ describe('sparse-school and regional university expansion on 2026-08-04', () => 
 
     expect(program).toBeDefined()
     expect(program?.status).toBe('verified')
-    expect((program?.reviewAfter ?? '') >= TODAY).toBe(true)
+    expect(
+      (program?.reviewAfter ?? '').localeCompare(TODAY) >= 0,
+    ).toBe(true)
     expect(program?.verificationScope).toBe('complete')
     expect(program?.details).toBeDefined()
     expect(publishedProgram).toBeDefined()

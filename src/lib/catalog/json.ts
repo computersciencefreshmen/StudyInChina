@@ -248,10 +248,11 @@ export class JsonCatalogRepository implements CatalogRepository {
   async listPrograms(query: CatalogProgramListQuery = {}): Promise<CatalogProgramListPage> {
     const today = query.today ?? getTodayDate()
     const data = selectPublishedData(await this.getBundle(), today)
+    const currentScholarships = data.scholarships.filter((item) => item.status === 'verified')
     const requestedScholarships = query.scholarship === 'linked'
-      ? data.scholarships
+      ? currentScholarships
       : query.scholarship
-        ? data.scholarships.filter((item) => (
+        ? currentScholarships.filter((item) => (
             item.id === query.scholarship || item.slug === query.scholarship
           ))
         : []

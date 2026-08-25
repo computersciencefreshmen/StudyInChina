@@ -14,7 +14,7 @@ const cycleById = new Map(data.admissionCycles.map((record) => [record.id, recor
 const scholarshipById = new Map(data.scholarships.map((record) => [record.id, record]))
 const sourceById = new Map(data.sources.map((record) => [record.id, record]))
 
-describe('2026-08-10 freshness reverification wave 2', () => {
+describe('2026-08-10 freshness evidence wave 2 after safe expiry rollover', () => {
   it('records a live check for every accepted official HTTPS source', () => {
     const sourceIds = [
       'src-wku-international-admissions-2027',
@@ -35,7 +35,7 @@ describe('2026-08-10 freshness reverification wave 2', () => {
     }
   })
 
-  it('reverifies five WKU spring-transfer cycles without widening their scope', () => {
+  it('retains five WKU spring-transfer facts while safely downgrading expired evidence', () => {
     const cycleIds = [
       'cycle-2027-wenzhou-kean-university-finance-bs-spring-transfer',
       'cycle-2027-wenzhou-kean-university-global-business-bs-spring-transfer',
@@ -55,13 +55,13 @@ describe('2026-08-10 freshness reverification wave 2', () => {
         factScope: 'complete',
         verifiedAt: TODAY,
         reviewAfter: '2026-08-17',
-        status: 'verified',
+        status: 'stale',
       })
       expect(cycleById.get(cycleId)?.notes?.en).toContain('transfer students only')
     }
   })
 
-  it('reverifies the SHNU spring scholarship route as dates-only', () => {
+  it('retains the SHNU dates-only route with expired evidence marked stale', () => {
     expect(cycleById.get('cycle-2027-shnu-iclt-one-semester-spring')).toMatchObject({
       academicYear: '2026-2027',
       intake: 'spring',
@@ -69,24 +69,24 @@ describe('2026-08-10 freshness reverification wave 2', () => {
       factScope: 'dates-only',
       verifiedAt: TODAY,
       reviewAfter: '2026-08-17',
-      status: 'verified',
+      status: 'stale',
     })
   })
 
-  it('reverifies four scholarship deadlines while preserving unsupported unknowns', () => {
+  it('retains four scholarship facts while safely downgrading expired evidence', () => {
     expect(scholarshipById.get('sch-gap-pku-depth-international-chinese-language-teachers-scholarship')).toMatchObject({
       deadline: '2026-10-31',
       coverage: { tuition: 'full', accommodation: 'full', insurance: true },
       verifiedAt: TODAY,
       reviewAfter: '2026-08-17',
-      status: 'verified',
+      status: 'stale',
     })
     expect(scholarshipById.get('sch-gap-sch-sisu-iclt-2026')).toMatchObject({
       deadline: '2026-10-31',
       coverage: { tuition: 'full', accommodation: 'full', insurance: true },
       verifiedAt: TODAY,
       reviewAfter: '2026-08-17',
-      status: 'verified',
+      status: 'stale',
     })
     expect(scholarshipById.get('sch-gap-sch-mew-nss-synu-iclts')).toMatchObject({
       deadline: '2026-09-15',
@@ -100,7 +100,7 @@ describe('2026-08-10 freshness reverification wave 2', () => {
       coverage: { tuition: 'unknown', accommodation: 'unknown', insurance: 'unknown' },
       verifiedAt: TODAY,
       reviewAfter: '2026-08-17',
-      status: 'verified',
+      status: 'stale',
     })
   })
 })

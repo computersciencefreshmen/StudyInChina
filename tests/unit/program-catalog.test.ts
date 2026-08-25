@@ -51,6 +51,34 @@ describe('server-side program catalogue', () => {
     expect(href).toContain('page=2')
   })
 
+  it('keeps stale identities browseable without classifying them as current unknown facts', () => {
+    const staleProgram = {
+      ...data.programs[0],
+      status: 'stale' as const,
+      teachingLanguages: [],
+      durationMonths: null,
+      applyUrl: null,
+      languageRequirements: [],
+    }
+    const fixture = { ...data, programs: [staleProgram], admissionCycles: [] }
+
+    expect(queryProgramCatalog(
+      fixture,
+      parseProgramCatalogFilters({}),
+      '2026-08-25',
+    ).total).toBe(1)
+    expect(queryProgramCatalog(
+      fixture,
+      parseProgramCatalogFilters({ applicationState: 'not-announced' }),
+      '2026-08-25',
+    ).total).toBe(0)
+    expect(queryProgramCatalog(
+      fixture,
+      parseProgramCatalogFilters({ tuition: 'unknown' }),
+      '2026-08-25',
+    ).total).toBe(0)
+  })
+
   it('rejects unsupported filter values instead of passing them to queries', () => {
     const filters = parseProgramCatalogFilters({ degree: 'invalid', scholarship: 'anything', sort: 'drop-table' })
 

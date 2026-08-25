@@ -5,11 +5,10 @@ import universities from '../../content/data/universities.json'
 import programs from '../../content/data/programs.json'
 import admissionCycles from '../../content/data/admission-cycles.json'
 import scholarships from '../../content/data/scholarships.json'
-import { getApplicationState } from '@/lib/data/admission'
 import { bundleSchema } from '@/lib/data/schema'
 import { selectPublishedData } from '@/lib/data/publication'
 
-const PUBLISHED_AS_OF = '2026-07-20'
+const PUBLISHED_AS_OF = '2026-08-25'
 
 const content = bundleSchema.parse({
   sources,
@@ -101,22 +100,24 @@ describe('published content data', () => {
       (program) => program.id === 'program-fudan-university-chinese-language-program-language',
     )
     expect(fudanStableIdentity).toBeDefined()
-    const fudanCycles = published.admissionCycles.filter(
+    const publishedFudanCycles = published.admissionCycles.filter(
       (cycle) => cycle.programId === fudanStableIdentity?.id,
     )
-    expect(fudanCycles.length).toBeGreaterThan(0)
-    for (const cycle of fudanCycles) {
-      expect(cycle.id).toContain('fee-reference')
-      expect(cycle.opensOn).toBeNull()
-      expect(cycle.closesOn).toBeNull()
-      expect(cycle.dateStatus).toBe('not-announced')
-      expect(cycle.tuitionCny).not.toBeNull()
-      expect(cycle.tuitionStatus).toBe('reference')
-      expect(cycle).not.toHaveProperty('notes')
-      expect(['open', 'rolling']).not.toContain(
-        getApplicationState(cycle, PUBLISHED_AS_OF),
-      )
-    }
+    expect(publishedFudanCycles).toHaveLength(0)
+
+    const staleFeeReference = content.admissionCycles.find(
+      (cycle) => cycle.id === 'cycle-2026-fudan-university-chinese-language-program-language-fee-reference',
+    )
+    expect(staleFeeReference).toMatchObject({
+      programId: fudanStableIdentity?.id,
+      status: 'stale',
+      dateStatus: 'not-announced',
+      opensOn: null,
+      closesOn: null,
+      tuitionStatus: 'reference',
+    })
+    expect(staleFeeReference?.tuitionCny).not.toBeNull()
+    expect(staleFeeReference).not.toHaveProperty('notes')
   })
 
   it('provides English, Chinese and Russian for public names', () => {

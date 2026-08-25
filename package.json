@@ -44,6 +44,8 @@
     "cloudflare:restore-drill": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cloudflare/restore-drill.ps1",
     "check:links": "node scripts/check-links.mjs",
     "data:health": "node scripts/data-health.mjs --mode monthly",
+    "data:rollover-stale": "tsx scripts/quality/rollover-overdue-data.ts",
+    "data:apply-official-depth-2026-08-25": "node scripts/ingestion/apply-official-depth-wave-2026-08-25.cjs",
     "pipeline:build-bootstrap": "tsx scripts/ingestion/build-pipeline-bootstrap.ts",
     "pipeline:materialize-official": "tsx scripts/ingestion/materialize-official-entities.ts",
     "data:build-double-first-class-coverage": "tsx scripts/ingestion/build-public-double-first-class-coverage.ts",

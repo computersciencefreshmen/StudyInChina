@@ -1,7 +1,47 @@
 import { expect, test } from '@playwright/test'
+import admissionCycles from '../../content/data/admission-cycles.json'
+import cities from '../../content/data/cities.json'
+import programs from '../../content/data/programs.json'
+import scholarships from '../../content/data/scholarships.json'
+import sources from '../../content/data/sources.json'
+import universities from '../../content/data/universities.json'
+import { getApplicationState, selectAdmissionCycle } from '../../src/lib/data/admission'
+import { getTodayDate } from '../../src/lib/data/freshness'
+import { selectPublishedData } from '../../src/lib/data/publication'
+import { bundleSchema } from '../../src/lib/data/schema'
+import { isIndexableProgram } from '../../src/lib/seo/indexability'
 
 const locales = ['en', 'zh', 'ru', 'de', 'fr', 'es'] as const
 const coreRoutes = ['', 'universities', 'programs', 'scholarships', 'cities', 'guides'] as const
+const TODAY = getTodayDate()
+const publicData = selectPublishedData(bundleSchema.parse({
+  admissionCycles,
+  cities,
+  programs,
+  scholarships,
+  sources,
+  universities,
+}), TODAY)
+const freshCompleteFixture = publicData.programs
+  .flatMap((program) => {
+    const cycle = selectAdmissionCycle(publicData.admissionCycles, program.id, TODAY)
+    return cycle && isIndexableProgram(program, publicData.admissionCycles, TODAY)
+      ? [{ program, cycle, applicationState: getApplicationState(cycle, TODAY) }]
+      : []
+  })
+  .sort((left, right) => {
+    const leftAccepting = left.applicationState === 'open' || left.applicationState === 'rolling'
+    const rightAccepting = right.applicationState === 'open' || right.applicationState === 'rolling'
+    const leftFreshThrough = left.program.reviewAfter.localeCompare(left.cycle.reviewAfter) < 0
+      ? left.program.reviewAfter
+      : left.cycle.reviewAfter
+    const rightFreshThrough = right.program.reviewAfter.localeCompare(right.cycle.reviewAfter) < 0
+      ? right.program.reviewAfter
+      : right.cycle.reviewAfter
+    return Number(leftAccepting) - Number(rightAccepting)
+      || rightFreshThrough.localeCompare(leftFreshThrough)
+      || left.program.slug.localeCompare(right.program.slug)
+  })[0]
 
 for (const locale of locales) {
   test(`${locale} core routes render inside the localized shell`, async ({ page }) => {
@@ -33,10 +73,15 @@ test('the root route redirects using the accepted launch language', async ({ bro
 })
 
 test('the skip link moves keyboard focus into the main content', async ({ page }) => {
-  await page.goto('/en', { waitUntil: 'domcontentloaded' })
+  await page.goto('/en', { waitUntil: 'networkidle' })
 
   const skipLink = page.locator('.atlas-skip-link')
   await expect(skipLink).toHaveCount(1)
+  await page.evaluate(() => {
+    document.body.tabIndex = -1
+    document.body.focus()
+    document.body.removeAttribute('tabindex')
+  })
   await page.keyboard.press('Tab')
   await expect(skipLink).toBeFocused()
   await page.keyboard.press('Enter')
@@ -120,29 +165,48 @@ test('a thin verified program stays reachable but is excluded from search indexi
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
 })
 
-test('a complete program page exposes facts and a conservative official route', async ({ page }) => {
+test('a stale program identity remains reachable while expired dynamic facts are withheld', async ({ page }) => {
   const response = await page.goto('/en/programs/shanghai-jiao-tong-university-chinese-language-program-language', { waitUntil: 'domcontentloaded' })
 
   expect(response?.ok()).toBe(true)
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Long-term Chinese Language Course')
-  await expect(page.getByRole('heading', { name: 'Curriculum highlights' })).toBeVisible()
-  await expect(page.getByRole('heading', { name: 'Eligibility' })).toBeVisible()
-  await expect(page.getByRole('heading', { name: 'Application materials' })).toBeVisible()
+  await expect(page.getByText(/Needs review/).first()).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Curriculum highlights', exact: true })).toHaveCount(0)
+  await expect(page.getByRole('heading', { name: 'Eligibility', exact: true })).toHaveCount(0)
+  await expect(page.getByRole('heading', { name: 'Application materials', exact: true })).toHaveCount(0)
+  await expect(page.getByText('Opening soon', { exact: true })).toHaveCount(0)
+  await expect(page.getByText('Dec 15, 2026', { exact: true })).toHaveCount(0)
   await expect(page.getByRole('link', { name: /Official source/ }).first()).toHaveAttribute('href', /ichinese\.sjtu\.edu\.cn/)
   await expect(page.getByRole('link', { name: /Apply on official site/ })).toHaveCount(0)
-  await expect(page.locator('meta[name="robots"]')).toHaveCount(0)
-  await expect(page.locator('a[href="https://ichinese.sjtu.edu.cn/en/programs/10/detail"]')).toHaveAttribute('href', /ichinese\.sjtu\.edu\.cn/)
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
 })
 
-test('a multi-cycle program promotes the next upcoming intake', async ({ page }) => {
-  const response = await page.goto('/en/programs/shanghai-jiao-tong-university-chinese-language-program-language', { waitUntil: 'domcontentloaded' })
+test('a fresh complete program exposes grounded details and a state-aware official route', async ({ page }) => {
+  expect(freshCompleteFixture, 'at least one fresh complete program must remain public').toBeDefined()
+  if (!freshCompleteFixture) return
+
+  const { program, cycle, applicationState } = freshCompleteFixture
+  expect(program.name.en, program.id).toBeTruthy()
+  const response = await page.goto(`/en/programs/${program.slug}`, { waitUntil: 'domcontentloaded' })
 
   expect(response?.ok()).toBe(true)
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Long-term Chinese Language Course')
-  await expect(page.getByText('Opening soon', { exact: true }).first()).toBeVisible()
-  await expect(page.getByText('Dec 15, 2026', { exact: true }).first()).toBeVisible()
-  await expect(page.getByRole('link', { name: /Apply on official site/ })).toHaveCount(0)
-  await expect(page.getByRole('link', { name: /Official source/ }).first()).toHaveAttribute('href', /ichinese\.sjtu\.edu\.cn/)
+  await expect(page.getByRole('heading', { level: 1 })).toContainText(program.name.en ?? '')
+  await expect(page.getByRole('heading', { name: 'Curriculum highlights', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Eligibility', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Application materials', exact: true })).toBeVisible()
+  await expect(page.locator('meta[name="robots"]')).toHaveCount(0)
+  await expect(page.getByRole('link', { name: /Official source/ }).first())
+    .toHaveAttribute('href', program.programUrl)
+  if (cycle.closesOn) {
+    await expect(page.locator(`time[datetime="${cycle.closesOn}"]`).first()).toBeVisible()
+  }
+
+  if ((applicationState === 'open' || applicationState === 'rolling') && program.applyUrl) {
+    await expect(page.getByRole('link', { name: /Apply on official site/ }).first())
+      .toHaveAttribute('href', program.applyUrl)
+  } else {
+    await expect(page.getByRole('link', { name: /Apply on official site/ })).toHaveCount(0)
+  }
 })
 
 test('a future scholarship deadline does not claim that applications are already open', async ({ page }) => {

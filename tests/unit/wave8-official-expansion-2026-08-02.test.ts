@@ -11,6 +11,7 @@ import scholarships from '../../content/data/scholarships.json'
 import sources from '../../content/data/sources.json'
 import universities from '../../content/data/universities.json'
 import { findSemanticProgramDuplicates } from '../../scripts/quality/check-program-coverage'
+import { isWithinPostDeadlineGrace } from '../../src/lib/data/freshness'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
 
@@ -63,11 +64,11 @@ describe('official catalog expansion wave 8 on 2026-08-02', () => {
     expect(published.programs.length).toBeGreaterThanOrEqual(845)
   })
 
-  it('materializes every non-duplicate candidate and excludes stale scholarships', () => {
+  it('materializes every non-duplicate candidate and safely redacts stale scholarship identities', () => {
     const programIds = new Set(data.programs.map((item) => item.id))
     const scholarshipById = new Map(data.scholarships.map((item) => [item.id, item]))
-    const currentScholarshipIds = new Set(
-      selectPublishedData(data, CURRENT_PUBLICATION_DATE).scholarships.map((item) => item.id),
+    const currentScholarshipById = new Map(
+      selectPublishedData(data, CURRENT_PUBLICATION_DATE).scholarships.map((item) => [item.id, item]),
     )
 
     for (const candidate of programCandidates) {
@@ -77,10 +78,37 @@ describe('official catalog expansion wave 8 on 2026-08-02', () => {
       const scholarshipId = `sch-gap-${candidate.candidateId}`
       const scholarship = scholarshipById.get(scholarshipId)
       expect(scholarship, candidate.candidateId).toBeDefined()
-      if (scholarship?.status === 'stale') {
-        expect(currentScholarshipIds.has(scholarshipId), candidate.candidateId).toBe(false)
+      if (!scholarship) continue
+
+      const publishedScholarship = currentScholarshipById.get(scholarshipId)
+      if (!isWithinPostDeadlineGrace(scholarship.deadline, CURRENT_PUBLICATION_DATE)) {
+        expect(publishedScholarship, candidate.candidateId).toBeUndefined()
+        continue
+      }
+
+      expect(publishedScholarship, candidate.candidateId).toBeDefined()
+      if (scholarship.status === 'stale' || scholarship.reviewAfter < CURRENT_PUBLICATION_DATE) {
+        expect(publishedScholarship, candidate.candidateId).toMatchObject({
+          status: 'stale',
+          coverage: {
+            tuition: 'unknown',
+            accommodation: 'unknown',
+            insurance: 'unknown',
+            stipendCnyPerMonth: null,
+          },
+          deadline: null,
+          applicationUrl: null,
+          summary: null,
+        })
+        expect(publishedScholarship?.name, candidate.candidateId).toEqual(scholarship.name)
+        expect(publishedScholarship?.sourceIds, candidate.candidateId).toEqual(scholarship.sourceIds)
       } else {
-        expect(currentScholarshipIds.has(scholarshipId), candidate.candidateId).toBe(true)
+        expect(publishedScholarship?.status, candidate.candidateId).toBe('verified')
+        expect(
+          (publishedScholarship?.reviewAfter ?? '')
+            .localeCompare(CURRENT_PUBLICATION_DATE) >= 0,
+          candidate.candidateId,
+        ).toBe(true)
       }
     }
   })

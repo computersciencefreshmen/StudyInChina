@@ -66,7 +66,12 @@ describe('platform data-quality scorecard', () => {
       teachingLanguageCoveragePct: 66.67,
       requirementsCoveragePct: 33.33,
     })
-    expect(report.metrics.scholarships).toMatchObject({ universitiesCovered: 1, recordsWithDeadline: 1 })
+    expect(report.metrics.scholarships).toMatchObject({
+      identityRecords: 1,
+      freshRecords: 1,
+      universitiesCovered: 1,
+      recordsWithDeadline: 1,
+    })
     expect(report.metrics.cities).toEqual({ withCoordinates: 1, coordinateCoveragePct: 50 })
     expect(report.gates.allPassed).toBe(false)
     expect(JSON.stringify(data)).toBe(snapshot)
@@ -111,6 +116,21 @@ describe('platform data-quality scorecard', () => {
 
     expect(report.metrics.anomalies.verifiedOverdueRecords).toBe(1)
     expect(report.metrics.anomalies.publishedCyclesWithoutAnyDate).toBe(1)
+  })
+
+  it('does not count stale scholarship identities as fresh university coverage', () => {
+    const data = fixture()
+    data.scholarships[0].status = 'stale'
+
+    const report = buildPlatformDataQualityScorecard(data, [], { today: '2026-08-06' })
+
+    expect(report.metrics.publicRecords.scholarships).toBe(1)
+    expect(report.metrics.scholarships).toMatchObject({
+      identityRecords: 1,
+      freshRecords: 0,
+      universitiesCovered: 0,
+      recordsWithDeadline: 0,
+    })
   })
 
   it('parses strict and explicit output options and keeps console output concise', () => {

@@ -163,6 +163,33 @@ describe('decision-oriented cards', () => {
     expect(screen.getByText('截止日期已过')).toBeVisible()
     expect(screen.getByRole('link', { name: /官方申请入口/ })).toHaveClass('atlas-button--secondary')
   })
+
+  it('labels stale identities as needing review and suppresses application routes', () => {
+    const { rerender } = render(
+      <ProgramCard
+        program={{ ...program, status: 'stale' }}
+        cycle={openCycle}
+        locale="en"
+        messages={getMessages('en')}
+        today="2026-08-08"
+      />,
+    )
+
+    expect(screen.getAllByText('Needs review').length).toBeGreaterThan(0)
+    expect(screen.queryByRole('link', { name: /Apply on official site/ })).not.toBeInTheDocument()
+
+    rerender(
+      <ScholarshipCard
+        scholarship={{ ...scholarship, status: 'stale' }}
+        locale="en"
+        messages={getMessages('en')}
+        today="2026-08-08"
+      />,
+    )
+
+    expect(screen.getAllByText('Needs review').length).toBeGreaterThan(0)
+    expect(screen.queryByRole('link', { name: /Official application route/ })).not.toBeInTheDocument()
+  })
 })
 
 describe('ApplicationSummaryCard', () => {
