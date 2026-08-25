@@ -66,6 +66,7 @@ export default async function ScholarshipDetail({
   const copy = messages.scholarships
   const universityCoverage = formatUniversityCoverage(item.universityIds.length, locale, messages.common.all)
   const fundingHighlights = `${coverageLabel(item.coverage.tuition, locale)} · ${formatCny(item.coverage.stipendCnyPerMonth, locale, messages.common.unknown)}`
+  const isStaleIdentity = item.status === 'stale'
   const currentCycle = selectScholarshipCurrentCycle(item, getTodayDate())
   const deadlineLabels = {
     future: decisionCopy.deadlineAhead,
@@ -77,6 +78,8 @@ export default async function ScholarshipDetail({
     closed: 'neutral',
     'not-announced': 'warning',
   } as const
+  const deadlineLabel = isStaleIdentity ? messages.common.stale : deadlineLabels[currentCycle.deadlineState]
+  const deadlineTone = isStaleIdentity ? 'warning' as const : deadlineTones[currentCycle.deadlineState]
 
   return <>
     <PageHero
@@ -84,7 +87,7 @@ export default async function ScholarshipDetail({
       eyebrow={providerLabel(item.providerType, locale)}
       title={localize(item.name, locale)}
       description={localize(item.summary, locale)}
-      actions={item.applicationUrl ? (
+      actions={item.status === 'verified' && item.applicationUrl ? (
         <a
           className="atlas-button atlas-button--secondary atlas-button--medium"
           href={item.applicationUrl}
@@ -155,7 +158,7 @@ export default async function ScholarshipDetail({
         <ApplicationSummaryCard
           eyebrow={providerLabel(item.providerType, locale)}
           title={decisionCopy.fundingSnapshot}
-          status={<Badge tone={deadlineTones[currentCycle.deadlineState]} dot>{deadlineLabels[currentCycle.deadlineState]}</Badge>}
+          status={<Badge tone={deadlineTone} dot>{deadlineLabel}</Badge>}
           accent="none"
           facts={[
             { label: messages.common.deadline, value: currentCycle.deadline
@@ -167,7 +170,7 @@ export default async function ScholarshipDetail({
             { label: messages.common.lastVerified, value: formatDate(lastSourceCheckedAt, locale, '—') },
           ]}
           notice={decisionCopy.verifiedFactsOnly}
-          actions={item.applicationUrl
+          actions={item.status === 'verified' && item.applicationUrl
             ? <a className="atlas-button atlas-button--secondary atlas-button--small" href={item.applicationUrl} target="_blank" rel="noreferrer">
                 {decisionCopy.officialApplicationRoute} ↗
               </a>

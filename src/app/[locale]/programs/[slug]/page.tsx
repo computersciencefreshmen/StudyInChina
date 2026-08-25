@@ -88,6 +88,10 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
       'not-announced': 'warning',
       'previous-cycle': 'neutral',
     } as const
+    const partialApplicationStateLabel = program.status === 'stale'
+      ? messages.common.stale
+      : partialApplicationStateLabels[partialApplicationState]
+    const partialApplicationStateTone = program.status === 'stale' ? 'warning' as const : partialApplicationStateTones[partialApplicationState]
     const partialTuitionPeriodLabels = {
       program: messages.programs.tuitionProgram,
       semester: messages.programs.tuitionSemester,
@@ -106,7 +110,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
     const partialApplicationFee = cycle?.applicationFeeCny == null
       ? messages.common.unknown
       : `${formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)}${cycle.tuitionStatus === 'reference' ? ` · ${messages.programs.tuitionReference}` : ''}`
-    const partialCanApply = (partialApplicationState === 'open' || partialApplicationState === 'rolling')
+    const partialCanApply = program.status === 'verified' && (partialApplicationState === 'open' || partialApplicationState === 'rolling')
       && Boolean(program.applyUrl)
     return <>
       <PageHero
@@ -146,7 +150,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
               <div><dt>{messages.common.language}</dt><dd>{program.teachingLanguages.length
                 ? program.teachingLanguages.map((item) => languageLabel(item, locale)).join(', ')
                 : messages.common.unknown}</dd></div>
-              <div><dt>{messages.programs.applicationStatus}</dt><dd>{partialApplicationStateLabels[partialApplicationState]}</dd></div>
+              <div><dt>{messages.programs.applicationStatus}</dt><dd>{partialApplicationStateLabel}</dd></div>
               <div><dt>{messages.programs.opens}</dt><dd>{formatDate(cycle?.opensOn ?? null, locale, messages.common.unknown)}</dd></div>
               <div><dt>{messages.common.deadline}</dt><dd>{formatDate(cycle?.closesOn ?? null, locale, messages.common.unknown)}</dd></div>
               <div><dt>{messages.common.tuition}</dt><dd>{partialTuition}</dd></div>
@@ -158,7 +162,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
           <ApplicationSummaryCard
             eyebrow={degreeLabels(locale)[program.degreeLevel]}
             title={decisionCopy.applicationSnapshot}
-            status={<Badge tone={partialApplicationStateTones[partialApplicationState]} dot>{partialApplicationStateLabels[partialApplicationState]}</Badge>}
+            status={<Badge tone={partialApplicationStateTone} dot>{partialApplicationStateLabel}</Badge>}
             accent={partialCanApply ? 'jade' : 'none'}
             facts={[
               { label: decisionCopy.currentCycle, value: cycle?.academicYear ?? messages.common.unknown },
@@ -216,7 +220,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
     'previous-cycle': 'neutral',
   } as const
   const applicationStateLabel = applicationStateLabels[applicationState]
-  const isAcceptingApplications = applicationState === 'open' || applicationState === 'rolling'
+  const isAcceptingApplications = program.status === 'verified' && (applicationState === 'open' || applicationState === 'rolling')
 
   const intakeLabels = {
     spring: messages.programs.springIntake,

@@ -15,7 +15,7 @@ const cycleById = new Map(data.admissionCycles.map((record) => [record.id, recor
 const scholarshipById = new Map(data.scholarships.map((record) => [record.id, record]))
 const sourceById = new Map(data.sources.map((record) => [record.id, record]))
 
-describe('2026-08-10 freshness reverification wave', () => {
+describe('2026-08-10 freshness evidence after safe expiry rollover', () => {
   it('records a live check for every accepted official source', () => {
     const sourceIds = [
       'src-gov-clec',
@@ -53,13 +53,18 @@ describe('2026-08-10 freshness reverification wave', () => {
       reviewAfter: '2026-08-13',
       status: 'stale',
     })
-    expect(scholarship).toMatchObject({ deadline: '2026-09-09', reviewAfter: '2026-08-13' })
+    expect(scholarship).toMatchObject({
+      deadline: '2026-09-09',
+      verifiedAt: TODAY,
+      reviewAfter: '2026-08-13',
+      status: 'stale',
+    })
     expect(program?.languageRequirements[0]?.minimum).toContain('IELTS 7')
     expect(program?.details?.applicationMaterials[1]?.en).toContain('not required')
     expect(program?.details?.applicationMaterials[1]?.en).not.toContain('required video')
   })
 
-  it('publishes Soochow fees and restores the current spring scholarship route', () => {
+  it('retains Soochow facts while safely downgrading evidence after review expiry', () => {
     for (const id of [
       'cycle-gap-mve-jzh-suda-long-chinese-year-2026-2027-autumn',
       'cycle-gap-mve-jzh-suda-long-chinese-semester-2026-2027-autumn',
@@ -69,28 +74,36 @@ describe('2026-08-10 freshness reverification wave', () => {
         factScope: 'complete',
         verifiedAt: TODAY,
         reviewAfter: '2026-08-17',
+        status: 'stale',
       })
     }
 
     expect(cycleById.get('cycle-2026-a6e5661b86ff')).toMatchObject({
       closesOn: '2026-10-31',
-      status: 'verified',
+      status: 'stale',
       verifiedAt: TODAY,
       reviewAfter: '2026-08-17',
     })
 
     const scholarship = scholarshipById.get('sch-gap-mve-jzh-suda-iclt-scholarship')
+    expect(scholarship).toMatchObject({
+      deadline: '2026-10-31',
+      verifiedAt: TODAY,
+      reviewAfter: '2026-08-17',
+      status: 'stale',
+    })
     expect(scholarship?.programIds).toContain('program-soochow-university-international-chinese-language-teachers-scholarship-o')
     expect(scholarship?.sourceIds).toContain('src-gov-clec')
     expect(scholarship?.coverage).toMatchObject({ tuition: 'full', accommodation: 'full', insurance: true })
   })
 
-  it('publishes only directly supported SCAU and ZUST facts', () => {
+  it('retains directly supported SCAU and ZUST facts with expired evidence marked stale', () => {
     const scau = scholarshipById.get('sch-gap-mew-csw-scau-guangdong-government-scholarship-2026')
     expect(scau).toMatchObject({
       deadline: '2026-09-01',
       verifiedAt: TODAY,
       reviewAfter: '2026-08-13',
+      status: 'stale',
     })
     expect(scau?.summary?.en).toContain('CNY 30,000')
 
@@ -99,6 +112,7 @@ describe('2026-08-10 freshness reverification wave', () => {
       deadline: '2026-10-31',
       verifiedAt: TODAY,
       reviewAfter: '2026-08-17',
+      status: 'stale',
     })
     expect(zustScholarship?.coverage).toMatchObject({ tuition: 'full', accommodation: 'full', insurance: true })
     expect(programById.get('prog-gap-mve-jzh-zust-iclt-master')?.languageRequirements[0]?.minimum).toContain('HSKK Intermediate: 60')

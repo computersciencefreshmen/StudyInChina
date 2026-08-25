@@ -102,10 +102,28 @@ describe('verified broad university expansion on 2026-07-29', () => {
     })
   })
 
-  it('broadens verified coverage across Double First-Class and local strong universities', () => {
-    expect(published.scholarships.some(
+  it('broadens verified coverage while retaining only the safe stale scholarship identity', () => {
+    const sourceScholarship = data.scholarships.find(
       (scholarship) => scholarship.id === 'scholarship-schwarzman-scholars-2027',
-    )).toBe(false)
+    )
+    const publishedScholarship = published.scholarships.find(
+      (scholarship) => scholarship.id === 'scholarship-schwarzman-scholars-2027',
+    )
+    expect(sourceScholarship).toBeDefined()
+    expect(publishedScholarship).toMatchObject({
+      status: 'stale',
+      coverage: {
+        tuition: 'unknown',
+        accommodation: 'unknown',
+        insurance: 'unknown',
+        stipendCnyPerMonth: null,
+      },
+      deadline: null,
+      applicationUrl: null,
+      summary: null,
+    })
+    expect(publishedScholarship?.name).toEqual(sourceScholarship?.name)
+    expect(publishedScholarship?.sourceIds).toEqual(sourceScholarship?.sourceIds)
     expect(published.universities.length).toBeGreaterThanOrEqual(200)
     expect(published.programs.length).toBeGreaterThanOrEqual(400)
 

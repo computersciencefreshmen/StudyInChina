@@ -38,12 +38,12 @@ The product is built around three promises:
 
 <div align="center">
 
-| **266** universities | **1,234** program identities | **360** scholarship identities | **62** cities |
+| **266** universities | **1,245** program identities | **364** scholarship identities | **62** cities |
 | :------------------: | :--------------------------: | :----------------------------: | :-----------: |
 
 </div>
 
-The public identity catalogue contains **52 published cycle or fee-reference records** and is backed by **2,070 registered official source records**. It deliberately retains verified and stale identities as official discovery paths, so its counts differ from the stricter fresh-data scorecard below. A published record is not automatically an open application window; the decision-oriented metrics are evaluated for **2026-08-17** with `npm run quality:platform-scorecard`.
+The public identity catalogue contains **37 current published-cycle records** and is backed by **2,078 registered official source records**. It deliberately retains verified and stale identities as official discovery paths, so its counts differ from the stricter fresh-data scorecard below. Only **6** of those program cycles are open, upcoming or rolling on the evaluation date; a published record is not automatically an open application window. The decision-oriented metrics are evaluated for **2026-08-25** with `npm run quality:platform-scorecard`.
 
 <details>
 <summary><strong>Open the honest data-depth scorecard</strong></summary>
@@ -52,16 +52,17 @@ Record count is not the same as record completeness. This stricter scorecard mea
 
 | Quality indicator                                       |           Current baseline |       Next gate |
 | ------------------------------------------------------- | -------------------------: | --------------: |
-| Universities below three published programs             |                      **8** |               0 |
-| Freshly verified international-program identities       | 1,233 / 1,234 · **99.92%** |    Restore 100% |
-| Programs with a fresh 30-day disposition                |     49 / 1,233 · **3.97%** |           ≥ 70% |
-| Programs with dated or rolling admissions               |     49 / 1,233 · **3.97%** | Report honestly |
-| Programs open or upcoming on the evaluation date        |     10 / 1,233 · **0.81%** | Report honestly |
-| Programs with duration                                  |                 **61.64%** |           ≥ 90% |
-| Programs with an official application route             |                 **50.85%** |           ≥ 80% |
-| Programs with known teaching language                   |                 **85.08%** |           ≥ 95% |
-| Programs with eligibility/language evidence             |                  **6.16%** |           ≥ 50% |
-| Universities connected to freshly verified scholarships |                  204 / 266 |           ≥ 230 |
+| Universities below three published programs             | **3** · 1 documented `limited` | 0 unresolved |
+| Freshly verified international-program identities       | 1,239 / 1,245 · **99.52%** |    Restore 100% |
+| Programs with a fresh 30-day disposition                |     37 / 1,245 · **2.97%** |           ≥ 70% |
+| Programs with dated or rolling admissions               |     37 / 1,245 · **2.97%** | Report honestly |
+| Programs open or upcoming on the evaluation date        |      6 / 1,245 · **0.48%** | Report honestly |
+| Programs with duration                                  |    765 / 1,245 · **61.45%** |           ≥ 90% |
+| Programs with an official application route             |    630 / 1,245 · **50.60%** |           ≥ 80% |
+| Programs with known teaching language                   |  1,055 / 1,245 · **84.74%** |           ≥ 95% |
+| Programs with eligibility/language evidence             |      76 / 1,245 · **6.10%** |           ≥ 50% |
+| Universities connected to freshly verified scholarships |     205 / 266 · **77.07%** |           ≥ 230 |
+| Fresh scholarships with an explicit deadline            |      37 / 348 · **10.63%** | Improve with current cycles |
 | Cities with reviewed coordinates                        |                    27 / 62 |         62 / 62 |
 | Source Manifests registered                             |                   10 / 266 |       266 / 266 |
 | Completed V2 Source Manifests                           |                    0 / 266 |       266 / 266 |
@@ -69,9 +70,9 @@ Record count is not the same as record completeness. This stricter scorecard mea
 | Verified records overdue for review                     |                      **0** |               0 |
 | Platform quality gates passing                          |                     3 / 14 |         14 / 14 |
 
-The raw compatibility dataset contains 272 universities, 1,255 programs and 384 scholarships. Draft, archived, identity-conflicting or publication-ineligible records are intentionally excluded from the public numbers above.
+The raw compatibility dataset contains 272 universities, 1,266 programs and 388 scholarships. Draft, archived, identity-conflicting or publication-ineligible records are intentionally excluded from the public numbers above.
 
-The public Release API reports the wider 1,234-program / 360-scholarship identity catalogue; the scorecard intentionally reports the smaller fresh-verification subset. Do not substitute one metric for the other.
+The public Release API reports the wider 1,245-program / 364-scholarship identity catalogue; the scorecard intentionally reports the smaller fresh-verification subset. Do not substitute one metric for the other.
 
 </details>
 
@@ -87,7 +88,7 @@ The current release moves the project from a large static directory toward a mea
 - the `raw-v1` backup format, checksum/readback path and isolated restore procedure have been exercised locally in **101.198 seconds** with zero foreign-key violations; a production RPO/RTO claim waits for dedicated credentials and verified R2 checkpoints;
 - Catalog remains on the JSON compatibility backend while D1 Shadow parity, remote credential proof and production rollback evidence remain explicit cutover gates.
 
-This milestone deliberately exposes the freshness gap: a fact becoming stale reduces the public count instead of silently remaining visible. That makes the lower current figures a trustworthy operational signal, not a regression hidden by optimistic counting.
+This milestone deliberately exposes the freshness gap while preserving catalogue continuity: a confirmed identity can remain discoverable, but stale deadlines, fees, requirements, funding and application routes are withheld. Freshness metrics therefore fall honestly without breaking stable discovery links or presenting expired facts as current.
 
 ### Operational status: implemented versus proven
 
@@ -319,11 +320,11 @@ flowchart LR
 
 Near-term work is measured by:
 
-- raising the remaining 8 sparse universities to 3–5 verified international-student programs or a documented `limited` reconciliation;
-- increasing fresh-disposition coverage from 3.97% to at least 70%, without counting date-free fee references as application cycles;
+- resolving the two remaining expansion targets—Hunan University of Technology and Business and Zhejiang University—while retaining Tibet University as a documented `limited` official catalogue rather than padding it with unsupported identities;
+- increasing fresh-disposition coverage from 2.97% to at least 70%, without counting date-free fee references as application cycles;
 - reaching the six-week gates of 75% duration, 65% official application-route, 90% teaching-language and 25% requirements coverage;
 - continuing after that toward the expansion gates of 90% duration, 80% application-route, 95% teaching-language and 50% requirements coverage;
-- expanding scholarship-connected institutions from 204 to at least 230;
+- expanding institutions connected to freshly verified scholarships from 205 to at least 230;
 - completing 266 Source Manifests and 266 catalogue reconciliations;
 - completing three matching shadow releases over at least 72 hours before Production switches to D1;
 - passing two full monthly update cycles before expansion to 500, then 1,000+ institutions.

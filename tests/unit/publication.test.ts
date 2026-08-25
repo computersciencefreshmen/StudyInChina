@@ -82,7 +82,7 @@ describe('production publication policy', () => {
       (program) => program.verificationScope === 'identity' || program.verificationScope === 'facts',
     ).length).toBeGreaterThanOrEqual(240)
     expect(published.programs.every(
-      (program) => program.status === 'verified',
+      (program) => program.status === 'verified' || program.status === 'stale',
     )).toBe(true)
   })
 
@@ -117,7 +117,40 @@ describe('production publication policy', () => {
     expect(fixture.cities[0].status).toBe('verified')
   })
 
-  it.each(['stale', 'draft', 'archived'] as const)('excludes %s dynamic records', (status) => {
+  it('keeps stale identities discoverable while masking stale decision facts', () => {
+    const fixture = publicationFixture()
+    fixture.programs[0] = { ...fixture.programs[0], status: 'stale' }
+    fixture.admissionCycles[0] = { ...fixture.admissionCycles[0], status: 'stale' }
+    fixture.scholarships[0] = { ...fixture.scholarships[0], status: 'stale' }
+
+    const result = selectPublishedData(fixture, TODAY)
+
+    expect(result.programs).toHaveLength(1)
+    expect(result.programs[0]).toMatchObject({
+      status: 'stale',
+      teachingLanguages: [],
+      durationMonths: null,
+      applyUrl: null,
+      languageRequirements: [],
+      verificationScope: 'identity',
+    })
+    expect(result.admissionCycles).toHaveLength(0)
+    expect(result.scholarships).toHaveLength(1)
+    expect(result.scholarships[0]).toMatchObject({
+      status: 'stale',
+      deadline: null,
+      applicationUrl: null,
+      summary: null,
+      coverage: {
+        tuition: 'unknown',
+        accommodation: 'unknown',
+        insurance: 'unknown',
+        stipendCnyPerMonth: null,
+      },
+    })
+  })
+
+  it.each(['draft', 'archived'] as const)('excludes %s identities and dynamic records', (status) => {
     const fixture = publicationFixture()
     fixture.programs[0] = { ...fixture.programs[0], status }
     fixture.admissionCycles[0] = { ...fixture.admissionCycles[0], status }
@@ -130,7 +163,7 @@ describe('production publication policy', () => {
     expect(result.scholarships).toHaveLength(0)
   })
 
-  it('excludes overdue dynamic facts and cascades program removal to admission cycles', () => {
+  it('keeps overdue identities but excludes overdue dynamic facts', () => {
     const fixture = publicationFixture()
     fixture.programs[0] = { ...fixture.programs[0], reviewAfter: '2026-07-18' }
     fixture.admissionCycles[0] = { ...fixture.admissionCycles[0], reviewAfter: '2026-07-18' }
@@ -138,14 +171,18 @@ describe('production publication policy', () => {
 
     const result = selectPublishedData(fixture, TODAY)
 
-    expect(result.programs).toHaveLength(0)
+    expect(result.programs).toHaveLength(1)
+    expect(result.programs[0].status).toBe('stale')
+    expect(result.programs[0].durationMonths).toBeNull()
     expect(result.admissionCycles).toHaveLength(0)
-    expect(result.scholarships).toHaveLength(0)
+    expect(result.scholarships).toHaveLength(1)
+    expect(result.scholarships[0].status).toBe('stale')
+    expect(result.scholarships[0].deadline).toBeNull()
   })
 
   it('cascades a hidden parent program even when its admission cycle is otherwise current', () => {
     const fixture = publicationFixture()
-    fixture.programs[0] = { ...fixture.programs[0], status: 'stale' }
+    fixture.programs[0] = { ...fixture.programs[0], status: 'draft' }
 
     const result = selectPublishedData(fixture, TODAY)
 

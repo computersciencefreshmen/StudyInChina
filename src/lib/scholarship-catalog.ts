@@ -295,8 +295,12 @@ export function queryScholarshipCatalog(
         item.slug === filters.institution || item.id === filters.institution
       )))
       && (!filters.degree || programs.some((item) => item.degreeLevel === filters.degree))
-      && matchesFunding(scholarship, filters.funding)
-      && matchesDeadline(currentCycle, filters.deadline, today)
+      && (!filters.funding || (
+        scholarship.status === 'verified' && matchesFunding(scholarship, filters.funding)
+      ))
+      && (!filters.deadline || (
+        scholarship.status === 'verified' && matchesDeadline(currentCycle, filters.deadline, today)
+      ))
 
     return matches ? [{ scholarship, universities, programs, currentCycle }] : []
   })

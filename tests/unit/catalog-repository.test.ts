@@ -99,6 +99,20 @@ describe('CatalogRepository', () => {
     ))).toBe(true)
   })
 
+  it('does not use stale scholarship relationships for the linked-program filter', async () => {
+    const bundle = copyBundle()
+    bundle.scholarships = bundle.scholarships.map((item) => ({ ...item, status: 'stale' }))
+    const repository = createJsonCatalogRepository(() => bundle)
+
+    const linked = await repository.listPrograms({
+      scholarship: 'linked',
+      today: '2026-08-25',
+      limit: 100,
+    })
+
+    expect(linked.total).toBe(0)
+  })
+
   it('reads the internal D1 Catalog API envelope with an optional bearer token', async () => {
     const fetcher = successfulFetch()
     const repository = createD1CatalogRepository({

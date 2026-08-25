@@ -74,6 +74,25 @@ describe('server-side scholarship catalogue', () => {
     })
   })
 
+  it('keeps stale identities browseable without treating masked facts as not announced', () => {
+    const staleScholarship = {
+      ...data.scholarships[0],
+      status: 'stale' as const,
+      deadline: null,
+      coverage: {
+        tuition: 'unknown' as const,
+        accommodation: 'unknown' as const,
+        insurance: 'unknown' as const,
+        stipendCnyPerMonth: null,
+      },
+    }
+    const fixture = { ...data, scholarships: [staleScholarship] }
+
+    expect(queryScholarshipCatalog(fixture, parseScholarshipCatalogFilters({}), '2026-08-25').total).toBe(1)
+    expect(queryScholarshipCatalog(fixture, parseScholarshipCatalogFilters({ deadline: 'not-announced' }), '2026-08-25').total).toBe(0)
+    expect(queryScholarshipCatalog(fixture, parseScholarshipCatalogFilters({ funding: 'full-tuition' }), '2026-08-25').total).toBe(0)
+  })
+
   it('preserves shareable filters while changing pages', () => {
     const filters = parseScholarshipCatalogFilters({
       q: 'government',
