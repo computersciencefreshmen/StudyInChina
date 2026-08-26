@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { Badge, Card, PageHero } from '@/components/ui'
 import { getMessages } from '@/i18n/messages'
+import { getReleaseAnnouncement } from '@/i18n/release-announcement'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -13,10 +14,17 @@ export default async function UpdatesPage({ params }: { params: Promise<{ locale
   const locale = requireLocale((await params).locale)
   if (!locale) notFound()
   const copy = getMessages(locale).updates
+  const announcement = getReleaseAnnouncement(locale)
   return <>
     <PageHero variant="compact" eyebrow={copy.eyebrow} title={copy.title} description={copy.description} />
     <section className="atlas-container atlas-section">
       <div className="update-timeline">
+        <Card accent="jade">
+          <div className="record-card__top"><Badge tone="vermilion">{announcement.publishedOn}</Badge><Badge tone="jade">{copy.badge}</Badge></div>
+          <h2 className="atlas-card__title">{announcement.copy.title}</h2>
+          <p>{announcement.copy.summary}</p>
+          <ul>{announcement.copy.highlights.map((item) => <li key={item}>{item}</li>)}</ul>
+        </Card>
         <Card accent="vermilion">
           <div className="record-card__top"><Badge tone="vermilion">2026-07-20</Badge><Badge tone="jade">{copy.badge}</Badge></div>
           <h2 className="atlas-card__title">{copy.releaseTitle}</h2>

@@ -2,12 +2,15 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { ReleaseAnnouncement } from '@/components/features/ReleaseAnnouncement'
 import { SiteFooter } from '@/components/layout'
 import { AppHeader } from '@/components/layout/AppHeader'
 import { localeDirection, launchLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
+import { getReleaseAnnouncement } from '@/i18n/release-announcement'
 import { formatDate } from '@/lib/data/format'
 import { getCatalogData } from '@/lib/data/load'
+import { selectPublishedData } from '@/lib/data/publication'
 import { getDataReleaseDate } from '@/lib/data/release'
 import { requireLocale, siteUrl } from '@/lib/site'
 import '../globals.css'
@@ -30,12 +33,25 @@ export default async function LocaleLayout({ children, params }: Readonly<{ chil
   const locale = requireLocale((await params).locale)
   if (!locale) notFound()
   const messages = getMessages(locale)
-  const releaseDate = formatDate(getDataReleaseDate(await getCatalogData()), locale, '—')
+  const catalog = await getCatalogData()
+  const publicCatalog = selectPublishedData(catalog)
+  const releaseDate = formatDate(getDataReleaseDate(catalog), locale, '—')
   const releaseLabel = `${messages.shell.dataRelease}: ${releaseDate}`
+  const announcement = getReleaseAnnouncement(locale)
 
   return <html lang={locale} dir={localeDirection(locale)}>
     <body>
       <AppHeader locale={locale} />
+      <ReleaseAnnouncement
+        locale={locale}
+        announcement={announcement}
+        dataReleaseDate={releaseDate}
+        stats={{
+          universities: publicCatalog.universities.length,
+          programs: publicCatalog.programs.length,
+          scholarships: publicCatalog.scholarships.length,
+        }}
+      />
       <main id="main-content" className="atlas-main" tabIndex={-1}>{children}</main>
       <SiteFooter
         locale={locale}
