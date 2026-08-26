@@ -1,23 +1,6 @@
 import { createHash } from 'node:crypto'
-import {
-  lstat,
-  mkdir,
-  readFile,
-  realpath,
-  rename,
-  rm,
-  writeFile,
-} from 'node:fs/promises'
-import {
-  basename,
-  dirname,
-  extname,
-  isAbsolute,
-  join,
-  relative,
-  resolve,
-  sep,
-} from 'node:path'
+import { lstat, mkdir, readFile, realpath, rename, rm, writeFile } from 'node:fs/promises'
+import { basename, dirname, extname, isAbsolute, join, relative, resolve, sep } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
 import {
@@ -36,10 +19,7 @@ import {
   type ZjuDegreeLevel,
   type ZjuInstructionLanguage,
 } from './zju-pdf-catalog-harvester'
-import {
-  harvestPkuCatalogDirectory,
-  parsePkuCatalogIndexHtml,
-} from './pku-pdf-catalog-harvester'
+import { harvestPkuCatalogDirectory, parsePkuCatalogIndexHtml } from './pku-pdf-catalog-harvester'
 import {
   DEFAULT_SCHOLARSHIP_INDEX_SOURCES,
   SCHOLARSHIP_HARVESTER_USER_AGENT,
@@ -105,7 +85,6 @@ export type MaterializationSourceArtifact = RegisteredAsset & {
   provenanceStatus: 'complete'
 }
 
-
 export type DependencySourceArtifact = RegisteredAsset & {
   dependencyId: string
   role: 'dependency'
@@ -130,6 +109,25 @@ export type HarvestGate = {
   passed: boolean
   reasons: string[]
   requiredFailures: string[]
+}
+
+export type HarvestSourceSettlement = {
+  status: 'complete' | 'partial' | 'blocked'
+  publicationEligible: boolean
+  catalogSources: Array<{
+    sourceId: string
+    kind: Exclude<SourceKind, 'dependency'>
+    harvestPath: string
+    verified: number
+    sourceArtifacts: number
+  }>
+  dependencySourceIds: string[]
+  quarantinedSources: Array<{
+    sourceId: string
+    kind: SourceKind
+    status: HarvestSourceStatus
+    reason: string
+  }>
 }
 
 export type PriorityHarvestRunManifest = {
@@ -163,6 +161,7 @@ export type PriorityHarvestRunManifest = {
   }
   sources: HarvestSourceRun[]
   gate: HarvestGate
+  settlement: HarvestSourceSettlement
   provenanceStatus: 'complete' | 'incomplete'
   sourceArtifacts: MaterializationSourceArtifact[]
   dependencyArtifacts: DependencySourceArtifact[]
@@ -451,7 +450,9 @@ function materializationCandidates(source: HarvestSourceRun): RegisteredAsset[] 
   if (source.kind === 'tsinghua_catalog') {
     candidates = source.sourceArtifacts.filter((asset) => asset.assetId.endsWith(':source-bundle'))
   } else if (source.kind === 'pku_pdf_directory') {
-    candidates = source.sourceArtifacts.filter((asset) => asset.localPath.toLowerCase().endsWith('.pdf'))
+    candidates = source.sourceArtifacts.filter((asset) =>
+      asset.localPath.toLowerCase().endsWith('.pdf'),
+    )
   } else {
     candidates = [...source.sourceArtifacts]
   }
@@ -482,8 +483,9 @@ export function buildMaterializationSourceArtifacts(
       })
     }
   }
-  return [...artifactsBySourceId.values()]
-    .sort((left, right) => left.sourceId.localeCompare(right.sourceId, 'en'))
+  return [...artifactsBySourceId.values()].sort((left, right) =>
+    left.sourceId.localeCompare(right.sourceId, 'en'),
+  )
 }
 
 export function buildDependencySourceArtifacts(
@@ -491,13 +493,78 @@ export function buildDependencySourceArtifacts(
 ): DependencySourceArtifact[] {
   return sources
     .filter((source) => source.kind === 'dependency' && source.status === 'verified')
-    .flatMap((source) => source.sourceArtifacts.map((artifact) => ({
-      ...artifact,
-      dependencyId: source.sourceId,
-      role: 'dependency' as const,
-      batchScope: 'dependency' as const,
-    })))
+    .flatMap((source) =>
+      source.sourceArtifacts.map((artifact) => ({
+        ...artifact,
+        dependencyId: source.sourceId,
+        role: 'dependency' as const,
+        batchScope: 'dependency' as const,
+      })),
+    )
     .sort((left, right) => left.dependencyId.localeCompare(right.dependencyId, 'en'))
+}
+export function buildHarvestSourceSettlement(
+  sources: readonly HarvestSourceRun[],
+  publicationEligible: boolean,
+): HarvestSourceSettlement {
+  const catalogSources: HarvestSourceSettlement['catalogSources'] = []
+  const dependencySourceIds: string[] = []
+  const quarantinedSources: HarvestSourceSettlement['quarantinedSources'] = []
+
+  for (const source of sources) {
+    if (source.kind === 'dependency') {
+      if (source.status === 'verified' && source.sourceArtifacts.length > 0) {
+        dependencySourceIds.push(source.sourceId)
+      } else {
+        quarantinedSources.push({
+          sourceId: source.sourceId,
+          kind: source.kind,
+          status: source.status,
+          reason: source.error ?? 'dependency_source_not_verified',
+        })
+      }
+      continue
+    }
+
+    const sourceArtifacts = buildMaterializationSourceArtifacts([source]).length
+    if (
+      source.status === 'verified' &&
+      source.verified > 0 &&
+      sourceArtifacts > 0 &&
+      source.harvestPath
+    ) {
+      catalogSources.push({
+        sourceId: source.sourceId,
+        kind: source.kind,
+        harvestPath: source.harvestPath,
+        verified: source.verified,
+        sourceArtifacts,
+      })
+      continue
+    }
+
+    quarantinedSources.push({
+      sourceId: source.sourceId,
+      kind: source.kind,
+      status: source.status,
+      reason:
+        source.error ??
+        (source.status === 'verified'
+          ? 'verified_source_has_no_pipeline_candidate'
+          : 'source_not_verified'),
+    })
+  }
+
+  catalogSources.sort((left, right) => left.sourceId.localeCompare(right.sourceId, 'en'))
+  dependencySourceIds.sort((left, right) => left.localeCompare(right, 'en'))
+  quarantinedSources.sort((left, right) => left.sourceId.localeCompare(right.sourceId, 'en'))
+  return {
+    status: publicationEligible ? 'complete' : catalogSources.length > 0 ? 'partial' : 'blocked',
+    publicationEligible,
+    catalogSources,
+    dependencySourceIds,
+    quarantinedSources,
+  }
 }
 
 function errorMessage(error: unknown): string {
@@ -586,9 +653,7 @@ export async function assertSafeHarvestOutputDirectory(
     resolve(repositoryRoot, 'artifacts', 'official-harvest'),
   ]
   if (!allowedRoots.some((root) => isPathWithin(root, outputDirectory))) {
-    throw new Error(
-      'Harvest output must be under .official-harvest or artifacts/official-harvest',
-    )
+    throw new Error('Harvest output must be under .official-harvest or artifacts/official-harvest')
   }
 
   const realRepositoryRoot = await realpath(repositoryRoot)
@@ -611,7 +676,6 @@ export async function assertSafeHarvestOutputDirectory(
     }
   }
 }
-
 
 type HashState = {
   format: typeof HASH_STATE_FORMAT
@@ -857,10 +921,7 @@ class OfficialHttpClient {
     return bytes
   }
 
-  private async ensureRobotsAllowed(
-    target: URL,
-    allowedHosts: readonly string[],
-  ): Promise<void> {
+  private async ensureRobotsAllowed(target: URL, allowedHosts: readonly string[]): Promise<void> {
     const cacheKey = target.origin
     if (!this.robotsBodies.has(cacheKey)) {
       const robotsUrl = new URL('/robots.txt', target)
@@ -880,11 +941,11 @@ class OfficialHttpClient {
       }
     }
     const robotsBody = this.robotsBodies.get(cacheKey)
-    if (robotsBody !== null && robotsBody !== undefined && !isRobotsPathAllowed(
-      robotsBody,
-      target,
-      USER_AGENT,
-    )) {
+    if (
+      robotsBody !== null &&
+      robotsBody !== undefined &&
+      !isRobotsPathAllowed(robotsBody, target, USER_AGENT)
+    ) {
       throw new Error(`robots.txt disallows ${target.pathname}`)
     }
   }
@@ -908,12 +969,10 @@ class OfficialHttpClient {
       },
     )
     if (!response.ok) throw new Error(`Official source returned HTTP ${response.status}`)
-    const contentType = response.headers.get('content-type')?.split(';', 1)[0]?.trim().toLowerCase()
-      || 'application/octet-stream'
-    const bytes = await this.readBounded(
-      response,
-      kind === 'pdf' ? MAX_PDF_BYTES : MAX_HTML_BYTES,
-    )
+    const contentType =
+      response.headers.get('content-type')?.split(';', 1)[0]?.trim().toLowerCase() ||
+      'application/octet-stream'
+    const bytes = await this.readBounded(response, kind === 'pdf' ? MAX_PDF_BYTES : MAX_HTML_BYTES)
     if (kind === 'pdf') {
       const signature = new TextDecoder('ascii').decode(bytes.slice(0, 5))
       if (signature !== '%PDF-') throw new Error('Official PDF response has no PDF signature')
@@ -927,10 +986,7 @@ class OfficialHttpClient {
     }
   }
 
-  fetcherFor(
-    allowedHosts: readonly string[],
-    enforceRobots: boolean,
-  ): FetchLike {
+  fetcherFor(allowedHosts: readonly string[], enforceRobots: boolean): FetchLike {
     return async (input, init) => {
       const url = input instanceof URL ? input : new URL(input)
       if (enforceRobots && url.pathname !== '/robots.txt') {
@@ -1082,7 +1138,11 @@ async function runTsinghuaSources(input: {
   for (const source of TSINGHUA_PRIORITY_SOURCES) {
     const sourceArtifacts: RegisteredAsset[] = []
     try {
-      const downloaded = await input.client.download(source.officialUrl, source.allowedHosts, 'html')
+      const downloaded = await input.client.download(
+        source.officialUrl,
+        source.allowedHosts,
+        'html',
+      )
       const asset = await input.store.saveAsset({
         assetId: `${source.id}:html`,
         officialUrl: downloaded.officialUrl,
@@ -1113,8 +1173,9 @@ async function runTsinghuaSources(input: {
           `Captured Tsinghua responses ${capturedResponses.size} do not match departments ${harvest.departments.length}`,
         )
       }
-      const responses = [...capturedResponses.values()]
-        .sort((left, right) => left.departmentCode.localeCompare(right.departmentCode, 'en'))
+      const responses = [...capturedResponses.values()].sort((left, right) =>
+        left.departmentCode.localeCompare(right.departmentCode, 'en'),
+      )
       if (
         responses.length === 0 ||
         responses.some((response) => response.httpStatus !== 200) ||
@@ -1144,19 +1205,17 @@ async function runTsinghuaSources(input: {
       if (bundleBytes.byteLength > MAX_PDF_BYTES) {
         throw new Error('Tsinghua API response bundle exceeds the byte limit')
       }
-      sourceArtifacts.push(await input.store.saveAsset({
-        assetId: `${source.id}:source-bundle`,
-        officialUrl: downloaded.officialUrl,
-        finalUrl: downloaded.finalUrl,
-        httpStatus: downloaded.httpStatus,
-        relativePath: join(
-          'raw',
-          'tsinghua',
-          `${source.id}-source-bundle.json`,
-        ),
-        contentType: 'application/json',
-        bytes: bundleBytes,
-      }))
+      sourceArtifacts.push(
+        await input.store.saveAsset({
+          assetId: `${source.id}:source-bundle`,
+          officialUrl: downloaded.officialUrl,
+          finalUrl: downloaded.finalUrl,
+          httpStatus: downloaded.httpStatus,
+          relativePath: join('raw', 'tsinghua', `${source.id}-source-bundle.json`),
+          contentType: 'application/json',
+          bytes: bundleBytes,
+        }),
+      )
       const enrichedHarvest = enrichTsinghuaCatalogHarvest({
         harvest,
         sourceBundle: bundle,
@@ -1183,20 +1242,22 @@ async function runTsinghuaSources(input: {
         verified: enrichedHarvest.entities.length,
         quarantined: 0,
         sourceArtifacts,
-        primaryEvidenceOfficialUrls: [...new Set(
-          harvest.entities.map((entity) => entity.evidence.officialUrl),
-        )].sort((left, right) => left.localeCompare(right, 'en')),
+        primaryEvidenceOfficialUrls: [
+          ...new Set(harvest.entities.map((entity) => entity.evidence.officialUrl)),
+        ].sort((left, right) => left.localeCompare(right, 'en')),
         harvestPath,
         error: baseline.error,
       })
     } catch (error) {
-      sources.push(failedSource({
-        sourceId: source.id,
-        kind: 'tsinghua_catalog',
-        officialUrls: [source.officialUrl, TSINGHUA_CATALOG_QUERY_URL],
-        sourceArtifacts,
-        error,
-      }))
+      sources.push(
+        failedSource({
+          sourceId: source.id,
+          kind: 'tsinghua_catalog',
+          officialUrls: [source.officialUrl, TSINGHUA_CATALOG_QUERY_URL],
+          sourceArtifacts,
+          error,
+        }),
+      )
     }
   }
   return { sources, projects }
@@ -1254,20 +1315,22 @@ async function runZjuSources(input: {
         verified: harvest.entities.length,
         quarantined: harvest.quarantined.length,
         sourceArtifacts,
-        primaryEvidenceOfficialUrls: [...new Set(
-          harvest.entities.map((entity) => entity.evidence.officialUrl),
-        )].sort((left, right) => left.localeCompare(right, 'en')),
+        primaryEvidenceOfficialUrls: [
+          ...new Set(harvest.entities.map((entity) => entity.evidence.officialUrl)),
+        ].sort((left, right) => left.localeCompare(right, 'en')),
         harvestPath,
         error: baseline.error,
       })
     } catch (error) {
-      sources.push(failedSource({
-        sourceId: source.id,
-        kind: 'zju_pdf',
-        officialUrls: [source.officialUrl],
-        sourceArtifacts,
-        error,
-      }))
+      sources.push(
+        failedSource({
+          sourceId: source.id,
+          kind: 'zju_pdf',
+          officialUrls: [source.officialUrl],
+          sourceArtifacts,
+          error,
+        }),
+      )
     }
   }
   return { sources, projects }
@@ -1321,15 +1384,17 @@ async function runPkuSource(input: {
           source.allowedHosts,
           'pdf',
         )
-        sourceArtifacts.push(await input.store.saveAsset({
-          assetId: `${source.id}:${document.fileName}`,
-          officialUrl: downloaded.officialUrl,
-          finalUrl: downloaded.finalUrl,
-          httpStatus: downloaded.httpStatus,
-          relativePath: join('raw', 'pku', document.fileName),
-          contentType: downloaded.contentType,
-          bytes: downloaded.bytes,
-        }))
+        sourceArtifacts.push(
+          await input.store.saveAsset({
+            assetId: `${source.id}:${document.fileName}`,
+            officialUrl: downloaded.officialUrl,
+            finalUrl: downloaded.finalUrl,
+            httpStatus: downloaded.httpStatus,
+            relativePath: join('raw', 'pku', document.fileName),
+            contentType: downloaded.contentType,
+            bytes: downloaded.bytes,
+          }),
+        )
       } catch (error) {
         downloadFailures.push(`${document.fileName}:${errorMessage(error)}`)
       }
@@ -1363,14 +1428,15 @@ async function runPkuSource(input: {
       expected: source.expectedPrograms,
     })
     if (baseline.error) structuralIssues.push(baseline.error)
-    const primaryEvidenceOfficialUrls = [...new Set(
-      harvest.entities.map((entity) => entity.evidence.officialUrl),
-    )].sort((left, right) => left.localeCompare(right, 'en'))
-    const status: HarvestSourceStatus = structuralIssues.length === 0 && harvest.entities.length > 0
-      ? 'verified'
-      : structuralIssues.length > 0
-        ? 'failed'
-        : 'quarantined'
+    const primaryEvidenceOfficialUrls = [
+      ...new Set(harvest.entities.map((entity) => entity.evidence.officialUrl)),
+    ].sort((left, right) => left.localeCompare(right, 'en'))
+    const status: HarvestSourceStatus =
+      structuralIssues.length === 0 && harvest.entities.length > 0
+        ? 'verified'
+        : structuralIssues.length > 0
+          ? 'failed'
+          : 'quarantined'
     return {
       source: {
         sourceId: source.id,
@@ -1457,7 +1523,7 @@ async function runScholarshipSources(input: {
         harvestPath: null,
         error: verified
           ? null
-          : sourceResult.reason ?? `scholarship_source_status:${sourceResult.status}`,
+          : (sourceResult.reason ?? `scholarship_source_status:${sourceResult.status}`),
       })
     } catch (error) {
       const reason = errorMessage(error)
@@ -1469,17 +1535,20 @@ async function runScholarshipSources(input: {
         candidateCount: 0,
         reason,
       })
-      sources.push(failedSource({
-        sourceId: source.id,
-        kind: 'scholarship_index',
-        officialUrls: [source.officialUrl],
-        sourceArtifacts,
-        error: reason,
-      }))
+      sources.push(
+        failedSource({
+          sourceId: source.id,
+          kind: 'scholarship_index',
+          officialUrls: [source.officialUrl],
+          sourceArtifacts,
+          error: reason,
+        }),
+      )
     }
   }
-  const entities = [...uniqueScholarships.values()]
-    .sort((left, right) => left.entityKey.localeCompare(right.entityKey, 'en'))
+  const entities = [...uniqueScholarships.values()].sort((left, right) =>
+    left.entityKey.localeCompare(right.entityKey, 'en'),
+  )
   const aggregate: ScholarshipIndexHarvest = {
     checkedAt: input.checkedAt,
     sourceMode: 'live',
@@ -1489,19 +1558,35 @@ async function runScholarshipSources(input: {
     sources: sourceStatuses,
     entities,
   }
-  const harvestPath = await input.store.writeJson(
-    join('harvests', 'scholarship-indexes.json'),
-    aggregate,
-  )
-  const primaryEvidenceUrls = new Set(
-    entities.map((entity) => entity.evidence.officialUrl),
-  )
+  await input.store.writeJson(join('harvests', 'scholarship-indexes.json'), aggregate)
+  const primaryEvidenceUrls = new Set(entities.map((entity) => entity.evidence.officialUrl))
   for (const sourceRun of sources) {
-    sourceRun.primaryEvidenceOfficialUrls = sourceRun.sourceArtifacts
-      .map((artifact) => artifact.officialUrl)
+    const sourceOfficialUrls = new Set(
+      sourceRun.sourceArtifacts.map((artifact) => artifact.officialUrl),
+    )
+    sourceRun.primaryEvidenceOfficialUrls = [...sourceOfficialUrls]
       .filter((officialUrl) => primaryEvidenceUrls.has(officialUrl))
       .sort((left, right) => left.localeCompare(right, 'en'))
-    sourceRun.harvestPath = harvestPath
+    const sourceEntities = entities.filter((entity) =>
+      sourceOfficialUrls.has(entity.evidence.officialUrl),
+    )
+    if (sourceRun.status !== 'verified' || sourceEntities.length === 0) continue
+    const sourceStatus = sourceStatuses.find((item) => item.sourceId === sourceRun.sourceId)
+    if (!sourceStatus) throw new Error(`Missing scholarship source status: ${sourceRun.sourceId}`)
+    sourceRun.harvestPath = await input.store.writeJson(
+      join('harvests', 'scholarships', `${sourceRun.sourceId}.json`),
+      {
+        checkedAt: input.checkedAt,
+        sourceMode: 'live',
+        requestDelayMs: input.delayMs,
+        institutionsCovered: [
+          ...new Set(sourceEntities.map((entity) => entity.institutionId)),
+        ].sort(),
+        verifiedCandidateCount: sourceEntities.length,
+        sources: [sourceStatus],
+        entities: sourceEntities,
+      } satisfies ScholarshipIndexHarvest,
+    )
   }
   return { sources, scholarships: entities.length }
 }
@@ -1525,15 +1610,17 @@ async function runDependencySources(input: {
       if (!/<(?:!doctype\s+html|html|head|body)\b/u.test(leadingText)) {
         throw new Error('Dependency source response does not contain an HTML document marker')
       }
-      sourceArtifacts.push(await input.store.saveAsset({
-        assetId: `${source.id}:html`,
-        officialUrl: downloaded.officialUrl,
-        finalUrl: downloaded.finalUrl,
-        httpStatus: downloaded.httpStatus,
-        relativePath: join('raw', 'dependencies', `${source.id}.html`),
-        contentType: downloaded.contentType,
-        bytes: downloaded.bytes,
-      }))
+      sourceArtifacts.push(
+        await input.store.saveAsset({
+          assetId: `${source.id}:html`,
+          officialUrl: downloaded.officialUrl,
+          finalUrl: downloaded.finalUrl,
+          httpStatus: downloaded.httpStatus,
+          relativePath: join('raw', 'dependencies', `${source.id}.html`),
+          contentType: downloaded.contentType,
+          bytes: downloaded.bytes,
+        }),
+      )
       sources.push({
         sourceId: source.id,
         kind: 'dependency',
@@ -1548,13 +1635,15 @@ async function runDependencySources(input: {
         error: null,
       })
     } catch (error) {
-      sources.push(failedSource({
-        sourceId: source.id,
-        kind: 'dependency',
-        officialUrls: [source.officialUrl],
-        sourceArtifacts,
-        error,
-      }))
+      sources.push(
+        failedSource({
+          sourceId: source.id,
+          kind: 'dependency',
+          officialUrls: [source.officialUrl],
+          sourceArtifacts,
+          error,
+        }),
+      )
     }
   }
   return sources
@@ -1573,13 +1662,10 @@ export function validatePriorityHarvestConfig(): void {
   if (OFFICIAL_DEPENDENCY_SOURCES.length !== 10) {
     throw new Error('Priority harvest must register exactly ten dependency pages')
   }
-  const auditedProgramBaseline = TSINGHUA_PRIORITY_SOURCES.reduce(
-    (total, source) => total + source.expectedVerifiedCount,
-    0,
-  ) + ZJU_PRIORITY_PDF_SOURCES.reduce(
-    (total, source) => total + source.auditedVerifiedCount,
-    0,
-  ) + PKU_MASTER_CHINESE_2026_SOURCE.expectedPrograms
+  const auditedProgramBaseline =
+    TSINGHUA_PRIORITY_SOURCES.reduce((total, source) => total + source.expectedVerifiedCount, 0) +
+    ZJU_PRIORITY_PDF_SOURCES.reduce((total, source) => total + source.auditedVerifiedCount, 0) +
+    PKU_MASTER_CHINESE_2026_SOURCE.expectedPrograms
   if (auditedProgramBaseline !== PRIORITY_HARVEST_THRESHOLDS.programs) {
     throw new Error('Per-source audited program baselines must equal the global program gate')
   }
@@ -1636,6 +1722,7 @@ export function buildPriorityHarvestRunManifest(input: {
     scholarships: input.scholarships,
     sourceArtifacts: sourceArtifacts.length,
   })
+  const settlement = buildHarvestSourceSettlement(input.sources, gate.passed)
   const quarantined = input.sources.reduce((total, source) => total + source.quarantined, 0)
   return {
     format: RUN_MANIFEST_FORMAT,
@@ -1662,6 +1749,7 @@ export function buildPriorityHarvestRunManifest(input: {
       sourceArtifacts: sourceArtifacts.length,
       dependencies: dependencyArtifacts.length,
     },
+    settlement,
     provenanceStatus: gate.passed ? 'complete' : 'incomplete',
     sourceArtifacts,
     dependencyArtifacts,
@@ -1687,7 +1775,9 @@ export async function runPriorityOfficialHarvest(
 ): Promise<{ manifest: PriorityHarvestRunManifest; manifestPath: string }> {
   validatePriorityHarvestConfig()
   const outputDirectory = resolve(options.outputDirectory)
-  const stateFile = resolve(options.stateFile ?? join(outputDirectory, 'state', 'source-hashes.json'))
+  const stateFile = resolve(
+    options.stateFile ?? join(outputDirectory, 'state', 'source-hashes.json'),
+  )
   const checkedAt = new Date(options.checkedAt ?? new Date().toISOString())
   if (Number.isNaN(checkedAt.getTime())) throw new Error('checkedAt must be an ISO timestamp')
   const delayMs = validateInteger(
@@ -1710,12 +1800,7 @@ export async function runPriorityOfficialHarvest(
     checkedAt.toISOString(),
   )
   await store.resetOutputDirectory()
-  const client = new OfficialHttpClient(
-    delayMs,
-    maxAttempts,
-    options.fetchImpl,
-    options.sleep,
-  )
+  const client = new OfficialHttpClient(delayMs, maxAttempts, options.fetchImpl, options.sleep)
 
   const tsinghua = await runTsinghuaSources({
     client,
@@ -1777,11 +1862,7 @@ function argument(args: readonly string[], name: string): string | undefined {
   return index >= 0 ? args[index + 1] : undefined
 }
 
-function integerArgument(
-  args: readonly string[],
-  name: string,
-  fallback: number,
-): number {
+function integerArgument(args: readonly string[], name: string, fallback: number): number {
   const value = argument(args, name)
   if (value === undefined) return fallback
   return Number(value)
@@ -1813,24 +1894,18 @@ async function main(): Promise<void> {
     outputDirectory,
     stateFile: argument(args, '--state-file'),
     checkedAt: argument(args, '--checked-at'),
-    delayMs: integerArgument(
-      args,
-      '--delay-ms',
-      MINIMUM_DOMAIN_INTERVAL_MS,
-    ),
-    maxAttempts: integerArgument(
-      args,
-      '--max-attempts',
-      DEFAULT_MAX_HARVEST_ATTEMPTS,
-    ),
+    delayMs: integerArgument(args, '--delay-ms', MINIMUM_DOMAIN_INTERVAL_MS),
+    maxAttempts: integerArgument(args, '--max-attempts', DEFAULT_MAX_HARVEST_ATTEMPTS),
     pdftotextPath: argument(args, '--pdftotext'),
   })
-  process.stdout.write(`${JSON.stringify({
-    manifestPath: result.manifestPath,
-    status: result.manifest.status,
-    totals: result.manifest.totals,
-    gate: result.manifest.gate,
-  })}\n`)
+  process.stdout.write(
+    `${JSON.stringify({
+      manifestPath: result.manifestPath,
+      status: result.manifest.status,
+      totals: result.manifest.totals,
+      gate: result.manifest.gate,
+    })}\n`,
+  )
   if (!result.manifest.gate.passed) process.exitCode = 1
 }
 

@@ -1,11 +1,5 @@
 import { createHash } from 'node:crypto'
-import {
-  mkdirSync,
-  mkdtempSync,
-  readFileSync,
-  rmSync,
-  symlinkSync,
-} from 'node:fs'
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync } from 'node:fs'
 import { homedir, tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
@@ -20,6 +14,7 @@ import {
   assertRegisteredOfficialUrl,
   assertSafeHarvestOutputDirectory,
   buildDependencySourceArtifacts,
+  buildHarvestSourceSettlement,
   buildMaterializationSourceArtifacts,
   buildPriorityHarvestRunManifest,
   buildSourceArtifactR2Key,
@@ -73,7 +68,7 @@ function source(
     verified: status === 'verified' ? 1 : 0,
     quarantined: status === 'quarantined' ? 1 : 0,
     sourceArtifacts: status === 'verified' ? [asset(false, sourceId, officialUrl)] : [],
-    harvestPath: null,
+    harvestPath: status === 'verified' ? `harvests/${sourceId}.json` : null,
     error: status === 'verified' ? null : 'test failure',
   }
 }
@@ -113,18 +108,18 @@ describe('priority official harvest orchestration contract', () => {
     const repositoryRoot = join(temporaryRoot, 'repository')
     mkdirSync(repositoryRoot)
     try {
-      await expect(assertSafeHarvestOutputDirectory(
-        join(repositoryRoot, '.official-harvest'),
-        repositoryRoot,
-      )).resolves.toBeUndefined()
-      await expect(assertSafeHarvestOutputDirectory(
-        join(repositoryRoot, 'artifacts', 'official-harvest', 'weekly'),
-        repositoryRoot,
-      )).resolves.toBeUndefined()
-      await expect(assertSafeHarvestOutputDirectory(
-        join(repositoryRoot, 'src'),
-        repositoryRoot,
-      )).rejects.toThrow(/must be under \.official-harvest/u)
+      await expect(
+        assertSafeHarvestOutputDirectory(join(repositoryRoot, '.official-harvest'), repositoryRoot),
+      ).resolves.toBeUndefined()
+      await expect(
+        assertSafeHarvestOutputDirectory(
+          join(repositoryRoot, 'artifacts', 'official-harvest', 'weekly'),
+          repositoryRoot,
+        ),
+      ).resolves.toBeUndefined()
+      await expect(
+        assertSafeHarvestOutputDirectory(join(repositoryRoot, 'src'), repositoryRoot),
+      ).rejects.toThrow(/must be under \.official-harvest/u)
     } finally {
       rmSync(temporaryRoot, { recursive: true, force: true })
     }
@@ -135,16 +130,15 @@ describe('priority official harvest orchestration contract', () => {
     const repositoryRoot = join(temporaryRoot, 'repository')
     mkdirSync(repositoryRoot)
     try {
-      await expect(assertSafeHarvestOutputDirectory(
-        repositoryRoot,
-        repositoryRoot,
-      )).rejects.toThrow(/dedicated directory inside/u)
-      await expect(assertSafeHarvestOutputDirectory(
-        resolve(repositoryRoot, '..'),
-        repositoryRoot,
-      )).rejects.toThrow(/dedicated directory inside/u)
-      await expect(assertSafeHarvestOutputDirectory(homedir()))
-        .rejects.toThrow(/dedicated directory inside/u)
+      await expect(
+        assertSafeHarvestOutputDirectory(repositoryRoot, repositoryRoot),
+      ).rejects.toThrow(/dedicated directory inside/u)
+      await expect(
+        assertSafeHarvestOutputDirectory(resolve(repositoryRoot, '..'), repositoryRoot),
+      ).rejects.toThrow(/dedicated directory inside/u)
+      await expect(assertSafeHarvestOutputDirectory(homedir())).rejects.toThrow(
+        /dedicated directory inside/u,
+      )
     } finally {
       rmSync(temporaryRoot, { recursive: true, force: true })
     }
@@ -160,11 +154,7 @@ describe('priority official harvest orchestration contract', () => {
     const linkedOutput = join(artifacts, 'official-harvest')
     try {
       try {
-        symlinkSync(
-          outside,
-          linkedOutput,
-          process.platform === 'win32' ? 'junction' : 'dir',
-        )
+        symlinkSync(outside, linkedOutput, process.platform === 'win32' ? 'junction' : 'dir')
       } catch (error) {
         const code = error && typeof error === 'object' && 'code' in error
           ? String((error as { code?: unknown }).code)
@@ -172,8 +162,9 @@ describe('priority official harvest orchestration contract', () => {
         if (code === 'EPERM' || code === 'EACCES') return
         throw error
       }
-      await expect(assertSafeHarvestOutputDirectory(linkedOutput, repositoryRoot))
-        .rejects.toThrow(/symbolic link/u)
+      await expect(assertSafeHarvestOutputDirectory(linkedOutput, repositoryRoot)).rejects.toThrow(
+        /symbolic link/u,
+      )
     } finally {
       rmSync(temporaryRoot, { recursive: true, force: true })
     }
@@ -184,10 +175,9 @@ describe('priority official harvest orchestration contract', () => {
     expect(TSINGHUA_PRIORITY_SOURCES).toHaveLength(2)
     expect(TSINGHUA_PRIORITY_SOURCES.map((item) => item.expectedVerifiedCount)).toEqual([99, 118])
     expect(ZJU_PRIORITY_PDF_SOURCES).toHaveLength(6)
-    expect(ZJU_PRIORITY_PDF_SOURCES.reduce(
-      (total, item) => total + item.auditedVerifiedCount,
-      0,
-    )).toBe(612)
+    expect(
+      ZJU_PRIORITY_PDF_SOURCES.reduce((total, item) => total + item.auditedVerifiedCount, 0),
+    ).toBe(612)
     expect(PKU_MASTER_CHINESE_2026_SOURCE.expectedDocuments).toBe(36)
     expect(PKU_MASTER_CHINESE_2026_SOURCE.expectedPrograms).toBe(177)
     expect(PKU_MASTER_CHINESE_2026_SOURCE.expectedQuarantinedIndexAnchors).toBe(1)
@@ -203,9 +193,9 @@ describe('priority official harvest orchestration contract', () => {
       'https://eng.hangzhou.gov.cn/index.html',
       'https://en.ustc.edu.cn/About.htm',
     ])
-    expect(new Set(
-      DEFAULT_SCHOLARSHIP_INDEX_SOURCES.map((item) => item.institutionId),
-    ).size).toBe(6)
+    expect(new Set(DEFAULT_SCHOLARSHIP_INDEX_SOURCES.map((item) => item.institutionId)).size).toBe(
+      6,
+    )
     expect(MINIMUM_DOMAIN_INTERVAL_MS).toBeGreaterThanOrEqual(5_000)
 
     for (const item of [
@@ -213,39 +203,40 @@ describe('priority official harvest orchestration contract', () => {
       ...ZJU_PRIORITY_PDF_SOURCES,
       ...OFFICIAL_DEPENDENCY_SOURCES,
     ]) {
-      expect(assertRegisteredOfficialUrl(item.officialUrl, item.allowedHosts).protocol).toBe('https:')
+      expect(assertRegisteredOfficialUrl(item.officialUrl, item.allowedHosts).protocol).toBe(
+        'https:',
+      )
     }
-    expect(assertRegisteredOfficialUrl(
-      PKU_MASTER_CHINESE_2026_SOURCE.indexUrl,
-      PKU_MASTER_CHINESE_2026_SOURCE.allowedHosts,
-    ).hostname).toBe('admission.pku.edu.cn')
+    expect(
+      assertRegisteredOfficialUrl(
+        PKU_MASTER_CHINESE_2026_SOURCE.indexUrl,
+        PKU_MASTER_CHINESE_2026_SOURCE.allowedHosts,
+      ).hostname,
+    ).toBe('admission.pku.edu.cn')
     for (const item of DEFAULT_SCHOLARSHIP_INDEX_SOURCES) {
-      expect(assertRegisteredOfficialUrl(item.officialUrl, item.allowedHosts).protocol).toBe('https:')
+      expect(assertRegisteredOfficialUrl(item.officialUrl, item.allowedHosts).protocol).toBe(
+        'https:',
+      )
     }
   })
 
   it('rejects insecure, credentialed, nonstandard-port, and unregistered URLs', () => {
     const allowlist = ['admission.pku.edu.cn']
-    expect(() => assertRegisteredOfficialUrl(
-      'http://admission.pku.edu.cn/catalog',
-      allowlist,
-    )).toThrow(/official HTTPS host allowlist/u)
-    expect(() => assertRegisteredOfficialUrl(
-      'https://user:secret@admission.pku.edu.cn/catalog',
-      allowlist,
-    )).toThrow(/official HTTPS host allowlist/u)
-    expect(() => assertRegisteredOfficialUrl(
-      'https://admission.pku.edu.cn:8443/catalog',
-      allowlist,
-    )).toThrow(/official HTTPS host allowlist/u)
-    expect(() => assertRegisteredOfficialUrl(
-      'https://evil.example/catalog',
-      allowlist,
-    )).toThrow(/official HTTPS host allowlist/u)
-    expect(() => assertRegisteredOfficialUrl(
-      'https://sub.admission.pku.edu.cn/catalog',
-      allowlist,
-    )).toThrow(/official HTTPS host allowlist/u)
+    expect(() =>
+      assertRegisteredOfficialUrl('http://admission.pku.edu.cn/catalog', allowlist),
+    ).toThrow(/official HTTPS host allowlist/u)
+    expect(() =>
+      assertRegisteredOfficialUrl('https://user:secret@admission.pku.edu.cn/catalog', allowlist),
+    ).toThrow(/official HTTPS host allowlist/u)
+    expect(() =>
+      assertRegisteredOfficialUrl('https://admission.pku.edu.cn:8443/catalog', allowlist),
+    ).toThrow(/official HTTPS host allowlist/u)
+    expect(() => assertRegisteredOfficialUrl('https://evil.example/catalog', allowlist)).toThrow(
+      /official HTTPS host allowlist/u,
+    )
+    expect(() =>
+      assertRegisteredOfficialUrl('https://sub.admission.pku.edu.cn/catalog', allowlist),
+    ).toThrow(/official HTTPS host allowlist/u)
   })
 
   it('reports changed, unchanged, and mixed content without skipping parsing', () => {
@@ -265,8 +256,12 @@ describe('priority official harvest orchestration contract', () => {
     }
     const first = buildSourceArtifactR2Key(keyInput)
     expect(buildSourceArtifactR2Key({ ...keyInput })).toBe(first)
-    expect(buildSourceArtifactR2Key({ ...keyInput, assetId: 'another-source:same.pdf' }))
-      .not.toBe(first)
+    expect(
+      buildSourceArtifactR2Key({
+        ...keyInput,
+        assetId: 'another-source:same.pdf',
+      }),
+    ).not.toBe(first)
     expect(first).toMatch(/^source-artifacts\/[0-9a-f]{24}\/[0-9a-f]{64}\.pdf$/u)
   })
 
@@ -291,16 +286,20 @@ describe('priority official harvest orchestration contract', () => {
 
   it('fails a required source when its audited count is lower by one', () => {
     const sourceConfig = TSINGHUA_PRIORITY_SOURCES[0]!
-    expect(evaluateSourceCountBaseline({
-      sourceId: sourceConfig.id,
-      actual: sourceConfig.expectedVerifiedCount,
-      expected: sourceConfig.expectedVerifiedCount,
-    })).toEqual({ status: 'verified', error: null })
-    expect(evaluateSourceCountBaseline({
-      sourceId: sourceConfig.id,
-      actual: sourceConfig.expectedVerifiedCount - 1,
-      expected: sourceConfig.expectedVerifiedCount,
-    })).toEqual({
+    expect(
+      evaluateSourceCountBaseline({
+        sourceId: sourceConfig.id,
+        actual: sourceConfig.expectedVerifiedCount,
+        expected: sourceConfig.expectedVerifiedCount,
+      }),
+    ).toEqual({ status: 'verified', error: null })
+    expect(
+      evaluateSourceCountBaseline({
+        sourceId: sourceConfig.id,
+        actual: sourceConfig.expectedVerifiedCount - 1,
+        expected: sourceConfig.expectedVerifiedCount,
+      }),
+    ).toEqual({
       status: 'failed',
       error: `verified_count_mismatch:${sourceConfig.expectedVerifiedCount - 1}`
         + `!=${sourceConfig.expectedVerifiedCount}`,
@@ -309,12 +308,14 @@ describe('priority official harvest orchestration contract', () => {
 
   it('fails closed below thresholds or when any required source is not verified', () => {
     const healthy = [source('required-source')]
-    expect(evaluateHarvestGate({
-      sources: healthy,
-      projects: PRIORITY_HARVEST_THRESHOLDS.programs,
-      scholarships: PRIORITY_HARVEST_THRESHOLDS.scholarships,
-      sourceArtifacts: PRIORITY_HARVEST_THRESHOLDS.sourceArtifacts,
-    })).toEqual({ passed: true, reasons: [], requiredFailures: [] })
+    expect(
+      evaluateHarvestGate({
+        sources: healthy,
+        projects: PRIORITY_HARVEST_THRESHOLDS.programs,
+        scholarships: PRIORITY_HARVEST_THRESHOLDS.scholarships,
+        sourceArtifacts: PRIORITY_HARVEST_THRESHOLDS.sourceArtifacts,
+      }),
+    ).toEqual({ passed: true, reasons: [], requiredFailures: [] })
 
     const artifactShortfall = evaluateHarvestGate({
       sources: healthy,
@@ -348,6 +349,41 @@ describe('priority official harvest orchestration contract', () => {
     expect(result.reasons).toContain('required_sources_failed:failed-source')
   })
 
+  it('settles healthy sources independently while preserving the release gate', () => {
+    const healthy = source('healthy-catalog')
+    const missingInput = { ...source('missing-input'), harvestPath: null }
+    const dependency = dependencySource('institution-home-zju', 'https://www.zju.edu.cn/english/')
+    const settlement = buildHarvestSourceSettlement(
+      [healthy, source('failed-catalog', 'failed'), missingInput, dependency],
+      false,
+    )
+
+    expect(settlement).toMatchObject({
+      status: 'partial',
+      publicationEligible: false,
+      dependencySourceIds: ['institution-home-zju'],
+    })
+    expect(settlement.catalogSources).toEqual([
+      {
+        sourceId: 'healthy-catalog',
+        kind: 'zju_pdf',
+        harvestPath: 'harvests/healthy-catalog.json',
+        verified: 1,
+        sourceArtifacts: 1,
+      },
+    ])
+    expect(settlement.quarantinedSources).toEqual([
+      expect.objectContaining({
+        sourceId: 'failed-catalog',
+        reason: 'test failure',
+      }),
+      expect.objectContaining({
+        sourceId: 'missing-input',
+        reason: 'verified_source_has_no_pipeline_candidate',
+      }),
+    ])
+  })
+
   it('builds a machine-readable manifest with no AI and an explicit gate result', () => {
     const manifest = buildPriorityHarvestRunManifest({
       startedAt: '2026-07-24T00:00:00.000Z',
@@ -371,6 +407,13 @@ describe('priority official harvest orchestration contract', () => {
       robotsEnforced: true,
     })
     expect(manifest.status).toBe('passed')
+    expect(manifest.settlement).toMatchObject({
+      status: 'complete',
+      publicationEligible: true,
+    })
+    expect(manifest.settlement.catalogSources).toHaveLength(54)
+    expect(manifest.settlement.dependencySourceIds).toHaveLength(10)
+    expect(manifest.settlement.quarantinedSources).toEqual([])
     expect(manifest.totals).toMatchObject({
       projects: 1_006,
       scholarships: 55,
@@ -390,7 +433,9 @@ describe('priority official harvest orchestration contract', () => {
       checkedAt: manifest.checkedAt,
     })
     const dependencyUrls = new Set(OFFICIAL_DEPENDENCY_SOURCES.map((item) => item.officialUrl))
-    expect(manifest.sourceArtifacts.some((item) => dependencyUrls.has(item.officialUrl))).toBe(false)
+    expect(manifest.sourceArtifacts.some((item) => dependencyUrls.has(item.officialUrl))).toBe(
+      false,
+    )
     expect(manifest.sourceArtifacts[0]).toMatchObject({
       assetId: expect.any(String),
       capturedAt: manifest.checkedAt,
@@ -406,50 +451,50 @@ describe('priority official harvest orchestration contract', () => {
     )
   })
 
-  it('keeps R2 persistence and Pipeline imports fail-closed and strictly ordered', () => {
+  it('settles healthy sources before preserving the unchanged complete-batch release gate', () => {
     const workflow = readFileSync(
       resolve(process.cwd(), '.github/workflows/official-catalog-harvest.yml'),
       'utf8',
     )
     const r2Step = workflow.indexOf('- name: Upload deterministic private R2 source snapshot')
     const pipelineStep = workflow.indexOf(
-      '- name: Strictly import dependencies, then catalog, into Pipeline D1',
+      '- name: Import healthy source candidates into Pipeline D1',
     )
     const firstGet = workflow.indexOf('npx wrangler r2 object get', r2Step)
     const firstPut = workflow.indexOf('npx wrangler r2 object put', r2Step)
     const bootstrap = workflow.indexOf('import-pipeline-bootstrap.ps1', pipelineStep)
-    const dependencies = workflow.indexOf(
-      'materialize-official-dependencies.ts',
-      pipelineStep,
-    )
+    const dependencies = workflow.indexOf('materialize-official-dependencies.ts', pipelineStep)
     const catalog = workflow.indexOf('materialize-official-entities.ts', pipelineStep)
-    const dependencyImport = workflow.indexOf(
-      'import-official-entities.ps1',
-      dependencies,
-    )
-    const catalogImport = workflow.indexOf(
-      'import-official-entities.ps1',
-      catalog,
-    )
+    const dependencyImport = workflow.indexOf('import-official-entities.ps1', dependencies)
+    const catalogImport = workflow.indexOf('import-official-entities.ps1', catalog)
     const releaseRequest = workflow.indexOf('request-materialization-release.ps1')
+    const releaseGate = workflow.lastIndexOf(
+      'if [[ "${publication_eligible}" == \'true\' ]]; then',
+      releaseRequest,
+    )
+    const strictHealthSignal = workflow.indexOf('- name: Preserve strict batch health signal')
 
     expect(r2Step).toBeGreaterThan(-1)
     expect(pipelineStep).toBeGreaterThan(r2Step)
     expect(firstGet).toBeGreaterThan(r2Step)
     expect(firstPut).toBeGreaterThan(firstGet)
     expect(workflow).toContain(
-      "elif grep -Fqi 'The specified key does not exist.' \"${probe_log}\"; then",
+      'elif grep -Fqi \'The specified key does not exist.\' "${probe_log}"; then',
     )
-    expect(workflow).toContain(
-      'planned.size !== catalog.length + dependencies.length',
-    )
-    expect(workflow).toContain(
-      'if [[ "${upload_count}" -ne "${expected_upload_count}" ]]; then',
-    )
+    expect(workflow).toContain('planned.size !== catalog.length + dependencies.length')
+    expect(workflow).toContain('if [[ "${upload_count}" -ne "${expected_upload_count}" ]]; then')
     expect(workflow).toContain(
       'expected_upload_count="$(awk \'NF { count += 1 } END { print count + 0 }\' "${upload_plan}")"',
     )
     expect(workflow).not.toContain('-ne 64')
+    expect(workflow).toContain('continue-on-error: true')
+    expect(workflow).toContain('- name: Summarize source-level settlement')
+    expect(workflow).toContain('steps.settlement.outputs.uploadable')
+    expect(workflow).toContain('"${materializer_args[@]}"')
+    expect(workflow).not.toContain('catalog.length !== manifest.thresholds?.sourceArtifacts')
+    expect(workflow).not.toContain('dependencies.length !== 10')
+    expect(releaseGate).toBeGreaterThan(catalogImport)
+    expect(strictHealthSignal).toBeGreaterThan(releaseRequest)
     expect(bootstrap).toBeGreaterThan(pipelineStep)
     expect(dependencies).toBeGreaterThan(bootstrap)
     expect(dependencyImport).toBeGreaterThan(dependencies)
