@@ -3,7 +3,11 @@ import { dirname, join, resolve } from 'node:path'
 import process from 'node:process'
 import { pathToFileURL } from 'node:url'
 
-import { getTodayDate } from '../../src/lib/data/freshness'
+import {
+  getTodayDate,
+  isCurrentVerifiedRecord,
+  isWithinPostDeadlineGrace,
+} from '../../src/lib/data/freshness'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
 import type { DataBundle, Program, University } from '../../src/lib/data/types'
@@ -65,6 +69,10 @@ export type UniversityDecisionGap = {
   nameZh: string
   nameEn: string
   featured: boolean
+  freshScholarshipCount: number
+  freshScholarshipIds: string[]
+  needsFreshScholarship: boolean
+  scholarshipGapBoost: number
   publicProgramCount: number
   programsWithAllDecisionFacts: number
   missingFactCounts: Record<DecisionFactKey, number>
@@ -78,7 +86,7 @@ export type RankedProgramDecisionGap = ProgramDecisionGap & { rank: number }
 export type RankedUniversityDecisionGap = UniversityDecisionGap & { rank: number }
 
 export type DecisionGapReport = {
-  schemaVersion: 1
+  schemaVersion: 2
   evaluatedForDate: string
   deterministicGeneratedAt: string
   priorityLimit: number
@@ -88,8 +96,10 @@ export type DecisionGapReport = {
     officialApplyRoute: string
     freshDisposition: string
     requirements: string
+    scholarshipFreshness: string
     programGapWeights: Record<DecisionFactKey, number>
     valueBoosts: Record<string, number>
+    universityPriorityBoosts: Record<string, number>
     universityPriority: string
   }
   summary: {
@@ -102,10 +112,17 @@ export type DecisionGapReport = {
       missing: number
       coveragePct: number
     }>
+    scholarships: {
+      freshRecords: number
+      universitiesCovered: number
+      universitiesMissing: number
+      universityCoveragePct: number
+    }
   }
   universities: UniversityDecisionGap[]
   programs: ProgramDecisionGap[]
   priorityUniversities: RankedUniversityDecisionGap[]
+  priorityScholarshipUniversities: RankedUniversityDecisionGap[]
   priorityPrograms: RankedProgramDecisionGap[]
 }
 
@@ -126,6 +143,10 @@ const VALUE_BOOSTS = {
   featuredUniversity: 3,
   chineseLanguageOrEducation: 2,
   advancedDegree: 1,
+} as const
+
+const UNIVERSITY_PRIORITY_BOOSTS = {
+  missingFreshScholarship: 0.5,
 } as const
 
 function assertIsoDate(value: string, label: string): void {
@@ -243,6 +264,21 @@ export function buildDecisionGapReport(
   const universityById = new Map(
     published.universities.map((university) => [university.id, university]),
   )
+  const publicUniversityIds = new Set(universityById.keys())
+  const freshScholarships = rawBundle.scholarships.filter(
+    (scholarship) => isCurrentVerifiedRecord(scholarship, today)
+      && isWithinPostDeadlineGrace(scholarship.deadline, today),
+  )
+  const freshScholarshipIdsByUniversity = new Map<string, Set<string>>()
+  for (const scholarship of freshScholarships) {
+    for (const universityId of scholarship.universityIds) {
+      if (!publicUniversityIds.has(universityId)) continue
+      const scholarshipIds = freshScholarshipIdsByUniversity.get(universityId) ?? new Set()
+      scholarshipIds.add(scholarship.id)
+      freshScholarshipIdsByUniversity.set(universityId, scholarshipIds)
+    }
+  }
+
   const cyclesByProgram = new Map<string, DataBundle['admissionCycles']>()
   for (const cycle of published.admissionCycles) {
     const cycles = cyclesByProgram.get(cycle.programId) ?? []
@@ -324,6 +360,13 @@ export function buildDecisionGapReport(
 
   const universities = published.universities.map((university): UniversityDecisionGap => {
     const universityPrograms = programsByUniversity.get(university.id) ?? []
+    const freshScholarshipIds = [
+      ...(freshScholarshipIdsByUniversity.get(university.id) ?? new Set<string>()),
+    ].sort()
+    const needsFreshScholarship = freshScholarshipIds.length === 0
+    const scholarshipGapBoost = needsFreshScholarship
+      ? UNIVERSITY_PRIORITY_BOOSTS.missingFreshScholarship
+      : 0
     const missingFactCounts = emptyMissingFactCounts()
     for (const program of universityPrograms) {
       for (const fact of program.missingFacts) missingFactCounts[fact] += 1
@@ -351,13 +394,17 @@ export function buildDecisionGapReport(
       nameZh: localizedName(university.name, 'zh', university.slug),
       nameEn: localizedName(university.name, 'en', university.slug),
       featured: university.featured,
+      freshScholarshipCount: freshScholarshipIds.length,
+      freshScholarshipIds,
+      needsFreshScholarship,
+      scholarshipGapBoost,
       publicProgramCount: universityPrograms.length,
       programsWithAllDecisionFacts: universityPrograms
         .filter((program) => program.missingFacts.length === 0).length,
       missingFactCounts,
       totalMissingFacts,
       completionPct: percent(possibleFacts - totalMissingFacts, possibleFacts),
-      priorityScore: roundScore(topProgramAverage + sparseSchoolBoost),
+      priorityScore: roundScore(topProgramAverage + sparseSchoolBoost + scholarshipGapBoost),
       recommendedProgramIds: topPrograms.map((program) => program.programId),
     }
   }).sort((left, right) => left.universityId.localeCompare(right.universityId, 'en'))
@@ -373,19 +420,37 @@ export function buildDecisionGapReport(
     }),
   ) as DecisionGapReport['summary']['factCoverage']
 
+  const scholarshipUniversitiesCovered = freshScholarshipIdsByUniversity.size
+  const scholarshipSummary: DecisionGapReport['summary']['scholarships'] = {
+    freshRecords: freshScholarships.length,
+    universitiesCovered: scholarshipUniversitiesCovered,
+    universitiesMissing: published.universities.length - scholarshipUniversitiesCovered,
+    universityCoveragePct: percent(
+      scholarshipUniversitiesCovered,
+      published.universities.length,
+    ),
+  }
+
   const priorityPrograms = programs
     .filter((program) => program.gapScore > 0)
     .sort(comparePrograms)
     .slice(0, priorityLimit)
     .map((program, index) => ({ ...program, rank: index + 1 }))
   const priorityUniversities = universities
-    .filter((university) => university.totalMissingFacts > 0)
+    .filter((university) => (
+      university.totalMissingFacts > 0 || university.needsFreshScholarship
+    ))
+    .sort(compareUniversities)
+    .slice(0, priorityLimit)
+    .map((university, index) => ({ ...university, rank: index + 1 }))
+  const priorityScholarshipUniversities = universities
+    .filter((university) => university.needsFreshScholarship)
     .sort(compareUniversities)
     .slice(0, priorityLimit)
     .map((university, index) => ({ ...university, rank: index + 1 }))
 
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     evaluatedForDate: today,
     deterministicGeneratedAt: options.generatedAt ?? `${today}T00:00:00.000Z`,
     priorityLimit,
@@ -395,9 +460,11 @@ export function buildDecisionGapReport(
       officialApplyRoute: 'The published program has a non-empty applyUrl and at least one associated official source.',
       freshDisposition: 'A published non-historical cycle was verified within the inclusive 30-day window ending on evaluatedForDate.',
       requirements: 'At least one language requirement or non-empty localized eligibility item is public.',
+      scholarshipFreshness: 'A raw scholarship qualifies only when isCurrentVerifiedRecord and isWithinPostDeadlineGrace both pass; university coverage is limited to published universities.',
       programGapWeights: { ...DECISION_FACT_WEIGHTS },
       valueBoosts: { ...VALUE_BOOSTS },
-      universityPriority: 'Average priority score of up to three highest-gap public programs, plus a small boost for schools with four or fewer public programs.',
+      universityPriorityBoosts: { ...UNIVERSITY_PRIORITY_BOOSTS },
+      universityPriority: 'Average priority score of up to three highest-gap public programs, plus the sparse-school boost and an explicit small boost when the university has no fresh scholarship.',
     },
     summary: {
       publicUniversities: published.universities.length,
@@ -407,10 +474,12 @@ export function buildDecisionGapReport(
       programsWithAnyGap: programs
         .filter((program) => program.missingFacts.length > 0).length,
       factCoverage,
+      scholarships: scholarshipSummary,
     },
     universities,
     programs,
     priorityUniversities,
+    priorityScholarshipUniversities,
     priorityPrograms,
   }
 }
