@@ -169,7 +169,7 @@ describe('decision-oriented cards', () => {
       )
       const reference = container.querySelector('[data-fact-status="reference"]')
       expect(reference).toHaveTextContent('2025-2026')
-      expect(reference).toHaveTextContent(messages.programs.tuitionReference)
+      expect(reference).not.toHaveTextContent(messages.programs.tuitionReference)
       unmount()
     }
 

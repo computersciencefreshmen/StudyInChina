@@ -1,0 +1,964 @@
+{
+  "schemaVersion": "studyinchina.wave4-priority-r2-receipt.v1",
+  "checkedAt": "2026-08-26",
+  "bucket": "studyinchina-source-snapshots",
+  "sanitized": true,
+  "policy": {
+    "officialHttpsOnly": true,
+    "explicitHostAllowlist": [
+      "admission.blcu.edu.cn",
+      "admissions.swu.edu.cn",
+      "admissions.xmu.edu.cn",
+      "apply.shu.edu.cn",
+      "gjxy.swu.edu.cn",
+      "iso.fudan.edu.cn",
+      "lxs.ecnu.edu.cn",
+      "oec.xmu.edu.cn",
+      "osao.bfsu.edu.cn",
+      "study.njust.edu.cn",
+      "www-en.hnu.edu.cn"
+    ],
+    "perHostConcurrency": 1,
+    "minimumAdjacentRequestIntervalMs": 5000,
+    "contentAddressedR2": true,
+    "fullReadbackRequired": true,
+    "failClosedPerPackage": true,
+    "formalCatalogWriteAllowed": false
+  },
+  "requestAudit": {
+    "starts": [
+      {
+        "host": "osao.bfsu.edu.cn",
+        "startedAt": "2026-08-26T03:05:05.305Z"
+      },
+      {
+        "host": "admission.blcu.edu.cn",
+        "startedAt": "2026-08-26T03:05:05.338Z"
+      },
+      {
+        "host": "lxs.ecnu.edu.cn",
+        "startedAt": "2026-08-26T03:05:05.339Z"
+      },
+      {
+        "host": "iso.fudan.edu.cn",
+        "startedAt": "2026-08-26T03:05:05.340Z"
+      },
+      {
+        "host": "www-en.hnu.edu.cn",
+        "startedAt": "2026-08-26T03:05:05.341Z"
+      },
+      {
+        "host": "study.njust.edu.cn",
+        "startedAt": "2026-08-26T03:05:05.342Z"
+      },
+      {
+        "host": "apply.shu.edu.cn",
+        "startedAt": "2026-08-26T03:05:05.342Z"
+      },
+      {
+        "host": "admissions.swu.edu.cn",
+        "startedAt": "2026-08-26T03:05:05.343Z"
+      },
+      {
+        "host": "gjxy.swu.edu.cn",
+        "startedAt": "2026-08-26T03:05:05.343Z"
+      },
+      {
+        "host": "oec.xmu.edu.cn",
+        "startedAt": "2026-08-26T03:05:05.344Z"
+      },
+      {
+        "host": "admissions.xmu.edu.cn",
+        "startedAt": "2026-08-26T03:05:05.345Z"
+      },
+      {
+        "host": "osao.bfsu.edu.cn",
+        "startedAt": "2026-08-26T03:05:10.313Z"
+      },
+      {
+        "host": "admission.blcu.edu.cn",
+        "startedAt": "2026-08-26T03:05:10.344Z"
+      },
+      {
+        "host": "lxs.ecnu.edu.cn",
+        "startedAt": "2026-08-26T03:05:10.346Z"
+      },
+      {
+        "host": "iso.fudan.edu.cn",
+        "startedAt": "2026-08-26T03:05:10.347Z"
+      },
+      {
+        "host": "www-en.hnu.edu.cn",
+        "startedAt": "2026-08-26T03:05:10.348Z"
+      },
+      {
+        "host": "apply.shu.edu.cn",
+        "startedAt": "2026-08-26T03:05:10.349Z"
+      },
+      {
+        "host": "gjxy.swu.edu.cn",
+        "startedAt": "2026-08-26T03:05:10.350Z"
+      },
+      {
+        "host": "admissions.swu.edu.cn",
+        "startedAt": "2026-08-26T03:05:10.350Z"
+      },
+      {
+        "host": "oec.xmu.edu.cn",
+        "startedAt": "2026-08-26T03:05:10.351Z"
+      },
+      {
+        "host": "admissions.xmu.edu.cn",
+        "startedAt": "2026-08-26T03:05:10.354Z"
+      },
+      {
+        "host": "osao.bfsu.edu.cn",
+        "startedAt": "2026-08-26T03:05:15.314Z"
+      },
+      {
+        "host": "admission.blcu.edu.cn",
+        "startedAt": "2026-08-26T03:05:15.345Z"
+      },
+      {
+        "host": "lxs.ecnu.edu.cn",
+        "startedAt": "2026-08-26T03:05:15.348Z"
+      },
+      {
+        "host": "www-en.hnu.edu.cn",
+        "startedAt": "2026-08-26T03:05:15.349Z"
+      },
+      {
+        "host": "iso.fudan.edu.cn",
+        "startedAt": "2026-08-26T03:05:15.349Z"
+      },
+      {
+        "host": "apply.shu.edu.cn",
+        "startedAt": "2026-08-26T03:05:15.350Z"
+      },
+      {
+        "host": "gjxy.swu.edu.cn",
+        "startedAt": "2026-08-26T03:05:15.351Z"
+      },
+      {
+        "host": "admissions.swu.edu.cn",
+        "startedAt": "2026-08-26T03:05:15.352Z"
+      },
+      {
+        "host": "admissions.xmu.edu.cn",
+        "startedAt": "2026-08-26T03:05:15.355Z"
+      },
+      {
+        "host": "osao.bfsu.edu.cn",
+        "startedAt": "2026-08-26T03:05:20.325Z"
+      },
+      {
+        "host": "admission.blcu.edu.cn",
+        "startedAt": "2026-08-26T03:05:20.356Z"
+      },
+      {
+        "host": "iso.fudan.edu.cn",
+        "startedAt": "2026-08-26T03:05:20.358Z"
+      },
+      {
+        "host": "apply.shu.edu.cn",
+        "startedAt": "2026-08-26T03:05:20.360Z"
+      },
+      {
+        "host": "admissions.swu.edu.cn",
+        "startedAt": "2026-08-26T03:05:20.360Z"
+      }
+    ],
+    "adjacentHostIntervalsCompliant": true
+  },
+  "summary": {
+    "sources": 26,
+    "confirmedSources": 23,
+    "quarantinedSources": 3,
+    "packages": 38,
+    "readyPackages": 33,
+    "blockedPackages": 5,
+    "historicalStaleReferencePackages": 10
+  },
+  "sources": [
+    {
+      "sourceId": "bfsu-icl-scholarship-2026",
+      "status": "confirmed",
+      "officialUrl": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+      "finalOfficialUrl": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html",
+      "matchedExpectationGroups": 5,
+      "artifactSha256": "076811329c4922ed1d1177452da5deff36c6d52dca39f2e2b3b54f56cb1ebc8c",
+      "byteLength": 35588,
+      "r2Key": "source-artifacts/5ff2c7891cc3025606c30dbf/076811329c4922ed1d1177452da5deff36c6d52dca39f2e2b3b54f56cb1ebc8c.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/5ff2c7891cc3025606c30dbf/076811329c4922ed1d1177452da5deff36c6d52dca39f2e2b3b54f56cb1ebc8c.html",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "bfsu-scll-live",
+      "status": "confirmed",
+      "officialUrl": "https://osao.bfsu.edu.cn/info/2832/5592.htm",
+      "finalOfficialUrl": "https://osao.bfsu.edu.cn/info/2832/5592.htm",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html",
+      "matchedExpectationGroups": 5,
+      "artifactSha256": "5f02c1571d62ac072133db1fe221cf32478d99e34540aa463e5a95fe19f52e0b",
+      "byteLength": 45446,
+      "r2Key": "source-artifacts/a7eefc1bfca41726e5e3e0e4/5f02c1571d62ac072133db1fe221cf32478d99e34540aa463e5a95fe19f52e0b.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/a7eefc1bfca41726e5e3e0e4/5f02c1571d62ac072133db1fe221cf32478d99e34540aa463e5a95fe19f52e0b.html",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "bfsu-undergraduate-2026",
+      "status": "confirmed",
+      "officialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+      "finalOfficialUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html",
+      "matchedExpectationGroups": 6,
+      "artifactSha256": "2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329",
+      "byteLength": 40418,
+      "r2Key": "source-artifacts/1fc256edfb12a5d987fe5173/2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/1fc256edfb12a5d987fe5173/2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329.html",
+      "r2Action": "uploaded_and_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "blcu-graduate-live",
+      "status": "confirmed",
+      "officialUrl": "https://admission.blcu.edu.cn/en/376/list.htm",
+      "finalOfficialUrl": "https://admission.blcu.edu.cn/en/376/list.htm",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html",
+      "matchedExpectationGroups": 3,
+      "artifactSha256": "1562b8fda0f758738a0ecda17b94cda6172a7cdf9de035969476558ec7df8bfb",
+      "byteLength": 271284,
+      "r2Key": "source-artifacts/949735fe40030c2ae714f658/1562b8fda0f758738a0ecda17b94cda6172a7cdf9de035969476558ec7df8bfb.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/949735fe40030c2ae714f658/1562b8fda0f758738a0ecda17b94cda6172a7cdf9de035969476558ec7df8bfb.html",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "blcu-icl-scholarship-2026",
+      "status": "confirmed",
+      "officialUrl": "https://admission.blcu.edu.cn/en/2026/0303/c1148a3044/page.htm",
+      "finalOfficialUrl": "https://admission.blcu.edu.cn/en/2026/0303/c1148a3044/page.htm",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html",
+      "matchedExpectationGroups": 6,
+      "artifactSha256": "e4f81b6ecd4a07ba04ac429a79783dd8c8497bcee263b8ebdf1428f5ec687323",
+      "byteLength": 171117,
+      "r2Key": "source-artifacts/cf3d5feb6587fd795c790065/e4f81b6ecd4a07ba04ac429a79783dd8c8497bcee263b8ebdf1428f5ec687323.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/cf3d5feb6587fd795c790065/e4f81b6ecd4a07ba04ac429a79783dd8c8497bcee263b8ebdf1428f5ec687323.html",
+      "r2Action": "uploaded_and_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "blcu-undergraduate-live-2026",
+      "status": "confirmed",
+      "officialUrl": "https://admission.blcu.edu.cn/en/384/list.htm",
+      "finalOfficialUrl": "https://admission.blcu.edu.cn/en/384/list.htm",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html",
+      "matchedExpectationGroups": 5,
+      "artifactSha256": "016d37595e985e9e5c33d4d9825a80753e8461857cc3ac4e3aab3f5ca2ed2f96",
+      "byteLength": 126612,
+      "r2Key": "source-artifacts/99e381c65ca708180109c0a3/016d37595e985e9e5c33d4d9825a80753e8461857cc3ac4e3aab3f5ca2ed2f96.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/99e381c65ca708180109c0a3/016d37595e985e9e5c33d4d9825a80753e8461857cc3ac4e3aab3f5ca2ed2f96.html",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "ecnu-graduate-program-table-live",
+      "status": "confirmed",
+      "officialUrl": "https://lxs.ecnu.edu.cn/_s916/en/admission/degree_programs/graduate_program/programs/list.psp",
+      "finalOfficialUrl": "https://lxs.ecnu.edu.cn/_s916/en/admission/degree_programs/graduate_program/programs/list.psp",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html;charset=UTF-8",
+      "matchedExpectationGroups": 4,
+      "artifactSha256": "4cd0ce5fd905c4441cbcbd03042720486094fc267d29102b5a7f8eaf0fdbbbcf",
+      "byteLength": 113178,
+      "r2Key": "source-artifacts/adda18da95d4a797e59ae63f/4cd0ce5fd905c4441cbcbd03042720486094fc267d29102b5a7f8eaf0fdbbbcf.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/adda18da95d4a797e59ae63f/4cd0ce5fd905c4441cbcbd03042720486094fc267d29102b5a7f8eaf0fdbbbcf.html",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "ecnu-undergraduate-live",
+      "status": "confirmed",
+      "officialUrl": "https://lxs.ecnu.edu.cn/en/admission_degree_programs_undergraduate_program/list.htm",
+      "finalOfficialUrl": "https://lxs.ecnu.edu.cn/en/admission_degree_programs_undergraduate_program/list.htm",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html",
+      "matchedExpectationGroups": 4,
+      "artifactSha256": "9b24ebbd79833ff94cc2fcae25128bd527d19e9fc939b0e3b9614f904a955e29",
+      "byteLength": 65426,
+      "r2Key": "source-artifacts/5833c18d362b2516fbea4813/9b24ebbd79833ff94cc2fcae25128bd527d19e9fc939b0e3b9614f904a955e29.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/5833c18d362b2516fbea4813/9b24ebbd79833ff94cc2fcae25128bd527d19e9fc939b0e3b9614f904a955e29.html",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "fudan-cebp-2026",
+      "status": "confirmed",
+      "officialUrl": "https://iso.fudan.edu.cn/_upload/article/files/0c/b7/62dace38424b898022eeaf4b7665/4f0f35fe-0ca8-40d7-bacb-e67a5c16ddb0.pdf",
+      "finalOfficialUrl": "https://iso.fudan.edu.cn/_upload/article/files/0c/b7/62dace38424b898022eeaf4b7665/4f0f35fe-0ca8-40d7-bacb-e67a5c16ddb0.pdf",
+      "checkedAt": "2026-08-26",
+      "contentType": "application/pdf",
+      "matchedExpectationGroups": 5,
+      "artifactSha256": "253d3f567fe62e64c2dca03aaa7d100280e44554cd82b566e067f59684dfcc7f",
+      "byteLength": 936678,
+      "r2Key": "source-artifacts/d892eff85d80fc9b382ae270/253d3f567fe62e64c2dca03aaa7d100280e44554cd82b566e067f59684dfcc7f.pdf",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/d892eff85d80fc9b382ae270/253d3f567fe62e64c2dca03aaa7d100280e44554cd82b566e067f59684dfcc7f.pdf",
+      "r2Action": "uploaded_and_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "fudan-icl-language-2026",
+      "status": "confirmed",
+      "officialUrl": "https://iso.fudan.edu.cn/_upload/article/files/ec/db/98f894064930aeeec752ae6440b4/c5ee1e57-ef19-4b80-824e-d52ce48a22b5.pdf",
+      "finalOfficialUrl": "https://iso.fudan.edu.cn/_upload/article/files/ec/db/98f894064930aeeec752ae6440b4/c5ee1e57-ef19-4b80-824e-d52ce48a22b5.pdf",
+      "checkedAt": "2026-08-26",
+      "contentType": "application/pdf",
+      "matchedExpectationGroups": 5,
+      "artifactSha256": "41f14564b253d9dcbbfe689083e8c863351bd3b8fdd6aa9e496a2e30706fb846",
+      "byteLength": 147857,
+      "r2Key": "source-artifacts/63988551be62e01d61a00068/41f14564b253d9dcbbfe689083e8c863351bd3b8fdd6aa9e496a2e30706fb846.pdf",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/63988551be62e01d61a00068/41f14564b253d9dcbbfe689083e8c863351bd3b8fdd6aa9e496a2e30706fb846.pdf",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "fudan-icl-master-2026",
+      "status": "confirmed",
+      "officialUrl": "https://iso.fudan.edu.cn/_upload/article/files/e8/7f/880b67734458b73e4d3ffb0953f7/31ae1373-31de-48ce-8d14-3995a0e52a19.pdf",
+      "finalOfficialUrl": "https://iso.fudan.edu.cn/_upload/article/files/e8/7f/880b67734458b73e4d3ffb0953f7/31ae1373-31de-48ce-8d14-3995a0e52a19.pdf",
+      "checkedAt": "2026-08-26",
+      "contentType": "application/pdf",
+      "matchedExpectationGroups": 6,
+      "artifactSha256": "151468d28669b16dd3051aea685857f0beaea61269656c5d7f6c93190c51525b",
+      "byteLength": 133331,
+      "r2Key": "source-artifacts/a217a144568100283c35b595/151468d28669b16dd3051aea685857f0beaea61269656c5d7f6c93190c51525b.pdf",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/a217a144568100283c35b595/151468d28669b16dd3051aea685857f0beaea61269656c5d7f6c93190c51525b.pdf",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "hnu-csc-postgraduate-2026",
+      "status": "confirmed",
+      "officialUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+      "finalOfficialUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+      "checkedAt": "2026-08-26",
+      "contentType": "application/pdf",
+      "matchedExpectationGroups": 6,
+      "artifactSha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+      "byteLength": 296218,
+      "r2Key": "source-artifacts/a41ac3ab715a136bbf7a98a3/ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd.pdf",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/a41ac3ab715a136bbf7a98a3/ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd.pdf",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "hnu-self-financed-2025",
+      "status": "confirmed",
+      "officialUrl": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+      "finalOfficialUrl": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+      "checkedAt": "2026-08-26",
+      "contentType": "application/pdf",
+      "matchedExpectationGroups": 5,
+      "artifactSha256": "1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6",
+      "byteLength": 340044,
+      "r2Key": "source-artifacts/2048d2e975c1f454784b59b5/1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6.pdf",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/2048d2e975c1f454784b59b5/1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6.pdf",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "njust-official-application",
+      "status": "quarantine",
+      "officialUrl": "https://study.njust.edu.cn/",
+      "checkedAt": "2026-08-26",
+      "reason": "fetch failed",
+      "fullReadbackVerified": false
+    },
+    {
+      "sourceId": "njust-undergraduate-catalogue-2026",
+      "status": "quarantine",
+      "officialUrl": "https://study.njust.edu.cn/_upload/article/files/c7/93/9c7e117040008af4927036927a99/b75bbd08-7d75-4352-bfe6-4d68d079fda9.pdf",
+      "checkedAt": "2026-08-26",
+      "reason": "fetch failed",
+      "fullReadbackVerified": false
+    },
+    {
+      "sourceId": "shu-business-chinese-2026",
+      "status": "confirmed",
+      "officialUrl": "https://apply.shu.edu.cn/upload/shangda/3/a/3/2026%E5%B9%B4%E7%A7%8B%E5%AD%A3%E4%B8%8A%E6%B5%B7%E5%A4%A7%E5%AD%A6%E5%95%86%E5%8A%A1%E6%B1%89%E8%AF%AD%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%B8%80%E5%AD%A6%E6%9C%9F%EF%BC%89%E6%8B%9B%E7%94%9F%E7%AE%80%E7%AB%A0.pdf",
+      "finalOfficialUrl": "https://apply.shu.edu.cn/upload/shangda/3/a/3/2026%E5%B9%B4%E7%A7%8B%E5%AD%A3%E4%B8%8A%E6%B5%B7%E5%A4%A7%E5%AD%A6%E5%95%86%E5%8A%A1%E6%B1%89%E8%AF%AD%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%B8%80%E5%AD%A6%E6%9C%9F%EF%BC%89%E6%8B%9B%E7%94%9F%E7%AE%80%E7%AB%A0.pdf",
+      "checkedAt": "2026-08-26",
+      "contentType": "application/pdf",
+      "matchedExpectationGroups": 5,
+      "artifactSha256": "3109094ec5b36ba5669ea73f278aa9093c28e8c5ad46736909eeac66a26164c0",
+      "byteLength": 505058,
+      "r2Key": "source-artifacts/887d7e88bea7c425f5af8ff5/3109094ec5b36ba5669ea73f278aa9093c28e8c5ad46736909eeac66a26164c0.pdf",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/887d7e88bea7c425f5af8ff5/3109094ec5b36ba5669ea73f278aa9093c28e8c5ad46736909eeac66a26164c0.pdf",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "shu-icl-scholarship-2026",
+      "status": "confirmed",
+      "officialUrl": "https://apply.shu.edu.cn/upload/shangda/2/c/0/2026%E5%B9%B4%E4%B8%8A%E6%B5%B7%E5%A4%A7%E5%AD%A6%E5%9B%BD%E9%99%85%E4%B8%AD%E6%96%87%E6%95%99%E5%B8%88%E5%A5%96%E5%AD%A6%E9%87%91%EF%BC%88%E5%AD%94%E5%AD%90%E5%AD%A6%E9%99%A2%E5%A5%96%E5%AD%A6%E9%87%91%EF%BC%89%E7%94%B3%E8%AF%B7%E6%8C%87%E5%8D%97.pdf",
+      "finalOfficialUrl": "https://apply.shu.edu.cn/upload/shangda/2/c/0/2026%E5%B9%B4%E4%B8%8A%E6%B5%B7%E5%A4%A7%E5%AD%A6%E5%9B%BD%E9%99%85%E4%B8%AD%E6%96%87%E6%95%99%E5%B8%88%E5%A5%96%E5%AD%A6%E9%87%91%EF%BC%88%E5%AD%94%E5%AD%90%E5%AD%A6%E9%99%A2%E5%A5%96%E5%AD%A6%E9%87%91%EF%BC%89%E7%94%B3%E8%AF%B7%E6%8C%87%E5%8D%97.pdf",
+      "checkedAt": "2026-08-26",
+      "contentType": "application/pdf",
+      "matchedExpectationGroups": 6,
+      "artifactSha256": "cb9703d6835e09db3391b4d8beedb5ab820a8484b9000a3277a48334731951c4",
+      "byteLength": 1691575,
+      "r2Key": "source-artifacts/ac18865c2c6eee9b23046a3f/cb9703d6835e09db3391b4d8beedb5ab820a8484b9000a3277a48334731951c4.pdf",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/ac18865c2c6eee9b23046a3f/cb9703d6835e09db3391b4d8beedb5ab820a8484b9000a3277a48334731951c4.pdf",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "shu-one-year-chinese-2026",
+      "status": "confirmed",
+      "officialUrl": "https://apply.shu.edu.cn/upload/shangda/0/1/5/2026%E5%B9%B4%E6%98%A5%E5%AD%A3%E4%B8%8A%E6%B5%B7%E5%A4%A7%E5%AD%A6%E9%95%BF%E6%9C%9F%E6%B1%89%E8%AF%AD%E8%BF%9B%E4%BF%AE%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%B8%80%E5%B9%B4%EF%BC%89%E6%8B%9B%E7%94%9F%E7%AE%80%E7%AB%A0.pdf",
+      "finalOfficialUrl": "https://apply.shu.edu.cn/upload/shangda/0/1/5/2026%E5%B9%B4%E6%98%A5%E5%AD%A3%E4%B8%8A%E6%B5%B7%E5%A4%A7%E5%AD%A6%E9%95%BF%E6%9C%9F%E6%B1%89%E8%AF%AD%E8%BF%9B%E4%BF%AE%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%B8%80%E5%B9%B4%EF%BC%89%E6%8B%9B%E7%94%9F%E7%AE%80%E7%AB%A0.pdf",
+      "checkedAt": "2026-08-26",
+      "contentType": "application/pdf",
+      "matchedExpectationGroups": 4,
+      "artifactSha256": "f0b0fec731948f1996f8af188dd5d1efc19d73fbed261264363e0061200d1eeb",
+      "byteLength": 315263,
+      "r2Key": "source-artifacts/7f0d44ccf7fa55fa9f53d693/f0b0fec731948f1996f8af188dd5d1efc19d73fbed261264363e0061200d1eeb.pdf",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/7f0d44ccf7fa55fa9f53d693/f0b0fec731948f1996f8af188dd5d1efc19d73fbed261264363e0061200d1eeb.pdf",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "swu-chinese-training-live",
+      "status": "confirmed",
+      "officialUrl": "https://admissions.swu.edu.cn/info/1048/1051.htm",
+      "finalOfficialUrl": "https://admissions.swu.edu.cn/info/1048/1051.htm",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html",
+      "matchedExpectationGroups": 5,
+      "artifactSha256": "e73eb8957587757709fdaf6570c060b8e8482052a20f7a0fdc852fcd8b4bb134",
+      "byteLength": 154426,
+      "r2Key": "source-artifacts/6ae6beb63f7e5a1a16387fcb/e73eb8957587757709fdaf6570c060b8e8482052a20f7a0fdc852fcd8b4bb134.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/6ae6beb63f7e5a1a16387fcb/e73eb8957587757709fdaf6570c060b8e8482052a20f7a0fdc852fcd8b4bb134.html",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "swu-education-live",
+      "status": "confirmed",
+      "officialUrl": "https://admissions.swu.edu.cn/Degree_Programs/Undergraduate/Education.htm",
+      "finalOfficialUrl": "https://admissions.swu.edu.cn/Degree_Programs/Undergraduate/Education.htm",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html",
+      "matchedExpectationGroups": 4,
+      "artifactSha256": "e17c5ecaed81da168d81362633fece59e121d9f5ba48bb6689cabeb10b2b00ce",
+      "byteLength": 29780,
+      "r2Key": "source-artifacts/da2580c1406cdb2cced3b467/e17c5ecaed81da168d81362633fece59e121d9f5ba48bb6689cabeb10b2b00ce.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/da2580c1406cdb2cced3b467/e17c5ecaed81da168d81362633fece59e121d9f5ba48bb6689cabeb10b2b00ce.html",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "swu-engineering-live",
+      "status": "confirmed",
+      "officialUrl": "https://admissions.swu.edu.cn/Degree_Programs/Postgraduate/Engineering.htm",
+      "finalOfficialUrl": "https://admissions.swu.edu.cn/Degree_Programs/Postgraduate/Engineering.htm",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html",
+      "matchedExpectationGroups": 4,
+      "artifactSha256": "5954d87d2f423eb762f6e9931d9e0f6c2348ec85daf88e8967fcde437ef9d5ea",
+      "byteLength": 68695,
+      "r2Key": "source-artifacts/1985dc0983295c3ab0387c8e/5954d87d2f423eb762f6e9931d9e0f6c2348ec85daf88e8967fcde437ef9d5ea.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/1985dc0983295c3ab0387c8e/5954d87d2f423eb762f6e9931d9e0f6c2348ec85daf88e8967fcde437ef9d5ea.html",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "swu-icl-master-plan-2024",
+      "status": "confirmed",
+      "officialUrl": "https://gjxy.swu.edu.cn/info/1025/4400.htm",
+      "finalOfficialUrl": "https://gjxy.swu.edu.cn/info/1025/4400.htm",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html",
+      "matchedExpectationGroups": 3,
+      "artifactSha256": "fea699d41226a5c5a681735e91af0fd7d9ad4f48280a4cac1f976daebd615a6c",
+      "byteLength": 173884,
+      "r2Key": "source-artifacts/ba74518a783338990fc9b852/fea699d41226a5c5a681735e91af0fd7d9ad4f48280a4cac1f976daebd615a6c.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/ba74518a783338990fc9b852/fea699d41226a5c5a681735e91af0fd7d9ad4f48280a4cac1f976daebd615a6c.html",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "swu-icl-scholarship-2026",
+      "status": "quarantine",
+      "officialUrl": "https://gjxy.swu.edu.cn/jxj/gjzwjsjxj.htm",
+      "checkedAt": "2026-08-26",
+      "reason": "evidence_mismatch:groups_5",
+      "fullReadbackVerified": false
+    },
+    {
+      "sourceId": "xmu-chinese-program-live",
+      "status": "confirmed",
+      "officialUrl": "https://oec.xmu.edu.cn/en/Program1/Chinese_Language_Programs.htm",
+      "finalOfficialUrl": "https://oec.xmu.edu.cn/en/Program1/Chinese_Language_Programs.htm",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html",
+      "matchedExpectationGroups": 5,
+      "artifactSha256": "d37af527d320cd7dc2f38a2b43f0fca9871c92781f9e8733d8166bef7b7557c2",
+      "byteLength": 61385,
+      "r2Key": "source-artifacts/a4df332c738d04cd0fab2db3/d37af527d320cd7dc2f38a2b43f0fca9871c92781f9e8733d8166bef7b7557c2.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/a4df332c738d04cd0fab2db3/d37af527d320cd7dc2f38a2b43f0fca9871c92781f9e8733d8166bef7b7557c2.html",
+      "r2Action": "uploaded_and_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "xmu-costs-live",
+      "status": "confirmed",
+      "officialUrl": "https://admissions.xmu.edu.cn/Admissions/Costs.htm",
+      "finalOfficialUrl": "https://admissions.xmu.edu.cn/Admissions/Costs.htm",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html",
+      "matchedExpectationGroups": 8,
+      "artifactSha256": "a0e21c012eaebdbfb033aeed53abbbfdbfa246c188b99ff00059fceca862a76c",
+      "byteLength": 73160,
+      "r2Key": "source-artifacts/620cdf3890c5d658df5160ef/a0e21c012eaebdbfb033aeed53abbbfdbfa246c188b99ff00059fceca862a76c.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/620cdf3890c5d658df5160ef/a0e21c012eaebdbfb033aeed53abbbfdbfa246c188b99ff00059fceca862a76c.html",
+      "r2Action": "existing_object_readback_verified",
+      "fullReadbackVerified": true
+    },
+    {
+      "sourceId": "xmu-icl-scholarship-2026",
+      "status": "confirmed",
+      "officialUrl": "https://admissions.xmu.edu.cn/info/1061/4020.htm",
+      "finalOfficialUrl": "https://admissions.xmu.edu.cn/info/1061/4020.htm",
+      "checkedAt": "2026-08-26",
+      "contentType": "text/html",
+      "matchedExpectationGroups": 5,
+      "artifactSha256": "ff88643705b94ffcf8b39e08c7c7f64249dcc1e0699b5879aa2427abc5c363ba",
+      "byteLength": 54082,
+      "r2Key": "source-artifacts/5c3bf2a6d3c8c2c400a5589b/ff88643705b94ffcf8b39e08c7c7f64249dcc1e0699b5879aa2427abc5c363ba.html",
+      "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/5c3bf2a6d3c8c2c400a5589b/ff88643705b94ffcf8b39e08c7c7f64249dcc1e0699b5879aa2427abc5c363ba.html",
+      "r2Action": "uploaded_and_readback_verified",
+      "fullReadbackVerified": true
+    }
+  ],
+  "packages": [
+    {
+      "programId": "prog-gap-chinese-degree-blcu-international-chinese-education-master",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "blcu-graduate-live",
+        "blcu-icl-scholarship-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "prog-gap-chinese-degree-ecnu-business-chinese-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "ecnu-undergraduate-live"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "prog-gap-chinese-degree-ecnu-chinese-language-culture-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "ecnu-undergraduate-live"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "prog-gap-chinese-degree-ecnu-chinese-language-literature-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "ecnu-undergraduate-live"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "prog-gap-chinese-degree-ecnu-international-chinese-education-master",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "ecnu-graduate-program-table-live",
+        "ecnu-undergraduate-live"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "prog-gap-chinese-degree-fudan-international-chinese-education-master",
+      "decision": "promote_historical_cycle_only",
+      "disposition": "historical_stale_reference",
+      "sourceIds": [
+        "fudan-icl-master-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "prog-gap-clw-sw-swu-icl-master",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "swu-icl-master-plan-2024",
+        "swu-icl-scholarship-2026"
+      ],
+      "status": "blocked",
+      "blockingSourceIds": [
+        "swu-icl-scholarship-2026"
+      ]
+    },
+    {
+      "programId": "prog-gap-clw-sw-xmu-icl-master",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "xmu-costs-live",
+        "xmu-icl-scholarship-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "prog-gap-confirmed-swu-chinese-language-training",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "swu-chinese-training-live"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "prog-gap-shu-2026-master-icle",
+      "decision": "promote_historical_cycle_only",
+      "disposition": "historical_stale_reference",
+      "sourceIds": [
+        "shu-icl-scholarship-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "prog-gap-wave8-hnu-chemistry-doctorate",
+      "decision": "promote_historical_cycle_only",
+      "disposition": "historical_stale_reference",
+      "sourceIds": [
+        "hnu-csc-postgraduate-2026",
+        "hnu-self-financed-2025"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "prog-gap-wave8-hnu-computer-science-technology-master",
+      "decision": "promote_historical_cycle_only",
+      "disposition": "historical_stale_reference",
+      "sourceIds": [
+        "hnu-csc-postgraduate-2026",
+        "hnu-self-financed-2025"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "prog-gap-wave8-hnu-mechanical-engineering-doctorate",
+      "decision": "promote_historical_cycle_only",
+      "disposition": "historical_stale_reference",
+      "sourceIds": [
+        "hnu-csc-postgraduate-2026",
+        "hnu-self-financed-2025"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "prog-gap-wave8-njust-international-economics-trade-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "njust-official-application",
+        "njust-undergraduate-catalogue-2026"
+      ],
+      "status": "blocked",
+      "blockingSourceIds": [
+        "njust-official-application",
+        "njust-undergraduate-catalogue-2026"
+      ]
+    },
+    {
+      "programId": "prog-gap-wave8-njust-mechanical-engineering-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "njust-official-application",
+        "njust-undergraduate-catalogue-2026"
+      ],
+      "status": "blocked",
+      "blockingSourceIds": [
+        "njust-official-application",
+        "njust-undergraduate-catalogue-2026"
+      ]
+    },
+    {
+      "programId": "prog-gap-wave8-njust-nanomaterials-nanotechnology-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "njust-official-application",
+        "njust-undergraduate-catalogue-2026"
+      ],
+      "status": "blocked",
+      "blockingSourceIds": [
+        "njust-official-application",
+        "njust-undergraduate-catalogue-2026"
+      ]
+    },
+    {
+      "programId": "prog-gap-wave8-njust-software-engineering-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "njust-official-application",
+        "njust-undergraduate-catalogue-2026"
+      ],
+      "status": "blocked",
+      "blockingSourceIds": [
+        "njust-official-application",
+        "njust-undergraduate-catalogue-2026"
+      ]
+    },
+    {
+      "programId": "program-beijing-foreign-studies-university-finance-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "bfsu-undergraduate-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-beijing-foreign-studies-university-international-business-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "bfsu-undergraduate-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-beijing-foreign-studies-university-international-trade-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "bfsu-undergraduate-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-beijing-language-and-culture-university-chinese-language-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "blcu-undergraduate-live-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-beijing-language-and-culture-university-finance-english-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "blcu-undergraduate-live-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-bfsu-general-chinese-training-spring-2027",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "bfsu-scll-live",
+        "bfsu-undergraduate-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-bfsu-iclt-one-semester-spring-2027",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "bfsu-icl-scholarship-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-blcu-iclt-one-semester-spring-2027",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "blcu-icl-scholarship-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-fudan-university-chinese-economy-and-business-program-language",
+      "decision": "promote_historical_cycle_only",
+      "disposition": "historical_stale_reference",
+      "sourceIds": [
+        "fudan-cebp-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-fudan-university-international-chinese-language-teachers-scholarship-one",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "fudan-icl-language-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-hunan-university-applied-economics-master",
+      "decision": "promote_historical_cycle_only",
+      "disposition": "historical_stale_reference",
+      "sourceIds": [
+        "hnu-csc-postgraduate-2026",
+        "hnu-self-financed-2025"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-hunan-university-business-administration-master",
+      "decision": "promote_historical_cycle_only",
+      "disposition": "historical_stale_reference",
+      "sourceIds": [
+        "hnu-csc-postgraduate-2026",
+        "hnu-self-financed-2025"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-shanghai-university-one-semester-business-chinese-program-language",
+      "decision": "promote_historical_cycle_only",
+      "disposition": "historical_stale_reference",
+      "sourceIds": [
+        "shu-business-chinese-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-shanghai-university-one-year-intensive-chinese-language-program-language",
+      "decision": "promote_historical_cycle_only",
+      "disposition": "historical_stale_reference",
+      "sourceIds": [
+        "shu-one-year-chinese-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-shu-iclt-one-semester-spring-2027",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "shu-icl-scholarship-2026"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-southwest-university-education-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "swu-education-live"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-southwest-university-environmental-science-master",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "swu-engineering-live"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-xiamen-university-digital-media-art-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "xmu-costs-live"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-xiamen-university-environmental-design-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "xmu-costs-live"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-xiamen-university-visual-communication-design-bachelor",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "xmu-costs-live"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    },
+    {
+      "programId": "program-xmu-long-term-chinese-language-spring-2027",
+      "decision": "promote_current_or_stable",
+      "disposition": "current_or_stable",
+      "sourceIds": [
+        "xmu-chinese-program-live",
+        "xmu-costs-live"
+      ],
+      "status": "ready_for_staged_import",
+      "blockingSourceIds": []
+    }
+  ]
+}

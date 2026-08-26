@@ -162,4 +162,31 @@ describe('favorites comparison workspace', () => {
     expect(screen.getByRole('link', { name: /Official source/ })).toBeVisible()
     expect(screen.queryByRole('link', { name: /Apply on official site/ })).not.toBeInTheDocument()
   })
+
+  it('keeps reference tuition concise in comparison cards', async () => {
+    window.localStorage.setItem(FAVORITES_KEY, JSON.stringify([ids[0]]))
+    const item = comparisonItem(ids[0])
+    vi.stubGlobal('fetch', vi.fn(async () => ({
+      ok: true,
+      status: 200,
+      json: async () => ({
+        data: {
+          items: [{
+            ...item,
+            currentCycle: { ...item.currentCycle, tuitionStatus: 'reference' },
+          }],
+          missingIds: [],
+        },
+        meta: {},
+      }),
+    }) as Response))
+    const user = userEvent.setup()
+    const messages = getMessages('en')
+
+    render(<FavoritesView locale="en" messages={messages} />)
+    await user.click(await screen.findByRole('checkbox'))
+
+    expect(screen.getByText(/CN¥\s*30,000/)).toBeVisible()
+    expect(screen.queryByText(messages.programs.tuitionReference)).not.toBeInTheDocument()
+  })
 })

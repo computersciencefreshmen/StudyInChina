@@ -320,6 +320,69 @@ describe('SourceManifestV2 cohort candidate builder', () => {
     ])
   })
 
+  it('rejects institution-scoped sources owned by another university while retaining shared government sources', () => {
+    const input = fixture()
+    input.universities.push({
+      id: 'uni-source-owner',
+      slug: 'source-owner',
+      name: { en: 'Source Owner University' },
+      sourceIds: ['src-other-university-home'],
+    })
+    input.sources.push(
+      {
+        id: 'src-other-university-home',
+        url: 'https://international.owner.edu.cn/',
+        title: 'Other university admissions home',
+        kind: 'admissions',
+        official: true,
+      },
+      {
+        id: 'src-shared-government-scholarship',
+        url: 'https://scholarship.gov.cn/shared-program',
+        title: 'Shared government scholarship',
+        kind: 'government',
+        official: true,
+      },
+    )
+    input.scholarships.push(
+      {
+        id: 'scholarship-city-with-wrong-university-source',
+        name: { en: 'City scholarship with a university-hosted source' },
+        providerType: 'city',
+        universityIds: ['uni-test-university', 'uni-source-owner'],
+        sourceIds: ['src-other-university-home'],
+      },
+      {
+        id: 'scholarship-shared-government',
+        name: { en: 'Shared government scholarship' },
+        providerType: 'government',
+        universityIds: ['uni-test-university', 'uni-source-owner'],
+        sourceIds: ['src-shared-government-scholarship'],
+      },
+    )
+
+    const build = buildSourceManifestCohort(input)
+    const candidate = build.candidates.find(
+      (item) => item.manifest.institutionId === 'uni-test-university',
+    )!
+    const officialUrls = candidate.manifest.sources.map((source) => source.officialUrl)
+
+    expect(officialUrls).not.toContain('https://international.owner.edu.cn/')
+    expect(officialUrls).toContain('https://scholarship.gov.cn/shared-program')
+    expect(candidate.manifest.catalogReconciliation.entries.some(
+      (entry) => entry.officialKey === 'scholarship-city-with-wrong-university-source',
+    )).toBe(false)
+    expect(candidate.manifest.catalogReconciliation.entries.some(
+      (entry) => entry.officialKey === 'scholarship-shared-government',
+    )).toBe(true)
+    expect(build.gapReport.institutionCoverage.find(
+      (coverage) => coverage.institutionId === 'uni-test-university',
+    )?.rejectedSources).toContainEqual({
+      sourceId: 'src-other-university-home',
+      reason: 'institution_ownership_mismatch',
+    })
+  })
+
   it('is deterministic regardless of input order and exposes a no-write dry-run summary', () => {
     const input = fixture()
     const expected = buildSourceManifestCohort(input)

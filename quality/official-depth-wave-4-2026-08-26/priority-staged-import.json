@@ -1,0 +1,2541 @@
+{
+  "schemaVersion": "studyinchina.wave4-priority-staged-import.v1",
+  "generatedFromAuditDate": "2026-08-26",
+  "formalCatalogWrite": false,
+  "summary": {
+    "closurePackages": 38,
+    "stagedCandidates": 33,
+    "blockedCandidates": 5,
+    "historicalStaleCandidates": 12,
+    "currentConfirmedMetricEligible": 6,
+    "datedOrRollingMetricEligible": 6,
+    "activeUpcomingMetricEligible": 6,
+    "referenceTuitionCandidates": 20,
+    "confirmedTuitionCandidates": 10
+  },
+  "candidates": [
+    {
+      "programId": "prog-gap-chinese-degree-blcu-international-chinese-education-master",
+      "universityId": "uni-beijing-language-and-culture-university",
+      "name": "International Chinese Language Education",
+      "degreeLevel": "master",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "blcu-graduate-live",
+          "artifactSha256": "1562b8fda0f758738a0ecda17b94cda6172a7cdf9de035969476558ec7df8bfb",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/949735fe40030c2ae714f658/1562b8fda0f758738a0ecda17b94cda6172a7cdf9de035969476558ec7df8bfb.html"
+        },
+        {
+          "sourceId": "blcu-icl-scholarship-2026",
+          "artifactSha256": "e4f81b6ecd4a07ba04ac429a79783dd8c8497bcee263b8ebdf1428f5ec687323",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/cf3d5feb6587fd795c790065/e4f81b6ecd4a07ba04ac429a79783dd8c8497bcee263b8ebdf1428f5ec687323.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": null,
+          "fundingDurationMonths": 24,
+          "status": "route_specific_funding_duration",
+          "evidenceRefs": [
+            "blcu-icl-scholarship-2026"
+          ]
+        },
+        "tuition": {
+          "amountCny": 30000,
+          "period": "academic_year",
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "blcu-graduate-live"
+          ]
+        },
+        "deadline": {
+          "value": "2026-05-15",
+          "status": "historical_closed",
+          "evidenceRefs": [
+            "blcu-icl-scholarship-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "Bachelor's degree",
+            "HSK 5 score 210",
+            "HSKK Intermediate score 60"
+          ],
+          "status": "historical_route_specific",
+          "evidenceRefs": [
+            "blcu-icl-scholarship-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": [
+            "https://pmplatform.chinese.cn/ui/start/#/login",
+            "https://apply.blcu.edu.cn/"
+          ],
+          "status": "official_routes",
+          "evidenceRefs": [
+            "blcu-icl-scholarship-2026",
+            "blcu-graduate-live"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "historical_closed",
+        "cycleStatus": "stale",
+        "dateStatus": "previous-cycle-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": "2026-05-15",
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [],
+      "unknowns": [
+        "program-specific academic duration outside the scholarship route",
+        "next open degree deadline"
+      ]
+    },
+    {
+      "programId": "prog-gap-chinese-degree-ecnu-business-chinese-bachelor",
+      "universityId": "uni-east-china-normal-university",
+      "name": "Business Chinese",
+      "degreeLevel": "bachelor",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "ecnu-undergraduate-live",
+          "artifactSha256": "9b24ebbd79833ff94cc2fcae25128bd527d19e9fc939b0e3b9614f904a955e29",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/5833c18d362b2516fbea4813/9b24ebbd79833ff94cc2fcae25128bd527d19e9fc939b0e3b9614f904a955e29.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 48,
+          "unit": "months",
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        },
+        "tuition": {
+          "amountCny": null,
+          "status": "officially_not_announced_in_selected_source",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "year_ambiguous",
+          "note": "Live page prints June 15 for self-funded programs without a cycle year.",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "high school qualification",
+            "valid foreign passport",
+            "HSK 4 score 180"
+          ],
+          "status": "live_official_reference",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://lxsapply.ecnu.edu.cn/",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "undated-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "officially_not_announced",
+        "tuitionAcademicYear": null
+      },
+      "conflicts": [],
+      "unknowns": [
+        "2026/2027 tuition",
+        "year-qualified deadline"
+      ]
+    },
+    {
+      "programId": "prog-gap-chinese-degree-ecnu-chinese-language-culture-bachelor",
+      "universityId": "uni-east-china-normal-university",
+      "name": "Chinese Language and Culture",
+      "degreeLevel": "bachelor",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "ecnu-undergraduate-live",
+          "artifactSha256": "9b24ebbd79833ff94cc2fcae25128bd527d19e9fc939b0e3b9614f904a955e29",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/5833c18d362b2516fbea4813/9b24ebbd79833ff94cc2fcae25128bd527d19e9fc939b0e3b9614f904a955e29.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 48,
+          "unit": "months",
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        },
+        "tuition": {
+          "amountCny": null,
+          "status": "officially_not_announced_in_selected_source",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "year_ambiguous",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "high school qualification",
+            "valid foreign passport",
+            "HSK 4 score 180"
+          ],
+          "status": "live_official_reference",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://lxsapply.ecnu.edu.cn/",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "undated-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "officially_not_announced",
+        "tuitionAcademicYear": null
+      },
+      "conflicts": [],
+      "unknowns": [
+        "2026/2027 tuition",
+        "year-qualified deadline"
+      ]
+    },
+    {
+      "programId": "prog-gap-chinese-degree-ecnu-chinese-language-literature-bachelor",
+      "universityId": "uni-east-china-normal-university",
+      "name": "Chinese Language and Literature",
+      "degreeLevel": "bachelor",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "ecnu-undergraduate-live",
+          "artifactSha256": "9b24ebbd79833ff94cc2fcae25128bd527d19e9fc939b0e3b9614f904a955e29",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/5833c18d362b2516fbea4813/9b24ebbd79833ff94cc2fcae25128bd527d19e9fc939b0e3b9614f904a955e29.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 48,
+          "unit": "months",
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        },
+        "tuition": {
+          "amountCny": null,
+          "status": "officially_not_announced_in_selected_source",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "year_ambiguous",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "high school qualification",
+            "valid foreign passport",
+            "HSK 4 score 180"
+          ],
+          "status": "live_official_reference",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://lxsapply.ecnu.edu.cn/",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "undated-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "officially_not_announced",
+        "tuitionAcademicYear": null
+      },
+      "conflicts": [],
+      "unknowns": [
+        "2026/2027 tuition",
+        "year-qualified deadline"
+      ]
+    },
+    {
+      "programId": "prog-gap-chinese-degree-ecnu-international-chinese-education-master",
+      "universityId": "uni-east-china-normal-university",
+      "name": "International Chinese Language Education",
+      "degreeLevel": "master",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "ecnu-graduate-program-table-live",
+          "artifactSha256": "4cd0ce5fd905c4441cbcbd03042720486094fc267d29102b5a7f8eaf0fdbbbcf",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/adda18da95d4a797e59ae63f/4cd0ce5fd905c4441cbcbd03042720486094fc267d29102b5a7f8eaf0fdbbbcf.html"
+        },
+        {
+          "sourceId": "ecnu-undergraduate-live",
+          "artifactSha256": "9b24ebbd79833ff94cc2fcae25128bd527d19e9fc939b0e3b9614f904a955e29",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/5833c18d362b2516fbea4813/9b24ebbd79833ff94cc2fcae25128bd527d19e9fc939b0e3b9614f904a955e29.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 24,
+          "unit": "months",
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "ecnu-graduate-program-table-live"
+          ]
+        },
+        "tuition": {
+          "amountCny": 25800,
+          "period": "academic_year",
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "ecnu-graduate-program-table-live"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "officially_not_announced_in_selected_source",
+          "evidenceRefs": [
+            "ecnu-graduate-program-table-live"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "HSK 5 score 210"
+          ],
+          "status": "live_official_reference",
+          "evidenceRefs": [
+            "ecnu-graduate-program-table-live"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://lxsapply.ecnu.edu.cn/",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "ecnu-undergraduate-live"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "undated-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": null
+      },
+      "conflicts": [],
+      "unknowns": [
+        "2026/2027 exact application window"
+      ]
+    },
+    {
+      "programId": "prog-gap-chinese-degree-fudan-international-chinese-education-master",
+      "universityId": "uni-fudan-university",
+      "name": "Teaching Chinese to Speakers of Other Languages / International Chinese Language Education",
+      "degreeLevel": "master",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "fudan-icl-master-2026",
+          "artifactSha256": "151468d28669b16dd3051aea685857f0beaea61269656c5d7f6c93190c51525b",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/a217a144568100283c35b595/151468d28669b16dd3051aea685857f0beaea61269656c5d7f6c93190c51525b.pdf"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 36,
+          "unit": "months",
+          "fundingDurationMonths": 24,
+          "status": "official_semantic_split",
+          "evidenceRefs": [
+            "fudan-icl-master-2026"
+          ]
+        },
+        "tuition": {
+          "amountCny": null,
+          "coverage": "scholarship funds first two years; student bears third-year tuition and related costs",
+          "status": "historical_2026_cycle",
+          "evidenceRefs": [
+            "fudan-icl-master-2026"
+          ]
+        },
+        "deadline": {
+          "value": "2026-05-15",
+          "status": "historical_closed",
+          "evidenceRefs": [
+            "fudan-icl-master-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "Bachelor's degree",
+            "HSK 6 score 180",
+            "HSKK Advanced score 60",
+            "two academic recommendations"
+          ],
+          "status": "historical_route_specific",
+          "evidenceRefs": [
+            "fudan-icl-master-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://pmplatform.chinese.cn/ui/start/#/login",
+          "status": "historical_official_route",
+          "evidenceRefs": [
+            "fudan-icl-master-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "historical_closed",
+        "cycleStatus": "stale",
+        "dateStatus": "previous-cycle-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": "2026-05-15",
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [
+        "The program is 36 months but scholarship coverage is 24 months; these are different facts and must remain separate."
+      ],
+      "unknowns": [
+        "numeric third-year tuition",
+        "next deadline"
+      ]
+    },
+    {
+      "programId": "prog-gap-clw-sw-xmu-icl-master",
+      "universityId": "uni-xiamen-university",
+      "name": "Master of International Chinese Language Education",
+      "degreeLevel": "master",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "xmu-costs-live",
+          "artifactSha256": "a0e21c012eaebdbfb033aeed53abbbfdbfa246c188b99ff00059fceca862a76c",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/620cdf3890c5d658df5160ef/a0e21c012eaebdbfb033aeed53abbbfdbfa246c188b99ff00059fceca862a76c.html"
+        },
+        {
+          "sourceId": "xmu-icl-scholarship-2026",
+          "artifactSha256": "ff88643705b94ffcf8b39e08c7c7f64249dcc1e0699b5879aa2427abc5c363ba",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/5c3bf2a6d3c8c2c400a5589b/ff88643705b94ffcf8b39e08c7c7f64249dcc1e0699b5879aa2427abc5c363ba.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 24,
+          "unit": "months",
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        },
+        "tuition": {
+          "amountCny": 30000,
+          "period": "academic_year",
+          "applicationFeeCny": 400,
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        },
+        "deadline": {
+          "value": "2026-05-15",
+          "status": "historical_closed_scholarship_route",
+          "evidenceRefs": [
+            "xmu-icl-scholarship-2026"
+          ]
+        },
+        "requirements": {
+          "value": null,
+          "status": "not_reverified_for_self_funded_route",
+          "evidenceRefs": [
+            "xmu-icl-scholarship-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://application.xmu.edu.cn/",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "historical_closed",
+        "cycleStatus": "stale",
+        "dateStatus": "previous-cycle-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": "2026-05-15",
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [],
+      "unknowns": [
+        "next degree deadline",
+        "route-specific language requirement"
+      ]
+    },
+    {
+      "programId": "prog-gap-confirmed-swu-chinese-language-training",
+      "universityId": "uni-southwest-university",
+      "name": "Chinese Language Training Program",
+      "degreeLevel": "language",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "swu-chinese-training-live",
+          "artifactSha256": "e73eb8957587757709fdaf6570c060b8e8482052a20f7a0fdc852fcd8b4bb134",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/6ae6beb63f7e5a1a16387fcb/e73eb8957587757709fdaf6570c060b8e8482052a20f7a0fdc852fcd8b4bb134.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "variants": [
+            {
+              "label": "one year",
+              "value": 12,
+              "unit": "months"
+            },
+            {
+              "label": "one semester",
+              "value": 6,
+              "unit": "months"
+            }
+          ],
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "swu-chinese-training-live"
+          ]
+        },
+        "tuition": {
+          "variants": [
+            {
+              "amountCny": 15000,
+              "period": "year"
+            },
+            {
+              "amountCny": 8000,
+              "period": "semester"
+            }
+          ],
+          "applicationFeeCny": 500,
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "swu-chinese-training-live"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "not_exact",
+          "note": "The page says usually two or three months before a semester; no exact date is published.",
+          "evidenceRefs": [
+            "swu-chinese-training-live"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "non-Chinese citizen in good health",
+            "age 16 or above",
+            "valid foreign passport"
+          ],
+          "status": "live_official_reference",
+          "evidenceRefs": [
+            "swu-chinese-training-live"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://swu.17gz.org/member/login.do",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "swu-chinese-training-live"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "undated-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": null
+      },
+      "conflicts": [
+        "The current catalog has one identity record for two official duration/fee variants; materializer should model variants or split cycles rather than choose one scalar duration."
+      ],
+      "unknowns": [
+        "2026/2027 exact intake deadline"
+      ]
+    },
+    {
+      "programId": "prog-gap-shu-2026-master-icle",
+      "universityId": "uni-shanghai-university",
+      "name": "International Chinese Language Education",
+      "degreeLevel": "master",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "shu-icl-scholarship-2026",
+          "artifactSha256": "cb9703d6835e09db3391b4d8beedb5ab820a8484b9000a3277a48334731951c4",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/ac18865c2c6eee9b23046a3f/cb9703d6835e09db3391b4d8beedb5ab820a8484b9000a3277a48334731951c4.pdf"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": null,
+          "fundingDurationMonths": 24,
+          "status": "historical_route_specific",
+          "evidenceRefs": [
+            "shu-icl-scholarship-2026"
+          ]
+        },
+        "tuition": {
+          "amountCny": null,
+          "coverage": "full tuition under scholarship",
+          "status": "historical_2026_cycle",
+          "evidenceRefs": [
+            "shu-icl-scholarship-2026"
+          ]
+        },
+        "deadline": {
+          "value": "2026-05-15",
+          "status": "historical_closed",
+          "evidenceRefs": [
+            "shu-icl-scholarship-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "Bachelor's degree",
+            "HSK 5 score 210",
+            "HSKK Intermediate score 60",
+            "two academic recommendations"
+          ],
+          "status": "historical_route_specific",
+          "evidenceRefs": [
+            "shu-icl-scholarship-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": [
+            "https://pmplatform.chinese.cn/ui/start/#/login",
+            "https://apply.shu.edu.cn/"
+          ],
+          "status": "historical_official_routes",
+          "evidenceRefs": [
+            "shu-icl-scholarship-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "historical_closed",
+        "cycleStatus": "stale",
+        "dateStatus": "previous-cycle-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": "2026-05-15",
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [],
+      "unknowns": [
+        "academic program duration independent of scholarship funding",
+        "self-funded tuition",
+        "next deadline"
+      ]
+    },
+    {
+      "programId": "prog-gap-wave8-hnu-chemistry-doctorate",
+      "universityId": "uni-hunan-university",
+      "name": "Chemistry",
+      "degreeLevel": "doctorate",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "hnu-csc-postgraduate-2026",
+          "artifactSha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/a41ac3ab715a136bbf7a98a3/ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd.pdf"
+        },
+        {
+          "sourceId": "hnu-self-financed-2025",
+          "artifactSha256": "1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/2048d2e975c1f454784b59b5/1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6.pdf"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": null,
+          "status": "unknown"
+        },
+        "tuition": {
+          "amountCny": null,
+          "coverage": "full tuition under 2026 CSC route",
+          "historicalSelfPayRule": "2025 doctorate category table plus CNY 3,000 for English teaching",
+          "status": "historical_only",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026",
+            "hnu-self-financed-2025"
+          ]
+        },
+        "deadline": {
+          "value": "2026-03-01",
+          "status": "historical_closed",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "Master's degree",
+            "under age 40",
+            "HSK 4 or IELTS 6.0/TOEFL 80 by teaching language"
+          ],
+          "status": "historical_route_specific",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://studyinchina.csc.edu.cn/#/login",
+          "status": "historical_scholarship_route",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "historical_closed",
+        "cycleStatus": "stale",
+        "dateStatus": "previous-cycle-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": "2026-03-01",
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [],
+      "unknowns": [
+        "duration",
+        "current self-funded tuition",
+        "next deadline"
+      ]
+    },
+    {
+      "programId": "prog-gap-wave8-hnu-computer-science-technology-master",
+      "universityId": "uni-hunan-university",
+      "name": "Computer Science and Technology",
+      "degreeLevel": "master",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "hnu-csc-postgraduate-2026",
+          "artifactSha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/a41ac3ab715a136bbf7a98a3/ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd.pdf"
+        },
+        {
+          "sourceId": "hnu-self-financed-2025",
+          "artifactSha256": "1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/2048d2e975c1f454784b59b5/1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6.pdf"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": null,
+          "status": "unknown"
+        },
+        "tuition": {
+          "amountCny": null,
+          "coverage": "full tuition under 2026 CSC route",
+          "historicalSelfPayRule": "2025 master's category table plus CNY 3,000 for English teaching",
+          "status": "historical_only",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026",
+            "hnu-self-financed-2025"
+          ]
+        },
+        "deadline": {
+          "value": "2026-03-01",
+          "status": "historical_closed",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "Bachelor's degree",
+            "under age 35",
+            "HSK 4 or IELTS 6.0/TOEFL 80 by teaching language"
+          ],
+          "status": "historical_route_specific",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://studyinchina.csc.edu.cn/#/login",
+          "status": "historical_scholarship_route",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "historical_closed",
+        "cycleStatus": "stale",
+        "dateStatus": "previous-cycle-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": "2026-03-01",
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [],
+      "unknowns": [
+        "duration",
+        "current self-funded tuition",
+        "next deadline"
+      ]
+    },
+    {
+      "programId": "prog-gap-wave8-hnu-mechanical-engineering-doctorate",
+      "universityId": "uni-hunan-university",
+      "name": "Mechanical Engineering",
+      "degreeLevel": "doctorate",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "hnu-csc-postgraduate-2026",
+          "artifactSha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/a41ac3ab715a136bbf7a98a3/ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd.pdf"
+        },
+        {
+          "sourceId": "hnu-self-financed-2025",
+          "artifactSha256": "1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/2048d2e975c1f454784b59b5/1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6.pdf"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": null,
+          "status": "unknown"
+        },
+        "tuition": {
+          "amountCny": null,
+          "coverage": "full tuition under 2026 CSC route",
+          "historicalSelfPayRule": "2025 doctorate category table plus CNY 3,000 for English teaching",
+          "status": "historical_only",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026",
+            "hnu-self-financed-2025"
+          ]
+        },
+        "deadline": {
+          "value": "2026-03-01",
+          "status": "historical_closed",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "Master's degree",
+            "under age 40",
+            "HSK 4 or IELTS 6.0/TOEFL 80 by teaching language"
+          ],
+          "status": "historical_route_specific",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://studyinchina.csc.edu.cn/#/login",
+          "status": "historical_scholarship_route",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "historical_closed",
+        "cycleStatus": "stale",
+        "dateStatus": "previous-cycle-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": "2026-03-01",
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [],
+      "unknowns": [
+        "duration",
+        "current self-funded tuition",
+        "next deadline"
+      ]
+    },
+    {
+      "programId": "program-beijing-foreign-studies-university-finance-bachelor",
+      "universityId": "uni-beijing-foreign-studies-university",
+      "name": "Finance",
+      "degreeLevel": "bachelor",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "bfsu-undergraduate-2026",
+          "artifactSha256": "2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/1fc256edfb12a5d987fe5173/2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 48,
+          "unit": "months",
+          "status": "current_2026_page",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        },
+        "tuition": {
+          "amountCny": 39900,
+          "period": "academic_year",
+          "applicationFeeCny": 800,
+          "status": "current_2026_page",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "intake_year_conflict",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "foreign ordinary passport",
+            "senior high school completion",
+            "CSCA Mathematics",
+            "major-specific English proof"
+          ],
+          "status": "current_2026_page",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://study.bfsu.edu.cn/",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "undated-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "confirmed",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [
+        "The 2026 prospectus says enrollment in 2026 but prints a spring window of 2026-10-15 through 2026-12-15; treat the dates as printed but do not assign an intake year without confirmation."
+      ],
+      "unknowns": [
+        "cycle-qualified spring deadline"
+      ]
+    },
+    {
+      "programId": "program-beijing-foreign-studies-university-international-business-bachelor",
+      "universityId": "uni-beijing-foreign-studies-university",
+      "name": "International Business",
+      "degreeLevel": "bachelor",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "bfsu-undergraduate-2026",
+          "artifactSha256": "2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/1fc256edfb12a5d987fe5173/2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 48,
+          "unit": "months",
+          "status": "current_2026_page",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        },
+        "tuition": {
+          "amountCny": 39900,
+          "period": "academic_year",
+          "applicationFeeCny": 800,
+          "status": "current_2026_page",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "intake_year_conflict",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "foreign ordinary passport",
+            "senior high school completion",
+            "CSCA Mathematics",
+            "major-specific English proof"
+          ],
+          "status": "current_2026_page",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://study.bfsu.edu.cn/",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "undated-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "confirmed",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [
+        "Same intake-year inconsistency as the Finance record."
+      ],
+      "unknowns": [
+        "cycle-qualified spring deadline"
+      ]
+    },
+    {
+      "programId": "program-beijing-foreign-studies-university-international-trade-bachelor",
+      "universityId": "uni-beijing-foreign-studies-university",
+      "name": "International Trade",
+      "degreeLevel": "bachelor",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "bfsu-undergraduate-2026",
+          "artifactSha256": "2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/1fc256edfb12a5d987fe5173/2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 48,
+          "unit": "months",
+          "status": "current_2026_page",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        },
+        "tuition": {
+          "amountCny": 39900,
+          "period": "academic_year",
+          "applicationFeeCny": 800,
+          "status": "current_2026_page",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "intake_year_conflict",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "foreign ordinary passport",
+            "senior high school completion",
+            "CSCA Mathematics",
+            "major-specific English proof"
+          ],
+          "status": "current_2026_page",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://study.bfsu.edu.cn/",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "undated-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "confirmed",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [
+        "Same intake-year inconsistency as the Finance record."
+      ],
+      "unknowns": [
+        "cycle-qualified spring deadline"
+      ]
+    },
+    {
+      "programId": "program-beijing-language-and-culture-university-chinese-language-bachelor",
+      "universityId": "uni-beijing-language-and-culture-university",
+      "name": "Chinese Language",
+      "degreeLevel": "bachelor",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "blcu-undergraduate-live-2026",
+          "artifactSha256": "016d37595e985e9e5c33d4d9825a80753e8461857cc3ac4e3aab3f5ca2ed2f96",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/99e381c65ca708180109c0a3/016d37595e985e9e5c33d4d9825a80753e8461857cc3ac4e3aab3f5ca2ed2f96.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": null,
+          "status": "unknown"
+        },
+        "tuition": {
+          "amountCny": 25800,
+          "period": "academic_year",
+          "status": "current_2026_live_page",
+          "evidenceRefs": [
+            "blcu-undergraduate-live-2026"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "source_typo_or_ambiguity",
+          "evidenceRefs": [
+            "blcu-undergraduate-live-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "high school diploma",
+            "HSK 4 score 180",
+            "CSCA results required from Fall 2026"
+          ],
+          "status": "current_2026_live_page",
+          "evidenceRefs": [
+            "blcu-undergraduate-live-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://apply.blcu.edu.cn/",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "blcu-undergraduate-live-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "undated-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "confirmed",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [
+        "The page prints 'September 2025' with a June 30, 2026 deadline; deadline is withheld pending correction."
+      ],
+      "unknowns": [
+        "unambiguous 2026/2027 deadline",
+        "program-specific duration from a directly located official row"
+      ]
+    },
+    {
+      "programId": "program-beijing-language-and-culture-university-finance-english-bachelor",
+      "universityId": "uni-beijing-language-and-culture-university",
+      "name": "Finance (English-taught)",
+      "degreeLevel": "bachelor",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "blcu-undergraduate-live-2026",
+          "artifactSha256": "016d37595e985e9e5c33d4d9825a80753e8461857cc3ac4e3aab3f5ca2ed2f96",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/99e381c65ca708180109c0a3/016d37595e985e9e5c33d4d9825a80753e8461857cc3ac4e3aab3f5ca2ed2f96.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": null,
+          "status": "unknown"
+        },
+        "tuition": {
+          "amountCny": 39000,
+          "period": "academic_year",
+          "status": "current_2026_live_page",
+          "evidenceRefs": [
+            "blcu-undergraduate-live-2026"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "source_typo_or_ambiguity",
+          "evidenceRefs": [
+            "blcu-undergraduate-live-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "high school diploma",
+            "IELTS 5.5 with no component below 5.5 or TOEFL 80 or TOEIC 650",
+            "interview",
+            "CSCA"
+          ],
+          "status": "current_2026_live_page",
+          "evidenceRefs": [
+            "blcu-undergraduate-live-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://apply.blcu.edu.cn/",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "blcu-undergraduate-live-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "undated-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "confirmed",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [
+        "The undergraduate application-date text is internally inconsistent; no date is promoted."
+      ],
+      "unknowns": [
+        "unambiguous 2026/2027 deadline",
+        "program-specific duration from a directly located official row"
+      ]
+    },
+    {
+      "programId": "program-bfsu-general-chinese-training-spring-2027",
+      "universityId": "uni-beijing-foreign-studies-university",
+      "name": "General Chinese Training (Spring 2027)",
+      "degreeLevel": "language",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "bfsu-scll-live",
+          "artifactSha256": "5f02c1571d62ac072133db1fe221cf32478d99e34540aa463e5a95fe19f52e0b",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/a7eefc1bfca41726e5e3e0e4/5f02c1571d62ac072133db1fe221cf32478d99e34540aa463e5a95fe19f52e0b.html"
+        },
+        {
+          "sourceId": "bfsu-undergraduate-2026",
+          "artifactSha256": "2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/1fc256edfb12a5d987fe5173/2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": "one semester, approximately 18 weeks",
+          "status": "live_recurring_official_reference",
+          "evidenceRefs": [
+            "bfsu-scll-live"
+          ]
+        },
+        "tuition": {
+          "amountCny": 12000,
+          "period": "semester",
+          "applicationFeeCny": 800,
+          "status": "live_recurring_official_reference",
+          "evidenceRefs": [
+            "bfsu-scll-live"
+          ]
+        },
+        "deadline": {
+          "value": "2026-12-15",
+          "status": "current_upcoming_by_recurring_rule",
+          "evidenceRefs": [
+            "bfsu-scll-live"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "senior high school diploma or above",
+            "pass the SCLL entrance examination"
+          ],
+          "status": "live_recurring_official_reference",
+          "evidenceRefs": [
+            "bfsu-scll-live"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://study.bfsu.edu.cn/",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "bfsu-undergraduate-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "upcoming",
+        "cycleStatus": "confirmed",
+        "dateStatus": "announced",
+        "eligibleForCurrentConfirmedMetric": true,
+        "eligibleForDatedOrRollingMetric": true,
+        "eligibleForActiveUpcomingMetric": true,
+        "deadline": "2026-12-15",
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [
+        "The catalog's four-month scalar and the official one-semester/approximately-18-week wording should be normalized without inventing six exact months."
+      ],
+      "unknowns": [
+        "exact Spring 2027 teaching dates"
+      ]
+    },
+    {
+      "programId": "program-bfsu-iclt-one-semester-spring-2027",
+      "universityId": "uni-beijing-foreign-studies-university",
+      "name": "ICL Teachers Scholarship — One-Semester Study (Spring 2027)",
+      "degreeLevel": "language",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "bfsu-icl-scholarship-2026",
+          "artifactSha256": "076811329c4922ed1d1177452da5deff36c6d52dca39f2e2b3b54f56cb1ebc8c",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/5ff2c7891cc3025606c30dbf/076811329c4922ed1d1177452da5deff36c6d52dca39f2e2b3b54f56cb1ebc8c.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 5,
+          "unit": "months",
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "bfsu-icl-scholarship-2026"
+          ]
+        },
+        "tuition": {
+          "amountCny": null,
+          "coverage": "full tuition under scholarship",
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "bfsu-icl-scholarship-2026"
+          ]
+        },
+        "deadline": {
+          "value": "2026-12-30",
+          "status": "current_upcoming",
+          "evidenceRefs": [
+            "bfsu-icl-scholarship-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "HSK 3 score 180",
+            "HSKK required",
+            "X1/X2 visa holders not eligible"
+          ],
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "bfsu-icl-scholarship-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": [
+            "https://pmplatform.chinese.cn/ui/start/#/login",
+            "https://study.bfsu.edu.cn/"
+          ],
+          "status": "current_official_routes",
+          "evidenceRefs": [
+            "bfsu-icl-scholarship-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "upcoming",
+        "cycleStatus": "confirmed",
+        "dateStatus": "announced",
+        "eligibleForCurrentConfirmedMetric": true,
+        "eligibleForDatedOrRollingMetric": true,
+        "eligibleForActiveUpcomingMetric": true,
+        "deadline": "2026-12-30",
+        "tuitionStatus": "confirmed",
+        "tuitionAcademicYear": 2027
+      },
+      "conflicts": [
+        "The prose says January 2027 while the deadline table says March 2027. Duration and deadline agree; commencement month remains conflict-hidden."
+      ],
+      "unknowns": [
+        "exact commencement month"
+      ]
+    },
+    {
+      "programId": "program-blcu-iclt-one-semester-spring-2027",
+      "universityId": "uni-beijing-language-and-culture-university",
+      "name": "ICL Teachers Scholarship — One-Semester Study (Spring 2027)",
+      "degreeLevel": "language",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "blcu-icl-scholarship-2026",
+          "artifactSha256": "e4f81b6ecd4a07ba04ac429a79783dd8c8497bcee263b8ebdf1428f5ec687323",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/cf3d5feb6587fd795c790065/e4f81b6ecd4a07ba04ac429a79783dd8c8497bcee263b8ebdf1428f5ec687323.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 5,
+          "unit": "months",
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "blcu-icl-scholarship-2026"
+          ]
+        },
+        "tuition": {
+          "amountCny": null,
+          "coverage": "full tuition under scholarship",
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "blcu-icl-scholarship-2026"
+          ]
+        },
+        "deadline": {
+          "value": "2026-10-31",
+          "status": "current_upcoming",
+          "evidenceRefs": [
+            "blcu-icl-scholarship-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "HSK 3 score 180",
+            "HSKK required"
+          ],
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "blcu-icl-scholarship-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://pmplatform.chinese.cn/ui/start/#/login",
+          "status": "current_official_route",
+          "evidenceRefs": [
+            "blcu-icl-scholarship-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "upcoming",
+        "cycleStatus": "confirmed",
+        "dateStatus": "announced",
+        "eligibleForCurrentConfirmedMetric": true,
+        "eligibleForDatedOrRollingMetric": true,
+        "eligibleForActiveUpcomingMetric": true,
+        "deadline": "2026-10-31",
+        "tuitionStatus": "confirmed",
+        "tuitionAcademicYear": 2027
+      },
+      "conflicts": [],
+      "unknowns": []
+    },
+    {
+      "programId": "program-fudan-university-chinese-economy-and-business-program-language",
+      "universityId": "uni-fudan-university",
+      "name": "Chinese Economy and Business Program",
+      "degreeLevel": "language",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "fudan-cebp-2026",
+          "artifactSha256": "253d3f567fe62e64c2dca03aaa7d100280e44554cd82b566e067f59684dfcc7f",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/d892eff85d80fc9b382ae270/253d3f567fe62e64c2dca03aaa7d100280e44554cd82b566e067f59684dfcc7f.pdf"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "variants": [
+            {
+              "label": "one semester",
+              "from": "2026-08-31",
+              "to": "2027-01-08"
+            },
+            {
+              "label": "one year",
+              "from": "2026-08-31",
+              "to": "2027-07-02"
+            }
+          ],
+          "status": "historical_2026_cycle",
+          "evidenceRefs": [
+            "fudan-cebp-2026"
+          ]
+        },
+        "tuition": {
+          "variants": [
+            {
+              "amountCny": 12500,
+              "period": "semester"
+            },
+            {
+              "amountCny": 25000,
+              "period": "year"
+            }
+          ],
+          "applicationFeeCny": 400,
+          "status": "historical_reference_subject_to_final_price",
+          "evidenceRefs": [
+            "fudan-cebp-2026"
+          ]
+        },
+        "deadline": {
+          "value": "2026-06-12",
+          "status": "historical_closed",
+          "evidenceRefs": [
+            "fudan-cebp-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "foreign citizen age 18-60",
+            "bachelor-equivalent study status or above",
+            "HSK 5 or equivalent"
+          ],
+          "status": "historical_2026_cycle",
+          "evidenceRefs": [
+            "fudan-cebp-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://istudent.fudan.edu.cn/apply",
+          "status": "historical_official_route",
+          "evidenceRefs": [
+            "fudan-cebp-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "historical_closed",
+        "cycleStatus": "stale",
+        "dateStatus": "previous-cycle-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": "2026-06-12",
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [],
+      "unknowns": [
+        "next intake",
+        "final tuition for next cycle"
+      ]
+    },
+    {
+      "programId": "program-fudan-university-international-chinese-language-teachers-scholarship-one",
+      "universityId": "uni-fudan-university",
+      "name": "ICL Teachers Scholarship — One-Semester Study (Spring 2027)",
+      "degreeLevel": "language",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "fudan-icl-language-2026",
+          "artifactSha256": "41f14564b253d9dcbbfe689083e8c863351bd3b8fdd6aa9e496a2e30706fb846",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/63988551be62e01d61a00068/41f14564b253d9dcbbfe689083e8c863351bd3b8fdd6aa9e496a2e30706fb846.pdf"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 5,
+          "unit": "months",
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "fudan-icl-language-2026"
+          ]
+        },
+        "tuition": {
+          "amountCny": null,
+          "coverage": "full tuition under scholarship",
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "fudan-icl-language-2026"
+          ]
+        },
+        "deadline": {
+          "value": "2026-10-31",
+          "status": "current_upcoming",
+          "evidenceRefs": [
+            "fudan-icl-language-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "HSK 3 score 180",
+            "HSKK required",
+            "age 16-35, or up to 45 for in-service Chinese teachers"
+          ],
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "fudan-icl-language-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://pmplatform.chinese.cn/ui/start/#/login",
+          "status": "current_official_route",
+          "evidenceRefs": [
+            "fudan-icl-language-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "upcoming",
+        "cycleStatus": "confirmed",
+        "dateStatus": "announced",
+        "eligibleForCurrentConfirmedMetric": true,
+        "eligibleForDatedOrRollingMetric": true,
+        "eligibleForActiveUpcomingMetric": true,
+        "deadline": "2026-10-31",
+        "tuitionStatus": "confirmed",
+        "tuitionAcademicYear": 2027
+      },
+      "conflicts": [],
+      "unknowns": []
+    },
+    {
+      "programId": "program-hunan-university-applied-economics-master",
+      "universityId": "uni-hunan-university",
+      "name": "Applied Economics",
+      "degreeLevel": "master",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "hnu-csc-postgraduate-2026",
+          "artifactSha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/a41ac3ab715a136bbf7a98a3/ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd.pdf"
+        },
+        {
+          "sourceId": "hnu-self-financed-2025",
+          "artifactSha256": "1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/2048d2e975c1f454784b59b5/1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6.pdf"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": null,
+          "status": "unknown"
+        },
+        "tuition": {
+          "amountCny": null,
+          "coverage": "full tuition under 2026 CSC route",
+          "historicalSelfPayRule": "2025 master's category table plus CNY 3,000 for English teaching",
+          "status": "historical_only",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026",
+            "hnu-self-financed-2025"
+          ]
+        },
+        "deadline": {
+          "value": "2026-03-01",
+          "status": "historical_closed",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "Bachelor's degree",
+            "under age 35",
+            "HSK 4 or IELTS 6.0/TOEFL 80 by teaching language"
+          ],
+          "status": "historical_route_specific",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://studyinchina.csc.edu.cn/#/login",
+          "status": "historical_scholarship_route",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "historical_closed",
+        "cycleStatus": "stale",
+        "dateStatus": "previous-cycle-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": "2026-03-01",
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [],
+      "unknowns": [
+        "duration",
+        "current self-funded tuition",
+        "next deadline"
+      ]
+    },
+    {
+      "programId": "program-hunan-university-business-administration-master",
+      "universityId": "uni-hunan-university",
+      "name": "Business Administration",
+      "degreeLevel": "master",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "hnu-csc-postgraduate-2026",
+          "artifactSha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/a41ac3ab715a136bbf7a98a3/ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd.pdf"
+        },
+        {
+          "sourceId": "hnu-self-financed-2025",
+          "artifactSha256": "1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/2048d2e975c1f454784b59b5/1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6.pdf"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": null,
+          "status": "unknown"
+        },
+        "tuition": {
+          "amountCny": null,
+          "coverage": "full tuition under 2026 CSC route",
+          "historicalSelfPayRule": "2025 Chinese-taught master's CNY 19,000 arts / 21,000 science-engineering; English-taught adds CNY 3,000",
+          "status": "historical_only",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026",
+            "hnu-self-financed-2025"
+          ]
+        },
+        "deadline": {
+          "value": "2026-03-01",
+          "status": "historical_closed",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "Bachelor's degree",
+            "under age 35",
+            "HSK 4 for Chinese-taught or IELTS 6.0/TOEFL 80 for English-taught",
+            "study plan",
+            "two recommendations"
+          ],
+          "status": "historical_route_specific",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://studyinchina.csc.edu.cn/#/login",
+          "status": "historical_scholarship_route",
+          "evidenceRefs": [
+            "hnu-csc-postgraduate-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "historical_closed",
+        "cycleStatus": "stale",
+        "dateStatus": "previous-cycle-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": "2026-03-01",
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [
+        "Do not infer the arts/science fee category for this program without a program-row mapping."
+      ],
+      "unknowns": [
+        "duration",
+        "current self-funded tuition",
+        "next deadline"
+      ]
+    },
+    {
+      "programId": "program-shanghai-university-one-semester-business-chinese-program-language",
+      "universityId": "uni-shanghai-university",
+      "name": "One-Semester Business Chinese Program",
+      "degreeLevel": "language",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "shu-business-chinese-2026",
+          "artifactSha256": "3109094ec5b36ba5669ea73f278aa9093c28e8c5ad46736909eeac66a26164c0",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/887d7e88bea7c425f5af8ff5/3109094ec5b36ba5669ea73f278aa9093c28e8c5ad46736909eeac66a26164c0.pdf"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 18,
+          "unit": "weeks",
+          "status": "historical_2026_cycle",
+          "evidenceRefs": [
+            "shu-business-chinese-2026"
+          ]
+        },
+        "tuition": {
+          "amountCny": 9900,
+          "period": "semester",
+          "applicationFeeCny": 500,
+          "status": "historical_2026_cycle",
+          "evidenceRefs": [
+            "shu-business-chinese-2026"
+          ]
+        },
+        "deadline": {
+          "value": "2026-06-30",
+          "status": "historical_closed",
+          "evidenceRefs": [
+            "shu-business-chinese-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "foreign passport",
+            "high school education or above",
+            "age 18-60",
+            "HSK 4 score 180"
+          ],
+          "status": "historical_2026_cycle",
+          "evidenceRefs": [
+            "shu-business-chinese-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://apply.shu.edu.cn/",
+          "status": "historical_official_route",
+          "evidenceRefs": [
+            "shu-business-chinese-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "historical_closed",
+        "cycleStatus": "stale",
+        "dateStatus": "previous-cycle-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": "2026-06-30",
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [],
+      "unknowns": [
+        "next intake"
+      ]
+    },
+    {
+      "programId": "program-shanghai-university-one-year-intensive-chinese-language-program-language",
+      "universityId": "uni-shanghai-university",
+      "name": "One-Year Intensive Chinese Language Program",
+      "degreeLevel": "language",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "shu-one-year-chinese-2026",
+          "artifactSha256": "f0b0fec731948f1996f8af188dd5d1efc19d73fbed261264363e0061200d1eeb",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/7f0d44ccf7fa55fa9f53d693/f0b0fec731948f1996f8af188dd5d1efc19d73fbed261264363e0061200d1eeb.pdf"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": "one year; two 18-week semesters",
+          "status": "historical_2026_cycle",
+          "evidenceRefs": [
+            "shu-one-year-chinese-2026"
+          ]
+        },
+        "tuition": {
+          "amountCny": 19800,
+          "period": "year",
+          "applicationFeeCny": 500,
+          "status": "historical_2026_cycle",
+          "evidenceRefs": [
+            "shu-one-year-chinese-2026"
+          ]
+        },
+        "deadline": {
+          "value": "2026-01-15",
+          "status": "historical_closed_spring_intake",
+          "evidenceRefs": [
+            "shu-one-year-chinese-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "non-Chinese citizen",
+            "valid ordinary foreign passport",
+            "high school education or above",
+            "age usually 18-60"
+          ],
+          "status": "historical_2026_cycle",
+          "evidenceRefs": [
+            "shu-one-year-chinese-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://apply.shu.edu.cn/",
+          "status": "historical_official_route",
+          "evidenceRefs": [
+            "shu-one-year-chinese-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "historical_closed",
+        "cycleStatus": "stale",
+        "dateStatus": "previous-cycle-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": "2026-01-15",
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": 2026
+      },
+      "conflicts": [
+        "Do not infer a scalar month count from the marketing label; retain the two official 18-week terms."
+      ],
+      "unknowns": [
+        "next intake and deadline"
+      ]
+    },
+    {
+      "programId": "program-shu-iclt-one-semester-spring-2027",
+      "universityId": "uni-shanghai-university",
+      "name": "ICL Teachers Scholarship — One-Semester Study (Spring 2027)",
+      "degreeLevel": "language",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "shu-icl-scholarship-2026",
+          "artifactSha256": "cb9703d6835e09db3391b4d8beedb5ab820a8484b9000a3277a48334731951c4",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/ac18865c2c6eee9b23046a3f/cb9703d6835e09db3391b4d8beedb5ab820a8484b9000a3277a48334731951c4.pdf"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 5,
+          "unit": "months",
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "shu-icl-scholarship-2026"
+          ]
+        },
+        "tuition": {
+          "amountCny": null,
+          "coverage": "full tuition under scholarship",
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "shu-icl-scholarship-2026",
+            "shu-scholarship-live"
+          ]
+        },
+        "deadline": {
+          "value": "2026-10-31",
+          "status": "current_upcoming",
+          "evidenceRefs": [
+            "shu-icl-scholarship-2026"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "HSK 3 score 180",
+            "HSKK score required"
+          ],
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "shu-icl-scholarship-2026"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://pmplatform.chinese.cn/ui/start/#/login",
+          "status": "current_official_route",
+          "evidenceRefs": [
+            "shu-icl-scholarship-2026"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "upcoming",
+        "cycleStatus": "confirmed",
+        "dateStatus": "announced",
+        "eligibleForCurrentConfirmedMetric": true,
+        "eligibleForDatedOrRollingMetric": true,
+        "eligibleForActiveUpcomingMetric": true,
+        "deadline": "2026-10-31",
+        "tuitionStatus": "confirmed",
+        "tuitionAcademicYear": 2027
+      },
+      "conflicts": [],
+      "unknowns": []
+    },
+    {
+      "programId": "program-southwest-university-education-bachelor",
+      "universityId": "uni-southwest-university",
+      "name": "Education",
+      "degreeLevel": "bachelor",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "swu-education-live",
+          "artifactSha256": "e17c5ecaed81da168d81362633fece59e121d9f5ba48bb6689cabeb10b2b00ce",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/da2580c1406cdb2cced3b467/e17c5ecaed81da168d81362633fece59e121d9f5ba48bb6689cabeb10b2b00ce.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 48,
+          "unit": "months",
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "swu-education-live"
+          ]
+        },
+        "tuition": {
+          "amountCny": 18000,
+          "period": "academic_year",
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "swu-education-live"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "officially_not_announced",
+          "evidenceRefs": [
+            "swu-education-live"
+          ]
+        },
+        "requirements": {
+          "value": null,
+          "status": "unknown"
+        },
+        "applyUrl": {
+          "value": "https://swu.17gz.org/member/login.do",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "swu-education-live"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "not-announced",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": null
+      },
+      "conflicts": [],
+      "unknowns": [
+        "2026/2027 exact application window",
+        "route-specific language and education requirements"
+      ]
+    },
+    {
+      "programId": "program-southwest-university-environmental-science-master",
+      "universityId": "uni-southwest-university",
+      "name": "Environmental Science and Engineering",
+      "degreeLevel": "master",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "swu-engineering-live",
+          "artifactSha256": "5954d87d2f423eb762f6e9931d9e0f6c2348ec85daf88e8967fcde437ef9d5ea",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/1985dc0983295c3ab0387c8e/5954d87d2f423eb762f6e9931d9e0f6c2348ec85daf88e8967fcde437ef9d5ea.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 36,
+          "unit": "months",
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "swu-engineering-live"
+          ]
+        },
+        "tuition": {
+          "variants": [
+            {
+              "amountCny": 24000,
+              "period": "academic_year",
+              "language": "Chinese"
+            },
+            {
+              "amountCny": 28000,
+              "period": "academic_year",
+              "language": "English"
+            }
+          ],
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "swu-engineering-live"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "officially_not_announced",
+          "evidenceRefs": [
+            "swu-engineering-live"
+          ]
+        },
+        "requirements": {
+          "value": null,
+          "status": "unknown"
+        },
+        "applyUrl": {
+          "value": "https://swu.17gz.org/member/login.do",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "swu-engineering-live"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "not-announced",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": null
+      },
+      "conflicts": [],
+      "unknowns": [
+        "2026/2027 exact deadline",
+        "route-specific qualification requirements"
+      ]
+    },
+    {
+      "programId": "program-xiamen-university-digital-media-art-bachelor",
+      "universityId": "uni-xiamen-university",
+      "name": "Digital Media Art",
+      "degreeLevel": "bachelor",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "xmu-costs-live",
+          "artifactSha256": "a0e21c012eaebdbfb033aeed53abbbfdbfa246c188b99ff00059fceca862a76c",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/620cdf3890c5d658df5160ef/a0e21c012eaebdbfb033aeed53abbbfdbfa246c188b99ff00059fceca862a76c.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 48,
+          "unit": "months",
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        },
+        "tuition": {
+          "amountCny": 90000,
+          "period": "academic_year",
+          "applicationFeeCny": 400,
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "officially_not_announced_in_selected_source",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        },
+        "requirements": {
+          "value": null,
+          "status": "unknown"
+        },
+        "applyUrl": {
+          "value": "https://application.xmu.edu.cn/",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "undated-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": null
+      },
+      "conflicts": [],
+      "unknowns": [
+        "2026/2027 deadline",
+        "entry requirements"
+      ]
+    },
+    {
+      "programId": "program-xiamen-university-environmental-design-bachelor",
+      "universityId": "uni-xiamen-university",
+      "name": "Environmental Design",
+      "degreeLevel": "bachelor",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "xmu-costs-live",
+          "artifactSha256": "a0e21c012eaebdbfb033aeed53abbbfdbfa246c188b99ff00059fceca862a76c",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/620cdf3890c5d658df5160ef/a0e21c012eaebdbfb033aeed53abbbfdbfa246c188b99ff00059fceca862a76c.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 48,
+          "unit": "months",
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        },
+        "tuition": {
+          "amountCny": 90000,
+          "period": "academic_year",
+          "applicationFeeCny": 400,
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "officially_not_announced_in_selected_source",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        },
+        "requirements": {
+          "value": null,
+          "status": "unknown"
+        },
+        "applyUrl": {
+          "value": "https://application.xmu.edu.cn/",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "undated-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": null
+      },
+      "conflicts": [],
+      "unknowns": [
+        "2026/2027 deadline",
+        "entry requirements"
+      ]
+    },
+    {
+      "programId": "program-xiamen-university-visual-communication-design-bachelor",
+      "universityId": "uni-xiamen-university",
+      "name": "Visual Communication Design",
+      "degreeLevel": "bachelor",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "xmu-costs-live",
+          "artifactSha256": "a0e21c012eaebdbfb033aeed53abbbfdbfa246c188b99ff00059fceca862a76c",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/620cdf3890c5d658df5160ef/a0e21c012eaebdbfb033aeed53abbbfdbfa246c188b99ff00059fceca862a76c.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 48,
+          "unit": "months",
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        },
+        "tuition": {
+          "amountCny": 90000,
+          "period": "academic_year",
+          "applicationFeeCny": 400,
+          "status": "live_undated_official_reference",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        },
+        "deadline": {
+          "value": null,
+          "status": "officially_not_announced_in_selected_source",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        },
+        "requirements": {
+          "value": null,
+          "status": "unknown"
+        },
+        "applyUrl": {
+          "value": "https://application.xmu.edu.cn/",
+          "status": "live_official_route",
+          "evidenceRefs": [
+            "xmu-costs-live"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "not_announced",
+        "cycleStatus": "reference",
+        "dateStatus": "undated-reference",
+        "eligibleForCurrentConfirmedMetric": false,
+        "eligibleForDatedOrRollingMetric": false,
+        "eligibleForActiveUpcomingMetric": false,
+        "deadline": null,
+        "tuitionStatus": "reference",
+        "tuitionAcademicYear": null
+      },
+      "conflicts": [],
+      "unknowns": [
+        "2026/2027 deadline",
+        "entry requirements"
+      ]
+    },
+    {
+      "programId": "program-xmu-long-term-chinese-language-spring-2027",
+      "universityId": "uni-xiamen-university",
+      "name": "Long-term Chinese Language Program (Spring 2027)",
+      "degreeLevel": "language",
+      "candidateStatus": "ready_for_pipeline_candidate",
+      "sourceDependencies": [
+        {
+          "sourceId": "xmu-chinese-program-live",
+          "artifactSha256": "d37af527d320cd7dc2f38a2b43f0fca9871c92781f9e8733d8166bef7b7557c2",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/a4df332c738d04cd0fab2db3/d37af527d320cd7dc2f38a2b43f0fca9871c92781f9e8733d8166bef7b7557c2.html"
+        },
+        {
+          "sourceId": "xmu-costs-live",
+          "artifactSha256": "a0e21c012eaebdbfb033aeed53abbbfdbfa246c188b99ff00059fceca862a76c",
+          "r2Uri": "r2://studyinchina-source-snapshots/source-artifacts/620cdf3890c5d658df5160ef/a0e21c012eaebdbfb033aeed53abbbfdbfa246c188b99ff00059fceca862a76c.html"
+        }
+      ],
+      "facts": {
+        "duration": {
+          "value": 5,
+          "unit": "months",
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "xmu-chinese-program-live"
+          ]
+        },
+        "tuition": {
+          "amountCny": 13000,
+          "period": "semester",
+          "applicationFeeCny": 400,
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "xmu-chinese-program-live",
+            "xmu-costs-live"
+          ]
+        },
+        "deadline": {
+          "value": "2026-12-30",
+          "status": "current_upcoming",
+          "evidenceRefs": [
+            "xmu-chinese-program-live"
+          ]
+        },
+        "requirements": {
+          "value": [
+            "non-Chinese citizen (overseas Chinese included)",
+            "age 18 to 55",
+            "mentally and physically healthy",
+            "valid regular passport",
+            "high school diploma or above or equivalent"
+          ],
+          "status": "current_2027_cycle",
+          "evidenceRefs": [
+            "xmu-chinese-program-live"
+          ]
+        },
+        "applyUrl": {
+          "value": "https://mcc.xmu.edu.cn/login.aspx",
+          "status": "current_official_route",
+          "evidenceRefs": [
+            "xmu-chinese-program-live"
+          ]
+        }
+      },
+      "cycleProjection": {
+        "applicationState": "upcoming",
+        "cycleStatus": "confirmed",
+        "dateStatus": "announced",
+        "eligibleForCurrentConfirmedMetric": true,
+        "eligibleForDatedOrRollingMetric": true,
+        "eligibleForActiveUpcomingMetric": true,
+        "deadline": "2026-12-30",
+        "tuitionStatus": "confirmed",
+        "tuitionAcademicYear": 2027
+      },
+      "conflicts": [],
+      "unknowns": [
+        "explicit qualification requirements"
+      ]
+    }
+  ],
+  "blocked": [
+    {
+      "programId": "prog-gap-clw-sw-swu-icl-master",
+      "blockingSourceIds": [
+        "swu-icl-scholarship-2026"
+      ]
+    },
+    {
+      "programId": "prog-gap-wave8-njust-international-economics-trade-bachelor",
+      "blockingSourceIds": [
+        "njust-official-application",
+        "njust-undergraduate-catalogue-2026"
+      ]
+    },
+    {
+      "programId": "prog-gap-wave8-njust-mechanical-engineering-bachelor",
+      "blockingSourceIds": [
+        "njust-official-application",
+        "njust-undergraduate-catalogue-2026"
+      ]
+    },
+    {
+      "programId": "prog-gap-wave8-njust-nanomaterials-nanotechnology-bachelor",
+      "blockingSourceIds": [
+        "njust-official-application",
+        "njust-undergraduate-catalogue-2026"
+      ]
+    },
+    {
+      "programId": "prog-gap-wave8-njust-software-engineering-bachelor",
+      "blockingSourceIds": [
+        "njust-official-application",
+        "njust-undergraduate-catalogue-2026"
+      ]
+    }
+  ]
+}

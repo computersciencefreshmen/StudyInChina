@@ -185,7 +185,12 @@ export type CandidateManifestFile = {
 
 export type SourceRejection = {
   sourceId: string
-  reason: 'missing_source_record' | 'not_official' | 'not_https' | 'unsupported_source_kind'
+  reason:
+    | 'missing_source_record'
+    | 'not_official'
+    | 'not_https'
+    | 'unsupported_source_kind'
+    | 'institution_ownership_mismatch'
 }
 
 export type InstitutionCoverageGap = {
@@ -271,6 +276,29 @@ const SUPPORTED_SOURCE_KINDS = new Set<SafeCatalogSource['kind']>([
 function stringArray(value: unknown): string[] {
   if (!Array.isArray(value)) return []
   return [...new Set(value.filter((item): item is string => typeof item === 'string' && item.length > 0))]
+}
+
+function addSourceInstitutionOwners(
+  ownership: Map<string, Set<string>>,
+  sourceIds: string[],
+  institutionIds: string[],
+): void {
+  for (const sourceId of sourceIds) {
+    const owners = ownership.get(sourceId) ?? new Set<string>()
+    for (const institutionId of institutionIds) owners.add(institutionId)
+    ownership.set(sourceId, owners)
+  }
+}
+
+function hasExactInstitutionOwnership(
+  source: SafeCatalogSource,
+  institutionId: string,
+  sourceOwnerInstitutionIds: ReadonlyMap<string, ReadonlySet<string>>,
+): boolean {
+  if (source.kind === 'government' || source.kind === 'city') return true
+  const owners = sourceOwnerInstitutionIds.get(source.id)
+  if (!owners || owners.size === 0) return true
+  return owners.size === 1 && owners.has(institutionId)
 }
 
 function localizedName(
@@ -548,6 +576,41 @@ export function buildSourceManifestCohort(
       typeof program.id === 'string' ? [[program.id, program] as const] : []
     )),
   )
+  const sourceOwnerInstitutionIds = new Map<string, Set<string>>()
+  for (const university of input.universities) {
+    if (typeof university.id !== 'string') continue
+    addSourceInstitutionOwners(
+      sourceOwnerInstitutionIds,
+      stringArray(university.sourceIds),
+      [university.id],
+    )
+  }
+  for (const program of input.programs) {
+    if (typeof program.universityId !== 'string') continue
+    addSourceInstitutionOwners(
+      sourceOwnerInstitutionIds,
+      stringArray(program.sourceIds),
+      [program.universityId],
+    )
+  }
+  for (const cycle of input.admissionCycles) {
+    if (typeof cycle.programId !== 'string') continue
+    const program = programById.get(cycle.programId)
+    if (typeof program?.universityId !== 'string') continue
+    addSourceInstitutionOwners(
+      sourceOwnerInstitutionIds,
+      stringArray(cycle.sourceIds),
+      [program.universityId],
+    )
+  }
+  for (const scholarship of input.scholarships) {
+    if (scholarship.providerType !== 'university') continue
+    addSourceInstitutionOwners(
+      sourceOwnerInstitutionIds,
+      stringArray(scholarship.sourceIds),
+      stringArray(scholarship.universityIds),
+    )
+  }
   const sourceReconciliationByName = new Map<string, ReconciledInstitution>()
   for (const reconciliation of input.sourceReconciliations) {
     if (sourceReconciliationByName.has(reconciliation.institutionNameZh)) {
@@ -657,6 +720,14 @@ export function buildSourceManifestCohort(
       const inspected = inspectSource(sourceById.get(sourceId))
       if ('rejection' in inspected) {
         rejectedSources.push({ sourceId, reason: inspected.rejection })
+        return []
+      }
+      if (!hasExactInstitutionOwnership(
+        inspected.source,
+        institutionId,
+        sourceOwnerInstitutionIds,
+      )) {
+        rejectedSources.push({ sourceId, reason: 'institution_ownership_mismatch' })
         return []
       }
       return [inspected.source]
@@ -809,7 +880,7 @@ export function buildSourceManifestCohort(
     cohortId: input.registry.cohort.id,
     checkedAt: input.checkedAt,
     policy: {
-      mapping: 'Exact current catalog relationships are preferred. Only when no safe program or scholarship source exists may an exact-name record from the validated official reconciliation registry create a disabled audit-only fallback; fuzzy matching remains forbidden.',
+      mapping: 'Exact current catalog relationships are preferred. Institution-scoped sources must have one exact catalog owner matching the candidate institution; explicitly government or city sources may be shared. Only when no safe program or scholarship source exists may an exact-name record from the validated official reconciliation registry create a disabled audit-only fallback; fuzzy matching remains forbidden.',
       missingCoverage: 'Unmapped categories are discovery_pending with an explicit note.',
       officialAbsence: 'officially_not_provided is never inferred; it requires separate explicit official evidence.',
     },
