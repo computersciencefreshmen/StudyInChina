@@ -61,7 +61,8 @@
     "quality:inventory-untracked": "tsx scripts/quality/inventory-untracked-assets.ts",
     "quality:synthetic-regression": "tsx scripts/quality/run-synthetic-regression.ts",
     "quality:reliability": "node scripts/operations/evaluate-p0-reliability.mjs",
-    "quality:platform-scorecard": "tsx scripts/quality/platform-data-quality.ts"
+    "quality:platform-scorecard": "tsx scripts/quality/platform-data-quality.ts",
+    "quality:decision-gap": "tsx scripts/quality/build-decision-gap-report.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
