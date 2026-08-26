@@ -9,10 +9,15 @@ import { getApplicationState, selectAdmissionCycle } from '../../src/lib/data/ad
 import { getTodayDate } from '../../src/lib/data/freshness'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
+import {
+  LATEST_RELEASE_ANNOUNCEMENT_ID,
+  RELEASE_ANNOUNCEMENT_STORAGE_KEY,
+} from '../../src/i18n/release-announcement'
 import { isIndexableProgram } from '../../src/lib/seo/indexability'
 
 const locales = ['en', 'zh', 'ru', 'de', 'fr', 'es'] as const
 const coreRoutes = ['', 'universities', 'programs', 'scholarships', 'cities', 'guides'] as const
+const releaseAnnouncementTestTitle = 'new catalogue releases announce data and product changes once'
 const TODAY = getTodayDate()
 const publicData = selectPublishedData(bundleSchema.parse({
   admissionCycles,
@@ -42,6 +47,38 @@ const freshCompleteFixture = publicData.programs
       || rightFreshThrough.localeCompare(leftFreshThrough)
       || left.program.slug.localeCompare(right.program.slug)
   })[0]
+
+test.beforeEach(async ({ page }, testInfo) => {
+  if (testInfo.title === releaseAnnouncementTestTitle) return
+  await page.addInitScript(({ key, id }) => {
+    window.localStorage.setItem(key, id)
+  }, {
+    key: RELEASE_ANNOUNCEMENT_STORAGE_KEY,
+    id: LATEST_RELEASE_ANNOUNCEMENT_ID,
+  })
+})
+
+test(releaseAnnouncementTestTitle, async ({ page }) => {
+  await page.goto('/zh', { waitUntil: 'domcontentloaded' })
+
+  const dialog = page.getByRole('dialog', { name: '选择更广，证据更清楚' })
+  await expect(dialog).toBeVisible()
+  await expect(page.getByRole('button', { name: '关闭更新' })).toBeFocused()
+  await expect(dialog.getByText(publicData.universities.length.toLocaleString('en-US'))).toBeVisible()
+  await expect(dialog.getByText(publicData.programs.length.toLocaleString('en-US'))).toBeVisible()
+  await expect(dialog.getByText(publicData.scholarships.length.toLocaleString('en-US'))).toBeVisible()
+  await expect(page.getByRole('link', { name: '查看开放申请项目' }))
+    .toHaveAttribute('href', '/zh/programs?applicationState=open')
+
+  await page.getByRole('button', { name: '关闭更新' }).click()
+  await expect(dialog).toHaveCount(0)
+  await expect.poll(() => page.evaluate(
+    (key) => window.localStorage.getItem(key),
+    RELEASE_ANNOUNCEMENT_STORAGE_KEY,
+  )).toBe(LATEST_RELEASE_ANNOUNCEMENT_ID)
+  await page.reload({ waitUntil: 'domcontentloaded' })
+  await expect(page.getByRole('dialog')).toHaveCount(0)
+})
 
 for (const locale of locales) {
   test(`${locale} core routes render inside the localized shell`, async ({ page }) => {
