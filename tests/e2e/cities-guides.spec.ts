@@ -1,5 +1,19 @@
 import { expect, test } from '@playwright/test'
 
+import {
+  LATEST_RELEASE_ANNOUNCEMENT_ID,
+  RELEASE_ANNOUNCEMENT_STORAGE_KEY,
+} from '../../src/i18n/release-announcement'
+
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(({ key, id }) => {
+    window.localStorage.setItem(key, id)
+  }, {
+    key: RELEASE_ANNOUNCEMENT_STORAGE_KEY,
+    id: LATEST_RELEASE_ANNOUNCEMENT_ID,
+  })
+})
+
 test('city explorer switches views and narrows the directory without leaving the page', async ({ page }) => {
   await page.goto('/en/cities', { waitUntil: 'domcontentloaded' })
   if (test.info().project.name === 'mobile') {
