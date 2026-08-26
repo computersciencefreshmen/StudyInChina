@@ -263,7 +263,7 @@ describe('official coverage wave 5 on 2026-07-31', () => {
     }
   })
 
-  it('sanitizes every fee-reference cycle and removes superseded deadlines', () => {
+  it('keeps every fee-reference cycle stale and out of the active catalog', () => {
     const feeReferenceCycles = data.admissionCycles.filter((cycle) => (
       cycle.id.includes('fee-reference')
       && cycle.tuitionStatus === 'reference'
@@ -272,12 +272,22 @@ describe('official coverage wave 5 on 2026-07-31', () => {
 
     expect(feeReferenceCycles.length).toBeGreaterThan(0)
     for (const cycle of feeReferenceCycles) {
-      expect(cycle.opensOn, cycle.id).toBeNull()
-      expect(cycle.closesOn, cycle.id).toBeNull()
-      expect(cycle.dateStatus, cycle.id).toBe('not-announced')
+      expect(cycle.status, cycle.id).toBe('stale')
       expect(cycle.tuitionCny, cycle.id).not.toBeNull()
       expect(cycle.tuitionStatus, cycle.id).toBe('reference')
-      expect(cycle, cycle.id).not.toHaveProperty('notes')
+
+      const isUndatedReference = cycle.dateStatus === 'not-announced'
+        && cycle.opensOn === null
+        && cycle.closesOn === null
+      const isHistoricalReference = cycle.dateStatus === 'previous-cycle-reference'
+        && (cycle.opensOn === null || cycle.opensOn <= TODAY)
+        && (cycle.closesOn === null || cycle.closesOn <= TODAY)
+      expect(isUndatedReference || isHistoricalReference, cycle.id).toBe(true)
+      if (isUndatedReference) expect(cycle, cycle.id).not.toHaveProperty('notes')
+      expect(
+        published.admissionCycles.some((publishedCycle) => publishedCycle.id === cycle.id),
+        cycle.id,
+      ).toBe(false)
 
       if (!cycle.programId.startsWith('prog-gap-')) continue
 
@@ -291,7 +301,12 @@ describe('official coverage wave 5 on 2026-07-31', () => {
         const deadline = rawCycle.applicationDeadline
         if (deadline && isMoreThanThirtyDaysBefore(deadline, TODAY)) {
           supersededDeadlineCount += 1
-          expect(serializedCycle, `${cycle.id}:${deadline}`).not.toContain(deadline)
+          if (cycle.dateStatus === 'not-announced') {
+            expect(serializedCycle, `${cycle.id}:${deadline}`).not.toContain(deadline)
+          } else if (cycle.closesOn === deadline) {
+            expect(cycle.status, `${cycle.id}:${deadline}`).toBe('stale')
+            expect(cycle.closesOn <= TODAY, `${cycle.id}:${deadline}`).toBe(true)
+          }
         }
       }
     }

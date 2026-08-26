@@ -177,6 +177,7 @@ export type MoneyDto = {
   currencyCode: string | null
   currencyExponent: number | null
   period: string | null
+  valueStatus?: 'confirmed' | 'reference'
 }
 
 export type ApplicationDto = {

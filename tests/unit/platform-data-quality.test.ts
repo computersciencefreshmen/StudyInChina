@@ -58,6 +58,10 @@ describe('platform data-quality scorecard', () => {
       datedOrRollingCoveragePct: 33.33,
       programsActiveOrUpcoming: 1,
       activeUpcomingCoveragePct: 33.33,
+      programsWithCurrentConfirmedTuition: 0,
+      currentConfirmedTuitionCoveragePct: 0,
+      programsWithAnyOfficialTuitionEvidence: 0,
+      anyOfficialTuitionEvidenceCoveragePct: 0,
       programsWithCurrentCycle: 1,
       currentCycleCoveragePct: 33.33,
       currentCycleCoverageSemantics: 'deprecated_alias_of_dated_or_rolling',
@@ -98,8 +102,64 @@ describe('platform data-quality scorecard', () => {
       programsWithFreshDisposition: 1,
       programsWithDatedOrRollingCycle: 1,
       programsActiveOrUpcoming: 1,
+      programsWithCurrentConfirmedTuition: 0,
+      programsWithAnyOfficialTuitionEvidence: 1,
       programsWithCurrentCycle: 1,
     })
+  })
+
+  it('separates current confirmed tuition from broader official tuition evidence', () => {
+    const data = fixture()
+    data.admissionCycles[0] = {
+      ...data.admissionCycles[0],
+      tuitionCny: 30_000,
+      tuitionStatus: 'confirmed',
+    }
+    data.admissionCycles.push(
+      {
+        ...data.admissionCycles[0],
+        id: 'cycle-program-2-current-reference',
+        programId: 'program-2',
+        tuitionCny: 24_000,
+        tuitionStatus: 'reference',
+      },
+      {
+        ...data.admissionCycles[0],
+        id: 'cycle-program-3-stale-reference',
+        programId: 'program-3',
+        academicYear: '2025-2026',
+        opensOn: '2025-01-01',
+        closesOn: '2025-10-01',
+        dateStatus: 'previous-cycle-reference',
+        tuitionCny: 20_000,
+        tuitionStatus: 'reference',
+        status: 'stale',
+      },
+    )
+    data.programs.push({
+      ...data.programs[0],
+      id: 'program-hidden',
+      slug: 'hidden',
+      status: 'draft',
+    })
+    data.admissionCycles.push({
+      ...data.admissionCycles[0],
+      id: 'cycle-hidden-current-confirmed',
+      programId: 'program-hidden',
+      tuitionCny: 50_000,
+      tuitionStatus: 'confirmed',
+    })
+
+    const report = buildPlatformDataQualityScorecard(data, [], { today: '2026-08-06' })
+
+    expect(report.metrics.publicRecords.programs).toBe(3)
+    expect(report.metrics.programCoverage).toMatchObject({
+      programsWithCurrentConfirmedTuition: 1,
+      currentConfirmedTuitionCoveragePct: 33.33,
+      programsWithAnyOfficialTuitionEvidence: 3,
+      anyOfficialTuitionEvidenceCoveragePct: 100,
+    })
+    expect(report.gates.total).toBe(14)
   })
 
   it('reports overdue verified data and published cycles with no dates', () => {
@@ -140,6 +200,8 @@ describe('platform data-quality scorecard', () => {
 
     const report = buildPlatformDataQualityScorecard(fixture(), [], { today: '2026-08-06' })
     expect(conciseScorecardSummary(report)).toContain('gates ')
+    expect(conciseScorecardSummary(report)).toContain('current confirmed tuition 0%')
+    expect(conciseScorecardSummary(report)).toContain('any official tuition evidence 0%')
     expect(conciseScorecardSummary(report).split('\n')).toHaveLength(1)
   })
 })

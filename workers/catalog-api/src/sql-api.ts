@@ -150,6 +150,7 @@ type FeeRow = {
   currency_code: string | null
   currency_exponent: number | null
   billing_period: string | null
+  value_status: 'confirmed' | 'reference'
 }
 
 type CoverageRow = {
@@ -193,18 +194,28 @@ function moneyFromFee(row: FeeRow | undefined): MoneyDto | null {
     currencyCode: row.currency_code,
     currencyExponent: row.currency_exponent,
     period: row.billing_period,
+    valueStatus: row.value_status,
   }
 }
 
-function legacyMoney(value: number | null, period: string | null): MoneyDto | null {
-  if (value === null) return null
+function legacyMoney(
+  value: number | null,
+  period: string | null,
+  valueStatus: MoneyDto['valueStatus'] | null,
+): MoneyDto | null {
+  if (value === null || valueStatus === null) return null
   return {
     amountMinimumMinor: Math.round(value * 100),
     amountMaximumMinor: null,
     currencyCode: 'CNY',
     currencyExponent: 2,
     period,
+    valueStatus,
   }
+}
+
+function normalizedFeeStatus(value: unknown): MoneyDto['valueStatus'] | null {
+  return value === 'confirmed' || value === 'reference' ? value : null
 }
 
 function routeApplication(
@@ -1105,6 +1116,7 @@ export class CatalogSqlApi {
           WHERE tuition.release_id = cycle.release_id
             AND tuition.owner_record_id = cycle.program_cycle_id
             AND tuition.fee_type = 'tuition'
+            AND tuition.value_status = 'confirmed'
             AND COALESCE(tuition.amount_min_minor, tuition.amount_max_minor) >= ?
         )
         OR EXISTS (
@@ -1113,6 +1125,13 @@ export class CatalogSqlApi {
             AND tuition_fact.record_id = cycle.program_cycle_id
             AND tuition_fact.field_path IN ('tuitionCny', 'tuition_amount')
             AND CAST(json_extract(tuition_fact.value_json, '$') AS REAL) >= ?
+            AND EXISTS (
+              SELECT 1 FROM current_record_fields AS tuition_status_fact
+              WHERE tuition_status_fact.release_id = tuition_fact.release_id
+                AND tuition_status_fact.record_id = tuition_fact.record_id
+                AND tuition_status_fact.field_path IN ('tuitionStatus', 'tuition_status')
+                AND json_extract(tuition_status_fact.value_json, '$') = 'confirmed'
+            )
         )
       )`, Math.round(query.tuitionMin * 100), query.tuitionMin)
     }
@@ -1124,6 +1143,7 @@ export class CatalogSqlApi {
             AND tuition.owner_record_id = cycle.program_cycle_id
             AND tuition.fee_type = 'tuition'
             AND COALESCE(tuition.amount_max_minor, tuition.amount_min_minor) <= ?
+            AND tuition.value_status = 'confirmed'
         )
         OR EXISTS (
           SELECT 1 FROM current_record_fields AS tuition_fact
@@ -1131,6 +1151,13 @@ export class CatalogSqlApi {
             AND tuition_fact.record_id = cycle.program_cycle_id
             AND tuition_fact.field_path IN ('tuitionCny', 'tuition_amount')
             AND CAST(json_extract(tuition_fact.value_json, '$') AS REAL) <= ?
+            AND EXISTS (
+              SELECT 1 FROM current_record_fields AS tuition_status_fact
+              WHERE tuition_status_fact.release_id = tuition_fact.release_id
+                AND tuition_status_fact.record_id = tuition_fact.record_id
+                AND tuition_status_fact.field_path IN ('tuitionStatus', 'tuition_status')
+                AND json_extract(tuition_status_fact.value_json, '$') = 'confirmed'
+            )
         )
       )`, Math.round(query.tuitionMax * 100), query.tuitionMax)
     }
@@ -1910,7 +1937,8 @@ export class CatalogSqlApi {
         amount_max_minor,
         currency_code,
         currency_exponent,
-        billing_period
+        billing_period,
+        value_status
       FROM current_fee_items
       WHERE release_id = ? AND owner_record_id IN (${slots})
       ORDER BY owner_record_id, fee_type, fee_id
@@ -1965,12 +1993,14 @@ export class CatalogSqlApi {
       ) ?? legacyMoney(
         decorations.value<number>(row.record_id, ['tuitionCny', 'tuition_amount']),
         decorations.value<string>(row.record_id, ['tuitionPeriod', 'billing_period']),
+        normalizedFeeStatus(decorations.value(row.record_id, ['tuitionStatus', 'tuition_status'])),
       )
       const applicationFee = moneyFromFee(
         fees.find((item) => item.owner_record_id === row.record_id && item.fee_type === 'application'),
       ) ?? legacyMoney(
         decorations.value<number>(row.record_id, ['applicationFeeCny', 'application_fee']),
         'one_time',
+        'confirmed',
       )
       return {
         type: 'program_cycle',
@@ -2130,12 +2160,14 @@ export class CatalogSqlApi {
       ) ?? legacyMoney(
         decorations.value<number>(row.record_id, ['tuitionCny', 'tuition_amount']),
         decorations.value<string>(row.record_id, ['tuitionPeriod', 'billing_period']),
+        normalizedFeeStatus(decorations.value(row.record_id, ['tuitionStatus', 'tuition_status'])),
       )
       const applicationFee = moneyFromFee(
         fees.find((item) => item.owner_record_id === row.record_id && item.fee_type === 'application'),
       ) ?? legacyMoney(
         decorations.value<number>(row.record_id, ['applicationFeeCny', 'application_fee']),
         'one_time',
+        'confirmed',
       )
       return {
         type: 'program_cycle',

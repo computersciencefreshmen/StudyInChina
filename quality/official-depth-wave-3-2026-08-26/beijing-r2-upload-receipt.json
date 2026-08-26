@@ -1,0 +1,130 @@
+{
+  "receiptVersion": 1,
+  "waveId": "beijing-official-depth-wave-3-2026-08-26",
+  "bucket": "studyinchina-source-snapshots",
+  "visibility": "private",
+  "verifiedAt": "2026-08-25T17:16:22Z",
+  "verification": {
+    "method": "Full remote object read-back followed by exact byte-size and SHA-256 comparison",
+    "wranglerVersions": [
+      "4.113.0",
+      "4.125.0"
+    ],
+    "expectedObjects": 11,
+    "verifiedObjects": 11,
+    "allObjectsVerified": true,
+    "note": "The largest PDF required a second full read-back with Wrangler 4.125.0 after the first TLS stream terminated; the successful retry matched the registered 5,375,945 bytes and SHA-256 exactly."
+  },
+  "objects": [
+    {
+      "sourceId": "src-thu-chinese-language-program-current",
+      "url": "https://intl-nondegree.tsinghua.edu.cn/f/yzlxs/yz_lxs_kstzb/view?id=254607",
+      "sha256": "f318a58f6e6dd51032f50de4a7620d9e7b6b02307d6891fd8506adea69f28ed1",
+      "size": 6438,
+      "mime": "text/html",
+      "r2Key": "snapshots/f3/src-thu-chinese-language-program-current/f318a58f6e6dd51032f50de4a7620d9e7b6b02307d6891fd8506adea69f28ed1.html",
+      "disposition": "uploaded",
+      "remoteReadBackVerified": true
+    },
+    {
+      "sourceId": "source-thu-clp-spring-2027-guide-pdf",
+      "url": "https://intl-nondegree.tsinghua.edu.cn/b/yzlxs/yz_sys_xxfjb/download/file?id=531455",
+      "sha256": "1666a2d1d9c532c3c4e95e9911cd3595f7036ffe58ddd5cac7aa16ced0072457",
+      "size": 5375945,
+      "mime": "application/pdf",
+      "r2Key": "snapshots/16/source-thu-clp-spring-2027-guide-pdf/1666a2d1d9c532c3c4e95e9911cd3595f7036ffe58ddd5cac7aa16ced0072457.pdf",
+      "disposition": "uploaded_and_verified_after_retry",
+      "remoteReadBackVerified": true
+    },
+    {
+      "sourceId": "src-thu-visiting-student-current",
+      "url": "https://intl-nondegree.tsinghua.edu.cn/f/yzlxs/yz_lxs_kstzb/view?id=264627",
+      "sha256": "da582ceae823c62f876c28fa27987eb20ce636b3477778e5129b31ff083462a5",
+      "size": 25010,
+      "mime": "text/html",
+      "r2Key": "snapshots/da/src-thu-visiting-student-current/da582ceae823c62f876c28fa27987eb20ce636b3477778e5129b31ff083462a5.html",
+      "disposition": "uploaded",
+      "remoteReadBackVerified": true
+    },
+    {
+      "sourceId": "source-thu-visiting-fees-schedule",
+      "url": "https://intl-nondegree.tsinghua.edu.cn/b/yzlxs/yz_sys_xxfjb/download/file?id=504171",
+      "sha256": "49710361f944f48418eaaffa7835207a1b8fd5065b79a562086acf8ce7ee1414",
+      "size": 528603,
+      "mime": "application/pdf",
+      "r2Key": "snapshots/49/source-thu-visiting-fees-schedule/49710361f944f48418eaaffa7835207a1b8fd5065b79a562086acf8ce7ee1414.pdf",
+      "disposition": "uploaded",
+      "remoteReadBackVerified": true
+    },
+    {
+      "sourceId": "src-thu-graduate-programs-in-english-current",
+      "url": "https://yz.tsinghua.edu.cn/en/Programs/Graduate_Programs_in_English.htm",
+      "sha256": "68554b13c6168ead07e51a3f49c15eec5d5f6dfc81afd76ae30c665f06a8bd0c",
+      "size": 53137,
+      "mime": "text/html",
+      "r2Key": "snapshots/68/src-thu-graduate-programs-in-english-current/68554b13c6168ead07e51a3f49c15eec5d5f6dfc81afd76ae30c665f06a8bd0c.html",
+      "disposition": "uploaded",
+      "remoteReadBackVerified": true
+    },
+    {
+      "sourceId": "source-thu-2026-international-graduate-admissions",
+      "url": "https://yz.tsinghua.edu.cn/en/info/1035/1523.htm",
+      "sha256": "e3f3f646fb9851825f188815cb1a7376e8587e86d6fd15d0e03aba2124d62992",
+      "size": 46967,
+      "mime": "text/html",
+      "r2Key": "snapshots/e3/source-thu-2026-international-graduate-admissions/e3f3f646fb9851825f188815cb1a7376e8587e86d6fd15d0e03aba2124d62992.html",
+      "disposition": "uploaded",
+      "remoteReadBackVerified": true
+    },
+    {
+      "sourceId": "source-thu-2026-international-graduate-tuition",
+      "url": "https://yzbm.tsinghua.edu.cn/publish/s05/s0501/detail/dae20f4e-6f7a-42ee-9dad-24597411b6a4",
+      "sha256": "ece7e2958e189b6f924f79822c2446894fa394c967336e485494e1b8b80dd6fc",
+      "size": 149410,
+      "mime": "text/html",
+      "r2Key": "snapshots/ec/source-thu-2026-international-graduate-tuition/ece7e2958e189b6f924f79822c2446894fa394c967336e485494e1b8b80dd6fc.html",
+      "disposition": "uploaded",
+      "remoteReadBackVerified": true
+    },
+    {
+      "sourceId": "source-pku-2026-international-graduate-tuition",
+      "url": "https://isd.pku.edu.cn/userfiles/editor/202510201755264616.pdf",
+      "sha256": "666ca67bbd14ba475c5b6664f7daf0a573e7cb74acc5e76963fe6f1d6467bd0f",
+      "size": 130678,
+      "mime": "application/pdf",
+      "r2Key": "snapshots/66/source-pku-2026-international-graduate-tuition/666ca67bbd14ba475c5b6664f7daf0a573e7cb74acc5e76963fe6f1d6467bd0f.pdf",
+      "disposition": "uploaded",
+      "remoteReadBackVerified": true
+    },
+    {
+      "sourceId": "src-gap-program-pku-depth-cs-master-english",
+      "url": "https://www.isd.pku.edu.cn/en/detail.php?id=739",
+      "sha256": "187a6822204194613a81c1639b1633332808b3764a02548712e2a2d74862a5dd",
+      "size": 64230,
+      "mime": "text/html",
+      "r2Key": "snapshots/18/src-gap-program-pku-depth-cs-master-english/187a6822204194613a81c1639b1633332808b3764a02548712e2a2d74862a5dd.html",
+      "disposition": "uploaded",
+      "remoteReadBackVerified": true
+    },
+    {
+      "sourceId": "src-gap-program-pku-depth-impa-cppic-master",
+      "url": "https://www.isd.pku.edu.cn/en/detail.php?id=761",
+      "sha256": "9ecfa39af2301ac3dd206c5965957073395e4b9202987aaee5b553530b0f9c15",
+      "size": 95160,
+      "mime": "text/html",
+      "r2Key": "snapshots/9e/src-gap-program-pku-depth-impa-cppic-master/9ecfa39af2301ac3dd206c5965957073395e4b9202987aaee5b553530b0f9c15.html",
+      "disposition": "uploaded",
+      "remoteReadBackVerified": true
+    },
+    {
+      "sourceId": "src-gap-program-pku-depth-llm-chinese-law",
+      "url": "https://www.isd.pku.edu.cn/en/detail.php?id=749",
+      "sha256": "1a7c558fdb8ac12416cbe9d73939bb9ed00fa9adcdc96fbc8447094bb91f3c27",
+      "size": 165717,
+      "mime": "text/html",
+      "r2Key": "snapshots/1a/src-gap-program-pku-depth-llm-chinese-law/1a7c558fdb8ac12416cbe9d73939bb9ed00fa9adcdc96fbc8447094bb91f3c27.html",
+      "disposition": "uploaded",
+      "remoteReadBackVerified": true
+    }
+  ]
+}

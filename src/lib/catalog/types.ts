@@ -103,6 +103,7 @@ export type CatalogProgramListItem = {
   program: Program
   university: University
   currentCycle: AdmissionCycle | null
+  latestTuitionReference?: AdmissionCycle | null
 }
 
 export type CatalogProgramListFacets = {

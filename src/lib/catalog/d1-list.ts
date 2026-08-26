@@ -4,6 +4,7 @@ import {
   scholarshipSchema,
   universitySchema,
 } from '@/lib/data/schema'
+import { selectLatestTuitionReference } from '@/lib/data/admission'
 import type {
   AdmissionCycle,
   DegreeLevel,
@@ -159,7 +160,12 @@ function normalizeProgramCycle(
   const intake = intakeValue === 'spring' || intakeValue === 'autumn' ? intakeValue : 'other'
   const exponent = typeof tuition?.currencyExponent === 'number' ? tuition.currencyExponent : 0
   const amountMinor = typeof tuition?.amountMinimumMinor === 'number' ? tuition.amountMinimumMinor : null
-  const tuitionCny = amountMinor === null ? null : amountMinor / (10 ** exponent)
+  const tuitionStatusValue = stringValue(tuition?.valueStatus)
+  const tuitionStatus = tuitionStatusValue === 'confirmed' || tuitionStatusValue === 'reference'
+    ? tuitionStatusValue
+    : null
+  const tuitionCny = amountMinor === null || tuitionStatus === null
+    ? null : amountMinor / (10 ** exponent)
   const candidate = {
     ...fieldAudit(value, today),
     id: stringValue(value.id) ?? `remote:${program.id}:${academicYear}:${intake}`,
@@ -177,11 +183,36 @@ function normalizeProgramCycle(
     tuitionPeriod: stringValue(tuition?.period) === 'academic_year'
       ? 'academic-year'
       : stringValue(tuition?.period),
-    tuitionStatus: tuitionCny === null ? null : 'confirmed',
+    tuitionStatus: tuitionCny === null ? null : tuitionStatus,
+    evidenceBasis: 'cycle-specific' as const,
+    factScope: 'partial' as const,
     applicationFeeCny: null,
   }
   const normalized = admissionCycleSchema.safeParse(candidate)
   return normalized.success ? normalized.data : null
+}
+
+function normalizeProgramCycles(
+  value: UnknownRecord,
+  program: Program,
+  today: string,
+): Pick<CatalogProgramListItem, 'currentCycle' | 'latestTuitionReference'> {
+  const currentCycle = normalizeProgramCycle(value.currentCycle, program, today)
+  const explicitReference = normalizeProgramCycle(value.latestTuitionReference, program, today)
+  const referenceCandidates = [currentCycle, explicitReference]
+    .filter((cycle): cycle is AdmissionCycle => cycle !== null)
+    .map((cycle) => cycle.dateStatus === 'previous-cycle-reference' && cycle.tuitionCny !== null
+      ? { ...cycle, tuitionStatus: 'reference' as const }
+      : cycle)
+  const latestTuitionReference = selectLatestTuitionReference(
+    referenceCandidates,
+    program.id,
+  ) ?? null
+
+  return {
+    currentCycle: currentCycle?.dateStatus === 'previous-cycle-reference' ? null : currentCycle,
+    latestTuitionReference,
+  }
 }
 
 function normalizeProgram(value: unknown, today: string): CatalogProgramListItem {
@@ -192,7 +223,7 @@ function normalizeProgram(value: unknown, today: string): CatalogProgramListItem
     return {
       program: parsedProgram.data,
       university: normalizeUniversity(value.university, parsedProgram.data.programUrl, today),
-      currentCycle: normalizeProgramCycle(value.currentCycle, parsedProgram.data, today),
+      ...normalizeProgramCycles(value, parsedProgram.data, today),
     }
   }
 
@@ -243,7 +274,7 @@ function normalizeProgram(value: unknown, today: string): CatalogProgramListItem
   return {
     program,
     university,
-    currentCycle: normalizeProgramCycle(value.currentCycle, program, today),
+    ...normalizeProgramCycles(value, program, today),
   }
 }
 

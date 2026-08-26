@@ -8,6 +8,7 @@ import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
 import { selectCatalogApiData } from '@/lib/catalog-api/projection'
 import { CatalogApiService } from '@/lib/catalog-api/service'
 import { selectPublishedData } from '@/lib/data/publication'
+import { selectLatestTuitionReference } from '@/lib/data/admission'
 import {
   parseProgramCatalogFilters,
   queryProgramCatalog,
@@ -248,7 +249,14 @@ export class JsonCatalogRepository implements CatalogRepository {
 
   async listPrograms(query: CatalogProgramListQuery = {}): Promise<CatalogProgramListPage> {
     const today = query.today ?? getTodayDate()
-    const data = selectPublishedData(await this.getBundle(), today)
+    const rawData = await this.getBundle()
+    const data = selectPublishedData(rawData, today)
+    const officialSourceIds = new Set(
+      rawData.sources.filter((source) => source.official).map((source) => source.id),
+    )
+    const officialTuitionReferenceCycles = rawData.admissionCycles.filter(
+      (cycle) => cycle.sourceIds.some((sourceId) => officialSourceIds.has(sourceId)),
+    )
     const currentScholarships = data.scholarships.filter((item) => item.status === 'verified')
     const requestedScholarships = query.scholarship === 'linked'
       ? currentScholarships
@@ -298,6 +306,10 @@ export class JsonCatalogRepository implements CatalogRepository {
         program,
         university,
         currentCycle: cycle ?? null,
+        latestTuitionReference: selectLatestTuitionReference(
+          officialTuitionReferenceCycles,
+          program.id,
+        ) ?? null,
       })),
       nextCursor,
       total: result.total,

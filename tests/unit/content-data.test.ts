@@ -67,7 +67,8 @@ describe('published content data', () => {
       expect(program.durationMonths).not.toBeNull()
       expect(program.languageRequirements.length).toBeGreaterThan(0)
       expect(program.programUrl).not.toBe(program.applyUrl)
-      expect(program.durationMonthsMax).not.toBeNull()
+      // A null/omitted maximum represents a fixed duration; only ranged programs need a maximum.
+      expect(program.durationMonthsMax ?? program.durationMonths).toBeGreaterThanOrEqual(program.durationMonths!)
     }
 
     for (const cycle of published.admissionCycles) {

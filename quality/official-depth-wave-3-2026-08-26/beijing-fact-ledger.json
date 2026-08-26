@@ -1,0 +1,375 @@
+{
+  "waveId": "beijing-official-depth-wave-3-2026-08-26",
+  "checkedAt": "2026-08-26",
+  "policy": {
+    "officialSourcesOnly": true,
+    "httpsSourcesOnly": true,
+    "searchSnippetsSupportDynamicFacts": false,
+    "unknownValuesInferred": false,
+    "closed2026CyclesPublishedAsCurrent": false,
+    "projected2027CyclesAllowed": false,
+    "scalarVisitingTuitionAllowed": false,
+    "rawEvidenceCommittedToGit": false,
+    "privateR2ObjectKeysRegistered": true,
+    "privateR2UploadConfirmed": true,
+    "existingIdsAndSlugsPreserved": true
+  },
+  "snapshotConvention": {
+    "status": "confirmed_private_r2_upload",
+    "objectKeyPattern": "snapshots/{sha256-prefix-2}/{sourceId}/{sha256}.{extension}",
+    "bucket": "studyinchina-source-snapshots",
+    "confirmedAt": "2026-08-25T17:16:22Z",
+    "note": "The official response bytes were rehashed locally, uploaded to the private R2 bucket, fully read back, and matched by exact byte size and SHA-256. Large raw files are not committed."
+  },
+  "sources": [
+    {
+      "sourceId": "src-thu-chinese-language-program-current",
+      "officialUrl": "https://intl-nondegree.tsinghua.edu.cn/f/yzlxs/yz_lxs_kstzb/view?id=254607",
+      "title": "Admission to Chinese Language Program in THU — Spring 2027",
+      "evidenceAcquisition": "direct_https_html",
+      "releaseEvidenceScope": "current_2027_program_and_cycle",
+      "snapshot": {
+        "status": "confirmed_private_r2_upload",
+        "sha256": "f318a58f6e6dd51032f50de4a7620d9e7b6b02307d6891fd8506adea69f28ed1",
+        "sizeBytes": 6438,
+        "mimeType": "text/html",
+        "r2ObjectKey": "snapshots/f3/src-thu-chinese-language-program-current/f318a58f6e6dd51032f50de4a7620d9e7b6b02307d6891fd8506adea69f28ed1.html"
+      },
+      "locators": [
+        {
+          "kind": "html_section",
+          "heading": "Program Overview",
+          "htmlTextLines": "9-14",
+          "quote": "one semester, which consists of approximately 18 weeks",
+          "supports": ["duration_18_weeks", "three_placement_levels", "teaching_language_by_level"]
+        },
+        {
+          "kind": "html_section",
+          "heading": "Eligibility",
+          "htmlTextLines": "16-21",
+          "quote": "foreign citizens aged 20-55 ... following a bachelor's degree program ... or has obtained bachelor's degree",
+          "supports": ["age_20_55", "bachelor_current_or_completed", "foreign_citizenship"]
+        },
+        {
+          "kind": "html_section",
+          "heading": "Application Procedures",
+          "htmlTextLines": "23-32",
+          "quote": "spring 2027 intake will start on September 29 and will end at 11am, November 3, 2026 ... application fee (RMB 400)",
+          "supports": ["opens_2026_09_29", "closes_2026_11_03_1100_beijing", "application_fee_400"]
+        },
+        {
+          "kind": "html_section",
+          "heading": "FAQ",
+          "htmlTextLines": "36-41",
+          "quote": "CLP is entirely self-funded and no scholarships are available",
+          "supports": ["no_scholarship"]
+        }
+      ]
+    },
+    {
+      "sourceId": "source-thu-clp-spring-2027-guide-pdf",
+      "officialUrl": "https://intl-nondegree.tsinghua.edu.cn/b/yzlxs/yz_sys_xxfjb/download/file?id=531455",
+      "title": "Introduction to CLP and Application Guide — Spring 2027",
+      "evidenceAcquisition": "raw_pdf_bytes",
+      "releaseEvidenceScope": "current_2027_program_cycle_costs_and_materials",
+      "snapshot": {
+        "status": "confirmed_private_r2_upload",
+        "sha256": "1666a2d1d9c532c3c4e95e9911cd3595f7036ffe58ddd5cac7aa16ced0072457",
+        "sizeBytes": 5375945,
+        "mimeType": "application/pdf",
+        "r2ObjectKey": "snapshots/16/source-thu-clp-spring-2027-guide-pdf/1666a2d1d9c532c3c4e95e9911cd3595f7036ffe58ddd5cac7aa16ced0072457.pdf"
+      },
+      "locators": [
+        {
+          "kind": "pdf_page_section",
+          "page": 3,
+          "heading": "Qualifications of Applicants / Application Schedule / Costs in RMB Yuan",
+          "quote": "11:00am September 29, 2026 ... 11:00am November 3, 2026 ... Tuition fee RMB12,600 (per semester) ... Application fee RMB400",
+          "supports": ["age_20_55", "bachelor_current_or_completed", "opens_2026_09_29", "closes_2026_11_03_1100_beijing", "tuition_12600_per_semester", "application_fee_400"]
+        },
+        {
+          "kind": "pdf_page_section",
+          "page": 4,
+          "heading": "Application Procedure / Documents to be submitted",
+          "quote": "website: intl-nondegree.tsinghua.edu.cn/f/login ... passport ... ID photo ... transcript ... diploma/certificate of enrollment ... personal statement and study plan",
+          "supports": ["official_application_entrypoint", "application_materials"]
+        },
+        {
+          "kind": "pdf_page_section",
+          "page": 5,
+          "heading": "FAQ",
+          "quote": "CLP is entirely self-funded and no scholarships are available",
+          "supports": ["no_scholarship"]
+        }
+      ]
+    },
+    {
+      "sourceId": "src-thu-visiting-student-current",
+      "officialUrl": "https://intl-nondegree.tsinghua.edu.cn/f/yzlxs/yz_lxs_kstzb/view?id=264627",
+      "title": "Admission to Visiting Student Program of Tsinghua University 2027",
+      "evidenceAcquisition": "direct_https_html",
+      "releaseEvidenceScope": "current_2027_program_and_cycles",
+      "snapshot": {
+        "status": "confirmed_private_r2_upload",
+        "sha256": "da582ceae823c62f876c28fa27987eb20ce636b3477778e5129b31ff083462a5",
+        "sizeBytes": 25010,
+        "mimeType": "text/html",
+        "r2ObjectKey": "snapshots/da/src-thu-visiting-student-current/da582ceae823c62f876c28fa27987eb20ce636b3477778e5129b31ff083462a5.html"
+      },
+      "locators": [
+        {
+          "kind": "html_section",
+          "heading": "Introduction",
+          "htmlTextLines": "13-19",
+          "quote": "ranges from 1 semester up to 2 years ... Department-level Exchange students and Free-mover Visiting Students",
+          "supports": ["duration_one_semester_to_two_years", "exchange_and_free_mover"]
+        },
+        {
+          "kind": "html_section",
+          "heading": "Qualification of Applicants",
+          "htmlTextLines": "21-41",
+          "quote": "General Visiting Students ... second year of university ... 45 ... Senior Visiting Students ... Ph.D. ... 50 ... HSK Level 5 ... TOEFL 90 or IELTS 6.5",
+          "supports": ["general_visitor_age_and_education", "senior_visitor_age_and_education", "hsk_210", "hsk_180_modern_chinese", "toefl_90", "ielts_6_5"]
+        },
+        {
+          "kind": "html_section",
+          "heading": "Application Schedule",
+          "htmlTextLines": "43-52",
+          "quote": "2027 Spring ... 15th Oct. 2026 - 30th Nov. 2026 ... 2027 Fall ... 15th Mar. 2027 - 15th May 2027 ... Scholarship holders from CSC ... 30th Apr. 2027",
+          "supports": ["spring_2027_window", "fall_2027_window", "csc_fall_2027_window"]
+        },
+        {
+          "kind": "html_section",
+          "heading": "Application Documents / Application Procedure",
+          "htmlTextLines": "54-74",
+          "quote": "Personal Statement ... Degree Certificate or Enrolment Certificate ... transcripts ... Language Proficiency ... passport ... online application via Tsinghua University's Non-Degree International Student Portal",
+          "supports": ["application_materials", "official_application_entrypoint"]
+        }
+      ]
+    },
+    {
+      "sourceId": "source-thu-visiting-fees-schedule",
+      "officialUrl": "https://intl-nondegree.tsinghua.edu.cn/b/yzlxs/yz_sys_xxfjb/download/file?id=504171",
+      "title": "Tsinghua University International Non-Degree Programs Fees Schedule",
+      "evidenceAcquisition": "raw_pdf_bytes",
+      "releaseEvidenceScope": "current_fee_matrix_without_scalar_projection",
+      "snapshot": {
+        "status": "confirmed_private_r2_upload",
+        "sha256": "49710361f944f48418eaaffa7835207a1b8fd5065b79a562086acf8ce7ee1414",
+        "sizeBytes": 528603,
+        "mimeType": "application/pdf",
+        "r2ObjectKey": "snapshots/49/source-thu-visiting-fees-schedule/49710361f944f48418eaaffa7835207a1b8fd5065b79a562086acf8ce7ee1414.pdf"
+      },
+      "locators": [
+        {
+          "kind": "pdf_table",
+          "page": 1,
+          "heading": "Fees Schedule",
+          "quote": "Application Fee ¥400 ... Tuition Fee (per year) ... General Visiting Students / Senior Visiting Students ... Tuition for one semester is half ... Exchange Students and Research Cooperation Students are free-charged",
+          "supports": ["application_fee_400", "visiting_fee_matrix", "semester_half_rate", "exchange_research_tuition_free"]
+        }
+      ],
+      "feeMatrix": {
+        "currency": "CNY",
+        "period": "academic-year",
+        "generalVisiting": {
+          "scienceEngineering": 30000,
+          "economicsManagement": 26000,
+          "lawJournalismHumanitiesSocialSciences": 25000,
+          "arts": 40000
+        },
+        "seniorVisiting": {
+          "scienceEngineering": 33000,
+          "economicsManagement": 30000,
+          "lawJournalismHumanitiesSocialSciences": 28000,
+          "arts": 45000
+        },
+        "oneSemesterRule": "half_of_corresponding_annual_rate",
+        "tuitionFreeTracks": ["exchange_students", "research_cooperation_students"],
+        "scalarCatalogValue": null
+      }
+    },
+    {
+      "sourceId": "src-thu-graduate-programs-in-english-current",
+      "officialUrl": "https://yz.tsinghua.edu.cn/en/Programs/Graduate_Programs_in_English.htm",
+      "title": "Graduate Programs in English",
+      "evidenceAcquisition": "direct_https_html",
+      "releaseEvidenceScope": "identity_reconciliation_and_quarantine",
+      "snapshot": {
+        "status": "confirmed_private_r2_upload",
+        "sha256": "68554b13c6168ead07e51a3f49c15eec5d5f6dfc81afd76ae30c665f06a8bd0c",
+        "sizeBytes": 53137,
+        "mimeType": "text/html",
+        "r2ObjectKey": "snapshots/68/src-thu-graduate-programs-in-english-current/68554b13c6168ead07e51a3f49c15eec5d5f6dfc81afd76ae30c665f06a8bd0c.html"
+      },
+      "locators": [
+        {
+          "kind": "html_table_reconciliation",
+          "heading": "Graduate Programs in English",
+          "quote": "Tsinghua Global MBA Program (GMBA)",
+          "supports": ["specific_gmba_identity", "generic_business_administration_exact_match_absent"]
+        }
+      ],
+      "catalogReconciliation": {
+        "searchedIdentity": "Business Administration",
+        "exactInternationalProgramMatch": false,
+        "specificMatchAlreadyPublished": "program-tsinghua-university-tsinghua-global-mba-program-master",
+        "decision": "archive_generic_identity_and_remove_all_cycles"
+      }
+    },
+    {
+      "sourceId": "source-thu-2026-international-graduate-admissions",
+      "officialUrl": "https://yz.tsinghua.edu.cn/en/info/1035/1523.htm",
+      "title": "Admission to Graduate Programs of Tsinghua University 2026 (For International Students)",
+      "evidenceAcquisition": "direct_https_html",
+      "releaseEvidenceScope": "historical_2026_reference_only",
+      "snapshot": {
+        "status": "confirmed_private_r2_upload",
+        "sha256": "e3f3f646fb9851825f188815cb1a7376e8587e86d6fd15d0e03aba2124d62992",
+        "sizeBytes": 46967,
+        "mimeType": "text/html",
+        "r2ObjectKey": "snapshots/e3/source-thu-2026-international-graduate-admissions/e3f3f646fb9851825f188815cb1a7376e8587e86d6fd15d0e03aba2124d62992.html"
+      },
+      "locators": [
+        {
+          "kind": "html_section",
+          "heading": "Costs",
+          "htmlTextLines": "167-174",
+          "quote": "Application Fee: RMB 800 ... Tuition Fees ... list of Tuition Fees 2026",
+          "supports": ["historical_2026_application_fee_800", "tuition_table_link"]
+        }
+      ]
+    },
+    {
+      "sourceId": "source-thu-2026-international-graduate-tuition",
+      "officialUrl": "https://yzbm.tsinghua.edu.cn/publish/s05/s0501/detail/dae20f4e-6f7a-42ee-9dad-24597411b6a4",
+      "title": "Tuition Fees of Graduate Programs for International Students 2026",
+      "evidenceAcquisition": "direct_https_html",
+      "releaseEvidenceScope": "historical_2026_reference_only",
+      "snapshot": {
+        "status": "confirmed_private_r2_upload",
+        "sha256": "ece7e2958e189b6f924f79822c2446894fa394c967336e485494e1b8b80dd6fc",
+        "sizeBytes": 149410,
+        "mimeType": "text/html",
+        "r2ObjectKey": "snapshots/ec/source-thu-2026-international-graduate-tuition/ece7e2958e189b6f924f79822c2446894fa394c967336e485494e1b8b80dd6fc.html"
+      },
+      "locators": [
+        { "kind": "html_table_rows", "htmlTextLines": "236-395", "supports": ["thu_architecture_120000_program", "thu_icpm_158000_program", "thu_environment_master_78000_program", "thu_vehicle_78000_program", "thu_global_manufacturing_78000_program", "thu_imem_78000_program", "thu_advanced_computing_39000_year", "thu_cs_phd_40000_year", "thu_nuclear_78000_program", "thu_gmba_198000_program"] },
+        { "kind": "html_table_rows", "htmlTextLines": "411-426", "supports": ["thu_mid_120000_program", "thu_llm_group_146000_program"] }
+      ]
+    },
+    {
+      "sourceId": "source-pku-2026-international-graduate-tuition",
+      "officialUrl": "https://isd.pku.edu.cn/userfiles/editor/202510201755264616.pdf",
+      "title": "Tuition Fees of Graduate Programs for International Students 2026",
+      "evidenceAcquisition": "raw_pdf_bytes",
+      "releaseEvidenceScope": "historical_2026_reference_only",
+      "snapshot": {
+        "status": "confirmed_private_r2_upload",
+        "sha256": "666ca67bbd14ba475c5b6664f7daf0a573e7cb74acc5e76963fe6f1d6467bd0f",
+        "sizeBytes": 130678,
+        "mimeType": "application/pdf",
+        "r2ObjectKey": "snapshots/66/source-pku-2026-international-graduate-tuition/666ca67bbd14ba475c5b6664f7daf0a573e7cb74acc5e76963fe6f1d6467bd0f.pdf"
+      },
+      "locators": [
+        { "kind": "pdf_table_row", "page": 1, "row": 7, "quote": "Law School ... Master ... 2 ... English ... 160000 ... LLM program", "supports": ["pku_llm_160000_program"] },
+        { "kind": "pdf_table_rows", "page": 3, "rows": "23-24", "quote": "School of Computer Science ... Master 3 ... 150000 ... PhD 4-5 ... 200000-250000", "supports": ["pku_cs_master_150000_total", "pku_cs_phd_200000_250000_total"] },
+        { "kind": "pdf_table_row", "page": 4, "row": 45, "quote": "Public Administration in Comparative Public Policy and International Cooperation ... 2 ... English ... 380000 ... IMPA", "supports": ["pku_impa_380000_total"] }
+      ]
+    },
+    {
+      "sourceId": "src-gap-program-pku-depth-cs-master-english",
+      "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=739",
+      "title": "2026 Application Guide for International Graduate Students in Computer Science at Peking University",
+      "evidenceAcquisition": "direct_https_html",
+      "releaseEvidenceScope": "historical_2026_reference_only",
+      "snapshot": {
+        "status": "confirmed_private_r2_upload",
+        "sha256": "187a6822204194613a81c1639b1633332808b3764a02548712e2a2d74862a5dd",
+        "sizeBytes": 64230,
+        "mimeType": "text/html",
+        "r2ObjectKey": "snapshots/18/src-gap-program-pku-depth-cs-master-english/187a6822204194613a81c1639b1633332808b3764a02548712e2a2d74862a5dd.html"
+      },
+      "locators": [
+        { "kind": "html_section", "heading": "Tuition and Financial Aid", "supports": ["pku_cs_50000_per_year", "pku_cs_master_150000_total", "pku_cs_phd_200000_250000_total"] }
+      ]
+    },
+    {
+      "sourceId": "src-gap-program-pku-depth-impa-cppic-master",
+      "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=761",
+      "title": "International Master of Public Administration Program at School of Government (2026 Entry)",
+      "evidenceAcquisition": "direct_https_html",
+      "releaseEvidenceScope": "historical_2026_reference_only",
+      "snapshot": {
+        "status": "confirmed_private_r2_upload",
+        "sha256": "9ecfa39af2301ac3dd206c5965957073395e4b9202987aaee5b553530b0f9c15",
+        "sizeBytes": 95160,
+        "mimeType": "text/html",
+        "r2ObjectKey": "snapshots/9e/src-gap-program-pku-depth-impa-cppic-master/9ecfa39af2301ac3dd206c5965957073395e4b9202987aaee5b553530b0f9c15.html"
+      },
+      "locators": [
+        { "kind": "html_section", "heading": "Tuition / Application", "quote": "RMB 190,000 per year ... RMB 380,000 total ... application fee RMB 800", "supports": ["pku_impa_190000_per_year", "pku_impa_380000_total", "pku_impa_application_fee_800"] }
+      ]
+    },
+    {
+      "sourceId": "src-gap-program-pku-depth-llm-chinese-law",
+      "officialUrl": "https://www.isd.pku.edu.cn/en/detail.php?id=749",
+      "title": "The Master of Laws (LL.M.) Program in Chinese Law at Peking University for 2026 Entry",
+      "evidenceAcquisition": "direct_https_html",
+      "releaseEvidenceScope": "historical_2026_reference_only",
+      "snapshot": {
+        "status": "confirmed_private_r2_upload",
+        "sha256": "1a7c558fdb8ac12416cbe9d73939bb9ed00fa9adcdc96fbc8447094bb91f3c27",
+        "sizeBytes": 165717,
+        "mimeType": "text/html",
+        "r2ObjectKey": "snapshots/1a/src-gap-program-pku-depth-llm-chinese-law/1a7c558fdb8ac12416cbe9d73939bb9ed00fa9adcdc96fbc8447094bb91f3c27.html"
+      },
+      "locators": [
+        { "kind": "html_section", "heading": "Tuition / Application", "quote": "tuition fee ... 160,000 RMB ... application fee RMB 800", "supports": ["pku_llm_160000_program", "pku_llm_application_fee_800"] }
+      ]
+    }
+  ],
+  "currentProgramCoverage": [
+    {
+      "programId": "program-tsinghua-university-chinese-language-program-language",
+      "publishedFacts": ["approximately_18_weeks", "tuition_12600_per_semester", "application_fee_400", "age_20_55", "bachelor_current_or_completed", "application_materials", "official_application_entrypoint", "spring_2027_window", "no_scholarship"],
+      "withheldFacts": []
+    },
+    {
+      "programId": "program-tsinghua-university-visiting-student-program-other",
+      "publishedFacts": ["one_semester_to_two_years", "general_and_senior_age_rules", "route_specific_language_rules", "application_materials", "official_application_entrypoint", "spring_2027_window", "fall_2027_window", "visiting_fee_matrix"],
+      "withheldFacts": ["scalar_tuition_withheld_because_official_fee_depends_on_category_and_discipline"],
+      "tuitionRepresentation": "structured_fee_matrix_in_ledger_and_cycle_notes"
+    }
+  ],
+  "historicalCycleCoverage": [
+    "cycle-thu-architecture-2026-2027-autumn-fee-reference",
+    "cycle-thu-icpm-2026-2027-autumn-fee-reference",
+    "cycle-thu-environmental-science-master-2026-2027-autumn-fee-reference",
+    "cycle-thu-vehicle-mobility-2026-2027-autumn-fee-reference",
+    "cycle-thu-global-manufacturing-2026-2027-autumn-fee-reference",
+    "cycle-thu-imem-2026-2027-autumn-fee-reference",
+    "cycle-thu-advanced-computing-2026-2027-autumn-fee-reference",
+    "cycle-thu-computer-science-phd-2026-2027-autumn-fee-reference",
+    "cycle-thu-nuclear-engineering-management-2026-2027-autumn-fee-reference",
+    "cycle-thu-global-mba-2026-2027-autumn-fee-reference",
+    "cycle-thu-mid-2026-2027-autumn-fee-reference",
+    "cycle-thu-llm-chinese-law-2026-2027-autumn-fee-reference",
+    "cycle-gap-pku-depth-cs-master-english-2026-2027-autumn-fee-reference",
+    "cycle-gap-pku-depth-cs-doctorate-english-2026-2027-autumn-fee-reference",
+    "cycle-gap-pku-depth-impa-cppic-master-2026-2027-autumn-fee-reference",
+    "cycle-gap-pku-depth-llm-chinese-law-2026-2027-autumn-fee-reference"
+  ],
+  "quarantinedFactSets": [
+    {
+      "id": "thu-generic-business-administration-identity-and-cycle",
+      "programId": "program-tsinghua-university-business-administration-master",
+      "preservedSlug": "tsinghua-university-business-administration-master",
+      "state": "archived_not_public",
+      "reasonCode": "no_exact_international_program_mapping",
+      "reason": "The official English-program catalog lists the specific Tsinghua Global MBA but no exact generic Business Administration international program. The existing record used only a generic international homepage.",
+      "cyclesRemoved": ["cycle-2027-tsinghua-university-business-administration-master"],
+      "compatibilityStrategy": "retain_id_and_slug_in_archived_record_but_exclude_from_publication"
+    }
+  ]
+}

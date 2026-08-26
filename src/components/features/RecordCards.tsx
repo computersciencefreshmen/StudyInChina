@@ -57,7 +57,7 @@ export function UniversityCard({ university, city, fields, locale, messages }: {
   </Card>
 }
 
-export function ProgramCard({ program, university, cycle, locale, messages, today = new Date().toISOString().slice(0, 10) }: { program: ProgramWithFieldMeta; university?: University; cycle?: AdmissionCycleWithFieldMeta; locale: PublicLocale; messages: Messages; today?: string }) {
+export function ProgramCard({ program, university, cycle, latestTuitionReference, locale, messages, today = new Date().toISOString().slice(0, 10) }: { program: ProgramWithFieldMeta; university?: University; cycle?: AdmissionCycleWithFieldMeta; latestTuitionReference?: AdmissionCycleWithFieldMeta; locale: PublicLocale; messages: Messages; today?: string }) {
   const decisionCopy = getDecisionExperienceCopy(locale)
   const periodLabels = {
     program: messages.programs.tuitionProgram,
@@ -70,18 +70,20 @@ export function ProgramCard({ program, university, cycle, locale, messages, toda
   const cycleIsStale = Boolean(cycle && isStaleRecord(cycle, today))
   const previousCycle = cycle?.dateStatus === 'previous-cycle-reference'
   const dynamicFactsAreStale = programIsStale || cycleIsStale || previousCycle
-  const referenceFees = cycle?.tuitionStatus === 'reference'
+  const hasCurrentConfirmedTuition = cycle?.tuitionCny != null
+    && cycle.tuitionStatus === 'confirmed'
+  const visibleTuitionReference = hasCurrentConfirmedTuition
+    ? undefined
+    : latestTuitionReference
   const tuitionStatus = resolveFactStatus({
     fieldMeta: cycle?.fieldMeta?.tuitionCny,
     stale: dynamicFactsAreStale,
-    value: cycle?.tuitionCny,
-    reference: referenceFees,
+    value: hasCurrentConfirmedTuition ? cycle.tuitionCny : undefined,
   })
   const applicationFeeStatus = resolveFactStatus({
     fieldMeta: cycle?.fieldMeta?.applicationFeeCny,
     stale: dynamicFactsAreStale,
     value: cycle?.applicationFeeCny,
-    reference: referenceFees,
   })
   const deadlineStatus = resolveFactStatus({
     fieldMeta: cycle?.fieldMeta?.closesOn,
@@ -93,9 +95,12 @@ export function ProgramCard({ program, university, cycle, locale, messages, toda
     stale: programIsStale,
     value: program.durationMonths,
   })
-  const tuitionValue = cycle?.tuitionCny == null
+  const tuitionValue = !hasCurrentConfirmedTuition
     ? undefined
     : `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${periodLabels[cycle.tuitionPeriod || 'other']}`
+  const tuitionReferenceValue = visibleTuitionReference?.tuitionCny == null
+    ? undefined
+    : `${formatCny(visibleTuitionReference.tuitionCny, locale, messages.common.unknown)} / ${periodLabels[visibleTuitionReference.tuitionPeriod || 'other']} · ${visibleTuitionReference.academicYear} · ${messages.programs.tuitionReference}`
   const applicationFeeValue = cycle?.applicationFeeCny == null
     ? undefined
     : formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)
@@ -136,7 +141,9 @@ export function ProgramCard({ program, university, cycle, locale, messages, toda
         : undefined} /></dd></div>
     </dl>
     <dl className={`record-facts ${styles.supportingFacts}`}>
-      <div><dt>{messages.common.tuition}</dt><dd><FactValue status={tuitionStatus} locale={locale} value={tuitionValue} /></dd></div>
+      <div><dt>{messages.common.tuition}</dt><dd>{tuitionReferenceValue
+        ? <span className={styles.referenceFact} data-fact-status="reference">{tuitionReferenceValue}</span>
+        : <FactValue status={tuitionStatus} locale={locale} value={tuitionValue} />}</dd></div>
       <div><dt>{decisionCopy.applicationFee}</dt><dd><FactValue status={applicationFeeStatus} locale={locale} value={applicationFeeValue} /></dd></div>
       <div><dt>{messages.common.language}</dt><dd>{program.teachingLanguages.length
         ? program.teachingLanguages.map((item) => languageLabel(item, locale)).join(', ')

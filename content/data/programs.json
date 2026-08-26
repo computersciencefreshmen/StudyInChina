@@ -31,9 +31,9 @@
     "sourceIds": [
       "src-uni-tsinghua-university"
     ],
-    "verifiedAt": "2026-07-16",
-    "reviewAfter": "2026-10-01",
-    "status": "draft",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-08-26",
+    "status": "archived",
     "id": "program-tsinghua-university-business-administration-master",
     "slug": "tsinghua-university-business-administration-master",
     "universityId": "uni-tsinghua-university",
@@ -44,13 +44,13 @@
     },
     "degreeLevel": "master",
     "discipline": "business",
-    "teachingLanguages": [
-      "To be confirmed"
-    ],
+    "teachingLanguages": [],
     "durationMonths": null,
     "programUrl": "https://international.join-tsinghua.edu.cn/",
-    "applyUrl": "https://international.join-tsinghua.edu.cn/",
-    "languageRequirements": []
+    "applyUrl": null,
+    "languageRequirements": [],
+    "durationMonthsMax": null,
+    "verificationScope": "identity"
   },
   {
     "id": "program-tsinghua-university-chinese-language-program-language",
@@ -64,19 +64,88 @@
     "degreeLevel": "language",
     "discipline": "chinese-education",
     "teachingLanguages": [
+      "English",
       "Chinese"
     ],
-    "durationMonths": null,
+    "durationMonths": 4,
     "programUrl": "https://intl-nondegree.tsinghua.edu.cn/f/yzlxs/yz_lxs_kstzb/view?id=254607",
     "applyUrl": "https://intl-nondegree.tsinghua.edu.cn/f/login",
-    "languageRequirements": [],
-    "verificationScope": "identity",
-    "sourceIds": [
-      "src-thu-chinese-language-program-current"
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "Placement is generally equivalent to HSK 3 or below for elementary, HSK 4–5 for intermediate, and HSK 5–6 for advanced classes; the official guide does not state a universal minimum HSK score."
+      }
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "verificationScope": "complete",
+    "sourceIds": [
+      "src-thu-chinese-language-program-current",
+      "source-thu-clp-spring-2027-guide-pdf"
+    ],
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-08-29",
+    "status": "verified",
+    "durationMonthsMax": null,
+    "details": {
+      "faculty": {
+        "en": "Chinese Language Program, Non-degree Programs, Academic Affairs Office",
+        "zh": "清华大学非学位项目汉语进修项目"
+      },
+      "overview": {
+        "en": "A semester-based Chinese-language program of approximately 18 weeks and 16 class units per week.",
+        "zh": "按学期组织的汉语进修项目，每学期约18周、每周16课时。"
+      },
+      "qualification": {
+        "en": "Applicants must be foreign citizens aged 20–55 and be studying for, or already hold, a bachelor-equivalent degree.",
+        "zh": "申请人须为20至55岁的外国公民，正在攻读或已经取得学士学位或同等学历。"
+      },
+      "studyMode": "full-time",
+      "languagePolicy": {
+        "en": "Elementary classes are taught in English; intermediate and advanced classes are taught in Chinese.",
+        "zh": "初级班使用英语授课，中级和高级班使用汉语授课。"
+      },
+      "curriculumHighlights": [
+        {
+          "en": "Elementary, intermediate and advanced placement levels.",
+          "zh": "设置初级、中级和高级三个层级。"
+        },
+        {
+          "en": "Approximately 18 weeks and 16 class units per week.",
+          "zh": "每学期约18周，每周约16课时。"
+        }
+      ],
+      "eligibility": [
+        {
+          "en": "Foreign citizen aged 20–55.",
+          "zh": "20至55岁的外国公民。"
+        },
+        {
+          "en": "Currently following a bachelor-equivalent program or already holding a bachelor-equivalent degree.",
+          "zh": "正在攻读或已经取得学士学位或同等学历。"
+        },
+        {
+          "en": "Good moral character and health, with willingness to follow Chinese laws and university rules.",
+          "zh": "品行良好、身体健康，并遵守中国法律和学校规定。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "en": "Passport information page and compliant ID photo.",
+          "zh": "护照信息页和符合要求的证件照。"
+        },
+        {
+          "en": "Official transcript and highest diploma or certificate of enrolment.",
+          "zh": "正式成绩单以及最高学历证书或在读证明。"
+        },
+        {
+          "en": "A 500–1,000 word personal statement and study plan in Chinese or English.",
+          "zh": "500至1,000字的中英文个人陈述及学习计划。"
+        }
+      ],
+      "campus": {
+        "en": "Tsinghua University, Beijing",
+        "zh": "清华大学北京校区"
+      }
+    }
   },
   {
     "sourceIds": [
@@ -652,11 +721,12 @@
   },
   {
     "sourceIds": [
-      "src-uni-shenzhen-university"
+      "src-szu-2026-international-undergraduate-catalog",
+      "source-szu-2026-bachelor-guide"
     ],
-    "verifiedAt": "2026-07-16",
-    "reviewAfter": "2026-10-01",
-    "status": "draft",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified",
     "id": "program-shenzhen-university-computer-science-bachelor",
     "slug": "shenzhen-university-computer-science-bachelor",
     "universityId": "uni-shenzhen-university",
@@ -668,20 +738,27 @@
     "degreeLevel": "bachelor",
     "discipline": "engineering",
     "teachingLanguages": [
-      "To be confirmed"
+      "Chinese"
     ],
-    "durationMonths": null,
-    "programUrl": "https://lxs.szu.edu.cn/",
-    "applyUrl": "https://lxs.szu.edu.cn/",
-    "languageRequirements": []
+    "durationMonths": 48,
+    "programUrl": "https://lxs.szu.edu.cn/info/1277/5767.htm",
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=02",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 4, score 180"
+      }
+    ],
+    "verificationScope": "facts"
   },
   {
     "sourceIds": [
-      "src-uni-shenzhen-university"
+      "src-szu-2026-international-master-catalog",
+      "source-szu-2026-master-guide"
     ],
-    "verifiedAt": "2026-07-16",
-    "reviewAfter": "2026-10-01",
-    "status": "draft",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified",
     "id": "program-shenzhen-university-design-master",
     "slug": "shenzhen-university-design-master",
     "universityId": "uni-shenzhen-university",
@@ -693,20 +770,27 @@
     "degreeLevel": "master",
     "discipline": "art-design",
     "teachingLanguages": [
-      "To be confirmed"
+      "Chinese"
     ],
-    "durationMonths": null,
-    "programUrl": "https://lxs.szu.edu.cn/",
-    "applyUrl": "https://lxs.szu.edu.cn/",
-    "languageRequirements": []
+    "durationMonths": 36,
+    "programUrl": "https://lxs.szu.edu.cn/info/1278/5777.htm",
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=07",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 5, score 180"
+      }
+    ],
+    "verificationScope": "facts"
   },
   {
     "sourceIds": [
-      "src-uni-shenzhen-university"
+      "source-szu-2026-autumn-chinese-language",
+      "source-szu-2026-autumn-chinese-language-supplement"
     ],
-    "verifiedAt": "2026-07-16",
-    "reviewAfter": "2026-10-01",
-    "status": "draft",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified",
     "id": "program-shenzhen-university-chinese-language-program-language",
     "slug": "shenzhen-university-chinese-language-program-language",
     "universityId": "uni-shenzhen-university",
@@ -718,12 +802,18 @@
     "degreeLevel": "language",
     "discipline": "chinese-education",
     "teachingLanguages": [
-      "To be confirmed"
+      "Chinese"
     ],
-    "durationMonths": null,
-    "programUrl": "https://lxs.szu.edu.cn/",
-    "applyUrl": "https://lxs.szu.edu.cn/",
-    "languageRequirements": []
+    "durationMonths": 5,
+    "programUrl": "https://lxs.szu.edu.cn/info/1253/7227.htm",
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=01",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "Foreign passport holder, age 18–60, in good health and good conduct"
+      }
+    ],
+    "verificationScope": "facts"
   },
   {
     "sourceIds": [
@@ -1306,7 +1396,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-renmin-university-of-china-chinese-language-program-language",
     "slug": "renmin-university-of-china-chinese-language-program-language",
     "universityId": "uni-renmin-university-of-china",
@@ -1332,7 +1422,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-jiaotong-university-chinese-language-program-language",
     "slug": "beijing-jiaotong-university-chinese-language-program-language",
     "universityId": "uni-beijing-jiaotong-university",
@@ -1358,7 +1448,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-university-of-technology-computer-science-and-technology-bachelo",
     "slug": "beijing-university-of-technology-computer-science-and-technology-bachelo",
     "universityId": "uni-beijing-university-of-technology",
@@ -1384,7 +1474,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beihang-university-computer-science-and-technology-bachelor",
     "slug": "beihang-university-computer-science-and-technology-bachelor",
     "universityId": "uni-beihang-university",
@@ -1436,7 +1526,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-university-of-science-and-technology-beijing-computer-science-and-techno",
     "slug": "university-of-science-and-technology-beijing-computer-science-and-techno",
     "universityId": "uni-university-of-science-and-technology-beijing",
@@ -1462,7 +1552,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-university-of-chemical-technology-chemical-engineering-and-techn",
     "slug": "beijing-university-of-chemical-technology-chemical-engineering-and-techn",
     "universityId": "uni-beijing-university-of-chemical-technology",
@@ -1489,7 +1579,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-agricultural-university-crop-genetics-and-breeding-master",
     "slug": "china-agricultural-university-crop-genetics-and-breeding-master",
     "universityId": "uni-china-agricultural-university",
@@ -1515,7 +1605,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-forestry-university-chinese-language-program-language",
     "slug": "beijing-forestry-university-chinese-language-program-language",
     "universityId": "uni-beijing-forestry-university",
@@ -1567,7 +1657,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-normal-university-chinese-as-a-second-language-bachelor",
     "slug": "beijing-normal-university-chinese-as-a-second-language-bachelor",
     "universityId": "uni-beijing-normal-university",
@@ -1593,7 +1683,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-foreign-studies-university-finance-bachelor",
     "slug": "beijing-foreign-studies-university-finance-bachelor",
     "universityId": "uni-beijing-foreign-studies-university",
@@ -1619,7 +1709,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-communication-university-of-china-digital-media-art-bachelor",
     "slug": "communication-university-of-china-digital-media-art-bachelor",
     "universityId": "uni-communication-university-of-china",
@@ -1645,7 +1735,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-central-university-of-finance-and-economics-finance-master",
     "slug": "central-university-of-finance-and-economics-finance-master",
     "universityId": "uni-central-university-of-finance-and-economics",
@@ -1671,7 +1761,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-university-of-international-business-and-economics-economics-bachelor",
     "slug": "university-of-international-business-and-economics-economics-bachelor",
     "universityId": "uni-university-of-international-business-and-economics",
@@ -1801,7 +1891,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-minzu-university-of-china-one-semester-study-program-international-chine",
     "slug": "minzu-university-of-china-one-semester-study-program-international-chine",
     "universityId": "uni-minzu-university-of-china",
@@ -1853,7 +1943,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nankai-university-international-education-of-chinese-language-bachelor",
     "slug": "nankai-university-international-education-of-chinese-language-bachelor",
     "universityId": "uni-nankai-university",
@@ -2122,7 +2212,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-dalian-university-of-technology-chinese-language-business-bachelor-progr",
     "slug": "dalian-university-of-technology-chinese-language-business-bachelor-progr",
     "universityId": "uni-dalian-university-of-technology",
@@ -2379,7 +2469,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-fudan-university-chinese-economy-and-business-program-language",
     "slug": "fudan-university-chinese-economy-and-business-program-language",
     "universityId": "uni-fudan-university",
@@ -2405,7 +2495,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-tongji-university-architecture-international-class-bachelor",
     "slug": "tongji-university-architecture-international-class-bachelor",
     "universityId": "uni-tongji-university",
@@ -2674,7 +2764,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-university-one-semester-business-chinese-program-language",
     "slug": "shanghai-university-one-semester-business-chinese-program-language",
     "universityId": "uni-shanghai-university",
@@ -2700,7 +2790,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-university-master-of-international-relations-china-and-global-af",
     "slug": "nanjing-university-master-of-international-relations-china-and-global-af",
     "universityId": "uni-nanjing-university",
@@ -2757,7 +2847,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-southeast-university-bachelor-of-medicine-and-bachelor-of-surgery-mbbs-b",
     "slug": "southeast-university-bachelor-of-medicine-and-bachelor-of-surgery-mbbs-b",
     "universityId": "uni-southeast-university",
@@ -3095,7 +3185,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-normal-university-master-s-program-in-human-geography-master",
     "slug": "nanjing-normal-university-master-s-program-in-human-geography-master",
     "universityId": "uni-nanjing-normal-university",
@@ -3229,7 +3319,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-xiamen-university-digital-media-art-bachelor",
     "slug": "xiamen-university-digital-media-art-bachelor",
     "universityId": "uni-xiamen-university",
@@ -3440,7 +3530,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-wuhan-university-bachelor-of-medicine-and-bachelor-of-surgery-mbbs-bache",
     "slug": "wuhan-university-bachelor-of-medicine-and-bachelor-of-surgery-mbbs-bache",
     "universityId": "uni-wuhan-university",
@@ -3466,7 +3556,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-huazhong-university-of-science-and-technology-chinese-language-program-l",
     "slug": "huazhong-university-of-science-and-technology-chinese-language-program-l",
     "universityId": "uni-huazhong-university-of-science-and-technology",
@@ -3727,7 +3817,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-sun-yat-sen-university-2026-one-academic-year-pre-university-program-fou",
     "slug": "sun-yat-sen-university-2026-one-academic-year-pre-university-program-fou",
     "universityId": "uni-sun-yat-sen-university",
@@ -3762,7 +3852,7 @@
       "English"
     ],
     "durationMonths": 48,
-    "programUrl": "https://zsb.jnu.edu.cn/2025/1205/c40322a847522/page.htm",
+    "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
     "applyUrl": "https://lxlz.jnu.edu.cn/",
     "languageRequirements": [
       {
@@ -3771,15 +3861,20 @@
       },
       {
         "test": "TOEFL",
-        "minimum": "80 iBT"
+        "minimum": "80 (iBT)"
+      },
+      {
+        "test": "other",
+        "minimum": "SAT total score 1030 accepted by the 2026 guide"
       }
     ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-jnu-2026-international-undergraduate-admissions"
+      "src-jnu-2026-international-undergraduate-admissions",
+      "source-jnu-official-application-portal"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -3945,7 +4040,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-sichuan-university-chinese-language-program-language",
     "slug": "sichuan-university-chinese-language-program-language",
     "universityId": "uni-sichuan-university",
@@ -4042,7 +4137,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-university-of-electronic-science-and-technology-of-china-control-science",
     "slug": "university-of-electronic-science-and-technology-of-china-control-science",
     "universityId": "uni-university-of-electronic-science-and-technology-of-china",
@@ -4125,7 +4220,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-northwestern-polytechnical-university-aerospace-engineering-bachelor",
     "slug": "northwestern-polytechnical-university-aerospace-engineering-bachelor",
     "universityId": "uni-northwestern-polytechnical-university",
@@ -4178,7 +4273,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-northwest-a-and-f-university-crop-cultivation-and-farming-system-master",
     "slug": "northwest-a-and-f-university-crop-cultivation-and-farming-system-master",
     "universityId": "uni-northwest-a-and-f-university",
@@ -4204,7 +4299,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-lanzhou-university-atmosphere-science-bachelor",
     "slug": "lanzhou-university-atmosphere-science-bachelor",
     "universityId": "uni-lanzhou-university",
@@ -4230,7 +4325,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-renmin-university-of-china-finance-junior-visiting-program-other",
     "slug": "renmin-university-of-china-finance-junior-visiting-program-other",
     "universityId": "uni-renmin-university-of-china",
@@ -4256,7 +4351,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-jiaotong-university-preparatory-program-for-international-studen",
     "slug": "beijing-jiaotong-university-preparatory-program-for-international-studen",
     "universityId": "uni-beijing-jiaotong-university",
@@ -4308,7 +4403,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beihang-university-flight-vehicle-design-and-engineering-bachelor",
     "slug": "beihang-university-flight-vehicle-design-and-engineering-bachelor",
     "universityId": "uni-beihang-university",
@@ -4360,7 +4455,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-university-of-science-and-technology-beijing-environmental-engineering-b",
     "slug": "university-of-science-and-technology-beijing-environmental-engineering-b",
     "universityId": "uni-university-of-science-and-technology-beijing",
@@ -4386,7 +4481,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-university-of-chemical-technology-computer-science-and-technolog",
     "slug": "beijing-university-of-chemical-technology-computer-science-and-technolog",
     "universityId": "uni-beijing-university-of-chemical-technology",
@@ -4413,7 +4508,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-agricultural-university-agricultural-engineering-master",
     "slug": "china-agricultural-university-agricultural-engineering-master",
     "universityId": "uni-china-agricultural-university",
@@ -4465,7 +4560,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-normal-university-computer-science-and-technology-bachelor",
     "slug": "beijing-normal-university-computer-science-and-technology-bachelor",
     "universityId": "uni-beijing-normal-university",
@@ -4491,7 +4586,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-foreign-studies-university-international-business-bachelor",
     "slug": "beijing-foreign-studies-university-international-business-bachelor",
     "universityId": "uni-beijing-foreign-studies-university",
@@ -4517,7 +4612,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-communication-university-of-china-journalism-bachelor",
     "slug": "communication-university-of-china-journalism-bachelor",
     "universityId": "uni-communication-university-of-china",
@@ -4543,7 +4638,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-central-university-of-finance-and-economics-international-law-master",
     "slug": "central-university-of-finance-and-economics-international-law-master",
     "universityId": "uni-central-university-of-finance-and-economics",
@@ -4569,7 +4664,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-university-of-international-business-and-economics-finance-bachelor",
     "slug": "university-of-international-business-and-economics-finance-bachelor",
     "universityId": "uni-university-of-international-business-and-economics",
@@ -4699,7 +4794,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-minzu-university-of-china-one-semester-study-program-chinese-language-an",
     "slug": "minzu-university-of-china-one-semester-study-program-chinese-language-an",
     "universityId": "uni-minzu-university-of-china",
@@ -4751,7 +4846,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nankai-university-chinese-language-business-chinese-bachelor",
     "slug": "nankai-university-chinese-language-business-chinese-bachelor",
     "universityId": "uni-nankai-university",
@@ -4959,7 +5054,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-dalian-university-of-technology-chinese-language-international-chinese-l",
     "slug": "dalian-university-of-technology-chinese-language-international-chinese-l",
     "universityId": "uni-dalian-university-of-technology",
@@ -5191,7 +5286,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-fudan-university-fudan-international-winter-session-2026-other",
     "slug": "fudan-university-fudan-international-winter-session-2026-other",
     "universityId": "uni-fudan-university",
@@ -5217,7 +5312,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-tongji-university-bachelor-of-medicine-and-bachelor-of-surgery-mbbs-bach",
     "slug": "tongji-university-bachelor-of-medicine-and-bachelor-of-surgery-mbbs-bach",
     "universityId": "uni-tongji-university",
@@ -5516,7 +5611,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-university-one-year-intensive-chinese-language-program-language",
     "slug": "shanghai-university-one-year-intensive-chinese-language-program-language",
     "universityId": "uni-shanghai-university",
@@ -5568,7 +5663,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-southeast-university-english-taught-undergraduate-program-in-architectur",
     "slug": "southeast-university-english-taught-undergraduate-program-in-architectur",
     "universityId": "uni-southeast-university",
@@ -5906,7 +6001,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-normal-university-master-s-program-in-chemistry-master",
     "slug": "nanjing-normal-university-master-s-program-in-chemistry-master",
     "universityId": "uni-nanjing-normal-university",
@@ -6040,7 +6135,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-xiamen-university-environmental-design-bachelor",
     "slug": "xiamen-university-environmental-design-bachelor",
     "universityId": "uni-xiamen-university",
@@ -6248,7 +6343,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-wuhan-university-master-of-public-health-global-health-track-master",
     "slug": "wuhan-university-master-of-public-health-global-health-track-master",
     "universityId": "uni-wuhan-university",
@@ -6274,7 +6369,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-huazhong-university-of-science-and-technology-master-s-program-in-comput",
     "slug": "huazhong-university-of-science-and-technology-master-s-program-in-comput",
     "universityId": "uni-huazhong-university-of-science-and-technology",
@@ -6535,7 +6630,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-sun-yat-sen-university-one-semester-pre-university-program-foundation",
     "slug": "sun-yat-sen-university-one-semester-pre-university-program-foundation",
     "universityId": "uni-sun-yat-sen-university",
@@ -6570,7 +6665,7 @@
       "English"
     ],
     "durationMonths": 48,
-    "programUrl": "https://zsb.jnu.edu.cn/2025/1205/c40322a847522/page.htm",
+    "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
     "applyUrl": "https://lxlz.jnu.edu.cn/",
     "languageRequirements": [
       {
@@ -6579,15 +6674,20 @@
       },
       {
         "test": "TOEFL",
-        "minimum": "80 iBT"
+        "minimum": "80 (iBT)"
+      },
+      {
+        "test": "other",
+        "minimum": "SAT total score 1030 accepted by the 2026 guide"
       }
     ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-jnu-2026-international-undergraduate-admissions"
+      "src-jnu-2026-international-undergraduate-admissions",
+      "source-jnu-official-application-portal"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -6727,7 +6827,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-sichuan-university-civil-engineering-semester-and-academic-year-program-",
     "slug": "sichuan-university-civil-engineering-semester-and-academic-year-program-",
     "universityId": "uni-sichuan-university",
@@ -6824,7 +6924,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-university-of-electronic-science-and-technology-of-china-electrical-engi",
     "slug": "university-of-electronic-science-and-technology-of-china-electrical-engi",
     "universityId": "uni-university-of-electronic-science-and-technology-of-china",
@@ -6907,7 +7007,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-northwestern-polytechnical-university-computer-science-and-technology-ba",
     "slug": "northwestern-polytechnical-university-computer-science-and-technology-ba",
     "universityId": "uni-northwestern-polytechnical-university",
@@ -6960,7 +7060,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-northwest-a-and-f-university-plant-genetics-breeding-master",
     "slug": "northwest-a-and-f-university-plant-genetics-breeding-master",
     "universityId": "uni-northwest-a-and-f-university",
@@ -6986,7 +7086,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-lanzhou-university-applied-meteorology-bachelor",
     "slug": "lanzhou-university-applied-meteorology-bachelor",
     "universityId": "uni-lanzhou-university",
@@ -7012,7 +7112,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-renmin-university-of-china-international-communication-senior-visiting-p",
     "slug": "renmin-university-of-china-international-communication-senior-visiting-p",
     "universityId": "uni-renmin-university-of-china",
@@ -7038,7 +7138,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-university-of-technology-mechanical-engineering-bachelor",
     "slug": "beijing-university-of-technology-mechanical-engineering-bachelor",
     "universityId": "uni-beijing-university-of-technology",
@@ -7064,7 +7164,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beihang-university-materials-science-and-engineering-bachelor",
     "slug": "beihang-university-materials-science-and-engineering-bachelor",
     "universityId": "uni-beihang-university",
@@ -7090,7 +7190,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-university-of-science-and-technology-beijing-materials-science-and-engin",
     "slug": "university-of-science-and-technology-beijing-materials-science-and-engin",
     "universityId": "uni-university-of-science-and-technology-beijing",
@@ -7116,7 +7216,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-university-of-chemical-technology-materials-science-and-engineer",
     "slug": "beijing-university-of-chemical-technology-materials-science-and-engineer",
     "universityId": "uni-beijing-university-of-chemical-technology",
@@ -7143,7 +7243,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-agricultural-university-food-science-and-engineering-master",
     "slug": "china-agricultural-university-food-science-and-engineering-master",
     "universityId": "uni-china-agricultural-university",
@@ -7195,7 +7295,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-normal-university-international-economics-and-trade-bachelor",
     "slug": "beijing-normal-university-international-economics-and-trade-bachelor",
     "universityId": "uni-beijing-normal-university",
@@ -7221,7 +7321,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-foreign-studies-university-international-trade-bachelor",
     "slug": "beijing-foreign-studies-university-international-trade-bachelor",
     "universityId": "uni-beijing-foreign-studies-university",
@@ -7247,7 +7347,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-communication-university-of-china-chinese-language-preparatory-program-l",
     "slug": "communication-university-of-china-chinese-language-preparatory-program-l",
     "universityId": "uni-communication-university-of-china",
@@ -7273,7 +7373,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-central-university-of-finance-and-economics-investment-master",
     "slug": "central-university-of-finance-and-economics-investment-master",
     "universityId": "uni-central-university-of-finance-and-economics",
@@ -7299,7 +7399,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-university-of-international-business-and-economics-international-economi",
     "slug": "university-of-international-business-and-economics-international-economi",
     "universityId": "uni-university-of-international-business-and-economics",
@@ -7325,7 +7425,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-minzu-university-of-china-chinese-language-study-program-language",
     "slug": "minzu-university-of-china-chinese-language-study-program-language",
     "universityId": "uni-minzu-university-of-china",
@@ -7351,7 +7451,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nankai-university-chinese-language-and-literature-bachelor",
     "slug": "nankai-university-chinese-language-and-literature-bachelor",
     "universityId": "uni-nankai-university",
@@ -7404,7 +7504,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-fudan-university-international-chinese-language-teachers-scholarship-one",
     "slug": "fudan-university-international-chinese-language-teachers-scholarship-one",
     "universityId": "uni-fudan-university",
@@ -7430,7 +7530,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-tongji-university-civil-engineering-international-class-bachelor",
     "slug": "tongji-university-civil-engineering-international-class-bachelor",
     "universityId": "uni-tongji-university",
@@ -7482,7 +7582,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-university-one-semester-intensive-chinese-language-program-lang",
     "slug": "shanghai-university-one-semester-intensive-chinese-language-program-lang",
     "universityId": "uni-shanghai-university",
@@ -7508,7 +7608,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-soochow-university-csca-foundation-program-for-international-students-on",
     "slug": "soochow-university-csca-foundation-program-for-international-students-on",
     "universityId": "uni-soochow-university",
@@ -7534,7 +7634,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-southeast-university-pre-university-program-foundation",
     "slug": "southeast-university-pre-university-program-foundation",
     "universityId": "uni-southeast-university",
@@ -7560,7 +7660,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-normal-university-international-economics-and-trade-bachelor",
     "slug": "nanjing-normal-university-international-economics-and-trade-bachelor",
     "universityId": "uni-nanjing-normal-university",
@@ -7586,7 +7686,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-xiamen-university-visual-communication-design-bachelor",
     "slug": "xiamen-university-visual-communication-design-bachelor",
     "universityId": "uni-xiamen-university",
@@ -7612,7 +7712,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-wuhan-university-bachelor-of-software-engineering-bachelor",
     "slug": "wuhan-university-bachelor-of-software-engineering-bachelor",
     "universityId": "uni-wuhan-university",
@@ -7638,7 +7738,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-huazhong-university-of-science-and-technology-bachelor-of-telecommunicat",
     "slug": "huazhong-university-of-science-and-technology-bachelor-of-telecommunicat",
     "universityId": "uni-huazhong-university-of-science-and-technology",
@@ -7664,7 +7764,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-sun-yat-sen-university-tourism-management-bachelor",
     "slug": "sun-yat-sen-university-tourism-management-bachelor",
     "universityId": "uni-sun-yat-sen-university",
@@ -7690,7 +7790,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-sichuan-university-international-business-management-semester-and-academ",
     "slug": "sichuan-university-international-business-management-semester-and-academ",
     "universityId": "uni-sichuan-university",
@@ -7760,7 +7860,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-university-of-electronic-science-and-technology-of-china-foreign-languag",
     "slug": "university-of-electronic-science-and-technology-of-china-foreign-languag",
     "universityId": "uni-university-of-electronic-science-and-technology-of-china",
@@ -7817,7 +7917,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-northwestern-polytechnical-university-mechanical-engineering-bachelor",
     "slug": "northwestern-polytechnical-university-mechanical-engineering-bachelor",
     "universityId": "uni-northwestern-polytechnical-university",
@@ -7843,7 +7943,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-xidian-university-computer-science-and-technology-master",
     "slug": "xidian-university-computer-science-and-technology-master",
     "universityId": "uni-xidian-university",
@@ -7870,7 +7970,7 @@
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
-    "status": "verified",
+    "status": "stale",
     "id": "program-northwest-a-and-f-university-fruit-science-master",
     "slug": "northwest-a-and-f-university-fruit-science-master",
     "universityId": "uni-northwest-a-and-f-university",
@@ -8492,10 +8592,10 @@
   },
   {
     "sourceIds": [
-      "src-szu-iclt-2026"
+      "source-szu-iclt-nondegree-2026-2027"
     ],
-    "verifiedAt": "2026-07-28",
-    "reviewAfter": "2026-08-27",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-01",
     "status": "verified",
     "id": "program-shenzhen-university-iclt-one-semester-language",
     "slug": "shenzhen-university-iclt-one-semester-language",
@@ -8511,12 +8611,16 @@
       "Chinese"
     ],
     "durationMonths": 5,
-    "programUrl": "https://lxs.szu.edu.cn/info/1253/6937.htm",
+    "programUrl": "https://lxs.szu.edu.cn/info/1169/6947.htm",
     "applyUrl": "https://status.szu.edu.cn/szulxs/stuzs/stuLogin.action?fpage_id=216",
     "languageRequirements": [
       {
         "test": "HSK",
-        "minimum": "Level 3, 180 with HSKK"
+        "minimum": "Level 3, score 180"
+      },
+      {
+        "test": "other",
+        "minimum": "HSKK score report required"
       }
     ],
     "verificationScope": "facts"
@@ -11200,26 +11304,97 @@
       "Chinese",
       "English"
     ],
-    "durationMonths": null,
+    "durationMonths": 5,
     "programUrl": "https://intl-nondegree.tsinghua.edu.cn/f/yzlxs/yz_lxs_kstzb/view?id=264627",
     "applyUrl": "https://intl-nondegree.tsinghua.edu.cn/f/login",
     "languageRequirements": [
       {
-        "test": "IELTS",
-        "minimum": "6.5 when required by the selected English-medium courses"
+        "test": "HSK",
+        "minimum": "Level 5, score 210 for humanities and social-science disciplines"
+      },
+      {
+        "test": "HSK",
+        "minimum": "Level 5, score 180 for the Modern Chinese major"
       },
       {
         "test": "TOEFL",
-        "minimum": "90 when required by the selected English-medium courses"
+        "minimum": "90 for applicants from non-native English-speaking countries taking English-taught courses"
+      },
+      {
+        "test": "IELTS",
+        "minimum": "6.5 for applicants from non-native English-speaking countries taking English-taught courses"
       }
     ],
-    "verificationScope": "facts",
+    "verificationScope": "complete",
     "sourceIds": [
-      "src-thu-visiting-student-current"
+      "src-thu-visiting-student-current",
+      "source-thu-visiting-fees-schedule"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-02",
+    "status": "verified",
+    "durationMonthsMax": 24,
+    "details": {
+      "faculty": {
+        "en": "Non-Degree Education Office",
+        "zh": "非学位教育办公室"
+      },
+      "overview": {
+        "en": "A general or senior visiting-student route lasting from one semester to two years, including exchange and free-mover study.",
+        "zh": "普通或高级访问学生项目，学制从一学期至两年，包含校际交换和个人申请路线。"
+      },
+      "qualification": {
+        "en": "General visitors must normally be at least second-year university students and no older than 45; senior visitors must be current PhD students, PhD candidates or PhD holders and are normally no older than 50.",
+        "zh": "普通访问学生通常须达到大学二年级及以上且不超过45岁；高级访问学生须为在读博士、博士候选人或博士学位持有者，通常不超过50岁。"
+      },
+      "studyMode": "full-time",
+      "languagePolicy": {
+        "en": "Chinese-taught routes use route-specific HSK 5 thresholds; non-native English speakers taking English-taught courses need TOEFL 90 or IELTS 6.5.",
+        "zh": "中文路线按学科采用不同的HSK五级分数要求；非英语母语者修读英文课程须达到托福90或雅思6.5。"
+      },
+      "curriculumHighlights": [
+        {
+          "en": "Access to more than 200 English-mediated courses, subject to department confirmation.",
+          "zh": "可选范围包括200余门英文授课课程，具体以院系确认为准。"
+        },
+        {
+          "en": "Official transcripts are issued after successful completion.",
+          "zh": "完成学习并达到要求后可获得正式成绩单。"
+        }
+      ],
+      "eligibility": [
+        {
+          "en": "Non-Chinese citizen holding a valid ordinary passport.",
+          "zh": "持有效普通护照的非中国籍公民。"
+        },
+        {
+          "en": "General route: at least second-year university standing, normally age 45 or below.",
+          "zh": "普通访问路线：至少大学二年级，通常不超过45岁。"
+        },
+        {
+          "en": "Senior route: current PhD student, PhD candidate or PhD holder, normally age 50 or below.",
+          "zh": "高级访问路线：在读博士、博士候选人或博士学位持有者，通常不超过50岁。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "en": "Personal statement, preceding degree or enrolment certificate, and original transcripts.",
+          "zh": "个人陈述、前置学历或在读证明以及正式成绩单。"
+        },
+        {
+          "en": "Language certificate and passport photo page.",
+          "zh": "语言能力证明和护照照片页。"
+        },
+        {
+          "en": "Senior visitors also need an acceptance letter and two academic references.",
+          "zh": "高级访问学生还须提交接收函和两封学术推荐信。"
+        }
+      ],
+      "campus": {
+        "en": "Tsinghua University, Beijing",
+        "zh": "清华大学北京校区"
+      }
+    }
   },
   {
     "id": "program-tsinghua-university-english-doctoral-program-in-environmental-science-engineering-and-management-doctorate",
@@ -12967,15 +13142,28 @@
     ],
     "durationMonths": 48,
     "programUrl": "https://lxs.szu.edu.cn/info/1277/5767.htm",
-    "applyUrl": "https://lxs.szu.edu.cn/",
-    "languageRequirements": [],
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=02",
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "5.5"
+      },
+      {
+        "test": "TOEFL",
+        "minimum": "80 (iBT)"
+      },
+      {
+        "test": "other",
+        "minimum": "Duolingo English Test 100"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
       "src-szu-2026-international-undergraduate-catalog",
-      "src-szu-international-tuition-current"
+      "source-szu-2026-bachelor-guide"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -12994,15 +13182,28 @@
     ],
     "durationMonths": 48,
     "programUrl": "https://lxs.szu.edu.cn/info/1277/5767.htm",
-    "applyUrl": "https://lxs.szu.edu.cn/",
-    "languageRequirements": [],
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=02",
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "5.5"
+      },
+      {
+        "test": "TOEFL",
+        "minimum": "80 (iBT)"
+      },
+      {
+        "test": "other",
+        "minimum": "Duolingo English Test 100"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
       "src-szu-2026-international-undergraduate-catalog",
-      "src-szu-international-tuition-current"
+      "source-szu-2026-bachelor-guide"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -13021,15 +13222,28 @@
     ],
     "durationMonths": 48,
     "programUrl": "https://lxs.szu.edu.cn/info/1277/5767.htm",
-    "applyUrl": "https://lxs.szu.edu.cn/",
-    "languageRequirements": [],
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=02",
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "5.5"
+      },
+      {
+        "test": "TOEFL",
+        "minimum": "80 (iBT)"
+      },
+      {
+        "test": "other",
+        "minimum": "Duolingo English Test 100"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
       "src-szu-2026-international-undergraduate-catalog",
-      "src-szu-international-tuition-current"
+      "source-szu-2026-bachelor-guide"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -13048,15 +13262,20 @@
     ],
     "durationMonths": 24,
     "programUrl": "https://lxs.szu.edu.cn/info/1278/5777.htm",
-    "applyUrl": "https://lxs.szu.edu.cn/",
-    "languageRequirements": [],
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=07",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "Official English-proficiency proof for applicants whose native or prior degree language is not English"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
       "src-szu-2026-international-master-catalog",
-      "src-szu-international-tuition-current"
+      "source-szu-2026-master-guide"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -13075,15 +13294,20 @@
     ],
     "durationMonths": 24,
     "programUrl": "https://lxs.szu.edu.cn/info/1278/5777.htm",
-    "applyUrl": "https://lxs.szu.edu.cn/",
-    "languageRequirements": [],
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=07",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "Official English-proficiency proof for applicants whose native or prior degree language is not English"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
       "src-szu-2026-international-master-catalog",
-      "src-szu-international-tuition-current"
+      "source-szu-2026-master-guide"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -13102,15 +13326,20 @@
     ],
     "durationMonths": 36,
     "programUrl": "https://lxs.szu.edu.cn/info/1278/5777.htm",
-    "applyUrl": "https://lxs.szu.edu.cn/",
-    "languageRequirements": [],
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=07",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "Official English-proficiency proof for applicants whose native or prior degree language is not English"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
       "src-szu-2026-international-master-catalog",
-      "src-szu-international-tuition-current"
+      "source-szu-2026-master-guide"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -13129,15 +13358,20 @@
     ],
     "durationMonths": 48,
     "programUrl": "https://lxs.szu.edu.cn/info/1279/5787.htm",
-    "applyUrl": "https://lxs.szu.edu.cn/",
-    "languageRequirements": [],
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=10",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "Official English-proficiency proof for applicants whose native or prior degree language is not English"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
       "src-szu-2026-international-doctoral-catalog",
-      "src-szu-international-tuition-current"
+      "source-szu-2026-doctoral-guide"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -13156,15 +13390,20 @@
     ],
     "durationMonths": 48,
     "programUrl": "https://lxs.szu.edu.cn/info/1279/5787.htm",
-    "applyUrl": "https://lxs.szu.edu.cn/",
-    "languageRequirements": [],
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=10",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "Official English-proficiency proof for applicants whose native or prior degree language is not English"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
       "src-szu-2026-international-doctoral-catalog",
-      "src-szu-international-tuition-current"
+      "source-szu-2026-doctoral-guide"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -13183,15 +13422,20 @@
     ],
     "durationMonths": 48,
     "programUrl": "https://lxs.szu.edu.cn/info/1279/5787.htm",
-    "applyUrl": "https://lxs.szu.edu.cn/",
-    "languageRequirements": [],
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=10",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "Official English-proficiency proof for applicants whose native or prior degree language is not English"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
       "src-szu-2026-international-doctoral-catalog",
-      "src-szu-international-tuition-current"
+      "source-szu-2026-doctoral-guide"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -13210,15 +13454,20 @@
     ],
     "durationMonths": 48,
     "programUrl": "https://lxs.szu.edu.cn/info/1279/5787.htm",
-    "applyUrl": "https://lxs.szu.edu.cn/",
-    "languageRequirements": [],
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=10",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "Official English-proficiency proof for applicants whose native or prior degree language is not English"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
       "src-szu-2026-international-doctoral-catalog",
-      "src-szu-international-tuition-current"
+      "source-szu-2026-doctoral-guide"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -13236,7 +13485,7 @@
       "English"
     ],
     "durationMonths": 48,
-    "programUrl": "https://zsb.jnu.edu.cn/2025/1205/c40322a847522/page.htm",
+    "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
     "applyUrl": "https://lxlz.jnu.edu.cn/",
     "languageRequirements": [
       {
@@ -13245,15 +13494,20 @@
       },
       {
         "test": "TOEFL",
-        "minimum": "80 iBT"
+        "minimum": "80 (iBT)"
+      },
+      {
+        "test": "other",
+        "minimum": "SAT total score 1030 accepted by the 2026 guide"
       }
     ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-jnu-2026-international-undergraduate-admissions"
+      "src-jnu-2026-international-undergraduate-admissions",
+      "source-jnu-official-application-portal"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -13271,7 +13525,7 @@
       "English"
     ],
     "durationMonths": 48,
-    "programUrl": "https://zsb.jnu.edu.cn/2025/1205/c40322a847522/page.htm",
+    "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
     "applyUrl": "https://lxlz.jnu.edu.cn/",
     "languageRequirements": [
       {
@@ -13280,15 +13534,20 @@
       },
       {
         "test": "TOEFL",
-        "minimum": "80 iBT"
+        "minimum": "80 (iBT)"
+      },
+      {
+        "test": "other",
+        "minimum": "SAT total score 1030 accepted by the 2026 guide"
       }
     ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-jnu-2026-international-undergraduate-admissions"
+      "src-jnu-2026-international-undergraduate-admissions",
+      "source-jnu-official-application-portal"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -13306,7 +13565,7 @@
       "English"
     ],
     "durationMonths": 48,
-    "programUrl": "https://zsb.jnu.edu.cn/2025/1205/c40322a847522/page.htm",
+    "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
     "applyUrl": "https://lxlz.jnu.edu.cn/",
     "languageRequirements": [
       {
@@ -13315,15 +13574,20 @@
       },
       {
         "test": "TOEFL",
-        "minimum": "80 iBT"
+        "minimum": "80 (iBT)"
+      },
+      {
+        "test": "other",
+        "minimum": "SAT total score 1030 accepted by the 2026 guide"
       }
     ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-jnu-2026-international-undergraduate-admissions"
+      "src-jnu-2026-international-undergraduate-admissions",
+      "source-jnu-official-application-portal"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -13341,7 +13605,7 @@
       "English"
     ],
     "durationMonths": 48,
-    "programUrl": "https://zsb.jnu.edu.cn/2025/1205/c40322a847522/page.htm",
+    "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
     "applyUrl": "https://lxlz.jnu.edu.cn/",
     "languageRequirements": [
       {
@@ -13350,15 +13614,20 @@
       },
       {
         "test": "TOEFL",
-        "minimum": "80 iBT"
+        "minimum": "80 (iBT)"
+      },
+      {
+        "test": "other",
+        "minimum": "SAT total score 1030 accepted by the 2026 guide"
       }
     ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-jnu-2026-international-undergraduate-admissions"
+      "src-jnu-2026-international-undergraduate-admissions",
+      "source-jnu-official-application-portal"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -13376,7 +13645,7 @@
       "English"
     ],
     "durationMonths": 48,
-    "programUrl": "https://zsb.jnu.edu.cn/2025/1205/c40322a847522/page.htm",
+    "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
     "applyUrl": "https://lxlz.jnu.edu.cn/",
     "languageRequirements": [
       {
@@ -13385,15 +13654,20 @@
       },
       {
         "test": "TOEFL",
-        "minimum": "80 iBT"
+        "minimum": "80 (iBT)"
+      },
+      {
+        "test": "other",
+        "minimum": "SAT total score 1030 accepted by the 2026 guide"
       }
     ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-jnu-2026-international-undergraduate-admissions"
+      "src-jnu-2026-international-undergraduate-admissions",
+      "source-jnu-official-application-portal"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -13411,7 +13685,7 @@
       "English"
     ],
     "durationMonths": 72,
-    "programUrl": "https://zsb.jnu.edu.cn/2025/1205/c40322a847522/page.htm",
+    "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
     "applyUrl": "https://lxlz.jnu.edu.cn/",
     "languageRequirements": [
       {
@@ -13420,15 +13694,20 @@
       },
       {
         "test": "TOEFL",
-        "minimum": "80 iBT"
+        "minimum": "80 (iBT)"
+      },
+      {
+        "test": "other",
+        "minimum": "SAT total score 1030 accepted by the 2026 guide"
       }
     ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-jnu-2026-international-undergraduate-admissions"
+      "src-jnu-2026-international-undergraduate-admissions",
+      "source-jnu-official-application-portal"
     ],
-    "verifiedAt": "2026-07-29",
-    "reviewAfter": "2026-08-28",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -18986,16 +19265,26 @@
     "degreeLevel": "master",
     "discipline": "medicine",
     "teachingLanguages": [],
-    "durationMonths": null,
-    "programUrl": "https://www.gdpu.edu.cn/zsyjy/gjxszs.htm",
+    "durationMonths": 36,
+    "programUrl": "https://sie.gdpu.edu.cn/info/1038/1493.htm",
     "applyUrl": null,
-    "languageRequirements": [],
-    "verificationScope": "identity",
-    "sourceIds": [
-      "src-gap-program-mew-0805-scw-gdpu-basic-medicine-master"
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "Academic 6.0 overall, with each component at least 5.5, for applicants from non-English-speaking countries"
+      },
+      {
+        "test": "other",
+        "minimum": "Equivalent English certificate, English-medium prior degree, or university online interview accepted"
+      }
     ],
-    "verifiedAt": "2026-08-05",
-    "reviewAfter": "2026-09-04",
+    "verificationScope": "facts",
+    "sourceIds": [
+      "source-gdpu-international-program-disciplines",
+      "source-gdpu-2026-postgraduate-guide"
+    ],
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -19010,16 +19299,26 @@
     "degreeLevel": "master",
     "discipline": "engineering",
     "teachingLanguages": [],
-    "durationMonths": null,
-    "programUrl": "https://www.gdpu.edu.cn/zsyjy/gjxszs.htm",
+    "durationMonths": 36,
+    "programUrl": "https://sie.gdpu.edu.cn/info/1038/1493.htm",
     "applyUrl": null,
-    "languageRequirements": [],
-    "verificationScope": "identity",
-    "sourceIds": [
-      "src-gap-program-mew-0805-scw-gdpu-bioengineering-master"
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "Academic 6.0 overall, with each component at least 5.5, for applicants from non-English-speaking countries"
+      },
+      {
+        "test": "other",
+        "minimum": "Equivalent English certificate, English-medium prior degree, or university online interview accepted"
+      }
     ],
-    "verifiedAt": "2026-08-05",
-    "reviewAfter": "2026-09-04",
+    "verificationScope": "facts",
+    "sourceIds": [
+      "source-gdpu-international-program-disciplines",
+      "source-gdpu-2026-postgraduate-guide"
+    ],
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -19034,16 +19333,26 @@
     "degreeLevel": "master",
     "discipline": "medicine",
     "teachingLanguages": [],
-    "durationMonths": null,
-    "programUrl": "https://www.gdpu.edu.cn/zsyjy/gjxszs.htm",
+    "durationMonths": 36,
+    "programUrl": "https://sie.gdpu.edu.cn/info/1038/1493.htm",
     "applyUrl": null,
-    "languageRequirements": [],
-    "verificationScope": "identity",
-    "sourceIds": [
-      "src-gap-program-mew-0805-scw-gdpu-integrated-medicine-master"
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "Academic 6.0 overall, with each component at least 5.5, for applicants from non-English-speaking countries"
+      },
+      {
+        "test": "other",
+        "minimum": "Equivalent English certificate, English-medium prior degree, or university online interview accepted"
+      }
     ],
-    "verifiedAt": "2026-08-05",
-    "reviewAfter": "2026-09-04",
+    "verificationScope": "facts",
+    "sourceIds": [
+      "source-gdpu-international-program-disciplines",
+      "source-gdpu-2026-postgraduate-guide"
+    ],
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -19058,16 +19367,26 @@
     "degreeLevel": "master",
     "discipline": "medicine",
     "teachingLanguages": [],
-    "durationMonths": null,
-    "programUrl": "https://www.gdpu.edu.cn/zsyjy/gjxszs.htm",
+    "durationMonths": 36,
+    "programUrl": "https://sie.gdpu.edu.cn/info/1038/1493.htm",
     "applyUrl": null,
-    "languageRequirements": [],
-    "verificationScope": "identity",
-    "sourceIds": [
-      "src-gap-program-mew-0805-scw-gdpu-pharmacy-academic-master"
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "Academic 6.0 overall, with each component at least 5.5, for applicants from non-English-speaking countries"
+      },
+      {
+        "test": "other",
+        "minimum": "Equivalent English certificate, English-medium prior degree, or university online interview accepted"
+      }
     ],
-    "verifiedAt": "2026-08-05",
-    "reviewAfter": "2026-09-04",
+    "verificationScope": "facts",
+    "sourceIds": [
+      "source-gdpu-international-program-disciplines",
+      "source-gdpu-2026-postgraduate-guide"
+    ],
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -19082,16 +19401,26 @@
     "degreeLevel": "master",
     "discipline": "medicine",
     "teachingLanguages": [],
-    "durationMonths": null,
-    "programUrl": "https://www.gdpu.edu.cn/zsyjy/gjxszs.htm",
+    "durationMonths": 36,
+    "programUrl": "https://sie.gdpu.edu.cn/info/1038/1493.htm",
     "applyUrl": null,
-    "languageRequirements": [],
-    "verificationScope": "identity",
-    "sourceIds": [
-      "src-gap-program-mew-0805-scw-gdpu-public-health-preventive-master"
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "Academic 6.0 overall, with each component at least 5.5, for applicants from non-English-speaking countries"
+      },
+      {
+        "test": "other",
+        "minimum": "Equivalent English certificate, English-medium prior degree, or university online interview accepted"
+      }
     ],
-    "verifiedAt": "2026-08-05",
-    "reviewAfter": "2026-09-04",
+    "verificationScope": "facts",
+    "sourceIds": [
+      "source-gdpu-international-program-disciplines",
+      "source-gdpu-2026-postgraduate-guide"
+    ],
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -19110,15 +19439,29 @@
     ],
     "durationMonths": 24,
     "programUrl": "https://fao.gdufe.edu.cn/2026/0228/c9112a233410/page.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "applyUrl": "https://gdufe.at0086.cn/StuApplication/Login.aspx",
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "6.0"
+      },
+      {
+        "test": "TOEFL",
+        "minimum": "80 (iBT)"
+      },
+      {
+        "test": "other",
+        "minimum": "Duolingo English Test 112 or an officially accepted equivalent"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-mew-csw-gdufe-digital-economy-master",
-      "src-gap-program-mew-csw-gdufe-digital-economy-master-support-1"
+      "source-gdufe-2026-master-guide-page",
+      "source-gdufe-2026-master-guide-pdf",
+      "source-gdufe-official-application-portal"
     ],
-    "verifiedAt": "2026-08-03",
-    "reviewAfter": "2026-09-02",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -19164,15 +19507,21 @@
     ],
     "durationMonths": 36,
     "programUrl": "https://fao.gdufe.edu.cn/2026/0228/c9112a233410/page.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "applyUrl": "https://gdufe.at0086.cn/StuApplication/Login.aspx",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 5, score 180"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-mew-csw-gdufe-international-chinese-education-master",
-      "src-gap-program-mew-csw-gdufe-international-chinese-education-master-support-1"
+      "source-gdufe-2026-master-guide-page",
+      "source-gdufe-2026-master-guide-pdf",
+      "source-gdufe-official-application-portal"
     ],
-    "verifiedAt": "2026-08-03",
-    "reviewAfter": "2026-09-02",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -19218,15 +19567,29 @@
     ],
     "durationMonths": 36,
     "programUrl": "https://fao.gdufe.edu.cn/2026/0228/c9112a233410/page.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "applyUrl": "https://gdufe.at0086.cn/StuApplication/Login.aspx",
+    "languageRequirements": [
+      {
+        "test": "IELTS",
+        "minimum": "6.0"
+      },
+      {
+        "test": "TOEFL",
+        "minimum": "80 (iBT)"
+      },
+      {
+        "test": "other",
+        "minimum": "Duolingo English Test 112 or an officially accepted equivalent"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-mew-csw-gdufe-international-trade-master",
-      "src-gap-program-mew-csw-gdufe-international-trade-master-support-1"
+      "source-gdufe-2026-master-guide-page",
+      "source-gdufe-2026-master-guide-pdf",
+      "source-gdufe-official-application-portal"
     ],
-    "verifiedAt": "2026-08-03",
-    "reviewAfter": "2026-09-02",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -19245,16 +19608,23 @@
     ],
     "durationMonths": 48,
     "programUrl": "https://fao.gdufe.edu.cn/2026/0228/c9112a233411/page.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "applyUrl": "https://gdufe.at0086.cn/StuApplication/Login.aspx",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 5, score 180, or an accepted prior Chinese-medium degree"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-mew-csw-gdufe-international-trade-doctorate",
-      "src-gap-program-mew-csw-gdufe-international-trade-doctorate-support-1"
+      "source-gdufe-2026-doctoral-guide-page",
+      "source-gdufe-2026-doctoral-guide-pdf",
+      "source-gdufe-official-application-portal"
     ],
-    "verifiedAt": "2026-08-03",
-    "reviewAfter": "2026-09-02",
-    "status": "verified"
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
+    "status": "verified",
+    "durationMonthsMax": 84
   },
   {
     "id": "prog-gap-prog-gdufs-chinese-thai-translation-bachelor",
@@ -23637,15 +24007,21 @@
       "Chinese"
     ],
     "durationMonths": 48,
-    "programUrl": "https://ms.jnu.edu.cn/2026/0330/c13218a852649/page.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+    "applyUrl": "https://lxlz.jnu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 5, score 180"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-clw-sw-jnu-chinese-language-bachelor"
+      "src-jnu-2026-international-undergraduate-admissions",
+      "source-jnu-official-application-portal"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -23663,15 +24039,21 @@
       "Chinese"
     ],
     "durationMonths": 48,
-    "programUrl": "https://ms.jnu.edu.cn/2026/0330/c13218a852649/page.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+    "applyUrl": "https://lxlz.jnu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 5, score 180"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-clw-sw-jnu-chinese-culture-education-bachelor"
+      "src-jnu-2026-international-undergraduate-admissions",
+      "source-jnu-official-application-portal"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -23689,15 +24071,21 @@
       "Chinese"
     ],
     "durationMonths": 48,
-    "programUrl": "https://ms.jnu.edu.cn/2026/0330/c13218a852649/page.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+    "applyUrl": "https://lxlz.jnu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 5, score 180"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-clw-sw-jnu-tcsol-bachelor"
+      "src-jnu-2026-international-undergraduate-admissions",
+      "source-jnu-official-application-portal"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -29746,15 +30134,21 @@
       "Chinese"
     ],
     "durationMonths": 48,
-    "programUrl": "https://en.szu.edu.cn/info/1023/1903.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "programUrl": "https://lxs.szu.edu.cn/info/1277/5767.htm",
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=02",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "No HSK certificate required for this major under the 2026 international bachelor guide"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-prog-szu-chinese-language-literature-bachelor-2026"
+      "src-szu-2026-international-undergraduate-catalog",
+      "source-szu-2026-bachelor-guide"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -29773,15 +30167,20 @@
     ],
     "durationMonths": 24,
     "programUrl": "https://lxs.szu.edu.cn/info/1278/5777.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=07",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 5, score 180"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-clw-sw-szu-icl-master",
-      "src-gap-program-clw-sw-szu-icl-master-support-1"
+      "src-szu-2026-international-master-catalog",
+      "source-szu-2026-master-guide"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {
@@ -29799,15 +30198,21 @@
       "Chinese"
     ],
     "durationMonths": 48,
-    "programUrl": "https://en.szu.edu.cn/info/1023/1903.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "programUrl": "https://lxs.szu.edu.cn/info/1277/5767.htm",
+    "applyUrl": "https://status.szu.edu.cn/szulxs/html/vue/stuBm.html?fxq=2026-09&lxslbm=02",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "No HSK certificate required for this major under the 2026 international bachelor guide"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-prog-szu-tcsol-bachelor-2026"
+      "src-szu-2026-international-undergraduate-catalog",
+      "source-szu-2026-bachelor-guide"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-25",
+    "reviewAfter": "2026-09-24",
     "status": "verified"
   },
   {

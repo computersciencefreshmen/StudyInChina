@@ -107,7 +107,7 @@ describe('ProgramCard fact safety', () => {
     expect(screen.getByText('24 months')).toBeVisible()
   })
 
-  it('does not present reference fees as current tuition or application fee', () => {
+  it('does not present reference tuition while retaining an independent application fee', () => {
     const { container } = render(<ProgramCard
       program={program}
       cycle={{ ...cycle, tuitionStatus: 'reference' }}
@@ -116,9 +116,9 @@ describe('ProgramCard fact safety', () => {
       today="2026-08-08"
     />)
 
-    expect(container.querySelectorAll('[data-fact-status="officially_not_announced"]')).toHaveLength(2)
+    expect(container.querySelectorAll('[data-fact-status="officially_not_announced"]')).toHaveLength(1)
     expect(screen.queryByText(/28,000/)).not.toBeInTheDocument()
-    expect(screen.queryByText(/600/)).not.toBeInTheDocument()
+    expect(screen.getByText(/600/)).toBeVisible()
   })
 
   it('hides old cycle facts while retaining a fresh program duration', () => {

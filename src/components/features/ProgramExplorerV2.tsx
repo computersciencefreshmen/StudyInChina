@@ -294,8 +294,8 @@ export function ProgramExplorerV2({
     />
     {result.items.length ? (
       <div className="content-grid">
-        {result.items.map(({ program, university, cycle }) => (
-          <ProgramCard key={program.id} program={program} university={university} cycle={cycle} locale={locale} messages={messages} today={today} />
+        {result.items.map(({ program, university, cycle, latestTuitionReference }) => (
+          <ProgramCard key={program.id} program={program} university={university} cycle={cycle} latestTuitionReference={latestTuitionReference} locale={locale} messages={messages} today={today} />
         ))}
       </div>
     ) : <div className="empty-box">{messages.programs.noResults}</div>}
