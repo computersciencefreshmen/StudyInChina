@@ -67,6 +67,10 @@ export type PlatformDataQualityScorecard = {
       datedOrRollingCoveragePct: number
       programsActiveOrUpcoming: number
       activeUpcomingCoveragePct: number
+      programsWithCurrentConfirmedTuition: number
+      currentConfirmedTuitionCoveragePct: number
+      programsWithAnyOfficialTuitionEvidence: number
+      anyOfficialTuitionEvidenceCoveragePct: number
       // Deprecated alias of programsWithDatedOrRollingCycle.
       programsWithCurrentCycle: number
       // Deprecated alias of datedOrRollingCoveragePct.
@@ -208,6 +212,23 @@ export function buildPlatformDataQualityScorecard(
       .filter((cycle) => ['open', 'upcoming', 'rolling'].includes(getApplicationState(cycle, today)))
       .map((cycle) => cycle.programId),
   )
+  const publicProgramIds = new Set(publicBundle.programs.map((program) => program.id))
+  const officialSourceIds = new Set(
+    rawBundle.sources.filter((source) => source.official).map((source) => source.id),
+  )
+  const programsWithCurrentConfirmedTuition = new Set(
+    publicBundle.admissionCycles
+      .filter((cycle) => cycle.tuitionCny !== null && cycle.tuitionStatus === 'confirmed')
+      .map((cycle) => cycle.programId),
+  )
+  const programsWithAnyOfficialTuitionEvidence = new Set(
+    rawBundle.admissionCycles
+      .filter((cycle) => (cycle.status === 'verified' || cycle.status === 'stale')
+        && cycle.tuitionCny !== null
+        && publicProgramIds.has(cycle.programId)
+        && cycle.sourceIds.some((sourceId) => officialSourceIds.has(sourceId)))
+      .map((cycle) => cycle.programId),
+  )
   const programsWithDuration = publicBundle.programs.filter(
     (program) => program.durationMonths !== null && program.durationMonths > 0,
   ).length
@@ -282,6 +303,16 @@ export function buildPlatformDataQualityScorecard(
       datedOrRollingCoveragePct: percent(programsWithDatedOrRollingCycle.size, programTotal),
       programsActiveOrUpcoming: programsActiveOrUpcoming.size,
       activeUpcomingCoveragePct: percent(programsActiveOrUpcoming.size, programTotal),
+      programsWithCurrentConfirmedTuition: programsWithCurrentConfirmedTuition.size,
+      currentConfirmedTuitionCoveragePct: percent(
+        programsWithCurrentConfirmedTuition.size,
+        programTotal,
+      ),
+      programsWithAnyOfficialTuitionEvidence: programsWithAnyOfficialTuitionEvidence.size,
+      anyOfficialTuitionEvidenceCoveragePct: percent(
+        programsWithAnyOfficialTuitionEvidence.size,
+        programTotal,
+      ),
       programsWithCurrentCycle: programsWithDatedOrRollingCycle.size,
       currentCycleCoveragePct: percent(programsWithDatedOrRollingCycle.size, programTotal),
       currentCycleCoverageSemantics: 'deprecated_alias_of_dated_or_rolling',
@@ -402,6 +433,8 @@ export function conciseScorecardSummary(report: PlatformDataQualityScorecard): s
     `fresh dispositions ${programCoverage.freshDispositionCoveragePct}%`,
     `dated/rolling ${programCoverage.datedOrRollingCoveragePct}%`,
     `active/upcoming ${programCoverage.activeUpcomingCoveragePct}%`,
+    `current confirmed tuition ${programCoverage.currentConfirmedTuitionCoveragePct}%`,
+    `any official tuition evidence ${programCoverage.anyOfficialTuitionEvidenceCoveragePct}%`,
     `scholarship schools ${scholarships.universitiesCovered}`,
     `city coordinates ${cities.withCoordinates}/${publicRecords.cities}`,
     `manifests ${sourceManifests.institutionsRegistered} (${sourceManifests.completedReconciliations} reconciled)`,

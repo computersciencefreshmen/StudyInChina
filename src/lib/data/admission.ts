@@ -47,3 +47,21 @@ export function selectAdmissionCycle(cycles: AdmissionCycle[], programId: string
         || compareWithinState(left, right, leftState)
     })[0]
 }
+
+/**
+ * Selects the newest official tuition reference supplied by the caller.
+ * Callers must pre-filter cycles to records backed by at least one official source.
+ */
+export function selectLatestTuitionReference(
+  cycles: AdmissionCycle[],
+  programId: string,
+): AdmissionCycle | undefined {
+  return cycles
+    .filter((cycle) => cycle.programId === programId
+      && (cycle.status === 'verified' || cycle.status === 'stale')
+      && cycle.tuitionCny !== null
+      && (cycle.dateStatus === 'previous-cycle-reference' || cycle.tuitionStatus === 'reference'))
+    .sort((left, right) => right.academicYear.localeCompare(left.academicYear)
+      || right.verifiedAt.localeCompare(left.verifiedAt)
+      || right.id.localeCompare(left.id))[0]
+}

@@ -224,7 +224,8 @@ describe('verified regional breadth expansion on 2026-08-05', () => {
   it('materializes every individually applicable program and scholarship exactly once', () => {
     for (const candidate of candidatePrograms) {
       const materialized = data.programs.filter((program) => (
-        program.sourceIds.includes(`src-gap-program-${candidate.candidateId}`)
+        program.id === `prog-gap-${candidate.candidateId}`
+        || program.sourceIds.includes(`src-gap-program-${candidate.candidateId}`)
       ))
       expect(materialized, candidate.candidateId).toHaveLength(
         candidate.riskFlags?.includes('group_application_only') ? 0 : 1,
@@ -238,7 +239,8 @@ describe('verified regional breadth expansion on 2026-08-05', () => {
     for (const candidate of candidateScholarships) {
       expect(
         data.scholarships.filter((scholarship) => (
-          scholarship.sourceIds.includes(`src-gap-scholarship-${candidate.candidateId}`)
+          scholarship.id === `sch-gap-${candidate.candidateId}`
+          || scholarship.sourceIds.includes(`src-gap-scholarship-${candidate.candidateId}`)
         )),
         candidate.candidateId,
       ).toHaveLength(1)

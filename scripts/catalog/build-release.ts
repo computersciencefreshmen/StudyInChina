@@ -498,6 +498,8 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
       opensOn: cycle.opensOn,
       closesOn: cycle.closesOn,
       tuitionCny: cycle.tuitionCny,
+      tuitionPeriod: cycle.tuitionPeriod,
+      tuitionStatus: cycle.tuitionStatus,
       applicationFeeCny: cycle.applicationFeeCny,
     })) addField(statements, releaseId, cycle.id, cycle, field, value, dataDate, official)
 

@@ -135,9 +135,58 @@ describe('decision-oriented cards', () => {
         today="2026-08-08"
       />,
     )
-    expect(container.querySelectorAll('[data-fact-status=\"officially_not_announced\"]')).toHaveLength(3)
+    expect(container.querySelectorAll('[data-fact-status=\"officially_not_announced\"]')).toHaveLength(2)
     expect(screen.queryByText(/28,000/)).not.toBeInTheDocument()
-    expect(screen.queryByText(/600/)).not.toBeInTheDocument()
+    expect(screen.getByText(/600/)).toBeVisible()
+  })
+
+  it('shows a historical tuition reference only when current confirmed tuition is absent', () => {
+    const latestTuitionReference: AdmissionCycle = {
+      ...openCycle,
+      id: 'cycle-decision-reference',
+      academicYear: '2025-2026',
+      opensOn: '2025-01-01',
+      closesOn: '2025-09-01',
+      dateStatus: 'previous-cycle-reference',
+      tuitionCny: 24_000,
+      tuitionStatus: 'reference',
+      verifiedAt: '2025-08-08',
+      reviewAfter: '2025-09-08',
+      status: 'stale',
+    }
+
+    for (const locale of launchLocales) {
+      const messages = getMessages(locale)
+      const { container, unmount } = render(
+        <ProgramCard
+          program={program}
+          cycle={{ ...openCycle, tuitionCny: null, tuitionPeriod: null, tuitionStatus: null }}
+          latestTuitionReference={latestTuitionReference}
+          locale={locale}
+          messages={messages}
+          today="2026-08-08"
+        />,
+      )
+      const reference = container.querySelector('[data-fact-status="reference"]')
+      expect(reference).toHaveTextContent('2025-2026')
+      expect(reference).toHaveTextContent(messages.programs.tuitionReference)
+      unmount()
+    }
+
+    const messages = getMessages('en')
+    const { container } = render(
+      <ProgramCard
+        program={program}
+        cycle={openCycle}
+        latestTuitionReference={latestTuitionReference}
+        locale="en"
+        messages={messages}
+        today="2026-08-08"
+      />,
+    )
+    expect(container.querySelector('[data-fact-status="reference"]')).not.toBeInTheDocument()
+    expect(screen.getByText(/28,000/)).toBeVisible()
+    expect(screen.queryByText(messages.programs.tuitionReference)).not.toBeInTheDocument()
   })
 
   it('puts scholarship deadline and funding first and localizes its university scope', () => {

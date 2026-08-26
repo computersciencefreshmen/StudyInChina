@@ -186,6 +186,186 @@ describe('CatalogRepository', () => {
     expect(linked.total).toBe(0)
   })
 
+  it('projects only official tuition references without changing current tuition filters', async () => {
+    const today = '2026-08-25'
+    const bundle = copyBundle()
+    const target = selectPublishedData(bundle, today).programs[0]!
+    const rawTarget = bundle.programs.find((program) => program.id === target.id)!
+    const officialSource = bundle.sources.find((source) => (
+      source.official && source.kind === 'program' && source.url === rawTarget.programUrl
+    ))!
+    const university = bundle.universities.find((item) => item.id === rawTarget.universityId)!
+    const city = bundle.cities.find((item) => item.id === university.cityId)!
+    const unofficialSource = {
+      ...officialSource,
+      id: 'source-unofficial-tuition-reference',
+      url: 'https://example.test/tuition',
+      official: false,
+    }
+    const hiddenProgram = {
+      ...rawTarget,
+      id: 'program-hidden-tuition-reference',
+      slug: 'program-hidden-tuition-reference',
+      status: 'draft' as const,
+    }
+    const baseCycle = bundle.admissionCycles[0]!
+    const currentCycle = {
+      ...baseCycle,
+      id: 'cycle-current-without-tuition',
+      programId: rawTarget.id,
+      academicYear: '2026-2027',
+      opensOn: null,
+      closesOn: null,
+      dateStatus: 'not-announced' as const,
+      tuitionCny: null,
+      tuitionPeriod: null,
+      tuitionStatus: null,
+      applicationFeeCny: null,
+      evidenceBasis: 'cycle-specific' as const,
+      factScope: 'dates-only' as const,
+      sourceIds: [officialSource.id],
+      verifiedAt: today,
+      reviewAfter: '2026-09-25',
+      status: 'verified' as const,
+    }
+    const officialReference = {
+      ...currentCycle,
+      id: 'cycle-official-tuition-reference',
+      academicYear: '2025-2026',
+      opensOn: '2025-01-01',
+      closesOn: '2025-10-01',
+      dateStatus: 'previous-cycle-reference' as const,
+      tuitionCny: 22_000,
+      tuitionPeriod: 'academic-year' as const,
+      tuitionStatus: 'reference' as const,
+      verifiedAt: '2025-08-01',
+      reviewAfter: '2025-09-01',
+      status: 'stale' as const,
+    }
+    const unofficialReference = {
+      ...officialReference,
+      id: 'cycle-unofficial-tuition-reference',
+      academicYear: '2023-2024',
+      tuitionCny: 99_000,
+      sourceIds: [unofficialSource.id],
+      verifiedAt: today,
+      reviewAfter: '2026-09-25',
+      status: 'verified' as const,
+    }
+    const draftReference = {
+      ...unofficialReference,
+      id: 'cycle-draft-tuition-reference',
+      academicYear: '2024-2025',
+      tuitionCny: 88_000,
+      sourceIds: [officialSource.id],
+      status: 'draft' as const,
+    }
+    const hiddenReference = {
+      ...officialReference,
+      id: 'cycle-hidden-program-reference',
+      programId: hiddenProgram.id,
+    }
+    bundle.sources.push(unofficialSource)
+    bundle.cities = [city]
+    bundle.universities = [university]
+    bundle.scholarships = []
+    bundle.programs = [{
+      ...rawTarget,
+      sourceIds: [officialSource.id],
+      verifiedAt: today,
+      reviewAfter: '2026-09-25',
+      status: 'verified',
+    }, hiddenProgram]
+    bundle.admissionCycles = [
+      currentCycle,
+      officialReference,
+      draftReference,
+      hiddenReference,
+    ]
+
+    const repository = createJsonCatalogRepository(() => bundle)
+    const page = await repository.listPrograms({ today, limit: 100 })
+    expect(page.items).toHaveLength(1)
+    expect(page.items[0]).toMatchObject({
+      program: { id: rawTarget.id },
+      currentCycle: { id: currentCycle.id, tuitionCny: null },
+      latestTuitionReference: {
+        id: officialReference.id,
+        academicYear: '2025-2026',
+        tuitionCny: 22_000,
+        tuitionStatus: 'reference',
+      },
+    })
+    await expect(repository.listPrograms({ today, tuition: 'known', limit: 100 }))
+      .resolves.toMatchObject({ total: 0, items: [] })
+    await expect(repository.listPrograms({ today, tuition: 'unknown', limit: 100 }))
+      .resolves.toMatchObject({ total: 1 })
+
+    const draftOnly = structuredClone(bundle)
+    draftOnly.admissionCycles = draftOnly.admissionCycles.filter(
+      (cycle) => cycle.id !== officialReference.id,
+    )
+    const draftOnlyPage = await createJsonCatalogRepository(() => draftOnly)
+      .listPrograms({ today, limit: 100 })
+    expect(draftOnlyPage.items[0]?.latestTuitionReference).toBeNull()
+
+    expect(() => bundleSchema.parse({
+      ...draftOnly,
+      admissionCycles: [...draftOnly.admissionCycles, unofficialReference],
+    })).toThrow(/Dynamic fact lacks an official source/)
+  })
+
+  it('keeps the D1 tuition reference field optional and demotes previous-cycle current data', async () => {
+    const today = '2026-08-25'
+    const bundle = copyBundle()
+    const program = selectPublishedData(bundle, today).programs[0]!
+    const university = bundle.universities.find((item) => item.id === program.universityId)!
+    const baseCycle = bundle.admissionCycles[0]!
+    const previousCycle = {
+      ...baseCycle,
+      id: 'remote-previous-tuition-reference',
+      programId: program.id,
+      academicYear: '2025-2026',
+      opensOn: '2025-01-01',
+      closesOn: '2025-10-01',
+      dateStatus: 'previous-cycle-reference' as const,
+      tuitionCny: 24_000,
+      tuitionPeriod: 'academic-year' as const,
+      tuitionStatus: 'confirmed' as const,
+      verifiedAt: '2025-08-01',
+      reviewAfter: '2025-09-01',
+      status: 'stale' as const,
+    }
+    const withoutReference = {
+      ...program,
+      id: `${program.id}-without-reference`,
+      slug: `${program.slug}-without-reference`,
+    }
+    const fetcher: CatalogFetch = vi.fn(async () => new Response(JSON.stringify({
+      data: [
+        { program: withoutReference, university, currentCycle: null },
+        { program, university, currentCycle: previousCycle },
+      ],
+      meta: { nextCursor: null, total: 2 },
+    }), { status: 200, headers: { 'content-type': 'application/json' } }))
+    const repository = createD1CatalogRepository({
+      apiUrl: 'https://catalog.example.test/internal/v1/catalog-bundle',
+      fetch: fetcher,
+    })
+
+    const page = await repository.listPrograms({ today, limit: 100 })
+    expect(page.items[0]?.latestTuitionReference).toBeNull()
+    expect(page.items[1]).toMatchObject({
+      currentCycle: null,
+      latestTuitionReference: {
+        id: previousCycle.id,
+        academicYear: '2025-2026',
+        tuitionCny: 24_000,
+        tuitionStatus: 'reference',
+      },
+    })
+  })
+
   it('reads the internal D1 Catalog API envelope with an optional bearer token', async () => {
     const fetcher = successfulFetch()
     const repository = createD1CatalogRepository({

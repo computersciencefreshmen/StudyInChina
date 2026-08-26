@@ -66,7 +66,20 @@ describe('CatalogApiService', () => {
     expect(scholarships.data[0].fieldMeta['coverage.accommodation'].status).toBe('officially_not_announced')
   })
 
+  it('keeps reference tuition out of current amount filters without hiding program identity', () => {
+    const bundle = fixture()
+    bundle.admissionCycles[0]!.tuitionStatus = 'reference'
+    const service = new CatalogApiService(
+      bundle,
+      releaseFromBundle(bundle, '2026-07-20'),
+      '2026-07-20',
+    )
+    expect(service.listPrograms({ tuitionMax: 35_000 }).data).toHaveLength(0)
+    expect(service.listPrograms().data).toHaveLength(1)
+  })
+
   it('accepts the applicant-facing Chinese field and multilingual Chinese-program search aliases', () => {
+
     const bundle = fixture()
     bundle.programs.push({
       ...bundle.programs[0],

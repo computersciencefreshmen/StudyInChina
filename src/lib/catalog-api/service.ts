@@ -416,7 +416,9 @@ export class CatalogApiService {
       )
       const matchesCycle = !hasCycleFilters || cycles.some((cycle) => {
         if (!hasCurrentFacts(cycle, this.today)) return false
-        const tuition = cycle.tuitionCny
+        const tuition = cycle.tuitionStatus === 'confirmed'
+          ? cycle.tuitionCny
+          : null
         return (!query.academicYear || cycle.academicYear === query.academicYear)
           && (!query.intake || cycle.intake === query.intake)
           && (!query.applicationState || getApplicationState(cycle, this.today) === query.applicationState)

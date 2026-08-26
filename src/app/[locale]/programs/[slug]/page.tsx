@@ -110,7 +110,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
       : `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${partialTuitionPeriodLabels[cycle.tuitionPeriod || 'other']}${cycle.tuitionStatus === 'reference' ? ` · ${messages.programs.tuitionReference}` : ''}`
     const partialApplicationFee = cycle?.applicationFeeCny == null
       ? messages.common.unknown
-      : `${formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)}${cycle.tuitionStatus === 'reference' ? ` · ${messages.programs.tuitionReference}` : ''}`
+      : formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)
     const partialCanApply = program.status === 'verified' && (partialApplicationState === 'open' || partialApplicationState === 'rolling')
       && Boolean(program.applyUrl)
     return <>
@@ -362,7 +362,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
             <div><dt>{messages.programs.opens}</dt><dd>{formatDate(cycle.opensOn, locale, messages.common.unknown)}</dd></div>
             <div><dt>{messages.common.deadline}</dt><dd>{formatDate(cycle.closesOn, locale, messages.common.unknown)}</dd></div>
             <div><dt>{messages.common.tuition}</dt><dd>{tuition}</dd></div>
-            <div><dt>{messages.programs.fee}</dt><dd>{cycle.applicationFeeCny === null ? messages.common.unknown : `${formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)}${cycle.tuitionStatus === 'reference' ? ` · ${messages.programs.tuitionReference}` : ''}`}</dd></div>
+            <div><dt>{messages.programs.fee}</dt><dd>{cycle.applicationFeeCny === null ? messages.common.unknown : formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)}</dd></div>
           </dl>
           {cycle.notes ? <p>{localize(cycle.notes, locale)}</p> : null}
         </article>
@@ -412,7 +412,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
               ? <time dateTime={cycle.closesOn}>{formatDate(cycle.closesOn, locale, messages.common.unknown)}</time>
               : messages.common.unknown },
             { label: messages.common.tuition, value: tuition },
-            { label: decisionCopy.applicationFee, value: cycle.applicationFeeCny === null ? messages.common.unknown : `${formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)}${cycle.tuitionStatus === 'reference' ? ` · ${messages.programs.tuitionReference}` : ''}` },
+            { label: decisionCopy.applicationFee, value: cycle.applicationFeeCny === null ? messages.common.unknown : formatCny(cycle.applicationFeeCny, locale, messages.common.unknown) },
             { label: messages.common.lastVerified, value: formatDate(lastSourceCheckedAt, locale, '—') },
           ]}
           notice={decisionCopy.verifiedFactsOnly}

@@ -5,6 +5,7 @@ import { join } from 'node:path'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { buildLegacyRelease, readLegacyBundle } from '../../scripts/catalog/build-release'
 import worker from '../../workers/catalog-api/src/index'
+import { parseD1ProgramList } from '@/lib/catalog/d1-list'
 import { chinaCalendarDate } from '../../workers/catalog-api/src/sql-data'
 import type {
   CatalogApiEnv,
@@ -18,6 +19,7 @@ import type {
   DegreeLevel,
   ProgramCycleDto,
   ProgramDto,
+  ProgramListDto,
   ProgramType,
   ScholarshipCycleDto,
   ScholarshipDto,
@@ -162,6 +164,102 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(r2Reads).toBe(0)
     expect(queries.some(({ sql }) => sql.includes('FROM current_programs AS program'))).toBe(true)
   }, 30_000)
+  it('keeps reference tuition out of D1 current filters and preserves its explicit status', async () => {
+    const knownResponse = await worker.fetch(
+      new Request('https://catalog.test/api/v1/programs?tuitionMax=1000000&limit=100'),
+      environment,
+    )
+    const known = await knownResponse.json() as ApiEnvelopeDto<ProgramListDto[]>
+    expect(knownResponse.status, JSON.stringify(known)).toBe(200)
+    const target = known.data[0]!
+    expect(target).toBeDefined()
+    const cyclesResponse = await worker.fetch(
+      new Request(
+        `https://catalog.test/api/v1/programs/${encodeURIComponent(target.slug!)}/cycles`,
+      ),
+      environment,
+    )
+    const cycles = await cyclesResponse.json() as ApiEnvelopeDto<ProgramCycleDto[]>
+    expect(cyclesResponse.status, JSON.stringify(cycles)).toBe(200)
+    const confirmedCycle = cycles.data.find((cycle) => (
+      cycle.attributes.tuition?.valueStatus === 'confirmed'
+    ))
+    expect(confirmedCycle).toBeDefined()
+
+    database.exec('BEGIN')
+    try {
+      const release = database.prepare(`
+        SELECT current_release_id AS release_id
+        FROM release_pointer
+        WHERE singleton_id = 1
+      `).get() as { release_id: string }
+      const changed = database.prepare(`
+        UPDATE fee_items
+        SET value_status = 'reference'
+        WHERE release_id = ?
+          AND fee_type = 'tuition'
+          AND owner_record_id IN (
+            SELECT program_cycle_id
+            FROM program_cycles
+            WHERE release_id = ? AND program_id = ?
+          )
+      `).run(release.release_id, release.release_id, target!.id)
+      expect(Number(changed.changes)).toBeGreaterThan(0)
+      const statusChanged = database.prepare(`
+        UPDATE record_field_status
+        SET value_json = '"reference"'
+        WHERE release_id = ?
+          AND field_path IN ('tuitionStatus', 'tuition_status')
+          AND record_id IN (
+            SELECT program_cycle_id
+            FROM program_cycles
+            WHERE release_id = ? AND program_id = ?
+          )
+      `).run(release.release_id, release.release_id, target!.id)
+      expect(Number(statusChanged.changes)).toBeGreaterThan(0)
+
+
+      const institution = target!.relationships.institution.id
+      const filteredResponse = await worker.fetch(
+        new Request(
+          `https://catalog.test/api/v1/programs?institution=${encodeURIComponent(institution)}&tuitionMax=1000000&limit=100`,
+        ),
+        environment,
+      )
+      const filtered = await filteredResponse.json() as ApiEnvelopeDto<ProgramListDto[]>
+      expect(filteredResponse.status, JSON.stringify(filtered)).toBe(200)
+      expect(filtered.data.map((program) => program.id)).not.toContain(target!.id)
+
+      const referenceCyclesResponse = await worker.fetch(
+        new Request(
+          `https://catalog.test/api/v1/programs/${encodeURIComponent(target.slug!)}/cycles`,
+        ),
+        environment,
+      )
+      const referenceCycles = await referenceCyclesResponse.json() as ApiEnvelopeDto<ProgramCycleDto[]>
+      expect(referenceCyclesResponse.status, JSON.stringify(referenceCycles)).toBe(200)
+      const referenceCycle = referenceCycles.data.find((cycle) => cycle.id === confirmedCycle!.id)
+      expect(referenceCycle?.attributes.tuition).toMatchObject({ valueStatus: 'reference' })
+
+      const detailResponse = await worker.fetch(
+        new Request(`https://catalog.test/api/v1/programs/${encodeURIComponent(target.slug!)}`),
+        environment,
+      )
+      const detail = await detailResponse.json() as ApiEnvelopeDto<ProgramListDto>
+      expect(detailResponse.status, JSON.stringify(detail)).toBe(200)
+      const parsed = parseD1ProgramList({
+        data: [{ ...detail.data, currentCycle: referenceCycle }],
+        meta: detail.meta,
+      }, '2026-08-26')
+      expect(parsed.items[0]).toMatchObject({
+        currentCycle: { tuitionStatus: 'reference' },
+        latestTuitionReference: { tuitionStatus: 'reference' },
+      })
+    } finally {
+      database.exec('ROLLBACK')
+    }
+  }, 30_000)
+
 
   it('compares at most four programs from normalized SQL without reading the R2 bundle', async () => {
     const listResponse = await worker.fetch(

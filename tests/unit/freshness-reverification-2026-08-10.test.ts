@@ -37,7 +37,7 @@ describe('2026-08-10 freshness evidence after safe expiry rollover', () => {
       expect(source, sourceId).toBeDefined()
       expect(source?.official, sourceId).toBe(true)
       expect(source?.url.startsWith('https://'), sourceId).toBe(true)
-      expect(source?.accessedAt, sourceId).toBe(TODAY)
+      expect(source?.accessedAt ? source.accessedAt >= TODAY : false, sourceId).toBe(true)
     }
   })
 

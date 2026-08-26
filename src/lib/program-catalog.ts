@@ -71,6 +71,7 @@ export type ProgramCatalogItem = {
   program: Program
   university: University
   cycle: AdmissionCycle | undefined
+  latestTuitionReference?: AdmissionCycle
 }
 
 export type ProgramCatalogResult = {
@@ -338,10 +339,11 @@ function repositoryProgramResult(
     : Math.ceil(pageResult.total / PROGRAM_CATALOG_PAGE_SIZE)
 
   return {
-    items: pageResult.items.map(({ program, university, currentCycle }) => ({
+    items: pageResult.items.map(({ program, university, currentCycle, latestTuitionReference }) => ({
       program,
       university,
       cycle: currentCycle ?? undefined,
+      latestTuitionReference: latestTuitionReference ?? undefined,
     })),
     filters: {
       ...filters,
