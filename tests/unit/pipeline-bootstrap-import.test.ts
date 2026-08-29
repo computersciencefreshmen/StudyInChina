@@ -302,6 +302,17 @@ describe('Pipeline stable-entity bootstrap', () => {
     expect(script).not.toContain('Get-Command node.exe')
     expect(script).not.toContain('wrangler.cmd')
 
+    const commandRunnerPath = join(
+      process.cwd(),
+      'scripts',
+      'cloudflare',
+      'execute-d1-command-file.mjs',
+    )
+    const commandRunner = readFileSync(commandRunnerPath, 'utf8')
+    expect(commandRunner).toContain('sql.length <= 24_000')
+    expect(commandRunner).toContain(": ['--file', absoluteSqlPath]")
+    expect(commandRunner).not.toContain('SQL command exceeds the safe Windows argument limit')
+
     const escapedScriptPath = scriptPath.replaceAll("'", "''")
     const parserScript = [
       '$errors = $null',

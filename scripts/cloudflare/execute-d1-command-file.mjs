@@ -24,9 +24,6 @@ const sql = readFileSync(absoluteSqlPath, 'utf8')
   .trim()
 
 if (!sql) throw new Error(`SQL file is empty: ${absoluteSqlPath}`)
-if (sql.length > 24_000) {
-  throw new Error(`SQL command exceeds the safe Windows argument limit: ${sql.length}`)
-}
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..')
 const wranglerEntrypoint = resolve(root, 'node_modules', 'wrangler', 'bin', 'wrangler.js')
@@ -34,13 +31,16 @@ if (!existsSync(wranglerEntrypoint)) {
   throw new Error(`Wrangler entrypoint not found: ${wranglerEntrypoint}`)
 }
 
+const sqlTransportArguments = sql.length <= 24_000
+  ? ['--command', sql]
+  : ['--file', absoluteSqlPath]
+
 const result = spawnSync(process.execPath, [
   wranglerEntrypoint,
   'd1',
   'execute',
   'INGESTION_DB',
-  '--command',
-  sql,
+  ...sqlTransportArguments,
   '--config',
   absoluteConfigPath,
   targetFlag,
