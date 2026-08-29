@@ -107,7 +107,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
         : `${program.durationMonths} ${messages.common.months}`
     const partialTuition = cycle?.tuitionCny == null
       ? messages.common.unknown
-      : `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${partialTuitionPeriodLabels[cycle.tuitionPeriod || 'other']}${cycle.tuitionStatus === 'reference' ? ` · ${messages.programs.tuitionReference}` : ''}`
+      : `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${partialTuitionPeriodLabels[cycle.tuitionPeriod || 'other']}`
     const partialApplicationFee = cycle?.applicationFeeCny == null
       ? messages.common.unknown
       : formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)
@@ -242,7 +242,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   }
   const tuition = cycle.tuitionCny === null
     ? messages.common.unknown
-    : `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${tuitionPeriodLabels[cycle.tuitionPeriod || 'other']}${cycle.tuitionStatus === 'reference' ? ` · ${messages.programs.tuitionReference}` : ''}`
+    : `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${tuitionPeriodLabels[cycle.tuitionPeriod || 'other']}`
   const duration = program.durationMonthsMax && program.durationMonthsMax !== program.durationMonths
     ? `${program.durationMonths}–${program.durationMonthsMax} ${messages.common.months}`
     : `${program.durationMonths} ${messages.common.months}`

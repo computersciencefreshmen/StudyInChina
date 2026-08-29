@@ -47,7 +47,6 @@ const en = {
 type BaseMessages = typeof en
 type ProgramExtraMessages = {
   viewApplicationPortal: string
-  tuitionReference: string
   evidenceBasis: string
   cycleSpecific: string
   recurringRule: string
@@ -250,12 +249,12 @@ const es: BaseMessages = {
 const baseDictionaries = { en, zh, ru, de, fr, es } satisfies Record<LaunchLocale, BaseMessages>
 
 const programExtraMessages: Record<LaunchLocale, ProgramExtraMessages> = {
-  en: { viewApplicationPortal: 'View official application portal', tuitionReference: 'Reference amount—confirm with university', evidenceBasis: 'Evidence basis', cycleSpecific: 'Cycle-specific official notice', recurringRule: 'Official recurring annual rule' },
-  zh: { viewApplicationPortal: '查看官方申请系统', tuitionReference: '参考金额——请向大学确认', evidenceBasis: '信息依据', cycleSpecific: '当期官方通知', recurringRule: '官方年度常规规则' },
-  ru: { viewApplicationPortal: 'Открыть официальную систему подачи заявлений', tuitionReference: 'Ориентировочная сумма — уточните в университете', evidenceBasis: 'Основание данных', cycleSpecific: 'Официальное уведомление для конкретного цикла', recurringRule: 'Официальное ежегодно действующее правило' },
-  de: { viewApplicationPortal: 'Offizielles Bewerbungsportal öffnen', tuitionReference: 'Referenzbetrag – bitte bei der Universität bestätigen', evidenceBasis: 'Datengrundlage', cycleSpecific: 'Offizielle Mitteilung für den jeweiligen Zulassungszeitraum', recurringRule: 'Offizielle jährlich wiederkehrende Regelung' },
-  fr: { viewApplicationPortal: 'Accéder au portail officiel de candidature', tuitionReference: 'Montant indicatif — à confirmer auprès de l’université', evidenceBasis: 'Base documentaire', cycleSpecific: 'Avis officiel propre au cycle', recurringRule: 'Règle officielle renouvelée chaque année' },
-  es: { viewApplicationPortal: 'Abrir el portal oficial de solicitudes', tuitionReference: 'Importe de referencia: confírmalo con la universidad', evidenceBasis: 'Base documental', cycleSpecific: 'Aviso oficial específico del ciclo', recurringRule: 'Norma oficial recurrente anual' },
+  en: { viewApplicationPortal: 'View official application portal', evidenceBasis: 'Evidence basis', cycleSpecific: 'Cycle-specific official notice', recurringRule: 'Official recurring annual rule' },
+  zh: { viewApplicationPortal: '查看官方申请系统', evidenceBasis: '信息依据', cycleSpecific: '当期官方通知', recurringRule: '官方年度常规规则' },
+  ru: { viewApplicationPortal: 'Открыть официальную систему подачи заявлений', evidenceBasis: 'Основание данных', cycleSpecific: 'Официальное уведомление для конкретного цикла', recurringRule: 'Официальное ежегодно действующее правило' },
+  de: { viewApplicationPortal: 'Offizielles Bewerbungsportal öffnen', evidenceBasis: 'Datengrundlage', cycleSpecific: 'Offizielle Mitteilung für den jeweiligen Zulassungszeitraum', recurringRule: 'Offizielle jährlich wiederkehrende Regelung' },
+  fr: { viewApplicationPortal: 'Accéder au portail officiel de candidature', evidenceBasis: 'Base documentaire', cycleSpecific: 'Avis officiel propre au cycle', recurringRule: 'Règle officielle renouvelée chaque année' },
+  es: { viewApplicationPortal: 'Abrir el portal oficial de solicitudes', evidenceBasis: 'Base documental', cycleSpecific: 'Aviso oficial específico del ciclo', recurringRule: 'Norma oficial recurrente anual' },
 }
 
 export const dictionaries = Object.fromEntries(

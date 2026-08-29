@@ -12,6 +12,15 @@ import {
 import { getMessages } from '@/i18n/messages'
 import type { AdmissionCycle, Program, Scholarship } from '@/lib/data/types'
 
+const obsoleteTuitionReferenceLabels = [
+  'Reference amount—confirm with university',
+  '参考金额——请向大学确认',
+  'Ориентировочная сумма — уточните в университете',
+  'Referenzbetrag – bitte bei der Universität bestätigen',
+  'Montant indicatif — à confirmer auprès de l’université',
+  'Importe de referencia: confírmalo con la universidad',
+]
+
 const auditMeta = {
   sourceIds: ['source-official'],
   verifiedAt: '2026-08-08',
@@ -169,7 +178,9 @@ describe('decision-oriented cards', () => {
       )
       const reference = container.querySelector('[data-fact-status="reference"]')
       expect(reference).toHaveTextContent('2025-2026')
-      expect(reference).not.toHaveTextContent(messages.programs.tuitionReference)
+      for (const obsoleteLabel of obsoleteTuitionReferenceLabels) {
+        expect(reference).not.toHaveTextContent(obsoleteLabel)
+      }
       unmount()
     }
 
@@ -186,7 +197,9 @@ describe('decision-oriented cards', () => {
     )
     expect(container.querySelector('[data-fact-status="reference"]')).not.toBeInTheDocument()
     expect(screen.getByText(/28,000/)).toBeVisible()
-    expect(screen.queryByText(messages.programs.tuitionReference)).not.toBeInTheDocument()
+    for (const obsoleteLabel of obsoleteTuitionReferenceLabels) {
+      expect(screen.queryByText(obsoleteLabel)).not.toBeInTheDocument()
+    }
   })
 
   it('puts scholarship deadline and funding first and localizes its university scope', () => {
