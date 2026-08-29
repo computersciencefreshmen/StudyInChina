@@ -212,6 +212,27 @@ export async function hasEntityExtraction(
   return row?.present === 1
 }
 
+export async function hasCandidateExtraction(
+  environment: Pick<IngestionEnv, 'INGESTION_DB'>,
+  sourceId: string,
+  snapshotId: string,
+  extractorFingerprints: readonly string[],
+): Promise<boolean> {
+  if (extractorFingerprints.length === 0) return false
+  const placeholders = extractorFingerprints.map((_, index) => `?${index + 3}`).join(', ')
+  const row = await environment.INGESTION_DB.prepare(
+    `SELECT 1 AS present
+       FROM ingestion_candidates candidate
+       JOIN ingestion_candidate_provenance provenance
+         ON provenance.candidate_id = candidate.candidate_id
+      WHERE candidate.source_id = ?1
+        AND candidate.snapshot_id = ?2
+        AND provenance.extractor_fingerprint IN (${placeholders})
+      LIMIT 1`,
+  ).bind(sourceId, snapshotId, ...extractorFingerprints).first<{ present: number }>()
+  return row?.present === 1
+}
+
 export async function persistSnapshotEntityExtraction(
   environment: Pick<IngestionEnv, 'INGESTION_DB'>,
   parameters: {

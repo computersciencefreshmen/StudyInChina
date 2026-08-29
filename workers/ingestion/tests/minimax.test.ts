@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { gateDualExtractions, runDualMiniMaxExtraction } from '../src/minimax'
-import type { ExtractionEnvelope, IngestionEnv } from '../src/types'
+import { MINIMAX_PROMPT_SPEC_VERSION } from '../src/provenance'
+import type { ExtractionEnvelope, IngestionEnv, SourceManifestV1 } from '../src/types'
 import { sourceManifest } from './fixtures'
 
 const sourceText = 'Applications close on 2026-09-01. Tuition is 30000 CNY per academic year.'
@@ -70,9 +71,14 @@ test('MiniMax adapter performs two independent passes through a configurable end
     MINIMAX_MODEL: 'minimax-test',
   } as IngestionEnv
 
+  const manifest: SourceManifestV1 = sourceManifest()
+  manifest.extraction.fields.push(
+    { path: 'requirements', type: 'object' },
+    { path: 'availableLanguages', type: 'string-array' },
+  )
   const result = await runDualMiniMaxExtraction(
     environment,
-    sourceManifest(),
+    manifest,
     'https://admissions.example.edu.cn/programs/computer-science',
     sourceText,
     fetcher,
@@ -85,6 +91,55 @@ test('MiniMax adapter performs two independent passes through a configurable end
     assert.equal(body.temperature, undefined)
     assert.equal(body.reasoning_split, true)
     assert.equal(body.max_completion_tokens, 4_096)
+    const messages = body.messages as Array<{ role: string; content: string }>
+    assert.equal(messages.length, 2)
+    assert.equal(messages[0]?.role, 'system')
+    assert.match(messages[0]!.content, /exactly one JSON object/i)
+    assert.match(messages[0]!.content, /no Markdown, code fence, prose, wrapper/i)
+    assert.match(messages[0]!.content, /exactly schemaVersion, sourceId, and facts/i)
+    assert.match(messages[0]!.content, /never emit a dotted or nested child path/i)
+    assert.match(messages[0]!.content, /complete object or array value at its allowed parent path/i)
+    assert.match(messages[0]!.content, /exact, verbatim evidence quote/i)
+
+    assert.equal(messages[1]?.role, 'user')
+    const prompt = JSON.parse(messages[1]!.content) as {
+      promptSpecVersion: string
+      responseContract: Record<string, unknown>
+      exactOutputShape: Record<string, unknown>
+      allowedFields: Array<{ path: string; type: string }>
+    }
+    assert.equal(prompt.promptSpecVersion, MINIMAX_PROMPT_SPEC_VERSION)
+    assert.equal(MINIMAX_PROMPT_SPEC_VERSION, 'studyinchina-minimax-dual-v3')
+    assert.deepEqual(prompt.responseContract.exactTopLevelKeys, [
+      'schemaVersion',
+      'sourceId',
+      'facts',
+    ])
+    assert.match(String(prompt.responseContract.responseFormat), /exactly one JSON object/i)
+    assert.match(String(prompt.responseContract.responseFormat), /Do not use Markdown, code fences/i)
+    assert.match(String(prompt.responseContract.rootRule), /Do not add an output wrapper or any other top-level key/i)
+    assert.match(String(prompt.responseContract.schemaVersionRule), /"program-cycle-v1"/)
+    assert.match(String(prompt.responseContract.sourceIdRule), /"example-program-source"/)
+    assert.match(String(prompt.responseContract.factsRule), /facts must be a JSON array/i)
+    assert.match(String(prompt.responseContract.fieldPathRule), /exactly equal one ALLOWED_FIELDS\.path parent path/i)
+    assert.match(String(prompt.responseContract.fieldPathRule), /Never invent dotted or nested child paths/i)
+    assert.match(String(prompt.responseContract.compoundValueRule), /object or string-array/i)
+    assert.match(String(prompt.responseContract.compoundValueRule), /complete object or array as value at the parent fieldPath/i)
+    assert.match(String(prompt.responseContract.omissionRule), /Omit any field that is absent, ambiguous/i)
+    assert.match(String(prompt.responseContract.evidenceRule), /exact verbatim substring copied from SOURCE_TEXT/i)
+    assert.deepEqual(
+      Object.keys(prompt.exactOutputShape),
+      ['schemaVersion', 'sourceId', 'facts'],
+    )
+    assert.deepEqual(
+      prompt.allowedFields
+        .filter((field) => ['requirements', 'availableLanguages'].includes(field.path))
+        .sort((left, right) => left.path.localeCompare(right.path)),
+      [
+        { path: 'availableLanguages', type: 'string-array' },
+        { path: 'requirements', type: 'object' },
+      ],
+    )
   }
 })
 
