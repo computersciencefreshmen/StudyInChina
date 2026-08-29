@@ -66,7 +66,7 @@ describe('detail-page canonical and locale hardening', () => {
       const badgeLabels = [...container.querySelectorAll('.atlas-badge')]
         .map((badge) => badge.textContent?.trim())
 
-      expect(badgeLabels).toContain(getMessages(locale).common.verified)
+      expect(badgeLabels).toContain(getMessages(locale).common.stale)
       expect(badgeLabels).not.toContain('verified')
       expect(badgeLabels).not.toContain('stale')
       unmount()

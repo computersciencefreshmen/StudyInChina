@@ -468,23 +468,23 @@ describe('sparse-school and regional university expansion on 2026-08-04', () => 
     }))).toEqual([])
   })
 
-  it('keeps the current NJU Chinese Language Program details while quarantining its stale cycle', () => {
+  it('keeps the stored NJU facts while publishing only its stale identity and quarantining stale cycles', () => {
     const programId = 'program-nanjing-university-chinese-language-program-language'
     const program = data.programs.find((candidate) => candidate.id === programId)
     const publishedProgram = published.programs.find((candidate) => candidate.id === programId)
     const relatedCycles = data.admissionCycles.filter((cycle) => cycle.programId === programId)
 
     expect(program).toBeDefined()
-    expect(program?.status).toBe('verified')
+    expect(program?.status).toBe('stale')
     expect(
       (program?.reviewAfter ?? '').localeCompare(TODAY) >= 0,
     ).toBe(true)
     expect(program?.verificationScope).toBe('complete')
     expect(program?.details).toBeDefined()
     expect(publishedProgram).toBeDefined()
-    expect(publishedProgram?.status).toBe('verified')
-    expect(publishedProgram?.verificationScope).toBe('complete')
-    expect(publishedProgram?.details).toBeDefined()
+    expect(publishedProgram?.status).toBe('stale')
+    expect(publishedProgram?.verificationScope).toBe('identity')
+    expect(publishedProgram?.details).toBeUndefined()
 
     expect(relatedCycles.length).toBeGreaterThan(0)
     expect(relatedCycles.some((cycle) => cycle.status === 'verified')).toBe(false)
