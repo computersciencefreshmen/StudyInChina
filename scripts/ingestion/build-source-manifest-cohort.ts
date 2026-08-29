@@ -17,6 +17,7 @@ import type {
   SourceManifestV1,
 } from '../../workers/ingestion/src/types'
 import {
+  sourceBindingsForSources,
   sourceManifestV2Schema,
   type SourceManifestV2,
 } from '../source-manifest-registry'
@@ -537,6 +538,7 @@ function buildReconciliationFallbackManifest(
     checkedAt,
     officialHosts: [...new Set(sources.flatMap((source) => source.allowedHosts))].sort(),
     sources,
+    sourceBindings: sourceBindingsForSources(sources),
     coverage,
     catalogReconciliation: {
       scope: 'limited_official_catalog',
@@ -846,6 +848,7 @@ export function buildSourceManifestCohort(
       checkedAt: input.checkedAt,
       officialHosts: [...new Set(safeSources.map((source) => source.host))].sort(),
       sources: manifestSources,
+      sourceBindings: sourceBindingsForSources(manifestSources),
       coverage,
       catalogReconciliation: {
         scope: 'representative_international_programs',

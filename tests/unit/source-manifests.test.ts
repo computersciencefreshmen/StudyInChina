@@ -4,6 +4,8 @@ import { describe, expect, it } from 'vitest'
 import {
   isCatalogReconciliationComplete,
   loadSourceManifestFiles,
+  SOURCE_PURPOSES,
+  sourceResourceKey,
   validateSourceManifests,
   type LoadedSourceManifest,
   type SourceManifestV2,
@@ -104,11 +106,67 @@ describe('pilot source manifests', () => {
     expect(new Set(ids).size).toBe(ids.length)
   })
 
+  it('maps every source to a locked purpose and shared official resource key', () => {
+    const records = validateSourceManifests(clonedInputs())
+    const purposeCounts = Object.fromEntries(
+      SOURCE_PURPOSES.map((purpose) => [purpose, 0]),
+    ) as Record<(typeof SOURCE_PURPOSES)[number], number>
+    const sourcesByResource = new Map<string, string[]>()
+
+    for (const record of records) {
+      expect(record.version).toBe(2)
+      if (record.version !== 2) throw new Error('Expected a V2 pilot manifest')
+      expect(record.sourceBindings).toHaveLength(record.sources.length)
+      expect(new Set(record.sourceBindings.map((binding) => binding.sourceId)).size)
+        .toBe(record.sources.length)
+      for (const binding of record.sourceBindings) {
+        purposeCounts[binding.purpose] += 1
+        expect(binding.resourceKey).toMatch(/^resource:[0-9a-f]{64}$/)
+        const sourceIds = sourcesByResource.get(binding.resourceKey) ?? []
+        sourceIds.push(binding.sourceId)
+        sourcesByResource.set(binding.resourceKey, sourceIds)
+      }
+    }
+
+    expect(purposeCounts).toEqual({
+      discovery: 20,
+      entity_index: 42,
+      entity_detail: 9,
+      fact_sheet: 18,
+      application_endpoint: 11,
+    })
+    expect(
+      [...sourcesByResource.values()]
+        .filter((sourceIds) => sourceIds.length > 1)
+        .map((sourceIds) => sourceIds.length)
+        .sort((left, right) => left - right),
+    ).toEqual([2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3])
+  })
+
+  it('rejects missing, mismatched, or forged source bindings', () => {
+    const missing = clonedInputs()
+    recordOf(missing[0]!).sourceBindings.pop()
+    expect(() => validateSourceManifests(missing)).toThrow(/source binding is missing/)
+
+    const mismatched = clonedInputs()
+    recordOf(mismatched[0]!).sourceBindings[0]!.purpose = 'fact_sheet'
+    expect(() => validateSourceManifests(mismatched)).toThrow(/source binding purpose must be/)
+
+    const forged = clonedInputs()
+    recordOf(forged[0]!).sourceBindings[0]!.resourceKey = `resource:${'0'.repeat(64)}`
+    expect(() => validateSourceManifests(forged)).toThrow(
+      /source binding resourceKey does not match officialUrl/,
+    )
+  })
+
   it('rejects an official URL and allowlist moved to an unapproved host', () => {
     const inputs = clonedInputs()
     const record = recordOf(inputs[0]!)
     record.sources[0]!.officialUrl = 'https://attacker.example/admissions'
     record.sources[0]!.allowedHosts = ['attacker.example']
+    record.sourceBindings[0]!.resourceKey = sourceResourceKey(
+      record.sources[0]!.officialUrl,
+    )
 
     expect(() => validateSourceManifests(inputs)).toThrow(
       /uses undeclared official host attacker\.example/,
@@ -120,6 +178,7 @@ describe('pilot source manifests', () => {
     const first = recordOf(inputs[0]!)
     const second = recordOf(inputs[1]!)
     second.sources[0]!.id = first.sources[0]!.id
+    second.sourceBindings[0]!.sourceId = first.sources[0]!.id
 
     expect(() => validateSourceManifests(inputs)).toThrow(
       /duplicate source id/,
