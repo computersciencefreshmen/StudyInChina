@@ -2,7 +2,7 @@ import { IngestionError } from './errors'
 import { readBoundedBody } from './body'
 import { stableJson } from './hash'
 import { boundedInteger } from './retry'
-import { MINIMAX_SYSTEM_INSTRUCTIONS } from './provenance'
+import { MINIMAX_PROMPT_SPEC_VERSION, MINIMAX_SYSTEM_INSTRUCTIONS } from './provenance'
 import { criticalEvidenceIssue, isFieldValueValid, normalizeEvidenceText } from './rules'
 import { isForbiddenHostname } from './security'
 import type {
@@ -128,15 +128,27 @@ function promptFor(
       role: 'user',
       content: JSON.stringify({
         task: `independent-${pass}-extraction`,
-        responseContract: 'Return the output object itself as the JSON root. Do not wrap it in an output property.',
-        output: {
+        promptSpecVersion: MINIMAX_PROMPT_SPEC_VERSION,
+        responseContract: {
+          responseFormat: 'Return exactly one JSON object and nothing else. Do not use Markdown, code fences, commentary, or prose.',
+          exactTopLevelKeys: ['schemaVersion', 'sourceId', 'facts'],
+          rootRule: 'The JSON root is the output object itself. Do not add an output wrapper or any other top-level key.',
+          schemaVersionRule: `Copy this exact string verbatim: ${JSON.stringify(manifest.extraction.schemaVersion)}.`,
+          sourceIdRule: `Copy this exact string verbatim: ${JSON.stringify(manifest.id)}.`,
+          factsRule: 'facts must be a JSON array. Each item must contain exactly fieldPath, value, and evidence.',
+          fieldPathRule: 'fieldPath must exactly equal one ALLOWED_FIELDS.path parent path. Never invent dotted or nested child paths.',
+          compoundValueRule: 'For ALLOWED_FIELDS.type object or string-array, emit exactly one fact with the complete object or array as value at the parent fieldPath. Never split members or elements into child facts.',
+          evidenceRule: 'evidence.quote must be a short exact verbatim substring copied from SOURCE_TEXT. evidence.locator is optional.',
+          omissionRule: 'Omit any field that is absent, ambiguous, inferred, estimated, translated, or not supported by an exact SOURCE_TEXT quote.',
+        },
+        exactOutputShape: {
           schemaVersion: manifest.extraction.schemaVersion,
           sourceId: manifest.id,
           facts: [
             {
-              fieldPath: 'one of ALLOWED_FIELDS.path',
-              value: 'must match ALLOWED_FIELDS.type',
-              evidence: { quote: 'verbatim SOURCE_TEXT quote', locator: 'optional locator' },
+              fieldPath: 'EXACT ALLOWED_FIELDS.path parent path',
+              value: 'complete value matching ALLOWED_FIELDS.type',
+              evidence: { quote: 'exact verbatim SOURCE_TEXT quote', locator: 'optional locator' },
             },
           ],
         },

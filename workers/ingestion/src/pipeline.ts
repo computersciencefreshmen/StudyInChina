@@ -9,8 +9,15 @@ import {
 } from './hash'
 import { infrastructureCostPolicy, permitsBrowserForSource } from './cost-policy'
 import { runDualMiniMaxExtraction } from './minimax'
-import { miniMaxCandidateProvenance, ruleCandidateProvenance } from './provenance'
 import {
+  miniMaxCandidateProvenance,
+  miniMaxExtractorFingerprint,
+  miniMaxPromptFingerprint,
+  ruleCandidateProvenance,
+  ruleExtractorFingerprint,
+} from './provenance'
+import {
+  hasCandidateExtraction,
   hasEntityExtraction,
   loadSourceState,
   persistChangedResult,
@@ -64,6 +71,24 @@ const ENTITY_CATALOG_CATEGORIES = new Set<SourceManifestV1['sourceCategory']>([
   'government_scholarship',
   'program_detail',
 ])
+
+export async function expectedCandidateExtractorFingerprints(
+  environment: Pick<IngestionEnv, 'MINIMAX_MODEL'>,
+  manifest: SourceManifestV1,
+): Promise<string[]> {
+  const fingerprints: string[] = []
+  if (manifest.extraction.mode !== 'minimax') {
+    fingerprints.push(await ruleExtractorFingerprint(manifest))
+  }
+  if (manifest.extraction.mode !== 'rules-only') {
+    const model = environment.MINIMAX_MODEL ?? manifest.extraction.minimaxModel
+    if (model) {
+      const promptFingerprint = await miniMaxPromptFingerprint(manifest)
+      fingerprints.push(await miniMaxExtractorFingerprint(manifest, model, promptFingerprint))
+    }
+  }
+  return fingerprints
+}
 
 
 function isTextContentType(contentType: string): boolean {
@@ -500,6 +525,21 @@ export async function processIngestionJob(
   )
   const checkedAt = now.toISOString()
   const scheduledNextFetch = nextFetchAt(manifest, now)
+  const expectedExtractorFingerprints = await expectedCandidateExtractorFingerprints(
+    environment,
+    manifest,
+  )
+  const previousSnapshotId = state.rawSha256 === null
+    ? null
+    : await sha256Hex(`${manifest.id}:${state.rawSha256}`)
+  const previousCandidateExtractionCurrent = previousSnapshotId === null
+    ? false
+    : await hasCandidateExtraction(
+      environment,
+      manifest.id,
+      previousSnapshotId,
+      expectedExtractorFingerprints,
+    )
   let body: ArrayBuffer
   let contentType: string
   let finalUrl: URL
@@ -544,8 +584,13 @@ export async function processIngestionJob(
       Accept: manifest.fetch.accept ?? 'text/html,application/xhtml+xml,application/json,application/pdf;q=0.9,*/*;q=0.1',
       'User-Agent': environment.USER_AGENT ?? DEFAULT_USER_AGENT,
     })
-    if (state.etag) headers.set('If-None-Match', state.etag)
-    if (state.lastModified) headers.set('If-Modified-Since', state.lastModified)
+    // An extractor or prompt upgrade must receive the official body again. Sending
+    // validators here could yield 304 and strand the saved snapshot on an old
+    // extraction fingerprint forever.
+    if (state.rawSha256 === null || previousCandidateExtractionCurrent) {
+      if (state.etag) headers.set('If-None-Match', state.etag)
+      if (state.lastModified) headers.set('If-Modified-Since', state.lastModified)
+    }
 
     let response: Response
     try {
@@ -600,7 +645,13 @@ export async function processIngestionJob(
     snapshotId,
     OFFICIAL_HTML_ENTITY_EXTRACTOR,
   )
-  if (rawSha256 === state.rawSha256 && entityExtractionCurrent) {
+  const candidateExtractionCurrent = await hasCandidateExtraction(
+    environment,
+    manifest.id,
+    snapshotId,
+    expectedExtractorFingerprints,
+  )
+  if (rawSha256 === state.rawSha256 && entityExtractionCurrent && candidateExtractionCurrent) {
     await recordNoChange(environment, {
       job,
       sourceId: manifest.id,
@@ -655,7 +706,11 @@ export async function processIngestionJob(
   const canonicalSha256 = rawText === null
     ? rawSha256
     : await sha256Hex(normalizeCanonicalText(rawText, manifest.canonicalization))
-  if (canonicalSha256 === state.canonicalSha256 && entityExtractionCurrent) {
+  if (
+    canonicalSha256 === state.canonicalSha256
+    && entityExtractionCurrent
+    && candidateExtractionCurrent
+  ) {
     await recordNoChange(environment, {
       job,
       sourceId: manifest.id,
@@ -688,15 +743,17 @@ export async function processIngestionJob(
   if (derivative && rawText !== null) {
     await putDerivativeText(environment, snapshot, rawText)
   }
-  const entityExtraction = await buildOfficialEntityExtraction(
-    manifest,
-    snapshotId,
-    job.jobId,
-    finalUrl.href,
-    rawText,
-    contentType,
-    checkedAt,
-  )
+  const entityExtraction = entityExtractionCurrent
+    ? null
+    : await buildOfficialEntityExtraction(
+      manifest,
+      snapshotId,
+      job.jobId,
+      finalUrl.href,
+      rawText,
+      contentType,
+      checkedAt,
+    )
   if (entityExtraction) {
     await persistSnapshotEntityExtraction(environment, {
       snapshot,

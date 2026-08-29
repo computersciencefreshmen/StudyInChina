@@ -73,6 +73,121 @@ jobs:
             --max-urls "$MAXIMUM_URLS" \
             --minimum-domain-interval-ms 5000
 
+      - name: Build Pipeline re-verification handoff
+        id: handoff
+        shell: bash
+        run: |
+          set -euo pipefail
+          handoff="$RUNNER_TEMP/program-fact-pipeline-handoff.json"
+          npx tsx scripts/ingestion/build-program-fact-pipeline-handoff.ts \
+            --audit "$RUNNER_TEMP/fact-enrichment-${{ steps.date.outputs.value }}.json" \
+            --manifest-dir content/source-manifests \
+            --output "$handoff" \
+            --generated-at "${{ steps.date.outputs.value }}T00:00:00.000Z"
+
+          requests="$(jq -r '.summary.requests' "$handoff")"
+          unmatched="$(jq -r '.summary.unmatchedOfficialUrls' "$handoff")"
+          echo "requests=${requests}" >> "$GITHUB_OUTPUT"
+          echo "unmatched=${unmatched}" >> "$GITHUB_OUTPUT"
+          {
+            echo '### Pipeline re-verification handoff'
+            echo "- Exact registered source requests: ${requests}"
+            echo "- Audit URLs without a registered AI source: ${unmatched}"
+            echo '- Destination: Ingestion Worker → Pipeline candidates only; never Catalog.'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Enqueue registered sources for Pipeline AI verification
+        id: enqueue
+        continue-on-error: true
+        shell: bash
+        env:
+          INGESTION_WORKER_URL: ${{ vars.INGESTION_WORKER_URL }}
+          INGESTION_ADMIN_TOKEN: ${{ secrets.INGESTION_ADMIN_TOKEN }}
+        run: |
+          set -euo pipefail
+          handoff="$RUNNER_TEMP/program-fact-pipeline-handoff.json"
+          response_dir="$RUNNER_TEMP/program-fact-enqueue-responses"
+          mkdir -p "$response_dir"
+
+          jq -e '
+            .format == "studyinchina.pipeline.program-fact-reverification"
+            and .formatVersion == 1
+            and .policy.exactOfficialUrlMatch == true
+            and .policy.aiWritesCatalog == false
+            and .policy.pipelineCandidateOnly == true
+            and ([.requests[].sourceId | test("^[a-z0-9][a-z0-9_-]{0,127}$")] | all)
+          ' "$handoff" >/dev/null
+
+          if [[ -z "${INGESTION_WORKER_URL:-}" || -z "${INGESTION_ADMIN_TOKEN:-}" ]]; then
+            echo 'configured=false' >> "$GITHUB_OUTPUT"
+            {
+              echo '### Pipeline enqueue'
+              echo '- Status: not configured; the replayable handoff artifact was retained.'
+              echo '- Required: repository variable `INGESTION_WORKER_URL` and secret `INGESTION_ADMIN_TOKEN`.'
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          enqueue_url="$(node -e '
+            const url = new URL(process.argv[1]);
+            if (url.protocol !== "https:" || url.username || url.password || url.port || url.search || url.hash || (url.pathname !== "/" && url.pathname !== "")) {
+              throw new Error("INGESTION_WORKER_URL must be a credential-free HTTPS origin");
+            }
+            url.pathname = "/enqueue";
+            process.stdout.write(url.href);
+          ' "$INGESTION_WORKER_URL")"
+
+          mapfile -t source_ids < <(jq -r '.requests[].sourceId' "$handoff" | sort -u)
+          accepted=0
+          already_queued=0
+          failed=0
+          for source_id in "${source_ids[@]}"; do
+            response_path="$response_dir/${source_id}.json"
+            payload="$(jq -cn --arg sourceId "$source_id" '{sourceId: $sourceId}')"
+            if ! http_status="$(curl --silent --show-error \
+              --connect-timeout 15 --max-time 60 --retry 2 --retry-delay 2 --retry-all-errors \
+              --output "$response_path" --write-out '%{http_code}' \
+              --request POST "$enqueue_url" \
+              --header "Authorization: Bearer ${INGESTION_ADMIN_TOKEN}" \
+              --header 'Content-Type: application/json' \
+              --data "$payload")"; then
+              failed=$((failed + 1))
+              continue
+            fi
+            if [[ "$http_status" == '202' ]] && jq -e '.ok == true and (.jobId | type == "string")' "$response_path" >/dev/null; then
+              accepted=$((accepted + 1))
+            elif [[ "$http_status" == '409' ]] && jq -e '.ok == false and .error == "source_already_queued"' "$response_path" >/dev/null; then
+              already_queued=$((already_queued + 1))
+            else
+              failed=$((failed + 1))
+            fi
+          done
+
+          echo 'configured=true' >> "$GITHUB_OUTPUT"
+          echo "accepted=${accepted}" >> "$GITHUB_OUTPUT"
+          echo "already_queued=${already_queued}" >> "$GITHUB_OUTPUT"
+          echo "failed=${failed}" >> "$GITHUB_OUTPUT"
+          {
+            echo '### Pipeline enqueue'
+            echo "- Accepted: ${accepted}"
+            echo "- Already queued (idempotent): ${already_queued}"
+            echo "- Failed: ${failed}"
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [[ "$failed" -gt 0 ]]; then
+            exit 1
+          fi
+
+      - name: Upload Pipeline re-verification handoff
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v6
+        with:
+          name: program-fact-pipeline-handoff-${{ steps.date.outputs.value }}
+          path: |
+            ${{ runner.temp }}/program-fact-pipeline-handoff.json
+            ${{ runner.temp }}/program-fact-enqueue-responses
+          if-no-files-found: warn
+          retention-days: 35
+
       - name: Validate refreshed Catalog
         run: |
           npm run validate:data
@@ -118,3 +233,8 @@ jobs:
           path: ${{ runner.temp }}/program-fact-refresh-candidate
           if-no-files-found: error
           retention-days: 35
+
+      - name: Preserve Pipeline enqueue health signal
+        if: ${{ always() && steps.enqueue.outcome == 'failure' }}
+        shell: bash
+        run: exit 1

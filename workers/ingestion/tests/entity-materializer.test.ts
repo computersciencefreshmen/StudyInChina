@@ -6,6 +6,7 @@ import test from 'node:test'
 
 import {
   materializeExtractedEntityCandidate,
+  registerEntityPromotionFieldMappings,
   requestEntityMaterializationRelease,
 } from '../src/entity-materializer'
 import { sha256Hex } from '../src/hash'
@@ -243,6 +244,147 @@ function plainRow<T extends Record<string, unknown>>(value: unknown): T {
   return { ...(value as T) }
 }
 
+type PromotionFixture = {
+  rootRecordId: string
+  sourceId: string
+  cycleRecordId: string
+  routeRecordId: string
+  windowRecordId: string
+  feeRecordId: string
+  requirementRecordId: string
+}
+
+function configureDecisionFactTargets(
+  database: DatabaseSync,
+  candidateId: string,
+): PromotionFixture {
+  const context = database.prepare(
+    `SELECT decision.canonical_record_id AS root_record_id,
+            candidate.source_id
+       FROM entity_materialization_decisions decision
+       JOIN extracted_entity_candidates candidate
+         ON candidate.candidate_id = decision.candidate_id
+      WHERE decision.candidate_id = ?`,
+  ).get(candidateId) as { root_record_id: string; source_id: string }
+  const manifest = JSON.parse((database.prepare(
+    `SELECT manifest_json FROM ingestion_sources WHERE source_id = ?`,
+  ).get(context.source_id) as { manifest_json: string }).manifest_json) as SourceManifestV1
+  manifest.extraction = {
+    mode: 'minimax',
+    schemaVersion: 'program-decision-facts-v1',
+    fields: [
+      { path: 'durationMonths', type: 'number', required: true, critical: true },
+      { path: 'tuitionCny', type: 'money', required: true, critical: true },
+      { path: 'closesOn', type: 'date', required: true, critical: true },
+      { path: 'applyUrl', type: 'string', required: true, critical: true },
+      { path: 'requirements', type: 'object', required: true, critical: true },
+    ],
+  }
+  database.prepare(
+    `UPDATE ingestion_sources SET manifest_json = ?, updated_at = ?
+      WHERE source_id = ?`,
+  ).run(JSON.stringify(manifest), checkedAt, context.source_id)
+
+  const ids = {
+    rootRecordId: context.root_record_id,
+    sourceId: context.source_id,
+    cycleRecordId: `${candidateId}-cycle`,
+    routeRecordId: `${candidateId}-route`,
+    windowRecordId: `${candidateId}-window`,
+    feeRecordId: `${candidateId}-fee`,
+    requirementRecordId: `${candidateId}-requirement`,
+  }
+  const records: Array<[string, string]> = [
+    [ids.cycleRecordId, 'program_cycle'],
+    [ids.routeRecordId, 'application_route'],
+    [ids.windowRecordId, 'application_window'],
+    [ids.feeRecordId, 'fee'],
+    [ids.requirementRecordId, 'requirement'],
+  ]
+  for (const [recordId, kind] of records) {
+    database.prepare(
+      `INSERT INTO records (id, public_id, kind, workflow_status)
+       VALUES (?, ?, ?, 'applied')`,
+    ).run(recordId, recordId, kind)
+  }
+  database.prepare(
+    `INSERT INTO program_cycles (
+       record_id, program_id, academic_year, intake_code, official_url
+     ) VALUES (?, ?, '2027-2028', 'autumn', 'https://admissions.example.edu.cn/cycle')`,
+  ).run(ids.cycleRecordId, ids.rootRecordId)
+  database.prepare(
+    `INSERT INTO application_routes (
+       record_id, owner_record_id, route_type, access_mode, apply_url, is_primary
+     ) VALUES (?, ?, 'university_portal', 'public_individual',
+               'https://apply.example.edu.cn', 1)`,
+  ).run(ids.routeRecordId, ids.cycleRecordId)
+  database.prepare(
+    `INSERT INTO application_windows (
+       record_id, application_route_id, rolling
+     ) VALUES (?, ?, 0)`,
+  ).run(ids.windowRecordId, ids.routeRecordId)
+  database.prepare(
+    `INSERT INTO fee_items (
+       record_id, owner_record_id, fee_type, value_status
+     ) VALUES (?, ?, 'tuition', 'unknown')`,
+  ).run(ids.feeRecordId, ids.cycleRecordId)
+  database.prepare(
+    `INSERT INTO requirements (
+       record_id, owner_record_id, requirement_type, required
+     ) VALUES (?, ?, 'language_test', 1)`,
+  ).run(ids.requirementRecordId, ids.cycleRecordId)
+
+  const definitions: Array<[string, string, string]> = [
+    ['program', 'duration_min', 'integer'],
+    ['application_route', 'apply_url', 'url'],
+    ['application_window', 'closes_on', 'date'],
+    ['fee', 'amount_min_minor', 'decimal_minor'],
+    ['requirement', 'value_json', 'json'],
+  ]
+  for (const [recordKind, fieldPath, valueType] of definitions) {
+    database.prepare(
+      `INSERT OR REPLACE INTO field_definitions (
+         record_kind, field_path, value_type, risk_class,
+         required_for_publish, max_age_days, validation_profile
+       ) VALUES (?, ?, ?, 'critical', 0, 7, 'test')`,
+    ).run(recordKind, fieldPath, valueType)
+  }
+  return ids
+}
+
+function decisionFactMappings(
+  fixture: PromotionFixture,
+): Parameters<typeof registerEntityPromotionFieldMappings>[2] {
+  return [
+    {
+      candidateFieldPath: 'durationMonths',
+      targetRecordId: fixture.rootRecordId,
+      canonicalFieldPath: 'duration_min',
+    },
+    {
+      candidateFieldPath: 'tuitionCny',
+      targetRecordId: fixture.feeRecordId,
+      canonicalFieldPath: 'amount_min_minor',
+      valueTransform: 'major_to_minor_2',
+    },
+    {
+      candidateFieldPath: 'closesOn',
+      targetRecordId: fixture.windowRecordId,
+      canonicalFieldPath: 'closes_on',
+    },
+    {
+      candidateFieldPath: 'applyUrl',
+      targetRecordId: fixture.routeRecordId,
+      canonicalFieldPath: 'apply_url',
+    },
+    {
+      candidateFieldPath: 'requirements',
+      targetRecordId: fixture.requirementRecordId,
+      canonicalFieldPath: 'value_json',
+    },
+  ]
+}
+
 test('materializes a validated directory entity with evidence and remains idempotent', async () => {
   const database = pipelineDatabase()
   try {
@@ -417,6 +559,110 @@ test('creates one release request per UTC day and rejects unsafe cohorts', async
     )
     assert.equal(count(database, 'entity_materialization_release_requests'), 1)
     assert.equal(count(database, 'publication_jobs'), 1)
+  } finally {
+    database.close()
+  }
+})
+
+test('registers complete trusted decision-field mappings idempotently', async () => {
+  const database = pipelineDatabase()
+  try {
+    seedInstitution(database, 'uni-example')
+    const candidateId = await seedCandidate(database, 'decision-fields')
+    const d1 = new SqliteD1(database)
+    const materialized = await materializeExtractedEntityCandidate(d1, candidateId, {
+      decidedAt: '2026-08-05T01:00:00.000Z',
+    })
+    assert.equal(materialized.status, 'materialized')
+    const fixture = configureDecisionFactTargets(database, candidateId)
+
+    const registered = await registerEntityPromotionFieldMappings(
+      d1,
+      candidateId,
+      decisionFactMappings(fixture),
+      '2026-08-05T02:00:00.000Z',
+    )
+    assert.equal(registered.status, 'registered')
+    assert.equal(registered.mappings, 5)
+    assert.equal(registered.inserted, 5)
+    assert.deepEqual(
+      database.prepare(
+        `SELECT mapping.candidate_field_path, mapping.canonical_field_path,
+                transform.value_transform
+           FROM promotion_field_mappings mapping
+           JOIN promotion_field_mapping_transforms transform
+             ON transform.source_id = mapping.source_id
+            AND transform.candidate_field_path = mapping.candidate_field_path
+          ORDER BY mapping.candidate_field_path`,
+      ).all().map(plainRow),
+      [
+        { candidate_field_path: 'applyUrl', canonical_field_path: 'apply_url', value_transform: 'identity' },
+        { candidate_field_path: 'closesOn', canonical_field_path: 'closes_on', value_transform: 'identity' },
+        { candidate_field_path: 'durationMonths', canonical_field_path: 'duration_min', value_transform: 'identity' },
+        { candidate_field_path: 'requirements', canonical_field_path: 'value_json', value_transform: 'identity' },
+        { candidate_field_path: 'tuitionCny', canonical_field_path: 'amount_min_minor', value_transform: 'major_to_minor_2' },
+      ],
+    )
+
+    const repeated = await registerEntityPromotionFieldMappings(
+      d1,
+      candidateId,
+      decisionFactMappings(fixture),
+      '2026-08-05T03:00:00.000Z',
+    )
+    assert.equal(repeated.status, 'already-registered')
+    assert.equal(repeated.inserted, 0)
+    assert.equal(repeated.planSha256, registered.planSha256)
+    assert.equal(count(database, 'promotion_field_mappings'), 5)
+    assert.equal(Number((database.prepare(
+      `SELECT COUNT(*) AS count FROM audit_log
+        WHERE action = 'entity_promotion_mappings_registered'`,
+    ).get() as { count: number }).count), 1)
+  } finally {
+    database.close()
+  }
+})
+
+test('refuses source-wide mappings when one source contains multiple entities', async () => {
+  const database = pipelineDatabase()
+  try {
+    seedInstitution(database, 'uni-example')
+    const candidateId = await seedCandidate(database, 'aggregate-source')
+    const d1 = new SqliteD1(database)
+    const materialized = await materializeExtractedEntityCandidate(d1, candidateId, {
+      decidedAt: '2026-08-05T01:00:00.000Z',
+    })
+    assert.equal(materialized.status, 'materialized')
+    const fixture = configureDecisionFactTargets(database, candidateId)
+    database.prepare(
+      `INSERT INTO extracted_entity_candidates (
+         candidate_id, institution_id, entity_type, entity_key, source_id,
+         snapshot_id, source_discovery_id, ingestion_job_id, extractor,
+         candidate_status, facts_json, evidence_json, issues_json,
+         entity_sha256, confidence_ppm, created_at, processed_at
+       )
+       SELECT 'candidate-second-entity', institution_id, entity_type,
+              'second-international-program', source_id, snapshot_id,
+              source_discovery_id, ingestion_job_id, extractor,
+              'validated', facts_json, evidence_json, '[]',
+              ?, confidence_ppm, created_at, ?
+         FROM extracted_entity_candidates WHERE candidate_id = ?`,
+    ).run('b'.repeat(64), checkedAt, candidateId)
+
+    await assert.rejects(
+      registerEntityPromotionFieldMappings(
+        d1,
+        candidateId,
+        decisionFactMappings(fixture),
+        '2026-08-05T02:00:00.000Z',
+      ),
+      /not a single-entity source; candidate-scoped mappings are required/iu,
+    )
+    assert.equal(count(database, 'promotion_field_mappings'), 0)
+    assert.equal(Number((database.prepare(
+      `SELECT COUNT(*) AS count FROM audit_log
+        WHERE action = 'entity_promotion_mappings_registered'`,
+    ).get() as { count: number }).count), 0)
   } finally {
     database.close()
   }

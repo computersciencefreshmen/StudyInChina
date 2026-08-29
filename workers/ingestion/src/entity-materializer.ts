@@ -1,3 +1,9 @@
+export {
+  registerEntityPromotionFieldMappings,
+  type EntityPromotionFieldMapping,
+  type EntityPromotionMappingResult,
+} from './entity-promotion-mappings'
+
 import { sha256Hex, stableJson } from './hash'
 import { assertSafeSourceUrl, validateManifest } from './security'
 import type {

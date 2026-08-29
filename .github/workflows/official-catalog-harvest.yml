@@ -64,6 +64,8 @@ jobs:
           fi
 
       - name: Run serial official-source harvest
+        id: harvest
+        continue-on-error: true
         shell: bash
         run: |
           set -euo pipefail
@@ -75,8 +77,67 @@ jobs:
             --max-attempts 3 \
             --pdftotext pdftotext
 
+      - name: Summarize source-level settlement
+        id: settlement
+        if: ${{ always() }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          manifest="${HARVEST_OUTPUT_DIR}/run-manifest.json"
+          if [[ ! -f "${manifest}" ]]; then
+            echo 'uploadable=false' >> "${GITHUB_OUTPUT}"
+            echo 'catalog_ready=false' >> "${GITHUB_OUTPUT}"
+            echo 'publication_eligible=false' >> "${GITHUB_OUTPUT}"
+            echo '### Official-source settlement' >> "${GITHUB_STEP_SUMMARY}"
+            echo '' >> "${GITHUB_STEP_SUMMARY}"
+            echo 'The harvest did not produce a run manifest; no source was persisted.' >> "${GITHUB_STEP_SUMMARY}"
+            exit 0
+          fi
+          node - "${manifest}" <<'NODE'
+          const fs = require('node:fs')
+          const manifest = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'))
+          const settlement = manifest.settlement
+          if (!settlement || !Array.isArray(settlement.catalogSources)
+            || !Array.isArray(settlement.dependencySourceIds)
+            || !Array.isArray(settlement.quarantinedSources)) {
+            throw new Error('Run manifest is missing the source-level settlement')
+          }
+          const uploadable = (manifest.sourceArtifacts?.length ?? 0)
+            + (manifest.dependencyArtifacts?.length ?? 0) > 0
+          const outputs = [
+            `uploadable=${uploadable}`,
+            `catalog_ready=${settlement.catalogSources.length > 0}`,
+            `publication_eligible=${settlement.publicationEligible === true}`,
+            `settlement_status=${settlement.status}`,
+          ].join('\n') + '\n'
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, outputs)
+          const clean = (value) => String(value ?? '')
+            .replace(/[|\r\n]+/g, ' ')
+            .slice(0, 240)
+          const lines = [
+            '### Official-source settlement',
+            '',
+            `- Settlement: **${clean(settlement.status)}**`,
+            `- Healthy catalog sources: **${settlement.catalogSources.length}**`,
+            `- Healthy dependencies: **${settlement.dependencySourceIds.length}**`,
+            `- Isolated sources: **${settlement.quarantinedSources.length}**`,
+            `- Release request allowed: **${settlement.publicationEligible === true ? 'yes' : 'no'}**`,
+          ]
+          if (manifest.gate?.reasons?.length) {
+            lines.push('', 'Batch gate reasons:', ...manifest.gate.reasons.map((reason) => `- ${clean(reason)}`))
+          }
+          if (settlement.quarantinedSources.length) {
+            lines.push('', '| Source | Kind | Status | Reason |', '|---|---|---|---|')
+            for (const source of settlement.quarantinedSources) {
+              lines.push(`| ${clean(source.sourceId)} | ${clean(source.kind)} | ${clean(source.status)} | ${clean(source.reason)} |`)
+            }
+          }
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${lines.join('\n')}\n`)
+          NODE
+
       - name: Upload deterministic private R2 source snapshot
-        if: ${{ success() && steps.cloudflare.outputs.configured == 'true' }}
+        id: r2
+        if: ${{ always() && steps.cloudflare.outputs.configured == 'true' && steps.settlement.outputs.uploadable == 'true' }}
         shell: bash
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -102,24 +163,50 @@ jobs:
           const outputRoot = path.resolve(process.argv[3])
           const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
           if (
-            manifest.status !== 'passed' ||
-            manifest.gate?.passed !== true ||
-            manifest.provenanceStatus !== 'complete'
+            manifest.format !== 'studyinchina.priority-official-harvest'
+            || manifest.formatVersion !== 2
+            || manifest.aiUsed !== false
           ) {
-            throw new Error('Run manifest is not a passed, complete-provenance harvest')
+            throw new Error('Run manifest is not a deterministic priority harvest v2 document')
           }
           const catalog = manifest.sourceArtifacts
           const dependencies = manifest.dependencyArtifacts
-          if (!Array.isArray(catalog) || !Array.isArray(dependencies)) {
-            throw new Error('Run manifest artifact batches are missing')
+          const settlement = manifest.settlement
+          if (!Array.isArray(catalog) || !Array.isArray(dependencies)
+            || !settlement || !Array.isArray(settlement.catalogSources)
+            || !Array.isArray(settlement.dependencySourceIds)
+            || !Array.isArray(settlement.quarantinedSources)) {
+            throw new Error('Run manifest source-level settlement is incomplete')
           }
           if (
-            manifest.totals?.sourceArtifacts !== catalog.length ||
-            manifest.totals?.dependencies !== dependencies.length ||
-            catalog.length !== manifest.thresholds?.sourceArtifacts ||
-            dependencies.length !== 10
+            manifest.totals?.sourceArtifacts !== catalog.length
+            || manifest.totals?.dependencies !== dependencies.length
+            || settlement.publicationEligible !== (manifest.gate?.passed === true)
           ) {
-            throw new Error('Run manifest artifact totals do not satisfy the locked contract')
+            throw new Error('Source-level settlement disagrees with the immutable run totals or gate')
+          }
+          const eligibleCatalogIds = new Set(
+            settlement.catalogSources.map((source) => source.sourceId),
+          )
+          const eligibleDependencyIds = new Set(settlement.dependencySourceIds)
+          const sourceRuns = new Map(manifest.sources.map((source) => [source.sourceId, source]))
+          const verifiedCatalogAssets = new Set(
+            settlement.catalogSources.flatMap((settled) => {
+              const source = sourceRuns.get(settled.sourceId)
+              if (!source || source.status !== 'verified' || source.kind === 'dependency') {
+                throw new Error(`Settled catalog source is not verified: ${settled.sourceId}`)
+              }
+              return source.sourceArtifacts.map((artifact) => `${artifact.assetId}\0${artifact.sha256}`)
+            }),
+          )
+          for (const dependencyId of eligibleDependencyIds) {
+            const source = sourceRuns.get(dependencyId)
+            if (!source || source.status !== 'verified' || source.kind !== 'dependency') {
+              throw new Error(`Settled dependency source is not verified: ${dependencyId}`)
+            }
+          }
+          if (eligibleCatalogIds.size !== settlement.catalogSources.length) {
+            throw new Error('Source-level settlement contains duplicate catalog source IDs')
           }
           if (!/^\d{4}-\d{2}-\d{2}T/u.test(manifest.checkedAt)) {
             throw new Error('Run manifest checkedAt is invalid')
@@ -184,16 +271,18 @@ jobs:
                 artifact.captureMode !== 'live' ||
                 artifact.provenanceStatus !== 'complete' ||
                 artifact.artifactUri !==
-                  `r2://studyinchina-source-snapshots/${artifact.r2Key}`
+                  `r2://studyinchina-source-snapshots/${artifact.r2Key}` ||
+                !verifiedCatalogAssets.has(`${artifact.assetId}\0${sha}`)
               )) {
-                throw new Error('Catalog artifact is missing strict provenance metadata')
+                throw new Error('Catalog artifact is missing strict settled provenance metadata')
               }
               if (scope === 'dependency' && (
                 artifact.role !== 'dependency' ||
                 artifact.batchScope !== 'dependency' ||
-                typeof artifact.dependencyId !== 'string'
+                typeof artifact.dependencyId !== 'string' ||
+                !eligibleDependencyIds.has(artifact.dependencyId)
               )) {
-                throw new Error('Dependency artifact is not isolated in dependency scope')
+                throw new Error('Dependency artifact is not isolated in settled dependency scope')
               }
               const bytes = fs.readFileSync(local)
               const actualSha = crypto.createHash('sha256').update(bytes).digest('hex')
@@ -324,8 +413,8 @@ jobs:
             --content-type application/json
           echo "Uploaded and read-back verified ${upload_count} private R2 objects; deterministic archive and checksum recorded."
 
-      - name: Strictly import dependencies, then catalog, into Pipeline D1
-        if: ${{ success() && steps.cloudflare.outputs.configured == 'true' }}
+      - name: Import healthy source candidates into Pipeline D1
+        if: ${{ always() && steps.cloudflare.outputs.configured == 'true' && steps.r2.outcome == 'success' && steps.settlement.outputs.catalog_ready == 'true' }}
         shell: bash
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -335,6 +424,42 @@ jobs:
           harvest_root="$(cd "${HARVEST_OUTPUT_DIR}" && pwd)"
           materialized_dir="${harvest_root}/materialized"
           mkdir -p "${materialized_dir}"
+          manifest="${HARVEST_OUTPUT_DIR}/run-manifest.json"
+          mapfile -t candidate_inputs < <(
+            node - "${manifest}" <<'NODE'
+          const path = require('node:path')
+          const fs = require('node:fs')
+          const manifest = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'))
+          const sources = manifest.settlement?.catalogSources
+          if (!Array.isArray(sources) || sources.length === 0) {
+            throw new Error('Source settlement contains no healthy catalog candidate')
+          }
+          for (const source of sources) {
+            const value = source.harvestPath
+            if (typeof value !== 'string' || value.includes('\\')
+              || path.posix.normalize(value) !== value
+              || !/^harvests\/[a-z0-9/_-]+\.json$/u.test(value)) {
+              throw new Error(`Unsafe settled harvest path: ${String(value)}`)
+            }
+            process.stdout.write(`${value}\n`)
+          }
+          NODE
+          )
+          materializer_args=()
+          for candidate_input in "${candidate_inputs[@]}"; do
+            if [[ ! -f "${harvest_root}/${candidate_input}" ]]; then
+              echo "Settled harvest input is missing: ${candidate_input}" >&2
+              exit 1
+            fi
+            materializer_args+=(--input "${candidate_input}")
+          done
+          if [[ "${#materializer_args[@]}" -eq 0 ]]; then
+            echo 'Source settlement unexpectedly produced no materializer inputs.' >&2
+            exit 1
+          fi
+          publication_eligible="${{ steps.settlement.outputs.publication_eligible }}"
+          dependency_manifest=''
+
           pwsh -NoLogo -NoProfile -NonInteractive \
             -File scripts/ingestion/import-pipeline-bootstrap.ps1 \
             -Remote \
@@ -342,6 +467,7 @@ jobs:
             -MaxChunkAttempts 3
 
           pushd "${harvest_root}" >/dev/null
+          if [[ "${publication_eligible}" == 'true' ]]; then
           dependency_output="$(
             npx --no-install tsx \
               "${GITHUB_WORKSPACE}/scripts/ingestion/materialize-official-dependencies.ts" \
@@ -360,11 +486,12 @@ jobs:
             -Remote \
             -OutputDirectory "${materialized_dir}/strict-dependency-import" \
             -Transport auto
+          fi
 
           materializer_output="$(
             npx --no-install tsx \
               "${GITHUB_WORKSPACE}/scripts/ingestion/materialize-official-entities.ts" \
-              --input-directory harvests \
+              "${materializer_args[@]}" \
               --provenance-manifest run-manifest.json \
               --output materialized
           )"
@@ -380,15 +507,20 @@ jobs:
             -Remote \
             -OutputDirectory "${materialized_dir}/strict-import" \
             -Transport auto
+          if [[ "${publication_eligible}" == 'true' ]]; then
           pwsh -NoLogo -NoProfile -NonInteractive \
             -File "${GITHUB_WORKSPACE}/scripts/ingestion/request-materialization-release.ps1" \
             -CatalogManifestPath "${materialization_manifest}" \
             -DependencyManifestPath "${dependency_manifest}" \
             -Remote \
             -OutputDirectory "${materialized_dir}/release-request"
+          else
+            echo 'Healthy source evidence was imported into Pipeline; Release is withheld because the complete batch gate did not pass.' \
+              >> "${GITHUB_STEP_SUMMARY}"
+          fi
 
       - name: Report skipped Pipeline import
-        if: ${{ success() && steps.cloudflare.outputs.configured != 'true' }}
+        if: ${{ always() && steps.cloudflare.outputs.configured != 'true' }}
         shell: bash
         run: echo 'Cloudflare credentials are not both configured; harvest completed, while private R2 upload and Pipeline D1 import were skipped.'
 
@@ -401,3 +533,11 @@ jobs:
           if-no-files-found: error
           retention-days: 35
           include-hidden-files: true
+
+      - name: Preserve strict batch health signal
+        if: ${{ always() && steps.harvest.outcome == 'failure' }}
+        shell: bash
+        run: |
+          echo 'One or more required sources failed the unchanged complete-batch gate.' >&2
+          echo 'Healthy sources were settled independently; inspect the source table above for isolated failures.' >&2
+          exit 1

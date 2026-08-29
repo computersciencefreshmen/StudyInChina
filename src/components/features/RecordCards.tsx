@@ -100,7 +100,7 @@ export function ProgramCard({ program, university, cycle, latestTuitionReference
     : `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${periodLabels[cycle.tuitionPeriod || 'other']}`
   const tuitionReferenceValue = visibleTuitionReference?.tuitionCny == null
     ? undefined
-    : `${formatCny(visibleTuitionReference.tuitionCny, locale, messages.common.unknown)} / ${periodLabels[visibleTuitionReference.tuitionPeriod || 'other']} · ${visibleTuitionReference.academicYear} · ${messages.programs.tuitionReference}`
+    : `${formatCny(visibleTuitionReference.tuitionCny, locale, messages.common.unknown)} / ${periodLabels[visibleTuitionReference.tuitionPeriod || 'other']} · ${visibleTuitionReference.academicYear}`
   const applicationFeeValue = cycle?.applicationFeeCny == null
     ? undefined
     : formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)

@@ -43,16 +43,18 @@ describe('official ICLT wave 2026-07-28', () => {
     }
   })
 
-  it('publishes four distinct Spring 2027 program identities and cycles', () => {
+  it('retains four distinct Spring 2027 program identities and cycles after review rollover', () => {
     for (const id of expectedProgramIds) {
       const program = programs.find((item) => item.id === id)
-      expect(program?.status).toBe('verified')
+      expect(program?.status).toBe('stale')
+      expect(program?.reviewAfter).toBe('2026-08-27')
       expect(program?.durationMonths).toBe(5)
       expect(program?.verificationScope).toBe('facts')
       expect(program?.programUrl).toMatch(/^https:\/\//u)
 
       const cycle = cycles.find((item) => item.programId === id)
-      expect(cycle?.status).toBe('verified')
+      expect(cycle?.status).toBe('stale')
+      expect(cycle?.reviewAfter).toBe('2026-08-27')
       expect(cycle?.intake).toBe('spring')
       expect(cycle?.closesOn).toBe('2026-10-31')
       expect(cycle?.evidenceBasis).toBe('cycle-specific')
@@ -76,7 +78,8 @@ describe('official ICLT wave 2026-07-28', () => {
         Array.isArray(item.programIds)
         && (item.programIds as string[]).includes(programId)
       ))
-      expect(scholarship?.status).toBe('verified')
+      expect(scholarship?.status).toBe('stale')
+      expect(scholarship?.reviewAfter).toBe('2026-08-27')
       expect(scholarship?.deadline).toBe('2026-10-31')
       expect((scholarship?.coverage as JsonRecord).tuition).toBe('full')
 
@@ -90,7 +93,8 @@ describe('official ICLT wave 2026-07-28', () => {
     const scholarship = scholarships.find(
       (item) => item.id === 'scholarship-bfsu-beijing-government-annual',
     )
-    expect(scholarship?.status).toBe('verified')
+    expect(scholarship?.status).toBe('stale')
+    expect(scholarship?.reviewAfter).toBe('2026-08-27')
     expect(scholarship?.deadline).toBeNull()
     expect((scholarship?.coverage as JsonRecord).tuition).toBe('unknown')
     expect((scholarship?.summary as JsonRecord).en).toContain('November 30')

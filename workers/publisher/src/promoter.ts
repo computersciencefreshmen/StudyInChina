@@ -68,6 +68,7 @@ type MappingRow = {
   subject_record_id: string
   canonical_field_path: string
   locale: string
+  value_transform: 'identity' | 'major_to_minor_2'
   record_kind: string
   workflow_status: string
   row_version: number
@@ -95,6 +96,7 @@ type ValidCandidate = {
 
 type PlannedFact = {
   fact: ExtractionFact
+  canonicalValue: unknown
   evidence: CandidateFieldEvidence
   mapping: MappingRow
   claimId: string
@@ -235,6 +237,30 @@ function valueMatchesDefinition(valueType: string, value: unknown): boolean {
   }
 }
 
+function transformMappedValue(mapping: MappingRow, value: unknown): unknown {
+  if (mapping.value_transform === 'identity') return value
+  if (mapping.value_transform === 'major_to_minor_2') {
+    if (typeof value !== 'number' || !Number.isFinite(value) || value < 0) {
+      unsafe(
+        'canonical_transform_invalid',
+        `${mapping.candidate_field_path} must be a non-negative finite major-unit amount`,
+      )
+    }
+    const transformed = value * 100
+    if (!Number.isSafeInteger(transformed)) {
+      unsafe(
+        'canonical_transform_invalid',
+        `${mapping.candidate_field_path} cannot be represented exactly in two decimal minor units`,
+      )
+    }
+    return transformed
+  }
+  return unsafe(
+    'canonical_transform_invalid',
+    `Unsupported value transform ${String(mapping.value_transform)}`,
+  )
+}
+
 function addDays(dateValue: string, days: number): string {
   const date = new Date(dateValue)
   if (Number.isNaN(date.getTime()) || !Number.isInteger(days) || days <= 0) {
@@ -301,6 +327,7 @@ async function loadMappings(database: D1Database, sourceId: string): Promise<Map
   const result = await database.prepare(
     `SELECT mapping.candidate_field_path, mapping.subject_record_id,
             mapping.canonical_field_path, mapping.locale,
+            COALESCE(transform.value_transform, 'identity') AS value_transform,
             record.kind AS record_kind, record.workflow_status, record.row_version,
             definition.value_type, definition.risk_class, definition.max_age_days,
             current.claim_id AS previous_claim_id,
@@ -310,6 +337,9 @@ async function loadMappings(database: D1Database, sourceId: string): Promise<Map
        JOIN field_definitions definition
          ON definition.record_kind = record.kind
         AND definition.field_path = mapping.canonical_field_path
+       LEFT JOIN promotion_field_mapping_transforms transform
+         ON transform.source_id = mapping.source_id
+        AND transform.candidate_field_path = mapping.candidate_field_path
        LEFT JOIN canonical_fields current
          ON current.subject_record_id = mapping.subject_record_id
         AND current.field_path = mapping.canonical_field_path
@@ -477,7 +507,8 @@ async function buildPlan(
     if (['quarantined', 'archived', 'rejected'].includes(mapping.workflow_status)) {
       unsafe('target_record_blocked', `Target record ${mapping.subject_record_id} is ${mapping.workflow_status}`)
     }
-    if (!valueMatchesDefinition(mapping.value_type, fact.value)) {
+    const canonicalValue = transformMappedValue(mapping, fact.value)
+    if (!valueMatchesDefinition(mapping.value_type, canonicalValue)) {
       unsafe(
         'canonical_type_mismatch',
         `${fact.fieldPath} cannot be safely stored as ${mapping.value_type}`,
@@ -503,6 +534,7 @@ async function buildPlan(
     }
     facts.push({
       fact,
+      canonicalValue,
       evidence,
       mapping,
       claimId: await deterministicId('claim', idBasis),
@@ -532,7 +564,7 @@ async function buildPlan(
     for (const item of recordFacts) {
       snapshot.set(
         `${item.mapping.canonical_field_path}\u0000${item.mapping.locale}`,
-        item.fact.value,
+        item.canonicalValue,
       )
     }
     const mapping = recordFacts[0]!.mapping
@@ -556,7 +588,13 @@ async function buildPlan(
       previous: item.mapping.previous_value_json === null
         ? null
         : JSON.parse(item.mapping.previous_value_json),
-      value: item.fact.value,
+      value: item.canonicalValue,
+      ...(item.mapping.value_transform === 'identity'
+        ? {}
+        : {
+            candidateValue: item.fact.value,
+            valueTransform: item.mapping.value_transform,
+          }),
       claimId: item.claimId,
     }))
     records.push({
@@ -662,7 +700,7 @@ async function applyPlan(database: D1Database, plan: PromotionPlan, now: Date): 
       locale: item.mapping.locale,
       valueType: item.mapping.value_type,
       rawValueText: rawValue(item.fact.value),
-      normalizedValueJson: stableJson(item.fact.value),
+      normalizedValueJson: stableJson(item.canonicalValue),
       extractionMethod: candidate.extractor === 'rules' ? 'selector' : 'llm',
       extractorVersion: candidate.extractor_fingerprint,
       discoveredAt: candidate.created_at,
@@ -673,7 +711,7 @@ async function applyPlan(database: D1Database, plan: PromotionPlan, now: Date): 
       fieldPath: item.mapping.canonical_field_path,
       locale: item.mapping.locale,
       claimId: item.claimId,
-      valueJson: stableJson(item.fact.value),
+      valueJson: stableJson(item.canonicalValue),
       verifiedAt: candidate.fetched_at,
       reviewAfter: item.reviewAfter,
       updatedAt: nowIso,

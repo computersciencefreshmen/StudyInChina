@@ -5,6 +5,7 @@ import universities from '../../content/data/universities.json'
 import programs from '../../content/data/programs.json'
 import admissionCycles from '../../content/data/admission-cycles.json'
 import scholarships from '../../content/data/scholarships.json'
+import { getApplicationState } from '@/lib/data/admission'
 import {
   getFreshnessState,
   getTodayDate,
@@ -17,6 +18,13 @@ import type { DataBundle } from '@/lib/data/types'
 
 const allData = bundleSchema.parse({ sources, cities, universities, programs, admissionCycles, scholarships })
 const TODAY = '2026-07-20'
+const CATALOG_AS_OF = getTodayDate()
+const ACTIONABLE_APPLICATION_STATES = new Set([
+  'open',
+  'upcoming',
+  'rolling',
+  'dates-published',
+])
 
 function publicationFixture(): DataBundle {
   const city = { ...allData.cities[0], status: 'verified' as const, reviewAfter: TODAY }
@@ -64,7 +72,7 @@ function publicationFixture(): DataBundle {
 }
 
 describe('production publication policy', () => {
-  const published = selectPublishedData(allData, TODAY)
+  const published = selectPublishedData(allData, CATALOG_AS_OF)
 
   it('keeps only verified or stale profile records', () => {
     const profiles = [...published.cities, ...published.universities]
@@ -77,13 +85,24 @@ describe('production publication policy', () => {
       (program) => program.status === 'draft',
     ).length).toBeLessThan(40)
     expect(published.programs.length).toBeGreaterThanOrEqual(240)
-    expect(published.admissionCycles.length).toBeGreaterThanOrEqual(30)
     expect(published.programs.filter(
       (program) => program.verificationScope === 'identity' || program.verificationScope === 'facts',
     ).length).toBeGreaterThanOrEqual(240)
     expect(published.programs.every(
       (program) => program.status === 'verified' || program.status === 'stale',
     )).toBe(true)
+
+    const publishedCycleIds = new Set(published.admissionCycles.map((cycle) => cycle.id))
+    const quarantinedCycles = allData.admissionCycles.filter(
+      (cycle) => cycle.status === 'stale' || cycle.reviewAfter < CATALOG_AS_OF,
+    )
+    const actionableCycles = published.admissionCycles.filter((cycle) => (
+      ACTIONABLE_APPLICATION_STATES.has(getApplicationState(cycle, CATALOG_AS_OF))
+    ))
+
+    expect(quarantinedCycles.length).toBeGreaterThan(0)
+    expect(quarantinedCycles.every((cycle) => !publishedCycleIds.has(cycle.id))).toBe(true)
+    expect(actionableCycles.length).toBeGreaterThan(0)
   })
 
   it('publishes only records whose related entities remain public', () => {

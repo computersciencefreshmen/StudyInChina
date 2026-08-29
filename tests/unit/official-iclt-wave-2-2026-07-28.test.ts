@@ -41,16 +41,24 @@ describe('second official ICLT wave 2026-07-28', () => {
     }
   })
 
-  it('adds one program, one cycle and one scholarship per school route', () => {
+  it('retains one program, one cycle and one scholarship per school route with current freshness', () => {
     for (const key of keys) {
       const programId = `program-${key}`
-      expect(programs.find((item) => item.id === programId)?.status).toBe('verified')
-      expect(cycles.find((item) => item.programId === programId)?.closesOn)
-        .toBe('2026-10-31')
+      const isReverified = key === 'sisu-iclt-one-semester-spring-2027'
+      const expectedStatus = isReverified ? 'verified' : 'stale'
+      const expectedReviewAfter = isReverified ? '2026-09-01' : '2026-08-27'
+      const program = programs.find((item) => item.id === programId)
+      expect(program?.status).toBe(expectedStatus)
+      expect(program?.reviewAfter).toBe(expectedReviewAfter)
+      const cycle = cycles.find((item) => item.programId === programId)
+      expect(cycle?.status).toBe(expectedStatus)
+      expect(cycle?.reviewAfter).toBe(expectedReviewAfter)
+      expect(cycle?.closesOn).toBe('2026-10-31')
       const scholarship = scholarships.find(
         (item) => item.id === `scholarship-${key}`,
       )
-      expect(scholarship?.status).toBe('verified')
+      expect(scholarship?.status).toBe(expectedStatus)
+      expect(scholarship?.reviewAfter).toBe(expectedReviewAfter)
       expect(scholarship?.deadline).toBe('2026-10-31')
     }
   })

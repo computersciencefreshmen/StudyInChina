@@ -103,6 +103,7 @@ function applyMigrations(database: DatabaseSync): void {
     '0004_worker_runtime.sql',
     '0005_domain_throttle.sql',
     '0006_candidate_provenance_promotion.sql',
+    '0015_promotion_mapping_transforms.sql',
   ]) {
     database.exec(readFileSync(join(directory, name), 'utf8'))
   }
@@ -115,6 +116,11 @@ type SeedOptions = {
   critical: boolean
   withMapping: boolean
   fieldPath?: string
+  fieldType?: SourceManifestV1['extraction']['fields'][number]['type']
+  value?: unknown
+  canonicalFieldPath?: string
+  canonicalValueType?: 'url' | 'integer' | 'decimal_minor' | 'date' | 'json'
+  valueTransform?: 'identity' | 'major_to_minor_2'
 }
 
 async function seedCandidate(database: DatabaseSync, options: SeedOptions) {
@@ -123,10 +129,13 @@ async function seedCandidate(database: DatabaseSync, options: SeedOptions) {
   const recordId = `record-${options.candidateId}`
   const sourceDocumentId = `document-${options.candidateId}`
   const fieldPath = options.fieldPath ?? 'applicationUrl'
-  const value = `https://apply.example.edu.cn/${options.candidateId}`
+  const value = options.value ?? `https://apply.example.edu.cn/${options.candidateId}`
+  const fieldType = options.fieldType ?? 'string'
+  const canonicalFieldPath = options.canonicalFieldPath ?? 'admissions_url'
+  const canonicalValueType = options.canonicalValueType ?? 'url'
   const field = {
     path: fieldPath,
-    type: 'string' as const,
+    type: fieldType,
     required: true,
     critical: options.critical,
   }
@@ -181,10 +190,10 @@ async function seedCandidate(database: DatabaseSync, options: SeedOptions) {
      VALUES (?, ?, 'organization', 'validated', 1)`,
   ).run(recordId, recordId)
   database.prepare(
-    `INSERT OR IGNORE INTO field_definitions (
+    `INSERT INTO field_definitions (
        record_kind, field_path, value_type, risk_class, required_for_publish, max_age_days
-     ) VALUES ('organization', 'admissions_url', 'url', ?, 1, 30)`,
-  ).run(options.critical ? 'critical' : 'low')
+     ) VALUES ('organization', ?, ?, ?, 1, 30)`,
+  ).run(canonicalFieldPath, canonicalValueType, options.critical ? 'critical' : 'low')
   database.prepare(
     `INSERT INTO source_documents (
        id, public_id, canonical_url, source_kind, authority_level,
@@ -215,9 +224,17 @@ async function seedCandidate(database: DatabaseSync, options: SeedOptions) {
   if (options.withMapping) {
     database.prepare(
       `INSERT INTO promotion_field_mappings (
-         source_id, candidate_field_path, subject_record_id, canonical_field_path
-       ) VALUES (?, ?, ?, 'admissions_url')`,
-    ).run(sourceId, fieldPath, recordId)
+         source_id, candidate_field_path, subject_record_id,
+         canonical_field_path
+       ) VALUES (?, ?, ?, ?)`,
+    ).run(sourceId, fieldPath, recordId, canonicalFieldPath)
+    if (options.valueTransform) {
+      database.prepare(
+        `INSERT INTO promotion_field_mapping_transforms (
+           source_id, candidate_field_path, value_transform
+         ) VALUES (?, ?, ?)`,
+      ).run(sourceId, fieldPath, options.valueTransform)
+    }
   }
   database.prepare(
     `INSERT INTO ingestion_candidates (
@@ -465,6 +482,102 @@ test('a late publication error rolls back every canonical write before isolation
     assert.equal(sqlite.prepare(
       `SELECT reason_code FROM promotion_isolations WHERE candidate_id = ?`,
     ).get(seeded.candidateId)?.reason_code, 'promotion_transaction_failed')
+  } finally {
+    sqlite.close()
+  }
+})
+
+test('converts a verified major-unit tuition value to canonical minor units', async () => {
+  const { sqlite, database } = fixture()
+  try {
+    const seeded = await seedCandidate(sqlite, {
+      candidateId: 'candidate-tuition-transform',
+      extractor: 'minimax-dual',
+      gateStatus: 'dual-pass',
+      critical: true,
+      withMapping: true,
+      fieldPath: 'tuitionCny',
+      fieldType: 'money',
+      value: 30_000,
+      canonicalFieldPath: 'tuition_minor',
+      canonicalValueType: 'decimal_minor',
+      valueTransform: 'major_to_minor_2',
+    })
+    const result = await promoteCandidate(
+      database,
+      seeded.candidateId,
+      new Date('2026-07-20T01:00:00.000Z'),
+    )
+
+    assert.equal(result.status, 'applied')
+    assert.deepEqual({ ...sqlite.prepare(
+      `SELECT raw_value_text, normalized_value_json
+         FROM claims WHERE subject_record_id = ?`,
+    ).get(seeded.recordId) }, {
+      raw_value_text: '30000',
+      normalized_value_json: '3000000',
+    })
+    const canonical = sqlite.prepare(
+      `SELECT value_json FROM canonical_fields WHERE subject_record_id = ?`,
+    ).get(seeded.recordId) as { value_json: string }
+    assert.equal(JSON.parse(canonical.value_json), 3_000_000)
+    const diff = JSON.parse((sqlite.prepare(
+      `SELECT diff_json FROM change_sets WHERE subject_record_id = ?`,
+    ).get(seeded.recordId) as { diff_json: string }).diff_json) as Array<Record<string, unknown>>
+    assert.deepEqual(diff.map((item) => ({
+      candidateValue: item.candidateValue,
+      value: item.value,
+      valueTransform: item.valueTransform,
+    })), [{
+      candidateValue: 30_000,
+      value: 3_000_000,
+      valueTransform: 'major_to_minor_2',
+    }])
+    assert.equal(sqlite.prepare(
+      `SELECT count(*) AS count FROM claim_evidence`,
+    ).get()?.count, 2)
+  } finally {
+    sqlite.close()
+  }
+})
+
+test('quarantines a major-unit amount that cannot be represented exactly', async () => {
+  const { sqlite, database } = fixture()
+  try {
+    const seeded = await seedCandidate(sqlite, {
+      candidateId: 'candidate-invalid-tuition-transform',
+      extractor: 'minimax-dual',
+      gateStatus: 'dual-pass',
+      critical: true,
+      withMapping: true,
+      fieldPath: 'tuitionCny',
+      fieldType: 'money',
+      value: 12.345,
+      canonicalFieldPath: 'tuition_minor',
+      canonicalValueType: 'decimal_minor',
+      valueTransform: 'major_to_minor_2',
+    })
+    const result = await promoteCandidate(
+      database,
+      seeded.candidateId,
+      new Date('2026-07-20T01:00:00.000Z'),
+    )
+
+    assert.equal(result.status, 'quarantined')
+    assert.equal(result.reasonCode, 'canonical_transform_invalid')
+    for (const table of [
+      'claims',
+      'canonical_fields',
+      'change_sets',
+      'record_versions',
+      'publication_jobs',
+      'outbox_events',
+    ]) {
+      assert.equal(sqlite.prepare(`SELECT count(*) AS count FROM ${table}`).get()?.count, 0)
+    }
+    assert.equal(sqlite.prepare(
+      `SELECT reason_code FROM promotion_isolations WHERE candidate_id = ?`,
+    ).get(seeded.candidateId)?.reason_code, 'canonical_transform_invalid')
   } finally {
     sqlite.close()
   }

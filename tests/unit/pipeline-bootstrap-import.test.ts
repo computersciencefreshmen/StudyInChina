@@ -54,6 +54,7 @@ describe('Pipeline stable-entity bootstrap', () => {
       enabledSources: enabledManifestSources,
       sourceBindings: enabledManifestSources,
       fieldMappings: 0,
+      fieldDefinitions: 46,
       excludedDraftPrograms: draftPrograms,
     })
     expect(bundle.universities.length).toBeGreaterThanOrEqual(120)
@@ -85,6 +86,20 @@ describe('Pipeline stable-entity bootstrap', () => {
       programs: 0,
       mappings: 0,
     })
+    expect(database.prepare(`
+      SELECT record_kind, field_path, value_type
+      FROM field_definitions
+      WHERE (record_kind = 'program' AND field_path = 'duration_unit')
+         OR (record_kind = 'application_route' AND field_path = 'route_type')
+         OR (record_kind = 'fee' AND field_path = 'amount_max_minor')
+         OR (record_kind = 'requirement' AND field_path = 'value_json')
+      ORDER BY record_kind, field_path
+    `).all()).toEqual([
+      { record_kind: 'application_route', field_path: 'route_type', value_type: 'string' },
+      { record_kind: 'fee', field_path: 'amount_max_minor', value_type: 'decimal_minor' },
+      { record_kind: 'program', field_path: 'duration_unit', value_type: 'string' },
+      { record_kind: 'requirement', field_path: 'value_json', value_type: 'json' },
+    ])
     expect(database.prepare(`
       SELECT COUNT(*) AS count
       FROM promotion_source_bindings
@@ -286,6 +301,17 @@ describe('Pipeline stable-entity bootstrap', () => {
     expect(script).toContain('"node_modules/wrangler/bin/wrangler.js"')
     expect(script).not.toContain('Get-Command node.exe')
     expect(script).not.toContain('wrangler.cmd')
+
+    const commandRunnerPath = join(
+      process.cwd(),
+      'scripts',
+      'cloudflare',
+      'execute-d1-command-file.mjs',
+    )
+    const commandRunner = readFileSync(commandRunnerPath, 'utf8')
+    expect(commandRunner).toContain('sql.length <= 24_000')
+    expect(commandRunner).toContain(": ['--file', absoluteSqlPath]")
+    expect(commandRunner).not.toContain('SQL command exceeds the safe Windows argument limit')
 
     const escapedScriptPath = scriptPath.replaceAll("'", "''")
     const parserScript = [

@@ -80,7 +80,7 @@ function tuitionLabel(cycle: AdmissionCycleRecord | null, locale: LaunchLocale, 
     month: messages.programs.tuitionMonth,
     other: messages.programs.tuitionOther,
   }
-  return `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${periods[cycle.tuitionPeriod || 'other']}${cycle.tuitionStatus === 'reference' ? ` · ${messages.programs.tuitionReference}` : ''}`
+  return `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${periods[cycle.tuitionPeriod || 'other']}`
 }
 
 function durationLabel(program: ProgramRecord, messages: Messages) {

@@ -5,10 +5,18 @@ import universities from '../../content/data/universities.json'
 import programs from '../../content/data/programs.json'
 import admissionCycles from '../../content/data/admission-cycles.json'
 import scholarships from '../../content/data/scholarships.json'
+import { getApplicationState } from '@/lib/data/admission'
+import { getTodayDate } from '@/lib/data/freshness'
 import { bundleSchema } from '@/lib/data/schema'
 import { selectPublishedData } from '@/lib/data/publication'
 
-const PUBLISHED_AS_OF = '2026-08-25'
+const PUBLISHED_AS_OF = getTodayDate()
+const ACTIONABLE_APPLICATION_STATES = new Set([
+  'open',
+  'upcoming',
+  'rolling',
+  'dates-published',
+])
 
 const content = bundleSchema.parse({
   sources,
@@ -30,10 +38,21 @@ describe('published content data', () => {
     expect(published.cities.length).toBeGreaterThanOrEqual(35)
     expect(published.universities.length).toBeGreaterThanOrEqual(119)
     expect(published.programs.length).toBeGreaterThanOrEqual(240)
-    expect(published.admissionCycles.length).toBeGreaterThanOrEqual(30)
     expect(published.programs.filter(
       (program) => program.verificationScope === 'identity' || program.verificationScope === 'facts',
     ).length).toBeGreaterThanOrEqual(240)
+
+    const publishedCycleIds = new Set(published.admissionCycles.map((cycle) => cycle.id))
+    const quarantinedCycles = content.admissionCycles.filter(
+      (cycle) => cycle.status === 'stale' || cycle.reviewAfter < PUBLISHED_AS_OF,
+    )
+    const actionableCycles = published.admissionCycles.filter((cycle) => (
+      ACTIONABLE_APPLICATION_STATES.has(getApplicationState(cycle, PUBLISHED_AS_OF))
+    ))
+
+    expect(quarantinedCycles.length).toBeGreaterThan(0)
+    expect(quarantinedCycles.every((cycle) => !publishedCycleIds.has(cycle.id))).toBe(true)
+    expect(actionableCycles.length).toBeGreaterThan(0)
   })
 
   it('separates verified identities from complete program and cycle facts', () => {

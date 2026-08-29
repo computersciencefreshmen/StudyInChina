@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import UniversityDetailPage, {
   generateMetadata as generateUniversityMetadata,
@@ -12,6 +12,10 @@ import { providerLabel } from '@/lib/data/scholarship'
 const ALIAS_SLUG = 'beijing-language-university'
 const CANONICAL_SLUG = 'beijing-language-and-culture-university'
 const SCHOLARSHIP_SLUG = 'blcu-beijing-international-students-2027'
+
+afterEach(() => {
+  vi.useRealTimers()
+})
 
 describe('detail-page canonical and locale hardening', () => {
   it('uses the canonical university slug for canonical, hreflang and x-default metadata', async () => {
@@ -51,6 +55,9 @@ describe('detail-page canonical and locale hardening', () => {
   }, 15_000)
 
   it('renders the scholarship source status as localized copy, never as a raw enum', async () => {
+    vi.useFakeTimers()
+    vi.setSystemTime(new Date('2026-08-26T12:00:00+08:00'))
+
     for (const locale of launchLocales) {
       const page = await ScholarshipDetail({
         params: Promise.resolve({ locale, slug: SCHOLARSHIP_SLUG }),
@@ -59,7 +66,7 @@ describe('detail-page canonical and locale hardening', () => {
       const badgeLabels = [...container.querySelectorAll('.atlas-badge')]
         .map((badge) => badge.textContent?.trim())
 
-      expect(badgeLabels).toContain(getMessages(locale).common.verified)
+      expect(badgeLabels).toContain(getMessages(locale).common.stale)
       expect(badgeLabels).not.toContain('verified')
       expect(badgeLabels).not.toContain('stale')
       unmount()

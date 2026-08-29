@@ -25,7 +25,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "sourceIds": [
@@ -822,7 +822,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-southern-university-of-science-and-technology-physics-bachelor",
     "slug": "southern-university-of-science-and-technology-physics-bachelor",
     "universityId": "uni-southern-university-of-science-and-technology",
@@ -849,7 +849,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-southern-university-of-science-and-technology-materials-science-master",
     "slug": "southern-university-of-science-and-technology-materials-science-master",
     "universityId": "uni-southern-university-of-science-and-technology",
@@ -1170,7 +1170,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-university-chinese-language-program-language",
     "slug": "nanjing-university-long-term-chinese-language-program",
     "universityId": "uni-nanjing-university",
@@ -1267,11 +1267,12 @@
   },
   {
     "sourceIds": [
-      "src-uni-southwest-university"
+      "src-uni-southwest-university",
+      "swu-education-live"
     ],
-    "verifiedAt": "2026-07-16",
-    "reviewAfter": "2026-10-01",
-    "status": "draft",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
+    "status": "verified",
     "id": "program-southwest-university-education-bachelor",
     "slug": "southwest-university-education-bachelor",
     "universityId": "uni-southwest-university",
@@ -1283,20 +1284,23 @@
     "degreeLevel": "bachelor",
     "discipline": "chinese-education",
     "teachingLanguages": [
-      "To be confirmed"
+      "Chinese"
     ],
-    "durationMonths": null,
-    "programUrl": "https://admissions.swu.edu.cn/",
-    "applyUrl": "https://admissions.swu.edu.cn/",
-    "languageRequirements": []
+    "durationMonths": 48,
+    "programUrl": "https://admissions.swu.edu.cn/Degree_Programs/Undergraduate/Education.htm",
+    "applyUrl": "https://swu.17gz.org/member/login.do",
+    "languageRequirements": [],
+    "durationMonthsMax": null,
+    "verificationScope": "facts"
   },
   {
     "sourceIds": [
-      "src-uni-southwest-university"
+      "src-uni-southwest-university",
+      "swu-engineering-live"
     ],
-    "verifiedAt": "2026-07-16",
-    "reviewAfter": "2026-10-01",
-    "status": "draft",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
+    "status": "verified",
     "id": "program-southwest-university-environmental-science-master",
     "slug": "southwest-university-environmental-science-master",
     "universityId": "uni-southwest-university",
@@ -1308,12 +1312,15 @@
     "degreeLevel": "master",
     "discipline": "science",
     "teachingLanguages": [
-      "To be confirmed"
+      "Chinese",
+      "English"
     ],
-    "durationMonths": null,
-    "programUrl": "https://admissions.swu.edu.cn/",
-    "applyUrl": "https://admissions.swu.edu.cn/",
-    "languageRequirements": []
+    "durationMonths": 36,
+    "programUrl": "https://admissions.swu.edu.cn/Degree_Programs/Postgraduate/Engineering.htm",
+    "applyUrl": "https://swu.17gz.org/member/login.do",
+    "languageRequirements": [],
+    "durationMonthsMax": null,
+    "verificationScope": "facts"
   },
   {
     "sourceIds": [
@@ -1500,7 +1507,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-institute-of-technology-computer-science-and-technology-master",
     "slug": "beijing-institute-of-technology-computer-science-and-technology-master",
     "universityId": "uni-beijing-institute-of-technology",
@@ -1631,7 +1638,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-university-of-chinese-medicine-traditional-chinese-medicine-bach",
     "slug": "beijing-university-of-chinese-medicine-traditional-chinese-medicine-bach",
     "universityId": "uni-beijing-university-of-chinese-medicine",
@@ -1679,11 +1686,12 @@
   },
   {
     "sourceIds": [
-      "src-program-review-3f6ff1580cd5"
+      "src-program-review-3f6ff1580cd5",
+      "bfsu-undergraduate-2026"
     ],
-    "verifiedAt": "2026-07-26",
-    "reviewAfter": "2026-08-25",
-    "status": "stale",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
+    "status": "verified",
     "id": "program-beijing-foreign-studies-university-finance-bachelor",
     "slug": "beijing-foreign-studies-university-finance-bachelor",
     "universityId": "uni-beijing-foreign-studies-university",
@@ -1697,11 +1705,17 @@
     "teachingLanguages": [
       "English"
     ],
-    "durationMonths": null,
+    "durationMonths": 48,
     "programUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
-    "applyUrl": "https://osao.bfsu.edu.cn/Academics/Admissions_Brochure.htm",
-    "languageRequirements": [],
-    "verificationScope": "identity"
+    "applyUrl": "https://study.bfsu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "major-specific English proof"
+      }
+    ],
+    "verificationScope": "facts",
+    "durationMonthsMax": null
   },
   {
     "sourceIds": [
@@ -1787,7 +1801,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-foreign-affairs-university-international-relations-master",
     "slug": "china-foreign-affairs-university-international-relations-master",
     "universityId": "uni-china-foreign-affairs-university",
@@ -1813,7 +1827,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-sport-university-physical-education-bachelor",
     "slug": "beijing-sport-university-physical-education-bachelor",
     "universityId": "uni-beijing-sport-university",
@@ -1839,7 +1853,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-central-conservatory-of-music-musicology-bachelor",
     "slug": "central-conservatory-of-music-musicology-bachelor",
     "universityId": "uni-central-conservatory-of-music",
@@ -1865,7 +1879,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-conservatory-of-music-musicology-bachelor",
     "slug": "china-conservatory-of-music-musicology-bachelor",
     "universityId": "uni-china-conservatory-of-music",
@@ -1917,7 +1931,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-university-of-political-science-and-law-chinese-law-master",
     "slug": "china-university-of-political-science-and-law-chinese-law-master",
     "universityId": "uni-china-university-of-political-science-and-law",
@@ -1970,7 +1984,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-tianjin-university-one-semester-chinese-language-study-spring-language",
     "slug": "tianjin-university-one-semester-chinese-language-study-spring-language",
     "universityId": "uni-tianjin-university",
@@ -2003,7 +2017,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-tiangong-university-materials-science-and-engineering-bachelor",
     "slug": "tiangong-university-materials-science-and-engineering-bachelor",
     "universityId": "uni-tiangong-university",
@@ -2030,7 +2044,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-tianjin-university-of-traditional-chinese-medicine-traditional-chinese-m",
     "slug": "tianjin-university-of-traditional-chinese-medicine-traditional-chinese-m",
     "universityId": "uni-tianjin-university-of-traditional-chinese-medicine",
@@ -2056,7 +2070,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-north-china-electric-power-university-electrical-engineering-and-its-aut",
     "slug": "north-china-electric-power-university-electrical-engineering-and-its-aut",
     "universityId": "uni-north-china-electric-power-university",
@@ -2082,7 +2096,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hebei-university-of-technology-electrical-engineering-master",
     "slug": "hebei-university-of-technology-electrical-engineering-master",
     "universityId": "uni-hebei-university-of-technology",
@@ -2108,7 +2122,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanxi-university-international-economics-and-trade-bachelor",
     "slug": "shanxi-university-international-economics-and-trade-bachelor",
     "universityId": "uni-shanxi-university",
@@ -2134,7 +2148,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-taiyuan-university-of-technology-computer-science-and-technology-bachelo",
     "slug": "taiyuan-university-of-technology-computer-science-and-technology-bachelo",
     "universityId": "uni-taiyuan-university-of-technology",
@@ -2160,7 +2174,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-inner-mongolia-university-one-semester-study-program-chinese-medicine-an",
     "slug": "inner-mongolia-university-one-semester-study-program-chinese-medicine-an",
     "universityId": "uni-inner-mongolia-university",
@@ -2186,7 +2200,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-liaoning-university-long-term-chinese-language-study-program-language",
     "slug": "liaoning-university-long-term-chinese-language-study-program-language",
     "universityId": "uni-liaoning-university",
@@ -2238,7 +2252,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-northeastern-university-china-chinese-language-bachelor",
     "slug": "northeastern-university-china-chinese-language-bachelor",
     "universityId": "uni-northeastern-university-china",
@@ -2264,7 +2278,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-dalian-maritime-university-chinese-language-program-language",
     "slug": "dalian-maritime-university-chinese-language-program-language",
     "universityId": "uni-dalian-maritime-university",
@@ -2290,7 +2304,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-jilin-university-clinical-medicine-mbbs-bachelor",
     "slug": "jilin-university-clinical-medicine-mbbs-bachelor",
     "universityId": "uni-jilin-university",
@@ -2316,7 +2330,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-yanbian-university-chinese-language-bachelor",
     "slug": "yanbian-university-chinese-language-bachelor",
     "universityId": "uni-yanbian-university",
@@ -2389,7 +2403,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-harbin-engineering-university-artificial-intelligence-bachelor",
     "slug": "harbin-engineering-university-artificial-intelligence-bachelor",
     "universityId": "uni-harbin-engineering-university",
@@ -2416,7 +2430,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-northeast-agricultural-university-clinical-veterinary-medicine-doctorate",
     "slug": "northeast-agricultural-university-clinical-veterinary-medicine-doctorate",
     "universityId": "uni-northeast-agricultural-university",
@@ -2442,7 +2456,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-northeast-forestry-university-international-economics-and-trade-bachelor",
     "slug": "northeast-forestry-university-international-economics-and-trade-bachelor",
     "universityId": "uni-northeast-forestry-university",
@@ -2465,7 +2479,8 @@
   },
   {
     "sourceIds": [
-      "src-program-review-14da1477a841"
+      "src-program-review-14da1477a841",
+      "fudan-cebp-2026"
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
@@ -2521,7 +2536,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-east-china-university-of-science-and-technology-chemical-engineering-and",
     "slug": "east-china-university-of-science-and-technology-chemical-engineering-and",
     "universityId": "uni-east-china-university-of-science-and-technology",
@@ -2547,7 +2562,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-donghua-university-fashion-design-and-engineering-master",
     "slug": "donghua-university-fashion-design-and-engineering-master",
     "universityId": "uni-donghua-university",
@@ -2573,7 +2588,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-ocean-university-aquaculture-bachelor",
     "slug": "shanghai-ocean-university-aquaculture-bachelor",
     "universityId": "uni-shanghai-ocean-university",
@@ -2599,7 +2614,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-university-of-traditional-chinese-medicine-traditional-chinese-",
     "slug": "shanghai-university-of-traditional-chinese-medicine-traditional-chinese-",
     "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
@@ -2625,7 +2640,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-east-china-normal-university-business-chinese-language-program-language",
     "slug": "east-china-normal-university-business-chinese-language-program-language",
     "universityId": "uni-east-china-normal-university",
@@ -2686,7 +2701,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-university-of-finance-and-economics-international-economics-and",
     "slug": "shanghai-university-of-finance-and-economics-international-economics-and",
     "universityId": "uni-shanghai-university-of-finance-and-economics",
@@ -2712,7 +2727,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-university-of-sport-sport-management-master",
     "slug": "shanghai-university-of-sport-sport-management-master",
     "universityId": "uni-shanghai-university-of-sport",
@@ -2738,7 +2753,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-conservatory-of-music-composition-bachelor",
     "slug": "shanghai-conservatory-of-music-composition-bachelor",
     "universityId": "uni-shanghai-conservatory-of-music",
@@ -2760,7 +2775,8 @@
   },
   {
     "sourceIds": [
-      "src-program-review-ab7de1ce70b4"
+      "src-program-review-ab7de1ce70b4",
+      "shu-business-chinese-2026"
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
@@ -2873,7 +2889,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-university-of-aeronautics-and-astronautics-international-busines",
     "slug": "nanjing-university-of-aeronautics-and-astronautics-international-busines",
     "universityId": "uni-nanjing-university-of-aeronautics-and-astronautics",
@@ -2899,7 +2915,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-university-of-science-and-technology-mechanical-engineering-mast",
     "slug": "nanjing-university-of-science-and-technology-mechanical-engineering-mast",
     "universityId": "uni-nanjing-university-of-science-and-technology",
@@ -2925,7 +2941,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-university-of-mining-and-technology-mechanical-engineering-bachelo",
     "slug": "china-university-of-mining-and-technology-mechanical-engineering-bachelo",
     "universityId": "uni-china-university-of-mining-and-technology",
@@ -2951,7 +2967,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-university-of-posts-and-telecommunications-information-and-commu",
     "slug": "nanjing-university-of-posts-and-telecommunications-information-and-commu",
     "universityId": "uni-nanjing-university-of-posts-and-telecommunications",
@@ -2977,7 +2993,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hohai-university-civil-engineering-master",
     "slug": "hohai-university-civil-engineering-master",
     "universityId": "uni-hohai-university",
@@ -3003,7 +3019,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-jiangnan-university-industrial-design-bachelor",
     "slug": "jiangnan-university-industrial-design-bachelor",
     "universityId": "uni-jiangnan-university",
@@ -3029,7 +3045,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-forestry-university-forestry-bachelor",
     "slug": "nanjing-forestry-university-forestry-bachelor",
     "universityId": "uni-nanjing-forestry-university",
@@ -3055,7 +3071,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-university-of-information-science-and-technology-atmospheric-sci",
     "slug": "nanjing-university-of-information-science-and-technology-atmospheric-sci",
     "universityId": "uni-nanjing-university-of-information-science-and-technology",
@@ -3081,7 +3097,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-agricultural-university-agronomy-bachelor",
     "slug": "nanjing-agricultural-university-agronomy-bachelor",
     "universityId": "uni-nanjing-agricultural-university",
@@ -3107,7 +3123,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-medical-university-clinical-medicine-mbbs-bachelor",
     "slug": "nanjing-medical-university-clinical-medicine-mbbs-bachelor",
     "universityId": "uni-nanjing-medical-university",
@@ -3133,7 +3149,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-university-of-chinese-medicine-traditional-chinese-medicine-bach",
     "slug": "nanjing-university-of-chinese-medicine-traditional-chinese-medicine-bach",
     "universityId": "uni-nanjing-university-of-chinese-medicine",
@@ -3159,7 +3175,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-pharmaceutical-university-clinical-pharmacy-bachelor",
     "slug": "china-pharmaceutical-university-clinical-pharmacy-bachelor",
     "universityId": "uni-china-pharmaceutical-university",
@@ -3211,7 +3227,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-academy-of-art-fine-arts-master",
     "slug": "china-academy-of-art-fine-arts-master",
     "universityId": "uni-china-academy-of-art",
@@ -3267,7 +3283,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-university-of-science-and-technology-of-china-chemistry-bachelor",
     "slug": "university-of-science-and-technology-of-china-chemistry-bachelor",
     "universityId": "uni-university-of-science-and-technology-of-china",
@@ -3293,7 +3309,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hefei-university-of-technology-mechanical-engineering-master",
     "slug": "hefei-university-of-technology-mechanical-engineering-master",
     "universityId": "uni-hefei-university-of-technology",
@@ -3315,11 +3331,12 @@
   },
   {
     "sourceIds": [
-      "src-program-review-74f5c9a7aa22"
+      "src-program-review-74f5c9a7aa22",
+      "xmu-costs-live"
     ],
-    "verifiedAt": "2026-07-26",
-    "reviewAfter": "2026-08-25",
-    "status": "stale",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
+    "status": "verified",
     "id": "program-xiamen-university-digital-media-art-bachelor",
     "slug": "xiamen-university-digital-media-art-bachelor",
     "universityId": "uni-xiamen-university",
@@ -3333,11 +3350,12 @@
     "teachingLanguages": [
       "English"
     ],
-    "durationMonths": null,
-    "programUrl": "https://admissions.xmu.edu.cn/Programs/English_Medium_Bachelor_s.htm",
-    "applyUrl": "https://admissions.xmu.edu.cn/Admissions/Undergraduate_Students.htm",
+    "durationMonths": 48,
+    "programUrl": "https://admissions.xmu.edu.cn/Admissions/Costs.htm",
+    "applyUrl": "https://application.xmu.edu.cn/",
     "languageRequirements": [],
-    "verificationScope": "identity"
+    "verificationScope": "facts",
+    "durationMonthsMax": null
   },
   {
     "sourceIds": [
@@ -3345,7 +3363,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-fuzhou-university-engineering-mechanics-master",
     "slug": "fuzhou-university-engineering-mechanics-master",
     "universityId": "uni-fuzhou-university",
@@ -3371,7 +3389,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanchang-university-clinical-medicine-bachelor",
     "slug": "nanchang-university-clinical-medicine-bachelor",
     "universityId": "uni-nanchang-university",
@@ -3397,7 +3415,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shandong-university-clinical-medicine-bachelor",
     "slug": "shandong-university-clinical-medicine-bachelor",
     "universityId": "uni-shandong-university",
@@ -3423,7 +3441,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-ocean-university-of-china-china-international-business-program-master",
     "slug": "ocean-university-of-china-china-international-business-program-master",
     "universityId": "uni-ocean-university-of-china",
@@ -3452,7 +3470,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-university-of-petroleum-east-china-petroleum-engineering-bachelor",
     "slug": "china-university-of-petroleum-east-china-petroleum-engineering-bachelor",
     "universityId": "uni-china-university-of-petroleum-east-china",
@@ -3478,7 +3496,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-zhengzhou-university-international-trade-bachelor",
     "slug": "zhengzhou-university-international-trade-bachelor",
     "universityId": "uni-zhengzhou-university",
@@ -3504,7 +3522,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-henan-university-international-economics-and-trade-bachelor",
     "slug": "henan-university-international-economics-and-trade-bachelor",
     "universityId": "uni-henan-university",
@@ -3582,7 +3600,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-university-of-geosciences-wuhan-geological-resources-and-geologica",
     "slug": "china-university-of-geosciences-wuhan-geological-resources-and-geologica",
     "universityId": "uni-china-university-of-geosciences-wuhan",
@@ -3608,7 +3626,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-wuhan-university-of-technology-civil-engineering-master",
     "slug": "wuhan-university-of-technology-civil-engineering-master",
     "universityId": "uni-wuhan-university-of-technology",
@@ -3634,7 +3652,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-huazhong-agricultural-university-crop-cultivation-and-farming-system-mas",
     "slug": "huazhong-agricultural-university-crop-cultivation-and-farming-system-mas",
     "universityId": "uni-huazhong-agricultural-university",
@@ -3661,7 +3679,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-central-china-normal-university-general-chinese-language-program-languag",
     "slug": "central-china-normal-university-general-chinese-language-program-languag",
     "universityId": "uni-central-china-normal-university",
@@ -3687,7 +3705,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-zhongnan-university-of-economics-and-law-chinese-law-master",
     "slug": "zhongnan-university-of-economics-and-law-chinese-law-master",
     "universityId": "uni-zhongnan-university-of-economics-and-law",
@@ -3713,7 +3731,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-xiangtan-university-chinese-language-training-program-one-academic-year-",
     "slug": "xiangtan-university-chinese-language-training-program-one-academic-year-",
     "universityId": "uni-xiangtan-university",
@@ -3735,11 +3753,13 @@
   },
   {
     "sourceIds": [
-      "src-program-review-626c7c1ccf2a"
+      "src-program-review-626c7c1ccf2a",
+      "hnu-csc-postgraduate-2026",
+      "hnu-self-financed-2025"
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hunan-university-business-administration-master",
     "slug": "hunan-university-business-administration-master",
     "universityId": "uni-hunan-university",
@@ -3765,7 +3785,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-central-south-university-civil-engineering-bachelor",
     "slug": "central-south-university-civil-engineering-bachelor",
     "universityId": "uni-central-south-university",
@@ -3791,7 +3811,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hunan-normal-university-business-administration-bachelor",
     "slug": "hunan-normal-university-business-administration-bachelor",
     "universityId": "uni-hunan-normal-university",
@@ -3883,7 +3903,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-south-china-university-of-technology-general-chinese-program-language",
     "slug": "south-china-university-of-technology-general-chinese-program-language",
     "universityId": "uni-south-china-university-of-technology",
@@ -3909,7 +3929,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-south-china-agricultural-university-soil-science-master",
     "slug": "south-china-agricultural-university-soil-science-master",
     "universityId": "uni-south-china-agricultural-university",
@@ -3936,7 +3956,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-guangzhou-medical-university-clinical-medicine-mbbs-bachelor",
     "slug": "guangzhou-medical-university-clinical-medicine-mbbs-bachelor",
     "universityId": "uni-guangzhou-medical-university",
@@ -3962,7 +3982,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-south-china-normal-university-human-resource-management-bachelor",
     "slug": "south-china-normal-university-human-resource-management-bachelor",
     "universityId": "uni-south-china-normal-university",
@@ -3988,7 +4008,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hainan-university-crop-science-master",
     "slug": "hainan-university-crop-science-master",
     "universityId": "uni-hainan-university",
@@ -4014,7 +4034,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-guangxi-university-electrical-engineering-master",
     "slug": "guangxi-university-electrical-engineering-master",
     "universityId": "uni-guangxi-university",
@@ -4110,7 +4130,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-southwest-jiaotong-university-traffic-and-transportation-bachelor",
     "slug": "southwest-jiaotong-university-traffic-and-transportation-bachelor",
     "universityId": "uni-southwest-jiaotong-university",
@@ -4163,7 +4183,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-southwestern-university-of-finance-and-economics-international-business-",
     "slug": "southwestern-university-of-finance-and-economics-international-business-",
     "universityId": "uni-southwestern-university-of-finance-and-economics",
@@ -4246,7 +4266,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-xidian-university-information-and-communication-engineering-master",
     "slug": "xidian-university-information-and-communication-engineering-master",
     "universityId": "uni-xidian-university",
@@ -4377,7 +4397,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-university-of-technology-international-economics-and-trade-bache",
     "slug": "beijing-university-of-technology-international-economics-and-trade-bache",
     "universityId": "uni-beijing-university-of-technology",
@@ -4429,7 +4449,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-institute-of-technology-mechanical-engineering-master",
     "slug": "beijing-institute-of-technology-mechanical-engineering-master",
     "universityId": "uni-beijing-institute-of-technology",
@@ -4534,7 +4554,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-university-of-chinese-medicine-traditional-chinese-orthopedics-a",
     "slug": "beijing-university-of-chinese-medicine-traditional-chinese-orthopedics-a",
     "universityId": "uni-beijing-university-of-chinese-medicine",
@@ -4582,11 +4602,12 @@
   },
   {
     "sourceIds": [
-      "src-program-review-3f6ff1580cd5"
+      "src-program-review-3f6ff1580cd5",
+      "bfsu-undergraduate-2026"
     ],
-    "verifiedAt": "2026-07-26",
-    "reviewAfter": "2026-08-25",
-    "status": "stale",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
+    "status": "verified",
     "id": "program-beijing-foreign-studies-university-international-business-bachelor",
     "slug": "beijing-foreign-studies-university-international-business-bachelor",
     "universityId": "uni-beijing-foreign-studies-university",
@@ -4600,11 +4621,17 @@
     "teachingLanguages": [
       "English"
     ],
-    "durationMonths": null,
+    "durationMonths": 48,
     "programUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
-    "applyUrl": "https://osao.bfsu.edu.cn/Academics/Admissions_Brochure.htm",
-    "languageRequirements": [],
-    "verificationScope": "identity"
+    "applyUrl": "https://study.bfsu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "major-specific English proof"
+      }
+    ],
+    "verificationScope": "facts",
+    "durationMonthsMax": null
   },
   {
     "sourceIds": [
@@ -4690,7 +4717,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-foreign-affairs-university-diplomacy-bachelor",
     "slug": "china-foreign-affairs-university-diplomacy-bachelor",
     "universityId": "uni-china-foreign-affairs-university",
@@ -4716,7 +4743,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-sport-university-sports-training-bachelor",
     "slug": "beijing-sport-university-sports-training-bachelor",
     "universityId": "uni-beijing-sport-university",
@@ -4742,7 +4769,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-central-conservatory-of-music-music-performance-bachelor",
     "slug": "central-conservatory-of-music-music-performance-bachelor",
     "universityId": "uni-central-conservatory-of-music",
@@ -4768,7 +4795,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-conservatory-of-music-music-performance-bachelor",
     "slug": "china-conservatory-of-music-music-performance-bachelor",
     "universityId": "uni-china-conservatory-of-music",
@@ -4820,7 +4847,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-university-of-political-science-and-law-comparative-law-master",
     "slug": "china-university-of-political-science-and-law-comparative-law-master",
     "universityId": "uni-china-university-of-political-science-and-law",
@@ -4872,7 +4899,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-tiangong-university-textile-engineering-bachelor",
     "slug": "tiangong-university-textile-engineering-bachelor",
     "universityId": "uni-tiangong-university",
@@ -4898,7 +4925,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-tianjin-university-of-traditional-chinese-medicine-acupuncture-moxibusti",
     "slug": "tianjin-university-of-traditional-chinese-medicine-acupuncture-moxibusti",
     "universityId": "uni-tianjin-university-of-traditional-chinese-medicine",
@@ -4924,7 +4951,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-north-china-electric-power-university-energy-and-power-engineering-bache",
     "slug": "north-china-electric-power-university-energy-and-power-engineering-bache",
     "universityId": "uni-north-china-electric-power-university",
@@ -4950,7 +4977,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hebei-university-of-technology-information-and-communication-engineering",
     "slug": "hebei-university-of-technology-information-and-communication-engineering",
     "universityId": "uni-hebei-university-of-technology",
@@ -4976,7 +5003,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanxi-university-computer-science-and-technology-bachelor",
     "slug": "shanxi-university-computer-science-and-technology-bachelor",
     "universityId": "uni-shanxi-university",
@@ -5002,7 +5029,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-taiyuan-university-of-technology-international-economics-and-trade-bache",
     "slug": "taiyuan-university-of-technology-international-economics-and-trade-bache",
     "universityId": "uni-taiyuan-university-of-technology",
@@ -5028,7 +5055,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-inner-mongolia-university-one-semester-study-program-international-chine",
     "slug": "inner-mongolia-university-one-semester-study-program-international-chine",
     "universityId": "uni-inner-mongolia-university",
@@ -5080,7 +5107,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-northeastern-university-china-software-engineering-bachelor",
     "slug": "northeastern-university-china-software-engineering-bachelor",
     "universityId": "uni-northeastern-university-china",
@@ -5106,7 +5133,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-jilin-university-vehicle-engineering-bachelor",
     "slug": "jilin-university-vehicle-engineering-bachelor",
     "universityId": "uni-jilin-university",
@@ -5132,7 +5159,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-yanbian-university-chinese-language-study-program-language",
     "slug": "yanbian-university-chinese-language-study-program-language",
     "universityId": "uni-yanbian-university",
@@ -5205,7 +5232,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-harbin-engineering-university-civil-engineering-double-degree-bachelor",
     "slug": "harbin-engineering-university-civil-engineering-double-degree-bachelor",
     "universityId": "uni-harbin-engineering-university",
@@ -5233,7 +5260,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-northeast-agricultural-university-food-science-doctorate",
     "slug": "northeast-agricultural-university-food-science-doctorate",
     "universityId": "uni-northeast-agricultural-university",
@@ -5260,7 +5287,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-northeast-forestry-university-forestry-bachelor",
     "slug": "northeast-forestry-university-forestry-bachelor",
     "universityId": "uni-northeast-forestry-university",
@@ -5338,7 +5365,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-jiao-tong-university-civil-engineering-smart-and-sustainable-co",
     "slug": "shanghai-jiao-tong-university-civil-engineering-smart-and-sustainable-co",
     "universityId": "uni-shanghai-jiao-tong-university",
@@ -5364,7 +5391,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-east-china-university-of-science-and-technology-inorganic-chemistry-mast",
     "slug": "east-china-university-of-science-and-technology-inorganic-chemistry-mast",
     "universityId": "uni-east-china-university-of-science-and-technology",
@@ -5390,7 +5417,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-donghua-university-management-science-and-engineering-master",
     "slug": "donghua-university-management-science-and-engineering-master",
     "universityId": "uni-donghua-university",
@@ -5416,7 +5443,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-ocean-university-marine-science-bachelor",
     "slug": "shanghai-ocean-university-marine-science-bachelor",
     "universityId": "uni-shanghai-ocean-university",
@@ -5442,7 +5469,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-university-of-traditional-chinese-medicine-chinese-materia-medi",
     "slug": "shanghai-university-of-traditional-chinese-medicine-chinese-materia-medi",
     "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
@@ -5468,7 +5495,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-east-china-normal-university-intensive-chinese-language-program-language",
     "slug": "east-china-normal-university-intensive-chinese-language-program-language",
     "universityId": "uni-east-china-normal-university",
@@ -5533,7 +5560,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-university-of-finance-and-economics-finance-bachelor",
     "slug": "shanghai-university-of-finance-and-economics-finance-bachelor",
     "universityId": "uni-shanghai-university-of-finance-and-economics",
@@ -5559,7 +5586,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-university-of-sport-journalism-and-communication-master",
     "slug": "shanghai-university-of-sport-journalism-and-communication-master",
     "universityId": "uni-shanghai-university-of-sport",
@@ -5585,7 +5612,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-conservatory-of-music-vocal-performance-bachelor",
     "slug": "shanghai-conservatory-of-music-vocal-performance-bachelor",
     "universityId": "uni-shanghai-conservatory-of-music",
@@ -5607,7 +5634,8 @@
   },
   {
     "sourceIds": [
-      "src-program-review-512621438a07"
+      "src-program-review-512621438a07",
+      "shu-one-year-chinese-2026"
     ],
     "verifiedAt": "2026-07-26",
     "reviewAfter": "2026-08-25",
@@ -5637,7 +5665,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-university-master-of-resources-and-environment-smart-environment",
     "slug": "nanjing-university-master-of-resources-and-environment-smart-environment",
     "universityId": "uni-nanjing-university",
@@ -5689,7 +5717,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-university-of-aeronautics-and-astronautics-aerospace-engineering",
     "slug": "nanjing-university-of-aeronautics-and-astronautics-aerospace-engineering",
     "universityId": "uni-nanjing-university-of-aeronautics-and-astronautics",
@@ -5715,7 +5743,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-university-of-science-and-technology-computer-science-and-techno",
     "slug": "nanjing-university-of-science-and-technology-computer-science-and-techno",
     "universityId": "uni-nanjing-university-of-science-and-technology",
@@ -5741,7 +5769,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-university-of-mining-and-technology-mining-engineering-bachelor",
     "slug": "china-university-of-mining-and-technology-mining-engineering-bachelor",
     "universityId": "uni-china-university-of-mining-and-technology",
@@ -5767,7 +5795,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-university-of-posts-and-telecommunications-computer-science-and-",
     "slug": "nanjing-university-of-posts-and-telecommunications-computer-science-and-",
     "universityId": "uni-nanjing-university-of-posts-and-telecommunications",
@@ -5793,7 +5821,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hohai-university-hydraulic-engineering-master",
     "slug": "hohai-university-hydraulic-engineering-master",
     "universityId": "uni-hohai-university",
@@ -5819,7 +5847,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-jiangnan-university-food-science-and-engineering-bachelor",
     "slug": "jiangnan-university-food-science-and-engineering-bachelor",
     "universityId": "uni-jiangnan-university",
@@ -5845,7 +5873,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-forestry-university-landscape-architecture-bachelor",
     "slug": "nanjing-forestry-university-landscape-architecture-bachelor",
     "universityId": "uni-nanjing-forestry-university",
@@ -5871,7 +5899,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-university-of-information-science-and-technology-computer-scienc",
     "slug": "nanjing-university-of-information-science-and-technology-computer-scienc",
     "universityId": "uni-nanjing-university-of-information-science-and-technology",
@@ -5897,7 +5925,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-agricultural-university-plant-protection-bachelor",
     "slug": "nanjing-agricultural-university-plant-protection-bachelor",
     "universityId": "uni-nanjing-agricultural-university",
@@ -5923,7 +5951,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-medical-university-public-health-and-preventive-medicine-master",
     "slug": "nanjing-medical-university-public-health-and-preventive-medicine-master",
     "universityId": "uni-nanjing-medical-university",
@@ -5949,7 +5977,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-university-of-chinese-medicine-acupuncture-moxibustion-and-tuina",
     "slug": "nanjing-university-of-chinese-medicine-acupuncture-moxibustion-and-tuina",
     "universityId": "uni-nanjing-university-of-chinese-medicine",
@@ -5975,7 +6003,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-pharmaceutical-university-pharmacy-bachelor",
     "slug": "china-pharmaceutical-university-pharmacy-bachelor",
     "universityId": "uni-china-pharmaceutical-university",
@@ -6027,7 +6055,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-academy-of-art-design-master",
     "slug": "china-academy-of-art-design-master",
     "universityId": "uni-china-academy-of-art",
@@ -6083,7 +6111,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-university-of-science-and-technology-of-china-physics-bachelor",
     "slug": "university-of-science-and-technology-of-china-physics-bachelor",
     "universityId": "uni-university-of-science-and-technology-of-china",
@@ -6109,7 +6137,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hefei-university-of-technology-computer-science-and-technology-master",
     "slug": "hefei-university-of-technology-computer-science-and-technology-master",
     "universityId": "uni-hefei-university-of-technology",
@@ -6131,11 +6159,12 @@
   },
   {
     "sourceIds": [
-      "src-program-review-74f5c9a7aa22"
+      "src-program-review-74f5c9a7aa22",
+      "xmu-costs-live"
     ],
-    "verifiedAt": "2026-07-26",
-    "reviewAfter": "2026-08-25",
-    "status": "stale",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
+    "status": "verified",
     "id": "program-xiamen-university-environmental-design-bachelor",
     "slug": "xiamen-university-environmental-design-bachelor",
     "universityId": "uni-xiamen-university",
@@ -6149,11 +6178,12 @@
     "teachingLanguages": [
       "English"
     ],
-    "durationMonths": null,
-    "programUrl": "https://admissions.xmu.edu.cn/Programs/English_Medium_Bachelor_s.htm",
-    "applyUrl": "https://admissions.xmu.edu.cn/Admissions/Undergraduate_Students.htm",
+    "durationMonths": 48,
+    "programUrl": "https://admissions.xmu.edu.cn/Admissions/Costs.htm",
+    "applyUrl": "https://application.xmu.edu.cn/",
     "languageRequirements": [],
-    "verificationScope": "identity"
+    "verificationScope": "facts",
+    "durationMonthsMax": null
   },
   {
     "sourceIds": [
@@ -6161,7 +6191,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-fuzhou-university-structural-engineering-master",
     "slug": "fuzhou-university-structural-engineering-master",
     "universityId": "uni-fuzhou-university",
@@ -6187,7 +6217,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanchang-university-chinese-language-bachelor",
     "slug": "nanchang-university-chinese-language-bachelor",
     "universityId": "uni-nanchang-university",
@@ -6213,7 +6243,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shandong-university-stomatology-bachelor",
     "slug": "shandong-university-stomatology-bachelor",
     "universityId": "uni-shandong-university",
@@ -6239,7 +6269,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-ocean-university-of-china-long-term-chinese-language-program-language",
     "slug": "ocean-university-of-china-long-term-chinese-language-program-language",
     "universityId": "uni-ocean-university-of-china",
@@ -6265,7 +6295,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-university-of-petroleum-east-china-resource-exploration-engineerin",
     "slug": "china-university-of-petroleum-east-china-resource-exploration-engineerin",
     "universityId": "uni-china-university-of-petroleum-east-china",
@@ -6291,7 +6321,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-zhengzhou-university-anesthesiology-bachelor",
     "slug": "zhengzhou-university-anesthesiology-bachelor",
     "universityId": "uni-zhengzhou-university",
@@ -6317,7 +6347,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-henan-university-chinese-language-bachelor",
     "slug": "henan-university-chinese-language-bachelor",
     "universityId": "uni-henan-university",
@@ -6395,7 +6425,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-china-university-of-geosciences-wuhan-environmental-science-and-engineer",
     "slug": "china-university-of-geosciences-wuhan-environmental-science-and-engineer",
     "universityId": "uni-china-university-of-geosciences-wuhan",
@@ -6421,7 +6451,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-wuhan-university-of-technology-applied-economics-master",
     "slug": "wuhan-university-of-technology-applied-economics-master",
     "universityId": "uni-wuhan-university-of-technology",
@@ -6447,7 +6477,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-huazhong-agricultural-university-animal-genetics-and-breeding-master",
     "slug": "huazhong-agricultural-university-animal-genetics-and-breeding-master",
     "universityId": "uni-huazhong-agricultural-university",
@@ -6474,7 +6504,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-central-china-normal-university-intensive-chinese-foundation-program-fou",
     "slug": "central-china-normal-university-intensive-chinese-foundation-program-fou",
     "universityId": "uni-central-china-normal-university",
@@ -6500,7 +6530,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-zhongnan-university-of-economics-and-law-finance-master",
     "slug": "zhongnan-university-of-economics-and-law-finance-master",
     "universityId": "uni-zhongnan-university-of-economics-and-law",
@@ -6526,7 +6556,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-xiangtan-university-chinese-language-training-program-one-semester-langu",
     "slug": "xiangtan-university-chinese-language-training-program-one-semester-langu",
     "universityId": "uni-xiangtan-university",
@@ -6548,11 +6578,13 @@
   },
   {
     "sourceIds": [
-      "src-program-review-626c7c1ccf2a"
+      "src-program-review-626c7c1ccf2a",
+      "hnu-csc-postgraduate-2026",
+      "hnu-self-financed-2025"
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hunan-university-applied-economics-master",
     "slug": "hunan-university-applied-economics-master",
     "universityId": "uni-hunan-university",
@@ -6578,7 +6610,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-central-south-university-mathematics-bachelor",
     "slug": "central-south-university-mathematics-bachelor",
     "universityId": "uni-central-south-university",
@@ -6604,7 +6636,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hunan-normal-university-chinese-language-bachelor",
     "slug": "hunan-normal-university-chinese-language-bachelor",
     "universityId": "uni-hunan-normal-university",
@@ -6696,7 +6728,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-south-china-university-of-technology-intensive-chinese-program-language",
     "slug": "south-china-university-of-technology-intensive-chinese-program-language",
     "universityId": "uni-south-china-university-of-technology",
@@ -6722,7 +6754,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-south-china-agricultural-university-food-science-and-engineering-master",
     "slug": "south-china-agricultural-university-food-science-and-engineering-master",
     "universityId": "uni-south-china-agricultural-university",
@@ -6749,7 +6781,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-guangzhou-medical-university-clinical-medicine-academic-master-s-master",
     "slug": "guangzhou-medical-university-clinical-medicine-academic-master-s-master",
     "universityId": "uni-guangzhou-medical-university",
@@ -6775,7 +6807,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hainan-university-hotel-management-bachelor",
     "slug": "hainan-university-hotel-management-bachelor",
     "universityId": "uni-hainan-university",
@@ -6801,7 +6833,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-guangxi-university-electrical-engineering-and-automation-bachelor",
     "slug": "guangxi-university-electrical-engineering-and-automation-bachelor",
     "universityId": "uni-guangxi-university",
@@ -6897,7 +6929,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-southwest-jiaotong-university-civil-engineering-bachelor",
     "slug": "southwest-jiaotong-university-civil-engineering-bachelor",
     "universityId": "uni-southwest-jiaotong-university",
@@ -6950,7 +6982,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-southwestern-university-of-finance-and-economics-finance-master",
     "slug": "southwestern-university-of-finance-and-economics-finance-master",
     "universityId": "uni-southwestern-university-of-finance-and-economics",
@@ -7033,7 +7065,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-xidian-university-electronic-science-and-technology-master",
     "slug": "xidian-university-electronic-science-and-technology-master",
     "universityId": "uni-xidian-university",
@@ -7269,7 +7301,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-beijing-university-of-chinese-medicine-acupuncture-and-tuina-bachelor",
     "slug": "beijing-university-of-chinese-medicine-acupuncture-and-tuina-bachelor",
     "universityId": "uni-beijing-university-of-chinese-medicine",
@@ -7317,11 +7349,12 @@
   },
   {
     "sourceIds": [
-      "src-program-review-3f6ff1580cd5"
+      "src-program-review-3f6ff1580cd5",
+      "bfsu-undergraduate-2026"
     ],
-    "verifiedAt": "2026-07-26",
-    "reviewAfter": "2026-08-25",
-    "status": "stale",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
+    "status": "verified",
     "id": "program-beijing-foreign-studies-university-international-trade-bachelor",
     "slug": "beijing-foreign-studies-university-international-trade-bachelor",
     "universityId": "uni-beijing-foreign-studies-university",
@@ -7335,11 +7368,17 @@
     "teachingLanguages": [
       "English"
     ],
-    "durationMonths": null,
+    "durationMonths": 48,
     "programUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
-    "applyUrl": "https://osao.bfsu.edu.cn/Academics/Admissions_Brochure.htm",
-    "languageRequirements": [],
-    "verificationScope": "identity"
+    "applyUrl": "https://study.bfsu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "other",
+        "minimum": "major-specific English proof"
+      }
+    ],
+    "verificationScope": "facts",
+    "durationMonthsMax": null
   },
   {
     "sourceIds": [
@@ -7477,7 +7516,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-harbin-engineering-university-computer-science-and-technology-bachelor",
     "slug": "harbin-engineering-university-computer-science-and-technology-bachelor",
     "universityId": "uni-harbin-engineering-university",
@@ -7500,11 +7539,12 @@
   },
   {
     "sourceIds": [
-      "src-program-review-00734e75ed5e"
+      "src-program-review-00734e75ed5e",
+      "fudan-icl-language-2026"
     ],
-    "verifiedAt": "2026-07-26",
-    "reviewAfter": "2026-08-25",
-    "status": "stale",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
+    "status": "verified",
     "id": "program-fudan-university-international-chinese-language-teachers-scholarship-one",
     "slug": "fudan-university-international-chinese-language-teachers-scholarship-one",
     "universityId": "uni-fudan-university",
@@ -7518,11 +7558,21 @@
     "teachingLanguages": [
       "Chinese"
     ],
-    "durationMonths": null,
+    "durationMonths": 5,
     "programUrl": "https://iso.fudan.edu.cn/_upload/article/files/ec/db/98f894064930aeeec752ae6440b4/c5ee1e57-ef19-4b80-824e-d52ce48a22b5.pdf",
-    "applyUrl": "https://iso.fudan.edu.cn/isoenglish/wonwwegree/list.htm",
-    "languageRequirements": [],
-    "verificationScope": "identity"
+    "applyUrl": "https://pmplatform.chinese.cn/ui/start/#/login",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 3, 180"
+      },
+      {
+        "test": "other",
+        "minimum": "HSKK required"
+      }
+    ],
+    "verificationScope": "facts",
+    "durationMonthsMax": null
   },
   {
     "sourceIds": [
@@ -7556,7 +7606,7 @@
     ],
     "verifiedAt": "2026-07-27",
     "reviewAfter": "2026-08-26",
-    "status": "verified",
+    "status": "stale",
     "id": "program-east-china-normal-university-standard-chinese-language-program-language",
     "slug": "east-china-normal-university-standard-chinese-language-program-language",
     "universityId": "uni-east-china-normal-university",
@@ -7682,11 +7732,12 @@
   },
   {
     "sourceIds": [
-      "src-program-review-74f5c9a7aa22"
+      "src-program-review-74f5c9a7aa22",
+      "xmu-costs-live"
     ],
-    "verifiedAt": "2026-07-26",
-    "reviewAfter": "2026-08-25",
-    "status": "stale",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
+    "status": "verified",
     "id": "program-xiamen-university-visual-communication-design-bachelor",
     "slug": "xiamen-university-visual-communication-design-bachelor",
     "universityId": "uni-xiamen-university",
@@ -7700,11 +7751,12 @@
     "teachingLanguages": [
       "English"
     ],
-    "durationMonths": null,
-    "programUrl": "https://admissions.xmu.edu.cn/Programs/English_Medium_Bachelor_s.htm",
-    "applyUrl": "https://admissions.xmu.edu.cn/Admissions/Undergraduate_Students.htm",
+    "durationMonths": 48,
+    "programUrl": "https://admissions.xmu.edu.cn/Admissions/Costs.htm",
+    "applyUrl": "https://application.xmu.edu.cn/",
     "languageRequirements": [],
-    "verificationScope": "identity"
+    "verificationScope": "facts",
+    "durationMonthsMax": null
   },
   {
     "sourceIds": [
@@ -8151,7 +8203,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-normal-university-human-geography-bachelor",
     "slug": "shanghai-normal-university-human-geography-bachelor",
     "universityId": "uni-shanghai-normal-university",
@@ -8177,7 +8229,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-normal-university-applied-chemistry-bachelor",
     "slug": "shanghai-normal-university-applied-chemistry-bachelor",
     "universityId": "uni-shanghai-normal-university",
@@ -8203,7 +8255,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-normal-university-mathematics-education-master",
     "slug": "shanghai-normal-university-mathematics-education-master",
     "universityId": "uni-shanghai-normal-university",
@@ -8229,7 +8281,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-normal-university-finance-master",
     "slug": "shanghai-normal-university-finance-master",
     "universityId": "uni-shanghai-normal-university",
@@ -8255,7 +8307,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-normal-university-iclt-one-semester-language",
     "slug": "shanghai-normal-university-iclt-one-semester-language",
     "universityId": "uni-shanghai-normal-university",
@@ -8286,7 +8338,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-xian-international-studies-university-regular-chinese-language",
     "slug": "xian-international-studies-university-regular-chinese-language",
     "universityId": "uni-xian-international-studies-university",
@@ -8312,7 +8364,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-xian-international-studies-university-new-sinology-translation-master",
     "slug": "xian-international-studies-university-new-sinology-translation-master",
     "universityId": "uni-xian-international-studies-university",
@@ -8341,7 +8393,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-wenzhou-medical-university-mbbs-bachelor",
     "slug": "wenzhou-medical-university-mbbs-bachelor",
     "universityId": "uni-wenzhou-medical-university",
@@ -8367,7 +8419,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-wenzhou-medical-university-bds-bachelor",
     "slug": "wenzhou-medical-university-bds-bachelor",
     "universityId": "uni-wenzhou-medical-university",
@@ -8393,7 +8445,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-wenzhou-medical-university-pharmaceutical-sciences-bachelor",
     "slug": "wenzhou-medical-university-pharmaceutical-sciences-bachelor",
     "universityId": "uni-wenzhou-medical-university",
@@ -8420,7 +8472,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-changan-university-transportation-engineering-master",
     "slug": "changan-university-transportation-engineering-master",
     "universityId": "uni-changan-university",
@@ -8447,7 +8499,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-changan-university-civil-engineering-master",
     "slug": "changan-university-civil-engineering-master",
     "universityId": "uni-changan-university",
@@ -8473,7 +8525,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-changan-university-international-chinese-education-master",
     "slug": "changan-university-international-chinese-education-master",
     "universityId": "uni-changan-university",
@@ -8499,7 +8551,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-changan-university-self-funded-chinese-language",
     "slug": "changan-university-self-funded-chinese-language",
     "universityId": "uni-changan-university",
@@ -8521,10 +8573,11 @@
   },
   {
     "sourceIds": [
-      "src-blcu-entry-requirements"
+      "src-blcu-entry-requirements",
+      "blcu-undergraduate-live-2026"
     ],
-    "verifiedAt": "2026-07-28",
-    "reviewAfter": "2026-08-27",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
     "status": "verified",
     "id": "program-beijing-language-and-culture-university-finance-english-bachelor",
     "slug": "beijing-language-and-culture-university-finance-english-bachelor",
@@ -8540,7 +8593,7 @@
       "English"
     ],
     "durationMonths": 48,
-    "programUrl": "https://admission.blcu.edu.cn/en/39/list.htm",
+    "programUrl": "https://admission.blcu.edu.cn/en/384/list.htm",
     "applyUrl": "https://apply.blcu.edu.cn/",
     "languageRequirements": [
       {
@@ -8561,10 +8614,11 @@
   {
     "sourceIds": [
       "src-blcu-entry-requirements",
-      "src-blcu-undergraduate-programs"
+      "src-blcu-undergraduate-programs",
+      "blcu-undergraduate-live-2026"
     ],
-    "verifiedAt": "2026-07-28",
-    "reviewAfter": "2026-08-27",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
     "status": "verified",
     "id": "program-beijing-language-and-culture-university-chinese-language-bachelor",
     "slug": "beijing-language-and-culture-university-chinese-language-bachelor",
@@ -8580,7 +8634,7 @@
       "Chinese"
     ],
     "durationMonths": 48,
-    "programUrl": "https://admission.blcu.edu.cn/en/39/list.htm",
+    "programUrl": "https://admission.blcu.edu.cn/en/384/list.htm",
     "applyUrl": "https://apply.blcu.edu.cn/",
     "languageRequirements": [
       {
@@ -8631,7 +8685,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shanghai-normal-university-chinese-improvement-autumn-2026",
     "slug": "shanghai-normal-university-chinese-improvement-autumn-2026",
     "universityId": "uni-shanghai-normal-university",
@@ -8658,7 +8712,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-wenzhou-kean-university-finance-bs",
     "slug": "wenzhou-kean-university-finance-bs",
     "universityId": "uni-wenzhou-kean-university",
@@ -8698,7 +8752,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-wenzhou-kean-university-global-business-bs",
     "slug": "wenzhou-kean-university-global-business-bs",
     "universityId": "uni-wenzhou-kean-university",
@@ -8738,7 +8792,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-wenzhou-kean-university-computer-science-bs",
     "slug": "wenzhou-kean-university-computer-science-bs",
     "universityId": "uni-wenzhou-kean-university",
@@ -8778,7 +8832,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-wenzhou-kean-university-biology-cell-molecular-bs",
     "slug": "wenzhou-kean-university-biology-cell-molecular-bs",
     "universityId": "uni-wenzhou-kean-university",
@@ -8818,7 +8872,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-wenzhou-kean-university-architecture-bfa",
     "slug": "wenzhou-kean-university-architecture-bfa",
     "universityId": "uni-wenzhou-kean-university",
@@ -8857,7 +8911,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-bupt-computer-science-and-technology-bachelor-english",
     "slug": "bupt-computer-science-and-technology-bachelor-english",
     "universityId": "uni-beijing-university-of-posts-and-telecommunications",
@@ -8892,7 +8946,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-bupt-computer-technology-master-english",
     "slug": "bupt-computer-technology-master-english",
     "universityId": "uni-beijing-university-of-posts-and-telecommunications",
@@ -8927,7 +8981,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-bupt-international-business-master-english",
     "slug": "bupt-international-business-master-english",
     "universityId": "uni-beijing-university-of-posts-and-telecommunications",
@@ -8962,7 +9016,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-bupt-information-and-communication-engineering-doctorate-english",
     "slug": "bupt-information-and-communication-engineering-doctorate-english",
     "universityId": "uni-beijing-university-of-posts-and-telecommunications",
@@ -8997,7 +9051,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-bupt-computer-science-and-technology-doctorate-english",
     "slug": "bupt-computer-science-and-technology-doctorate-english",
     "universityId": "uni-beijing-university-of-posts-and-telecommunications",
@@ -9034,7 +9088,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nanjing-audit-university-master-of-auditing",
     "slug": "nanjing-audit-university-master-of-auditing",
     "universityId": "uni-nanjing-audit-university",
@@ -9054,10 +9108,12 @@
   },
   {
     "sourceIds": [
-      "src-xmu-long-term-chinese-2026-2027"
+      "src-xmu-long-term-chinese-2026-2027",
+      "xmu-chinese-program-live",
+      "xmu-costs-live"
     ],
-    "verifiedAt": "2026-07-28",
-    "reviewAfter": "2026-08-27",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
     "status": "verified",
     "id": "program-xmu-long-term-chinese-language-spring-2027",
     "slug": "xmu-long-term-chinese-language-spring-2027",
@@ -9158,7 +9214,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-dhu-winter-chinese-2027",
     "slug": "dhu-winter-chinese-2027",
     "universityId": "uni-donghua-university",
@@ -9185,10 +9241,12 @@
   },
   {
     "sourceIds": [
-      "src-bfsu-chinese-training"
+      "src-bfsu-chinese-training",
+      "bfsu-scll-live",
+      "bfsu-undergraduate-2026"
     ],
-    "verifiedAt": "2026-07-28",
-    "reviewAfter": "2026-08-27",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
     "status": "verified",
     "id": "program-bfsu-general-chinese-training-spring-2027",
     "slug": "bfsu-general-chinese-training-spring-2027",
@@ -9218,7 +9276,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-uibe-international-foundation-spring-2027",
     "slug": "uibe-international-foundation-spring-2027",
     "universityId": "uni-university-of-international-business-and-economics",
@@ -9248,7 +9306,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-xju-iclt-one-semester-spring-2027",
     "slug": "xju-iclt-one-semester-spring-2027",
     "universityId": "uni-xinjiang-university",
@@ -9282,7 +9340,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-snnu-iclt-one-semester-spring-2027",
     "slug": "snnu-iclt-one-semester-spring-2027",
     "universityId": "uni-shaanxi-normal-university",
@@ -9312,10 +9370,11 @@
   {
     "sourceIds": [
       "src-blcu-iclt-2026",
-      "src-clec-iclt-2026-standard"
+      "src-clec-iclt-2026-standard",
+      "blcu-icl-scholarship-2026"
     ],
-    "verifiedAt": "2026-07-28",
-    "reviewAfter": "2026-08-27",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
     "status": "verified",
     "id": "program-blcu-iclt-one-semester-spring-2027",
     "slug": "blcu-iclt-one-semester-spring-2027",
@@ -9350,7 +9409,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-dhu-iclt-one-semester-spring-2027",
     "slug": "dhu-iclt-one-semester-spring-2027",
     "universityId": "uni-donghua-university",
@@ -9382,10 +9441,11 @@
   {
     "sourceIds": [
       "src-shu-iclt-2026",
-      "src-clec-iclt-2026-standard"
+      "src-clec-iclt-2026-standard",
+      "shu-icl-scholarship-2026"
     ],
-    "verifiedAt": "2026-07-28",
-    "reviewAfter": "2026-08-27",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
     "status": "verified",
     "id": "program-shu-iclt-one-semester-spring-2027",
     "slug": "shu-iclt-one-semester-spring-2027",
@@ -9422,7 +9482,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-nankai-iclt-one-semester-spring-2027",
     "slug": "nankai-iclt-one-semester-spring-2027",
     "universityId": "uni-nankai-university",
@@ -9452,10 +9512,11 @@
   {
     "sourceIds": [
       "src-bfsu-iclt-2026",
-      "src-clec-iclt-2026-standard"
+      "src-clec-iclt-2026-standard",
+      "bfsu-icl-scholarship-2026"
     ],
-    "verifiedAt": "2026-07-28",
-    "reviewAfter": "2026-08-27",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
     "status": "verified",
     "id": "program-bfsu-iclt-one-semester-spring-2027",
     "slug": "bfsu-iclt-one-semester-spring-2027",
@@ -9490,7 +9551,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hznu-iclt-one-semester-spring-2027",
     "slug": "hznu-iclt-one-semester-spring-2027",
     "universityId": "uni-hangzhou-normal-university",
@@ -9524,7 +9585,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-sjtu-iclt-one-semester-spring-2027",
     "slug": "sjtu-iclt-one-semester-spring-2027",
     "universityId": "uni-shanghai-jiao-tong-university",
@@ -9558,7 +9619,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hunnu-iclt-one-semester-spring-2027",
     "slug": "hunnu-iclt-one-semester-spring-2027",
     "universityId": "uni-hunan-normal-university",
@@ -9592,7 +9653,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-imnu-chinese-tourism-management-spring-2027",
     "slug": "imnu-chinese-tourism-management-spring-2027",
     "universityId": "uni-inner-mongolia-normal-university",
@@ -9665,7 +9726,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-tjnu-iclt-one-semester-spring-2027",
     "slug": "tjnu-iclt-one-semester-spring-2027",
     "universityId": "uni-tianjin-normal-university",
@@ -9699,7 +9760,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-zcmu-iclt-one-semester-spring-2027",
     "slug": "zcmu-iclt-one-semester-spring-2027",
     "universityId": "uni-zhejiang-chinese-medical-university",
@@ -9733,7 +9794,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-shutcm-iclt-one-semester-spring-2027",
     "slug": "shutcm-iclt-one-semester-spring-2027",
     "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
@@ -9767,7 +9828,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-neu-iclt-one-semester-spring-2027",
     "slug": "neu-iclt-one-semester-spring-2027",
     "universityId": "uni-northeastern-university-china",
@@ -9797,7 +9858,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hust-iclt-one-semester-spring-2027",
     "slug": "hust-iclt-one-semester-spring-2027",
     "universityId": "uni-huazhong-university-of-science-and-technology",
@@ -9832,7 +9893,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-gzu-iclt-one-semester-spring-2027",
     "slug": "gzu-iclt-one-semester-spring-2027",
     "universityId": "uni-guizhou-university",
@@ -9866,7 +9927,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-cupb-iclt-one-semester-spring-2027",
     "slug": "cupb-iclt-one-semester-spring-2027",
     "universityId": "uni-china-university-of-petroleum-beijing",
@@ -9901,7 +9962,7 @@
     ],
     "verifiedAt": "2026-07-28",
     "reviewAfter": "2026-08-27",
-    "status": "verified",
+    "status": "stale",
     "id": "program-ynu-iclt-one-semester-spring-2027",
     "slug": "ynu-iclt-one-semester-spring-2027",
     "universityId": "uni-yunnan-university",
@@ -9934,7 +9995,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified",
+    "status": "stale",
     "id": "program-cdut-china-link-2026-2027",
     "slug": "cdut-china-link-2026-2027",
     "universityId": "uni-chengdu-university-of-technology",
@@ -10046,7 +10107,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified",
+    "status": "stale",
     "id": "program-wzu-china-link-2026-2027",
     "slug": "wzu-china-link-2026-2027",
     "universityId": "uni-wenzhou-university",
@@ -10159,7 +10220,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified",
+    "status": "stale",
     "id": "program-hubu-iclt-one-semester-spring-2027",
     "slug": "hubu-iclt-one-semester-spring-2027",
     "universityId": "uni-hubei-university",
@@ -10274,7 +10335,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified",
+    "status": "stale",
     "id": "program-cqnu-iclt-one-semester-spring-2027",
     "slug": "cqnu-iclt-one-semester-spring-2027",
     "universityId": "uni-chongqing-normal-university",
@@ -10389,7 +10450,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified",
+    "status": "stale",
     "id": "program-mnnu-iclt-one-semester-spring-2027",
     "slug": "mnnu-iclt-one-semester-spring-2027",
     "universityId": "uni-minnan-normal-university",
@@ -10504,7 +10565,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified",
+    "status": "stale",
     "id": "program-zafu-iclt-one-semester-spring-2027",
     "slug": "zafu-iclt-one-semester-spring-2027",
     "universityId": "uni-zhejiang-af-university",
@@ -10624,7 +10685,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified",
+    "status": "stale",
     "id": "program-fjnu-iclt-one-semester-spring-2027",
     "slug": "fjnu-iclt-one-semester-spring-2027",
     "universityId": "uni-fujian-normal-university",
@@ -10739,7 +10800,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified",
+    "status": "stale",
     "id": "program-ybu-iclt-one-semester-spring-2027",
     "slug": "ybu-iclt-one-semester-spring-2027",
     "universityId": "uni-yanbian-university",
@@ -10854,7 +10915,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified",
+    "status": "stale",
     "id": "program-jiangnan-iclt-one-semester-spring-2027",
     "slug": "jiangnan-iclt-one-semester-spring-2027",
     "universityId": "uni-jiangnan-university",
@@ -10964,7 +11025,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified",
+    "status": "stale",
     "id": "program-sufe-iclt-one-semester-spring-2027",
     "slug": "sufe-iclt-one-semester-spring-2027",
     "universityId": "uni-shanghai-university-of-finance-and-economics",
@@ -11079,7 +11140,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified",
+    "status": "stale",
     "id": "program-zjnu-iclt-one-semester-spring-2027",
     "slug": "zjnu-iclt-one-semester-spring-2027",
     "universityId": "uni-zhejiang-normal-university",
@@ -11194,7 +11255,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified",
+    "status": "stale",
     "id": "program-cqnu-chinese-language-spring-2027",
     "slug": "cqnu-chinese-language-spring-2027",
     "universityId": "uni-chongqing-normal-university",
@@ -11420,7 +11481,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-doctoral-program-in-computer-science-and-technology-doctorate",
@@ -11446,7 +11507,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-international-doctoral-program-of-materials-science-and-engineering-doctorate",
@@ -11472,7 +11533,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-doctoral-program-in-communication-and-global-development-doctorate",
@@ -11498,7 +11559,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-doctoral-program-in-global-health-doctorate",
@@ -11524,7 +11585,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-doctoral-program-in-mathematics-doctorate",
@@ -11550,7 +11611,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-doctoral-program-in-environmental-science-and-new-energy-technology-doctorate",
@@ -11576,7 +11637,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-doctoral-program-in-data-science-and-information-technology-doctorate",
@@ -11602,7 +11663,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-doctoral-program-in-precision-medicine-and-healthcare-doctorate",
@@ -11628,7 +11689,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-architecture-master",
@@ -11654,7 +11715,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-international-construction-and-project-management-master",
@@ -11680,7 +11741,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-environmental-science-engineering-and-management-master",
@@ -11706,7 +11767,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-vehicle-and-mobility-master",
@@ -11732,7 +11793,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-global-manufacturing-and-analytics-master",
@@ -11758,7 +11819,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-international-master-of-engineering-management-master",
@@ -11784,7 +11845,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-electronic-and-information-engineering-master",
@@ -11810,7 +11871,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-advanced-computing-master",
@@ -11846,7 +11907,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-international-master-in-nuclear-engineering-and-management-master",
@@ -11872,7 +11933,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-international-master-program-of-materials-science-and-engineering-master",
@@ -11898,7 +11959,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-tsinghua-global-mba-program-master",
@@ -11924,7 +11985,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-master-of-global-industrial-innovation-master",
@@ -11950,7 +12011,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-master-of-public-administration-in-international-development-master",
@@ -11976,7 +12037,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-international-master-of-public-administration-master",
@@ -12002,7 +12063,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-ll-m-in-chinese-law-master",
@@ -12038,7 +12099,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-global-business-journalism-master",
@@ -12064,7 +12125,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-chinese-politics-foreign-policy-and-international-relations-master",
@@ -12090,7 +12151,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-master-of-international-affairs-global-governance-master",
@@ -12116,7 +12177,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-international-master-of-applied-psychology-master",
@@ -12142,7 +12203,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-international-master-of-public-health-master",
@@ -12168,7 +12229,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-general-medicine-master",
@@ -12194,7 +12255,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-green-environmental-infrastructure-master",
@@ -12220,7 +12281,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-environmental-science-and-new-energy-technology-master",
@@ -12246,7 +12307,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-precision-medicine-and-healthcare-master",
@@ -12272,7 +12333,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-logistics-engineering-and-management-master",
@@ -12298,7 +12359,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-master-of-urban-systems-in-human-habitats-master",
@@ -12324,7 +12385,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-data-science-and-information-technology-master",
@@ -12350,7 +12411,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-masters-program-in-future-industry-and-technology-master",
@@ -12376,7 +12437,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-doctoral-program-in-advanced-computing-doctorate",
@@ -12411,7 +12472,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-tsinghua-university-schwarzman-scholars-master-of-global-affairs-master",
@@ -12539,7 +12600,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-guangdong-university-of-technology-computer-science-and-technology-bachelor",
@@ -12565,7 +12626,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-guangdong-university-of-technology-international-economics-and-trade-bachelor",
@@ -12591,7 +12652,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-guangdong-university-of-technology-civil-engineering-chinese-international-student-class-bachelor",
@@ -12617,7 +12678,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-guangdong-university-of-technology-chinese-language-training-one-semester-language",
@@ -12643,7 +12704,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-zhejiang-university-of-technology-chemical-engineering-and-technology-bachelor",
@@ -12669,7 +12730,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-zhejiang-university-of-technology-pharmaceutical-science-bachelor",
@@ -12695,7 +12756,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-zhejiang-university-of-technology-environmental-engineering-bachelor",
@@ -12721,7 +12782,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-zhejiang-university-of-technology-mechanical-engineering-bachelor",
@@ -12747,7 +12808,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-zhejiang-university-of-technology-computer-science-and-technology-bachelor",
@@ -12773,7 +12834,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-jiangsu-university-csca-international-english-standard-pre-university-foundation",
@@ -12799,7 +12860,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-jiangsu-university-csca-international-chinese-standard-pre-university-one-year-foundation",
@@ -12825,7 +12886,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-jiangsu-university-culture-and-practice-one-semester-other",
@@ -12851,7 +12912,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-jiangsu-university-juris-master-master",
@@ -12878,7 +12939,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-jiangsu-university-pedagogy-master",
@@ -12905,7 +12966,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-jiangsu-university-business-administration-master",
@@ -12932,7 +12993,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-guangzhou-university-public-administration-smart-governance-bachelor",
@@ -12994,7 +13055,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-shantou-university-clinical-medicine-chinese-english-taught-bachelor",
@@ -13022,7 +13083,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-shantou-university-optometry-medicine-english-taught-bachelor",
@@ -13049,7 +13110,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-shantou-university-computer-science-and-technology-bachelor",
@@ -13074,7 +13135,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-shantou-university-international-economics-and-trade-bachelor",
@@ -13099,7 +13160,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-southern-medical-university-clinical-medicine-bachelor",
@@ -13124,7 +13185,7 @@
     ],
     "verifiedAt": "2026-07-29",
     "reviewAfter": "2026-08-28",
-    "status": "verified"
+    "status": "stale"
   },
   {
     "id": "program-shenzhen-university-international-business-administration-bachelor",
@@ -14575,15 +14636,17 @@
       "Chinese"
     ],
     "durationMonths": 24,
-    "programUrl": "https://admission.blcu.edu.cn/en/2026/0303/c1148a3044/page.htm",
+    "programUrl": "https://admission.blcu.edu.cn/en/376/list.htm",
     "applyUrl": null,
     "languageRequirements": [],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-chinese-degree-blcu-international-chinese-education-master"
+      "src-gap-program-chinese-degree-blcu-international-chinese-education-master",
+      "blcu-graduate-live",
+      "blcu-icl-scholarship-2026"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
     "status": "verified"
   },
   {
@@ -18357,15 +18420,21 @@
       "Chinese"
     ],
     "durationMonths": 48,
-    "programUrl": "https://lxs.ecnu.edu.cn/sk_scholarship_undergraduate_international_chinese_language_teachers_scholarship/list.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "programUrl": "https://lxs.ecnu.edu.cn/en/admission_degree_programs_undergraduate_program/list.htm",
+    "applyUrl": "https://lxsapply.ecnu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 4, 180"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-chinese-degree-ecnu-business-chinese-bachelor"
+      "src-gap-program-chinese-degree-ecnu-business-chinese-bachelor",
+      "ecnu-undergraduate-live"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
     "status": "verified"
   },
   {
@@ -18383,15 +18452,21 @@
       "Chinese"
     ],
     "durationMonths": 48,
-    "programUrl": "https://lxs.ecnu.edu.cn/sk_scholarship_undergraduate_international_chinese_language_teachers_scholarship/list.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "programUrl": "https://lxs.ecnu.edu.cn/en/admission_degree_programs_undergraduate_program/list.htm",
+    "applyUrl": "https://lxsapply.ecnu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 4, 180"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-chinese-degree-ecnu-chinese-language-culture-bachelor"
+      "src-gap-program-chinese-degree-ecnu-chinese-language-culture-bachelor",
+      "ecnu-undergraduate-live"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
     "status": "verified"
   },
   {
@@ -18409,15 +18484,21 @@
       "Chinese"
     ],
     "durationMonths": 48,
-    "programUrl": "https://lxs.ecnu.edu.cn/sk_scholarship_undergraduate_international_chinese_language_teachers_scholarship/list.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "programUrl": "https://lxs.ecnu.edu.cn/en/admission_degree_programs_undergraduate_program/list.htm",
+    "applyUrl": "https://lxsapply.ecnu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 4, 180"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-chinese-degree-ecnu-chinese-language-literature-bachelor"
+      "src-gap-program-chinese-degree-ecnu-chinese-language-literature-bachelor",
+      "ecnu-undergraduate-live"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
     "status": "verified"
   },
   {
@@ -18460,17 +18541,25 @@
     "teachingLanguages": [
       "Chinese"
     ],
-    "durationMonths": null,
-    "programUrl": "https://lxs.ecnu.edu.cn/jp_admission_degree_programs_graduate_program/list.htm",
-    "applyUrl": null,
-    "languageRequirements": [],
+    "durationMonths": 24,
+    "programUrl": "https://lxs.ecnu.edu.cn/_s916/en/admission/degree_programs/graduate_program/programs/list.psp",
+    "applyUrl": "https://lxsapply.ecnu.edu.cn/",
+    "languageRequirements": [
+      {
+        "test": "HSK",
+        "minimum": "Level 5, 210"
+      }
+    ],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-chinese-degree-ecnu-international-chinese-education-master"
+      "src-gap-program-chinese-degree-ecnu-international-chinese-education-master",
+      "ecnu-graduate-program-table-live",
+      "ecnu-undergraduate-live"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
-    "status": "verified"
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
+    "status": "verified",
+    "durationMonthsMax": null
   },
   {
     "id": "prog-gap-chinese-degree-ecnu-international-chinese-education-bachelor",
@@ -18752,7 +18841,8 @@
     "languageRequirements": [],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-chinese-degree-fudan-international-chinese-education-master"
+      "src-gap-program-chinese-degree-fudan-international-chinese-education-master",
+      "fudan-icl-master-2026"
     ],
     "verifiedAt": "2026-08-02",
     "reviewAfter": "2026-09-01",
@@ -23227,7 +23317,9 @@
     "languageRequirements": [],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-wave8-hnu-chemistry-doctorate"
+      "src-gap-program-wave8-hnu-chemistry-doctorate",
+      "hnu-csc-postgraduate-2026",
+      "hnu-self-financed-2025"
     ],
     "verifiedAt": "2026-08-02",
     "reviewAfter": "2026-09-01",
@@ -23254,7 +23346,9 @@
     "languageRequirements": [],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-wave8-hnu-computer-science-technology-master"
+      "src-gap-program-wave8-hnu-computer-science-technology-master",
+      "hnu-csc-postgraduate-2026",
+      "hnu-self-financed-2025"
     ],
     "verifiedAt": "2026-08-02",
     "reviewAfter": "2026-09-01",
@@ -23281,7 +23375,9 @@
     "languageRequirements": [],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-wave8-hnu-mechanical-engineering-doctorate"
+      "src-gap-program-wave8-hnu-mechanical-engineering-doctorate",
+      "hnu-csc-postgraduate-2026",
+      "hnu-self-financed-2025"
     ],
     "verifiedAt": "2026-08-02",
     "reviewAfter": "2026-09-01",
@@ -29178,7 +29274,8 @@
     "languageRequirements": [],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-shu-2026-master-icle"
+      "src-gap-program-shu-2026-master-icle",
+      "shu-icl-scholarship-2026"
     ],
     "verifiedAt": "2026-08-02",
     "reviewAfter": "2026-09-01",
@@ -31468,14 +31565,15 @@
     "teachingLanguages": [],
     "durationMonths": null,
     "programUrl": "https://admissions.swu.edu.cn/info/1048/1051.htm",
-    "applyUrl": null,
+    "applyUrl": "https://swu.17gz.org/member/login.do",
     "languageRequirements": [],
     "verificationScope": "identity",
     "sourceIds": [
-      "src-gap-program-confirmed-swu-chinese-language-training"
+      "src-gap-program-confirmed-swu-chinese-language-training",
+      "swu-chinese-training-live"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
     "status": "verified"
   },
   {
@@ -33300,15 +33398,17 @@
       "Chinese"
     ],
     "durationMonths": 24,
-    "programUrl": "https://admissions.xmu.edu.cn/info/1061/4020.htm",
-    "applyUrl": null,
+    "programUrl": "https://admissions.xmu.edu.cn/Admissions/Costs.htm",
+    "applyUrl": "https://application.xmu.edu.cn/",
     "languageRequirements": [],
     "verificationScope": "facts",
     "sourceIds": [
-      "src-gap-program-clw-sw-xmu-icl-master"
+      "src-gap-program-clw-sw-xmu-icl-master",
+      "xmu-costs-live",
+      "xmu-icl-scholarship-2026"
     ],
-    "verifiedAt": "2026-08-02",
-    "reviewAfter": "2026-09-01",
+    "verifiedAt": "2026-08-26",
+    "reviewAfter": "2026-09-25",
     "status": "verified"
   },
   {
