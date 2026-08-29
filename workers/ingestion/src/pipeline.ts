@@ -587,7 +587,7 @@ export async function processIngestionJob(
     // An extractor or prompt upgrade must receive the official body again. Sending
     // validators here could yield 304 and strand the saved snapshot on an old
     // extraction fingerprint forever.
-    if (state.rawSha256 === null || previousCandidateExtractionCurrent) {
+    if (previousSnapshotId !== null && previousCandidateExtractionCurrent) {
       if (state.etag) headers.set('If-None-Match', state.etag)
       if (state.lastModified) headers.set('If-Modified-Since', state.lastModified)
     }
@@ -609,6 +609,13 @@ export async function processIngestionJob(
 
     if (response.status === 304) {
       clearTimeout(timeout)
+      if (previousSnapshotId === null || !previousCandidateExtractionCurrent) {
+        throw new IngestionError(
+          'Official source returned 304 without a current saved extraction',
+          'unexpected_304',
+          true,
+        )
+      }
       await recordNoChange(environment, {
         job,
         sourceId: manifest.id,

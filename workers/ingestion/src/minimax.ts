@@ -295,6 +295,12 @@ function validateEnvelope(
       issues.push(`${label}: invalid ${field.type} value for ${fact.fieldPath}`)
       continue
     }
+    if (field.critical && (field.type === 'object' || field.type === 'string-array')) {
+      issues.push(
+        `${label}: critical composite field requires leaf-level evidence: ${fact.fieldPath}`,
+      )
+      continue
+    }
     const quote = normalizeEvidenceText(fact.evidence.quote)
     if (quote.length < 2 || quote.length > 1_000 || !normalizedSource.includes(quote)) {
       issues.push(`${label}: evidence is not grounded for ${fact.fieldPath}`)
