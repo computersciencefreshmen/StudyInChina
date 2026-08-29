@@ -4,6 +4,7 @@ import { resolve } from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import test from 'node:test'
 import { IngestionError } from '../src/errors'
+import { sha256Hex } from '../src/hash'
 import { processIngestionJob } from '../src/pipeline'
 import { recordJobFailure } from '../src/repository'
 import type {
@@ -390,6 +391,115 @@ test('ordinary rules-only pages retain the existing completed-result path', asyn
         `SELECT status, outcome FROM ingestion_jobs WHERE job_id = ?`,
       ).get(job.jobId)),
       { status: 'completed', outcome: 'rule-pass' },
+    )
+  } finally {
+    database.close()
+  }
+})
+
+test('304 without a saved snapshot is retryable and never records no-change', async () => {
+  const database = databaseWithEntitySchema()
+  try {
+    const manifest = sourceManifest()
+    const job = testJob(manifest.id)
+    seedSourceAndJob(database, manifest, job)
+    database.prepare(
+      `UPDATE ingestion_sources
+          SET etag = '"orphan-etag"', last_modified = 'Mon, 20 Jul 2026 00:00:00 GMT'
+        WHERE source_id = ?`,
+    ).run(manifest.id)
+    const environment = environmentFor(database)
+    let officialFetches = 0
+    const fetcher: Fetcher = async (_input, init) => {
+      officialFetches += 1
+      const headers = new Headers(init?.headers)
+      assert.equal(headers.has('if-none-match'), false)
+      assert.equal(headers.has('if-modified-since'), false)
+      return new Response(null, { status: 304 })
+    }
+
+    await assert.rejects(
+      processIngestionJob(environment, job, fetcher, checkedAt),
+      (error: unknown) => error instanceof IngestionError
+        && error.code === 'unexpected_304'
+        && error.retryable,
+    )
+
+    assert.equal(officialFetches, 1)
+    assert.deepEqual(
+      plainRow(database.prepare(
+        `SELECT status, outcome, completed_at FROM ingestion_jobs WHERE job_id = ?`,
+      ).get(job.jobId)),
+      { status: 'running', outcome: null, completed_at: null },
+    )
+  } finally {
+    database.close()
+  }
+})
+
+test('304 with a stale extractor fingerprint is retryable and never records no-change', async () => {
+  const database = databaseWithEntitySchema()
+  try {
+    const manifest = sourceManifest()
+    const job = testJob(manifest.id)
+    seedSourceAndJob(database, manifest, job)
+    const rawSha256 = 'a'.repeat(64)
+    const canonicalSha256 = 'b'.repeat(64)
+    const snapshotId = await sha256Hex(`${manifest.id}:${rawSha256}`)
+    database.prepare(
+      `UPDATE ingestion_sources
+          SET raw_sha256 = ?, canonical_sha256 = ?,
+              etag = '"stale-etag"', last_modified = 'Mon, 20 Jul 2026 00:00:00 GMT'
+        WHERE source_id = ?`,
+    ).run(rawSha256, canonicalSha256, manifest.id)
+    database.prepare(
+      `INSERT INTO ingestion_snapshots
+         (snapshot_id, source_id, r2_key, raw_sha256, canonical_sha256, content_type,
+          byte_length, final_url, fetched_at, etag, last_modified)
+       VALUES (?, ?, ?, ?, ?, 'text/html', 1, ?, ?, '"stale-etag"',
+               'Mon, 20 Jul 2026 00:00:00 GMT')`,
+    ).run(
+      snapshotId,
+      manifest.id,
+      `snapshots/${manifest.id}/${rawSha256}.html`,
+      rawSha256,
+      canonicalSha256,
+      manifest.officialUrl,
+      checkedAt.toISOString(),
+    )
+    database.prepare(
+      `INSERT INTO ingestion_candidates
+         (candidate_id, source_id, snapshot_id, extractor, gate_status,
+          candidate_status, facts_json, issues_json, created_at)
+       VALUES ('stale-candidate', ?, ?, 'rules', 'rule-pass',
+               'extracted', '[]', '[]', ?)`,
+    ).run(manifest.id, snapshotId, checkedAt.toISOString())
+    database.prepare(
+      `INSERT INTO ingestion_candidate_provenance
+         (candidate_id, schema_version, extractor_fingerprint, field_evidence_json,
+          contains_critical, created_at)
+       VALUES ('stale-candidate', ?, ?, '[]', 0, ?)`,
+    ).run(manifest.extraction.schemaVersion, 'c'.repeat(64), checkedAt.toISOString())
+    const environment = environmentFor(database)
+    const fetcher: Fetcher = async (_input, init) => {
+      const headers = new Headers(init?.headers)
+      assert.equal(headers.has('if-none-match'), false)
+      assert.equal(headers.has('if-modified-since'), false)
+      return new Response(null, { status: 304 })
+    }
+
+    await assert.rejects(
+      processIngestionJob(environment, job, fetcher, checkedAt),
+      (error: unknown) => error instanceof IngestionError
+        && error.code === 'unexpected_304'
+        && error.retryable,
+    )
+
+    assert.deepEqual(
+      plainRow(database.prepare(
+        `SELECT status, outcome, completed_at FROM ingestion_jobs WHERE job_id = ?`,
+      ).get(job.jobId)),
+      { status: 'running', outcome: null, completed_at: null },
     )
   } finally {
     database.close()

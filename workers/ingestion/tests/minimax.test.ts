@@ -52,6 +52,47 @@ test('dual extraction passes only when values agree and evidence is grounded', (
   )
 })
 
+test('critical composite fields remain quarantined without leaf-level evidence', () => {
+  const manifest = sourceManifest()
+  manifest.extraction.fields = [
+    { path: 'fees', type: 'object', required: true, critical: true },
+    { path: 'availableLanguages', type: 'string-array', required: true, critical: true },
+  ]
+  const compositeSource = 'Tuition information. Languages available.'
+  const compositeExtraction: ExtractionEnvelope = {
+    schemaVersion: manifest.extraction.schemaVersion,
+    sourceId: manifest.id,
+    facts: [
+      {
+        fieldPath: 'fees',
+        value: { tuition: 30_000, currency: 'CNY' },
+        evidence: { quote: 'Tuition information.' },
+      },
+      {
+        fieldPath: 'availableLanguages',
+        value: ['Chinese', 'English'],
+        evidence: { quote: 'Languages available.' },
+      },
+    ],
+  }
+
+  const result = gateDualExtractions(
+    compositeExtraction,
+    structuredClone(compositeExtraction),
+    manifest,
+    compositeSource,
+  )
+
+  assert.equal(result.status, 'quarantined')
+  assert.equal(result.facts.length, 0)
+  assert.ok(result.issues.some((issue) => issue.includes(
+    'critical composite field requires leaf-level evidence: fees',
+  )))
+  assert.ok(result.issues.some((issue) => issue.includes(
+    'critical composite field requires leaf-level evidence: availableLanguages',
+  )))
+})
+
 test('MiniMax adapter performs two independent passes through a configurable endpoint', async () => {
   const passes: string[] = []
   const redirectModes: Array<RequestRedirect | undefined> = []

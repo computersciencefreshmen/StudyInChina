@@ -8,6 +8,7 @@ import type {
 } from './types'
 
 export const MINIMAX_PROMPT_SPEC_VERSION = 'studyinchina-minimax-dual-v3'
+export const EVIDENCE_GATE_VERSION = 'studyinchina-evidence-gate-v2'
 export const RULE_EXTRACTOR_VERSION = 'studyinchina-rules-v1'
 
 export const MINIMAX_SYSTEM_INSTRUCTIONS = [
@@ -56,6 +57,7 @@ export async function miniMaxExtractorFingerprint(
 ): Promise<string> {
   return sha256Hex(stableJson({
     version: MINIMAX_PROMPT_SPEC_VERSION,
+    evidenceGateVersion: EVIDENCE_GATE_VERSION,
     model,
     promptFingerprint,
     schemaVersion: manifest.extraction.schemaVersion,
