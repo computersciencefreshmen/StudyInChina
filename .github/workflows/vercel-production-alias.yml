@@ -151,14 +151,57 @@ jobs:
           steps.ci.outputs.passed == 'true' &&
           steps.credential.outputs.configured == 'true'
         shell: bash
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           set -euo pipefail
           release_api="${DEPLOYMENT_URL%/}/api/v1/releases/current"
+          deployment_host="${DEPLOYMENT_URL#https://}"
+          deployment_host="${deployment_host%/}"
+
+          # Reuse an existing automation credential through read-only APIs.
+          # Never disable protection, generate a bypass, or run a package with this token.
+          project_json="$(curl --fail --silent --show-error \
+            --connect-timeout 10 --max-time 30 \
+            --header "Authorization: Bearer ${VERCEL_TOKEN}" \
+            'https://api.vercel.com/v9/projects/studyinchina?slug=henry-yangs-projects-c9706eac')"
+          project_id="$(jq -er 'select(.name == "studyinchina") | .id | select(type == "string" and test("^prj_[A-Za-z0-9]+$"))' <<< "${project_json}")"
+          team_id="$(jq -er '.accountId | select(type == "string" and test("^team_[A-Za-z0-9]+$"))' <<< "${project_json}")"
+          deployment_json="$(curl --fail --silent --show-error \
+            --connect-timeout 10 --max-time 30 \
+            --header "Authorization: Bearer ${VERCEL_TOKEN}" \
+            "https://api.vercel.com/v13/deployments/${deployment_host}?teamId=${team_id}")"
+          if ! jq -e --arg projectId "${project_id}" --arg ownerId "${team_id}" \
+            --arg host "${deployment_host}" \
+            '.projectId == $projectId and .ownerId == $ownerId
+              and .url == $host and .readyState == "READY" and .target == "production"' \
+            <<< "${deployment_json}" >/dev/null; then
+            echo 'The immutable URL is not a Ready production deployment of the expected project; the stable alias was not changed.' >&2
+            exit 1
+          fi
+          if ! bypass_secret="$(jq -er '
+            (.protectionBypass // {}) | to_entries
+            | map(select(.value.scope == "automation-bypass")) | first | .key
+            | select(type == "string" and length > 0 and (test("[\\r\\n]") | not))
+          ' <<< "${project_json}")"; then
+            echo 'No existing automation-bypass credential is available. The smoke test will not change Deployment Protection; the stable alias was not changed.' >&2
+            exit 1
+          fi
+          # Mask before use; keep the credential in this shell only, never in artifacts.
+          masked_secret="${bypass_secret//%/%25}"
+          printf '::add-mask::%s\n' "${masked_secret}"
+          unset project_json deployment_json masked_secret
+
           for attempt in 1 2 3 4 5 6; do
-            if curl --fail --silent --show-error "${release_api}" \
+            if curl --fail --silent --show-error \
+              --connect-timeout 10 --max-time 30 \
+              --header "x-vercel-protection-bypass: ${bypass_secret}" \
+              "${release_api}" \
               | jq -e --arg sha "${DEPLOYMENT_SHA}" \
-                '.data.deploymentSha == $sha and .data.id
+                '.data.deploymentSha == $sha
+                  and (.data.id | type == "string" and length > 0)
                   and (.data.publicCounts.programs | type == "number" and . > 0)' >/dev/null; then
+              unset bypass_secret
               exit 0
             fi
             sleep 10
