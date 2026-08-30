@@ -124,7 +124,43 @@ describe('production release workflow safety', () => {
     expect(workflow.slice(stableSmoke)).toContain('transaction_committed=true')
   })
 
-  it('exposes the Vercel token only to the credential gate and alias transaction', () => {
+  it('authenticates immutable smoke with an existing project credential and read-only APIs', () => {
+    const workflow = readWorkflow('vercel-production-alias.yml')
+    const immutableSmoke = workflow.indexOf('Verify immutable deployment release API')
+    const nodeSetup = workflow.indexOf('Use Node.js 24')
+    const block = workflow.slice(immutableSmoke, nodeSetup)
+    const ownershipCheck = block.indexOf('.projectId == $projectId and .ownerId == $ownerId')
+    const credentialSelection = block.indexOf('bypass_secret=')
+    const credentialMask = block.indexOf("printf '::add-mask::%s\\n'")
+    const smokeRequest = block.indexOf('if curl --fail --silent --show-error')
+
+    expect(block).toContain('https://api.vercel.com/v9/projects/studyinchina?slug=henry-yangs-projects-c9706eac')
+    expect(block).toContain('https://api.vercel.com/v13/deployments/${deployment_host}?teamId=${team_id}')
+    expect(block).toContain('select(.name == "studyinchina")')
+    expect(block).toContain('.url == $host and .readyState == "READY" and .target == "production"')
+    expect(ownershipCheck).toBeGreaterThan(-1)
+    expect(credentialSelection).toBeGreaterThan(ownershipCheck)
+    expect(credentialMask).toBeGreaterThan(credentialSelection)
+    expect(smokeRequest).toBeGreaterThan(credentialMask)
+    expect(block).toContain('.value.scope == "automation-bypass"')
+    expect(block).toContain('No existing automation-bypass credential is available.')
+    expect(block).toContain('The smoke test will not change Deployment Protection')
+    expect(block.slice(smokeRequest)).toContain('--header "x-vercel-protection-bypass: ${bypass_secret}"')
+    expect(block.slice(smokeRequest)).not.toContain('VERCEL_TOKEN')
+    expect(block).not.toMatch(/\b(?:npx|npm|vercel)\s/u)
+    expect(block).not.toMatch(/--(?:request|location|insecure|proxy|verbose|debug)\b/u)
+    expect(block).not.toMatch(/GITHUB_ENV|GITHUB_OUTPUT|\btee\b/u)
+    expect(block).toContain('set -euo pipefail')
+    expect(block).toContain('--connect-timeout 10 --max-time 30')
+    expect(block).toContain('jq -e --arg sha "${DEPLOYMENT_SHA}"')
+    expect(block).toContain('.data.deploymentSha == $sha')
+    expect(block).toContain('.data.id | type == "string" and length > 0')
+    expect(block).toContain('.data.publicCounts.programs | type == "number" and . > 0')
+    expect(block).toContain('the stable alias was not changed.')
+    expect(block).toContain('exit 1')
+  })
+
+  it('exposes the Vercel token only to the credential gate, authenticated smoke, and alias transaction', () => {
     const workflow = readWorkflow('vercel-production-alias.yml')
     const bindings = workflow.match(
       /^\s+VERCEL_TOKEN:\s+\$\{\{ secrets\.VERCEL_TOKEN \}\}$/gmu,
@@ -133,14 +169,14 @@ describe('production release workflow safety', () => {
     const immutableSmoke = workflow.indexOf('Verify immutable deployment release API')
     const transaction = workflow.indexOf('Promote stable production alias transaction')
 
-    expect(bindings).toHaveLength(2)
+    expect(bindings).toHaveLength(3)
     expect(workflow.slice(0, credentialGate)).not.toContain(
       'VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}',
     )
     expect(workflow.slice(credentialGate, immutableSmoke)).toContain(
       'VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}',
     )
-    expect(workflow.slice(immutableSmoke, transaction)).not.toContain(
+    expect(workflow.slice(immutableSmoke, transaction)).toContain(
       'VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}',
     )
     expect(workflow.slice(transaction).match(

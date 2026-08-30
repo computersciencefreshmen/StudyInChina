@@ -144,6 +144,7 @@ export class JsonCatalogRepository implements CatalogRepository {
       recordCounts: publicCounts,
       rawCounts: getCatalogRecordCounts(rawBundle),
       publicCounts,
+      evaluatedForDate: today,
     }, today).comparePrograms(uniqueIds)
   }
 
@@ -242,7 +243,7 @@ export class JsonCatalogRepository implements CatalogRepository {
       nextCursor,
       total: items.length,
       facets: { cities },
-      release: deriveCatalogRelease(data),
+      release: { ...deriveCatalogRelease(data), evaluatedForDate: today },
     }
   }
 
@@ -317,7 +318,7 @@ export class JsonCatalogRepository implements CatalogRepository {
         universities: result.universityOptions,
         cities: result.cityOptions,
       },
-      release: deriveCatalogRelease(data),
+      release: { ...deriveCatalogRelease(data), evaluatedForDate: today },
     }
   }
 
@@ -361,7 +362,7 @@ export class JsonCatalogRepository implements CatalogRepository {
       nextCursor,
       total: result.total,
       facets: { universities: result.universityOptions },
-      release: deriveCatalogRelease(published),
+      release: { ...deriveCatalogRelease(published), evaluatedForDate: today },
     }
   }
 

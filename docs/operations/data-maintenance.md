@@ -52,12 +52,26 @@ argument, committed file, issue, log or workflow output.
 
 `VERCEL_TOKEN` allows the successful main deployment to reassign the stable
 `studyinchina.vercel.app` alias. The secret is injected only into the credential
-gate and the `vercel alias set` step; checkout, URL validation, smoke tests and
-other commands cannot read it. Until it is configured, the Vercel Git integration
-can still build a deployment, but the alias workflow fails deliberately: a green
-workflow must mean that the immutable deployment and stable alias were both
-smoke-tested. A successful deployment and a successful stable-alias promotion
-are therefore two separate signals.
+gate, authenticated immutable smoke, and alias transaction steps. Checkout,
+URL validation and Node setup cannot read it. Until it is configured, the Vercel
+Git integration can still build a deployment, but the alias workflow fails
+deliberately: a green workflow must mean that the immutable deployment and stable
+alias were both smoke-tested. A successful deployment and a successful stable-alias
+promotion are therefore two separate signals.
+
+Immutable deployment URLs can return a Vercel login HTML page with HTTP 200 even
+when the deployment itself is Ready. The immutable smoke uses read-only Vercel
+APIs to confirm that the URL belongs to the expected project's Ready production
+deployment, then reuses an existing [automation-bypass credential](https://vercel.com/docs/deployment-protection/methods-to-bypass-deployment-protection/protection-bypass-automation)
+in the recommended HTTP header. It masks the credential before use and never
+saves it in an artifact, changes Deployment Protection, generates a bypass, or
+installs/runs an npm package with the token. If the token cannot read the project
+or no existing automation credential is available, promotion fails closed; an
+operator must resolve access through Vercel's protected settings. The JSON, exact
+deployment SHA, non-empty release ID and positive public program count checks
+remain mandatory. Redirect-following, local proxy and verbose/debug flags must
+not be added to the credentialed requests. The stable public alias is still
+checked without authentication using system curl.
 
 When a successful Production deployment does not match the current `main` SHA,
 the alias workflow remains a deliberate no-op and records a notice. When it does

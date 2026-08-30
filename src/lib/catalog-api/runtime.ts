@@ -47,6 +47,7 @@ export async function getCatalogApiService(): Promise<CatalogApiService> {
     recordCounts: publicCounts,
     rawCounts,
     publicCounts,
+    evaluatedForDate: isJson ? today : release.evaluatedForDate,
   }, today)
 }
 
