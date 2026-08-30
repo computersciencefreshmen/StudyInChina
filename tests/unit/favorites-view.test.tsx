@@ -187,6 +187,6 @@ describe('favorites comparison workspace', () => {
     await user.click(await screen.findByRole('checkbox'))
 
     expect(screen.getByText(/CN¥\s*30,000/)).toBeVisible()
-    expect(screen.queryByText(messages.programs.tuitionReference)).not.toBeInTheDocument()
+    expect(screen.queryByText('Reference amount—confirm with university')).not.toBeInTheDocument()
   })
 })

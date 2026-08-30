@@ -15,20 +15,32 @@ import {
 import {
   CATALOG_RECONCILIATION_STATUSES,
   pilotSourceManifestSchema,
+  sourceBindingsForSources,
   sourceManifestV2Schema,
+  sourcePurposeFor,
+  sourceResourceKey,
+  SOURCE_PURPOSES,
   type CatalogReconciliationStatus,
+  type SourceBinding,
   type SourceManifestRecord,
   type SourceManifestV2,
+  type SourcePurpose,
 } from './source-manifest-contract'
 
 export {
   CATALOG_RECONCILIATION_STATUSES,
+  SOURCE_PURPOSES,
+  sourceBindingsForSources,
   sourceManifestV2Schema,
+  sourcePurposeFor,
+  sourceResourceKey,
 }
 export type {
   CatalogReconciliationStatus,
+  SourceBinding,
   SourceManifestRecord,
   SourceManifestV2,
+  SourcePurpose,
 }
 
 export type LoadedSourceManifest = {
