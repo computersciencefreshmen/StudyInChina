@@ -44,6 +44,24 @@ async function scheduleValidatedCandidates(
          ON promotion.candidate_id = candidate.candidate_id
       WHERE candidate.candidate_status = 'validated'
         AND candidate.gate_status IN ('rule-pass', 'dual-pass')
+        AND json_array_length(candidate.facts_json) > 0
+        AND NOT EXISTS (
+          SELECT 1
+            FROM json_each(candidate.facts_json) fact
+           WHERE NOT EXISTS (
+             SELECT 1
+               FROM promotion_field_mappings mapping
+               JOIN records target ON target.id = mapping.subject_record_id
+               JOIN field_definitions definition
+                 ON definition.record_kind = target.kind
+                AND definition.field_path = mapping.canonical_field_path
+              WHERE mapping.source_id = candidate.source_id
+                AND mapping.enabled = 1
+                AND mapping.candidate_field_path = CASE
+                  WHEN fact.type = 'object' THEN json_extract(fact.value, '$.fieldPath')
+                END
+           )
+        )
         AND (
           promotion.candidate_id IS NULL
           OR (
@@ -94,6 +112,8 @@ async function handleQueue(
       if (result.status === 'busy') {
         message.retry({ delaySeconds: 60 })
       } else {
+        // A deferred dependency cannot be repaired by queue retries. The
+        // scheduler will rediscover it once every exact mapping is available.
         message.ack()
       }
     } catch (error) {

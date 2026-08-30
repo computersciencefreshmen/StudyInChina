@@ -138,6 +138,13 @@ class UnsafeCandidateError extends Error {
   }
 }
 
+class DeferredCandidateError extends Error {
+  constructor(readonly code: 'field_mapping_missing', message: string) {
+    super(message)
+    this.name = 'DeferredCandidateError'
+  }
+}
+
 function unsafe(code: string, issue: string | string[]): never {
   throw new UnsafeCandidateError(code, Array.isArray(issue) ? issue : [issue])
 }
@@ -503,7 +510,12 @@ async function buildPlan(
   const facts: PlannedFact[] = []
   for (const fact of candidate.facts) {
     const mapping = byField.get(fact.fieldPath)
-    if (!mapping) unsafe('field_mapping_missing', `No exact promotion mapping for ${fact.fieldPath}`)
+    if (!mapping) {
+      throw new DeferredCandidateError(
+        'field_mapping_missing',
+        `No exact promotion mapping for ${fact.fieldPath}`,
+      )
+    }
     if (['quarantined', 'archived', 'rejected'].includes(mapping.workflow_status)) {
       unsafe('target_record_blocked', `Target record ${mapping.subject_record_id} is ${mapping.workflow_status}`)
     }
@@ -1063,6 +1075,11 @@ export async function promoteCandidate(
     const candidate = await validateCandidate(row)
     plan = await buildPlan(database, candidate)
   } catch (error) {
+    if (error instanceof DeferredCandidateError) {
+      // Mapping is an operator-owned dependency, not an evidence failure.
+      // Keep the validated candidate untouched so a later poll can retry it.
+      return { candidateId, status: 'deferred', reasonCode: error.code }
+    }
     if (!(error instanceof UnsafeCandidateError)) throw error
     await isolateCandidate(database, candidateId, error.code, error.issues, now)
     return { candidateId, status: 'quarantined', reasonCode: error.code }
