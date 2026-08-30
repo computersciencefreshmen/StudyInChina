@@ -65,7 +65,7 @@ export interface PublisherEnv {
 
 export type PromotionResult = {
   candidateId: string
-  status: 'applied' | 'already-applied' | 'quarantined' | 'busy'
+  status: 'applied' | 'already-applied' | 'quarantined' | 'busy' | 'deferred'
   publicationJobId?: string
   reasonCode?: string
 }
