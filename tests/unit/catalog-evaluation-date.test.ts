@@ -48,6 +48,7 @@ describe('JSON runtime release evaluation dates', () => {
 
       const result = await repository[method]({ today: evaluationDate, limit: 1 })
 
+      if (!result.release) throw new Error('JSON list results must include release metadata')
       expect(result.release.evaluatedForDate).toBe(evaluationDate)
       expect(result.release.dataDate).not.toBe(evaluationDate)
       expect(result.release.dataCheckedThrough).not.toBe(evaluationDate)
