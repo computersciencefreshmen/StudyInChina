@@ -143,6 +143,29 @@ describe('pilot source manifests', () => {
     ).toEqual([2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3])
   })
 
+  it('preserves distinct request paths and query strings in resource keys', () => {
+    expect(sourceResourceKey('https://example.edu/catalog')).not.toBe(
+      sourceResourceKey('https://example.edu/catalog/'),
+    )
+    expect(sourceResourceKey('https://example.edu/catalog?level=masters&lang=en'))
+      .not.toBe(sourceResourceKey('https://example.edu/catalog?lang=en&level=masters'))
+    expect(sourceResourceKey('https://example.edu/catalog?year=2026')).not.toBe(
+      sourceResourceKey('https://example.edu/catalog?year=2027'),
+    )
+    expect(sourceResourceKey('https://example.edu/catalog?name=Chinese')).not.toBe(
+      sourceResourceKey('https://example.edu/catalog?name=chinese'),
+    )
+  })
+
+  it('ignores fragments and uses standard host and default-port normalization', () => {
+    expect(sourceResourceKey('https://example.edu/catalog?year=2026#masters')).toBe(
+      sourceResourceKey('https://example.edu/catalog?year=2026#doctoral'),
+    )
+    expect(sourceResourceKey('https://EXAMPLE.edu:443/catalog?year=2026')).toBe(
+      sourceResourceKey('https://example.edu/catalog?year=2026'),
+    )
+  })
+
   it('rejects missing, mismatched, or forged source bindings', () => {
     const missing = clonedInputs()
     recordOf(missing[0]!).sourceBindings.pop()

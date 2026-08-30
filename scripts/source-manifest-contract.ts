@@ -26,9 +26,8 @@ export type SourceBinding = {
 export function normalizeSourceResourceUrl(value: string): string {
   const url = new URL(value)
   url.hash = ''
-  url.protocol = url.protocol.toLowerCase()
-  url.hostname = url.hostname.toLowerCase()
-  if (url.pathname !== '/') url.pathname = url.pathname.replace(/\/+$/, '')
+  // Keep the request path and query intact: a trailing slash or query order can
+  // identify a different official resource. URL already normalizes host/port.
   return url.toString()
 }
 
