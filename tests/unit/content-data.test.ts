@@ -52,7 +52,14 @@ describe('published content data', () => {
 
     expect(quarantinedCycles.length).toBeGreaterThan(0)
     expect(quarantinedCycles.every((cycle) => !publishedCycleIds.has(cycle.id))).toBe(true)
-    expect(actionableCycles.length).toBeGreaterThan(0)
+    // A school need not have an open intake every day. Availability is content,
+    // while current evidence and an honest application state are the contract.
+    for (const cycle of actionableCycles) {
+      expect(cycle.status).toBe('verified')
+      expect(cycle.reviewAfter >= PUBLISHED_AS_OF).toBe(true)
+      expect(cycle.verifiedAt <= PUBLISHED_AS_OF).toBe(true)
+      expect(cycle.sourceIds.length).toBeGreaterThan(0)
+    }
   })
 
   it('separates verified identities from complete program and cycle facts', () => {

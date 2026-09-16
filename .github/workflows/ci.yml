@@ -48,6 +48,9 @@ jobs:
       - name: Run unit tests
         run: npm run test
 
+      - name: Test full record audit
+        run: npm run test:audit
+
       - name: Validate content data
         run: npm run validate:data
 

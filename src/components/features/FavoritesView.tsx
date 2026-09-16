@@ -1,19 +1,26 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { Button, Card, EmptyState, LinkButton } from '@/components/ui'
+import { Badge, Button, Card, EmptyState, LinkButton } from '@/components/ui'
+import { FactValue } from '@/components/ui/FactValue'
 import type { LaunchLocale } from '@/i18n/config'
 import type { Messages } from '@/i18n/messages'
+import { getDataTrustCopy } from '@/i18n/data-trust'
+import { getDecisionExperienceCopy } from '@/i18n/decision-experience'
 import type {
   AdmissionCycleRecord,
   ApiEnvelope,
+  FactStatus,
   ProgramRecord,
 } from '@/lib/catalog-api/types'
 import { formatCny, formatDate, localize } from '@/lib/data/format'
+import { getApplicationState, type ApplicationState } from '@/lib/data/admission'
 import { degreeLabels, disciplineLabels, languageLabel } from '@/lib/data/labels'
+import { getTodayDate, isCurrentVerifiedRecord } from '@/lib/data/freshness'
 import { MAX_COMPARE } from '@/lib/favorites'
 import { useFavorites } from './useFavorites'
 import { FavoriteButton } from './FavoriteButton'
+import { CatalogFreshnessNote } from './DataFreshnessPanel'
 
 type ComparisonItem = {
   program: ProgramRecord
@@ -65,7 +72,7 @@ function safeHttpsUrl(value: string | null | undefined): string | null {
 async function fetchComparison(ids: string[], signal: AbortSignal): Promise<ComparisonResponse> {
   const response = await fetch(
     `/api/v1/programs/compare?ids=${encodeURIComponent(ids.join(','))}`,
-    { headers: { Accept: 'application/json' }, signal },
+    { headers: { Accept: 'application/json' }, cache: 'no-store', signal },
   )
   if (!response.ok) throw new Error(`Comparison request failed with ${response.status}`)
   return await response.json() as ComparisonResponse
@@ -90,8 +97,42 @@ function durationLabel(program: ProgramRecord, messages: Messages) {
     : `${program.durationMonths} ${messages.common.months}`
 }
 
-function applicationStateLabel(cycle: AdmissionCycleRecord | null, messages: Messages): string {
-  if (!cycle) return messages.programs.notAnnounced
+function comparisonFactStatus(
+  record: ProgramRecord | AdmissionCycleRecord | null,
+  field: string,
+  value: unknown,
+  today: string,
+  parentNeedsReview = false,
+): FactStatus {
+  if (parentNeedsReview || (record && !isCurrentVerifiedRecord(record, today))) return 'stale'
+  const status = record?.fieldMeta[field]?.status
+  if (status && status !== 'known') return status
+  return value === null || value === undefined || value === '' ? 'officially_not_announced' : 'known'
+}
+
+/** API states are snapshots; date fields must be re-evaluated while a tab stays open. */
+function currentApplicationState(cycle: AdmissionCycleRecord | null, today: string): ApplicationState {
+  if (!cycle?.dateStatus) return 'not-announced'
+  const unsafeStatuses = new Set(['conflict', 'source_unavailable', 'stale'])
+  for (const field of ['dateStatus', 'opensOn', 'closesOn']) {
+    const status = cycle.fieldMeta[field]?.status
+    if (status && unsafeStatuses.has(status)) return 'not-announced'
+  }
+  if (cycle.fieldMeta.dateStatus && cycle.fieldMeta.dateStatus.status !== 'known') return 'not-announced'
+  const permittedDate = (field: 'opensOn' | 'closesOn') => {
+    const meta = cycle.fieldMeta[field]
+    return !meta || meta.status === 'known' ? cycle[field] : null
+  }
+  return getApplicationState({
+    ...cycle,
+    dateStatus: cycle.dateStatus,
+    opensOn: permittedDate('opensOn'),
+    closesOn: permittedDate('closesOn'),
+    evidenceBasis: cycle.evidenceBasis ?? undefined,
+  }, today)
+}
+
+function applicationStateLabel(cycle: AdmissionCycleRecord | null, messages: Messages, today: string): string {
   const labels = {
     open: messages.common.openNow,
     upcoming: messages.programs.upcoming,
@@ -101,7 +142,7 @@ function applicationStateLabel(cycle: AdmissionCycleRecord | null, messages: Mes
     'not-announced': messages.programs.notAnnounced,
     'previous-cycle': messages.programs.previousCycle,
   }
-  return labels[cycle.applicationState]
+  return labels[currentApplicationState(cycle, today)]
 }
 
 export function FavoritesView({
@@ -125,6 +166,36 @@ export function FavoritesView({
   const compared = saved.filter(({ program }) => selected.includes(program.id))
   const copy = messages.favorites
   const experience = experienceCopy[locale]
+  const trust = getDataTrustCopy(locale)
+  const decision = getDecisionExperienceCopy(locale)
+  const today = getTodayDate()
+
+  useEffect(() => {
+    if (!ready || favorites.length === 0) return
+    let timer: ReturnType<typeof setTimeout> | undefined
+    const refresh = () => setRetryKey((value) => value + 1)
+    const scheduleMidnight = () => {
+      clearTimeout(timer)
+      // Admission dates use modern China Standard Time (UTC+08:00), not the viewer's timezone.
+      const dayMilliseconds = 86_400_000
+      const untilMidnight = dayMilliseconds - ((Date.now() + 8 * 3_600_000) % dayMilliseconds)
+      timer = setTimeout(() => {
+        refresh()
+        scheduleMidnight()
+      }, untilMidnight)
+    }
+    const onVisibilityChange = () => {
+      if (document.visibilityState !== 'visible') return
+      refresh()
+      scheduleMidnight()
+    }
+    scheduleMidnight()
+    document.addEventListener('visibilitychange', onVisibilityChange)
+    return () => {
+      clearTimeout(timer)
+      document.removeEventListener('visibilitychange', onVisibilityChange)
+    }
+  }, [ready, favorites.length])
 
   useEffect(() => {
     if (!ready || favorites.length === 0) return
@@ -172,9 +243,10 @@ export function FavoritesView({
 
   return <div className="atlas-stack" style={{ '--atlas-stack-gap': '3rem' } as React.CSSProperties}>
     <div>
+      <CatalogFreshnessNote locale={locale} today={today} />
       <p className="result-count">{copy.limit} {messages.favorites.localOnly}</p>
       <div className="content-grid">
-        {saved.map(({ program }) => <Card key={program.id} className="record-card">
+        {saved.map(({ program, currentCycle }) => <Card key={program.id} className="record-card">
           <label className="checkbox-field">
             <input
               type="checkbox"
@@ -187,6 +259,10 @@ export function FavoritesView({
           <h2 className="record-card__title">{localize(program.name, locale)}</h2>
           <p className="record-card__place">{localize(program.university.name, locale)}</p>
           <div className="tag-list">
+            <Badge tone={isCurrentVerifiedRecord(program, today) && (!currentCycle || isCurrentVerifiedRecord(currentCycle, today)) ? 'neutral' : 'warning'}>
+              {!isCurrentVerifiedRecord(program, today) || (currentCycle && !isCurrentVerifiedRecord(currentCycle, today))
+                ? messages.common.stale : applicationStateLabel(currentCycle, messages, today)}
+            </Badge>
             <span>{degreeLabels(locale)[program.degreeLevel]}</span>
             <span>{program.discipline ? disciplineLabels(locale)[program.discipline] : messages.common.unknown}</span>
           </div>
@@ -211,30 +287,38 @@ export function FavoritesView({
       </div>
       <div className="compare-grid">
         {compared.map(({ program, currentCycle, linkedScholarshipCount }) => {
-          const canApply = currentCycle?.applicationState === 'open'
-            || currentCycle?.applicationState === 'rolling'
+          const programNeedsReview = !isCurrentVerifiedRecord(program, today)
+          const cycleNeedsReview = Boolean(currentCycle && !isCurrentVerifiedRecord(currentCycle, today))
+          const needsReview = programNeedsReview || cycleNeedsReview
+          const currentTuition = currentCycle?.dateStatus !== 'previous-cycle-reference'
+            && (currentCycle?.tuitionStatus ?? 'confirmed') === 'confirmed'
+            ? currentCycle?.tuitionCny : null
+          const applicationState = currentApplicationState(currentCycle, today)
+          const canApply = !needsReview
+            && comparisonFactStatus(program, 'applyUrl', program.applyUrl, today) === 'known'
+            && (applicationState === 'open' || applicationState === 'rolling')
           const applyHref = canApply ? safeHttpsUrl(program.applyUrl) : null
           const sourceHref = currentCycle?.officialSources
             .map((source) => safeHttpsUrl(source.url)).find(Boolean)
             ?? program.officialSources.map((source) => safeHttpsUrl(source.url)).find(Boolean)
             ?? safeHttpsUrl(program.programUrl)
-          const checkedAt = currentCycle?.officialSources[0]?.checkedAt
-            ?? program.officialSources[0]?.checkedAt
-            ?? program.verifiedAt
+          const reviewDue = [program.reviewAfter, ...(currentCycle ? [currentCycle.reviewAfter] : [])].sort()[0]
 
           return <Card key={program.id} accent="jade">
             <h3 className="atlas-card__title">{localize(program.name, locale)}</h3>
             <dl className="compare-facts">
               <div><dt>{copy.university}</dt><dd>{localize(program.university.name, locale)}</dd></div>
               <div><dt>{messages.programs.degree}</dt><dd>{degreeLabels(locale)[program.degreeLevel]}</dd></div>
-              <div><dt>{messages.common.language}</dt><dd>{program.teachingLanguages?.length ? program.teachingLanguages.map((item) => languageLabel(item, locale)).join(', ') : messages.common.unknown}</dd></div>
-              <div><dt>{messages.common.duration}</dt><dd>{durationLabel(program, messages)}</dd></div>
-              <div><dt>{messages.programs.applicationStatus}</dt><dd>{applicationStateLabel(currentCycle, messages)}</dd></div>
-              <div><dt>{messages.common.tuition}</dt><dd>{tuitionLabel(currentCycle, locale, messages)}</dd></div>
-              <div><dt>{messages.programs.fee}</dt><dd>{currentCycle?.applicationFeeCny == null ? messages.common.unknown : formatCny(currentCycle.applicationFeeCny, locale, messages.common.unknown)}</dd></div>
-              <div><dt>{messages.common.deadline}</dt><dd>{formatDate(currentCycle?.closesOn ?? null, locale, messages.common.unknown)}</dd></div>
+              <div><dt>{messages.common.language}</dt><dd><FactValue locale={locale} status={comparisonFactStatus(program, 'teachingLanguages', program.teachingLanguages?.length ? program.teachingLanguages : null, today)} value={program.teachingLanguages?.length ? program.teachingLanguages.map((item) => languageLabel(item, locale)).join(', ') : undefined} /></dd></div>
+              <div><dt>{messages.common.duration}</dt><dd><FactValue locale={locale} status={comparisonFactStatus(program, 'durationMonths', program.durationMonths, today)} value={durationLabel(program, messages)} /></dd></div>
+              <div><dt>{messages.programs.applicationStatus}</dt><dd>{needsReview ? messages.common.stale : applicationStateLabel(currentCycle, messages, today)}</dd></div>
+              <div><dt>{decision.currentCycle}</dt><dd>{currentCycle?.academicYear ?? messages.common.unknown}</dd></div>
+              <div><dt>{messages.common.tuition}</dt><dd><FactValue locale={locale} status={comparisonFactStatus(currentCycle, 'tuitionCny', currentTuition, today, programNeedsReview)} value={currentTuition == null ? undefined : tuitionLabel(currentCycle, locale, messages)} /></dd></div>
+              <div><dt>{messages.programs.fee}</dt><dd><FactValue locale={locale} status={comparisonFactStatus(currentCycle, 'applicationFeeCny', currentCycle?.applicationFeeCny, today, programNeedsReview)} value={currentCycle?.applicationFeeCny == null ? undefined : formatCny(currentCycle.applicationFeeCny, locale, messages.common.unknown)} /></dd></div>
+              <div><dt>{messages.common.deadline}</dt><dd><FactValue locale={locale} status={comparisonFactStatus(currentCycle, 'closesOn', currentCycle?.closesOn, today, programNeedsReview)} value={currentCycle?.closesOn ? <time dateTime={currentCycle.closesOn}>{formatDate(currentCycle.closesOn, locale, messages.common.unknown)}</time> : undefined} /></dd></div>
               <div><dt>{experience.linkedScholarships}</dt><dd>{linkedScholarshipCount.toLocaleString(locale)}</dd></div>
-              <div><dt>{messages.common.lastVerified}</dt><dd><time dateTime={checkedAt}>{formatDate(checkedAt, locale, '—')}</time></dd></div>
+              <div><dt>{messages.common.lastVerified}</dt><dd><time dateTime={program.verifiedAt}>{formatDate(program.verifiedAt, locale, '—')}</time></dd></div>
+              <div><dt>{trust.reviewDue}</dt><dd><time dateTime={reviewDue}>{formatDate(reviewDue, locale, '—')}</time></dd></div>
             </dl>
             <div className="record-card__actions">
               {sourceHref ? <a className="text-link" href={sourceHref} target="_blank" rel="noreferrer">{messages.common.officialSource} ↗</a> : null}

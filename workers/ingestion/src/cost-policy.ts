@@ -13,7 +13,7 @@ export type InfrastructureCostPolicy = {
   browserScope: 'all' | 'critical-only' | 'none'
 }
 
-const CRITICAL_BROWSER_CATEGORIES = new Set<SourceCategory>([
+export const CRITICAL_BROWSER_CATEGORIES = new Set<SourceCategory>([
   'international_admissions_home',
   'undergraduate_catalog',
   'masters_catalog',

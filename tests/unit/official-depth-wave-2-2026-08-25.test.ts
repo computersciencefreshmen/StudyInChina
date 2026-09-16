@@ -82,9 +82,10 @@ function expectOfficialHttps(sourceIds: string[], label: string): void {
     const source = sourceById.get(sourceId)
     expect(source, `${label}:${sourceId}`).toBeDefined()
     expect(source?.official, `${label}:${sourceId}`).toBe(true)
-    expect(source?.accessedAt, `${label}:${sourceId}`).toBe(
-      sourceId === 'src-clec-iclt-2026-standard' ? '2026-07-28' : TODAY,
-    )
+    // Later official rechecks update accessedAt without changing this batch's identity contract.
+    const firstCheckedAt = sourceId === 'src-clec-iclt-2026-standard' ? '2026-07-28' : TODAY
+    expect(source?.accessedAt, `${label}:${sourceId}`).toMatch(/^\d{4}-\d{2}-\d{2}$/u)
+    expect((source?.accessedAt ?? '').localeCompare(firstCheckedAt), `${label}:${sourceId}`).toBeGreaterThanOrEqual(0)
     expect(new URL(source?.url ?? 'http://invalid.local').protocol, `${label}:${sourceId}`).toBe('https:')
   }
 }
@@ -233,11 +234,13 @@ describe('SISU, AHU and CQU official depth wave on 2026-08-25', () => {
     expect(cquMayor?.universityIds).toEqual(['uni-chongqing-university'])
   })
 
-  it('publishes the CQU March 2027 deadline without claiming the route is open', () => {
+  it('retains the CQU March 2027 evidence while withholding its overdue public deadline', () => {
     const scholarship = data.scholarships.find(
       (item) => item.id === 'scholarship-cqu-iclt-2026',
     )
-    expect(scholarship?.status).toBe('verified')
+    expect(scholarship?.status).toBe('stale')
+    expect(scholarship?.verifiedAt).toBe(TODAY)
+    expect(scholarship?.reviewAfter).toBe('2026-09-01')
     expect(scholarship?.deadline).toBe('2026-10-31')
     expect(scholarship?.applicationUrl).toBeNull()
     expect(scholarship?.programIds).toEqual([])
@@ -245,6 +248,10 @@ describe('SISU, AHU and CQU official depth wave on 2026-08-25', () => {
     expect(scholarship?.summary?.en).toContain('no opening date')
     expectSixLanguages(scholarship?.name ?? {}, scholarship?.id ?? 'missing-cqu-iclt')
     expectOfficialHttps(scholarship?.sourceIds ?? [], scholarship?.id ?? 'missing-cqu-iclt')
-    expect(published.scholarships.some((item) => item.id === scholarship?.id)).toBe(true)
+    const publicRecord = published.scholarships.find((item) => item.id === scholarship?.id)
+    expect(publicRecord).toBeDefined()
+    expect(publicRecord?.status).toBe('stale')
+    expect(publicRecord?.deadline).toBeNull()
+    expect(publicRecord?.summary).toBeNull()
   })
 })

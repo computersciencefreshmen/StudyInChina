@@ -1,0 +1,35 @@
+{
+  "format": "studyinchina.automation-deployment",
+  "observedAt": "2026-09-16T10:44:07.404Z",
+  "pipelineMigrations": [
+    "0017_automation_retry_state.sql",
+    "0018_source_revalidation_observations.sql"
+  ],
+  "catalogMigrations": [
+    "0011_application_state_calendar.sql"
+  ],
+  "workers": {
+    "ingestion": "63eedf54-15fe-493b-9ac3-93711c59e492",
+    "publisher": "a9bb1368-aeb8-4078-a567-4281c0da8b25",
+    "entityMaterializer": "3064f5b4-d351-4d9f-a3e8-748a81140047",
+    "releaseBuilder": "d6807c7c-da9b-4dd9-ae2a-69af35dd47c4",
+    "catalogApi": "b6ebcbf7-07e5-4a36-bf59-e96e93d70ef0"
+  },
+  "sources": {
+    "registered": 1528,
+    "enabled": 1514,
+    "seeded": 1374,
+    "automaticallyDiscovered": 54
+  },
+  "postDeploymentChecks": {
+    "healthStatus": 200,
+    "unauthorizedOperationsStatus": 403,
+    "sourceObservations": 0
+  },
+  "limitations": [
+    "No remote observation receipt has yet been observed",
+    "Website still serves the prior JSON release",
+    "GitHub cloud snapshot and backup token missing",
+    "Vercel stable alias token missing; local CLI logged out"
+  ]
+}

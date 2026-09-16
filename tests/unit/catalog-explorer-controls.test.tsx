@@ -47,6 +47,19 @@ function scholarshipResult(): ScholarshipCatalogResult {
 }
 
 describe('catalogue explorer controls', () => {
+  it('clears only the status shortcut and resets pagination while preserving other filters', () => {
+    const result = programResult()
+    result.filters = parseProgramCatalogFilters({ q: 'medicine', institution: 'tsinghua', applicationState: 'closed', page: '2' })
+    render(<ProgramExplorerV2 result={result} locale="en" messages={getMessages('en')} today="2026-09-16" />)
+    const all = screen.getByRole('link', { name: 'All' })
+    const url = new URL(all.getAttribute('href')!, 'https://example.test')
+    expect(url.searchParams.get('q')).toBe('medicine')
+    expect(url.searchParams.get('institution')).toBe('tsinghua')
+    expect(url.searchParams.has('applicationState')).toBe(false)
+    expect(url.searchParams.has('page')).toBe(false)
+    expect(url.searchParams.has('cursor')).toBe(false)
+  })
+
   it.each(locales)('localizes progressive disclosure controls in %s', (locale) => {
     const messages = getMessages(locale)
     const text = catalogExplorerText(locale)

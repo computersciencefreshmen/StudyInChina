@@ -89,7 +89,7 @@ describe('Chinese-language degree and scholarship expansion on 2026-08-02', () =
     ))).toHaveLength(1)
   })
 
-  it('publishes the verified Guangzhou University master with its degree facts and scholarship link', () => {
+  it('preserves the Guangzhou University identity and sourced degree facts without publishing stale facts', () => {
     const university = published.universities.find((item) => item.slug === 'guangzhou-university')
     expect(university).toBeDefined()
     const program = chinesePrograms.find((item) => (
@@ -97,8 +97,16 @@ describe('Chinese-language degree and scholarship expansion on 2026-08-02', () =
         && item.degreeLevel === 'master'
         && item.name.zh === '国际中文教育硕士'
     ))
-    expect(program?.durationMonths).toBe(36)
-    expect(program?.teachingLanguages).toEqual(expect.arrayContaining(['Chinese', 'English']))
+    expect(program).toBeDefined()
+    const sourceRecord = data.programs.find((item) => item.id === program?.id)
+    expect(sourceRecord?.durationMonths).toBe(36)
+    expect(sourceRecord?.teachingLanguages).toEqual(expect.arrayContaining(['Chinese', 'English']))
+    expect(sourceRecord?.verifiedAt).toBe(TODAY)
+    expect(sourceRecord?.reviewAfter).toBe('2026-09-01')
+    expect(sourceRecord?.status).toBe('stale')
+    expect(program?.durationMonths).toBeNull()
+    expect(program?.teachingLanguages).toEqual([])
+    expect(program?.applyUrl).toBeNull()
 
     const scholarship = published.scholarships.find((item) => (
       item.id === 'sch-gap-clw-sw-gzhu-belt-road-scholarship'

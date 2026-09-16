@@ -1,3 +1,4 @@
+import { withAutomationHeartbeat } from '../../shared/automation-heartbeat'
 import { processEntityMaterializationBatch } from '../../ingestion/src/entity-materializer-scheduler'
 import type {
   D1Database,
@@ -6,6 +7,7 @@ import type {
 
 const SERVICE_VERSION = '1.0.0'
 export const DAILY_RELEASE_CRON = '17 19 * * *'
+export const MATERIALIZATION_CRON = '*/15 * * * *'
 
 export interface EntityMaterializerEnv {
   PIPELINE_DB: D1Database
@@ -26,14 +28,16 @@ function boundedInteger(
 }
 
 export function shouldRequestDailyRelease(cron: string): boolean {
-  return cron.trim() === DAILY_RELEASE_CRON
+  // The DB's unique daily release window makes catch-up calls idempotent.
+  // Missing one dedicated cron must not delay verified updates another day.
+  return [DAILY_RELEASE_CRON, MATERIALIZATION_CRON, '47 * * * *'].includes(cron.trim())
 }
 
-export async function scheduleEntityMaterialization(
+async function materializeScheduledBatch(
   controller: ScheduledControllerLike,
   environment: EntityMaterializerEnv,
 ): Promise<void> {
-  await processEntityMaterializationBatch(environment.PIPELINE_DB, {
+  const result = await processEntityMaterializationBatch(environment.PIPELINE_DB, {
     candidateLimit: boundedInteger(
       environment.MATERIALIZATION_BATCH_LIMIT,
       20,
@@ -47,6 +51,15 @@ export async function scheduleEntityMaterialization(
     now: new Date(controller.scheduledTime).toISOString(),
     requestRelease: shouldRequestDailyRelease(controller.cron),
   })
+  if (result.failures.length) {
+    const error = new Error(`${result.failures.length} entity materialization attempts are awaiting retry`)
+    Object.assign(error, { code: 'entity_materialization_partial_failure' })
+    throw error
+  }
+}
+
+export async function scheduleEntityMaterialization(controller: ScheduledControllerLike, environment: EntityMaterializerEnv): Promise<void> {
+  await withAutomationHeartbeat(environment.PIPELINE_DB, 'entity-materializer', () => materializeScheduledBatch(controller, environment))
 }
 
 export function handleFetch(request: Request): Response {

@@ -2,9 +2,10 @@ import { NextResponse } from 'next/server'
 import { CatalogRepositoryError } from '@/lib/catalog'
 import { InvalidCursorError } from './cursor'
 import { InvalidSearchQueryError } from './service'
+import { catalogCacheControl } from './cache-policy'
 
 const responseHeaders = {
-  'Cache-Control': 'public, max-age=60, s-maxage=300, stale-while-revalidate=3600',
+  'X-Content-Type-Options': 'nosniff',
   'Content-Type': 'application/json; charset=utf-8',
 }
 
@@ -55,13 +56,16 @@ export function numberParam(
 }
 
 export function ok<T>(payload: T) {
-  return NextResponse.json(payload, { status: 200, headers: responseHeaders })
+  return NextResponse.json(payload, {
+    status: 200,
+    headers: { ...responseHeaders, 'Cache-Control': catalogCacheControl() },
+  })
 }
 
 export function notFound(resource: string) {
   return NextResponse.json(
     { error: { code: 'not_found', message: `${resource} was not found.` } },
-    { status: 404, headers: responseHeaders },
+    { status: 404, headers: { ...responseHeaders, 'Cache-Control': 'no-store' } },
   )
 }
 

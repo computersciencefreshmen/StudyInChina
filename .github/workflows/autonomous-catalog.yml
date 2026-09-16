@@ -1,0 +1,145 @@
+name: Autonomous catalog maintenance
+
+on:
+  schedule:
+    - cron: '23 16 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: autonomous-catalog-maintenance-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  maintain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Downgrade expired evidence without changing verification dates
+        run: npm run data:rollover-stale -- --apply
+      - name: Pull complete verified Pipeline release when cloud credentials are configured
+        id: snapshot
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [[ -z "$CLOUDFLARE_API_TOKEN" || -z "$CLOUDFLARE_ACCOUNT_ID" ]]; then
+            echo '::error::Cloud snapshot sync is not configured; source review dates will not be extended.'
+            exit 1
+          fi
+          npm run automation:sync -- --remote --apply --output "$RUNNER_TEMP/automation-snapshot"
+      - name: Validate resulting public catalog
+        run: |
+          npm run validate:data
+          npm run check:program-coverage:strict
+          npm run test:automation
+          npx vitest run tests/unit/publication.test.ts tests/unit/overdue-rollover.test.ts
+      - name: Publish the exact catalog commit only after protected-branch CI passes
+        timeout-minutes: 25
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- content/data; then exit 0; fi
+          base_sha="$(git rev-parse HEAD)"
+          git fetch origin main --depth=1
+          if [[ "$(git rev-parse origin/main)" != "$base_sha" ]]; then
+            echo 'Main advanced during maintenance; next scheduled run will rebuild against current data.'
+            exit 1
+          fi
+          if ! [[ "$GITHUB_RUN_ID" =~ ^[0-9]+$ && "$GITHUB_RUN_ATTEMPT" =~ ^[0-9]+$ ]]; then
+            echo 'Invalid workflow run identity; no branch was created.' >&2
+            exit 1
+          fi
+          maintenance_branch="codex/automation-catalog-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- content/data/cities.json content/data/universities.json content/data/programs.json content/data/admission-cycles.json content/data/scholarships.json content/data/sources.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'data: maintain evidence freshness and verified catalog release'
+          candidate_sha="$(git rev-parse HEAD)"
+          git push origin "HEAD:refs/heads/${maintenance_branch}"
+          # GITHUB_TOKEN pushes do not trigger push workflows. Explicitly validate this branch.
+          gh workflow run ci.yml --ref "$maintenance_branch"
+          deadline=$((SECONDS + 1200))
+          ci_passed=false
+          api="${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/workflows/ci.yml/runs?branch=${maintenance_branch}&event=workflow_dispatch&per_page=20"
+          while (( SECONDS < deadline )); do
+            remaining=$((deadline - SECONDS))
+            request_timeout=20
+            if (( remaining < request_timeout )); then request_timeout="$remaining"; fi
+            outcome='pending'
+            if response="$(curl --fail --silent --show-error --connect-timeout 10 --max-time "$request_timeout" \
+              --header 'Accept: application/vnd.github+json' \
+              --header "Authorization: Bearer ${GH_TOKEN}" \
+              --header 'X-GitHub-Api-Version: 2022-11-28' "$api")"; then
+              outcome="$(jq -er --arg sha "$candidate_sha" --arg branch "$maintenance_branch" '
+                .workflow_runs
+                | map(select(.head_sha == $sha and .head_branch == $branch and .event == "workflow_dispatch"))
+                | sort_by(.id) | last
+                | if . == null then "pending"
+                  elif .status == "completed" then .conclusion
+                  else "pending" end
+              ' <<< "$response" || echo 'pending')"
+            fi
+            if [[ "$outcome" == 'success' ]]; then ci_passed=true; break; fi
+            if [[ "$outcome" != 'pending' ]]; then
+              echo "::error::CI for ${candidate_sha} ended with ${outcome}; main was not changed."
+              exit 1
+            fi
+            remaining=$((deadline - SECONDS))
+            if (( remaining <= 0 )); then break; fi
+            pause=15
+            if (( remaining < pause )); then pause="$remaining"; fi
+            sleep "$pause"
+          done
+          if [[ "$ci_passed" != 'true' ]]; then
+            echo "::error::No successful CI was observed for ${candidate_sha} within 20 minutes; main was not changed."
+            exit 1
+          fi
+          git fetch origin main --depth=1
+          if [[ "$(git rev-parse origin/main)" != "$base_sha" ]]; then
+            echo '::error::Main advanced while the candidate was being tested; no rebase, force-push or untested replacement will be attempted.'
+            exit 1
+          fi
+          # This is a normal fast-forward push of the already checked commit. GitHub retains every protection rule.
+          git push origin "${candidate_sha}:refs/heads/main"
+          # The production-alias gate observes CI on main as well as the exact deployment SHA.
+          gh workflow run ci.yml --ref main
+          git push origin --delete "$maintenance_branch"
+      - name: Build complete official-source seed inventory
+        run: npm run automation:seeds -- --output "$RUNNER_TEMP/automation-seeds"
+      - name: Register new official sources when cloud credentials are configured
+        id: seeds
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [[ -z "$CLOUDFLARE_API_TOKEN" || -z "$CLOUDFLARE_ACCOUNT_ID" ]]; then exit 1; fi
+          npx wrangler d1 execute INGESTION_DB --config workers/ingestion/wrangler.jsonc --remote --file "$RUNNER_TEMP/automation-seeds/catalog-seeds.sql"
+      - name: Preserve automation evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: autonomous-catalog-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/automation-snapshot/assessment.json
+            ${{ runner.temp }}/automation-seeds/catalog-seeds.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Report incomplete cloud automation explicitly
+        if: always() && (steps.snapshot.outcome == 'failure' || steps.seeds.outcome == 'failure')
+        run: exit 1

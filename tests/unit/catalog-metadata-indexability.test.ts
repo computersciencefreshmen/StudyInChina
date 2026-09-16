@@ -1,4 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
+
+vi.mock('next/server', () => ({ connection: vi.fn(async () => undefined) }))
 
 import { generateMetadata as generateCitiesMetadata } from '@/app/[locale]/cities/page'
 import { generateMetadata as generateProgramDetailMetadata } from '@/app/[locale]/programs/[slug]/page'

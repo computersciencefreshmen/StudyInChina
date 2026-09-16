@@ -1,4 +1,6 @@
-import { isolateCandidate, promoteCandidate } from './promoter'
+import { promoteCandidate } from './promoter'
+import { clearAutomationRetry, recordAutomationRetry } from '../../entity-materializer/src/runtime-retry'
+import { withAutomationHeartbeat } from '../../shared/automation-heartbeat'
 import type {
   PromotionFailure,
   PromotionJob,
@@ -31,7 +33,7 @@ function isPromotionJob(value: unknown): value is PromotionJob {
     && !Number.isNaN(new Date(job.requestedAt).getTime())
 }
 
-async function scheduleValidatedCandidates(
+async function dispatchValidatedCandidates(
   controller: ScheduledControllerLike,
   environment: PublisherEnv,
 ): Promise<void> {
@@ -42,7 +44,10 @@ async function scheduleValidatedCandidates(
        FROM ingestion_candidates candidate
        LEFT JOIN candidate_promotions promotion
          ON promotion.candidate_id = candidate.candidate_id
-      WHERE candidate.candidate_status = 'validated'
+       LEFT JOIN automation_retry_state retry
+         ON retry.task_kind = 'candidate_promotion' AND retry.task_id = candidate.candidate_id
+      WHERE (retry.task_id IS NULL OR retry.next_attempt_at <= ?1)
+        AND candidate.candidate_status = 'validated'
         AND candidate.gate_status IN ('rule-pass', 'dual-pass')
         AND json_array_length(candidate.facts_json) > 0
         AND NOT EXISTS (
@@ -69,17 +74,23 @@ async function scheduleValidatedCandidates(
             AND promotion.lease_expires_at <= ?1
           )
         )
-      ORDER BY candidate.created_at, candidate.candidate_id
+      ORDER BY coalesce(retry.last_attempt_at, candidate.created_at), candidate.candidate_id
       LIMIT ?2`,
   ).bind(requestedAt, limit).all<{ candidate_id: string }>()
   if (!result.success) throw new Error(`publisher scheduler query failed: ${result.error ?? 'unknown'}`)
+  const failures: unknown[] = []
   for (const row of result.results ?? []) {
-    await environment.PROMOTION_QUEUE.send({
-      version: 1,
-      candidateId: row.candidate_id,
-      requestedAt,
-    })
+    try {
+      await environment.PROMOTION_QUEUE.send({ version: 1, candidateId: row.candidate_id, requestedAt })
+    } catch (error) {
+      failures.push(error)
+    }
   }
+  if (failures.length) throw new AggregateError(failures, 'Some promotion jobs could not be dispatched')
+}
+
+async function scheduleValidatedCandidates(controller: ScheduledControllerLike, environment: PublisherEnv): Promise<void> {
+  await withAutomationHeartbeat(environment.PIPELINE_DB, 'publisher', () => dispatchValidatedCandidates(controller, environment))
 }
 
 async function handleQueue(
@@ -112,27 +123,19 @@ async function handleQueue(
       if (result.status === 'busy') {
         message.retry({ delaySeconds: 60 })
       } else {
+        await clearAutomationRetry(environment.PIPELINE_DB, 'candidate_promotion', job.candidateId)
         // A deferred dependency cannot be repaired by queue retries. The
         // scheduler will rediscover it once every exact mapping is available.
         message.ack()
       }
     } catch (error) {
       const messageText = error instanceof Error ? error.message : String(error)
+      // Runtime failure is an operational retry, never a new evidence verdict.
+      // Once queue attempts run out, the durable scheduled lane rediscovers it.
+      await recordAutomationRetry(environment.PIPELINE_DB, 'candidate_promotion', job.candidateId, error, new Date().toISOString())
       if (message.attempts < maximumAttempts) {
         message.retry({ delaySeconds: Math.min(3_600, 60 * 2 ** (message.attempts - 1)) })
         continue
-      }
-      try {
-        await isolateCandidate(
-          environment.PIPELINE_DB,
-          job.candidateId,
-          'publisher_runtime_failure',
-          [messageText],
-          new Date(),
-        )
-      } catch {
-        // The scheduled poller will rediscover a still-validated candidate or
-        // an expired applying lease after the infrastructure failure clears.
       }
       await environment.PUBLISHER_DLQ.send({
         version: 1,

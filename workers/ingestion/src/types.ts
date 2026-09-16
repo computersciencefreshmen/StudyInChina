@@ -319,6 +319,7 @@ export interface IngestionEnv {
   INGESTION_ADMIN_TOKEN?: string
   USER_AGENT?: string
   SCHEDULE_BATCH_LIMIT?: string
+  DISCOVERY_REGISTER_LIMIT?: string
   MAX_QUEUE_ATTEMPTS?: string
   DEFAULT_FETCH_TIMEOUT_MS?: string
   DEFAULT_MAX_BYTES?: string

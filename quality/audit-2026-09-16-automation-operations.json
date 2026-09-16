@@ -1,0 +1,578 @@
+{
+  "format": "studyinchina.automation-operations-health",
+  "formatVersion": 1,
+  "evaluatedAt": "2026-09-16T10:31:54.682Z",
+  "status": "fail",
+  "summary": {
+    "pass": 24,
+    "fail": 14,
+    "unobserved": 5
+  },
+  "fingerprint": "5e3fa962e026f6437c0afd8e4e0f866a7f4b3e3e3a5ef39414d4fa245b3e4c70",
+  "notification": {
+    "changed": true,
+    "actionable": true,
+    "recovered": false
+  },
+  "scope": {
+    "requestedRemote": true,
+    "observationTransport": "wrangler-cli",
+    "pipelineObserved": true,
+    "expectedBackend": "d1",
+    "productionRunningClaim": false
+  },
+  "publicRelease": {
+    "id": "json:2026-08-26",
+    "catalogBackend": "json",
+    "evaluatedForDate": "2026-09-16",
+    "activatedAt": "2026-08-26T00:00:00.000Z"
+  },
+  "contentSummary": {
+    "rawRecords": {
+      "universities": 272,
+      "programs": 1280,
+      "scholarships": 394,
+      "admissionCycles": 860,
+      "cities": 62,
+      "sources": 2155
+    },
+    "publicRecords": {
+      "universities": 266,
+      "programs": 1265,
+      "scholarships": 366,
+      "admissionCycles": 9,
+      "cities": 62,
+      "sources": 2090
+    },
+    "totalRecords": 5023,
+    "rowsWithFindings": 4631,
+    "findingsByCode": {
+      "stale_evidence": 2331,
+      "missing_admissions_route": 15,
+      "sparse_program_catalogue": 2,
+      "missing_requirements": 1109,
+      "no_current_disposition": 1257,
+      "no_current_confirmed_tuition": 1263,
+      "missing_duration": 448,
+      "missing_application_route": 597,
+      "missing_teaching_language": 181,
+      "review_due_within_seven_days": 20,
+      "scholarship_deadline_unannounced": 314,
+      "partial_scholarship_coverage": 338,
+      "deadline_passed": 276,
+      "actionable_cycle_needs_recheck": 82,
+      "deadline_within_45_days": 51,
+      "documented_source_conflict": 2,
+      "missing_coordinates": 35,
+      "source_monthly_review_due": 2036,
+      "shared_source_url": 1277
+    },
+    "tasksByPriority": {
+      "1": 1344,
+      "2": 3184,
+      "3": 103
+    },
+    "verifiedOverdue": 0,
+    "statusByCollection": {
+      "universities": {
+        "verified": 255,
+        "stale": 11,
+        "archived": 6
+      },
+      "programs": {
+        "stale": 1143,
+        "archived": 1,
+        "draft": 14,
+        "verified": 122
+      },
+      "scholarships": {
+        "stale": 362,
+        "draft": 18,
+        "verified": 14
+      },
+      "admissionCycles": {
+        "draft": 18,
+        "stale": 815,
+        "verified": 27
+      },
+      "cities": {
+        "verified": 62
+      },
+      "sources": {
+        "registered": 2155
+      }
+    },
+    "schemaValid": true,
+    "structuralErrors": []
+  },
+  "reliability": {
+    "format": "studyinchina.p0-reliability-audit",
+    "formatVersion": 1,
+    "status": "fail",
+    "evaluatedAt": "2026-09-16T10:31:54.682Z",
+    "observation": {
+      "formatValid": true,
+      "formatVersionValid": true,
+      "observedAt": "2026-09-16T10:31:54.682Z"
+    },
+    "thresholds": {
+      "observationMaxAgeMinutes": 15,
+      "backupMaxAgeHours": 26,
+      "releaseMaxAgeHours": 48,
+      "schedulerMaxAgeMinutes": 90,
+      "dlqMaxBacklogCount": 0,
+      "outboxMaxAgeHours": 168
+    },
+    "summary": {
+      "pass": 4,
+      "fail": 0,
+      "unobserved": 3
+    },
+    "checks": [
+      {
+        "id": "input_contract",
+        "status": "pass",
+        "source": "observation-document",
+        "observedAt": null,
+        "value": {
+          "formatVersion": 1
+        },
+        "threshold": {
+          "operator": "eq",
+          "value": 1,
+          "unit": "format-version"
+        },
+        "detail": "Observation document uses the supported explicit contract."
+      },
+      {
+        "id": "observation_freshness",
+        "status": "pass",
+        "source": "observation-document",
+        "observedAt": "2026-09-16T10:31:54.682Z",
+        "value": 0,
+        "threshold": {
+          "operator": "lte",
+          "value": 15,
+          "unit": "minutes"
+        },
+        "detail": "Observed value is inside the reliability threshold."
+      },
+      {
+        "id": "backup_age",
+        "status": "unobserved",
+        "source": null,
+        "observedAt": null,
+        "value": null,
+        "threshold": {
+          "operator": "lte",
+          "value": 26,
+          "unit": "hours"
+        },
+        "detail": "Required observation section is missing."
+      },
+      {
+        "id": "release_age",
+        "status": "unobserved",
+        "source": null,
+        "observedAt": null,
+        "value": null,
+        "threshold": {
+          "operator": "lte",
+          "value": 48,
+          "unit": "hours"
+        },
+        "detail": "Required observation section is missing."
+      },
+      {
+        "id": "scheduler_heartbeat_age",
+        "status": "pass",
+        "source": "pipeline-d1:automation-service-runs/ingestion",
+        "observedAt": "2026-09-16T10:18:06.036Z",
+        "value": 13.811,
+        "threshold": {
+          "operator": "lte",
+          "value": 90,
+          "unit": "minutes"
+        },
+        "detail": "Observed value is inside the reliability threshold."
+      },
+      {
+        "id": "dlq_backlog",
+        "status": "unobserved",
+        "source": null,
+        "observedAt": null,
+        "value": null,
+        "threshold": {
+          "operator": "eq",
+          "value": 0,
+          "unit": "messages"
+        },
+        "detail": "Required DLQ observation is missing."
+      },
+      {
+        "id": "outbox_backlog_age",
+        "status": "pass",
+        "source": "pipeline-d1:outbox-events/pending",
+        "observedAt": null,
+        "value": {
+          "backlogCount": 0,
+          "oldestAgeHours": null
+        },
+        "threshold": {
+          "operator": "lt",
+          "value": 168,
+          "unit": "hours"
+        },
+        "detail": "No pending outbox events were observed."
+      }
+    ]
+  },
+  "checks": [
+    {
+      "id": "pipeline.heartbeats.observation",
+      "status": "pass",
+      "code": "observed",
+      "value": null,
+      "detail": "Read-only Pipeline D1 query completed."
+    },
+    {
+      "id": "pipeline.jobs.observation",
+      "status": "pass",
+      "code": "observed",
+      "value": null,
+      "detail": "Read-only Pipeline D1 query completed."
+    },
+    {
+      "id": "pipeline.sources.observation",
+      "status": "pass",
+      "code": "observed",
+      "value": null,
+      "detail": "Read-only Pipeline D1 query completed."
+    },
+    {
+      "id": "pipeline.outbox.observation",
+      "status": "pass",
+      "code": "observed",
+      "value": null,
+      "detail": "Read-only Pipeline D1 query completed."
+    },
+    {
+      "id": "pipeline.entities.observation",
+      "status": "pass",
+      "code": "observed",
+      "value": null,
+      "detail": "Read-only Pipeline D1 query completed."
+    },
+    {
+      "id": "pipeline.retries.observation",
+      "status": "pass",
+      "code": "observed",
+      "value": null,
+      "detail": "Read-only Pipeline D1 query completed."
+    },
+    {
+      "id": "pipeline.evidence.observation",
+      "status": "pass",
+      "code": "observed",
+      "value": null,
+      "detail": "Read-only Pipeline D1 query completed."
+    },
+    {
+      "id": "ingestion.stuck_running",
+      "status": "pass",
+      "code": "within_threshold",
+      "value": 0,
+      "detail": "Running ingestion jobs must make progress within two hours."
+    },
+    {
+      "id": "ingestion.failed_recent",
+      "status": "fail",
+      "code": "threshold_exceeded",
+      "value": 11,
+      "detail": "Terminal ingestion failures in the last 24 hours require automatic retry or investigation."
+    },
+    {
+      "id": "ingestion.retry_exhausted",
+      "status": "fail",
+      "code": "threshold_exceeded",
+      "value": 1,
+      "detail": "Jobs reaching four attempts and terminal failure in the last 24 hours need recovery."
+    },
+    {
+      "id": "sources.enabled_registry",
+      "status": "pass",
+      "code": "sources_registered",
+      "value": 1514,
+      "detail": "The automation must have at least one enabled official source to monitor."
+    },
+    {
+      "id": "sources.overdue_fetch",
+      "status": "pass",
+      "code": "within_threshold",
+      "value": 0,
+      "detail": "Enabled sources must not remain unattempted or overdue for more than 24 hours."
+    },
+    {
+      "id": "sources.repeated_failures",
+      "status": "fail",
+      "code": "threshold_exceeded",
+      "value": 20,
+      "detail": "Sources with four consecutive failures need a recovery plan, not another invented verification date."
+    },
+    {
+      "id": "release.dead_letters",
+      "status": "fail",
+      "code": "threshold_exceeded",
+      "value": 1,
+      "detail": "Terminal release outbox events must be recovered; this is not a Cloudflare Queue DLQ metric."
+    },
+    {
+      "id": "release.expired_leases",
+      "status": "pass",
+      "code": "within_threshold",
+      "value": 0,
+      "detail": "Expired processing leases indicate interrupted work awaiting scheduler recovery."
+    },
+    {
+      "id": "automation.repeated_failures",
+      "status": "fail",
+      "code": "threshold_exceeded",
+      "value": 100,
+      "detail": "Four or more automatic retry failures indicate a persistent operational problem; they never approve evidence."
+    },
+    {
+      "id": "automation.overdue_retries",
+      "status": "pass",
+      "code": "within_threshold",
+      "value": 0,
+      "detail": "Due automatic retries must be attempted within two hours of their scheduled retry time."
+    },
+    {
+      "id": "pipeline.overdue_evidence",
+      "status": "fail",
+      "code": "threshold_exceeded",
+      "value": 1110,
+      "detail": "Validated, applied or published canonical records must not retain overdue evidence as current."
+    },
+    {
+      "id": "pipeline.jobs.backlog_age",
+      "status": "pass",
+      "code": "within_threshold",
+      "value": {
+        "count": 8,
+        "oldestAt": "2026-09-16T10:17:30.000Z"
+      },
+      "detail": "Oldest pending work must be younger than 2 hours; an empty backlog requires explicit count zero and null time."
+    },
+    {
+      "id": "pipeline.outbox.backlog_age",
+      "status": "pass",
+      "code": "within_threshold",
+      "value": {
+        "count": 0,
+        "oldestAt": null
+      },
+      "detail": "Oldest pending work must be younger than 168 hours; an empty backlog requires explicit count zero and null time."
+    },
+    {
+      "id": "pipeline.entities.backlog_age",
+      "status": "fail",
+      "code": "stalled_backlog",
+      "value": {
+        "count": 326,
+        "oldestAt": "2026-07-30T10:20:34.789Z"
+      },
+      "detail": "Oldest pending work must be younger than 24 hours; an empty backlog requires explicit count zero and null time."
+    },
+    {
+      "id": "scheduler.ingestion",
+      "status": "pass",
+      "code": "within_threshold",
+      "value": {
+        "lastStartedAt": "2026-09-16T10:17:30.729Z",
+        "lastSucceededAt": "2026-09-16T10:18:06.036Z",
+        "lastRunFailed": false
+      },
+      "detail": "A successful persisted scheduler run must be observed within 90 minutes. HTTP /health and an idle job table are not scheduler evidence."
+    },
+    {
+      "id": "scheduler.entity-materializer",
+      "status": "fail",
+      "code": "last_run_failed",
+      "value": {
+        "lastStartedAt": "2026-09-16T10:30:30.680Z",
+        "lastSucceededAt": "2026-09-16T10:15:31.062Z",
+        "lastRunFailed": true
+      },
+      "detail": "A successful persisted scheduler run must be observed within 90 minutes. HTTP /health and an idle job table are not scheduler evidence."
+    },
+    {
+      "id": "scheduler.publisher",
+      "status": "pass",
+      "code": "within_threshold",
+      "value": {
+        "lastStartedAt": "2026-09-16T10:22:30.679Z",
+        "lastSucceededAt": "2026-09-16T10:22:30.853Z",
+        "lastRunFailed": false
+      },
+      "detail": "A successful persisted scheduler run must be observed within 90 minutes. HTTP /health and an idle job table are not scheduler evidence."
+    },
+    {
+      "id": "scheduler.release-builder",
+      "status": "pass",
+      "code": "within_threshold",
+      "value": {
+        "lastStartedAt": "2026-09-16T10:17:30.680Z",
+        "lastSucceededAt": "2026-09-16T10:17:30.981Z",
+        "lastRunFailed": false
+      },
+      "detail": "A successful persisted scheduler run must be observed within 90 minutes. HTTP /health and an idle job table are not scheduler evidence."
+    },
+    {
+      "id": "publication.backend",
+      "status": "fail",
+      "code": "publication_backend_mismatch",
+      "value": "json",
+      "detail": "Expected d1. A working Pipeline does not prove its changes reach a JSON-backed website."
+    },
+    {
+      "id": "publication.evaluation_date",
+      "status": "pass",
+      "code": "current_date",
+      "value": "2026-09-16",
+      "detail": "The public release must evaluate deadline and review states for the current China calendar date."
+    },
+    {
+      "id": "workflow.autonomous-catalog.yml",
+      "status": "unobserved",
+      "code": "unavailable",
+      "value": null,
+      "detail": "Workflow runs could not be verified; missing access and missing deployments remain explicit."
+    },
+    {
+      "id": "workflow.program-fact-refresh.yml",
+      "status": "fail",
+      "code": "latest_run_failed",
+      "value": {
+        "lastSuccessfulAt": null,
+        "latestRunId": 34929171077,
+        "conclusion": "failure"
+      },
+      "detail": "A main-branch successful run is required within 48 hours. Workflow success alone is not backup readback proof."
+    },
+    {
+      "id": "workflow.official-catalog-harvest.yml",
+      "status": "fail",
+      "code": "latest_run_failed",
+      "value": {
+        "lastSuccessfulAt": null,
+        "latestRunId": 34799870612,
+        "conclusion": "failure"
+      },
+      "detail": "A main-branch successful run is required within 192 hours. Workflow success alone is not backup readback proof."
+    },
+    {
+      "id": "workflow.cloudflare-restore-drill.yml",
+      "status": "unobserved",
+      "code": "no_recent_success_observed",
+      "value": {
+        "lastSuccessfulAt": null,
+        "latestRunId": null,
+        "conclusion": null
+      },
+      "detail": "A main-branch successful run is required within 2280 hours. Workflow success alone is not backup readback proof."
+    },
+    {
+      "id": "workflow.cloudflare-backup.yml",
+      "status": "fail",
+      "code": "latest_run_failed",
+      "value": {
+        "lastSuccessfulAt": null,
+        "latestRunId": 35009437238,
+        "conclusion": "failure"
+      },
+      "detail": "A main-branch successful run is required within 30 hours. Workflow success alone is not backup readback proof."
+    },
+    {
+      "id": "workflow.data-health.yml",
+      "status": "fail",
+      "code": "latest_run_failed",
+      "value": {
+        "lastSuccessfulAt": null,
+        "latestRunId": 35048358713,
+        "conclusion": "failure"
+      },
+      "detail": "A main-branch successful run is required within 30 hours. Workflow success alone is not backup readback proof."
+    },
+    {
+      "id": "content.schema",
+      "status": "pass",
+      "code": "valid",
+      "value": true,
+      "detail": "Reuse the comprehensive audit schema and provenance checks."
+    },
+    {
+      "id": "content.verified_overdue",
+      "status": "pass",
+      "code": "within_threshold",
+      "value": 0,
+      "detail": "No verified record may retain evidence past its review date."
+    },
+    {
+      "id": "content.review_backlog",
+      "status": "fail",
+      "code": "stale_evidence_backlog",
+      "value": 2331,
+      "detail": "Stale identities remain discoverable, but their evidence backlog still needs automated re-verification."
+    },
+    {
+      "id": "p0.input_contract",
+      "status": "pass",
+      "code": "pass",
+      "value": null,
+      "detail": "Observation document uses the supported explicit contract."
+    },
+    {
+      "id": "p0.observation_freshness",
+      "status": "pass",
+      "code": "pass",
+      "value": null,
+      "detail": "Observed value is inside the reliability threshold."
+    },
+    {
+      "id": "p0.backup_age",
+      "status": "unobserved",
+      "code": "unobserved",
+      "value": null,
+      "detail": "Required observation section is missing."
+    },
+    {
+      "id": "p0.release_age",
+      "status": "unobserved",
+      "code": "unobserved",
+      "value": null,
+      "detail": "Required observation section is missing."
+    },
+    {
+      "id": "p0.scheduler_heartbeat_age",
+      "status": "pass",
+      "code": "pass",
+      "value": null,
+      "detail": "Observed value is inside the reliability threshold."
+    },
+    {
+      "id": "p0.dlq_backlog",
+      "status": "unobserved",
+      "code": "unobserved",
+      "value": null,
+      "detail": "Required DLQ observation is missing."
+    },
+    {
+      "id": "p0.outbox_backlog_age",
+      "status": "pass",
+      "code": "pass",
+      "value": null,
+      "detail": "No pending outbox events were observed."
+    }
+  ]
+}

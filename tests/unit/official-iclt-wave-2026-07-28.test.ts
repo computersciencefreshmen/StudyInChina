@@ -35,7 +35,8 @@ describe('official ICLT wave 2026-07-28', () => {
       'uni-inner-mongolia-normal-university',
     ]) {
       const university = universities.find((item) => item.id === id)
-      expect(university?.status).toBe('verified')
+      // Stable public identities survive source-review expiry; drafts do not.
+      expect(['verified', 'stale']).toContain(university?.status)
       const name = university?.name as JsonRecord
       expect(name.en).toBeTruthy()
       expect(name.zh).toBeTruthy()

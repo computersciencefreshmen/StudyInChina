@@ -105,6 +105,9 @@ WHERE json_extract(manifest_json, '$.institutionId') IN (
 AND source_id NOT IN (
   ${[...sourceIds].sort().map(sqlValue).join(', ')}
 )
+-- Runtime discoveries and fleet seeds are owned by their own registrars.
+AND source_id NOT GLOB 'auto-discovery-*'
+AND source_id NOT GLOB 'auto-seed-*'
 AND enabled <> 0;`.trim())
   statements.push('PRAGMA optimize;')
 

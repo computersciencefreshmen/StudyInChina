@@ -97,6 +97,13 @@ jobs:
           npm run quality:platform-scorecard --
           --output "$RUNNER_TEMP/platform-data-quality.json"
 
+      - name: Build full record audit and review queue
+        id: comprehensive_audit
+        continue-on-error: true
+        run: >-
+          npm run quality:comprehensive-audit --
+          --output "$RUNNER_TEMP/comprehensive-data-audit.json"
+
       - name: Add report to workflow summary
         if: always()
         shell: bash
@@ -118,6 +125,7 @@ jobs:
             ${{ runner.temp }}/data-health.json
             ${{ runner.temp }}/data-health.md
             ${{ runner.temp }}/platform-data-quality.json
+            ${{ runner.temp }}/comprehensive-data-audit.json
           if-no-files-found: warn
           retention-days: 30
 
@@ -194,6 +202,7 @@ jobs:
           DATA_HEALTH_OUTCOME: ${{ steps.data_health.outcome }}
           LINK_CHECK_OUTCOME: ${{ steps.link_check.outcome }}
           PLATFORM_SCORECARD_OUTCOME: ${{ steps.platform_scorecard.outcome }}
+          COMPREHENSIVE_AUDIT_OUTCOME: ${{ steps.comprehensive_audit.outcome }}
         run: |
           failed=0
           if [[ "$DATA_HEALTH_OUTCOME" == "failure" ]]; then
@@ -201,11 +210,15 @@ jobs:
             failed=1
           fi
           if [[ "$LINK_CHECK_OUTCOME" == "failure" ]]; then
-            echo "One or more links returned a confirmed 404 or 410."
+            echo "The link check reported confirmed 404/410 responses or failed to complete; inspect its report and logs."
             failed=1
           fi
           if [[ "$PLATFORM_SCORECARD_OUTCOME" == "failure" ]]; then
             echo "The platform quality scorecard could not be generated."
+            failed=1
+          fi
+          if [[ "$COMPREHENSIVE_AUDIT_OUTCOME" == "failure" ]]; then
+            echo "The full record audit failed schema validation or could not be generated."
             failed=1
           fi
           exit "$failed"

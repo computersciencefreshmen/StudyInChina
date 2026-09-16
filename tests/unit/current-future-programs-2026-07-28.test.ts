@@ -88,7 +88,9 @@ describe('current future program expansion on 2026-07-28', () => {
       closesOn: '2026-12-30',
       tuitionCny: 13000,
       tuitionPeriod: 'semester',
-      applicationFeeCny: 400,
+      // The official page calls CNY 400 an enrolment fee, not an application fee.
+      applicationFeeCny: null,
+      factScope: 'partial',
       evidenceBasis: 'cycle-specific',
     })
 

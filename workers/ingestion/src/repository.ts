@@ -1,3 +1,5 @@
+import { officialLinkDiscoveryStatements } from './source-discovery'
+import { CRITICAL_BROWSER_CATEGORIES, type InfrastructureCostPolicy } from './cost-policy'
 import { validateManifest } from './security'
 import type {
   D1PreparedStatement,
@@ -237,6 +239,8 @@ export async function persistSnapshotEntityExtraction(
   environment: Pick<IngestionEnv, 'INGESTION_DB'>,
   parameters: {
     snapshot: SnapshotRecord
+    manifest?: SourceManifestV1
+    rawText?: string
     entityExtraction: {
       extractor: string
       institutionId: string
@@ -249,6 +253,9 @@ export async function persistSnapshotEntityExtraction(
     ...snapshotPersistenceStatements(environment.INGESTION_DB, snapshot),
     ...entityExtraction.candidates.flatMap((candidate) =>
       entityPersistenceStatements(environment.INGESTION_DB, candidate)),
+    ...(parameters.manifest && parameters.rawText !== undefined
+      ? await officialLinkDiscoveryStatements(environment, parameters.manifest, snapshot, parameters.rawText)
+      : []),
     environment.INGESTION_DB.prepare(
       `INSERT INTO entity_extraction_runs
         (snapshot_id, source_id, institution_id, extractor, extraction_status,
@@ -307,13 +314,19 @@ export async function listDueSourceIds(
   now: string,
   limit: number,
   includeDiscovery = true,
+  browserScope: InfrastructureCostPolicy['browserScope'] = 'all',
 ): Promise<string[]> {
   const result = await environment.INGESTION_DB.prepare(
     `SELECT source_id
       FROM ingestion_sources
       WHERE enabled = 1
         AND (next_fetch_at IS NULL OR next_fetch_at <= ?1)
+        AND COALESCE(json_extract(manifest_json, '$.enabled'), 1) = 1
         AND (?3 = 1 OR json_extract(manifest_json, '$.sourceCategory') <> 'catalog_anchor')
+        AND (COALESCE(json_extract(manifest_json, '$.fetch.renderMode'), 'http') <> 'browser'
+          OR ?4 = 'all'
+          OR (?4 = 'critical-only' AND json_extract(manifest_json, '$.sourceCategory') IN (SELECT value FROM json_each(?5))))
+        AND COALESCE(json_extract(manifest_json, '$.robots.mode'), 'enforce') <> 'blocked'
         AND NOT EXISTS (
           SELECT 1
             FROM ingestion_jobs
@@ -323,7 +336,7 @@ export async function listDueSourceIds(
       ORDER BY COALESCE(next_fetch_at, '1970-01-01T00:00:00.000Z'), source_id
       LIMIT ?2`,
   )
-    .bind(now, limit, includeDiscovery ? 1 : 0)
+    .bind(now, limit, includeDiscovery ? 1 : 0, browserScope, JSON.stringify([...CRITICAL_BROWSER_CATEGORIES]))
     .all<DueSourceRow>()
   ensureSuccess(result, 'list due sources')
   return (result.results ?? []).map((row) => row.source_id)
@@ -353,7 +366,11 @@ export async function claimJob(
   const result = await environment.INGESTION_DB.prepare(
     `INSERT OR IGNORE INTO ingestion_jobs
       (job_id, source_id, status, reason, scheduled_at, created_at, updated_at)
-     VALUES (?1, ?2, 'queued', ?3, ?4, ?4, ?4)`,
+     SELECT ?1, ?2, 'queued', ?3, ?4, ?4, ?4
+     WHERE NOT EXISTS (
+       SELECT 1 FROM ingestion_jobs WHERE source_id = ?2
+         AND status IN ('queued', 'running', 'retrying')
+     )`,
   )
     .bind(job.jobId, job.sourceId, job.reason, job.scheduledAt)
     .run()

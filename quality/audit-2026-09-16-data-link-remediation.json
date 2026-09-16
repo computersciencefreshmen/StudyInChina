@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-15T16:35:28.605Z",
+  "changes": [
+    {
+      "collection": "sources",
+      "id": "source-review-njucm-profile-2026-09-16",
+      "before": null,
+      "after": {
+        "id": "source-review-njucm-profile-2026-09-16",
+        "url": "https://english.njucm.edu.cn/5128/list.htm",
+        "title": "Introduction of NJUCM",
+        "publisher": "Nanjing University of Chinese Medicine",
+        "kind": "university",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-09-16"
+      },
+      "reason": "Official replacement page was opened and its institutional/admissions role reviewed; this does not renew any program facts."
+    },
+    {
+      "collection": "sources",
+      "id": "source-review-njucm-admissions-2026-09-16",
+      "before": null,
+      "after": {
+        "id": "source-review-njucm-admissions-2026-09-16",
+        "url": "https://english.njucm.edu.cn/2019/0411/c5134a75522/page.htm",
+        "title": "International Education College — official university description",
+        "publisher": "Nanjing University of Chinese Medicine",
+        "kind": "admissions",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-09-16"
+      },
+      "reason": "Official replacement page was opened and its institutional/admissions role reviewed; this does not renew any program facts."
+    },
+    {
+      "collection": "sources",
+      "id": "source-review-hainan-admissions-2026-09-16",
+      "before": null,
+      "after": {
+        "id": "source-review-hainan-admissions-2026-09-16",
+        "url": "https://www.muhn.edu.cn/gjxy/zsgl/zsjz.htm",
+        "title": "海南医科大学国际学生学历生招生简章（2026）",
+        "publisher": "Hainan Medical University",
+        "kind": "admissions",
+        "language": "zh",
+        "official": true,
+        "accessedAt": "2026-09-16"
+      },
+      "reason": "Official replacement page was opened and its institutional/admissions role reviewed; this does not renew any program facts."
+    },
+    {
+      "collection": "universities",
+      "id": "uni-nanjing-university-of-chinese-medicine",
+      "before": {
+        "status": "verified"
+      },
+      "after": {
+        "status": "stale"
+      },
+      "reason": "Confirmed HTTP 404 dependency isolated; status change recovered from the pre-link-remediation audit after a transient Windows write interruption."
+    },
+    {
+      "collection": "universities",
+      "id": "uni-inner-mongolia-normal-university",
+      "before": {
+        "status": "verified"
+      },
+      "after": {
+        "status": "stale"
+      },
+      "reason": "Confirmed HTTP 404 dependency isolated; status change recovered from the pre-link-remediation audit after a transient Windows write interruption."
+    },
+    {
+      "collection": "universities",
+      "id": "uni-hainan-medical-university",
+      "before": {
+        "status": "verified"
+      },
+      "after": {
+        "status": "stale"
+      },
+      "reason": "Confirmed HTTP 404 dependency isolated; status change recovered from the pre-link-remediation audit after a transient Windows write interruption."
+    },
+    {
+      "collection": "universities",
+      "id": "uni-nanjing-university-of-chinese-medicine",
+      "before": {
+        "officialUrl": "https://iec.njucm.edu.cn/",
+        "admissionsUrl": "https://iec.njucm.edu.cn/",
+        "sourceIds": [
+          "src-uni-nanjing-university-of-chinese-medicine"
+        ]
+      },
+      "after": {
+        "officialUrl": "https://english.njucm.edu.cn/5128/list.htm",
+        "admissionsUrl": null,
+        "sourceIds": [
+          "src-uni-nanjing-university-of-chinese-medicine",
+          "source-review-njucm-profile-2026-09-16",
+          "source-review-njucm-admissions-2026-09-16"
+        ]
+      },
+      "reason": "Official school entry point repaired. NJUCM admissions endpoint remains unavailable, so admissionsUrl is null; Hainan uses its live 2026 guide. Historical profile verification dates are preserved."
+    },
+    {
+      "collection": "universities",
+      "id": "uni-hainan-medical-university",
+      "before": {
+        "officialUrl": "https://www.muhn.edu.cn/gjxy/info/1432/19674.htm",
+        "admissionsUrl": "https://www.muhn.edu.cn/gjxy/info/1432/19674.htm",
+        "sourceIds": [
+          "src-gap-university-hainan-medical-university"
+        ]
+      },
+      "after": {
+        "officialUrl": "https://www.muhn.edu.cn/gjxy/zsgl/zsjz.htm",
+        "admissionsUrl": "https://www.muhn.edu.cn/gjxy/zsgl/zsjz.htm",
+        "sourceIds": [
+          "src-gap-university-hainan-medical-university",
+          "source-review-hainan-admissions-2026-09-16"
+        ]
+      },
+      "reason": "Official school entry point repaired. NJUCM admissions endpoint remains unavailable, so admissionsUrl is null; Hainan uses its live 2026 guide. Historical profile verification dates are preserved."
+    }
+  ],
+  "unresolvedOfficialUrls": [
+    "https://admission.bisu.edu.cn/attach/0/2411071706042027427.pdf",
+    "https://cis.chinese.cn/",
+    "https://gjjl.imnu.edu.cn/info/1065/5164.htm",
+    "https://gjjl.imnu.edu.cn/info/1065/5864.htm",
+    "https://iec.njucm.edu.cn/",
+    "https://iec.njucm.edu.cn/en/detail/1260.html",
+    "https://iec.njucm.edu.cn/en/detail/1375.html",
+    "https://iec.njucm.edu.cn/en/detail/1406.html",
+    "https://ies-en.zuel.edu.cn/_upload/article/files/9e/a1/f493cff64425b1bbf55d031a056b/283f0e72-29f6-4dc8-b85d-4e400c5c50f9.pdf",
+    "https://international.qhu.edu.cn/info/1010/1340.htm",
+    "https://iso.sta.edu.cn/_upload/article/files/77/17/2e572a8e4f6b038e52fd93dcb79/76bf8a5d-222d-4940-aa0b-517c4c3fa041.pdf",
+    "https://laihua.jxnu.edu.cn/_upload/article/files/b5/49/253c7fc3430f8a403ebb1a74beff/db9b3304-860d-4a6d-bb9f-cd6f94a327ad.pdf",
+    "https://six.xisu.edu.cn/info/1077/4590.htm",
+    "https://studyoverseas.gzucm.edu.cn/info/1069/2588.htm",
+    "https://www.bipt.edu.cn/pub/gjjl/lxs/ws/index.htm",
+    "https://www.bwu.edu.cn/info/1278/5945.htm",
+    "https://www.muhn.edu.cn/gjxy/info/1432/19674.htm"
+  ],
+  "note": "Historical dead source IDs are retained for provenance. The unresolved URL list is the original audit set, not a claim that all remain active after remediation."
+}

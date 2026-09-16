@@ -1,4 +1,5 @@
 import { IngestionError } from './errors'
+import { observeUnchangedOfficialBody, sourceRevalidationDue } from './source-observations'
 import { readBoundedBody } from './body'
 import {
   extractionTextObjectKey,
@@ -60,8 +61,11 @@ const TEXT_CONTENT_TYPES = [
   'text/',
 ]
 const MAX_IN_MEMORY_SOURCE_BYTES = 10 * 1024 * 1024
-const OFFICIAL_HTML_ENTITY_EXTRACTOR = 'official-html-v2'
+const OFFICIAL_HTML_ENTITY_EXTRACTOR = 'official-html-v3'
 const ENTITY_CATALOG_CATEGORIES = new Set<SourceManifestV1['sourceCategory']>([
+  'catalog_anchor',
+  'international_admissions_home',
+  'current_guide',
   'undergraduate_catalog',
   'masters_catalog',
   'doctoral_catalog',
@@ -540,6 +544,13 @@ export async function processIngestionJob(
       previousSnapshotId,
       expectedExtractorFingerprints,
     )
+  const previousEntityExtractionCurrent = !ENTITY_CATALOG_CATEGORIES.has(manifest.sourceCategory)
+    || (previousSnapshotId !== null && await hasEntityExtraction(
+      environment, manifest.id, previousSnapshotId, OFFICIAL_HTML_ENTITY_EXTRACTOR,
+    ))
+  const revalidationDue = previousSnapshotId !== null
+    && await sourceRevalidationDue(environment.INGESTION_DB, previousSnapshotId, now)
+  let responseStatus = 0
   let body: ArrayBuffer
   let contentType: string
   let finalUrl: URL
@@ -587,7 +598,7 @@ export async function processIngestionJob(
     // An extractor or prompt upgrade must receive the official body again. Sending
     // validators here could yield 304 and strand the saved snapshot on an old
     // extraction fingerprint forever.
-    if (previousSnapshotId !== null && previousCandidateExtractionCurrent) {
+    if (previousSnapshotId !== null && previousCandidateExtractionCurrent && previousEntityExtractionCurrent && !revalidationDue) {
       if (state.etag) headers.set('If-None-Match', state.etag)
       if (state.lastModified) headers.set('If-Modified-Since', state.lastModified)
     }
@@ -609,9 +620,9 @@ export async function processIngestionJob(
 
     if (response.status === 304) {
       clearTimeout(timeout)
-      if (previousSnapshotId === null || !previousCandidateExtractionCurrent) {
+      if (previousSnapshotId === null || !previousCandidateExtractionCurrent || !previousEntityExtractionCurrent || revalidationDue) {
         throw new IngestionError(
-          'Official source returned 304 without a current saved extraction',
+          'Official source returned 304 without a current saved extraction or while a full-body revalidation is due',
           'unexpected_304',
           true,
         )
@@ -637,6 +648,7 @@ export async function processIngestionJob(
     } finally {
       clearTimeout(timeout)
     }
+    responseStatus = response.status
     contentType = contentTypeOf(response)
     etag = response.headers.get('etag')
     lastModified = response.headers.get('last-modified')
@@ -659,6 +671,12 @@ export async function processIngestionJob(
     expectedExtractorFingerprints,
   )
   if (rawSha256 === state.rawSha256 && entityExtractionCurrent && candidateExtractionCurrent) {
+    if (revalidationDue) {
+      await observeUnchangedOfficialBody(environment, {
+        job, snapshotId, body, contentType, finalUrl: finalUrl.href, checkedAt,
+        httpStatus: responseStatus, extractorFingerprints: expectedExtractorFingerprints,
+      })
+    }
     await recordNoChange(environment, {
       job,
       sourceId: manifest.id,
@@ -765,6 +783,8 @@ export async function processIngestionJob(
     await persistSnapshotEntityExtraction(environment, {
       snapshot,
       entityExtraction,
+      manifest,
+      rawText: rawText ?? '',
     })
   }
   const candidate = await buildCandidate(

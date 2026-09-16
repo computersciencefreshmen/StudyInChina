@@ -1,6 +1,9 @@
 import { notFound } from 'next/navigation'
+import { connection } from 'next/server'
 import { Badge, Card, LinkButton, PageHero, SectionHeading, VerificationBadge } from '@/components/ui'
 import { ProgramCard } from '@/components/features/RecordCards'
+import { DataFreshnessPanel } from '@/components/features/DataFreshnessPanel'
+import { SourceTransparency } from '@/components/features/SourceTransparency'
 import { indexedLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 import { getApplicationState, selectAdmissionCycle } from '@/lib/data/admission'
@@ -20,6 +23,8 @@ export function generateStaticParams() {
   return indexedLocales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })))
 }
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  // Evaluate publication and admission dates for this request, not a cached build day.
+  await connection()
   const { locale: raw, slug } = await params
   const locale = requireLocale(raw) || 'en'
   const data = await getCatalogData()
@@ -29,6 +34,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function UniversityDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  // Evaluate publication and admission dates for this request, not a cached build day.
+  await connection()
   const { locale: raw, slug } = await params
   const locale = requireLocale(raw)
   if (!locale) notFound()
@@ -61,6 +68,9 @@ export default async function UniversityDetailPage({ params }: { params: Promise
   return <>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     <PageHero variant="compact" eyebrow={city ? `${localize(city.name, locale)} · ${university.region ? regionLabels(locale)[university.region] : messages.common.unknown}` : university.region ? regionLabels(locale)[university.region] : messages.common.unknown} title={localize(university.name, locale)} description={localize(university.summary, locale)} actions={<><a className="atlas-button atlas-button--primary atlas-button--medium" href={university.admissionsUrl || university.officialUrl} target="_blank" rel="noreferrer">{university.admissionsUrl ? copy.admission : messages.common.officialSource} ↗</a><a className="atlas-button atlas-button--ghost atlas-button--medium" href={university.officialUrl} target="_blank" rel="noreferrer">{copy.official} ↗</a></>} meta={<VerificationBadge status={university.status} verifiedAt={university.verifiedAt} locale={locale} verifiedDateLabel={messages.common.lastVerified} labels={{ verified: messages.common.verified, stale: messages.common.stale, draft: messages.common.draft, archived: messages.common.archived }} />} />
+    <div className="atlas-container">
+      <DataFreshnessPanel record={university} locale={locale} today={today} />
+    </div>
     <section className="atlas-container atlas-section">
       <div className="stat-strip">
         <div className="stat"><strong>{programs.length}</strong><span>{copy.programs}</span></div>
@@ -76,7 +86,21 @@ export default async function UniversityDetailPage({ params }: { params: Promise
         {visibleScholarships.length ? <div><SectionHeading title={copy.funding} level={2} /><div className="content-grid content-grid--two">{visibleScholarships.map((scholarship) => <Card key={scholarship.id}><Badge tone="gold">{providerLabel(scholarship.providerType, locale)}</Badge><h3 className="atlas-card__title">{localize(scholarship.name, locale)}</h3><p className="atlas-card__description">{localize(scholarship.summary, locale)}</p><div className="atlas-card__footer"><LinkButton href={`/${locale}/scholarships/${scholarship.slug}`} variant="quiet">{messages.common.viewDetails} →</LinkButton></div></Card>)}</div>{scholarships.length > visibleScholarships.length ? <div className="atlas-card__footer"><LinkButton href={`/${locale}/scholarships?institution=${encodeURIComponent(university.slug)}`} variant="secondary">{messages.common.explore} ({scholarships.length}) →</LinkButton></div> : null}</div> : null}
       </div>
       <aside className="detail-aside">
-        <Card accent="jade"><h2 className="atlas-card__title">{copy.sources}</h2><dl className="record-facts"><div><dt>{messages.common.lastVerified}</dt><dd>{formatDate(university.verifiedAt, locale, '—')}</dd></div><div><dt>{copy.review}</dt><dd>{formatDate(university.reviewAfter, locale, '—')}</dd></div></dl><ul className="source-list">{sources.map((source) => <li key={source.id}><a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a><small>{source.publisher}</small></li>)}</ul></Card>
+        <Card accent="jade" id="official-evidence">
+          <h2 className="atlas-card__title">{copy.sources}</h2>
+          <ul className="source-list">{sources.map((source) => <li key={source.id}>
+            <a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a>
+            <small>{source.publisher} · <time dateTime={source.accessedAt}>{formatDate(source.accessedAt, locale, '—')}</time></small>
+          </li>)}</ul>
+          <SourceTransparency
+            locale={locale}
+            lastCheckedAt={sources.map((source) => source.accessedAt).sort().at(-1) ?? university.verifiedAt}
+            lastCheckedLabel={messages.common.sourcesLastChecked}
+            notice={messages.common.automatedCollectionNotice}
+            reportErrorLabel={messages.common.reportInformationError}
+            officialLink={{ href: university.officialUrl, label: messages.common.officialSource }}
+          />
+        </Card>
         <div className="notice">{messages.common.authoritativeNotice}</div>
       </aside>
     </section>

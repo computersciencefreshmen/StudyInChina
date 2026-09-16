@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { CatalogRepositoryError } from '@/lib/catalog'
 
 const repository = vi.hoisted(() => ({
@@ -68,9 +68,13 @@ const page = {
 
 describe('institution catalog API route', () => {
   beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date('2026-08-10T04:00:00Z'))
     vi.clearAllMocks()
     repository.listInstitutions.mockResolvedValue(page)
   })
+
+  afterEach(() => vi.useRealTimers())
 
   it('uses the bounded Repository list path without reading a compatibility bundle', async () => {
     const response = await GET(new Request(

@@ -7,6 +7,7 @@ export default defineConfig([
   ...nextTypeScript,
   globalIgnores([
     '.next/**',
+    '**/.tmp/**', // Worker dry-run output; generated bundles are not source files.
     'coverage/**',
     'playwright-report/**',
     'test-results/**',

@@ -89,6 +89,7 @@ export interface ReleaseBuilderEnv {
   CATALOG_WRITE_BATCH_SIZE?: string
   MAX_QUEUE_ATTEMPTS?: string
   EVENT_LEASE_SECONDS?: string
+  RUNTIME_RETRY_DELAY_SECONDS?: string
 }
 
 export type ReleaseCounts = {

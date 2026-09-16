@@ -15,6 +15,7 @@ import {
   type CatalogFilterChip,
 } from './CatalogFilterSummary'
 import { CatalogPagination } from './CatalogPagination'
+import { CatalogFreshnessNote } from './DataFreshnessPanel'
 import { ProgramCard } from './RecordCards'
 import styles from './ProgramExplorerV2.module.css'
 
@@ -136,7 +137,7 @@ export function ProgramExplorerV2({
     filters.sort === 'default' ? '' : filters.sort,
   ].filter(Boolean).length
 
-  const statusHref = (applicationState: 'open' | 'upcoming') => programCatalogHref(locale, {
+  const statusHref = (applicationState: '' | 'open' | 'upcoming') => programCatalogHref(locale, {
     ...filters,
     applicationState,
     page: 1,
@@ -146,16 +147,17 @@ export function ProgramExplorerV2({
   }, 1)
 
   return <>
+    <CatalogFreshnessNote locale={locale} today={today} />
     <nav className={styles.quickFilters} aria-label={text.statusShortcuts}>
       <span>{messages.programs.statusFilter}</span>
-      {(['open', 'upcoming'] as const).map((state) => (
+      {(['', 'open', 'upcoming'] as const).map((state) => (
         <Link
           key={state}
           href={statusHref(state)}
           aria-current={filters.applicationState === state ? 'page' : undefined}
           className={`${styles.quickFilter} ${filters.applicationState === state ? styles.isActive : ''}`}
         >
-          {state === 'open' ? messages.common.openNow : messages.programs.upcoming}
+          {state === '' ? messages.common.all : state === 'open' ? messages.common.openNow : messages.programs.upcoming}
         </Link>
       ))}
     </nav>

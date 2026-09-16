@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import test from 'node:test'
 import { sha256Hex } from '../../ingestion/src/hash'
+import { observeUnchangedOfficialBody, sourceRevalidationDue } from '../../ingestion/src/source-observations'
 import {
   miniMaxCandidateProvenance,
   ruleCandidateProvenance,
@@ -12,6 +13,7 @@ import type {
   ExtractionEnvelope,
   ExtractionFact,
   SourceManifestV1,
+  IngestionEnv,
 } from '../../ingestion/src/types'
 import { handleQueue, scheduleValidatedCandidates } from '../src/index'
 import { promoteCandidate } from '../src/promoter'
@@ -107,7 +109,9 @@ function applyMigrations(database: DatabaseSync): void {
     '0004_worker_runtime.sql',
     '0005_domain_throttle.sql',
     '0006_candidate_provenance_promotion.sql',
+    '0018_source_revalidation_observations.sql',
     '0015_promotion_mapping_transforms.sql',
+    '0017_automation_retry_state.sql',
   ]) {
     database.exec(readFileSync(join(directory, name), 'utf8'))
   }
@@ -115,6 +119,7 @@ function applyMigrations(database: DatabaseSync): void {
 
 type SeedOptions = {
   candidateId: string
+  body?: string
   extractor: 'rules' | 'minimax-dual'
   gateStatus: 'rule-pass' | 'dual-pass' | 'quarantined'
   critical: boolean
@@ -208,7 +213,7 @@ async function seedCandidate(database: DatabaseSync, options: SeedOptions) {
         'MiniMax-M2.7',
         options.critical,
       )
-  const rawHash = await sha256Hex(sourceId)
+  const rawHash = await sha256Hex(options.body ?? sourceId)
 
   database.prepare(
     `INSERT INTO records (id, public_id, kind, workflow_status, row_version)
@@ -240,13 +245,14 @@ async function seedCandidate(database: DatabaseSync, options: SeedOptions) {
     `INSERT INTO ingestion_snapshots (
        snapshot_id, source_id, r2_key, raw_sha256, canonical_sha256,
        content_type, byte_length, final_url, fetched_at
-     ) VALUES (?, ?, ?, ?, ?, 'text/html', 128, ?, '2026-07-20T00:00:00.000Z')`,
+     ) VALUES (?, ?, ?, ?, ?, 'text/html', ?, ?, '2026-07-20T00:00:00.000Z')`,
   ).run(
     snapshotId,
     sourceId,
     `snapshots/${rawHash}`,
     rawHash,
     rawHash,
+    options.body ? new TextEncoder().encode(options.body).byteLength : 128,
     manifest.officialUrl,
   )
   database.prepare(
@@ -866,4 +872,167 @@ test('quarantines a major-unit amount that cannot be represented exactly', async
   } finally {
     sqlite.close()
   }
+})
+
+
+test('a temporary transaction failure remains verified and resumes exactly once after queue exhaustion', async () => {
+  const { sqlite, database } = fixture()
+  try {
+    const seeded = await seedCandidate(sqlite, {
+      candidateId: 'candidate-network-retry', extractor: 'minimax-dual', gateStatus: 'dual-pass', critical: true, withMapping: true,
+    })
+    const originalBatch = database.batch.bind(database)
+    database.batch = async () => { throw new Error('D1_ERROR: network temporarily unavailable') }
+    const { environment, jobs, failures } = environmentFixture(database)
+    let acknowledgements = 0
+    const job = { version: 1 as const, candidateId: seeded.candidateId, requestedAt: new Date().toISOString() }
+    await handleQueue({ messages: [{ id: 'exhausted-network-message', attempts: 4, body: job, ack() { acknowledgements++ }, retry() { assert.fail('durable scheduler resumes exhausted attempts') } }] }, environment)
+    assert.equal(acknowledgements, 1)
+    assert.equal(failures.length, 1)
+    assert.equal(sqlite.prepare('SELECT candidate_status FROM ingestion_candidates').get()?.candidate_status, 'validated')
+    assert.equal(sqlite.prepare('SELECT count(*) AS count FROM promotion_isolations').get()?.count, 0)
+    assert.equal(sqlite.prepare('SELECT count(*) AS count FROM canonical_fields').get()?.count, 0)
+    assert.equal(sqlite.prepare('SELECT failure_count FROM automation_retry_state').get()?.failure_count, 1)
+    await scheduleValidatedCandidates({ scheduledTime: Date.now(), cron: '37 * * * *' }, environment)
+    assert.equal(jobs.length, 0, 'persistent cooldown applies before scheduler LIMIT')
+    database.batch = originalBatch
+    await scheduleValidatedCandidates({ scheduledTime: Date.now() + 120_000, cron: '37 * * * *' }, environment)
+    assert.equal(jobs.length, 1)
+    await handleQueue({ messages: [{ id: 'recovered-message', attempts: 1, body: jobs[0], ack() { acknowledgements++ }, retry() { assert.fail('recovered evidence can publish') } }] }, environment)
+    assert.equal(acknowledgements, 2)
+    assert.equal(sqlite.prepare('SELECT candidate_status FROM ingestion_candidates').get()?.candidate_status, 'applied')
+    assert.equal(sqlite.prepare('SELECT count(*) AS count FROM claims').get()?.count, 1)
+    assert.equal(sqlite.prepare('SELECT count(*) AS count FROM automation_retry_state').get()?.count, 0)
+    assert.equal((await promoteCandidate(database, seeded.candidateId)).status, 'already-applied')
+    assert.equal(sqlite.prepare('SELECT count(*) AS count FROM publication_jobs').get()?.count, 1)
+  } finally { sqlite.close() }
+})
+
+const renewalBucket: IngestionEnv['SNAPSHOTS_BUCKET'] = {
+  async head() { return {} }, async get() { return null }, async put() { return {} }, async delete() {},
+}
+
+async function renewalFixture(candidateId = 'fresh-evidence', withQuote = true) {
+  const { sqlite, database } = fixture()
+  const value = 'https://apply.example.edu.cn/' + candidateId
+  const body = '<p>' + (withQuote ? 'Apply at ' + value + ' Official application: ' + value : 'Unrelated body') + '</p>'
+  const seeded = await seedCandidate(sqlite, {
+    candidateId, body, extractor: 'minimax-dual', gateStatus: 'dual-pass', critical: true, withMapping: true,
+  })
+  const hash = await sha256Hex(body)
+  sqlite.prepare('UPDATE ingestion_sources SET raw_sha256 = ? WHERE source_id = ?').run(hash, seeded.sourceId)
+  assert.equal((await promoteCandidate(database, candidateId, new Date('2026-07-20T01:00:00.000Z'))).status, 'applied')
+  const job = { version: 1 as const, jobId: 'recheck-' + candidateId, sourceId: seeded.sourceId,
+    reason: 'scheduled' as const, scheduledAt: '2026-09-16T00:00:00.000Z' }
+  sqlite.prepare(`INSERT INTO ingestion_jobs (job_id, source_id, reason, status, scheduled_at, created_at, updated_at)
+    VALUES (?, ?, 'scheduled', 'running', ?, ?, ?)`).run(job.jobId, job.sourceId, job.scheduledAt, job.scheduledAt, job.scheduledAt)
+  const fingerprint = sqlite.prepare('SELECT extractor_fingerprint FROM ingestion_candidate_provenance WHERE candidate_id = ?')
+    .get(candidateId)?.extractor_fingerprint as string
+  const input = { job, snapshotId: 'snapshot-' + candidateId,
+    body: new TextEncoder().encode(body).buffer, contentType: 'text/html',
+    finalUrl: 'https://admissions.example.edu.cn/' + seeded.sourceId,
+    checkedAt: job.scheduledAt, httpStatus: 200, extractorFingerprints: [fingerprint] }
+  return { sqlite, database, seeded, input }
+}
+
+test('a real same-byte body observation renews expired accepted facts with new evidence and preserves immutable history', async () => {
+  const { sqlite, database, seeded, input } = await renewalFixture()
+  try {
+    const before = sqlite.prepare('SELECT verified_at, review_after, claim_id FROM canonical_fields').get()!
+    assert.equal(before.review_after, '2026-08-19')
+    assert.equal(await sourceRevalidationDue(database, input.snapshotId, new Date(input.checkedAt)), true)
+    const observed = await observeUnchangedOfficialBody({ INGESTION_DB: database, SNAPSHOTS_BUCKET: renewalBucket }, input)
+    assert.equal(observed.candidatesCreated, 1)
+    assert.ok(observed.observationId)
+    const renewal = sqlite.prepare('SELECT candidate_id FROM ingestion_candidate_observations').get()?.candidate_id as string
+    const promoted = await promoteCandidate(database, renewal, new Date('2026-09-16T00:01:00.000Z'))
+    assert.equal(promoted.status, 'applied', JSON.stringify(promoted))
+    const after = sqlite.prepare('SELECT verified_at, review_after, claim_id, value_json FROM canonical_fields').get()!
+    assert.equal(after.verified_at, input.checkedAt)
+    assert.equal(after.review_after, '2026-10-16')
+    assert.equal(JSON.parse(after.value_json as string), seeded.value)
+    assert.notEqual(after.claim_id, before.claim_id)
+    assert.equal(sqlite.prepare('SELECT fetched_at FROM ingestion_snapshots').get()?.fetched_at, '2026-07-20T00:00:00.000Z')
+    assert.equal(sqlite.prepare('SELECT count(*) AS n FROM source_fetches').get()?.n, 2)
+    assert.equal(sqlite.prepare('SELECT count(*) AS n FROM record_versions').get()?.n, 2)
+    assert.equal(sqlite.prepare('SELECT count(*) AS n FROM publication_jobs').get()?.n, 2)
+    assert.equal(sqlite.prepare('SELECT count(*) AS n FROM outbox_events').get()?.n, 2)
+    const renewedFetch = sqlite.prepare('SELECT metadata_json FROM source_fetches WHERE completed_at = ?').get(input.checkedAt)!
+    assert.equal(JSON.parse(renewedFetch.metadata_json as string).observationId, observed.observationId)
+    assert.equal(await sourceRevalidationDue(database, input.snapshotId, new Date('2026-09-16T23:59:59.999Z')), false)
+    assert.equal(await sourceRevalidationDue(database, input.snapshotId, new Date('2026-09-17T00:00:00.000Z')), true)
+    assert.equal((await observeUnchangedOfficialBody({ INGESTION_DB: database, SNAPSHOTS_BUCKET: renewalBucket }, input)).candidatesCreated, 0)
+    assert.equal((await promoteCandidate(database, renewal)).status, 'already-applied')
+    assert.throws(() => sqlite.prepare('UPDATE ingestion_source_observations SET observed_at = ?').run('2026-09-17T00:00:00.000Z'), /immutable/)
+    assert.throws(() => sqlite.prepare('DELETE FROM ingestion_source_observations').run(), /immutable/)
+  } finally { sqlite.close() }
+})
+
+test('304, partial responses, changed bytes and wrong snapshot proofs never renew facts', async () => {
+  const { sqlite, database, input } = await renewalFixture('invalid-body')
+  try {
+    for (const httpStatus of [304, 206, 503]) {
+      assert.equal((await observeUnchangedOfficialBody({ INGESTION_DB: database, SNAPSHOTS_BUCKET: renewalBucket }, { ...input, httpStatus })).observationId, null)
+    }
+    await assert.rejects(observeUnchangedOfficialBody({ INGESTION_DB: database, SNAPSHOTS_BUCKET: renewalBucket }, {
+      ...input, body: new TextEncoder().encode('different body').buffer,
+    }), /does not match/)
+    assert.equal(sqlite.prepare('SELECT count(*) AS n FROM ingestion_source_observations').get()?.n, 0)
+    assert.equal(sqlite.prepare('SELECT verified_at FROM canonical_fields').get()?.verified_at, '2026-07-20T00:00:00.000Z')
+    assert.throws(() => sqlite.prepare(`INSERT INTO ingestion_source_observations
+      (observation_id, source_id, snapshot_id, job_id, observed_at, http_status, body_sha256, byte_length, final_url, proof_kind)
+      VALUES ('forged', ?, ?, ?, ?, 200, ?, ?, ?, 'complete-body-sha256')`).run(
+      input.job.sourceId, input.snapshotId, input.job.jobId, input.checkedAt, '0'.repeat(64), input.body.byteLength, input.finalUrl,
+    ), /matching complete official response/)
+  } finally { sqlite.close() }
+})
+
+test('ungrounded prior quotes and old extractor fingerprints cannot create renewal candidates', async () => {
+  for (const mode of ['quote', 'fingerprint']) {
+    const { sqlite, database, input } = await renewalFixture('missing-' + mode, mode !== 'quote')
+    try {
+      const result = await observeUnchangedOfficialBody({ INGESTION_DB: database, SNAPSHOTS_BUCKET: renewalBucket }, {
+        ...input, extractorFingerprints: mode === 'fingerprint' ? ['0'.repeat(64)] : input.extractorFingerprints,
+      })
+      assert.equal(result.candidatesCreated, 0)
+      assert.equal(sqlite.prepare('SELECT verified_at FROM canonical_fields').get()?.verified_at, '2026-07-20T00:00:00.000Z')
+    } finally { sqlite.close() }
+  }
+})
+
+test('renewal does not overwrite changed or withheld facts or facts with conflicting evidence', async () => {
+  for (const mode of ['changed', 'withheld', 'conflict', 'source-changed']) {
+    const { sqlite, database, input } = await renewalFixture('conflict-' + mode)
+    try {
+      const observed = await observeUnchangedOfficialBody({ INGESTION_DB: database, SNAPSHOTS_BUCKET: renewalBucket }, input)
+      assert.equal(observed.candidatesCreated, 1)
+      if (mode === 'changed') sqlite.prepare('UPDATE canonical_fields SET value_json = ?').run(JSON.stringify('https://apply.example.edu.cn/newer'))
+      if (mode === 'withheld') sqlite.prepare(`UPDATE canonical_fields SET field_status = 'withheld', value_json = NULL`).run()
+      if (mode === 'conflict') sqlite.prepare(`UPDATE claim_evidence SET evidence_role = 'conflicting' WHERE evidence_role = 'primary'`).run()
+      if (mode === 'source-changed') sqlite.prepare('UPDATE ingestion_sources SET raw_sha256 = ?').run('f'.repeat(64))
+      const renewal = sqlite.prepare('SELECT candidate_id FROM ingestion_candidate_observations').get()?.candidate_id as string
+      const result = await promoteCandidate(database, renewal, new Date('2026-09-16T00:01:00.000Z'))
+      assert.equal(result.status, 'quarantined', JSON.stringify(result))
+      assert.equal(sqlite.prepare('SELECT verified_at FROM canonical_fields').get()?.verified_at, '2026-07-20T00:00:00.000Z')
+      assert.equal(sqlite.prepare('SELECT count(*) AS n FROM publication_jobs').get()?.n, 1)
+    } finally { sqlite.close() }
+  }
+})
+
+
+test('a missing immutable artifact and renewal candidates without receipts fail closed', async () => {
+  const { sqlite, database, input } = await renewalFixture('missing-artifact')
+  try {
+    await assert.rejects(observeUnchangedOfficialBody({ INGESTION_DB: database,
+      SNAPSHOTS_BUCKET: { ...renewalBucket, async head() { return null } },
+    }, input), /artifact to remain available/)
+    assert.equal(sqlite.prepare('SELECT count(*) AS n FROM ingestion_source_observations').get()?.n, 0)
+    const seeded = await seedCandidate(sqlite, {
+      candidateId: 'renewal-no-receipt', extractor: 'rules', gateStatus: 'rule-pass',
+      critical: false, withMapping: true, canonicalFieldPath: 'unproven_url',
+    })
+    const result = await promoteCandidate(database, seeded.candidateId)
+    assert.equal(result.status, 'quarantined')
+    assert.equal(result.reasonCode, 'renewal_receipt_missing')
+  } finally { sqlite.close() }
 })

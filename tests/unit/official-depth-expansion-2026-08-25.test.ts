@@ -103,13 +103,22 @@ describe('official depth expansion on 2026-08-25', () => {
     }
   })
 
-  it('publishes four grounded scholarships with conservative deadlines and WTU scope', () => {
+  it('publishes grounded scholarship identities while withholding overdue funding facts', () => {
     expect(new Set(SCHOLARSHIP_IDS).size).toBe(4)
 
     for (const id of SCHOLARSHIP_IDS) {
       const scholarship = data.scholarships.find((item) => item.id === id)
       expect(scholarship, id).toBeDefined()
-      expect(scholarship?.status, id).toBe('verified')
+      const isOverdueIclt = id === 'scholarship-cug-international-chinese-language-teachers-2026'
+      expect(scholarship?.status, id).toBe(isOverdueIclt ? 'stale' : 'verified')
+      if (isOverdueIclt) {
+        expect(scholarship?.verifiedAt).toBe(TODAY)
+        expect(scholarship?.reviewAfter).toBe('2026-09-01')
+        const publicRecord = published.scholarships.find((item) => item.id === id)
+        expect(publicRecord?.applicationUrl).toBeNull()
+        expect(publicRecord?.coverage.tuition).toBe('unknown')
+        expect(publicRecord?.coverage.stipendCnyPerMonth).toBeNull()
+      }
       expect((scholarship?.reviewAfter ?? '').localeCompare(TODAY) >= 0, id).toBe(true)
       expectSixLanguageName(scholarship?.name ?? {}, id)
       expectOfficialSources(scholarship?.sourceIds ?? [], id)
