@@ -293,6 +293,8 @@ export class CatalogApiService {
       tuitionStatus: cycle.tuitionStatus,
       evidenceBasis: cycle.evidenceBasis,
       applicationFeeCny: cycle.applicationFeeCny,
+      // Narratives can repeat deadlines and prices, so they share the freshness gate.
+      notes: cycle.notes,
     }, this.today)
     const safeCycle = {
       ...cycle,
@@ -304,6 +306,7 @@ export class CatalogApiService {
       tuitionStatus: knownValue(dynamicMeta, 'tuitionStatus', cycle.tuitionStatus ?? null),
       evidenceBasis: knownValue(dynamicMeta, 'evidenceBasis', cycle.evidenceBasis ?? null),
       applicationFeeCny: knownValue(dynamicMeta, 'applicationFeeCny', cycle.applicationFeeCny),
+      notes: knownValue(dynamicMeta, 'notes', cycle.notes ?? null),
     }
     return {
       ...safeCycle,

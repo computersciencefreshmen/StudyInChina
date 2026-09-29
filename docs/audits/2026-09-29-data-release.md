@@ -29,6 +29,14 @@ Evidence: [comprehensive audit](../../quality/audit-2026-09-29-data.json),
 [quality scorecard](../../quality/audit-2026-09-29-scorecard.json), and
 [publication rules](../../src/lib/data/publication.ts).
 
+The v1 release API uses a separate identity projection. It exposes 743 cycle
+identities (729 stale and 14 current) and 2,094 source records, with the same
+university, programme, scholarship and city counts. The additional source is
+`src-program-sjtu-autumn-2026-calendar`. A cycle identity count is therefore not
+the number of current application opportunities. Dynamic cycle dates, fees and
+narrative notes are withheld when their evidence expires; identity, academic year,
+intake and official-source history remain traceable.
+
 ## Official review and changes
 
 The September 28 review changed 163 overdue records to `stale` without advancing

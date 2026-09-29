@@ -129,6 +129,7 @@ function currentApplicationState(cycle: AdmissionCycleRecord | null, today: stri
     opensOn: permittedDate('opensOn'),
     closesOn: permittedDate('closesOn'),
     evidenceBasis: cycle.evidenceBasis ?? undefined,
+    notes: cycle.notes ?? undefined,
   }, today)
 }
 
