@@ -46,7 +46,7 @@ const copy = {
     explorePrograms: 'Explore open programmes',
     fullUpdate: 'View the full update',
     dismiss: 'Close update',
-    storageNote: 'Shown once for this release. The dismissed version stays only in this browser.',
+    storageNote: 'Shown only on your first visit. The viewed status stays only in this browser.',
   },
   zh: {
     mark: '新',
@@ -67,7 +67,7 @@ const copy = {
     explorePrograms: '查看开放申请项目',
     fullUpdate: '查看完整更新记录',
     dismiss: '关闭更新',
-    storageNote: '本版本仅提示一次；已读状态只保存在当前浏览器。',
+    storageNote: '仅首次访问时提示；已读状态保存在当前浏览器，后续更新不再自动弹出。',
   },
   ru: {
     mark: 'NEW',
@@ -88,7 +88,7 @@ const copy = {
     explorePrograms: 'Открытые программы',
     fullUpdate: 'Полный список изменений',
     dismiss: 'Закрыть обновление',
-    storageNote: 'Показывается один раз для этой версии; отметка хранится только в этом браузере.',
+    storageNote: 'Показывается только при первом посещении; отметка хранится в этом браузере.',
   },
   de: {
     mark: 'NEU',
@@ -109,7 +109,7 @@ const copy = {
     explorePrograms: 'Offene Programme',
     fullUpdate: 'Vollständiges Update',
     dismiss: 'Update schließen',
-    storageNote: 'Erscheint einmal pro Version; der Lesestatus bleibt nur in diesem Browser.',
+    storageNote: 'Erscheint nur beim ersten Besuch; der Lesestatus bleibt in diesem Browser.',
   },
   fr: {
     mark: 'NOUV.',
@@ -130,7 +130,7 @@ const copy = {
     explorePrograms: 'Programmes ouverts',
     fullUpdate: 'Voir la mise à jour complète',
     dismiss: 'Fermer la mise à jour',
-    storageNote: 'Affiché une fois pour cette version ; l’état de lecture reste dans ce navigateur.',
+    storageNote: 'Affiché uniquement lors de la première visite ; l’état de lecture reste dans ce navigateur.',
   },
   es: {
     mark: 'NUEVO',
@@ -151,7 +151,7 @@ const copy = {
     explorePrograms: 'Programas abiertos',
     fullUpdate: 'Ver la actualización completa',
     dismiss: 'Cerrar actualización',
-    storageNote: 'Se muestra una vez por versión; el estado leído solo queda en este navegador.',
+    storageNote: 'Se muestra solo en la primera visita; el estado leído queda en este navegador.',
   },
 } satisfies Record<LaunchLocale, ReleaseAnnouncementCopy>
 

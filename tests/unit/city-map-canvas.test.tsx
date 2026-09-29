@@ -123,6 +123,9 @@ afterEach(() => { vi.unstubAllGlobals() })
 
 async function ready() {
   await waitFor(() => expect(screen.getByRole('button', { name: copy.zoomIn })).toBeEnabled())
+  // Controls enable in the ready render; marker fitting runs in its next effect.
+  // Wait for that lifecycle step before asserting exact viewport call counts.
+  await waitFor(() => expect(state.maps[0]?.fitBounds).toHaveBeenCalled())
 }
 
 describe('CityMapCanvas', () => {
