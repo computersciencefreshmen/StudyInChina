@@ -1,3 +1,4 @@
+import { clearAutomationRetry, recordAutomationRetry } from '../../entity-materializer/src/runtime-retry'
 import {
   materializeExtractedEntityCandidate,
   requestEntityMaterializationRelease,
@@ -32,8 +33,9 @@ async function candidateIds(
   database: D1Database,
   sql: string,
   limit: number,
+  now?: string,
 ): Promise<string[]> {
-  const result = await database.prepare(sql).bind(limit).all<CandidateIdRow>()
+  const result = await database.prepare(sql).bind(...(now ? [limit, now] : [limit])).all<CandidateIdRow>()
   if (!result.success) {
     throw new Error(`entity materialization queue query failed: ${result.error ?? 'unknown D1 error'}`)
   }
@@ -43,6 +45,7 @@ async function candidateIds(
 export async function listPendingEntityMaterializationCandidates(
   database: D1Database,
   limit = 20,
+  now = new Date().toISOString(),
 ): Promise<string[]> {
   return candidateIds(
     database,
@@ -54,14 +57,18 @@ export async function listPendingEntityMaterializationCandidates(
         AND registry.entity_key = candidate.entity_key
        JOIN catalog_reconciliation_items reconciliation
          ON reconciliation.candidate_id = candidate.candidate_id
-       WHERE candidate.candidate_status IN ('validated', 'registered', 'quarantined')
+       LEFT JOIN automation_retry_state retry
+         ON retry.task_kind = 'entity_materialization' AND retry.task_id = candidate.candidate_id
+       WHERE (retry.task_id IS NULL OR retry.next_attempt_at <= ?2)
+         AND candidate.candidate_status IN ('validated', 'registered', 'quarantined')
          AND NOT EXISTS (
            SELECT 1 FROM entity_materialization_decisions decision
            WHERE decision.candidate_id = candidate.candidate_id
          )
-       ORDER BY candidate.created_at, candidate.candidate_id
+       ORDER BY coalesce(retry.last_attempt_at, candidate.created_at), candidate.candidate_id
        LIMIT ?1`,
     boundedLimit(limit, 20, 100),
+    now,
   )
 }
 
@@ -99,15 +106,17 @@ export async function processEntityMaterializationBatch(
   const ids = await listPendingEntityMaterializationCandidates(
     database,
     options.candidateLimit,
+    now,
   )
   const results: EntityMaterializationResult[] = []
   const failures: Array<{ candidateId: string; message: string }> = []
   for (const candidateId of ids) {
     try {
-      results.push(await materializeExtractedEntityCandidate(database, candidateId, {
-        decidedAt: now,
-      }))
+      const result = await materializeExtractedEntityCandidate(database, candidateId, { decidedAt: now })
+      results.push(result)
+      if (result.status !== 'pending') await clearAutomationRetry(database, 'entity_materialization', candidateId)
     } catch (error) {
+      await recordAutomationRetry(database, 'entity_materialization', candidateId, error, now)
       failures.push({
         candidateId,
         message: (error instanceof Error ? error.message : String(error)).slice(0, 1_000),

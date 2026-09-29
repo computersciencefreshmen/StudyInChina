@@ -1,3 +1,7 @@
+import { registerAutomaticSourceBindings } from './automatic-source-bindings'
+import { handleOperations } from './operations'
+import { withAutomationHeartbeat } from '../../shared/automation-heartbeat'
+import { registerDiscoveredSources } from './source-discovery'
 import { asIngestionError } from './errors'
 import {
   infrastructureCostPolicy,
@@ -75,31 +79,41 @@ async function scheduleDueSources(
   const scheduledAt = new Date(controller.scheduledTime).toISOString()
   const limit = boundedInteger(environment.SCHEDULE_BATCH_LIMIT, 20, 1, 250)
   const costPolicy = infrastructureCostPolicy(environment.INFRA_FORECAST_CNY)
+  const errors: unknown[] = []
+  if (costPolicy.allowDiscovery) {
+    try { await registerDiscoveredSources(environment, scheduledAt) }
+    catch (error) { errors.push(error) }
+  }
+  try { await registerAutomaticSourceBindings(environment, scheduledAt) }
+  catch (error) { errors.push(error) }
   const sourceIds = await listDueSourceIds(
-    environment,
-    scheduledAt,
-    limit,
-    costPolicy.allowDiscovery,
+    environment, scheduledAt, limit, costPolicy.allowDiscovery, costPolicy.browserScope,
   )
   for (const sourceId of sourceIds) {
-    const source = await loadSourceState(environment, sourceId)
-    if (!source) continue
-    const reason = scheduledJobReason(source.manifest.sourceCategory)
-    if (!permitsScheduledReason(costPolicy, reason)) continue
-    if (
-      source.manifest.fetch.renderMode === 'browser'
-      && !permitsBrowserForSource(costPolicy, source.manifest.sourceCategory)
-    ) continue
-    const jobId = await sha256Hex(`${reason}:${sourceId}:${scheduledAt}`)
-    const job: IngestionJob = {
-      version: 1,
-      jobId,
-      sourceId,
-      reason,
-      scheduledAt,
+    try {
+      const source = await loadSourceState(environment, sourceId)
+      if (!source || !source.manifest.enabled || source.manifest.robots.mode === 'blocked') continue
+      const reason = scheduledJobReason(source.manifest.sourceCategory)
+      if (!permitsScheduledReason(costPolicy, reason)) continue
+      if (source.manifest.fetch.renderMode === 'browser'
+        && !permitsBrowserForSource(costPolicy, source.manifest.sourceCategory)) continue
+      const jobId = await sha256Hex(`${reason}:${sourceId}:${scheduledAt}`)
+      await enqueueClaimedJob(environment, { version: 1, jobId, sourceId, reason, scheduledAt })
+    } catch (error) {
+      errors.push(error)
+      // Isolate a broken manifest/queue send and give later sources a turn next time.
+      const retryAt = new Date(controller.scheduledTime + 15 * 60 * 1000).toISOString()
+      try {
+        const deferred = await environment.INGESTION_DB.prepare(`
+          UPDATE ingestion_sources SET next_fetch_at = ?2, last_error_code = 'schedule_failed', updated_at = ?3
+          WHERE source_id = ?1
+        `).bind(sourceId, retryAt, scheduledAt).run()
+        if (!deferred.success) throw new Error('Could not defer failed source schedule')
+      } catch (persistError) { errors.push(persistError) }
     }
-    await enqueueClaimedJob(environment, job)
   }
+  // Heartbeat reports a partial failure, after all unaffected sources were scheduled.
+  if (errors.length) throw new AggregateError(errors, 'Some ingestion sources could not be scheduled')
 }
 
 async function handleQueue(
@@ -216,6 +230,8 @@ async function handleFetch(request: Request, environment: IngestionEnv): Promise
     })
   }
 
+  if (request.method === 'GET' && url.pathname === '/operations') return handleOperations(request, environment)
+
   if (request.method === 'POST' && url.pathname === '/enqueue') {
     const configuredToken = environment.INGESTION_ADMIN_TOKEN
     const authorization = request.headers.get('authorization') ?? ''
@@ -279,7 +295,8 @@ const worker = {
     controller: ScheduledControllerLike,
     environment: IngestionEnv,
   ): Promise<void> {
-    await scheduleDueSources(controller, environment)
+    await withAutomationHeartbeat(environment.INGESTION_DB, 'ingestion',
+      () => scheduleDueSources(controller, environment))
   },
 }
 

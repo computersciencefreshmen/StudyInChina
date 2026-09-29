@@ -1,6 +1,8 @@
 import { render } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
+vi.mock('next/server', () => ({ connection: vi.fn(async () => undefined) }))
+
 import UniversityDetailPage, {
   generateMetadata as generateUniversityMetadata,
 } from '@/app/[locale]/universities/[slug]/page'

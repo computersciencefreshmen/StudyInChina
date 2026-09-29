@@ -103,6 +103,7 @@ export type AdmissionCycleRecord = Omit<
   | 'tuitionStatus'
   | 'evidenceBasis'
   | 'applicationFeeCny'
+  | 'notes'
 > & {
   opensOn: AdmissionCycle['opensOn']
   closesOn: AdmissionCycle['closesOn']
@@ -112,6 +113,7 @@ export type AdmissionCycleRecord = Omit<
   tuitionStatus: AdmissionCycle['tuitionStatus'] | null
   evidenceBasis: AdmissionCycle['evidenceBasis'] | null
   applicationFeeCny: AdmissionCycle['applicationFeeCny']
+  notes?: AdmissionCycle['notes'] | null
   applicationState:
     | 'open'
     | 'upcoming'

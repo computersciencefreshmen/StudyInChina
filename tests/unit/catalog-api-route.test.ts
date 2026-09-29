@@ -13,7 +13,12 @@ describe('catalog API routes', () => {
     expect(response.status).toBe(200)
     expect(response.headers.get('cache-control')).toContain('s-maxage=300')
     expect(body.data).toHaveLength(1)
-    expect(body.data[0].status).toBe('verified')
+    expect(['verified', 'stale']).toContain(body.data[0].status)
+    if (body.data[0].status === 'stale') {
+      expect(body.data[0].durationMonths).toBeNull()
+      expect(body.data[0].applyUrl).toBeNull()
+      expect(body.data[0].fieldMeta.durationMonths.status).toBe('stale')
+    }
     expect(body.data[0].fieldMeta.programUrl.officialUrl).toMatch(/^https:\/\//)
     expect(body.meta.release.id).toMatch(/^json:/)
   })

@@ -98,11 +98,11 @@ export function applicationState(
   rolling: boolean | null,
   today: string,
 ): ApplicationState {
-  if (rolling) return 'rolling'
-  if (opensOn === null && closesOn === null) return 'not-announced'
   if (closesOn !== null && closesOn < today) return 'closed'
   if (opensOn !== null && opensOn > today) return 'upcoming'
-  return 'open'
+  if (rolling) return 'rolling'
+  if (opensOn !== null) return 'open'
+  return closesOn !== null ? 'dates-published' : 'not-announced'
 }
 
 function uniqueSources(rows: SourceRow[]): OfficialSourceDto[] {

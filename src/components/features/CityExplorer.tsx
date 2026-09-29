@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { CityConstellation } from '@/components/features/CityConstellation'
+import { CityMapWorkspace, type CityMapUniversity } from '@/components/features/CityMapWorkspace'
 import type { PublicLocale } from '@/i18n/config'
 import { getCityGuideExperience } from '@/i18n/city-guide-experience'
 import { getMessages } from '@/i18n/messages'
@@ -26,11 +26,13 @@ export function CityExplorer({
   initialState = defaultCityExplorerState,
   locale,
   universityCounts,
+  universities = [],
 }: {
   cities: CityExplorerItem[]
   initialState?: CityExplorerState
   locale: PublicLocale
   universityCounts: Readonly<Record<string, number>>
+  universities?: CityMapUniversity[]
 }) {
   const messages = getMessages(locale)
   const experience = getCityGuideExperience(locale).cities
@@ -80,6 +82,9 @@ export function CityExplorer({
       setState(next)
     }
     window.addEventListener('popstate', restoreFromUrl)
+    // Back/forward can happen between the server render and hydration. Reconcile
+    // on subscription too, so a missed popstate cannot leave stale controls.
+    restoreFromUrl()
     return () => window.removeEventListener('popstate', restoreFromUrl)
     // The initial server state is immutable for this mounted route. Later URL
     // changes are restored through popstate without causing a second history write.
@@ -91,7 +96,9 @@ export function CityExplorer({
     const filtered = cities.filter((city) => {
       if (region !== 'all' && city.region !== region) return false
       if (!normalizedQuery) return true
-      return `${localize(city.name, locale)} ${localize(city.province, locale)}`
+      const schoolNames = universities.filter(university => university.cityId === city.id)
+        .flatMap(university => Object.values(university.name))
+      return [...Object.values(city.name), ...Object.values(city.province ?? {}), ...schoolNames].join(' ')
         .toLocaleLowerCase(locale)
         .includes(normalizedQuery)
     })
@@ -104,7 +111,7 @@ export function CityExplorer({
       return localize(left.name, locale).localeCompare(localize(right.name, locale), locale)
         || left.slug.localeCompare(right.slug)
     })
-  }, [cities, locale, normalizedQuery, region, sort, universityCounts])
+  }, [cities, locale, normalizedQuery, region, sort, universities, universityCounts])
 
   const regionCounts = useMemo(() => Object.fromEntries(regions.map((key) => [
     key,
@@ -140,10 +147,10 @@ export function CityExplorer({
         <button
           type="button"
           aria-controls="city-explorer-results"
-          aria-pressed={view === 'constellation'}
-          onClick={() => updateState({ view: 'constellation', viewExplicit: true })}
+          aria-pressed={view === 'map'}
+          onClick={() => updateState({ view: 'map', viewExplicit: true })}
         >
-          <span aria-hidden="true">✦</span>{experience.constellationView}
+          <span aria-hidden="true">◎</span>{experience.constellationView}
         </button>
         <button
           type="button"
@@ -173,8 +180,8 @@ export function CityExplorer({
     <div id="city-explorer-results">
       {visibleCities.length === 0
         ? <div className="empty-box"><p>{experience.empty}</p></div>
-        : view === 'constellation'
-          ? <CityConstellation cities={visibleCities} locale={locale} universityCounts={universityCounts} />
+        : view === 'map'
+          ? <CityMapWorkspace cities={visibleCities} locale={locale} universityCounts={universityCounts} universities={universities} />
           : <ul className="city-directory">
               {visibleCities.map((city) => <li key={city.id}>
                 <Link href={`/${locale}/cities/${city.slug}`}>

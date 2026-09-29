@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import GuideDetail from '@/app/[locale]/guides/[slug]/page'
 import { CityExplorer } from '@/components/features/CityExplorer'
@@ -10,6 +10,8 @@ import {
   parseCityExplorerSearchParams,
 } from '@/lib/city-explorer'
 import type { City } from '@/lib/data/types'
+
+vi.mock('@/components/features/CityMapCanvas', () => ({ CityMapCanvas: () => <div /> }))
 
 const guangzhou: City = {
   id: 'city-guangzhou',
@@ -39,6 +41,20 @@ const beijing: City = {
 }
 
 describe('city and guide experience', () => {
+  beforeEach(() => {
+    // Browser history is an input to CityExplorer and survives React cleanup.
+    // Give every test its own initial URL, including default-map assertions.
+    window.history.replaceState({}, '', '/en/cities')
+  })
+
+  it('reconciles history that changed before the hydration listener attached', () => {
+    window.history.replaceState({}, '', '/en/cities?view=directory')
+    render(<CityExplorer cities={[guangzhou, beijing]} locale="en" universityCounts={{}}
+      initialState={parseCityExplorerSearchParams({ view: 'directory', sort: 'name' })} />)
+    expect(screen.getByLabelText('Sort')).toHaveValue('universities')
+    expect(screen.getByRole('button', { name: 'Directory' })).toHaveAttribute('aria-pressed', 'true')
+  })
+
   it('offers keyboard-native city views, filters and deterministic sorting', () => {
     render(<CityExplorer
       cities={[guangzhou, beijing]}
@@ -46,8 +62,8 @@ describe('city and guide experience', () => {
       universityCounts={{ [guangzhou.id]: 3, [beijing.id]: 9 }}
     />)
 
-    expect(screen.getByRole('link', { name: 'Beijing: 9 Universities' })).toBeVisible()
-    expect(screen.getByRole('button', { name: 'Constellation' })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('button', { name: /Beijing.*9 Universities/ })).toBeVisible()
+    expect(screen.getByRole('button', { name: 'Map' })).toHaveAttribute('aria-pressed', 'true')
 
     fireEvent.click(screen.getByRole('button', { name: 'Directory' }))
     const directoryLinks = screen.getAllByRole('link').filter((link) => link.getAttribute('href')?.includes('/cities/'))
@@ -86,8 +102,10 @@ describe('city and guide experience', () => {
     expect(params.get('region')).toBe('south')
     expect(params.get('sort')).toBe('name')
 
-    expect(parseCityExplorerSearchParams({ view: 'map', region: 'invalid', sort: 'price' }))
-      .toEqual(expect.objectContaining({ view: 'constellation', region: 'all', sort: 'universities', viewExplicit: false }))
+    expect(parseCityExplorerSearchParams({ view: 'globe', region: 'invalid', sort: 'price' }))
+      .toEqual(expect.objectContaining({ view: 'map', region: 'all', sort: 'universities', viewExplicit: false }))
+    expect(parseCityExplorerSearchParams({ view: 'constellation' }))
+      .toEqual(expect.objectContaining({ view: 'map', viewExplicit: true }))
   })
 
   it('renders flagship guide navigation, official sources and valid Article / FAQ JSON-LD', async () => {

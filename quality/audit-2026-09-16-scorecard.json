@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-15T16:38:49.197Z",
+  "evaluatedForDate": "2026-09-16",
+  "metrics": {
+    "publicRecords": {
+      "universities": 266,
+      "programs": 1265,
+      "scholarships": 366,
+      "admissionCycles": 9,
+      "cities": 62
+    },
+    "programCoverage": {
+      "schoolsBelowThreePrograms": 2,
+      "schoolIdsBelowThreePrograms": [
+        "uni-hunan-university-of-technology-and-business",
+        "uni-tibet-university"
+      ],
+      "programsWithVerifiedIdentity": 1265,
+      "identityCoveragePct": 100,
+      "programsWithFreshDisposition": 8,
+      "freshDispositionCoveragePct": 0.63,
+      "programsWithDatedOrRollingCycle": 8,
+      "datedOrRollingCoveragePct": 0.63,
+      "programsActiveOrUpcoming": 1,
+      "activeUpcomingCoveragePct": 0.08,
+      "programsWithCurrentConfirmedTuition": 2,
+      "currentConfirmedTuitionCoveragePct": 0.16,
+      "programsWithAnyOfficialTuitionEvidence": 551,
+      "anyOfficialTuitionEvidenceCoveragePct": 43.56,
+      "programsWithCurrentCycle": 8,
+      "currentCycleCoveragePct": 0.63,
+      "currentCycleCoverageSemantics": "deprecated_alias_of_dated_or_rolling",
+      "programsWithDuration": 111,
+      "durationCoveragePct": 8.77,
+      "programsWithApplicationUrl": 109,
+      "applicationUrlCoveragePct": 8.62,
+      "programsWithTeachingLanguage": 113,
+      "teachingLanguageCoveragePct": 8.93,
+      "programsWithRequirements": 98,
+      "requirementsCoveragePct": 7.75
+    },
+    "scholarships": {
+      "identityRecords": 366,
+      "freshRecords": 12,
+      "universitiesCovered": 8,
+      "universityCoveragePct": 3.01,
+      "recordsWithDeadline": 4,
+      "deadlineCoveragePct": 33.33
+    },
+    "cities": {
+      "withCoordinates": 27,
+      "coordinateCoveragePct": 43.55
+    },
+    "sourceManifests": {
+      "institutionsRegistered": 10,
+      "publicUniversitiesRegistered": 10,
+      "publicUniversityCoveragePct": 3.76,
+      "v2Manifests": 10,
+      "completedManifests": 0,
+      "completedReconciliations": 0
+    },
+    "anomalies": {
+      "verifiedOverdueRecords": 0,
+      "staleStatusRecords": 2331,
+      "publishedCyclesWithoutAnyDate": 0
+    }
+  },
+  "gates": {
+    "passed": 3,
+    "failed": 11,
+    "total": 14,
+    "allPassed": false,
+    "checks": [
+      {
+        "metric": "publicUniversities",
+        "comparison": "at_least",
+        "actual": 266,
+        "target": 257,
+        "passed": true
+      },
+      {
+        "metric": "schoolsBelowThreePrograms",
+        "comparison": "at_most",
+        "actual": 2,
+        "target": 0,
+        "passed": false
+      },
+      {
+        "metric": "freshDispositionCoveragePct",
+        "comparison": "at_least",
+        "actual": 0.63,
+        "target": 70,
+        "passed": false
+      },
+      {
+        "metric": "durationCoveragePct",
+        "comparison": "at_least",
+        "actual": 8.77,
+        "target": 90,
+        "passed": false
+      },
+      {
+        "metric": "applicationUrlCoveragePct",
+        "comparison": "at_least",
+        "actual": 8.62,
+        "target": 80,
+        "passed": false
+      },
+      {
+        "metric": "teachingLanguageCoveragePct",
+        "comparison": "at_least",
+        "actual": 8.93,
+        "target": 95,
+        "passed": false
+      },
+      {
+        "metric": "requirementsCoveragePct",
+        "comparison": "at_least",
+        "actual": 7.75,
+        "target": 50,
+        "passed": false
+      },
+      {
+        "metric": "scholarshipUniversityCoverage",
+        "comparison": "at_least",
+        "actual": 8,
+        "target": 230,
+        "passed": false
+      },
+      {
+        "metric": "citiesWithCoordinates",
+        "comparison": "at_least",
+        "actual": 27,
+        "target": 60,
+        "passed": false
+      },
+      {
+        "metric": "manifestInstitutions",
+        "comparison": "at_least",
+        "actual": 10,
+        "target": 257,
+        "passed": false
+      },
+      {
+        "metric": "completedManifests",
+        "comparison": "at_least",
+        "actual": 0,
+        "target": 257,
+        "passed": false
+      },
+      {
+        "metric": "completedReconciliations",
+        "comparison": "at_least",
+        "actual": 0,
+        "target": 257,
+        "passed": false
+      },
+      {
+        "metric": "verifiedOverdueRecords",
+        "comparison": "at_most",
+        "actual": 0,
+        "target": 0,
+        "passed": true
+      },
+      {
+        "metric": "publishedCyclesWithoutAnyDate",
+        "comparison": "at_most",
+        "actual": 0,
+        "target": 0,
+        "passed": true
+      }
+    ]
+  }
+}

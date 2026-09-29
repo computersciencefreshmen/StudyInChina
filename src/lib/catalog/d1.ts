@@ -139,7 +139,7 @@ export class D1CatalogRepository implements CatalogRepository {
   private readonly now: () => number
   private cached: { snapshot: CatalogSnapshot; expiresAt: number } | undefined
   private inFlight: Promise<CatalogSnapshot> | undefined
-  private operationalReleaseCached: { release: CatalogRelease; expiresAt: number } | undefined
+  private operationalReleaseCached: { release: CatalogRelease; expiresAt: number; calendarDate: string } | undefined
   private operationalReleaseInFlight: Promise<CatalogRelease> | undefined
 
   constructor(options: D1CatalogRepositoryOptions) {
@@ -200,7 +200,9 @@ export class D1CatalogRepository implements CatalogRepository {
 
   getOperationalRelease(): Promise<CatalogRelease> {
     const now = this.now()
-    if (this.operationalReleaseCached && this.operationalReleaseCached.expiresAt >= now) {
+    if (this.operationalReleaseCached
+      && this.operationalReleaseCached.expiresAt >= now
+      && this.operationalReleaseCached.calendarDate === getTodayDate(new Date(now))) {
       return Promise.resolve(this.operationalReleaseCached.release)
     }
     if (this.operationalReleaseInFlight) return this.operationalReleaseInFlight
@@ -209,6 +211,7 @@ export class D1CatalogRepository implements CatalogRepository {
         this.operationalReleaseCached = {
           release,
           expiresAt: this.now() + this.cacheTtlMs,
+          calendarDate: getTodayDate(new Date(now)),
         }
         return release
       })
@@ -336,6 +339,7 @@ export class D1CatalogRepository implements CatalogRepository {
         method: 'GET',
         headers: { accept: 'application/json' },
         redirect: 'error',
+        cache: 'no-store',
         signal: controller.signal,
       })
     } catch (error) {
@@ -415,6 +419,7 @@ export class D1CatalogRepository implements CatalogRepository {
         method: 'GET',
         headers,
         redirect: 'error',
+        cache: 'no-store',
         signal: controller.signal,
       })
     } catch (error) {

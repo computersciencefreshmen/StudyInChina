@@ -1,10 +1,10 @@
+import { catalogCacheControl } from '../../../src/lib/catalog-api/cache-policy'
 import type { ActiveReleaseRow, CatalogApiEnv, R2ObjectBody } from './types'
 import { CatalogSqlApi } from './sql-api'
 import { InvalidCursorError } from './sql-cursor'
 import { chinaCalendarDate, InvalidSearchQueryError } from './sql-data'
 
 const RELEASE_ID_PATTERN = /^[A-Za-z0-9._:-]{1,160}$/
-const PUBLIC_CACHE = 'public, max-age=60, s-maxage=300, stale-while-revalidate=300'
 const PRIVATE_CACHE = 'private, max-age=60, stale-while-revalidate=300'
 const MAX_RELEASE_ARTIFACT_BYTES = 20 * 1024 * 1024
 
@@ -14,7 +14,7 @@ function json(value: unknown, status = 200, headers: HeadersInit = {}) {
   return Response.json(value, {
     status,
     headers: {
-      'Cache-Control': status >= 400 ? 'no-store' : PUBLIC_CACHE,
+      'Cache-Control': status >= 400 ? 'no-store' : catalogCacheControl(),
       'X-Content-Type-Options': 'nosniff',
       ...headers,
     },
@@ -188,38 +188,30 @@ function programIdsParam(params: URLSearchParams): string[] {
   return ids
 }
 
-function publicResponse(request: Request, payload: unknown, etag: string) {
-  if (request.method === 'HEAD') {
-    return new Response(null, {
-      status: 200,
-      headers: {
-        'Cache-Control': PUBLIC_CACHE,
-        'Content-Type': 'application/json; charset=utf-8',
-        'Access-Control-Allow-Origin': '*',
-        'X-Content-Type-Options': 'nosniff',
-        ETag: etag,
-      },
-    })
+async function publicResponse(request: Request, payload: unknown) {
+  // Hash the actual representation, after route validation and existence checks.
+  // A release-wide validator cannot identify two different filtered responses.
+  const body = JSON.stringify(payload)
+  const etag = '"' + await sha256Hex(new TextEncoder().encode(body)) + '"'
+  const headers = {
+    'Cache-Control': catalogCacheControl(),
+    'Content-Type': 'application/json; charset=utf-8',
+    'Access-Control-Allow-Origin': '*',
+    'X-Content-Type-Options': 'nosniff',
+    ETag: etag,
   }
-  return json(payload, 200, { ETag: etag, 'Access-Control-Allow-Origin': '*' })
+  const matches = request.headers.get('if-none-match')?.split(',').some((candidate) => {
+    const tag = candidate.trim()
+    return tag === '*' || tag.replace(/^W\//u, '') === etag
+  })
+  if (matches) return new Response(null, { status: 304, headers })
+  return new Response(request.method === 'HEAD' ? null : body, { status: 200, headers })
 }
 
 async function publicCatalogResponse(request: Request, environment: CatalogApiEnv, url: URL) {
   const release = await getActiveRelease(environment)
   if (!release) return json({ error: { code: 'release_unavailable' } }, 503)
   const today = chinaCalendarDate()
-  const etag = `"${release.content_sha256}:${today}"`
-  if (request.headers.get('if-none-match') === etag) {
-    return new Response(null, {
-      status: 304,
-      headers: {
-        ETag: etag,
-        'Cache-Control': PUBLIC_CACHE,
-        'Access-Control-Allow-Origin': '*',
-        'X-Content-Type-Options': 'nosniff',
-      },
-    })
-  }
   const api = new CatalogSqlApi(environment.CATALOG_DB, release, today)
   const parts = url.pathname.split('/').filter(Boolean)
   const resource = parts[2]
@@ -237,12 +229,12 @@ async function publicCatalogResponse(request: Request, environment: CatalogApiEn
       ),
       cursor: stringParam(url.searchParams, 'cursor', 1_024),
       limit: integerParam(url.searchParams, 'limit', 1, 100),
-    }), etag)
+    }))
   }
   if (resource === 'institutions' && parts.length === 4) {
     const result = await api.getInstitution(safeSlug(parts[3]!))
     return result
-      ? publicResponse(request, result, etag)
+      ? publicResponse(request, result)
       : json({ error: { code: 'not_found' } }, 404)
   }
   if (resource === 'programs' && parts.length === 3) {
@@ -263,21 +255,21 @@ async function publicCatalogResponse(request: Request, environment: CatalogApiEn
       sort: stringParam(url.searchParams, 'sort'),
       cursor: stringParam(url.searchParams, 'cursor', 1_024),
       limit: integerParam(url.searchParams, 'limit', 1, 100),
-    }), etag)
+    }))
   }
   if (resource === 'programs' && parts.length === 4 && parts[3] === 'compare') {
-    return publicResponse(request, await api.comparePrograms(programIdsParam(url.searchParams)), etag)
+    return publicResponse(request, await api.comparePrograms(programIdsParam(url.searchParams)))
   }
   if (resource === 'programs' && parts.length === 4) {
     const result = await api.getProgram(safeSlug(parts[3]!))
     return result
-      ? publicResponse(request, result, etag)
+      ? publicResponse(request, result)
       : json({ error: { code: 'not_found' } }, 404)
   }
   if (resource === 'programs' && parts.length === 5 && parts[4] === 'cycles') {
     const result = await api.getProgramCycles(safeSlug(parts[3]!))
     return result
-      ? publicResponse(request, result, etag)
+      ? publicResponse(request, result)
       : json({ error: { code: 'not_found' } }, 404)
   }
   if (resource === 'scholarships' && parts.length === 3) {
@@ -304,18 +296,18 @@ async function publicCatalogResponse(request: Request, environment: CatalogApiEn
       sort: enumParam(url.searchParams, 'sort', new Set(['default', 'name', 'deadline', 'stipend-desc'])),
       cursor: stringParam(url.searchParams, 'cursor', 1_024),
       limit: integerParam(url.searchParams, 'limit', 1, 100),
-    }), etag)
+    }))
   }
   if (resource === 'scholarships' && parts.length === 4) {
     const result = await api.getScholarship(safeSlug(parts[3]!))
     return result
-      ? publicResponse(request, result, etag)
+      ? publicResponse(request, result)
       : json({ error: { code: 'not_found' } }, 404)
   }
   if (resource === 'scholarships' && parts.length === 5 && parts[4] === 'cycles') {
     const result = await api.getScholarshipCycles(safeSlug(parts[3]!))
     return result
-      ? publicResponse(request, result, etag)
+      ? publicResponse(request, result)
       : json({ error: { code: 'not_found' } }, 404)
   }
   return json({ error: { code: 'not_found' } }, 404)
@@ -325,22 +317,9 @@ async function currentReleaseResponse(request: Request, env: CatalogApiEnv) {
   const release = await getActiveRelease(env)
   if (!release) return json({ error: { code: 'release_unavailable' } }, 503)
   const today = chinaCalendarDate()
-  const etag = `"${release.content_sha256}:${today}"`
-  if (request.headers.get('if-none-match') === etag) {
-    return new Response(null, {
-      status: 304,
-      headers: {
-        ETag: etag,
-        'Cache-Control': PUBLIC_CACHE,
-        'Access-Control-Allow-Origin': '*',
-        'X-Content-Type-Options': 'nosniff',
-      },
-    })
-  }
   return publicResponse(
     request,
     new CatalogSqlApi(env.CATALOG_DB, release, today).currentRelease(),
-    etag,
   )
 }
 

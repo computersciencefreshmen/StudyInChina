@@ -5,16 +5,21 @@
   "compatibility_date": "2026-07-20",
   "workers_dev": true,
   "preview_urls": false,
-  "observability": { "enabled": true },
+  "observability": {
+    "enabled": true
+  },
   "triggers": {
-    "crons": ["47 * * * *"]
+    "crons": [
+      "2,17,32,47 * * * *"
+    ]
   },
   "vars": {
     "SCHEDULE_BATCH_LIMIT": "20",
     "PIPELINE_PAGE_SIZE": "500",
     "CATALOG_WRITE_BATCH_SIZE": "50",
     "MAX_QUEUE_ATTEMPTS": "4",
-    "EVENT_LEASE_SECONDS": "900"
+    "EVENT_LEASE_SECONDS": "900",
+    "RUNTIME_RETRY_DELAY_SECONDS": "900"
   },
   "d1_databases": [
     {

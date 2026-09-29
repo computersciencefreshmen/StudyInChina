@@ -70,6 +70,7 @@ function databaseWithEntitySchema(): DatabaseSync {
     '0004_worker_runtime.sql',
     '0005_domain_throttle.sql',
     '0006_candidate_provenance_promotion.sql',
+    '0018_source_revalidation_observations.sql',
     '0007_snapshot_derivatives.sql',
     '0008_release_builder_contract.sql',
     '0009_entity_discovery_registry.sql',
@@ -504,4 +505,55 @@ test('304 with a stale extractor fingerprint is retryable and never records no-c
   } finally {
     database.close()
   }
+})
+
+
+test('daily full-body revalidation bypasses validators and a 304 cannot refresh its evidence', async () => {
+  const database = databaseWithEntitySchema()
+  try {
+    const manifest = sourceManifest({
+      extraction: {
+        mode: 'rules-only', schemaVersion: 'deadline-v1',
+        fields: [{ path: 'deadline', type: 'date', required: true }],
+        rules: [{ kind: 'regex', fieldPath: 'deadline', pattern: 'Deadline:\\s*(\\d{4}-\\d{2}-\\d{2})' }],
+      },
+    })
+    const initialJob = testJob(manifest.id)
+    seedSourceAndJob(database, manifest, initialJob)
+    const environment = environmentFor(database)
+    const body = '<p>Deadline: 2026-09-01</p>'
+    await processIngestionJob(environment, initialJob, async () => new Response(body, {
+      headers: { 'Content-Type': 'text/html', ETag: '"body-version-1"' },
+    }), checkedAt)
+    const original = database.prepare('SELECT snapshot_id, fetched_at FROM ingestion_snapshots').get()!
+    for (const [step, time, responseStatus, expectsValidator, fails] of [
+      ['within-day', '2026-07-20T12:00:00.000Z', 304, true, false],
+      ['due-304', '2026-07-21T01:00:00.000Z', 304, false, true],
+      ['due-body', '2026-07-21T02:00:00.000Z', 200, false, false],
+      ['after-proof', '2026-07-21T03:00:00.000Z', 304, true, false],
+    ] as const) {
+      const job: IngestionJob = { ...initialJob, jobId: 'job-' + step, reason: 'scheduled', scheduledAt: time }
+      database.prepare(`INSERT INTO ingestion_jobs
+        (job_id, source_id, reason, status, scheduled_at, created_at, updated_at)
+        VALUES (?, ?, 'scheduled', 'running', ?, ?, ?)`).run(job.jobId, job.sourceId, time, time, time)
+      const process = processIngestionJob(environment, job, async (_url, init) => {
+        assert.equal(new Headers(init?.headers).has('If-None-Match'), expectsValidator, step)
+        return new Response(responseStatus === 304 ? null : body, {
+          status: responseStatus, headers: { 'Content-Type': 'text/html', ETag: '"body-version-1"' },
+        })
+      }, new Date(time))
+      if (fails) {
+        await assert.rejects(process, (error: unknown) => error instanceof IngestionError && error.code === 'unexpected_304')
+        assert.equal(count(database, 'ingestion_source_observations'), 0)
+        database.prepare(`UPDATE ingestion_jobs SET status = 'failed', completed_at = ? WHERE job_id = ?`).run(time, job.jobId)
+      } else await process
+    }
+    assert.equal(count(database, 'ingestion_snapshots'), 1)
+    assert.equal(count(database, 'ingestion_source_observations'), 1)
+    assert.equal(database.prepare('SELECT observed_at FROM ingestion_source_observations').get()?.observed_at, '2026-07-21T02:00:00.000Z')
+    assert.equal(database.prepare('SELECT fetched_at FROM ingestion_snapshots WHERE snapshot_id = ?').get(original.snapshot_id)?.fetched_at,
+      '2026-07-20T00:00:00.000Z')
+    // No existing accepted claim means the full-body receipt alone cannot promote facts.
+    assert.equal(count(database, 'ingestion_candidate_observations'), 0)
+  } finally { database.close() }
 })

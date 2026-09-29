@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { classifyProgramField, programFieldTaxonomy } from '../../src/lib/data/fields'
+import { getDataReleaseDate } from '../../src/lib/data/release'
 import { buildLegacyRelease, readLegacyBundle } from '../../scripts/catalog/build-release'
 
 function applyMigrations(database: DatabaseSync) {
@@ -15,6 +16,24 @@ function applyMigrations(database: DatabaseSync) {
 describe('legacy JSON release builder', () => {
   it('builds an exact compatibility envelope and idempotent D1 release', () => {
     const bundle = readLegacyBundle()
+    // This branch needs a current scholarship with no application URL. Real
+    // scholarships can expire, so make that condition explicit in the local fixture.
+    const fixtureDate = getDataReleaseDate(bundle)
+    bundle.sources.push({
+      id: 'source-test-no-application', url: 'https://example.edu.cn/scholarship',
+      title: 'Synthetic scholarship evidence', publisher: 'Test fixture', kind: 'scholarship',
+      language: 'en', official: true, accessedAt: fixtureDate,
+    })
+    bundle.scholarships.push({
+      id: 'scholarship-test-no-application', slug: 'test-no-application',
+      name: { en: 'Synthetic scholarship with unannounced application' }, providerType: 'university',
+      universityIds: [], programIds: [], coverage: {
+        tuition: 'unknown', accommodation: 'unknown', insurance: 'unknown', stipendCnyPerMonth: null,
+      },
+      deadline: null, applicationUrl: null, summary: null,
+      sourceIds: ['source-test-no-application'], verifiedAt: fixtureDate,
+      reviewAfter: fixtureDate, status: 'verified',
+    })
     const artifacts = buildLegacyRelease(bundle)
     const envelope = JSON.parse(artifacts.envelope)
     expect(envelope.data).toEqual(bundle)

@@ -1,3 +1,4 @@
+import { getTodayDate } from '../../src/lib/data/freshness'
 import { describe, expect, it } from 'vitest'
 
 import admissionCycles from '../../content/data/admission-cycles.json'
@@ -274,7 +275,8 @@ describe('evidence-first sparse-school depth wave on 2026-08-08', () => {
     for (const [candidateId, providerType] of providers) {
       const scholarship = materializedScholarship(candidateId)[0]
       expect(scholarship, candidateId).toBeDefined()
-      expect(scholarship?.status, candidateId).toBe('verified')
+      expect(['verified', 'stale'], candidateId).toContain(scholarship?.status)
+      if ((scholarship?.reviewAfter ?? '') < getTodayDate()) expect(scholarship?.status, candidateId).toBe('stale')
       expect(scholarship?.deadline, candidateId).toBeNull()
       expect(scholarship?.applicationUrl, candidateId).toBeNull()
       expect(scholarship?.providerType, candidateId).toBe(providerType)

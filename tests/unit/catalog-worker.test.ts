@@ -75,7 +75,47 @@ describe('catalog API worker', () => {
     expect(body.data.activatedAt).toBe(release.activated_at)
     expect(body.data.catalogBackend).toBe('d1')
     expect(body.data.deploymentSha).toBeNull()
-    expect(response.headers.get('etag')).toMatch(/^"[a-f0-9]{64}:\d{4}-\d{2}-\d{2}"$/u)
+    expect(response.headers.get('etag')).toMatch(/^"[a-f0-9]{64}"$/u)
+  })
+
+
+  it('validates resources and queries before honoring representation-specific ETags', async () => {
+    const env = environment()
+    const currentUrl = 'https://catalog.test/api/v1/releases/current'
+    const current = await worker.fetch(new Request(currentUrl), env)
+    const etag = current.headers.get('etag')!
+    const conditional = await worker.fetch(new Request(currentUrl, {
+      headers: { 'if-none-match': etag },
+    }), env)
+    expect(conditional.status).toBe(304)
+    expect(await conditional.text()).toBe('')
+    const other = await worker.fetch(new Request('https://catalog.test/api/v1/programs?limit=1', {
+      headers: { 'if-none-match': etag },
+    }), env)
+    expect(other.status).toBe(200)
+    expect(other.headers.get('etag')).not.toBe(etag)
+    const invalid = await worker.fetch(new Request('https://catalog.test/api/v1/programs?limit=101', {
+      headers: { 'if-none-match': etag },
+    }), env)
+    expect(invalid.status).toBe(400)
+    const missing = await worker.fetch(new Request('https://catalog.test/api/v1/missing', {
+      headers: { 'if-none-match': etag },
+    }), env)
+    expect(missing.status).toBe(404)
+  })
+
+  it('supports weak conditional validators and HEAD without leaking a response body', async () => {
+    const url = 'https://catalog.test/api/v1/releases/current'
+    const response = await worker.fetch(new Request(url), environment())
+    const etag = response.headers.get('etag')!
+    const weak = await worker.fetch(new Request(url, {
+      headers: { 'if-none-match': '"unrelated", W/' + etag },
+    }), environment())
+    expect(weak.status).toBe(304)
+    const head = await worker.fetch(new Request(url, { method: 'HEAD' }), environment())
+    expect(head.status).toBe(200)
+    expect(head.headers.get('etag')).toBe(etag)
+    expect(await head.text()).toBe('')
   })
 
   it('uses the China calendar date at the UTC day boundary', () => {

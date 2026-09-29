@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation'
+import { connection } from 'next/server'
 import { ApplicationSummaryCard } from '@/components/features/ApplicationSummaryCard'
+import { DataFreshnessPanel } from '@/components/features/DataFreshnessPanel'
 import { SourceTransparency } from '@/components/features/SourceTransparency'
 import { Badge, Card, PageHero, VerificationBadge } from '@/components/ui'
 import { indexedLocales } from '@/i18n/config'
@@ -27,6 +29,8 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string; slug: string }>
 }) {
+  // Evaluate publication and admission dates for this request, not a cached build day.
+  await connection()
   const { locale: raw, slug } = await params
   const locale = requireLocale(raw) || 'en'
   const data = await getCatalogData()
@@ -47,6 +51,8 @@ export default async function ScholarshipDetail({
 }: {
   params: Promise<{ locale: string; slug: string }>
 }) {
+  // Evaluate publication and admission dates for this request, not a cached build day.
+  await connection()
   const { locale: raw, slug } = await params
   const locale = requireLocale(raw)
   if (!locale) notFound()
@@ -67,7 +73,8 @@ export default async function ScholarshipDetail({
   const universityCoverage = formatUniversityCoverage(item.universityIds.length, locale, messages.common.all)
   const fundingHighlights = `${coverageLabel(item.coverage.tuition, locale)} · ${formatCny(item.coverage.stipendCnyPerMonth, locale, messages.common.unknown)}`
   const isStaleIdentity = item.status === 'stale'
-  const currentCycle = selectScholarshipCurrentCycle(item, getTodayDate())
+  const today = getTodayDate()
+  const currentCycle = selectScholarshipCurrentCycle(item, today)
   const deadlineLabels = {
     future: decisionCopy.deadlineAhead,
     closed: decisionCopy.deadlineClosed,
@@ -112,6 +119,9 @@ export default async function ScholarshipDetail({
         />
       )}
     />
+    <div className="atlas-container">
+      <DataFreshnessPanel record={item} locale={locale} today={today} />
+    </div>
     <section className="atlas-container atlas-section detail-layout">
       <div className="detail-main">
         <div className="prose-panel">
@@ -167,7 +177,7 @@ export default async function ScholarshipDetail({
             { label: decisionCopy.fundingHighlights, value: fundingHighlights },
             { label: copy.accommodation, value: coverageLabel(item.coverage.accommodation, locale) },
             { label: messages.common.university, value: universityCoverage },
-            { label: messages.common.lastVerified, value: formatDate(lastSourceCheckedAt, locale, '—') },
+            { label: messages.common.lastVerified, value: formatDate(item.verifiedAt, locale, '—') },
           ]}
           notice={decisionCopy.verifiedFactsOnly}
           actions={item.status === 'verified' && item.applicationUrl
@@ -178,7 +188,7 @@ export default async function ScholarshipDetail({
               ? <a className="atlas-button atlas-button--secondary atlas-button--small" href={sources[0].url} target="_blank" rel="noreferrer">{messages.common.officialSource} ↗</a>
               : undefined}
         />
-        <Card accent="jade">
+        <Card accent="jade" id="official-evidence">
           <h2 className="atlas-card__title">{copy.sources}</h2>
           <div className="tag-list">
             <VerificationBadge

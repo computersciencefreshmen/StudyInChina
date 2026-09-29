@@ -102,7 +102,14 @@ describe('production publication policy', () => {
 
     expect(quarantinedCycles.length).toBeGreaterThan(0)
     expect(quarantinedCycles.every((cycle) => !publishedCycleIds.has(cycle.id))).toBe(true)
-    expect(actionableCycles.length).toBeGreaterThan(0)
+    // A school need not have an open intake every day. Availability is content,
+    // while current evidence and an honest application state are the contract.
+    for (const cycle of actionableCycles) {
+      expect(cycle.status).toBe('verified')
+      expect(cycle.reviewAfter >= CATALOG_AS_OF).toBe(true)
+      expect(cycle.verifiedAt <= CATALOG_AS_OF).toBe(true)
+      expect(cycle.sourceIds.length).toBeGreaterThan(0)
+    }
   })
 
   it('publishes only records whose related entities remain public', () => {

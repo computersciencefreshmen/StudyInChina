@@ -1,0 +1,37 @@
+name: Automation runtime health
+on:
+  schedule:
+    - cron: '41 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: automation-runtime-health
+  cancel-in-progress: false
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Check persisted progress and public catalog
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INGESTION_ADMIN_TOKEN: ${{ secrets.INGESTION_ADMIN_TOKEN }}
+          INGESTION_WORKER_URL: ${{ vars.INGESTION_WORKER_URL }}
+        run: |
+          test -n "$INGESTION_WORKER_URL" && test -n "$INGESTION_ADMIN_TOKEN"
+          npm run automation:health -- --operations-url "$INGESTION_WORKER_URL" --github-repo "$GITHUB_REPOSITORY" --release-url https://studyinchina.vercel.app/api/v1/releases/current --output "$RUNNER_TEMP/automation-health.json"
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: automation-health-${{ github.run_id }}
+          path: ${{ runner.temp }}/automation-health.json
+          if-no-files-found: error
+          retention-days: 30

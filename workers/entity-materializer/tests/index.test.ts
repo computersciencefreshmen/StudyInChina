@@ -3,12 +3,15 @@ import test from 'node:test'
 
 import {
   DAILY_RELEASE_CRON,
+  MATERIALIZATION_CRON,
   handleFetch,
   shouldRequestDailyRelease,
 } from '../src/index'
 
-test('only the dedicated daily cron can request a release', () => {
-  assert.equal(shouldRequestDailyRelease('47 * * * *'), false)
+test('regular cron catches up daily releases while DB uniqueness bounds publication', () => {
+  assert.equal(shouldRequestDailyRelease('unrecognized'), false)
+  assert.equal(shouldRequestDailyRelease(MATERIALIZATION_CRON), true)
+  assert.equal(shouldRequestDailyRelease('47 * * * *'), true)
   assert.equal(shouldRequestDailyRelease(DAILY_RELEASE_CRON), true)
 })
 

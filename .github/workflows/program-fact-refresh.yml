@@ -1,8 +1,8 @@
-name: Weekly official program fact refresh
+name: Daily official program fact refresh
 
 on:
   schedule:
-    - cron: '19 4 * * 2'
+    - cron: '19 4 * * *'
   workflow_dispatch:
     inputs:
       maximum_urls:
@@ -49,7 +49,10 @@ jobs:
       - name: Set refresh date
         id: date
         shell: bash
-        run: echo "value=$(date -u +%F)" >> "$GITHUB_OUTPUT"
+        run: echo "value=$(TZ=Asia/Shanghai date +%F)" >> "$GITHUB_OUTPUT"
+
+      - name: Downgrade expired input evidence before generating candidates
+        run: npm run data:rollover-stale -- --apply
 
       - name: Build complete current Catalog review queue
         shell: bash
@@ -125,7 +128,8 @@ jobs:
               echo '- Status: not configured; the replayable handoff artifact was retained.'
               echo '- Required: repository variable `INGESTION_WORKER_URL` and secret `INGESTION_ADMIN_TOKEN`.'
             } >> "$GITHUB_STEP_SUMMARY"
-            exit 0
+            echo '::error::Pipeline verification was not enqueued because its required Worker configuration is missing.'
+            exit 1
           fi
 
           enqueue_url="$(node -e '

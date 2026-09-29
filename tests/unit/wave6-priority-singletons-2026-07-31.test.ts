@@ -163,7 +163,7 @@ describe('priority singleton coverage wave 6 on 2026-07-31', () => {
     }
   })
 
-  it('preserves verified level, language, duration and discipline mappings', () => {
+  it('preserves sourced mappings while withholding expired public facts', () => {
     const expected = new Map([
       ['wave6-ucas-biology-master', ['master', 'science', 36, ['English']]],
       [
@@ -185,13 +185,20 @@ describe('priority singleton coverage wave 6 on 2026-07-31', () => {
     ])
 
     for (const [candidateId, values] of expected) {
-      const program = published.programs.find((item) =>
+      const program = data.programs.find((item) =>
         item.id === programId(candidateId))
       expect(program, candidateId).toBeDefined()
       expect(program?.degreeLevel, candidateId).toBe(values[0])
       expect(program?.discipline, candidateId).toBe(values[1])
       expect(program?.durationMonths, candidateId).toBe(values[2])
       expect(program?.teachingLanguages, candidateId).toEqual(values[3])
+      const publicProgram = published.programs.find((item) => item.id === program?.id)
+      expect(publicProgram, candidateId).toBeDefined()
+      if (program?.status === 'stale') {
+        expect(publicProgram?.durationMonths, candidateId).toBeNull()
+        expect(publicProgram?.teachingLanguages, candidateId).toEqual([])
+        expect(publicProgram?.applyUrl, candidateId).toBeNull()
+      }
     }
   })
 

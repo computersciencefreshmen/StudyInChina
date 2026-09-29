@@ -44,13 +44,33 @@ describe('server-side scholarship catalogue', () => {
   })
 
   it('filters funding and linked degree levels using explicit structured facts', () => {
+    const master = data.programs.find((program) => program.degreeLevel === 'master')!
+    const fullTuition: Scholarship = {
+      ...data.scholarships[0],
+      id: 'test-full-tuition-master',
+      status: 'verified',
+      verifiedAt: '2026-08-01',
+      reviewAfter: '2026-09-01',
+      deadline: null,
+      universityIds: [],
+      programIds: [master.id],
+      coverage: { tuition: 'full', accommodation: 'unknown', insurance: 'unknown', stipendCnyPerMonth: null },
+    }
+    const fixture: DataBundle = {
+      ...data,
+      scholarships: [
+        fullTuition,
+        { ...fullTuition, id: 'test-partial-tuition', coverage: { ...fullTuition.coverage, tuition: 'partial' } },
+        { ...fullTuition, id: 'test-stale-full-tuition', status: 'stale' },
+      ],
+    }
     const filters = parseScholarshipCatalogFilters({
       degree: 'master',
       funding: 'full-tuition',
     })
-    const result = queryScholarshipCatalog(data, filters, '2026-08-05', 100)
+    const result = queryScholarshipCatalog(fixture, filters, '2026-08-05', 100)
 
-    expect(result.total).toBeGreaterThan(0)
+    expect(result.items.map(({ scholarship }) => scholarship.id)).toEqual([fullTuition.id])
     expect(result.items.every(({ scholarship, programs: linkedPrograms }) => (
       scholarship.coverage.tuition === 'full'
       && linkedPrograms.some((program) => program.degreeLevel === 'master')

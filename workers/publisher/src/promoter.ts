@@ -1,3 +1,4 @@
+import { isRetryableInfrastructureError } from '../../entity-materializer/src/runtime-retry'
 import { sha256Hex, stableJson } from '../../ingestion/src/hash'
 import {
   candidateFieldEvidence,
@@ -51,6 +52,14 @@ type CandidateRow = {
   byte_length: number
   final_url: string
   fetched_at: string
+  observation_id: string | null
+  observed_at: string | null
+  observation_sha256: string | null
+  observation_bytes: number | null
+  observation_url: string | null
+  observation_status: number | null
+  observation_proof: string | null
+  current_raw_sha256: string | null
   source_document_id: string | null
   source_official: number | null
   source_active: number | null
@@ -77,6 +86,10 @@ type MappingRow = {
   max_age_days: number | null
   previous_claim_id: string | null
   previous_value_json: string | null
+  previous_field_status: string | null
+  previous_claim_status: string | null
+  previous_verified_at: string | null
+  has_conflict: number
 }
 
 type CanonicalRow = {
@@ -303,7 +316,11 @@ async function loadCandidate(database: D1Database, candidateId: string): Promise
             provenance.primary_extraction_json,
             provenance.secondary_extraction_json,
             provenance.field_evidence_json, provenance.contains_critical,
-            c.created_at, s.manifest_json,
+            c.created_at, s.manifest_json, s.raw_sha256 AS current_raw_sha256,
+            observation.observation_id, observation.observed_at,
+            observation.body_sha256 AS observation_sha256, observation.byte_length AS observation_bytes,
+            observation.final_url AS observation_url, observation.http_status AS observation_status,
+            observation.proof_kind AS observation_proof,
             snap.r2_key, snap.raw_sha256, snap.canonical_sha256,
             snap.content_type, snap.byte_length, snap.final_url, snap.fetched_at,
             binding.source_document_id,
@@ -314,6 +331,11 @@ async function loadCandidate(database: D1Database, candidateId: string): Promise
        JOIN ingestion_sources s ON s.source_id = c.source_id
        JOIN ingestion_snapshots snap
          ON snap.snapshot_id = c.snapshot_id AND snap.source_id = c.source_id
+       LEFT JOIN ingestion_candidate_observations observation_binding
+         ON observation_binding.candidate_id = c.candidate_id
+       LEFT JOIN ingestion_source_observations observation
+         ON observation.observation_id = observation_binding.observation_id
+        AND observation.source_id = c.source_id AND observation.snapshot_id = c.snapshot_id
        LEFT JOIN ingestion_candidate_provenance provenance
          ON provenance.candidate_id = c.candidate_id
        LEFT JOIN promotion_source_bindings binding
@@ -338,7 +360,16 @@ async function loadMappings(database: D1Database, sourceId: string): Promise<Map
             record.kind AS record_kind, record.workflow_status, record.row_version,
             definition.value_type, definition.risk_class, definition.max_age_days,
             current.claim_id AS previous_claim_id,
-            current.value_json AS previous_value_json
+            current.value_json AS previous_value_json,
+            current.field_status AS previous_field_status, accepted.claim_status AS previous_claim_status,
+            current.verified_at AS previous_verified_at,
+            (EXISTS (SELECT 1 FROM claim_evidence conflicting
+              WHERE conflicting.claim_id = current.claim_id AND conflicting.evidence_role = 'conflicting')
+             OR EXISTS (SELECT 1 FROM anomalies anomaly JOIN change_sets change_set
+               ON change_set.id = anomaly.change_set_id
+               WHERE change_set.subject_record_id = record.id
+                 AND anomaly.anomaly_status IN ('open', 'quarantined')
+                 AND anomaly.severity IN ('warning', 'blocker'))) AS has_conflict
        FROM promotion_field_mappings mapping
        JOIN records record ON record.id = mapping.subject_record_id
        JOIN field_definitions definition
@@ -351,6 +382,7 @@ async function loadMappings(database: D1Database, sourceId: string): Promise<Map
          ON current.subject_record_id = mapping.subject_record_id
         AND current.field_path = mapping.canonical_field_path
         AND current.locale = mapping.locale
+       LEFT JOIN claims accepted ON accepted.id = current.claim_id
       WHERE mapping.source_id = ?1 AND mapping.enabled = 1`,
   ).bind(sourceId).all<MappingRow>()
   ensureSuccess(result, 'load promotion mappings')
@@ -370,7 +402,24 @@ async function loadCanonicalSnapshot(
   return result.results ?? []
 }
 
-async function validateCandidate(row: CandidateRow): Promise<ValidCandidate> {
+function evidenceObservedAt(row: CandidateRow): string {
+  return row.observed_at ?? row.fetched_at
+}
+
+async function validateCandidate(row: CandidateRow, now: Date): Promise<ValidCandidate> {
+  if (row.candidate_id.startsWith('renewal-') && !row.observation_id) {
+    unsafe('renewal_receipt_missing', 'A renewal requires a complete-body observation receipt')
+  }
+  if (row.observation_id) {
+    const observed = Date.parse(row.observed_at ?? '')
+    if (!Number.isFinite(observed) || observed > now.getTime()
+      || observed < Date.parse(row.fetched_at)
+      || row.observation_status !== 200 || row.observation_proof !== 'complete-body-sha256'
+      || row.observation_sha256 !== row.raw_sha256 || row.current_raw_sha256 !== row.raw_sha256
+      || row.observation_bytes !== row.byte_length || row.observation_url !== row.final_url) {
+      unsafe('renewal_receipt_invalid', 'Renewal receipt does not prove the current complete official snapshot body')
+    }
+  }
   if (row.gate_status === 'quarantined' || row.candidate_status === 'quarantined') {
     unsafe('candidate_quarantined', 'A quarantined candidate can never be promoted')
   }
@@ -520,6 +569,13 @@ async function buildPlan(
       unsafe('target_record_blocked', `Target record ${mapping.subject_record_id} is ${mapping.workflow_status}`)
     }
     const canonicalValue = transformMappedValue(mapping, fact.value)
+    if (candidate.row.observation_id && (mapping.previous_field_status !== 'accepted'
+      || mapping.previous_claim_status !== 'accepted' || !mapping.previous_claim_id
+      || mapping.has_conflict !== 0 || mapping.previous_value_json === null
+      || stableJson(JSON.parse(mapping.previous_value_json)) !== stableJson(canonicalValue)
+      || Date.parse(mapping.previous_verified_at ?? '') >= Date.parse(evidenceObservedAt(candidate.row)))) {
+      unsafe('renewal_current_fact_conflict', 'Renewal must preserve an accepted, conflict-free value and advance real evidence time')
+    }
     if (!valueMatchesDefinition(mapping.value_type, canonicalValue)) {
       unsafe(
         'canonical_type_mismatch',
@@ -554,7 +610,7 @@ async function buildPlan(
       secondaryFragmentId: evidence.secondary
         ? await deterministicId('fragment-secondary', idBasis)
         : null,
-      reviewAfter: addDays(candidate.row.fetched_at, mapping.max_age_days),
+      reviewAfter: addDays(evidenceObservedAt(candidate.row), mapping.max_age_days),
     })
   }
 
@@ -627,7 +683,7 @@ async function buildPlan(
   return {
     candidate,
     token: crypto.randomUUID(),
-    fetchId: await deterministicId('source-fetch', { snapshotId: candidate.row.snapshot_id }),
+    fetchId: await deterministicId('source-fetch', { snapshotId: candidate.row.snapshot_id, ...(candidate.row.observation_id ? { observationId: candidate.row.observation_id } : {}) }),
     publicationJobId: await deterministicId('publication-job', basis),
     catalogReleaseId: await deterministicId('catalog-release', basis),
     outboxEventId: await deterministicId('outbox', basis),
@@ -724,7 +780,7 @@ async function applyPlan(database: D1Database, plan: PromotionPlan, now: Date): 
       locale: item.mapping.locale,
       claimId: item.claimId,
       valueJson: stableJson(item.canonicalValue),
-      verifiedAt: candidate.fetched_at,
+      verifiedAt: evidenceObservedAt(candidate),
       reviewAfter: item.reviewAfter,
       updatedAt: nowIso,
     })
@@ -763,6 +819,8 @@ async function applyPlan(database: D1Database, plan: PromotionPlan, now: Date): 
   }
   const provenanceMetadata = stableJson({
     candidateId: candidate.candidate_id,
+    observationId: candidate.observation_id,
+    immutableSnapshotFetchedAt: candidate.fetched_at,
     schemaVersion: candidate.schema_version,
     model: candidate.model_name,
     promptFingerprint: candidate.prompt_fingerprint,
@@ -779,7 +837,7 @@ async function applyPlan(database: D1Database, plan: PromotionPlan, now: Date): 
        ) VALUES (?1, ?2, 'succeeded', ?3, ?3, 200, ?4, ?5, ?6, ?7, ?8, ?9, ?10)`,
       plan.fetchId,
       sourceDocumentId,
-      candidate.fetched_at,
+      evidenceObservedAt(candidate),
       candidate.content_type,
       candidate.byte_length,
       candidate.raw_sha256,
@@ -1072,7 +1130,7 @@ export async function promoteCandidate(
 
   let plan: PromotionPlan
   try {
-    const candidate = await validateCandidate(row)
+    const candidate = await validateCandidate(row, now)
     plan = await buildPlan(database, candidate)
   } catch (error) {
     if (error instanceof DeferredCandidateError) {
@@ -1110,6 +1168,17 @@ export async function promoteCandidate(
         status: 'applied',
         publicationJobId: committed.publication_job_id ?? plan.publicationJobId,
       }
+    }
+    if (isRetryableInfrastructureError(error)) {
+      // Release only this executor's lease; a lost response can mean another
+      // attempt has already committed. Never turn a transient outage into a
+      // permanent evidence rejection. The next attempt revalidates all facts.
+      const released = await database.prepare(`
+        UPDATE candidate_promotions SET lease_expires_at = ?3
+        WHERE candidate_id = ?1 AND promotion_token = ?2 AND promotion_status = 'applying'
+      `).bind(candidateId, plan.token, now.toISOString()).run()
+      if (!released.success) throw new Error(released.error ?? 'Could not release promotion lease')
+      throw error
     }
     const message = error instanceof Error ? error.message : String(error)
     await isolateCandidate(

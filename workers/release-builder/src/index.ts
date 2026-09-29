@@ -1,3 +1,5 @@
+import { withAutomationHeartbeat } from '../../shared/automation-heartbeat'
+import { assertAutomatedReleaseHealth } from './health-gate'
 import { CATALOG_COLUMNS } from './catalog-schema'
 import {
   parseArtifact,
@@ -377,6 +379,7 @@ async function importArtifact(
     return 'already-published'
   }
 
+  const baselineReleaseId = await assertAutomatedReleaseHealth(environment.CATALOG_DB, artifact, now)
   await run(environment.CATALOG_DB, 'DELETE FROM search_documents WHERE release_id = ?1', releaseId)
   await run(
     environment.CATALOG_DB,
@@ -449,12 +452,14 @@ async function importArtifact(
       `INSERT INTO release_activation_requests (
          request_id, release_id, expected_content_sha256, expected_counts_json,
          actor, requested_at, previous_release_id, completed_at
-       ) VALUES (?1, ?2, ?3, ?4, 'release-builder-worker', ?5, NULL, NULL)`,
+       ) SELECT ?1, ?2, ?3, ?4, 'release-builder-worker', ?5, NULL, NULL
+         WHERE (SELECT current_release_id FROM release_pointer WHERE singleton_id = 1) IS ?6`,
       activationId,
       releaseId,
       contentSha256,
       countsJson,
       requestedAt,
+      baselineReleaseId,
     ),
   ])
   ensureBatch(finalResults, 'activate catalog release')
@@ -507,7 +512,7 @@ async function markDelivered(
   )
 }
 
-async function recordFailure(
+export async function recordFailure(
   environment: ReleaseBuilderEnv,
   job: ReleaseQueueJob,
   leaseOwner: string,
@@ -517,7 +522,7 @@ async function recordFailure(
 ): Promise<void> {
   const status = terminal ? 'dead_letter' : 'pending'
   const jobStatus = terminal ? 'failed' : 'queued'
-  const delaySeconds = boundedInteger(environment.MAX_QUEUE_ATTEMPTS, 4, 1, 10) * 30
+  const delaySeconds = boundedInteger(environment.RUNTIME_RETRY_DELAY_SECONDS, 900, 60, 21_600)
   const availableAt = terminal
     ? now.toISOString()
     : new Date(now.getTime() + delaySeconds * 1_000).toISOString()
@@ -526,10 +531,15 @@ async function recordFailure(
       prepared(
         environment.PIPELINE_DB,
         `UPDATE publication_jobs SET job_status = ?2, error_detail = ?3
-          WHERE id = ?1 AND job_status <> 'published'`,
+          WHERE id = ?1 AND job_status <> 'published'
+            AND EXISTS (SELECT 1 FROM outbox_events event
+              WHERE event.id = ?4 AND event.aggregate_id = publication_jobs.id
+                AND event.lease_owner = ?5 AND event.event_status = 'processing')`,
         job.publicationJobId,
         jobStatus,
         message.slice(0, 1_000),
+        job.outboxEventId,
+        leaseOwner,
       ),
       prepared(
         environment.PIPELINE_DB,
@@ -572,9 +582,9 @@ export async function processReleaseJob(
   environment: ReleaseBuilderEnv,
   job: ReleaseQueueJob,
   now = new Date(),
+  leaseOwner = `release-builder-${crypto.randomUUID()}`,
 ): Promise<'published' | 'already-published' | 'busy'> {
   if (await releaseAlreadyDelivered(environment, job)) return 'already-published'
-  const leaseOwner = `release-builder-${crypto.randomUUID()}`
   if (!(await claimEvent(environment, job, leaseOwner, now))) {
     if (await releaseAlreadyDelivered(environment, job)) return 'already-published'
     return 'busy'
@@ -591,7 +601,7 @@ export async function processReleaseJob(
   return status
 }
 
-export async function scheduleReleaseJobs(
+async function dispatchReleaseJobs(
   controller: ScheduledControllerLike,
   environment: ReleaseBuilderEnv,
 ): Promise<void> {
@@ -615,15 +625,22 @@ export async function scheduleReleaseJobs(
     created_at: string
   }>()
   if (!result.success) throw new Error(result.error ?? 'release scheduler query failed')
+  const failures: unknown[] = []
   for (const row of result.results ?? []) {
-    await environment.RELEASE_QUEUE.send({
-      version: 1,
-      outboxEventId: row.outbox_event_id,
-      publicationJobId: row.publication_job_id,
-      catalogReleaseId: row.catalog_release_id,
-      requestedAt: row.created_at,
-    })
+    try {
+      await environment.RELEASE_QUEUE.send({
+        version: 1, outboxEventId: row.outbox_event_id, publicationJobId: row.publication_job_id,
+        catalogReleaseId: row.catalog_release_id, requestedAt: row.created_at,
+      })
+    } catch (error) {
+      failures.push(error)
+    }
   }
+  if (failures.length) throw new AggregateError(failures, 'Some release jobs could not be dispatched')
+}
+
+export async function scheduleReleaseJobs(controller: ScheduledControllerLike, environment: ReleaseBuilderEnv): Promise<void> {
+  await withAutomationHeartbeat(environment.PIPELINE_DB, 'release-builder', () => dispatchReleaseJobs(controller, environment))
 }
 
 export async function handleQueue(
@@ -651,23 +668,20 @@ export async function handleQueue(
       continue
     }
     const job = message.body
+    const leaseOwner = `release-builder-${crypto.randomUUID()}`
     try {
-      const result = await processReleaseJob(environment, job)
+      const result = await processReleaseJob(environment, job, new Date(), leaseOwner)
       if (result === 'busy') message.retry({ delaySeconds: 60 })
       else message.ack()
     } catch (error) {
       const text = error instanceof Error ? error.message : String(error)
       const code = error instanceof ReleaseValidationError ? error.code : 'release_builder_runtime_failure'
-      const terminal = message.attempts >= maximumAttempts
-      const leaseOwnerRow = await first<{ lease_owner: string | null }>(
-        environment.PIPELINE_DB,
-        'SELECT lease_owner FROM outbox_events WHERE id = ?1',
-        job.outboxEventId,
-      )
-      if (leaseOwnerRow?.lease_owner) {
-        await recordFailure(environment, job, leaseOwnerRow.lease_owner, text, terminal, new Date())
-      }
-      if (terminal) {
+      const terminal = error instanceof ReleaseValidationError
+      const exhausted = message.attempts >= maximumAttempts
+      // Only this attempt may release its own lease. Runtime failures remain in
+      // the durable outbox after queue exhaustion and are retried by the cron.
+      await recordFailure(environment, job, leaseOwner, text, terminal, new Date())
+      if (terminal || exhausted) {
         const failure: ReleaseFailure = {
           version: 1,
           job,
@@ -679,7 +693,7 @@ export async function handleQueue(
         await environment.RELEASE_BUILDER_DLQ.send(failure)
         message.ack()
       } else {
-        message.retry({ delaySeconds: Math.min(3_600, 60 * 2 ** (message.attempts - 1)) })
+        message.retry({ delaySeconds: boundedInteger(environment.RUNTIME_RETRY_DELAY_SECONDS, 900, 60, 21_600) })
       }
     }
   }

@@ -3,6 +3,7 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
+import { pathToFileURL } from 'node:url'
 
 const DEFAULT_TIMEOUT_MS = 10_000
 const DEFAULT_RETRIES = 2
@@ -200,7 +201,7 @@ function shouldRetry(result) {
   )
 }
 
-async function requestOnce(url, method, timeoutMs) {
+export async function requestOnce(url, method, timeoutMs) {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), timeoutMs)
   const startedAt = Date.now()
@@ -222,9 +223,9 @@ async function requestOnce(url, method, timeoutMs) {
     })
 
     if (method === 'GET' && response.body) {
-      const reader = response.body.getReader()
-      await reader.read()
-      await reader.cancel()
+      // Preserve the confirmed HTTP status even when the response body stalls.
+      // Cancelling an unused body is cleanup, not another availability check.
+      void response.body.cancel().catch(() => undefined)
     }
 
     return {
@@ -343,23 +344,32 @@ async function checkUrl(target, options) {
   }
 }
 
-async function mapWithConcurrency(items, concurrency, mapper) {
+// One URL per host at a time: a large catalogue must not occupy every slot.
+export async function mapWithConcurrency(items, concurrency, mapper) {
+  if (!Number.isInteger(concurrency) || concurrency < 1) throw new Error('concurrency must be positive')
   const results = new Array(items.length)
-  let nextIndex = 0
-
-  async function worker() {
-    while (nextIndex < items.length) {
-      const index = nextIndex
-      nextIndex += 1
-      results[index] = await mapper(items[index], index)
+  const groups = new Map()
+  items.forEach((item, index) => {
+    const host = new URL(item.url).hostname
+    const queue = groups.get(host) ?? []
+    queue.push(index)
+    groups.set(host, queue)
+  })
+  const ready = [...groups.values()]
+  const running = new Map()
+  while (ready.length || running.size) {
+    while (ready.length && running.size < concurrency) {
+      const queue = ready.shift()
+      const index = queue.shift()
+      const task = Promise.resolve().then(() => mapper(items[index], index))
+        .then((result) => ({ queue, index, result }))
+      running.set(queue, task)
     }
+    const { queue, index, result } = await Promise.race(running.values())
+    results[index] = result
+    running.delete(queue)
+    if (queue.length) ready.push(queue)
   }
-
-  const workers = Array.from(
-    { length: Math.min(concurrency, Math.max(items.length, 1)) },
-    () => worker(),
-  )
-  await Promise.all(workers)
   return results
 }
 
@@ -435,9 +445,16 @@ async function main() {
   const dataDirectory = path.resolve(options.dataDir)
   const documents = await loadJsonFiles(dataDirectory)
   const targets = groupUrlReferences(documents)
-  const results = await mapWithConcurrency(targets, options.concurrency, (target) =>
-    checkUrl(target, options),
-  )
+  let completed = 0
+  process.stderr.write(`Checking ${targets.length} URLs across ${new Set(targets.map((target) => new URL(target.url).hostname)).size} hosts (one URL per host at a time).\n`)
+  const results = await mapWithConcurrency(targets, options.concurrency, async (target) => {
+    const result = await checkUrl(target, options)
+    completed += 1
+    if (completed % 50 === 0 || completed === targets.length) {
+      process.stderr.write(`Checked ${completed}/${targets.length} URLs.\n`)
+    }
+    return result
+  })
 
   const report = {
     generatedAt: new Date().toISOString(),
@@ -446,6 +463,7 @@ async function main() {
       timeoutMs: options.timeoutMs,
       retries: options.retries,
       concurrency: options.concurrency,
+      perHostConcurrency: 1,
     },
     summary: {
       checked: results.length,
@@ -471,7 +489,9 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  process.stderr.write(`Link check failed: ${error.stack ?? error.message}\n`)
-  process.exitCode = 2
-})
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  main().catch((error) => {
+    process.stderr.write(`Link check failed: ${error.stack ?? error.message}\n`)
+    process.exitCode = 2
+  })
+}

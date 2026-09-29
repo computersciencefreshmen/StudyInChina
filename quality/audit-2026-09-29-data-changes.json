@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "evaluatedForDate": "2026-09-29",
+  "generatedAt": "2026-09-29T06:17:49.273Z",
+  "officialReviews": [
+    {
+      "url": "https://sie.tju.edu.cn/en/xwxm/FOUNDATIONPROGRAM/202609/t20260920_324704.html",
+      "receivedAt": "2026-09-29T06:14:52.556Z",
+      "sha256": "1126b57e57cca4b3aa831ffe18a4f50799a5f3cb2efa0f663553b5fa551bce0d",
+      "locator": "III–VI and VIII; Program 2 in duration and fee tables",
+      "conclusion": "The exact one-year foundation route has a 15 March–15 July 2027 application window and September 2027 entry; 28900 tuition for the one-year programme, 500 application fee, HSK3 or at least one year of Chinese study. The separate spring one-semester route is not merged into this identity."
+    },
+    {
+      "url": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+      "receivedAt": "2026-09-29T06:14:54.659Z",
+      "sha256": "81d4cdb47283cf31f3065cb332ce2da4d1d8abf0b73ac95f6206293a5d82d800",
+      "locator": "I Clinical Medicine; II application method; VI scholarship application",
+      "conclusion": "Current official 2026 page names Chinese-taught five-year Clinical Medicine and the ASEAN/Hainan scholarships, and supplies application instructions. Only dead discovery/instruction links are replaced; fees, dates and requirements are not renewed."
+    },
+    {
+      "url": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+      "receivedAt": "2026-09-29T06:14:56.508Z",
+      "sha256": "2f6c66a275e120b01ac26964b00c00ef49f6462359b2ce68e08359bac4b65010",
+      "locator": "IV forms and contact; online-application navigation",
+      "conclusion": "Current 2026 guide supplies forms and admissions contact but does not establish a working replacement for the stored 404 online-application page. Clear three dead application URLs; keep stale records and original provenance."
+    },
+    {
+      "url": "https://lxs.sicnu.edu.cn/p/30/?StId=st_app_news_i_x639081519364042574",
+      "receivedAt": "2026-09-29T06:14:57.147Z",
+      "sha256": "dbf76aeda36125706d7cf7a1be2ff91577d8f522e1588475d76770b154c2ac6e",
+      "locator": "IV Application Procedures",
+      "conclusion": "The current 2026 SICNU guide still directs to cis.chinese.cn, whose root returned confirmed HTTP404 in the full audit. Clear two dead application URLs; do not guess a replacement login path or renew old facts."
+    }
+  ],
+  "changes": [
+    {
+      "collection": "programs",
+      "id": "prog-gap-breadth-tju-foundation-one-year",
+      "before": {
+        "programUrl": "https://sie.tju.edu.cn/en/xwxm/FOUNDATIONPROGRAM/202510/t20251013_324451.html",
+        "languageRequirements": [],
+        "sourceIds": [
+          "src-gap-program-breadth-tju-foundation-one-year",
+          "src-gap-program-breadth-tju-foundation-one-year-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale"
+      },
+      "after": {
+        "programUrl": "https://sie.tju.edu.cn/en/xwxm/FOUNDATIONPROGRAM/202609/t20260920_324704.html",
+        "languageRequirements": [
+          {
+            "test": "other",
+            "minimum": "HSK Level 3 or above, or a certificate of at least one year of Chinese learning, for the one-year foundation route."
+          }
+        ],
+        "sourceIds": [
+          "src-gap-program-breadth-tju-foundation-one-year",
+          "src-gap-program-breadth-tju-foundation-one-year-support-1",
+          "src-tju-foundation-2027-review"
+        ],
+        "verifiedAt": "2026-09-29",
+        "reviewAfter": "2026-10-06",
+        "status": "verified"
+      },
+      "reason": "Official 2027 one-year route reconciled; exact language threshold and current program link reviewed."
+    },
+    {
+      "collection": "programs",
+      "id": "prog-gap-local-strong-muhn-b-clinical-medicine-cn",
+      "before": {
+        "programUrl": "https://www.muhn.edu.cn/gjxy/info/1432/19674.htm",
+        "sourceIds": [
+          "src-gap-program-local-strong-muhn-b-clinical-medicine-cn"
+        ]
+      },
+      "after": {
+        "programUrl": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+        "sourceIds": [
+          "src-gap-program-local-strong-muhn-b-clinical-medicine-cn",
+          "src-hainan-degree-2026-review"
+        ]
+      },
+      "reason": "Official current Clinical Medicine discovery link replaces missing page; record remains stale."
+    },
+    {
+      "collection": "programs",
+      "id": "prog-gap-wave8-sicnu-international-chinese-education-master",
+      "before": {
+        "applyUrl": "https://cis.chinese.cn/"
+      },
+      "after": {
+        "applyUrl": null
+      },
+      "reason": "Confirmed HTTP404 application entry removed; no replacement guessed; record remains stale."
+    },
+    {
+      "collection": "programs",
+      "id": "prog-gap-wave8-sicnu-international-chinese-education-doctorate",
+      "before": {
+        "applyUrl": "https://cis.chinese.cn/"
+      },
+      "after": {
+        "applyUrl": null
+      },
+      "reason": "Confirmed HTTP404 application entry removed; no replacement guessed; record remains stale."
+    },
+    {
+      "collection": "programs",
+      "id": "prog-gap-wave7-bipt-robotics-engineering-bachelor",
+      "before": {
+        "applyUrl": "https://www.bipt.edu.cn/pub/gjjl/lxs/ws/index.htm"
+      },
+      "after": {
+        "applyUrl": null
+      },
+      "reason": "Confirmed HTTP404 application entry removed; no replacement guessed; record remains stale."
+    },
+    {
+      "collection": "programs",
+      "id": "prog-gap-wave7-bipt-chinese-language-program",
+      "before": {
+        "applyUrl": "https://www.bipt.edu.cn/pub/gjjl/lxs/ws/index.htm"
+      },
+      "after": {
+        "applyUrl": null
+      },
+      "reason": "Confirmed HTTP404 application entry removed; no replacement guessed; record remains stale."
+    },
+    {
+      "collection": "programs",
+      "id": "prog-gap-wave7-bipt-biological-pharmacy-bachelor",
+      "before": {
+        "applyUrl": "https://www.bipt.edu.cn/pub/gjjl/lxs/ws/index.htm"
+      },
+      "after": {
+        "applyUrl": null
+      },
+      "reason": "Confirmed HTTP404 application entry removed; no replacement guessed; record remains stale."
+    },
+    {
+      "collection": "sources",
+      "id": "src-tju-foundation-2027-review",
+      "before": null,
+      "after": {
+        "id": "src-tju-foundation-2027-review",
+        "url": "https://sie.tju.edu.cn/en/xwxm/FOUNDATIONPROGRAM/202609/t20260920_324704.html",
+        "title": "Admission to Foundation Program of Tianjin University 2027",
+        "publisher": "Tianjin University School of International Education",
+        "language": "en",
+        "kind": "program",
+        "official": true,
+        "accessedAt": "2026-09-29"
+      },
+      "reason": "New official source ID; historical source and URL preserved."
+    },
+    {
+      "collection": "sources",
+      "id": "src-hainan-degree-2026-review",
+      "before": null,
+      "after": {
+        "id": "src-hainan-degree-2026-review",
+        "url": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+        "title": "Hainan Medical University International Student Degree Program Admission Brochure 2026",
+        "publisher": "Hainan Medical University",
+        "language": "zh",
+        "kind": "program",
+        "official": true,
+        "accessedAt": "2026-09-29"
+      },
+      "reason": "New official source ID; historical source and URL preserved."
+    },
+    {
+      "collection": "scholarships",
+      "id": "sch-gap-local-strong-muhn-asean-scholarship",
+      "before": {
+        "applicationUrl": "https://www.muhn.edu.cn/gjxy/info/1432/19674.htm",
+        "sourceIds": [
+          "src-gap-scholarship-local-strong-muhn-asean-scholarship"
+        ]
+      },
+      "after": {
+        "applicationUrl": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+        "sourceIds": [
+          "src-gap-scholarship-local-strong-muhn-asean-scholarship",
+          "src-hainan-degree-2026-review"
+        ]
+      },
+      "reason": "Replace dead instructions with the official guide section VI; scholarship facts remain stale."
+    },
+    {
+      "collection": "scholarships",
+      "id": "sch-gap-local-strong-muhn-hainan-government-scholarship",
+      "before": {
+        "applicationUrl": "https://www.muhn.edu.cn/gjxy/info/1432/19674.htm",
+        "sourceIds": [
+          "src-gap-scholarship-local-strong-muhn-hainan-government-scholarship"
+        ]
+      },
+      "after": {
+        "applicationUrl": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+        "sourceIds": [
+          "src-gap-scholarship-local-strong-muhn-hainan-government-scholarship",
+          "src-hainan-degree-2026-review"
+        ]
+      },
+      "reason": "Replace dead instructions with the official guide section VI; scholarship facts remain stale."
+    },
+    {
+      "collection": "admissionCycles",
+      "id": "cycle-tju-foundation-one-year-autumn-2027",
+      "before": null,
+      "after": {
+        "id": "cycle-tju-foundation-one-year-autumn-2027",
+        "programId": "prog-gap-breadth-tju-foundation-one-year",
+        "academicYear": "2027-2028",
+        "intake": "autumn",
+        "opensOn": "2027-03-15",
+        "closesOn": "2027-07-15",
+        "dateStatus": "published",
+        "tuitionCny": 28900,
+        "tuitionPeriod": "program",
+        "tuitionStatus": "confirmed",
+        "applicationFeeCny": 500,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "complete",
+        "sourceIds": [
+          "src-tju-foundation-2027-review"
+        ],
+        "status": "verified",
+        "verifiedAt": "2026-09-29",
+        "reviewAfter": "2026-10-06",
+        "notes": {
+          "en": "One-year foundation route (Program 2), entering September 2027. Application and tuition fees are paid after admission. Medical insurance is CNY 400 per semester; accommodation is CNY 15–60 per bed per day. The separate spring one-semester route has different dates, tuition and language requirements.",
+          "zh": "一学年预科路线（项目2），2027年9月入学。申请费与学费在录取后缴纳。医疗保险每学期400元，住宿每床每天15—60元。春季一学期路线的日期、学费和语言要求不同。"
+        }
+      },
+      "reason": "Publish a new exact 2027 autumn cycle from the official Program 2 table; never roll a historical cycle forward."
+    }
+  ],
+  "writeRecovery": "A Windows transient write failure occurred after the programs file; idempotent rerun completed remaining collections, and exact before/after program changes were reconstructed from the unchanged baseline for those seven records."
+}

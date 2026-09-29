@@ -1,0 +1,1216 @@
+{
+  "evaluatedForDate": "2026-09-29",
+  "scope": "Read-only coordinate provenance inventory, not geographic verification.",
+  "summary": {
+    "cities": 62,
+    "withCoordinates": 27,
+    "withoutCoordinates": 35,
+    "coordinateSpecificEvidenceFields": false
+  },
+  "findings": [
+    "City source IDs describe record-level provenance; no coordinate-specific source, coordinate system or precision is stored.",
+    "Most missing-coordinate cities cite university admissions pages; a healthy admissions URL does not substantiate a city centroid.",
+    "A city centroid is not a university campus location. Do not position multiple university campuses at a city centroid and label them exact.",
+    "Existing 27 pairs pass schema bounds but were not independently re-geocoded in this audit.",
+    "For Google Maps links, a place query can be generated from reviewed city name without fabricating coordinates. For plotted pins, acquire explicit licensed geocoding provenance and preserve coordinate system, precision and check date."
+  ],
+  "cities": [
+    {
+      "id": "city-beijing",
+      "name": "Beijing",
+      "coordinates": {
+        "lat": 39.9042,
+        "lng": 116.4074
+      },
+      "sources": [
+        {
+          "id": "src-city-beijing",
+          "url": "https://english.beijing.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-16",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-shanghai",
+      "name": "Shanghai",
+      "coordinates": {
+        "lat": 31.2304,
+        "lng": 121.4737
+      },
+      "sources": [
+        {
+          "id": "src-city-shanghai",
+          "url": "https://english.shanghai.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-16",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-guangzhou",
+      "name": "Guangzhou",
+      "coordinates": {
+        "lat": 23.1291,
+        "lng": 113.2644
+      },
+      "sources": [
+        {
+          "id": "src-city-guangzhou",
+          "url": "https://www.gz.gov.cn/guangzhouinternational/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-16",
+          "health": {
+            "severity": "warning",
+            "status": null,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-shenzhen",
+      "name": "Shenzhen",
+      "coordinates": {
+        "lat": 22.5431,
+        "lng": 114.0579
+      },
+      "sources": [
+        {
+          "id": "src-city-shenzhen",
+          "url": "https://www.sz.gov.cn/en_szgov/aboutsz/profile/content/post_12542766.html",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-19",
+          "health": {
+            "severity": "warning",
+            "status": null,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-hangzhou",
+      "name": "Hangzhou",
+      "coordinates": {
+        "lat": 30.2741,
+        "lng": 120.1551
+      },
+      "sources": [
+        {
+          "id": "src-city-hangzhou",
+          "url": "https://www.ehangzhou.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-16",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-nanjing",
+      "name": "Nanjing",
+      "coordinates": {
+        "lat": 32.0603,
+        "lng": 118.7969
+      },
+      "sources": [
+        {
+          "id": "src-city-nanjing",
+          "url": "https://english.nanjing.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-16",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-wuhan",
+      "name": "Wuhan",
+      "coordinates": {
+        "lat": 30.5928,
+        "lng": 114.3055
+      },
+      "sources": [
+        {
+          "id": "src-city-wuhan",
+          "url": "https://english.wuhan.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-16",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-xian",
+      "name": "Xi'an",
+      "coordinates": {
+        "lat": 34.3416,
+        "lng": 108.9398
+      },
+      "sources": [
+        {
+          "id": "src-city-xian",
+          "url": "https://en.xa.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-16",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-chengdu",
+      "name": "Chengdu",
+      "coordinates": {
+        "lat": 30.5728,
+        "lng": 104.0668
+      },
+      "sources": [
+        {
+          "id": "src-city-chengdu",
+          "url": "https://www.chengdu.gov.cn/chengdu/c131071/english.shtml",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-16",
+          "health": {
+            "severity": "warning",
+            "status": 412,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-chongqing",
+      "name": "Chongqing",
+      "coordinates": {
+        "lat": 29.563,
+        "lng": 106.5516
+      },
+      "sources": [
+        {
+          "id": "src-city-chongqing",
+          "url": "https://english.cq.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-16",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-tianjin",
+      "name": "Tianjin",
+      "coordinates": {
+        "lat": 39.0842,
+        "lng": 117.2009
+      },
+      "sources": [
+        {
+          "id": "src-city-tianjin",
+          "url": "https://en.tj.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-16",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-harbin",
+      "name": "Harbin",
+      "coordinates": {
+        "lat": 45.8038,
+        "lng": 126.5349
+      },
+      "sources": [
+        {
+          "id": "src-city-harbin",
+          "url": "https://www.harbin.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-16",
+          "health": {
+            "severity": "warning",
+            "status": 403,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-taiyuan",
+      "name": "Taiyuan",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-shanxi-university",
+          "url": "https://siee.sxu.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-hohhot",
+      "name": "Hohhot",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-inner-mongolia-university",
+          "url": "https://iec.imu.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-shenyang",
+      "name": "Shenyang",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-liaoning-university",
+          "url": "https://ie.lnu.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-dalian",
+      "name": "Dalian",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-dalian-university-of-technology",
+          "url": "https://sie.dlut.edu.cn/English.htm",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-26",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-changchun",
+      "name": "Changchun",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-jilin-university",
+          "url": "https://cie.jlu.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-yanji",
+      "name": "Yanji",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-yanbian-university",
+          "url": "https://liuxue.ybu.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-suzhou",
+      "name": "Suzhou",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-soochow-university",
+          "url": "https://oversea.suda.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-26",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-xuzhou",
+      "name": "Xuzhou",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-china-university-of-mining-and-technology",
+          "url": "https://sac.cumt.edu.cn/index.htm",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-wuxi",
+      "name": "Wuxi",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-jiangnan-university",
+          "url": "https://studyabroad.jiangnan.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-hefei",
+      "name": "Hefei",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-anhui-university",
+          "url": "https://sie.ahu.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "warning",
+            "status": 412,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-xiamen",
+      "name": "Xiamen",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-xiamen-university",
+          "url": "https://admissions.xmu.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-26",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-fuzhou",
+      "name": "Fuzhou",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-fuzhou-university",
+          "url": "https://oce.fzu.edu.cn/lxfd/zsxx.htm",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-nanchang",
+      "name": "Nanchang",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-nanchang-university",
+          "url": "https://iec.ncu.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-jinan",
+      "name": "Jinan",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-shandong-university",
+          "url": "https://www.istudy.sdu.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-qingdao",
+      "name": "Qingdao",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-ocean-university-of-china",
+          "url": "https://sie.ouc.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-zhengzhou",
+      "name": "Zhengzhou",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-zhengzhou-university",
+          "url": "https://international.zzu.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "warning",
+            "status": null,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-kaifeng",
+      "name": "Kaifeng",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-henan-university",
+          "url": "https://dwhy.henu.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-xiangtan",
+      "name": "Xiangtan",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-xiangtan-university",
+          "url": "https://gjjlc.xtu.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 206,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-changsha",
+      "name": "Changsha",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-hunan-university",
+          "url": "https://www-en.hnu.edu.cn/Admission/Why_HNU.htm",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-haikou",
+      "name": "Haikou",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-hainan-university",
+          "url": "https://sie.hainanu.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-nanning",
+      "name": "Nanning",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-guangxi-university",
+          "url": "https://gjxy.gxu.edu.cn/gjxy_en/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-27",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-yangling",
+      "name": "Yangling",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-northwest-a-and-f-university",
+          "url": "https://gjs.nwafu.edu.cn/",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-26",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-lanzhou",
+      "name": "Lanzhou",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-uni-lanzhou-university",
+          "url": "https://apply.lzu.edu.cn/en/site/login",
+          "kind": "admissions",
+          "sourceAccessedAt": "2026-07-26",
+          "health": {
+            "severity": "warning",
+            "status": 503,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-wenzhou",
+      "name": "Wenzhou",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-city-wenzhou-official",
+          "url": "https://www.wenzhou.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-28",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-urumqi",
+      "name": "Urumqi",
+      "coordinates": {
+        "lat": 43.8256,
+        "lng": 87.6168
+      },
+      "sources": [
+        {
+          "id": "src-urumqi-government",
+          "url": "https://www.urumqi.gov.cn/wlmqs/c119048/sq.shtml",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-28",
+          "health": {
+            "severity": "warning",
+            "status": null,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-guiyang",
+      "name": "Guiyang",
+      "coordinates": {
+        "lat": 26.647,
+        "lng": 106.6302
+      },
+      "sources": [
+        {
+          "id": "src-city-guiyang",
+          "url": "https://english.guiyang.gov.cn/profile.html",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-28",
+          "health": {
+            "severity": "warning",
+            "status": null,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-kunming",
+      "name": "Kunming",
+      "coordinates": {
+        "lat": 25.0389,
+        "lng": 102.7183
+      },
+      "sources": [
+        {
+          "id": "src-city-kunming",
+          "url": "https://en.www.km.gov.cn/index.html",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-28",
+          "health": {
+            "severity": "warning",
+            "status": null,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-quanzhou",
+      "name": "Quanzhou",
+      "coordinates": {
+        "lat": 24.8741,
+        "lng": 118.6757
+      },
+      "sources": [
+        {
+          "id": "src-city-profile-20260729-quanzhou",
+          "url": "https://www.quanzhou.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-29",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-zhenjiang",
+      "name": "Zhenjiang",
+      "coordinates": {
+        "lat": 32.188,
+        "lng": 119.425
+      },
+      "sources": [
+        {
+          "id": "src-city-profile-20260729-zhenjiang",
+          "url": "https://www.zhenjiang.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-29",
+          "health": {
+            "severity": "warning",
+            "status": null,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-ningbo",
+      "name": "Ningbo",
+      "coordinates": {
+        "lat": 29.8683,
+        "lng": 121.544
+      },
+      "sources": [
+        {
+          "id": "src-city-profile-20260729-ningbo",
+          "url": "https://www.ningbo.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-29",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-yinchuan",
+      "name": "Yinchuan",
+      "coordinates": {
+        "lat": 38.4872,
+        "lng": 106.2309
+      },
+      "sources": [
+        {
+          "id": "src-city-profile-20260729-yinchuan",
+          "url": "https://www.yinchuan.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-29",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-xining",
+      "name": "Xining",
+      "coordinates": {
+        "lat": 36.6171,
+        "lng": 101.7782
+      },
+      "sources": [
+        {
+          "id": "src-city-profile-20260729-xining",
+          "url": "https://www.xining.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-29",
+          "health": {
+            "severity": "warning",
+            "status": 403,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-shantou",
+      "name": "Shantou",
+      "coordinates": {
+        "lat": 23.3541,
+        "lng": 116.682
+      },
+      "sources": [
+        {
+          "id": "src-city-profile-20260729-shantou",
+          "url": "https://www.shantou.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-29",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-shihezi",
+      "name": "Shihezi",
+      "coordinates": {
+        "lat": 44.3059,
+        "lng": 86.0805
+      },
+      "sources": [
+        {
+          "id": "src-city-profile-20260729-shihezi",
+          "url": "https://www.shz.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-29",
+          "health": {
+            "severity": "warning",
+            "status": null,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-lhasa",
+      "name": "Lhasa",
+      "coordinates": {
+        "lat": 29.652,
+        "lng": 91.1721
+      },
+      "sources": [
+        {
+          "id": "src-city-profile-20260729-lhasa",
+          "url": "https://www.lasa.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-29",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-jinhua",
+      "name": "Jinhua",
+      "coordinates": {
+        "lat": 29.0787,
+        "lng": 119.6474
+      },
+      "sources": [
+        {
+          "id": "src-city-profile-20260729-jinhua",
+          "url": "https://www.jinhua.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-29",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-zhangzhou",
+      "name": "Zhangzhou",
+      "coordinates": {
+        "lat": 24.513,
+        "lng": 117.6471
+      },
+      "sources": [
+        {
+          "id": "src-city-profile-20260729-zhangzhou",
+          "url": "https://www.zhangzhou.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-29",
+          "health": {
+            "severity": "warning",
+            "status": null,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-yantai",
+      "name": "Yantai",
+      "coordinates": {
+        "lat": 37.4638,
+        "lng": 121.4479
+      },
+      "sources": [
+        {
+          "id": "src-city-profile-20260729-yantai",
+          "url": "https://www.yantai.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-29",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-baoding",
+      "name": "Baoding",
+      "coordinates": {
+        "lat": 38.874,
+        "lng": 115.4646
+      },
+      "sources": [
+        {
+          "id": "src-city-profile-20260729-baoding",
+          "url": "https://www.baoding.gov.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-29",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-guilin",
+      "name": "Guilin",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-gap-city-guilin",
+          "url": "https://english.gxnu.edu.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-30",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-jingzhou",
+      "name": "Jingzhou",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-gap-city-jingzhou",
+          "url": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-30",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-jining",
+      "name": "Jining",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-gap-city-jining",
+          "url": "https://gjjyxy.jnmc.edu.cn/2026/0415/c4397a180451/page.htm",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-30",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-jinzhong",
+      "name": "Jinzhong",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-gap-city-jinzhong",
+          "url": "https://gjzx.sxtcm.edu.cn/info/1079/1997.htm",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-30",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-nantong",
+      "name": "Nantong",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-gap-city-nantong",
+          "url": "https://sie.ntu.edu.cn/ntu_web/html/enrollment-information/enrollment-information.html?Hid=information&lang=zh-cn&timid=17",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-30",
+          "health": {
+            "severity": "warning",
+            "status": null,
+            "checkedAt": "2026-09-28T11:06:34.616Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-yangzhou",
+      "name": "Yangzhou",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-gap-city-yangzhou",
+          "url": "https://coe.yzu.edu.cn/__local/2/A3/99/1297746533A22EBC4C5B3B81852_832931CD_35475.pdf",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-30",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-dongguan",
+      "name": "Dongguan",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-wave3-east-south-city-dongguan",
+          "url": "https://www.dgut.edu.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-30",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-shijiazhuang",
+      "name": "Shijiazhuang",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-wave3-city-shijiazhuang",
+          "url": "https://www.hebmu.edu.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-07-30",
+          "health": {
+            "severity": "ok",
+            "status": 206,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-xinxiang",
+      "name": "Xinxiang",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-mew-scws-city-xinxiang",
+          "url": "https://www.htu.edu.cn/english/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-08-04",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-jilin",
+      "name": "Jilin",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-mew-nnw-city-jilin",
+          "url": "https://www.neepu.edu.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-08-05",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    },
+    {
+      "id": "city-zhanjiang",
+      "name": "Zhanjiang",
+      "coordinates": null,
+      "sources": [
+        {
+          "id": "src-mew-0805-scw-city-zhanjiang",
+          "url": "https://www.gdou.edu.cn/",
+          "kind": "city",
+          "sourceAccessedAt": "2026-08-05",
+          "health": {
+            "severity": "ok",
+            "status": 200,
+            "checkedAt": "2026-09-28T10:57:11.315Z"
+          }
+        }
+      ]
+    }
+  ]
+}

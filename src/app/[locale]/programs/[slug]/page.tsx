@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation'
+import { connection } from 'next/server'
 import { ApplicationSummaryCard } from '@/components/features/ApplicationSummaryCard'
+import { DataFreshnessPanel } from '@/components/features/DataFreshnessPanel'
 import { FavoriteButton } from '@/components/features/FavoriteButton'
 import { ProgramCard } from '@/components/features/RecordCards'
 import { ScholarshipCard } from '@/components/features/ScholarshipCard'
@@ -11,11 +13,12 @@ import { getMessages } from '@/i18n/messages'
 import { getApplicationState, selectAdmissionCycle } from '@/lib/data/admission'
 import { selectProgramPrebuildSlugs } from '@/lib/data/detail-prebuild'
 import { formatCny, formatDate, localize } from '@/lib/data/format'
-import { getTodayDate } from '@/lib/data/freshness'
+import { getTodayDate, isCurrentVerifiedRecord } from '@/lib/data/freshness'
 import { degreeLabels, disciplineLabels, languageLabel } from '@/lib/data/labels'
 import { getCatalogData, getData } from '@/lib/data/load'
 import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
 import { isIndexableProgram } from '@/lib/seo/indexability'
+import { serializeJsonLd } from '@/lib/seo/json-ld'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
 export const dynamicParams = true
@@ -27,6 +30,8 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  // Evaluate publication and admission dates for this request, not a cached build day.
+  await connection()
   const { locale: raw, slug } = await params
   const locale = requireLocale(raw) || 'en'
   const data = await getCatalogData()
@@ -47,6 +52,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function ProgramDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  // Evaluate publication and admission dates for this request, not a cached build day.
+  await connection()
   const { locale: raw, slug } = await params
   const locale = requireLocale(raw)
   if (!locale) notFound()
@@ -65,7 +72,8 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   const today = getTodayDate()
   const cycle = selectAdmissionCycle(data.admissionCycles, program.id, today)
   if (!details || program.durationMonths === null || !cycle) {
-    const sources = data.sources.filter((source) => program.sourceIds.includes(source.id))
+    const partialSourceIds = new Set([...program.sourceIds, ...(cycle?.sourceIds ?? [])])
+    const sources = data.sources.filter((source) => partialSourceIds.has(source.id))
     const lastSourceCheckedAt = sources.map((source) => source.accessedAt).sort().at(-1)
       ?? program.verifiedAt
     const partialApplicationState = cycle
@@ -105,13 +113,13 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
       : program.durationMonthsMax && program.durationMonthsMax !== program.durationMonths
         ? `${program.durationMonths}–${program.durationMonthsMax} ${messages.common.months}`
         : `${program.durationMonths} ${messages.common.months}`
-    const partialTuition = cycle?.tuitionCny == null
+    const partialTuition = cycle?.tuitionCny == null || cycle.tuitionStatus === 'reference'
       ? messages.common.unknown
       : `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${partialTuitionPeriodLabels[cycle.tuitionPeriod || 'other']}`
     const partialApplicationFee = cycle?.applicationFeeCny == null
       ? messages.common.unknown
       : formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)
-    const partialCanApply = program.status === 'verified' && (partialApplicationState === 'open' || partialApplicationState === 'rolling')
+    const partialCanApply = isCurrentVerifiedRecord(program, today) && Boolean(cycle && isCurrentVerifiedRecord(cycle, today)) && (partialApplicationState === 'open' || partialApplicationState === 'rolling')
       && Boolean(program.applyUrl)
     return <>
       <PageHero
@@ -140,6 +148,9 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
           }}
         />}
       />
+      <div className="atlas-container">
+        <DataFreshnessPanel record={program} cycle={cycle} locale={locale} today={today} />
+      </div>
       <section className="atlas-container atlas-section detail-layout">
         <div className="detail-main">
           <article className="prose-panel">
@@ -172,14 +183,14 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
                 : messages.common.unknown },
               { label: messages.common.tuition, value: partialTuition },
               { label: decisionCopy.applicationFee, value: partialApplicationFee },
-              { label: messages.common.lastVerified, value: formatDate(lastSourceCheckedAt, locale, '—') },
+              { label: messages.common.lastVerified, value: formatDate(program.verifiedAt, locale, '—') },
             ]}
             notice={decisionCopy.verifiedFactsOnly}
             actions={partialCanApply && program.applyUrl
               ? <a className="atlas-button atlas-button--primary atlas-button--small" href={program.applyUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
               : <a className="atlas-button atlas-button--secondary atlas-button--small" href={program.programUrl} target="_blank" rel="noreferrer">{messages.common.officialSource} ↗</a>}
           />
-          <Card accent="jade">
+          <Card accent="jade" id="official-evidence">
             <h2 className="atlas-card__title">{messages.programs.sources}</h2>
             <ul className="source-list">
               {sources.map((source) => <li key={source.id}>
@@ -221,7 +232,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
     'previous-cycle': 'neutral',
   } as const
   const applicationStateLabel = applicationStateLabels[applicationState]
-  const isAcceptingApplications = program.status === 'verified' && (applicationState === 'open' || applicationState === 'rolling')
+  const isAcceptingApplications = isCurrentVerifiedRecord(program, today) && isCurrentVerifiedRecord(cycle, today) && (applicationState === 'open' || applicationState === 'rolling')
 
   const intakeLabels = {
     spring: messages.programs.springIntake,
@@ -240,7 +251,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
     month: messages.programs.tuitionMonth,
     other: messages.programs.tuitionOther,
   }
-  const tuition = cycle.tuitionCny === null
+  const tuition = cycle.tuitionCny === null || cycle.tuitionStatus === 'reference'
     ? messages.common.unknown
     : `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${tuitionPeriodLabels[cycle.tuitionPeriod || 'other']}`
   const duration = program.durationMonthsMax && program.durationMonthsMax !== program.durationMonths
@@ -283,7 +294,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   }
 
   return <>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }} />
     <PageHero
       variant="compact"
       eyebrow={`${degreeLabels(locale)[program.degreeLevel]} · ${disciplineLabels(locale)[program.discipline]}`}
@@ -314,6 +325,9 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
       />}
     />
 
+    <div className="atlas-container">
+      <DataFreshnessPanel record={program} cycle={cycle} locale={locale} today={today} />
+    </div>
     <section className="atlas-container atlas-section detail-layout">
       <div className="detail-main">
         <article className="prose-panel">
@@ -413,18 +427,18 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
               : messages.common.unknown },
             { label: messages.common.tuition, value: tuition },
             { label: decisionCopy.applicationFee, value: cycle.applicationFeeCny === null ? messages.common.unknown : formatCny(cycle.applicationFeeCny, locale, messages.common.unknown) },
-            { label: messages.common.lastVerified, value: formatDate(lastSourceCheckedAt, locale, '—') },
+            { label: messages.common.lastVerified, value: formatDate(program.verifiedAt, locale, '—') },
           ]}
           notice={decisionCopy.verifiedFactsOnly}
           actions={isAcceptingApplications && program.applyUrl
             ? <a className="atlas-button atlas-button--primary atlas-button--small" href={program.applyUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a>
             : <a className="atlas-button atlas-button--secondary atlas-button--small" href={program.programUrl} target="_blank" rel="noreferrer">{messages.common.officialSource} ↗</a>}
         />
-        <Card accent="jade">
+        <Card accent="jade" id="official-evidence">
           <h2 className="atlas-card__title">{messages.programs.sources}</h2>
           <dl className="record-facts">
             <div><dt>{messages.common.lastVerified}</dt><dd>{formatDate(program.verifiedAt, locale, '—')}</dd></div>
-            <div><dt>{messages.common.status}</dt><dd><Badge tone="jade">{messages.common.verified}</Badge></dd></div>
+            <div><dt>{messages.common.status}</dt><dd><VerificationBadge status={program.status} showDate={false} labels={{ verified: messages.common.verified, stale: messages.common.stale, draft: messages.common.draft, archived: messages.common.archived }} /></dd></div>
           </dl>
           <ul className="source-list">
             {sources.map((source) => <li key={source.id}>

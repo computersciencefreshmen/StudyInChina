@@ -1,3 +1,4 @@
+import { getTodayDate } from '../../src/lib/data/freshness'
 import { execFileSync } from 'node:child_process'
 import {
   copyFileSync,
@@ -211,7 +212,8 @@ describe('Guangdong official depth wave 3 on 2026-08-25', () => {
     expect(expectedDurations.size).toBe(37)
     for (const [id, durationMonths] of expectedDurations) {
       const item = program(id)
-      expect(item.status, id).toBe('verified')
+      expect(['verified', 'stale'], id).toContain(item.status)
+      if (item.reviewAfter < getTodayDate()) expect(item.status, id).toBe('stale')
       expect(item.verifiedAt, id).toBe(TODAY)
       expect(item.durationMonths, id).toBe(durationMonths)
       expect(item.verificationScope, id).toBe('facts')
@@ -397,7 +399,9 @@ describe('Guangdong official depth wave 3 on 2026-08-25', () => {
       const source = sourceById.get(captured.sourceId)
       expect(source, captured.sourceId).toBeDefined()
       expect(source?.official, captured.sourceId).toBe(true)
-      expect(source?.accessedAt, captured.sourceId).toBe(TODAY)
+      // Source checks may advance; the immutable R2 ledger still owns its historical date.
+      expect(source!.accessedAt >= TODAY, captured.sourceId).toBe(true)
+      expect(source!.accessedAt <= getTodayDate(), captured.sourceId).toBe(true)
       expect(source?.url, captured.sourceId).toBe(captured.officialUrl)
     }
 

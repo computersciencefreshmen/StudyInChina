@@ -6,6 +6,8 @@ const requiredWorkflows = [
   '.github/workflows/ci.yml',
   '.github/workflows/data-health.yml',
   '.github/workflows/program-fact-refresh.yml',
+  '.github/workflows/autonomous-catalog.yml',
+  '.github/workflows/automation-health.yml',
   '.github/workflows/official-catalog-harvest.yml',
   '.github/workflows/cloudflare-backup.yml',
   '.github/workflows/cloudflare-restore-drill.yml',
@@ -34,8 +36,8 @@ const p0Reliability = await text('scripts/operations/evaluate-p0-reliability.mjs
 
 requirePattern(
   refresh,
-  /cron:\s*'19 4 \* \* 2'/,
-  'The complete Catalog fact refresh must run weekly.',
+  /cron:\s*'19 4 \* \* \*'/,
+  'The complete Catalog fact refresh must run daily.',
 )
 requirePattern(
   refresh,
@@ -148,8 +150,13 @@ requirePattern(
 )
 requirePattern(
   alias,
-  /Wait for successful CI on the exact deployment SHA[\s\S]*branch=main&event=push[\s\S]*\.head_sha == \$sha[\s\S]*\.conclusion == "success"/,
+  /Wait for successful CI on the exact deployment SHA[\s\S]*branch=main&per_page=20[\s\S]*\.head_sha == \$sha[\s\S]*\.conclusion == "success"/,
   'Vercel alias promotion must wait for successful CI on the exact deployment SHA.',
+)
+requirePattern(
+  alias,
+  /\.head_sha == \$sha and \(\.event == "push" or \.event == "workflow_dispatch"\) and \.status == "completed" and \.conclusion == "success"/,
+  'Vercel promotion must accept only completed successful push or explicitly dispatched CI for the exact SHA.',
 )
 requirePattern(
   alias,
@@ -242,7 +249,7 @@ if (!Number.isFinite(scheduledUrlLimit) || scheduledUrlLimit <= 0) {
 }
 if (uniqueOfficialUrls.size > scheduledUrlLimit) {
   throw new Error(
-    `The Catalog has ${uniqueOfficialUrls.size} official URLs but the weekly refresh limit is ${scheduledUrlLimit}.`,
+    `The Catalog has ${uniqueOfficialUrls.size} official URLs but the daily refresh limit is ${scheduledUrlLimit}.`,
   )
 }
 
@@ -253,7 +260,7 @@ console.log(JSON.stringify({
   uniqueOfficialUrls: uniqueOfficialUrls.size,
   scheduledUrlLimit,
   freshnessAudit: 'daily',
-  factRefresh: 'weekly',
+  factRefresh: 'daily',
   backup: 'daily-with-readback',
   restoreDrill: 'quarterly-protected',
   productionPromotion: 'exact-sha-ci-gated',

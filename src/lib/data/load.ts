@@ -6,6 +6,7 @@ import { getTodayDate } from './freshness'
 import { createCatalogRepository, type CatalogRepository } from '@/lib/catalog'
 import { bundleSchema } from './schema'
 import { selectPublishedData } from './publication'
+import { isContentPreviewEnabled } from './preview'
 import type { DataBundle } from './types'
 import { canonicalUniversitySlug } from './slug-aliases'
 
@@ -26,7 +27,7 @@ const getPublishedData = cache((today: string): DataBundle => selectPublishedDat
 
 export function getData(): DataBundle {
   const data = getAllData()
-  const previewEnabled = process.env.CONTENT_PREVIEW === 'true' && process.env.VERCEL_ENV !== 'production'
+  const previewEnabled = isContentPreviewEnabled(process.env)
   return previewEnabled ? data : getPublishedData(getTodayDate())
 }
 
@@ -39,8 +40,7 @@ function activeCatalogRepository(): CatalogRepository {
 
 const getRepositoryData = cache(async (today: string): Promise<DataBundle> => {
   const data = await activeCatalogRepository().getBundle()
-  const previewEnabled = process.env.CONTENT_PREVIEW === 'true'
-    && process.env.VERCEL_ENV !== 'production'
+  const previewEnabled = isContentPreviewEnabled(process.env)
   return previewEnabled ? data : selectPublishedData(data, today)
 })
 

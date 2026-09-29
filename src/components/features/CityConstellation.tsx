@@ -37,7 +37,7 @@ export function CityConstellation({
 }) {
   const messages = getMessages(locale)
   const locatedCities = cities.filter(hasUsableCoordinates)
-  const note = messages.cities.mapNote
+  const note = messages.cities.plotNote
 
   return <div>
     <div className="city-map" aria-label={note}>

@@ -38,6 +38,7 @@ export function VerificationBadge({
   let formattedDate: string | null = null
 
   if (showDate && verifiedAt) {
+    // Audit dates name a calendar day, so the viewer's timezone must not shift it.
     const date = new Date(verifiedAt)
     if (!Number.isNaN(date.getTime())) {
       try {
@@ -45,12 +46,14 @@ export function VerificationBadge({
           year: 'numeric',
           month: 'short',
           day: 'numeric',
+          timeZone: 'UTC',
         }).format(date)
       } catch {
         formattedDate = new Intl.DateTimeFormat('en', {
           year: 'numeric',
           month: 'short',
           day: 'numeric',
+          timeZone: 'UTC',
         }).format(date)
       }
     }

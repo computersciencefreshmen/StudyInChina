@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { DataBundle } from '@/lib/data/types'
 import { InvalidCursorError } from '@/lib/catalog-api/cursor'
+import { selectCatalogApiData } from '@/lib/catalog-api/projection'
 import {
   CatalogApiService,
   InvalidSearchQueryError,
@@ -64,6 +65,8 @@ describe('CatalogApiService', () => {
     expect(cycles?.data[0].fieldMeta.applicationFeeCny.status).toBe('officially_not_announced')
     const scholarships = service.listScholarships({ institution: 'example-university' })
     expect(scholarships.data[0].fieldMeta['coverage.accommodation'].status).toBe('officially_not_announced')
+    expect(scholarships.data[0].applicationUrl).toBe('https://example.edu/scholarship')
+    expect(scholarships.data[0].fieldMeta.applicationUrl.status).toBe('known')
   })
 
   it('keeps reference tuition out of current amount filters without hiding program identity', () => {
@@ -365,6 +368,50 @@ describe('CatalogApiService', () => {
       ])
   })
 
+  it('withholds cycle deadline and fee narratives after expiry while preserving identity', () => {
+    const bundle = fixture()
+    const cycle = bundle.admissionCycles[0]!
+    const notes = text('Apply before 31 August 2026. Tuition is CNY 30,000 and the application fee is CNY 600.')
+    Object.assign(cycle, { closesOn: '2026-08-31', applicationFeeCny: 600, notes })
+    const serviceFor = (today: string) => new CatalogApiService(
+      selectCatalogApiData(bundle, today),
+      releaseFromBundle(bundle, today),
+      today,
+    )
+    const currentService = serviceFor('2026-08-20')
+    const current = currentService.getProgramCycles('computer-science')?.data[0]
+    expect(current).toMatchObject({
+      id: 'cycle-1', programId: 'program-1', academicYear: '2026-2027', intake: 'autumn',
+      notes, closesOn: '2026-08-31', tuitionCny: 30000, applicationFeeCny: 600,
+      fieldMeta: { notes: { status: 'known' } },
+    })
+    expect(currentService.comparePrograms(['program-1']).data.items[0]?.currentCycle?.notes).toEqual(notes)
+
+    const expiredService = serviceFor('2026-08-21')
+    const expiredCycles = expiredService.getProgramCycles('computer-science')?.data
+    expect(expiredCycles).toHaveLength(1)
+    expect(expiredCycles?.[0]).toMatchObject({
+      id: current!.id, programId: current!.programId, academicYear: current!.academicYear,
+      intake: current!.intake, status: 'stale', notes: null, closesOn: null,
+      tuitionCny: null, applicationFeeCny: null, applicationState: 'not-announced',
+      fieldMeta: { notes: { status: 'stale' } },
+    })
+    expect(expiredService.comparePrograms(['program-1']).data.items[0]?.currentCycle).toBeNull()
+    expect(cycle.notes).toEqual(notes)
+    expect(cycle.status).toBe('verified')
+  })
+
+  it('withholds cycle narratives explicitly marked stale before the review deadline', () => {
+    const bundle = fixture()
+    bundle.admissionCycles[0]!.notes = text('Applications are open; pay an application fee of CNY 600.')
+    bundle.admissionCycles[0]!.status = 'stale'
+    const service = new CatalogApiService(bundle, releaseFromBundle(bundle, '2026-07-20'), '2026-07-20')
+    const cycle = service.getProgramCycles('computer-science')?.data[0]
+    expect(cycle?.notes).toBeNull()
+    expect(cycle?.fieldMeta.notes.status).toBe('stale')
+    expect(cycle?.id).toBe('cycle-1')
+  })
+
   it('keeps confirmed identity but masks stale dynamic facts everywhere', () => {
     const bundle = fixture()
     const service = new CatalogApiService(bundle, releaseFromBundle(bundle, '2026-07-20'), '2026-11-01')
@@ -387,6 +434,8 @@ describe('CatalogApiService', () => {
     expect(cycle?.applicationState).toBe('not-announced')
     expect(scholarship.coverage.tuition).toBeNull()
     expect(scholarship.universityIds).toBeNull()
+    expect(scholarship.applicationUrl).toBeNull()
+    expect(scholarship.fieldMeta.applicationUrl.status).toBe('stale')
     expect(scholarshipCycle?.deadline).toBeNull()
     expect(scholarshipCycle?.academicYear).toBeNull()
 

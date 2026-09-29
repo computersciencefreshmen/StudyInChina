@@ -35,8 +35,8 @@ type ExperienceCopy = {
 const copy = {
   en: {
     cities: {
-      explorerLabel: 'Explore student cities', viewLabel: 'View', constellationView: 'Constellation', directoryView: 'Directory',
-      searchLabel: 'Search cities', searchPlaceholder: 'City or province', regionLabel: 'Region', allRegions: 'All regions',
+      explorerLabel: 'Explore student cities', viewLabel: 'View', constellationView: 'Map', directoryView: 'Directory',
+      searchLabel: 'Search cities', searchPlaceholder: 'City, province or university', regionLabel: 'Region', allRegions: 'All regions',
       sortLabel: 'Sort', sortByUniversities: 'Most universities', sortByName: 'City name', resultSummary: 'cities in this view',
       empty: 'No cities match these filters.',
     },
@@ -48,8 +48,8 @@ const copy = {
   },
   zh: {
     cities: {
-      explorerLabel: '探索留学城市', viewLabel: '视图', constellationView: '城市星图', directoryView: '城市目录',
-      searchLabel: '搜索城市', searchPlaceholder: '城市或省份', regionLabel: '区域', allRegions: '全部区域',
+      explorerLabel: '探索留学城市', viewLabel: '视图', constellationView: '交互地图', directoryView: '城市目录',
+      searchLabel: '搜索城市', searchPlaceholder: '城市、省份或高校', regionLabel: '区域', allRegions: '全部区域',
       sortLabel: '排序', sortByUniversities: '高校数量优先', sortByName: '城市名称', resultSummary: '座城市符合当前条件',
       empty: '没有符合当前筛选条件的城市。',
     },
@@ -61,8 +61,8 @@ const copy = {
   },
   ru: {
     cities: {
-      explorerLabel: 'Города для учёбы', viewLabel: 'Вид', constellationView: 'Созвездие', directoryView: 'Список',
-      searchLabel: 'Поиск города', searchPlaceholder: 'Город или провинция', regionLabel: 'Регион', allRegions: 'Все регионы',
+      explorerLabel: 'Города для учёбы', viewLabel: 'Вид', constellationView: 'Карта', directoryView: 'Список',
+      searchLabel: 'Поиск города', searchPlaceholder: 'Город, провинция или вуз', regionLabel: 'Регион', allRegions: 'Все регионы',
       sortLabel: 'Сортировка', sortByUniversities: 'Больше вузов', sortByName: 'По названию', resultSummary: 'городов в выборке',
       empty: 'По этим фильтрам городов нет.',
     },
@@ -74,8 +74,8 @@ const copy = {
   },
   de: {
     cities: {
-      explorerLabel: 'Studienstädte entdecken', viewLabel: 'Ansicht', constellationView: 'Konstellation', directoryView: 'Verzeichnis',
-      searchLabel: 'Städte suchen', searchPlaceholder: 'Stadt oder Provinz', regionLabel: 'Region', allRegions: 'Alle Regionen',
+      explorerLabel: 'Studienstädte entdecken', viewLabel: 'Ansicht', constellationView: 'Karte', directoryView: 'Verzeichnis',
+      searchLabel: 'Städte suchen', searchPlaceholder: 'Stadt, Provinz oder Hochschule', regionLabel: 'Region', allRegions: 'Alle Regionen',
       sortLabel: 'Sortieren', sortByUniversities: 'Meiste Hochschulen', sortByName: 'Stadtname', resultSummary: 'Städte in dieser Auswahl',
       empty: 'Keine Stadt entspricht diesen Filtern.',
     },
@@ -87,8 +87,8 @@ const copy = {
   },
   fr: {
     cities: {
-      explorerLabel: 'Explorer les villes étudiantes', viewLabel: 'Vue', constellationView: 'Constellation', directoryView: 'Répertoire',
-      searchLabel: 'Rechercher une ville', searchPlaceholder: 'Ville ou province', regionLabel: 'Région', allRegions: 'Toutes les régions',
+      explorerLabel: 'Explorer les villes étudiantes', viewLabel: 'Vue', constellationView: 'Carte', directoryView: 'Répertoire',
+      searchLabel: 'Rechercher une ville', searchPlaceholder: 'Ville, province ou université', regionLabel: 'Région', allRegions: 'Toutes les régions',
       sortLabel: 'Trier', sortByUniversities: "Plus d'universités", sortByName: 'Nom de la ville', resultSummary: 'villes dans cette sélection',
       empty: 'Aucune ville ne correspond à ces filtres.',
     },
@@ -100,8 +100,8 @@ const copy = {
   },
   es: {
     cities: {
-      explorerLabel: 'Explorar ciudades universitarias', viewLabel: 'Vista', constellationView: 'Constelación', directoryView: 'Directorio',
-      searchLabel: 'Buscar ciudades', searchPlaceholder: 'Ciudad o provincia', regionLabel: 'Región', allRegions: 'Todas las regiones',
+      explorerLabel: 'Explorar ciudades universitarias', viewLabel: 'Vista', constellationView: 'Mapa', directoryView: 'Directorio',
+      searchLabel: 'Buscar ciudades', searchPlaceholder: 'Ciudad, provincia o universidad', regionLabel: 'Región', allRegions: 'Todas las regiones',
       sortLabel: 'Ordenar', sortByUniversities: 'Más universidades', sortByName: 'Nombre de ciudad', resultSummary: 'ciudades en esta selección',
       empty: 'Ninguna ciudad coincide con estos filtros.',
     },

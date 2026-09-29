@@ -41,24 +41,35 @@ describe('second official ICLT wave 2026-07-28', () => {
     }
   })
 
-  it('retains one program, one cycle and one scholarship per school route with current freshness', () => {
+  it('retains each school route and follows its latest official recheck without refreshing other routes', () => {
     for (const key of keys) {
       const programId = `program-${key}`
       const isReverified = key === 'sisu-iclt-one-semester-spring-2027'
       const expectedStatus = isReverified ? 'verified' : 'stale'
-      const expectedReviewAfter = isReverified ? '2026-09-01' : '2026-08-27'
       const program = programs.find((item) => item.id === programId)
+      const recheckedAt = String(program?.verifiedAt)
+      const nextReview = new Date(recheckedAt + 'T00:00:00Z')
+      nextReview.setUTCDate(nextReview.getUTCDate() + 7)
+      const expectedReviewAfter = isReverified ? nextReview.toISOString().slice(0, 10) : '2026-08-27'
+      // Dates and funding receive a shorter three-day review window than profile facts.
+      nextReview.setUTCDate(nextReview.getUTCDate() - 4)
+      const expectedDynamicReviewAfter = isReverified ? nextReview.toISOString().slice(0, 10) : '2026-08-27'
+      if (isReverified) {
+        const primarySource = sources.find((source) => source.url === program?.programUrl)
+        expect(primarySource?.accessedAt).toBe(recheckedAt)
+        expect(recheckedAt.localeCompare('2026-08-25')).toBeGreaterThanOrEqual(0)
+      }
       expect(program?.status).toBe(expectedStatus)
       expect(program?.reviewAfter).toBe(expectedReviewAfter)
       const cycle = cycles.find((item) => item.programId === programId)
       expect(cycle?.status).toBe(expectedStatus)
-      expect(cycle?.reviewAfter).toBe(expectedReviewAfter)
+      expect(cycle?.reviewAfter).toBe(expectedDynamicReviewAfter)
       expect(cycle?.closesOn).toBe('2026-10-31')
       const scholarship = scholarships.find(
         (item) => item.id === `scholarship-${key}`,
       )
       expect(scholarship?.status).toBe(expectedStatus)
-      expect(scholarship?.reviewAfter).toBe(expectedReviewAfter)
+      expect(scholarship?.reviewAfter).toBe(expectedDynamicReviewAfter)
       expect(scholarship?.deadline).toBe('2026-10-31')
     }
   })

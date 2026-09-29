@@ -29,6 +29,18 @@
 > [!NOTE]
 > **Reproducible catalogue baseline · 2026-08-26:** 266 public universities, 1,263 program identities and 367 scholarship identities. Run `npm run quality:platform-scorecard` to reproduce the quality metrics; use the [Release API](https://studyinchina.vercel.app/api/v1/releases/current) for live publication metadata. Executable validation and official evidence take precedence over prose if they ever differ.
 
+## Latest review and upgrade · 2026-09-16
+
+This revision strengthens the application decision workflow: filtering, comparison, date-sensitive status and official evidence. [Project review](./docs/audits/2026-09-16-project-review.md) · [Data audit](./quality/audit-2026-09-16-data.md)
+
+- The full structural audit covers **5,023 records**. **792 overdue verified records** were resolved; **0** remain.
+- Official-source review restored **9 admission cycles**. Public identities now total **266 universities / 1,265 programs / 366 scholarships**; identity counts do not mean applications are open.
+- Detail pages explain verification and review dates and evaluate freshness per request. Comparison handles stale, historical-reference and conflicting fields.
+- Initial and follow-up checks cover **1,596 distinct URLs**: 1,339 reachable, 17 confirmed broken and 240 requiring further checks. Reachability does not verify a fact.
+- Machine coverage, actual source-content review and unresolved work are reported separately. The **2026-08-26** numbers below remain a historical baseline.
+
+Reproduce the full record audit with `npm run quality:comprehensive-audit`. The data-health workflow now retains the full audit and review queue.
+
 ## Choose your path
 
 | You are… | Start here | What you will find |
@@ -386,3 +398,7 @@ Report a security problem privately to the maintainer rather than placing secret
 Created and maintained by [Henry Yang](https://yanghanyu2023.wixsite.com/henry) as a non-commercial public-interest information project for international students.
 
 If you spot outdated information, use the website’s private correction form and include the official source. Please never send passports, transcripts, medical records or payment information.
+
+## Unattended maintenance upgrade (2026-09-16)
+
+Cloudflare now runs official-source discovery, complete-body revalidation receipts, persistent retries, and runtime health observations. Daily catalog maintenance publishes only the exact commit that passes full CI; retries never renew old evidence by changing its date. Production still uses the previous JSON release: snapshot completeness and one-time cloud credentials remain outstanding. See the [deployment and remaining conditions](docs/audits/2026-09-16-unattended-automation.md).

@@ -139,7 +139,7 @@ type RouteWindowRow = {
   opens_on: string | null
   closes_on: string | null
   rolling: number | null
-  application_state: 'open' | 'upcoming' | 'closed' | 'rolling' | 'not_announced' | null
+  application_state: 'open' | 'upcoming' | 'closed' | 'rolling' | 'dates-published' | 'not_announced' | null
 }
 
 type FeeRow = {
@@ -354,7 +354,8 @@ function scholarshipDeadlineSql() {
           WHEN 'open' THEN 0
           WHEN 'rolling' THEN 1
           WHEN 'upcoming' THEN 2
-          WHEN 'not_announced' THEN 3
+          WHEN 'dates-published' THEN 3
+          WHEN 'not_announced' THEN 4
           ELSE 4
         END,
         window.closes_on,
@@ -1067,28 +1068,16 @@ export class CatalogSqlApi {
         : query.applicationState
       addCondition(cycleConditions, cycleValues, `(EXISTS (
           SELECT 1
-          FROM current_application_routes AS route
-          JOIN current_application_windows AS window
-            ON window.release_id = route.release_id
-           AND window.application_route_id = route.application_route_id
-          WHERE route.release_id = cycle.release_id
-            AND route.owner_record_id = cycle.program_cycle_id
+          FROM cycle_window_states AS window
+          WHERE window.release_id = cycle.release_id
+            AND window.owner_record_id = cycle.program_cycle_id
             AND window.application_state = ?
         ) OR (
-          CASE
-            WHEN EXISTS (
-              SELECT 1 FROM current_record_fields AS rolling_fact
-              WHERE rolling_fact.release_id = cycle.release_id
-                AND rolling_fact.record_id = cycle.program_cycle_id
-                AND rolling_fact.field_path IN ('rolling', 'dateStatus')
-                AND json_extract(rolling_fact.value_json, '$') IN (1, 'rolling')
-            ) THEN 'rolling'
-            WHEN NOT EXISTS (
-              SELECT 1 FROM current_record_fields AS date_fact
-              WHERE date_fact.release_id = cycle.release_id
-                AND date_fact.record_id = cycle.program_cycle_id
-                AND date_fact.field_path IN ('opens_on', 'opensOn', 'closes_on', 'closesOn')
-            ) THEN 'not_announced'
+          NOT EXISTS (
+            SELECT 1 FROM cycle_window_states AS window
+            WHERE window.release_id = cycle.release_id
+              AND window.owner_record_id = cycle.program_cycle_id
+          ) AND CASE
             WHEN COALESCE((
               SELECT CAST(json_extract(close_fact.value_json, '$') AS TEXT)
               FROM current_record_fields AS close_fact
@@ -1096,7 +1085,7 @@ export class CatalogSqlApi {
                 AND close_fact.record_id = cycle.program_cycle_id
                 AND close_fact.field_path IN ('closes_on', 'closesOn')
               LIMIT 1
-            ), '9999-12-31') < date('now') THEN 'closed'
+            ), '9999-12-31') < date('now', '+8 hours') THEN 'closed'
             WHEN COALESCE((
               SELECT CAST(json_extract(open_fact.value_json, '$') AS TEXT)
               FROM current_record_fields AS open_fact
@@ -1104,8 +1093,29 @@ export class CatalogSqlApi {
                 AND open_fact.record_id = cycle.program_cycle_id
                 AND open_fact.field_path IN ('opens_on', 'opensOn')
               LIMIT 1
-            ), '0000-01-01') > date('now') THEN 'upcoming'
-            ELSE 'open'
+            ), '0000-01-01') > date('now', '+8 hours') THEN 'upcoming'
+            WHEN EXISTS (
+              SELECT 1 FROM current_record_fields AS rolling_fact
+              WHERE rolling_fact.release_id = cycle.release_id
+                AND rolling_fact.record_id = cycle.program_cycle_id
+                AND rolling_fact.field_path IN ('rolling', 'dateStatus')
+                AND json_extract(rolling_fact.value_json, '$') IN (1, 'rolling')
+            ) THEN 'rolling'
+            WHEN EXISTS (
+              SELECT 1 FROM current_record_fields AS open_fact
+              WHERE open_fact.release_id = cycle.release_id
+                AND open_fact.record_id = cycle.program_cycle_id
+                AND open_fact.field_path IN ('opens_on', 'opensOn')
+                AND json_extract(open_fact.value_json, '$') IS NOT NULL
+            ) THEN 'open'
+            WHEN EXISTS (
+              SELECT 1 FROM current_record_fields AS close_fact
+              WHERE close_fact.release_id = cycle.release_id
+                AND close_fact.record_id = cycle.program_cycle_id
+                AND close_fact.field_path IN ('closes_on', 'closesOn')
+                AND json_extract(close_fact.value_json, '$') IS NOT NULL
+            ) THEN 'dates-published'
+            ELSE 'not_announced'
           END = ?
         ))`, expectedState, expectedState)
     }
@@ -1162,11 +1172,25 @@ export class CatalogSqlApi {
       )`, Math.round(query.tuitionMax * 100), query.tuitionMax)
     }
     if (cycleConditions.length > 0) {
-      const matchingCycle = `EXISTS (
-        SELECT 1
+      // Keep this independent of the outer program row. A correlated EXISTS
+      // repeatedly expands the cycle/route/window visibility views for every
+      // program (and again for counts/facets). IN evaluates the trusted cycle
+      // projection once while preserving exactly the same release/date gates.
+      // The window view already enforces route visibility; the base route join
+      // below only retrieves its owner ID, never unverified application facts.
+      const windowStates = query.applicationState ? `WITH cycle_window_states AS MATERIALIZED (
+          SELECT window.release_id, route.owner_record_id, window.application_state
+          FROM current_application_windows AS window
+          JOIN application_routes AS route
+            ON route.release_id = window.release_id
+           AND route.application_route_id = window.application_route_id
+          WHERE window.release_id = ?
+        )` : ''
+      const matchingCycle = `program.program_id IN (
+        ${windowStates}
+        SELECT cycle.program_id
         FROM current_program_cycles AS cycle
-        WHERE cycle.release_id = program.release_id
-          AND cycle.program_id = program.program_id
+        WHERE cycle.release_id = ?
           AND ${cycleConditions.join('\n          AND ')}
       )`
       const identityOnlyNotAnnounced = query.applicationState === 'not-announced'
@@ -1178,13 +1202,15 @@ export class CatalogSqlApi {
         conditions,
         values,
         identityOnlyNotAnnounced
-          ? `(NOT EXISTS (
-              SELECT 1
+          ? `(program.program_id NOT IN (
+              SELECT announced_cycle.program_id
               FROM current_program_cycles AS announced_cycle
-              WHERE announced_cycle.release_id = program.release_id
-                AND announced_cycle.program_id = program.program_id
+              WHERE announced_cycle.release_id = ?
             ) OR ${matchingCycle})`
           : matchingCycle,
+        ...(identityOnlyNotAnnounced ? [this.release.id] : []),
+        ...(query.applicationState ? [this.release.id] : []),
+        this.release.id,
         ...cycleValues,
       )
     }

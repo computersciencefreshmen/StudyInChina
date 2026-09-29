@@ -64,10 +64,11 @@ test('scheduler keeps registered critical checks while discovery is frozen', asy
       return {
         bind(...values: unknown[]) {
           bindings = values
-          queryBindings.push(values)
+          if (!query.includes('WITH latest AS')) queryBindings.push(values)
           return this
         },
         async all() {
+          if (query.includes('WITH latest AS')) return { success: true, results: [] }
           assert.match(query, /json_extract\(manifest_json/)
           return {
             success: true,

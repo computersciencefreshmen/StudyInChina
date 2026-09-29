@@ -1,4 +1,7 @@
 import { expect, test } from '@playwright/test'
+import { mockMapTiles } from './map-fixture'
+
+test.beforeEach(async ({ page }) => { await mockMapTiles(page) })
 import admissionCycles from '../../content/data/admission-cycles.json'
 import cities from '../../content/data/cities.json'
 import programs from '../../content/data/programs.json'
@@ -10,6 +13,7 @@ import { getTodayDate } from '../../src/lib/data/freshness'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
 import {
+  getReleaseAnnouncement,
   LATEST_RELEASE_ANNOUNCEMENT_ID,
   RELEASE_ANNOUNCEMENT_STORAGE_KEY,
 } from '../../src/i18n/release-announcement'
@@ -61,7 +65,7 @@ test.beforeEach(async ({ page }, testInfo) => {
 test(releaseAnnouncementTestTitle, async ({ page }) => {
   await page.goto('/zh', { waitUntil: 'domcontentloaded' })
 
-  const dialog = page.getByRole('dialog', { name: '选择更广，证据更清楚' })
+  const dialog = page.getByRole('dialog', { name: getReleaseAnnouncement('zh').copy.title })
   await expect(dialog).toBeVisible()
   await expect(page.getByRole('button', { name: '关闭更新' })).toBeFocused()
   await expect(dialog.getByText(publicData.universities.length.toLocaleString('en-US'))).toBeVisible()
