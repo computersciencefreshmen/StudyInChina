@@ -4,6 +4,7 @@ import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 import { selectPublishedData } from '../../src/lib/data/publication'
+import { getTodayDate } from '../../src/lib/data/freshness'
 import { bundleSchema } from '../../src/lib/data/schema'
 
 const TODAY = '2026-08-25'
@@ -107,7 +108,12 @@ describe('SISU, AHU and CQU official depth wave on 2026-08-25', () => {
       const program = data.programs.find((item) => item.id === id)
       expect(program, id).toBeDefined()
       expect(program?.slug, id).toBe(program?.slug)
-      expect(program?.status, id).toBe('verified')
+      // The historical identity and evidence survive a later review rollover.
+      expect(program?.status, id).toMatch(/^(verified|stale)$/u)
+      if (program?.status === 'stale') {
+        const current = selectPublishedData(data, getTodayDate()).programs.find((item) => item.id === id)
+        expect(current, id).toMatchObject({ status: 'stale', durationMonths: null, applyUrl: null, languageRequirements: [] })
+      }
       expect(program?.durationMonths, id).toBe(duration)
       expect(program?.verificationScope, id).toBe('facts')
       expectSixLanguages(program?.name ?? {}, id)

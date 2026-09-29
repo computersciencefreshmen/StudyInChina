@@ -7,6 +7,8 @@ import scholarships from '../../content/data/scholarships.json'
 import sources from '../../content/data/sources.json'
 import universities from '../../content/data/universities.json'
 import { getApplicationState } from '../../src/lib/data/admission'
+import { getTodayDate } from '../../src/lib/data/freshness'
+import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
 
 const TODAY = '2026-08-25'
@@ -54,7 +56,7 @@ describe('decision-fact depth wave on 2026-08-25', () => {
     for (const [programId, duration, tuition, period] of ZJU_PROGRAMS) {
       const program = data.programs.find((item) => item.id === programId)
       const cycle = data.admissionCycles.find((item) => item.programId === programId && item.academicYear === '2026-2027')
-      expect(program?.status, programId).toBe('verified')
+      expect(program?.status, programId).toMatch(/^(verified|stale)$/u)
       expect(program?.durationMonths, programId).toBe(duration)
       expect(program?.teachingLanguages, programId).toContain('English')
       expect(program?.applyUrl, programId).toBe('https://intlstudent.zju.edu.cn/')
@@ -62,7 +64,7 @@ describe('decision-fact depth wave on 2026-08-25', () => {
       expectCurrentOfficialEvidence(program?.sourceIds ?? [], programId)
 
       expect(cycle, programId).toMatchObject({
-        status: 'verified',
+        status: expect.stringMatching(/^(verified|stale)$/u),
         closesOn: '2026-05-31',
         dateStatus: 'published',
         tuitionCny: tuition,
@@ -91,7 +93,7 @@ describe('decision-fact depth wave on 2026-08-25', () => {
       const cycle = data.admissionCycles.find((item) => item.programId === programId && item.academicYear === '2026-2027')
       expectSixLanguages(program?.name ?? {}, programId)
       expect(cycle).toMatchObject({
-        status: 'verified', closesOn: '2026-06-30', dateStatus: 'published',
+        status: expect.stringMatching(/^(verified|stale)$/u), closesOn: '2026-06-30', dateStatus: 'published',
         tuitionCny: tuition, tuitionStatus: 'confirmed', applicationFeeCny: null,
       })
       expect(cycle?.notes?.en).toContain('registration fee, not an application fee')
@@ -114,11 +116,11 @@ describe('decision-fact depth wave on 2026-08-25', () => {
     for (const programId of HDU_PROGRAMS) {
       const program = data.programs.find((item) => item.id === programId)
       const cycle = data.admissionCycles.find((item) => item.programId === programId && item.academicYear === '2026-2027')
-      expect(program?.status, programId).toBe('verified')
+      expect(program?.status, programId).toMatch(/^(verified|stale)$/u)
       expect(program?.applyUrl, programId).toBe('https://lxsgl.hdu.edu.cn/')
       expectSixLanguages(program?.name ?? {}, programId)
       expect(cycle).toMatchObject({
-        status: 'verified', closesOn: '2026-06-15', dateStatus: 'published',
+        status: expect.stringMatching(/^(verified|stale)$/u), closesOn: '2026-06-15', dateStatus: 'published',
         tuitionStatus: 'confirmed', applicationFeeCny: null,
       })
       expect(cycle?.notes?.en).toContain('registration charge is not an application fee')
@@ -148,7 +150,7 @@ describe('decision-fact depth wave on 2026-08-25', () => {
     expect(program?.languageRequirements).toContainEqual({ test: 'HSK', minimum: 'Level 4 or higher; some Chinese-taught disciplines may require Level 5' })
     expectSixLanguages(program?.name ?? {}, programId)
     expect(cycle).toMatchObject({
-      status: 'verified', closesOn: '2026-04-30', tuitionCny: null,
+      status: expect.stringMatching(/^(verified|stale)$/u), closesOn: '2026-04-30', tuitionCny: null,
       tuitionPeriod: null, tuitionStatus: null, applicationFeeCny: 0,
     })
     expect(cycle?.notes?.en).toContain('18,000–20,000')
@@ -157,5 +159,21 @@ describe('decision-fact depth wave on 2026-08-25', () => {
     const scholarship = data.scholarships.find((item) => item.id === 'sch-gap-wave6-gzhu-international-student-scholarship-2026')
     expect(scholarship).toMatchObject({ deadline: '2026-04-30', coverage: { tuition: 'partial', insurance: 'unknown', stipendCnyPerMonth: 1000 } })
     expect(scholarship?.programIds).toEqual([programId])
+  })
+
+  it('keeps historical wave identities discoverable without renewing expired fields or cycles', () => {
+    const published = selectPublishedData(data, getTodayDate())
+    const ids = [...ZJU_PROGRAMS.map(([id]) => id), ...HDU_PROGRAMS]
+    for (const id of ids) {
+      const original = data.programs.find((program) => program.id === id)!
+      const current = published.programs.find((program) => program.id === id)
+      expect(current, id).toBeDefined()
+      if (original.status === 'stale' || original.reviewAfter < getTodayDate()) {
+        expect(current, id).toMatchObject({ status: 'stale', durationMonths: null, applyUrl: null, teachingLanguages: [], languageRequirements: [] })
+      }
+      for (const cycle of data.admissionCycles.filter((item) => item.programId === id && (item.status === 'stale' || item.reviewAfter < getTodayDate()))) {
+        expect(published.admissionCycles.some((item) => item.id === cycle.id), cycle.id).toBe(false)
+      }
+    }
   })
 })

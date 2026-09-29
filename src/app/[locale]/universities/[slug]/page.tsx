@@ -14,6 +14,7 @@ import { disciplineLabels, regionLabels } from '@/lib/data/labels'
 import { getCatalogData, getData } from '@/lib/data/load'
 import { providerLabel } from '@/lib/data/scholarship'
 import { canonicalUniversitySlug } from '@/lib/data/slug-aliases'
+import { serializeJsonLd } from '@/lib/seo/json-ld'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
 export const dynamicParams = true
@@ -66,7 +67,7 @@ export default async function UniversityDetailPage({ params }: { params: Promise
   const jsonLd = { '@context': 'https://schema.org', '@type': 'CollegeOrUniversity', name: localize(university.name, locale), url: university.officialUrl, address: city ? { '@type': 'PostalAddress', addressLocality: localize(city.name, locale), addressCountry: 'CN' } : undefined }
 
   return <>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }} />
     <PageHero variant="compact" eyebrow={city ? `${localize(city.name, locale)} · ${university.region ? regionLabels(locale)[university.region] : messages.common.unknown}` : university.region ? regionLabels(locale)[university.region] : messages.common.unknown} title={localize(university.name, locale)} description={localize(university.summary, locale)} actions={<><a className="atlas-button atlas-button--primary atlas-button--medium" href={university.admissionsUrl || university.officialUrl} target="_blank" rel="noreferrer">{university.admissionsUrl ? copy.admission : messages.common.officialSource} ↗</a><a className="atlas-button atlas-button--ghost atlas-button--medium" href={university.officialUrl} target="_blank" rel="noreferrer">{copy.official} ↗</a></>} meta={<VerificationBadge status={university.status} verifiedAt={university.verifiedAt} locale={locale} verifiedDateLabel={messages.common.lastVerified} labels={{ verified: messages.common.verified, stale: messages.common.stale, draft: messages.common.draft, archived: messages.common.archived }} />} />
     <div className="atlas-container">
       <DataFreshnessPanel record={university} locale={locale} today={today} />

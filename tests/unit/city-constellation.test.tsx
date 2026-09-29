@@ -34,6 +34,6 @@ describe('CityConstellation', () => {
     render(<CityConstellation cities={[{ ...city, coordinates: null }]} locale="en" />)
 
     expect(screen.getByText('0 Cities')).toBeInTheDocument()
-    expect(screen.getAllByText(/latitude\/longitude city index/i)).toHaveLength(2)
+    expect(screen.getAllByText(/City markers are approximate/i)).toHaveLength(2)
   })
 })

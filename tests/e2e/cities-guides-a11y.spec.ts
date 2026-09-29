@@ -1,4 +1,7 @@
 import { expect, test } from '@playwright/test'
+import { mockMapTiles } from './map-fixture'
+
+test.beforeEach(async ({ page }) => { await mockMapTiles(page) })
 
 type AxeResult = {
   violations: Array<{
@@ -62,7 +65,8 @@ test('city and flagship guide pages pass scoped WCAG A/AA checks', async ({ page
 
 test('city markers expose 44px targets and mobile defaults to the overlap-safe directory', async ({ page }) => {
   await page.goto('/en/cities?view=constellation', { waitUntil: 'domcontentloaded' })
-  const markers = page.locator('.city-marker')
+  const markers = page.locator('.city-map-pin')
+  await expect(markers.first()).toBeVisible()
   const markerCount = await markers.count()
   expect(markerCount).toBeGreaterThan(10)
 

@@ -73,10 +73,11 @@ export default async function CitiesPage({
         initialState={explorerState}
         locale={locale}
         universityCounts={universityCounts}
+        universities={universities.map(({ id, slug, name, cityId }) => ({ id, slug, name, cityId }))}
       />
       <p className="map-source-link">
-        <a className="text-link" href="https://bzdt.tianditu.gov.cn/" target="_blank" rel="noreferrer">
-          {messages.cities.officialMapService} ↗
+        <a className="text-link" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">
+          © OpenStreetMap contributors ↗
         </a>
       </p>
     </section>

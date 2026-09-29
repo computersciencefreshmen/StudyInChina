@@ -15,6 +15,7 @@ import { getDataReleaseDate } from '@/lib/data/release'
 import { requireLocale, siteUrl } from '@/lib/site'
 import '../globals.css'
 import '../feature-styles.css'
+import '../city-map.css'
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,

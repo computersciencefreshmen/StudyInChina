@@ -327,7 +327,6 @@ export class CatalogApiService {
       slug: scholarship.slug,
       name: scholarship.name,
       providerType: scholarship.providerType,
-      applicationUrl: scholarship.applicationUrl,
     }, this.today, {}, false)
     const normalizedCoverage = {
       tuition: scholarship.coverage.tuition === 'unknown' ? null : scholarship.coverage.tuition,
@@ -345,6 +344,7 @@ export class CatalogApiService {
       'coverage.insurance': normalizedCoverage.insurance,
       'coverage.stipendCnyPerMonth': normalizedCoverage.stipendCnyPerMonth,
       deadline: scholarship.deadline,
+      applicationUrl: scholarship.applicationUrl,
       summary: scholarship.summary,
     }, this.today)
     return {
@@ -362,6 +362,7 @@ export class CatalogApiService {
         ),
       },
       deadline: knownValue(dynamicMeta, 'deadline', scholarship.deadline),
+      applicationUrl: knownValue(dynamicMeta, 'applicationUrl', scholarship.applicationUrl),
       summary: knownValue(dynamicMeta, 'summary', scholarship.summary),
       officialSources: officialSourcesFor(scholarship.sourceIds, this.bundle.sources),
       fieldMeta: { ...identityMeta, ...dynamicMeta },

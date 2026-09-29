@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { mockMapTiles } from './map-fixture'
 
 import {
   LATEST_RELEASE_ANNOUNCEMENT_ID,
@@ -6,6 +7,7 @@ import {
 } from '../../src/i18n/release-announcement'
 
 test.beforeEach(async ({ page }) => {
+  await mockMapTiles(page)
   await page.addInitScript(({ key, id }) => {
     window.localStorage.setItem(key, id)
   }, {

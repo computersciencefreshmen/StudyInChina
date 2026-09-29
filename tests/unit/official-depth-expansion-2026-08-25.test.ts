@@ -7,6 +7,7 @@ import scholarships from '../../content/data/scholarships.json'
 import sources from '../../content/data/sources.json'
 import universities from '../../content/data/universities.json'
 import { selectPublishedData } from '../../src/lib/data/publication'
+import { getTodayDate } from '../../src/lib/data/freshness'
 import { bundleSchema } from '../../src/lib/data/schema'
 
 const TODAY = '2026-08-25'
@@ -76,13 +77,17 @@ function expectSixLanguageName(
 }
 
 describe('official depth expansion on 2026-08-25', () => {
-  it('publishes all eleven verified programs with six-language names and official evidence', () => {
+  it('retains eleven audited program identities and withholds their expired facts', () => {
     expect(new Set(PROGRAM_IDS).size).toBe(11)
 
     for (const id of PROGRAM_IDS) {
       const program = data.programs.find((item) => item.id === id)
       expect(program, id).toBeDefined()
-      expect(program?.status, id).toBe('verified')
+      expect(program?.status, id).toMatch(/^(verified|stale)$/u)
+      if (program?.status === 'stale') {
+        const current = selectPublishedData(data, getTodayDate()).programs.find((item) => item.id === id)
+        expect(current, id).toMatchObject({ status: 'stale', durationMonths: null, applyUrl: null, languageRequirements: [] })
+      }
       expect((program?.reviewAfter ?? '').localeCompare(TODAY) >= 0, id).toBe(true)
       expectSixLanguageName(program?.name ?? {}, id)
       expectOfficialSources(program?.sourceIds ?? [], id)
@@ -110,7 +115,11 @@ describe('official depth expansion on 2026-08-25', () => {
       const scholarship = data.scholarships.find((item) => item.id === id)
       expect(scholarship, id).toBeDefined()
       const isOverdueIclt = id === 'scholarship-cug-international-chinese-language-teachers-2026'
-      expect(scholarship?.status, id).toBe(isOverdueIclt ? 'stale' : 'verified')
+      expect(scholarship?.status, id).toMatch(/^(verified|stale)$/u)
+      if (scholarship?.status === 'stale') {
+        const current = selectPublishedData(data, getTodayDate()).scholarships.find((item) => item.id === id)
+        expect(current, id).toMatchObject({ status: 'stale', applicationUrl: null, deadline: null, coverage: { tuition: 'unknown', stipendCnyPerMonth: null } })
+      }
       if (isOverdueIclt) {
         expect(scholarship?.verifiedAt).toBe(TODAY)
         expect(scholarship?.reviewAfter).toBe('2026-09-01')

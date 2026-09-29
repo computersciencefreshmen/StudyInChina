@@ -1,22 +1,85 @@
-# Standard-map publication gate
+# Interactive map service and source record
 
-The public city visualization is currently a coordinate index. It is not a map and does not depict national or provincial boundaries.
+Reviewed: **2026-09-29**. The selected implementation uses Leaflet 1.9.4 with
+OpenStreetMap Standard raster tiles, replacing the coordinate-only city plot.
+This records the actual provider and operation; it does not claim a government
+map-review certificate or provider endorsement.
 
-## Official base-map candidate
+## Current service
 
-- Catalogue: [Ministry of Natural Resources Standard Map Service](https://bzdt.tianditu.gov.cn/)
-- Candidate: 中国地图 1∶740万 对开（横版、界线版、无邻国、含南海诸岛附图）
-- Approval number: `GS(2023)2767号`
-- Official catalogue ID: `4o28b0625501ad13015501ad2bfc2187`
+| Item | Recorded implementation |
+| --- | --- |
+| Tile endpoint | `https://tile.openstreetmap.org/{z}/{x}/{y}.png` |
+| Provider | OpenStreetMap Foundation community tile service |
+| Renderer | Pinned `leaflet@1.9.4`, imported when the map component mounts |
+| Attribution | Continuously visible `© OpenStreetMap contributors`, linked to the [copyright and licence page](https://www.openstreetmap.org/copyright) |
+| Provider rules | [Standard raster Tile Usage Policy](https://operations.osmfoundation.org/policies/tiles/) and [OSMF Terms of Use](https://osmfoundation.org/wiki/Terms_of_Use) |
+| Privacy reference | [OSMF Privacy Policy](https://osmfoundation.org/wiki/Privacy_Policy); the site's localized privacy page explains direct tile requests |
+| City-marker source | Recorded city-centre coordinates in `content/data/cities.json`, separate from the provider's basemap |
+| Implementation | `CityMapCanvas.tsx` and `CityMapWorkspace.tsx` in `src/components/features/` |
 
-The candidate approval number applies to the approved standard-map artwork. The website needs a responsive image plus city labels and markers. Resizing or adding those elements creates a modified public map and must not be released under the original approval number without confirmation and, where required, a new map review.
+OpenStreetMap's underlying data uses the Open Database License. The linked
+copyright page explains the licence and credit requirements. Attribution remains
+visible beside the selected-city panel and during loading or tile failure.
 
-## Required before release
+## Network and interaction behavior
 
-1. Produce the final web composition, including every marker, label, inset and attribution.
-2. Submit that final composition through the competent map-review process and obtain the approval number applicable to the published version, or use a licensed official web-map service under its approved terms.
-3. Record the final asset, approval number, official source URL, licence/usage terms and review date in the repository.
-4. Verify desktop and mobile rendering without cropping, stretching, obscuring an inset or separating the approval number from the map.
-5. Keep the current coordinate index as the fallback until all checks pass.
+The active viewport requests tiles with `keepBuffer: 0`, `updateWhenIdle: true`,
+`updateWhenZooming: false`, and no world wrapping. There is no prefetch, offline
+download, tile archive, or background geography crawl. Automated pan/zoom tests
+intercept the provider URL and return labelled synthetic fixtures.
 
-Governing content guidance: [Public Map Content Representation Specification](https://www.cgs.gov.cn/tzgg/tzgg/202302/t20230214_805031.html).
+The browser honors normal cache headers. There is no proxy, cache-busting query,
+or `no-cache` override. The site's `strict-origin-when-cross-origin` policy retains
+the origin Referer for tile images; the browser supplies its normal User-Agent.
+These choices implement the provider's [tile operating requirements](https://operations.osmfoundation.org/policies/tiles/).
+
+The service is best effort. Failed tiles show an unavailable message and Retry
+action; city markers, list and detail links remain usable. A completed Leaflet
+batch does not mean success if tiles failed. Precise visitor location is never
+requested. Direct tile requests expose ordinary connection information to the
+provider, as described in the site's privacy notice and the
+[provider's terms](https://osmfoundation.org/wiki/Terms_of_Use).
+
+## Coordinates and Google Maps links
+
+Markers use finite catalogue coordinates within the accepted city range.
+Missing coordinates remain visible in the list and never receive invented
+positions. City centres do not represent university campus locations.
+
+The catalogue currently contains 27 coordinate pairs among 62 cities. These are
+approximate city locations: the data model records no coordinate-specific source,
+coordinate system or precision, and this release did not independently geocode
+them. The UI describes catalogue locations without claiming newly reviewed
+coordinates. The other 35 cities remain searchable without pins. See the
+[coordinate provenance inventory](../quality/audit-2026-09-29-city-coordinate-provenance.json).
+
+The Google Maps action is an external `https://www.google.com/maps/search/` URL
+with `api=1` and a coordinate or city-name query, opened only when followed.
+It is not an embedded Google API, requires no API key, and reuses no Google
+imagery or geocoding. See the official
+[Maps URLs documentation](https://developers.google.com/maps/documentation/urls/get-started).
+
+## Historical standard-map candidate
+
+The earlier static candidate remains a historical research entry:
+
+- [Ministry of Natural Resources Standard Map Service](https://bzdt.tianditu.gov.cn/).
+- Description: 中国地图 1∶740万 对开（横版、界线版、无邻国、含南海诸岛附图）.
+- Previously recorded candidate approval number: `GS(2023)2767号`.
+- Previously recorded catalogue ID: `4o28b0625501ad13015501ad2bfc2187`.
+
+That artwork is not used. Its identifier is not applied to OpenStreetMap tiles,
+the interactive composition, or city markers. No approval number is invented or
+presented as covering the current site. A future official static asset or provider
+change needs its own accurate source and usage record; this historical entry is
+not a licence or approval for such reuse.
+
+## Bounded availability observation
+
+At **2026-09-29 06:30:03 UTC**, one identified, read-only `HEAD` request to
+`https://tile.openstreetmap.org/4/12/6.png` returned HTTP 200 and `image/png`, with
+provider cache directives `max-age=529095`, `stale-while-revalidate=604800`, and
+`stale-if-error=604800`. No tile bytes were downloaded or prefetched. This is one
+successful observation from the operator's connection, not continuous or worldwide
+availability. Mocked browser tests verify interaction, not provider geography or uptime.

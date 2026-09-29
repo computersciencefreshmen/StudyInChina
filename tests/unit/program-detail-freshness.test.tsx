@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import { renderToStaticMarkup } from 'react-dom/server'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { connection } from 'next/server'
 import ProgramDetailPage, { generateMetadata as programMetadata } from '@/app/[locale]/programs/[slug]/page'
@@ -38,6 +39,26 @@ beforeEach(() => {
 afterEach(() => { vi.restoreAllMocks() })
 
 describe('program detail evidence and freshness', () => {
+  it.each([
+    ['program', ProgramDetailPage],
+    ['university', UniversityDetailPage],
+  ] as const)('keeps source names inside JSON-LD when rendering the %s page as HTML', async (slug, renderPage) => {
+    const data = bundle(true)
+    const sourceName = '</ScRiPt><script id="injected-source-script">void 0</script><img id="injected-source-image" src=x>'
+    data.programs[0].name.en = sourceName
+    data.universities[0].name.en = sourceName
+    vi.mocked(getCatalogData).mockResolvedValue(data)
+
+    // Parse server HTML, where raw script text is handled differently from a React DOM update.
+    const markup = renderToStaticMarkup(await renderPage({ params: Promise.resolve({ locale: 'en', slug }) }))
+    const document = new DOMParser().parseFromString(markup, 'text/html')
+    const scripts = document.querySelectorAll('script')
+    expect(scripts).toHaveLength(1)
+    expect(scripts[0].getAttribute('type')).toBe('application/ld+json')
+    expect(document.querySelector('#injected-source-script, #injected-source-image')).toBeNull()
+    expect(JSON.parse(scripts[0].textContent ?? '').name).toBe(sourceName)
+  })
+
   it.each([
     ['program page', 'program', ProgramDetailPage],
     ['university page', 'university', UniversityDetailPage],

@@ -23,20 +23,21 @@ export type ReleaseAnnouncementContent = {
   copy: ReleaseAnnouncementCopy
 }
 
-export const LATEST_RELEASE_ANNOUNCEMENT_ID = '2026-08-26-trust-platform-release'
+export const LATEST_RELEASE_ANNOUNCEMENT_ID = '2026-09-29-map-and-evidence-release'
 export const RELEASE_ANNOUNCEMENT_STORAGE_KEY = 'studyinchina.release-announcement.dismissed'
 
 const copy = {
   en: {
     mark: 'NEW',
     eyebrow: 'Release note',
-    title: 'A broader catalogue, with clearer evidence',
-    summary: 'The latest atlas release expands official decision facts while making unknown, historical and conflicting values easier to distinguish.',
+    title: 'Current evidence, clearer application decisions',
+    summary: 'This release reviews the full catalogue for freshness and rechecks selected official admissions notices. Each record keeps its own verification date.',
     highlightsTitle: 'What changed',
     highlights: [
-      'Deeper official programme coverage now adds more duration, tuition, requirements and application-route evidence across leading and regional universities.',
-      'Programme facts now distinguish confirmed, reference, not announced, unavailable, conflicting and stale information instead of hiding every gap behind one label.',
-      'Shortlists and comparisons bring application status, fees, related scholarships, verification dates and official sources into one decision view.',
+      'Explore a draggable, zoomable city map with linked results, university search and direct Google Maps links.',
+      'Evidence past its review date is marked for rechecking; historical deadlines are never advanced to a new year automatically.',
+      'University, programme and scholarship pages show verification and review dates alongside links to the official evidence.',
+      'Comparisons refresh application status as the date changes and keep expired or conflicting fees separate from current confirmed facts.',
     ],
     universitiesLabel: 'universities',
     programsLabel: 'programme identities',
@@ -50,13 +51,14 @@ const copy = {
   zh: {
     mark: '新',
     eyebrow: '版本更新',
-    title: '选择更广，证据更清楚',
-    summary: '本次图谱更新继续扩充官方决策信息，并把未知、历史参考和来源冲突清楚地区分开。',
+    title: '核验更及时，申请判断更清楚',
+    summary: '本次更新完成全目录时效审查，并重新核对部分官方招生公告。每条记录保留独立的核验日期。',
     highlightsTitle: '本次变化',
     highlights: [
-      '面向重点高校与地方强校继续深化官方项目资料，补充更多学制、学费、申请条件和官方申请入口证据。',
-      '项目事实现在明确区分已确认、参考值、尚未公布、来源不可用、冲突和过期，不再让所有空白看起来都一样。',
-      '收藏与项目对比集中展示申请状态、费用、关联奖学金、核验日期和官方来源，减少来回查找成本。',
+      '全新可拖动缩放的城市地图，与城市列表、高校搜索和详情联动，并可一键跳转 Google Maps。',
+      '超过复核期限的证据明确标为待复核，历史截止日期不会自动改成新一年的日期。',
+      '高校、项目和奖学金详情直接展示核验日期、复核期限和官方证据入口。',
+      '项目对比随日期变化刷新申请状态，过期或有冲突的费用不会作为当前已确认事实展示。',
     ],
     universitiesLabel: '所高校',
     programsLabel: '个项目身份',
@@ -70,13 +72,14 @@ const copy = {
   ru: {
     mark: 'NEW',
     eyebrow: 'Обновление',
-    title: 'Больше вариантов, яснее доказательства',
-    summary: 'Новая версия атласа расширяет официальные данные для принятия решений и чётко отделяет неизвестные, исторические и противоречивые сведения.',
+    title: 'Актуальность данных и ясные сроки подачи',
+    summary: 'Проверена актуальность всего каталога и повторно изучены отдельные официальные объявления. У каждой записи остаётся собственная дата проверки.',
     highlightsTitle: 'Что изменилось',
     highlights: [
-      'Для ведущих и сильных региональных вузов добавлено больше официальных сведений о длительности, стоимости, требованиях и способах подачи.',
-      'Факты теперь разделены на подтверждённые, справочные, не объявленные, недоступные, противоречивые и устаревшие.',
-      'В избранном и сравнении вместе показаны статус подачи, сборы, связанные стипендии, дата проверки и официальные источники.',
+      'Интерактивная карта с масштабированием, связанным списком городов, поиском вузов и ссылками на Google Maps.',
+      'Просроченные сведения помечаются для повторной проверки; старые сроки не переносятся автоматически на следующий год.',
+      'Страницы вузов, программ и стипендий показывают даты проверки и пересмотра со ссылками на официальные источники.',
+      'Сравнение обновляет статус подачи при смене даты и отделяет устаревшие или противоречивые сборы от подтверждённых данных.',
     ],
     universitiesLabel: 'вузов',
     programsLabel: 'программ',
@@ -90,13 +93,14 @@ const copy = {
   de: {
     mark: 'NEU',
     eyebrow: 'Versionshinweis',
-    title: 'Mehr Auswahl, klarere Nachweise',
-    summary: 'Die neue Atlas-Version erweitert offizielle Entscheidungsdaten und trennt unbekannte, historische und widersprüchliche Angaben klar voneinander.',
+    title: 'Aktuelle Nachweise, klare Bewerbungsfristen',
+    summary: 'Der gesamte Katalog wurde auf Aktualität geprüft und ausgewählte offizielle Zulassungshinweise erneut gelesen. Jeder Eintrag behält sein eigenes Prüfdatum.',
     highlightsTitle: 'Was sich geändert hat',
     highlights: [
-      'Für führende und starke regionale Hochschulen stehen mehr offizielle Angaben zu Dauer, Gebühren, Voraussetzungen und Bewerbungswegen bereit.',
-      'Programmfakten unterscheiden nun bestätigt, Referenzwert, nicht angekündigt, Quelle nicht verfügbar, Konflikt und veraltet.',
-      'Merkliste und Vergleich bündeln Bewerbungsstatus, Gebühren, zugehörige Stipendien, Prüfdatum und offizielle Quellen.',
+      'Interaktive Stadtkarte mit Zoom, verknüpfter Ergebnisliste, Hochschulsuche und direkten Google-Maps-Links.',
+      'Überfällige Nachweise werden zur erneuten Prüfung markiert; alte Fristen werden nie automatisch ins nächste Jahr verschoben.',
+      'Hochschul-, Programm- und Stipendienseiten zeigen Prüfdatum, nächste Prüfung und Links zu offiziellen Nachweisen.',
+      'Vergleiche aktualisieren den Bewerbungsstatus bei Datumswechsel und trennen veraltete oder widersprüchliche Gebühren von bestätigten Angaben.',
     ],
     universitiesLabel: 'Hochschulen',
     programsLabel: 'Programme',
@@ -110,13 +114,14 @@ const copy = {
   fr: {
     mark: 'NOUV.',
     eyebrow: 'Note de version',
-    title: 'Plus de choix, des preuves plus claires',
-    summary: 'Cette version enrichit les données officielles utiles à la décision et distingue clairement les valeurs inconnues, historiques ou contradictoires.',
+    title: 'Des preuves à jour, des candidatures plus claires',
+    summary: 'La fraîcheur de tout le catalogue a été contrôlée et certaines annonces officielles ont été relues. Chaque fiche conserve sa propre date de vérification.',
     highlightsTitle: 'Ce qui change',
     highlights: [
-      'Davantage de preuves officielles sur la durée, les frais, les conditions et les voies de candidature couvrent les grandes universités comme les établissements régionaux solides.',
-      'Les faits distinguent désormais confirmé, référence, non annoncé, source indisponible, conflit et périmé.',
-      'Les favoris et la comparaison réunissent l’état des candidatures, les frais, les bourses liées, la date de vérification et les sources officielles.',
+      'Une carte interactive avec zoom, liste liée, recherche des universités et liens directs vers Google Maps.',
+      'Les preuves dont la révision est échue sont signalées ; les anciennes échéances ne sont jamais reportées automatiquement à une nouvelle année.',
+      'Les fiches des universités, programmes et bourses affichent les dates de vérification et de révision ainsi que les sources officielles.',
+      'Les comparaisons actualisent le statut des candidatures au changement de date et distinguent les frais périmés ou contradictoires des faits confirmés.',
     ],
     universitiesLabel: 'universités',
     programsLabel: 'programmes',
@@ -130,13 +135,14 @@ const copy = {
   es: {
     mark: 'NUEVO',
     eyebrow: 'Nota de versión',
-    title: 'Más opciones, evidencia más clara',
-    summary: 'La nueva versión amplía los datos oficiales para decidir y separa con claridad los valores desconocidos, históricos y contradictorios.',
+    title: 'Evidencia actual, solicitudes más claras',
+    summary: 'Se revisó la vigencia de todo el catálogo y se comprobaron de nuevo determinados avisos oficiales. Cada registro conserva su propia fecha de verificación.',
     highlightsTitle: 'Qué ha cambiado',
     highlights: [
-      'Hay más evidencia oficial sobre duración, matrícula, requisitos y vías de solicitud en universidades líderes y regionales destacadas.',
-      'Los datos ahora distinguen entre confirmado, referencia, no anunciado, fuente no disponible, conflicto y desactualizado.',
-      'Favoritos y comparación reúnen el estado de solicitud, las tasas, las becas relacionadas, la fecha de verificación y las fuentes oficiales.',
+      'Mapa interactivo con zoom, lista vinculada, búsqueda de universidades y enlaces directos a Google Maps.',
+      'La evidencia cuya revisión ha vencido queda marcada; los plazos históricos nunca se trasladan automáticamente a otro año.',
+      'Las páginas de universidades, programas y becas muestran las fechas de verificación y revisión junto a las fuentes oficiales.',
+      'Las comparaciones actualizan el estado de solicitud al cambiar la fecha y separan las tasas vencidas o contradictorias de los datos confirmados.',
     ],
     universitiesLabel: 'universidades',
     programsLabel: 'programas',
@@ -152,7 +158,7 @@ const copy = {
 export function getReleaseAnnouncement(locale: LaunchLocale): ReleaseAnnouncementContent {
   return {
     id: LATEST_RELEASE_ANNOUNCEMENT_ID,
-    publishedOn: '2026-08-26',
+    publishedOn: '2026-09-29',
     copy: copy[locale],
   }
 }

@@ -266,6 +266,7 @@ describe('Catalog D1 normalized v1 API', () => {
         UPDATE record_field_status
         SET value_json = '"reference"'
         WHERE release_id = ?
+          AND field_status = 'known'
           AND field_path IN ('tuitionStatus', 'tuition_status')
           AND record_id IN (
             SELECT program_cycle_id

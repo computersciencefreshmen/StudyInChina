@@ -73,6 +73,7 @@
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
+    "leaflet": "1.9.4",
     "next": "16.3.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -85,6 +86,7 @@
     "@testing-library/jest-dom": "^6.6.0",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.0",
+    "@types/leaflet": "1.9.21",
     "@types/node": "^24.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
@@ -100,6 +102,9 @@
     "wrangler": "4.131.2"
   },
   "overrides": {
+    "miniflare": {
+      "undici": "7.29.1"
+    },
     "nanoid": "3.3.18",
     "js-yaml": "4.3.2",
     "minimatch@3.1.5": {

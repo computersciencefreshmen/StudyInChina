@@ -64,6 +64,8 @@ describe('CatalogApiService', () => {
     expect(cycles?.data[0].fieldMeta.applicationFeeCny.status).toBe('officially_not_announced')
     const scholarships = service.listScholarships({ institution: 'example-university' })
     expect(scholarships.data[0].fieldMeta['coverage.accommodation'].status).toBe('officially_not_announced')
+    expect(scholarships.data[0].applicationUrl).toBe('https://example.edu/scholarship')
+    expect(scholarships.data[0].fieldMeta.applicationUrl.status).toBe('known')
   })
 
   it('keeps reference tuition out of current amount filters without hiding program identity', () => {
@@ -387,6 +389,8 @@ describe('CatalogApiService', () => {
     expect(cycle?.applicationState).toBe('not-announced')
     expect(scholarship.coverage.tuition).toBeNull()
     expect(scholarship.universityIds).toBeNull()
+    expect(scholarship.applicationUrl).toBeNull()
+    expect(scholarship.fieldMeta.applicationUrl.status).toBe('stale')
     expect(scholarshipCycle?.deadline).toBeNull()
     expect(scholarshipCycle?.academicYear).toBeNull()
 

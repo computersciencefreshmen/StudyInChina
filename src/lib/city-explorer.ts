@@ -1,6 +1,6 @@
 import type { Region } from '@/lib/data/types'
 
-export type CityExplorerView = 'constellation' | 'directory'
+export type CityExplorerView = 'map' | 'directory'
 export type CityExplorerSort = 'universities' | 'name'
 export type CityExplorerRegion = Region | 'all'
 
@@ -38,7 +38,7 @@ function bounded(value: string, maxLength = 120): string {
 }
 
 export const defaultCityExplorerState: CityExplorerState = {
-  view: 'constellation',
+  view: 'map',
   query: '',
   region: 'all',
   sort: 'universities',
@@ -51,10 +51,11 @@ export function parseCityExplorerSearchParams(
   const requestedView = readParam(params, 'view')
   const requestedRegion = readParam(params, 'region')
   const requestedSort = readParam(params, 'sort')
-  const viewExplicit = requestedView === 'constellation' || requestedView === 'directory'
+  // Existing shared constellation URLs now open the interactive map.
+  const viewExplicit = requestedView === 'map' || requestedView === 'constellation' || requestedView === 'directory'
 
   return {
-    view: viewExplicit ? requestedView : defaultCityExplorerState.view,
+    view: requestedView === 'directory' ? 'directory' : defaultCityExplorerState.view,
     query: bounded(readParam(params, 'q')),
     region: regions.has(requestedRegion as Region)
       ? requestedRegion as Region

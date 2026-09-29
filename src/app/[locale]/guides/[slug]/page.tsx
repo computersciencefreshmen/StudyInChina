@@ -7,6 +7,7 @@ import { getMessages } from '@/i18n/messages'
 import { formatDate, localize } from '@/lib/data/format'
 import { getGuideEnhancement } from '@/lib/guide-experience'
 import { getGuide, guides } from '@/lib/guides'
+import { serializeJsonLd } from '@/lib/seo/json-ld'
 import { pageMetadata, requireLocale, siteUrl } from '@/lib/site'
 
 export function generateStaticParams() {
@@ -19,10 +20,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const guide = getGuide(slug)
   if (!guide) return {}
   return pageMetadata(locale, localize(guide.title, locale), localize(guide.summary, locale), `guides/${slug}`)
-}
-
-function jsonLd(value: unknown): string {
-  return JSON.stringify(value).replace(/</g, '\\u003c')
 }
 
 export default async function GuideDetail({ params }: { params: Promise<{ locale: string; slug: string }> }) {
@@ -69,8 +66,8 @@ export default async function GuideDetail({ params }: { params: Promise<{ locale
   } : null
 
   return <>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(articleStructuredData) }} />
-    {faqStructuredData && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(faqStructuredData) }} />}
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleStructuredData) }} />
+    {faqStructuredData && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqStructuredData) }} />}
     <PageHero
       variant="compact"
       eyebrow={`${messages.common.lastVerified}: ${formatDate(updatedAt, locale, updatedAt)}`}

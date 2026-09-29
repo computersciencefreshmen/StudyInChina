@@ -18,6 +18,7 @@ import { degreeLabels, disciplineLabels, languageLabel } from '@/lib/data/labels
 import { getCatalogData, getData } from '@/lib/data/load'
 import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
 import { isIndexableProgram } from '@/lib/seo/indexability'
+import { serializeJsonLd } from '@/lib/seo/json-ld'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
 export const dynamicParams = true
@@ -293,7 +294,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   }
 
   return <>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }} />
     <PageHero
       variant="compact"
       eyebrow={`${degreeLabels(locale)[program.degreeLevel]} · ${disciplineLabels(locale)[program.discipline]}`}

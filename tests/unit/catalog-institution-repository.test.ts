@@ -54,6 +54,18 @@ function compareItems(
 describe('CatalogRepository institution lists', () => {
   it('filters JSON institutions with the shared field taxonomy and exposes exact facets and counts', async () => {
     const bundle = freshBundle()
+    // Exercise filtering independently of whether today's production catalogue
+    // happens to contain fresh records in both fields.
+    for (const field of ['engineering-technology', 'chinese-language']) {
+      const program = bundle.programs.find((item) => (
+        (item.status === 'verified' || item.status === 'stale')
+        && classifyProgramField(item) === field
+        && item.sourceIds.some((id) => bundle.sources.some((source) => (
+          source.id === id && source.official && source.kind === 'program' && source.url === item.programUrl
+        )))
+      ))!
+      Object.assign(program, { status: 'verified', verifiedAt: TODAY, reviewAfter: '2026-08-19' })
+    }
     const repository = createJsonCatalogRepository(() => bundle)
     const publicBundle = selectCatalogApiData(bundle, TODAY)
     const targetProgram = publicBundle.programs.find(
