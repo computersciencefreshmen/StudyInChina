@@ -173,6 +173,37 @@ describe('Catalog D1 normalized v1 API', () => {
 
   afterAll(() => database.close())
 
+  // Small behavior fixtures keep default-timeout tests independent of catalogue
+  // size. Each owns its connection so a timed-out body cannot leak a transaction
+  // into a later test. The full catalogue fixture above still covers integration.
+  function createSyntheticCatalog(programCount = 1) {
+    const bundle = catalogTestBundle(true)
+    const firstProgram = bundle.programs[0]!
+    const firstCycle = bundle.admissionCycles[0]!
+    for (let index = 1; index < programCount; index += 1) {
+      const programId = `${firstProgram.id}-${index}`
+      bundle.programs.push({
+        ...firstProgram, id: programId, slug: `${firstProgram.slug}-${index}`,
+        name: { en: `Synthetic Test Program ${index}` },
+      })
+      bundle.admissionCycles.push({ ...firstCycle, id: `${firstCycle.id}-${index}`, programId })
+    }
+    const database = new DatabaseSync(':memory:')
+    try {
+      database.exec('PRAGMA foreign_keys = ON')
+      applyCatalogMigrations(database)
+      database.exec(buildLegacyRelease(bundle).sql)
+      const isolatedEnvironment: CatalogApiEnv = {
+        ...environment,
+        CATALOG_DB: { prepare: (sql) => new SqliteD1Statement(database, [], sql) },
+      }
+      return { database, environment: isolatedEnvironment }
+    } catch (error) {
+      database.close()
+      throw error
+    }
+  }
+
   it('queries the active release through current_* views with stable cursor pagination', async () => {
     const representableProgramTypes: ProgramType[] = [
       'degree', 'language', 'foundation', 'exchange', 'visiting', 'short_term', 'other',
@@ -1118,7 +1149,7 @@ describe('Catalog D1 normalized v1 API', () => {
   }, 30_000)
 
   it('lists and resolves an unannounced zero-cycle scholarship without fabricated values', async () => {
-    database.exec('BEGIN')
+    const { database, environment } = createSyntheticCatalog()
     try {
       const scholarship = database.prepare(`
         SELECT visible.scholarship_id, record.slug
@@ -1171,12 +1202,12 @@ describe('Catalog D1 normalized v1 API', () => {
       expect(detailResponse.status).toBe(200)
       expect(detail.data).toEqual(listed)
     } finally {
-      database.exec('ROLLBACK')
+      database.close()
     }
   })
 
   it('lists identity-only programs as not announced without exposing a cycle or route', async () => {
-    database.exec('BEGIN')
+    const { database, environment } = createSyntheticCatalog()
     try {
       const program = database.prepare(`
         SELECT visible.program_id, visible.institution_id, record.slug
@@ -1255,7 +1286,7 @@ describe('Catalog D1 normalized v1 API', () => {
       expect(cyclesResponse.status).toBe(200)
       expect(cycles.data).toEqual([])
     } finally {
-      database.exec('ROLLBACK')
+      database.close()
     }
   }, 15_000)
 
@@ -1319,22 +1350,31 @@ describe('Catalog D1 normalized v1 API', () => {
   }, 30_000)
 
   it('rejects oversized limits and cursors bound to another resource', async () => {
-    const oversized = await worker.fetch(
-      new Request('https://catalog.test/api/v1/programs?limit=101'),
-      environment,
-    )
-    expect(oversized.status).toBe(400)
+    // A real next cursor requires a second program; a one-row fixture would
+    // only exercise malformed-cursor rejection rather than resource binding.
+    const { database, environment } = createSyntheticCatalog(2)
+    try {
+      const oversized = await worker.fetch(
+        new Request('https://catalog.test/api/v1/programs?limit=101'),
+        environment,
+      )
+      expect(oversized.status).toBe(400)
 
-    const programsResponse = await worker.fetch(
-      new Request('https://catalog.test/api/v1/programs?limit=1'),
-      environment,
-    )
-    const programs = await programsResponse.json() as ApiEnvelopeDto<ProgramDto[]>
-    const wrongResource = await worker.fetch(
-      new Request(`https://catalog.test/api/v1/institutions?cursor=${encodeURIComponent(programs.meta.nextCursor!)}`),
-      environment,
-    )
-    expect(wrongResource.status).toBe(400)
+      const programsResponse = await worker.fetch(
+        new Request('https://catalog.test/api/v1/programs?limit=1'),
+        environment,
+      )
+      const programs = await programsResponse.json() as ApiEnvelopeDto<ProgramDto[]>
+      expect(programsResponse.status).toBe(200)
+      expect(programs.meta.nextCursor).toEqual(expect.any(String))
+      const wrongResource = await worker.fetch(
+        new Request(`https://catalog.test/api/v1/institutions?cursor=${encodeURIComponent(programs.meta.nextCursor!)}`),
+        environment,
+      )
+      expect(wrongResource.status).toBe(400)
+    } finally {
+      database.close()
+    }
   })
 
   it('keeps opportunities through day 30 and hides them everywhere on day 31', async () => {
