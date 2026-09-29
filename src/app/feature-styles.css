@@ -65,6 +65,12 @@
 .city-marker:hover::before, .city-marker:focus-visible::before { background: var(--jade); }
 .map-disclaimer { margin: .7rem 0 0; color: var(--muted); font-size: .78rem; }
 .map-source-link { margin: .65rem 0 0; font-size: .86rem; }
+.city-map.city-map--geographic { min-height: 0; aspect-ratio: 1848 / 920; background: #c8e9df; }
+.city-map--geographic::before { content: none; }
+.city-map__background { position: absolute; inset: 0; width: 100%; height: 100%; }
+.city-map--geographic .city-map__compass { z-index: 2; padding: .4rem; border-radius: .35rem; background: #fffdf7e8; color: var(--ink); }
+.city-map__source { margin: .3rem 0 0; color: var(--muted); font-size: .68rem; }
+.city-map__source a { color: var(--jade-dark); text-decoration: underline; }
 .city-marker { min-width: 3rem; min-height: 2.75rem; align-content: center; gap: .18rem; padding: .12rem; border: 0; background: transparent; box-shadow: none; }
 .city-marker::before { content: none; }
 .city-marker__bubble { display: grid; min-width: 1.75rem; height: 1.75rem; place-items: center; padding-inline: .28rem; border: 3px solid var(--paper-light); border-radius: 999px; background: var(--vermilion); box-shadow: 0 4px 12px rgba(160,48,33,.28); color: white; font-size: .68rem; font-variant-numeric: tabular-nums; }
@@ -73,6 +79,9 @@
 .city-marker:hover, .city-marker:focus-visible { border-color: transparent; background: transparent; box-shadow: none; }
 .city-marker:hover .city-marker__bubble, .city-marker:focus-visible .city-marker__bubble { background: var(--jade); box-shadow: 0 5px 14px rgba(23,106,91,.3); }
 .city-marker:focus-visible { outline: 3px solid var(--jade); outline-offset: 3px; }
+.city-map--geographic .city-marker__label { display: none; }
+.city-map--geographic .city-marker:hover .city-marker__label, .city-map--geographic .city-marker:focus-visible .city-marker__label { display: block; }
+@media (max-width: 560px) { .city-map--geographic .city-marker__bubble { min-width: 1.2rem; height: 1.2rem; padding-inline: .15rem; border-width: 2px; } .city-map--geographic .city-map__compass { inset: .5rem auto auto .5rem; } .city-map--geographic .city-map__location-count { inset: .5rem .5rem auto auto; padding: .25rem .45rem; font-size: .65rem; } }
 .city-explorer { display: grid; gap: 1rem; }
 .city-explorer__toolbar { display: grid; grid-template-columns: minmax(220px, 1.5fr) minmax(170px, .7fr) auto; gap: .85rem; align-items: end; padding: 1rem; border: 1px solid var(--line); border-radius: 1rem; background: color-mix(in srgb, var(--paper-light) 88%, transparent); box-shadow: var(--shadow-soft); }
 .city-explorer__search { min-width: 0; }

@@ -65,7 +65,9 @@ export function ReleaseAnnouncement({
     } catch {
       // A storage failure must not make the dialog or the page unusable.
     }
-    if (dismissed !== announcement.id) {
+    // Keep the existing key so every previously dismissed release counts as
+    // already seen, including after a release update or a language change.
+    if (dismissed === null) {
       previousFocusRef.current = document.activeElement instanceof HTMLElement
         ? document.activeElement
         : null
@@ -78,6 +80,9 @@ export function ReleaseAnnouncement({
 
   useEffect(() => {
     if (!open) return
+    // Record the first presentation, not just a close action: refreshing or
+    // navigating away while the dialog is open must not show it again.
+    saveDismissedAnnouncement(announcement.id)
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     closeRef.current?.focus()

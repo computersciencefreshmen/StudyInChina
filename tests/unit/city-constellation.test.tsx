@@ -28,6 +28,13 @@ describe('CityConstellation', () => {
     const link = screen.getByRole('link', { name: 'Guangzhou: 3 Universities' })
     expect(link).toHaveAttribute('href', '/en/cities/guangzhou')
     expect(link).toHaveTextContent('3 Universities')
+    const background = document.querySelector<HTMLImageElement>('.city-map__background')!
+    expect(background.src).toContain('/maps/china-google-maps-2026-09-29.jpg')
+    expect(background.width / background.height).toBeCloseTo(1848 / 920)
+    expect(screen.getByRole('link', { name: 'Google Maps' })).toHaveAttribute('href', 'https://www.google.com/maps/@36,104,5z?hl=en')
+    // Guangzhou lies southeast of the captured centre on the real basemap.
+    expect(parseFloat(link.style.left)).toBeGreaterThan(48)
+    expect(parseFloat(link.style.top)).toBeGreaterThan(70)
   })
 
   it('shows an explicit fallback instead of a blank plot without coordinates', () => {

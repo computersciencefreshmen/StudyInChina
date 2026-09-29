@@ -5,6 +5,20 @@ OpenStreetMap Standard raster tiles, replacing the coordinate-only city plot.
 This records the actual provider and operation; it does not claim a government
 map-review certificate or provider endorsement.
 
+## Homepage background
+
+The homepage `CityConstellation` also displays a locally served screenshot of
+[Google Maps](https://www.google.com/maps/@36,104,5z?hl=en), captured on
+2026-09-29, at `/maps/china-google-maps-2026-09-29.jpg`. The original Google Maps
+logo and map-data credit remain in the image, with an additional readable source
+link beneath it. The screenshot is 1848 × 920 pixels, from a 1920 × 1080 viewport
+with the top 160 pixels and left 72 pixels of interface excluded. Its centre is
+36°N, 104°E, zoom 5. Homepage pins use this camera's Web Mercator projection and
+the same aspect ratio on every screen, so resizing does not move a pin relative
+to the geographic background. The static screenshot is an orientation view;
+the city-directory map retains the interactive OpenStreetMap service below.
+Loading the homepage background makes no visitor request to Google Maps.
+
 ## Current service
 
 | Item | Recorded implementation |
@@ -56,8 +70,9 @@ coordinates. The other 35 cities remain searchable without pins. See the
 
 The Google Maps action is an external `https://www.google.com/maps/search/` URL
 with `api=1` and a coordinate or city-name query, opened only when followed.
-It is not an embedded Google API, requires no API key, and reuses no Google
-imagery or geocoding. See the official
+The city-directory map is not an embedded Google API and requires no API key;
+it does not use Google geocoding. The separate homepage screenshot is described
+above. See the official
 [Maps URLs documentation](https://developers.google.com/maps/documentation/urls/get-started).
 
 ## Historical standard-map candidate
