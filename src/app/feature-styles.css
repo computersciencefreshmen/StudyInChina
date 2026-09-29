@@ -65,7 +65,7 @@
 .city-marker:hover::before, .city-marker:focus-visible::before { background: var(--jade); }
 .map-disclaimer { margin: .7rem 0 0; color: var(--muted); font-size: .78rem; }
 .map-source-link { margin: .65rem 0 0; font-size: .86rem; }
-.city-map.city-map--geographic { min-height: 0; aspect-ratio: 1848 / 920; background: #c8e9df; }
+.city-map.city-map--geographic { box-sizing: content-box; width: calc(100% - 2px); min-height: 0; aspect-ratio: 1848 / 920; background: #c8e9df; }
 .city-map--geographic::before { content: none; }
 .city-map__background { position: absolute; inset: 0; width: 100%; height: 100%; }
 .city-map--geographic .city-map__compass { z-index: 2; padding: .4rem; border-radius: .35rem; background: #fffdf7e8; color: var(--ink); }
