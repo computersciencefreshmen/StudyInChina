@@ -8,6 +8,8 @@ html[data-theme] body { background-image:none; }
 html[data-theme] body::before { display:none; }
 html[data-theme=night] .atlas-button--primary { color:#15251c; }
 html[data-theme=night] .atlas-site-header { background:rgb(32 41 41 / .96); }
+html[data-theme=night] .atlas-hero { background:linear-gradient(104deg,var(--atlas-paper-bright) 0 53%,var(--atlas-paper-deep) 100%); }
+html[data-theme=night] :where(.atlas-hero__aside,.atlas-language-switcher summary) { background:var(--atlas-paper-bright); }
 html[data-theme=night] :where(.atlas-site-header__seal,.atlas-footer__seal) { color:#15251c; }
 html[data-theme] .atlas-site-header__actions { display:flex; align-items:center; gap:.65rem; }
 html[data-theme] .atlas-site-header__actions [role=combobox] { min-height:2.3rem; padding:.45rem .65rem; font-size:.75rem; }

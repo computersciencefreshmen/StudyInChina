@@ -22,6 +22,7 @@ test('the user can apply a studio theme, change it in the header, and retain it 
   expect(await page.evaluate(() => localStorage.getItem('studycn-theme'))).toBe('night')
   await page.goto('/en/universities', { waitUntil: 'domcontentloaded' })
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'night')
+  await expect(page.locator('.atlas-hero')).toHaveCSS('background-image', /rgb\(32, 41, 41\)/)
   await page.reload({ waitUntil: 'domcontentloaded' })
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'night')
   await openMobileMenu(page, testInfo.project.name)
