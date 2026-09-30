@@ -30,6 +30,15 @@ Sources must belong to the ranking publisher or that university's
 official domain, including sibling departments inside its registered `.edu.cn`
 domain. Unrelated university domains are rejected.
 
+Ranking-only scholarship queries discover award identities through recorded
+university or program affiliations even when the scholarship profile is stale.
+This is historical affiliation discovery, not confirmation of current award
+eligibility. The API still withholds expired funding, deadlines, application
+URLs and eligibility scope IDs, marking their field metadata as stale. Explicit
+API `institution` and `program` eligibility filters retain their current-fact
+requirement, so combining them with rankings can return fewer results than
+ranking-only identity discovery.
+
 The sample independently rechecked on 2026-09-30 covers six universities for
 QS 2027, THE 2027 and ARWU 2026, and two for U.S. News 2026–2027. Its scope is
 explicit: remaining universities have unverified ranking metadata. The six are
