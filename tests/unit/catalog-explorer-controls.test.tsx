@@ -6,6 +6,9 @@ import {
 } from '@/components/features/CatalogFilterSummary'
 import { ProgramExplorerV2 } from '@/components/features/ProgramExplorerV2'
 import { ScholarshipExplorerV2 } from '@/components/features/ScholarshipExplorerV2'
+import { UniversityExplorerV2 } from '@/components/features/UniversityExplorerV2'
+import { rankingFilterKeys, rankingFilterLabel } from '@/lib/data/rankings'
+import { parseUniversityCatalogFilters } from '@/lib/university-catalog'
 import type { LaunchLocale } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 import {
@@ -47,6 +50,24 @@ function scholarshipResult(): ScholarshipCatalogResult {
 }
 
 describe('catalogue explorer controls', () => {
+  it.each(locales)('shows all four ranking controls across all three catalogues in %s', (locale) => {
+    const messages = getMessages(locale)
+    const params = { qsRankMax: '100', theRankMax: '200', usNewsRankMax: 'ranked', arwuRankMax: 'unverified' }
+    render(<>
+      <UniversityExplorerV2 result={{ items: [], filters: parseUniversityCatalogFilters(params), total: 0, totalExact: true, page: 1, pageCount: 1, pageSize: 24, cityOptions: [] }} locale={locale} messages={messages} />
+      <ProgramExplorerV2 result={{ ...programResult(), filters: parseProgramCatalogFilters(params) }} locale={locale} messages={messages} today="2026-09-29" />
+      <ScholarshipExplorerV2 result={{ ...scholarshipResult(), filters: parseScholarshipCatalogFilters(params) }} locale={locale} messages={messages} today="2026-09-29" />
+    </>)
+    for (const key of rankingFilterKeys) {
+      const fields = screen.getAllByRole('combobox', { name: rankingFilterLabel(key, locale) })
+      expect(fields).toHaveLength(3)
+      for (const field of fields) {
+        expect(field).toHaveAttribute('name', key)
+        expect(field).toHaveValue(params[key])
+      }
+    }
+  })
+
   it('clears only the status shortcut and resets pagination while preserving other filters', () => {
     const result = programResult()
     result.filters = parseProgramCatalogFilters({ q: 'medicine', institution: 'tsinghua', applicationState: 'closed', page: '2' })
@@ -58,6 +79,33 @@ describe('catalogue explorer controls', () => {
     expect(url.searchParams.has('applicationState')).toBe(false)
     expect(url.searchParams.has('page')).toBe(false)
     expect(url.searchParams.has('cursor')).toBe(false)
+  })
+
+  it('removes one ranking without losing the others and carries them into pagination', () => {
+    const messages = getMessages('en')
+    const params = { q: 'medicine', qsRankMax: '100', theRankMax: '200', usNewsRankMax: '500', arwuRankMax: '1000', page: '2', cursor: 'old-cursor', cursorHistory: '~' }
+    render(<>
+      <UniversityExplorerV2 result={{ items: [], filters: { ...parseUniversityCatalogFilters(params), nextCursor: 'next-cursor' }, total: 72, totalExact: true, page: 2, pageCount: 3, pageSize: 24, cityOptions: [] }} locale="en" messages={messages} />
+      <ProgramExplorerV2 result={{ ...programResult(), filters: { ...parseProgramCatalogFilters(params), nextCursor: 'next-cursor' }, page: 2, pageCount: 3 }} locale="en" messages={messages} today="2026-09-29" />
+      <ScholarshipExplorerV2 result={{ ...scholarshipResult(), filters: { ...parseScholarshipCatalogFilters(params), nextCursor: 'next-cursor' }, page: 2, pageCount: 3 }} locale="en" messages={messages} today="2026-09-29" />
+    </>)
+    const chips = screen.getAllByRole('link', { name: 'Remove filter: QS world ranking, Top 100' })
+    expect(chips).toHaveLength(3)
+    for (const chip of chips) {
+      const url = new URL(chip.getAttribute('href')!, 'https://example.test')
+      expect(url.searchParams.get('q')).toBe('medicine')
+      expect(url.searchParams.has('qsRankMax')).toBe(false)
+      for (const key of rankingFilterKeys.filter((key) => key !== 'qsRankMax')) expect(url.searchParams.get(key)).toBe(params[key])
+      for (const key of ['page', 'cursor', 'cursorHistory']) expect(url.searchParams.has(key)).toBe(false)
+    }
+    const nextLinks = screen.getAllByRole('link', { name: 'Next' })
+    expect(nextLinks).toHaveLength(6)
+    for (const link of nextLinks) {
+      const url = new URL(link.getAttribute('href')!, 'https://example.test')
+      for (const key of rankingFilterKeys) expect(url.searchParams.get(key)).toBe(params[key])
+      expect(url.searchParams.get('cursor')).toBe('next-cursor')
+      expect(url.searchParams.get('page')).toBe('3')
+    }
   })
 
   it.each(locales)('localizes progressive disclosure controls in %s', (locale) => {

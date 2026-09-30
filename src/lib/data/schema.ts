@@ -5,7 +5,9 @@ const date = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine((value) => {
   const parsed = new Date(`${value}T00:00:00Z`)
   return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value
 }, 'Invalid calendar date')
-const httpsUrl = z.url().refine((value) => new URL(value).protocol === 'https:', 'URL must use HTTPS')
+const httpsUrl = z.url().refine((value) => {
+  try { return new URL(value).protocol === 'https:' } catch { return false }
+}, 'URL must use HTTPS')
 const localizedText = z.object({
   en: z.string().min(1).optional(), zh: z.string().min(1).optional(), ru: z.string().min(1).optional(),
   de: z.string().min(1).optional(), es: z.string().min(1).optional(), fr: z.string().min(1).optional(), ar: z.string().min(1).optional(), pt: z.string().min(1).optional(),
@@ -31,7 +33,39 @@ const programDetailsSchema = z.object({
 
 export const sourceSchema = z.object({ id: z.string().min(1), url: httpsUrl, title: z.string().min(1), publisher: z.string().min(1), kind: z.enum(['university', 'program', 'admissions', 'scholarship', 'government', 'city', 'other']), language: z.enum(['zh', 'en', 'ru', 'other']), official: z.boolean(), accessedAt: date })
 export const citySchema = audit.extend({ id: z.string().min(1), slug: z.string().regex(/^[a-z0-9-]+$/), name: localizedText, province: localizedText.nullable(), region: region.nullable(), coordinates: z.object({ lat: z.number().min(-90).max(90), lng: z.number().min(-180).max(180) }).nullable(), overview: localizedText.nullable(), climate: localizedText.nullable(), foodHighlights: z.array(localizedText), sights: z.array(localizedText) })
-export const universitySchema = audit.extend({ id: z.string().min(1), slug: z.string().regex(/^[a-z0-9-]+$/), name: localizedText, cityId: z.string().min(1), region: region.nullable(), officialUrl: httpsUrl, admissionsUrl: httpsUrl.nullable(), summary: localizedText.nullable(), featured: z.boolean() })
+export const universityRankingSchema = z.object({
+  system: z.enum(['qs', 'the', 'usnews', 'arwu']),
+  year: z.number().int().min(2000).max(2100),
+  editionLabel: z.string().min(1).max(30).optional(),
+  rankMin: z.number().int().positive(),
+  rankMax: z.number().int().positive(),
+  rankLabel: z.string().min(1).max(30),
+  sourceUrl: httpsUrl,
+  checkedAt: date,
+  reviewAfter: date.optional(),
+}).superRefine((value, context) => {
+  if (value.rankMax < value.rankMin) context.addIssue({ code: 'custom', message: 'Ranking upper bound precedes lower bound' })
+  if (value.reviewAfter && value.reviewAfter < value.checkedAt) context.addIssue({ code: 'custom', message: 'Ranking review date precedes checked date' })
+})
+function rankingSourceHost(value: string): string | null {
+  try { return new URL(value).hostname.toLowerCase().replace(/^www\./u, '') } catch { return null }
+}
+export const universitySchema = audit.extend({ id: z.string().min(1), slug: z.string().regex(/^[a-z0-9-]+$/), name: localizedText, cityId: z.string().min(1), region: region.nullable(), officialUrl: httpsUrl, admissionsUrl: httpsUrl.nullable(), summary: localizedText.nullable(), featured: z.boolean(), rankings: z.array(universityRankingSchema).optional() }).superRefine((university, context) => {
+  const officialHost = rankingSourceHost(university.officialUrl)
+  if (!officialHost) return
+  // English and department sites can be sibling hosts of the same university.
+  const universityHost = officialHost.endsWith('.edu.cn') ? officialHost.split('.').slice(-3).join('.') : officialHost
+  const seen = new Set<string>()
+  for (const [index, ranking] of (university.rankings ?? []).entries()) {
+    const host = rankingSourceHost(ranking.sourceUrl)
+    if (!host) continue
+    const publisher = { qs: 'topuniversities.com', the: 'timeshighereducation.com', usnews: 'usnews.com', arwu: 'shanghairanking.com' }[ranking.system]
+    if (host !== publisher && !host.endsWith(`.${publisher}`) && host !== universityHost && !host.endsWith(`.${universityHost}`)) context.addIssue({ code: 'custom', path: ['rankings', index, 'sourceUrl'], message: 'Ranking requires its publisher or this university official source' })
+    const key = `${ranking.system}:${ranking.year}`
+    if (seen.has(key)) context.addIssue({ code: 'custom', path: ['rankings', index], message: 'Duplicate ranking system and edition' })
+    seen.add(key)
+  }
+})
 export const programSchema = audit.extend({ id: z.string().min(1), slug: z.string().regex(/^[a-z0-9-]+$/), universityId: z.string().min(1), name: localizedText, degreeLevel: z.enum(['bachelor', 'master', 'doctorate', 'language', 'foundation', 'other']), discipline: z.enum(['engineering', 'business', 'medicine', 'chinese-education', 'humanities', 'law-ir', 'science', 'art-design', 'other']), teachingLanguages: z.array(z.string().min(1)), durationMonths: z.number().int().positive().max(120).nullable(), durationMonthsMax: z.number().int().positive().max(120).nullable().optional(), programUrl: httpsUrl, applyUrl: httpsUrl.nullable(), languageRequirements: z.array(z.object({ test: z.enum(['HSK', 'IELTS', 'TOEFL', 'other']), minimum: z.string().nullable() })), verificationScope: z.enum(['identity', 'facts', 'complete']).optional(), details: programDetailsSchema.optional() }).superRefine((value, context) => {
   if (value.durationMonthsMax !== null && value.durationMonthsMax !== undefined && (value.durationMonths === null || value.durationMonthsMax < value.durationMonths)) context.addIssue({ code: 'custom', message: 'Maximum duration must be at least the minimum duration' })
   if (value.status !== 'verified') return

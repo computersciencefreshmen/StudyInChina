@@ -209,6 +209,12 @@ async function publicResponse(request: Request, payload: unknown) {
 }
 
 async function publicCatalogResponse(request: Request, environment: CatalogApiEnv, url: URL) {
+  for (const key of ['qsRankMax', 'theRankMax', 'usNewsRankMax', 'arwuRankMax']) {
+    if (url.searchParams.get(key)) return json({ error: {
+      code: 'ranking_filters_unavailable',
+      message: 'Ranking filters are not available in this D1 catalog release.',
+    } }, 501)
+  }
   const release = await getActiveRelease(environment)
   if (!release) return json({ error: { code: 'release_unavailable' } }, 503)
   const today = chinaCalendarDate()

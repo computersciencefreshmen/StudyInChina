@@ -7,6 +7,7 @@ import {
   programFieldTaxonomy,
 } from '@/lib/data/fields'
 import { localize } from '@/lib/data/format'
+import { rankingFilterKeys, rankingFilterLabel, rankingFilterOptions, type RankingFilterKey } from '@/lib/data/rankings'
 import { regionLabels } from '@/lib/data/labels'
 import {
   universityCatalogHref,
@@ -18,6 +19,7 @@ import {
   type CatalogFilterChip,
 } from './CatalogFilterSummary'
 import { CatalogPagination } from './CatalogPagination'
+import { RankingFilterFields, RankingNotice, UniversityRankingLinks } from './RankingFilterFields'
 import styles from './ProgramExplorerV2.module.css'
 
 type ExplorerLabels = {
@@ -42,7 +44,7 @@ const labels: Record<LaunchLocale, ExplorerLabels> = {
 }
 
 type SelectOption = { value: string; label: string }
-type UniversityFilterKey = 'query' | 'city' | 'region' | 'discipline' | 'sort'
+type UniversityFilterKey = 'query' | 'city' | 'region' | 'discipline' | 'sort' | RankingFilterKey
 
 function selectedLabel(options: SelectOption[], value: string): string {
   return options.find((option) => option.value === value)?.label ?? value
@@ -93,6 +95,7 @@ export function UniversityExplorerV2({
   addFilter('city', messages.universities.cityFilter, selectedLabel(cityOptions, filters.city))
   addFilter('region', messages.universities.regionFilter, selectedLabel(regionOptions, filters.region))
   addFilter('discipline', messages.universities.fieldFilter, selectedLabel(disciplineOptions, filters.discipline))
+  for (const key of rankingFilterKeys) addFilter(key, rankingFilterLabel(key, locale), selectedLabel(rankingFilterOptions(locale), filters[key] ?? ''))
   if (filters.sort !== 'default') addFilter('sort', text.sortBy, selectedLabel(sortOptions, filters.sort))
   const advancedFilterCount = [
     filters.region,
@@ -126,7 +129,9 @@ export function UniversityExplorerV2({
           {programFieldTaxonomy(locale).map(({ key, label }) => <option value={key} key={key}>{label}</option>)}
         </select>
       </div>
+      <RankingFilterFields filters={filters} locale={locale} prefix="university" allLabel={messages.common.all} />
       </div>
+      <RankingNotice locale={locale} />
       <details className={styles.advanced} open={advancedFilterCount > 0}>
         <summary>{controls.advancedFilters}{advancedFilterCount ? ` (${advancedFilterCount})` : ''}</summary>
         <div className={styles.advancedGrid}>
@@ -202,6 +207,7 @@ export function UniversityExplorerV2({
               {city ? <p className="record-card__place">⌖ {localize(city.name, locale)}</p> : null}
             </div>
             <p className="record-card__summary">{localize(institution.summary, locale)}</p>
+            <UniversityRankingLinks university={institution} locale={locale} />
             <div className="tag-list">
               {disciplines.slice(0, 3).map((discipline) => (
                 <Badge key={discipline} tone="neutral">{disciplineLabel(discipline, locale)}</Badge>

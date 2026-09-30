@@ -2,6 +2,7 @@ import { Button, LinkButton } from '@/components/ui'
 import type { LaunchLocale } from '@/i18n/config'
 import type { Messages } from '@/i18n/messages'
 import { localize } from '@/lib/data/format'
+import { rankingFilterKeys, rankingFilterLabel, rankingFilterOptions, type RankingFilterKey } from '@/lib/data/rankings'
 import { degreeLabels } from '@/lib/data/labels'
 import {
   scholarshipCatalogHref,
@@ -14,6 +15,7 @@ import {
 } from './CatalogFilterSummary'
 import { CatalogPagination } from './CatalogPagination'
 import { ScholarshipCard } from './ScholarshipCard'
+import { RankingFilterFields, RankingNotice } from './RankingFilterFields'
 import styles from './ScholarshipExplorerV2.module.css'
 
 type ExplorerLabels = {
@@ -55,7 +57,7 @@ const labels: Record<LaunchLocale, ExplorerLabels> = {
 }
 
 type SelectOption = { value: string; label: string }
-type ScholarshipFilterKey = 'query' | 'institution' | 'degree' | 'funding' | 'deadline' | 'sort'
+type ScholarshipFilterKey = 'query' | 'institution' | 'degree' | 'funding' | 'deadline' | 'sort' | RankingFilterKey
 
 function selectedLabel(options: SelectOption[], value: string): string {
   return options.find((option) => option.value === value)?.label ?? value
@@ -117,6 +119,7 @@ export function ScholarshipExplorerV2({
   addFilter('degree', text.degree, selectedLabel(degreeOptions, filters.degree))
   addFilter('funding', text.funding, selectedLabel(fundingOptions, filters.funding))
   addFilter('deadline', text.deadline, selectedLabel(deadlineOptions, filters.deadline))
+  for (const key of rankingFilterKeys) addFilter(key, rankingFilterLabel(key, locale), selectedLabel(rankingFilterOptions(locale), filters[key] ?? ''))
   if (filters.sort !== 'default') addFilter('sort', text.sortBy, selectedLabel(sortOptions, filters.sort))
   const advancedFilterCount = [
     filters.institution,
@@ -166,7 +169,9 @@ export function ScholarshipExplorerV2({
           <option value="closed">{text.deadlineClosed}</option>
         </select>
       </div>
+      <RankingFilterFields filters={filters} locale={locale} prefix="scholarship" allLabel={messages.common.all} />
       </div>
+      <RankingNotice locale={locale} />
       <details className={styles.advanced} open={advancedFilterCount > 0}>
         <summary>{controls.advancedFilters}{advancedFilterCount ? ` (${advancedFilterCount})` : ''}</summary>
         <div className={styles.advancedGrid}>

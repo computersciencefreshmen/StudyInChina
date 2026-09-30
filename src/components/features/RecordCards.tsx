@@ -10,6 +10,7 @@ import type { FactStatus, FieldMeta } from '@/lib/catalog-api/types'
 import type { AdmissionCycle, City, Program, University } from '@/lib/data/types'
 import styles from './DecisionRecordCards.module.css'
 import { FavoriteButton } from './FavoriteButton'
+import { UniversityRankingLinks } from './RankingFilterFields'
 
 type ProgramWithFieldMeta = Program & {
   fieldMeta?: Record<string, FieldMeta>
@@ -134,6 +135,7 @@ export function ProgramCard({ program, university, cycle, latestTuitionReference
   return <Card className={`record-card ${styles.card}`}>
     <div className={styles.identityRow}><Badge tone="vermilion">{degreeLabels(locale)[program.degreeLevel]}</Badge></div>
     <div><h3 className="record-card__title">{localize(program.name, locale)}</h3>{university ? <p className="record-card__place">{localize(university.name, locale)}</p> : null}</div>
+    {university ? <UniversityRankingLinks university={university} locale={locale} /> : null}
     <dl className={styles.signal}>
       <div><dt>{messages.programs.applicationStatus}</dt><dd><Badge tone={stateTone}>{stateLabel}</Badge></dd></div>
       <div><dt>{messages.common.deadline}</dt><dd><FactValue status={deadlineStatus} locale={locale} value={cycle?.closesOn

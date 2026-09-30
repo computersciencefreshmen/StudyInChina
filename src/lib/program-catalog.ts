@@ -1,5 +1,6 @@
 import { getApplicationState, selectAdmissionCycle } from '@/lib/data/admission'
 import { classifyProgramField, normalizeProgramField, programSearchKeywords } from '@/lib/data/fields'
+import { matchesUniversityRankings, parseRankingFilters, rankingFilterKeys, type RankingFilters } from '@/lib/data/rankings'
 import type {
   AdmissionCycle,
   DataBundle,
@@ -44,7 +45,7 @@ const SORT_ORDERS = new Set([
 ])
 
 export type ProgramCatalogSearchParams = Record<string, string | string[] | undefined>
-export type ProgramCatalogFilters = {
+export type ProgramCatalogFilters = RankingFilters & {
   query: string
   degree: string
   discipline: string
@@ -121,6 +122,7 @@ export function parseProgramCatalogFilters(
     || bounded(params.dateStatus)
 
   return {
+    ...parseRankingFilters(params),
     query: bounded(params.q),
     degree: allowed(bounded(params.degree), DEGREE_LEVELS),
     discipline: requestedDiscipline
@@ -279,7 +281,7 @@ export function queryProgramCatalog(
       ))
       && (!filters.tuition || (program.status === 'verified' && matchesTuition(cycle, filters.tuition)))
 
-    return matches ? [{ program, university, cycle }] : []
+    return matches && matchesUniversityRankings(university, filters, today) ? [{ program, university, cycle }] : []
   })
 
   sortEntries(matching, filters.sort)
@@ -306,6 +308,7 @@ function repositoryProgramQuery(
   cursor: string | undefined,
 ): CatalogProgramListQuery {
   return {
+    ...Object.fromEntries(rankingFilterKeys.map((key) => [key, filters[key] || undefined])),
     q: filters.query || undefined,
     degree: filters.degree || undefined,
     discipline: filters.discipline || undefined,
@@ -408,6 +411,7 @@ export function programCatalogHref(
   }
 
   const values: Array<[string, string]> = [
+    ...rankingFilterKeys.map((key): [string, string] => [key, filters[key] ?? '']),
     ['q', filters.query],
     ['degree', filters.degree],
     ['discipline', filters.discipline],

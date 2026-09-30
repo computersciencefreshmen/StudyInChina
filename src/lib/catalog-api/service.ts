@@ -3,6 +3,7 @@ import { getTodayDate } from '@/lib/data/freshness'
 import { classifyProgramField, isProgramField, programSearchKeywords } from '@/lib/data/fields'
 import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
 import { canonicalUniversitySlug } from '@/lib/data/slug-aliases'
+import { currentUniversityRankings, hasRankingFilters, matchesUniversityRankings, type RankingFilters } from '@/lib/data/rankings'
 import type {
   AdmissionCycle,
   AuditMeta,
@@ -30,7 +31,7 @@ export type ListOptions = { cursor?: string; limit?: number }
 
 export type InstitutionSort = 'default' | 'name' | 'programs-desc' | 'scholarships-desc'
 
-export type InstitutionQuery = ListOptions & {
+export type InstitutionQuery = ListOptions & RankingFilters & {
   q?: string
   city?: string
   region?: string
@@ -38,7 +39,7 @@ export type InstitutionQuery = ListOptions & {
   sort?: InstitutionSort
 }
 
-export type ProgramQuery = ListOptions & {
+export type ProgramQuery = ListOptions & RankingFilters & {
   q?: string
   institution?: string
   city?: string
@@ -54,7 +55,7 @@ export type ProgramQuery = ListOptions & {
   scholarship?: string
 }
 
-export type ScholarshipQuery = ListOptions & {
+export type ScholarshipQuery = ListOptions & RankingFilters & {
   q?: string
   provider?: string
   institution?: string
@@ -228,6 +229,7 @@ export class CatalogApiService {
     }, this.today)
     return {
       ...university,
+      rankings: university.rankings ? currentUniversityRankings(university, this.today) : undefined,
       summary: knownValue(dynamicMeta, 'summary', university.summary),
       disciplines,
       city: city ? { id: city.id, slug: city.slug, name: city.name, province: city.province, region: city.region } : null,
@@ -270,7 +272,7 @@ export class CatalogApiService {
       languageRequirements: knownValue(dynamicMeta, 'languageRequirements', program.languageRequirements),
       details: knownValue(dynamicMeta, 'details', program.details ?? null),
       programType: deriveProgramType(program),
-      university: { id: university.id, slug: university.slug, name: university.name },
+      university: { id: university.id, slug: university.slug, name: university.name, rankings: university.rankings ? currentUniversityRankings(university, this.today) : undefined },
       officialSources: officialSourcesFor(program.sourceIds, this.bundle.sources),
       fieldMeta: { ...identityMeta, ...dynamicMeta },
     }
@@ -377,6 +379,7 @@ export class CatalogApiService {
       const city = this.bundle.cities.find((item) => item.id === university.cityId)
       const programs = this.bundle.programs.filter((item) => item.universityId === university.id)
       return matchesInstitutionName(university.name, query.q)
+        && matchesUniversityRankings(university, query, this.today)
         && (!query.city || Boolean(city && matchesIdentity(city, query.city)))
         && (!query.region || university.region === query.region)
         && (!query.discipline || programs.some((item) =>
@@ -433,6 +436,7 @@ export class CatalogApiService {
         ? [program.discipline, program.teachingLanguages]
         : []
       return matchesQuery([program.name, university.name, programSearchKeywords(program), programFacts], query.q)
+        && matchesUniversityRankings(university, query, this.today)
         && (!query.institution || matchesIdentity(university, query.institution))
         && (!query.city || Boolean(city && matchesIdentity(city, query.city)))
         && (!query.type || deriveProgramType(program) === query.type)
@@ -512,14 +516,29 @@ export class CatalogApiService {
       const programs = factsAreCurrent
         ? this.bundle.programs.filter((item) => scholarship.programIds.includes(item.id))
         : []
+      const linkedUniversities = [...new Map([
+        ...institutions,
+        ...programs.flatMap((program) => this.bundle.universities.filter((university) => university.id === program.universityId)),
+      ].map((university) => [university.id, university])).values()]
+      // A selected program must use its own school rather than another school
+      // attached to the same multi-institution award.
+      const rankingUniversities = query.program
+        ? linkedUniversities.filter((university) => programs.some((program) => (
+          matchesIdentity(program, query.program!) && program.universityId === university.id
+        )))
+        : linkedUniversities
       return matchesQuery([
         scholarship.name,
         factsAreCurrent ? scholarship.summary : null,
         institutions.map((item) => item.name),
       ], query.q)
         && (!query.provider || scholarship.providerType === query.provider)
-        && (!query.institution || institutions.some((item) => matchesIdentity(item, query.institution)))
+        && (!query.institution || linkedUniversities.some((item) => matchesIdentity(item, query.institution)))
         && (!query.program || programs.some((item) => matchesIdentity(item, query.program)))
+        && (!hasRankingFilters(query) || rankingUniversities.some((university) => (
+          (!query.institution || matchesIdentity(university, query.institution))
+          && matchesUniversityRankings(university, query, this.today)
+        )))
     }).map((item) => this.scholarshipRecord(item))
     const page = paginateBySlug(filtered, 'scholarships', query)
     return this.envelope(page.items, { pageSize: page.items.length, nextCursor: page.nextCursor })

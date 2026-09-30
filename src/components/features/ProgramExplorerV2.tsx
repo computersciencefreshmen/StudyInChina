@@ -3,7 +3,9 @@ import { Button, LinkButton } from '@/components/ui'
 import type { LaunchLocale } from '@/i18n/config'
 import type { Messages } from '@/i18n/messages'
 import { programFieldTaxonomy } from '@/lib/data/fields'
+import { rankingFilterKeys, rankingFilterLabel, rankingFilterOptions, type RankingFilterKey } from '@/lib/data/rankings'
 import { localize } from '@/lib/data/format'
+import { RankingFilterFields, RankingNotice } from './RankingFilterFields'
 import { degreeLabels, languageLabel } from '@/lib/data/labels'
 import {
   programCatalogHref,
@@ -50,6 +52,7 @@ type ProgramFilterKey =
   | 'tuition'
   | 'scholarship'
   | 'sort'
+  | RankingFilterKey
 
 function selectedLabel(options: SelectOption[], value: string): string {
   return options.find((option) => option.value === value)?.label ?? value
@@ -126,6 +129,7 @@ export function ProgramExplorerV2({
   addFilter('applicationState', messages.programs.statusFilter, selectedLabel(statusOptions, filters.applicationState))
   addFilter('tuition', messages.programs.tuitionFilter, selectedLabel(tuitionOptions, filters.tuition))
   addFilter('scholarship', messages.nav.scholarships, filters.scholarship ? text.linkedScholarship : '')
+  for (const key of rankingFilterKeys) addFilter(key, rankingFilterLabel(key, locale), selectedLabel(rankingFilterOptions(locale), filters[key] ?? ''))
   if (filters.sort !== 'default') addFilter('sort', text.sortBy, selectedLabel(sortOptions, filters.sort))
   const advancedFilterCount = [
     filters.institution,
@@ -194,7 +198,9 @@ export function ProgramExplorerV2({
           {['Chinese', 'English', 'Bilingual'].map((value) => <option value={value} key={value}>{languageLabel(value, locale)}</option>)}
         </select>
       </div>
+      <RankingFilterFields filters={filters} locale={locale} prefix="program" allLabel={messages.common.all} />
       </div>
+      <RankingNotice locale={locale} />
       <details className={styles.advanced} open={advancedFilterCount > 0}>
         <summary>{controls.advancedFilters}{advancedFilterCount ? ` (${advancedFilterCount})` : ''}</summary>
         <div className={styles.advancedGrid}>

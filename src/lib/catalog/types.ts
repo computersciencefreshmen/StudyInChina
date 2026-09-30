@@ -7,6 +7,7 @@ import type {
   Scholarship,
   University,
 } from '@/lib/data/types'
+import type { RankingFilters } from '@/lib/data/rankings'
 
 export const CATALOG_COLLECTIONS = [
   'sources',
@@ -45,7 +46,7 @@ export type CatalogInstitutionListSort =
   | 'programs-desc'
   | 'scholarships-desc'
 
-export type CatalogInstitutionListQuery = {
+export type CatalogInstitutionListQuery = RankingFilters & {
   q?: string
   city?: string
   region?: string
@@ -78,7 +79,7 @@ export type CatalogInstitutionListPage = CatalogListPage<
   CatalogInstitutionListFacets
 >
 
-export type CatalogProgramListQuery = {
+export type CatalogProgramListQuery = RankingFilters & {
   q?: string
   institution?: string
   city?: string
@@ -116,7 +117,7 @@ export type CatalogProgramListPage = CatalogListPage<
   CatalogProgramListFacets
 >
 
-export type CatalogScholarshipListQuery = {
+export type CatalogScholarshipListQuery = RankingFilters & {
   q?: string
   provider?: string
   institution?: string
