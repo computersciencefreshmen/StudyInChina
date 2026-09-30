@@ -4,7 +4,7 @@ import { ADMIN_COOKIE, createAdminSession } from '../../src/lib/admin/auth'
 const mocked = vi.hoisted(() => ({ snapshot: vi.fn(), runs: vi.fn(), launch: vi.fn(), limiter: vi.fn() }))
 vi.mock('../../src/lib/admin/snapshot', () => ({ getAdminSnapshot: mocked.snapshot, readLocalVerificationRuns: mocked.runs }))
 vi.mock('../../src/lib/admin/verification', async importOriginal => ({ ...await importOriginal<typeof import('../../src/lib/admin/verification')>(), launchVerification: mocked.launch }))
-vi.mock('../../src/lib/feedback/rate-limit', () => ({ consumeFeedbackRateLimit: mocked.limiter }))
+vi.mock('../../src/lib/admin/rate-limit', () => ({ consumeAdminLoginRateLimit: mocked.limiter }))
 import { GET as status } from '../../src/app/api/admin/status/route'
 import { GET as events } from '../../src/app/api/admin/events/route'
 import { POST as start } from '../../src/app/api/admin/verification/route'
@@ -90,5 +90,14 @@ describe('administrator browser login', () => {
     const response = logout(new Request('https://example.test/api/admin/session', { method: 'DELETE', headers: { origin: 'https://example.test' } }))
     expect(response.status).toBe(200)
     expect(response.headers.get('set-cookie')).toMatch(/Max-Age=0/)
+  })
+
+  it('returns a retry delay without authenticating a rate-limited login', async () => {
+    mocked.limiter.mockResolvedValueOnce({ allowed: false, retryAfterSeconds: 1800 })
+    const response = await login(loginRequest({ password }))
+    expect(response.status).toBe(429)
+    expect(response.headers.get('Retry-After')).toBe('1800')
+    expect(response.headers.get('set-cookie')).toBeNull()
+    expect(await response.json()).toEqual({ error: 'rate_limited' })
   })
 })

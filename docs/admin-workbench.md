@@ -11,7 +11,17 @@ ADMIN_ACCESS_TOKEN=<at least 32 random characters used to sign in>
 ADMIN_SESSION_SECRET=<a different random value of at least 32 characters>
 ```
 
-There is no default administrator password. Until both values are configured, login stays locked. Restart the development server after changing configuration. These values must never use the `NEXT_PUBLIC_` prefix, appear in browser code, or be committed. Production login also requires the existing `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` settings so attempts are limited across server instances. Local development uses the existing in-memory limiter. Login attempts use a separate hashed namespace from feedback requests.
+There is no default administrator password. Until both values are configured, login stays locked. Restart the development server after changing configuration. These values must never use the `NEXT_PUBLIC_` prefix, appear in browser code, or be committed.
+
+For a small private administrator deployment, explicitly select the simple mode:
+
+```dotenv
+ADMIN_LOGIN_RATE_LIMIT_MODE=memory
+```
+
+This mode needs no Redis account. It allows five login attempts per hashed client IP per hour in each running server instance, with counters isolated from public feedback submissions. It is best-effort on serverless hosting: counters reset when the process restarts or a cold start creates a new instance, and different instances do not share counts. The password, signed session, same-origin validation, and secure cookie protections still apply.
+
+The default mode (unset or `distributed`) requires `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` in production so attempts are limited across instances. Missing configuration or Redis failures refuse login rather than silently selecting memory. Local development uses the existing in-memory limiter. Login attempts use a separate hashed namespace from feedback requests. The explicit administrator memory mode does not change feedback's distributed production requirements. Change the mode to `distributed` and add the two Redis settings when shared production limits are needed. Hosting environment changes require a new deployment.
 
 Authentication creates an eight-hour signed session in an HttpOnly, SameSite=Strict cookie. HTTPS adds the Secure cookie attribute. POST and DELETE require the exact site origin. Each status, stream, and start endpoint validates the session before observing or executing work. Logout clears the browser cookie; rotating `ADMIN_SESSION_SECRET` invalidates all issued sessions.
 

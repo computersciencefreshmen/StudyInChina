@@ -1,7 +1,7 @@
 import { createHmac } from 'node:crypto'
 import { NextResponse } from 'next/server'
 import { ADMIN_COOKIE, ADMIN_RESPONSE_HEADERS, ADMIN_SESSION_SECONDS, adminConfigured, createAdminSession, isAdminMutationOrigin, matchesAdminPassword, readAdminJson, requestAdminSession } from '@/lib/admin/auth'
-import { consumeFeedbackRateLimit } from '@/lib/feedback/rate-limit'
+import { consumeAdminLoginRateLimit } from '@/lib/admin/rate-limit'
 import { getClientIp } from '@/lib/feedback/security'
 
 export const runtime = 'nodejs'
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
   if (!adminConfigured()) return json({ error: 'admin_not_configured' }, 503)
   try {
     const rateKey = createHmac('sha256', process.env.ADMIN_SESSION_SECRET!).update(`admin-login:${getClientIp(request.headers)}`).digest('hex')
-    const rate = await consumeFeedbackRateLimit(rateKey)
+    const rate = await consumeAdminLoginRateLimit(rateKey)
     if (!rate.allowed) return NextResponse.json({ error: 'rate_limited' }, { status: 429, headers: { ...ADMIN_RESPONSE_HEADERS, 'Retry-After': String(rate.retryAfterSeconds) } })
   } catch { return json({ error: 'rate_limit_unavailable' }, 503) }
   let body: unknown
