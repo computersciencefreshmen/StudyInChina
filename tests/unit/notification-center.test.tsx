@@ -118,7 +118,7 @@ describe('website notification center', () => {
   it('persists the chosen summary frequency across notification center remounts', () => {
     const view = render(<NotificationCenter locale="en" />)
     fireEvent.click(screen.getByRole('combobox', { name: 'Summary frequency' }))
-    fireEvent.click(screen.getByRole('option', { name: 'Daily summary', exact: true }))
+    fireEvent.click(screen.getByRole('option', { name: 'Daily summary' }))
     expect(parseSiteNotifications(window.localStorage.getItem(SITE_NOTIFICATIONS_KEY)).summaryFrequency).toBe('daily')
     view.unmount()
     render(<NotificationCenter locale="en" />)
