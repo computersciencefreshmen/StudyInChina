@@ -5,6 +5,7 @@ import { ProgramCard } from '@/components/features/RecordCards'
 import { UniversityRankingLinks } from '@/components/features/RankingFilterFields'
 import { DataFreshnessPanel } from '@/components/features/DataFreshnessPanel'
 import { SourceTransparency } from '@/components/features/SourceTransparency'
+import { FollowUpdates } from '@/components/features/FollowUpdates'
 import { indexedLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 import { getApplicationState, selectAdmissionCycle } from '@/lib/data/admission'
@@ -89,6 +90,7 @@ export default async function UniversityDetailPage({ params }: { params: Promise
         {visibleScholarships.length ? <div><SectionHeading title={copy.funding} level={2} /><div className="content-grid content-grid--two">{visibleScholarships.map((scholarship) => <Card key={scholarship.id}><Badge tone="gold">{providerLabel(scholarship.providerType, locale)}</Badge><h3 className="atlas-card__title">{localize(scholarship.name, locale)}</h3><p className="atlas-card__description">{localize(scholarship.summary, locale)}</p><div className="atlas-card__footer"><LinkButton href={`/${locale}/scholarships/${scholarship.slug}`} variant="quiet">{messages.common.viewDetails} →</LinkButton></div></Card>)}</div>{scholarships.length > visibleScholarships.length ? <div className="atlas-card__footer"><LinkButton href={`/${locale}/scholarships?institution=${encodeURIComponent(university.slug)}`} variant="secondary">{messages.common.explore} ({scholarships.length}) →</LinkButton></div> : null}</div> : null}
       </div>
       <aside className="detail-aside">
+        <FollowUpdates locale={locale} targets={[{ kind: 'university', id: university.id, label: localize(university.name, locale) }]} />
         <Card accent="jade" id="official-evidence">
           <h2 className="atlas-card__title">{copy.sources}</h2>
           <ul className="source-list">{sources.map((source) => <li key={source.id}>

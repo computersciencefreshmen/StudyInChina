@@ -3,6 +3,7 @@ import { connection } from 'next/server'
 import { ApplicationSummaryCard } from '@/components/features/ApplicationSummaryCard'
 import { DataFreshnessPanel } from '@/components/features/DataFreshnessPanel'
 import { FavoriteButton } from '@/components/features/FavoriteButton'
+import { FollowUpdates } from '@/components/features/FollowUpdates'
 import { ProgramCard } from '@/components/features/RecordCards'
 import { ScholarshipCard } from '@/components/features/ScholarshipCard'
 import { SourceTransparency } from '@/components/features/SourceTransparency'
@@ -171,6 +172,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
           </article>
         </div>
         <aside className="detail-aside">
+          <FollowUpdates locale={locale} targets={[{ kind: 'program', id: program.id, label: localize(program.name, locale) }]} />
           <ApplicationSummaryCard
             eyebrow={degreeLabels(locale)[program.degreeLevel]}
             title={decisionCopy.applicationSnapshot}
@@ -415,6 +417,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
       </div>
 
       <aside className="detail-aside">
+        <FollowUpdates locale={locale} targets={[{ kind: 'program', id: program.id, label: localize(program.name, locale) }]} />
         <ApplicationSummaryCard
           eyebrow={degreeLabels(locale)[program.degreeLevel]}
           title={decisionCopy.applicationSnapshot}

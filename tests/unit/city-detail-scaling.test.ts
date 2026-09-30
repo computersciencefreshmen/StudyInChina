@@ -12,7 +12,7 @@ describe('city detail scaling contract', () => {
   })
 
   it('bounds the first render to 36 stable university cards', () => {
-    expect(source).toContain('export const CITY_DETAIL_UNIVERSITY_LIMIT = 36')
+    expect(source).toContain('const CITY_DETAIL_UNIVERSITY_LIMIT = 36')
     expect(source).toContain('Number(right.featured) - Number(left.featured)')
     expect(source).toContain('localize(left.name, locale).localeCompare(')
     expect(source).toContain('universities.slice(0, CITY_DETAIL_UNIVERSITY_LIMIT)')

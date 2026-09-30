@@ -14,7 +14,7 @@ import { pageMetadata, requireLocale } from '@/lib/site'
 
 export const dynamicParams = true
 
-export const CITY_DETAIL_UNIVERSITY_LIMIT = 36
+const CITY_DETAIL_UNIVERSITY_LIMIT = 36
 
 function indexUniversityDisciplines(programs: Program[]): Map<string, Set<string>> {
   const disciplinesByUniversityId = new Map<string, Set<string>>()

@@ -21,6 +21,7 @@ import { MAX_COMPARE } from '@/lib/favorites'
 import { useFavorites } from './useFavorites'
 import { FavoriteButton } from './FavoriteButton'
 import { CatalogFreshnessNote } from './DataFreshnessPanel'
+import { FollowUpdates } from './FollowUpdates'
 
 type ComparisonItem = {
   program: ProgramRecord
@@ -243,6 +244,7 @@ export function FavoritesView({
   if (loading && saved.length === 0) return <p aria-live="polite">{copy.loading}</p>
 
   return <div className="atlas-stack" style={{ '--atlas-stack-gap': '3rem' } as React.CSSProperties}>
+    {saved.length ? <FollowUpdates locale={locale} bulk targets={saved.map(({ program }) => ({ kind: 'program', id: program.id, label: localize(program.name, locale) }))} /> : null}
     <div>
       <CatalogFreshnessNote locale={locale} today={today} />
       <p className="result-count">{copy.limit} {messages.favorites.localOnly}</p>

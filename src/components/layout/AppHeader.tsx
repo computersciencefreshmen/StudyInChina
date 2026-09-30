@@ -10,6 +10,9 @@ import { isBetaLocale, localeNames, localizeNavigationHref, publicLocales, type 
 import { getMessages } from '@/i18n/messages'
 import { betaContentFallbackNotice } from '@/i18n/navigation-experience'
 
+import { followedSiteUpdates, getSiteNotificationCopy } from '@/lib/site-notifications'
+import { useSiteNotifications } from '@/components/features/useSiteNotifications'
+
 function ShortlistLink({ href, label, active }: { href: string; label: string; active: boolean }) {
   const { favorites, ready } = useFavorites()
   const count = ready ? favorites.length : 0
@@ -25,6 +28,15 @@ function ShortlistLink({ href, label, active }: { href: string; label: string; a
       {count > 0 ? <strong aria-label={`${count}`}>{count}</strong> : null}
     </Link>
   )
+}
+
+function NotificationLink({ locale, active }: { locale: LaunchLocale; active: boolean }) {
+  const { follows, events, readIds, now, ready } = useSiteNotifications()
+  const count = ready ? followedSiteUpdates(follows, events).filter(event => event.publishedAt >= now - 30 * 86_400_000 && !readIds.includes(event.eventId)).length : 0
+  return <Link className={cx('atlas-site-header__shortlist', active && 'is-active')} href={`/${locale}/notifications`} aria-current={active ? 'page' : undefined}>
+    <span aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
+    <span>{getSiteNotificationCopy(locale).nav}</span>{count > 0 ? <strong aria-label={`${count}`}>{count}</strong> : null}
+  </Link>
 }
 
 function HeaderContent({
@@ -72,7 +84,7 @@ function HeaderContent({
         href: localizeNavigationHref(pathname, searchParams, code),
         active: code === locale,
       }))}
-      actions={<ShortlistLink href={favoritesHref} label={messages.nav.favorites} active={favoritesActive} />}
+      actions={<><NotificationLink locale={locale} active={pathname.startsWith(`/${locale}/notifications`)} /><ShortlistLink href={favoritesHref} label={messages.nav.favorites} active={favoritesActive} /></>}
     />
     {isBetaLocale(locale) && showsCatalogData ? (
       <div className="atlas-container" role="note">
@@ -89,6 +101,7 @@ function QueryAwareHeader({ locale, pathname }: { locale: LaunchLocale; pathname
 
 export function AppHeader({ locale }: { locale: LaunchLocale }) {
   const pathname = usePathname()
+  useSiteNotifications(true)
 
   useEffect(() => {
     document.cookie = `studycn-locale=${locale}; Path=/; Max-Age=31536000; SameSite=Lax`
