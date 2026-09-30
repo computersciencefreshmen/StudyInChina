@@ -508,6 +508,7 @@ export class CatalogApiService {
   }
 
   listScholarships(query: ScholarshipQuery = {}): ApiEnvelope<ScholarshipRecord[]> {
+    const hasRanks = hasRankingFilters(query)
     const filtered = this.bundle.scholarships.filter((scholarship) => {
       const factsAreCurrent = hasCurrentFacts(scholarship, this.today)
       const institutions = factsAreCurrent
@@ -520,13 +521,26 @@ export class CatalogApiService {
         ...institutions,
         ...programs.flatMap((program) => this.bundle.universities.filter((university) => university.id === program.universityId)),
       ].map((university) => [university.id, university])).values()]
+      // Rankings discover a scholarship identity by recorded affiliation. They
+      // do not establish that an expired award still applies to that school or
+      // program; eligibility filters and response facts retain their freshness
+      // gates below and in scholarshipRecord.
+      const rankingPrograms = factsAreCurrent || !hasRanks
+        ? programs
+        : this.bundle.programs.filter((program) => scholarship.programIds.includes(program.id))
+      const affiliatedUniversities = factsAreCurrent || !hasRanks
+        ? linkedUniversities
+        : this.bundle.universities.filter((university) => (
+          scholarship.universityIds.includes(university.id)
+          || rankingPrograms.some((program) => program.universityId === university.id)
+        ))
       // A selected program must use its own school rather than another school
       // attached to the same multi-institution award.
       const rankingUniversities = query.program
-        ? linkedUniversities.filter((university) => programs.some((program) => (
+        ? affiliatedUniversities.filter((university) => rankingPrograms.some((program) => (
           matchesIdentity(program, query.program!) && program.universityId === university.id
         )))
-        : linkedUniversities
+        : affiliatedUniversities
       return matchesQuery([
         scholarship.name,
         factsAreCurrent ? scholarship.summary : null,
@@ -535,7 +549,7 @@ export class CatalogApiService {
         && (!query.provider || scholarship.providerType === query.provider)
         && (!query.institution || linkedUniversities.some((item) => matchesIdentity(item, query.institution)))
         && (!query.program || programs.some((item) => matchesIdentity(item, query.program)))
-        && (!hasRankingFilters(query) || rankingUniversities.some((university) => (
+        && (!hasRanks || rankingUniversities.some((university) => (
           (!query.institution || matchesIdentity(university, query.institution))
           && matchesUniversityRankings(university, query, this.today)
         )))

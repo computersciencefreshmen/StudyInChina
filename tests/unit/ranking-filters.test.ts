@@ -4,8 +4,11 @@ import cities from '../../content/data/cities.json'
 import universities from '../../content/data/universities.json'
 import programs from '../../content/data/programs.json'
 import scholarships from '../../content/data/scholarships.json'
+import admissionCycles from '../../content/data/admission-cycles.json'
 import type { DataBundle, University, UniversityRanking } from '@/lib/data/types'
-import { universitySchema } from '@/lib/data/schema'
+import { bundleSchema, universitySchema } from '@/lib/data/schema'
+import { selectPublishedData } from '@/lib/data/publication'
+import { selectCatalogApiData } from '@/lib/catalog-api/projection'
 import { currentUniversityRankings, matchesUniversityRankings, parseRankingFilters, rankingEditionLabel } from '@/lib/data/rankings'
 import { parseUniversityCatalogFilters, universityCatalogHref } from '@/lib/university-catalog'
 import { parseProgramCatalogFilters, programCatalogHref, queryProgramCatalog } from '@/lib/program-catalog'
@@ -119,6 +122,41 @@ describe('university ranking filters', () => {
     expect(service.listScholarships({ program: 'rank-program-0', qsRankMax: '100' }).data).toHaveLength(1)
     expect(service.listScholarships({ program: 'rank-program-1', qsRankMax: '100' }).data).toHaveLength(0)
     expect(service.listScholarships({ program: 'rank-program-1', theRankMax: '100' }).data).toHaveLength(1)
+  })
+
+  it('discovers stale scholarship identities by affiliation without restoring expired eligibility or facts', () => {
+    const data = fixture()
+    const before = structuredClone(data)
+    const service = new CatalogApiService(data, deriveCatalogRelease(data), today)
+    const records = service.listScholarships({ qsRankMax: '100' }).data
+    expect(records.map(({ id }) => id)).toEqual(['program-award', 'rank-award'])
+    for (const record of records) {
+      expect(record.universityIds).toBeNull()
+      expect(record.programIds).toBeNull()
+      expect(record.coverage).toEqual({ tuition: null, accommodation: null, insurance: null, stipendCnyPerMonth: null })
+      expect(record.deadline).toBeNull()
+      expect(record.applicationUrl).toBeNull()
+      expect(record.summary).toBeNull()
+      expect(record.fieldMeta.universityIds.status).toBe('stale')
+      expect(record.fieldMeta.programIds.status).toBe('stale')
+      expect(record.verifiedAt).toBe(data.scholarships.find(({ id }) => id === record.id)!.verifiedAt)
+    }
+    expect(service.listScholarships({ qsRankMax: '100', institution: 'rank-school-0' }).data).toHaveLength(0)
+    expect(service.listScholarships({ qsRankMax: '100', program: 'rank-program-0' }).data).toHaveLength(0)
+    expect(service.listScholarships({ qsRankMax: '100', theRankMax: '100' }).data).toHaveLength(0)
+    expect(data).toEqual(before)
+  })
+
+  it('keeps actual website and API scholarship rank discovery aligned on 2026-09-30', () => {
+    const date = '2026-09-30'
+    const data = bundleSchema.parse({ sources, cities, universities, programs, scholarships, admissionCycles })
+    const filters = { qsRankMax: '100', theRankMax: '100', usNewsRankMax: '100', arwuRankMax: '100' } as const
+    const web = queryScholarshipCatalog(selectPublishedData(data, date), parseScholarshipCatalogFilters(filters), date, 100)
+    const service = new CatalogApiService(selectCatalogApiData(data, date), deriveCatalogRelease(data), date)
+    const api = service.listScholarships({ ...filters, limit: 100 })
+    expect(web.total).toBeGreaterThan(0)
+    expect(web.total).toBeLessThanOrEqual(100)
+    expect(api.data.map(({ id }) => id).sort()).toEqual(web.items.map(({ scholarship }) => scholarship.id).sort())
   })
 
   it('never publishes older ranking evidence when its newest edition is overdue', () => {
