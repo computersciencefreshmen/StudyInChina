@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildClaims, buildRankingSources, getApiConfig, summarizeResults, validateVerdicts, type RecordResult, type SourceReceipt } from '../../scripts/ingestion/verify-catalog-minimax'
+import { applyModelOptions, buildClaims, buildComparisonRequest, buildRankingSources, getApiConfig, matchesModelConfiguration, modelConfiguration, parseModelOptions, summarizeResults, validateVerdicts, verificationRunId, type ApiConfig, type RecordResult, type SourceReceipt } from '../../scripts/ingestion/verify-catalog-minimax'
 
 const source: SourceReceipt = {
   sourceId: 'official', url: 'https://example.edu/guide', checkedAt: '2026-09-29T00:00:00Z',
@@ -73,5 +73,64 @@ describe('MiniMax catalog comparison evidence gate', () => {
       { ...base, taskId: 'two', verdicts: [{ path: 'tuition', storedValue: 20000, proposedValue: 30000, status: 'contradicted', reason: 'candidate' }, { path: 'deadline', storedValue: null, status: 'unconfirmed', reason: 'unknown' }] },
       { ...base, taskId: 'three', issues: ['MiniMax HTTP 429'], verdicts: [{ path: 'fee', storedValue: null, status: 'unconfirmed', reason: 'unknown' }] },
     ], 100, 100)).toMatchObject({ totalRecords: 100, selectedRecords: 100, completedRecords: 3, supportedCandidateFields: 1, contradictedCandidateFields: 1, unconfirmedFields: 2, recordsRequiringReview: 2, modelErrorRecords: 1, publicationApprovedRecords: 0, fatal: null })
+  })
+})
+
+describe('MiniMax new-run model configuration', () => {
+  const anthropic: ApiConfig = { model: 'MiniMax-M3', key: 'test-only-secret', endpoint: 'https://api.minimax.cn/anthropic/v1/messages', anthropic: true, providerId: 'test-provider' }
+  const openai: ApiConfig = { ...anthropic, endpoint: 'https://api.minimax.cn/v1/chat/completions', anthropic: false }
+  const checkpoint: RecordResult = { taskId: 'one', checkedAt: '2026-09-30T08:30:00Z', inputSha256: 'test', model: 'MiniMax-M3', status: 'review-required', sourceIds: [], issues: [], verdicts: [] }
+
+  it('preserves provider choice and the exact legacy request defaults with no flags', () => {
+    const api = applyModelOptions(anthropic, parseModelOptions([]))
+    expect(api).toMatchObject(anthropic)
+    expect(modelConfiguration(api)).toMatchObject({ model: 'MiniMax-M3', effort: null, thinking: 'disabled' })
+    expect(buildComparisonRequest(api, 'payload')).toMatchObject({ model: 'MiniMax-M3', max_tokens: 16384, messages: [{ role: 'user', content: 'payload' }] })
+    expect(buildComparisonRequest(api, 'payload')).not.toHaveProperty('thinking')
+    expect(buildComparisonRequest(api, 'payload')).not.toHaveProperty('output_config')
+    expect(verificationRunId('a'.repeat(64), api, {})).toBe('a'.repeat(16))
+    expect(matchesModelConfiguration(checkpoint, api, false)).toBe(true)
+  })
+
+  it('allows a new M3 adaptive run without changing the provider or credential', () => {
+    const options = parseModelOptions(['--model', 'MiniMax-M3', '--thinking', 'adaptive'])
+    const api = applyModelOptions(anthropic, options)
+    expect(api.key).toBe(anthropic.key)
+    expect(api.endpoint).toBe(anthropic.endpoint)
+    expect(anthropic).not.toHaveProperty('thinking')
+    expect(buildComparisonRequest(api, 'payload')).toHaveProperty('thinking', { type: 'adaptive' })
+    expect(modelConfiguration(api)).toMatchObject({ effort: null, thinking: 'adaptive' })
+    expect(matchesModelConfiguration(checkpoint, api, false)).toBe(false)
+    expect(verificationRunId('a'.repeat(64), api, options)).toMatch(/^a{16}-[a-f0-9]{12}$/)
+    expect(JSON.stringify(modelConfiguration(api))).not.toContain(anthropic.key)
+  })
+
+  it('uses protocol-specific effort fields and honors forced adaptive thinking for M3.1', () => {
+    const options = parseModelOptions(['--model', 'MiniMax-M3.1-Flash-Preview', '--effort', 'high'])
+    expect(buildComparisonRequest(applyModelOptions(anthropic, options), 'payload')).toHaveProperty('output_config', { effort: 'high' })
+    expect(buildComparisonRequest(applyModelOptions(openai, options), 'payload')).toHaveProperty('reasoning_effort', 'high')
+    const defaults = applyModelOptions(anthropic, { model: 'MiniMax-M3.1-Flash-Preview' })
+    expect(modelConfiguration(defaults)).toMatchObject({ effort: 'max', thinking: 'adaptive' })
+    expect(() => applyModelOptions(anthropic, { ...options, thinking: 'disabled' })).toThrow('disabled')
+  })
+
+  it('never reuses checkpoints or run directories across different effort or protocol defaults', () => {
+    const high = applyModelOptions(anthropic, { model: 'MiniMax-M3.1-Flash-Preview', effort: 'high' })
+    const max = applyModelOptions(anthropic, { model: 'MiniMax-M3.1-Flash-Preview', effort: 'max' })
+    const highCheckpoint = { ...checkpoint, ...modelConfiguration(high) }
+    expect(matchesModelConfiguration(highCheckpoint, high, false)).toBe(true)
+    expect(matchesModelConfiguration(highCheckpoint, max, false)).toBe(false)
+    expect(verificationRunId('a'.repeat(64), high, high.requestedModelOptions!)).not.toBe(verificationRunId('a'.repeat(64), max, max.requestedModelOptions!))
+    expect(modelConfiguration(anthropic).modelConfigSha256).not.toBe(modelConfiguration(openai).modelConfigSha256)
+    expect(matchesModelConfiguration({ ...checkpoint, model: null, modelConfigSha256: null }, max, true)).toBe(true)
+    expect(matchesModelConfiguration(highCheckpoint, high, true)).toBe(false)
+  })
+
+  it('rejects unknown, duplicated, missing and unsupported options before calling a model', () => {
+    for (const args of [['--model', 'Claude-X'], ['--effort', 'none'], ['--thinking', 'on'], ['--effort'], ['--model', '--all'], ['--model', 'MiniMax-M3', '--model', 'MiniMax-M2.7']]) {
+      expect(() => parseModelOptions(args)).toThrow()
+    }
+    expect(() => applyModelOptions(anthropic, { effort: 'max' })).toThrow('only')
+    expect(() => applyModelOptions(anthropic, { model: 'MiniMax-M2.7', thinking: 'disabled' })).toThrow()
   })
 })

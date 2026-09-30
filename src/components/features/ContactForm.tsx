@@ -1,5 +1,7 @@
 'use client'
 
+import { RoundedSelect } from '@/components/ui/RoundedSelect'
+
 import { FormEvent, useState } from 'react'
 import Script from 'next/script'
 import { Button } from '@/components/ui'
@@ -22,7 +24,7 @@ export function ContactForm({ messages, siteKey }: { messages: Messages; siteKey
   }
 
   return <form className="form-stack" onSubmit={submit}>
-    <div className="field"><label htmlFor="feedback-category">{messages.contact.category}</label><select id="feedback-category" name="category" required defaultValue="incorrect-data"><option value="incorrect-data">{messages.contact.incorrect}</option><option value="broken-link">{messages.contact.broken}</option><option value="suggest-program">{messages.contact.suggest}</option><option value="other">{messages.contact.other}</option></select></div>
+    <div className="field"><label htmlFor="feedback-category">{messages.contact.category}</label><RoundedSelect id="feedback-category" name="category" required defaultValue="incorrect-data"><option value="incorrect-data">{messages.contact.incorrect}</option><option value="broken-link">{messages.contact.broken}</option><option value="suggest-program">{messages.contact.suggest}</option><option value="other">{messages.contact.other}</option></RoundedSelect></div>
     <div className="field"><label htmlFor="feedback-message">{messages.contact.message}</label><textarea id="feedback-message" name="message" required maxLength={2000} /></div>
     <div className="field"><label htmlFor="feedback-source">{messages.contact.source}</label><input id="feedback-source" name="sourceUrl" type="url" inputMode="url" placeholder="https://" /></div>
     <div className="field"><label htmlFor="feedback-email">{messages.contact.email}</label><input id="feedback-email" name="replyEmail" type="email" autoComplete="email" /></div>

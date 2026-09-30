@@ -31,3 +31,8 @@
 .local { margin: 1.4rem 0 0; }
 .error { color: var(--atlas-danger); font-size: .85rem; line-height: 1.8; }
 @media (max-width: 760px) { .center { grid-template-columns: 1fr; gap: 1rem; } .toolbar { padding-inline: 1rem; } .state { padding: 2rem 1rem; } .update { padding: 1.2rem 1rem; } }
+
+.preferences { display: grid; gap: .8rem; padding: 1rem 1.4rem; border-bottom: 1px solid var(--atlas-line); }
+.preferences p { margin: 0; font-size: .76rem; line-height: 1.8; color: var(--atlas-muted); }
+.preferences label { font-size: .82rem; }
+@media (max-width: 760px) { .toolbar { flex-wrap: wrap; gap: .6rem; } .preferences { padding-inline: 1rem; } }

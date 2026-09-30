@@ -18,15 +18,16 @@ for (const route of ['universities', 'programs', 'scholarships']) {
     await page.goto(`/en/${route}`, { waitUntil: 'domcontentloaded' })
     const form = page.getByRole('search')
     for (const key of rankingKeys) {
-      const field = form.locator(`select[name="${key}"]`)
+      const field = form.locator(`[role="combobox"][name="${key}"]`)
       await expect(field).toBeVisible()
-      await field.selectOption('100')
+      await field.click()
+      await page.getByRole('option', { name: 'Top 100', exact: true }).click()
     }
     await form.getByRole('button', { name: 'Apply filters', exact: true }).click()
     await page.waitForURL((url) => rankingKeys.every((key) => url.searchParams.get(key) === '100'))
     expect(await page.locator('.record-card').count()).toBeGreaterThan(0)
     if (route === 'universities') {
-      await form.locator('select[name="qsRankMax"]').scrollIntoViewIfNeeded()
+      await form.locator('[role="combobox"][name="qsRankMax"]').scrollIntoViewIfNeeded()
       await page.screenshot({ path: `.tmp/ranking-filters-${testInfo.project.name}.png`, fullPage: false })
     }
     const qsChip = page.getByRole('link', { name: /Remove filter: QS world ranking/ })
@@ -35,7 +36,7 @@ for (const route of ['universities', 'programs', 'scholarships']) {
     await page.waitForURL((url) => !url.searchParams.has('qsRankMax'))
     for (const key of rankingKeys.slice(1)) expect(new URL(page.url()).searchParams.get(key)).toBe('100')
     await page.goBack({ waitUntil: 'domcontentloaded' })
-    for (const key of rankingKeys) await expect(form.locator(`select[name="${key}"]`)).toHaveValue('100')
+    for (const key of rankingKeys) await expect(form.locator(`[role="combobox"][name="${key}"]`)).toHaveAttribute('value', '100')
     await expect(qsChip).toBeVisible()
   })
 }

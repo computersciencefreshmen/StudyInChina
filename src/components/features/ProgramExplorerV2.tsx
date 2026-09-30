@@ -1,3 +1,4 @@
+import { RoundedSelect } from '@/components/ui/RoundedSelect'
 import Link from 'next/link'
 import { Button, LinkButton } from '@/components/ui'
 import type { LaunchLocale } from '@/i18n/config'
@@ -179,24 +180,24 @@ export function ProgramExplorerV2({
       </div>
       <div className="field">
         <label htmlFor="program-degree">{messages.programs.degree}</label>
-        <select id="program-degree" name="degree" defaultValue={filters.degree}>
+        <RoundedSelect id="program-degree" name="degree" defaultValue={filters.degree}>
           <option value="">{messages.common.all}</option>
           {Object.entries(degreeLabels(locale)).map(([key, label]) => <option value={key} key={key}>{label}</option>)}
-        </select>
+        </RoundedSelect>
       </div>
       <div className="field">
         <label htmlFor="program-discipline">{messages.programs.discipline}</label>
-        <select id="program-discipline" name="discipline" defaultValue={filters.discipline}>
+        <RoundedSelect id="program-discipline" name="discipline" defaultValue={filters.discipline}>
           <option value="">{messages.common.all}</option>
           {programFieldTaxonomy(locale).map(({ key, label }) => <option value={key} key={key}>{label}</option>)}
-        </select>
+        </RoundedSelect>
       </div>
       <div className="field">
         <label htmlFor="program-language">{messages.programs.languageFilter}</label>
-        <select id="program-language" name="language" defaultValue={filters.language}>
+        <RoundedSelect id="program-language" name="language" defaultValue={filters.language}>
           <option value="">{messages.common.all}</option>
           {['Chinese', 'English', 'Bilingual'].map((value) => <option value={value} key={value}>{languageLabel(value, locale)}</option>)}
-        </select>
+        </RoundedSelect>
       </div>
       <RankingFilterFields filters={filters} locale={locale} prefix="program" allLabel={messages.common.all} />
       </div>
@@ -206,64 +207,64 @@ export function ProgramExplorerV2({
         <div className={styles.advancedGrid}>
       <div className="field">
         <label htmlFor="program-institution">{messages.programs.university}</label>
-        <select id="program-institution" name="institution" defaultValue={filters.institution}>
+        <RoundedSelect id="program-institution" name="institution" defaultValue={filters.institution}>
           <option value="">{messages.common.all}</option>
           {result.universityOptions.map((option) => <option value={option.value} key={option.value}>{localize(option.name, locale)}</option>)}
-        </select>
+        </RoundedSelect>
       </div>
       <div className="field">
         <label htmlFor="program-city">{messages.common.city}</label>
-        <select id="program-city" name="city" defaultValue={filters.city}>
+        <RoundedSelect id="program-city" name="city" defaultValue={filters.city}>
           <option value="">{messages.common.all}</option>
           {result.cityOptions.map((option) => <option value={option.value} key={option.value}>{localize(option.name, locale)}</option>)}
-        </select>
+        </RoundedSelect>
       </div>
       <div className="field">
         <label htmlFor="program-intake">{messages.programs.intake}</label>
-        <select id="program-intake" name="intake" defaultValue={filters.intake}>
+        <RoundedSelect id="program-intake" name="intake" defaultValue={filters.intake}>
           <option value="">{messages.common.all}</option>
           <option value="spring">{messages.programs.springIntake}</option>
           <option value="autumn">{messages.programs.autumnIntake}</option>
           <option value="other">{messages.programs.otherIntake}</option>
-        </select>
+        </RoundedSelect>
       </div>
       <div className="field">
         <label htmlFor="program-status">{messages.programs.statusFilter}</label>
-        <select id="program-status" name="applicationState" defaultValue={filters.applicationState}>
+        <RoundedSelect id="program-status" name="applicationState" defaultValue={filters.applicationState}>
           <option value="">{messages.common.all}</option>
           <option value="open">{messages.common.openNow}</option>
           <option value="upcoming">{messages.programs.upcoming}</option>
           <option value="closed">{messages.programs.applicationsClosed}</option>
           <option value="not-announced">{messages.programs.notAnnounced}</option>
-        </select>
+        </RoundedSelect>
       </div>
       <div className="field">
         <label htmlFor="program-tuition">{messages.programs.tuitionFilter}</label>
-        <select id="program-tuition" name="tuition" defaultValue={filters.tuition}>
+        <RoundedSelect id="program-tuition" name="tuition" defaultValue={filters.tuition}>
           <option value="">{messages.common.all}</option>
           <option value="known">{messages.programs.known}</option>
           <option value="unknown">{messages.programs.unannounced}</option>
           <option value="under-20000">≤ ¥20,000</option>
           <option value="20000-40000">¥20,001–40,000</option>
           <option value="over-40000">&gt; ¥40,000</option>
-        </select>
+        </RoundedSelect>
       </div>
       <div className="field">
         <label htmlFor="program-scholarship">{messages.nav.scholarships}</label>
-        <select id="program-scholarship" name="scholarship" defaultValue={filters.scholarship}>
+        <RoundedSelect id="program-scholarship" name="scholarship" defaultValue={filters.scholarship}>
           <option value="">{messages.common.all}</option>
           <option value="linked">{text.linkedScholarship}</option>
-        </select>
+        </RoundedSelect>
       </div>
       <div className="field">
         <label htmlFor="program-sort">{text.sortBy}</label>
-        <select id="program-sort" name="sort" defaultValue={filters.sort}>
+        <RoundedSelect id="program-sort" name="sort" defaultValue={filters.sort}>
           <option value="default">{text.defaultOrder}</option>
           <option value="name">{messages.common.program} A–Z</option>
           <option value="deadline">{messages.common.deadline}</option>
           <option value="tuition-asc">{messages.common.tuition} ↑</option>
           <option value="tuition-desc">{messages.common.tuition} ↓</option>
-        </select>
+        </RoundedSelect>
       </div>
         </div>
       </details>

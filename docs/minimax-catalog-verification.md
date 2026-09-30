@@ -6,6 +6,9 @@ This tool checks all six `content/data` collections against freshly captured off
 # Inventory and build the complete 6-collection queue; no network or model charge.
 npm run minimax:verify -- --prepare
 
+# Inspect public effective configuration without source/model calls or output files.
+npm run minimax:verify -- --use-ccswitch --audit-config
+
 # Fetch two records' official sources without a model call.
 npm run minimax:verify -- --fetch-only --limit 2
 
@@ -24,9 +27,21 @@ npm run minimax:verify -- --report-only --run 698fd533401f3de8
 
 # Retry unresolved records and optionally restrict to one collection.
 npm run minimax:verify -- --use-ccswitch --all --retry-unconfirmed --collection programs
+
+# New M3 job with reasoning explicitly enabled (does not edit CC Switch).
+npm run minimax:verify -- --use-ccswitch --model MiniMax-M3 --thinking adaptive --limit 2
+
+# New preview job; requires an eligible Token Plan credential.
+npm run minimax:verify -- --use-ccswitch --model MiniMax-M3.1-Flash-Preview --effort high --limit 2
 ```
 
 `--use-ccswitch` opens `~/.cc-switch/cc-switch.db` read-only and selects only the current Claude provider. It requires that provider to specify an official MiniMax endpoint and MiniMax model. The current provider's credential stays in memory and is sent directly to its official endpoint; the script neither changes CC Switch/Claude settings nor starts Claude tools or shell commands. It respects the provider's configured model (currently MiniMax-M3 when configured by the user).
+
+On 2026-09-30, the local live receipt and CC Switch provider both selected `MiniMax-M3`; the checked-in ingestion and localization Worker configurations still select `MiniMax-M2.7`. This establishes local execution and repository defaults, not the model currently deployed in a remote Worker. MiniMax lists `MiniMax-M3.1-Flash-Preview` as its newest M-series model with a 1M context window, currently available only through Token Plan and MiniMax Code. The model name alone does not establish that a particular credential is eligible or that its catalog comparison quality is better. [Official model overview](https://platform.minimax.cn/docs/guides/models-intro).
+
+Explicit `--model` overrides are allowlisted to M3.1-Flash-Preview, M3, M2.7 and M2.7-highspeed. `--effort low|medium|high|xhigh|max` applies only to M3.1 Flash; omission means `max`, and thinking cannot be disabled. `--thinking adaptive` explicitly enables M3 reasoning; `--thinking disabled` is accepted only for M3. M3 defaults to thinking **disabled on Anthropic**, but **adaptive on OpenAI**, so interface choice affects its effective behavior. Existing commands without overrides keep their previous request defaults. Thinking tokens count against the existing 16,384 output limit, and deeper effort can increase runtime and token use. [Anthropic thinking and effort](https://platform.minimax.cn/docs/api-reference/text-anthropic-api), [OpenAI thinking and effort](https://platform.minimax.cn/docs/api-reference/text-openai-api).
+
+`--audit-config` validates the configured official endpoint and model options, prints only public metadata, and exits before loading catalog data, making network calls or writing task files. It does not probe account entitlement or charge tokens. An absent credential or invalid configuration exits nonzero. For a new task with any explicit model/thinking/effort option, the run directory is `<input-hash16>-<model-config-hash12>`, separate from the running legacy `<input-hash16>` directory. Manifest, receipts, responses, checkpoints and status record effective `model`, `effort`, `thinking` and `modelConfigSha256`; checkpoints from different reasoning configurations are never reused. Use `--report-only --run <input-hash16>-<model-config-hash12>` to inspect these runs. A changed model or effort starts fresh comparison checkpoints, which can consume additional tokens; it does not stop or silently upgrade an existing process.
 
 CC Switch may point the live Claude settings at a local takeover proxy (`http://127.0.0.1:...`) and set a Claude alias such as `haiku`. The current provider stored in CC Switch establishes the official upstream endpoint and actual MiniMax model; this verifier uses that provider directly. Consequently the local proxy credential is never forwarded to a guessed public endpoint, and an additional Claude Code subprocess is unnecessary.
 

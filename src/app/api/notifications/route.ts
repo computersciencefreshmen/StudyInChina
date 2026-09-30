@@ -10,8 +10,9 @@ export async function GET() {
   try {
     const observedAt = Date.now()
     const current = observePublishedCatalog(await getCatalogRepository().getBundle(), observedAt)
-    const observations = Object.entries(current).filter(([, item]) => item.verified)
-      .map(([observationKey, item]) => ({ observationKey, ...item }))
+    // Already-public stale identities establish a baseline without creating an
+    // alert. An unchanged re-verification must not look like a new listing.
+    const observations = Object.entries(current).map(([observationKey, item]) => ({ observationKey, ...item }))
     return Response.json({ available: true, observations, observedAt, revision: meaningfulFingerprint(observations) }, { headers })
   } catch { return Response.json({ available: false, observations: [] }, { status: 503, headers }) }
 }

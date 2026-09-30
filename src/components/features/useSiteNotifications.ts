@@ -1,7 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 'react'
-import { applySiteObservations, EMPTY_NOTIFICATIONS, matchesSiteFollow, parseSiteNotifications, parseSiteObservations, SITE_NOTIFICATIONS_EVENT, SITE_NOTIFICATIONS_KEY, siteFollowKey, type SiteFollow, type SiteNotificationState } from '@/lib/site-notifications'
+import { applySiteObservations, EMPTY_NOTIFICATIONS, matchesSiteFollow, notificationSummaryInterval, parseSiteNotifications, parseSiteObservations, SITE_NOTIFICATIONS_EVENT, SITE_NOTIFICATIONS_KEY, siteFollowKey, type NotificationSummaryFrequency, type SiteFollow, type SiteNotificationState } from '@/lib/site-notifications'
 
 function subscribe(callback: () => void) {
   window.addEventListener('storage', callback)
@@ -33,7 +33,7 @@ export function refreshSiteNotifications(force = false): Promise<boolean> {
   const state = parseSiteNotifications(snapshot())
   if (!state.follows.length) return Promise.resolve(true)
   const now = Date.now()
-  if (!force && now - Math.max(state.lastCheckedAt, lastAttemptAt) < 10 * 60_000) return Promise.resolve(lastAttemptSucceeded)
+  if (!force && state.lastCheckedAt > 0 && now - Math.max(state.lastCheckedAt, lastAttemptSucceeded ? 0 : lastAttemptAt) < notificationSummaryInterval(state.summaryFrequency)) return Promise.resolve(lastAttemptSucceeded)
   lastAttemptAt = now
   refreshPromise = (async () => {
     try {
@@ -68,7 +68,7 @@ export function useSiteNotifications(refreshOnResume = false) {
     const onVisible = () => { if (document.visibilityState === 'visible') void refreshSiteNotifications() }
     document.addEventListener('visibilitychange', onVisible)
     return () => document.removeEventListener('visibilitychange', onVisible)
-  }, [refreshOnResume, ready, followSignature, state.lastCheckedAt])
+  }, [refreshOnResume, ready, followSignature, state.lastCheckedAt, state.summaryFrequency])
 
   const follow = useCallback((targets: Omit<SiteFollow, 'followedAt'>[]) => save(current => {
     const existing = new Map(current.follows.map(item => [siteFollowKey(item), item]))
@@ -92,5 +92,8 @@ export function useSiteNotifications(refreshOnResume = false) {
   const markRead = useCallback((eventIds: string[]) => save(current => ({
     ...current, readIds: [...new Set([...current.readIds, ...eventIds])].slice(-100),
   })), [])
-  return { ...state, now, ready, follow, unfollow, markRead }
+  const setSummaryFrequency = useCallback((summaryFrequency: NotificationSummaryFrequency) => save(current => ({
+    ...current, summaryFrequency: summaryFrequency === 'daily' ? 'daily' : 'five-hours',
+  })), [])
+  return { ...state, now, ready, follow, unfollow, markRead, setSummaryFrequency }
 }

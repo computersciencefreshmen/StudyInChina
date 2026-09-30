@@ -16,6 +16,8 @@ import { requireLocale, siteUrl } from '@/lib/site'
 import '../globals.css'
 import '../feature-styles.css'
 import '../city-map.css'
+import '../themes.css'
+import { THEME_INIT_SCRIPT } from '@/lib/site-themes'
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
@@ -40,7 +42,8 @@ export default async function LocaleLayout({ children, params }: Readonly<{ chil
   const releaseLabel = `${messages.shell.dataRelease}: ${releaseDate}`
   const announcement = getReleaseAnnouncement(locale)
 
-  return <html lang={locale} dir={localeDirection(locale)}>
+  return <html lang={locale} dir={localeDirection(locale)} data-theme="cloud" suppressHydrationWarning>
+    <head><script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} /></head>
     <body>
       <AppHeader locale={locale} />
       <ReleaseAnnouncement
@@ -72,6 +75,8 @@ export default async function LocaleLayout({ children, params }: Readonly<{ chil
             { label: messages.nav.about, href: `/${locale}/about` },
             { label: messages.nav.contact, href: `/${locale}/contact` },
             { label: 'GitHub', href: 'https://github.com/computersciencefreshmen/StudyInChina', external: true },
+            { label: locale === 'zh' ? '管理员工作台' : 'Admin workspace', href: '/admin' },
+            { label: locale === 'zh' ? '主题实验室' : 'Theme studio', href: '/themes' },
           ] },
         ]}
         legalLinks={[

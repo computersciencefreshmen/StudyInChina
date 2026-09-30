@@ -46,6 +46,18 @@ describe('browser-local observed notification changes', () => {
     expect(state.events).toEqual([])
   })
 
+  it('baselines already-public stale records and suppresses unchanged renewal after reload', () => {
+    const stale = { ...observation, verified: false }
+    let state = applySiteObservations({ ...parseSiteNotifications(null), follows: [follow] }, parseSiteObservations([stale]), 100)
+    expect(state.events).toEqual([])
+    state = parseSiteNotifications(JSON.stringify(state))
+    expect(state.baseline[observation.observationKey].verified).toBe(false)
+    expect(applySiteObservations(state, [observation], 200).events).toEqual([])
+    const changed = applySiteObservations(state, [{ ...observation, fingerprint: 'corrected-facts' }], 200)
+    expect(changed.events).toHaveLength(1)
+    expect(changed.events[0].change).toBe('updated')
+  })
+
   it('initializes new follows separately while existing follows still receive changes', () => {
     let state = applySiteObservations({ ...parseSiteNotifications(null), follows: [follow] }, [observation], 100)
     state = { ...state, follows: [...state.follows, { kind: 'university', id: 'university-two', label: 'Second university', followedAt: 150 }] }
@@ -70,9 +82,17 @@ describe('browser-local observed notification changes', () => {
   })
 
   it('validates observations and events and excludes updates before follow time', () => {
-    expect(parseSiteObservations([observation, { ...observation, verified: false }, { ...observation, observationKey: 'invalid' }, null])).toEqual([observation])
+    expect(parseSiteObservations([observation, { ...observation, verified: false }, { ...observation, verified: 'true' }, { ...observation, observationKey: 'invalid' }, null])).toEqual([observation, { ...observation, verified: false }])
     expect(parseSiteUpdates([event, { ...event, publishedAt: '100' }, null])).toEqual([event])
     expect(followedSiteUpdates([{ ...follow, followedAt: 101 }], [event])).toEqual([])
     expect(followedSiteUpdates([follow], [event, event])).toEqual([event])
   })
+
+  it('migrates old browser state to five hours and preserves a valid daily preference', () => {
+    expect(parseSiteNotifications(null).summaryFrequency).toBe('five-hours')
+    expect(parseSiteNotifications(JSON.stringify({ summaryFrequency: 'unsupported' })).summaryFrequency).toBe('five-hours')
+    const daily = { ...parseSiteNotifications(null), follows: [follow], summaryFrequency: 'daily' as const }
+    expect(parseSiteNotifications(JSON.stringify(applySiteObservations(daily, [observation], 100))).summaryFrequency).toBe('daily')
+  })
+
 })

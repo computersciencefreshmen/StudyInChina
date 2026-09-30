@@ -1,5 +1,7 @@
 'use client'
 
+import { RoundedSelect } from '@/components/ui/RoundedSelect'
+
 import Link from 'next/link'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { CityMapWorkspace, type CityMapUniversity } from '@/components/features/CityMapWorkspace'
@@ -133,7 +135,7 @@ export function CityExplorer({
       </div>
       <div className="field">
         <label htmlFor="city-sort">{experience.sortLabel}</label>
-        <select
+        <RoundedSelect
           id="city-sort"
           name="sort"
           value={sort}
@@ -141,7 +143,7 @@ export function CityExplorer({
         >
           <option value="universities">{experience.sortByUniversities}</option>
           <option value="name">{experience.sortByName}</option>
-        </select>
+        </RoundedSelect>
       </div>
       <div className="city-view-switch" role="group" aria-label={experience.viewLabel}>
         <button

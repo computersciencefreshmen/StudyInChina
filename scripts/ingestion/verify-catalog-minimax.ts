@@ -19,6 +19,11 @@ const USER_AGENT = 'StudyInChinaVerifier/1.0'
 const MAX_BYTES = 5 * 1024 * 1024
 const SOURCE_CHARS = 25_000
 const API_HOSTS = new Set(['api.minimax.io', 'api.minimaxi.com', 'api.minimax.cn'])
+export const VERIFICATION_MODELS = ['MiniMax-M3.1-Flash-Preview', 'MiniMax-M3', 'MiniMax-M2.7', 'MiniMax-M2.7-highspeed'] as const
+export const VERIFICATION_EFFORTS = ['low', 'medium', 'high', 'xhigh', 'max'] as const
+type ModelEffort = typeof VERIFICATION_EFFORTS[number]
+type ModelThinking = 'adaptive' | 'disabled'
+export type ModelOptions = { model?: string; effort?: ModelEffort; thinking?: ModelThinking }
 const METADATA = new Set(['id', 'slug', 'sourceIds', 'verifiedAt', 'reviewAfter', 'status', 'accessedAt', 'featured', 'verificationScope', 'factScope', 'tuitionStatus', 'evidenceBasis'])
 type RecordValue = Record<string, unknown> & { id: string; sourceIds?: string[] }
 type OfficialSource = RecordValue & { url: string; official: boolean }
@@ -35,12 +40,72 @@ export type Verdict = {
 }
 export type RecordResult = {
   taskId: string; checkedAt: string; inputSha256: string; model: string | null;
+  effort?: ModelEffort | null; thinking?: ModelThinking | null; modelConfigSha256?: string | null;
   status: 'review-required'; sourceIds: string[]; verdicts: Verdict[]; issues: string[];
 }
-type ApiConfig = { endpoint: string; key: string; model: string; anthropic: boolean; providerId?: string }
+export type ApiConfig = { endpoint: string; key: string; model: string; anthropic: boolean; providerId?: string; effort?: ModelEffort; thinking?: ModelThinking; requestedModelOptions?: ModelOptions }
 const sha = (value: string | Uint8Array) => createHash('sha256').update(value).digest('hex')
 const pause = (ms: number) => new Promise<void>(done => setTimeout(done, ms))
 const executeFile = promisify(execFile)
+
+/** Overrides are opt-in; they never change the user's provider or an already running job. */
+export function parseModelOptions(args: string[]): ModelOptions {
+  const value = (flag: string) => {
+    const indexes = args.flatMap((arg, index) => arg === flag ? [index] : [])
+    if (indexes.length > 1) throw new Error(`${flag} may be supplied only once`)
+    if (!indexes.length) return undefined
+    const selected = args[indexes[0] + 1]
+    if (!selected || selected.startsWith('--')) throw new Error(`${flag} requires a value`)
+    return selected
+  }
+  const model = value('--model')
+  const effort = value('--effort')
+  const thinking = value('--thinking')
+  if (model && !(VERIFICATION_MODELS as readonly string[]).includes(model)) throw new Error('--model must be a supported verification model')
+  if (effort && !(VERIFICATION_EFFORTS as readonly string[]).includes(effort)) throw new Error('--effort must be low, medium, high, xhigh or max')
+  if (thinking && thinking !== 'adaptive' && thinking !== 'disabled') throw new Error('--thinking must be adaptive or disabled')
+  return { ...(model ? { model } : {}), ...(effort ? { effort: effort as ModelEffort } : {}), ...(thinking ? { thinking: thinking as ModelThinking } : {}) }
+}
+
+export function applyModelOptions(api: ApiConfig, options: ModelOptions): ApiConfig {
+  const model = options.model || api.model
+  if (options.model && !(VERIFICATION_MODELS as readonly string[]).includes(options.model)) throw new Error('Unsupported verification model')
+  if (options.effort && !(VERIFICATION_EFFORTS as readonly string[]).includes(options.effort)) throw new Error('Unsupported thinking effort')
+  if (options.effort && model !== 'MiniMax-M3.1-Flash-Preview') throw new Error('--effort is supported only by MiniMax-M3.1-Flash-Preview')
+  if (options.thinking && options.thinking !== 'adaptive' && options.thinking !== 'disabled') throw new Error('Unsupported thinking mode')
+  if (options.thinking === 'disabled' && model !== 'MiniMax-M3') throw new Error('Thinking may be disabled only for MiniMax-M3')
+  return { ...api, model, ...(options.effort ? { effort: options.effort } : {}), ...(options.thinking ? { thinking: options.thinking } : {}), requestedModelOptions: options }
+}
+
+/** Public execution identity excludes credentials and records provider defaults explicitly. */
+export function modelConfiguration(api: ApiConfig | null) {
+  if (!api) return { model: null, effort: null, thinking: null, modelConfigSha256: null }
+  const effort = api.model === 'MiniMax-M3.1-Flash-Preview' ? api.effort || 'max' : null
+  const thinking = api.model === 'MiniMax-M3.1-Flash-Preview' ? 'adaptive' : api.thinking || (api.model === 'MiniMax-M3' && api.anthropic ? 'disabled' : 'adaptive')
+  const identity = { model: api.model, effort, thinking, protocol: api.anthropic ? 'anthropic' : 'openai' }
+  return { model: api.model, effort, thinking, modelConfigSha256: sha(JSON.stringify(identity)) }
+}
+
+export function verificationRunId(inputSha256: string, api: ApiConfig | null, options: ModelOptions) {
+  const config = modelConfiguration(api)
+  return inputSha256.slice(0, 16) + (Object.keys(options).length && config.modelConfigSha256 ? `-${config.modelConfigSha256.slice(0, 12)}` : '')
+}
+
+export function matchesModelConfiguration(result: RecordResult, api: ApiConfig | null, fetchOnly: boolean) {
+  const config = modelConfiguration(fetchOnly ? null : api)
+  if (result.model !== config.model) return false
+  if (result.modelConfigSha256 !== undefined) return result.modelConfigSha256 === config.modelConfigSha256
+  // Legacy receipts have no effort identity. Reuse them only with the unchanged legacy invocation.
+  return !Object.keys(api?.requestedModelOptions || {}).length
+}
+
+export function buildComparisonRequest(api: ApiConfig, payload: string) {
+  const effort = modelConfiguration(api).effort
+  const thinking = api.thinking ? { thinking: { type: api.thinking } } : {}
+  return api.anthropic
+    ? { model: api.model, max_tokens: 16_384, system: INSTRUCTIONS, messages: [{ role: 'user', content: payload }], ...thinking, ...(effort ? { output_config: { effort } } : {}) }
+    : { model: api.model, max_completion_tokens: 16_384, reasoning_split: true, messages: [{ role: 'system', content: INSTRUCTIONS }, { role: 'user', content: payload }], ...thinking, ...(effort ? { reasoning_effort: effort } : {}) }
+}
 
 /** A checkpoint is a comparison attempt, never publication approval or proof that every field is correct. */
 export function summarizeResults(results: RecordResult[], totalRecords: number, selectedRecords: number, fatal: string | null = null) {
@@ -262,9 +327,7 @@ async function compareBatch(tasks: Task[], receipts: SourceReceipt[], api: ApiCo
   })
   const response = await retry(async () => {
     const signal = AbortSignal.timeout(90_000)
-    const body = api.anthropic
-      ? { model: api.model, max_tokens: 16_384, system: INSTRUCTIONS, messages: [{ role: 'user', content: payload }] }
-      : { model: api.model, max_completion_tokens: 16_384, reasoning_split: true, messages: [{ role: 'system', content: INSTRUCTIONS }, { role: 'user', content: payload }] }
+    const body = buildComparisonRequest(api, payload)
     const reply = await fetch(api.endpoint, {
       method: 'POST', redirect: 'error', signal,
       headers: { Authorization: `Bearer ${api.key}`, 'Content-Type': 'application/json', ...(api.anthropic ? { 'anthropic-version': '2023-06-01' } : {}) },
@@ -280,7 +343,7 @@ async function compareBatch(tasks: Task[], receipts: SourceReceipt[], api: ApiCo
     if (!Array.isArray(output.results)) throw new Error('MiniMax response schema invalid')
     return { output, usage: parsed.usage || null }
   })
-  await atomicJson(join(directory, 'responses', `${sha(tasks.map(task => task.taskId).join('|'))}.json`), { checkedAt: new Date().toISOString(), model: api.model, requestSha256: sha(payload), ...response })
+  await atomicJson(join(directory, 'responses', `${sha(tasks.map(task => task.taskId).join('|'))}.json`), { checkedAt: new Date().toISOString(), ...modelConfiguration(api), requestSha256: sha(JSON.stringify(buildComparisonRequest(api, payload))), ...response })
   return response.output.results as Array<{ taskId: string; verdicts: unknown }>
 }
 
@@ -288,12 +351,25 @@ async function main() {
   const args = process.argv.slice(2)
   const option = (name: string, fallback: string) => args.includes(name) ? args[args.indexOf(name) + 1] || fallback : fallback
   if (args.includes('--help')) {
-    console.log('npm run minimax:verify -- --prepare | --report-only [--run <16-character-input-hash>] | --fetch-only --limit 2 | --use-ccswitch --limit 2 | --use-ccswitch --all [--concurrency 2] [--batch-size 2] [--retry-unconfirmed] [--collection programs] [--env-file .env.local]')
+    console.log('npm run minimax:verify -- --audit-config | --prepare | --report-only [--run <run-id>] | --fetch-only --limit 2 | --use-ccswitch --limit 2 | --use-ccswitch --all [--model MiniMax-M3.1-Flash-Preview] [--effort low|medium|high|xhigh|max] [--thinking adaptive|disabled] [--concurrency 2] [--batch-size 2] [--retry-unconfirmed] [--collection programs] [--env-file .env.local]')
     return
   }
   const root = resolve(__dirname, '../..')
   const environmentPath = resolve(root, option('--env-file', '.env.local'))
   if (!args.includes('--report-only') && existsSync(environmentPath)) process.loadEnvFile(environmentPath)
+  const modelOptions = parseModelOptions(args)
+  if (args.includes('--report-only') && Object.keys(modelOptions).length) throw new Error('--report-only reads a saved run; select it with --run instead of model overrides')
+  if (args.includes('--fetch-only') && Object.keys(modelOptions).length) throw new Error('--fetch-only makes no model calls and cannot use model overrides')
+  const configuredApi = args.includes('--report-only') ? null : args.includes('--use-ccswitch') ? getCcSwitchConfig() : getApiConfig(process.env)
+  if (!configuredApi && Object.keys(modelOptions).length) throw new Error('Model overrides require a configured official MiniMax provider')
+  const api = configuredApi ? applyModelOptions(configuredApi, modelOptions) : null
+  const executionConfig = modelConfiguration(args.includes('--fetch-only') ? null : api)
+  if (args.includes('--audit-config')) {
+    if (args.includes('--report-only') || args.includes('--fetch-only')) throw new Error('--audit-config cannot be combined with report-only or fetch-only')
+    console.log(JSON.stringify({ configured: Boolean(api), ...executionConfig, endpoint: api?.endpoint || null, requestedModelOptions: modelOptions, credentialOrigin: args.includes('--use-ccswitch') ? 'ccswitch-current-claude-provider-read-only' : 'local-environment', modelCalls: 0 }))
+    if (!api) process.exitCode = 1
+    return
+  }
   const numberOption = (name: string, fallback: string, minimum: number, maximum: number) => {
     const value = Number(option(name, fallback))
     if (!Number.isSafeInteger(value) || value < minimum || value > maximum) throw new Error(`${name} must be an integer from ${minimum} to ${maximum}`)
@@ -305,13 +381,13 @@ async function main() {
   const collection = option('--collection', '')
   if (collection && !FILES.includes(collection as typeof FILES[number])) throw new Error('Unknown collection')
   const savedRun = option('--run', '')
-  if (savedRun && (!args.includes('--report-only') || !/^[a-f0-9]{16}$/.test(savedRun))) throw new Error('--run requires --report-only and a 16-character lowercase input hash')
+  if (savedRun && (!args.includes('--report-only') || !/^[a-f0-9]{16}(?:-[a-f0-9]{12})?$/.test(savedRun))) throw new Error('--run requires --report-only and a validated run ID')
   const data = savedRun
     ? JSON.parse(await readFile(join(root, '.official-harvest/minimax-verification', savedRun, 'input-snapshot.json'), 'utf8')) as Record<string, RecordValue[]>
     : Object.fromEntries(await Promise.all(FILES.map(async file => [file, JSON.parse(await readFile(join(root, 'content/data', `${file}.json`), 'utf8')) as RecordValue[]]))) as Record<string, RecordValue[]>
   const inputSha256 = sha(JSON.stringify({ data, promptVersion: PROMPT_VERSION, sourceChars: SOURCE_CHARS }))
-  if (savedRun && inputSha256.slice(0, 16) !== savedRun) throw new Error('Saved run snapshot does not match the current verifier prompt version and requested input hash')
-  const directory = join(root, '.official-harvest/minimax-verification', inputSha256.slice(0, 16))
+  if (savedRun && inputSha256.slice(0, 16) !== savedRun.slice(0, 16)) throw new Error('Saved run snapshot does not match the current verifier prompt version and requested input hash')
+  const directory = join(root, '.official-harvest/minimax-verification', savedRun || verificationRunId(inputSha256, api, modelOptions))
   const sourceMap = new Map((data.sources as OfficialSource[]).map(source => [source.id, source]))
   const rankingSourceIds = new Map<string, string[]>()
   for (const university of data.universities) {
@@ -326,23 +402,26 @@ async function main() {
   })))
   const selected = tasks.filter(task => !collection || task.collection === collection).slice(0, limit)
   if (args.includes('--report-only')) {
+    const manifestPath = join(directory, 'manifest.json')
+    const savedManifest = existsSync(manifestPath) ? JSON.parse(await readFile(manifestPath, 'utf8')) as { model?: string | null; modelConfigSha256?: string | null; requestedModelOptions?: ModelOptions } : null
+    if (savedRun?.includes('-') && (!savedManifest?.modelConfigSha256 || savedManifest.modelConfigSha256.slice(0, 12) !== savedRun.split('-')[1])) throw new Error('Saved run model configuration does not match its run ID')
     const results: RecordResult[] = []
     for (const task of selected) {
       const checkpoint = join(directory, 'records', `${sha(task.taskId)}.json`)
       if (!existsSync(checkpoint)) continue
       const result = JSON.parse(await readFile(checkpoint, 'utf8')) as RecordResult
-      if (result.taskId === task.taskId && result.inputSha256 === inputSha256) results.push(result)
+      const matchesSavedConfig = savedManifest?.modelConfigSha256 === undefined || result.modelConfigSha256 === savedManifest.modelConfigSha256 || (result.modelConfigSha256 === undefined && result.model === savedManifest.model && !Object.keys(savedManifest.requestedModelOptions || {}).length)
+      if (result.taskId === task.taskId && result.inputSha256 === inputSha256 && matchesSavedConfig) results.push(result)
     }
     console.log(JSON.stringify({ ...await writeReports(directory, inputSha256, results, tasks.length, selected.length, null, true), output: directory }))
     return
   }
-  const api = args.includes('--use-ccswitch') ? getCcSwitchConfig() : getApiConfig(process.env)
   await atomicJson(join(directory, 'manifest.json'), {
-    schemaVersion: 1, inputSha256, promptVersion: PROMPT_VERSION, createdAt: new Date().toISOString(),
+    schemaVersion: 2, inputSha256, promptVersion: PROMPT_VERSION, createdAt: new Date().toISOString(),
     methodology: 'Read-only official snapshot comparison. Supported/contradicted are candidates, never publication approval. No content/data writes.',
     counts: Object.fromEntries(FILES.map(file => [file, data[file].length])), totalRecords: tasks.length,
     totalClaims: tasks.reduce((sum, task) => sum + task.claims.length, 0), selectedRecords: selected.length,
-    configured: Boolean(api), endpoint: api?.endpoint || null, model: api?.model || null, providerId: api?.providerId || null,
+    configured: Boolean(api), endpoint: api?.endpoint || null, ...executionConfig, providerId: api?.providerId || null, requestedModelOptions: modelOptions,
     concurrency, batchSize, maxSourceChars: SOURCE_CHARS, maxSourceBytes: MAX_BYTES,
     syntheticRankingSources: [...sourceMap.values()].filter(source => source.id.startsWith('ranking-evidence-')).length,
   })
@@ -357,7 +436,7 @@ async function main() {
     const checkpoint = join(directory, 'records', `${sha(task.taskId)}.json`)
     if (existsSync(checkpoint)) {
       const result = JSON.parse(await readFile(checkpoint, 'utf8')) as RecordResult
-      const sameModel = result.model === (args.includes('--fetch-only') ? null : api?.model || null)
+      const sameModel = matchesModelConfiguration(result, api, args.includes('--fetch-only'))
       const failedModel = result.issues.some(issue => /^MiniMax /i.test(issue))
       if (sameModel && !failedModel && Date.now() - Date.parse(result.checkedAt) < 86_400_000 && !(args.includes('--retry-unconfirmed') && result.verdicts.some(verdict => verdict.status === 'unconfirmed'))) {
         results.push(result)
@@ -384,14 +463,15 @@ async function main() {
   const progress = (value: unknown) => {
     // Serialize progress updates so a slower earlier write cannot overwrite a newer record count.
     progressWriter = progressWriter.then(async () => {
-      await atomicJson(join(directory, 'status.json'), value)
-      await atomicJson(join(directory, 'progress.json'), value)
+      const status = { ...value as Record<string, unknown>, ...executionConfig, requestedModelOptions: modelOptions }
+      await atomicJson(join(directory, 'status.json'), status)
+      await atomicJson(join(directory, 'progress.json'), status)
     })
     return progressWriter
   }
   const startedAt = new Date().toISOString()
   await atomicJson(join(directory, 'run-receipt.json'), {
-    pid: process.pid, startedAt, inputSha256, model: api?.model || null,
+    pid: process.pid, startedAt, inputSha256, ...executionConfig, requestedModelOptions: modelOptions,
     endpoint: api?.endpoint || null, providerId: api?.providerId || null,
     credentialOrigin: args.includes('--use-ccswitch') ? 'ccswitch-current-claude-provider-read-only' : 'local-environment',
     selectedRecords: selected.length, resumedRecords: results.length, concurrency, batchSize,
@@ -422,7 +502,7 @@ async function main() {
         }
         const result: RecordResult = {
           taskId: task.taskId, checkedAt: new Date().toISOString(), inputSha256,
-          model: args.includes('--fetch-only') ? null : api?.model || null,
+          ...executionConfig,
           status: 'review-required', sourceIds: task.sourceIds,
           verdicts: validateVerdicts(task.claims, matches.length === 1 ? matches[0].verdicts : [], recordReceipts, sourceUrlByPath),
           issues: [...issues, ...recordReceipts.filter(receipt => receipt.status !== 'captured').map(receipt => `${receipt.sourceId}: ${receipt.reason}`)],

@@ -1,3 +1,4 @@
+import { RoundedSelect } from '@/components/ui/RoundedSelect'
 import { Badge, Button, Card, LinkButton, VerificationBadge } from '@/components/ui'
 import type { LaunchLocale } from '@/i18n/config'
 import type { Messages } from '@/i18n/messages'
@@ -117,17 +118,17 @@ export function UniversityExplorerV2({
       </div>
       <div className="field">
         <label htmlFor="university-city">{messages.universities.cityFilter}</label>
-        <select id="university-city" name="city" defaultValue={filters.city}>
+        <RoundedSelect id="university-city" name="city" defaultValue={filters.city}>
           <option value="">{messages.common.all}</option>
           {result.cityOptions.map((city) => <option value={city.value} key={city.value}>{localize(city.name, locale)}</option>)}
-        </select>
+        </RoundedSelect>
       </div>
       <div className="field">
         <label htmlFor="university-discipline">{messages.universities.fieldFilter}</label>
-        <select id="university-discipline" name="discipline" defaultValue={filters.discipline}>
+        <RoundedSelect id="university-discipline" name="discipline" defaultValue={filters.discipline}>
           <option value="">{messages.common.all}</option>
           {programFieldTaxonomy(locale).map(({ key, label }) => <option value={key} key={key}>{label}</option>)}
-        </select>
+        </RoundedSelect>
       </div>
       <RankingFilterFields filters={filters} locale={locale} prefix="university" allLabel={messages.common.all} />
       </div>
@@ -137,19 +138,19 @@ export function UniversityExplorerV2({
         <div className={styles.advancedGrid}>
       <div className="field">
         <label htmlFor="university-region">{messages.universities.regionFilter}</label>
-        <select id="university-region" name="region" defaultValue={filters.region}>
+        <RoundedSelect id="university-region" name="region" defaultValue={filters.region}>
           <option value="">{messages.common.all}</option>
           {Object.entries(regionLabels(locale)).map(([key, label]) => <option value={key} key={key}>{label}</option>)}
-        </select>
+        </RoundedSelect>
       </div>
       <div className="field">
         <label htmlFor="university-sort">{text.sortBy}</label>
-        <select id="university-sort" name="sort" defaultValue={filters.sort}>
+        <RoundedSelect id="university-sort" name="sort" defaultValue={filters.sort}>
           <option value="default">{text.defaultOrder}</option>
           <option value="name">{text.nameOrder}</option>
           <option value="programs-desc">{text.programsMost}</option>
           <option value="scholarships-desc">{text.scholarshipsMost}</option>
-        </select>
+        </RoundedSelect>
       </div>
         </div>
       </details>

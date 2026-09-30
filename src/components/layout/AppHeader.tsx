@@ -9,7 +9,7 @@ import { cx } from '@/components/ui/cx'
 import { isBetaLocale, localeNames, localizeNavigationHref, publicLocales, type LaunchLocale } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 import { betaContentFallbackNotice } from '@/i18n/navigation-experience'
-
+import { ThemePreference } from '@/components/ui/ThemePreference'
 import { followedSiteUpdates, getSiteNotificationCopy } from '@/lib/site-notifications'
 import { useSiteNotifications } from '@/components/features/useSiteNotifications'
 
@@ -84,7 +84,7 @@ function HeaderContent({
         href: localizeNavigationHref(pathname, searchParams, code),
         active: code === locale,
       }))}
-      actions={<><NotificationLink locale={locale} active={pathname.startsWith(`/${locale}/notifications`)} /><ShortlistLink href={favoritesHref} label={messages.nav.favorites} active={favoritesActive} /></>}
+      actions={<><NotificationLink locale={locale} active={pathname.startsWith(`/${locale}/notifications`)} /><ShortlistLink href={favoritesHref} label={messages.nav.favorites} active={favoritesActive} /><ThemePreference locale={locale} compact /></>}
     />
     {isBetaLocale(locale) && showsCatalogData ? (
       <div className="atlas-container" role="note">

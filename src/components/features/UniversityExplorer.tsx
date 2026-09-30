@@ -1,5 +1,7 @@
 'use client'
 
+import { RoundedSelect } from '@/components/ui/RoundedSelect'
+
 import { useMemo, useState } from 'react'
 import { Button } from '@/components/ui'
 import type { LaunchLocale } from '@/i18n/config'
@@ -19,9 +21,9 @@ export function UniversityExplorer({ universities, programs, cities, locale, mes
   return <>
     <div className="filter-panel" role="search" aria-label={messages.universities.title}>
       <div className="field"><label htmlFor="university-search">{messages.common.search}</label><input id="university-search" value={filters.query} onChange={(event) => set('query', event.target.value)} placeholder={messages.universities.searchPlaceholder} /></div>
-      <div className="field"><label htmlFor="university-city">{messages.universities.cityFilter}</label><select id="university-city" value={filters.cityId} onChange={(event) => set('cityId', event.target.value)}><option value="">{messages.common.all}</option>{cities.map((city) => <option value={city.id} key={city.id}>{localize(city.name, locale)}</option>)}</select></div>
-      <div className="field"><label htmlFor="university-region">{messages.universities.regionFilter}</label><select id="university-region" value={filters.region} onChange={(event) => set('region', event.target.value)}><option value="">{messages.common.all}</option>{Object.entries(regionLabels(locale)).map(([key, label]) => <option value={key} key={key}>{label}</option>)}</select></div>
-      <div className="field"><label htmlFor="university-field">{messages.universities.fieldFilter}</label><select id="university-field" value={filters.discipline} onChange={(event) => set('discipline', event.target.value)}><option value="">{messages.common.all}</option>{Object.entries(disciplineLabels(locale)).map(([key, label]) => <option value={key} key={key}>{label}</option>)}</select></div>
+      <div className="field"><label htmlFor="university-city">{messages.universities.cityFilter}</label><RoundedSelect id="university-city" value={filters.cityId} onChange={(event) => set('cityId', event.target.value)}><option value="">{messages.common.all}</option>{cities.map((city) => <option value={city.id} key={city.id}>{localize(city.name, locale)}</option>)}</RoundedSelect></div>
+      <div className="field"><label htmlFor="university-region">{messages.universities.regionFilter}</label><RoundedSelect id="university-region" value={filters.region} onChange={(event) => set('region', event.target.value)}><option value="">{messages.common.all}</option>{Object.entries(regionLabels(locale)).map(([key, label]) => <option value={key} key={key}>{label}</option>)}</RoundedSelect></div>
+      <div className="field"><label htmlFor="university-field">{messages.universities.fieldFilter}</label><RoundedSelect id="university-field" value={filters.discipline} onChange={(event) => set('discipline', event.target.value)}><option value="">{messages.common.all}</option>{Object.entries(disciplineLabels(locale)).map(([key, label]) => <option value={key} key={key}>{label}</option>)}</RoundedSelect></div>
       <Button variant="ghost" onClick={() => setFilters({ query: '', cityId: '', region: '', discipline: '' })}>{messages.common.clear}</Button>
     </div>
     <p className="result-count" aria-live="polite">{filtered.length} {messages.universities.results}</p>

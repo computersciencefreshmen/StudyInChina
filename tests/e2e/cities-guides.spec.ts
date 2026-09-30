@@ -29,7 +29,8 @@ test('city explorer switches views and narrows the directory without leaving the
   await expect(page.locator('.city-directory a').first()).toBeVisible()
 
   await page.getByRole('button', { name: /South China/ }).click()
-  await page.getByLabel('Sort').selectOption('name')
+  await page.getByRole('combobox', { name: 'Sort' }).click()
+  await page.getByRole('option', { name: 'City name', exact: true }).click()
   await page.getByLabel('Search cities').fill('Guangzhou')
   await expect.poll(() => new URL(page.url()).searchParams.get('view')).toBe('directory')
   await expect.poll(() => new URL(page.url()).searchParams.get('region')).toBe('south')
@@ -41,16 +42,16 @@ test('city explorer switches views and narrows the directory without leaving the
   await page.reload({ waitUntil: 'domcontentloaded' })
   await expect(page.getByRole('button', { name: 'Directory' })).toHaveAttribute('aria-pressed', 'true')
   await expect(page.getByRole('button', { name: /South China/ })).toHaveAttribute('aria-pressed', 'true')
-  await expect(page.getByLabel('Sort')).toHaveValue('name')
+  await expect(page.getByLabel('Sort')).toHaveAttribute('value', 'name')
   await expect(page.getByLabel('Search cities')).toHaveValue('Guangzhou')
   await expect(page.locator('.city-directory a')).toHaveCount(1)
 
   await page.goBack({ waitUntil: 'domcontentloaded' })
   await expect.poll(() => new URL(page.url()).searchParams.get('sort')).toBeNull()
-  await expect(page.getByLabel('Sort')).toHaveValue('universities')
+  await expect(page.getByLabel('Sort')).toHaveAttribute('value', 'universities')
   await page.goForward({ waitUntil: 'domcontentloaded' })
   await expect.poll(() => new URL(page.url()).searchParams.get('sort')).toBe('name')
-  await expect(page.getByLabel('Sort')).toHaveValue('name')
+  await expect(page.getByLabel('Sort')).toHaveAttribute('value', 'name')
 })
 
 test('a shared city URL is rendered with useful state before hydration', async ({ page }) => {
@@ -60,7 +61,7 @@ test('a shared city URL is rendered with useful state before hydration', async (
 
   await expect(page.getByRole('button', { name: '城市目录' })).toHaveAttribute('aria-pressed', 'true')
   await expect(page.getByRole('button', { name: /华南/ })).toHaveAttribute('aria-pressed', 'true')
-  await expect(page.getByLabel('排序')).toHaveValue('name')
+  await expect(page.getByLabel('排序')).toHaveAttribute('value', 'name')
   await expect(page.getByLabel('搜索城市')).toHaveValue('广州')
   await expect(page.locator('.city-directory a')).toHaveCount(1)
 })

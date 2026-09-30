@@ -1,3 +1,4 @@
+import { RoundedSelect } from '@/components/ui/RoundedSelect'
 import type { LaunchLocale } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 import type { University } from '@/lib/data/types'
@@ -14,10 +15,10 @@ export function RankingFilterFields({ filters, locale, prefix, allLabel }: {
   return <>
     {rankingFilterKeys.map((key) => <div className="field" key={key}>
       <label htmlFor={`${prefix}-${key}`}>{rankingFilterLabel(key, locale)}</label>
-      <select id={`${prefix}-${key}`} name={key} defaultValue={filters[key] ?? ''}>
+      <RoundedSelect id={`${prefix}-${key}`} name={key} defaultValue={filters[key] ?? ''}>
         <option value="">{allLabel}</option>
         {rankingFilterOptions(locale).map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
-      </select>
+      </RoundedSelect>
     </div>)}
   </>
 }

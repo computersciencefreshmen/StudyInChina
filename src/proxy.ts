@@ -35,4 +35,4 @@ export function proxy(request: NextRequest) {
   return NextResponse.redirect(url)
 }
 
-export const config = { matcher: ['/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\\..*).*)'] }
+export const config = { matcher: ['/((?!api|admin(?:/|$)|themes(?:/|$)|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|.*\\..*).*)'] }

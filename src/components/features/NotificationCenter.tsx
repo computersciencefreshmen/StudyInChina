@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
+import { RoundedSelect } from '@/components/ui/RoundedSelect'
 import { localeIntlTag, type LaunchLocale } from '@/i18n/config'
 import { followedSiteUpdates, getSiteNotificationCopy, siteFollowKey } from '@/lib/site-notifications'
 import { refreshSiteNotifications, useSiteNotifications } from './useSiteNotifications'
@@ -10,9 +11,8 @@ import styles from './NotificationCenter.module.css'
 
 export function NotificationCenter({ locale }: { locale: LaunchLocale }) {
   const copy = getSiteNotificationCopy(locale)
-  const { follows, readIds, events, now, ready, unfollow, markRead } = useSiteNotifications()
+  const { follows, readIds, events, now, ready, summaryFrequency, setSummaryFrequency, unfollow, markRead } = useSiteNotifications()
   const [status, setStatus] = useState<'loading' | 'available' | 'unavailable'>('loading')
-  const [retry, setRetry] = useState(0)
   const [storageError, setStorageError] = useState(false)
   const hasFollows = follows.length > 0
   const matching = useMemo(() => followedSiteUpdates(follows, events).filter(event => event.publishedAt >= now - 30 * 86_400_000), [follows, events, now])
@@ -25,22 +25,29 @@ export function NotificationCenter({ locale }: { locale: LaunchLocale }) {
       const available = await refreshSiteNotifications(force)
       if (active) setStatus(available ? 'available' : 'unavailable')
     }
-    void load(true)
+    void load()
     const onVisible = () => { if (document.visibilityState === 'visible') void load() }
     document.addEventListener('visibilitychange', onVisible)
     return () => { active = false; document.removeEventListener('visibilitychange', onVisible) }
-  }, [ready, hasFollows, retry])
+  }, [ready, hasFollows, summaryFrequency])
 
   function saved(ok: boolean) { setStorageError(!ok) }
+  async function refresh() {
+    setStatus('loading')
+    const available = await refreshSiteNotifications(true)
+    setStatus(available ? 'available' : 'unavailable')
+  }
 
   return <div className={styles.center}>
     <div className={styles.feed}>
       <div className={styles.toolbar}><span className={styles.eyebrow}>{copy.eyebrow}{unread.length > 0 ? ' · ' + unread.length + ' ' + copy.unread : ''}</span>
+        <Button type="button" size="small" variant="ghost" disabled={!ready || !hasFollows || status === 'loading'} onClick={() => { void refresh() }}>{copy.refresh}</Button>
         <Button type="button" size="small" variant="ghost" disabled={!ready || !unread.length} onClick={() => saved(markRead(matching.map(event => event.eventId)))}>{copy.allRead}</Button>
       </div>
+      <div className={styles.preferences}><div className="field"><label htmlFor="notification-summary-frequency">{copy.summaryFrequency}</label><RoundedSelect id="notification-summary-frequency" value={summaryFrequency} disabled={!ready} onChange={event => saved(setSummaryFrequency(event.target.value === 'daily' ? 'daily' : 'five-hours'))}><option value="five-hours">{copy.fiveHours}</option><option value="daily">{copy.daily}</option></RoundedSelect></div><p>{copy.summaryDetail}</p></div>
       {!ready ? <p role="status" className={styles.state}>{copy.loading}</p> : !hasFollows ? <div className={styles.state}><span className={styles.stateIcon} aria-hidden="true">☆</span><h2>{copy.noFollows}</h2><p>{copy.noFollowsDetail}</p><Link className="atlas-button atlas-button--secondary atlas-button--medium" href={'/' + locale + '/universities'}>{copy.explore} →</Link></div>
         : status === 'loading' ? <p role="status" className={styles.state}>{copy.loading}</p>
-          : <>{status === 'unavailable' ? <div className={styles.unavailable} role="status"><p>{copy.unavailable}</p><Button type="button" variant="secondary" size="small" onClick={() => { setStatus('loading'); setRetry(value => value + 1) }}>{copy.retry}</Button></div> : null}
+          : <>{status === 'unavailable' ? <div className={styles.unavailable} role="status"><p>{copy.unavailable}</p><Button type="button" variant="secondary" size="small" onClick={() => { void refresh() }}>{copy.retry}</Button></div> : null}
             {!matching.length && status === 'available' ? <div className={styles.state} role="status"><span className={styles.stateIcon} aria-hidden="true">✓</span><h2>{copy.empty}</h2><p>{copy.emptyDetail}</p></div>
               : <ul className={styles.updates}>{matching.map(event => {
                 const isRead = readIds.includes(event.eventId)

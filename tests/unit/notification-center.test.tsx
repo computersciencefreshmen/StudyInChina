@@ -12,7 +12,7 @@ beforeEach(() => vi.clearAllMocks())
 afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks() })
 function seed(initialized = false) {
   let state: SiteNotificationState = { ...parseSiteNotifications(null), follows: [follow] }
-  if (initialized) state = applySiteObservations(state, [observation], Date.now() - 11 * 60_000)
+  if (initialized) state = applySiteObservations(state, [observation], Date.now() - 5 * 60 * 60_000)
   window.localStorage.setItem(SITE_NOTIFICATIONS_KEY, JSON.stringify(state))
 }
 
@@ -101,7 +101,7 @@ describe('website notification center', () => {
 
   it('refreshes on return when the automatic interval has elapsed', async () => {
     seed(true)
-    const now = Date.now() + 11 * 60_000
+    const now = Date.now() + 5 * 60 * 60_000
     const clock = vi.spyOn(Date, 'now').mockReturnValue(now)
     const fetchMock = vi.fn(async () => response([observation]))
     vi.stubGlobal('fetch', fetchMock)
@@ -110,8 +110,39 @@ describe('website notification center', () => {
     expect(result.current.events).toEqual([])
     fireEvent(document, new Event('visibilitychange'))
     expect(fetchMock).toHaveBeenCalledOnce()
-    clock.mockReturnValue(now + 11 * 60_000)
+    clock.mockReturnValue(now + 5 * 60 * 60_000)
     fireEvent(document, new Event('visibilitychange'))
     await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2))
   })
+
+  it('persists the chosen summary frequency across notification center remounts', () => {
+    const view = render(<NotificationCenter locale="en" />)
+    fireEvent.click(screen.getByRole('combobox', { name: 'Summary frequency' }))
+    fireEvent.click(screen.getByRole('option', { name: 'Daily summary', exact: true }))
+    expect(parseSiteNotifications(window.localStorage.getItem(SITE_NOTIFICATIONS_KEY)).summaryFrequency).toBe('daily')
+    view.unmount()
+    render(<NotificationCenter locale="en" />)
+    expect(screen.getByRole('combobox', { name: 'Summary frequency' })).toHaveAttribute('value', 'daily')
+  })
+
+  it.each(['five-hours', 'daily'] as const)('waits for the exact %s summary interval and allows manual refresh', async frequency => {
+    seed()
+    const start = Date.now()
+    const clock = vi.spyOn(Date, 'now').mockReturnValue(start)
+    const fetchMock = vi.fn(async () => response([observation]))
+    vi.stubGlobal('fetch', fetchMock)
+    const state = parseSiteNotifications(window.localStorage.getItem(SITE_NOTIFICATIONS_KEY))
+    window.localStorage.setItem(SITE_NOTIFICATIONS_KEY, JSON.stringify({ ...state, summaryFrequency: frequency }))
+    expect(await refreshSiteNotifications(true)).toBe(true)
+    const interval = (frequency === 'daily' ? 24 : 5) * 60 * 60_000
+    clock.mockReturnValue(start + interval - 1)
+    expect(await refreshSiteNotifications()).toBe(true)
+    expect(fetchMock).toHaveBeenCalledOnce()
+    clock.mockReturnValue(start + interval)
+    expect(await refreshSiteNotifications()).toBe(true)
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+    expect(await refreshSiteNotifications(true)).toBe(true)
+    expect(fetchMock).toHaveBeenCalledTimes(3)
+  })
+
 })

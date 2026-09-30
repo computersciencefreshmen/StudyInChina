@@ -1,3 +1,4 @@
+import { RoundedSelect } from '@/components/ui/RoundedSelect'
 import { Button, LinkButton } from '@/components/ui'
 import type { LaunchLocale } from '@/i18n/config'
 import type { Messages } from '@/i18n/messages'
@@ -141,25 +142,25 @@ export function ScholarshipExplorerV2({
       </div>
       <div className="field">
         <label htmlFor="scholarship-degree">{text.degree}</label>
-        <select id="scholarship-degree" name="degree" defaultValue={filters.degree}>
+        <RoundedSelect id="scholarship-degree" name="degree" defaultValue={filters.degree}>
           <option value="">{messages.common.all}</option>
           {Object.entries(degreeLabels(locale)).map(([key, label]) => <option value={key} key={key}>{label}</option>)}
-        </select>
+        </RoundedSelect>
       </div>
       <div className="field">
         <label htmlFor="scholarship-funding">{text.funding}</label>
-        <select id="scholarship-funding" name="funding" defaultValue={filters.funding}>
+        <RoundedSelect id="scholarship-funding" name="funding" defaultValue={filters.funding}>
           <option value="">{messages.common.all}</option>
           <option value="full-tuition">{text.fundingFullTuition}</option>
           <option value="partial-tuition">{text.fundingPartialTuition}</option>
           <option value="stipend">{text.fundingStipend}</option>
           <option value="accommodation">{text.fundingAccommodation}</option>
           <option value="insurance">{text.fundingInsurance}</option>
-        </select>
+        </RoundedSelect>
       </div>
       <div className="field">
         <label htmlFor="scholarship-deadline">{text.deadline}</label>
-        <select id="scholarship-deadline" name="deadline" defaultValue={filters.deadline}>
+        <RoundedSelect id="scholarship-deadline" name="deadline" defaultValue={filters.deadline}>
           <option value="">{messages.common.all}</option>
           <option value="future">{text.deadlineFuture}</option>
           <option value="next-30-days">{text.deadlineNext30}</option>
@@ -167,7 +168,7 @@ export function ScholarshipExplorerV2({
           <option value="announced">{text.deadlineAnnounced}</option>
           <option value="not-announced">{text.deadlineUnknown}</option>
           <option value="closed">{text.deadlineClosed}</option>
-        </select>
+        </RoundedSelect>
       </div>
       <RankingFilterFields filters={filters} locale={locale} prefix="scholarship" allLabel={messages.common.all} />
       </div>
@@ -177,19 +178,19 @@ export function ScholarshipExplorerV2({
         <div className={styles.advancedGrid}>
       <div className="field">
         <label htmlFor="scholarship-institution">{text.school}</label>
-        <select id="scholarship-institution" name="institution" defaultValue={filters.institution}>
+        <RoundedSelect id="scholarship-institution" name="institution" defaultValue={filters.institution}>
           <option value="">{messages.common.all}</option>
           {result.universityOptions.map((option) => <option value={option.value} key={option.value}>{localize(option.name, locale)}</option>)}
-        </select>
+        </RoundedSelect>
       </div>
       <div className="field">
         <label htmlFor="scholarship-sort">{text.sortBy}</label>
-        <select id="scholarship-sort" name="sort" defaultValue={filters.sort}>
+        <RoundedSelect id="scholarship-sort" name="sort" defaultValue={filters.sort}>
           <option value="default">{text.defaultOrder}</option>
           <option value="name">{text.scholarshipName}</option>
           <option value="deadline">{text.deadline}</option>
           <option value="stipend-desc">{text.stipendHigh}</option>
-        </select>
+        </RoundedSelect>
       </div>
         </div>
       </details>

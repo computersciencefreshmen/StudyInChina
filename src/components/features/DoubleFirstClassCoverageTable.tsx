@@ -1,5 +1,7 @@
 'use client'
 
+import { RoundedSelect } from '@/components/ui/RoundedSelect'
+
 import { useMemo, useState } from 'react'
 
 import type { LaunchLocale } from '@/i18n/config'
@@ -232,7 +234,7 @@ export function DoubleFirstClassCoverageTable({
         </div>
         <div className={styles.field}>
           <label htmlFor="double-first-class-status">{copy.status}</label>
-          <select
+          <RoundedSelect
             id="double-first-class-status"
             value={status}
             onChange={(event) => setStatus(event.target.value)}
@@ -241,7 +243,7 @@ export function DoubleFirstClassCoverageTable({
             <option value="source_manifest_complete">{copy.complete}</option>
             <option value="reconciled_limited">{copy.limited}</option>
             <option value="collecting">{copy.collecting}</option>
-          </select>
+          </RoundedSelect>
         </div>
       </div>
       <p className={styles.resultCount} aria-live="polite">
