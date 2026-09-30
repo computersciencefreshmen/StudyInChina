@@ -1,4 +1,5 @@
-.panel {
+/* Override the shared filter-panel layout regardless of production CSS order. */
+.panel:global(.filter-panel) {
   display: block;
   position: static;
 }

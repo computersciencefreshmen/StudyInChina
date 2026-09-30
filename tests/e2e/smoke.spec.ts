@@ -96,6 +96,12 @@ for (const locale of locales) {
       await expect(header).toHaveCount(1)
       await expect(header).toBeVisible()
       await expect(page.locator('main#main-content')).toBeVisible()
+      if (['universities', 'programs', 'scholarships'].includes(route)) {
+        // Large nested filter forms must remain in normal flow above their results.
+        const filters = page.getByRole('search')
+        await expect(filters).toHaveCSS('display', 'block')
+        await expect(filters).toHaveCSS('position', 'static')
+      }
     }
   })
 }
@@ -179,21 +185,20 @@ test('catalogue filters remain shareable and removable through browser history',
   await expect(page.getByRole('link', { name: /Remove filter: Degree level/ })).toBeVisible()
   const tuitionFilter = page.getByRole('link', { name: /Remove filter: Tuition data/ })
   await expect(tuitionFilter).toBeVisible()
-  await Promise.all([
-    page.waitForURL((url) => url.searchParams.get('degree') === 'master' && !url.searchParams.has('tuition')),
-    tuitionFilter.click(),
-  ])
+  // Server-rendered links are visible before the client router has hydrated.
+  await expect(page.locator('#program-degree')).toBeEnabled()
+  await tuitionFilter.click()
+  await expect.poll(() => new URL(page.url()).searchParams.get('degree')).toBe('master')
+  await expect.poll(() => new URL(page.url()).searchParams.has('tuition')).toBe(false)
 
-  await expect(page).toHaveURL(/degree=master/)
-  expect(new URL(page.url()).searchParams.has('tuition')).toBe(false)
   await page.goBack({ waitUntil: 'domcontentloaded' })
-  expect(new URL(page.url()).searchParams.get('tuition')).toBe('known')
+  await expect.poll(() => new URL(page.url()).searchParams.get('tuition')).toBe('known')
 })
 
 test('the program catalogue exposes linked scholarships as a shareable evidence relationship', async ({ page }) => {
   await page.goto('/en/programs?scholarship=linked', { waitUntil: 'domcontentloaded' })
 
-  await expect(page.locator('#program-scholarship')).toHaveValue('linked')
+  await expect(page.locator('#program-scholarship')).toHaveAttribute('value', 'linked')
   await expect(page.getByRole('link', { name: /Remove filter: Scholarships/ })).toBeVisible()
   expect(await page.locator('.record-card').count()).toBeGreaterThan(0)
   expect(new URL(page.url()).searchParams.get('scholarship')).toBe('linked')
