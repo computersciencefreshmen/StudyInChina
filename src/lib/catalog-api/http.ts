@@ -3,6 +3,7 @@ import { CatalogRepositoryError } from '@/lib/catalog'
 import { InvalidCursorError } from './cursor'
 import { InvalidSearchQueryError } from './service'
 import { catalogCacheControl } from './cache-policy'
+import { rankingFilterKeys, rankingFilterValues, type RankingFilters, type RankingFilterValue } from '@/lib/data/rankings'
 
 const responseHeaders = {
   'X-Content-Type-Options': 'nosniff',
@@ -84,6 +85,10 @@ export async function handleCatalogRequest(operation: () => Promise<NextResponse
       )
     }
     if (error instanceof CatalogRepositoryError) {
+      if (error.code === 'UNSUPPORTED_RANKING_FILTERS') return NextResponse.json(
+        { error: { code: 'ranking_filters_unavailable', message: error.message } },
+        { status: 501, headers: { ...responseHeaders, 'Cache-Control': 'no-store' } },
+      )
       return NextResponse.json(
         { error: { code: 'catalog_unavailable', message: 'The catalog is temporarily unavailable.' } },
         { status: 503, headers: { ...responseHeaders, 'Cache-Control': 'no-store', 'Retry-After': '60' } },
@@ -94,4 +99,14 @@ export async function handleCatalogRequest(operation: () => Promise<NextResponse
       { status: 500, headers: { ...responseHeaders, 'Cache-Control': 'no-store' } },
     )
   }
+}
+export function rankingParams(params: URLSearchParams): RankingFilters {
+  const result: RankingFilters = {}
+  for (const key of rankingFilterKeys) {
+    const value = stringParam(params, key)
+    if (value === undefined) continue
+    if (!rankingFilterValues.has(value)) throw new InvalidQueryError(`${key} is invalid.`)
+    result[key] = value as RankingFilterValue
+  }
+  return result
 }

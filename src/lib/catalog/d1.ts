@@ -1,6 +1,7 @@
 import { bundleSchema } from '@/lib/data/schema'
 import type { DataBundle } from '@/lib/data/types'
 import { getTodayDate } from '@/lib/data/freshness'
+import { hasRankingFilters, type RankingFilters } from '@/lib/data/rankings'
 import { parseD1ProgramComparison } from './d1-compare'
 import { parseD1InstitutionList, parseD1ProgramList, parseD1ScholarshipList } from './d1-list'
 import { deriveCatalogRelease, parseCatalogRelease, parseCatalogReleaseInfo } from './release'
@@ -37,6 +38,13 @@ export type D1CatalogRepositoryOptions = {
 
 const DEFAULT_TIMEOUT_MS = 10_000
 const DEFAULT_MAX_RESPONSE_BYTES = 25 * 1024 * 1024
+
+function rejectUnsupportedRankingFilters(query: RankingFilters) {
+  if (hasRankingFilters(query)) throw new CatalogRepositoryError(
+    'UNSUPPORTED_RANKING_FILTERS',
+    'Ranking filters are not available in this D1 catalog release.',
+  )
+}
 
 function boundedInteger(value: number | undefined, fallback: number, minimum: number, maximum: number): number {
   if (value === undefined) return fallback
@@ -245,6 +253,7 @@ export class D1CatalogRepository implements CatalogRepository {
   async listInstitutions(
     query: CatalogInstitutionListQuery = {},
   ): Promise<CatalogInstitutionListPage> {
+    rejectUnsupportedRankingFilters(query)
     const url = this.publicEndpoint('institutions')
     addParam(url, 'q', query.q)
     addParam(url, 'city', query.city)
@@ -263,6 +272,7 @@ export class D1CatalogRepository implements CatalogRepository {
   async listPrograms(
     query: CatalogProgramListQuery = {},
   ): Promise<CatalogProgramListPage> {
+    rejectUnsupportedRankingFilters(query)
     const url = this.publicEndpoint('programs')
     const range = tuitionRange(query.tuition)
     addParam(url, 'q', query.q)
@@ -291,6 +301,7 @@ export class D1CatalogRepository implements CatalogRepository {
   async listScholarships(
     query: CatalogScholarshipListQuery = {},
   ): Promise<CatalogScholarshipListPage> {
+    rejectUnsupportedRankingFilters(query)
     const url = this.publicEndpoint('scholarships')
     addParam(url, 'q', query.q)
     addParam(url, 'provider', query.provider)

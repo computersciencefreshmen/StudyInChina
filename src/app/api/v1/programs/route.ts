@@ -1,5 +1,5 @@
 import { getCatalogApiService } from '@/lib/catalog-api/runtime'
-import { handleCatalogRequest, integerParam, numberParam, ok, stringParam } from '@/lib/catalog-api/http'
+import { handleCatalogRequest, integerParam, numberParam, ok, rankingParams, stringParam } from '@/lib/catalog-api/http'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -9,6 +9,7 @@ export function GET(request: Request) {
     const params = new URL(request.url).searchParams
     const service = await getCatalogApiService()
     return ok(service.listPrograms({
+      ...rankingParams(params),
       q: stringParam(params, 'q'),
       institution: stringParam(params, 'institution'),
       city: stringParam(params, 'city'),

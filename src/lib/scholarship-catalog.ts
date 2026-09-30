@@ -6,6 +6,7 @@ import type {
   Scholarship,
   University,
 } from '@/lib/data/types'
+import { hasRankingFilters, matchesUniversityRankings, parseRankingFilters, rankingFilterKeys, type RankingFilters } from '@/lib/data/rankings'
 import {
   readCatalogListCursorPageIndex,
   validatedCatalogCursorHistory,
@@ -45,7 +46,7 @@ const SORT_ORDERS = new Set([
 ])
 
 export type ScholarshipCatalogSearchParams = Record<string, string | string[] | undefined>
-export type ScholarshipCatalogFilters = {
+export type ScholarshipCatalogFilters = RankingFilters & {
   query: string
   institution: string
   degree: string
@@ -125,6 +126,7 @@ export function parseScholarshipCatalogFilters(
   const requestedPage = Number.parseInt(first(params.page), 10)
 
   return {
+    ...parseRankingFilters(params),
     query: bounded(params.q),
     institution: bounded(params.institution),
     degree: allowed(bounded(params.degree), DEGREE_LEVELS),
@@ -255,6 +257,10 @@ function sortEntries(
 
 function catalogOptions(data: DataBundle): ScholarshipCatalogOption[] {
   const universityIds = new Set(data.scholarships.flatMap((item) => item.universityIds))
+  const programIds = new Set(data.scholarships.flatMap((item) => item.programIds))
+  for (const program of data.programs) {
+    if (programIds.has(program.id)) universityIds.add(program.universityId)
+  }
   return data.universities
     .filter((university) => universityIds.has(university.id))
     .map(({ slug, name }) => ({ value: slug, name }))
@@ -282,6 +288,13 @@ export function queryScholarshipCatalog(
       const program = programsById.get(id)
       return program ? [program] : []
     })
+    const rankingUniversities = [...new Map([
+      ...universities,
+      ...programs.flatMap((program) => {
+        const university = universitiesById.get(program.universityId)
+        return university ? [university] : []
+      }),
+    ].map((university) => [university.id, university])).values()]
     const currentCycle = selectScholarshipCurrentCycle(scholarship, today)
 
     const matches = includesQuery([
@@ -291,7 +304,7 @@ export function queryScholarshipCatalog(
       universities.map((item) => item.name),
       programs.map((item) => item.name),
     ], filters.query)
-      && (!filters.institution || universities.some((item) => (
+      && (!filters.institution || rankingUniversities.some((item) => (
         item.slug === filters.institution || item.id === filters.institution
       )))
       && (!filters.degree || programs.some((item) => item.degreeLevel === filters.degree))
@@ -302,7 +315,11 @@ export function queryScholarshipCatalog(
         scholarship.status === 'verified' && matchesDeadline(currentCycle, filters.deadline, today)
       ))
 
-    return matches ? [{ scholarship, universities, programs, currentCycle }] : []
+    const matchesRankings = !hasRankingFilters(filters) || rankingUniversities.some((university) => (
+      (!filters.institution || university.id === filters.institution || university.slug === filters.institution)
+      && matchesUniversityRankings(university, filters, today)
+    ))
+    return matches && matchesRankings ? [{ scholarship, universities, programs, currentCycle }] : []
   })
 
   sortEntries(matching, filters.sort, today)
@@ -329,6 +346,7 @@ function repositoryScholarshipQuery(
   cursor: string | undefined,
 ): CatalogScholarshipListQuery {
   return {
+    ...Object.fromEntries(rankingFilterKeys.map((key) => [key, filters[key] || undefined])),
     q: filters.query || undefined,
     institution: filters.institution || undefined,
     degree: filters.degree || undefined,
@@ -412,6 +430,7 @@ export function scholarshipCatalogHref(
   }
 
   const values: Array<[string, string]> = [
+    ...rankingFilterKeys.map((key): [string, string] => [key, filters[key] ?? '']),
     ['q', filters.query],
     ['institution', filters.institution],
     ['degree', filters.degree],

@@ -88,7 +88,7 @@ export type ProgramRecord = Omit<
   languageRequirements: Program['languageRequirements'] | null
   details: Program['details'] | null
   programType: ProgramType
-  university: Pick<University, 'id' | 'slug' | 'name'>
+  university: Pick<University, 'id' | 'slug' | 'name' | 'rankings'>
   officialSources: OfficialSourceLink[]
   fieldMeta: Record<string, FieldMeta>
 }

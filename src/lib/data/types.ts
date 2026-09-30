@@ -37,6 +37,18 @@ export type City = AuditMeta & {
   sights: LocalizedText[]
 }
 
+export type UniversityRanking = {
+  system: 'qs' | 'the' | 'usnews' | 'arwu'
+  year: number
+  editionLabel?: string
+  rankMin: number
+  rankMax: number
+  rankLabel: string
+  sourceUrl: string
+  checkedAt: string
+  reviewAfter?: string
+}
+
 export type University = AuditMeta & {
   id: string
   slug: string
@@ -47,6 +59,7 @@ export type University = AuditMeta & {
   admissionsUrl: string | null
   summary: LocalizedText | null
   featured: boolean
+  rankings?: UniversityRanking[]
 }
 
 export type LanguageRequirement = {

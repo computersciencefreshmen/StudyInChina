@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { connection } from 'next/server'
 import { Badge, Card, LinkButton, PageHero, SectionHeading, VerificationBadge } from '@/components/ui'
 import { ProgramCard } from '@/components/features/RecordCards'
+import { UniversityRankingLinks } from '@/components/features/RankingFilterFields'
 import { DataFreshnessPanel } from '@/components/features/DataFreshnessPanel'
 import { SourceTransparency } from '@/components/features/SourceTransparency'
 import { indexedLocales } from '@/i18n/config'
@@ -71,6 +72,7 @@ export default async function UniversityDetailPage({ params }: { params: Promise
     <PageHero variant="compact" eyebrow={city ? `${localize(city.name, locale)} · ${university.region ? regionLabels(locale)[university.region] : messages.common.unknown}` : university.region ? regionLabels(locale)[university.region] : messages.common.unknown} title={localize(university.name, locale)} description={localize(university.summary, locale)} actions={<><a className="atlas-button atlas-button--primary atlas-button--medium" href={university.admissionsUrl || university.officialUrl} target="_blank" rel="noreferrer">{university.admissionsUrl ? copy.admission : messages.common.officialSource} ↗</a><a className="atlas-button atlas-button--ghost atlas-button--medium" href={university.officialUrl} target="_blank" rel="noreferrer">{copy.official} ↗</a></>} meta={<VerificationBadge status={university.status} verifiedAt={university.verifiedAt} locale={locale} verifiedDateLabel={messages.common.lastVerified} labels={{ verified: messages.common.verified, stale: messages.common.stale, draft: messages.common.draft, archived: messages.common.archived }} />} />
     <div className="atlas-container">
       <DataFreshnessPanel record={university} locale={locale} today={today} />
+      <UniversityRankingLinks university={university} locale={locale} />
     </div>
     <section className="atlas-container atlas-section">
       <div className="stat-strip">

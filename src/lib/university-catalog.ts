@@ -1,4 +1,5 @@
 import { normalizeProgramField } from '@/lib/data/fields'
+import { parseRankingFilters, rankingFilterKeys, type RankingFilters } from '@/lib/data/rankings'
 import type { Region } from '@/lib/data/types'
 import {
   readCatalogListCursorPageIndex,
@@ -32,7 +33,7 @@ const SORT_ORDERS = new Set([
 
 export type UniversityCatalogSearchParams = Record<string, string | string[] | undefined>
 
-export type UniversityCatalogFilters = {
+export type UniversityCatalogFilters = RankingFilters & {
   query: string
   city: string
   region: string
@@ -96,6 +97,7 @@ export function parseUniversityCatalogFilters(
   const requestedPage = Number.parseInt(first(params.page), 10)
 
   return {
+    ...parseRankingFilters(params),
     query: searchQuery(params.q),
     city: bounded(params.city),
     region: allowed(bounded(params.region), REGIONS),
@@ -116,6 +118,7 @@ function repositoryInstitutionQuery(
   cursor: string | undefined,
 ): CatalogInstitutionListQuery {
   return {
+    ...Object.fromEntries(rankingFilterKeys.map((key) => [key, filters[key] || undefined])),
     q: filters.query || undefined,
     city: filters.city || undefined,
     region: filters.region || undefined,
@@ -195,6 +198,7 @@ export function universityCatalogHref(
   }
 
   const values: Array<[string, string]> = [
+    ...rankingFilterKeys.map((key): [string, string] => [key, filters[key] ?? '']),
     ['q', filters.query],
     ['city', filters.city],
     ['region', filters.region],

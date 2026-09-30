@@ -56,6 +56,7 @@
     "minimax:queue": "tsx scripts/ingestion/build-minimax-harvest-queue.ts",
     "minimax:claim": "tsx scripts/ingestion/claim-minimax-harvest-task.ts",
     "minimax:validate": "tsx scripts/ingestion/validate-minimax-harvest.ts",
+    "minimax:verify": "tsx scripts/ingestion/verify-catalog-minimax.ts",
     "check:program-coverage": "tsx scripts/quality/check-program-coverage.ts --mode report",
     "check:program-coverage:strict": "tsx scripts/quality/check-program-coverage.ts --mode strict --minimum 1",
     "quality:inventory-untracked": "tsx scripts/quality/inventory-untracked-assets.ts",

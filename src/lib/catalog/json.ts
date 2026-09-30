@@ -4,6 +4,7 @@ import { bundleSchema } from '@/lib/data/schema'
 import type { DataBundle } from '@/lib/data/types'
 import { getTodayDate, isCurrentVerifiedRecord } from '@/lib/data/freshness'
 import { classifyProgramField } from '@/lib/data/fields'
+import { matchesUniversityRankings, rankingFilterKeys } from '@/lib/data/rankings'
 import { scholarshipAppliesToProgram } from '@/lib/data/scholarship-scope'
 import { selectCatalogApiData } from '@/lib/catalog-api/projection'
 import { CatalogApiService } from '@/lib/catalog-api/service'
@@ -197,6 +198,8 @@ export class JsonCatalogRepository implements CatalogRepository {
       )].sort()
       const nameTokens = searchTokens(Object.values(safeInstitution.name))
       if (
+        !matchesUniversityRankings(institution, query, today)
+        ||
         queryTerms.some((term) => !nameTokens.some((token) => token.startsWith(term)))
         || (query.city && city?.id !== query.city && city?.slug !== query.city)
         || (query.region && (institution.region ?? city?.region) !== query.region)
@@ -280,6 +283,7 @@ export class JsonCatalogRepository implements CatalogRepository {
       ?? (query.type === 'language' || query.type === 'foundation' ? query.type : undefined)
     const filters = {
       ...parseProgramCatalogFilters({
+        ...Object.fromEntries(rankingFilterKeys.map((key) => [key, query[key]])),
         q: query.q,
         institution: query.institution,
         city: query.city,
@@ -340,6 +344,7 @@ export class JsonCatalogRepository implements CatalogRepository {
     const page = requestedPage('scholarships', query)
     const filters = {
       ...parseScholarshipCatalogFilters({
+        ...Object.fromEntries(rankingFilterKeys.map((key) => [key, query[key]])),
         q: query.q,
         institution: query.institution,
         degree: query.degree,

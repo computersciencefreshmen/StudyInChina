@@ -6,7 +6,7 @@ import {
   type CatalogInstitutionListQuery,
   type CatalogInstitutionListSort,
 } from '@/lib/catalog'
-import { InvalidQueryError, handleCatalogRequest, integerParam, ok, stringParam } from '@/lib/catalog-api/http'
+import { InvalidQueryError, handleCatalogRequest, integerParam, ok, rankingParams, stringParam } from '@/lib/catalog-api/http'
 import {
   AUTOMATED_COLLECTION_NOTICE,
   type ApiEnvelope,
@@ -97,6 +97,7 @@ function institutionRecord(
 
   return {
     ...institution,
+    rankings: institution.rankings?.filter((ranking) => !ranking.reviewAfter || ranking.reviewAfter >= today),
     city,
     disciplines: item.disciplines,
     programCount: item.programCount,
@@ -172,6 +173,7 @@ export function GET(request: Request) {
     const params = new URL(request.url).searchParams
     const today = getTodayDate()
     const page = await repositoryPage({
+      ...rankingParams(params),
       q: institutionSearchParam(params),
       city: stringParam(params, 'city'),
       region: stringParam(params, 'region'),
