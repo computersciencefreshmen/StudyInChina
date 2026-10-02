@@ -1,6 +1,6 @@
 import { createHash, randomUUID } from 'node:crypto'
 import { spawn, execFile } from 'node:child_process'
-import { open, readFile, readdir, mkdir, rename, unlink, stat } from 'node:fs/promises'
+import { open, readFile, readdir, mkdir, unlink, stat } from 'node:fs/promises'
 import { closeSync, openSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { promisify } from 'node:util'
@@ -8,6 +8,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 import { fetchQuota, getCcSwitchQuotaConfig, type QuotaApiConfig, type QuotaState } from './minimax-quota'
 import { authorizedCreditWindow, readPlanBillingSafety, type PlanBillingSafety } from './minimax-billing-safety'
 import { assertMiniMaxRunning, readManualControl } from './minimax-manual-control'
+import { atomicJson } from './atomic-json'
 
 const FILES = ['universities', 'programs', 'admission-cycles', 'scholarships', 'cities', 'sources'] as const
 const RUN_ID = /^[a-f0-9]{16}(?:-[a-f0-9]{12})?$/
@@ -182,14 +183,7 @@ export function verifierSourceConfiguration(source: string) {
 }
 
 export async function atomicSupervisorJson(path: string, value: unknown): Promise<void> {
-  await mkdir(dirname(path), { recursive: true })
-  const temporary = `${path}.${process.pid}.${randomUUID()}.tmp`
-  await (await open(/* turbopackIgnore: true */ temporary, 'wx')).close()
-  try {
-    const file = await open(/* turbopackIgnore: true */ temporary, 'w')
-    try { await file.writeFile(`${JSON.stringify(value, null, 2)}\n`, 'utf8') } finally { await file.close() }
-    await rename(temporary, path)
-  } finally { await unlink(temporary).catch(() => undefined) }
+  await atomicJson(path, value)
 }
 
 type LockOwner = { schemaVersion: 1; ownerPid: number; fingerprint: string; nonce: string; runId: string; startedAt: string }

@@ -1,6 +1,6 @@
 import { createHash, randomUUID } from 'node:crypto'
 import { existsSync } from 'node:fs'
-import { mkdir, readFile, realpath, rename, stat, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, realpath, stat, writeFile } from 'node:fs/promises'
 import { resolve, join, relative, isAbsolute, dirname } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { execFile } from 'node:child_process'
@@ -16,6 +16,7 @@ import { fetchQuota, getCcSwitchQuotaConfig, isCurrentQuotaWindow, type QuotaSta
 import { assertSafePlanQuota, authorizedCreditWindow, readPlanBillingSafety, type PlanBillingSafety } from './minimax-billing-safety'
 import { recordModelUsage } from './minimax-usage-ledger'
 import { assertMiniMaxRunning } from './minimax-manual-control'
+import { atomicJson } from './atomic-json'
 
 const FILES = ['universities', 'programs', 'admission-cycles', 'scholarships', 'cities', 'sources'] as const
 const PROMPT_VERSION = 'catalog-comparison-v1.2'
@@ -476,13 +477,6 @@ function getCcSwitchConfig(): ApiConfig {
     if (!config || !/^MiniMax-M/.test(config.model)) throw new Error('CC Switch current provider is not an official configured MiniMax provider')
     return { ...config, providerId: row.id }
   } finally { db.close() }
-}
-
-async function atomicJson(file: string, value: unknown) {
-  await mkdir(resolve(file, '..'), { recursive: true })
-  const temporary = `${file}.${process.pid}.${randomUUID()}.tmp`
-  await writeFile(temporary, `${JSON.stringify(value, null, 2)}\n`, 'utf8')
-  await rename(temporary, file)
 }
 
 async function retry<T>(action: () => Promise<T>, attempts = 3): Promise<T> {
