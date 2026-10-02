@@ -11,13 +11,27 @@ import styles from './Workbench.module.css'
 class AdminRequestError extends Error {
   constructor(message: string, public status: number) { super(message) }
 }
+const requestErrors: Record<string, string> = {
+  unauthorized: '管理员会话已过期，请重新登录。', invalid_credentials: '管理员访问口令不正确，请重试。',
+  forbidden: '请求来源校验未通过，请刷新管理员页面后重试。', invalid_request: '核验设置无效，请检查范围、数量和模型选项。',
+  admin_not_configured: '管理员访问尚未配置，请检查服务端配置。', rate_limited: '登录尝试过于频繁，请稍后重试。',
+  rate_limit_unavailable: '登录保护服务暂时不可用，请稍后重试。',
+  verification_already_running: '已有核验任务正在运行，请查看核验任务进度，或先暂停后续任务。',
+  executor_unavailable: '执行器暂时无法接受指令，请同步最新数据并检查执行器连接后重试。',
+}
+type VerificationAccepted = { accepted: true; commandId?: string; pid?: number }
 async function jsonRequest<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(path, { cache: 'no-store', credentials: 'same-origin', ...init })
-  const data = await response.json()
-  if (!response.ok) throw new AdminRequestError(typeof data.error === 'string' ? data.error : '请求未完成，请稍后重试。', response.status)
+  let data
+  try { data = await response.json() }
+  catch { throw new AdminRequestError('管理员服务返回了无效响应，请同步最新数据后重试。', response.status) }
+  if (!response.ok) {
+    const code = typeof data?.error === 'string' ? data.error : ''
+    throw new AdminRequestError(requestErrors[code] ?? '请求未完成，请稍后重试。', response.status)
+  }
   return data as T
 }
-function StartVerification({ onClose, onStarted, configuredModel }: { onClose: () => void; onStarted: () => void; configuredModel: string | null }) {
+function StartVerification({ onClose, onStart, configuredModel }: { onClose: () => void; onStart: (request: VerificationRequest) => Promise<void>; configuredModel: string | null }) {
   const [collection, setCollection] = useState<VerificationRequest['collection']>('all')
   const [mode, setMode] = useState<'sample' | 'full'>('sample')
   const [model, setModel] = useState<NonNullable<VerificationRequest['model']>>('configured')
@@ -45,8 +59,8 @@ function StartVerification({ onClose, onStarted, configuredModel }: { onClose: (
   async function submit(event: FormEvent) {
     event.preventDefault(); setBusy(true); setError('')
     try {
-      await jsonRequest('/api/admin/verification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ collection, mode, model, effort, ...(mode === 'sample' ? { limit } : {}) }) })
-      onStarted(); onClose()
+      await onStart({ collection, mode, model, effort, ...(mode === 'sample' ? { limit } : {}) })
+      onClose()
     } catch (cause) { setError(cause instanceof Error ? cause.message : '无法开始核验。') }
     finally { setBusy(false) }
   }
@@ -69,19 +83,39 @@ export function AdminWorkbench() {
   const [busy, setBusy] = useState(false)
   const [starting, setStarting] = useState(false)
   const [automationCommandId, setAutomationCommandId] = useState<string | null>(null)
+  const [verificationReceipt, setVerificationReceipt] = useState('')
   const [refreshing, setRefreshing] = useState(false)
   const [refreshedAt, setRefreshedAt] = useState<string | null>(null)
   const refreshController = useRef<AbortController | null>(null)
+  const transportCleanup = useRef<(() => void) | null>(null)
+  const closeTransport = useCallback(() => {
+    transportCleanup.current?.()
+    transportCleanup.current = null
+    refreshController.current?.abort()
+  }, [])
+  const snapshotGeneratedAt = useRef('')
+  const acceptSnapshot = useCallback((next: AdminSnapshot) => {
+    if (snapshotGeneratedAt.current > next.generatedAt) return
+    snapshotGeneratedAt.current = next.generatedAt
+    setSnapshot(next)
+    const latest = next.automation?.latestCommand
+    // A terminal receipt releases this browser's command lock. Subsequent commands
+    // from other administrators must not turn a completed command back into a wait.
+    setAutomationCommandId(current => current && latest?.commandId === current && ['completed', 'failed', 'expired'].includes(latest.status) ? null : current)
+  }, [])
   const expireSession = useCallback(() => {
+    closeTransport()
+    snapshotGeneratedAt.current = ''
     setSnapshot(null)
     setStarting(false)
     setAutomationCommandId(null)
+    setVerificationReceipt('')
     setRefreshing(false)
     setRefreshedAt(null)
     setSession(current => current ? { ...current, authenticated: false } : current)
     setConnection('offline')
     setError('管理员会话已过期，请重新登录。')
-  }, [])
+  }, [closeTransport])
   useEffect(() => {
     let cancelled = false
     jsonRequest<AdminSession>('/api/admin/session').then(next => { if (!cancelled) { setSession(next); setError('') } }).catch(() => { if (!cancelled) setError('管理员服务暂时不可用，请刷新重试。') })
@@ -95,13 +129,13 @@ export function AdminWorkbench() {
     setRefreshedAt(null)
     try {
       const next = await jsonRequest<AdminSnapshot>('/api/admin/status', { signal: controller.signal })
-      if (!controller.signal.aborted) { setSnapshot(current => current && current.generatedAt > next.generatedAt ? current : next); setError(''); setRefreshedAt(new Date().toISOString()) }
+      if (!controller.signal.aborted) { acceptSnapshot(next); setError(''); setRefreshedAt(new Date().toISOString()); setConnection(current => current === 'live' ? current : 'polling') }
     } catch (cause) {
       if (controller.signal.aborted) return
       if (cause instanceof AdminRequestError && cause.status === 401) { expireSession(); return }
       setError(cause instanceof Error ? cause.message : '无法同步数据。'); setConnection('offline')
     } finally { if (refreshController.current === controller) { refreshController.current = null; setRefreshing(false) } }
-  }, [expireSession])
+  }, [acceptSnapshot, expireSession])
   useEffect(() => {
     if (!session?.authenticated) return
     let stopped = false
@@ -111,6 +145,20 @@ export function AdminWorkbench() {
     let snapshotWatchdog: ReturnType<typeof setTimeout> | undefined
     const controller = new AbortController()
     const source = new EventSource('/api/admin/events')
+    let disposed = false
+    const dispose = () => {
+      if (disposed) return
+      disposed = true
+      stopped = true
+      controller.abort()
+      refreshController.current?.abort()
+      source.close()
+      if (polling) clearTimeout(polling)
+      if (snapshotWatchdog) clearTimeout(snapshotWatchdog)
+    }
+    // Revoke transport admission before rendering the signed-out view. A passive
+    // effect cleanup can run later than the DOM update, especially under load.
+    transportCleanup.current = dispose
     function fallback() {
       if (stopped) return
       streamLive = false
@@ -125,10 +173,10 @@ export function AdminWorkbench() {
       try {
         const response = await fetch('/api/admin/status', { cache: 'no-store', signal: controller.signal })
         if (stopped) return
-        if (response.status === 401) { source.close(); stopped = true; expireSession(); return }
+        if (response.status === 401) { expireSession(); return }
         if (!response.ok) throw new Error('Unavailable')
         const next: AdminSnapshot = await response.json()
-        if (!stopped && !streamLive) { setSnapshot(current => current && current.generatedAt > next.generatedAt ? current : next); setConnection('polling'); setError('') }
+        if (!stopped && !streamLive) { acceptSnapshot(next); setConnection('polling'); setError('') }
       } catch { if (!stopped && !streamLive) setConnection('offline') }
       finally {
         pollingInFlight = false
@@ -146,7 +194,7 @@ export function AdminWorkbench() {
         // The server sends snapshots every three seconds. An open connection
         // without fresh data must not leave the usage page frozen indefinitely.
         snapshotWatchdog = setTimeout(() => { setConnection('connecting'); fallback() }, 15_000)
-        setSnapshot(current => current && current.generatedAt > next.generatedAt ? current : next); setConnection('live'); setError('')
+        acceptSnapshot(next); setConnection('live'); setError('')
       } catch { setConnection('offline'); fallback() }
     })
     source.addEventListener('status-error', () => { if (stopped) return; setConnection('offline'); setError('执行器状态暂时不可用，正在等待下一次同步。'); fallback() })
@@ -154,13 +202,26 @@ export function AdminWorkbench() {
     // confirms that application data is flowing and can stop fallback polling.
     source.onopen = () => { if (stopped) return; setConnection('connecting'); fallback() }
     source.onerror = () => { if (stopped) return; setConnection('connecting'); fallback() }
-    jsonRequest<AdminSnapshot>('/api/admin/status', { signal: controller.signal }).then(next => { if (!stopped) setSnapshot(current => current && current.generatedAt > next.generatedAt ? current : next) }).catch(cause => {
+    jsonRequest<AdminSnapshot>('/api/admin/status', { signal: controller.signal }).then(next => { if (!stopped) acceptSnapshot(next) }).catch(cause => {
       if (stopped) return
-      if (cause instanceof AdminRequestError && cause.status === 401) { stopped = true; source.close(); expireSession() }
+      if (cause instanceof AdminRequestError && cause.status === 401) expireSession()
       else { setConnection('offline'); fallback() }
     })
-    return () => { stopped = true; controller.abort(); refreshController.current?.abort(); source.close(); if (polling) clearTimeout(polling); if (snapshotWatchdog) clearTimeout(snapshotWatchdog) }
-  }, [session?.authenticated, expireSession])
+    return () => { dispose(); if (transportCleanup.current === dispose) transportCleanup.current = null }
+  }, [session?.authenticated, acceptSnapshot, expireSession])
+  async function startVerification(request: VerificationRequest) {
+    setVerificationReceipt('')
+    try {
+      const accepted = await jsonRequest<VerificationAccepted>('/api/admin/verification', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(request) })
+      if (accepted?.accepted !== true || !accepted.commandId && (!Number.isSafeInteger(accepted.pid) || Number(accepted.pid) <= 0)) throw new AdminRequestError('核验启动回执无效，请同步最新数据确认任务状态。', 502)
+      if (accepted.commandId) setAutomationCommandId(accepted.commandId)
+      else setVerificationReceipt('核验进程已启动，模型调用与核验结果将随执行器回执更新。')
+      void refresh()
+    } catch (cause) {
+      if (cause instanceof AdminRequestError && cause.status === 401) expireSession()
+      throw cause
+    }
+  }
   async function automationAction(action: 'pause' | 'resume') {
     const commandId = crypto.randomUUID()
     setAutomationCommandId(commandId)
@@ -180,9 +241,9 @@ export function AdminWorkbench() {
     finally { setBusy(false) }
   }
   async function logout() {
-    try { await jsonRequest('/api/admin/session', { method: 'DELETE' }); setSnapshot(null); setAutomationCommandId(null); setRefreshing(false); setRefreshedAt(null); setSession(current => current ? { ...current, authenticated: false } : current) }
+    try { await jsonRequest('/api/admin/session', { method: 'DELETE' }); closeTransport(); snapshotGeneratedAt.current = ''; setSnapshot(null); setAutomationCommandId(null); setVerificationReceipt(''); setRefreshing(false); setRefreshedAt(null); setSession(current => current ? { ...current, authenticated: false } : current) }
     catch { setError('退出未完成，请重试。') }
   }
-  if (session?.authenticated && snapshot) return <><AdminDashboard snapshot={snapshot} connection={connection} refreshing={refreshing} refreshedAt={refreshedAt} onAutomationAction={automationAction} automationCommandId={automationCommandId} onStart={() => { if (snapshot.capabilities.startVerification) setStarting(true) }} onRefresh={() => { void refresh() }} onLogout={() => { void logout() }} />{error ? <p role="alert" className={styles.error} style={{ position: 'fixed', bottom: 15, right: 20, background: 'white', padding: 12, borderRadius: 12 }}>{error}</p> : null}{starting && snapshot.capabilities.startVerification ? <StartVerification configuredModel={snapshot.model.configured} onClose={() => setStarting(false)} onStarted={() => { void refresh() }} /> : null}</>
+  if (session?.authenticated && snapshot) return <><AdminDashboard snapshot={snapshot} connection={connection} refreshing={refreshing} refreshedAt={refreshedAt} verificationReceipt={verificationReceipt} onAutomationAction={automationAction} automationCommandId={automationCommandId} onStart={() => { if (snapshot.capabilities.startVerification) setStarting(true) }} onRefresh={() => { void refresh() }} onLogout={() => { void logout() }} />{error ? <p role="alert" className={styles.error} style={{ position: 'fixed', bottom: 15, right: 20, background: 'white', padding: 12, borderRadius: 12 }}>{error}</p> : null}{starting && snapshot.capabilities.startVerification ? <StartVerification configuredModel={snapshot.model.configured} onClose={() => setStarting(false)} onStart={startVerification} /> : null}</>
   return <div className={styles.loginShell}><section className={styles.loginCard}><Link href="/zh" className={styles.brand}><span className={styles.brandMark} style={{ background: '#7860cf', color: 'white' }}>中</span><span>Study in China<small>ADMIN WORKSPACE</small></span></Link><h1>{session?.authenticated ? '正在连接工作空间…' : '欢迎回到数据工作室'}</h1>{session === null ? <p>正在检查管理员会话…</p> : session.authenticated ? <p>正在读取实际目录和核验进度。</p> : session.configured ? <><p>登录后查看核验任务、处理进度和 Token 用量。</p><form onSubmit={login}><label htmlFor="admin-password">管理员访问口令</label><input autoComplete="current-password" type="password" id="admin-password" value={password} required onChange={event => setPassword(event.target.value)} /><button type="submit" disabled={busy} className={styles.primaryButton}>{busy ? '正在登录…' : '进入管理员工作台'}<WorkbenchIcon name="arrow" size={16} /></button></form></> : <><p>管理员访问尚未配置。请在服务端环境中设置 ADMIN_ACCESS_TOKEN 和 ADMIN_SESSION_SECRET；本机执行核验还需要 ADMIN_LOCAL_VERIFICATION_ENABLED=true。</p><p>主题实验室已可直接查看完整工作台设计。</p></>}{error ? <p className={styles.error} role="alert">{error}</p> : null}<div className={styles.loginLinks}><Link href="/themes">查看五套主题 ↗</Link><Link href="/zh">返回网站 →</Link></div></section></div>
 }

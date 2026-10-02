@@ -1,6 +1,14 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { bridgeIteration, createBridgeRequest, loadBridgeConfiguration, projectBridgeQuota, telemetryOnlyIteration, validateBridgeTarget, windowsBridgeModulePath, type BridgeConfiguration } from '../../scripts/ingestion/admin-executor-bridge'
+import { bridgeIteration, buildBridgeTelemetry, createBridgeRequest, loadBridgeConfiguration, projectBridgeQuota, telemetryOnlyIteration, validateBridgeTarget, windowsBridgeModulePath, type BridgeConfiguration } from '../../scripts/ingestion/admin-executor-bridge'
 import { ADMIN_COMMAND_TTL_MS, ADMIN_EXECUTOR_ID, type ExecutorQueueEntry } from '../../workers/catalog-api/src/admin-executor'
+
+vi.mock('../../src/lib/admin/snapshot', () => ({ readLocalVerificationRuns: async () => [] }))
+vi.mock('../../scripts/ingestion/minimax-admin-control', () => ({ readExecutorStatus: async () => ({
+  executorId: 'studyinchina-local-minimax', observedAt: new Date().toISOString(), connected: true, desiredState: 'running',
+  phase: 'idle', reason: 'executor_ready', baselineRunId: null, runnerAlive: false, supervisorAlive: false, activeVerifierCount: 0,
+  controlAcknowledgedAt: null, pauseMayHaveInFlightRequest: false, creditFallbackAuthorized: false, policyReloadPending: false,
+  keepAwake: false, quota: null, latestCommand: null,
+}) }))
 
 const now = Date.parse('2026-10-02T10:00:00.000Z')
 const commandId = 'bca14973-d37e-4b4d-8742-4ad95a64a90c'
@@ -19,6 +27,11 @@ function dependencies() {
 }
 
 describe('outward-only administrator bridge', () => {
+  it('advertises command consumption only when publishing from the execution mode', async () => {
+    expect((await buildBridgeTelemetry('missing-test-root')).automation?.remotelyControllable).toBe(false)
+    expect((await buildBridgeTelemetry('missing-test-root', false)).automation?.remotelyControllable).toBe(false)
+    expect((await buildBridgeTelemetry('missing-test-root', true)).automation?.remotelyControllable).toBe(true)
+  })
   it('publishes telemetry without reading or executing pending commands in monitoring-only mode', async () => {
     const fixture = dependencies()
     expect(await telemetryOnlyIteration(fixture)).toEqual({ commandId: null, result: 'idle', published: true })

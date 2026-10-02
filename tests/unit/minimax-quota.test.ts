@@ -121,6 +121,28 @@ describe('MiniMax Token Plan quota normalization', () => {
   })
 })
 
+describe('MiniMax Shanghai day-end fixed quota window', () => {
+  const terminalStart = Date.parse('2026-10-02T12:00:00Z')
+  const terminalEnd = Date.parse('2026-10-02T16:00:00Z')
+  const terminalNow = Date.parse('2026-10-02T14:05:00Z')
+  it.each([100, 0])('recognizes the observed 20:00–00:00 window with %s percent remaining', remaining => {
+    expect(normalizeQuota(response({ start_time: terminalStart, end_time: terminalEnd, current_interval_remaining_percent: remaining }), 'MiniMax-M3', terminalNow))
+      .toMatchObject({ state: remaining ? 'available' : 'exhausted', canRun: remaining > 0 })
+  })
+  it.each([
+    { start_time: terminalStart + 1 }, { end_time: terminalEnd - 1 },
+    { start_time: terminalStart - 3_600_000, end_time: terminalEnd - 3_600_000 },
+    { start_time: null }, { end_time: 0 }, { weekly_end_time: terminalEnd },
+  ])('rejects shifted, incomplete or invalid terminal windows', overrides => {
+    expect(normalizeQuota(response({ start_time: terminalStart, end_time: terminalEnd, current_interval_remaining_percent: 0, ...overrides }), 'MiniMax-M3', terminalNow))
+      .toMatchObject({ state: 'unknown', canRun: false })
+  })
+  it.each([terminalStart - 1, terminalEnd, terminalEnd + 1])('fails closed outside the terminal window, including zero quota', clock => {
+    expect(normalizeQuota(response({ start_time: terminalStart, end_time: terminalEnd, current_interval_remaining_percent: 0 }), 'MiniMax-M3', clock))
+      .toMatchObject({ state: 'unknown', canRun: false, reason: 'quota_window_unknown_or_expired' })
+  })
+})
+
 describe('MiniMax read-only quota transport', () => {
   it('sends only GET to the approved official host and refuses redirects', async () => {
     const fetcher = vi.fn<typeof fetch>().mockResolvedValue(new Response(JSON.stringify(response())))

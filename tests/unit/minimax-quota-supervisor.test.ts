@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os'
 import { basename, dirname, join, resolve } from 'node:path'
 import { createHash } from 'node:crypto'
 import { normalizeQuota } from '../../scripts/ingestion/minimax-quota'
-import { acquireSupervisorLock, buildVerifierLaunch, currentInputMatches, decideSupervisorAction, inspectCheckpoints, inspectVerifierActivity, observeSupervisorClock, processMatchesReceipt, receiptMatchesAnchor, verifierRestartDelay, verifierSourceConfiguration, windowsProcessProbe, type ProcessProbe, type RunReceipt, type SupervisorAnchor, type SupervisorObservation } from '../../scripts/ingestion/minimax-quota-supervisor'
+import { acquireSupervisorLock, buildVerifierLaunch, currentInputMatches, decideSupervisorAction, inspectCheckpoints, inspectVerifierActivity, observeSupervisorClock, preparedBaselineSafety, processMatchesReceipt, readBaselineReceipt, receiptMatchesAnchor, verifierRestartDelay, verifierSourceConfiguration, windowsProcessProbe, type ProcessProbe, type RunReceipt, type SupervisorAnchor, type SupervisorObservation } from '../../scripts/ingestion/minimax-quota-supervisor'
 
 const now = Date.parse('2026-10-01T18:00:00Z')
 const sha = (value: string) => createHash('sha256').update(value).digest('hex')
@@ -61,6 +61,12 @@ describe('MiniMax finite baseline supervision decisions', () => {
   })
   it('hands off completed base work to recovery instead of spending quota on another all pass', () => {
     expect(decideSupervisorAction(observation({ inventory: { completedRecords: 5031, modelErrorRecords: 0, unconfirmedFields: 999, expiredCompletedRecords: 5031 } }))).toMatchObject({ kind: 'needs-recovery', reason: 'base_all_completed_no_repeat' })
+  })
+  it('hands only known transient model errors to the qualified single-record recovery queue', () => {
+    expect(decideSupervisorAction(observation({ inventory: { completedRecords: 5013, modelErrorRecords: 18, recoveryEligibleRecords: 18, unconfirmedFields: 999, expiredCompletedRecords: 0 }, noProgressFailures: 3 })))
+      .toMatchObject({ kind: 'needs-recovery', reason: 'base_all_completed_no_repeat' })
+    expect(decideSupervisorAction(observation({ inventory: { completedRecords: 5013, modelErrorRecords: 18, recoveryEligibleRecords: 17, unconfirmedFields: 999, expiredCompletedRecords: 0 } })).kind).toBe('launch')
+    expect(decideSupervisorAction(observation({ inventory: { completedRecords: 5031, modelErrorRecords: 0, unconfirmedFields: 0, expiredCompletedRecords: 0 }, fatal: 'MiniMax HTTP 402' })).kind).toBe('stop')
   })
   it('does not silently repeat successful records beyond the maximum allowed checkpoint age', () => {
     expect(decideSupervisorAction(observation({ inventory: { completedRecords: 612, modelErrorRecords: 0, unconfirmedFields: 20, expiredCompletedRecords: 1 } })).kind).toBe('needs-recovery')
@@ -192,7 +198,50 @@ describe('Supervisor local lock and immutable checkpoint inventory', () => {
     await writeFile(join(directory, 'records', `${sha('programs:one')}.json`), JSON.stringify({ ...base, taskId: 'programs:one' }))
     await writeFile(join(directory, 'records', `${sha('programs:two')}.json`), JSON.stringify({ ...base, taskId: 'programs:two', issues: ['MiniMax quota exhausted'] }))
     await writeFile(join(directory, 'records', `${sha('foreign')}.json`), JSON.stringify({ ...base, taskId: 'foreign' }))
-    expect(await inspectCheckpoints({ ...anchor, directory }, now)).toEqual({ completedRecords: 1, modelErrorRecords: 1, unconfirmedFields: 2, expiredCompletedRecords: 0 })
+    expect(await inspectCheckpoints({ ...anchor, directory }, now)).toEqual({ completedRecords: 1, modelErrorRecords: 1, unconfirmedFields: 2, expiredCompletedRecords: 0, recoveryEligibleRecords: 0 })
+  })
+  it('bootstraps only an absent receipt with no execution artifacts and no live verifier', async () => {
+    const directory = join(temporaryRoot, 'prepared-run')
+    await mkdir(directory, { recursive: true })
+    const selected = { ...anchor, directory }
+    const clear = vi.fn(async () => ({ inspected: true, activeVerifiers: 0 }))
+    expect(await readBaselineReceipt(selected)).toEqual({ kind: 'missing', receipt: null })
+    expect(await preparedBaselineSafety(selected, clear)).toBe(true)
+    expect(await preparedBaselineSafety(selected, async () => ({ inspected: false, activeVerifiers: 0 }))).toBe(false)
+    expect(await preparedBaselineSafety(selected, async () => ({ inspected: true, activeVerifiers: 1 }))).toBe(false)
+    await writeFile(join(directory, 'status.json'), '{}')
+    expect(await preparedBaselineSafety(selected, clear)).toBe(false)
+  })
+  it('rejects malformed, null and foreign receipts instead of treating them as never started', async () => {
+    const directory = join(temporaryRoot, 'invalid-receipt-run')
+    await mkdir(directory, { recursive: true })
+    const selected = { ...anchor, directory }
+    const clear = vi.fn(async () => ({ inspected: true, activeVerifiers: 0 }))
+    for (const text of ['{', 'null', '{}', JSON.stringify({ ...receipt, selectedRecords: 20 }), JSON.stringify({ ...receipt, inputSha256: 'c'.repeat(64) })]) {
+      await writeFile(join(directory, 'run-receipt.json'), text)
+      expect(await readBaselineReceipt(selected)).toEqual({ kind: 'invalid', receipt: null })
+      expect(await preparedBaselineSafety(selected, clear)).toBe(false)
+    }
+    expect(clear).not.toHaveBeenCalled()
+    await writeFile(join(directory, 'run-receipt.json'), JSON.stringify(receipt))
+    expect(await readBaselineReceipt(selected)).toEqual({ kind: 'valid', receipt })
+    expect(await preparedBaselineSafety(selected, clear)).toBe(false)
+  })
+  it('separates fresh model defects from admission, authentication and unknown failures', async () => {
+    const directory = join(temporaryRoot, 'transient-run')
+    await mkdir(join(directory, 'records'), { recursive: true })
+    const base = { checkedAt: new Date(now - 1000).toISOString(), inputSha256: anchor.inputSha256, modelConfigSha256: anchor.modelConfigSha256, model: anchor.model, sourceIds: ['official'], verdicts: [{ status: 'unconfirmed' }] }
+    const save = async (issues: string[], checkedAt = base.checkedAt) => writeFile(join(directory, 'records', `${sha('programs:one')}.json`), JSON.stringify({ ...base, taskId: 'programs:one', issues, checkedAt }))
+    for (const issues of [['MiniMax HTTP 500'], ['MiniMax response invalid JSON', 'official: timeout'], ['Unexpected end of JSON input']]) {
+      await save(issues)
+      expect(await inspectCheckpoints({ ...anchor, directory }, now)).toMatchObject({ completedRecords: 0, modelErrorRecords: 1, recoveryEligibleRecords: 1 })
+    }
+    for (const issues of [['MiniMax HTTP 429'], ['MiniMax quota unknown'], ['MiniMax HTTP 401'], ['MiniMax HTTP 500', 'unknown transport']]) {
+      await save(issues)
+      expect(await inspectCheckpoints({ ...anchor, directory }, now)).toMatchObject({ completedRecords: 0, modelErrorRecords: 1, recoveryEligibleRecords: 0 })
+    }
+    await save(['MiniMax HTTP 500'], new Date(now + 1).toISOString())
+    expect(await inspectCheckpoints({ ...anchor, directory }, now)).toMatchObject({ recoveryEligibleRecords: 0 })
   })
   it('requires targeted handling for future-dated checkpoints that the verifier cannot reuse', async () => {
     const directory = join(temporaryRoot, 'future-run')

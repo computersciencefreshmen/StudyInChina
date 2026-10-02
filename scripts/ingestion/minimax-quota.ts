@@ -3,6 +3,8 @@ import { join, resolve } from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import { pathToFileURL } from 'node:url'
 import { readBoundedBody } from '../../workers/ingestion/src/body'
+import { isCurrentQuotaWindow } from './minimax-quota-window'
+export { isCurrentQuotaWindow } from './minimax-quota-window'
 
 const QUOTA_ENDPOINTS = new Set([
   'https://www.minimax.cn/v1/token_plan/remains',
@@ -116,18 +118,18 @@ export function normalizeQuota(payload: unknown, model: string, now = Date.now()
   const row = rows[0]
   result.fiveHour = windowFrom(row, false, now)
   result.weekly = windowFrom(row, true, now)
-  if (result.fiveHour.remainingPercent === 0 || result.weekly.remainingPercent === 0) {
-    result.state = 'exhausted'
-    result.reason = result.weekly.remainingPercent === 0 ? 'weekly_quota_exhausted' : 'five_hour_quota_exhausted'
-    return result
-  }
   if (result.fiveHour.remainingPercent === null || result.weekly.remainingPercent === null) return result
   const start = row.start_time
   const end = row.end_time
   const weeklyStart = row.weekly_start_time
   const weeklyEnd = row.weekly_end_time
-  if (!validTime(start) || !validTime(end) || !validTime(weeklyStart) || !validTime(weeklyEnd) || end - start !== 5 * 60 * 60 * 1_000 || weeklyEnd - weeklyStart !== 7 * 24 * 60 * 60 * 1_000 || now < start || now >= end || now < weeklyStart || now >= weeklyEnd) {
+  if (!validTime(start) || !validTime(end) || !validTime(weeklyStart) || !validTime(weeklyEnd) || !isCurrentQuotaWindow(result.fiveHour, 'fiveHour', now) || !isCurrentQuotaWindow(result.weekly, 'weekly', now)) {
     result.reason = 'quota_window_unknown_or_expired'
+    return result
+  }
+  if (result.fiveHour.remainingPercent === 0 || result.weekly.remainingPercent === 0) {
+    result.state = 'exhausted'
+    result.reason = result.weekly.remainingPercent === 0 ? 'weekly_quota_exhausted' : 'five_hour_quota_exhausted'
     return result
   }
   result.state = 'available'

@@ -47,13 +47,19 @@ export async function readRemoteTelemetry(environment: Environment = process.env
 export function remoteExecutorConnected(telemetry: AdminTelemetry | null, now = Date.now()): boolean {
   const automation = telemetry?.automation
   const age = now - Date.parse(automation?.observedAt || '')
-  return Boolean(automation?.connected && Number.isFinite(age) && age >= -5_000 && age <= REMOTE_EXECUTOR_FRESH_MS && now - Date.parse(telemetry!.observedAt) <= REMOTE_EXECUTOR_FRESH_MS)
+  const transportAge = now - Date.parse(telemetry?.observedAt || '')
+  return Boolean(automation?.connected && Number.isFinite(age) && age >= -5_000 && age <= REMOTE_EXECUTOR_FRESH_MS &&
+    Number.isFinite(transportAge) && transportAge >= -5_000 && transportAge <= REMOTE_EXECUTOR_FRESH_MS)
+}
+/** A live monitoring upload does not imply that the bridge consumes commands. */
+export function remoteExecutorControllable(telemetry: AdminTelemetry | null, now = Date.now()): boolean {
+  return remoteExecutorConnected(telemetry, now) && telemetry?.automation?.remotelyControllable === true
 }
 /** Called only after administrator authentication and same-origin checks. */
 export async function submitRemoteExecutorCommand(command: ExecutorCommand): Promise<{ accepted: true; commandId: string }> {
   const safe = executorCommandSchema.parse(command)
   const config = remoteExecutorConfiguration()
-  if (!config?.controlEnabled || !remoteExecutorConnected(await readRemoteTelemetry())) throw new Error('executor_unavailable')
+  if (!config?.controlEnabled || !remoteExecutorControllable(await readRemoteTelemetry())) throw new Error('executor_unavailable')
   try {
     const response = await fetch(config.commandUrl, { method: 'POST', headers: { Authorization: `Bearer ${config.token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(safe), redirect: 'error', signal: AbortSignal.timeout(8_000), cache: 'no-store' })
     if (!response.ok) throw new Error('executor_unavailable')

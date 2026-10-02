@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import type { QuotaState } from './minimax-quota'
+import { isCurrentQuotaWindow } from './minimax-quota-window'
 
 export type PlanBillingSafety = {
   creditFallbackDisabled: boolean
@@ -48,14 +49,9 @@ export function assertSafePlanQuota(quota: QuotaState, policy: PlanBillingSafety
 /** Credit authorization never overrides an unknown query, unsafe configuration or stale window. */
 export function authorizedCreditWindow(quota: QuotaState, policy: PlanBillingSafety, now = Date.now()): boolean {
   if (!policy.allowExistingCredits || quota.state !== 'exhausted') return false
-  const fiveStart = Date.parse(quota.fiveHour.startAt || '')
-  const fiveEnd = Date.parse(quota.fiveHour.resetAt || '')
-  const weekStart = Date.parse(quota.weekly.startAt || '')
-  const weekEnd = Date.parse(quota.weekly.resetAt || '')
   const checked = Date.parse(quota.checkedAt)
   return Number.isFinite(checked) && checked <= now && now - checked <= 30_000 &&
-    Number.isFinite(fiveStart) && Number.isFinite(fiveEnd) && fiveStart <= now && now < fiveEnd && fiveEnd - fiveStart === 5 * 3_600_000 &&
-    Number.isFinite(weekStart) && Number.isFinite(weekEnd) && weekStart <= now && now < weekEnd && weekEnd - weekStart === 7 * 24 * 3_600_000 &&
-    quota.fiveHour.remainingPercent !== null && quota.weekly.remainingPercent !== null &&
+    isCurrentQuotaWindow(quota.fiveHour, 'fiveHour', now) && isCurrentQuotaWindow(quota.weekly, 'weekly', now) &&
+    [quota.fiveHour.remainingPercent, quota.weekly.remainingPercent].every(value => typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 100) &&
     (quota.fiveHour.remainingPercent === 0 || quota.weekly.remainingPercent === 0)
 }

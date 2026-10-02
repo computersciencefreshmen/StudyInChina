@@ -74,11 +74,53 @@ describe('administrator workbench transport and session', () => {
     render(<AdminWorkbench />)
     await screen.findByRole('heading', { name: '让每一条数据，更可信。' })
     const source = FakeEventSource.instances[0]
+    let dashboardVisibleWhenClosed = false
+    source.close.mockImplementation(() => { dashboardVisibleWhenClosed = Boolean(screen.queryByRole('heading', { name: '让每一条数据，更可信。' })) })
     fireEvent.click(screen.getByRole('button', { name: '退出管理员' }))
     await screen.findByLabelText('管理员访问口令')
-    expect(source.close).toHaveBeenCalled()
+    expect(source.close).toHaveBeenCalledTimes(1)
+    expect(dashboardVisibleWhenClosed).toBe(true)
     expect(screen.queryByRole('heading', { name: '让每一条数据，更可信。' })).not.toBeInTheDocument()
     expect(fetchMock).toHaveBeenCalledWith('/api/admin/session', expect.objectContaining({ method: 'DELETE' }))
+  })
+
+  it('aborts outstanding refresh and ignores old stream callbacks before signing in again', async () => {
+    let delayStatus = false
+    let resolveRefresh: (value: ReturnType<typeof response>) => void = () => {}
+    let refreshSignal: AbortSignal | null = null
+    let delayedRequests = 0
+    const fetchMock = vi.fn(async (path: string, init?: RequestInit) => {
+      if (path === '/api/admin/session') return response(init?.method === 'DELETE' ? { ok: true } : adminSession)
+      if (delayStatus) {
+        delayedRequests++
+        if (delayedRequests === 1) {
+          refreshSignal = init?.signal as AbortSignal
+          return new Promise<ReturnType<typeof response>>(resolve => { resolveRefresh = resolve })
+        }
+        return new Promise<ReturnType<typeof response>>(() => {})
+      }
+      return response(adminSnapshot())
+    })
+    vi.stubGlobal('fetch', fetchMock)
+    render(<AdminWorkbench />)
+    await screen.findByRole('heading', { name: '让每一条数据，更可信。' })
+    const source = FakeEventSource.instances[0]
+    delayStatus = true
+    fireEvent.click(screen.getByRole('button', { name: '同步最新数据' }))
+    fireEvent.click(screen.getByRole('button', { name: '退出管理员' }))
+    await screen.findByLabelText('管理员访问口令')
+    expect(refreshSignal).not.toBeNull()
+    expect(refreshSignal!.aborted).toBe(true)
+    expect(source.close).toHaveBeenCalledTimes(1)
+    const oldSnapshot = adminSnapshot(); oldSnapshot.generatedAt = '2099-01-01T00:00:00Z'
+    await act(async () => { source.snapshot(oldSnapshot); source.onopen?.(); resolveRefresh(response(oldSnapshot)); await Promise.resolve(); await Promise.resolve() })
+    fireEvent.change(screen.getByLabelText('管理员访问口令'), { target: { value: 'test-only-password' } })
+    fireEvent.click(screen.getByRole('button', { name: /进入管理员工作台/ }))
+    await screen.findByRole('heading', { name: '正在连接工作空间…' })
+    expect(screen.queryByRole('heading', { name: '让每一条数据，更可信。' })).not.toBeInTheDocument()
+    expect(FakeEventSource.instances).toHaveLength(2)
+    act(() => FakeEventSource.instances[1].snapshot(adminSnapshot()))
+    expect(screen.getByRole('heading', { name: '让每一条数据，更可信。' })).toBeVisible()
   })
 
   it('ignores an in-flight fallback response after the event stream delivers a valid snapshot', async () => {
@@ -175,7 +217,7 @@ describe('administrator workbench transport and session', () => {
   })
 
   it('only enables effort for M3.1 and resets it when switching to M3', async () => {
-    const fetchMock = vi.fn(async (path: string, init?: RequestInit) => response(path === '/api/admin/session' ? adminSession : path === '/api/admin/verification' && init?.method === 'POST' ? { ok: true } : adminSnapshot()))
+    const fetchMock = vi.fn(async (path: string, init?: RequestInit) => response(path === '/api/admin/session' ? adminSession : path === '/api/admin/verification' && init?.method === 'POST' ? { accepted: true, pid: 1234 } : adminSnapshot()))
     vi.stubGlobal('fetch', fetchMock)
     render(<AdminWorkbench />)
     await screen.findByRole('heading', { name: '让每一条数据，更可信。' })
@@ -196,6 +238,31 @@ describe('administrator workbench transport and session', () => {
     await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
     expect(fetchMock).toHaveBeenCalledWith('/api/admin/verification', expect.objectContaining({ method: 'POST', body: JSON.stringify({ collection: 'all', mode: 'sample', model: 'MiniMax-M3', effort: 'default', limit: 20 }) }))
     await flush()
+  })
+
+  it('keeps the verification form open when the server does not confirm an accepted process or command', async () => {
+    vi.stubGlobal('fetch', vi.fn(async (path: string) => response(path === '/api/admin/session' ? adminSession : path === '/api/admin/verification' ? { accepted: true } : adminSnapshot())))
+    render(<AdminWorkbench />)
+    await screen.findByRole('heading', { name: '让每一条数据，更可信。' })
+    fireEvent.click(screen.getByRole('button', { name: '开始核验' }))
+    fireEvent.click(screen.getByRole('button', { name: '创建并开始核验' }))
+    expect(await screen.findByRole('alert')).toHaveTextContent('核验启动回执无效')
+    expect(screen.getByRole('dialog', { name: '开始一次新的核验' })).toBeVisible()
+    expect(screen.getByRole('button', { name: '创建并开始核验' })).toBeEnabled()
+    expect(screen.queryByText('核验进程已启动，模型调用与核验结果将随执行器回执更新。')).not.toBeInTheDocument()
+  })
+
+  it('returns to login if the administrator session expires while starting verification', async () => {
+    vi.stubGlobal('fetch', vi.fn(async (path: string) => response(path === '/api/admin/session' ? adminSession : path === '/api/admin/verification' ? { error: 'unauthorized' } : adminSnapshot(), path === '/api/admin/verification' ? 401 : 200)))
+    render(<AdminWorkbench />)
+    await screen.findByRole('heading', { name: '让每一条数据，更可信。' })
+    const source = FakeEventSource.instances[0]
+    fireEvent.click(screen.getByRole('button', { name: '开始核验' }))
+    fireEvent.click(screen.getByRole('button', { name: '创建并开始核验' }))
+    await screen.findByLabelText('管理员访问口令')
+    expect(screen.getByRole('alert')).toHaveTextContent('管理员会话已过期')
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    expect(source.close).toHaveBeenCalled()
   })
 
   it('uses the classified needs-review bucket once in dashboard metrics', async () => {

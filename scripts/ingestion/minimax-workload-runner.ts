@@ -252,8 +252,13 @@ export async function readWorkloadPlan(path: string, anchor: SupervisorAnchor): 
     return { schemaVersion: 1, baselineRunId: anchor.runId, inputSha256: anchor.inputSha256, baselineCompleted: false, pendingRecovery: null, finishedJobs: [], completedRecoverySelections: 0 }
   }
   if (Buffer.byteLength(text) > 512 * 1024) throw new Error('workload_plan_oversized')
-  let raw: Record<string, unknown> | null
-  try { raw = object(JSON.parse(text)) } catch { throw new Error('workload_plan_invalid') }
+  let raw: unknown
+  try { raw = JSON.parse(text) } catch { throw new Error('workload_plan_invalid') }
+  return validateWorkloadPlan(raw, anchor)
+}
+
+export function validateWorkloadPlan(value: unknown, anchor: SupervisorAnchor): WorkloadPlan {
+  const raw = object(value)
   if (!raw) throw new Error('workload_plan_invalid')
   if (raw.schemaVersion !== 1 || raw.baselineRunId !== anchor.runId || raw.inputSha256 !== anchor.inputSha256 || typeof raw.baselineCompleted !== 'boolean' || !Array.isArray(raw.finishedJobs) || raw.finishedJobs.some(value => typeof value !== 'string') || !Number.isSafeInteger(raw.completedRecoverySelections) || Number(raw.completedRecoverySelections) < 0) throw new Error('workload_plan_identity_invalid')
   if (raw.pendingRecovery !== null) {
@@ -408,11 +413,11 @@ export async function tryLegacySupervisorHandoff(anchor: SupervisorAnchor, child
   return true
 }
 
-export async function inspectWorkloadReadiness(root: string, runId: string) {
+export async function inspectWorkloadReadiness(root: string, runId: string, prospectivePlan?: WorkloadPlan) {
   const anchor = await loadAnchor(root, runId)
   const baseline = await inspectSupervisorReadiness(root, runId)
   const directory = join(root, '.tmp', 'minimax-verification')
-  const plan = await readWorkloadPlan(join(directory, 'workload-plan.json'), anchor)
+  const plan = prospectivePlan ? validateWorkloadPlan(prospectivePlan, anchor) : await readWorkloadPlan(join(directory, 'workload-plan.json'), anchor)
   const previousLock = object(await optionalJson(join(directory, 'workload-runner.lock.json')))
   const probe = previousLock && pidIsValid(previousLock.ownerPid) ? await probeNativeProcess(previousLock.ownerPid, root) : null
   const runnerAlreadyAlive = Boolean(probe?.alive)

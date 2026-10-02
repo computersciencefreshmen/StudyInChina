@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { applyModelOptions, buildClaims, buildComparisonRequest, buildRankingSources, getApiConfig, matchesModelConfiguration, modelConfiguration, parseMiniMaxResponseJson, parseModelOptions, summarizeResults, validateComparisonOutput, validateVerdicts, verificationRunId, type ApiConfig, type RecordResult, type SourceReceipt } from '../../scripts/ingestion/verify-catalog-minimax'
+import { applyModelOptions, buildClaims, buildComparisonRequest, buildRankingSources, getApiConfig, matchesModelConfiguration, modelConfiguration, parseMiniMaxResponseJson, parseModelOptions, runVerificationBatches, summarizeResults, validateComparisonOutput, validateVerdicts, verificationRunId, type ApiConfig, type RecordResult, type SourceReceipt } from '../../scripts/ingestion/verify-catalog-minimax'
 
 const source: SourceReceipt = {
   sourceId: 'official', url: 'https://example.edu/guide', checkedAt: '2026-09-29T00:00:00Z',
@@ -7,6 +7,31 @@ const source: SourceReceipt = {
 }
 
 describe('MiniMax catalog comparison evidence gate', () => {
+  it.each([1, 2, 3, 4])('drains a one-record sample with %s workers despite asynchronous admission', async concurrency => {
+    const processed: number[] = []
+    await runVerificationBatches([[1]], concurrency, () => true, async batch => {
+      await Promise.resolve()
+      processed.push(...batch)
+    })
+    expect(processed).toEqual([1])
+  })
+  it('reserves each batch once across asynchronous workers and stops assigning work after a fatal admission', async () => {
+    const processed: number[] = []
+    await runVerificationBatches(Array.from({ length: 11 }, (_, index) => [index]), 4, () => true, async batch => {
+      await Promise.resolve()
+      processed.push(...batch)
+    })
+    expect(processed.sort((left, right) => left - right)).toEqual(Array.from({ length: 11 }, (_, index) => index))
+    let stopped = false
+    const admitted: number[] = []
+    await runVerificationBatches([[1], [2], [3]], 2, () => !stopped, async batch => {
+      stopped = true
+      await Promise.resolve()
+      admitted.push(...batch)
+    })
+    expect(admitted).toEqual([1])
+  })
+
   it('classifies null and malformed model result identities before saving a response or losing checkpoints', () => {
     for (const text of ['{', '{"results":', '{"secret-input":garbage}']) expect(() => parseMiniMaxResponseJson(text)).toThrow('MiniMax response JSON invalid')
     expect(parseMiniMaxResponseJson('{"results":[]}')).toEqual({ results: [] })

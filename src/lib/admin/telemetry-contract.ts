@@ -58,7 +58,7 @@ export const adminTelemetrySchema = z.object({
 export type AdminTelemetry = z.infer<typeof adminTelemetrySchema>
 
 /** Only the already sanitized file projection crosses this boundary. */
-export function createAdminTelemetry(runs: AdminRun[], configuredModel: string | null, observedAt = new Date().toISOString(), extra: Pick<AdminTelemetry, 'ledger' | 'automation'> = {}): AdminTelemetry {
+export function createAdminTelemetry(runs: AdminRun[], configuredModel: string | null, observedAt = new Date().toISOString(), extra: Pick<z.input<typeof adminTelemetrySchema>, 'ledger' | 'automation'> = {}): AdminTelemetry {
   const saved = sumTokenUsage(runs.map(run => run.tokenUsage))
   return adminTelemetrySchema.parse({ version: 1, observedAt, runs, usage: extra.ledger ? ledgerTokenUsage(extra.ledger, saved) : saved,
     usageBasis: extra.ledger ? 'immutable-ledger' : 'saved-responses', model: { configured: configuredModel }, ...extra })

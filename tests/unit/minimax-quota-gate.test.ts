@@ -19,6 +19,19 @@ function quota(fiveHour: number, weekly: number) {
 }
 
 describe('MiniMax model request quota gate', () => {
+  it('admits the terminal Shanghai window consistently for plan and authorized-credit calls', async () => {
+    const terminalNow = Date.parse('2026-10-02T14:05:00Z')
+    const terminal = { ...quota(100, 100), checkedAt: new Date(terminalNow).toISOString(),
+      fiveHour: { remainingPercent: 100, startAt: '2026-10-02T12:00:00Z', resetAt: '2026-10-02T16:00:00Z', resetInMs: 6_900_000 } }
+    const send = vi.fn(async () => 'response')
+    await expect(withMiniMaxQuota(terminal, send, planOnly, terminalNow)).resolves.toBe('response')
+    const exhausted = { ...terminal, state: 'exhausted' as const, canRun: false, fiveHour: { ...terminal.fiveHour, remainingPercent: 0 } }
+    await expect(withMiniMaxQuota(exhausted, send, credits, terminalNow)).resolves.toBe('response')
+    await expect(withMiniMaxQuota(exhausted, send, planOnly, terminalNow)).rejects.toThrow('MiniMax quota exhausted')
+    await expect(withMiniMaxQuota(exhausted, send, credits, Date.parse('2026-10-02T16:00:00Z'))).rejects.toThrow('MiniMax quota unknown')
+    expect(send).toHaveBeenCalledTimes(2)
+  })
+
   it.each([[0, 100], [50, 0], [0, 0]])('does not send a model request when a plan window is exhausted (%s/%s)', async (fiveHour, weekly) => {
     const send = vi.fn(async () => new Response('model response'))
     await expect(withMiniMaxQuota(quota(fiveHour, weekly), send)).rejects.toThrow('MiniMax quota exhausted')

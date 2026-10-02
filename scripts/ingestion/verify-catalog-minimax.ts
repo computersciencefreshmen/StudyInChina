@@ -12,7 +12,7 @@ import { assertSafeSourceUrl, fetchWithValidatedRedirects } from '../../workers/
 import { isRobotsPathAllowed } from '../../workers/ingestion/src/robots'
 import { htmlToText, normalizeEvidenceText } from '../../workers/ingestion/src/rules'
 import { universitySchema } from '../../src/lib/data/schema'
-import { fetchQuota, getCcSwitchQuotaConfig, type QuotaState } from './minimax-quota'
+import { fetchQuota, getCcSwitchQuotaConfig, isCurrentQuotaWindow, type QuotaState } from './minimax-quota'
 import { assertSafePlanQuota, authorizedCreditWindow, readPlanBillingSafety, type PlanBillingSafety } from './minimax-billing-safety'
 import { recordModelUsage } from './minimax-usage-ledger'
 import { assertMiniMaxRunning } from './minimax-manual-control'
@@ -44,6 +44,7 @@ export type Verdict = {
 }
 export type RecordResult = {
   taskId: string; checkedAt: string; inputSha256: string; model: string | null;
+  invocationId?: string | null;
   effort?: ModelEffort | null; thinking?: ModelThinking | null; modelConfigSha256?: string | null;
   status: 'review-required'; sourceIds: string[]; verdicts: Verdict[]; issues: string[];
   sourceEvidence?: Array<{ sourceId: string; sha256: string; textSha256: string }>;
@@ -53,11 +54,24 @@ type VerificationManifest = {
   inputSha256: string; promptVersion: string; maxSourceChars: number;
   model?: string | null; modelConfigSha256?: string | null; requestedModelOptions?: ModelOptions;
   selection?: TaskSelection | null;
+  invocationId?: string | null;
 }
 export type ApiConfig = { endpoint: string; key: string; model: string; anthropic: boolean; providerId?: string; effort?: ModelEffort; thinking?: ModelThinking; requestedModelOptions?: ModelOptions }
 const sha = (value: string | Uint8Array) => createHash('sha256').update(value).digest('hex')
 const pause = (ms: number) => new Promise<void>(done => setTimeout(done, ms))
 const executeFile = promisify(execFile)
+
+/** Reserve a batch synchronously before admission/capture can yield to another worker. */
+export async function runVerificationBatches<T>(batches: readonly T[][], concurrency: number, continueWork: () => boolean, processBatch: (batch: T[]) => Promise<void>) {
+  if (!Number.isInteger(concurrency) || concurrency < 1 || concurrency > 4) throw new Error('Verification concurrency must be from 1 to 4')
+  let next = 0
+  await Promise.all(Array.from({ length: Math.min(concurrency, batches.length) }, async () => {
+    while (next < batches.length && continueWork()) {
+      const batch = batches[next++]
+      await processBatch(batch)
+    }
+  }))
+}
 
 function singleArgument(args: string[], name: string): string | undefined {
   const positions = args.flatMap((arg, index) => arg === name ? [index] : [])
@@ -66,6 +80,19 @@ function singleArgument(args: string[], name: string): string | undefined {
   const value = args[positions[0] + 1]
   if (!value || value.startsWith('--')) throw new Error(`${name} requires a value`)
   return value
+}
+
+/** An explicit admin command gets a separate run; normal guarded resume keeps its identity. */
+export function parseInvocationId(args: string[]): string | null {
+  const value = singleArgument(args, '--invocation-id')
+  if (value === undefined) return null
+  if (!/^[a-f0-9]{8}-[a-f0-9]{4}-[1-8][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(value)) throw new Error('--invocation-id must be a valid UUID')
+  if (['--report-only', '--fetch-only', '--run', '--task-ids-file', '--recovery-from', '--retry-unconfirmed'].some(flag => args.includes(flag))) throw new Error('--invocation-id cannot replace a saved report, capture or qualified recovery identity')
+  return value.toLowerCase()
+}
+
+function invocationRunPrefix(modelConfigSha256: string | null | undefined, invocationId: string) {
+  return sha(JSON.stringify({ modelConfigSha256: modelConfigSha256 || null, invocationId })).slice(0, 12)
 }
 
 /** Record checkpoint retention is independent of the 24-hour official-source cache. */
@@ -121,7 +148,10 @@ export function parseVerificationRunId(runId: string) {
 export function validateSavedRunManifest(runId: string, inputSha256: string, manifest: VerificationManifest, knownTaskIds: string[]) {
   const parts = parseVerificationRunId(runId)
   if (parts.inputPrefix !== inputSha256.slice(0, 16) || manifest.inputSha256 !== inputSha256 || manifest.promptVersion !== PROMPT_VERSION || manifest.maxSourceChars !== SOURCE_CHARS) throw new Error('Saved run snapshot, prompt or source limit does not match its manifest')
-  if (parts.modelPrefix && manifest.modelConfigSha256?.slice(0, 12) !== parts.modelPrefix) throw new Error('Saved run model configuration does not match its run ID')
+  if (manifest.invocationId) {
+    const invocationId = parseInvocationId(['--invocation-id', manifest.invocationId])
+    if (!manifest.modelConfigSha256 || parts.modelPrefix !== invocationRunPrefix(manifest.modelConfigSha256, invocationId!) || manifest.selection) throw new Error('Saved run invocation or model configuration does not match its run ID')
+  } else if (parts.modelPrefix && manifest.modelConfigSha256?.slice(0, 12) !== parts.modelPrefix) throw new Error('Saved run model configuration does not match its run ID')
   if (parts.selectorPrefix) {
     if (!manifest.selection) throw new Error('Saved selection manifest is missing')
     const selection = buildTaskSelection(manifest.selection.taskIds, knownTaskIds, manifest.selection.recoveryFrom)
@@ -163,8 +193,8 @@ export function assertRecoveryTaskNotRepeated(previous: RecordResult | undefined
   if (previous && !recoveryReason(previous, receipts, true)) throw new Error(`Recovery task already attempted with unchanged or unreviewed official evidence: ${previous.taskId}`)
 }
 
-export function shouldReuseCheckpoint(result: RecordResult, task: Pick<Task, 'taskId'>, inputSha256: string, api: ApiConfig | null, fetchOnly: boolean, maxAgeHours = 24, isolated = false, now = Date.now()) {
-  if (result.taskId !== task.taskId || result.inputSha256 !== inputSha256 || !matchesModelConfiguration(result, api, fetchOnly)) return false
+export function shouldReuseCheckpoint(result: RecordResult, task: Pick<Task, 'taskId'>, inputSha256: string, api: ApiConfig | null, fetchOnly: boolean, maxAgeHours = 24, isolated = false, now = Date.now(), invocationId: string | null = null) {
+  if (result.taskId !== task.taskId || result.inputSha256 !== inputSha256 || (result.invocationId || null) !== invocationId || !matchesModelConfiguration(result, api, fetchOnly)) return false
   const age = now - Date.parse(result.checkedAt)
   if (!Number.isFinite(age) || age < 0) return false
   // A fixed selection is attempted once, including unresolved or failed verdicts.
@@ -177,14 +207,12 @@ export function shouldReuseCheckpoint(result: RecordResult, task: Pick<Task, 'ta
 export async function withMiniMaxQuota<T>(quota: QuotaState, request: (quota?: QuotaState) => Promise<T>, policy?: PlanBillingSafety, now = Date.now()): Promise<T> {
   if (policy) {
     const checked = Date.parse(quota.checkedAt)
-    const freshWindow = (window: QuotaState['fiveHour'], duration: number) => {
-      const start = Date.parse(window.startAt || '')
-      const end = Date.parse(window.resetAt || '')
-      return Number.isFinite(start) && Number.isFinite(end) && start <= now && now < end && end - start === duration &&
+    const freshWindow = (window: QuotaState['fiveHour'], period: 'fiveHour' | 'weekly') => {
+      return isCurrentQuotaWindow(window, period, now) &&
         typeof window.remainingPercent === 'number' && Number.isFinite(window.remainingPercent) && window.remainingPercent >= 0 && window.remainingPercent <= 100
     }
     if (quota.pool !== 'general' || !Number.isFinite(checked) || checked > now || now - checked > 30_000 ||
-      !freshWindow(quota.fiveHour, 5 * 3_600_000) || !freshWindow(quota.weekly, 7 * 24 * 3_600_000)) throw new Error('MiniMax quota unknown')
+      !freshWindow(quota.fiveHour, 'fiveHour') || !freshWindow(quota.weekly, 'weekly')) throw new Error('MiniMax quota unknown')
     assertSafePlanQuota(quota, policy)
     if (authorizedCreditWindow(quota, policy, now)) return request(quota)
   }
@@ -294,8 +322,13 @@ export function modelConfiguration(api: ApiConfig | null) {
   return { model: api.model, effort, thinking, modelConfigSha256: sha(JSON.stringify(identity)) }
 }
 
-export function verificationRunId(inputSha256: string, api: ApiConfig | null, options: ModelOptions, selection?: TaskSelection | null) {
+export function verificationRunId(inputSha256: string, api: ApiConfig | null, options: ModelOptions, selection?: TaskSelection | null, invocationId: string | null = null) {
   const config = modelConfiguration(api)
+  if (invocationId) {
+    const validId = parseInvocationId(['--invocation-id', invocationId])!
+    if (!config.modelConfigSha256 || selection) throw new Error('An invocation requires a configured model and cannot replace a qualified recovery selection')
+    return `${inputSha256.slice(0, 16)}-${invocationRunPrefix(config.modelConfigSha256, validId)}`
+  }
   return inputSha256.slice(0, 16) + ((selection || Object.keys(options).length) && config.modelConfigSha256 ? `-${config.modelConfigSha256.slice(0, 12)}` : '') + (selection ? `-r${selection.selectorSha256.slice(0, 12)}` : '')
 }
 
@@ -659,11 +692,13 @@ async function main() {
   const environmentPath = resolve(root, option('--env-file', '.env.local'))
   if (!args.includes('--report-only') && existsSync(environmentPath)) process.loadEnvFile(environmentPath)
   const modelOptions = parseModelOptions(args)
+  const invocationId = parseInvocationId(args)
   if (args.includes('--report-only') && Object.keys(modelOptions).length) throw new Error('--report-only reads a saved run; select it with --run instead of model overrides')
   if (args.includes('--fetch-only') && Object.keys(modelOptions).length) throw new Error('--fetch-only makes no model calls and cannot use model overrides')
   const configuredApi = args.includes('--report-only') ? null : args.includes('--use-ccswitch') ? getCcSwitchConfig() : getApiConfig(process.env)
   if (!configuredApi && Object.keys(modelOptions).length) throw new Error('Model overrides require a configured official MiniMax provider')
   const api = configuredApi ? applyModelOptions(configuredApi, modelOptions) : null
+  if (invocationId && !api) throw new Error('--invocation-id requires a configured official MiniMax provider')
   const quotaGuard = args.includes('--quota-guard')
   if (quotaGuard && (!args.includes('--use-ccswitch') || args.includes('--fetch-only') || args.includes('--report-only'))) throw new Error('--quota-guard requires --use-ccswitch and a model run')
   const quotaConfig = quotaGuard && !args.includes('--prepare') && !args.includes('--audit-config') ? getCcSwitchQuotaConfig() : null
@@ -671,7 +706,7 @@ async function main() {
   const executionConfig = modelConfiguration(args.includes('--fetch-only') ? null : api)
   if (args.includes('--audit-config')) {
     if (args.includes('--report-only') || args.includes('--fetch-only')) throw new Error('--audit-config cannot be combined with report-only or fetch-only')
-    console.log(JSON.stringify({ configured: Boolean(api), ...executionConfig, endpoint: api?.endpoint || null, requestedModelOptions: modelOptions, credentialOrigin: args.includes('--use-ccswitch') ? 'ccswitch-current-claude-provider-read-only' : 'local-environment', modelCalls: 0 }))
+    console.log(JSON.stringify({ configured: Boolean(api), ...executionConfig, invocationId, endpoint: api?.endpoint || null, requestedModelOptions: modelOptions, credentialOrigin: args.includes('--use-ccswitch') ? 'ccswitch-current-claude-provider-read-only' : 'local-environment', modelCalls: 0 }))
     if (!api) process.exitCode = 1
     return
   }
@@ -716,7 +751,7 @@ async function main() {
     ? await readTaskSelection(resolve(root, selectionOptions.taskIdsFile), knownTaskIds, selectionOptions.recoveryFrom || null)
     : originManifest?.selection || null
   const selected = selectVerificationTasks(tasks, selection, collection, selection ? (args.includes('--limit') ? numberOption('--limit', '2', 1, 100_000) : Infinity) : limit)
-  const runId = savedRun || verificationRunId(inputSha256, api, modelOptions, selection)
+  const runId = savedRun || verificationRunId(inputSha256, api, modelOptions, selection, invocationId)
   const directory = join(verificationRoot, runId)
   const recoveryPlan: Array<{ taskId: string; reason: string }> = []
   if (selectionOptions.recoveryFrom && originDirectory && originManifest) {
@@ -771,7 +806,7 @@ async function main() {
     configured: Boolean(api), endpoint: api?.endpoint || null, ...executionConfig, providerId: api?.providerId || null, requestedModelOptions: modelOptions,
     concurrency, batchSize, quotaGuard, checkpointMaxAgeHours, maxSourceChars: SOURCE_CHARS, maxSourceBytes: MAX_BYTES,
     syntheticRankingSources: [...sourceMap.values()].filter(source => source.id.startsWith('ranking-evidence-')).length,
-    selection, recoveryPlan,
+    selection, recoveryPlan, invocationId,
   })
   await atomicJson(join(directory, 'queue.json'), tasks)
   await atomicJson(join(directory, 'input-snapshot.json'), data)
@@ -784,7 +819,7 @@ async function main() {
     const checkpoint = join(directory, 'records', `${sha(task.taskId)}.json`)
     if (existsSync(checkpoint)) {
       const result = JSON.parse(await readFile(checkpoint, 'utf8')) as RecordResult
-      if (shouldReuseCheckpoint(result, task, inputSha256, api, args.includes('--fetch-only'), checkpointMaxAgeHours, Boolean(selection))) {
+      if (shouldReuseCheckpoint(result, task, inputSha256, api, args.includes('--fetch-only'), checkpointMaxAgeHours, Boolean(selection), Date.now(), invocationId)) {
         results.push(result)
         continue
       }
@@ -806,14 +841,13 @@ async function main() {
   }
   const batches: Task[][] = []
   for (let index = 0; index < pending.length; index += batchSize) batches.push(pending.slice(index, index + batchSize))
-  let nextBatch = 0
   let fatal: string | null = null
   let consecutiveRecoveryModelFailures = 0
   let progressWriter = Promise.resolve()
   const progress = (value: unknown) => {
     // Serialize progress updates so a slower earlier write cannot overwrite a newer record count.
     progressWriter = progressWriter.then(async () => {
-      const status = { ...value as Record<string, unknown>, ...executionConfig, requestedModelOptions: modelOptions, selection, checkpointMaxAgeHours }
+      const status = { ...value as Record<string, unknown>, ...executionConfig, requestedModelOptions: modelOptions, selection, checkpointMaxAgeHours, invocationId }
       await atomicJson(join(directory, 'status.json'), status)
       await atomicJson(join(directory, 'progress.json'), status)
     })
@@ -821,7 +855,7 @@ async function main() {
   }
   const startedAt = new Date().toISOString()
   await atomicJson(join(directory, 'run-receipt.json'), {
-    pid: process.pid, startedAt, inputSha256, ...executionConfig, requestedModelOptions: modelOptions,
+    pid: process.pid, startedAt, inputSha256, ...executionConfig, requestedModelOptions: modelOptions, invocationId,
     endpoint: api?.endpoint || null, providerId: api?.providerId || null,
     credentialOrigin: args.includes('--use-ccswitch') ? 'ccswitch-current-claude-provider-read-only' : 'local-environment',
     selectedRecords: selected.length, resumedRecords: results.length, concurrency, batchSize, quotaGuard, checkpointMaxAgeHours, selection,
@@ -832,10 +866,8 @@ async function main() {
     try { await withMiniMaxQuota(quota, async () => undefined, await readPlanBillingSafety(root)) } catch (error) { fatal = error instanceof Error ? error.message : 'MiniMax quota unknown' }
   }
   await progress({ status: 'running', pid: process.pid, startedAt, selectedRecords: selected.length, completedRecords: results.length, inputSha256, model: api?.model || null })
-  await Promise.all(Array.from({ length: concurrency }, async () => {
-    while (nextBatch < batches.length && !fatal) {
-      try { await assertMiniMaxRunning(root) } catch { fatal = 'MiniMax manually paused'; break }
-      const batch = batches[nextBatch++]
+  await runVerificationBatches(batches, concurrency, () => !fatal, async batch => {
+      try { await assertMiniMaxRunning(root) } catch { fatal = 'MiniMax manually paused'; return }
       const receipts: SourceReceipt[] = []
       // Capture sequentially per batch to bound source concurrency and avoid a burst at one university.
       for (const id of [...new Set(batch.flatMap(task => task.sourceIds))]) receipts.push(await getSource(id))
@@ -847,7 +879,7 @@ async function main() {
           consecutiveRecoveryModelFailures = 0
         } catch (error) {
           const issue = error instanceof Error ? error.message : 'minimax_failed'
-          if (issue === 'MiniMax manually paused') { fatal = issue; break }
+          if (issue === 'MiniMax manually paused') { fatal = issue; return }
           issues.push(issue)
           if (/MiniMax HTTP (400|401|402|403|404|429)|MiniMax quota|MiniMax usage receipt/.test(issue)) fatal = issue
           if (selectionOptions.recoveryFrom && ++consecutiveRecoveryModelFailures >= 3) fatal = fatal || 'MiniMax recovery stopped after 3 consecutive model failures'
@@ -862,7 +894,7 @@ async function main() {
           if (index !== undefined) sourceUrlByPath[claim.path] = (task.record.rankings[Number(index)] as { sourceUrl: string }).sourceUrl
         }
         const result: RecordResult = {
-          taskId: task.taskId, checkedAt: new Date().toISOString(), inputSha256,
+          taskId: task.taskId, checkedAt: new Date().toISOString(), inputSha256, invocationId,
           ...executionConfig,
           status: 'review-required', sourceIds: task.sourceIds,
           verdicts: validateVerdicts(task.claims, matches.length === 1 ? matches[0].verdicts : [], recordReceipts, sourceUrlByPath),
@@ -874,8 +906,7 @@ async function main() {
       }
       console.log(JSON.stringify({ completed: results.length, selected: selected.length, reviewRequired: true }))
       await progress({ status: fatal ? 'failed' : 'running', pid: process.pid, updatedAt: new Date().toISOString(), selectedRecords: selected.length, completedRecords: results.length, inputSha256, model: api?.model || null, lastCompletedTaskIds: batch.map(task => task.taskId), fatal })
-    }
-  }))
+  })
   const summary = await writeReports(directory, inputSha256, results, tasks.length, selected.length, fatal)
   console.log(JSON.stringify(summary))
   await progress({ status: fatal ? 'failed' : results.length === selected.length ? 'completed' : 'incomplete', pid: process.pid, startedAt, finishedAt: new Date().toISOString(), inputSha256, model: api?.model || null, ...summary })

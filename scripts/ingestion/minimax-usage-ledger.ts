@@ -4,6 +4,7 @@ import { link, mkdir, readFile, readdir, realpath, rename, stat, unlink, writeFi
 import { isAbsolute, join, relative, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import type { QuotaState } from './minimax-quota'
+import { isCurrentQuotaWindow } from './minimax-quota-window'
 
 export type UsageApiFormat = 'anthropic' | 'openai-chat' | 'openai-responses'
 export type UsageMetadata = {
@@ -110,7 +111,7 @@ function admissionWindow(quota: QuotaState | undefined, requestedAt: string): Us
   const end = Date.parse(quota.fiveHour.resetAt)
   const checked = Date.parse(quota.checkedAt)
   const requested = Date.parse(requestedAt)
-  if (![start, end, checked, requested].every(Number.isFinite) || end - start !== 18_000_000 || requested < start || requested >= end || checked > requested || checked < start) return null
+  if (![start, end, checked, requested].every(Number.isFinite) || !isCurrentQuotaWindow(quota.fiveHour, 'fiveHour', requested) || checked > requested || checked < start || requested - checked > 30_000) return null
   return { startAt: new Date(start).toISOString(), resetAt: new Date(end).toISOString(), checkedAt: new Date(checked).toISOString(),
     remainingPercent: typeof quota.fiveHour.remainingPercent === 'number' && quota.fiveHour.remainingPercent >= 0 && quota.fiveHour.remainingPercent <= 100 ? quota.fiveHour.remainingPercent : null, pool: 'general', basis: 'official-preflight' }
 }

@@ -1,12 +1,9 @@
 import 'server-only'
-import { execFile, spawn } from 'node:child_process'
+import { randomUUID } from 'node:crypto'
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { homedir } from 'node:os'
-import { promisify } from 'node:util'
 import type { AdminSnapshot, VerificationRequest } from './types'
-import { buildVerificationArguments } from './verification-options'
-import { assertMiniMaxRunning } from '../../../scripts/ingestion/minimax-manual-control'
 export { parseVerificationRequest, buildVerificationArguments } from './verification-options'
 
 type Environment = Record<string, string | undefined>
@@ -30,7 +27,6 @@ export function processAlive(pid: unknown): boolean {
 
 const globalRunner = globalThis as typeof globalThis & { studyInChinaAdminRunner?: { starting: boolean; pid: number | null } }
 const runner = globalRunner.studyInChinaAdminRunner ??= { starting: false, pid: null }
-const auditCommand = promisify(execFile)
 
 /** The administrator chooses typed scope/model options, never an executable, filename or shell fragment. */
 export async function launchVerification(request: VerificationRequest, hasActiveRun: () => Promise<boolean>): Promise<number> {
@@ -40,29 +36,10 @@ export async function launchVerification(request: VerificationRequest, hasActive
   runner.starting = true
   try {
     if (await hasActiveRun()) throw new Error('verification_already_running')
-    const root = process.cwd()
-    await assertMiniMaxRunning(root)
-    const { readExecutorStatus } = await import('../../../scripts/ingestion/minimax-admin-control')
-    const executor = await readExecutorStatus(root)
-    if (executor.runnerAlive || executor.supervisorAlive || executor.activeVerifierCount) throw new Error('verification_already_running')
-    if (executor.reason === 'process_identity_unconfirmed') throw new Error('executor_unavailable')
-    const cli = join(root, 'node_modules', 'tsx', 'dist', 'cli.mjs')
-    const script = join(root, 'scripts', 'ingestion', 'verify-catalog-minimax.ts')
-    // Executables belong to the explicitly enabled local executor, never serverless deployment assets.
-    if (!existsSync(/* turbopackIgnore: true */ cli) || !existsSync(/* turbopackIgnore: true */ script)) throw new Error('executor_unavailable')
-    const args = buildVerificationArguments(request, capabilities.credentialSource === 'ccswitch')
-    // This CLI branch only validates configuration; it makes no model calls or run writes.
-    try {
-      const { stdout } = await auditCommand(process.execPath, [cli, script, '--audit-config', ...args], { cwd: root, windowsHide: true, timeout: 15_000, maxBuffer: 16_384 })
-      if (JSON.parse(stdout.trim()).configured !== true) throw new Error('executor_unavailable')
-    } catch { throw new Error('executor_unavailable') }
-    const child = spawn(process.execPath, [cli, script, ...args], {
-      cwd: root, detached: true, windowsHide: true, stdio: 'ignore', shell: false,
-    })
-    await new Promise<void>((resolve, reject) => { child.once('spawn', resolve); child.once('error', () => reject(new Error('executor_unavailable'))) })
-    if (!child.pid) throw new Error('executor_unavailable')
-    runner.pid = child.pid
-    child.unref()
-    return child.pid
+    const { executeExecutorCommand } = await import('../../../scripts/ingestion/minimax-admin-control')
+    const result = await executeExecutorCommand({ commandId: randomUUID(), action: 'start', options: request })
+    if (result.status !== 'completed' || !result.pid) throw new Error(result.error || 'executor_unavailable')
+    runner.pid = result.pid
+    return result.pid
   } finally { runner.starting = false }
 }
