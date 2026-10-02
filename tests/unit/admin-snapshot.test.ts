@@ -2,7 +2,7 @@ import { mkdtemp, mkdir, rm, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { tmpdir } from 'node:os'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
-import { readVerificationRun } from '../../src/lib/admin/snapshot'
+import { readVerificationRun, verificationProcessMatches } from '../../src/lib/admin/snapshot'
 
 let directory: string
 beforeAll(async () => {
@@ -15,6 +15,16 @@ afterAll(async () => {
 })
 
 describe('administrator bounded file projections', () => {
+  it('requires verifier identity, manifest hashes, and OS birth before treating a live PID as this run', () => {
+    const receipt = { startedAt: '2026-10-02T10:00:01Z', inputSha256: 'a'.repeat(64), modelConfigSha256: 'b'.repeat(64), model: 'MiniMax-M3', selectedRecords: 10 }
+    const probe = { alive: true, inspected: true, fingerprint: 'os-identity', createdAt: '2026-10-02T10:00:00Z', verifier: true, supervisor: false }
+    expect(verificationProcessMatches(probe, receipt, receipt)).toBe(true)
+    expect(verificationProcessMatches({ ...probe, verifier: false }, receipt, receipt)).toBe(false)
+    expect(verificationProcessMatches({ ...probe, inspected: false }, receipt, receipt)).toBe(false)
+    expect(verificationProcessMatches({ ...probe, createdAt: '2026-10-02T11:00:00Z' }, receipt, receipt)).toBe(false)
+    expect(verificationProcessMatches(probe, receipt, { ...receipt, inputSha256: 'c'.repeat(64) })).toBe(false)
+    expect(verificationProcessMatches(probe, null, receipt)).toBe(false)
+  })
   it('reads usage and aggregates while excluding provider secrets, paths and source text', async () => {
     await writeFile(join(directory, 'status.json'), JSON.stringify({ status: 'running', pid: 0, selectedRecords: 20, completedRecords: 3, model: 'MiniMax-M3', updatedAt: '2026-09-30T10:00:00Z', fatal: 'credential private-secret' }))
     await writeFile(join(directory, 'manifest.json'), JSON.stringify({ key: 'private-secret', endpoint: 'https://private.test', selectedRecords: 20 }))

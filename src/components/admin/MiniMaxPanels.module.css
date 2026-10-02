@@ -1,0 +1,37 @@
+.ledger, .automation { margin-bottom: 22px; }
+.ledgerMetrics { display: grid; grid-template-columns: 1.2fr 1.2fr 1fr; gap: 24px; margin: 25px 0; }
+.ledgerMetrics > div { min-width: 0; }
+.ledgerMetrics span, .funding > span { display: block; color: var(--wb-muted); font-size: 11px; }
+.ledgerMetrics strong { display: block; font-size: clamp(24px, 2.5vw, 37px); font-weight: 550; letter-spacing: -.045em; font-variant-numeric: tabular-nums; line-height: 1.5; }
+.ledgerMetrics small { color: var(--wb-muted); font-size: 10px; }
+.target { padding: 16px 18px; border: 1px solid var(--wb-border); border-radius: 14px; background: var(--wb-background); }
+.target > div:first-child { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 11px; font-size: 11px; }
+.target strong { color: var(--wb-accent); font-variant-numeric: tabular-nums; }
+.target p { color: var(--wb-muted); font-size: 10px; margin-top: 9px; }
+.ledgerBody { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; margin: 26px 0; }
+.ledgerBody h3 { font-size: 12px; font-weight: 600; margin-bottom: 14px; }
+.tableScroll { overflow-x: auto; }
+.dailyTable { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 11px; white-space: nowrap; }
+.dailyTable th, .dailyTable td { padding: 10px 8px; border-bottom: 1px solid var(--wb-border); text-align: right; }
+.dailyTable tr > :first-child { text-align: left; padding-left: 0; }
+.dailyTable thead th { color: var(--wb-muted); font-weight: 500; font-size: 10px; }
+.dailyTable tbody th { font-weight: 500; }
+.recordTime { margin-top: 8px !important; }
+.automationHeading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.eyebrow { color: var(--wb-accent); font-size: 9px; letter-spacing: .15em; margin-bottom: 6px !important; }
+.automationHeading h2 { margin-bottom: 6px; }
+.automationBody { display: grid; grid-template-columns: 1fr 1.3fr; gap: 30px; padding: 22px 0; }
+.phase { display: block; font-size: 18px; font-weight: 550; margin-bottom: 8px; }
+.automationBody p { color: var(--wb-muted); font-size: 10px; line-height: 1.8; margin-top: 5px; }
+.funding { border-left: 1px solid var(--wb-border); padding-left: 28px; }
+.funding strong { display: block; font-size: 12px; font-weight: 600; margin-top: 6px; }
+.funding p.pendingPolicy { color: var(--wb-accent); }
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; border-top: 1px solid var(--wb-border); padding-top: 17px; }
+.controls > p { flex: 1 1 240px; color: var(--wb-muted); font-size: 10px; }
+.pauseButton { border: 1px solid var(--wb-border); border-radius: 13px; padding: 11px 17px; background: var(--wb-surface); color: var(--wb-ink); font-size: 12px !important; }
+.pauseButton:hover:not(:disabled) { background: var(--wb-background); }
+.pauseButton:disabled { opacity: .55; cursor: default; }
+.commandReceipt { margin-top: 14px !important; color: var(--wb-accent); font-size: 11px; }
+@media(max-width:1100px) { .ledgerMetrics { gap: 17px; } .ledgerBody { gap: 25px; } }
+@media(max-width:780px) { .ledgerMetrics { grid-template-columns: 1fr 1fr; gap: 18px; } .ledgerMetrics > div:last-child { grid-column: 1 / -1; } .ledgerMetrics > div:last-child strong { display: inline; margin-right: 14px; } .ledgerBody, .automationBody { grid-template-columns: 1fr; gap: 22px; } .funding { border-left: 0; padding-left: 0; border-top: 1px solid var(--wb-border); padding-top: 17px; } .automationHeading { align-items: flex-start; flex-wrap: wrap; gap: 12px; } }
+@media(max-width:420px) { .ledgerMetrics { grid-template-columns: 1fr; } .ledgerMetrics strong { font-size: 30px; } .target > div:first-child { align-items: flex-start; } }

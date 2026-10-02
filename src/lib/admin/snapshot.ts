@@ -1,13 +1,18 @@
 import 'server-only'
 import { open, readdir, readFile, stat } from 'node:fs/promises'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
 import { createCatalogRepository } from '@/lib/catalog/repository'
 import type { DataBundle } from '@/lib/data/types'
 import { getTodayDate } from '@/lib/data/freshness'
-import { getVerificationCapabilities, processAlive } from './verification'
+import { getVerificationCapabilities } from './verification'
 import type { AdminRun, AdminSnapshot, TokenUsage } from './types'
+import { ledgerTokenUsage, sumTokenUsage } from './telemetry-contract'
+import { telemetryIsStale } from './telemetry-contract'
+import { currentQuotaObservation, EXECUTOR_RUN_ID, projectUsageLedger } from './executor-contract'
+import { readRemoteTelemetry, remoteExecutorConfiguration, remoteExecutorConnected } from './remote-executor'
+import type { ProcessProbe } from '../../../scripts/ingestion/minimax-quota-supervisor'
 
-const RUN_ID = /^[a-f0-9]{16}(?:-[a-f0-9]{12})?$/
+const RUN_ID = EXECUTOR_RUN_ID
 type Json = Record<string, unknown>
 const number = (value: unknown): number | null => Number.isSafeInteger(value) && Number(value) >= 0 ? Number(value) : null
 const date = (value: unknown): string | null => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T[\d:.]+Z$/.test(value) && Number.isFinite(Date.parse(value)) ? value : null
@@ -28,11 +33,7 @@ export function normalizeTokenUsage(usage: unknown, checkedAt: unknown): TokenUs
 }
 
 function sumUsage(values: TokenUsage[]): TokenUsage {
-  const result = emptyUsage()
-  for (const value of values) for (const key of ['inputTokens', 'outputTokens', 'totalTokens', 'requests', 'cacheReadTokens', 'cacheWriteTokens'] as const) result[key] += value[key]
-  const latest = values.filter(value => value.lastResponseAt).sort((a, b) => Date.parse(b.lastResponseAt!) - Date.parse(a.lastResponseAt!))[0]
-  if (latest) { result.lastInputTokens = latest.lastInputTokens; result.lastOutputTokens = latest.lastOutputTokens; result.lastResponseAt = latest.lastResponseAt }
-  return result
+  return sumTokenUsage(values)
 }
 
 async function boundedJson(file: string, maxBytes = 64 * 1_024): Promise<Json | null> {
@@ -69,9 +70,28 @@ async function responseUsage(filePath: string, size: number): Promise<TokenUsage
     await file.read(header, 0, header.length, 0)
     await file.read(tail, 0, tail.length, Math.max(0, size - tail.length))
     const checkedAt = /"checkedAt"\s*:\s*"([^"]+)"/.exec(header.toString('utf8'))?.[1]
-    const match = /"usage"\s*:\s*(\{[\s\S]*\}|null)\s*\}\s*$/.exec(tail.toString('utf8'))
-    return match ? normalizeTokenUsage(JSON.parse(match[1]), checkedAt) : emptyUsage()
+    const usage = savedResponseUsage(tail.toString('utf8'))
+    return usage !== undefined ? normalizeTokenUsage(usage, checkedAt) : emptyUsage()
   } catch { return emptyUsage() } finally { await file?.close().catch(() => {}) }
+}
+
+/** Usage is followed by immutable attempt metadata in newer responses. */
+export function savedResponseUsage(text: string): unknown {
+  const matches = [...text.matchAll(/"usage"\s*:\s*/g)]
+  const last = matches.at(-1)
+  if (!last) return undefined
+  const start = last.index! + last[0].length
+  if (text.slice(start, start + 4) === 'null') return null
+  if (text[start] !== '{') return undefined
+  let depth = 0, quoted = false, escaped = false
+  for (let index = start; index < text.length; index++) {
+    const char = text[index]
+    if (quoted) { if (escaped) escaped = false; else if (char === '\\') escaped = true; else if (char === '"') quoted = false; continue }
+    if (char === '"') quoted = true
+    else if (char === '{') depth++
+    else if (char === '}' && --depth === 0) { try { return JSON.parse(text.slice(start, index + 1)) } catch { return undefined } }
+  }
+  return undefined
 }
 
 const responseCache = new Map<string, { mtime: number; size: number; value: TokenUsage }>()
@@ -109,6 +129,25 @@ function cachedUsage(directory: string): Promise<TokenUsage> {
   return pending
 }
 
+/** A reused PID, unrelated Node process, or unverified OS identity is not a running verifier. */
+export function verificationProcessMatches(probe: ProcessProbe, receipt: Json | null, manifest: Json | null): boolean {
+  const started = Date.parse(String(receipt?.startedAt || ''))
+  const created = Date.parse(probe.createdAt || '')
+  return Boolean(probe.alive && probe.inspected && probe.fingerprint && (probe.verifier || probe.adminVerifier || probe.recoveryVerifier) &&
+    Number.isFinite(started) && Number.isFinite(created) && created <= started && started - created <= 120_000 &&
+    receipt && manifest && /^[a-f0-9]{64}$/.test(String(receipt.inputSha256)) && /^[a-f0-9]{64}$/.test(String(receipt.modelConfigSha256)) &&
+    receipt.inputSha256 === manifest.inputSha256 && receipt.modelConfigSha256 === manifest.modelConfigSha256 &&
+    receipt.model === manifest.model && receipt.selectedRecords === manifest.selectedRecords)
+}
+async function verifiedRunAlive(directory: string, receipt: Json | null, manifest: Json | null): Promise<boolean> {
+  if (!Number.isSafeInteger(receipt?.pid) || Number(receipt?.pid) <= 0) return false
+  try {
+    const { probeNativeProcess } = await import('../../../scripts/ingestion/minimax-quota-supervisor')
+    const root = dirname(dirname(dirname(directory)))
+    return verificationProcessMatches(await probeNativeProcess(Number(receipt?.pid), root), receipt, manifest)
+  } catch { return false }
+}
+
 export async function readVerificationRun(directory: string, id: string): Promise<AdminRun> {
   const [savedStatus, progress, receipt, manifest, summary, tokenUsage] = await Promise.all([
     boundedJson(join(directory, 'status.json')), boundedJson(join(directory, 'progress.json')),
@@ -119,7 +158,7 @@ export async function readVerificationRun(directory: string, id: string): Promis
   const value = status.status
   return { id, title: id === '698fd533401f3de8' ? '全量目录核验' : id === '9dd414cb9cb419af' ? '最新高校补充核验' : '目录核验任务',
     status: value === 'running' || value === 'failed' || value === 'completed' || value === 'incomplete' ? value : 'unknown',
-    alive: processAlive(status.pid ?? receipt?.pid), model: model(status.model ?? receipt?.model ?? manifest?.model),
+    alive: await verifiedRunAlive(directory, receipt, manifest), model: model(status.model ?? receipt?.model ?? manifest?.model),
     effort: typeof receipt?.effort === 'string' && ['low', 'medium', 'high', 'xhigh', 'max'].includes(receipt.effort) ? receipt.effort : null,
     thinking: receipt?.thinking === 'adaptive' || receipt?.thinking === 'disabled' ? receipt.thinking : null,
     selectedRecords: number(status.selectedRecords ?? receipt?.selectedRecords ?? manifest?.selectedRecords), completedRecords: number(status.completedRecords),
@@ -155,8 +194,32 @@ const catalog = createCatalogRepository()
 let cachedCatalog: { at: number; value: AdminSnapshot['catalog'] } | undefined
 export async function getAdminSnapshot(): Promise<AdminSnapshot> {
   if (!cachedCatalog || Date.now() - cachedCatalog.at >= 30_000) cachedCatalog = { at: Date.now(), value: catalogSnapshot(await catalog.getBundle()) }
-  const runs = await readLocalVerificationRuns()
-  return { generatedAt: new Date().toISOString(), catalog: cachedCatalog.value, runs, capabilities: getVerificationCapabilities(),
+  const capabilities = getVerificationCapabilities()
+  const generatedAt = new Date().toISOString()
+  const todayDay = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date())
+  if (!capabilities.localMonitoring) {
+    const remote = await readRemoteTelemetry()
+    const connected = remoteExecutorConnected(remote)
+    const controls = remoteExecutorConfiguration()?.controlEnabled === true
+    const automation = remote?.automation ? { ...remote.automation, connected, quota: currentQuotaObservation(remote.automation.quota) } : null
+    const ledger = remote?.ledger ? { ...remote.ledger, todayDay } : null
+    return { generatedAt, catalog: cachedCatalog.value, runs: remote?.runs || [],
+      capabilities: { ...capabilities, startVerification: connected && controls, automationControl: connected && controls,
+        credentialSource: connected ? 'ccswitch' : capabilities.credentialSource, reason: connected && controls ? null : remote ? '本机执行器未在线，或控制通道尚未启用。' : capabilities.reason },
+      telemetry: { source: remote ? 'remote' : 'unavailable', observedAt: remote?.observedAt || null, stale: !remote || telemetryIsStale(remote.observedAt) },
+      model: remote?.model || { configured: null }, usage: { ...(ledger ? ledgerTokenUsage(ledger, remote!.usage) : remote?.usage || emptyUsage()), budgetTokens: null },
+      usageBasis: ledger ? 'immutable-ledger' : remote ? 'saved-responses' : 'unavailable', ledger, automation }
+  }
+  const [runs, savedLedger, automation] = await Promise.all([
+    readLocalVerificationRuns(), boundedJson(join(process.cwd(), '.tmp/minimax-verification/usage-ledger.json'), 512 * 1_024),
+    import('../../../scripts/ingestion/minimax-admin-control').then(module => module.readExecutorStatus()).catch(() => null),
+  ])
+  const ledger = projectUsageLedger(savedLedger, todayDay)
+  const savedUsage = sumUsage(runs.map(run => run.tokenUsage))
+  return { generatedAt, catalog: cachedCatalog.value, runs, capabilities: { ...capabilities,
+      automationControl: Boolean(automation && automation.reason !== 'process_identity_unconfirmed') },
+    telemetry: { source: capabilities.localMonitoring ? 'local' : 'unavailable', observedAt: capabilities.localMonitoring ? generatedAt : null, stale: !capabilities.localMonitoring },
     model: { configured: model(process.env.MINIMAX_MODEL || process.env.ANTHROPIC_MODEL) ?? runs.find(run => run.model)?.model ?? null },
-    usage: { ...sumUsage(runs.map(run => run.tokenUsage)), budgetTokens: null } }
+    usage: { ...(ledger ? ledgerTokenUsage(ledger, savedUsage) : savedUsage), budgetTokens: null }, usageBasis: ledger ? 'immutable-ledger' : 'saved-responses', ledger,
+    automation: automation ? { ...automation, quota: currentQuotaObservation(automation.quota) } : null }
 }

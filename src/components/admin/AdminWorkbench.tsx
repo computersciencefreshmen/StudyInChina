@@ -68,10 +68,16 @@ export function AdminWorkbench() {
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
   const [starting, setStarting] = useState(false)
+  const [automationCommandId, setAutomationCommandId] = useState<string | null>(null)
+  const [refreshing, setRefreshing] = useState(false)
+  const [refreshedAt, setRefreshedAt] = useState<string | null>(null)
   const refreshController = useRef<AbortController | null>(null)
   const expireSession = useCallback(() => {
     setSnapshot(null)
     setStarting(false)
+    setAutomationCommandId(null)
+    setRefreshing(false)
+    setRefreshedAt(null)
     setSession(current => current ? { ...current, authenticated: false } : current)
     setConnection('offline')
     setError('管理员会话已过期，请重新登录。')
@@ -85,14 +91,16 @@ export function AdminWorkbench() {
     refreshController.current?.abort()
     const controller = new AbortController()
     refreshController.current = controller
+    setRefreshing(true)
+    setRefreshedAt(null)
     try {
       const next = await jsonRequest<AdminSnapshot>('/api/admin/status', { signal: controller.signal })
-      if (!controller.signal.aborted) { setSnapshot(current => current && current.generatedAt > next.generatedAt ? current : next); setError('') }
+      if (!controller.signal.aborted) { setSnapshot(current => current && current.generatedAt > next.generatedAt ? current : next); setError(''); setRefreshedAt(new Date().toISOString()) }
     } catch (cause) {
       if (controller.signal.aborted) return
       if (cause instanceof AdminRequestError && cause.status === 401) { expireSession(); return }
       setError(cause instanceof Error ? cause.message : '无法同步数据。'); setConnection('offline')
-    } finally { if (refreshController.current === controller) refreshController.current = null }
+    } finally { if (refreshController.current === controller) { refreshController.current = null; setRefreshing(false) } }
   }, [expireSession])
   useEffect(() => {
     if (!session?.authenticated) return
@@ -100,8 +108,16 @@ export function AdminWorkbench() {
     let streamLive = false
     let pollingInFlight = false
     let polling: ReturnType<typeof setTimeout> | undefined
+    let snapshotWatchdog: ReturnType<typeof setTimeout> | undefined
     const controller = new AbortController()
     const source = new EventSource('/api/admin/events')
+    function fallback() {
+      if (stopped) return
+      streamLive = false
+      if (snapshotWatchdog) clearTimeout(snapshotWatchdog)
+      snapshotWatchdog = undefined
+      if (!polling && !pollingInFlight) polling = setTimeout(poll, 1200)
+    }
     async function poll() {
       polling = undefined
       if (stopped || streamLive || pollingInFlight) return
@@ -126,19 +142,37 @@ export function AdminWorkbench() {
         streamLive = true
         if (polling) clearTimeout(polling)
         polling = undefined
+        if (snapshotWatchdog) clearTimeout(snapshotWatchdog)
+        // The server sends snapshots every three seconds. An open connection
+        // without fresh data must not leave the usage page frozen indefinitely.
+        snapshotWatchdog = setTimeout(() => { setConnection('connecting'); fallback() }, 15_000)
         setSnapshot(current => current && current.generatedAt > next.generatedAt ? current : next); setConnection('live'); setError('')
-      } catch { setConnection('offline') }
+      } catch { setConnection('offline'); fallback() }
     })
-    source.addEventListener('status-error', () => { setConnection('offline'); setError('执行器状态暂时不可用，正在等待下一次同步。') })
-    source.onopen = () => { if (stopped) return; streamLive = true; if (polling) clearTimeout(polling); polling = undefined; setConnection('live') }
-    source.onerror = () => { streamLive = false; if (!polling && !pollingInFlight && !stopped) { setConnection('connecting'); polling = setTimeout(poll, 1200) } }
+    source.addEventListener('status-error', () => { if (stopped) return; setConnection('offline'); setError('执行器状态暂时不可用，正在等待下一次同步。'); fallback() })
+    // EventSource opening confirms transport only; the first valid snapshot
+    // confirms that application data is flowing and can stop fallback polling.
+    source.onopen = () => { if (stopped) return; setConnection('connecting'); fallback() }
+    source.onerror = () => { if (stopped) return; setConnection('connecting'); fallback() }
     jsonRequest<AdminSnapshot>('/api/admin/status', { signal: controller.signal }).then(next => { if (!stopped) setSnapshot(current => current && current.generatedAt > next.generatedAt ? current : next) }).catch(cause => {
       if (stopped) return
       if (cause instanceof AdminRequestError && cause.status === 401) { stopped = true; source.close(); expireSession() }
-      else setConnection('offline')
+      else { setConnection('offline'); fallback() }
     })
-    return () => { stopped = true; controller.abort(); refreshController.current?.abort(); source.close(); if (polling) clearTimeout(polling) }
+    return () => { stopped = true; controller.abort(); refreshController.current?.abort(); source.close(); if (polling) clearTimeout(polling); if (snapshotWatchdog) clearTimeout(snapshotWatchdog) }
   }, [session?.authenticated, expireSession])
+  async function automationAction(action: 'pause' | 'resume') {
+    const commandId = crypto.randomUUID()
+    setAutomationCommandId(commandId)
+    try {
+      await jsonRequest('/api/admin/automation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ commandId, action }) })
+      void refresh()
+    } catch (cause) {
+      setAutomationCommandId(null)
+      if (cause instanceof AdminRequestError && cause.status === 401) expireSession()
+      throw cause
+    }
+  }
   async function login(event: FormEvent) {
     event.preventDefault(); setBusy(true); setError('')
     try { setSession(await jsonRequest<AdminSession>('/api/admin/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password }) })); setPassword('') }
@@ -146,9 +180,9 @@ export function AdminWorkbench() {
     finally { setBusy(false) }
   }
   async function logout() {
-    try { await jsonRequest('/api/admin/session', { method: 'DELETE' }); setSnapshot(null); setSession(current => current ? { ...current, authenticated: false } : current) }
+    try { await jsonRequest('/api/admin/session', { method: 'DELETE' }); setSnapshot(null); setAutomationCommandId(null); setRefreshing(false); setRefreshedAt(null); setSession(current => current ? { ...current, authenticated: false } : current) }
     catch { setError('退出未完成，请重试。') }
   }
-  if (session?.authenticated && snapshot) return <><AdminDashboard snapshot={snapshot} connection={connection} onStart={() => setStarting(true)} onRefresh={() => { void refresh() }} onLogout={() => { void logout() }} />{error ? <p role="alert" className={styles.error} style={{ position: 'fixed', bottom: 15, right: 20, background: 'white', padding: 12, borderRadius: 12 }}>{error}</p> : null}{starting ? <StartVerification configuredModel={snapshot.model.configured} onClose={() => setStarting(false)} onStarted={() => { void refresh() }} /> : null}</>
+  if (session?.authenticated && snapshot) return <><AdminDashboard snapshot={snapshot} connection={connection} refreshing={refreshing} refreshedAt={refreshedAt} onAutomationAction={automationAction} automationCommandId={automationCommandId} onStart={() => { if (snapshot.capabilities.startVerification) setStarting(true) }} onRefresh={() => { void refresh() }} onLogout={() => { void logout() }} />{error ? <p role="alert" className={styles.error} style={{ position: 'fixed', bottom: 15, right: 20, background: 'white', padding: 12, borderRadius: 12 }}>{error}</p> : null}{starting && snapshot.capabilities.startVerification ? <StartVerification configuredModel={snapshot.model.configured} onClose={() => setStarting(false)} onStarted={() => { void refresh() }} /> : null}</>
   return <div className={styles.loginShell}><section className={styles.loginCard}><Link href="/zh" className={styles.brand}><span className={styles.brandMark} style={{ background: '#7860cf', color: 'white' }}>中</span><span>Study in China<small>ADMIN WORKSPACE</small></span></Link><h1>{session?.authenticated ? '正在连接工作空间…' : '欢迎回到数据工作室'}</h1>{session === null ? <p>正在检查管理员会话…</p> : session.authenticated ? <p>正在读取实际目录和核验进度。</p> : session.configured ? <><p>登录后查看核验任务、处理进度和 Token 用量。</p><form onSubmit={login}><label htmlFor="admin-password">管理员访问口令</label><input autoComplete="current-password" type="password" id="admin-password" value={password} required onChange={event => setPassword(event.target.value)} /><button type="submit" disabled={busy} className={styles.primaryButton}>{busy ? '正在登录…' : '进入管理员工作台'}<WorkbenchIcon name="arrow" size={16} /></button></form></> : <><p>管理员访问尚未配置。请在服务端环境中设置 ADMIN_ACCESS_TOKEN 和 ADMIN_SESSION_SECRET；本机执行核验还需要 ADMIN_LOCAL_VERIFICATION_ENABLED=true。</p><p>主题实验室已可直接查看完整工作台设计。</p></>}{error ? <p className={styles.error} role="alert">{error}</p> : null}<div className={styles.loginLinks}><Link href="/themes">查看五套主题 ↗</Link><Link href="/zh">返回网站 →</Link></div></section></div>
 }

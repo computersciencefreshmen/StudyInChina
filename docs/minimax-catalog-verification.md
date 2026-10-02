@@ -18,6 +18,19 @@ npm run minimax:verify -- --use-ccswitch --limit 2
 # Run the complete catalog, with two batches at a time. Repeat to resume.
 npm run minimax:verify -- --use-ccswitch --all --concurrency 2 --batch-size 2
 
+# Guard each attempt with fresh official quota and the local human billing policy.
+npm run minimax:verify -- --use-ccswitch --all --concurrency 4 --batch-size 2 --quota-guard
+
+# Continue the frozen baseline, then only qualified recovery work; inspect before starting.
+node --import tsx scripts/ingestion/minimax-workload-runner.ts --run 9dd414cb9cb419af --inspect
+node --import tsx scripts/ingestion/minimax-workload-runner.ts --run 9dd414cb9cb419af
+
+# Refresh actual API usage accounting; historical response imports are idempotent.
+node --import tsx scripts/ingestion/minimax-usage-ledger.ts --seed-historical --daily-target 144000000 --output .tmp/minimax-verification/usage-ledger.json
+
+# Read current provider plan quota without a model call.
+node --import tsx scripts/ingestion/minimax-quota.ts --use-ccswitch
+
 # Generate an immediate partial review report from checkpoints, even during a full run.
 # This needs no credential and makes no model or source calls.
 npm run minimax:verify -- --report-only
@@ -25,8 +38,9 @@ npm run minimax:verify -- --report-only
 # Inspect a running frozen snapshot after newer catalog data has changed its hash.
 npm run minimax:verify -- --report-only --run 698fd533401f3de8
 
-# Retry unresolved records and optionally restrict to one collection.
-npm run minimax:verify -- --use-ccswitch --all --retry-unconfirmed --collection programs
+# Retry an exact, qualified recovery list in an isolated run, one record per batch.
+# The list must use the frozen queue and have readable new evidence or a model defect.
+npm run minimax:verify -- --use-ccswitch --all --quota-guard --batch-size 1 --task-ids-file .tmp/minimax-verification/recovery-task-ids.json --recovery-from 9dd414cb9cb419af --retry-unconfirmed --checkpoint-max-age-hours 168
 
 # New M3 job with reasoning explicitly enabled (does not edit CC Switch).
 npm run minimax:verify -- --use-ccswitch --model MiniMax-M3 --thinking adaptive --limit 2
@@ -36,6 +50,8 @@ npm run minimax:verify -- --use-ccswitch --model MiniMax-M3.1-Flash-Preview --ef
 ```
 
 `--use-ccswitch` opens `~/.cc-switch/cc-switch.db` read-only and selects only the current Claude provider. It requires that provider to specify an official MiniMax endpoint and MiniMax model. The current provider's credential stays in memory and is sent directly to its official endpoint; the script neither changes CC Switch/Claude settings nor starts Claude tools or shell commands. It respects the provider's configured model (currently MiniMax-M3 when configured by the user).
+
+`--quota-guard` requires `--use-ccswitch` and queries the official Token Plan quota endpoint before source retrieval and every complete model attempt, including retries. Only the shared `general` text pool with valid current five-hour and weekly windows is accepted. The default helper policy remains plan-only. Runtime reads `.tmp/minimax-verification/billing-safety.json` again for each admitted attempt: explicit human authorization permits existing credits only when a fresh valid quota response establishes plan exhaustion; authorization does not override unknown, stale, inaccessible or invalid quota. Low-quota and exhausted-credit attempts use one in-flight response. Without credit authorization, exhaustion closes the run and preserves checkpoints. Requests do not purchase credits, change the provider or switch to an ordinary API credential. `quota.json` and per-attempt receipts record admission conditions; they do not prove server billing allocation or the account UI switch's state. The official service prioritizes included plan quota, then available credits on the subscription key. [Official Token Plan quota API and credit behavior](https://platform.minimax.cn/docs/token-plan/faq).
 
 On 2026-09-30, the local live receipt and CC Switch provider both selected `MiniMax-M3`; the checked-in ingestion and localization Worker configurations still select `MiniMax-M2.7`. This establishes local execution and repository defaults, not the model currently deployed in a remote Worker. MiniMax lists `MiniMax-M3.1-Flash-Preview` as its newest M-series model with a 1M context window, currently available only through Token Plan and MiniMax Code. The model name alone does not establish that a particular credential is eligible or that its catalog comparison quality is better. [Official model overview](https://platform.minimax.cn/docs/guides/models-intro).
 
@@ -49,7 +65,43 @@ Alternatively, set `MINIMAX_API_KEY` locally, `MINIMAX_MODEL=MiniMax-M2.7` and a
 
 Only public catalog records and official source text leave the computer. Environment files, repository files and API credentials are not part of the model prompt. Credentials are used only in the authorization header sent to one of the allowlisted official MiniMax API hosts. Source redirects are restricted to registered official hosts, use no API authorization header, and honor robots.txt. Capture has a byte limit, timeout and bounded retry. PDF extraction uses existing `pdftotext`/`PDFTOTEXT_PATH`; a missing extractor yields `unconfirmed`.
 
-Output is in the ignored `.official-harvest/minimax-verification/<input-hash>/` directory. `manifest.json` contains counts and the input hash; `input-snapshot.json` freezes the six input collections; `queue.json` inventories every record; `run-receipt.json` records the PID, provider, model, concurrency and resumed count without credentials; `progress.json`/`status.json` atomically update after every batch; `sources/` contains retrieval receipts and bounded source text; `snapshots/` contains original bytes with SHA-256 hashes; `responses/` contains model results, usage and request hashes; `records/` contains atomic checkpoints; `report.json`, `report.md` and `differences.json` report field-level results. Matching checkpoints and source receipts are reusable for 24 hours. A changed input, prompt version or model triggers re-evaluation. Different selection sizes can share checkpoints. Ranking publisher/own-university URLs accepted by the production schema receive separate synthetic evidence sources; ranking fields cannot use unrelated admissions snapshots. These synthetic sources do not change the production source registry or add catalog tasks. To force refetching an inaccessible source immediately, remove only its known receipt file or start again after its 24-hour cache window.
+Output is in the ignored `.official-harvest/minimax-verification/<input-hash>/` directory. `manifest.json` contains counts and the input hash; `input-snapshot.json` freezes the six input collections; `queue.json` inventories every record; `run-receipt.json` records the PID, provider, model, concurrency and resumed count without credentials; `progress.json`/`status.json` atomically update after every batch; `sources/` contains retrieval receipts and bounded source text; `snapshots/` contains original bytes with SHA-256 hashes; `responses/` contains model results, usage and request hashes; `records/` contains atomic checkpoints; `report.json`, `report.md` and `differences.json` report field-level results. Record checkpoints default to 24-hour reuse; `--checkpoint-max-age-hours 168` retains matching audit work for seven days across quota windows. Source receipts always retain their separate 24-hour capture policy. Neither retention policy renews publication verification dates. A changed input, prompt version or model triggers re-evaluation. Exact recovery selections have their own run identity and reuse attempted checkpoints, including failed outcomes, to prevent repeated charging for the same selection. Ranking publisher/own-university URLs accepted by the production schema receive separate synthetic evidence sources; ranking fields cannot use unrelated admissions snapshots. These synthetic sources do not change the production source registry or add catalog tasks. To force refetching an inaccessible source immediately, remove only its known receipt file or start again after its 24-hour cache window.
+
+Recovery is qualified before any model call. A previously blocked registered source becoming readable qualifies as new evidence when unresolved claims remain. A changed existing page hash alone does not: counters, navigation and news can change without changing any relevant claim. Such changes remain an independent-review backlog and need a reviewed subsequent snapshot before another comparison. Fully supported records are never automatically repeated. Quota/authentication/transport interruptions are not missing model verdicts. Baseline continuation handles admission interruptions, and recoverable model failures or malformed verdicts use a bounded isolated selection. Quota-interrupted recovery checkpoints remain resumable. Both the ledger and verifier startup check earlier sibling selections, so changing selector membership cannot replay the same task and evidence; actual failed model attempts remain bounded.
+
+## Local quota supervision and the full-field recovery ledger
+
+Inspect the current baseline without model calls or state writes:
+
+```powershell
+node --import tsx scripts/ingestion/minimax-quota-supervisor.ts --run 9dd414cb9cb419af --inspect
+```
+
+Only after confirming the current receipt and OS process identity, start the
+supervisor with its absolute script path and `--adopt-pid <current-pid>` (or omit
+adoption when no guarded verifier exists). It records sanitized state in
+`.tmp/minimax-verification/supervisor-state.json`, uses an exclusive process
+lock, and waits for the official quota reset before rechecking permission. Its
+baseline launch always uses a quota guard and seven-day checkpoint retention.
+Thirty minutes without checkpoint progress, source capture, or actual model
+responses requires attention. The supervisor keeps inspecting the existing
+process without killing or duplicating it. Once that exact process exits, fresh
+official quota and the existing failure limits govern any continuation.
+
+The supervisor exits with `needs-recovery` after baseline completion rather
+than repeating successful records. The 15-minute heartbeat then builds the
+same-input field ledger and processes only qualified selections:
+
+```powershell
+node --import tsx scripts/ingestion/build-minimax-recovery-ledger.ts --run 9dd414cb9cb419af
+```
+
+`recovery-ledger.json` inventories every frozen factual claim, including those
+never attempted. The Markdown ledger separates real parsed model responses,
+HTTP failures, source failures, output omissions/duplicates and quote defects,
+and gives exact one-record guarded commands for its immutable selector files.
+This remains a review ledger: source text can refer to a different program,
+academic year, currency or fee period even when a quote matches exactly.
 
 Exact quote validation rejects missing/duplicate verdicts, quotes absent from the captured text, unsupported nulls/composites, mismatching numeric evidence and ambiguous dates. Replacement strings must themselves appear in the quote: missing evidence cannot become a contradiction. `supported` and `contradicted` mean candidate comparison only. Findings can still be semantically incorrect or refer to an unrelated passage; human review must match the exact program, intake, currency and billing period before existing promotion procedures are used. Long source text is explicitly marked truncated, and absence outside the sent text remains unconfirmed. Authentication, configuration and rate-limit errors stop further batches after bounded retries and record a fatal/incomplete receipt; repeat the same command to resume, including failed model requests. Full runs can consume substantial time and API tokens; the default command processes two records and `--all` explicitly selects the complete catalog.
 

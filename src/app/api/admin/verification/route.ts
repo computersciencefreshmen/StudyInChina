@@ -1,6 +1,8 @@
 import { ADMIN_RESPONSE_HEADERS, isAdminMutationOrigin, readAdminJson, requestAdminSession } from '@/lib/admin/auth'
 import { readLocalVerificationRuns } from '@/lib/admin/snapshot'
-import { launchVerification, parseVerificationRequest } from '@/lib/admin/verification'
+import { launchVerification, parseVerificationRequest, getVerificationCapabilities } from '@/lib/admin/verification'
+import { remoteExecutorConfiguration, submitRemoteExecutorCommand } from '@/lib/admin/remote-executor'
+import { randomUUID } from 'node:crypto'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -12,6 +14,9 @@ export async function POST(request: Request) {
   try { options = parseVerificationRequest(await readAdminJson(request)) }
   catch { return Response.json({ error: 'invalid_request' }, { status: 400, headers: ADMIN_RESPONSE_HEADERS }) }
   try {
+    if (!getVerificationCapabilities().localMonitoring && remoteExecutorConfiguration()?.controlEnabled) {
+      return Response.json(await submitRemoteExecutorCommand({ commandId: randomUUID(), action: 'start', options }), { status: 202, headers: ADMIN_RESPONSE_HEADERS })
+    }
     const pid = await launchVerification(options, async () => (await readLocalVerificationRuns()).some(run => run.alive))
     return Response.json({ accepted: true, pid }, { status: 202, headers: ADMIN_RESPONSE_HEADERS })
   } catch (error) {
