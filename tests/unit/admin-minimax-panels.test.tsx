@@ -22,7 +22,7 @@ class FakeEventSource {
   snapshot(value: unknown) { this.listeners.get('snapshot')?.({ data: JSON.stringify(value) } as MessageEvent) }
 }
 beforeEach(() => { FakeEventSource.instances = []; vi.stubGlobal('EventSource', FakeEventSource); document.documentElement.dataset.theme = 'cloud' })
-afterEach(() => { cleanup(); vi.unstubAllGlobals(); vi.restoreAllMocks() })
+afterEach(() => { cleanup(); vi.useRealTimers(); vi.unstubAllGlobals(); vi.restoreAllMocks() })
 
 describe('MiniMax immutable usage dashboard', () => {
   it('shows today and cumulative receipts separately, counts unknown attempts, and avoids treating the target as a cap', () => {
@@ -241,6 +241,49 @@ describe('MiniMax executor controls', () => {
     act(() => FakeEventSource.instances[0].snapshot(later))
     expect(screen.queryByText('指令已提交，等待执行器回执。')).not.toBeInTheDocument()
     expect(screen.getByRole('button', { name: '暂停后续任务' })).toBeEnabled()
+  })
+
+  it.each(['expired', 'failed', 'completed'] as const)('recovers a matching %s queue outcome absent from the local latest receipt without redispatch', async status => {
+    const snapshot = adminSnapshot(); snapshot.generatedAt = new Date().toISOString(); snapshot.capabilities.localMonitoring = false; snapshot.automation = executor()
+    const commandId = '814dce65-1297-4638-8d83-ae4a93204d87'
+    vi.spyOn(crypto, 'randomUUID').mockReturnValue(commandId)
+    const fetchMock = vi.fn(async (path: string, init?: RequestInit) => response(path === '/api/admin/session' ? adminSession
+      : path.startsWith('/api/admin/automation?commandId=') ? { command: { commandId, action: 'pause', status, updatedAt: new Date().toISOString(), error: status === 'failed' ? 'execution_outcome_unknown' : status === 'expired' ? 'command_expired' : null } }
+        : path === '/api/admin/automation' && init?.method === 'POST' ? { accepted: true, commandId } : snapshot))
+    vi.stubGlobal('fetch', fetchMock)
+    render(<AdminWorkbench />)
+    await screen.findByRole('heading', { name: '自动化执行' })
+    act(() => FakeEventSource.instances[0].snapshot(snapshot))
+    vi.useFakeTimers()
+    await act(async () => { fireEvent.click(screen.getByRole('button', { name: '暂停后续任务' })); await Promise.resolve() })
+    expect(screen.getByRole('button', { name: '开始核验' })).toBeDisabled()
+    await act(async () => { await vi.advanceTimersByTimeAsync(1200) })
+    expect(screen.getByRole('button', { name: '开始核验' })).toBeEnabled()
+    expect(screen.getByRole('button', { name: '暂停后续任务' })).toBeEnabled()
+    expect(screen.queryByText('指令已提交，等待执行器回执。')).not.toBeInTheDocument()
+    expect(fetchMock.mock.calls.filter(([path, init]) => path === '/api/admin/automation' && init?.method === 'POST')).toHaveLength(1)
+    expect(fetchMock).toHaveBeenCalledWith(`/api/admin/automation?commandId=${commandId}`, expect.objectContaining({ credentials: 'same-origin' }))
+    expect(screen.getByText(status === 'expired' ? /指令已过期/ : status === 'failed' ? /系统不会自动重派/ : /执行器已确认指令/)).toHaveAttribute('role', 'status')
+  })
+
+  it.each(['pending', 'claimed', 'missing', 'mismatched', 'unavailable'] as const)('keeps the command locked for a %s queue outcome beyond command TTL without retrying it', async outcome => {
+    const snapshot = adminSnapshot(); snapshot.generatedAt = new Date().toISOString(); snapshot.capabilities.localMonitoring = false; snapshot.automation = executor()
+    const commandId = '814dce65-1297-4638-8d83-ae4a93204d87'
+    vi.spyOn(crypto, 'randomUUID').mockReturnValue(commandId)
+    const fetchMock = vi.fn(async (path: string, init?: RequestInit) => response(path === '/api/admin/session' ? adminSession
+      : path.startsWith('/api/admin/automation?commandId=') ? { command: outcome === 'missing' ? null : { commandId: outcome === 'mismatched' ? 'different-command' : commandId, action: 'pause', status: outcome === 'pending' || outcome === 'claimed' ? outcome : 'completed', updatedAt: new Date().toISOString(), error: null } }
+        : path === '/api/admin/automation' && init?.method === 'POST' ? { accepted: true, commandId } : snapshot, path.includes('?commandId=') && outcome === 'unavailable' ? 503 : 200))
+    vi.stubGlobal('fetch', fetchMock)
+    render(<AdminWorkbench />)
+    await screen.findByRole('heading', { name: '自动化执行' })
+    act(() => FakeEventSource.instances[0].snapshot(snapshot))
+    vi.useFakeTimers()
+    await act(async () => { fireEvent.click(screen.getByRole('button', { name: '暂停后续任务' })); await Promise.resolve() })
+    await act(async () => { await vi.advanceTimersByTimeAsync(306_000) })
+    expect(screen.getByRole('button', { name: '开始核验' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: '暂停后续任务' })).toBeDisabled()
+    expect(screen.getByText('指令已提交，等待执行器回执。')).toBeVisible()
+    expect(fetchMock.mock.calls.filter(([path, init]) => path === '/api/admin/automation' && init?.method === 'POST')).toHaveLength(1)
   })
 
   it('shows a readable rejected command and leaves controls available for retry', async () => {

@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { createAdminTelemetry } from '../../src/lib/admin/telemetry-contract'
 import { executorStatusSchema } from '../../src/lib/admin/executor-contract'
-import { remoteExecutorConnected, remoteExecutorControllable } from '../../src/lib/admin/remote-executor'
+import { readRemoteExecutorCommand, remoteExecutorConnected, remoteExecutorControllable } from '../../src/lib/admin/remote-executor'
 
 const now = Date.parse('2026-10-02T10:00:00Z')
 const token = 'synthetic-transport-token-'.repeat(2)
@@ -63,5 +63,38 @@ describe('remote executor command admission', () => {
     expect(fetchMock).toHaveBeenLastCalledWith('https://catalog.account.workers.dev/internal/v1/admin-executor', expect.objectContaining({
       method: 'POST', redirect: 'error', body: JSON.stringify({ commandId, action: 'resume' }),
     }))
+  })
+})
+
+
+describe('remote command receipt lookup', () => {
+  const queueCommand = { commandId, action: 'resume', status: 'expired', createdAt: new Date(now - 300_000).toISOString(),
+    expiresAt: new Date(now).toISOString(), updatedAt: new Date(now).toISOString(), executorId: null,
+    attemptId: null, leaseExpiresAt: null, error: 'command_expired' }
+  function configure() { vi.stubEnv('ADMIN_TELEMETRY_URL', telemetryUrl); vi.stubEnv('ADMIN_TELEMETRY_TOKEN', token) }
+  it('reads the matching queue terminal receipt without telemetry freshness or command redispatch', async () => {
+    configure()
+    const fetchMock = vi.fn(async () => Response.json({ version: 1, observedAt: new Date(now).toISOString(), commands: [queueCommand] }))
+    vi.stubGlobal('fetch', fetchMock)
+    expect(await readRemoteExecutorCommand(commandId)).toEqual({ commandId, action: 'resume', status: 'expired', updatedAt: new Date(now).toISOString(), error: 'command_expired' })
+    expect(fetchMock).toHaveBeenCalledExactlyOnceWith('https://catalog.account.workers.dev/internal/v1/admin-executor', expect.objectContaining({ method: 'GET', redirect: 'error', cache: 'no-store', headers: { Authorization: `Bearer ${token}` } }))
+    expect(fetchMock.mock.calls[0]).toHaveLength(2)
+  })
+  it('does not substitute another command or infer completion when history is missing', async () => {
+    configure()
+    vi.stubGlobal('fetch', vi.fn(async () => Response.json({ version: 1, observedAt: new Date(now).toISOString(), commands: [queueCommand] })))
+    expect(await readRemoteExecutorCommand('7ed8c4ed-32ac-4b11-b548-e59f10cb6b6c')).toBeNull()
+  })
+  it('rejects invalid identities before transport and sanitizes malformed or oversized queue failures', async () => {
+    configure()
+    const fetchMock = vi.fn(async () => new Response('private-token-details', { status: 500 }))
+    vi.stubGlobal('fetch', fetchMock)
+    await expect(readRemoteExecutorCommand('../other')).rejects.toThrow()
+    expect(fetchMock).not.toHaveBeenCalled()
+    await expect(readRemoteExecutorCommand(commandId)).rejects.toThrow('executor_unavailable')
+    fetchMock.mockResolvedValueOnce(Response.json({ version: 1, observedAt: new Date(now).toISOString(), commands: [{ ...queueCommand, status: 'arbitrary-success' }] }))
+    await expect(readRemoteExecutorCommand(commandId)).rejects.toThrow('executor_unavailable')
+    fetchMock.mockResolvedValueOnce(new Response('x'.repeat(129 * 1024)))
+    await expect(readRemoteExecutorCommand(commandId)).rejects.toThrow('executor_unavailable')
   })
 })

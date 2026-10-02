@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react'
 import Link from 'next/link'
 import { RoundedSelect } from '@/components/ui/RoundedSelect'
-import type { AdminSession, AdminSnapshot, VerificationRequest } from '@/lib/admin/types'
+import type { AdminSession, AdminSnapshot, ExecutorStatus, VerificationRequest } from '@/lib/admin/types'
 import { AdminDashboard } from './AdminDashboard'
 import { WorkbenchIcon } from './WorkbenchIcon'
 import styles from './Workbench.module.css'
@@ -88,10 +88,12 @@ export function AdminWorkbench() {
   const [refreshedAt, setRefreshedAt] = useState<string | null>(null)
   const refreshController = useRef<AbortController | null>(null)
   const transportCleanup = useRef<(() => void) | null>(null)
+  const commandLookupController = useRef<AbortController | null>(null)
   const closeTransport = useCallback(() => {
     transportCleanup.current?.()
     transportCleanup.current = null
     refreshController.current?.abort()
+    commandLookupController.current?.abort()
   }, [])
   const snapshotGeneratedAt = useRef('')
   const acceptSnapshot = useCallback((next: AdminSnapshot) => {
@@ -209,6 +211,37 @@ export function AdminWorkbench() {
     })
     return () => { dispose(); if (transportCleanup.current === dispose) transportCleanup.current = null }
   }, [session?.authenticated, acceptSnapshot, expireSession])
+  // A never-claimed expiry or lost lease is recorded in the private queue rather
+  // than the local executor's latest receipt. Read that exact outcome; time alone
+  // never authorizes retrying a command whose execution remains uncertain.
+  useEffect(() => {
+    if (!session?.authenticated || !automationCommandId || snapshot?.capabilities.localMonitoring !== false) return
+    const commandId = automationCommandId
+    const controller = new AbortController()
+    commandLookupController.current = controller
+    let polling: ReturnType<typeof setTimeout> | undefined
+    async function pollCommand() {
+      if (controller.signal.aborted) return
+      try {
+        const reply = await jsonRequest<{ command: ExecutorStatus['latestCommand'] }>(`/api/admin/automation?commandId=${encodeURIComponent(commandId)}`, { signal: controller.signal })
+        if (controller.signal.aborted) return
+        const command = reply?.command
+        if (command?.commandId === commandId && ['completed', 'failed', 'expired'].includes(command.status)) {
+          setAutomationCommandId(current => current === commandId ? null : current)
+          setVerificationReceipt(command.status === 'expired' ? '指令已过期，执行器未领取该任务。请重新提交。'
+            : command.error === 'execution_outcome_unknown' ? '指令的执行结果未能确认。请核对任务进度后再操作，系统不会自动重派。'
+              : command.status === 'failed' ? '执行器未能完成指令。请同步任务进度后再操作。' : '执行器已确认指令，任务进度将随执行器回执更新。')
+          return
+        }
+      } catch (cause) {
+        if (controller.signal.aborted) return
+        if (cause instanceof AdminRequestError && cause.status === 401) { expireSession(); return }
+      }
+      if (!controller.signal.aborted) polling = setTimeout(pollCommand, 5000)
+    }
+    polling = setTimeout(pollCommand, 1200)
+    return () => { controller.abort(); if (polling) clearTimeout(polling); if (commandLookupController.current === controller) commandLookupController.current = null }
+  }, [session?.authenticated, automationCommandId, snapshot?.capabilities.localMonitoring, expireSession])
   async function startVerification(request: VerificationRequest) {
     setVerificationReceipt('')
     try {

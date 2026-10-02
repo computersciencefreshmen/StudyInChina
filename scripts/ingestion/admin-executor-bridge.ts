@@ -184,6 +184,13 @@ export async function buildBridgeTelemetry(root: string, remotelyControllable = 
   } catch { automation.quota = currentQuotaObservation(automation.quota) }
   return createAdminTelemetry(runs.slice(0, 100), runs.find(run => run.model)?.model || null, new Date().toISOString(), { ledger, automation })
 }
+/** Read-only uploads retain the legacy wire shape; upgraded readers default this missing capability to false. */
+export function bridgeTelemetryPayload(telemetry: AdminTelemetry, telemetryOnly: boolean) {
+  if (!telemetryOnly || !telemetry.automation) return telemetry
+  const automation: ExecutorStatus = { ...telemetry.automation }
+  delete automation.remotelyControllable
+  return { ...telemetry, automation }
+}
 export async function runAdminExecutorBridge(root = process.cwd(), once = false, telemetryOnly = false) {
   root = resolve(root)
   const configuration = await loadBridgeConfiguration(root)
@@ -210,7 +217,11 @@ export async function runAdminExecutorBridge(root = process.cwd(), once = false,
   const dependencies: BridgeDependencies = {
     request,
     execute: async command => { const { executeExecutorCommand } = await import('./minimax-admin-control'); return executeExecutorCommand(command, root) },
-    publish: async () => { await request('PUT', configuration.telemetryUrl, await buildBridgeTelemetry(root, !telemetryOnly)); lastPublishedAt = new Date().toISOString() },
+    publish: async () => {
+      const telemetry = await buildBridgeTelemetry(root, !telemetryOnly)
+      await request('PUT', configuration.telemetryUrl, bridgeTelemetryPayload(telemetry, telemetryOnly))
+      lastPublishedAt = new Date().toISOString()
+    },
   }
   try {
     while (!stopped) {
