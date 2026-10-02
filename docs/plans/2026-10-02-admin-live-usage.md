@@ -4,7 +4,7 @@
 
 **Architecture:** The local executor reads immutable model usage receipts and quota observations, projects a bounded credential-free snapshot, and publishes it to the existing private catalog Worker. The authenticated Next.js administrator API reads that snapshot. The five existing themes share the same live workbench and never replace live measurements with preview data.
 
-**Tech stack:** Installed Next.js 16.3.5, React, TypeScript, Zod, Node.js, Cloudflare Worker/R2, Vercel, Vitest and Playwright.
+**Tech stack:** Next.js 16.3.8, React, TypeScript, Zod, Node.js, Cloudflare Worker/R2, Vercel, Vitest and Playwright. The Next.js patch upgrade and matching lint configuration resolve the production dependency audit finding before release.
 
 ## Implementation
 
