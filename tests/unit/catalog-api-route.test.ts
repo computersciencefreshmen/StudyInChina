@@ -3,9 +3,11 @@ import { GET as listPrograms } from '@/app/api/v1/programs/route'
 import { GET as getCurrentRelease } from '@/app/api/v1/releases/current/route'
 import { createCatalogRepository } from '@/lib/catalog'
 import { selectCatalogApiData } from '@/lib/catalog-api/projection'
+import * as catalogApiRuntime from '@/lib/catalog-api/runtime'
+import { CatalogApiService, releaseFromBundle } from '@/lib/catalog-api/service'
 import { getTodayDate } from '@/lib/data/freshness'
 
-afterEach(() => vi.useRealTimers())
+afterEach(() => vi.restoreAllMocks())
 
 describe('catalog API routes', () => {
   it('serves only publication-gated records with cache policy and release metadata', async () => {
@@ -26,16 +28,27 @@ describe('catalog API routes', () => {
   })
 
   it('exposes the linked-scholarship program filter through the compatibility API', async () => {
-    // Evaluate the catalog while its September scholarship evidence is current.
-    // The real clock must not turn this positive route fixture into expired data.
-    vi.useFakeTimers({ toFake: ['Date'] })
-    vi.setSystemTime(new Date('2026-09-28T04:00:00Z'))
+    // Give this positive route fixture its own evidence window and scope.
+    // Canonical evidence may expire or roll over without changing this contract.
+    const today = '2026-09-28'
+    const bundle = structuredClone(await createCatalogRepository().getBundle())
+    const program = selectCatalogApiData(bundle, today).programs[0]!
+    bundle.scholarships = [{
+      ...bundle.scholarships[0]!,
+      id: 'scholarship-route-fixture', slug: 'scholarship-route-fixture',
+      universityIds: [program.universityId], programIds: [program.id],
+      status: 'verified', verifiedAt: today, reviewAfter: '2026-10-28', deadline: null,
+    }]
+    const published = selectCatalogApiData(bundle, today)
+    vi.spyOn(catalogApiRuntime, 'getCatalogApiService').mockResolvedValueOnce(
+      new CatalogApiService(published, releaseFromBundle(published, today), today),
+    )
 
     const response = await listPrograms(new Request('https://example.test/api/v1/programs?scholarship=linked&limit=100'))
-    const body = await response.json() as { data: unknown[] }
+    const body = await response.json() as { data: Array<{ id: string }> }
 
     expect(response.status).toBe(200)
-    expect(body.data.length).toBeGreaterThan(0)
+    expect(body.data.map((record) => record.id)).toEqual([program.id])
   })
 
   it('rejects invalid pagination input without exposing an internal error', async () => {
