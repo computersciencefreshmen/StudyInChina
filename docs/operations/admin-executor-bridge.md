@@ -118,3 +118,46 @@ Tests exercise strict authorization, expiry, duplicate UUIDs, claim identity,
 CAS conflicts, no redispatch after lost acknowledgement, failed controller
 results, response bounds and HTTPS host pinning. They mock all commands and
 make no live MiniMax requests.
+
+## Enabling actual controls
+
+The website requires `ADMIN_REMOTE_CONTROL_ENABLED=true` and a fresh executor
+observation with `remotelyControllable=true`. A monitoring-only bridge advertises
+false; older observations without this field also default to false. Deploy the
+shared telemetry schema to the private catalog Worker before switching modes.
+
+On the machine that owns the current MiniMax CC Switch provider, set
+`ADMIN_VERIFICATION_USE_CCSWITCH=true` in the bridge process environment and run
+the bridge without `--telemetry-only`. This keeps credentials local and routes
+administrator start requests through the existing quota-protected provider.
+
+An explicit start while paused opens admission for that requested verification
+after configuration and process-identity checks succeed. Resume enables the
+continuous workload runner. Both local and online starts use the same typed
+controller. Command acknowledgement confirms execution dispatch; record counters,
+model response receipts, and immutable usage receipts establish actual progress.
+
+Resume selects a prepared full, quota-guarded baseline whose input hash matches
+the current six collections. Prepare it without model calls:
+
+```powershell
+node --import tsx scripts/ingestion/verify-catalog-minimax.ts --use-ccswitch --quota-guard --prepare --all --concurrency 4 --batch-size 2 --checkpoint-max-age-hours 168
+```
+
+When no managed coordinator is alive, changing baseline archives the previous
+global workload plan before initializing the new one. Existing evidence and
+record checkpoints remain intact. A completed first pass containing only
+recoverable model failures transfers to targeted, bounded single-record
+recovery; it does not repeatedly relaunch the entire baseline.
+
+The official domestic quota endpoint was observed on October 2, 2026 reporting
+the Shanghai 20:00–00:00 terminal daily interval. The normalizer accepts this
+specific four-hour interval alongside five-hour intervals, retaining current
+time, percentage, weekly-window, expiry and unknown-response checks. This is an
+inference from the live authoritative response and the documented fixed daily
+intervals; it does not authorize arbitrary shortened windows.
+
+Comparison reports remain local evidence-review candidates. This controller
+does not write canonical catalog records or approve publication. The existing
+administrator interface exposes task controls and catalog navigation, not a
+record-by-record evidence approval and publishing editor.

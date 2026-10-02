@@ -6,6 +6,7 @@ const state = vi.hoisted(() => ({ remote: null as AdminTelemetry | null, connect
 vi.mock('../../src/lib/catalog/repository', () => ({ createCatalogRepository: () => ({ getBundle: async () => ({ universities: [], programs: [], admissionCycles: [], scholarships: [], cities: [], sources: [] }) }) }))
 vi.mock('../../src/lib/admin/verification', () => ({ getVerificationCapabilities: () => ({ localMonitoring: false, startVerification: false, credentialSource: 'unconfigured', reason: '执行器未连接' }) }))
 vi.mock('../../src/lib/admin/remote-executor', () => ({ readRemoteTelemetry: async () => state.remote, remoteExecutorConnected: () => state.connected,
+  remoteExecutorControllable: () => state.connected && state.remote?.automation?.remotelyControllable === true,
   remoteExecutorConfiguration: () => ({ controlEnabled: state.controls }) }))
 import { getAdminSnapshot } from '../../src/lib/admin/snapshot'
 
@@ -30,6 +31,18 @@ describe('administrator source and monitoring capabilities', () => {
     const snapshot = await getAdminSnapshot()
     expect(snapshot).toMatchObject({ telemetry: { source: 'remote' }, usageBasis: 'immutable-ledger', usage: { totalTokens: 100, inputTokens: 80, outputTokens: 20, cacheReadTokens: 20 },
       capabilities: { automationControl: false, startVerification: false } })
+    state.controls = true
+    expect((await getAdminSnapshot()).capabilities).toMatchObject({ automationControl: false, startVerification: false })
+  })
+  it('requires a bridge that consumes commands before enabling the website controls', async () => {
+    state.remote = createAdminTelemetry([], 'MiniMax-M3', '2026-10-02T10:00:00Z', { automation: {
+      executorId: 'studyinchina-local-minimax', observedAt: '2026-10-02T10:00:00Z', connected: true, remotelyControllable: true,
+      desiredState: 'running', phase: 'idle', reason: 'executor_ready', baselineRunId: null, runnerAlive: false,
+      supervisorAlive: false, activeVerifierCount: 0, controlAcknowledgedAt: null, pauseMayHaveInFlightRequest: false,
+      creditFallbackAuthorized: false, policyReloadPending: false, keepAwake: false, quota: null, latestCommand: null,
+    } })
+    state.connected = true
+    expect((await getAdminSnapshot()).capabilities).toMatchObject({ automationControl: false, startVerification: false })
     state.controls = true
     expect((await getAdminSnapshot()).capabilities).toMatchObject({ automationControl: true, startVerification: true })
   })

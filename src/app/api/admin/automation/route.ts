@@ -1,13 +1,23 @@
 import { ADMIN_RESPONSE_HEADERS, isAdminMutationOrigin, readAdminJson, requestAdminSession } from '@/lib/admin/auth'
 import { executorCommandSchema } from '@/lib/admin/executor-contract'
 import { getVerificationCapabilities } from '@/lib/admin/verification'
-import { submitRemoteExecutorCommand } from '@/lib/admin/remote-executor'
+import { readRemoteExecutorCommand, submitRemoteExecutorCommand } from '@/lib/admin/remote-executor'
 import { getAdminSnapshot } from '@/lib/admin/snapshot'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 export async function GET(request: Request) {
   if (!requestAdminSession(request).authenticated) return Response.json({ error: 'unauthorized' }, { status: 401, headers: ADMIN_RESPONSE_HEADERS })
+  const query = new URL(request.url).searchParams
+  if (query.has('commandId')) {
+    const id = executorCommandSchema.shape.commandId.safeParse(query.get('commandId'))
+    if (!id.success || query.getAll('commandId').length !== 1) return Response.json({ error: 'invalid_request' }, { status: 400, headers: ADMIN_RESPONSE_HEADERS })
+    try {
+      const command = !getVerificationCapabilities().localMonitoring ? await readRemoteExecutorCommand(id.data)
+        : (await getAdminSnapshot()).automation?.latestCommand
+      return Response.json({ command: command?.commandId === id.data ? command : null }, { headers: ADMIN_RESPONSE_HEADERS })
+    } catch { return Response.json({ error: 'executor_unavailable' }, { status: 503, headers: ADMIN_RESPONSE_HEADERS }) }
+  }
   const snapshot = await getAdminSnapshot()
   return Response.json({ automation: snapshot.automation || null }, { headers: ADMIN_RESPONSE_HEADERS })
 }

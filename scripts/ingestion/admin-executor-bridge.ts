@@ -169,7 +169,7 @@ export async function refreshBridgeUsage(root: string) {
   await atomicSupervisorJson(join(root, '.tmp', 'minimax-verification', 'usage-ledger.json'), report)
   return report
 }
-export async function buildBridgeTelemetry(root: string): Promise<AdminTelemetry> {
+export async function buildBridgeTelemetry(root: string, remotelyControllable = false): Promise<AdminTelemetry> {
   // The server-only projection requires the CLI's --conditions=react-server flag.
   const { readLocalVerificationRuns } = await import('../../src/lib/admin/snapshot')
   const { readExecutorStatus } = await import('./minimax-admin-control')
@@ -177,11 +177,19 @@ export async function buildBridgeTelemetry(root: string): Promise<AdminTelemetry
   let ledger = null
   try { ledger = projectUsageLedger(JSON.parse(await readFile(join(root, '.tmp', 'minimax-verification', 'usage-ledger.json'), 'utf8')), shanghaiUsageDay(new Date().toISOString())) } catch { /* Missing ledger is explicit, never a made-up zero. */ }
   const automation: ExecutorStatus = await readExecutorStatus(root)
+  automation.remotelyControllable = remotelyControllable
   try {
     const path = join(root, '.tmp', 'minimax-verification', 'admin-quota.json')
     if ((await stat(path)).size <= 64 * 1_024) automation.quota = projectBridgeQuota(JSON.parse(await readFile(path, 'utf8')))
   } catch { automation.quota = currentQuotaObservation(automation.quota) }
   return createAdminTelemetry(runs.slice(0, 100), runs.find(run => run.model)?.model || null, new Date().toISOString(), { ledger, automation })
+}
+/** Read-only uploads retain the legacy wire shape; upgraded readers default this missing capability to false. */
+export function bridgeTelemetryPayload(telemetry: AdminTelemetry, telemetryOnly: boolean) {
+  if (!telemetryOnly || !telemetry.automation) return telemetry
+  const automation: ExecutorStatus = { ...telemetry.automation }
+  delete automation.remotelyControllable
+  return { ...telemetry, automation }
 }
 export async function runAdminExecutorBridge(root = process.cwd(), once = false, telemetryOnly = false) {
   root = resolve(root)
@@ -209,7 +217,11 @@ export async function runAdminExecutorBridge(root = process.cwd(), once = false,
   const dependencies: BridgeDependencies = {
     request,
     execute: async command => { const { executeExecutorCommand } = await import('./minimax-admin-control'); return executeExecutorCommand(command, root) },
-    publish: async () => { await request('PUT', configuration.telemetryUrl, await buildBridgeTelemetry(root)); lastPublishedAt = new Date().toISOString() },
+    publish: async () => {
+      const telemetry = await buildBridgeTelemetry(root, !telemetryOnly)
+      await request('PUT', configuration.telemetryUrl, bridgeTelemetryPayload(telemetry, telemetryOnly))
+      lastPublishedAt = new Date().toISOString()
+    },
   }
   try {
     while (!stopped) {

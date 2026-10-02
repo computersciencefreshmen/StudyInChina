@@ -36,6 +36,27 @@ async function fixture() {
 }
 
 describe('MiniMax truthful token usage accounting', () => {
+  it('keeps the Shanghai terminal preflight window in receipts and rejects stale or invalid admission metadata', async () => {
+    const { directory } = await fixture()
+    const terminalMetadata = { ...metadata, attemptId: 'terminal-window', requestedAt: '2026-10-02T14:05:00.000Z', receivedAt: '2026-10-02T14:05:01.000Z' }
+    const terminalQuota = { ...quota, checkedAt: '2026-10-02T14:04:59.000Z', fiveHour: { ...quota.fiveHour, startAt: '2026-10-02T12:00:00.000Z', resetAt: '2026-10-02T16:00:00.000Z' } }
+    await recordModelUsage(directory, terminalMetadata, usage, terminalQuota)
+    const readReceipt = async (attemptId: string) => JSON.parse(await readFile(join(directory, 'usage-receipts', `${hash(attemptId)}.json`), 'utf8'))
+    expect((await readReceipt(terminalMetadata.attemptId)).quotaWindow).toMatchObject({ startAt: terminalQuota.fiveHour.startAt, resetAt: terminalQuota.fiveHour.resetAt, basis: 'official-preflight' })
+    const invalid = [
+      { ...terminalQuota, checkedAt: '2026-10-02T14:04:29.000Z' },
+      { ...terminalQuota, checkedAt: '2026-10-02T14:05:00.001Z' },
+      { ...terminalQuota, fiveHour: { ...terminalQuota.fiveHour, startAt: null } },
+      { ...terminalQuota, fiveHour: { ...terminalQuota.fiveHour, resetAt: '2026-10-02T14:05:00.000Z' } },
+      { ...terminalQuota, fiveHour: { ...terminalQuota.fiveHour, startAt: '2026-10-02T11:00:00.000Z', resetAt: '2026-10-02T15:00:00.000Z' } },
+    ]
+    for (let index = 0; index < invalid.length; index++) {
+      const attemptId = `invalid-terminal-${index}`
+      await recordModelUsage(directory, { ...terminalMetadata, attemptId }, usage, invalid[index])
+      expect((await readReceipt(attemptId)).quotaWindow).toBeNull()
+    }
+  })
+
   it('keeps Anthropic disjoint cache buckets and OpenAI cache/reasoning subsets from being counted twice', () => {
     const anthropic = normalizeModelUsage(usage, 'anthropic')
     expect(anthropic).toMatchObject({ inputTokens: 330, uncachedInputTokens: 100, cacheReadTokens: 200, cacheWriteTokens: 30, outputTokens: 40, reportedTokens: 370 })

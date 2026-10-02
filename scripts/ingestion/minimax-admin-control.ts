@@ -7,13 +7,13 @@ import { promisify } from 'node:util'
 import { executorCommandSchema, executorStatusSchema, EXECUTOR_RUN_ID } from '../../src/lib/admin/executor-contract'
 import type { ExecutorCommand, ExecutorStatus } from '../../src/lib/admin/types'
 import { buildVerificationArguments } from '../../src/lib/admin/verification-options'
-import { atomicSupervisorJson, currentInputMatches, loadAnchor, probeNativeProcess, type ProcessProbe } from './minimax-quota-supervisor'
-import { inspectWorkloadReadiness } from './minimax-workload-runner'
+import { atomicSupervisorJson, currentInputMatches, loadAnchor, probeNativeProcess, type ProcessProbe, type SupervisorAnchor } from './minimax-quota-supervisor'
+import { inspectWorkloadReadiness, type WorkloadPlan } from './minimax-workload-runner'
 import { assertMiniMaxRunning, readManualControl } from './minimax-manual-control'
 import { readPlanBillingSafety } from './minimax-billing-safety'
 
 type Json = Record<string, unknown>
-type CommandResult = { status: 'completed' | 'failed'; error?: string }
+type CommandResult = { status: 'completed' | 'failed'; error?: string; pid?: number }
 const object = (value: unknown): Json | null => value && typeof value === 'object' && !Array.isArray(value) ? value as Json : null
 const validPid = (value: unknown): value is number => typeof value === 'number' && Number.isSafeInteger(value) && value > 0
 const timestamp = (value: unknown): string | null => typeof value === 'string' && Number.isFinite(Date.parse(value)) ? new Date(value).toISOString() : null
@@ -28,6 +28,7 @@ export type ControllerRuntime = {
   platform: string; now: () => number; probeProcess: (pid: number, root: string) => Promise<ProcessProbe>;
   terminate: (pid: number) => void; launch: (root: string, kind: 'runner' | 'verification', args: string[]) => Promise<number>;
   inspectReadiness: typeof inspectWorkloadReadiness;
+  auditConfiguration?: (root: string, args: string[]) => Promise<boolean>;
   wait: (milliseconds: number) => Promise<void>;
 }
 async function launchLogged(root: string, kind: 'runner' | 'verification', args: string[]): Promise<number> {
@@ -154,38 +155,96 @@ async function stopManagedProcesses(root: string, runtime: ControllerRuntime): P
   return observed.processes.some(item => item.kind === 'verification')
 }
 
+/** Catalog edits create a new input identity; an old run is never silently resumed against it. */
+export async function selectExecutorBaseline(root: string, previousRunId: string | null): Promise<SupervisorAnchor> {
+  const directory = join(root, '.official-harvest', 'minimax-verification')
+  const entries = await readdir(/* turbopackIgnore: true */ directory, { withFileTypes: true }).catch(() => [])
+  const candidates = await Promise.all(entries.filter(entry => entry.isDirectory() && /^[a-f0-9]{16}$/.test(entry.name)).map(async entry => ({
+    runId: entry.name, manifest: await json(join(directory, entry.name, 'manifest.json')),
+  })))
+  const runIds = [previousRunId, ...candidates.sort((left, right) => Date.parse(String(right.manifest?.createdAt || '')) - Date.parse(String(left.manifest?.createdAt || ''))).map(item => item.runId)]
+  for (const runId of new Set(runIds)) {
+    if (!runId) continue
+    try {
+      const anchor = await loadAnchor(root, runId)
+      if (await currentInputMatches(anchor)) return anchor
+    } catch { /* Only complete, full, quota-guarded baseline manifests are eligible. */ }
+  }
+  throw new Error(previousRunId ? 'catalog_snapshot_changed' : 'executor_baseline_unavailable')
+}
+
+function freshWorkloadPlan(anchor: SupervisorAnchor): WorkloadPlan {
+  return { schemaVersion: 1, baselineRunId: anchor.runId, inputSha256: anchor.inputSha256,
+    baselineCompleted: false, pendingRecovery: null, finishedJobs: [], completedRecoverySelections: 0 }
+}
+
+async function inspectWorkloadPlanTransition(root: string, anchor: SupervisorAnchor, observed: Inventory) {
+  const directory = stateDirectory(root), path = join(directory, 'workload-plan.json')
+  if (!existsSync(/* turbopackIgnore: true */ path)) return null
+  const previous = await json(path)
+  if (previous?.baselineRunId === anchor.runId && previous.inputSha256 === anchor.inputSha256) return null
+  if (!previous || previous.schemaVersion !== 1 || !EXECUTOR_RUN_ID.test(String(previous.baselineRunId)) || !/^[a-f0-9]{64}$/.test(String(previous.inputSha256)) ||
+    typeof previous.baselineCompleted !== 'boolean' || !Array.isArray(previous.finishedJobs) || !Number.isSafeInteger(previous.completedRecoverySelections) || Number(previous.completedRecoverySelections) < 0) throw new Error('workload_plan_identity_invalid')
+  // A coordinator owns its plan until it exits. Archive only after process identity checks.
+  if (observed.unsafe || observed.processes.some(item => item.kind !== 'verification')) throw new Error('verification_already_running')
+  return { path, previous, nextPlan: freshWorkloadPlan(anchor) }
+}
+
+async function commitWorkloadPlanTransition(root: string, transition: NonNullable<Awaited<ReturnType<typeof inspectWorkloadPlanTransition>>>) {
+  if (JSON.stringify(await json(transition.path)) !== JSON.stringify(transition.previous)) throw new Error('workload_plan_identity_invalid')
+  const history = join(stateDirectory(root), 'admin-workload-plan-history')
+  await mkdir(history, { recursive: true })
+  await atomicSupervisorJson(join(history, `${transition.previous.baselineRunId}-${randomUUID()}.json`), transition.previous)
+  await atomicSupervisorJson(transition.path, transition.nextPlan)
+}
+
 async function resumeWorkload(root: string, runtime: ControllerRuntime): Promise<void> {
   const observed = await inventory(root, runtime)
   if (observed.unsafe) throw new Error('process_identity_unconfirmed')
   if (observed.processes.some(item => item.kind === 'runner')) return
-  const runId = observed.baselineRunId || '9dd414cb9cb419af'
-  const anchor = await loadAnchor(root, runId)
-  if (!await currentInputMatches(anchor)) throw new Error('catalog_snapshot_changed')
-  const readiness = await runtime.inspectReadiness(root, runId)
+  const anchor = await selectExecutorBaseline(root, observed.baselineRunId)
+  const runId = anchor.runId
+  const transition = await inspectWorkloadPlanTransition(root, anchor, observed)
+  const readiness = await runtime.inspectReadiness(root, runId, transition?.nextPlan)
   if (!readiness.ready) throw new Error('workload_readiness_failed')
+  const refreshed = await inventory(root, runtime)
+  if (refreshed.unsafe) throw new Error('process_identity_unconfirmed')
+  if (refreshed.processes.some(item => item.kind === 'runner')) return
   await assertMiniMaxRunning(root)
+  if (transition) {
+    if (refreshed.processes.some(item => item.kind !== 'verification')) throw new Error('verification_already_running')
+    await commitWorkloadPlanTransition(root, transition)
+  }
   const pid = await runtime.launch(root, 'runner', ['--import', 'tsx', join(root, 'scripts', 'ingestion', 'minimax-workload-runner.ts'), '--run', runId])
   await atomicSupervisorJson(join(stateDirectory(root), 'admin-launch.json'), { pid, kind: 'runner', runId, startedAt: new Date(runtime.now()).toISOString() })
 }
 
-async function startVerification(command: ExecutorCommand, root: string, runtime: ControllerRuntime): Promise<void> {
+async function startVerification(command: ExecutorCommand, root: string, runtime: ControllerRuntime): Promise<number> {
   const observed = await inventory(root, runtime)
   if (observed.unsafe) throw new Error('process_identity_unconfirmed')
   if (observed.processes.length) throw new Error('verification_already_running')
-  await assertMiniMaxRunning(root)
   const useCcSwitch = process.env.ADMIN_VERIFICATION_USE_CCSWITCH === 'true'
-  const args = buildVerificationArguments(command.options!, useCcSwitch)
+  // Each administrator start owns its checkpoints. A sample must not overwrite a full baseline.
+  const args = [...buildVerificationArguments(command.options!, useCcSwitch), '--invocation-id', command.commandId]
   const cli = join(root, 'node_modules', 'tsx', 'dist', 'cli.mjs'), script = join(root, 'scripts', 'ingestion', 'verify-catalog-minimax.ts')
-  if (!existsSync(/* turbopackIgnore: true */ cli) || !existsSync(/* turbopackIgnore: true */ script)) throw new Error('executor_unavailable')
-  try {
-    const { stdout } = await executeFile(process.execPath, [cli, script, '--audit-config', ...args], { cwd: root, windowsHide: true, timeout: 15_000, maxBuffer: 16_384 })
-    if (JSON.parse(stdout.trim()).configured !== true) throw new Error('executor_unavailable')
-  } catch { throw new Error('executor_unavailable') }
+  if (runtime.auditConfiguration) {
+    if (!await runtime.auditConfiguration(root, args)) throw new Error('executor_unavailable')
+  } else {
+    if (!existsSync(/* turbopackIgnore: true */ cli) || !existsSync(/* turbopackIgnore: true */ script)) throw new Error('executor_unavailable')
+    try {
+      const { stdout } = await executeFile(process.execPath, [cli, script, '--audit-config', ...args], { cwd: root, windowsHide: true, timeout: 15_000, maxBuffer: 16_384 })
+      if (JSON.parse(stdout.trim()).configured !== true) throw new Error('executor_unavailable')
+    } catch { throw new Error('executor_unavailable') }
+  }
   const refreshed = await inventory(root, runtime)
   if (refreshed.unsafe || refreshed.processes.length) throw new Error('verification_already_running')
+  // An explicit start authorizes this selected run even after an operator pause.
+  // Keep the pause intact if configuration validation or exclusivity checks fail.
+  await atomicSupervisorJson(join(stateDirectory(root), 'manual-control.json'), { schemaVersion: 1, desiredState: 'running', commandId: command.commandId, updatedAt: new Date(runtime.now()).toISOString() })
   await assertMiniMaxRunning(root)
   const pid = await runtime.launch(root, 'verification', [cli, script, ...args])
   await atomicSupervisorJson(join(stateDirectory(root), 'admin-launch.json'), { pid, kind: 'verification', startedAt: new Date(runtime.now()).toISOString() })
+  return pid
 }
 
 /** Each durable receipt makes delivery retries idempotent; fixed typed commands never select a shell. */
@@ -215,12 +274,12 @@ export async function executeExecutorCommand(value: ExecutorCommand, root = proc
     const previous = await json(receiptPath)
     if (previous) {
       if (JSON.stringify(previous.command) !== JSON.stringify(command)) return { status: 'failed', error: 'command_id_conflict' }
-      if (previous.status === 'completed' || previous.status === 'failed') return { status: previous.status, ...(typeof previous.error === 'string' ? { error: previous.error } : {}) }
+      if (previous.status === 'completed' || previous.status === 'failed') return { status: previous.status, ...(typeof previous.error === 'string' ? { error: previous.error } : {}), ...(validPid(previous.pid) ? { pid: previous.pid } : {}) }
       return { status: 'failed', error: 'command_outcome_requires_review' }
     }
     const updatedAt = new Date(runtime.now()).toISOString()
     await atomicSupervisorJson(receiptPath, { command, status: 'claimed', updatedAt })
-    let result: CommandResult
+    let result: CommandResult = { status: 'completed' }
     let pauseMayHaveInFlightRequest = false
     try {
       if (command.action === 'pause' || command.action === 'resume') {
@@ -228,8 +287,10 @@ export async function executeExecutorCommand(value: ExecutorCommand, root = proc
       }
       if (command.action === 'pause') pauseMayHaveInFlightRequest = await stopManagedProcesses(root, runtime)
       else if (command.action === 'resume') await resumeWorkload(root, runtime)
-      else await startVerification(command, root, runtime)
-      result = { status: 'completed' }
+      else {
+        const pid = await startVerification(command, root, runtime)
+        result = { status: 'completed', pid }
+      }
     } catch (error) {
       result = { status: 'failed', error: reason(error instanceof Error ? error.message : null, 'control_operation_failed') }
     }

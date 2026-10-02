@@ -1,6 +1,6 @@
 import { createHash, randomUUID } from 'node:crypto'
 import { spawn, execFile } from 'node:child_process'
-import { open, readFile, readdir, mkdir, rename, unlink, stat } from 'node:fs/promises'
+import { open, readFile, readdir, mkdir, unlink, stat } from 'node:fs/promises'
 import { closeSync, openSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { promisify } from 'node:util'
@@ -8,6 +8,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 import { fetchQuota, getCcSwitchQuotaConfig, type QuotaApiConfig, type QuotaState } from './minimax-quota'
 import { authorizedCreditWindow, readPlanBillingSafety, type PlanBillingSafety } from './minimax-billing-safety'
 import { assertMiniMaxRunning, readManualControl } from './minimax-manual-control'
+import { atomicJson } from './atomic-json'
 
 const FILES = ['universities', 'programs', 'admission-cycles', 'scholarships', 'cities', 'sources'] as const
 const RUN_ID = /^[a-f0-9]{16}(?:-[a-f0-9]{12})?$/
@@ -38,6 +39,7 @@ export type RunReceipt = {
 }
 export type CheckpointInventory = {
   completedRecords: number; modelErrorRecords: number; unconfirmedFields: number; expiredCompletedRecords: number
+  recoveryEligibleRecords?: number
 }
 export type SupervisorAction = {
   kind: 'monitor' | 'wait' | 'launch' | 'needs-recovery' | 'stop'; reason: string; nextCheckAt: number | null
@@ -71,8 +73,8 @@ export function decideSupervisorAction(observation: SupervisorObservation): Supe
     if (stale) return { kind: 'monitor', reason: 'stalled_guarded_verifier_attention_required', nextCheckAt: observation.now + 60_000 }
     return { kind: 'monitor', reason: 'guarded_verifier_running', nextCheckAt: observation.now + 30_000 }
   }
-  if (observation.inventory.completedRecords === observation.totalRecords) return { kind: 'needs-recovery', reason: 'base_all_completed_no_repeat', nextCheckAt: null }
   if (/MiniMax HTTP (400|401|402|403|404)/.test(observation.fatal || '')) return stop('verifier_authentication_billing_or_configuration_error')
+  if (observation.inventory.completedRecords + (observation.inventory.recoveryEligibleRecords || 0) === observation.totalRecords) return { kind: 'needs-recovery', reason: 'base_all_completed_no_repeat', nextCheckAt: null }
   if (observation.noProgressFailures >= 3) return stop('repeated_verifier_failure_without_progress')
   if (observation.inventory.expiredCompletedRecords) return { kind: 'needs-recovery', reason: 'expired_checkpoints_require_targeted_resume', nextCheckAt: null }
   if (!observation.verifierSupportsResume) return wait('waiting_for_safe_resume_flag', observation.now + 60_000)
@@ -108,6 +110,54 @@ export function receiptMatchesAnchor(receipt: unknown, anchor: SupervisorAnchor)
     value.providerId === anchor.providerId && value.endpoint === anchor.endpoint && value.quotaGuard === true && value.selectedRecords === anchor.totalRecords)
 }
 
+/** Only a genuinely absent receipt can describe a prepared, never-started baseline. */
+export async function readBaselineReceipt(anchor: SupervisorAnchor): Promise<{ kind: 'missing' | 'valid' | 'invalid'; receipt: RunReceipt | null }> {
+  try {
+    const raw = await readJson(join(anchor.directory, 'run-receipt.json'))
+    return receiptMatchesAnchor(raw, anchor) ? { kind: 'valid', receipt: raw } : { kind: 'invalid', receipt: null }
+  } catch (error) {
+    return { kind: (error as NodeJS.ErrnoException).code === 'ENOENT' ? 'missing' : 'invalid', receipt: null }
+  }
+}
+
+type VerifierInventory = { inspected: boolean; activeVerifiers: number }
+
+/** Read OS process details in memory; only the sanitized verifier count leaves this function. */
+export async function inspectNativeVerifiers(root: string): Promise<VerifierInventory> {
+  if (process.platform !== 'win32') return { inspected: false, activeVerifiers: 0 }
+  try {
+    const powershell = join(process.env.SystemRoot || 'C:\\Windows', 'System32', 'WindowsPowerShell', 'v1.0', 'powershell.exe')
+    const script = "$rows = @(Get-CimInstance Win32_Process -Filter \"Name = 'node.exe'\" | ForEach-Object { [pscustomobject]@{ processId=$_.ProcessId; commandLine=$_.CommandLine; executablePath=$_.ExecutablePath; createdAt=$_.CreationDate.ToUniversalTime().ToString('o') } }); ConvertTo-Json -InputObject $rows -Compress"
+    const result = await executeFile(powershell, ['-NoProfile', '-NonInteractive', '-WindowStyle', 'Hidden', '-Command', script], { windowsHide: true, timeout: 10_000, maxBuffer: 512 * 1024 })
+    const rows: unknown = JSON.parse(result.stdout.trim())
+    if (!Array.isArray(rows)) return { inspected: false, activeVerifiers: 0 }
+    let activeVerifiers = 0
+    for (const raw of rows) {
+      const row = asObject(raw)
+      if (!row || !validPid(row.processId) || typeof row.commandLine !== 'string') return { inspected: false, activeVerifiers }
+      const probe = windowsProcessProbe(row.processId, row, root)
+      if (probe.verifier || probe.recoveryVerifier || probe.adminVerifier) {
+        if (!probe.inspected) return { inspected: false, activeVerifiers }
+        // A relative verifier in another checkout is ambiguous, so block bootstrap.
+        activeVerifiers++
+      }
+    }
+    return { inspected: true, activeVerifiers }
+  } catch { return { inspected: false, activeVerifiers: 0 } }
+}
+
+export async function preparedBaselineSafety(anchor: SupervisorAnchor, inventory = inspectNativeVerifiers): Promise<boolean> {
+  if ((await readBaselineReceipt(anchor)).kind !== 'missing') return false
+  for (const filename of ['status.json', 'progress.json']) {
+    try { await stat(join(anchor.directory, filename)); return false } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') return false }
+  }
+  for (const subdirectory of ['records', 'responses', 'usage-receipts']) {
+    try { if ((await readdir(join(anchor.directory, subdirectory))).length) return false } catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') return false }
+  }
+  const processes = await inventory(anchor.root)
+  return processes.inspected && processes.activeVerifiers === 0
+}
+
 /** Creation time makes an old receipt insufficient evidence when an OS reuses its PID. */
 export function processMatchesReceipt(probe: ProcessProbe, receipt: RunReceipt, rememberedFingerprint?: string | null): boolean {
   if (!probe.alive || !probe.inspected || !probe.verifier || !probe.fingerprint || !probe.createdAt) return false
@@ -133,14 +183,7 @@ export function verifierSourceConfiguration(source: string) {
 }
 
 export async function atomicSupervisorJson(path: string, value: unknown): Promise<void> {
-  await mkdir(dirname(path), { recursive: true })
-  const temporary = `${path}.${process.pid}.${randomUUID()}.tmp`
-  await (await open(/* turbopackIgnore: true */ temporary, 'wx')).close()
-  try {
-    const file = await open(/* turbopackIgnore: true */ temporary, 'w')
-    try { await file.writeFile(`${JSON.stringify(value, null, 2)}\n`, 'utf8') } finally { await file.close() }
-    await rename(temporary, path)
-  } finally { await unlink(temporary).catch(() => undefined) }
+  await atomicJson(path, value)
 }
 
 type LockOwner = { schemaVersion: 1; ownerPid: number; fingerprint: string; nonce: string; runId: string; startedAt: string }
@@ -191,7 +234,7 @@ export async function loadAnchor(root: string, runId: string): Promise<Superviso
 }
 
 export async function inspectCheckpoints(anchor: SupervisorAnchor, now: number): Promise<CheckpointInventory> {
-  const inventory: CheckpointInventory = { completedRecords: 0, modelErrorRecords: 0, unconfirmedFields: 0, expiredCompletedRecords: 0 }
+  const inventory: CheckpointInventory = { completedRecords: 0, modelErrorRecords: 0, unconfirmedFields: 0, expiredCompletedRecords: 0, recoveryEligibleRecords: 0 }
   const names = await readdir(/* turbopackIgnore: true */ join(anchor.directory, 'records')).catch(() => [] as string[])
   const seen = new Set<string>()
   for (const name of names) {
@@ -200,7 +243,19 @@ export async function inspectCheckpoints(anchor: SupervisorAnchor, now: number):
     if (!record || typeof record.taskId !== 'string' || !anchor.taskIds.has(record.taskId) || seen.has(record.taskId) || name !== `${sha(record.taskId)}.json` || record.inputSha256 !== anchor.inputSha256 || record.modelConfigSha256 !== anchor.modelConfigSha256 || record.model !== anchor.model || !Array.isArray(record.issues) || !Array.isArray(record.verdicts)) continue
     seen.add(record.taskId)
     inventory.unconfirmedFields += record.verdicts.filter(value => asObject(value)?.status === 'unconfirmed').length
-    if (record.issues.some(issue => typeof issue === 'string' && /^MiniMax /i.test(issue))) inventory.modelErrorRecords++
+    if (record.issues.some(issue => typeof issue === 'string' && /^MiniMax |^Unexpected (?:token|end)|^Unterminated /i.test(issue))) {
+      inventory.modelErrorRecords++
+      // Stop replaying a full baseline once only model-output defects remain.
+      // The recovery ledger still validates readable evidence and one-attempt
+      // history before any single-record retry; this counter grants no call.
+      const transient = record.issues.some(issue => typeof issue === 'string' && /^MiniMax HTTP 5\d\d$|^MiniMax response |^Unexpected (?:token|end)|^Unterminated /i.test(issue))
+      const onlyKnownIssues = record.issues.every(issue => typeof issue === 'string' && (
+        /^MiniMax HTTP 5\d\d$|^MiniMax response |^Unexpected (?:token|end)|^Unterminated /i.test(issue) ||
+        (Array.isArray(record.sourceIds) && record.sourceIds.some(sourceId => typeof sourceId === 'string' && issue.startsWith(`${sourceId}: `)))
+      ))
+      const checked = typeof record.checkedAt === 'string' ? Date.parse(record.checkedAt) : NaN
+      if (transient && onlyKnownIssues && Number.isFinite(checked) && checked <= now && now - checked < MAX_CHECKPOINT_AGE_MS) inventory.recoveryEligibleRecords = (inventory.recoveryEligibleRecords || 0) + 1
+    }
     else {
       inventory.completedRecords++
       const checked = typeof record.checkedAt === 'string' ? Date.parse(record.checkedAt) : NaN
@@ -241,7 +296,7 @@ export function windowsProcessProbe(pid: number, details: unknown, root: string,
   const supervisor = nodeMatches && args.includes(normalize(join(root, supervisorPath)))
   const recoveryVerifier = nodeMatches && args.includes(normalize(join(root, verifierPath))) && ['--quota-guard', '--use-ccswitch', '--task-ids-file', '--recovery-from'].every(flag => args.includes(flag))
   const workloadRunner = nodeMatches && args.includes(normalize(join(root, runnerPath)))
-  const adminVerifier = nodeMatches && args.includes(normalize(join(root, verifierPath)))
+  const adminVerifier = nodeMatches && (args.includes(normalize(join(root, verifierPath))) || args.includes(verifierPath) || args.includes(`./${verifierPath}`))
   return { alive: true, inspected: Boolean(createdAt && typeof value?.executablePath === 'string' && typeof value?.commandLine === 'string'), fingerprint: createdAt ? `${pid}:${createdAt}` : null, createdAt, verifier, supervisor, recoveryVerifier, workloadRunner, adminVerifier }
 }
 
@@ -293,6 +348,7 @@ export type SupervisorState = {
   schemaVersion: 1; supervisorPid: number; runId: string; inputSha256: string; modelConfigSha256: string;
   phase: SupervisorAction['kind'] | 'starting' | 'stopped'; reason: string; updatedAt: string; childPid: number | null;
   completedRecords: number; totalRecords: number; modelErrorRecords: number; unconfirmedFields: number;
+  recoveryEligibleRecords?: number;
   nextCheckAt: string | null; launchCount: number; quota: QuotaState | null; balanceFallbackAllowed: boolean;
   stdout?: string; stderr?: string
   lastActivityAt?: string | null; lastSourceReceiptAt?: string | null; lastModelResponseAt?: string | null
@@ -306,8 +362,9 @@ export type SupervisorOptions = { root: string; runId: string; adoptPid?: number
 /** Read-only activation evidence: no lock/state writes, quota query, or child process. */
 export async function inspectSupervisorReadiness(root: string, runId: string) {
   const anchor = await loadAnchor(resolve(root), runId)
-  const rawReceipt = await optionalJson(join(anchor.directory, 'run-receipt.json'))
-  const receipt = receiptMatchesAnchor(rawReceipt, anchor) ? rawReceipt : null
+  const receiptState = await readBaselineReceipt(anchor)
+  const receipt = receiptState.receipt
+  const prepared = receiptState.kind === 'missing' && await preparedBaselineSafety(anchor)
   const source = verifierSourceConfiguration(await readFile(/* turbopackIgnore: true */ join(anchor.root, 'scripts', 'ingestion', 'verify-catalog-minimax.ts'), 'utf8'))
   const inputMatches = await currentInputMatches(anchor) && source.promptVersion === anchor.promptVersion && source.sourceChars === anchor.sourceChars
   let providerMatches = false
@@ -317,8 +374,8 @@ export async function inspectSupervisorReadiness(root: string, runId: string) {
   const activity = receipt ? await inspectVerifierActivity(anchor, receipt, await optionalJson(join(anchor.directory, 'status.json')), Date.now()) : null
   const inventory = await inspectCheckpoints(anchor, Date.now())
   const billingSafety = await readPlanBillingSafety(anchor.root)
-  const ready = Boolean(receipt && inputMatches && providerMatches && source.supportsResume && (!processState?.alive || processVerified))
-  return { runId, ready, inputMatches, providerMatches, supportsResume: source.supportsResume, receiptMatches: Boolean(receipt), processAlive: processState?.alive || false, processVerified, processId: receipt?.pid || null, totalRecords: anchor.totalRecords, ...inventory, lastActivityAt: activity?.lastActivityAt ? new Date(activity.lastActivityAt).toISOString() : null, lastSourceReceiptAt: activity?.lastSourceReceiptAt ? new Date(activity.lastSourceReceiptAt).toISOString() : null, lastModelResponseAt: activity?.lastModelResponseAt ? new Date(activity.lastModelResponseAt).toISOString() : null, balanceFallbackAllowed: billingSafety.allowExistingCredits, billingSafety }
+  const ready = Boolean((receipt || prepared) && inputMatches && providerMatches && source.supportsResume && (!processState?.alive || processVerified))
+  return { runId, ready, inputMatches, providerMatches, supportsResume: source.supportsResume, receiptMatches: Boolean(receipt), prepared, receiptState: receiptState.kind, processAlive: processState?.alive || false, processVerified, processId: receipt?.pid || null, totalRecords: anchor.totalRecords, ...inventory, lastActivityAt: activity?.lastActivityAt ? new Date(activity.lastActivityAt).toISOString() : null, lastSourceReceiptAt: activity?.lastSourceReceiptAt ? new Date(activity.lastSourceReceiptAt).toISOString() : null, lastModelResponseAt: activity?.lastModelResponseAt ? new Date(activity.lastModelResponseAt).toISOString() : null, balanceFallbackAllowed: billingSafety.allowExistingCredits, billingSafety }
 }
 
 /** Windows local supervisor: finite baseline tasks, no time-based expiry and no success re-audit loop. */
@@ -359,7 +416,7 @@ export async function runQuotaSupervisor(options: SupervisorOptions): Promise<vo
   let state: SupervisorState | null = null
   const persist = async (action: SupervisorAction | { kind: 'starting' | 'stopped'; reason: string; nextCheckAt: number | null }) => {
     const date = (time: number | null | undefined) => typeof time === 'number' ? new Date(time).toISOString() : null
-    state = { schemaVersion: 1, supervisorPid: process.pid, runId: anchor.runId, inputSha256: anchor.inputSha256, modelConfigSha256: anchor.modelConfigSha256, phase: action.kind, reason: action.reason, updatedAt: new Date().toISOString(), childPid: activePid, completedRecords: inventory.completedRecords, totalRecords: anchor.totalRecords, modelErrorRecords: inventory.modelErrorRecords, unconfirmedFields: inventory.unconfirmedFields, nextCheckAt: action.nextCheckAt ? new Date(action.nextCheckAt).toISOString() : null, launchCount, quota, balanceFallbackAllowed: billingSafety.allowExistingCredits, fundingMode, lastActivityAt: date(activity?.lastActivityAt), lastSourceReceiptAt: date(activity?.lastSourceReceiptAt), lastModelResponseAt: date(activity?.lastModelResponseAt), lastLoopAt: new Date(lastLoopAt).toISOString(), resumeGraceUntil: new Date(resumeGraceUntil).toISOString(), lastClockGapAt: date(lastClockGapAt), noProgressFailures, attentionRequired: action.reason === 'stalled_guarded_verifier_attention_required' || action.reason === 'credit_fallback_confirmation_required', billingSafety, ...(logPaths || {}) }
+    state = { schemaVersion: 1, supervisorPid: process.pid, runId: anchor.runId, inputSha256: anchor.inputSha256, modelConfigSha256: anchor.modelConfigSha256, phase: action.kind, reason: action.reason, updatedAt: new Date().toISOString(), childPid: activePid, completedRecords: inventory.completedRecords, totalRecords: anchor.totalRecords, modelErrorRecords: inventory.modelErrorRecords, recoveryEligibleRecords: inventory.recoveryEligibleRecords || 0, unconfirmedFields: inventory.unconfirmedFields, nextCheckAt: action.nextCheckAt ? new Date(action.nextCheckAt).toISOString() : null, launchCount, quota, balanceFallbackAllowed: billingSafety.allowExistingCredits, fundingMode, lastActivityAt: date(activity?.lastActivityAt), lastSourceReceiptAt: date(activity?.lastSourceReceiptAt), lastModelResponseAt: date(activity?.lastModelResponseAt), lastLoopAt: new Date(lastLoopAt).toISOString(), resumeGraceUntil: new Date(resumeGraceUntil).toISOString(), lastClockGapAt: date(lastClockGapAt), noProgressFailures, attentionRequired: action.reason === 'stalled_guarded_verifier_attention_required' || action.reason === 'credit_fallback_confirmation_required', billingSafety, ...(logPaths || {}) }
     await atomicSupervisorJson(statePath, state)
   }
   try {
@@ -386,8 +443,10 @@ export async function runQuotaSupervisor(options: SupervisorOptions): Promise<vo
       try { config = getCcSwitchQuotaConfig() } catch { await persist({ kind: 'stop', reason: 'quota_configuration_unavailable', nextCheckAt: null }); return }
       const providerMatches = quotaConfigMatches(config, anchor) && (!frozenConfig || (config.providerId === frozenConfig.providerId && config.key === frozenConfig.key && config.endpoint === frozenConfig.endpoint && config.model === frozenConfig.model))
       frozenConfig ||= config
-      const rawReceipt = await optionalJson(join(anchor.directory, 'run-receipt.json'))
-      const receipt = receiptMatchesAnchor(rawReceipt, anchor) ? rawReceipt : null
+      const receiptState = await readBaselineReceipt(anchor)
+      const receipt = receiptState.receipt
+      if (receiptState.kind === 'invalid') { await persist({ kind: 'stop', reason: 'base_run_receipt_changed', nextCheckAt: null }); return }
+      if (receiptState.kind === 'missing' && !activePid && !await preparedBaselineSafety(anchor)) { await persist({ kind: 'stop', reason: 'prepared_baseline_execution_unconfirmed', nextCheckAt: null }); return }
       const status = asObject(await optionalJson(join(anchor.directory, 'status.json')))
       if (!activePid && receipt) activePid = receipt.pid
       let active: SupervisorObservation['active'] = 'none'
@@ -437,12 +496,13 @@ export async function runQuotaSupervisor(options: SupervisorOptions): Promise<vo
       const action = decideSupervisorAction({ now: Date.now(), totalRecords: anchor.totalRecords, inventory, active, currentInputMatches: inputMatches, providerMatches, verifierSupportsResume: supportsResume, fatal: typeof status?.fatal === 'string' ? status.fatal : null, cooldownUntil, noProgressFailures, quota, resumeGraceUntil, minimumRemainingPercent: billingSafety.minimumRemainingPercent, allowExistingCredits: billingSafety.allowExistingCredits, creditsWindowConfirmed: quota ? authorizedCreditWindow(quota, billingSafety, Date.now()) : false, ...(active === 'verified' ? { lastActivityAt: activity?.lastActivityAt ?? null } : {}) })
       if (action.kind === 'launch') {
         // Re-read both snapshot and current receipt immediately before spawning to avoid duplicates.
-        const latestReceipt = await optionalJson(join(anchor.directory, 'run-receipt.json'))
+        const latestReceiptState = await readBaselineReceipt(anchor)
+        const latestReceipt = latestReceiptState.receipt
         if (!await currentInputMatches(anchor)) { await persist({ kind: 'stop', reason: 'catalog_snapshot_changed', nextCheckAt: null }); return }
-        if (receiptMatchesAnchor(latestReceipt, anchor)) {
+        if (latestReceipt) {
           const existing = await probe(latestReceipt.pid)
           if (existing.alive) { activePid = latestReceipt.pid; fingerprint = null; continue }
-        } else { await persist({ kind: 'stop', reason: 'base_run_receipt_changed', nextCheckAt: null }); return }
+        } else if (latestReceiptState.kind !== 'missing' || !await preparedBaselineSafety(anchor)) { await persist({ kind: 'stop', reason: 'base_run_receipt_changed', nextCheckAt: null }); return }
         const refreshedConfig = getCcSwitchQuotaConfig()
         if (!quotaConfigMatches(refreshedConfig, anchor) || refreshedConfig.key !== frozenConfig.key) { await persist({ kind: 'stop', reason: 'minimax_provider_changed', nextCheckAt: null }); return }
         const launch = buildVerifierLaunch(root)

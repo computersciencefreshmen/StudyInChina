@@ -5,7 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import {
   assertRecoveryTaskNotRepeated,
   buildTaskSelection, copyVerifiedSourceEvidence, modelConfiguration,
-  parseCheckpointMaxAgeHours, parseSelectionOptions, parseVerificationRunId,
+  parseCheckpointMaxAgeHours, parseInvocationId, parseSelectionOptions, parseVerificationRunId,
   readTaskSelection, readValidatedSourceReceipt, recoveryReason,
   selectVerificationTasks, shouldReuseCheckpoint, validateSavedRunManifest,
   verificationRunId, type ApiConfig, type RecordResult, type SourceReceipt,
@@ -30,6 +30,44 @@ const receipt: SourceReceipt = {
   status: 'captured', text, sha256: hash(bytes), textSha256: hash(text), bytes: bytes.byteLength,
 }
 const temporaryDirectories: string[] = []
+
+describe('Explicit admin verification invocation identity', () => {
+  const first = '11111111-1111-4111-8111-111111111111'
+  const second = '22222222-2222-4222-8222-222222222222'
+  it('gives sample and full commands independent directories while preserving automatic resume', () => {
+    const sample = verificationRunId(inputSha256, api, {}, null, first)
+    const full = verificationRunId(inputSha256, api, {}, null, second)
+    expect(sample).toMatch(/^a{16}-[a-f0-9]{12}$/)
+    expect(full).not.toBe(sample)
+    expect(sample).not.toBe(baseRun)
+    expect(verificationRunId(inputSha256, api, {})).toBe(baseRun)
+    expect(verificationRunId(inputSha256, api, {}, null, first)).toBe(sample)
+    expect(verificationRunId(inputSha256, { ...api, thinking: 'adaptive' }, {}, null, first)).not.toBe(sample)
+  })
+  it('validates UUIDs without allowing explicit commands to replay qualified recovery', () => {
+    expect(parseInvocationId([])).toBeNull()
+    expect(parseInvocationId(['--invocation-id', first.toUpperCase(), '--audit-config'])).toBe(first)
+    for (const args of [['--invocation-id'], ['--invocation-id', '../baseline'], ['--invocation-id', first, '--invocation-id', second], ['--invocation-id', first, '--recovery-from', baseRun], ['--invocation-id', first, '--report-only']]) {
+      expect(() => parseInvocationId(args)).toThrow()
+    }
+  })
+  it('binds a saved manifest to both the model and explicit invocation', () => {
+    const runId = verificationRunId(inputSha256, api, {}, null, first)
+    const manifest = { inputSha256, promptVersion: 'catalog-comparison-v1.2', maxSourceChars: 25000, ...modelConfiguration(api), invocationId: first, selection: null }
+    expect(() => validateSavedRunManifest(runId, inputSha256, manifest, taskIds)).not.toThrow()
+    expect(() => validateSavedRunManifest(runId, inputSha256, { ...manifest, invocationId: second }, taskIds)).toThrow('invocation')
+    expect(() => validateSavedRunManifest(runId, inputSha256, { ...manifest, modelConfigSha256: 'b'.repeat(64) }, taskIds)).toThrow('model')
+    expect(() => validateSavedRunManifest(baseRun, inputSha256, manifest, taskIds)).toThrow('invocation')
+  })
+  it('cannot satisfy a fresh command from a baseline or another command checkpoint', () => {
+    const reuse = (value: RecordResult, invocationId: string | null) => shouldReuseCheckpoint(value, { taskId: taskIds[0] }, inputSha256, api, false, 168, false, now, invocationId)
+    expect(reuse(checkpoint, first)).toBe(false)
+    expect(reuse({ ...checkpoint, invocationId: first }, second)).toBe(false)
+    expect(reuse({ ...checkpoint, invocationId: first }, null)).toBe(false)
+    expect(reuse({ ...checkpoint, invocationId: first }, first)).toBe(true)
+    expect(reuse(checkpoint, null)).toBe(true)
+  })
+})
 
 beforeEach(() => {
   vi.stubGlobal('fetch', vi.fn(() => { throw new Error('These selection tests must never fetch') }))

@@ -26,6 +26,7 @@ export type ExecutorCommand = {
 }
 export type ExecutorStatus = {
   executorId: string; observedAt: string; connected: boolean; desiredState: 'running' | 'paused'
+  remotelyControllable?: boolean
   phase: string; reason: string; baselineRunId: string | null
   runnerAlive: boolean; supervisorAlive: boolean; activeVerifierCount: number
   controlAcknowledgedAt: string | null; pauseMayHaveInFlightRequest: boolean

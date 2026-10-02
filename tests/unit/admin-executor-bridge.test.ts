@@ -1,6 +1,17 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { bridgeIteration, createBridgeRequest, loadBridgeConfiguration, projectBridgeQuota, telemetryOnlyIteration, validateBridgeTarget, windowsBridgeModulePath, type BridgeConfiguration } from '../../scripts/ingestion/admin-executor-bridge'
+import { bridgeIteration, bridgeTelemetryPayload, buildBridgeTelemetry, createBridgeRequest, loadBridgeConfiguration, projectBridgeQuota, telemetryOnlyIteration, validateBridgeTarget, windowsBridgeModulePath, type BridgeConfiguration } from '../../scripts/ingestion/admin-executor-bridge'
 import { ADMIN_COMMAND_TTL_MS, ADMIN_EXECUTOR_ID, type ExecutorQueueEntry } from '../../workers/catalog-api/src/admin-executor'
+import { z } from 'zod'
+import { adminTelemetrySchema } from '../../src/lib/admin/telemetry-contract'
+import { executorStatusSchema } from '../../src/lib/admin/executor-contract'
+
+vi.mock('../../src/lib/admin/snapshot', () => ({ readLocalVerificationRuns: async () => [] }))
+vi.mock('../../scripts/ingestion/minimax-admin-control', () => ({ readExecutorStatus: async () => ({
+  executorId: 'studyinchina-local-minimax', observedAt: new Date().toISOString(), connected: true, desiredState: 'running',
+  phase: 'idle', reason: 'executor_ready', baselineRunId: null, runnerAlive: false, supervisorAlive: false, activeVerifierCount: 0,
+  controlAcknowledgedAt: null, pauseMayHaveInFlightRequest: false, creditFallbackAuthorized: false, policyReloadPending: false,
+  keepAwake: false, quota: null, latestCommand: null,
+}) }))
 
 const now = Date.parse('2026-10-02T10:00:00.000Z')
 const commandId = 'bca14973-d37e-4b4d-8742-4ad95a64a90c'
@@ -19,6 +30,35 @@ function dependencies() {
 }
 
 describe('outward-only administrator bridge', () => {
+  it('advertises command consumption only when publishing from the execution mode', async () => {
+    expect((await buildBridgeTelemetry('missing-test-root')).automation?.remotelyControllable).toBe(false)
+    expect((await buildBridgeTelemetry('missing-test-root', false)).automation?.remotelyControllable).toBe(false)
+    expect((await buildBridgeTelemetry('missing-test-root', true)).automation?.remotelyControllable).toBe(true)
+  })
+  it('uploads monitoring observations in the old strict wire shape without mutating its explicit local capability', async () => {
+    const legacySchema = z.object({ ...adminTelemetrySchema.shape,
+      automation: executorStatusSchema.omit({ remotelyControllable: true }).nullable().optional(),
+    }).strict()
+    const telemetry = await buildBridgeTelemetry('missing-test-root', false)
+    const payload = bridgeTelemetryPayload(telemetry, true)
+    expect(payload.automation).not.toHaveProperty('remotelyControllable')
+    expect(legacySchema.safeParse(payload).success).toBe(true)
+    expect(adminTelemetrySchema.parse(payload).automation?.remotelyControllable).toBe(false)
+    expect(telemetry.automation?.remotelyControllable).toBe(false)
+    const transport = vi.fn(async () => Response.json({ ok: true }))
+    await createBridgeRequest(configuration, transport)('PUT', configuration.telemetryUrl, payload)
+    expect(transport).toHaveBeenCalledWith(configuration.telemetryUrl, expect.objectContaining({ method: 'PUT', body: JSON.stringify(payload) }))
+  })
+  it('retains an explicit true capability on execution uploads that require an upgraded Worker', async () => {
+    const legacySchema = z.object({ ...adminTelemetrySchema.shape,
+      automation: executorStatusSchema.omit({ remotelyControllable: true }).nullable().optional(),
+    }).strict()
+    const telemetry = await buildBridgeTelemetry('missing-test-root', true)
+    const payload = bridgeTelemetryPayload(telemetry, false)
+    expect(payload.automation?.remotelyControllable).toBe(true)
+    expect(adminTelemetrySchema.parse(payload).automation?.remotelyControllable).toBe(true)
+    expect(legacySchema.safeParse(payload).success).toBe(false)
+  })
   it('publishes telemetry without reading or executing pending commands in monitoring-only mode', async () => {
     const fixture = dependencies()
     expect(await telemetryOnlyIteration(fixture)).toEqual({ commandId: null, result: 'idle', published: true })

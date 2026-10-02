@@ -9,7 +9,7 @@ import type { AdminRun, AdminSnapshot, TokenUsage } from './types'
 import { ledgerTokenUsage, sumTokenUsage } from './telemetry-contract'
 import { telemetryIsStale } from './telemetry-contract'
 import { currentQuotaObservation, EXECUTOR_RUN_ID, projectUsageLedger } from './executor-contract'
-import { readRemoteTelemetry, remoteExecutorConfiguration, remoteExecutorConnected } from './remote-executor'
+import { readRemoteTelemetry, remoteExecutorConfiguration, remoteExecutorConnected, remoteExecutorControllable } from './remote-executor'
 import type { ProcessProbe } from '../../../scripts/ingestion/minimax-quota-supervisor'
 
 const RUN_ID = EXECUTOR_RUN_ID
@@ -200,7 +200,7 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
   if (!capabilities.localMonitoring) {
     const remote = await readRemoteTelemetry()
     const connected = remoteExecutorConnected(remote)
-    const controls = remoteExecutorConfiguration()?.controlEnabled === true
+    const controls = remoteExecutorConfiguration()?.controlEnabled === true && remoteExecutorControllable(remote)
     const automation = remote?.automation ? { ...remote.automation, connected, quota: currentQuotaObservation(remote.automation.quota) } : null
     const ledger = remote?.ledger ? { ...remote.ledger, todayDay } : null
     return { generatedAt, catalog: cachedCatalog.value, runs: remote?.runs || [],

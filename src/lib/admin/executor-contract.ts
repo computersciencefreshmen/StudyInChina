@@ -41,6 +41,7 @@ export const adminUsageLedgerSchema = z.object({
 }) satisfies z.ZodType<AdminUsageLedger>
 export const executorStatusSchema = z.object({
   executorId: z.string().regex(/^[a-zA-Z0-9_-]{1,64}$/), observedAt: timestamp, connected: z.boolean(), desiredState: z.enum(['running', 'paused']),
+  remotelyControllable: z.boolean().default(false),
   phase: z.string().regex(/^[a-zA-Z0-9_-]{1,100}$/), reason: z.string().regex(/^[a-zA-Z0-9_-]{1,160}$/), baselineRunId: z.string().regex(EXECUTOR_RUN_ID).nullable(),
   runnerAlive: z.boolean(), supervisorAlive: z.boolean(), activeVerifierCount: count.max(100), controlAcknowledgedAt: timestamp.nullable(), pauseMayHaveInFlightRequest: z.boolean(),
   creditFallbackAuthorized: z.boolean(), policyReloadPending: z.boolean(), keepAwake: z.boolean(),

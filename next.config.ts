@@ -19,6 +19,10 @@ const contentSecurityPolicy = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // These files belong to the local executor and must never enter website bundles.
+  outputFileTracingExcludes: {
+    '/*': ['./.official-harvest/**/*', './.tmp/**/*', './.env*', './.vercel/**/*'],
+  },
   experimental: {
     globalNotFound: true,
   },

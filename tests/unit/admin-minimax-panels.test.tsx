@@ -22,7 +22,7 @@ class FakeEventSource {
   snapshot(value: unknown) { this.listeners.get('snapshot')?.({ data: JSON.stringify(value) } as MessageEvent) }
 }
 beforeEach(() => { FakeEventSource.instances = []; vi.stubGlobal('EventSource', FakeEventSource); document.documentElement.dataset.theme = 'cloud' })
-afterEach(() => { cleanup(); vi.unstubAllGlobals(); vi.restoreAllMocks() })
+afterEach(() => { cleanup(); vi.useRealTimers(); vi.unstubAllGlobals(); vi.restoreAllMocks() })
 
 describe('MiniMax immutable usage dashboard', () => {
   it('shows today and cumulative receipts separately, counts unknown attempts, and avoids treating the target as a cap', () => {
@@ -196,5 +196,122 @@ describe('MiniMax executor controls', () => {
     const panel = screen.getByRole('region', { name: '自动化执行' })
     expect(within(panel).getByRole('button', { name: '暂停后续任务' })).toBeDisabled()
     expect(panel).toHaveTextContent('执行器连接待更新')
+  })
+
+  it('tracks remote start through the matching receipt and prevents duplicate starts until it finishes', async () => {
+    const snapshot = adminSnapshot(); snapshot.generatedAt = new Date().toISOString(); snapshot.automation = executor({ desiredState: 'paused', runnerAlive: false, supervisorAlive: false, activeVerifierCount: 0 })
+    const commandId = '189bd3e2-5218-4406-af56-2a4d46cc0466'
+    const fetchMock = vi.fn(async (path: string, init?: RequestInit) => response(path === '/api/admin/session' ? adminSession : path === '/api/admin/verification' && init?.method === 'POST' ? { accepted: true, commandId } : snapshot, path === '/api/admin/verification' ? 202 : 200))
+    vi.stubGlobal('fetch', fetchMock)
+    render(<AdminWorkbench />)
+    await screen.findByRole('heading', { name: '自动化执行' })
+    act(() => FakeEventSource.instances[0].snapshot(snapshot))
+    fireEvent.click(screen.getByRole('button', { name: '开始核验' }))
+    fireEvent.click(screen.getByRole('button', { name: '创建并开始核验' }))
+    await screen.findByText('指令已提交，等待执行器回执。')
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: '开始核验' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: '恢复自动推进' })).toBeDisabled()
+    const claimed = { ...snapshot, generatedAt: new Date(Date.now() + 100).toISOString(), automation: executor({ latestCommand: { commandId, action: 'start', status: 'claimed', updatedAt: new Date().toISOString(), error: null } }) }
+    act(() => FakeEventSource.instances[0].snapshot(claimed))
+    expect(screen.getByText('开始核验：执行器处理中')).toBeVisible()
+    expect(screen.getByRole('button', { name: '开始核验' })).toBeDisabled()
+    const failed = { ...claimed, generatedAt: new Date(Date.now() + 200).toISOString(), automation: executor({ runnerAlive: false, supervisorAlive: false, activeVerifierCount: 0, latestCommand: { commandId, action: 'start', status: 'failed', updatedAt: new Date().toISOString(), error: 'verification_already_running' } }) }
+    act(() => FakeEventSource.instances[0].snapshot(failed))
+    await waitFor(() => expect(screen.getByRole('button', { name: '开始核验' })).toBeEnabled())
+    expect(screen.getByRole('alert')).toHaveTextContent('已有核验任务在运行')
+    expect(screen.getByText('开始核验：执行未完成')).toBeVisible()
+    expect(fetchMock.mock.calls.filter(([path]) => path === '/api/admin/verification')).toHaveLength(1)
+  })
+
+  it('does not wait again for a completed command when another administrator submits a later command', async () => {
+    const snapshot = adminSnapshot(); snapshot.generatedAt = new Date().toISOString(); snapshot.automation = executor()
+    const commandId = '814dce65-1297-4638-8d83-ae4a93204d87'
+    vi.spyOn(crypto, 'randomUUID').mockReturnValue(commandId)
+    vi.stubGlobal('fetch', vi.fn(async (path: string, init?: RequestInit) => response(path === '/api/admin/session' ? adminSession : path === '/api/admin/automation' && init?.method === 'POST' ? { accepted: true, commandId } : snapshot)))
+    render(<AdminWorkbench />)
+    await screen.findByRole('heading', { name: '自动化执行' })
+    act(() => FakeEventSource.instances[0].snapshot(snapshot))
+    fireEvent.click(screen.getByRole('button', { name: '暂停后续任务' }))
+    await screen.findByText('指令已提交，等待执行器回执。')
+    const completed = { ...snapshot, generatedAt: new Date(Date.now() + 100).toISOString(), automation: executor({ desiredState: 'paused', runnerAlive: false, activeVerifierCount: 0, latestCommand: { commandId, action: 'pause', status: 'completed', updatedAt: new Date().toISOString(), error: null } }) }
+    act(() => FakeEventSource.instances[0].snapshot(completed))
+    await waitFor(() => expect(screen.getByRole('button', { name: '恢复自动推进' })).toBeEnabled())
+    const later = { ...completed, generatedAt: new Date(Date.now() + 200).toISOString(), automation: executor({ latestCommand: { commandId: 'da33e71f-a871-40f1-9f2d-c4d1b2e41f9f', action: 'resume', status: 'completed', updatedAt: new Date().toISOString(), error: null } }) }
+    act(() => FakeEventSource.instances[0].snapshot(later))
+    expect(screen.queryByText('指令已提交，等待执行器回执。')).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: '暂停后续任务' })).toBeEnabled()
+  })
+
+  it.each(['expired', 'failed', 'completed'] as const)('recovers a matching %s queue outcome absent from the local latest receipt without redispatch', async status => {
+    const snapshot = adminSnapshot(); snapshot.generatedAt = new Date().toISOString(); snapshot.capabilities.localMonitoring = false; snapshot.automation = executor()
+    const commandId = '814dce65-1297-4638-8d83-ae4a93204d87'
+    vi.spyOn(crypto, 'randomUUID').mockReturnValue(commandId)
+    const fetchMock = vi.fn(async (path: string, init?: RequestInit) => response(path === '/api/admin/session' ? adminSession
+      : path.startsWith('/api/admin/automation?commandId=') ? { command: { commandId, action: 'pause', status, updatedAt: new Date().toISOString(), error: status === 'failed' ? 'execution_outcome_unknown' : status === 'expired' ? 'command_expired' : null } }
+        : path === '/api/admin/automation' && init?.method === 'POST' ? { accepted: true, commandId } : snapshot))
+    vi.stubGlobal('fetch', fetchMock)
+    render(<AdminWorkbench />)
+    await screen.findByRole('heading', { name: '自动化执行' })
+    act(() => FakeEventSource.instances[0].snapshot(snapshot))
+    vi.useFakeTimers()
+    await act(async () => { fireEvent.click(screen.getByRole('button', { name: '暂停后续任务' })); await Promise.resolve() })
+    expect(screen.getByRole('button', { name: '开始核验' })).toBeDisabled()
+    await act(async () => { await vi.advanceTimersByTimeAsync(1200) })
+    expect(screen.getByRole('button', { name: '开始核验' })).toBeEnabled()
+    expect(screen.getByRole('button', { name: '暂停后续任务' })).toBeEnabled()
+    expect(screen.queryByText('指令已提交，等待执行器回执。')).not.toBeInTheDocument()
+    expect(fetchMock.mock.calls.filter(([path, init]) => path === '/api/admin/automation' && init?.method === 'POST')).toHaveLength(1)
+    expect(fetchMock).toHaveBeenCalledWith(`/api/admin/automation?commandId=${commandId}`, expect.objectContaining({ credentials: 'same-origin' }))
+    expect(screen.getByText(status === 'expired' ? /指令已过期/ : status === 'failed' ? /系统不会自动重派/ : /执行器已确认指令/)).toHaveAttribute('role', 'status')
+  })
+
+  it.each(['pending', 'claimed', 'missing', 'mismatched', 'unavailable'] as const)('keeps the command locked for a %s queue outcome beyond command TTL without retrying it', async outcome => {
+    const snapshot = adminSnapshot(); snapshot.generatedAt = new Date().toISOString(); snapshot.capabilities.localMonitoring = false; snapshot.automation = executor()
+    const commandId = '814dce65-1297-4638-8d83-ae4a93204d87'
+    vi.spyOn(crypto, 'randomUUID').mockReturnValue(commandId)
+    const fetchMock = vi.fn(async (path: string, init?: RequestInit) => response(path === '/api/admin/session' ? adminSession
+      : path.startsWith('/api/admin/automation?commandId=') ? { command: outcome === 'missing' ? null : { commandId: outcome === 'mismatched' ? 'different-command' : commandId, action: 'pause', status: outcome === 'pending' || outcome === 'claimed' ? outcome : 'completed', updatedAt: new Date().toISOString(), error: null } }
+        : path === '/api/admin/automation' && init?.method === 'POST' ? { accepted: true, commandId } : snapshot, path.includes('?commandId=') && outcome === 'unavailable' ? 503 : 200))
+    vi.stubGlobal('fetch', fetchMock)
+    render(<AdminWorkbench />)
+    await screen.findByRole('heading', { name: '自动化执行' })
+    act(() => FakeEventSource.instances[0].snapshot(snapshot))
+    vi.useFakeTimers()
+    await act(async () => { fireEvent.click(screen.getByRole('button', { name: '暂停后续任务' })); await Promise.resolve() })
+    await act(async () => { await vi.advanceTimersByTimeAsync(306_000) })
+    expect(screen.getByRole('button', { name: '开始核验' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: '暂停后续任务' })).toBeDisabled()
+    expect(screen.getByText('指令已提交，等待执行器回执。')).toBeVisible()
+    expect(fetchMock.mock.calls.filter(([path, init]) => path === '/api/admin/automation' && init?.method === 'POST')).toHaveLength(1)
+  })
+
+  it('shows a readable rejected command and leaves controls available for retry', async () => {
+    const snapshot = adminSnapshot(); snapshot.generatedAt = new Date().toISOString(); snapshot.automation = executor()
+    vi.stubGlobal('fetch', vi.fn(async (path: string) => response(path === '/api/admin/session' ? adminSession : path === '/api/admin/automation' ? { error: 'executor_unavailable' } : snapshot, path === '/api/admin/automation' ? 503 : 200)))
+    render(<AdminWorkbench />)
+    await screen.findByRole('heading', { name: '自动化执行' })
+    act(() => FakeEventSource.instances[0].snapshot(snapshot))
+    fireEvent.click(screen.getByRole('button', { name: '暂停后续任务' }))
+    expect(await screen.findByRole('alert')).toHaveTextContent('执行器暂时无法接受指令')
+    expect(screen.getByRole('button', { name: '暂停后续任务' })).toBeEnabled()
+    expect(screen.queryByText('指令已提交，等待执行器回执。')).not.toBeInTheDocument()
+  })
+
+  it('reenables fresh controls as soon as a successful manual sync recovers the connection', async () => {
+    const snapshot = adminSnapshot(); snapshot.generatedAt = new Date().toISOString(); snapshot.automation = executor()
+    const fetchMock = vi.fn(async (path: string) => response(path === '/api/admin/session' ? adminSession : snapshot))
+    vi.stubGlobal('fetch', fetchMock)
+    render(<AdminWorkbench />)
+    await screen.findByRole('heading', { name: '自动化执行' })
+    act(() => FakeEventSource.instances[0].snapshot(snapshot))
+    fetchMock.mockImplementation(async () => response({ error: 'unavailable' }, 503))
+    fireEvent.click(screen.getByRole('button', { name: '同步最新数据' }))
+    await screen.findByText('连接中断')
+    expect(screen.getByRole('button', { name: '暂停后续任务' })).toBeDisabled()
+    fetchMock.mockImplementation(async () => response(snapshot))
+    fireEvent.click(screen.getByRole('button', { name: '同步最新数据' }))
+    await screen.findByText('后台同步')
+    expect(screen.getByRole('button', { name: '暂停后续任务' })).toBeEnabled()
   })
 })

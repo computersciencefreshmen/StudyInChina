@@ -1,7 +1,8 @@
 import 'server-only'
 import { adminTelemetrySchema, ADMIN_TELEMETRY_MAX_BYTES, type AdminTelemetry } from './telemetry-contract'
-import { executorCommandSchema } from './executor-contract'
-import type { ExecutorCommand } from './types'
+import { executorCommandSchema, executorStatusSchema } from './executor-contract'
+import type { ExecutorCommand, ExecutorStatus } from './types'
+import { ADMIN_EXECUTOR_MAX_BYTES, executorQueueSchema } from '../../../workers/catalog-api/src/admin-executor'
 
 type Environment = Record<string, string | undefined>
 export const REMOTE_EXECUTOR_FRESH_MS = 30_000
@@ -47,13 +48,33 @@ export async function readRemoteTelemetry(environment: Environment = process.env
 export function remoteExecutorConnected(telemetry: AdminTelemetry | null, now = Date.now()): boolean {
   const automation = telemetry?.automation
   const age = now - Date.parse(automation?.observedAt || '')
-  return Boolean(automation?.connected && Number.isFinite(age) && age >= -5_000 && age <= REMOTE_EXECUTOR_FRESH_MS && now - Date.parse(telemetry!.observedAt) <= REMOTE_EXECUTOR_FRESH_MS)
+  const transportAge = now - Date.parse(telemetry?.observedAt || '')
+  return Boolean(automation?.connected && Number.isFinite(age) && age >= -5_000 && age <= REMOTE_EXECUTOR_FRESH_MS &&
+    Number.isFinite(transportAge) && transportAge >= -5_000 && transportAge <= REMOTE_EXECUTOR_FRESH_MS)
+}
+/** A live monitoring upload does not imply that the bridge consumes commands. */
+export function remoteExecutorControllable(telemetry: AdminTelemetry | null, now = Date.now()): boolean {
+  return remoteExecutorConnected(telemetry, now) && telemetry?.automation?.remotelyControllable === true
+}
+/** Queue outcomes remain authoritative even when the bridge never received a command. */
+export async function readRemoteExecutorCommand(commandId: string): Promise<ExecutorStatus['latestCommand']> {
+  const id = executorCommandSchema.shape.commandId.parse(commandId)
+  const config = remoteExecutorConfiguration()
+  if (!config) throw new Error('executor_unavailable')
+  try {
+    const response = await fetch(config.commandUrl, { method: 'GET', headers: { Authorization: `Bearer ${config.token}` }, cache: 'no-store', redirect: 'error', signal: AbortSignal.timeout(8_000) })
+    if (!response.ok) throw new Error('executor_unavailable')
+    const queue = executorQueueSchema.parse(await boundedResponse(response, ADMIN_EXECUTOR_MAX_BYTES))
+    const command = queue.commands.find(value => value.commandId === id)
+    return command ? executorStatusSchema.shape.latestCommand.parse({ commandId: command.commandId, action: command.action,
+      status: command.status, updatedAt: command.updatedAt, error: command.error }) : null
+  } catch { throw new Error('executor_unavailable') }
 }
 /** Called only after administrator authentication and same-origin checks. */
 export async function submitRemoteExecutorCommand(command: ExecutorCommand): Promise<{ accepted: true; commandId: string }> {
   const safe = executorCommandSchema.parse(command)
   const config = remoteExecutorConfiguration()
-  if (!config?.controlEnabled || !remoteExecutorConnected(await readRemoteTelemetry())) throw new Error('executor_unavailable')
+  if (!config?.controlEnabled || !remoteExecutorControllable(await readRemoteTelemetry())) throw new Error('executor_unavailable')
   try {
     const response = await fetch(config.commandUrl, { method: 'POST', headers: { Authorization: `Bearer ${config.token}`, 'Content-Type': 'application/json' }, body: JSON.stringify(safe), redirect: 'error', signal: AbortSignal.timeout(8_000), cache: 'no-store' })
     if (!response.ok) throw new Error('executor_unavailable')
