@@ -71,8 +71,17 @@ describe('CatalogRepository', () => {
 
   it('filters JSON programs by linked or specifically selected published scholarship scopes', async () => {
     const today = '2026-08-08'
-    const repository = createJsonCatalogRepository(() => copyBundle())
-    const published = selectPublishedData(copyBundle(), today)
+    const bundle = copyBundle()
+    const program = selectPublishedData(bundle, today).programs[0]!
+    // Keep a positive eligibility fixture independent of canonical evidence rollover.
+    bundle.scholarships = [{
+      ...bundle.scholarships[0]!,
+      id: 'scholarship-repository-fixture', slug: 'scholarship-repository-fixture',
+      universityIds: [program.universityId], programIds: [program.id],
+      status: 'verified', verifiedAt: today, reviewAfter: '2026-09-08', deadline: null,
+    }]
+    const repository = createJsonCatalogRepository(() => bundle)
+    const published = selectPublishedData(bundle, today)
     const linked = await repository.listPrograms({
       scholarship: 'linked',
       today,

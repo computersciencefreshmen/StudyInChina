@@ -11,7 +11,7 @@ describe('administrator verification scope and measurements', () => {
     expect(() => parseVerificationRequest({ collection: 'all', mode: 'sample', command: 'arbitrary' })).toThrow()
     expect(() => parseVerificationRequest({ collection: 'all', mode: 'sample', limit: 201 })).toThrow()
     expect(() => parseVerificationRequest({ collection: 'all', mode: 'sample', model: 'MiniMax-M3', effort: 'max' })).toThrow()
-    expect(buildVerificationArguments(parseVerificationRequest({ collection: 'programs', mode: 'sample', model: 'MiniMax-M3.1-Flash-Preview', effort: 'max' }), true)).toEqual(['--use-ccswitch', '--collection', 'programs', '--limit', '20', '--concurrency', '2', '--batch-size', '2', '--model', 'MiniMax-M3.1-Flash-Preview', '--thinking', 'adaptive', '--effort', 'max'])
+    expect(buildVerificationArguments(parseVerificationRequest({ collection: 'programs', mode: 'sample', model: 'MiniMax-M3.1-Flash-Preview', effort: 'max' }), true)).toEqual(['--use-ccswitch', '--quota-guard', '--collection', 'programs', '--limit', '20', '--concurrency', '2', '--batch-size', '2', '--model', 'MiniMax-M3.1-Flash-Preview', '--thinking', 'adaptive', '--effort', 'max'])
   })
 
   it('requires local opt-in and disables subprocesses in managed cloud runtimes', () => {

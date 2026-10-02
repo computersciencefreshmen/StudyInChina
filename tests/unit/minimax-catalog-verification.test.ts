@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { applyModelOptions, buildClaims, buildComparisonRequest, buildRankingSources, getApiConfig, matchesModelConfiguration, modelConfiguration, parseModelOptions, summarizeResults, validateVerdicts, verificationRunId, type ApiConfig, type RecordResult, type SourceReceipt } from '../../scripts/ingestion/verify-catalog-minimax'
+import { applyModelOptions, buildClaims, buildComparisonRequest, buildRankingSources, getApiConfig, matchesModelConfiguration, modelConfiguration, parseMiniMaxResponseJson, parseModelOptions, summarizeResults, validateComparisonOutput, validateVerdicts, verificationRunId, type ApiConfig, type RecordResult, type SourceReceipt } from '../../scripts/ingestion/verify-catalog-minimax'
 
 const source: SourceReceipt = {
   sourceId: 'official', url: 'https://example.edu/guide', checkedAt: '2026-09-29T00:00:00Z',
@@ -7,6 +7,17 @@ const source: SourceReceipt = {
 }
 
 describe('MiniMax catalog comparison evidence gate', () => {
+  it('classifies null and malformed model result identities before saving a response or losing checkpoints', () => {
+    for (const text of ['{', '{"results":', '{"secret-input":garbage}']) expect(() => parseMiniMaxResponseJson(text)).toThrow('MiniMax response JSON invalid')
+    expect(parseMiniMaxResponseJson('{"results":[]}')).toEqual({ results: [] })
+    for (const output of [null, false, [], {}, { results: null }, { results: [null] }, { results: [[]] }, { results: [{ taskId: 42 }] }, { results: [{ taskId: '' }] }]) {
+      expect(() => validateComparisonOutput(output)).toThrow('MiniMax response schema invalid')
+    }
+    const omittedVerdicts = { results: [{ taskId: 'programs:one' }] }
+    expect(validateComparisonOutput(omittedVerdicts)).toBe(omittedVerdicts)
+    const duplicates = { results: [{ taskId: 'programs:one', verdicts: [] }, { taskId: 'programs:one', verdicts: [] }] }
+    expect(validateComparisonOutput(duplicates)).toBe(duplicates)
+  })
   it('inventories nested public fields without sending audit metadata as claims', () => {
     expect(buildClaims({ id: 'one', status: 'verified', sourceIds: ['official'], coverage: { insurance: true, stipend: null }, name: { en: 'School' } })).toEqual([
       { path: 'coverage.insurance', value: true }, { path: 'coverage.stipend', value: null }, { path: 'name.en', value: 'School' },

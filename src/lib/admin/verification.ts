@@ -4,34 +4,10 @@ import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { homedir } from 'node:os'
 import { promisify } from 'node:util'
-import { z } from 'zod'
-import { ADMIN_COLLECTIONS, type AdminSnapshot, type VerificationRequest } from './types'
-
-const requestSchema = z.object({
-  collection: z.enum(ADMIN_COLLECTIONS), mode: z.enum(['sample', 'full']),
-  limit: z.number().int().min(1).max(200).optional(),
-  model: z.enum(['configured', 'MiniMax-M3', 'MiniMax-M3.1-Flash-Preview']).optional(),
-  effort: z.enum(['default', 'high', 'xhigh', 'max']).optional(),
-}).strict().superRefine((request, context) => {
-  if (request.effort && request.effort !== 'default' && request.model !== 'MiniMax-M3.1-Flash-Preview') {
-    context.addIssue({ code: 'custom', message: 'Adjustable effort requires MiniMax-M3.1-Flash-Preview', path: ['effort'] })
-  }
-})
-
-export function parseVerificationRequest(value: unknown): VerificationRequest { return requestSchema.parse(value) }
-
-export function buildVerificationArguments(request: VerificationRequest, useCcSwitch: boolean): string[] {
-  const args = useCcSwitch ? ['--use-ccswitch'] : []
-  if (request.collection !== 'all') args.push('--collection', request.collection)
-  if (request.mode === 'full') args.push('--all')
-  else args.push('--limit', String(request.limit ?? 20))
-  args.push('--concurrency', '2', '--batch-size', '2')
-  if (request.model && request.model !== 'configured') {
-    args.push('--model', request.model, '--thinking', 'adaptive')
-    if (request.model === 'MiniMax-M3.1-Flash-Preview' && request.effort && request.effort !== 'default') args.push('--effort', request.effort)
-  }
-  return args
-}
+import type { AdminSnapshot, VerificationRequest } from './types'
+import { buildVerificationArguments } from './verification-options'
+import { assertMiniMaxRunning } from '../../../scripts/ingestion/minimax-manual-control'
+export { parseVerificationRequest, buildVerificationArguments } from './verification-options'
 
 type Environment = Record<string, string | undefined>
 export function getVerificationCapabilities(environment: Environment = process.env): AdminSnapshot['capabilities'] {
@@ -65,6 +41,11 @@ export async function launchVerification(request: VerificationRequest, hasActive
   try {
     if (await hasActiveRun()) throw new Error('verification_already_running')
     const root = process.cwd()
+    await assertMiniMaxRunning(root)
+    const { readExecutorStatus } = await import('../../../scripts/ingestion/minimax-admin-control')
+    const executor = await readExecutorStatus(root)
+    if (executor.runnerAlive || executor.supervisorAlive || executor.activeVerifierCount) throw new Error('verification_already_running')
+    if (executor.reason === 'process_identity_unconfirmed') throw new Error('executor_unavailable')
     const cli = join(root, 'node_modules', 'tsx', 'dist', 'cli.mjs')
     const script = join(root, 'scripts', 'ingestion', 'verify-catalog-minimax.ts')
     // Executables belong to the explicitly enabled local executor, never serverless deployment assets.

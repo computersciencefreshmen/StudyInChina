@@ -9,9 +9,10 @@ import scholarships from '../../content/data/scholarships.json'
 import sources from '../../content/data/sources.json'
 import universities from '../../content/data/universities.json'
 import { getApplicationState, selectAdmissionCycle } from '../../src/lib/data/admission'
-import { getTodayDate } from '../../src/lib/data/freshness'
+import { getTodayDate, isCurrentVerifiedRecord } from '../../src/lib/data/freshness'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
+import { scholarshipAppliesToProgram } from '../../src/lib/data/scholarship-scope'
 import {
   getReleaseAnnouncement,
   LATEST_RELEASE_ANNOUNCEMENT_ID,
@@ -196,12 +197,27 @@ test('catalogue filters remain shareable and removable through browser history',
 })
 
 test('the program catalogue exposes linked scholarships as a shareable evidence relationship', async ({ page }) => {
+  const eligiblePrograms = publicData.programs.filter(program => publicData.scholarships.some(scholarship => (
+    isCurrentVerifiedRecord(scholarship, TODAY) && scholarshipAppliesToProgram(scholarship, program)
+  )))
   await page.goto('/en/programs?scholarship=linked', { waitUntil: 'domcontentloaded' })
 
   await expect(page.locator('#program-scholarship')).toHaveAttribute('value', 'linked')
   await expect(page.getByRole('link', { name: /Remove filter: Scholarships/ })).toBeVisible()
-  expect(await page.locator('.record-card').count()).toBeGreaterThan(0)
+  await expect(page.locator('.record-card')).toHaveCount(Math.min(24, eligiblePrograms.length))
+  if (eligiblePrograms.length) {
+    const eligibleSlugs = new Set(eligiblePrograms.map(program => program.slug))
+    for (const link of await page.locator('.record-card a[href^="/en/programs/"]').all()) {
+      const href = await link.getAttribute('href')
+      expect(eligibleSlugs.has(href!.slice('/en/programs/'.length)), href ?? '').toBe(true)
+    }
+  } else {
+    await expect(page.getByText('No programs match these filters.', { exact: true })).toBeVisible()
+  }
   expect(new URL(page.url()).searchParams.get('scholarship')).toBe('linked')
+  await page.getByRole('link', { name: /Remove filter: Scholarships/ }).click()
+  await expect.poll(() => new URL(page.url()).searchParams.has('scholarship')).toBe(false)
+  await expect(page.locator('.record-card').first()).toBeVisible()
 })
 
 test('a thin verified program stays reachable but is excluded from search indexing', async ({ page }) => {
@@ -255,14 +271,31 @@ test('a fresh complete program exposes grounded details and a state-aware offici
   }
 })
 
-test('a future scholarship deadline does not claim that applications are already open', async ({ page }) => {
-  const response = await page.goto('/en/scholarships/gdufs-iclt-one-semester-2027', { waitUntil: 'domcontentloaded' })
+test('scholarship deadline claims follow current evidence and never claim applications are open', async ({ page }) => {
+  const scholarship = publicData.scholarships.find(item => (
+    isCurrentVerifiedRecord(item, TODAY) && item.deadline && item.deadline > TODAY && item.applicationUrl
+  )) ?? publicData.scholarships.find(item => item.status === 'stale')
+  expect(scholarship, 'a current future scholarship or retained stale identity must be public').toBeDefined()
+  if (!scholarship) return
+  const response = await page.goto(`/en/scholarships/${scholarship.slug}`, { waitUntil: 'domcontentloaded' })
 
   expect(response?.ok()).toBe(true)
-  await expect(page.getByText('Deadline ahead', { exact: true }).first()).toBeVisible()
   await expect(page.getByRole('link', { name: /Apply on official site/ })).toHaveCount(0)
-  await expect(page.getByRole('link', { name: /Official application route/ }).first())
-    .toHaveClass(/atlas-button--secondary/)
+  if (isCurrentVerifiedRecord(scholarship, TODAY)) {
+    await expect(page.getByText('Deadline ahead', { exact: true }).first()).toBeVisible()
+    await expect(page.locator(`time[datetime="${scholarship.deadline}"]`).first()).toBeVisible()
+    const officialRoute = page.getByRole('link', { name: /Official application route/ }).first()
+    await expect(officialRoute).toHaveClass(/atlas-button--secondary/)
+    await expect(officialRoute).toHaveAttribute('href', scholarship.applicationUrl!)
+  } else {
+    await expect(page.getByText('Needs review', { exact: true }).first()).toBeVisible()
+    await expect(page.getByText('Deadline ahead', { exact: true })).toHaveCount(0)
+    await expect(page.getByRole('link', { name: /Official application route/ })).toHaveCount(0)
+    const original = scholarships.find(item => item.id === scholarship.id)!
+    if (original.deadline) await expect(page.locator(`time[datetime="${original.deadline}"]`)).toHaveCount(0)
+    await expect(page.getByRole('link', { name: /Official source/ }).first()).toHaveAttribute('href', /^https:\/\//)
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/i)
+  }
 })
 
 test('a draft program detail is not publicly routable', async ({ page }) => {

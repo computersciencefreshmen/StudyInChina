@@ -3,6 +3,9 @@ import { resolve } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
+import { selectPublishedData } from '../../src/lib/data/publication'
+import { bundleSchema } from '../../src/lib/data/schema'
+
 type JsonRecord = Record<string, unknown>
 
 function load(fileName: string): JsonRecord[] {
@@ -26,6 +29,16 @@ describe('second official ICLT wave 2026-07-28', () => {
   const programs = load('programs.json')
   const cycles = load('admission-cycles.json')
   const scholarships = load('scholarships.json')
+  // Reproduce the maintenance rollover without making this regression depend on the wall clock.
+  const rolloverDate = '2026-10-02'
+  const published = selectPublishedData(bundleSchema.parse({
+    sources,
+    cities: load('cities.json'),
+    universities,
+    programs,
+    admissionCycles: cycles,
+    scholarships,
+  }), rolloverDate)
 
   it('adds Tianjin Normal and Zhejiang Chinese Medical University', () => {
     for (const id of [
@@ -62,15 +75,28 @@ describe('second official ICLT wave 2026-07-28', () => {
       expect(program?.status).toBe(expectedStatus)
       expect(program?.reviewAfter).toBe(expectedReviewAfter)
       const cycle = cycles.find((item) => item.programId === programId)
-      expect(cycle?.status).toBe(expectedStatus)
+      const expectedDynamicStatus = expectedDynamicReviewAfter < rolloverDate ? 'stale' : expectedStatus
+      expect(cycle?.status).toBe(expectedDynamicStatus)
       expect(cycle?.reviewAfter).toBe(expectedDynamicReviewAfter)
       expect(cycle?.closesOn).toBe('2026-10-31')
       const scholarship = scholarships.find(
         (item) => item.id === `scholarship-${key}`,
       )
-      expect(scholarship?.status).toBe(expectedStatus)
+      expect(scholarship?.status).toBe(expectedDynamicStatus)
       expect(scholarship?.reviewAfter).toBe(expectedDynamicReviewAfter)
       expect(scholarship?.deadline).toBe('2026-10-31')
+      if (expectedDynamicStatus === 'stale') {
+        expect(published.admissionCycles.some((item) => item.id === cycle?.id)).toBe(false)
+        const publicScholarship = published.scholarships.find((item) => item.id === scholarship?.id)
+        expect(publicScholarship).toMatchObject({
+          status: 'stale',
+          deadline: null,
+          applicationUrl: null,
+          summary: null,
+          coverage: { tuition: 'unknown', accommodation: 'unknown', insurance: 'unknown', stipendCnyPerMonth: null },
+        })
+        expect(publicScholarship?.sourceIds).toEqual(scholarship?.sourceIds)
+      }
     }
   })
 

@@ -165,7 +165,7 @@ describe('SISU, AHU and CQU official depth wave on 2026-08-25', () => {
     }
   })
 
-  it('keeps the SISU spring 2027 route upcoming with no invented opening date', () => {
+  it('retains the SISU spring 2027 evidence while withholding overdue dates and funding', () => {
     const program = data.programs.find(
       (item) => item.id === 'program-sisu-iclt-one-semester-spring-2027',
     )
@@ -177,12 +177,15 @@ describe('SISU, AHU and CQU official depth wave on 2026-08-25', () => {
     const cycle = data.admissionCycles.find(
       (item) => item.id === 'cycle-sisu-iclt-one-semester-spring-2027',
     )
-    expect(cycle?.status).toBe('verified')
+    expect(cycle?.status).toBe('stale')
     expect(cycle?.opensOn).toBeNull()
     expect(cycle?.closesOn).toBe('2026-10-31')
     expect(cycle?.tuitionCny).toBeNull()
     expect(cycle?.applicationFeeCny).toBeNull()
-    expect(published.admissionCycles.some((item) => item.id === cycle?.id)).toBe(true)
+    expect(cycle?.sourceIds).toEqual(['src-sisu-iclt-2026'])
+    expect(cycle?.reviewAfter).toBe('2026-10-01')
+    const current = selectPublishedData(data, '2026-10-02')
+    expect(current.admissionCycles.some((item) => item.id === cycle?.id)).toBe(false)
 
     const scholarship = data.scholarships.find(
       (item) => item.id === 'scholarship-sisu-iclt-one-semester-spring-2027',
@@ -194,8 +197,19 @@ describe('SISU, AHU and CQU official depth wave on 2026-08-25', () => {
       stipendCnyPerMonth: 2500,
     })
     expect(scholarship?.deadline).toBe('2026-10-31')
+    expect(scholarship?.status).toBe('stale')
+    expect(scholarship?.reviewAfter).toBe('2026-10-01')
+    expect(scholarship?.sourceIds).toEqual(['src-sisu-iclt-2026'])
     expectSixLanguages(scholarship?.name ?? {}, scholarship?.id ?? 'missing-sisu-iclt')
-    expect(published.scholarships.some((item) => item.id === scholarship?.id)).toBe(true)
+    const publicScholarship = current.scholarships.find((item) => item.id === scholarship?.id)
+    expect(publicScholarship).toMatchObject({
+      status: 'stale',
+      deadline: null,
+      applicationUrl: null,
+      summary: null,
+      coverage: { tuition: 'unknown', accommodation: 'unknown', insurance: 'unknown', stipendCnyPerMonth: null },
+    })
+    expect(publicScholarship?.sourceIds).toEqual(scholarship?.sourceIds)
   })
 
   it('stores expired scholarship facts without leaking them as current opportunities', () => {

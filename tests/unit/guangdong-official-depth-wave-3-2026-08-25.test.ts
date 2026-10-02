@@ -359,9 +359,9 @@ describe('Guangdong official depth wave 3 on 2026-08-25', () => {
     }
   })
 
-  it('publishes only the SZU spring 2027 future deadline without inventing an opening date', () => {
-    const futureWaveCycles = published.admissionCycles.filter((cycle) => (
-      WAVE_PROGRAM_ID_SET.has(cycle.programId)
+  it('retains the SZU spring 2027 deadline evidence and withholds the overdue public dates', () => {
+    const futureWaveCycles = data.admissionCycles.filter((cycle) => (
+      WAVE_PROGRAM_ID_SET.has(cycle.programId) && cycle.intake === 'spring'
     ))
     expect(futureWaveCycles).toHaveLength(1)
 
@@ -374,6 +374,12 @@ describe('Guangdong official depth wave 3 on 2026-08-25', () => {
     expect(cycle.tuitionCny).toBeNull()
     expect(cycle.applicationFeeCny).toBeNull()
     expect(getApplicationState(cycle, TODAY)).toBe('dates-published')
+    expect(cycle.status).toBe('stale')
+    expect(cycle.sourceIds).toEqual(['source-szu-iclt-nondegree-2026-2027'])
+    expect(cycle.reviewAfter < '2026-10-02').toBe(true)
+    const current = selectPublishedData(data, '2026-10-02')
+    expect(current.admissionCycles.filter((item) => WAVE_PROGRAM_ID_SET.has(item.programId))).toEqual([])
+    expect(getApplicationState(current.admissionCycles.find((item) => item.id === cycle.id), '2026-10-02')).toBe('not-announced')
   })
 
   it('registers official HTTPS sources with honest mixed private-R2 audit states', () => {
