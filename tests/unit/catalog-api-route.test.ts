@@ -1,9 +1,11 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { GET as listPrograms } from '@/app/api/v1/programs/route'
 import { GET as getCurrentRelease } from '@/app/api/v1/releases/current/route'
 import { createCatalogRepository } from '@/lib/catalog'
 import { selectCatalogApiData } from '@/lib/catalog-api/projection'
 import { getTodayDate } from '@/lib/data/freshness'
+
+afterEach(() => vi.useRealTimers())
 
 describe('catalog API routes', () => {
   it('serves only publication-gated records with cache policy and release metadata', async () => {
@@ -24,6 +26,11 @@ describe('catalog API routes', () => {
   })
 
   it('exposes the linked-scholarship program filter through the compatibility API', async () => {
+    // Evaluate the catalog while its September scholarship evidence is current.
+    // The real clock must not turn this positive route fixture into expired data.
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(new Date('2026-09-28T04:00:00Z'))
+
     const response = await listPrograms(new Request('https://example.test/api/v1/programs?scholarship=linked&limit=100'))
     const body = await response.json() as { data: unknown[] }
 
