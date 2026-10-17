@@ -1,0 +1,623 @@
+{
+  "format": "studyinchina.national-discovery-local-companion-qualification",
+  "version": 1,
+  "qualifiedAt": "2026-10-17T06:38:58.252Z",
+  "batch": {
+    "path": "quality/continuous-program-maintenance-20261017/national-discovery/batch-003.json",
+    "sha256": "4ed5065245eda2e3c1fed5dd8eff7e53d404ac06e93d6998c28bdb22671db11e",
+    "bytes": 20971
+  },
+  "verdict": "qualified-source-discovery-metadata-only",
+  "blockingIssues": [],
+  "checks": [
+    {
+      "name": "batch-original-hash-matches-parent-readback",
+      "passed": true,
+      "detail": {
+        "expected": "4ed5065245eda2e3c1fed5dd8eff7e53d404ac06e93d6998c28bdb22671db11e",
+        "actual": "4ed5065245eda2e3c1fed5dd8eff7e53d404ac06e93d6998c28bdb22671db11e"
+      }
+    },
+    {
+      "name": "batch-format-version-id",
+      "passed": true
+    },
+    {
+      "name": "registry-original-pin",
+      "passed": true,
+      "detail": {
+        "registrySha256": "53d8d773ed333d3dc82bd352d060f32dbb2a1ad1bd6d11d51d1843bdb8ebd7af"
+      }
+    },
+    {
+      "name": "complete-receipt:quality/continuous-program-maintenance-20261017/national-discovery/batch-001.json",
+      "passed": true
+    },
+    {
+      "name": "complete-receipt:quality/continuous-program-maintenance-20261017/national-discovery/batch-002.json",
+      "passed": true
+    },
+    {
+      "name": "complete-receipt:quality/continuous-program-maintenance-20261017/national-discovery/batch-003.json",
+      "passed": true
+    },
+    {
+      "name": "selection-maximum-10",
+      "passed": true
+    },
+    {
+      "name": "selection-exact-first-unattempted-MOE-order",
+      "passed": true,
+      "detail": {
+        "expected": [
+          "moe-4111013630",
+          "moe-4111013901",
+          "moe-4111013904",
+          "moe-4111014019",
+          "moe-4111014201",
+          "moe-4111014596",
+          "moe-4111014139",
+          "moe-4111010858",
+          "moe-4111010853",
+          "moe-4111010857"
+        ],
+        "actual": [
+          "moe-4111013630",
+          "moe-4111013901",
+          "moe-4111013904",
+          "moe-4111014019",
+          "moe-4111014201",
+          "moe-4111014596",
+          "moe-4111014139",
+          "moe-4111010858",
+          "moe-4111010853",
+          "moe-4111010857"
+        ]
+      }
+    },
+    {
+      "name": "selection-no-previous-target-replay",
+      "passed": true
+    },
+    {
+      "name": "prior-receipt-count-and-attempt-count",
+      "passed": true,
+      "detail": {
+        "actualPriorReceipts": 2,
+        "actualPriorDistinctTargets": 20
+      }
+    },
+    {
+      "name": "prior-receipt-pins-and-byte-lengths",
+      "passed": true
+    },
+    {
+      "name": "result-order-matches-selection",
+      "passed": true
+    },
+    {
+      "name": "result-registry-identities-categories-and-source-rows",
+      "passed": true
+    },
+    {
+      "name": "summary-actual-status-counts",
+      "passed": true,
+      "detail": {
+        "actual": {
+          "unknown": 4,
+          "blocked": 1,
+          "found-official-source": 5
+        }
+      }
+    },
+    {
+      "name": "actual-selected-category-distribution",
+      "passed": true,
+      "detail": {
+        "actualDistribution": {
+          "bachelor-level": 8,
+          "higher-vocational-junior-college": 2,
+          "adult-higher-education": 0
+        }
+      }
+    },
+    {
+      "name": "category-list-means-permitted-queue-categories",
+      "passed": true
+    },
+    {
+      "name": "batch-observation-times",
+      "passed": true
+    },
+    {
+      "name": "all-results-current-claims-stay-unknown-and-unpublished",
+      "passed": true
+    },
+    {
+      "name": "source-count-status-contract",
+      "passed": true
+    },
+    {
+      "name": "source-provenance-explicit-and-no-raw-capture-claim",
+      "passed": true
+    },
+    {
+      "name": "evidence-URLs-HTTPS-without-credentials",
+      "passed": true
+    },
+    {
+      "name": "BHI-historical-2025-index-and-image-limit-disclosed",
+      "passed": true
+    },
+    {
+      "name": "UCASS-index-only-timeout-no-HTTP200-claim",
+      "passed": true
+    },
+    {
+      "name": "BPU-2026-closed-window-disclosed",
+      "passed": true
+    },
+    {
+      "name": "BGY-PDF-body-2024-vs-path-2025-short-course-disclosed",
+      "passed": true
+    },
+    {
+      "name": "BITC-undated-year-and-no-rollover-disclosed",
+      "passed": true
+    },
+    {
+      "name": "Gengdan-403-confined-to-actual-office-URL",
+      "passed": true
+    },
+    {
+      "name": "unknowns-not-promoted-by-domestic-outbound-or-historical-qualification",
+      "passed": true
+    },
+    {
+      "name": "summary-zero-fact-paid-write-publication-counts",
+      "passed": true
+    },
+    {
+      "name": "wire-transport-count-remains-unknown",
+      "passed": true
+    },
+    {
+      "name": "whole-queue-expected-counts-after-batch003",
+      "passed": true,
+      "detail": {
+        "distinctMissingInstitutionsActuallyInvestigated": 30,
+        "unattemptedMissingInstitutions": 2894,
+        "foundOfficialSource": 18,
+        "unknown": 9,
+        "blocked": 3,
+        "sourceReview": 18,
+        "sourceReviewHandedOff": 0,
+        "retryDue": 0
+      }
+    },
+    {
+      "name": "all-map-state-untouched-by-national-batch",
+      "passed": true
+    }
+  ],
+  "clarifications": [
+    {
+      "field": "selection.educationCategoriesIncluded",
+      "meaning": "Allowed categories in the complete missing-institution queue, not the category distribution of the ten selected schools.",
+      "allowedQueueCategories": [
+        "bachelor-level",
+        "higher-vocational-junior-college",
+        "adult-higher-education"
+      ],
+      "actualSelectedDistribution": {
+        "bachelor-level": 8,
+        "higher-vocational-junior-college": 2,
+        "adult-higher-education": 0
+      },
+      "adultSelected": 0,
+      "adultStillUnattempted": 244,
+      "requiresChangingOriginalBatch": false
+    },
+    {
+      "field": "results[].status=found-official-source",
+      "meaning": "An official international admissions source candidate was observed, including historical, undated and index-only observations. This is not current programme certification, catalogue completeness, current eligibility, a public import or a capture executor lease."
+    },
+    {
+      "field": "summary.searchQueries and directWebToolReadAttempts",
+      "meaning": "Recorded activity counts belong to the original discovery batch. This pure-local companion checks receipt consistency and does not independently reconstruct web tool transport or source content from preserved raw bytes; rawSourceCaptures=0."
+    }
+  ],
+  "wholeQueue": {
+    "evaluatedAt": "2026-10-17T06:37:17.405Z",
+    "allCompletedReceipts": [
+      {
+        "path": "quality/continuous-program-maintenance-20261017/national-discovery/batch-001.json",
+        "sha256": "1173713dbad44ac58066269bda067be7def6435fefbc9e84357275494a7fbf75",
+        "bytes": 20825
+      },
+      {
+        "path": "quality/continuous-program-maintenance-20261017/national-discovery/batch-002.json",
+        "sha256": "67d9953ddbb1230ffb13822731b8428f8e8efae07cd3e7fec86a1617f9589669",
+        "bytes": 22013
+      },
+      {
+        "path": "quality/continuous-program-maintenance-20261017/national-discovery/batch-003.json",
+        "sha256": "4ed5065245eda2e3c1fed5dd8eff7e53d404ac06e93d6998c28bdb22671db11e",
+        "bytes": 20971
+      }
+    ],
+    "counts": {
+      "distinctMissingInstitutionsActuallyInvestigated": 30,
+      "unattemptedMissingInstitutions": 2894,
+      "foundOfficialSource": 18,
+      "unknown": 9,
+      "blocked": 3,
+      "sourceReview": 18,
+      "sourceReviewHandedOff": 0,
+      "retryDue": 0
+    },
+    "categories": [
+      {
+        "educationCategory": "bachelor-level",
+        "missing": 1140,
+        "actuallyInvestigated": 28,
+        "unattempted": 1112
+      },
+      {
+        "educationCategory": "higher-vocational-junior-college",
+        "missing": 1540,
+        "actuallyInvestigated": 2,
+        "unattempted": 1538
+      },
+      {
+        "educationCategory": "adult-higher-education",
+        "missing": 244,
+        "actuallyInvestigated": 0,
+        "unattempted": 244
+      }
+    ],
+    "nextFiniteFirstPass": [
+      {
+        "targetId": "moe-4111011090",
+        "officialNameZh": "北京京北职业技术学院",
+        "educationCategory": "higher-vocational-junior-college",
+        "moeOrdinal": 72,
+        "sourceSheet": "全国普通高等学校名单",
+        "sourceRow": 76
+      },
+      {
+        "targetId": "moe-4111011092",
+        "officialNameZh": "北京交通职业技术学院",
+        "educationCategory": "higher-vocational-junior-college",
+        "moeOrdinal": 73,
+        "sourceSheet": "全国普通高等学校名单",
+        "sourceRow": 77
+      },
+      {
+        "targetId": "moe-4111011626",
+        "officialNameZh": "北京青年政治学院",
+        "educationCategory": "higher-vocational-junior-college",
+        "moeOrdinal": 74,
+        "sourceSheet": "全国普通高等学校名单",
+        "sourceRow": 78
+      },
+      {
+        "targetId": "moe-4111012448",
+        "officialNameZh": "北京农业职业学院",
+        "educationCategory": "higher-vocational-junior-college",
+        "moeOrdinal": 75,
+        "sourceSheet": "全国普通高等学校名单",
+        "sourceRow": 79
+      },
+      {
+        "targetId": "moe-4111012451",
+        "officialNameZh": "北京政法职业学院",
+        "educationCategory": "higher-vocational-junior-college",
+        "moeOrdinal": 76,
+        "sourceSheet": "全国普通高等学校名单",
+        "sourceRow": 80
+      },
+      {
+        "targetId": "moe-4111012561",
+        "officialNameZh": "北京财贸职业学院",
+        "educationCategory": "higher-vocational-junior-college",
+        "moeOrdinal": 77,
+        "sourceSheet": "全国普通高等学校名单",
+        "sourceRow": 81
+      },
+      {
+        "targetId": "moe-4111012564",
+        "officialNameZh": "北京北大方正软件职业技术学院",
+        "educationCategory": "higher-vocational-junior-college",
+        "moeOrdinal": 78,
+        "sourceSheet": "全国普通高等学校名单",
+        "sourceRow": 82
+      },
+      {
+        "targetId": "moe-4111012565",
+        "officialNameZh": "北京经贸职业学院",
+        "educationCategory": "higher-vocational-junior-college",
+        "moeOrdinal": 79,
+        "sourceSheet": "全国普通高等学校名单",
+        "sourceRow": 83
+      },
+      {
+        "targetId": "moe-4111012566",
+        "officialNameZh": "北京经济技术职业学院",
+        "educationCategory": "higher-vocational-junior-college",
+        "moeOrdinal": 80,
+        "sourceSheet": "全国普通高等学校名单",
+        "sourceRow": 84
+      },
+      {
+        "targetId": "moe-4111012567",
+        "officialNameZh": "北京戏曲艺术职业学院",
+        "educationCategory": "higher-vocational-junior-college",
+        "moeOrdinal": 81,
+        "sourceSheet": "全国普通高等学校名单",
+        "sourceRow": 85
+      }
+    ],
+    "retryQueue": [
+      {
+        "targetId": "moe-4111010018",
+        "status": "unknown",
+        "nextDueAt": "2026-10-24T05:51:46.000Z",
+        "dueAtBatchCompletion": false
+      },
+      {
+        "targetId": "moe-4111010039",
+        "status": "unknown",
+        "nextDueAt": "2026-10-24T05:51:46.000Z",
+        "dueAtBatchCompletion": false
+      },
+      {
+        "targetId": "moe-4111010042",
+        "status": "unknown",
+        "nextDueAt": "2026-10-24T05:51:46.000Z",
+        "dueAtBatchCompletion": false
+      },
+      {
+        "targetId": "moe-4111010050",
+        "status": "blocked",
+        "nextDueAt": "2026-10-31T05:55:32.000Z",
+        "dueAtBatchCompletion": false
+      },
+      {
+        "targetId": "moe-4111011417",
+        "status": "blocked",
+        "nextDueAt": "2026-10-31T05:55:32.000Z",
+        "dueAtBatchCompletion": false
+      },
+      {
+        "targetId": "moe-4111012453",
+        "status": "unknown",
+        "nextDueAt": "2026-10-24T05:55:32.000Z",
+        "dueAtBatchCompletion": false
+      },
+      {
+        "targetId": "moe-4111013629",
+        "status": "unknown",
+        "nextDueAt": "2026-10-24T05:55:32.000Z",
+        "dueAtBatchCompletion": false
+      },
+      {
+        "targetId": "moe-4111013630",
+        "status": "unknown",
+        "nextDueAt": "2026-10-24T06:37:17.405Z",
+        "dueAtBatchCompletion": false
+      },
+      {
+        "targetId": "moe-4111013901",
+        "status": "unknown",
+        "nextDueAt": "2026-10-24T06:37:17.405Z",
+        "dueAtBatchCompletion": false
+      },
+      {
+        "targetId": "moe-4111013904",
+        "status": "blocked",
+        "nextDueAt": "2026-10-31T06:37:17.405Z",
+        "dueAtBatchCompletion": false
+      },
+      {
+        "targetId": "moe-4111014019",
+        "status": "unknown",
+        "nextDueAt": "2026-10-24T06:37:17.405Z",
+        "dueAtBatchCompletion": false
+      },
+      {
+        "targetId": "moe-4111014139",
+        "status": "unknown",
+        "nextDueAt": "2026-10-24T06:37:17.405Z",
+        "dueAtBatchCompletion": false
+      }
+    ],
+    "sourceReviewQueue": [
+      {
+        "targetId": "moe-4111010012",
+        "idempotencyKey": "moe-4111010012:1173713dbad44ac58066269bda067be7def6435fefbc9e84357275494a7fbf75",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111010015",
+        "idempotencyKey": "moe-4111010015:1173713dbad44ac58066269bda067be7def6435fefbc9e84357275494a7fbf75",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111010016",
+        "idempotencyKey": "moe-4111010016:1173713dbad44ac58066269bda067be7def6435fefbc9e84357275494a7fbf75",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111010020",
+        "idempotencyKey": "moe-4111010020:1173713dbad44ac58066269bda067be7def6435fefbc9e84357275494a7fbf75",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111010025",
+        "idempotencyKey": "moe-4111010025:1173713dbad44ac58066269bda067be7def6435fefbc9e84357275494a7fbf75",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111010029",
+        "idempotencyKey": "moe-4111010029:1173713dbad44ac58066269bda067be7def6435fefbc9e84357275494a7fbf75",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111010049",
+        "idempotencyKey": "moe-4111010049:1173713dbad44ac58066269bda067be7def6435fefbc9e84357275494a7fbf75",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111010051",
+        "idempotencyKey": "moe-4111010051:67d9953ddbb1230ffb13822731b8428f8e8efae07cd3e7fec86a1617f9589669",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111011149",
+        "idempotencyKey": "moe-4111011149:67d9953ddbb1230ffb13822731b8428f8e8efae07cd3e7fec86a1617f9589669",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111011232",
+        "idempotencyKey": "moe-4111011232:67d9953ddbb1230ffb13822731b8428f8e8efae07cd3e7fec86a1617f9589669",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111011418",
+        "idempotencyKey": "moe-4111011418:67d9953ddbb1230ffb13822731b8428f8e8efae07cd3e7fec86a1617f9589669",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111011625",
+        "idempotencyKey": "moe-4111011625:67d9953ddbb1230ffb13822731b8428f8e8efae07cd3e7fec86a1617f9589669",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111011831",
+        "idempotencyKey": "moe-4111011831:67d9953ddbb1230ffb13822731b8428f8e8efae07cd3e7fec86a1617f9589669",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111014201",
+        "idempotencyKey": "moe-4111014201:4ed5065245eda2e3c1fed5dd8eff7e53d404ac06e93d6998c28bdb22671db11e",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111014596",
+        "idempotencyKey": "moe-4111014596:4ed5065245eda2e3c1fed5dd8eff7e53d404ac06e93d6998c28bdb22671db11e",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111010858",
+        "idempotencyKey": "moe-4111010858:4ed5065245eda2e3c1fed5dd8eff7e53d404ac06e93d6998c28bdb22671db11e",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111010853",
+        "idempotencyKey": "moe-4111010853:4ed5065245eda2e3c1fed5dd8eff7e53d404ac06e93d6998c28bdb22671db11e",
+        "accepted": false
+      },
+      {
+        "targetId": "moe-4111010857",
+        "idempotencyKey": "moe-4111010857:4ed5065245eda2e3c1fed5dd8eff7e53d404ac06e93d6998c28bdb22671db11e",
+        "accepted": false
+      }
+    ],
+    "handoffLedgerPresent": false
+  },
+  "recordedSources": [
+    {
+      "targetId": "moe-4111014201",
+      "url": "https://english.bhi.edu.cn/en/article/detail?cid=27&detail=487",
+      "evidenceAcquisition": "primary-official-search-index",
+      "sourcePublishedAt": null,
+      "admissionsYearObserved": 2025,
+      "rawBytesCaptured": false
+    },
+    {
+      "targetId": "moe-4111014201",
+      "url": "https://english.bhi.edu.cn/en/videos?cid=37",
+      "evidenceAcquisition": "primary-official-search-index",
+      "sourcePublishedAt": null,
+      "admissionsYearObserved": null,
+      "rawBytesCaptured": false
+    },
+    {
+      "targetId": "moe-4111014596",
+      "url": "https://intl.ucass.edu.cn/lxskd1/zwxm.htm",
+      "evidenceAcquisition": "primary-official-search-index",
+      "sourcePublishedAt": null,
+      "admissionsYearObserved": 2026,
+      "rawBytesCaptured": false
+    },
+    {
+      "targetId": "moe-4111010858",
+      "url": "https://www.bpu.edu.cn/international/info/1003/1283.htm",
+      "evidenceAcquisition": "read-primary-official-page",
+      "sourcePublishedAt": "2026-04-28",
+      "admissionsYearObserved": 2026,
+      "rawBytesCaptured": false
+    },
+    {
+      "targetId": "moe-4111010853",
+      "url": "https://gjc.bgy.edu.cn/docs/2025-03/160a93f1991e4423ab436ee2da04e8f8.pdf",
+      "evidenceAcquisition": "read-primary-official-PDF-text",
+      "sourcePublishedAt": null,
+      "admissionsYearObserved": 2024,
+      "rawBytesCaptured": false
+    },
+    {
+      "targetId": "moe-4111010857",
+      "url": "https://www.bitc.edu.cn/bjxxzyjsxy_en/hta/Apply_for_Diploma_program.htm",
+      "evidenceAcquisition": "read-primary-official-page",
+      "sourcePublishedAt": null,
+      "admissionsYearObserved": null,
+      "rawBytesCaptured": false
+    }
+  ],
+  "boundaries": {
+    "localConsistencyQualificationOnly": true,
+    "originalBatchEdited": false,
+    "networkRequests": 0,
+    "captureCliRuns": 0,
+    "modelCalls": 0,
+    "consumerRuns": 0,
+    "canonicalWrites": 0,
+    "stateWrites": 0,
+    "cloudDatabaseReads": 0,
+    "cloudDatabaseWrites": 0,
+    "publications": 0,
+    "currentProgrammesCertified": 0,
+    "catalogueCompleteness": "unknown",
+    "protectedPaidState": "Preserve ambiguous_paid_outcome STOP, consumed and unknown paid scopes, budgets, owner locks and original receipts.",
+    "cloudflareD1EarliestOrdinaryRetryAt": "2026-10-18T00:00:00.000Z"
+  },
+  "inputPins": [
+    {
+      "path": "quality/continuous-program-maintenance-20261017/national-discovery/batch-003.json",
+      "sha256": "4ed5065245eda2e3c1fed5dd8eff7e53d404ac06e93d6998c28bdb22671db11e",
+      "bytes": 20971
+    },
+    {
+      "path": "content/targets/national-university-registry.json",
+      "sha256": "53d8d773ed333d3dc82bd352d060f32dbb2a1ad1bd6d11d51d1843bdb8ebd7af",
+      "bytes": 3812554
+    },
+    {
+      "path": "quality/continuous-program-maintenance-20261017/national-discovery/batch-001.json",
+      "sha256": "1173713dbad44ac58066269bda067be7def6435fefbc9e84357275494a7fbf75",
+      "bytes": 20825
+    },
+    {
+      "path": "quality/continuous-program-maintenance-20261017/national-discovery/batch-002.json",
+      "sha256": "67d9953ddbb1230ffb13822731b8428f8e8efae07cd3e7fec86a1617f9589669",
+      "bytes": 22013
+    },
+    {
+      "path": ".tmp/university-maintenance/current-state.json",
+      "sha256": "f2802916886ad9ef3ed836ece31b6942982eb22b3615a2acac777d527e5131c9",
+      "bytes": 63350
+    }
+  ]
+}

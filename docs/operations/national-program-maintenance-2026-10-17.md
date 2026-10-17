@@ -91,3 +91,7 @@ The qualified security candidate passed the full 255-page/755-programme API and 
 ## Business sequencing
 
 The first audience is prospective international students. The immediate acquisition promise must match measured coverage. Broader promotion should follow useful, current coverage for initial student segments and clear disclosure of the remaining backlog. The free product needs trustworthy discovery, filters, official evidence and application timing first. Paid CV/profile-to-programme analysis should be evaluated later against actual eligibility evidence, user demand and inference costs; a generated score without reliable catalogue coverage would amplify existing gaps. See `docs/growth/` for the first-cohort and commercialization documents.
+
+## 06:28 UTC finite follow-up
+
+See [the immutable-source follow-up handoff](national-maintenance-heartbeat-2026-10-17T0628Z.md): ten additional national identities investigated (five official sources, four unknown, one blocked URL), oldest twenty map schools triaged with no complete factual approval, and absent admin/publication lock owners observed without restart. Three national batches now cover thirty missing identities; all paid/canonical/cloud/publication deltas are zero.
