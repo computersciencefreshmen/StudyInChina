@@ -1,0 +1,69 @@
+{
+  "format": "studyinchina.national-university-registry-source-receipt",
+  "version": 1,
+  "listYear": 2026,
+  "asOf": "2026-06-17",
+  "publishedAt": "2026-06-18",
+  "scope": {
+    "excludesHongKongMacaoTaiwan": true,
+    "officialScopeNoteZh": "本名单未包含港澳台地区高等学校。"
+  },
+  "expectedCounts": {
+    "total": 3196,
+    "general": 2952,
+    "bachelor": 1412,
+    "higherVocational": 1540,
+    "adult": 244
+  },
+  "captures": {
+    "announcement": {
+      "url": "https://www.moe.gov.cn/jyb_xxgk/s5743/s5744/202606/t20260618_1441074.html",
+      "finalUrl": "http://www.moe.gov.cn/jyb_xxgk/s5743/s5744/202606/t20260618_1441074.html",
+      "httpStatus": 200,
+      "capturedAt": "2026-10-17T05:38:18.876188+00:00",
+      "sha256": "ebd5e7a3d3a595f458a8d9f598a0277f70ea2ea4912df53ac9084f9be46ad617",
+      "bytes": 13439,
+      "contentType": "text/html",
+      "fileName": "moe-list-page.html"
+    },
+    "general": {
+      "url": "https://www.moe.gov.cn/jyb_xxgk/s5743/s5744/202606/W020260618416094865984.xls",
+      "finalUrl": "http://www.moe.gov.cn/jyb_xxgk/s5743/s5744/202606/W020260618416094865984.xls",
+      "httpStatus": 200,
+      "capturedAt": "2026-10-17T05:38:59.236308+00:00",
+      "sha256": "29c40f083b639888e429cf40b68f9a75782d1ce81131c99aabca65b65b36eaea",
+      "bytes": 464896,
+      "contentType": "application/vnd.ms-excel",
+      "fileName": "general-institutions.xls"
+    },
+    "adult": {
+      "url": "https://www.moe.gov.cn/jyb_xxgk/s5743/s5744/202606/W020260618307096079727.xls",
+      "finalUrl": "http://www.moe.gov.cn/jyb_xxgk/s5743/s5744/202606/W020260618307096079727.xls",
+      "httpStatus": 200,
+      "capturedAt": "2026-10-17T05:39:05.418688+00:00",
+      "sha256": "34765edba0ceda935ca7d4455bc2eb105b94eee8d8d4d7c9150fba327cf11bbf",
+      "bytes": 56832,
+      "contentType": "application/vnd.ms-excel",
+      "fileName": "adult-institutions.xls"
+    },
+    "renameShanghaiSport": {
+      "url": "https://www.moe.gov.cn/srcsite/A03/s181/202306/t20230616_1064609.html",
+      "finalUrl": "http://www.moe.gov.cn/srcsite/A03/s181/202306/t20230616_1064609.html",
+      "httpStatus": 200,
+      "capturedAt": "2026-10-17T05:40:52.136986+00:00",
+      "sha256": "91b9d1d6164c36d4781a4a6ada180f94fa48c32cd5925d62a343aa7f6e496622",
+      "bytes": 16299,
+      "contentType": "text/html",
+      "fileName": "shanghai-sport-rename.html"
+    }
+  },
+  "aliases": [
+    {
+      "localNameZh": "上海体育学院",
+      "officialNameZh": "上海体育大学",
+      "institutionCode": "4131010277",
+      "evidenceCaptureId": "renameShanghaiSport",
+      "evidenceText": "同意上海体育学院更名为上海体育大学，学校标识码为4131010277"
+    }
+  ]
+}

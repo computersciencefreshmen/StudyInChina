@@ -7,7 +7,6 @@ import { pathToFileURL } from 'node:url'
 
 import { bundleSchema } from '../../src/lib/data/schema'
 import type {
-  AdmissionCycle,
   DataBundle,
   Program,
 } from '../../src/lib/data/types'
@@ -67,7 +66,7 @@ type EnrichmentRecord = {
   programNameEn: string
   officialUrl: string
   programId: string | null
-  status: 'enriched' | 'identity-confirmed' | 'no-grounded-facts' | 'fetch-failed' | 'program-not-found'
+  status: 'candidate' | 'identity-confirmed' | 'no-grounded-facts' | 'fetch-failed' | 'program-not-found'
   facts: EvidenceFact[]
   issues: string[]
 }
@@ -111,12 +110,6 @@ function parseArguments(arguments_: string[]): Options {
 
 function hash(value: string): string {
   return createHash('sha256').update(value).digest('hex').slice(0, 12)
-}
-
-function addDays(value: string, days: number): string {
-  const date = new Date(`${value}T00:00:00.000Z`)
-  date.setUTCDate(date.getUTCDate() + days)
-  return date.toISOString().slice(0, 10)
 }
 
 function normalizedName(value: string): string {
@@ -177,8 +170,13 @@ function parseEnglishDate(month: string, day: string, year: string): string | nu
   const numericYear = Number(year)
   if (!monthNumber || numericDay < 1 || numericDay > 31 || numericYear < 2025) return null
   const value = `${numericYear}-${String(monthNumber).padStart(2, '0')}-${String(numericDay).padStart(2, '0')}`
+  return isCalendarDate(value) ? value : null
+}
+
+function isCalendarDate(value: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/u.test(value)) return false
   const parsed = new Date(`${value}T00:00:00.000Z`)
-  return parsed.toISOString().slice(0, 10) === value ? value : null
+  return !Number.isNaN(parsed.valueOf()) && parsed.toISOString().slice(0, 10) === value
 }
 
 export function extractGroundedFacts(
@@ -250,8 +248,11 @@ export function extractGroundedFacts(
           .map((match) => `${match[1]}-${String(Number(match[2])).padStart(2, '0')}-${String(Number(match[3])).padStart(2, '0')}`),
         ...[...quote.matchAll(englishPattern)]
           .map((match) => parseEnglishDate(match[1] ?? '', match[2] ?? '', match[3] ?? '')),
-      ].filter((value): value is string => Boolean(value))
+      ]
+      // A malformed endpoint must not turn a range into a different single date.
+      if (rangeDates.some((value) => value === null || !isCalendarDate(value))) continue
       if (rangeDates.length >= 2) {
+        if (rangeDates[0]! > rangeDates[1]!) continue
         candidates.push({ field: 'opensOn', value: rangeDates[0]!, evidence: evidenceSlice(quote) })
         candidates.push({ field: 'closesOn', value: rangeDates[1]!, evidence: evidenceSlice(quote) })
         continue
@@ -267,7 +268,7 @@ export function extractGroundedFacts(
       } else if (english) {
         value = parseEnglishDate(english[1] ?? '', english[2] ?? '', english[3] ?? '')
       }
-      if (!value || Number.isNaN(new Date(`${value}T00:00:00.000Z`).valueOf())) continue
+      if (!value || !isCalendarDate(value)) continue
       candidates.push({
         field: isOpen ? 'opensOn' : 'closesOn',
         value,
@@ -370,26 +371,8 @@ function findProgram(bundle: DataBundle, record: ReviewRecord): Program | null {
   )) ?? null
 }
 
-function factValue<T extends EvidenceFact['value']>(
-  facts: EvidenceFact[],
-  field: EvidenceFact['field'],
-): T | null {
-  return (facts.find((fact) => fact.field === field)?.value as T | undefined) ?? null
-}
-
-function inferAcademicYear(record: ReviewRecord, checkedAt: string): string {
-  const year = Number(
-    record.intake.match(/20\d{2}/u)?.[0]
-    ?? record.deadline?.slice(0, 4)
-    ?? record.applicationOpen?.slice(0, 4)
-    ?? checkedAt.slice(0, 4),
-  )
-  const spring = record.intake.toLocaleLowerCase('en').includes('spring')
-  const start = spring ? year - 1 : year
-  return `${start}-${start + 1}`
-}
-
-function enrichBundle(
+/** Snippets propose field changes; they never certify unrelated canonical claims. */
+export function stageFactCandidates(
   bundle: DataBundle,
   recordFacts: Array<{
     record: ReviewRecord
@@ -398,85 +381,27 @@ function enrichBundle(
     identityConfirmed: boolean
   }>,
   checkedAt: string,
-): DataBundle {
-  const programs = new Map(bundle.programs.map((program) => [program.id, program]))
-  const cycles = new Map(bundle.admissionCycles.map((cycle) => [cycle.id, cycle]))
-  for (const item of recordFacts) {
-    if (item.identityConfirmed) {
-      programs.set(item.program.id, {
-        ...item.program,
-        verifiedAt: checkedAt,
-        reviewAfter: addDays(checkedAt, 30),
-        status: 'verified',
-      })
-    }
-    const duration = factValue<number>(item.facts, 'durationMonths')
-    if (duration !== null) {
-      programs.set(item.program.id, {
-        ...(programs.get(item.program.id) ?? item.program),
-        durationMonths: duration,
-        verificationScope: item.program.verificationScope === 'complete' || item.program.details ? 'complete' : 'facts',
-        verifiedAt: checkedAt,
-        reviewAfter: addDays(checkedAt, 30),
-      })
-    }
-
-    const tuition = factValue<number>(item.facts, 'tuitionCny')
-    const tuitionPeriod = factValue<Exclude<AdmissionCycle['tuitionPeriod'], null | undefined>>(
-      item.facts,
-      'tuitionPeriod',
-    )
-    const applicationFee = factValue<number>(item.facts, 'applicationFeeCny')
-    const graceStart = addDays(checkedAt, -30)
-    const extractedCloses = factValue<string>(item.facts, 'closesOn')
-    const reviewCloses = item.record.deadline && item.record.deadline >= graceStart
-      ? item.record.deadline
-      : null
-    const closesOn = extractedCloses && extractedCloses >= graceStart
-      ? extractedCloses
-      : reviewCloses
-    const extractedOpens = factValue<string>(item.facts, 'opensOn')
-    const opensOn = closesOn
-      ? (extractedOpens ?? item.record.applicationOpen)
-      : null
-    if (tuition === null && applicationFee === null && !opensOn && !closesOn) continue
-    const existing = [...cycles.values()].find((cycle) => cycle.programId === item.program.id)
-    const candidateOpensOn = opensOn ?? existing?.opensOn ?? null
-    const effectiveClosesOn = closesOn ?? existing?.closesOn ?? null
-    const effectiveOpensOn = candidateOpensOn && effectiveClosesOn
-      && candidateOpensOn > effectiveClosesOn
-      ? null
-      : candidateOpensOn
-    const intakeText = item.record.intake.toLocaleLowerCase('en')
-    const intake: AdmissionCycle['intake'] = intakeText.includes('spring')
-      ? 'spring'
-      : (intakeText.includes('autumn') || intakeText.includes('fall')) ? 'autumn' : 'other'
-    const cycle: AdmissionCycle = {
-      id: existing?.id ?? `cycle-${hash(`${item.program.id}|${item.record.intake}|${checkedAt}`)}`,
-      programId: item.program.id,
-      academicYear: existing?.academicYear ?? inferAcademicYear(item.record, checkedAt),
-      intake: existing?.intake ?? intake,
-      opensOn: effectiveOpensOn,
-      closesOn: effectiveClosesOn,
-      dateStatus: effectiveOpensOn || effectiveClosesOn ? 'published' : 'not-announced',
-      tuitionCny: tuition ?? existing?.tuitionCny ?? null,
-      tuitionPeriod: tuitionPeriod ?? existing?.tuitionPeriod ?? null,
-      tuitionStatus: tuition !== null ? 'confirmed' : existing?.tuitionStatus ?? null,
-      applicationFeeCny: applicationFee ?? existing?.applicationFeeCny ?? null,
-      evidenceBasis: 'cycle-specific',
-      factScope: tuition !== null || applicationFee !== null ? 'partial' : 'dates-only',
-      sourceIds: [...new Set([...(existing?.sourceIds ?? []), ...item.program.sourceIds])],
-      verifiedAt: checkedAt,
-      reviewAfter: addDays(checkedAt, 7),
-      status: 'verified',
-    }
-    cycles.set(cycle.id, cycle)
-  }
-  return bundleSchema.parse({
-    ...bundle,
-    programs: [...programs.values()],
-    admissionCycles: [...cycles.values()],
-  })
+) {
+  const proposals = recordFacts.map((item) => ({
+    programId: item.program.id,
+    institutionId: item.record.institutionId,
+    officialUrl: item.record.officialUrl,
+    observedAt: checkedAt,
+    status: 'draft' as const,
+    publicationEligible: false as const,
+    identityConfirmed: item.identityConfirmed,
+    // Do not merge old fees/dates, infer an intake year, or copy review-queue dates.
+    facts: item.facts,
+    issues: [
+      'Unverified deterministic proposal; scoped source and field review required before certification.',
+      ...(item.facts.some((fact) => fact.field === 'closesOn'
+        && typeof fact.value === 'string' && fact.value < checkedAt)
+        ? ['Expired deadline retained as historical evidence only; applications are not reopened.']
+        : []),
+    ],
+  }))
+  // The CLI retains its snapshot outputs, but no canonical row or audit stamp changes.
+  return { bundle, proposals }
 }
 
 async function main(): Promise<void> {
@@ -517,7 +442,7 @@ async function main(): Promise<void> {
     }
   }
 
-  const enriched: Array<{
+  const candidates: Array<{
     record: ReviewRecord
     program: Program
     facts: EvidenceFact[]
@@ -559,7 +484,7 @@ async function main(): Promise<void> {
         .map(normalizedName)
         .some((name) => name.length >= 6 && normalizedSource.includes(name))
       if (facts.length > 0 || identityConfirmed) {
-        enriched.push({ record, program, facts, identityConfirmed })
+        candidates.push({ record, program, facts, identityConfirmed })
       }
       auditRecords.push({
         institutionId: record.institutionId,
@@ -567,32 +492,48 @@ async function main(): Promise<void> {
         officialUrl: url,
         programId: program.id,
         status: facts.length > 0
-          ? 'enriched'
+          ? 'candidate'
           : identityConfirmed ? 'identity-confirmed' : 'no-grounded-facts',
         facts,
-        issues: [],
+        issues: facts.length > 0 || identityConfirmed
+          ? ['Candidate observation only; canonical values and verification dates remain unchanged.']
+          : [],
       })
     }
   }
 
-  const output = enrichBundle(bundle, enriched, options.checkedAt)
+  const staged = stageFactCandidates(bundle, candidates, options.checkedAt)
+  const output = staged.bundle
   await mkdir(options.outputDirectory, { recursive: true })
   await mkdir(resolve(options.auditPath, '..'), { recursive: true })
-  for (const [name, value] of [
-    ['programs', output.programs],
-    ['admission-cycles', output.admissionCycles],
-  ] as const) {
-    await writeFile(
-      join(options.outputDirectory, `${name}.json`),
-      `${JSON.stringify(value, null, 2)}\n`,
-      'utf8',
-    )
+  if (options.outputDirectory !== options.dataDirectory) {
+    for (const [name, value] of [
+      ['programs', output.programs],
+      ['admission-cycles', output.admissionCycles],
+    ] as const) {
+      await writeFile(
+        join(options.outputDirectory, `${name}.json`),
+        `${JSON.stringify(value, null, 2)}\n`,
+        'utf8',
+      )
+    }
   }
+  await writeFile(
+    join(options.outputDirectory, 'fact-proposals.json'),
+    `${JSON.stringify({ mode: 'candidate-only', proposals: staged.proposals }, null, 2)}\n`,
+    'utf8',
+  )
   const summary = {
+    mode: 'candidate-only',
     checkedAt: options.checkedAt,
     selectedUrls: selectedUrls.length,
     records: auditRecords.length,
-    enriched: auditRecords.filter((record) => record.status === 'enriched').length,
+    candidateRecords: staged.proposals.length,
+    factCandidateRecords: auditRecords.filter((record) => record.status === 'candidate').length,
+    certifiedPrograms: 0,
+    certifiedCycles: 0,
+    // Legacy counter: observations do not constitute certified enrichment.
+    enriched: 0,
     identityConfirmed: auditRecords.filter(
       (record) => record.status === 'identity-confirmed',
     ).length,

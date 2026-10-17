@@ -1,0 +1,276 @@
+name: University program maintenance (source only)
+
+# Cron becomes active only after this file reaches the default branch. A new
+# workflow_dispatch may also need default-branch registration before branch runs.
+# GitHub schedules can be delayed/dropped; hourly is a cadence, not an SLA.
+on:
+  schedule:
+    - cron: "23 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: university-program-maintenance-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    name: One bounded official-source batch
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      CI: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+
+    steps:
+      - name: Check out the selected revision
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Validate source-only maintenance boundaries
+        id: validation
+        run: >-
+          node node_modules/vitest/vitest.mjs run
+          tests/unit/university-maintenance-plan.test.ts
+          tests/unit/university-maintenance-capture.test.ts
+          tests/unit/university-maintenance-db.test.ts
+          tests/unit/university-program-maintenance-workflow.test.ts
+
+      # Restore one coherent generation: never combine a newer state with an
+      # older ledger/checkpoint cache. Cache is evictable, repository-accessible
+      # storage (including default-branch cache access from forks), NOT private R2.
+      # Only public official-source bytes/operational metadata belong here:
+      # never applicant documents, credentials, cookies or other user data.
+      - name: Restore scheduling ledger and capture checkpoints
+        id: checkpoint_cache
+        uses: actions/cache/restore@v6
+        with:
+          path: |
+            .tmp/university-maintenance/state.json
+            .tmp/university-maintenance/state.json.lock
+            .tmp/university-maintenance/maintenance.sqlite
+            .tmp/university-maintenance/maintenance.sqlite-journal
+            .official-harvest/university-maintenance
+          key: university-maintenance-v1-${{ runner.os }}-${{ github.ref }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            university-maintenance-v1-${{ runner.os }}-${{ github.ref }}-
+
+      - name: Resolve the China calendar date
+        id: date
+        shell: bash
+        run: |
+          node --import tsx --input-type=module <<'NODE'
+          import { appendFileSync } from 'node:fs';
+          import { getTodayDate } from './src/lib/data/freshness.ts';
+          appendFileSync(process.env.GITHUB_OUTPUT, 'today=' + getTodayDate() + '\n');
+          NODE
+
+      - name: Plan one batch of at most twenty visible universities
+        id: plan
+        run: >-
+          node --import tsx scripts/automation/build-university-maintenance-plan.ts
+          --today "${{ steps.date.outputs.today }}"
+          --data-dir content/data
+          --output .tmp/university-maintenance/plan.json
+          --state-file .tmp/university-maintenance/state.json
+          --limit 20
+
+      - name: Retain the original plan identity
+        id: batch
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync, appendFileSync } from 'node:fs';
+          const plan = JSON.parse(readFileSync('.tmp/university-maintenance/plan.json', 'utf8'));
+          if (!/^[a-f0-9]{64}$/.test(plan.planSha256) || plan.limit !== 20
+              || !Array.isArray(plan.selectedUniversityIds) || plan.selectedUniversityIds.length > 20) {
+            throw new Error('Invalid finite maintenance plan');
+          }
+          appendFileSync(process.env.GITHUB_OUTPUT,
+            'plan_sha=' + plan.planSha256 + '\nselected=' + plan.selectedUniversityIds.length
+            + '\nhas_work=' + (plan.selectedUniversityIds.length > 0) + '\n');
+          NODE
+
+      - name: Mirror original coverage when all universities are on cooldown
+        id: empty_ledger
+        if: steps.batch.outputs.has_work == 'false'
+        continue-on-error: true
+        run: >-
+          node --import tsx scripts/automation/sync-university-maintenance-db.ts
+          --plan .tmp/university-maintenance/plan.json
+          --database .tmp/university-maintenance/maintenance.sqlite
+
+      - name: Capture at most two approved source URLs per selected university
+        id: capture
+        if: steps.batch.outputs.has_work == 'true'
+        continue-on-error: true
+        run: >-
+          node --import tsx scripts/automation/capture-university-maintenance-sources.ts
+          --plan .tmp/university-maintenance/plan.json
+          --today "${{ steps.date.outputs.today }}"
+          --data-dir content/data
+          --state-file .tmp/university-maintenance/state.json
+          --output-dir .official-harvest/university-maintenance
+
+      - name: Stage only the exact plan report and results for inspection
+        id: receipts
+        if: steps.capture.outcome == 'success'
+        env:
+          PLAN_SHA: ${{ steps.batch.outputs.plan_sha }}
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { copyFileSync, readFileSync } from 'node:fs';
+          import { join } from 'node:path';
+          const sha = process.env.PLAN_SHA;
+          const plan = JSON.parse(readFileSync('.tmp/university-maintenance/plan.json', 'utf8'));
+          if (!/^[a-f0-9]{64}$/.test(sha) || sha !== plan.planSha256) throw new Error('Original plan changed');
+          const base = join('.official-harvest/university-maintenance', sha);
+          for (const name of ['report', 'results']) {
+            const source = join(base, name + '.json');
+            if (JSON.parse(readFileSync(source, 'utf8')).planSha256 !== sha) throw new Error('Receipt plan mismatch');
+            copyFileSync(source, join('.tmp/university-maintenance', name + '.json'));
+          }
+          NODE
+
+      # SQLite is an inspectable query mirror. The sync validates the original
+      # plan/report and raw hashes, closes its DELETE-journal database, and does
+      # not advance scheduling state or certify programme facts.
+      - name: Mirror exact capture observations into SQLite before advancing state
+        id: ledger
+        if: steps.receipts.outcome == 'success'
+        continue-on-error: true
+        env:
+          CAPTURE_DIRECTORY: .official-harvest/university-maintenance/${{ steps.batch.outputs.plan_sha }}
+        run: >-
+          node --import tsx scripts/automation/sync-university-maintenance-db.ts
+          --plan .tmp/university-maintenance/plan.json
+          --report "$CAPTURE_DIRECTORY/report.json"
+          --database .tmp/university-maintenance/maintenance.sqlite
+
+      - name: Record exact outcomes after the ledger transaction
+        id: record
+        if: steps.ledger.outcome == 'success'
+        continue-on-error: true
+        env:
+          CAPTURE_DIRECTORY: .official-harvest/university-maintenance/${{ steps.batch.outputs.plan_sha }}
+        run: >-
+          node --import tsx scripts/automation/build-university-maintenance-plan.ts
+          --today "${{ steps.date.outputs.today }}"
+          --data-dir content/data
+          --output .tmp/university-maintenance/next-plan.json
+          --state-file .tmp/university-maintenance/state.json
+          --limit 20
+          --record-attempts "$CAPTURE_DIRECTORY/results.json"
+
+      - name: Confirm source capture did not change canonical data or manifests
+        id: canonical
+        if: always()
+        run: git diff --exit-code -- content/data content/source-manifests
+
+      # Save even an incomplete/failed capture. Preserve started markers and
+      # owner locks; do not clear them or replay an uncertain source request.
+      # Cache save can be denied/evicted: this is best-effort continuity only.
+      - name: Preserve state ledger and partial source checkpoints
+        id: checkpoint_save
+        if: always() && steps.checkpoint_cache.outcome == 'success' && (steps.batch.outputs.has_work == 'true' || steps.empty_ledger.outcome == 'success')
+        uses: actions/cache/save@v6
+        with:
+          path: |
+            .tmp/university-maintenance/state.json
+            .tmp/university-maintenance/state.json.lock
+            .tmp/university-maintenance/maintenance.sqlite
+            .tmp/university-maintenance/maintenance.sqlite-journal
+            .official-harvest/university-maintenance
+          key: ${{ steps.checkpoint_cache.outputs.cache-primary-key }}
+
+      # Exact allowlist only. Do not upload the raw/robots/checkpoint directory.
+      - name: Upload source-only inspection artifacts
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: university-maintenance-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .tmp/university-maintenance/plan.json
+            .tmp/university-maintenance/report.json
+            .tmp/university-maintenance/results.json
+            .tmp/university-maintenance/maintenance.sqlite
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Explain observed outcomes and remaining verification work
+        if: always()
+        env:
+          CAPTURE_OUTCOME: ${{ steps.capture.outcome }}
+          LEDGER_OUTCOME: ${{ steps.ledger.outcome }}
+          EMPTY_LEDGER_OUTCOME: ${{ steps.empty_ledger.outcome }}
+          RECORD_OUTCOME: ${{ steps.record.outcome }}
+          CACHE_OUTCOME: ${{ steps.checkpoint_save.outcome }}
+          CACHE_MATCH: ${{ steps.checkpoint_cache.outputs.cache-matched-key }}
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { existsSync, readFileSync, appendFileSync } from 'node:fs';
+          const read = path => existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')) : null;
+          const plan = read('.tmp/university-maintenance/plan.json');
+          const report = read('.tmp/university-maintenance/report.json');
+          const exact = plan && report && report.planSha256 === plan.planSha256;
+          const sources = exact ? report.results.flatMap(row => row.sources) : [];
+          const counts = Object.fromEntries(['captured', 'unchanged', 'blocked', 'failed']
+            .map(status => [status, sources.filter(source => source.outcome === status).length]));
+          const schools = exact ? Object.fromEntries(['captured_pending_review', 'held', 'no_sources']
+            .map(status => [status, report.results.filter(row => row.processingStatus === status).length])) : null;
+          const lines = [
+            '### University maintenance: source acquisition only',
+            '- Original plan: ' + (plan?.planSha256 ?? 'not generated'),
+            '- Universities selected: ' + (plan?.selectedUniversityIds.length ?? 'unknown') + ' (maximum 20; maximum 40 source URLs).',
+            '- Exact-plan terminal source observations: ' + (exact ? JSON.stringify(counts) : 'not available; no source success inferred'),
+            '- University acquisition outcomes: ' + (schools ? JSON.stringify(schools) : 'not available'),
+            '- Stages: capture=' + process.env.CAPTURE_OUTCOME + ', ledger=' + process.env.LEDGER_OUTCOME
+              + ', cooldown-plan-ledger=' + process.env.EMPTY_LEDGER_OUTCOME
+              + ', scheduling=' + process.env.RECORD_OUTCOME + ', cache-save=' + process.env.CACHE_OUTCOME + '.',
+            '- Captured or unchanged bytes are NOT verified admissions facts. Facts verified: 0. Publication performed: false.',
+            '- Blocked/failed sources retain their real status and cooldown; no deadline, fee or review date is renewed.',
+            '- SQLite stores observation/query history only; local hash validation does not establish publication-qualified private evidence.',
+            '- Checkpoint cache is repository-accessible and evictable, not confidential storage or a durability guarantee. Never put user data or credentials there.',
+            '- Prior checkpoint cache: ' + (process.env.CACHE_MATCH ? 'restored a branch-scoped generation' : 'cache miss; prior fairness/checkpoint history unavailable'),
+            '- Source locks and interrupted markers require owner reconciliation; this workflow does not clear them.',
+            '- Cron requires default-branch installation and may be delayed/dropped; a new manual workflow may also require default-branch registration.',
+          ];
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
+          NODE
+
+      - name: Preserve a failure signal for incomplete maintenance execution
+        if: always()
+        env:
+          VALIDATION_OUTCOME: ${{ steps.validation.outcome }}
+          RESTORE_OUTCOME: ${{ steps.checkpoint_cache.outcome }}
+          PLAN_OUTCOME: ${{ steps.plan.outcome }}
+          BATCH_OUTCOME: ${{ steps.batch.outcome }}
+          CAPTURE_OUTCOME: ${{ steps.capture.outcome }}
+          RECEIPTS_OUTCOME: ${{ steps.receipts.outcome }}
+          LEDGER_OUTCOME: ${{ steps.ledger.outcome }}
+          EMPTY_LEDGER_OUTCOME: ${{ steps.empty_ledger.outcome }}
+          RECORD_OUTCOME: ${{ steps.record.outcome }}
+          CANONICAL_OUTCOME: ${{ steps.canonical.outcome }}
+          CACHE_OUTCOME: ${{ steps.checkpoint_save.outcome }}
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          const failed = Object.entries(process.env).filter(([key, value]) =>
+            key.endsWith('_OUTCOME') && ['failure', 'cancelled'].includes(value));
+          if (failed.length) throw new Error('Source-only maintenance incomplete: ' + failed.map(([key]) => key).join(', '));
+          NODE

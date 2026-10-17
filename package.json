@@ -72,6 +72,9 @@
     "automation:seeds": "tsx scripts/automation/build-catalog-seeds.ts",
     "automation:sync": "tsx scripts/automation/pull-catalog-snapshot.ts",
     "automation:health": "tsx scripts/automation/operations-health.ts",
+    "maintenance:universities": "tsx scripts/automation/build-university-maintenance-plan.ts",
+    "maintenance:capture": "tsx scripts/automation/capture-university-maintenance-sources.ts",
+    "maintenance:ledger": "tsx scripts/automation/sync-university-maintenance-db.ts",
     "test:automation": "vitest run tests/unit/automation-"
   },
   "dependencies": {
@@ -82,6 +85,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "server-only": "0.0.1",
+    "undici": "7.29.1",
     "zod": "^4.0.0"
   },
   "devDependencies": {

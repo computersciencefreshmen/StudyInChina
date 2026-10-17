@@ -1,0 +1,77 @@
+# Nationwide international admissions coverage and continuous maintenance
+
+## Product goal and completion criteria
+
+The product helps prospective international students find study programmes in China and understand whether, when and how they can apply. A university identity on a map is only a starting point. Two manually corrected universities do not meet the nationwide requirement.
+
+The authoritative mainland institution universe is the Ministry of Education's 2026 list, published 18 June 2026, as of 17 June 2026: **3,196 institutions**, including 2,952 general institutions (1,412 bachelor-level and 1,540 higher-vocational/junior-college institutions) and 244 adult institutions. Its stated scope excludes Hong Kong, Macao and Taiwan. Listing an institution does not establish international-student admission eligibility. Adult/vocational institutions must remain identifiable and individually investigated rather than silently excluded or advertised as accepting international applicants.
+
+Official source: <https://www.moe.gov.cn/jyb_xxgk/s5743/s5744/202606/t20260618_1441074.html>.
+
+`content/targets/national-university-registry.json` is the operational target universe. It is not the public factual university collection. Its deterministic discovery queue includes every institution. Exact Chinese names match 271 existing catalogue identities; a separately evidenced Shanghai Sport University rename links the remaining identity. There are 272 linked identities and **2,924 institutions absent from the existing university collection**. Unknown admission availability remains unknown.
+
+For each institution, eventual completion means reconciling its official international admissions catalogue against the collected programme identities, levels, teaching languages and intake cycles. A single current programme is not proof of catalogue completeness. Record the official catalogue version/year, discovered rows, reviewed rows, excluded domestic-only rows, unresolved conflicts and missing evidence. Closed intakes remain historical evidence; do not roll their dates forward.
+
+## Architecture and responsibilities
+
+```mermaid
+flowchart TD
+  MOE[Official national institution list] --> Registry[National target registry and discovery queue]
+  Registry --> Discovery[Find official international admissions sources]
+  Discovery --> Capture[Bounded source capture and immutable receipts]
+  Capture --> Ledger[Maintenance state and SQLite observation ledger]
+  Capture --> Candidates[Programme and intake candidates]
+  Candidates --> Review[Field evidence and independent review]
+  Review --> Facts[Canonical programme and cycle facts]
+  Facts --> Gate[Freshness and publication policy]
+  Gate --> Snapshot[Versioned public catalogue snapshot]
+  Snapshot --> Website[Website and public API]
+```
+
+The registry answers “which institutions have we not investigated?” The operational ledger answers “what did we actually check, and what happens next?” The factual catalogue answers “which claims have official evidence?” Keeping these separate prevents a successful download from silently certifying old requirements, fees or deadlines.
+
+The current bounded collector covers all 255 publicly visible map universities and separately reports 17 withheld local identities. The national registry extends the target universe beyond those 272 existing identities. Unregistered sources for the additional institutions require official-source discovery and normal review before capture; the collector does not guess domains or invent admissions facts.
+
+## Actual factual changes in this release
+
+- Two existing GDUFS bachelor programme identities now have independently reviewed spring 2027 admission cycles, complete official-source eligibility/materials, application fee and tuition conditions. These are two programme updates and two new cycles, not two newly discovered degree identities.
+- The application period is 30 September–10 December 2026, academic year 2026–2027. Official Chinese/English notices and original fee/CSCA image bytes support the accepted fields. Conflicting age/CSCA timing and a stale minor-date statement are disclosed; do not silently select the more convenient wording.
+- Overdue verified records were marked stale without extending evidence/review dates: four programmes, four cycles and four scholarships. Runtime publication also enforces freshness and inclusive China-calendar deadlines.
+- A partial/name-only deterministic extraction can now produce held proposals only. It cannot renew a whole programme, merge an old intake into a new one or write an unsupported current cycle.
+- Universities without current verified programmes now explain that coverage is pending, offer the official source and accept missing-programme feedback in all six public languages.
+
+The frozen release contains 272 raw universities, 2,035 raw programmes, 1,626 raw cycles, 396 raw scholarships and 2,556 sources. On 17 October 2026 the public projection is 255 universities and 755 programmes/cycles across **seven universities**. The other **248 visible universities still have zero current verified programmes**. This is a coverage deficit, not evidence that those universities have no programmes.
+
+SYSU remains pending: the observed international admissions host blocked acquisition, and a readable official preparation-programme notice had an already closed July 2026 deadline. Neither that closed notice nor an indexed snippet qualifies as a current admission record. The GDUFS discovery adapter also found graduate and domestic-only catalogue candidates; those candidates were not automatically published.
+
+## Runbook and continuity
+
+Read `docs/operations/university-maintenance-planner.md` for the exact plan → capture → SQLite mirror → scheduling-receipt sequence. In particular, mirror the original plan and its report before advancing state. Plan hashes, catalogue hashes, dates, selected IDs and state revisions must match. Preserve interrupted markers and owner locks; do not erase them to retry.
+
+The current local sweep uses `.tmp/university-maintenance/current-state.json` and `.tmp/university-maintenance/maintenance.sqlite`. Complete runs preserve their original `plan.json` beneath `.official-harvest/university-maintenance/<planSha256>/`, plus bounded original bytes, report, results and completion hashes. Source observations and link candidates remain unverified. Acquisition uses at most twenty universities, two URLs per university, two concurrent workers, domain throttling, robots policy, exact hosts and socket-time public DNS checks. Persistent URL offsets rotate the next pair rather than repeatedly selecting only the first sources. Legacy receipts lacking an offset retain their original scheduling meaning; do not alter their hashes.
+
+`.github/workflows/university-program-maintenance.yml` prepares one source-only batch each hour. It requires default-branch installation before GitHub cron becomes active. A branch push/PR does not enable the schedule, and a new manual workflow may also require default-branch registration. GitHub cache is an evictable, repository-accessible continuity aid, not private evidence storage or a durability guarantee. No applicant documents, credentials or cookies belong in it. Raw public-source bytes are cached with their matching state and closed ledger; uploaded inspection artifacts use a narrow allowlist.
+
+The existing local fifteen-minute heartbeat should continue the national backlog and review completed source batches once the interactive writer releases ownership. Reuse the existing automation rather than creating duplicate canonical writers. Each run must read the latest handoff and real current state, process finite batches fairly, and report only meaningful progress, failures, completion or required user action. An unchanged healthy poll stays quiet.
+
+## Database and publication limits
+
+The local maintenance SQLite ledger is an observation/query mirror; JSON scheduling state remains its execution authority. Separately, a local factual database built with the existing D1 catalogue migrations contains the canonical release, with clean `foreign_key_check` and `integrity_check`. Its immutable receipt lives under `quality/continuous-program-maintenance-20261017/database/`. It includes held/stale history and performs no cloud activation.
+
+The actual Cloudflare D1 API returned error 7500 (free-tier daily row-read limit exceeded). Do not repeatedly retry or purchase capacity. Earliest ordinary daily-reset retry: **18 October 2026 00:00 UTC / 08:00 China time**. A failed quota request does not prove a database is empty. GitHub currently lacks `CLOUDFLARE_API_TOKEN`; do not copy an interactive OAuth login into a repository secret. The frontend remains on its existing JSON delivery path until a qualified database release and independent readback permit a deliberate cutover.
+
+Preserve the existing `ambiguous_paid_outcome` STOP, consumed/unknown paid scopes, budgets, owner locks and original receipts. This work authorizes national maintenance; it does not reset an ambiguous paid call or authorize repeated charges. Official-source preparation and independently evidenced manual review can progress without paid model calls. Keep acquisition, candidate creation, fact approval, canonical writes, cloud writes and public publication as separate reported counts.
+
+Website releases are built from the pinned already-published baseline plus explicit task overlays, not from the entire dirty working tree. Candidate readiness is followed by all-map-page/API/locale/browser checks, then the shared guarded deployment writer and stable-alias readback. The former production version remains registered for rollback. GitHub work uses the attached isolated branch `codex/all-university-maintenance`; unrelated local experiments and private operational artifacts are excluded.
+
+Actual production promotion completed **17 October 2026 05:48:51 UTC** through the shared writer: current deployment `dpl_EzmeTYs6kFzVda3vaWNWVXsmVC7F`, previous deployment `dpl_9cDXyRNRAZoit9TNuwQLigSsApEz`. The publisher checked all 255 candidate university pages, all 755 API programme identities, required conditions on the two changed programmes, six-language pending/available states, unpublished-record 404s, desktop/mobile geometry and the city → university → programme browser path. The immutable candidate receipt has nineteen checks, two full changed-programme detail checks, 255 university page checks and zero browser errors. Stable-domain readback is an additional receipt rather than an inference from candidate readiness.
+
+Stable-domain readback also passed nineteen checks and the two changed-programme detail checks, confirming 255 public universities, 755 public programmes/cycles, 696 referenced public sources and zero browser errors. The previous version remains the recorded rollback target.
+
+Task validation passed 147 focused tests plus sixteen national-registry tests, full TypeScript checking, scoped strict ESLint, strict data validation and a production webpack build on the locked Next.js 16.3.8 dependency. The whole unit suite is not green: its initial run reported 1,375 passed, 104 failed and one skipped. The isolated branch preserves the exact previously published source baseline as a separate commit, and existing tests contain contracts from older catalogue/publication behavior. Baseline attribution is being checked separately; do not attribute every failure to the new task or claim CI success. The strict per-university programme-coverage gate also remains unmet while 248 visible schools have zero current records. Keep the pull request in draft and retain the quality gates.
+
+Independent baseline comparison subsequently reran all 45 failing files (328 tests) against a clean archive of the preserved production baseline commit `81c8892`: exactly the same 104 test identities failed, 224 passed, and the new task introduced zero newly failing identities. The comparison proof is `.tmp/university-maintenance-baseline-comparison.json` in the isolated worktree. This establishes attribution, not a green suite: the old tests and coverage deficit still need resolution before default-branch integration.
+
+## Business sequencing
+
+The first audience is prospective international students. The immediate acquisition promise must match measured coverage. Broader promotion should follow useful, current coverage for initial student segments and clear disclosure of the remaining backlog. The free product needs trustworthy discovery, filters, official evidence and application timing first. Paid CV/profile-to-programme analysis should be evaluated later against actual eligibility evidence, user demand and inference costs; a generated score without reliable catalogue coverage would amplify existing gaps. See `docs/growth/` for the first-cohort and commercialization documents.

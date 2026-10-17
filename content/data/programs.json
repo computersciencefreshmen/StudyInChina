@@ -1925,7 +1925,7 @@
     ],
     "verifiedAt": "2026-10-13",
     "reviewAfter": "2026-10-16",
-    "status": "verified",
+    "status": "stale",
     "id": "program-minzu-university-of-china-one-semester-study-program-international-chine",
     "slug": "minzu-university-of-china-one-semester-study-program-international-chine",
     "universityId": "uni-minzu-university-of-china",
@@ -7759,7 +7759,7 @@
     ],
     "verifiedAt": "2026-10-13",
     "reviewAfter": "2026-10-16",
-    "status": "verified",
+    "status": "stale",
     "id": "program-fudan-university-international-chinese-language-teachers-scholarship-one",
     "slug": "fudan-university-international-chinese-language-teachers-scholarship-one",
     "universityId": "uni-fudan-university",
@@ -8346,12 +8346,16 @@
   },
   {
     "sourceIds": [
-      "src-gdufs-chinese-language-bachelor",
-      "src-gdufs-2026-degree-admissions"
+      "source-gdufs-degree-2027-spring-zh-20261017",
+      "source-gdufs-degree-2027-spring-en-20261017",
+      "source-gdufs-chinese-undergraduate-en-20261017",
+      "source-gdufs-degree-2027-tuition-zh-20261017",
+      "source-gdufs-degree-2027-csca-zh-20261017",
+      "source-gdufs-application-portal-https-20261017"
     ],
-    "verifiedAt": "2026-08-25",
-    "reviewAfter": "2026-09-24",
-    "status": "stale",
+    "verifiedAt": "2026-10-17",
+    "reviewAfter": "2026-10-24",
+    "status": "verified",
     "id": "program-guangdong-university-of-foreign-studies-chinese-language-bachelor",
     "slug": "guangdong-university-of-foreign-studies-chinese-language-bachelor",
     "universityId": "uni-guangdong-university-of-foreign-studies",
@@ -8370,15 +8374,65 @@
     ],
     "durationMonths": 48,
     "durationMonthsMax": null,
-    "programUrl": "https://iie.gdufs.edu.cn/info/1078/3350.htm",
+    "programUrl": "https://iie-en.gdufs.edu.cn/info/1132/2191.htm",
     "applyUrl": "https://gdufs.17gz.org/",
     "languageRequirements": [
       {
         "test": "HSK",
-        "minimum": "No HSK is required for Year 1; direct entry to Year 2 requires HSK 4 (180), and direct entry to Year 3 requires HSK 5 (180)."
+        "minimum": "Applicants for Year 1 need no HSK certificate at application but must have Chinese proficiency equivalent to HSK Level 3. CSCA mathematics is required; liberal-arts Chinese is required unless the official HSK4 180-point exemption applies. Entry to Year 2 requires HSK4 with 180 points or above. The current notice does not confirm Year 3 entry for the general Chinese B.A. route."
       }
     ],
-    "verificationScope": "facts"
+    "verificationScope": "facts",
+    "supplementaryDetails": {
+      "faculty": {
+        "en": "Institute for International Education",
+        "zh": "留学生教育学院"
+      },
+      "languagePolicy": {
+        "en": "Chinese-taught undergraduate route; Year 1 requires HSK3-equivalent proficiency, with separate CSCA and advanced-entry requirements.",
+        "zh": "汉语授课本科；一年级须具备相当于HSK3级的汉语水平，并符合CSCA及适用的插班要求。"
+      },
+      "eligibility": [
+        {
+          "en": "Non-Chinese nationality, a foreign passport and compliance with Ministry of Education Regulation No. [2020] 12; supplementary nationality evidence is required where applicable.",
+          "zh": "非中国国籍、持外国护照并符合教外函〔2020〕12号要求；符合附录所列情形者须提供本人及父母的补充国籍材料。"
+        },
+        {
+          "en": "Good physical and mental health; compliance with Chinese law and university rules; satisfactory academic conduct and no criminal record.",
+          "zh": "身心健康，遵守中国法律及学校规定，学业与品行符合要求，无违法犯罪及相关违纪记录。"
+        },
+        {
+          "en": "High-school graduation and the academic, language and CSCA requirements of the chosen program. In principle the Chinese notice says no older than 30; its English version says under 30, so applicants aged 30 should confirm with IIE.",
+          "zh": "须高中毕业，并满足所报专业的学业、语言与CSCA要求。中文通知规定本科申请者年龄一般不超过30周岁；英文通知写作未满30周岁，年满30周岁者须向学院确认适用口径。"
+        },
+        {
+          "en": "Take the university entrance examination, which may consist of a written test plus interview or an interview only, as required by the university.",
+          "zh": "须参加学校要求的入学考试，主要形式为笔试加面试，或仅面试。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "en": "High-school certificate and transcript; provide notarized Chinese or English versions when the originals use another language.",
+          "zh": "高中毕业证书及成绩单；非中文或英文原件须提供经公证的中文或英文文本。"
+        },
+        {
+          "en": "CSCA results and the applicable Chinese-language evidence. The attached subject table requires mathematics plus liberal-arts Chinese for Chinese-language majors, with the stated valid HSK4 180-point exemption from liberal-arts Chinese.",
+          "zh": "CSCA成绩及适用的汉语水平证明。附表规定汉语言类考数学与文科中文；提交规定有效期内HSK4级180分及以上成绩可免考文科中文。"
+        },
+        {
+          "en": "Passport main-page copy, Chinese visa-page copy if any, a 1-inch digital bareheaded color photograph and a valid medical examination report.",
+          "zh": "护照个人首页、来华签证页（如有）、一寸免冠证件彩照，以及有效期内体检报告。"
+        },
+        {
+          "en": "A valid non-criminal-record certificate, Chinese translation and required authentication; the original must be submitted after checking an electronic copy and mailing details with IIE.",
+          "zh": "有效期内无犯罪记录证明、中文翻译及规定认证；应先与学院核对电子版与邮寄地址后提交原件。"
+        },
+        {
+          "en": "Where applicable: applicant/parent nationality evidence; notarized birth and guardian documents for the notice-defined under-18 group; latest attendance certificate and academic transcripts for previous study in China. Further university-requested materials may apply.",
+          "zh": "按适用情形提交本人及父母国籍材料、通知所定义未满18周岁群体的出生及监护公证材料、曾在华学习者最新学期出勤证明与成绩单；学校可另行要求补充材料。"
+        }
+      ]
+    }
   },
   {
     "sourceIds": [
@@ -8466,7 +8520,7 @@
     ],
     "verifiedAt": "2026-10-13",
     "reviewAfter": "2026-10-16",
-    "status": "verified",
+    "status": "stale",
     "id": "program-guangdong-university-of-foreign-studies-iclt-one-semester-language",
     "slug": "guangdong-university-of-foreign-studies-iclt-one-semester-language",
     "universityId": "uni-guangdong-university-of-foreign-studies",
@@ -9891,7 +9945,7 @@
     ],
     "verifiedAt": "2026-10-13",
     "reviewAfter": "2026-10-16",
-    "status": "verified",
+    "status": "stale",
     "id": "program-sjtu-iclt-one-semester-spring-2027",
     "slug": "sjtu-iclt-one-semester-spring-2027",
     "universityId": "uni-shanghai-jiao-tong-university",
@@ -20060,12 +20114,16 @@
   },
   {
     "sourceIds": [
-      "src-gap-program-prog-gdufs-chinese-business-bachelor",
-      "src-gdufs-2026-degree-admissions"
+      "source-gdufs-degree-2027-spring-zh-20261017",
+      "source-gdufs-degree-2027-spring-en-20261017",
+      "source-gdufs-chinese-undergraduate-en-20261017",
+      "source-gdufs-degree-2027-tuition-zh-20261017",
+      "source-gdufs-degree-2027-csca-zh-20261017",
+      "source-gdufs-application-portal-https-20261017"
     ],
-    "verifiedAt": "2026-08-25",
-    "reviewAfter": "2026-09-24",
-    "status": "stale",
+    "verifiedAt": "2026-10-17",
+    "reviewAfter": "2026-10-24",
+    "status": "verified",
     "id": "prog-gap-prog-gdufs-chinese-business-bachelor",
     "slug": "gap-prog-gdufs-chinese-business-bachelor-bachelor",
     "universityId": "uni-guangdong-university-of-foreign-studies",
@@ -20089,10 +20147,60 @@
     "languageRequirements": [
       {
         "test": "HSK",
-        "minimum": "No HSK is required for Year 1; direct entry to Year 2 requires HSK 4 (180), and direct entry to Year 3 requires HSK 5 (180)."
+        "minimum": "Applicants for Year 1 need no HSK certificate at application but must have Chinese proficiency equivalent to HSK Level 3. CSCA mathematics is required; liberal-arts Chinese is required unless the official HSK4 180-point exemption applies. Entry to Year 2 requires HSK4 with 180 points or above. Entry to Year 3 of Business Chinese requires HSK5 with 180 points or above."
       }
     ],
-    "verificationScope": "facts"
+    "verificationScope": "facts",
+    "supplementaryDetails": {
+      "faculty": {
+        "en": "Institute for International Education",
+        "zh": "留学生教育学院"
+      },
+      "languagePolicy": {
+        "en": "Chinese-taught undergraduate route; Year 1 requires HSK3-equivalent proficiency, with separate CSCA and advanced-entry requirements.",
+        "zh": "汉语授课本科；一年级须具备相当于HSK3级的汉语水平，并符合CSCA及适用的插班要求。"
+      },
+      "eligibility": [
+        {
+          "en": "Non-Chinese nationality, a foreign passport and compliance with Ministry of Education Regulation No. [2020] 12; supplementary nationality evidence is required where applicable.",
+          "zh": "非中国国籍、持外国护照并符合教外函〔2020〕12号要求；符合附录所列情形者须提供本人及父母的补充国籍材料。"
+        },
+        {
+          "en": "Good physical and mental health; compliance with Chinese law and university rules; satisfactory academic conduct and no criminal record.",
+          "zh": "身心健康，遵守中国法律及学校规定，学业与品行符合要求，无违法犯罪及相关违纪记录。"
+        },
+        {
+          "en": "High-school graduation and the academic, language and CSCA requirements of the chosen program. In principle the Chinese notice says no older than 30; its English version says under 30, so applicants aged 30 should confirm with IIE.",
+          "zh": "须高中毕业，并满足所报专业的学业、语言与CSCA要求。中文通知规定本科申请者年龄一般不超过30周岁；英文通知写作未满30周岁，年满30周岁者须向学院确认适用口径。"
+        },
+        {
+          "en": "Take the university entrance examination, which may consist of a written test plus interview or an interview only, as required by the university.",
+          "zh": "须参加学校要求的入学考试，主要形式为笔试加面试，或仅面试。"
+        }
+      ],
+      "applicationMaterials": [
+        {
+          "en": "High-school certificate and transcript; provide notarized Chinese or English versions when the originals use another language.",
+          "zh": "高中毕业证书及成绩单；非中文或英文原件须提供经公证的中文或英文文本。"
+        },
+        {
+          "en": "CSCA results and the applicable Chinese-language evidence. The attached subject table requires mathematics plus liberal-arts Chinese for Chinese-language majors, with the stated valid HSK4 180-point exemption from liberal-arts Chinese.",
+          "zh": "CSCA成绩及适用的汉语水平证明。附表规定汉语言类考数学与文科中文；提交规定有效期内HSK4级180分及以上成绩可免考文科中文。"
+        },
+        {
+          "en": "Passport main-page copy, Chinese visa-page copy if any, a 1-inch digital bareheaded color photograph and a valid medical examination report.",
+          "zh": "护照个人首页、来华签证页（如有）、一寸免冠证件彩照，以及有效期内体检报告。"
+        },
+        {
+          "en": "A valid non-criminal-record certificate, Chinese translation and required authentication; the original must be submitted after checking an electronic copy and mailing details with IIE.",
+          "zh": "有效期内无犯罪记录证明、中文翻译及规定认证；应先与学院核对电子版与邮寄地址后提交原件。"
+        },
+        {
+          "en": "Where applicable: applicant/parent nationality evidence; notarized birth and guardian documents for the notice-defined under-18 group; latest attendance certificate and academic transcripts for previous study in China. Further university-requested materials may apply.",
+          "zh": "按适用情形提交本人及父母国籍材料、通知所定义未满18周岁群体的出生及监护公证材料、曾在华学习者最新学期出勤证明与成绩单；学校可另行要求补充材料。"
+        }
+      ]
+    }
   },
   {
     "sourceIds": [
