@@ -1,16 +1,15 @@
 import { Badge, Card, LinkButton, VerificationBadge } from '@/components/ui'
 import { FactValue } from '@/components/ui/FactValue'
 import type { PublicLocale } from '@/i18n/config'
-import { getDecisionExperienceCopy } from '@/i18n/decision-experience'
+import { officialReferenceTuitionCopy } from '@/i18n/tuition-reference'
 import type { Messages } from '@/i18n/messages'
-import { getApplicationState } from '@/lib/data/admission'
-import { formatCny, formatDate, localize } from '@/lib/data/format'
+import { getApplicationState, isCurrentOfficialReferenceTuition } from '@/lib/data/admission'
+import { formatDate, formatTuition, localize } from '@/lib/data/format'
 import { degreeLabels, disciplineLabels, languageLabel, regionLabels } from '@/lib/data/labels'
 import type { FactStatus, FieldMeta } from '@/lib/catalog-api/types'
 import type { AdmissionCycle, City, Program, University } from '@/lib/data/types'
 import styles from './DecisionRecordCards.module.css'
 import { FavoriteButton } from './FavoriteButton'
-import { UniversityRankingLinks } from './RankingFilterFields'
 
 type ProgramWithFieldMeta = Program & {
   fieldMeta?: Record<string, FieldMeta>
@@ -50,16 +49,15 @@ function resolveFactStatus({
 
 export function UniversityCard({ university, city, fields, locale, messages }: { university: University; city?: City; fields: string[]; locale: PublicLocale; messages: Messages }) {
   return <Card className="record-card" accent={university.featured ? 'vermilion' : 'none'}>
-    <div className="record-card__top"><Badge tone="blue">{university.region ? regionLabels(locale)[university.region] : messages.common.unknown}</Badge><VerificationBadge status={university.status} verifiedAt={university.verifiedAt} locale={locale} verifiedDateLabel={messages.common.lastVerified} labels={{ verified: messages.common.verified, stale: messages.common.stale, draft: messages.common.draft, archived: messages.common.archived }} /></div>
+    <div className="record-card__top">{university.region ? <Badge tone="blue">{regionLabels(locale)[university.region]}</Badge> : null}<VerificationBadge collection="universities" recordId={university.id} status={university.status} verifiedAt={university.verifiedAt} locale={locale} verifiedDateLabel={messages.common.lastVerified} labels={{ verified: messages.common.verified, stale: messages.common.stale, draft: messages.common.draft, archived: messages.common.archived }} /></div>
     <div><h3 className="record-card__title">{localize(university.name, locale)}</h3>{city ? <p className="record-card__place">⌖ {localize(city.name, locale)}</p> : null}</div>
-    <p className="record-card__summary">{localize(university.summary, locale)}</p>
+    {university.summary ? <p className="record-card__summary">{localize(university.summary, locale)}</p> : null}
     <div className="tag-list">{fields.slice(0, 3).map((field) => <Badge key={field} tone="neutral">{disciplineLabels(locale)[field as keyof ReturnType<typeof disciplineLabels>] || field}</Badge>)}</div>
     <div className="record-card__actions"><LinkButton href={`/${locale}/universities/${university.slug}`} variant="secondary" size="small">{messages.common.viewDetails}</LinkButton>{university.admissionsUrl ? <a className="text-link" href={university.admissionsUrl} target="_blank" rel="noreferrer">{messages.universities.admission} ↗</a> : <a className="text-link" href={university.officialUrl} target="_blank" rel="noreferrer">{messages.common.officialSource} ↗</a>}</div>
   </Card>
 }
 
 export function ProgramCard({ program, university, cycle, latestTuitionReference, locale, messages, today = new Date().toISOString().slice(0, 10) }: { program: ProgramWithFieldMeta; university?: University; cycle?: AdmissionCycleWithFieldMeta; latestTuitionReference?: AdmissionCycleWithFieldMeta; locale: PublicLocale; messages: Messages; today?: string }) {
-  const decisionCopy = getDecisionExperienceCopy(locale)
   const periodLabels = {
     program: messages.programs.tuitionProgram,
     semester: messages.programs.tuitionSemester,
@@ -73,18 +71,14 @@ export function ProgramCard({ program, university, cycle, latestTuitionReference
   const dynamicFactsAreStale = programIsStale || cycleIsStale || previousCycle
   const hasCurrentConfirmedTuition = cycle?.tuitionCny != null
     && cycle.tuitionStatus === 'confirmed'
+  const currentOfficialReference = !dynamicFactsAreStale && isCurrentOfficialReferenceTuition(cycle, today)
   const visibleTuitionReference = hasCurrentConfirmedTuition
     ? undefined
-    : latestTuitionReference
+    : currentOfficialReference ? cycle : latestTuitionReference
   const tuitionStatus = resolveFactStatus({
     fieldMeta: cycle?.fieldMeta?.tuitionCny,
     stale: dynamicFactsAreStale,
     value: hasCurrentConfirmedTuition ? cycle.tuitionCny : undefined,
-  })
-  const applicationFeeStatus = resolveFactStatus({
-    fieldMeta: cycle?.fieldMeta?.applicationFeeCny,
-    stale: dynamicFactsAreStale,
-    value: cycle?.applicationFeeCny,
   })
   const deadlineStatus = resolveFactStatus({
     fieldMeta: cycle?.fieldMeta?.closesOn,
@@ -98,13 +92,10 @@ export function ProgramCard({ program, university, cycle, latestTuitionReference
   })
   const tuitionValue = !hasCurrentConfirmedTuition
     ? undefined
-    : `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${periodLabels[cycle.tuitionPeriod || 'other']}`
+    : formatTuition(cycle, locale, periodLabels[cycle.tuitionPeriod || 'other'], messages.common.unknown)
   const tuitionReferenceValue = visibleTuitionReference?.tuitionCny == null
     ? undefined
-    : `${formatCny(visibleTuitionReference.tuitionCny, locale, messages.common.unknown)} / ${periodLabels[visibleTuitionReference.tuitionPeriod || 'other']} · ${visibleTuitionReference.academicYear}`
-  const applicationFeeValue = cycle?.applicationFeeCny == null
-    ? undefined
-    : formatCny(cycle.applicationFeeCny, locale, messages.common.unknown)
+    : `${formatTuition(visibleTuitionReference, locale, periodLabels[visibleTuitionReference.tuitionPeriod || 'other'], messages.common.unknown)} · ${visibleTuitionReference.academicYear}`
   const durationValue = program.durationMonths
     ? program.durationMonthsMax && program.durationMonthsMax !== program.durationMonths
       ? `${program.durationMonths}–${program.durationMonthsMax} ${messages.common.months}`
@@ -132,34 +123,29 @@ export function ProgramCard({ program, university, cycle, latestTuitionReference
         ? 'neutral' as const
         : 'blue' as const
 
-  return <Card className={`record-card ${styles.card}`}>
-    <div className={styles.identityRow}><Badge tone="vermilion">{degreeLabels(locale)[program.degreeLevel]}</Badge></div>
-    <div><h3 className="record-card__title">{localize(program.name, locale)}</h3>{university ? <p className="record-card__place">{localize(university.name, locale)}</p> : null}</div>
-    {university ? <UniversityRankingLinks university={university} locale={locale} /> : null}
-    <dl className={styles.signal}>
-      <div><dt>{messages.programs.applicationStatus}</dt><dd><Badge tone={stateTone}>{stateLabel}</Badge></dd></div>
-      <div><dt>{messages.common.deadline}</dt><dd><FactValue status={deadlineStatus} locale={locale} value={cycle?.closesOn
+  return <Card className={`record-card ${styles.card} ${styles.programCard}`} data-program-preview>
+    <div className={styles.identityRow}>
+      <Badge tone="vermilion">{degreeLabels(locale)[program.degreeLevel]}</Badge>
+      <VerificationBadge status={program.status} locale={locale} showDate={false} labels={{ verified: messages.common.verified, stale: messages.common.stale, draft: messages.common.draft, archived: messages.common.archived }} />
+    </div>
+    <div className={styles.programIdentity}><h3 className={`record-card__title ${styles.programTitle}`}>{localize(program.name, locale)}</h3>{university ? <p className="record-card__place">{localize(university.name, locale)}</p> : null}</div>
+    {dynamicFactsAreStale || applicationState !== 'not-announced' || cycle?.closesOn ? <dl className={styles.signal}>
+      {dynamicFactsAreStale || applicationState !== 'not-announced' ? <div><dt>{messages.programs.applicationStatus}</dt><dd><Badge tone={stateTone}>{stateLabel}</Badge></dd></div> : null}
+      {cycle?.closesOn ? <div><dt>{messages.common.deadline}</dt><dd><FactValue status={deadlineStatus} locale={locale} value={cycle.closesOn
         ? <time dateTime={cycle.closesOn}>{formatDate(cycle.closesOn, locale, messages.common.unknown)}</time>
-        : undefined} /></dd></div>
-    </dl>
+        : undefined} /></dd></div> : null}
+    </dl> : null}
     <dl className={`record-facts ${styles.supportingFacts}`}>
-      <div><dt>{messages.common.tuition}</dt><dd>{tuitionReferenceValue
-        ? <span className={styles.referenceFact} data-fact-status="reference">{tuitionReferenceValue}</span>
-        : <FactValue status={tuitionStatus} locale={locale} value={tuitionValue} />}</dd></div>
-      <div><dt>{decisionCopy.applicationFee}</dt><dd><FactValue status={applicationFeeStatus} locale={locale} value={applicationFeeValue} /></dd></div>
-      <div><dt>{messages.common.language}</dt><dd>{program.teachingLanguages.length
-        ? program.teachingLanguages.map((item) => languageLabel(item, locale)).join(', ')
-        : messages.common.unknown}</dd></div>
-      <div><dt>{messages.common.duration}</dt><dd><FactValue status={durationStatus} locale={locale} value={durationValue} /></dd></div>
+      {tuitionValue !== undefined || tuitionReferenceValue ? <div className={styles.tuitionFact}><dt>{messages.common.tuition}</dt><dd>{tuitionReferenceValue
+        ? <span className={styles.referenceFact} data-fact-status="reference">{currentOfficialReference ? <><Badge tone="gold">{officialReferenceTuitionCopy(locale).label}</Badge>{' '}</> : null}{tuitionReferenceValue}</span>
+        : <FactValue status={tuitionStatus} locale={locale} value={tuitionValue} />}</dd></div> : null}
+      {program.teachingLanguages.length ? <div><dt>{messages.common.language}</dt><dd>{program.teachingLanguages.map((item) => languageLabel(item, locale)).join(', ')}</dd></div> : null}
+      {program.durationMonths !== null ? <div><dt>{messages.common.duration}</dt><dd><FactValue status={durationStatus} locale={locale} value={durationValue} /></dd></div> : null}
     </dl>
-    {!dynamicFactsAreStale && cycle?.notes ? <p className="record-card__summary">{localize(cycle.notes, locale)}</p> : null}
-    <div className="record-card__actions">
+    <div className={`record-card__actions ${styles.programActions}`}>
       <LinkButton href={`/${locale}/programs/${program.slug}`} variant="secondary" size="small">{messages.common.viewDetails}</LinkButton>
       {canApply && program.applyUrl ? <a className="atlas-button atlas-button--primary atlas-button--small" href={program.applyUrl} target="_blank" rel="noreferrer">{messages.common.applyOfficial} ↗</a> : null}
       <FavoriteButton programId={program.id} saveLabel={messages.common.save} savedLabel={messages.common.saved} />
-    </div>
-    <div className={styles.footer}>
-      <VerificationBadge status={program.status} verifiedAt={program.verifiedAt} locale={locale} verifiedDateLabel={messages.common.lastVerified} labels={{ verified: messages.common.verified, stale: messages.common.stale, draft: messages.common.draft, archived: messages.common.archived }} />
     </div>
   </Card>
 }

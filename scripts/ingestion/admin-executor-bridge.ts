@@ -12,6 +12,7 @@ import { acquireSupervisorLock, atomicSupervisorJson, probeNativeProcess } from 
 import { buildUsageReport, seedHistoricalUsage, shanghaiUsageDay } from './minimax-usage-ledger'
 import { DAILY_USEFUL_TOKEN_TARGET } from './minimax-workload-runner'
 import { fetchQuota, getCcSwitchQuotaConfig, type QuotaState } from './minimax-quota'
+import { minimaxContinuousStatusSchema, MINIMAX_CONTINUOUS_STATUS_PATH } from '../../src/lib/admin/minimax-continuous-contract'
 
 const executeFile = promisify(execFile)
 const DEFAULT_TELEMETRY_URL = 'https://studyinchina-catalog-api.13022037121.workers.dev/internal/v1/admin-telemetry'
@@ -24,7 +25,7 @@ export type BridgeConfiguration = { executorId: string; telemetryUrl: string; co
 export type BridgeDependencies = {
   request: (method: 'GET' | 'PUT' | 'PATCH', url: string, value?: unknown) => Promise<unknown>
   execute: (command: ExecutorCommand) => Promise<unknown>
-  publish: () => Promise<void>
+  publish: (remotelyControllable?: boolean) => Promise<void>
   attemptId?: () => string
   renewEveryMs?: number
 }
@@ -145,6 +146,15 @@ export async function telemetryOnlyIteration(dependencies: Pick<BridgeDependenci
   return { commandId: null, result: 'idle', published: true }
 }
 
+/** A temporary command outage must not erase live progress or advertise working controls. */
+export async function bridgeCycle(configuration: BridgeConfiguration, dependencies: BridgeDependencies, telemetryOnly = false): Promise<BridgeIteration> {
+  if (telemetryOnly) return telemetryOnlyIteration(dependencies)
+  try { return await bridgeIteration(configuration, dependencies) }
+  catch (error) {
+    try { await dependencies.publish(false) } catch { /* Preserve the original command-channel failure. */ }
+    throw error
+  }
+}
 export function projectBridgeQuota(value: unknown, now = Date.now()): ExecutorStatus['quota'] {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return null
   const quota = value as Partial<QuotaState>
@@ -182,7 +192,13 @@ export async function buildBridgeTelemetry(root: string, remotelyControllable = 
     const path = join(root, '.tmp', 'minimax-verification', 'admin-quota.json')
     if ((await stat(path)).size <= 64 * 1_024) automation.quota = projectBridgeQuota(JSON.parse(await readFile(path, 'utf8')))
   } catch { automation.quota = currentQuotaObservation(automation.quota) }
-  return createAdminTelemetry(runs.slice(0, 100), runs.find(run => run.model)?.model || null, new Date().toISOString(), { ledger, automation })
+  let continuousPipeline = null
+  try {
+    const path = join(root, MINIMAX_CONTINUOUS_STATUS_PATH)
+    if ((await stat(path)).size <= 16 * 1024) continuousPipeline = minimaxContinuousStatusSchema.parse(JSON.parse(await readFile(path, 'utf8')))
+  } catch { /* Missing/invalid pipeline observations do not manufacture progress. */ }
+  return createAdminTelemetry(runs.slice(0, 100), runs.find(run => run.model)?.model || null, new Date().toISOString(), { ledger, automation,
+    ...(continuousPipeline ? { continuousPipeline } : {}) })
 }
 /** Read-only uploads retain the legacy wire shape; upgraded readers default this missing capability to false. */
 export function bridgeTelemetryPayload(telemetry: AdminTelemetry, telemetryOnly: boolean) {
@@ -217,9 +233,9 @@ export async function runAdminExecutorBridge(root = process.cwd(), once = false,
   const dependencies: BridgeDependencies = {
     request,
     execute: async command => { const { executeExecutorCommand } = await import('./minimax-admin-control'); return executeExecutorCommand(command, root) },
-    publish: async () => {
-      const telemetry = await buildBridgeTelemetry(root, !telemetryOnly)
-      await request('PUT', configuration.telemetryUrl, bridgeTelemetryPayload(telemetry, telemetryOnly))
+    publish: async (remotelyControllable = !telemetryOnly) => {
+      const telemetry = await buildBridgeTelemetry(root, remotelyControllable)
+      await request('PUT', configuration.telemetryUrl, bridgeTelemetryPayload(telemetry, telemetryOnly || !remotelyControllable))
       lastPublishedAt = new Date().toISOString()
     },
   }
@@ -241,7 +257,7 @@ export async function runAdminExecutorBridge(root = process.cwd(), once = false,
         }
         // A one-off upload must include completed refreshes, not the previous saved ledger.
         if (once) await Promise.all([usageRefresh, quotaRefresh])
-        const result = telemetryOnly ? await telemetryOnlyIteration(dependencies) : await bridgeIteration(configuration, dependencies)
+        const result = await bridgeCycle(configuration, dependencies, telemetryOnly)
         lastCommandId = result.commandId
       } catch { lastError = 'bridge_cycle_unavailable' }
       await atomicSupervisorJson(join(directory, 'admin-executor-bridge-state.json'), { schemaVersion: 1, ownerPid: owner.ownerPid, fingerprint: owner.fingerprint,

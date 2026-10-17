@@ -118,12 +118,15 @@ export async function readExecutorStatus(root = process.cwd(), runtime = default
   const checkedAt = timestamp(quota?.checkedAt)
   const activeVerifierCount = observed.processes.filter(item => item.kind === 'verification').length
   const runnerAlive = observed.processes.some(item => item.kind === 'runner')
+  const supervisorAlive = observed.processes.some(item => item.kind === 'supervisor')
+  // Historical coordinator state must not label a new standalone verifier.
+  const liveCoordinator = runnerAlive ? observed.rawRunner : supervisorAlive ? observed.rawSupervisor : null
   return executorStatusSchema.parse({
     executorId: /^[a-zA-Z0-9_-]{1,64}$/.test(process.env.ADMIN_EXECUTOR_ID || '') ? process.env.ADMIN_EXECUTOR_ID : 'studyinchina-local-minimax',
     observedAt: new Date(runtime.now()).toISOString(), connected: true, desiredState: control.desiredState,
-    phase: observed.unsafe ? 'attention' : control.desiredState === 'paused' ? activeVerifierCount ? 'pausing' : 'paused' : observed.processes.length ? reason(observed.rawRunner?.phase ?? observed.rawSupervisor?.phase, 'running') : 'idle',
-    reason: observed.unsafe ? 'process_identity_unconfirmed' : control.desiredState === 'paused' ? 'human_pause_requested' : observed.processes.length ? reason(observed.rawRunner?.reason ?? observed.rawSupervisor?.reason, 'executor_ready') : 'executor_ready',
-    baselineRunId: observed.baselineRunId, runnerAlive, supervisorAlive: observed.processes.some(item => item.kind === 'supervisor'),
+    phase: observed.unsafe ? 'attention' : control.desiredState === 'paused' ? activeVerifierCount ? 'pausing' : 'paused' : observed.processes.length ? reason(liveCoordinator?.phase, 'running') : 'idle',
+    reason: observed.unsafe ? 'process_identity_unconfirmed' : control.desiredState === 'paused' ? 'human_pause_requested' : observed.processes.length ? reason(liveCoordinator?.reason, 'active_verifier') : 'executor_ready',
+    baselineRunId: observed.baselineRunId, runnerAlive, supervisorAlive,
     activeVerifierCount, controlAcknowledgedAt: latest?.status === 'completed' ? timestamp(latest.updatedAt) : null,
     pauseMayHaveInFlightRequest: control.desiredState === 'paused' && (activeVerifierCount > 0 || observed.unsafe || latest?.pauseMayHaveInFlightRequest === true),
     creditFallbackAuthorized: policy.allowExistingCredits, policyReloadPending: observed.rawRunner?.supervisorPolicyReloadPending === true,

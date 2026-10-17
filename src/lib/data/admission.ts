@@ -1,4 +1,13 @@
 import type { AdmissionCycle } from './types'
+import { getTodayDate, isCurrentVerifiedRecord } from './freshness'
+
+export function isCurrentOfficialReferenceTuition(cycle: AdmissionCycle | undefined, today = getTodayDate()): boolean {
+  return Boolean(cycle && isCurrentVerifiedRecord(cycle, today) && cycle.verifiedAt <= today
+    && cycle.tuitionStatus === 'reference' && cycle.tuitionCny !== null && cycle.tuitionPeriod
+    && cycle.factScope === 'complete' && cycle.evidenceBasis === 'cycle-specific'
+    && (cycle.dateStatus === 'published' || cycle.dateStatus === 'rolling')
+    && (!cycle.closesOn || cycle.closesOn >= today))
+}
 
 export type ApplicationState =
   | 'open'

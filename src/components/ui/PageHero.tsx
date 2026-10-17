@@ -24,7 +24,7 @@ export function PageHero({
   className,
 }: PageHeroProps) {
   return (
-    <header className={cx('atlas-hero', `atlas-hero--${variant}`, className)}>
+    <header className={cx('atlas-hero', `atlas-hero--${variant}`, Boolean(aside) && 'atlas-hero--with-aside', className)}>
       <span className="atlas-hero__sun" aria-hidden="true" />
       <span className="atlas-hero__route" aria-hidden="true" />
       <div className="atlas-hero__content">

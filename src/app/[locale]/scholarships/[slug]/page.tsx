@@ -71,7 +71,10 @@ export default async function ScholarshipDetail({
     ?? item.verifiedAt
   const copy = messages.scholarships
   const universityCoverage = formatUniversityCoverage(item.universityIds.length, locale, messages.common.all)
-  const fundingHighlights = `${coverageLabel(item.coverage.tuition, locale)} · ${formatCny(item.coverage.stipendCnyPerMonth, locale, messages.common.unknown)}`
+  const fundingHighlights = [
+    item.coverage.tuition !== 'unknown' ? coverageLabel(item.coverage.tuition, locale) : null,
+    item.coverage.stipendCnyPerMonth !== null ? formatCny(item.coverage.stipendCnyPerMonth, locale, '') : null,
+  ].filter(value => value !== null).join(' · ')
   const isStaleIdentity = item.status === 'stale'
   const today = getTodayDate()
   const currentCycle = selectScholarshipCurrentCycle(item, today)
@@ -93,7 +96,7 @@ export default async function ScholarshipDetail({
       variant="compact"
       eyebrow={providerLabel(item.providerType, locale)}
       title={localize(item.name, locale)}
-      description={localize(item.summary, locale)}
+      description={item.summary ? localize(item.summary, locale) : undefined}
       actions={item.status === 'verified' && item.applicationUrl ? (
         <a
           className="atlas-button atlas-button--secondary atlas-button--medium"
@@ -105,7 +108,7 @@ export default async function ScholarshipDetail({
         </a>
       ) : undefined}
       meta={(
-        <VerificationBadge
+        <VerificationBadge collection="scholarships" recordId={item.id}
           status={item.status}
           verifiedAt={item.verifiedAt}
           locale={locale}
@@ -124,31 +127,29 @@ export default async function ScholarshipDetail({
     </div>
     <section className="atlas-container atlas-section detail-layout">
       <div className="detail-main">
-        <div className="prose-panel">
+        {item.coverage.tuition !== 'unknown' || item.coverage.accommodation !== 'unknown' || item.coverage.insurance !== 'unknown' || item.coverage.stipendCnyPerMonth !== null || currentCycle.deadline ? <div className="prose-panel">
           <h2>{copy.coverage}</h2>
           <dl className="detail-facts">
-            <div><dt>{copy.tuition}</dt><dd>{coverageLabel(item.coverage.tuition, locale)}</dd></div>
-            <div><dt>{copy.accommodation}</dt><dd>{coverageLabel(item.coverage.accommodation, locale)}</dd></div>
-            <div>
+            {item.coverage.tuition !== 'unknown' ? <div><dt>{copy.tuition}</dt><dd>{coverageLabel(item.coverage.tuition, locale)}</dd></div> : null}
+            {item.coverage.accommodation !== 'unknown' ? <div><dt>{copy.accommodation}</dt><dd>{coverageLabel(item.coverage.accommodation, locale)}</dd></div> : null}
+            {item.coverage.insurance !== 'unknown' ? <div>
               <dt>{copy.insurance}</dt>
-              <dd>{item.coverage.insurance === 'unknown'
-                ? messages.common.unknown
-                : item.coverage.insurance ? copy.included : copy.notIncluded}</dd>
-            </div>
-            <div>
+              <dd>{item.coverage.insurance ? copy.included : copy.notIncluded}</dd>
+            </div> : null}
+            {item.coverage.stipendCnyPerMonth !== null ? <div>
               <dt>{copy.stipend}</dt>
               <dd>{formatCny(
                 item.coverage.stipendCnyPerMonth,
                 locale,
                 messages.common.unknown,
               )}</dd>
-            </div>
-            <div>
+            </div> : null}
+            {currentCycle.deadline ? <div>
               <dt>{messages.common.deadline}</dt>
               <dd>{formatDate(currentCycle.deadline, locale, messages.common.unknown)}</dd>
-            </div>
+            </div> : null}
           </dl>
-        </div>
+        </div> : null}
         <div className="prose-panel">
           <h2>{copy.scope}</h2>
           {universities.length ? (
@@ -168,18 +169,18 @@ export default async function ScholarshipDetail({
         <ApplicationSummaryCard
           eyebrow={providerLabel(item.providerType, locale)}
           title={decisionCopy.fundingSnapshot}
-          status={<Badge tone={deadlineTone} dot>{deadlineLabel}</Badge>}
+          status={isStaleIdentity || currentCycle.deadline ? <Badge tone={deadlineTone} dot>{deadlineLabel}</Badge> : undefined}
           accent="none"
           facts={[
             { label: messages.common.deadline, value: currentCycle.deadline
               ? <time dateTime={currentCycle.deadline}>{formatDate(currentCycle.deadline, locale, messages.common.unknown)}</time>
-              : messages.common.unknown },
+              : null },
             { label: decisionCopy.fundingHighlights, value: fundingHighlights },
-            { label: copy.accommodation, value: coverageLabel(item.coverage.accommodation, locale) },
+            { label: copy.accommodation, value: item.coverage.accommodation !== 'unknown' ? coverageLabel(item.coverage.accommodation, locale) : null },
             { label: messages.common.university, value: universityCoverage },
             { label: messages.common.lastVerified, value: formatDate(item.verifiedAt, locale, '—') },
           ]}
-          notice={decisionCopy.verifiedFactsOnly}
+          notice={messages.common.authoritativeNotice}
           actions={item.status === 'verified' && item.applicationUrl
             ? <a className="atlas-button atlas-button--secondary atlas-button--small" href={item.applicationUrl} target="_blank" rel="noreferrer">
                 {decisionCopy.officialApplicationRoute} ↗
@@ -191,8 +192,9 @@ export default async function ScholarshipDetail({
         <Card accent="jade" id="official-evidence">
           <h2 className="atlas-card__title">{copy.sources}</h2>
           <div className="tag-list">
-            <VerificationBadge
+            <VerificationBadge collection="scholarships" recordId={item.id}
               status={item.status}
+              locale={locale}
               labels={{
                 verified: messages.common.verified,
                 stale: messages.common.stale,

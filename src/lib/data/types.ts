@@ -94,6 +94,7 @@ export type Program = AuditMeta & {
   languageRequirements: LanguageRequirement[]
   verificationScope?: 'identity' | 'facts' | 'complete'
   details?: ProgramDetails
+  supplementaryDetails?: Partial<Omit<ProgramDetails, 'studyMode'>>
 }
 
 export type AdmissionCycle = AuditMeta & {
@@ -107,6 +108,8 @@ export type AdmissionCycle = AuditMeta & {
   tuitionCny: number | null
   tuitionPeriod?: 'program' | 'semester' | 'academic-year' | 'month' | 'other' | null
   tuitionStatus?: 'confirmed' | 'reference' | null
+  /** Official variable-rate schedule; amount above is the first published charge. */
+  tuitionSchedule?: LocalizedText
   evidenceBasis?: 'cycle-specific' | 'recurring-official-rule'
   factScope?: 'dates-only' | 'partial' | 'complete'
   applicationFeeCny: number | null
@@ -129,6 +132,7 @@ export type Scholarship = AuditMeta & {
   deadline: string | null
   applicationUrl: string | null
   summary: LocalizedText | null
+  eligibility?: LocalizedText[]
 }
 
 export type DataBundle = {

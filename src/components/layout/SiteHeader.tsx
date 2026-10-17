@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 
 import { LanguageSwitcher, type LanguageOption } from '../ui/LanguageSwitcher'
 import { cx } from '../ui/cx'
+import { CraftBrandMark } from '../ui/CraftBrandMark'
 
 export interface HeaderNavItem {
   label: string
@@ -18,7 +19,7 @@ export interface SiteHeaderProps {
   homeHref?: string
   brandName?: string
   brandTagline?: string
-  brandMark?: string
+  brandMark?: ReactNode
   navLabel?: string
   languageLabel?: string
   mobileMenuLabel?: string
@@ -60,7 +61,7 @@ export function SiteHeader({
   homeHref = '/',
   brandName = 'Study in China',
   brandTagline = 'Independent student atlas',
-  brandMark = '中',
+  brandMark = <CraftBrandMark />,
   navLabel = 'Primary navigation',
   languageLabel = 'Language',
   mobileMenuLabel = 'Open menu',

@@ -2,6 +2,7 @@ import { ImageResponse } from 'next/og'
 
 import { isPublicLocale } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
+import { CraftBrandMark } from '@/components/ui/CraftBrandMark'
 
 export const alt = 'Study in China Atlas — source-led university and program discovery'
 export const size = { width: 1200, height: 630 }
@@ -32,7 +33,7 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
 
       <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 22 }}>
-          <div style={{ width: 72, height: 72, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#10283d', color: '#f5efe2', fontSize: 42, fontWeight: 700 }}>中</div>
+          <div style={{ width: 72, height: 72, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 18, background: '#10283d', color: '#f5efe2' }}><CraftBrandMark /></div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
             <div style={{ fontFamily: 'Arial, sans-serif', fontSize: 25, fontWeight: 800, letterSpacing: '-0.02em' }}>{messages.brand}</div>
             <div style={{ fontFamily: 'Arial, sans-serif', fontSize: 15, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#62717c' }}>{messages.shell.brandTagline}</div>

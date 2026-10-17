@@ -1,0 +1,18 @@
+/* The administrator and public atlas share typography, paper and palette tokens. */
+.atlas-admin {
+  --wb-accent: var(--atlas-vermilion);
+  --wb-background: var(--atlas-paper);
+  --wb-surface: var(--atlas-paper-bright);
+  --wb-ink: var(--atlas-ink);
+  --wb-muted: var(--atlas-muted);
+  --wb-soft: var(--atlas-vermilion-pale);
+  --wb-border: var(--atlas-line);
+  --wb-secondary: var(--atlas-jade-pale);
+  margin: 0;
+  background: var(--atlas-paper);
+  color: var(--atlas-ink);
+  font-family: var(--atlas-font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+.atlas-admin button, .atlas-admin input, .atlas-admin select { font: inherit; }
+.atlas-admin a { color: inherit; }

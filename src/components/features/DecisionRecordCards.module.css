@@ -2,6 +2,74 @@
   gap: .9rem;
 }
 
+.programCard {
+  min-width: 0;
+}
+
+.programIdentity {
+  min-height: 4.75rem;
+}
+
+.programActions {
+  margin-top: auto;
+}
+
+.tuitionFact {
+  grid-column: 1 / -1;
+}
+
+:global(.atlas-public) .programCard {
+  gap: .95rem;
+}
+
+:global(.atlas-public) .programCard .programTitle {
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  line-height: 1.3;
+}
+
+:global(.atlas-public) .programCard .signal > div {
+  min-height: 4.5rem;
+  padding: .8rem;
+}
+
+:global(.atlas-public) .programCard .supportingFacts {
+  gap: .85rem;
+}
+
+:global(.atlas-public) .programCard .programActions {
+  justify-content: flex-start;
+  gap: .55rem;
+  padding-top: 1rem;
+}
+
+:global(html[data-design='craft'] .atlas-public) .programCard {
+  gap: 1rem;
+  padding: clamp(1.25rem, 2vw, 1.65rem);
+}
+
+:global(html[data-design='craft'] .atlas-public) .programCard .programTitle {
+  font-size: clamp(1.35rem, 1.8vw, 1.6rem);
+  line-height: 1.3;
+}
+
+:global(html[data-design='craft'] .atlas-public) .programCard .signal > div {
+  min-height: 4.6rem;
+  padding: .85rem;
+}
+
+@media (max-width: 560px) {
+  .programIdentity { min-height: 0; }
+  :global(html[data-design='craft'] .atlas-public) .programCard .signal {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  :global(html[data-design='craft'] .atlas-public) .programCard .signal > div + div {
+    border-top: 0;
+  }
+  :global(.atlas-public) .programCard .supportingFacts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .identityRow {
   display: flex;
   align-items: center;
@@ -86,6 +154,83 @@
 
 .fundingSignal {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+:global(.atlas-public) .card { gap: 1.1rem; }
+:global(.atlas-public) .signal { border: 0; border-block: 1px solid var(--atlas-line); border-radius: 0; padding: 0; }
+:global(.atlas-public) .signal > div { min-height: 5.3rem; padding: 1rem .85rem; }
+:global(.atlas-public) .signal dt { font-size: .64rem; font-weight: 650; letter-spacing: .06em; }
+:global(.atlas-public) .signal dd { font-size: .97rem; font-weight: 650; line-height: 1.5; }
+:global(.atlas-public) .signal time { font-size: 1.15rem; }
+:global(.atlas-public) .footer { padding-top: 1rem; }
+
+:global(html[data-design='craft'] .atlas-public) .card {
+  gap: 1.25rem;
+  padding: clamp(1.4rem, 2.5vw, 2rem);
+  background: var(--atlas-paper-bright);
+  border: 1px solid var(--atlas-line);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 28px rgb(3 3 2 / 3%);
+}
+
+:global(html[data-design='craft'] .atlas-public) .card h2,
+:global(html[data-design='craft'] .atlas-public) .card h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 2.2vw, 1.9rem);
+  font-weight: 400;
+  letter-spacing: -.03em;
+  line-height: 1.2;
+}
+
+:global(html[data-design='craft'] .atlas-public) .signal {
+  gap: 0;
+  padding: 0;
+  background: color-mix(in srgb, var(--atlas-jade-pale) 35%, var(--atlas-paper-bright));
+  border: 0;
+  border-radius: 1.1rem;
+}
+
+:global(html[data-design='craft'] .atlas-public) .signal > div {
+  min-height: 5.5rem;
+  padding: 1.1rem;
+  background: transparent;
+}
+
+:global(html[data-design='craft'] .atlas-public) .signal > div:first-child {
+  background: color-mix(in srgb, var(--atlas-jade-pale) 45%, transparent);
+}
+
+:global(html[data-design='craft'] .atlas-public) .signal dt {
+  font-family: var(--font-body);
+  font-size: .78rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:global(html[data-design='craft'] .atlas-public) .signal dd {
+  font-family: var(--font-body);
+  font-size: .95rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+:global(html[data-design='craft'] .atlas-public) .signal time {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+:global(html[data-design='craft'] .atlas-public) .referenceFact { font-weight: 400; }
+:global(html[data-design='craft'] .atlas-public) .footer { padding-top: 1.2rem; }
+
+:global(html[data-design='craft'][lang='zh'] .atlas-public) .card h2,
+:global(html[data-design='craft'][lang='zh'] .atlas-public) .card h3 { letter-spacing: -.02em; }
+
+@media (max-width: 560px) {
+  :global(html[data-design='craft'] .atlas-public) .card { padding: 1.25rem; }
+  :global(html[data-design='craft'] .atlas-public) .signal > div { min-height: auto; }
+  :global(html[data-design='craft'] .atlas-public) .signal > div + div { border-top: 1px solid var(--atlas-line); }
 }
 
 @media (max-width: 560px) {

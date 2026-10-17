@@ -121,6 +121,40 @@
   min-height: 1px;
 }
 
+:global(.atlas-public) .summary { margin-bottom: 1.4rem; padding-block: 1.1rem; }
+:global(.atlas-public) .range { gap: .4rem; font-size: .83rem; }
+:global(.atlas-public) .range strong { font-size: 1.5rem; font-weight: 500; }
+:global(.atlas-public) .chip { min-height: 2.75rem; padding: .55rem .8rem; border-radius: .3rem; font-weight: 600; }
+:global(.atlas-public) .clear { display: inline-flex; min-height: 2.75rem; align-items: center; font-weight: 650; }
+:global(.atlas-public) .pagination { margin-block: 1.4rem; }
+:global(.atlas-public) .page { font-family: var(--atlas-font-mono); font-size: .72rem; }
+
+:global(html[data-design='craft'] .atlas-public) .summary { gap: .95rem; margin-bottom: 1.5rem; padding-block: 1.15rem; }
+:global(html[data-design='craft'] .atlas-public) .range { font-family: var(--font-body); font-size: .9rem; }
+:global(html[data-design='craft'] .atlas-public) .range strong { font-family: var(--font-heading); font-size: 1.55rem; font-weight: 400; }
+:global(html[data-design='craft'] .atlas-public) .filterTitle { font-family: var(--font-body); font-size: .85rem; font-weight: 400; letter-spacing: 0; text-transform: none; }
+
+:global(html[data-design='craft'] .atlas-public) .chip {
+  min-height: 2.75rem;
+  padding: .6rem .95rem;
+  background: var(--atlas-paper-bright);
+  border: 1px solid var(--atlas-line);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: .82rem;
+  font-weight: 400;
+}
+
+:global(html[data-design='craft'] .atlas-public) .chip:hover { background: var(--atlas-jade-pale); border-color: var(--atlas-jade); transform: none; }
+:global(html[data-design='craft'] .atlas-public) .clear { font-family: var(--font-body); font-size: .85rem; font-weight: 400; }
+:global(html[data-design='craft'] .atlas-public) .pagination { gap: .75rem; margin-block: 1.75rem; }
+:global(html[data-design='craft'] .atlas-public) .page { font-family: var(--font-body); font-size: .85rem; line-height: 1.5; }
+
+@media (max-width: 560px) {
+  :global(html[data-design='craft'] .atlas-public) .pagination { gap: .4rem; }
+  :global(html[data-design='craft'] .atlas-public) .page { font-size: .75rem; }
+}
+
 @media (max-width: 560px) {
   .filterRow {
     align-items: flex-start;

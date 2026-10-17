@@ -173,6 +173,7 @@
 .modePicker button { text-align: left; border: 1px solid #e9e9f1; border-radius: 13px; padding: 12px 14px; background: #fff; color: #252638; cursor: pointer; }
 .modePicker button[aria-pressed=true] { border-color: #7860cf; background: #f6f3ff; }
 .modePicker small { display: block; font-size: 10px; color: #77798d; margin-top: 4px; }
+
 .modalActions { display: flex; justify-content: flex-end; margin-top: 23px; }
 .modalActions .primaryButton { background: #7860cf; color: white; }
 @media(min-width:1500px) { .content { padding-top: 46px; } .sidebar { flex-basis: 270px; } }
@@ -180,3 +181,114 @@
 @media(max-width:780px) { .workbench { display: block; } .sidebar { padding: 16px; border-right: 0; border-bottom: 1px solid var(--wb-border); gap: 12px; } .brand { padding: 0; } .workspaceBadge, .navLabel, .sidebarBottom { display: none; } .navigation { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 5px; margin-top: 5px; } .navigation button { padding: 10px 8px; justify-content: center; font-size: 11px; gap: 7px; } .navigation button svg { width: 15px; height: 15px; } .topbar { min-height: 57px; padding: 13px 20px; } .topbarRight { gap: 12px; } .content { padding: 26px 20px 20px; } .pageHeading { align-items: flex-start; gap: 14px; } .pageHeading h1 { font-size: 23px; } .pageHeading p:last-child { font-size: 11px; } .pageHeading .primaryButton { padding: 10px 12px; margin-top: 21px; } .metrics { grid-template-columns: 1fr 1fr; gap: 12px; } .overviewGrid { grid-template-columns: 1fr; gap: 16px; } .qualityBody { grid-template-columns: 1fr 1.4fr; } .qualityPercent { display: block; margin-left: 0; } .qualityBody > div > p { display: block; margin-left: 0; } .tokenPanel .tokenTotal { margin-top: 12px; } .tokenPanel .tokenDetails { display: flex; justify-content: space-between; gap: 20px; } .tokenPanel .tokenDetails > div { flex: 1; } .tasksGrid, .usageGrid { grid-template-columns: 1fr; gap: 14px; } .catalogGrid { grid-template-columns: 1fr 1fr; gap: 12px; } .footer { flex-wrap: wrap; } }
 @media(max-width:420px) { .content { padding-inline: 15px; } .pageHeading { flex-wrap: wrap; } .pageHeading .primaryButton { margin-top: 0; } .qualityBody { grid-template-columns: 1fr; } .panel { padding: 20px; } .navigation button { font-size: 10px; } .navigation b { display: none; } .metricCard p { font-size: 9px; } .loginCard { padding: 27px; } .themeChoices { grid-template-columns: repeat(2,minmax(0,1fr)); } .themeSwitcherHeading > small { font-size: 9px; } }
 @media(prefers-reduced-motion:reduce) { .workbench *, .workbench *::before, .workbench *::after { transition: none !important; animation: none !important; } }
+
+/* Atlas paper workspace: same locally hosted type and quiet geometry as the public site. */
+.workbench, .loginShell, .modal {
+  font-family: var(--atlas-font-sans, "Atlas Source Sans", "Microsoft YaHei", sans-serif);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.workbench { padding: 18px; gap: 20px; align-items: flex-start; }
+.workbench h1, .workbench h2, .workbench h3, .workbench[data-display=serif] .pageHeading h1,
+.loginCard h1, .modal h2 {
+  font-family: var(--atlas-font-display, "Atlas Source Serif", "Songti SC", Georgia, serif);
+  font-weight: 400;
+  letter-spacing: -.025em;
+}
+.sidebar {
+  position: sticky; top: 18px; min-height: calc(100dvh - 36px); flex-basis: 256px;
+  padding: 28px 16px 20px; border: 1px solid var(--wb-border); border-radius: 28px;
+  box-shadow: 0 8px 26px rgb(28 40 32 / .035);
+}
+.brand { padding: 0 6px 14px; font-family: var(--atlas-font-display, "Atlas Source Serif", Georgia, serif); font-size: 18px; font-weight: 400; letter-spacing: -.025em; line-height: 1.22; }
+.brandMark { flex-shrink: 0; width: 37px; height: 40px; border-radius: 0; background: transparent; color: var(--wb-ink); }
+.brandMark svg { display: block; width: 37px; height: 40px; }
+.brand small { margin-top: 7px; font-family: var(--atlas-font-sans); font-size: 8px; font-weight: 500; letter-spacing: .17em; }
+.workspaceBadge { background: var(--wb-background); border-radius: 18px; padding: 13px; }
+.navigation { gap: 6px; }
+.navigation button, .sidebarBottom > a { padding: 13px 15px; border-radius: 50px; font-size: 13px; }
+.navigation button.navActive { color: var(--wb-ink); font-weight: 600; }
+.sidebarBottom { padding-top: 35px; }
+.main { width: 100%; }
+.topbar { min-height: 76px; padding: 17px 26px; border: 1px solid var(--wb-border); border-radius: 50px; box-shadow: 0 8px 26px rgb(28 40 32 / .035); }
+.content { max-width: 1440px; padding: 40px 12px 22px; }
+.pageHeading { margin-bottom: 30px; }
+.pageHeading h1 { font-size: clamp(29px, 3vw, 43px); line-height: 1.25; }
+.pageHeading p:last-child { font-size: 14px; line-height: 1.8; }
+.eyebrow { font-size: 10px; letter-spacing: .15em; }
+.primaryButton { min-height: 44px; padding: 12px 22px; border-radius: 50px; font-size: 14px !important; font-weight: 600; box-shadow: none; }
+.primaryButton:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 18px color-mix(in srgb,var(--wb-accent) 14%,transparent); }
+.metrics { gap: 16px; }
+.metricCard, .panel, .runCard { border-radius: 24px; box-shadow: 0 7px 25px rgb(28 40 32 / .025); }
+.metricCard { padding: 23px; }
+.metricCard > strong { font-family: var(--atlas-font-display, "Atlas Source Serif", Georgia, serif); font-weight: 400; font-size: 36px; line-height: 1.25; margin: 15px 0 10px; }
+.metricCard > div, .metricCard p { font-size: 12px; line-height: 1.7; }
+.panel { padding: 28px; }
+.panel h2 { font-size: 23px; line-height: 1.35; }
+.panel h3, .runCard h3 { font-size: 19px; }
+.smallMuted, .panelHeading p, .tokenCoverage, .runModel, .runFooter, .runVerdicts { font-size: 12px; line-height: 1.75; }
+.qualityPanel { background: var(--wb-surface); }
+.qualityPercent { font-family: var(--atlas-font-display, "Atlas Source Serif", Georgia, serif); font-weight: 400; }
+.infoNotice { padding: 15px 18px; font-size: 13px; line-height: 1.7; border-radius: 18px; }
+.themeChoices > button { border-radius: 16px; }
+.themeChoices > button strong { font-size: 12px; }
+.themeChoices > button small { font-size: 10px; }
+.loginShell { background: var(--wb-background, #fcf9f7); color: var(--wb-ink, #141412); padding: 36px 20px; }
+.loginShell, .loginShell * { box-sizing: border-box; }
+.loginCard { width: min(500px,100%); padding: 42px; border-radius: 30px; background: var(--wb-surface, #fff); border-color: var(--wb-border, #e6e2dc); box-shadow: 0 18px 55px rgb(28 40 32 / .06); }
+.loginCard h1 { margin: 32px 0 12px; font-size: 31px; line-height: 1.4; }
+.loginCard p { color: var(--wb-muted, #6d6b66); font-size: 14px; }
+.loginCard input, .modal input { color: var(--wb-ink); background: var(--wb-surface); border: 1px solid var(--wb-border); min-height: 48px; border-radius: 16px; }
+.loginCard .primaryButton, .modalActions .primaryButton { background: var(--wb-accent, #20201e); color: var(--wb-surface, #fff); }
+.loginLinks { color: var(--wb-muted); font-size: 13px; }
+.loginLinks a { text-decoration: none; }
+.loginLinks a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.loginCard :where(a,input,button):focus-visible, .modal :where(a,input,button):focus-visible { outline: 2px solid var(--wb-accent); outline-offset: 4px; }
+.modal { color: var(--wb-ink); background: var(--wb-surface); border: 1px solid var(--wb-border); border-radius: 28px; }
+.modal p, .modePicker small { color: var(--wb-muted); font-size: 13px; }
+.modalHeading button, .modal .connectionDetail { color: var(--wb-ink); background: var(--wb-background); }
+.modePicker button { color: var(--wb-ink); background: var(--wb-surface); border-color: var(--wb-border); border-radius: 16px; }
+.modePicker button[aria-pressed=true] { border-color: var(--wb-accent); background: var(--wb-soft); }
+.error { color: var(--atlas-danger, #98514c); }
+@media(min-width:1500px) { .sidebar { flex-basis: 270px; } }
+@media(max-width:1100px) { .workbench { padding: 14px; gap: 14px; } .sidebar { top: 14px; flex-basis: 220px; min-height: calc(100dvh - 28px); } .brand { font-size: 16px; } .content { padding: 30px 8px 20px; } .metricCard { padding: 18px; } .panel { padding: 22px; } }
+@media(max-width:780px) {
+  .workbench { display: block; padding: 12px; }
+  .sidebar { position: relative; top: 0; min-height: 0; padding: 18px 16px 12px; margin-bottom: 14px; border: 1px solid var(--wb-border); border-radius: 24px; }
+  .brand { font-size: 20px; padding-bottom: 18px; }
+  .navigation { grid-template-columns: repeat(5,minmax(0,1fr)); gap: 4px; margin-top: 0; }
+  .navigation button { min-width: 0; flex-direction: column; gap: 5px; padding: 11px 3px; border-radius: 15px; font-size: 10px; }
+  .navigation button svg { width: 18px; height: 18px; }
+  .navigation b { display: none; }
+  .topbar { min-height: 62px; padding: 13px 16px; border-radius: 24px; }
+  .topbarRight { gap: 10px; }
+  .content { padding: 26px 3px 18px; }
+  .pageHeading { flex-wrap: wrap; gap: 16px; }
+  .pageHeading .primaryButton { margin-top: 0; }
+  .pageHeading h1 { font-size: 31px; }
+  .metricCard > strong { font-size: 32px; }
+  .panel { padding: 22px 19px; }
+  .loginCard { padding: 32px 25px; }
+}
+@media(prefers-reduced-motion:reduce) { .workbench *, .loginShell * { transition: none !important; animation: none !important; } }
+
+/* Keep operational details readable at the same scale as the public atlas. */
+.breadcrumb, .connection, .chartLegend > div, .tokenDetails > div,
+.usageRows strong, .sectionHeading p, .telemetryMeta { font-size: 13px; }
+.panelFootnote, .footer, .usageRows small { font-size: 12px; line-height: 1.7; }
+.sectionHeading h2 { font-size: 25px; font-weight: 400; }
+.tokenTotal { font-family: var(--atlas-font-display); font-size: 42px; font-weight: 400; }
+.tokenTotal span { font-family: var(--atlas-font-sans); font-size: 12px; }
+.status, .softBadge { font-size: 11px; border-radius: 50px; }
+@media(max-width:420px) {
+  .content { padding-inline: 2px; }
+  .topbar { padding-inline: 12px; }
+  .breadcrumb { font-size: 11px; }
+  .connection { font-size: 11px; }
+  .themeChoices { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .metrics { grid-template-columns: 1fr 1fr; }
+  .metricCard { padding: 16px 13px; }
+  .metricCard p { font-size: 11px; }
+  .tokenPanel .tokenDetails { display: grid; gap: 9px; }
+  .tokenTotal { font-size: 35px; flex-wrap: wrap; }
+}

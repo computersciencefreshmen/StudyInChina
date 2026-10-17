@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { connection } from 'next/server'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { ReleaseAnnouncement } from '@/components/features/ReleaseAnnouncement'
 import { SiteFooter } from '@/components/layout'
 import { AppHeader } from '@/components/layout/AppHeader'
+import { CraftBrandMark } from '@/components/ui/CraftBrandMark'
 import { localeDirection, launchLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
 import { getReleaseAnnouncement } from '@/i18n/release-announcement'
@@ -17,13 +19,14 @@ import '../globals.css'
 import '../feature-styles.css'
 import '../city-map.css'
 import '../themes.css'
+import '../craft.css'
 import { THEME_INIT_SCRIPT } from '@/lib/site-themes'
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
   applicationName: 'Study in China Atlas',
   formatDetection: { email: false, address: false, telephone: false },
-  icons: { icon: '/icon.svg' },
+  icons: { icon: { url: '/atlas-icon.svg', type: 'image/svg+xml' }, apple: '/atlas-apple-icon.png' },
 }
 
 export const revalidate = 86_400
@@ -33,6 +36,8 @@ export function generateStaticParams() {
 }
 
 export default async function LocaleLayout({ children, params }: Readonly<{ children: React.ReactNode; params: Promise<{ locale: string }> }>) {
+  // Publication reviews and application deadlines advance with China's calendar.
+  await connection()
   const locale = requireLocale((await params).locale)
   if (!locale) notFound()
   const messages = getMessages(locale)
@@ -42,9 +47,9 @@ export default async function LocaleLayout({ children, params }: Readonly<{ chil
   const releaseLabel = `${messages.shell.dataRelease}: ${releaseDate}`
   const announcement = getReleaseAnnouncement(locale)
 
-  return <html lang={locale} dir={localeDirection(locale)} data-theme="cloud" suppressHydrationWarning>
+  return <html lang={locale} dir={localeDirection(locale)} data-theme="craft" data-design="craft" suppressHydrationWarning>
     <head><script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} /></head>
-    <body>
+    <body className="atlas-public">
       <AppHeader locale={locale} />
       <ReleaseAnnouncement
         locale={locale}
@@ -61,6 +66,7 @@ export default async function LocaleLayout({ children, params }: Readonly<{ chil
         locale={locale}
         homeHref={`/${locale}`}
         brandName={messages.brand}
+        brandMark={<CraftBrandMark />}
         description={messages.footer.project}
         creator={{ prefix: messages.shell.creatorPrefix, label: 'Henry Yang', href: 'https://yanghanyu2023.wixsite.com/henry' }}
         columns={[

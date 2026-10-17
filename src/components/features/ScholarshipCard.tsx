@@ -24,8 +24,10 @@ export function ScholarshipCard({ scholarship, locale, messages, today }: { scho
   } as const
   const deadlineLabel = isStaleIdentity ? messages.common.stale : deadlineLabels[currentCycle.deadlineState]
   const deadlineTone = isStaleIdentity ? 'warning' as const : deadlineTones[currentCycle.deadlineState]
-  const stipend = formatCny(scholarship.coverage.stipendCnyPerMonth, locale, messages.common.unknown)
-  const funding = `${coverageLabel(scholarship.coverage.tuition, locale)} · ${stipend}`
+  const funding = [
+    scholarship.coverage.tuition !== 'unknown' ? coverageLabel(scholarship.coverage.tuition, locale) : null,
+    scholarship.coverage.stipendCnyPerMonth !== null ? formatCny(scholarship.coverage.stipendCnyPerMonth, locale, '') : null,
+  ].filter(value => value !== null).join(' · ')
   const universities = formatUniversityCoverage(
     scholarship.universityIds.length,
     locale,
@@ -35,21 +37,19 @@ export function ScholarshipCard({ scholarship, locale, messages, today }: { scho
   return <Card className={`record-card ${styles.card}`}>
     <div className={styles.identityRow}><Badge tone="gold">{providerLabel(scholarship.providerType, locale)}</Badge></div>
     <div><h3 className="record-card__title">{localize(scholarship.name, locale)}</h3></div>
-    <p className="record-card__summary">{localize(scholarship.summary, locale)}</p>
-    <dl className={`${styles.signal} ${styles.fundingSignal}`}>
-      <div><dt>{messages.common.deadline}</dt><dd className={styles.deadlineValue}>
+    {scholarship.summary ? <p className="record-card__summary">{localize(scholarship.summary, locale)}</p> : null}
+    {currentCycle.deadline || funding ? <dl className={`${styles.signal} ${styles.fundingSignal}`}>
+      {currentCycle.deadline ? <div><dt>{messages.common.deadline}</dt><dd className={styles.deadlineValue}>
         <Badge tone={deadlineTone}>{deadlineLabel}</Badge>
         {currentCycle.deadline
           ? <time dateTime={currentCycle.deadline}>{formatDate(currentCycle.deadline, locale, messages.common.unknown)}</time>
-          : messages.common.unknown}
-      </dd></div>
-      <div><dt>{decisionCopy.fundingHighlights}</dt><dd>{funding}</dd></div>
-    </dl>
+          : null}
+      </dd></div> : null}
+      {funding ? <div><dt>{decisionCopy.fundingHighlights}</dt><dd>{funding}</dd></div> : null}
+    </dl> : null}
     <dl className={`record-facts ${styles.supportingFacts}`}>
-      <div><dt>{messages.scholarships.accommodation}</dt><dd>{coverageLabel(scholarship.coverage.accommodation, locale)}</dd></div>
-      <div><dt>{messages.scholarships.insurance}</dt><dd>{scholarship.coverage.insurance === 'unknown'
-        ? messages.common.unknown
-        : scholarship.coverage.insurance ? messages.scholarships.included : messages.scholarships.notIncluded}</dd></div>
+      {scholarship.coverage.accommodation !== 'unknown' ? <div><dt>{messages.scholarships.accommodation}</dt><dd>{coverageLabel(scholarship.coverage.accommodation, locale)}</dd></div> : null}
+      {scholarship.coverage.insurance !== 'unknown' ? <div><dt>{messages.scholarships.insurance}</dt><dd>{scholarship.coverage.insurance ? messages.scholarships.included : messages.scholarships.notIncluded}</dd></div> : null}
       <div><dt>{messages.common.university}</dt><dd>{universities}</dd></div>
     </dl>
     <div className="record-card__actions">
@@ -59,7 +59,7 @@ export function ScholarshipCard({ scholarship, locale, messages, today }: { scho
       </a> : null}
     </div>
     <div className={styles.footer}>
-      <VerificationBadge status={scholarship.status} verifiedAt={scholarship.verifiedAt} locale={locale} verifiedDateLabel={messages.common.lastVerified} labels={{ verified: messages.common.verified, stale: messages.common.stale, draft: messages.common.draft, archived: messages.common.archived }} />
+      <VerificationBadge collection="scholarships" recordId={scholarship.id} status={scholarship.status} verifiedAt={scholarship.verifiedAt} locale={locale} verifiedDateLabel={messages.common.lastVerified} labels={{ verified: messages.common.verified, stale: messages.common.stale, draft: messages.common.draft, archived: messages.common.archived }} />
     </div>
   </Card>
 }

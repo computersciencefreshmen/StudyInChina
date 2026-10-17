@@ -19,6 +19,9 @@ const contentSecurityPolicy = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  outputFileTracingIncludes: {
+    '/api/v1/minimax-verification': ['./content/verification/minimax.json'],
+  },
   // These files belong to the local executor and must never enter website bundles.
   outputFileTracingExcludes: {
     '/*': ['./.official-harvest/**/*', './.tmp/**/*', './.env*', './.vercel/**/*'],

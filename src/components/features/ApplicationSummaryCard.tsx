@@ -25,6 +25,7 @@ export function ApplicationSummaryCard({
   actions?: ReactNode
   accent?: CardAccent
 }) {
+  const visibleFacts = facts.filter(fact => fact.value !== null && fact.value !== undefined && fact.value !== '' && typeof fact.value !== 'boolean')
   return <Card as="section" accent={accent} className={styles.summary}>
     <header className={styles.header}>
       <div>
@@ -33,12 +34,12 @@ export function ApplicationSummaryCard({
       </div>
       {status}
     </header>
-    <dl className={styles.facts}>
-      {facts.map((fact) => <div className={styles.fact} key={fact.label}>
+    {visibleFacts.length ? <dl className={styles.facts}>
+      {visibleFacts.map((fact) => <div className={styles.fact} key={fact.label}>
         <dt>{fact.label}</dt>
         <dd>{fact.value}</dd>
       </div>)}
-    </dl>
+    </dl> : null}
     {notice ? <p className={styles.notice}>{notice}</p> : null}
     {actions ? <div className={styles.actions}>{actions}</div> : null}
   </Card>

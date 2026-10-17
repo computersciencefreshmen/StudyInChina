@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Badge, Card, LinkButton, PageHero, SectionHeading } from '@/components/ui'
 import { CityConstellation } from '@/components/features/CityConstellation'
+import { CraftHomeVisual } from '@/components/features/CraftHomeVisual'
 import { UniversityCard } from '@/components/features/RecordCards'
+import styles from '@/components/features/CraftHomeVisual.module.css'
 import { formatStudentCityTitle, getHomeExperienceCopy } from '@/i18n/home-experience'
 import { getMessages } from '@/i18n/messages'
 import { localize } from '@/lib/data/format'
@@ -12,89 +13,62 @@ import { guides } from '@/lib/guides'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
-  const locale = requireLocale((await params).locale) || 'en'; const m = getMessages(locale)
-  return pageMetadata(locale, m.brand, m.home.intro)
+  const locale = requireLocale((await params).locale) || 'en'
+  const messages = getMessages(locale)
+  return pageMetadata(locale, messages.brand, messages.home.intro)
 }
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
-  const locale = requireLocale((await params).locale); if (!locale) notFound()
-  const messages = getMessages(locale); const experience = getHomeExperienceCopy(locale); const data = await getCatalogData()
-  const featured = data.universities.filter((item) => item.featured).slice(0, 6)
-  const fieldsByUniversity = Object.fromEntries(data.universities.map((university) => [university.id, [...new Set(data.programs.filter((program) => program.universityId === university.id).map(classifyProgramField))]]))
+  const locale = requireLocale((await params).locale)
+  if (!locale) notFound()
+  const messages = getMessages(locale), experience = getHomeExperienceCopy(locale), data = await getCatalogData()
+  const featured = data.universities.filter(item => item.featured).slice(0, 6)
+  const fieldsByUniversity = Object.fromEntries(data.universities.map(university => [university.id, [...new Set(data.programs.filter(program => program.universityId === university.id).map(classifyProgramField))]]))
   const fields = programFieldTaxonomy(locale)
-  const fieldCounts = Object.fromEntries(fields.map(({ key }) => [key, data.programs.filter((program) => classifyProgramField(program) === key).length]))
-  const officialSourceCount = data.sources.filter((source) => source.official).length
+  const fieldCounts = Object.fromEntries(fields.map(({ key }) => [key, data.programs.filter(program => classifyProgramField(program) === key).length]))
+  const officialSourceCount = data.sources.filter(source => source.official).length
   const latestSourceCheck = data.sources.reduce<string | null>((latest, source) => !latest || source.accessedAt > latest ? source.accessedAt : latest, null)
-  const sourceCheckLabel = latestSourceCheck
-    ? new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(`${latestSourceCheck}T00:00:00Z`))
-    : messages.common.unknown
-  const pathwayHrefs = [
-    'universities',
-    'programs',
-    'guides/verify-admissions-data',
-    'programs?applicationState=open',
-  ] as const
+  const sourceCheckLabel = latestSourceCheck ? new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(`${latestSourceCheck}T00:00:00Z`)) : null
+  const pathwayHrefs = ['universities', 'programs', 'guides/verify-admissions-data', 'programs?applicationState=open'] as const
 
-  return <>
-    <PageHero variant="feature" eyebrow={messages.home.eyebrow} title={messages.home.title} description={messages.home.intro}
-      actions={<><LinkButton href={`/${locale}/universities`} size="large" iconEnd="→">{messages.home.findUniversity}</LinkButton><LinkButton href={`/${locale}/programs`} variant="ghost" size="large">{messages.home.explorePrograms}</LinkButton></>}
-      meta={<><span>{data.universities.length} {messages.nav.universities}</span><span>{data.programs.length} {messages.nav.programs}</span><span>{data.cities.length} {messages.nav.cities}</span><span>{data.scholarships.length} {messages.nav.scholarships}</span></>}
-      aside={<div className="atlas-stack"><Badge tone="jade" dot>{messages.common.officialSource}</Badge><h2>{messages.home.sourceHeading}</h2><p>{messages.common.authoritativeNotice}</p><Link className="text-link" href={`/${locale}/data-policy`}>{messages.footer.dataPolicy} →</Link></div>} />
-
-    <section className="atlas-home-ledger" aria-labelledby="catalog-ledger-title">
-      <div className="atlas-container atlas-home-ledger__grid">
-        <div className="atlas-home-ledger__intro">
-          <div className="atlas-kicker">{experience.catalogEyebrow}</div>
-          <h2 id="catalog-ledger-title">{experience.catalogTitle}</h2>
-          <p>{experience.catalogIntro}</p>
-          <div className="atlas-home-ledger__freshness">
-            <span><i aria-hidden="true" />{experience.latestSourceCheck}: <time dateTime={latestSourceCheck || undefined}>{sourceCheckLabel}</time></span>
-            <Link href={`/${locale}/data-policy`}>{experience.policyLink} →</Link>
-          </div>
-        </div>
-        <dl className="atlas-home-ledger__metrics">
-          <div><dt>{messages.nav.universities}</dt><dd>{data.universities.length.toLocaleString(locale)}</dd></div>
-          <div><dt>{messages.nav.programs}</dt><dd>{data.programs.length.toLocaleString(locale)}</dd></div>
-          <div><dt>{messages.nav.scholarships}</dt><dd>{data.scholarships.length.toLocaleString(locale)}</dd></div>
-          <div><dt>{experience.officialSources}</dt><dd>{officialSourceCount.toLocaleString(locale)}</dd></div>
-        </dl>
-        <p className="atlas-home-ledger__principle"><span aria-hidden="true">※</span>{experience.noGuessing}</p>
-      </div>
+  return <div className={styles.home}>
+    <section className={styles.hero} aria-labelledby="home-title">
+      <p className={styles.eyebrow}>{messages.home.eyebrow}</p>
+      <h1 id="home-title">{messages.home.title}</h1>
+      <p className={styles.intro}>{messages.home.intro}</p>
+      <div className={styles.actions}><Link href={`/${locale}/universities`}>{messages.home.findUniversity}<span aria-hidden="true">↗</span></Link><Link href={`/${locale}/programs`}>{messages.home.explorePrograms}</Link></div>
+      <CraftHomeVisual locale={locale} labels={{ ...messages.nav, search: messages.common.search, searchPlaceholder: messages.programs.searchPlaceholder }} counts={{ universities: data.universities.length, programs: data.programs.length, cities: data.cities.length, guides: guides.length }} />
     </section>
 
-    <section className="atlas-container atlas-section atlas-home-pathway" aria-labelledby="applicant-pathway-title">
-      <SectionHeading eyebrow={experience.pathwayEyebrow} title={<span id="applicant-pathway-title">{experience.pathwayTitle}</span>} description={experience.pathwayIntro} />
-      <ol className="atlas-home-pathway__steps">
-        {experience.steps.map((step, index) => <li key={step.title}>
-          <Link href={`/${locale}/${pathwayHrefs[index]}`}>
-            <span className="atlas-home-pathway__number" aria-hidden="true">0{index + 1}</span>
-            <div><h3>{step.title}</h3><p>{step.description}</p></div>
-            <span className="atlas-home-pathway__arrow" aria-hidden="true">↗</span>
-          </Link>
-        </li>)}
-      </ol>
+    <section className={styles.ledger} aria-label={experience.catalogEyebrow}>
+      <dl className={styles.metrics}><div><dt>{messages.nav.universities}</dt><dd>{data.universities.length.toLocaleString(locale)}</dd></div><div><dt>{messages.nav.programs}</dt><dd>{data.programs.length.toLocaleString(locale)}</dd></div><div><dt>{messages.nav.scholarships}</dt><dd>{data.scholarships.length.toLocaleString(locale)}</dd></div><div><dt>{experience.officialSources}</dt><dd>{officialSourceCount.toLocaleString(locale)}</dd></div></dl>
+      <div className={styles.sourceLine}>{sourceCheckLabel ? <span>{experience.latestSourceCheck}: <time dateTime={latestSourceCheck!}>{sourceCheckLabel}</time></span> : null}<Link href={`/${locale}/data-policy`}>{experience.policyLink} ↗</Link></div>
+      <p className={styles.principle}>{experience.noGuessing}</p>
     </section>
 
-    <section className="atlas-container atlas-section">
-      <SectionHeading eyebrow="01" title={messages.home.featured} description={messages.home.featuredIntro} action={<LinkButton href={`/${locale}/universities`} variant="quiet">{messages.common.explore} →</LinkButton>} />
-      <div className="content-grid">{featured.map((university) => <UniversityCard key={university.id} university={university} city={data.cities.find((city) => city.id === university.cityId)} fields={fieldsByUniversity[university.id] || []} locale={locale} messages={messages} />)}</div>
+    <section className={styles.section} aria-labelledby="applicant-pathway-title">
+      <header className={styles.sectionHeading}><span className={styles.eyebrow}>{experience.pathwayEyebrow}</span><h2 id="applicant-pathway-title">{experience.pathwayTitle}</h2><p>{experience.pathwayIntro}</p></header>
+      <ol className={styles.pathway}>{experience.steps.map((step, index) => <li key={step.title}><Link href={`/${locale}/${pathwayHrefs[index]}`}><div className={styles.stepTop}><span>0{index + 1}</span><span aria-hidden="true">↗</span></div><h3>{step.title}</h3><p>{step.description}</p></Link></li>)}</ol>
     </section>
 
-    <section className="atlas-section home-band">
-      <div className="atlas-container">
-        <SectionHeading eyebrow="02" title={messages.home.disciplines} />
-        {data.programs.length ? <div className="discipline-grid">{fields.map(({ key, label, description }) => <Link className="discipline-tile" href={`/${locale}/programs?discipline=${key}`} key={key}><b>{label}</b><small>{description}</small><span>{fieldCounts[key]} {messages.nav.programs} →</span></Link>)}</div> : <div className="notice" data-testid="program-publication-note">{messages.home.programVerificationNote}</div>}
-      </div>
+    <section className={styles.section} aria-labelledby="featured-schools-title">
+      <header className={styles.sectionHeading}><span className={styles.eyebrow}>{messages.nav.universities}</span><h2 id="featured-schools-title">{messages.home.featured}</h2><p>{messages.home.featuredIntro}</p><Link href={`/${locale}/universities`}>{messages.common.explore} ↗</Link></header>
+      <div className="content-grid">{featured.map(university => <UniversityCard key={university.id} university={university} city={data.cities.find(city => city.id === university.cityId)} fields={fieldsByUniversity[university.id] || []} locale={locale} messages={messages} />)}</div>
     </section>
 
-    <section className="atlas-container atlas-section">
-      <SectionHeading eyebrow="03" title={formatStudentCityTitle(data.cities.length, locale)} description={messages.cities.intro} action={<LinkButton href={`/${locale}/cities`} variant="quiet">{messages.common.explore} →</LinkButton>} />
-      <CityConstellation cities={data.cities} locale={locale} />
+    <section className={styles.section} aria-labelledby="study-fields-title">
+      <header className={styles.sectionHeading}><span className={styles.eyebrow}>{messages.nav.programs}</span><h2 id="study-fields-title">{messages.home.disciplines}</h2></header>
+      {data.programs.length ? <div className={styles.fieldGrid}>{fields.map(({ key, label, description }) => <Link className={styles.field} href={`/${locale}/programs?discipline=${key}`} key={key}><b>{label}</b><small>{description}</small><span>{fieldCounts[key].toLocaleString(locale)} {messages.nav.programs}<span aria-hidden="true">↗</span></span></Link>)}</div> : <div className="notice" data-testid="program-publication-note">{messages.home.programVerificationNote}</div>}
     </section>
 
-    <section className="atlas-container atlas-section">
-      <SectionHeading eyebrow="04" title={messages.home.guideTitle} description={messages.guide.intro} action={<LinkButton href={`/${locale}/guides`} variant="quiet">{messages.common.explore} →</LinkButton>} />
-      <div className="content-grid">{guides.slice(0, 3).map((guide, index) => <Card key={guide.slug} accent={index === 0 ? 'vermilion' : 'none'}><Badge tone="neutral">0{index + 1}</Badge><h3 className="atlas-card__title">{localize(guide.title, locale)}</h3><p className="atlas-card__description">{localize(guide.summary, locale)}</p><div className="atlas-card__footer"><LinkButton href={`/${locale}/guides/${guide.slug}`} variant="quiet">{messages.common.viewDetails} →</LinkButton></div></Card>)}</div>
+    <section className={styles.section} aria-labelledby="student-cities-title">
+      <header className={styles.sectionHeading}><span className={styles.eyebrow}>{messages.nav.cities}</span><h2 id="student-cities-title">{formatStudentCityTitle(data.cities.length, locale)}</h2><p>{messages.cities.intro}</p><Link href={`/${locale}/cities`}>{messages.common.explore} ↗</Link></header>
+      <div className={styles.cityFrame}><CityConstellation cities={data.cities} locale={locale} /></div>
     </section>
-  </>
+
+    <section className={styles.section} aria-labelledby="application-guides-title">
+      <header className={styles.sectionHeading}><span className={styles.eyebrow}>{messages.nav.guides}</span><h2 id="application-guides-title">{messages.home.guideTitle}</h2><p>{messages.guide.intro}</p><Link href={`/${locale}/guides`}>{messages.common.explore} ↗</Link></header>
+      <div className={styles.guideGrid}>{guides.slice(0, 3).map((guide, index) => <Link className={styles.guideCard} href={`/${locale}/guides/${guide.slug}`} key={guide.slug}><span className={styles.guideNumber}>0{index + 1}</span><h3>{localize(guide.title, locale)}</h3><p>{localize(guide.summary, locale)}</p><span>{messages.common.viewDetails}<span aria-hidden="true">↗</span></span></Link>)}</div>
+    </section>
+  </div>
 }

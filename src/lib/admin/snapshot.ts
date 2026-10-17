@@ -205,10 +205,16 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
     const ledger = remote?.ledger ? { ...remote.ledger, todayDay } : null
     return { generatedAt, catalog: cachedCatalog.value, runs: remote?.runs || [],
       capabilities: { ...capabilities, startVerification: connected && controls, automationControl: connected && controls,
-        credentialSource: connected ? 'ccswitch' : capabilities.credentialSource, reason: connected && controls ? null : remote ? '本机执行器未在线，或控制通道尚未启用。' : capabilities.reason },
+        credentialSource: connected ? 'ccswitch' : capabilities.credentialSource, reason: connected && controls ? null
+          : !remote ? capabilities.reason
+            : !connected ? '执行器状态已过期或暂时离线，重新连接后即可控制核验任务。'
+              : remote.automation?.remotelyControllable !== true ? '执行器当前仅上传监控数据；开启任务控制通道后，才能恢复或暂停核验。'
+                : '执行器已连接，管理网站尚未启用远程任务控制。' },
       telemetry: { source: remote ? 'remote' : 'unavailable', observedAt: remote?.observedAt || null, stale: !remote || telemetryIsStale(remote.observedAt) },
       model: remote?.model || { configured: null }, usage: { ...(ledger ? ledgerTokenUsage(ledger, remote!.usage) : remote?.usage || emptyUsage()), budgetTokens: null },
-      usageBasis: ledger ? 'immutable-ledger' : remote ? 'saved-responses' : 'unavailable', ledger, automation }
+      usageBasis: ledger ? 'immutable-ledger' : remote ? 'saved-responses' : 'unavailable', ledger, automation,
+      ...(remote?.continuousPipeline ? { continuousPipeline: remote.continuousPipeline } : {}),
+      ...(remote?.catalogMaintenance ? { catalogMaintenance: remote.catalogMaintenance } : {}) }
   }
   const [runs, savedLedger, automation] = await Promise.all([
     readLocalVerificationRuns(), boundedJson(join(process.cwd(), '.tmp/minimax-verification/usage-ledger.json'), 512 * 1_024),
@@ -216,10 +222,16 @@ export async function getAdminSnapshot(): Promise<AdminSnapshot> {
   ])
   const ledger = projectUsageLedger(savedLedger, todayDay)
   const savedUsage = sumUsage(runs.map(run => run.tokenUsage))
+  const { minimaxContinuousStatusSchema, MINIMAX_CONTINUOUS_STATUS_PATH } = await import('./minimax-continuous-contract')
+  const continuous = minimaxContinuousStatusSchema.safeParse(await boundedJson(join(process.cwd(), MINIMAX_CONTINUOUS_STATUS_PATH), 16 * 1024))
+  const { readCatalogMaintenanceObservation } = await import('../../../scripts/ingestion/admin-catalog-maintenance-collector')
+  const catalogMaintenance = await readCatalogMaintenanceObservation(process.cwd(), Date.parse(generatedAt))
   return { generatedAt, catalog: cachedCatalog.value, runs, capabilities: { ...capabilities,
       automationControl: Boolean(automation && automation.reason !== 'process_identity_unconfirmed') },
     telemetry: { source: capabilities.localMonitoring ? 'local' : 'unavailable', observedAt: capabilities.localMonitoring ? generatedAt : null, stale: !capabilities.localMonitoring },
     model: { configured: model(process.env.MINIMAX_MODEL || process.env.ANTHROPIC_MODEL) ?? runs.find(run => run.model)?.model ?? null },
     usage: { ...(ledger ? ledgerTokenUsage(ledger, savedUsage) : savedUsage), budgetTokens: null }, usageBasis: ledger ? 'immutable-ledger' : 'saved-responses', ledger,
-    automation: automation ? { ...automation, quota: currentQuotaObservation(automation.quota) } : null }
+    automation: automation ? { ...automation, quota: currentQuotaObservation(automation.quota) } : null,
+    ...(continuous.success ? { continuousPipeline: continuous.data } : {}),
+    ...(catalogMaintenance ? { catalogMaintenance } : {}) }
 }

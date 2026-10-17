@@ -1,7 +1,7 @@
 'use client'
 import { useSyncExternalStore } from 'react'
 import { RoundedSelect } from './RoundedSelect'
-import { siteThemes } from '@/lib/site-themes'
+import { siteThemes, type SiteTheme } from '@/lib/site-themes'
 export const THEME_KEY = 'studycn-theme'
 const subscribe = (callback: () => void) => {
   const storage = (event: StorageEvent) => { if (event.key !== THEME_KEY) return; if (siteThemes.some(theme => theme.id === event.newValue)) document.documentElement.dataset.theme = event.newValue!; callback() }
@@ -10,8 +10,8 @@ const subscribe = (callback: () => void) => {
 }
 const snapshot = () => siteThemes.some(theme => theme.id === document.documentElement.dataset.theme) ? document.documentElement.dataset.theme! : 'cloud'
 export function useSiteTheme() { const selected = useSyncExternalStore(subscribe, snapshot, () => 'cloud'); return siteThemes.find(theme => theme.id === selected) ?? siteThemes[0] }
-export function ThemePreference({ locale = 'zh', compact = false }: { locale?: string; compact?: boolean }) {
-  const selected = useSyncExternalStore(subscribe, snapshot, () => 'cloud')
+export function ThemePreference({ locale = 'zh', compact = false, defaultTheme = 'cloud' }: { locale?: string; compact?: boolean; defaultTheme?: SiteTheme['id'] }) {
+  const selected = useSyncExternalStore(subscribe, snapshot, () => defaultTheme)
   const label = ({ zh: '界面主题', en: 'Theme', ru: 'Тема', de: 'Design', fr: 'Thème', es: 'Tema' } as Record<string,string>)[locale] ?? 'Theme'
   return <span style={{ display: 'inline-block', minWidth: compact ? 110 : 150 }}><RoundedSelect aria-label={label} value={selected} onChange={event => {
     document.documentElement.dataset.theme = event.target.value

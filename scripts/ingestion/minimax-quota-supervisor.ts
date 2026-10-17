@@ -287,6 +287,11 @@ export function windowsProcessProbe(pid: number, details: unknown, root: string,
   const normalize = (path: string) => path.toLowerCase().replaceAll('\\', '/')
   const args = typeof value?.commandLine === 'string' ? Array.from(value.commandLine.matchAll(/"([^"]*)"|'([^']*)'|(\S+)/g), match => normalize(match[1] ?? match[2] ?? match[3])) : []
   const nodeMatches = typeof value?.executablePath === 'string' && normalize(value.executablePath) === normalize(executable)
+  // Windows can expose the image name and creation time while withholding a
+  // service's command/executable path. A different image proves that a saved
+  // Node PID now belongs to another application; it never grants signal rights.
+  const otherImage = typeof value?.name === 'string' && /^[a-zA-Z0-9_.-]+\.exe$/i.test(value.name) &&
+    normalize(value.name) !== normalize(executable).split('/').at(-1)
   const verifierPath = 'scripts/ingestion/verify-catalog-minimax.ts'
   const supervisorPath = 'scripts/ingestion/minimax-quota-supervisor.ts'
   const runnerPath = 'scripts/ingestion/minimax-workload-runner.ts'
@@ -297,7 +302,7 @@ export function windowsProcessProbe(pid: number, details: unknown, root: string,
   const recoveryVerifier = nodeMatches && args.includes(normalize(join(root, verifierPath))) && ['--quota-guard', '--use-ccswitch', '--task-ids-file', '--recovery-from'].every(flag => args.includes(flag))
   const workloadRunner = nodeMatches && args.includes(normalize(join(root, runnerPath)))
   const adminVerifier = nodeMatches && (args.includes(normalize(join(root, verifierPath))) || args.includes(verifierPath) || args.includes(`./${verifierPath}`))
-  return { alive: true, inspected: Boolean(createdAt && typeof value?.executablePath === 'string' && typeof value?.commandLine === 'string'), fingerprint: createdAt ? `${pid}:${createdAt}` : null, createdAt, verifier, supervisor, recoveryVerifier, workloadRunner, adminVerifier }
+  return { alive: true, inspected: Boolean(createdAt && (otherImage || typeof value?.executablePath === 'string' && typeof value?.commandLine === 'string')), fingerprint: createdAt ? `${pid}:${createdAt}` : null, createdAt, verifier, supervisor, recoveryVerifier, workloadRunner, adminVerifier }
 }
 
 async function latestReceiptTimestamp(directory: string, validate: (value: Record<string, unknown>) => boolean, now: number): Promise<number | null> {
@@ -331,12 +336,15 @@ export async function inspectVerifierActivity(anchor: SupervisorAnchor, receipt:
 export async function probeNativeProcess(pid: number, root: string): Promise<ProcessProbe> {
   const empty: ProcessProbe = { alive: false, inspected: false, fingerprint: null, createdAt: null, verifier: false, supervisor: false }
   try { process.kill(pid, 0) } catch (error) {
-    return (error as NodeJS.ErrnoException).code === 'ESRCH' ? empty : { ...empty, alive: true }
+    if ((error as NodeJS.ErrnoException).code === 'ESRCH') return empty
+    // EPERM means the PID may exist without signal access. The read-only Windows
+    // query can still identify a reused service PID; do not skip that evidence.
+    if (process.platform !== 'win32' || (error as NodeJS.ErrnoException).code !== 'EPERM') return { ...empty, alive: true }
   }
   if (process.platform !== 'win32') return { ...empty, alive: true }
   try {
     const powershell = join(process.env.SystemRoot || 'C:\\Windows', 'System32', 'WindowsPowerShell', 'v1.0', 'powershell.exe')
-    const script = `$p = Get-CimInstance Win32_Process -Filter 'ProcessId = ${pid}'; if ($null -eq $p) { 'null' } else { [pscustomobject]@{ commandLine=$p.CommandLine; executablePath=$p.ExecutablePath; createdAt=$p.CreationDate.ToUniversalTime().ToString('o') } | ConvertTo-Json -Compress }`
+    const script = `$p = Get-CimInstance Win32_Process -Filter 'ProcessId = ${pid}'; if ($null -eq $p) { 'null' } else { [pscustomobject]@{ name=$p.Name; commandLine=$p.CommandLine; executablePath=$p.ExecutablePath; createdAt=$p.CreationDate.ToUniversalTime().ToString('o') } | ConvertTo-Json -Compress }`
     const result = await executeFile(powershell, ['-NoProfile', '-NonInteractive', '-WindowStyle', 'Hidden', '-Command', script], { windowsHide: true, timeout: 10_000, maxBuffer: 64 * 1024 })
     const value = asObject(JSON.parse(result.stdout.trim()))
     if (!value) return empty
