@@ -5,6 +5,7 @@ import { officialReferenceTuitionCopy } from '@/i18n/tuition-reference'
 import type { Messages } from '@/i18n/messages'
 import { getApplicationState, isCurrentOfficialReferenceTuition } from '@/lib/data/admission'
 import { formatDate, formatTuition, localize } from '@/lib/data/format'
+import { formatProgramDuration } from '@/lib/data/duration'
 import { degreeLabels, disciplineLabels, languageLabel, regionLabels } from '@/lib/data/labels'
 import type { FactStatus, FieldMeta } from '@/lib/catalog-api/types'
 import type { AdmissionCycle, City, Program, University } from '@/lib/data/types'
@@ -86,9 +87,9 @@ export function ProgramCard({ program, university, cycle, latestTuitionReference
     value: cycle?.closesOn,
   })
   const durationStatus = resolveFactStatus({
-    fieldMeta: program.fieldMeta?.durationMonths,
+    fieldMeta: program.fieldMeta?.[program.durationText ? 'durationText' : 'durationMonths'],
     stale: programIsStale,
-    value: program.durationMonths,
+    value: program.durationText ?? program.durationMonths,
   })
   const tuitionValue = !hasCurrentConfirmedTuition
     ? undefined
@@ -96,11 +97,7 @@ export function ProgramCard({ program, university, cycle, latestTuitionReference
   const tuitionReferenceValue = visibleTuitionReference?.tuitionCny == null
     ? undefined
     : `${formatTuition(visibleTuitionReference, locale, periodLabels[visibleTuitionReference.tuitionPeriod || 'other'], messages.common.unknown)} · ${visibleTuitionReference.academicYear}`
-  const durationValue = program.durationMonths
-    ? program.durationMonthsMax && program.durationMonthsMax !== program.durationMonths
-      ? `${program.durationMonths}–${program.durationMonthsMax} ${messages.common.months}`
-      : `${program.durationMonths} ${messages.common.months}`
-    : undefined
+  const durationValue = formatProgramDuration(program, locale, messages.common.months) ?? undefined
   const applicationState = getApplicationState(cycle, today)
   const canApply = !dynamicFactsAreStale && program.status === 'verified' && (applicationState === 'open' || applicationState === 'rolling') && Boolean(program.applyUrl)
   const stateLabels = {
@@ -140,7 +137,7 @@ export function ProgramCard({ program, university, cycle, latestTuitionReference
         ? <span className={styles.referenceFact} data-fact-status="reference">{currentOfficialReference ? <><Badge tone="gold">{officialReferenceTuitionCopy(locale).label}</Badge>{' '}</> : null}{tuitionReferenceValue}</span>
         : <FactValue status={tuitionStatus} locale={locale} value={tuitionValue} />}</dd></div> : null}
       {program.teachingLanguages.length ? <div><dt>{messages.common.language}</dt><dd>{program.teachingLanguages.map((item) => languageLabel(item, locale)).join(', ')}</dd></div> : null}
-      {program.durationMonths !== null ? <div><dt>{messages.common.duration}</dt><dd><FactValue status={durationStatus} locale={locale} value={durationValue} /></dd></div> : null}
+      {durationValue !== undefined ? <div><dt>{messages.common.duration}</dt><dd><FactValue status={durationStatus} locale={locale} value={durationValue} /></dd></div> : null}
     </dl>
     <div className={`record-card__actions ${styles.programActions}`}>
       <LinkButton href={`/${locale}/programs/${program.slug}`} variant="secondary" size="small">{messages.common.viewDetails}</LinkButton>

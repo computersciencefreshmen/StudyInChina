@@ -87,6 +87,21 @@ afterEach(() => {
 })
 
 describe('favorites comparison workspace', () => {
+  it('shows exact official semesters in saved programme comparison without inferring months', async () => {
+    window.localStorage.setItem(FAVORITES_KEY, JSON.stringify([ids[0]]))
+    const item = comparisonItem(ids[0])
+    Object.assign(item.program, { durationMonths: null, durationText: { en: '2 semesters' } })
+    vi.stubGlobal('fetch', vi.fn(async () => ({
+      ok: true, status: 200,
+      json: async () => ({ data: { items: [item], missingIds: [] }, meta: {} }),
+    }) as Response))
+    const user = userEvent.setup()
+    render(<FavoritesView locale="en" messages={getMessages('en')} />)
+    await user.click(await screen.findByRole('checkbox'))
+    expect(screen.getByText('2 semesters')).toBeVisible()
+    expect(screen.queryByText('12 months')).not.toBeInTheDocument()
+  })
+
   it('keeps the server page from serializing the complete catalogue', () => {
     const source = readFileSync(
       join(process.cwd(), 'src', 'app', '[locale]', 'favorites', 'page.tsx'),

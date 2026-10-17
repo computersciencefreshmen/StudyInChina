@@ -14,6 +14,7 @@ import { officialReferenceTuitionCopy } from '@/i18n/tuition-reference'
 import { getMessages } from '@/i18n/messages'
 import { getApplicationState, isCurrentOfficialReferenceTuition, selectAdmissionCycle } from '@/lib/data/admission'
 import { selectProgramPrebuildSlugs } from '@/lib/data/detail-prebuild'
+import { formatProgramDuration, hasConfirmedProgramDuration, programIsoDuration } from '@/lib/data/duration'
 import { formatCny, formatDate, formatTuition, localize, localizeProgramText } from '@/lib/data/format'
 import { getTodayDate, isCurrentVerifiedRecord } from '@/lib/data/freshness'
 import { degreeLabels, disciplineLabels, languageLabel } from '@/lib/data/labels'
@@ -76,7 +77,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   const city = data.cities.find((item) => item.id === university.cityId)
   const today = getTodayDate()
   const cycle = selectAdmissionCycle(data.admissionCycles, program.id, today)
-  if (!details || program.durationMonths === null || !cycle) {
+  if (!details || !hasConfirmedProgramDuration(program) || !cycle) {
     const partialSourceIds = new Set([...program.sourceIds, ...(cycle?.sourceIds ?? [])])
     const sources = data.sources.filter((source) => partialSourceIds.has(source.id))
     const lastSourceCheckedAt = sources.map((source) => source.accessedAt).sort().at(-1)
@@ -113,11 +114,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
       month: messages.programs.tuitionMonth,
       other: messages.programs.tuitionOther,
     }
-    const partialDuration = program.durationMonths === null
-      ? null
-      : program.durationMonthsMax && program.durationMonthsMax !== program.durationMonths
-        ? `${program.durationMonths}–${program.durationMonthsMax} ${messages.common.months}`
-        : `${program.durationMonths} ${messages.common.months}`
+    const partialDuration = formatProgramDuration(program, locale, messages.common.months)
     const partialReferenceTuition = isCurrentOfficialReferenceTuition(cycle, today)
     const partialTuition = cycle?.tuitionCny == null || cycle.tuitionStatus === 'reference' && !partialReferenceTuition
       ? null
@@ -275,9 +272,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
   const tuition = cycle.tuitionCny === null || cycle.tuitionStatus === 'reference' && !referenceTuition
     ? null
     : formatTuition(cycle, locale, tuitionPeriodLabels[cycle.tuitionPeriod || 'other'], messages.common.unknown)
-  const duration = program.durationMonthsMax && program.durationMonthsMax !== program.durationMonths
-    ? `${program.durationMonths}–${program.durationMonthsMax} ${messages.common.months}`
-    : `${program.durationMonths} ${messages.common.months}`
+  const duration = formatProgramDuration(program, locale, messages.common.months)
   const evidenceBasis = cycle.evidenceBasis === 'recurring-official-rule'
     ? messages.programs.recurringRule
     : messages.programs.cycleSpecific
@@ -307,9 +302,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<{ 
     applicationStartDate: cycle.opensOn || undefined,
     applicationDeadline: cycle.closesOn || undefined,
     educationalCredentialAwarded: details.qualification ? localize(details.qualification, locale) : undefined,
-    timeToComplete: program.durationMonthsMax && program.durationMonthsMax !== program.durationMonths
-      ? undefined
-      : `P${program.durationMonths}M`,
+    timeToComplete: programIsoDuration(program),
   }
 
   return <>

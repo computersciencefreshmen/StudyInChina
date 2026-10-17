@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-17T06:43:20.027892+00:00",
+  "reviewer": "codex-independent-business-research",
+  "batchPath": "quality/map-program-fill-20261017/southwest-jiaotong-university/full-program-batch-draft-v3.json",
+  "batchSha256": "8d81cfffc4a7ac06e9328b70c13485d9cf29da0b6d0146b8de8c8e9749905342",
+  "sourceRawSha256": "94751800de8ba5e4e7d967a9a5d120d75374eb11dd960cccc61f9fcab515f7ee",
+  "sourceTextSha256": "a794baa2d168873aeb10983f1b87682639a0498a31cb2ac1cdf12fae352f7eea",
+  "priorReviewPaths": [
+    "quality/map-program-fill-20261017/southwest-jiaotong-university/independent-review.json",
+    "quality/map-program-fill-20261017/southwest-jiaotong-university/independent-review-v2.json"
+  ],
+  "outcome": "pass",
+  "pass": true,
+  "scope": "Independent semantic and source-integrity review of two candidate entries. This is a review receipt only, not a canonical publication receipt. Original draft reviewer fields are unchanged.",
+  "resolvedIssues": [
+    {
+      "id": "exact-duration",
+      "detail": "Both durations are exact official Chinese text only: elementary 2学期 and intermediate 1学期. No invented English exact wording or month conversion."
+    },
+    {
+      "id": "notarization-scope",
+      "detail": "Transcripts and notarized academic certificate are explicitly separated; translations of either document require notarization when the original is neither Chinese nor English."
+    }
+  ],
+  "checks": [
+    {
+      "id": "source-integrity",
+      "status": "pass",
+      "detail": "Independently recomputed raw/text SHA-256, checked receipt byte count, HTTP 200, identical official requested/final URLs, and checked every quoted field against both saved text and independently parsed raw HTML."
+    },
+    {
+      "id": "program-identity-language",
+      "status": "pass",
+      "detail": "Elementary/intermediate are explicit tracks with distinct official lengths; both are language training, not academic degrees. English + Chinese teaching is explicit."
+    },
+    {
+      "id": "placement-and-learning-goals",
+      "status": "pass",
+      "detail": "HSK levels are under 项目目标, not admission thresholds. Draft correctly uses entry-test placement and says no mandatory HSK entrance score is specified rather than asserting unconditional eligibility."
+    },
+    {
+      "id": "fees-and-time",
+      "status": "pass",
+      "detail": "Tuition period, 14000 annual alternative, 400 application fee, non-refundability and payment after preliminary review agree. January 1 is an explicitly named end date; competing 日前 wording is disclosed and applicants are advised to apply early. opensOn remains unknown rather than substituting capture/publication date."
+    },
+    {
+      "id": "conditional-materials",
+      "status": "pass",
+      "detail": "Passport expiry beyond September 2027, notarized academic certificate, translated non-Chinese/non-English documents, six-month complete medical form with required seals and signatures, financial evidence, local-authority noncriminal record, under-18 guardian documents, and in-China current visa/residence-permit copies are preserved."
+    },
+    {
+      "id": "application-url",
+      "status": "pass",
+      "detail": "The plain-text official URL and navigation login href support https://admission.swjtu.edu.cn. One body hyperlink has a malformed punycode href, which was not followed or used; canonical proposal correctly uses the explicitly printed official host."
+    }
+  ],
+  "issues": [],
+  "reviewedCandidateEntries": 2,
+  "canonicalWrites": 0,
+  "paidCalls": 0
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-17T06:45:23.463384+00:00",
+  "reviewer": "codex-independent-business-research",
+  "batchPath": "quality/map-program-fill-20261017/southwest-jiaotong-university/full-program-batch-draft-v4.json",
+  "batchSha256": "6ec9a4322698edac6118309e26a67ff018320876a691691a9af04933104e0f71",
+  "sourceRawSha256": "94751800de8ba5e4e7d967a9a5d120d75374eb11dd960cccc61f9fcab515f7ee",
+  "sourceTextSha256": "a794baa2d168873aeb10983f1b87682639a0498a31cb2ac1cdf12fae352f7eea",
+  "priorReviewPath": "quality/map-program-fill-20261017/southwest-jiaotong-university/independent-review-v3.json",
+  "outcome": "pass",
+  "pass": true,
+  "checks": [
+    {
+      "id": "metadata-delta",
+      "status": "pass",
+      "detail": "Structurally compared v3/v4: only batchId suffix and the one source kind changed from admissions to program. The same official document is a specific 2027 language-programme guide and therefore is correctly classified as program. No URL, raw evidence, program, cycle or reviewer field changed."
+    },
+    {
+      "id": "source-hash-recheck",
+      "status": "pass",
+      "detail": "Raw and text capture SHA-256 independently rechecked against the accepted v3 review."
+    }
+  ],
+  "issues": [],
+  "reviewedCandidateEntries": 2,
+  "canonicalWrites": 0,
+  "paidCalls": 0
+}

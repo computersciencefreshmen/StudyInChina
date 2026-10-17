@@ -4,6 +4,7 @@ import { dirname, isAbsolute, relative, resolve, sep } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { bundleSchema, programSchema, admissionCycleSchema, sourceSchema } from '../../src/lib/data/schema'
 import { getTodayDate } from '../../src/lib/data/freshness'
+import { hasConfirmedProgramDuration } from '../../src/lib/data/duration'
 import type { AdmissionCycle, DataBundle, Program, Source } from '../../src/lib/data/types'
 
 export type FieldEvidence = { field: string; sourceId: string; quote: string; locator?: string; derivation?: string }
@@ -12,7 +13,7 @@ export type FullProgramEntry = { program: Program; cycle: AdmissionCycle; eviden
 export type FullProgramBatch = { schemaVersion: 1; batchId: string; allowOfficialReferenceTuition?: boolean; sources: Source[]; captures: Capture[]; entries: FullProgramEntry[] }
 const digest = (value: Uint8Array | string) => createHash('sha256').update(value).digest('hex')
 const normalized = (value: string) => value.normalize('NFKC').replace(/\s+/gu, ' ').trim()
-const requiredFields = ['name', 'degreeLevel', 'teachingLanguages', 'durationMonths', 'applyUrl', 'languageRequirements', 'eligibility', 'applicationMaterials', 'closesOn', 'tuitionCny', 'tuitionPeriod', 'applicationFeeCny']
+const requiredFields = ['name', 'degreeLevel', 'teachingLanguages', 'applyUrl', 'languageRequirements', 'eligibility', 'applicationMaterials', 'closesOn', 'tuitionCny', 'tuitionPeriod', 'applicationFeeCny']
 
 function localFile(root: string, name: string): Buffer {
   if (isAbsolute(name)) throw Error('evidence_path_absolute')
@@ -44,7 +45,7 @@ export function assessFullProgramBatch(root: string, batch: FullProgramBatch, ca
     if (seen.has(p.id)) blockers.push('duplicate_program_id'); seen.add(p.id)
     if (!universityIds.has(p.universityId)) blockers.push('parent_university_not_public')
     if (p.status !== 'verified' || p.verificationScope === 'identity' || p.verifiedAt > today || p.reviewAfter < today) blockers.push('program_not_current_fact_review')
-    if (!p.teachingLanguages.length || p.durationMonths === null || !p.applyUrl || !p.languageRequirements.length) blockers.push('incomplete_program_admissions')
+    if (!p.teachingLanguages.length || !hasConfirmedProgramDuration(p) || !p.applyUrl || !p.languageRequirements.length) blockers.push('incomplete_program_admissions')
     if (!p.supplementaryDetails?.eligibility?.length && !p.details?.eligibility?.length) blockers.push('academic_eligibility_missing')
     if (!p.supplementaryDetails?.applicationMaterials?.length && !p.details?.applicationMaterials?.length) blockers.push('application_materials_missing')
     if (cycle.programId !== p.id || cycle.status !== 'verified' || cycle.verifiedAt > today || cycle.reviewAfter < today || cycle.factScope !== 'complete') blockers.push('cycle_not_current_complete')
@@ -58,7 +59,8 @@ export function assessFullProgramBatch(root: string, batch: FullProgramBatch, ca
     if (entry.reviewer !== 'codex' || !Number.isFinite(Date.parse(entry.reviewedAt)) || Date.now() - Date.parse(entry.reviewedAt) > 24 * 60 * 60_000 || Date.parse(entry.reviewedAt) > Date.now() + 5000) blockers.push('independent_review_missing')
     const recordSources = new Set([...p.sourceIds, ...cycle.sourceIds])
     if ([...recordSources].some(id => failedSources.has(id) || !texts.has(id))) blockers.push('fresh_captured_source_missing')
-    for (const field of [...requiredFields, ...(cycle.tuitionSchedule ? ['tuitionSchedule'] : [])]) {
+    const durationFields = [...(p.durationMonths !== null ? ['durationMonths'] : []), ...(p.durationText || p.durationMonths === null ? ['durationText'] : [])]
+    for (const field of [...requiredFields, ...durationFields, ...(cycle.tuitionSchedule ? ['tuitionSchedule'] : [])]) {
       if (field === 'closesOn' && cycle.dateStatus === 'rolling') continue
       const proofs = entry.evidence.filter(item => {
         const key = item.field.replace(/^(program|cycle)\./u, '').replace(/^(supplementaryDetails|details)\./u, '').replace(/\[.*$/u, '')
@@ -66,6 +68,13 @@ export function assessFullProgramBatch(root: string, batch: FullProgramBatch, ca
       })
       if (!proofs.length) { blockers.push('field_evidence_missing:' + field); continue }
       if (!proofs.some(proof => recordSources.has(proof.sourceId) && normalized(proof.quote).length > 0 && texts.get(proof.sourceId)?.includes(normalized(proof.quote)))) blockers.push('quote_not_in_official_capture:' + field)
+    }
+    // Each supplied localized duration is an exact source claim, not a guessed conversion.
+    for (const [locale, value] of Object.entries(p.durationText ?? {})) {
+      if (!value) continue
+      const supported = entry.evidence.some(proof => ['durationText', 'program.durationText', `durationText.${locale}`, `program.durationText.${locale}`].includes(proof.field)
+        && recordSourceProof(proof, p, cycle, texts) && normalized(proof.quote).includes(normalized(value)))
+      if (!supported) blockers.push('duration_text_not_in_official_evidence:' + locale)
     }
     return { ...entry, blockers: [...new Set(blockers)], ready: blockers.length === 0 }
   })

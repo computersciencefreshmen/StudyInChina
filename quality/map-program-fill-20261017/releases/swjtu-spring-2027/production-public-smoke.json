@@ -1,0 +1,164 @@
+{
+  "pass": true,
+  "checkedAt": "2026-10-17T07:07:50.433Z",
+  "base": "https://studyinchina.vercel.app",
+  "prefix": "production",
+  "today": "2026-10-17",
+  "sourcePlanSha256": "1f150fe54710d165da05dc7570e69d34138d33c14f690aa2e43e750a34fabd42",
+  "smokeRunnerSha256": "5ef8c7860c981648b6718f5b115229f12ac5570018379b542274986f478b1d7c",
+  "publicCounts": {
+    "sources": 697,
+    "cities": 62,
+    "universities": 255,
+    "programs": 757,
+    "admissionCycles": 757,
+    "scholarships": 0
+  },
+  "checks": [
+    {
+      "route": "/api/v1/releases/current",
+      "pass": true
+    },
+    {
+      "route": "/api/v1/programs",
+      "records": 757,
+      "exactDurationRoundtrip": true,
+      "pass": true
+    },
+    {
+      "route": "university-pages",
+      "records": 2,
+      "pending": 1,
+      "pass": true
+    },
+    {
+      "route": "/en/programs/tsinghua-university-computer-science-bachelor",
+      "pass": true,
+      "status": 404
+    },
+    {
+      "route": "/api/v1/programs/tsinghua-university-computer-science-bachelor",
+      "pass": true,
+      "status": 404
+    },
+    {
+      "route": "/en/universities/sun-yat-sen-university",
+      "pass": true
+    },
+    {
+      "route": "/en/universities/southwest-jiaotong-university",
+      "pass": true
+    },
+    {
+      "route": "/en/programs/southwest-jiaotong-university-chinese-language-elementary",
+      "pass": true
+    },
+    {
+      "route": "/zh/universities/sun-yat-sen-university",
+      "pass": true
+    },
+    {
+      "route": "/zh/universities/southwest-jiaotong-university",
+      "pass": true
+    },
+    {
+      "route": "/zh/programs/southwest-jiaotong-university-chinese-language-elementary",
+      "pass": true
+    },
+    {
+      "route": "/ru/universities/sun-yat-sen-university",
+      "pass": true
+    },
+    {
+      "route": "/ru/universities/southwest-jiaotong-university",
+      "pass": true
+    },
+    {
+      "route": "/ru/programs/southwest-jiaotong-university-chinese-language-elementary",
+      "pass": true
+    },
+    {
+      "route": "/de/universities/sun-yat-sen-university",
+      "pass": true
+    },
+    {
+      "route": "/de/universities/southwest-jiaotong-university",
+      "pass": true
+    },
+    {
+      "route": "/de/programs/southwest-jiaotong-university-chinese-language-elementary",
+      "pass": true
+    },
+    {
+      "route": "/fr/universities/sun-yat-sen-university",
+      "pass": true
+    },
+    {
+      "route": "/fr/universities/southwest-jiaotong-university",
+      "pass": true
+    },
+    {
+      "route": "/fr/programs/southwest-jiaotong-university-chinese-language-elementary",
+      "pass": true
+    },
+    {
+      "route": "/es/universities/sun-yat-sen-university",
+      "pass": true
+    },
+    {
+      "route": "/es/universities/southwest-jiaotong-university",
+      "pass": true
+    },
+    {
+      "route": "/es/programs/southwest-jiaotong-university-chinese-language-elementary",
+      "pass": true
+    },
+    {
+      "route": "city-university-project-navigation",
+      "pass": true
+    },
+    {
+      "route": "mobile-project",
+      "pass": true
+    }
+  ],
+  "universities": [
+    {
+      "id": "uni-southwest-jiaotong-university",
+      "route": "/en/universities/southwest-jiaotong-university",
+      "pass": true,
+      "currentPrograms": 2,
+      "pending": false
+    },
+    {
+      "id": "uni-sun-yat-sen-university",
+      "route": "/en/universities/sun-yat-sen-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    }
+  ],
+  "details": [
+    {
+      "id": "program-southwest-jiaotong-university-chinese-language-elementary",
+      "route": "/en/programs/southwest-jiaotong-university-chinese-language-elementary",
+      "pass": true,
+      "conditions": 10,
+      "officialDuration": {
+        "zh": "2学期"
+      },
+      "htmlSha256": "183e26bbd786532d43de1589a228a84eab44bb226517c9341a1331c9e0f30b6f"
+    },
+    {
+      "id": "program-southwest-jiaotong-university-chinese-language-intermediate",
+      "route": "/en/programs/southwest-jiaotong-university-chinese-language-intermediate",
+      "pass": true,
+      "conditions": 10,
+      "officialDuration": {
+        "zh": "1学期"
+      },
+      "htmlSha256": "940d34fdf1a5614eb0220439636903e0f481950262888373f4d1bd8977d28dde"
+    }
+  ],
+  "browserErrors": 0
+}

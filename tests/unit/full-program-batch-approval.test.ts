@@ -22,6 +22,8 @@ const visibleText = [
   'Tuition: 30000 RMB per academic year. Application fee: 500 RMB.',
   'Published tuition is an official reference only; the final amount follows the admission notice.',
   'Variable tuition: first year 150000 RMB; second and third years 30000 RMB each.',
+  'Official duration: 16 weeks. Another official route lasts 2 semesters.',
+  '学制：1学期或2学期。',
 ].join('\n')
 
 beforeEach(() => {
@@ -90,6 +92,57 @@ function referenceTuition(batch: FullProgramBatch) {
 }
 
 describe('full admissions approval from immutable official captures', () => {
+  it.each(['16 weeks', '2 semesters'])('accepts exact official duration %s without manufacturing months', async value => {
+    const { program, batch, source, assess } = await fixture()
+    program.durationMonths = null
+    program.durationText = { en: value }
+    batch.entries[0].evidence = batch.entries[0].evidence.filter(proof => proof.field !== 'program.durationMonths')
+    batch.entries[0].evidence.push({ field: 'program.durationText.en', sourceId: source.id, quote: value })
+    expect(assess()).toMatchObject({ ready: 1, held: 0 })
+    expect(program.durationMonths).toBeNull()
+  })
+
+  it('holds textual duration without its own captured field proof', async () => {
+    const { program, assess } = await fixture()
+    program.durationMonths = null
+    program.durationText = { en: '16 weeks' }
+    expect(assess().entries[0].blockers).toContain('field_evidence_missing:durationText')
+    expect(assess().ready).toBe(0)
+  })
+
+  it('accepts Chinese-only duration with a matching Chinese source quote', async () => {
+    const { program, batch, source, assess } = await fixture()
+    program.durationMonths = null
+    program.durationText = { zh: '2学期' }
+    batch.entries[0].evidence = batch.entries[0].evidence.filter(proof => proof.field !== 'program.durationMonths')
+    batch.entries[0].evidence.push({ field: 'program.durationText.zh', sourceId: source.id, quote: '学制：1学期或2学期。' })
+    expect(assess()).toMatchObject({ ready: 1, held: 0 })
+  })
+
+  it('rejects an invented duration even when another duration quote is genuine', async () => {
+    const { program, batch, source, assess } = await fixture()
+    program.durationMonths = null
+    program.durationText = { en: '4 months' }
+    batch.entries[0].evidence.push({ field: 'program.durationText.en', sourceId: source.id, quote: '16 weeks' })
+    expect(assess().entries[0].blockers).toContain('duration_text_not_in_official_evidence:en')
+    expect(assess().ready).toBe(0)
+  })
+
+  it('still requires duration when both numeric months and official wording are absent', async () => {
+    const { program, assess } = await fixture()
+    program.durationMonths = null
+    expect(assess().entries[0].blockers).toContain('incomplete_program_admissions')
+    expect(assess().ready).toBe(0)
+  })
+
+  it('does not let a duration text proof replace numeric duration evidence', async () => {
+    const { program, batch, source, assess } = await fixture()
+    program.durationText = { en: '2 semesters' }
+    batch.entries[0].evidence = batch.entries[0].evidence.filter(proof => proof.field !== 'program.durationMonths')
+    batch.entries[0].evidence.push({ field: 'program.durationText.en', sourceId: source.id, quote: '2 semesters' })
+    expect(assess().entries[0].blockers).toContain('field_evidence_missing:durationMonths')
+  })
+
   it('applies a complete independently reviewed entry and records exact before/after rows', async () => {
     const { root, batch, catalogSha, program, cycle, snapshot } = await fixture()
     const before = await snapshot()

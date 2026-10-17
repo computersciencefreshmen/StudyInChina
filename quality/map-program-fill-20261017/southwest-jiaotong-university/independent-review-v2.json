@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-17T06:42:44.347219+00:00",
+  "reviewer": "codex-independent-business-research",
+  "batchPath": "quality/map-program-fill-20261017/southwest-jiaotong-university/full-program-batch-draft-v2.json",
+  "batchSha256": "b4d017f9710efcacd80d50c21cd53f6ec6e7a9712252c6215adef526e60fd4e0",
+  "sourceRawSha256": "94751800de8ba5e4e7d967a9a5d120d75374eb11dd960cccc61f9fcab515f7ee",
+  "sourceTextSha256": "a794baa2d168873aeb10983f1b87682639a0498a31cb2ac1cdf12fae352f7eea",
+  "priorReviewPath": "quality/map-program-fill-20261017/southwest-jiaotong-university/independent-review.json",
+  "outcome": "changes-required",
+  "pass": false,
+  "checks": [
+    {
+      "id": "exact-duration",
+      "status": "pass",
+      "detail": "Both entries now retain only exact official zh semester wording, with no month conversion."
+    },
+    {
+      "id": "unmodified-reviewed-facts",
+      "status": "pass",
+      "detail": "Compared v1/v2 structurally; only batchId, durationText.en and the reviewed application-material sentence changed. Previously checked facts and capture hashes are unchanged."
+    }
+  ],
+  "issues": [
+    {
+      "severity": "must-fix-before-approval",
+      "field": "program.supplementaryDetails.applicationMaterials[1]",
+      "problem": "English still says Notarized academic certificate and academic transcripts; Chinese first sentence also groups both documents as notarized before later saying transcripts are not required to be notarized. The scope remains ambiguous.",
+      "requiredFix": {
+        "en": "Academic transcripts and a notarized academic certificate. If either document is not in Chinese or English, provide a notarized Chinese or English translation.",
+        "zh": "成绩单；经公证的学历证明。两类文件如非中英文，须另附经公证的中文或英文译文。"
+      }
+    }
+  ],
+  "approvedEntries": 0,
+  "canonicalWrites": 0,
+  "paidCalls": 0
+}

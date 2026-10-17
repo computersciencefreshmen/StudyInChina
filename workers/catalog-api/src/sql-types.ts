@@ -148,6 +148,7 @@ export type ProgramDto = RecordDto<
     attendanceMode: 'full_time' | 'part_time' | 'hybrid'
     deliveryMode: 'on_campus' | 'online' | 'hybrid'
     duration: DurationDto
+    durationText?: LocalizedValue
     disciplineCodes: string[]
     teachingLanguageCodes: string[]
     officialUrl: string

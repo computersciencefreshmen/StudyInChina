@@ -86,7 +86,7 @@ function fieldAudit(value: UnknownRecord, today: string) {
 
 function durationMonths(value: unknown, unit: unknown): number | null {
   if (typeof value !== 'number' || !Number.isFinite(value) || value <= 0) return null
-  const factor = unit === 'academic_years' ? 12 : unit === 'semesters' ? 6 : unit === 'months' ? 1 : null
+  const factor = unit === 'academic_years' ? 12 : unit === 'months' ? 1 : null
   if (factor === null) return null
   return Math.min(120, Math.max(1, Math.round(value * factor)))
 }
@@ -266,6 +266,7 @@ function normalizeProgram(value: unknown, today: string): CatalogProgramListItem
     teachingLanguages: languages.filter((item): item is string => typeof item === 'string').map(teachingLanguage),
     durationMonths: minimumDuration,
     durationMonthsMax: maximumDuration,
+    durationText: isObject(attributes.durationText ?? value.durationText) ? localized(attributes.durationText ?? value.durationText, '') : undefined,
     programUrl: officialUrl,
     applyUrl: safeHttps(attributes.applyUrl ?? value.applyUrl),
     languageRequirements: Array.isArray(value.languageRequirements) ? value.languageRequirements : [],

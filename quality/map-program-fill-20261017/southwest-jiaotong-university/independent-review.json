@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-17T06:40:34.194954+00:00",
+  "reviewer": "codex-independent-business-research",
+  "batchPath": "quality/map-program-fill-20261017/southwest-jiaotong-university/full-program-batch-draft.json",
+  "batchSha256": "805fe9f855d8e1fd4d3743237e3f9c4a3a88a7b88521519c9bfe0b8b65a9d33a",
+  "sourceReceiptPath": "quality/map-program-fill-20261017/southwest-jiaotong-university/captures/language-2027-notice.receipt.json",
+  "sourceReceiptSha256": "6feecf4c0c0bfc90f9e83951056337372cfa3d7ef9479df44e4a890b3ab03f60",
+  "rawSha256": "94751800de8ba5e4e7d967a9a5d120d75374eb11dd960cccc61f9fcab515f7ee",
+  "textSha256": "a794baa2d168873aeb10983f1b87682639a0498a31cb2ac1cdf12fae352f7eea",
+  "scope": "Independent semantic review of the two draft entries only. No reviewer field, candidate entry, or canonical data modified.",
+  "outcome": "changes-required",
+  "pass": false,
+  "checks": [
+    {
+      "id": "source-integrity",
+      "status": "pass",
+      "detail": "Independently recomputed raw/text SHA-256, checked receipt byte count, HTTP 200, identical official requested/final URLs, and checked every quoted field against both saved text and independently parsed raw HTML."
+    },
+    {
+      "id": "program-identity-language",
+      "status": "pass",
+      "quotes": [
+        "西南交通大学的语言生项目专注于汉语学习和中国文化体验。",
+        "1. 授课语言：英文+中文"
+      ],
+      "detail": "Elementary/intermediate are explicit tracks with distinct official lengths; both are language training, not academic degrees. English + Chinese teaching is explicit."
+    },
+    {
+      "id": "placement-and-learning-goals",
+      "status": "pass",
+      "quotes": [
+        "学生根据入学测试结果参加相应层级的班级学习。",
+        "初级班：通过HSK3级；中级班：通过HSK4/5级"
+      ],
+      "detail": "HSK levels are under 项目目标, not admission thresholds. Draft correctly uses entry-test placement and says no mandatory HSK entrance score is specified rather than asserting unconditional eligibility."
+    },
+    {
+      "id": "eligibility-and-materials",
+      "status": "issue",
+      "quotes": [
+        "2. 申请人年龄需17-50周岁；",
+        "2. 经公证的学历证明Notarized academic certificate.",
+        "3. 成绩单Academic Records. 如果文件不是英文或中文，请提供经过公证的翻译件。"
+      ],
+      "detail": "Age, citizenship, health, conduct and funding requirements are preserved; draft does not invent a minimum education level. However it incorrectly extends notarization to transcripts themselves."
+    },
+    {
+      "id": "fees-and-time",
+      "status": "pass",
+      "quotes": [
+        "c.学费：7000元/人/学期，14000元/人/学年",
+        "a.报名费：400元/人",
+        "春季入学申请即日起至2027年1月1日；秋季入学申请从2027年3月1日起至2027年6月30日。"
+      ],
+      "detail": "Tuition period, 14000 annual alternative, 400 application fee, non-refundability and payment after preliminary review agree. January 1 is an explicitly named end date; competing 日前 wording is disclosed and applicants are advised to apply early. opensOn remains unknown rather than substituting capture/publication date."
+    },
+    {
+      "id": "duration",
+      "status": "issue",
+      "quotes": [
+        "初级班：2学期；中级班：1学期"
+      ],
+      "detail": "Months remain null correctly. zh durationText is exact source text; English translations are unsupported by the current exact-localized-duration proof contract."
+    },
+    {
+      "id": "conditional-materials",
+      "status": "pass",
+      "detail": "Passport expiry beyond September 2027, notarized academic certificate, translated non-Chinese/non-English documents, six-month complete medical form with required seals and signatures, financial evidence, local-authority noncriminal record, under-18 guardian documents, and in-China current visa/residence-permit copies are preserved."
+    },
+    {
+      "id": "application-url",
+      "status": "pass-with-source-anomaly",
+      "detail": "The plain-text official URL and navigation login href support https://admission.swjtu.edu.cn. One body hyperlink has a malformed punycode href, which was not followed or used; canonical proposal correctly uses the explicitly printed official host."
+    }
+  ],
+  "issues": [
+    {
+      "severity": "must-fix-before-approval",
+      "field": "program.durationText.en",
+      "affectedProgramIds": [
+        "program-southwest-jiaotong-university-chinese-language-elementary",
+        "program-southwest-jiaotong-university-chinese-language-intermediate"
+      ],
+      "problem": "English durationText is a translation absent from the only official capture. The new gate requires every supplied duration locale to occur literally in the evidence quote.",
+      "requiredFix": "Keep only exact zh durationText 2学期 or 1学期, or capture an official English notice with the corresponding English words. Do not invent month counts."
+    },
+    {
+      "severity": "must-fix-before-approval",
+      "field": "program.supplementaryDetails.applicationMaterials[1]",
+      "affectedProgramIds": [
+        "program-southwest-jiaotong-university-chinese-language-elementary",
+        "program-southwest-jiaotong-university-chinese-language-intermediate"
+      ],
+      "problem": "Draft says transcripts must themselves be notarized; original explicitly requires notarization for the academic certificate and for translations when relevant, but not for transcripts in English/Chinese.",
+      "requiredFix": "Separate notarized academic certificate from academic transcripts; require notarized translation for each when the original is neither English nor Chinese."
+    }
+  ],
+  "canonicalWrites": 0,
+  "paidCalls": 0,
+  "approvedEntries": 0
+}

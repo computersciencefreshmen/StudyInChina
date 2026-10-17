@@ -1,0 +1,1935 @@
+{
+  "pass": true,
+  "checkedAt": "2026-10-17T07:03:39.939Z",
+  "base": "https://studyinchina-j0qkuroh8-henry-yangs-projects-c9706eac.vercel.app",
+  "prefix": "immutable",
+  "today": "2026-10-17",
+  "sourcePlanSha256": "1f150fe54710d165da05dc7570e69d34138d33c14f690aa2e43e750a34fabd42",
+  "smokeRunnerSha256": "5ef8c7860c981648b6718f5b115229f12ac5570018379b542274986f478b1d7c",
+  "publicCounts": {
+    "sources": 697,
+    "cities": 62,
+    "universities": 255,
+    "programs": 757,
+    "admissionCycles": 757,
+    "scholarships": 0
+  },
+  "checks": [
+    {
+      "route": "/api/v1/releases/current",
+      "pass": true
+    },
+    {
+      "route": "/api/v1/programs",
+      "records": 757,
+      "exactDurationRoundtrip": true,
+      "pass": true
+    },
+    {
+      "route": "university-pages",
+      "records": 255,
+      "pending": 247,
+      "pass": true
+    },
+    {
+      "route": "/en/programs/tsinghua-university-computer-science-bachelor",
+      "pass": true,
+      "status": 404
+    },
+    {
+      "route": "/api/v1/programs/tsinghua-university-computer-science-bachelor",
+      "pass": true,
+      "status": 404
+    },
+    {
+      "route": "/en/universities/sun-yat-sen-university",
+      "pass": true
+    },
+    {
+      "route": "/en/universities/southwest-jiaotong-university",
+      "pass": true
+    },
+    {
+      "route": "/en/programs/southwest-jiaotong-university-chinese-language-elementary",
+      "pass": true
+    },
+    {
+      "route": "/zh/universities/sun-yat-sen-university",
+      "pass": true
+    },
+    {
+      "route": "/zh/universities/southwest-jiaotong-university",
+      "pass": true
+    },
+    {
+      "route": "/zh/programs/southwest-jiaotong-university-chinese-language-elementary",
+      "pass": true
+    },
+    {
+      "route": "/ru/universities/sun-yat-sen-university",
+      "pass": true
+    },
+    {
+      "route": "/ru/universities/southwest-jiaotong-university",
+      "pass": true
+    },
+    {
+      "route": "/ru/programs/southwest-jiaotong-university-chinese-language-elementary",
+      "pass": true
+    },
+    {
+      "route": "/de/universities/sun-yat-sen-university",
+      "pass": true
+    },
+    {
+      "route": "/de/universities/southwest-jiaotong-university",
+      "pass": true
+    },
+    {
+      "route": "/de/programs/southwest-jiaotong-university-chinese-language-elementary",
+      "pass": true
+    },
+    {
+      "route": "/fr/universities/sun-yat-sen-university",
+      "pass": true
+    },
+    {
+      "route": "/fr/universities/southwest-jiaotong-university",
+      "pass": true
+    },
+    {
+      "route": "/fr/programs/southwest-jiaotong-university-chinese-language-elementary",
+      "pass": true
+    },
+    {
+      "route": "/es/universities/sun-yat-sen-university",
+      "pass": true
+    },
+    {
+      "route": "/es/universities/southwest-jiaotong-university",
+      "pass": true
+    },
+    {
+      "route": "/es/programs/southwest-jiaotong-university-chinese-language-elementary",
+      "pass": true
+    },
+    {
+      "route": "city-university-project-navigation",
+      "pass": true
+    },
+    {
+      "route": "mobile-project",
+      "pass": true
+    }
+  ],
+  "universities": [
+    {
+      "id": "uni-beijing-normal-university",
+      "route": "/en/universities/beijing-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-tsinghua-university",
+      "route": "/en/universities/tsinghua-university",
+      "pass": true,
+      "currentPrograms": 34,
+      "pending": false
+    },
+    {
+      "id": "uni-beijing-language-and-culture-university",
+      "route": "/en/universities/beijing-language-and-culture-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-university-of-international-business-and-economics",
+      "route": "/en/universities/university-of-international-business-and-economics",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-peking-university",
+      "route": "/en/universities/peking-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-beijing-foreign-studies-university",
+      "route": "/en/universities/beijing-foreign-studies-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-fudan-university",
+      "route": "/en/universities/fudan-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-east-china-normal-university",
+      "route": "/en/universities/east-china-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-tongji-university",
+      "route": "/en/universities/tongji-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-international-studies-university",
+      "route": "/en/universities/shanghai-international-studies-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-sun-yat-sen-university",
+      "route": "/en/universities/sun-yat-sen-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-jiao-tong-university",
+      "route": "/en/universities/shanghai-jiao-tong-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shenzhen-university",
+      "route": "/en/universities/shenzhen-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-southern-university-of-science-and-technology",
+      "route": "/en/universities/southern-university-of-science-and-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-south-china-university-of-technology",
+      "route": "/en/universities/south-china-university-of-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-zhejiang-university",
+      "route": "/en/universities/zhejiang-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-jinan-university",
+      "route": "/en/universities/jinan-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-zhejiang-gongshang-university",
+      "route": "/en/universities/zhejiang-gongshang-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-southeast-university",
+      "route": "/en/universities/southeast-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-nanjing-normal-university",
+      "route": "/en/universities/nanjing-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-wuhan-university",
+      "route": "/en/universities/wuhan-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-zhejiang-sci-tech-university",
+      "route": "/en/universities/zhejiang-sci-tech-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-nanjing-university-of-aeronautics-and-astronautics",
+      "route": "/en/universities/nanjing-university-of-aeronautics-and-astronautics",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-nanjing-university",
+      "route": "/en/universities/nanjing-university",
+      "pass": true,
+      "currentPrograms": 49,
+      "pending": false
+    },
+    {
+      "id": "uni-central-china-normal-university",
+      "route": "/en/universities/central-china-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-huazhong-university-of-science-and-technology",
+      "route": "/en/universities/huazhong-university-of-science-and-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-xian-jiaotong-university",
+      "route": "/en/universities/xian-jiaotong-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-wuhan-university-of-technology",
+      "route": "/en/universities/wuhan-university-of-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-xidian-university",
+      "route": "/en/universities/xidian-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-northwestern-polytechnical-university",
+      "route": "/en/universities/northwestern-polytechnical-university",
+      "pass": true,
+      "currentPrograms": 90,
+      "pending": false
+    },
+    {
+      "id": "uni-university-of-electronic-science-and-technology-of-china",
+      "route": "/en/universities/university-of-electronic-science-and-technology-of-china",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-sichuan-university",
+      "route": "/en/universities/sichuan-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-tianjin-university",
+      "route": "/en/universities/tianjin-university",
+      "pass": true,
+      "currentPrograms": 244,
+      "pending": false
+    },
+    {
+      "id": "uni-southwestern-university-of-finance-and-economics",
+      "route": "/en/universities/southwestern-university-of-finance-and-economics",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-nankai-university",
+      "route": "/en/universities/nankai-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-southwest-university",
+      "route": "/en/universities/southwest-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-chongqing-university",
+      "route": "/en/universities/chongqing-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-harbin-institute-of-technology",
+      "route": "/en/universities/harbin-institute-of-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-beijing-university-of-technology",
+      "route": "/en/universities/beijing-university-of-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-beijing-institute-of-technology",
+      "route": "/en/universities/beijing-institute-of-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-beihang-university",
+      "route": "/en/universities/beihang-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-heilongjiang-university",
+      "route": "/en/universities/heilongjiang-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-beijing-jiaotong-university",
+      "route": "/en/universities/beijing-jiaotong-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-renmin-university-of-china",
+      "route": "/en/universities/renmin-university-of-china",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-harbin-engineering-university",
+      "route": "/en/universities/harbin-engineering-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-university-of-science-and-technology-beijing",
+      "route": "/en/universities/university-of-science-and-technology-beijing",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-communication-university-of-china",
+      "route": "/en/universities/communication-university-of-china",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-beijing-university-of-chemical-technology",
+      "route": "/en/universities/beijing-university-of-chemical-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-beijing-forestry-university",
+      "route": "/en/universities/beijing-forestry-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-china-agricultural-university",
+      "route": "/en/universities/china-agricultural-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-beijing-university-of-chinese-medicine",
+      "route": "/en/universities/beijing-university-of-chinese-medicine",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-china-foreign-affairs-university",
+      "route": "/en/universities/china-foreign-affairs-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-china-conservatory-of-music",
+      "route": "/en/universities/china-conservatory-of-music",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-minzu-university-of-china",
+      "route": "/en/universities/minzu-university-of-china",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-central-university-of-finance-and-economics",
+      "route": "/en/universities/central-university-of-finance-and-economics",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-beijing-sport-university",
+      "route": "/en/universities/beijing-sport-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-central-conservatory-of-music",
+      "route": "/en/universities/central-conservatory-of-music",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanxi-university",
+      "route": "/en/universities/shanxi-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-tianjin-university-of-traditional-chinese-medicine",
+      "route": "/en/universities/tianjin-university-of-traditional-chinese-medicine",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-tiangong-university",
+      "route": "/en/universities/tiangong-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-china-university-of-political-science-and-law",
+      "route": "/en/universities/china-university-of-political-science-and-law",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-hebei-university-of-technology",
+      "route": "/en/universities/hebei-university-of-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-north-china-electric-power-university",
+      "route": "/en/universities/north-china-electric-power-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-dalian-maritime-university",
+      "route": "/en/universities/dalian-maritime-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-northeastern-university-china",
+      "route": "/en/universities/northeastern-university-china",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-inner-mongolia-university",
+      "route": "/en/universities/inner-mongolia-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-taiyuan-university-of-technology",
+      "route": "/en/universities/taiyuan-university-of-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-liaoning-university",
+      "route": "/en/universities/liaoning-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-dalian-university-of-technology",
+      "route": "/en/universities/dalian-university-of-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-east-china-university-of-science-and-technology",
+      "route": "/en/universities/east-china-university-of-science-and-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-jilin-university",
+      "route": "/en/universities/jilin-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-northeast-forestry-university",
+      "route": "/en/universities/northeast-forestry-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-yanbian-university",
+      "route": "/en/universities/yanbian-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-university-of-traditional-chinese-medicine",
+      "route": "/en/universities/shanghai-university-of-traditional-chinese-medicine",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-northeast-agricultural-university",
+      "route": "/en/universities/northeast-agricultural-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-donghua-university",
+      "route": "/en/universities/donghua-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-university-of-sport",
+      "route": "/en/universities/shanghai-university-of-sport",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-ocean-university",
+      "route": "/en/universities/shanghai-ocean-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-university-of-finance-and-economics",
+      "route": "/en/universities/shanghai-university-of-finance-and-economics",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-university",
+      "route": "/en/universities/shanghai-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-soochow-university",
+      "route": "/en/universities/soochow-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-nanjing-university-of-science-and-technology",
+      "route": "/en/universities/nanjing-university-of-science-and-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-china-university-of-mining-and-technology",
+      "route": "/en/universities/china-university-of-mining-and-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-conservatory-of-music",
+      "route": "/en/universities/shanghai-conservatory-of-music",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-hohai-university",
+      "route": "/en/universities/hohai-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-jiangnan-university",
+      "route": "/en/universities/jiangnan-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-nanjing-university-of-posts-and-telecommunications",
+      "route": "/en/universities/nanjing-university-of-posts-and-telecommunications",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-nanjing-forestry-university",
+      "route": "/en/universities/nanjing-forestry-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-nanjing-university-of-information-science-and-technology",
+      "route": "/en/universities/nanjing-university-of-information-science-and-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-nanjing-agricultural-university",
+      "route": "/en/universities/nanjing-agricultural-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-nanjing-medical-university",
+      "route": "/en/universities/nanjing-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-china-pharmaceutical-university",
+      "route": "/en/universities/china-pharmaceutical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-china-academy-of-art",
+      "route": "/en/universities/china-academy-of-art",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-anhui-university",
+      "route": "/en/universities/anhui-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-university-of-science-and-technology-of-china",
+      "route": "/en/universities/university-of-science-and-technology-of-china",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-hefei-university-of-technology",
+      "route": "/en/universities/hefei-university-of-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-fuzhou-university",
+      "route": "/en/universities/fuzhou-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-xiamen-university",
+      "route": "/en/universities/xiamen-university",
+      "pass": true,
+      "currentPrograms": 335,
+      "pending": false
+    },
+    {
+      "id": "uni-nanchang-university",
+      "route": "/en/universities/nanchang-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shandong-university",
+      "route": "/en/universities/shandong-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-zhengzhou-university",
+      "route": "/en/universities/zhengzhou-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-ocean-university-of-china",
+      "route": "/en/universities/ocean-university-of-china",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-henan-university",
+      "route": "/en/universities/henan-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-china-university-of-geosciences-wuhan",
+      "route": "/en/universities/china-university-of-geosciences-wuhan",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-china-university-of-petroleum-east-china",
+      "route": "/en/universities/china-university-of-petroleum-east-china",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-zhongnan-university-of-economics-and-law",
+      "route": "/en/universities/zhongnan-university-of-economics-and-law",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-hunan-university",
+      "route": "/en/universities/hunan-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-xiangtan-university",
+      "route": "/en/universities/xiangtan-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-central-south-university",
+      "route": "/en/universities/central-south-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-huazhong-agricultural-university",
+      "route": "/en/universities/huazhong-agricultural-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-hunan-normal-university",
+      "route": "/en/universities/hunan-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-south-china-agricultural-university",
+      "route": "/en/universities/south-china-agricultural-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-south-china-normal-university",
+      "route": "/en/universities/south-china-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guangxi-university",
+      "route": "/en/universities/guangxi-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guangzhou-medical-university",
+      "route": "/en/universities/guangzhou-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-hainan-university",
+      "route": "/en/universities/hainan-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-southwest-jiaotong-university",
+      "route": "/en/universities/southwest-jiaotong-university",
+      "pass": true,
+      "currentPrograms": 2,
+      "pending": false
+    },
+    {
+      "id": "uni-northwest-a-and-f-university",
+      "route": "/en/universities/northwest-a-and-f-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-lanzhou-university",
+      "route": "/en/universities/lanzhou-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-normal-university",
+      "route": "/en/universities/shanghai-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guangdong-university-of-foreign-studies",
+      "route": "/en/universities/guangdong-university-of-foreign-studies",
+      "pass": true,
+      "currentPrograms": 2,
+      "pending": false
+    },
+    {
+      "id": "uni-xian-international-studies-university",
+      "route": "/en/universities/xian-international-studies-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-wenzhou-medical-university",
+      "route": "/en/universities/wenzhou-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-changan-university",
+      "route": "/en/universities/changan-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-nanjing-audit-university",
+      "route": "/en/universities/nanjing-audit-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-wenzhou-kean-university",
+      "route": "/en/universities/wenzhou-kean-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-beijing-university-of-posts-and-telecommunications",
+      "route": "/en/universities/beijing-university-of-posts-and-telecommunications",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-xinjiang-university",
+      "route": "/en/universities/xinjiang-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shaanxi-normal-university",
+      "route": "/en/universities/shaanxi-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-hangzhou-normal-university",
+      "route": "/en/universities/hangzhou-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-tianjin-normal-university",
+      "route": "/en/universities/tianjin-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guizhou-university",
+      "route": "/en/universities/guizhou-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-zhejiang-chinese-medical-university",
+      "route": "/en/universities/zhejiang-chinese-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-china-university-of-petroleum-beijing",
+      "route": "/en/universities/china-university-of-petroleum-beijing",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-yunnan-university",
+      "route": "/en/universities/yunnan-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-chengdu-university-of-traditional-chinese-medicine",
+      "route": "/en/universities/chengdu-university-of-traditional-chinese-medicine",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-chengdu-university-of-technology",
+      "route": "/en/universities/chengdu-university-of-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-chongqing-university-of-posts-and-telecommunications",
+      "route": "/en/universities/chongqing-university-of-posts-and-telecommunications",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-chongqing-medical-university",
+      "route": "/en/universities/chongqing-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-dalian-medical-university",
+      "route": "/en/universities/dalian-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-northeast-normal-university",
+      "route": "/en/universities/northeast-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-dongbei-university-of-finance-and-economics",
+      "route": "/en/universities/dongbei-university-of-finance-and-economics",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-fujian-normal-university",
+      "route": "/en/universities/fujian-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guangxi-medical-university",
+      "route": "/en/universities/guangxi-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-hangzhou-dianzi-university",
+      "route": "/en/universities/hangzhou-dianzi-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guangzhou-university",
+      "route": "/en/universities/guangzhou-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-huaqiao-university",
+      "route": "/en/universities/huaqiao-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guizhou-normal-university",
+      "route": "/en/universities/guizhou-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-harbin-normal-university",
+      "route": "/en/universities/harbin-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guangzhou-university-of-chinese-medicine",
+      "route": "/en/universities/guangzhou-university-of-chinese-medicine",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-jiangsu-university",
+      "route": "/en/universities/jiangsu-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-kunming-medical-university",
+      "route": "/en/universities/kunming-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-ningbo-university",
+      "route": "/en/universities/ningbo-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-southern-medical-university",
+      "route": "/en/universities/southern-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-ningxia-university",
+      "route": "/en/universities/ningxia-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-qinghai-university",
+      "route": "/en/universities/qinghai-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shandong-normal-university",
+      "route": "/en/universities/shandong-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-maritime-university",
+      "route": "/en/universities/shanghai-maritime-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shantou-university",
+      "route": "/en/universities/shantou-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-university-of-international-business-and-economics",
+      "route": "/en/universities/shanghai-university-of-international-business-and-economics",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-university-of-shanghai-for-science-and-technology",
+      "route": "/en/universities/university-of-shanghai-for-science-and-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-capital-normal-university",
+      "route": "/en/universities/capital-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-capital-university-of-economics-and-business",
+      "route": "/en/universities/capital-university-of-economics-and-business",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shihezi-university",
+      "route": "/en/universities/shihezi-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shenyang-pharmaceutical-university",
+      "route": "/en/universities/shenyang-pharmaceutical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-sichuan-agricultural-university",
+      "route": "/en/universities/sichuan-agricultural-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-sichuan-normal-university",
+      "route": "/en/universities/sichuan-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-tibet-university",
+      "route": "/en/universities/tibet-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-northwest-university",
+      "route": "/en/universities/northwest-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-tianjin-university-of-finance-and-economics",
+      "route": "/en/universities/tianjin-university-of-finance-and-economics",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-tianjin-foreign-studies-university",
+      "route": "/en/universities/tianjin-foreign-studies-university",
+      "pass": true,
+      "currentPrograms": 1,
+      "pending": false
+    },
+    {
+      "id": "uni-sichuan-international-studies-university",
+      "route": "/en/universities/sichuan-international-studies-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-southwest-petroleum-university",
+      "route": "/en/universities/southwest-petroleum-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-yunnan-normal-university",
+      "route": "/en/universities/yunnan-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-zhejiang-university-of-technology",
+      "route": "/en/universities/zhejiang-university-of-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-zhejiang-university-of-finance-and-economics",
+      "route": "/en/universities/zhejiang-university-of-finance-and-economics",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-zhejiang-normal-university",
+      "route": "/en/universities/zhejiang-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-china-university-of-geosciences-beijing",
+      "route": "/en/universities/china-university-of-geosciences-beijing",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-central-academy-of-fine-arts",
+      "route": "/en/universities/central-academy-of-fine-arts",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-china-jiliang-university",
+      "route": "/en/universities/china-jiliang-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-university-of-chinese-academy-of-sciences",
+      "route": "/en/universities/university-of-chinese-academy-of-sciences",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-china-university-of-mining-and-technology-beijing",
+      "route": "/en/universities/china-university-of-mining-and-technology-beijing",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-central-academy-of-drama",
+      "route": "/en/universities/central-academy-of-drama",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-wenzhou-university",
+      "route": "/en/universities/wenzhou-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-hubei-university",
+      "route": "/en/universities/hubei-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-minnan-normal-university",
+      "route": "/en/universities/minnan-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-chongqing-normal-university",
+      "route": "/en/universities/chongqing-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-qingdao-university",
+      "route": "/en/universities/qingdao-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-yantai-university",
+      "route": "/en/universities/yantai-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-zhejiang-af-university",
+      "route": "/en/universities/zhejiang-af-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-university-of-jinan",
+      "route": "/en/universities/university-of-jinan",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-hebei-university",
+      "route": "/en/universities/hebei-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-dalian-university-of-foreign-languages",
+      "route": "/en/universities/dalian-university-of-foreign-languages",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guangdong-university-of-finance-and-economics",
+      "route": "/en/universities/guangdong-university-of-finance-and-economics",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guilin-medical-university",
+      "route": "/en/universities/guilin-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-anhui-medical-university",
+      "route": "/en/universities/anhui-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-beijing-institute-of-petrochemical-technology",
+      "route": "/en/universities/beijing-institute-of-petrochemical-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guizhou-medical-university",
+      "route": "/en/universities/guizhou-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-jiangsu-university-of-science-and-technology",
+      "route": "/en/universities/jiangsu-university-of-science-and-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-jining-medical-university",
+      "route": "/en/universities/jining-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-kunming-university-of-science-and-technology",
+      "route": "/en/universities/kunming-university-of-science-and-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-nantong-university",
+      "route": "/en/universities/nantong-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-qingdao-university-of-science-and-technology",
+      "route": "/en/universities/qingdao-university-of-science-and-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanxi-university-of-chinese-medicine",
+      "route": "/en/universities/shanxi-university-of-chinese-medicine",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shandong-jianzhu-university",
+      "route": "/en/universities/shandong-jianzhu-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-xinjiang-agricultural-university",
+      "route": "/en/universities/xinjiang-agricultural-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-north-china-university-of-technology",
+      "route": "/en/universities/north-china-university-of-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-xuzhou-medical-university",
+      "route": "/en/universities/xuzhou-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-yangtze-university",
+      "route": "/en/universities/yangtze-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-zhejiang-university-of-science-and-technology",
+      "route": "/en/universities/zhejiang-university-of-science-and-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-yangzhou-university",
+      "route": "/en/universities/yangzhou-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-yunnan-university-of-finance-and-economics",
+      "route": "/en/universities/yunnan-university-of-finance-and-economics",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-dongguan-university-of-technology",
+      "route": "/en/universities/dongguan-university-of-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-fujian-medical-university",
+      "route": "/en/universities/fujian-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guangdong-medical-university",
+      "route": "/en/universities/guangdong-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guilin-university-of-electronic-technology",
+      "route": "/en/universities/guilin-university-of-electronic-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guangxi-university-of-chinese-medicine",
+      "route": "/en/universities/guangxi-university-of-chinese-medicine",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guangxi-normal-university",
+      "route": "/en/universities/guangxi-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-beijing-technology-and-business-university",
+      "route": "/en/universities/beijing-technology-and-business-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-beijing-international-studies-university",
+      "route": "/en/universities/beijing-international-studies-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-east-china-university-of-political-science-and-law",
+      "route": "/en/universities/east-china-university-of-political-science-and-law",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shandong-university-of-finance-and-economics",
+      "route": "/en/universities/shandong-university-of-finance-and-economics",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-changsha-university-of-science-and-technology",
+      "route": "/en/universities/changsha-university-of-science-and-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shenzhen-technology-university",
+      "route": "/en/universities/shenzhen-technology-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-beijing-wuzi-university",
+      "route": "/en/universities/beijing-wuzi-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-lixin-university-of-accounting-and-finance",
+      "route": "/en/universities/shanghai-lixin-university-of-accounting-and-finance",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-jiangxi-university-of-finance-and-economics",
+      "route": "/en/universities/jiangxi-university-of-finance-and-economics",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-wuhan-university-of-science-and-technology",
+      "route": "/en/universities/wuhan-university-of-science-and-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-chengdu-university-of-information-technology",
+      "route": "/en/universities/chengdu-university-of-information-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-nanjing-university-of-finance-and-economics",
+      "route": "/en/universities/nanjing-university-of-finance-and-economics",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-northwest-university-of-political-science-and-law",
+      "route": "/en/universities/northwest-university-of-political-science-and-law",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-university-of-electric-power",
+      "route": "/en/universities/shanghai-university-of-electric-power",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-university-of-political-science-and-law",
+      "route": "/en/universities/shanghai-university-of-political-science-and-law",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-hunan-university-of-technology-and-business",
+      "route": "/en/universities/hunan-university-of-technology-and-business",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-communication-university-of-zhejiang",
+      "route": "/en/universities/communication-university-of-zhejiang",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-wuhan-textile-university",
+      "route": "/en/universities/wuhan-textile-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-jiangxi-normal-university",
+      "route": "/en/universities/jiangxi-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guangxi-minzu-university",
+      "route": "/en/universities/guangxi-minzu-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-henan-normal-university",
+      "route": "/en/universities/henan-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-liaoning-normal-university",
+      "route": "/en/universities/liaoning-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-hainan-normal-university",
+      "route": "/en/universities/hainan-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-nanjing-tech-university",
+      "route": "/en/universities/nanjing-tech-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shenyang-normal-university",
+      "route": "/en/universities/shenyang-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shanghai-theatre-academy",
+      "route": "/en/universities/shanghai-theatre-academy",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-xinjiang-normal-university",
+      "route": "/en/universities/xinjiang-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guangdong-ocean-university",
+      "route": "/en/universities/guangdong-ocean-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guangdong-pharmaceutical-university",
+      "route": "/en/universities/guangdong-pharmaceutical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-northwest-normal-university",
+      "route": "/en/universities/northwest-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-ningxia-medical-university",
+      "route": "/en/universities/ningxia-medical-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guangzhou-academy-of-fine-arts",
+      "route": "/en/universities/guangzhou-academy-of-fine-arts",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-hebei-normal-university",
+      "route": "/en/universities/hebei-normal-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-northeast-electric-power-university",
+      "route": "/en/universities/northeast-electric-power-university",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-shandong-university-of-traditional-chinese-medicine",
+      "route": "/en/universities/shandong-university-of-traditional-chinese-medicine",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-sichuan-fine-arts-institute",
+      "route": "/en/universities/sichuan-fine-arts-institute",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    },
+    {
+      "id": "uni-guilin-university-of-technology",
+      "route": "/en/universities/guilin-university-of-technology",
+      "pass": true,
+      "currentPrograms": 0,
+      "pending": true
+    }
+  ],
+  "details": [
+    {
+      "id": "program-southwest-jiaotong-university-chinese-language-elementary",
+      "route": "/en/programs/southwest-jiaotong-university-chinese-language-elementary",
+      "pass": true,
+      "conditions": 10,
+      "officialDuration": {
+        "zh": "2学期"
+      },
+      "htmlSha256": "183e26bbd786532d43de1589a228a84eab44bb226517c9341a1331c9e0f30b6f"
+    },
+    {
+      "id": "program-southwest-jiaotong-university-chinese-language-intermediate",
+      "route": "/en/programs/southwest-jiaotong-university-chinese-language-intermediate",
+      "pass": true,
+      "conditions": 10,
+      "officialDuration": {
+        "zh": "1学期"
+      },
+      "htmlSha256": "940d34fdf1a5614eb0220439636903e0f481950262888373f4d1bd8977d28dde"
+    }
+  ],
+  "browserErrors": 0
+}

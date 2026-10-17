@@ -89,6 +89,8 @@ export type Program = AuditMeta & {
   teachingLanguages: string[]
   durationMonths: number | null
   durationMonthsMax?: number | null
+  /** Exact official duration wording when months are unknown (for example, 16 weeks). */
+  durationText?: LocalizedText
   programUrl: string
   applyUrl: string | null
   languageRequirements: LanguageRequirement[]
