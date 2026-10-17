@@ -1,4 +1,4 @@
-const fs=require('node:fs');
+import fs from 'node:fs';
 const directory='quality/map-program-fill-20261017/southwest-jiaotong-university';
 const capture=JSON.parse(fs.readFileSync(directory+'/captures/language-2027-notice.receipt.json'));
 const sourceId='source-swjtu-language-2027-official-20261017';
