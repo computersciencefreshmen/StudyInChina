@@ -4,5 +4,6 @@ export function MiniMaxVerificationBadge(_props: {
   recordId: string
   locale?: string
 }) {
+  void _props
   return null
 }
