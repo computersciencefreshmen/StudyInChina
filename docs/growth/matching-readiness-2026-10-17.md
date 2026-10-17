@@ -1,5 +1,7 @@
 # AI matching data readiness — 2026-10-17
 
+Later maintenance note: this report preserves the initial 753-programme/six-university local research snapshot. The subsequent production readback contains 755 programmes across seven universities. See the [dated operational handoff](../operations/national-program-maintenance-2026-10-17.md) for nationwide targets, actual publication checks and remaining coverage; the small change does not establish nationwide matching readiness.
+
 ## Scope and decision
 
 This assessment uses the **local working-tree JSON catalogue**, evaluated for the fixed date **2026-10-17 in Asia/Shanghai**. It is not a live production inventory, a release certification, or evidence that the same data is deployed. The working tree contains existing changes; this audit did not edit catalogue data, run ingestion, call a paid model, or deploy anything.
