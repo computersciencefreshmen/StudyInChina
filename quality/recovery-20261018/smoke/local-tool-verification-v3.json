@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-18T16:02:58Z",
+  "scope": "Local validation of the final read-only smoke runner and the new China-calendar 19 October expectation; deployment success is determined separately by the candidate/stable website proofs",
+  "runner": "scripts/quality/release-public-smoke.ts",
+  "runnerSha256": "296d11d6af36752b8f1df4ce0bbc0135cdf48847018a3b787fad08b4349f248e",
+  "sourcePlanSha256": "0c6074393602627b9a5770d3cf1b814bc96997b753f0095b137db1312a4f78fc",
+  "input": "quality/recovery-20261018/smoke/expected-input-20261019.json",
+  "expectedInputSha256": "a2bdda348090811d8980eaeab52dba72f3c24f94e5cfa3b6948e8088191f4d48",
+  "checks": [
+    {"command": "npx vitest run tests/unit/release-public-smoke.test.ts", "exitCode": 0, "testsPassed": 6, "testsFailed": 0, "testsSkipped": 0},
+    {"command": "npx eslint scripts/quality/release-public-smoke.ts tests/unit/release-public-smoke.test.ts --max-warnings=0", "exitCode": 0, "warnings": 0},
+    {"command": "npx tsc --noEmit --incremental false --pretty false", "exitCode": 0},
+    {"command": "node --import tsx scripts/quality/release-public-smoke.ts --validate-input quality/recovery-20261018/smoke/expected-input-20261019.json", "exitCode": 0, "inputValidatedOnly": true, "websiteSmokeRun": false, "evaluationDate": "2026-10-19", "publicPrograms": 766, "publicUniversities": 255, "publicCycles": 766, "publicSources": 714, "changedPrograms": 9, "changedUniversities": 6}
+  ],
+  "actualPriorWebsiteResult": {
+    "proof": "quality/recovery-20261018/release/candidate-smoke-20261018-v2/candidate-public-smoke.json",
+    "pass": false,
+    "all766ProgramApiRecordsPassed": true,
+    "all255UniversityPagesPassed": true,
+    "detailPagesPassed": 49,
+    "detailPagesFailed": 5,
+    "failure": "Five network-idle wait timeouts occurred before content assertions; ten storage initialization errors arose in documents lacking the site's storage origin capability. The failed proof is preserved."
+  },
+  "verifiedRepair": [
+    "Remove all networkidle waits; use DOMContentLoaded and visible main/h1/program detail, then retain every exact reviewed field assertion and actual navigation click/URL/target checks.",
+    "Only access release-announcement localStorage when location.origin and self.origin both exactly match the target site. Own-site storage exceptions remain real page errors; no product error filtering is added.",
+    "Preserve the bounded exact-origin protected fetch and contained asynchronous handler; credentials remain absent from URL, reports and output.",
+    "Add safe progress for all 54 detail checks without printing headers or credentials."
+  ],
+  "singleActiveCandidateV3": "quality/recovery-20261018/release/candidate-smoke-20261019-v3",
+  "activeInputSelection": "The standard new 19 October input above is used. A separately prepared root input was not launched; no duplicate candidate run was started.",
+  "canonicalMutations": 0,
+  "cloudMutations": 0,
+  "paidCalls": 0
+}

@@ -50,7 +50,7 @@ export async function reserveGithubPromotion(clients: GithubWriterClients, deplo
   const latest = await currentWriter(clients)
   if (latest.state.registry.currentId !== previous.id || latest.state.command && ['pending', 'claimed', 'uncertain'].includes(latest.state.command.status)) throw new Error('release_current_changed')
   const reservedRaw = await clients.writer('PUT', { action: 'reserve-promotion', request: { commandId: randomUUID(), kind: 'deployment', targetId: target.id,
-    expectedCurrentId: previous.id, expectedRevision: latest.state.registry.revision, expectedRegistrySha256: latest.registrySha256, reason: `GitHub production promotion of exact main ${deploymentSha}` } }) as { ok?: unknown; result?: unknown }
+    expectedCurrentId: previous.id, expectedRevision: latest.state.registry.revision, expectedRegistrySha256: latest.registrySha256, reason: `GitHub production promotion of exact source commit ${deploymentSha}` } }) as { ok?: unknown; result?: unknown }
   if (reservedRaw.ok !== true) throw new Error('release_reservation_invalid')
   const reserved = deploymentWriterCommandSchema.parse(reservedRaw.result)
   if (reserved.action !== 'deployment-promotion' || reserved.status !== 'pending' || reserved.targetId !== target.id || reserved.expectedCurrentId !== previous.id || reserved.expectedRegistrySha256 !== latest.registrySha256) throw new Error('release_reservation_invalid')

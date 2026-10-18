@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-18T16:18:42.978Z",
+  "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "canonicalOwner": null,
+  "canonicalWritesReleased": true,
+  "handoff": "docs/operations/map-program-recovery-2026-10-18.md",
+  "catalogSha256": "b38205d8b48028e7dea8086977f64eaaec090ffc8352021f21a278a7499fb0c9",
+  "sourceCommit": "85f87e77b42221fd96e59110684932e291ea053b",
+  "publicProjection": {
+    "programs": 766,
+    "universitiesWithPrograms": 14,
+    "universitiesWithoutPrograms": 241
+  },
+  "lastStableReadback": {
+    "deploymentId": "dpl_36sjWb43vDSYppFRYysBjgSic6NZ",
+    "programs": 757,
+    "universitiesWithPrograms": 8,
+    "universitiesWithoutPrograms": 247,
+    "evaluatedForDate": "2026-10-19",
+    "proof": "quality/recovery-20261018/release/stable-public-readback-before-promotion-20261019.json",
+    "catalogBackend": "json"
+  },
+  "candidate": {
+    "deploymentId": "dpl_2nANfpPkNbiGsZY6aTrUMGh11TEA",
+    "url": "https://studyinchina-l0gm4mmz9-henry-yangs-projects-c9706eac.vercel.app",
+    "sourcePlan": "quality/recovery-20261018/release/source-plan.json",
+    "qualification": "READY-owner-project-commit-qualified; single-complete-v4-public-smoke-pass",
+    "promoted": false,
+    "smokeProof": "quality/recovery-20261018/release/candidate-smoke-20261019-v4/candidate-public-smoke.json",
+    "smokeProofSha256": "da346dcbd0f613522809368e08e119d79fea409faaf6abc176789b85ec34f400",
+    "smokeCheckedAt": "2026-10-18T16:12:48.193Z",
+    "smokeCompletedAt": "2026-10-18T16:17:19.864Z",
+    "smokeRunnerSha256": "28bf94595ff7a05e24f5d64437aca7b9ea08ce9a71c33e8daaad85698127f6d5",
+    "expectedInputSha256": "a2bdda348090811d8980eaeab52dba72f3c24f94e5cfa3b6948e8088191f4d48",
+    "promotionProofMaxAgeMinutes": 15
+  },
+  "publicationAuthentication": "human-confirmed-they-will-restore-existing-local-authentication; absent-on-local-file-check-at-2026-10-18T16:18:42.978Z",
+  "paidModelLane": "ambiguous_paid_outcome STOP remains; no new paid calls",
+  "cloudDatabaseWrites": 0,
+  "automation": {
+    "id": "studyinchina-minimax",
+    "status": "ACTIVE",
+    "intervalMinutes": 15,
+    "readback": "quality/recovery-20261018/automation-readback.json"
+  },
+  "canonicalOwnershipRelease": {
+    "releasedAt": "2026-10-18T16:18:42.978Z",
+    "scope": "bounded canonical preparation may continue; stable publication still requires existing authentication, fresh complete proof and shared writer CAS",
+    "preservePendingCandidate": true,
+    "doNotReplayConsumedBatchIds": true
+  },
+  "cloudDatabaseDiagnostic": {
+    "receipt": "quality/recovery-20261018/d1-catalog-pointer-diagnostic-20261019-v1.json",
+    "requests": 1,
+    "rowsRead": 1,
+    "rowsWritten": 0,
+    "status": "pointer-read-succeeded; not a cloud parity or cutover proof"
+  },
+  "nextBatch": {
+    "university": "East China Normal University",
+    "approvedProposal": "quality/recovery-20261018/next-wave/ecnu/full-program-batch-approved-v1.json",
+    "applied": false,
+    "countedInPublicProjection": false,
+    "mustRecheckFreshnessAndLatestCatalogHash": true
+  }
+}

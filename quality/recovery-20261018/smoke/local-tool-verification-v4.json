@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-18T16:11:16Z",
+  "scope": "Local verification of the final read-only smoke runner; full candidate and stable website results are separate immutable proofs",
+  "runner": "scripts/quality/release-public-smoke.ts",
+  "runnerSha256": "28bf94595ff7a05e24f5d64437aca7b9ea08ce9a71c33e8daaad85698127f6d5",
+  "sourcePlanSha256": "0c6074393602627b9a5770d3cf1b814bc96997b753f0095b137db1312a4f78fc",
+  "input": "quality/recovery-20261018/smoke/expected-input-20261019.json",
+  "expectedInputSha256": "a2bdda348090811d8980eaeab52dba72f3c24f94e5cfa3b6948e8088191f4d48",
+  "checks": [
+    {"command": "npx vitest run tests/unit/release-public-smoke.test.ts", "exitCode": 0, "testsPassed": 8, "testsFailed": 0, "testsSkipped": 0},
+    {"command": "npx eslint scripts/quality/release-public-smoke.ts tests/unit/release-public-smoke.test.ts --max-warnings=0", "exitCode": 0, "warnings": 0},
+    {"command": "npx tsc --noEmit --incremental false --pretty false", "exitCode": 0}
+  ],
+  "securityTests": [
+    "Literal and URL-encoded bypass credentials are removed from error messages.",
+    "The entire Playwright call log is discarded, including Cookie, Authorization and protection headers.",
+    "Single-line Cookie, Set-Cookie, Authorization and JSON header diagnostics are discarded even without knowing their secret values."
+  ],
+  "previousCandidateSafeAggregateOnly": {
+    "pass": false,
+    "all54DetailPagesPassed": true,
+    "apiCountsPassed": true,
+    "browserNavigationPassed": true,
+    "mobileGeometryPassed": true,
+    "consoleErrorCount": 0,
+    "universityTransportFailures": 1,
+    "teardownCancellationErrors": 12,
+    "rawProofHandling": "The previous raw proof included request cookies in Playwright diagnostics and is quarantined locally. It must not be committed. No headers, cookies or call logs are reproduced in this receipt."
+  },
+  "specificRepairs": [
+    "Every read-only API/HTML GET uses maxRedirects 0 and maxRetries 1; Playwright retries ECONNRESET only, not HTTP/authentication or factual failures.",
+    "Protected browser route promises are tracked per page. Page close follows finite document-load readiness, bounded font readiness and a bounded pending-request drain.",
+    "Only exact disposed/target-closed errors caused after intentional page/context teardown are classified as cleanup. Genuine pre-close loading and TLS errors remain failures.",
+    "The context waits for registered handlers before closing. All 54 reviewed-text, exact API identity, 255-university, reference-fee, CTA, navigation, mobile and product-console assertions remain enabled."
+  ],
+  "canonicalMutations": 0,
+  "cloudMutations": 0,
+  "paidCalls": 0
+}

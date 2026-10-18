@@ -1,5 +1,7 @@
 # Nationwide international admissions coverage and continuous maintenance
 
+> Latest recovery and batch status: [18 October handoff](map-program-recovery-2026-10-18.md) and `quality/recovery-20261018/continuation-state.json`. These supersede historical workspace paths, automation status and current-version/count pointers below. Use the restored primary checkout for Git operations; the old managed worktree's Git pointer is broken.
+
 ## Product goal and completion criteria
 
 The product helps prospective international students find study programmes in China and understand whether, when and how they can apply. A university identity on a map is only a starting point. Two manually corrected universities do not meet the nationwide requirement.

@@ -1,2 +1,7 @@
 __pycache__/
 *.pyc
+# Unused initial byte snapshot; actual smoke reads the pinned release archive.
+smoke/expected-data/
+smoke/expected-data-manifest.json
+# Independent duplicate input validation; v3 uses expected-input-20261019.json.
+smoke/expected-input-20261019-root-v3.json

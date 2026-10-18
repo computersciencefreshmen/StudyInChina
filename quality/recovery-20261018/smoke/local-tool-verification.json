@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-18T15:48:51Z",
+  "scope": "Local implementation verification for the reusable read-only release smoke runner; this does not certify the deployed website",
+  "runner": "scripts/quality/release-public-smoke.ts",
+  "runnerSha256": "8fd79f509e5ca91d6ac1e39ecb0e73f56327747bd45393091128222866ed83b3",
+  "sourcePlanSha256": "0c6074393602627b9a5770d3cf1b814bc96997b753f0095b137db1312a4f78fc",
+  "expectedInputSha256": "3b60805b55ee51f7352ff47f4c44cfe773c2aea57615b2fcd12c14ba5e5c8c52",
+  "checks": [
+    {"command": "npx vitest run tests/unit/release-public-smoke.test.ts", "exitCode": 0, "testsPassed": 6, "testsFailed": 0, "testsSkipped": 0, "environment": "normal user execution; sandbox temporary-cache rename had failed before any tests on the initial attempt"},
+    {"command": "npx eslint scripts/quality/release-public-smoke.ts tests/unit/release-public-smoke.test.ts --max-warnings=0", "exitCode": 0, "warnings": 0},
+    {"command": "npx tsc --noEmit --incremental false --pretty false", "exitCode": 0},
+    {"command": "node --import tsx scripts/quality/release-public-smoke.ts --validate-input quality/recovery-20261018/smoke/expected-input.json", "exitCode": 0, "inputValidatedOnly": true, "websiteSmokeRun": false, "publicPrograms": 766, "publicUniversities": 255, "changedPrograms": 9, "changedUniversities": 6}
+  ],
+  "networkFailureRepair": {
+    "firstCandidateAttempt": "Uncaught browser route.fetch TLS connection failure; no success proof was produced.",
+    "repair": "Contain the entire asynchronous route handler, redact and record the failure before aborting the request. Exact-origin read-only route.fetch uses maxRedirects 0 and one ECONNRESET-only retry. HTTP/authentication or factual failures are not retried or hidden.",
+    "candidateV2": "A separate complete website run is owned by the native release adapter; its immutable proof is the deployment result."
+  },
+  "unusedEarlierSnapshot": "smoke/expected-data is an earlier root-byte snapshot retained for audit. The actual expected-input reads the frozen candidate content/data so that all six raw data hashes match the source plan exactly.",
+  "canonicalMutations": 0,
+  "cloudMutations": 0,
+  "paidCalls": 0
+}
