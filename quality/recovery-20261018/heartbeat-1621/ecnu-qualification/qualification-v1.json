@@ -1,0 +1,423 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-18T16:24:52.075Z",
+  "auditType": "INDEPENDENT_READ_ONLY_COMPLETE_PROGRAMME_APPLICATION_QUALIFICATION",
+  "decision": "HOLD_EXISTING_APPROVED_V1_FOR_SEMANTIC_CORRECTION",
+  "canApplyExistingApprovedV1": false,
+  "mechanicalConsumerAssessmentIsNotWholeClaimApproval": true,
+  "ownership": {
+    "file": {
+      "path": "quality/recovery-20261018/continuation-state.json",
+      "sha256": "deb2235c710255341283d1688ce011dddb10982446ddc9b222484d2dd22b73cb",
+      "bytes": 3191
+    },
+    "canonicalWritesReleased": true,
+    "canonicalOwner": null,
+    "releasedAt": "2026-10-18T16:18:42.978Z"
+  },
+  "batch": {
+    "path": "quality/recovery-20261018/next-wave/ecnu/full-program-batch-approved-v1.json",
+    "sha256": "1289434eedd14e3bb8583cae9320a3e81459fad0e7d446128ece5a9bb3b04e22",
+    "bytes": 17422
+  },
+  "batchId": "ecnu-global-china-spring-2027-proposal-20261018-v1",
+  "draft": {
+    "path": "quality/recovery-20261018/next-wave/ecnu/full-program-batch-draft-v1.json",
+    "sha256": "5d08d14ac779973019faac4564abb3886bb184d1f837a93f65acf1a15a310e2b",
+    "bytes": 17393
+  },
+  "independentReview": {
+    "path": "quality/recovery-20261018/next-wave/ecnu/independent-review-v1.json",
+    "sha256": "5781dab18334afc1b007b0a6fdd3f113275f2947d66947bb79b052afc7b83d73",
+    "bytes": 2176
+  },
+  "reviewBindings": {
+    "reviewPass": true,
+    "reviewDraftDigest": true,
+    "reviewEntryTimestamp": true,
+    "sourcesUnchanged": true,
+    "capturesUnchanged": true,
+    "programUnchanged": true,
+    "cycleUnchanged": true,
+    "evidenceUnchanged": true
+  },
+  "reviewFreshness": {
+    "reviewedAt": "2026-10-18T15:51:33.555Z",
+    "ageMinutes": 33.30461666666667,
+    "expiresAt": "2026-10-19T15:51:33.555Z"
+  },
+  "canonical": {
+    "evaluatedForDate": "2026-10-19",
+    "normalizedCatalogSha256": "b38205d8b48028e7dea8086977f64eaaec090ffc8352021f21a278a7499fb0c9",
+    "matchesReleasedContinuationHash": true,
+    "inputFiles": [
+      {
+        "path": "content/data/sources.json",
+        "sha256": "ecb815fc1e739d71b111ef6068dcac6635e71fadea66653aa4a1d323dc12e430",
+        "bytes": 973751
+      },
+      {
+        "path": "content/data/cities.json",
+        "sha256": "50e70c4d3daeb872ccec74f9e18ffd2f235e0b51ffd6d657292ff51e59dc9756",
+        "bytes": 61094
+      },
+      {
+        "path": "content/data/universities.json",
+        "sha256": "192c67035dcbfdda25efb7fa6bf4e558e4f903f8dd180a59bdc0feb574e4518b",
+        "bytes": 355070
+      },
+      {
+        "path": "content/data/programs.json",
+        "sha256": "16241e17f574d40147571b36444711b93a3e752247d977d0ed5820bf866eb913",
+        "bytes": 7189347
+      },
+      {
+        "path": "content/data/admission-cycles.json",
+        "sha256": "3418d0c1b553881b814136d6027cdf8864115129a68b5501a25136519d3647ea",
+        "bytes": 2260839
+      },
+      {
+        "path": "content/data/scholarships.json",
+        "sha256": "9b24efe621e4c59986564ff15b13588144aa1b5627e76425660f3aaeb4feaf5c",
+        "bytes": 738017
+      }
+    ]
+  },
+  "mechanicalAssessment": {
+    "assessedAt": "2026-10-18T16:24:52.034Z",
+    "today": "2026-10-19",
+    "ready": 1,
+    "held": 0,
+    "entries": [
+      {
+        "programId": "program-east-china-normal-university-global-china-program-other",
+        "cycleId": "cycle-ecnu-global-china-2027-spring",
+        "ready": true,
+        "blockers": []
+      }
+    ],
+    "function": "assessFullProgramBatch",
+    "applicationFunctionNotInvoked": true
+  },
+  "replayAndConflicts": {
+    "expectedApplicationReceipt": "quality/program-expansion-20261013/applied-ecnu-global-china-spring-2027-proposal-20261018-v1.json",
+    "receiptExists": false,
+    "continuationNextBatchApplied": false,
+    "programIdExists": false,
+    "slugConflict": false,
+    "cycleIdExists": false,
+    "sourceIdConflicts": [],
+    "parentIsCurrentlyPublic": true,
+    "existingEcnuCurrentPrograms": 0,
+    "noGlobalHistoricalPaidScopeOrLostStateContinuityClaim": true
+  },
+  "captures": [
+    {
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "url": "https://lxs.ecnu.edu.cn/en_admission_visiting_programs_global_china_program/list.htm",
+      "httpStatus": 200,
+      "retrievedAt": "2026-10-18T15:38:48.683880+00:00",
+      "ageMinutes": 46.052483333333335,
+      "expiresAt": "2026-10-19T15:38:48.683Z",
+      "raw": {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-gcp-2027.html",
+        "sha256": "5aa5392cc221790673daf92171a2ce8d001a4a36f7c2e574f8b9ff8fb69b91cc",
+        "bytes": 107080
+      },
+      "text": {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-gcp-2027.text.txt",
+        "sha256": "5366f5ff935488603a559eda14119da39ad0e38ce2aa83b8034efacaee466884",
+        "bytes": 17098
+      },
+      "receipt": {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-gcp-2027.receipt.json",
+        "sha256": "3510d3ccb50073d32979efd0d2ed47d9e7d1d6eb0af9eb5fa71e2c36fea89a00",
+        "bytes": 8165
+      },
+      "rawAndTextMatchCaptureAndReceipt": true,
+      "receiptUrlAndTimeMatch": true,
+      "robots": {
+        "status": 404,
+        "canFetch": true,
+        "original": {
+          "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-gcp-2027.robots.txt",
+          "sha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+          "bytes": 196
+        },
+        "hashMatches": true
+      },
+      "redirects": []
+    },
+    {
+      "sourceId": "source-ecnu-gcp-official-application-20261018",
+      "url": "https://lxsapply.ecnu.edu.cn/c.asp?action=student_sign",
+      "httpStatus": 200,
+      "retrievedAt": "2026-10-18T15:39:45.459141+00:00",
+      "ageMinutes": 45.10621666666667,
+      "expiresAt": "2026-10-19T15:39:45.459Z",
+      "raw": {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-apply-https.html",
+        "sha256": "7a797c96061df064449cbb28f69867700509dcf164db1d797ad1f6d00cea64b0",
+        "bytes": 6287
+      },
+      "text": {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-apply-https.text.txt",
+        "sha256": "52ab5cffacb495f0352318121f493d004e612844a1090cd4610bedb2bf0ab5a8",
+        "bytes": 960
+      },
+      "receipt": {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-apply-https.receipt.json",
+        "sha256": "477c62908ef22b468499a1328218f2836b832a9c0aea28f3c9d6ed98d0cdd519",
+        "bytes": 2038
+      },
+      "rawAndTextMatchCaptureAndReceipt": true,
+      "receiptUrlAndTimeMatch": true,
+      "robots": {
+        "status": 404,
+        "canFetch": true,
+        "original": {
+          "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-apply-https.robots.txt",
+          "sha256": "217997338677cb4c6028849c2c69b11146e515f0bc49c01fa18a3e5f66201204",
+          "bytes": 1231
+        },
+        "hashMatches": true
+      },
+      "redirects": [
+        {
+          "url": "https://lxsapply.ecnu.edu.cn/",
+          "status": 302,
+          "location": "https://lxsapply.ecnu.edu.cn/c.asp?action=student_sign"
+        }
+      ]
+    }
+  ],
+  "quotes": [
+    {
+      "index": 0,
+      "field": "name",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inIndependentlyParsedRawHtml": true,
+      "inBoundText": true
+    },
+    {
+      "index": 1,
+      "field": "degreeLevel",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inIndependentlyParsedRawHtml": true,
+      "inBoundText": true
+    },
+    {
+      "index": 2,
+      "field": "teachingLanguages",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inIndependentlyParsedRawHtml": true,
+      "inBoundText": true
+    },
+    {
+      "index": 3,
+      "field": "durationText.en",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inIndependentlyParsedRawHtml": true,
+      "inBoundText": true
+    },
+    {
+      "index": 4,
+      "field": "applyUrl",
+      "sourceId": "source-ecnu-gcp-official-application-20261018",
+      "inIndependentlyParsedRawHtml": true,
+      "inBoundText": true
+    },
+    {
+      "index": 5,
+      "field": "languageRequirements",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inIndependentlyParsedRawHtml": true,
+      "inBoundText": true
+    },
+    {
+      "index": 6,
+      "field": "eligibility",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inIndependentlyParsedRawHtml": true,
+      "inBoundText": true
+    },
+    {
+      "index": 7,
+      "field": "applicationMaterials",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inIndependentlyParsedRawHtml": true,
+      "inBoundText": true
+    },
+    {
+      "index": 8,
+      "field": "applicationMaterials",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inIndependentlyParsedRawHtml": true,
+      "inBoundText": true
+    },
+    {
+      "index": 9,
+      "field": "closesOn",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inIndependentlyParsedRawHtml": true,
+      "inBoundText": true
+    },
+    {
+      "index": 10,
+      "field": "tuitionCny",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inIndependentlyParsedRawHtml": true,
+      "inBoundText": true
+    },
+    {
+      "index": 11,
+      "field": "tuitionPeriod",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inIndependentlyParsedRawHtml": true,
+      "inBoundText": true
+    },
+    {
+      "index": 12,
+      "field": "applicationFeeCny",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inIndependentlyParsedRawHtml": true,
+      "inBoundText": true
+    }
+  ],
+  "findings": [
+    {
+      "id": "ECNU-SEMANTIC-1",
+      "severity": "blocking",
+      "field": "entries[0].cycle.notes.zh",
+      "approvedPath": "quality/recovery-20261018/next-wave/ecnu/full-program-batch-approved-v1.json",
+      "approvedLine": 172,
+      "claim": "第一周报到",
+      "sourcePath": "quality/recovery-20261018/next-wave/ecnu/ecnu-gcp-2027.html",
+      "sourceLines": [
+        772,
+        868
+      ],
+      "source": "the first week is orientation week; Come to ECNU on registration days.",
+      "reason": "Orientation week does not publish registration days. The Chinese notes convert it into a first-week arrival/registration requirement while the English notes correctly say orientation.",
+      "requiredCorrection": "第一周为迎新周，3月8日开课；具体报到日按学校指定日期。 Preserve null/unknown exact registration dates."
+    },
+    {
+      "id": "ECNU-SEMANTIC-2",
+      "severity": "blocking-for-complete-claim-boundary",
+      "field": "entries[0].cycle.notes.en and notes.zh",
+      "approvedPath": "quality/recovery-20261018/next-wave/ecnu/full-program-batch-approved-v1.json",
+      "approvedLines": [
+        171,
+        172
+      ],
+      "claims": [
+        "The separate 20:00 cutoff on the Chinese-language programme page is not used here.",
+        "Do not apply lower fees or closed application dates from a different, older language-version page to this current Spring2027 guide."
+      ],
+      "reason": "This batch binds only the current GCP admissions page and application portal. Neither source capture establishes the claimed other-page 20:00 time, lower fees or closed dates. These cross-page maintenance comparisons are not fully source-backed applicant claims.",
+      "requiredCorrection": "Remove the specific other-page comparisons. Retain the supported statement that this programme page does not publish an exact opening date or deadline time, plus the current guide fees and deadline."
+    }
+  ],
+  "otherClaimsReviewed": {
+    "oneVisitingRouteNotFourCourseProjects": true,
+    "englishContentMediumOnlyWithOptionalChineseCaveat": true,
+    "literal15WeeksAndNullMonths": true,
+    "eligibilityCurrentCollegeStudent": true,
+    "alternativeEnglishCertificates": "IELTS >=6.0 / TOEFL >=85 / Cambridge English >=B2",
+    "allFourMaterialCategoriesAndPassportPhotoConditionsSupported": true,
+    "fees": {
+      "tuitionCny": 20000,
+      "tuitionPeriod": "semester",
+      "applicationFeeCny": 800,
+      "applicationFeeNonRefundable": true,
+      "insuranceCnyPerYear": 800,
+      "tuitionStatus": "confirmed",
+      "allowOfficialReferenceTuition": false,
+      "noReferenceFeeOptInRequired": true,
+      "noSemesterInsuranceProrationOrTuitionRefundInvented": true
+    },
+    "springDatesAndDec25DeadlineSupported": true,
+    "curriculumCreditsAvailabilityCreditTransferCampusContactsAndApplicationStepsSupported": true,
+    "exactHttpsPortalHrefPresentInRaw": true
+  },
+  "consumerParametersAfterCorrectionsOnly": {
+    "script": "scripts/quality/approve-full-program-batch.ts",
+    "invocationTemplate": "node --import tsx scripts/quality/approve-full-program-batch.ts <new-corrected-approved-batch.json> --apply <latest-normalized-catalog-sha256>",
+    "currentCatalogSha256ForReferenceOnly": "b38205d8b48028e7dea8086977f64eaaec090ffc8352021f21a278a7499fb0c9",
+    "cliSupportsOnlyApplyFlag": true,
+    "cliUsesCurrentChinaDateAutomatically": true,
+    "required": "Create a distinct immutable corrected draft/new batch ID, independently review all claims and bind its exact draft SHA, create corrected approved file, re-run read-only assessment and freshness/source/batch checks, establish exclusive canonical writer ownership, then re-read the latest normalized catalog SHA immediately before formal consumer application. Do not run --apply for the held v1. No new network capture is needed while existing official captures remain within the 24-hour window.",
+    "expectedRouteScope": 1,
+    "referenceFeeOptInRequired": false
+  },
+  "projectionBefore": {
+    "programmes": 766,
+    "cycles": 766,
+    "mapUniversities": 255,
+    "coveredSchools": 14
+  },
+  "preservedOriginalFiles": [
+    {
+      "path": "content/data/sources.json",
+      "sha256": "ecb815fc1e739d71b111ef6068dcac6635e71fadea66653aa4a1d323dc12e430",
+      "bytes": 973751
+    },
+    {
+      "path": "content/data/cities.json",
+      "sha256": "50e70c4d3daeb872ccec74f9e18ffd2f235e0b51ffd6d657292ff51e59dc9756",
+      "bytes": 61094
+    },
+    {
+      "path": "content/data/universities.json",
+      "sha256": "192c67035dcbfdda25efb7fa6bf4e558e4f903f8dd180a59bdc0feb574e4518b",
+      "bytes": 355070
+    },
+    {
+      "path": "content/data/programs.json",
+      "sha256": "16241e17f574d40147571b36444711b93a3e752247d977d0ed5820bf866eb913",
+      "bytes": 7189347
+    },
+    {
+      "path": "content/data/admission-cycles.json",
+      "sha256": "3418d0c1b553881b814136d6027cdf8864115129a68b5501a25136519d3647ea",
+      "bytes": 2260839
+    },
+    {
+      "path": "content/data/scholarships.json",
+      "sha256": "9b24efe621e4c59986564ff15b13588144aa1b5627e76425660f3aaeb4feaf5c",
+      "bytes": 738017
+    },
+    {
+      "path": "quality/recovery-20261018/next-wave/ecnu/full-program-batch-approved-v1.json",
+      "sha256": "1289434eedd14e3bb8583cae9320a3e81459fad0e7d446128ece5a9bb3b04e22",
+      "bytes": 17422
+    },
+    {
+      "path": "quality/recovery-20261018/next-wave/ecnu/full-program-batch-draft-v1.json",
+      "sha256": "5d08d14ac779973019faac4564abb3886bb184d1f837a93f65acf1a15a310e2b",
+      "bytes": 17393
+    },
+    {
+      "path": "quality/recovery-20261018/next-wave/ecnu/independent-review-v1.json",
+      "sha256": "5781dab18334afc1b007b0a6fdd3f113275f2947d66947bb79b052afc7b83d73",
+      "bytes": 2176
+    },
+    {
+      "path": "quality/recovery-20261018/continuation-state.json",
+      "sha256": "deb2235c710255341283d1688ce011dddb10982446ddc9b222484d2dd22b73cb",
+      "bytes": 3191
+    }
+  ],
+  "scope": {
+    "privateAuditOnly": true,
+    "canonicalWrites": 0,
+    "approvalWrites": 0,
+    "stateWrites": 0,
+    "gitWrites": 0,
+    "networkRequests": 0,
+    "paidCalls": 0,
+    "databaseWrites": 0,
+    "candidateBuildPublishActions": 0,
+    "pendingNineRouteCandidateAndFrozenBaselineNotTouched": true
+  }
+}

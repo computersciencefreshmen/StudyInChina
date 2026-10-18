@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-18T16:33:25.549Z",
+  "catalogSha256": "37d01083aa83d7ee7ee225d3aac63728f01edd188b71c1b2feb38e7616b91693",
+  "checks": [
+    {
+      "command": "npm run validate:data",
+      "exitCode": 0,
+      "rawUniversities": 272,
+      "rawPrograms": 2044,
+      "rawAdmissionCycles": 1637,
+      "rawSources": 2576,
+      "rawScholarships": 396
+    },
+    {
+      "command": "npx vitest run tests/unit/full-program-batch-approval.test.ts tests/unit/program-duration-release.test.ts",
+      "exitCode": 0,
+      "testFilesPassed": 2,
+      "testsPassed": 33,
+      "testsFailed": 0,
+      "initialSandboxAttempt": "EPERM temporary-cache rename before any tests; preserved in tool log",
+      "repair": "normal-user execution with dedicated workspace TEMP/TMP; no test or gate changed"
+    },
+    {
+      "command": "node --conditions=react-server --import tsx scripts/catalog/build-local-mirror.ts --expected-public-programs 767 --evaluated-for-date 2026-10-19",
+      "exitCode": 0,
+      "localOnly": true,
+      "receipt": {
+        "path": "quality/catalog-local-mirrors/legacy-v3-2026-10-18-37d01083aa83.receipt.json",
+        "sha256": "c95458e59ad884658a46cdf5493e1577538c7bbf38bb131411e4b5d9d493f074"
+      }
+    }
+  ],
+  "nativeReceipt": {
+    "path": "quality/program-expansion-20261013/applied-ecnu-global-china-spring-2027-proposal-20261019-v2.json",
+    "sha256": "54700be458db67ea8ef83630bf7478cde5ff14d50a9fce655afbc9901198491e"
+  },
+  "completeWebsiteAcceptanceForECNU": false,
+  "publicReleases": 0,
+  "fullCIGreen": false,
+  "paidCalls": 0,
+  "D1Requests": 0,
+  "cloudWrites": 0
+}

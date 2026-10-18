@@ -30,6 +30,18 @@ const programDetailsSchema = z.object({
   applicationMaterials: z.array(localizedText).min(2),
   campus: localizedText.optional(),
 })
+// Partial official information is distinct from the complete details contract.
+// Absent siblings carry no factual claim; every present value is reviewed separately.
+export const programSupplementaryDetailsSchema = z.object({
+  faculty: localizedText.optional(),
+  overview: localizedText.optional(),
+  qualification: localizedText.optional(),
+  languagePolicy: localizedText.optional(),
+  curriculumHighlights: z.array(localizedText).min(1).optional(),
+  eligibility: z.array(localizedText).min(1).optional(),
+  applicationMaterials: z.array(localizedText).min(1).optional(),
+  campus: localizedText.optional(),
+}).strict().refine(value => Object.values(value).some(item => item !== undefined), 'Supplementary details must contain a fact')
 
 export const sourceSchema = z.object({ id: z.string().min(1), url: httpsUrl, title: z.string().min(1), publisher: z.string().min(1), kind: z.enum(['university', 'program', 'admissions', 'scholarship', 'government', 'city', 'other']), language: z.enum(['zh', 'en', 'ru', 'other']), official: z.boolean(), accessedAt: date })
 export const citySchema = audit.extend({ id: z.string().min(1), slug: z.string().regex(/^[a-z0-9-]+$/), name: localizedText, province: localizedText.nullable(), region: region.nullable(), coordinates: z.object({ lat: z.number().min(-90).max(90), lng: z.number().min(-180).max(180) }).nullable(), overview: localizedText.nullable(), climate: localizedText.nullable(), foodHighlights: z.array(localizedText), sights: z.array(localizedText) })
@@ -66,20 +78,20 @@ export const universitySchema = audit.extend({ id: z.string().min(1), slug: z.st
     seen.add(key)
   }
 })
-export const programSchema = audit.extend({ id: z.string().min(1), slug: z.string().regex(/^[a-z0-9-]+$/), universityId: z.string().min(1), name: localizedText, degreeLevel: z.enum(['bachelor', 'master', 'doctorate', 'language', 'foundation', 'other']), discipline: z.enum(['engineering', 'business', 'medicine', 'chinese-education', 'humanities', 'law-ir', 'science', 'art-design', 'other']), teachingLanguages: z.array(z.string().min(1)), durationMonths: z.number().int().positive().max(120).nullable(), durationMonthsMax: z.number().int().positive().max(120).nullable().optional(), programUrl: httpsUrl, applyUrl: httpsUrl.nullable(), languageRequirements: z.array(z.object({ test: z.enum(['HSK', 'IELTS', 'TOEFL', 'other']), minimum: z.string().nullable() })), verificationScope: z.enum(['identity', 'facts', 'complete']).optional(), details: programDetailsSchema.optional() }).superRefine((value, context) => {
+export const programSchema = audit.extend({ id: z.string().min(1), slug: z.string().regex(/^[a-z0-9-]+$/), universityId: z.string().min(1), name: localizedText, degreeLevel: z.enum(['bachelor', 'master', 'doctorate', 'language', 'foundation', 'other']), discipline: z.enum(['engineering', 'business', 'medicine', 'chinese-education', 'humanities', 'law-ir', 'science', 'art-design', 'other']), teachingLanguages: z.array(z.string().min(1)), durationMonths: z.number().int().positive().max(120).nullable(), durationMonthsMax: z.number().int().positive().max(120).nullable().optional(), durationText: localizedText.refine(value => Object.values(value).every(text => text === undefined || text.trim().length > 0), 'Official duration text must be nonblank').optional(), programUrl: httpsUrl, applyUrl: httpsUrl.nullable(), languageRequirements: z.array(z.object({ test: z.enum(['HSK', 'IELTS', 'TOEFL', 'other']), minimum: z.string().nullable() })), verificationScope: z.enum(['identity', 'facts', 'complete']).optional(), details: programDetailsSchema.optional(), supplementaryDetails: programSupplementaryDetailsSchema.optional() }).superRefine((value, context) => {
   if (value.durationMonthsMax !== null && value.durationMonthsMax !== undefined && (value.durationMonths === null || value.durationMonthsMax < value.durationMonths)) context.addIssue({ code: 'custom', message: 'Maximum duration must be at least the minimum duration' })
   if (value.status !== 'verified') return
   const placeholderLanguage = /confirm|tbd|unknown|not[- ]announced/i
   if (value.teachingLanguages.some((language) => placeholderLanguage.test(language))) context.addIssue({ code: 'custom', message: 'Verified programs require confirmed teaching languages' })
   if (value.verificationScope === 'identity') return
   if (!value.details) return
-  if (value.durationMonths === null) context.addIssue({ code: 'custom', message: 'Complete verified programs require a confirmed duration' })
+  if (value.durationMonths === null && !Object.values(value.durationText ?? {}).some(text => text?.trim())) context.addIssue({ code: 'custom', message: 'Complete verified programs require a confirmed duration' })
   if (!value.applyUrl) context.addIssue({ code: 'custom', message: 'Complete verified programs require an official application URL' })
   if (value.applyUrl && value.programUrl === value.applyUrl) context.addIssue({ code: 'custom', message: 'Complete verified programs require a distinct official application URL' })
   if (value.teachingLanguages.length === 0) context.addIssue({ code: 'custom', message: 'Complete verified programs require confirmed teaching languages' })
   if (value.languageRequirements.length === 0) context.addIssue({ code: 'custom', message: 'Verified programs require an explicit language requirement or no-prerequisite statement' })
 })
-export const admissionCycleSchema = audit.extend({ id: z.string().min(1), programId: z.string().min(1), academicYear: z.string().regex(/^\d{4}-\d{4}$/).refine((value) => Number(value.slice(5)) === Number(value.slice(0, 4)) + 1, 'Academic year must contain consecutive years'), intake: z.enum(['spring', 'autumn', 'other']), opensOn: date.nullable(), closesOn: date.nullable(), dateStatus: z.enum(['published', 'rolling', 'not-announced', 'previous-cycle-reference']), tuitionCny: z.number().nonnegative().nullable(), tuitionPeriod: z.enum(['program', 'semester', 'academic-year', 'month', 'other']).nullable().optional(), tuitionStatus: z.enum(['confirmed', 'reference']).nullable().optional(), evidenceBasis: z.enum(['cycle-specific', 'recurring-official-rule']).optional(), factScope: z.enum(['dates-only', 'partial', 'complete']).optional(), applicationFeeCny: z.number().nonnegative().nullable(), notes: localizedText.optional() }).superRefine((value, context) => {
+export const admissionCycleSchema = audit.extend({ id: z.string().min(1), programId: z.string().min(1), academicYear: z.string().regex(/^\d{4}-\d{4}$/).refine((value) => Number(value.slice(5)) === Number(value.slice(0, 4)) + 1, 'Academic year must contain consecutive years'), intake: z.enum(['spring', 'autumn', 'other']), opensOn: date.nullable(), closesOn: date.nullable(), dateStatus: z.enum(['published', 'rolling', 'not-announced', 'previous-cycle-reference']), tuitionCny: z.number().nonnegative().nullable(), tuitionPeriod: z.enum(['program', 'semester', 'academic-year', 'month', 'other']).nullable().optional(), tuitionStatus: z.enum(['confirmed', 'reference']).nullable().optional(), tuitionSchedule: localizedText.optional(), evidenceBasis: z.enum(['cycle-specific', 'recurring-official-rule']).optional(), factScope: z.enum(['dates-only', 'partial', 'complete']).optional(), applicationFeeCny: z.number().nonnegative().nullable(), notes: localizedText.optional() }).superRefine((value, context) => {
   if (value.opensOn && value.closesOn && value.opensOn > value.closesOn) context.addIssue({ code: 'custom', message: 'opensOn must be before closesOn' })
   if (value.dateStatus === 'published' && !value.opensOn && !value.closesOn) context.addIssue({ code: 'custom', message: 'Published cycles require at least one official application date' })
   if (value.status === 'verified' && (value.factScope ?? 'complete') === 'complete' && value.dateStatus === 'published' && (value.tuitionCny === null || value.applicationFeeCny === null)) context.addIssue({ code: 'custom', message: 'Published verified cycles require tuition and application fee values' })
@@ -88,7 +100,7 @@ export const admissionCycleSchema = audit.extend({ id: z.string().min(1), progra
   if (value.status === 'verified' && !value.evidenceBasis) context.addIssue({ code: 'custom', message: 'Verified cycles require an explicit evidence basis' })
   if (value.dateStatus === 'not-announced' && (value.opensOn || value.closesOn)) context.addIssue({ code: 'custom', message: 'Not-announced cycles must keep dates null' })
 })
-export const scholarshipSchema = audit.extend({ id: z.string().min(1), slug: z.string().regex(/^[a-z0-9-]+$/), name: localizedText, providerType: z.enum(['csc', 'university', 'province', 'city', 'other']), universityIds: z.array(z.string()), programIds: z.array(z.string()), coverage: z.object({ tuition: z.enum(['full', 'partial', 'none', 'unknown']), accommodation: z.enum(['full', 'partial', 'none', 'unknown']), insurance: z.union([z.boolean(), z.literal('unknown')]), stipendCnyPerMonth: z.number().nonnegative().nullable() }), deadline: date.nullable(), applicationUrl: httpsUrl.nullable(), summary: localizedText.nullable() })
+export const scholarshipSchema = audit.extend({ id: z.string().min(1), slug: z.string().regex(/^[a-z0-9-]+$/), name: localizedText, providerType: z.enum(['csc', 'university', 'province', 'city', 'other']), universityIds: z.array(z.string()), programIds: z.array(z.string()), coverage: z.object({ tuition: z.enum(['full', 'partial', 'none', 'unknown']), accommodation: z.enum(['full', 'partial', 'none', 'unknown']), insurance: z.union([z.boolean(), z.literal('unknown')]), stipendCnyPerMonth: z.number().nonnegative().nullable() }), deadline: date.nullable(), applicationUrl: httpsUrl.nullable(), summary: localizedText.nullable(), eligibility: z.array(localizedText).min(1).optional() })
 
 export const bundleSchema = z.object({
   sources: z.array(sourceSchema), cities: z.array(citySchema), universities: z.array(universitySchema), programs: z.array(programSchema), admissionCycles: z.array(admissionCycleSchema), scholarships: z.array(scholarshipSchema),

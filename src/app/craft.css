@@ -1,0 +1,223 @@
+/* Craft-inspired type and paper composition; original assets, existing five palettes retained. */
+@font-face {
+  font-family: "Atlas Source Serif";
+  src: url("/fonts/source-serif-4.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atlas Source Sans";
+  src: url("/fonts/source-sans-3.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+}
+:root[data-design="craft"][data-theme] {
+  --atlas-font-display: "Atlas Source Serif", "Songti SC", "STSong", "SimSun", Georgia, serif;
+  --atlas-font-sans: "Atlas Source Sans", "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+  --font-heading: var(--atlas-font-display);
+  --font-body: var(--atlas-font-sans);
+  --atlas-container: 75rem;
+  --atlas-reading: 45rem;
+  --atlas-header-height: 5.8rem;
+  --atlas-radius-sm: .75rem;
+  --atlas-radius-md: 1.15rem;
+  --atlas-radius-lg: 1.75rem;
+  --atlas-shadow-xs: 0 2px 4px rgb(28 28 26 / .04);
+  --atlas-shadow-sm: 0 8px 24px rgb(28 28 26 / .045);
+  --atlas-shadow-md: 0 18px 55px rgb(28 28 26 / .085);
+}
+html[data-design="craft"][data-theme="craft"] {
+  --atlas-paper: #fcf9f7;
+  --atlas-paper-bright: #fff;
+  --atlas-paper-deep: #f0ece7;
+  --atlas-paper-muted: #f5f1ec;
+  --atlas-ink: #141412;
+  --atlas-ink-soft: #484742;
+  --atlas-muted: #6d6b66;
+  --atlas-line: #e6e2dc;
+  --atlas-line-strong: #d0cbc4;
+  --atlas-vermilion: #20201e;
+  --atlas-vermilion-dark: #030302;
+  --atlas-vermilion-pale: #efede7;
+  --atlas-jade: #3a6652;
+  --atlas-jade-dark: #28533e;
+  --atlas-jade-pale: #e9f1e9;
+  --atlas-gold: #78613d;
+  --atlas-gold-pale: #f6f0da;
+  --atlas-blue-pale: #e7f0f8;
+  --atlas-danger: #98514c;
+  --atlas-danger-pale: #f6e8e5;
+}
+html[data-design="craft"] body.atlas-public {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  background-image: none;
+}
+html[data-design="craft"] .atlas-public::before { display: none; }
+html[data-design="craft"] .atlas-public :where(h1,h2,h3,h4,h5) {
+  font-family: var(--atlas-font-display);
+  font-weight: 400;
+  font-optical-sizing: auto;
+  letter-spacing: -.025em;
+  line-height: 1.12;
+}
+html[data-design="craft"]:lang(zh) .atlas-public :where(h1,h2,h3,h4,h5) { letter-spacing: -.02em; line-height: 1.28; }
+html[data-design="craft"] .atlas-public :where(button,input,select,textarea) { font-family: var(--atlas-font-sans); }
+html[data-design="craft"] .atlas-public .atlas-container,
+html[data-design="craft"] .atlas-public .page-shell { width: min(var(--atlas-container), calc(100% - 4rem)); }
+html[data-design="craft"] .atlas-public .atlas-main { padding-top: .8rem; }
+
+/* A compact floating navigation bar, with every existing action still available. */
+html[data-design="craft"] .atlas-public .atlas-site-header {
+  top: 0;
+  padding: 1rem 1rem .35rem;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+html[data-design="craft"] .atlas-public .atlas-site-header__rule { display: none; }
+html[data-design="craft"] .atlas-public .atlas-site-header__inner {
+  width: min(82rem, 100%);
+  min-height: 4rem;
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr) auto;
+  grid-template-rows: auto;
+  padding: .55rem 1.2rem;
+  gap: 1rem;
+  background: color-mix(in srgb, var(--atlas-paper-bright) 92%, transparent);
+  border: 1px solid color-mix(in srgb, var(--atlas-line) 75%, transparent);
+  border-radius: 4rem;
+  box-shadow: 0 4px 15px rgb(28 28 26 / .06);
+  backdrop-filter: blur(20px);
+}
+html[data-design="craft"] .atlas-public .atlas-site-header__brand { gap: .5rem; grid-column: 1; }
+html[data-design="craft"] .atlas-public .atlas-site-header__brand-copy strong { font-size: 1.25rem; font-weight: 550; letter-spacing: -.035em; }
+html[data-design="craft"] .atlas-public .atlas-site-header__brand-copy small { display: none; }
+html[data-design="craft"] .atlas-public .atlas-site-header__seal,
+html[data-design="craft"] .atlas-public .atlas-footer__seal {
+  width: 2.5rem; height: 2.5rem; padding: 0; color: var(--atlas-ink); background: transparent;
+  border: 0; box-shadow: none; transform: none; flex-shrink: 0;
+}
+html[data-design="craft"] .atlas-public .atlas-site-header__seal svg,
+html[data-design="craft"] .atlas-public .atlas-footer__seal svg { width: 100%; height: 100%; }
+html[data-design="craft"] .atlas-public .atlas-site-header__nav { grid-row: 1; grid-column: 2; justify-self: center; border: 0; }
+html[data-design="craft"] .atlas-public .atlas-site-header__nav ul { flex-wrap: nowrap; gap: .12rem; }
+html[data-design="craft"] .atlas-public .atlas-site-header__nav a { padding: .65rem .65rem; min-height: 2.6rem; font-size: .9rem; font-weight: 450; letter-spacing: -.01em; border-radius: 2rem; }
+html[data-design="craft"] .atlas-public .atlas-site-header__nav a::after { display: none; }
+html[data-design="craft"] .atlas-public .atlas-site-header__nav a:is(:hover,.is-active) { background: var(--atlas-paper-muted); color: var(--atlas-ink); }
+html[data-design="craft"] .atlas-public .atlas-site-header__tools { grid-column: 3; grid-row: 1; gap: .35rem; }
+html[data-design="craft"] .atlas-public .atlas-site-header__actions { gap: .2rem; }
+html[data-design="craft"] .atlas-public .atlas-site-header__shortlist { gap: .25rem; border: 0; border-radius: 2rem; padding: .6rem .5rem; font-size: .8rem; font-weight: 450; }
+html[data-design="craft"] .atlas-public .atlas-language-switcher summary { border: 0; background: transparent; font-size: .85rem; }
+html[data-design="craft"] .atlas-public .atlas-site-header__mobile-panel { top: calc(100% + .55rem); inset-inline: 0; border-radius: 1.5rem; border: 1px solid var(--atlas-line); box-shadow: var(--atlas-shadow-md); }
+html[data-design="craft"] .atlas-public .atlas-site-header__mobile-links a { border-radius: .75rem; font-size: 1rem; }
+
+/* Shared hero, directory, detail and reading-page rhythm. */
+html[data-design="craft"] .atlas-public .atlas-hero {
+  width: min(var(--atlas-container),calc(100% - 4rem));
+  margin: 1rem auto 2rem;
+  padding: 3.8rem 0 2rem;
+  min-height: 0;
+  grid-template-columns: minmax(0,1fr);
+  background: none;
+  border: 0;
+  gap: 2rem;
+}
+html[data-design="craft"] .atlas-public :where(.atlas-hero__sun,.atlas-hero__route) { display: none; }
+html[data-design="craft"] .atlas-public .atlas-hero__content { max-width: 56rem; }
+html[data-design="craft"] .atlas-public .atlas-hero__eyebrow { color: var(--atlas-muted); font-size: .73rem; font-weight: 550; letter-spacing: .065em; margin-bottom: 1.15rem; }
+html[data-design="craft"] .atlas-public .atlas-hero__title { font-size: clamp(2.6rem,4.8vw,4.125rem); max-width: 23ch; line-height: 1.05; font-weight: 400; letter-spacing: -.03em; }
+html[data-design="craft"]:lang(zh) .atlas-public .atlas-hero__title { max-width: 21ch; line-height: 1.22; }
+html[data-design="craft"] .atlas-public .atlas-hero__description { max-width: 42rem; margin-top: 1.3rem; color: var(--atlas-ink-soft); font-size: 1.08rem; line-height: 1.6; }
+html[data-design="craft"] .atlas-public .atlas-hero__meta { margin-top: 1.4rem; gap: .6rem; font-size: .8rem; }
+html[data-design="craft"] .atlas-public .atlas-hero__aside { padding: 1.8rem; border: 1px solid var(--atlas-line); border-radius: 1.5rem; background: var(--atlas-paper-bright); }
+html[data-design="craft"] .atlas-public .atlas-section { padding-block: 3.5rem; }
+html[data-design="craft"] .atlas-public .atlas-section-heading { margin-bottom: 2rem; gap: 1.5rem; align-items: end; }
+html[data-design="craft"] .atlas-public .atlas-section-heading__title { font-size: clamp(2rem,3.8vw,3.375rem); font-weight: 400; letter-spacing: -.025em; }
+html[data-design="craft"] .atlas-public .atlas-section-heading__description { color: var(--atlas-muted); line-height: 1.6; font-size: 1rem; max-width: 38rem; }
+html[data-design="craft"] .atlas-public :where(.atlas-kicker,.atlas-section-heading__eyebrow) { font-size: .72rem; font-weight: 550; letter-spacing: .065em; }
+html[data-design="craft"] .atlas-public .content-grid { gap: 1.2rem; }
+html[data-design="craft"] .atlas-public .atlas-card { border: 1px solid var(--atlas-line); border-radius: 1.5rem; background: var(--atlas-paper-bright); padding: 1.6rem; box-shadow: 0 4px 15px rgb(28 28 26 / .025); }
+html[data-design="craft"] .atlas-public .atlas-card:hover { transform: translateY(-3px); box-shadow: var(--atlas-shadow-sm); }
+html[data-design="craft"] .atlas-public .atlas-card__title { font-size: 1.65rem; font-weight: 400; line-height: 1.2; }
+html[data-design="craft"] .atlas-public .atlas-card__description { font-size: 1rem; line-height: 1.6; }
+html[data-design="craft"] .atlas-public .atlas-card__footer { padding-top: 1.3rem; border-top: 1px solid var(--atlas-line); }
+html[data-design="craft"] .atlas-public .atlas-button { min-height: 2.85rem; border-radius: 3rem; font-size: .95rem; font-weight: 550; letter-spacing: -.01em; padding-inline: 1.25rem; box-shadow: none; }
+html[data-design="craft"] .atlas-public .atlas-button--primary { color: var(--atlas-paper-bright); background: var(--atlas-vermilion); border-color: var(--atlas-vermilion); }
+html[data-design="craft"] .atlas-public .atlas-button--secondary { color: var(--atlas-ink); background: var(--atlas-paper-bright); border: 1px solid var(--atlas-line); }
+html[data-design="craft"] .atlas-public .atlas-button--ghost { color: var(--atlas-ink); background: color-mix(in srgb,var(--atlas-paper-bright) 65%,transparent); border-color: var(--atlas-line); }
+html[data-design="craft"] .atlas-public .atlas-badge { font-family: var(--atlas-font-sans); font-weight: 500; font-size: .72rem; padding: .32rem .65rem; border-radius: 2rem; letter-spacing: 0; }
+html[data-design="craft"] .atlas-public :where(.prose-panel,.notice,.empty-state) { border-radius: 1.3rem; }
+html[data-design="craft"] .atlas-public .prose-panel { padding: 2rem; border-color: var(--atlas-line); background: var(--atlas-paper-bright); box-shadow: none; }
+html[data-design="craft"] .atlas-public .prose-panel :where(h2,h3) { font-weight: 400; margin-top: 1.8rem; }
+html[data-design="craft"] .atlas-public .prose-panel h2 { font-size: 2rem; }
+html[data-design="craft"] .atlas-public .prose-panel :where(p,li) { line-height: 1.8; font-size: 1rem; }
+html[data-design="craft"] .atlas-public .detail-layout { grid-template-columns: minmax(0,1.8fr) minmax(18rem,.85fr); gap: 1.5rem; }
+html[data-design="craft"] .atlas-public .detail-aside { top: 7rem; }
+html[data-design="craft"] .atlas-public .detail-facts { gap: 0 1.5rem; }
+html[data-design="craft"] .atlas-public .detail-facts > div { padding-block: 1.1rem; border-bottom: 1px solid var(--atlas-line); }
+html[data-design="craft"] .atlas-public .detail-facts dt { font-size: .8rem; color: var(--atlas-muted); letter-spacing: 0; font-weight: 450; }
+html[data-design="craft"] .atlas-public .detail-facts dd { font-size: 1rem; font-weight: 500; line-height: 1.5; }
+html[data-design="craft"] .atlas-public .notice { border: 1px solid var(--atlas-line); background: var(--atlas-paper-muted); font-size: .93rem; line-height: 1.65; padding: 1rem 1.25rem; }
+html[data-design="craft"] .atlas-public .reading-layout { gap: 2rem; }
+html[data-design="craft"] .atlas-public .prose :where(h2,h3) { font-weight: 400; }
+html[data-design="craft"] .atlas-public .prose h2 { font-size: 2.4rem; margin-top: 2.5rem; }
+html[data-design="craft"] .atlas-public .prose :where(p,li) { line-height: 1.85; }
+
+/* Source references, article utilities and footer share the same calm paper language. */
+html[data-design="craft"] .atlas-public .atlas-footer { margin-top: 3rem; padding-top: 0; border-top: 1px solid var(--atlas-line); background: var(--atlas-paper-muted); }
+html[data-design="craft"] .atlas-public .atlas-footer__grid { padding-top: 3.5rem; gap: 3rem; }
+html[data-design="craft"] .atlas-public .atlas-footer__brand strong { font-family: var(--atlas-font-display); font-size: 1.75rem; font-weight: 400; }
+html[data-design="craft"] .atlas-public .atlas-footer__column h2 { font-family: var(--atlas-font-sans); font-weight: 550; font-size: .8rem; letter-spacing: .03em; color: var(--atlas-ink); }
+html[data-design="craft"] .atlas-public .atlas-footer__column a { font-size: .95rem; min-height: 2.5rem; }
+html[data-design="craft"] .atlas-public .atlas-footer__notice { font-size: .87rem; padding-block: 1.25rem; }
+html[data-design="craft"] .atlas-public [role="dialog"] { background: var(--atlas-paper-bright); border-color: var(--atlas-line); border-radius: 1.75rem; }
+html[data-design="craft"] .atlas-public [role="dialog"] h2 { font-weight: 400; font-size: clamp(1.75rem,3.2vw,2.75rem); max-width: 27ch; }
+html[data-design="craft"] .atlas-public #home-title { line-height: 1; letter-spacing: -.03em; }
+html[data-design="craft"]:lang(zh) .atlas-public #home-title { line-height: 1.22; letter-spacing: -.02em; }
+
+@media (max-width: 77rem) {
+  html[data-design="craft"] .atlas-public .atlas-site-header__nav a { padding-inline: .4rem; font-size: .85rem; }
+  html[data-design="craft"] .atlas-public .atlas-site-header__brand-copy strong { font-size: 1.15rem; }
+  html[data-design="craft"] .atlas-public .atlas-site-header__actions > a span:not([aria-hidden]) { display: none; }
+}
+@media (max-width: 62rem) {
+  html[data-design="craft"] .atlas-public .atlas-site-header__inner { display: flex; justify-content: space-between; gap: .5rem; }
+  html[data-design="craft"] .atlas-public :where(.atlas-site-header__nav,.atlas-site-header__tools) { display: none; }
+  html[data-design="craft"] .atlas-public .atlas-site-header__mobile-menu { display: block; }
+  html[data-design="craft"] .atlas-public .atlas-site-header__menu-label { display: none; }
+  html[data-design="craft"] .atlas-public .atlas-site-header__mobile-menu summary { padding: .65rem; min-width: 2.75rem; min-height: 2.75rem; }
+  html[data-design="craft"] .atlas-public .detail-layout { grid-template-columns: minmax(0,1fr); }
+  html[data-design="craft"] .atlas-public .detail-aside { position: static; }
+}
+@media (max-width: 48rem) {
+  html[data-design="craft"] { --atlas-header-height: 5.25rem; }
+  html[data-design="craft"] .atlas-public .atlas-site-header { padding: .75rem .75rem .25rem; }
+  html[data-design="craft"] .atlas-public .atlas-site-header__inner { padding: .5rem .9rem; min-height: 3.7rem; }
+  html[data-design="craft"] .atlas-public .atlas-container,
+  html[data-design="craft"] .atlas-public .page-shell { width: calc(100% - 2rem); }
+  html[data-design="craft"] .atlas-public .atlas-hero { width: calc(100% - 2rem); padding: 2.25rem 0 1rem; margin-block: .5rem 1rem; }
+  html[data-design="craft"] .atlas-public .atlas-hero__title { font-size: clamp(2.2rem,8vw,3.4rem); line-height: 1.1; }
+  html[data-design="craft"] .atlas-public .atlas-hero__description { font-size: 1rem; }
+  html[data-design="craft"] .atlas-public .atlas-section { padding-block: 2.5rem; }
+  html[data-design="craft"] .atlas-public .atlas-section-heading { align-items: start; }
+  html[data-design="craft"] .atlas-public .atlas-section-heading__title { font-size: 2.3rem; }
+  html[data-design="craft"] .atlas-public .prose-panel { padding: 1.5rem; }
+  html[data-design="craft"] .atlas-public .detail-facts { grid-template-columns: 1fr; }
+  html[data-design="craft"] .atlas-public .atlas-footer__grid { padding-top: 2.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-design="craft"] .atlas-public *, html[data-design="craft"] .atlas-public *::before, html[data-design="craft"] .atlas-public *::after { animation: none !important; scroll-behavior: auto; transition: none !important; }
+}
+@media (forced-colors: active) {
+  html[data-design="craft"] .atlas-public .atlas-site-header__inner { border: 1px solid ButtonText; }
+  html[data-design="craft"] .atlas-public .atlas-button { border: 1px solid ButtonText; }
+}
+@media print {
+  html[data-design="craft"] .atlas-public .atlas-site-header { display: none; }
+  html[data-design="craft"] .atlas-public .atlas-container { width: 100%; }
+  html[data-design="craft"] .atlas-public .atlas-hero { padding: 1rem 0; width: 100%; }
+}

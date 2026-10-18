@@ -1,0 +1,496 @@
+{
+  "format": "studyinchina.national-university-source-discovery-batch",
+  "version": 1,
+  "batchId": "national-discovery-batch-003",
+  "startedAt": "2026-10-17T06:32:50Z",
+  "completedAt": "2026-10-17T06:37:17.405Z",
+  "evaluationDate": "2026-10-17",
+  "registry": {
+    "path": "content/targets/national-university-registry.json",
+    "sha256": "53d8d773ed333d3dc82bd352d060f32dbb2a1ad1bd6d11d51d1843bdb8ebd7af",
+    "sourceYear": 2026,
+    "asOf": "2026-06-17"
+  },
+  "selection": {
+    "method": "first10-unattempted-missing-institutions-in-official-MOE-order-all-education-categories",
+    "maximumInstitutions": 10,
+    "priorReceiptCount": 2,
+    "previouslyAttemptedTargetCount": 20,
+    "priorReceipts": [
+      {
+        "path": "quality/continuous-program-maintenance-20261017/national-discovery/batch-001.json",
+        "sha256": "1173713dbad44ac58066269bda067be7def6435fefbc9e84357275494a7fbf75",
+        "bytes": 20825
+      },
+      {
+        "path": "quality/continuous-program-maintenance-20261017/national-discovery/batch-002.json",
+        "sha256": "67d9953ddbb1230ffb13822731b8428f8e8efae07cd3e7fec86a1617f9589669",
+        "bytes": 22013
+      }
+    ],
+    "targetIds": [
+      "moe-4111013630",
+      "moe-4111013901",
+      "moe-4111013904",
+      "moe-4111014019",
+      "moe-4111014201",
+      "moe-4111014596",
+      "moe-4111014139",
+      "moe-4111010858",
+      "moe-4111010853",
+      "moe-4111010857"
+    ],
+    "educationCategoriesIncluded": [
+      "bachelor-level",
+      "higher-vocational-junior-college",
+      "adult-higher-education"
+    ],
+    "adultQueueExcluded": false,
+    "adultQueueUnattempted": 244
+  },
+  "policy": {
+    "primaryOfficialSourcesOnly": true,
+    "admissionsHostsGuessed": false,
+    "searchResultsFromThirdPartiesUsedAsEvidence": false,
+    "captureAndPublicationPerformed": false,
+    "noSourceFoundDoesNotEstablishNoAdmissions": true,
+    "no2027ValuesInferred": true,
+    "accessControlsRespected": true,
+    "immutableReceipt": true,
+    "laterChangesRequireNewBatchReceipt": true,
+    "nationalMissingTargetsNotPassedToMapCaptureExecutor": true
+  },
+  "summary": {
+    "institutionsAttempted": 10,
+    "foundOfficialSource": 5,
+    "unknown": 4,
+    "blocked": 1,
+    "sourceDiscoveryIsNotProgrammeVerification": true,
+    "rawSourceCaptures": 0,
+    "currentProgrammesCertified": 0,
+    "completeFactApprovals": 0,
+    "newIndependentProgrammeCandidatesCreated": 0,
+    "paidModelCalls": 0,
+    "reportedMiniMaxTokensThisBatch": 0,
+    "unknownMiniMaxUsageThisBatch": 0,
+    "canonicalWrites": 0,
+    "databaseWrites": 0,
+    "cloudWrites": 0,
+    "publications": 0,
+    "externalAccountWrites": 0,
+    "searchQueries": 20,
+    "directWebToolReadAttempts": 10,
+    "wireHttpRequestCount": "unknown-web-tool-internal-transport-not-exposed"
+  },
+  "results": [
+    {
+      "targetId": "moe-4111013630",
+      "status": "unknown",
+      "sources": [],
+      "nonAdmissionsEvidence": [
+        {
+          "primaryOfficialSource": true,
+          "evidenceAcquisition": "primary-official-search-index",
+          "url": "https://zsb.canvard.net.cn/",
+          "title": "北京金融科技学院本科招生网",
+          "sourceKind": "domestic-undergraduate-admissions",
+          "note": "Domestic admissions site found; no inbound international-student guide established in the bounded searches.",
+          "observedAt": "2026-10-17T06:37:17.405Z",
+          "rawBytesCaptured": false,
+          "publicationEligible": false
+        }
+      ],
+      "nextAction": "retry-official-international-source-discovery-after-7-days",
+      "institutionCode": "4111013630",
+      "officialNameZh": "北京金融科技学院",
+      "educationCategory": "bachelor-level",
+      "moeOrdinal": 61,
+      "sourceSheet": "全国普通高等学校名单",
+      "sourceRow": 65,
+      "catalogueMatchAtSelection": null,
+      "currentAvailability": "unknown",
+      "currentProgramsStatus": "unknown",
+      "catalogueCompleteness": "unknown",
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T06:37:17.405Z"
+    },
+    {
+      "targetId": "moe-4111013901",
+      "status": "unknown",
+      "sources": [],
+      "nonAdmissionsEvidence": [
+        {
+          "primaryOfficialSource": true,
+          "evidenceAcquisition": "primary-official-search-index",
+          "url": "https://www.ccbupt.cn/xygk/index.htm",
+          "title": "北京邮电大学世纪学院学院概况",
+          "sourceKind": "institution-profile",
+          "note": "Official indexed profile describes historical international-student qualification; direct tool read returned no extractable body. This is not an international admission guide.",
+          "observedAt": "2026-10-17T06:37:17.405Z",
+          "rawBytesCaptured": false,
+          "publicationEligible": false
+        },
+        {
+          "primaryOfficialSource": true,
+          "evidenceAcquisition": "primary-official-search-index",
+          "url": "https://zhaoban.ccbupt.cn/zsjz/001b1e6a683e4ded98a117ded25805ba.htm",
+          "title": "北京邮电大学世纪学院招生网站",
+          "sourceKind": "domestic-admissions-historical-profile",
+          "note": "Historical inbound exchanges are mentioned in domestic admissions material; current inbound programme scope and dates remain unknown.",
+          "observedAt": "2026-10-17T06:37:17.405Z",
+          "rawBytesCaptured": false,
+          "publicationEligible": false
+        }
+      ],
+      "accessLimitations": [
+        {
+          "url": "https://www.ccbupt.cn/xygk/index.htm",
+          "outcome": "no-extractable-body",
+          "httpStatus": null
+        }
+      ],
+      "nextAction": "retry-official-international-source-discovery-after-7-days",
+      "institutionCode": "4111013901",
+      "officialNameZh": "北京邮电大学世纪学院",
+      "educationCategory": "bachelor-level",
+      "moeOrdinal": 62,
+      "sourceSheet": "全国普通高等学校名单",
+      "sourceRow": 66,
+      "catalogueMatchAtSelection": null,
+      "currentAvailability": "unknown",
+      "currentProgramsStatus": "unknown",
+      "catalogueCompleteness": "unknown",
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T06:37:17.405Z"
+    },
+    {
+      "targetId": "moe-4111013904",
+      "status": "blocked",
+      "sources": [],
+      "nonAdmissionsEvidence": [
+        {
+          "primaryOfficialSource": true,
+          "evidenceAcquisition": "read-primary-official-page",
+          "url": "https://www.gengdan.cn/xvsr8456f3.html",
+          "title": "国际交流办公室举办2026年春季学期留学生见面会",
+          "sourceKind": "incoming-exchange-student-news",
+          "sourcePublishedAt": "2026-03-13",
+          "note": "Official news confirms an exchange-student activity, not current admissions. International-office URL was followed from this page, not guessed.",
+          "observedAt": "2026-10-17T06:37:17.405Z",
+          "rawBytesCaptured": false,
+          "publicationEligible": false
+        }
+      ],
+      "accessLimitations": [
+        {
+          "url": "https://www.gengdan.cn/io/",
+          "outcome": "HTTP-forbidden",
+          "httpStatus": 403,
+          "discoveredVia": "https://www.gengdan.cn/xvsr8456f3.html#international-navigation",
+          "scope": "this-office-URL-only"
+        }
+      ],
+      "nextAction": "respect-office-access-control-and-retry-after-14-days; do-not-infer-whole-institution-blocked",
+      "institutionCode": "4111013904",
+      "officialNameZh": "北京工业大学耿丹学院",
+      "educationCategory": "bachelor-level",
+      "moeOrdinal": 63,
+      "sourceSheet": "全国普通高等学校名单",
+      "sourceRow": 67,
+      "catalogueMatchAtSelection": null,
+      "currentAvailability": "unknown",
+      "currentProgramsStatus": "unknown",
+      "catalogueCompleteness": "unknown",
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T06:37:17.405Z"
+    },
+    {
+      "targetId": "moe-4111014019",
+      "status": "unknown",
+      "sources": [],
+      "nonAdmissionsEvidence": [
+        {
+          "primaryOfficialSource": true,
+          "evidenceAcquisition": "primary-official-search-index",
+          "url": "https://ehall.bjpc.edu.cn/pages/bjpc/site/home",
+          "title": "北京警察学院智慧门户",
+          "sourceKind": "institution-portal",
+          "note": "Official institutional portal is not international admissions. Domestic police recruitment and nationality rules must not be extrapolated into a conclusion about every international/exchange route.",
+          "observedAt": "2026-10-17T06:37:17.405Z",
+          "rawBytesCaptured": false,
+          "publicationEligible": false
+        }
+      ],
+      "nextAction": "retry-official-international-source-discovery-after-7-days",
+      "institutionCode": "4111014019",
+      "officialNameZh": "北京警察学院",
+      "educationCategory": "bachelor-level",
+      "moeOrdinal": 64,
+      "sourceSheet": "全国普通高等学校名单",
+      "sourceRow": 68,
+      "catalogueMatchAtSelection": null,
+      "currentAvailability": "unknown",
+      "currentProgramsStatus": "unknown",
+      "catalogueCompleteness": "unknown",
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T06:37:17.405Z"
+    },
+    {
+      "targetId": "moe-4111014201",
+      "status": "found-official-source",
+      "sources": [
+        {
+          "primaryOfficialSource": true,
+          "evidenceAcquisition": "primary-official-search-index",
+          "sourcePublishedAt": null,
+          "admissionsYearObserved": 2025,
+          "url": "https://english.bhi.edu.cn/en/article/detail?cid=27&detail=487",
+          "title": "2025 BHI Undergraduate Application Guide for International Students",
+          "sourceKind": "international-undergraduate-guide",
+          "note": "Historical 2025 guide; key programme and fee information is in images not captured here. No current window, complete catalogue or approval established.",
+          "observedAt": "2026-10-17T06:37:17.405Z",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        },
+        {
+          "primaryOfficialSource": true,
+          "evidenceAcquisition": "primary-official-search-index",
+          "sourcePublishedAt": null,
+          "admissionsYearObserved": null,
+          "url": "https://english.bhi.edu.cn/en/videos?cid=37",
+          "title": "Admission - Hospitality Management",
+          "sourceKind": "international-admission-and-application",
+          "note": "Official admission page found by primary-domain search; undated material must not imply a current cycle.",
+          "observedAt": "2026-10-17T06:37:17.405Z",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "accessLimitations": [
+        {
+          "url": "https://english.bhi.edu.cn/",
+          "outcome": "tool-internal-error-on-homepage-navigation",
+          "httpStatus": null
+        }
+      ],
+      "nextAction": "sourceReview: preserve-and-capture-exact-guide-and-embedded-evidence-under-qualified-admission; resolve-current-year-and-complete-claims",
+      "institutionCode": "4111014201",
+      "officialNameZh": "北京第二外国语学院中瑞酒店管理学院",
+      "educationCategory": "bachelor-level",
+      "moeOrdinal": 65,
+      "sourceSheet": "全国普通高等学校名单",
+      "sourceRow": 69,
+      "catalogueMatchAtSelection": null,
+      "currentAvailability": "unknown",
+      "currentProgramsStatus": "unknown",
+      "catalogueCompleteness": "unknown",
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T06:37:17.405Z",
+      "nonAdmissionsEvidence": []
+    },
+    {
+      "targetId": "moe-4111014596",
+      "status": "found-official-source",
+      "sources": [
+        {
+          "primaryOfficialSource": true,
+          "evidenceAcquisition": "primary-official-search-index",
+          "sourcePublishedAt": null,
+          "admissionsYearObserved": 2026,
+          "url": "https://intl.ucass.edu.cn/lxskd1/zwxm.htm",
+          "title": "中文项目-中国社科大国际交流与合作处",
+          "sourceKind": "international-graduate-admissions-index",
+          "note": "Primary official search index lists the 2026 Chinese-taught international master's/doctoral prospectus and scholarship route. Direct read timed out; no raw bytes or HTTP200 claim.",
+          "observedAt": "2026-10-17T06:37:17.405Z",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "accessLimitations": [
+        {
+          "url": "https://intl.ucass.edu.cn/lxskd1/zwxm.htm",
+          "outcome": "direct-tool-read-timeout",
+          "httpStatus": null
+        }
+      ],
+      "nextAction": "sourceReview: capture-official-prospectus-and-all-linked-programme-attachments-under-qualified-admission; verify-current-status",
+      "institutionCode": "4111014596",
+      "officialNameZh": "中国社会科学院大学",
+      "educationCategory": "bachelor-level",
+      "moeOrdinal": 67,
+      "sourceSheet": "全国普通高等学校名单",
+      "sourceRow": 71,
+      "catalogueMatchAtSelection": null,
+      "currentAvailability": "unknown",
+      "currentProgramsStatus": "unknown",
+      "catalogueCompleteness": "unknown",
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T06:37:17.405Z",
+      "nonAdmissionsEvidence": []
+    },
+    {
+      "targetId": "moe-4111014139",
+      "status": "unknown",
+      "sources": [],
+      "nonAdmissionsEvidence": [
+        {
+          "primaryOfficialSource": true,
+          "evidenceAcquisition": "primary-official-search-index",
+          "url": "https://www.bcsa.edu.cn/gjhzyjl/xwdt/1.htm",
+          "title": "新闻动态-民政职业大学国际合作与交流",
+          "sourceKind": "international-cooperation-and-outbound-news",
+          "note": "Official indexed cooperation news concerns partner/outbound activity. No inbound international admissions guide established.",
+          "observedAt": "2026-10-17T06:37:17.405Z",
+          "rawBytesCaptured": false,
+          "publicationEligible": false
+        }
+      ],
+      "accessLimitations": [
+        {
+          "url": "https://www.bcsa.edu.cn/gjhzyjl/xwdt/1.htm",
+          "outcome": "tool-unavailable",
+          "httpStatus": null
+        }
+      ],
+      "nextAction": "retry-official-international-source-discovery-after-7-days",
+      "institutionCode": "4111014139",
+      "officialNameZh": "民政职业大学",
+      "educationCategory": "bachelor-level",
+      "moeOrdinal": 68,
+      "sourceSheet": "全国普通高等学校名单",
+      "sourceRow": 72,
+      "catalogueMatchAtSelection": null,
+      "currentAvailability": "unknown",
+      "currentProgramsStatus": "unknown",
+      "catalogueCompleteness": "unknown",
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T06:37:17.405Z"
+    },
+    {
+      "targetId": "moe-4111010858",
+      "status": "found-official-source",
+      "sources": [
+        {
+          "primaryOfficialSource": true,
+          "evidenceAcquisition": "read-primary-official-page",
+          "sourcePublishedAt": "2026-04-28",
+          "admissionsYearObserved": 2026,
+          "url": "https://www.bpu.edu.cn/international/info/1003/1283.htm",
+          "title": "北京科技职业大学2026年留学生招生简章",
+          "sourceKind": "international-undergraduate-diploma-and-preparatory-guide",
+          "note": "Guide separates vocational bachelor's, diploma and preparatory routes and gives a 2026-05-27 to 2026-06-26 application period, already closed on the evaluation date. No rollover to 2027 or public current-cycle approval.",
+          "observedAt": "2026-10-17T06:37:17.405Z",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "nextAction": "sourceReview: preserve-historical-2026-route-evidence-and-discover-new-official-cycle-without-changing-old-dates",
+      "institutionCode": "4111010858",
+      "officialNameZh": "北京科技职业大学",
+      "educationCategory": "bachelor-level",
+      "moeOrdinal": 69,
+      "sourceSheet": "全国普通高等学校名单",
+      "sourceRow": 73,
+      "catalogueMatchAtSelection": null,
+      "currentAvailability": "unknown",
+      "currentProgramsStatus": "unknown",
+      "catalogueCompleteness": "unknown",
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T06:37:17.405Z",
+      "nonAdmissionsEvidence": []
+    },
+    {
+      "targetId": "moe-4111010853",
+      "status": "found-official-source",
+      "sources": [
+        {
+          "primaryOfficialSource": true,
+          "evidenceAcquisition": "read-primary-official-PDF-text",
+          "sourcePublishedAt": null,
+          "admissionsYearObserved": 2024,
+          "url": "https://gjc.bgy.edu.cn/docs/2025-03/160a93f1991e4423ab436ee2da04e8f8.pdf",
+          "title": "Beijing Polytechnic College 2024 Chinese+TVET International Students Admission",
+          "sourceKind": "historical-international-Chinese-plus-vocational-short-course-guide",
+          "pageCount": 11,
+          "note": "PDF body says 2024 although its URL directory is 2025-03. It describes short-course/completion-certificate study; future diploma progression is not approval of an available diploma programme. Historical evidence only.",
+          "observedAt": "2026-10-17T06:37:17.405Z",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "nextAction": "sourceReview: preserve-original-PDF-and-check-current-official-guide; keep-short-course-and-degree-identities-separate",
+      "institutionCode": "4111010853",
+      "officialNameZh": "北京工业职业技术学院",
+      "educationCategory": "higher-vocational-junior-college",
+      "moeOrdinal": 70,
+      "sourceSheet": "全国普通高等学校名单",
+      "sourceRow": 74,
+      "catalogueMatchAtSelection": null,
+      "currentAvailability": "unknown",
+      "currentProgramsStatus": "unknown",
+      "catalogueCompleteness": "unknown",
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T06:37:17.405Z",
+      "nonAdmissionsEvidence": []
+    },
+    {
+      "targetId": "moe-4111010857",
+      "status": "found-official-source",
+      "sources": [
+        {
+          "primaryOfficialSource": true,
+          "evidenceAcquisition": "read-primary-official-page",
+          "sourcePublishedAt": null,
+          "admissionsYearObserved": null,
+          "url": "https://www.bitc.edu.cn/bjxxzyjsxy_en/hta/Apply_for_Diploma_program.htm",
+          "title": "Apply for Diploma program-北京信息职业技术学院 International Education",
+          "sourceKind": "international-diploma-application-guide",
+          "note": "Separate three-year and five-year routes, qualifications and month/day periods are present, but no admissions year is stated. Do not infer rolling admission or create a 2027 deadline.",
+          "observedAt": "2026-10-17T06:37:17.405Z",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "nextAction": "sourceReview: capture-complete-route-catalogue-fees-and-current-year-confirmation-before-full-programme-review",
+      "institutionCode": "4111010857",
+      "officialNameZh": "北京信息职业技术学院",
+      "educationCategory": "higher-vocational-junior-college",
+      "moeOrdinal": 71,
+      "sourceSheet": "全国普通高等学校名单",
+      "sourceRow": 75,
+      "catalogueMatchAtSelection": null,
+      "currentAvailability": "unknown",
+      "currentProgramsStatus": "unknown",
+      "catalogueCompleteness": "unknown",
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T06:37:17.405Z",
+      "nonAdmissionsEvidence": []
+    }
+  ]
+}

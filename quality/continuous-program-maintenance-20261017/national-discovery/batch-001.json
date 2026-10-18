@@ -1,0 +1,476 @@
+{
+  "format": "studyinchina.national-university-source-discovery-batch",
+  "version": 1,
+  "batchId": "national-discovery-batch-001",
+  "startedAt": "2026-10-17T05:49:32Z",
+  "completedAt": "2026-10-17T05:51:46Z",
+  "evaluationDate": "2026-10-17",
+  "registry": {
+    "path": "content/targets/national-university-registry.json",
+    "sha256": "53d8d773ed333d3dc82bd352d060f32dbb2a1ad1bd6d11d51d1843bdb8ebd7af",
+    "sourceYear": 2026,
+    "asOf": "2026-06-17"
+  },
+  "selection": {
+    "method": "first-10-in-official-MOE-order-with-bachelor-level-and-null-catalogueMatch",
+    "maximumInstitutions": 10,
+    "targetIds": [
+      "moe-4111010012",
+      "moe-4111010015",
+      "moe-4111010016",
+      "moe-4111010018",
+      "moe-4111010020",
+      "moe-4111010025",
+      "moe-4111010029",
+      "moe-4111010039",
+      "moe-4111010042",
+      "moe-4111010049"
+    ]
+  },
+  "policy": {
+    "primaryOfficialSourcesOnly": true,
+    "admissionsHostsGuessed": false,
+    "searchResultsFromThirdPartiesUsedAsEvidence": false,
+    "captureAndPublicationPerformed": false,
+    "noSourceFoundDoesNotEstablishNoAdmissions": true,
+    "no2027ValuesInferred": true,
+    "accessErrorsAreNotConfirmedHTTP403": true,
+    "immutableReceipt": true,
+    "laterChangesRequireNewBatchReceipt": true
+  },
+  "summary": {
+    "institutionsAttempted": 10,
+    "foundOfficialSource": 7,
+    "unknown": 3,
+    "blocked": 0,
+    "sourceDiscoveryIsNotProgrammeVerification": true,
+    "rawSourceCaptures": 0,
+    "currentProgrammesCertified": 0,
+    "paidModelCalls": 0,
+    "canonicalWrites": 0,
+    "databaseWrites": 0,
+    "externalAccountWrites": 0
+  },
+  "results": [
+    {
+      "status": "found-official-source",
+      "sources": [
+        {
+          "url": "https://gjy.bift.edu.cn/zsxx/6e3639c5d7b04bb080a6cd4f9e1e1dcf.htm",
+          "title": "留学生（本科）- 本科留学生招生简章",
+          "sourceKind": "international-undergraduate-prospectus",
+          "primaryOfficialSource": true,
+          "observedAt": "2026-10-17T05:51:46Z",
+          "evidenceAcquisition": "read-primary-page",
+          "sourcePublishedAt": "2025-11-06",
+          "admissionsYearObserved": 2026,
+          "evidenceQuote": "BIFT 2026 International Student Enrollment Prospectus for Undergraduates",
+          "note": null,
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "observedApplicationDeadline": "2026-06-30",
+      "cycleAssessment": "observed-deadline-has-passed",
+      "currentAvailability": "unknown",
+      "nextAction": "capture-official-prospectus-and-programme-attachments; search-explicit-next-intake; do-not-reopen-2026-deadline",
+      "targetId": "moe-4111010012",
+      "institutionCode": "4111010012",
+      "officialNameZh": "北京服装学院",
+      "moeOrdinal": 12,
+      "catalogueMatchAtSelection": null,
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T05:51:46Z"
+    },
+    {
+      "status": "found-official-source",
+      "sources": [
+        {
+          "url": "https://sie.bigc.edu.cn/docs/2025-12/89bfa29ba40049dba2d9665a4313f6ce.pdf",
+          "title": "北京印刷学院2026秋季国际学生本科生招生简章",
+          "sourceKind": "international-undergraduate-prospectus-pdf",
+          "primaryOfficialSource": true,
+          "observedAt": "2026-10-17T05:51:46Z",
+          "evidenceAcquisition": "primary-official-PDF-search-index",
+          "sourcePublishedAt": null,
+          "admissionsYearObserved": 2026,
+          "evidenceQuote": "北京印刷学院2026秋季国际学生本科生招生简章",
+          "note": "The official PDF title and indexed first-page text were observed; full PDF bytes and its deadline have not been captured or verified.",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        },
+        {
+          "url": "https://sie.bigc.edu.cn/docs/2025-12/721b1afe64e44166852c83466ebff0b8.pdf",
+          "title": "北京印刷学院2026秋季国际学生研究生招生简章",
+          "sourceKind": "international-postgraduate-prospectus-pdf",
+          "primaryOfficialSource": true,
+          "observedAt": "2026-10-17T05:51:46Z",
+          "evidenceAcquisition": "primary-official-PDF-search-index",
+          "sourcePublishedAt": null,
+          "admissionsYearObserved": 2026,
+          "evidenceQuote": "北京印刷学院2026秋季国际学生研究生招生简章",
+          "note": null,
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "currentAvailability": "unknown",
+      "nextAction": "capture-official-PDFs; inspect-complete-2026-catalogues-and-deadlines; discover-explicit-future-intake",
+      "targetId": "moe-4111010015",
+      "institutionCode": "4111010015",
+      "officialNameZh": "北京印刷学院",
+      "moeOrdinal": 14,
+      "catalogueMatchAtSelection": null,
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T05:51:46Z"
+    },
+    {
+      "status": "found-official-source",
+      "sources": [
+        {
+          "url": "https://idri.bucea.edu.cn/lxjd/zsxx_lxjd/bkszs_lxjd/index.htm",
+          "title": "本科生招生-北京建筑大学国际交流合作处（国际教育学院）",
+          "sourceKind": "international-undergraduate-admissions-index",
+          "primaryOfficialSource": true,
+          "observedAt": "2026-10-17T05:51:46Z",
+          "evidenceAcquisition": "read-primary-page",
+          "sourcePublishedAt": "2026-06-05",
+          "admissionsYearObserved": 2026,
+          "evidenceQuote": "北京建筑大学2026年留学生中文授课本科生招生简章",
+          "note": "2026-06-05 is the dated entry in the official index, not a new verification date.",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        },
+        {
+          "url": "https://idri.bucea.edu.cn/docs/2026-06/053af99d0c334cc5bb6dd03058d67463.pdf",
+          "title": "北京建筑大学2026年留学生中文授课本科生招生简章",
+          "sourceKind": "officially-linked-prospectus-pdf",
+          "primaryOfficialSource": true,
+          "observedAt": "2026-10-17T05:51:46Z",
+          "evidenceAcquisition": "official-index-link-resolved; tool-size-limit",
+          "sourcePublishedAt": null,
+          "admissionsYearObserved": 2026,
+          "evidenceQuote": null,
+          "note": "Tool could not read the 13,690,133-byte PDF. Exact URL was obtained by following the official index link; no programme facts extracted.",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "currentAvailability": "unknown",
+      "accessLimitations": [
+        {
+          "url": "https://idri.bucea.edu.cn/docs/2026-06/053af99d0c334cc5bb6dd03058d67463.pdf",
+          "outcome": "tool-content-too-large",
+          "observedBytes": 13690133,
+          "httpStatus": null
+        }
+      ],
+      "nextAction": "capture-linked-PDF-with-approved-size-limit; inspect-complete-catalogue-and-dates-before-programme-extraction",
+      "targetId": "moe-4111010016",
+      "institutionCode": "4111010016",
+      "officialNameZh": "北京建筑大学",
+      "moeOrdinal": 15,
+      "catalogueMatchAtSelection": null,
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T05:51:46Z"
+    },
+    {
+      "status": "unknown",
+      "sources": [],
+      "nonAdmissionsEvidence": [
+        {
+          "url": "https://www.besti.edu.cn/252.news.detail.dhtml?news_id=1632",
+          "title": "2021—2022学年度北京电子科技学院信息公开报告",
+          "sourceKind": "historical-information-disclosure-report",
+          "primaryOfficialSource": true,
+          "observedAt": "2026-10-17T05:51:46Z",
+          "evidenceAcquisition": "primary-official-search-index; page-not-accessible-in-tool",
+          "sourcePublishedAt": null,
+          "admissionsYearObserved": null,
+          "evidenceQuote": "来华留学生管理相关规定",
+          "note": "A disclosure checklist is not an international admissions notice; its presence does not establish admissions availability.",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "currentAvailability": "unknown",
+      "accessLimitations": [
+        {
+          "url": "https://www.besti.edu.cn/252.news.detail.dhtml?news_id=1632",
+          "outcome": "tool-not-accessible",
+          "httpStatus": null
+        }
+      ],
+      "nextAction": "continue-official-site-source-discovery-or-check-published-official-contact-guidance; retain-unknown-until-explicit-inbound-admissions-evidence",
+      "targetId": "moe-4111010018",
+      "institutionCode": "4111010018",
+      "officialNameZh": "北京电子科技学院",
+      "moeOrdinal": 17,
+      "catalogueMatchAtSelection": null,
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T05:51:46Z"
+    },
+    {
+      "status": "found-official-source",
+      "sources": [
+        {
+          "url": "https://english.bua.edu.cn/lnternational_Students/Admission.htm",
+          "title": "Admission-北京农学院英文网站",
+          "sourceKind": "international-student-admissions-guidance",
+          "primaryOfficialSource": true,
+          "observedAt": "2026-10-17T05:51:46Z",
+          "evidenceAcquisition": "read-primary-page",
+          "sourcePublishedAt": null,
+          "admissionsYearObserved": null,
+          "evidenceQuote": "Application Form of BUA for Admission of Foreign Students",
+          "note": "No publication date, intake year or current cycle is stated. Copyright 2007 is not treated as a publication or admissions date.",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "currentAvailability": "unknown",
+      "cycleAssessment": "undated-guidance-only",
+      "nextAction": "capture-official-guidance; locate-dated-international-admissions-notice-and-current-catalogue",
+      "targetId": "moe-4111010020",
+      "institutionCode": "4111010020",
+      "officialNameZh": "北京农学院",
+      "moeOrdinal": 19,
+      "catalogueMatchAtSelection": null,
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T05:51:46Z"
+    },
+    {
+      "status": "found-official-source",
+      "sources": [
+        {
+          "url": "https://yjsh.ccmu.edu.cn/zsgz/zsjz/d5881bc0228c49408af914609f5996eb.htm",
+          "title": "首都医科大学2026年招收自费国际学生攻读硕士、博士研究生招生简章及招生目录",
+          "sourceKind": "international-postgraduate-prospectus-and-catalogue-index",
+          "primaryOfficialSource": true,
+          "observedAt": "2026-10-17T05:51:46Z",
+          "evidenceAcquisition": "primary-official-search-index; page-read-timeout",
+          "sourcePublishedAt": "2025-12-31",
+          "admissionsYearObserved": 2026,
+          "evidenceQuote": "首都医科大学2026年招收自费国际学生攻读硕士、博士研究生招生简章及招生目录",
+          "note": "Official indexed entry lists prospectus, master catalogue and doctoral catalogue attachments. Full page and attachments have not been captured.",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        },
+        {
+          "url": "https://gjxy.ccmu.edu.cn/zsxx_8209/",
+          "title": "招生信息-首都医科大学国际学院",
+          "sourceKind": "international-admissions-index",
+          "primaryOfficialSource": true,
+          "observedAt": "2026-10-17T05:51:46Z",
+          "evidenceAcquisition": "primary-official-search-index; page-read-timeout",
+          "sourcePublishedAt": "2026-01-21",
+          "admissionsYearObserved": 2026,
+          "evidenceQuote": "2026年首都医科大学国际本科生（汉语授课）招生简章",
+          "note": "2026-01-21 is the date of the indexed undergraduate entry; it is not applied to the postgraduate prospectus.",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "currentAvailability": "unknown",
+      "accessLimitations": [
+        {
+          "url": "https://yjsh.ccmu.edu.cn/zsgz/zsjz/d5881bc0228c49408af914609f5996eb.htm",
+          "outcome": "tool-fetch-timeout",
+          "httpStatus": null
+        },
+        {
+          "url": "https://gjxy.ccmu.edu.cn/zsxx_8209/",
+          "outcome": "tool-fetch-timeout",
+          "httpStatus": null
+        }
+      ],
+      "nextAction": "retry-official-source-capture-with-bounded-timeout; read-complete-linked-catalogues-and-cycle-dates",
+      "targetId": "moe-4111010025",
+      "institutionCode": "4111010025",
+      "officialNameZh": "首都医科大学",
+      "moeOrdinal": 22,
+      "catalogueMatchAtSelection": null,
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T05:51:46Z"
+    },
+    {
+      "status": "found-official-source",
+      "sources": [
+        {
+          "url": "https://sie-lb.cupes.edu.cn/lxsq/xmjs/bsxm/413eed781a2e475189b7d72fa1ade3f2.htm",
+          "title": "二〇二三年首都体育学院博士来华留学生招生简章",
+          "sourceKind": "historical-international-doctoral-prospectus-index",
+          "primaryOfficialSource": true,
+          "observedAt": "2026-10-17T05:51:46Z",
+          "evidenceAcquisition": "read-primary-page",
+          "sourcePublishedAt": "2023-03-01",
+          "admissionsYearObserved": 2023,
+          "evidenceQuote": "二〇二三年首都体育学院博士来华留学生招生简章",
+          "note": "Historical source and admissions office navigation only; no 2026 or 2027 admissions values inferred.",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "currentAvailability": "unknown",
+      "cycleAssessment": "historical-2023-notice-only",
+      "nextAction": "follow-official-international-admissions-navigation-for-latest-dated-prospectus; retain-2023-as-historical-only",
+      "targetId": "moe-4111010029",
+      "institutionCode": "4111010029",
+      "officialNameZh": "首都体育学院",
+      "moeOrdinal": 26,
+      "catalogueMatchAtSelection": null,
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T05:51:46Z"
+    },
+    {
+      "status": "unknown",
+      "sources": [],
+      "nonAdmissionsEvidence": [
+        {
+          "url": "https://zs.cfri.edu.cn/",
+          "title": "中国消防救援学院招生网",
+          "sourceKind": "domestic-admissions-site",
+          "primaryOfficialSource": true,
+          "observedAt": "2026-10-17T05:51:46Z",
+          "evidenceAcquisition": "primary-official-search-index; page-read-timeout",
+          "sourcePublishedAt": null,
+          "admissionsYearObserved": 2026,
+          "evidenceQuote": "2026年招收青年学生常见问题解答",
+          "note": "Domestic youth recruitment and generic student-management regulations are not evidence of inbound international admissions.",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "currentAvailability": "unknown",
+      "accessLimitations": [
+        {
+          "url": "https://zs.cfri.edu.cn/",
+          "outcome": "tool-fetch-timeout",
+          "httpStatus": null
+        }
+      ],
+      "nextAction": "continue-bounded-official-source-discovery-for-explicit-international-admissions-policy; do-not-infer-eligibility-or-non-eligibility-from-domestic-rules",
+      "targetId": "moe-4111010039",
+      "institutionCode": "4111010039",
+      "officialNameZh": "中国消防救援学院",
+      "moeOrdinal": 35,
+      "catalogueMatchAtSelection": null,
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T05:51:46Z"
+    },
+    {
+      "status": "unknown",
+      "sources": [],
+      "nonAdmissionsEvidence": [
+        {
+          "url": "https://www.uir.edu.cn/xxgkw.htm",
+          "title": "信息公开-国际关系学院",
+          "sourceKind": "official-information-disclosure-index",
+          "primaryOfficialSource": true,
+          "observedAt": "2026-10-17T05:51:46Z",
+          "evidenceAcquisition": "read-primary-page",
+          "sourcePublishedAt": null,
+          "admissionsYearObserved": null,
+          "evidenceQuote": "留学生管理规定",
+          "note": "This index links the official international cooperation office; neither the index nor its navigation establishes a current admissions offer.",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        },
+        {
+          "url": "https://iecd.uir.cn/",
+          "title": "国际关系学院国际交流合作处",
+          "sourceKind": "official-international-cooperation-office",
+          "primaryOfficialSource": true,
+          "observedAt": "2026-10-17T05:51:46Z",
+          "evidenceAcquisition": "official-homepage-link-followed; read-primary-page",
+          "sourcePublishedAt": null,
+          "admissionsYearObserved": null,
+          "evidenceQuote": null,
+          "note": "The page includes outbound exchange/news. No dated inbound international-student admissions notice found in this bounded pass.",
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "currentAvailability": "unknown",
+      "falsePositiveExclusions": [
+        "北京外国语大学国际关系学院",
+        "北京大学国际关系学院",
+        "中国人民大学国际关系学院",
+        "华侨大学国际关系学院"
+      ],
+      "nextAction": "inspect-official-international-office-inbound-admissions-or-partner-programme-guidance; distinguish-independent-UIR-from-similarly-named-departments",
+      "targetId": "moe-4111010042",
+      "institutionCode": "4111010042",
+      "officialNameZh": "国际关系学院",
+      "moeOrdinal": 38,
+      "catalogueMatchAtSelection": null,
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T05:51:46Z"
+    },
+    {
+      "status": "found-official-source",
+      "sources": [
+        {
+          "url": "https://www.nacta.edu.cn/xwgg/zsxx/lxszs/11f444989cf341169e6ff5155b79c33d.htm",
+          "title": "中国戏曲学院2026年来华留学生硕士研究生招生简章",
+          "sourceKind": "international-masters-prospectus",
+          "primaryOfficialSource": true,
+          "observedAt": "2026-10-17T05:51:46Z",
+          "evidenceAcquisition": "read-primary-page",
+          "sourcePublishedAt": "2025-12-30",
+          "admissionsYearObserved": 2026,
+          "evidenceQuote": "中国戏曲学院2026年来华留学生硕士研究生招生简章",
+          "note": null,
+          "rawBytesCaptured": false,
+          "currentProgrammesCertified": 0,
+          "publicationEligible": false
+        }
+      ],
+      "observedApplicationOpensOn": "2026-01-01",
+      "observedApplicationDeadline": "2026-05-31",
+      "cycleAssessment": "observed-deadline-has-passed",
+      "currentAvailability": "unknown",
+      "nextAction": "capture-official-prospectus-and-full-programme-attachment; search-explicit-next-intake; do-not-reopen-closed-2026-cycle",
+      "targetId": "moe-4111010049",
+      "institutionCode": "4111010049",
+      "officialNameZh": "中国戏曲学院",
+      "moeOrdinal": 44,
+      "catalogueMatchAtSelection": null,
+      "internationalAdmissionsVerified": false,
+      "currentProgrammesCertified": 0,
+      "publicationEligible": false,
+      "observedAt": "2026-10-17T05:51:46Z"
+    }
+  ]
+}

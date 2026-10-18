@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import type { ReactNode } from 'react'
+import { CraftBrandMark } from '../ui/CraftBrandMark'
 
 export interface FooterLink {
   label: string
@@ -25,7 +27,7 @@ export interface SiteFooterProps {
   legalLabel?: string
   homeHref?: string
   brandName?: string
-  brandMark?: string
+  brandMark?: ReactNode
   description?: string
   creator?: FooterCreator
   updatedLabel?: string
@@ -55,7 +57,7 @@ export function SiteFooter({
   legalLabel = 'Legal',
   homeHref = '/',
   brandName = 'Study in China',
-  brandMark = '中',
+  brandMark = <CraftBrandMark />,
   description = 'An independent, source-led guide for international students exploring universities, programs and cities across China.',
   creator,
   updatedLabel,

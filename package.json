@@ -57,6 +57,9 @@
     "minimax:claim": "tsx scripts/ingestion/claim-minimax-harvest-task.ts",
     "minimax:validate": "tsx scripts/ingestion/validate-minimax-harvest.ts",
     "minimax:verify": "tsx scripts/ingestion/verify-catalog-minimax.ts",
+    "minimax:enrich": "tsx scripts/ingestion/enrich-catalog-minimax.ts --extract --thinking disabled --all",
+    "minimax:review": "tsx scripts/ingestion/review-minimax-enrichment.ts --all --limit 2",
+    "minimax:status": "tsx scripts/ingestion/minimax-pipeline-status.ts",
     "check:program-coverage": "tsx scripts/quality/check-program-coverage.ts --mode report",
     "check:program-coverage:strict": "tsx scripts/quality/check-program-coverage.ts --mode strict --minimum 1",
     "quality:inventory-untracked": "tsx scripts/quality/inventory-untracked-assets.ts",
@@ -69,6 +72,9 @@
     "automation:seeds": "tsx scripts/automation/build-catalog-seeds.ts",
     "automation:sync": "tsx scripts/automation/pull-catalog-snapshot.ts",
     "automation:health": "tsx scripts/automation/operations-health.ts",
+    "maintenance:universities": "tsx scripts/automation/build-university-maintenance-plan.ts",
+    "maintenance:capture": "tsx scripts/automation/capture-university-maintenance-sources.ts",
+    "maintenance:ledger": "tsx scripts/automation/sync-university-maintenance-db.ts",
     "test:automation": "vitest run tests/unit/automation-"
   },
   "dependencies": {
@@ -79,6 +85,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "server-only": "0.0.1",
+    "undici": "7.29.1",
     "zod": "^4.0.0"
   },
   "devDependencies": {
@@ -104,7 +111,8 @@
   },
   "overrides": {
     "miniflare": {
-      "undici": "7.29.1"
+      "undici": "7.29.1",
+      "sharp": "0.35.5"
     },
     "nanoid": "3.3.18",
     "js-yaml": "4.3.2",

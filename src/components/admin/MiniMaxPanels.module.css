@@ -35,3 +35,16 @@
 @media(max-width:1100px) { .ledgerMetrics { gap: 17px; } .ledgerBody { gap: 25px; } }
 @media(max-width:780px) { .ledgerMetrics { grid-template-columns: 1fr 1fr; gap: 18px; } .ledgerMetrics > div:last-child { grid-column: 1 / -1; } .ledgerMetrics > div:last-child strong { display: inline; margin-right: 14px; } .ledgerBody, .automationBody { grid-template-columns: 1fr; gap: 22px; } .funding { border-left: 0; padding-left: 0; border-top: 1px solid var(--wb-border); padding-top: 17px; } .automationHeading { align-items: flex-start; flex-wrap: wrap; gap: 12px; } }
 @media(max-width:420px) { .ledgerMetrics { grid-template-columns: 1fr; } .ledgerMetrics strong { font-size: 30px; } .target > div:first-child { align-items: flex-start; } }
+
+/* Shared atlas type, paper and control geometry. */
+.ledgerMetrics strong, .phase { font-family: var(--atlas-font-display); font-weight: 400; }
+.ledgerMetrics span, .funding > span, .ledgerMetrics small,
+.target > div:first-child, .target p, .automationBody p,
+.controls > p, .dailyTable, .dailyTable thead th, .commandReceipt { font-size: 13px; line-height: 1.7; }
+.ledgerBody h3 { font-size: 20px; font-weight: 400; }
+.phase { font-size: 27px; }
+.funding strong { font-size: 15px; line-height: 1.6; }
+.target { border-radius: 18px; }
+.pauseButton { min-height: 44px; border-radius: 50px; font-size: 14px !important; }
+.pauseButton:focus-visible { outline: 2px solid var(--wb-accent); outline-offset: 4px; }
+@media(max-width:420px) { .ledgerMetrics strong { font-size: 32px; } .dailyTable { font-size: 12px; } }

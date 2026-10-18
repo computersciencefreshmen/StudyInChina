@@ -115,6 +115,77 @@
   padding-top: .1rem;
 }
 
+:global(.atlas-public) .summary { gap: 1.3rem; background: var(--atlas-paper-bright); border-top: 3px solid var(--atlas-jade); }
+:global(.atlas-public) .summary::after { display: none; }
+:global(.atlas-public) .eyebrow { font-size: .65rem; font-weight: 650; color: var(--atlas-jade-dark); }
+:global(.atlas-public) .title { max-width: 18ch; font-size: 1.7rem; font-weight: 500; line-height: 1.17; }
+:global(.atlas-public) .facts { padding: 0; gap: 0; border: 0; border-radius: 0; background: transparent; }
+:global(.atlas-public) .fact { padding: 1rem .8rem; background: transparent; border-bottom: 1px solid var(--atlas-line); }
+:global(.atlas-public) .fact:first-child { background: var(--atlas-jade-pale); border-radius: .3rem; }
+:global(.atlas-public) .fact dt { font-size: .64rem; font-weight: 650; letter-spacing: .06em; }
+:global(.atlas-public) .fact dd { line-height: 1.6; font-weight: 650; }
+:global(.atlas-public) .fact:first-child dd { font-size: 1.25rem; font-weight: 500; }
+:global(.atlas-public) .actions > * { flex: 1 1 auto; }
+
+/* Craft uses the same facts and actions in a quieter paper surface. */
+:global(html[data-design='craft'] .atlas-public) .summary {
+  gap: 1.5rem;
+  padding: clamp(1.35rem, 3vw, 2rem);
+  background: var(--atlas-paper-bright);
+  border: 1px solid var(--atlas-line);
+  border-radius: 1.5rem;
+  box-shadow: 0 12px 36px rgb(3 3 2 / 3%);
+}
+
+:global(html[data-design='craft'] .atlas-public) .title {
+  max-width: 21ch;
+  font-family: var(--font-heading);
+  font-size: clamp(1.65rem, 2.6vw, 2rem);
+  font-weight: 400;
+  letter-spacing: -.03em;
+  line-height: 1.16;
+}
+
+:global(html[data-design='craft'] .atlas-public) .eyebrow,
+:global(html[data-design='craft'] .atlas-public) .fact dt {
+  color: var(--atlas-muted);
+  font-family: var(--font-body);
+  font-size: .8rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:global(html[data-design='craft'] .atlas-public) .facts { gap: 0; }
+:global(html[data-design='craft'] .atlas-public) .fact { padding: 1rem .85rem; }
+:global(html[data-design='craft'] .atlas-public) .fact:first-child {
+  background: color-mix(in srgb, var(--atlas-jade-pale) 65%, var(--atlas-paper-bright));
+  border: 0;
+  border-radius: 1rem;
+}
+
+:global(html[data-design='craft'] .atlas-public) .fact dd {
+  font-family: var(--font-body);
+  font-size: .95rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+:global(html[data-design='craft'] .atlas-public) .fact:first-child dd {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: -.02em;
+}
+
+:global(html[data-design='craft'] .atlas-public) .notice { font-size: .85rem; line-height: 1.6; }
+
+:global(html[data-design='craft'][lang='zh'] .atlas-public) .title { letter-spacing: -.02em; }
+
+@media (max-width: 560px) {
+  :global(html[data-design='craft'] .atlas-public) .summary { padding: 1.25rem; border-radius: 1.25rem; }
+}
+
 @media (max-width: 560px) {
   .facts { grid-template-columns: 1fr; }
   .fact:first-child { grid-column: auto; }

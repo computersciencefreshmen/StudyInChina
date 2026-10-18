@@ -195,7 +195,7 @@ export function UniversityExplorerV2({
           return <Card key={institution.id} className="record-card" accent={institution.featured ? 'vermilion' : 'none'}>
             <div className="record-card__top">
               <Badge tone="blue">{region ? regionLabels(locale)[region] : messages.common.unknown}</Badge>
-              <VerificationBadge
+              <VerificationBadge collection="universities" recordId={institution.id}
                 status={institution.status}
                 verifiedAt={institution.verifiedAt}
                 locale={locale}

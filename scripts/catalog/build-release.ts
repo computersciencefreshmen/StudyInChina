@@ -450,6 +450,7 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
       }))
     }
     addLocalized(statements, releaseId, program.id, 'name', program.name)
+    if (program.durationText) addLocalized(statements, releaseId, program.id, 'durationText', program.durationText)
     if (program.details) {
       addLocalized(statements, releaseId, program.id, 'overview', program.details.overview)
       addLocalized(statements, releaseId, program.id, 'faculty', program.details.faculty)
@@ -466,6 +467,7 @@ export function buildLegacyRelease(bundleInput: DataBundle): ReleaseArtifacts {
       teachingLanguages: program.teachingLanguages,
       durationMonths: program.durationMonths,
       durationMonthsMax: program.durationMonthsMax ?? null,
+      ...(program.durationText ? { durationText: program.durationText } : {}),
       programUrl: program.programUrl,
       applyUrl: program.applyUrl,
       languageRequirements: program.languageRequirements,

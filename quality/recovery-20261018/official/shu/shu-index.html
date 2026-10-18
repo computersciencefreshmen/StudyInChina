@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="WHJ0SDNXMTcpA1khdy9AAis3OQp1I15gDhY1fEImUFRgFRhle2JzUA==">
+        <link href="/css/rest.css" rel="stylesheet">
+<link href="/css/common.css" rel="stylesheet">
+<link href="/libs/css/swiper.min.5.2.0.css" rel="stylesheet">
+<link href="/libs/css/animate.css" rel="stylesheet">
+<link href="/css/common.zh.css" rel="stylesheet">
+<link href="/css/application_detail.css" rel="stylesheet">        <!--[if IE]>
+        <link href="/css/ie.css" rel="stylesheet" type="text/css" />
+        <![endif]-->
+    </head>
+    <body>
+                <style type="text/css">
+.language a {
+    color: white;
+}
+
+.language a:hover {
+    text-decoration: underline;
+}
+</style>
+<header class="header">
+    <div class="header_container">
+        <div class="logo">
+            <a href="/">
+                <img src="/img/logo.png" alt="">
+            </a>
+        </div>
+        <div class="logo_right">
+            <div class="title"><a href="javascript:void(0)" onclick="goto('https://apply.applyforshu.com/index.html#/pre-registration')" target="_blank">
+                    预报到</a></div>
+            <div class="language"><a href="/application/index?language=en&from=search&id=8&type=faq" target="_self">English</a> | <a href="/application/index?language=zh&from=search&id=8&type=faq" target="_self">中文</a></div>
+            <div><img class="change_language" src="/img/Triangle@2x (1).png" alt=""></div>
+            <div><img id="global_search_btn" class="search" src="/img/search.png" alt=""></div>
+        </div>
+    </div>
+</header>
+<!-- nav -->
+<div class="nav">
+    <ul>
+        <li class="nav-item">
+            <a class="nav-link " href="/">
+                主页</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="/why-us/index">
+                学校介绍</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="/program/index">
+                课程项目</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/application/index">
+                入学申请</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="/application/scholarships">
+                奖学金</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="/pre-arrival/detail">
+                行前须知</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="/life/index">
+                校园生活</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="/contact-us/index">
+                联系我们</a>
+        </li>
+        <li class="nav-item">
+            <div class="btn" onclick="goto('http://apply.applyforshu.com')">
+                立即申请            </div>
+        </li>
+    </ul>
+    <div class="global-search">
+        <div class="search-input">
+            <form action="/search/index" method="get">
+                <input type="hidden" name="_csrf" value="WHJ0SDNXMTcpA1khdy9AAis3OQp1I15gDhY1fEImUFRgFRhle2JzUA==">
+                <input type="text" name="kw" id="global-search-text-val" value="" placeholder="请输入搜索词" />
+                <button type="submit" onclick="globalSearch()" value=""><img src="/img/search1.png"></button>
+            </form>
+        </div>
+    </div>
+</div>        <div id="main">
+            <style type="text/css">
+.menu_body {
+    padding: 10px 0px;
+    background: #FBFBFB;
+}
+
+.application_faqs #firstpane1 .menu_head {
+    background-position: right !important;
+}
+
+.info-desc {
+    font-size: 18px;
+    line-height: normal;
+    margin: 15px 0px;
+}
+
+#firstpane1 .menu_top_title {
+    margin: 0px;
+    height: auto;
+}
+
+#firstpane1 .menu_top_title {
+    font-size: 18px;
+    margin: 20px 0px 10px 0px;
+}
+
+#firstpane1 a {
+    display: inline;
+    padding: 0px;
+    color: rgba(26, 70, 122, 1);
+}
+
+#firstpane1 {
+    padding-left: 0px;
+}
+
+.common-color {
+    color: #1a467a !important;
+}
+</style>
+<div class="banner">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide swiper_img_wrapper" style="background-image: url(/img/application_banner.jpg);">
+                <div class="banner_background"></div>
+                <div class="banner_Text">
+                    <div class="banner_title">
+                        申请信息                    </div>
+                    <div class="banner_info"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content -->
+<div class="content_tainer clearfix">
+    <div class="left types">
+        <div class="left_info_active">
+            入学申请        </div>
+        <div class="left_info active_item" data-type="requirements">
+            申请资格        </div>
+        <div class="left_info" data-type="important_dates">
+            重要时间        </div>
+        <div class="left_info" data-type="support_documents">
+            申请材料        </div>
+        <div class="left_info" data-type="fees_calculator_and_payment">
+            费用与支付        </div>
+        <div class="left_info" data-type="faq">
+            常见问题        </div>
+        <div class="left_info" data-type="apply_here">
+            相关下载        </div>
+    </div>
+    <div class="right">
+        <div class="right_content_info">
+            <div class="oneRight">
+                <div class="oneRight_title">
+                    申请资格                    <div class="apply_btn" onclick="goto('http://apply.applyforshu.com')">
+                        立即申请                    </div>
+                </div>
+                <div class="oneRight_info">
+                    <div class="title">一般要求</div>
+                        <ul class="point">
+                            <li>非中国籍公民，身体健康</li>
+<li>来华学习本科专业者，须高中毕业或以上学历</li>
+<li>来华攻读硕士学位者，须具有学士学位</li>
+<li>来华攻读博士学位者，须具有硕士学位，年龄不超过 55 周岁</li>
+<li>申请非学历项目者，须高中以上学历，年龄在18-45岁之间</li>
+<li>未满十八周岁申请人需提供监护人保证书</li>
+                        </ul>
+                        <div class="content">
+                            <p>备注: </p>
+                             <ul class="point">
+                                <li>申请时尚未拿到学位证书的应届毕业生需提供所在学校或学院出具的预毕业证明，用以证明申请者有能力于 2025年7月前顺利毕业并取得学位证书.</li>
+                                <li>根据《中华人民共和国国籍法》和中华人民共和国教育部有关规定，父母双方或一方为中国公民并定居在外国，本人出生时即具有外国国籍的，不具有中国国籍。其作为外国留学生申请者，须于2022年4月30日之前持有有效的外国护照或国籍证明文件，且从2022年4月30日至2025年4月30日期间有在外国实际居住2年以上的记录（一年中实际在外国居住满9个月可按一年计算，以入境和出境签章为准）。</li>
+                                <li>对于中国大陆（内地）、香港特别行政区、澳门特别行政区和台湾地区居民在移民并获得外国国籍后作为外国留学生申请者，须于2022年4月30日之前持有有效的外国护照或国籍证明文件，并拥有已注销中国国籍的证明，且从2022年4月30日起至2026年4月30日止有在外国实际居住2年以上的记录（一年中实际在外国居住满9个月可按一年计算，以入境和出境签章为准）。</li>
+                                <li>相关申请人需提供出生证明、出入境签章、退籍证明、出入境信息承诺书（可在https://apply.shu.edu.cn下载模板）等支撑材料，未能通过国籍状况审查者，自动丧失申请资格及后续可能取得的入学资格、奖学金资格或学籍。</li>
+                            </ul> 
+                        </div>
+                        <div class="title">语言要求</div>
+                        <div class="subtitle">
+                            1. 申请中文授课专业，汉语水平考试（HSK）成绩应达到以下标准:
+                        </div>
+                        <ul class="point">
+                            <li>汉语言及汉语国际教育本科：新HSK4级180分以上;</li>
+                            <li>艺术、理工、经管类专业：新HSK5级180分以上;</li>
+                            <li>人文社科类专业：新HSK5级210分以上.</li>
+                        </ul>
+                        <div class="content">
+                            <p>备注: </p>
+                            HSK是指汉语水平测试，详情参见 <a href="http://www.chinesetest.cn" target="_blank">www.chinesetest.cn</a>
+                            <p><b>以下情况可免HSK</b></p>
+                        </div>
+                        <ul class="point">
+                                <li>汉语为母语或常用语;</li>
+                                <li>用汉语完整学习过学历项目，并获得证书.</li>
+                            </ul>
+                        <div class="subtitle">
+                            2. 申请英语授课专业，英语水平须满足以下任一条:
+                        </div>
+                        <ul class="point">
+                            <li>英文为母语或官方语言;</li>
+                            <li>近两年内雅思(A)成绩 6.5 分以上(含)或托福成绩 90 分以上(含)或接受托福个人最佳成绩 TOEFLMyBestTM Score和和TOEFL essentials)或其他国际认可的英语水平考试达到相当分数，并提交成绩证明;</li>
+                            <li>在以英语为母语的国家获得过学历证书。</li>
+                        </ul>
+                    <div class="title">学术水平</div> 
+                    <div class="content">
+                        <p><b>1. 本科项目</b></p>
+                        须具有高中毕业学历，成绩绩点3.0（含）以上（GPA4分制）；<br />    
+                        申请理工类专业，高中数学及物理成绩合格；申请经管类专业，高中数学成绩合格；申请艺术类专业，须提供作品集；
+                    </div>
+                    <div class="content">
+                       <p><b>2. 硕士研究生项目</b></p>
+                       具有相关本科专业背景，或本科阶段修读过相关专业课程，成绩绩点2.5(含)以上（备注：GPA4分制）。<br />
+                       上海大学导师审核接收<br />
+                       在线申请系统中选择专业时选择导师，并取得导师审核通过。<br />
+                       注：申请以下学院硕士研究生项目无须在线选择导师，符合条件的录取者报到注册后由专业学院安排导师：管理学院、经济学院、MBA中心、悉尼工商学院；
+                    </div>
+                     <ul class="point">
+                        <li>申请艺术类专业，须有艺术专业背景，并提供作品集；</li>
+                        <li>个别学院要求有工作经验者优先录取，如：MBA中心。</li>
+                        <li style="display: none">申请电影学院部分专业须具备：理工科基础及专业背景、与导师研究方向近似或匹配的专业背景</li>
+                    </ul>
+                    <div class="content">
+                        <p><b>3. 博士研究生项目</b></p>
+                    </div>
+                     <ul class="point">
+                        <li>具有相关硕士专业背景，并取得过相关学术成果。成绩绩点 3.0(含)以上(备注：GPA4分制)。</li>
+                        <li>上海大学导师审核接收</li>
+                        <li>申请电影学院部分专业须具备：理工科基础及专业背景、与导师研究方向近似或匹配的专业背景</li>
+                    </ul>
+                    <div class="content">
+                    在线申请系统中选择专业时时选择导师，并取得导师审核通过。<br />
+                    注：申请经济学院、管理学院博士研究生不需要选择导师，符合条件的录取者将由专业学院分配导师。<br />
+                    </div>
+                    <ul class="point">
+                        <li>申请艺术类专业，须有艺术专业背景，并提供作品集；</li>
+                    </ul>                </div>
+            </div>
+        </div>
+        <div class="right_content_info">
+            <div class="oneRight">
+                <div class="oneRight_title">
+                    重要时间                    <div class="apply_btn" onclick="goto('http://apply.applyforshu.com')">
+                        立即申请                    </div>
+                </div>
+                <div class="oneRight_info">
+                    <div class="title">申请时间</div>
+                    <div class="content">2025年11月20日至2026年6月30日</div>
+                    <div class="title">申请后</div>
+                    <div class="content">如果你申请成功，那么两周内校方会发送录取通知书。<br>在2026年7月15日之前，校方会发给你正式录取通知书。</div>
+                    <div class="title">注册时间</div>
+                    <div class="content">2026年 8月底、9月初。</div>                </div>
+            </div>
+        </div>
+        <div class="right_content_info application_faqs">
+            <div class="oneRight">
+                <div class="oneRight_title">
+                    申请材料                    <div class="apply_btn" onclick="goto('http://apply.applyforshu.com')">
+                        立即申请                    </div>
+                </div>
+                <div class="oneRight_info">
+                    <div id="firstpane1" class="menu_list">
+                        <div class="menu_head">
+                            <div class="menu_title">本科项目</div>
+                        </div>
+                        <div style="display:none" class="menu_body">
+                            <div class="content">我校通过审核申请人申请材料，结合在线测试结果和面试结果等择优录取.</div>
+                            <div class="subtitle">
+                                1. 申请材料
+                            </div>
+                            <div class="content">以下材料应准备完整.清晰的电子文件（PDF或JPG等格式）。</div>
+                            <ul class="point">
+                                <li>护照复印件</li>
+                                <li>护照尺寸证件照</li>
+                                 <li>“来华留学本科入学学业水平测试”（CSCA测试）成绩单扫描件；
+        <br />说明：若在申请阶段暂未收到CSCA成绩单，可先上传报名系统的截屏图作为临时材料。待正式成绩单出
+后，请务必在截止日期前通过邮件发送给项目专员，由专员协助完成我校网申系统上传。奖学金申请人
+在5月15日前提供；自费申请人须在6月30日前提供。</li>
+                                <li>上传小视频 (内容:自我介绍及来华学习计划，格式: AVI, mov,mp4三种均可，语言：根据申请专业的授课语言，50M以内）</li>
+                                <li>高中毕业证书复印件（应届毕业生可先提供预毕业证明）  </li>
+                                <li>高中阶段全部课程成绩单复印件</li>
+                                <li>语言水平证书复印件或成绩网页截屏（注册时须提供证书原件备查）</li>
+                                <li>来华学习和研究计划。根据申请专业的授课语言，选择用中文或英文书写（不少于800字）；   </li>
+                                <li>经济担保证明（模板下载）</li>
+                                <li>不满18周岁需提供监护人保证书（模板下载）</li>
+                                <li>申请美术专业需提供至少两幅作品；音乐专业提供专业相关音、视频</li>
+                                <li>无犯罪记录证明<br />备注：如无法在本国获得无犯罪记录证明，可与学校签署《无犯罪记录承诺书》，可在<a href="https://apply.shu.edu.cn" target="_blank">https://apply.shu.edu.cn</a>下载模板。</li>
+                            </ul>
+                            <div class="content">
+                                以上材料申请时仅需要上传扫描件，开学报到时需提供原件备查.
+                            </div>
+                            <div class="subtitle">2. 上海大学国际学生安全与背景审查旨</div>
+                            <div class="content">旨在通过询问申请人个人生活、学习背景及身体健康状况，了解申请人是否适合进入大学学习。请如实作答，学校将备案审查结果。</div>
+                            <div class="subtitle">3. 上海大学国际学生入学资格测试</div>
+                            <div class="content">本测试旨在衡量国际学生是否做好进入上海大学进行学历项目学习准备，仅限个人申请学历项目的国际学生。测试结果将作为我校录取与否的重要依据，请认真答题。</div>
+                            <div class="subtitle">4. 电话面试（10-15min）</div>
+                            <div class="content">更多详情，请前往相关下载下载招生简章（<a href="/application/index?type=apply_here">相关下载</a>）.</div>
+                        </div>
+                        <div class="menu_head">
+                            <div class="menu_title">硕士项目</div>
+                        </div>
+                        <div style="display:none" class="menu_body">
+                            <div class="content">我校通过审核申请人申请材料，结合在线测试结果和面试结果等择优录取</div>
+                            <div class="subtitle">1. 申请材料</div>
+                            <div class="content">以下材料应准备完整、清晰的电子文件（PDF或JPG等格式）。</div>
+                            <ul class="point">
+                                <li>护照复印件</li>
+                                <li>护照尺寸证件照；</li>
+                                <li>上传小视频 (内容:自我介绍及来华学习计划，格式: AVI, mov,mp4三种均可，语言：根据申请专业的授课语言，50M以内）</li>
+                                <li>本科毕业证书或学位证书复印件（应届毕业生可提供预毕业证明原件或公证件）；</li>
+                                <li>本科阶段全部课程成绩单复印件；   </li>
+                                <li>语言水平证书复印件或成绩网页截屏（注册时须提供证书原件备查）；   </li>
+                                <li>两封教授或副教授或相关领域专家的推荐信（需有推荐人签字和联系方式）</li>
+                                <li>在线选择导师，取得导师审核通过（注：申请以下学院硕士研究生项目无须在线选择导师，符合条件的录取者报到注册后由专业学院安排导师：经济学院、MBA中心、悉尼工商学院、国际教育学院）</li>
+                                <li>来华学习和研究计划。根据申请专业的授课语言，选择用中文或英文书写（不少于800字）； </li>
+                                <li>经济担保证明</li>
+                                <li>美术专业需提供至少两幅相关作品；音乐专业提供专业相关音、视频</li>
+                                <li>无犯罪记录证明<br />备注：如无法在本国获得无犯罪记录证明，可与学校签署《无犯罪记录承诺书》，可在<a href="http://apply.shu.edu.cn" target="_blank">http://apply.shu.edu.cn</a>下载模板。</li>
+                            </ul>
+                            <div class="content">以上材料申请时仅需要上传扫描件，开学报到时需提供原件备查。</div>
+                            <div class="subtitle">2. 上海大学国际学生安全与背景审查旨</div>
+                            <div class="content">旨在通过询问申请人个人生活、学习背景及身体健康状况，了解申请人是否适合进入大学学习。请如实作答，学校将备案审查结果。</div>
+                            <div class="subtitle">3. 上海大学国际学生入学资格测试</div>
+                            <div class="content">本测试旨在衡量国际学生是否做好进入上海大学进行学历项目学习准备，仅限个人申请 学历项目的国际学生。测试结果将作为我校录取与否的重要依据，请认真答题。</div>
+                            <div class="subtitle">4. 电话面试（10-15min）</div>
+                            <div class="subtitle">5. 专家小组面试</div>
+                            <div class="content">更多详情，请前往相关下载下载招生简章（<a href="/application/index?type=apply_here">相关下载</a>）.</div>
+                        </div>
+                        <div class="menu_head">
+                            <div class="menu_title">博士项目</div>
+                        </div>
+                        <div style="display:none" class="menu_body">
+                            <div class="content">我校通过审核申请人申请材料，结合在线测试结果和面试结果等择优录取.</div>
+                            <div class="subtitle">1. 申请材料</div>
+                            <div class="content">以下材料应准备完整.清晰的电子文件（PDF或JPG等格式）。</div>
+                            <ul class="point">
+                                <li>护照复印件</li>
+                                <li>护照尺寸证件照</li>
+                                <li>上传小视频 (内容:自我介绍及来华学习计划，格式: AVI, mov,mp4三种均可，语言：根据申请专业的授课语言，50M以内）</li>
+                                <li>硕士研究生毕业证书或学位证书复印件（应届毕业生可提供预毕业证明原件或公证件）</li>
+                                <li>硕士研究生阶段全部课程成绩单复印件   </li>
+                                <li>语言水平证书复印件或成绩网页截屏（注册时须提供证书原件备查）   </li>
+                                <li>两封教授或副教授或相关领域专家的推荐信（需有推荐人签字和联系方式）</li>
+                                <li>在线选择导师，取得导师审核通过（注：经济学院博士研究生不需要选择导师，符合条件的录取者将由专业学院分配导师。）</li>
+                                <li>来华学习和研究计划。根据申请专业的授课语言，用中文或英文书写（不少于800字）   </li>
+                                <li>经济担保证明</li>
+                                <li>学术成果材料</li>
+                                <li>无犯罪记录证明<br />备注：如无法在本国获得无犯罪记录证明，可与学校签署《无犯罪记录承诺书》，可在<a href="http://apply.shu.edu.cn" target="_blank">http://apply.shu.edu.cn</a>下载模板。</li>
+                            </ul>
+                            <div class="content">
+                                <br />
+                                ① 学术论文发表及专利证明，注：申请管理学院博士的申请者，需具有管理科学或理工科背景且在申请时已在SCI或SSCI期刊发表过至少一篇学术论文。 <br />
+                                ② 美术专业需提供至少两幅相关作品；<br />
+                                ③ 音乐专业提供专业相关音、视频
+                            </div>
+                            <div class="content">非中文或英文的文件，需附公证或发证单位的翻译件；以上材料申请时仅需要上传扫描件，开学报到时需提供原件备查。</div>
+                            <div class="subtitle">2. 上海大学国际学生安全与背景审查旨</div>
+                            <div class="content">旨在通过询问申请人个人生活、学习背景及身体健康 状况，了解申请人是否适合进入大学学习。请如实作答，学校将备案审查结果。</div>
+                            <div class="subtitle">3. 上海大学国际学生入学资格测试</div>
+                            <div class="content">本测试旨在衡量国际学生是否做好进入上海大学进行学历项目学习准备，仅限个人申请学历项目的国际学生。测试结果将作为我校录取与否的重要依据，请认真答题。</div>
+                            <div class="subtitle">4. 电话面试（10-15min）</div>
+                            <div class="subtitle">5. 专家小组面试</div>
+                            <div class="content">更多详情，请前往相关下载下载招生简章（<a href="/application/index?type=apply_here">相关下载</a>）.</div>
+                        </div>
+                        <div class="menu_head">
+                            <div class="menu_title">非学历项目</div>
+                        </div>
+                        <div style="display:none" class="menu_body">
+                            <div class="subtitle">1. 申请材料</div>
+                            <ul class="point">
+                                <li>护照复印件</li>
+                                <li>护照尺寸证件照</li>
+                                <li>最高学历证书及翻译公证件</li>
+                                <li>经济担保证明（模板下载）</li>
+                            </ul>
+                            <div class="content">
+                                <p>备注:</p>
+                                非中文或英文的文件，需附公证或发证单位的翻译件。<br />
+                                以上材料申请时仅需要上传扫描件，开学报到时需提供原件备查。<br />
+                                DBIC项目学历要求更高或相关工作经验。
+                            </div>
+                            <div class="subtitle">2. 上海大学国际学生安全与背景审查旨.</div>
+                            <div class="content">旨在通过询问申请人个人生活、学习背景及身体健康状况，了解申请人是否适合进入大学学习。请如实作答，学校将备案审查结果。</div>
+                            <div class="content">更多详情，请前往相关下载下载招生简章（<a href="/application/index?type=apply_here">相关下载</a>）.</div>
+                        </div>
+                    </div>                </div>
+            </div>
+        </div>
+        <div class="right_content_info">
+            <div class="oneRight ">
+                <div class="oneRight_title clearfix">
+                    <div class="tab active_tab">
+                        费用                    </div>
+                    <div class="tab">
+                        如何支付                    </div>
+                    <div class="tab">
+                        支付政策                    </div>
+                    <div class="apply_btn" onclick="goto('http://apply.applyforshu.com')">
+                        立即申请                    </div>
+                </div>
+                <div class="contentarea">
+                    <div class="oneRight_info tabcontent fee">
+                        <div class="content_title" style="margin-top: 20px;">
+                            费用                        </div>
+                        <div class="content_bar">
+                            专业课程相关费用.pdf
+                            <a target="_blank" href="/upload/shangda/1/1/e/专业课程费用相关.pdf" class="link"><img src="/img/download.png" /></a>
+                        </div>
+                        <div class="content_sub_title">
+                            费用                        </div>
+                        <div class="sub_box box1 international_applicant">
+                            <div class="menu_top_title"><span class="left_bar"></span>
+                                申请费（一概不予退还）                            </div>
+                            <div class="checkbox">
+                                <p class="checkItem" value="500" style=" padding-left: 20px;"><span style="display: none;" class="checkItem_box checked"></span></p>
+                                <p class="checkItem" value="0" style="display: none;"><span class="checkItem_box"></span>
+                                    否                                </p>
+                            </div>
+                            <input type="hidden" name="international_applicant[money]" value="500">
+                            <div class="total_money">
+                                人民币:<span class="money-subtotal">500</span></div>
+                        </div>
+                        <div class="sub_box box2 tuition_fee">
+                            <div class="menu_top_title"><span class="left_bar"></span>
+                                学费                            </div>
+                            <div class="checkbox">
+                                <div class="select-group">
+                                    <div class="selectBox">
+                                        <div class="select" id="select-box1-money" value="0"><span id="program-search-text2" class="selectText">
+                                                项目</span><img src="/img/application_detail_Triangle.png" alt=""></div>
+                                        <ul class="selectOption selectOption-list-1">
+                                            <li class="selectOption1" value="0">
+                                                本科项目                                            </li>
+                                            <li class="selectOption2" value="1">
+                                                硕士项目                                            </li>
+                                            <li class="selectOption2" value="2">
+                                                博士项目                                            </li>
+                                            <li class="selectOption2" value="3">
+                                                非学历项目                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="selectBox">
+                                        <div class="select" id="select-box2-money" value="0"><span id="program-search-text2" class="selectText">
+                                                选择语言</span><img src="/img/application_detail_Triangle.png" alt=""></div>
+                                        <ul class="selectOption selectOption-list-2">
+                                            <li class="selectOption1" value="0">
+                                                英语                                            </li>
+                                            <li class="selectOption2" value="1">
+                                                中文                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="selectBox">
+                                        <div class="select" id="select-box3-money" value="0"><span id="program-search-text2" class="selectText">
+                                                子项目</span><img src="/img/application_detail_Triangle.png" alt=""></div>
+                                        <ul class="selectOption selectOption-list-3">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="tuition_fee[money]" value="0">
+                            <div class="total_money money">
+                                <p class="sub1">
+                                    人民币：<span id="select-group-money-total" class="money-subtotal">0</span></p>
+                            </div>
+                        </div>
+                        <div class="sub_box accommodations">
+                            <div class="menu_top_title"><span class="left_bar"></span>
+                                住宿费                            </div>
+                            <div class="checkbox">
+                                <input type="hidden" name="accommodations[money]" value="12700">
+                                <p class="checkItem" data-money="51000"><span class="checkItem_box"></span>
+                                    单人间  51000元/年（校内）                                </p>
+                                <p class="checkItem" data-money="25000"><span class="checkItem_box"></span>
+                                    双人间25000元/年（校内）                                </p>
+                                <p class="checkItem" data-money="12700"><span class="checkItem_box checked"></span>
+                                    四人间12700元/年（校内）                                </p>
+                                <p class="checkItem" data-money="30000"><span class="checkItem_box"></span>
+                                    30000元/年（校外）                                </p>
+                            </div>
+                            <div class="total_money money">
+                                人民币：<span>12700</span>
+                            </div>
+                        </div>
+                        <div class="sub_box living_expenses">
+                            <div class="menu_top_title"><span class="left_bar"></span>
+                                生活费                            </div>
+                            <div class="checkbox">
+                                <p class="title_text">
+                                    （一年的生活费大约在35000元）                                </p>
+                                <div class="title_text">
+                                    <input type="text" placeholder="请输入" class="input_text borderradius" />
+                                    <div class="ajust_btn">
+                                        调整                                    </div>
+                                </div>
+                            </div>
+                            <div class="total_money money">
+                                <input type="hidden" name="living_expenses[money]" value="0">
+                                人民币：<span>0</span>
+                            </div>
+                        </div>
+                        <div class="total_box">
+                            <p><span class="total">
+                                    合计</span><span class="money">
+                                    人民币 ≈ <span id="total">0</span></span></p>
+                            <p class="tips">
+                                以上价格仅供参考                            </p>
+                        </div>
+                    </div>
+                    <div class="oneRight_info tabcontent pay">
+                        <div class="content">
+    <p><br /></p>
+</div><ul class="point">
+    <li>使用中国境内银行卡支付:可以使用微信、支付宝、农行APP、网上银行缴费，具体方法参见 https://apply.shu.edu.cn 网站“入学申请”中“相关下载”《上海大学境内“网上缴费平台”操作指南》;</li>
+</ul>
+<ul class="point">
+    <li>无法使用在线支付功能的申请人，请通过银行汇款缴费。汇率差和手续费由学生本
+        人承担。账户信息如下:</li>
+</ul>
+<div class="content">
+    1）<b>外币汇款</b><br />
+    收款人名称:上海大学 <br />
+    收款人帐号:98211454800000228 <br />
+    收款人开户银行名称:上海浦发银行静安支行<br />
+    (SWIFT NO.SPDBCNSHXXX)<br />
+    * 请不要在境外向此账户汇款人民币.<br />
+    2）<b>人民币汇款</b><br />
+    帐户名:上海大学 <br />
+    帐号:03358400801000968 <br />
+    开户行:农行上海共和支行<br />
+    * 请不要在境外向此账户汇款人民币.<br /><br />
+    <b>悉尼工商学院汇款信息(仅限申请悉尼商学院学历项目人)</b><br />
+    1）<b>国际汇款</b><br />
+    收款人名称:SILC Business School, Shanghai University<br />
+    收款人帐号:31634000002047078<br />
+    收款人开户银行名称:BANK OF SHANGHAI (SWIFT CODE: BOSHCNSH)<br />
+    地 址 : NO 20 CHENGZHONG ROAD, JIADING DISTRICT, SHANGHAI<br />
+    2）<b>人民币汇款</b><br />
+    帐户名:上海大学悉尼工商学院 <br />
+    帐号:31634000002047078 <br />
+    开户行:上海银行沪太支行<br />
+    注：请勿在中国境外汇人民币至以上两个银行账户，国际汇款请汇金额相当的美金或欧元。<br />
+    <b>备注:</b><br />
+    1.请勿在中国境外汇人民币至以上银行账户，国际汇款请汇金额相当的美金或欧元。<br />
+    2.汇款时，请注明：申请单号+护照姓名。<br />
+    3.缴费完成后，请登录网申系统，点击“已预付学费”，在线上传支付凭证。经我校确认预付成功后，发放正式录取材料。<br />
+</div>                    </div>
+                    <div class="oneRight_info tabcontent pay">
+                        <div class="bartitle">关于学费</div>
+<div class="content">
+    1.1 国际学生费用以人民币为计价单位。<br />
+    1.2 我校收费接受中国境内银行发行的储蓄卡或带有“银联”、“VISA”、“MasterCard”等标识的信用卡。若使用境外银行发行的“VISA”或 “MasterCard”等信用卡所产生的任何手续费，由学生本人承担。<br />
+    1.3 自费学历生学费按学年一次性交纳，有特殊原因无法在规定时间内交清者可申请半年一交，居留许可按半年办理。自费非学历生应在报到注册时按学习期限一次性交纳学费。
+</div>
+<div class="bartitle">关于预付学费</div>
+<ul class="point">
+    <li>支付方式</li>
+</ul>
+<div class="content">
+    <p>1)<b>网申系统在线支付：</b>目前仅支持中国境外银行卡</p>
+    <p>2)<b>中国境内银行卡网上或线下银行转账：</b>仅支持接收人民币</p>
+    <p><b>人民币汇款账户信息：</b></p>
+    <p>帐户名：上海大学<br>帐号：033584-00801000968<br>开户行：农行上海共和支行</p>
+    <p><b>悉尼工商学院学历项目申请人学费汇款账户信息：</b></p>
+    <p>账户名：上海大学悉尼工商学院<br>
+账号：31634000002047078<br>
+开户行：上海银行沪太支行</p>
+    <p>3)<b>境外汇款：仅支持接收美元、欧元等外币，请勿在境外汇人民币到以下账号</b></p>
+    <p><b>外币汇款账号信息：</b></p>
+    <p>
+    收款人名称：上海大学<br>
+    收款人账号：98211454800000228<br>
+    收款人开户银行名称：上海浦发银行静安支行<br>
+    (SWIFT NO.SPDBCNSHXXX)<br>
+    地址: 上海市静安区北京西路699号
+    </p>
+    <p><b>悉尼工商学院学历项目申请人外币汇款账户信息</b></p>
+    <p>收款人名称：SILC Business School, Shanghai University<br>
+收款人账号：31634000002047078<br>
+收款人开户银行名称：BANK OF SHANGHAI (SWIFT CODE: BOSHCNSH)<br>
+收款人地址：NO 20 CHENGZHONG ROAD, JIADING DISTRICT, SHANGHAI<br>
+收款人银行地址：No.659 HUTAI ROAD, JING'AN DISTRICT, SHANGHAI</p>
+    <p>
+    <b>注意：</b><br>
+1.汇率差和银行服务费由学生本人承担，国际汇款请汇金额相当的美金或欧元。<br>
+2.通过银行汇款者，请注明：申请单号+护照姓名。<br>
+3.通过银行汇款者，缴费完成后，请登录网申系统，点击“已预付学费”，在线上传支付凭证。经我校确认预付成功后，发放正式录取材料。
+</p>
+</div>
+<div class="bartitle">支付政策</div>
+<div class="content">
+<p>所有自费生都须预付学费，以下情况不用预付学费：</p>
+<p>A.奖学金生：含中国政府奖学金、上海市政府奖学金、国际中文教师奖学金、上海大学奖学金、CCN预科免学费奖学金。以上学生请登录网申系统，点击“已预付学费”，在线上传奖学金确认邮件截屏。经我校确认后，发放正式录取材料；</p>
+<p>B.通过我校合作机构提交申请的学历生。</p>
+</div>
+<div class="bartitle">退费政策</div>
+<div class="content">
+    以下情形可退还预付学费（仅限退费至中国境内银行卡）：<br>
+    <p>
+    1.自支付成功（以学校实际到账日）30天内，且不晚于报到日期，书面确认放弃申请者；<br>
+2.学校取消其录取专业；<br>
+3.因非个人原因签证申请失败（须提交使领馆正式证明，并于报到截止日前书面申请）；<br>
+4.因地震、战争等不可抗力因素导致无法正常入学（须提交书面申请）。<br>
+其他原因无法来校学习的，须提交书面申请，退90%预付学费。
+</p>
+</div>
+<div class="bartitle">退费手续 </div>
+<div class="content">
+    符合退费政策的申请人，可按以下流程提交退费申请：<br>
+本人填写退费申请书（参照模板），递交书面申请，同时提供佐证材料，清单如下：<br>
+    <ul>
+        <li>a)护照复印件</li>
+         <li>b)中国国内银行账户信息</li>
+         <li>c)开户银行信息</li>
+         <li>d)支付凭证（原件扫描）</li>
+         <li>e)其他（使领馆官方签证申请失败证明等）</li>
+    </ul>
+    <p>完成退费流程至少需要90个工作日，请悉知。</p>
+</div>
+<div class="bartitle">上海大学保留对以上协议条款的修订权和解释权。</div>                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right_content_info application_faqs">
+            <div class="cnetent_text">
+                <div class="title"><span>FAQS</span>
+                    <div class="apply_btn" onclick="goto('http://apply.applyforshu.com')">Apply Now</div>
+                </div>
+                <div id="firstpane" class="menu_list">
+                                        <div class="menu_top_title"><span class="left_bar"></span>
+                        申请常见问题                    </div>
+                                                            <div class="menu_head">
+                        <div class="menu_title">
+                            如要申请奖学金，需要什么资格？                        </div>
+                    </div>
+                    <div style="display:none" class="menu_body">
+                        <p style="white-space: normal;">需满足以下条件:</p><p style="white-space: normal;">-&nbsp;非中国籍公民，身心健康；</p><p style="white-space: normal;">-&nbsp;来华攻读学士学位者，须高中毕业，年龄不超过25岁；</p><p style="white-space: normal;">-&nbsp;来华攻读硕士学位者，须具有学士学位，年龄不超过35岁；</p><p style="white-space: normal;">-&nbsp;来华攻读博士学位者，须具有硕士学位，年龄不超过40岁；</p><p style="white-space: normal;">-&nbsp;来华学习的普通进修者，须完成至少两年的本科学习，年龄不超过45岁；</p><p style="white-space: normal;">-&nbsp;来华学习的高级进修者，须具有硕士学位或副教授以上，年龄不超过50岁。</p>                    </div>
+                                        <div class="menu_head">
+                        <div class="menu_title">
+                            在读的留学生可以申请奖学金继续完成学业吗？                        </div>
+                    </div>
+                    <div style="display:none" class="menu_body">
+                        <p>在读未毕业生不能申请该奖学金项目。</p>                    </div>
+                                        <div class="menu_head">
+                        <div class="menu_title">
+                            ​可以换专业吗?                         </div>
+                    </div>
+                    <div style="display:none" class="menu_body">
+                        <p>原则上，奖学金生不可以换专业。&nbsp;</p>                    </div>
+                                        <div class="menu_head">
+                        <div class="menu_title">
+                            申请条件有哪些?                        </div>
+                    </div>
+                    <div style="display:none" class="menu_body">
+                        <p>通常，申请者需达到各专业学院入学标准。 在本科项目中，除美术和音乐专业有具体入学要求外，其他专业无其他特殊要求。 但是，申请研究生项目的要求与本科项目不同。当你申请研究生项目(硕士和博士)时，必须在线选择导师，取得导师审核通过。<span style="font-family: arial, helvetica, sans-serif; font-size: 14px;">(注:申请以下学院研究生项目无须在线选择导师，符合条件的录取者报到注册后由专业学院安排导师:经济学院、MBA 中心、悉尼工商学院、国际教育学院);</span></p><p><br/></p>                    </div>
+                                        <div class="menu_head">
+                        <div class="menu_title">
+                            ​是否接收纸质材料申请?                        </div>
+                    </div>
+                    <div style="display:none" class="menu_body">
+                        <p style="white-space: normal;">不需要。</p><p style="white-space: normal;">从 2017 年开始，申请者不需要将纸质材料邮寄给我校。</p>                    </div>
+                                        <div class="menu_head">
+                        <div class="menu_title">
+                            上海大学的机构代码是?                         </div>
+                    </div>
+                    <div style="display:none" class="menu_body">
+                        <p>上海大学的机构代码是 10280。&nbsp;</p>                    </div>
+                                        <div class="menu_head">
+                        <div class="menu_title">
+                            我申请了奖学金，为什么还需要提交经济担保证明?                        </div>
+                    </div>
+                    <div style="display:none" class="menu_body">
+                        <p>奖学金获得者每年都要对资格进行审核，一旦学业成绩不合格或者违反学校规定，将取消奖学金资格。</p><p><br/></p>                    </div>
+                                                                            </div>
+                <div class="oneRight_info">
+                    <div class="menu_top_title" style="margin-top: 40px;">
+                        <span class="left_bar"></span>
+                        更多问题，请下载:</div>
+                    <div class="download_list">
+                        <ul>
+                            <li>
+                                奖学金申请常见问题<a href="" target="_blank"><img class="download_btn" src="/img/download.png"></a></li>
+                            <li style="display: none;">
+                                本科项目申请常见问题<a href="/upload/shangda/1/5/8/国际学生申请上海大学学历项目常见问题.pdf" target="_blank"><img class="download_btn" src="/img/download.png"></a></li>
+                            <li style="display: none;">
+                                研究生项目申请常见问题<a href="/upload/shangda/1/5/8/国际学生申请上海大学学历项目常见问题.pdf" target="_blank"><img class="download_btn" src="/img/download.png"></a></li>
+                            <li>
+                                国际学生申请上海大学学历项目常见问题<a href="https://apply.shu.edu.cn/upload/res/2026-FAQS-zh.pdf" target="_blank"><img class="download_btn" src="/img/download.png"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right_content_info">
+            <div class="oneRight">
+                <div class="oneRight_title">
+                    相关下载                    <div class="apply_btn" onclick="goto('http://apply.applyforshu.com')">
+                        立即申请                    </div>
+                </div>
+                <div class="oneRight_info">
+                    <div class="download_list">
+                        <div class="box_list">
+                                                        <div class="menu_top_title"><span class="left_bar"></span>
+                                模板                            </div>
+                            <ul>
+                                                                <li title="外国人体格检查表">
+                                    外国人体格检查表                                    <a href="/upload/shangda/8/0/5/4-外国人体检检查表Foreigner Physical Examination Form.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="监护人保证书">
+                                    监护人保证书                                    <a href="/upload/shangda/5/0/3/1-监护人保证书Guarantee Statement.doc" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="经济担保证明">
+                                    经济担保证明                                    <a href="/upload/shangda/c/b/5/2-经济担保证明Statement of Financial Support.docx" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="无犯罪记录承诺书 ">
+                                    无犯罪记录承诺书                                     <a href="/upload/shangda/9/b/0/5-无犯罪记录承诺书 No criminal record Commitment.docx" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="上海大学国际研究生申请人研究计划模板">
+                                    上海大学国际研究生申请人研究计划模板                                    <a href="/upload/shangda/1/3/6/上海大学国际研究生申请人研究计划模板Sample of Research Plan for International Graduates.doc" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="预毕业证明及学位证书承诺书 ">
+                                    预毕业证明及学位证书承诺书                                     <a href="/upload/shangda/f/4/8/预毕业证明及学位证书承诺书 Pre-Graduation And Degree Certificate Commitment.doc" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="出入境信息承诺书">
+                                    出入境信息承诺书                                    <a href="/upload/shangda/9/2/1/出入境信息承诺书（模板）.docx" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                            </ul>
+                                                        <div class="menu_top_title"><span class="left_bar"></span>
+                                招生简章                            </div>
+                            <ul>
+                                                                <li title="研究生申请人如何联系导师">
+                                    研究生申请人如何联系导师                                    <a href="/upload/shangda/a/1/a/研究生申请人如何联系导师2021.PDF" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="2026-2027年上海大学国际本科生招生简章">
+                                    2026-2027年上海大学国际本科生招生简章                                    <a href="/upload/shangda/9/5/f/2026-2027学年上海大学国际本科生招生简章.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="2026-2027学年上海大学国际硕士研究生招生简章">
+                                    2026-2027学年上海大学国际硕士研究生招生简章                                    <a href="/upload/shangda/d/e/7/2026-2027学年上海大学国际硕士研究生招生简章.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="2026-2027学年上海大学国际博士研究生招生简章">
+                                    2026-2027学年上海大学国际博士研究生招生简章                                    <a href="/upload/shangda/5/b/b/2026-2027学年上海大学国际博士研究生招生简章.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="上海大学2026_2027学年中国政府奖学金高水平研究生项目">
+                                    上海大学2026_2027学年中国政府奖学金高水平研究生项目                                    <a href="/upload/shangda/0/6/c/1.申请指南：上海大学2026-2027学年中国政府奖学金高水平研究生项目.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="上海大学2026_2027学年_中国政府奖学金国别双边项目（CSC Type A）">
+                                    上海大学2026_2027学年_中国政府奖学金国别双边项目（CSC Type A）                                    <a href="/upload/shangda/5/e/c/1.申请指南：上海大学2026-2027学年-中国政府奖学金国别双边项目（CSC Type A）.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="上海大学2026年上海市政府奖学金奖学金申请指南">
+                                    上海大学2026年上海市政府奖学金奖学金申请指南                                    <a href="/upload/shangda/f/3/6/上海大学2026年上海市政府奖学金奖学金申请指南.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="2026年上海大学国际中文教师奖学金（孔子学院奖学金）申请指南">
+                                    2026年上海大学国际中文教师奖学金（孔子学院奖学金）申请指南                                    <a href="/upload/shangda/2/c/0/2026年上海大学国际中文教师奖学金（孔子学院奖学金）申请指南.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="2026年上海大学悉尼工商学院国际本科招生简章">
+                                    2026年上海大学悉尼工商学院国际本科招生简章                                    <a href="/upload/shangda/1/b/8/SILC BUSINESS SCHOOL UNDERGRADUATE DEGREE PROGRAMS 2026.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="2026年上海大学悉尼工商学院国际硕士招生简章">
+                                    2026年上海大学悉尼工商学院国际硕士招生简章                                    <a href="/upload/shangda/b/f/a/7、SILC Business School Master's Programs-2026.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="申请指南：上海大学2026年-中国政府奖学金“丝绸之路”项目">
+                                    申请指南：上海大学2026年-中国政府奖学金“丝绸之路”项目                                    <a href="/upload/shangda/a/f/4/1.申请指南：上海大学2026年-中国政府奖学金“丝绸之路”项目.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="上海大学上海美术学院国际学生招生手册">
+                                    上海大学上海美术学院国际学生招生手册                                    <a href="/upload/shangda/2/5/2/上海大学上海美术学院国际学生招生手册.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="上海大学音乐学院国际学生招生简章">
+                                    上海大学音乐学院国际学生招生简章                                    <a href="/upload/shangda/3/4/9/上海大学音乐学院国际学生招生简章.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="CSC type A_ 预录取通知书获取指南">
+                                    CSC type A_ 预录取通知书获取指南                                    <a href="/upload/shangda/6/7/9/CSC type A- 预录取通知书获取指南.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="上海大学MBA中心">
+                                    上海大学MBA中心                                    <a href="/upload/shangda/b/9/a/SHANGHAI UNIVERSITY MBA CENTER.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                            </ul>
+                                                        <div class="menu_top_title"><span class="left_bar"></span>
+                                支付政策                            </div>
+                            <ul>
+                                                                <li title="上海大学国际学生预付学费政策说明（限自费生）（2022年6月更新）">
+                                    上海大学国际学生预付学费政策说明（限自费生）（2022年6月更新）                                    <a href="/upload/shangda/1/2/f/2022年上海大学国际学生预付学费政策说明.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="上海大学境内银行卡“网上缴费平台”操作指南">
+                                    上海大学境内银行卡“网上缴费平台”操作指南                                    <a href="/upload/shangda/2/0/b/上海大学境内“网上缴费平台”操作指南Online payment by the Chinese bank card via Alipay or WeChat.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                            </ul>
+                                                        <div class="menu_top_title"><span class="left_bar"></span>
+                                新生报到                            </div>
+                            <ul>
+                                                                <li title="来校交通方式说明">
+                                    来校交通方式说明                                    <a href="/upload/shangda/d/8/2/来校交通方式说明 Directions for transportation to Shanghai University.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="在线购买保险流程">
+                                    在线购买保险流程                                    <a href="/upload/shangda/b/5/e/在线购买保险流程 How to Buy Insurance Online.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                            </ul>
+                                                        <div class="menu_top_title"><span class="left_bar"></span>
+                                招生简章(非学历项目）                            </div>
+                            <ul>
+                                                                <li title="上海大学长期汉语进修项目（一学期）招生简章">
+                                    上海大学长期汉语进修项目（一学期）招生简章                                    <a href="/upload/shangda/0/0/8/2026年秋季上海大学长期汉语进修项目（一学期）招生简章.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="Non degree credit English taught program-2026 DBIC PROGRAM">
+                                    Non degree credit English taught program-2026 DBIC PROGRAM                                    <a href="/upload/shangda/c/8/c/Non degree credit English taught program-2026 DBIC PROGRAM.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="上海大学国际交换生项目招生简章">
+                                    上海大学国际交换生项目招生简章                                    <a href="/upload/shangda/e/b/5/上海大学校级国际交换生项目申请指南(2026).pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="上海大学国际预科项目2027年春季招生简章">
+                                    上海大学国际预科项目2027年春季招生简章                                    <a href="/upload/shangda/7/b/e/上海大学国际预科项目2027年春季招生简章.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="上海大学商务汉语项目（一年）招生简章">
+                                    上海大学商务汉语项目（一年）招生简章                                    <a href="/upload/shangda/1/5/f/2026年秋季上海大学商务汉语项目（一年）招生简章.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="上海大学商务汉语项目（一学期）招生简章">
+                                    上海大学商务汉语项目（一学期）招生简章                                    <a href="/upload/shangda/3/a/3/2026年秋季上海大学商务汉语项目（一学期）招生简章.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="2026上海城市文化暑期学校">
+                                    2026上海城市文化暑期学校                                    <a href="/upload/shangda/7/4/c/2026上海城市暑期文化学校.jpg" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="2024上海大学“一带一路”沿线国家城市发展高级研修项目招生简章">
+                                    2024上海大学“一带一路”沿线国家城市发展高级研修项目招生简章                                    <a href="/upload/shangda/5/5/c/2024上海大学“一带一路”沿线国家城市发展高级研修项目.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                                <li title="上海大学长期汉语进修项目（一年）招生简章">
+                                    上海大学长期汉语进修项目（一年）招生简章                                    <a href="/upload/shangda/6/5/0/2026年秋季上海大学长期汉语进修项目（一年）招生简章.pdf" target="_blank"><img class="download_btn" src="/img/download.png" /></a>
+                                </li>
+                                                            </ul>
+                                                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Useful -->
+<div class="useful">
+    <div class="useful_title fonts-common" style="font-weight: bold;">
+        友情链接    </div>
+    <div class="userful_content">
+        <div class="useful_one">
+            <div class="useful_one_title">
+                申请学生            </div>
+            <div class="useful_dashed">
+                <div class="useful_one_text" onclick="goto('http://www.campuschina.org')">
+                    留学中国                </div>
+                <div class="useful_one_text" onclick="goto('https://english.shanghai.gov.cn/')">
+                    留学上海                </div>
+                <div class="useful_one_text" onclick="goto('http://www.chinese.cn/page/#/pcpage/mainpage')">
+                    中外与交流合作中心                </div>
+                <div class="useful_one_text" onclick="goto('http://www.chinesetest.cn/kaoshibaomingIndex.do?source=hsk')">
+                    汉语考试                </div>
+                <div class="useful_one_text" onclick="goto('http://www.shu.edu.cn')">
+                    上海大学                </div>
+            </div>
+        </div>
+        <div class="useful_two">
+            <div class="useful_one_title">
+                在校学生            </div>
+            <div class="useful_dashed">
+                <div class="useful_one_text" onclick="goto('https://cie.shu.edu.cn/index.htm')">
+                    上海大学国际教育学院                </div>
+                <div class="useful_one_text" onclick="goto('https://online.shhg12360.cn/sithc/')">
+                    上海国际旅行卫生保健中心                </div>
+                <div class="useful_one_text" onclick="goto('https://gaj.sh.gov.cn/crj/')">
+                    上海市出入境管理局                </div>
+                <div class="useful_one_text" onclick="goto('http://oa.lhgj.net/')">
+                    联华国际                </div>
+                <div class="useful_one_text" onclick="goto('https://www.shydtest.com/')">
+                    上海大学HSK考点                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+var n1 = -1;
+var n2 = -1;
+var n3 = -1;
+var n = [
+    [
+        [
+            { "name": "理学", "price": 30000 },
+            { "name": "工学", "price": 30000 },
+            { "name": "经济学", "price": 30000 },
+            { "name": "管理学", "price": 30000 }
+        ],
+        [
+            { "name": "人文社科", "price": 21000 },
+            { "name": "理学", "price": 24000 },
+            { "name": "工学", "price": 24000 },
+            { "name": "经济学", "price": 24000 },
+            { "name": "管理学", "price": 24000 },
+            { "name": "艺术类", "price": 32000 }
+        ]
+    ],
+    [
+        [
+            { "name": "人文社科", "price": 32500 },
+            { "name": "理学", "price": 36250 },
+            { "name": "工学", "price": 36250 },
+            { "name": "经济学", "price": 36250 },
+            { "name": "管理学", "price": 36250 },
+            { "name": "艺术类", "price": 48750 },
+            { "name": "MBA中心", "price": 94000 },
+            { "name": "法律（中国商法）", "price": 50000 },
+            { "name": "会计", "price": 59000 },
+            { "name": "金融（悉尼工商学院）", "price": 45000 },
+            { "name": "国际商务", "price": 45000 }
+        ],
+        [
+            { "name": "人文社科", "price": 26000 },
+            { "name": "理学", "price": 29000 },
+            { "name": "工学", "price": 29000 },
+            { "name": "经济学", "price": 29000 },
+            { "name": "管理学", "price": 29000 },
+            { "name": "艺术类", "price": 39000 },
+            { "name": "MBA中心", "price": 11400 }
+        ]
+    ],
+    [
+        [
+            { "name": "人文社科", "price": 29000 },
+            { "name": "理学", "price": 36000 },
+            { "name": "工学", "price": 36000 },
+            { "name": "经济学", "price": 36000 },
+            { "name": "管理学", "price": 36000 },
+            { "name": "艺术类", "price": 42000 }
+        ],
+        [
+            { "name": "人文社科", "price": 29000 },
+            { "name": "理学", "price": 36000 },
+            { "name": "工学", "price": 36000 },
+            { "name": "经济学", "price": 36000 },
+            { "name": "管理学", "price": 36000 },
+            { "name": "艺术类", "price": 42000 }
+        ]
+    ],
+    [
+        [
+
+        ],
+        [
+            { "name": "语言项目", "price": 19800 }
+        ]
+    ]
+];
+</script>
+        </div>
+        <style>
+  .email-cell{
+    display: flex;
+  }
+  .email-cell span{
+    padding-right: 5px;
+  }
+</style>
+<!-- foot -->
+<div class="foot">
+    <div class="foot_content">
+      <div class="foot_info">
+        <div class="foot_one">
+          <img src="/img/footlogo.png" alt="">
+        </div>
+        <div class="foot_two">
+          <div class="foot_title">招生咨询</div>
+          <div class="foot_two_text">
+            如有任何疑问，欢迎联系我们！<br>招生办公室工作时间：周一至周五，上午八点至下午五点<br>            <div style="height: 10px;">&nbsp;</div>
+            电话:  +86 21 66136615<br>
+            <div style="height: 10px;">&nbsp;</div>
+            邮箱:<br>
+            <ul>
+              <li class="email-cell">
+                <span>学历项目 :</span>
+                <ol>
+                  <li><a href="mailto:apply1@oa.shu.edu.cn" target="_blank">apply1@oa.shu.edu.cn</a></li>
+                  <li><a href="mailto:apply9@oa.shu.edu.cn" target="_blank">apply9@oa.shu.edu.cn</a></li>
+                </ol>
+              </li>
+              <li class="email-cell">
+                <span>奖学金项目 :</span>
+                <ol>
+                  <li><a href="mailto:apply8@oa.shu.edu.cn" target="_blank">apply8@oa.shu.edu.cn</a></li>
+                </ol>
+              </li>
+              <li class="email-cell">
+                <span>汉语项目 :</span>
+                <ol>
+                  <li><a href="mailto:apply6@oa.shu.edu.cn" target="_blank">apply6@oa.shu.edu.cn</a></li>
+                </ol>
+              </li>
+              <li class="email-cell">
+                <span>交换生项目 :</span>
+                <ol>
+                  <li><a href="mailto:apply4@oa.shu.edu.cn" target="_blank">apply4@oa.shu.edu.cn</a></li>
+                </ol>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="foot_three">
+          <div class="foot_title">拜访我们</div>
+          <div class="foot_three_text">
+            <div class="part-top">
+              <span>
+                地址:  中国上海市宝山区上大路99号              </span>
+              <br>
+              <a class="text-style2" href="/contact-us/index">地理位置</a>
+            </div>
+            <div class="part-bottom" style="margin-top: 80px;">
+              <div class="foot_title">联系我们</div>
+              <div class="icon-group">
+                <a class="has-child-img first-icon" href="javascript:;">
+                    <img src="/img/instagram.png"/>
+                    <div>
+                        <ul style="font-size: 17px; display: flex; text-align: center; line-height: 30px;">
+                            <li><img src="/img/instagram-qrcode.png"/></li>
+                        </ul>
+                    </div>
+                </a>
+                <a class="has-child-img" href="javascript:;"><img src="/img/facebook.png"/>
+                    <div>
+                        <ul style="font-size: 17px; display: flex; text-align: center; line-height: 30px;">
+                            <li ><img src="/img/facebook-qrcode.png"/></li>
+                        </ul>
+                    </div>
+                </a>
+                <a class="has-child-img" style="color: #fff">
+                  <img src="/img/wechat.png"/>
+                  <div>
+                    <ul style="width: 380px; height: 190px; font-size: 17px; display: flex; text-align: center; line-height: 30px;">
+                      <li style="margin-right: 30px;"><img src="/img/WechatIMG4.png"/><br />上海大学</li>
+                      <li><img src="/img/191575619025_.pic_hd.png"/><br />上海大学留学生</li>
+                    </ul>
+                  </div>
+                  <span class="triangle-down"></span>
+                </a>
+                  <a class="has-child-img" href="javascript:;"><img width="32" height="32" src="/img/youtube.png"/>
+                      <div>
+                          <ul style="font-size: 17px; display: flex; text-align: center; line-height: 30px;">
+                              <li ><img  src="/img/youtube-qrcode.png"/></li>
+                          </ul>
+                      </div>
+                  </a>
+                <a href="javascript:;" style="display: none" onclick="goto('https://weibo.com/u/3243026514')"><img src="/img/sina.png"/></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- footer -->
+<div class="footer">
+    <div class="footer_content">
+        <div class="footer_text">
+            <div>版权所有@上海大学</div>
+            <div style="margin-left: 5px;">2018-2026 <a style="color: #ffffff" href="https://beian.miit.gov.cn/" target="_blank">沪ICP备09014157</div>
+            <div style="margin-left: 20px;">技术支持：<a href="http://www.superchinese.com" title="SuperChinese" alt="SuperChinese" style="color: white" target="_blank">SuperChinese</a></div>
+        </div>
+    </div>
+</div>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-143373668-4"></script>
+<script type="text/javascript">
+    //网站全局搜索
+    function globalSearch(){
+        var val = $("#global-search-text-val").val();
+        location.href = "search_results.html?s=" + val;
+    };
+    //打开网站搜索栏
+    function showSearchArea(){
+        $("#global_search_btn").click(function(){
+            var sear = $('.nav > .global-search');
+            if(!sear.hasClass('show')){
+                sear.addClass('show');
+            }else{
+                sear.removeClass('show');
+            }
+        });
+    };
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-143373668-4');
+</script>
+        <script src="/assets/3ac6c9f5/jquery.js"></script>
+<script src="/assets/83279897/yii.js"></script>
+<script src="/libs/js/jquery.min.js"></script>
+<script src="/libs/js/swiper.min.5.2.0.js"></script>
+<script src="/js/main.js"></script>
+<script type="text/javascript">jQuery(document).ready(function () {
+
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    nextButton: '.next',
+    prevButton: '.prev',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 30,
+    loop: true
+});
+
+function initSelect() {
+    $(".selectBox").click(function() {
+        $(this).find(".selectOption").css('display', 'block');
+        $(this).find(".selectOption > li").click(function() {
+            $(this).parent().parent().find('.selectText').html($(this).text());
+            $(this).parent().parent().find('.selectText').addClass('common-color');
+            var value = $(this).attr('value');
+            $(this).parent().parent().find('.select').attr('value', value);
+            var selectMoney1 = parseFloat($('#select-box1-money').attr('value'));
+            var selectMoney2 = parseFloat($('#select-box2-money').attr('value'));
+            var selectMoney3 = parseFloat($('#select-box3-money').attr('value'));
+            var selectTotalMoney = selectMoney1 + selectMoney2 + selectMoney3;
+        });
+        $(this).mouseleave(function() {
+            $(this).find(".selectOption").css('display', 'none')
+        });
+    });
+}
+$(document).ready(function() {
+    initSelect();
+    $('.right>.right_content_info').eq(0).show().siblings().hide();
+    //Fees Calculator and Payment tab切换
+    $('.contentarea>.tabcontent').eq(0).show().siblings().hide();
+        $('.types').find(".left_info").each(function(index) {
+        if ($(this).data('type') == "faq") {
+            $(this).click();
+            $(".right_content_info").eq(0).hide();
+            $(".right_content_info").eq(index).show();
+        }
+    });
+    });
+//selectOption-list change
+$('.selectOption-list-1').find('li').click(function() {
+    n1 = parseInt($(this).attr('value'));
+    showSelectOption();
+});
+$('.selectOption-list-2').find('li').click(function() {
+    n2 = parseInt($(this).attr('value'));
+    showSelectOption();
+});
+calculate();
+
+function showSelectOption() {
+    if (n1 >= 0 && n2 >= 0) {
+        var n3list = n[n1][n2];
+        var n3str = '';
+        for (i in n3list) {
+            n3str += '<li class="selectOption1" value="' + n3list[i].price + '">' + n3list[i].name + '</li>';
+        }
+        $('.selectOption-list-3').html(n3str);
+    }
+    $('.selectOption-list-3').find('li').click(function() {
+        let money = $(this).attr('value');
+        money = parseInt(money);
+        console.log(money);
+        $('.tuition_fee').find('input[name="tuition_fee[money]"]').val(money);
+        $('.tuition_fee').find('.money span').html(money);
+        calculate();
+    });
+}
+
+//点击切换不同的内容
+$('.left_info').click(function() {
+    $(this).addClass('active_item').siblings().removeClass('active_item')
+    var index = $(this).index() - 1;
+    $(".right>.right_content_info").eq(index).show().siblings().hide();
+})
+//Fees Calculator and Payment tab切换
+$(".oneRight_title .tab").click(function() {
+    $(this).addClass('active_tab').siblings().removeClass('active_tab')
+    var index = $(this).index();
+    $(".contentarea>.tabcontent").eq(index).show().siblings().hide();
+})
+
+//checkbox
+$(".sub_box .checkbox .checkItem").click(function() {
+    $(this).find('.checkItem_box').addClass('checked');
+    $(this).siblings().find('.checkItem_box').removeClass('checked');
+})
+//support documents
+$("#firstpane1 .menu_body:eq(0)").show();
+$("#firstpane1 .menu_head:eq(0)").addClass("current");
+$("#firstpane1 .menu_head").click(function() {
+    if ($(this).hasClass('current')) {
+        $(this).removeClass("current");
+        $(this).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+    } else {
+        $(this).addClass("current").next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+    }
+    $(this).siblings().removeClass("current");
+});
+//FAQS
+$("#firstpane .menu_body:eq(0)").show();
+$("#firstpane .menu_head:eq(0)").addClass("current");
+$("#firstpane .menu_head").click(function() {
+    if ($(this).hasClass('current')) {
+        $(this).removeClass("current");
+        $(this).next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+    } else {
+        $(this).addClass("current").next("div.menu_body").slideToggle(300).siblings("div.menu_body").slideUp("slow");
+    }
+    $(this).siblings().removeClass("current");
+});
+
+//Fees Calculator and Payment
+function calculate() {
+    let international_applicant = $('input[name="international_applicant[money]"]').val();
+    let accommodations = $('input[name="accommodations[money]"]').val();
+    let tuition_fee = $('input[name="tuition_fee[money]"]').val();
+    let living_expenses = $('input[name="living_expenses[money]"]').val();
+    international_applicant = parseInt(international_applicant);
+    accommodations = parseInt(accommodations);
+    tuition_fee = parseInt(tuition_fee);
+    living_expenses = parseInt(living_expenses);
+    $('#total').html(international_applicant + accommodations + tuition_fee + living_expenses);
+}
+$('.international_applicant').find('.checkItem').click(function() {
+    let money = $(this).data('money');
+    $('.international_applicant').find('input[name="international_applicant[money]"]').val(money);
+    $('.international_applicant').find('.money span').html(money);
+    calculate();
+});
+$('.accommodations').find('.checkItem').click(function() {
+    let money = $(this).data('money');
+    $('.accommodations').find('input[name="accommodations[money]"]').val(money);
+    $('.accommodations').find('.money span').html(money);
+    calculate();
+});
+$('.ajust_btn').click(function() {
+    let money = $(this).prev().val();
+    money = parseInt(money);
+    $('.living_expenses').find('input[name="living_expenses[money]"]').val(money);
+    $('.living_expenses').find('.money span').html(money);
+    calculate();
+});
+
+showSearchArea();
+});</script>    </body>
+</html>

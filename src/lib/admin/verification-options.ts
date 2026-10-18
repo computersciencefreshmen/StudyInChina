@@ -9,7 +9,9 @@ export function buildVerificationArguments(request: VerificationRequest, useCcSw
   if (request.collection !== 'all') args.push('--collection', request.collection)
   if (request.mode === 'full') args.push('--all')
   else args.push('--limit', String(request.limit ?? 20))
-  args.push('--concurrency', '2', '--batch-size', '2')
+  // The native verifier admits at most four workers and reduces concurrency
+  // when quota is low. Full runs use that supported ceiling; samples stay small.
+  args.push('--concurrency', request.mode === 'full' ? '4' : '2', '--batch-size', '2')
   if (request.model && request.model !== 'configured') {
     args.push('--model', request.model, '--thinking', 'adaptive')
     if (request.model === 'MiniMax-M3.1-Flash-Preview' && request.effort && request.effort !== 'default') args.push('--effort', request.effort)

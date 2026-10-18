@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "pass": false,
+  "outcome": "held",
+  "batchPath": "quality/recovery-20261018/official/fdu/full-program-batch-draft.json",
+  "batchSha256": "beb7d6ab26ee8ecd3e705a72b68ed45e50a93771d3070975fd4bf88c83b7b6fc",
+  "reviewedAt": "2026-10-18T14:21:16.819015+00:00",
+  "reviewer": "codex-independent-recover-local",
+  "reviewedCandidateEntries": 1,
+  "checks": [
+    {
+      "id": "stable-identity",
+      "status": "pass",
+      "detail": "Reuses program-fudan-university-chinese-language-program-language and proposes only a fresh spring2027 semester cycle; no duplicate programme identity or renewal of the prior stale autumn cycle."
+    },
+    {
+      "id": "whole-official-fact-review",
+      "status": "pass",
+      "detail": "Read both full current PDF texts and viewed critical admissions/fee/guardian/teaching-language/visa/nonrefund pages in both languages. Scope, semester/TBC dates, reference tuition, final finance pricing, passport, placement and unknown minimum academic/HSK thresholds are otherwise supported."
+    },
+    {
+      "id": "reference-tuition-opt-in",
+      "status": "pass",
+      "detail": "Read-only strict assessor leaves only independent_review_missing with explicit allowOfficialReferenceTuition=true. Removing that flag in memory additionally produces incomplete_reviewed_fees. No source draft or canonical approval fields were changed."
+    },
+    {
+      "id": "guarantor-income-qualifier",
+      "status": "held",
+      "detail": "EN PDF page11 requires a stable source of income, but two applicant-facing EN checklist statements weaken this to a source of income."
+    }
+  ],
+  "issues": [
+    {
+      "severity": "requires-new-draft",
+      "fieldPaths": [
+        "entries[0].program.supplementaryDetails.eligibility[1].en",
+        "entries[0].program.supplementaryDetails.applicationMaterials[3].en"
+      ],
+      "source": "fdu-spring-2027-en.pdf page11; Chinese PDF page10 uses source-of-income wording without the stable qualifier",
+      "detail": "Preserve the English stable-source-of-income requirement and, if desired, disclose the wording difference in Chinese. Publish a distinct immutable v2 draft; do not overwrite v1."
+    }
+  ],
+  "canonicalWrites": 0,
+  "approvedBatchWrites": 0,
+  "paidCalls": 0
+}

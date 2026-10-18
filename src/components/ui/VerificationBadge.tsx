@@ -4,7 +4,7 @@ export type VerificationStatus = 'verified' | 'stale' | 'draft' | 'archived'
 
 const defaultLabels: Record<VerificationStatus, string> = {
   verified: 'Verified',
-  stale: 'Review due',
+  stale: 'Needs review',
   draft: 'Draft',
   archived: 'Archived',
 }
@@ -24,6 +24,8 @@ export interface VerificationBadgeProps {
   verifiedDateLabel?: string
   showDate?: boolean
   className?: string
+  collection?: string
+  recordId?: string
 }
 
 export function VerificationBadge({

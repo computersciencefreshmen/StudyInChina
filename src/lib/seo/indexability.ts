@@ -1,4 +1,5 @@
 import { selectAdmissionCycle } from '@/lib/data/admission'
+import { hasConfirmedProgramDuration } from '@/lib/data/duration'
 import { isPublicStatus } from '@/lib/data/publication'
 import type {
   AdmissionCycle,
@@ -24,7 +25,7 @@ export function isIndexableProgram(
     && program.verificationScope !== 'identity'
     && Boolean(program.details)
     && Boolean(cycle)
-    && program.durationMonths !== null
+    && hasConfirmedProgramDuration(program)
     && program.teachingLanguages.length > 0
     && Boolean(program.applyUrl)
 }

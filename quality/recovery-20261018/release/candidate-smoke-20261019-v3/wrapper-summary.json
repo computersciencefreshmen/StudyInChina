@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "pass": false,
+  "deploymentId": "dpl_2nANfpPkNbiGsZY6aTrUMGh11TEA",
+  "deploymentUrl": "https://studyinchina-l0gm4mmz9-henry-yangs-projects-c9706eac.vercel.app",
+  "sourceCommit": "85f87e77b42221fd96e59110684932e291ea053b",
+  "readyState": "READY",
+  "ownershipAndCommitMatched": true,
+  "startedAt": "2026-10-18T16:02:05.693Z",
+  "completedAt": "2026-10-18T16:06:41.592Z",
+  "evaluatedForDate": "2026-10-19",
+  "sourcePlanSha256": "0c6074393602627b9a5770d3cf1b814bc96997b753f0095b137db1312a4f78fc",
+  "runnerSha256": "296d11d6af36752b8f1df4ce0bbc0135cdf48847018a3b787fad08b4349f248e",
+  "expectedInputSha256": "a2bdda348090811d8980eaeab52dba72f3c24f94e5cfa3b6948e8088191f4d48",
+  "proofPath": "quality/recovery-20261018/release/candidate-smoke-20261019-v3/candidate-public-smoke.json",
+  "proofSha256": "790f6390def77727e8d9b3642fb2bb19083e6ea45fb214a9d9fb8daaf432afd9",
+  "proofPublication": "Ignored local failure evidence; browser request call logs are not suitable for Git publication.",
+  "results": {
+    "publicPrograms": 766,
+    "publicAdmissionCycles": 766,
+    "universityPages": 255,
+    "universityPasses": 254,
+    "universityFailures": 1,
+    "details": 54,
+    "detailPasses": 54,
+    "detailFailures": 0,
+    "navigationPassed": true,
+    "mobilePassed": true,
+    "consoleErrors": 0
+  },
+  "failureCategories": [
+    "A single university page GET disconnected before a secure TLS connection was established.",
+    "Twelve protected browser static resource fetches were still pending when their request context was disposed."
+  ],
+  "cloudWrites": 0,
+  "publisherRequests": 0,
+  "aliasMutations": 0,
+  "protectionBypassPersisted": false,
+  "qualification": "Rejected for promotion; immutable failure evidence retained locally."
+}

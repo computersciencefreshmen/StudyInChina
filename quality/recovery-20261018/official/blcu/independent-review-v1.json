@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "pass": false,
+  "outcome": "held",
+  "batchPath": "quality/recovery-20261018/official/blcu/full-program-batch-draft-v1.json",
+  "batchSha256": "9ce41c80abdc1ff1018b24505e7690ec3fae63e7568b04dad4df7bfb8aa60b79",
+  "reviewedAt": "2026-10-18T14:25:57.967258+00:00",
+  "reviewer": "codex-independent-recover-local",
+  "reviewedCandidateEntries": 2,
+  "checks": [
+    {
+      "id": "full-primary-source-reading",
+      "status": "pass",
+      "detail": "Read the entry requirements, full profiles and Chinese-medium list and visually inspected both2027catalogue pages. Chinese medium, four-year bachelor identities, HSK4>=180/CSCA, complete nationality/guardian/material requirements, ordinary campus rates25800/22000, spring cutoffFebruary1,2027 and qualified application-fee nonrefund wording are otherwise supported."
+    },
+    {
+      "id": "selected-table-cell-scope",
+      "status": "held",
+      "detail": "The selected-cells transcription incorrectly assigns the AppliedChinese row campus-year arrangement to the lower merged rows covering Translation/ChineseLanguage/TCSoL/InternationalTrade. Those lower rows say placement follows the relevant plan in Hainan or Beijing, years1-2general training and years3-4specialization; they do not fix years3-4 in Beijing."
+    }
+  ],
+  "issues": [
+    {
+      "severity": "requires-new-draft-and-transcription",
+      "fieldPaths": [
+        "captures[1].textPath",
+        "entries[*].program.supplementaryDetails.campus",
+        "entries[*].cycle.tuitionSchedule",
+        "entries[*].cycle.notes"
+      ],
+      "source": "2027catalogue page1: 国际学生独立培养项目 table, merged 培养安排 cells",
+      "detail": "Remove the unsupported fixed years3-4Beijing guarantee from both selected programmes and separate the AppliedChinese campus-year row from the lower merged rows in a newly named transcription. Use plan-dependent Hainan/Beijing placement and retain the general-to-specialization training stages. Preserve v1 files; author a distinct v2 candidate and transcription receipt."
+    }
+  ],
+  "visualEvidence": [
+    {
+      "path": "quality/recovery-20261018/official/blcu/catalogue-page-1.png",
+      "sha256": "557258f322dc67eebf9255d0e8d68985701e7365d3a424bdc73f34a12ca0ccef"
+    },
+    {
+      "path": "quality/recovery-20261018/official/blcu/catalogue-page-2.png",
+      "sha256": "4dfd8ac383a3170ead8ef817fdacd8cbd38424649c9f6ad234ef64f1827b9332"
+    }
+  ],
+  "canonicalWrites": 0,
+  "approvedBatchWrites": 0,
+  "paidCalls": 0
+}

@@ -1,0 +1,169 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.85fr) minmax(20rem, .9fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  align-items: start;
+}
+
+.main,
+.aside {
+  display: grid;
+  min-width: 0;
+  gap: 1.5rem;
+  align-content: start;
+}
+
+.aside {
+  position: static;
+  align-self: start;
+}
+
+.aside > * {
+  min-width: 0;
+  margin: 0;
+}
+
+.aside dl:has(.variableTuitionSummary) {
+  grid-auto-flow: row dense;
+}
+
+.aside dl > div:has(.variableTuitionSummary) {
+  grid-column: 1 / -1;
+}
+
+.variableTuitionSummary {
+  display: block;
+}
+
+.panel {
+  min-width: 0;
+  padding: clamp(1.4rem, 2.5vw, 2rem);
+  background: var(--atlas-paper-bright);
+  border: 1px solid var(--atlas-line);
+  border-radius: .6rem;
+}
+
+.panel h2,
+.panel h3 {
+  margin: 0;
+  color: var(--atlas-ink);
+  font-family: var(--atlas-font-display);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.panel h2 {
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+}
+
+.panel h3 {
+  margin-block: 1.5rem .65rem;
+  font-size: 1.15rem;
+}
+
+.panel p,
+.panel li {
+  color: var(--atlas-ink-soft);
+  font-size: 1rem;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+.panel p {
+  margin-block: .9rem 0;
+}
+
+.lead {
+  margin-block: 1rem 1.4rem;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 1.5rem;
+  margin: .75rem 0 0;
+}
+
+.facts > div {
+  min-width: 0;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--atlas-line);
+}
+
+.facts dt {
+  color: var(--atlas-muted);
+  font-size: .8rem;
+  line-height: 1.45;
+}
+
+.facts dd {
+  margin: .35rem 0 0;
+  color: var(--atlas-ink);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.sections {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.sections section + section {
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--atlas-line);
+}
+
+.sections ul {
+  display: grid;
+  gap: .85rem;
+  margin: 1rem 0 0;
+  padding-inline-start: 1.2rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cycleNotes {
+  padding-top: 1rem;
+}
+
+:global(html[data-design='craft']) .panel {
+  border-radius: 1.5rem;
+}
+
+:global(html[data-design='craft']) .panel h2,
+:global(html[data-design='craft']) .panel h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: -.02em;
+}
+
+:global(html[data-design='craft']) .panel h2 {
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+}
+
+@media (max-width: 1050px) {
+  .layout {
+    grid-template-columns: minmax(0, 1.7fr) minmax(17rem, .9fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .aside { gap: 1.25rem; }
+}
+
+@media (max-width: 560px) {
+  .panel { padding: 1.25rem; }
+  .facts { grid-template-columns: minmax(0, 1fr); }
+  .sections { gap: 1.4rem; }
+  .sections section + section { padding-top: 1.4rem; }
+}

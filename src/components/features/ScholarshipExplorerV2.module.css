@@ -48,6 +48,33 @@
   margin-top: 1.5rem;
 }
 
+:global(.atlas-public) .primaryGrid,
+:global(.atlas-public) .advancedGrid { gap: 1rem; }
+:global(.atlas-public) .advanced { margin-top: 1.25rem; }
+:global(.atlas-public) .advanced summary { display: flex; align-items: center; min-height: 2.75rem; padding: .9rem 0; font-size: .78rem; font-weight: 650; }
+:global(.atlas-public) .advancedGrid { padding-block: .4rem 1.2rem; }
+:global(.atlas-public) .actions { justify-content: flex-end; margin-top: 1rem; }
+
+:global(html[data-design='craft'] .atlas-public) .panel {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--atlas-paper-bright);
+  border: 1px solid var(--atlas-line);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgb(3 3 2 / 2%);
+}
+
+:global(html[data-design='craft'] .atlas-public) .primaryGrid,
+:global(html[data-design='craft'] .atlas-public) .advancedGrid { gap: 1.1rem; }
+:global(html[data-design='craft'] .atlas-public) .advanced { margin-top: 1.5rem; border-color: var(--atlas-line); }
+:global(html[data-design='craft'] .atlas-public) .advanced summary { min-height: 2.75rem; padding: .9rem 0; font-family: var(--font-body); font-size: .9rem; font-weight: 400; letter-spacing: 0; }
+:global(html[data-design='craft'] .atlas-public) .advancedGrid { padding-block: .35rem 1.35rem; }
+:global(html[data-design='craft'] .atlas-public) .actions { justify-content: flex-end; gap: .65rem; margin-top: 1.25rem; }
+
+@media (max-width: 560px) {
+  :global(html[data-design='craft'] .atlas-public) .panel { padding: 1.25rem; border-radius: 1.25rem; }
+  :global(html[data-design='craft'] .atlas-public) .actions { align-items: stretch; }
+}
+
 @media (max-width: 560px) {
   .primaryGrid,
   .advancedGrid {

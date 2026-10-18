@@ -19,6 +19,16 @@ export function MiniMaxAutomationPanel({ status, stale, online, commandId = null
   const awaitingReceipt = Boolean(commandId && latest?.commandId !== commandId)
   const pending = awaitingReceipt || latest?.status === 'pending' || latest?.status === 'claimed'
   const disabled = readOnly || !fresh || busy || pending || !onAction
+  const unavailableReason = !online ? '页面连接暂时中断，请点击顶部同步按钮重新连接。'
+    : !fresh ? '执行器状态已过期或暂时离线，等待执行器重新连接后即可操作。'
+      : readOnly || !onAction ? status.remotelyControllable === true
+        ? '执行器已连接，管理网站尚未启用远程任务控制。'
+        : '当前执行器仅上传监控数据，尚未连接任务控制通道。'
+        : null
+  const resumeDisabled = disabled || (status.desiredState === 'running' && (status.runnerAlive || status.supervisorAlive || status.activeVerifierCount > 0))
+  const pauseDisabled = disabled || status.desiredState === 'paused'
+  const resumeReason = unavailableReason || (pending ? '等待当前指令的执行器回执。' : resumeDisabled && !busy ? '自动推进已在运行，可使用暂停后续任务。' : undefined)
+  const pauseReason = unavailableReason || (pending ? '等待当前指令的执行器回执。' : pauseDisabled && !busy ? '后续任务已暂停，可使用恢复自动推进。' : undefined)
   const title = !fresh ? '执行器连接待更新' : status.desiredState === 'paused' ? status.pauseMayHaveInFlightRequest ? '正在暂停新调用' : '已暂停新调用' : status.runnerAlive || status.activeVerifierCount ? '自动推进中' : '等待执行器处理任务'
   async function submit(action: 'pause' | 'resume') {
     if (disabled) return
@@ -31,7 +41,8 @@ export function MiniMaxAutomationPanel({ status, stale, online, commandId = null
   return <section className={`${styles.panel} ${mini.automation}`} aria-labelledby="minimax-automation-title">
     <div className={mini.automationHeading}><div><p className={mini.eyebrow}>MINIMAX AUTOMATION</p><h2 id="minimax-automation-title">自动化执行</h2><p className={styles.smallMuted}>{readOnly ? '只读监控模式 · 已同步执行器状态，此连接未开放远程任务控制。' : '任务由执行器持续推进，在这里查看状态并控制新的调用。'}</p></div><span className={styles.status} data-active={fresh && status.desiredState === 'running' && status.runnerAlive}><i />{title}</span></div>
     <div className={mini.automationBody}><div><strong className={mini.phase}>{phases[status.phase] ?? '执行器正在处理任务'}</strong><p>{status.activeVerifierCount} 个核验进程 · {status.keepAwake ? '执行器保持唤醒' : '唤醒状态未启用'}</p><p>最近模型响应：{date(lastResponseAt)}</p><p>最近状态：{date(status.observedAt)}{status.controlAcknowledgedAt ? ` · 控制确认：${date(status.controlAcknowledgedAt)}` : ''}</p></div><div className={mini.funding}><span>消耗策略</span><strong>{status.creditFallbackAuthorized ? 'Token Plan 优先，耗尽后可用现有积分' : '使用 Token Plan'}</strong>{status.policyReloadPending ? <p className={mini.pendingPolicy}>积分授权已保存，运行中任务正在等待策略交接。</p> : null}{status.quota ? <p>{status.quota.stale ? '上次额度（待更新）：' : '最近额度回执：'}5 小时套餐剩余 {status.quota.fiveHourRemainingPercent == null ? '待确认' : `${status.quota.fiveHourRemainingPercent}%`} · 周套餐剩余 {status.quota.weeklyRemainingPercent == null ? '待确认' : `${status.quota.weeklyRemainingPercent}%`}<br />额度检查：{date(status.quota.checkedAt)}{status.quota.resetAt ? ` · 窗口恢复：${date(status.quota.resetAt)}` : ''}</p> : <p>套餐额度尚无回执。</p>}</div></div>
-    <div className={mini.controls}><button className={styles.primaryButton} type="button" disabled={disabled || (status.desiredState === 'running' && (status.runnerAlive || status.supervisorAlive || status.activeVerifierCount > 0))} onClick={() => { void submit('resume') }}><WorkbenchIcon name="play" size={16} />{busy ? '正在提交…' : '恢复自动推进'}</button><button className={mini.pauseButton} type="button" disabled={disabled || status.desiredState === 'paused'} onClick={() => { void submit('pause') }}>暂停后续任务</button><p>暂停阻止新的 MiniMax 调用；已发出的请求可能完成并继续记录用量。</p></div>
+    <div className={mini.controls}><button className={styles.primaryButton} type="button" disabled={resumeDisabled} title={resumeReason} aria-describedby={unavailableReason ? 'minimax-control-unavailable' : undefined} onClick={() => { void submit('resume') }}><WorkbenchIcon name="play" size={16} />{busy ? '正在提交…' : '恢复自动推进'}</button><button className={mini.pauseButton} type="button" disabled={pauseDisabled} title={pauseReason} aria-describedby={unavailableReason ? 'minimax-control-unavailable' : undefined} onClick={() => { void submit('pause') }}>暂停后续任务</button><p>暂停阻止新的 MiniMax 调用；已发出的请求可能完成并继续记录用量。</p></div>
+    {unavailableReason ? <p id="minimax-control-unavailable" className={mini.commandReceipt}>{unavailableReason}</p> : null}
     {receipt ? <p className={mini.commandReceipt} role="status">{receipt}</p> : null}{latest?.status === 'failed' || latest?.status === 'expired' ? <p className={styles.error} role="alert">{latest.status === 'expired' ? failureReasons.command_expired : failureReasons[latest.error ?? ''] ?? '执行器未能完成指令，请同步最新状态后重试。'}</p> : null}{error ? <p className={styles.error} role="alert">{error}</p> : null}
   </section>
 }

@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-10-18T16:33:38.457Z",
+  "completedAt": "2026-10-18T16:33:47.778Z",
+  "runnerSha256": "862186ae40ef910bd883ac69d8fb4ec78d368c6951ca60f77d2066ae7f46f6bf",
+  "stateBeforeSha256": "410fe5da6291f1a9353be47870005c88b91f0f1bd552deaf726c6229cfd4b7e8",
+  "stateAfterSha256": "410fe5da6291f1a9353be47870005c88b91f0f1bd552deaf726c6229cfd4b7e8",
+  "results": [
+    {
+      "lane": "native-alias",
+      "status": "fulfilled",
+      "value": {
+        "available": true,
+        "observedAt": "2026-10-18T16:33:47.778Z",
+        "GETInvocations": 3,
+        "before": {
+          "deploymentId": "dpl_36sjWb43vDSYppFRYysBjgSic6NZ",
+          "projectId": "prj_AgYJcsuat4kmLiinlvcBbZsYY3cg"
+        },
+        "after": {
+          "deploymentId": "dpl_36sjWb43vDSYppFRYysBjgSic6NZ",
+          "projectId": "prj_AgYJcsuat4kmLiinlvcBbZsYY3cg"
+        },
+        "metadata": {
+          "id": "dpl_36sjWb43vDSYppFRYysBjgSic6NZ",
+          "projectId": "prj_AgYJcsuat4kmLiinlvcBbZsYY3cg",
+          "ownerId": "team_o5qghzfTOk24QwoYANzJ8hNH",
+          "readyState": "READY",
+          "target": "production",
+          "url": "studyinchina-j0qkuroh8-henry-yangs-projects-c9706eac.vercel.app"
+        },
+        "sameAlias": true,
+        "ownershipMatches": true
+      }
+    },
+    {
+      "lane": "stable-public-release",
+      "status": "fulfilled",
+      "value": {
+        "url": "https://studyinchina.vercel.app/api/v1/releases/current",
+        "observedAt": "2026-10-18T16:33:40.574Z",
+        "status": 200,
+        "bytes": 1361,
+        "sha256": "13369487aebc570050fa1fb9d844980f198d0afbb1e4e5e3a6b89a589d74da23",
+        "body": {
+          "data": {
+            "id": "json:2026-10-17",
+            "dataDate": "2026-10-17",
+            "generatedAt": "2026-10-17T00:00:00.000Z",
+            "recordCounts": {
+              "sources": 697,
+              "cities": 62,
+              "universities": 255,
+              "programs": 757,
+              "admissionCycles": 757,
+              "scholarships": 0
+            },
+            "rawCounts": {
+              "sources": 2557,
+              "cities": 62,
+              "universities": 272,
+              "programs": 2037,
+              "admissionCycles": 1628,
+              "scholarships": 396
+            },
+            "publicCounts": {
+              "sources": 697,
+              "cities": 62,
+              "universities": 255,
+              "programs": 757,
+              "admissionCycles": 757,
+              "scholarships": 0
+            },
+            "dataCheckedThrough": "2026-10-17",
+            "evaluatedForDate": "2026-10-19",
+            "activatedAt": "2026-10-17T00:00:00.000Z",
+            "catalogBackend": "json",
+            "deploymentSha": null
+          },
+          "meta": {
+            "release": {
+              "id": "json:2026-10-17",
+              "dataDate": "2026-10-17",
+              "generatedAt": "2026-10-17T00:00:00.000Z",
+              "recordCounts": {
+                "sources": 697,
+                "cities": 62,
+                "universities": 255,
+                "programs": 757,
+                "admissionCycles": 757,
+                "scholarships": 0
+              },
+              "rawCounts": {
+                "sources": 2557,
+                "cities": 62,
+                "universities": 272,
+                "programs": 2037,
+                "admissionCycles": 1628,
+                "scholarships": 396
+              },
+              "publicCounts": {
+                "sources": 697,
+                "cities": 62,
+                "universities": 255,
+                "programs": 757,
+                "admissionCycles": 757,
+                "scholarships": 0
+              },
+              "dataCheckedThrough": "2026-10-17",
+              "evaluatedForDate": "2026-10-19",
+              "activatedAt": "2026-10-17T00:00:00.000Z",
+              "catalogBackend": "json",
+              "deploymentSha": null
+            },
+            "notice": "信息由自动化系统收录并定期更新；申请条件、费用与截止日期以学校或奖学金官方网站实际情况为准。"
+          }
+        }
+      }
+    }
+  ],
+  "scope": "Observation only. READY, candidate counts and HTTP200 do not qualify promotion. No runtime secret, deployment writer, assignment, credential restore or registry mutation.",
+  "paidCalls": 0,
+  "D1Requests": 0,
+  "canonicalWrites": 0,
+  "cloudWrites": 0,
+  "publisherCalls": 0,
+  "gitWrites": 0
+}

@@ -8,8 +8,8 @@ import styles from './Workbench.module.css'
 
 export function AdminThemeSwitcher({ selected }: { selected: SiteTheme }) {
   return <div className={styles.themeSwitcher}>
-    <div className={styles.themeSwitcherHeading}><span><WorkbenchIcon name="palette" size={15} />工作台主题</span><small>五种界面 · 同一份实时数据</small></div>
-    <div className={styles.themeChoices} role="group" aria-label="管理员五主题切换">{siteThemes.map(theme => <button type="button" key={theme.id} aria-pressed={selected.id === theme.id} onClick={() => {
+    <div className={styles.themeSwitcherHeading}><span><WorkbenchIcon name="palette" size={15} />工作台主题</span><small>{siteThemes.length} 种界面 · 同一份实时数据</small></div>
+    <div className={styles.themeChoices} role="group" aria-label="管理员主题切换">{siteThemes.map(theme => <button type="button" key={theme.id} aria-pressed={selected.id === theme.id} onClick={() => {
       document.documentElement.dataset.theme = theme.id
       try { localStorage.setItem(THEME_KEY, theme.id) } catch { /* The theme still applies for this visit. */ }
       window.dispatchEvent(new Event('studycn-theme-changed'))

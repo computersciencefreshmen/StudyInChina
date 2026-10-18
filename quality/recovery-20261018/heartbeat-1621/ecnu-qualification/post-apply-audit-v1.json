@@ -1,0 +1,295 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-18T16:32:11.514Z",
+  "type": "INDEPENDENT_READ_ONLY_ECNU_POST_APPLY_AUDIT",
+  "decision": "EXACT_ONE_PROGRAMME_ONE_CYCLE_TWO_SOURCES_CANONICAL_ONLY_CONFIRMED",
+  "nativeReceipt": {
+    "path": "quality/program-expansion-20261013/applied-ecnu-global-china-spring-2027-proposal-20261019-v2.json",
+    "sha256": "54700be458db67ea8ef83630bf7478cde5ff14d50a9fce655afbc9901198491e",
+    "bytes": 26613
+  },
+  "batch": {
+    "path": "quality/recovery-20261018/next-wave/ecnu/full-program-batch-approved-v2.json",
+    "sha256": "62296edf5eff8b47b73775cb9d5cbce6100ef65d6cf249867a8cb90fa51e9a7c",
+    "bytes": 17355
+  },
+  "batchId": "ecnu-global-china-spring-2027-proposal-20261019-v2",
+  "appliedAt": "2026-10-18T16:27:49.433Z",
+  "applicationStart": {
+    "path": "quality/recovery-20261018/heartbeat-1621/ecnu-apply-start.json",
+    "sha256": "f3a563986c4d04f6b7ce44f9f99e9ed4a962ed6a9586670533b2830990416d7d",
+    "bytes": 941
+  },
+  "applicationResult": {
+    "path": "quality/recovery-20261018/heartbeat-1621/ecnu-apply-result.json",
+    "sha256": "a5e3fa1fba9f5b595a07a4d728ad109f70d61411e0d950b19f9f921ea2c1acca",
+    "bytes": 1434
+  },
+  "checks": {
+    "receiptRawHashMatchesRootExpected": true,
+    "receiptRawHashMatchesApplicationResult": true,
+    "fullReconstructedPreApplyCatalogEqualsOriginalDigest": true,
+    "currentCatalogEqualsReceiptAndState": true,
+    "addedExactlyOneProgram": true,
+    "addedExactlyOneCycle": true,
+    "addedExactlyTwoSources": true,
+    "receiptBeforeRowsAbsent": true,
+    "nativeConsumerAppliedOnlyOne": true,
+    "allNewRecordsMatchApproved": true,
+    "allPriorEvidenceHashesAndBytesUnchanged": true,
+    "allCandidateBoundariesPreserved": true,
+    "stateReleasedAgain": true,
+    "canonicalOwnerLockAbsent": true,
+    "catalogApplyLockAbsent": true,
+    "stateLabelsEcnuNotPubliclyReleased": true
+  },
+  "completeCatalogueDifference": {
+    "method": "Remove only the approved new programme ID, new cycle ID and two new source IDs from the complete current bundleSchema-normalized catalogue in memory, then hash JSON.stringify of the entire remaining catalogue. Exact match to the prior pinned digest proves no other normalized catalogue facts changed.",
+    "reconstructedOriginalCatalogSha256": "b38205d8b48028e7dea8086977f64eaaec090ffc8352021f21a278a7499fb0c9",
+    "currentCatalogSha256": "37d01083aa83d7ee7ee225d3aac63728f01edd188b71c1b2feb38e7616b91693",
+    "addedPrograms": [
+      "program-east-china-normal-university-global-china-program-other"
+    ],
+    "addedAdmissionCycles": [
+      "cycle-ecnu-global-china-2027-spring"
+    ],
+    "addedSources": [
+      "source-ecnu-gcp-spring-2027-official-20261018",
+      "source-ecnu-gcp-official-application-20261018"
+    ],
+    "otherFactChanges": 0,
+    "recordMatches": {
+      "program": true,
+      "cycle": true,
+      "sources": true,
+      "nativeReceiptAfter": true
+    },
+    "rawBefore": {
+      "sources": 2574,
+      "cities": 62,
+      "universities": 272,
+      "programs": 2043,
+      "admissionCycles": 1636,
+      "scholarships": 396
+    },
+    "rawAfter": {
+      "sources": 2576,
+      "cities": 62,
+      "universities": 272,
+      "programs": 2044,
+      "admissionCycles": 1637,
+      "scholarships": 396
+    }
+  },
+  "canonicalProjectionBefore": {
+    "programmes": 766,
+    "cycles": 766,
+    "mapSchools": 255,
+    "coveredSchools": 14,
+    "zeroProgrammeSchools": 241
+  },
+  "canonicalProjectionAfter": {
+    "programmes": 767,
+    "cycles": 767,
+    "mapSchools": 255,
+    "coveredSchools": 15,
+    "zeroProgrammeSchools": 240
+  },
+  "preservedEvidence": {
+    "uniqueOriginalFiles": 15,
+    "pinReferencesChecked": 30,
+    "files": [
+      {
+        "path": "quality/recovery-20261018/next-wave/ecnu/full-program-batch-approved-v1.json",
+        "sha256": "1289434eedd14e3bb8583cae9320a3e81459fad0e7d446128ece5a9bb3b04e22",
+        "bytes": 17422
+      },
+      {
+        "path": "quality/recovery-20261018/next-wave/ecnu/full-program-batch-draft-v1.json",
+        "sha256": "5d08d14ac779973019faac4564abb3886bb184d1f837a93f65acf1a15a310e2b",
+        "bytes": 17393
+      },
+      {
+        "path": "quality/recovery-20261018/next-wave/ecnu/independent-review-v1.json",
+        "sha256": "5781dab18334afc1b007b0a6fdd3f113275f2947d66947bb79b052afc7b83d73",
+        "bytes": 2176
+      },
+      {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-gcp-2027.html",
+        "sha256": "5aa5392cc221790673daf92171a2ce8d001a4a36f7c2e574f8b9ff8fb69b91cc",
+        "bytes": 107080
+      },
+      {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-gcp-2027.text.txt",
+        "sha256": "5366f5ff935488603a559eda14119da39ad0e38ce2aa83b8034efacaee466884",
+        "bytes": 17098
+      },
+      {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-gcp-2027.receipt.json",
+        "sha256": "3510d3ccb50073d32979efd0d2ed47d9e7d1d6eb0af9eb5fa71e2c36fea89a00",
+        "bytes": 8165
+      },
+      {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-gcp-2027.robots.txt",
+        "sha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+        "bytes": 196
+      },
+      {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-apply-https.html",
+        "sha256": "7a797c96061df064449cbb28f69867700509dcf164db1d797ad1f6d00cea64b0",
+        "bytes": 6287
+      },
+      {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-apply-https.text.txt",
+        "sha256": "52ab5cffacb495f0352318121f493d004e612844a1090cd4610bedb2bf0ab5a8",
+        "bytes": 960
+      },
+      {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-apply-https.receipt.json",
+        "sha256": "477c62908ef22b468499a1328218f2836b832a9c0aea28f3c9d6ed98d0cdd519",
+        "bytes": 2038
+      },
+      {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-apply-https.robots.txt",
+        "sha256": "217997338677cb4c6028849c2c69b11146e515f0bc49c01fa18a3e5f66201204",
+        "bytes": 1231
+      },
+      {
+        "path": "quality/recovery-20261018/next-wave/ecnu/full-program-batch-draft-v2.json",
+        "sha256": "bf29c85b2a2bc92d2a6d3c840a0aef2801738734d09956ff447420fc4bc35bd7",
+        "bytes": 17158
+      },
+      {
+        "path": "quality/recovery-20261018/next-wave/ecnu/independent-review-v2.json",
+        "sha256": "1451298ce41785b3c37ad98970fe225dfb93dd4315e6992d022b95f2d3e161e0",
+        "bytes": 8523
+      },
+      {
+        "path": "quality/recovery-20261018/next-wave/ecnu/full-program-batch-approved-v2.json",
+        "sha256": "62296edf5eff8b47b73775cb9d5cbce6100ef65d6cf249867a8cb90fa51e9a7c",
+        "bytes": 17355
+      },
+      {
+        "path": "quality/recovery-20261018/heartbeat-1621/ecnu-qualification/qualification-v1.json",
+        "sha256": "42aa8e895467bc98c2e062e111238e10efeccb0f7d0ff345496a8f72e9e199bd",
+        "bytes": 15991
+      }
+    ]
+  },
+  "pendingNineRouteCandidate": {
+    "checks": {
+      "deploymentIdMatchesPreApplyHealth": true,
+      "sourceCommitMatchesPreApplyHealth": true,
+      "proofPathMatchesPreApplyHealth": true,
+      "proofHashMatchesPreApplyHealth": true,
+      "lastStableReadbackExactlyMatchesPreApplySavedValue": true,
+      "rootApplicationResultPreservedCandidate": true,
+      "currentCandidatePromoted": true,
+      "allSixFrozenFilesRetainOriginalDualPins": true
+    },
+    "preApplyHealth": {
+      "path": "quality/recovery-20261018/heartbeat-1621/health/local-health-20261018T162436827Z.json",
+      "sha256": "21d75ce38c78a8deddee16fd595b3798ab56b2f5145c7a66481790357bc2a167",
+      "bytes": 9826
+    },
+    "frozenReleaseSourcePlan": {
+      "path": "quality/recovery-20261018/release/source-plan.json",
+      "sha256": "0c6074393602627b9a5770d3cf1b814bc96997b753f0095b137db1312a4f78fc",
+      "bytes": 132435
+    },
+    "originalSmokeProof": {
+      "path": "quality/recovery-20261018/release/candidate-smoke-20261018-v2/candidate-public-smoke.json",
+      "sha256": "6538e74cbd4735d64b97c8ea52ee8a80db75029c950ffbcb0629aeffb224f10d",
+      "bytes": 101254
+    },
+    "frozenSixData": [
+      {
+        "path": ".pipeline-build/recovery-six-school-20261018/content/data/sources.json",
+        "sha256": "ecb815fc1e739d71b111ef6068dcac6635e71fadea66653aa4a1d323dc12e430",
+        "bytes": 973751,
+        "matchesOriginalSmokeLeaf": true,
+        "matchesOriginalReleaseSourcePlan": true
+      },
+      {
+        "path": ".pipeline-build/recovery-six-school-20261018/content/data/cities.json",
+        "sha256": "50e70c4d3daeb872ccec74f9e18ffd2f235e0b51ffd6d657292ff51e59dc9756",
+        "bytes": 61094,
+        "matchesOriginalSmokeLeaf": true,
+        "matchesOriginalReleaseSourcePlan": true
+      },
+      {
+        "path": ".pipeline-build/recovery-six-school-20261018/content/data/universities.json",
+        "sha256": "192c67035dcbfdda25efb7fa6bf4e558e4f903f8dd180a59bdc0feb574e4518b",
+        "bytes": 355070,
+        "matchesOriginalSmokeLeaf": true,
+        "matchesOriginalReleaseSourcePlan": true
+      },
+      {
+        "path": ".pipeline-build/recovery-six-school-20261018/content/data/programs.json",
+        "sha256": "16241e17f574d40147571b36444711b93a3e752247d977d0ed5820bf866eb913",
+        "bytes": 7189347,
+        "matchesOriginalSmokeLeaf": true,
+        "matchesOriginalReleaseSourcePlan": true
+      },
+      {
+        "path": ".pipeline-build/recovery-six-school-20261018/content/data/admission-cycles.json",
+        "sha256": "3418d0c1b553881b814136d6027cdf8864115129a68b5501a25136519d3647ea",
+        "bytes": 2260839,
+        "matchesOriginalSmokeLeaf": true,
+        "matchesOriginalReleaseSourcePlan": true
+      },
+      {
+        "path": ".pipeline-build/recovery-six-school-20261018/content/data/scholarships.json",
+        "sha256": "598a8c56baa2b3e3645a975b0f6e4f62c227d37b6d7015d46063dab8a24eafd4",
+        "bytes": 724093,
+        "matchesOriginalSmokeLeaf": true,
+        "matchesOriginalReleaseSourcePlan": true
+      }
+    ],
+    "qualification": "Six frozen candidate data files match both original source-plan and original smoke manifest byte pins. Current candidate identity/commit/proof fields match the saved pre-application health observation; root result separately records full candidate-object preservation. This audit did not mutate or re-qualify publication."
+  },
+  "replayBoundary": {
+    "batchNowConsumed": true,
+    "applicationReceiptMustNeverBeOverwritten": true,
+    "doNotReplay": true,
+    "consumer": {
+      "path": "scripts/quality/approve-full-program-batch.ts",
+      "sha256": "5ce787f9ee8485b90508a1388bd5d628e7ed467f6673a7569a9710d5ed94b59e",
+      "bytes": 12533
+    },
+    "alreadyAppliedGuardPrecedesCanonicalRead": true,
+    "consumerWasNotInvokedByAuditor": true,
+    "heldV1WasNotConsumed": true
+  },
+  "currentOwnership": {
+    "canonicalOwner": null,
+    "canonicalWritesReleased": true,
+    "ownerLockAbsent": true,
+    "catalogLockAbsent": true
+  },
+  "stableBoundary": {
+    "lastStableReadback": {
+      "deploymentId": "dpl_36sjWb43vDSYppFRYysBjgSic6NZ",
+      "programs": 757,
+      "universitiesWithPrograms": 8,
+      "universitiesWithoutPrograms": 247,
+      "evaluatedForDate": "2026-10-19",
+      "proof": "quality/recovery-20261018/release/stable-public-readback-before-promotion-20261019.json",
+      "catalogBackend": "json"
+    },
+    "stableObservationPerformedByThisAudit": false,
+    "newStablePublication": false,
+    "newCanonicalRecordIsNotAStableSiteClaim": true
+  },
+  "scope": {
+    "canonicalWrites": 0,
+    "stateWrites": 0,
+    "gitWrites": 0,
+    "networkRequests": 0,
+    "paidCalls": 0,
+    "databaseWrites": 0,
+    "consumerOrReplayCalls": 0,
+    "candidateBuildPublishActions": 0,
+    "testsRerun": false
+  }
+}

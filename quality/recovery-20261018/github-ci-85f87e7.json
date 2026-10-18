@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "85f87e77b42221fd96e59110684932e291ea053b",
+  "runId": 39140972425,
+  "url": "https://github.com/computersciencefreshmen/StudyInChina/actions/runs/39140972425",
+  "conclusion": "failure",
+  "jobs": [
+    {
+      "id": 117715150511,
+      "conclusion": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Use Node.js 24",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install dependencies",
+          "conclusion": "success"
+        },
+        {
+          "name": "Audit production dependencies",
+          "conclusion": "success"
+        },
+        {
+          "name": "Lint",
+          "conclusion": "success"
+        },
+        {
+          "name": "Type-check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run unit tests",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Test full record audit",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Validate content data",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Enforce one public program per university",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Validate D1 migrations and database integrity",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Validate recursive source manifests",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run isolated extraction and prompt-injection regressions",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Validate scheduled maintenance capacity",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run ingestion Worker tests",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run Entity Materializer tests",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run publisher Worker tests",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run release builder Worker tests",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Validate ingestion Worker bundle and bindings",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Validate Entity Materializer Worker bundle and bindings",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Validate publisher Worker bundle and bindings",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Validate release builder Worker bundle and bindings",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Validate Catalog API Worker bundle and bindings",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Build production application",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Install Playwright Chromium",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run end-to-end tests against the production build",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Use Node.js 24",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "testTotals": [
+    "⎯⎯⎯⎯⎯⎯ Failed Tests 104 ⎯⎯⎯⎯⎯⎯",
+    " Test Files  45 failed | 153 passed (198)",
+    "      Tests  104 failed | 1431 passed | 1 skipped (1536)"
+  ],
+  "baselineAttribution": "The ten publication.test.ts failures have exact independently reproduced identities and error signatures at restored baseline7c44e16. The current full Linux run reports104 failures; this receipt does not claim all104 were re-attributed in this continuation.",
+  "draftRequired": true
+}

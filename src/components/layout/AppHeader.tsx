@@ -4,6 +4,7 @@ import { Suspense, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { SiteHeader } from '@/components/layout'
+import { CraftBrandMark } from '@/components/ui/CraftBrandMark'
 import { useFavorites } from '@/components/features/useFavorites'
 import { cx } from '@/components/ui/cx'
 import { isBetaLocale, localeNames, localizeNavigationHref, publicLocales, type LaunchLocale } from '@/i18n/config'
@@ -68,6 +69,7 @@ function HeaderContent({
       locale={locale}
       homeHref={`/${locale}`}
       brandName={messages.brand}
+      brandMark={<CraftBrandMark />}
       brandTagline={messages.shell.brandTagline}
       navLabel={messages.shell.navLabel}
       languageLabel={messages.common.language}
@@ -84,7 +86,7 @@ function HeaderContent({
         href: localizeNavigationHref(pathname, searchParams, code),
         active: code === locale,
       }))}
-      actions={<><NotificationLink locale={locale} active={pathname.startsWith(`/${locale}/notifications`)} /><ShortlistLink href={favoritesHref} label={messages.nav.favorites} active={favoritesActive} /><ThemePreference locale={locale} compact /></>}
+      actions={<><NotificationLink locale={locale} active={pathname.startsWith(`/${locale}/notifications`)} /><ShortlistLink href={favoritesHref} label={messages.nav.favorites} active={favoritesActive} /><ThemePreference locale={locale} compact defaultTheme="craft" /></>}
     />
     {isBetaLocale(locale) && showsCatalogData ? (
       <div className="atlas-container" role="note">

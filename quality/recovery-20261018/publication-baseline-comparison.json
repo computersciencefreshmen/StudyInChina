@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "comparedAt": "2026-10-18T15:33:09.168059+00:00",
+  "baselineCommit": "7c44e16b4dfb254cf499c7f9cc6f27aacfe3adad",
+  "baselineMethod": "Clean git archive extracted to ignored isolated directory; node_modules junction points to the current locked dependency installation. No source or canonical file was changed.",
+  "baselinePath": ".pipeline-build/recovery-publication-baseline-7c44e16",
+  "command": "node node_modules/vitest/vitest.mjs run tests/unit/publication.test.ts --reporter=json --outputFile=<distinct report path>",
+  "runScope": "publication.test.ts only; this is not a claim that the full unit suite passes.",
+  "results": {
+    "baseline": {
+      "numTotalTests": 16,
+      "numPassedTests": 6,
+      "numFailedTests": 10,
+      "reportPath": "quality/recovery-20261018/publication-baseline-7c44e16-native-results.json",
+      "reportSha256": "27d020d6307239d8d5ed60d2e8c38f53bdca6dd513b6b0242ba6431edfda3167"
+    },
+    "current": {
+      "numTotalTests": 16,
+      "numPassedTests": 6,
+      "numFailedTests": 10,
+      "reportPath": "quality/recovery-20261018/publication-current-native-results.json",
+      "reportSha256": "c47b7e9f8e7c236d8203d24d1e151ee36540437b0ef7d9280e4b093de43158a1"
+    }
+  },
+  "sameFailedTestIdentities": true,
+  "newFailures": [],
+  "removedFailures": [],
+  "sameFailureMessagesAfterWorkspacePathNormalization": true,
+  "failures": [
+    {
+      "fullName": "production publication policy filters relationship IDs and sources to the records that remain published",
+      "sameFailureMessageAfterWorkspacePathNormalization": true,
+      "baselineFailureSha256": "a3b08b42ffba545803c1c5604b6e76f9462068ca2be295eee8e374a41ab055e3",
+      "currentFailureSha256": "a3b08b42ffba545803c1c5604b6e76f9462068ca2be295eee8e374a41ab055e3",
+      "assertionSummary": "AssertionError: expected [] to deeply equal [ Array(1) ]"
+    },
+    {
+      "fullName": "production publication policy keeps a deadline through day 30 and removes expired cycles and scholarships on day 31",
+      "sameFailureMessageAfterWorkspacePathNormalization": true,
+      "baselineFailureSha256": "024d95a4db1388d934c8e7e0c2fab9933c0ac1557bcc41c53f24604b8cafc0ff",
+      "currentFailureSha256": "024d95a4db1388d934c8e7e0c2fab9933c0ac1557bcc41c53f24604b8cafc0ff",
+      "assertionSummary": "AssertionError: expected [] to have a length of 1 but got +0"
+    },
+    {
+      "fullName": "production publication policy keeps a verified identity with no announced cycle distinct from an expired cycle",
+      "sameFailureMessageAfterWorkspacePathNormalization": true,
+      "baselineFailureSha256": "41351fca8a7cc48af52990ae07064c3130ffb58bd1461ee892a0ca120612dbb8",
+      "currentFailureSha256": "41351fca8a7cc48af52990ae07064c3130ffb58bd1461ee892a0ca120612dbb8",
+      "assertionSummary": "AssertionError: expected [] to deeply equal [ Array(1) ]"
+    },
+    {
+      "fullName": "production publication policy keeps a verified program identity when its admission cycle expires",
+      "sameFailureMessageAfterWorkspacePathNormalization": true,
+      "baselineFailureSha256": "26471dfbd9d2365d1528dd7f5c3288ff9c29c745a909d76f92c64500a53c869c",
+      "currentFailureSha256": "26471dfbd9d2365d1528dd7f5c3288ff9c29c745a909d76f92c64500a53c869c",
+      "assertionSummary": "AssertionError: expected [] to have a length of 1 but got +0"
+    },
+    {
+      "fullName": "production publication policy keeps overdue and explicitly stale profiles but maps overdue verified profiles to stale",
+      "sameFailureMessageAfterWorkspacePathNormalization": true,
+      "baselineFailureSha256": "29548e816d51c59d39bdaf5546c9818d341e5fcec155ff55700bfd378ccc21be",
+      "currentFailureSha256": "29548e816d51c59d39bdaf5546c9818d341e5fcec155ff55700bfd378ccc21be",
+      "assertionSummary": "TypeError: Cannot read properties of undefined (reading 'status')"
+    },
+    {
+      "fullName": "production publication policy keeps overdue identities but excludes overdue dynamic facts",
+      "sameFailureMessageAfterWorkspacePathNormalization": true,
+      "baselineFailureSha256": "76b4a5b21db376a76c8a54bae003b43cea6449f4da851d4d20de0ff12828fa01",
+      "currentFailureSha256": "76b4a5b21db376a76c8a54bae003b43cea6449f4da851d4d20de0ff12828fa01",
+      "assertionSummary": "AssertionError: expected [] to have a length of 1 but got +0"
+    },
+    {
+      "fullName": "production publication policy keeps rolling and officially unannounced deadlines public",
+      "sameFailureMessageAfterWorkspacePathNormalization": true,
+      "baselineFailureSha256": "0e7772949ff7927e1df1154e6aa24b6bd13b8793c64d74e8157af85fe03e963a",
+      "currentFailureSha256": "0e7772949ff7927e1df1154e6aa24b6bd13b8793c64d74e8157af85fe03e963a",
+      "assertionSummary": "AssertionError: expected [] to have a length of 1 but got +0"
+    },
+    {
+      "fullName": "production publication policy keeps stale identities discoverable while masking stale decision facts",
+      "sameFailureMessageAfterWorkspacePathNormalization": true,
+      "baselineFailureSha256": "a22cdd30009d33a9da2b397f2448eb654384593815d3ceda4b156c28e1870600",
+      "currentFailureSha256": "a22cdd30009d33a9da2b397f2448eb654384593815d3ceda4b156c28e1870600",
+      "assertionSummary": "AssertionError: expected [] to have a length of 1 but got +0"
+    },
+    {
+      "fullName": "production publication policy publishes only records whose related entities remain public",
+      "sameFailureMessageAfterWorkspacePathNormalization": true,
+      "baselineFailureSha256": "78a13788cca95ccf0742b422ccb17a47cd6e252cbd86242e2b36c9b9808941d0",
+      "currentFailureSha256": "78a13788cca95ccf0742b422ccb17a47cd6e252cbd86242e2b36c9b9808941d0",
+      "assertionSummary": "AssertionError: expected 0 to be greater than or equal to 10"
+    },
+    {
+      "fullName": "production publication policy treats reviewAfter as inclusive through the end of that calendar date",
+      "sameFailureMessageAfterWorkspacePathNormalization": true,
+      "baselineFailureSha256": "fc33b6118ca742491f11a01db23dee7fc3fbd6f2dffa390c2a199edf80346109",
+      "currentFailureSha256": "fc33b6118ca742491f11a01db23dee7fc3fbd6f2dffa390c2a199edf80346109",
+      "assertionSummary": "AssertionError: expected [] to have a length of 1 but got +0"
+    }
+  ],
+  "codeInputComparison": [
+    {
+      "path": "tests/unit/publication.test.ts",
+      "baselineSha256": "72f839875e9a1676dd506991b81c1602375e05108df4aa78d1dbe0b02b04a2a5",
+      "currentSha256": "72f839875e9a1676dd506991b81c1602375e05108df4aa78d1dbe0b02b04a2a5",
+      "same": true
+    },
+    {
+      "path": "src/lib/data/publication.ts",
+      "baselineSha256": "7c5e12af5eb0008b8827f56dd6b5e47fd5f3ffe9e9db1aebca9db64cb0f8f71d",
+      "currentSha256": "7c5e12af5eb0008b8827f56dd6b5e47fd5f3ffe9e9db1aebca9db64cb0f8f71d",
+      "same": true
+    },
+    {
+      "path": "src/lib/data/freshness.ts",
+      "baselineSha256": "3b62bc28c9670e07754ea068436da069a6affb992a795b3626c14d7f656aebf3",
+      "currentSha256": "3b62bc28c9670e07754ea068436da069a6affb992a795b3626c14d7f656aebf3",
+      "same": true
+    },
+    {
+      "path": "src/lib/data/admission.ts",
+      "baselineSha256": "34d5a85904f545695bb7be520d03f5707ab57b6cbfd93ec5a6ae9ef3ea5db523",
+      "currentSha256": "34d5a85904f545695bb7be520d03f5707ab57b6cbfd93ec5a6ae9ef3ea5db523",
+      "same": true
+    },
+    {
+      "path": "src/lib/data/schema.ts",
+      "baselineSha256": "f1f0d21179a35e86f988cad39cf162052742c399b4342199e5b3ae91dc6d27bf",
+      "currentSha256": "f1f0d21179a35e86f988cad39cf162052742c399b4342199e5b3ae91dc6d27bf",
+      "same": true
+    },
+    {
+      "path": "src/lib/data/types.ts",
+      "baselineSha256": "4dbedeb8cb5aa461446350e1d72b575ece121ff506b64f86e1b72ceac1f4a742",
+      "currentSha256": "4dbedeb8cb5aa461446350e1d72b575ece121ff506b64f86e1b72ceac1f4a742",
+      "same": true
+    },
+    {
+      "path": "src/lib/data/duration.ts",
+      "baselineSha256": "5cdfcbf6e3b913c9f268a32083592288adc58ac413d789b2ee913e097c913d62",
+      "currentSha256": "5cdfcbf6e3b913c9f268a32083592288adc58ac413d789b2ee913e097c913d62",
+      "same": true
+    }
+  ],
+  "sandboxAttemptNotes": "Initial sandbox runs failed during Vite temporary-cache EPERM rename before executing any tests; those distinct zero-test reports were preserved. Native runs then executed16tests each. No tests were skipped or assertions altered.",
+  "preservedRunnerFailureReports": [
+    "quality/recovery-20261018/publication-baseline-7c44e16-results.json",
+    "quality/recovery-20261018/publication-current-results.json"
+  ],
+  "canonicalWrites": 0,
+  "cloudWrites": 0
+}

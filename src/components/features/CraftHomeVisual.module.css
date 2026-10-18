@@ -1,0 +1,105 @@
+.home { color: var(--atlas-ink); padding-bottom: 5rem; }
+.hero { max-width: 78rem; margin: 0 auto; padding: 5.5rem 1.5rem 0; text-align: center; }
+.eyebrow { margin: 0 0 1.4rem; color: var(--atlas-muted); font-size: .75rem; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; }
+.hero h1 { max-width: 56rem; margin: 0 auto; font-family: var(--atlas-font-display); font-size: 66px; font-weight: 400; line-height: 1; letter-spacing: -.03em; text-wrap: balance; }
+.intro { max-width: 42rem; margin: 1.65rem auto 0; color: var(--atlas-ink-soft); font-size: 1.12rem; line-height: 1.65; text-wrap: pretty; }
+.actions { display: flex; justify-content: center; flex-wrap: wrap; gap: .7rem; margin-top: 1.9rem; }
+.actions a { display: inline-flex; align-items: center; justify-content: center; gap: .8rem; min-height: 3.2rem; padding: .7rem 1.4rem; border: 1px solid var(--atlas-line); border-radius: 999px; background: var(--atlas-paper-bright); color: var(--atlas-ink); font-size: .92rem; font-weight: 500; text-decoration: none; transition: transform 180ms ease, box-shadow 180ms ease; }
+.actions a:first-child { border-color: var(--atlas-ink); background: var(--atlas-ink); color: var(--atlas-paper-bright); }
+.actions a:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgb(20 30 35 / .08); }
+.actions a:focus-visible, .note:focus-visible, .universityLink:focus-visible { outline: 2px solid var(--atlas-jade); outline-offset: 5px; }
+.collage { position: relative; max-width: 68rem; height: 430px; margin: 3rem auto 0; isolation: isolate; text-align: left; }
+.bluePaper { position: absolute; z-index: -2; inset: 64px 5% 38px; border-radius: 1.6rem; background: var(--atlas-blue-pale, #dfeafa); transform: rotate(2deg); }
+.paperShadow { position: absolute; z-index: -1; width: 52%; height: 298px; left: 25%; top: 45px; border: 1px solid var(--atlas-line); border-radius: 1rem; background: var(--atlas-paper-muted); transform: rotate(1.5deg); }
+.routeDrawing { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; color: var(--atlas-ink-soft); opacity: .48; }
+.planner { position: absolute; width: 52%; left: 24%; top: 34px; padding: 1.1rem 1.3rem; border: 1px solid color-mix(in srgb, var(--atlas-line) 65%, transparent); border-radius: 1rem; background: var(--atlas-paper-bright); box-shadow: 0 18px 45px rgb(27 39 47 / .07); transform: rotate(-3deg); }
+.search { display: flex; align-items: center; gap: .7rem; padding: .5rem .55rem .5rem .85rem; border: 1px solid var(--atlas-line); border-radius: 999px; }
+.search > svg { flex: 0 0 20px; width: 20px; height: 20px; color: var(--atlas-muted); }
+.search input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--atlas-ink); font: inherit; font-size: .85rem; }
+.search input::placeholder { color: var(--atlas-muted); opacity: 1; }
+.search:focus-within { outline: 2px solid var(--atlas-jade); outline-offset: 3px; }
+.search button { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--atlas-ink); color: var(--atlas-paper-bright); font-size: 1.1rem; cursor: pointer; }
+.campus { width: 90%; margin: .8rem auto 0; color: var(--atlas-ink-soft); }
+.campus svg { display: block; width: 100%; height: auto; }
+.universityLink { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin: .25rem .3rem .1rem; color: var(--atlas-ink); font-size: 1.05rem; text-decoration: none; }
+.universityLink > span:first-child { font-family: var(--atlas-font-display); font-size: 1.75rem; font-weight: 400; }
+.universityLink > span:last-child { color: var(--atlas-muted); font-size: .9rem; white-space: nowrap; }
+.universityLink i, .note i { margin-left: .7rem; font-style: normal; }
+.note { position: absolute; display: flex; flex-direction: column; width: 174px; padding: 1.2rem 1.35rem 1rem; border: 1px solid rgb(35 44 51 / .05); border-radius: .65rem; box-shadow: 0 8px 20px rgb(25 35 42 / .04); color: var(--atlas-ink); text-decoration: none; transition: translate 180ms ease, box-shadow 180ms ease; }
+.note > svg { width: 68px; height: 46px; margin-bottom: .6rem; color: var(--atlas-ink-soft); }
+.note > span { font-family: var(--atlas-font-display); font-size: 1.6rem; line-height: 1.2; overflow-wrap: anywhere; }
+.note small { display: flex; justify-content: space-between; margin-top: .55rem; color: var(--atlas-ink-soft); font-size: .82rem; }
+.note:hover { translate: 0 -5px; box-shadow: 0 13px 30px rgb(25 35 42 / .1); }
+.programNote { top: 45px; right: 3%; background: var(--atlas-jade-pale); transform: rotate(9deg); }
+.guideNote { top: 180px; left: 4%; background: var(--atlas-vermilion-pale); transform: rotate(-9deg); }
+.cityNote { top: 246px; right: 10%; background: var(--atlas-gold-pale); transform: rotate(7deg); }
+.section { max-width: 74rem; margin: 0 auto; padding: 4.8rem 1.5rem; }
+.sectionHeading { max-width: 43rem; margin: 0 auto 2.8rem; text-align: center; }
+.sectionHeading h2 { margin: .8rem 0 1rem; font-family: var(--atlas-font-display); font-size: 54px; font-weight: 400; line-height: 1.1; letter-spacing: -.03em; text-wrap: balance; }
+.sectionHeading p { margin: .7rem auto 0; color: var(--atlas-muted); font-size: 1rem; line-height: 1.65; text-wrap: pretty; }
+.sectionHeading > a { display: inline-block; margin-top: 1rem; color: var(--atlas-ink); text-decoration: none; font-size: .85rem; }
+.sectionHeading > a:hover { text-decoration: underline; text-underline-offset: .25rem; }
+.ledger { max-width: 64rem; margin: 0 auto; padding: 1rem 1.5rem 4.5rem; }
+.metrics { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; padding: 1.5rem 0; border-top: 1px solid var(--atlas-line); border-bottom: 1px solid var(--atlas-line); text-align: center; }
+.metrics > div { padding: .6rem 1rem; }
+.metrics > div + div { border-left: 1px solid var(--atlas-line); }
+.metrics dt { color: var(--atlas-muted); font-size: .78rem; }
+.metrics dd { margin: .25rem 0 0; font-family: var(--atlas-font-display); font-size: 2.65rem; font-weight: 400; line-height: 1.15; letter-spacing: -.03em; }
+.sourceLine { display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem 1.5rem; margin: 1.2rem 0 0; color: var(--atlas-muted); font-size: .74rem; text-align: center; }
+.sourceLine a { color: inherit; text-underline-offset: .25rem; }
+.pathway { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 0; list-style: none; }
+.pathway li { min-width: 0; }
+.pathway a { display: block; height: 100%; padding: 1.5rem 1.35rem; border: 1px solid var(--atlas-line); border-radius: 1.05rem; color: var(--atlas-ink); text-decoration: none; transition: background 180ms ease, translate 180ms ease; }
+.pathway li:nth-child(2) a { background: var(--atlas-blue-pale); border-color: transparent; }
+.pathway li:nth-child(3) a { background: var(--atlas-jade-pale); border-color: transparent; }
+.pathway li:nth-child(4) a { background: var(--atlas-vermilion-pale); border-color: transparent; }
+.pathway a:hover { translate: 0 -4px; }
+.stepTop { display: flex; justify-content: space-between; margin-bottom: 2.2rem; color: var(--atlas-muted); font-size: .8rem; }
+.pathway h3 { margin: 0 0 .7rem; font-family: var(--atlas-font-display); font-size: 1.75rem; font-weight: 400; line-height: 1.15; letter-spacing: -.02em; }
+.pathway p { margin: 0; color: var(--atlas-ink-soft); font-size: .84rem; line-height: 1.65; }
+.home :global(.content-grid) { gap: 1.4rem; }
+.home :global(.atlas-card) { border-radius: 1rem; box-shadow: none; }
+.fieldGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+.field { display: flex; flex-direction: column; gap: .5rem; padding: 1.35rem 1.5rem; border: 1px solid var(--atlas-line); border-radius: 1rem; color: var(--atlas-ink); text-decoration: none; transition: background 180ms ease; }
+.field:hover { background: var(--atlas-paper-bright); }
+.field b { font-family: var(--atlas-font-display); font-size: 1.5rem; font-weight: 400; }
+.field small { color: var(--atlas-muted); line-height: 1.55; }
+.field > span { display: flex; justify-content: space-between; margin-top: .5rem; color: var(--atlas-ink-soft); font-size: .78rem; }
+.cityFrame { overflow: hidden; border: 1px solid var(--atlas-line); border-radius: 1.5rem; }
+.guideGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.guideCard { display: flex; flex-direction: column; padding: 2rem; border-radius: 1.1rem; background: var(--atlas-blue-pale); color: var(--atlas-ink); text-decoration: none; transition: translate 180ms ease; }
+.guideCard:nth-child(2) { background: var(--atlas-jade-pale); }
+.guideCard:nth-child(3) { background: var(--atlas-gold-pale); }
+.guideCard:hover { translate: 0 -4px; }
+.guideNumber { color: var(--atlas-muted); font-size: .75rem; }
+.guideCard h3 { margin: 2rem 0 1rem; font-family: var(--atlas-font-display); font-size: 1.9rem; font-weight: 400; line-height: 1.2; letter-spacing: -.02em; }
+.guideCard p { flex: 1; margin: 0 0 1.5rem; color: var(--atlas-ink-soft); font-size: .9rem; line-height: 1.65; }
+.guideCard > span:last-child { display: flex; justify-content: space-between; font-size: .8rem; }
+.principle { max-width: 42rem; margin: 1.5rem auto 0; color: var(--atlas-muted); font-size: .78rem; text-align: center; text-wrap: pretty; }
+.home:lang(zh) .hero h1, .home:lang(zh) .sectionHeading h2 { letter-spacing: -.02em; }
+@media (max-width: 900px) {
+  .hero { padding-top: 3.7rem; } .hero h1 { max-width: 45rem; font-size: 58px; }
+  .collage { height: 390px; } .planner { width: 57%; left: 20%; }
+  .note { width: 145px; padding: 1rem; } .programNote { right: 0; } .guideNote { left: 0; } .cityNote { top: 230px; right: 3%; } .note > span { font-size: 1.35rem; }
+  .pathway { grid-template-columns: repeat(2, 1fr); } .section { padding-top: 3.5rem; padding-bottom: 3.5rem; } .sectionHeading h2 { font-size: 46px; } .fieldGrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .hero { padding: 3rem 1.2rem 0; } .hero h1 { font-size: 44px; line-height: 1.06; }
+  .eyebrow { font-size: .68rem; letter-spacing: .06em; margin-bottom: 1.1rem; } .intro { font-size: 1rem; margin-top: 1.3rem; }
+  .actions { margin-top: 1.5rem; gap: .5rem; } .actions a { padding: .65rem 1.05rem; min-height: 2.9rem; font-size: .83rem; }
+  .collage { height: 430px; margin-top: 1.8rem; } .bluePaper { inset: 60px -1% 40px; transform: rotate(2deg); }
+  .planner { width: 87%; left: 5%; top: 40px; padding: .9rem; } .paperShadow { width: 85%; left: 8%; top: 49px; height: 235px; }
+  .search { gap: .5rem; } .search input { font-size: .76rem; } .campus { width: 94%; margin-top: .5rem; }
+  .universityLink > span:first-child { font-size: 1.35rem; } .universityLink > span:last-child { font-size: .78rem; }
+  .note { width: 30%; padding: .85rem .75rem; } .note > svg { width: 46px; height: 32px; margin-bottom: .35rem; } .note > span { font-family: var(--atlas-font-sans); font-size: .82rem; line-height: 1.35; } .note small { font-size: .73rem; }
+  .programNote { top: 286px; right: 35%; transform: rotate(2deg); } .guideNote { top: 278px; left: 1%; transform: rotate(-7deg); } .cityNote { top: 282px; right: 1%; transform: rotate(8deg); } .routeDrawing { opacity: .3; }
+  .ledger { padding: 0 1.2rem 2rem; } .metrics { grid-template-columns: repeat(2, 1fr); gap: 1.1rem 0; } .metrics > div:nth-child(3) { border-left: 0; } .metrics dt { font-size: .7rem; } .metrics dd { font-size: 2.1rem; }
+  .section { padding: 2.7rem 1.2rem; } .sectionHeading { margin-bottom: 1.8rem; } .sectionHeading h2 { font-size: 36px; line-height: 1.12; } .sectionHeading p { font-size: .9rem; }
+  .pathway { gap: .65rem; } .pathway a { padding: 1.1rem 1rem; } .stepTop { margin-bottom: 1.3rem; } .pathway h3 { font-size: 1.3rem; } .pathway p { font-size: .76rem; }
+  .fieldGrid { grid-template-columns: 1fr; } .field { padding: 1.1rem 1.2rem; } .guideGrid { grid-template-columns: 1fr; } .guideCard { padding: 1.5rem; } .guideCard h3 { margin-top: 1.2rem; font-size: 1.65rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .actions a, .note, .pathway a, .field, .guideCard { transition: none; }
+  .actions a:hover, .note:hover, .pathway a:hover, .guideCard:hover { translate: none; }
+  .actions a:hover { transform: none; }
+}

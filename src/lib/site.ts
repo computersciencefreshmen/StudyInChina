@@ -25,8 +25,20 @@ export function requireLocale(value: string): LaunchLocale | null {
 
 export type PageSearchParams = Record<string, string | string[] | undefined>
 
+// Campaign labels do not change catalogue content. Keep the list explicit so
+// unknown parameters and real filters still use the conservative noindex gate.
+const campaignParameters = new Set([
+  'utm_source',
+  'utm_medium',
+  'utm_campaign',
+  'utm_content',
+  'utm_term',
+  'utm_id',
+  'utm_source_platform',
+])
+
 export function hasSearchParameters(params: PageSearchParams): boolean {
-  return Object.keys(params).length > 0
+  return Object.keys(params).some(key => !campaignParameters.has(key))
 }
 
 type PageMetadataOptions = {

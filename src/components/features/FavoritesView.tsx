@@ -14,6 +14,7 @@ import type {
   ProgramRecord,
 } from '@/lib/catalog-api/types'
 import { formatCny, formatDate, localize } from '@/lib/data/format'
+import { formatProgramDuration } from '@/lib/data/duration'
 import { getApplicationState, type ApplicationState } from '@/lib/data/admission'
 import { degreeLabels, disciplineLabels, languageLabel } from '@/lib/data/labels'
 import { getTodayDate, isCurrentVerifiedRecord } from '@/lib/data/freshness'
@@ -91,11 +92,8 @@ function tuitionLabel(cycle: AdmissionCycleRecord | null, locale: LaunchLocale, 
   return `${formatCny(cycle.tuitionCny, locale, messages.common.unknown)} / ${periods[cycle.tuitionPeriod || 'other']}`
 }
 
-function durationLabel(program: ProgramRecord, messages: Messages) {
-  if (!program.durationMonths) return messages.common.unknown
-  return program.durationMonthsMax && program.durationMonthsMax !== program.durationMonths
-    ? `${program.durationMonths}–${program.durationMonthsMax} ${messages.common.months}`
-    : `${program.durationMonths} ${messages.common.months}`
+function durationLabel(program: ProgramRecord, locale: LaunchLocale, messages: Messages) {
+  return formatProgramDuration(program, locale, messages.common.months) ?? messages.common.unknown
 }
 
 function comparisonFactStatus(
@@ -313,7 +311,7 @@ export function FavoritesView({
               <div><dt>{copy.university}</dt><dd>{localize(program.university.name, locale)}</dd></div>
               <div><dt>{messages.programs.degree}</dt><dd>{degreeLabels(locale)[program.degreeLevel]}</dd></div>
               <div><dt>{messages.common.language}</dt><dd><FactValue locale={locale} status={comparisonFactStatus(program, 'teachingLanguages', program.teachingLanguages?.length ? program.teachingLanguages : null, today)} value={program.teachingLanguages?.length ? program.teachingLanguages.map((item) => languageLabel(item, locale)).join(', ') : undefined} /></dd></div>
-              <div><dt>{messages.common.duration}</dt><dd><FactValue locale={locale} status={comparisonFactStatus(program, 'durationMonths', program.durationMonths, today)} value={durationLabel(program, messages)} /></dd></div>
+              <div><dt>{messages.common.duration}</dt><dd><FactValue locale={locale} status={comparisonFactStatus(program, program.durationText ? 'durationText' : 'durationMonths', program.durationText ?? program.durationMonths, today)} value={durationLabel(program, locale, messages)} /></dd></div>
               <div><dt>{messages.programs.applicationStatus}</dt><dd>{needsReview ? messages.common.stale : applicationStateLabel(currentCycle, messages, today)}</dd></div>
               <div><dt>{decision.currentCycle}</dt><dd>{currentCycle?.academicYear ?? messages.common.unknown}</dd></div>
               <div><dt>{messages.common.tuition}</dt><dd><FactValue locale={locale} status={comparisonFactStatus(currentCycle, 'tuitionCny', currentTuition, today, programNeedsReview)} value={currentTuition == null ? undefined : tuitionLabel(currentCycle, locale, messages)} /></dd></div>

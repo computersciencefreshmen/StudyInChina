@@ -43,6 +43,8 @@ export type AdminRun = {
   summaryAt: string | null; fatal: string | null; tokenUsage: TokenUsage
 }
 export type AdminSnapshot = {
+  continuousPipeline?: import('./minimax-continuous-contract').MiniMaxContinuousStatus | null
+  catalogMaintenance?: import('./catalog-maintenance-contract').CatalogMaintenanceObservation | null
   generatedAt: string
   telemetry?: { source: 'local' | 'remote' | 'unavailable'; observedAt: string | null; stale: boolean }
   catalog: {

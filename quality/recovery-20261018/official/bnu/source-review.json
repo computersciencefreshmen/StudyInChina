@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "codex-subagent-refresh-official",
+  "reviewedAt": "2026-10-18T14:02:56Z",
+  "scope": "Independent fresh-source semantic review; does not approve an unseen program batch or mutate canonical content",
+  "status": "fresh-source-reviewed-ready-for-batch-comparison",
+  "sourceReceipt": "quality/recovery-20261018/official/bnu/bnu-spring-2027.receipt.json",
+  "sourceSha256": "306e935bedf7b53ba3ee86825ccac63f7a1675747607f80dce56b494168bbef7",
+  "textSha256": "e51d12edd6dcc0f3b20b8045aff3873e578354240ab8b477a4df7d927ed94db8",
+  "comparison": {
+    "priorSha256SuppliedByParent": "306e935bedf7b53ba3ee86825ccac63f7a1675747607f80dce56b494168bbef7",
+    "freshBytesMatchPriorSuppliedDigest": true,
+    "meaning": "A new HTTP 200 capture was obtained. The unchanged digest compares bytes; the old retrieval date was not reused."
+  },
+  "sourceDateCaveats": [
+    "The page visibly states Date:2020-11-26 and the PubDate meta tag is 2020-11-26 10:11:00. Do not replace that publication date with the 2026 capture date.",
+    "The body explicitly titles itself Beijing Normal University 2027 Admission Brochure for Undergraduate Credit Program (Chinese-taught) and explicitly lists the March 2027 spring intake and 2026 application dates.",
+    "The autumn paragraph still refers to September 2026 and its already closed March–June 2026 application window. Do not roll it forward to autumn 2027.",
+    "The linked undergraduate majors catalog is labeled 2026. The page can support a general non-degree credit-study program; it does not establish a current 2027 degree-major catalog."
+  ],
+  "fields": {
+    "title": {"value": "Chinese-taught Undergraduate Credit Program (General Advanced Studies Student)", "quote": "Beijing Normal University 2027 Admission Brochure for Undergraduate Credit Program (Chinese-taught)"},
+    "classification": {"value": "non-degree undergraduate-credit advanced studies", "quote": "The undergraduate credit program accepts international students who are in the second year of university (including) or above. They can take undergraduate courses in BNU schools and colleges as general advanced studies students.", "evidence": "Official page route and navigation are under Non-Degree Program. This is not a bachelor's-degree admission offer."},
+    "durationText": {"en": "One semester or one academic year", "zh": "一学期或一学年", "quote": "The study period is one semester or one academic year.", "durationMonths": null},
+    "teachingLanguage": {"value": "Chinese", "quote": "CHINESE-TAUGHT UNDERGRADUATE CREDIT PROGRAM"},
+    "applicationPeriod": {"opensOn": "2026-10-10", "closesOn": "2026-12-15", "quote": "Spring Semester (starting in March 2027) : October 10, 2026 -- December 15, 2026", "supplementaryDocumentsDeadline": "2026-12-20", "supplementaryQuote": "If requested to supplement materials, the deadline for re-submission is December 20."},
+    "intake": {"value": "March 2027", "exactStartDate": null},
+    "applicationUrl": {"value": "https://international.bnu.edu.cn/", "quote": "Log on to Beijing Normal University Online Application System For International Students at https://international.bnu.edu.cn/"},
+    "tuition": {
+      "currency": "CNY",
+      "liberalArts": {"semester": 11600, "academicYear": 22400},
+      "scienceEngineeringArtsPE": {"semester": 13050, "academicYear": 25300},
+      "quotes": ["Liberal Arts: RMB 11600 per semester; RMB 22400 per academic year.", "Science, Engineering, Arts, P.E.: RMB 13050 per semester; RMB 25300 per academic year."],
+      "condition": "The lower liberal-arts amount cannot be represented as the fee for every subject. Preserve the full subject-dependent schedule."
+    },
+    "applicationFee": {"amount": 450, "currency": "CNY", "refundable": false, "waiver": "Exchange students may be exempt according to the relevant agreement.", "quotes": ["pay the application fee of 450 RMB.", "Application fees can be waived for exchange students according to the relevant agreement.", "The application fee is non-refundable. It will not be returned regardless of whether the applicant is admitted by the institution."]},
+    "languageRequirements": [
+      {"condition": "Teaching Chinese to Speakers of Other Languages", "test": "HSK 4", "minimum": 180, "quote": "A minimum score of 180 or above in the HSK test (Level 4) is required for the major of Teaching Chinese to Speakers of Other Languages."},
+      {"condition": "Other subjects", "test": "HSK 5", "minimum": 180, "quote": "A minimum score of 180 or above in the HSK test (Level 5) is required for other majors."},
+      {"condition": "Prior or current academic qualification taught in Chinese", "exemption": "HSK report submission waived with institutional proof of Chinese teaching medium.", "quote": "Applicants with prior/current academic qualifications taught in Chinese are exempt from submitting HSK score reports."}
+    ],
+    "eligibility": [
+      "Good health and good character; respect Chinese habits and customs; obey Chinese law and university rules.",
+      "Non-Chinese citizen aged 18–45, holding a valid foreign passport.",
+      "Second year of university or above.",
+      "Chinese proficiency at the subject-dependent HSK 4/5 threshold or the stated Chinese-medium qualification evidence exemption."
+    ],
+    "materials": [
+      {"number": 1, "required": true, "value": "BNU International Students Application Form completed through the official online application system."},
+      {"number": 2, "required": true, "value": "Passport bio page; applicants who have a Chinese visa also supply the recent visa page."},
+      {"number": 3, "required": true, "value": "Final degree certificate or certificate of enrollment."},
+      {"number": 4, "required": true, "value": "Transcript of the final academic study period."},
+      {"number": 5, "required": true, "value": "HSK certificate and transcript, or an institution-issued certificate that the previous/current qualification was taught in Chinese."},
+      {"number": 6, "required": true, "value": "A teacher's recommendation letter; no fixed format, but it must carry the teacher's signature."},
+      {"number": 7, "required": "except exchange students", "value": "Non-criminal record."},
+      {"number": 8, "required": "unless exchange agreement grants waiver", "value": "RMB 450 application fee paid through the applicant's personal online account; non-refundable."}
+    ],
+    "documentConditions": [
+      "All application documents must be Chinese or English; documents in other languages require notarized Chinese or English translations.",
+      "Applicants attending a higher education institution in China during application must, if admitted, supply its completion or graduation certificate at registration.",
+      "After preliminary review, download and print the system-generated application form, sign it and email its scan to nondegree@bnu.edu.cn according to instructions.",
+      "An online interview may be required."
+    ],
+    "accommodation": {"fixedRateVerified": false, "value": "Single and double rooms are mentioned; fee information is delegated to the International Student Office website, and admitted applicants apply online. Do not invent accommodation rates."},
+    "scholarship": {"value": "The page lists general university scholarship programs with separate application instructions.", "fixedAwardOrProgramEligibilityVerified": false}
+  },
+  "noInferenceRules": [
+    "Do not classify the program as a bachelor's degree.",
+    "Do not convert a semester or academic year to a guessed month count.",
+    "Do not use December 20 as the initial application deadline.",
+    "Do not drop the separate subject fee scales, the conditional exchange fee exemption, or the Chinese-medium qualification HSK-report exemption.",
+    "Do not extend the already closed autumn 2026 intake to another year.",
+    "Do not extract a new 2027 bachelor's-major catalog from the linked 2026 catalog."
+  ]
+}

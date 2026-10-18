@@ -5,6 +5,7 @@ import { InvalidCursorError } from './sql-cursor'
 import { chinaCalendarDate, InvalidSearchQueryError } from './sql-data'
 import { handleAdminTelemetry } from './admin-telemetry'
 import { handleAdminExecutor } from './admin-executor'
+import { handleAdminReleases } from './admin-releases'
 
 const RELEASE_ID_PATTERN = /^[A-Za-z0-9._:-]{1,160}$/
 const PRIVATE_CACHE = 'private, max-age=60, stale-while-revalidate=300'
@@ -392,6 +393,7 @@ async function handle(request: Request, env: CatalogApiEnv) {
   const url = new URL(request.url)
   if (url.pathname === '/internal/v1/admin-telemetry') return handleAdminTelemetry(request, env)
   if (url.pathname === '/internal/v1/admin-executor') return handleAdminExecutor(request, env)
+  if (url.pathname === '/internal/v1/admin-releases') return handleAdminReleases(request, env)
   if (request.method === 'OPTIONS' && url.pathname.startsWith('/api/v1/')) {
     return new Response(null, {
       status: 204,

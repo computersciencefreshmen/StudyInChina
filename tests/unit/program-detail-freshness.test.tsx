@@ -39,6 +39,22 @@ beforeEach(() => {
 afterEach(() => { vi.restoreAllMocks() })
 
 describe('program detail evidence and freshness', () => {
+  it.each([false, true])('renders official weeks in the %s complete detail branch without an invented ISO duration', async complete => {
+    const data = bundle(complete)
+    data.programs[0].durationMonths = null
+    data.programs[0].durationText = { en: '16 weeks' }
+    vi.mocked(getCatalogData).mockResolvedValue(data)
+    const { container } = render(await ProgramDetailPage({ params: Promise.resolve({ locale: 'en', slug: 'program' }) }))
+    expect(screen.getAllByText('16 weeks').length).toBeGreaterThan(0)
+    expect(container).not.toHaveTextContent('null months')
+    const script = container.querySelector('script[type="application/ld+json"]')
+    if (complete) {
+      expect(script).not.toBeNull()
+      expect(JSON.parse(script!.textContent ?? '{}')).not.toHaveProperty('timeToComplete')
+    }
+    expect(container.innerHTML).not.toContain('PnullM')
+  })
+
   it.each([
     ['program', ProgramDetailPage],
     ['university', UniversityDetailPage],

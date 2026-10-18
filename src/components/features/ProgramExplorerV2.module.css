@@ -87,6 +87,54 @@
   margin-top: 1.5rem;
 }
 
+:global(.atlas-public) .primaryGrid,
+:global(.atlas-public) .advancedGrid { gap: 1rem; }
+:global(.atlas-public) .quickFilters { gap: .5rem; margin-bottom: 1.25rem; }
+:global(.atlas-public) .quickFilter { display: inline-flex; min-height: 2.75rem; align-items: center; padding: .65rem 1rem; border-radius: .3rem; background: var(--atlas-paper-bright); font-size: .79rem; font-weight: 650; }
+:global(.atlas-public) .isActive { color: var(--atlas-paper-bright); border-color: var(--atlas-jade-dark); background: var(--atlas-jade-dark); }
+:global(.atlas-public) .advanced { margin-top: 1.25rem; }
+:global(.atlas-public) .advanced summary { display: flex; align-items: center; min-height: 2.75rem; padding: .9rem 0; font-size: .78rem; font-weight: 650; }
+:global(.atlas-public) .advancedGrid { padding-block: .4rem 1.2rem; }
+:global(.atlas-public) .actions { justify-content: flex-end; margin-top: 1rem; }
+
+/* Universities share this filter surface with programs. */
+:global(html[data-design='craft'] .atlas-public) .panel {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--atlas-paper-bright);
+  border: 1px solid var(--atlas-line);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgb(3 3 2 / 2%);
+}
+
+:global(html[data-design='craft'] .atlas-public) .primaryGrid,
+:global(html[data-design='craft'] .atlas-public) .advancedGrid { gap: 1.1rem; }
+:global(html[data-design='craft'] .atlas-public) .quickFilters { gap: .55rem; margin-bottom: 1.5rem; }
+:global(html[data-design='craft'] .atlas-public) .quickFilters > span { font-family: var(--font-body); font-size: .85rem; font-weight: 400; letter-spacing: 0; text-transform: none; }
+
+:global(html[data-design='craft'] .atlas-public) .quickFilter {
+  min-height: 2.75rem;
+  padding: .65rem 1rem;
+  background: var(--atlas-paper-bright);
+  border-color: var(--atlas-line);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: .85rem;
+  font-weight: 400;
+}
+
+:global(html[data-design='craft'] .atlas-public) .quickFilter:hover { background: var(--atlas-jade-pale); border-color: var(--atlas-jade); }
+:global(html[data-design='craft'] .atlas-public) .isActive,
+:global(html[data-design='craft'] .atlas-public) .quickFilter.isActive:hover { color: var(--atlas-paper-bright); background: var(--atlas-ink); border-color: var(--atlas-ink); }
+:global(html[data-design='craft'] .atlas-public) .advanced { margin-top: 1.5rem; border-color: var(--atlas-line); }
+:global(html[data-design='craft'] .atlas-public) .advanced summary { min-height: 2.75rem; padding: .9rem 0; font-family: var(--font-body); font-size: .9rem; font-weight: 400; letter-spacing: 0; }
+:global(html[data-design='craft'] .atlas-public) .advancedGrid { padding-block: .35rem 1.35rem; }
+:global(html[data-design='craft'] .atlas-public) .actions { justify-content: flex-end; gap: .65rem; margin-top: 1.25rem; }
+
+@media (max-width: 560px) {
+  :global(html[data-design='craft'] .atlas-public) .panel { padding: 1.25rem; border-radius: 1.25rem; }
+  :global(html[data-design='craft'] .atlas-public) .actions { align-items: stretch; }
+}
+
 @media (max-width: 560px) {
   .primaryGrid,
   .advancedGrid {

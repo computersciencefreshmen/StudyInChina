@@ -132,6 +132,22 @@ jobs:
             exit 1
           fi
 
+      - name: Require common release-writer credential
+        if: >-
+          steps.current.outputs.matches == 'true' &&
+          steps.ci.outputs.passed == 'true' &&
+          steps.credential.outputs.configured == 'true'
+        shell: bash
+        env:
+          ADMIN_TELEMETRY_URL: ${{ secrets.ADMIN_TELEMETRY_URL }}
+          ADMIN_TELEMETRY_TOKEN: ${{ secrets.ADMIN_TELEMETRY_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [[ "${#ADMIN_TELEMETRY_TOKEN}" -lt 32 ]] || ! [[ "${ADMIN_TELEMETRY_URL}" =~ ^https://[a-z0-9-]+\.[a-z0-9-]+\.workers\.dev/internal/v1/admin-telemetry$ ]]; then
+            echo '::error title=Common release writer unavailable::Configure ADMIN_TELEMETRY_URL and ADMIN_TELEMETRY_TOKEN repository secrets. Promotion cannot bypass the durable writer used by administrator rollback; the stable alias was not changed.'
+            exit 1
+          fi
+
       - name: Validate deployment URL
         if: >-
           steps.current.outputs.matches == 'true' &&
@@ -218,6 +234,13 @@ jobs:
         with:
           node-version: 24
 
+      - name: Install typed release-writer dependencies
+        if: >-
+          steps.current.outputs.matches == 'true' &&
+          steps.ci.outputs.passed == 'true' &&
+          steps.credential.outputs.configured == 'true'
+        run: npm ci --ignore-scripts
+
       - name: Promote stable production alias transaction and verify release API
         if: >-
           steps.current.outputs.matches == 'true' &&
@@ -227,6 +250,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          ADMIN_TELEMETRY_URL: ${{ secrets.ADMIN_TELEMETRY_URL }}
+          ADMIN_TELEMETRY_TOKEN: ${{ secrets.ADMIN_TELEMETRY_TOKEN }}
         run: |
           set -euo pipefail
 
@@ -261,28 +286,47 @@ jobs:
             status=$?
             trap - EXIT
             if [[ "${status}" -eq 0 || "${mutation_attempted}" != 'true' || "${transaction_committed}" == 'true' ]]; then
+              if [[ "${transaction_committed}" != 'true' && -f '.github-release-writer/operation.json' ]]; then
+                if ! node --import tsx scripts/operations/github-release-writer.ts finish failed; then
+                  echo '::error title=Release writer outcome unconfirmed::The durable writer remains blocked until an operator reconciles the exact alias target.'
+                  exit 1
+                fi
+              fi
               exit "${status}"
             fi
 
             echo "::error title=Stable alias transaction failed::Rolling studyinchina.vercel.app back to ${previous_target}."
-            if ! npx --yes vercel@58.0.0 alias set \
-              "${previous_target}" \
-              studyinchina.vercel.app \
-              --scope henry-yangs-projects-c9706eac \
-              --token "${VERCEL_TOKEN}"; then
-              echo '::error title=Stable alias rollback failed::The previous target could not be restored; immediate operator action is required.'
+            if ! node --import tsx scripts/operations/github-release-writer.ts guard compensate; then
+              node --import tsx scripts/operations/github-release-writer.ts finish uncertain || true
+              echo '::error title=Stable alias rollback blocked::The exact common writer or current target could not be confirmed; no unguarded alias write is allowed.'
               exit 1
+            fi
+            if jq -e '.mutationRequired == true' .github-release-writer/guard-compensate.json >/dev/null; then
+              if ! npx --yes vercel@58.0.0 alias set \
+                "${previous_target}" \
+                studyinchina.vercel.app \
+                --scope henry-yangs-projects-c9706eac \
+                --token "${VERCEL_TOKEN}"; then
+                node --import tsx scripts/operations/github-release-writer.ts finish uncertain || true
+                echo '::error title=Stable alias rollback failed::The previous target could not be restored; immediate operator action is required.'
+                exit 1
+              fi
             fi
 
             for attempt in 1 2 3 4 5 6; do
               restored_target="$(current_stable_target || true)"
               if [[ "${restored_target}" == "${previous_target}" ]]; then
+                if ! node --import tsx scripts/operations/github-release-writer.ts finish failed; then
+                  echo '::error title=Release writer outcome unconfirmed::The previous target was read back, but the immutable completion receipt was not acknowledged.'
+                  exit 1
+                fi
                 echo "::notice title=Stable alias rollback verified::studyinchina.vercel.app again targets ${previous_target}."
                 exit "${status}"
               fi
               sleep 10
             done
 
+            node --import tsx scripts/operations/github-release-writer.ts finish uncertain || true
             echo "::error title=Stable alias rollback verification failed::Expected ${previous_target}, but the stable alias did not return to that immutable target. Immediate operator action is required."
             exit 1
           }
@@ -295,12 +339,19 @@ jobs:
             exit 1
           fi
 
+          node --import tsx scripts/operations/github-release-writer.ts reserve
+          if ! jq -e --arg previous "${previous_target}" '.previous.url == $previous' .github-release-writer/operation.json >/dev/null; then
+            echo '::error title=Production promotion blocked::The previous target changed during writer reservation; the stable alias was not changed.'
+            exit 1
+          fi
+
           final_main_sha="$(github_main_sha || true)"
           if ! [[ "${final_main_sha}" =~ ^[0-9a-f]{40}$ ]] || [[ "${final_main_sha}" != "${DEPLOYMENT_SHA}" ]]; then
             echo "::error title=Production promotion blocked::Main is ${final_main_sha:-unavailable}, not deployment ${DEPLOYMENT_SHA}; the stable alias was not changed."
             exit 1
           fi
 
+          node --import tsx scripts/operations/github-release-writer.ts guard promote
           mutation_attempted=true
           npx --yes vercel@58.0.0 alias set \
             "${DEPLOYMENT_URL}" \
@@ -321,6 +372,7 @@ jobs:
                 '.data.deploymentSha == $sha
                   and (.data.id | type == "string" and length > 0)
                   and (.data.publicCounts.programs | type == "number" and . > 0)' >/dev/null; then
+              node --import tsx scripts/operations/github-release-writer.ts finish completed
               transaction_committed=true
               echo "::notice title=Stable alias promotion verified::studyinchina.vercel.app serves deployment ${DEPLOYMENT_SHA}."
               exit 0
@@ -329,3 +381,12 @@ jobs:
           done
           echo 'The stable production alias did not pass the release API smoke test; the previous immutable target will be restored.' >&2
           exit 1
+
+      - name: Preserve common-writer operation receipts
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: production-release-writer-${{ github.run_id }}
+          path: .github-release-writer/*.json
+          include-hidden-files: true
+          if-no-files-found: ignore

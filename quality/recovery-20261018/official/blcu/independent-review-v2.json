@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "outcome": "pass",
+  "batchPath": "quality/recovery-20261018/official/blcu/full-program-batch-draft-v2.json",
+  "batchSha256": "0e4ba47e8a16f7748f4250635bbadfb43a5fef8e84826e36ea92c993e74d18ee",
+  "reviewedAt": "2026-10-18T14:28:54.829783+00:00",
+  "reviewer": "codex-independent-recover-local",
+  "reviewedCandidateEntries": 2,
+  "priorReviewPath": "quality/recovery-20261018/official/blcu/independent-review-v1.json",
+  "checks": [
+    {
+      "id": "official-seven-source-integrity",
+      "status": "pass",
+      "detail": "All7official-source URL/source/capture bindings, fresh HTTP200 original byte hashes, labelled text hashes and robots receipts were independently checked. The published2027notice links the exact cataloguePDF. The two profile documents retain their actual2023publication years; no old admissions date is republished as2027."
+    },
+    {
+      "id": "pdf-pages-and-corrected-cell-boundaries",
+      "status": "pass",
+      "detail": "Independently viewed both actual2027catalogue page renders. V1table-boundary error is corrected: fixed Hainan years1-2/Beijing years3-4 belongs only to AppliedChinese. The selected ChineseLanguage/TCSoL rows instead share plan-dependent Hainan/Beijing placement and broad-category years1-2 followed by specialization years3-4. V2transcription, campus, fee schedule and notes all now reflect this; v1 remains held audit history."
+    },
+    {
+      "id": "identities-level-medium-duration",
+      "status": "pass",
+      "detail": "Both selected programmes are current international-student bachelor offerings in the explicit Chinese-taught category. Full2023officialcurricula plus the live four-year list support48months. Existing stable programmeIDs are reused, not duplicated. Korean/Japanese translation conditions and distinct English-medium routes are not incorrectly applied."
+    },
+    {
+      "id": "new-intake-window",
+      "status": "pass",
+      "detail": "Current2027catalogue explicitly lists March/September entry for the selected group and spring deadlineFebruary1,2027. Exact commencement/registration follow AdmissionNotice; openingdate remains unknown. The general entry page still lists closed2026windows, and those are excluded rather than advanced by a year."
+    },
+    {
+      "id": "campus-dependent-annual-fees",
+      "status": "pass",
+      "detail": "Selected-row annual fees are BeijingCNY25800 and HainanCNY22000, with programme training arrangement determining campus. Numeric tuition is explicitly Beijing only, not a universal or guaranteed-campus amount. No unsupported years3-4Beijing guarantee, scholarship award or free campus choice remains."
+    },
+    {
+      "id": "qualifications-age-minors",
+      "status": "pass",
+      "detail": "High-school/equivalent-or-higher qualification, foreignordinarypassport/non-Chinese citizenship, age18-55 retained. Under18 exception requires university consent and notarized guardian documents, rather than suggesting unconditional eligibility."
+    },
+    {
+      "id": "both-nationality-residence-groups",
+      "status": "pass",
+      "detail": "Both required groups retained: foreign-born nationality/non-Chinese applicants with settled-abroad Chinese parent(s), and former mainland/HongKong/Macao/Taiwan residents who acquired foreign nationality. Required4years foreignpassport/nationalityproof,2years actual overseas residence during last4years up to admission-yearApril30,9months-counts-one-year rule and entry/exit stamp basis are represented."
+    },
+    {
+      "id": "hsk-and-csca",
+      "status": "pass",
+      "detail": "Relevant international-only degree group requires HSK4total>=180. All undergraduate applicants from autumn2026onward require validCSCAresults. No unsupported CSCAminimum score or subject list is invented from unrelated degree rows."
+    },
+    {
+      "id": "complete-ten-item-checklist",
+      "status": "pass",
+      "detail": "Passport; diploma and all-term transcripts; notarizedChinese/Englishtranslations when originals are not either language; prospective-graduation certificate original and finaldiploma before enrollment; HSK; validCSCA; signedChinese/Englishrefereeletter with contact; applicationfeepayment; guarantorID and in-China foreignguarantor visa; IDphoto; criminalrecord and otherprogramme-specificmaterials retained across the grouped checklist and eligibility. No currentpublished material requirement is silently omitted."
+    },
+    {
+      "id": "qualified-nonrefund",
+      "status": "pass",
+      "detail": "ApplicationfeeCNY800 paid online. Latest2027catalogue limits nonrefund to reasons not attributable to the university, overriding the older blanket webpage wording. Tuition is not declared non-refundable."
+    },
+    {
+      "id": "manual-transcription-traceability",
+      "status": "pass",
+      "detail": "PDFtext is explicitly selected-cell manual transcription, not a claimed full extraction. V2text and its separate receipt bind to the exact rawPDF and actual2page renders. Every one of30fieldproofs across both entries matches its record-bound currenttext after existingconsumer normalization, with additional visual verification of all table-dependent claims."
+    },
+    {
+      "id": "strict-assessor-and-whole-fact-freshness",
+      "status": "pass",
+      "detail": "Read-only strictassessor leaves both originalpendingdraft entries held solely for independent_review_missing. The2026-10-18verification/2026-10-25reviewdates reflect completecurrentfactreview, not timestamp-onlyrenewal. No approval-field or canonical writes by the reviewer."
+    }
+  ],
+  "issues": [],
+  "captures": [
+    {
+      "sourceId": "source-blcu-map-undergraduate-2027-20261017",
+      "url": "https://admission.blcu.edu.cn/2026/1014/c1572a3064/page.htm",
+      "rawSha256": "66c51c65fcef81bb20b49130502f3907f9287bd373dc6820bc49c432ac56d28b",
+      "textSha256": "0e52e710004b338ce4b99b5a52f6d49fce5a14cee9889fc9a7aa436faea39571",
+      "receiptPath": "quality/recovery-20261018/official/blcu/blcu-notice-2027.receipt.json",
+      "receiptSha256": "f5998191222171dd7c0e83b0fade93e8a52fd38852946228fcf00219d17a7b97",
+      "robotsSha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+      "retrievedAt": "2026-10-18T14:07:54.641160+00:00",
+      "httpStatus": 200
+    },
+    {
+      "sourceId": "source-blcu-map-undergraduate-2027-catalogue-v2-20261017",
+      "url": "https://admission.blcu.edu.cn/_upload/article/files/39/74/e89e82e5490687d93679a0c4b3c4/206c8a45-4a29-45e6-9870-cfd697dd5c60.pdf",
+      "rawSha256": "17c8a4e898f89b233917269b5353b3110d63ebd5e62c568672d8fbc43d864993",
+      "textSha256": "5c7b6433c9319d9acd0991ece48aa758282071c9bb249d0edc0b29f80dbb1f01",
+      "receiptPath": "quality/recovery-20261018/official/blcu/blcu-catalogue-2027.receipt.json",
+      "receiptSha256": "1dd379e6641218eb8e9febb0bb270a4651417eb80dd46bf0b576851c21fcb750",
+      "robotsSha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+      "retrievedAt": "2026-10-18T14:08:03.578775+00:00",
+      "httpStatus": 200
+    },
+    {
+      "sourceId": "source-blcu-map-undergraduate-entry-20261017",
+      "url": "https://admission.blcu.edu.cn/46/list.htm",
+      "rawSha256": "11b21f64ff65f086c274da91b010981809b6da92d1a0a91c70fcc05fa4b55a43",
+      "textSha256": "5f84a1905aacced29e6ec73c200bab0fef4a1691e18fcc17e59f92f530910731",
+      "receiptPath": "quality/recovery-20261018/official/blcu/blcu-entry.receipt.json",
+      "receiptSha256": "8fa97fad8dcf85a04fce86140c21543fe112b7a5ab42cea44b6a5cc265d79eba",
+      "robotsSha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+      "retrievedAt": "2026-10-18T14:08:07.766841+00:00",
+      "httpStatus": 200
+    },
+    {
+      "sourceId": "source-blcu-map-chinese-programmes-list-official-20261017",
+      "url": "https://admission.blcu.edu.cn/43/list.htm",
+      "rawSha256": "e6fc67b8a3a1ba194fa79952468dd55032e1c9e82b2d544f5b2d5bba8c56df6a",
+      "textSha256": "c107a629ac1086c3174fec0b00a935099a68783098fdf30c4368293955d124c8",
+      "receiptPath": "quality/recovery-20261018/official/blcu/blcu-chinese-medium-list.receipt.json",
+      "receiptSha256": "2948e1f17a53c8e9d97819f8e12163e8916c7b363268865d4207aadb0410efed",
+      "robotsSha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+      "retrievedAt": "2026-10-18T14:08:11.357784+00:00",
+      "httpStatus": 200
+    },
+    {
+      "sourceId": "source-blcu-map-chinese-bachelor-profile-20261017",
+      "url": "https://admission.blcu.edu.cn/2023/1219/c1250a2682/page.htm",
+      "rawSha256": "eb4fb76529728154aebd2c5420a4a48dd4e381049ad8d2a51b0dbb93fe0bed34",
+      "textSha256": "630e00b0d91ddd12d0af9030c7e2c84c9c93f33a71399e4b6661f65cfbccbe73",
+      "receiptPath": "quality/recovery-20261018/official/blcu/blcu-chinese-profile.receipt.json",
+      "receiptSha256": "8dba4ffc5aa4a9488e8bedb62cbaba21430ec446b10a8d650073b7c00f85803e",
+      "robotsSha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+      "retrievedAt": "2026-10-18T14:08:15.000455+00:00",
+      "httpStatus": 200
+    },
+    {
+      "sourceId": "source-blcu-map-teaching-chinese-bachelor-profile-20261017",
+      "url": "https://admission.blcu.edu.cn/2023/1219/c1250a2683/page.htm",
+      "rawSha256": "5cc3f398fedd9f36c269ef03856be0f8fb03b7c0269b9ef07d2275189f1774ba",
+      "textSha256": "e25819aeac83ccf0c9e5d9d327100e58123fa35ca418022650c8983a41560d31",
+      "receiptPath": "quality/recovery-20261018/official/blcu/blcu-tcsol-profile.receipt.json",
+      "receiptSha256": "2cdf9583c35a28b217ee032bcabdbd1181911c502c39be83e8f4575d1953ef1b",
+      "robotsSha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+      "retrievedAt": "2026-10-18T14:08:19.011949+00:00",
+      "httpStatus": 200
+    },
+    {
+      "sourceId": "source-blcu-map-application-portal-20261017",
+      "url": "https://apply.blcu.edu.cn/",
+      "rawSha256": "57f4b5462e7af38152ef5df179f1748dbf7ec68637ab8a744993a0f94513fb27",
+      "textSha256": "191765f895f21201d1ba4c1ee145dd41cf530cd33afd24d45cee39fef51ebdc4",
+      "receiptPath": "quality/recovery-20261018/official/blcu/blcu-apply.receipt.json",
+      "receiptSha256": "adbb29f8d03feeeca96468220efe497d154eb94570142e01ab41797b2d3f6487",
+      "robotsSha256": "10174434dbe479c08b32ce3b42b70e7c6336647d29e4393483158d590d35c325",
+      "retrievedAt": "2026-10-18T14:08:22.470418+00:00",
+      "httpStatus": 200
+    }
+  ],
+  "manualTranscription": {
+    "path": "quality/recovery-20261018/official/blcu/catalogue-selected-cells.manual-transcription-v2.txt",
+    "sha256": "5c7b6433c9319d9acd0991ece48aa758282071c9bb249d0edc0b29f80dbb1f01",
+    "receiptPath": "quality/recovery-20261018/official/blcu/manual-transcription-receipt-v2.json",
+    "receiptSha256": "04e0eb62b763dc7177a1e6e12186bafe83f96c0620ad12c9f0e37fe97df24d3b"
+  },
+  "visualEvidence": [
+    {
+      "path": "quality/recovery-20261018/official/blcu/catalogue-page-1.png",
+      "sha256": "557258f322dc67eebf9255d0e8d68985701e7365d3a424bdc73f34a12ca0ccef"
+    },
+    {
+      "path": "quality/recovery-20261018/official/blcu/catalogue-page-2.png",
+      "sha256": "4dfd8ac383a3170ead8ef817fdacd8cbd38424649c9f6ad234ef64f1827b9332"
+    }
+  ],
+  "canonicalWrites": 0,
+  "approvedBatchWrites": 0,
+  "paidCalls": 0
+}

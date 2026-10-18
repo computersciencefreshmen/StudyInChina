@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "pass": false,
+  "deploymentId": "dpl_2nANfpPkNbiGsZY6aTrUMGh11TEA",
+  "deploymentUrl": "https://studyinchina-l0gm4mmz9-henry-yangs-projects-c9706eac.vercel.app",
+  "sourceCommit": "85f87e77b42221fd96e59110684932e291ea053b",
+  "metadataQualification": {
+    "projectId": "prj_AgYJcsuat4kmLiinlvcBbZsYY3cg",
+    "ownerId": "team_o5qghzfTOk24QwoYANzJ8hNH",
+    "readyState": "READY",
+    "target": "production",
+    "commitMatched": true
+  },
+  "startedAt": "2026-10-18T15:46:56.824Z",
+  "completedAt": "2026-10-18T15:55:52.907Z",
+  "sourcePlanSha256": "0c6074393602627b9a5770d3cf1b814bc96997b753f0095b137db1312a4f78fc",
+  "runnerSha256": "8fd79f509e5ca91d6ac1e39ecb0e73f56327747bd45393091128222866ed83b3",
+  "expectedInputSha256": "3b60805b55ee51f7352ff47f4c44cfe773c2aea57615b2fcd12c14ba5e5c8c52",
+  "proofPath": "quality/recovery-20261018/release/candidate-smoke-20261018-v2/candidate-public-smoke.json",
+  "proofSha256": "6538e74cbd4735d64b97c8ea52ee8a80db75029c950ffbcb0629aeffb224f10d",
+  "results": {
+    "publicPrograms": 766,
+    "publicAdmissionCycles": 766,
+    "universityPages": 255,
+    "universityFailures": 0,
+    "details": 54,
+    "detailPasses": 49,
+    "detailFailures": 5,
+    "checkFailures": 0,
+    "consoleErrors": 10
+  },
+  "failureCategories": [
+    "Five detail checks timed out waiting for networkidle after the document load event.",
+    "Ten initialization script errors accessed localStorage on a document without storage permission."
+  ],
+  "cloudWrites": 0,
+  "publisherRequests": 0,
+  "aliasMutations": 0,
+  "credentialsPersisted": false,
+  "qualification": "Rejected for promotion; complete immutable failure proof retained."
+}

@@ -1,4 +1,5 @@
 export const siteThemes = [
+  { id: 'craft', name: '纸间留学', english: 'Paper & Possibility', description: '常规字重的衬线标题、暖白纸感与柔和的彩色卡片。为清晰检索和从容阅读重新设计。', accent: '#1c1c1a', background: '#fcf9f7', surface: '#ffffff', ink: '#141412', muted: '#6d6b66', soft: '#f1eee9', secondary: '#dfece3', border: '#e6e2dc', display: 'serif', tags: ['纸感', '从容', '新设计'] },
   { id: 'cloud', name: '云白淡紫', english: 'Cloud & Lilac', description: '柔和的云白、淡紫与薄荷绿。最接近你的参考图，轻盈、友好，适合长时间浏览。', accent: '#7860cf', background: '#f4f5f8', surface: '#ffffff', ink: '#252638', muted: '#686b80', soft: '#eee9fc', secondary: '#b9edce', border: '#e9e9f1', display: 'sans', tags: ['轻盈', '圆润', '推荐'] },
   { id: 'jade', name: '雾绿玉色', english: 'Jade Journal', description: '带一点东方气质的雾白与玉绿。克制、安静，让官方数据与阅读内容成为主角。', accent: '#277267', background: '#f2f6f2', surface: '#fdfefd', ink: '#233c36', muted: '#61746b', soft: '#e2efe7', secondary: '#e9d9a6', border: '#dde8e0', display: 'serif', tags: ['自然', '可信', '东方气质'] },
   { id: 'ocean', name: '冰川蓝', english: 'Ocean Studio', description: '清透的冰川蓝搭配深海文字。信息层级清楚，适合国际化教育平台和数据工作台。', accent: '#356bc0', background: '#f1f5fb', surface: '#ffffff', ink: '#1d3452', muted: '#66758c', soft: '#e4edff', secondary: '#bce7e9', border: '#e1e8f4', display: 'sans', tags: ['清透', '国际化', '专业'] },
@@ -7,7 +8,7 @@ export const siteThemes = [
 ] as const
 export type SiteTheme = typeof siteThemes[number]
 // Shared with server layouts so the saved theme applies before hydration.
-export const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem('studycn-theme');if(['cloud','jade','ocean','sand','night'].indexOf(t)>=0)document.documentElement.dataset.theme=t}catch(e){}})()`
+export const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem('studycn-theme');if(['craft','cloud','jade','ocean','sand','night'].indexOf(t)>=0)document.documentElement.dataset.theme=t}catch(e){}})()`
 export function themeVariables(theme: SiteTheme) {
   return {
     '--wb-accent': theme.accent, '--wb-background': theme.background,

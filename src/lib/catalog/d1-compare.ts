@@ -171,7 +171,7 @@ function audit(
 
 function durationMonths(value: unknown, unit: unknown): number | null {
   if (typeof value !== 'number' || !Number.isFinite(value) || value <= 0) return null
-  const factor = unit === 'academic_years' ? 12 : unit === 'semesters' ? 6 : unit === 'months' ? 1 : null
+  const factor = unit === 'academic_years' ? 12 : unit === 'months' ? 1 : null
   return factor === null ? null : Math.min(120, Math.max(1, Math.round(value * factor)))
 }
 
@@ -331,6 +331,7 @@ function programItem(
     teachingLanguages: languages,
     durationMonths: minimumDuration,
     durationMonthsMax: maximumDuration,
+    durationText: isObject(attributes.durationText) ? localized(attributes.durationText, '') : undefined,
     programUrl,
     applyUrl,
     languageRequirements: null,

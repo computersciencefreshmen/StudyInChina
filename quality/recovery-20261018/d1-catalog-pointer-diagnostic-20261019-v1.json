@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-10-18T16:14:41.632Z",
+  "finishedAt": "2026-10-18T16:14:49.133Z",
+  "clientDate": "2026-10-19",
+  "timezone": "Asia/Shanghai",
+  "database": {
+    "binding": "CATALOG_DB",
+    "name": "studyinchina-catalog",
+    "id": "451c22ea-473e-4a71-a1b5-8b0a2de4176f",
+    "configPath": "workers/catalog-api/wrangler.jsonc",
+    "configSha256": "5503e6f0719d3cb0a33060722d348c6d14e1756349a156c74e4427587924294f"
+  },
+  "query": "SELECT current_release_id FROM release_pointer WHERE singleton_id = 1 LIMIT 1",
+  "readMethod": "existing-local-Wrangler-OAuth-only",
+  "wranglerVersion": "4.131.2",
+  "cliInvocations": 1,
+  "remoteSqlRequestCount": 1,
+  "retryCount": 0,
+  "exitCode": 0,
+  "status": "success",
+  "pointerObservation": "observed-release-id",
+  "currentReleaseId": "catalog-release-materialization-885700cd9128f2de4173d9c39725066bd5170c4cb00192b52ad06f6b94dad528",
+  "canonicalWrites": 0,
+  "cloudWrites": 0,
+  "rawOutputPersisted": false,
+  "meta": {
+    "rows_read": 1,
+    "rows_written": 0,
+    "duration": 0.2573,
+    "served_by": "v3-prod",
+    "changed_db": false
+  }
+}

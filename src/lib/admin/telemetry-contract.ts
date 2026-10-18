@@ -1,6 +1,8 @@
 import { z } from 'zod'
 import type { AdminRun, AdminUsageLedger, TokenUsage } from './types'
 import { adminUsageLedgerSchema, executorStatusSchema, EXECUTOR_RUN_ID } from './executor-contract'
+import { minimaxContinuousStatusSchema } from './minimax-continuous-contract'
+import { catalogMaintenanceObservationSchema } from './catalog-maintenance-contract'
 
 export const ADMIN_TELEMETRY_MAX_BYTES = 128 * 1_024
 export const ADMIN_TELEMETRY_STALE_MS = 120_000
@@ -48,7 +50,10 @@ export const adminTelemetrySchema = z.object({
   usageBasis: z.enum(['immutable-ledger', 'saved-responses']).optional(),
   model: z.object({ configured: model }).strict(),
   ledger: adminUsageLedgerSchema.nullable().optional(), automation: executorStatusSchema.nullable().optional(),
+  continuousPipeline: minimaxContinuousStatusSchema.nullable().optional(),
+  catalogMaintenance: catalogMaintenanceObservationSchema.nullable().optional(),
 }).strict().superRefine((value, context) => {
+  if (value.catalogMaintenance && Date.parse(value.catalogMaintenance.observedAt) > Date.parse(value.observedAt) + 30_000) context.addIssue({ code: 'custom', message: 'Future maintenance observation', path: ['catalogMaintenance', 'observedAt'] })
   if (new Set(value.runs.map(run => run.id)).size !== value.runs.length) context.addIssue({ code: 'custom', message: 'Duplicate run identity', path: ['runs'] })
   const saved = sumTokenUsage(value.runs.map(run => run.tokenUsage))
   if (value.usageBasis === 'immutable-ledger' && !value.ledger) context.addIssue({ code: 'custom', message: 'Ledger usage requires a ledger', path: ['ledger'] })
@@ -58,7 +63,7 @@ export const adminTelemetrySchema = z.object({
 export type AdminTelemetry = z.infer<typeof adminTelemetrySchema>
 
 /** Only the already sanitized file projection crosses this boundary. */
-export function createAdminTelemetry(runs: AdminRun[], configuredModel: string | null, observedAt = new Date().toISOString(), extra: Pick<z.input<typeof adminTelemetrySchema>, 'ledger' | 'automation'> = {}): AdminTelemetry {
+export function createAdminTelemetry(runs: AdminRun[], configuredModel: string | null, observedAt = new Date().toISOString(), extra: Pick<z.input<typeof adminTelemetrySchema>, 'ledger' | 'automation' | 'continuousPipeline' | 'catalogMaintenance'> = {}): AdminTelemetry {
   const saved = sumTokenUsage(runs.map(run => run.tokenUsage))
   return adminTelemetrySchema.parse({ version: 1, observedAt, runs, usage: extra.ledger ? ledgerTokenUsage(extra.ledger, saved) : saved,
     usageBasis: extra.ledger ? 'immutable-ledger' : 'saved-responses', model: { configured: configuredModel }, ...extra })

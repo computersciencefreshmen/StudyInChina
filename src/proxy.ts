@@ -26,9 +26,11 @@ export function proxy(request: NextRequest) {
   if (pathLocale && isPublicLocale(pathLocale)) return NextResponse.next()
 
   const url = request.nextUrl.clone()
+  // The public landing address always opens English, including returning visitors.
+  // Explicit language URLs and preferences on other unlocalized paths still work.
   // Preview routes are not public yet. Redirect directly to the same English
   // path so /pt/programs never becomes the misleading /en/pt/programs.
-  const locale = pathLocale && isPreviewLocale(pathLocale)
+  const locale = pathname === '/' || (pathLocale && isPreviewLocale(pathLocale))
     ? defaultLocale
     : preferredLocale(request)
   url.pathname = localizePathname(pathname, locale)

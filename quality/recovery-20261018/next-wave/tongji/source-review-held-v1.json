@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-18T15:46:15.988886+00:00",
+  "reviewer": "codex-author-recover-local",
+  "universityId": "uni-tongji-university",
+  "outcome": "held",
+  "pass": false,
+  "publicProgrammeCountObservedBeforePreparation": 0,
+  "scope": "Current spring2027long-termChinese programme; finite preparation of this school only, not a full catalogue-completeness claim.",
+  "captures": [
+    {
+      "receiptPath": "quality/recovery-20261018/next-wave/tongji/tongji-current-period.receipt.json",
+      "receiptSha256": "0e46efff4e00a8330ecafb9874df06cd4b6213f0b1e95bd1ba3e760f6cdb56ca",
+      "url": "https://study.tongji.edu.cn/info/1010/1182.htm",
+      "httpStatus": 200,
+      "retrievedAt": "2026-10-18T15:39:55.445522+00:00",
+      "rawSha256": "bd1b771325a473f9907b1a3c846ad7e46728b40b099e5c26e431bbde85e02391",
+      "textSha256": "49f1f2b69763d5ba263f3794ed3c768122f753a6a7470a1467f86bf99194347a"
+    },
+    {
+      "receiptPath": "quality/recovery-20261018/next-wave/tongji/tongji-language-guide.receipt.json",
+      "receiptSha256": "c16f991b576a5f51eb5fd8820fb0e01465e799746fb2307dd545018b965c402c",
+      "url": "https://study.tongji.edu.cn/info/1061/1568.htm",
+      "httpStatus": 200,
+      "retrievedAt": "2026-10-18T15:38:49.550843+00:00",
+      "rawSha256": "d7b8f3bef3f0ff23900bda9e6151bbdc896545609678038079342ec67a65fbb4",
+      "textSha256": "93419ada90be3ab8c34416d55455a1b98e9eb32b30abf1f35fc5017612a23e53"
+    },
+    {
+      "receiptPath": "quality/recovery-20261018/next-wave/tongji/tongji-language-brochure.receipt.json",
+      "receiptSha256": "dd0de9e245e3ac1ab87c636cabee4b5bafb42381c750214829092c3d24aad1ae",
+      "url": "https://study.tongji.edu.cn/__local/F/B5/C2/33F541911754CBAFDC0717991B9_BE10EB99_412058.pdf",
+      "httpStatus": 200,
+      "retrievedAt": "2026-10-18T15:41:25.075985+00:00",
+      "rawSha256": "4d82e415e040752991cb0c2b8ccf5d3283c5e89fa9ffe3624b4d8c0967f89d61",
+      "textSha256": "5c590a1908f23f6afabee5b8c0a8ab8f48069d0c901be6d1bc92cd3e5b359401"
+    }
+  ],
+  "supportedFacts": [
+    {
+      "field": "currentSpringDeadline",
+      "value": "2026-11-30",
+      "source": "tongji-current-period",
+      "detail": "Official admissions summary explicitly names2027spring(February-March) and links the language guide. The generic brochure deadlineDecember20is not applied to the current cycle."
+    },
+    {
+      "field": "duration",
+      "value": "17weeks per semester; one semester to two academic years",
+      "source": "tongji-language-brochure",
+      "detail": "Exact semester/week wording, no conversion to numeric months."
+    },
+    {
+      "field": "fees",
+      "value": {
+        "tuitionCnyPerSemester": 8200,
+        "tuitionCnyPerYear": 16400,
+        "applicationFeeCny": 600,
+        "insuranceCnyPerSemester": 400,
+        "insuranceCnyPerYear": 800
+      },
+      "source": "tongji-language-brochure",
+      "detail": "Application fee alone non-refundable; tuition/insurance paid at registration or by transfer. These are guide values, not a complete approved current-cycle fact bundle."
+    },
+    {
+      "field": "eligibility",
+      "value": "Non-Chinese citizen,18-55,high-school graduation or above,healthy; minors conditional on guardian evidence",
+      "source": "tongji-language-brochure",
+      "detail": "Guardian reference is August31ofapplicationyear; bank deposit>=CNY100000andexpiryafterfollowingJanuary31; foreignguardian requires non-studentresidencepermit. Exact application-year interpretation would require confirmation if used for spring."
+    }
+  ],
+  "blockers": [
+    {
+      "code": "explicit_teaching_medium_missing",
+      "detail": "The complete18-pagebrochure describes learningChinese and Chinese-course subjects but does not explicitly identify the teachingmedium. A programme subject/title or Chinese-language PDF does not establish instructionmedium."
+    },
+    {
+      "code": "complete_general_application_materials_not_established",
+      "detail": "The guide supplies the specialguardianchecklist and onlinepaymentprocess but does not establish a full ordinaryapplicant materiallist. Do not copy requirements from unrelated bachelor/scholarship routes or invent passport/health/criminalrecord requirements."
+    },
+    {
+      "code": "entry_language_requirement_unknown",
+      "detail": "Course table lists starter/HSKlevel groupings, but these must not be silently advertised as independently established mandatoryadmissionthresholds."
+    }
+  ],
+  "visualEvidence": [
+    {
+      "path": "quality/recovery-20261018/next-wave/tongji/eligibility-page-14.png",
+      "sha256": "4dc391712bd41f79085ca1424b70148de5d73431e43271e053e070889e9a82b0"
+    },
+    {
+      "path": "quality/recovery-20261018/next-wave/tongji/fees-page-16.png",
+      "sha256": "1d150a4d4886ac61e46645c83503455e2ec27e098b409f37e9dc3988191bdbf9"
+    }
+  ],
+  "nextAction": "Investigate the programme-specific onlineapplicationguide or a newer official language-medium/materials notice. Keep held until exact teachingmedium and full materials can be corroborated. Do not reset verification dates or publish this partial programme.",
+  "canonicalWrites": 0,
+  "approvedBatchWrites": 0,
+  "paidCalls": 0,
+  "cloudWrites": 0
+}

@@ -1,0 +1,434 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>西南交通大学2027学年语言生项目招生简章-西南交通大学国际教育学院</title><meta name="pageType" content="3">
+<meta name="pageTitle" content="西南交通大学2027学年语言生项目招生简章">
+<META Name="keywords" Content="西南交通大学国际教育学院,通知公告,西南交通大学2027学年语言生项目招生简章" />
+<META Name="description" Content="西南交通大学2027学年语言生项目招生简章" />
+
+    <link rel="stylesheet" href="../../css/main.css">
+
+<!--Announced by Visual SiteBuilder 9-->
+<script language="javascript" src="../../_sitegray/_sitegray.js"></script>
+<!-- CustomerNO:77656262657232307476475d51535742000300034452 -->
+<link rel="stylesheet" type="text/css" href="../../content.vsb.css" />
+<script type="text/javascript" src="/system/resource/js/vsbscreen.min.js" id="_vsbscreen" devices="pc|pad"></script>
+<script type="text/javascript" src="/system/resource/js/counter.js"></script>
+<script type="text/javascript">_jsq_(1014,'/content.jsp',3352,1671064084)</script>
+</head>
+
+<body>
+    <div class="topbar">
+        <div class="wrap clearfix relative">
+       <div class="other"><script language="javascript" src="/system/resource/js/dynclicks.js"></script><script language="javascript" src="/system/resource/js/openlink.js"></script>
+     <a href="https://admission.swjtu.edu.cn/#/login" target="_blank" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1671064084, 68547)"><p>在线申请</p></a>
+</div>
+            <div class="lang"></div>
+           <!-- 3.1.3版本 -->
+
+
+
+<script language="javascript" src="/system/resource/js/base64.js"></script><script language="javascript" src="/system/resource/js/jquery/jquery-latest.min.js"></script><script language="javascript" src="/system/resource/vue/vue.js"></script><script language="javascript" src="/system/resource/vue/bluebird.min.js"></script><script language="javascript" src="/system/resource/vue/axios.js"></script><script language="javascript" src="/system/resource/vue/polyfill.js"></script><script language="javascript" src="/system/resource/vue/token.js"></script><LINK href="/system/resource/vue/static/element/index.css" type="text/css" rel="stylesheet"><script language="javascript" src="/system/resource/vue/static/element/index.js"></script><script language="javascript" src="/system/resource/vue/static/public.js"></script><script language="javascript" src="/system/resource/openapp/search/js/containsHtmlTags.js"></script><script language="javascript" src="/system/resource/openapp/search/layui/layui.js"></script><style>
+    #appu1 .qwss{
+        height: 31px;
+        font-size: 12px;
+        min-width: 190px;
+        max-width: 600px;
+        width: 60%;
+        margin-top: -15px;
+        outline: none;
+        padding-left: 10px;
+        border-radius: 2px;
+        border: 1px solid #e4e7ed;}
+    #appu1 .tj{
+        padding-left: 6px;
+        letter-spacing: 5px;
+        color: white;
+        min-width: 53px;
+        max-width: 150px;
+        height: 32px;
+        border: 0;
+        border-radius: 2px;
+        background-color: #1890FF;
+        position: relative;
+        top: 1px;
+        width: 20%;
+        margin-top: -15px;}
+</style>
+<div id="divu1"></div>
+<script type="text/html" id="htmlu1">
+    <div id="appu1">
+        <div v-if="!isError">
+          
+             <div class="search-box">
+                <input type="text" class="text" placeholder="检索" v-model=query.keyWord @keyup.enter="onSubmit">
+                <input type="image" class="btn" src="../../images/search-icon.png" v-on:click="onSubmit()" style="    width: 18px;">
+            </div>
+
+        </div>
+        <div v-if="isError" style="color: #b30216; font-size:18px;text-align: center;padding:20px;">
+            应用维护中！
+        </div>
+    </div>
+</script>
+<script>
+    $("#divu1").html($("#htmlu1").text());
+</script>
+<script>
+    var appOwner = "1671064084";
+    var token = gettoken(10);
+    var urlPrefix = "/aop_component/";
+
+    jQuery.support.cors = true;
+    $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+    });
+
+    new Vue({
+        el: "#appu1",
+        data: function () {
+            return {
+                query: {
+                    keyWord: "",//搜索关键词
+                    owner: appOwner,
+                    token: token,
+                    urlPrefix: urlPrefix,
+                    lang:"i18n_zh_CN"
+                },
+                isError: false
+            }
+        },
+        mounted: function () {
+            var _this = this;
+            // _this.init();
+        },
+        methods: {
+            init: function(){
+                $.ajax({
+                    url: "/aop_component//webber/search/test",
+                    type: "get",
+                    success: function (response) {
+                        if (response.code == "0000") {
+                        } else if (response.code == "220") {
+                            _this.isError = true;
+                            console.log(response);
+                        } else if (!response.code) {
+                            _this.isError = true;
+                            console.log(response);
+                        }
+                    },
+                    error: function (response) {
+                        _this.isError = true;
+                    }
+                });
+            },
+            onSubmit: function (e) {
+                var url = "/aop_views/search/modules/resultpc/soso.html";
+                if ("10" == "1" || "10" == "2") {
+                    url = "" + url;
+                }
+                var _this = this;
+                var query = _this.query;
+                if (url.indexOf("?") > -1) {
+                    url = url.split("?")[0];
+                }
+                if (query.keyWord) {
+                    var query = new Base64().encode(JSON.stringify(query));
+                    window.open(url + "?query=" + query);
+                } else {
+                    alert("请填写搜索内容")
+                }
+            },
+        }
+    })
+</script>
+
+<script>
+   var appElementu1 = document.querySelector("#appu1");
+   if (appElementu1 && appElementu1.__vue__) {
+
+   } else {
+      $("#divu1").html($("#htmlu1").text());
+      var appOwner = "1671064084";   
+      var urlPrefix = "/aop_component/";
+      var ifLogin="";
+      var token = ifLogin=='true'?gettoken(10, true).trim():'tourist';
+      if (containsHtmlTags(token) || !token) { 
+         token = 'tourist';
+      }
+      jQuery.support.cors = true;
+      $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+      });
+      var queryInfou1 = {
+        query: {
+            keyWord: "",//搜索关键词
+            owner: appOwner,
+            token: token,
+            urlPrefix: urlPrefix,
+            lang:"i18n_zh_CN"
+        },
+        isError: false
+      };
+      function keyUpFunu1(e){
+        var theEvent = e || window.event;
+        var keyCode = theEvent.keyCode || theEvent.which || theEvent.charCode;
+        if(keyCode == 13){
+          onSubmitu1();
+        }
+      };
+
+      function onSubmitu1(e) {
+        queryInfou1.query.keyWord= $("#appu1  .qwss").val();
+        
+        var url = "/aop_views/search/modules/resultpc/soso.html";      
+        if ("10" == "1" || "10" == "2") {
+           url = "" + url;
+        }
+        var query = queryInfou1.query;
+        if (url.indexOf("?") > -1) {
+            url = url.split("?")[0];
+        }
+        if (query.keyWord) {
+            var query = new Base64().encode(JSON.stringify(query));
+            window.open(url + "?query=" + query);
+        } else {
+            alert("请填写搜索内容")
+        }
+      };
+   }
+</script>
+            <div class="links"> 
+     <a href="../../English1/Home.htm" target="_blank" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1671064084, 68548)">ENGLISH</a> 
+</div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="wrap clearfix ">
+            <div class="r1 clearfix">
+                <div class="logo">
+<!-- 网站logo图片地址请在本组件"内容配置-网站logo"处填写 -->
+<a href="../../index.htm" title="国际教育学院（2020）"><img src="../../images/GUOJI02.png"></a></div>
+                
+                <div class="main-nav"><ul class="clearfix">
+
+		
+		<li><a href="../../gywm/xyjj.htm" title="关于我们">关于我们</a>
+
+                            <div class="dropdown">
+                                <ul>
+				<li><a href="../../gywm/xyjj.htm" title="学院简介">学院简介</a></li>
+				<li><a href="../../gywm/gzry.htm" title="工作人员">工作人员</a></li>
+                                </ul>
+                            </div>
+		</li>
+
+
+		
+		<li><a href="../../zsxx/xlxwxm.htm" title="招生信息">招生信息</a>
+
+                            <div class="dropdown">
+                                <ul>
+				<li><a href="../../zsxx/xlxwxm.htm" title="学历学位项目">学历学位项目</a></li>
+				<li><a href="../../zsxx/fxlxm.htm" title="非学历项目">非学历项目</a></li>
+				<li><a href="../../zsxx/jxj.htm" title="奖学金">奖学金</a></li>
+				<li><a href="../../zsxx/dsxx.htm" title="导师信息">导师信息</a></li>
+                                </ul>
+                            </div>
+		</li>
+
+
+		
+		<li><a href="../../jyjx/bks.htm" title="教育教学">教育教学</a>
+
+                            <div class="dropdown">
+                                <ul>
+				<li><a href="../../jyjx/bks.htm" title="本科生">本科生</a></li>
+				<li><a href="../../jyjx/yjs.htm" title="研究生">研究生</a></li>
+				<li><a href="../../jyjx/yys.htm" title="语言生">语言生</a></li>
+				<li><a href="../../jyjx/yywhxm.htm" title="语言文化项目">语言文化项目</a></li>
+                                </ul>
+                            </div>
+		</li>
+
+
+		
+		<li><a href="../../xysh/csjj.htm" title="校园生活">校园生活</a>
+
+                            <div class="dropdown">
+                                <ul>
+				<li><a href="../../xysh/csjj.htm" title="城市简介">城市简介</a></li>
+				<li><a href="../../xysh/jtxx.htm" title="交通信息">交通信息</a></li>
+				<li><a href="../../xysh/bdxz.htm" title="报到须知">报到须知</a></li>
+				<li><a href="../../xysh/zzbl.htm" title="证照办理">证照办理</a></li>
+				<li><a href="../../xysh/zszy.htm" title="住宿指引">住宿指引</a></li>
+				<li><a href="../../xysh/wltx.htm" title="网络通信">网络通信</a></li>
+				<li><a href="../../xysh/bxzn.htm" title="保险指南">保险指南</a></li>
+				<li><a href="../../xysh/shzn.htm" title="生活指南">生活指南</a></li>
+				<li><a href="../../xysh/gzzd.htm" title="规章制度">规章制度</a></li>
+				<li><a href="../../xysh/xshd.htm" title="学生活动">学生活动</a></li>
+                                </ul>
+                            </div>
+		</li>
+
+
+		
+		<li><a href="../../xqzb/dxqzn.htm" title="学前准备">学前准备</a>
+
+                            <div class="dropdown">
+                                <ul>
+				<li><a href="../../xqzb/dxqzn.htm" title="到校前指南">到校前指南</a></li>
+				<li><a href="../../xqzb/flfg.htm" title="法律法规">法律法规</a></li>
+                                </ul>
+                            </div>
+		</li>
+
+
+		
+		<li><a href="../../cglx/pxjj.htm" title="出国留学">出国留学</a>
+
+                            <div class="dropdown">
+                                <ul>
+				<li><a href="../../cglx/pxjj.htm" title="培训简介">培训简介</a></li>
+				<li><a href="../../cglx/pxxw.htm" title="培训新闻">培训新闻</a></li>
+                                </ul>
+                            </div>
+		</li>
+
+
+		
+		<li><a href="../../xywl/xywl.htm" title="校友网络">校友网络</a>
+
+                            <div class="dropdown">
+                                <ul>
+				<li><a href="../../xywl/xywl.htm" title="校友网络">校友网络</a></li>
+				<li><a href="../../xywl/yxxlj.htm" title="与学校链接">与学校链接</a></li>
+                                </ul>
+                            </div>
+		</li>
+
+
+		
+		<li><a href="../../xzzx/xqzb.htm" title="下载中心">下载中心</a>
+
+                            <div class="dropdown">
+                                <ul>
+				<li><a href="../../xzzx/xqzb.htm" title="行前准备">行前准备</a></li>
+				<li><a href="../../xzzx/jxxg.htm" title="教学相关">教学相关</a></li>
+				<li><a href="../../xzzx/by_jyxg.htm" title="毕业、结业相关">毕业、结业相关</a></li>
+				<li><a href="../../xzzx/qzxg.htm" title="签证相关">签证相关</a></li>
+				<li><a href="../../xzzx/zsxg.htm" title="住宿相关">住宿相关</a></li>
+                                </ul>
+                            </div>
+		</li>
+
+
+
+
+
+
+</ul></div>
+            </div>
+        </div>
+    </div>
+    <div class="inner-banner">     
+             
+           
+                        <img src="../../images/inner-banner.jpg" border="0">
+           
+  
+</div>
+    <div class="inner-page">
+        <div class="wrap clearfix">
+            <div class="leftbar">
+                <div class="tit">
+通知公告</div>
+                <div class="list">
+                    
+</div>
+            </div>
+            <div class="right-con">
+                <div class="inner-tit clearfix">
+                    <div class="bread">
+                        <a href="../../index.htm">首页</a>
+               <span>></span>
+                <a href="../../tzgg.htm">通知公告</a>
+               <span>></span>
+                正文
+</div>
+                    <h6>
+通知公告</h6>
+                </div>
+                <div class="detail-page">
+
+<script language="javascript" src="../../_dwr/interface/NewsvoteDWR.js"></script><script language="javascript" src="../../_dwr/engine.js"></script><script language="javascript" src="/system/resource/js/news/newscontent.js"></script><LINK href="/system/resource/js/photoswipe/3.0.5.1/photoswipe.css" type="text/css" rel="stylesheet"><script language="javascript" src="/system/resource/js/photoswipe/3.0.5.1/pw.js"></script><link rel="stylesheet" Content-type="text/css" href="/system/resource/style/component/news/content/format501.css"><script language="javascript" src="/system/resource/js/ajax.js"></script><form name="_newscontent_fromname"> 
+<div class="detail-tit">西南交通大学2027学年语言生项目招生简章</div>
+                    <div class="detail-main">
+
+    <div id="vsb_content_501"><div class="v_news_content">
+<p class="vsbcontent_start">西南交通大学是教育部直属全国重点大学，国家首批“双一流”、“211工程”、“985工程优势学科创新平台”、“2011协同创新计划”重点建设高校，设有研究生院，坐落于中国历史文化名城、国家中心城市、“成渝地区双城经济圈”核心城市——成都。</p><p>西南交通大学的语言生项目专注于汉语学习和中国文化体验。西南交通大学国际教育学院每学期都为不同汉语水平的国际学生开设多种汉语课程和文化课程。学生根据入学测试结果参加相应层级的班级学习。经验丰富的教师和小班教学将确保获得良好的教学效果。</p><p>一、申请日期</p><p>春季入学申请即日起至2027年1月1日；秋季入学申请从2027年3月1日起至2027年6月30日。</p><p>注：春季学期从3月至7月，秋季学期从9月至12月。</p><p>二、项目信息</p><p>1. 授课语言：英文+中文</p><p>2. 项目目标：</p><p>初级班：通过HSK3级；中级班：通过HSK4/5级</p><p>3. 项目时长：</p><p>初级班：2学期；中级班：1学期</p><p>4. 费用：</p><p>a.报名费：400元/人</p><p>b.保险：1000元/人/年</p><p>c.学费：7000元/人/学期，14000元/人/学年</p><p>d.住宿费：365元/月/人（犀浦校区留学生公寓两人卧室，不含水电费）。</p><p>注：报名费恕不退还。一旦课程开始，所有费用将不予退还；学生可以住在校外，也可以在有条件的情况下申请校内公寓。</p><p>三、申请条件</p><p>1. 非中国籍公民，身心健康；遵守中华人民共和国法律法规和学校规章制度，无违法违纪记录。</p><p>2. 申请人年龄需17-50周岁；</p><p>3. 申请人应能负担项目期间在华学习和生活费用；</p><p>四、申请网站</p><p>西南交通大学：https://admission.swjtu.edu.cn</p><p>注：申请春季入学的申请人应在2027年1月1日前完成网上申请，申请秋季入学的申请人应在2027年6月30日前完成网上申请，申请费400元（不退还）。</p><p>五、申请材料及申请流程</p><p>（一）申请材料请详见附件1</p><p>（二）申请流程</p><p>1. 学校系统申请（非常重要）：请在学校申请系统(<a href="https://admission.swjtu.edu.xn--cn)-x68d9uh03hipzec2b/">https://admission.swjtu.edu.cn)中提交申请</a>。</p><p>2. 学校初审：学校按照招生要求，对申请人资格进行初审。初审合格的申请人须缴纳申请费人民币400元。无论是否录取，申请费不予退还。</p><p>3. 发放录取通知书：录取后，学校将提供《录取通知书》及签证申请表（DQ/JW202）等文件。</p><p>六、其他事项</p><p>1. 申请人必须确保申请材料的真实性，一经查实材料不实，将取消申请人资格。</p><p>2. 所有申请须在线提交，不接受电子邮件申请或纸质材料申请。</p><p>3. 请务必提供正确的电子邮件地址和邮寄地址。我们将通过电子邮件确认每项重要信息，请务必每天查看。</p><p>4. 在读期间，须遵守中华人民共和国的法律、法规和西南交通大学的校纪、校规。若学生出现违法、违纪或违规行为，学校将按相关规定处理，所有后果由学生本人承担。</p><p>5. 该简章最终解释权归西南交通大学国际教育学院所有。</p><p>七、联系方式</p><p>联系电话：028-66366920 (北京时间：上午8：30-12:00；下午2:00-5:30）</p><p>电子邮件：sie@swjtu.edu.cn</p><p>网站：https://en.swjtu.edu.cn</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;https://sie.swjtu.edu.cn</p><p><br></p><p>附件：语言生项目申请材料说明</p><p>Application Documents Requirements for Chinese Language Learning Programs</p><p>1. 护照首页扫描件Scanned Copy of Passport Home Page. 如现持有护照有效期不符合要求(护照有效期应晚于 2027 年 9 月)，请及时换发新护照。If the validity of the applicant’s current passport does not meet the requirement (meaning the passport expires before September 2027), please apply for a new passport before submitting the application.</p><p>2. 经公证的学历证明Notarized academic certificate. 如果文件不是英文或中文，请提供经过公证的翻译件。Please provide notarized translation if the documents are not in English or Chinese.</p><p>3. 成绩单Academic Records. 如果文件不是英文或中文，请提供经过公证的翻译件。Please provide notarized translation if the documents are not in English or Chinese.</p><p>4. 《外国人体格检查表》扫描件。Scanned copy of the <a></a><a></a>Foreigner Physical Examination Form. 申请人须保存原始体检表。本表由中国卫生检疫部门统一印制，需用英文填写，可以从https://en.swjtu.edu.cn/FOREIGNER_PHYSICAL_EXAMINAT_ON_FORM.pdf下载。体检必须包括《外国人体格检查表》所列的所有项目。不完整、无主治医生签名、无医院公章、无申请人盖章的照片，均视为无效。体检结果有效期仅为6个月，请慎重安排体检时间。The original form should be kept by the applicant. The form is uniformly printed by Chinese healthy quarantine departments. It must be written in English and can be downloaded from <a href="https://en.swjtu.edu.cn/FOREIGNER_PHYSICAL_EXAMINAT_ON_FORM.pdf">https://en.swjtu.edu.cn/FOREIGNER_PHYSICAL_EXAMINAT_ON_FORM.pdf</a>. The physical examinations must cover all of the items listed in the Foreigner Physical Examination Form. Incomplete forms or forms without the signature of the attending physician, or the official stamp of the hospital, or a sealed photograph of the applicant are considered as invalid. Please carefully plan your physical examination schedule as the result is valid for only 6 months.</p><p>5.<a></a><a></a> 由银行出具的申请人的对账单、存款证明或担保人签署的担保证明。Applicant’s Bank Statement or Certificate of Deposit or the statement of financial support signed by sponsor.</p><p>它必须涵盖在中国学习所需的学费和生活费。It must cover the tuition fees and living expense needed for study in China.</p><p>6.无犯罪记录证明Non-criminal record report. 申请人须提交由所在地公安机关出具的有效期内的无犯 罪记录证明，通常应为提交申请之日前 6 个月以内的证明文件。The applicant shall submit a valid certificate of on-Criminal Record issued by the local public security authority, usually issued within 6 months prior to the submission date of the application.</p><p>7. 未满18周岁的申请人须提交其在中国境内委托法定监护人的相关法律文件。Applicants under the age of 18 shall submit relevant legal documents of his/her entrusted legal guardians in China.</p><p>8. 有效签证页Valid visa page. 目前在中国境内的申请人，应提供其当前签证或居留许可页复印件。Applicants who are in China currently should provide a copy of the page of his/her current visa or residence permit.</p><p>注意:通过系统上传的材料须清晰、真实、有效。建议申请人使用专业设备扫描需提交的有关文件，因材料不清晰或无法识别造成的后果由申请人承担。Reminder: Uploaded supporting documents must be clear, authentic and valid. Applicants are recommended to use a professional device to scan the relevant documents. Applicants shall bear the consequences caused by unclear or unidentifiable uploaded materials.</p><p><br></p><p><strong>犀浦校区 Xipu Campus</strong></p><p class="vsbcontent_img"><img width="335" height="197" src="/__local/1/78/E7/F9C03A3FD9622A806DDB95C15FE_CAE17284_1CADF.jpg" align="left" hspace="12" vsbhref="vurl" vurl="/_vsl/178E7F9C03A3FD9622A806DDB95C15FE/CAE17284/1CADF" vheight="197" vwidth="335" orisrc="/__local/1/78/E7/F9C03A3FD9622A806DDB95C15FE_CAE17284_1CADF.jpg" class="img_vsb_content"><img width="318" height="198" src="/__local/8/AA/AE/F51DD87895475976F6ABE4F1FBB_085DD3F4_18367.jpg" align="left" hspace="12" vsbhref="vurl" vurl="/_vsl/8AAAEF51DD87895475976F6ABE4F1FBB/085DD3F4/18367" vheight="198" vwidth="318" orisrc="/__local/8/AA/AE/F51DD87895475976F6ABE4F1FBB_085DD3F4_18367.jpg" class="img_vsb_content"><img width="338" height="200" src="/__local/C/55/74/58F66508522FFD6E31B0E9D7A47_F5CF57BE_15721.jpg" align="left" hspace="12" vsbhref="vurl" vurl="/_vsl/C557458F66508522FFD6E31B0E9D7A47/F5CF57BE/15721" vheight="200" vwidth="338" orisrc="/__local/C/55/74/58F66508522FFD6E31B0E9D7A47_F5CF57BE_15721.jpg" class="img_vsb_content"> </p><p class="vsbcontent_img"><img width="334" height="200" src="/__local/3/DD/B2/E6A003B22E2414FE809825A3A53_C8431A46_13E91.jpg" align="left" hspace="12" vsbhref="vurl" vurl="/_vsl/3DDB2E6A003B22E2414FE809825A3A53/C8431A46/13E91" vheight="200" vwidth="334" orisrc="/__local/3/DD/B2/E6A003B22E2414FE809825A3A53_C8431A46_13E91.jpg" class="img_vsb_content"><img width="337" height="197" src="/__local/3/69/31/A83EA2B458AC9ABA0B39DC09254_A5DF0890_1E986.jpg" align="left" hspace="12" vsbhref="vurl" vurl="/_vsl/36931A83EA2B458AC9ABA0B39DC09254/A5DF0890/1E986" vheight="197" vwidth="337" orisrc="/__local/3/69/31/A83EA2B458AC9ABA0B39DC09254_A5DF0890_1E986.jpg" class="img_vsb_content"><img width="300" height="204" src="/__local/0/0C/53/D8308D60FA480791D3AAA743431_C805B289_5E3C4.png" align="left" hspace="12" vsbhref="vurl" vurl="/_vsl/00C53D8308D60FA480791D3AAA743431/C805B289/5E3C4" vheight="204" vwidth="300" orisrc="/__local/0/0C/53/D8308D60FA480791D3AAA743431_C805B289_5E3C4.png" class="img_vsb_content"> </p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><br></p><p><strong>留学交大</strong><strong>The campus life of </strong><strong>International </strong><strong>students</strong></p><p>犀浦校区留学生公寓（鸿哲斋11栋）和超过7处的学生食堂</p><p class="vsbcontent_end">The international student apartment (Building 11, Hongzhezhai) and over 7 student canteens in Xipu Campus</p><p class="vsbcontent_img"><img width="929" height="221" src="/__local/6/CA/8A/C856876DBC78DD756C6252A59A2_56CE9FCA_13AEC1.png" vsbhref="vurl" vurl="/_vsl/6CA8AC856876DBC78DD756C6252A59A2/56CE9FCA/13AEC1" vheight="221" vwidth="929" orisrc="/__local/6/CA/8A/C856876DBC78DD756C6252A59A2_56CE9FCA_13AEC1.png" class="img_vsb_content"> </p><p class="vsbcontent_img"><img width="339" height="195" src="/__local/1/DA/A6/B20F5657AF0B35C027B3D3FAE1E_70766771_675DA.png" vsbhref="vurl" vurl="/_vsl/1DAA6B20F5657AF0B35C027B3D3FAE1E/70766771/675DA" vheight=" 195px" vwidth=" 339px" orisrc="/__local/1/DA/A6/B20F5657AF0B35C027B3D3FAE1E_70766771_675DA.png" class="img_vsb_content" style="width: 339px; height: 195px;"><img src="/__local/D/1A/F8/D33B6868495F6F82FF1033F13C3_69387EDA_F7A3.jpg" width="315" height="193" vsbhref="vurl" vurl="/_vsl/D1AF8D33B6868495F6F82FF1033F13C3/69387EDA/F7A3" vheight=" 193px" vwidth=" 315px" orisrc="/__local/D/1A/F8/D33B6868495F6F82FF1033F13C3_69387EDA_F7A3.jpg" class="img_vsb_content" style="width: 315px; height: 193px;"><img width="263" height="197" src="/__local/5/73/E7/59A35260FD2428402CDE3916F1D_AE41C2B3_4F90D.png" vsbhref="vurl" vurl="/_vsl/573E759A35260FD2428402CDE3916F1D/AE41C2B3/4F90D" vheight="197" vwidth="263" orisrc="/__local/5/73/E7/59A35260FD2428402CDE3916F1D_AE41C2B3_4F90D.png" class="img_vsb_content"> </p><p class="vsbcontent_img"><img width="292" height="205" src="/__local/0/D0/8D/F59EA94818C664A251FC72ECAD7_E1ECEAB0_5C165.png" vsbhref="vurl" vurl="/_vsl/0D08DF59EA94818C664A251FC72ECAD7/E1ECEAB0/5C165" vheight="205" vwidth="292" orisrc="/__local/0/D0/8D/F59EA94818C664A251FC72ECAD7_E1ECEAB0_5C165.png" class="img_vsb_content"><img width="320" height="205" src="/__local/B/24/BB/3179DFEEC01962E475F5AAD66CE_DACB2DBD_1E084.jpg" vsbhref="vurl" vurl="/_vsl/B24BB3179DFEEC01962E475F5AAD66CE/DACB2DBD/1E084" vheight="205" vwidth="320" orisrc="/__local/B/24/BB/3179DFEEC01962E475F5AAD66CE_DACB2DBD_1E084.jpg" class="img_vsb_content"><img width="300" height="206" src="/__local/1/78/E7/F9C03A3FD9622A806DDB95C15FE_CAE17284_1CADF.jpg" vsbhref="vurl" vurl="/_vsl/178E7F9C03A3FD9622A806DDB95C15FE/CAE17284/1CADF" vheight="206" vwidth="300" orisrc="/__local/1/78/E7/F9C03A3FD9622A806DDB95C15FE_CAE17284_1CADF.jpg" class="img_vsb_content"><img width="294" height="196" src="/__local/C/98/1B/073B45D2666A66DCD82335ADFF5_7C3368B3_58A11.png" vsbhref="vurl" vurl="/_vsl/C981B073B45D2666A66DCD82335ADFF5/7C3368B3/58A11" vheight="196" vwidth="294" orisrc="/__local/C/98/1B/073B45D2666A66DCD82335ADFF5_7C3368B3_58A11.png" class="img_vsb_content"><img width="335" height="193" src="/__local/B/BC/EF/A11816E00A99C17EBA0BD007B4F_67D7A8CF_6342B.png" vsbhref="vurl" vurl="/_vsl/BBCEFA11816E00A99C17EBA0BD007B4F/67D7A8CF/6342B" vheight="193" vwidth="335" orisrc="/__local/B/BC/EF/A11816E00A99C17EBA0BD007B4F_67D7A8CF_6342B.png" class="img_vsb_content"><img width="281" height="187" src="/__local/7/5F/53/220B726B4B445C842C3D35ED853_5D03F049_50A50.png" vsbhref="vurl" vurl="/_vsl/75F53220B726B4B445C842C3D35ED853/5D03F049/50A50" vheight="187" vwidth="281" orisrc="/__local/7/5F/53/220B726B4B445C842C3D35ED853_5D03F049_50A50.png" class="img_vsb_content"> </p><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div>
+</div></div><div id="div_vote_id"></div>
+        <p align="left">
+        
+        <div>下一条:<a href="3242.htm">讲座：人工智能理论与实践</a></div>
+    </p>
+    
+</form>
+</div>
+            </div>
+        </div>
+    </div>
+    <div class="footer" data-aos="fade-down">
+        <div class="wrap clearfix">
+            <div class="c1"><!-- 版权内容请在本组件"内容配置-版权"处填写 -->
+<p>版权所有：西南交通大学国际教育学院</p><p>地址：中国四川省成都市郫都区犀安路 999 号（邮编：611756）</p><p><br /></p><p><br /></p></div>
+            <div class="c2"><h6>相关链接</h6>
+                <div class="list"><ul class="link_ul">
+<li> <a href="https://www.swjtu.edu.cn/" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1671064084, 68549)">西南交通大学</a> </li>               
+<li> <a href="http://fad.swjtu.edu.cn/" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1671064084, 68552)">西南交通大学国际合作与交流处</a> </li>               
+<li> <a href="http://www.csc.edu.cn/" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1671064084, 68553)">国家留学基金管理委员会</a> </li>               
+<li> <a href="http://www.cscse.edu.cn/" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1671064084, 68550)">教育部留学服务中心</a> </li>               
+<li> <a href="http://cdcrj.chengdu.gov.cn/" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1671064084, 68551)">成都市公安局出入境管理局</a> </li>               
+ </ul></div></div>
+        </div>
+    </div>    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/jquery.SuperSlide.js"></script>
+    <script>
+        $(function () {
+            $('.main-nav li').mouseenter(function () {
+                $(this).find('.dropdown').stop().slideDown()
+            })
+            $('.main-nav li').mouseleave(function () {
+                $(this).find('.dropdown').stop().slideUp()
+            })
+        })
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

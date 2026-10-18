@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-18T16:05:02.986Z",
+  "inputFile": "quality/recovery-20261018/smoke/expected-input.json",
+  "rawInputFileSha256": "a24f21889051f2f4b732a95eae2196a34393ca0fdf0bcbef75b6675ee53e3315",
+  "aggregateExpectedInputManifestSha256": "3b60805b55ee51f7352ff47f4c44cfe773c2aea57615b2fcd12c14ba5e5c8c52",
+  "manifestRawInputSha256": "a24f21889051f2f4b732a95eae2196a34393ca0fdf0bcbef75b6675ee53e3315",
+  "proofPath": "quality/recovery-20261018/release/candidate-smoke-20261018-v2/candidate-public-smoke.json",
+  "proofSha256": "6538e74cbd4735d64b97c8ea52ee8a80db75029c950ffbcb0629aeffb224f10d",
+  "bindingsMatch": true,
+  "websitePass": false,
+  "explanation": "expectedInputSha256 is the hash of the complete stable-sorted expectedInputManifest (input file + data files + source plan + batches + support-code pins). It is intentionally different from the raw input-file hash stored in expectedInputManifest.inputSha256. Both are independently recomputed above; no source bytes or historical receipts were edited.",
+  "priorObservation": "heartbeat-1551/HANDOFF.md compared the aggregate digest to several raw-file serialization digests. That comparison uses different objects; it does not establish a changed input. The v2 website proof still fails for its actual readiness/storage errors, independently of these matching hash bindings."
+}
