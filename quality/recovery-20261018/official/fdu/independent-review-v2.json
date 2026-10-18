@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "outcome": "pass",
+  "batchPath": "quality/recovery-20261018/official/fdu/full-program-batch-draft-v2.json",
+  "batchSha256": "32f4c5c630ee10c2ce11150c70c992105fde13acec07a610ee5c800eb212ff56",
+  "reviewedAt": "2026-10-18T14:23:25.032592+00:00",
+  "reviewer": "codex-independent-recover-local",
+  "reviewedCandidateEntries": 1,
+  "priorReviewPath": "quality/recovery-20261018/official/fdu/independent-review-v1.json",
+  "checks": [
+    {
+      "id": "immutable-primary-capture",
+      "status": "pass",
+      "detail": "All four raw/text hashes, exact official URLs, HTTP200 receipts and robots evidence checked. Official current ICES notice links both captured PDFs; its dated2026-10-13 publication grounds the October16-December13,2026 window for spring2027. No old date was rolled forward."
+    },
+    {
+      "id": "two-language-pdf-review",
+      "status": "pass",
+      "detail": "Read both full extracted texts, plus independently viewed EN11-15 and ZH10-13 critical rendered admissions, fees, teaching-language, guardian, visa/passport and non-returnable pages. Values and limiting conditions agree except the explicitly retained English stable-income wording."
+    },
+    {
+      "id": "stable-programme-identity",
+      "status": "pass",
+      "detail": "Uses the existing program-fudan-university-chinese-language-program-language identity, replaces old2026-labelled programme facts with fully reviewed current facts and introduces one2027springsemester cycle. Prior stale autumn cycle is not renewed; changing the outdated slug does not create a duplicate identity."
+    },
+    {
+      "id": "semester-scope-and-tentative-dates",
+      "status": "pass",
+      "detail": "One semester/一学期 exact wording, numeric months unknown. The February15-June25,2027 study timetable is TBC and refers applicants to the school calendar. The separate one-year option and reference annual fee appear only as explicitly separated brochure context."
+    },
+    {
+      "id": "teaching-medium-and-placement",
+      "status": "pass",
+      "detail": "Official application instructions explicitly select teaching language Chinese. Online arrival placement determines one of ten learning levels; about9weeks per level, two levels each semester and18classhours/week are supported. No minimum HSK or academic qualification is published, and unknown thresholds are not represented as an admission exemption."
+    },
+    {
+      "id": "eligibility-and-repaired-guardian-condition",
+      "status": "pass",
+      "detail": "Foreign nationality, age17-60, physical/mental health and fitness to study in China retained. Applicants17butunder18 require GuaranteeStatement and related documents from an adult resident in MainlandChina. V2 restores the English stable-income requirement in both eligibility and materials and discloses that language-specific wording in Chinese."
+    },
+    {
+      "id": "all-materials-and-passport-constraints",
+      "status": "pass",
+      "detail": "Online education/family/emergency-contact information, all system-required uploads, ordinary passport personal-information-page copy and coverage of the study period retained. Identity/birth/issue/expiry details must match exactly; passport and number cannot be changed before campus registration or the electronic form becomes invalid. Conditional guardian and additional/supplementary materials retained."
+    },
+    {
+      "id": "reference-tuition-strict-opt-in",
+      "status": "pass",
+      "detail": "CNY10500/semester is explicitly reference, with final amount set by Fudan FinancialOffice at enrollment; application feeCNY400 is separate. Read-only strict assessment of unchanged pending draft gives only independent_review_missing with explicit allowOfficialReferenceTuition=true; removing the flag in memory also holds incomplete_reviewed_fees. Neither reference status nor financial uncertainty was promoted to confirmed."
+    },
+    {
+      "id": "nonrefund-scope-and-housing",
+      "status": "pass",
+      "detail": "Only application fees and submitted materials are non-returnable. No tuition-nonrefund rule was invented. Student-selected accommodation and reference nearby-housing information are retained without room or price guarantee."
+    },
+    {
+      "id": "application-and-visa-conditions",
+      "status": "pass",
+      "detail": "Original captured ISO DOM contains exact HTTPS apply href, verified independently against raw HTML and the labelled derived-text hashes. Registration/activation/application/payment/feedback/correction sequence retained. Visa process is attributed to brochure guidance; arrival1-2days before registration and Fudan assistance only after school registration retained. JW202>=180days and DQ<180days remain source rules without predicting the form for the tentative semester route."
+    },
+    {
+      "id": "full-current-facts-not-time-renewal",
+      "status": "pass",
+      "detail": "All programme/cycle claims rechecked against the fresh complete official evidence. The2026-10-18 verification and2026-10-25 next-review proposal is backed by this whole-fact review, not merely the programme status or a repeated timestamp."
+    },
+    {
+      "id": "verbatim-proof-binding",
+      "status": "pass",
+      "detail": "All19provided field quotes match their bound current official capture after the existing consumer normalization, including both duration locales and explicit reference/final-pricing proofs. No canonical or batch approval fields were changed."
+    }
+  ],
+  "issues": [],
+  "captures": [
+    {
+      "sourceId": "source-fdu-ices-index-official-20261018",
+      "rawSha256": "945f80fb7b291ebae07b30a4b02838d9ba538d236e4db36988b67a94b0d1d249",
+      "textSha256": "0d3a7a716835a0d5f616fe5e3931995a2c0706f34d5826b7f000162d323d5e9c",
+      "receiptPath": "quality/recovery-20261018/official/fdu/fdu-ices-index.receipt.json",
+      "receiptSha256": "f74b0438f9ad1845e8775b7bdeb077f7131e1d9e90506e9d4dc6cc19c28cd2bc",
+      "robotsSha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+      "retrievedAt": "2026-10-18T14:12:52.302037+00:00",
+      "httpStatus": 200
+    },
+    {
+      "sourceId": "source-fdu-spring-2027-en-official-20261018",
+      "rawSha256": "79590e27e8a092013db2c208718c00b1af2ba6e9cdec2d29b6d5be9ffac68351",
+      "textSha256": "33e3078b3a599178f3bdcb6651c122fb8f2e7b0d40399d4fe8627ba1f1825844",
+      "receiptPath": "quality/recovery-20261018/official/fdu/fdu-spring-2027-en.receipt.json",
+      "receiptSha256": "09d91e7884d284274edbcd349fe7159f841c04dc0b3db8cf71953793244b2c35",
+      "robotsSha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+      "retrievedAt": "2026-10-18T14:12:56.741980+00:00",
+      "httpStatus": 200
+    },
+    {
+      "sourceId": "source-fdu-spring-2027-zh-official-20261018",
+      "rawSha256": "2f5b09cc02fed3753bf0b662f60242cfcd56f21eeb8f7904b5bc48464d30bef2",
+      "textSha256": "0c3707ea49528d7d7de5b2c85af84d41a33ad852af7b6bf1b9dac2a23212721e",
+      "receiptPath": "quality/recovery-20261018/official/fdu/fdu-spring-2027-zh.receipt.json",
+      "receiptSha256": "08014408d7d99f8be3db2930f23b3856f9150007bb8ea39a0d8b1c2f8c9ac8cf",
+      "robotsSha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+      "retrievedAt": "2026-10-18T14:12:55.357717+00:00",
+      "httpStatus": 200
+    },
+    {
+      "sourceId": "source-fdu-iso-index-official-20261018",
+      "rawSha256": "517749ba89764edf62d1bda01ccba40c1b84d659e8d580e4061cbf24d413c70c",
+      "textSha256": "9d7e9a1bb2eb82775ff5dcf4202ca9adbc6b9079685efba28bf7d2d4b4cb0157",
+      "receiptPath": "quality/recovery-20261018/official/fdu/fdu-iso-index.receipt.json",
+      "receiptSha256": "e46aaf957f652aaafd2b311a9ae1ff43d9f89e4454f0526e21ff71a70ed1d651",
+      "robotsSha256": "100ca2fff14de55ad4a9f6d47ec2ca3d5c3e0f2a6b194569250b78b9bb4a6b9a",
+      "retrievedAt": "2026-10-18T14:12:52.682484+00:00",
+      "httpStatus": 200
+    }
+  ],
+  "visualEvidence": [
+    {
+      "path": "quality/recovery-20261018/official/fdu/en-page-11.png",
+      "sha256": "bc226e67334c29b9171aa49bfa81a0cfcffb737b983d3f9bac0eb7ed056be00e"
+    },
+    {
+      "path": "quality/recovery-20261018/official/fdu/en-page-12.png",
+      "sha256": "3f9789bd0662be96c01aeeaa09e34165bb5cf1a783aec98583055c99d07a7b9b"
+    },
+    {
+      "path": "quality/recovery-20261018/official/fdu/en-page-13.png",
+      "sha256": "8622302d734cb77734be862afc506334fae5e1d4b541fd3ef5cb378575aa98f6"
+    },
+    {
+      "path": "quality/recovery-20261018/official/fdu/en-page-14.png",
+      "sha256": "47f3c9a9cf15de4137c2d11cfb310ce3aa5a1bf4ef91b97fce131acd53ad1c16"
+    },
+    {
+      "path": "quality/recovery-20261018/official/fdu/en-page-15.png",
+      "sha256": "fc81787eb393729b2ad07264640a6d026b45567615b1226402b09177bb79f054"
+    },
+    {
+      "path": "quality/recovery-20261018/official/fdu/zh-page-10.png",
+      "sha256": "c4619c6ecdf432abde0381783e138d1e94a937bbaacbdbee805fa154a0e52f8d"
+    },
+    {
+      "path": "quality/recovery-20261018/official/fdu/zh-page-11.png",
+      "sha256": "267c3a218e62699814ebd720d0cfb0c2577fafedd6cfb4a8183ca2df2762e81e"
+    },
+    {
+      "path": "quality/recovery-20261018/official/fdu/zh-page-12.png",
+      "sha256": "2b0f71d0bc10b55aa2147c599306a14e708e9e067d2da68e93e5e721a8bfab9c"
+    },
+    {
+      "path": "quality/recovery-20261018/official/fdu/zh-page-13.png",
+      "sha256": "fbdf92dcbaa3840ed7f67812bb5eb15323db438926da52b76c274048753b4e12"
+    }
+  ],
+  "domDerivation": {
+    "path": "quality/recovery-20261018/official/fdu/fdu-iso-index.dom-extraction.json",
+    "sha256": "821e86897f2af7f2a40e632659ed58a04b7ec71367e28e03e8071f84b0dd1e90",
+    "rawHrefRechecked": true
+  },
+  "canonicalWrites": 0,
+  "approvedBatchWrites": 0,
+  "paidCalls": 0
+}

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "outcome": "pass",
+  "batchPath": "quality/recovery-20261018/official/sjtu/full-program-batch-draft-v1.json",
+  "batchSha256": "544d61369be0a86f49cedc7c1f5fb960c37b7cbb1c0e5b7ca6cbb98c0d6775b6",
+  "reviewedAt": "2026-10-18T14:14:48.772590+00:00",
+  "reviewer": "codex-independent-recover-local",
+  "reviewedCandidateEntries": 2,
+  "method": "Independent full semantic review of current immutable original bytes, including field evidence binding and conditional application requirements; read-only strict assessor; no approval-field edits.",
+  "checks": [
+    {
+      "id": "full-claim-review-not-date-only",
+      "status": "pass",
+      "detail": "Independently reread the complete official admissions body and compared identity, level, medium, exact duration, language alternatives, qualifications, all application-document conditions, current intake dates and fees. The proposed 2026-10-18 verification and 2026-10-25 review date are supported by the fresh whole-fact review, not a date-only renewal."
+    },
+    {
+      "id": "immutable-current-evidence",
+      "status": "pass",
+      "detail": "All raw/text bytes match the batch and HTTP200 capture receipts; source and capture URLs agree. Official university subdomains, same-host TLS acquisition, robots status and original robots byte hashes were checked. Captures are within 24 hours and not future-dated."
+    },
+    {
+      "id": "strict-assessor-original-draft",
+      "status": "pass",
+      "detail": "Read-only strict assessor against the current normalized canonical bundle reports 0 ready and 2 held per school, with independent_review_missing as the sole blocker for each entry. Original pending reviewer and null reviewedAt fields remain unchanged; no approval or canonical application was performed."
+    },
+    {
+      "id": "2027-spring-scope",
+      "status": "pass",
+      "detail": "The 2026-04-16 official launch notice explicitly includes February 2027 Chinese and English half-year mid-term entry into the continuing one-year cohort. Each is non-degree foundation preparation, with limited slots for outstanding transfers. January 15, 2027 deadline is explicit; unknown opening date remains null and precise commencement remains subject to the Admission Notice. Exact 0.5 year wording and the separate second-semester 10-week curriculum statement are both retained without month conversion."
+    },
+    {
+      "id": "medium-and-spring-thresholds",
+      "status": "pass",
+      "detail": "Separate curriculum notes explicitly state Chinese/English as primary instruction. Chinese spring entry requires HSK5 total >=200 and Writing >=60 or equivalent/native-Chinese documentation. English spring entry accepts one of TOEFL>=90, IELTS>=6.0, native-English proof, or at least two full-time years of English-medium academic study. Lower one-year autumn thresholds were not transferred to these rows."
+    },
+    {
+      "id": "eligibility-complete",
+      "status": "pass",
+      "detail": "High-school diploma or above, valid non-Chinese passport and MOE Document12(2020), physical/mental health and no criminal record, age16 inclusive to23 exclusive are retained, together with conditional integrative review/testing/interview."
+    },
+    {
+      "id": "all-fourteen-material-items",
+      "status": "pass",
+      "detail": "Reviewed all fourteen numbered items and subitems: diploma/prospective-graduate transcript alternative; school profile; passport >6 months and post-admission information restriction; photo; signed600-1000-word statement; signed referee contact letter; full academic transcript and optional written explanation for unavailable standardized results; correct route language certificate; birth certificate; both parents nationality/registration; every Chinese-parent/former-Chinese nationality subcase; spring guardian guarantee; awards if any; additional requested evidence. Notarized translations and online-paper distinction are retained."
+    },
+    {
+      "id": "nationality-and-guardian-subconditions",
+      "status": "pass",
+      "detail": "Foreign nationality at birth or later, parent permanent residence at birth, four-year renunciation by April30 of the application year, former Chinese household-registration cancellation, historical China visas/residence/entry-exit records, Statement of Integrity, and prior PRC Travel Document/Exit and Entry Permit section11.3 documents are represented. Applicable application-year uncertainty remains disclosed. The under18 guardian reference is February1,2027 for spring, not September1,2026."
+    },
+    {
+      "id": "tuition-and-fee-binding",
+      "status": "pass",
+      "detail": "Raw HTML tuition-table row associations confirm Chinese half-year CNY36800 and English half-year CNY46800 for the whole route. CNY800 application fee alone is non-refundable. Included preparation/guidance, CNY800/year mandatory insurance, CNY700/month assigned four-person Qibao dormitory, two-week pre-admission tuition payment and minimum10/cancellation-full-tuition-refund conditions are retained without broadening nonrefund scope."
+    },
+    {
+      "id": "progression-scholarship-limits",
+      "status": "pass",
+      "detail": "No undergraduate admission or scholarship is promised. Official assessment-dependent progression, autumn-only one-year Freshman Scholarship restriction, exam-based Outstanding Scholarship and the notice statement that scholarships cannot be applied to tuition are preserved."
+    },
+    {
+      "id": "all-field-quotes-bound",
+      "status": "pass",
+      "detail": "Every provided field quote across both entries was independently normalized and matched to its record-bound official capture; 26 field-evidence items checked. Numeric and date claims were additionally read in their full section/table context."
+    }
+  ],
+  "issues": [],
+  "captures": [
+    {
+      "sourceId": "source-sjtu-pre-university-spring-2027-en-20261017",
+      "url": "https://www.oec.sjtu.edu.cn/en/pressreleases/info.aspx?itemid=6157",
+      "rawSha256": "54667226cc4ad3fe424ba083deaea58f723cd4b607d5c9b491b041dc8f6606a1",
+      "textSha256": "bb5bec027c09f4ad9adcc0be73422279966506549d8ed22360dd32f079068f44",
+      "receiptPath": "quality/recovery-20261018/official/sjtu/sjtu-spring-2027.receipt.json",
+      "receiptSha256": "1262f17d810b86bdfd4a79cd02621ffda2dcfffaae73a408a2d7c484bb13e8ec",
+      "robotsSha256": "dda74fc3cb9f21461f8b070cd42903cdeb7d1bc81bc372e6ac845f86dd92f049",
+      "retrievedAt": "2026-10-18T14:05:38.910591+00:00",
+      "httpStatus": 200
+    }
+  ],
+  "canonicalWrites": 0,
+  "approvedBatchWrites": 0,
+  "paidCalls": 0
+}

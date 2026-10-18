@@ -1,0 +1,944 @@
+{
+  "schemaVersion": 1,
+  "comparedAt": "2026-10-18T14:02:23.579164+00:00",
+  "baseCommit": "7c44e16b4dfb254cf499c7f9cc6f27aacfe3adad",
+  "candidateDeployment": "dpl_HDcttJBikiQnnHHJCAjGXqftsvpw",
+  "classification": "recovered differences only; not a new official-source certification",
+  "files": {
+    "programs.json": {
+      "baseBytes": 7141459,
+      "baseSha256": "b7fa9cb59b664f249b1cce19183871f0ad0d110eace176e79e8e08335de63bf3",
+      "candidateBytes": 7187611,
+      "candidateSha256": "c0a774cc4a576c7e98d01ab1e3032aaa22738a88a26b4f7c61e12c165671ca5d",
+      "baseRecords": 2037,
+      "candidateRecords": 2043,
+      "addedIds": [
+        "program-beijing-normal-university-chinese-taught-undergraduate-credit-nondegree",
+        "program-shu-international-foundation-one-semester-spring-2027",
+        "program-sjtu-pre-university-chinese-half-year-spring-2027",
+        "program-sjtu-pre-university-english-half-year-spring-2027",
+        "program-xjtu-ifp-advanced-chinese-taught-18-weeks",
+        "program-xjtu-ifp-intensive-chinese-taught-11-weeks"
+      ],
+      "removedIds": [],
+      "modifiedIds": [
+        "program-beijing-language-and-culture-university-chinese-language-bachelor",
+        "program-beijing-language-and-culture-university-teaching-chinese-bachelor"
+      ],
+      "changes": [
+        {
+          "id": "program-beijing-normal-university-chinese-taught-undergraduate-credit-nondegree",
+          "change": "added",
+          "name": {
+            "en": "Chinese-taught Undergraduate Credit Program (General Advanced Studies Student)",
+            "zh": "中文授课本科学分项目（普通进修生）"
+          },
+          "universityId": "uni-beijing-normal-university",
+          "programId": null,
+          "changedFields": [
+            "applyUrl",
+            "degreeLevel",
+            "discipline",
+            "durationMonths",
+            "durationText",
+            "id",
+            "languageRequirements",
+            "name",
+            "programUrl",
+            "reviewAfter",
+            "slug",
+            "sourceIds",
+            "status",
+            "supplementaryDetails",
+            "teachingLanguages",
+            "universityId",
+            "verificationScope",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-bnu-undergraduate-credit-2027-spring-20261017"
+          ],
+          "url": "https://admission-is.bnu.edu.cn/english/admissionprogram/nondegreeprogram/undergraduatecredi/a/105146.html",
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-10-24",
+          "status": "verified"
+        },
+        {
+          "id": "program-shu-international-foundation-one-semester-spring-2027",
+          "change": "added",
+          "name": {
+            "en": "International Foundation Programme (One Semester)",
+            "zh": "国际预科项目（一学期）"
+          },
+          "universityId": "uni-shanghai-university",
+          "programId": null,
+          "changedFields": [
+            "applyUrl",
+            "degreeLevel",
+            "discipline",
+            "durationMonths",
+            "durationMonthsMax",
+            "durationText",
+            "id",
+            "languageRequirements",
+            "name",
+            "programUrl",
+            "reviewAfter",
+            "slug",
+            "sourceIds",
+            "status",
+            "supplementaryDetails",
+            "teachingLanguages",
+            "universityId",
+            "verificationScope",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-shu-foundation-2027-spring-official-20261017"
+          ],
+          "url": "https://apply.shu.edu.cn/upload/shangda/7/b/e/%E4%B8%8A%E6%B5%B7%E5%A4%A7%E5%AD%A6%E5%9B%BD%E9%99%85%E9%A2%84%E7%A7%91%E9%A1%B9%E7%9B%AE2027%E5%B9%B4%E6%98%A5%E5%AD%A3%E6%8B%9B%E7%94%9F%E7%AE%80%E7%AB%A0.pdf",
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-11-16",
+          "status": "verified"
+        },
+        {
+          "id": "program-sjtu-pre-university-chinese-half-year-spring-2027",
+          "change": "added",
+          "name": {
+            "en": "Pre-University Chinese Program (0.5 year)"
+          },
+          "universityId": "uni-shanghai-jiao-tong-university",
+          "programId": null,
+          "changedFields": [
+            "applyUrl",
+            "degreeLevel",
+            "discipline",
+            "durationMonths",
+            "durationMonthsMax",
+            "durationText",
+            "id",
+            "languageRequirements",
+            "name",
+            "programUrl",
+            "reviewAfter",
+            "slug",
+            "sourceIds",
+            "status",
+            "supplementaryDetails",
+            "teachingLanguages",
+            "universityId",
+            "verificationScope",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-sjtu-pre-university-spring-2027-en-20261017"
+          ],
+          "url": "https://www.oec.sjtu.edu.cn/en/pressreleases/info.aspx?itemid=6157",
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-11-16",
+          "status": "verified"
+        },
+        {
+          "id": "program-sjtu-pre-university-english-half-year-spring-2027",
+          "change": "added",
+          "name": {
+            "en": "Pre-University English Program (0.5 year)"
+          },
+          "universityId": "uni-shanghai-jiao-tong-university",
+          "programId": null,
+          "changedFields": [
+            "applyUrl",
+            "degreeLevel",
+            "discipline",
+            "durationMonths",
+            "durationMonthsMax",
+            "durationText",
+            "id",
+            "languageRequirements",
+            "name",
+            "programUrl",
+            "reviewAfter",
+            "slug",
+            "sourceIds",
+            "status",
+            "supplementaryDetails",
+            "teachingLanguages",
+            "universityId",
+            "verificationScope",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-sjtu-pre-university-spring-2027-en-20261017"
+          ],
+          "url": "https://www.oec.sjtu.edu.cn/en/pressreleases/info.aspx?itemid=6157",
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-11-16",
+          "status": "verified"
+        },
+        {
+          "id": "program-xjtu-ifp-advanced-chinese-taught-18-weeks",
+          "change": "added",
+          "name": {
+            "en": "International Foundation Program — Advanced Program (18 weeks, Chinese-taught)"
+          },
+          "universityId": "uni-xian-jiaotong-university",
+          "programId": null,
+          "changedFields": [
+            "applyUrl",
+            "degreeLevel",
+            "discipline",
+            "durationMonths",
+            "durationMonthsMax",
+            "durationText",
+            "id",
+            "languageRequirements",
+            "name",
+            "programUrl",
+            "reviewAfter",
+            "slug",
+            "sourceIds",
+            "status",
+            "supplementaryDetails",
+            "teachingLanguages",
+            "universityId",
+            "verificationScope",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-xjtu-2027-foundation-full-guide-official-20261017",
+            "source-xjtu-2027-foundation-brochure-official-20261017",
+            "source-xjtu-official-application-route-official-20261017"
+          ],
+          "url": "https://sie.xjtu.edu.cn/en/info/1165/3212.htm",
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-10-24",
+          "status": "verified"
+        },
+        {
+          "id": "program-xjtu-ifp-intensive-chinese-taught-11-weeks",
+          "change": "added",
+          "name": {
+            "en": "International Foundation Program — Intensive Program (11 weeks, Chinese-taught)"
+          },
+          "universityId": "uni-xian-jiaotong-university",
+          "programId": null,
+          "changedFields": [
+            "applyUrl",
+            "degreeLevel",
+            "discipline",
+            "durationMonths",
+            "durationMonthsMax",
+            "durationText",
+            "id",
+            "languageRequirements",
+            "name",
+            "programUrl",
+            "reviewAfter",
+            "slug",
+            "sourceIds",
+            "status",
+            "supplementaryDetails",
+            "teachingLanguages",
+            "universityId",
+            "verificationScope",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-xjtu-2027-foundation-full-guide-official-20261017",
+            "source-xjtu-2027-foundation-brochure-official-20261017",
+            "source-xjtu-official-application-route-official-20261017"
+          ],
+          "url": "https://sie.xjtu.edu.cn/en/info/1165/3212.htm",
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-10-24",
+          "status": "verified"
+        },
+        {
+          "id": "program-beijing-language-and-culture-university-chinese-language-bachelor",
+          "change": "modified",
+          "name": {
+            "en": "Chinese Language",
+            "zh": "汉语言",
+            "ru": "Китайский язык"
+          },
+          "universityId": "uni-beijing-language-and-culture-university",
+          "programId": null,
+          "changedFields": [
+            "languageRequirements",
+            "programUrl",
+            "reviewAfter",
+            "sourceIds",
+            "status",
+            "supplementaryDetails",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-blcu-map-undergraduate-2027-20261017",
+            "source-blcu-map-undergraduate-2027-catalogue-v2-20261017",
+            "source-blcu-map-undergraduate-entry-20261017",
+            "source-blcu-map-chinese-programmes-list-official-20261017",
+            "source-blcu-map-chinese-bachelor-profile-20261017",
+            "source-blcu-map-application-portal-20261017"
+          ],
+          "url": "https://admission.blcu.edu.cn/2023/1219/c1250a2682/page.htm",
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-10-24",
+          "status": "verified"
+        },
+        {
+          "id": "program-beijing-language-and-culture-university-teaching-chinese-bachelor",
+          "change": "modified",
+          "name": {
+            "en": "Teaching Chinese to Speakers of Other Languages",
+            "zh": "汉语国际教育",
+            "ru": "Преподавание китайского как иностранного"
+          },
+          "universityId": "uni-beijing-language-and-culture-university",
+          "programId": null,
+          "changedFields": [
+            "applyUrl",
+            "durationMonths",
+            "languageRequirements",
+            "programUrl",
+            "reviewAfter",
+            "sourceIds",
+            "status",
+            "supplementaryDetails",
+            "teachingLanguages",
+            "verificationScope",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-blcu-map-undergraduate-2027-20261017",
+            "source-blcu-map-undergraduate-2027-catalogue-v2-20261017",
+            "source-blcu-map-undergraduate-entry-20261017",
+            "source-blcu-map-chinese-programmes-list-official-20261017",
+            "source-blcu-map-teaching-chinese-bachelor-profile-20261017",
+            "source-blcu-map-application-portal-20261017"
+          ],
+          "url": "https://admission.blcu.edu.cn/2023/1219/c1250a2683/page.htm",
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-10-24",
+          "status": "verified"
+        }
+      ]
+    },
+    "admission-cycles.json": {
+      "baseBytes": 2233669,
+      "baseSha256": "e48f43e0c8d6a46c72b70d247aa6aaed62dea76afab00d974dd4fcfec30328b2",
+      "candidateBytes": 2257040,
+      "candidateSha256": "d8eb788f0a6f0e324275f72c5918d6d218553719f33af520799e52335c7c2d3d",
+      "baseRecords": 1628,
+      "candidateRecords": 1635,
+      "addedIds": [
+        "cycle-blcu-teaching-chinese-2027-spring",
+        "cycle-bnu-undergraduate-credit-chinese-2027-spring",
+        "cycle-shu-international-foundation-spring-2027",
+        "cycle-sjtu-pre-university-chinese-spring-2027",
+        "cycle-sjtu-pre-university-english-spring-2027",
+        "cycle-xjtu-ifp-advanced-2027-spring",
+        "cycle-xjtu-ifp-intensive-2027-spring"
+      ],
+      "removedIds": [],
+      "modifiedIds": [
+        "cycle-2027-blcu-chinese-language-spring"
+      ],
+      "changes": [
+        {
+          "id": "cycle-blcu-teaching-chinese-2027-spring",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": "program-beijing-language-and-culture-university-teaching-chinese-bachelor",
+          "changedFields": [
+            "academicYear",
+            "applicationFeeCny",
+            "closesOn",
+            "dateStatus",
+            "evidenceBasis",
+            "factScope",
+            "id",
+            "intake",
+            "notes",
+            "opensOn",
+            "programId",
+            "reviewAfter",
+            "sourceIds",
+            "status",
+            "tuitionCny",
+            "tuitionPeriod",
+            "tuitionSchedule",
+            "tuitionStatus",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-blcu-map-undergraduate-2027-20261017",
+            "source-blcu-map-undergraduate-2027-catalogue-v2-20261017",
+            "source-blcu-map-undergraduate-entry-20261017",
+            "source-blcu-map-chinese-programmes-list-official-20261017",
+            "source-blcu-map-teaching-chinese-bachelor-profile-20261017",
+            "source-blcu-map-application-portal-20261017"
+          ],
+          "url": null,
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-10-24",
+          "status": "verified"
+        },
+        {
+          "id": "cycle-bnu-undergraduate-credit-chinese-2027-spring",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": "program-beijing-normal-university-chinese-taught-undergraduate-credit-nondegree",
+          "changedFields": [
+            "academicYear",
+            "applicationFeeCny",
+            "closesOn",
+            "dateStatus",
+            "evidenceBasis",
+            "factScope",
+            "id",
+            "intake",
+            "notes",
+            "opensOn",
+            "programId",
+            "reviewAfter",
+            "sourceIds",
+            "status",
+            "tuitionCny",
+            "tuitionPeriod",
+            "tuitionSchedule",
+            "tuitionStatus",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-bnu-undergraduate-credit-2027-spring-20261017"
+          ],
+          "url": null,
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-10-24",
+          "status": "verified"
+        },
+        {
+          "id": "cycle-shu-international-foundation-spring-2027",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": "program-shu-international-foundation-one-semester-spring-2027",
+          "changedFields": [
+            "academicYear",
+            "applicationFeeCny",
+            "closesOn",
+            "dateStatus",
+            "evidenceBasis",
+            "factScope",
+            "id",
+            "intake",
+            "notes",
+            "opensOn",
+            "programId",
+            "reviewAfter",
+            "sourceIds",
+            "status",
+            "tuitionCny",
+            "tuitionPeriod",
+            "tuitionStatus",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-shu-foundation-2027-spring-official-20261017"
+          ],
+          "url": null,
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-11-16",
+          "status": "verified"
+        },
+        {
+          "id": "cycle-sjtu-pre-university-chinese-spring-2027",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": "program-sjtu-pre-university-chinese-half-year-spring-2027",
+          "changedFields": [
+            "academicYear",
+            "applicationFeeCny",
+            "closesOn",
+            "dateStatus",
+            "evidenceBasis",
+            "factScope",
+            "id",
+            "intake",
+            "notes",
+            "opensOn",
+            "programId",
+            "reviewAfter",
+            "sourceIds",
+            "status",
+            "tuitionCny",
+            "tuitionPeriod",
+            "tuitionStatus",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-sjtu-pre-university-spring-2027-en-20261017"
+          ],
+          "url": null,
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-11-16",
+          "status": "verified"
+        },
+        {
+          "id": "cycle-sjtu-pre-university-english-spring-2027",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": "program-sjtu-pre-university-english-half-year-spring-2027",
+          "changedFields": [
+            "academicYear",
+            "applicationFeeCny",
+            "closesOn",
+            "dateStatus",
+            "evidenceBasis",
+            "factScope",
+            "id",
+            "intake",
+            "notes",
+            "opensOn",
+            "programId",
+            "reviewAfter",
+            "sourceIds",
+            "status",
+            "tuitionCny",
+            "tuitionPeriod",
+            "tuitionStatus",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-sjtu-pre-university-spring-2027-en-20261017"
+          ],
+          "url": null,
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-11-16",
+          "status": "verified"
+        },
+        {
+          "id": "cycle-xjtu-ifp-advanced-2027-spring",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": "program-xjtu-ifp-advanced-chinese-taught-18-weeks",
+          "changedFields": [
+            "academicYear",
+            "applicationFeeCny",
+            "closesOn",
+            "dateStatus",
+            "evidenceBasis",
+            "factScope",
+            "id",
+            "intake",
+            "notes",
+            "opensOn",
+            "programId",
+            "reviewAfter",
+            "sourceIds",
+            "status",
+            "tuitionCny",
+            "tuitionPeriod",
+            "tuitionStatus",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-xjtu-2027-foundation-full-guide-official-20261017",
+            "source-xjtu-2027-foundation-brochure-official-20261017",
+            "source-xjtu-official-application-route-official-20261017"
+          ],
+          "url": null,
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-10-24",
+          "status": "verified"
+        },
+        {
+          "id": "cycle-xjtu-ifp-intensive-2027-spring",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": "program-xjtu-ifp-intensive-chinese-taught-11-weeks",
+          "changedFields": [
+            "academicYear",
+            "applicationFeeCny",
+            "closesOn",
+            "dateStatus",
+            "evidenceBasis",
+            "factScope",
+            "id",
+            "intake",
+            "notes",
+            "opensOn",
+            "programId",
+            "reviewAfter",
+            "sourceIds",
+            "status",
+            "tuitionCny",
+            "tuitionPeriod",
+            "tuitionStatus",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-xjtu-2027-foundation-full-guide-official-20261017",
+            "source-xjtu-2027-foundation-brochure-official-20261017",
+            "source-xjtu-official-application-route-official-20261017"
+          ],
+          "url": null,
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-10-24",
+          "status": "verified"
+        },
+        {
+          "id": "cycle-2027-blcu-chinese-language-spring",
+          "change": "modified",
+          "name": null,
+          "universityId": null,
+          "programId": "program-beijing-language-and-culture-university-chinese-language-bachelor",
+          "changedFields": [
+            "applicationFeeCny",
+            "closesOn",
+            "dateStatus",
+            "factScope",
+            "notes",
+            "reviewAfter",
+            "sourceIds",
+            "status",
+            "tuitionSchedule",
+            "tuitionStatus",
+            "verifiedAt"
+          ],
+          "sourceIds": [
+            "source-blcu-map-undergraduate-2027-20261017",
+            "source-blcu-map-undergraduate-2027-catalogue-v2-20261017",
+            "source-blcu-map-undergraduate-entry-20261017",
+            "source-blcu-map-chinese-programmes-list-official-20261017",
+            "source-blcu-map-chinese-bachelor-profile-20261017",
+            "source-blcu-map-application-portal-20261017"
+          ],
+          "url": null,
+          "verifiedAt": "2026-10-17",
+          "reviewAfter": "2026-10-24",
+          "status": "verified"
+        }
+      ]
+    },
+    "sources.json": {
+      "baseBytes": 966550,
+      "baseSha256": "f524d45c9f0044f7f263c85bc1c8d49b3cc28e9ae4abc441b0ea9cef65214289",
+      "candidateBytes": 971935,
+      "candidateSha256": "230a0babb41a23587b4b051f24419dc2629391c905a07e757e3153e7551a5fe2",
+      "baseRecords": 2557,
+      "candidateRecords": 2570,
+      "addedIds": [
+        "source-blcu-map-application-portal-20261017",
+        "source-blcu-map-chinese-bachelor-profile-20261017",
+        "source-blcu-map-chinese-programmes-list-official-20261017",
+        "source-blcu-map-teaching-chinese-bachelor-profile-20261017",
+        "source-blcu-map-undergraduate-2027-20261017",
+        "source-blcu-map-undergraduate-2027-catalogue-v2-20261017",
+        "source-blcu-map-undergraduate-entry-20261017",
+        "source-bnu-undergraduate-credit-2027-spring-20261017",
+        "source-shu-foundation-2027-spring-official-20261017",
+        "source-sjtu-pre-university-spring-2027-en-20261017",
+        "source-xjtu-2027-foundation-brochure-official-20261017",
+        "source-xjtu-2027-foundation-full-guide-official-20261017",
+        "source-xjtu-official-application-route-official-20261017"
+      ],
+      "removedIds": [],
+      "modifiedIds": [],
+      "changes": [
+        {
+          "id": "source-blcu-map-application-portal-20261017",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": null,
+          "changedFields": [
+            "accessedAt",
+            "id",
+            "kind",
+            "language",
+            "official",
+            "publisher",
+            "title",
+            "url"
+          ],
+          "sourceIds": null,
+          "url": "https://apply.blcu.edu.cn/",
+          "verifiedAt": null,
+          "reviewAfter": null,
+          "status": null
+        },
+        {
+          "id": "source-blcu-map-chinese-bachelor-profile-20261017",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": null,
+          "changedFields": [
+            "accessedAt",
+            "id",
+            "kind",
+            "language",
+            "official",
+            "publisher",
+            "title",
+            "url"
+          ],
+          "sourceIds": null,
+          "url": "https://admission.blcu.edu.cn/2023/1219/c1250a2682/page.htm",
+          "verifiedAt": null,
+          "reviewAfter": null,
+          "status": null
+        },
+        {
+          "id": "source-blcu-map-chinese-programmes-list-official-20261017",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": null,
+          "changedFields": [
+            "accessedAt",
+            "id",
+            "kind",
+            "language",
+            "official",
+            "publisher",
+            "title",
+            "url"
+          ],
+          "sourceIds": null,
+          "url": "https://admission.blcu.edu.cn/43/list.htm",
+          "verifiedAt": null,
+          "reviewAfter": null,
+          "status": null
+        },
+        {
+          "id": "source-blcu-map-teaching-chinese-bachelor-profile-20261017",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": null,
+          "changedFields": [
+            "accessedAt",
+            "id",
+            "kind",
+            "language",
+            "official",
+            "publisher",
+            "title",
+            "url"
+          ],
+          "sourceIds": null,
+          "url": "https://admission.blcu.edu.cn/2023/1219/c1250a2683/page.htm",
+          "verifiedAt": null,
+          "reviewAfter": null,
+          "status": null
+        },
+        {
+          "id": "source-blcu-map-undergraduate-2027-20261017",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": null,
+          "changedFields": [
+            "accessedAt",
+            "id",
+            "kind",
+            "language",
+            "official",
+            "publisher",
+            "title",
+            "url"
+          ],
+          "sourceIds": null,
+          "url": "https://admission.blcu.edu.cn/2026/1014/c1572a3064/page.htm",
+          "verifiedAt": null,
+          "reviewAfter": null,
+          "status": null
+        },
+        {
+          "id": "source-blcu-map-undergraduate-2027-catalogue-v2-20261017",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": null,
+          "changedFields": [
+            "accessedAt",
+            "id",
+            "kind",
+            "language",
+            "official",
+            "publisher",
+            "title",
+            "url"
+          ],
+          "sourceIds": null,
+          "url": "https://admission.blcu.edu.cn/_upload/article/files/39/74/e89e82e5490687d93679a0c4b3c4/206c8a45-4a29-45e6-9870-cfd697dd5c60.pdf",
+          "verifiedAt": null,
+          "reviewAfter": null,
+          "status": null
+        },
+        {
+          "id": "source-blcu-map-undergraduate-entry-20261017",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": null,
+          "changedFields": [
+            "accessedAt",
+            "id",
+            "kind",
+            "language",
+            "official",
+            "publisher",
+            "title",
+            "url"
+          ],
+          "sourceIds": null,
+          "url": "https://admission.blcu.edu.cn/46/list.htm",
+          "verifiedAt": null,
+          "reviewAfter": null,
+          "status": null
+        },
+        {
+          "id": "source-bnu-undergraduate-credit-2027-spring-20261017",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": null,
+          "changedFields": [
+            "accessedAt",
+            "id",
+            "kind",
+            "language",
+            "official",
+            "publisher",
+            "title",
+            "url"
+          ],
+          "sourceIds": null,
+          "url": "https://admission-is.bnu.edu.cn/english/admissionprogram/nondegreeprogram/undergraduatecredi/a/105146.html",
+          "verifiedAt": null,
+          "reviewAfter": null,
+          "status": null
+        },
+        {
+          "id": "source-shu-foundation-2027-spring-official-20261017",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": null,
+          "changedFields": [
+            "accessedAt",
+            "id",
+            "kind",
+            "language",
+            "official",
+            "publisher",
+            "title",
+            "url"
+          ],
+          "sourceIds": null,
+          "url": "https://apply.shu.edu.cn/upload/shangda/7/b/e/%E4%B8%8A%E6%B5%B7%E5%A4%A7%E5%AD%A6%E5%9B%BD%E9%99%85%E9%A2%84%E7%A7%91%E9%A1%B9%E7%9B%AE2027%E5%B9%B4%E6%98%A5%E5%AD%A3%E6%8B%9B%E7%94%9F%E7%AE%80%E7%AB%A0.pdf",
+          "verifiedAt": null,
+          "reviewAfter": null,
+          "status": null
+        },
+        {
+          "id": "source-sjtu-pre-university-spring-2027-en-20261017",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": null,
+          "changedFields": [
+            "accessedAt",
+            "id",
+            "kind",
+            "language",
+            "official",
+            "publisher",
+            "title",
+            "url"
+          ],
+          "sourceIds": null,
+          "url": "https://www.oec.sjtu.edu.cn/en/pressreleases/info.aspx?itemid=6157",
+          "verifiedAt": null,
+          "reviewAfter": null,
+          "status": null
+        },
+        {
+          "id": "source-xjtu-2027-foundation-brochure-official-20261017",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": null,
+          "changedFields": [
+            "accessedAt",
+            "id",
+            "kind",
+            "language",
+            "official",
+            "publisher",
+            "title",
+            "url"
+          ],
+          "sourceIds": null,
+          "url": "https://sie.xjtu.edu.cn/__local/D/3B/55/11E8A37A7F7047E740921538CA1_2E732B70_4489F7.pdf",
+          "verifiedAt": null,
+          "reviewAfter": null,
+          "status": null
+        },
+        {
+          "id": "source-xjtu-2027-foundation-full-guide-official-20261017",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": null,
+          "changedFields": [
+            "accessedAt",
+            "id",
+            "kind",
+            "language",
+            "official",
+            "publisher",
+            "title",
+            "url"
+          ],
+          "sourceIds": null,
+          "url": "https://sie.xjtu.edu.cn/en/info/1165/3212.htm",
+          "verifiedAt": null,
+          "reviewAfter": null,
+          "status": null
+        },
+        {
+          "id": "source-xjtu-official-application-route-official-20261017",
+          "change": "added",
+          "name": null,
+          "universityId": null,
+          "programId": null,
+          "changedFields": [
+            "accessedAt",
+            "id",
+            "kind",
+            "language",
+            "official",
+            "publisher",
+            "title",
+            "url"
+          ],
+          "sourceIds": null,
+          "url": "https://isso.xjtu.edu.cn/recruit/login",
+          "verifiedAt": null,
+          "reviewAfter": null,
+          "status": null
+        }
+      ]
+    }
+  }
+}

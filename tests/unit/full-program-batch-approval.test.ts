@@ -157,6 +157,27 @@ describe('full admissions approval from immutable official captures', () => {
     expect(fetch).not.toHaveBeenCalled()
   })
 
+  it('rejects an applied batch with the latest catalogue hash without changing data or its receipt', async () => {
+    const { root, batch, catalogSha, catalog, snapshot } = await fixture()
+    expect(applyFullProgramBatch(root, batch, catalogSha, today)).toMatchObject({ appliedPrograms: 1, newPrograms: 1 })
+    const programPath = join(root, 'content/data/programs.json')
+    const latestPrograms = JSON.parse(await readFile(programPath, 'utf8')) as Program[]
+    latestPrograms[0].name.en = 'Synthetic Robotics — later approved name'
+    await writeFile(programPath, JSON.stringify(latestPrograms, null, 2) + '\n')
+    const current = await snapshot()
+    const currentCatalog = bundleSchema.parse({ ...catalog, sources: JSON.parse(current[0]), programs: JSON.parse(current[3]), admissionCycles: JSON.parse(current[4]) })
+    const currentSha = sha(JSON.stringify(currentCatalog))
+    expect(currentSha).not.toBe(catalogSha)
+    const protectedPaths = ['sources', 'programs', 'admission-cycles'].map(name => join(root, 'content/data', name + '.json'))
+    protectedPaths.push(join(root, 'quality/program-expansion-20261013/applied-' + batch.batchId + '.json'))
+    const before = await Promise.all(protectedPaths.map(path => readFile(path)))
+
+    expect(() => applyFullProgramBatch(root, batch, currentSha, today)).toThrow('batch_already_applied')
+
+    expect(await Promise.all(protectedPaths.map(path => readFile(path)))).toEqual(before)
+    expect(fetch).not.toHaveBeenCalled()
+  })
+
   it.each(['raw', 'text'] as const)('holds changed %s bytes even if every quote and record remains plausible', async kind => {
     const { root, batch, catalogSha, snapshot } = await fixture()
     await writeFile(join(root, kind === 'raw' ? 'official.html' : 'official.txt'), visibleText + '\nChanged after independent review.')

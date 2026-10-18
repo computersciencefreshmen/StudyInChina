@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { bundleSchema, programSchema, admissionCycleSchema, sourceSchema } from '../../src/lib/data/schema'
@@ -87,6 +87,9 @@ function recordSourceProof(proof: FieldEvidence, program: Program, cycle: Admiss
 }
 
 export function applyFullProgramBatch(root: string, batch: FullProgramBatch, expectedCatalogSha256: string, today = getTodayDate()) {
+  if (!/^[a-z0-9-]{1,80}$/.test(batch.batchId)) throw Error('batch_contract_invalid')
+  const receiptPath = resolve(root, 'quality/program-expansion-20261013/applied-' + batch.batchId + '.json')
+  if (existsSync(receiptPath)) throw Error('batch_already_applied')
   const read = (name: string) => JSON.parse(readFileSync(resolve(root, 'content/data/' + name + '.json'), 'utf8'))
   const catalog = bundleSchema.parse({ sources: read('sources'), cities: read('cities'), universities: read('universities'), programs: read('programs'), admissionCycles: read('admission-cycles'), scholarships: read('scholarships') })
   const originalSha = digest(JSON.stringify(catalog))
@@ -103,7 +106,6 @@ export function applyFullProgramBatch(root: string, batch: FullProgramBatch, exp
   // All validation precedes writes. Preserve exact before/after rows in the receipt.
   const receipt = { batchId: batch.batchId, appliedAt: new Date().toISOString(), originalCatalogSha256: originalSha, nextCatalogSha256: digest(JSON.stringify(next)), assessment, appliedPrograms: approved.length, newPrograms,
     before: approved.map(entry => ({ program: catalog.programs.find(p => p.id === entry.program.id) ?? null, cycle: catalog.admissionCycles.find(c => c.id === entry.cycle.id) ?? null })), after: approved.map(entry => ({ program: entry.program, cycle: entry.cycle })) }
-  const receiptPath = resolve(root, 'quality/program-expansion-20261013/applied-' + batch.batchId + '.json')
   mkdirSync(dirname(receiptPath), { recursive: true })
   for (const [name, values] of Object.entries(changes)) writeFileSync(resolve(root, 'content/data/' + name + '.json'), JSON.stringify(values, null, 2) + '\n')
   writeFileSync(receiptPath, JSON.stringify(receipt, null, 2) + '\n')

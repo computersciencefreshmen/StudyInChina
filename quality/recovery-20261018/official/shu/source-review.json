@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "codex-subagent-refresh-official",
+  "reviewedAt": "2026-10-18T14:02:56Z",
+  "scope": "Independent fresh-source semantic review; does not approve an unseen program batch or mutate canonical content",
+  "status": "fresh-source-reviewed-ready-for-batch-comparison",
+  "sourceReceipt": "quality/recovery-20261018/official/shu/shu-spring-2027.receipt.json",
+  "sourceSha256": "924785d97f72deae12a57ff775fb9e69625f684aef92e75bbf17eff4556d2aa6",
+  "textSha256": "e3fa9b78a9cc95785c3fa34efaaa9719a888b23a449e2acd70c369886b588433",
+  "comparison": {
+    "priorSha256SuppliedByParent": "924785d97f72deae12a57ff775fb9e69625f684aef92e75bbf17eff4556d2aa6",
+    "freshBytesMatchPriorSuppliedDigest": true,
+    "meaning": "A new HTTP 200 capture was obtained. The unchanged digest compares bytes; the old retrieval date was not reused."
+  },
+  "visualInspection": {
+    "renderer": "pdftoppm -png -r 110",
+    "pages": 6,
+    "allPagesViewed": true,
+    "images": ["page-1.png", "page-2.png", "page-3.png", "page-4.png", "page-5.png", "page-6.png"],
+    "tableFinding": "In both direction tables, the two optional foundation subjects share a single merged 64-hour cell. Do not assign 64 hours to each subject. The accommodation rows are 140/70/35 RMB per bed per day."
+  },
+  "fields": {
+    "title": {"value": "上海大学国际预科项目2027年春季", "quote": "上海大学国际预科项目 2027 年春季招生简章", "pdfPage": 2},
+    "classification": {"value": "non-degree pre-university foundation", "quote": "国际预科项目是上海大学国际教育学院面向国际学生设置的本科学前预备教育非学历项目。", "pdfPage": 2},
+    "durationText": {"en": "One semester", "zh": "一学期", "quote": "选择“非学历项目”——“国际预科项目（一学期）”。", "pdfPage": 4, "durationMonths": null},
+    "teachingLanguage": {"value": "Chinese, primarily", "quote": "培养方案可能会根据升学要求及学生学术能力进行调整，主要为中文授课。", "pdfPage": 5},
+    "applicationPeriod": {"opensOn": "2026-09-30", "closesOn": "2026-12-30", "quote": "2026 年 9 月 30 日至 2026 年 12 月 30 日", "pdfPage": 3},
+    "intake": {"value": "March 2027; exact date per admission notice", "quote": "开学时间: 2027 年 3 月，具体时间以《录取通知书》为准。", "pdfPage": 4},
+    "applicationUrl": {"value": "https://apply.shu.edu.cn", "quote": "登录上海大学网上申请系统： https://apply.shu.edu.cn", "pdfPage": 4},
+    "tuition": {"amount": 26000, "currency": "CNY", "period": "semester", "quote": "2.6 万元/学期（人民币）", "pdfPage": 5},
+    "tuitionIncludes": {"value": ["Tuition", "CSCA preparation", "HSK mock tests", "Undergraduate application guidance"], "quote": "以上费用包含学费、CSCA 备考、HSK 模考及本科申请指导费用。", "pdfPage": 5},
+    "applicationFee": {"amount": 500, "currency": "CNY", "refundable": false, "quote": "500 元（人民币）（申请费一经缴纳不予退还）", "pdfPage": 5},
+    "insurance": {"amount": 400, "currency": "CNY", "period": "semester", "required": true, "quote": "400 元/一学期（人民币）", "pdfPage": 5},
+    "languageRequirement": {
+      "value": "In principle HSK 3 with the stated score or equivalent; arrangements may be made for applicants below that level. Preserve the exception.",
+      "quote": "原则上，申请人汉语水平需要达到 HSK3 及 180 分以上或同等水平。",
+      "exceptionQuote": "如语言水平未达标学生有学习预科的需求，根据学生情况另行安排。",
+      "pdfPage": 3,
+      "proofDocument": "HSK 3 or higher score scan/web screenshot within the past two years"
+    },
+    "eligibility": [
+      "High-school graduate or equivalent; prospective graduates may apply with a school-issued expected-graduation certificate and must supply the final certificate before enrollment.",
+      "Non-Chinese citizen holding a valid foreign passport and complying with relevant Ministry of Education rules.",
+      "Physically and mentally healthy, no criminal record, meeting the medical examination standards for studying in China.",
+      "Aged 16 through 24 inclusive at enrollment.",
+      "In principle HSK 3 at the stated 180-point threshold or equivalent; case-specific arrangements may be made below the level."
+    ],
+    "materials": [
+      {"number": 1, "required": true, "value": "Ordinary passport information page, valid for over one year; passport information must not change from admission until registration is completed."},
+      {"number": 2, "required": "if currently in China", "value": "Valid visa information page."},
+      {"number": 3, "required": true, "value": "Color bareheaded identification photo from the last six months, at least 295 by 413 pixels and no more than 200 KB."},
+      {"number": 4, "required": true, "value": "Personally signed study plan of 300–500 Chinese characters covering background, interests/strengths, intended major and reasons for application."},
+      {"number": 5, "required": true, "value": "High-school diploma or equivalent; prospective graduate certificate allowed initially, final diploma required before enrollment."},
+      {"number": 6, "required": true, "value": "School-issued high-school transcript covering all courses; prospective graduates submit all results available at application."},
+      {"number": 7, "required": true, "value": "Chinese-language evidence from within the past two years: HSK 3 or higher report scan or website screenshot; preserve the separate below-level arrangement note."},
+      {"number": 8, "required": true, "value": "Financial guarantee evidence."},
+      {"number": 9, "required": true, "value": "Non-criminal record evidence."},
+      {"number": 10, "required": "if under 18", "value": "Guardian guarantee in China."},
+      {"number": 11, "required": "if available", "value": "Award certificates and other supporting evidence."}
+    ],
+    "documentConditions": [
+      "Application information must be true, accurate and complete; false information can revoke application, admission or study eligibility.",
+      "Materials outside Chinese or English require notarized Chinese or English translations.",
+      "Upload scans during application; do not mail paper materials at this stage; originals must be available at registration.",
+      "Templates for financial guarantee, criminal record and guardian guarantee are linked through the application index."
+    ],
+    "paymentConditions": [
+      "Pay the application fee online after preliminary approval, within two weeks of confirmation; late payment ends processing.",
+      "Pay full tuition after the electronic admission notice; bank-transfer applicants upload proof in the prepaid tuition section. Formal admission materials follow payment confirmation.",
+      "Exchange differences and transaction charges are borne by the student."
+    ],
+    "minimumClassCondition": {"minimum": 10, "quote": "每项目最低开班人数为 10 人，如人数未满，则不予开班，已缴纳的学费予以退还，退费标准参见学校官网。", "pdfPage": 6},
+    "progressionCondition": {"value": "Completing the foundation program plus HSK 4/5 score of at least 180 and passing CSCA permits an application to SHU undergraduate majors in September; this is not guaranteed admission.", "quote": "预科顺利结业，汉语达到 HSK4/5 级 180 分及以上，且通过 CSCA 学业测试，可于当年 9 月申请就读上海大学本科专业。", "pdfPage": 2},
+    "accommodation": {"unit": "CNY per bed per day", "single": 140, "double": 70, "fourBed": 35, "conditions": ["Rates may change per the International Student Apartment Management Center.", "Electricity and other miscellaneous charges excluded.", "On-campus accommodation is limited and not guaranteed; applicants may need safe off-campus accommodation."]},
+    "scholarship": {"value": "Excellent results and conduct may qualify students to apply; assessment details will be published separately.", "fixedAwardOrEligibilityVerified": false},
+    "directions": ["Science and Engineering", "Humanities, Economics and Management"]
+  },
+  "noInferenceRules": [
+    "Do not convert one semester to a guessed number of months.",
+    "Do not label a non-degree foundation course as a bachelor's degree.",
+    "Do not silently remove the below-HSK-3 exception.",
+    "Do not claim guaranteed undergraduate admission or a guaranteed scholarship.",
+    "Do not add a physical examination form as a listed application document: medical fitness is an eligibility requirement, but the 11-item document list does not list that form.",
+    "Do not invent a precise March start date or an exact end date."
+  ]
+}

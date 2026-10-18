@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "pass": true,
+  "outcome": "pass",
+  "batchPath": "quality/recovery-20261018/official/xjtu/full-program-batch-draft-v1.json",
+  "batchSha256": "04b7328e95452539c5fece2e97768c3069a0cf1c32d532fed5c96da76a29df89",
+  "reviewedAt": "2026-10-18T14:14:48.784814+00:00",
+  "reviewer": "codex-independent-recover-local",
+  "reviewedCandidateEntries": 2,
+  "method": "Independent full semantic review of current immutable original bytes, including field evidence binding and conditional application requirements; read-only strict assessor; no approval-field edits.",
+  "checks": [
+    {
+      "id": "full-claim-review-not-date-only",
+      "status": "pass",
+      "detail": "Independently reread the complete official admissions body and compared identity, level, medium, exact duration, language alternatives, qualifications, all application-document conditions, current intake dates and fees. The proposed 2026-10-18 verification and 2026-10-25 review date are supported by the fresh whole-fact review, not a date-only renewal."
+    },
+    {
+      "id": "immutable-current-evidence",
+      "status": "pass",
+      "detail": "All raw/text bytes match the batch and HTTP200 capture receipts; source and capture URLs agree. Official university subdomains, same-host TLS acquisition, robots status and original robots byte hashes were checked. Captures are within 24 hours and not future-dated."
+    },
+    {
+      "id": "strict-assessor-original-draft",
+      "status": "pass",
+      "detail": "Read-only strict assessor against the current normalized canonical bundle reports 0 ready and 2 held per school, with independent_review_missing as the sole blocker for each entry. Original pending reviewer and null reviewedAt fields remain unchanged; no approval or canonical application was performed."
+    },
+    {
+      "id": "pdf-table-columns-visually-reviewed",
+      "status": "pass",
+      "detail": "Independently inspected brochure-render.png against the raw2027PDF and full official HTML. Merged grade cells apply IFP60% and separate1+4 70% across all route rows. Advanced is18weeks/HSK2~3 or equivalent; Intensive is11weeks/HSK4 or above or equivalent. Both Humanities(Business and SocialScience) and Science/Engineering cost CNY13800 for18weeks and CNY8800 for11weeks; these are programme totals, not annual prices."
+    },
+    {
+      "id": "official-current-identity-and-dates",
+      "status": "pass",
+      "detail": "The official2027 Chinese-taught full-guide title explicitly supports teaching medium and foundation identity. Advanced starts February2027 with October1,2026-January15,2027 application window; Intensive starts April2027 with October1,2026-March12,2027 window. Registration day remains unknown. Exact18weeks/11weeks text is retained, with null numeric months."
+    },
+    {
+      "id": "eligibility-and-guardian",
+      "status": "pass",
+      "detail": "Under24, good health, valid ordinary foreign passport, high-school/senior-secondary qualification or equivalent, and under18 guardian authorization are retained. Graduation applicants may use mock-examination transcripts. HSK native-Chinese exemption is conditional on XJTU approval. No invented HSK numerical score or age-reference date is added."
+    },
+    {
+      "id": "all-nine-documents-and-original-tension",
+      "status": "pass",
+      "detail": "All nine source checklist items are preserved: ordinary foreign passport scan; original/notarized diploma; original/notarized academic and UniversityEntranceExamination transcripts with course scores; Chinese certificate and conditional exemption; signed headmaster/teacher letter plus email/phone; Chinese/English study plan>=600characters/words; full physical form with doctor signature/hospital seal; noncriminal certificate with expiration; supporting documents if any. Online-only submission and no paper applications retained. The apparent graduating-student/mock-transcript versus original-diploma/entrance-results timing tension is disclosed for confirmation, not silently resolved."
+    },
+    {
+      "id": "application-fee-only-nonrefund",
+      "status": "pass",
+      "detail": "Ordinary application fee is CNY500, with CNY800 replacing it for the specified FiveCentralAsianCountries scholarship applicants. Only the application fee is described as non-refundable regardless of admission result. Payment opens after initial review; no unsupported tuition nonrefund rule appears."
+    },
+    {
+      "id": "ordinary-ifp-versus-one-plus-four",
+      "status": "pass",
+      "detail": "These entries are ordinary IFP with60% average high-school grade. The separately described1+4 pathway requires70%, comprehensive undergraduate review/interview and successful foundation completion with HSK4-equivalent and qualifying CSCA report. Ordinary IFP bachelor application/review remains separate and no bachelor placement guarantee is made."
+    },
+    {
+      "id": "secure-official-application-route",
+      "status": "pass",
+      "detail": "The full guide publishes the HTTP isso.xjtu.edu.cn/recruit/login route. A separate fresh TLS-verified HTTPS200 capture of the exact same official host/path with no redirects supports its secure-scheme display. This does not invent a new destination or establish any programme fact from the login page."
+    },
+    {
+      "id": "all-field-quotes-bound",
+      "status": "pass",
+      "detail": "Every provided field quote across both entries was independently normalized and matched to its record-bound official capture; 30 field-evidence items checked. Numeric and date claims were additionally read in their full section/table context."
+    }
+  ],
+  "issues": [],
+  "captures": [
+    {
+      "sourceId": "source-xjtu-2027-foundation-full-guide-official-20261017",
+      "url": "https://sie.xjtu.edu.cn/en/info/1165/3212.htm",
+      "rawSha256": "61924d9ec9d56bb485c58845c515ad72bd710972475c489e58c26750bc424970",
+      "textSha256": "781fff50144cec1ba275d1ba7491a79780e172e835dca5ddf1a24be4a8e47c61",
+      "receiptPath": "quality/recovery-20261018/official/xjtu/xjtu-full-guide-2027-direct.receipt.json",
+      "receiptSha256": "d0d416e835a91047a0b68686c95a129995c19c1063cba5644254d372baf62ea0",
+      "robotsSha256": "29c0b0a5db57af93122bca27d4c301f5d1b7d34e5f410a85b4c1af2e747a1407",
+      "retrievedAt": "2026-10-18T14:06:58.535179+00:00",
+      "httpStatus": 200
+    },
+    {
+      "sourceId": "source-xjtu-2027-foundation-brochure-official-20261017",
+      "url": "https://sie.xjtu.edu.cn/__local/D/3B/55/11E8A37A7F7047E740921538CA1_2E732B70_4489F7.pdf",
+      "rawSha256": "4880fbb47dd4702fff4d92b7736df8bc4d3c3364c6f51452337ed1613d98484d",
+      "textSha256": "61c1688c57e5336a66a9d964a7bccf0fbb19608de2ab0aa226c235aded66db7c",
+      "receiptPath": "quality/recovery-20261018/official/xjtu/xjtu-brochure-2027-direct.receipt.json",
+      "receiptSha256": "ec63422dac568d352817cd2e1bf5c704f971e2628bd63e7e043c9b2cbb67e351",
+      "robotsSha256": "29c0b0a5db57af93122bca27d4c301f5d1b7d34e5f410a85b4c1af2e747a1407",
+      "retrievedAt": "2026-10-18T14:06:52.824268+00:00",
+      "httpStatus": 200
+    },
+    {
+      "sourceId": "source-xjtu-official-application-route-official-20261017",
+      "url": "https://isso.xjtu.edu.cn/recruit/login",
+      "rawSha256": "65f993e842483d68d8f63e87570c716c3ae9c086390d8394074947c2584873d3",
+      "textSha256": "f5b09d5bbb6dfe522c73316ae551788c59ff6da07d5e6e180e2615703a01f5ef",
+      "receiptPath": "quality/recovery-20261018/official/xjtu/xjtu-application-route-direct.receipt.json",
+      "receiptSha256": "c4b699192d975252827684d4c0a07e1d4eb076f15a35c64088efac88f4351ab4",
+      "robotsSha256": "55f7d9e99b8e2d4e0e193b2f0275501e6d9c1ebd29cadbea6a0da48a8587e3e0",
+      "retrievedAt": "2026-10-18T14:06:57.217967+00:00",
+      "httpStatus": 200
+    }
+  ],
+  "canonicalWrites": 0,
+  "approvedBatchWrites": 0,
+  "paidCalls": 0,
+  "visualEvidence": {
+    "path": "quality/recovery-20261018/official/xjtu/brochure-render.png",
+    "sha256": "47dc37b61837c0686af31eb6fc6e5e950da353fef8392a8cebc67b891563eba9",
+    "inspected": "Full brochure page: eligibility merged grade columns, programme-length/language rows, tuition and application-date rows, materials and application-fee conditions."
+  }
+}
