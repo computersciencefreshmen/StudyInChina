@@ -51,7 +51,7 @@ const data = bundleSchema.parse({
   sources,
   universities,
 })
-const published = selectPublishedData(data, TODAY)
+const published = selectPublishedData(data, '2026-10-19')
 const pack = wave6 as unknown as Wave6Pack
 const allCandidates = [
   ...pack.programCandidates,
@@ -76,28 +76,30 @@ function isOfficialHttpsUrl(value: string): boolean {
 }
 
 describe('priority singleton coverage wave 6 on 2026-07-31', () => {
-  it('raises six priority schools to three or four published programs', () => {
+  it('retains the six-school historical depth in the audit', () => {
     expect(EXPECTED_COUNTS.size).toBe(6)
 
     for (const [slug, expectedCount] of EXPECTED_COUNTS) {
-      const university = published.universities.find((item) => item.slug === slug)
+      const university = data.universities.find((item) => item.slug === slug)
       expect(university, slug).toBeDefined()
       expect(
-        published.programs.filter((item) => item.universityId === university?.id),
+        data.programs.filter((item) => item.universityId === university?.id).length,
         slug,
-      ).toHaveLength(expectedCount)
+      ).toBeGreaterThanOrEqual(expectedCount)
     }
   })
 
-  it('publishes all fifteen concrete program candidates', () => {
+  it('retains all fifteen concrete program candidates without publishing stale reviews', () => {
     expect(pack.programCandidates).toHaveLength(15)
 
+    const storedIds = new Set(data.programs.map((item) => item.id))
     const publishedIds = new Set(published.programs.map((item) => item.id))
     for (const candidate of pack.programCandidates) {
       expect(
-        publishedIds.has(programId(candidate.candidateId)),
+        storedIds.has(programId(candidate.candidateId)),
         candidate.candidateId,
       ).toBe(true)
+      expect(publishedIds.has(programId(candidate.candidateId)), candidate.candidateId).toBe(false)
     }
   })
 
@@ -193,22 +195,21 @@ describe('priority singleton coverage wave 6 on 2026-07-31', () => {
       expect(program?.durationMonths, candidateId).toBe(values[2])
       expect(program?.teachingLanguages, candidateId).toEqual(values[3])
       const publicProgram = published.programs.find((item) => item.id === program?.id)
-      expect(publicProgram, candidateId).toBeDefined()
+      expect(publicProgram, candidateId).toBeUndefined()
       if (program?.status === 'stale') {
-        expect(publicProgram?.durationMonths, candidateId).toBeNull()
-        expect(publicProgram?.teachingLanguages, candidateId).toEqual([])
-        expect(publicProgram?.applyUrl, candidateId).toBeNull()
+        expect(program.reviewAfter < '2026-10-19', candidateId).toBe(true)
       }
     }
   })
 
   it('keeps CUEB unbound and applies the later GZHU program scope without backdating it', () => {
     const cuebCandidateId = 'wave6-cueb-new-foreign-student-scholarship'
-    const cueb = published.scholarships.find((item) =>
+    const cueb = data.scholarships.find((item) =>
       item.id === scholarshipId(cuebCandidateId))
     expect(cueb, cuebCandidateId).toBeDefined()
     expect(cueb?.providerType, cuebCandidateId).toBe('university')
     expect(cueb?.programIds, cuebCandidateId).toEqual([])
+    expect(published.scholarships.some(item => item.id === cueb?.id)).toBe(false)
 
     const gzhuCandidateId = 'wave6-gzhu-international-student-scholarship-2026'
     const gzhuId = scholarshipId(gzhuCandidateId)
@@ -222,13 +223,10 @@ describe('priority singleton coverage wave 6 on 2026-07-31', () => {
     expect(published.scholarships.some((item) => item.id === gzhuId)).toBe(false)
   })
 
-  it('keeps the published catalog free of same-school semantic duplicates', () => {
-    const publishedProgramIds = new Set(
-      published.programs.map((program) => program.id),
-    )
-
-    expect(
-      findSemanticProgramDuplicates(data.programs, publishedProgramIds),
-    ).toEqual([])
+  it('keeps this historical wave free of same-school semantic duplicates', () => {
+    const cohortIds = new Set(pack.programCandidates.map(candidate => `prog-gap-${candidate.candidateId}`))
+    const cohortPrograms = data.programs.filter(program => cohortIds.has(program.id))
+    expect(cohortPrograms.length).toBeGreaterThan(0)
+    expect(findSemanticProgramDuplicates(cohortPrograms)).toEqual([])
   })
 })

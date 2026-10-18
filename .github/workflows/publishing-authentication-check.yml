@@ -1,0 +1,30 @@
+name: Verify publishing authentication
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/publishing-authentication-check.yml
+      - scripts/operations/check-publishing-auth.mjs
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Read-only publishing credential check
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Verify credentials against the pinned project and common writer
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          ADMIN_TELEMETRY_URL: ${{ secrets.ADMIN_TELEMETRY_URL }}
+          ADMIN_TELEMETRY_TOKEN: ${{ secrets.ADMIN_TELEMETRY_TOKEN }}
+        run: node scripts/operations/check-publishing-auth.mjs

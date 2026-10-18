@@ -93,7 +93,7 @@ for (const candidate of candidatePrograms) {
 }
 
 const data = bundleSchema.parse({ admissionCycles, cities, programs, scholarships, sources, universities })
-const published = selectPublishedData(data, TODAY)
+const published = selectPublishedData(data, '2026-10-19')
 
 function isOfficialUniversityHttps(value: string): boolean {
   try {
@@ -285,18 +285,18 @@ describe('verified regional breadth expansion on 2026-08-05', () => {
     }
   })
 
-  it('raises the public breadth floor while preserving Tibet University as an explicit limited case', () => {
-    expect(published.universities.length).toBeGreaterThanOrEqual(266)
-    expect(published.programs.length).toBeGreaterThanOrEqual(1_211)
+  it('preserves historical breadth and the single Tibet identity', () => {
+    expect(data.universities.length).toBeGreaterThanOrEqual(266)
+    expect(data.programs.length).toBeGreaterThanOrEqual(1_211)
     expect(data.scholarships.filter(
       (scholarship) => scholarship.status === 'verified' || scholarship.status === 'stale',
     ).length).toBeGreaterThanOrEqual(355)
 
     const counts = new Map<string, number>()
-    for (const program of published.programs) {
+    for (const program of data.programs) {
       counts.set(program.universityId, (counts.get(program.universityId) ?? 0) + 1)
     }
-    const bySlug = new Map(published.universities.map((university) => [university.slug, university]))
+    const bySlug = new Map(data.universities.map((university) => [university.slug, university]))
     for (const [slug, minimum] of new Map([
       ['guangxi-minzu-university', 3],
       ['liaoning-normal-university', 5],
@@ -318,4 +318,11 @@ describe('verified regional breadth expansion on 2026-08-05', () => {
     expect(tibet).toBeDefined()
     expect(counts.get(tibet?.id ?? '')).toBe(1)
   })
+  it('keeps expired inventory in the audit and out of the current public catalog', () => {
+    const expiredPrograms = data.programs.filter(program => program.status === 'stale' || program.reviewAfter < '2026-10-19')
+    expect(expiredPrograms.length).toBeGreaterThan(0)
+    const publishedIds = new Set(published.programs.map(program => program.id))
+    expect(expiredPrograms.every(program => !publishedIds.has(program.id))).toBe(true)
+  })
+
 })

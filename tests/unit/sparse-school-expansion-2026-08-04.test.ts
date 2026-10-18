@@ -141,7 +141,7 @@ for (const candidate of candidatePrograms) {
 }
 
 const data = bundleSchema.parse({ admissionCycles, cities, programs, scholarships, sources, universities })
-const published = selectPublishedData(data, TODAY)
+const published = selectPublishedData(data, '2026-10-19')
 
 function parseHttpsUrl(value: string): URL | null {
   try {
@@ -417,32 +417,12 @@ describe('sparse-school and regional university expansion on 2026-08-04', () => 
       expect(programCounts.get(university?.id ?? '') ?? 0, candidateUniversity.slug)
         .toBeGreaterThanOrEqual(1)
     }
-    const staleScholarships = published.scholarships.filter(
-      (scholarship) => scholarship.status === 'stale',
-    )
+    const staleScholarships = data.scholarships.filter(item => item.status === 'stale')
     expect(staleScholarships.length).toBeGreaterThan(0)
-    for (const scholarship of published.scholarships) {
-      if (scholarship.status === 'verified') {
-        expect(
-          (scholarship.reviewAfter ?? '').localeCompare(TODAY) >= 0,
-          scholarship.id,
-        ).toBe(true)
-        continue
-      }
+    const publicScholarshipIds = new Set(published.scholarships.map(item => item.id))
+    expect(staleScholarships.every(item => !publicScholarshipIds.has(item.id))).toBe(true)
+    expect(published.scholarships.every(item => item.status === 'verified' && item.reviewAfter >= '2026-10-19')).toBe(true)
 
-      expect(scholarship.status, scholarship.id).toBe('stale')
-      expect(scholarship.name.en, scholarship.id).toBeTruthy()
-      expect(scholarship.sourceIds.length, scholarship.id).toBeGreaterThan(0)
-      expect(scholarship.coverage, scholarship.id).toEqual({
-        tuition: 'unknown',
-        accommodation: 'unknown',
-        insurance: 'unknown',
-        stipendCnyPerMonth: null,
-      })
-      expect(scholarship.deadline, scholarship.id).toBeNull()
-      expect(scholarship.applicationUrl, scholarship.id).toBeNull()
-      expect(scholarship.summary, scholarship.id).toBeNull()
-    }
   })
 
   it('never leaves an overdue formal record marked as verified', () => {
@@ -468,7 +448,7 @@ describe('sparse-school and regional university expansion on 2026-08-04', () => 
     }))).toEqual([])
   })
 
-  it('keeps the stored NJU facts while publishing only its stale identity and quarantining stale cycles', () => {
+  it('keeps stored NJU facts in the audit while quarantining its stale identity and cycles', () => {
     const programId = 'program-nanjing-university-chinese-language-program-language'
     const program = data.programs.find((candidate) => candidate.id === programId)
     const publishedProgram = published.programs.find((candidate) => candidate.id === programId)
@@ -481,10 +461,7 @@ describe('sparse-school and regional university expansion on 2026-08-04', () => 
     ).toBe(true)
     expect(program?.verificationScope).toBe('complete')
     expect(program?.details).toBeDefined()
-    expect(publishedProgram).toBeDefined()
-    expect(publishedProgram?.status).toBe('stale')
-    expect(publishedProgram?.verificationScope).toBe('identity')
-    expect(publishedProgram?.details).toBeUndefined()
+    expect(publishedProgram).toBeUndefined()
 
     expect(relatedCycles.length).toBeGreaterThan(0)
     expect(relatedCycles.some((cycle) => cycle.status === 'verified')).toBe(false)

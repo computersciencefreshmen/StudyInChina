@@ -368,8 +368,9 @@ describe('CatalogApiService', () => {
       ])
   })
 
-  it('withholds cycle deadline and fee narratives after expiry while preserving identity', () => {
+  it('withholds expired cycles while preserving a current program identity', () => {
     const bundle = fixture()
+    bundle.programs[0]!.reviewAfter = '2026-09-20'
     const cycle = bundle.admissionCycles[0]!
     const notes = text('Apply before 31 August 2026. Tuition is CNY 30,000 and the application fee is CNY 600.')
     Object.assign(cycle, { closesOn: '2026-08-31', applicationFeeCny: 600, notes })
@@ -389,13 +390,8 @@ describe('CatalogApiService', () => {
 
     const expiredService = serviceFor('2026-08-21')
     const expiredCycles = expiredService.getProgramCycles('computer-science')?.data
-    expect(expiredCycles).toHaveLength(1)
-    expect(expiredCycles?.[0]).toMatchObject({
-      id: current!.id, programId: current!.programId, academicYear: current!.academicYear,
-      intake: current!.intake, status: 'stale', notes: null, closesOn: null,
-      tuitionCny: null, applicationFeeCny: null, applicationState: 'not-announced',
-      fieldMeta: { notes: { status: 'stale' } },
-    })
+    expect(expiredCycles).toEqual([])
+    expect(expiredService.getProgram('computer-science')?.data.id).toBe('program-1')
     expect(expiredService.comparePrograms(['program-1']).data.items[0]?.currentCycle).toBeNull()
     expect(cycle.notes).toEqual(notes)
     expect(cycle.status).toBe('verified')

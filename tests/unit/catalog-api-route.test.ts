@@ -32,11 +32,17 @@ describe('catalog API routes', () => {
     // Canonical evidence may expire or roll over without changing this contract.
     const today = '2026-09-28'
     const bundle = structuredClone(await createCatalogRepository().getBundle())
-    const program = selectCatalogApiData(bundle, today).programs[0]!
+    const program = bundle.programs.find(item => item.status === 'verified' && item.verificationScope !== 'identity')!
+    const university = bundle.universities.find(item => item.id === program.universityId)!
+    const city = bundle.cities.find(item => item.id === university.cityId)!
+    for (const record of [program, university, city]) {
+      Object.assign(record, { status: 'verified', verifiedAt: today, reviewAfter: '2026-10-28' })
+    }
     bundle.scholarships = [{
       ...bundle.scholarships[0]!,
       id: 'scholarship-route-fixture', slug: 'scholarship-route-fixture',
       universityIds: [program.universityId], programIds: [program.id],
+      sourceIds: [...program.sourceIds],
       status: 'verified', verifiedAt: today, reviewAfter: '2026-10-28', deadline: null,
     }]
     const published = selectCatalogApiData(bundle, today)

@@ -117,18 +117,20 @@ describe('MiniMax immutable usage dashboard', () => {
     expect(screen.getByRole('heading', { name: '用量总览' }).closest('article')?.querySelector('strong')).toHaveTextContent('—')
   })
 
-  it('switches all five themes while keeping the real telemetry and selected section', () => {
+  it('switches all six site themes through the accessible preference while keeping telemetry and the selected section', () => {
     const snapshot = adminSnapshot(); snapshot.ledger = ledger()
-    render(<AdminDashboard snapshot={snapshot} connection="live" />)
+    const { container } = render(<AdminDashboard snapshot={snapshot} connection="live" />)
     fireEvent.click(screen.getByRole('button', { name: 'Token 用量' }))
-    const choices = screen.getByRole('group', { name: '管理员五主题切换' })
-    expect(within(choices).getAllByRole('button')).toHaveLength(5)
-    for (const [id, name] of [['cloud', '云白淡紫'], ['jade', '雾绿玉色'], ['ocean', '冰川蓝'], ['sand', '暖白陶色'], ['night', '深夜墨绿']]) {
-      const button = within(choices).getByRole('button', { name: new RegExp(name) })
-      fireEvent.click(button)
+    const preference = screen.getByRole('combobox', { name: '界面主题' })
+    for (const [id, name] of [['craft', '纸间留学'], ['cloud', '云白淡紫'], ['jade', '雾绿玉色'], ['ocean', '冰川蓝'], ['sand', '暖白陶色'], ['night', '深夜墨绿']]) {
+      fireEvent.click(preference)
+      expect(within(screen.getByRole('listbox')).getAllByRole('option')).toHaveLength(6)
+      fireEvent.click(screen.getByRole('option', { name }))
       expect(document.documentElement.dataset.theme).toBe(id)
       expect(localStorage.getItem('studycn-theme')).toBe(id)
-      expect(button).toHaveAttribute('aria-pressed', 'true')
+      expect(container.querySelector('[data-admin-theme]')).toHaveAttribute('data-admin-theme', id)
+      expect(preference).toHaveTextContent(name)
+      expect(preference).toHaveAttribute('aria-expanded', 'false')
       expect(screen.getByRole('heading', { name: 'Token 用量' })).toBeVisible()
       expect(screen.getByText('今日已记录 Token').closest('div')).toHaveTextContent('9,000,000')
     }
@@ -173,7 +175,7 @@ describe('MiniMax executor controls', () => {
     const snapshot = adminSnapshot(); snapshot.generatedAt = new Date().toISOString(); snapshot.automation = executor()
     const commandId = '3bb5ffbf-854a-4da5-9dcf-e46242c43221'
     vi.spyOn(crypto, 'randomUUID').mockReturnValue(commandId)
-    const fetchMock = vi.fn(async (path: string, init?: RequestInit) => response(path === '/api/admin/session' ? adminSession : path === '/api/admin/automation' && init?.method === 'POST' ? { accepted: true } : snapshot, path === '/api/admin/automation' ? 202 : 200))
+    const fetchMock = vi.fn(async (path: string, init?: RequestInit) => response(path === '/api/admin/session' ? adminSession : path === '/api/admin/automation' && init?.method === 'POST' ? { accepted: true, commandId } : snapshot, path === '/api/admin/automation' ? 202 : 200))
     vi.stubGlobal('fetch', fetchMock)
     render(<AdminWorkbench />)
     await screen.findByRole('heading', { name: '自动化执行' })

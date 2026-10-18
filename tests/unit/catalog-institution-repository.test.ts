@@ -64,7 +64,13 @@ describe('CatalogRepository institution lists', () => {
           source.id === id && source.official && source.kind === 'program' && source.url === item.programUrl
         )))
       ))!
-      Object.assign(program, { status: 'verified', verifiedAt: TODAY, reviewAfter: '2026-08-19' })
+      const university = bundle.universities.find(item => item.id === program.universityId)!
+      const city = bundle.cities.find(item => item.id === university.cityId)!
+      for (const record of [program, university, city]) {
+        Object.assign(record, { status: 'verified', verifiedAt: TODAY, reviewAfter: '2026-08-19' })
+      }
+      program.verificationScope = 'facts'
+      program.sourceIds = program.sourceIds.filter(id => bundle.sources.some(source => source.id === id && source.official))
     }
     const repository = createJsonCatalogRepository(() => bundle)
     const publicBundle = selectCatalogApiData(bundle, TODAY)
@@ -252,7 +258,7 @@ describe('CatalogRepository institution lists', () => {
   it('compares Shadow institution pages, combines cursors, and fails open on shadow errors', async () => {
     const primaryBundle = freshBundle()
     const shadowBundle = freshBundle()
-    const firstShadow = [...shadowBundle.universities]
+    const firstShadow = [...selectCatalogApiData(shadowBundle, TODAY).universities]
       .sort((left, right) => left.slug.localeCompare(right.slug))[0]!
     firstShadow.featured = !firstShadow.featured
     const repository = createShadowCatalogRepository({

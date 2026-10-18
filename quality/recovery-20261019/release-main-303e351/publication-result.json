@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-18T17:17:45.636227+00:00",
+  "authorizedManualBatchPublication": true,
+  "sourceCommit": "303e3516322f7b8eed1a4cf2301d01a3c91976a3",
+  "deploymentId": "dpl_EUkxVddCJFkt2KvLso15TdCEDCht",
+  "previousDeploymentId": "dpl_36sjWb43vDSYppFRYysBjgSic6NZ",
+  "publicUrl": "https://studyinchina.vercel.app/en",
+  "programs": 767,
+  "universities": 255,
+  "universitiesWithPrograms": 15,
+  "universitiesWithoutPrograms": 240,
+  "sourcePlanSha256": "f7328f6d8a40be901bec01f0ec3d7d863140f345174395ba1462db0330b8d983",
+  "candidateProof": {
+    "path": "quality/recovery-20261019/release-main-303e351/candidate-smoke-v1/candidate-public-smoke.json",
+    "sha256": "4da629d321c3ef4d3dd963f49d34e80a3903e2d24070ce61f1568ee09456f647",
+    "pass": true
+  },
+  "stableProof": {
+    "path": "quality/recovery-20261019/release-main-303e351/stable-smoke-v1/stable-public-smoke.json",
+    "sha256": "5a94f4f49b8fd1237a08ac792efed755d7df8beb67693f8e151aeda19c659f15",
+    "pass": true,
+    "errors": 0,
+    "consoleErrors": 0,
+    "boundedTeardownNotes": [
+      {
+        "kind": "bounded_page_drain_reached",
+        "pendingRequests": 2
+      }
+    ]
+  },
+  "sharedWriter": {
+    "commandId": "d4488cf6-4624-409c-81c4-fbf6c594bcc3",
+    "outcome": "completed",
+    "readbackAt": "2026-10-18T17:06:58.063Z",
+    "proofSha256": "36b3074e02354328c6a9caa49ed88c28e6d691e98ffae1bec786dd8dab70866e"
+  },
+  "serverAutomaticPromotion": "strict nationwide coverage CI remains failing; not bypassed or rewritten",
+  "cloudDatabaseWrites": 0,
+  "paidModelCalls": 0
+}

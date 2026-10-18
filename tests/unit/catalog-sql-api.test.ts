@@ -36,6 +36,7 @@ class SqliteD1Statement implements D1PreparedStatement {
   ) {}
 
   bind(...values: unknown[]) {
+    if (values.length > 100) throw new Error('D1 statements support at most 100 bound parameters')
     return new SqliteD1Statement(this.database, this.queries, this.sql, values)
   }
 
@@ -176,7 +177,7 @@ describe('Catalog D1 normalized v1 API', () => {
   // Small behavior fixtures keep default-timeout tests independent of catalogue
   // size. Each owns its connection so a timed-out body cannot leak a transaction
   // into a later test. The full catalogue fixture above still covers integration.
-  function createSyntheticCatalog(programCount = 1) {
+  function createSyntheticCatalog(programCount = 1, additionalSpringCycle = false) {
     const bundle = catalogTestBundle(true)
     const firstProgram = bundle.programs[0]!
     const firstCycle = bundle.admissionCycles[0]!
@@ -188,16 +189,20 @@ describe('Catalog D1 normalized v1 API', () => {
       })
       bundle.admissionCycles.push({ ...firstCycle, id: `${firstCycle.id}-${index}`, programId })
     }
+    if (additionalSpringCycle) {
+      bundle.admissionCycles.push(...bundle.admissionCycles.map(cycle => ({ ...cycle, id: `${cycle.id}-spring`, intake: 'spring' as const })))
+    }
     const database = new DatabaseSync(':memory:')
+    const recordedQueries: QueryLog[] = []
     try {
       database.exec('PRAGMA foreign_keys = ON')
       applyCatalogMigrations(database)
       database.exec(buildLegacyRelease(bundle).sql)
       const isolatedEnvironment: CatalogApiEnv = {
         ...environment,
-        CATALOG_DB: { prepare: (sql) => new SqliteD1Statement(database, [], sql) },
+        CATALOG_DB: { prepare: (sql) => new SqliteD1Statement(database, recordedQueries, sql) },
       }
-      return { database, environment: isolatedEnvironment }
+      return { database, environment: isolatedEnvironment, queries: recordedQueries }
     } catch (error) {
       database.close()
       throw error
@@ -252,6 +257,44 @@ describe('Catalog D1 normalized v1 API', () => {
     expect(r2Reads).toBe(0)
     expect(queries.some(({ sql }) => sql.includes('FROM current_programs AS program'))).toBe(true)
   }, 30_000)
+  it('decorates a full 100-program page and its schools within the D1 binding budget', async () => {
+    const queryStart = queries.length
+    const response = await worker.fetch(new Request('https://catalog.test/api/v1/programs?limit=100'), environment)
+    const page = await response.json() as ApiEnvelopeDto<ProgramListDto[]>
+    expect(response.status, JSON.stringify(page)).toBe(200)
+    expect(page.data).toHaveLength(100)
+    expect(new Set(page.data.map(program => program.id)).size).toBe(100)
+    const requestedIds = new Set(page.data.flatMap(program => [program.id, program.relationships.institution.id]))
+    expect(requestedIds.size).toBeGreaterThan(100)
+    for (const program of page.data) {
+      expect(Object.values(program.attributes.name).some(Boolean), program.id).toBe(true)
+      expect(Object.values(program.relationships.institution.name).some(Boolean), program.id).toBe(true)
+      expect(program.sources.length, program.id).toBeGreaterThan(0)
+    }
+    const decorationQueries = queries.slice(queryStart).filter(query => /FROM current_(localized_content|record_field_statuses|record_sources)/u.test(query.sql))
+    expect(decorationQueries.length).toBeGreaterThanOrEqual(6)
+    expect(decorationQueries.every(query => query.values.length <= 100)).toBe(true)
+    expect(queries.slice(queryStart).every(query => query.values.length <= 100)).toBe(true)
+    const decoratedIds = new Set(decorationQueries.flatMap(query => query.values.slice(1)))
+    for (const id of requestedIds) expect(decoratedIds.has(id), id).toBe(true)
+  }, 30_000)
+
+  it('returns every program when a full page expands into 200 admission cycles', async () => {
+    const fixture = createSyntheticCatalog(100, true)
+    try {
+      const response = await worker.fetch(new Request('https://catalog.test/api/v1/programs?limit=100'), fixture.environment)
+      const page = await response.json() as ApiEnvelopeDto<ProgramListDto[]>
+      expect(response.status, JSON.stringify(page)).toBe(200)
+      expect(page.data).toHaveLength(100)
+      expect(new Set(page.data.map(program => program.id)).size).toBe(100)
+      expect(page.data.every(program => program.currentCycle?.relationships.program.id === program.id)).toBe(true)
+      const routeQueries = fixture.queries.filter(query => query.sql.includes('FROM current_application_routes AS route'))
+      const cycleIds = new Set(routeQueries.flatMap(query => query.values.slice(1)))
+      expect(cycleIds.size).toBe(200)
+      expect(fixture.queries.every(query => query.values.length <= 100)).toBe(true)
+    } finally { fixture.database.close() }
+  }, 30_000)
+
   it('keeps reference tuition out of D1 current filters and preserves its explicit status', async () => {
     const knownResponse = await worker.fetch(
       new Request('https://catalog.test/api/v1/programs?tuitionMax=1000000&limit=100'),

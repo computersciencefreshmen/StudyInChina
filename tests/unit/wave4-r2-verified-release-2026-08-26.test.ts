@@ -53,6 +53,12 @@ describe('Wave 4 R2-verified compatibility release', () => {
     const materializedCycleCount = (status: string, dateStatus: string) => changedCycles.filter((cycle: JsonValue) => (
       cycle.status === status && cycle.dateStatus === dateStatus
     )).length
+    // Summary counters describe actual edits, not merely whether one source
+    // existed. Later official rechecks may change a subset of these fields.
+    const changedFieldCount = (...fields: string[]) => changedPrograms.filter((program: JsonValue) => {
+      const previous = input.programs.find((candidate: JsonValue) => candidate.id === program.id)
+      return fields.some(field => JSON.stringify(previous[field] ?? null) !== JSON.stringify(program[field] ?? null))
+    }).length
     expect(release.summary).toMatchObject({
       stagedCandidates: 33,
       blockedCandidates: 5,
@@ -73,11 +79,11 @@ describe('Wave 4 R2-verified compatibility release', () => {
         : 24,
       variantTuitionValuesPublished: 0,
       fieldUpdates: {
-        duration: changeCount(10),
-        applyUrl: changeCount(15),
-        languageRequirements: changeCount(8),
-        teachingLanguages: changeCount(2),
-        programUrl: changeCount(13),
+        duration: changedFieldCount('durationMonths', 'durationMonthsMax'),
+        applyUrl: changedFieldCount('applyUrl'),
+        languageRequirements: changedFieldCount('languageRequirements'),
+        teachingLanguages: changedFieldCount('teachingLanguages'),
+        programUrl: changedFieldCount('programUrl'),
       },
     })
 

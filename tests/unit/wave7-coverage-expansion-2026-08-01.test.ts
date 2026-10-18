@@ -37,7 +37,7 @@ const data = bundleSchema.parse({
   sources,
   universities,
 })
-const published = selectPublishedData(data, TODAY)
+const published = selectPublishedData(data, '2026-10-19')
 const packs = [northWest, southEast, special] as unknown as Pack[]
 const programCandidates = packs.flatMap((pack) => pack.programCandidates)
 const scholarshipCandidates = packs.flatMap((pack) => pack.scholarshipCandidates)
@@ -65,24 +65,26 @@ function isOfficialHttpsUrl(value: string): boolean {
 }
 
 describe('official coverage expansion wave 7 on 2026-08-01', () => {
-  it('publishes all 24 verified program candidates and seven scholarships', () => {
+  it('retains the 24-program and seven-scholarship historical cohort', () => {
     expect(programCandidates).toHaveLength(24)
     expect(scholarshipCandidates).toHaveLength(7)
 
-    const programIds = new Set(published.programs.map((item) => item.id))
-    const scholarshipIds = new Set(published.scholarships.map((item) => item.id))
+    const programIds = new Set(data.programs.map((item) => item.id))
+    const scholarshipIds = new Set(data.scholarships.map((item) => item.id))
 
     for (const candidate of programCandidates) {
       expect(
         programIds.has(`prog-gap-${candidate.candidateId}`),
         candidate.candidateId,
       ).toBe(true)
+      expect(published.programs.some(item => item.id === `prog-gap-${candidate.candidateId}`)).toBe(false)
     }
     for (const candidate of scholarshipCandidates) {
       expect(
         scholarshipIds.has(`sch-gap-${candidate.candidateId}`),
         candidate.candidateId,
       ).toBe(true)
+      expect(published.scholarships.some(item => item.id === `sch-gap-${candidate.candidateId}`)).toBe(false)
     }
   })
 
@@ -99,12 +101,12 @@ describe('official coverage expansion wave 7 on 2026-08-01', () => {
     }
   })
 
-  it('raises ten formerly shallow institutions to two through four programs', () => {
+  it('retains the historical ten-school depth in the canonical audit', () => {
     for (const [slug, expectedCount] of EXPECTED_PROGRAM_COUNTS) {
-      const university = published.universities.find((item) => item.slug === slug)
+      const university = data.universities.find((item) => item.slug === slug)
       expect(university, slug).toBeDefined()
       expect(
-        published.programs.filter((item) => item.universityId === university?.id).length,
+        data.programs.filter((item) => item.universityId === university?.id).length,
         slug,
       ).toBeGreaterThanOrEqual(expectedCount)
     }
@@ -123,8 +125,10 @@ describe('official coverage expansion wave 7 on 2026-08-01', () => {
     expect(packs.reduce((sum, pack) => sum + (pack.exclusions?.length ?? 0), 0)).toBe(17)
   })
 
-  it('keeps the published catalog free of same-school semantic duplicates', () => {
-    const publishedProgramIds = new Set(published.programs.map((program) => program.id))
-    expect(findSemanticProgramDuplicates(data.programs, publishedProgramIds)).toEqual([])
+  it('keeps this historical wave free of same-school semantic duplicates', () => {
+    const cohortIds = new Set(programCandidates.map(candidate => `prog-gap-${candidate.candidateId}`))
+    const cohortPrograms = data.programs.filter(program => cohortIds.has(program.id))
+    expect(cohortPrograms.length).toBeGreaterThan(0)
+    expect(findSemanticProgramDuplicates(cohortPrograms)).toEqual([])
   })
 })

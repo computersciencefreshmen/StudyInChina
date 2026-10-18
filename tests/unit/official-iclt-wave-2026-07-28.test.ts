@@ -48,14 +48,15 @@ describe('official ICLT wave 2026-07-28', () => {
     for (const id of expectedProgramIds) {
       const program = programs.find((item) => item.id === id)
       expect(program?.status).toBe('stale')
-      expect(program?.reviewAfter).toBe('2026-08-27')
-      expect(program?.durationMonths).toBe(5)
+      expect(program?.reviewAfter).toBe(id === 'program-sjtu-iclt-one-semester-spring-2027' ? '2026-10-16' : '2026-08-27')
+      // The October SJTU recheck withdrew the unsupported month conversion.
+      expect(program?.durationMonths).toBe(id === 'program-sjtu-iclt-one-semester-spring-2027' ? null : 5)
       expect(program?.verificationScope).toBe('facts')
       expect(program?.programUrl).toMatch(/^https:\/\//u)
 
       const cycle = cycles.find((item) => item.programId === id)
       expect(cycle?.status).toBe('stale')
-      expect(cycle?.reviewAfter).toBe('2026-08-27')
+      expect(cycle?.reviewAfter).toBe(cycle?.programId === 'program-sjtu-iclt-one-semester-spring-2027' ? '2026-10-16' : '2026-08-27')
       expect(cycle?.intake).toBe('spring')
       expect(cycle?.closesOn).toBe('2026-10-31')
       expect(cycle?.evidenceBasis).toBe('cycle-specific')
@@ -80,7 +81,7 @@ describe('official ICLT wave 2026-07-28', () => {
         && (item.programIds as string[]).includes(programId)
       ))
       expect(scholarship?.status).toBe('stale')
-      expect(scholarship?.reviewAfter).toBe('2026-08-27')
+      expect(scholarship?.reviewAfter).toBe(programId === 'program-sjtu-iclt-one-semester-spring-2027' ? '2026-10-16' : '2026-08-27')
       expect(scholarship?.deadline).toBe('2026-10-31')
       expect((scholarship?.coverage as JsonRecord).tuition).toBe('full')
 

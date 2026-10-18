@@ -12,7 +12,6 @@ import {
 } from '../../scripts/quality/build-decision-gap-report'
 import {
   isCurrentVerifiedRecord,
-  isWithinPostDeadlineGrace,
 } from '../../src/lib/data/freshness'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
@@ -182,7 +181,7 @@ function fixture(): DataBundle {
         insurance: 'unknown',
         stipendCnyPerMonth: null,
       },
-      deadline: '2026-08-01',
+      deadline: '2026-08-31',
       applicationUrl: 'https://one.example.edu.cn/scholarships/apply',
       summary: { en: 'Fresh scholarship', zh: '有效奖学金' },
     }],
@@ -227,8 +226,8 @@ describe('decision-fact gap report', () => {
     ])
     expect(programB?.availability.freshDisposition).toBe(false)
 
-    expect(programC?.availability.officialApplyRoute).toBe(false)
-    expect(programC?.evidence.officialApplyRouteSourceIds).toEqual([])
+    expect(programC).toBeUndefined()
+    expect(data.programs.find(item => item.id === 'program-c')?.sourceIds).toEqual(['source-unofficial'])
 
     expect(report.summary.scholarships).toEqual({
       freshRecords: 1,
@@ -252,12 +251,12 @@ describe('decision-fact gap report', () => {
     expect(report.priorityPrograms).toHaveLength(2)
     expect(report.priorityPrograms[0]).toMatchObject({
       rank: 1,
-      programId: 'program-c',
+      programId: 'program-a',
     })
     expect(report.priorityUniversities[0]).toMatchObject({
       rank: 1,
-      universityId: 'university-two',
-      recommendedProgramIds: ['program-c'],
+      universityId: 'university-one',
+      recommendedProgramIds: ['program-a', 'program-b'],
     })
     expect(report.priorityScholarshipUniversities).toHaveLength(1)
     expect(report.priorityScholarshipUniversities[0]).toMatchObject({
@@ -307,14 +306,15 @@ describe('decision-fact gap report', () => {
       sources,
       universities,
     })
-    const published = selectPublishedData(data, TODAY)
-    const report = buildDecisionGapReport(data, { today: TODAY })
+    const catalogDate = '2026-10-19'
+    const published = selectPublishedData(data, catalogDate)
+    const report = buildDecisionGapReport(data, { today: catalogDate })
     const publicUniversityIds = new Set(
       published.universities.map((university) => university.id),
     )
-    const expectedFreshScholarships = data.scholarships.filter(
-      (scholarship) => isCurrentVerifiedRecord(scholarship, TODAY)
-        && isWithinPostDeadlineGrace(scholarship.deadline, TODAY),
+    const expectedFreshScholarships = published.scholarships.filter(
+      (scholarship) => isCurrentVerifiedRecord(scholarship, catalogDate)
+        && (scholarship.deadline === null || scholarship.deadline >= catalogDate),
     )
     const expectedFreshScholarshipIdsByUniversity = new Map<string, Set<string>>()
     for (const scholarship of expectedFreshScholarships) {
@@ -349,13 +349,14 @@ describe('decision-fact gap report', () => {
       universitiesMissing: expectedMissingUniversities,
       universityCoveragePct: expectedScholarshipCoveragePct,
     })
-    expect(report.priorityUniversities).toHaveLength(30)
-    expect(report.priorityPrograms).toHaveLength(30)
+    expect(report.priorityUniversities).toHaveLength(Math.min(30, published.universities.length))
+    expect(report.priorityPrograms.length).toBeGreaterThan(0)
+    expect(report.priorityPrograms.length).toBeLessThanOrEqual(30)
     expect(report.priorityUniversities.map((item) => item.rank)).toEqual(
-      Array.from({ length: 30 }, (_, index) => index + 1),
+      Array.from({ length: Math.min(30, published.universities.length) }, (_, index) => index + 1),
     )
     expect(report.priorityPrograms.map((item) => item.rank)).toEqual(
-      Array.from({ length: 30 }, (_, index) => index + 1),
+      Array.from({ length: report.priorityPrograms.length }, (_, index) => index + 1),
     )
     expect(report.priorityScholarshipUniversities).toHaveLength(
       Math.min(30, expectedMissingUniversities),

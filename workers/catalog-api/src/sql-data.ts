@@ -76,6 +76,21 @@ export function placeholders(count: number) {
   return Array.from({ length: count }, () => '?').join(', ')
 }
 
+/** Keep one release binding plus record IDs within D1's per-query budget. */
+export async function queryAllByRecordIds<T>(
+  database: D1Database,
+  releaseId: string,
+  recordIds: readonly string[],
+  sql: (slots: string) => string,
+): Promise<T[]> {
+  const ids = [...new Set(recordIds)], rows: T[] = []
+  for (let offset = 0; offset < ids.length; offset += 99) {
+    const batch = ids.slice(offset, offset + 99)
+    rows.push(...await queryAll<T>(database, sql(placeholders(batch.length)), [releaseId, ...batch]))
+  }
+  return rows
+}
+
 export function fts5Query(value: string, column?: 'title') {
   const terms = value.normalize('NFKC').match(/[\p{L}\p{N}]+/gu) ?? []
   if (terms.length === 0 || terms.length > 20) {
@@ -195,40 +210,49 @@ export async function loadRecordDecorations(
 ) {
   const ids = [...new Set(recordIds)]
   if (ids.length === 0) return new RecordDecorations([], [], [])
-  const slots = placeholders(ids.length)
-  const values = [releaseId, ...ids]
-  const [localizedRows, fieldRows, sourceRows] = await Promise.all([
-    queryAll<LocalizedRow>(database, `
-      SELECT record_id, locale, field_name, text_value
-      FROM current_localized_content
-      WHERE release_id = ? AND record_id IN (${slots})
-      ORDER BY record_id, field_name, locale
-    `, values),
-    queryAll<FieldRow>(database, `
-      SELECT record_id, field_path, locale, field_status, value_json, verified_at, review_after
-      FROM current_record_field_statuses
-      WHERE release_id = ? AND record_id IN (${slots})
-      ORDER BY record_id, field_path, locale
-    `, values),
-    queryAll<SourceRow>(database, `
-      SELECT
-        binding.record_id,
-        binding.field_path,
-        binding.locale,
-        source.source_id,
-        source.url,
-        source.title,
-        source.publisher,
-        source.language_code,
-        source.authority_level,
-        source.checked_at
-      FROM current_record_sources AS binding
-      JOIN current_source_summaries AS source
-        ON source.release_id = binding.release_id
-       AND source.source_id = binding.source_id
-      WHERE binding.release_id = ? AND binding.record_id IN (${slots})
-      ORDER BY binding.record_id, source.source_id
-    `, values),
-  ])
+  const localizedRows: LocalizedRow[] = [], fieldRows: FieldRow[] = [], sourceRows: SourceRow[] = []
+  // A full program page also needs its parent institutions. Reserve one of
+  // D1's 100 bindings for the release while retaining every requested record.
+  for (let offset = 0; offset < ids.length; offset += 99) {
+    const batch = ids.slice(offset, offset + 99)
+    const slots = placeholders(batch.length)
+    const values = [releaseId, ...batch]
+    const [localizedBatch, fieldBatch, sourceBatch] = await Promise.all([
+      queryAll<LocalizedRow>(database, `
+        SELECT record_id, locale, field_name, text_value
+        FROM current_localized_content
+        WHERE release_id = ? AND record_id IN (${slots})
+        ORDER BY record_id, field_name, locale
+      `, values),
+      queryAll<FieldRow>(database, `
+        SELECT record_id, field_path, locale, field_status, value_json, verified_at, review_after
+        FROM current_record_field_statuses
+        WHERE release_id = ? AND record_id IN (${slots})
+        ORDER BY record_id, field_path, locale
+      `, values),
+      queryAll<SourceRow>(database, `
+        SELECT
+          binding.record_id,
+          binding.field_path,
+          binding.locale,
+          source.source_id,
+          source.url,
+          source.title,
+          source.publisher,
+          source.language_code,
+          source.authority_level,
+          source.checked_at
+        FROM current_record_sources AS binding
+        JOIN current_source_summaries AS source
+          ON source.release_id = binding.release_id
+         AND source.source_id = binding.source_id
+        WHERE binding.release_id = ? AND binding.record_id IN (${slots})
+        ORDER BY binding.record_id, source.source_id
+      `, values),
+    ])
+    localizedRows.push(...localizedBatch)
+    fieldRows.push(...fieldBatch)
+    sourceRows.push(...sourceBatch)
+  }
   return new RecordDecorations(localizedRows, fieldRows, sourceRows)
 }

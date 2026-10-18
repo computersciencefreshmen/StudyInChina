@@ -67,7 +67,7 @@ for (const candidate of candidatePrograms) {
 }
 
 const data = bundleSchema.parse({ admissionCycles, cities, programs, scholarships, sources, universities })
-const published = selectPublishedData(data, TODAY)
+const published = selectPublishedData(data, '2026-10-19')
 
 function isPermittedHttps(value: string): boolean {
   try {
@@ -143,26 +143,26 @@ describe('verified multi-university expansion on 2026-08-03', () => {
     ]))
   })
 
-  it('quarantines catalog-level guesses and publishes a broad formal catalog', () => {
+  it('preserves historical breadth while excluding the rejected catalog guesses', () => {
     const programIds = new Set(programs.map((program) => program.id))
     expect(programIds.has('prog-gap-prog-mew-ne-nefu-doctoral-programs')).toBe(false)
     expect(programIds.has('prog-gap-prog-mew-ne-sdjzu-chinese-taught-master-entry')).toBe(false)
 
-    expect(published.universities.length).toBeGreaterThanOrEqual(245)
-    expect(published.programs.length).toBeGreaterThanOrEqual(1_010)
-    expect(published.scholarships.length).toBeGreaterThanOrEqual(275)
+    expect(data.universities.length).toBeGreaterThanOrEqual(245)
+    expect(data.programs.length).toBeGreaterThanOrEqual(1_010)
+    expect(data.scholarships.length).toBeGreaterThanOrEqual(275)
 
     const programCounts = new Map<string, number>()
-    for (const program of published.programs) {
+    for (const program of data.programs) {
       programCounts.set(program.universityId, (programCounts.get(program.universityId) ?? 0) + 1)
     }
-    expect(published.universities.every((university) => (programCounts.get(university.id) ?? 0) >= 1)).toBe(true)
+    expect(data.universities.filter(item => item.status === 'verified').every((university) => (programCounts.get(university.id) ?? 0) >= 1)).toBe(true)
     expect([...programCounts.values()].filter((count) => count >= 3).length).toBeGreaterThanOrEqual(185)
   })
 
-  it('makes the expanded fields discoverable through applicant-facing filters', () => {
+  it('preserves historical field classification for future source rechecks', () => {
     const fieldCounts = new Map<string, number>()
-    for (const program of published.programs) {
+    for (const program of data.programs) {
       const field = classifyProgramField(program)
       fieldCounts.set(field, (fieldCounts.get(field) ?? 0) + 1)
     }
@@ -171,4 +171,11 @@ describe('verified multi-university expansion on 2026-08-03', () => {
     expect(fieldCounts.get('agriculture-veterinary')).toBeGreaterThanOrEqual(12)
     expect(fieldCounts.get('environment-earth')).toBeGreaterThanOrEqual(10)
   })
+  it('keeps expired inventory in the audit and out of the current public catalog', () => {
+    const expiredPrograms = data.programs.filter(program => program.status === 'stale' || program.reviewAfter < '2026-10-19')
+    expect(expiredPrograms.length).toBeGreaterThan(0)
+    const publishedIds = new Set(published.programs.map(program => program.id))
+    expect(expiredPrograms.every(program => !publishedIds.has(program.id))).toBe(true)
+  })
+
 })

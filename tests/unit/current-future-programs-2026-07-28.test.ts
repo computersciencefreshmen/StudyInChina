@@ -37,14 +37,15 @@ const expandedProgramIds = [
 ] as const
 
 describe('current future program expansion on 2026-07-28', () => {
-  it('publishes all twelve grounded future program identities', () => {
-    const published = selectPublishedData(data, '2026-07-28')
+  it('retains twelve grounded historical identities without publishing expired reviews', () => {
+    const published = selectPublishedData(data, '2026-10-19')
     const publishedIds = new Set(published.programs.map((item) => item.id))
 
     for (const id of expandedProgramIds) {
       const program = data.programs.find((item) => item.id === id)
       expect(program, id).toBeDefined()
-      expect(publishedIds.has(id), id).toBe(true)
+      expect(program?.status, id).toBe('stale')
+      expect(publishedIds.has(id), id).toBe(false)
       expect(
         data.sources.some(
           (source) => source.official

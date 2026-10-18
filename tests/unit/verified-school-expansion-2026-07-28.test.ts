@@ -79,7 +79,7 @@ describe('verified school expansion on 2026-07-28', () => {
       selectPublishedData(data, '2026-07-28').scholarships.some(
         (item) => item.id === scholarship?.id,
       ),
-    ).toBe(true)
+    ).toBe(false)
     expect(
       selectPublishedData(data, '2026-07-31').scholarships.some(
         (item) => item.id === scholarship?.id,

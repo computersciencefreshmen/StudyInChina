@@ -9,27 +9,27 @@ import { buildCurrentSourceManifestCohort } from '../../scripts/ingestion/build-
 
 describe('SourceManifestV2 public trust ledger', () => {
   it('covers every current public university while separating candidates from reconciliation', () => {
-    const report = buildCurrentSourceManifestTrustLedger('2026-08-10', resolve('.'))
+    const report = buildCurrentSourceManifestTrustLedger('2026-10-19', resolve('.'))
 
     expect(report).toMatchObject({
       format: 'studyinchina.source-manifest-trust-ledger',
       formatVersion: 1,
-      checkedAt: '2026-08-10',
+      checkedAt: '2026-10-19',
       scope: 'public_catalog',
       disposition: 'audit_only',
       summary: {
-        publicUniversities: 266,
-        ledgerEntries: 266,
+        publicUniversities: 255,
+        ledgerEntries: 255,
         formalManifestRecords: 10,
         formalRecordsOutsidePublicCatalog: 0,
         legacyV1UpgradePaths: 0,
         formalV2InProgress: 10,
         completeFormalReconciliations: 0,
-        candidateCoverage: 140,
-        candidateRecordsOutsidePublicCatalog: 4,
-        candidateOnlyRecords: 130,
+        candidateCoverage: 139,
+        candidateRecordsOutsidePublicCatalog: 5,
+        candidateOnlyRecords: 129,
         formalCandidateOverlap: 10,
-        officialSourceDiscoveryRequired: 126,
+        officialSourceDiscoveryRequired: 116,
         candidateCohort: {
           officialTargets: 147,
           militaryExcluded: 3,
@@ -46,14 +46,14 @@ describe('SourceManifestV2 public trust ledger', () => {
     ).toBe(report.summary.publicUniversities)
     expect(report.summary.statusCounts).toEqual({
       complete: 0,
-      in_progress: 266,
+      in_progress: 255,
       limited_official_catalog: 0,
     })
     expect(new Set(report.entries.map((entry) => entry.institutionId)).size)
       .toBe(report.entries.length)
 
     const candidates = report.entries.filter((entry) => entry.candidate.available)
-    expect(candidates).toHaveLength(140)
+    expect(candidates).toHaveLength(139)
     expect(candidates.every((entry) => (
       entry.candidate.safelyDisabled
       && entry.gates.candidateEvidenceOnly

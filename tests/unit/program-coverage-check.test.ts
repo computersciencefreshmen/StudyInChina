@@ -74,11 +74,11 @@ function program(
     degreeLevel: 'master',
     discipline: 'other',
     teachingLanguages: ['English'],
-    durationMonths: null,
-    programUrl: `https://example.edu/programs/${id}`,
+    durationMonths: 24,
+    programUrl: 'https://example.edu/programs',
     applyUrl: null,
     languageRequirements: [],
-    verificationScope: 'identity',
+    verificationScope: 'facts',
     status,
   }
 }
@@ -118,8 +118,10 @@ function coverageFixture(): DataBundle {
     program('two-expired', 'university-two'),
   ]
 
-  return {
-    sources: [],
+  return bundleSchema.parse({
+    sources: [{ id: CURRENT_META.sourceIds[0], url: 'https://example.edu/programs',
+      title: 'Official coverage fixture', publisher: 'Example University', kind: 'program',
+      language: 'en', official: true, accessedAt: TODAY }],
     cities: [city()],
     universities: fixtureUniversities,
     programs: fixturePrograms,
@@ -128,7 +130,7 @@ function coverageFixture(): DataBundle {
       expiredCycle('two-expired-cycle', 'two-expired'),
     ],
     scholarships: [],
-  }
+  })
 }
 
 describe('public university program coverage check', () => {
@@ -207,14 +209,18 @@ describe('public university program coverage check', () => {
       scholarships,
     })
     const report = buildProgramCoverageReport(catalog, {
-      today: TODAY,
+      today: '2026-10-19',
       mode: 'report',
       minimumPublishedPrograms: 1,
     })
 
     expect(coverageExitCode(report)).toBe(0)
-    expect(report.summary.duplicateProgramIdentities).toBe(0)
-    expect(report.identityDuplicates).toHaveLength(0)
+    // Full-catalog duplicate identities remain an actionable audit finding.
+    // A passing advisory report never implies that the strict release gate passes.
+    expect(report.summary.duplicateProgramIdentities).toBeGreaterThan(0)
+    expect(report.identityDuplicates.every(group => group.programIds.length > 1)).toBe(true)
+    expect(report.summary.belowMinimum).toBeGreaterThan(0)
+    expect(coverageExitCode({ ...report, mode: 'strict' })).toBe(1)
     expect(report.summary.belowMinimum).toBe(report.summary.distribution.zero)
     expect(report.lowCoverage).toHaveLength(
       report.summary.distribution.zero

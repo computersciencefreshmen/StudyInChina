@@ -4,7 +4,6 @@ import path from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 import { selectPublishedData } from '../../src/lib/data/publication'
-import { getTodayDate } from '../../src/lib/data/freshness'
 import { bundleSchema } from '../../src/lib/data/schema'
 
 const TODAY = '2026-08-25'
@@ -65,7 +64,7 @@ const data = bundleSchema.parse({
   sources,
   universities,
 })
-const published = selectPublishedData(data, TODAY)
+const published = selectPublishedData(data, '2026-10-19')
 const sourceById = new Map(data.sources.map((source) => [source.id, source]))
 
 function expectSixLanguages(
@@ -111,14 +110,14 @@ describe('SISU, AHU and CQU official depth wave on 2026-08-25', () => {
       // The historical identity and evidence survive a later review rollover.
       expect(program?.status, id).toMatch(/^(verified|stale)$/u)
       if (program?.status === 'stale') {
-        const current = selectPublishedData(data, getTodayDate()).programs.find((item) => item.id === id)
-        expect(current, id).toMatchObject({ status: 'stale', durationMonths: null, applyUrl: null, languageRequirements: [] })
+        const current = selectPublishedData(data, '2026-10-19').programs.find((item) => item.id === id)
+        expect(current, id).toBeUndefined()
       }
       expect(program?.durationMonths, id).toBe(duration)
       expect(program?.verificationScope, id).toBe('facts')
       expectSixLanguages(program?.name ?? {}, id)
       expectOfficialHttps(program?.sourceIds ?? [], id)
-      expect(published.programs.some((item) => item.id === id), id).toBe(true)
+      expect(published.programs.some((item) => item.id === id), id).toBe(false)
     }
   })
 
@@ -202,14 +201,7 @@ describe('SISU, AHU and CQU official depth wave on 2026-08-25', () => {
     expect(scholarship?.sourceIds).toEqual(['src-sisu-iclt-2026'])
     expectSixLanguages(scholarship?.name ?? {}, scholarship?.id ?? 'missing-sisu-iclt')
     const publicScholarship = current.scholarships.find((item) => item.id === scholarship?.id)
-    expect(publicScholarship).toMatchObject({
-      status: 'stale',
-      deadline: null,
-      applicationUrl: null,
-      summary: null,
-      coverage: { tuition: 'unknown', accommodation: 'unknown', insurance: 'unknown', stipendCnyPerMonth: null },
-    })
-    expect(publicScholarship?.sourceIds).toEqual(scholarship?.sourceIds)
+    expect(publicScholarship).toBeUndefined()
   })
 
   it('stores expired scholarship facts without leaking them as current opportunities', () => {
@@ -269,9 +261,6 @@ describe('SISU, AHU and CQU official depth wave on 2026-08-25', () => {
     expectSixLanguages(scholarship?.name ?? {}, scholarship?.id ?? 'missing-cqu-iclt')
     expectOfficialHttps(scholarship?.sourceIds ?? [], scholarship?.id ?? 'missing-cqu-iclt')
     const publicRecord = published.scholarships.find((item) => item.id === scholarship?.id)
-    expect(publicRecord).toBeDefined()
-    expect(publicRecord?.status).toBe('stale')
-    expect(publicRecord?.deadline).toBeNull()
-    expect(publicRecord?.summary).toBeNull()
+    expect(publicRecord).toBeUndefined()
   })
 })
