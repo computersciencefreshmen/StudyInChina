@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "kind": "studyinchina.local-catalog-mirror.v1",
+  "localOnly": true,
+  "releaseId": "legacy-v3-2026-10-18-37d01083aa83",
+  "createdAt": "2026-10-18T16:30:37.643Z",
+  "evaluatedForDate": "2026-10-19",
+  "outputDirectory": "C:\\Users\\Henry\\Desktop\\学过的课程\\github_profile_work\\StudyInChina\\.catalog-build\\local-mirrors\\legacy-v3-2026-10-18-37d01083aa83",
+  "manifest": {
+    "path": "manifest.json",
+    "bytes": 4235,
+    "sha256": "37bee344cc912e350fb889106cbebaa50473557017bee76a170967d9f51e8362"
+  },
+  "files": {
+    "sql": {
+      "path": "normalized.sql",
+      "bytes": 36224470,
+      "sha256": "09bee1b601f1f756578ce57015b59d85f37e6b1a9f600cb7736d8278151fe095"
+    },
+    "envelope": {
+      "path": "compat-envelope.json",
+      "bytes": 9946098,
+      "sha256": "e4c23d33ace81b50e0f306a836ecc3f7968aae55a57e68f086ae4d37d4a6e5ca"
+    },
+    "database": {
+      "path": "catalog.sqlite",
+      "bytes": 54009856,
+      "sha256": "289f6d6230caf1c4bc07ac4a68cb118222aaaeb911415e3a92e78e0a8f99523f"
+    }
+  },
+  "rawCounts": {
+    "sources": 2576,
+    "cities": 62,
+    "universities": 272,
+    "programs": 2044,
+    "admissionCycles": 1637,
+    "scholarships": 396
+  },
+  "publicCounts": {
+    "sources": 716,
+    "cities": 62,
+    "universities": 255,
+    "programs": 767,
+    "admissionCycles": 767,
+    "scholarships": 0
+  },
+  "validation": {
+    "integrityCheck": "ok",
+    "foreignKeyViolations": 0,
+    "sqliteVersion": "3.51.2",
+    "normalizedCounts": {
+      "sources": 2576,
+      "cities": 62,
+      "universities": 272,
+      "programs": 2044,
+      "admissionCycles": 1637,
+      "scholarships": 396
+    },
+    "textualDurations": 11,
+    "referenceTuitionFees": 690
+  },
+  "cloudOperations": 0,
+  "paidModelCalls": 0,
+  "websiteBackend": "json"
+}

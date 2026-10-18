@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "codex-recovery-scope-independent-whole-claim-review",
+  "reviewedAt": "2026-10-18T16:26:18.775Z",
+  "batchPath": "quality/recovery-20261018/next-wave/ecnu/full-program-batch-draft-v2.json",
+  "batchSha256": "bf29c85b2a2bc92d2a6d3c840a0aef2801738734d09956ff447420fc4bc35bd7",
+  "batchId": "ecnu-global-china-spring-2027-proposal-20261019-v2",
+  "catalogSha256AtReview": "b38205d8b48028e7dea8086977f64eaaec090ffc8352021f21a278a7499fb0c9",
+  "evaluatedForDate": "2026-10-19",
+  "pass": true,
+  "issues": [],
+  "supersedesOnly": "New independent review of corrected immutable v2; prior v1 review and held diagnosis remain unchanged. No prior approval or consumed batch is replayed.",
+  "checks": [
+    "Independently reread both complete original HTML captures; local parse5 extraction and a separate HTMLParser reviewer both support all programme applicant-facing claims.",
+    "All thirteen field quotes match independently parsed original HTML and bound text; raw/text/robots hashes and capture receipt URLs/timestamps are exact. Captures remain under 24 hours.",
+    "One visiting non-degree Global China Program route only. Four named Spring 2027 course options remain internal curriculum options, not four programme identities. No current canonical ID, slug, cycle or source-ID collision.",
+    "English medium applies to all content courses. Optional Chinese classes and their separately unknown instruction medium remain explicitly distinguished.",
+    "Exactly 15 weeks retained as durationText with null numeric months. March 1 to June 11 2027, orientation week and March 8 class start are explicit.",
+    "Chinese orientation-versus-registration error is corrected: first week is orientation; actual registration dates are designated by the university and are not invented.",
+    "Current-college-student condition, alternative IELTS6.0/TOEFL85/CambridgeB2 for non-native speakers, all four document categories, passport-study-period validity, passport-information-update restriction, and passport photo/campus-card use are complete.",
+    "December 25 2026 deadline is explicit. Opening date and same-day cutoff time remain unknown; unbound other-page20:00/lower-fee/closed-date comparisons have been removed in both languages.",
+    "CNY20000 per semester confirmed tuition, separate non-refundable CNY800 application fee, and CNY800/year insurance are directly stated. No semester insurance conversion, tuition refund, age or HSK threshold, or accommodation guarantee is invented. No reference-tuition opt-in is needed.",
+    "3–4-course selection, 9 Chinese credits and 3 content-course credits, optional Chinese placement, variable course availability/cancellation, and home-university credit-transfer responsibility remain complete.",
+    "Putuo campus, programme and course-selection contacts, online application/fee payment, email admission and visa forms, accommodation choices and designated-date registration are supported. Exact HTTPS application href occurs in programme raw HTML and captured portal reached200 through a recorded same-host normal redirect.",
+    "V2 sources, captures, program, evidence, non-notes cycle facts and original verifiedAt/reviewAfter dates are unchanged; v1 findings are fixed without new acquisition or date-only renewal.",
+    "Reviewed against the present normalized canonical catalogue hash; formal application, exclusive writer claim, CAS readback and any publication remain separate."
+  ],
+  "fieldQuotesIndependentlyBound": 13,
+  "captures": [
+    {
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "url": "https://lxs.ecnu.edu.cn/en_admission_visiting_programs_global_china_program/list.htm",
+      "retrievedAt": "2026-10-18T15:38:48.683880+00:00",
+      "ageMinutes": 47.50078333333333,
+      "expiresAt": "2026-10-19T15:38:48.683Z",
+      "raw": {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-gcp-2027.html",
+        "sha256": "5aa5392cc221790673daf92171a2ce8d001a4a36f7c2e574f8b9ff8fb69b91cc",
+        "bytes": 107080
+      },
+      "text": {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-gcp-2027.text.txt",
+        "sha256": "5366f5ff935488603a559eda14119da39ad0e38ce2aa83b8034efacaee466884",
+        "bytes": 17098
+      },
+      "receipt": {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-gcp-2027.receipt.json",
+        "sha256": "3510d3ccb50073d32979efd0d2ed47d9e7d1d6eb0af9eb5fa71e2c36fea89a00",
+        "bytes": 8165
+      },
+      "robots": {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-gcp-2027.robots.txt",
+        "sha256": "80c3fe2ae1062abf56456f52518bd670f9ec3917b7f85e152b347ac6b6faf880",
+        "bytes": 196
+      },
+      "robotsStatus": 404,
+      "allPinsMatch": true
+    },
+    {
+      "sourceId": "source-ecnu-gcp-official-application-20261018",
+      "url": "https://lxsapply.ecnu.edu.cn/c.asp?action=student_sign",
+      "retrievedAt": "2026-10-18T15:39:45.459141+00:00",
+      "ageMinutes": 46.555,
+      "expiresAt": "2026-10-19T15:39:45.459Z",
+      "raw": {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-apply-https.html",
+        "sha256": "7a797c96061df064449cbb28f69867700509dcf164db1d797ad1f6d00cea64b0",
+        "bytes": 6287
+      },
+      "text": {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-apply-https.text.txt",
+        "sha256": "52ab5cffacb495f0352318121f493d004e612844a1090cd4610bedb2bf0ab5a8",
+        "bytes": 960
+      },
+      "receipt": {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-apply-https.receipt.json",
+        "sha256": "477c62908ef22b468499a1328218f2836b832a9c0aea28f3c9d6ed98d0cdd519",
+        "bytes": 2038
+      },
+      "robots": {
+        "path": "quality/recovery-20261018/next-wave/ecnu/ecnu-apply-https.robots.txt",
+        "sha256": "217997338677cb4c6028849c2c69b11146e515f0bc49c01fa18a3e5f66201204",
+        "bytes": 1231
+      },
+      "robotsStatus": 404,
+      "allPinsMatch": true
+    }
+  ],
+  "quoteChecks": [
+    {
+      "index": 0,
+      "field": "name",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inRawParsed": true,
+      "inBoundText": true
+    },
+    {
+      "index": 1,
+      "field": "degreeLevel",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inRawParsed": true,
+      "inBoundText": true
+    },
+    {
+      "index": 2,
+      "field": "teachingLanguages",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inRawParsed": true,
+      "inBoundText": true
+    },
+    {
+      "index": 3,
+      "field": "durationText.en",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inRawParsed": true,
+      "inBoundText": true
+    },
+    {
+      "index": 4,
+      "field": "applyUrl",
+      "sourceId": "source-ecnu-gcp-official-application-20261018",
+      "inRawParsed": true,
+      "inBoundText": true
+    },
+    {
+      "index": 5,
+      "field": "languageRequirements",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inRawParsed": true,
+      "inBoundText": true
+    },
+    {
+      "index": 6,
+      "field": "eligibility",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inRawParsed": true,
+      "inBoundText": true
+    },
+    {
+      "index": 7,
+      "field": "applicationMaterials",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inRawParsed": true,
+      "inBoundText": true
+    },
+    {
+      "index": 8,
+      "field": "applicationMaterials",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inRawParsed": true,
+      "inBoundText": true
+    },
+    {
+      "index": 9,
+      "field": "closesOn",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inRawParsed": true,
+      "inBoundText": true
+    },
+    {
+      "index": 10,
+      "field": "tuitionCny",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inRawParsed": true,
+      "inBoundText": true
+    },
+    {
+      "index": 11,
+      "field": "tuitionPeriod",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inRawParsed": true,
+      "inBoundText": true
+    },
+    {
+      "index": 12,
+      "field": "applicationFeeCny",
+      "sourceId": "source-ecnu-gcp-spring-2027-official-20261018",
+      "inRawParsed": true,
+      "inBoundText": true
+    }
+  ],
+  "canonicalWrites": 0,
+  "networkRequests": 0,
+  "paidCalls": 0,
+  "publicationPerformed": false
+}
