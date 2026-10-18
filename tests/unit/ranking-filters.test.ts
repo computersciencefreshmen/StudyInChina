@@ -24,18 +24,21 @@ function rank(system: UniversityRanking['system'], rankMin: number, rankMax = ra
 }
 
 function fixture(): DataBundle {
+  const audit = { sourceIds: ['rank-fixture-official'], status: 'verified' as const, verifiedAt: today, reviewAfter: '2026-10-29' }
   const schools: University[] = universities.slice(0, 3).map((university, index) => ({
-    ...university, id: `rank-school-${index}`, slug: `rank-school-${index}`, cityId: cities[0]!.id,
+    ...university, ...audit, id: `rank-school-${index}`, slug: `rank-school-${index}`, cityId: cities[0]!.id,
     rankings: index === 0 ? [rank('qs', 99), rank('the', 201, 250)] : index === 1 ? [rank('qs', 201, 250), rank('the', 99)] : undefined,
   })) as University[]
   const linkedPrograms = programs.slice(0, 3).map((program, index) => ({
-    ...program, id: `rank-program-${index}`, slug: `rank-program-${index}`, universityId: schools[index]!.id, status: 'stale',
+    ...program, ...audit, id: `rank-program-${index}`, slug: `rank-program-${index}`, universityId: schools[index]!.id, verificationScope: 'facts',
+    sourceIds: [`rank-program-source-${index}`], programUrl: `https://example.edu/program-${index}`,
+    details: undefined,
   })) as DataBundle['programs']
   const linkedScholarships = [
-    { ...scholarships[0]!, id: 'rank-award', slug: 'rank-award', universityIds: [schools[0]!.id, schools[1]!.id], programIds: [], status: 'stale' },
-    { ...scholarships[0]!, id: 'program-award', slug: 'program-award', universityIds: [], programIds: [linkedPrograms[0]!.id], status: 'stale' },
+    { ...scholarships[0]!, ...audit, id: 'rank-award', slug: 'rank-award', universityIds: [schools[0]!.id, schools[1]!.id], programIds: [], deadline: null },
+    { ...scholarships[0]!, ...audit, id: 'program-award', slug: 'program-award', universityIds: [], programIds: [linkedPrograms[0]!.id], deadline: null },
   ] as DataBundle['scholarships']
-  return { sources: sources as DataBundle['sources'], cities: [cities[0]!] as DataBundle['cities'], universities: schools, programs: linkedPrograms, scholarships: linkedScholarships, admissionCycles: [] }
+  return { sources: [{ id: 'rank-fixture-official', url: 'https://example.edu/admissions', title: 'Official ranking filter fixture', publisher: 'Test university', kind: 'admissions', language: 'en', official: true, accessedAt: today }, ...linkedPrograms.map((program, index) => ({ id: `rank-program-source-${index}`, url: program.programUrl, title: 'Official program fixture', publisher: 'Test university', kind: 'program' as const, language: 'en' as const, official: true, accessedAt: today }))], cities: [{ ...cities[0]!, ...audit }] as DataBundle['cities'], universities: schools, programs: linkedPrograms, scholarships: linkedScholarships, admissionCycles: [] }
 }
 
 describe('university ranking filters', () => {
@@ -93,7 +96,7 @@ describe('university ranking filters', () => {
     expect(selectedSchool.universityOptions.map(({ value }) => value)).toContain('rank-school-0')
   })
 
-  it('keeps rank filtering independent of university freshness and other facts', () => {
+  it('applies ranking filters to current institutions without mutating other facts', () => {
     const data = fixture()
     const before = structuredClone(data)
     const service = new CatalogApiService(data, deriveCatalogRelease(data), today)
@@ -124,8 +127,9 @@ describe('university ranking filters', () => {
     expect(service.listScholarships({ program: 'rank-program-1', theRankMax: '100' }).data).toHaveLength(1)
   })
 
-  it('discovers stale scholarship identities by affiliation without restoring expired eligibility or facts', () => {
+  it('masks stale scholarship facts and excludes them from the public projection', () => {
     const data = fixture()
+    data.scholarships = data.scholarships.map(scholarship => ({ ...scholarship, status: 'stale' }))
     const before = structuredClone(data)
     const service = new CatalogApiService(data, deriveCatalogRelease(data), today)
     const records = service.listScholarships({ qsRankMax: '100' }).data
@@ -141,6 +145,8 @@ describe('university ranking filters', () => {
       expect(record.fieldMeta.programIds.status).toBe('stale')
       expect(record.verifiedAt).toBe(data.scholarships.find(({ id }) => id === record.id)!.verifiedAt)
     }
+    const publicService = new CatalogApiService(selectCatalogApiData(data, today), deriveCatalogRelease(data), today)
+    expect(publicService.listScholarships({ qsRankMax: '100' }).data).toEqual([])
     expect(service.listScholarships({ qsRankMax: '100', institution: 'rank-school-0' }).data).toHaveLength(0)
     expect(service.listScholarships({ qsRankMax: '100', program: 'rank-program-0' }).data).toHaveLength(0)
     expect(service.listScholarships({ qsRankMax: '100', theRankMax: '100' }).data).toHaveLength(0)
@@ -154,7 +160,8 @@ describe('university ranking filters', () => {
     const web = queryScholarshipCatalog(selectPublishedData(data, date), parseScholarshipCatalogFilters(filters), date, 100)
     const service = new CatalogApiService(selectCatalogApiData(data, date), deriveCatalogRelease(data), date)
     const api = service.listScholarships({ ...filters, limit: 100 })
-    expect(web.total).toBeGreaterThan(0)
+    expect(web.total).toBe(0)
+    expect(api.data).toHaveLength(web.total)
     expect(web.total).toBeLessThanOrEqual(100)
     expect(api.data.map(({ id }) => id).sort()).toEqual(web.items.map(({ scholarship }) => scholarship.id).sort())
   })

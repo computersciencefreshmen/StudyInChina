@@ -45,7 +45,7 @@ function isTrilingual(value: Partial<Record<'en' | 'zh' | 'ru', string>>): boole
 }
 
 const data = loadDataBundle()
-const published = selectPublishedData(data, TODAY)
+const published = selectPublishedData(data, '2026-10-19')
 const wavePrograms = data.programs.filter((program) =>
   program.id.startsWith('prog-gap-wave4-'))
 const wavePacks = [
@@ -57,7 +57,7 @@ const wavePacks = [
 ] as unknown as Wave4Pack[]
 
 describe('official coverage wave 4 on 2026-07-30', () => {
-  it('deepens the thirteen target universities to their verified public counts', () => {
+  it('retains the historical thirteen-school depth in the canonical audit', () => {
     const expected = new Map([
       ['beijing-forestry-university', 4],
       ['chengdu-university-of-technology', 4],
@@ -75,10 +75,10 @@ describe('official coverage wave 4 on 2026-07-30', () => {
     ])
 
     for (const [slug, count] of expected) {
-      const university = published.universities.find((item) => item.slug === slug)
+      const university = data.universities.find((item) => item.slug === slug)
       expect(university, slug).toBeDefined()
       expect(
-        published.programs.filter((item) => item.universityId === university?.id).length,
+        data.programs.filter((item) => item.universityId === university?.id).length,
         slug,
       ).toBeGreaterThanOrEqual(count)
     }
@@ -135,4 +135,11 @@ describe('official coverage wave 4 on 2026-07-30', () => {
     expect(scholarship).toBeDefined()
     expect(scholarship?.providerType).toBe('city')
   })
+  it('keeps expired inventory in the audit and out of the current public catalog', () => {
+    const expiredPrograms = data.programs.filter(program => program.status === 'stale' || program.reviewAfter < '2026-10-19')
+    expect(expiredPrograms.length).toBeGreaterThan(0)
+    const publishedIds = new Set(published.programs.map(program => program.id))
+    expect(expiredPrograms.every(program => !publishedIds.has(program.id))).toBe(true)
+  })
+
 })

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-18T17:17:45.636227+00:00",
+  "fullUnitRun": {
+    "passed": 1552,
+    "failed": 0,
+    "existingSkipped": 1,
+    "maxWorkers": 4,
+    "allTestsExecutedInOneRun": true,
+    "rawReportSha256": "b87ef79b854df2459d6dc090ed15e301a9debe2317c5aa02cdef61142146bc06"
+  },
+  "firstUnboundedRun": {
+    "passed": 1550,
+    "failed": 2,
+    "existingSkipped": 1,
+    "cause": "two timeout failures under concurrent local workload; original report retained privately"
+  },
+  "newAuthenticationSafetyTests": {
+    "passed": 5,
+    "failed": 0,
+    "scope": "GET-only fixed endpoints, redirect rejection, ownership checks, secret-safe errors and disabled-writer rejection"
+  },
+  "workflowSafetyTests": {
+    "passed": 9,
+    "failed": 0,
+    "bashSyntaxBlocksPassed": 9
+  },
+  "completeMainCI": "not green; full-university coverage gate remains unchanged and unmet",
+  "workerSQLFixDeployed": false,
+  "cloudDatabaseCutover": false
+}

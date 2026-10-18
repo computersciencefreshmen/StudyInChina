@@ -99,7 +99,8 @@ describe('program detail evidence and freshness', () => {
     const { container } = render(await ProgramDetailPage({ params: Promise.resolve({ locale: 'en', slug: 'program' }) }))
     expect(screen.getByRole('link', { name: 'Read official evidence' })).toHaveAttribute('href', '#official-evidence')
     expect(container.querySelector('#official-evidence')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /Cycle deadline evidence/ })).toBeVisible()
+    expect(screen.getByRole('link', { name: /Official admissions guide/ })).toHaveAttribute('href', 'https://example.edu/admissions')
+    expect(screen.getByRole('link', { name: /Official programme source/ })).toHaveAttribute('href', 'https://example.edu/program')
     expect(screen.queryByText(/28,000/)).not.toBeInTheDocument()
     const summary = screen.getByRole('heading', { name: 'Application snapshot' }).closest('section')!
     expect(summary).toHaveTextContent('Aug 1, 2026')

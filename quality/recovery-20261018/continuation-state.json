@@ -1,54 +1,56 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-18T16:27:49.679Z",
+  "updatedAt": "2026-10-18T17:30:17.434717Z",
   "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
-  "canonicalOwner": null,
+  "canonicalOwner": "studyinchina-minimax",
   "canonicalWritesReleased": true,
-  "handoff": "docs/operations/map-program-recovery-2026-10-18.md",
+  "handoff": "docs/operations/publishing-authentication-reset-2026-10-19.md",
   "catalogSha256": "37d01083aa83d7ee7ee225d3aac63728f01edd188b71c1b2feb38e7616b91693",
-  "sourceCommit": "85f87e77b42221fd96e59110684932e291ea053b",
+  "sourceCommit": "303e3516322f7b8eed1a4cf2301d01a3c91976a3",
   "publicProjection": {
     "programs": 767,
     "universitiesWithPrograms": 15,
     "universitiesWithoutPrograms": 240
   },
   "lastStableReadback": {
-    "deploymentId": "dpl_36sjWb43vDSYppFRYysBjgSic6NZ",
-    "programs": 757,
-    "universitiesWithPrograms": 8,
-    "universitiesWithoutPrograms": 247,
+    "deploymentId": "dpl_EUkxVddCJFkt2KvLso15TdCEDCht",
+    "previousDeploymentId": "dpl_36sjWb43vDSYppFRYysBjgSic6NZ",
+    "programs": 767,
+    "universitiesWithPrograms": 15,
+    "universitiesWithoutPrograms": 240,
     "evaluatedForDate": "2026-10-19",
-    "proof": "quality/recovery-20261018/release/stable-public-readback-before-promotion-20261019.json",
-    "catalogBackend": "json"
+    "catalogBackend": "json",
+    "proof": "quality/recovery-20261019/release-main-303e351/stable-smoke-v1/stable-public-smoke.json",
+    "proofSha256": "5a94f4f49b8fd1237a08ac792efed755d7df8beb67693f8e151aeda19c659f15"
   },
   "candidate": {
-    "deploymentId": "dpl_2nANfpPkNbiGsZY6aTrUMGh11TEA",
-    "url": "https://studyinchina-l0gm4mmz9-henry-yangs-projects-c9706eac.vercel.app",
-    "sourcePlan": "quality/recovery-20261018/release/source-plan.json",
-    "qualification": "READY-owner-project-commit-qualified; single-complete-v4-public-smoke-pass",
-    "promoted": false,
-    "smokeProof": "quality/recovery-20261018/release/candidate-smoke-20261019-v4/candidate-public-smoke.json",
-    "smokeProofSha256": "da346dcbd0f613522809368e08e119d79fea409faaf6abc176789b85ec34f400",
-    "smokeCheckedAt": "2026-10-18T16:12:48.193Z",
-    "smokeCompletedAt": "2026-10-18T16:17:19.864Z",
-    "smokeRunnerSha256": "28bf94595ff7a05e24f5d64437aca7b9ea08ce9a71c33e8daaad85698127f6d5",
-    "expectedInputSha256": "a2bdda348090811d8980eaeab52dba72f3c24f94e5cfa3b6948e8088191f4d48",
+    "deploymentId": "dpl_EUkxVddCJFkt2KvLso15TdCEDCht",
+    "url": "https://studyinchina-a2m2xmfdj-henry-yangs-projects-c9706eac.vercel.app",
+    "sourcePlan": "quality/recovery-20261019/release-main-303e351/source-plan.json",
+    "qualification": "READY-owner-project-commit-qualified; candidate-and-stable-complete-smoke-pass",
+    "promoted": true,
+    "smokeProof": "quality/recovery-20261019/release-main-303e351/candidate-smoke-v1/candidate-public-smoke.json",
+    "smokeProofSha256": "4da629d321c3ef4d3dd963f49d34e80a3903e2d24070ce61f1568ee09456f647",
+    "sourceCommit": "303e3516322f7b8eed1a4cf2301d01a3c91976a3",
     "promotionProofMaxAgeMinutes": 15
   },
-  "publicationAuthentication": "human-confirmed-they-will-restore-existing-local-authentication; absent-on-local-file-check-at-2026-10-18T16:18:42.978Z",
+  "publicationAuthentication": "coordinated ADMIN reset completed; GitHub authenticated project/owner/alias/common-writer GETs verified; no further reset required",
   "paidModelLane": "ambiguous_paid_outcome STOP remains; no new paid calls",
   "cloudDatabaseWrites": 0,
   "automation": {
     "id": "studyinchina-minimax",
     "status": "ACTIVE",
     "intervalMinutes": 15,
-    "readback": "quality/recovery-20261018/automation-readback.json"
+    "readback": "quality/recovery-20261019/automation-readback.json"
   },
   "canonicalOwnershipRelease": {
-    "releasedAt": "2026-10-18T16:18:42.978Z",
-    "scope": "bounded canonical preparation may continue; stable publication still requires existing authentication, fresh complete proof and shared writer CAS",
-    "preservePendingCandidate": true,
-    "doNotReplayConsumedBatchIds": true
+    "releasedAt": "2026-10-18T17:30:17.434717Z",
+    "scope": "bounded canonical preparation and authorized fresh-proof shared-CAS publication may continue only after this handoff commit is synchronized with upstream and no overlapping owner exists; retain the published 767-programme version and previous stable",
+    "handoffCommitMustMatchUpstream": true,
+    "preservePendingCandidate": false,
+    "doNotReplayConsumedBatchIds": true,
+    "requiresFreshCompleteCandidateProof": true,
+    "requiresCommonWriterCas": true
   },
   "cloudDatabaseDiagnostic": {
     "receipt": "quality/recovery-20261018/d1-catalog-pointer-diagnostic-20261019-v1.json",
@@ -62,7 +64,7 @@
     "approvedProposal": "quality/recovery-20261018/next-wave/ecnu/full-program-batch-approved-v2.json",
     "applied": true,
     "countedInPublicProjection": true,
-    "publiclyReleased": false,
+    "publiclyReleased": true,
     "applicationReceipt": "quality/program-expansion-20261013/applied-ecnu-global-china-spring-2027-proposal-20261019-v2.json"
   },
   "lastCanonicalBatch": {
@@ -72,6 +74,52 @@
     "newAdmissionCycles": 1,
     "newSources": 2,
     "receipt": "quality/program-expansion-20261013/applied-ecnu-global-china-spring-2027-proposal-20261019-v2.json",
-    "stablePublication": false
+    "stablePublication": true
+  },
+  "authenticationReset": {
+    "authorizedByHuman": true,
+    "owner": "interactive-root",
+    "status": "completed; ADMIN synchronized and GitHub VERCEL_TOKEN functionally verified",
+    "doNotRotateConcurrently": true,
+    "encryptedBackupOutsideWorkspace": "%LOCALAPPDATA%/StudyInChina/secrets/admin-telemetry-20261019.dpapi",
+    "completedAt": "2026-10-18T17:24:17Z",
+    "serverVerification": {
+      "runId": 39149405552,
+      "runUrl": "https://github.com/computersciencefreshmen/StudyInChina/actions/runs/39149405552",
+      "headSha": "de3878059ba2fcdc7a8fd8976c17556a31642dd2",
+      "conclusion": "success",
+      "checkedAt": "2026-10-18T17:24:14.412Z",
+      "receipt": "quality/recovery-20261019/authentication-reset/github-functional-check-v1.json"
+    }
+  },
+  "mergedPullRequest": {
+    "number": 38,
+    "mergeCommit": "303e3516322f7b8eed1a4cf2301d01a3c91976a3",
+    "state": "MERGED"
+  },
+  "previousUnpromotedCandidate": {
+    "deploymentId": "dpl_2nANfpPkNbiGsZY6aTrUMGh11TEA",
+    "url": "https://studyinchina-l0gm4mmz9-henry-yangs-projects-c9706eac.vercel.app",
+    "sourcePlan": "quality/recovery-20261018/release/source-plan.json",
+    "qualification": "READY-owner-project-commit-qualified; single-complete-v4-public-smoke-pass",
+    "promoted": false,
+    "smokeProof": "quality/recovery-20261018/release/candidate-smoke-20261019-v4/candidate-public-smoke.json",
+    "smokeProofSha256": "da346dcbd0f613522809368e08e119d79fea409faaf6abc176789b85ec34f400",
+    "smokeCheckedAt": "2026-10-18T16:12:48.193Z",
+    "smokeCompletedAt": "2026-10-18T16:17:19.864Z",
+    "smokeRunnerSha256": "28bf94595ff7a05e24f5d64437aca7b9ea08ce9a71c33e8daaad85698127f6d5",
+    "expectedInputSha256": "a2bdda348090811d8980eaeab52dba72f3c24f94e5cfa3b6948e8088191f4d48",
+    "promotionProofMaxAgeMinutes": 15,
+    "mayPromote": false,
+    "retiredBy": "published-new-767-project-deployment"
+  },
+  "followupPullRequest": {
+    "number": 39,
+    "url": "https://github.com/computersciencefreshmen/StudyInChina/pull/39",
+    "state": "OPEN",
+    "draft": true,
+    "branch": "codex/publishing-authentication-20261019",
+    "coverageGateUnresolved": true,
+    "notAnAdditionalPublishedApplicationCommit": true
   }
 }

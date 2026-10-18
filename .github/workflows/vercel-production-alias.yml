@@ -58,10 +58,9 @@ jobs:
           set -euo pipefail
           api="${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/workflows/ci.yml/runs?branch=main&per_page=20"
           for attempt in $(seq 1 60); do
-            response="$(curl --fail --silent --show-error \
+            response="$(printf 'header = "Authorization: Bearer %s"\n' "${GITHUB_TOKEN}" | curl --config - --fail --silent --show-error \
               --header 'Accept: application/vnd.github+json' \
-              --header "Authorization: Bearer ${GITHUB_TOKEN}" \
-              --header 'X-GitHub-Api-Version: 2022-11-28' \
+                --header 'X-GitHub-Api-Version: 2022-11-28' \
               "${api}")"
             if jq -e --arg sha "${DEPLOYMENT_SHA}" \
               '.workflow_runs | any(.head_sha == $sha and (.event == "push" or .event == "workflow_dispatch") and .status == "completed" and .conclusion == "success")' \
@@ -92,9 +91,8 @@ jobs:
         run: |
           set -euo pipefail
           ref_api="${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/git/ref/heads/main"
-          current_sha="$(curl --fail --silent --show-error \
+          current_sha="$(printf 'header = "Authorization: Bearer %s"\n' "${GITHUB_TOKEN}" | curl --config - --fail --silent --show-error \
             --header 'Accept: application/vnd.github+json' \
-            --header "Authorization: Bearer ${GITHUB_TOKEN}" \
             --header 'X-GitHub-Api-Version: 2022-11-28' \
             "${ref_api}" | jq -r '.object.sha // empty')"
           if ! [[ "${current_sha}" =~ ^[0-9a-f]{40}$ ]]; then
@@ -177,15 +175,13 @@ jobs:
 
           # Reuse an existing automation credential through read-only APIs.
           # Never disable protection, generate a bypass, or run a package with this token.
-          project_json="$(curl --fail --silent --show-error \
+          project_json="$(printf 'header = "Authorization: Bearer %s"\n' "${VERCEL_TOKEN}" | curl --config - --fail --silent --show-error \
             --connect-timeout 10 --max-time 30 \
-            --header "Authorization: Bearer ${VERCEL_TOKEN}" \
             'https://api.vercel.com/v9/projects/studyinchina?slug=henry-yangs-projects-c9706eac')"
           project_id="$(jq -er 'select(.name == "studyinchina") | .id | select(type == "string" and test("^prj_[A-Za-z0-9]+$"))' <<< "${project_json}")"
           team_id="$(jq -er '.accountId | select(type == "string" and test("^team_[A-Za-z0-9]+$"))' <<< "${project_json}")"
-          deployment_json="$(curl --fail --silent --show-error \
+          deployment_json="$(printf 'header = "Authorization: Bearer %s"\n' "${VERCEL_TOKEN}" | curl --config - --fail --silent --show-error \
             --connect-timeout 10 --max-time 30 \
-            --header "Authorization: Bearer ${VERCEL_TOKEN}" \
             "https://api.vercel.com/v13/deployments/${deployment_host}?teamId=${team_id}")"
           if ! jq -e --arg projectId "${project_id}" --arg ownerId "${team_id}" \
             --arg host "${deployment_host}" \
@@ -209,9 +205,8 @@ jobs:
           unset project_json deployment_json masked_secret
 
           for attempt in 1 2 3 4 5 6; do
-            if curl --fail --silent --show-error \
+            if printf 'header = "x-vercel-protection-bypass: %s"\n' "${bypass_secret}" | curl --config - --fail --silent --show-error \
               --connect-timeout 10 --max-time 30 \
-              --header "x-vercel-protection-bypass: ${bypass_secret}" \
               "${release_api}" \
               | jq -e --arg sha "${DEPLOYMENT_SHA}" \
                 '.data.deploymentSha == $sha
@@ -260,10 +255,9 @@ jobs:
           transaction_committed=false
 
           github_main_sha() {
-            curl --fail --silent --show-error \
+            printf 'header = "Authorization: Bearer %s"\n' "${GITHUB_TOKEN}" | curl --config - --fail --silent --show-error \
               --header 'Accept: application/vnd.github+json' \
-              --header "Authorization: Bearer ${GITHUB_TOKEN}" \
-              --header 'X-GitHub-Api-Version: 2022-11-28' \
+                --header 'X-GitHub-Api-Version: 2022-11-28' \
               "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/git/ref/heads/main" \
               | jq -r '.object.sha // empty'
           }
@@ -273,7 +267,6 @@ jobs:
               --format json \
               --limit 100 \
               --scope henry-yangs-projects-c9706eac \
-              --token "${VERCEL_TOKEN}" \
               | jq -er '
                   [.aliases[] | select(.alias == "studyinchina.vercel.app")] as $matches
                   | if ($matches | length) == 1 then $matches[0].url
@@ -305,8 +298,7 @@ jobs:
               if ! npx --yes vercel@58.0.0 alias set \
                 "${previous_target}" \
                 studyinchina.vercel.app \
-                --scope henry-yangs-projects-c9706eac \
-                --token "${VERCEL_TOKEN}"; then
+                --scope henry-yangs-projects-c9706eac; then
                 node --import tsx scripts/operations/github-release-writer.ts finish uncertain || true
                 echo '::error title=Stable alias rollback failed::The previous target could not be restored; immediate operator action is required.'
                 exit 1
@@ -356,8 +348,7 @@ jobs:
           npx --yes vercel@58.0.0 alias set \
             "${DEPLOYMENT_URL}" \
             studyinchina.vercel.app \
-            --scope henry-yangs-projects-c9706eac \
-            --token "${VERCEL_TOKEN}"
+            --scope henry-yangs-projects-c9706eac
 
           post_promotion_main_sha="$(github_main_sha || true)"
           if ! [[ "${post_promotion_main_sha}" =~ ^[0-9a-f]{40}$ ]] || [[ "${post_promotion_main_sha}" != "${DEPLOYMENT_SHA}" ]]; then

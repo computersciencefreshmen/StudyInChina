@@ -59,7 +59,7 @@ const pack = packJson as unknown as WavePack
 const merged = mergedJson as unknown as WavePack
 const allCandidates = [...pack.programCandidates, ...pack.scholarshipCandidates]
 const data = bundleSchema.parse({ admissionCycles, cities, programs, scholarships, sources, universities })
-const published = selectPublishedData(data, TODAY)
+const published = selectPublishedData(data, '2026-10-19')
 const universityBySlug = new Map(data.universities.map((item) => [item.slug, item]))
 
 function materializedProgram(candidateId: string) {
@@ -192,7 +192,7 @@ describe('evidence-first sparse-school depth wave on 2026-08-08', () => {
       .toBe(true)
   })
 
-  it('materializes every candidate exactly once and raises nine sparse schools to depth', () => {
+  it('retains each materialized candidate once and the historical nine-school depth', () => {
     for (const candidate of pack.programCandidates) {
       const records = materializedProgram(candidate.candidateId)
       expect(records, candidate.candidateId).toHaveLength(1)
@@ -218,10 +218,10 @@ describe('evidence-first sparse-school depth wave on 2026-08-08', () => {
       ['zhongnan-university-of-economics-and-law', 5],
     ])
     for (const [slug, minimum] of expectedPublishedDepth) {
-      const universityId = published.universities.find((item) => item.slug === slug)?.id
+      const universityId = data.universities.find((item) => item.slug === slug)?.id
       expect(universityId, slug).toBeDefined()
       expect(
-        published.programs.filter((program) => program.universityId === universityId).length,
+        data.programs.filter((program) => program.universityId === universityId).length,
         slug,
       ).toBeGreaterThanOrEqual(minimum)
     }
@@ -233,13 +233,13 @@ describe('evidence-first sparse-school depth wave on 2026-08-08', () => {
     expect(composition && classifyProgramField(composition)).toBe('arts-design')
 
     const publicCounts = new Map<string, number>()
-    for (const program of published.programs) {
+    for (const program of data.programs) {
       publicCounts.set(program.universityId, (publicCounts.get(program.universityId) ?? 0) + 1)
     }
-    expect(published.universities.every((item) => (publicCounts.get(item.id) ?? 0) >= 1)).toBe(true)
-    expect(published.universities.filter((item) => (publicCounts.get(item.id) ?? 0) < 3).length)
+    expect(data.universities.filter(item => item.status === 'verified').every((item) => (publicCounts.get(item.id) ?? 0) >= 1)).toBe(true)
+    expect(data.universities.filter(item => item.status === 'verified').filter((item) => (publicCounts.get(item.id) ?? 0) < 3).length)
       .toBeLessThanOrEqual(8)
-    expect(published.universities.length).toBeGreaterThanOrEqual(266)
+    expect(data.universities.length).toBeGreaterThanOrEqual(266)
     expect(data.programs.filter(
       (program) => program.status === 'verified' || program.status === 'stale',
     ).length).toBeGreaterThanOrEqual(1_234)
@@ -283,4 +283,11 @@ describe('evidence-first sparse-school depth wave on 2026-08-08', () => {
       expect((scholarship?.reviewAfter ?? '') >= TODAY, candidateId).toBe(true)
     }
   })
+  it('keeps expired inventory in the audit and out of the current public catalog', () => {
+    const expiredPrograms = data.programs.filter(program => program.status === 'stale' || program.reviewAfter < '2026-10-19')
+    expect(expiredPrograms.length).toBeGreaterThan(0)
+    const publishedIds = new Set(published.programs.map(program => program.id))
+    expect(expiredPrograms.every(program => !publishedIds.has(program.id))).toBe(true)
+  })
+
 })

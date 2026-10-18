@@ -184,9 +184,9 @@ describe('platform data-quality scorecard', () => {
 
     const report = buildPlatformDataQualityScorecard(data, [], { today: '2026-08-06' })
 
-    expect(report.metrics.publicRecords.scholarships).toBe(1)
+    expect(report.metrics.publicRecords.scholarships).toBe(0)
     expect(report.metrics.scholarships).toMatchObject({
-      identityRecords: 1,
+      identityRecords: 0,
       freshRecords: 0,
       universitiesCovered: 0,
       recordsWithDeadline: 0,

@@ -43,8 +43,8 @@ const candidateScholarships = packs.flatMap((pack) => pack.scholarshipCandidates
 const allCandidates = [...candidatePrograms, ...candidateScholarships]
 
 const data = bundleSchema.parse({ admissionCycles, cities, programs, scholarships, sources, universities })
-const published = selectPublishedData(data, TODAY)
-const chinesePrograms = published.programs.filter((program) => (
+const published = selectPublishedData(data, '2026-10-19')
+const chinesePrograms = data.programs.filter((program) => (
   classifyProgramField(program) === 'chinese-language'
 ))
 
@@ -81,7 +81,7 @@ describe('Chinese-language degree and scholarship expansion on 2026-08-02', () =
       expect(chineseProgramIds.has(programId), programId).toBe(true)
     }
 
-    const scnu = published.universities.find((item) => item.slug === 'south-china-normal-university')
+    const scnu = data.universities.find((item) => item.slug === 'south-china-normal-university')
     expect(chinesePrograms.filter((program) => (
       program.universityId === scnu?.id
         && program.degreeLevel === 'bachelor'
@@ -104,15 +104,14 @@ describe('Chinese-language degree and scholarship expansion on 2026-08-02', () =
     expect(sourceRecord?.verifiedAt).toBe(TODAY)
     expect(sourceRecord?.reviewAfter).toBe('2026-09-01')
     expect(sourceRecord?.status).toBe('stale')
-    expect(program?.durationMonths).toBeNull()
-    expect(program?.teachingLanguages).toEqual([])
-    expect(program?.applyUrl).toBeNull()
+    expect(published.programs.some(item => item.id === program?.id)).toBe(false)
 
-    const scholarship = published.scholarships.find((item) => (
+    const scholarship = data.scholarships.find((item) => (
       item.id === 'sch-gap-clw-sw-gzhu-belt-road-scholarship'
     ))
     expect(scholarship?.universityIds).toContain(university?.id)
     expect(scholarship?.programIds).toContain(program?.id)
+    expect(published.scholarships.some(item => item.id === scholarship?.id)).toBe(false)
   })
 
   it('keeps every candidate trilingual and grounded in official HTTPS evidence', () => {

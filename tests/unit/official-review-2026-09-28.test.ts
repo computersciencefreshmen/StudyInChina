@@ -10,7 +10,7 @@ const reviewedCycles = review.changes
   .filter((change) => change.collection === 'admissionCycles' && change.before === null)
   .map((change) => admissionCycleSchema.parse(change.after))
 
-function reviewedCycleFixture() {
+function reviewedCycleFixture(staleParents = false) {
   const data = readLegacyBundle()
   const cycleIds = new Set(reviewedCycles.map((cycle) => cycle.id))
   const programIds = new Set(reviewedCycles.map((cycle) => cycle.programId))
@@ -18,14 +18,21 @@ function reviewedCycleFixture() {
     ...data.admissionCycles.filter((cycle) => !cycleIds.has(cycle.id)),
     ...reviewedCycles,
   ]
-  data.programs = data.programs.map((program) => programIds.has(program.id)
-    ? { ...program, status: 'stale' }
-    : program)
+  // Synthetic current parents test the reviewed payload independently from
+  // future canonical rechecks. No production review timestamp is changed.
+  const parentMeta = { status: 'verified' as const, verifiedAt: '2026-09-28', reviewAfter: '2026-10-28' }
+  data.programs = data.programs.filter(program => programIds.has(program.id))
+    .map(program => ({ ...program, ...parentMeta, verificationScope: 'facts' as const,
+      teachingLanguages: ['English'], status: staleParents ? 'stale' as const : 'verified' as const }))
+  const universityIds = new Set(data.programs.map(program => program.universityId))
+  data.universities = data.universities.filter(item => universityIds.has(item.id)).map(item => ({ ...item, ...parentMeta }))
+  const cityIds = new Set(data.universities.map(item => item.cityId))
+  data.cities = data.cities.filter(item => cityIds.has(item.id)).map(item => ({ ...item, ...parentMeta }))
   return data
 }
 
 describe('September 28 official cycle review', () => {
-  it('publishes four exact SIGS cycle fees without renewing old program facts', () => {
+  it('publishes four exact reviewed SIGS fees when every synthetic parent is current', () => {
     expect(reviewedCycles.map((cycle) => [cycle.id, cycle.tuitionCny])).toEqual([
       ['cycle-thu-sigs-0830j2-autumn-2027', 40000],
       ['cycle-thu-sigs-0812j3-autumn-2027', 40000],
@@ -39,10 +46,17 @@ describe('September 28 official cycle review', () => {
         tuitionPeriod: 'academic-year', applicationFeeCny: 800,
         verifiedAt: '2026-09-28', sourceIds: ['src-thu-sigs-international-graduate-2027'],
       })
-      expect(published.programs.find((item) => item.id === cycle.programId)).toMatchObject({
-        status: 'stale', durationMonths: null, teachingLanguages: [],
-        languageRequirements: [], applyUrl: null,
-      })
+      expect(published.programs.find((item) => item.id === cycle.programId)?.status).toBe('verified')
+    }
+  })
+
+  it('withholds otherwise reviewed fees when their parent program remains stale', () => {
+    const fixture = reviewedCycleFixture(true)
+    const published = selectPublishedData(fixture, '2026-09-28')
+    for (const cycle of reviewedCycles) {
+      expect(fixture.admissionCycles.find(item => item.id === cycle.id)?.tuitionCny).toBe(cycle.tuitionCny)
+      expect(published.admissionCycles.some(item => item.id === cycle.id)).toBe(false)
+      expect(published.programs.some(item => item.id === cycle.programId)).toBe(false)
     }
   })
 

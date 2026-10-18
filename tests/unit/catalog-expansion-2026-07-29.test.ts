@@ -17,7 +17,7 @@ const data = bundleSchema.parse({
   admissionCycles,
   scholarships,
 })
-const published = selectPublishedData(data, '2026-07-29')
+const published = selectPublishedData(data, '2026-10-19')
 
 const expansionUniversityIds = new Set([
   'uni-peking-union-medical-college',
@@ -155,13 +155,14 @@ describe('2026-07-29 official catalog expansion', () => {
     }
   })
 
-  it('publishes all new programs with program-level official evidence', () => {
+  it('retains all historical programs with official evidence and quarantines expired reviews', () => {
     const publishedIds = new Set(published.programs.map((item) => item.id))
     expect(newProgramIds.size).toBe(12)
     for (const id of newProgramIds) {
       const program = data.programs.find((item) => item.id === id)
       expect(program, id).toBeDefined()
-      expect(publishedIds.has(id), id).toBe(true)
+      expect(program?.status, id).toBe('stale')
+      expect(publishedIds.has(id), id).toBe(false)
       expect(program?.details, `${id}: details`).toBeDefined()
       expect(program?.details?.overview.en, `${id}: English overview`).toBeTruthy()
       expect(program?.details?.overview.zh, `${id}: Chinese overview`).toBeTruthy()

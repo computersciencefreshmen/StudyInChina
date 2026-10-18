@@ -93,7 +93,7 @@ describe('FactValue', () => {
 })
 
 describe('ProgramCard fact safety', () => {
-  it('renders the four decision facts when their current values are known', () => {
+  it('renders known deadline, tuition and duration on the compact card', () => {
     const { container } = render(<ProgramCard
       program={program}
       cycle={cycle}
@@ -102,13 +102,15 @@ describe('ProgramCard fact safety', () => {
       today="2026-08-08"
     />)
 
-    expect(container.querySelectorAll('[data-fact-status="known"]')).toHaveLength(4)
+    expect(container.querySelectorAll('[data-fact-status="known"]')).toHaveLength(3)
     expect(screen.getByText('Sep 1, 2026')).toBeVisible()
+    expect(screen.getByText(/28,000/)).toHaveAttribute('data-fact-status', 'known')
     expect(screen.getByText('24 months')).toBeVisible()
+    expect(screen.queryByText(/600/)).not.toBeInTheDocument()
   })
 
-  it('does not present reference tuition while retaining an independent application fee', () => {
-    const { container } = render(<ProgramCard
+  it('omits unconfirmed tuition and application fees from the compact card while retaining known deadline and duration', () => {
+    render(<ProgramCard
       program={program}
       cycle={{ ...cycle, tuitionStatus: 'reference' }}
       locale="en"
@@ -116,9 +118,11 @@ describe('ProgramCard fact safety', () => {
       today="2026-08-08"
     />)
 
-    expect(container.querySelectorAll('[data-fact-status="officially_not_announced"]')).toHaveLength(1)
+    expect(screen.queryByText(getMessages('en').common.tuition)).not.toBeInTheDocument()
     expect(screen.queryByText(/28,000/)).not.toBeInTheDocument()
-    expect(screen.getByText(/600/)).toBeVisible()
+    expect(screen.queryByText(/600/)).not.toBeInTheDocument()
+    expect(screen.getByText('Sep 1, 2026')).toBeVisible()
+    expect(screen.getByText('24 months')).toHaveAttribute('data-fact-status', 'known')
   })
 
   it('hides old cycle facts while retaining a fresh program duration', () => {
@@ -130,7 +134,7 @@ describe('ProgramCard fact safety', () => {
       today="2026-08-08"
     />)
 
-    expect(container.querySelectorAll('[data-fact-status="stale"]')).toHaveLength(3)
+    expect(container.querySelectorAll('[data-fact-status="stale"]')).toHaveLength(2)
     expect(screen.getByText('24 months')).toHaveAttribute('data-fact-status', 'known')
     expect(screen.queryByText('Sep 1, 2026')).not.toBeInTheDocument()
     expect(screen.queryByText(/28,000/)).not.toBeInTheDocument()

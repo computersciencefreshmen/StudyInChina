@@ -8,6 +8,7 @@ import {
   normalizeLanguageFilter,
   placeholders,
   queryAll,
+  queryAllByRecordIds,
   queryFirst,
   type RecordAuditRow,
   type RecordDecorations,
@@ -690,13 +691,12 @@ export class CatalogSqlApi {
   private async mapInstitutions(rows: InstitutionRow[]) {
     const institutionIds = rows.map((row) => row.record_id)
     const cityIds = rows.map((row) => row.city_id)
-    const slots = institutionIds.length > 0 ? placeholders(institutionIds.length) : ''
     const [institutionDecorations, cityDecorations, disciplines] = await Promise.all([
       loadRecordDecorations(this.database, this.release.id, institutionIds),
       loadRecordDecorations(this.database, this.release.id, cityIds),
       institutionIds.length === 0
         ? Promise.resolve([] as InstitutionCodeRow[])
-        : queryAll<InstitutionCodeRow>(this.database, `
+        : queryAllByRecordIds<InstitutionCodeRow>(this.database, this.release.id, institutionIds, slots => `
             SELECT DISTINCT
               program.institution_id,
               discipline.discipline_code AS code
@@ -707,7 +707,7 @@ export class CatalogSqlApi {
             WHERE program.release_id = ?
               AND program.institution_id IN (${slots})
             ORDER BY program.institution_id, discipline.discipline_code
-          `, [this.release.id, ...institutionIds]),
+          `),
     ])
     return rows.map((row): InstitutionDto => {
       const disciplineCodes = disciplines
@@ -1279,7 +1279,6 @@ export class CatalogSqlApi {
 
   private async mapPrograms(rows: ProgramRow[]) {
     const programIds = rows.map((row) => row.record_id)
-    const slots = programIds.length > 0 ? placeholders(programIds.length) : ''
     const [decorations, disciplines, languages, currentCycles] = await Promise.all([
       loadRecordDecorations(
         this.database,
@@ -1288,20 +1287,20 @@ export class CatalogSqlApi {
       ),
       programIds.length === 0
         ? Promise.resolve([] as ProgramCodeRow[])
-        : queryAll<ProgramCodeRow>(this.database, `
+        : queryAllByRecordIds<ProgramCodeRow>(this.database, this.release.id, programIds, slots => `
             SELECT program_id, discipline_code AS code
             FROM current_program_disciplines
             WHERE release_id = ? AND program_id IN (${slots})
             ORDER BY program_id, is_primary DESC, discipline_code
-          `, [this.release.id, ...programIds]),
+          `),
       programIds.length === 0
         ? Promise.resolve([] as ProgramCodeRow[])
-        : queryAll<ProgramCodeRow>(this.database, `
+        : queryAllByRecordIds<ProgramCodeRow>(this.database, this.release.id, programIds, slots => `
             SELECT program_id, language_code AS code
             FROM current_program_teaching_languages
             WHERE release_id = ? AND program_id IN (${slots})
             ORDER BY program_id, role, language_code
-          `, [this.release.id, ...programIds]),
+          `),
       this.currentProgramCycles(rows),
     ])
     return rows.map((row): ProgramListDto => {
@@ -1365,8 +1364,7 @@ export class CatalogSqlApi {
 
   private async linkedScholarshipCounts(programIds: readonly string[]) {
     if (programIds.length === 0) return new Map<string, number>()
-    const slots = placeholders(programIds.length)
-    const rows = await queryAll<ProgramScholarshipCountRow>(this.database, `
+    const rows = await queryAllByRecordIds<ProgramScholarshipCountRow>(this.database, this.release.id, programIds, slots => `
       WITH target_programs AS MATERIALIZED (
         SELECT program_id, institution_id, release_id
         FROM current_programs
@@ -1452,7 +1450,7 @@ export class CatalogSqlApi {
       SELECT program_id, COUNT(DISTINCT scholarship_id) AS scholarship_count
       FROM linked
       GROUP BY program_id
-    `, [this.release.id, ...programIds])
+    `)
     return new Map(rows.map((row) => [row.program_id, Number(row.scholarship_count)]))
   }
 
@@ -1933,8 +1931,7 @@ export class CatalogSqlApi {
 
   private async routeWindows(ownerIds: string[]) {
     if (ownerIds.length === 0) return []
-    const slots = placeholders(ownerIds.length)
-    return queryAll<RouteWindowRow>(this.database, `
+    return queryAllByRecordIds<RouteWindowRow>(this.database, this.release.id, ownerIds, slots => `
       SELECT
         route.owner_record_id,
         route.route_type,
@@ -1951,13 +1948,12 @@ export class CatalogSqlApi {
       WHERE route.release_id = ? AND route.owner_record_id IN (${slots})
       ORDER BY route.owner_record_id, route.is_primary DESC, route.application_route_id,
                window.closes_on, window.application_window_id
-    `, [this.release.id, ...ownerIds])
+    `)
   }
 
   private async fees(ownerIds: string[]) {
     if (ownerIds.length === 0) return []
-    const slots = placeholders(ownerIds.length)
-    return queryAll<FeeRow>(this.database, `
+    return queryAllByRecordIds<FeeRow>(this.database, this.release.id, ownerIds, slots => `
       SELECT
         owner_record_id,
         fee_type,
@@ -1970,13 +1966,12 @@ export class CatalogSqlApi {
       FROM current_fee_items
       WHERE release_id = ? AND owner_record_id IN (${slots})
       ORDER BY owner_record_id, fee_type, fee_id
-    `, [this.release.id, ...ownerIds])
+    `)
   }
 
   private async programCycleRows(programIds: string[]) {
     if (programIds.length === 0) return []
-    const slots = placeholders(programIds.length)
-    return queryAll<ProgramCycleRow>(this.database, `
+    return queryAllByRecordIds<ProgramCycleRow>(this.database, this.release.id, programIds, slots => `
       SELECT
         record.record_id,
         record.slug,
@@ -1997,7 +1992,7 @@ export class CatalogSqlApi {
       WHERE cycle.release_id = ? AND cycle.program_id IN (${slots})
       ORDER BY cycle.program_id, cycle.academic_year DESC,
                cycle.intake_code, cycle.sequence, cycle.program_cycle_id
-    `, [this.release.id, ...programIds])
+    `)
   }
 
   private async mapProgramCycleRows(
@@ -2257,8 +2252,7 @@ export class CatalogSqlApi {
 
   private async coverage(cycleIds: string[]) {
     if (cycleIds.length === 0) return []
-    const slots = placeholders(cycleIds.length)
-    return queryAll<CoverageRow>(this.database, `
+    return queryAllByRecordIds<CoverageRow>(this.database, this.release.id, cycleIds, slots => `
       SELECT
         scholarship_cycle_id,
         coverage_id,
@@ -2274,7 +2268,7 @@ export class CatalogSqlApi {
       FROM current_scholarship_coverage
       WHERE release_id = ? AND scholarship_cycle_id IN (${slots})
       ORDER BY scholarship_cycle_id, coverage_type, coverage_id
-    `, [this.release.id, ...cycleIds])
+    `)
   }
 
   async getScholarshipCycles(slug: string) {

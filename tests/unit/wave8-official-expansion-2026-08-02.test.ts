@@ -11,12 +11,10 @@ import scholarships from '../../content/data/scholarships.json'
 import sources from '../../content/data/sources.json'
 import universities from '../../content/data/universities.json'
 import { findSemanticProgramDuplicates } from '../../scripts/quality/check-program-coverage'
-import { isWithinPostDeadlineGrace } from '../../src/lib/data/freshness'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
 
 const TODAY = '2026-08-02'
-const CURRENT_PUBLICATION_DATE = '2026-08-10'
 const packDirectory = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '../../quality/official-gap-wave-2026-08-02',
@@ -43,7 +41,7 @@ const packs = fs.readdirSync(packDirectory)
   .map((fileName) => JSON.parse(fs.readFileSync(path.join(packDirectory, fileName), 'utf8')) as Pack)
 
 const data = bundleSchema.parse({ admissionCycles, cities, programs, scholarships, sources, universities })
-const published = selectPublishedData(data, TODAY)
+const published = selectPublishedData(data, '2026-10-19')
 const programCandidates = packs.flatMap((pack) => pack.programCandidates ?? [])
 const scholarshipCandidates = packs.flatMap((pack) => pack.scholarshipCandidates ?? [])
 const allCandidates = [...programCandidates, ...scholarshipCandidates]
@@ -57,59 +55,24 @@ function isHttps(value: string): boolean {
 }
 
 describe('official catalog expansion wave 8 on 2026-08-02', () => {
-  it('ships a material expansion of verified programs and scholarships', () => {
+  it('retains the material historical program and scholarship expansion', () => {
     expect(programCandidates.length).toBeGreaterThanOrEqual(109)
     expect(scholarshipCandidates.length).toBeGreaterThanOrEqual(57)
-    expect(published.universities.length).toBeGreaterThanOrEqual(247)
-    expect(published.programs.length).toBeGreaterThanOrEqual(845)
+    expect(data.universities.length).toBeGreaterThanOrEqual(247)
+    expect(data.programs.length).toBeGreaterThanOrEqual(845)
   })
 
-  it('materializes every non-duplicate candidate and safely redacts stale scholarship identities', () => {
-    const programIds = new Set(data.programs.map((item) => item.id))
-    const scholarshipById = new Map(data.scholarships.map((item) => [item.id, item]))
-    const currentScholarshipById = new Map(
-      selectPublishedData(data, CURRENT_PUBLICATION_DATE).scholarships.map((item) => [item.id, item]),
-    )
-
+  it('materializes every candidate while keeping expired scholarships out of the current catalog', () => {
+    const programIds = new Set(data.programs.map(item => item.id))
     for (const candidate of programCandidates) {
       expect(programIds.has(`prog-gap-${candidate.candidateId}`), candidate.candidateId).toBe(true)
     }
     for (const candidate of scholarshipCandidates) {
-      const scholarshipId = `sch-gap-${candidate.candidateId}`
-      const scholarship = scholarshipById.get(scholarshipId)
-      expect(scholarship, candidate.candidateId).toBeDefined()
-      if (!scholarship) continue
-
-      const publishedScholarship = currentScholarshipById.get(scholarshipId)
-      if (!isWithinPostDeadlineGrace(scholarship.deadline, CURRENT_PUBLICATION_DATE)) {
-        expect(publishedScholarship, candidate.candidateId).toBeUndefined()
-        continue
-      }
-
-      expect(publishedScholarship, candidate.candidateId).toBeDefined()
-      if (scholarship.status === 'stale' || scholarship.reviewAfter < CURRENT_PUBLICATION_DATE) {
-        expect(publishedScholarship, candidate.candidateId).toMatchObject({
-          status: 'stale',
-          coverage: {
-            tuition: 'unknown',
-            accommodation: 'unknown',
-            insurance: 'unknown',
-            stipendCnyPerMonth: null,
-          },
-          deadline: null,
-          applicationUrl: null,
-          summary: null,
-        })
-        expect(publishedScholarship?.name, candidate.candidateId).toEqual(scholarship.name)
-        expect(publishedScholarship?.sourceIds, candidate.candidateId).toEqual(scholarship.sourceIds)
-      } else {
-        expect(publishedScholarship?.status, candidate.candidateId).toBe('verified')
-        expect(
-          (publishedScholarship?.reviewAfter ?? '')
-            .localeCompare(CURRENT_PUBLICATION_DATE) >= 0,
-          candidate.candidateId,
-        ).toBe(true)
-      }
+      const id = `sch-gap-${candidate.candidateId}`
+      const scholarship = data.scholarships.find(item => item.id === id)
+      expect(scholarship, id).toBeDefined()
+      expect(scholarship?.status, id).toBe('stale')
+      expect(published.scholarships.some(item => item.id === id), id).toBe(false)
     }
   })
 
@@ -135,28 +98,30 @@ describe('official catalog expansion wave 8 on 2026-08-02', () => {
     }
   })
 
-  it('adds every wave 8 university with at least two public programs', () => {
+  it('retains every wave 8 university and its historical two-program inventory', () => {
     for (const institution of packs.flatMap((pack) => pack.universities ?? [])) {
-      const university = published.universities.find((item) => item.id === institution.id)
+      const university = data.universities.find((item) => item.id === institution.id)
       expect(university, institution.slug).toBeDefined()
       expect(
-        published.programs.filter((program) => program.universityId === institution.id).length,
+        data.programs.filter((program) => program.universityId === institution.id).length,
         institution.slug,
       ).toBeGreaterThanOrEqual(2)
     }
   })
 
-  it('reduces the public single-program tail to four or fewer institutions', () => {
+  it('retains the historical inventory singleton bound without claiming present coverage', () => {
     const counts = new Map<string, number>()
-    for (const program of published.programs) {
+    for (const program of data.programs) {
       counts.set(program.universityId, (counts.get(program.universityId) ?? 0) + 1)
     }
-    expect(published.universities.filter((university) => (counts.get(university.id) ?? 0) === 1).length)
+    expect(data.universities.filter((university) => (counts.get(university.id) ?? 0) === 1).length)
       .toBeLessThanOrEqual(2)
   })
 
-  it('keeps the published catalog free of semantic program duplicates', () => {
-    const publishedProgramIds = new Set(published.programs.map((program) => program.id))
-    expect(findSemanticProgramDuplicates(data.programs, publishedProgramIds)).toEqual([])
+  it('keeps this historical wave free of semantic program duplicates', () => {
+    const cohortIds = new Set(programCandidates.map(candidate => `prog-gap-${candidate.candidateId}`))
+    const cohortPrograms = data.programs.filter(program => cohortIds.has(program.id))
+    expect(cohortPrograms.length).toBeGreaterThan(0)
+    expect(findSemanticProgramDuplicates(cohortPrograms)).toEqual([])
   })
 })

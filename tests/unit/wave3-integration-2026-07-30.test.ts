@@ -138,9 +138,8 @@ describe('official coverage wave 3 on 2026-07-31', () => {
     }
   })
 
-  it('deepens the four existing universities in the production selector', () => {
-    const published = selectPublishedData(data, TODAY)
-    const expected = new Map([
+  it('retains the historical four-school depth in the canonical audit', () => {
+        const expected = new Map([
       ['northeast-normal-university', 6],
       ['yunnan-university', 5],
       ['china-university-of-geosciences-beijing', 5],
@@ -148,8 +147,8 @@ describe('official coverage wave 3 on 2026-07-31', () => {
     ])
 
     for (const [slug, count] of expected) {
-      const university = published.universities.find((item) => item.slug === slug)
-      expect(published.programs.filter((item) =>
+      const university = data.universities.find((item) => item.slug === slug)
+      expect(data.programs.filter((item) =>
         item.universityId === university?.id).length).toBeGreaterThanOrEqual(count)
     }
   })

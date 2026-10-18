@@ -17,9 +17,10 @@ describe('JSON runtime release evaluation dates', () => {
 
     const repository = createJsonCatalogRepository()
     const snapshotRelease = await repository.getRelease()
+    const expiredProgramId = (await repository.getBundle()).programs[0]!.id
     const list = await (await listPrograms(new Request('https://example.test/api/v1/programs?limit=1'))).json()
     const comparison = await (await comparePrograms(new Request(
-      `https://example.test/api/v1/programs/compare?ids=${encodeURIComponent(list.data[0].id)}`,
+      `https://example.test/api/v1/programs/compare?ids=${encodeURIComponent(expiredProgramId)}`,
     ))).json()
     const current = await (await getCurrentRelease()).json()
 
@@ -31,9 +32,10 @@ describe('JSON runtime release evaluation dates', () => {
       expect(envelope.meta.release.id).toBe(snapshotRelease.id)
     }
     expect(current.data.evaluatedForDate).toBe(evaluationDate)
-    // Future evaluation still masks stale facts; changing metadata must not refresh them.
-    expect(list.data[0].status).toBe('stale')
-    expect(list.data[0].durationMonths).toBeNull()
+    // Advancing the query clock does not renew expired records or expose their identities.
+    expect(list.data).toEqual([])
+    expect(comparison.data.items).toEqual([])
+    expect(comparison.data.missingIds).toEqual([expiredProgramId])
     await expect(repository.getRelease()).resolves.toEqual(snapshotRelease)
   })
 

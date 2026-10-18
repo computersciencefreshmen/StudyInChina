@@ -58,7 +58,7 @@ describe('second official ICLT wave 2026-07-28', () => {
     for (const key of keys) {
       const programId = `program-${key}`
       const isReverified = key === 'sisu-iclt-one-semester-spring-2027'
-      const expectedStatus = isReverified ? 'verified' : 'stale'
+      const expectedStatus = 'stale'
       const program = programs.find((item) => item.id === programId)
       const recheckedAt = String(program?.verifiedAt)
       const nextReview = new Date(recheckedAt + 'T00:00:00Z')
@@ -88,14 +88,7 @@ describe('second official ICLT wave 2026-07-28', () => {
       if (expectedDynamicStatus === 'stale') {
         expect(published.admissionCycles.some((item) => item.id === cycle?.id)).toBe(false)
         const publicScholarship = published.scholarships.find((item) => item.id === scholarship?.id)
-        expect(publicScholarship).toMatchObject({
-          status: 'stale',
-          deadline: null,
-          applicationUrl: null,
-          summary: null,
-          coverage: { tuition: 'unknown', accommodation: 'unknown', insurance: 'unknown', stipendCnyPerMonth: null },
-        })
-        expect(publicScholarship?.sourceIds).toEqual(scholarship?.sourceIds)
+        expect(publicScholarship).toBeUndefined()
       }
     }
   })

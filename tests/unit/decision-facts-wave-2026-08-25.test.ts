@@ -7,7 +7,6 @@ import scholarships from '../../content/data/scholarships.json'
 import sources from '../../content/data/sources.json'
 import universities from '../../content/data/universities.json'
 import { getApplicationState } from '../../src/lib/data/admission'
-import { getTodayDate } from '../../src/lib/data/freshness'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
 
@@ -161,17 +160,17 @@ describe('decision-fact depth wave on 2026-08-25', () => {
     expect(scholarship?.programIds).toEqual([programId])
   })
 
-  it('keeps historical wave identities discoverable without renewing expired fields or cycles', () => {
-    const published = selectPublishedData(data, getTodayDate())
+  it('keeps historical wave identities in the audit without renewing expired fields or cycles', () => {
+    const published = selectPublishedData(data, '2026-10-19')
     const ids = [...ZJU_PROGRAMS.map(([id]) => id), ...HDU_PROGRAMS]
     for (const id of ids) {
       const original = data.programs.find((program) => program.id === id)!
       const current = published.programs.find((program) => program.id === id)
-      expect(current, id).toBeDefined()
-      if (original.status === 'stale' || original.reviewAfter < getTodayDate()) {
-        expect(current, id).toMatchObject({ status: 'stale', durationMonths: null, applyUrl: null, teachingLanguages: [], languageRequirements: [] })
+      expect(original, id).toBeDefined()
+      if (original.status === 'stale' || original.reviewAfter < '2026-10-19') {
+        expect(current, id).toBeUndefined()
       }
-      for (const cycle of data.admissionCycles.filter((item) => item.programId === id && (item.status === 'stale' || item.reviewAfter < getTodayDate()))) {
+      for (const cycle of data.admissionCycles.filter((item) => item.programId === id && (item.status === 'stale' || item.reviewAfter < '2026-10-19'))) {
         expect(published.admissionCycles.some((item) => item.id === cycle.id), cycle.id).toBe(false)
       }
     }

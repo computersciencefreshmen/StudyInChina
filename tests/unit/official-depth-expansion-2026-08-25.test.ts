@@ -7,7 +7,6 @@ import scholarships from '../../content/data/scholarships.json'
 import sources from '../../content/data/sources.json'
 import universities from '../../content/data/universities.json'
 import { selectPublishedData } from '../../src/lib/data/publication'
-import { getTodayDate } from '../../src/lib/data/freshness'
 import { bundleSchema } from '../../src/lib/data/schema'
 
 const TODAY = '2026-08-25'
@@ -50,7 +49,7 @@ const data = bundleSchema.parse({
   sources,
   universities,
 })
-const published = selectPublishedData(data, TODAY)
+const published = selectPublishedData(data, '2026-10-19')
 const sourceById = new Map(data.sources.map((source) => [source.id, source]))
 
 function expectOfficialSources(sourceIds: string[], label: string): void {
@@ -85,13 +84,13 @@ describe('official depth expansion on 2026-08-25', () => {
       expect(program, id).toBeDefined()
       expect(program?.status, id).toMatch(/^(verified|stale)$/u)
       if (program?.status === 'stale') {
-        const current = selectPublishedData(data, getTodayDate()).programs.find((item) => item.id === id)
-        expect(current, id).toMatchObject({ status: 'stale', durationMonths: null, applyUrl: null, languageRequirements: [] })
+        const current = selectPublishedData(data, '2026-10-19').programs.find((item) => item.id === id)
+        expect(current, id).toBeUndefined()
       }
       expect((program?.reviewAfter ?? '').localeCompare(TODAY) >= 0, id).toBe(true)
       expectSixLanguageName(program?.name ?? {}, id)
       expectOfficialSources(program?.sourceIds ?? [], id)
-      expect(published.programs.some((item) => item.id === id), id).toBe(true)
+      expect(published.programs.some((item) => item.id === id), id).toBe(false)
     }
   })
 
@@ -117,21 +116,19 @@ describe('official depth expansion on 2026-08-25', () => {
       const isOverdueIclt = id === 'scholarship-cug-international-chinese-language-teachers-2026'
       expect(scholarship?.status, id).toMatch(/^(verified|stale)$/u)
       if (scholarship?.status === 'stale') {
-        const current = selectPublishedData(data, getTodayDate()).scholarships.find((item) => item.id === id)
-        expect(current, id).toMatchObject({ status: 'stale', applicationUrl: null, deadline: null, coverage: { tuition: 'unknown', stipendCnyPerMonth: null } })
+        const current = selectPublishedData(data, '2026-10-19').scholarships.find((item) => item.id === id)
+        expect(current, id).toBeUndefined()
       }
       if (isOverdueIclt) {
         expect(scholarship?.verifiedAt).toBe(TODAY)
         expect(scholarship?.reviewAfter).toBe('2026-09-01')
         const publicRecord = published.scholarships.find((item) => item.id === id)
-        expect(publicRecord?.applicationUrl).toBeNull()
-        expect(publicRecord?.coverage.tuition).toBe('unknown')
-        expect(publicRecord?.coverage.stipendCnyPerMonth).toBeNull()
+        expect(publicRecord).toBeUndefined()
       }
       expect((scholarship?.reviewAfter ?? '').localeCompare(TODAY) >= 0, id).toBe(true)
       expectSixLanguageName(scholarship?.name ?? {}, id)
       expectOfficialSources(scholarship?.sourceIds ?? [], id)
-      expect(published.scholarships.some((item) => item.id === id), id).toBe(true)
+      expect(published.scholarships.some((item) => item.id === id), id).toBe(false)
     }
 
     const cugIclt = data.scholarships.find(
@@ -148,16 +145,16 @@ describe('official depth expansion on 2026-08-25', () => {
       expect(scholarship?.programIds, id).toEqual([])
 
       const publicScholarship = published.scholarships.find((item) => item.id === id)
-      expect(publicScholarship?.universityIds, id).toEqual(['uni-wuhan-textile-university'])
+      expect(publicScholarship, id).toBeUndefined()
     }
   })
 
-  it('raises the targeted public university depth without inflating the Tibet limited case', () => {
+  it('retains historical depth without inflating the single Tibet identity', () => {
     const universityBySlug = new Map(
-      published.universities.map((university) => [university.slug, university]),
+      data.universities.map((university) => [university.slug, university]),
     )
     const programCounts = new Map<string, number>()
-    for (const program of published.programs) {
+    for (const program of data.programs) {
       programCounts.set(
         program.universityId,
         (programCounts.get(program.universityId) ?? 0) + 1,

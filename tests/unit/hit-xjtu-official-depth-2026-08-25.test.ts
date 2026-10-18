@@ -374,7 +374,7 @@ describe('HIT and XJTU official depth importer on 2026-08-25', () => {
     }
 
     for (const identityProgram of data.programs.filter(
-      (program) => program.verificationScope === 'identity',
+      (program) => [...XJTU_ENGINEERING_IDS, XJTU_MBBS_ID].includes(program.id),
     )) {
       expect(identityProgram.durationMonths, identityProgram.id).toBeNull()
       expect(identityProgram.languageRequirements, identityProgram.id).toEqual([])
@@ -539,7 +539,7 @@ describe('HIT and XJTU official depth importer on 2026-08-25', () => {
     }
     expect(data.sources.some((source) => source.url.endsWith('/2026CLP.pdf'))).toBe(false)
     for (const identityProgram of data.programs.filter(
-      (program) => program.verificationScope === 'identity',
+      (program) => [...XJTU_ENGINEERING_IDS, XJTU_MBBS_ID].includes(program.id),
     )) {
       expect(identityProgram.durationMonths, identityProgram.id).toBeNull()
       expect(identityProgram.languageRequirements, identityProgram.id).toEqual([])

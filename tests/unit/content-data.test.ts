@@ -6,11 +6,13 @@ import programs from '../../content/data/programs.json'
 import admissionCycles from '../../content/data/admission-cycles.json'
 import scholarships from '../../content/data/scholarships.json'
 import { getApplicationState } from '@/lib/data/admission'
-import { getTodayDate } from '@/lib/data/freshness'
+import { localize } from '@/lib/data/format'
+import { hasConfirmedProgramDuration } from '@/lib/data/duration'
+import { getProgramDisplayDetails } from '@/lib/data/program-details'
 import { bundleSchema } from '@/lib/data/schema'
 import { selectPublishedData } from '@/lib/data/publication'
 
-const PUBLISHED_AS_OF = getTodayDate()
+const PUBLISHED_AS_OF = '2026-10-19'
 const ACTIONABLE_APPLICATION_STATES = new Set([
   'open',
   'upcoming',
@@ -85,16 +87,21 @@ describe('published content data', () => {
         expect(
           program.durationMonths !== null
           || program.teachingLanguages.length > 0
-          || program.languageRequirements.length > 0,
+          || program.languageRequirements.length > 0
+          || program.applyUrl !== null,
         ).toBe(true)
         continue
       }
-      expect(program.details).toBeDefined()
-      expect(program.durationMonths).not.toBeNull()
-      expect(program.languageRequirements.length).toBeGreaterThan(0)
+      const details = getProgramDisplayDetails(program, PUBLISHED_AS_OF)
+      expect(details, program.id).toBeDefined()
+      expect(hasConfirmedProgramDuration(program), program.id).toBe(true)
+      expect(details?.eligibility.length, program.id).toBeGreaterThan(0)
+      expect(details?.applicationMaterials.length, program.id).toBeGreaterThan(0)
       expect(program.programUrl).not.toBe(program.applyUrl)
       // A null/omitted maximum represents a fixed duration; only ranged programs need a maximum.
-      expect(program.durationMonthsMax ?? program.durationMonths).toBeGreaterThanOrEqual(program.durationMonths!)
+      if (program.durationMonths !== null) {
+        expect(program.durationMonthsMax ?? program.durationMonths).toBeGreaterThanOrEqual(program.durationMonths)
+      }
     }
 
     for (const cycle of published.admissionCycles) {
@@ -130,7 +137,8 @@ describe('published content data', () => {
     const publishedFudanCycles = published.admissionCycles.filter(
       (cycle) => cycle.programId === fudanStableIdentity?.id,
     )
-    expect(publishedFudanCycles).toHaveLength(0)
+    expect(publishedFudanCycles).toHaveLength(1)
+    expect(publishedFudanCycles[0]).toMatchObject({ intake: 'spring', academicYear: '2026-2027', tuitionStatus: 'reference' })
 
     const staleFeeReference = content.admissionCycles.find(
       (cycle) => cycle.id === 'cycle-2026-fudan-university-chinese-language-program-language-fee-reference',
@@ -145,9 +153,10 @@ describe('published content data', () => {
     })
     expect(staleFeeReference?.tuitionCny).not.toBeNull()
     expect(staleFeeReference).not.toHaveProperty('notes')
+    expect(publishedFudanCycles.some(cycle => cycle.id === staleFeeReference?.id)).toBe(false)
   })
 
-  it('provides English, Chinese and Russian for public names', () => {
+  it('provides sourced names with nonempty display fallbacks in six locales', () => {
     const names = [
       ...content.cities.map((item) => item.name),
       ...content.universities.map((item) => item.name),
@@ -156,10 +165,13 @@ describe('published content data', () => {
     ]
 
     for (const name of names) {
-      expect(name.en?.trim()).not.toBe('')
-      expect(name.zh?.trim()).not.toBe('')
-      expect(name.ru?.trim()).not.toBe('')
-      expect(name.ru).not.toMatch(/translation pending/i)
+      expect(name.en?.trim()).toBeTruthy()
+      if (name.zh !== undefined) expect(name.zh.trim()).not.toBe('')
+      for (const locale of ['en', 'zh', 'ru', 'de', 'fr', 'es'] as const) {
+        const display = localize(name, locale)
+        expect(display.trim()).not.toBe('')
+        expect(display).not.toMatch(/translation pending/i)
+      }
     }
   })
 

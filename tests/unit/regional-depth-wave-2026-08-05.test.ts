@@ -57,7 +57,7 @@ type Pack = {
 const pack = JSON.parse(fs.readFileSync(packPath, 'utf8')) as Pack
 const candidates: Candidate[] = [...pack.programCandidates, ...pack.scholarshipCandidates]
 const data = bundleSchema.parse({ admissionCycles, cities, programs, scholarships, sources, universities })
-const published = selectPublishedData(data, TODAY)
+const published = selectPublishedData(data, '2026-10-19')
 
 function expectLocalized(value: LocalizedText, label: string): void {
   for (const locale of locales) {
@@ -156,31 +156,11 @@ describe('regional depth wave on 2026-08-05', () => {
     expect(published.universities.every(
       (university) => (programCounts.get(university.id) ?? 0) >= 1,
     )).toBe(true)
-    const staleScholarships = published.scholarships.filter(
-      (scholarship) => scholarship.status === 'stale',
-    )
+    const staleScholarships = data.scholarships.filter(item => item.status === 'stale')
     expect(staleScholarships.length).toBeGreaterThan(0)
-    for (const scholarship of published.scholarships) {
-      if (scholarship.status === 'verified') {
-        expect(
-          (scholarship.reviewAfter ?? '').localeCompare(TODAY) >= 0,
-          scholarship.id,
-        ).toBe(true)
-        continue
-      }
+    const publicScholarshipIds = new Set(published.scholarships.map(item => item.id))
+    expect(staleScholarships.every(item => !publicScholarshipIds.has(item.id))).toBe(true)
+    expect(published.scholarships.every(item => item.status === 'verified' && item.reviewAfter >= '2026-10-19')).toBe(true)
 
-      expect(scholarship.status, scholarship.id).toBe('stale')
-      expect(scholarship.name.en, scholarship.id).toBeTruthy()
-      expect(scholarship.sourceIds.length, scholarship.id).toBeGreaterThan(0)
-      expect(scholarship.coverage, scholarship.id).toEqual({
-        tuition: 'unknown',
-        accommodation: 'unknown',
-        insurance: 'unknown',
-        stipendCnyPerMonth: null,
-      })
-      expect(scholarship.deadline, scholarship.id).toBeNull()
-      expect(scholarship.applicationUrl, scholarship.id).toBeNull()
-      expect(scholarship.summary, scholarship.id).toBeNull()
-    }
   })
 })

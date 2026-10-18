@@ -144,9 +144,13 @@ describe('decision-oriented cards', () => {
         today="2026-08-08"
       />,
     )
-    expect(container.querySelectorAll('[data-fact-status=\"officially_not_announced\"]')).toHaveLength(2)
+    // Compact cards omit absent decision facts; full source/fee context lives on the detail page.
+    expect(container.querySelector('time')).not.toBeInTheDocument()
+    expect(screen.queryByText(getMessages('en').common.tuition)).not.toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /Apply on official site/ })).not.toBeInTheDocument()
     expect(screen.queryByText(/28,000/)).not.toBeInTheDocument()
-    expect(screen.getByText(/600/)).toBeVisible()
+    expect(screen.queryByText(/600/)).not.toBeInTheDocument()
+    expect(screen.getByText('24 months')).toBeVisible()
   })
 
   it('shows a historical tuition reference only when current confirmed tuition is absent', () => {

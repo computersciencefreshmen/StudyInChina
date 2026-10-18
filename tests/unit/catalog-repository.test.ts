@@ -29,8 +29,16 @@ const allData = bundleSchema.parse({
   scholarships,
 })
 
-function copyBundle(): DataBundle {
-  return structuredClone(allData)
+function copyBundle(fixtureDate?: string): DataBundle {
+  const bundle = structuredClone(allData)
+  if (fixtureDate) {
+    // These positive fixtures own their evidence window and complete parent chain.
+    const reviewAfter = new Date(Date.parse(`${fixtureDate}T00:00:00Z`) + 30 * 86_400_000).toISOString().slice(0, 10)
+    for (const record of [...bundle.cities, ...bundle.universities, ...bundle.programs]) {
+      if (record.status === 'verified') Object.assign(record, { verifiedAt: fixtureDate, reviewAfter })
+    }
+  }
+  return bundle
 }
 
 function apiRelease(bundle: DataBundle) {
@@ -71,13 +79,14 @@ describe('CatalogRepository', () => {
 
   it('filters JSON programs by linked or specifically selected published scholarship scopes', async () => {
     const today = '2026-08-08'
-    const bundle = copyBundle()
+    const bundle = copyBundle(today)
     const program = selectPublishedData(bundle, today).programs[0]!
     // Keep a positive eligibility fixture independent of canonical evidence rollover.
     bundle.scholarships = [{
       ...bundle.scholarships[0]!,
       id: 'scholarship-repository-fixture', slug: 'scholarship-repository-fixture',
       universityIds: [program.universityId], programIds: [program.id],
+      sourceIds: [...program.sourceIds],
       status: 'verified', verifiedAt: today, reviewAfter: '2026-09-08', deadline: null,
     }]
     const repository = createJsonCatalogRepository(() => bundle)
@@ -109,7 +118,7 @@ describe('CatalogRepository', () => {
 
   it('keeps JSON program scope strict while preserving institution scholarship search', async () => {
     const today = '2026-08-25'
-    const bundle = copyBundle()
+    const bundle = copyBundle(today)
     const publicPrograms = selectPublishedData(bundle, today).programs
     const byUniversity = new Map<string, typeof publicPrograms>()
     for (const program of publicPrograms) {
@@ -128,6 +137,7 @@ describe('CatalogRepository', () => {
       slug: 'strict-program-scope',
       universityIds: [university.id],
       programIds: [target.id],
+      sourceIds: [...target.sourceIds],
       deadline: null,
       verifiedAt: today,
       reviewAfter: '2026-09-24',
@@ -197,7 +207,7 @@ describe('CatalogRepository', () => {
 
   it('projects only official tuition references without changing current tuition filters', async () => {
     const today = '2026-08-25'
-    const bundle = copyBundle()
+    const bundle = copyBundle(today)
     const target = selectPublishedData(bundle, today).programs[0]!
     const rawTarget = bundle.programs.find((program) => program.id === target.id)!
     const officialSource = bundle.sources.find((source) => (
@@ -326,7 +336,7 @@ describe('CatalogRepository', () => {
 
   it('keeps the D1 tuition reference field optional and demotes previous-cycle current data', async () => {
     const today = '2026-08-25'
-    const bundle = copyBundle()
+    const bundle = copyBundle(today)
     const program = selectPublishedData(bundle, today).programs[0]!
     const university = bundle.universities.find((item) => item.id === program.universityId)!
     const baseCycle = bundle.admissionCycles[0]!
