@@ -36,6 +36,27 @@ const expandedProgramIds = [
   'program-bfsu-iclt-one-semester-spring-2027',
 ] as const
 
+const REVERIFIED_DHU_PROGRAM_ID = 'program-dhu-winter-chinese-2027'
+const REVERIFIED_DHU_SOURCE_IDS = [
+  'src-dhu-winter-chinese-2027',
+  'source-dhu-language-pedagogy-20261019',
+  'source-dhu-current-language-index-20261019',
+]
+// The newly reviewed awards intentionally omit links to these still-stale routes.
+// Keep their old fee assertions scoped to the original programme identities.
+const REVERIFIED_SCHOLARSHIPS = new Map([
+  ['scholarship-snnu-iclt-one-semester-spring-2027', {
+    universityId: 'uni-shaanxi-normal-university',
+    historicalProgramId: 'program-snnu-iclt-one-semester-spring-2027',
+    sourceId: 'source-snnu-iclt-spring2027-fresh-20261019',
+  }],
+  ['scholarship-blcu-iclt-one-semester-spring-2027', {
+    universityId: 'uni-beijing-language-and-culture-university',
+    historicalProgramId: 'program-blcu-iclt-one-semester-spring-2027',
+    sourceId: 'source-blcu-iclt-spring2027-fresh-20261019',
+  }],
+])
+
 describe('current future program expansion on 2026-07-28', () => {
   it('retains twelve grounded historical identities without publishing expired reviews', () => {
     const published = selectPublishedData(data, '2026-10-19')
@@ -44,8 +65,19 @@ describe('current future program expansion on 2026-07-28', () => {
     for (const id of expandedProgramIds) {
       const program = data.programs.find((item) => item.id === id)
       expect(program, id).toBeDefined()
-      expect(program?.status, id).toBe('stale')
-      expect(publishedIds.has(id), id).toBe(false)
+      if (id === REVERIFIED_DHU_PROGRAM_ID) {
+        expect(program?.status, id).toBe('verified')
+        expect(program?.verifiedAt, id).toBe('2026-10-19')
+        expect(program?.reviewAfter, id).toBe('2026-10-26')
+        expect(program?.sourceIds, id).toEqual(REVERIFIED_DHU_SOURCE_IDS)
+        expect(publishedIds.has(id), id).toBe(true)
+        expect(selectPublishedData(data, '2026-10-27').programs.some((item) => item.id === id))
+          .toBe(false)
+      } else {
+        expect(program?.status, id).toBe('stale')
+        expect(publishedIds.has(id), id).toBe(false)
+        expect(program?.name.ru).toBeTruthy()
+      }
       expect(
         data.sources.some(
           (source) => source.official
@@ -57,7 +89,6 @@ describe('current future program expansion on 2026-07-28', () => {
       ).toBe(true)
       expect(program?.name.en).toBeTruthy()
       expect(program?.name.zh).toBeTruthy()
-      expect(program?.name.ru).toBeTruthy()
     }
   })
 
@@ -99,12 +130,15 @@ describe('current future program expansion on 2026-07-28', () => {
       (item) => item.id === 'cycle-dhu-winter-chinese-2027',
     )
     expect(dhu).toMatchObject({
-      opensOn: '2026-07-10',
+      // July 10 is the brochure publication date, not an announced opening date.
+      opensOn: null,
       closesOn: '2026-11-30',
       tuitionCny: 3600,
       tuitionPeriod: 'program',
       applicationFeeCny: 600,
       evidenceBasis: 'cycle-specific',
+      verifiedAt: '2026-10-19',
+      sourceIds: REVERIFIED_DHU_SOURCE_IDS,
     })
   })
 
@@ -154,7 +188,7 @@ describe('current future program expansion on 2026-07-28', () => {
     }
   })
 
-  it('publishes nine school-specific future scholarships without treating coverage as list-price tuition', () => {
+  it('retains nine school-specific scholarship identities without treating coverage as list-price tuition', () => {
     const octoberScholarshipIds = new Set([
       'scholarship-xmu-iclt-one-semester-spring-2027',
       'scholarship-xju-iclt-one-semester-spring-2027',
@@ -182,9 +216,19 @@ describe('current future program expansion on 2026-07-28', () => {
         insurance: true,
         stipendCnyPerMonth: 2500,
       })
+      const reverified = REVERIFIED_SCHOLARSHIPS.get(item.id)
+      if (reverified) {
+        expect(item.status, item.id).toBe('verified')
+        expect(item.verifiedAt, item.id).toBe('2026-10-19')
+        expect(item.universityIds, item.id).toEqual([reverified.universityId])
+        expect(item.programIds, item.id).toEqual([])
+        expect(item.sourceIds, item.id).toContain(reverified.sourceId)
+      }
+      const originalProgramId = reverified?.historicalProgramId ?? item.programIds[0]
       const cycle = data.admissionCycles.find(
-        (candidate) => candidate.programId === item.programIds[0],
+        (candidate) => candidate.programId === originalProgramId,
       )
+      expect(cycle, item.id).toBeDefined()
       if (item.id === 'scholarship-xmu-iclt-one-semester-spring-2027') {
         expect(cycle?.tuitionCny).toBe(13000)
       } else {

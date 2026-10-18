@@ -1,0 +1,36 @@
+{
+  "reviewedAt": "2026-10-18T17:59:15.229397+00:00",
+  "status": "held-not-publishable",
+  "supersedesReadinessClaim": "local-preflight-v1.json is structural only and does not prove semantic entailment of teachingLanguages.",
+  "proposalPath": "quality/recovery-20261019/rapid-expansion/qingdao/full-program-batch-proposal-v1.json",
+  "proposalSha256": "2a11c66ce58a631b3cece25247964bd47694f194546259f78e615bd602ba41e5",
+  "programmeIds": [
+    "prog-gap-remaining-qdu-nondegree-chinese-language-fall-2025",
+    "prog-gap-local-strong-qust-language-chinese"
+  ],
+  "blockers": [
+    "teaching_medium_not_explicit_in_official_evidence"
+  ],
+  "finding": "The full QDU2027 bilingualPDF and QUST2027 Chinese/English pages and general course description prove Chinese as the target of study, but do not explicitly establish Chinese as the language of instruction. Course names and level labels do not justify the UI Teaching language value.",
+  "action": "Root is the sole canonical writer and will reconcile the applied but unpublished rows; this audit writes no canonical changes. A new source must explicitly establish the medium before either candidate can be published.",
+  "sourceHashes": [
+    {
+      "path": "quality/recovery-20261019/rapid-expansion/qingdao/qdu/qdu-spring-2027.pdf",
+      "sha256": "8d1d53c41f45e9e4a56617b95250f6c743714cd118fceb41a1e85b4ecf1b99b1"
+    },
+    {
+      "path": "quality/recovery-20261019/rapid-expansion/qingdao/qust/qust-spring-2027-zh.html",
+      "sha256": "f0bdf33fd64afb7a788b81e17576eec40825011a4a5e9fe5fb65b5f85611c3d1"
+    },
+    {
+      "path": "quality/recovery-20261019/rapid-expansion/qingdao/qust/qust-spring-2027-en.html",
+      "sha256": "5a91672b5aa2d4e89eeeba3ee8a0f7a7257e04fdbbd292b28d2560e1e5dd9eb6"
+    },
+    {
+      "path": "quality/recovery-20261019/rapid-expansion/qingdao/qust/qust-language.html",
+      "sha256": "9075971a2b51051b8e41e76f0b7ba3cf7db4cc38699234e6a4c844a0f721bfe2"
+    }
+  ],
+  "canonicalWrites": 0,
+  "cloudWrites": 0
+}

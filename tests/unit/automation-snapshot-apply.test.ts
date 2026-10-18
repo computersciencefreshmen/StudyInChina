@@ -43,6 +43,102 @@ afterEach(() => {
 })
 
 describe('locked catalog snapshot application using real files', () => {
+  it.each(['EPERM', 'EACCES', 'EBUSY'])('retries a proven unchanged Windows %s rename and keeps atomic replacement', code => {
+    const { before, next, directory } = fixture()
+    let failures = 0
+    const waitForRetry = vi.fn()
+    applyCatalogSnapshotFiles(before, next, { platform: 'win32', waitForRetry, replaceFile: (source, target) => {
+      if (target === before.files[0].path && failures++ < 2) throw Object.assign(new Error('temporary-sharing-lock'), { code })
+      renameSync(source, target)
+    } })
+    expect(waitForRetry.mock.calls).toEqual([[25], [50]])
+    expect(readCatalogSnapshotBaseline(directory).bundle).toEqual(next)
+    expectNoTemporaryFiles(directory)
+  })
+
+  it('bounds persistent Windows sharing failures to five attempts and rolls back earlier files', () => {
+    const { before, next, directory } = fixture()
+    let failedAttempts = 0
+    const waitForRetry = vi.fn()
+    expect(() => applyCatalogSnapshotFiles(before, next, { platform: 'win32', waitForRetry, replaceFile: (source, target) => {
+      if (source.endsWith('.snapshot-tmp') && target === before.files[2].path) { failedAttempts++; throw Object.assign(new Error('persistent-sharing-lock'), { code: 'EPERM' }) }
+      renameSync(source, target)
+    } })).toThrow('persistent-sharing-lock; external_changes_preserved=none; rollback_failures=none')
+    expect(failedAttempts).toBe(5)
+    expect(waitForRetry.mock.calls).toEqual([[25], [50], [100], [150]])
+    expectOriginals(before); expectNoTemporaryFiles(directory)
+  })
+
+  it('preserves an external edit made during a forward-rename retry wait', () => {
+    const { before, next, directory } = fixture(), external = Buffer.from('concurrent-program-correction\n')
+    let failedAttempts = 0
+    let failure: unknown
+    try {
+      applyCatalogSnapshotFiles(before, next, { platform: 'win32', waitForRetry: () => writeFileSync(before.files[1].path, external), replaceFile: (source, target) => {
+        if (source.endsWith('.snapshot-tmp') && target === before.files[1].path) { failedAttempts++; throw Object.assign(new Error('temporary-sharing-lock'), { code: 'EPERM' }) }
+        renameSync(source, target)
+      } })
+    } catch (error) { failure = error }
+    expect(failedAttempts).toBe(1)
+    expect(failure).toBeInstanceOf(CatalogSnapshotApplyError)
+    expect((failure as CatalogSnapshotApplyError).preservedExternalFiles).toEqual(['programs'])
+    expect(readFileSync(before.files[1].path)).toEqual(external)
+    expectOriginals(before, ['programs']); expectNoTemporaryFiles(directory)
+  })
+
+  it('uses the same guarded retries for rollback without overwriting an intervening edit', () => {
+    const { before, next, directory } = fixture(), external = Buffer.from('concurrent-university-correction\n')
+    let rollbackAttempts = 0
+    let failure: unknown
+    try {
+      applyCatalogSnapshotFiles(before, next, { platform: 'win32', waitForRetry: () => writeFileSync(before.files[0].path, external), replaceFile: (source, target) => {
+        if (source.endsWith('.snapshot-tmp') && target === before.files[1].path) throw Error('later-nontransient-failure')
+        if (source.endsWith('.rollback-tmp')) { rollbackAttempts++; throw Object.assign(new Error('rollback-sharing-lock'), { code: 'EBUSY' }) }
+        renameSync(source, target)
+      } })
+    } catch (error) { failure = error }
+    expect(rollbackAttempts).toBe(1)
+    expect(failure).toBeInstanceOf(CatalogSnapshotApplyError)
+    expect((failure as CatalogSnapshotApplyError).preservedExternalFiles).toEqual(['universities'])
+    expect((failure as CatalogSnapshotApplyError).rollbackFailures).toEqual([])
+    expect(readFileSync(before.files[0].path)).toEqual(external)
+    expectOriginals(before, ['universities']); expectNoTemporaryFiles(directory)
+  })
+
+  it('retries a temporary rollback sharing lock and restores the original bytes', () => {
+    const { before, next, directory } = fixture()
+    let rollbackAttempts = 0
+    const waitForRetry = vi.fn()
+    expect(() => applyCatalogSnapshotFiles(before, next, { platform: 'win32', waitForRetry, replaceFile: (source, target) => {
+      if (source.endsWith('.snapshot-tmp') && target === before.files[1].path) throw Error('later-nontransient-failure')
+      if (source.endsWith('.rollback-tmp') && rollbackAttempts++ === 0) throw Object.assign(new Error('rollback-sharing-lock'), { code: 'EBUSY' })
+      renameSync(source, target)
+    } })).toThrow('later-nontransient-failure; external_changes_preserved=none; rollback_failures=none')
+    expect(rollbackAttempts).toBe(2); expect(waitForRetry).toHaveBeenCalledExactlyOnceWith(25)
+    expectOriginals(before); expectNoTemporaryFiles(directory)
+  })
+
+  it('does not retry sharing errors on non-Windows platforms or non-transient errors on Windows', () => {
+    for (const [platform, code] of [['linux', 'EPERM'], ['win32', 'ENOSPC']] as const) {
+      const { before, next, directory } = fixture(), waitForRetry = vi.fn()
+      const replaceFile = vi.fn(() => { throw Object.assign(new Error('immediate-failure'), { code }) })
+      expect(() => applyCatalogSnapshotFiles(before, next, { platform, waitForRetry, replaceFile })).toThrow('immediate-failure')
+      expect(replaceFile).toHaveBeenCalledTimes(1); expect(waitForRetry).not.toHaveBeenCalled()
+      expectOriginals(before); expectNoTemporaryFiles(directory)
+    }
+  })
+
+  it('does not retry an ambiguous rename that moved the stage before throwing', () => {
+    const { before, next, directory } = fixture(), waitForRetry = vi.fn()
+    let forwardCalls = 0
+    expect(() => applyCatalogSnapshotFiles(before, next, { platform: 'win32', waitForRetry, replaceFile: (source, target) => {
+      renameSync(source, target)
+      if (source.endsWith('.snapshot-tmp')) { forwardCalls++; throw Object.assign(new Error('ambiguous-rename-outcome'), { code: 'EPERM' }) }
+    } })).toThrow('ambiguous-rename-outcome')
+    expect(forwardCalls).toBe(1); expect(waitForRetry).not.toHaveBeenCalled()
+    expectOriginals(before); expectNoTemporaryFiles(directory)
+  })
+
   it('reads a baseline without creating a lock or changing files', () => {
     const { before, directory } = fixture()
     expect(readCatalogSnapshotBaseline(directory).bundle).toEqual(before.bundle)

@@ -1,0 +1,19 @@
+{
+  "checkedAt": "2026-10-18T18:08:37.794667+00:00",
+  "purpose": "Preserve original ordering/bytes of unrelated source rows after the validated snapshot writer normalized object-key order; no fact/review/source changes.",
+  "files": [
+    {
+      "path": "content\\data\\universities.json",
+      "beforeSha256": "993ecaa2e21541567242b15e2317ebdf98d42b93c09a46d3885e8205b5c604bd",
+      "afterSha256": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+      "semanticFactsUnchanged": true
+    },
+    {
+      "path": "content\\data\\scholarships.json",
+      "beforeSha256": "10db6b9bb7b97cb3586720fc17616548f579283f92014b19da2bee214aad2cb7",
+      "afterSha256": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83",
+      "semanticFactsUnchanged": true
+    }
+  ],
+  "canonicalFactsChanged": false
+}

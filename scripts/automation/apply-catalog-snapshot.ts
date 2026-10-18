@@ -10,6 +10,33 @@ const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest(
 
 type BaselineFile = { key: keyof typeof catalogSnapshotFilenames; path: string; bytes: Buffer; sha256: string }
 export type CatalogSnapshotBaseline = { directory: string; bundle: DataBundle; files: BaselineFile[] }
+export type CatalogSnapshotOperations = {
+  replaceFile?: (source: string, destination: string) => void
+  /** Test seams; production uses this process's platform and bounded Atomics.wait. */
+  platform?: NodeJS.Platform
+  waitForRetry?: (milliseconds: number) => void
+}
+const windowsRenameRetryDelays = [25, 50, 100, 150] as const
+class SnapshotRenameTargetChanged extends Error {}
+
+function replaceExpectedFile(source: string, target: string, expectedTarget: Buffer, expectedSource: Buffer, operations: CatalogSnapshotOperations) {
+  const replaceFile = operations.replaceFile ?? renameSync
+  const wait = operations.waitForRetry ?? (milliseconds => { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, milliseconds) })
+  for (let attempt = 0; ; attempt++) {
+    // Recheck after every wait. A retry must never overwrite an intervening edit,
+    // nor reuse a missing/changed stage after an ambiguous rename outcome.
+    if (!readIfPresent(target)?.equals(expectedTarget)) throw new SnapshotRenameTargetChanged('snapshot_target_changed_before_rename')
+    if (!readIfPresent(source)?.equals(expectedSource)) throw new Error('snapshot_stage_changed_before_rename')
+    try { replaceFile(source, target); return } catch (error) {
+      const code = (error as NodeJS.ErrnoException).code
+      if ((operations.platform ?? process.platform) !== 'win32' || !['EPERM', 'EACCES', 'EBUSY'].includes(code ?? '') || attempt >= windowsRenameRetryDelays.length) throw error
+      // Retry only a positively unchanged destination and intact stage: merely
+      // receiving a sharing/permission error does not prove rename had no effect.
+      if (!readIfPresent(target)?.equals(expectedTarget) || !readIfPresent(source)?.equals(expectedSource)) throw error
+      wait(windowsRenameRetryDelays[attempt])
+    }
+  }
+}
 
 /** Reads exactly the bytes assessed later; importing this module never reads content/data. */
 export function readCatalogSnapshotBaseline(directory: string): CatalogSnapshotBaseline {
@@ -64,9 +91,8 @@ export class CatalogSnapshotApplyError extends Error {
 export function applyCatalogSnapshotFiles(
   baseline: CatalogSnapshotBaseline,
   bundle: DataBundle,
-  operations: { replaceFile?: (source: string, destination: string) => void } = {},
+  operations: CatalogSnapshotOperations = {},
 ) {
-  const replaceFile = operations.replaceFile ?? renameSync
   const token = randomUUID()
   // Serialize every candidate before acquiring the lock or touching any target.
   const entries = baseline.files.map(file => ({ ...file, next: Buffer.from(`${JSON.stringify(bundle[file.key], null, 2)}\n`), staged: `${file.path}.${token}.snapshot-tmp` }))
@@ -91,7 +117,7 @@ export function applyCatalogSnapshotFiles(
     for (const entry of entries) {
       assertUnchanged(entry)
       attempted.push(entry)
-      replaceFile(entry.staged, entry.path)
+      replaceExpectedFile(entry.staged, entry.path, entry.bytes, entry.next, operations)
     }
     for (const entry of entries) {
       if (!readIfPresent(entry.path)?.equals(entry.next)) throw new Error(`snapshot_changed_during_apply:${entry.key}`)
@@ -110,8 +136,11 @@ export function applyCatalogSnapshotFiles(
         writeStaged(rollback, entry.bytes)
         // Roll back only our exact bytes; never overwrite a later external edit.
         if (!readIfPresent(entry.path)?.equals(entry.next)) { preservedExternalFiles.push(entry.key); continue }
-        replaceFile(rollback, entry.path)
-      } catch { rollbackFailures.push(entry.key) }
+        replaceExpectedFile(rollback, entry.path, entry.next, entry.bytes, operations)
+      } catch (error) {
+        if (error instanceof SnapshotRenameTargetChanged) preservedExternalFiles.push(entry.key)
+        else rollbackFailures.push(entry.key)
+      }
     }
     throw new CatalogSnapshotApplyError(error, preservedExternalFiles, rollbackFailures)
   } finally {

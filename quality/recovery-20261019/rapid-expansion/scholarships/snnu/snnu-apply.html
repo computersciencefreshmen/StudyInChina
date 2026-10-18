@@ -1,0 +1,1226 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Online Service Platform for International Students</title>
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache" />
+<meta name="viewport"
+	content="width=1024px,initial-scale=1.0,user-scalable=yes" />
+
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+<meta http-equiv="X-XSS-Protection" content="1;mode=block" />
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta http-equiv="X-Permitted-Cross-Domain-Policies" content="master-only" />
+<meta http-equiv="Referrer-Policy" content="same-origin" />
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' *.17gz.org res.wx.qq.com *.alicdn.com" />
+
+<link rel="stylesheet" type="text/css" href="https://arc.17gz.org/jquery/themes/gray/easyui.css?1" />
+<link rel="stylesheet" type="text/css" href="https://arc.17gz.org/css/ui.css?23" />
+<link rel="stylesheet" type="text/css" href="https://arc.17gz.org/css/jquery.suggest.css" />
+<link rel="stylesheet" type="text/css" href="https://arc.17gz.org/jquery/plugin/picture.viewer.css?h" />
+<link rel="stylesheet" type="text/css" href="https://arc.17gz.org/alumni_new/multipleselect/multiple-select.min.css?9"/>
+<link rel="stylesheet" type="text/css" href="https://arc.17gz.org/iconfont/iconfont.css?2" />
+<script type="text/javascript">languageId=1;</script>
+
+<script type="text/javascript" src="https://arc.17gz.org/jquery/jquery-3.x.min.js?2"></script>
+
+<script type="text/javascript" src="https://arc.17gz.org/jquery/jquery.suggest.js?2"></script>
+<script type="text/javascript" src="https://arc.17gz.org/js/ui.js?5"></script>
+<script type="text/javascript" src="https://arc.17gz.org/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="https://arc.17gz.org/js/chosen.jquery.min.js?7"></script>
+<script type="text/javascript" src="https://arc.17gz.org/js/security.src.js?5"></script>
+<script type="text/javascript" src="https://arc.17gz.org/jquery/plugin/picture.viewer.js?11"></script>
+<script type="text/javascript" src="https://arc.17gz.org/alumni_new/multipleselect/multiple-select.min.js?2"></script>
+<script type="text/javascript">
+languageId=1;
+isZh=languageId==0;
+</script>
+<style type="text/css">
+html {
+	overflow: auto;
+}
+
+body {
+	overflow: auto;
+}
+</style>
+
+
+
+
+
+<style>
+.no-data{
+	font-size:20px;
+	text-align:center;
+	padding:20px 0;
+}
+p.attach-file-row{
+	margin:5px;
+}
+a.attach-file-link{
+	color:black;
+	padding:3px;
+}
+a.attach-file-link:hover{
+	color:blue;
+}
+div.attach-item-list>div{
+	border: 1px solid #ebeef5;
+	display:inline-block;
+	margin: 3px 3px 3px 10px;
+	padding: 1px;
+	border-radius:5px;
+	
+	position: relative;
+}
+div.attach-item-list>div:first-child{
+	margin-left:0;
+}
+div.attach-item-list>div:hover{
+	border-color: #a0cfff;
+}
+div.attach-item-list i.icon-delete{
+	position: absolute;
+	right:-15px;
+	top:-15px;
+	font-size:20px;
+	background-color: white;
+	border-radius: 10px;
+	cursor: pointer;
+}
+div.attach-item-list i.icon-delete:hover{
+	color:white;
+	background-color: #409EFF;
+}
+img.attach {
+	width: 128px;
+	height: 128px;
+}
+div.attach-image{
+	position: relative;
+}
+div.attach-image input {
+	display: block;
+	width: 100%;
+}
+div.attach-image label.timestamp,div.attach-item label.timestamp{
+	position: absolute;
+	bottom:2px;
+	left:0;
+	right:0;
+	text-align: center;
+	background-color:white;
+	opacity: 0.8;
+}
+
+div.attach-item a{
+	word-break: break-all;
+	word-wrap: break-word;
+	display:inline-block;
+	width: 128px;
+	height: 128px;
+	text-align:center;
+	position: relative;
+	overflow:hidden;
+}
+div.attach-item a label{
+	display:block;
+	cursor: pointer;
+	margin-top:60px;
+}
+div.attach-item input{
+	display:block;
+	width: 128px;
+}
+.attach-item.doc_doc{
+	background:white url(https://arc.17gz.org/image/icons/icon_doc.png)no-repeat center 10px;
+}
+.attach-item.doc_pdf{
+	background:white url(https://arc.17gz.org/image/icons/icon_pdf.png)no-repeat center 10px;
+}
+.attach-item.doc_excel{
+	background:url(https://arc.17gz.org/image/icons/icon_excel.png)no-repeat center 10px;
+}
+.attach-item.doc_word{
+	background:url(https://arc.17gz.org/image/icons/icon_word.png)no-repeat center 10px;
+}
+.attach-item.doc_video{
+	background:url(https://arc.17gz.org/image/icons/icon_video.png)no-repeat center 10px;
+}
+div.attach-item-footer p{
+	margin:3px 0;
+	color:black;
+}
+</style>
+<style>
+input.el-button{
+	height:32px;
+}
+.el-button {
+	font-family:Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei;
+	  
+    display:inline-flex;
+	justify-content:center;
+	align-items:center;
+	line-height:1;
+	height:32px;
+	font-size:14px;
+	white-space:nowrap;
+	cursor:pointer;
+	color:#606266;
+	text-align:center;
+	box-sizing:border-box;
+	outline:0;
+	transition:.1s;
+	font-weight:500;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	vertical-align:middle;
+	-webkit-appearance:none;
+	background-color:#ffffff;
+	border:1px solid #dcdfe6;
+	border-color:#dcdfe6;
+	padding:8px 15px;
+	padding:8px 3px\0;
+	border-radius:4px;
+	min-width:75px;
+}
+.el-button.min-size, input.min-size{
+	min-width:auto;
+	padding:5px 5px;
+	height:auto;
+	font-size:12px;
+}
+input.min-size+input.min-size {
+	margin-left:3px;
+}
+.el-button:focus,.el-button:hover {
+	text-decoration: none;
+	
+	color:#409EFF;
+	border-color:#c6e2ff;
+	background-color:#ecf5ff;
+	outline:0;
+}
+.el-button:active {
+	color:#409EFF;
+	border-color:#409EFF;
+	background-color:#ecf5ff;
+	outline:0;
+}
+.el-button:focus-visible {
+	outline:2px solid #a0cfff;
+	outline-offset:1px;
+}
+.el-button>span {
+	display:inline-flex;
+	align-items:center
+}
+.el-button+.el-button {
+	margin-left:12px;
+}
+.el-button.is-round {
+	padding:8px 15px
+}
+.el-button::-moz-focus-inner {
+	border:0
+}
+.el-button [class*=el-icon]+span {
+	margin-left:6px
+}
+.el-button [class*=el-icon] svg {
+	vertical-align:bottom
+}
+.el-button.is-active {
+	color:#409EFF;
+	border-color:#409EFF;
+	background-color:#ecf5ff;
+	outline:0;
+}
+.el-button.is-disabled,.el-button.is-disabled:focus,.el-button.is-disabled:hover {
+	color:#a8abb2;
+	cursor:not-allowed;
+	background-image:none;
+	background-color:white;
+	border-color:#e4e7ed;
+}
+.el-button.is-round {
+	border-radius:20px;
+}
+.el-button.is-circle {
+	border-radius:50%;
+	padding:8px
+}
+/**el-button--primary**/
+.el-button--primary{
+	color:white;
+	border-color:#409eff;
+	background-color:#409eff;
+}
+.el-button--primary:focus,.el-button--primary:hover {
+	color:white;
+	border-color:#79bbff;
+	background-color:#79bbff;
+}
+.el-button--primary:active {
+	color:white;
+	border-color:#337ecc;
+	background-color:#337ecc;
+}
+.el-button--primary.is-disabled, .el-button--primary.is-disabled:hover, .el-button--primary.is-disabled:focus {
+    color: white;
+    cursor: not-allowed;
+    background-image: none;
+    background-color: #A0CFFF;
+    border-color:#A0CFFF;
+}
+.el-button--primary.is-plain{
+    color:#409eff;
+    background-color:#ecf5ff;
+    border-color:#a0cfff;
+}
+.el-button--primary.is-plain:focus,.el-button--primary.is-plain:hover{
+    color:white;
+    background-color:#409eff;
+    border-color:#409eff;
+}
+.el-button--primary.is-plain:active{
+	background-color:#337ECC;
+	border-color:#337ECC;
+	color:white;
+}
+.el-button--primary.is-plain.is-disabled{
+	color:#a0cfff;
+    background-color:#ecf5ff;
+    border-color:#d9ecff;
+}
+/**el-button--success**/
+.el-button--success{
+	color:white;
+	border-color:#67C23A;
+	background-color:#67C23A;
+}
+.el-button--success:focus,.el-button--success:hover {
+	color:white;
+	border-color:#95D475;
+	background-color:#95D475;
+}
+.el-button--success:active {
+	color:white;
+	border-color:#529B2E;
+	background-color:#529B2E;
+}
+.el-button--success.is-disabled, .el-button--success.is-disabled:hover, .el-button--success.is-disabled:focus {
+    color: white;
+    cursor: not-allowed;
+    background-image: none;
+    background-color: #A0CFFF;
+    border-color:#A0CFFF;
+}
+.el-button--success:focus-visible {
+	outline-color: #B3E19D;
+}
+
+.el-button--success.is-plain{
+    color:#67c23a;
+    background-color:#f0f9eb;
+    border-color:#b3e19d;
+}
+.el-button--success.is-plain:focus,.el-button--success.is-plain:hover{
+    color:white;
+    background-color:#67C23A;
+    border-color:#67C23A;
+}
+.el-button--success.is-plain:active{
+	background-color:#529B2E;
+	border-color:#529B2E;
+	color:white;
+}
+/**el-button--warning**/
+.el-button--warning{
+	color:white;
+	border-color:#E6A23C;
+	background-color:#E6A23C;
+}
+.el-button--warning:focus,.el-button--warning:hover {
+	color:white;
+	border-color:#eebe77;
+	background-color:#eebe77;
+}
+.el-button--warning:active {
+	color:white;
+	border-color:#b88230;
+	background-color:#b88230;
+}
+.el-button--warning.is-disabled, .el-button--warning.is-disabled:hover, .el-button--warning.is-disabled:focus {
+    color: white;
+    cursor: not-allowed;
+    background-image: none;
+    background-color: #A0CFFF;
+    border-color:#A0CFFF;
+}
+.el-button--warning:focus-visible {
+	outline-color: #f3d19e;
+}
+
+.el-button--warning.is-plain{
+    color:#e6a23c;
+    background-color:#fdf6ec;
+    border-color:#f3d19e;
+}
+.el-button--warning.is-plain:focus,.el-button--warning.is-plain:hover{
+    color:white;
+    background-color:#E6A23C;
+    border-color:#E6A23C;
+}
+.el-button--warning.is-plain:active{
+	background-color:#B88230;
+	border-color:#B88230;
+	color:white;
+}
+/**el-button--danger**/
+.el-button--danger{
+	color:white;
+	border-color:#f56c6c;
+	background-color:#f56c6c;
+}
+.el-button--danger:focus,.el-button--danger:hover {
+	color:white;
+	border-color:#F89898;
+	background-color:#F89898;
+}
+.el-button--danger:active {
+	color:white;
+	border-color:#C45656;
+	background-color:#C45656;
+}
+.el-button--danger.is-disabled, .el-button--danger.is-disabled:hover, .el-button--danger.is-disabled:focus {
+    color: white;
+    cursor: not-allowed;
+    background-image: none;
+    background-color: #A0CFFF;
+    border-color:#A0CFFF;
+}
+.el-button--danger:focus-visible {
+	outline-color: #f3d19e;
+}
+
+.el-button--danger.is-plain{
+    color:#f56c6c;
+    background-color:#fef0f0;
+    border-color:#fab6b6;
+}
+.el-button--danger.is-plain:focus,.el-button--danger.is-plain:hover{
+    color:white;
+    background-color:#F56C6C;
+    border-color:#F56C6C;
+}
+.el-button--danger.is-plain:active{
+	background-color:#C45656;
+	border-color:#C45656;
+	color:white;
+}
+/**---***/
+div.buttons_panel{
+	position:relative;
+	text-align:center;
+	padding:20px 0;
+}
+div.buttons_panel.min-size{
+	padding:10px 0;
+}
+
+/**--datagrid-***/
+.datagrid-header, .datagrid-toolbar, .datagrid-pager, .datagrid-footer-inner{
+	border-color:#ebeef5;
+}
+tbody.datagrid-body tr{
+	border-bottom:1px solid #ebeef5;
+}
+tbody.datagrid-body tr:nth-child(even){
+	background: #FAFAFA;
+}
+tbody.datagrid-body tr.datagrid-row-selected:nth-child(even){
+	background: #FBEC88;
+}
+tbody.datagrid-body tr.datagrid-row-selected:nth-child(even){
+	background: #FBEC88;
+}
+tbody.datagrid-body tr.grid-row-over:first-child {
+	border-top: none;
+}
+.datagrid-header td, .datagrid-body td, .datagrid-footer td{
+	border-style: dotted;
+	border-color:#ebeef5;
+}
+tbody.datagrid-body tr.grid-row-over td{
+	border-top: 1px solid #7DA2CE;
+}
+tbody.datagrid-body tr.grid-row-over{
+	background: #D1E5FD;
+	border-bottom: 1px solid #7DA2CE;
+}
+</style>
+
+<style>
+div,span,p,label,h1,h2,h3,h4,h5,h6,a{
+	color:#666;
+}
+.box-shadow{
+	border:1px solid #ebeef5;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 8px 0 rgba(97,131,155,0.2);
+}
+div.grid-panel{
+	border:none;
+}
+.datagrid-header, .datagrid-td-rownumber{
+	background: none;
+}
+.datagrid-header td, .datagrid-body td, .datagrid-footer td{
+	border-style: none;
+}
+thead.datagrid-header td{
+	color:#909399;
+}
+tbody.datagrid-body{
+	color:#606266;
+}
+.grid-table thead td,.grid-table tbody td{
+	text-align:left;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+tbody.datagrid-body tr.grid-row-over td{
+	background: #F5F7FA;
+	border-top: 1px solid #ebeef5;
+	border-bottom: 1px solid #ebeef5;
+}
+table.kv_table{
+	border-collapse: collapse;
+	display:block;
+	border-collapse: separate;
+    border-spacing:0;
+}
+table.kv_table tr td{
+	padding:3px 3px;
+}
+table.kv_table tr td:nth-child(odd){
+	color:#666;
+	text-align: right;
+	white-space:nowrap;
+}
+table.kv_table tr td:nth-child(even){
+
+	padding-left:0.5em;
+
+	color:black;
+	text-align: left;
+}
+div.news_date_md{
+	color:white;
+}
+div.title_bar{
+	background: none;
+	border:none;
+	padding-left:0;
+	
+	border-left:5px solid #239de6;
+	border-bottom:1px solid #ebeef5;
+}
+div.title_bar+div.title_bar{
+	margin:20px 0 0 0;
+}
+div.title_ct{
+	border:none;
+	background: none;
+	font-size:14px;
+}
+div.title_bar span.recordCount{
+	margin-left:0.5em;
+	font-size:12px;
+	font-weight: normal;
+}
+table.table_form{
+	border:none;
+}
+table.table_form td,table.table_form td label{
+	border:none;
+	padding:8px 0;
+	color:#666;
+}
+table.table_form td,table.table_form td label.field-label{
+	color:#666;
+	content:none;
+}
+
+table.table_form td.td_item_nowrap, table.table_form td.td_item, table.table_form td.td_item2,table.table_form td.td_item0{
+	background: none;
+	padding-right:8px;
+	color:#666;
+}
+td.td_item0{
+	text-align: right;
+	padding-right:5px;
+}
+td.td_item:after,td.td_item2:after,.field-label:after{
+	content: ':';
+}
+div.gradient_line_start {
+	height: 5px;
+    background: linear-gradient(to right,#239de6,#00d1ff);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#239de6', endColorstr='#00d1ff');
+}
+div.gradient_line_end {
+	height: 5px;
+    background: linear-gradient(to right,#00d1ff,#239de6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00d1ff', endColorstr='#239de6');
+}
+div.gradient_line_start.gray-thin-line,div.gradient_line_end.gray-thin-line{
+	height: 1px;
+	background:#a8abb2;
+}
+
+.alert_info,.alert_warning{
+	display:block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size:14px;
+}
+.alert_info td:first-child,.alert_warning td:first-child{
+	width:1%;
+}
+.alert_info{
+    background-color: #FAFAFA;
+    border:1px solid #ebeef5;
+}
+.alert_info span.icon{
+	color:#3373cc;
+}
+.alert_info ul{
+	color:#666;
+}
+.alert_info span.icon,.alert_warning span.icon{
+	margin-right:10px;
+	font-size:28px;
+}
+.alert_warning{
+    background-color: #FAFAFA;
+    border:1px solid #ebeef5;
+}
+.alert_warning .icon{
+	color:#337ECC;
+}
+.el-alert__title.is-bold {
+    font-weight: 700;
+}
+.el-alert__title {
+    font-size: 13px;
+    line-height: 18px;
+    vertical-align: text-top;
+}
+ul.statusMsg li{
+	display:block;
+	padding:10px 0;
+}
+ul.statusMsg li:first-child{
+	padding-top:0;
+}
+ul.statusMsg li:last-child{
+	padding-bottom:0;
+}
+ul.statusMsg label{
+	color:#606266;
+}
+ul.statusMsg span{
+	color:black;
+}
+div.chosen-container a.chosen-single span{
+	color:black;
+}
+div.chosen-container a.chosen-default span{
+	color:gray;
+}
+</style>
+
+
+</head>
+<body>
+	<div id="progressingDialog" class="panel window ui-dialog" modal="true"
+		closeDestroy="false"
+		style="display: none; width: 300px; z-index: 9001;">
+		<div class="panel-header panel-header-noborder window-header">
+			<div class="panel-title" style="">information</div>
+			<div class="panel-tool">
+				<a href="javascript:void(0)" class="panel-tool-close"></a>
+			</div>
+		</div>
+		<div class="messager-body panel-body panel-body-noborder window-body"
+			 >
+			<div class="content" style="padding:10px 0;">
+				<p>It&#039;s processing! Please wait...</p>
+				<div class="progress"></div>
+			</div>
+		</div>
+	</div>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://arc.17gz.org/login/login.js?2"></script>
+<link rel="stylesheet" type="text/css" href="https://arc.17gz.org/login/login.css?3" />
+<style>
+#top {
+	margin-top:10px;
+	height: 80px;
+	background: url(https://arc.17gz.org/images/custom/leftLogo_11071800.png) no-repeat
+		left center;
+}
+#logo2{
+	height: 80px;
+	background: url(https://arc.17gz.org/upload/image/apply/logoText_in.png) no-repeat 180px center;
+}
+table.news-list td.news-item_td1 {
+	background: url(https://arc.17gz.org/images/icon.gif)
+		no-repeat left center;
+	padding:0 10px;
+}
+#login_mode{
+	float:right;
+	margin-top:-18px;
+	margin-right:-21px;
+}
+#login_mode a:hover{
+	border-bottom:none;
+}
+#qrcode_login_mode{
+	text-align:center;
+	padding-top:50px;
+}
+#qrcode_login_mode p{
+	font-size:16px;
+	font-weight: bold;
+}
+#login-frm-div{
+	position:static;
+	background-color: #fff;
+	border: 1px solid #d6d6d4;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin-top: 25px;
+	opacity: 0.80;
+	filter: alpha(opacity =80);
+}
+#login-frm-div label{
+	color:black;
+}
+#J_bigImg{
+	position:relative;
+	height:450px;
+	width:100%;
+	overflow:hidden;
+}
+#J_bigImg img{
+	height:450px;
+	width:100%;
+}
+img.barcode_2d{
+	display:block;
+}
+a.app_item{
+	display:block;
+}
+a.app_item i{
+	display:block;
+	width:100px;
+	height:100px;
+}
+i.icon-android{
+	background:url(/image/app_icons/android_logo.png)no-repeat center;
+}
+#logo_header{
+	margin:5px auto;
+	border:none;
+}
+#logo_header td{
+	border:none;
+}
+h1.logo-title {
+    font-family: YouYuan;
+    margin: 10px 0 5px 0;
+}
+h1.logo-title p.p1{
+	font-size: 26px;
+	color:#0274E1;
+}
+h1.logo-title p.p2{
+	font-weight: normal;
+	font-size: 15px;
+	color:#4398E9;
+}
+#login_dialog{
+	position:absolute;
+	right:100px;
+	top:100px;
+	height:450px;
+}
+#images_point{
+	position:relative;
+	z-index:100;
+}
+#images_point a{
+	color:white;
+}
+#bgRepeat-x{
+	position:static;
+}
+#J_bigImg div{
+	position: absolute;
+	top:0;
+	left:0;
+	height:450px;
+	width:100%;
+}
+</style>
+
+
+
+
+<style>
+#pageLoadingShade {
+	height: 3000px;
+	position: fixed;
+	z-index: 9999;
+	top: 0;
+	left: 0;
+}
+
+#pageLoadingDlg {
+	width: 270px;
+	top: 45%;
+	left: 45%;
+	position: fixed; margin : 0 auto;
+	background-color: white;
+	z-index: 99999;
+	text-align: center;
+	padding: 40px 10px;
+	
+	border:1px solid #F5F5F5;
+	border-radius: 5px;
+	box-shadow: 0 2px 8px 0 rgba(97,131,155,0.2);
+	margin: 0 auto;
+}
+</style>
+<div id="pageLoadingShade" class="window-mask"></div>
+<div id="pageLoadingDlg">
+	<p>Page loading...</p>
+</div>
+<script>
+function closePageLoading(){
+	var dom=document.getElementById("pageLoadingShade");
+	$(dom).hide();
+	
+	dom=document.getElementById("pageLoadingDlg");
+	$(dom).hide();
+	
+	if(onloadForPageLoading){
+		onloadForPageLoading();
+		onloadForPageLoading=null;
+	}
+}
+var onloadForPageLoading=window.onload;
+window.onload=closePageLoading;
+</script>
+<div id="container">
+	<table id="logo_header">
+		<tr>
+		
+			<td><img src="https://arc.17gz.org/images/custom/leftLogo_11071800.png"/></td>
+			<td><img src="https://arc.17gz.org/upload/image/apply/logoText_in.png" />
+		
+			<td>
+				<a href="https://snnu.17gz.org/html/0/guide_en.htm" target="_blank">Registration Guide</a><i>|</i><a
+				href="javascript:toggleLanguage('zh_CN')">中文</a>
+			</td>
+		</tr>
+	</table>
+	<div id="bgRepeat-x">
+		<div id="J_bigImg">
+			<div style=""><img src="https://a2.17gz.org/upload/image/2014/12_11071800/LOGIN_IMAGES/eff9d69b2feb447b9adf8e9317a88e3e.jpg?x-oss-date=20261018T175220Z&x-oss-expires=3600&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=LTAI4GHXyt5G8dzCs7Z3coaG%2F20261018%2Fcn-beijing%2Foss%2Faliyun_v4_request&x-oss-signature=d2a7635afec912a1ad61d042b9adbc2b2629e751dec2d0425041640f116bb386"/></div>
+			<div style="display:none;"><img src="https://a2.17gz.org/upload/image/2014/12_11071800/LOGIN_IMAGES/68429f0064e54d5a8d767aad01e3b539.jpg?x-oss-date=20261018T175220Z&x-oss-expires=3600&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=LTAI4GHXyt5G8dzCs7Z3coaG%2F20261018%2Fcn-beijing%2Foss%2Faliyun_v4_request&x-oss-signature=ca97d2d85f15e0aac625ddbed2be9346311837dcb6f52c797aa2a8cc5a03acdc"/></div>
+			<div style="display:none;"><img src="https://a2.17gz.org/upload/image/2014/12_11071800/LOGIN_IMAGES/fddf141567864143b1a1184654fe8a6f.jpg?x-oss-date=20261018T175220Z&x-oss-expires=3600&x-oss-signature-version=OSS4-HMAC-SHA256&x-oss-credential=LTAI4GHXyt5G8dzCs7Z3coaG%2F20261018%2Fcn-beijing%2Foss%2Faliyun_v4_request&x-oss-signature=b16ee6b6d009281a6f4c8c994500bcc3a5d35ea17a902bc004a481fbd530060f"/></div>
+			
+		</div>
+	
+		<div id="images_point">
+			<a href="#" onclick="return loginImageOnClick(this,arguments[0])" class="current" no="0">●</a>
+			<a href="#" onclick="return loginImageOnClick(this,arguments[0])"  no="1">●</a>
+			<a href="#" onclick="return loginImageOnClick(this,arguments[0])"  no="2">●</a>
+			
+		</div>
+	
+	</div>
+	<div id="login_dialog">
+		<div id="login-frm-div">
+			<div id="login_mode"><a href="#" onclick="switchLoginMode(this)"><img src="/apply/image/2dcode_login.png" /></a></div>
+			<div id="qrcode_login_mode" style="display:none;">
+				<img src="/2dcode/11071800_m2.png?1783502362488"/>
+				<p>Scan QR Code Visit System</p>
+			</div>
+			<div id="pc_login_mode">
+				<p id="login_title">Account Sign In</p>
+				
+
+
+
+
+
+
+
+
+
+<form id="userNameLoginForm" action="/member/loginCheck.do" method="post" autocomplete="off"
+	onsubmit="doMemberLogin(this);return false;" >
+	<input type="hidden" name="fromUrl" value="" />
+	<input type="hidden" name="encryptText" value=""/>
+	
+	<p>
+		<label>User Name&#047;Email：</label>
+		<span class="user-input-container"><i class="icon-user-name"></i><input type="text" class="text focusOnShow"
+							id="j_username" data-options="name:'User Name&#047;Email：',required:true" disableautocomplete autocomplete="off"/></span>
+	</p>
+	
+	<p style="position: relative;">
+		<i class="icon icon-password-hide" style="cursor:pointer; position: absolute;right:35px;top:22px;font-size:25px;color:gray;z-index:99999;" onclick="var $this=$(this);var b=$this.hasClass('icon-password-show');if(b){switchClass($this,'icon-password-show','icon-password-hide');}else{switchClass($this,'icon-password-hide','icon-password-show');} $('#j_password')[0].type=b?'password':'text';"></i>
+		<label>Password:</label>
+		<span class="user-input-container"><i class="icon-password"></i><input class="text" type="password"
+							id="j_password" data-options="name:'Password:',required:true" disableautocomplete autocomplete="new-password"
+							/></span>
+	</p>
+	<p class="captcha">
+		
+		<label>Verified Code：</label><input type="text" class="text" disableautocomplete
+			autocomplete="off" style="width: 160px;" name="j_captcha"  maxlength="4" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'').toUpperCase()"
+			data-options="name:'Verified Code：',required:true,length:'4-4'" /><a
+			href="#" class="captcha-image" title="点击更换验证码"
+			onclick="captchaOnClick(this,arguments[0])"><img
+			src="/apply/captcha.do?155829" /></a>
+	<div class="clear"></div>
+	</p>
+	<p class="login_button">
+		
+		<input id="loginBtn" class="login" type="submit"
+			value="Sign In" /> <input
+			class="register register_en" type="button"
+			value="Register"
+			onclick="showRegistAgreement()" />
+	</p>
+	<p id="login-frm-bottom">
+		<a href="#" class="forgetPassword" onclick="showResetPasswordDlg()">Forgotten password</a><i>|</i><a
+			href="#" onclick="showResendActiveEmailDlg()">Resend email to activate</a>
+	</p>
+</form>
+			</div>
+		</div>
+	</div>
+	
+
+
+
+
+
+
+<div class="news-body">
+	<div class="news-half-op"></div>
+	<div class="news-panel">
+		<table cellspacing="0" cellpadding="0" width="100%" class="news_func">
+			<tr>
+				<td valign="top" class="news_td">
+					<form action="/member/newsList.do" class="news-form" onsubmit="return false;">
+						<div class="news-panel-title">News List</div>
+						<ul class="news-list">
+						
+							<li style="text-align: center;padding:80px 0;font-size:16px;">
+								No Data!
+							</li>
+						
+						</ul>
+					
+					</form>
+				</td>
+				
+				<td width="480px" align="center" valign="top">
+
+
+
+
+
+
+
+
+<style>
+p.mobile_app {
+	text-align: left;
+	margin: 0 0 0 50px;
+	font-size: 14px;
+	font-weight: bold;
+	border-bottom: 1px solid #d3d3d3;
+}
+span.mobile_app_header {
+	font-size: 14px;
+	font-weight: bold;
+	height: 34px;
+	line-height: 34px;
+}
+
+a.app_item_android, a.app_item_iphone {
+	display: block;
+}
+
+a.app_item_android {
+	background: url("https://arc.17gz.org/image/app_icons/android_app_logo.jpg") no-repeat left
+		center;
+	width: 230px;
+	height: 60px;
+	margin-top: 20px;
+}
+
+a.app_item_android:hover {
+	background: url("https://arc.17gz.org/image/app_icons/android_app_logo_hover.png") no-repeat
+		left center;
+	width: 230px;
+	height: 60px;
+	border-bottom: none;
+}
+
+a.app_item_iphone {
+	background: url("https://arc.17gz.org/image/app_icons/iphone_app_logo.jpg") no-repeat left
+		center;
+	width: 230px;
+	height: 60px;
+	margin-top: 30px;
+}
+
+a.app_item_iphone:hover {
+	background: url("https://arc.17gz.org/image/app_icons/iphone_app_logo_hover.png") no-repeat
+		left center;
+	width: 230px;
+	height: 60px;
+	border-bottom: none;
+}
+
+img.mobile_qr_code {
+	width: 140px;
+	height: 140px;
+	border: 1px solid #d3d3d3;
+	padding: 10px;
+	margin-left: 50px;
+	margin-top: 20px;
+}
+</style>
+<p class="mobile_app">
+	<span class="mobile_app_header">Mobile H5:</span>
+	<span style="font-size:12px;font-weight: normal;">&nbsp;&nbsp;Study abroad assistant&nbsp;&nbsp;留学助手</span>
+</p>
+
+<div style="margin-top:10px;">
+	<img src="/2dcode/11071800_m2.png?1783502362488"/>
+	<p>Scan QR Code Visit</p>
+</div>
+</td>
+				
+			</tr>
+		</table>
+	</div>
+</div>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+<div class="login-footer">
+	<div class="login-copyRight">
+	
+		备案号：<a href="https://beian.miit.gov.cn" target="_blank">京ICP备09025346号-4</a>
+		
+		&nbsp;&nbsp;<a target="_blank" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802027928">京公网安备 11010802027928号</a>
+		<i>|</i>
+	
+		© 2011-2026 China Cinda Institute (Beijing) Technology Co.,Ltd. All right reserved.
+	</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="panel window ui-dialog resetPasswordDialog" modal="false"
+	closeDestroy="false"
+	style="display: none; width: 400px;z-index: 100;height:auto;">
+	<div class="panel-header panel-header-noborder window-header">
+		<div class="panel-title">Forgotten password</div>
+		<div class="panel-tool">
+			<a href="javascript:void(0)" class="panel-tool-close"></a>
+		</div>
+	</div>
+	<div class="messager-body panel-body panel-body-noborder window-body"
+		style="">
+<form method="post" action="/member/resetPassword.do">
+	<table cellspacing="1" cellpadding="0" class="table_form"
+		style="border-top: 1px solid #D4D4D4;">
+		<tr>
+			<td class="td_item_nowrap" width="30%"><span class="required">*</span>User Name&#047;Email：</td>
+			<td width="70%"><input type="text" class="login_input width100"
+				name="j_username"
+				placeholder="Enter the user name or email"
+				data-options="required:true" /></td>
+		</tr>
+		<tr>
+			<td class="td_item_nowrap"><span class="required">*</span> Verified Code：</td>
+			<td class="captcha-td"><input type="hidden" name="j_captcha_type" value="reset_password" /><input type="text" class="login_input" style="width: 120px;"
+				name="j_captcha"  maxlength="4" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'').toUpperCase()" data-options="required:true" autocomplete="off"/></label><a href="#"
+				class="captcha-image" title="点击更换验证码" onclick="captchaOnClick(this,arguments[0])"><img
+					src="" /></a></td>
+		</tr>
+		<tr align="center">
+			<td colspan="2"><input type="button" class="el-button el-button--primary"
+				value="Submit"
+				onclick="resetPassword(this.form)" />&nbsp;&nbsp;<input
+				type="button" class="el-button"
+				value="Close"
+				onclick="hideDialog(this)" /></td>
+		</tr>
+	</table>
+</form>
+
+</div>
+</div>
+
+
+
+
+<div class="panel window ui-dialog resendActiveEmailDialog" modal="false"
+	closeDestroy="false"
+	style="display: none; width: 400px;z-index: 100;height:auto;">
+	<div class="panel-header panel-header-noborder window-header">
+		<div class="panel-title">Send active email again</div>
+		<div class="panel-tool">
+			<a href="javascript:void(0)" class="panel-tool-close"></a>
+		</div>
+	</div>
+	<div class="messager-body panel-body panel-body-noborder window-body"
+		style="">
+<form method="post" action="/member/resendActiveEmail.do">
+	<input type="hidden" name="encryptText" value=""/>
+	<input type="hidden" value="" id="j_password2" />
+	<table cellspacing="1" cellpadding="0" class="table_form"
+		style="border-top: 1px solid #D4D4D4;">
+		<tr>
+			<td class="td_item_nowrap" width="30%"><span class="required">*</span>User Name&#047;Email：</td>
+			<td width="70%"><input type="text" class="width100 login_input focusOnShow"
+				id="j_username2"
+				placeholder="Enter the user name or email"
+				data-options="required:true" /></td>
+		</tr>
+		<tr>
+			<td class="td_item_nowrap"><span class="required">*</span> Verified Code：</td>
+			<td class="captcha-td"><input type="hidden" name="j_captcha_type" value="resendActiveEmail" /><input type="text" class="login_input" style="width:80px;"
+				name="j_captcha"  maxlength="4" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'').toUpperCase()" data-options="required:true" autocomplete="off"/></label><a href="#"
+				class="captcha-image" title="点击更换验证码" onclick="captchaOnClick(this,arguments[0])"><img
+					src="" /></a></td>
+		</tr>
+		<tr align="center">
+			<td colspan="2"><input type="button" class="el-button el-button--primary"
+				value="Resend email to activate"
+				onclick="resendActiveEmail(this.form)" />&nbsp;&nbsp;<input
+				type="button" class="el-button"
+				value="Close"
+				onclick="hideDialog(this)" /></td>
+		</tr>
+	</table>
+</form>
+
+</div>
+</div>
+<script>
+loginImageCount=3;
+function winOnSize(){
+	var $dlg=$("#login_dialog");
+	var dw=$dlg.width();
+	var w=$(window).width();
+	
+	var x=1200+dw;
+	var r;
+	if(w>x){
+		r=w-x+100;
+	}else
+	if (w-dw>200){
+		r=100;
+	}else{
+		r=(w-dw)/2;
+	}
+	$dlg.css({"right":r});
+}
+$(function(){
+	initForMember();
+	winOnSize();
+	window.onresize=winOnSize;
+});
+
+</script>
+
+</body>
+</html>

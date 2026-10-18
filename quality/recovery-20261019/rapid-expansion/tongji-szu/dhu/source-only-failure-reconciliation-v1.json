@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "reconciledAt": "2026-10-18T18:06:32.854Z",
+  "failedStart": "quality/recovery-20261019/rapid-expansion/canonical/apply-dhu-winter-chinese-2027-fresh-complete-20261019-v1-start.json",
+  "failedStartSha256": "2161fd6dc65671d50c08af4a4a8c65e557f39f5c7caf235a8ebbd71e9354c035",
+  "approvedBatchSha256": "9bd118eb5a1c556562f0ed221894d642a3a9ae9fdc989d3c717492a9431568d9",
+  "failure": "Legacy programme consumer wrote sources, then Windows UNKNOWN on opening programs.json. No new programme/cycle or native success receipt was written.",
+  "effectsExactlyReconstructed": true,
+  "reconstruction": "Replacing only these three sources with their exact pre-wave Git rows/removing the two newly added sources reproduces the entire original normalized six-file catalogue hash.",
+  "intendedSourceIds": [
+    "src-dhu-winter-chinese-2027",
+    "source-dhu-language-pedagogy-20261019",
+    "source-dhu-current-language-index-20261019"
+  ],
+  "originalCatalogSha256": "2232e47eaf8426a062105dcdd31243162319923f1b4fc87f2d69637ccdd5148d",
+  "actualCatalogSha256": "af5f9ab5e492a210dffd48f34f5b9b6e11e0e079011abac23ac56559e5019465",
+  "files": [
+    {
+      "key": "universities",
+      "sha256": "993ecaa2e21541567242b15e2317ebdf98d42b93c09a46d3885e8205b5c604bd",
+      "bytes": 348043
+    },
+    {
+      "key": "programs",
+      "sha256": "80674182b46474c1fdc84ab5c20f6860b736b4d8460c069625ea5170fa4b3959",
+      "bytes": 7334530
+    },
+    {
+      "key": "admissionCycles",
+      "sha256": "bb080ab63753bb4d02af8da61cbd260058d863be422644e3bbacfa4decc6f039",
+      "bytes": 2322972
+    },
+    {
+      "key": "scholarships",
+      "sha256": "10db6b9bb7b97cb3586720fc17616548f579283f92014b19da2bee214aad2cb7",
+      "bytes": 778660
+    },
+    {
+      "key": "cities",
+      "sha256": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+      "bytes": 58897
+    },
+    {
+      "key": "sources",
+      "sha256": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+      "bytes": 982063
+    }
+  ],
+  "disposition": "Retain valid captured source metadata and all immutable v1 evidence/start. Explicit root reconciliation permits a distinct unpaid v2 local batch after the programme consumer adopts the shared atomic snapshot writer; no old-identity replay or paid/cloud action."
+}
