@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-18T17:17:45.636227+00:00",
+  "updatedAt": "2026-10-18T17:30:17.434717Z",
   "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
-  "canonicalOwner": "interactive-root-finishing-publishing-verification",
-  "canonicalWritesReleased": false,
-  "handoff": "docs/operations/map-program-recovery-2026-10-18.md",
+  "canonicalOwner": "studyinchina-minimax",
+  "canonicalWritesReleased": true,
+  "handoff": "docs/operations/publishing-authentication-reset-2026-10-19.md",
   "catalogSha256": "37d01083aa83d7ee7ee225d3aac63728f01edd188b71c1b2feb38e7616b91693",
   "sourceCommit": "303e3516322f7b8eed1a4cf2301d01a3c91976a3",
   "publicProjection": {
@@ -34,20 +34,23 @@
     "sourceCommit": "303e3516322f7b8eed1a4cf2301d01a3c91976a3",
     "promotionProofMaxAgeMinutes": 15
   },
-  "publicationAuthentication": "coordinated ADMIN reset completed and writer-authorized; all 3 GitHub secret names confirmed; Vercel PAT functional server check pending",
+  "publicationAuthentication": "coordinated ADMIN reset completed; GitHub authenticated project/owner/alias/common-writer GETs verified; no further reset required",
   "paidModelLane": "ambiguous_paid_outcome STOP remains; no new paid calls",
   "cloudDatabaseWrites": 0,
   "automation": {
     "id": "studyinchina-minimax",
     "status": "ACTIVE",
     "intervalMinutes": 15,
-    "readback": "quality/recovery-20261018/automation-readback.json"
+    "readback": "quality/recovery-20261019/automation-readback.json"
   },
   "canonicalOwnershipRelease": {
-    "releasedAt": "2026-10-18T16:18:42.978Z",
-    "scope": "bounded canonical preparation may continue; stable publication still requires existing authentication, fresh complete proof and shared writer CAS",
-    "preservePendingCandidate": true,
-    "doNotReplayConsumedBatchIds": true
+    "releasedAt": "2026-10-18T17:30:17.434717Z",
+    "scope": "bounded canonical preparation and authorized fresh-proof shared-CAS publication may continue only after this handoff commit is synchronized with upstream and no overlapping owner exists; retain the published 767-programme version and previous stable",
+    "handoffCommitMustMatchUpstream": true,
+    "preservePendingCandidate": false,
+    "doNotReplayConsumedBatchIds": true,
+    "requiresFreshCompleteCandidateProof": true,
+    "requiresCommonWriterCas": true
   },
   "cloudDatabaseDiagnostic": {
     "receipt": "quality/recovery-20261018/d1-catalog-pointer-diagnostic-20261019-v1.json",
@@ -76,9 +79,18 @@
   "authenticationReset": {
     "authorizedByHuman": true,
     "owner": "interactive-root",
-    "status": "ADMIN synchronized and verified; human saved VERCEL_TOKEN, names confirmed; functional server check pending",
+    "status": "completed; ADMIN synchronized and GitHub VERCEL_TOKEN functionally verified",
     "doNotRotateConcurrently": true,
-    "encryptedBackupOutsideWorkspace": "%LOCALAPPDATA%/StudyInChina/secrets/admin-telemetry-20261019.dpapi"
+    "encryptedBackupOutsideWorkspace": "%LOCALAPPDATA%/StudyInChina/secrets/admin-telemetry-20261019.dpapi",
+    "completedAt": "2026-10-18T17:24:17Z",
+    "serverVerification": {
+      "runId": 39149405552,
+      "runUrl": "https://github.com/computersciencefreshmen/StudyInChina/actions/runs/39149405552",
+      "headSha": "de3878059ba2fcdc7a8fd8976c17556a31642dd2",
+      "conclusion": "success",
+      "checkedAt": "2026-10-18T17:24:14.412Z",
+      "receipt": "quality/recovery-20261019/authentication-reset/github-functional-check-v1.json"
+    }
   },
   "mergedPullRequest": {
     "number": 38,
@@ -100,5 +112,14 @@
     "promotionProofMaxAgeMinutes": 15,
     "mayPromote": false,
     "retiredBy": "published-new-767-project-deployment"
+  },
+  "followupPullRequest": {
+    "number": 39,
+    "url": "https://github.com/computersciencefreshmen/StudyInChina/pull/39",
+    "state": "OPEN",
+    "draft": true,
+    "branch": "codex/publishing-authentication-20261019",
+    "coverageGateUnresolved": true,
+    "notAnAdditionalPublishedApplicationCommit": true
   }
 }
