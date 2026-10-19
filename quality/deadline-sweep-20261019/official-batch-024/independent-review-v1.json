@@ -1,0 +1,1149 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "official-batch-024-independent-review-v1",
+  "reviewedAt": "2026-10-19T07:51:19.104Z",
+  "reviewer": "deadline_architecture",
+  "reviewType": "source-only-independent-exact-record-and-date-scope-review",
+  "reviewedReport": {
+    "path": "quality/deadline-sweep-20261019/official-batch-024/report.json",
+    "sha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f",
+    "batchId": "official-date-only-024-20261019"
+  },
+  "result": "source-only-review-failed",
+  "approvalScope": "Sourceobservationsandexactrecordbindingonly.Noapprovalforcanonicaldate/statusmutation,publicationorfull-factfreshnessrenewal.",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "targetQueueSha256": "01719171d2d61977e8c62adfe3e323750f30b40a2396685c962f56d71bfa34d4",
+  "additionalSelectionReceiptSha256": "19b484eb2df8aaefa97d74c9a2eb78962b4b5fc9f0e374d6a6d619b73f566b2b",
+  "summary": {
+    "exactRecordsReviewed": 22,
+    "baseQueueRecords": 15,
+    "additionalSameSourceRecords": 7,
+    "schoolsReviewed": 6,
+    "checksPassed": 28,
+    "checksFailed": 1,
+    "recordChecksPassed": 22,
+    "recordResults": {
+      "closed": 15,
+      "unknown": 7
+    },
+    "newOfficialReads": 0,
+    "canonicalWrites": 0,
+    "gitMutations": 0,
+    "sharedStateWrites": 0,
+    "fullFactsCertified": 0
+  },
+  "checks": [
+    {
+      "id": "frozen-report-sha",
+      "passed": true,
+      "detail": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "id": "canonical-six-and-snapshot",
+      "passed": true,
+      "detail": {
+        "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+        "inputFileSha256": {
+          "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+          "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+          "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+          "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+          "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+          "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+        }
+      }
+    },
+    {
+      "id": "inventory-and-queue-byte-pins",
+      "passed": true,
+      "detail": {
+        "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+        "queueSha256": "01719171d2d61977e8c62adfe3e323750f30b40a2396685c962f56d71bfa34d4"
+      }
+    },
+    {
+      "id": "six-exact-schools",
+      "passed": true,
+      "detail": [
+        "uni-huazhong-agricultural-university",
+        "uni-hunan-university",
+        "uni-hunan-university-of-technology-and-business",
+        "uni-jiangsu-university",
+        "uni-jiangsu-university-of-science-and-technology",
+        "uni-jiangxi-normal-university"
+      ]
+    },
+    {
+      "id": "base15-plus-additional7-exact22",
+      "passed": true,
+      "detail": {
+        "baseRecordIds": [
+          "sch-gap-mew-scws-hzau-university-scholarship",
+          "sch-gap-wave8-hnu-csc-high-level-postgraduate",
+          "cycle-gap-wave8-hnu-chemistry-doctorate-2026-2027-autumn",
+          "cycle-gap-wave8-hnu-computer-science-technology-master-2026-2027-autumn",
+          "cycle-gap-wave8-hnu-mechanical-engineering-doctorate-2026-2027-autumn",
+          "sch-gap-mew-csw-hutb-hunan-provincial-scholarship",
+          "sch-gap-wave8-2-hutb-belt-road-language-scholarship",
+          "scholarship-hutb-international-students-inclusive",
+          "cycle-gap-wave8-2-hutb-chinese-language-2026-2027-autumn-fee-reference",
+          "sch-gap-wave8-jsu-presidential-scholarship",
+          "sch-gap-local-strong-just-university-scholarship",
+          "sch-gap-mve-jzh-just-jiangsu-provincial",
+          "cycle-gap-local-strong-just-b-business-administration-en-2026-2027-other",
+          "cycle-gap-local-strong-just-b-computer-science-en-2026-2027-other",
+          "sch-gap-mve-ecs-jxnu-iclt-scholarship-2026"
+        ],
+        "additionalRecordIds": [
+          "cycle-wave4-program-hunan-university-applied-economics-master-2026-2027-other-evidence",
+          "cycle-wave4-program-hunan-university-business-administration-master-2026-2027-other-evidence",
+          "cycle-gap-wave8-2-hutb-international-business-master-2026-2027-autumn-fee-reference",
+          "cycle-gap-mve-jzh-just-energy-power-master-2026-2027-autumn-fee-reference",
+          "cycle-gap-mve-jzh-just-management-science-doctorate-2026-2027-autumn-fee-reference",
+          "cycle-gap-mve-jzh-just-mba-master-2026-2027-autumn-fee-reference",
+          "cycle-gap-mve-jzh-just-naval-architecture-master-2026-2027-autumn-fee-reference"
+        ]
+      }
+    },
+    {
+      "id": "root-extension-receipt-and-row-pins",
+      "passed": true,
+      "detail": {
+        "path": "quality/deadline-sweep-20261019/heartbeat-0610/additional-same-source-selection-v1.json",
+        "sha256": "19b484eb2df8aaefa97d74c9a2eb78962b4b5fc9f0e374d6a6d619b73f566b2b"
+      }
+    },
+    {
+      "id": "capture-manifest-pins-and-9-originals",
+      "passed": true,
+      "detail": [
+        {
+          "name": "hnu-csc-2026",
+          "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+          "rawSha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+          "textSha256": "825d348d77a21e005650c55b3cc973d57576b0da66901bdb27218144fa0c3a36",
+          "observedAt": "2026-10-19T06:15:19.520972+00:00",
+          "bytes": 296218
+        },
+        {
+          "name": "hnu-self-financed",
+          "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+          "rawSha256": "1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6",
+          "textSha256": "cccddf72acbdf636cac2f39b153f9f8c2299829c2f4adb5d244d95336083ef9c",
+          "observedAt": "2026-10-19T06:15:19.522976+00:00",
+          "bytes": 340044
+        },
+        {
+          "name": "hutb-2026-guide",
+          "url": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+          "rawSha256": "d4321d95b87b1cd3c4f6bc0dd2de3faf02502b27fa82bcce028d3138582013d5",
+          "textSha256": "219adaef206a93c0e726a3642bf53c398117c063d253a0cedc97055bf4e957e3",
+          "observedAt": "2026-10-19T06:15:21.022494+00:00",
+          "bytes": 75511
+        },
+        {
+          "name": "jsu-president",
+          "url": "https://oec.ujs.edu.cn/en/SCHOLARSHIPS/JSU_Presidential_Scholarship.htm",
+          "rawSha256": "5601a711343244ca4671befb963d09500cb979235034059e2cedb532362aeb20",
+          "textSha256": "9198b16171a4b97f2543e6840a0a894d4a1f4092d25244a3df1d744172eb8164",
+          "observedAt": "2026-10-19T06:15:21.607313+00:00",
+          "bytes": 29996
+        },
+        {
+          "name": "just-2026-guide",
+          "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+          "rawSha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+          "textSha256": "a3ef83b2d77d9f891673a1d966a25f0ffc6610c8ebc3e83bafab6165b38b9dc6",
+          "observedAt": "2026-10-19T06:15:24.124123+00:00",
+          "bytes": 84572
+        },
+        {
+          "name": "jxnu-2026-iclt",
+          "url": "https://laihua.jxnu.edu.cn/2026/0313/c5944a290528/page.htm",
+          "rawSha256": "89c37024e23ec43c79fe3be51061463681b8eb636ae9a872a9b46f051a767192",
+          "textSha256": "650b453ddfd0025c87e098d473ff1132905bc5f14789f18e255aeec658676bb6",
+          "observedAt": "2026-10-19T06:15:24.791460+00:00",
+          "bytes": 21652
+        },
+        {
+          "name": "hzau-scholarship-recovery",
+          "url": "https://ic.hzau.edu.cn/ADMISSIONS1/SCHOLARSHIPS/Huazhong_Agricultural_University_Scholarship.htm",
+          "rawSha256": "660f1627d8d1c929256a1a1fa94cf8686d8eca1c9f2887e385412d6709a99eb9",
+          "textSha256": "8f1f1e8a926631ca4030f01faeece3e6b6e4c448a4a5061d4639269c40ea4136",
+          "observedAt": "2026-10-19T06:40:23.547185+00:00",
+          "bytes": 15344
+        },
+        {
+          "name": "hzau-application-recovery",
+          "url": "https://ic.hzau.edu.cn/ADMISSIONS1/APPLICATION/How_to_Apply.htm",
+          "rawSha256": "6c4c7fe342fff1f48c4d0a74260d4457b4d70fd45bf7ad81b75666a9f9d5c5f5",
+          "textSha256": "d57d5bad5c0cedb7ada92d422a252f030dca576646930b03af1d6ce7843706f2",
+          "observedAt": "2026-10-19T06:40:23.548202+00:00",
+          "bytes": 53198
+        },
+        {
+          "name": "jxnu-2026-iclt-original",
+          "url": "https://laihua.jxnu.edu.cn/_upload/article/files/a7/45/bf7d0b9e4322b89bc8781f2065b2/1aa93a0b-61e9-46f5-9588-1e8a15aead47.pdf",
+          "rawSha256": "e1cc43259f46d13f28a850c72497a172fea34e12cf17cffa4645dc991d41aced",
+          "textSha256": "b2bdae2da7afe046debb562faf9790d31b6c36e8dd4468eb76b4a53157232a62",
+          "observedAt": "2026-10-19T06:40:23.548202+00:00",
+          "bytes": 465658
+        }
+      ]
+    },
+    {
+      "id": "bounded-normal-TLS-recoveries-not-suppressed",
+      "passed": true,
+      "detail": "Two initialTLS EOFs preserved; one normal-certificate curl recovery each returned actualHTML bytes."
+    },
+    {
+      "id": "group-original-and-record-evidence-pins",
+      "passed": true,
+      "detail": "Allgroupandrecordsourcebytes/observationtimesmatchcapture receipts."
+    },
+    {
+      "id": "quoted-date-and-programme-fragments",
+      "passed": true,
+      "detail": "Original extracted texts independently read and date/programme fragments matched."
+    },
+    {
+      "id": "rendered-PDF-images-pinned-and-read",
+      "passed": true,
+      "detail": "HNU2026CSCprogramme/deadline, HNU2025self-title/deadline andJXNUintake/deadline images all visually inspected."
+    },
+    {
+      "id": "all22-exact-record-program-source-pins",
+      "passed": true,
+      "detail": {
+        "records": 22,
+        "cycles": 13,
+        "awards": 9
+      }
+    },
+    {
+      "id": "hzau-own-award-period-not-CSC-date-borrowing",
+      "passed": true,
+      "detail": "Separateexplicituniversityawardlineestablishesitsowndate,notmerelytheparallelCSCline."
+    },
+    {
+      "id": "hnu2026CSC-year-TypeB-and-own-deadline",
+      "passed": true,
+      "detail": "HNU2026originalfour-pageCSCTypeBnoticeprovidesMarch1deadline."
+    },
+    {
+      "id": "hnu5-exact-majors-degrees-and-canonicalCSC-route-notes",
+      "passed": true,
+      "detail": "ChemistryPhD,MechanicalEngineeringPhD,ComputerScienceMaster,AppliedEconomicsMaster,BusinessAdministrationMastereachmatchPDFandexplicitcanonical2026CSCroute."
+    },
+    {
+      "id": "hnu2025-self-financed-never-rolled-to2026",
+      "passed": true,
+      "detail": "Historicalself-financedPDFprogrammeidentitiesdonotcreate2026self-fundeddates;closedfindingisscholarshiprouteonly."
+    },
+    {
+      "id": "hutb2026-two-programmes-agree-in-both-deadline-languages",
+      "passed": true,
+      "detail": "Exactmasterandlanguageprogrammesmatch; unrelated2025vs2026age-clausetranslationissueisnotadeadlineconflict."
+    },
+    {
+      "id": "hutb3-awards-independently-unknown",
+      "passed": true,
+      "detail": "Provincial,BeltRoadlanguageandinclusiveperformanceawardsretainindependentunknowncutoffs."
+    },
+    {
+      "id": "jsu-award-application-upload-without-deadline",
+      "passed": false,
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n",
+      "detail": "Annualrenewal,officeclockhoursandregistrationarenewapplicantdeadlines."
+    },
+    {
+      "id": "JUST6-exact-specialty-and-degree-table-bindings",
+      "passed": true,
+      "detail": [
+        {
+          "degree": "Bachelor",
+          "school": "School of Computer Science and Technology",
+          "major": "Computer Science and Technology",
+          "duration": "4 Years"
+        },
+        {
+          "degree": "Bachelor",
+          "school": "School of Economics and Management",
+          "major": "Bachelor of Business Administration (BBA)",
+          "duration": "4 Years"
+        },
+        {
+          "degree": "Master",
+          "school": "School of Computer Science and Technology",
+          "major": "Computer Science and Technology",
+          "duration": "3 Years"
+        },
+        {
+          "degree": "Master",
+          "school": "School of Energy and Power Engineering",
+          "major": "Energy and Power",
+          "duration": "2 Years"
+        },
+        {
+          "degree": "Master",
+          "school": "School of Naval Architecture and Ocean Engineering",
+          "major": "Naval Architecture and Ocean Engineering",
+          "duration": "3 Years"
+        },
+        {
+          "degree": "Master",
+          "school": "School of Economics and Management (courses delivered bilingually; HSK preferred)",
+          "major": "Master of Business Administration (MBA)",
+          "duration": "2 Years"
+        },
+        {
+          "degree": "PhD",
+          "school": "School of Economics and Management (courses delivered bilingually; HSK preferred)",
+          "major": "Management Science and Engineering",
+          "duration": "4 Years"
+        },
+        {
+          "degree": "PhD",
+          "school": "School of Naval Architecture and Ocean Engineering",
+          "major": "Naval Architecture and Ocean Engineering",
+          "duration": "4 Years"
+        }
+      ]
+    },
+    {
+      "id": "JUST2026-applicant-period-vs-document-mailing",
+      "passed": true,
+      "detail": "April10–June10applicantperiod;August15beforeclauseisinstitutionaldocumentmailingandisnotborrowed."
+    },
+    {
+      "id": "JUST2-independent-awards-unknown",
+      "passed": true,
+      "detail": "Universityawardsandprovince-managedawardarenotassignedgeneraladmissionJune10."
+    },
+    {
+      "id": "JXNU-wrapper-links-actual-originalPDF",
+      "passed": true,
+      "detail": "OriginalPDFembeddedpathverifiedinretainedofficialwrapperbytes;wrapperaloneisnotdateproof."
+    },
+    {
+      "id": "JXNU2026September-vs2027March-no-whole-award-close",
+      "passed": true,
+      "detail": "September-onlyMay15pastwindowretained;March2027one-semesterdeadlineisnotstatedorrolledfromcentralguide."
+    },
+    {
+      "id": "no-fabricated-times-and-opening-equality",
+      "passed": true,
+      "detail": "Explicitcandidateopeningdatesdonotbecomecanonicalopeningcomparisons;Beijingtimewordingretainedwithoutinventedclock."
+    },
+    {
+      "id": "no-prior-exact-record-overlap",
+      "passed": true,
+      "detail": {
+        "priorReports": 23,
+        "overlap": []
+      }
+    },
+    {
+      "id": "summary15-closed7-unknown-and8-newnull-candidates",
+      "passed": true,
+      "detail": {
+        "recordResults": {
+          "closed": 15,
+          "unknown": 7
+        },
+        "newCandidatesFromNull": 8,
+        "existingExpiredDays": 7
+      }
+    },
+    {
+      "id": "no-canonical-freshness-publishing-authority",
+      "passed": true,
+      "detail": "Allobservationscandidate-only;source-onlyreviewdoesnotapproveconsumerwritesorpublication."
+    },
+    {
+      "id": "final-frozen-report-and-six-canonical-files-unchanged",
+      "passed": true,
+      "detail": "Noofficialnetworkreadsorrepositorymutationsduringreview."
+    }
+  ],
+  "recordChecks": [
+    {
+      "recordId": "sch-gap-mew-scws-hzau-university-scholarship",
+      "universityId": "uni-huazhong-agricultural-university",
+      "collection": "scholarships",
+      "selectionOrigin": "baseQueue15",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "7ee7dfe86c12fc31f3e5941013e5434c71d078abd04420ff3eacd5952e93b326",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mew-scws-hzau-food-science-engineering-master",
+          "canonicalProgramSha256": "526682161595db5919a5e708dc7e853f6f07f0176c67df45a4197e34ec974915"
+        },
+        {
+          "programId": "prog-gap-mew-scws-hzau-agricultural-economic-management-doctorate",
+          "canonicalProgramSha256": "b5fd3437e549fa65bb6f7577aa71144303f2e6bb4f506ec6a0955b6ac3599071"
+        },
+        {
+          "programId": "prog-gap-mew-scws-hzau-bioinformatics-doctorate",
+          "canonicalProgramSha256": "020982511ba24f50ee0f9581e5d9b742c258544809ac598d736992eb53646075"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-mew-scws-hzau-university-scholarship",
+          "canonicalSourceSha256": "af7771588e2e88eaa93324a757654039bb81ca26f9506ac8b58f2f5fc0f2bf02"
+        },
+        {
+          "sourceId": "src-gap-scholarship-mew-scws-hzau-university-scholarship-support-1",
+          "canonicalSourceSha256": "858d658e701d1de6f595ceb4a395244bcc9a659d30e1bc0747f9794fd66d50c2"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": "2026-02-27",
+      "evidenceSourceUrl": "https://ic.hzau.edu.cn/ADMISSIONS1/APPLICATION/How_to_Apply.htm",
+      "evidenceBodySha256": "6c4c7fe342fff1f48c4d0a74260d4457b4d70fd45bf7ad81b75666a9f9d5c5f5",
+      "observedAt": "2026-10-19T06:40:23.548202+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "sch-gap-wave8-hnu-csc-high-level-postgraduate",
+      "universityId": "uni-hunan-university",
+      "collection": "scholarships",
+      "selectionOrigin": "baseQueue15",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "7cb746ac38b19fc8dd3c79ee3022f0e1860ea6aa519123efd4604809a65fb548",
+      "canonicalProgramPins": [],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-wave8-hnu-csc-high-level-postgraduate",
+          "canonicalSourceSha256": "0d423cfe85494a653c7e41aef974f663bb79a63ab0d5c0688ba79f83c88218f0"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": "2026-03-01",
+      "evidenceSourceUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+      "evidenceBodySha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+      "observedAt": "2026-10-19T06:15:19.520972+00:00",
+      "fundingRoute": "2026 CSC High-level Postgraduate Program, Type B",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-wave8-hnu-chemistry-doctorate-2026-2027-autumn",
+      "universityId": "uni-hunan-university",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue15",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "1b787d39d1e731c232b20406ca340c2ad19551fae41a13b1f82fc11e4a67f47d",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave8-hnu-chemistry-doctorate",
+          "canonicalProgramSha256": "d8435aedf26fb098974947c8a6ab405b98033153b99b5c62aa0c5dab9d938e72"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-wave8-hnu-chemistry-doctorate",
+          "canonicalSourceSha256": "3537194404571c4587e84bd51eab47a93d5ccf42d9ba886bb2684890e7abb5d8"
+        },
+        {
+          "sourceId": "hnu-csc-postgraduate-2026",
+          "canonicalSourceSha256": "f5c3a782830172749e617289a2c0fed54e7bb72e4a01e5fbe0991dec157b9d96"
+        },
+        {
+          "sourceId": "hnu-self-financed-2025",
+          "canonicalSourceSha256": "81e99aba212da09b4e0ec3c2d8b3f11b2f3ce4b231dced65e7fcaeb0497a4715"
+        }
+      ],
+      "storedDeadline": "2026-03-01",
+      "officialDeadline": "2026-03-01",
+      "evidenceSourceUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+      "evidenceBodySha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+      "observedAt": "2026-10-19T06:15:19.520972+00:00",
+      "fundingRoute": "2026 CSC High-level Postgraduate Program, Type B",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-wave8-hnu-computer-science-technology-master-2026-2027-autumn",
+      "universityId": "uni-hunan-university",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue15",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "e94f46140430e11853806a7c23fef4903c9f66b0678351caf827634e1252f7c9",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave8-hnu-computer-science-technology-master",
+          "canonicalProgramSha256": "0e5be8ba14424b6a463fd891d85032c9f15c2b867a585d8a669c62a7e91a1e5a"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-wave8-hnu-computer-science-technology-master",
+          "canonicalSourceSha256": "4c668742f4dc9c4d2477f8ced5b3576e8777de6b74c056b1dcb408a0caede1c3"
+        },
+        {
+          "sourceId": "hnu-csc-postgraduate-2026",
+          "canonicalSourceSha256": "f5c3a782830172749e617289a2c0fed54e7bb72e4a01e5fbe0991dec157b9d96"
+        },
+        {
+          "sourceId": "hnu-self-financed-2025",
+          "canonicalSourceSha256": "81e99aba212da09b4e0ec3c2d8b3f11b2f3ce4b231dced65e7fcaeb0497a4715"
+        }
+      ],
+      "storedDeadline": "2026-03-01",
+      "officialDeadline": "2026-03-01",
+      "evidenceSourceUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+      "evidenceBodySha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+      "observedAt": "2026-10-19T06:15:19.520972+00:00",
+      "fundingRoute": "2026 CSC High-level Postgraduate Program, Type B",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-wave8-hnu-mechanical-engineering-doctorate-2026-2027-autumn",
+      "universityId": "uni-hunan-university",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue15",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "48d6c462a414a56c509243f97892d3950c6c1c2271363c940da69e69c4a5896f",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave8-hnu-mechanical-engineering-doctorate",
+          "canonicalProgramSha256": "d0a24a33fbd08cd6d5a150de5f0df9b4bcb25cefa4565a712d5a56ae36927232"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-wave8-hnu-mechanical-engineering-doctorate",
+          "canonicalSourceSha256": "96dc66f7d9011d95e22992673060ae042dd601a0cc35139f1da705c9aa3c1de6"
+        },
+        {
+          "sourceId": "hnu-csc-postgraduate-2026",
+          "canonicalSourceSha256": "f5c3a782830172749e617289a2c0fed54e7bb72e4a01e5fbe0991dec157b9d96"
+        },
+        {
+          "sourceId": "hnu-self-financed-2025",
+          "canonicalSourceSha256": "81e99aba212da09b4e0ec3c2d8b3f11b2f3ce4b231dced65e7fcaeb0497a4715"
+        }
+      ],
+      "storedDeadline": "2026-03-01",
+      "officialDeadline": "2026-03-01",
+      "evidenceSourceUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+      "evidenceBodySha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+      "observedAt": "2026-10-19T06:15:19.520972+00:00",
+      "fundingRoute": "2026 CSC High-level Postgraduate Program, Type B",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-wave4-program-hunan-university-applied-economics-master-2026-2027-other-evidence",
+      "universityId": "uni-hunan-university",
+      "collection": "admissionCycles",
+      "selectionOrigin": "additionalSameSource7",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "e2d7e51e1ad8c09dbc8349e40adfa3f7dba9aeba27c583495104779b724e6a7c",
+      "canonicalProgramPins": [
+        {
+          "programId": "program-hunan-university-applied-economics-master",
+          "canonicalProgramSha256": "9c41cd518ff10d0e574e5b25f111ac9d7258a4ac245179cdbc022702d9083b9a"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "hnu-csc-postgraduate-2026",
+          "canonicalSourceSha256": "f5c3a782830172749e617289a2c0fed54e7bb72e4a01e5fbe0991dec157b9d96"
+        },
+        {
+          "sourceId": "hnu-self-financed-2025",
+          "canonicalSourceSha256": "81e99aba212da09b4e0ec3c2d8b3f11b2f3ce4b231dced65e7fcaeb0497a4715"
+        },
+        {
+          "sourceId": "src-program-review-626c7c1ccf2a",
+          "canonicalSourceSha256": "100d569b7ccb939bdd7b3776db54aae14672dc5d57519f2c95048ceaf998d1c9"
+        }
+      ],
+      "storedDeadline": "2026-03-01",
+      "officialDeadline": "2026-03-01",
+      "evidenceSourceUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+      "evidenceBodySha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+      "observedAt": "2026-10-19T06:15:19.520972+00:00",
+      "fundingRoute": "2026 CSC High-level Postgraduate Program, Type B",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-wave4-program-hunan-university-business-administration-master-2026-2027-other-evidence",
+      "universityId": "uni-hunan-university",
+      "collection": "admissionCycles",
+      "selectionOrigin": "additionalSameSource7",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "bf04fda025ea8cf0f1057eddf715be67dab023a8a37eed4ff364b5a636f2ca4b",
+      "canonicalProgramPins": [
+        {
+          "programId": "program-hunan-university-business-administration-master",
+          "canonicalProgramSha256": "3d61fb8505d7b367fbf88ff6441277394077dcb8765105c796a15ab85d913ea7"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "hnu-csc-postgraduate-2026",
+          "canonicalSourceSha256": "f5c3a782830172749e617289a2c0fed54e7bb72e4a01e5fbe0991dec157b9d96"
+        },
+        {
+          "sourceId": "hnu-self-financed-2025",
+          "canonicalSourceSha256": "81e99aba212da09b4e0ec3c2d8b3f11b2f3ce4b231dced65e7fcaeb0497a4715"
+        },
+        {
+          "sourceId": "src-program-review-626c7c1ccf2a",
+          "canonicalSourceSha256": "100d569b7ccb939bdd7b3776db54aae14672dc5d57519f2c95048ceaf998d1c9"
+        }
+      ],
+      "storedDeadline": "2026-03-01",
+      "officialDeadline": "2026-03-01",
+      "evidenceSourceUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+      "evidenceBodySha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+      "observedAt": "2026-10-19T06:15:19.520972+00:00",
+      "fundingRoute": "2026 CSC High-level Postgraduate Program, Type B",
+      "errors": []
+    },
+    {
+      "recordId": "sch-gap-mew-csw-hutb-hunan-provincial-scholarship",
+      "universityId": "uni-hunan-university-of-technology-and-business",
+      "collection": "scholarships",
+      "selectionOrigin": "baseQueue15",
+      "result": "unknown",
+      "passed": true,
+      "canonicalRecordSha256": "67f553b42c5a01ccc836883b7b0f4f883893619ef0721fb14c4788fe6332a990",
+      "canonicalProgramPins": [],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-mew-csw-hutb-hunan-provincial-scholarship",
+          "canonicalSourceSha256": "3932d46d9e85abb64121f6cb915dbb01e663aa6cbb89924c8d2e1801527f8f4b"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "evidenceSourceUrl": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+      "evidenceBodySha256": "d4321d95b87b1cd3c4f6bc0dd2de3faf02502b27fa82bcce028d3138582013d5",
+      "observedAt": "2026-10-19T06:15:21.022494+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "sch-gap-wave8-2-hutb-belt-road-language-scholarship",
+      "universityId": "uni-hunan-university-of-technology-and-business",
+      "collection": "scholarships",
+      "selectionOrigin": "baseQueue15",
+      "result": "unknown",
+      "passed": true,
+      "canonicalRecordSha256": "facdd50c811d6c98372d5ad2e14c8a28ebffc18a978aa87d106129a171f88619",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave8-2-hutb-chinese-language",
+          "canonicalProgramSha256": "6b0fd34a22d2b8f94d237ae1ad5d11e73d4e0b1e3cf1d1558dd5c09e169b058c"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-wave8-2-hutb-belt-road-language-scholarship",
+          "canonicalSourceSha256": "23cbe7498a1d89951fadeee083261bf8098c4f1fb0c1b8352f5b0f652a5472d0"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "evidenceSourceUrl": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+      "evidenceBodySha256": "d4321d95b87b1cd3c4f6bc0dd2de3faf02502b27fa82bcce028d3138582013d5",
+      "observedAt": "2026-10-19T06:15:21.022494+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "scholarship-hutb-international-students-inclusive",
+      "universityId": "uni-hunan-university-of-technology-and-business",
+      "collection": "scholarships",
+      "selectionOrigin": "baseQueue15",
+      "result": "unknown",
+      "passed": true,
+      "canonicalRecordSha256": "535be7d2c0378b481dd3f96775b3750ca5b03b37b9972245c0400cbf96c79f4f",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave8-2-hutb-chinese-language",
+          "canonicalProgramSha256": "6b0fd34a22d2b8f94d237ae1ad5d11e73d4e0b1e3cf1d1558dd5c09e169b058c"
+        },
+        {
+          "programId": "prog-gap-wave8-2-hutb-international-business-master",
+          "canonicalProgramSha256": "91630c956e4aa6c57aa1560fe7c576c1354783c3a6f93fb4d0d3320f537d803e"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "source-hutb-2026-inclusive-scholarship",
+          "canonicalSourceSha256": "416fccf096c9156c5492d99927cc21e9f5e926e149275b67251afdc54f32c097"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "evidenceSourceUrl": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+      "evidenceBodySha256": "d4321d95b87b1cd3c4f6bc0dd2de3faf02502b27fa82bcce028d3138582013d5",
+      "observedAt": "2026-10-19T06:15:21.022494+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-wave8-2-hutb-chinese-language-2026-2027-autumn-fee-reference",
+      "universityId": "uni-hunan-university-of-technology-and-business",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue15",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "540e7a4f2e398f8da67a35abee1498433d18d9b755403ab7d2824f66440550ba",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave8-2-hutb-chinese-language",
+          "canonicalProgramSha256": "6b0fd34a22d2b8f94d237ae1ad5d11e73d4e0b1e3cf1d1558dd5c09e169b058c"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-wave8-2-hutb-chinese-language",
+          "canonicalSourceSha256": "16c00ee857456eb3388761938edfaa5ebea96cb62cce2423d47e42d28ba3c321"
+        }
+      ],
+      "storedDeadline": "2026-06-30",
+      "officialDeadline": "2026-06-30",
+      "evidenceSourceUrl": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+      "evidenceBodySha256": "d4321d95b87b1cd3c4f6bc0dd2de3faf02502b27fa82bcce028d3138582013d5",
+      "observedAt": "2026-10-19T06:15:21.022494+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-wave8-2-hutb-international-business-master-2026-2027-autumn-fee-reference",
+      "universityId": "uni-hunan-university-of-technology-and-business",
+      "collection": "admissionCycles",
+      "selectionOrigin": "additionalSameSource7",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "08aecb472f53418618ddef0de3712c1c7050b33c7507094cb745af03fe8c0b43",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave8-2-hutb-international-business-master",
+          "canonicalProgramSha256": "91630c956e4aa6c57aa1560fe7c576c1354783c3a6f93fb4d0d3320f537d803e"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-wave8-2-hutb-international-business-master",
+          "canonicalSourceSha256": "a6f24ad67d96638fd02ebf2dd11e06c42c8c2f6051281aaab0e282e1dc7cb611"
+        }
+      ],
+      "storedDeadline": "2026-06-30",
+      "officialDeadline": "2026-06-30",
+      "evidenceSourceUrl": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+      "evidenceBodySha256": "d4321d95b87b1cd3c4f6bc0dd2de3faf02502b27fa82bcce028d3138582013d5",
+      "observedAt": "2026-10-19T06:15:21.022494+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "sch-gap-wave8-jsu-presidential-scholarship",
+      "universityId": "uni-jiangsu-university",
+      "collection": "scholarships",
+      "selectionOrigin": "baseQueue15",
+      "result": "unknown",
+      "passed": true,
+      "canonicalRecordSha256": "8bb2776a895bf814f98b9be0603fb13bcf0a28cff39f67a3085668eb455c0bef",
+      "canonicalProgramPins": [],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-wave8-jsu-presidential-scholarship",
+          "canonicalSourceSha256": "76bd4d6a415bd5664b213eeac60f1ed4f4e5aaca27196dd31c7efb4664f1bb98"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "evidenceSourceUrl": "https://oec.ujs.edu.cn/en/SCHOLARSHIPS/JSU_Presidential_Scholarship.htm",
+      "evidenceBodySha256": "5601a711343244ca4671befb963d09500cb979235034059e2cedb532362aeb20",
+      "observedAt": "2026-10-19T06:15:21.607313+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "sch-gap-local-strong-just-university-scholarship",
+      "universityId": "uni-jiangsu-university-of-science-and-technology",
+      "collection": "scholarships",
+      "selectionOrigin": "baseQueue15",
+      "result": "unknown",
+      "passed": true,
+      "canonicalRecordSha256": "0bbd8699755332022348a0764c8963813be1e49885e6202792e7093424f94c4f",
+      "canonicalProgramPins": [],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-local-strong-just-university-scholarship",
+          "canonicalSourceSha256": "4491d311ebae9f4057e72199fbcf442b7d06ee9e7bd65c198b905f1b4da71c8b"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+      "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+      "observedAt": "2026-10-19T06:15:24.124123+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "sch-gap-mve-jzh-just-jiangsu-provincial",
+      "universityId": "uni-jiangsu-university-of-science-and-technology",
+      "collection": "scholarships",
+      "selectionOrigin": "baseQueue15",
+      "result": "unknown",
+      "passed": true,
+      "canonicalRecordSha256": "0d55f9286b8d0dd930f1a77404e1619a4a847769df27efe4249e1824d5253528",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mve-jzh-just-naval-architecture-master",
+          "canonicalProgramSha256": "84dc4dd5aee0cf077bf08506e01304da948ec742a77e2440ace00410d4c86328"
+        },
+        {
+          "programId": "prog-gap-mve-jzh-just-energy-power-master",
+          "canonicalProgramSha256": "107666864d88832244a47ef860bc16aaeda41efd76486df15c5ac35bc6da8bee"
+        },
+        {
+          "programId": "prog-gap-mve-jzh-just-mba-master",
+          "canonicalProgramSha256": "4117e1b7042c83c5ca2f7d7946077abeaae17130d5572d09a9a81b45cab8ecf5"
+        },
+        {
+          "programId": "prog-gap-mve-jzh-just-management-science-doctorate",
+          "canonicalProgramSha256": "d8fbd81de4099f7070115725fcafa331d7a6b06df795eb46c0022a623e0da247"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-mve-jzh-just-jiangsu-provincial",
+          "canonicalSourceSha256": "dc44374e5f6ab3cc3cb44d606786e79357de2b3bcf9baf41de639eb276749331"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+      "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+      "observedAt": "2026-10-19T06:15:24.124123+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-local-strong-just-b-business-administration-en-2026-2027-other",
+      "universityId": "uni-jiangsu-university-of-science-and-technology",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue15",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "017d304629a16421c59e08138a8bd8b5c98954d5c2382948bd89c2df510717fe",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-local-strong-just-b-business-administration-en",
+          "canonicalProgramSha256": "99951e1f97d35ca4c0bab2c6f61095293311e13a489ef88fe5d4b8291704c803"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-local-strong-just-b-business-administration-en",
+          "canonicalSourceSha256": "b33c00cb77c08796c6ff0a7c7e1b6bee788cc3512240c983517cef6ceb7f6512"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": "2026-06-10",
+      "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+      "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+      "observedAt": "2026-10-19T06:15:24.124123+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-local-strong-just-b-computer-science-en-2026-2027-other",
+      "universityId": "uni-jiangsu-university-of-science-and-technology",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue15",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "af56c11ad94bfe659be517d30ae934300c34878da4ada9d244402e0893721eef",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-local-strong-just-b-computer-science-en",
+          "canonicalProgramSha256": "a45cddb2f4a56ef2161281506a993f6149dbb08c00ac0d2422141d908a599d0c"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-local-strong-just-b-computer-science-en",
+          "canonicalSourceSha256": "b972500031870fcadf61861aab8fdbb3ed9880ca8842451108d72ed7daaecc5b"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": "2026-06-10",
+      "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+      "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+      "observedAt": "2026-10-19T06:15:24.124123+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-mve-jzh-just-energy-power-master-2026-2027-autumn-fee-reference",
+      "universityId": "uni-jiangsu-university-of-science-and-technology",
+      "collection": "admissionCycles",
+      "selectionOrigin": "additionalSameSource7",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "dbd5e511671b75c8b8fb2fba54ba85f2c9e7a1fe16b83ba5af0afb6d683c2b7c",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mve-jzh-just-energy-power-master",
+          "canonicalProgramSha256": "107666864d88832244a47ef860bc16aaeda41efd76486df15c5ac35bc6da8bee"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-mve-jzh-just-energy-power-master",
+          "canonicalSourceSha256": "6f397fa70a9200368a5f7fb9508fead86274bf9a01cc1048483ba8bfb6d12eb3"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": "2026-06-10",
+      "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+      "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+      "observedAt": "2026-10-19T06:15:24.124123+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-mve-jzh-just-management-science-doctorate-2026-2027-autumn-fee-reference",
+      "universityId": "uni-jiangsu-university-of-science-and-technology",
+      "collection": "admissionCycles",
+      "selectionOrigin": "additionalSameSource7",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "01979e1942fc224ded2f87060742ed489e1dc28a8dac4c410c3813061de5a253",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mve-jzh-just-management-science-doctorate",
+          "canonicalProgramSha256": "d8fbd81de4099f7070115725fcafa331d7a6b06df795eb46c0022a623e0da247"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-mve-jzh-just-management-science-doctorate",
+          "canonicalSourceSha256": "a3ae07fec770907c1a332493c971afd2b9175d37c5a18768ba25ffda632de40b"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": "2026-06-10",
+      "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+      "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+      "observedAt": "2026-10-19T06:15:24.124123+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-mve-jzh-just-mba-master-2026-2027-autumn-fee-reference",
+      "universityId": "uni-jiangsu-university-of-science-and-technology",
+      "collection": "admissionCycles",
+      "selectionOrigin": "additionalSameSource7",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "31bbc16d072fa0e9abb36ca0c44b440890146e88f5bc2bdcd89af2632f19501a",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mve-jzh-just-mba-master",
+          "canonicalProgramSha256": "4117e1b7042c83c5ca2f7d7946077abeaae17130d5572d09a9a81b45cab8ecf5"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-mve-jzh-just-mba-master",
+          "canonicalSourceSha256": "751543aea67902b8378d1e20c26e50ced77f8dcb93002730f11c98916424da74"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": "2026-06-10",
+      "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+      "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+      "observedAt": "2026-10-19T06:15:24.124123+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-mve-jzh-just-naval-architecture-master-2026-2027-autumn-fee-reference",
+      "universityId": "uni-jiangsu-university-of-science-and-technology",
+      "collection": "admissionCycles",
+      "selectionOrigin": "additionalSameSource7",
+      "result": "closed",
+      "passed": true,
+      "canonicalRecordSha256": "82b10a2996026feacbcf4045660e5888f138c589e43a24de38fa76b0d6791bab",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mve-jzh-just-naval-architecture-master",
+          "canonicalProgramSha256": "84dc4dd5aee0cf077bf08506e01304da948ec742a77e2440ace00410d4c86328"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-mve-jzh-just-naval-architecture-master",
+          "canonicalSourceSha256": "14adb03b2c1b4d7e8285df87688b232734fe94ac86e8330c2b41a8d33c76f494"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": "2026-06-10",
+      "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+      "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+      "observedAt": "2026-10-19T06:15:24.124123+00:00",
+      "fundingRoute": null,
+      "errors": []
+    },
+    {
+      "recordId": "sch-gap-mve-ecs-jxnu-iclt-scholarship-2026",
+      "universityId": "uni-jiangxi-normal-university",
+      "collection": "scholarships",
+      "selectionOrigin": "baseQueue15",
+      "result": "unknown",
+      "passed": true,
+      "canonicalRecordSha256": "b0f03a1d47a95e5839816411ce71eddeec0bb6d7bfe04eafdd3fa256c07e7ef3",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mve-ecs-jxnu-iclt-bachelor",
+          "canonicalProgramSha256": "b84056d230086918475299440114f656ddb9d1bdf640b96509e8ef56ec3800ac"
+        },
+        {
+          "programId": "prog-gap-mve-ecs-jxnu-iclt-master",
+          "canonicalProgramSha256": "60558ab9911dd13d213364fabc71e204f2a8ff37d973f377cbf59d3d0b40f861"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-mve-ecs-jxnu-iclt-scholarship-2026",
+          "canonicalSourceSha256": "168839f49443152426f816339e3163857181995733aa00fd4cd63334d874780e"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "evidenceSourceUrl": "https://laihua.jxnu.edu.cn/_upload/article/files/a7/45/bf7d0b9e4322b89bc8781f2065b2/1aa93a0b-61e9-46f5-9588-1e8a15aead47.pdf",
+      "evidenceBodySha256": "e1cc43259f46d13f28a850c72497a172fea34e12cf17cffa4645dc991d41aced",
+      "observedAt": "2026-10-19T06:40:23.548202+00:00",
+      "fundingRoute": null,
+      "errors": []
+    }
+  ],
+  "priorReportsPinned": [
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-001/report.json",
+      "sha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-002/report.json",
+      "sha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-003/report.json",
+      "sha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-004/report.json",
+      "sha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-005/report.json",
+      "sha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-006/report.json",
+      "sha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-007/report.json",
+      "sha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-008/report.json",
+      "sha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-009/report.json",
+      "sha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-010/report.json",
+      "sha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-011/report.json",
+      "sha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-012/report.json",
+      "sha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-013/report.json",
+      "sha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-014/report.json",
+      "sha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-015/report.json",
+      "sha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-016/report.json",
+      "sha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-017/report.json",
+      "sha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-018/report.json",
+      "sha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-019/report.json",
+      "sha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-020/report.json",
+      "sha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-021/report.json",
+      "sha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-022/report.json",
+      "sha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-023/report.json",
+      "sha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    }
+  ],
+  "limitations": [
+    "HNUclosedfindingsapplyonlytotheexplicitcanonical2026CSCTypeBroute;2025self-financedJuly18isanhistoricalreference,not2026self-fundedverification.",
+    "HUTBthreeawards,JSUPresidentialawardandJUSTtwoawardsretainindependentunknowncutoffs.Nogeneraldegreecutoffisborrowed.",
+    "JXNUwholeawardremainsunknownbecauseSeptember2026May15doesnotestablishMarch2027deadline;candidateMarch1openingdoesnotrenewwholeawardfreshness.",
+    "Allnulls/statuses/freshnessremainunchanged;source-onlyapprovalisnotcanonicalorpublicationapproval."
+  ],
+  "reviewMutations": {
+    "writtenFiles": [
+      "quality/deadline-sweep-20261019/official-batch-024/independent-review-v1.json"
+    ],
+    "networkCalls": 0,
+    "canonicalWrites": 0,
+    "freshnessWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0
+  }
+}

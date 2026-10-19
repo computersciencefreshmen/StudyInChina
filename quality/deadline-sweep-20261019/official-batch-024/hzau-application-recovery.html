@@ -1,0 +1,380 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<title>How to Apply-GRADUATE  SCHOOL-研究生院</title><meta name="pageType" content="2">
+<meta name="pageTitle" content="How to Apply">
+<META Name="keywords" Content="GRADUATE  SCHOOL-研究生院,Huazhong Agricultural University International College,How to Apply" />
+
+
+<meta name="Description" content="Huazhong Agricultural University International College">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet" href="../../dfiles/9811/wcs/tpl/home/default/css/common.css">
+<script src="../../dfiles/9811/wcs/tpl/home/default/js/back.js"></script>
+<script src="../../dfiles/9811/wcs/tpl/home/default/js/break.js"></script>
+<script src="../../dfiles/9811/wcs/tpl/home/default/js/common.js"></script>
+<script src="../../dfiles/9811/wcs/tpl/home/default/js/example.js"></script>
+<!--Announced by Visual SiteBuilder 9-->
+<script language="javascript" src="../../_sitegray/_sitegray.js"></script>
+<!-- CustomerNO:7765626265723230747f465553525742000400034351 -->
+<link rel="stylesheet" type="text/css" href="../../list3_by.vsb.css" />
+<script type="text/javascript" src="/system/resource/js/counter.js"></script>
+<script type="text/javascript">_jsq_(1115,'/list3_by.jsp',-1,1394510530)</script>
+</head>
+<body>
+
+<div class="header">
+  <div class="con_1170">
+    <div class="clearfix">
+      <div class="logo fl">
+<!-- 网站logo图片地址请在本组件"内容配置-网站logo"处填写 -->
+<a href="../../index.htm" title="研究生院（英文）"><img src="../../dfiles/9811/wcs/tpl/home/default/images/ic_logo2.png" width="650" height="76" border="0" alt="研究生院（英文）" title="研究生院（英文）"></a></div>
+      <div class="fr clearfix">
+         <!--<div class="share bshare-custom"></div>-->
+        <div class="toplink"><script language="javascript" src="/system/resource/js/dynclicks.js"></script><script language="javascript" src="/system/resource/js/openlink.js"></script><a href="http://www.hzau.edu.cn" onclick="_addDynClicks(&#34;wburl&#34;, 1394510530, 61759)">华中农业大学</a> | 
+<a href="http://yjs.hzau.edu.cn" onclick="_addDynClicks(&#34;wburl&#34;, 1394510530, 61760)">中文版</a>  
+</div>
+        <div class="search fr"><!-- 3.1.3版本 -->
+
+
+
+<script language="javascript" src="/system/resource/js/base64.js"></script><script language="javascript" src="/system/resource/js/jquery/jquery-latest.min.js"></script><script language="javascript" src="/system/resource/vue/vue.js"></script><script language="javascript" src="/system/resource/vue/bluebird.min.js"></script><script language="javascript" src="/system/resource/vue/axios.js"></script><script language="javascript" src="/system/resource/vue/polyfill.js"></script><script language="javascript" src="/system/resource/vue/token.js"></script><LINK href="/system/resource/vue/static/element/index.css" type="text/css" rel="stylesheet"><script language="javascript" src="/system/resource/vue/static/element/index.js"></script><script language="javascript" src="/system/resource/vue/static/public.js"></script><script language="javascript" src="/system/resource/openapp/search/js/containsHtmlTags.js"></script><script language="javascript" src="/system/resource/openapp/search/layui/layui.js"></script>
+<div id="divu2"></div>
+<script type="text/html" id="htmlu2">
+    <div id="appu2">
+        <div v-if="!isError">
+                    <input type="hidden" name="type" value="1" />
+            <label for="textfield"></label>
+            <input class="search-txt" type="text" name="key" id="textfield" placeholder="Search" autocomplete=off v-model=query.keyWord @keyup.enter="onSubmit">
+            <input class="search-but" type="submit" name="button" id="button" value="" v-on:click="onSubmit()">
+
+        </div>
+        <div v-if="isError" style="color: #b30216; font-size:18px;text-align: center;padding:20px;">
+            应用维护中！
+        </div>
+    </div>
+</script>
+<script>
+    $("#divu2").html($("#htmlu2").text());
+</script>
+<script>
+    var appOwner = "1394510530";
+    var token = gettoken(10);
+    var urlPrefix = "/aop_component/";
+
+    jQuery.support.cors = true;
+    $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+    });
+
+    new Vue({
+        el: "#appu2",
+        data: function () {
+            return {
+                query: {
+                    keyWord: "",//搜索关键词
+                    owner: appOwner,
+                    token: token,
+                    urlPrefix: urlPrefix,
+                    lang:"i18n_zh_CN"
+                },
+                isError: false
+            }
+        },
+        mounted: function () {
+            var _this = this;
+            // _this.init();
+        },
+        methods: {
+            init: function(){
+                $.ajax({
+                    url: "/aop_component//webber/search/test",
+                    type: "get",
+                    success: function (response) {
+                        if (response.code == "0000") {
+                        } else if (response.code == "220") {
+                            _this.isError = true;
+                            console.log(response);
+                        } else if (!response.code) {
+                            _this.isError = true;
+                            console.log(response);
+                        }
+                    },
+                    error: function (response) {
+                        _this.isError = true;
+                    }
+                });
+            },
+            onSubmit: function (e) {
+                var url = "/aop_views/search/modules/resultpc/soso.html";
+                if ("10" == "1" || "10" == "2") {
+                    url = "" + url;
+                }
+                var _this = this;
+                var query = _this.query;
+                if (url.indexOf("?") > -1) {
+                    url = url.split("?")[0];
+                }
+                if (query.keyWord) {
+                    var query = new Base64().encode(JSON.stringify(query));
+                    window.open(url + "?query=" + query);
+                } else {
+                    alert("请填写搜索内容")
+                }
+            },
+        }
+    })
+</script>
+
+<script>
+   var appElementu2 = document.querySelector("#appu2");
+   if (appElementu2 && appElementu2.__vue__) {
+
+   } else {
+      $("#divu2").html($("#htmlu2").text());
+      var appOwner = "1394510530";   
+      var urlPrefix = "/aop_component/";
+      var ifLogin="";
+      var token = ifLogin=='true'?gettoken(10, true).trim():'tourist';
+      if (containsHtmlTags(token) || !token) { 
+         token = 'tourist';
+      }
+      jQuery.support.cors = true;
+      $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+      });
+      var queryInfou2 = {
+        query: {
+            keyWord: "",//搜索关键词
+            owner: appOwner,
+            token: token,
+            urlPrefix: urlPrefix,
+            lang:"i18n_zh_CN"
+        },
+        isError: false
+      };
+      function keyUpFunu2(e){
+        var theEvent = e || window.event;
+        var keyCode = theEvent.keyCode || theEvent.which || theEvent.charCode;
+        if(keyCode == 13){
+          onSubmitu2();
+        }
+      };
+
+      function onSubmitu2(e) {
+        queryInfou2.query.keyWord= $("#appu2  .qwss").val();
+        
+        var url = "/aop_views/search/modules/resultpc/soso.html";      
+        if ("10" == "1" || "10" == "2") {
+           url = "" + url;
+        }
+        var query = queryInfou2.query;
+        if (url.indexOf("?") > -1) {
+            url = url.split("?")[0];
+        }
+        if (query.keyWord) {
+            var query = new Base64().encode(JSON.stringify(query));
+            window.open(url + "?query=" + query);
+        } else {
+            alert("请填写搜索内容")
+        }
+      };
+   }
+</script></div>
+      </div>
+    </div>
+    <div class="clearfix">
+      <div class="nav nav-wrap"><DIV class="navline"><B></B><I></I></DIV>
+<UL class="group clearfix" id="example-one">
+
+<LI><A href="../../index.htm">HOME</A> </LI>
+
+<LI><A href="../../ABOUT_US.htm">ABOUT US</A> </LI>
+
+<LI class="current_page_item"><A href="../../ADMISSIONS1.htm">ADMISSIONS</A> </LI>
+
+<LI><A href="../../CAMPUS_LIFE1.htm">CAMPUS LIFE</A> </LI>
+
+<LI><A href="../../ALUMNI/NETWORKS.htm">ALUMNI</A> </LI>
+
+<LI style="margin-right:0;"><A href="../../LINKS.htm">LINKS</A> </LI>
+
+</UL></div>
+    </div>
+  </div>
+</div> 
+
+   <div class="nybanner"><img src="../../dfiles/9811/wcs/upload/201703/2.jpg" width="100%" height="400px" /></div> 
+
+
+
+<div class="crumbs con_1170">     
+   <a href="../../index.htm">HOME</a>
+     
+   >
+   <a href="../../ADMISSIONS1.htm">ADMISSIONS</a>
+     
+   >
+   <a href="How_to_Apply.htm">APPLICATION</a>
+     
+   >
+   <a href="How_to_Apply.htm">How to Apply</a>
+</div>
+
+<div class="nycon con_1170">
+  <div class="nyleft fl">
+    <div class="nymenu">
+      <!--侧边导航-->
+ 
+
+ <h2>
+ADMISSIONS</h2>  
+   <ul class="menulsit"><li class="nLi ">
+                    <h3><a href="../SCHOLARSHIPS/Chinese_Government_Scholarship_Bilateral_Program.htm">SCHOLARSHIPS</a></h3>
+                     <ul class="sub"> 
+                       
+                        
+                       
+                       
+                      <li>
+                          <a href="../SCHOLARSHIPS/Chinese_Government_Scholarship_Bilateral_Program.htm">Chinese Government Scholarship-Bilateral Program</a>
+                        </li>
+ <li>
+                          <a href="../SCHOLARSHIPS/Chinese_Government_Scholarship_University_Postgr.htm">Chinese Government Scholarship-University Postgraduates Program</a>
+                        </li>
+ <li>
+                          <a href="../SCHOLARSHIPS/Huazhong_Agricultural_University_Scholarship.htm">Huazhong Agricultural University Scholarship</a>
+                        </li>
+</ul>
+                     
+                </li>
+<li class="nLi ">
+                    <h3><a href="../PROGRAMS__SUPERVISORS1.htm">PROGRAMS&amp; SUPERVISORS</a></h3>
+                                     </li>
+<li class="nLi on">
+                    <h3><a href="How_to_Apply.htm">APPLICATION</a></h3>
+                     <ul class="sub"> 
+                       
+                        
+                       
+                       
+                      <li class="current">
+                          <a href="How_to_Apply.htm">How to Apply</a>
+                        </li>
+ <li>
+                          <a href="FAQs_for_Application.htm">FAQs for Application</a>
+                        </li>
+</ul>
+                     
+                </li>
+<li class="nLi ">
+                    <h3><a href="../DOWNLOAD.htm">DOWNLOAD</a></h3>
+                                     </li>
+</ul>
+<!--侧边导航 end-->
+    </div>
+     <script type="text/javascript">
+            $(function(){
+                if ($(".menulsit .nLi .sub").html()!="") {
+                    $(".menulsit .nLi .sub").prev("h3").append("<span class='sign'></span>");                
+                }
+
+                var onIndex = $(".menulsit .nLi").index($($(".menulsit .nLi.on")));
+
+                $(".menulsit .nLi").hover(function(){
+                    if($(this).hasClass("on")){
+                        //无操作
+                    }else{
+                        $(this).addClass("on");
+                    }
+                },function(){
+                    $(this).removeClass("on");
+                    $(".menulsit .nLi").eq(onIndex).addClass("on");
+                })
+            })
+        </script>
+
+  </div>
+  <div class="nyright fr clearfix">
+    <div class="title clearfix">
+<h3>How to Apply</h3></div>
+   
+     <div class="clearfix" style="width:630px;margin:0 auto;">     
+          <div class="applynow2 fl" style="width:300px;">
+        <a href="https://hzau.at0086.cn/student" target="_blank" onclick="_addDynClicks(&#34;wbimage&#34;, 1394510530, 37058)">HZAU Online Application System</a>       </div>
+       
+<div class="ifoas fr" style="width:300px;">
+        <a href="http://studyinchina.csc.edu.cn/#/register" target="_blank" onclick="_addDynClicks(&#34;wbimage&#34;, 1394510530, 37059)">CSC Online Application System</a>       </div>
+       
+
+     </div>
+    
+    <div class="news_point">
+      <div class="art_biaoti">
+APPLICATION</div>
+      <div class="art_content clearfix">
+
+
+
+
+
+<script language="javascript" src="/system/resource/js/ajax.js"></script><script language="javascript">_getBatchClickTimes('null',1394510530,'wbnews','u11')</script>
+<script>function seeContenta11(contentid,size,displayid){	document.getElementById(contentid).innerHTML = '[';	for(var i=0;i<=size;i++){		var allcontentid = contentid+(i+1);		if(allcontentid==displayid){			document.getElementById(contentid).innerHTML += " <span id='"+allcontentid+"' name='"+allcontentid+"'  >"+(i+1)+"</span> ";			document.getElementById(displayid).style.display = 'block';		}else{			document.getElementById(contentid).innerHTML += " <span style='cursor:pointer' id='"+allcontentid+"' name='"+allcontentid+"' onclick=seeContenta11('"+contentid+"','"+size+"','"+allcontentid+"')  >"+(i+1)+"</span> ";			document.getElementById(allcontentid).style.display = 'none';		}	}	document.getElementById(contentid).innerHTML += ']';}</script>
+<script language="javascript" src="/system/resource/js/news/mp4video.js"></script>
+<script>_addDynClicks('wbnews',1394510530,1378)</script>
+<p>
+    <div id="vsb_content_1378_u111"><div id="vsb_content"><p style="text-align: left;"><br></p><h5 style="margin: 0px; padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; font-size: 16px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">1.Application Period:</span></h5><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal; margin-bottom: 5px;"><span style="font-family: arial, helvetica, sans-serif;">Chinese Government Scholarship: &nbsp;November 1, 2025 to&nbsp;February 27, 2026</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">Huazhong Agricultural University Scholarship: <span style="font-family: arial, helvetica, sans-serif; color: rgb(51, 51, 51); text-align: justify; text-wrap-mode: wrap; background-color: rgb(255, 255, 255);">November 1, 2025 to February 27, 2026</span></span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); font-family: Hhumnst777BT; font-size: 12px; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">&nbsp;</span></p><h5 style="margin: 0px; padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; font-size: 16px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">2.Application Qualification:</span></h5><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal; margin-bottom: 5px;"><span style="font-family: arial, helvetica, sans-serif;">(1) Applicants must be non-Chinese citizens in good health.</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal; margin-bottom: 10px;"><span style="font-family: arial, helvetica, sans-serif;">Note: Residents of mainland China, Hong Kong, Macao and Taiwan who have emigrated to a foreign country and who are now applying to study in China as international students must have held a valid foreign passport for at least four years, and must have actually resided in a foreign country for at least two years in the past four years. (Nine months of residence in a foreign country may count as a full year. The dates of the entry and exit stamps in the passport will be followed in the determination of actual foreign residence.)</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal; margin-bottom: 5px;"><span style="font-family: arial, helvetica, sans-serif;">(2) Applicants mentioned above should submit additional documents as follows:&nbsp;</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal; margin-bottom: 5px;"><span style="font-family: arial, helvetica, sans-serif;">① Certificate of naturalization;&nbsp;</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal; margin-bottom: 5px;"><span style="font-family: arial, helvetica, sans-serif;">②&nbsp;Proof of cancellation of the original residence;&nbsp;</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal; margin-bottom: 5px;"><span style="font-family: arial, helvetica, sans-serif;">③ A photocopy of exit and entry signature pages of the passport in recent four years (original copy for future examination);&nbsp;</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal; margin-bottom: 10px;"><span style="font-family: arial, helvetica, sans-serif;">④ Proof of study or work experience at abroad in recent two years.</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal; margin-top: 5px;"><span style="font-family: arial, helvetica, sans-serif;">(3) Applicants for Master's degree must have obtained Bachelor's Degree and be under the age of 35.</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal; margin-top: 5px;"><span style="font-family: arial, helvetica, sans-serif;">&nbsp; &nbsp; &nbsp;Applicants for Doctoral degree must have obtained Master's Degree and be under the age of 40.</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><br></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); font-family: Hhumnst777BT; font-size: 12px; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;"><strong><span style="font-family: arial, helvetica, sans-serif; font-size: 18px;">3.Online Application：</span></strong></span></p><p style="padding: 0px; text-align: left; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">For CSC Scholarship:&nbsp;</span><a href="https://studyinchina.csc.edu.cn/#/register" _src="https://studyinchina.csc.edu.cn/#/register" style="text-align: justify; white-space: normal; text-decoration: underline; font-family: arial, helvetica, sans-serif;"><span style="font-family: arial, helvetica, sans-serif;">https://studyinchina.csc.edu.cn/#/register</span></a><span style="font-family: arial, helvetica, sans-serif;">&nbsp;<strong>(HZAU Agency number: 10504)</strong>;&nbsp;</span></p><p style="padding: 0px; text-align: left; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal; margin-bottom: 5px;"><a href="https://hzau.at0086.cn/student" target="_self" style="text-decoration: underline; font-family: arial, helvetica, sans-serif;"><span style="font-family: arial, helvetica, sans-serif;">https://hzau.at0086.cn/student</span></a><span style="font-family: arial, helvetica, sans-serif;">&nbsp;</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">For University Scholarship:&nbsp;</span><a href="https://hzau.at0086.cn/student" target="_self" style="text-decoration: underline; font-family: arial, helvetica, sans-serif;"><span style="font-family: arial, helvetica, sans-serif;">https://hzau.at0086.cn/student</span></a></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); font-family: Hhumnst777BT; font-size: 12px; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">&nbsp;</span></p><h5 style="margin: 0px; padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; font-size: 16px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">4.Required Documents:</span></h5><table width="100%" bordercolor="#e0e0e0" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><thead style="margin: 0px; padding: 0px;"><tr class="firstRow" style="margin: 0px; padding: 0px;"><td width="15%" align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px; font-weight: bold;"><span style="font-family: arial, helvetica, sans-serif;">No.</span></td><td width="85%" align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px; font-weight: bold;"><span style="font-family: arial, helvetica, sans-serif;">Documents</span></td></tr></thead><tbody style="margin: 0px; padding: 0px;"><tr style="margin: 0px; padding: 0px;"><td width="15%" align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 16px;"><span style="font-size: 14px; font-family: arial, helvetica, sans-serif;">1</span></td><td width="85%" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><span style="font-family: arial, helvetica, sans-serif;">&nbsp; The application form</span></td></tr><tr style="margin: 0px; padding: 0px;"><td width="15%" align="center" valign="center" height="40" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 16px;"><span style="font-size: 14px; font-family: arial, helvetica, sans-serif;">2</span></td><td width="85%" valign="center" height="40" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">&nbsp; Highest diploma or degree certificate;</span></p><p><span style="font-family: arial, helvetica, sans-serif;">&nbsp; or an official Certificate of Expected Graduation for the ones still on campus</span></p></td></tr><tr style="margin: 0px; padding: 0px;"><td width="15%" align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 16px;"><span style="font-size: 14px; font-family: arial, helvetica, sans-serif;">3</span></td><td width="85%" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><span style="font-family: arial, helvetica, sans-serif;">&nbsp; Official Transcripts</span></td></tr><tr style="margin: 0px; padding: 0px;"><td width="15%" align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 16px;"><span style="font-size: 14px; font-family: arial, helvetica, sans-serif;">4</span></td><td width="85%" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><span style="font-family: arial, helvetica, sans-serif;">&nbsp; Two recommendation letters by professors/associate professors of correlated disciplines&nbsp;</span></td></tr><tr style="margin: 0px; padding: 0px;"><td width="15%" align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 16px;"><span style="font-size: 14px; font-family: arial, helvetica, sans-serif;">5</span></td><td width="85%" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><span style="font-family: arial, helvetica, sans-serif;">&nbsp; Study Plan&nbsp;<a href="../../StudyPlan2025.docx" target="_self"><img alt="" src="/__local/0/FE/7F/4C4A8772291900427254AE1ABE2_B5F5E0B3_4AD.png?e=.png" vwidth="" vheight="" vurl="/_vsl/0FE7F4C4A8772291900427254AE1ABE2/B5F5E0B3/4AD?e=.png" vsbhref="vurl" orisrc="/__local/0/FE/7F/4C4A8772291900427254AE1ABE2_B5F5E0B3_4AD.png?e=.png" class="img_vsb_content" style="margin: 0px; padding: 0px; border: rgb(0, 0, 0); color: rgb(51, 51, 51); vertical-align: middle; max-width: 100%;"><span style="font-size: 14px; margin: 0px; padding: 0px; color: rgb(243, 42, 47); font-family: arial, helvetica, sans-serif;"><strong style="margin: 0px; padding: 0px;">Download</strong></span></a></span></td></tr><tr style="margin: 0px; padding: 0px;"><td width="15%" align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 16px;"><span style="font-size: 14px; font-family: arial, helvetica, sans-serif;">6</span></td><td width="85%" valign="center" style="margin: 0px; line-height: 26px; padding-top: 0px; padding-bottom: 0px; font-size: 14px;"><span style="font-family: arial, helvetica, sans-serif;">&nbsp; Duplication of the Passport</span></td></tr><tr><td height="0" align="center" valign="center" rowspan="1" colspan="1"><p><span style="font-size: 14px; font-family: arial, helvetica, sans-serif;">7</span></p></td><td height="0" align="left" valign="top" rowspan="1" colspan="1"><p style="line-height: normal; margin-top: 0px; margin-bottom: 0px;"><span style="font-size: 14px; font-family: arial, helvetica, sans-serif;">&nbsp;</span></p><p style="line-height: normal; margin-top: 0px; margin-bottom: 0px;"><span style="font-size: 14px; font-family: arial, helvetica, sans-serif;">&nbsp; Physical Examination Record </span><a href="../../physicalexam.doc" target="_self" style="text-decoration: none;"><span style="text-decoration: none; margin: 0px; padding: 0px; font-size: 14px; font-family: arial, helvetica, sans-serif;"></span><img alt="" src="/__local/0/FE/7F/4C4A8772291900427254AE1ABE2_B5F5E0B3_4AD.png?e=.png" vwidth="" vheight="" vurl="/_vsl/0FE7F4C4A8772291900427254AE1ABE2/B5F5E0B3/4AD?e=.png" vsbhref="vurl" orisrc="/__local/0/FE/7F/4C4A8772291900427254AE1ABE2_B5F5E0B3_4AD.png?e=.png" class="img_vsb_content" style="margin: 0px; padding: 0px; border: rgb(0, 0, 0); border-image: none; color: rgb(51, 51, 51); vertical-align: middle; max-width: 100%;"><span style="font-size: 14px; text-decoration: none; margin: 0px; padding: 0px; color: rgb(243, 42, 47); font-family: arial, helvetica, sans-serif;"><strong style="margin: 0px; padding: 0px;">Download</strong><strong style="margin: 0px; padding: 0px;"></strong><strong style="margin: 0px; padding: 0px;"></strong></span></a></p><p style="line-height: normal; margin-top: 0px; margin-bottom: 0px;"><br></p></td></tr><tr><td align="center" valign="middle" rowspan="1" colspan="1" height="48"><span style="text-align: -webkit-center; font-size: 14px; font-family: arial, helvetica, sans-serif;">8</span></td><td align="left" valign="middle" rowspan="1" colspan="1" height="48"><span style="font-size: 14px; font-family: arial, helvetica, sans-serif;">&nbsp; Certificate of non-criminal record</span></td></tr><tr style="margin: 0px; padding: 0px;"><td width="15%" align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 16px;"><span style="text-align: -webkit-center; font-size: 14px; font-family: arial, helvetica, sans-serif;">9</span></td><td width="85%" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><span style="font-family: arial, helvetica, sans-serif;">&nbsp; Other auxiliary supporting materials (such as: award certificates, academic papers published, English or Chinese Language Proficiency certificate, special skill certificate like dancing, sports, etc.)</span></td></tr><tr style="margin: 0px; padding: 0px;"><td width="15%" align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 16px;"><p style="margin: 0pt;"><span style="font-size: 14px; font-family: arial, helvetica, sans-serif;">10</span></p></td><td width="85%" valign="center" style="margin: 0px; line-height: 26px; padding-top: 0px; padding-bottom: 0px; font-size: 14px;"><span style="font-family: arial, helvetica, sans-serif;">&nbsp; An Acceptance Letter from a professor of HZAU&nbsp;</span><a href="../../AcceptanceLetterforInternationalStudent2025.docx" target="_self"><img alt="" src="/__local/0/FE/7F/4C4A8772291900427254AE1ABE2_B5F5E0B3_4AD.png?e=.png" vwidth="" vheight="" vurl="/_vsl/0FE7F4C4A8772291900427254AE1ABE2/B5F5E0B3/4AD?e=.png" vsbhref="vurl" orisrc="/__local/0/FE/7F/4C4A8772291900427254AE1ABE2_B5F5E0B3_4AD.png?e=.png" class="img_vsb_content" style="margin: 0px; padding: 0px; border: rgb(0, 0, 0); border-image: none; color: rgb(51, 51, 51); vertical-align: middle; max-width: 100%;"><span style="margin: 0px; padding: 0px; color: rgb(243, 42, 47); font-family: arial, helvetica, sans-serif;"><strong style="margin: 0px; padding: 0px;">Download</strong></span></a></td></tr><tr><td width="15%" align="center" valign="center" colspan="1" rowspan="1" height="46" style="margin: 0px; line-height: 26px; font-size: 16px;"><span style="font-size: 14px; font-family: arial, helvetica, sans-serif;">11*</span></td><td width="15%" align="center" valign="center" colspan="1" rowspan="1" height="46" style="margin: 0px; line-height: 26px; font-size: 16px; text-align: left; vertical-align: middle;"><p style="font-size: 14px; text-indent: 0em;"><span style="font-family: arial, helvetica, sans-serif;">&nbsp; Residence Permit Page in China and Performance Certificate issued by the current university(required for applicants studying in China)<br></span></p></td></tr></tbody></table><p><span style="font-family: arial, helvetica, sans-serif;"><strong><span style="font-family: arial, helvetica, sans-serif; font-size: 19px;"></span></strong></span></p><p style="line-height: 26px; padding-right: 10px; padding-left: 10px;"><span style="font-family: arial, helvetica, sans-serif;">Notes:&nbsp;</span></p><p style="line-height: 26px; padding-right: 10px; padding-left: 10px; margin-bottom: 5px; margin-top: 5px;"><span style="font-family: arial, helvetica, sans-serif;">Please prepare the application documents, then submit the soft copies to application system.&nbsp;</span></p><p style="line-height: 26px; padding-right: 10px; padding-left: 10px; margin-bottom: 5px; margin-top: 5px;"><span style="font-family: arial, helvetica, sans-serif;">Documents in languages other than Chinese or English must be attached with certified translations in Chinese or English.</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); font-family: Hhumnst777BT; font-size: 12px; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">&nbsp;</span></p><h5 style="margin: 0px; padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; font-size: 16px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">5.Language Proficiency:</span></h5><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal; margin-bottom: 5px;"><span style="font-family: arial, helvetica, sans-serif;">① Chinese Medium Program: Applicants should submit a score report of a recognized Chinese Proficiency Test. HSK level 5 or above (Note: HSK&nbsp;refers to Chinese Proficiency Test. You can find information on: www.chinesetest.cn) is required. If the applicant has no elementary Chinese study&nbsp;experience, he or she can pass HSK level 5 by attending Chinese Language Program for one academic year before the start of Academic study.</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">② English Medium Program: It is better if applicants can submit a score report of a recognized English Proficiency Test such as TOEFL, IELTS or&nbsp;other official English test recognized by HZAU. Failing to demonstrate one's English proficiency may adversely affect one's candidacy for&nbsp;acceptance.</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); font-family: Hhumnst777BT; font-size: 12px; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">&nbsp;</span></p><h5 style="margin: 0px; padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; font-size: 16px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">6.Expenses :<br></span></h5><table bordercolor="#e0e0e0" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 847px; table-layout: fixed;"><colgroup><col data-offset-left="80.4000015258789" data-offset-right="214.0999984741211" data-resize-pixel="133.6999969482422" data-resize-percent="15.785123606640164" style="width: 15.7851%;"><col data-offset-left="214.10000610351562" data-offset-right="411.83750915527344" data-resize-pixel="197.7375030517578" data-resize-percent="23.34563200138817" style="width: 23.3456%;"><col data-offset-left="411.8374938964844" data-offset-right="542.7375030517578" data-resize-pixel="130.90000915527344" data-resize-percent="15.45454653545141" style="width: 15.4545%;"><col data-offset-left="542.7374877929688" data-offset-right="668.8124923706055" data-resize-pixel="126.07500457763672" data-resize-percent="14.884888379886272" style="width: 14.8849%;"><col data-offset-left="668.8125" data-offset-right="798.9125061035156" data-resize-pixel="130.10000610351562" data-resize-percent="15.360095171607513" style="width: 15.3601%;"><col data-offset-left="798.9125366210938" data-offset-right="926.6000366210938" data-resize-pixel="127.6875" data-resize-percent="15.07526564344746" style="width: 15.0753%;"></colgroup><tbody style="margin: 0px; padding: 0px;"><tr class="firstRow" style="margin: 0px; padding: 0px;"><td align="center" valign="center" rowspan="2" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;"><strong style="margin: 0px; padding: 0px;">Items</strong></span></p></td><td align="center" valign="center" rowspan="2" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;"><strong style="margin: 0px; padding: 0px;">Class</strong></span></p></td><td align="center" valign="center" colspan="2" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;"><strong style="margin: 0px; padding: 0px;">Fee/RMB</strong><strong style="margin: 0px; padding: 0px;">（</strong><strong style="margin: 0px; padding: 0px;">Master Degree</strong><strong style="margin: 0px; padding: 0px;">）</strong><strong style="margin: 0px; padding: 0px;"></strong></span></p></td><td align="center" valign="center" colspan="2" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;"><strong style="margin: 0px; padding: 0px;">Fee/RMB</strong><strong style="margin: 0px; padding: 0px;">（</strong><strong style="margin: 0px; padding: 0px;">Doctor Degree</strong><strong style="margin: 0px; padding: 0px;">）</strong><strong style="margin: 0px; padding: 0px;"></strong></span></p></td></tr><tr style="margin: 0px; padding: 0px;"><td align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;"><strong style="margin: 0px; padding: 0px;">C</strong></span></p></td><td align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;"><strong style="margin: 0px; padding: 0px;">E</strong></span></p></td><td align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;"><strong style="margin: 0px; padding: 0px;">C</strong></span></p></td><td align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;"><strong style="margin: 0px; padding: 0px;">E</strong></span></p></td></tr><tr style="margin: 0px; padding: 0px;"><td align="center" valign="center" rowspan="2" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">Tuition</span></p></td><td align="center" valign="center" height="84" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">Science, Engineering</span></p></td><td align="center" valign="center" height="84" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">25000/academic&nbsp;</span></p><p><span style="font-family: arial, helvetica, sans-serif;">year</span></p></td><td align="center" valign="center" height="84" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">28000/academic&nbsp;</span></p><p><span style="font-family: arial, helvetica, sans-serif;">year</span></p></td><td align="center" valign="center" height="84" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">40000/academic&nbsp;</span></p><p><span style="font-family: arial, helvetica, sans-serif;">year</span></p></td><td align="center" valign="center" height="84" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">44000/academic&nbsp;</span></p><p><span style="font-family: arial, helvetica, sans-serif;">year</span></p></td></tr><tr style="margin: 0px; padding: 0px;"><td align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">Economics, Management,&nbsp;</span></p><p><span style="font-family: arial, helvetica, sans-serif;">Humanities&nbsp;</span></p><p><span style="font-family: arial, helvetica, sans-serif;">&amp; Social Sciences</span></p></td><td align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">22000/ academic&nbsp;</span></p><p><span style="font-family: arial, helvetica, sans-serif;">year</span></p></td><td align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">25000/academic&nbsp;</span></p><p><span style="font-family: arial, helvetica, sans-serif;">year</span></p></td><td align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">28000/academic&nbsp;</span></p><p><span style="font-family: arial, helvetica, sans-serif;">year</span></p></td><td align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">32000/academic&nbsp;</span></p><p><span style="font-family: arial, helvetica, sans-serif;">year</span></p></td></tr><tr style="margin: 0px; padding: 0px;"><td align="center" valign="center" rowspan="1" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">Accommodation</span></p></td><td align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">Single Room</span></p></td><td align="center" valign="center" colspan="4" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">10000/ academic year</span></p></td></tr><tr style="margin: 0px; padding: 0px;"><td align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">Registration</span></p></td><td align="center" valign="center" colspan="5" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">400/academic year</span></p></td></tr><tr style="margin: 0px; padding: 0px;"><td align="center" valign="center" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">Insurance</span></p></td><td align="center" valign="center" colspan="5" style="margin: 0px; line-height: 26px; padding-top: 10px; padding-bottom: 10px; font-size: 14px;"><p><span style="font-family: arial, helvetica, sans-serif;">800/academic year</span></p></td></tr></tbody></table><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); font-family: Hhumnst777BT; font-size: 12px; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="margin: 0px; padding: 0px; font-size: 14px; font-family: arial, helvetica, sans-serif;"> “C” stands for teaching in Chinese, and “E” teaching in English</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); font-family: Hhumnst777BT; font-size: 12px; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="margin: 0px; padding: 0px; font-size: 14px; font-family: arial, helvetica, sans-serif;"><br></span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); font-family: Hhumnst777BT; font-size: 12px; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="margin: 0px; padding: 0px; font-size: 14px; font-family: arial, helvetica, sans-serif;"></span></p><h5 style="white-space: normal; margin: 0px; padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; font-size: 16px; background-color: rgb(255, 255, 255);"><span style="font-family: arial, helvetica, sans-serif;">7.&nbsp;Values of the scholarship:</span></h5><p style="margin-top: 0px; padding: 0px; line-height: 1.5em; color: rgb(51, 51, 51); font-family: Hhumnst777BT; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); margin-bottom: 5px;"><span style="font-family: arial, helvetica, sans-serif;">① Tuition waiver</span></p><p style="margin-top: 0px; padding: 0px; line-height: 1.5em; color: rgb(51, 51, 51); font-family: Hhumnst777BT; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); margin-bottom: 5px;"><span style="font-family: arial, helvetica, sans-serif;">② Free university accommodation</span></p><p style="padding: 0px; line-height: 1.5em; color: rgb(51, 51, 51); font-family: Hhumnst777BT; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); margin-top: 5px; margin-bottom: 5px;"><span style="font-family: arial, helvetica, sans-serif;">③ Comprehensive medical insurance</span></p><p style="margin-top: 0px; padding: 0px; line-height: 1.5em; color: rgb(51, 51, 51); font-family: Hhumnst777BT; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255); margin-bottom: 5px;"><span style="font-family: arial, helvetica, sans-serif;">④ Stipend: Master's students: 3,000 RMB/month; Doctoral students: 3,500 RMB/month (CSC Scholarship);</span></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; line-height: 1.5em; color: rgb(51, 51, 51); font-family: Hhumnst777BT; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255);"><span style="font-family: arial, helvetica, sans-serif;">&nbsp; &nbsp; &nbsp;Master's students: 2,100 RMB/month; Doctoral students: 2,500 RMB/month (University Scholarship)</span></p><p style="margin-top: 0px; margin-bottom: 0px; padding: 0px; line-height: 1.5em; color: rgb(51, 51, 51); font-family: Hhumnst777BT; text-align: justify; white-space: normal; background-color: rgb(255, 255, 255);"><br></p><h5 style="margin: 0px; padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; font-size: 16px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">8.Visa:</span></h5><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">Students who are admitted must apply for study type of visa at the Chinese Embassy/Consulate in home country with the Admission Notice and JW202 form. International students who will study in China for less than 6 months should apply for “X2” type of visa. Students who will study in China for over 6 months are required to obtain ‘X1’ type of Visa, which will only be valid for 30 days after your arrival in China. Students must come to the International Student Office to apply for a Residence Permit within 30 days in order to obtain a legal stay in China.</span></p><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); font-family: Hhumnst777BT; font-size: 12px; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">&nbsp;</span></p><h5 style="margin: 0px; padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; font-size: 16px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">9.Registration:</span></h5><p style="padding: 0px; text-align: justify; color: rgb(51, 51, 51); line-height: 28px; font-family: Hhumnst777BT; margin-top: 0px; margin-bottom: 0px; white-space: normal; orphans: 2; widows: 2; background-color: rgb(255, 255, 255); font-variant-ligatures: normal;"><span style="font-family: arial, helvetica, sans-serif;">Registration dates will be specified in the admission notice. Successful applicants are required to register in HZAU during the specified period, and early registration will not be handled.</span></p><p><span style="font-family: arial, helvetica, sans-serif;">&nbsp;</span></p></div></div>
+</p>
+</div>
+    </div>
+  </div>
+</div>
+
+<!--左右浮动层高度自适应-->
+<script type="text/javascript">
+  $(function(){
+    if($(".nyleft").height() < $(".nyright").height()){
+      $(".nyleft").css("height",$(".nyright").height() + 100);   
+    }
+  })
+</script>
+
+<div class="footer">
+  
+  <div class="con_1170">
+    
+    <div class="con_1170"><!-- 版权内容请在本组件"内容配置-版权"处填写 -->
+<div class="logo fl"><img src="../../dfiles/9811/wcs/tpl/home/default/images/footer-logo3.png" /></div><p>&nbsp;</p><div class="qrcode fr"><img src="../../dfiles/9811/wcs/tpl/home/default/images/qrcode.jpg" /></div><div class="copyright fr"><p>Copyright By © Huazhong Agricultural University . All Rights Reaserved</p><p>Graduate School</p></div></div>
+  </div>
+</div>
+
+
+<script type="text/javascript" charset="utf-8" src="../../dfiles/13039/b/fb93b630820182b144bfebe6ccc7ee29_buttonlite.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../dfiles/13039/b/bsharec1.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

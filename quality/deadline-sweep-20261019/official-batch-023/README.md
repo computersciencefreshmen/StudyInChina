@@ -1,0 +1,13 @@
+# Batch 023 — nineteen exact records at seven schools
+
+**16 queue rows + 3 explicitly assigned same-source additions = 19 records.** Results: **8 closed candidate scopes, 11 unknown**. All rows are unpublished in the pinned snapshot. Canonical dates, status, freshness, Git and shared progress were not changed.
+
+- Hebei Normal: 2026/27 high-level CSC application deadline **February 28, 2026**.
+- HEBUT: actual bilingual 2026 **Type B** guide gives **November 27, 2025–February 10, 2026**. The Type A route is separate.
+- HFUT: general undergraduate deadline **June 15, 2026**. The directly linked current XLSX explicitly identifies 2026 and the exact programme/language rows: Biomedical Engineering Chinese, Civil Engineering English, International Economics and Trade Chinese. The generic award record stays unknown: Chinese/English-major and English-programme scholarships are different branches and no independent single award cutoff is certified.
+- Henan University: the exact 2026/27 CSC award deadline is **before January 16, 2026**. Four programme records remain unknown: the old registered English PDF has the exact names/degrees/languages but no intake year; the current guide defers eligibility to a different Annex 5, which returned a verification-code HTML form. No bypass was attempted. Their old January 16 dates remain unchanged and are not revalidated.
+- HAUT: native request returned 403; one actual full-page web fallback succeeded, saved as possibly cached tool text without raw-origin claims. The guide gives **April–July 2026**, with no exact day. Four programme rows and two award rows remain unknown; stored April 1 openings are not certified. Promotion awards are later-year assessments, not first-year application deadlines.
+- Hohai: initial school-system application is **before December 30, 2025** for the 2026 award route. Later school review/interview dates and the **March 27, 2026 CSC stage for already recommended applicants** are separate.
+- Huaqiao: September 2026 ICLT student deadline **May 15, 2026**; recommending/host institution review deadline **May 25**. This source does not offer a March 2027 intake.
+
+Full canonical row, parent programme and source objects/hashes are in `selection.json`, with the pinned root additional-selection receipt. Native originals, timestamps, hashes, parsed XLSX rows and honest web-only evidence are retained. `report.json` stores rows only under `groups[].records`. All six canonical input hashes and zero prior-record overlap passed. New openings remain candidates only, with `openingDateAssessed: false`. `completion.json` pins the final report.
