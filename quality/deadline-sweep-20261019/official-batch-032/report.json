@@ -1,0 +1,1822 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-032-20261019",
+  "state": "completed-six-scoped-past-windows-twelve-unknown-two-blocked",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T12:06:21.617Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v8.json",
+  "targetQueueSha256": "cd24ea5c2c2df6b38b04ff7b85ea85ab298134f8e1caa333938016e720860d2d",
+  "selectionSha256": "ddb7ee2d0a716ea1056a84da573aede65f0dc791612b217a406ee79dd668e807",
+  "selectedUniversityIds": [
+    "uni-shanxi-university",
+    "uni-shenyang-pharmaceutical-university",
+    "uni-shenzhen-technology-university",
+    "uni-sichuan-agricultural-university",
+    "uni-sichuan-fine-arts-institute",
+    "uni-sichuan-university"
+  ],
+  "selection": {
+    "baseQueueRecords": 16,
+    "additionalSameSourceRecords": 4,
+    "totalRecords": 20,
+    "baseQueueRecordIds": [
+      "cycle-gap-prog-mew-nss-sxu-foundation-2026-2027-autumn-fee-reference",
+      "sch-gap-sch-mew-nss-sxu-undergraduate-ab",
+      "cycle-gap-remaining-syphu-b-pharmacy-2026-2027-other-fee-reference",
+      "cycle-gap-wave4-medicine-syphu-medicinal-chemistry-master-2026-2027-other-fee-reference",
+      "cycle-gap-wave4-medicine-syphu-pharmaceutics-master-2026-2027-other-fee-reference",
+      "cycle-gap-wave3-sztu-ai-english-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave3-sztu-cs-chinese-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave3-sztu-international-business-english-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave3-sztu-pharmacy-english-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave3-depth-sicau-chinese-language-literature-bachelor-2026-2027-autumn-fee-reference",
+      "sch-gap-wave3-depth-sicau-undergraduate-university-scholarship-2026",
+      "cycle-gap-mew-0805-scw-scfai-art-studies-doctorate-2026-2027-other-fee-reference",
+      "sch-gap-mew-0805-scw-scfai-chongqing-mayor-scholarship",
+      "sch-gap-mew-0805-scw-scfai-president-scholarship",
+      "scholarship-sichuan-university-international-student",
+      "scholarship-sichuan-government"
+    ],
+    "additionalSameSourceRecordIds": [
+      "sch-gap-wave3-sztu-guangdong-government-scholarship",
+      "sch-gap-wave3-sztu-freshman-scholarship",
+      "cycle-gap-mew-0805-scw-scfai-art-studies-master-2026-2027-other-fee-reference",
+      "cycle-gap-mew-0805-scw-scfai-painting-bachelor-2026-2027-other-fee-reference"
+    ],
+    "extensionReceipt": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1200/additional-same-source-selection-v1.json",
+      "sha256": "78d33a7b306a9e6ff28285eff969e52d192600dca341e548ed4c4613b00eaa4c"
+    }
+  },
+  "acquisition": {
+    "registeredDistinctUrlsAttempted": 10,
+    "nativeOriginRequests": 10,
+    "webFallbackRequests": 3,
+    "rawBodiesSaved": 7,
+    "originalHtmlBodies": 6,
+    "originalPdfBodies": 1,
+    "webObservationOnlyDateRecords": 3,
+    "bodyInterpretation": "Seven saved originals. SCFAI three native TLS failures each received one official-web fallback; retained master excerpts support three restricted observations, while two cycles remain blocked without retained exact programme/date proof. Web-observation hashes are not original server hashes.",
+    "skippedDateIrrelevantSupportingUrls": [
+      "https://en.syphu.edu.cn/Admissions/Tuition_Fees.htm"
+    ],
+    "captureManifestPin": {
+      "path": "captures.json",
+      "sha256": "8f920cb942de7cd1572bee552a6e135901713987a6dde042ca7586ddc54bb2d9"
+    },
+    "pdfExtractionPin": {
+      "path": "pdf-extraction.json",
+      "sha256": "9932d1f6df3eb8465fe49ce3b63e2c6c58eebeec28ec7f9459359b8c38de5835"
+    },
+    "diagnostics": {
+      "path": "acquisition-diagnostics.json",
+      "sha256": "9168bcb7d90be438167cfc03f3e4405a0245fce7cce1a6fb236e70d2a37ca339"
+    },
+    "fallbackPin": {
+      "path": "scfai-web-fallback-observations.json",
+      "sha256": "bd97fe3122647e378146bba3e5a601562932fd1cdc96c5ab593db25f8b9fb686"
+    },
+    "successorObservation": {
+      "path": "sztu-successor-date-observation.json",
+      "sha256": "2b70e132a379815aaeace768e6b87730a12a7a205703379a5936de8c5969a04c"
+    },
+    "paidModelCalls": 0,
+    "tlsCertificateValidation": true
+  },
+  "summary": {
+    "schoolsAttempted": 6,
+    "recordsAssessed": 20,
+    "baseQueueRecords": 16,
+    "additionalSameSourceRecords": 4,
+    "admissionCyclesAssessed": 12,
+    "scholarshipsAssessed": 8,
+    "recordResults": {
+      "closed": 6,
+      "unknown": 12,
+      "blocked": 2
+    },
+    "newExactPastDeadlineCandidatesFromStoredNull": 6,
+    "originalBodyBackedPastDateCandidates": 3,
+    "webObservationOnlyPastDateCandidates": 3,
+    "existingExpiredDatesScoped": 0,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "rules": [
+    "Candidate-only source observations; canonical dates, status, publication and whole-record freshness unchanged.",
+    "Unknown and blocked do not establish availability; no date is rolled to a new year. Failed paths enter cooldown.",
+    "Closed dates bind only the exact matched year, programme and funding route. No programme discontinuation is inferred.",
+    "Independent awards do not borrow admission deadlines; only explicit concurrent scholarship forms bind the stated route.",
+    "SZTU successor2027 remains separate from stored2026-2027 rows; stale July2026 process wording is disclosed. No open status is asserted.",
+    "SCFAI retained web-observation excerpts are not original server bytes or offline-original certification. Doctoral and bachelor cycles remain blocked.",
+    "Month precision and relative openings do not become invented exact dates."
+  ],
+  "groups": [
+    {
+      "key": "sxu-exact-foundation-and-separate-undergraduate-award",
+      "universityId": "uni-shanxi-university",
+      "evidence": [
+        {
+          "name": "sxu-foundation",
+          "url": "https://siee.sxu.edu.cn/docs/2026-04/9e9a1838ee3e49c3aabd942d05cd4e32.pdf",
+          "observedAt": "2026-10-19T12:02:54.392590+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://siee.sxu.edu.cn/docs/2026-04/9e9a1838ee3e49c3aabd942d05cd4e32.pdf",
+          "contentType": "application/pdf",
+          "bytes": 613523,
+          "rawPath": "sxu-foundation.pdf",
+          "rawSha256": "c1784b48833700055264dcb71c4a204199b6059b94b31f9da2dc43b5703a5262",
+          "captureSucceeded": true,
+          "error": "No module named 'pypdf'",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "method": "offline-pypdf-extraction-from-saved-original-no-refetch",
+          "textPath": "sxu-foundation.txt",
+          "textSha256": "e7c7d042b88afb45d17003d56911ccdadbf413cb58a4634040b5ce7e32421b9b",
+          "pageCount": 2,
+          "localExtractionRecovered": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "pdfExtraction": {
+        "path": "pdf-extraction.json",
+        "sha256": "9932d1f6df3eb8465fe49ce3b63e2c6c58eebeec28ec7f9459359b8c38de5835"
+      },
+      "visualPage": {
+        "path": "sxu-foundation-page1.png",
+        "sha256": "af39281322ada00be89e55e42b4499b006700b35e058893b69ef58d169373bbd"
+      },
+      "yearTitle": "2026年山西大学来华留学1+4预科项目招生简章",
+      "quotedDate": "2025年12月31日—2026年6月15日",
+      "foundationStudyPeriod": "2026.9-2027.7",
+      "undergraduateStudyPeriod": "2027年 9月—2031年7月",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-sxu-foundation-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shanxi-university",
+          "canonicalUniversitySha256": "054248b4c6dc94b09992eb3620b598aa6eeefc7d77bb231db7137e2e3650568c",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-prog-mew-nss-sxu-foundation",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "foundation",
+          "canonicalCycleSha256": "606c0b4f543c7eccd4f56ee3652c0885c2ab64572acb5269ba6740d26d33ada4",
+          "canonicalProgramSha256": "d883a2df07d9a61b38bbd91b8c4f09c4714ba82654e1a8b2dc35a270e191f8e0",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "name": "1+4 International Student Foundation Program",
+          "canonicalRecordSha256": "606c0b4f543c7eccd4f56ee3652c0885c2ab64572acb5269ba6740d26d33ada4",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-sxu-foundation",
+              "canonicalProgramSha256": "d883a2df07d9a61b38bbd91b8c4f09c4714ba82654e1a8b2dc35a270e191f8e0"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-sxu-foundation"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-sxu-foundation",
+              "canonicalSourceSha256": "c76467471e0156737c97cbdfe41d2b45a92d14167450df8909a5898ce30041f9",
+              "url": "https://siee.sxu.edu.cn/docs/2026-04/9e9a1838ee3e49c3aabd942d05cd4e32.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "reason": "explicit-2026-foundation-application-period-matches-foundation-2026-2027-study",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-12-31",
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://siee.sxu.edu.cn/docs/2026-04/9e9a1838ee3e49c3aabd942d05cd4e32.pdf",
+          "evidenceBodySha256": "c1784b48833700055264dcb71c4a204199b6059b94b31f9da2dc43b5703a5262",
+          "observedAt": "2026-10-19T12:02:54.392590+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched 2026 route is past; no permanent cessation or successor-cycle closure is inferred.",
+          "quotedDate": "2025年12月31日—2026年6月15日",
+          "pdfPage": 1,
+          "pdfVisuallyRead": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nss-sxu-undergraduate-ab",
+          "universityId": "uni-shanxi-university",
+          "canonicalUniversitySha256": "054248b4c6dc94b09992eb3620b598aa6eeefc7d77bb231db7137e2e3650568c",
+          "selectionOrigin": "base-queue-v8",
+          "canonicalScholarshipSha256": "d2b72a4ab2b8acaee2b972d069c25f61f27601eb6e2bbe4b2e3bcc5673d6fdda",
+          "name": "Shanxi University International Undergraduate Scholarship (Types A and B)",
+          "canonicalRecordSha256": "d2b72a4ab2b8acaee2b972d069c25f61f27601eb6e2bbe4b2e3bcc5673d6fdda",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-sxu-foundation",
+              "canonicalProgramSha256": "d883a2df07d9a61b38bbd91b8c4f09c4714ba82654e1a8b2dc35a270e191f8e0"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nss-sxu-undergraduate-ab"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nss-sxu-undergraduate-ab",
+              "canonicalSourceSha256": "7cbb12fb96d2af5aaaa318a07466291d074b59d5645215f841df38e62191e471",
+              "url": "https://siee.sxu.edu.cn/docs/2026-04/9e9a1838ee3e49c3aabd942d05cd4e32.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "undergraduate-A-B-awards-depend-on-foundation-performance-and-2027-undergraduate-stage-no-own-deadline",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://siee.sxu.edu.cn/docs/2026-04/9e9a1838ee3e49c3aabd942d05cd4e32.pdf",
+          "evidenceBodySha256": "c1784b48833700055264dcb71c4a204199b6059b94b31f9da2dc43b5703a5262",
+          "observedAt": "2026-10-19T12:02:54.392590+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "awardDeadlineNotBorrowed": true,
+          "foundationDeadlineNotAwardDeadline": "2026-06-15",
+          "sourceAwardSection": "九、本科奖学金"
+        }
+      ]
+    },
+    {
+      "key": "syphu-unanchored-seasonal-dates",
+      "universityId": "uni-shenyang-pharmaceutical-university",
+      "evidence": [
+        {
+          "name": "syphu-degree",
+          "url": "https://en.syphu.edu.cn/Admissions/Degree_Programs.htm",
+          "observedAt": "2026-10-19T12:02:54.394105+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://en.syphu.edu.cn/Admissions/Degree_Programs.htm",
+          "contentType": "text/html",
+          "bytes": 48510,
+          "rawPath": "syphu-degree.html",
+          "rawSha256": "f817c017523b4d37d4b585c6623f71256b3e72d648cb64488b6d52aeec4b5019",
+          "textPath": "syphu-degree.txt",
+          "textSha256": "dcb4219ae2abb09b53feffa64b771b5abab02f9be1ef8857a90d65e57d1d93c8",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "syphu-requirements",
+          "url": "https://en.syphu.edu.cn/Admissions/Admission_Requirement.htm",
+          "observedAt": "2026-10-19T12:02:54.394105+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://en.syphu.edu.cn/Admissions/Admission_Requirement.htm",
+          "contentType": "text/html",
+          "bytes": 32685,
+          "rawPath": "syphu-requirements.html",
+          "rawSha256": "49f5af62792c9fcb2a73d4340b4aa1acbda4a3aca3feaca2f683b4be15d573cc",
+          "textPath": "syphu-requirements.txt",
+          "textSha256": "1669d85344b6ec6d2c69ee735aa66b0d717781c1d37f74654e54a70798eda859",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "recurringFallQuote": "Fall Semester — July 15",
+      "recurringSpringQuote": "Spring Semester — Jan 15",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-remaining-syphu-b-pharmacy-2026-2027-other-fee-reference",
+          "universityId": "uni-shenyang-pharmaceutical-university",
+          "canonicalUniversitySha256": "7af3a1b17d52f47b1167cb06aee2f06e07c9f63928603183b67494c22b9b0836",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-remaining-syphu-b-pharmacy",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "canonicalCycleSha256": "2b6844275fe73fe56e76813bbc964eff85b1dad8135847ef2e72c3e6e03f4923",
+          "canonicalProgramSha256": "0a09d8788f33b4b37ce0c65e2eecae28a6377111467f32b5491b4852c857b4d5",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "name": "Pharmacy",
+          "canonicalRecordSha256": "2b6844275fe73fe56e76813bbc964eff85b1dad8135847ef2e72c3e6e03f4923",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-remaining-syphu-b-pharmacy",
+              "canonicalProgramSha256": "0a09d8788f33b4b37ce0c65e2eecae28a6377111467f32b5491b4852c857b4d5"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-remaining-syphu-b-pharmacy",
+            "src-gap-program-remaining-syphu-b-pharmacy-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-remaining-syphu-b-pharmacy",
+              "canonicalSourceSha256": "ac812cd1132bb0b627a4f86d8ccd5bb5720f6019383ada33b3355f7f704933c5",
+              "url": "https://en.syphu.edu.cn/Admissions/Tuition_Fees.htm"
+            },
+            {
+              "sourceId": "src-gap-program-remaining-syphu-b-pharmacy-support-1",
+              "canonicalSourceSha256": "a4c288a145af054842596da1b2ae605f55b2014dcd424df4b3c50280a4f877b9",
+              "url": "https://en.syphu.edu.cn/Admissions/Admission_Requirement.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-seasonal-page-has-no-application-year-and-stored-intake-is-other-no-year-or-intake-inference",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://en.syphu.edu.cn/Admissions/Admission_Requirement.htm",
+          "evidenceBodySha256": "49f5af62792c9fcb2a73d4340b4aa1acbda4a3aca3feaca2f683b4be15d573cc",
+          "observedAt": "2026-10-19T12:02:54.394105+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "seasonalUnanchoredDates": [
+            "July 15",
+            "Jan 15"
+          ],
+          "noYearRollover": true,
+          "exactMasterSubjectsListed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave4-medicine-syphu-medicinal-chemistry-master-2026-2027-other-fee-reference",
+          "universityId": "uni-shenyang-pharmaceutical-university",
+          "canonicalUniversitySha256": "7af3a1b17d52f47b1167cb06aee2f06e07c9f63928603183b67494c22b9b0836",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-wave4-medicine-syphu-medicinal-chemistry-master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "master",
+          "canonicalCycleSha256": "1bfcd585e184e0bc0e8cfe17decd7f650f0af83876ec6451a177ad1ebbcbfff0",
+          "canonicalProgramSha256": "9c5a072637da453271ef6528b27eb143b727f451ad6fe80a4b2db64f503fdee3",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "name": "Medicinal Chemistry (Master)",
+          "canonicalRecordSha256": "1bfcd585e184e0bc0e8cfe17decd7f650f0af83876ec6451a177ad1ebbcbfff0",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave4-medicine-syphu-medicinal-chemistry-master",
+              "canonicalProgramSha256": "9c5a072637da453271ef6528b27eb143b727f451ad6fe80a4b2db64f503fdee3"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master",
+            "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master-support-1",
+            "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master-support-2"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master",
+              "canonicalSourceSha256": "5089a3d12eec0fde99ea49fd36b0ca9c607fca44e689a3d22dcb7fdf0ad6c772",
+              "url": "https://en.syphu.edu.cn/Admissions/Degree_Programs.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master-support-1",
+              "canonicalSourceSha256": "1be8614a0340e04e0b52163ceed13be78e0130c44e3c023d5c7d0d3aafe3433d",
+              "url": "https://en.syphu.edu.cn/Admissions/Tuition_Fees.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master-support-2",
+              "canonicalSourceSha256": "8bf50eeabbae9762debc1aa8bb24a6dc79b9d6c0337a2036487d7b6c7bb43b63",
+              "url": "https://en.syphu.edu.cn/Admissions/Admission_Requirement.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-seasonal-page-has-no-application-year-and-stored-intake-is-other-no-year-or-intake-inference",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://en.syphu.edu.cn/Admissions/Admission_Requirement.htm",
+          "evidenceBodySha256": "49f5af62792c9fcb2a73d4340b4aa1acbda4a3aca3feaca2f683b4be15d573cc",
+          "observedAt": "2026-10-19T12:02:54.394105+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "seasonalUnanchoredDates": [
+            "July 15",
+            "Jan 15"
+          ],
+          "noYearRollover": true,
+          "exactMasterSubjectsListed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave4-medicine-syphu-pharmaceutics-master-2026-2027-other-fee-reference",
+          "universityId": "uni-shenyang-pharmaceutical-university",
+          "canonicalUniversitySha256": "7af3a1b17d52f47b1167cb06aee2f06e07c9f63928603183b67494c22b9b0836",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-wave4-medicine-syphu-pharmaceutics-master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "master",
+          "canonicalCycleSha256": "f0dcecd0ebbb5b60b12a6144acf2927c834f5bc74eaf6b5d07bf92a5092d23b0",
+          "canonicalProgramSha256": "9716f02479643d1fdc1def6980d57cd6e567f37c7e27774d0afe117e21739b89",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "name": "Pharmaceutics (Master)",
+          "canonicalRecordSha256": "f0dcecd0ebbb5b60b12a6144acf2927c834f5bc74eaf6b5d07bf92a5092d23b0",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave4-medicine-syphu-pharmaceutics-master",
+              "canonicalProgramSha256": "9716f02479643d1fdc1def6980d57cd6e567f37c7e27774d0afe117e21739b89"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave4-medicine-syphu-pharmaceutics-master",
+            "src-gap-program-wave4-medicine-syphu-pharmaceutics-master-support-1",
+            "src-gap-program-wave4-medicine-syphu-pharmaceutics-master-support-2"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave4-medicine-syphu-pharmaceutics-master",
+              "canonicalSourceSha256": "762dc4d7549916e0dd4457bd7d44288ebd5baf690090e30d75da81a350e9cc92",
+              "url": "https://en.syphu.edu.cn/Admissions/Degree_Programs.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave4-medicine-syphu-pharmaceutics-master-support-1",
+              "canonicalSourceSha256": "d401a9eeffaab475f7ab96ced882d1fb3375a28e9192124e7be7c6e807d5f2d2",
+              "url": "https://en.syphu.edu.cn/Admissions/Tuition_Fees.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave4-medicine-syphu-pharmaceutics-master-support-2",
+              "canonicalSourceSha256": "d25ad0e503240eb7edb861ffae521f877eefb864b231d8b970edb61cddb9cdfc",
+              "url": "https://en.syphu.edu.cn/Admissions/Admission_Requirement.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-seasonal-page-has-no-application-year-and-stored-intake-is-other-no-year-or-intake-inference",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://en.syphu.edu.cn/Admissions/Admission_Requirement.htm",
+          "evidenceBodySha256": "49f5af62792c9fcb2a73d4340b4aa1acbda4a3aca3feaca2f683b4be15d573cc",
+          "observedAt": "2026-10-19T12:02:54.394105+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "seasonalUnanchoredDates": [
+            "July 15",
+            "Jan 15"
+          ],
+          "noYearRollover": true,
+          "exactMasterSubjectsListed": true
+        }
+      ]
+    },
+    {
+      "key": "sztu-successor2027-does-not-renew-stored2026-cycles-or-awards",
+      "universityId": "uni-shenzhen-technology-university",
+      "evidence": [
+        {
+          "name": "sztu-admission",
+          "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+          "observedAt": "2026-10-19T12:02:54.394105+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+          "contentType": "text/html",
+          "bytes": 65475,
+          "rawPath": "sztu-admission.html",
+          "rawSha256": "14079a38134f33f74553e8a15cbbcf691d7e7a4a775ff695cd620af969cb0bfb",
+          "textPath": "sztu-admission.txt",
+          "textSha256": "d92149b3048acf30db3f9eba31a650aa7aa4fce8ceb16cdaa97b2c7b929ca6c4",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "sztu-procedure",
+          "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+          "observedAt": "2026-10-19T12:02:56.513286+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+          "contentType": "text/html",
+          "bytes": 46283,
+          "rawPath": "sztu-procedure.html",
+          "rawSha256": "8735768b1128b7a4058a0fd6f386a7516641109909ff5b35814093221af1c27b",
+          "textPath": "sztu-procedure.txt",
+          "textSha256": "6c2306e7fc5cb8733ae2521d2cb6547689bd719b825cbdb219b8c7f5058f73e2",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "successorObservation": {
+        "path": "sztu-successor-date-observation.json",
+        "sha256": "2b70e132a379815aaeace768e6b87730a12a7a205703379a5936de8c5969a04c"
+      },
+      "yearTitle": "2027 SZTU Admission Brochure of Bachelor Programs for International Students",
+      "observedSuccessorPeriodQuote": "2026年11月1日-2027年5月1日 From 1st November, 2026 to 1st May, 2027",
+      "awardListings": [
+        "Guangdong Government Outstanding International Student Scholarship (for the first year undergraduates or above)",
+        "Freshman scholarship (for the first-year undergraduates)"
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-sztu-ai-english-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shenzhen-technology-university",
+          "canonicalUniversitySha256": "62972623c88cff9426bfab008cb628449aaeb68b921f24385c4065097944fd01",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-wave3-sztu-ai-english-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalCycleSha256": "c2335e62f1488e691ca905721913d4704f436f58753b1a0bb161df179a137807",
+          "canonicalProgramSha256": "1c2ca749eb9b2facd142ef38c15b485368882ce723df7909621e9b7a753c07d8",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "name": "Artificial Intelligence (English-taught Bachelor)",
+          "canonicalRecordSha256": "c2335e62f1488e691ca905721913d4704f436f58753b1a0bb161df179a137807",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-sztu-ai-english-bachelor",
+              "canonicalProgramSha256": "1c2ca749eb9b2facd142ef38c15b485368882ce723df7909621e9b7a753c07d8"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave3-sztu-ai-english-bachelor",
+            "src-gap-program-wave3-sztu-ai-english-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-sztu-ai-english-bachelor",
+              "canonicalSourceSha256": "019fd0ae8a30c90e1749ff501746224b61bf735891c5d2ec66666432a4e52d37",
+              "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave3-sztu-ai-english-bachelor-support-1",
+              "canonicalSourceSha256": "e38b44cc92e9eb16c14983a49c01f50638630ac6de3a86424b4866188b8f6f7c",
+              "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "source-now-targets-successor2027-and-conflicting-july2026-process-dates-no-stored2026-binding",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+          "evidenceBodySha256": "8735768b1128b7a4058a0fd6f386a7516641109909ff5b35814093221af1c27b",
+          "observedAt": "2026-10-19T12:02:56.513286+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "noYearRollover": true,
+          "successorObservationOnly": true,
+          "successorDeadlineNotApplied": "2027-05-01",
+          "independentAwardDeadlineNotBorrowed": false,
+          "currentOpenStatusNotEstablished": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-sztu-cs-chinese-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shenzhen-technology-university",
+          "canonicalUniversitySha256": "62972623c88cff9426bfab008cb628449aaeb68b921f24385c4065097944fd01",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-wave3-sztu-cs-chinese-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalCycleSha256": "22e72652d532e974c41537cd89c7cf92bd4e77a1a25cc3a5a81b165642013499",
+          "canonicalProgramSha256": "ee4ae6bee5a9171ffd6e79380732c7c18b67f5572929fb5425a86916f8007147",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "name": "Computer Science and Technology (Chinese-taught Bachelor)",
+          "canonicalRecordSha256": "22e72652d532e974c41537cd89c7cf92bd4e77a1a25cc3a5a81b165642013499",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-sztu-cs-chinese-bachelor",
+              "canonicalProgramSha256": "ee4ae6bee5a9171ffd6e79380732c7c18b67f5572929fb5425a86916f8007147"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave3-sztu-cs-chinese-bachelor",
+            "src-gap-program-wave3-sztu-cs-chinese-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-sztu-cs-chinese-bachelor",
+              "canonicalSourceSha256": "27fc02d0b8f44b49e2888c50b413fd7843168ef24afcc85b75ba6976307e8778",
+              "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave3-sztu-cs-chinese-bachelor-support-1",
+              "canonicalSourceSha256": "8a7745a8a51c536a25b91ac7a3e7f955ea0a8ff69589f3616088a3f1ed2ec61e",
+              "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "source-now-targets-successor2027-and-conflicting-july2026-process-dates-no-stored2026-binding",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+          "evidenceBodySha256": "8735768b1128b7a4058a0fd6f386a7516641109909ff5b35814093221af1c27b",
+          "observedAt": "2026-10-19T12:02:56.513286+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "noYearRollover": true,
+          "successorObservationOnly": true,
+          "successorDeadlineNotApplied": "2027-05-01",
+          "independentAwardDeadlineNotBorrowed": false,
+          "currentOpenStatusNotEstablished": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-sztu-international-business-english-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shenzhen-technology-university",
+          "canonicalUniversitySha256": "62972623c88cff9426bfab008cb628449aaeb68b921f24385c4065097944fd01",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-wave3-sztu-international-business-english-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalCycleSha256": "5b891322f663fc971d4825bb6a3c66711f3af2116e1e9557be0d8ddb860b704d",
+          "canonicalProgramSha256": "e58ea9c9b73da98336ef31e931cfbd2a2303317a2650b7e3476943096d796d40",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "name": "International Business (English-taught Bachelor)",
+          "canonicalRecordSha256": "5b891322f663fc971d4825bb6a3c66711f3af2116e1e9557be0d8ddb860b704d",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-sztu-international-business-english-bachelor",
+              "canonicalProgramSha256": "e58ea9c9b73da98336ef31e931cfbd2a2303317a2650b7e3476943096d796d40"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave3-sztu-international-business-english-bachelor",
+            "src-gap-program-wave3-sztu-international-business-english-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-sztu-international-business-english-bachelor",
+              "canonicalSourceSha256": "bae81eb03f98bd8ffdb025621cd609e69aed791e3de583a8f87020efbef88e29",
+              "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave3-sztu-international-business-english-bachelor-support-1",
+              "canonicalSourceSha256": "26864f7e108fccae4223146e595a6d74e5bc25f146ef1995ba1b7095a20e7dc5",
+              "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "source-now-targets-successor2027-and-conflicting-july2026-process-dates-no-stored2026-binding",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+          "evidenceBodySha256": "8735768b1128b7a4058a0fd6f386a7516641109909ff5b35814093221af1c27b",
+          "observedAt": "2026-10-19T12:02:56.513286+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "noYearRollover": true,
+          "successorObservationOnly": true,
+          "successorDeadlineNotApplied": "2027-05-01",
+          "independentAwardDeadlineNotBorrowed": false,
+          "currentOpenStatusNotEstablished": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-sztu-pharmacy-english-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shenzhen-technology-university",
+          "canonicalUniversitySha256": "62972623c88cff9426bfab008cb628449aaeb68b921f24385c4065097944fd01",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-wave3-sztu-pharmacy-english-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalCycleSha256": "5ba304eada3e2e493c7fd33579908eb44f3c526486eb86a2fd3c68a685307aa4",
+          "canonicalProgramSha256": "de6bbb96fcf0f18c05f495deff420d07a3321626a3c50a113701963fff0c9b60",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "name": "Pharmacy (English-taught Bachelor)",
+          "canonicalRecordSha256": "5ba304eada3e2e493c7fd33579908eb44f3c526486eb86a2fd3c68a685307aa4",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-sztu-pharmacy-english-bachelor",
+              "canonicalProgramSha256": "de6bbb96fcf0f18c05f495deff420d07a3321626a3c50a113701963fff0c9b60"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave3-sztu-pharmacy-english-bachelor",
+            "src-gap-program-wave3-sztu-pharmacy-english-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-sztu-pharmacy-english-bachelor",
+              "canonicalSourceSha256": "5939b56ceecc2f232bd1f0aca41bb57736c3d51a25be2ceeb4898e27825863a3",
+              "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave3-sztu-pharmacy-english-bachelor-support-1",
+              "canonicalSourceSha256": "8a289e399d24bbc45b458ecb214651b48642503ac55a8220e0322093a155f993",
+              "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "source-now-targets-successor2027-and-conflicting-july2026-process-dates-no-stored2026-binding",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+          "evidenceBodySha256": "8735768b1128b7a4058a0fd6f386a7516641109909ff5b35814093221af1c27b",
+          "observedAt": "2026-10-19T12:02:56.513286+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "noYearRollover": true,
+          "successorObservationOnly": true,
+          "successorDeadlineNotApplied": "2027-05-01",
+          "independentAwardDeadlineNotBorrowed": false,
+          "currentOpenStatusNotEstablished": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-sztu-guangdong-government-scholarship",
+          "universityId": "uni-shenzhen-technology-university",
+          "canonicalUniversitySha256": "62972623c88cff9426bfab008cb628449aaeb68b921f24385c4065097944fd01",
+          "selectionOrigin": "explicit-same-source-extension",
+          "canonicalScholarshipSha256": "d49bfe79ef98f952167f44d7945e16aabe463816e43f88443168083cf7498ef3",
+          "name": "Guangdong Government Outstanding International Student Scholarship at SZTU",
+          "canonicalRecordSha256": "d49bfe79ef98f952167f44d7945e16aabe463816e43f88443168083cf7498ef3",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-wave3-sztu-guangdong-government-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-sztu-guangdong-government-scholarship",
+              "canonicalSourceSha256": "02a363436a49ac5e77d0abd2caa73cf483cae627ba98451b11944ee5989c9890",
+              "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "independent-award-listed-without-own-period-in-successor2027-prospectus",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+          "evidenceBodySha256": "14079a38134f33f74553e8a15cbbcf691d7e7a4a775ff695cd620af969cb0bfb",
+          "observedAt": "2026-10-19T12:02:54.394105+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "noYearRollover": true,
+          "successorObservationOnly": true,
+          "successorDeadlineNotApplied": "2027-05-01",
+          "independentAwardDeadlineNotBorrowed": true,
+          "currentOpenStatusNotEstablished": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-sztu-freshman-scholarship",
+          "universityId": "uni-shenzhen-technology-university",
+          "canonicalUniversitySha256": "62972623c88cff9426bfab008cb628449aaeb68b921f24385c4065097944fd01",
+          "selectionOrigin": "explicit-same-source-extension",
+          "canonicalScholarshipSha256": "81fb0739650d0015eaa00a3764d68d6294e830cdb5eceaf353fea7a0466a6224",
+          "name": "SZTU Freshman Scholarship for International Students",
+          "canonicalRecordSha256": "81fb0739650d0015eaa00a3764d68d6294e830cdb5eceaf353fea7a0466a6224",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-sztu-international-business-english-bachelor",
+              "canonicalProgramSha256": "e58ea9c9b73da98336ef31e931cfbd2a2303317a2650b7e3476943096d796d40"
+            },
+            {
+              "programId": "prog-gap-wave3-sztu-ai-english-bachelor",
+              "canonicalProgramSha256": "1c2ca749eb9b2facd142ef38c15b485368882ce723df7909621e9b7a753c07d8"
+            },
+            {
+              "programId": "prog-gap-wave3-sztu-pharmacy-english-bachelor",
+              "canonicalProgramSha256": "de6bbb96fcf0f18c05f495deff420d07a3321626a3c50a113701963fff0c9b60"
+            },
+            {
+              "programId": "prog-gap-wave3-sztu-cs-chinese-bachelor",
+              "canonicalProgramSha256": "ee4ae6bee5a9171ffd6e79380732c7c18b67f5572929fb5425a86916f8007147"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave3-sztu-freshman-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-sztu-freshman-scholarship",
+              "canonicalSourceSha256": "4bd2f1dc2ab663870942bb11a0e3771f7d2f0b8449249af1ed41016f0281dcbe",
+              "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "independent-award-listed-without-own-period-in-successor2027-prospectus",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+          "evidenceBodySha256": "14079a38134f33f74553e8a15cbbcf691d7e7a4a775ff695cd620af969cb0bfb",
+          "observedAt": "2026-10-19T12:02:54.394105+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "noYearRollover": true,
+          "successorObservationOnly": true,
+          "successorDeadlineNotApplied": "2027-05-01",
+          "independentAwardDeadlineNotBorrowed": true,
+          "currentOpenStatusNotEstablished": true
+        }
+      ]
+    },
+    {
+      "key": "sicau-exact2026-undergraduate-and-integrated-university-award-route",
+      "universityId": "uni-sichuan-agricultural-university",
+      "evidence": [
+        {
+          "name": "sicau-undergraduate",
+          "url": "https://ic.sicau.edu.cn/info/1082/1461.htm",
+          "observedAt": "2026-10-19T12:02:56.707411+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://ic.sicau.edu.cn/info/1082/1461.htm",
+          "contentType": "text/html",
+          "bytes": 58057,
+          "rawPath": "sicau-undergraduate.html",
+          "rawSha256": "dfb2c22c0cdd64ffecbb999c9458284d8726f1f727a297c2753c8188f2402529",
+          "textPath": "sicau-undergraduate.txt",
+          "textSha256": "f813ea8f262085b3c552cb25139ab4b5fbc3591dedafd876f0fef71e39caa7d2",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "Admissions to Undergraduate Programs 2026",
+      "quotedDate": "December 1st 2025 to May 31st 2026",
+      "exactProgrammeQuote": "Applicants for Chinese Language and Literature undergraduate program",
+      "concurrentScholarshipApplicationQuote": "Step 1: Register and fill in personal information and scholarship application form in the Online System https://appghc.sicau.edu.cn",
+      "universityAwardQuote": "International students can apply for university scholarship, the standard is tuition waiver.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-depth-sicau-chinese-language-literature-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-sichuan-agricultural-university",
+          "canonicalUniversitySha256": "180d6c7c455569942f081216d6a68923fad506d85c901e88587067036a2a6696",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-wave3-depth-sicau-chinese-language-literature-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalCycleSha256": "11e18c1e16041965a1f0767262fd42ddd5f64110b81d665801b811378ead9f63",
+          "canonicalProgramSha256": "93341a0550d047c7a852552b522ec1fbacc79fab00fcdfff2fe0ae2c5ebd241f",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "name": "Chinese Language and Literature (Bachelor)",
+          "canonicalRecordSha256": "11e18c1e16041965a1f0767262fd42ddd5f64110b81d665801b811378ead9f63",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-depth-sicau-chinese-language-literature-bachelor",
+              "canonicalProgramSha256": "93341a0550d047c7a852552b522ec1fbacc79fab00fcdfff2fe0ae2c5ebd241f"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave3-depth-sicau-chinese-language-literature-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-depth-sicau-chinese-language-literature-bachelor",
+              "canonicalSourceSha256": "814eb544b7acb05e60aba0ecb5d2a6c8157481ac8d492209f64f59c1151aa567",
+              "url": "https://ic.sicau.edu.cn/info/1082/1461.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-31",
+          "candidateOfficialDeadline": "2026-05-31",
+          "reason": "exact2026-chinese-language-literature-undergraduate-route-and-explicit-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-12-01",
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://ic.sicau.edu.cn/info/1082/1461.htm",
+          "evidenceBodySha256": "dfb2c22c0cdd64ffecbb999c9458284d8726f1f727a297c2753c8188f2402529",
+          "observedAt": "2026-10-19T12:02:56.707411+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched 2026 route is past; no permanent cessation or successor-cycle closure is inferred.",
+          "quotedDate": "December 1st 2025 to May 31st 2026",
+          "fundingRoute": null,
+          "concurrentApplicationProof": null,
+          "otherNamedGovernmentAwardsNotAssessed": true,
+          "noIndependentLaterAwardDeadlineInferred": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-depth-sicau-undergraduate-university-scholarship-2026",
+          "universityId": "uni-sichuan-agricultural-university",
+          "canonicalUniversitySha256": "180d6c7c455569942f081216d6a68923fad506d85c901e88587067036a2a6696",
+          "selectionOrigin": "base-queue-v8",
+          "canonicalScholarshipSha256": "1715ee35a63710cce967854300433ac522978bc848b4795a989177da92f79afb",
+          "name": "SICAU University Scholarship for International Undergraduates 2026",
+          "canonicalRecordSha256": "1715ee35a63710cce967854300433ac522978bc848b4795a989177da92f79afb",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-depth-sicau-chinese-language-literature-bachelor",
+              "canonicalProgramSha256": "93341a0550d047c7a852552b522ec1fbacc79fab00fcdfff2fe0ae2c5ebd241f"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave3-depth-sicau-undergraduate-university-scholarship-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-depth-sicau-undergraduate-university-scholarship-2026",
+              "canonicalSourceSha256": "dad0650d317d7349001a8c2ff9275d0337f8f9d42b6f0ed7f5ed272836a9f110",
+              "url": "https://ic.sicau.edu.cn/info/1082/1461.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-31",
+          "candidateOfficialDeadline": "2026-05-31",
+          "reason": "named-university-award-is-integrated-with-explicit-scholarship-form-submission-in-this2026-undergraduate-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-12-01",
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://ic.sicau.edu.cn/info/1082/1461.htm",
+          "evidenceBodySha256": "dfb2c22c0cdd64ffecbb999c9458284d8726f1f727a297c2753c8188f2402529",
+          "observedAt": "2026-10-19T12:02:56.707411+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched 2026 route is past; no permanent cessation or successor-cycle closure is inferred.",
+          "quotedDate": "December 1st 2025 to May 31st 2026",
+          "fundingRoute": "Integrated SICAU university scholarship application for 2026 international undergraduates",
+          "concurrentApplicationProof": "Step 1: Register and fill in personal information and scholarship application form in the Online System https://appghc.sicau.edu.cn",
+          "otherNamedGovernmentAwardsNotAssessed": true,
+          "noIndependentLaterAwardDeadlineInferred": true
+        }
+      ]
+    },
+    {
+      "key": "scfai-web-observation-only-master-and-concurrent-awards-two-original-holds",
+      "universityId": "uni-sichuan-fine-arts-institute",
+      "evidence": [
+        {
+          "name": "scfai-doctoral",
+          "url": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm",
+          "observedAt": "2026-10-19T12:02:57.606368+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "<urlopen error _ssl.c:983: The handshake operation timed out>",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-TLS-timeout-no-body",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "scfai-master",
+          "url": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+          "observedAt": "2026-10-19T12:02:58.549679+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "<urlopen error _ssl.c:983: The handshake operation timed out>",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-TLS-timeout-no-body",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "scfai-bachelor",
+          "url": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
+          "observedAt": "2026-10-19T12:02:59.248480+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "<urlopen error _ssl.c:983: The handshake operation timed out>",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-TLS-timeout-no-body",
+          "fullFactsCertified": false
+        }
+      ],
+      "fallbackObservations": {
+        "path": "scfai-web-fallback-observations.json",
+        "sha256": "bd97fe3122647e378146bba3e5a601562932fd1cdc96c5ab593db25f8b9fb686"
+      },
+      "originServerBodiesSaved": false,
+      "offlineOriginalCertified": false,
+      "limitation": "Retained web-observation excerpts support only the matching 2026 academic-master and concurrent named-award route. Observation bytes/hash are not original server bytes/hash; no independent offline-original certification.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-0805-scw-scfai-art-studies-doctorate-2026-2027-other-fee-reference",
+          "universityId": "uni-sichuan-fine-arts-institute",
+          "canonicalUniversitySha256": "75788f74cec24b236db8555f80ae3db6f0bddb776ff1e596921ef53515724101",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mew-0805-scw-scfai-art-studies-doctorate",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "doctorate",
+          "canonicalCycleSha256": "ced5d66b1d9c1417d3f4ba562ff731f0d86050187073f5b29821d479525af92b",
+          "canonicalProgramSha256": "385ef7b51473c1479e2a3d88ffbd2f7be1bff6171386d0a1874818d495928c07",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "name": "Art Studies (Academic Doctorate)",
+          "canonicalRecordSha256": "ced5d66b1d9c1417d3f4ba562ff731f0d86050187073f5b29821d479525af92b",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-0805-scw-scfai-art-studies-doctorate",
+              "canonicalProgramSha256": "385ef7b51473c1479e2a3d88ffbd2f7be1bff6171386d0a1874818d495928c07"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-0805-scw-scfai-art-studies-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-0805-scw-scfai-art-studies-doctorate",
+              "canonicalSourceSha256": "75ad01093ec75f5ceff8ecbe3cd35a383bfb0c790435b712ce3b1206a5ccf181",
+              "url": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "native-TLS-timeout-and-fallback-did-not-retain-exact-programme-date-proof-or-original-catalogue",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T12:02:57.606368+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "evidenceObservation": {
+            "path": "scfai-web-fallback-observations.json",
+            "sha256": "bd97fe3122647e378146bba3e5a601562932fd1cdc96c5ab593db25f8b9fb686"
+          },
+          "originServerBodySaved": false,
+          "webTextReturned": true,
+          "exactProgrammeAndDateProofRetained": false,
+          "programmeCatalogueAttachmentUnread": true,
+          "retryPolicy": "cooldown-no-further-retries",
+          "noOtherDegreeDeadlineBorrowed": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-0805-scw-scfai-chongqing-mayor-scholarship",
+          "universityId": "uni-sichuan-fine-arts-institute",
+          "canonicalUniversitySha256": "75788f74cec24b236db8555f80ae3db6f0bddb776ff1e596921ef53515724101",
+          "selectionOrigin": "base-queue-v8",
+          "canonicalScholarshipSha256": "03c3a22b644b855ba45f1f86e860b22fc9e725aa39e5aa0f33b6dc3cd756f270",
+          "name": "Chongqing Municipal Government Mayor's Scholarship for International Students",
+          "canonicalRecordSha256": "03c3a22b644b855ba45f1f86e860b22fc9e725aa39e5aa0f33b6dc3cd756f270",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-0805-scw-scfai-painting-bachelor",
+              "canonicalProgramSha256": "3d52dfd4c1f92220da2d7b9605df8f12790b1e47775548fb96394ef9ec66d727"
+            },
+            {
+              "programId": "prog-gap-mew-0805-scw-scfai-art-studies-master",
+              "canonicalProgramSha256": "6dc82bd4113d3828b7d308fef4eb964c291941dce4766ce204e46d18431ebe1f"
+            },
+            {
+              "programId": "prog-gap-mew-0805-scw-scfai-art-studies-doctorate",
+              "canonicalProgramSha256": "385ef7b51473c1479e2a3d88ffbd2f7be1bff6171386d0a1874818d495928c07"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mew-0805-scw-scfai-chongqing-mayor-scholarship",
+            "src-gap-scholarship-mew-0805-scw-scfai-chongqing-mayor-scholarship-support-1",
+            "src-gap-scholarship-mew-0805-scw-scfai-chongqing-mayor-scholarship-support-2"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-0805-scw-scfai-chongqing-mayor-scholarship",
+              "canonicalSourceSha256": "d1b6851c3d1736d2c7b9d6cbc29b5c11369d8cc7e6938df455a4a0592674c479",
+              "url": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm"
+            },
+            {
+              "sourceId": "src-gap-scholarship-mew-0805-scw-scfai-chongqing-mayor-scholarship-support-1",
+              "canonicalSourceSha256": "7514c19edafcf17827f5e6d529efd75b19629ee84d0f8d0595166fbec86e2a4f",
+              "url": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm"
+            },
+            {
+              "sourceId": "src-gap-scholarship-mew-0805-scw-scfai-chongqing-mayor-scholarship-support-2",
+              "canonicalSourceSha256": "a1fef9ca334076151e6dfdd9524c5dffb2a12488779115016b12fd59fc441e9b",
+              "url": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-31",
+          "candidateOfficialDeadline": "2026-05-31",
+          "reason": "official-web-master-prospectus-explicit-concurrent-Mayor-and-President-forms-within2026-application-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T12:06:59.181Z",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "2026 SCFAI academic-master applicants and the explicitly concurrent named-award applications only; no doctoral/bachelor deadline inference.",
+          "quotedDate": "From the date of publication of this Admissions Guide until May 31, 2026.",
+          "evidenceObservation": {
+            "path": "scfai-web-fallback-observations.json",
+            "sha256": "bd97fe3122647e378146bba3e5a601562932fd1cdc96c5ab593db25f8b9fb686"
+          },
+          "originServerBodySaved": false,
+          "sourceReadMethod": "single-official-web-open-fallback-retained-excerpts",
+          "evidenceObservationSha256": "bd97fe3122647e378146bba3e5a601562932fd1cdc96c5ab593db25f8b9fb686",
+          "fundingRoute": "2026 SCFAI master route with named Mayor or President scholarship form submitted together",
+          "sourceApplicationYear": "2026",
+          "exactProgrammeQuote": null,
+          "concurrentAwardSubmissionQuote": "如需申请重庆市政府外国留学生市长奖学金和四川美术学院国际学生校长奖学金者，须一并提交《重庆市人民政府外国留学生市长奖学金申请表》和《四川美术学院国际学生校长奖学金申请表》。",
+          "openingRelativeWording": "From the date of publication",
+          "sourcePublicationDateContextOnly": "2026-04-30",
+          "offlineOriginalCertified": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-0805-scw-scfai-president-scholarship",
+          "universityId": "uni-sichuan-fine-arts-institute",
+          "canonicalUniversitySha256": "75788f74cec24b236db8555f80ae3db6f0bddb776ff1e596921ef53515724101",
+          "selectionOrigin": "base-queue-v8",
+          "canonicalScholarshipSha256": "516b9e972507afa75d0517bcd410338f0ebd9f260f4ec3c4a82d4a102c68fc15",
+          "name": "Sichuan Fine Arts Institute President's Scholarship for International Students",
+          "canonicalRecordSha256": "516b9e972507afa75d0517bcd410338f0ebd9f260f4ec3c4a82d4a102c68fc15",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-0805-scw-scfai-painting-bachelor",
+              "canonicalProgramSha256": "3d52dfd4c1f92220da2d7b9605df8f12790b1e47775548fb96394ef9ec66d727"
+            },
+            {
+              "programId": "prog-gap-mew-0805-scw-scfai-art-studies-master",
+              "canonicalProgramSha256": "6dc82bd4113d3828b7d308fef4eb964c291941dce4766ce204e46d18431ebe1f"
+            },
+            {
+              "programId": "prog-gap-mew-0805-scw-scfai-art-studies-doctorate",
+              "canonicalProgramSha256": "385ef7b51473c1479e2a3d88ffbd2f7be1bff6171386d0a1874818d495928c07"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mew-0805-scw-scfai-president-scholarship",
+            "src-gap-scholarship-mew-0805-scw-scfai-president-scholarship-support-1",
+            "src-gap-scholarship-mew-0805-scw-scfai-president-scholarship-support-2"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-0805-scw-scfai-president-scholarship",
+              "canonicalSourceSha256": "22efa4e64a9bec6635726d4397d09af293ffcca989b14b0322a5092e1f70e5bf",
+              "url": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm"
+            },
+            {
+              "sourceId": "src-gap-scholarship-mew-0805-scw-scfai-president-scholarship-support-1",
+              "canonicalSourceSha256": "dead61401698642922282424bcacd00f080ac2fb286967992b16735e7fdec5e3",
+              "url": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm"
+            },
+            {
+              "sourceId": "src-gap-scholarship-mew-0805-scw-scfai-president-scholarship-support-2",
+              "canonicalSourceSha256": "c78350d218dfa82414ab7b0ce6416189f7502a8a50fbef2daddee99917eb0f0b",
+              "url": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-31",
+          "candidateOfficialDeadline": "2026-05-31",
+          "reason": "official-web-master-prospectus-explicit-concurrent-Mayor-and-President-forms-within2026-application-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T12:06:59.181Z",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "2026 SCFAI academic-master applicants and the explicitly concurrent named-award applications only; no doctoral/bachelor deadline inference.",
+          "quotedDate": "From the date of publication of this Admissions Guide until May 31, 2026.",
+          "evidenceObservation": {
+            "path": "scfai-web-fallback-observations.json",
+            "sha256": "bd97fe3122647e378146bba3e5a601562932fd1cdc96c5ab593db25f8b9fb686"
+          },
+          "originServerBodySaved": false,
+          "sourceReadMethod": "single-official-web-open-fallback-retained-excerpts",
+          "evidenceObservationSha256": "bd97fe3122647e378146bba3e5a601562932fd1cdc96c5ab593db25f8b9fb686",
+          "fundingRoute": "2026 SCFAI master route with named Mayor or President scholarship form submitted together",
+          "sourceApplicationYear": "2026",
+          "exactProgrammeQuote": null,
+          "concurrentAwardSubmissionQuote": "如需申请重庆市政府外国留学生市长奖学金和四川美术学院国际学生校长奖学金者，须一并提交《重庆市人民政府外国留学生市长奖学金申请表》和《四川美术学院国际学生校长奖学金申请表》。",
+          "openingRelativeWording": "From the date of publication",
+          "sourcePublicationDateContextOnly": "2026-04-30",
+          "offlineOriginalCertified": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-0805-scw-scfai-art-studies-master-2026-2027-other-fee-reference",
+          "universityId": "uni-sichuan-fine-arts-institute",
+          "canonicalUniversitySha256": "75788f74cec24b236db8555f80ae3db6f0bddb776ff1e596921ef53515724101",
+          "selectionOrigin": "explicit-same-source-extension",
+          "programId": "prog-gap-mew-0805-scw-scfai-art-studies-master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "master",
+          "canonicalCycleSha256": "044bbbc1037ad8053b85770afaa20267cf78f3971c1862d3d892cb926037f531",
+          "canonicalProgramSha256": "6dc82bd4113d3828b7d308fef4eb964c291941dce4766ce204e46d18431ebe1f",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "name": "Art Studies (Academic Master)",
+          "canonicalRecordSha256": "044bbbc1037ad8053b85770afaa20267cf78f3971c1862d3d892cb926037f531",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-0805-scw-scfai-art-studies-master",
+              "canonicalProgramSha256": "6dc82bd4113d3828b7d308fef4eb964c291941dce4766ce204e46d18431ebe1f"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-0805-scw-scfai-art-studies-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-0805-scw-scfai-art-studies-master",
+              "canonicalSourceSha256": "36987fe3c08d04d7b5039383f37f6989fa2c8b3df960c72f29067e6377647566",
+              "url": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-31",
+          "candidateOfficialDeadline": "2026-05-31",
+          "reason": "official-web-master-prospectus-explicit2026-period-and-Art-Studies-academic-master-scope",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T12:06:59.181Z",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "2026 SCFAI academic-master applicants and the explicitly concurrent named-award applications only; no doctoral/bachelor deadline inference.",
+          "quotedDate": "From the date of publication of this Admissions Guide until May 31, 2026.",
+          "evidenceObservation": {
+            "path": "scfai-web-fallback-observations.json",
+            "sha256": "bd97fe3122647e378146bba3e5a601562932fd1cdc96c5ab593db25f8b9fb686"
+          },
+          "originServerBodySaved": false,
+          "sourceReadMethod": "single-official-web-open-fallback-retained-excerpts",
+          "evidenceObservationSha256": "bd97fe3122647e378146bba3e5a601562932fd1cdc96c5ab593db25f8b9fb686",
+          "fundingRoute": null,
+          "sourceApplicationYear": "2026",
+          "exactProgrammeQuote": "Art Studies",
+          "concurrentAwardSubmissionQuote": null,
+          "openingRelativeWording": "From the date of publication",
+          "sourcePublicationDateContextOnly": "2026-04-30",
+          "offlineOriginalCertified": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-0805-scw-scfai-painting-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-sichuan-fine-arts-institute",
+          "canonicalUniversitySha256": "75788f74cec24b236db8555f80ae3db6f0bddb776ff1e596921ef53515724101",
+          "selectionOrigin": "explicit-same-source-extension",
+          "programId": "prog-gap-mew-0805-scw-scfai-painting-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "canonicalCycleSha256": "6b878c30f1e6ef8859d8adff8a167bd02243cca5eb7859a0c208c991badd7c96",
+          "canonicalProgramSha256": "3d52dfd4c1f92220da2d7b9605df8f12790b1e47775548fb96394ef9ec66d727",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "name": "Painting",
+          "canonicalRecordSha256": "6b878c30f1e6ef8859d8adff8a167bd02243cca5eb7859a0c208c991badd7c96",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-0805-scw-scfai-painting-bachelor",
+              "canonicalProgramSha256": "3d52dfd4c1f92220da2d7b9605df8f12790b1e47775548fb96394ef9ec66d727"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-0805-scw-scfai-painting-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-0805-scw-scfai-painting-bachelor",
+              "canonicalSourceSha256": "a701c4e0abe033a91b284033e482214761e05f06e6c55c6c59eb09e54fd2c20a",
+              "url": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "native-TLS-timeout-and-fallback-did-not-retain-exact-programme-date-proof-or-original-catalogue",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T12:02:59.248480+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "evidenceObservation": {
+            "path": "scfai-web-fallback-observations.json",
+            "sha256": "bd97fe3122647e378146bba3e5a601562932fd1cdc96c5ab593db25f8b9fb686"
+          },
+          "originServerBodySaved": false,
+          "webTextReturned": true,
+          "exactProgrammeAndDateProofRetained": false,
+          "programmeCatalogueAttachmentUnread": true,
+          "retryPolicy": "cooldown-no-further-retries",
+          "noOtherDegreeDeadlineBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "scu-international-homepage-no-independent-award-period",
+      "universityId": "uni-sichuan-university",
+      "evidence": [
+        {
+          "name": "scu-international",
+          "url": "https://global.scu.edu.cn/",
+          "observedAt": "2026-10-19T12:03:00.733698+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://global.scu.edu.cn/",
+          "contentType": "text/html; CHARSET=UTF-8",
+          "bytes": 39507,
+          "rawPath": "scu-international.html",
+          "rawSha256": "5a5c6a8cc6ccfba6100ad768ae9dee095f5b061e52089087b5c1ad93662e2d66",
+          "textPath": "scu-international.txt",
+          "textSha256": "de9a40331b7dc98ef18ea17e53ec0fe7b6861f5f2a8dd7b351fe2780ee427342",
+          "captureSucceeded": true,
+          "evidenceRole": "homepage-and-service-news-not-award-full-text-date-proof",
+          "fullFactsCertified": false
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-sichuan-university-international-student",
+          "universityId": "uni-sichuan-university",
+          "canonicalUniversitySha256": "ea1c5822b871509c182e4f981b936daf7f3c8bed819a1dddf7fde80a0276b19a",
+          "selectionOrigin": "base-queue-v8",
+          "canonicalScholarshipSha256": "eaaa4ad15866115fa6e2c4ca2e82164e0e09f11dbfe3871de27bee67a7efa03f",
+          "name": "Sichuan University Scholarship for International Students",
+          "canonicalRecordSha256": "eaaa4ad15866115fa6e2c4ca2e82164e0e09f11dbfe3871de27bee67a7efa03f",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-uni-sichuan-university"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-uni-sichuan-university",
+              "canonicalSourceSha256": "ee6c684383019562b266a7c98634d89f2629311e70910af2e6df90f511db7697",
+              "url": "https://global.scu.edu.cn/"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-source-is-international-office-homepage-without-named-independent-award-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://global.scu.edu.cn/",
+          "evidenceBodySha256": "5a5c6a8cc6ccfba6100ad768ae9dee095f5b061e52089087b5c1ad93662e2d66",
+          "observedAt": "2026-10-19T12:03:00.733698+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "landingPageOnly": true,
+          "awardDeadlineNotBorrowed": true,
+          "noMultiLayerDirectoryExpansion": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-sichuan-government",
+          "universityId": "uni-sichuan-university",
+          "canonicalUniversitySha256": "ea1c5822b871509c182e4f981b936daf7f3c8bed819a1dddf7fde80a0276b19a",
+          "selectionOrigin": "base-queue-v8",
+          "canonicalScholarshipSha256": "50d710caeb8169c771413f6e1fd2e89a0ab147381322953369a3da3ca468cfdc",
+          "name": "Sichuan Government Scholarship",
+          "canonicalRecordSha256": "50d710caeb8169c771413f6e1fd2e89a0ab147381322953369a3da3ca468cfdc",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-uni-sichuan-university"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-uni-sichuan-university",
+              "canonicalSourceSha256": "ee6c684383019562b266a7c98634d89f2629311e70910af2e6df90f511db7697",
+              "url": "https://global.scu.edu.cn/"
+            }
+          ],
+          "storedDeadline": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-source-is-international-office-homepage-without-named-independent-award-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://global.scu.edu.cn/",
+          "evidenceBodySha256": "5a5c6a8cc6ccfba6100ad768ae9dee095f5b061e52089087b5c1ad93662e2d66",
+          "observedAt": "2026-10-19T12:03:00.733698+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "landingPageOnly": true,
+          "awardDeadlineNotBorrowed": true,
+          "noMultiLayerDirectoryExpansion": true
+        }
+      ]
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "reportSha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "batch": "official-batch-025",
+      "reportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f"
+    },
+    {
+      "batch": "official-batch-026",
+      "reportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9"
+    },
+    {
+      "batch": "official-batch-027",
+      "reportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+    },
+    {
+      "batch": "official-batch-028",
+      "reportSha256": "c1ee48a947ab94feac0f853531921d888b4ce30b24781afe7cb9e422e29f9276"
+    },
+    {
+      "batch": "official-batch-029",
+      "reportSha256": "6fa308e70e7e0ad0a0436ed5103eb067928fc9494ba1e977fdaba85cdd3d2243"
+    },
+    {
+      "batch": "official-batch-030",
+      "reportSha256": "95ae6d26c4de9030e7debe25a19d12f12d23235c3633a3b75aca538996958668"
+    }
+  ],
+  "validation": {
+    "exactTwentyIdsCoveredOnce": true,
+    "noAssessedOrPriorApprovedOverlap": true,
+    "allSixCanonicalInputsUnchanged": true,
+    "canonicalRecordParentLinkedProgrammeSourceAndUniversityPinsSaved": true,
+    "originalQuotedTextFragmentsMatchSavedText": true,
+    "sxuPdfDateVisuallyRead": true,
+    "unknownOpeningNotAssessed": true,
+    "closedDatesAreExplicitPastIsoDays": true,
+    "extensionsMatchRootSelectionReceipt": true
+  }
+}

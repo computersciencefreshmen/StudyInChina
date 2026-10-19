@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-19T12:06:40.431Z",
+  "originalCapture": {
+    "name": "sysu-guide-pdf",
+    "url": "https://iso.sysu.edu.cn/docs/2025-12/20251209183332399352.pdf",
+    "observedAt": "2026-10-19T12:03:26.411638+00:00",
+    "timeoutSeconds": 25,
+    "maximumBytes": 12000000,
+    "tlsCertificateValidation": true,
+    "status": 200,
+    "finalUrl": "https://iso.sysu.edu.cn/docs/2025-12/20251209183332399352.pdf",
+    "contentType": "application/pdf",
+    "bytes": 352371,
+    "rawPath": "sysu-guide-pdf.pdf",
+    "rawSha256": "f65fb02364a43950bd2144cd13b630308e3f9c6fc56b748dfb91fe3b729b0dd3",
+    "captureSucceeded": false,
+    "error": "No module named 'pypdf'",
+    "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown"
+  },
+  "offlineTextExtractionSucceeded": true,
+  "method": "bundled-runtime-pypdf-read-only-extraction-and-Poppler-page-1-render",
+  "networkRequests": 0,
+  "pageCount": 6,
+  "text": {
+    "path": "sysu-guide-pdf.txt",
+    "sha256": "cdcd3a2ab4162d360997eca8ecb7f8d79c2b5cf6c33533da7cc49c87c1441e07"
+  },
+  "visualLocator": {
+    "path": "sysu-catalog-page1.png",
+    "sha256": "adb0c41d23aeb365a35fb5cbffc5f981417805b49550e7c2d462e8bd0884ab2b"
+  },
+  "yearTitle": "中山大学2026年国际学生（本科）招生专业目录",
+  "exactProgrammeQuote": "汉语言文学Chinese Language & Literature4中文Chinese",
+  "originalCaptureParserFailure": "Default Python lacked pypdf after original bytes had already been saved. This is an offline extraction failure, not an official website failure.",
+  "visualReadConfirmed": true
+}

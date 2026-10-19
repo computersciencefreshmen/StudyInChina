@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-031-20261019",
+  "reviewer": "independent-offline-agent-dates-033",
+  "reviewedAt": "2026-10-19T12:11:19.940Z",
+  "result": "source-only-pass",
+  "finalReportSha256": "7f213f09e6f2e397a41ce67e2a81c68c9f4bed5f93f83d60d1cff37a42e5cf59",
+  "report": {
+    "path": "report.json",
+    "sha256": "7f213f09e6f2e397a41ce67e2a81c68c9f4bed5f93f83d60d1cff37a42e5cf59"
+  },
+  "reviewScope": "Offline review of exact21 date records at6 schools. Canonical rows/parents/sources and original-byte pins checked; all relevant PDF pages visually read. No network or canonical/shared-state/Git/deployment writes.",
+  "summary": {
+    "checksPassed": 23,
+    "checksFailed": 0,
+    "recordsReviewed": 21,
+    "universitiesReviewed": 6,
+    "recordOutcomes": {
+      "unknown": 10,
+      "closed": 11
+    },
+    "originalBodiesChecked": 7,
+    "pdfOriginalsChecked": 4,
+    "networkRequests": 0,
+    "canonicalWrites": 0
+  },
+  "checks": [
+    {
+      "name": "exact-frozen-report",
+      "passed": true
+    },
+    {
+      "name": "audit-and-six-canonical-files",
+      "passed": true
+    },
+    {
+      "name": "selection-inventory-queue-summary-pins",
+      "passed": true
+    },
+    {
+      "name": "exact21-ids-once-six-schools",
+      "passed": true
+    },
+    {
+      "name": "no-previously-assessed-records",
+      "passed": true
+    },
+    {
+      "name": "root-extension-exact-three-additions",
+      "passed": true
+    },
+    {
+      "name": "seven-original-body-hashes-lengths-tls-observation-times",
+      "passed": true
+    },
+    {
+      "name": "original-derived-text-and-pdf-extraction-pins",
+      "passed": true
+    },
+    {
+      "name": "manifest-renders-additional-shcm-page9-pins",
+      "passed": true
+    },
+    {
+      "name": "canonical-record-parent-linked-program-source-university-pins",
+      "passed": true
+    },
+    {
+      "name": "closed-dates-explicit-past-iso-unknown-dates-null",
+      "passed": true
+    },
+    {
+      "name": "date-quotes-match-original-text-or-pinned-visual",
+      "passed": true,
+      "detail": "SUEP embedded heading/cover glyphs are absent from pypdf text. Independent full-page visual read confirms exact heading and2026 cover; text separately confirms June30 and2026 section links."
+    },
+    {
+      "name": "shcm-year-applicant-date-and-exact-degree-appendix",
+      "passed": true,
+      "detail": "Visually read complete pages1,2,5,8,9:2026 title; academic doctoral ArtTheory; professional master MusicTherapy. May31 is supplementary HSK/certificate only."
+    },
+    {
+      "name": "sta-four2026-majors-and13-beijing-boundary",
+      "passed": true,
+      "detail": "Complete pages1-2 visually read. Same four foreign bachelor majors and January8 at13:00 Beijing time; not end of day."
+    },
+    {
+      "name": "suep2026-cover-section-year-and-three-degree-rules",
+      "passed": true,
+      "detail": "Visually read original2026 cover and undergraduate3-4/master7-8/doctoral11-12. Each same-section2026 autumn entry link anchors annual June30 to2026. No successor-year inference."
+    },
+    {
+      "name": "four-independent-awards-remain-unknown",
+      "passed": true
+    },
+    {
+      "name": "nwnu2021-not-rolled-forward",
+      "passed": true,
+      "detail": "Original first page visually confirms2021 major catalogue. No2026 applicant period assigned."
+    },
+    {
+      "name": "sufe-chinese-listing-does-not-bind-english-route-date",
+      "passed": true
+    },
+    {
+      "name": "shupl-month-only-csc-and-standing-award-kept-unknown",
+      "passed": true,
+      "detail": "Complete HTML bodies read: month-only CSC remark is no exact general/SGS day; annual award rule lacks explicit target year."
+    },
+    {
+      "name": "source-only-flags-unknown-openings-unassessed",
+      "passed": true
+    },
+    {
+      "name": "thirty-prior-frozen-reports-match-pins",
+      "passed": true
+    },
+    {
+      "name": "outcome-counts-eleven-closed-ten-unknown",
+      "passed": true
+    },
+    {
+      "name": "frozen-report-still-unchanged",
+      "passed": true
+    }
+  ],
+  "sourceOriginalPins": [
+    {
+      "path": "nwnu-guide.pdf",
+      "sha256": "9d3ab787bb4d610e1c3ad00b2803445ae52a8ea849b09ba07063b417c69455de"
+    },
+    {
+      "path": "shcm-guide.pdf",
+      "sha256": "adefe1491a89c9567fdacb23b3f587f85c462a154ce65c9a5c77e77e838e23b5"
+    },
+    {
+      "path": "sta-guide.pdf",
+      "sha256": "f00ac0070452f8ea139d8670bb47b60f390d0ce8f1d1c9b84caeed580a369f3c"
+    },
+    {
+      "path": "suep-guide.pdf",
+      "sha256": "e30b295be932882cfce1eb5fa2034938f5ef6d53743c5b7f6f3d4398da5850cd"
+    },
+    {
+      "path": "sufe-guide.html",
+      "sha256": "12861ddc07f6aeb17a4108b8d392c717ac428bc1ad8c1ccd1742ea381fb7cb7b"
+    },
+    {
+      "path": "shupl-guide.html",
+      "sha256": "c369cca864ccdda2b6d061ff6af5aaee360496aecf54bc9bf69604bd4d14eb0c"
+    },
+    {
+      "path": "shupl-belt-road.html",
+      "sha256": "323051ee10cd0f909f541b2eb629df85a1f3f02c96ac64554cc19e048ed35e11"
+    }
+  ],
+  "artifactPins": [
+    {
+      "path": "selection.json",
+      "sha256": "5dc5091d0139f0b0cd8456fbf629783167cb4f11dcbc38755eb4106055b760c5"
+    },
+    {
+      "path": "captures.json",
+      "sha256": "ab22a902abf20fb7dc90a58a78c9134083f8455d2589ec2457d681e67957114a"
+    },
+    {
+      "path": "pdf-extractions.json",
+      "sha256": "7a50cd4ed6f0918a86a7376b8cac6964e038ad13390992c25df92a4cecaaa9a7"
+    },
+    {
+      "path": "pdf-render-manifest.json",
+      "sha256": "144bd529e0609ca8c0fce6763ff001c6ad3be1c859b88c683f7d16b9e7807309"
+    },
+    {
+      "path": "pdf-visual-transcript.json",
+      "sha256": "9e294303246067d3057d6c84fe5d19ca77aafcb74bf07e8a7b79d19f713c21de"
+    },
+    {
+      "path": "acquisition-diagnostics.json",
+      "sha256": "3286f4a3c7f3c88abcb9dddbc067d2d532fccb989b0768d5785260197188d42b"
+    }
+  ],
+  "recordSetSha256": "b9ea66e38f7527aa2a25b2393df5f4e9852bb74eaaeaec7caae637381e98bf2e",
+  "limitations": [
+    "Acceptance is source-only. Null-to-date observations remain candidates; no canonical date/status/publication/freshness changes are approved.",
+    "Unknown awards and unbound years do not prove open or closed. NWNU2021 and SUFE language mismatch retain unknown; SHUPL May wording is not invented as May31.",
+    "SUEP June30 binds only the explicit2026 original and degree-section links; awards stay independent and no2027 rollover is made.",
+    "SHCM May31 is supplementary HSK/certificate timing. STA January8 remains13:00 Beijing time.",
+    "SUEP embedded heading and cover glyphs are missing from extracted text; pinned complete-page visual originals supply those exact words and year. Initial literal full-heading text assertion was corrected to use visible original evidence before any review receipt was written.",
+    "Default Python PDF errors happened after byte capture; bundled offline parsing recovered interpretation without repeated network calls.",
+    "No complete-school catalogue, fees, language requirements, materials, funding amount or permanent cessation is certified."
+  ],
+  "finalReportUnchanged": true
+}

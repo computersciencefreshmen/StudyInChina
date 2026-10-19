@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-19T12:08:24.573Z",
+  "reviewer": "independent-agent-dates031-offline-review-of032",
+  "result": "source-only-pass",
+  "scope": "Offline independent review of frozen032 evidence and unchanged C-root canonical bindings; no source acquisition, canonical mutation or publication approval.",
+  "report": {
+    "path": "quality/deadline-sweep-20261019/official-batch-032/report.json",
+    "sha256": "7ca2417531ff19ae0b9c7b348bf40be89d9029a48b7930172d876488b663b982",
+    "batchId": "official-date-only-032-20261019"
+  },
+  "summary": {
+    "checksPassed": 18,
+    "checksFailed": 0,
+    "recordsReviewed": 20,
+    "schoolsReviewed": 6,
+    "recordResults": {
+      "closed": 6,
+      "unknown": 12,
+      "blocked": 2
+    },
+    "canonicalRowPinsChecked": 20,
+    "linkedProgrammePinsChecked": 24,
+    "officialSourcePinsChecked": 33,
+    "originOriginalsVerified": 7,
+    "originalBodyBackedPastDateCandidates": 3,
+    "webObservationOnlyPastDateCandidates": 3,
+    "networkRequests": 0,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "deploymentActions": 0
+  },
+  "recordSetSha256": "414705a7333c3f5eaa4a6998e96c406d7632e56e6c94610c106e2262d77f4613",
+  "recordBindingsSha256": "5995485186b0bff739d2f62ac4697d8dfa2fa566cb2d6064dfcd6368383d3ee5",
+  "selection": {
+    "path": "selection.json",
+    "sha256": "ddb7ee2d0a716ea1056a84da573aede65f0dc791612b217a406ee79dd668e807"
+  },
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "checks": [
+    {
+      "name": "frozen-report-identity",
+      "result": "pass",
+      "detail": "Final author-supplied SHA256, batch031 reviewer isolation and 2026-10-19 audit identity matched."
+    },
+    {
+      "name": "all-six-canonical-inputs",
+      "result": "pass",
+      "detail": "Six C-root canonical JSON byte hashes match the frozen snapshot before review."
+    },
+    {
+      "name": "selection-and-queue",
+      "result": "pass",
+      "detail": "Frozen selection hash, v8 queue and summary exclusions establish 16 queued and 4 explicit same-source additions."
+    },
+    {
+      "name": "exact-record-counts",
+      "result": "pass",
+      "detail": "Twenty IDs occur once, across six schools, with 12 admission cycles and 8 scholarships; closed6 unknown12 blocked2."
+    },
+    {
+      "name": "exact-rows-parents-and-sources",
+      "result": "pass",
+      "detail": "All complete row hashes, stored fields, parent level/year/intake, linked programmes, university attribution and official source URL/hash pins match C-root records."
+    },
+    {
+      "name": "same-source-extension-receipt",
+      "result": "pass",
+      "detail": "The four extra IDs and row hashes match the root selection receipt at SHA78d33a7b... exactly."
+    },
+    {
+      "name": "original-bytes-text-and-times",
+      "result": "pass",
+      "detail": "Seven native originals retain original byte length/SHA, source URLs and observedAt; all saved text SHA pins match. The PDF extraction is offline."
+    },
+    {
+      "name": "prior-frozen-report-chain",
+      "result": "pass",
+      "detail": "All30 prior-report pins resolve to unchanged canonical report bytes; this review does not mutate source reports."
+    },
+    {
+      "name": "past-day-and-opening-rules",
+      "result": "pass",
+      "detail": "Closed rows use valid explicit past ISO days; every unknown/blocked deadline stays null and unknown canonical openings are unassessed."
+    },
+    {
+      "name": "sxu-foundation-scope",
+      "result": "pass",
+      "detail": "Saved PDF page1 visually confirms the2026 foundation window toJune15; undergraduate2027-stage A/B awards retain unknown independent dates."
+    },
+    {
+      "name": "syphu-standing-seasonal-scope",
+      "result": "pass",
+      "detail": "July15 andJan15 have no application year and stored intake is other; all three degree records correctly retain unknown."
+    },
+    {
+      "name": "sztu-successor-separated",
+      "result": "pass",
+      "detail": "The saved2027 brochure and Nov1,2026-May1,2027 process window remain a held successor observation; stale July2026 wording is disclosed and no stored cycle or award is renewed."
+    },
+    {
+      "name": "sicau-explicit-concurrent-route",
+      "result": "pass",
+      "detail": "The saved2026 undergraduate original names Chinese Language and Literature and explicitly requires the scholarship form within the stated Dec1-May31 route; only university award is bound."
+    },
+    {
+      "name": "scfai-retained-web-observation-limit",
+      "result": "pass",
+      "detail": "Three restricted master/concurrent-award past-window observations are expressly web-excerpt-only, without invented origin body hashes; doctoral and painting cycles remain blocked."
+    },
+    {
+      "name": "scu-homepage-does-not-prove-award-date",
+      "result": "pass",
+      "detail": "The international-office homepage supplies no named independent award period; both broad awards retain unknown and no directory expansion is claimed."
+    },
+    {
+      "name": "zero-mutation-and-no-cessation",
+      "result": "pass",
+      "detail": "Every selected row is candidate/date-only with no freshness renewal, status/date change, whole-school certification or programme-cessation assertion."
+    },
+    {
+      "name": "bounded-acquisition-and-sandbox-diagnosis",
+      "result": "pass",
+      "detail": "Ten selected native GETs plus one fallback per three SCFAI TLS failures are documented; local socket denials are not counted as site failures; review performs zero network requests."
+    },
+    {
+      "name": "final-preservation",
+      "result": "pass",
+      "detail": "Report, selection, inventory and all six canonical inputs still match the pre-review pins after independent checks."
+    }
+  ],
+  "originalPins": [
+    {
+      "rawPath": "sxu-foundation.pdf",
+      "rawSha256": "c1784b48833700055264dcb71c4a204199b6059b94b31f9da2dc43b5703a5262"
+    },
+    {
+      "rawPath": "syphu-degree.html",
+      "rawSha256": "f817c017523b4d37d4b585c6623f71256b3e72d648cb64488b6d52aeec4b5019",
+      "textPath": "syphu-degree.txt",
+      "textSha256": "dcb4219ae2abb09b53feffa64b771b5abab02f9be1ef8857a90d65e57d1d93c8"
+    },
+    {
+      "rawPath": "syphu-requirements.html",
+      "rawSha256": "49f5af62792c9fcb2a73d4340b4aa1acbda4a3aca3feaca2f683b4be15d573cc",
+      "textPath": "syphu-requirements.txt",
+      "textSha256": "1669d85344b6ec6d2c69ee735aa66b0d717781c1d37f74654e54a70798eda859"
+    },
+    {
+      "rawPath": "sztu-admission.html",
+      "rawSha256": "14079a38134f33f74553e8a15cbbcf691d7e7a4a775ff695cd620af969cb0bfb",
+      "textPath": "sztu-admission.txt",
+      "textSha256": "d92149b3048acf30db3f9eba31a650aa7aa4fce8ceb16cdaa97b2c7b929ca6c4"
+    },
+    {
+      "rawPath": "sztu-procedure.html",
+      "rawSha256": "8735768b1128b7a4058a0fd6f386a7516641109909ff5b35814093221af1c27b",
+      "textPath": "sztu-procedure.txt",
+      "textSha256": "6c2306e7fc5cb8733ae2521d2cb6547689bd719b825cbdb219b8c7f5058f73e2"
+    },
+    {
+      "rawPath": "sicau-undergraduate.html",
+      "rawSha256": "dfb2c22c0cdd64ffecbb999c9458284d8726f1f727a297c2753c8188f2402529",
+      "textPath": "sicau-undergraduate.txt",
+      "textSha256": "f813ea8f262085b3c552cb25139ab4b5fbc3591dedafd876f0fef71e39caa7d2"
+    },
+    {
+      "rawPath": "scu-international.html",
+      "rawSha256": "5a5c6a8cc6ccfba6100ad768ae9dee095f5b061e52089087b5c1ad93662e2d66",
+      "textPath": "scu-international.txt",
+      "textSha256": "de9a40331b7dc98ef18ea17e53ec0fe7b6861f5f2a8dd7b351fe2780ee427342"
+    }
+  ],
+  "additionalEvidencePins": [
+    {
+      "path": "pdf-extraction.json",
+      "sha256": "9932d1f6df3eb8465fe49ce3b63e2c6c58eebeec28ec7f9459359b8c38de5835"
+    },
+    {
+      "path": "scfai-web-fallback-observations.json",
+      "sha256": "bd97fe3122647e378146bba3e5a601562932fd1cdc96c5ab593db25f8b9fb686"
+    },
+    {
+      "path": "sztu-successor-date-observation.json",
+      "sha256": "2b70e132a379815aaeace768e6b87730a12a7a205703379a5936de8c5969a04c"
+    }
+  ],
+  "limitations": [
+    "This passes only the immutable source-observation report. It does not authorize canonical date/status/freshness changes, apply past dates or certify availability.",
+    "Three SCFAI observations are retained official-web text excerpts without original server bytes. The saved fallback-observation SHA is not an origin-body SHA; no independent offline-original certification is asserted.",
+    "SCFAI May31 is restricted to matching2026 academic-master applicants and explicitly concurrent Mayor/President award forms. It does not close broad awards across all undergraduate/doctoral routes. Doctoral and painting rows remain blocked in cooldown.",
+    "SZTU2027 Nov1-May1 is a separate successor observation with inconsistent July2026 process text. No2026 row rollover, successor record creation or currently-open assertion follows.",
+    "Standing seasonal dates, homepage listings and foundation-stage timing do not supply independent award dates. Unknown and blocked are not open/closed conclusions."
+  ],
+  "manualSourceReview": [
+    "SXU complete saved PDF page1 image inspected for2026 foundation identity, exact application window and separate undergraduate scholarship stage.",
+    "All six saved HTML originals and extracted text checked for the stated applicant, year and independent-award scope; SCFAI retained excerpts read with their original-byte limitation."
+  ],
+  "finalReportSha256": "7ca2417531ff19ae0b9c7b348bf40be89d9029a48b7930172d876488b663b982"
+}

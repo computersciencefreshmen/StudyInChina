@@ -1,0 +1,1899 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-031-20261019",
+  "state": "completed-eleven-scoped-past-window-candidates-ten-unknown",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T12:06:10.841Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v8.json",
+  "targetQueueSha256": "cd24ea5c2c2df6b38b04ff7b85ea85ab298134f8e1caa333938016e720860d2d",
+  "selectionSha256": "5dc5091d0139f0b0cd8456fbf629783167cb4f11dcbc38755eb4106055b760c5",
+  "selectedUniversityIds": [
+    "uni-northwest-normal-university",
+    "uni-shanghai-conservatory-of-music",
+    "uni-shanghai-theatre-academy",
+    "uni-shanghai-university-of-electric-power",
+    "uni-shanghai-university-of-finance-and-economics",
+    "uni-shanghai-university-of-political-science-and-law"
+  ],
+  "selection": {
+    "baseQueueRecords": 18,
+    "additionalSameSourceRecords": 3,
+    "totalRecords": 21,
+    "baseQueueRecordIds": [
+      "cycle-gap-mew-scws-nwnu-chinese-philology-master-2026-2027-other-fee-reference",
+      "cycle-gap-mew-scws-nwnu-international-chinese-education-doctorate-2026-2027-other-fee-reference",
+      "cycle-gap-mew-scws-nwnu-international-chinese-education-master-2026-2027-other-fee-reference",
+      "cycle-gap-mve-ecma-shcm-art-theory-doctorate-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-ecma-shcm-music-therapy-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-root-sta-acting-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-root-sta-dance-chinese-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-root-sta-digital-media-art-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-root-sta-directing-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-jzh-suep-control-science-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-jzh-suep-electrical-engineering-doctorate-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-jzh-suep-english-translation-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-jzh-suep-power-engineering-master-2026-2027-autumn-fee-reference",
+      "cycle-0b402cd2eff5",
+      "cycle-gap-mve-ecma-shupl-iclte-bachelor-2026-2027-other-fee-reference",
+      "cycle-gap-mve-ecma-shupl-international-politics-bachelor-2026-2027-other-fee-reference",
+      "sch-gap-mve-ecma-shupl-shanghai-government-scholarship-2026",
+      "sch-gap-wave8-2-shupl-belt-road-scholarship"
+    ],
+    "additionalSameSourceRecordIds": [
+      "cycle-gap-wave8-2-suep-electrical-engineering-automation-bachelor-2026-2027-autumn-fee-reference",
+      "sch-gap-mve-jzh-suep-shanghai-government-2026",
+      "sch-gap-wave8-2-suep-university-scholarship-2026"
+    ],
+    "extensionReceipt": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1200/additional-same-source-selection-v1.json",
+      "sha256": "78d33a7b306a9e6ff28285eff969e52d192600dca341e548ed4c4613b00eaa4c"
+    }
+  },
+  "acquisition": {
+    "registeredDistinctUrlsAttempted": 7,
+    "nativeOriginRequests": 7,
+    "webFallbackRequests": 0,
+    "rawBodiesSaved": 7,
+    "captureManifestPins": [
+      {
+        "path": "captures.json",
+        "sha256": "ab22a902abf20fb7dc90a58a78c9134083f8455d2589ec2457d681e67957114a"
+      },
+      {
+        "path": "pdf-extractions.json",
+        "sha256": "7a50cd4ed6f0918a86a7376b8cac6964e038ad13390992c25df92a4cecaaa9a7"
+      },
+      {
+        "path": "pdf-render-manifest.json",
+        "sha256": "144bd529e0609ca8c0fce6763ff001c6ad3be1c859b88c683f7d16b9e7807309"
+      }
+    ],
+    "diagnostics": {
+      "path": "acquisition-diagnostics.json",
+      "sha256": "3286f4a3c7f3c88abcb9dddbc067d2d532fccb989b0768d5785260197188d42b"
+    },
+    "visualTranscript": {
+      "path": "pdf-visual-transcript.json",
+      "sha256": "9e294303246067d3057d6c84fe5d19ca77aafcb74bf07e8a7b79d19f713c21de"
+    },
+    "sourceBodyRead": "All seven complete official originals read. Four PDFs extracted offline and relevant pages visually inspected. No repeated origin GETs were needed.",
+    "paidModelCalls": 0,
+    "tlsCertificateValidation": true
+  },
+  "summary": {
+    "schoolsAttempted": 6,
+    "recordsAssessed": 21,
+    "baseQueueRecords": 18,
+    "additionalSameSourceRecords": 3,
+    "admissionCyclesAssessed": 17,
+    "scholarshipsAssessed": 4,
+    "recordResults": {
+      "unknown": 10,
+      "closed": 11
+    },
+    "newExactPastDeadlineCandidatesFromStoredNull": 11,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "rules": [
+    "Candidate-only date observations; no canonical dates/status/publication/freshness changed.",
+    "Unknown dates do not prove open or closed. No programme cessation or complete school catalogue is certified.",
+    "Past dates bind only matched year, degree, programme and application route.",
+    "Independent awards do not borrow degree applicant cutoffs, CSCA stages or registration months.",
+    "NWNU2021 is historical context. SHUPL standing annual award wording has no exact target-year binding. SUFE Chinese listing cannot prove an English route day.",
+    "SUEP uses the current original’s explicit2026 cover and per-degree2026 autumn link; its recurring June30 rule is not rolled to2027.",
+    "Any later mutation requires a supported narrow consumer, independent approval and current-row compare-and-swap."
+  ],
+  "precisionIssues": [
+    {
+      "universityId": "uni-shanghai-theatre-academy",
+      "recordIds": [
+        "cycle-gap-mve-root-sta-acting-bachelor-2026-2027-autumn-fee-reference",
+        "cycle-gap-mve-root-sta-dance-chinese-bachelor-2026-2027-autumn-fee-reference",
+        "cycle-gap-mve-root-sta-digital-media-art-bachelor-2026-2027-autumn-fee-reference",
+        "cycle-gap-mve-root-sta-directing-bachelor-2026-2027-autumn-fee-reference"
+      ],
+      "type": "intraday-cutoff",
+      "officialDeadline": "2026-01-08",
+      "officialCutoffAt": "2026-01-08T13:00:00+08:00",
+      "quotedDate": "2.报名时间：2026年1月1日9:00至2026年1月8日13:00（北京时间）",
+      "explanation": "Beijing13:00 preserved; calendar-only summaries cannot extend the application window to end of day."
+    },
+    {
+      "universityId": "uni-shanghai-conservatory-of-music",
+      "type": "supplementary-item-versus-applicant-period",
+      "applicantDeadline": "2026-01-23",
+      "supplementaryHskDeadline": "2026-05-31",
+      "explanation": "May31 concerns HSK/certificate submission only; it is not the initial applicant cutoff."
+    },
+    {
+      "universityId": "uni-shanghai-university-of-electric-power",
+      "type": "year-anchored-standing-rule",
+      "officialDeadline": "2026-06-30",
+      "quotedDate": "每年6月30日",
+      "explanation": "The saved original is expressly2026 on cover and degree-section entry links. No successor-year extrapolation is made."
+    }
+  ],
+  "groups": [
+    {
+      "key": "nwnu-2021-catalogue-no-current-date",
+      "universityId": "uni-northwest-normal-university",
+      "evidence": [
+        {
+          "name": "nwnu-guide",
+          "url": "https://foreign.nwnu.edu.cn/_upload/article/files/66/4f/c8d47d9442ac899699e18a345813/7bddafdb-6a71-476e-adb7-8d12200bfb0c.pdf",
+          "observedAt": "2026-10-19T12:02:44.315856+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://foreign.nwnu.edu.cn/_upload/article/files/66/4f/c8d47d9442ac899699e18a345813/7bddafdb-6a71-476e-adb7-8d12200bfb0c.pdf",
+          "contentType": "application/pdf",
+          "bytes": 290830,
+          "rawPath": "nwnu-guide.pdf",
+          "rawSha256": "9d3ab787bb4d610e1c3ad00b2803445ae52a8ea849b09ba07063b417c69455de",
+          "captureSucceeded": false,
+          "error": "No module named 'pypdf'",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "offlineTextExtraction": {
+            "name": "nwnu-guide",
+            "extractedAt": "2026-10-19T12:03:28.415628+00:00",
+            "method": "offline-pypdf-bundled-runtime",
+            "rawPath": "nwnu-guide.pdf",
+            "rawSha256": "9d3ab787bb4d610e1c3ad00b2803445ae52a8ea849b09ba07063b417c69455de",
+            "textPath": "nwnu-guide.txt",
+            "textSha256": "855a4e6b4e5d707235ac72fcbc638c391f2928a9750b315fb8e1bd6022d31a5e",
+            "pageCount": 11,
+            "networkRequests": 0,
+            "extractSucceeded": true,
+            "characters": 12312
+          },
+          "sourceBodyAcquired": true,
+          "sourceBodyRead": true,
+          "initialCaptureSucceededFalseReason": "System Python lacked pypdf; complete original bytes were saved. Bundled offline extraction succeeded with zero repeat network calls.",
+          "evidenceRole": "original-date-and-route-identity-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "historicalTitle": "西北师范大学2021年留学生招生专业目录",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-scws-nwnu-chinese-philology-master-2026-2027-other-fee-reference",
+          "universityId": "uni-northwest-normal-university",
+          "canonicalUniversitySha256": "cdab8785eddb9185a710bd9fa0dcbb5005a4a06e3d726dc25f0fc037748cb09e",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mew-scws-nwnu-chinese-philology-master",
+          "name": "Chinese Philology",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "7192df6161d3ac2124696ec380fe991d1fd08ce24e587441b35797457555fe67",
+          "canonicalCycleSha256": "7192df6161d3ac2124696ec380fe991d1fd08ce24e587441b35797457555fe67",
+          "canonicalProgramSha256": "5c6005589067c01a12b2ff4c20a96fd7566c5bbe1a45859552420eb50f273e28",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-scws-nwnu-chinese-philology-master",
+              "canonicalProgramSha256": "5c6005589067c01a12b2ff4c20a96fd7566c5bbe1a45859552420eb50f273e28"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-scws-nwnu-chinese-philology-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-scws-nwnu-chinese-philology-master",
+              "canonicalSourceSha256": "50fd1e181dd88b29f27db240880155a409acfeee896e2072c3c38636b7abb5f0",
+              "url": "https://foreign.nwnu.edu.cn/_upload/article/files/66/4f/c8d47d9442ac899699e18a345813/7bddafdb-6a71-476e-adb7-8d12200bfb0c.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-original-is-2021-major-catalogue-with-no-2026-applicant-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://foreign.nwnu.edu.cn/_upload/article/files/66/4f/c8d47d9442ac899699e18a345813/7bddafdb-6a71-476e-adb7-8d12200bfb0c.pdf",
+          "evidenceBodySha256": "9d3ab787bb4d610e1c3ad00b2803445ae52a8ea849b09ba07063b417c69455de",
+          "observedAt": "2026-10-19T12:02:44.315856+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "historicalSourceYear": 2021,
+          "targetYearBindingEstablished": false,
+          "noYearRollover": true,
+          "noProgrammeDiscontinuationInferred": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-scws-nwnu-international-chinese-education-doctorate-2026-2027-other-fee-reference",
+          "universityId": "uni-northwest-normal-university",
+          "canonicalUniversitySha256": "cdab8785eddb9185a710bd9fa0dcbb5005a4a06e3d726dc25f0fc037748cb09e",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mew-scws-nwnu-international-chinese-education-doctorate",
+          "name": "International Chinese Language Education",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "doctorate",
+          "canonicalRecordSha256": "6d3f180dde87e148bcc00c133bf71f6a8580223d64e8911e3d5304e5c86617ee",
+          "canonicalCycleSha256": "6d3f180dde87e148bcc00c133bf71f6a8580223d64e8911e3d5304e5c86617ee",
+          "canonicalProgramSha256": "5b064f3a6773f2b4225344e20399c2692f7c657c18a8f75acb81b822ba829c4f",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-scws-nwnu-international-chinese-education-doctorate",
+              "canonicalProgramSha256": "5b064f3a6773f2b4225344e20399c2692f7c657c18a8f75acb81b822ba829c4f"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-scws-nwnu-international-chinese-education-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-scws-nwnu-international-chinese-education-doctorate",
+              "canonicalSourceSha256": "552a11171c8d3c74e626038929f557eb192c2664503b532910b15979b76bbb00",
+              "url": "https://foreign.nwnu.edu.cn/_upload/article/files/66/4f/c8d47d9442ac899699e18a345813/7bddafdb-6a71-476e-adb7-8d12200bfb0c.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-original-is-2021-major-catalogue-with-no-2026-applicant-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://foreign.nwnu.edu.cn/_upload/article/files/66/4f/c8d47d9442ac899699e18a345813/7bddafdb-6a71-476e-adb7-8d12200bfb0c.pdf",
+          "evidenceBodySha256": "9d3ab787bb4d610e1c3ad00b2803445ae52a8ea849b09ba07063b417c69455de",
+          "observedAt": "2026-10-19T12:02:44.315856+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "historicalSourceYear": 2021,
+          "targetYearBindingEstablished": false,
+          "noYearRollover": true,
+          "noProgrammeDiscontinuationInferred": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-scws-nwnu-international-chinese-education-master-2026-2027-other-fee-reference",
+          "universityId": "uni-northwest-normal-university",
+          "canonicalUniversitySha256": "cdab8785eddb9185a710bd9fa0dcbb5005a4a06e3d726dc25f0fc037748cb09e",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mew-scws-nwnu-international-chinese-education-master",
+          "name": "International Chinese Language Education",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "7f41ab0e7de1ac0559ea6ea2ab8181ace4a54c37a346f83b3a9012061fff0a9a",
+          "canonicalCycleSha256": "7f41ab0e7de1ac0559ea6ea2ab8181ace4a54c37a346f83b3a9012061fff0a9a",
+          "canonicalProgramSha256": "c40e89c7addc132d9ca955e286af04a94ab0c2218a5ace7e93d8ea8db548ae0e",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-scws-nwnu-international-chinese-education-master",
+              "canonicalProgramSha256": "c40e89c7addc132d9ca955e286af04a94ab0c2218a5ace7e93d8ea8db548ae0e"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-scws-nwnu-international-chinese-education-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-scws-nwnu-international-chinese-education-master",
+              "canonicalSourceSha256": "85e7c88a49a8041c55ed568acf306297bffb1ae3bd132cf1407b6e3e49f0dd12",
+              "url": "https://foreign.nwnu.edu.cn/_upload/article/files/66/4f/c8d47d9442ac899699e18a345813/7bddafdb-6a71-476e-adb7-8d12200bfb0c.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-original-is-2021-major-catalogue-with-no-2026-applicant-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://foreign.nwnu.edu.cn/_upload/article/files/66/4f/c8d47d9442ac899699e18a345813/7bddafdb-6a71-476e-adb7-8d12200bfb0c.pdf",
+          "evidenceBodySha256": "9d3ab787bb4d610e1c3ad00b2803445ae52a8ea849b09ba07063b417c69455de",
+          "observedAt": "2026-10-19T12:02:44.315856+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "historicalSourceYear": 2021,
+          "targetYearBindingEstablished": false,
+          "noYearRollover": true,
+          "noProgrammeDiscontinuationInferred": true
+        }
+      ]
+    },
+    {
+      "key": "shcm-2026-master-and-doctoral-applicant-period",
+      "universityId": "uni-shanghai-conservatory-of-music",
+      "evidence": [
+        {
+          "name": "shcm-guide",
+          "url": "https://yjsb.shcmusic.edu.cn/_upload/article/files/1b/ec/b0ca02bc4d6fba1d5f980afbec4c/d27c9cc3-4989-4a24-8a99-9c9edf60fa4d.pdf",
+          "observedAt": "2026-10-19T12:02:44.317856+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://yjsb.shcmusic.edu.cn/_upload/article/files/1b/ec/b0ca02bc4d6fba1d5f980afbec4c/d27c9cc3-4989-4a24-8a99-9c9edf60fa4d.pdf",
+          "contentType": "application/pdf",
+          "bytes": 284892,
+          "rawPath": "shcm-guide.pdf",
+          "rawSha256": "adefe1491a89c9567fdacb23b3f587f85c462a154ce65c9a5c77e77e838e23b5",
+          "captureSucceeded": false,
+          "error": "No module named 'pypdf'",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "offlineTextExtraction": {
+            "name": "shcm-guide",
+            "extractedAt": "2026-10-19T12:03:28.714880+00:00",
+            "method": "offline-pypdf-bundled-runtime",
+            "rawPath": "shcm-guide.pdf",
+            "rawSha256": "adefe1491a89c9567fdacb23b3f587f85c462a154ce65c9a5c77e77e838e23b5",
+            "textPath": "shcm-guide.txt",
+            "textSha256": "79db13b3e2a0f7d042aa3174b964b608e7e8ca06420fdd8246bea2df9d444924",
+            "pageCount": 11,
+            "networkRequests": 0,
+            "extractSucceeded": true,
+            "characters": 15171
+          },
+          "sourceBodyAcquired": true,
+          "sourceBodyRead": true,
+          "initialCaptureSucceededFalseReason": "System Python lacked pypdf; complete original bytes were saved. Bundled offline extraction succeeded with zero repeat network calls.",
+          "evidenceRole": "original-date-and-route-identity-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "2026 international master and doctoral admission brochure",
+      "quotedDate": "between January 4 and January 23, 2026",
+      "excludedSupplementaryCertificateDeadline": "This item should be submitted no later than May 31, 2026.",
+      "visualTranscript": {
+        "path": "pdf-visual-transcript.json",
+        "sha256": "9e294303246067d3057d6c84fe5d19ca77aafcb74bf07e8a7b79d19f713c21de"
+      },
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecma-shcm-art-theory-doctorate-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shanghai-conservatory-of-music",
+          "canonicalUniversitySha256": "e3bc51df035d8e60d8b315992c9df2222aa12115d4a5badb76261271b1222971",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mve-ecma-shcm-art-theory-doctorate",
+          "name": "Art Theory",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "doctorate",
+          "canonicalRecordSha256": "22591ca2665e550d9be31b355fbb6058030284a793915859ae69a8639bb84024",
+          "canonicalCycleSha256": "22591ca2665e550d9be31b355fbb6058030284a793915859ae69a8639bb84024",
+          "canonicalProgramSha256": "4c137977a460f342cb5142db1c94d934eec7320b82b4602b54d29fa024f9fd89",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecma-shcm-art-theory-doctorate",
+              "canonicalProgramSha256": "4c137977a460f342cb5142db1c94d934eec7320b82b4602b54d29fa024f9fd89"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-ecma-shcm-art-theory-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecma-shcm-art-theory-doctorate",
+              "canonicalSourceSha256": "2a155a4f2572e24de08a37fae37f9e369f3f041c066fe286ce459eee12313d20",
+              "url": "https://yjsb.shcmusic.edu.cn/_upload/article/files/1b/ec/b0ca02bc4d6fba1d5f980afbec4c/d27c9cc3-4989-4a24-8a99-9c9edf60fa4d.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-01-23",
+          "candidateOfficialDeadline": "2026-01-23",
+          "reason": "same-2026-international-degree-guide-and-exact-appendix-programme-level-match",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-01-04",
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://yjsb.shcmusic.edu.cn/_upload/article/files/1b/ec/b0ca02bc4d6fba1d5f980afbec4c/d27c9cc3-4989-4a24-8a99-9c9edf60fa4d.pdf",
+          "evidenceBodySha256": "adefe1491a89c9567fdacb23b3f587f85c462a154ce65c9a5c77e77e838e23b5",
+          "observedAt": "2026-10-19T12:02:44.317856+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only this explicitly matched 2026 applicant route is past. No permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "between January 4 and January 23, 2026",
+          "exactMajorQuote": "Art Theory",
+          "programmeSection": "Appendix I Academic Doctoral Degree Programs; 1301 Art Theory",
+          "supplementaryCertificateDateExcluded": "2026-05-31",
+          "examMonthNotApplicantCutoff": "mid-March 2026",
+          "fundingRoute": "General international degree admission"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecma-shcm-music-therapy-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shanghai-conservatory-of-music",
+          "canonicalUniversitySha256": "e3bc51df035d8e60d8b315992c9df2222aa12115d4a5badb76261271b1222971",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mve-ecma-shcm-music-therapy-master",
+          "name": "Music Therapy",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "41de6e19af5af0e2b2e6c4324d6ef9bf3dfb0ee074a818d71ecd47c6243fc035",
+          "canonicalCycleSha256": "41de6e19af5af0e2b2e6c4324d6ef9bf3dfb0ee074a818d71ecd47c6243fc035",
+          "canonicalProgramSha256": "a9911a124dd1dc07931a0e5818dfc3784d2cdef4b26b7a7aa17a438338567367",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecma-shcm-music-therapy-master",
+              "canonicalProgramSha256": "a9911a124dd1dc07931a0e5818dfc3784d2cdef4b26b7a7aa17a438338567367"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-ecma-shcm-music-therapy-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecma-shcm-music-therapy-master",
+              "canonicalSourceSha256": "57f9315f680dd8b0bd78da7f1d0f8074787b126c919ee846fe7369c141f9a0e8",
+              "url": "https://yjsb.shcmusic.edu.cn/_upload/article/files/1b/ec/b0ca02bc4d6fba1d5f980afbec4c/d27c9cc3-4989-4a24-8a99-9c9edf60fa4d.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-01-23",
+          "candidateOfficialDeadline": "2026-01-23",
+          "reason": "same-2026-international-degree-guide-and-exact-appendix-programme-level-match",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-01-04",
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://yjsb.shcmusic.edu.cn/_upload/article/files/1b/ec/b0ca02bc4d6fba1d5f980afbec4c/d27c9cc3-4989-4a24-8a99-9c9edf60fa4d.pdf",
+          "evidenceBodySha256": "adefe1491a89c9567fdacb23b3f587f85c462a154ce65c9a5c77e77e838e23b5",
+          "observedAt": "2026-10-19T12:02:44.317856+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only this explicitly matched 2026 applicant route is past. No permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "between January 4 and January 23, 2026",
+          "exactMajorQuote": "Music Therapy",
+          "programmeSection": "Appendix II Professional Master’s Degree Programs; Music Education; Music Therapy",
+          "supplementaryCertificateDateExcluded": "2026-05-31",
+          "examMonthNotApplicantCutoff": "mid-March 2026",
+          "fundingRoute": "General international degree admission"
+        }
+      ]
+    },
+    {
+      "key": "sta-2026-foreign-bachelor-january-registration",
+      "universityId": "uni-shanghai-theatre-academy",
+      "evidence": [
+        {
+          "name": "sta-guide",
+          "url": "https://iso.sta.edu.cn/_upload/article/files/b8/e7/781f2e5a4602b245a6be0e949646/8773afff-c435-482b-8605-26f0a88ea189.pdf",
+          "observedAt": "2026-10-19T12:02:44.318855+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iso.sta.edu.cn/_upload/article/files/b8/e7/781f2e5a4602b245a6be0e949646/8773afff-c435-482b-8605-26f0a88ea189.pdf",
+          "contentType": "application/pdf",
+          "bytes": 425476,
+          "rawPath": "sta-guide.pdf",
+          "rawSha256": "f00ac0070452f8ea139d8670bb47b60f390d0ce8f1d1c9b84caeed580a369f3c",
+          "captureSucceeded": false,
+          "error": "No module named 'pypdf'",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "offlineTextExtraction": {
+            "name": "sta-guide",
+            "extractedAt": "2026-10-19T12:03:28.793853+00:00",
+            "method": "offline-pypdf-bundled-runtime",
+            "rawPath": "sta-guide.pdf",
+            "rawSha256": "f00ac0070452f8ea139d8670bb47b60f390d0ce8f1d1c9b84caeed580a369f3c",
+            "textPath": "sta-guide.txt",
+            "textSha256": "6cdca50f43c74fd91f263eef9cd3cf088dd13679d872aebcc74d1f40fb4d948c",
+            "pageCount": 5,
+            "networkRequests": 0,
+            "extractSucceeded": true,
+            "characters": 3613
+          },
+          "sourceBodyAcquired": true,
+          "sourceBodyRead": true,
+          "initialCaptureSucceededFalseReason": "System Python lacked pypdf; complete original bytes were saved. Bundled offline extraction succeeded with zero repeat network calls.",
+          "evidenceRole": "original-date-and-route-identity-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "上海戏剧学院2026年外国留学生本科招生简章",
+      "quotedDate": "2.报名时间：2026年1月1日9:00至2026年1月8日13:00（北京时间）",
+      "visualTranscript": {
+        "path": "pdf-visual-transcript.json",
+        "sha256": "9e294303246067d3057d6c84fe5d19ca77aafcb74bf07e8a7b79d19f713c21de"
+      },
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-root-sta-acting-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shanghai-theatre-academy",
+          "canonicalUniversitySha256": "704b8b84f6f417e254535f25fc271699b00af5dd2527f43fc430e4828d0869bf",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mve-root-sta-acting-bachelor",
+          "name": "Acting (Theatre and Film)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "6199c8fda603c5a4ee8b064d377d6cbaeeb49f2a8f91bba6f74ec5976aecc396",
+          "canonicalCycleSha256": "6199c8fda603c5a4ee8b064d377d6cbaeeb49f2a8f91bba6f74ec5976aecc396",
+          "canonicalProgramSha256": "ac85eefe022c3016821bd97193815487b6f603639950c3046f924ce921412050",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-root-sta-acting-bachelor",
+              "canonicalProgramSha256": "ac85eefe022c3016821bd97193815487b6f603639950c3046f924ce921412050"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-root-sta-acting-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-root-sta-acting-bachelor",
+              "canonicalSourceSha256": "7e6f6cd5c51c976442c6d6c97f32289b0c923eab2d8880301c96b6a4bd4f6145",
+              "url": "https://iso.sta.edu.cn/_upload/article/files/b8/e7/781f2e5a4602b245a6be0e949646/8773afff-c435-482b-8605-26f0a88ea189.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-01-08",
+          "candidateOfficialDeadline": "2026-01-08",
+          "reason": "same-2026-foreign-bachelor-registered-programmes-and-explicit-app-registration-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-01-01",
+          "openingDateAssessed": false,
+          "officialCutoffAt": "2026-01-08T13:00:00+08:00",
+          "deadlineBoundary": "January 8 at 13:00 Beijing time; do not extend to end of day",
+          "evidenceSourceUrl": "https://iso.sta.edu.cn/_upload/article/files/b8/e7/781f2e5a4602b245a6be0e949646/8773afff-c435-482b-8605-26f0a88ea189.pdf",
+          "evidenceBodySha256": "f00ac0070452f8ea139d8670bb47b60f390d0ce8f1d1c9b84caeed580a369f3c",
+          "observedAt": "2026-10-19T12:02:44.318855+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only this explicitly matched 2026 applicant route is past. No permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "2.报名时间：2026年1月1日9:00至2026年1月8日13:00（北京时间）",
+          "exactMajorQuote": "表演（戏剧影视）",
+          "candidateOfficialOpeningAt": "2026-01-01T09:00:00+08:00",
+          "programmeSection": "Table1; registration period applies to preceding named programmes",
+          "laterExamAndJulyAdmissionNotApplicantCutoff": true,
+          "fundingRoute": "General foreign undergraduate admission"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-root-sta-dance-chinese-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shanghai-theatre-academy",
+          "canonicalUniversitySha256": "704b8b84f6f417e254535f25fc271699b00af5dd2527f43fc430e4828d0869bf",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mve-root-sta-dance-chinese-bachelor",
+          "name": "Dance Performance (Chinese Dance)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "4b63fc14d894ca82ad9f4d8a236c0296a5d10b6b3035bf5d4218fd67fa421e31",
+          "canonicalCycleSha256": "4b63fc14d894ca82ad9f4d8a236c0296a5d10b6b3035bf5d4218fd67fa421e31",
+          "canonicalProgramSha256": "ac809a5e2fe72ad38a880def39cbde28207101896388bac000fe138fd30f9e22",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-root-sta-dance-chinese-bachelor",
+              "canonicalProgramSha256": "ac809a5e2fe72ad38a880def39cbde28207101896388bac000fe138fd30f9e22"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-root-sta-dance-chinese-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-root-sta-dance-chinese-bachelor",
+              "canonicalSourceSha256": "fb9386dbedd37df45193e758867a9a23e6feb851576784fa9cd9ca1b753fbb0d",
+              "url": "https://iso.sta.edu.cn/_upload/article/files/b8/e7/781f2e5a4602b245a6be0e949646/8773afff-c435-482b-8605-26f0a88ea189.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-01-08",
+          "candidateOfficialDeadline": "2026-01-08",
+          "reason": "same-2026-foreign-bachelor-registered-programmes-and-explicit-app-registration-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-01-01",
+          "openingDateAssessed": false,
+          "officialCutoffAt": "2026-01-08T13:00:00+08:00",
+          "deadlineBoundary": "January 8 at 13:00 Beijing time; do not extend to end of day",
+          "evidenceSourceUrl": "https://iso.sta.edu.cn/_upload/article/files/b8/e7/781f2e5a4602b245a6be0e949646/8773afff-c435-482b-8605-26f0a88ea189.pdf",
+          "evidenceBodySha256": "f00ac0070452f8ea139d8670bb47b60f390d0ce8f1d1c9b84caeed580a369f3c",
+          "observedAt": "2026-10-19T12:02:44.318855+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only this explicitly matched 2026 applicant route is past. No permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "2.报名时间：2026年1月1日9:00至2026年1月8日13:00（北京时间）",
+          "exactMajorQuote": "舞蹈表演（中国舞）",
+          "candidateOfficialOpeningAt": "2026-01-01T09:00:00+08:00",
+          "programmeSection": "Table1; registration period applies to preceding named programmes",
+          "laterExamAndJulyAdmissionNotApplicantCutoff": true,
+          "fundingRoute": "General foreign undergraduate admission"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-root-sta-digital-media-art-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shanghai-theatre-academy",
+          "canonicalUniversitySha256": "704b8b84f6f417e254535f25fc271699b00af5dd2527f43fc430e4828d0869bf",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mve-root-sta-digital-media-art-bachelor",
+          "name": "Digital Media Art",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "b9b1f44cc766192eb6339e5533a2ac3111f5e64b12f80e2905624f55d8ad5d9f",
+          "canonicalCycleSha256": "b9b1f44cc766192eb6339e5533a2ac3111f5e64b12f80e2905624f55d8ad5d9f",
+          "canonicalProgramSha256": "dfb69dffbd629f85f0ada128567d19391e6f3e39e0056e4bb08a560454474707",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-root-sta-digital-media-art-bachelor",
+              "canonicalProgramSha256": "dfb69dffbd629f85f0ada128567d19391e6f3e39e0056e4bb08a560454474707"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-root-sta-digital-media-art-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-root-sta-digital-media-art-bachelor",
+              "canonicalSourceSha256": "9116b92e6b9ac11815fabae043afe257e1588cb15bf0d536c5bb856a83e55de8",
+              "url": "https://iso.sta.edu.cn/_upload/article/files/b8/e7/781f2e5a4602b245a6be0e949646/8773afff-c435-482b-8605-26f0a88ea189.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-01-08",
+          "candidateOfficialDeadline": "2026-01-08",
+          "reason": "same-2026-foreign-bachelor-registered-programmes-and-explicit-app-registration-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-01-01",
+          "openingDateAssessed": false,
+          "officialCutoffAt": "2026-01-08T13:00:00+08:00",
+          "deadlineBoundary": "January 8 at 13:00 Beijing time; do not extend to end of day",
+          "evidenceSourceUrl": "https://iso.sta.edu.cn/_upload/article/files/b8/e7/781f2e5a4602b245a6be0e949646/8773afff-c435-482b-8605-26f0a88ea189.pdf",
+          "evidenceBodySha256": "f00ac0070452f8ea139d8670bb47b60f390d0ce8f1d1c9b84caeed580a369f3c",
+          "observedAt": "2026-10-19T12:02:44.318855+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only this explicitly matched 2026 applicant route is past. No permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "2.报名时间：2026年1月1日9:00至2026年1月8日13:00（北京时间）",
+          "exactMajorQuote": "数字媒体艺术",
+          "candidateOfficialOpeningAt": "2026-01-01T09:00:00+08:00",
+          "programmeSection": "Table1; registration period applies to preceding named programmes",
+          "laterExamAndJulyAdmissionNotApplicantCutoff": true,
+          "fundingRoute": "General foreign undergraduate admission"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-root-sta-directing-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shanghai-theatre-academy",
+          "canonicalUniversitySha256": "704b8b84f6f417e254535f25fc271699b00af5dd2527f43fc430e4828d0869bf",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mve-root-sta-directing-bachelor",
+          "name": "Theatre and Film Directing",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "272d7034da8f4a6c6e6e735bb4da7f00ba111037636287b4e8cabaad819c3cf4",
+          "canonicalCycleSha256": "272d7034da8f4a6c6e6e735bb4da7f00ba111037636287b4e8cabaad819c3cf4",
+          "canonicalProgramSha256": "2ebd69ce9dca7bcfdf72be721ce5be57878d7bf2bdee9fd9a27cc78bf6bec97c",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-root-sta-directing-bachelor",
+              "canonicalProgramSha256": "2ebd69ce9dca7bcfdf72be721ce5be57878d7bf2bdee9fd9a27cc78bf6bec97c"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-root-sta-directing-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-root-sta-directing-bachelor",
+              "canonicalSourceSha256": "3e4ecea4483b29a7e1f9f381552a8f635ff489244ef72fc5c071b0eafa0855f0",
+              "url": "https://iso.sta.edu.cn/_upload/article/files/b8/e7/781f2e5a4602b245a6be0e949646/8773afff-c435-482b-8605-26f0a88ea189.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-01-08",
+          "candidateOfficialDeadline": "2026-01-08",
+          "reason": "same-2026-foreign-bachelor-registered-programmes-and-explicit-app-registration-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-01-01",
+          "openingDateAssessed": false,
+          "officialCutoffAt": "2026-01-08T13:00:00+08:00",
+          "deadlineBoundary": "January 8 at 13:00 Beijing time; do not extend to end of day",
+          "evidenceSourceUrl": "https://iso.sta.edu.cn/_upload/article/files/b8/e7/781f2e5a4602b245a6be0e949646/8773afff-c435-482b-8605-26f0a88ea189.pdf",
+          "evidenceBodySha256": "f00ac0070452f8ea139d8670bb47b60f390d0ce8f1d1c9b84caeed580a369f3c",
+          "observedAt": "2026-10-19T12:02:44.318855+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only this explicitly matched 2026 applicant route is past. No permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "2.报名时间：2026年1月1日9:00至2026年1月8日13:00（北京时间）",
+          "exactMajorQuote": "戏剧影视导演",
+          "candidateOfficialOpeningAt": "2026-01-01T09:00:00+08:00",
+          "programmeSection": "Table1; registration period applies to preceding named programmes",
+          "laterExamAndJulyAdmissionNotApplicantCutoff": true,
+          "fundingRoute": "General foreign undergraduate admission"
+        }
+      ]
+    },
+    {
+      "key": "suep-explicit-2026-cover-and-three-degree-sections",
+      "universityId": "uni-shanghai-university-of-electric-power",
+      "evidence": [
+        {
+          "name": "suep-guide",
+          "url": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf",
+          "observedAt": "2026-10-19T12:02:44.319854+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf",
+          "contentType": "application/pdf",
+          "bytes": 1266747,
+          "rawPath": "suep-guide.pdf",
+          "rawSha256": "e30b295be932882cfce1eb5fa2034938f5ef6d53743c5b7f6f3d4398da5850cd",
+          "captureSucceeded": false,
+          "error": "No module named 'pypdf'",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "offlineTextExtraction": {
+            "name": "suep-guide",
+            "extractedAt": "2026-10-19T12:03:29.005417+00:00",
+            "method": "offline-pypdf-bundled-runtime",
+            "rawPath": "suep-guide.pdf",
+            "rawSha256": "e30b295be932882cfce1eb5fa2034938f5ef6d53743c5b7f6f3d4398da5850cd",
+            "textPath": "suep-guide.txt",
+            "textSha256": "9929bcada91091120b69503e3fee9614b3777a421dcc3b883b36d7dc13161b0c",
+            "pageCount": 19,
+            "networkRequests": 0,
+            "extractSucceeded": true,
+            "characters": 6456
+          },
+          "sourceBodyAcquired": true,
+          "sourceBodyRead": true,
+          "initialCaptureSucceededFalseReason": "System Python lacked pypdf; complete original bytes were saved. Bundled offline extraction succeeded with zero repeat network calls.",
+          "evidenceRole": "original-date-and-route-identity-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "上海电力大学2026年国际学生招生简章合集",
+      "yearAnchor": "2026年上海电力大学国际学生秋季入学在线申请报名(学历生-汉语授课)",
+      "quotedDate": "六、报名截止日期：每年6月30日",
+      "extractedDateFragment": "每年6月30日",
+      "visualTranscript": {
+        "path": "pdf-visual-transcript.json",
+        "sha256": "9e294303246067d3057d6c84fe5d19ca77aafcb74bf07e8a7b79d19f713c21de"
+      },
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-jzh-suep-control-science-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shanghai-university-of-electric-power",
+          "canonicalUniversitySha256": "dbbb5177e4b834a1478c3bc64b35dfb6ba2bda4133b15597b669045109f5c102",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mve-jzh-suep-control-science-master",
+          "name": "Control Science and Engineering",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "3a3289703a1b66a77819e55497a79ad02504183b7d8669a894504de71f696a26",
+          "canonicalCycleSha256": "3a3289703a1b66a77819e55497a79ad02504183b7d8669a894504de71f696a26",
+          "canonicalProgramSha256": "1d8611f78bdbf5a5a9a2bdee003fb18fa7e131861c649fe0338577a69aecd839",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-suep-control-science-master",
+              "canonicalProgramSha256": "1d8611f78bdbf5a5a9a2bdee003fb18fa7e131861c649fe0338577a69aecd839"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-jzh-suep-control-science-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-jzh-suep-control-science-master",
+              "canonicalSourceSha256": "9db90db57c4d22578c11fbafd3a7d6fa96d7d7f1de9d3c7d2c266bd520c7c4c4",
+              "url": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "reason": "explicit-2026-guide-cover-and-section-specific-2026-autumn-link-anchor-annual-june30-applicant-rule",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf",
+          "evidenceBodySha256": "e30b295be932882cfce1eb5fa2034938f5ef6d53743c5b7f6f3d4398da5850cd",
+          "observedAt": "2026-10-19T12:02:44.319854+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only this explicitly matched 2026 applicant route is past. No permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "六、报名截止日期：每年6月30日",
+          "extractedDateFragment": "每年6月30日",
+          "yearAnchor": "2026年上海电力大学国际学生秋季入学在线申请报名(学历生-汉语授课)",
+          "exactMajorQuote": "控制科学与工程",
+          "programmeSection": "硕士研究生招生简章; original pages7-8",
+          "yearRolloverPerformed": false,
+          "yearRuleApplication": "The current original itself states 2026 on the cover and in this degree-section application link; no inference to 2027 or another successor is made.",
+          "fundingRoute": "General Chinese-taught international degree admission; separate awards excluded"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-jzh-suep-electrical-engineering-doctorate-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shanghai-university-of-electric-power",
+          "canonicalUniversitySha256": "dbbb5177e4b834a1478c3bc64b35dfb6ba2bda4133b15597b669045109f5c102",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mve-jzh-suep-electrical-engineering-doctorate",
+          "name": "Electrical Engineering",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "doctorate",
+          "canonicalRecordSha256": "a07bb6f0b474e6453610371a16b11c86943399f5d45d1d542b8afbc9fba82ce3",
+          "canonicalCycleSha256": "a07bb6f0b474e6453610371a16b11c86943399f5d45d1d542b8afbc9fba82ce3",
+          "canonicalProgramSha256": "fe3072edf762437d056935f01eea1bb097d44752d85b48c5195da8dbad88f6f3",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-suep-electrical-engineering-doctorate",
+              "canonicalProgramSha256": "fe3072edf762437d056935f01eea1bb097d44752d85b48c5195da8dbad88f6f3"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-jzh-suep-electrical-engineering-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-jzh-suep-electrical-engineering-doctorate",
+              "canonicalSourceSha256": "e430e0e26e3a228349b0fc8331ec5bcbd0de9dc68b382e85faf1d69ec9ad83e3",
+              "url": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "reason": "explicit-2026-guide-cover-and-section-specific-2026-autumn-link-anchor-annual-june30-applicant-rule",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf",
+          "evidenceBodySha256": "e30b295be932882cfce1eb5fa2034938f5ef6d53743c5b7f6f3d4398da5850cd",
+          "observedAt": "2026-10-19T12:02:44.319854+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only this explicitly matched 2026 applicant route is past. No permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "六、报名截止日期：每年6月30日",
+          "extractedDateFragment": "每年6月30日",
+          "yearAnchor": "2026年上海电力大学国际学生秋季入学在线申请报名(学历生-汉语授课)",
+          "exactMajorQuote": "电气工程",
+          "programmeSection": "博士研究生招生简章; original pages11-12",
+          "yearRolloverPerformed": false,
+          "yearRuleApplication": "The current original itself states 2026 on the cover and in this degree-section application link; no inference to 2027 or another successor is made.",
+          "fundingRoute": "General Chinese-taught international degree admission; separate awards excluded"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-jzh-suep-english-translation-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shanghai-university-of-electric-power",
+          "canonicalUniversitySha256": "dbbb5177e4b834a1478c3bc64b35dfb6ba2bda4133b15597b669045109f5c102",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mve-jzh-suep-english-translation-master",
+          "name": "English Translation",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "aec112138ca1939c66018d19b63a41bb7620c0189471294d22c8750d5f1199a3",
+          "canonicalCycleSha256": "aec112138ca1939c66018d19b63a41bb7620c0189471294d22c8750d5f1199a3",
+          "canonicalProgramSha256": "e0916888c572a64804cb866e9d4b0d2568c03c92e04f961e8e1135a3874277ad",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-suep-english-translation-master",
+              "canonicalProgramSha256": "e0916888c572a64804cb866e9d4b0d2568c03c92e04f961e8e1135a3874277ad"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-jzh-suep-english-translation-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-jzh-suep-english-translation-master",
+              "canonicalSourceSha256": "e1517a6bf39278125f4586131438206d5da22eb26e267a5924c9b208ac65405c",
+              "url": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "reason": "explicit-2026-guide-cover-and-section-specific-2026-autumn-link-anchor-annual-june30-applicant-rule",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf",
+          "evidenceBodySha256": "e30b295be932882cfce1eb5fa2034938f5ef6d53743c5b7f6f3d4398da5850cd",
+          "observedAt": "2026-10-19T12:02:44.319854+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only this explicitly matched 2026 applicant route is past. No permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "六、报名截止日期：每年6月30日",
+          "extractedDateFragment": "每年6月30日",
+          "yearAnchor": "2026年上海电力大学国际学生秋季入学在线申请报名(学历生-汉语授课)",
+          "exactMajorQuote": "英语笔译",
+          "programmeSection": "硕士研究生招生简章; original pages7-8",
+          "yearRolloverPerformed": false,
+          "yearRuleApplication": "The current original itself states 2026 on the cover and in this degree-section application link; no inference to 2027 or another successor is made.",
+          "fundingRoute": "General Chinese-taught international degree admission; separate awards excluded"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-jzh-suep-power-engineering-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shanghai-university-of-electric-power",
+          "canonicalUniversitySha256": "dbbb5177e4b834a1478c3bc64b35dfb6ba2bda4133b15597b669045109f5c102",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mve-jzh-suep-power-engineering-master",
+          "name": "Power Engineering and Engineering Thermophysics",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "8723eb9a13bc555262ebfa058332d2a6311ca27fca77f691dcdba6c95a8f7ce5",
+          "canonicalCycleSha256": "8723eb9a13bc555262ebfa058332d2a6311ca27fca77f691dcdba6c95a8f7ce5",
+          "canonicalProgramSha256": "107533bc5c0a0be709a109ef5ccf164d50350dded0b32eb2f56e4df69ffae22a",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-suep-power-engineering-master",
+              "canonicalProgramSha256": "107533bc5c0a0be709a109ef5ccf164d50350dded0b32eb2f56e4df69ffae22a"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-jzh-suep-power-engineering-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-jzh-suep-power-engineering-master",
+              "canonicalSourceSha256": "6a2a71bc1f054b841f0038cbc599503ded5426a770c14a8b4c5156e6dc9982ec",
+              "url": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "reason": "explicit-2026-guide-cover-and-section-specific-2026-autumn-link-anchor-annual-june30-applicant-rule",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf",
+          "evidenceBodySha256": "e30b295be932882cfce1eb5fa2034938f5ef6d53743c5b7f6f3d4398da5850cd",
+          "observedAt": "2026-10-19T12:02:44.319854+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only this explicitly matched 2026 applicant route is past. No permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "六、报名截止日期：每年6月30日",
+          "extractedDateFragment": "每年6月30日",
+          "yearAnchor": "2026年上海电力大学国际学生秋季入学在线申请报名(学历生-汉语授课)",
+          "exactMajorQuote": "动力工程及工程热物理",
+          "programmeSection": "硕士研究生招生简章; original pages7-8",
+          "yearRolloverPerformed": false,
+          "yearRuleApplication": "The current original itself states 2026 on the cover and in this degree-section application link; no inference to 2027 or another successor is made.",
+          "fundingRoute": "General Chinese-taught international degree admission; separate awards excluded"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-2-suep-electrical-engineering-automation-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shanghai-university-of-electric-power",
+          "canonicalUniversitySha256": "dbbb5177e4b834a1478c3bc64b35dfb6ba2bda4133b15597b669045109f5c102",
+          "selectionOrigin": "explicit-same-source-extension",
+          "programId": "prog-gap-wave8-2-suep-electrical-engineering-automation-bachelor",
+          "name": "Electrical Engineering and Automation (Bachelor's Program)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "878bf978f06faef0eea181fd94290618109e650cf81c39c2a14d7f420a4ab039",
+          "canonicalCycleSha256": "878bf978f06faef0eea181fd94290618109e650cf81c39c2a14d7f420a4ab039",
+          "canonicalProgramSha256": "69226a918ea8b2ac9a4fc2cf699843e87159b557b2cce0ab260339ae64fb88ff",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-suep-electrical-engineering-automation-bachelor",
+              "canonicalProgramSha256": "69226a918ea8b2ac9a4fc2cf699843e87159b557b2cce0ab260339ae64fb88ff"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave8-2-suep-electrical-engineering-automation-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-2-suep-electrical-engineering-automation-bachelor",
+              "canonicalSourceSha256": "a10d12d1e8b0076741a3f50b499e0d34e0153b8b7703e3372ed45de65068b887",
+              "url": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "reason": "explicit-2026-guide-cover-and-section-specific-2026-autumn-link-anchor-annual-june30-applicant-rule",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf",
+          "evidenceBodySha256": "e30b295be932882cfce1eb5fa2034938f5ef6d53743c5b7f6f3d4398da5850cd",
+          "observedAt": "2026-10-19T12:02:44.319854+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only this explicitly matched 2026 applicant route is past. No permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "六、报名截止日期：每年6月30日",
+          "extractedDateFragment": "每年6月30日",
+          "yearAnchor": "2026年上海电力大学国际学生秋季入学在线申请报名(学历生-汉语授课)",
+          "exactMajorQuote": "电气工程及其自动化",
+          "programmeSection": "本科生招生简章; original pages3-4",
+          "yearRolloverPerformed": false,
+          "yearRuleApplication": "The current original itself states 2026 on the cover and in this degree-section application link; no inference to 2027 or another successor is made.",
+          "fundingRoute": "General Chinese-taught international degree admission; separate awards excluded"
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-jzh-suep-shanghai-government-2026",
+          "universityId": "uni-shanghai-university-of-electric-power",
+          "canonicalUniversitySha256": "dbbb5177e4b834a1478c3bc64b35dfb6ba2bda4133b15597b669045109f5c102",
+          "selectionOrigin": "explicit-same-source-extension",
+          "programId": null,
+          "name": "Shanghai Government Scholarship at SUEP 2026",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "50ea7635381e72e48b1724b251b676fc1ac4962121e11e8c6689816a789b7b34",
+          "canonicalScholarshipSha256": "50ea7635381e72e48b1724b251b676fc1ac4962121e11e8c6689816a789b7b34",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-suep-power-engineering-master",
+              "canonicalProgramSha256": "107533bc5c0a0be709a109ef5ccf164d50350dded0b32eb2f56e4df69ffae22a"
+            },
+            {
+              "programId": "prog-gap-mve-jzh-suep-control-science-master",
+              "canonicalProgramSha256": "1d8611f78bdbf5a5a9a2bdee003fb18fa7e131861c649fe0338577a69aecd839"
+            },
+            {
+              "programId": "prog-gap-mve-jzh-suep-english-translation-master",
+              "canonicalProgramSha256": "e0916888c572a64804cb866e9d4b0d2568c03c92e04f961e8e1135a3874277ad"
+            },
+            {
+              "programId": "prog-gap-mve-jzh-suep-electrical-engineering-doctorate",
+              "canonicalProgramSha256": "fe3072edf762437d056935f01eea1bb097d44752d85b48c5195da8dbad88f6f3"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mve-jzh-suep-shanghai-government-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-jzh-suep-shanghai-government-2026",
+              "canonicalSourceSha256": "d8da9dc33bb77841ad734db8835f064f6c3d19258e1a0e649a7de9c6141947da",
+              "url": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "award-listing-does-not-announce-independent-award-applicant-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf",
+          "evidenceBodySha256": "e30b295be932882cfce1eb5fa2034938f5ef6d53743c5b7f6f3d4398da5850cd",
+          "observedAt": "2026-10-19T12:02:44.319854+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "awardListingQuote": "我校为上海市政府奖学金(SGS)院校",
+          "generalAdmissionDeadlineNotBorrowed": "2026-06-30",
+          "septemberRegistrationNotAwardCutoff": true,
+          "awardDeadlineNotBorrowed": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-2-suep-university-scholarship-2026",
+          "universityId": "uni-shanghai-university-of-electric-power",
+          "canonicalUniversitySha256": "dbbb5177e4b834a1478c3bc64b35dfb6ba2bda4133b15597b669045109f5c102",
+          "selectionOrigin": "explicit-same-source-extension",
+          "programId": null,
+          "name": "SUEP University Scholarship 2026",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "364ff873d76afab866cac376224eeab60c7d04d65cd89cd0974d1c07e53a71fd",
+          "canonicalScholarshipSha256": "364ff873d76afab866cac376224eeab60c7d04d65cd89cd0974d1c07e53a71fd",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-suep-international-economy-trade-bachelor",
+              "canonicalProgramSha256": "cf276ae70616bc11567edeb778edb337a5119589d2f42105fea0250cb5136189"
+            },
+            {
+              "programId": "prog-gap-wave8-2-suep-electrical-engineering-automation-bachelor",
+              "canonicalProgramSha256": "69226a918ea8b2ac9a4fc2cf699843e87159b557b2cce0ab260339ae64fb88ff"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-2-suep-university-scholarship-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-2-suep-university-scholarship-2026",
+              "canonicalSourceSha256": "79fe74b698f5a371eecf41a48e832fc321449ca15a82e68f68da4cffe80515b5",
+              "url": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "award-listing-does-not-announce-independent-award-applicant-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://fao.shiep.edu.cn/_upload/article/files/5a/08/9d8d7e404f879c420bed0297b055/261babb3-636a-4aa3-a43c-13ed593abddc.pdf",
+          "evidenceBodySha256": "e30b295be932882cfce1eb5fa2034938f5ef6d53743c5b7f6f3d4398da5850cd",
+          "observedAt": "2026-10-19T12:02:44.319854+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "awardListingQuote": "我校提供上海电力大学校级奖学金",
+          "generalAdmissionDeadlineNotBorrowed": "2026-06-30",
+          "septemberRegistrationNotAwardCutoff": true,
+          "awardDeadlineNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "sufe-2026-chinese-directory-no-english-route-date",
+      "universityId": "uni-shanghai-university-of-finance-and-economics",
+      "evidence": [
+        {
+          "name": "sufe-guide",
+          "url": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm",
+          "observedAt": "2026-10-19T12:02:48.091205+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm",
+          "contentType": "text/html",
+          "bytes": 29758,
+          "rawPath": "sufe-guide.html",
+          "rawSha256": "12861ddc07f6aeb17a4108b8d392c717ac428bc1ad8c1ccd1742ea381fb7cb7b",
+          "textPath": "sufe-guide.txt",
+          "textSha256": "1d726893bedac82ed7e7cb795cc442be399d0c8812227040fb98e912ed9bfcb5",
+          "captureSucceeded": true,
+          "sourceBodyRead": true,
+          "evidenceRole": "original-date-and-route-identity-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "Bachelor Programs (2026 Entry)",
+      "languageQuote": "Language of Instruction: Chinese",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-0b402cd2eff5",
+          "universityId": "uni-shanghai-university-of-finance-and-economics",
+          "canonicalUniversitySha256": "de3980048219f949421536b3ac9a1d2b0a1e5e7a437d6d0243d66391e14d53e1",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "program-shanghai-university-of-finance-and-economics-international-economics-and",
+          "name": "International Economics and Trade",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "91ffd9063052b08fc8ec80f090e9875110e6c8d791457dbf0be811b56873ccd6",
+          "canonicalCycleSha256": "91ffd9063052b08fc8ec80f090e9875110e6c8d791457dbf0be811b56873ccd6",
+          "canonicalProgramSha256": "58a4e9472fac5ffccbd822a75f78c374b3058546d2435ee88d3c3f97eb2941a8",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-shanghai-university-of-finance-and-economics-international-economics-and",
+              "canonicalProgramSha256": "58a4e9472fac5ffccbd822a75f78c374b3058546d2435ee88d3c3f97eb2941a8"
+            }
+          ],
+          "sourceIds": [
+            "src-program-review-6350471def26"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-program-review-6350471def26",
+              "canonicalSourceSha256": "89b53e33e805c0f6997dedcf65f99ab4722b960d195f55d190df3081fa79f913",
+              "url": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-page-is-chinese-taught-2026-bachelor-listing-with-no-exact-application-period-and-does-not-bind-stored-english-route",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://intlstu.sufe.edu.cn/2e/f4/c12486a208628/page.htm",
+          "evidenceBodySha256": "12861ddc07f6aeb17a4108b8d392c717ac428bc1ad8c1ccd1742ea381fb7cb7b",
+          "observedAt": "2026-10-19T12:02:48.091205+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "listedMajorQuote": "International Economics and Trade",
+          "storedRoute": "International Economics and Trade English-taught",
+          "targetProgrammeLanguageBindingEstablished": false,
+          "directoryIsNotDeadlineProof": true,
+          "noProgrammeDiscontinuationInferred": true
+        }
+      ]
+    },
+    {
+      "key": "shupl-2026-admission-no-day-and-independent-recurring-award",
+      "universityId": "uni-shanghai-university-of-political-science-and-law",
+      "evidence": [
+        {
+          "name": "shupl-guide",
+          "url": "https://iso.shupl.edu.cn/2025/1029/c3326a143594/page.htm",
+          "observedAt": "2026-10-19T12:02:49.094721+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iso.shupl.edu.cn/2025/1029/c3326a143594/page.htm",
+          "contentType": "text/html",
+          "bytes": 125691,
+          "rawPath": "shupl-guide.html",
+          "rawSha256": "c369cca864ccdda2b6d061ff6af5aaee360496aecf54bc9bf69604bd4d14eb0c",
+          "textPath": "shupl-guide.txt",
+          "textSha256": "0b5e67305b5d6d58dd73c9628c2e4aad91e2f7922b64f329c37e147acaf7b16b",
+          "captureSucceeded": true,
+          "sourceBodyRead": true,
+          "evidenceRole": "original-date-and-route-identity-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "shupl-belt-road",
+          "url": "https://iso.shupl.edu.cn/english/2017/0420/c3363a145473/page.htm",
+          "observedAt": "2026-10-19T12:02:50.321074+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iso.shupl.edu.cn/english/2017/0420/c3363a145473/page.htm",
+          "contentType": "text/html",
+          "bytes": 25898,
+          "rawPath": "shupl-belt-road.html",
+          "rawSha256": "323051ee10cd0f909f541b2eb629df85a1f3f02c96ac64554cc19e048ed35e11",
+          "textPath": "shupl-belt-road.txt",
+          "textSha256": "703aab9583d6cee53b978f20228eb70f94f27ec9df7340351e38c210138a3e38",
+          "captureSucceeded": true,
+          "sourceBodyRead": true,
+          "evidenceRole": "original-date-and-route-identity-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "上海政法学院2026年国际学生招生简章(内附操作说明)",
+      "cscOnlyMonthPrecisionExcluded": "中国政府奖学金申请者最晚参加4月份批次的CSCA测试，最晚5月份提交申请",
+      "standingBeltRoadRule": "II. Application Period: November of each year to May 30 of the following year",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecma-shupl-iclte-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-shanghai-university-of-political-science-and-law",
+          "canonicalUniversitySha256": "5ef7442aa7b42c3380fb3f0fc8bcc881b044893295d7ad1b4dbdd26e1f45c5eb",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mve-ecma-shupl-iclte-bachelor",
+          "name": "International Chinese Language Education",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "23d52fcf989cb6a4e202f9c272106981ed57a87db6c9a39cd397f81a203b2a4d",
+          "canonicalCycleSha256": "23d52fcf989cb6a4e202f9c272106981ed57a87db6c9a39cd397f81a203b2a4d",
+          "canonicalProgramSha256": "c261b2173ebdac79f1b854f61ff2a1979321cf4f3bf73f60fc0223a162f0ad42",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecma-shupl-iclte-bachelor",
+              "canonicalProgramSha256": "c261b2173ebdac79f1b854f61ff2a1979321cf4f3bf73f60fc0223a162f0ad42"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-ecma-shupl-iclte-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecma-shupl-iclte-bachelor",
+              "canonicalSourceSha256": "8d20986237b7dc0f1186d7cf0e3436820e7528602b0b1fdfe83eb7a39b18a19a",
+              "url": "https://iso.shupl.edu.cn/2025/1029/c3326a143594/page.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "2026-guide-does-not-publish-exact-general-route-or-independent-award-day",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iso.shupl.edu.cn/2025/1029/c3326a143594/page.htm",
+          "evidenceBodySha256": "c369cca864ccdda2b6d061ff6af5aaee360496aecf54bc9bf69604bd4d14eb0c",
+          "observedAt": "2026-10-19T12:02:49.094721+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "cscOnlyMonthPrecisionExcluded": "中国政府奖学金申请者最晚参加4月份批次的CSCA测试，最晚5月份提交申请",
+          "cscMonthNotBorrowedForIndependentAwardOrGeneralAdmission": true,
+          "awardDeadlineNotBorrowed": false,
+          "mayMonthNotInventedAsMay31": true,
+          "noProgrammeDiscontinuationInferred": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecma-shupl-international-politics-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-shanghai-university-of-political-science-and-law",
+          "canonicalUniversitySha256": "5ef7442aa7b42c3380fb3f0fc8bcc881b044893295d7ad1b4dbdd26e1f45c5eb",
+          "selectionOrigin": "base-queue-v8",
+          "programId": "prog-gap-mve-ecma-shupl-international-politics-bachelor",
+          "name": "International Politics",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "684f27f05bd8fddf22cb983eca4f8bb17c0dadbbbe30bb7b60e1ebda918d8654",
+          "canonicalCycleSha256": "684f27f05bd8fddf22cb983eca4f8bb17c0dadbbbe30bb7b60e1ebda918d8654",
+          "canonicalProgramSha256": "d0295bcb03bb0a7d36133c45e56d0e555c95b27110c36b11b8c424da17bdbb85",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecma-shupl-international-politics-bachelor",
+              "canonicalProgramSha256": "d0295bcb03bb0a7d36133c45e56d0e555c95b27110c36b11b8c424da17bdbb85"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-ecma-shupl-international-politics-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecma-shupl-international-politics-bachelor",
+              "canonicalSourceSha256": "fbc462b1e3584ec6be38329f2f4740f3b7fecc88b5e3069b16a6cbc82bdba9f3",
+              "url": "https://iso.shupl.edu.cn/2025/1029/c3326a143594/page.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "2026-guide-does-not-publish-exact-general-route-or-independent-award-day",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iso.shupl.edu.cn/2025/1029/c3326a143594/page.htm",
+          "evidenceBodySha256": "c369cca864ccdda2b6d061ff6af5aaee360496aecf54bc9bf69604bd4d14eb0c",
+          "observedAt": "2026-10-19T12:02:49.094721+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "cscOnlyMonthPrecisionExcluded": "中国政府奖学金申请者最晚参加4月份批次的CSCA测试，最晚5月份提交申请",
+          "cscMonthNotBorrowedForIndependentAwardOrGeneralAdmission": true,
+          "awardDeadlineNotBorrowed": false,
+          "mayMonthNotInventedAsMay31": true,
+          "noProgrammeDiscontinuationInferred": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecma-shupl-shanghai-government-scholarship-2026",
+          "universityId": "uni-shanghai-university-of-political-science-and-law",
+          "canonicalUniversitySha256": "5ef7442aa7b42c3380fb3f0fc8bcc881b044893295d7ad1b4dbdd26e1f45c5eb",
+          "selectionOrigin": "base-queue-v8",
+          "programId": null,
+          "name": "Shanghai Government Scholarship at SHUPL",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "09fb9077c73c6016fe4028b634fe16104b56675cb397d0d289fe0378e6925dc8",
+          "canonicalScholarshipSha256": "09fb9077c73c6016fe4028b634fe16104b56675cb397d0d289fe0378e6925dc8",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecma-shupl-international-politics-bachelor",
+              "canonicalProgramSha256": "d0295bcb03bb0a7d36133c45e56d0e555c95b27110c36b11b8c424da17bdbb85"
+            },
+            {
+              "programId": "prog-gap-mve-ecma-shupl-iclte-bachelor",
+              "canonicalProgramSha256": "c261b2173ebdac79f1b854f61ff2a1979321cf4f3bf73f60fc0223a162f0ad42"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mve-ecma-shupl-shanghai-government-scholarship-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecma-shupl-shanghai-government-scholarship-2026",
+              "canonicalSourceSha256": "0fd0608875bfccb8a01c8a322321ff10b37b87aac383bc6c1f9728e814258bf9",
+              "url": "https://iso.shupl.edu.cn/2025/1029/c3326a143594/page.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "2026-guide-does-not-publish-exact-general-route-or-independent-award-day",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iso.shupl.edu.cn/2025/1029/c3326a143594/page.htm",
+          "evidenceBodySha256": "c369cca864ccdda2b6d061ff6af5aaee360496aecf54bc9bf69604bd4d14eb0c",
+          "observedAt": "2026-10-19T12:02:49.094721+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "cscOnlyMonthPrecisionExcluded": "中国政府奖学金申请者最晚参加4月份批次的CSCA测试，最晚5月份提交申请",
+          "cscMonthNotBorrowedForIndependentAwardOrGeneralAdmission": true,
+          "awardDeadlineNotBorrowed": true,
+          "mayMonthNotInventedAsMay31": true,
+          "noProgrammeDiscontinuationInferred": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-2-shupl-belt-road-scholarship",
+          "universityId": "uni-shanghai-university-of-political-science-and-law",
+          "canonicalUniversitySha256": "5ef7442aa7b42c3380fb3f0fc8bcc881b044893295d7ad1b4dbdd26e1f45c5eb",
+          "selectionOrigin": "base-queue-v8",
+          "programId": null,
+          "name": "SHUPL Belt and Road Scholarship",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "198f326c46be6d0266716bacf3b9c80902a75b0ebd9f9c555e7b7b4866c8e6c4",
+          "canonicalScholarshipSha256": "198f326c46be6d0266716bacf3b9c80902a75b0ebd9f9c555e7b7b4866c8e6c4",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-shupl-international-law-bachelor",
+              "canonicalProgramSha256": "de25915b95125379edc85b8d054b6271fdf52d83d78b3cdb0c04f43e66d4a62b"
+            },
+            {
+              "programId": "prog-gap-wave8-2-shupl-ecommerce-law-bachelor",
+              "canonicalProgramSha256": "04d03445fe583852f664581ec1b211fdad09ea1c1389f440ca7495a54c2b16e3"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-2-shupl-belt-road-scholarship",
+            "src-gap-scholarship-wave8-2-shupl-belt-road-scholarship-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-2-shupl-belt-road-scholarship",
+              "canonicalSourceSha256": "23a0ec02c08b0a8809e9207e4d3dad2dd73624b668d36de92f1b50ac51ba5569",
+              "url": "https://iso.shupl.edu.cn/english/2017/0420/c3363a145473/page.htm"
+            },
+            {
+              "sourceId": "src-gap-scholarship-wave8-2-shupl-belt-road-scholarship-support-1",
+              "canonicalSourceSha256": "c4455afc9be1aae6efa6db8e06967486b9283ce205a7fb7cdbf3ac57c7dc36c4",
+              "url": "https://iso.shupl.edu.cn/2025/1029/c3326a143594/page.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-annual-award-rule-does-not-explicitly-bind-this-record-to-2026-or-2027",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iso.shupl.edu.cn/english/2017/0420/c3363a145473/page.htm",
+          "evidenceBodySha256": "323051ee10cd0f909f541b2eb629df85a1f3f02c96ac64554cc19e048ed35e11",
+          "observedAt": "2026-10-19T12:02:50.321074+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "standingAnnualDateQuote": "II. Application Period: November of each year to May 30 of the following year",
+          "annualRuleOnly": true,
+          "exactTargetYearAnnounced": false,
+          "noYearRollover": true,
+          "awardDeadlineNotBorrowed": true,
+          "mayMonthNotInventedAsMay31": true,
+          "noProgrammeDiscontinuationInferred": true
+        }
+      ]
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "reportSha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "batch": "official-batch-025",
+      "reportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f"
+    },
+    {
+      "batch": "official-batch-026",
+      "reportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9"
+    },
+    {
+      "batch": "official-batch-027",
+      "reportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+    },
+    {
+      "batch": "official-batch-028",
+      "reportSha256": "c1ee48a947ab94feac0f853531921d888b4ce30b24781afe7cb9e422e29f9276"
+    },
+    {
+      "batch": "official-batch-029",
+      "reportSha256": "6fa308e70e7e0ad0a0436ed5103eb067928fc9494ba1e977fdaba85cdd3d2243"
+    },
+    {
+      "batch": "official-batch-030",
+      "reportSha256": "95ae6d26c4de9030e7debe25a19d12f12d23235c3633a3b75aca538996958668"
+    }
+  ],
+  "validation": {
+    "exactTwentyOneIdsCoveredOnce": true,
+    "noAssessedOrPriorApprovedOverlap": true,
+    "allSixCanonicalInputsUnchanged": true,
+    "canonicalRecordParentLinkedProgrammeSourceAndUniversityPinsSaved": true,
+    "quotedTextFragmentsMatchSavedOriginalText": true,
+    "relevantPdfPagesVisuallyReadAndPinned": true,
+    "unknownOpeningNotAssessed": true,
+    "closedDatesAreExplicitPastIsoDays": true,
+    "extensionsMatchRootSelectionReceipt": true
+  }
+}

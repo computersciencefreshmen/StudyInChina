@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-19T12:05:10Z",
+  "retrievalTimePrecision": "Public web results were received earlier in this same session on 2026-10-19 UTC; the tool did not provide an exact retrieval timestamp. recordedAt is the receipt recording time, not an origin response timestamp.",
+  "method": "single-web-open-fallback-per-native-TLS-timeout",
+  "originBodiesSaved": false,
+  "observationsAreNotOriginalBodyHashes": true,
+  "retryPolicy": "cooldown-no-further-retries",
+  "pages": [
+    {"name":"swu-admissions","url":"https://admissions.swu.edu.cn/","result":"failed-timeout","fullSourceRead":false,"returnedObservation":"Failed to fetch https://admissions.swu.edu.cn/: (400) Timeout fetching"},
+    {"name":"swu-education","url":"https://admissions.swu.edu.cn/Degree_Programs/Undergraduate/Education.htm","result":"full-page-text-observation-no-date","fullSourceRead":true,"returnedLines":50,"bodyScope":"Undergraduate-Education table and navigation; no application date or 2027 year binding.","quotation":"1  | Education  | 4 years  | Chinese  | ¥18,000","sourceLocator":"web.open returned lines 26-31","dateClaimSupported":false},
+    {"name":"swu-engineering","url":"https://admissions.swu.edu.cn/Degree_Programs/Postgraduate/Engineering.htm","result":"full-page-text-observation-no-date","fullSourceRead":true,"returnedLines":64,"bodyScope":"Postgraduate-Engineering table and navigation; no application date or 2027 year binding. Listed Environmental Science and Engineering is not silently relabelled Environmental Science.","quotation":"15  | Environmental Science and   Engineering  | 3 years  | Chinese& English  | ¥24000/¥28000","sourceLocator":"web.open returned lines 26-46","dateClaimSupported":false}
+  ]
+}

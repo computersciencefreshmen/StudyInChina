@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-033-20261019",
+  "reviewedAt": "2026-10-19T12:09:59.534Z",
+  "reviewer": "/root/dates_032",
+  "mode": "independent-offline-source-only",
+  "result": "source-only-pass",
+  "finalReportSha256": "9087e4d1d7242809498d7f0a9c1b740419da39f52ee863e4d4849bd1aef44698",
+  "reportPath": "quality/deadline-sweep-20261019/official-batch-033/report.json",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "selectionSha256": "054c6bef535f35d21e9df7bcdc4f2bacbe668978abbd63fe8ddde3308e01672a",
+  "reviewedRecordIds": [
+    "cycle-gap-mew-csw-scau-plant-protection-professional-master-2026-2027-autumn-fee-reference",
+    "sch-gap-mew-csw-scau-guangdong-government-scholarship-2026",
+    "cycle-gap-chinese-degree-scnu-chinese-language-bachelor-2026-2027-autumn-fee-reference",
+    "sch-gap-chinese-scholarship-scnu-iclt-degree-programs-2026",
+    "cycle-gap-chinese-degree-scnu-international-chinese-education-doctorate-2026-2027-autumn-fee-reference",
+    "cycle-gap-chinese-degree-scnu-international-chinese-education-master-2026-2027-autumn-fee-reference",
+    "cycle-807baacccf2f",
+    "cycle-8509838c238f",
+    "cycle-2027-southern-university-of-science-and-technology-chinese-language-program-language",
+    "cycle-gap-wave4-swpu-b-computer-science-and-technology-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave4-swpu-b-mechanical-engineering-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave4-swpu-m-petroleum-and-natural-gas-engineering-2026-2027-autumn-fee-reference",
+    "sch-gap-wave4-sch-swpu-chengdu-belt-and-road",
+    "sch-gap-wave4-sch-swpu-sichuan-government",
+    "cycle-2027-southwest-university-chinese-language-program-language",
+    "cycle-2027-southwest-university-education-bachelor",
+    "cycle-2027-southwest-university-environmental-science-master",
+    "cycle-gap-clw-sw-sysu-chinese-literature-bachelor-2026-2027-autumn-fee-reference"
+  ],
+  "originalPins": [
+    {
+      "path": "scau-guide.html",
+      "sha256": "c674b0313799ad3cf51e4c20f853accd18031e08f3ef062da3ca65842a43a411"
+    },
+    {
+      "path": "scau-english.html",
+      "sha256": "d5cc3c042bbdf929c1ccb691222ced80eae29d29060ba361384dffeedd4aae39"
+    },
+    {
+      "path": "scau-admissions.html",
+      "sha256": "90b00e7f410f66c3f8eac8e36e3d5fb0360ab1c2141858aaf35f64fd69d6fe06"
+    },
+    {
+      "path": "scnu-bachelor.html",
+      "sha256": "232cd05536d29650639caba7c9736603d83a05e105fd77945ea5147a8ab2f707"
+    },
+    {
+      "path": "scnu-master.html",
+      "sha256": "eca1357c1d9ed57173fa7bea84e877ac3d3f43a3e63d987448475409c0e9298a"
+    },
+    {
+      "path": "scnu-doctorate.html",
+      "sha256": "9b15e0758442a9ffab5eaa459e218c740f95dd7cf7b0e323ffee9bcc2917106c"
+    },
+    {
+      "path": "scnu-award.html",
+      "sha256": "dcd8b100bb5f0b2f3b7909678e5cbd385cb6a11c4443d673114e7f55bbcd48ac"
+    },
+    {
+      "path": "scut-intensive.html",
+      "sha256": "8fd9e933efbddf38c2c20e7215705e73ef92e5226fe846d616bb812564676ff6"
+    },
+    {
+      "path": "seu-architecture.html",
+      "sha256": "eb2349afb71192755303a52ec2928f69b07711ab37a8fbb84ac15b31bfa62dde"
+    },
+    {
+      "path": "sustech-global.html",
+      "sha256": "405e142225cfe6793efe372b2de28920db3ff83577683087afc0e973182d0beb"
+    },
+    {
+      "path": "swpu-guide.html",
+      "sha256": "cb9b290408a2a2f7653a58967b1c2f0216b3b0c922d9ac905b4ae0f50962b860"
+    },
+    {
+      "path": "sysu-guide-pdf.pdf",
+      "sha256": "f65fb02364a43950bd2144cd13b630308e3f9c6fc56b748dfb91fe3b729b0dd3"
+    },
+    {
+      "path": "sysu-guide.html",
+      "sha256": "e34c17821f3c6c4d19668199e0b3081b7f68cb836c6792a0bb234147f1c3b1a9"
+    }
+  ],
+  "captureManifestSha256": "31a7cdfd6a899502e4f680e91685b968e1d1af2c634bb3f66e5a774374de491c",
+  "summary": {
+    "checksPassed": 17,
+    "checksFailed": 0,
+    "recordsChecked": 18,
+    "recordResults": {
+      "closed": 8,
+      "unknown": 9,
+      "blocked": 1
+    },
+    "originalBodiesChecked": 13,
+    "sourcePinsChecked": 26,
+    "linkedProgrammePinsChecked": 18,
+    "localReferencePinsChecked": 11,
+    "quoteFragmentsChecked": 30,
+    "canonicalWrites": 0,
+    "sourceReportWrites": 0,
+    "networkRequests": 0
+  },
+  "checks": [
+    {
+      "id": "frozen-report",
+      "passed": true,
+      "detail": "Final report matches the author supplied freeze hash."
+    },
+    {
+      "id": "six-inputs-and-snapshot",
+      "passed": true,
+      "detail": "All six C canonical input bytes and snapshot fingerprint match."
+    },
+    {
+      "id": "selection-and-current-queue",
+      "passed": true,
+      "detail": "Queue v8 school indexes 12 through 19 and 15 base IDs remain exact."
+    },
+    {
+      "id": "exact-eighteen-and-exclusions",
+      "passed": true,
+      "detail": "Each selected ID appears once and none overlaps v10 assessed or carried approved records."
+    },
+    {
+      "id": "extensions-receipt",
+      "passed": true,
+      "detail": "Three explicit same-source extensions match the root receipt and canonical row pins."
+    },
+    {
+      "id": "all-record-parent-source-pins",
+      "passed": true,
+      "detail": "All 18 stored dates, full rows, cycle parents, linked programmes, universities and official sources match C."
+    },
+    {
+      "id": "saved-originals-and-texts",
+      "passed": true,
+      "detail": "13 original byte hashes and lengths, 12 native text hashes, recovered PDF text and rendered catalogue hashes match."
+    },
+    {
+      "id": "all-local-reference-pins",
+      "passed": true,
+      "detail": "All receipt, manifest, extraction, catalogue and visual reference pins match saved bytes."
+    },
+    {
+      "id": "quoted-original-fragments",
+      "passed": true,
+      "detail": "All retained date, year, subject and programme quotations match the saved original-derived text."
+    },
+    {
+      "id": "closed-vs-unknown-boundaries",
+      "passed": true,
+      "detail": "Eight exact past days; nine unknown and one blocked remain non-availability findings. Unknown openings are not assessed."
+    },
+    {
+      "id": "scau-own-award-strict-before",
+      "passed": true,
+      "detail": "SCAU provincial award retains strict-before September 1 and admitted self-funded prerequisite; unanchored master period stays unknown."
+    },
+    {
+      "id": "scnu-three-degrees-award-separated",
+      "passed": true,
+      "detail": "Three exact 2026 degree pages support June 10; general-master content at the registered award URL supplies no ICLT cutoff."
+    },
+    {
+      "id": "swpu-general-applicant-heading-awards-separated",
+      "passed": true,
+      "detail": "SWPU closes only three matched English degree routes; May 30 has its own applicant heading and is not borrowed for either award."
+    },
+    {
+      "id": "historical-month-landing-holds",
+      "passed": true,
+      "detail": "SCUT intensive start months, SEU 2015 source and SUSTech landing cannot establish current exact days."
+    },
+    {
+      "id": "swu-bounded-fallback-limits",
+      "passed": true,
+      "detail": "One timeout stays blocked; two no-date programme-table observations stay unknown with no origin hash or 2027 binding."
+    },
+    {
+      "id": "sysu-catalogue-identity-final-round",
+      "passed": true,
+      "detail": "SYSU final general round is April 30; saved December-path catalogue identifies 2026 exact subject/language. Current January link limitation is retained. Page 1 visually verified."
+    },
+    {
+      "id": "candidate-only-and-final-recheck",
+      "passed": true,
+      "detail": "Only this review receipt is written; frozen report and all six canonical inputs remain unchanged."
+    }
+  ],
+  "limitations": [
+    "Source-only acceptance; no canonical date, publication, availability or whole-record freshness approval.",
+    "SCAU September 1 is a strict-before boundary and the award requires prior self-funded admission.",
+    "General degree dates do not become independent SCNU ICLT or SWPU award deadlines.",
+    "SYSU registered December-path catalogue independently identifies 2026; current HTML links a different January catalogue. Only the saved exact subject/year identity is certified.",
+    "SWU fallback receipts are observations, not original server bytes. Exact retrieval time was unavailable and recordedAt is explicitly receipt time.",
+    "No whole-school catalogue completion, successor-year rollout or permanent programme suspension is inferred."
+  ]
+}
