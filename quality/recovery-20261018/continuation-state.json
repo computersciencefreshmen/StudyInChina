@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-19T04:40:40.944Z",
+  "updatedAt": "2026-10-19T05:02:48.471Z",
   "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
   "canonicalOwner": "released-for-date-first-maintenance",
   "canonicalWritesReleased": true,
@@ -49,13 +49,14 @@
     "readback": "quality/recovery-20261019/release-rapid-0cb2b83/date-first-automation-readback-v1.json"
   },
   "canonicalOwnershipRelease": {
-    "releasedAt": "2026-10-19T04:40:40.944Z",
-    "scope": "Continue finite date-only official rechecks and evidence commits; factual date changes require evidence and existing guarded current-snapshot consumers. No whole-record renewal from date checks.",
+    "releasedAt": "2026-10-19T05:02:48.471Z",
+    "scope": "Continue pending date-only source groups from the latest summary/progress/nextQueue. No whole-record renewal from date checks; no unguarded release.",
     "handoffCommitMustMatchUpstream": true,
     "requiresFreshCompleteCandidateProof": true,
     "requiresCommonWriterCas": true,
     "doNotReplayConsumedBatchIds": true,
-    "previousOwner": "interactive-root-deadline-fast-sweep-20261019"
+    "previousOwner": "heartbeat-date-first-20261019T0443",
+    "requiresCommittedUnchangedContinuationState": true
   },
   "cloudDatabaseDiagnostic": {
     "receipt": "quality/recovery-20261018/d1-catalog-pointer-diagnostic-20261019-v1.json",
@@ -194,19 +195,38 @@
     "priority": "date-only official rechecks; other facts deferred",
     "audit": "quality/deadline-sweep-20261019/catalog-deadlines.json",
     "progress": "quality/deadline-sweep-20261019/official-recheck-progress.json",
-    "summary": "quality/deadline-sweep-20261019/official-review-summary-v2.json",
+    "summary": "quality/deadline-sweep-20261019/official-review-summary-v3.json",
     "rawUniversities": 272,
     "rawPrograms": 2057,
     "rawCycles": 1654,
     "rawScholarships": 400,
     "storedExpiredDeadlines": 290,
-    "schoolsAttempted": 40,
-    "selectedRecordDatesAssessed": 70,
-    "unchanged": 56,
+    "schoolsAttempted": 44,
+    "selectedRecordDatesAssessed": 834,
+    "unchanged": 819,
     "unknown": 6,
     "blocked": 8,
     "wholeSchoolCataloguesCertified": 0,
     "dateChangesApplied": 0,
-    "preciseTimeRestrictionsRetained": true
+    "preciseTimeRestrictionsRetained": true,
+    "summarySha256": "37c2960b7cb58a2f8a12ad31cfb1d19d83c239afcfff96b92e495058db17e8a8",
+    "nextQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v1.json",
+    "conflicting": 1,
+    "currentPublicCycleDateReview": {
+      "total": 783,
+      "dateSupported": 782,
+      "conflicting": 1,
+      "unassessed": 0,
+      "batchReadSupported": 766,
+      "priorApprovedEvidenceReused": 16
+    },
+    "currentPublicScholarshipDates": {
+      "total": 7,
+      "priorApprovedEvidence": 7,
+      "specificDeadline": 4,
+      "unknownSeparateDeadline": 3
+    },
+    "remainingRawRecordDates": 1201,
+    "remainingUnexpiredRecordDates": 63
   }
 }

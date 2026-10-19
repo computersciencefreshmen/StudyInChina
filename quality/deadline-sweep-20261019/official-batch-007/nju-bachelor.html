@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/DFS//template/3410/images/global.css">
+    <link rel="stylesheet" href="/DFS//template/3419/images/reset.css">
+    <link rel="stylesheet" href="/DFS//template/3410/images/index.css">
+    <link rel="stylesheet" href="/DFS//template/3410/images/style.css">
+    <link rel="stylesheet" href="/DFS//template/3410/images/ionicons.min.css">
+    <script src="/DFS//template/3410/images/modernizr-2.8.3.min.js"></script>
+    <link rel="stylesheet" href="/DFS//template/3419/images/channel_info.css">
+    <script type="text/javascript" src="/njdx/front/ui/jquery/jquery.js?v=v4.0.2"></script><script type="text/javascript" src="/njdx/front/ui/jquery/jquery.base64.js?v=v4.0.2"></script><script type="text/javascript" src="/njdx/front/ui/boshan/ui.js" data-appurl="/njdx"></script><link type="text/css" rel="stylesheet" href="/njdx/front/ui/page/info.css?v=v4.0.2"/><link type="text/css" rel="stylesheet" href="/njdx/front/ui/page/channel.css?v=v4.0.2"/><script type="text/javascript" src="/njdx/front/ui/visit/visit.js?s=168&c=14051&v=v4.0.2"></script><script type="text/javascript" src="/njdx/front/ui/jwplayer/jwplayer.js?v=v4.0.2"></script><script type="text/javascript" src="/njdx/front/ui/jwplayer/bs.js?v=v4.0.2"></script><script type="text/javascript" src="/njdx/front/ui/pdf/build/pdf.js?v=v4.0.2"></script><script type="text/javascript" src="/njdx/front/ui/pdf/showpdf.js?v=v4.0.2"></script><script type="text/javascript" src="/njdx/front/ui/layer/layer.js?v=v4.0.2"></script><script type="text/javascript" src="/njdx/front/ui/layer/bs.js?v=v4.0.2"></script><script type="text/javascript" src="/njdx/front/ui/template/es5-shim.min.js?v=v4.0.2"></script><script type="text/javascript" src="/njdx/front/ui/template/es5-sham.min.js?v=v4.0.2"></script><script type="text/javascript" src="/njdx/front/ui/template/template-web.js?v=v4.0.2"></script><script type="text/javascript" src="/njdx/front/ui/template/template-bs.js?v=v4.0.2"></script>
+    <title>申报指南</title>
+    <style>
+      .menu > ul > li {
+        width: 11.11%;
+      }
+
+      .words img,.words table {
+        max-width:100%;
+        height:auto;
+      }
+      .active{
+        background-color: white;
+        border-color: #ffb217;
+        font-weight: bold;
+        color: #751d1d;
+      }
+      .menu > ul > li > ul.normal-sub {
+        padding:0!important;
+      }
+      .menu > ul > li > ul > li {
+        margin:0px 0 0 20px;
+      }
+
+      .fdj {
+        position: relative;
+      }
+      form {
+        width:100%;height:100%;top:10px; position: absolute;
+      }
+
+      .lianxi {
+        text-align: center;
+        padding-top: 43px;
+      }
+
+      .lianxi p {
+        color: #e7dfdf;
+        font-size: 14px;
+      }
+
+      @media screen and (max-width: 768px){
+        .link_web_left {
+          margin-left: 0;
+        }
+
+        .link_web_right {
+          float: left;
+          margin-right: 0;
+        }
+
+
+        .lianxi{
+          position: static;
+          bottom: 0;
+          width: 140px;
+          left: 0;
+          transform: none;
+        }
+      }
+
+      @media screen and (max-width: 400px){
+        footer .w {
+          height: 342px;
+        }
+
+
+        .lianxi{
+          width: 100%;
+        }
+
+        .link_web_right {
+          float: right;
+          margin-right: 0;
+        }
+
+      }
+
+      #lsj_ss{
+        width:100%;height:100%;background:url(/DFS//template/3410/images/fdj.png) no-repeat;background-size:100% 100%;cursor:pointer;position: absolute;
+      }
+      @media screen and (max-width:1200px){
+        .fdj {
+          margin-top: 36px;
+        }}
+      @media screen and (max-width: 992px){
+        .fdj {
+          margin-top: 31px;
+        }}
+      @media screen and (max-width: 450px){
+        .fdj {
+          margin-top: 25px;
+        }
+      }
+      .left_list .channelpname {
+        background-color: #751d1d;
+      }
+      .web_position .channelpname {
+        border-left: 4px solid #751d1d;
+      }
+      .icon-home:before {
+        content: '\e803';
+        color:#751d1d;
+      }
+      .right_list li:hover .title{
+        color:#751d1d!important;
+      }
+      #pages span {
+        border: 1px solid #751d1d;
+        background-color: #751d1d;
+      }
+      #pages a:hover {
+        border: 1px solid #751d1d;
+        background-color: #751d1d!important;
+      }
+      .left_list .channel_contain li a.active {
+        background-color: white;
+        border-color: #ffb217;
+        font-weight: bold;
+        color:#751d1d;}
+      .icon-home:before {
+        font-family:"wechat";
+      }
+      .icon-home:before {
+        position: relative;
+        top:-1px;
+      }
+      .menu-container {
+        width: 70.25%!important;
+      }
+
+      .menu > ul > li {
+        width: 10%;
+      }
+
+      .menu > ul > li a {
+
+        padding: 0px!important;
+        line-height: 50px;
+      }
+      .menu .menu-dropdown-icon:first-child  a:first-child {
+        text-align: center;
+      }
+      .left_list .ul2{
+        width: 80%;
+        float:right;
+        display: none;
+      }
+      .left_list {
+        background-color: transparent;
+      }
+      .left_list .li1{
+        background-color: #f3f3f3;
+      }
+      .left_list .li2 {
+        background-color: rgba(243,243,243);
+      }
+
+      .nihao .ul2{
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="w clearfix">
+        <div class="welcome fl color-fff font-14">欢迎访问南京大学海外教育学院！</div>
+        <div class="wel_right fr">
+          <!-- <a href="http://cms.nju.edu.cn/lxsbgs" class="fl color-fff font-14" target="_blank">留学生工作办公室</a>
+          <div class="shu fl"></div> -->
+          
+          <a href="https://hwxy.nju.edu.cn/English/index.html" class="fl color-fff font-14" style="margin-right: 20px;">English</a>
+          
+          <a href="https://confucius.nju.edu.cn/main.htm" class="fl color-fff font-14" target="_blank">南京大学孔子学院办公室</a>
+        </div>
+      </div>
+    </header>
+    <!-- phone nav -->
+    <div class="drop_down_menu pa">
+      <div class="tip">导航栏<i class="close fr">✖</i></div>
+      <ul class="ul1">
+                <li>
+                  <a href="https://hwxy.nju.edu.cn">首页</a>
+                </li>
+            <li>
+              <a href="https://hwxy.nju.edu.cn/xyjj/index.html">学院简介<i class="open">+</i></a>
+              <ul class="ul2">
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/xyjj/xygk/index.html">学院概况</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/xyjj/lsyg/index.html">历史沿革</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/xyjj/yzzc/index.html">院长致辞</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/xyjj/ygsj/index.html">有关数据</a>
+                        </li>
+
+                  </ul>
+                </li>
+
+            <li>
+              <a href="https://hwxy.nju.edu.cn/dzgl/index.html">党政管理<i class="open">+</i></a>
+              <ul class="ul2">
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/dzgl/xyld/index.html">学院领导</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/dzgl/bmjg/index.html">行政机构</a>
+                        </li>
+                    <li><a href="https://hwxy.nju.edu.cn/dzgl/jyjg/index.html">教研机构<i class="open">+</i></a>
+                      <ul class="ul3">
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/dzgl/jyjg/hyyx/index.html">汉语言系</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/dzgl/jyjg/hygjjyx/index.html">国际中文教育系</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/dzgl/jyjg/gghyjxb/index.html">留学生公共教学部</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/dzgl/jyjg/jsfzyjxyjzx/index.html">教师发展与教学研究中心</a>
+                              </li>
+                          </ul>
+
+                        </li>
+
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/dzgl/wyh/index.html">委员会</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/dzgl/dqzz/index.html">党群组织</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/dzgl/xxjy/index.html">学习教育</a>
+                        </li>
+
+                  </ul>
+                </li>
+
+            <li>
+              <a href="https://hwxy.nju.edu.cn/lxnd/index.html">留学南大<i class="open">+</i></a>
+              <ul class="ul2">
+                    <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/index.html">招生信息<i class="open">+</i></a>
+                      <ul class="ul3">
+                            <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/hyxx/index.html">汉语学习<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/hyxx/zqhyjx/index.html">长期汉语进修</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/hyxx/dqhypx/index.html">短期汉语培训</a></li>
+                                  <li><a href="https://chinesetest.nju.edu.cn/njdx/front/chinese/index.do">汉语水平自测</a></li>
+                              </ul>
+
+                            </li>
+
+                            <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bkxm/index.html">本科专业<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bkxm/sbzn/index.html">申报指南</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bkxm/zyml/index.html">专业目录</a></li>
+                              </ul>
+
+                            </li>
+
+                            <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/ssxm/index.html">硕士专业<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/ssxm/sbzn/index.html">申报指南</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/ssxm/DeclarationGuide/index.html">Application Instructions</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/ssxm/zyml/index.html">专业目录</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/ssxm/hygjjyzy/index.html">国际中文教育</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/ssxm/szmtycb/index.html">数字媒体与传播</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/ssxm/gxyj/index.html">国学研究</a></li>
+                              </ul>
+
+                            </li>
+
+                            <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bsxm/index.html">博士专业<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bsxm/sbzn/index.html">申报指南</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bsxm/DeclarationGuide/index.html">Application Instructions</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bsxm/zyml/index.html">专业目录</a></li>
+                              </ul>
+
+                            </li>
+
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/yyskzy/index.html">英语授课专业</a>
+                              </li>
+                            <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/jxj/index.html">奖学金<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/jxj/zgzfjxj/index.html">中国政府奖学金</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/jxj/njszfjxj/index.html">南京市政府奖学金</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/jxj/gjzwjsjxj/index.html">国际中文教师奖学金</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/jxj/kzxhxjhjxj/index.html">孔子新汉学计划奖学金</a></li>
+                              </ul>
+
+                            </li>
+
+                          </ul>
+
+                        </li>
+
+                    <li><a href="https://hwxy.nju.edu.cn/lxnd/zxbm/index.html">在线报名<i class="open">+</i></a>
+                      <ul class="ul3">
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/lxnd/zxbm/ywyjd/index.html">疑问与解答</a>
+                              </li>
+                              <li>
+                                <a href="http://istudy.nju.edu.cn/">在线报名</a>
+                              </li>
+                          </ul>
+
+                        </li>
+
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/lxnd/lxfs/index.html">联系方式</a>
+                        </li>
+                    <li><a href="https://hwxy.nju.edu.cn/lxnd/xygl/index.html">学业管理<i class="open">+</i></a>
+                      <ul class="ul3">
+                            <li><a href="https://hwxy.nju.edu.cn/lxnd/xygl/xxfy/index.html">学习费用<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/xygl/xxfy/xf/index.html">学费</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/xygl/xxfy/sqf/index.html">申请费</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/xygl/xxfy/qtfy/index.html">其他费用</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/xygl/xxfy/zxzfzn/index.html">在线支付指南</a></li>
+                              </ul>
+
+                            </li>
+
+                            <li><a href="https://hwxy.nju.edu.cn/lxnd/xygl/zcbd/index.html">注册报到<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/xygl/zcbd/bdlc/index.html">报到流程</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/xygl/zcbd/bdxz/index.html">报到须知</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/xygl/zcbd/xjyd/index.html">学籍异动</a></li>
+                              </ul>
+
+                            </li>
+
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/lxnd/xygl/xyxz/index.html">学业须知</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/lxnd/xygl/ksgl/index.html">考试管理</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/lxnd/xygl/zgzfjxjps/index.html">中国政府奖学金评审</a>
+                              </li>
+                          </ul>
+
+                        </li>
+
+                    <li><a href="https://hwxy.nju.edu.cn/lxnd/xyfw/index.html">校园服务<i class="open">+</i></a>
+                      <ul class="ul3">
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/lxnd/xyfw/njlxshzn/index.html">生活指南</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/lxnd/xyfw/qzjl/index.html">签证居留</a>
+                              </li>
+                            <li><a href="https://hwxy.nju.edu.cn/lxnd/xyfw/zsbx/index.html">住宿保险<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/xyfw/zsbx/zs/index.html">住宿</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/lxnd/xyfw/zsbx/bx/index.html">保险</a></li>
+                              </ul>
+
+                            </li>
+
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/lxnd/xyfw/bylx/index.html">毕业离校</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/lxnd/xyfw/cylxfs/index.html">常用联系方式</a>
+                              </li>
+                          </ul>
+
+                        </li>
+
+
+                  </ul>
+                </li>
+
+            <li>
+              <a href="https://hwxy.nju.edu.cn/szdw/index.html">师资队伍<i class="open">+</i></a>
+              <ul class="ul2">
+                    <li><a href="https://hwxy.nju.edu.cn/szdw/xk/index.html">系部<i class="open">+</i></a>
+                      <ul class="ul3">
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/szdw/xk/hyyx/index.html">汉语言系</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/szdw/xk/gjzwjyx/index.html">国际中文教育系</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/szdw/xk/lxsggjxb/index.html">留学生公共教学部</a>
+                              </li>
+                          </ul>
+
+                        </li>
+
+                    <li><a href="https://hwxy.nju.edu.cn/szdw/zc/index.html">职称<i class="open">+</i></a>
+                      <ul class="ul3">
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/szdw/zc/js/index.html">教授</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/szdw/zc/fjs/index.html">副教授</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/szdw/zc/js1832/index.html">讲师</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/szdw/zc/zpzljs/index.html">准聘助理教授</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/szdw/zc/zzky/index.html">专职科研</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/szdw/zc/yyjs/index.html">语言教师</a>
+                              </li>
+                          </ul>
+
+                        </li>
+
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/szdw/rxry/index.html">荣休教师</a>
+                        </li>
+
+                  </ul>
+                </li>
+
+            <li>
+              <a href="https://hwxy.nju.edu.cn/jxky/index.html">教学科研<i class="open">+</i></a>
+              <ul class="ul2">
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/jxky/xsjl/index.html">学术交流</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/jxky/kycg/index.html">科研成果</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/jxky/xshy/index.html">学术会议</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/jxky/mkxx/index.html">慕课学习</a>
+                        </li>
+
+                  </ul>
+                </li>
+
+            <li>
+              <a href="https://hwxy.nju.edu.cn/xsgz/index.html">学生园地<i class="open">+</i></a>
+              <ul class="ul2">
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/xsgz/dtjs/index.html">党团建设</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/xsgz/xsgz/index.html">学生活动</a>
+                        </li>
+
+                  </ul>
+                </li>
+
+            <li>
+              <a href="https://hwxy.nju.edu.cn/cyyc/index.html">诚邀英才<i class="open">+</i></a>
+              <ul class="ul2">
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/cyyc/cyyc/index.html">诚邀英才</a>
+                        </li>
+
+                  </ul>
+                </li>
+
+            <li>
+              <a href="https://hwxy.nju.edu.cn/xytd/index.html">校友天地<i class="open">+</i></a>
+              <ul class="ul2">
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/xytd/xyfh/index.html">校友分会</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/xytd/xydt/index.html">校友动态</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/xytd/xyfc/index.html">校友风采</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/xytd/xyml/index.html">校友名录</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/xytd/xyzp7192/index.html">校友照片</a>
+                        </li>
+
+                  </ul>
+                </li>
+
+            <li>
+              <a href="https://hwxy.nju.edu.cn/hskks/index.html">HSK考试<i class="open">+</i></a>
+              <ul class="ul2">
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/hskks/kdjj/index.html">考点简介</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/hskks/ksjh/index.html">考试计划</a>
+                        </li>
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/hskks/cjwt/index.html">常见问题</a>
+                        </li>
+                        <li>
+                          <a href="http://www.chinesetest.cn">报名链接</a>
+                        </li>
+
+                  </ul>
+                </li>
+
+            <li>
+              <a href="https://dwhj.cbpt.cnki.net/portal">出版物<i class="open">+</i></a>
+              <ul class="ul2">
+
+                  </ul>
+                </li>
+
+            <li>
+              <a href="https://hwxy.nju.edu.cn/English/index.html">English<i class="open">+</i></a>
+              <ul class="ul2">
+                    <li><a href="https://hwxy.nju.edu.cn/English/AboutUs/index.html">About Us<i class="open">+</i></a>
+                      <ul class="ul3">
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/English/AboutUs/Overview/index.html">Overview</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/English/AboutUs/DeansMessage/index.html">Dean’s Message</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/English/AboutUs/Facts/index.html">Facts</a>
+                              </li>
+                          </ul>
+
+                        </li>
+
+                    <li><a href="https://hwxy.nju.edu.cn/English/Faculty/index.html">Faculty<i class="open">+</i></a>
+                      <ul class="ul3">
+                            <li><a href="https://hwxy.nju.edu.cn/English/Faculty/Department/index.html">Department<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Faculty/Department/ChineseLanguage/index.html">Department of Chinese Language</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Faculty/Department/InternationalChineseLanguageEducation/index.html">Department of International Chinese Education</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Faculty/Department/PublicEducationDepartmentforInternationalStudents/index.html">The Public Program Teaching Department for International Students</a></li>
+                              </ul>
+
+                            </li>
+
+                            <li><a href="https://hwxy.nju.edu.cn/English/Faculty/ProfessionalTitles/index.html">Professional Titles<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Faculty/ProfessionalTitles/Professors/index.html">Professors</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Faculty/ProfessionalTitles/AssociateProfessors/index.html">Associate Professors</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Faculty/ProfessionalTitles/Lectures/index.html">Lectures</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Faculty/ProfessionalTitles/TenuretrackAssociateProfessor/index.html">Tenure-track Assistant Professor</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Faculty/ProfessionalTitles/ScientificResearch/index.html">Scientific Research</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Faculty/ProfessionalTitles/LanguageTeacher/index.html">Language Teacher</a></li>
+                              </ul>
+
+                            </li>
+
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/English/Faculty/HonoraryRetiredTeacher/index.html">Honorary Retired Teacher</a>
+                              </li>
+                          </ul>
+
+                        </li>
+
+                    <li><a href="https://hwxy.nju.edu.cn/English/Academics/index.html">Academics<i class="open">+</i></a>
+                      <ul class="ul3">
+                            <li><a href="https://hwxy.nju.edu.cn/English/Academics/AcademicCalendar/index.html">Academic Calendar<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Academics/AcademicCalendar/SchoolCalendar/index.html">School Calendar</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Academics/AcademicCalendar/Timetables/index.html">Timetables</a></li>
+                              </ul>
+
+                            </li>
+
+                            <li><a href="https://hwxy.nju.edu.cn/English/Academics/DepartmentsInstitutions/index.html">Departments&Institutions<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Academics/DepartmentsInstitutions/ChineseLanguage/index.html">Department of Chinese Language</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Academics/DepartmentsInstitutions/CSL/index.html">Department of International Chinese Education</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Academics/DepartmentsInstitutions/GraduateStudy/index.html">The Public Program Teaching Department for International Students</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/Academics/DepartmentsInstitutions/TeacherDevelopmentandTeachingResearchCenter/index.html">Teacher Development and Teaching Research Center</a></li>
+                              </ul>
+
+                            </li>
+
+                          </ul>
+
+                        </li>
+
+                    <li><a href="https://hwxy.nju.edu.cn/English/Bulletin/index.html">Bulletin<i class="open">+</i></a>
+                      <ul class="ul3">
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/English/Bulletin/News/index.html">News</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/English/Bulletin/Announcements/index.html">Announcements</a>
+                              </li>
+                          </ul>
+
+                        </li>
+
+                    <li><a href="https://hwxy.nju.edu.cn/English/Policies/index.html">Policies<i class="open">+</i></a>
+                      <ul class="ul3">
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/English/Policies/Policies/index.html">Policies</a>
+                              </li>
+                          </ul>
+
+                        </li>
+
+                    <li><a href="https://hwxy.nju.edu.cn/English/HSKTest/index.html">HSK Test<i class="open">+</i></a>
+                      <ul class="ul3">
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/English/HSKTest/AboutNJUTestCenter/index.html">About NJU Test Center</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/English/HSKTest/TestSchedule/index.html">Test Schedule</a>
+                              </li>
+                              <li>
+                                <a href="https://hwxy.nju.edu.cn/English/HSKTest/FAQs/index.html">FAQs</a>
+                              </li>
+                          </ul>
+
+                        </li>
+
+                        <li>
+                          <a href="https://hwxy.nju.edu.cn/English/Administration/index.html">Contact</a>
+                        </li>
+                    <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/index.html">Study at NJU<i class="open">+</i></a>
+                      <ul class="ul3">
+                            <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/index.html">Admissions<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/ChineseLanguageTraining/index.html">Chinese Language Training</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/BachelorsPrograms/index.html">Bachelor’s Programs</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/MastersPrograms/index.html">Master’s Programs</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DoctoratePrograms/index.html">Doctorate Programs</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/DegreeProgramsTaughtinEnglish/index.html">Degree Programs Taught in English</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Admissions/FeaturedPrograms/index.html">Featured Programs</a></li>
+                              </ul>
+
+                            </li>
+
+                            <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Costs/index.html">Costs<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Costs/RegistrationFee/index.html">Registration Fee</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Costs/Tuition/index.html">Tuition</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Costs/OtherCosts/index.html">Other Costs</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Costs/OnlinePaymentInstructions/index.html">Online Payment Instructions</a></li>
+                              </ul>
+
+                            </li>
+
+                            <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Scholarships/index.html">Scholarships<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Scholarships/ChineseGovernmentScholarship/index.html">Chinese Government Scholarship</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Scholarships/NanjingMunicipalScholarship/index.html">Nanjing Municipal Scholarship</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Scholarships/InternationalChineseLanguageTeachersScholarship/index.html">International Chinese Language Teachers Scholarship</a></li>
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Scholarships/ConfuciusChinaStudiesProgram/index.html">Confucius China Studies Program</a></li>
+                              </ul>
+
+                            </li>
+
+                            <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Application/index.html">Application<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Application/QAQA/index.html">Q&A</a></li>
+                                  <li><a href="http://istudy.nju.edu.cn/">Application</a></li>
+                                  <li><a href="https://chinesetest.nju.edu.cn/njdx/front/chinese/index.do">Chinese Proficiency Test</a></li>
+                              </ul>
+
+                            </li>
+
+                            <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/CampusLife/index.html">Campus Life<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/CampusLife/Contact/index.html">Campus Life</a></li>
+                              </ul>
+
+                            </li>
+
+                            <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Downloads/index.html">Downloads<i class="open">+</i></a>
+                              <ul class="ul4">
+                                  <li><a href="https://hwxy.nju.edu.cn/English/StudyatNJU/Downloads/Downloads/index.html">Downloads</a></li>
+                              </ul>
+
+                            </li>
+
+                          </ul>
+
+                        </li>
+
+
+                  </ul>
+                </li>
+
+          
+          </ul>
+        </div>
+    <!-- phone nav end-->
+    <div class="banner pr"style="height:300px">
+      <div class="tiao pa"style="top:0;z-index:1">
+        <img src="/DFS//template/3419/images/tiao.png" alt="" style="width:100%">
+      </div>
+      <div class="w pa">
+        <nav class="pa">
+          <a href="http://hwxy.nju.edu.cn" class="school_log">
+            <img src="/DFS//template/3410/images/logo.png" alt="">
+          </a>
+          <a  class="fdj fr" target="_blank"><form action="/njdx/front/aisearch/search.do" method="get" target="_blank">  				
+            <input type="hidden" name="siteid" id="siteid" value="168">			
+            <input type="hidden" name="sorttype" id="sorttype" value="0">		
+            <input type="hidden" id="tplid" name="tplid" value="3439" />			
+            <input type="hidden" name="indexids" id="indexids" value="1">   
+            <input type="submit" id="lsj_ss"value="">
+            </form></a>
+          <i class="home fr"><img src="/DFS//template/3410/images/home.png" alt=""></i>
+          <div class="menu-container fr">
+            <div class="menu">
+              <ul>
+                  <li>
+                    <a href="https://hwxy.nju.edu.cn">首页</a>
+                    <ul>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="https://hwxy.nju.edu.cn/xyjj/index.html">学院简介</a>
+                    <ul>
+                        <li><a href="https://hwxy.nju.edu.cn/xyjj/xygk/index.html">学院概况</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/xyjj/lsyg/index.html">历史沿革</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/xyjj/yzzc/index.html">院长致辞</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/xyjj/ygsj/index.html">有关数据</a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="https://hwxy.nju.edu.cn/dzgl/index.html">党政管理</a>
+                    <ul>
+                        <li><a href="https://hwxy.nju.edu.cn/dzgl/xyld/index.html">学院领导</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/dzgl/bmjg/index.html">行政机构</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/dzgl/jyjg/index.html">教研机构</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/dzgl/wyh/index.html">委员会</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/dzgl/dqzz/index.html">党群组织</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/dzgl/xxjy/index.html">学习教育</a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="https://hwxy.nju.edu.cn/lxnd/index.html">留学南大</a>
+                    <ul>
+                        <li><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/index.html">招生信息</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/lxnd/zxbm/index.html">在线报名</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/lxnd/lxfs/index.html">联系方式</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/lxnd/xygl/index.html">学业管理</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/lxnd/xyfw/index.html">校园服务</a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="https://hwxy.nju.edu.cn/szdw/index.html">师资队伍</a>
+                    <ul>
+                        <li><a href="https://hwxy.nju.edu.cn/szdw/xk/index.html">系部</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/szdw/zc/index.html">职称</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/szdw/rxry/index.html">荣休教师</a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="https://hwxy.nju.edu.cn/jxky/index.html">教学科研</a>
+                    <ul>
+                        <li><a href="https://hwxy.nju.edu.cn/jxky/xsjl/index.html">学术交流</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/jxky/kycg/index.html">科研成果</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/jxky/xshy/index.html">学术会议</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/jxky/mkxx/index.html">慕课学习</a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="https://hwxy.nju.edu.cn/xsgz/index.html">学生园地</a>
+                    <ul>
+                        <li><a href="https://hwxy.nju.edu.cn/xsgz/dtjs/index.html">党团建设</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/xsgz/xsgz/index.html">学生活动</a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="https://hwxy.nju.edu.cn/cyyc/index.html">诚邀英才</a>
+                    <ul>
+                        <li><a href="https://hwxy.nju.edu.cn/cyyc/cyyc/index.html">诚邀英才</a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="https://hwxy.nju.edu.cn/xytd/index.html">校友天地</a>
+                    <ul>
+                        <li><a href="https://hwxy.nju.edu.cn/xytd/xyfh/index.html">校友分会</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/xytd/xydt/index.html">校友动态</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/xytd/xyfc/index.html">校友风采</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/xytd/xyml/index.html">校友名录</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/xytd/xyzp7192/index.html">校友照片</a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="https://hwxy.nju.edu.cn/hskks/index.html">HSK考试</a>
+                    <ul>
+                        <li><a href="https://hwxy.nju.edu.cn/hskks/kdjj/index.html">考点简介</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/hskks/ksjh/index.html">考试计划</a>
+                        </li>
+                        <li><a href="https://hwxy.nju.edu.cn/hskks/cjwt/index.html">常见问题</a>
+                        </li>
+                        <li><a href="http://www.chinesetest.cn">报名链接</a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="https://dwhj.cbpt.cnki.net/portal">出版物</a>
+                    <ul>
+                    </ul>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="device" style="height:300px; background:url(/DFS//template/3410/images/banner.jpg) center center">
+
+      </div>
+
+    </div>
+    <!-- 内容 -->
+    <div class="web_position w_12">
+
+
+
+        <span class="channelpname">申报指南</span>
+      <div class="position_link">
+        <span class="icon-home"></span>
+        当前位置：
+        <a href="http://hwxy.nju.edu.cn">首页</a>
+        >
+          <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bkxm/sbzn/index.html">申报指南</a>
+
+      </div>
+    </div>
+    <!-- 分页 -->
+
+
+
+    <div class="wenzhang_1 w_12  clearfix">
+      <div class="left_list">
+            <div class="channelpname">
+              招生信息
+            </div>
+
+          <ul class="channel_contain clearfix" id="汉语学习">
+            <li class="li1">
+              <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/hyxx/index.html" id="汉语学习1">汉语学习</a>
+            </li>
+
+            <ul class="ul2">
+
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/hyxx/zqhyjx/index.html" id="长期汉语进修">长期汉语进修</a>
+                </li>
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/hyxx/dqhypx/index.html" id="短期汉语培训">短期汉语培训</a>
+                </li>
+                <li class="li2">
+                  <a href="https://chinesetest.nju.edu.cn/njdx/front/chinese/index.do" id="汉语水平自测">汉语水平自测</a>
+                </li>
+            </ul>
+          </ul>
+          <ul class="channel_contain clearfix" id="本科专业">
+            <li class="li1">
+              <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bkxm/index.html" id="本科专业1">本科专业</a>
+            </li>
+
+            <ul class="ul2">
+
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bkxm/sbzn/index.html" id="申报指南">申报指南</a>
+                </li>
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bkxm/zyml/index.html" id="专业目录">专业目录</a>
+                </li>
+            </ul>
+          </ul>
+          <ul class="channel_contain clearfix" id="硕士专业">
+            <li class="li1">
+              <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/ssxm/index.html" id="硕士专业1">硕士专业</a>
+            </li>
+
+            <ul class="ul2">
+
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/ssxm/sbzn/index.html" id="申报指南">申报指南</a>
+                </li>
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/ssxm/DeclarationGuide/index.html" id="Application Instructions">Application Instructions</a>
+                </li>
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/ssxm/zyml/index.html" id="专业目录">专业目录</a>
+                </li>
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/ssxm/hygjjyzy/index.html" id="国际中文教育">国际中文教育</a>
+                </li>
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/ssxm/szmtycb/index.html" id="数字媒体与传播">数字媒体与传播</a>
+                </li>
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/ssxm/gxyj/index.html" id="国学研究">国学研究</a>
+                </li>
+            </ul>
+          </ul>
+          <ul class="channel_contain clearfix" id="博士专业">
+            <li class="li1">
+              <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bsxm/index.html" id="博士专业1">博士专业</a>
+            </li>
+
+            <ul class="ul2">
+
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bsxm/sbzn/index.html" id="申报指南">申报指南</a>
+                </li>
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bsxm/DeclarationGuide/index.html" id="Application Instructions">Application Instructions</a>
+                </li>
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bsxm/zyml/index.html" id="专业目录">专业目录</a>
+                </li>
+            </ul>
+          </ul>
+          <ul class="channel_contain clearfix" id="英语授课专业">
+            <li class="li1">
+              <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/yyskzy/index.html" id="英语授课专业1">英语授课专业</a>
+            </li>
+
+            <ul class="ul2">
+
+            </ul>
+          </ul>
+          <ul class="channel_contain clearfix" id="奖学金">
+            <li class="li1">
+              <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/jxj/index.html" id="奖学金1">奖学金</a>
+            </li>
+
+            <ul class="ul2">
+
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/jxj/zgzfjxj/index.html" id="中国政府奖学金">中国政府奖学金</a>
+                </li>
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/jxj/njszfjxj/index.html" id="南京市政府奖学金">南京市政府奖学金</a>
+                </li>
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/jxj/gjzwjsjxj/index.html" id="国际中文教师奖学金">国际中文教师奖学金</a>
+                </li>
+                <li class="li2">
+                  <a href="https://hwxy.nju.edu.cn/lxnd/zsxx/jxj/kzxhxjhjxj/index.html" id="孔子新汉学计划奖学金">孔子新汉学计划奖学金</a>
+                </li>
+            </ul>
+          </ul>
+        <script>
+          $("#本科专业").addClass("nihao");
+          $("#本科专业1").addClass("active");
+          $("#申报指南").addClass("active");
+        </script>
+
+      </div>
+
+
+
+
+      <div class="right_list wenzhang_contain_1">
+            <h1 class="title">自费申报指南</h1>
+            <h3 class="subtitle"></h3>
+            <div class="msg">
+              <span class="time">发布日期：2026-09-16</span>
+              
+              
+              <span class="visit">访问量：<script type="text/javascript" src="/njdx/front/ui/visit/pv.js?s=168&c=14051"></script></span>
+            </div>
+            <div class="words">
+              <p style="margin-left: 0px; font-size: 14px; font-family: 宋体; text-align: left;"><span style="font-size: 18px;"><strong><span style="font-size: 18px; font-family: 微软雅黑; color: rgb(112, 48, 160);">申报须知</span></strong></span></p><p style="margin-left: 0px; font-size: 14px; font-family: 宋体; text-align: left; line-height: 2em;"><span style="text-indent: 32px; font-family: 微软雅黑; font-size: 16px;">1.&nbsp;申请者年龄在18周岁以上(不超过30周岁),&nbsp; 高中毕业以上学历,&nbsp; 身体健康,&nbsp;<strong>&nbsp;</strong>非中国籍公民；</span></p><p style="margin-left: 0px; font-size: 14px; font-family: 宋体; text-align: left; line-height: 2em;"><span style="font-family: 微软雅黑; font-size: 16px; text-indent: 32px;">2. 本科学制为4年,&nbsp; 授课语言为汉语,&nbsp;&nbsp;申请人汉语水平须达到HSK5级180分以上;&nbsp;</span></p><p style="margin-left: 0px; font-size: 14px; font-family: 宋体; text-align: left; line-height: 2em;"><span style="font-family: 微软雅黑; font-size: 16px; text-indent: 32px;">3. 从2026/2027学年起，所有申请本科专业的国际学生</span><span style="font-size: 16px; text-indent: 32px; font-family: 微软雅黑, sans-serif;">须参加来华留学本科入学学业水平测试（CSCA 测试），并提交成绩单；</span></p><p style="margin-left: 0px; font-size: 14px; font-family: 宋体; text-align: left; line-height: 2em;"><span style="text-indent: 32px; font-family: 微软雅黑; font-size: 16px;">4. 符合教育部教外函（2020）12号文件要求&nbsp;</span><a href="http://www.moe.gov.cn/srcsite/A20/moe_850/202006/t20200609_464159.html" target="_blank" sudyfile-attr="{&#39;title&#39;:&#39;&#39;}" data_ue_src="http://www.moe.gov.cn/srcsite/A20/moe_850/202006/t20200609_464159.html" style="color: rgb(38, 38, 38); text-indent: 32px; font-family: 微软雅黑; font-size: 14px; text-decoration: underline;"><span style="font-size: 14px;">http://www.moe.gov.cn/srcsite/A20/moe_850/202006/t20200609_464159.html</span></a><span style="text-indent: 32px; font-family: 微软雅黑; font-size: 16px;">；</span></p><p style="text-align: left; margin-left: 0px; font-size: 14px; font-family: 宋体; line-height: 2em;"><span style="font-family: 微软雅黑; font-size: 16px; text-align: justify; text-indent: 32px;">&nbsp; &nbsp; &nbsp; *父母双方或一方为中国公民并定居在外国，本人在外国出生时即取得外国国籍申请者，须提供父母（中国公民方）在本人出生前取得的外国永久居留权、本人有效外国护照或国籍证明文件4年（含）以上，且最近4年（2023年4月30日至2027年4月30日）之内有在外国实际居住2年以上的记录（一年中实际在外国居住满9个月可按一年计算，以入境和出境签章为准）。</span></p><p style="text-align: justify; margin-left: 0px; font-size: 14px; font-family: 宋体; line-height: 2em;"><span style="font-family: 微软雅黑; font-size: 16px; text-indent: 32px;">&nbsp; &nbsp; &nbsp; *中国大陆（内地）、香港、澳门和台湾居民在移民并获得外国国籍后作为国际学生申请者，须于2023年4月30日之前取得外国国籍，且在最近4年（2023年4月30日至2027年4月30日）之内有在国外实际居住2年以上的记录（一年中实际在国外居住满9个月可按一年计算，以入境和出境签章为准）。</span></p><p style="text-align: justify; margin-left: 0px; font-size: 14px; font-family: 宋体; line-height: 2em;"><span style="font-family: 微软雅黑; font-size: 16px; text-indent: 32px;">5. 未通过入学前复核的申请者将被通知和取消其入学资格；&nbsp; &nbsp;</span></p><p style="text-align: justify; margin-left: 0px; font-size: 14px; font-family: 宋体; line-height: 2em;"><span style="font-family: 微软雅黑; font-size: 16px; text-indent: 32px;">6. 申报指南如有变动，以南京大学海外教育学院最终解释为准。</span></p><p style="margin-right: 0px; margin-left: 0px; font-size: 14px; font-family: 宋体; text-indent: 32px; line-height: 2em;"><span style="font-size: 17px; font-family: 微软雅黑; color: rgb(0, 0, 0);"><br/></span></p><p style="font-size: 14px;font-family: 宋体;line-height: 45px"><span style="font-size: 18px;"><strong><span style="font-family: 微软雅黑; color: rgb(112, 48, 160);">申报时间</span></strong></span><br/></p><p class="MsoNormal p_text_indent_2" style="font-size: 14px;font-family: 宋体;text-indent: 2em;line-height: 22px"><span style="color: rgb(63, 63, 63); font-size: 16px;"><strong><span style="color: rgb(63, 63, 63); font-family: 微软雅黑;">3月1日至5月15日</span></strong></span></p><p class="MsoNormal p_text_indent_2" style="font-size: 14px;font-family: 宋体;text-indent: 2em;line-height: 22px"><span style="color: rgb(0, 0, 0);"><strong><span style="font-size: 15px; font-family: 微软雅黑;"><span style="font-size: 18px;"></span>&nbsp;</span></strong><strong><span style="font-size: 18px; font-family: 微软雅黑;">&nbsp;</span></strong></span></p><p class="MsoNormal p_text_indent_2" style="font-size: 14px;font-family: 宋体;text-indent: 2em;line-height: 22px"><span style="font-size: 24px;"></span></p><p style="font-size: 14px;font-family: 宋体;line-height: 27px"><span style="font-size: 18px;"><strong><span style="font-family: 微软雅黑; color: rgb(112, 48, 160);">申报方式</span></strong><strong><span style="font-family: 微软雅黑; color: rgb(51, 51, 51);">&nbsp; &nbsp;</span></strong></span></p><p style="font-size: 14px; font-family: 宋体; text-align: left; line-height: 2em;"><span style="font-size: 16px; text-indent: 2em; font-family: 微软雅黑;">登录南京大学外国留学生线上报名系统&nbsp;<a href="http://istudy.nju.edu.cn/" target="_blank" data_ue_src="http://istudy.nju.edu.cn/" style="color: rgb(112, 48, 160);">http://istudy.nju.edu.cn/</a><strong><a href="http://istudy.nju.edu.cn/" target="_blank" data_ue_src="http://istudy.nju.edu.cn/"></a>&nbsp;&nbsp;</strong>填写申请表、上传所要求的申请材料，完成后提交。</span></p><p style="font-size: 14px; font-family: 宋体; text-align: left; line-height: 2em;"><strong style="color: rgb(63, 63, 63); font-size: 16px; text-indent: 2em;"><span style="font-family: 微软雅黑;">&nbsp; &nbsp; &nbsp; 1. 普通护照</span></strong></p><p style="font-size: 14px; text-align: left; line-height: 2em;"><span style="font-size: 16px; text-indent: 32px; color: rgb(63, 63, 63); font-family: 微软雅黑;"><strong>&nbsp; &nbsp; </strong></span><span style="color: rgb(38, 38, 38);"><span style="font-size: 16px; text-indent: 32px; font-family: 微软雅黑;"><strong>&nbsp;&nbsp;</strong></span><span style="font-family: 微软雅黑, sans-serif; font-size: 16px; text-indent: 32px;">*提交护照首页信息，护照有效期不早于2028年3月1日，如不符合要求请及时换发新护照，入学报到前护照信息不可更改;</span></span></p><p style="font-size: 14px; text-align: left; line-height: 2em;"><span style="font-family: 微软雅黑, sans-serif; font-size: 16px; text-indent: 48px; color: rgb(38, 38, 38);">&nbsp; &nbsp; &nbsp; *在中国大陆境内的申请者还需提供所有签证页或居留许可页的扫描件（按照年份顺序排列）</span></p><p style="font-size: 14px; text-align: left; line-height: 2em;"><strong style="color: rgb(63, 63, 63); font-size: 16px; font-family: 宋体; text-indent: 2em;"><span style="font-family: 微软雅黑;">&nbsp; &nbsp; &nbsp; 2. 三年全日制高中毕业证书</span></strong></p><p style="font-family: 宋体; text-indent: 2em; text-align: left; line-height: 2em;"><span style="text-indent: 32px; font-size: 16px; font-family: 微软雅黑, sans-serif; color: rgb(38, 38, 38);">*非中文或英文语种需提供中文或英文的官方翻译公证件；</span></p><p style="font-family: 宋体; text-indent: 2em; text-align: left; line-height: 2em;"><span style="font-family: 微软雅黑, sans-serif; font-size: 16px; text-indent: 32px; color: rgb(38, 38, 38);">*应届毕业生可先提供本人所在学校出具的预毕业证明，入学报到时补充正式毕业证书；</span></p><p style="font-family: 宋体; text-indent: 2em; text-align: left; line-height: 2em;"><span style="font-family: 微软雅黑, sans-serif; font-size: 16px; text-indent: 32px; color: rgb(38, 38, 38);">*马来西亚SPM文凭、两年制高中</span><span style="color: rgb(38, 38, 38); font-family: 微软雅黑, sans-serif; font-size: 16px; text-indent: 32px;">还需额外提供一年大学预科证书，如申请时只有在读证明，入学报到时补充正式证书；</span></p><p style="font-family: 宋体; text-indent: 2em; text-align: left; line-height: 2em;"><strong style="color: rgb(63, 63, 63); font-size: 16px; text-indent: 2em;"><span style="font-family: 微软雅黑;">3. 高中三年所有课程成绩单</span></strong></p><p style="font-family: 宋体; text-indent: 2em; text-align: left; line-height: 2em;"><span style="font-family: 微软雅黑; font-size: 16px; color: rgb(38, 38, 38);">*中文或英文版加盖学校公章，非中文或英文版需提供中文或英文的官方翻译公证件；</span></p><p style="font-family: 宋体; text-indent: 2em; text-align: left; line-height: 2em;"><span style="font-family: 微软雅黑; font-size: 16px; color: rgb(38, 38, 38);">*马来西亚SPM文凭、两年制高中还需额外提供一年<span style="color: rgb(38, 38, 38); font-family: 微软雅黑, sans-serif; font-size: 16px; text-indent: 32px; text-wrap-mode: wrap;">大学预科成绩单或STPM、A-level；</span></span></p><p style="font-family: 宋体; text-indent: 2em; text-align: left; line-height: 2em;"><strong style="color: rgb(63, 63, 63); font-size: 16px; text-indent: 2em;"><span style="font-family: 微软雅黑;">4. HSK汉语水平考试证书</span></strong></p><p style="text-indent: 28px; text-align: left; line-height: 2em;"><span style="font-family: 微软雅黑, sans-serif; text-indent: 32px; font-size: 16px; color: rgb(38, 38, 38);">*除汉语言专业外，所有专业须达到HSK5级180分以上(单项不低于60分)；</span></p><p style="text-indent: 28px; text-align: left; line-height: 2em;"><span style="font-family: 微软雅黑, sans-serif; font-size: 16px; text-indent: 32px; color: rgb(38, 38, 38);">*汉语言专业须达到HSK4级180分以上(单项不低于60分)；汉语言专业二年级插班：国外全日制高中毕业后在国内大学或国外大学中文及相关专业学习中文满一年以上，HSK5级180分以上(单项不低于60分)；汉语言专业三年级插班：国外全日制高中毕业后在国内大学或国外大学中文及相关专业学习中文满二年以上，HSK6级180分以上(单项不低于60分)；</span></p><p style="margin: 5px 0px; text-align: left; text-indent: 32px; line-height: 2em;"><span style="font-size: 16px; font-family: 微软雅黑, sans-serif; color: rgb(38, 38, 38);">*毕业于马来西亚华文独立中学，参加马来西亚华文独立中学统一考试的学生需提供UEC证书,可代替HSK证书；</span></p><p style="margin: 5px 0px; text-align: left; text-indent: 32px; line-height: 2em;"><span style="font-size: 16px; font-family: 微软雅黑, sans-serif; color: rgb(38, 38, 38);">*如提供HSK成绩网页截屏，入学报到时补充正式考试证书；</span></p><p style="margin: 5px 0px; text-align: left; text-indent: 32px; line-height: 2em;"><span style="font-size:16px;font-family:&#39;微软雅黑&#39;,sans-serif;color:black"></span></p><p style="margin: 5px 0px; text-indent: 32px; text-align: left; line-height: 2em;"><span style="font-size: 16px; color: rgb(63, 63, 63);"><strong><span style="color: rgb(63, 63, 63); font-size: 16px; font-family: 微软雅黑;">5.&nbsp;<strong><span style="font-size:16px;font-family:&#39;微软雅黑&#39;,sans-serif;color:#3F3F3F">来华留学本科入学学业水平测试（CSCA 测试）成绩单</span></strong></span></strong></span></p><p style="margin: 5px 0px; text-indent: 32px; text-align: left; line-height: 2em;"><span style="text-indent: 32px; font-size: 16px; font-family: 微软雅黑; color: rgb(38, 38, 38);">*自2026/2027学年开始，所有申请本科专业的国际学生须参加由中国教育部国家留学基金管理委员会组织的“来华留学本科入学学业水平测试”（China Scholastic Competency Assessment, 以下简称“CSCA测试”），并提交测试成绩。每年提供5场测试，分别于1月、3月、4月、6月、12月；测试时间、形式、费用等详见CSCA官方网站（</span><a href="http://www.csca.cn/" style="text-decoration: underline; font-family: 微软雅黑; text-indent: 32px; font-size: 16px; color: rgb(38, 38, 38);"><span style="font-family: 微软雅黑; text-indent: 32px; font-size: 16px; color: rgb(38, 38, 38);">www.csca.cn</span></a><span style="font-family: 微软雅黑; text-indent: 32px; font-size: 16px; color: rgb(38, 38, 38);">）；科目要求请见《南京大学留学生2027年本科专业目录》</span><a href="https://hwxy.nju.edu.cn/lxnd/zsxx/bkxm/zyml/index.html" target="_self" style="text-decoration: underline; font-family: 微软雅黑; color: rgb(38, 38, 38); font-size: 14px;"><span style="font-family: 微软雅黑; color: rgb(38, 38, 38); font-size: 14px;">https://hwxy.nju.edu.cn/lxnd/zsxx/bkxm/zyml/index.html</span></a><span style="font-family: 微软雅黑; text-indent: 32px; font-size: 16px; color: rgb(38, 38, 38);">；</span></p><p style="margin: 5px 0px; text-indent: 32px; text-align: left; line-height: 2em;"><span style="font-family: 微软雅黑; text-indent: 32px; font-size: 16px; color: rgb(38, 38, 38);">*我校成绩提交截止日期为5月15日。</span></p><p style="margin: 5px 0px; text-indent: 32px; text-align: left; line-height: 2em;"><span style="text-indent: 2em; font-family: 宋体; font-size: 16px; color: rgb(63, 63, 63);"><strong><span style="font-family: 微软雅黑;">6. 1-2封推荐信&nbsp;&nbsp;</span></strong></span><span style="text-indent: 2em; font-family: 微软雅黑; font-size: 16px;">(<span style="font-size: 12pt; font-family: 微软雅黑, sans-serif;">中文或英文，高中老师撰写</span>)</span></p><p style="margin: 5px 0px; text-indent: 32px; text-align: left; line-height: 2em;"><span style="font-family: 宋体; text-indent: 2em; font-size: 16px; color: rgb(63, 63, 63);"><strong><span style="font-family: 微软雅黑;">7. 本科学习计划 </span></strong></span><span style="text-indent: 2em; font-family: 微软雅黑; font-size: 16px;">(须有个人介绍，学习经历，申请理由)</span></p><p style="margin: 5px 0px; text-indent: 32px; text-align: left; line-height: 2em;"><span style="text-indent: 2em; font-family: 宋体; font-size: 16px; color: rgb(63, 63, 63);"><strong><span style="font-family: 微软雅黑;">8.&nbsp;</span></strong></span><span style="text-indent: 2em; font-family: 微软雅黑; font-size: 16px;"><span style="color: rgb(63, 63, 63);"><strong>其他材料&nbsp;</strong></span><strong>（</strong>根据个人情况提供）</span></p><p style="font-family: 宋体; text-indent: 2em; text-align: left; line-height: 2em;"><span style="color: rgb(0, 0, 0); font-family: 微软雅黑; font-size: 16px;">&nbsp; &nbsp;*至2027年9月1日未满18周岁的申请人，须提交&nbsp;</span><a href="/DFS//file/2025/12/23/20251223102340139nq1d25.pdf" title="在华监护确认书" style="font-family: &quot;Helvetica Neue&quot;, helvetica, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; text-decoration: underline; text-indent: 2em; font-size: 16px; color: rgb(112, 48, 160);"><span style="text-indent: 2em; font-size: 16px; color: rgb(112, 48, 160);">在华监护确认书</span></a><span style="text-indent: 48px; font-size: 16px; font-family: 微软雅黑, sans-serif;">；<span style="text-indent: 48px; font-family: 微软雅黑, sans-serif; font-size: 12px;">（不接收2027年不满足18周岁的申请）</span></span></p><p style="text-indent: 28px; text-align: left; line-height: 2em;"><span style="text-indent: 2em; font-family: 宋体;">&nbsp;</span><span style="font-family: 微软雅黑; font-size: 16px; text-indent: 2em;">*报考英语专业的申请人需提供雅思成绩5.5分(含)以上或托福成绩70分(含)以上的成绩单；（托福成绩南京大学接收代码：C288&nbsp;）&nbsp; &nbsp; &nbsp;&nbsp;</span></p><p style="font-family: 宋体; text-indent: 2em; text-align: left; line-height: 2em;"><span style="color: rgb(0, 0, 0); font-family: 微软雅黑; font-size: 16px;">&nbsp; &nbsp;*报考建筑学专业需提供与所报考专业相关的美术作品(至少1份)；</span></p><p style="font-family: 宋体; text-indent: 2em; text-align: left; line-height: 2em;"><span style="color: rgb(0, 0, 0); font-family: 微软雅黑; font-size: 16px;">&nbsp; &nbsp;</span><span style="text-indent: 48px; font-size: 16px; font-family: 微软雅黑, sans-serif;">*可提交A-Level、AP、ACT、IB、SAT、AST等标准化考试成绩(成绩有效期为2年)；</span></p><p style="font-family: 宋体; text-indent: 2em; text-align: left; line-height: 2em;"><span style="text-indent: 2em; font-family: 微软雅黑; font-size: 16px;">&nbsp; &nbsp;*<span style="color: rgb(63, 63, 63);"><strong>华裔、转国籍申请人需提供的材料</strong></span>&nbsp;&nbsp;</span><a href="/DFS//file/2025/01/02/20250102095354897l94rsn.pdf" title="附件1-华裔学生认定外国籍所需材料" style="font-family: 微软雅黑; text-indent: 2em; color: rgb(112, 48, 160); font-size: 16px;"><span style="text-indent: 2em;">附件1-华裔学生认定外国籍所需材料</span></a><span style="font-family: 微软雅黑; text-indent: 2em; color: rgb(112, 48, 160); font-size: 16px;">&nbsp;&nbsp;</span><a href="/DFS//file/2024/03/01/2024030116343033133xig5.pdf" title="附件2-本科申请诚信承诺书" style="font-family: 微软雅黑; text-indent: 2em; color: rgb(112, 48, 160); font-size: 16px;"><span style="text-indent: 2em;">附件2-本科申请诚信承诺书</span></a>&nbsp;</p><p style="font-family: 宋体; text-indent: 2em; text-align: left; line-height: 2em;">&nbsp; <span style="text-indent: 48px; font-family: 微软雅黑, sans-serif; font-size: 12px;">马来西亚华生，如父母双方原籍均为马来西亚，无需提供华裔生材料。</span></p><p style="font-family: 宋体; text-indent: 2em; text-align: left; line-height: 2em;"><span style="color: rgb(112, 48, 160); font-family: 微软雅黑; font-size: 16px; text-indent: 2em;"><br/></span></p><p class="MsoNormal p_text_indent_2" style="font-family: 宋体;text-indent: 2em;line-height: 29px"><span style="color: rgb(112, 48, 160); font-family: 微软雅黑; font-size: 16px; text-indent: 2em;">填报专业提示：</span><br/></p><p style="margin-right: 0px; margin-left: 0px; font-family: 宋体; text-indent: 32px; line-height: 1.75em;"><span style="color: rgb(63, 63, 63);"><strong><span style="font-family: 微软雅黑; font-size: 16px;">填写专业</span></strong><span style="font-family: 微软雅黑; font-size: 16px;">&nbsp;&nbsp;</span></span></p><p style="margin-right: 0px; margin-left: 0px; font-family: 宋体; text-indent: 32px; line-height: 1.75em;"><span style="color: rgb(0, 0, 0); font-family: 微软雅黑; font-size: 16px;">申请人可同时填写两个志愿专业及选择是否服从调剂。</span><span style="font-family: 微软雅黑; font-size: 16px;">申请材料会按填报顺序相继进入第一、二志愿专业院系复审，后进行调剂；</span></p><p style="margin-right: 0px; margin-left: 0px; font-family: 宋体; text-indent: 32px; line-height: 1.75em;"><span style="font-family: 微软雅黑; font-size: 16px;">默认调剂院系为海外教育学院；未被第一、二志愿录取的申请人选择不调剂，将视为不录取/不通过处理。&nbsp;</span></p><p style="margin-right: 0px; margin-left: 0px; font-family: 宋体; text-indent: 32px; line-height: 1.75em;"><span style="color: rgb(63, 63, 63);"><strong><span style="font-family: 微软雅黑; font-size: 16px;">选拔方式</span></strong></span><span style="color: rgb(0, 0, 0); font-size: 16px;"><strong><span style="color: rgb(0, 0, 0); font-size: 17px; font-family: 微软雅黑, sans-serif;"></span></strong></span></p><p style="margin-right: 0px; margin-left: 0px; font-family: 宋体; text-indent: 32px; line-height: 1.75em;"><span style="color: rgb(0, 0, 0); font-family: 微软雅黑; font-size: 16px;">1. 材料审核&nbsp; (</span><span style="font-family: 微软雅黑; font-size: 16px;">根据高中阶段成绩、语言水平、综合能力等择优录取)</span></p><p style="margin-right: 0px; margin-left: 0px; font-family: 宋体; text-indent: 32px; line-height: 1.75em;"><span style="color: rgb(0, 0, 0); font-family: 微软雅黑; font-size: 16px;">2. 笔试面试</span><span style="font-family: 微软雅黑; font-size: 16px;">（<span style="font-family: 微软雅黑; font-size: 16px; text-indent: 32px; text-wrap-mode: wrap;">数学学院、计算机学院、海外教育学院、外国语学院、商学院</span>）</span></p><p style="margin-right: 0px; margin-left: 0px; font-family: 宋体; text-indent: 32px; line-height: 1.75em;"><span style="color: rgb(31, 56, 100);font-family: 微软雅黑, sans-serif;font-size: 17px"><br/></span></p><p style="font-family: 宋体;line-height: 45px"><span style="font-size: 18px;"><strong><span style="font-size: 18px; font-family: 微软雅黑; color: rgb(112, 48, 160);">申报流程</span></strong></span></p><p style="font-family: 宋体; line-height: 1.75em;"><span style="font-family: 微软雅黑, sans-serif; font-size: 16px; text-indent: 32px;">1. 材料初审</span></p><p style="font-family: 宋体; line-height: 1.75em;"><span style="font-family: 微软雅黑, sans-serif; font-size: 16px; text-indent: 32px;">&nbsp; &nbsp; &nbsp;&nbsp;申请人提交网上申请后，5个工作日内会收到初审通知 (中国法定节假日除外，初审通过后系统提示支付申请费)</span></p><p style="font-family: 宋体; line-height: 1.75em;"><span style="font-family: 微软雅黑, sans-serif; font-size: 16px; text-indent: 32px;">2. 学院复审&nbsp; &nbsp;</span></p><p style="font-family: 宋体; line-height: 1.75em;"><span style="font-family: 微软雅黑, sans-serif; font-size: 16px; text-indent: 32px;">&nbsp; &nbsp; &nbsp; 已支付申请费状态下，招生部门整合申请人材料成批量送入各个学院进行复审，</span><span style="text-indent: 32px; font-family: 微软雅黑; font-size: 16px;">复审时间(含笔、面</span><span style="text-indent: 32px; font-size: 16px; font-family: 微软雅黑, sans-serif;">试)约10-30个工作日；</span></p><p style="font-family: 宋体; line-height: 1.75em;"><span style="text-indent: 32px; font-size: 16px; font-family: 微软雅黑, sans-serif;">&nbsp; &nbsp; &nbsp; 请申请人务必定期查看申请状态，以免耽误申请后续步骤；</span></p><p style="font-family: 宋体; line-height: 1.75em;"><span style="text-indent: 32px; font-size: 16px; font-family: 微软雅黑, sans-serif;">3.&nbsp;录取结果</span></p><p style="font-family: 宋体; line-height: 1.75em;"><span style="text-indent: 32px; font-family: 微软雅黑, sans-serif; font-size: 16px;">&nbsp; &nbsp; &nbsp;不论申请人被录取与否，均会收到站内信或电子邮件通知；</span></p><p style="font-family: 宋体; line-height: 1.75em;"><span style="font-family: 微软雅黑, sans-serif; font-size: 16px; text-indent: 32px;">4. 录取通知&nbsp; &nbsp;</span></p><p style="font-family: 宋体; line-height: 1.75em;"><span style="font-family: 微软雅黑, sans-serif; font-size: 16px; text-indent: 32px;">&nbsp; &nbsp; &nbsp;录取完成后的15个工作日内发出电子录取材料。</span></p><p style="font-family: 宋体; line-height: 1.75em;"><span style="font-family: 微软雅黑, sans-serif; font-size: 16px; text-indent: 32px;">5. 入学准备&nbsp; &nbsp;</span></p><p style="font-family: 宋体; line-height: 1.75em;"><span style="text-indent: 32px; font-size: 16px; font-family: 微软雅黑, sans-serif;">&nbsp; &nbsp; &nbsp;凭录取通知书和JW202表去中华人民共和国驻外使（领）馆办理来华学习（X）签证；必须携带《南京大学外国留学生录取通知书》、JW202表和《外国人体格检查表》</span><span style="text-indent: 32px; font-size: 17px; font-family: 微软雅黑, sans-serif; color: rgb(31, 56, 100);">&nbsp;</span><a href="/DFS//file/2022/06/27/202206271035560543pl8mi.doc" title="南京大学外国人体格检查记录表" style="text-indent: 32px; font-family: &quot;Helvetica Neue&quot;, helvetica, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 16px; color: rgb(112, 48, 160);">南京大学外国人体格检查记录表.doc</a><span style="text-indent: 32px;">&nbsp;</span><span style="text-indent: 32px; font-size: 16px; font-family: 微软雅黑, sans-serif;">原件(该表的有效期只有6个月) 且为来华后申请居留许可的必须证件,请妥善安排体检时间，入境后体检要求请参看&nbsp;</span><a href="/DFS//file/2022/06/27/20220627103556194fxd5js.pdf" title="入境人员体检须知" style="text-indent: 32px; font-family: &quot;Helvetica Neue&quot;, helvetica, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;WenQuanYi Micro Hei&quot;, sans-serif; font-size: 16px; color: rgb(112, 48, 160);">入境人员体检须知.pdf</a><span style="text-indent: 32px;">，</span><span style="text-indent: 32px; font-size: 16px; font-family: 微软雅黑, sans-serif;">按规定时间到南京大学海外教育学院进行入学注册报到。</span></p><p style="font-family: 宋体; line-height: 1.75em;"><span style="text-indent: 32px; font-size: 16px; font-family: 微软雅黑, sans-serif;">&nbsp; &nbsp; &nbsp;<strong style="color: rgb(63, 63, 63);">2027年秋季入学等事宜，请以录取通知书和官方电邮通知为准；</strong></span></p><p style="margin-right: 0px; margin-left: 0px; font-size: 14px; font-family: 宋体; text-indent: 32px; line-height: 1.75em;"><span style="color: rgb(63, 63, 63);"><strong><span style="font-size: 16px; font-family: 微软雅黑, sans-serif;"><br/></span></strong></span></p><p style="font-size: 14px;font-family: 宋体;line-height: 33px"><span style="font-size: 18px;"><strong><span style="font-family: 微软雅黑; color: rgb(112, 48, 160);">费用</span></strong></span><strong><span style="font-size: 15px;font-family: 微软雅黑;color: rgb(112, 48, 160)">&nbsp;</span></strong><span style="color: rgb(0, 0, 0); font-size: 16px;"><span style="color: rgb(0, 0, 0); font-family: 微软雅黑;">（人民币</span><span style="color: rgb(0, 0, 0); font-family: arial;">RMB</span><span style="color: rgb(0, 0, 0); font-family: 微软雅黑;">）</span><span style="color: rgb(0, 0, 0); font-family: arial;">&nbsp; &nbsp;</span></span></p><p style="font-size: 14px; font-family: 宋体; line-height: normal;"><span style="font-size: 17px; font-family: 微软雅黑; color: rgb(31, 56, 100);">&nbsp; &nbsp; </span><span style="font-size: 16px;"><span style="font-family: 微软雅黑; color: rgb(31, 56, 100);">&nbsp;&nbsp;</span><span style="font-family: 微软雅黑; text-indent: 2em; color: rgb(0, 0, 0);">学&nbsp; &nbsp;费：&nbsp;文科专业&nbsp;21,000元/年；理科和商科各专业&nbsp;24,000元/年&nbsp;</span></span></p><p style="font-size: 14px; font-family: 宋体; line-height: normal;"><span style="font-family: 微软雅黑; text-indent: 2em; font-size: 16px;">&nbsp; &nbsp; &nbsp;&nbsp;</span><span style="font-family: 微软雅黑; color: rgb(0, 0, 0); font-size: 16px;">申请费：&nbsp;500元&nbsp;（提交申请并通过初审后支付，不退)&nbsp;</span></p><p style="font-size: 14px; font-family: 宋体; line-height: normal;"><span style="font-family: 微软雅黑; color: rgb(0, 0, 0); font-size: 16px;">&nbsp; &nbsp; &nbsp; 保险费：&nbsp;400元/学期&nbsp;&nbsp;(入学后支付)</span></p><p class="MsoNormal p_text_indent_0" style="font-size: 14px;font-family: 宋体;line-height: 45px"><span style="font-size: 18px;"><strong><span style="font-family: 微软雅黑; color: rgb(112, 48, 160);">宿舍</span></strong><strong><span style="font-family: 微软雅黑; color: rgb(112, 48, 160);">&nbsp;</span></strong></span><strong><span style="font-size: 15px;font-family: 微软雅黑;color: rgb(112, 48, 160)"> &nbsp;&nbsp;</span></strong></p><p style="font-size: 14px; font-family: 宋体; line-height: 1.5em;"><span style="color: rgb(31, 56, 100); font-family: 微软雅黑; text-indent: 2em; font-size: 16px;">&nbsp; &nbsp; <span style="font-size: 17px; font-family: 微软雅黑; text-indent: 2em; color: rgb(0, 0, 0);">&nbsp; </span></span><span style="font-family: 微软雅黑; color: rgb(0, 0, 0); font-size: 16px;">鼓楼校区：西苑留学生公寓（地址：南京市鼓楼区上海路金银街20号）</span></p><p style="text-indent: 2em; line-height: 1.5em;"><span style="font-family: 微软雅黑; color: rgb(0, 0, 0); font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;平仓巷（地址：南京市鼓楼区平仓巷1号2栋/3栋）</span></p><p style="text-indent: 2em; line-height: 1.5em;"><span style="font-size: 16px; color: rgb(0, 0, 0); font-family: 微软雅黑, sans-serif;">仙林校区：21栋留学生公寓</span><span style="font-family: 微软雅黑; color: rgb(0, 0, 0); font-size: 16px;">（地址：南京市栖霞区南京大学仙林校区）</span></p><p style="font-size: 14px; font-family: 宋体; text-indent: 2em; line-height: 1.5em;"><span style="color: rgb(63, 63, 63);"><strong><span style="font-family: 微软雅黑; font-size: 16px;">温馨提示：宿舍房源紧张，申请先到先得。更多信息请点击：<span style="font-family: 微软雅黑; font-size: 16px; color: rgb(63, 63, 63);">&nbsp;</span></span></strong></span><a href="https://hwxy.nju.edu.cn/lxnd/xyfw/zsbx/zs/index.html" title="留学生宿舍" style="text-decoration: underline; font-family: 微软雅黑; font-size: 16px; color: rgb(112, 48, 160);"><strong><span style="font-size: 16px; color: rgb(112, 48, 160);">留学生宿舍</span></strong></a><span style="font-size: 16px; color: rgb(112, 48, 160);">&nbsp;</span><span style="color: rgb(63, 63, 63);"><strong><span style="font-family: 微软雅黑; color: rgb(0, 0, 0); font-size: 16px;"></span></strong><strong><span style="font-family: 微软雅黑; color: rgb(0, 0, 0); font-size: 16px;"></span></strong></span></p><p style="font-size: 14px; font-family: 宋体; text-indent: 2em; line-height: 2em;"><span style="font-family: 微软雅黑; color: rgb(31, 56, 100); font-size: 12px;"><br/></span></p><p style="font-size: 14px;font-family: 宋体;line-height: 45px"><span style="font-size: 18px;"><strong><span style="font-family: 微软雅黑; color: rgb(112, 48, 160);">联系我们</span></strong><span style="font-family: 微软雅黑; color: rgb(31, 56, 100);">&nbsp; </span></span><span style="font-size: 17px; font-family: 微软雅黑; color: rgb(31, 56, 100);">&nbsp;&nbsp;</span></p><p style="font-size: 14px; font-family: 宋体; line-height: 1.75em;"><span style="font-family: 微软雅黑; font-size: 16px; text-indent: 2em;">南京大学海外教育学院&nbsp; &nbsp;</span></p><p style="font-size: 14px; font-family: 宋体; line-height: 1.75em;"><span style="font-family: 微软雅黑; font-size: 16px; text-indent: 2em;">通讯地址：中国南京市鼓楼区 金银街18号曾宪梓楼&nbsp; &nbsp;</span></p><p style="font-size: 14px; font-family: 宋体; line-height: 1.75em;"><span style="font-family: 微软雅黑; font-size: 16px; text-indent: 2em;">邮政编码：210008&nbsp;</span></p><p style="font-size: 14px; font-family: 宋体; line-height: 1.5em;"><span style="font-family: 微软雅黑; font-size: 16px; text-indent: 2em;">招生&nbsp;:&nbsp;&nbsp;钱老师&nbsp; 0086-025-83595068 /&nbsp;qianyue@nju.edu.cn</span></p><p style="line-height: 1.5em;"><span style="font-family: 微软雅黑; color: rgb(0, 0, 0); font-size: 16px;">财务：汪老师&nbsp;0086-025-83593587&nbsp; /&nbsp;</span>&nbsp;<span style="font-family: 微软雅黑; color: rgb(0, 0, 0); font-size: 16px;">wjwang@nju.edu.cn</span></p><p style="line-height: 1.5em;"><span style="font-family: 微软雅黑; color: rgb(0, 0, 0); font-size: 16px;">签证：于老师&nbsp;0086-025-83592473&nbsp; /&nbsp;&nbsp;shensheng.yu@nju.edu.cn</span></p><p style="line-height: 1.5em;"><span style="font-family: 微软雅黑; color: rgb(0, 0, 0); font-size: 16px;">宿舍、保险：陈老师&nbsp;0086-025-83593616&nbsp; /&nbsp;carolinechen@nju.edu.cn</span></p><p style="line-height: 1.5em;"><span style="font-family: 微软雅黑; color: rgb(0, 0, 0); font-size: 16px;">教务:&nbsp; (各院系) 赵老师&nbsp;0086-025-83593616&nbsp; /&nbsp;zhaomj@nju.edu.cn</span></p><p style="line-height: 1.5em;"><span style="font-family: 微软雅黑; color: rgb(0, 0, 0); font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp;（海外教育学院）李老师 0086-025-83598996&nbsp; /&nbsp;</span>&nbsp;<span style="font-family: 微软雅黑; color: rgb(0, 0, 0); font-size: 16px;">lichunyan@nju.edu.cn</span></p><p style="font-size: 14px; font-family: 宋体; text-indent: 19px; line-height: 27px;"><br/></p>
+            </div>
+
+          </div>
+      </div>
+
+    </div>
+
+    <footer>
+      <div class="w">
+        <div class="foot_top pr clearfix">
+          <div class="link_web_left fl">
+
+              <li class="li1 f-fl">
+                <a href="https://www.nju.edu.cn/" target="_blank">南京大学</a>
+              </li>
+
+
+              <li class="li2 f-fl">
+                <a href="https://hwxy.nju.edu.cn/6021/list.htm" target="_blank">留学保险网</a>
+              </li>
+
+
+              <li class="li3 f-fl">
+                <a href="https://www.csc.edu.cn/" target="_blank">国家留学基金委</a>
+              </li>
+
+
+              <li class="li4 f-fl">
+                <a href="http://www.cscse.edu.cn/" target="_blank">中国留学网</a>
+              </li>
+
+          </div>
+          <div class="link_web_right fl">
+
+              <li class="li1 f-fl">
+                <a href="https://wb.nju.edu.cn/" target="_blank">国际合作与交流处</a>
+              </li>
+
+
+              <li class="li2 f-fl">
+                <a href="https://hwxy.nju.edu.cn/6021/list.htm" target="_blank">研究生院</a>
+              </li>
+
+
+              <li class="li3 f-fl">
+                <a href="https://news.nju.edu.cn/" target="_blank">南京大学新闻网</a>
+              </li>
+
+
+              <li class="li4 f-fl">
+                <a href="http://bbs.nju.edu.cn/" target="_blank">南大小百合</a>
+              </li>
+
+          </div>
+          <div class="foot_logo pa"></div>
+          <div class="lianxi fr clearfix">
+            <img src="/DFS//template/3410/images/ewm.jpg">
+            <p>海外教育学院公众号</p>
+          </div>
+        </div>
+          
+            
+          
+            <div style="color: white;text-align: center;font-size:14px;">
+              <span style="    margin-right: 2%;">地址：江苏省南京市鼓楼区上海路金银街18号 </span>
+              <span style="    margin-right: 2%;">邮编：210008 </span>
+              <span style="    margin-right: 2%;">电话：86-25-83593587 </span>
+              <span style="    margin-right: 2%;">招生电话：86-25-83594535 </span>
+              <span style="    margin-right: 2%;">传真：86-25-83316747 </span>
+              <span>邮箱：hwxy.nju.edu.cn </span>
+            </div>
+          
+      </div>
+      <div class="foot_bottom">
+        <div class="w">
+          <div class="copyright font-14 color-fff">
+            Copyright © 2021
+            南京大学海外教育学院<span style="margin-left: 18px;">数据统计</span><span
+                                                                        style="margin-left:22px;">访问量:<script type='text/javascript' src='/njdx/openapi/visit/pv.do?siteId=168&showType=1'></script></span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/DFS//template/3419/images/index.js"></script>
+    <script src="/DFS//template/3410/images/megamenu.js"></script>
+    <!--[if IE 8]>
+<script src="/DFS//template/3410/images/background.js"></script>
+<script>
+$("#").css("backgroundSize","cover");
+</script>
+<![endif]-->
+    <script src="/DFS//template/3410/images/main.js"></script>
+  </body>
+
+</html>

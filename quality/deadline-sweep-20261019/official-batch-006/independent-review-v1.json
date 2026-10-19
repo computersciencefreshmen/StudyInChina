@@ -1,0 +1,575 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "independent-xmu-date-scope-review-v1",
+  "reviewedAt": "2026-10-19T04:48:23.331Z",
+  "reviewer": "independent-codex-subagent",
+  "result": "passed-date-scope-only",
+  "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "method": "Independent JS DOM parse of original captured HTML, separately expanded rowspans, then exact comparison with current canonical parents/dates/source IDs and current public inventory. Did not rerun or trust the original Python finalizer.",
+  "summary": {
+    "checks": 107,
+    "passed": 107,
+    "failed": 0,
+    "sourceGuides": 3,
+    "degreeCycleBindings": 335,
+    "byDegree": {
+      "bachelor": 4,
+      "master": 143,
+      "doctorate": 188
+    },
+    "canonicalWrites": 0,
+    "networkRequests": 0,
+    "fullFactsCertified": 0
+  },
+  "guideDetails": [
+    {
+      "degreeLevel": "bachelor",
+      "sourceUrl": "https://admissions.xmu.edu.cn/cn/info/1063/10733.htm",
+      "bodySha256": "23339b569cd29cf3f29857e477d1bbe87e0ac8e54a09b56f94db0b45c4c6cbcf",
+      "rawOpeningRowspan": 4,
+      "selfFundedWindow": {
+        "opensOn": "2026-12-01",
+        "closesOn": "2027-05-31"
+      },
+      "expandedApplicationTypes": [
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年2月20日",
+          "applicationType": "中国政府奖学金B类"
+        },
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年4月30日",
+          "applicationType": "福建省政府外国留学生奖学金"
+        },
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年4月30日",
+          "applicationType": "厦门大学国际学生新生奖学金"
+        },
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年5月31日",
+          "applicationType": "自费生"
+        }
+      ],
+      "records": 4
+    },
+    {
+      "degreeLevel": "master",
+      "sourceUrl": "https://admissions.xmu.edu.cn/cn/info/1063/10743.htm",
+      "bodySha256": "d9b75f2174b01ff4e78d4c15b9fe1b9224e9b72a5b8b25b85fbdba727c1af04f",
+      "rawOpeningRowspan": 5,
+      "selfFundedWindow": {
+        "opensOn": "2026-12-01",
+        "closesOn": "2027-05-31"
+      },
+      "expandedApplicationTypes": [
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年2月20日",
+          "applicationType": "中国政府奖学金B类"
+        },
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年4月30日",
+          "applicationType": "福建省政府外国留学生奖学金"
+        },
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年4月30日",
+          "applicationType": "厦门大学国际学生新生奖学金"
+        },
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年4月30日",
+          "applicationType": "厦门大学海岸带可持续发展奖学金"
+        },
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年5月31日",
+          "applicationType": "自费生"
+        }
+      ],
+      "records": 143
+    },
+    {
+      "degreeLevel": "doctorate",
+      "sourceUrl": "https://admissions.xmu.edu.cn/cn/info/1063/10753.htm",
+      "bodySha256": "922e30024117104ccf9582060849000df6115fcff5ffef37137ca8dba5a7495e",
+      "rawOpeningRowspan": 6,
+      "selfFundedWindow": {
+        "opensOn": "2026-12-01",
+        "closesOn": "2027-05-31"
+      },
+      "expandedApplicationTypes": [
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年2月20日",
+          "applicationType": "中国政府奖学金B类"
+        },
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年2月20日",
+          "applicationType": "新汉学博士计划"
+        },
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年4月30日",
+          "applicationType": "福建省政府外国留学生奖学金"
+        },
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年4月30日",
+          "applicationType": "厦门大学国际学生新生奖学金"
+        },
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年4月30日",
+          "applicationType": "厦门大学海岸带可持续发展奖学金"
+        },
+        {
+          "opensOnText": "2026年12月1日",
+          "closesOnText": "2027年5月31日",
+          "applicationType": "自费生"
+        }
+      ],
+      "records": 188
+    }
+  ],
+  "checks": [
+    {
+      "name": "completion report hash",
+      "passed": true
+    },
+    {
+      "name": "capture manifest hash",
+      "passed": true
+    },
+    {
+      "name": "current input hash sources.json",
+      "passed": true
+    },
+    {
+      "name": "current input hash cities.json",
+      "passed": true
+    },
+    {
+      "name": "current input hash universities.json",
+      "passed": true
+    },
+    {
+      "name": "current input hash programs.json",
+      "passed": true
+    },
+    {
+      "name": "current input hash admission-cycles.json",
+      "passed": true
+    },
+    {
+      "name": "current input hash scholarships.json",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw capture hash",
+      "passed": true
+    },
+    {
+      "name": "bachelor capture size and HTTP",
+      "passed": true
+    },
+    {
+      "name": "bachelor saved table hash",
+      "passed": true
+    },
+    {
+      "name": "bachelor exact 2027 degree title",
+      "passed": true
+    },
+    {
+      "name": "bachelor unambiguous raw application table",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 0:0:0:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 0:1:0:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 0:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 1:0:0:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 1:0:1:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 1:0:2:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 1:0:3:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 1:1:0:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 1:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 2:1:0:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 2:1:1:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 2:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 3:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 4:1:0:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor raw cell overlap 4:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "bachelor self funded exact opening and cutoff",
+      "passed": true
+    },
+    {
+      "name": "bachelor opening rowspan reaches final row",
+      "passed": true
+    },
+    {
+      "name": "bachelor all expanded application type windows exact",
+      "passed": true
+    },
+    {
+      "name": "bachelor scholarship deadlines kept distinct",
+      "passed": true
+    },
+    {
+      "name": "bachelor table in correct programme scope",
+      "passed": true
+    },
+    {
+      "name": "bachelor external award route exception present",
+      "passed": true
+    },
+    {
+      "name": "bachelor decoded title and date evidence agree with raw",
+      "passed": true
+    },
+    {
+      "name": "master raw capture hash",
+      "passed": true
+    },
+    {
+      "name": "master capture size and HTTP",
+      "passed": true
+    },
+    {
+      "name": "master saved table hash",
+      "passed": true
+    },
+    {
+      "name": "master exact 2027 degree title",
+      "passed": true
+    },
+    {
+      "name": "master unambiguous raw application table",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 0:0:0:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 0:1:0:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 0:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 1:0:0:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 1:0:1:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 1:0:2:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 1:0:3:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 1:0:4:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 1:1:0:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 1:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 2:1:0:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 2:1:1:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 2:1:2:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 2:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 3:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 4:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 5:1:0:0",
+      "passed": true
+    },
+    {
+      "name": "master raw cell overlap 5:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "master self funded exact opening and cutoff",
+      "passed": true
+    },
+    {
+      "name": "master opening rowspan reaches final row",
+      "passed": true
+    },
+    {
+      "name": "master all expanded application type windows exact",
+      "passed": true
+    },
+    {
+      "name": "master scholarship deadlines kept distinct",
+      "passed": true
+    },
+    {
+      "name": "master table in correct programme scope",
+      "passed": true
+    },
+    {
+      "name": "master external award route exception present",
+      "passed": true
+    },
+    {
+      "name": "master decoded title and date evidence agree with raw",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw capture hash",
+      "passed": true
+    },
+    {
+      "name": "doctorate capture size and HTTP",
+      "passed": true
+    },
+    {
+      "name": "doctorate saved table hash",
+      "passed": true
+    },
+    {
+      "name": "doctorate exact 2027 degree title",
+      "passed": true
+    },
+    {
+      "name": "doctorate unambiguous raw application table",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 0:0:0:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 0:1:0:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 0:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 1:0:0:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 1:0:1:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 1:0:2:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 1:0:3:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 1:0:4:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 1:0:5:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 1:1:0:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 1:1:1:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 1:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 2:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 3:1:0:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 3:1:1:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 3:1:2:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 3:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 4:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 5:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 6:1:0:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate raw cell overlap 6:2:0:0",
+      "passed": true
+    },
+    {
+      "name": "doctorate self funded exact opening and cutoff",
+      "passed": true
+    },
+    {
+      "name": "doctorate opening rowspan reaches final row",
+      "passed": true
+    },
+    {
+      "name": "doctorate all expanded application type windows exact",
+      "passed": true
+    },
+    {
+      "name": "doctorate scholarship deadlines kept distinct",
+      "passed": true
+    },
+    {
+      "name": "doctorate table in correct programme scope",
+      "passed": true
+    },
+    {
+      "name": "doctorate external award route exception present",
+      "passed": true
+    },
+    {
+      "name": "doctorate decoded title and date evidence agree with raw",
+      "passed": true
+    },
+    {
+      "name": "335 unique record bindings",
+      "passed": true
+    },
+    {
+      "name": "bachelor binding count",
+      "passed": true
+    },
+    {
+      "name": "master binding count",
+      "passed": true
+    },
+    {
+      "name": "doctorate binding count",
+      "passed": true
+    },
+    {
+      "name": "all current canonical degree parent date source and application scope bindings",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "inventory content snapshot matches",
+      "passed": true
+    },
+    {
+      "name": "all current public XMU degree cycles covered exactly once",
+      "passed": true
+    },
+    {
+      "name": "zero full record or award approvals",
+      "passed": true
+    },
+    {
+      "name": "raw report unchanged after review",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "qualification": "Passed only the self-funded opening/deadline interpretation and its exact 335-record bindings. May31 is not a CSC or other scholarship cutoff; CSC Type A/ICLT follow external authority dates. Does not certify programme existence, catalogue completeness or non-date fields.",
+  "outputOnly": "quality/deadline-sweep-20261019/official-batch-006/independent-review-v1.json"
+}

@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-date-only-evidence-review-batch008",
+  "reviewedAt": "2026-10-19T04:54:30.009947+00:00",
+  "reviewer": "deployment_audit agent; not batch008 author",
+  "result": "pass",
+  "report": {
+    "path": "quality/deadline-sweep-20261019/official-batch-008/report.json",
+    "sha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+  },
+  "plan": {
+    "path": "quality/deadline-sweep-20261019/current-public-deadline-plan-v1.json",
+    "sha256": "3f8bbba636ddebd602a4dd01068d008249c5aa0f3081012121eb44982a0a22bc",
+    "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722"
+  },
+  "verifiedCounts": {
+    "distinctPublicCycleBindings": 12,
+    "universitiesWithScopedDateChecks": 7,
+    "unchangedDeadlines": 12,
+    "prior70DuplicateRecordIds": 0,
+    "carried16DuplicateRecordIds": 0,
+    "scholarshipsCertified": 0,
+    "wholeSchoolCataloguesCompleted": 0,
+    "newFullRecordsCertified": 0
+  },
+  "checks": [
+    {
+      "name": "canonical-and-source-bindings",
+      "result": "pass",
+      "detail": "All6current canonical byte hashes match plan. All12actual public cycle IDs,programme parents,source IDs and exact source URLs,academicYear,intake,opening/deadline values match; no prior70 or carried16 overlap."
+    },
+    {
+      "name": "fresh-PDF-byte-and-text-pins",
+      "result": "pass",
+      "pdfEvidence": [
+        {
+          "key": "blcu",
+          "pdfPath": "blcu.pdf",
+          "pdfSha256": "17c8a4e898f89b233917269b5353b3110d63ebd5e62c568672d8fbc43d864993",
+          "textPath": "blcu.txt",
+          "textSha256": "92659fa9a6d755b1183ae55c486db763ced8689a633b15016f38198d6f85ae4e",
+          "pages": 2
+        },
+        {
+          "key": "fudan",
+          "pdfPath": "fudan.pdf",
+          "pdfSha256": "79590e27e8a092013db2c208718c00b1af2ba6e9cdec2d29b6d5be9ffac68351",
+          "textPath": "fudan.txt",
+          "textSha256": "32e3c644b41164e1370174f77cbcd65b5fb4f6a03d60db39cd1564c864657ca2",
+          "pages": 15
+        },
+        {
+          "key": "shu",
+          "pdfPath": "shu.pdf",
+          "pdfSha256": "924785d97f72deae12a57ff775fb9e69625f684aef92e75bbf17eff4556d2aa6",
+          "textPath": "shu.txt",
+          "textSha256": "946a037f6fd7d618424104b8f21a87f6c55eeb39de45a5ad80c90a2b690ddcd3",
+          "pages": 6
+        }
+      ],
+      "detail": "All3saved official PDF byte/text hashes and page counts match report. Reviewer independently reopened PDFs withpypdf; Fudanpage11 andSHUpage3 date text match. BLCU has effectively no readable extracted body and requires image review."
+    },
+    {
+      "name": "image-only-BLCU-date-and-programme-scope",
+      "result": "pass",
+      "detail": "Visually reviewed both rendered pages:2027undergraduate title; ChineseLanguage and InternationalChineseEducation standalone programme rows shareMarch/September entry; spring deadline explicitlyFebruary1,2027. No opening date invented."
+    },
+    {
+      "name": "Fudan-contextual-year-preserved",
+      "result": "pass",
+      "detail": "PDFpage11 visually confirmsOctober16 andDecember13 application month/day besideSpring2027programme context. Saved officialHTML observation dates landing noticeOctober13,2026. Report explicitly calls2026contextual, not an explicitly printed deadline year."
+    },
+    {
+      "name": "SHU-specific-2027-foundation-window",
+      "result": "pass",
+      "detail": "Visually checked physical PDFpage3, printedpage2: September30–December30,2026 window for2027springfoundation route; not another scholarship or degree intake."
+    },
+    {
+      "name": "HTML-route-and-date-scope",
+      "result": "pass",
+      "detail": "Saved web observations contain bothXJTUadvanced andintensive2027table rows withdifferentJan15/Mar12 deadlines;SJTUhalfyearFeb2027spring scope andJan15 deadline;GDUFSdegreeSpring2027Sept30–Dec10 window. Portal acceptance not asserted."
+    },
+    {
+      "name": "SWJTU-before-boundary-preserved",
+      "result": "pass",
+      "detail": "SavedHTML contains beforeJanuary1,2027 online completion. School, both record rows, precisionIssues andREADME retain the qualification; no full inclusiveJanuary1 day or opening calendar date inferred."
+    },
+    {
+      "name": "date-only-scope-and-mutations",
+      "result": "pass",
+      "detail": "All12record rows deny full certification/canonical writes; report claims zero whole-school catalogues. No freshness renewal or applicant-portal availability inference."
+    }
+  ],
+  "reviewedImages": [
+    {
+      "path": "blcu-page-1.png",
+      "sha256": "3c237c5706d84d303d050c09c8a457fc0a45e502cba736f292fc2fa28d70d98e",
+      "reviewedVisually": true
+    },
+    {
+      "path": "blcu-page-2.png",
+      "sha256": "690a8c0178b5001b3315c2367693b8c84c481f30d0ac47a7ef5fe62249edb98b",
+      "reviewedVisually": true
+    },
+    {
+      "path": "fudan-page-11.png",
+      "sha256": "9fdcaac76dd5de5a543e8598591c3d0aecadb0d6ca8adcd34785ba789fb04e17",
+      "reviewedVisually": true
+    },
+    {
+      "path": "shu-date-page-3.png",
+      "sha256": "4c6e3c85ef6d028766f025969e12a11cea215f4788531ce2f4315cd2a4f20add",
+      "reviewedVisually": true
+    }
+  ],
+  "webObservationPins": [
+    {
+      "path": "web-open-observations.json",
+      "sha256": "2c03366b63e2d2947e0f6c197ab62399f373f95986d3f0fff47e8dec333f3dc2",
+      "provenance": "Saved returned web-tool text, not raw origin-server HTML."
+    },
+    {
+      "path": "sjtu-web-observation.json",
+      "sha256": "ef8d66da9aa5dbaf348da4b47feb43aa1467e23ea3c3c729663ba4f8ef8a601d",
+      "provenance": "Saved returned web-tool text, not raw origin-server HTML."
+    }
+  ],
+  "findings": [],
+  "limits": [
+    "PDFimages were visually reviewed from saved renders and pinned; reviewer did not regenerate them because review scope permits only this new JSON output.",
+    "This review uses existing fresh captures and savedHTMLobservations; no additional network requests were made.",
+    "Fudancontextual year andSWJTUbefore-date qualifications must accompany any downstream date-only presentation."
+  ],
+  "mutations": {
+    "canonicalWrites": 0,
+    "sharedProgressWrites": 0,
+    "gitMutations": 0,
+    "deploymentMutations": 0,
+    "networkRequests": 0,
+    "filesWritten": [
+      "quality/deadline-sweep-20261019/official-batch-008/independent-review-v1.json"
+    ]
+  }
+}

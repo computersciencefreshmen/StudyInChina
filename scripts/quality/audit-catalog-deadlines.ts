@@ -235,15 +235,36 @@ export function generateAudit(inputDirectory: string, outputDirectory: string, t
       || b.unknownOrRollingCount - a.unknownOrRollingCount || a.url.localeCompare(b.url))
   const inventorySummary = { ...summary, distinctOfficialDateRecheckPages: officialRecheckPages.length,
     distinctOfficialDateRecheckPagesWithCurrentWindows: officialRecheckPages.filter(row => row.currentWindowCount > 0).length }
-  mkdirSync(outputDir, { recursive: true })
+  const reportPath = path.join(outputDir, 'catalog-deadlines.json')
+  const markdownPath = path.join(outputDir, 'catalog-deadlines.md')
   const progressPath = path.join(outputDir, 'official-recheck-progress.json')
+  const existingBundle = [reportPath, markdownPath, progressPath].filter(existsSync)
+  if (existingBundle.length) {
+    if (existingBundle.length !== 3) throw new Error('Partial immutable audit bundle; use a unique --output-dir')
+    const previous = JSON.parse(readFileSync(reportPath, 'utf8'))
+    const progress = JSON.parse(readFileSync(progressPath, 'utf8'))
+    // Legacy reports did not store the capacity explicitly. Multiple school
+    // batches establish it exactly; a single short legacy batch cannot do so.
+    const previousBatchSize = previous.batchSize ?? (previous.batches?.length > 1 ? previous.batches[0].universityIds?.length : null)
+    const matches = previous.today === today && previous.snapshotSha256 === snapshotSha256
+      && previous.inputDir === inputDir && previousBatchSize === batchSize
+      && progress.today === today && progress.snapshotSha256 === snapshotSha256
+      && JSON.stringify(previous.inputFileSha256) === JSON.stringify(hashes)
+      && JSON.stringify(previous.summary) === JSON.stringify(inventorySummary)
+      && JSON.stringify(previous.batches) === JSON.stringify(batches)
+      && JSON.stringify(previous.unattributedScholarshipBatches) === JSON.stringify(unattributedScholarshipBatches)
+    if (!matches) throw new Error('Immutable audit date, snapshot or options differ; use a unique --output-dir')
+    console.log(JSON.stringify({ result: 'reused immutable audit', today, inputDir, outputDir, snapshotSha256, ...inventorySummary }, null, 2))
+    return
+  }
+  mkdirSync(outputDir, { recursive: true })
   const existingProgress = existsSync(progressPath) ? JSON.parse(readFileSync(progressPath, 'utf8')) : null
   if (!existingProgress) writeFileSync(progressPath, JSON.stringify({ schemaVersion: 1, snapshotSha256, today,
     instruction: 'Update only after actually reading official pages. A completed date sweep is not official website verification. Never renew verifiedAt or reviewAfter from this report alone.',
     batches: [...batches, ...unattributedScholarshipBatches].map(batch => ({ batchId: batch.id, state: 'pending',
-      completedUniversityIds: [], receipts: [], deployedCommit: null, deployedUrl: null })) }, null, 2) + '\n')
+      completedUniversityIds: [], receipts: [], deployedCommit: null, deployedUrl: null })) }, null, 2) + '\n', { flag: 'wx' })
   const report = { schemaVersion: 1, generatedAt: new Date().toISOString(), today, timeZone: 'Asia/Shanghai',
-    inputDir, snapshotSha256, inputFileSha256: hashes,
+    inputDir, snapshotSha256, inputFileSha256: hashes, batchSize,
     auditType: 'automated-stored-date-inventory', officialWebsiteVerifiedThisRun: false,
     rules: [
       'A deadline equal to today remains valid through the end of that date in Asia/Shanghai.',
@@ -261,7 +282,7 @@ export function generateAudit(inputDirectory: string, outputDirectory: string, t
     batches, unattributedScholarshipBatches, orphanQueue, officialRecheckPages,
     universities: schoolRows, programs: programRows, admissionCycles: cycles, scholarships,
     sources: raw.sources.map(row => ({ id: row.id, url: row.url, official: row.official, accessedAt: row.accessedAt })) }
-  writeFileSync(path.join(outputDir, 'catalog-deadlines.json'), JSON.stringify(report, null, 2) + '\n')
+  writeFileSync(reportPath, JSON.stringify(report, null, 2) + '\n', { flag: 'wx' })
   const table = (rows: Record<string, number>) => Object.entries(rows).map(([key, count]) => `| ${key} | ${count} |`).join('\n')
   const markdown = `# Catalogue deadline sweep: ${today}\n\n` +
     `This is an automated inventory of stored structured dates, **not new official website verification**. Official pages read in this run: **0**. The cutoff is inclusive in Asia/Shanghai. An expired intake is historical reference; it is not evidence that the program stopped operating.\n\n` +
@@ -277,7 +298,7 @@ export function generateAudit(inputDirectory: string, outputDirectory: string, t
     `Use \`catalog-deadlines.json\` for exact IDs, university links, per-record source URLs and batch membership. Its \`officialRecheckPages\` deduplicates ${officialRecheckPages.length} official date source pages (${inventorySummary.distinctOfficialDateRecheckPagesWithCurrentWindows} with current windows), so one page read can support multiple matching intake records. Record actual official-page findings in \`official-recheck-progress.json\`; completion receipts require URL, accessed date and the official deadline wording. Keep this progress file when rerunning. Deploy and push each completed reviewed batch, recording commit and deployed URL. The generator changes no canonical data.\n\n` +
     `| Batch | Schools | Public | Programs | Cycles | Scholarships | Current windows | Unknown/rolling |\n|---|---:|---:|---:|---:|---:|---:|---:|\n` +
     batches.map(batch => `| ${batch.id} | ${batch.universityIds.length} | ${batch.publicUniversityCount} | ${batch.programIds.length} | ${batch.admissionCycleIds.length} | ${batch.scholarshipIds.length} | ${batch.currentWindowCount} | ${batch.unknownOrRollingCount} |`).join('\n') + '\n'
-  writeFileSync(path.join(outputDir, 'catalog-deadlines.md'), markdown)
+  writeFileSync(markdownPath, markdown, { flag: 'wx' })
   console.log(JSON.stringify({ today, inputDir, outputDir, snapshotSha256, ...inventorySummary }, null, 2))
 }
 
