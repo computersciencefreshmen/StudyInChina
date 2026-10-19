@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Overseas Education School</title>
+		<link rel="stylesheet" type="text/css" href="/statics/hwjyen/css/style-Eng.css"/>
+		<script src="/statics/hwjyen/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/statics/hwjyen/js/jquery.SuperSlide.2.1.3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/statics/hwjyen/js/script.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="s-bj"></div>
+		<!--头部        -->
+		<div class="s-header">
+  <div class="s-contaier">
+    <div class="s-header-top">
+      <ul>
+        <li> <a href="#"> <img src="/statics/hwjyen/images/tb_03.png"/><span>EMAIL</span> </a> </li>
+        <li> <a href="https://oes.jxufe.edu.cn/"> <img src="/statics/hwjyen/images/tb_05.png"/><span>中文</span> </a> </li>
+        <li> <a href="/"> <img src="/statics/hwjyen/images/tb_07.png"/><span>ENGLISH</span> </a> </li>
+        <div class="clear"></div>
+      </ul>
+    </div>
+    <div class="s-header-center">
+      <div class="s-logo"> <a href="/"> <img src="/statics/hwjyen/images/tb_13.png"/> </a> </div>
+      <div class="s-search">
+        <div class="search-form" >
+          <input type="text" class="form-control" placeholder="Search..." name="keyword" id="keyword">
+          <input class="s-search-btn" type="submit">
+        </div>
+      </div>
+<script>
+$(function () {
+  // 你的搜索按钮点击事件
+  $('.s-search-btn').click(function () {
+    var search = $('#keyword').val();
+    let obj = {
+                field: "",
+                inputorder: "1",
+                keyword: search,
+                messagetype: "",
+                siteid: "153 ",
+                size: "20",
+                time: "all"
+            }
+            sessionStorage.setItem("lastname",JSON.stringify(obj))
+            window.location.href = "/fullsearchs/list.html";
+  });
+});
+</script>
+      <div class="clear"></div>
+    </div>
+    <div class="s-nav">
+      <ul>
+        <li> <a href="/" >HOME</a> </li>
+        <li class="nav-item"> <a href="news-list-aboutus.html" >ABOUT US</a>
+          <div class="s-chil-nav">
+            <ul>
+                            <li> <a href="http://oesenglish.jxufe.edu.cn/news-show-15.html">About Nanchang</a> </li>
+                            <li> <a href="http://oice.jxufe.cn/news-show-604.html">About JUFE</a> </li>
+                            <li> <a href="news-list-aboutoes.html">About OES</a> </li>
+                            <li> <a href="https://oesenglish.jxufe.edu.cn/news-show-18.html">Contact Information</a> </li>
+                            <li> <a href="http://www.jxufe.cn/news-show-38.html">Pictures of JUFE</a> </li>
+                          </ul>
+          </div>
+        </li>
+        <li class="nav-item"> <a href="news-list-admission.html">ADMISSION</a>
+          <div class="s-chil-nav">
+            <ul>
+                            <li> <a href="http://oesenglish.jxufe.edu.cn/news-show-38.html">Undergraduate Program</a> </li>
+                            <li> <a href="http://oesenglish.jxufe.edu.cn/news-show-39.html">Master Program</a> </li>
+                            <li> <a href="http://oesenglish.jxufe.edu.cn/news-show-40.html">Ph.D. Program</a> </li>
+                            <li> <a href="news-list-exchangeprogram.html">Exchange Program</a> </li>
+                            <li> <a href="news-list-chineselanguageprogram.html">Chinese Language Program</a> </li>
+                            <li> <a href="news-list-summercampus.html">Summer Camp</a> </li>
+                          </ul>
+          </div>
+        </li>
+        <li class="nav-item"> <a href="news-list-campuslife.html">CAMPUS LIFE</a>
+          <div class="s-chil-nav">
+            <ul>
+                            <li> <a href="http://oesenglish.jxufe.edu.cn/news-show-19.html">Activities</a> </li>
+                            <li> <a href="http://oesenglish.jxufe.edu.cn/news-show-32.html">Campus Map</a> </li>
+                            <li> <a href="http://oesenglish.jxufe.edu.cn/news-show-25.html">Facilities</a> </li>
+                            <li> <a href="http://oesenglish.jxufe.edu.cn/news-show-26.html">School Canteens</a> </li>
+                            <li> <a href="news-list-transportation.html">Transportation</a> </li>
+                            <li> <a href="http://oesenglish.jxufe.edu.cn/news-show-28.html">Bank</a> </li>
+                            <li> <a href="http://oesenglish.jxufe.edu.cn/news-show-29.html">Health&Insurance</a> </li>
+                            <li> <a href="http://oesenglish.jxufe.edu.cn/news-show-30.html">Useful Contact</a> </li>
+                            <li> <a href="http://oesenglish.jxufe.edu.cn/news-show-31.html">Student Support Office</a> </li>
+                          </ul>
+          </div>
+        </li>
+        <li class="nav-item"> <a href="news-list-academicaffairs.html">ACADEMIC AFFAIRS</a>
+          <div class="s-chil-nav">
+            <ul>
+                            <li> <a href="news-list-syllabusfornondegreeprogram.html">Syllabus for Nondegree Program</a> </li>
+                            <li> <a href="news-list-syllabusfordegreeprogram.html">Syllabus for Degree Program</a> </li>
+                            <li> <a href="news-list-academicpolicies.html">Academic Policies</a> </li>
+                          </ul>
+          </div>
+        </li>
+        <li class="margin-zero nav-item"> <a href="news-list-honors.html">HONORS</a>
+          <div class="s-chil-nav s-chil-nav-wid">
+            <ul>
+                            <li> <a href="news-list-excellentstudent.html">Excellent Student</a> </li>
+                            <li> <a href="news-list-excellentgraduate.html">Excellent Graduate</a> </li>
+                            <li> <a href="news-list-solidarityandfriendaward.html">Solidarity and Friend Award</a> </li>
+                            <li> <a href="news-list-pingningexcellentstudent.html">Pingning Excellent Student</a> </li>
+                            <li> <a href="news-list-qiushiexcellentstudent.html">Qiushi Excellent Student</a> </li>
+                          </ul>
+          </div>
+        </li>       
+        <li class="margin-zero nav-item"> <a href="news-list-alumni.html">ALUMNI</a>
+          <div class="s-chil-nav s-chil-nav-wid">
+            <ul>
+                            <li> <a href="news-list-2019alumnimessage.html">Alulmni Information</a> </li>
+                            <li> <a href="news-list-alumnimessage2020.html">Alumni Message</a> </li>
+                          </ul>
+          </div>
+        </li>
+        <li class="margin-zero nav-item"> <a href="news-list-regulationsrules.html">REGULATIONS&RULES</a></li>
+        <div class="clear"></div>
+      </ul>
+      <div class="s-find-nav"></div>
+    </div>
+  </div>
+</div>
+		<!--头部  End      -->
+		<!--内容        -->
+		<div class="s-Eng-list">
+			<div class="s-contaiers">
+				<div class="s-list-left">
+					<div class="s-colu">
+						<h3>SCHOLARSHIP</h3>
+					</div>
+					<div class="s-colu-list">
+						<ul>
+														<li>
+								<a href="news-list-cscscholarship.html">CSC Scholarship</a>
+							</li>
+														<li>
+								<a href="news-list-provincialscholarship.html">Provincial Scholarship</a>
+							</li>
+														<li>
+								<a href="news-list-jufescholarsip.html">JUFE Scholarsip</a>
+							</li>
+														
+						</ul>
+					</div>
+				</div>
+				<div class="s-list-right">
+					<!--<div class="s-list-place">
+						
+						<span class="colr">JUFE Scholarsip</span>
+
+					</div>-->
+					<div class="s-list-cent">
+						<ul>
+            <div id="all_list"></div>
+
+            <div id="mypages"></div>
+
+						</ul>
+<script>
+
+    $(function(){
+        show_lists(1)
+
+        $("#go").click(function(){
+            show_lists(parseInt($("#get_currentPage").val()));
+        })
+    })
+
+    function show_lists(page){
+        $.ajax({
+          url:"api-ajax_list-"+page+".html",
+          type:"post",
+          async:false,
+          data:{"ajax_type":["153_news",81,153,"news","Y-m-d",60,20,["is_top DESC","displayorder DESC","inputtime DESC"],null],"is_ds":1},
+          dataType:"JSON",
+          success:function(data){
+            if(data.total){
+                if(data.data.length){
+                    
+        var str = "<ul>";
+        $.each(data.data,function(index,result){
+            
+            var ol = result.ol;
+            var url = result.url;
+            var outlink = result.outlink;
+            var category_url = result.category_url;
+            var title = result.title;  var inputtime = result.inputtime;
+            title =title.replace('null','...');
+            
+            str+="<li><a href='"+url+"' target='_blank'><div class='s-list-title'>"+title+"</div><div class='s-list-time'>"+inputtime+"</div></a></li>";
+
+            
+        }); 
+        str+="</ul>";
+        $("#all_list").html(str);
+
+        var total = data.total;
+        var yemashu = Math.ceil(total/20);
+
+        if(total>20){
+            
+        var pages = "Total<span class='defalt_total'>"+total+"</span>Records";
+
+        pages +="<a class='first' href='javescript:viod(0);' onclick='show_lists(1)'>Home page</a>";
+
+        var shangyiye = page - 1;
+        if (shangyiye > 0) {
+            pages +="<a class='prev' href='javescript:viod(0);' onclick='show_lists("+shangyiye+")'>Previous page</a>";
+        }
+        for (var i = 0; i < yemashu ; i++) {
+            j = i+1;
+            if(page==j){
+                var c = 'class="active"';
+            }else{
+                var c = '';
+            }
+
+            if(j-page>5){
+               pages +="<a class='hover' href='javescript:viod(0);' "+c+" onclick='show_lists("+j+")'>"+j+"</a>"; 
+            }else{
+                pages +="<a href='javescript:viod(0);' "+c+" onclick='show_lists("+j+")'>"+j+"</a>";
+            }
+        } 
+        var xiayiye = page + 1;
+        if (xiayiye <= yemashu) {
+           pages+="<a class='next' href='javescript:viod(0);' onclick='show_lists("+xiayiye+")'>Next page</a>";
+        }
+
+        pages +="<a class='last' href='javescript:viod(0);' onclick='show_lists("+yemashu+")'>End page</a>";
+
+        pages+='<span>Jump to</span> <select class="page_zdy" onchange="show_lists(parseInt($(this).val()))">';
+        for (var o = 0; o < yemashu ; o++) {
+            p = o + 1;
+            if(page==p){
+                var c = 'selected="selected"';
+            }else{
+                var c = '';
+            }
+            pages+="<option "+c+" value="+p+">"+p+"</option>";
+        } 
+        pages+="</select>";
+
+        }
+        $("#mypages").html(pages);
+   
+                }else{
+                    $("#all_list").html('暂无数据');
+                }
+            }else{
+                $("#all_list").html(data.msg);
+            }
+          },
+           error: function() {}
+        })
+    }
+
+    </script>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<style type="text/css">
+.s-list-cent ul li a {
+    display: flow-root;
+    line-height: 30px;
+    cursor: pointer;
+}
+.s-list-cent ul {
+    margin-top: 0px;
+    padding-bottom: 0px;
+    border-bottom: 0px solid #EEEEEE;
+}
+.s-list-cent ul ul{
+    margin-top: 15px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #EEEEEE;
+}
+#mypages{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+#mypages a{
+    margin: 0 10px;
+}
+		</style>
+		<!--内容  End      -->
+		<!--底部        -->
+	<div class="s-contaier">
+<a href="http://www.chinesetest.cn/ChangeLan.do?languge=en&t=1571901318828" target="_blank"><img src="/statics/hwjyen/images/hyks.jpg" /></a>
+<a href="http://www.campuschina.org" target="_blank"><img src="/statics/hwjyen/images/lxzg.jpg"  /></a>
+</div>
+<div class="s-footer">
+  <div class="s-contaier">
+    <div class="s-fot-top">
+    
+      <div class="s-fot-left" style="width: 750px;">
+        <div class="s-foot-tit"> Add: </div>
+        <div class="s-foot-cent"> No.169 Shuanggang East Street, Changbei National Economic and Technological Development Zone, Nanchang, Jiangxi, China </div>
+        <div class="s-foot-tit"> Complaint Mailbox: </div>
+        <div class="s-foot-cent" style="width: 180px;"> oes@jxufe.edu.cn </div>
+        <div class="s-foot-tit"> Complaint Phone number: </div>
+        <div class="s-foot-cent" style="width: 180px;"> 0791-83816524 </div>
+        <div class="s-foot-tit"> Admission  Office number: </div>
+        <div class="s-foot-cent" style="width: 180px;"> 0791-83807960 </div>
+        <div class="clear"></div>
+      </div>
+
+      <div class="s-fot-right"> <img src="/statics/hwjyen/images/Wechat1.jpg" width="70"/>
+        <p>LOVEJUFE江财留学</p>
+      </div>
+      <div class="clear"></div>
+    </div>
+    
+    <div class="s-fot-bottom"> CopyrighCt 2016 Jiangxi University of Finance and Economics All Rights Reserved </div>
+  </div>
+</div>
+		<!--底部  End      -->
+	</body>
+</html>

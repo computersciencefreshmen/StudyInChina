@@ -1,0 +1,2376 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-025-20261019",
+  "selectedAt": "2026-10-19T08:10:24.215Z",
+  "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v6.json",
+  "queueSha256": "245ac3f58bf85e9f328d04a513e60d7a9fa7b1ab86a8b52ab70e2824ab7b75a0",
+  "inventoryPath": "quality/deadline-sweep-20261019/catalog-deadlines.json",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "universityIds": [
+    "uni-heilongjiang-university",
+    "uni-hubei-university",
+    "uni-jiangxi-university-of-finance-and-economics",
+    "uni-jilin-university",
+    "uni-jinan-university"
+  ],
+  "baseQueueRecordIds": [
+    "cycle-2027-heilongjiang-university-law-master",
+    "cycle-2027-heilongjiang-university-translation-bachelor",
+    "cycle-gap-wave8-hubu-international-economics-trade-bachelor-2026-2027-other-fee-reference",
+    "cycle-gap-wave8-hubu-management-philosophy-master-2026-2027-other-fee-reference",
+    "cycle-gap-wave8-hubu-nanomaterials-devices-master-2026-2027-other-fee-reference",
+    "sch-gap-mew-csw-jufe-university-scholarship",
+    "sch-gap-wave8-jlu-csc-bilateral-type-a",
+    "scholarship-jnu-guangdong-government-international-students",
+    "cycle-gap-clw-sw-jnu-chinese-culture-education-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-clw-sw-jnu-chinese-language-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-clw-sw-jnu-tcsol-bachelor-2026-2027-autumn-fee-reference"
+  ],
+  "additionalSameSourceRecordIds": [
+    "cycle-wave3-program-jinan-university-international-economics-and-trade-bachelor-autumn-2026-historical",
+    "cycle-wave3-program-jinan-university-computer-science-and-technology-bachelor-autumn-2026-historical",
+    "cycle-wave3-program-jinan-university-accounting-bachelor-autumn-2026-historical",
+    "cycle-wave3-program-jinan-university-finance-bachelor-autumn-2026-historical",
+    "cycle-wave3-program-jinan-university-pharmacy-bachelor-autumn-2026-historical",
+    "cycle-wave3-program-jinan-university-international-journalism-and-communication-bachelor-autumn-2026-historical",
+    "cycle-wave3-program-jinan-university-food-nutrition-and-health-bachelor-autumn-2026-historical",
+    "cycle-wave3-program-jinan-university-clinical-medicine-bachelor-autumn-2026-historical"
+  ],
+  "additionalSelectionReceipt": "quality/deadline-sweep-20261019/heartbeat-0806/additional-same-source-selection-v1.json",
+  "additionalSelectionReceiptSha256": "3c781bc6ec7ba4bbc7c3a40a4028619e29803a78fe002527fde27f2b996dab48",
+  "records": [
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-2027-heilongjiang-university-law-master",
+      "selectionOrigin": "baseQueue11",
+      "universityId": "uni-heilongjiang-university",
+      "row": {
+        "sourceIds": [
+          "src-uni-heilongjiang-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "cycle-2027-heilongjiang-university-law-master",
+        "programId": "program-heilongjiang-university-law-master",
+        "academicYear": "2027-2028",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "applicationFeeCny": null
+      },
+      "canonicalRecordSha256": "eb9b4c0a1244ff1b85b0b19ce36d199e794a686d0bd3778e221fc8532167470e",
+      "program": {
+        "sourceIds": [
+          "src-uni-heilongjiang-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "program-heilongjiang-university-law-master",
+        "slug": "heilongjiang-university-law-master",
+        "universityId": "uni-heilongjiang-university",
+        "name": {
+          "en": "Law",
+          "zh": "法学",
+          "ru": "Право"
+        },
+        "degreeLevel": "master",
+        "discipline": "law-ir",
+        "teachingLanguages": [
+          "To be confirmed"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://hi.hlju.edu.cn/",
+        "applyUrl": "https://hi.hlju.edu.cn/",
+        "languageRequirements": []
+      },
+      "canonicalProgramSha256": "ee2dd0fcfe02906e1abce4d31829cd0bdc4ec6e6e24d27b97ff5996c2f73fb93",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-heilongjiang-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2026-10-01",
+            "status": "draft",
+            "id": "program-heilongjiang-university-law-master",
+            "slug": "heilongjiang-university-law-master",
+            "universityId": "uni-heilongjiang-university",
+            "name": {
+              "en": "Law",
+              "zh": "法学",
+              "ru": "Право"
+            },
+            "degreeLevel": "master",
+            "discipline": "law-ir",
+            "teachingLanguages": [
+              "To be confirmed"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://hi.hlju.edu.cn/",
+            "applyUrl": "https://hi.hlju.edu.cn/",
+            "languageRequirements": []
+          },
+          "canonicalProgramSha256": "ee2dd0fcfe02906e1abce4d31829cd0bdc4ec6e6e24d27b97ff5996c2f73fb93"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-uni-heilongjiang-university",
+            "url": "https://hi.hlju.edu.cn/",
+            "title": "Official international information — Heilongjiang University",
+            "publisher": "Heilongjiang University",
+            "kind": "admissions",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-16"
+          },
+          "canonicalSourceSha256": "e0f3c420080b11a84e58cbd264bfdd2f600f24fa93c4a71bc19d6164230edb0c"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-2027-heilongjiang-university-translation-bachelor",
+      "selectionOrigin": "baseQueue11",
+      "universityId": "uni-heilongjiang-university",
+      "row": {
+        "sourceIds": [
+          "src-uni-heilongjiang-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "cycle-2027-heilongjiang-university-translation-bachelor",
+        "programId": "program-heilongjiang-university-translation-bachelor",
+        "academicYear": "2027-2028",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "applicationFeeCny": null
+      },
+      "canonicalRecordSha256": "06e2a7babe4ab5c1e511caae87d267d39e464be119ead63f434a6c726b138b1a",
+      "program": {
+        "sourceIds": [
+          "src-uni-heilongjiang-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "program-heilongjiang-university-translation-bachelor",
+        "slug": "heilongjiang-university-translation-bachelor",
+        "universityId": "uni-heilongjiang-university",
+        "name": {
+          "en": "Translation and Interpreting",
+          "zh": "翻译",
+          "ru": "Перевод и устный перевод"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "humanities",
+        "teachingLanguages": [
+          "To be confirmed"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://hi.hlju.edu.cn/",
+        "applyUrl": "https://hi.hlju.edu.cn/",
+        "languageRequirements": []
+      },
+      "canonicalProgramSha256": "41061b602fc693c254845131e8cf90c84bcdf0ddc1d5676173f0e24bbcf3f516",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-heilongjiang-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2026-10-01",
+            "status": "draft",
+            "id": "program-heilongjiang-university-translation-bachelor",
+            "slug": "heilongjiang-university-translation-bachelor",
+            "universityId": "uni-heilongjiang-university",
+            "name": {
+              "en": "Translation and Interpreting",
+              "zh": "翻译",
+              "ru": "Перевод и устный перевод"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "humanities",
+            "teachingLanguages": [
+              "To be confirmed"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://hi.hlju.edu.cn/",
+            "applyUrl": "https://hi.hlju.edu.cn/",
+            "languageRequirements": []
+          },
+          "canonicalProgramSha256": "41061b602fc693c254845131e8cf90c84bcdf0ddc1d5676173f0e24bbcf3f516"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-uni-heilongjiang-university",
+            "url": "https://hi.hlju.edu.cn/",
+            "title": "Official international information — Heilongjiang University",
+            "publisher": "Heilongjiang University",
+            "kind": "admissions",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-16"
+          },
+          "canonicalSourceSha256": "e0f3c420080b11a84e58cbd264bfdd2f600f24fa93c4a71bc19d6164230edb0c"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave8-hubu-international-economics-trade-bachelor-2026-2027-other-fee-reference",
+      "selectionOrigin": "baseQueue11",
+      "universityId": "uni-hubei-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave8-hubu-international-economics-trade-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-wave8-hubu-international-economics-trade-bachelor-2026-2027-other-fee-reference",
+        "programId": "prog-gap-wave8-hubu-international-economics-trade-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 18000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "canonicalRecordSha256": "4df16d918c2ceba0ed0daee97f2b92c2e3f0a88dd77c4fdb0ce5e9033ade2184",
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave8-hubu-international-economics-trade-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-wave8-hubu-international-economics-trade-bachelor",
+        "slug": "gap-wave8-hubu-international-economics-trade-bachelor-bachelor",
+        "universityId": "uni-hubei-university",
+        "name": {
+          "en": "International Economics and Trade",
+          "zh": "国际经济与贸易",
+          "ru": "Международная экономика и торговля"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "business",
+        "teachingLanguages": [
+          "Chinese",
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://eng.hubu.edu.cn/index/Admission/Online_Application1.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "0459ae15d87cb832fdaebb137c56fc1bbf7417ba347b8a7335d255f01560a868",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-hubu-international-economics-trade-bachelor"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-hubu-international-economics-trade-bachelor",
+            "slug": "gap-wave8-hubu-international-economics-trade-bachelor-bachelor",
+            "universityId": "uni-hubei-university",
+            "name": {
+              "en": "International Economics and Trade",
+              "zh": "国际经济与贸易",
+              "ru": "Международная экономика и торговля"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "business",
+            "teachingLanguages": [
+              "Chinese",
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://eng.hubu.edu.cn/index/Admission/Online_Application1.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "0459ae15d87cb832fdaebb137c56fc1bbf7417ba347b8a7335d255f01560a868"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave8-hubu-international-economics-trade-bachelor",
+            "url": "https://eng.hubu.edu.cn/index/Admission/Online_Application1.htm",
+            "title": "Hubei University Online Application and International Program Directory",
+            "publisher": "hubei-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "8d43de7fb3b1affa4bb1ffddda84a0512d804dfb0d1ca037c7f9814a581725d3"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave8-hubu-management-philosophy-master-2026-2027-other-fee-reference",
+      "selectionOrigin": "baseQueue11",
+      "universityId": "uni-hubei-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave8-hubu-management-philosophy-master"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-wave8-hubu-management-philosophy-master-2026-2027-other-fee-reference",
+        "programId": "prog-gap-wave8-hubu-management-philosophy-master",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 20000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "canonicalRecordSha256": "5daef6266480be57b9ea0ed2670bc94af0056d1e7421fe40a2b0a6a0d850f2a7",
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave8-hubu-management-philosophy-master"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-wave8-hubu-management-philosophy-master",
+        "slug": "gap-wave8-hubu-management-philosophy-master-master",
+        "universityId": "uni-hubei-university",
+        "name": {
+          "en": "Management Philosophy (Master's Program)",
+          "zh": "管理哲学硕士项目",
+          "ru": "Магистратура по философии управления"
+        },
+        "degreeLevel": "master",
+        "discipline": "business",
+        "teachingLanguages": [
+          "Chinese",
+          "English"
+        ],
+        "durationMonths": 36,
+        "programUrl": "https://eng.hubu.edu.cn/index/Admission/Online_Application1.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "7e3f98f7ef8393805d94c0587cb3def3eb042e6695e60fd409f4339ca4e4e18f",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-hubu-management-philosophy-master"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-hubu-management-philosophy-master",
+            "slug": "gap-wave8-hubu-management-philosophy-master-master",
+            "universityId": "uni-hubei-university",
+            "name": {
+              "en": "Management Philosophy (Master's Program)",
+              "zh": "管理哲学硕士项目",
+              "ru": "Магистратура по философии управления"
+            },
+            "degreeLevel": "master",
+            "discipline": "business",
+            "teachingLanguages": [
+              "Chinese",
+              "English"
+            ],
+            "durationMonths": 36,
+            "programUrl": "https://eng.hubu.edu.cn/index/Admission/Online_Application1.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "7e3f98f7ef8393805d94c0587cb3def3eb042e6695e60fd409f4339ca4e4e18f"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave8-hubu-management-philosophy-master",
+            "url": "https://eng.hubu.edu.cn/index/Admission/Online_Application1.htm",
+            "title": "Hubei University Online Application and International Program Directory",
+            "publisher": "hubei-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "9b5b258fe7bb75deb5d8c8c32e6183c930c2fe9ab9d1799dd3df8ded814dbd5a"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave8-hubu-nanomaterials-devices-master-2026-2027-other-fee-reference",
+      "selectionOrigin": "baseQueue11",
+      "universityId": "uni-hubei-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave8-hubu-nanomaterials-devices-master"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-wave8-hubu-nanomaterials-devices-master-2026-2027-other-fee-reference",
+        "programId": "prog-gap-wave8-hubu-nanomaterials-devices-master",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 22000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "canonicalRecordSha256": "dfa1f94eaad3454c72c8db33e3dbbe10688dad414cb091a7ee1482b5122c50a8",
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave8-hubu-nanomaterials-devices-master"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-wave8-hubu-nanomaterials-devices-master",
+        "slug": "gap-wave8-hubu-nanomaterials-devices-master-master",
+        "universityId": "uni-hubei-university",
+        "name": {
+          "en": "Nanomaterials and Devices (Master's Program)",
+          "zh": "纳米材料与器件硕士项目",
+          "ru": "Магистратура по наноматериалам и устройствам"
+        },
+        "degreeLevel": "master",
+        "discipline": "other",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 36,
+        "programUrl": "https://eng.hubu.edu.cn/index/Admission/Online_Application1.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "8964b5880376ce611d058ea54200fea97f0b1d81afd076a50eaedd8d9309c799",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-hubu-nanomaterials-devices-master"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-hubu-nanomaterials-devices-master",
+            "slug": "gap-wave8-hubu-nanomaterials-devices-master-master",
+            "universityId": "uni-hubei-university",
+            "name": {
+              "en": "Nanomaterials and Devices (Master's Program)",
+              "zh": "纳米材料与器件硕士项目",
+              "ru": "Магистратура по наноматериалам и устройствам"
+            },
+            "degreeLevel": "master",
+            "discipline": "other",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 36,
+            "programUrl": "https://eng.hubu.edu.cn/index/Admission/Online_Application1.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "8964b5880376ce611d058ea54200fea97f0b1d81afd076a50eaedd8d9309c799"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave8-hubu-nanomaterials-devices-master",
+            "url": "https://eng.hubu.edu.cn/index/Admission/Online_Application1.htm",
+            "title": "Hubei University Online Application and International Program Directory",
+            "publisher": "hubei-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "820bfdf88dd55c336bcee99bd2f05af420e3da75055416f6f1129fcaf73c9bab"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-mew-csw-jufe-university-scholarship",
+      "selectionOrigin": "baseQueue11",
+      "universityId": "uni-jiangxi-university-of-finance-and-economics",
+      "row": {
+        "id": "sch-gap-mew-csw-jufe-university-scholarship",
+        "slug": "gap-mew-csw-jufe-university-scholarship",
+        "name": {
+          "en": "JUFE Scholarship for International Students",
+          "zh": "江西财经大学来华留学生奖学金",
+          "ru": "Стипендия JUFE для иностранных студентов"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-jiangxi-university-of-finance-and-economics"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://oesenglish.jxufe.edu.cn/news-list-jufescholarsip.html",
+        "summary": {
+          "en": "JUFE's live official scholarship directory confirms a distinct university scholarship category for international students; current funding and cycle details are not published as accessible text.",
+          "zh": "江西财经大学当前官网奖学金目录确认独立的校级来华留学生奖学金类别；当前资助金额和周期未以可读取文本公布。",
+          "ru": "Действующий официальный каталог JUFE подтверждает отдельную университетскую стипендию; текущие суммы и сроки в доступном тексте не опубликованы."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-mew-csw-jufe-university-scholarship",
+          "src-gap-scholarship-mew-csw-jufe-university-scholarship-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "acb93b00a31b13708ee8d2490da3f034ee992ab3e8d10cc05d297a43f2068217",
+      "program": null,
+      "canonicalProgramSha256": null,
+      "programRows": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-mew-csw-jufe-university-scholarship",
+            "url": "https://oesenglish.jxufe.edu.cn/news-list-jufescholarsip.html",
+            "title": "JUFE Official Scholarship Directory — JUFE Scholarship",
+            "publisher": "jiangxi-university-of-finance-and-economics",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "f19fe0d45cda84f9759c4c770e7d844795d020ccd83cc9c5d0ef637a768dae9a"
+        },
+        {
+          "row": {
+            "id": "src-gap-scholarship-mew-csw-jufe-university-scholarship-support-1",
+            "url": "https://oesenglish.jxufe.edu.cn/news-list-scholarship.html",
+            "title": "JUFE Official Scholarship Directory",
+            "publisher": "jiangxi-university-of-finance-and-economics",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "10dd0eae7318d7dde47e602873160d77141037b91a123f4d272c32fc476835e5"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-wave8-jlu-csc-bilateral-type-a",
+      "selectionOrigin": "baseQueue11",
+      "universityId": "uni-jilin-university",
+      "row": {
+        "id": "sch-gap-wave8-jlu-csc-bilateral-type-a",
+        "slug": "gap-wave8-jlu-csc-bilateral-type-a",
+        "name": {
+          "en": "Chinese Government Scholarship Bilateral Program at JLU (Type A)",
+          "zh": "吉林大学中国政府奖学金国别双边项目（A类）",
+          "ru": "Двусторонняя программа CSC в JLU (тип A)"
+        },
+        "providerType": "csc",
+        "universityIds": [
+          "uni-jilin-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://cie.jlu.edu.cn/info/1189/3601.htm",
+        "summary": {
+          "en": "JLU confirms the bilateral Type A route and its tuition, living, accommodation and insurance coverage. Country dispatching authorities set the exact January–April application window, so no single deadline is asserted.",
+          "zh": "吉林大学确认A类国别双边项目覆盖学费、生活费、住宿补助和保险；具体1—4月申请窗口由各国派遣部门确定，因此不设单一截止日。",
+          "ru": "JLU подтверждает двусторонний маршрут Type A с покрытием обучения, проживания, пособия и страховки; точные сроки января–апреля устанавливает направляющий орган страны."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave8-jlu-csc-bilateral-type-a"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "bacdebd2063a91c7bbc66c5a6984e5a23d97010b1d79f85976d863c6dfef5a43",
+      "program": null,
+      "canonicalProgramSha256": null,
+      "programRows": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-jlu-csc-bilateral-type-a",
+            "url": "https://cie.jlu.edu.cn/info/1189/3601.htm",
+            "title": "Jilin University 2026–2027 CSC Bilateral Program (Type A)",
+            "publisher": "jilin-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "9bea801c86b6f87c8759ea62e605846ee5af4aa93d5fb256b997a7a14b46f8dc"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "scholarship-jnu-guangdong-government-international-students",
+      "selectionOrigin": "baseQueue11",
+      "universityId": "uni-jinan-university",
+      "row": {
+        "id": "scholarship-jnu-guangdong-government-international-students",
+        "slug": "jnu-guangdong-government-international-students",
+        "name": {
+          "en": "Guangdong Government Outstanding International Student Scholarship — Jinan University",
+          "zh": "广东省政府来粤留学生奖学金（暨南大学）",
+          "ru": "Стипендия правительства провинции Гуандун для иностранных студентов — Университет Цзинань"
+        },
+        "providerType": "province",
+        "universityIds": [
+          "uni-jinan-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "partial",
+          "accommodation": "none",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://zsb.jnu.edu.cn/2025/1205/c40322a847522/page.htm",
+        "summary": {
+          "en": "The official 2026 guide lists a first-year award of RMB 10,000 for eligible international undergraduates; the next application schedule has not yet been published.",
+          "zh": "官方2026简章列明，符合条件的国际本科新生第一学年可获人民币10,000元；下一申请周期尚未公布。",
+          "ru": "В официальном руководстве на 2026 год указана выплата 10 000 юаней за первый год для подходящих иностранных бакалавров; следующий срок ещё не опубликован."
+        },
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions"
+        ],
+        "verifiedAt": "2026-07-29",
+        "reviewAfter": "2026-08-28",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "5848d2801b5d801ef358f1a1ec77824a83eedb7af8e962504e434b12e151849e",
+      "program": null,
+      "canonicalProgramSha256": null,
+      "programRows": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-jnu-2026-international-undergraduate-admissions",
+            "url": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "title": "Jinan University Application Guide for International Students 2026",
+            "publisher": "Jinan University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "4183fd69f0a2ebf5a6c611f8f8e078f60dd884d42577216708ebb8301115bdf1"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-clw-sw-jnu-chinese-culture-education-bachelor-2026-2027-autumn-fee-reference",
+      "selectionOrigin": "baseQueue11",
+      "universityId": "uni-jinan-university",
+      "row": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-08-25",
+        "status": "stale",
+        "id": "cycle-gap-clw-sw-jnu-chinese-culture-education-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-clw-sw-jnu-chinese-culture-education-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-31",
+        "dateStatus": "previous-cycle-reference",
+        "tuitionCny": 22000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "complete",
+        "applicationFeeCny": 500,
+        "notes": {
+          "en": "The official guide lists two 2026 application-review windows, 15 January–28 February and 1 April–31 May. The final deadline, tuition and CNY 500 fee are historical only; no continuous opening interval or 2027 cycle is inferred.",
+          "zh": "官方简章列出2026年两段申请审核期：1月15日至2月28日、4月1日至5月31日。最终截止日、学费和500元报名费仅作历史记录，不虚构连续开放期或2027周期。"
+        }
+      },
+      "canonicalRecordSha256": "5b04617b3f9b79b48fc4f163a86e96b0a6355aa450c1e42c5db977c117fe480e",
+      "program": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions",
+          "source-jnu-official-application-portal"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-09-24",
+        "status": "stale",
+        "id": "prog-gap-clw-sw-jnu-chinese-culture-education-bachelor",
+        "slug": "gap-clw-sw-jnu-chinese-culture-education-bachelor-bachelor",
+        "universityId": "uni-jinan-university",
+        "name": {
+          "en": "Chinese Language and Culture Education",
+          "zh": "华文教育",
+          "ru": "Образование в области китайского языка и культуры"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+        "applyUrl": "https://lxlz.jnu.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "HSK",
+            "minimum": "Level 5, score 180"
+          }
+        ],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "fbf90dcfa6f2c174c1bb7af2ed5265ea7cca5d1fce9ec6185f1782b17113155f",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-jnu-2026-international-undergraduate-admissions",
+              "source-jnu-official-application-portal"
+            ],
+            "verifiedAt": "2026-08-25",
+            "reviewAfter": "2026-09-24",
+            "status": "stale",
+            "id": "prog-gap-clw-sw-jnu-chinese-culture-education-bachelor",
+            "slug": "gap-clw-sw-jnu-chinese-culture-education-bachelor-bachelor",
+            "universityId": "uni-jinan-university",
+            "name": {
+              "en": "Chinese Language and Culture Education",
+              "zh": "华文教育",
+              "ru": "Образование в области китайского языка и культуры"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "applyUrl": "https://lxlz.jnu.edu.cn/",
+            "languageRequirements": [
+              {
+                "test": "HSK",
+                "minimum": "Level 5, score 180"
+              }
+            ],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "fbf90dcfa6f2c174c1bb7af2ed5265ea7cca5d1fce9ec6185f1782b17113155f"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-jnu-2026-international-undergraduate-admissions",
+            "url": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "title": "Jinan University Application Guide for International Students 2026",
+            "publisher": "Jinan University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "4183fd69f0a2ebf5a6c611f8f8e078f60dd884d42577216708ebb8301115bdf1"
+        },
+        {
+          "row": {
+            "id": "source-jnu-official-application-portal",
+            "url": "https://lxlz.jnu.edu.cn/",
+            "title": "Jinan University International Student Application Portal",
+            "publisher": "Jinan University",
+            "kind": "admissions",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "3e6dc3ca7c5202648fea3343021d738a550c2a9b6a2675ce748f50e7af627386"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-clw-sw-jnu-chinese-language-bachelor-2026-2027-autumn-fee-reference",
+      "selectionOrigin": "baseQueue11",
+      "universityId": "uni-jinan-university",
+      "row": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-08-25",
+        "status": "stale",
+        "id": "cycle-gap-clw-sw-jnu-chinese-language-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-clw-sw-jnu-chinese-language-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-31",
+        "dateStatus": "previous-cycle-reference",
+        "tuitionCny": 22000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "complete",
+        "applicationFeeCny": 500,
+        "notes": {
+          "en": "The official guide lists two 2026 application-review windows, 15 January–28 February and 1 April–31 May. The final deadline, tuition and CNY 500 fee are historical only; no continuous opening interval or 2027 cycle is inferred.",
+          "zh": "官方简章列出2026年两段申请审核期：1月15日至2月28日、4月1日至5月31日。最终截止日、学费和500元报名费仅作历史记录，不虚构连续开放期或2027周期。"
+        }
+      },
+      "canonicalRecordSha256": "d15bc1f738f3ff1d9c68a5949a5f793c679833e8dbbbf6b0f4826f1385494cff",
+      "program": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions",
+          "source-jnu-official-application-portal"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-09-24",
+        "status": "stale",
+        "id": "prog-gap-clw-sw-jnu-chinese-language-bachelor",
+        "slug": "gap-clw-sw-jnu-chinese-language-bachelor-bachelor",
+        "universityId": "uni-jinan-university",
+        "name": {
+          "en": "Chinese Language",
+          "zh": "汉语言",
+          "ru": "Китайский язык"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+        "applyUrl": "https://lxlz.jnu.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "HSK",
+            "minimum": "Level 5, score 180"
+          }
+        ],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "5b6e5a3c26ded6eeceb0755a445a02e48bc3685561881a81d669dd5c4b5adcd9",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-jnu-2026-international-undergraduate-admissions",
+              "source-jnu-official-application-portal"
+            ],
+            "verifiedAt": "2026-08-25",
+            "reviewAfter": "2026-09-24",
+            "status": "stale",
+            "id": "prog-gap-clw-sw-jnu-chinese-language-bachelor",
+            "slug": "gap-clw-sw-jnu-chinese-language-bachelor-bachelor",
+            "universityId": "uni-jinan-university",
+            "name": {
+              "en": "Chinese Language",
+              "zh": "汉语言",
+              "ru": "Китайский язык"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "applyUrl": "https://lxlz.jnu.edu.cn/",
+            "languageRequirements": [
+              {
+                "test": "HSK",
+                "minimum": "Level 5, score 180"
+              }
+            ],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "5b6e5a3c26ded6eeceb0755a445a02e48bc3685561881a81d669dd5c4b5adcd9"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-jnu-2026-international-undergraduate-admissions",
+            "url": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "title": "Jinan University Application Guide for International Students 2026",
+            "publisher": "Jinan University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "4183fd69f0a2ebf5a6c611f8f8e078f60dd884d42577216708ebb8301115bdf1"
+        },
+        {
+          "row": {
+            "id": "source-jnu-official-application-portal",
+            "url": "https://lxlz.jnu.edu.cn/",
+            "title": "Jinan University International Student Application Portal",
+            "publisher": "Jinan University",
+            "kind": "admissions",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "3e6dc3ca7c5202648fea3343021d738a550c2a9b6a2675ce748f50e7af627386"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-clw-sw-jnu-tcsol-bachelor-2026-2027-autumn-fee-reference",
+      "selectionOrigin": "baseQueue11",
+      "universityId": "uni-jinan-university",
+      "row": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-08-25",
+        "status": "stale",
+        "id": "cycle-gap-clw-sw-jnu-tcsol-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-clw-sw-jnu-tcsol-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-31",
+        "dateStatus": "previous-cycle-reference",
+        "tuitionCny": 22000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "complete",
+        "applicationFeeCny": 500,
+        "notes": {
+          "en": "The official guide lists two 2026 application-review windows, 15 January–28 February and 1 April–31 May. The final deadline, tuition and CNY 500 fee are historical only; no continuous opening interval or 2027 cycle is inferred.",
+          "zh": "官方简章列出2026年两段申请审核期：1月15日至2月28日、4月1日至5月31日。最终截止日、学费和500元报名费仅作历史记录，不虚构连续开放期或2027周期。"
+        }
+      },
+      "canonicalRecordSha256": "e5c67bff185c2fdb341283f239f97b7ef6dae77c09a13111bcdc06d2c36a0161",
+      "program": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions",
+          "source-jnu-official-application-portal"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-09-24",
+        "status": "stale",
+        "id": "prog-gap-clw-sw-jnu-tcsol-bachelor",
+        "slug": "gap-clw-sw-jnu-tcsol-bachelor-bachelor",
+        "universityId": "uni-jinan-university",
+        "name": {
+          "en": "Teaching Chinese to Speakers of Other Languages",
+          "zh": "汉语国际教育",
+          "ru": "Преподавание китайского языка как иностранного"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+        "applyUrl": "https://lxlz.jnu.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "HSK",
+            "minimum": "Level 5, score 180"
+          }
+        ],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "a66011d5e2f476e74dfa375aee0c7894d8e05a34572d472490957c4c93bc6b3b",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-jnu-2026-international-undergraduate-admissions",
+              "source-jnu-official-application-portal"
+            ],
+            "verifiedAt": "2026-08-25",
+            "reviewAfter": "2026-09-24",
+            "status": "stale",
+            "id": "prog-gap-clw-sw-jnu-tcsol-bachelor",
+            "slug": "gap-clw-sw-jnu-tcsol-bachelor-bachelor",
+            "universityId": "uni-jinan-university",
+            "name": {
+              "en": "Teaching Chinese to Speakers of Other Languages",
+              "zh": "汉语国际教育",
+              "ru": "Преподавание китайского языка как иностранного"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "applyUrl": "https://lxlz.jnu.edu.cn/",
+            "languageRequirements": [
+              {
+                "test": "HSK",
+                "minimum": "Level 5, score 180"
+              }
+            ],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "a66011d5e2f476e74dfa375aee0c7894d8e05a34572d472490957c4c93bc6b3b"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-jnu-2026-international-undergraduate-admissions",
+            "url": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "title": "Jinan University Application Guide for International Students 2026",
+            "publisher": "Jinan University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "4183fd69f0a2ebf5a6c611f8f8e078f60dd884d42577216708ebb8301115bdf1"
+        },
+        {
+          "row": {
+            "id": "source-jnu-official-application-portal",
+            "url": "https://lxlz.jnu.edu.cn/",
+            "title": "Jinan University International Student Application Portal",
+            "publisher": "Jinan University",
+            "kind": "admissions",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "3e6dc3ca7c5202648fea3343021d738a550c2a9b6a2675ce748f50e7af627386"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-wave3-program-jinan-university-international-economics-and-trade-bachelor-autumn-2026-historical",
+      "selectionOrigin": "additionalSameSource8",
+      "universityId": "uni-jinan-university",
+      "row": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-08-25",
+        "status": "stale",
+        "id": "cycle-wave3-program-jinan-university-international-economics-and-trade-bachelor-autumn-2026-historical",
+        "programId": "program-jinan-university-international-economics-and-trade-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-31",
+        "dateStatus": "previous-cycle-reference",
+        "tuitionCny": 28000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "complete",
+        "applicationFeeCny": 500,
+        "notes": {
+          "en": "The official guide lists two 2026 application-review windows, 15 January–28 February and 1 April–31 May. The final deadline, tuition and CNY 500 fee are historical only; no continuous opening interval or 2027 cycle is inferred.",
+          "zh": "官方简章列出2026年两段申请审核期：1月15日至2月28日、4月1日至5月31日。最终截止日、学费和500元报名费仅作历史记录，不虚构连续开放期或2027周期。"
+        }
+      },
+      "canonicalRecordSha256": "ad9afb2483e1f4e4d508735354eaa8e3b07d3f579bb8597fb580a62e0fd5b0c0",
+      "program": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions",
+          "source-jnu-official-application-portal"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-09-24",
+        "status": "stale",
+        "id": "program-jinan-university-international-economics-and-trade-bachelor",
+        "slug": "jinan-university-international-economics-and-trade-bachelor",
+        "universityId": "uni-jinan-university",
+        "name": {
+          "en": "International Economics and Trade",
+          "zh": "国际经济与贸易",
+          "ru": "Международная экономика и торговля"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "business",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+        "applyUrl": "https://lxlz.jnu.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "IELTS",
+            "minimum": "5.5 overall, with each component at least 5.0"
+          },
+          {
+            "test": "TOEFL",
+            "minimum": "80 (iBT)"
+          },
+          {
+            "test": "other",
+            "minimum": "SAT total score 1030 accepted by the 2026 guide"
+          }
+        ],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "23f27fadad08e3d41536cb97c10a1a03bba51f4530a24e33b162b4cb099a1054",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-jnu-2026-international-undergraduate-admissions",
+              "source-jnu-official-application-portal"
+            ],
+            "verifiedAt": "2026-08-25",
+            "reviewAfter": "2026-09-24",
+            "status": "stale",
+            "id": "program-jinan-university-international-economics-and-trade-bachelor",
+            "slug": "jinan-university-international-economics-and-trade-bachelor",
+            "universityId": "uni-jinan-university",
+            "name": {
+              "en": "International Economics and Trade",
+              "zh": "国际经济与贸易",
+              "ru": "Международная экономика и торговля"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "business",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "applyUrl": "https://lxlz.jnu.edu.cn/",
+            "languageRequirements": [
+              {
+                "test": "IELTS",
+                "minimum": "5.5 overall, with each component at least 5.0"
+              },
+              {
+                "test": "TOEFL",
+                "minimum": "80 (iBT)"
+              },
+              {
+                "test": "other",
+                "minimum": "SAT total score 1030 accepted by the 2026 guide"
+              }
+            ],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "23f27fadad08e3d41536cb97c10a1a03bba51f4530a24e33b162b4cb099a1054"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-jnu-2026-international-undergraduate-admissions",
+            "url": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "title": "Jinan University Application Guide for International Students 2026",
+            "publisher": "Jinan University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "4183fd69f0a2ebf5a6c611f8f8e078f60dd884d42577216708ebb8301115bdf1"
+        },
+        {
+          "row": {
+            "id": "source-jnu-official-application-portal",
+            "url": "https://lxlz.jnu.edu.cn/",
+            "title": "Jinan University International Student Application Portal",
+            "publisher": "Jinan University",
+            "kind": "admissions",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "3e6dc3ca7c5202648fea3343021d738a550c2a9b6a2675ce748f50e7af627386"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-wave3-program-jinan-university-computer-science-and-technology-bachelor-autumn-2026-historical",
+      "selectionOrigin": "additionalSameSource8",
+      "universityId": "uni-jinan-university",
+      "row": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-08-25",
+        "status": "stale",
+        "id": "cycle-wave3-program-jinan-university-computer-science-and-technology-bachelor-autumn-2026-historical",
+        "programId": "program-jinan-university-computer-science-and-technology-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-31",
+        "dateStatus": "previous-cycle-reference",
+        "tuitionCny": 30000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "complete",
+        "applicationFeeCny": 500,
+        "notes": {
+          "en": "The official guide lists two 2026 application-review windows, 15 January–28 February and 1 April–31 May. The final deadline, tuition and CNY 500 fee are historical only; no continuous opening interval or 2027 cycle is inferred.",
+          "zh": "官方简章列出2026年两段申请审核期：1月15日至2月28日、4月1日至5月31日。最终截止日、学费和500元报名费仅作历史记录，不虚构连续开放期或2027周期。"
+        }
+      },
+      "canonicalRecordSha256": "6fdaa34bdf92abcf77e8f200eab1701bbd93898c1e7cabbbfe1dae5f322a3c34",
+      "program": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions",
+          "source-jnu-official-application-portal"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-09-24",
+        "status": "stale",
+        "id": "program-jinan-university-computer-science-and-technology-bachelor",
+        "slug": "jinan-university-computer-science-and-technology-bachelor",
+        "universityId": "uni-jinan-university",
+        "name": {
+          "en": "Computer Science and Technology",
+          "zh": "计算机科学与技术",
+          "ru": "Компьютерные науки и технологии"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+        "applyUrl": "https://lxlz.jnu.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "IELTS",
+            "minimum": "5.5 overall, with each component at least 5.0"
+          },
+          {
+            "test": "TOEFL",
+            "minimum": "80 (iBT)"
+          },
+          {
+            "test": "other",
+            "minimum": "SAT total score 1030 accepted by the 2026 guide"
+          }
+        ],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "582c276816be7dd08ffcfeee36dfe5a90edfd4b2a9a8dcbdd82588dbe207a947",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-jnu-2026-international-undergraduate-admissions",
+              "source-jnu-official-application-portal"
+            ],
+            "verifiedAt": "2026-08-25",
+            "reviewAfter": "2026-09-24",
+            "status": "stale",
+            "id": "program-jinan-university-computer-science-and-technology-bachelor",
+            "slug": "jinan-university-computer-science-and-technology-bachelor",
+            "universityId": "uni-jinan-university",
+            "name": {
+              "en": "Computer Science and Technology",
+              "zh": "计算机科学与技术",
+              "ru": "Компьютерные науки и технологии"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "applyUrl": "https://lxlz.jnu.edu.cn/",
+            "languageRequirements": [
+              {
+                "test": "IELTS",
+                "minimum": "5.5 overall, with each component at least 5.0"
+              },
+              {
+                "test": "TOEFL",
+                "minimum": "80 (iBT)"
+              },
+              {
+                "test": "other",
+                "minimum": "SAT total score 1030 accepted by the 2026 guide"
+              }
+            ],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "582c276816be7dd08ffcfeee36dfe5a90edfd4b2a9a8dcbdd82588dbe207a947"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-jnu-2026-international-undergraduate-admissions",
+            "url": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "title": "Jinan University Application Guide for International Students 2026",
+            "publisher": "Jinan University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "4183fd69f0a2ebf5a6c611f8f8e078f60dd884d42577216708ebb8301115bdf1"
+        },
+        {
+          "row": {
+            "id": "source-jnu-official-application-portal",
+            "url": "https://lxlz.jnu.edu.cn/",
+            "title": "Jinan University International Student Application Portal",
+            "publisher": "Jinan University",
+            "kind": "admissions",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "3e6dc3ca7c5202648fea3343021d738a550c2a9b6a2675ce748f50e7af627386"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-wave3-program-jinan-university-accounting-bachelor-autumn-2026-historical",
+      "selectionOrigin": "additionalSameSource8",
+      "universityId": "uni-jinan-university",
+      "row": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-08-25",
+        "status": "stale",
+        "id": "cycle-wave3-program-jinan-university-accounting-bachelor-autumn-2026-historical",
+        "programId": "program-jinan-university-accounting-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-31",
+        "dateStatus": "previous-cycle-reference",
+        "tuitionCny": 32000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "complete",
+        "applicationFeeCny": 500,
+        "notes": {
+          "en": "The official guide lists two 2026 application-review windows, 15 January–28 February and 1 April–31 May. The final deadline, tuition and CNY 500 fee are historical only; no continuous opening interval or 2027 cycle is inferred.",
+          "zh": "官方简章列出2026年两段申请审核期：1月15日至2月28日、4月1日至5月31日。最终截止日、学费和500元报名费仅作历史记录，不虚构连续开放期或2027周期。"
+        }
+      },
+      "canonicalRecordSha256": "ea0ba1152ad157d96a3be26d22f3ee52ca51f0c5bddf546c5c0e6bf1fb643243",
+      "program": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions",
+          "source-jnu-official-application-portal"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-09-24",
+        "status": "stale",
+        "id": "program-jinan-university-accounting-bachelor",
+        "slug": "jinan-university-accounting-bachelor",
+        "universityId": "uni-jinan-university",
+        "name": {
+          "en": "Accounting",
+          "zh": "会计学",
+          "ru": "Бухгалтерский учёт"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "business",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+        "applyUrl": "https://lxlz.jnu.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "IELTS",
+            "minimum": "5.5 overall, with each component at least 5.0"
+          },
+          {
+            "test": "TOEFL",
+            "minimum": "80 (iBT)"
+          },
+          {
+            "test": "other",
+            "minimum": "SAT total score 1030 accepted by the 2026 guide"
+          }
+        ],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "a150e17647de50ee968630c1ded81b728d0491aac501156c43cf634c31440bdd",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-jnu-2026-international-undergraduate-admissions",
+              "source-jnu-official-application-portal"
+            ],
+            "verifiedAt": "2026-08-25",
+            "reviewAfter": "2026-09-24",
+            "status": "stale",
+            "id": "program-jinan-university-accounting-bachelor",
+            "slug": "jinan-university-accounting-bachelor",
+            "universityId": "uni-jinan-university",
+            "name": {
+              "en": "Accounting",
+              "zh": "会计学",
+              "ru": "Бухгалтерский учёт"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "business",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "applyUrl": "https://lxlz.jnu.edu.cn/",
+            "languageRequirements": [
+              {
+                "test": "IELTS",
+                "minimum": "5.5 overall, with each component at least 5.0"
+              },
+              {
+                "test": "TOEFL",
+                "minimum": "80 (iBT)"
+              },
+              {
+                "test": "other",
+                "minimum": "SAT total score 1030 accepted by the 2026 guide"
+              }
+            ],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "a150e17647de50ee968630c1ded81b728d0491aac501156c43cf634c31440bdd"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-jnu-2026-international-undergraduate-admissions",
+            "url": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "title": "Jinan University Application Guide for International Students 2026",
+            "publisher": "Jinan University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "4183fd69f0a2ebf5a6c611f8f8e078f60dd884d42577216708ebb8301115bdf1"
+        },
+        {
+          "row": {
+            "id": "source-jnu-official-application-portal",
+            "url": "https://lxlz.jnu.edu.cn/",
+            "title": "Jinan University International Student Application Portal",
+            "publisher": "Jinan University",
+            "kind": "admissions",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "3e6dc3ca7c5202648fea3343021d738a550c2a9b6a2675ce748f50e7af627386"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-wave3-program-jinan-university-finance-bachelor-autumn-2026-historical",
+      "selectionOrigin": "additionalSameSource8",
+      "universityId": "uni-jinan-university",
+      "row": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-08-25",
+        "status": "stale",
+        "id": "cycle-wave3-program-jinan-university-finance-bachelor-autumn-2026-historical",
+        "programId": "program-jinan-university-finance-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-31",
+        "dateStatus": "previous-cycle-reference",
+        "tuitionCny": 28000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "complete",
+        "applicationFeeCny": 500,
+        "notes": {
+          "en": "The official guide lists two 2026 application-review windows, 15 January–28 February and 1 April–31 May. The final deadline, tuition and CNY 500 fee are historical only; no continuous opening interval or 2027 cycle is inferred.",
+          "zh": "官方简章列出2026年两段申请审核期：1月15日至2月28日、4月1日至5月31日。最终截止日、学费和500元报名费仅作历史记录，不虚构连续开放期或2027周期。"
+        }
+      },
+      "canonicalRecordSha256": "b7b1411ece3e4aa852ef04c41d209362aec98208ed0f237481f81b52733167ed",
+      "program": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions",
+          "source-jnu-official-application-portal"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-09-24",
+        "status": "stale",
+        "id": "program-jinan-university-finance-bachelor",
+        "slug": "jinan-university-finance-bachelor",
+        "universityId": "uni-jinan-university",
+        "name": {
+          "en": "Finance",
+          "zh": "金融学",
+          "ru": "Финансы"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "business",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+        "applyUrl": "https://lxlz.jnu.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "IELTS",
+            "minimum": "5.5 overall, with each component at least 5.0"
+          },
+          {
+            "test": "TOEFL",
+            "minimum": "80 (iBT)"
+          },
+          {
+            "test": "other",
+            "minimum": "SAT total score 1030 accepted by the 2026 guide"
+          }
+        ],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "44ce898a9722a5d726fef5a14b994b6ccf072d15fa4983f7fdde6b6843b1ae46",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-jnu-2026-international-undergraduate-admissions",
+              "source-jnu-official-application-portal"
+            ],
+            "verifiedAt": "2026-08-25",
+            "reviewAfter": "2026-09-24",
+            "status": "stale",
+            "id": "program-jinan-university-finance-bachelor",
+            "slug": "jinan-university-finance-bachelor",
+            "universityId": "uni-jinan-university",
+            "name": {
+              "en": "Finance",
+              "zh": "金融学",
+              "ru": "Финансы"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "business",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "applyUrl": "https://lxlz.jnu.edu.cn/",
+            "languageRequirements": [
+              {
+                "test": "IELTS",
+                "minimum": "5.5 overall, with each component at least 5.0"
+              },
+              {
+                "test": "TOEFL",
+                "minimum": "80 (iBT)"
+              },
+              {
+                "test": "other",
+                "minimum": "SAT total score 1030 accepted by the 2026 guide"
+              }
+            ],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "44ce898a9722a5d726fef5a14b994b6ccf072d15fa4983f7fdde6b6843b1ae46"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-jnu-2026-international-undergraduate-admissions",
+            "url": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "title": "Jinan University Application Guide for International Students 2026",
+            "publisher": "Jinan University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "4183fd69f0a2ebf5a6c611f8f8e078f60dd884d42577216708ebb8301115bdf1"
+        },
+        {
+          "row": {
+            "id": "source-jnu-official-application-portal",
+            "url": "https://lxlz.jnu.edu.cn/",
+            "title": "Jinan University International Student Application Portal",
+            "publisher": "Jinan University",
+            "kind": "admissions",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "3e6dc3ca7c5202648fea3343021d738a550c2a9b6a2675ce748f50e7af627386"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-wave3-program-jinan-university-pharmacy-bachelor-autumn-2026-historical",
+      "selectionOrigin": "additionalSameSource8",
+      "universityId": "uni-jinan-university",
+      "row": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-08-25",
+        "status": "stale",
+        "id": "cycle-wave3-program-jinan-university-pharmacy-bachelor-autumn-2026-historical",
+        "programId": "program-jinan-university-pharmacy-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-31",
+        "dateStatus": "previous-cycle-reference",
+        "tuitionCny": 30000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "complete",
+        "applicationFeeCny": 500,
+        "notes": {
+          "en": "The official guide lists two 2026 application-review windows, 15 January–28 February and 1 April–31 May. The final deadline, tuition and CNY 500 fee are historical only; no continuous opening interval or 2027 cycle is inferred.",
+          "zh": "官方简章列出2026年两段申请审核期：1月15日至2月28日、4月1日至5月31日。最终截止日、学费和500元报名费仅作历史记录，不虚构连续开放期或2027周期。"
+        }
+      },
+      "canonicalRecordSha256": "ccc46b76e262308ba54061fba37c6775fc2ff3602d6af1573139b1033610091b",
+      "program": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions",
+          "source-jnu-official-application-portal"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-09-24",
+        "status": "stale",
+        "id": "program-jinan-university-pharmacy-bachelor",
+        "slug": "jinan-university-pharmacy-bachelor",
+        "universityId": "uni-jinan-university",
+        "name": {
+          "en": "Pharmacy",
+          "zh": "药学",
+          "ru": "Фармация"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+        "applyUrl": "https://lxlz.jnu.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "IELTS",
+            "minimum": "5.5 overall, with each component at least 5.0"
+          },
+          {
+            "test": "TOEFL",
+            "minimum": "80 (iBT)"
+          },
+          {
+            "test": "other",
+            "minimum": "SAT total score 1030 accepted by the 2026 guide"
+          }
+        ],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "4e4bc2d7da7340dce1061c1af6b519d2e3783f9bfa2fb1c30478e38486c6b6df",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-jnu-2026-international-undergraduate-admissions",
+              "source-jnu-official-application-portal"
+            ],
+            "verifiedAt": "2026-08-25",
+            "reviewAfter": "2026-09-24",
+            "status": "stale",
+            "id": "program-jinan-university-pharmacy-bachelor",
+            "slug": "jinan-university-pharmacy-bachelor",
+            "universityId": "uni-jinan-university",
+            "name": {
+              "en": "Pharmacy",
+              "zh": "药学",
+              "ru": "Фармация"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "medicine",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "applyUrl": "https://lxlz.jnu.edu.cn/",
+            "languageRequirements": [
+              {
+                "test": "IELTS",
+                "minimum": "5.5 overall, with each component at least 5.0"
+              },
+              {
+                "test": "TOEFL",
+                "minimum": "80 (iBT)"
+              },
+              {
+                "test": "other",
+                "minimum": "SAT total score 1030 accepted by the 2026 guide"
+              }
+            ],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "4e4bc2d7da7340dce1061c1af6b519d2e3783f9bfa2fb1c30478e38486c6b6df"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-jnu-2026-international-undergraduate-admissions",
+            "url": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "title": "Jinan University Application Guide for International Students 2026",
+            "publisher": "Jinan University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "4183fd69f0a2ebf5a6c611f8f8e078f60dd884d42577216708ebb8301115bdf1"
+        },
+        {
+          "row": {
+            "id": "source-jnu-official-application-portal",
+            "url": "https://lxlz.jnu.edu.cn/",
+            "title": "Jinan University International Student Application Portal",
+            "publisher": "Jinan University",
+            "kind": "admissions",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "3e6dc3ca7c5202648fea3343021d738a550c2a9b6a2675ce748f50e7af627386"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-wave3-program-jinan-university-international-journalism-and-communication-bachelor-autumn-2026-historical",
+      "selectionOrigin": "additionalSameSource8",
+      "universityId": "uni-jinan-university",
+      "row": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-08-25",
+        "status": "stale",
+        "id": "cycle-wave3-program-jinan-university-international-journalism-and-communication-bachelor-autumn-2026-historical",
+        "programId": "program-jinan-university-international-journalism-and-communication-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-31",
+        "dateStatus": "previous-cycle-reference",
+        "tuitionCny": 28000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "complete",
+        "applicationFeeCny": 500,
+        "notes": {
+          "en": "The official guide lists two 2026 application-review windows, 15 January–28 February and 1 April–31 May. The final deadline, tuition and CNY 500 fee are historical only; no continuous opening interval or 2027 cycle is inferred.",
+          "zh": "官方简章列出2026年两段申请审核期：1月15日至2月28日、4月1日至5月31日。最终截止日、学费和500元报名费仅作历史记录，不虚构连续开放期或2027周期。"
+        }
+      },
+      "canonicalRecordSha256": "9836311faa4dab332207132d44364a38503550d42507fa95e431d62e9f4a4f5b",
+      "program": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions",
+          "source-jnu-official-application-portal"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-09-24",
+        "status": "stale",
+        "id": "program-jinan-university-international-journalism-and-communication-bachelor",
+        "slug": "jinan-university-international-journalism-and-communication-bachelor",
+        "universityId": "uni-jinan-university",
+        "name": {
+          "en": "International Journalism and Communication",
+          "zh": "国际新闻与传播",
+          "ru": "Международная журналистика и коммуникации"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "humanities",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+        "applyUrl": "https://lxlz.jnu.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "IELTS",
+            "minimum": "5.5 overall, with each component at least 5.0"
+          },
+          {
+            "test": "TOEFL",
+            "minimum": "80 (iBT)"
+          },
+          {
+            "test": "other",
+            "minimum": "SAT total score 1030 accepted by the 2026 guide"
+          }
+        ],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "71ac94c15e5c3c6a19b8b650f17d8adf2d382dfd40c5aed293878910f1fe84fa",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-jnu-2026-international-undergraduate-admissions",
+              "source-jnu-official-application-portal"
+            ],
+            "verifiedAt": "2026-08-25",
+            "reviewAfter": "2026-09-24",
+            "status": "stale",
+            "id": "program-jinan-university-international-journalism-and-communication-bachelor",
+            "slug": "jinan-university-international-journalism-and-communication-bachelor",
+            "universityId": "uni-jinan-university",
+            "name": {
+              "en": "International Journalism and Communication",
+              "zh": "国际新闻与传播",
+              "ru": "Международная журналистика и коммуникации"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "humanities",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "applyUrl": "https://lxlz.jnu.edu.cn/",
+            "languageRequirements": [
+              {
+                "test": "IELTS",
+                "minimum": "5.5 overall, with each component at least 5.0"
+              },
+              {
+                "test": "TOEFL",
+                "minimum": "80 (iBT)"
+              },
+              {
+                "test": "other",
+                "minimum": "SAT total score 1030 accepted by the 2026 guide"
+              }
+            ],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "71ac94c15e5c3c6a19b8b650f17d8adf2d382dfd40c5aed293878910f1fe84fa"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-jnu-2026-international-undergraduate-admissions",
+            "url": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "title": "Jinan University Application Guide for International Students 2026",
+            "publisher": "Jinan University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "4183fd69f0a2ebf5a6c611f8f8e078f60dd884d42577216708ebb8301115bdf1"
+        },
+        {
+          "row": {
+            "id": "source-jnu-official-application-portal",
+            "url": "https://lxlz.jnu.edu.cn/",
+            "title": "Jinan University International Student Application Portal",
+            "publisher": "Jinan University",
+            "kind": "admissions",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "3e6dc3ca7c5202648fea3343021d738a550c2a9b6a2675ce748f50e7af627386"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-wave3-program-jinan-university-food-nutrition-and-health-bachelor-autumn-2026-historical",
+      "selectionOrigin": "additionalSameSource8",
+      "universityId": "uni-jinan-university",
+      "row": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-08-25",
+        "status": "stale",
+        "id": "cycle-wave3-program-jinan-university-food-nutrition-and-health-bachelor-autumn-2026-historical",
+        "programId": "program-jinan-university-food-nutrition-and-health-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-31",
+        "dateStatus": "previous-cycle-reference",
+        "tuitionCny": 30000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "complete",
+        "applicationFeeCny": 500,
+        "notes": {
+          "en": "The official guide lists two 2026 application-review windows, 15 January–28 February and 1 April–31 May. The final deadline, tuition and CNY 500 fee are historical only; no continuous opening interval or 2027 cycle is inferred.",
+          "zh": "官方简章列出2026年两段申请审核期：1月15日至2月28日、4月1日至5月31日。最终截止日、学费和500元报名费仅作历史记录，不虚构连续开放期或2027周期。"
+        }
+      },
+      "canonicalRecordSha256": "995574d25c2ba24d564257d34014ec1aefe40087b64a128aa157b4553aff804a",
+      "program": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions",
+          "source-jnu-official-application-portal"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-09-24",
+        "status": "stale",
+        "id": "program-jinan-university-food-nutrition-and-health-bachelor",
+        "slug": "jinan-university-food-nutrition-and-health-bachelor",
+        "universityId": "uni-jinan-university",
+        "name": {
+          "en": "Food Nutrition and Health",
+          "zh": "食品营养与健康",
+          "ru": "Питание и здоровье"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+        "applyUrl": "https://lxlz.jnu.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "IELTS",
+            "minimum": "5.5 overall, with each component at least 5.0"
+          },
+          {
+            "test": "TOEFL",
+            "minimum": "80 (iBT)"
+          },
+          {
+            "test": "other",
+            "minimum": "SAT total score 1030 accepted by the 2026 guide"
+          }
+        ],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "844101a9500300d5556bbbd0d56153cbd4dbbb7a1f09ca6695447ddf76aa9629",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-jnu-2026-international-undergraduate-admissions",
+              "source-jnu-official-application-portal"
+            ],
+            "verifiedAt": "2026-08-25",
+            "reviewAfter": "2026-09-24",
+            "status": "stale",
+            "id": "program-jinan-university-food-nutrition-and-health-bachelor",
+            "slug": "jinan-university-food-nutrition-and-health-bachelor",
+            "universityId": "uni-jinan-university",
+            "name": {
+              "en": "Food Nutrition and Health",
+              "zh": "食品营养与健康",
+              "ru": "Питание и здоровье"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "medicine",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "applyUrl": "https://lxlz.jnu.edu.cn/",
+            "languageRequirements": [
+              {
+                "test": "IELTS",
+                "minimum": "5.5 overall, with each component at least 5.0"
+              },
+              {
+                "test": "TOEFL",
+                "minimum": "80 (iBT)"
+              },
+              {
+                "test": "other",
+                "minimum": "SAT total score 1030 accepted by the 2026 guide"
+              }
+            ],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "844101a9500300d5556bbbd0d56153cbd4dbbb7a1f09ca6695447ddf76aa9629"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-jnu-2026-international-undergraduate-admissions",
+            "url": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "title": "Jinan University Application Guide for International Students 2026",
+            "publisher": "Jinan University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "4183fd69f0a2ebf5a6c611f8f8e078f60dd884d42577216708ebb8301115bdf1"
+        },
+        {
+          "row": {
+            "id": "source-jnu-official-application-portal",
+            "url": "https://lxlz.jnu.edu.cn/",
+            "title": "Jinan University International Student Application Portal",
+            "publisher": "Jinan University",
+            "kind": "admissions",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "3e6dc3ca7c5202648fea3343021d738a550c2a9b6a2675ce748f50e7af627386"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-wave3-program-jinan-university-clinical-medicine-bachelor-autumn-2026-historical",
+      "selectionOrigin": "additionalSameSource8",
+      "universityId": "uni-jinan-university",
+      "row": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-08-25",
+        "status": "stale",
+        "id": "cycle-wave3-program-jinan-university-clinical-medicine-bachelor-autumn-2026-historical",
+        "programId": "program-jinan-university-clinical-medicine-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-31",
+        "dateStatus": "previous-cycle-reference",
+        "tuitionCny": 40000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "complete",
+        "applicationFeeCny": 500,
+        "notes": {
+          "en": "The official guide lists two 2026 application-review windows, 15 January–28 February and 1 April–31 May. The final deadline, tuition and CNY 500 fee are historical only; no continuous opening interval or 2027 cycle is inferred.",
+          "zh": "官方简章列出2026年两段申请审核期：1月15日至2月28日、4月1日至5月31日。最终截止日、学费和500元报名费仅作历史记录，不虚构连续开放期或2027周期。"
+        }
+      },
+      "canonicalRecordSha256": "d71f8e309023fe52e3149416095f63fd301b350dc9fe3fbe8c2ed28a6b75356e",
+      "program": {
+        "sourceIds": [
+          "src-jnu-2026-international-undergraduate-admissions",
+          "source-jnu-official-application-portal"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-09-24",
+        "status": "stale",
+        "id": "program-jinan-university-clinical-medicine-bachelor",
+        "slug": "jinan-university-clinical-medicine-bachelor",
+        "universityId": "uni-jinan-university",
+        "name": {
+          "en": "Clinical Medicine",
+          "zh": "临床医学",
+          "ru": "Клиническая медицина"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 72,
+        "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+        "applyUrl": "https://lxlz.jnu.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "IELTS",
+            "minimum": "5.5 overall, with each component at least 5.0"
+          },
+          {
+            "test": "TOEFL",
+            "minimum": "80 (iBT)"
+          },
+          {
+            "test": "other",
+            "minimum": "SAT total score 1030 accepted by the 2026 guide"
+          }
+        ],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "87f1f806cd1bc1cd8152117d58ff5cca70574ef083bd143a200ddcee1f4cf321",
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-jnu-2026-international-undergraduate-admissions",
+              "source-jnu-official-application-portal"
+            ],
+            "verifiedAt": "2026-08-25",
+            "reviewAfter": "2026-09-24",
+            "status": "stale",
+            "id": "program-jinan-university-clinical-medicine-bachelor",
+            "slug": "jinan-university-clinical-medicine-bachelor",
+            "universityId": "uni-jinan-university",
+            "name": {
+              "en": "Clinical Medicine",
+              "zh": "临床医学",
+              "ru": "Клиническая медицина"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "medicine",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 72,
+            "programUrl": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "applyUrl": "https://lxlz.jnu.edu.cn/",
+            "languageRequirements": [
+              {
+                "test": "IELTS",
+                "minimum": "5.5 overall, with each component at least 5.0"
+              },
+              {
+                "test": "TOEFL",
+                "minimum": "80 (iBT)"
+              },
+              {
+                "test": "other",
+                "minimum": "SAT total score 1030 accepted by the 2026 guide"
+              }
+            ],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "87f1f806cd1bc1cd8152117d58ff5cca70574ef083bd143a200ddcee1f4cf321"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-jnu-2026-international-undergraduate-admissions",
+            "url": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+            "title": "Jinan University Application Guide for International Students 2026",
+            "publisher": "Jinan University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "4183fd69f0a2ebf5a6c611f8f8e078f60dd884d42577216708ebb8301115bdf1"
+        },
+        {
+          "row": {
+            "id": "source-jnu-official-application-portal",
+            "url": "https://lxlz.jnu.edu.cn/",
+            "title": "Jinan University International Student Application Portal",
+            "publisher": "Jinan University",
+            "kind": "admissions",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "canonicalSourceSha256": "3e6dc3ca7c5202648fea3343021d738a550c2a9b6a2675ce748f50e7af627386"
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://eng.hubu.edu.cn/index/Admission/Online_Application1.htm",
+      "sourceIds": [
+        "src-gap-program-wave8-hubu-international-economics-trade-bachelor",
+        "src-gap-program-wave8-hubu-management-philosophy-master",
+        "src-gap-program-wave8-hubu-nanomaterials-devices-master"
+      ],
+      "recordIds": [
+        "cycle-gap-wave8-hubu-international-economics-trade-bachelor-2026-2027-other-fee-reference",
+        "cycle-gap-wave8-hubu-management-philosophy-master-2026-2027-other-fee-reference",
+        "cycle-gap-wave8-hubu-nanomaterials-devices-master-2026-2027-other-fee-reference"
+      ]
+    },
+    {
+      "url": "https://hi.hlju.edu.cn/",
+      "sourceIds": [
+        "src-uni-heilongjiang-university"
+      ],
+      "recordIds": [
+        "cycle-2027-heilongjiang-university-law-master",
+        "cycle-2027-heilongjiang-university-translation-bachelor"
+      ]
+    },
+    {
+      "url": "https://cie.jlu.edu.cn/info/1189/3601.htm",
+      "sourceIds": [
+        "src-gap-scholarship-wave8-jlu-csc-bilateral-type-a"
+      ],
+      "recordIds": [
+        "sch-gap-wave8-jlu-csc-bilateral-type-a"
+      ]
+    },
+    {
+      "url": "https://oesenglish.jxufe.edu.cn/news-list-jufescholarsip.html",
+      "sourceIds": [
+        "src-gap-scholarship-mew-csw-jufe-university-scholarship"
+      ],
+      "recordIds": [
+        "sch-gap-mew-csw-jufe-university-scholarship"
+      ]
+    },
+    {
+      "url": "https://oesenglish.jxufe.edu.cn/news-list-scholarship.html",
+      "sourceIds": [
+        "src-gap-scholarship-mew-csw-jufe-university-scholarship-support-1"
+      ],
+      "recordIds": [
+        "sch-gap-mew-csw-jufe-university-scholarship"
+      ]
+    },
+    {
+      "url": "https://zsb.jnu.edu.cn/2026/0113/c40322a849403/page.htm",
+      "sourceIds": [
+        "src-jnu-2026-international-undergraduate-admissions"
+      ],
+      "recordIds": [
+        "scholarship-jnu-guangdong-government-international-students",
+        "cycle-gap-clw-sw-jnu-chinese-culture-education-bachelor-2026-2027-autumn-fee-reference",
+        "cycle-gap-clw-sw-jnu-chinese-language-bachelor-2026-2027-autumn-fee-reference",
+        "cycle-gap-clw-sw-jnu-tcsol-bachelor-2026-2027-autumn-fee-reference",
+        "cycle-wave3-program-jinan-university-international-economics-and-trade-bachelor-autumn-2026-historical",
+        "cycle-wave3-program-jinan-university-computer-science-and-technology-bachelor-autumn-2026-historical",
+        "cycle-wave3-program-jinan-university-accounting-bachelor-autumn-2026-historical",
+        "cycle-wave3-program-jinan-university-finance-bachelor-autumn-2026-historical",
+        "cycle-wave3-program-jinan-university-pharmacy-bachelor-autumn-2026-historical",
+        "cycle-wave3-program-jinan-university-international-journalism-and-communication-bachelor-autumn-2026-historical",
+        "cycle-wave3-program-jinan-university-food-nutrition-and-health-bachelor-autumn-2026-historical",
+        "cycle-wave3-program-jinan-university-clinical-medicine-bachelor-autumn-2026-historical"
+      ]
+    }
+  ],
+  "priorExactRecordOverlap": [],
+  "rules": {
+    "candidateOnly": true,
+    "noCanonicalWrites": true,
+    "noFreshnessRenewal": true,
+    "noGitOrSharedStateWrites": true,
+    "noPaidCalls": true
+  }
+}

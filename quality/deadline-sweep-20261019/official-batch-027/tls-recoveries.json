@@ -1,0 +1,29 @@
+[
+  {
+    "name": "njmu-2026-recovery",
+    "url": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm",
+    "observedAt": "2026-10-19T08:10:44.624084+00:00",
+    "method": "one-bounded-Windows-curl-normal-TLS-recovery",
+    "tlsCertificateValidation": true,
+    "exitCode": 28,
+    "responseMetadata": "000\n\nhttps://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm",
+    "captureSucceeded": false,
+    "error": "curl: (28) Connection timed out after 13718 milliseconds\n",
+    "retryPolicy": "cooldown-no-further-retries"
+  },
+  {
+    "name": "njupt-2026-recovery",
+    "url": "https://overseas.njupt.edu.cn/2025/1027/c4601a290722/page.htm",
+    "observedAt": "2026-10-19T08:10:44.624084+00:00",
+    "method": "one-bounded-Windows-curl-normal-TLS-recovery",
+    "tlsCertificateValidation": true,
+    "exitCode": 0,
+    "responseMetadata": "200\ntext/html\nhttps://overseas.njupt.edu.cn/2025/1027/c4601a290722/page.htm",
+    "rawPath": "njupt-2026-recovery.html",
+    "rawSha256": "d76417f88aa8b87229a90133f512924ce2e9ec2569598038bf0b8bada237c5bb",
+    "bytes": 18073,
+    "textPath": "njupt-2026-recovery.txt",
+    "textSha256": "564858deb36105b522f8c46aa6e03728b22ce158a9dbe7cf582c168521cf1ce6",
+    "captureSucceeded": true
+  }
+]

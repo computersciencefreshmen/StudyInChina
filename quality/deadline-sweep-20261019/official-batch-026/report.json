@@ -1,0 +1,1632 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-026-20261019",
+  "state": "completed-date-only-with-unresolved-exact-scopes",
+  "completedAt": "2026-10-19T08:30:19.887Z",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v6.json",
+  "targetQueueSha256": "245ac3f58bf85e9f328d04a513e60d7a9fa7b1ab86a8b52ab70e2824ab7b75a0",
+  "selectedUniversityIds": [
+    "uni-jining-medical-university",
+    "uni-kunming-medical-university",
+    "uni-kunming-university-of-science-and-technology",
+    "uni-liaoning-normal-university",
+    "uni-nanchang-university",
+    "uni-nanjing-agricultural-university",
+    "uni-nanjing-audit-university"
+  ],
+  "selection": {
+    "path": "selection.json",
+    "sha256": "b58c9a139167d7d30f966973801c8b4c17234c6a509f7c0ddc13e5763cc62b1c",
+    "baseQueueRecordIds": [
+      "sch-gap-breadth-sch-jnmc-shandong-government",
+      "sch-gap-breadth-sch-jnmc-university-international",
+      "cycle-gap-breadth-jnmc-m-clinical-medicine-2026-2027-autumn-fee-reference",
+      "cycle-gap-breadth-jnmc-m-pharmacy-2026-2027-autumn-fee-reference",
+      "sch-gap-local-kmmu-academic-scholarship",
+      "sch-gap-local-kmmu-freshmen-aid",
+      "cycle-gap-local-kmmu-chinese-language-2026-2027-other",
+      "cycle-gap-local-kmmu-mbbs-preparatory-2026-2027-other",
+      "sch-gap-local-strong-kust-scholarship-information",
+      "sch-gap-sch-mew-nnw-lnnu-international-chinese-language-teachers",
+      "sch-gap-mew-scws-ncu-president-scholarship",
+      "sch-gap-mve-ecma-njau-international-student-scholarship",
+      "sch-gap-wave7-nau-international-student-scholarship"
+    ],
+    "additionalSameSourceRecordIds": [
+      "cycle-gap-local-strong-jnmc-m-clinical-medicine-cn-2026-2027-other-fee-reference",
+      "cycle-gap-breadth-jnmc-m-public-health-2026-2027-autumn-fee-reference",
+      "cycle-gap-local-kmmu-medical-advanced-training-2026-2027-other"
+    ],
+    "baseQueueRecords": 13,
+    "additionalSameSourceRecords": 3,
+    "totalRecords": 16,
+    "additionalSelectionReceipt": "quality/deadline-sweep-20261019/heartbeat-0806/additional-same-source-selection-v1.json",
+    "additionalSelectionReceiptSha256": "3c781bc6ec7ba4bbc7c3a40a4028619e29803a78fe002527fde27f2b996dab48"
+  },
+  "summary": {
+    "universitiesWithScopedChecks": 7,
+    "recordsAssessed": 16,
+    "baseQueueRecords": 13,
+    "additionalSameSourceRecords": 3,
+    "admissionCyclesAssessed": 7,
+    "scholarshipsAssessed": 9,
+    "recordResults": {
+      "unknown": 15,
+      "blocked": 1
+    },
+    "canonicalWrites": 0,
+    "freshnessRenewals": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "publicationActions": 0,
+    "fullFactsCertified": 0,
+    "wholeSchoolCataloguesCertified": 0
+  },
+  "acquisition": {
+    "nativeRequests": 9,
+    "successfulOriginalBodies": 6,
+    "failedNativeTLS": 3,
+    "webFallbackExactUrls": 3,
+    "webSuccessfulFullBodies": 2,
+    "webPartialPDF": 1,
+    "webFailedTailRead": 1,
+    "fullWebToolResponsesRetained": true,
+    "paidCalls": 0,
+    "unnecessaryRegisteredSupportPagesNotFetched": [
+      "source-06",
+      "source-07",
+      "source-08",
+      "source-10"
+    ]
+  },
+  "policy": "Source-only date observations; no unknown is treated open or closed. No exact day fabricated from months, recurring rules, registration dates, title shells or mismatched funding/degree scopes. Existing stored dates and all full facts/freshness remain unchanged. No whole-school certification.",
+  "groups": [
+    {
+      "school": "uni-jining-medical-university",
+      "key": "jnmc-2026-master-month-only-and-award-independent-date-unknown",
+      "native": [
+        "source-01",
+        "source-13"
+      ],
+      "source": "source-01",
+      "title": "济宁医学院2026年来华留学生硕士研究生招生简章",
+      "year": 2026,
+      "quote": "2026 年 3 月—2026 年 6 月",
+      "scope": "Actual PDF p2 explicitly lists Clinical Medicine, Public Health and Pharmacy full-time professional masters, three years and HSK4. Application window has month precision only; p2 June–July reporting is separate.",
+      "reason": "same2026-master-application-window-month-precision-no-exact-day",
+      "restrictions": [
+        "No March1 or June30 is invented.",
+        "Two provincial/university scholarships listed on pp4–5 have assessment criteria, not independent applicant deadlines."
+      ],
+      "monthWindow": {
+        "startMonth": "2026-03",
+        "endMonth": "2026-06",
+        "precision": "month",
+        "exactDatesNotInferred": true
+      },
+      "universityId": "uni-jining-medical-university",
+      "evidence": [
+        {
+          "key": "source-01",
+          "url": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+          "method": "GET",
+          "startedAt": "2026-10-19T08:16:21.099394+00:00",
+          "automaticRetries": 0,
+          "httpStatus": 200,
+          "finalUrl": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+          "contentType": "application/pdf",
+          "rawPath": "source-01.pdf",
+          "rawSha256": "1f1f9819676d148caef3a9c07d4b7983a24753969bfbc962e48ddb94ed237e78",
+          "bytes": 250491,
+          "pages": 7,
+          "textPath": "source-01.txt",
+          "textSha256": "19e44b2047f0c24d9b51274b232701990c6ee7a49c6ff116c84fac8d0ed71c9f",
+          "observedAt": "2026-10-19T08:16:26.510655+00:00"
+        },
+        {
+          "key": "source-13",
+          "url": "https://gjjyxy.jnmc.edu.cn/2026/0415/c4397a180451/page.htm",
+          "method": "GET",
+          "startedAt": "2026-10-19T08:16:40.176785+00:00",
+          "automaticRetries": 0,
+          "httpStatus": 200,
+          "finalUrl": "https://gjjyxy.jnmc.edu.cn/2026/0415/c4397a180451/page.htm",
+          "contentType": "text/html",
+          "rawPath": "source-13.html",
+          "rawSha256": "4dcd70690fe63e37ee93d722a6e9953c7de19da83f90977cf31a6182840293d4",
+          "bytes": 8912,
+          "charset": "utf8",
+          "textPath": "source-13.txt",
+          "textSha256": "b128581ecad6706987af096714cd1d356140d1b1a302f9b7fdf450cdf2b79b61",
+          "observedAt": "2026-10-19T08:16:49.761926+00:00"
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-breadth-sch-jnmc-shandong-government",
+          "selectionOrigin": "baseQueue13",
+          "universityId": "uni-jining-medical-university",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "canonicalRecordSha256": "ca9bb30a88f4de2f66aa08630d2c9b10cd792d5f6228c74ec382aa6851708485",
+          "canonicalScholarshipSha256": "ca9bb30a88f4de2f66aa08630d2c9b10cd792d5f6228c74ec382aa6851708485",
+          "canonicalProgramPins": [],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-breadth-sch-jnmc-shandong-government",
+              "canonicalSourceSha256": "2f3cf84c7256da3defb1602e3adc92934939348653eff21bb369a72a05e2fb2a",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-breadth-sch-jnmc-shandong-government",
+                "url": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+                "title": "Jining Medical University 2026 International Master's Admissions Guide",
+                "publisher": "jining-medical-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": null,
+          "reason": "provincial-and-university-awards-listed-no-independent-scholarship-cutoff",
+          "evidenceSourceKey": "source-01",
+          "evidenceSourceUrl": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "1f1f9819676d148caef3a9c07d4b7983a24753969bfbc962e48ddb94ed237e78",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "observedAt": "2026-10-19T08:16:26.510655+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-breadth-sch-jnmc-university-international",
+          "selectionOrigin": "baseQueue13",
+          "universityId": "uni-jining-medical-university",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "canonicalRecordSha256": "1d534c47d84e0ab9371eb0f8e162a2a50921933952efcf192b32dced56afed94",
+          "canonicalScholarshipSha256": "1d534c47d84e0ab9371eb0f8e162a2a50921933952efcf192b32dced56afed94",
+          "canonicalProgramPins": [],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-breadth-sch-jnmc-university-international",
+              "canonicalSourceSha256": "8fc4ec61aafa38736270a9990a34c7303ccb9b231466f9e1a70607463fcf8af7",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-breadth-sch-jnmc-university-international",
+                "url": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+                "title": "Jining Medical University 2026 International Master's Admissions Guide",
+                "publisher": "jining-medical-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": null,
+          "reason": "provincial-and-university-awards-listed-no-independent-scholarship-cutoff",
+          "evidenceSourceKey": "source-01",
+          "evidenceSourceUrl": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "1f1f9819676d148caef3a9c07d4b7983a24753969bfbc962e48ddb94ed237e78",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "observedAt": "2026-10-19T08:16:26.510655+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-breadth-jnmc-m-clinical-medicine-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "baseQueue13",
+          "universityId": "uni-jining-medical-university",
+          "programId": "prog-gap-breadth-jnmc-m-clinical-medicine",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalRecordSha256": "0467a38b8d9565b9cd1c10a902d075f644f3a50702cfc2e897a6d063f68dcf00",
+          "canonicalCycleSha256": "0467a38b8d9565b9cd1c10a902d075f644f3a50702cfc2e897a6d063f68dcf00",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-breadth-jnmc-m-clinical-medicine",
+              "canonicalProgramSha256": "33c7893348aa6cd9bda3303f22b9316bca3bf509d3f608879b1480623b1aa3b9"
+            }
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-breadth-jnmc-m-clinical-medicine",
+              "canonicalSourceSha256": "ec822537b513cada3b2430b6d89090ffb06d8c13988cea56acb565f7ef8e4c12",
+              "sourceFullRecord": {
+                "id": "src-gap-program-breadth-jnmc-m-clinical-medicine",
+                "url": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+                "title": "Jining Medical University 2026 International Master's Admissions Guide",
+                "publisher": "jining-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": "2026 年 3 月—2026 年 6 月",
+          "reason": "same2026-master-application-window-month-precision-no-exact-day",
+          "evidenceSourceKey": "source-01",
+          "evidenceSourceUrl": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "1f1f9819676d148caef3a9c07d4b7983a24753969bfbc962e48ddb94ed237e78",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "observedAt": "2026-10-19T08:16:26.510655+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-breadth-jnmc-m-pharmacy-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "baseQueue13",
+          "universityId": "uni-jining-medical-university",
+          "programId": "prog-gap-breadth-jnmc-m-pharmacy",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalRecordSha256": "e2b56b1308bf15938610661c6de50e81873085d6d37242f79ebf85be3b7e433e",
+          "canonicalCycleSha256": "e2b56b1308bf15938610661c6de50e81873085d6d37242f79ebf85be3b7e433e",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-breadth-jnmc-m-pharmacy",
+              "canonicalProgramSha256": "4c0558bb6c3b7c5494c425783ea419bd01866711a047d006b171fa41c627a1f1"
+            }
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-breadth-jnmc-m-pharmacy",
+              "canonicalSourceSha256": "b606ed175bd6f60e370aa395b7126f6e9d74b9ea3c6bbe1b249b978047e6def3",
+              "sourceFullRecord": {
+                "id": "src-gap-program-breadth-jnmc-m-pharmacy",
+                "url": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+                "title": "Jining Medical University 2026 International Master's Admissions Guide",
+                "publisher": "jining-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": "2026 年 3 月—2026 年 6 月",
+          "reason": "same2026-master-application-window-month-precision-no-exact-day",
+          "evidenceSourceKey": "source-01",
+          "evidenceSourceUrl": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "1f1f9819676d148caef3a9c07d4b7983a24753969bfbc962e48ddb94ed237e78",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "observedAt": "2026-10-19T08:16:26.510655+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-jnmc-m-clinical-medicine-cn-2026-2027-other-fee-reference",
+          "selectionOrigin": "additionalSameSource3",
+          "universityId": "uni-jining-medical-university",
+          "programId": "prog-gap-local-strong-jnmc-m-clinical-medicine-cn",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "canonicalRecordSha256": "27630ee2bac712cce2f7ef2cff0902a9ec5ba184f64fa6fc00c359f881971720",
+          "canonicalCycleSha256": "27630ee2bac712cce2f7ef2cff0902a9ec5ba184f64fa6fc00c359f881971720",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-jnmc-m-clinical-medicine-cn",
+              "canonicalProgramSha256": "42e80eadc6a0174e3cfdc8229e4ef47f5f7a77ac817613a9d688714c54a516b9"
+            }
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-jnmc-m-clinical-medicine-cn",
+              "canonicalSourceSha256": "92e83c97841cd37b186c40939e406cefac87e77514d0f8c3283dc02cf21504db",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-strong-jnmc-m-clinical-medicine-cn",
+                "url": "https://gjjyxy.jnmc.edu.cn/2026/0415/c4397a180451/page.htm",
+                "title": "Jining Medical University 2026 International Postgraduate Admission",
+                "publisher": "jining-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-local-strong-jnmc-m-clinical-medicine-cn-support-1",
+              "canonicalSourceSha256": "1c93cd2a764223f214481724317c90418a3bcf57248d275971cac1ca6eb35917",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-strong-jnmc-m-clinical-medicine-cn-support-1",
+                "url": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+                "title": "Supporting official source",
+                "publisher": "jining-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": "2026 年 3 月—2026 年 6 月",
+          "reason": "same2026-master-application-window-month-precision-no-exact-day",
+          "evidenceSourceKey": "source-01",
+          "evidenceSourceUrl": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "1f1f9819676d148caef3a9c07d4b7983a24753969bfbc962e48ddb94ed237e78",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "observedAt": "2026-10-19T08:16:26.510655+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-breadth-jnmc-m-public-health-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "additionalSameSource3",
+          "universityId": "uni-jining-medical-university",
+          "programId": "prog-gap-breadth-jnmc-m-public-health",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalRecordSha256": "0ec6d8a8e91f84308c88c20458687eacbf242e365052154b00f767746c8b8bc1",
+          "canonicalCycleSha256": "0ec6d8a8e91f84308c88c20458687eacbf242e365052154b00f767746c8b8bc1",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-breadth-jnmc-m-public-health",
+              "canonicalProgramSha256": "1d111c72fe69ac8417bfe057de72b0ffd1464c3c67b08a340dc44a9ac91a67ba"
+            }
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-breadth-jnmc-m-public-health",
+              "canonicalSourceSha256": "b3a2e7076ddb09914901162f6afbd49a9e3ccf5d147e4a6796f7c44161cb7219",
+              "sourceFullRecord": {
+                "id": "src-gap-program-breadth-jnmc-m-public-health",
+                "url": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+                "title": "Jining Medical University 2026 International Master's Admissions Guide",
+                "publisher": "jining-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": "2026 年 3 月—2026 年 6 月",
+          "reason": "same2026-master-application-window-month-precision-no-exact-day",
+          "evidenceSourceKey": "source-01",
+          "evidenceSourceUrl": "https://gjjyxy.jnmc.edu.cn/_upload/article/files/15/9f/3eb11e1e4b838ed918844868957c/a09ea7f0-c3b1-40d8-9316-ec987c854c05.pdf",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "1f1f9819676d148caef3a9c07d4b7983a24753969bfbc962e48ddb94ed237e78",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "observedAt": "2026-10-19T08:16:26.510655+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "school": "uni-kunming-medical-university",
+      "key": "kmmu-2026-degree-cutoff-not-selected-nondegree-or-awards",
+      "native": [
+        "source-02",
+        "source-03"
+      ],
+      "source": "source-02",
+      "title": "Kunming Medical University 2026 Admission Brochure for International Students",
+      "year": 2026,
+      "quote": "Self-funded degree programs: January 1, 2026 – July 31, 2026.",
+      "scope": "PDF p3 gives this period only for self-funded degree programmes; p4 explicitly directs nondegree applicants to admissions news. p1/p2 name medical and Chinese advanced training. The MBBS preparatory support HTML is a title shell and supplies no actual date body.",
+      "reason": "storedJuly31-is-degree-only-and-does-not-certify-selected-nondegree-or-preparatory-route",
+      "restrictions": [
+        "Three selected nondegree/preparatory stored July31 days remain unchanged and unverified.",
+        "Whole year in p8 fee-table semester-begins column is not an unconditional rolling application rule.",
+        "Freshmen aid follows first-year fee payment and monthly performance assessment. Academic award is from second year, assessed annually. Neither has an independent application cutoff."
+      ],
+      "unboundDegreeWindow": {
+        "opensOn": "2026-01-01",
+        "closesOn": "2026-07-31",
+        "scope": "self-funded degree programmes only; not bound to any selected row"
+      },
+      "universityId": "uni-kunming-medical-university",
+      "evidence": [
+        {
+          "key": "source-02",
+          "url": "https://www.kmmc.cn/upload/20251120/2025112011480439.pdf",
+          "method": "GET",
+          "startedAt": "2026-10-19T08:16:21.099394+00:00",
+          "automaticRetries": 0,
+          "httpStatus": 200,
+          "finalUrl": "https://www.kmmc.cn/upload/20251120/2025112011480439.pdf",
+          "contentType": "application/pdf",
+          "rawPath": "source-02.pdf",
+          "rawSha256": "4735a8b4afb010b413142fc3bd6b954c54239cd6bbef605d418fda0aaccc05f3",
+          "bytes": 220360,
+          "pages": 10,
+          "textPath": "source-02.txt",
+          "textSha256": "9c32cd73b0634b0e8bddf90400b384a315f43fa7a0384a5740d480cc845e493d",
+          "observedAt": "2026-10-19T08:16:28.499525+00:00"
+        },
+        {
+          "key": "source-03",
+          "url": "https://www.kmmu.edu.cn/Pages_1924_58983.aspx",
+          "method": "GET",
+          "startedAt": "2026-10-19T08:16:26.524569+00:00",
+          "automaticRetries": 0,
+          "httpStatus": 200,
+          "finalUrl": "https://www.kmmu.edu.cn/Pages_1924_58983.aspx",
+          "contentType": "text/html; charset=utf-8",
+          "rawPath": "source-03.html",
+          "rawSha256": "23f9e0b2721ab80cd7f45b433b626f121cc6316155d0f403dcd49a354075cd4a",
+          "bytes": 8799,
+          "charset": "utf-8",
+          "textPath": "source-03.txt",
+          "textSha256": "64eea0b754c7d9d72783fe4fbd5ecc05cd437fd9347f54b6bfa2457c0d29b5a3",
+          "observedAt": "2026-10-19T08:16:30.160516+00:00"
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-local-kmmu-academic-scholarship",
+          "selectionOrigin": "baseQueue13",
+          "universityId": "uni-kunming-medical-university",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "canonicalRecordSha256": "a8218430a2ec7abd2c915f71e68e40dfb5e97841d275825ae189c292f6343518",
+          "canonicalScholarshipSha256": "a8218430a2ec7abd2c915f71e68e40dfb5e97841d275825ae189c292f6343518",
+          "canonicalProgramPins": [],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-local-kmmu-academic-scholarship",
+              "canonicalSourceSha256": "7c1c98320899514e96ed7167061783cc456bfef32eb75609cc98bae2f8ffd47c",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-local-kmmu-academic-scholarship",
+                "url": "https://www.kmmc.cn/upload/20251120/2025112011480439.pdf",
+                "title": "Kunming Medical University 2026 International Student Admission Guide",
+                "publisher": "kunming-medical-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": null,
+          "reason": "postenrolment-monthly-aid-or-secondyear-annual-award-no-independent-application-cutoff",
+          "evidenceSourceKey": "source-02",
+          "evidenceSourceUrl": "https://www.kmmc.cn/upload/20251120/2025112011480439.pdf",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "4735a8b4afb010b413142fc3bd6b954c54239cd6bbef605d418fda0aaccc05f3",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "observedAt": "2026-10-19T08:16:28.499525+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-local-kmmu-freshmen-aid",
+          "selectionOrigin": "baseQueue13",
+          "universityId": "uni-kunming-medical-university",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "canonicalRecordSha256": "dc9df4eb08f6cbfbe95b25926670e078f8aa64322c53f809ad1c1665514ab4cb",
+          "canonicalScholarshipSha256": "dc9df4eb08f6cbfbe95b25926670e078f8aa64322c53f809ad1c1665514ab4cb",
+          "canonicalProgramPins": [],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-local-kmmu-freshmen-aid",
+              "canonicalSourceSha256": "f573774366d5cd8f1d844788d1338e0830cc8d21ebed057874e735312b64c71e",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-local-kmmu-freshmen-aid",
+                "url": "https://www.kmmc.cn/upload/20251120/2025112011480439.pdf",
+                "title": "Kunming Medical University 2026 International Student Admission Guide",
+                "publisher": "kunming-medical-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": null,
+          "reason": "postenrolment-monthly-aid-or-secondyear-annual-award-no-independent-application-cutoff",
+          "evidenceSourceKey": "source-02",
+          "evidenceSourceUrl": "https://www.kmmc.cn/upload/20251120/2025112011480439.pdf",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "4735a8b4afb010b413142fc3bd6b954c54239cd6bbef605d418fda0aaccc05f3",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "observedAt": "2026-10-19T08:16:28.499525+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-kmmu-chinese-language-2026-2027-other",
+          "selectionOrigin": "baseQueue13",
+          "universityId": "uni-kunming-medical-university",
+          "programId": "prog-gap-local-kmmu-chinese-language",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "canonicalRecordSha256": "a303daf91a8004da2db7babf85186dc8ba7bd9f83e3f3b1eb4da82df624482e0",
+          "canonicalCycleSha256": "a303daf91a8004da2db7babf85186dc8ba7bd9f83e3f3b1eb4da82df624482e0",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-kmmu-chinese-language",
+              "canonicalProgramSha256": "754208a184e9cc3a33cbeb831b4f7df3130c200c60869bc816d4de28d3f79a38"
+            }
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-kmmu-chinese-language",
+              "canonicalSourceSha256": "59d6a522d8769264fa036280ebb2e847098d62cfcc4cbd44940ff747b8850c26",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-kmmu-chinese-language",
+                "url": "https://www.kmmc.cn/upload/20251120/2025112011480439.pdf",
+                "title": "Kunming Medical University 2026 International Student Admission Guide",
+                "publisher": "kunming-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": "2026-07-31",
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": "Self-funded degree programs: January 1, 2026 – July 31, 2026.",
+          "reason": "storedJuly31-is-degree-only-and-does-not-certify-selected-nondegree-or-preparatory-route",
+          "evidenceSourceKey": "source-02",
+          "evidenceSourceUrl": "https://www.kmmc.cn/upload/20251120/2025112011480439.pdf",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "4735a8b4afb010b413142fc3bd6b954c54239cd6bbef605d418fda0aaccc05f3",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "observedAt": "2026-10-19T08:16:28.499525+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-kmmu-mbbs-preparatory-2026-2027-other",
+          "selectionOrigin": "baseQueue13",
+          "universityId": "uni-kunming-medical-university",
+          "programId": "prog-gap-local-kmmu-mbbs-preparatory",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "canonicalRecordSha256": "754d1278d3ad6adabcd42183a848ccf16f31cd4f1389964aaba6ae22513417dd",
+          "canonicalCycleSha256": "754d1278d3ad6adabcd42183a848ccf16f31cd4f1389964aaba6ae22513417dd",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-kmmu-mbbs-preparatory",
+              "canonicalProgramSha256": "d358060a197b531af2e0c8b26f94807883618279bd6b9f0d777fb32cd47b5994"
+            }
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-kmmu-mbbs-preparatory",
+              "canonicalSourceSha256": "d44b1ced3a53c966cf6dfe0031c0669d8e9324ad9b804907a4daee8d59a7bf63",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-kmmu-mbbs-preparatory",
+                "url": "https://www.kmmu.edu.cn/Pages_1924_58983.aspx",
+                "title": "Kunming Medical University 2026 Clinical Medicine English-taught Undergraduate (MBBS) Preparatory Program",
+                "publisher": "kunming-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-local-kmmu-mbbs-preparatory-support-1",
+              "canonicalSourceSha256": "8205542372b43b5dce397e27b98c0cab1a13c4bd5c2a54e363ff75c85ea74018",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-kmmu-mbbs-preparatory-support-1",
+                "url": "https://www.kmmc.cn/upload/20251120/2025112011480439.pdf",
+                "title": "Supporting official source",
+                "publisher": "kunming-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": "2026-07-31",
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": "Self-funded degree programs: January 1, 2026 – July 31, 2026.",
+          "reason": "storedJuly31-is-degree-only-and-does-not-certify-selected-nondegree-or-preparatory-route",
+          "evidenceSourceKey": "source-02",
+          "evidenceSourceUrl": "https://www.kmmc.cn/upload/20251120/2025112011480439.pdf",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "4735a8b4afb010b413142fc3bd6b954c54239cd6bbef605d418fda0aaccc05f3",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "observedAt": "2026-10-19T08:16:28.499525+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-kmmu-medical-advanced-training-2026-2027-other",
+          "selectionOrigin": "additionalSameSource3",
+          "universityId": "uni-kunming-medical-university",
+          "programId": "prog-gap-local-kmmu-medical-advanced-training",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "canonicalRecordSha256": "7c9c0ac31f86c6c8735ed812267524ab0b37bc9af2668f5cdbcc07afd3bc19bd",
+          "canonicalCycleSha256": "7c9c0ac31f86c6c8735ed812267524ab0b37bc9af2668f5cdbcc07afd3bc19bd",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-kmmu-medical-advanced-training",
+              "canonicalProgramSha256": "ace2503e5045caa53331d391a7ea3144ebcec4a75546861c289c0af74f7a8dc1"
+            }
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-kmmu-medical-advanced-training",
+              "canonicalSourceSha256": "b3cefffd0d99250f442bfdb987f5eaa6c74d0ac7f347091a266793e9415b8d47",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-kmmu-medical-advanced-training",
+                "url": "https://www.kmmc.cn/upload/20251120/2025112011480439.pdf",
+                "title": "Kunming Medical University 2026 International Student Admission Guide",
+                "publisher": "kunming-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": "2026-07-31",
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": "Self-funded degree programs: January 1, 2026 – July 31, 2026.",
+          "reason": "storedJuly31-is-degree-only-and-does-not-certify-selected-nondegree-or-preparatory-route",
+          "evidenceSourceKey": "source-02",
+          "evidenceSourceUrl": "https://www.kmmc.cn/upload/20251120/2025112011480439.pdf",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "4735a8b4afb010b413142fc3bd6b954c54239cd6bbef605d418fda0aaccc05f3",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "observedAt": "2026-10-19T08:16:28.499525+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "school": "uni-kunming-university-of-science-and-technology",
+      "key": "kust-generic-award-versus-2026-yunnan-government-landing-only",
+      "native": [
+        "source-04"
+      ],
+      "source": "source-04",
+      "title": "昆明理工大学2026年云南省政府奖学金招生简章",
+      "year": 2026,
+      "quote": null,
+      "scope": "Actual registered URL is a landing with a differently scoped Yunnan Provincial Government award title and an attached-guide link. Landing contains no applicant deadline; generic university scholarship row is not silently equated to provincial award.",
+      "reason": "landing-only-no-date-and-generic-university-award-not-equated-to-provincial-route",
+      "restrictions": [
+        "No deadline inferred from title, publication date or link presence. No expanded attachment chase."
+      ],
+      "universityId": "uni-kunming-university-of-science-and-technology",
+      "evidence": [
+        {
+          "key": "source-04",
+          "url": "https://gjxy.kust.edu.cn/info/1337/1671.htm",
+          "method": "GET",
+          "startedAt": "2026-10-19T08:16:28.500585+00:00",
+          "automaticRetries": 0,
+          "httpStatus": 200,
+          "finalUrl": "https://gjxy.kust.edu.cn/info/1337/1671.htm",
+          "contentType": "text/html",
+          "rawPath": "source-04.html",
+          "rawSha256": "8a7e93bae6d2109d00751dda240f94506f63462bcc2ef115a8e6194d1c762dcf",
+          "bytes": 211553,
+          "charset": "utf8",
+          "textPath": "source-04.txt",
+          "textSha256": "eb45005e16f7aaf5259f151096b3929a9c6b613a2002acd140b092b9aa640bbc",
+          "observedAt": "2026-10-19T08:16:32.322149+00:00"
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-local-strong-kust-scholarship-information",
+          "selectionOrigin": "baseQueue13",
+          "universityId": "uni-kunming-university-of-science-and-technology",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "canonicalRecordSha256": "37c2473874a0a864be9569e900214731c80282ca20b03ee908943dae3af435a6",
+          "canonicalScholarshipSha256": "37c2473874a0a864be9569e900214731c80282ca20b03ee908943dae3af435a6",
+          "canonicalProgramPins": [],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-local-strong-kust-scholarship-information",
+              "canonicalSourceSha256": "bd8860975c82d0688422e7fc1cd1aacd22d536f7d7332053a8426fbbbcbb81df",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-local-strong-kust-scholarship-information",
+                "url": "https://gjxy.kust.edu.cn/info/1337/1671.htm",
+                "title": "KUST International Student Scholarship Information",
+                "publisher": "kunming-university-of-science-and-technology",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": null,
+          "reason": "landing-only-no-date-and-generic-university-award-not-equated-to-provincial-route",
+          "evidenceSourceKey": "source-04",
+          "evidenceSourceUrl": "https://gjxy.kust.edu.cn/info/1337/1671.htm",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "8a7e93bae6d2109d00751dda240f94506f63462bcc2ef115a8e6194d1c762dcf",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "observedAt": "2026-10-19T08:16:32.322149+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "school": "uni-liaoning-normal-university",
+      "key": "lnnu-2025-ICLT-guide-no-current-generic-cutoff",
+      "native": [
+        "source-05"
+      ],
+      "web": "web-lnnu",
+      "source": "web-lnnu",
+      "title": "辽宁师范大学国际中文教师奖学金申请办法（2025年）",
+      "year": 2025,
+      "quote": "一学期研修生2025年9月、2026年3月入学",
+      "scope": "Actual full official parsed guide is for2025 and includes March2026 intake, not March2027. Student October31 is distinct from recommending/host review November10. The generic multilevel award has no one current cycle or single deadline.",
+      "reason": "official-full-guide-is2025-with-multiple-intake-cutoffs-no-single-current-award-deadline",
+      "restrictions": [
+        "No2025 date rolled to2026or2027.",
+        "Chinese March1 and English February20 opening wording differ; no exact opening certified.",
+        "Historical student and institutional deadlines remain separate; no current award status inferred."
+      ],
+      "universityId": "uni-liaoning-normal-university",
+      "evidence": [
+        {
+          "key": "source-05",
+          "url": "https://gjy.lnnu.edu.cn/jxj/gjzwjsjxj.htm",
+          "method": "GET",
+          "startedAt": "2026-10-19T08:16:30.160516+00:00",
+          "automaticRetries": 0,
+          "error": "URLError:<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+          "observedAt": "2026-10-19T08:16:35.166535+00:00"
+        },
+        {
+          "key": "web-lnnu",
+          "url": "https://gjy.lnnu.edu.cn/jxj/gjzwjsjxj.htm",
+          "observedAt": "2026-10-19T08:30:19.840Z",
+          "sourceType": "web-tool-parsed-official-page-not-origin-raw-bytes",
+          "originRawSha256": null,
+          "readScope": "Actual full parsed 2025 official scholarship guide; original native TLS failed; tool says crawled today.",
+          "retainedResponse": {
+            "path": "web-fallback-full-response.txt",
+            "sha256": "54469effde4a60471057fb77e451c9de697b73d851f24c388668fcac60ee3f14"
+          }
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nnw-lnnu-international-chinese-language-teachers",
+          "selectionOrigin": "baseQueue13",
+          "universityId": "uni-liaoning-normal-university",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "canonicalRecordSha256": "a6b00e7067bb68ae2da3f07259d2260f108809510b394ce1d70f65f1cb7de0d9",
+          "canonicalScholarshipSha256": "a6b00e7067bb68ae2da3f07259d2260f108809510b394ce1d70f65f1cb7de0d9",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nnw-lnnu-chinese-language-study",
+              "canonicalProgramSha256": "d7203357f6ad89dfb651f6379909662878ae7114c480842983c824c85602ac98"
+            },
+            {
+              "programId": "prog-gap-prog-mew-nnw-lnnu-chinese-language-bachelor",
+              "canonicalProgramSha256": "87ce420b876e397139a32ab3235ac69010092bc9743166c19c3f418879fd1c8e"
+            },
+            {
+              "programId": "prog-gap-prog-mew-nnw-lnnu-international-chinese-education-master",
+              "canonicalProgramSha256": "8f9540e739910bcf70f35a596b511e740f92a4a482f35fa51db49c6c326a3895"
+            }
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nnw-lnnu-international-chinese-language-teachers",
+              "canonicalSourceSha256": "22ad77dd35004872a143db9878d6c52bd2e14a23929311ced0ffde8e5b7b9bf8",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-sch-mew-nnw-lnnu-international-chinese-language-teachers",
+                "url": "https://gjy.lnnu.edu.cn/jxj/gjzwjsjxj.htm",
+                "title": "辽宁师范大学国际中文教师奖学金",
+                "publisher": "liaoning-normal-university",
+                "kind": "scholarship",
+                "language": "zh",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-lnnu-chinese-language-study",
+              "canonicalSourceSha256": "6fd7aa36dc9459ec1431205bbd4c4679ec53184e687eed3e504727daf0ccbfb1",
+              "sourceFullRecord": {
+                "id": "src-gap-program-prog-mew-nnw-lnnu-chinese-language-study",
+                "url": "https://gjy.lnnu.edu.cn/zsxx/yyjx.htm",
+                "title": "辽宁师范大学国际教育学院语言进修",
+                "publisher": "liaoning-normal-university",
+                "kind": "program",
+                "language": "zh",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-lnnu-chinese-language-bachelor",
+              "canonicalSourceSha256": "92e88bedf2e3355c4c01d961779e008cc74eb54614c05a364d8afdba988d1241",
+              "sourceFullRecord": {
+                "id": "src-gap-program-prog-mew-nnw-lnnu-chinese-language-bachelor",
+                "url": "https://gjy.lnnu.edu.cn/zsxx/bkzy.htm",
+                "title": "辽宁师范大学国际教育学院本科专业",
+                "publisher": "liaoning-normal-university",
+                "kind": "program",
+                "language": "zh",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-lnnu-international-chinese-education-master",
+              "canonicalSourceSha256": "5f833eb579ae503286d331a488ff412e5cf70695bfe2d1a01dd8c9aaa20d54e4",
+              "sourceFullRecord": {
+                "id": "src-gap-program-prog-mew-nnw-lnnu-international-chinese-education-master",
+                "url": "https://gjy.lnnu.edu.cn/zsxx/sszhuany.htm",
+                "title": "辽宁师范大学国际教育学院硕士专业",
+                "publisher": "liaoning-normal-university",
+                "kind": "program",
+                "language": "zh",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-05",
+          "storedReviewAfter": "2026-09-04",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": "一学期研修生2025年9月、2026年3月入学",
+          "reason": "official-full-guide-is2025-with-multiple-intake-cutoffs-no-single-current-award-deadline",
+          "evidenceSourceKey": "web-lnnu",
+          "evidenceSourceUrl": "https://gjy.lnnu.edu.cn/jxj/gjzwjsjxj.htm",
+          "evidenceSourceType": "web-tool-parsed-official-page-not-origin-raw-bytes",
+          "evidenceBodySha256": null,
+          "retainedObservationSha256": "54469effde4a60471057fb77e451c9de697b73d851f24c388668fcac60ee3f14",
+          "originRawBytesAvailableForDateEvidence": false,
+          "observedAt": "2026-10-19T08:30:19.840Z",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "school": "uni-nanchang-university",
+      "key": "ncu-president-award-body-without-date",
+      "native": [
+        "source-09"
+      ],
+      "web": "web-ncu",
+      "source": "web-ncu",
+      "title": "NCU President Scholarship for International Students",
+      "year": null,
+      "quote": null,
+      "scope": "Full actual parsed body distinguishes freshman, excellent undergraduate and graduate scholarships and points to an application platform. It gives no exact calendar year or applicant deadline.",
+      "reason": "actual-scholarship-body-with-application-link-but-no-dated-applicant-window",
+      "restrictions": [
+        "Application link does not prove an open or rolling window. No degree/nondegree admissions date borrowed."
+      ],
+      "universityId": "uni-nanchang-university",
+      "evidence": [
+        {
+          "key": "source-09",
+          "url": "https://iec.ncu.edu.cn/en/SCHOLARSHIPS/NCU_President_Scholarship_for_International_Stud.htm",
+          "method": "GET",
+          "startedAt": "2026-10-19T08:16:32.324194+00:00",
+          "automaticRetries": 0,
+          "error": "URLError:<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+          "observedAt": "2026-10-19T08:16:37.345937+00:00"
+        },
+        {
+          "key": "web-ncu",
+          "url": "https://iec.ncu.edu.cn/en/SCHOLARSHIPS/NCU_President_Scholarship_for_International_Stud.htm",
+          "observedAt": "2026-10-19T08:30:19.840Z",
+          "sourceType": "web-tool-parsed-official-page-not-origin-raw-bytes",
+          "originRawSha256": null,
+          "readScope": "Actual full parsed scholarship body and application-link instructions; no applicant date in body; original native TLS failed.",
+          "retainedResponse": {
+            "path": "web-fallback-full-response.txt",
+            "sha256": "54469effde4a60471057fb77e451c9de697b73d851f24c388668fcac60ee3f14"
+          }
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-scws-ncu-president-scholarship",
+          "selectionOrigin": "baseQueue13",
+          "universityId": "uni-nanchang-university",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "canonicalRecordSha256": "80e6c6949691d80e81d3793dbb3f8df882662e15a899d008620a126ac0b2c0bb",
+          "canonicalScholarshipSha256": "80e6c6949691d80e81d3793dbb3f8df882662e15a899d008620a126ac0b2c0bb",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-scws-ncu-chinese-language-training",
+              "canonicalProgramSha256": "6e94dc94fd55f114efbc46ec45371eb1a0f77034181e1546c95ddbd3d9bbe746"
+            },
+            {
+              "programId": "prog-gap-mew-scws-ncu-business-chinese-short-course",
+              "canonicalProgramSha256": "fd845111e3115029335b6924aaaab470b3564b857adf92d4608fe38e5712037a"
+            }
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-scws-ncu-president-scholarship",
+              "canonicalSourceSha256": "c892502536d3f038f59c9eebedff4477710f7fb62476279f2e644c15c76e3653",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mew-scws-ncu-president-scholarship",
+                "url": "https://iec.ncu.edu.cn/en/SCHOLARSHIPS/NCU_President_Scholarship_for_International_Stud.htm",
+                "title": "NCU President Scholarship for International Students",
+                "publisher": "nanchang-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-04"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-mew-scws-ncu-chinese-language-training",
+              "canonicalSourceSha256": "9bed28f603df2ad15898f0b41bea854766f069c19c4a506a5d85571f86618e19",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-scws-ncu-chinese-language-training",
+                "url": "https://iec.ncu.edu.cn/en/ADMISSION/Non_degree_programs.htm",
+                "title": "Nanchang University Non-degree Programs",
+                "publisher": "nanchang-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-04"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-mew-scws-ncu-business-chinese-short-course",
+              "canonicalSourceSha256": "f40ca50a7d94ab77083a1e5d93ee644ad5d5c714f5f11956087f4bb445d70512",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-scws-ncu-business-chinese-short-course",
+                "url": "https://iec.ncu.edu.cn/en/ADMISSION/Non_degree_programs.htm",
+                "title": "Nanchang University Non-degree Programs",
+                "publisher": "nanchang-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-04"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-04",
+          "storedReviewAfter": "2026-09-03",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": null,
+          "reason": "actual-scholarship-body-with-application-link-but-no-dated-applicant-window",
+          "evidenceSourceKey": "web-ncu",
+          "evidenceSourceUrl": "https://iec.ncu.edu.cn/en/SCHOLARSHIPS/NCU_President_Scholarship_for_International_Stud.htm",
+          "evidenceSourceType": "web-tool-parsed-official-page-not-origin-raw-bytes",
+          "evidenceBodySha256": null,
+          "retainedObservationSha256": "54469effde4a60471057fb77e451c9de697b73d851f24c388668fcac60ee3f14",
+          "originRawBytesAvailableForDateEvidence": false,
+          "observedAt": "2026-10-19T08:30:19.840Z",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "school": "uni-nanjing-agricultural-university",
+      "key": "njau-native-TLS-and-web-partial-pdf-cooldown",
+      "native": [
+        "source-11"
+      ],
+      "web": "web-njau",
+      "source": "web-njau",
+      "title": "Program Information on NAU Scholarship for International Students",
+      "year": null,
+      "quote": null,
+      "scope": "Native TLS failed; single web fallback exposed first51 of101lines of a three-page programme-information PDF. Tail read failed. Programme/eligibility body is insufficient to certify absence or presence of an applicant cutoff in unread remainder.",
+      "reason": "official-native-TLS-failure-and-web-partial-PDF-tail-failure-no-full-date-body",
+      "result": "blocked",
+      "restrictions": [
+        "No complete PDF/body/origin SHA is claimed. Cooldown; no further requests."
+      ],
+      "universityId": "uni-nanjing-agricultural-university",
+      "evidence": [
+        {
+          "key": "source-11",
+          "url": "https://coieen.njau.edu.cn/__local/C/3E/FD/BED3BCA3D7C1EDEEAACA6D7AD91_553F91D1_24055.pdf",
+          "method": "GET",
+          "startedAt": "2026-10-19T08:16:35.168288+00:00",
+          "automaticRetries": 0,
+          "error": "URLError:<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+          "observedAt": "2026-10-19T08:16:40.176161+00:00"
+        },
+        {
+          "key": "web-njau",
+          "url": "https://coieen.njau.edu.cn/__local/C/3E/FD/BED3BCA3D7C1EDEEAACA6D7AD91_553F91D1_24055.pdf",
+          "observedAt": "2026-10-19T08:30:19.840Z",
+          "sourceType": "web-tool-parsed-partial-official-pdf-not-origin-raw-bytes",
+          "originRawSha256": null,
+          "readScope": "PDF reports three pages/101 lines but returned only first51 lines. Attempt to read remaining lines failed UnexpectedStatusCode; no full-body date certification.",
+          "retainedResponse": {
+            "path": "web-fallback-full-response.txt",
+            "sha256": "54469effde4a60471057fb77e451c9de697b73d851f24c388668fcac60ee3f14"
+          },
+          "tailFailureResponse": {
+            "path": "web-njau-pdf-tail-response.txt",
+            "sha256": "1549d07ba7308ad35b3df128e15f745a60ea8ae1e4d0b5b354449cdbc13fb73a"
+          },
+          "cooldown": true
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecma-njau-international-student-scholarship",
+          "selectionOrigin": "baseQueue13",
+          "universityId": "uni-nanjing-agricultural-university",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "canonicalRecordSha256": "d11970428b0d40ef7ffad2a7e2c7c7b7504a2a8a8508c541a07ffb86610026ce",
+          "canonicalScholarshipSha256": "d11970428b0d40ef7ffad2a7e2c7c7b7504a2a8a8508c541a07ffb86610026ce",
+          "canonicalProgramPins": [],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecma-njau-international-student-scholarship",
+              "canonicalSourceSha256": "f5f6f8764d8c7a63bab68ebed8707fa558a2280eea214ab857da193b5715401d",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mve-ecma-njau-international-student-scholarship",
+                "url": "https://coieen.njau.edu.cn/__local/C/3E/FD/BED3BCA3D7C1EDEEAACA6D7AD91_553F91D1_24055.pdf",
+                "title": "NAU Scholarship for International Graduate Students",
+                "publisher": "nanjing-agricultural-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-05",
+          "storedReviewAfter": "2026-09-04",
+          "publishedInInputSnapshot": false,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": null,
+          "reason": "official-native-TLS-failure-and-web-partial-PDF-tail-failure-no-full-date-body",
+          "evidenceSourceKey": "web-njau",
+          "evidenceSourceUrl": "https://coieen.njau.edu.cn/__local/C/3E/FD/BED3BCA3D7C1EDEEAACA6D7AD91_553F91D1_24055.pdf",
+          "evidenceSourceType": "web-tool-parsed-partial-official-pdf-not-origin-raw-bytes",
+          "evidenceBodySha256": null,
+          "retainedObservationSha256": "54469effde4a60471057fb77e451c9de697b73d851f24c388668fcac60ee3f14",
+          "originRawBytesAvailableForDateEvidence": false,
+          "observedAt": "2026-10-19T08:30:19.840Z",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "cooldown": true
+        }
+      ]
+    },
+    {
+      "school": "uni-nanjing-audit-university",
+      "key": "nau-standing2015-rules-recurring-and-divergent-october-days",
+      "native": [
+        "source-12"
+      ],
+      "source": "source-12",
+      "title": "Nanjing Audit University Regulations on International Student Scholarship",
+      "year": 2015,
+      "quote": "The time of application for Nanjing Audit University International Student Scholarship is from 1 September to 10 October.",
+      "scope": "Original PDF p8 Article9 gives recurring September1–October10; p9 Article10 says submitting application deadline October15. p11 says effective from September2015. No exact current2026/27 call or reconciliation is given.",
+      "reason": "standing2015-recurring-award-rules-and-different-October10-vs15-no-current-year-cutoff",
+      "restrictions": [
+        "Do not roll recurring dates into2026.",
+        "Keep October10 application period and October15 document deadline distinct; do not choose either as current cutoff."
+      ],
+      "additionalQuote": "The deadline for submitting application is 15 October.",
+      "universityId": "uni-nanjing-audit-university",
+      "evidence": [
+        {
+          "key": "source-12",
+          "url": "https://lxsy.nau.edu.cn/_upload/article/files/c2/a0/641c09464e27ac58077b6658bd2a/d0954462-566a-4fd7-a885-47bfe8aede61.pdf",
+          "method": "GET",
+          "startedAt": "2026-10-19T08:16:37.345937+00:00",
+          "automaticRetries": 0,
+          "httpStatus": 200,
+          "finalUrl": "https://lxsy.nau.edu.cn/_upload/article/files/c2/a0/641c09464e27ac58077b6658bd2a/d0954462-566a-4fd7-a885-47bfe8aede61.pdf",
+          "contentType": "application/pdf",
+          "rawPath": "source-12.pdf",
+          "rawSha256": "bcb729061bf42ffa99e4431b4f313128749aebe27a570d5a6dcdb0e417195c85",
+          "bytes": 157638,
+          "pages": 11,
+          "textPath": "source-12.txt",
+          "textSha256": "0ff7813aaf9f0f9b13735485006d03bee60b9c66865d0e71d45923e645ca3028",
+          "observedAt": "2026-10-19T08:16:43.256225+00:00"
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave7-nau-international-student-scholarship",
+          "selectionOrigin": "baseQueue13",
+          "universityId": "uni-nanjing-audit-university",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "canonicalRecordSha256": "53fbbb8c83a1fcdb9ce97dcef9691667336a26a3068beb28cb60a798be1aaf62",
+          "canonicalScholarshipSha256": "53fbbb8c83a1fcdb9ce97dcef9691667336a26a3068beb28cb60a798be1aaf62",
+          "canonicalProgramPins": [],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave7-nau-international-student-scholarship",
+              "canonicalSourceSha256": "ebf13fa7f020ca94b1bdee73382d8e0b00946a37744192cdbd1cc80fa7552513",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave7-nau-international-student-scholarship",
+                "url": "https://lxsy.nau.edu.cn/_upload/article/files/c2/a0/641c09464e27ac58077b6658bd2a/d0954462-566a-4fd7-a885-47bfe8aede61.pdf",
+                "title": "NAU Regulations on International Student Scholarship",
+                "publisher": "nanjing-audit-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-01"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-01",
+          "storedReviewAfter": "2026-08-31",
+          "publishedInInputSnapshot": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDeadlineAssessed": false,
+          "exactCutoffAt": null,
+          "quotedDate": "The time of application for Nanjing Audit University International Student Scholarship is from 1 September to 10 October.",
+          "reason": "standing2015-recurring-award-rules-and-different-October10-vs15-no-current-year-cutoff",
+          "evidenceSourceKey": "source-12",
+          "evidenceSourceUrl": "https://lxsy.nau.edu.cn/_upload/article/files/c2/a0/641c09464e27ac58077b6658bd2a/d0954462-566a-4fd7-a885-47bfe8aede61.pdf",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "bcb729061bf42ffa99e4431b4f313128749aebe27a570d5a6dcdb0e417195c85",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "observedAt": "2026-10-19T08:16:43.256225+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "exactBase13PlusAdditional3CoveredOnce": true,
+    "fullCanonicalRowsParentsSourcesPinnedInSelection": true,
+    "allSixInputsUnchanged": true,
+    "allNativeRawTextHashesVerified": true,
+    "webFullResponsesRetainedWithParsedProvenance": true,
+    "noPriorExactRecordOverlap": true,
+    "priorReportPins": [
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-001/report.json",
+        "sha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-002/report.json",
+        "sha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-003/report.json",
+        "sha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-004/report.json",
+        "sha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-005/report.json",
+        "sha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-006/report.json",
+        "sha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-007/report.json",
+        "sha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-008/report.json",
+        "sha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-009/report.json",
+        "sha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-010/report.json",
+        "sha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-011/report.json",
+        "sha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-012/report.json",
+        "sha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-013/report.json",
+        "sha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-014/report.json",
+        "sha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-015/report.json",
+        "sha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-016/report.json",
+        "sha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-017/report.json",
+        "sha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-018/report.json",
+        "sha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-019/report.json",
+        "sha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-020/report.json",
+        "sha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-021/report.json",
+        "sha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-022/report.json",
+        "sha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-023/report.json",
+        "sha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-024/report.json",
+        "sha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-027/report.json",
+        "sha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+      }
+    ]
+  }
+}

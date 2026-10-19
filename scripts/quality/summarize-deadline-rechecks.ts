@@ -85,6 +85,15 @@ export function assertDistinctBindings(bindings: Binding[]): void {
   }
 }
 
+export function assertPriorReportHash(pin: ObjectRow, actual: string | undefined): void {
+  const primary = string(pin.reportSha256), alias = string(pin.sha256)
+  assert.ok(primary || alias, 'Missing prior-report SHA256')
+  if (has(pin, 'reportSha256')) assert.match(primary, /^[a-f0-9]{64}$/, 'Invalid reportSha256')
+  if (has(pin, 'sha256')) assert.match(alias, /^[a-f0-9]{64}$/, 'Invalid sha256')
+  if (primary && alias) assert.equal(primary, alias, 'Conflicting prior-report hash aliases')
+  assert.equal(actual, primary || alias, 'An earlier report was changed after a later report pinned it')
+}
+
 function assertStoredDate(row: ObjectRow, canonical: string | null, id: string): void {
   assert.ok(has(row, 'storedDeadline'), 'Missing stored deadline binding: ' + id)
   assert.equal(row.storedDeadline, canonical, 'Stored deadline differs from current canonical row: ' + id)
@@ -153,7 +162,7 @@ export function buildSummary(primaryRoot: string, reportsDirectory: string, toda
   for (const report of originalReports) for (const value of array(report.priorReportPins)) {
     const pin = object(value)
     const matched = reportPins.find(candidate => candidate.report.endsWith('/' + string(pin.batch) + '/report.json'))
-    assert.equal(matched?.reportSha256, pin.reportSha256, 'An earlier report was changed after a later report pinned it')
+    assertPriorReportHash(pin, matched?.reportSha256)
   }
   const checks = { storedDeadlinesMatched: 0, cycleParentsMatched: 0, scholarshipUniversityMappingsMatched: 0,
     storedOpeningsMatched: 0, completeCanonicalRowHashesMatched: 0, publicationFlagsMatched: 0 }
