@@ -1,0 +1,282 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "independent-date-only-028-v1",
+  "reviewedAt": "2026-10-19T11:55:13.164Z",
+  "reviewer": "dates_030; independent of batch028 report author",
+  "result": "source-only-pass",
+  "reviewedReport": "quality/deadline-sweep-20261019/official-batch-028/report.json",
+  "reviewedReportSha256": "c1ee48a947ab94feac0f853531921d888b4ce30b24781afe7cb9e422e29f9276",
+  "reviewedSelectionSha256": "cf868d9acc35e5aeda0d40ad20f6a079f18a6f713a49ca39844bcdbd31a7d737",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "summary": {
+    "checksFailed": 0,
+    "checksPassed": 15,
+    "schools": 6,
+    "records": 20,
+    "baseQueueRecords": 16,
+    "additionalSameSourceRecords": 4,
+    "closedCandidateScopes": 7,
+    "unknown": 13,
+    "blocked": 0,
+    "canonicalInputHashes": 6,
+    "recordPins": 20,
+    "programmePins": 32,
+    "sourcePins": 57,
+    "originalBodies": 12,
+    "priorExactIdOverlap": 0,
+    "networkRequestsDuringReview": 0,
+    "canonicalWrites": 0,
+    "sourceReportWrites": 0
+  },
+  "checks": [
+    {
+      "id": "frozen-report-selection",
+      "passed": true,
+      "note": "Final report matches the dispatched immutable SHA; linked selection SHA, date and snapshot match."
+    },
+    {
+      "id": "canonical-six-inputs",
+      "passed": true,
+      "note": "All six C-primary inputs and the frozen inventory bytes remain identical to the selected snapshot; this review only reads C."
+    },
+    {
+      "id": "exact-base-plus-root-extension",
+      "passed": true,
+      "note": "Exactly 20 IDs occur once at six schools: 16 queue-v7 IDs plus four root-selected shared-source IDs; root receipt and row pins agree."
+    },
+    {
+      "id": "full-record-parent-source-and-year-pins",
+      "passed": true,
+      "note": "All 20 full canonical rows, university/parent mappings, linked programme rows, source rows, academic years/intakes and stored null dates match."
+    },
+    {
+      "id": "prior-reports-and-no-replay",
+      "passed": true,
+      "note": "Summary-v9, queue/inventory pins and all 27 earlier report hashes match. None of these 20 IDs is already assessed or carried as approved evidence."
+    },
+    {
+      "id": "original-bytes-text-and-observation-times",
+      "passed": true,
+      "note": "All 12 saved original bodies, available text derivatives and valid observedAt values match the capture manifests. The local sandbox denials are not counted as official failures."
+    },
+    {
+      "id": "linked-original-lineage",
+      "passed": true,
+      "note": "Exact 2026 XLSX/PDF URLs are linked by their saved registered parent bodies; MIME/signatures distinguish originals from mere wrappers."
+    },
+    {
+      "id": "lnu-exact-current-catalogue-options",
+      "passed": true,
+      "note": "The original XLSX was independently parsed as ZIP/XML. Rows 20 and 22 are two-year master International business/Finance with English options; A1 anchors 2026 self-sponsored postgraduate admission and June30 is the general graduate applicant cutoff."
+    },
+    {
+      "id": "historical-guides-not-rolled-forward",
+      "passed": true,
+      "note": "NJFu 2023 master dates do not bind 2026 bachelor rows; NBU 2019/20 overview and NXMU 2019 standing route/award guide do not establish current applicant dates."
+    },
+    {
+      "id": "nxu-pdf-render-and-visual-transcription",
+      "passed": true,
+      "note": "The saved 24-page PDF was independently re-rendered offline. Pages1/15/20 match the saved page images pixel-for-pixel at scale1.7 and were visually read for cover year, applicant period and separately named awards."
+    },
+    {
+      "id": "nxu-award-identity-separation",
+      "passed": true,
+      "note": "Only named Ningxia University Scholarship receives the 2026 May30 past-window candidate. Generic CSC March25 stays unbound to stored TypeB; missing regional award does not imply suspension. June15-July15 is result admission, not applicant time."
+    },
+    {
+      "id": "ncepu-degree-sections-and-strict-before",
+      "passed": true,
+      "note": "The 2026 guide separately lists exact degree/language routes. Bachelor uses strict-before February25; master, doctorate and Chinese language use strict-before May30. Report dates retain boundary days without end-of-day availability."
+    },
+    {
+      "id": "ncepu-independent-awards-remain-unknown",
+      "passed": true,
+      "note": "Beijing Government, CSC University and Chinese Language Teachers/Confucius award sections provide no independent concrete current day. All three stay unknown and do not inherit degree/language cutoffs."
+    },
+    {
+      "id": "past-dates-and-unknown-opening-rules",
+      "passed": true,
+      "note": "All seven closed candidates are explicit valid past ISO boundary days from stored nulls. Thirteen unknowns keep null official/candidate cutoffs and do not certify availability; no opening is assessed."
+    },
+    {
+      "id": "candidate-only-no-mutation-or-publication-approval",
+      "passed": true,
+      "note": "Every record preserves candidate/date-only flags and denies canonical date/status writes, whole-record freshness renewal, full-facts certification, catalogue completion and programme cessation. This review grants source-only acceptance."
+    }
+  ],
+  "originalProofPins": [
+    {
+      "path": "lnu-2026-graduate-catalogue.xlsx",
+      "sha256": "1760923286ea859c5528eaa6a76e28125a8741df5e1d60b52edb66a3c0c6eaf0"
+    },
+    {
+      "path": "nxu-2026-original.pdf",
+      "sha256": "6a3c294d043e8b55f71ae3b18a2be949009aa237842fa8a4ea1d4c4ef9a274ab"
+    },
+    {
+      "path": "nxu-2026-page-01.png",
+      "sha256": "73c8cd668196e0b88c76cd8dce7eeb013cf6777b5f5625a2adf5973f5b79d18a"
+    },
+    {
+      "path": "nxu-2026-page-15.png",
+      "sha256": "c0da519556728a171e40080aff29f26b6a3fbe2db31590f68519ab47ae199e16"
+    },
+    {
+      "path": "nxu-2026-page-20.png",
+      "sha256": "9e395c91f15363e5fc8e81f412fffb28f369808b5bbb1b0e41456454c21b39cd"
+    }
+  ],
+  "recordChecks": [
+    {
+      "recordId": "cycle-gap-wave4-depth-lnu-finance-master-english-2026-2027-autumn-fee-reference",
+      "passed": true,
+      "result": "closed",
+      "officialDeadline": "2026-06-30"
+    },
+    {
+      "recordId": "cycle-gap-wave4-depth-lnu-international-business-master-english-2026-2027-autumn-fee-reference",
+      "passed": true,
+      "result": "closed",
+      "officialDeadline": "2026-06-30"
+    },
+    {
+      "recordId": "cycle-afb2f0408f58",
+      "passed": true,
+      "result": "unknown",
+      "officialDeadline": null
+    },
+    {
+      "recordId": "cycle-bbd48ff592d0",
+      "passed": true,
+      "result": "unknown",
+      "officialDeadline": null
+    },
+    {
+      "recordId": "cycle-gap-remaining-nbu-nondegree-chinese-language-2026-2027-other",
+      "passed": true,
+      "result": "unknown",
+      "officialDeadline": null
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nnw-nxmu-chinese-language-training-2026-2027-other-fee-reference",
+      "passed": true,
+      "result": "unknown",
+      "officialDeadline": null
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nnw-nxmu-clinical-medicine-master-2026-2027-other-fee-reference",
+      "passed": true,
+      "result": "unknown",
+      "officialDeadline": null
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nnw-nxmu-mbbs-english-bachelor-2026-2027-other-fee-reference",
+      "passed": true,
+      "result": "unknown",
+      "officialDeadline": null
+    },
+    {
+      "recordId": "sch-gap-sch-mew-nnw-nxmu-ningxia-government",
+      "passed": true,
+      "result": "unknown",
+      "officialDeadline": null
+    },
+    {
+      "recordId": "sch-gap-sch-mew-nnw-nxmu-silk-road-csc",
+      "passed": true,
+      "result": "unknown",
+      "officialDeadline": null
+    },
+    {
+      "recordId": "sch-gap-wave8-nxu-cgs-university-program",
+      "passed": true,
+      "result": "unknown",
+      "officialDeadline": null
+    },
+    {
+      "recordId": "sch-gap-wave8-nxu-international-student-scholarship",
+      "passed": true,
+      "result": "closed",
+      "officialDeadline": "2026-05-30"
+    },
+    {
+      "recordId": "sch-gap-wave8-nxu-ningxia-government-scholarship",
+      "passed": true,
+      "result": "unknown",
+      "officialDeadline": null
+    },
+    {
+      "recordId": "sch-gap-sch-mew-nss-ncepu-beijing-government",
+      "passed": true,
+      "result": "unknown",
+      "officialDeadline": null
+    },
+    {
+      "recordId": "sch-gap-sch-mew-nss-ncepu-csc-university",
+      "passed": true,
+      "result": "unknown",
+      "officialDeadline": null
+    },
+    {
+      "recordId": "sch-gap-sch-mew-nss-ncepu-iclts",
+      "passed": true,
+      "result": "unknown",
+      "officialDeadline": null
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-ncepu-chinese-language-2026-2027-autumn-fee-reference",
+      "passed": true,
+      "result": "closed",
+      "officialDeadline": "2026-05-30"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-ncepu-electrical-engineering-doctorate-2026-2027-autumn-fee-reference",
+      "passed": true,
+      "result": "closed",
+      "officialDeadline": "2026-05-30"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-ncepu-new-energy-science-engineering-bachelor-2026-2027-autumn-fee-reference",
+      "passed": true,
+      "result": "closed",
+      "officialDeadline": "2026-02-25"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-ncepu-power-engineering-thermophysics-master-2026-2027-autumn-fee-reference",
+      "passed": true,
+      "result": "closed",
+      "officialDeadline": "2026-05-30"
+    }
+  ],
+  "publicationRestrictions": [
+    "NCEPU strict-before wording is preserved; a boundary day is not end-of-day-inclusive availability.",
+    "NXU generic CSC March25 observation remains appliesToStoredRecord:false. No missing award is treated as suspended.",
+    "Historical/recurring dates are not rolled forward; general admission cutoffs do not become independent award deadlines.",
+    "Seven originally null deadlines remain source-only candidates. No canonical mutation, freshness renewal, whole-school completion or deployment approval is granted."
+  ],
+  "reproducibility": {
+    "checker": {
+      "path": "independent-review-check.cjs",
+      "sha256": "005722841cad596579ff6c746824d3f6acc12ae4b93a4a28dea631d4835196cc"
+    },
+    "pdfPagesRerendered": [
+      1,
+      15,
+      20
+    ],
+    "pdfRenderScale": 1.7,
+    "pdfPixelMatch": true,
+    "xlsxOriginalZipXmlCellsRead": [
+      "A1",
+      "C20",
+      "D20",
+      "E20",
+      "F20",
+      "C22",
+      "D22",
+      "E22",
+      "F22"
+    ]
+  }
+}

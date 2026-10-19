@@ -1,0 +1,2130 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-028-20261019",
+  "state": "completed-seven-scoped-past-windows-thirteen-unknown",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T11:49:32.964Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v7.json",
+  "targetQueueSha256": "eeb500d880d56d97fc7145542a31273047f77b23852a62857a74f428a791ad5b",
+  "inputSummary": "quality/deadline-sweep-20261019/official-review-summary-v9.json",
+  "inputSummarySha256": "cc96348f958644d76c1a4d253e734ba1bf7c87ed1b4b0cee844ad29dedf69b70",
+  "selectionSha256": "cf868d9acc35e5aeda0d40ad20f6a079f18a6f713a49ca39844bcdbd31a7d737",
+  "selectedUniversityIds": [
+    "uni-liaoning-university",
+    "uni-nanjing-forestry-university",
+    "uni-ningbo-university",
+    "uni-ningxia-medical-university",
+    "uni-ningxia-university",
+    "uni-north-china-electric-power-university"
+  ],
+  "selection": {
+    "baseQueueRecords": 16,
+    "additionalSameSourceRecords": 4,
+    "totalRecords": 20,
+    "baseQueueRecordIds": [
+      "cycle-gap-wave4-depth-lnu-finance-master-english-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave4-depth-lnu-international-business-master-english-2026-2027-autumn-fee-reference",
+      "cycle-afb2f0408f58",
+      "cycle-bbd48ff592d0",
+      "cycle-gap-remaining-nbu-nondegree-chinese-language-2026-2027-other",
+      "cycle-gap-prog-mew-nnw-nxmu-chinese-language-training-2026-2027-other-fee-reference",
+      "cycle-gap-prog-mew-nnw-nxmu-clinical-medicine-master-2026-2027-other-fee-reference",
+      "cycle-gap-prog-mew-nnw-nxmu-mbbs-english-bachelor-2026-2027-other-fee-reference",
+      "sch-gap-sch-mew-nnw-nxmu-ningxia-government",
+      "sch-gap-wave8-nxu-cgs-university-program",
+      "sch-gap-wave8-nxu-international-student-scholarship",
+      "sch-gap-wave8-nxu-ningxia-government-scholarship",
+      "sch-gap-sch-mew-nss-ncepu-beijing-government",
+      "sch-gap-sch-mew-nss-ncepu-csc-university",
+      "sch-gap-sch-mew-nss-ncepu-iclts",
+      "cycle-gap-prog-mew-nss-ncepu-chinese-language-2026-2027-autumn-fee-reference"
+    ],
+    "additionalSameSourceRecordIds": [
+      "sch-gap-sch-mew-nnw-nxmu-silk-road-csc",
+      "cycle-gap-prog-mew-nss-ncepu-electrical-engineering-doctorate-2026-2027-autumn-fee-reference",
+      "cycle-gap-prog-mew-nss-ncepu-new-energy-science-engineering-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-prog-mew-nss-ncepu-power-engineering-thermophysics-master-2026-2027-autumn-fee-reference"
+    ],
+    "additionalSelectionReceipt": "quality/deadline-sweep-20261019/heartbeat-0900/additional-same-source-selection-v1.json",
+    "additionalSelectionReceiptSha256": "4891483ce89720eeac5ae1ef1cf92056e4067a8aa54058b7c6e40a6642361bbb"
+  },
+  "acquisition": {
+    "registeredDistinctUrlsAttempted": 10,
+    "derivedExactAttachmentUrlsAttempted": 2,
+    "nativeNetworkRequests": 12,
+    "additionalSiteFallbackRequests": 0,
+    "rawBodiesSaved": 12,
+    "localSandboxDeniedBeforeSiteRequests": 10,
+    "localSandboxDeniedReceipt": {
+      "path": "captures-sandbox-denied.json",
+      "sha256": "8a81bf8a2aeb19de6a71c28434c01a7b52dee493526b523668461cbb21233f2a"
+    },
+    "completeNativeHtmlBodiesRead": 8,
+    "wrapperBodiesNotFullUnderlyingGuide": [
+      "source-08",
+      "source-09"
+    ],
+    "scannedPdfVisuallyInspected": true,
+    "scannedPdfBodyTextLayerEmpty": true,
+    "linkedCatalogueRead": true,
+    "captureManifestPins": [
+      {
+        "path": "captures.json",
+        "sha256": "763cb53dc5a377bc622ef5fb4f9b6b214a7164876bb984fef5dadbe5d123f299"
+      },
+      {
+        "path": "linked-captures.json",
+        "sha256": "047477560910428e138c8704ce52c836d745a67656650417b5f2694767387cfe"
+      }
+    ],
+    "offlineExtractionReceipt": {
+      "path": "pdf-extraction.json",
+      "sha256": "eec6dff2d5f9df6bdeb4711e1a3e8884fab863c1d5dbc46ddfa6d2c3b0a3f987"
+    },
+    "paidModelCalls": 0,
+    "normalTlsValidation": true
+  },
+  "summary": {
+    "schoolsAttempted": 6,
+    "recordsAssessed": 20,
+    "baseQueueRecords": 16,
+    "additionalSameSourceRecords": 4,
+    "admissionCyclesAssessed": 12,
+    "scholarshipsAssessed": 8,
+    "recordResults": {
+      "closed": 7,
+      "unknown": 13
+    },
+    "newExactPastDeadlineCandidatesFromStoredNull": 7,
+    "existingExpiredDatesScoped": 0,
+    "independentAwardPastDeadlineCandidates": 1,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "rules": [
+    "Source observations only; dates/status/freshness remain unchanged.",
+    "Unknown is not open/closed/stopped; old years and different degrees/funding routes are not rolled forward.",
+    "Strict-before February25/May30 wording is preserved without inventing a clock-time or inclusive day.",
+    "Ningxia2026 exact university award is scoped separately from an unbound generic CSC March25 observation and an unlisted regional award.",
+    "Admission-result and review dates are not application deadlines.",
+    "Each public source was read once; two exact guide-linked attachments are necessary source completions, not directory expansion."
+  ],
+  "groups": [
+    {
+      "key": "lnu-two-exact-2026-self-sponsored-english-masters",
+      "universityId": "uni-liaoning-university",
+      "scope": "2026 self-sponsored postgraduate general applicant period joined to the official 2026 linked catalogue, exact two-year Finance and International business English options. No scholarship window is borrowed.",
+      "evidence": [
+        {
+          "name": "source-01",
+          "url": "https://ie.lnu.edu.cn/info/13200/2216.htm",
+          "observedAt": "2026-10-19T09:04:18.255952+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://ie.lnu.edu.cn/info/13200/2216.htm",
+          "contentType": "text/html",
+          "bytes": 54991,
+          "rawPath": "source-01.html",
+          "rawSha256": "2bfb408c798ccb2892070168beb93a03fc50ec5bef0a3049c4d1e3530dfde781",
+          "textPath": "source-01.txt",
+          "textSha256": "a5e8991e3d2c89aedcdaa24a5d09898bb6cdbaffd6640e39307ca30712c3dcd1",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "source-02",
+          "url": "https://ie.lnu.edu.cn/info/10594/2201.htm",
+          "observedAt": "2026-10-19T09:04:18.255952+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://ie.lnu.edu.cn/info/10594/2201.htm",
+          "contentType": "text/html",
+          "bytes": 76774,
+          "rawPath": "source-02.html",
+          "rawSha256": "d298414acd369766a60ff1c560ec7cf0c50b31bd8418b39ab706957e8aee85ec",
+          "textPath": "source-02.txt",
+          "textSha256": "95108470e8058316d67e333b632d38433a00fbf9f4d6dc40181b3dd73a190111",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "lnu-2026-graduate-catalogue",
+          "url": "https://ie.lnu.edu.cn/__local/6/00/18/D51E50C90E0E7FCFD46054260CA_BF9D15DD_11854.xlsx",
+          "parentSource": "source-02",
+          "parentBodySha256": "d298414acd369766a60ff1c560ec7cf0c50b31bd8418b39ab706957e8aee85ec",
+          "linkLabel": "Appendix 2 2026 Liaoning University Graduate Programs for International Students.xlsx",
+          "observedAt": "2026-10-19T11:45:39.163723+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "route": "one-exact-linked-original-not-directory-search",
+          "status": 200,
+          "finalUrl": "https://ie.lnu.edu.cn/__local/6/00/18/D51E50C90E0E7FCFD46054260CA_BF9D15DD_11854.xlsx",
+          "contentType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "bytes": 71764,
+          "rawPath": "lnu-2026-graduate-catalogue.xlsx",
+          "rawSha256": "1760923286ea859c5528eaa6a76e28125a8741df5e1d60b52edb66a3c0c6eaf0",
+          "textPath": "lnu-2026-graduate-catalogue.txt",
+          "textSha256": "dca296078425bf5fde7d7bffeffeafb50cb808a00f70379c2a96b27af3ab0a95",
+          "captureSucceeded": true,
+          "originalAttachmentTypeMatched": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearQuote": "2026 International Students Admission Guidelines LNU",
+      "catalogueYearQuote": "2026 International Self-sponsored Postgraduate Program",
+      "quotedDate": "(2) Master and Doctoral Program: From now until June 30, 2026.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave4-depth-lnu-finance-master-english-2026-2027-autumn-fee-reference",
+          "universityId": "uni-liaoning-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": "prog-gap-wave4-depth-lnu-finance-master-english",
+          "name": "Finance (English-taught Master)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "d97674daf512d7fec3d6b6c7d983b3d0bc09236df9a0035fc8811e5989e8912d",
+          "canonicalCycleSha256": "d97674daf512d7fec3d6b6c7d983b3d0bc09236df9a0035fc8811e5989e8912d",
+          "canonicalProgramSha256": "28f2d4d50dfd2e7f067db5671ad4703302cc0cc4ca10b01ffbfbf041045ed9f6",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave4-depth-lnu-finance-master-english",
+              "canonicalProgramSha256": "28f2d4d50dfd2e7f067db5671ad4703302cc0cc4ca10b01ffbfbf041045ed9f6"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave4-depth-lnu-finance-master-english",
+            "src-gap-program-wave4-depth-lnu-finance-master-english-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave4-depth-lnu-finance-master-english",
+              "canonicalSourceSha256": "3b5192c3591797a8b470968ef665ea391b9e43d2a8460818add2570d22cb1ee0",
+              "url": "https://ie.lnu.edu.cn/info/13200/2216.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave4-depth-lnu-finance-master-english-support-1",
+              "canonicalSourceSha256": "6c3faadf8f06271c5dcabd032146d328909f002bf6d3b10f0eeab277aa58921b",
+              "url": "https://ie.lnu.edu.cn/info/10594/2201.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "reason": "2026-self-sponsored-graduate-cutoff-with-exact-two-year-English-programmes-in-current-linked-catalogue",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://ie.lnu.edu.cn/info/10594/2201.htm",
+          "evidenceBodySha256": "d298414acd369766a60ff1c560ec7cf0c50b31bd8418b39ab706957e8aee85ec",
+          "observedAt": "2026-10-19T09:04:18.255952+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the matching 2026 application route is past; no permanent discontinuation or closure of successor routes is inferred.",
+          "quotedDate": "(2) Master and Doctoral Program: From now until June 30, 2026.",
+          "applicableSourceYear": 2026,
+          "fundingRoute": "Self-sponsored postgraduate admission",
+          "openingRelativeWording": "From now",
+          "programmeIdentityQuote": "The Master of Finance and the Master of International Business offered by School of International Economics and Politics/School of Modern Industry of Digital Economy of Liaoning University are all English-language teaching programs",
+          "catalogueLocator": "xl/worksheets/sheet1.xml row22: C22 Finance, D22 master, E22 2, F22 Chinese/English; not row16 three-year Finance",
+          "supportingCatalogueBodySha256": "1760923286ea859c5528eaa6a76e28125a8741df5e1d60b52edb66a3c0c6eaf0",
+          "feeReferenceNotUsedAsYearAnchor": true,
+          "applicantVsExam": "May–July examinations and later admission results are distinct from June30 applications."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave4-depth-lnu-international-business-master-english-2026-2027-autumn-fee-reference",
+          "universityId": "uni-liaoning-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": "prog-gap-wave4-depth-lnu-international-business-master-english",
+          "name": "International Business (English-taught Master)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "132586c2c59ac3b66cd717b1d3c1001504be0ec4a25f2670f31817c2ccf5cc63",
+          "canonicalCycleSha256": "132586c2c59ac3b66cd717b1d3c1001504be0ec4a25f2670f31817c2ccf5cc63",
+          "canonicalProgramSha256": "34c3ddf4eb4118ef795e78c426b1a7a79aa29fcb5963ed2cc8c42c393654f079",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave4-depth-lnu-international-business-master-english",
+              "canonicalProgramSha256": "34c3ddf4eb4118ef795e78c426b1a7a79aa29fcb5963ed2cc8c42c393654f079"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave4-depth-lnu-international-business-master-english",
+            "src-gap-program-wave4-depth-lnu-international-business-master-english-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave4-depth-lnu-international-business-master-english",
+              "canonicalSourceSha256": "e59908ce9040c6c0626e190c5ba4052b7d668063e87c830ab09185891e6af62d",
+              "url": "https://ie.lnu.edu.cn/info/13200/2216.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave4-depth-lnu-international-business-master-english-support-1",
+              "canonicalSourceSha256": "5afbc6078cc66a5c2ccbe8ed107e09b90bfe0d26a756986f8b19fdda9baa4a1b",
+              "url": "https://ie.lnu.edu.cn/info/10594/2201.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "reason": "2026-self-sponsored-graduate-cutoff-with-exact-two-year-English-programmes-in-current-linked-catalogue",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://ie.lnu.edu.cn/info/10594/2201.htm",
+          "evidenceBodySha256": "d298414acd369766a60ff1c560ec7cf0c50b31bd8418b39ab706957e8aee85ec",
+          "observedAt": "2026-10-19T09:04:18.255952+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the matching 2026 application route is past; no permanent discontinuation or closure of successor routes is inferred.",
+          "quotedDate": "(2) Master and Doctoral Program: From now until June 30, 2026.",
+          "applicableSourceYear": 2026,
+          "fundingRoute": "Self-sponsored postgraduate admission",
+          "openingRelativeWording": "From now",
+          "programmeIdentityQuote": "The Master of Finance and the Master of International Business offered by School of International Economics and Politics/School of Modern Industry of Digital Economy of Liaoning University are all English-language teaching programs",
+          "catalogueLocator": "xl/worksheets/sheet1.xml row20: C20 International business, D20 master, E20 2, F20 Chinese/English",
+          "supportingCatalogueBodySha256": "1760923286ea859c5528eaa6a76e28125a8741df5e1d60b52edb66a3c0c6eaf0",
+          "feeReferenceNotUsedAsYearAnchor": true,
+          "applicantVsExam": "May–July examinations and later admission results are distinct from June30 applications."
+        }
+      ]
+    },
+    {
+      "key": "njfu-registered-source-is-2023-master-not-2026-bachelor",
+      "universityId": "uni-nanjing-forestry-university",
+      "evidence": [
+        {
+          "name": "source-03",
+          "url": "https://iec.njfu.edu.cn/lxnl/zszl/20221214/i266172.html",
+          "observedAt": "2026-10-19T09:04:18.255952+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iec.njfu.edu.cn/lxnl/zszl/20221214/i266172.html",
+          "contentType": "text/html",
+          "bytes": 79995,
+          "rawPath": "source-03.html",
+          "rawSha256": "55473746a77142eec0c9c9d54459b13063c437423d7367f9185c7a697b767f97",
+          "textPath": "source-03.txt",
+          "textSha256": "ff3dbfc57700d8d0ec9910dc7f4e681ab1d35131d661cbf0507cad740889e720",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "Stored Forestry/Landscape Architecture Chinese bachelor cycles for 2026/27 cannot be dated from the registered 2023 master guide.",
+      "actualSourceTitle": "2023年南京林业大学来华留学研究生（硕士）招生简章",
+      "originalPublication": "2022-12-14",
+      "historicalDateQuote": "申请截止日期（完成网上申请材料提交及申请费缴纳）： 2023年5月31日",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-afb2f0408f58",
+          "universityId": "uni-nanjing-forestry-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": "program-nanjing-forestry-university-forestry-bachelor",
+          "name": "Forestry",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "b37c3556873b1823cf92e9a7adb8a79f7964c35b12bd99fa6daefaecac0b07cd",
+          "canonicalCycleSha256": "b37c3556873b1823cf92e9a7adb8a79f7964c35b12bd99fa6daefaecac0b07cd",
+          "canonicalProgramSha256": "06ee87e2a3de37f3d1023c1899c40c890df3a9dbd30806e0ff5e205790ad82ac",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-nanjing-forestry-university-forestry-bachelor",
+              "canonicalProgramSha256": "06ee87e2a3de37f3d1023c1899c40c890df3a9dbd30806e0ff5e205790ad82ac"
+            }
+          ],
+          "sourceIds": [
+            "src-program-review-7f3732ba1483"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-program-review-7f3732ba1483",
+              "canonicalSourceSha256": "ea8c4208b78483bd3056fba4f3ee06dbfec0faa6b343e309fe628c5d2f8a833a",
+              "url": "https://iec.njfu.edu.cn/lxnl/zszl/20221214/i266172.html"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-full-source-is-2023-master-guide-with-wrong-year-and-degree-for-stored-2026-bachelor",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iec.njfu.edu.cn/lxnl/zszl/20221214/i266172.html",
+          "evidenceBodySha256": "55473746a77142eec0c9c9d54459b13063c437423d7367f9185c7a697b767f97",
+          "observedAt": "2026-10-19T09:04:18.255952+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "applicableSourceYear": 2023,
+          "historicalNonApplicableDeadline": "2023-05-31",
+          "sourceDegreeLevel": "master",
+          "appliesToStoredRecord": false,
+          "noYearRollForward": true,
+          "noSuspensionFromUnmatchedDirectory": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-bbd48ff592d0",
+          "universityId": "uni-nanjing-forestry-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": "program-nanjing-forestry-university-landscape-architecture-bachelor",
+          "name": "Landscape Architecture",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "0f20ad18cf0c93654a85011720c76e94ec47191f47424a9fb7a5cf55efa9e983",
+          "canonicalCycleSha256": "0f20ad18cf0c93654a85011720c76e94ec47191f47424a9fb7a5cf55efa9e983",
+          "canonicalProgramSha256": "2314d828f36c6c55b8366efc14939c4f10889e86806cd7849471a66f29a8b4a7",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-nanjing-forestry-university-landscape-architecture-bachelor",
+              "canonicalProgramSha256": "2314d828f36c6c55b8366efc14939c4f10889e86806cd7849471a66f29a8b4a7"
+            }
+          ],
+          "sourceIds": [
+            "src-program-review-7f3732ba1483"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-program-review-7f3732ba1483",
+              "canonicalSourceSha256": "ea8c4208b78483bd3056fba4f3ee06dbfec0faa6b343e309fe628c5d2f8a833a",
+              "url": "https://iec.njfu.edu.cn/lxnl/zszl/20221214/i266172.html"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-full-source-is-2023-master-guide-with-wrong-year-and-degree-for-stored-2026-bachelor",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iec.njfu.edu.cn/lxnl/zszl/20221214/i266172.html",
+          "evidenceBodySha256": "55473746a77142eec0c9c9d54459b13063c437423d7367f9185c7a697b767f97",
+          "observedAt": "2026-10-19T09:04:18.255952+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "applicableSourceYear": 2023,
+          "historicalNonApplicableDeadline": "2023-05-31",
+          "sourceDegreeLevel": "master",
+          "appliesToStoredRecord": false,
+          "noYearRollForward": true,
+          "noSuspensionFromUnmatchedDirectory": true
+        }
+      ]
+    },
+    {
+      "key": "nbu-historical-overview-no-target-year-window",
+      "universityId": "uni-ningbo-university",
+      "evidence": [
+        {
+          "name": "source-04",
+          "url": "https://www.nbu.edu.cn/en/Admissions1/International_Students.htm",
+          "observedAt": "2026-10-19T09:04:21.584344+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.nbu.edu.cn/en/Admissions1/International_Students.htm",
+          "contentType": "text/html",
+          "bytes": 26029,
+          "rawPath": "source-04.html",
+          "rawSha256": "85623fb538c68b2a9e548c985a926e334ca31ffbaff7bba67a7211c19eda5741",
+          "textPath": "source-04.txt",
+          "textSha256": "e042091d5caa5d1fab3ec4071c47d94e12a07e7bc2c59ecabedec935f391622c",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "Readable International Students overview is historical; it is not a current 2026 language intake guide.",
+      "historicalYearQuote": "In academic year 2019-2020",
+      "languageRouteQuote": "students who want to learn Chinese and experience Chinese culture can undertake non-degree Chinese language program.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-remaining-nbu-nondegree-chinese-language-2026-2027-other",
+          "universityId": "uni-ningbo-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": "prog-gap-remaining-nbu-nondegree-chinese-language",
+          "name": "Chinese Language Program",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "language",
+          "canonicalRecordSha256": "9ef26a47daf4c681045ebf9c49c57a03184abcd7e647d416c6020f4fb8c24ffd",
+          "canonicalCycleSha256": "9ef26a47daf4c681045ebf9c49c57a03184abcd7e647d416c6020f4fb8c24ffd",
+          "canonicalProgramSha256": "481bbc68c6fa6ccd31b479ae825c278b6bb81b81afddb8f98bee9a0252b28bd9",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-remaining-nbu-nondegree-chinese-language",
+              "canonicalProgramSha256": "481bbc68c6fa6ccd31b479ae825c278b6bb81b81afddb8f98bee9a0252b28bd9"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-remaining-nbu-nondegree-chinese-language"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-remaining-nbu-nondegree-chinese-language",
+              "canonicalSourceSha256": "8c72e65ade2deee6894c34e0eefb818f777d0529c7f0d938b2a8c96f730b6500",
+              "url": "https://www.nbu.edu.cn/en/Admissions1/International_Students.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "2019-2020-overview-has-language-programme-introduction-but-no-matching-2026-applicant-window",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.nbu.edu.cn/en/Admissions1/International_Students.htm",
+          "evidenceBodySha256": "85623fb538c68b2a9e548c985a926e334ca31ffbaff7bba67a7211c19eda5741",
+          "observedAt": "2026-10-19T09:04:21.584344+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "applicableSourceYear": "2019-2020",
+          "noLandingDateCertification": true,
+          "retryPolicy": "not-failed-access-no-directory-chasing"
+        }
+      ]
+    },
+    {
+      "key": "nxmu-2019-standing-guide-with-no-application-calendar",
+      "universityId": "uni-ningxia-medical-university",
+      "evidence": [
+        {
+          "name": "source-05",
+          "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+          "observedAt": "2026-10-19T09:04:21.691585+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+          "contentType": "text/html",
+          "bytes": 166114,
+          "rawPath": "source-05.html",
+          "rawSha256": "04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940",
+          "textPath": "source-05.txt",
+          "textSha256": "6e914151c22051ac2ec3256b1e95a6facad209a6809382102e26bbabab44c079",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "Three programme routes and two separately named awards appear in a 2019 standing guide, without a 2026 applicant calendar. Online access does not recertify that year.",
+      "originalPublicationQuote": "日期：2019-04-29",
+      "programmeQuote": "C、 汉语进修生招生 (Chinese language training programs)：",
+      "awardQuotes": [
+        "Ningxia Government Scholarship",
+        "“Silk Road”Chinese Government Scholarship"
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nnw-nxmu-chinese-language-training-2026-2027-other-fee-reference",
+          "universityId": "uni-ningxia-medical-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": "prog-gap-prog-mew-nnw-nxmu-chinese-language-training",
+          "name": "Chinese Language Training",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "language",
+          "canonicalRecordSha256": "eb59634756049ad8096656a9dea38bf8f0da42154ddc40306b5f388b442630ff",
+          "canonicalCycleSha256": "eb59634756049ad8096656a9dea38bf8f0da42154ddc40306b5f388b442630ff",
+          "canonicalProgramSha256": "77a835931ea833de03880cabccf084d7e52c70fc74d3b3dc24824ce3e9faefb9",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nnw-nxmu-chinese-language-training",
+              "canonicalProgramSha256": "77a835931ea833de03880cabccf084d7e52c70fc74d3b3dc24824ce3e9faefb9"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nnw-nxmu-chinese-language-training"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nxmu-chinese-language-training",
+              "canonicalSourceSha256": "e17e59571d74683aab6d262cbbce9b32759a43544eb5cb9284dd8c617be3765e",
+              "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "2019-standing-guide-lists-route-but-no-exact-current-application-window",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+          "evidenceBodySha256": "04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940",
+          "observedAt": "2026-10-19T09:04:21.691585+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "applicableSourceYear": 2019,
+          "noYearRollForward": true,
+          "awardDeadlineNotBorrowed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nnw-nxmu-clinical-medicine-master-2026-2027-other-fee-reference",
+          "universityId": "uni-ningxia-medical-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": "prog-gap-prog-mew-nnw-nxmu-clinical-medicine-master",
+          "name": "Clinical Medicine",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "902c18ff2b7f7c7b70c98583fafb972f39e57164b941ba88d173baacb239aa52",
+          "canonicalCycleSha256": "902c18ff2b7f7c7b70c98583fafb972f39e57164b941ba88d173baacb239aa52",
+          "canonicalProgramSha256": "1b9b9ae39eb23215bd596569ec3883737b603ade4202a03725ecb08705ba0918",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nnw-nxmu-clinical-medicine-master",
+              "canonicalProgramSha256": "1b9b9ae39eb23215bd596569ec3883737b603ade4202a03725ecb08705ba0918"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nnw-nxmu-clinical-medicine-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nxmu-clinical-medicine-master",
+              "canonicalSourceSha256": "ef67d09067342f9975a66352528d0b1a2f0fa7b5f88a8b3a49ed25dc90baec8b",
+              "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "2019-standing-guide-lists-route-but-no-exact-current-application-window",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+          "evidenceBodySha256": "04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940",
+          "observedAt": "2026-10-19T09:04:21.691585+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "applicableSourceYear": 2019,
+          "noYearRollForward": true,
+          "awardDeadlineNotBorrowed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nnw-nxmu-mbbs-english-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-ningxia-medical-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": "prog-gap-prog-mew-nnw-nxmu-mbbs-english-bachelor",
+          "name": "Clinical Medicine (MBBS, English-taught)",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "089a3a92ad4378f1636df27f17aa3c28010278c4a5cba87096c95f7d2823b861",
+          "canonicalCycleSha256": "089a3a92ad4378f1636df27f17aa3c28010278c4a5cba87096c95f7d2823b861",
+          "canonicalProgramSha256": "e290ead1222c0e530c9b5292257034db42b151f655a837881377528a44a698f2",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nnw-nxmu-mbbs-english-bachelor",
+              "canonicalProgramSha256": "e290ead1222c0e530c9b5292257034db42b151f655a837881377528a44a698f2"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nnw-nxmu-mbbs-english-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nxmu-mbbs-english-bachelor",
+              "canonicalSourceSha256": "cccb7ef10e77a334c407071e825db0589b4d13b6a0c6f18dc55dc48395e406f3",
+              "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "2019-standing-guide-lists-route-but-no-exact-current-application-window",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+          "evidenceBodySha256": "04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940",
+          "observedAt": "2026-10-19T09:04:21.691585+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "applicableSourceYear": 2019,
+          "noYearRollForward": true,
+          "awardDeadlineNotBorrowed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nnw-nxmu-ningxia-government",
+          "universityId": "uni-ningxia-medical-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": null,
+          "name": "Ningxia Government Scholarship",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "201aa0804f754a3ce947fb6c0d4c16df9020205a0e525504913ebaaacc96b27b",
+          "canonicalScholarshipSha256": "201aa0804f754a3ce947fb6c0d4c16df9020205a0e525504913ebaaacc96b27b",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nnw-nxmu-mbbs-english-bachelor",
+              "canonicalProgramSha256": "e290ead1222c0e530c9b5292257034db42b151f655a837881377528a44a698f2"
+            },
+            {
+              "programId": "prog-gap-prog-mew-nnw-nxmu-clinical-medicine-master",
+              "canonicalProgramSha256": "1b9b9ae39eb23215bd596569ec3883737b603ade4202a03725ecb08705ba0918"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nnw-nxmu-ningxia-government"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nnw-nxmu-ningxia-government",
+              "canonicalSourceSha256": "9571184750b5d3cec054e96399efb9ba94403959e52f899c0fa16c4e45e50294",
+              "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nxmu-mbbs-english-bachelor",
+              "canonicalSourceSha256": "cccb7ef10e77a334c407071e825db0589b4d13b6a0c6f18dc55dc48395e406f3",
+              "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nxmu-clinical-medicine-master",
+              "canonicalSourceSha256": "ef67d09067342f9975a66352528d0b1a2f0fa7b5f88a8b3a49ed25dc90baec8b",
+              "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "2019-standing-guide-lists-route-but-no-exact-current-application-window",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+          "evidenceBodySha256": "04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940",
+          "observedAt": "2026-10-19T09:04:21.691585+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "applicableSourceYear": 2019,
+          "noYearRollForward": true,
+          "awardDeadlineNotBorrowed": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nnw-nxmu-silk-road-csc",
+          "universityId": "uni-ningxia-medical-university",
+          "selectionOrigin": "additionalSameSource4",
+          "programId": null,
+          "name": "Silk Road Chinese Government Scholarship at NXMU",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "446e117921534eafe2bddf84f8417761cd1c5bf04fb9a20955836ec2a5ae49f1",
+          "canonicalScholarshipSha256": "446e117921534eafe2bddf84f8417761cd1c5bf04fb9a20955836ec2a5ae49f1",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nnw-nxmu-mbbs-english-bachelor",
+              "canonicalProgramSha256": "e290ead1222c0e530c9b5292257034db42b151f655a837881377528a44a698f2"
+            },
+            {
+              "programId": "prog-gap-prog-mew-nnw-nxmu-clinical-medicine-master",
+              "canonicalProgramSha256": "1b9b9ae39eb23215bd596569ec3883737b603ade4202a03725ecb08705ba0918"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nnw-nxmu-silk-road-csc"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nnw-nxmu-silk-road-csc",
+              "canonicalSourceSha256": "b23fbce042e44902ea484f08de225663802b7173f21655c8fd88004c769199e9",
+              "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nxmu-mbbs-english-bachelor",
+              "canonicalSourceSha256": "cccb7ef10e77a334c407071e825db0589b4d13b6a0c6f18dc55dc48395e406f3",
+              "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nxmu-clinical-medicine-master",
+              "canonicalSourceSha256": "ef67d09067342f9975a66352528d0b1a2f0fa7b5f88a8b3a49ed25dc90baec8b",
+              "url": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "2019-standing-guide-lists-route-but-no-exact-current-application-window",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.nxmu.edu.cn/gjjy/info/1034/1325.htm",
+          "evidenceBodySha256": "04a022539d8978ef24a84569f1b14e6d988500b985c8923e7704a10e47793940",
+          "observedAt": "2026-10-19T09:04:21.691585+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "applicableSourceYear": 2019,
+          "noYearRollForward": true,
+          "awardDeadlineNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "nxu-current-scanned-2026-guide-and-historical-scope-separation",
+      "universityId": "uni-ningxia-university",
+      "scope": "Exact current institutional award May30; specific stored CSC university route and regional-government award remain unresolved. Generic CSC March25 is a separately unbound observation.",
+      "evidence": [
+        {
+          "name": "source-06",
+          "url": "https://hzjl.nxu.edu.cn/info/1035/1639.htm",
+          "observedAt": "2026-10-19T09:04:21.799678+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://hzjl.nxu.edu.cn/info/1035/1639.htm",
+          "contentType": "text/html",
+          "bytes": 70492,
+          "rawPath": "source-06.html",
+          "rawSha256": "6e6605ab55569dd5982a95fc6705cbd09e6ee1a8c75b36f7ffd339cf5a2e5e0a",
+          "textPath": "source-06.txt",
+          "textSha256": "266f2b904fe2b12815dd50e0c5bd71ce470d972bbd5b028a7359f229bccd0fda",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-2022-historical-award-rules-not-current-date-proof",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "source-07",
+          "url": "https://hzjl.nxu.edu.cn/info/1035/1631.htm",
+          "observedAt": "2026-10-19T09:04:24.690673+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://hzjl.nxu.edu.cn/info/1035/1631.htm",
+          "contentType": "text/html",
+          "bytes": 53601,
+          "rawPath": "source-07.html",
+          "rawSha256": "b9fd2136b2b14d9741bfe5e7537d2d3a8be6b94d076e3779759826d0c78fa0bd",
+          "textPath": "source-07.txt",
+          "textSha256": "4375ee5b5534c80436c7c8eae22958f7da984ff3aace2044bbede5580e40281b",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-2020-historical-guide-not-current-date-proof",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "source-08",
+          "url": "https://hzjl.nxu.edu.cn/info/1035/1633.htm",
+          "observedAt": "2026-10-19T09:04:24.813169+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://hzjl.nxu.edu.cn/info/1035/1633.htm",
+          "contentType": "text/html",
+          "bytes": 20279,
+          "rawPath": "source-08.html",
+          "rawSha256": "a7cbf6a4ac1564c56889180f7c2c1a9e3d70ba6781b90eb5f05a096036d953a8",
+          "textPath": "source-08.txt",
+          "textSha256": "a163104313a094577ab459f226a3e1f5bc6a46e4b0d2f4b5d11a146d441c2d85",
+          "captureSucceeded": true,
+          "evidenceRole": "2024-programme-XLSX-wrapper-not-current-date-proof",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "source-09",
+          "url": "https://hzjl.nxu.edu.cn/info/1035/1781.htm",
+          "observedAt": "2026-10-19T09:04:25.071599+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://hzjl.nxu.edu.cn/info/1035/1781.htm",
+          "contentType": "text/html",
+          "bytes": 29003,
+          "rawPath": "source-09.html",
+          "rawSha256": "31cf1da1fd6d874f230f7b268c60d24944afebd66952b6f0905a86256505983a",
+          "textPath": "source-09.txt",
+          "textSha256": "b3e9dedffb74f1ef23312117adec28607f89bf4f96762929445cf086c23ed62c",
+          "captureSucceeded": true,
+          "evidenceRole": "exact-2026-guide-wrapper-links-original-PDF",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "nxu-2026-original",
+          "url": "https://hzjl.nxu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2117852820&wbfileid=18036112",
+          "parentSource": "source-09",
+          "parentBodySha256": "31cf1da1fd6d874f230f7b268c60d24944afebd66952b6f0905a86256505983a",
+          "linkLabel": "2026版招生简章电子版.pdf",
+          "observedAt": "2026-10-19T11:45:39.163723+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "route": "one-exact-linked-original-not-directory-search",
+          "status": 200,
+          "finalUrl": "https://hzjl.nxu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2117852820&wbfileid=18036112",
+          "contentType": "application/octet-stream",
+          "bytes": 10135753,
+          "rawPath": "nxu-2026-original.pdf",
+          "rawSha256": "6a3c294d043e8b55f71ae3b18a2be949009aa237842fa8a4ea1d4c4ef9a274ab",
+          "captureSucceeded": false,
+          "error": "No module named 'pypdf'",
+          "retryPolicy": "cooldown-no-further-retries",
+          "evidenceRole": "complete-original-scanned-PDF-visually-read-relevant-date-award-pages",
+          "fullFactsCertified": false,
+          "originalBytesAcquired": true,
+          "offlineTextExtractionRecovered": true,
+          "extractionFailureDoesNotMeanDownloadFailed": true
+        }
+      ],
+      "pdfVisualObservation": {
+        "method": "human-visual-transcription-from-original-rendered-scanned-PDF-not-OCR",
+        "originalBodySha256": "6a3c294d043e8b55f71ae3b18a2be949009aa237842fa8a4ea1d4c4ef9a274ab",
+        "originalObservedAt": "2026-10-19T11:45:39.163723+00:00",
+        "pageCount": 24,
+        "textLayerHasNoBodyText": true,
+        "extractionReceipt": {
+          "path": "pdf-extraction.json",
+          "sha256": "eec6dff2d5f9df6bdeb4711e1a3e8884fab863c1d5dbc46ddfa6d2c3b0a3f987"
+        },
+        "visualEvidence": [
+          {
+            "path": "nxu-2026-contact.png",
+            "sha256": "f80a58f5bf5b8913d10b755f22db63c51cfe7a12915a2b5e603b6545eff06301"
+          },
+          {
+            "path": "nxu-2026-page-01.png",
+            "sha256": "73c8cd668196e0b88c76cd8dce7eeb013cf6777b5f5625a2adf5973f5b79d18a"
+          },
+          {
+            "path": "nxu-2026-page-15.png",
+            "sha256": "c0da519556728a171e40080aff29f26b6a3fbe2db31590f68519ab47ae199e16"
+          },
+          {
+            "path": "nxu-2026-page-20.png",
+            "sha256": "9e395c91f15363e5fc8e81f412fffb28f369808b5bbb1b0e41456454c21b39cd"
+          }
+        ],
+        "coverYearQuote": "2026 ADMISSION GUIDE FOR INTERNATIONAL STUDENTS",
+        "dateQuote": "Attention: CSC scholarship deadline is on 25th March, while other scholarship deadline in on 30th May",
+        "dateLocator": "PDF page15, section07, Transcript Application Period; page1 cover year; page20 named award table",
+        "awardTableQuotes": [
+          "The Chinese Government Scholarship (20 students)",
+          "Ningxia University Scholarship (20 students)"
+        ],
+        "notApplicantStage": "June15–July15,2026 is the admission result period, not applicant deadline."
+      },
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-nxu-cgs-university-program",
+          "universityId": "uni-ningxia-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": null,
+          "name": "Chinese Government Scholarship University Program at Ningxia University",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "3611b5fde0f723643cdc4dbe0f6f737c34fa9d09fed43f4e2ca5022860be7cd9",
+          "canonicalScholarshipSha256": "3611b5fde0f723643cdc4dbe0f6f737c34fa9d09fed43f4e2ca5022860be7cd9",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-nxu-jurisprudence-bachelor",
+              "canonicalProgramSha256": "691afd653653f520685fe6a3cb9ab65736c83ab51be17f454deb7b573ce5385b"
+            },
+            {
+              "programId": "prog-gap-wave8-nxu-tourism-management-bachelor",
+              "canonicalProgramSha256": "62da4668b1d28432b14a5a84e5ac7c97b715f9e4e47b25aaafd8bb790ef693dc"
+            },
+            {
+              "programId": "prog-gap-wave8-nxu-political-economy-master",
+              "canonicalProgramSha256": "477f2e9fb63385b82c8d6eac94b8293e64192972fc700d16721130dc8f35f868"
+            },
+            {
+              "programId": "prog-gap-wave8-nxu-grass-science-doctorate",
+              "canonicalProgramSha256": "0fefd3590b0ca1682c7a28bbc6d5ff135decb3e60174bed2255f46937d6504e4"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-nxu-cgs-university-program"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-nxu-cgs-university-program",
+              "canonicalSourceSha256": "2f7c67e56e9cfb85aa3e91cbc0c08cdea0a560aad4574f2f64e958e5f6e9b160",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1639.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-jurisprudence-bachelor",
+              "canonicalSourceSha256": "33026e09ab2f9c9efe445f3861ecd620959c20f5d039de38f088d8c194ef67f6",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1631.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-jurisprudence-bachelor-support-1",
+              "canonicalSourceSha256": "4318c80aac2fa8f317ed4d1482c585b55aa0fbdf7df90497205fd19f81e76e55",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1633.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-jurisprudence-bachelor-support-2",
+              "canonicalSourceSha256": "4a6bb77bb6a2b08f456f0f2304f65725bb6702f8f1332965ea8d81a926b48a47",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1781.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-tourism-management-bachelor",
+              "canonicalSourceSha256": "47ccafa20ff25d54c565393f405a70f3f5942e60fc33d6170d98252829831948",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1631.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-tourism-management-bachelor-support-1",
+              "canonicalSourceSha256": "db06eddf121f6c0130a2467daf5b9458bb6a8c83fb3691c2697a01bd8cacdfa9",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1633.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-political-economy-master",
+              "canonicalSourceSha256": "4b279c02cb71f72354cd7adb56d5a9de0ffaab243ccd31d54af74c9a2b088351",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1631.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-political-economy-master-support-1",
+              "canonicalSourceSha256": "93e015dd1478d1a4cff27605007ba77c26cd1f6466ac5b8b88eb18117164c7db",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1633.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-grass-science-doctorate",
+              "canonicalSourceSha256": "7fdfcda562a2665876cdc9c2df2ce4b366d25c786cb7d0eb9f10fff59568a039",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1631.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-grass-science-doctorate-support-1",
+              "canonicalSourceSha256": "456a60cdcd9b0add610b17e1613942f9b71cc1122f105e2e22344b6f25ed198e",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1633.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "2026-generic-CSC-award-and-March25-date-do-not-explicitly-identify-stored-university-TypeB-programme",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://hzjl.nxu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2117852820&wbfileid=18036112",
+          "evidenceBodySha256": "6a3c294d043e8b55f71ae3b18a2be949009aa237842fa8a4ea1d4c4ef9a274ab",
+          "observedAt": "2026-10-19T11:45:39.163723+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "applicableSourceYear": 2026,
+          "sourceYearsAlsoRead": [
+            2022,
+            2020,
+            2024
+          ],
+          "noSuspensionFromAwardAbsence": true,
+          "awardDeadlineNotBorrowed": true,
+          "unboundDateObservation": {
+            "candidateDeadline": "2026-03-25",
+            "sourceAwardLabel": "The Chinese Government Scholarship",
+            "quotedDate": "Attention: CSC scholarship deadline is on 25th March, while other scholarship deadline in on 30th May",
+            "appliesToStoredRecord": false,
+            "reason": "No explicit TypeB/university-programme identity in the current award table; do not broaden the stored funding route."
+          },
+          "visualEvidence": [
+            {
+              "path": "nxu-2026-contact.png",
+              "sha256": "f80a58f5bf5b8913d10b755f22db63c51cfe7a12915a2b5e603b6545eff06301"
+            },
+            {
+              "path": "nxu-2026-page-01.png",
+              "sha256": "73c8cd668196e0b88c76cd8dce7eeb013cf6777b5f5625a2adf5973f5b79d18a"
+            },
+            {
+              "path": "nxu-2026-page-15.png",
+              "sha256": "c0da519556728a171e40080aff29f26b6a3fbe2db31590f68519ab47ae199e16"
+            },
+            {
+              "path": "nxu-2026-page-20.png",
+              "sha256": "9e395c91f15363e5fc8e81f412fffb28f369808b5bbb1b0e41456454c21b39cd"
+            }
+          ]
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-nxu-international-student-scholarship",
+          "universityId": "uni-ningxia-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": null,
+          "name": "Ningxia University Scholarship for International Students",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "dad3ae0bd18211b65759585866c79dcced8dc6a072c5c34071814ae6b6faa104",
+          "canonicalScholarshipSha256": "dad3ae0bd18211b65759585866c79dcced8dc6a072c5c34071814ae6b6faa104",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-nxu-jurisprudence-bachelor",
+              "canonicalProgramSha256": "691afd653653f520685fe6a3cb9ab65736c83ab51be17f454deb7b573ce5385b"
+            },
+            {
+              "programId": "prog-gap-wave8-nxu-tourism-management-bachelor",
+              "canonicalProgramSha256": "62da4668b1d28432b14a5a84e5ac7c97b715f9e4e47b25aaafd8bb790ef693dc"
+            },
+            {
+              "programId": "prog-gap-wave8-nxu-political-economy-master",
+              "canonicalProgramSha256": "477f2e9fb63385b82c8d6eac94b8293e64192972fc700d16721130dc8f35f868"
+            },
+            {
+              "programId": "prog-gap-wave8-nxu-grass-science-doctorate",
+              "canonicalProgramSha256": "0fefd3590b0ca1682c7a28bbc6d5ff135decb3e60174bed2255f46937d6504e4"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-nxu-international-student-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-nxu-international-student-scholarship",
+              "canonicalSourceSha256": "8635e6a5dfd9ebc11d41318fd02fbf295c4c2b7e6626fd8e881cb98788f8468f",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1639.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-jurisprudence-bachelor",
+              "canonicalSourceSha256": "33026e09ab2f9c9efe445f3861ecd620959c20f5d039de38f088d8c194ef67f6",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1631.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-jurisprudence-bachelor-support-1",
+              "canonicalSourceSha256": "4318c80aac2fa8f317ed4d1482c585b55aa0fbdf7df90497205fd19f81e76e55",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1633.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-jurisprudence-bachelor-support-2",
+              "canonicalSourceSha256": "4a6bb77bb6a2b08f456f0f2304f65725bb6702f8f1332965ea8d81a926b48a47",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1781.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-tourism-management-bachelor",
+              "canonicalSourceSha256": "47ccafa20ff25d54c565393f405a70f3f5942e60fc33d6170d98252829831948",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1631.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-tourism-management-bachelor-support-1",
+              "canonicalSourceSha256": "db06eddf121f6c0130a2467daf5b9458bb6a8c83fb3691c2697a01bd8cacdfa9",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1633.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-political-economy-master",
+              "canonicalSourceSha256": "4b279c02cb71f72354cd7adb56d5a9de0ffaab243ccd31d54af74c9a2b088351",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1631.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-political-economy-master-support-1",
+              "canonicalSourceSha256": "93e015dd1478d1a4cff27605007ba77c26cd1f6466ac5b8b88eb18117164c7db",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1633.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-grass-science-doctorate",
+              "canonicalSourceSha256": "7fdfcda562a2665876cdc9c2df2ce4b366d25c786cb7d0eb9f10fff59568a039",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1631.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-grass-science-doctorate-support-1",
+              "canonicalSourceSha256": "456a60cdcd9b0add610b17e1613942f9b71cc1122f105e2e22344b6f25ed198e",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1633.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-30",
+          "candidateOfficialDeadline": "2026-05-30",
+          "reason": "current-2026-guide-explicit-other-scholarship-cutoff-and-exact-named-non-CSC-university-award",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://hzjl.nxu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2117852820&wbfileid=18036112",
+          "evidenceBodySha256": "6a3c294d043e8b55f71ae3b18a2be949009aa237842fa8a4ea1d4c4ef9a274ab",
+          "observedAt": "2026-10-19T11:45:39.163723+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the matching 2026 application route is past; no permanent discontinuation or closure of successor routes is inferred.",
+          "quotedDate": "Attention: CSC scholarship deadline is on 25th March, while other scholarship deadline in on 30th May",
+          "quoteMethod": "human-visual-transcription-from-original-rendered-scanned-PDF-not-OCR",
+          "evidenceLocator": "PDF page15, section07, Transcript Application Period; page1 cover year; page20 named award table",
+          "applicableSourceYear": 2026,
+          "fundingRoute": "Ningxia University Scholarship",
+          "awardOwnDateNotBorrowed": true,
+          "awardIdentityQuote": "Ningxia University Scholarship (20 students)",
+          "visualEvidence": [
+            {
+              "path": "nxu-2026-contact.png",
+              "sha256": "f80a58f5bf5b8913d10b755f22db63c51cfe7a12915a2b5e603b6545eff06301"
+            },
+            {
+              "path": "nxu-2026-page-01.png",
+              "sha256": "73c8cd668196e0b88c76cd8dce7eeb013cf6777b5f5625a2adf5973f5b79d18a"
+            },
+            {
+              "path": "nxu-2026-page-15.png",
+              "sha256": "c0da519556728a171e40080aff29f26b6a3fbe2db31590f68519ab47ae199e16"
+            },
+            {
+              "path": "nxu-2026-page-20.png",
+              "sha256": "9e395c91f15363e5fc8e81f412fffb28f369808b5bbb1b0e41456454c21b39cd"
+            }
+          ]
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-nxu-ningxia-government-scholarship",
+          "universityId": "uni-ningxia-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": null,
+          "name": "Ningxia Hui Autonomous Region Government Scholarship at Ningxia University",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "b6560bf751413cb78d669720ce46aca527add180e224ba5c9c00a9c2bd537d36",
+          "canonicalScholarshipSha256": "b6560bf751413cb78d669720ce46aca527add180e224ba5c9c00a9c2bd537d36",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-nxu-jurisprudence-bachelor",
+              "canonicalProgramSha256": "691afd653653f520685fe6a3cb9ab65736c83ab51be17f454deb7b573ce5385b"
+            },
+            {
+              "programId": "prog-gap-wave8-nxu-tourism-management-bachelor",
+              "canonicalProgramSha256": "62da4668b1d28432b14a5a84e5ac7c97b715f9e4e47b25aaafd8bb790ef693dc"
+            },
+            {
+              "programId": "prog-gap-wave8-nxu-political-economy-master",
+              "canonicalProgramSha256": "477f2e9fb63385b82c8d6eac94b8293e64192972fc700d16721130dc8f35f868"
+            },
+            {
+              "programId": "prog-gap-wave8-nxu-grass-science-doctorate",
+              "canonicalProgramSha256": "0fefd3590b0ca1682c7a28bbc6d5ff135decb3e60174bed2255f46937d6504e4"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-nxu-ningxia-government-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-nxu-ningxia-government-scholarship",
+              "canonicalSourceSha256": "fa25e725d6bac9abec2694655e0f371cca2cdfa5268d2713de7f8462659b1360",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1639.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-jurisprudence-bachelor",
+              "canonicalSourceSha256": "33026e09ab2f9c9efe445f3861ecd620959c20f5d039de38f088d8c194ef67f6",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1631.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-jurisprudence-bachelor-support-1",
+              "canonicalSourceSha256": "4318c80aac2fa8f317ed4d1482c585b55aa0fbdf7df90497205fd19f81e76e55",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1633.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-jurisprudence-bachelor-support-2",
+              "canonicalSourceSha256": "4a6bb77bb6a2b08f456f0f2304f65725bb6702f8f1332965ea8d81a926b48a47",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1781.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-tourism-management-bachelor",
+              "canonicalSourceSha256": "47ccafa20ff25d54c565393f405a70f3f5942e60fc33d6170d98252829831948",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1631.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-tourism-management-bachelor-support-1",
+              "canonicalSourceSha256": "db06eddf121f6c0130a2467daf5b9458bb6a8c83fb3691c2697a01bd8cacdfa9",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1633.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-political-economy-master",
+              "canonicalSourceSha256": "4b279c02cb71f72354cd7adb56d5a9de0ffaab243ccd31d54af74c9a2b088351",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1631.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-political-economy-master-support-1",
+              "canonicalSourceSha256": "93e015dd1478d1a4cff27605007ba77c26cd1f6466ac5b8b88eb18117164c7db",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1633.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-grass-science-doctorate",
+              "canonicalSourceSha256": "7fdfcda562a2665876cdc9c2df2ce4b366d25c786cb7d0eb9f10fff59568a039",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1631.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-nxu-grass-science-doctorate-support-1",
+              "canonicalSourceSha256": "456a60cdcd9b0add610b17e1613942f9b71cc1122f105e2e22344b6f25ed198e",
+              "url": "https://hzjl.nxu.edu.cn/info/1035/1633.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "current-2026-guide-does-not-separately-list-regional-government-award-and-historical-recurring-rules-cannot-prove-current-deadline",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://hzjl.nxu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2117852820&wbfileid=18036112",
+          "evidenceBodySha256": "6a3c294d043e8b55f71ae3b18a2be949009aa237842fa8a4ea1d4c4ef9a274ab",
+          "observedAt": "2026-10-19T11:45:39.163723+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "applicableSourceYear": 2026,
+          "sourceYearsAlsoRead": [
+            2022,
+            2020,
+            2024
+          ],
+          "noSuspensionFromAwardAbsence": true,
+          "awardDeadlineNotBorrowed": true,
+          "historicalRecurringWording": "一般为每年3月初至5月底",
+          "noInventedMonthEndDate": true,
+          "visualEvidence": [
+            {
+              "path": "nxu-2026-contact.png",
+              "sha256": "f80a58f5bf5b8913d10b755f22db63c51cfe7a12915a2b5e603b6545eff06301"
+            },
+            {
+              "path": "nxu-2026-page-01.png",
+              "sha256": "73c8cd668196e0b88c76cd8dce7eeb013cf6777b5f5625a2adf5973f5b79d18a"
+            },
+            {
+              "path": "nxu-2026-page-15.png",
+              "sha256": "c0da519556728a171e40080aff29f26b6a3fbe2db31590f68519ab47ae199e16"
+            },
+            {
+              "path": "nxu-2026-page-20.png",
+              "sha256": "9e395c91f15363e5fc8e81f412fffb28f369808b5bbb1b0e41456454c21b39cd"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "ncepu-2026-degree-language-application-cutoffs-and-independent-awards",
+      "universityId": "uni-north-china-electric-power-university",
+      "scope": "Four exact 2026 general admission routes match their separate degree/language sections; three award sections state no independent concrete day. Strict before wording is retained.",
+      "evidence": [
+        {
+          "name": "source-10",
+          "url": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+          "observedAt": "2026-10-19T09:04:26.713750+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+          "contentType": "text/html",
+          "bytes": 71146,
+          "rawPath": "source-10.html",
+          "rawSha256": "29a4419be0dd27f66834b83a98a85bdfa051dd1e209a3f77910f15617562c5d2",
+          "textPath": "source-10.txt",
+          "textSha256": "54f4ab2b295e47df6ff72b26602653c1d39fa3ff98feff23ab50de4c97db3b81",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "North China Electric Power University 2026 International Admission",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nss-ncepu-beijing-government",
+          "universityId": "uni-north-china-electric-power-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": null,
+          "name": "Beijing Government Scholarship at NCEPU",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "5b051787b7be308c08fa7689a7cdef312dda47ca90102e20c5fba4b19ec9cb20",
+          "canonicalScholarshipSha256": "5b051787b7be308c08fa7689a7cdef312dda47ca90102e20c5fba4b19ec9cb20",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-ncepu-new-energy-science-engineering-bachelor",
+              "canonicalProgramSha256": "6e1a2ae1391fa257908821341284ab68b2e5a9654bd1a0911b361fce4a16b2d5"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nss-ncepu-beijing-government"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nss-ncepu-beijing-government",
+              "canonicalSourceSha256": "a9f516133f531635c7b3c40bee34655e06d60de13ad052e611b448aac888575e",
+              "url": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-ncepu-new-energy-science-engineering-bachelor",
+              "canonicalSourceSha256": "957f5d642d50edc4b2d5d5066f457f87fd83bbf8c3b9f139a9e62320ee84ab74",
+              "url": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "named-award-section-has-no-independent-exact-applicant-day",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+          "evidenceBodySha256": "29a4419be0dd27f66834b83a98a85bdfa051dd1e209a3f77910f15617562c5d2",
+          "observedAt": "2026-10-19T09:04:26.713750+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "applicableSourceYear": 2026,
+          "fundingRoute": "Beijing Government Scholarship at NCEPU",
+          "awardDeadlineNotBorrowed": true,
+          "generalAdmissionDeadlineNotBorrowed": "2026-02-25",
+          "evidenceLocator": "Section8 Scholarship; separate from Section2–5 File Requirements."
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nss-ncepu-csc-university",
+          "universityId": "uni-north-china-electric-power-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": null,
+          "name": "Chinese Government Scholarship – Chinese University Program at NCEPU",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "16576a8a0f97e08af1d57f0ae738ebd07c01992b577b9a489e2b6ad01b989034",
+          "canonicalScholarshipSha256": "16576a8a0f97e08af1d57f0ae738ebd07c01992b577b9a489e2b6ad01b989034",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-ncepu-power-engineering-thermophysics-master",
+              "canonicalProgramSha256": "24be3673e698fde0a2043d8849acf33519b19ad58b4ebf0b924369556960d9f2"
+            },
+            {
+              "programId": "prog-gap-prog-mew-nss-ncepu-electrical-engineering-doctorate",
+              "canonicalProgramSha256": "3defe8910c2ad373505d0ab42d4d583e63d8a4b1f4dca7035b89f7eb11ac75fb"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nss-ncepu-csc-university"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nss-ncepu-csc-university",
+              "canonicalSourceSha256": "66c4e94b8fea138aa1cebed13b9fabcebfec16b4abe79b268595fb358f6c78d5",
+              "url": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-ncepu-power-engineering-thermophysics-master",
+              "canonicalSourceSha256": "429ee8dc584b0632b260757ef7da5fa578befdfcc3f0c9afeabfa32bd4dce65d",
+              "url": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-ncepu-electrical-engineering-doctorate",
+              "canonicalSourceSha256": "8e34c37d210a979e08b13d4dee95484638ec634a6600a877fd4ba22b793d9601",
+              "url": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "named-award-section-has-no-independent-exact-applicant-day",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+          "evidenceBodySha256": "29a4419be0dd27f66834b83a98a85bdfa051dd1e209a3f77910f15617562c5d2",
+          "observedAt": "2026-10-19T09:04:26.713750+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "applicableSourceYear": 2026,
+          "fundingRoute": "Chinese Government Scholarship – Chinese University Program at NCEPU",
+          "awardDeadlineNotBorrowed": true,
+          "generalAdmissionDeadlineNotBorrowed": "2026-05-30",
+          "evidenceLocator": "Section8 Scholarship; separate from Section2–5 File Requirements."
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nss-ncepu-iclts",
+          "universityId": "uni-north-china-electric-power-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": null,
+          "name": "International Chinese Language Teachers Scholarship at NCEPU",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "382e54e47330a97ab47fc5fb5b66c747c079848c765597d67d8b267f4589a837",
+          "canonicalScholarshipSha256": "382e54e47330a97ab47fc5fb5b66c747c079848c765597d67d8b267f4589a837",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-ncepu-chinese-language",
+              "canonicalProgramSha256": "2653a15d1f039577aef1e047826cdf22f87a16f15b772a2bc7c433c99df7f27e"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nss-ncepu-iclts"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nss-ncepu-iclts",
+              "canonicalSourceSha256": "73c41558c4fb8ad2699ad92d45f69f834adc1370c317affeacdbc4570a4ec463",
+              "url": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-ncepu-chinese-language",
+              "canonicalSourceSha256": "3c24fcf0ba32db131a2af5db55aeb8ccce1c85c7a835fe438f6ec3521dc57b7c",
+              "url": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "named-award-section-has-no-independent-exact-applicant-day",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+          "evidenceBodySha256": "29a4419be0dd27f66834b83a98a85bdfa051dd1e209a3f77910f15617562c5d2",
+          "observedAt": "2026-10-19T09:04:26.713750+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "applicableSourceYear": 2026,
+          "fundingRoute": "International Chinese Language Teachers Scholarship at NCEPU",
+          "awardDeadlineNotBorrowed": true,
+          "generalAdmissionDeadlineNotBorrowed": "2026-05-30",
+          "awardTimingQuote": "The application time depends on the local Confucius Institute.",
+          "evidenceLocator": "Section8 Scholarship; separate from Section2–5 File Requirements."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-ncepu-chinese-language-2026-2027-autumn-fee-reference",
+          "universityId": "uni-north-china-electric-power-university",
+          "selectionOrigin": "baseQueue16",
+          "programId": "prog-gap-prog-mew-nss-ncepu-chinese-language",
+          "name": "Chinese Language Program",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "language",
+          "canonicalRecordSha256": "ffe59b9a977afb3fb7ddd0df457dacd3467dce62903c3cdf44f20bb36ecbf567",
+          "canonicalCycleSha256": "ffe59b9a977afb3fb7ddd0df457dacd3467dce62903c3cdf44f20bb36ecbf567",
+          "canonicalProgramSha256": "2653a15d1f039577aef1e047826cdf22f87a16f15b772a2bc7c433c99df7f27e",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-ncepu-chinese-language",
+              "canonicalProgramSha256": "2653a15d1f039577aef1e047826cdf22f87a16f15b772a2bc7c433c99df7f27e"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-ncepu-chinese-language"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-ncepu-chinese-language",
+              "canonicalSourceSha256": "3c24fcf0ba32db131a2af5db55aeb8ccce1c85c7a835fe438f6ec3521dc57b7c",
+              "url": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-05-30",
+          "candidateOfficialDeadline": "2026-05-30",
+          "reason": "explicit-2026-guide-exact-programme-and-degree-specific-application-section-match",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "strict-before-stated-calendar-date-no-clock-time-stated",
+          "evidenceSourceUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+          "evidenceBodySha256": "29a4419be0dd27f66834b83a98a85bdfa051dd1e209a3f77910f15617562c5d2",
+          "observedAt": "2026-10-19T09:04:26.713750+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the matching 2026 application route is past; no permanent discontinuation or closure of successor routes is inferred.",
+          "quotedDate": "Applicants are required to complete and submit the following materials via our online application system http://study.ncepu.edu.cn/ before 30th May.",
+          "applicableSourceYear": 2026,
+          "fundingRoute": "General degree/language admission; no independent scholarship cutoff inferred",
+          "exactMajorQuote": "5. Chinese Language Program",
+          "evidenceLocator": "Section5 Chinese Language Program File Requirements",
+          "beforeWordingPreserved": true,
+          "inclusiveEndOfDayNotAsserted": true,
+          "feeReferenceNotUsedAsYearAnchor": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-ncepu-electrical-engineering-doctorate-2026-2027-autumn-fee-reference",
+          "universityId": "uni-north-china-electric-power-university",
+          "selectionOrigin": "additionalSameSource4",
+          "programId": "prog-gap-prog-mew-nss-ncepu-electrical-engineering-doctorate",
+          "name": "Electrical Engineering",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "doctorate",
+          "canonicalRecordSha256": "dc971eefa28a3cc32ff3148182beed7e90a6e855e8c1b16e470c1c6f2b24d4e6",
+          "canonicalCycleSha256": "dc971eefa28a3cc32ff3148182beed7e90a6e855e8c1b16e470c1c6f2b24d4e6",
+          "canonicalProgramSha256": "3defe8910c2ad373505d0ab42d4d583e63d8a4b1f4dca7035b89f7eb11ac75fb",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-ncepu-electrical-engineering-doctorate",
+              "canonicalProgramSha256": "3defe8910c2ad373505d0ab42d4d583e63d8a4b1f4dca7035b89f7eb11ac75fb"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-ncepu-electrical-engineering-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-ncepu-electrical-engineering-doctorate",
+              "canonicalSourceSha256": "8e34c37d210a979e08b13d4dee95484638ec634a6600a877fd4ba22b793d9601",
+              "url": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-05-30",
+          "candidateOfficialDeadline": "2026-05-30",
+          "reason": "explicit-2026-guide-exact-programme-and-degree-specific-application-section-match",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "strict-before-stated-calendar-date-no-clock-time-stated",
+          "evidenceSourceUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+          "evidenceBodySha256": "29a4419be0dd27f66834b83a98a85bdfa051dd1e209a3f77910f15617562c5d2",
+          "observedAt": "2026-10-19T09:04:26.713750+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the matching 2026 application route is past; no permanent discontinuation or closure of successor routes is inferred.",
+          "quotedDate": "Applicants are required to complete and submit the following materials by online application system http://study.ncepu.edu.cn/ before 30th May.",
+          "applicableSourceYear": 2026,
+          "fundingRoute": "General degree/language admission; no independent scholarship cutoff inferred",
+          "exactMajorQuote": "Electrical Engineering",
+          "evidenceLocator": "Section4 PHD Program File Requirements",
+          "beforeWordingPreserved": true,
+          "inclusiveEndOfDayNotAsserted": true,
+          "feeReferenceNotUsedAsYearAnchor": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-ncepu-new-energy-science-engineering-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-north-china-electric-power-university",
+          "selectionOrigin": "additionalSameSource4",
+          "programId": "prog-gap-prog-mew-nss-ncepu-new-energy-science-engineering-bachelor",
+          "name": "New Energy Science and Engineering",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "a04c963995d6f104b724c9e04572421e80de4cfdc0aeb9d6740b9627ca03918e",
+          "canonicalCycleSha256": "a04c963995d6f104b724c9e04572421e80de4cfdc0aeb9d6740b9627ca03918e",
+          "canonicalProgramSha256": "6e1a2ae1391fa257908821341284ab68b2e5a9654bd1a0911b361fce4a16b2d5",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-ncepu-new-energy-science-engineering-bachelor",
+              "canonicalProgramSha256": "6e1a2ae1391fa257908821341284ab68b2e5a9654bd1a0911b361fce4a16b2d5"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-ncepu-new-energy-science-engineering-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-ncepu-new-energy-science-engineering-bachelor",
+              "canonicalSourceSha256": "957f5d642d50edc4b2d5d5066f457f87fd83bbf8c3b9f139a9e62320ee84ab74",
+              "url": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-02-25",
+          "candidateOfficialDeadline": "2026-02-25",
+          "reason": "explicit-2026-guide-exact-programme-and-degree-specific-application-section-match",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "strict-before-stated-calendar-date-no-clock-time-stated",
+          "evidenceSourceUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+          "evidenceBodySha256": "29a4419be0dd27f66834b83a98a85bdfa051dd1e209a3f77910f15617562c5d2",
+          "observedAt": "2026-10-19T09:04:26.713750+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the matching 2026 application route is past; no permanent discontinuation or closure of successor routes is inferred.",
+          "quotedDate": "Applicants are required to complete and submit the following materials via our online application system http://study.ncepu.edu.cn/ before 25th February.",
+          "applicableSourceYear": 2026,
+          "fundingRoute": "General degree/language admission; no independent scholarship cutoff inferred",
+          "exactMajorQuote": "New Energy Science and Engineering",
+          "evidenceLocator": "Section2 Bachelor Program File Requirements",
+          "beforeWordingPreserved": true,
+          "inclusiveEndOfDayNotAsserted": true,
+          "feeReferenceNotUsedAsYearAnchor": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-ncepu-power-engineering-thermophysics-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-north-china-electric-power-university",
+          "selectionOrigin": "additionalSameSource4",
+          "programId": "prog-gap-prog-mew-nss-ncepu-power-engineering-thermophysics-master",
+          "name": "Power Engineering and Engineering Thermophysics",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "6f33397de1ce29f80ce4de11d1a08fe67046754cf5d0f50b6dc9711166ef1c89",
+          "canonicalCycleSha256": "6f33397de1ce29f80ce4de11d1a08fe67046754cf5d0f50b6dc9711166ef1c89",
+          "canonicalProgramSha256": "24be3673e698fde0a2043d8849acf33519b19ad58b4ebf0b924369556960d9f2",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-ncepu-power-engineering-thermophysics-master",
+              "canonicalProgramSha256": "24be3673e698fde0a2043d8849acf33519b19ad58b4ebf0b924369556960d9f2"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-ncepu-power-engineering-thermophysics-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-ncepu-power-engineering-thermophysics-master",
+              "canonicalSourceSha256": "429ee8dc584b0632b260757ef7da5fa578befdfcc3f0c9afeabfa32bd4dce65d",
+              "url": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-05-30",
+          "candidateOfficialDeadline": "2026-05-30",
+          "reason": "explicit-2026-guide-exact-programme-and-degree-specific-application-section-match",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "strict-before-stated-calendar-date-no-clock-time-stated",
+          "evidenceSourceUrl": "https://xxgk.ncepu.edu.cn/dwjlyhzxx/48lhlxsgl/8a900bebdcee49398bbfb227bd3a1620.htm",
+          "evidenceBodySha256": "29a4419be0dd27f66834b83a98a85bdfa051dd1e209a3f77910f15617562c5d2",
+          "observedAt": "2026-10-19T09:04:26.713750+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the matching 2026 application route is past; no permanent discontinuation or closure of successor routes is inferred.",
+          "quotedDate": "Applicants are required to complete and submit the following materials via our online application system http://study.ncepu.edu.cn/ before 30th May.",
+          "applicableSourceYear": 2026,
+          "fundingRoute": "General degree/language admission; no independent scholarship cutoff inferred",
+          "exactMajorQuote": "Power Engineering and Engineering Thermophysics",
+          "evidenceLocator": "Section3 Master Program File Requirements",
+          "beforeWordingPreserved": true,
+          "inclusiveEndOfDayNotAsserted": true,
+          "feeReferenceNotUsedAsYearAnchor": true
+        }
+      ]
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "reportSha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "batch": "official-batch-025",
+      "reportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f"
+    },
+    {
+      "batch": "official-batch-026",
+      "reportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9"
+    },
+    {
+      "batch": "official-batch-027",
+      "reportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+    }
+  ],
+  "validation": {
+    "exactTwentyIdsCoveredOnce": true,
+    "allSixCanonicalInputsUnchanged": true,
+    "allSelectedRawProgrammeAndSourceRowsPinned": true,
+    "allExtraIdsMatchRootSelectionReceipt": true,
+    "noOverlapWithAssessedOrPriorApprovedSet": true,
+    "htmlAndXlsxQuotedFragmentsAsserted": true,
+    "scannedPdfYearDateAndAwardPagesVisuallyInspected": true,
+    "originalBodyBytesTextAndObservationTimesPinned": true,
+    "noCanonicalOrSharedStateMutation": true
+  },
+  "precisionIssues": [
+    {
+      "universityId": "uni-north-china-electric-power-university",
+      "issue": "Four general admission cutoffs use strict before wording; officialDeadline records the stated boundary day, not end-of-day-inclusive availability."
+    },
+    {
+      "universityId": "uni-ningxia-university",
+      "issue": "PDF is scanned: saved text layer contains no body words. Date and award quotations are manual visual transcriptions pinned to rendered original pages1/15/20."
+    }
+  ]
+}

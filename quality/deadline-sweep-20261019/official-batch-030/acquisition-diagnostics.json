@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-19T11:47:41.074Z",
+  "sandboxFailureManifest": {
+    "path": "captures-sandbox-denied.json",
+    "sha256": "410cea07548b13bd4df517304c917d515d1ce9b54619be8c2dd6142bc9dc5a0f"
+  },
+  "classification": "local-Windows-sandbox-socket-denials-before-origin-requests-not-official-site-failures",
+  "initialOfficialRequestsSent": 0,
+  "nativeEscalatedReadsCompleted": true,
+  "derivedReadApprovalTimeout": {
+    "action": "python capture-derived.py",
+    "outcome": "automatic-permission-review-did-not-finish-before-deadline",
+    "originRequestsSent": 0,
+    "safetyRejection": false,
+    "permittedSingleRetrySucceeded": true
+  },
+  "paidCalls": 0
+}

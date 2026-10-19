@@ -1,0 +1,1921 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-029-20261019",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T11:47:37.279Z",
+  "state": "completed-source-only-14-past-3-unknown-4-blocked",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v7.json",
+  "targetQueueSha256": "eeb500d880d56d97fc7145542a31273047f77b23852a62857a74f428a791ad5b",
+  "priorSummary": "quality/deadline-sweep-20261019/official-review-summary-v9.json",
+  "priorSummarySha256": "cc96348f958644d76c1a4d253e734ba1bf7c87ed1b4b0cee844ad29dedf69b70",
+  "selectionSha256": "7037d32b77e95e18c72cfa936d7d219e5075ca5fb1640f67fa9a116883d27fb2",
+  "selectedUniversityIds": [
+    "uni-north-china-university-of-technology",
+    "uni-northeast-agricultural-university",
+    "uni-northeast-electric-power-university",
+    "uni-northeast-forestry-university",
+    "uni-northeast-normal-university",
+    "uni-northwest-university-of-political-science-and-law"
+  ],
+  "selection": {
+    "baseQueueRecords": 17,
+    "additionalSameSourceRecords": 4,
+    "totalRecords": 21,
+    "baseQueueRecordIds": [
+      "sch-gap-breadth-sch-ncut-beijing-government",
+      "cycle-gap-breadth-ncut-b-electronic-information-engineering-en-2026-2027-other",
+      "cycle-gap-breadth-ncut-b-mechatronics-engineering-en-2026-2027-other",
+      "cycle-gap-local-strong-ncut-b-architecture-en-2026-2027-other",
+      "sch-gap-sch-mew-ne-neau-csc-high-level-postgraduate",
+      "cycle-gap-prog-mew-ne-neau-animal-husbandry-doctorate-2026-2027-autumn",
+      "cycle-gap-prog-mew-ne-neau-food-science-doctorate-2026-2027-autumn",
+      "cycle-gap-prog-mew-ne-neau-international-chinese-education-master-2026-2027-autumn",
+      "sch-gap-sch-mew-nnw-neepu-changbaishan",
+      "sch-gap-sch-mew-ne-nefu-president",
+      "sch-gap-nenu-2026-iclts-bachelor-language-coverage",
+      "cycle-gap-nenu-2026-bachelor-tcsol-2026-2027-autumn",
+      "cycle-gap-nenu-2026-one-year-chinese-literature-2026-2027-autumn",
+      "sch-gap-sch-mew-nnw-nwupl-central-asian-five-countries",
+      "sch-gap-sch-mew-nnw-nwupl-xian-belt-road",
+      "sch-gap-wave8-2-nwupl-belt-road-scholarship",
+      "cycle-gap-prog-mew-nnw-nwupl-chinese-language-2026-2027-autumn-fee-reference"
+    ],
+    "additionalSameSourceRecordIds": [
+      "cycle-gap-wave8-2-nwupl-cross-border-ecommerce-bachelor-2026-2027-autumn",
+      "cycle-gap-prog-mew-nnw-nwupl-law-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-prog-mew-nnw-nwupl-law-doctorate-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave8-2-nwupl-law-bachelor-2026-2027-autumn"
+    ],
+    "additionalSelectionReceipt": "quality/deadline-sweep-20261019/heartbeat-0900/additional-same-source-selection-v1.json",
+    "additionalSelectionReceiptSha256": "4891483ce89720eeac5ae1ef1cf92056e4067a8aa54058b7c6e40a6642361bbb"
+  },
+  "acquisition": {
+    "registeredDistinctUrlsAttempted": 9,
+    "nativeOutboundRequests": 9,
+    "sandboxDeniedBeforeOutbound": 9,
+    "sandboxDeniedReceipt": {
+      "path": "captures-sandbox-denied.json",
+      "sha256": "8f6a94c4c38f619f57c33836403ac27f4c91955cbba187ab15260d58ee8c079d"
+    },
+    "boundedWebFallbackRequests": 1,
+    "rawOriginBodiesSaved": 8,
+    "completeRelevantHtmlBodiesRead": 7,
+    "unrelatedHistoricalPdfBodiesRead": 1,
+    "localPdfExtractionWithoutHttpRetry": true,
+    "normalTlsValidation": true,
+    "paidModelCalls": 0,
+    "captureManifest": {
+      "path": "captures.json",
+      "sha256": "1dd4cd8e415f0456a9164631e1a76f798cb74bad2367c8841e6082ce9de616aa"
+    },
+    "pdfLocalExtraction": {
+      "path": "pdf-extraction.json",
+      "sha256": "a08a9f5cd241624a01c1f8a8770486c3c0b827a42a27eba065c9b289c4a1c1aa"
+    },
+    "fallbackReceipt": {
+      "path": "ncut-web-fallback.json",
+      "sha256": "c37220bf54392b77ea9beddb695b70bb73664422555d7f48294e29da827a07f8"
+    },
+    "otherParentProgrammeSources": "Parent/source rows are pinned in selection. Four extra parent-programme URLs outside the finite selected source queue were not freshly read or used as date evidence."
+  },
+  "summary": {
+    "schoolsAttempted": 6,
+    "recordsAssessed": 21,
+    "baseQueueRecords": 17,
+    "additionalSameSourceRecords": 4,
+    "admissionCyclesAssessed": 13,
+    "scholarshipsAssessed": 8,
+    "recordResults": {
+      "blocked": 4,
+      "closed": 14,
+      "unknown": 3
+    },
+    "newExactPastDeadlineCandidatesFromStoredNull": 7,
+    "existingExpiredDatesScoped": 7,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "rules": [
+    "Candidate-only observations: no canonical deadline/status/opening/freshness changes.",
+    "Unknown does not mean open or closed. A past intake is not a programme suspension.",
+    "Source years, exact programme and named funding routes must match; no year rollover.",
+    "NENU host April30-before, central applicant May15 and institutional review May25 remain separate.",
+    "NWUPL municipal awards explicitly share admission submission; its distinct university award does not borrow June20.",
+    "NEEPU2027 is a separate successor candidate; NEFU unanchored April30 remains unknown.",
+    "HTTP404, web timeout and the unrelated2025 bachelor-award PDF are not full current date proof."
+  ],
+  "groups": [
+    {
+      "key": "ncut-registered-undergraduate-source-unavailable",
+      "universityId": "uni-north-china-university-of-technology",
+      "scope": "Three exact English bachelor cycles and independently named Beijing Government award; no readable official date body.",
+      "evidence": [
+        {
+          "name": "source-01",
+          "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+          "observedAt": "2026-10-19T09:04:51.178043+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "HTTP Error 404: Not Found",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "failed-native-404-no-original-error-body-saved",
+          "fullFactsCertified": false
+        }
+      ],
+      "boundedFallback": {
+        "path": "ncut-web-fallback.json",
+        "sha256": "c37220bf54392b77ea9beddb695b70bb73664422555d7f48294e29da827a07f8",
+        "name": "source-01-web-fallback",
+        "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+        "observedAt": "2026-10-19T11:45:45.652Z",
+        "observationTimePrecision": "local recording time of the returned web-fallback result; exact HTTP attempt time was not provided by web tool",
+        "method": "one-web-open-after-native-404",
+        "toolCall": {
+          "open": [
+            {
+              "ref_id": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm"
+            }
+          ],
+          "response_length": "short"
+        },
+        "toolResultText": "Internal Error ()\nciteturn73view0 [wordlim: 200] Source: open({\"ref_id\":\"https://en.ncut.edu.cn/Admissions1/Undergraduate.htm\",\"lineno\":null}); Total lines: 1\nL0: Failed to fetch https://en.ncut.edu.cn/Admissions1/Undergraduate.htm: (400) Timeout fetching\n",
+        "captureSucceeded": false,
+        "originalOriginBytesObtained": false,
+        "dateEvidence": false,
+        "retryPolicy": "cooldown-no-further-retries",
+        "exactHttpAttemptedAt": null
+      },
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-breadth-sch-ncut-beijing-government",
+          "universityId": "uni-north-china-university-of-technology",
+          "selectionOrigin": "baseQueue17",
+          "programId": null,
+          "name": "Beijing Government Scholarship for International Students",
+          "canonicalScholarshipSha256": "0fe7def421b5f0ceab4aec2324a550ce0c9771220055be027240b9e2a3ea22f6",
+          "canonicalRecordSha256": "0fe7def421b5f0ceab4aec2324a550ce0c9771220055be027240b9e2a3ea22f6",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-breadth-sch-ncut-beijing-government"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-breadth-sch-ncut-beijing-government",
+              "canonicalSourceSha256": "db2c7815dabe2e21d9d832fbe8187de1720b2ce549258d60acf958128f5df50d",
+              "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-official-source-native-404-and-one-web-fallback-timeout-no-full-date-text",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T09:04:51.178043+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "noHttpStatusOrSnippetDateCertification": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-breadth-ncut-b-electronic-information-engineering-en-2026-2027-other",
+          "universityId": "uni-north-china-university-of-technology",
+          "selectionOrigin": "baseQueue17",
+          "programId": "prog-gap-breadth-ncut-b-electronic-information-engineering-en",
+          "name": "Electronic Information Engineering",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "canonicalCycleSha256": "df29047357a65054ab702191575dbf9bf23e3a42d9d13f2acb1921025a4c149b",
+          "canonicalProgramSha256": "fdbdab738c7eb1c8a0550d5c3e8433ed0ca77afde2141d3dbda646aef88b350b",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "df29047357a65054ab702191575dbf9bf23e3a42d9d13f2acb1921025a4c149b",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-breadth-ncut-b-electronic-information-engineering-en",
+              "canonicalProgramSha256": "fdbdab738c7eb1c8a0550d5c3e8433ed0ca77afde2141d3dbda646aef88b350b"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-breadth-ncut-b-electronic-information-engineering-en"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-breadth-ncut-b-electronic-information-engineering-en",
+              "canonicalSourceSha256": "17801e66393b821d50f4c73d6e472487ac14f01674bf0e630535e3974f0b29f1",
+              "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-official-source-native-404-and-one-web-fallback-timeout-no-full-date-text",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T09:04:51.178043+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "noHttpStatusOrSnippetDateCertification": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-breadth-ncut-b-mechatronics-engineering-en-2026-2027-other",
+          "universityId": "uni-north-china-university-of-technology",
+          "selectionOrigin": "baseQueue17",
+          "programId": "prog-gap-breadth-ncut-b-mechatronics-engineering-en",
+          "name": "Mechatronics Engineering",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "canonicalCycleSha256": "1ba54227995338bdde43675e336e7371e9a54e835a92d292ad8a2a5a0a2376af",
+          "canonicalProgramSha256": "288ad57f7073549fabad3bbe185678b7ce0f9097bd5f9719b954befa055cfab1",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "1ba54227995338bdde43675e336e7371e9a54e835a92d292ad8a2a5a0a2376af",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-breadth-ncut-b-mechatronics-engineering-en",
+              "canonicalProgramSha256": "288ad57f7073549fabad3bbe185678b7ce0f9097bd5f9719b954befa055cfab1"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-breadth-ncut-b-mechatronics-engineering-en"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-breadth-ncut-b-mechatronics-engineering-en",
+              "canonicalSourceSha256": "f3d2df76d95d24c787d421f9a864d851d5a0e883e8814a895fc4face4cb27f94",
+              "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-official-source-native-404-and-one-web-fallback-timeout-no-full-date-text",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T09:04:51.178043+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "noHttpStatusOrSnippetDateCertification": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-ncut-b-architecture-en-2026-2027-other",
+          "universityId": "uni-north-china-university-of-technology",
+          "selectionOrigin": "baseQueue17",
+          "programId": "prog-gap-local-strong-ncut-b-architecture-en",
+          "name": "Architecture",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "canonicalCycleSha256": "7e555e5052a4c7a1010491a452b82b91e518452440073f550daa1871e5e27332",
+          "canonicalProgramSha256": "69050b331aa4e8c09a3fdd63fb618db4c60ada8e674c12076fcc6a1e705a23d2",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "7e555e5052a4c7a1010491a452b82b91e518452440073f550daa1871e5e27332",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-ncut-b-architecture-en",
+              "canonicalProgramSha256": "69050b331aa4e8c09a3fdd63fb618db4c60ada8e674c12076fcc6a1e705a23d2"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-strong-ncut-b-architecture-en"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-ncut-b-architecture-en",
+              "canonicalSourceSha256": "9f188fa53ee35e9ac8dacff0d74a46c186f85c0b7812c603c118cbcecd631492",
+              "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-official-source-native-404-and-one-web-fallback-timeout-no-full-date-text",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T09:04:51.178043+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "noHttpStatusOrSnippetDateCertification": true
+        }
+      ]
+    },
+    {
+      "key": "neau-exact-2026-csc-high-level-three-majors-and-award",
+      "universityId": "uni-northeast-agricultural-university",
+      "scope": "2026 CSC High-Level Postgraduate Type B route; Chinese International Chinese Language Education master and CN/EN Animal Husbandry/Food Science doctoral majors.",
+      "evidence": [
+        {
+          "name": "source-02",
+          "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+          "observedAt": "2026-10-19T09:04:51.178043+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+          "contentType": "text/html",
+          "bytes": 172687,
+          "rawPath": "source-02.html",
+          "rawSha256": "ffaa0240a8e42f9849ff6eed6440f23f04c526c974407f74e40e4e58c1532509",
+          "textPath": "source-02.txt",
+          "textSha256": "3b7174a8cbe10046340887b44727712ed872108bce83a4accf5d4719b84bda60",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-native-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "source-03",
+          "url": "https://gjxy.neau.edu.cn/dongbeinongyedaxue2025jielaihualiuxueshengxueshixueweishouyumingdan.pdf",
+          "observedAt": "2026-10-19T09:04:51.178043+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://gjxy.neau.edu.cn/dongbeinongyedaxue2025jielaihualiuxueshengxueshixueweishouyumingdan.pdf",
+          "contentType": "application/pdf",
+          "bytes": 58028,
+          "rawPath": "source-03.pdf",
+          "rawSha256": "cbd81f3f9d697756fcd42c521dddea44d8ffbbe8c843e44a723b323a8eb5b3bc",
+          "captureSucceeded": false,
+          "error": "No module named 'pypdf'",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "captured-original-extraction-in-separate-local-receipt-unrelated-2025-bachelor-graduates",
+          "fullFactsCertified": false,
+          "localExtraction": {
+            "path": "pdf-extraction.json",
+            "sha256": "a08a9f5cd241624a01c1f8a8770486c3c0b827a42a27eba065c9b289c4a1c1aa"
+          },
+          "visualEvidence": {
+            "path": "source-03-page1.png",
+            "sha256": "71e9c2230c22e8d60ad14609b13a5130cac9eef120b36d4878a18bfd6c421d47"
+          }
+        }
+      ],
+      "yearTitle": "2026年东北农业大学中国政府奖学金“高水平研究生项目”招生简章",
+      "quotedDate": "提交申请2025年11月1日—2026年3月15日",
+      "unrelatedSupportingPdfQuote": "东北农业大学2025届来华留学生",
+      "supportingPdfQualification": "The one-page original is a 2025 bachelor degree-award list. It is not 2026 master admissions or deadline evidence; all date/major binding instead uses the complete 2026 HTML guide.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-ne-neau-csc-high-level-postgraduate",
+          "universityId": "uni-northeast-agricultural-university",
+          "selectionOrigin": "baseQueue17",
+          "programId": null,
+          "name": "Chinese Government Scholarship High-Level Postgraduate Program at NEAU",
+          "canonicalScholarshipSha256": "3553179ca9d740b9762ee8be281efdfb026309e5ff7d0fabaacc4e1f06db469a",
+          "canonicalRecordSha256": "3553179ca9d740b9762ee8be281efdfb026309e5ff7d0fabaacc4e1f06db469a",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-ne-neau-international-chinese-education-master",
+              "canonicalProgramSha256": "ce4478a73a05a9c606c263486daeb56f82447bf1dbc150e9dbce216c4c1a2aab"
+            },
+            {
+              "programId": "prog-gap-prog-mew-ne-neau-animal-husbandry-doctorate",
+              "canonicalProgramSha256": "549d1a79893fd91de7e899cf8d47548a427b7b0797e2ee3becc58dc190c19310"
+            },
+            {
+              "programId": "program-northeast-agricultural-university-food-science-doctorate",
+              "canonicalProgramSha256": "1a47c68b59390134ef29b4aad188f98f9b0d1c38e6332d2bf344a0445c5ff9c9"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-ne-neau-csc-high-level-postgraduate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-ne-neau-csc-high-level-postgraduate",
+              "canonicalSourceSha256": "3c4fe21f7a8ed50e4b434126f7e4b04b1d21331a858a5c4a92ac8c69e20a3d63",
+              "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-neau-international-chinese-education-master",
+              "canonicalSourceSha256": "aede2adeacf4a449c382a49644cda30aa2d29ae59d03bc4f48adf9d574d30405",
+              "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-neau-international-chinese-education-master-support-1",
+              "canonicalSourceSha256": "ff4c573903a4f5559029d0a532aaac97ec0a8b6e45aa3346a88093a741b25e45",
+              "url": "https://gjxy.neau.edu.cn/dongbeinongyedaxue2025jielaihualiuxueshengxueshixueweishouyumingdan.pdf"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-neau-animal-husbandry-doctorate",
+              "canonicalSourceSha256": "7feb1d6fae5e6ac3970af1c12bb05ebc1a2ee81a5b8a0a72fd8800ce7ad9aff4",
+              "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-neau-food-science-doctorate",
+              "canonicalSourceSha256": "fec72a61553d21a6a469ce7541e96ddc3ae313b03f1f87b732309988fe76a3fd",
+              "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "result": "closed",
+          "officialDeadline": "2026-03-15",
+          "candidateOfficialDeadline": "2026-03-15",
+          "reason": "same-2026-csc-award-own-student-application-window-and-exact-listed-major",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-11-01",
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+          "evidenceBodySha256": "ffaa0240a8e42f9849ff6eed6440f23f04c526c974407f74e40e4e58c1532509",
+          "observedAt": "2026-10-19T09:04:51.178043+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the explicitly matched 2026 application stage is past; later intakes and programme discontinuation are not inferred.",
+          "quotedDate": "提交申请2025年11月1日—2026年3月15日",
+          "fundingRoute": "Chinese Government Scholarship High-Level Postgraduate Type B; agency10224; complete both CSC and NEAU systems",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactMajorQuote": null,
+          "awardOwnDateNotBorrowed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-neau-animal-husbandry-doctorate-2026-2027-autumn",
+          "universityId": "uni-northeast-agricultural-university",
+          "selectionOrigin": "baseQueue17",
+          "programId": "prog-gap-prog-mew-ne-neau-animal-husbandry-doctorate",
+          "name": "Animal Husbandry",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "doctorate",
+          "canonicalCycleSha256": "ff3f7e0a4579d1c71aa0d1000699ba327c25b17ba2a2613b7c2d883cb919d70e",
+          "canonicalProgramSha256": "549d1a79893fd91de7e899cf8d47548a427b7b0797e2ee3becc58dc190c19310",
+          "storedOpensOn": "2025-11-01",
+          "canonicalRecordSha256": "ff3f7e0a4579d1c71aa0d1000699ba327c25b17ba2a2613b7c2d883cb919d70e",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-ne-neau-animal-husbandry-doctorate",
+              "canonicalProgramSha256": "549d1a79893fd91de7e899cf8d47548a427b7b0797e2ee3becc58dc190c19310"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-neau-animal-husbandry-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-neau-animal-husbandry-doctorate",
+              "canonicalSourceSha256": "7feb1d6fae5e6ac3970af1c12bb05ebc1a2ee81a5b8a0a72fd8800ce7ad9aff4",
+              "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm"
+            }
+          ],
+          "storedDeadline": "2026-03-15",
+          "storedDateStatus": "published",
+          "result": "closed",
+          "officialDeadline": "2026-03-15",
+          "candidateOfficialDeadline": "2026-03-15",
+          "reason": "same-2026-csc-award-own-student-application-window-and-exact-listed-major",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-11-01",
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+          "evidenceBodySha256": "ffaa0240a8e42f9849ff6eed6440f23f04c526c974407f74e40e4e58c1532509",
+          "observedAt": "2026-10-19T09:04:51.178043+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "closureScope": "Only the explicitly matched 2026 application stage is past; later intakes and programme discontinuation are not inferred.",
+          "quotedDate": "提交申请2025年11月1日—2026年3月15日",
+          "fundingRoute": "Chinese Government Scholarship High-Level Postgraduate Type B; agency10224; complete both CSC and NEAU systems",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactMajorQuote": "畜牧学 Animal husbandry",
+          "awardOwnDateNotBorrowed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-neau-food-science-doctorate-2026-2027-autumn",
+          "universityId": "uni-northeast-agricultural-university",
+          "selectionOrigin": "baseQueue17",
+          "programId": "program-northeast-agricultural-university-food-science-doctorate",
+          "name": "Food Science",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "doctorate",
+          "canonicalCycleSha256": "7e3aabd618a91749a9896c3501b6a502a3163038e567a2628dac96461a7eb07a",
+          "canonicalProgramSha256": "1a47c68b59390134ef29b4aad188f98f9b0d1c38e6332d2bf344a0445c5ff9c9",
+          "storedOpensOn": "2025-11-01",
+          "canonicalRecordSha256": "7e3aabd618a91749a9896c3501b6a502a3163038e567a2628dac96461a7eb07a",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-northeast-agricultural-university-food-science-doctorate",
+              "canonicalProgramSha256": "1a47c68b59390134ef29b4aad188f98f9b0d1c38e6332d2bf344a0445c5ff9c9"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-neau-food-science-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-neau-food-science-doctorate",
+              "canonicalSourceSha256": "fec72a61553d21a6a469ce7541e96ddc3ae313b03f1f87b732309988fe76a3fd",
+              "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm"
+            }
+          ],
+          "storedDeadline": "2026-03-15",
+          "storedDateStatus": "published",
+          "result": "closed",
+          "officialDeadline": "2026-03-15",
+          "candidateOfficialDeadline": "2026-03-15",
+          "reason": "same-2026-csc-award-own-student-application-window-and-exact-listed-major",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-11-01",
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+          "evidenceBodySha256": "ffaa0240a8e42f9849ff6eed6440f23f04c526c974407f74e40e4e58c1532509",
+          "observedAt": "2026-10-19T09:04:51.178043+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "closureScope": "Only the explicitly matched 2026 application stage is past; later intakes and programme discontinuation are not inferred.",
+          "quotedDate": "提交申请2025年11月1日—2026年3月15日",
+          "fundingRoute": "Chinese Government Scholarship High-Level Postgraduate Type B; agency10224; complete both CSC and NEAU systems",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactMajorQuote": "食品科学 Food Science",
+          "awardOwnDateNotBorrowed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-neau-international-chinese-education-master-2026-2027-autumn",
+          "universityId": "uni-northeast-agricultural-university",
+          "selectionOrigin": "baseQueue17",
+          "programId": "prog-gap-prog-mew-ne-neau-international-chinese-education-master",
+          "name": "International Chinese Language Education",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "canonicalCycleSha256": "af07a85db0894bb3e3704ab93c3d0e9b272eaaf2246e4672d30963ce430c1a1b",
+          "canonicalProgramSha256": "ce4478a73a05a9c606c263486daeb56f82447bf1dbc150e9dbce216c4c1a2aab",
+          "storedOpensOn": "2025-11-01",
+          "canonicalRecordSha256": "af07a85db0894bb3e3704ab93c3d0e9b272eaaf2246e4672d30963ce430c1a1b",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-ne-neau-international-chinese-education-master",
+              "canonicalProgramSha256": "ce4478a73a05a9c606c263486daeb56f82447bf1dbc150e9dbce216c4c1a2aab"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-neau-international-chinese-education-master",
+            "src-gap-program-prog-mew-ne-neau-international-chinese-education-master-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-neau-international-chinese-education-master",
+              "canonicalSourceSha256": "aede2adeacf4a449c382a49644cda30aa2d29ae59d03bc4f48adf9d574d30405",
+              "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-neau-international-chinese-education-master-support-1",
+              "canonicalSourceSha256": "ff4c573903a4f5559029d0a532aaac97ec0a8b6e45aa3346a88093a741b25e45",
+              "url": "https://gjxy.neau.edu.cn/dongbeinongyedaxue2025jielaihualiuxueshengxueshixueweishouyumingdan.pdf"
+            }
+          ],
+          "storedDeadline": "2026-03-15",
+          "storedDateStatus": "published",
+          "result": "closed",
+          "officialDeadline": "2026-03-15",
+          "candidateOfficialDeadline": "2026-03-15",
+          "reason": "same-2026-csc-award-own-student-application-window-and-exact-listed-major",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-11-01",
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+          "evidenceBodySha256": "ffaa0240a8e42f9849ff6eed6440f23f04c526c974407f74e40e4e58c1532509",
+          "observedAt": "2026-10-19T09:04:51.178043+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "closureScope": "Only the explicitly matched 2026 application stage is past; later intakes and programme discontinuation are not inferred.",
+          "quotedDate": "提交申请2025年11月1日—2026年3月15日",
+          "fundingRoute": "Chinese Government Scholarship High-Level Postgraduate Type B; agency10224; complete both CSC and NEAU systems",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactMajorQuote": "国际中文教育 International Chinese Language Education",
+          "awardOwnDateNotBorrowed": false
+        }
+      ]
+    },
+    {
+      "key": "neepu-current-page-successor-2027-not-rolled-to-2026",
+      "universityId": "uni-northeast-electric-power-university",
+      "scope": "The standing scholarship identity has no stored deadline or academic year; the current original explicitly covers September2027 rather than the historical unanchored June15 wording.",
+      "evidence": [
+        {
+          "name": "source-05",
+          "url": "https://cie.neepu.edu.cn/info/1159/1079.htm",
+          "observedAt": "2026-10-19T09:04:54.263307+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://cie.neepu.edu.cn/info/1159/1079.htm",
+          "contentType": "text/html",
+          "bytes": 23782,
+          "rawPath": "source-05.html",
+          "rawSha256": "b9d33d15184853ecd545bd9dcc0dc58625abc87bc812046e64723cfe7af2e3e8",
+          "textPath": "source-05.txt",
+          "textSha256": "136cdbf2db1bd337ad47516ce7240c74854bc3168baac2931d29852c415c13a2",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-native-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "sourceObservation": {
+        "quotedIntake": "入学时间： 2027年9月。",
+        "quotedDate": "六、申请截止时间：2027年6月1日",
+        "candidateAcademicYear": "2027-2028",
+        "candidateDeadline": "2027-06-01",
+        "appliesToStoredRecord": false,
+        "openingDateUnknown": true,
+        "notAProofApplicationsAreOpen": true,
+        "sourceUrl": "https://cie.neepu.edu.cn/info/1159/1079.htm",
+        "rawPath": "source-05.html",
+        "rawBodySha256": "b9d33d15184853ecd545bd9dcc0dc58625abc87bc812046e64723cfe7af2e3e8",
+        "textPath": "source-05.txt",
+        "textSha256": "136cdbf2db1bd337ad47516ce7240c74854bc3168baac2931d29852c415c13a2",
+        "observedAt": "2026-10-19T09:04:54.263307+00:00",
+        "dateQuoteSha256": "07222209668642d8f80321cc40098c1cffc2bacb6e8459742dc2045dc6ffef0e",
+        "intakeQuoteSha256": "933029346fd101660c3ddb9a253966642df44f16e5fc6367e8352e9eeb091afb",
+        "candidateOpensOn": null,
+        "candidateWindow": {
+          "opening": null,
+          "closing": "2027-06-01",
+          "intake": "September2027"
+        },
+        "sourceRecordId": "sch-gap-sch-mew-nnw-neepu-changbaishan",
+        "sourceCanonicalRecordSha256": "a9294217f4f26c20ff60e6be0a450647f4c2ab894ec6fbc56416e71a44c57922",
+        "originalStoredAcademicYear": null,
+        "originalStoredScope": "Standing Changbaishan scholarship policy with previously unanchored June15; neither this scholarship row nor its empty programme list establishes an original2026 intake.",
+        "status": "held-unapplied-successor-observation-only",
+        "canonicalDateChanged": false
+      },
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nnw-neepu-changbaishan",
+          "universityId": "uni-northeast-electric-power-university",
+          "selectionOrigin": "baseQueue17",
+          "programId": null,
+          "name": "Jilin Provincial Government Changbaishan Scholarship",
+          "canonicalScholarshipSha256": "a9294217f4f26c20ff60e6be0a450647f4c2ab894ec6fbc56416e71a44c57922",
+          "canonicalRecordSha256": "a9294217f4f26c20ff60e6be0a450647f4c2ab894ec6fbc56416e71a44c57922",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nnw-neepu-changbaishan"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nnw-neepu-changbaishan",
+              "canonicalSourceSha256": "70bf9290e467d989fa9a6b45db3a594124a0b32222a4af13b2206ff5b687d1ca",
+              "url": "https://cie.neepu.edu.cn/info/1159/1079.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "current-page-announces-successor-2027-intake-no-2026-window-can-be-reconstructed-from-replaced-standing-page",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://cie.neepu.edu.cn/info/1159/1079.htm",
+          "evidenceBodySha256": "b9d33d15184853ecd545bd9dcc0dc58625abc87bc812046e64723cfe7af2e3e8",
+          "observedAt": "2026-10-19T09:04:54.263307+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "yearQualification": "No stored academicYear exists on this standing scholarship row. The dated current 2027 route is retained as a separate successor candidate; no rollover or current-open assertion.",
+          "candidateSuccessorDeadline": "2027-06-01",
+          "candidateSuccessorDeadlineAppliesToStoredRecord": false,
+          "originalPageDisplayedPublicationDate": "2024-12-31",
+          "publicationMetadataNotUsedAsIntakeYear": true
+        }
+      ]
+    },
+    {
+      "key": "nefu-standing-president-award-april30-without-year",
+      "universityId": "uni-northeast-forestry-university",
+      "scope": "Exact university President award; both registered language pages read. English page gives a month/day only; Chinese page gives no application date.",
+      "evidence": [
+        {
+          "name": "source-06",
+          "url": "https://siee.nefu.edu.cn/English/Scholarships/NEFU_President_Scholarship_.htm",
+          "observedAt": "2026-10-19T09:04:54.573766+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://siee.nefu.edu.cn/English/Scholarships/NEFU_President_Scholarship_.htm",
+          "contentType": "text/html",
+          "bytes": 28414,
+          "rawPath": "source-06.html",
+          "rawSha256": "4f4e9df457b5b70b879d8fd13366d6e6702e7627534dea631100d4d2370af4e4",
+          "textPath": "source-06.txt",
+          "textSha256": "8efb44c2db41220191155b6715ba196c298ad59240984a6f032d955284975bf5",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-native-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "source-07",
+          "url": "https://siee.nefu.edu.cn/jxjxm/dlxzjxj_yxxs_.htm",
+          "observedAt": "2026-10-19T09:04:55.397908+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://siee.nefu.edu.cn/jxjxm/dlxzjxj_yxxs_.htm",
+          "contentType": "text/html",
+          "bytes": 22176,
+          "rawPath": "source-07.html",
+          "rawSha256": "25d3feec8e5c095e76489937ac16f002a8d2a2ac777117558ad63a93c480d690",
+          "textPath": "source-07.txt",
+          "textSha256": "d114844134ad5aa5a5899eff6420ca39d2f024273635eaa4b50281bbdfc2ab17",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-native-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "recurringWording": "Application Dates: before April 30th.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-ne-nefu-president",
+          "universityId": "uni-northeast-forestry-university",
+          "selectionOrigin": "baseQueue17",
+          "programId": null,
+          "name": "NEFU President Scholarship for Outstanding International Students",
+          "canonicalScholarshipSha256": "2935129b88a0262af26193f4c01b673ec23117bea16791ab20fd324c1afce877",
+          "canonicalRecordSha256": "2935129b88a0262af26193f4c01b673ec23117bea16791ab20fd324c1afce877",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-northeast-forestry-university-forestry-bachelor",
+              "canonicalProgramSha256": "b73cbef43c0e088afe0bf569b6c046ac4aeaca9025c1c868988523a7f3e4bcae"
+            },
+            {
+              "programId": "prog-gap-prog-mew-ne-nefu-ecology-master",
+              "canonicalProgramSha256": "ee02051d8d6be28e9587ba6afb849a83694c14a4bda4eb90656d58bd74abee63"
+            },
+            {
+              "programId": "prog-gap-prog-mew-ne-nefu-environmental-engineering-master",
+              "canonicalProgramSha256": "4ba7461496b763d2ed0e405f217148dfe29009044837d11f4b74eda3f335dbff"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-ne-nefu-president",
+            "src-gap-scholarship-sch-mew-ne-nefu-president-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-ne-nefu-president",
+              "canonicalSourceSha256": "b3ab859d8ba5879bf838748bd9743f83a8147980ec5795b8b9e2540926b2552a",
+              "url": "https://siee.nefu.edu.cn/English/Scholarships/NEFU_President_Scholarship_.htm"
+            },
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-ne-nefu-president-support-1",
+              "canonicalSourceSha256": "ff09b1ef0e9dddc601cf35bb4af747fd27b31b6a775083f23006525e09d24ed6",
+              "url": "https://siee.nefu.edu.cn/jxjxm/dlxzjxj_yxxs_.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-award-before-april30-without-explicit-year-not-an-exact-current-cycle-deadline",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://siee.nefu.edu.cn/English/Scholarships/NEFU_President_Scholarship_.htm",
+          "evidenceBodySha256": "4f4e9df457b5b70b879d8fd13366d6e6702e7627534dea631100d4d2370af4e4",
+          "observedAt": "2026-10-19T09:04:54.573766+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "unanchoredMonthDay": "04-30",
+          "strictBeforeWordingRetained": true,
+          "yearQualification": "Neither registered page establishes an explicit dated 2026 or 2027 application window.",
+          "generalAdmissionDeadlineNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "nenu-2026-september-award-school-stage-and-central-stage",
+      "universityId": "uni-northeast-normal-university",
+      "scope": "Both explicitly listed September2026 TCSOL bachelor and one-academic-year Chinese Language and Literature scholarship routes; the exact scholarship guide states two applicant stages.",
+      "evidence": [
+        {
+          "name": "source-11",
+          "url": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+          "observedAt": "2026-10-19T09:04:57.133940+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+          "contentType": "text/html",
+          "bytes": 36683,
+          "rawPath": "source-11.html",
+          "rawSha256": "80d9be0614b98dca9b86f016def420b8612c1e038d8ef7037f68c7db6809cc9e",
+          "textPath": "source-11.txt",
+          "textSha256": "8b698558ace4403b42003040de69f6bc25888e1214e210e3640a3ebe3b12dc83",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-native-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "东北师范大学2026年秋季学期国际中文教师奖学金招生简章",
+      "schoolStageQuote": "即日起至2026年4月30日前，登录东北师范大学国际学生服务系统",
+      "centralStageQuote": "2026年9月入学：学生申请截止日期为5月15日，推荐机构、接收院校审核截止日期为5月25日",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-nenu-2026-iclts-bachelor-language-coverage",
+          "universityId": "uni-northeast-normal-university",
+          "selectionOrigin": "baseQueue17",
+          "programId": null,
+          "name": "International Chinese Language Teachers Scholarship — NENU",
+          "canonicalScholarshipSha256": "e12c392f5d6d23f20914f851d1f109e70446aaf923cd75d8b61236a4d2d9b813",
+          "canonicalRecordSha256": "e12c392f5d6d23f20914f851d1f109e70446aaf923cd75d8b61236a4d2d9b813",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-nenu-2026-bachelor-tcsol",
+              "canonicalProgramSha256": "65eac45f944c2e8e4fb7c45b0c7eae12fbd3a70f8d01241ce8efdd4f886fb8da"
+            },
+            {
+              "programId": "prog-gap-nenu-2026-one-year-chinese-literature",
+              "canonicalProgramSha256": "7d6b32cb143940d7938b4ecf817f96a2f7c491264eba4dd4f26b5ac67a674748"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-nenu-2026-iclts-bachelor-language-coverage"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-nenu-2026-iclts-bachelor-language-coverage",
+              "canonicalSourceSha256": "f5188bcf052a168195418a1deaf336eeddf9f73e6cf90f408a8246909ccbf58c",
+              "url": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm"
+            },
+            {
+              "sourceId": "src-gap-program-nenu-2026-bachelor-tcsol",
+              "canonicalSourceSha256": "9bb1909d18f478a109ab4cecd712072ba65923f2e110eb9a7b1b86c5adf3b920",
+              "url": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm"
+            },
+            {
+              "sourceId": "src-gap-program-nenu-2026-one-year-chinese-literature",
+              "canonicalSourceSha256": "cbc1627b3bb944a558c198e3fc1fc7b49367f8679d84edf5029e2f1ca336fff5",
+              "url": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "result": "closed",
+          "officialDeadline": "2026-04-30",
+          "candidateOfficialDeadline": "2026-04-30",
+          "reason": "same-2026-september-iclts-route-has-mandatory-nenu-host-application-before-april30",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+          "evidenceBodySha256": "80d9be0614b98dca9b86f016def420b8612c1e038d8ef7037f68c7db6809cc9e",
+          "observedAt": "2026-10-19T09:04:57.133940+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the explicitly matched 2026 application stage is past; later intakes and programme discontinuation are not inferred.",
+          "quotedDate": "即日起至2026年4月30日前，登录东北师范大学国际学生服务系统",
+          "fundingRoute": "2026 autumn International Chinese Language Teachers Scholarship; NENU school application stage",
+          "deadlineBoundary": "school-stage-strict-before-April30-wording-no-clock-time-or-inclusive-day-inferred",
+          "officialDeadlineSemantics": "Printed school-stage boundary date in the wording 2026年4月30日前; not a rounded inclusive end-of-day cutoff.",
+          "centralApplicantDeadline": "2026-05-15",
+          "centralInstitutionReviewDeadline": "2026-05-25",
+          "centralStageQuote": "2026年9月入学：学生申请截止日期为5月15日，推荐机构、接收院校审核截止日期为5月25日",
+          "centralReviewDateNotBorrowedAsApplicantDeadline": true,
+          "scopeIntake": "September2026 only; July/December short-term routes excluded",
+          "openingRelativeWording": "即日起",
+          "exactRouteQuote": null,
+          "awardOwnDateNotBorrowed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-nenu-2026-bachelor-tcsol-2026-2027-autumn",
+          "universityId": "uni-northeast-normal-university",
+          "selectionOrigin": "baseQueue17",
+          "programId": "prog-gap-nenu-2026-bachelor-tcsol",
+          "name": "Bachelor of Teaching Chinese to Speakers of Other Languages",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalCycleSha256": "c789f360ecf56445ac45cbfe6d8d2d80ecf99656b57597a4a77a7b159ae441a5",
+          "canonicalProgramSha256": "65eac45f944c2e8e4fb7c45b0c7eae12fbd3a70f8d01241ce8efdd4f886fb8da",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "c789f360ecf56445ac45cbfe6d8d2d80ecf99656b57597a4a77a7b159ae441a5",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-nenu-2026-bachelor-tcsol",
+              "canonicalProgramSha256": "65eac45f944c2e8e4fb7c45b0c7eae12fbd3a70f8d01241ce8efdd4f886fb8da"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-nenu-2026-bachelor-tcsol"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-nenu-2026-bachelor-tcsol",
+              "canonicalSourceSha256": "9bb1909d18f478a109ab4cecd712072ba65923f2e110eb9a7b1b86c5adf3b920",
+              "url": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm"
+            }
+          ],
+          "storedDeadline": "2026-04-30",
+          "storedDateStatus": "published",
+          "result": "closed",
+          "officialDeadline": "2026-04-30",
+          "candidateOfficialDeadline": "2026-04-30",
+          "reason": "same-2026-september-iclts-route-has-mandatory-nenu-host-application-before-april30",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+          "evidenceBodySha256": "80d9be0614b98dca9b86f016def420b8612c1e038d8ef7037f68c7db6809cc9e",
+          "observedAt": "2026-10-19T09:04:57.133940+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "closureScope": "Only the explicitly matched 2026 application stage is past; later intakes and programme discontinuation are not inferred.",
+          "quotedDate": "即日起至2026年4月30日前，登录东北师范大学国际学生服务系统",
+          "fundingRoute": "2026 autumn International Chinese Language Teachers Scholarship; NENU school application stage",
+          "deadlineBoundary": "school-stage-strict-before-April30-wording-no-clock-time-or-inclusive-day-inferred",
+          "officialDeadlineSemantics": "Printed school-stage boundary date in the wording 2026年4月30日前; not a rounded inclusive end-of-day cutoff.",
+          "centralApplicantDeadline": "2026-05-15",
+          "centralInstitutionReviewDeadline": "2026-05-25",
+          "centralStageQuote": "2026年9月入学：学生申请截止日期为5月15日，推荐机构、接收院校审核截止日期为5月25日",
+          "centralReviewDateNotBorrowedAsApplicantDeadline": true,
+          "scopeIntake": "September2026 only; July/December short-term routes excluded",
+          "openingRelativeWording": "即日起",
+          "exactRouteQuote": "汉语国际教育专业本科生",
+          "awardOwnDateNotBorrowed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-nenu-2026-one-year-chinese-literature-2026-2027-autumn",
+          "universityId": "uni-northeast-normal-university",
+          "selectionOrigin": "baseQueue17",
+          "programId": "prog-gap-nenu-2026-one-year-chinese-literature",
+          "name": "One-year Chinese Language and Literature Study",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "language",
+          "canonicalCycleSha256": "9972caada7f26d06e872c953ee833e3ad447d492d8132704202f5829831f7752",
+          "canonicalProgramSha256": "7d6b32cb143940d7938b4ecf817f96a2f7c491264eba4dd4f26b5ac67a674748",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "9972caada7f26d06e872c953ee833e3ad447d492d8132704202f5829831f7752",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-nenu-2026-one-year-chinese-literature",
+              "canonicalProgramSha256": "7d6b32cb143940d7938b4ecf817f96a2f7c491264eba4dd4f26b5ac67a674748"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-nenu-2026-one-year-chinese-literature"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-nenu-2026-one-year-chinese-literature",
+              "canonicalSourceSha256": "cbc1627b3bb944a558c198e3fc1fc7b49367f8679d84edf5029e2f1ca336fff5",
+              "url": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm"
+            }
+          ],
+          "storedDeadline": "2026-04-30",
+          "storedDateStatus": "published",
+          "result": "closed",
+          "officialDeadline": "2026-04-30",
+          "candidateOfficialDeadline": "2026-04-30",
+          "reason": "same-2026-september-iclts-route-has-mandatory-nenu-host-application-before-april30",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+          "evidenceBodySha256": "80d9be0614b98dca9b86f016def420b8612c1e038d8ef7037f68c7db6809cc9e",
+          "observedAt": "2026-10-19T09:04:57.133940+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "closureScope": "Only the explicitly matched 2026 application stage is past; later intakes and programme discontinuation are not inferred.",
+          "quotedDate": "即日起至2026年4月30日前，登录东北师范大学国际学生服务系统",
+          "fundingRoute": "2026 autumn International Chinese Language Teachers Scholarship; NENU school application stage",
+          "deadlineBoundary": "school-stage-strict-before-April30-wording-no-clock-time-or-inclusive-day-inferred",
+          "officialDeadlineSemantics": "Printed school-stage boundary date in the wording 2026年4月30日前; not a rounded inclusive end-of-day cutoff.",
+          "centralApplicantDeadline": "2026-05-15",
+          "centralInstitutionReviewDeadline": "2026-05-25",
+          "centralStageQuote": "2026年9月入学：学生申请截止日期为5月15日，推荐机构、接收院校审核截止日期为5月25日",
+          "centralReviewDateNotBorrowedAsApplicantDeadline": true,
+          "scopeIntake": "September2026 only; July/December short-term routes excluded",
+          "openingRelativeWording": "即日起",
+          "exactRouteQuote": "汉语言文学、中国历史、中国哲学等方向",
+          "awardOwnDateNotBorrowed": false
+        }
+      ]
+    },
+    {
+      "key": "nwupl-2026-five-programmes-two-municipal-awards-one-distinct-university-award",
+      "universityId": "uni-northwest-university-of-political-science-and-law",
+      "scope": "2026 autumn law bachelor/master/doctor, cross-border e-commerce bachelor, Chinese language route and two separately named Xi’an awards that explicitly require concurrent admission/award submission. University Belt and Road award remains separate.",
+      "evidence": [
+        {
+          "name": "source-12",
+          "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+          "observedAt": "2026-10-19T09:04:57.818333+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+          "contentType": "text/html",
+          "bytes": 71259,
+          "rawPath": "source-12.html",
+          "rawSha256": "00643e0fcd4e455a38af47a7ec30d715048de3e698f889719ea92ebd55d2d8fd",
+          "textPath": "source-12.txt",
+          "textSha256": "371517f654beb510a2f63a9f07ab2dca4fbce024c2530c80f1737c108927b65e",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-native-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "source-13",
+          "url": "https://gjc.nwupl.edu.cn/lhlh/zcfg/87727.htm",
+          "observedAt": "2026-10-19T09:04:58.374434+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://gjc.nwupl.edu.cn/lhlh/zcfg/87727.htm",
+          "contentType": "text/html",
+          "bytes": 37395,
+          "rawPath": "source-13.html",
+          "rawSha256": "0fc7881c4b17071f23ffee691d9d2837b5da35b0253f6d0ec620f4ec75a047c3",
+          "textPath": "source-13.txt",
+          "textSha256": "a91591498c05efd8a78ce8cd8be43356e282c3d55dd41991ac0b8ef0a94823fb",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-native-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "西北政法大学2026年秋季学期来华留学生招生简章",
+      "quotedDate": "即日起至2026年6月20日止。",
+      "alsoBeforeDateWording": "6月20日前在学校招生平台上填写信息、上传全部材料，并完成提交；",
+      "majorQuotes": [
+        "本科生：法学、跨境电子商务",
+        "硕士研究生：法学、经济学、管理学",
+        "博士研究生：法学（可英文授课）",
+        "我校同时开展来华留学生汉语进修项目"
+      ],
+      "awardConcurrentQuote": "留学生须在提交入学申请的同时，提交该奖学金申请。",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nnw-nwupl-central-asian-five-countries",
+          "universityId": "uni-northwest-university-of-political-science-and-law",
+          "selectionOrigin": "baseQueue17",
+          "programId": null,
+          "name": "Xi'an Central Asian Five Countries Education and Training Plan Scholarship",
+          "canonicalScholarshipSha256": "734f928985d9a50aec415c5e9156441393bb111a11533c0e00f66ddb18be8fce",
+          "canonicalRecordSha256": "734f928985d9a50aec415c5e9156441393bb111a11533c0e00f66ddb18be8fce",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nnw-nwupl-law-master",
+              "canonicalProgramSha256": "fee0378131dd60c4ea0bafbb2bed05008759955d729e54720f58a6da1e09dc95"
+            },
+            {
+              "programId": "prog-gap-prog-mew-nnw-nwupl-law-doctorate",
+              "canonicalProgramSha256": "a999f206c6c4e1df3a6dc8d165118e7178acf961f6fbd776acc2cf479dd8b32b"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nnw-nwupl-central-asian-five-countries"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nnw-nwupl-central-asian-five-countries",
+              "canonicalSourceSha256": "42a23f363f05419a82d5bb66e9ce63fff50e2de79eee38871831ef07af793806",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nwupl-law-master",
+              "canonicalSourceSha256": "40a6264f2a0d21835ce211d357c8e46d8a1441e6c4beaa6f485924ec549728b7",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nwupl-law-doctorate",
+              "canonicalSourceSha256": "220ea952507b0c03e513edc486b8ef3836f831b4cc7d81138605c44850998038",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-20",
+          "candidateOfficialDeadline": "2026-06-20",
+          "reason": "exact-2026-autumn-programme-or-explicit-concurrent-municipal-award-application-boundary",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+          "evidenceBodySha256": "00643e0fcd4e455a38af47a7ec30d715048de3e698f889719ea92ebd55d2d8fd",
+          "observedAt": "2026-10-19T09:04:57.818333+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the explicitly matched 2026 application stage is past; later intakes and programme discontinuation are not inferred.",
+          "quotedDate": "即日起至2026年6月20日止。",
+          "alsoBeforeDateWording": "6月20日前在学校招生平台上填写信息、上传全部材料，并完成提交；",
+          "deadlineBoundary": "page-has-until-June20-and-before-June20-wording-no-clock-time-or-inclusive-day-resolved",
+          "officialDeadlineSemantics": "Printed June20 application boundary; the guide also says 6月20日前 in the submission step. Both source phrases are retained without inventing clock precision.",
+          "openingRelativeWording": "即日起",
+          "awardOwnConcurrentDateRule": "留学生须在提交入学申请的同时，提交该奖学金申请。",
+          "awardOwnDateNotBorrowed": true,
+          "awardIdentityQuote": "西安市“中亚五国”留学生教育培训计划项目专项奖学金"
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nnw-nwupl-xian-belt-road",
+          "universityId": "uni-northwest-university-of-political-science-and-law",
+          "selectionOrigin": "baseQueue17",
+          "programId": null,
+          "name": "Xi'an Belt and Road International Student Scholarship",
+          "canonicalScholarshipSha256": "3f351060f4c0230a27d7b832d1b1516555508d0211cc6d173836e5bad2ae53dd",
+          "canonicalRecordSha256": "3f351060f4c0230a27d7b832d1b1516555508d0211cc6d173836e5bad2ae53dd",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nnw-nwupl-chinese-language",
+              "canonicalProgramSha256": "cb89bcf592eba0bd74a8b9657021eca3775ec3baea4e8f7364baf91f80faf07a"
+            },
+            {
+              "programId": "prog-gap-prog-mew-nnw-nwupl-law-master",
+              "canonicalProgramSha256": "fee0378131dd60c4ea0bafbb2bed05008759955d729e54720f58a6da1e09dc95"
+            },
+            {
+              "programId": "prog-gap-prog-mew-nnw-nwupl-law-doctorate",
+              "canonicalProgramSha256": "a999f206c6c4e1df3a6dc8d165118e7178acf961f6fbd776acc2cf479dd8b32b"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nnw-nwupl-xian-belt-road"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nnw-nwupl-xian-belt-road",
+              "canonicalSourceSha256": "d1bffc23028d2e5335136c211a3bec766a59a41a12745d475ab81f0f8a1c007a",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nwupl-chinese-language",
+              "canonicalSourceSha256": "d290b13439acfeae677a2f388a2a739a7abc348251e9b3cfc32859e3d2806d54",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nwupl-law-master",
+              "canonicalSourceSha256": "40a6264f2a0d21835ce211d357c8e46d8a1441e6c4beaa6f485924ec549728b7",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nwupl-law-doctorate",
+              "canonicalSourceSha256": "220ea952507b0c03e513edc486b8ef3836f831b4cc7d81138605c44850998038",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-20",
+          "candidateOfficialDeadline": "2026-06-20",
+          "reason": "exact-2026-autumn-programme-or-explicit-concurrent-municipal-award-application-boundary",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+          "evidenceBodySha256": "00643e0fcd4e455a38af47a7ec30d715048de3e698f889719ea92ebd55d2d8fd",
+          "observedAt": "2026-10-19T09:04:57.818333+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the explicitly matched 2026 application stage is past; later intakes and programme discontinuation are not inferred.",
+          "quotedDate": "即日起至2026年6月20日止。",
+          "alsoBeforeDateWording": "6月20日前在学校招生平台上填写信息、上传全部材料，并完成提交；",
+          "deadlineBoundary": "page-has-until-June20-and-before-June20-wording-no-clock-time-or-inclusive-day-resolved",
+          "officialDeadlineSemantics": "Printed June20 application boundary; the guide also says 6月20日前 in the submission step. Both source phrases are retained without inventing clock precision.",
+          "openingRelativeWording": "即日起",
+          "awardOwnConcurrentDateRule": "留学生须在提交入学申请的同时，提交该奖学金申请。",
+          "awardOwnDateNotBorrowed": true,
+          "awardIdentityQuote": "西安市“一带一路”外国留学生奖学金"
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-2-nwupl-belt-road-scholarship",
+          "universityId": "uni-northwest-university-of-political-science-and-law",
+          "selectionOrigin": "baseQueue17",
+          "programId": null,
+          "name": "NWUPL Belt and Road International Student Scholarship",
+          "canonicalScholarshipSha256": "6a1e619e562fdcd4c6c7af9569bd72c54ec83f7748142cf040088c14dead5abc",
+          "canonicalRecordSha256": "6a1e619e562fdcd4c6c7af9569bd72c54ec83f7748142cf040088c14dead5abc",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-nwupl-law-bachelor",
+              "canonicalProgramSha256": "1120404d8980353f30baa310f3efc9196bffb64b37ea6c1a9bdaf207863b0295"
+            },
+            {
+              "programId": "prog-gap-wave8-2-nwupl-cross-border-ecommerce-bachelor",
+              "canonicalProgramSha256": "a07431af30a243d7e9f59501ad5b9fda819c1fe9dadfb37978ec5f3948a42c69"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-2-nwupl-belt-road-scholarship",
+            "src-gap-scholarship-wave8-2-nwupl-belt-road-scholarship-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-2-nwupl-belt-road-scholarship",
+              "canonicalSourceSha256": "64ed185e3e4369e263f5aedac3f6ef700f54a362b5d31e708a06810ddb581aea",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/zcfg/87727.htm"
+            },
+            {
+              "sourceId": "src-gap-scholarship-wave8-2-nwupl-belt-road-scholarship-support-1",
+              "canonicalSourceSha256": "dbb3834193d1e82ef30778c010cf9c0f01b170540737a36ac9861e6b0fabe2fb",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-2-nwupl-law-bachelor",
+              "canonicalSourceSha256": "5c6773fd421c886dd10e0ec9a79296a57c24d6bf86fd51153877eb4bb335cb4e",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave8-2-nwupl-cross-border-ecommerce-bachelor",
+              "canonicalSourceSha256": "a18f33937e43eb38487bdbb21ec212a06ede7bb4e55949041ecdb900ecf6cd6d",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "distinct-university-award-current-2026-guide-says-second-year-eligibility-while-standing-rules-contain-pre-admission-and-term-based-stages-no-current-exact-window",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+          "evidenceBodySha256": "00643e0fcd4e455a38af47a7ec30d715048de3e698f889719ea92ebd55d2d8fd",
+          "observedAt": "2026-10-19T09:04:57.818333+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "currentGuideQuote": "资助对象为本、硕、博层次留学生，学生入学后第二年开始可根据条件申请。",
+          "standingBasicAwardQuote": "基础奖学金采取入学前申请的方式",
+          "standingLivingAllowanceQuote": "学生在开学一周内向国际交流与合作处（国际教育学院）提交生活补贴申请。",
+          "generalAdmissionDeadlineNotBorrowed": "2026-06-20",
+          "yearQualification": "Standing policy has no dated current award window. Its pre-admission/basic and term/living rules are not merged with the 2026 second-year statement or municipal awards."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nnw-nwupl-chinese-language-2026-2027-autumn-fee-reference",
+          "universityId": "uni-northwest-university-of-political-science-and-law",
+          "selectionOrigin": "baseQueue17",
+          "programId": "prog-gap-prog-mew-nnw-nwupl-chinese-language",
+          "name": "Chinese Language Program",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "language",
+          "canonicalCycleSha256": "0b41593b59953f39d664a92be1b8a701b5d369452003253fc2de31cc6dc9c8b5",
+          "canonicalProgramSha256": "cb89bcf592eba0bd74a8b9657021eca3775ec3baea4e8f7364baf91f80faf07a",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "0b41593b59953f39d664a92be1b8a701b5d369452003253fc2de31cc6dc9c8b5",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nnw-nwupl-chinese-language",
+              "canonicalProgramSha256": "cb89bcf592eba0bd74a8b9657021eca3775ec3baea4e8f7364baf91f80faf07a"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nnw-nwupl-chinese-language"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nwupl-chinese-language",
+              "canonicalSourceSha256": "d290b13439acfeae677a2f388a2a739a7abc348251e9b3cfc32859e3d2806d54",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-20",
+          "candidateOfficialDeadline": "2026-06-20",
+          "reason": "exact-2026-autumn-programme-or-explicit-concurrent-municipal-award-application-boundary",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+          "evidenceBodySha256": "00643e0fcd4e455a38af47a7ec30d715048de3e698f889719ea92ebd55d2d8fd",
+          "observedAt": "2026-10-19T09:04:57.818333+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the explicitly matched 2026 application stage is past; later intakes and programme discontinuation are not inferred.",
+          "quotedDate": "即日起至2026年6月20日止。",
+          "alsoBeforeDateWording": "6月20日前在学校招生平台上填写信息、上传全部材料，并完成提交；",
+          "deadlineBoundary": "page-has-until-June20-and-before-June20-wording-no-clock-time-or-inclusive-day-resolved",
+          "officialDeadlineSemantics": "Printed June20 application boundary; the guide also says 6月20日前 in the submission step. Both source phrases are retained without inventing clock precision.",
+          "openingRelativeWording": "即日起",
+          "awardOwnConcurrentDateRule": null,
+          "awardOwnDateNotBorrowed": false,
+          "awardIdentityQuote": null
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-2-nwupl-cross-border-ecommerce-bachelor-2026-2027-autumn",
+          "universityId": "uni-northwest-university-of-political-science-and-law",
+          "selectionOrigin": "additionalSameSource4",
+          "programId": "prog-gap-wave8-2-nwupl-cross-border-ecommerce-bachelor",
+          "name": "Cross-Border E-Commerce (Bachelor's Program)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalCycleSha256": "7826763a4aa06a6b1b652264f2b5f1278d83375499c37af19fccdfdcb07381c8",
+          "canonicalProgramSha256": "a07431af30a243d7e9f59501ad5b9fda819c1fe9dadfb37978ec5f3948a42c69",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "7826763a4aa06a6b1b652264f2b5f1278d83375499c37af19fccdfdcb07381c8",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-nwupl-cross-border-ecommerce-bachelor",
+              "canonicalProgramSha256": "a07431af30a243d7e9f59501ad5b9fda819c1fe9dadfb37978ec5f3948a42c69"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave8-2-nwupl-cross-border-ecommerce-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-2-nwupl-cross-border-ecommerce-bachelor",
+              "canonicalSourceSha256": "a18f33937e43eb38487bdbb21ec212a06ede7bb4e55949041ecdb900ecf6cd6d",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            }
+          ],
+          "storedDeadline": "2026-06-20",
+          "storedDateStatus": "published",
+          "result": "closed",
+          "officialDeadline": "2026-06-20",
+          "candidateOfficialDeadline": "2026-06-20",
+          "reason": "exact-2026-autumn-programme-or-explicit-concurrent-municipal-award-application-boundary",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+          "evidenceBodySha256": "00643e0fcd4e455a38af47a7ec30d715048de3e698f889719ea92ebd55d2d8fd",
+          "observedAt": "2026-10-19T09:04:57.818333+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "closureScope": "Only the explicitly matched 2026 application stage is past; later intakes and programme discontinuation are not inferred.",
+          "quotedDate": "即日起至2026年6月20日止。",
+          "alsoBeforeDateWording": "6月20日前在学校招生平台上填写信息、上传全部材料，并完成提交；",
+          "deadlineBoundary": "page-has-until-June20-and-before-June20-wording-no-clock-time-or-inclusive-day-resolved",
+          "officialDeadlineSemantics": "Printed June20 application boundary; the guide also says 6月20日前 in the submission step. Both source phrases are retained without inventing clock precision.",
+          "openingRelativeWording": "即日起",
+          "awardOwnConcurrentDateRule": null,
+          "awardOwnDateNotBorrowed": false,
+          "awardIdentityQuote": null
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nnw-nwupl-law-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-northwest-university-of-political-science-and-law",
+          "selectionOrigin": "additionalSameSource4",
+          "programId": "prog-gap-prog-mew-nnw-nwupl-law-master",
+          "name": "Law",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "canonicalCycleSha256": "d6a4ad610468f2bec5e7513b656f77e9335bb74580bb2ac61fc7f8215f7b9b2c",
+          "canonicalProgramSha256": "fee0378131dd60c4ea0bafbb2bed05008759955d729e54720f58a6da1e09dc95",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "d6a4ad610468f2bec5e7513b656f77e9335bb74580bb2ac61fc7f8215f7b9b2c",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nnw-nwupl-law-master",
+              "canonicalProgramSha256": "fee0378131dd60c4ea0bafbb2bed05008759955d729e54720f58a6da1e09dc95"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nnw-nwupl-law-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nwupl-law-master",
+              "canonicalSourceSha256": "40a6264f2a0d21835ce211d357c8e46d8a1441e6c4beaa6f485924ec549728b7",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-20",
+          "candidateOfficialDeadline": "2026-06-20",
+          "reason": "exact-2026-autumn-programme-or-explicit-concurrent-municipal-award-application-boundary",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+          "evidenceBodySha256": "00643e0fcd4e455a38af47a7ec30d715048de3e698f889719ea92ebd55d2d8fd",
+          "observedAt": "2026-10-19T09:04:57.818333+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the explicitly matched 2026 application stage is past; later intakes and programme discontinuation are not inferred.",
+          "quotedDate": "即日起至2026年6月20日止。",
+          "alsoBeforeDateWording": "6月20日前在学校招生平台上填写信息、上传全部材料，并完成提交；",
+          "deadlineBoundary": "page-has-until-June20-and-before-June20-wording-no-clock-time-or-inclusive-day-resolved",
+          "officialDeadlineSemantics": "Printed June20 application boundary; the guide also says 6月20日前 in the submission step. Both source phrases are retained without inventing clock precision.",
+          "openingRelativeWording": "即日起",
+          "awardOwnConcurrentDateRule": null,
+          "awardOwnDateNotBorrowed": false,
+          "awardIdentityQuote": null
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nnw-nwupl-law-doctorate-2026-2027-autumn-fee-reference",
+          "universityId": "uni-northwest-university-of-political-science-and-law",
+          "selectionOrigin": "additionalSameSource4",
+          "programId": "prog-gap-prog-mew-nnw-nwupl-law-doctorate",
+          "name": "Law",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "doctorate",
+          "canonicalCycleSha256": "2d3893215a59428e01fd1ae7535e07c5699f39a350725f5cb014b7a9b78cf081",
+          "canonicalProgramSha256": "a999f206c6c4e1df3a6dc8d165118e7178acf961f6fbd776acc2cf479dd8b32b",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "2d3893215a59428e01fd1ae7535e07c5699f39a350725f5cb014b7a9b78cf081",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nnw-nwupl-law-doctorate",
+              "canonicalProgramSha256": "a999f206c6c4e1df3a6dc8d165118e7178acf961f6fbd776acc2cf479dd8b32b"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nnw-nwupl-law-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nnw-nwupl-law-doctorate",
+              "canonicalSourceSha256": "220ea952507b0c03e513edc486b8ef3836f831b4cc7d81138605c44850998038",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-20",
+          "candidateOfficialDeadline": "2026-06-20",
+          "reason": "exact-2026-autumn-programme-or-explicit-concurrent-municipal-award-application-boundary",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+          "evidenceBodySha256": "00643e0fcd4e455a38af47a7ec30d715048de3e698f889719ea92ebd55d2d8fd",
+          "observedAt": "2026-10-19T09:04:57.818333+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the explicitly matched 2026 application stage is past; later intakes and programme discontinuation are not inferred.",
+          "quotedDate": "即日起至2026年6月20日止。",
+          "alsoBeforeDateWording": "6月20日前在学校招生平台上填写信息、上传全部材料，并完成提交；",
+          "deadlineBoundary": "page-has-until-June20-and-before-June20-wording-no-clock-time-or-inclusive-day-resolved",
+          "officialDeadlineSemantics": "Printed June20 application boundary; the guide also says 6月20日前 in the submission step. Both source phrases are retained without inventing clock precision.",
+          "openingRelativeWording": "即日起",
+          "awardOwnConcurrentDateRule": null,
+          "awardOwnDateNotBorrowed": false,
+          "awardIdentityQuote": null
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-2-nwupl-law-bachelor-2026-2027-autumn",
+          "universityId": "uni-northwest-university-of-political-science-and-law",
+          "selectionOrigin": "additionalSameSource4",
+          "programId": "prog-gap-wave8-2-nwupl-law-bachelor",
+          "name": "Law (Bachelor's Program)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalCycleSha256": "de1e1633a444b80097f041a87bb92283678e758c8de455edc8fe879a3f7eee28",
+          "canonicalProgramSha256": "1120404d8980353f30baa310f3efc9196bffb64b37ea6c1a9bdaf207863b0295",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "de1e1633a444b80097f041a87bb92283678e758c8de455edc8fe879a3f7eee28",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-nwupl-law-bachelor",
+              "canonicalProgramSha256": "1120404d8980353f30baa310f3efc9196bffb64b37ea6c1a9bdaf207863b0295"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave8-2-nwupl-law-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-2-nwupl-law-bachelor",
+              "canonicalSourceSha256": "5c6773fd421c886dd10e0ec9a79296a57c24d6bf86fd51153877eb4bb335cb4e",
+              "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm"
+            }
+          ],
+          "storedDeadline": "2026-06-20",
+          "storedDateStatus": "published",
+          "result": "closed",
+          "officialDeadline": "2026-06-20",
+          "candidateOfficialDeadline": "2026-06-20",
+          "reason": "exact-2026-autumn-programme-or-explicit-concurrent-municipal-award-application-boundary",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "evidenceSourceUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+          "evidenceBodySha256": "00643e0fcd4e455a38af47a7ec30d715048de3e698f889719ea92ebd55d2d8fd",
+          "observedAt": "2026-10-19T09:04:57.818333+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "closureScope": "Only the explicitly matched 2026 application stage is past; later intakes and programme discontinuation are not inferred.",
+          "quotedDate": "即日起至2026年6月20日止。",
+          "alsoBeforeDateWording": "6月20日前在学校招生平台上填写信息、上传全部材料，并完成提交；",
+          "deadlineBoundary": "page-has-until-June20-and-before-June20-wording-no-clock-time-or-inclusive-day-resolved",
+          "officialDeadlineSemantics": "Printed June20 application boundary; the guide also says 6月20日前 in the submission step. Both source phrases are retained without inventing clock precision.",
+          "openingRelativeWording": "即日起",
+          "awardOwnConcurrentDateRule": null,
+          "awardOwnDateNotBorrowed": false,
+          "awardIdentityQuote": null
+        }
+      ]
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "reportSha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "batch": "official-batch-025",
+      "reportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f"
+    },
+    {
+      "batch": "official-batch-026",
+      "reportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9"
+    },
+    {
+      "batch": "official-batch-027",
+      "reportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+    }
+  ],
+  "precisionIssues": [
+    {
+      "universityId": "uni-northeast-normal-university",
+      "issue": "School-stage 2026年4月30日前 is strict-before wording; printed boundary retained without inclusive-day or clock-time assumption. Central September applicant deadline May15 differs from institution review May25."
+    },
+    {
+      "universityId": "uni-northwest-university-of-political-science-and-law",
+      "issue": "2026 guide says both 至2026年6月20日止 and 6月20日前. June20 boundary retained; inclusive/exclusive or intraday precision is not adjudicated."
+    }
+  ],
+  "validation": {
+    "exact21IdsCoveredOnce": true,
+    "allSixCanonicalInputsUnchanged": true,
+    "inventoryAndPriorSummaryHashesUnchanged": true,
+    "noPriorAssessedOrApprovedIdReplay": true,
+    "extensionFourIdsAndCanonicalRowsMatched": true,
+    "allRowParentProgrammeAndSourceHashesPinned": true,
+    "rawOriginalAndDerivedTextHashesVerified": true,
+    "dateQuotesMatchSavedText": true,
+    "closedDatesAreExplicitPastIsoDays": true,
+    "openingDatesAreCandidatesOnly": true,
+    "pdfFirstPageRenderedAndVisuallyInspected": true,
+    "reportIsSourceOnly": true
+  }
+}

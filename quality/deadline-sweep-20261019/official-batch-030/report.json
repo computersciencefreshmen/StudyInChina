@@ -1,0 +1,1689 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-030-20261019",
+  "state": "completed-ten-scoped-past-windows-four-unknown-three-blocked",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T11:47:41.106Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v7.json",
+  "targetQueueSha256": "eeb500d880d56d97fc7145542a31273047f77b23852a62857a74f428a791ad5b",
+  "selectionSha256": "6d320157f4c1f945aa9cdbf3c5911a5c94d9f6e3c633c74e30ce82311bf329db",
+  "selectedUniversityIds": [
+    "uni-shandong-jianzhu-university",
+    "uni-shandong-normal-university",
+    "uni-shandong-university",
+    "uni-shandong-university-of-finance-and-economics",
+    "uni-shandong-university-of-traditional-chinese-medicine",
+    "uni-shanghai-lixin-university-of-accounting-and-finance",
+    "uni-shanghai-maritime-university",
+    "uni-shanghai-ocean-university"
+  ],
+  "selection": {
+    "baseQueueRecords": 15,
+    "additionalSameSourceRecords": 2,
+    "totalRecords": 17,
+    "baseQueueRecordIds": [
+      "sch-gap-breadth-sch-sdjzu-shandong-provincial",
+      "sch-gap-breadth-sch-sdjzu-university",
+      "sch-gap-wave8-sdnu-international-chinese-language-teachers-scholarship-2026",
+      "sch-gap-wave8-sdu-csc-type-b",
+      "sch-gap-wave3-sdufe-english-undergraduate-special-scholarship",
+      "cycle-gap-wave3-sdufe-international-economics-trade-english-bachelor-2026-2027-autumn",
+      "sch-gap-mve-ecma-sdutcm-president-scholarship-2026",
+      "cycle-gap-mve-ecma-sdutcm-acupuncture-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-ecma-sdutcm-materia-medica-doctorate-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-ecma-sdutcm-tcm-bachelor-2026-2027-autumn-fee-reference",
+      "sch-gap-wave8-lixin-shanghai-government-scholarship",
+      "sch-gap-sch-shmtu-shanghai-government-2026",
+      "sch-gap-mve-jzh-shou-csc-high-level-2026",
+      "cycle-gap-mve-jzh-shou-food-science-master-2026-2027-autumn",
+      "cycle-gap-mve-jzh-shou-marine-science-doctorate-2026-2027-autumn"
+    ],
+    "additionalSameSourceRecordIds": [
+      "cycle-gap-local-strong-sdjzu-b-civil-engineering-en-2026-2027-other-fee-reference",
+      "cycle-gap-local-strong-sdjzu-b-civil-engineering-en-2026-2027-autumn"
+    ],
+    "extensionReceipt": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-0900/additional-same-source-selection-v1.json",
+      "sha256": "4891483ce89720eeac5ae1ef1cf92056e4067a8aa54058b7c6e40a6642361bbb"
+    }
+  },
+  "acquisition": {
+    "registeredDistinctUrlsAttempted": 10,
+    "derivedExactOriginalUrlsAttempted": 2,
+    "nativeOriginRequests": 12,
+    "webFallbackRequests": 1,
+    "rawBodiesSaved": 11,
+    "bodyInterpretation": "Nine readable registered HTML originals; one exact guide-image original; one linked-PDF captcha HTML; one registered-source TLS failure. Registration wrappers and captcha are not date proof.",
+    "skippedDateIrrelevantSupportingUrls": [
+      "https://www.sdjzu.edu.cn/english/International_Admissions/Academic_Education/Fees.htm",
+      "https://www.sdjzu.edu.cn/gjjy/xygk.htm"
+    ],
+    "captureManifestPins": [
+      {
+        "path": "captures.json",
+        "sha256": "ca9c1b8121bb44bf36f8f0287ca6ea39df16b702f2f0e2302370ba8f5a3e8fd6"
+      },
+      {
+        "path": "derived-captures.json",
+        "sha256": "a80768616fd289ec6b0617c1a4273a9f7d144e25dfbbb2ea4414f9d2da91625a"
+      }
+    ],
+    "diagnostics": {
+      "path": "acquisition-diagnostics.json",
+      "sha256": "5a7d4a7d570a31bf837023f7bc8bb1586009fe81b71f2c3aa15daba321a90ece"
+    },
+    "fallbackPin": {
+      "path": "sdnu-web-fallback.json",
+      "sha256": "3bfe3f6c3295df9cf2fbe666e7d0a2ebf96d1a681953d1d00e0b09a4ea72fe03"
+    },
+    "visualTranscriptPin": {
+      "path": "sdu-csc-visual-transcript.json",
+      "sha256": "cac359a553576f1eb402c92de4c4295306ed7a5b8c864c91232ba4ec33cb14a8"
+    },
+    "paidModelCalls": 0,
+    "tlsCertificateValidation": true
+  },
+  "summary": {
+    "schoolsAttempted": 8,
+    "recordsAssessed": 17,
+    "baseQueueRecords": 15,
+    "additionalSameSourceRecords": 2,
+    "admissionCyclesAssessed": 8,
+    "scholarshipsAssessed": 9,
+    "recordResults": {
+      "unknown": 4,
+      "blocked": 3,
+      "closed": 10
+    },
+    "newExactPastDeadlineCandidatesFromStoredNull": 7,
+    "existingExpiredDatesScoped": 3,
+    "independentAwardPastDeadlineCandidates": 4,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "rules": [
+    "Candidate-only source observations. No canonical date, status, publication or whole-record freshness changed.",
+    "Unknown and blocked dates do not establish open/closed availability. Failed and captcha paths enter cooldown.",
+    "Past dates bind only the explicitly matched year, programme degree/language and funding route. No programme discontinuation is inferred.",
+    "Standalone awards do not borrow general admission deadlines. Month-only, registration and relative opening wording do not become exact dates.",
+    "Lixin 2020 window is historical context only. SDJZU linked-PDF HTTP200 is captcha HTML and proves no guide contents.",
+    "Any later canonical mutation needs a supported narrow consumer, independent approval and exact-row compare-and-swap."
+  ],
+  "groups": [
+    {
+      "key": "sdjzu-two-independent-awards-and-two-civil-cycle-holds",
+      "universityId": "uni-shandong-jianzhu-university",
+      "scope": "Two independently named awards have no separate current day; two English Civil Engineering cycle bindings cannot be established from unread image tables and a captcha-blocked linked prospectus.",
+      "evidence": [
+        {
+          "name": "sdjzu-scholarship",
+          "url": "https://www.sdjzu.edu.cn/english/International_Admissions/Academic_Education/Scholarship_policy.htm",
+          "observedAt": "2026-10-19T09:04:53.690428+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.sdjzu.edu.cn/english/International_Admissions/Academic_Education/Scholarship_policy.htm",
+          "contentType": "text/html",
+          "bytes": 25154,
+          "rawPath": "sdjzu-scholarship.html",
+          "rawSha256": "37a2f8b125d31c3deb7de413f2d76e8060727339d21020ef8f8cec4b052f6cab",
+          "textPath": "sdjzu-scholarship.txt",
+          "textSha256": "5d2be915534e02f138a96f1a7df939e72945d9f18552cf2948c098ee535e54fc",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "sdjzu-policy",
+          "url": "https://www.sdjzu.edu.cn/xxgk/info/1090/3109.htm",
+          "observedAt": "2026-10-19T09:04:53.690428+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.sdjzu.edu.cn/xxgk/info/1090/3109.htm",
+          "contentType": "text/html",
+          "bytes": 27209,
+          "rawPath": "sdjzu-policy.html",
+          "rawSha256": "a9124ac5cb120c59b0320aff1659f72e3d72a74f0366c173c20d2058ba23d593",
+          "textPath": "sdjzu-policy.txt",
+          "textSha256": "3b103f8847b40423b611e72fdf2a6608c00fd74b60542394eea63dd5988a2f6e",
+          "captureSucceeded": true,
+          "evidenceRole": "policy-wrapper-attachments-not-read",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "sdjzu-admissions",
+          "url": "https://www.sdjzu.edu.cn/gjjy/info/1027/1173.htm",
+          "observedAt": "2026-10-19T09:04:53.690428+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.sdjzu.edu.cn/gjjy/info/1027/1173.htm",
+          "contentType": "text/html",
+          "bytes": 48371,
+          "rawPath": "sdjzu-admissions.html",
+          "rawSha256": "773515c0e46064752c6199c3a62525e159f4f4295a8c7cbe36d954c778b4a353",
+          "textPath": "sdjzu-admissions.txt",
+          "textSha256": "93728b2a9418dd6a07fdf215e752d7c83ea38efe3a8db3a158d9f11354f22f35",
+          "captureSucceeded": true,
+          "evidenceRole": "readable-2026-guide-with-unread-embedded-programme-images",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "sdjzu-2026-original",
+          "url": "https://www.sdjzu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2120571760&wbfileid=15404568",
+          "observedAt": "2026-10-19T11:45:40.697848+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.sdjzu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2120571760&wbfileid=15404568",
+          "contentType": "text/html;charset=UTF-8",
+          "bytes": 3805,
+          "rawPath": "sdjzu-2026-original.html",
+          "rawSha256": "68a663ed3f1459d86f66bfc7cd8d5be1d3c688bf9d01fcb7f355eb92859934eb",
+          "textPath": "sdjzu-2026-original.txt",
+          "textSha256": "b6e006dd45ea7eb317ff98ff3ccdeb5dae716b075e4ffa6c23d3bdfa0ffba07d",
+          "captureSucceeded": true,
+          "parentCapture": "sdjzu-admissions",
+          "parentRawSha256": "773515c0e46064752c6199c3a62525e159f4f4295a8c7cbe36d954c778b4a353",
+          "linkage": "Exact 2026 Admission Prospectus PDF href in the registered current guide; one bounded retrieval.",
+          "evidenceRole": "linked-PDF-request-returned-captcha-HTML-not-PDF",
+          "fullFactsCertified": false
+        }
+      ],
+      "awardListing": "我校可为学生提供各类奖学金，包括山东省政府奖学金、学校奖学金、济南市友好城市奖学金等。",
+      "unreadPolicyAttachments": "The wrapper lists 2021 policy PDFs; no attachment body was read or used as an application-date proof.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-breadth-sch-sdjzu-shandong-provincial",
+          "universityId": "uni-shandong-jianzhu-university",
+          "canonicalUniversitySha256": "2c1b433dbc4d4b31d8b8d4f537826dd0ac72d388cffb62f73ced17e00b92640f",
+          "selectionOrigin": "base-queue-v7",
+          "programId": null,
+          "name": "Shandong Provincial Government Scholarship",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "47759fd90a0d80571b7836b6c7851f1b6d2120287d261bee5cc8e4b542c21f67",
+          "canonicalScholarshipSha256": "47759fd90a0d80571b7836b6c7851f1b6d2120287d261bee5cc8e4b542c21f67",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-breadth-sch-sdjzu-shandong-provincial"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-breadth-sch-sdjzu-shandong-provincial",
+              "canonicalSourceSha256": "7fe5b53fb81d0dc052255558377237e87e40ff417ce7bafcb8405e08682be51f",
+              "url": "https://www.sdjzu.edu.cn/english/International_Admissions/Academic_Education/Scholarship_policy.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "independent-award-listed-without-announced-exact-application-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.sdjzu.edu.cn/gjjy/info/1027/1173.htm",
+          "evidenceBodySha256": "773515c0e46064752c6199c3a62525e159f4f4295a8c7cbe36d954c778b4a353",
+          "observedAt": "2026-10-19T09:04:53.690428+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "awardDeadlineNotBorrowed": true,
+          "registrationMonthNotApplicationDeadline": "September registration is not an award cutoff.",
+          "supportingProspectusCaptcha": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-breadth-sch-sdjzu-university",
+          "universityId": "uni-shandong-jianzhu-university",
+          "canonicalUniversitySha256": "2c1b433dbc4d4b31d8b8d4f537826dd0ac72d388cffb62f73ced17e00b92640f",
+          "selectionOrigin": "base-queue-v7",
+          "programId": null,
+          "name": "Shandong Jianzhu University International Student Scholarship",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "917664c714c6ada10be98da35042ba0698682f0353372a8a439fa0b9e44d0ce3",
+          "canonicalScholarshipSha256": "917664c714c6ada10be98da35042ba0698682f0353372a8a439fa0b9e44d0ce3",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-sdjzu-b-civil-engineering-en",
+              "canonicalProgramSha256": "b3af640871a1ce34f4b1fedd455438869696635cfe65c67762f0ac5da256d96c"
+            },
+            {
+              "programId": "prog-gap-prog-mew-ne-sdjzu-business-administration-bachelor-en",
+              "canonicalProgramSha256": "7927de3b9c85f9fcb61f889aa351aff27ea83871681e7c1daa0b2a4a1a751ca9"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-breadth-sch-sdjzu-university",
+            "src-gap-scholarship-breadth-sch-sdjzu-university-support-1",
+            "src-gap-scholarship-breadth-sch-sdjzu-university-support-2"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-breadth-sch-sdjzu-university",
+              "canonicalSourceSha256": "b93316ccb48ebd97f4064c9919a07e33adc7aaeb5fd82de26160b2a7165e664b",
+              "url": "https://www.sdjzu.edu.cn/english/International_Admissions/Academic_Education/Scholarship_policy.htm"
+            },
+            {
+              "sourceId": "src-gap-scholarship-breadth-sch-sdjzu-university-support-1",
+              "canonicalSourceSha256": "79edf96b22ef49a65fdd55cb224642cf89651a661f3f3edaf8a9ce9f0cf11485",
+              "url": "https://www.sdjzu.edu.cn/xxgk/info/1090/3109.htm"
+            },
+            {
+              "sourceId": "src-gap-scholarship-breadth-sch-sdjzu-university-support-2",
+              "canonicalSourceSha256": "740d5fc3fd45fe1c2aae1d21ace2627d49ba7d6e6b016205897c46b8e3279578",
+              "url": "https://www.sdjzu.edu.cn/gjjy/info/1027/1173.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "independent-award-listed-without-announced-exact-application-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.sdjzu.edu.cn/gjjy/info/1027/1173.htm",
+          "evidenceBodySha256": "773515c0e46064752c6199c3a62525e159f4f4295a8c7cbe36d954c778b4a353",
+          "observedAt": "2026-10-19T09:04:53.690428+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "awardDeadlineNotBorrowed": true,
+          "registrationMonthNotApplicationDeadline": "September registration is not an award cutoff.",
+          "supportingProspectusCaptcha": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-sdjzu-b-civil-engineering-en-2026-2027-other-fee-reference",
+          "universityId": "uni-shandong-jianzhu-university",
+          "canonicalUniversitySha256": "2c1b433dbc4d4b31d8b8d4f537826dd0ac72d388cffb62f73ced17e00b92640f",
+          "selectionOrigin": "explicit-same-source-extension",
+          "programId": "prog-gap-local-strong-sdjzu-b-civil-engineering-en",
+          "name": "Civil Engineering",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "2ccd34f036313b914a104224ac53af813050862f2f13bd0fa396c27953a35169",
+          "canonicalCycleSha256": "2ccd34f036313b914a104224ac53af813050862f2f13bd0fa396c27953a35169",
+          "canonicalProgramSha256": "b3af640871a1ce34f4b1fedd455438869696635cfe65c67762f0ac5da256d96c",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-sdjzu-b-civil-engineering-en",
+              "canonicalProgramSha256": "b3af640871a1ce34f4b1fedd455438869696635cfe65c67762f0ac5da256d96c"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-strong-sdjzu-b-civil-engineering-en",
+            "src-gap-program-local-strong-sdjzu-b-civil-engineering-en-support-1",
+            "src-gap-program-local-strong-sdjzu-b-civil-engineering-en-support-2"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-sdjzu-b-civil-engineering-en",
+              "canonicalSourceSha256": "6281ab571ba84b45984592e44cc8fade03b0a5c299ab11ff1cd860de7ed466bb",
+              "url": "https://www.sdjzu.edu.cn/gjjy/info/1027/1173.htm"
+            },
+            {
+              "sourceId": "src-gap-program-local-strong-sdjzu-b-civil-engineering-en-support-1",
+              "canonicalSourceSha256": "488d79863b85d7fac6bb7b9e8d54df7403358b627fb25ef21e33eae6f5cc0c19",
+              "url": "https://www.sdjzu.edu.cn/english/International_Admissions/Academic_Education/Fees.htm"
+            },
+            {
+              "sourceId": "src-gap-program-local-strong-sdjzu-b-civil-engineering-en-support-2",
+              "canonicalSourceSha256": "dbbd135dfa87aab2ed4d1c776ced93c0eb67420e7c219e04cc10e3cd8194715a",
+              "url": "https://www.sdjzu.edu.cn/gjjy/xygk.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "exact-linked-2026-prospectus-requires-captcha-and-html-tables-do-not-establish-exact-civil-route-date",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.sdjzu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2120571760&wbfileid=15404568",
+          "evidenceBodySha256": "68a663ed3f1459d86f66bfc7cd8d5be1d3c688bf9d01fcb7f355eb92859934eb",
+          "observedAt": "2026-10-19T11:45:40.697848+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "capturedBodyIsNotPdf": true,
+          "captchaQuote": "请输入验证码下载附件",
+          "programmeTableImagesNotRead": true,
+          "noProgrammeDiscontinuationInferred": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-sdjzu-b-civil-engineering-en-2026-2027-autumn",
+          "universityId": "uni-shandong-jianzhu-university",
+          "canonicalUniversitySha256": "2c1b433dbc4d4b31d8b8d4f537826dd0ac72d388cffb62f73ced17e00b92640f",
+          "selectionOrigin": "explicit-same-source-extension",
+          "programId": "prog-gap-local-strong-sdjzu-b-civil-engineering-en",
+          "name": "Civil Engineering",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "d15d54007eb3181aa0cfae44e6314d396c48a268ba8379770f11191105060dab",
+          "canonicalCycleSha256": "d15d54007eb3181aa0cfae44e6314d396c48a268ba8379770f11191105060dab",
+          "canonicalProgramSha256": "b3af640871a1ce34f4b1fedd455438869696635cfe65c67762f0ac5da256d96c",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-sdjzu-b-civil-engineering-en",
+              "canonicalProgramSha256": "b3af640871a1ce34f4b1fedd455438869696635cfe65c67762f0ac5da256d96c"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-strong-sdjzu-b-civil-engineering-en",
+            "src-gap-program-local-strong-sdjzu-b-civil-engineering-en-support-1",
+            "src-gap-program-local-strong-sdjzu-b-civil-engineering-en-support-2"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-sdjzu-b-civil-engineering-en",
+              "canonicalSourceSha256": "6281ab571ba84b45984592e44cc8fade03b0a5c299ab11ff1cd860de7ed466bb",
+              "url": "https://www.sdjzu.edu.cn/gjjy/info/1027/1173.htm"
+            },
+            {
+              "sourceId": "src-gap-program-local-strong-sdjzu-b-civil-engineering-en-support-1",
+              "canonicalSourceSha256": "488d79863b85d7fac6bb7b9e8d54df7403358b627fb25ef21e33eae6f5cc0c19",
+              "url": "https://www.sdjzu.edu.cn/english/International_Admissions/Academic_Education/Fees.htm"
+            },
+            {
+              "sourceId": "src-gap-program-local-strong-sdjzu-b-civil-engineering-en-support-2",
+              "canonicalSourceSha256": "dbbd135dfa87aab2ed4d1c776ced93c0eb67420e7c219e04cc10e3cd8194715a",
+              "url": "https://www.sdjzu.edu.cn/gjjy/xygk.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "exact-linked-2026-prospectus-requires-captcha-and-html-tables-do-not-establish-exact-civil-route-date",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.sdjzu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2120571760&wbfileid=15404568",
+          "evidenceBodySha256": "68a663ed3f1459d86f66bfc7cd8d5be1d3c688bf9d01fcb7f355eb92859934eb",
+          "observedAt": "2026-10-19T11:45:40.697848+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "capturedBodyIsNotPdf": true,
+          "captchaQuote": "请输入验证码下载附件",
+          "programmeTableImagesNotRead": true,
+          "noProgrammeDiscontinuationInferred": true
+        }
+      ]
+    },
+    {
+      "key": "sdnu-one-native-and-one-fallback-access-hold",
+      "universityId": "uni-shandong-normal-university",
+      "evidence": [
+        {
+          "name": "sdnu-iclt",
+          "url": "https://www.cie.sdnu.edu.cn/lxsgz/jxj/kzxyjxj/xsjxjxm.htm",
+          "observedAt": "2026-10-19T09:04:53.706880+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.cie.sdnu.edu.cn'. (_ssl.c:1000)>",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-certificate-hostname-mismatch-no-body",
+          "fullFactsCertified": false
+        }
+      ],
+      "webFallback": {
+        "path": "sdnu-web-fallback.json",
+        "sha256": "3bfe3f6c3295df9cf2fbe666e7d0a2ebf96d1a681953d1d00e0b09a4ea72fe03"
+      },
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-sdnu-international-chinese-language-teachers-scholarship-2026",
+          "universityId": "uni-shandong-normal-university",
+          "canonicalUniversitySha256": "cea9e88c5eed7438f4f62c45d2dbf34f9e0b7d1494807acef548278af209979e",
+          "selectionOrigin": "base-queue-v7",
+          "programId": null,
+          "name": "2026 International Chinese Language Teachers Scholarship at SDNU",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "b24a7e5a23620ec05efe1e52706fff71b8aa34044402b2de3767b1a444189b02",
+          "canonicalScholarshipSha256": "b24a7e5a23620ec05efe1e52706fff71b8aa34044402b2de3767b1a444189b02",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-sdnu-tcsol-bachelor",
+              "canonicalProgramSha256": "22c9149bee50918a39df600d5117ce8d362a6d1e222aeece66a08c44ce897415"
+            },
+            {
+              "programId": "prog-gap-wave8-sdnu-chinese-language-bachelor",
+              "canonicalProgramSha256": "009033b8589a7b1cc4f3c38ebec3a4a33f8ad55b2d7b4c27728e87d7428631b7"
+            },
+            {
+              "programId": "prog-gap-wave8-sdnu-mtcsol-master",
+              "canonicalProgramSha256": "ef49e6c71a4ba9015b2e293ea2796cf8ef6a76cbd81ef3b249d5125f11000e96"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-sdnu-international-chinese-language-teachers-scholarship-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-sdnu-international-chinese-language-teachers-scholarship-2026",
+              "canonicalSourceSha256": "81fca69a18d41bf2ced96ddd0b2f448b195805ce5413bb795c144da38c9ba172",
+              "url": "https://www.cie.sdnu.edu.cn/lxsgz/jxj/kzxyjxj/xsjxjxm.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "native-certificate-hostname-mismatch-and-one-web-fallback-timeout-no-scholarship-body",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.cie.sdnu.edu.cn/lxsgz/jxj/kzxyjxj/xsjxjxm.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T09:04:53.706880+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "originBodyUnavailable": true
+        }
+      ]
+    },
+    {
+      "key": "sdu-2026-type-b-exact-image-original",
+      "universityId": "uni-shandong-university",
+      "evidence": [
+        {
+          "name": "sdu-csc",
+          "url": "https://istudy.sdu.edu.cn/info/1291/3949.htm",
+          "observedAt": "2026-10-19T09:04:55.529770+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://istudy.sdu.edu.cn/info/1291/3949.htm",
+          "contentType": "text/html",
+          "bytes": 11716,
+          "rawPath": "sdu-csc.html",
+          "rawSha256": "e6c9e3ec9d46db19b6dd3ccdd4a40eb430c223a63e50c887504a8e68e66f6265",
+          "textPath": "sdu-csc.txt",
+          "textSha256": "ea8837f0fa3de337624e6a40615df9cb15b696781885517f7e63cc2ea086c702",
+          "captureSucceeded": true,
+          "evidenceRole": "registered-wrapper-links-exact-guide-image",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "sdu-csc-original",
+          "url": "https://istudy.sdu.edu.cn/__local/6/C6/73/8AC3F1556827637C3DF94D94CCB_9B4C7643_2681CB.jpg",
+          "observedAt": "2026-10-19T11:45:40.697848+00:00",
+          "timeoutSeconds": 25,
+          "tlsCertificateValidation": true,
+          "parentCapture": "sdu-csc",
+          "parentRawSha256": "e6c9e3ec9d46db19b6dd3ccdd4a40eb430c223a63e50c887504a8e68e66f6265",
+          "linkage": "Exact image src in registered 2026 Type B guide body; one bounded retrieval.",
+          "status": 200,
+          "finalUrl": "https://istudy.sdu.edu.cn/__local/6/C6/73/8AC3F1556827637C3DF94D94CCB_9B4C7643_2681CB.jpg",
+          "contentType": "image/jpeg",
+          "bytes": 2523595,
+          "rawPath": "sdu-csc-original.jpg",
+          "rawSha256": "7716a6daae6c94ddb2bcf6af273cb9b696e707c13c33ece436eceaf76b9b840a",
+          "dimensions": [
+            1778,
+            10617
+          ],
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-image-visual-date-read",
+          "fullFactsCertified": false
+        }
+      ],
+      "visualTranscript": {
+        "path": "sdu-csc-visual-transcript.json",
+        "sha256": "cac359a553576f1eb402c92de4c4295306ed7a5b8c864c91232ba4ec33cb14a8"
+      },
+      "yearTitle": "2026 Application Guide to Chinese Government Scholarship (Type B)",
+      "quotedDate": "From now to February 6, 2026",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-sdu-csc-type-b",
+          "universityId": "uni-shandong-university",
+          "canonicalUniversitySha256": "c02254140235fb64ae4d274d2588f6a407fbfb280f331458d20665ef2af97746",
+          "selectionOrigin": "base-queue-v7",
+          "programId": null,
+          "name": "Shandong University Chinese Government Scholarship (Type B)",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "c24e0a529f36b5bed1287428fd604cdf78c4a3bbe164928a74dc7e76872306d6",
+          "canonicalScholarshipSha256": "c24e0a529f36b5bed1287428fd604cdf78c4a3bbe164928a74dc7e76872306d6",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-sdu-csc-type-b"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-sdu-csc-type-b",
+              "canonicalSourceSha256": "a69f06c3730b1119e036a9c5007a9ba7a5b0d88824ef6f0b8dae4af6388ec11a",
+              "url": "https://istudy.sdu.edu.cn/info/1291/3949.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "closed",
+          "officialDeadline": "2026-02-06",
+          "candidateOfficialDeadline": "2026-02-06",
+          "reason": "same-2026-type-b-award-original-image-explicit-applicant-cutoff",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://istudy.sdu.edu.cn/__local/6/C6/73/8AC3F1556827637C3DF94D94CCB_9B4C7643_2681CB.jpg",
+          "evidenceBodySha256": "7716a6daae6c94ddb2bcf6af273cb9b696e707c13c33ece436eceaf76b9b840a",
+          "observedAt": "2026-10-19T11:45:40.697848+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only this explicitly matched 2026 route is past; no permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "From now to February 6, 2026",
+          "fundingRoute": "2026 Chinese Government Scholarship Type B at Shandong University",
+          "openingRelativeWording": "From now",
+          "advisoryTwoWeeksNotHardCutoff": true,
+          "awardOwnDateNotBorrowed": true,
+          "visualEvidence": [
+            {
+              "path": "sdu-csc-title.png",
+              "sha256": "29d21b834872eee01e570fd8e22d8180dbaa081805bc48a0018012380a5a1478",
+              "bounds": [
+                0,
+                0,
+                1778,
+                900
+              ]
+            },
+            {
+              "path": "sdu-csc-application-time.png",
+              "sha256": "962e51bd5a33c456c723c91121dbaf80e10b3ee657d05ecf16aea0bfd7c7057d",
+              "bounds": [
+                0,
+                3950,
+                1778,
+                4540
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "sdufe-exact-2026-english-bachelor-special-scholarship-route",
+      "universityId": "uni-shandong-university-of-finance-and-economics",
+      "evidence": [
+        {
+          "name": "sdufe-undergraduate",
+          "url": "https://study.sdufe.edu.cn/info/1007/1054.htm",
+          "observedAt": "2026-10-19T09:04:57.634164+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://study.sdufe.edu.cn/info/1007/1054.htm",
+          "contentType": "text/html",
+          "bytes": 48310,
+          "rawPath": "sdufe-undergraduate.html",
+          "rawSha256": "e82edfb512cc92fa7dc5f2cb19cdbedc094fb3f399fa05954bdca0e0f113dbac",
+          "textPath": "sdufe-undergraduate.txt",
+          "textSha256": "a9addb2a0c30ee14d7e9c0ea02c9462ef1801bf3fbca6d2d3b22da4720f5f6fb",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "Shandong University of Finance and Economics English-Taught Undergraduate Programs Special Scholarship Application Guide 2026",
+      "quotedDate": "2. Application deadline: June 20, 2026.",
+      "programmeQuote": "-International Economics and Trade",
+      "minimumCohortQuote": "Programs offered (a minimum of 20 students to commence):",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-sdufe-english-undergraduate-special-scholarship",
+          "universityId": "uni-shandong-university-of-finance-and-economics",
+          "canonicalUniversitySha256": "625500fbe6b607f960b15e30cd4f5f3a2b8927bc807ae2990edead671888c8d1",
+          "selectionOrigin": "base-queue-v7",
+          "programId": null,
+          "name": "SDUFE English-Taught Undergraduate Special Scholarship",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "ddc16782c2a02cc3f6ebe2ff5852e0fcee6b520bdedbbd7ce08a1b730138abb5",
+          "canonicalScholarshipSha256": "ddc16782c2a02cc3f6ebe2ff5852e0fcee6b520bdedbbd7ce08a1b730138abb5",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-sdufe-international-economics-trade-english-bachelor",
+              "canonicalProgramSha256": "9dd6808a9e7d602fa588bbd94ddd807f2e0317c7691968e1c7fe3d049e811230"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave3-sdufe-english-undergraduate-special-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-sdufe-english-undergraduate-special-scholarship",
+              "canonicalSourceSha256": "152167568721c70b203e3dec1f6f2f0e8efb487c95bfc4dbadc29a29fdad5143",
+              "url": "https://study.sdufe.edu.cn/info/1007/1054.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-20",
+          "candidateOfficialDeadline": "2026-06-20",
+          "reason": "matching-2026-special-scholarship-guide-states-own-application-cutoff-and-exact-english-bachelor-programme",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://study.sdufe.edu.cn/info/1007/1054.htm",
+          "evidenceBodySha256": "e82edfb512cc92fa7dc5f2cb19cdbedc094fb3f399fa05954bdca0e0f113dbac",
+          "observedAt": "2026-10-19T09:04:57.634164+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only this explicitly matched 2026 route is past; no permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "2. Application deadline: June 20, 2026.",
+          "fundingRoute": "2026 English-Taught Undergraduate Programs Special Scholarship",
+          "exactMajorQuote": "International Economics and Trade",
+          "conditionalCohortMinimum": 20,
+          "awardOwnDateNotBorrowed": true,
+          "scopeRestriction": "This special-scholarship applicant route only; no general self-funded deadline is inferred."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-sdufe-international-economics-trade-english-bachelor-2026-2027-autumn",
+          "universityId": "uni-shandong-university-of-finance-and-economics",
+          "canonicalUniversitySha256": "625500fbe6b607f960b15e30cd4f5f3a2b8927bc807ae2990edead671888c8d1",
+          "selectionOrigin": "base-queue-v7",
+          "programId": "prog-gap-wave3-sdufe-international-economics-trade-english-bachelor",
+          "name": "International Economics and Trade (English-taught Bachelor)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "ff332e024c5df76d7f7b2720c8fbf3e345b56556232da2580478d1657335d0b5",
+          "canonicalCycleSha256": "ff332e024c5df76d7f7b2720c8fbf3e345b56556232da2580478d1657335d0b5",
+          "canonicalProgramSha256": "9dd6808a9e7d602fa588bbd94ddd807f2e0317c7691968e1c7fe3d049e811230",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-sdufe-international-economics-trade-english-bachelor",
+              "canonicalProgramSha256": "9dd6808a9e7d602fa588bbd94ddd807f2e0317c7691968e1c7fe3d049e811230"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave3-sdufe-international-economics-trade-english-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-sdufe-international-economics-trade-english-bachelor",
+              "canonicalSourceSha256": "e05d0f04f6a1821fea2378df586e3e0f7d6f2affcb9719305eb0ebea21c3d450",
+              "url": "https://study.sdufe.edu.cn/info/1007/1054.htm"
+            }
+          ],
+          "storedDeadline": "2026-06-20",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "result": "closed",
+          "officialDeadline": "2026-06-20",
+          "candidateOfficialDeadline": "2026-06-20",
+          "reason": "matching-2026-special-scholarship-guide-states-own-application-cutoff-and-exact-english-bachelor-programme",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://study.sdufe.edu.cn/info/1007/1054.htm",
+          "evidenceBodySha256": "e82edfb512cc92fa7dc5f2cb19cdbedc094fb3f399fa05954bdca0e0f113dbac",
+          "observedAt": "2026-10-19T09:04:57.634164+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "closureScope": "Only this explicitly matched 2026 route is past; no permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "2. Application deadline: June 20, 2026.",
+          "fundingRoute": "2026 English-Taught Undergraduate Programs Special Scholarship",
+          "exactMajorQuote": "International Economics and Trade",
+          "conditionalCohortMinimum": 20,
+          "awardOwnDateNotBorrowed": false,
+          "scopeRestriction": "This special-scholarship applicant route only; no general self-funded deadline is inferred."
+        }
+      ]
+    },
+    {
+      "key": "sdutcm-2026-exact-degree-routes-and-post-enrolment-award",
+      "universityId": "uni-shandong-university-of-traditional-chinese-medicine",
+      "evidence": [
+        {
+          "name": "sdutcm-guide",
+          "url": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm",
+          "observedAt": "2026-10-19T09:04:57.911051+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm",
+          "contentType": "text/html",
+          "bytes": 207102,
+          "rawPath": "sdutcm-guide.html",
+          "rawSha256": "c61c34af9e4ff84aae96c34d2a6ced9e2e19d1b2e1813b7c2b07d505a56e6d03",
+          "textPath": "sdutcm-guide.txt",
+          "textSha256": "d2f800b01d9ded62bd5eb6b5f8ac85c63817efe56d5a34a17259890bfe067c0d",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "2026年山东中医药大学国际学生招生简章",
+      "quotedDate": "本科、硕士、博士申请时间：即日起至2026年6月30日",
+      "postEnrolmentAwardQuote": "每年9-10月报到后提交申请，根据当年通知提交相应材料，综合评定。",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecma-sdutcm-president-scholarship-2026",
+          "universityId": "uni-shandong-university-of-traditional-chinese-medicine",
+          "canonicalUniversitySha256": "dba08c1a8d959272cd930d4c8732811fc7008220a001a73bdc92afeb0a3c59a4",
+          "selectionOrigin": "base-queue-v7",
+          "programId": null,
+          "name": "SDUTCM International Student President Scholarship",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "e5f5ad14da7d1cb517aadf9e02f9a9c72c9182698be8cbb91f67866b88b2633f",
+          "canonicalScholarshipSha256": "e5f5ad14da7d1cb517aadf9e02f9a9c72c9182698be8cbb91f67866b88b2633f",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecma-sdutcm-tcm-bachelor",
+              "canonicalProgramSha256": "af942dba62e8ae8a48266c38c9fc85ac043c3249ab829baaca4ed421c343ea43"
+            },
+            {
+              "programId": "prog-gap-mve-ecma-sdutcm-acupuncture-master",
+              "canonicalProgramSha256": "0fef53073b8ab7e4d02dec92c60c8a160fc24e221f4a9e102f0d9103daa7947e"
+            },
+            {
+              "programId": "prog-gap-mve-ecma-sdutcm-materia-medica-doctorate",
+              "canonicalProgramSha256": "98670056da099c3faa8ce254b05d15a2727bab4a9046f35f313da49ac6b45b3e"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mve-ecma-sdutcm-president-scholarship-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecma-sdutcm-president-scholarship-2026",
+              "canonicalSourceSha256": "8d1f1bdf904c1337ecf0ad93ac0342f180334a1cbb8607f0f441f34c75725e20",
+              "url": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "president-award-is-post-enrolment-september-october-policy-without-an-exact-independent-day",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm",
+          "evidenceBodySha256": "c61c34af9e4ff84aae96c34d2a6ced9e2e19d1b2e1813b7c2b07d505a56e6d03",
+          "observedAt": "2026-10-19T09:04:57.911051+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "awardListingQuote": "2.山东中医药大学国际学生校长奖学金",
+          "postEnrolmentAwardQuote": "每年9-10月报到后提交申请，根据当年通知提交相应材料，综合评定。",
+          "generalAdmissionDeadlineNotBorrowed": "2026-06-30",
+          "monthPrecisionNotInventedAsMonthEnd": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecma-sdutcm-acupuncture-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shandong-university-of-traditional-chinese-medicine",
+          "canonicalUniversitySha256": "dba08c1a8d959272cd930d4c8732811fc7008220a001a73bdc92afeb0a3c59a4",
+          "selectionOrigin": "base-queue-v7",
+          "programId": "prog-gap-mve-ecma-sdutcm-acupuncture-master",
+          "name": "Acupuncture and Tuina",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "21e468b3b75e3514473e6c819eefb8d6617f5ecafa9bc969b46179f824111d82",
+          "canonicalCycleSha256": "21e468b3b75e3514473e6c819eefb8d6617f5ecafa9bc969b46179f824111d82",
+          "canonicalProgramSha256": "0fef53073b8ab7e4d02dec92c60c8a160fc24e221f4a9e102f0d9103daa7947e",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecma-sdutcm-acupuncture-master",
+              "canonicalProgramSha256": "0fef53073b8ab7e4d02dec92c60c8a160fc24e221f4a9e102f0d9103daa7947e"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-ecma-sdutcm-acupuncture-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecma-sdutcm-acupuncture-master",
+              "canonicalSourceSha256": "1aab97a052b7a5cb4abc3c9f632bc9b60bd4299e43130d1988909fd51dc1779b",
+              "url": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "reason": "exact-2026-degree-programme-language-and-level-match-general-degree-applicant-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm",
+          "evidenceBodySha256": "c61c34af9e4ff84aae96c34d2a6ced9e2e19d1b2e1813b7c2b07d505a56e6d03",
+          "observedAt": "2026-10-19T09:04:57.911051+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only this explicitly matched 2026 route is past; no permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "本科、硕士、博士申请时间：即日起至2026年6月30日",
+          "exactMajorQuote": "针灸推拿学",
+          "programmeSection": "硕士-英文-针灸推拿学",
+          "openingRelativeWording": "即日起",
+          "feeReferenceNotUsedAsYearAnchor": true,
+          "preparatory2027DatesExcluded": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecma-sdutcm-materia-medica-doctorate-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shandong-university-of-traditional-chinese-medicine",
+          "canonicalUniversitySha256": "dba08c1a8d959272cd930d4c8732811fc7008220a001a73bdc92afeb0a3c59a4",
+          "selectionOrigin": "base-queue-v7",
+          "programId": "prog-gap-mve-ecma-sdutcm-materia-medica-doctorate",
+          "name": "Chinese Materia Medica",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "doctorate",
+          "canonicalRecordSha256": "f16a51fe53a23e3193c89b0d828668585bd851e7c42c64b95b8d24e51627cc92",
+          "canonicalCycleSha256": "f16a51fe53a23e3193c89b0d828668585bd851e7c42c64b95b8d24e51627cc92",
+          "canonicalProgramSha256": "98670056da099c3faa8ce254b05d15a2727bab4a9046f35f313da49ac6b45b3e",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecma-sdutcm-materia-medica-doctorate",
+              "canonicalProgramSha256": "98670056da099c3faa8ce254b05d15a2727bab4a9046f35f313da49ac6b45b3e"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-ecma-sdutcm-materia-medica-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecma-sdutcm-materia-medica-doctorate",
+              "canonicalSourceSha256": "b7d018b43ec3a201a45f0307f3a3f5fe8afe5bdb7c3e3243a2dae9321f9e0291",
+              "url": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "reason": "exact-2026-degree-programme-language-and-level-match-general-degree-applicant-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm",
+          "evidenceBodySha256": "c61c34af9e4ff84aae96c34d2a6ced9e2e19d1b2e1813b7c2b07d505a56e6d03",
+          "observedAt": "2026-10-19T09:04:57.911051+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only this explicitly matched 2026 route is past; no permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "本科、硕士、博士申请时间：即日起至2026年6月30日",
+          "exactMajorQuote": "中药学",
+          "programmeSection": "博士-英文-中药学",
+          "openingRelativeWording": "即日起",
+          "feeReferenceNotUsedAsYearAnchor": true,
+          "preparatory2027DatesExcluded": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecma-sdutcm-tcm-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-shandong-university-of-traditional-chinese-medicine",
+          "canonicalUniversitySha256": "dba08c1a8d959272cd930d4c8732811fc7008220a001a73bdc92afeb0a3c59a4",
+          "selectionOrigin": "base-queue-v7",
+          "programId": "prog-gap-mve-ecma-sdutcm-tcm-bachelor",
+          "name": "Traditional Chinese Medicine",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "2d609875fbb488ae2b375ce3afc086ce5e9b4507a5b33f5f314cacd0d3230312",
+          "canonicalCycleSha256": "2d609875fbb488ae2b375ce3afc086ce5e9b4507a5b33f5f314cacd0d3230312",
+          "canonicalProgramSha256": "af942dba62e8ae8a48266c38c9fc85ac043c3249ab829baaca4ed421c343ea43",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecma-sdutcm-tcm-bachelor",
+              "canonicalProgramSha256": "af942dba62e8ae8a48266c38c9fc85ac043c3249ab829baaca4ed421c343ea43"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-ecma-sdutcm-tcm-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecma-sdutcm-tcm-bachelor",
+              "canonicalSourceSha256": "324bea8de34215df0db036b25f56e83346ee22f9cdee096db318e9886985885d",
+              "url": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "reason": "exact-2026-degree-programme-language-and-level-match-general-degree-applicant-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://gjjiaoyu.sdutcm.edu.cn/info/1158/2261.htm",
+          "evidenceBodySha256": "c61c34af9e4ff84aae96c34d2a6ced9e2e19d1b2e1813b7c2b07d505a56e6d03",
+          "observedAt": "2026-10-19T09:04:57.911051+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only this explicitly matched 2026 route is past; no permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "本科、硕士、博士申请时间：即日起至2026年6月30日",
+          "exactMajorQuote": "中医学",
+          "programmeSection": "本科-中文-中医学",
+          "openingRelativeWording": "即日起",
+          "feeReferenceNotUsedAsYearAnchor": true,
+          "preparatory2027DatesExcluded": true
+        }
+      ]
+    },
+    {
+      "key": "lixin-historical-2020-window-no-current-year-rollover",
+      "universityId": "uni-shanghai-lixin-university-of-accounting-and-finance",
+      "evidence": [
+        {
+          "name": "lixin-scholarship",
+          "url": "https://en.lixin.edu.cn/Scholarship/list.htm",
+          "observedAt": "2026-10-19T09:04:57.944760+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://en.lixin.edu.cn/Scholarship/list.htm",
+          "contentType": "text/html",
+          "bytes": 111045,
+          "rawPath": "lixin-scholarship.html",
+          "rawSha256": "826a071c08d7efc2e6d440377543eb61d47c2c023758173a2c4f871fdf074a61",
+          "textPath": "lixin-scholarship.txt",
+          "textSha256": "d07fc8811eca5a83cfed6fc7f7f14facad6b86e5db5be1cda014ee915fa05367",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "historicalDateQuote": "1st March - 30th May, 2020 (except holidays)",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-lixin-shanghai-government-scholarship",
+          "universityId": "uni-shanghai-lixin-university-of-accounting-and-finance",
+          "canonicalUniversitySha256": "dc300b2f849154316ed63aaf029176eafe63f08efc82b1aeb757e0526ad465c6",
+          "selectionOrigin": "base-queue-v7",
+          "programId": null,
+          "name": "Shanghai Government Scholarship for International Students at Lixin",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "83fcf843fbae4c76808e0ebc7591a54ee3a928196eca946d14e7af519c8d4634",
+          "canonicalScholarshipSha256": "83fcf843fbae4c76808e0ebc7591a54ee3a928196eca946d14e7af519c8d4634",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-lixin-international-economics-trade-bachelor",
+              "canonicalProgramSha256": "16b5c2f1b8178229711a06073dd63b04ed62b401c44067de902cef40062bbbba"
+            },
+            {
+              "programId": "prog-gap-wave8-lixin-finance-bachelor",
+              "canonicalProgramSha256": "3182d25fd7c0f2288935f0b3b6204cf45c88e79cb1ccc07fb56ea5f0c8449ae6"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-lixin-shanghai-government-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-lixin-shanghai-government-scholarship",
+              "canonicalSourceSha256": "0c4d2b5b0d9fd4019dafe91278a638978bebd3fc0c5f5e6b452999a4516c94db",
+              "url": "https://en.lixin.edu.cn/Scholarship/list.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "official-body-is-2020-scholarship-window-and-cannot-bind-a-current-cycle",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://en.lixin.edu.cn/Scholarship/list.htm",
+          "evidenceBodySha256": "826a071c08d7efc2e6d440377543eb61d47c2c023758173a2c4f871fdf074a61",
+          "observedAt": "2026-10-19T09:04:57.944760+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "historicalSourceDeadline": "2020-05-30",
+          "historicalSourceWindowQuote": "1st March - 30th May, 2020 (except holidays)",
+          "historicalSourceWindowAppliesToStoredCurrentRecord": false,
+          "noYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "shmtu-2026-shanghai-government-award-own-period",
+      "universityId": "uni-shanghai-maritime-university",
+      "evidence": [
+        {
+          "name": "shmtu-scholarship",
+          "url": "https://en.shmtu.edu.cn/SGSScholarship/main.psp",
+          "observedAt": "2026-10-19T09:04:58.155050+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://en.shmtu.edu.cn/SGSScholarship/main.psp",
+          "contentType": "text/html;charset=UTF-8",
+          "bytes": 42680,
+          "rawPath": "shmtu-scholarship.html",
+          "rawSha256": "429d6f4e908167c8c2cb23864f800c83d18bf5f71bf266ff521ed8d282350667",
+          "textPath": "shmtu-scholarship.txt",
+          "textSha256": "3db690fbe31d583a335d6f67aef789653e7c240684d5bc5b28cca20a03ebd411",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "(2026 Intake)",
+      "quotedDate": "December 1, 2025 – April 30, 2026",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-shmtu-shanghai-government-2026",
+          "universityId": "uni-shanghai-maritime-university",
+          "canonicalUniversitySha256": "2d8d3f11bac0147cc0f700bdcdaa59821302ee57fc0b87fcf1390718b1bf3229",
+          "selectionOrigin": "base-queue-v7",
+          "programId": null,
+          "name": "2026 Shanghai Government Scholarship at Shanghai Maritime University",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "2deb89d4c4479f1f6f2e06cff60d86ffa89c97dc9d9d63529c05ec462353ae93",
+          "canonicalScholarshipSha256": "2deb89d4c4479f1f6f2e06cff60d86ffa89c97dc9d9d63529c05ec462353ae93",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-sch-shmtu-shanghai-government-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-shmtu-shanghai-government-2026",
+              "canonicalSourceSha256": "f74af8f1e078902d0b1f470aa451a920de56e5931a691e35327e5e1c340e45ee",
+              "url": "https://en.shmtu.edu.cn/SGSScholarship/main.psp"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "closed",
+          "officialDeadline": "2026-04-30",
+          "candidateOfficialDeadline": "2026-04-30",
+          "reason": "same-2026-shanghai-government-scholarship-explicit-applicant-period",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-12-01",
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://en.shmtu.edu.cn/SGSScholarship/main.psp",
+          "evidenceBodySha256": "429d6f4e908167c8c2cb23864f800c83d18bf5f71bf266ff521ed8d282350667",
+          "observedAt": "2026-10-19T09:04:58.155050+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only this explicitly matched 2026 route is past; no permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "December 1, 2025 – April 30, 2026",
+          "awardOwnDateNotBorrowed": true,
+          "fundingRoute": "Shanghai Government Scholarship 2026 Intake"
+        }
+      ]
+    },
+    {
+      "key": "shou-2026-type-b-high-level-exact-majors",
+      "universityId": "uni-shanghai-ocean-university",
+      "evidence": [
+        {
+          "name": "shou-csc",
+          "url": "https://ieo.shou.edu.cn/2025/1126/c18223a348600/page.htm",
+          "observedAt": "2026-10-19T09:05:00.130994+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://ieo.shou.edu.cn/2025/1126/c18223a348600/page.htm",
+          "contentType": "text/html",
+          "bytes": 323366,
+          "rawPath": "shou-csc.html",
+          "rawSha256": "85a221f7f350bbe7c3187c5c14d7b7b9556f85cfcf6499284a02031552104ad4",
+          "textPath": "shou-csc.txt",
+          "textSha256": "e90b77d4b0f37ba10fb1b917fb5807ea144c4ec10ada5964cf8d0fbb1c0813d2",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "2026 CSC \"High-level Postgraduate\" Program Application Guide",
+      "quotedDate": "Applicable Deadline: February 1st, 2026",
+      "individualApplicantStage": "Now-February 1st, 2026",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-jzh-shou-csc-high-level-2026",
+          "universityId": "uni-shanghai-ocean-university",
+          "canonicalUniversitySha256": "6395ae91830dc62342c95bba820f59c277b2ee0ee117134be1de27c3f500e6f1",
+          "selectionOrigin": "base-queue-v7",
+          "programId": null,
+          "name": "SHOU 2026 CSC High-level Postgraduate Scholarship",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "50c8742b7397bf875e6fe75a91d25c209f18870a5d1306a6cd0ccaa334bbd704",
+          "canonicalScholarshipSha256": "50c8742b7397bf875e6fe75a91d25c209f18870a5d1306a6cd0ccaa334bbd704",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-shou-food-science-master",
+              "canonicalProgramSha256": "9102ee9c45152c51ccfcea68e803f1d5bf7eb932e52813102107203690131ecd"
+            },
+            {
+              "programId": "prog-gap-mve-jzh-shou-marine-science-doctorate",
+              "canonicalProgramSha256": "96859f9780d05ee143af1ddf74147ac193abdffd8f1b54d5bb2675f75812f21e"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mve-jzh-shou-csc-high-level-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-jzh-shou-csc-high-level-2026",
+              "canonicalSourceSha256": "2d5ccf219d65b98b74c3c45982c0680388b3f7949b1cb9eeccb5163e62ca59ae",
+              "url": "https://ieo.shou.edu.cn/2025/1126/c18223a348600/page.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "closed",
+          "officialDeadline": "2026-02-01",
+          "candidateOfficialDeadline": "2026-02-01",
+          "reason": "same-2026-csc-high-level-type-b-route-and-exact-programme-level-match",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://ieo.shou.edu.cn/2025/1126/c18223a348600/page.htm",
+          "evidenceBodySha256": "85a221f7f350bbe7c3187c5c14d7b7b9556f85cfcf6499284a02031552104ad4",
+          "observedAt": "2026-10-19T09:05:00.130994+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only this explicitly matched 2026 route is past; no permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "Applicable Deadline: February 1st, 2026",
+          "fundingRoute": "CSC High-level Postgraduate Category Type B 2026",
+          "exactMajorQuote": null,
+          "programmeSection": null,
+          "openingRelativeWording": "Now",
+          "awardOwnDateNotBorrowed": true,
+          "laterInstitutionReviewAndAdmissionNotApplicantCutoff": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-jzh-shou-food-science-master-2026-2027-autumn",
+          "universityId": "uni-shanghai-ocean-university",
+          "canonicalUniversitySha256": "6395ae91830dc62342c95bba820f59c277b2ee0ee117134be1de27c3f500e6f1",
+          "selectionOrigin": "base-queue-v7",
+          "programId": "prog-gap-mve-jzh-shou-food-science-master",
+          "name": "Food Science and Engineering",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "028afa103249a57aa661ed8820466b1bbddbe912ba216ba3e2a4b761587df6f9",
+          "canonicalCycleSha256": "028afa103249a57aa661ed8820466b1bbddbe912ba216ba3e2a4b761587df6f9",
+          "canonicalProgramSha256": "9102ee9c45152c51ccfcea68e803f1d5bf7eb932e52813102107203690131ecd",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-shou-food-science-master",
+              "canonicalProgramSha256": "9102ee9c45152c51ccfcea68e803f1d5bf7eb932e52813102107203690131ecd"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-jzh-shou-food-science-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-jzh-shou-food-science-master",
+              "canonicalSourceSha256": "74076e6f96ae8884254c5f24e11b217b0a0763014f85b97fade2fdb9cfe9e018",
+              "url": "https://ieo.shou.edu.cn/2025/1126/c18223a348600/page.htm"
+            }
+          ],
+          "storedDeadline": "2026-02-01",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "result": "closed",
+          "officialDeadline": "2026-02-01",
+          "candidateOfficialDeadline": "2026-02-01",
+          "reason": "same-2026-csc-high-level-type-b-route-and-exact-programme-level-match",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://ieo.shou.edu.cn/2025/1126/c18223a348600/page.htm",
+          "evidenceBodySha256": "85a221f7f350bbe7c3187c5c14d7b7b9556f85cfcf6499284a02031552104ad4",
+          "observedAt": "2026-10-19T09:05:00.130994+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "closureScope": "Only this explicitly matched 2026 route is past; no permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "Applicable Deadline: February 1st, 2026",
+          "fundingRoute": "CSC High-level Postgraduate Category Type B 2026",
+          "exactMajorQuote": "Food Science and Engineering",
+          "programmeSection": "Master Degree Programs; Course Language English or Chinese",
+          "openingRelativeWording": "Now",
+          "awardOwnDateNotBorrowed": false,
+          "laterInstitutionReviewAndAdmissionNotApplicantCutoff": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-jzh-shou-marine-science-doctorate-2026-2027-autumn",
+          "universityId": "uni-shanghai-ocean-university",
+          "canonicalUniversitySha256": "6395ae91830dc62342c95bba820f59c277b2ee0ee117134be1de27c3f500e6f1",
+          "selectionOrigin": "base-queue-v7",
+          "programId": "prog-gap-mve-jzh-shou-marine-science-doctorate",
+          "name": "Marine Science",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "doctorate",
+          "canonicalRecordSha256": "fa9c4bdb9c1e612877bed361eeb0089b154497ed727901d2f5dda797601edb88",
+          "canonicalCycleSha256": "fa9c4bdb9c1e612877bed361eeb0089b154497ed727901d2f5dda797601edb88",
+          "canonicalProgramSha256": "96859f9780d05ee143af1ddf74147ac193abdffd8f1b54d5bb2675f75812f21e",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-shou-marine-science-doctorate",
+              "canonicalProgramSha256": "96859f9780d05ee143af1ddf74147ac193abdffd8f1b54d5bb2675f75812f21e"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-jzh-shou-marine-science-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-jzh-shou-marine-science-doctorate",
+              "canonicalSourceSha256": "d6b7d7a56478d0113c38997db0317ffdfacec2556ceb85c80a847e1d54563c46",
+              "url": "https://ieo.shou.edu.cn/2025/1126/c18223a348600/page.htm"
+            }
+          ],
+          "storedDeadline": "2026-02-01",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "result": "closed",
+          "officialDeadline": "2026-02-01",
+          "candidateOfficialDeadline": "2026-02-01",
+          "reason": "same-2026-csc-high-level-type-b-route-and-exact-programme-level-match",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://ieo.shou.edu.cn/2025/1126/c18223a348600/page.htm",
+          "evidenceBodySha256": "85a221f7f350bbe7c3187c5c14d7b7b9556f85cfcf6499284a02031552104ad4",
+          "observedAt": "2026-10-19T09:05:00.130994+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "closureScope": "Only this explicitly matched 2026 route is past; no permanent programme cessation or successor-cycle closure is inferred.",
+          "quotedDate": "Applicable Deadline: February 1st, 2026",
+          "fundingRoute": "CSC High-level Postgraduate Category Type B 2026",
+          "exactMajorQuote": "Marine Science",
+          "programmeSection": "Doctoral Degree Programs; Course Language English",
+          "openingRelativeWording": "Now",
+          "awardOwnDateNotBorrowed": false,
+          "laterInstitutionReviewAndAdmissionNotApplicantCutoff": true
+        }
+      ]
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "reportSha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "batch": "official-batch-025",
+      "reportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f"
+    },
+    {
+      "batch": "official-batch-026",
+      "reportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9"
+    },
+    {
+      "batch": "official-batch-027",
+      "reportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+    }
+  ],
+  "validation": {
+    "exactSeventeenIdsCoveredOnce": true,
+    "noAssessedOrPriorApprovedOverlap": true,
+    "allSixCanonicalInputsUnchanged": true,
+    "canonicalRecordParentLinkedProgrammeSourceAndUniversityPinsSaved": true,
+    "quotedTextFragmentsMatchSavedOriginalText": true,
+    "sduDateReadFromOriginalImageWithPinnedLosslessLocators": true,
+    "unknownOpeningNotAssessed": true,
+    "closedDatesAreExplicitPastIsoDays": true,
+    "extensionsMatchRootSelectionReceipt": true
+  }
+}

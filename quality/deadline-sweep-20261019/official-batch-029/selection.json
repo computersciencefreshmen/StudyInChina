@@ -1,0 +1,2452 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-029-20261019",
+  "selectedAt": "2026-10-19T09:04:25.816Z",
+  "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "statePath": "quality/recovery-20261018/continuation-state.json",
+  "stateSha256": "199074501d4ef3c921fab69766c40d6294e7a669e4953fc6b73526abd8449d8b",
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v7.json",
+  "queueSha256": "eeb500d880d56d97fc7145542a31273047f77b23852a62857a74f428a791ad5b",
+  "summaryPath": "quality/deadline-sweep-20261019/official-review-summary-v9.json",
+  "summarySha256": "cc96348f958644d76c1a4d253e734ba1bf7c87ed1b4b0cee844ad29dedf69b70",
+  "inventoryPath": "quality/deadline-sweep-20261019/catalog-deadlines.json",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "universityIds": [
+    "uni-north-china-university-of-technology",
+    "uni-northeast-agricultural-university",
+    "uni-northeast-electric-power-university",
+    "uni-northeast-forestry-university",
+    "uni-northeast-normal-university",
+    "uni-northwest-university-of-political-science-and-law"
+  ],
+  "baseQueueRecordIds": [
+    "sch-gap-breadth-sch-ncut-beijing-government",
+    "cycle-gap-breadth-ncut-b-electronic-information-engineering-en-2026-2027-other",
+    "cycle-gap-breadth-ncut-b-mechatronics-engineering-en-2026-2027-other",
+    "cycle-gap-local-strong-ncut-b-architecture-en-2026-2027-other",
+    "sch-gap-sch-mew-ne-neau-csc-high-level-postgraduate",
+    "cycle-gap-prog-mew-ne-neau-animal-husbandry-doctorate-2026-2027-autumn",
+    "cycle-gap-prog-mew-ne-neau-food-science-doctorate-2026-2027-autumn",
+    "cycle-gap-prog-mew-ne-neau-international-chinese-education-master-2026-2027-autumn",
+    "sch-gap-sch-mew-nnw-neepu-changbaishan",
+    "sch-gap-sch-mew-ne-nefu-president",
+    "sch-gap-nenu-2026-iclts-bachelor-language-coverage",
+    "cycle-gap-nenu-2026-bachelor-tcsol-2026-2027-autumn",
+    "cycle-gap-nenu-2026-one-year-chinese-literature-2026-2027-autumn",
+    "sch-gap-sch-mew-nnw-nwupl-central-asian-five-countries",
+    "sch-gap-sch-mew-nnw-nwupl-xian-belt-road",
+    "sch-gap-wave8-2-nwupl-belt-road-scholarship",
+    "cycle-gap-prog-mew-nnw-nwupl-chinese-language-2026-2027-autumn-fee-reference"
+  ],
+  "additionalSameSourceRecordIds": [
+    "cycle-gap-wave8-2-nwupl-cross-border-ecommerce-bachelor-2026-2027-autumn",
+    "cycle-gap-prog-mew-nnw-nwupl-law-master-2026-2027-autumn-fee-reference",
+    "cycle-gap-prog-mew-nnw-nwupl-law-doctorate-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave8-2-nwupl-law-bachelor-2026-2027-autumn"
+  ],
+  "records": [
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-breadth-sch-ncut-beijing-government",
+      "universityId": "uni-north-china-university-of-technology",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "id": "sch-gap-breadth-sch-ncut-beijing-government",
+        "slug": "gap-breadth-sch-ncut-beijing-government",
+        "name": {
+          "en": "Beijing Government Scholarship for International Students",
+          "zh": "北京市外国留学生奖学金",
+          "ru": "Стипендия правительства Пекина для иностранных студентов"
+        },
+        "providerType": "city",
+        "universityIds": [
+          "uni-north-china-university-of-technology"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+        "summary": {
+          "en": "NCUT's official international admissions instructions require freshmen who seek the Beijing Government Scholarship to upload the scholarship application form.",
+          "zh": "北方工业大学国际招生官方说明要求申请北京市政府奖学金的新生上传奖学金申请表。",
+          "ru": "Официальные инструкции NCUT требуют от первокурсников, претендующих на стипендию правительства Пекина, загрузить соответствующую форму."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-breadth-sch-ncut-beijing-government"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "0fe7def421b5f0ceab4aec2324a550ce0c9771220055be027240b9e2a3ea22f6",
+      "publishedInInputSnapshot": false,
+      "programRows": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-breadth-sch-ncut-beijing-government",
+            "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+            "title": "NCUT International Undergraduate Admissions",
+            "publisher": "north-china-university-of-technology",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "canonicalSourceSha256": "db2c7815dabe2e21d9d832fbe8187de1720b2ce549258d60acf958128f5df50d"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-breadth-ncut-b-electronic-information-engineering-en-2026-2027-other",
+      "universityId": "uni-north-china-university-of-technology",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-breadth-ncut-b-electronic-information-engineering-en"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-breadth-ncut-b-electronic-information-engineering-en-2026-2027-other",
+        "programId": "prog-gap-breadth-ncut-b-electronic-information-engineering-en",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "NCUT's official international admissions page lists Electronic Information Engineering among four English-taught bachelor programs.",
+          "zh": "北方工业大学国际招生官网将电子信息工程列入四个英文授课本科项目。",
+          "ru": "Официальная страница международного приёма NCUT включает электронную информационную инженерию в четыре англоязычные программы бакалавриата."
+        }
+      },
+      "canonicalRecordSha256": "df29047357a65054ab702191575dbf9bf23e3a42d9d13f2acb1921025a4c149b",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-breadth-ncut-b-electronic-information-engineering-en"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-breadth-ncut-b-electronic-information-engineering-en",
+            "slug": "gap-breadth-ncut-b-electronic-information-engineering-en-bachelor",
+            "universityId": "uni-north-china-university-of-technology",
+            "name": {
+              "en": "Electronic Information Engineering",
+              "zh": "电子信息工程",
+              "ru": "Электронная информационная инженерия"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+            "applyUrl": "https://ncut.17gz.org/member/login.do",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "fdbdab738c7eb1c8a0550d5c3e8433ed0ca77afde2141d3dbda646aef88b350b"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-breadth-ncut-b-electronic-information-engineering-en",
+            "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+            "title": "NCUT International Undergraduate Admissions",
+            "publisher": "north-china-university-of-technology",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "canonicalSourceSha256": "17801e66393b821d50f4c73d6e472487ac14f01674bf0e630535e3974f0b29f1"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-breadth-ncut-b-mechatronics-engineering-en-2026-2027-other",
+      "universityId": "uni-north-china-university-of-technology",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-breadth-ncut-b-mechatronics-engineering-en"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-breadth-ncut-b-mechatronics-engineering-en-2026-2027-other",
+        "programId": "prog-gap-breadth-ncut-b-mechatronics-engineering-en",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official NCUT international undergraduate page identifies Mechatronics Engineering as English-taught and states bachelor programs normally last four years.",
+          "zh": "北方工业大学国际本科官网明确机械电子工程为英文授课，且本科项目通常为四年制。",
+          "ru": "Официальная страница NCUT указывает мехатронику как англоязычную программу и сообщает стандартную продолжительность бакалавриата четыре года."
+        }
+      },
+      "canonicalRecordSha256": "1ba54227995338bdde43675e336e7371e9a54e835a92d292ad8a2a5a0a2376af",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-breadth-ncut-b-mechatronics-engineering-en"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-breadth-ncut-b-mechatronics-engineering-en",
+            "slug": "gap-breadth-ncut-b-mechatronics-engineering-en-bachelor",
+            "universityId": "uni-north-china-university-of-technology",
+            "name": {
+              "en": "Mechatronics Engineering",
+              "zh": "机械电子工程",
+              "ru": "Мехатроника"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+            "applyUrl": "https://ncut.17gz.org/member/login.do",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "288ad57f7073549fabad3bbe185678b7ce0f9097bd5f9719b954befa055cfab1"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-breadth-ncut-b-mechatronics-engineering-en",
+            "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+            "title": "NCUT International Undergraduate Admissions",
+            "publisher": "north-china-university-of-technology",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "canonicalSourceSha256": "f3d2df76d95d24c787d421f9a864d851d5a0e883e8814a895fc4face4cb27f94"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-local-strong-ncut-b-architecture-en-2026-2027-other",
+      "universityId": "uni-north-china-university-of-technology",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-local-strong-ncut-b-architecture-en"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-local-strong-ncut-b-architecture-en-2026-2027-other",
+        "programId": "prog-gap-local-strong-ncut-b-architecture-en",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official admissions page lists Architecture as a five-year English-taught bachelor's program.",
+          "zh": "官方招生页面列出建筑学五年制英文授课本科项目。",
+          "ru": "Официальная страница приёма указывает пятилетний англоязычный бакалавриат по архитектуре."
+        }
+      },
+      "canonicalRecordSha256": "7e555e5052a4c7a1010491a452b82b91e518452440073f550daa1871e5e27332",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-local-strong-ncut-b-architecture-en"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-local-strong-ncut-b-architecture-en",
+            "slug": "gap-local-strong-ncut-b-architecture-en-bachelor",
+            "universityId": "uni-north-china-university-of-technology",
+            "name": {
+              "en": "Architecture",
+              "zh": "建筑学",
+              "ru": "Архитектура"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "other",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 60,
+            "programUrl": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "69050b331aa4e8c09a3fdd63fb618db4c60ada8e674c12076fcc6a1e705a23d2"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-local-strong-ncut-b-architecture-en",
+            "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+            "title": "NCUT International Undergraduate Programs",
+            "publisher": "north-china-university-of-technology",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "canonicalSourceSha256": "9f188fa53ee35e9ac8dacff0d74a46c186f85c0b7812c603c118cbcecd631492"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-sch-mew-ne-neau-csc-high-level-postgraduate",
+      "universityId": "uni-northeast-agricultural-university",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "id": "sch-gap-sch-mew-ne-neau-csc-high-level-postgraduate",
+        "slug": "gap-sch-mew-ne-neau-csc-high-level-postgraduate",
+        "name": {
+          "en": "Chinese Government Scholarship High-Level Postgraduate Program at NEAU",
+          "zh": "东北农业大学中国政府奖学金高水平研究生项目",
+          "ru": "Стипендия правительства Китая для магистрантов и докторантов NEAU"
+        },
+        "providerType": "csc",
+        "universityIds": [
+          "uni-northeast-agricultural-university"
+        ],
+        "programIds": [
+          "prog-gap-prog-mew-ne-neau-international-chinese-education-master",
+          "prog-gap-prog-mew-ne-neau-animal-husbandry-doctorate",
+          "program-northeast-agricultural-university-food-science-doctorate"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+        "summary": {
+          "en": "The official 2026 guide provides tuition, accommodation, insurance and monthly stipends for eligible master and doctoral programs.",
+          "zh": "2026年官方指南为符合条件的硕博项目提供学费、住宿、保险和月度生活费。",
+          "ru": "Официальный справочник 2026 года предоставляет оплату обучения, проживание, страховку и ежемесячную стипендию для магистратуры и докторантуры."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-mew-ne-neau-csc-high-level-postgraduate"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "3553179ca9d740b9762ee8be281efdfb026309e5ff7d0fabaacc4e1f06db469a",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-ne-neau-international-chinese-education-master",
+              "src-gap-program-prog-mew-ne-neau-international-chinese-education-master-support-1"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-ne-neau-international-chinese-education-master",
+            "slug": "gap-prog-mew-ne-neau-international-chinese-education-master-master",
+            "universityId": "uni-northeast-agricultural-university",
+            "name": {
+              "en": "International Chinese Language Education",
+              "zh": "国际中文教育",
+              "ru": "Международное преподавание китайского языка"
+            },
+            "degreeLevel": "master",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 36,
+            "programUrl": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+            "applyUrl": "https://dn.at0086.cn/student",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "ce4478a73a05a9c606c263486daeb56f82447bf1dbc150e9dbce216c4c1a2aab"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-ne-neau-animal-husbandry-doctorate"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-ne-neau-animal-husbandry-doctorate",
+            "slug": "gap-prog-mew-ne-neau-animal-husbandry-doctorate-doctorate",
+            "universityId": "uni-northeast-agricultural-university",
+            "name": {
+              "en": "Animal Husbandry",
+              "zh": "畜牧学",
+              "ru": "Животноводство"
+            },
+            "degreeLevel": "doctorate",
+            "discipline": "other",
+            "teachingLanguages": [
+              "Chinese",
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+            "applyUrl": "https://dn.at0086.cn/student",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "549d1a79893fd91de7e899cf8d47548a427b7b0797e2ee3becc58dc190c19310"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-program-review-fc6ee6711f67",
+              "src-gap-program-prog-mew-ne-neau-food-science-doctorate"
+            ],
+            "verifiedAt": "2026-07-27",
+            "reviewAfter": "2026-08-26",
+            "status": "stale",
+            "id": "program-northeast-agricultural-university-food-science-doctorate",
+            "slug": "northeast-agricultural-university-food-science-doctorate",
+            "universityId": "uni-northeast-agricultural-university",
+            "name": {
+              "en": "Food Science",
+              "zh": "Food Science",
+              "ru": "Пищевая наука"
+            },
+            "degreeLevel": "doctorate",
+            "discipline": "science",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://gjxy.neau.edu.cn/info/1035/1080.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "identity"
+          },
+          "canonicalProgramSha256": "1a47c68b59390134ef29b4aad188f98f9b0d1c38e6332d2bf344a0445c5ff9c9"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-mew-ne-neau-csc-high-level-postgraduate",
+            "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+            "title": "2026东北农业大学中国政府奖学金高水平研究生项目招生简章",
+            "publisher": "northeast-agricultural-university",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "3c4fe21f7a8ed50e4b434126f7e4b04b1d21331a858a5c4a92ac8c69e20a3d63"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-neau-international-chinese-education-master",
+            "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+            "title": "2026东北农业大学中国政府奖学金高水平研究生项目招生简章",
+            "publisher": "northeast-agricultural-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "aede2adeacf4a449c382a49644cda30aa2d29ae59d03bc4f48adf9d574d30405"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-neau-international-chinese-education-master-support-1",
+            "url": "https://gjxy.neau.edu.cn/dongbeinongyedaxue2025jielaihualiuxueshengxueshixueweishouyumingdan.pdf",
+            "title": "东北农业大学2025届来华留学生学士学位授予名单",
+            "publisher": "northeast-agricultural-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "ff4c573903a4f5559029d0a532aaac97ec0a8b6e45aa3346a88093a741b25e45"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-neau-animal-husbandry-doctorate",
+            "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+            "title": "2026东北农业大学中国政府奖学金高水平研究生项目招生简章",
+            "publisher": "northeast-agricultural-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "7feb1d6fae5e6ac3970af1c12bb05ebc1a2ee81a5b8a0a72fd8800ce7ad9aff4"
+        },
+        {
+          "row": {
+            "id": "src-program-review-fc6ee6711f67",
+            "url": "https://gjxy.neau.edu.cn/info/1035/1080.htm",
+            "title": "Official program information — Food Science",
+            "publisher": "Northeast Agricultural University",
+            "kind": "program",
+            "language": "other",
+            "official": true,
+            "accessedAt": "2026-07-27"
+          },
+          "canonicalSourceSha256": "97a8d5cae86274fc7c79686b722c0c56996f17adf46e9eb8712370fbfde98399"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-neau-food-science-doctorate",
+            "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+            "title": "2026东北农业大学中国政府奖学金高水平研究生项目招生简章",
+            "publisher": "northeast-agricultural-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "fec72a61553d21a6a469ce7541e96ddc3ae313b03f1f87b732309988fe76a3fd"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-ne-neau-animal-husbandry-doctorate-2026-2027-autumn",
+      "universityId": "uni-northeast-agricultural-university",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-neau-animal-husbandry-doctorate"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-ne-neau-animal-husbandry-doctorate-2026-2027-autumn",
+        "programId": "prog-gap-prog-mew-ne-neau-animal-husbandry-doctorate",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": "2025-11-01",
+        "closesOn": "2026-03-15",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The 2026 official catalog lists the four-year doctoral program in Animal Husbandry with Chinese and English teaching options.",
+          "zh": "2026年官方目录列出四年制畜牧学博士，中英文均可授课。",
+          "ru": "Официальный каталог 2026 года указывает четырехлетнюю докторантуру по животноводству на китайском или английском языке."
+        }
+      },
+      "canonicalRecordSha256": "ff3f7e0a4579d1c71aa0d1000699ba327c25b17ba2a2613b7c2d883cb919d70e",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-ne-neau-animal-husbandry-doctorate"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-ne-neau-animal-husbandry-doctorate",
+            "slug": "gap-prog-mew-ne-neau-animal-husbandry-doctorate-doctorate",
+            "universityId": "uni-northeast-agricultural-university",
+            "name": {
+              "en": "Animal Husbandry",
+              "zh": "畜牧学",
+              "ru": "Животноводство"
+            },
+            "degreeLevel": "doctorate",
+            "discipline": "other",
+            "teachingLanguages": [
+              "Chinese",
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+            "applyUrl": "https://dn.at0086.cn/student",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "549d1a79893fd91de7e899cf8d47548a427b7b0797e2ee3becc58dc190c19310"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-neau-animal-husbandry-doctorate",
+            "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+            "title": "2026东北农业大学中国政府奖学金高水平研究生项目招生简章",
+            "publisher": "northeast-agricultural-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "7feb1d6fae5e6ac3970af1c12bb05ebc1a2ee81a5b8a0a72fd8800ce7ad9aff4"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-ne-neau-food-science-doctorate-2026-2027-autumn",
+      "universityId": "uni-northeast-agricultural-university",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-neau-food-science-doctorate"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-ne-neau-food-science-doctorate-2026-2027-autumn",
+        "programId": "program-northeast-agricultural-university-food-science-doctorate",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": "2025-11-01",
+        "closesOn": "2026-03-15",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The university's 2026 official scholarship catalog lists a four-year Food Science doctorate available in Chinese or English.",
+          "zh": "学校2026年官方奖学金目录列出四年制食品科学博士，可中英文授课。",
+          "ru": "Официальный стипендиальный каталог 2026 года включает четырехлетнюю докторантуру по пищевой науке на китайском или английском языке."
+        }
+      },
+      "canonicalRecordSha256": "7e3aabd618a91749a9896c3501b6a502a3163038e567a2628dac96461a7eb07a",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-program-review-fc6ee6711f67",
+              "src-gap-program-prog-mew-ne-neau-food-science-doctorate"
+            ],
+            "verifiedAt": "2026-07-27",
+            "reviewAfter": "2026-08-26",
+            "status": "stale",
+            "id": "program-northeast-agricultural-university-food-science-doctorate",
+            "slug": "northeast-agricultural-university-food-science-doctorate",
+            "universityId": "uni-northeast-agricultural-university",
+            "name": {
+              "en": "Food Science",
+              "zh": "Food Science",
+              "ru": "Пищевая наука"
+            },
+            "degreeLevel": "doctorate",
+            "discipline": "science",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://gjxy.neau.edu.cn/info/1035/1080.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "identity"
+          },
+          "canonicalProgramSha256": "1a47c68b59390134ef29b4aad188f98f9b0d1c38e6332d2bf344a0445c5ff9c9"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-neau-food-science-doctorate",
+            "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+            "title": "2026东北农业大学中国政府奖学金高水平研究生项目招生简章",
+            "publisher": "northeast-agricultural-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "fec72a61553d21a6a469ce7541e96ddc3ae313b03f1f87b732309988fe76a3fd"
+        },
+        {
+          "row": {
+            "id": "src-program-review-fc6ee6711f67",
+            "url": "https://gjxy.neau.edu.cn/info/1035/1080.htm",
+            "title": "Official program information — Food Science",
+            "publisher": "Northeast Agricultural University",
+            "kind": "program",
+            "language": "other",
+            "official": true,
+            "accessedAt": "2026-07-27"
+          },
+          "canonicalSourceSha256": "97a8d5cae86274fc7c79686b722c0c56996f17adf46e9eb8712370fbfde98399"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-ne-neau-international-chinese-education-master-2026-2027-autumn",
+      "universityId": "uni-northeast-agricultural-university",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-neau-international-chinese-education-master",
+          "src-gap-program-prog-mew-ne-neau-international-chinese-education-master-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-ne-neau-international-chinese-education-master-2026-2027-autumn",
+        "programId": "prog-gap-prog-mew-ne-neau-international-chinese-education-master",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": "2025-11-01",
+        "closesOn": "2026-03-15",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official 2026 postgraduate scholarship catalog lists a three-year Chinese-taught master's in International Chinese Language Education.",
+          "zh": "2026年官方研究生奖学金专业目录列出三年制中文授课国际中文教育硕士。",
+          "ru": "Официальный каталог 2026 года указывает трехлетнюю магистратуру по международному преподаванию китайского языка на китайском языке."
+        }
+      },
+      "canonicalRecordSha256": "af07a85db0894bb3e3704ab93c3d0e9b272eaaf2246e4672d30963ce430c1a1b",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-ne-neau-international-chinese-education-master",
+              "src-gap-program-prog-mew-ne-neau-international-chinese-education-master-support-1"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-ne-neau-international-chinese-education-master",
+            "slug": "gap-prog-mew-ne-neau-international-chinese-education-master-master",
+            "universityId": "uni-northeast-agricultural-university",
+            "name": {
+              "en": "International Chinese Language Education",
+              "zh": "国际中文教育",
+              "ru": "Международное преподавание китайского языка"
+            },
+            "degreeLevel": "master",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 36,
+            "programUrl": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+            "applyUrl": "https://dn.at0086.cn/student",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "ce4478a73a05a9c606c263486daeb56f82447bf1dbc150e9dbce216c4c1a2aab"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-neau-international-chinese-education-master",
+            "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+            "title": "2026东北农业大学中国政府奖学金高水平研究生项目招生简章",
+            "publisher": "northeast-agricultural-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "aede2adeacf4a449c382a49644cda30aa2d29ae59d03bc4f48adf9d574d30405"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-neau-international-chinese-education-master-support-1",
+            "url": "https://gjxy.neau.edu.cn/dongbeinongyedaxue2025jielaihualiuxueshengxueshixueweishouyumingdan.pdf",
+            "title": "东北农业大学2025届来华留学生学士学位授予名单",
+            "publisher": "northeast-agricultural-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "ff4c573903a4f5559029d0a532aaac97ec0a8b6e45aa3346a88093a741b25e45"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-sch-mew-nnw-neepu-changbaishan",
+      "universityId": "uni-northeast-electric-power-university",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "id": "sch-gap-sch-mew-nnw-neepu-changbaishan",
+        "slug": "gap-sch-mew-nnw-neepu-changbaishan",
+        "name": {
+          "en": "Jilin Provincial Government Changbaishan Scholarship",
+          "zh": "吉林省政府来华留学生“长白山奖学金”",
+          "ru": "Стипендия правительства провинции Цзилинь «Чанбайшань»"
+        },
+        "providerType": "province",
+        "universityIds": [
+          "uni-northeast-electric-power-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://cie.neepu.edu.cn/info/1159/1079.htm",
+        "summary": {
+          "en": "The official university page confirms a full two-year master's scholarship covering tuition, accommodation, insurance and a CNY 1,700 monthly allowance; its June 15 deadline is not tied to a stated intake year, so no cycle is opened.",
+          "zh": "学校官网确认该两年制硕士全额奖学金覆盖学费、住宿、保险和每月1,700元生活费；6月15日截止日期未绑定明确招生年度，因此不开放周期。",
+          "ru": "Официальная страница подтверждает полную двухлетнюю магистерскую стипендию с оплатой обучения, проживания, страховки и пособием 1 700 CNY в месяц; срок 15 июня не привязан к году набора, поэтому цикл не открыт."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-mew-nnw-neepu-changbaishan"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-09-04",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "a9294217f4f26c20ff60e6be0a450647f4c2ab894ec6fbc56416e71a44c57922",
+      "publishedInInputSnapshot": false,
+      "programRows": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-mew-nnw-neepu-changbaishan",
+            "url": "https://cie.neepu.edu.cn/info/1159/1079.htm",
+            "title": "东北电力大学吉林省政府来华留学生“长白山奖学金”招生简章",
+            "publisher": "northeast-electric-power-university",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "canonicalSourceSha256": "70bf9290e467d989fa9a6b45db3a594124a0b32222a4af13b2206ff5b687d1ca"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-sch-mew-ne-nefu-president",
+      "universityId": "uni-northeast-forestry-university",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "id": "sch-gap-sch-mew-ne-nefu-president",
+        "slug": "gap-sch-mew-ne-nefu-president",
+        "name": {
+          "en": "NEFU President Scholarship for Outstanding International Students",
+          "zh": "东北林业大学优秀外国留学生校长奖学金",
+          "ru": "Президентская стипендия NEFU для отличившихся иностранных студентов"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-northeast-forestry-university"
+        ],
+        "programIds": [
+          "program-northeast-forestry-university-forestry-bachelor",
+          "prog-gap-prog-mew-ne-nefu-ecology-master",
+          "prog-gap-prog-mew-ne-nefu-environmental-engineering-master"
+        ],
+        "coverage": {
+          "tuition": "partial",
+          "accommodation": "full",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://siee.nefu.edu.cn/English/Scholarships/NEFU_President_Scholarship_.htm",
+        "summary": {
+          "en": "The official page supports self-funded international bachelor and master applicants with three tuition/accommodation tiers and states applications before April 30.",
+          "zh": "官方页面面向自费国际本科和硕士申请人，设三档学费/住宿资助，申请截止4月30日前。",
+          "ru": "Официальная страница предлагает три уровня льгот по обучению и проживанию для иностранных бакалавров и магистрантов; подача до 30 апреля."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-mew-ne-nefu-president",
+          "src-gap-scholarship-sch-mew-ne-nefu-president-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "2935129b88a0262af26193f4c01b673ec23117bea16791ab20fd324c1afce877",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-program-review-4c5085c9e8a0",
+              "src-gap-program-prog-mew-ne-nefu-forestry-bachelor"
+            ],
+            "verifiedAt": "2026-07-27",
+            "reviewAfter": "2026-08-26",
+            "status": "stale",
+            "id": "program-northeast-forestry-university-forestry-bachelor",
+            "slug": "northeast-forestry-university-forestry-bachelor",
+            "universityId": "uni-northeast-forestry-university",
+            "name": {
+              "en": "Forestry",
+              "zh": "林学",
+              "ru": "Лесное хозяйство"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "science",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://siee.nefu.edu.cn/jjy/bksxm.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "identity"
+          },
+          "canonicalProgramSha256": "b73cbef43c0e088afe0bf569b6c046ac4aeaca9025c1c868988523a7f3e4bcae"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-ne-nefu-ecology-master",
+              "src-gap-program-prog-mew-ne-nefu-ecology-master-support-1"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-ne-nefu-ecology-master",
+            "slug": "gap-prog-mew-ne-nefu-ecology-master-master",
+            "universityId": "uni-northeast-forestry-university",
+            "name": {
+              "en": "Ecology",
+              "zh": "生态学",
+              "ru": "Экология"
+            },
+            "degreeLevel": "master",
+            "discipline": "other",
+            "teachingLanguages": [
+              "Chinese",
+              "English"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://siee.nefu.edu.cn/English/Programs/Master.htm",
+            "applyUrl": "https://istudy.nefu.edu.cn/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "ee02051d8d6be28e9587ba6afb849a83694c14a4bda4eb90656d58bd74abee63"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-ne-nefu-environmental-engineering-master",
+              "src-gap-program-prog-mew-ne-nefu-environmental-engineering-master-support-1"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-ne-nefu-environmental-engineering-master",
+            "slug": "gap-prog-mew-ne-nefu-environmental-engineering-master-master",
+            "universityId": "uni-northeast-forestry-university",
+            "name": {
+              "en": "Environmental Engineering",
+              "zh": "环境工程",
+              "ru": "Инженерия окружающей среды"
+            },
+            "degreeLevel": "master",
+            "discipline": "other",
+            "teachingLanguages": [
+              "Chinese",
+              "English"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://siee.nefu.edu.cn/English/Programs/Master.htm",
+            "applyUrl": "https://istudy.nefu.edu.cn/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "4ba7461496b763d2ed0e405f217148dfe29009044837d11f4b74eda3f335dbff"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-mew-ne-nefu-president",
+            "url": "https://siee.nefu.edu.cn/English/Scholarships/NEFU_President_Scholarship_.htm",
+            "title": "NEFU President Scholarship",
+            "publisher": "northeast-forestry-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "b3ab859d8ba5879bf838748bd9743f83a8147980ec5795b8b9e2540926b2552a"
+        },
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-mew-ne-nefu-president-support-1",
+            "url": "https://siee.nefu.edu.cn/jxjxm/dlxzjxj_yxxs_.htm",
+            "title": "东林校长奖学金（优秀新生）",
+            "publisher": "northeast-forestry-university",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "ff09b1ef0e9dddc601cf35bb4af747fd27b31b6a775083f23006525e09d24ed6"
+        },
+        {
+          "row": {
+            "id": "src-program-review-4c5085c9e8a0",
+            "url": "https://siee.nefu.edu.cn/jjy/bksxm.htm",
+            "title": "Official program information — Forestry",
+            "publisher": "Northeast Forestry University",
+            "kind": "program",
+            "language": "other",
+            "official": true,
+            "accessedAt": "2026-07-27"
+          },
+          "canonicalSourceSha256": "c5bb0b48262d64baf66bb483c4ac54cbbcf5e68a1658fc14cc05abc49a1adb96"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-nefu-forestry-bachelor",
+            "url": "https://siee.nefu.edu.cn/jjy/bksxm.htm",
+            "title": "东北林业大学本科生项目",
+            "publisher": "northeast-forestry-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "34b0f2ffc76a6b55510c06baa98d96e6300bb7cbbd0b39040c6e20f94c848887"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-nefu-ecology-master",
+            "url": "https://siee.nefu.edu.cn/English/Programs/Master.htm",
+            "title": "NEFU Master's Degree Programs",
+            "publisher": "northeast-forestry-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "81cf30d13f6537b8837afe970ebb4e0cd85b98abb1c3caa903fc640597dbc21e"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-nefu-ecology-master-support-1",
+            "url": "https://siee.nefu.edu.cn/info/1017/1135.htm",
+            "title": "东北林业大学硕士生项目",
+            "publisher": "northeast-forestry-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "1dc6fa4802f5a921c57f58bc6501ebd458e568bf61f237c91c66fa6b9716db2f"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-nefu-environmental-engineering-master",
+            "url": "https://siee.nefu.edu.cn/English/Programs/Master.htm",
+            "title": "NEFU Master's Degree Programs",
+            "publisher": "northeast-forestry-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "1b2f7774de31f86a0b8ba70191499d7f10631283db9d064de8fab9aa89368a95"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-nefu-environmental-engineering-master-support-1",
+            "url": "https://siee.nefu.edu.cn/info/1017/1135.htm",
+            "title": "东北林业大学硕士生项目",
+            "publisher": "northeast-forestry-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "canonicalSourceSha256": "849bd4006256ecf3a9f1d6ba03792d7bad7bf90b9ea1bfa9840b21429286793a"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-nenu-2026-iclts-bachelor-language-coverage",
+      "universityId": "uni-northeast-normal-university",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "id": "sch-gap-nenu-2026-iclts-bachelor-language-coverage",
+        "slug": "gap-nenu-2026-iclts-bachelor-language-coverage",
+        "name": {
+          "en": "International Chinese Language Teachers Scholarship — NENU",
+          "zh": "国际中文教师奖学金—东北师范大学",
+          "ru": "Стипендия для преподавателей китайского языка — Северо-Восточный педагогический университет"
+        },
+        "providerType": "other",
+        "universityIds": [
+          "uni-northeast-normal-university"
+        ],
+        "programIds": [
+          "prog-gap-nenu-2026-bachelor-tcsol",
+          "prog-gap-nenu-2026-one-year-chinese-literature"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+        "summary": {
+          "en": "NENU's official 2026 guide confirms scholarship support for the TCSOL bachelor and one-year Chinese Language and Literature study route. It covers tuition, accommodation, a monthly allowance and medical insurance; the host deadline has passed.",
+          "zh": "东北师范大学官方2026年简章确认，奖学金适用于汉语国际教育本科及汉语言文学一年研修，覆盖学费、住宿、生活费和医疗保险；学校申请截止日期已过。",
+          "ru": "Официальное руководство NENU 2026 подтверждает поддержку бакалавриата TCSOL и годовой программы китайского языка и литературы. Стипендия покрывает обучение, проживание, пособие и страховку; срок вуза истёк."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-nenu-2026-iclts-bachelor-language-coverage"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "e12c392f5d6d23f20914f851d1f109e70446aaf923cd75d8b61236a4d2d9b813",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-nenu-2026-bachelor-tcsol"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-nenu-2026-bachelor-tcsol",
+            "slug": "gap-nenu-2026-bachelor-tcsol-bachelor",
+            "universityId": "uni-northeast-normal-university",
+            "name": {
+              "en": "Bachelor of Teaching Chinese to Speakers of Other Languages",
+              "zh": "汉语国际教育本科",
+              "ru": "Бакалавриат по преподаванию китайского языка как иностранного"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "65eac45f944c2e8e4fb7c45b0c7eae12fbd3a70f8d01241ce8efdd4f886fb8da"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-nenu-2026-one-year-chinese-literature"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-nenu-2026-one-year-chinese-literature",
+            "slug": "gap-nenu-2026-one-year-chinese-literature-language",
+            "universityId": "uni-northeast-normal-university",
+            "name": {
+              "en": "One-year Chinese Language and Literature Study",
+              "zh": "汉语言文学一年研修",
+              "ru": "Годовая программа китайского языка и литературы"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 11,
+            "programUrl": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "7d6b32cb143940d7938b4ecf817f96a2f7c491264eba4dd4f26b5ac67a674748"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-nenu-2026-iclts-bachelor-language-coverage",
+            "url": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+            "title": "Northeast Normal University 2026 International Chinese Language Teachers Scholarship Guide",
+            "publisher": "northeast-normal-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "f5188bcf052a168195418a1deaf336eeddf9f73e6cf90f408a8246909ccbf58c"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-nenu-2026-bachelor-tcsol",
+            "url": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+            "title": "Northeast Normal University 2026 International Chinese Language Teachers Scholarship Guide",
+            "publisher": "northeast-normal-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "9bb1909d18f478a109ab4cecd712072ba65923f2e110eb9a7b1b86c5adf3b920"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-nenu-2026-one-year-chinese-literature",
+            "url": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+            "title": "Northeast Normal University 2026 International Chinese Language Teachers Scholarship Guide",
+            "publisher": "northeast-normal-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "cbc1627b3bb944a558c198e3fc1fc7b49367f8679d84edf5029e2f1ca336fff5"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-nenu-2026-bachelor-tcsol-2026-2027-autumn",
+      "universityId": "uni-northeast-normal-university",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-nenu-2026-bachelor-tcsol"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-nenu-2026-bachelor-tcsol-2026-2027-autumn",
+        "programId": "prog-gap-nenu-2026-bachelor-tcsol",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-04-30",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "A four-year undergraduate TCSOL route explicitly open to international scholarship applicants.",
+          "zh": "明确面向国际奖学金申请人的四年制汉语国际教育本科项目。",
+          "ru": "Четырёхлетний бакалавриат TCSOL, прямо открытый для иностранных стипендиальных кандидатов."
+        }
+      },
+      "canonicalRecordSha256": "c789f360ecf56445ac45cbfe6d8d2d80ecf99656b57597a4a77a7b159ae441a5",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-nenu-2026-bachelor-tcsol"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-nenu-2026-bachelor-tcsol",
+            "slug": "gap-nenu-2026-bachelor-tcsol-bachelor",
+            "universityId": "uni-northeast-normal-university",
+            "name": {
+              "en": "Bachelor of Teaching Chinese to Speakers of Other Languages",
+              "zh": "汉语国际教育本科",
+              "ru": "Бакалавриат по преподаванию китайского языка как иностранного"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "65eac45f944c2e8e4fb7c45b0c7eae12fbd3a70f8d01241ce8efdd4f886fb8da"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-nenu-2026-bachelor-tcsol",
+            "url": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+            "title": "Northeast Normal University 2026 International Chinese Language Teachers Scholarship Guide",
+            "publisher": "northeast-normal-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "9bb1909d18f478a109ab4cecd712072ba65923f2e110eb9a7b1b86c5adf3b920"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-nenu-2026-one-year-chinese-literature-2026-2027-autumn",
+      "universityId": "uni-northeast-normal-university",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-nenu-2026-one-year-chinese-literature"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-nenu-2026-one-year-chinese-literature-2026-2027-autumn",
+        "programId": "prog-gap-nenu-2026-one-year-chinese-literature",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-04-30",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "An eleven-month non-degree study route in Chinese language and literature for international participants.",
+          "zh": "面向国际学习者的 11 个月汉语言文学非学历研修项目。",
+          "ru": "Одиннадцатимесячная неакадемическая программа китайского языка и литературы для иностранных слушателей."
+        }
+      },
+      "canonicalRecordSha256": "9972caada7f26d06e872c953ee833e3ad447d492d8132704202f5829831f7752",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-nenu-2026-one-year-chinese-literature"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-nenu-2026-one-year-chinese-literature",
+            "slug": "gap-nenu-2026-one-year-chinese-literature-language",
+            "universityId": "uni-northeast-normal-university",
+            "name": {
+              "en": "One-year Chinese Language and Literature Study",
+              "zh": "汉语言文学一年研修",
+              "ru": "Годовая программа китайского языка и литературы"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 11,
+            "programUrl": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "7d6b32cb143940d7938b4ecf817f96a2f7c491264eba4dd4f26b5ac67a674748"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-nenu-2026-one-year-chinese-literature",
+            "url": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+            "title": "Northeast Normal University 2026 International Chinese Language Teachers Scholarship Guide",
+            "publisher": "northeast-normal-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "cbc1627b3bb944a558c198e3fc1fc7b49367f8679d84edf5029e2f1ca336fff5"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-sch-mew-nnw-nwupl-central-asian-five-countries",
+      "universityId": "uni-northwest-university-of-political-science-and-law",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "id": "sch-gap-sch-mew-nnw-nwupl-central-asian-five-countries",
+        "slug": "gap-sch-mew-nnw-nwupl-central-asian-five-countries",
+        "name": {
+          "en": "Xi'an Central Asian Five Countries Education and Training Plan Scholarship",
+          "zh": "西安市“中亚五国”留学生教育培训计划项目专项奖学金",
+          "ru": "Стипендия Сианя по программе обучения студентов из пяти стран Центральной Азии"
+        },
+        "providerType": "other",
+        "universityIds": [
+          "uni-northwest-university-of-political-science-and-law"
+        ],
+        "programIds": [
+          "prog-gap-prog-mew-nnw-nwupl-law-master",
+          "prog-gap-prog-mew-nnw-nwupl-law-doctorate"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+        "summary": {
+          "en": "The official 2026 guide confirms this scholarship for international bachelor, master and doctoral students, covering tuition, accommodation and listed study-related costs; it is submitted with admission by June 20.",
+          "zh": "2026年官方简章确认该专项奖学金面向国际本硕博学生，覆盖学费、住宿及列明的学习相关费用，须随入学申请于6月20日前提交。",
+          "ru": "Официальный справочник 2026 года подтверждает стипендию для иностранных бакалавров, магистрантов и докторантов с оплатой обучения, проживания и указанных расходов; заявление подавалось вместе с поступлением до 20 июня."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-mew-nnw-nwupl-central-asian-five-countries"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-09-04",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "734f928985d9a50aec415c5e9156441393bb111a11533c0e00f66ddb18be8fce",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nnw-nwupl-law-master"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nnw-nwupl-law-master",
+            "slug": "gap-prog-mew-nnw-nwupl-law-master-master",
+            "universityId": "uni-northwest-university-of-political-science-and-law",
+            "name": {
+              "en": "Law",
+              "zh": "法学",
+              "ru": "Право"
+            },
+            "degreeLevel": "master",
+            "discipline": "law-ir",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 36,
+            "durationMonthsMax": 60,
+            "programUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "fee0378131dd60c4ea0bafbb2bed05008759955d729e54720f58a6da1e09dc95"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nnw-nwupl-law-doctorate"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nnw-nwupl-law-doctorate",
+            "slug": "gap-prog-mew-nnw-nwupl-law-doctorate-doctorate",
+            "universityId": "uni-northwest-university-of-political-science-and-law",
+            "name": {
+              "en": "Law",
+              "zh": "法学",
+              "ru": "Право"
+            },
+            "degreeLevel": "doctorate",
+            "discipline": "law-ir",
+            "teachingLanguages": [
+              "Chinese",
+              "English"
+            ],
+            "durationMonths": 48,
+            "durationMonthsMax": 72,
+            "programUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "a999f206c6c4e1df3a6dc8d165118e7178acf961f6fbd776acc2cf479dd8b32b"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-mew-nnw-nwupl-central-asian-five-countries",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "西北政法大学2026年秋季学期来华留学生招生简章",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "canonicalSourceSha256": "42a23f363f05419a82d5bb66e9ce63fff50e2de79eee38871831ef07af793806"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nnw-nwupl-law-master",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "西北政法大学2026年秋季学期来华留学生招生简章",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "canonicalSourceSha256": "40a6264f2a0d21835ce211d357c8e46d8a1441e6c4beaa6f485924ec549728b7"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nnw-nwupl-law-doctorate",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "西北政法大学2026年秋季学期来华留学生招生简章",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "canonicalSourceSha256": "220ea952507b0c03e513edc486b8ef3836f831b4cc7d81138605c44850998038"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-sch-mew-nnw-nwupl-xian-belt-road",
+      "universityId": "uni-northwest-university-of-political-science-and-law",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "id": "sch-gap-sch-mew-nnw-nwupl-xian-belt-road",
+        "slug": "gap-sch-mew-nnw-nwupl-xian-belt-road",
+        "name": {
+          "en": "Xi'an Belt and Road International Student Scholarship",
+          "zh": "西安市“一带一路”外国留学生奖学金",
+          "ru": "Сианьская стипендия «Пояс и путь» для иностранных студентов"
+        },
+        "providerType": "other",
+        "universityIds": [
+          "uni-northwest-university-of-political-science-and-law"
+        ],
+        "programIds": [
+          "prog-gap-prog-mew-nnw-nwupl-chinese-language",
+          "prog-gap-prog-mew-nnw-nwupl-law-master",
+          "prog-gap-prog-mew-nnw-nwupl-law-doctorate"
+        ],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+        "summary": {
+          "en": "The official 2026 guide confirms this scholarship for new international students at all levels, providing a monthly allowance for ten months and requiring submission with the admission application by June 20.",
+          "zh": "2026年官方简章确认该奖学金面向所有层次国际新生，连续10个月发放月生活补贴，并须随入学申请于6月20日前提交。",
+          "ru": "Официальный справочник 2026 года подтверждает стипендию для новых иностранных студентов всех уровней с ежемесячным пособием в течение 10 месяцев; заявление подавалось до 20 июня вместе с поступлением."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-mew-nnw-nwupl-xian-belt-road"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-09-04",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "3f351060f4c0230a27d7b832d1b1516555508d0211cc6d173836e5bad2ae53dd",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nnw-nwupl-chinese-language"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nnw-nwupl-chinese-language",
+            "slug": "gap-prog-mew-nnw-nwupl-chinese-language-language",
+            "universityId": "uni-northwest-university-of-political-science-and-law",
+            "name": {
+              "en": "Chinese Language Program",
+              "zh": "汉语进修项目",
+              "ru": "Программа китайского языка"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 6,
+            "programUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "cb89bcf592eba0bd74a8b9657021eca3775ec3baea4e8f7364baf91f80faf07a"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nnw-nwupl-law-master"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nnw-nwupl-law-master",
+            "slug": "gap-prog-mew-nnw-nwupl-law-master-master",
+            "universityId": "uni-northwest-university-of-political-science-and-law",
+            "name": {
+              "en": "Law",
+              "zh": "法学",
+              "ru": "Право"
+            },
+            "degreeLevel": "master",
+            "discipline": "law-ir",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 36,
+            "durationMonthsMax": 60,
+            "programUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "fee0378131dd60c4ea0bafbb2bed05008759955d729e54720f58a6da1e09dc95"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nnw-nwupl-law-doctorate"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nnw-nwupl-law-doctorate",
+            "slug": "gap-prog-mew-nnw-nwupl-law-doctorate-doctorate",
+            "universityId": "uni-northwest-university-of-political-science-and-law",
+            "name": {
+              "en": "Law",
+              "zh": "法学",
+              "ru": "Право"
+            },
+            "degreeLevel": "doctorate",
+            "discipline": "law-ir",
+            "teachingLanguages": [
+              "Chinese",
+              "English"
+            ],
+            "durationMonths": 48,
+            "durationMonthsMax": 72,
+            "programUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "a999f206c6c4e1df3a6dc8d165118e7178acf961f6fbd776acc2cf479dd8b32b"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-mew-nnw-nwupl-xian-belt-road",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "西北政法大学2026年秋季学期来华留学生招生简章",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "canonicalSourceSha256": "d1bffc23028d2e5335136c211a3bec766a59a41a12745d475ab81f0f8a1c007a"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nnw-nwupl-chinese-language",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "西北政法大学2026年秋季学期来华留学生招生简章",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "canonicalSourceSha256": "d290b13439acfeae677a2f388a2a739a7abc348251e9b3cfc32859e3d2806d54"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nnw-nwupl-law-master",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "西北政法大学2026年秋季学期来华留学生招生简章",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "canonicalSourceSha256": "40a6264f2a0d21835ce211d357c8e46d8a1441e6c4beaa6f485924ec549728b7"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nnw-nwupl-law-doctorate",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "西北政法大学2026年秋季学期来华留学生招生简章",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "canonicalSourceSha256": "220ea952507b0c03e513edc486b8ef3836f831b4cc7d81138605c44850998038"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-wave8-2-nwupl-belt-road-scholarship",
+      "universityId": "uni-northwest-university-of-political-science-and-law",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "id": "sch-gap-wave8-2-nwupl-belt-road-scholarship",
+        "slug": "gap-wave8-2-nwupl-belt-road-scholarship",
+        "name": {
+          "en": "NWUPL Belt and Road International Student Scholarship",
+          "zh": "西北政法大学“一带一路”来华留学生奖学金",
+          "ru": "Стипендия NWUPL «Пояс и путь» для иностранных студентов"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-northwest-university-of-political-science-and-law"
+        ],
+        "programIds": [
+          "prog-gap-wave8-2-nwupl-law-bachelor",
+          "prog-gap-wave8-2-nwupl-cross-border-ecommerce-bachelor"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://gjc.nwupl.edu.cn/lhlh/zcfg/87727.htm",
+        "summary": {
+          "en": "NWUPL's official rules define a basic scholarship plus living support for eligible international students. The next selection window and exact living amount are not announced.",
+          "zh": "西北政法大学官方办法为符合条件的国际学生设置基础奖学金和生活补贴；下一轮评选窗口及生活补贴具体金额未公布。",
+          "ru": "Официальные правила NWUPL предусматривают базовую стипендию и поддержку проживания; следующее окно и точная сумма не объявлены."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave8-2-nwupl-belt-road-scholarship",
+          "src-gap-scholarship-wave8-2-nwupl-belt-road-scholarship-support-1"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "6a1e619e562fdcd4c6c7af9569bd72c54ec83f7748142cf040088c14dead5abc",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-2-nwupl-law-bachelor"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-2-nwupl-law-bachelor",
+            "slug": "gap-wave8-2-nwupl-law-bachelor-bachelor",
+            "universityId": "uni-northwest-university-of-political-science-and-law",
+            "name": {
+              "en": "Law (Bachelor's Program)",
+              "zh": "法学本科项目",
+              "ru": "Право (бакалавриат)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "law-ir",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "durationMonthsMax": 72,
+            "programUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "applyUrl": "https://nwupl.at0086.cn/student",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "1120404d8980353f30baa310f3efc9196bffb64b37ea6c1a9bdaf207863b0295"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-2-nwupl-cross-border-ecommerce-bachelor"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-2-nwupl-cross-border-ecommerce-bachelor",
+            "slug": "gap-wave8-2-nwupl-cross-border-ecommerce-bachelor-bachelor",
+            "universityId": "uni-northwest-university-of-political-science-and-law",
+            "name": {
+              "en": "Cross-Border E-Commerce (Bachelor's Program)",
+              "zh": "跨境电子商务本科项目",
+              "ru": "Трансграничная электронная коммерция (бакалавриат)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "durationMonthsMax": 72,
+            "programUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "applyUrl": "https://nwupl.at0086.cn/student",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "a07431af30a243d7e9f59501ad5b9fda819c1fe9dadfb37978ec5f3948a42c69"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-2-nwupl-belt-road-scholarship",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/zcfg/87727.htm",
+            "title": "NWUPL Belt and Road International Student Scholarship Regulations",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "64ed185e3e4369e263f5aedac3f6ef700f54a362b5d31e708a06810ddb581aea"
+        },
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-2-nwupl-belt-road-scholarship-support-1",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "NWUPL 2026 International Student Admission Guide",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "dbb3834193d1e82ef30778c010cf9c0f01b170540737a36ac9861e6b0fabe2fb"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-wave8-2-nwupl-law-bachelor",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "NWUPL 2026 Autumn International Student Admission Guide",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "5c6773fd421c886dd10e0ec9a79296a57c24d6bf86fd51153877eb4bb335cb4e"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-wave8-2-nwupl-cross-border-ecommerce-bachelor",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "NWUPL 2026 Autumn International Student Admission Guide",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "a18f33937e43eb38487bdbb21ec212a06ede7bb4e55949041ecdb900ecf6cd6d"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-nnw-nwupl-chinese-language-2026-2027-autumn-fee-reference",
+      "universityId": "uni-northwest-university-of-political-science-and-law",
+      "selectionOrigin": "baseQueue17",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nnw-nwupl-chinese-language"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-08-12",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-nnw-nwupl-chinese-language-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-prog-mew-nnw-nwupl-chinese-language",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 8000,
+        "tuitionPeriod": "semester",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "canonicalRecordSha256": "0b41593b59953f39d664a92be1b8a701b5d369452003253fc2de31cc6dc9c8b5",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nnw-nwupl-chinese-language"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nnw-nwupl-chinese-language",
+            "slug": "gap-prog-mew-nnw-nwupl-chinese-language-language",
+            "universityId": "uni-northwest-university-of-political-science-and-law",
+            "name": {
+              "en": "Chinese Language Program",
+              "zh": "汉语进修项目",
+              "ru": "Программа китайского языка"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 6,
+            "programUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "cb89bcf592eba0bd74a8b9657021eca3775ec3baea4e8f7364baf91f80faf07a"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nnw-nwupl-chinese-language",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "西北政法大学2026年秋季学期来华留学生招生简章",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "canonicalSourceSha256": "d290b13439acfeae677a2f388a2a739a7abc348251e9b3cfc32859e3d2806d54"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave8-2-nwupl-cross-border-ecommerce-bachelor-2026-2027-autumn",
+      "universityId": "uni-northwest-university-of-political-science-and-law",
+      "selectionOrigin": "additionalSameSource4",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave8-2-nwupl-cross-border-ecommerce-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-wave8-2-nwupl-cross-border-ecommerce-bachelor-2026-2027-autumn",
+        "programId": "prog-gap-wave8-2-nwupl-cross-border-ecommerce-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-06-20",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "NWUPL's current guide explicitly lists Cross-Border E-Commerce for international bachelor's applicants, taught in Chinese over 4–6 years. The 2026 cycle is closed.",
+          "zh": "西北政法大学当前简章明确列出面向国际本科申请人的跨境电子商务，中文授课、学制4至6年；2026周期已关闭。",
+          "ru": "Текущее руководство NWUPL прямо включает трансграничную электронную коммерцию для иностранных бакалавров на китайском языке сроком 4–6 лет; цикл 2026 закрыт."
+        }
+      },
+      "canonicalRecordSha256": "7826763a4aa06a6b1b652264f2b5f1278d83375499c37af19fccdfdcb07381c8",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-2-nwupl-cross-border-ecommerce-bachelor"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-2-nwupl-cross-border-ecommerce-bachelor",
+            "slug": "gap-wave8-2-nwupl-cross-border-ecommerce-bachelor-bachelor",
+            "universityId": "uni-northwest-university-of-political-science-and-law",
+            "name": {
+              "en": "Cross-Border E-Commerce (Bachelor's Program)",
+              "zh": "跨境电子商务本科项目",
+              "ru": "Трансграничная электронная коммерция (бакалавриат)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "durationMonthsMax": 72,
+            "programUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "applyUrl": "https://nwupl.at0086.cn/student",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "a07431af30a243d7e9f59501ad5b9fda819c1fe9dadfb37978ec5f3948a42c69"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave8-2-nwupl-cross-border-ecommerce-bachelor",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "NWUPL 2026 Autumn International Student Admission Guide",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "a18f33937e43eb38487bdbb21ec212a06ede7bb4e55949041ecdb900ecf6cd6d"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-nnw-nwupl-law-master-2026-2027-autumn-fee-reference",
+      "universityId": "uni-northwest-university-of-political-science-and-law",
+      "selectionOrigin": "additionalSameSource4",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nnw-nwupl-law-master"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-08-12",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-nnw-nwupl-law-master-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-prog-mew-nnw-nwupl-law-master",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 18000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "canonicalRecordSha256": "d6a4ad610468f2bec5e7513b656f77e9335bb74580bb2ac61fc7f8215f7b9b2c",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nnw-nwupl-law-master"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nnw-nwupl-law-master",
+            "slug": "gap-prog-mew-nnw-nwupl-law-master-master",
+            "universityId": "uni-northwest-university-of-political-science-and-law",
+            "name": {
+              "en": "Law",
+              "zh": "法学",
+              "ru": "Право"
+            },
+            "degreeLevel": "master",
+            "discipline": "law-ir",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 36,
+            "durationMonthsMax": 60,
+            "programUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "fee0378131dd60c4ea0bafbb2bed05008759955d729e54720f58a6da1e09dc95"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nnw-nwupl-law-master",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "西北政法大学2026年秋季学期来华留学生招生简章",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "canonicalSourceSha256": "40a6264f2a0d21835ce211d357c8e46d8a1441e6c4beaa6f485924ec549728b7"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-nnw-nwupl-law-doctorate-2026-2027-autumn-fee-reference",
+      "universityId": "uni-northwest-university-of-political-science-and-law",
+      "selectionOrigin": "additionalSameSource4",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nnw-nwupl-law-doctorate"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-08-12",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-nnw-nwupl-law-doctorate-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-prog-mew-nnw-nwupl-law-doctorate",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 26000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "canonicalRecordSha256": "2d3893215a59428e01fd1ae7535e07c5699f39a350725f5cb014b7a9b78cf081",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nnw-nwupl-law-doctorate"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nnw-nwupl-law-doctorate",
+            "slug": "gap-prog-mew-nnw-nwupl-law-doctorate-doctorate",
+            "universityId": "uni-northwest-university-of-political-science-and-law",
+            "name": {
+              "en": "Law",
+              "zh": "法学",
+              "ru": "Право"
+            },
+            "degreeLevel": "doctorate",
+            "discipline": "law-ir",
+            "teachingLanguages": [
+              "Chinese",
+              "English"
+            ],
+            "durationMonths": 48,
+            "durationMonthsMax": 72,
+            "programUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "a999f206c6c4e1df3a6dc8d165118e7178acf961f6fbd776acc2cf479dd8b32b"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nnw-nwupl-law-doctorate",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "西北政法大学2026年秋季学期来华留学生招生简章",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "canonicalSourceSha256": "220ea952507b0c03e513edc486b8ef3836f831b4cc7d81138605c44850998038"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave8-2-nwupl-law-bachelor-2026-2027-autumn",
+      "universityId": "uni-northwest-university-of-political-science-and-law",
+      "selectionOrigin": "additionalSameSource4",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave8-2-nwupl-law-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-wave8-2-nwupl-law-bachelor-2026-2027-autumn",
+        "programId": "prog-gap-wave8-2-nwupl-law-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-06-20",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official 2026 guide lists Law among Chinese-taught bachelor's programs with a 4–6 year study range and an online personal application route. The June 20 deadline is closed.",
+          "zh": "官方2026简章将法学列入中文授课本科，学制4至6年并提供个人在线申请；6月20日截止，当前已关闭。",
+          "ru": "Официальное руководство 2026 включает право в китайскоязычный бакалавриат продолжительностью 4–6 лет с индивидуальной онлайн-подачей; срок 20 июня закрыт."
+        }
+      },
+      "canonicalRecordSha256": "de1e1633a444b80097f041a87bb92283678e758c8de455edc8fe879a3f7eee28",
+      "publishedInInputSnapshot": false,
+      "programRows": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-2-nwupl-law-bachelor"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-2-nwupl-law-bachelor",
+            "slug": "gap-wave8-2-nwupl-law-bachelor-bachelor",
+            "universityId": "uni-northwest-university-of-political-science-and-law",
+            "name": {
+              "en": "Law (Bachelor's Program)",
+              "zh": "法学本科项目",
+              "ru": "Право (бакалавриат)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "law-ir",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "durationMonthsMax": 72,
+            "programUrl": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "applyUrl": "https://nwupl.at0086.cn/student",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "canonicalProgramSha256": "1120404d8980353f30baa310f3efc9196bffb64b37ea6c1a9bdaf207863b0295"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave8-2-nwupl-law-bachelor",
+            "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+            "title": "NWUPL 2026 Autumn International Student Admission Guide",
+            "publisher": "northwest-university-of-political-science-and-law",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "canonicalSourceSha256": "5c6773fd421c886dd10e0ec9a79296a57c24d6bf86fd51153877eb4bb335cb4e"
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "key": "source-01",
+      "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+      "recordIds": [
+        "sch-gap-breadth-sch-ncut-beijing-government",
+        "cycle-gap-breadth-ncut-b-electronic-information-engineering-en-2026-2027-other",
+        "cycle-gap-breadth-ncut-b-mechatronics-engineering-en-2026-2027-other",
+        "cycle-gap-local-strong-ncut-b-architecture-en-2026-2027-other"
+      ]
+    },
+    {
+      "key": "source-02",
+      "url": "https://gjxy.neau.edu.cn/info/1012/2503.htm",
+      "recordIds": [
+        "sch-gap-sch-mew-ne-neau-csc-high-level-postgraduate",
+        "cycle-gap-prog-mew-ne-neau-animal-husbandry-doctorate-2026-2027-autumn",
+        "cycle-gap-prog-mew-ne-neau-food-science-doctorate-2026-2027-autumn",
+        "cycle-gap-prog-mew-ne-neau-international-chinese-education-master-2026-2027-autumn"
+      ]
+    },
+    {
+      "key": "source-03",
+      "url": "https://gjxy.neau.edu.cn/dongbeinongyedaxue2025jielaihualiuxueshengxueshixueweishouyumingdan.pdf",
+      "recordIds": [
+        "sch-gap-sch-mew-ne-neau-csc-high-level-postgraduate",
+        "cycle-gap-prog-mew-ne-neau-international-chinese-education-master-2026-2027-autumn"
+      ]
+    },
+    {
+      "key": "source-05",
+      "url": "https://cie.neepu.edu.cn/info/1159/1079.htm",
+      "recordIds": [
+        "sch-gap-sch-mew-nnw-neepu-changbaishan"
+      ]
+    },
+    {
+      "key": "source-06",
+      "url": "https://siee.nefu.edu.cn/English/Scholarships/NEFU_President_Scholarship_.htm",
+      "recordIds": [
+        "sch-gap-sch-mew-ne-nefu-president"
+      ]
+    },
+    {
+      "key": "source-07",
+      "url": "https://siee.nefu.edu.cn/jxjxm/dlxzjxj_yxxs_.htm",
+      "recordIds": [
+        "sch-gap-sch-mew-ne-nefu-president"
+      ]
+    },
+    {
+      "key": "source-11",
+      "url": "https://iso.nenu.edu.cn/chinese/info/1039/2045.htm",
+      "recordIds": [
+        "sch-gap-nenu-2026-iclts-bachelor-language-coverage",
+        "cycle-gap-nenu-2026-bachelor-tcsol-2026-2027-autumn",
+        "cycle-gap-nenu-2026-one-year-chinese-literature-2026-2027-autumn"
+      ]
+    },
+    {
+      "key": "source-12",
+      "url": "https://gjc.nwupl.edu.cn/lhlh/qsxx/147670.htm",
+      "recordIds": [
+        "sch-gap-sch-mew-nnw-nwupl-central-asian-five-countries",
+        "sch-gap-sch-mew-nnw-nwupl-xian-belt-road",
+        "sch-gap-wave8-2-nwupl-belt-road-scholarship",
+        "cycle-gap-prog-mew-nnw-nwupl-chinese-language-2026-2027-autumn-fee-reference",
+        "cycle-gap-wave8-2-nwupl-cross-border-ecommerce-bachelor-2026-2027-autumn",
+        "cycle-gap-prog-mew-nnw-nwupl-law-master-2026-2027-autumn-fee-reference",
+        "cycle-gap-prog-mew-nnw-nwupl-law-doctorate-2026-2027-autumn-fee-reference",
+        "cycle-gap-wave8-2-nwupl-law-bachelor-2026-2027-autumn"
+      ]
+    },
+    {
+      "key": "source-13",
+      "url": "https://gjc.nwupl.edu.cn/lhlh/zcfg/87727.htm",
+      "recordIds": [
+        "sch-gap-wave8-2-nwupl-belt-road-scholarship"
+      ]
+    }
+  ],
+  "otherParentProgrammeSourcePinsNotSelectedForFreshRead": [
+    {
+      "key": "source-04",
+      "url": "https://gjxy.neau.edu.cn/info/1035/1080.htm",
+      "recordIds": [
+        "sch-gap-sch-mew-ne-neau-csc-high-level-postgraduate",
+        "cycle-gap-prog-mew-ne-neau-food-science-doctorate-2026-2027-autumn"
+      ]
+    },
+    {
+      "key": "source-08",
+      "url": "https://siee.nefu.edu.cn/jjy/bksxm.htm",
+      "recordIds": [
+        "sch-gap-sch-mew-ne-nefu-president"
+      ]
+    },
+    {
+      "key": "source-09",
+      "url": "https://siee.nefu.edu.cn/English/Programs/Master.htm",
+      "recordIds": [
+        "sch-gap-sch-mew-ne-nefu-president"
+      ]
+    },
+    {
+      "key": "source-10",
+      "url": "https://siee.nefu.edu.cn/info/1017/1135.htm",
+      "recordIds": [
+        "sch-gap-sch-mew-ne-nefu-president"
+      ]
+    }
+  ]
+}
