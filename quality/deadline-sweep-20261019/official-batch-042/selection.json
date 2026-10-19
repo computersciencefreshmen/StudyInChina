@@ -1,0 +1,1460 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-042-20261019",
+  "createdAt": "2026-10-19T13:01:18.185Z",
+  "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "statePath": "quality/recovery-20261018/continuation-state.json",
+  "stateSha256": "147f2c31d24e1f2c7c7a36695e0a5b0bbc4aa81e2ece6b0148735ccce1b4b2d8",
+  "summaryPath": "quality/deadline-sweep-20261019/official-review-summary-v13.json",
+  "summarySha256": "1e9198fab441148a82bef921030a5668c4576704a923a0c60ad06f94d23fbaf5",
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v11.json",
+  "queueSha256": "a96da9b4352f7db30ba660a206f0ecdc29458d6301a62d7c3e107298840c1c59",
+  "inventoryPath": "quality/deadline-sweep-20261019/catalog-deadlines.json",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "dispatchPath": "quality/deadline-sweep-20261019/heartbeat-1257/base-dispatch-v1.json",
+  "dispatchSha256": "f853a30e74fd95f6a2965b4130e01784dd8ea60afd87d058a3afdbc6d8420b96",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "selectedUniversityIds": [
+    "uni-central-academy-of-drama",
+    "uni-central-china-normal-university",
+    "uni-central-conservatory-of-music",
+    "uni-central-south-university",
+    "uni-changchun-university-of-science-and-technology",
+    "uni-changsha-university-of-science-and-technology",
+    "uni-chengdu-university-of-information-technology"
+  ],
+  "baseQueueRecordIds": [
+    "sch-gap-sch-mew-nss-cad-beijing-government",
+    "sch-gap-sch-mew-nss-cad-csc",
+    "sch-gap-mew-csw-ccnu-cgs-silk-road-2026",
+    "cycle-gap-prog-mew-nss-ccom-music-doctorate-2026-2027-autumn",
+    "cycle-gap-prog-mew-nss-ccom-music-master-2026-2027-autumn",
+    "sch-gap-sparse-depth-0808-csu-university-scholarship",
+    "sch-gap-wave3-sch-cust-csc-graduate",
+    "sch-gap-wave8-csust-outstanding-international-student-scholarship",
+    "cycle-gap-wave8-2-cuit-chinese-language-culture-2025-2026-spring-fee-reference",
+    "cycle-gap-wave8-2-cuit-chinese-language-culture-2026-2027-autumn-fee-reference",
+    "sch-gap-wave8-2-cuit-sichuan-government-language-scholarship"
+  ],
+  "additionalSameSourceRecordIds": [],
+  "selectedRecordIds": [
+    "sch-gap-sch-mew-nss-cad-beijing-government",
+    "sch-gap-sch-mew-nss-cad-csc",
+    "sch-gap-mew-csw-ccnu-cgs-silk-road-2026",
+    "cycle-gap-prog-mew-nss-ccom-music-doctorate-2026-2027-autumn",
+    "cycle-gap-prog-mew-nss-ccom-music-master-2026-2027-autumn",
+    "sch-gap-sparse-depth-0808-csu-university-scholarship",
+    "sch-gap-wave3-sch-cust-csc-graduate",
+    "sch-gap-wave8-csust-outstanding-international-student-scholarship",
+    "cycle-gap-wave8-2-cuit-chinese-language-culture-2025-2026-spring-fee-reference",
+    "cycle-gap-wave8-2-cuit-chinese-language-culture-2026-2027-autumn-fee-reference",
+    "sch-gap-wave8-2-cuit-sichuan-government-language-scholarship"
+  ],
+  "schoolScope": "All seven selected university scopes are new record scopes at previously checked institutions; no new school completion is claimed.",
+  "records": [
+    {
+      "recordId": "sch-gap-sch-mew-nss-cad-beijing-government",
+      "collection": "scholarships",
+      "universityId": "uni-central-academy-of-drama",
+      "canonicalRecordSha256": "28a82fef568467ea8085d3c6e7528f29b6446b9b81a2a98e694441e44b8dbc09",
+      "row": {
+        "id": "sch-gap-sch-mew-nss-cad-beijing-government",
+        "slug": "gap-sch-mew-nss-cad-beijing-government",
+        "name": {
+          "en": "Beijing Government Scholarship at the Central Academy of Drama",
+          "zh": "中央戏剧学院北京市外国留学生奖学金",
+          "ru": "Пекинская правительственная стипендия в Центральной академии драмы"
+        },
+        "providerType": "city",
+        "universityIds": [
+          "uni-central-academy-of-drama"
+        ],
+        "programIds": [
+          "prog-gap-prog-mew-nss-cad-acting-bachelor",
+          "prog-gap-prog-mew-nss-cad-drama-film-doctorate"
+        ],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://chntheatre.edu.cn/cn/liuxue/zhuanye/detail/11795.html",
+        "summary": {
+          "en": "The official academy page confirms the Beijing Government Scholarship for international students; a current application cycle and verified funding tier remain unannounced.",
+          "zh": "中央戏剧学院官方页面确认面向国际学生的北京市外国留学生奖学金；当前申请周期和可核实资助档位尚未公布。",
+          "ru": "Официальная страница академии подтверждает пекинскую правительственную стипендию; текущий цикл и подтвержденный размер пока не объявлены."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-mew-nss-cad-beijing-government"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-cad-acting-bachelor",
+              "src-gap-program-prog-mew-nss-cad-acting-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-cad-acting-bachelor",
+            "slug": "gap-prog-mew-nss-cad-acting-bachelor-bachelor",
+            "universityId": "uni-central-academy-of-drama",
+            "name": {
+              "en": "Acting",
+              "zh": "表演",
+              "ru": "Актерское искусство"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "other",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://www.chntheatre.edu.cn/cn/recruit/liuxue/p/1.html",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "77f1d2014d0fa3813dd070005741f088de41cd9e57cef13b2b72389522dba634"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-cad-drama-film-doctorate",
+              "src-gap-program-prog-mew-nss-cad-drama-film-doctorate-support-1"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-cad-drama-film-doctorate",
+            "slug": "gap-prog-mew-nss-cad-drama-film-doctorate-doctorate",
+            "universityId": "uni-central-academy-of-drama",
+            "name": {
+              "en": "Drama and Film",
+              "zh": "戏剧与影视",
+              "ru": "Театр и кино"
+            },
+            "degreeLevel": "doctorate",
+            "discipline": "art-design",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://www.chntheatre.edu.cn/cn/recruit/liuxue/p/1.html",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "e611bdcba0dc6b36e76f3d1fc3778647a13817accd06a134f4af56e6ad82bea5"
+        }
+      ],
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-institution-20260729-central-academy-of-drama"
+            ],
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2027-01-29",
+            "status": "verified",
+            "id": "uni-central-academy-of-drama",
+            "slug": "central-academy-of-drama",
+            "name": {
+              "en": "Central Academy of Drama",
+              "zh": "中央戏剧学院",
+              "ru": "Центральная академия драмы"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://www.chntheatre.edu.cn/",
+            "admissionsUrl": "https://www.chntheatre.edu.cn/cn/recruit/liuxue.html",
+            "summary": {
+              "en": "Central Academy of Drama is located in Beijing. The official institution and admissions entry points are registered; current program facts must be checked on the official admissions site.",
+              "zh": "中央戏剧学院位于北京。平台已登记学校官网及国际招生入口；当前项目、费用和截止日期以官方招生页面为准。",
+              "ru": "Центральная академия драмы находится в городе Пекин. Официальный сайт и приёмная страница зарегистрированы; актуальные программы, стоимость и сроки следует проверять на сайте вуза."
+            },
+            "featured": false
+          },
+          "sha256": "b76010472aa034ab2ca685069efbad626cce8ba54683254010cce45c5a17bd65"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-mew-nss-cad-beijing-government",
+            "url": "https://chntheatre.edu.cn/cn/liuxue/zhuanye/detail/11795.html",
+            "title": "中央戏剧学院留学生奖学金介绍",
+            "publisher": "central-academy-of-drama",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "e7b7ac2bb7718b48137a708b7c2e9a57c59d327fd4898605569e6bb506bc5c1e"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-sch-mew-nss-cad-csc",
+      "collection": "scholarships",
+      "universityId": "uni-central-academy-of-drama",
+      "canonicalRecordSha256": "2400e940c86a1e61591d6bd078ea444a4307d0b1762937d127c1b974a7739961",
+      "row": {
+        "id": "sch-gap-sch-mew-nss-cad-csc",
+        "slug": "gap-sch-mew-nss-cad-csc",
+        "name": {
+          "en": "Chinese Government Scholarship at the Central Academy of Drama",
+          "zh": "中央戏剧学院中国政府奖学金",
+          "ru": "Стипендия правительства КНР в Центральной академии драмы"
+        },
+        "providerType": "csc",
+        "universityIds": [
+          "uni-central-academy-of-drama"
+        ],
+        "programIds": [
+          "prog-gap-prog-mew-nss-cad-acting-bachelor",
+          "prog-gap-prog-mew-nss-cad-drama-film-doctorate"
+        ],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://chntheatre.edu.cn/cn/liuxue/zhuanye/detail/11795.html",
+        "summary": {
+          "en": "The official academy page confirms the Chinese Government Scholarship as an available international-student funding route; a future deadline and complete tier table are not published.",
+          "zh": "中央戏剧学院官方页面确认中国政府奖学金是国际学生可用资助渠道；下一轮截止日期和完整资助档位未公布。",
+          "ru": "Официальная страница академии подтверждает государственную стипендию КНР для иностранных студентов; будущий срок и полные уровни не опубликованы."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-mew-nss-cad-csc"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-cad-acting-bachelor",
+              "src-gap-program-prog-mew-nss-cad-acting-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-cad-acting-bachelor",
+            "slug": "gap-prog-mew-nss-cad-acting-bachelor-bachelor",
+            "universityId": "uni-central-academy-of-drama",
+            "name": {
+              "en": "Acting",
+              "zh": "表演",
+              "ru": "Актерское искусство"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "other",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://www.chntheatre.edu.cn/cn/recruit/liuxue/p/1.html",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "77f1d2014d0fa3813dd070005741f088de41cd9e57cef13b2b72389522dba634"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-cad-drama-film-doctorate",
+              "src-gap-program-prog-mew-nss-cad-drama-film-doctorate-support-1"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-cad-drama-film-doctorate",
+            "slug": "gap-prog-mew-nss-cad-drama-film-doctorate-doctorate",
+            "universityId": "uni-central-academy-of-drama",
+            "name": {
+              "en": "Drama and Film",
+              "zh": "戏剧与影视",
+              "ru": "Театр и кино"
+            },
+            "degreeLevel": "doctorate",
+            "discipline": "art-design",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://www.chntheatre.edu.cn/cn/recruit/liuxue/p/1.html",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "e611bdcba0dc6b36e76f3d1fc3778647a13817accd06a134f4af56e6ad82bea5"
+        }
+      ],
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-institution-20260729-central-academy-of-drama"
+            ],
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2027-01-29",
+            "status": "verified",
+            "id": "uni-central-academy-of-drama",
+            "slug": "central-academy-of-drama",
+            "name": {
+              "en": "Central Academy of Drama",
+              "zh": "中央戏剧学院",
+              "ru": "Центральная академия драмы"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://www.chntheatre.edu.cn/",
+            "admissionsUrl": "https://www.chntheatre.edu.cn/cn/recruit/liuxue.html",
+            "summary": {
+              "en": "Central Academy of Drama is located in Beijing. The official institution and admissions entry points are registered; current program facts must be checked on the official admissions site.",
+              "zh": "中央戏剧学院位于北京。平台已登记学校官网及国际招生入口；当前项目、费用和截止日期以官方招生页面为准。",
+              "ru": "Центральная академия драмы находится в городе Пекин. Официальный сайт и приёмная страница зарегистрированы; актуальные программы, стоимость и сроки следует проверять на сайте вуза."
+            },
+            "featured": false
+          },
+          "sha256": "b76010472aa034ab2ca685069efbad626cce8ba54683254010cce45c5a17bd65"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-mew-nss-cad-csc",
+            "url": "https://chntheatre.edu.cn/cn/liuxue/zhuanye/detail/11795.html",
+            "title": "中央戏剧学院留学生奖学金介绍",
+            "publisher": "central-academy-of-drama",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "f24e9e7ff6db83c55068b28f6b11ae3596d8c92e419c6e7aaa6255c865f7df40"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-mew-csw-ccnu-cgs-silk-road-2026",
+      "collection": "scholarships",
+      "universityId": "uni-central-china-normal-university",
+      "canonicalRecordSha256": "4aee009404541846bd3204d46c70f2e67343f3bffc53b84c26b32c5b22cc2236",
+      "row": {
+        "id": "sch-gap-mew-csw-ccnu-cgs-silk-road-2026",
+        "slug": "gap-mew-csw-ccnu-cgs-silk-road-2026",
+        "name": {
+          "en": "CCNU Chinese Government Scholarship Silk Road Program 2026",
+          "zh": "华中师范大学2026年中国政府奖学金丝绸之路项目",
+          "ru": "Стипендия правительства Китая «Шелковый путь» CCNU 2026"
+        },
+        "providerType": "csc",
+        "universityIds": [
+          "uni-central-china-normal-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://cice.ccnu.edu.cn/info/1235/7411.htm",
+        "summary": {
+          "en": "CCNU's 2026 Silk Road guide publishes full support, degree-level stipends, country restrictions and a May 20 deadline; image-only designated majors are not inferred.",
+          "zh": "华中师范大学2026年丝绸之路指南公布全额资助、硕博生活费、国籍限制和5月20日截止；图片形式的指定专业未作推断。",
+          "ru": "Руководство CCNU 2026 публикует полное финансирование, стипендии, страновые ограничения и срок 20 мая; специальности из изображения не выводятся."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-mew-csw-ccnu-cgs-silk-road-2026"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-central-china-normal-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-central-china-normal-university",
+            "slug": "central-china-normal-university",
+            "name": {
+              "en": "Central China Normal University",
+              "zh": "华中师范大学",
+              "ru": "Центрально-Китайский педагогический университет"
+            },
+            "cityId": "city-wuhan",
+            "region": "central",
+            "officialUrl": "https://english.ccnu.edu.cn/",
+            "admissionsUrl": "https://is.ccnu.edu.cn/",
+            "summary": {
+              "en": "Central China Normal University is based in Wuhan and is known for education, humanities and social sciences.",
+              "zh": "华中师范大学位于武汉，以教育、人文与社会科学等领域见长。",
+              "ru": "Центрально-Китайский педагогический университет находится в городе Ухань; сильные направления: образование, гуманитарные и общественные науки."
+            },
+            "featured": false
+          },
+          "sha256": "9b594e21b2ab07073bb3c8a8a33a64060a846380aa8926f2890a07c26bc11f75"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-mew-csw-ccnu-cgs-silk-road-2026",
+            "url": "https://cice.ccnu.edu.cn/info/1235/7411.htm",
+            "title": "CCNU 2026 Chinese Government Scholarship Silk Road Program",
+            "publisher": "central-china-normal-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "e3fbe3a4b50f1331395e99412b97866e4c4a4746c65c466392e8ab5c9e32b840"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-ccom-music-doctorate-2026-2027-autumn",
+      "collection": "admissionCycles",
+      "universityId": "uni-central-conservatory-of-music",
+      "canonicalRecordSha256": "f47f38b1882c303dd5da092caab1fc2707b4f998b37f35eb86e656d0e56ce6a5",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-ccom-music-doctorate"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-08-11",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-nss-ccom-music-doctorate-2026-2027-autumn",
+        "programId": "prog-gap-prog-mew-nss-ccom-music-doctorate",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official source explicitly lists Music for international applicants. The same source states teaching language: Chinese.",
+          "zh": "官方来源明确列出面向国际申请人的音乐。同一来源注明授课语言：Chinese。",
+          "ru": "Официальный источник прямо указывает программу «Музыка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-ccom-music-doctorate"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-nss-ccom-music-doctorate",
+        "slug": "gap-prog-mew-nss-ccom-music-doctorate-doctorate",
+        "universityId": "uni-central-conservatory-of-music",
+        "name": {
+          "en": "Music",
+          "zh": "音乐",
+          "ru": "Музыка"
+        },
+        "degreeLevel": "doctorate",
+        "discipline": "art-design",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://liuxue.ccom.edu.cn/cn/article?cid=167",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "7bdc25285bb7a78eace31665bd46c0bc1aef4f94ba56bdad36c85e7ebfdc3cf8",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-ccom-music-doctorate"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-ccom-music-doctorate",
+            "slug": "gap-prog-mew-nss-ccom-music-doctorate-doctorate",
+            "universityId": "uni-central-conservatory-of-music",
+            "name": {
+              "en": "Music",
+              "zh": "音乐",
+              "ru": "Музыка"
+            },
+            "degreeLevel": "doctorate",
+            "discipline": "art-design",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://liuxue.ccom.edu.cn/cn/article?cid=167",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "7bdc25285bb7a78eace31665bd46c0bc1aef4f94ba56bdad36c85e7ebfdc3cf8"
+        }
+      ],
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-central-conservatory-of-music"
+            ],
+            "verifiedAt": "2026-07-27",
+            "reviewAfter": "2027-01-23",
+            "status": "verified",
+            "id": "uni-central-conservatory-of-music",
+            "slug": "central-conservatory-of-music",
+            "name": {
+              "en": "Central Conservatory of Music",
+              "zh": "中央音乐学院",
+              "ru": "Центральная консерватория музыки"
+            },
+            "cityId": "city-beijing",
+            "region": null,
+            "officialUrl": "https://liuxue.ccom.edu.cn/",
+            "admissionsUrl": "https://liuxue.ccom.edu.cn/",
+            "summary": {
+              "en": "Central Conservatory of Music is located in Beijing. Current international programs and requirements are published on the official admissions website.",
+              "zh": "中央音乐学院位于北京市。当前国际学生项目和申请要求以学校官方招生网站为准。",
+              "ru": "Центральная консерватория музыки находится в городе Пекин. Актуальные программы и требования опубликованы на официальном сайте приёма."
+            },
+            "featured": false
+          },
+          "sha256": "a8c35fc29b2e29b2703876ff218ef756a9047bfc0c4a76a46e4f08c43ca34e50"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nss-ccom-music-doctorate",
+            "url": "https://liuxue.ccom.edu.cn/cn/article?cid=167",
+            "title": "中央音乐学院2026年外国留学生博士研究生招生通知索引",
+            "publisher": "central-conservatory-of-music",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "356b9e2b6015c69d4bf58b9c94b1c562337c70057062a710681b28c18151868d"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-ccom-music-master-2026-2027-autumn",
+      "collection": "admissionCycles",
+      "universityId": "uni-central-conservatory-of-music",
+      "canonicalRecordSha256": "f0db5a992828dbcb132fb5f313246c77f9f94a58affe8cd2c0292e229194d953",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-ccom-music-master"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-08-11",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-nss-ccom-music-master-2026-2027-autumn",
+        "programId": "prog-gap-prog-mew-nss-ccom-music-master",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official source explicitly lists Music for international applicants. The same source states teaching language: Chinese.",
+          "zh": "官方来源明确列出面向国际申请人的音乐。同一来源注明授课语言：Chinese。",
+          "ru": "Официальный источник прямо указывает программу «Музыка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-ccom-music-master"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-nss-ccom-music-master",
+        "slug": "gap-prog-mew-nss-ccom-music-master-master",
+        "universityId": "uni-central-conservatory-of-music",
+        "name": {
+          "en": "Music",
+          "zh": "音乐",
+          "ru": "Музыка"
+        },
+        "degreeLevel": "master",
+        "discipline": "art-design",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://liuxue.ccom.edu.cn/cn/article?cid=167",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "6455b3ba4819cd4225c83017ddb65f0514574b6cbefb4bf6be95db27b87a0040",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-ccom-music-master"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-ccom-music-master",
+            "slug": "gap-prog-mew-nss-ccom-music-master-master",
+            "universityId": "uni-central-conservatory-of-music",
+            "name": {
+              "en": "Music",
+              "zh": "音乐",
+              "ru": "Музыка"
+            },
+            "degreeLevel": "master",
+            "discipline": "art-design",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://liuxue.ccom.edu.cn/cn/article?cid=167",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "6455b3ba4819cd4225c83017ddb65f0514574b6cbefb4bf6be95db27b87a0040"
+        }
+      ],
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-central-conservatory-of-music"
+            ],
+            "verifiedAt": "2026-07-27",
+            "reviewAfter": "2027-01-23",
+            "status": "verified",
+            "id": "uni-central-conservatory-of-music",
+            "slug": "central-conservatory-of-music",
+            "name": {
+              "en": "Central Conservatory of Music",
+              "zh": "中央音乐学院",
+              "ru": "Центральная консерватория музыки"
+            },
+            "cityId": "city-beijing",
+            "region": null,
+            "officialUrl": "https://liuxue.ccom.edu.cn/",
+            "admissionsUrl": "https://liuxue.ccom.edu.cn/",
+            "summary": {
+              "en": "Central Conservatory of Music is located in Beijing. Current international programs and requirements are published on the official admissions website.",
+              "zh": "中央音乐学院位于北京市。当前国际学生项目和申请要求以学校官方招生网站为准。",
+              "ru": "Центральная консерватория музыки находится в городе Пекин. Актуальные программы и требования опубликованы на официальном сайте приёма."
+            },
+            "featured": false
+          },
+          "sha256": "a8c35fc29b2e29b2703876ff218ef756a9047bfc0c4a76a46e4f08c43ca34e50"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nss-ccom-music-master",
+            "url": "https://liuxue.ccom.edu.cn/cn/article?cid=167",
+            "title": "中央音乐学院2026年外国留学生硕士研究生招生通知索引",
+            "publisher": "central-conservatory-of-music",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "099bae81684f6f9d420031cd0b3742a5b1c57a1b682849b7f3638f3ec593c9f1"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-sparse-depth-0808-csu-university-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-central-south-university",
+      "canonicalRecordSha256": "00490f1642284e6e84b25f9ffd0c344bc89ab3912a4cfc6e84f1f108d7da0835",
+      "row": {
+        "id": "sch-gap-sparse-depth-0808-csu-university-scholarship",
+        "slug": "gap-sparse-depth-0808-csu-university-scholarship",
+        "name": {
+          "en": "Central South University Scholarship for International Students",
+          "zh": "中南大学国际学生奖学金",
+          "ru": "Стипендия Центрально-Южного университета для иностранных студентов"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-central-south-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": null,
+        "summary": {
+          "en": "The official 2026 guide defines full and partial CSU scholarship tiers for international master and doctoral applicants and a direct CSU online application route. The May 31 deadline is closed and is not published as current.",
+          "zh": "2026年官方简章定义了面向国际硕士和博士申请者的中南大学全额与部分奖学金及校方在线申请路线；5月31日截止期已关闭，不展示为当前。",
+          "ru": "Официальное руководство 2026 года определяет полную и частичную стипендии CSU для иностранных магистров и докторантов; дедлайн 31 мая закрыт и не показывается как текущий."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sparse-depth-0808-csu-university-scholarship"
+        ],
+        "verifiedAt": "2026-08-08",
+        "reviewAfter": "2026-09-07",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-central-south-university"
+            ],
+            "verifiedAt": "2026-07-27",
+            "reviewAfter": "2027-01-23",
+            "status": "verified",
+            "id": "uni-central-south-university",
+            "slug": "central-south-university",
+            "name": {
+              "en": "Central South University",
+              "zh": "中南大学",
+              "ru": "Центральный южный университет"
+            },
+            "cityId": "city-changsha",
+            "region": "central",
+            "officialUrl": "https://intl.csu.edu.cn/index.htm",
+            "admissionsUrl": "https://intl.csu.edu.cn/index.htm",
+            "summary": {
+              "en": "Central South University is located in Changsha. Current international programs and requirements are published on the official admissions website.",
+              "zh": "中南大学位于长沙。当前国际学生项目和申请要求以学校官方招生网站为准。",
+              "ru": "Центральный южный университет находится в городе Чанша. Актуальные программы и требования опубликованы на официальном сайте приёма."
+            },
+            "featured": false
+          },
+          "sha256": "a64ac1c567cd39ef80a27b0379e725274e5c34a56669f765fc9e4511a5bd329f"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sparse-depth-0808-csu-university-scholarship",
+            "url": "https://intl.csu.edu.cn/English/Scholarship/University_Scholarship.htm",
+            "title": "2026 CSU Scholarship for International Students",
+            "publisher": "central-south-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-08"
+          },
+          "sha256": "359347503da8de3a9f8f19be4700e1c85ecf5ab2c45c8e650498b14f7250a62d"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-wave3-sch-cust-csc-graduate",
+      "collection": "scholarships",
+      "universityId": "uni-changchun-university-of-science-and-technology",
+      "canonicalRecordSha256": "9c19280c7e82be34649fb3ffb3ce3c16fdf9f74001bb1689ff4e5e64c9dacfaa",
+      "row": {
+        "id": "sch-gap-wave3-sch-cust-csc-graduate",
+        "slug": "gap-wave3-sch-cust-csc-graduate",
+        "name": {
+          "en": "2026 Chinese Government Scholarship Graduate Program at CUST",
+          "zh": "2026年长春理工大学中国政府奖学金研究生项目",
+          "ru": "Программа стипендии правительства Китая для магистров и докторантов CUST 2026"
+        },
+        "providerType": "csc",
+        "universityIds": [
+          "uni-changchun-university-of-science-and-technology"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://sie.cust.edu.cn/scholarship_pages/74616.htm",
+        "summary": {
+          "en": "CUST's official page and guide describe a full scholarship for international graduate study; the 2026 application deadline was 28 February.",
+          "zh": "长春理工大学官方页面和指南公布国际研究生全额奖学金；2026年申请已于2月28日截止。",
+          "ru": "Официальная страница и руководство CUST описывают полную стипендию для последипломного обучения; прием 2026 года завершился 28 февраля."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave3-sch-cust-csc-graduate",
+          "src-gap-scholarship-wave3-sch-cust-csc-graduate-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-wave3-university-changchun-university-of-science-and-technology"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "uni-changchun-university-of-science-and-technology",
+            "slug": "changchun-university-of-science-and-technology",
+            "name": {
+              "en": "Changchun University of Science and Technology",
+              "zh": "长春理工大学",
+              "ru": "Чанчуньский университет науки и технологии"
+            },
+            "cityId": "city-changchun",
+            "region": "northeast",
+            "officialUrl": "https://www.cust.edu.cn/",
+            "admissionsUrl": "https://sie.cust.edu.cn/",
+            "summary": {
+              "en": "CUST's official international college lists English-taught hot programs and publishes current 2026 Chinese Government and Jilin Provincial scholarship notices.",
+              "zh": "长春理工大学国际教育交流学院官网列出英文授课热门项目，并发布2026年中国政府奖学金和吉林省政府奖学金通知。",
+              "ru": "Официальный международный колледж CUST перечисляет востребованные англоязычные программы и публикует актуальные объявления о государственных стипендиях 2026 года."
+            },
+            "featured": false
+          },
+          "sha256": "6a33bc6bd100d3fd7bd27bd631727c47c12aa04443bb3e1f5dc00ba826e4761a"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave3-sch-cust-csc-graduate",
+            "url": "https://sie.cust.edu.cn/scholarship_pages/74616.htm",
+            "title": "2026 Chinese Government Scholarship Graduate Program for International Students",
+            "publisher": "changchun-university-of-science-and-technology",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "d92e523634f87d8353335c681534c26ef5ecd60b9bd14a4e5048cd93b6bf3479"
+        },
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave3-sch-cust-csc-graduate-support-1",
+            "url": "https://sie.cust.edu.cn/docs/2025-12/4c82fe64bd1e4c75a02b0d4bae45e0b6.pdf",
+            "title": "CUST 2026 Chinese Government Scholarship Admission Guide",
+            "publisher": "changchun-university-of-science-and-technology",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "fa77327287a58964164a3f271ddd85fdd7423162304f45c806b1f124153395b0"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-wave8-csust-outstanding-international-student-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-changsha-university-of-science-and-technology",
+      "canonicalRecordSha256": "eb9ce07cf28e9490c7685009b008256c9f6a147688cfb0cb40e89da356a7f76c",
+      "row": {
+        "id": "sch-gap-wave8-csust-outstanding-international-student-scholarship",
+        "slug": "gap-wave8-csust-outstanding-international-student-scholarship",
+        "name": {
+          "en": "CSUST Outstanding International Student Scholarship",
+          "zh": "长沙理工大学优秀来华留学生奖学金",
+          "ru": "Стипендия CSUST для выдающихся иностранных студентов"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-changsha-university-of-science-and-technology"
+        ],
+        "programIds": [
+          "prog-gap-wave8-csust-computer-science-technology-bachelor",
+          "prog-gap-wave8-csust-road-bridge-river-engineering-bachelor"
+        ],
+        "coverage": {
+          "tuition": "partial",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://www.csust.edu.cn/gjxy/info/1190/2346.htm",
+        "summary": {
+          "en": "The official rules establish first, second, third and individual awards for eligible full-time international students. Current amounts and the next application cycle are not announced, so only the scholarship identity and scope are retained.",
+          "zh": "官方办法面向符合条件的全日制国际学生设置一、二、三等奖及单项奖；当前金额和下一轮申请周期未公布，因此仅保留奖学金身份与适用范围。",
+          "ru": "Официальные правила учреждают первую, вторую, третью и индивидуальную награды для подходящих иностранных студентов; текущие суммы и следующий цикл не объявлены."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave8-csust-outstanding-international-student-scholarship",
+          "src-gap-scholarship-wave8-csust-outstanding-international-student-scholarship-support-1"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-csust-computer-science-technology-bachelor",
+              "src-gap-program-wave8-csust-computer-science-technology-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-csust-computer-science-technology-bachelor",
+            "slug": "gap-wave8-csust-computer-science-technology-bachelor-bachelor",
+            "universityId": "uni-changsha-university-of-science-and-technology",
+            "name": {
+              "en": "Computer Science and Technology (Bachelor's Program)",
+              "zh": "计算机科学与技术本科项目",
+              "ru": "Компьютерные науки и технологии (бакалавриат)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://www.csust.edu.cn/gjxy/info/1195/7615.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "22f7125eab5f2570ab6c5b131127ea0d62786514505498d6f72c7691d7505452"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-csust-road-bridge-river-engineering-bachelor",
+              "src-gap-program-wave8-csust-road-bridge-river-engineering-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-csust-road-bridge-river-engineering-bachelor",
+            "slug": "gap-wave8-csust-road-bridge-river-engineering-bachelor-bachelor",
+            "universityId": "uni-changsha-university-of-science-and-technology",
+            "name": {
+              "en": "Road, Bridge and River-Crossing Engineering (Bachelor's Program)",
+              "zh": "道路桥梁与渡河工程本科项目",
+              "ru": "Дороги, мосты и переправы (бакалавриат)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://www.csust.edu.cn/gjxy/info/1195/7615.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "c111f06a8a5df9bfdcda2c198dc289691e0f3cd947f8d807f0981196d1010431"
+        }
+      ],
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-wave8-university-changsha-university-of-science-and-technology"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-11-02",
+            "status": "verified",
+            "id": "uni-changsha-university-of-science-and-technology",
+            "slug": "changsha-university-of-science-and-technology",
+            "name": {
+              "en": "Changsha University of Science and Technology",
+              "zh": "长沙理工大学",
+              "ru": "Чаншаский университет науки и технологий"
+            },
+            "cityId": "city-changsha",
+            "region": "central",
+            "officialUrl": "https://www.csust.edu.cn/",
+            "admissionsUrl": "https://www.csust.edu.cn/gjxy/ywbwz/Admission/International_Students.htm",
+            "summary": {
+              "en": "CSUST's official international site publishes a self-funded international-program catalog and states that personal applications are accepted.",
+              "zh": "长沙理工大学国际学院官网公布自费国际项目目录，并明确接受个人申请。",
+              "ru": "Официальный международный сайт CSUST публикует каталог программ для иностранных самофинансируемых студентов и подтверждает приём индивидуальных заявлений."
+            },
+            "featured": false
+          },
+          "sha256": "6fad6d13ab8f1f7a2ad8f8594724c198b5d67d109fcbcd1595f2462e144e5da3"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-csust-outstanding-international-student-scholarship",
+            "url": "https://www.csust.edu.cn/gjxy/info/1190/2346.htm",
+            "title": "CSUST Outstanding International Student Scholarship",
+            "publisher": "changsha-university-of-science-and-technology",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "a617969cf447afc78100d68c509912cb306e3b8dee28272e63c89ac746aeb25e"
+        },
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-csust-outstanding-international-student-scholarship-support-1",
+            "url": "https://www.csust.edu.cn/gjxy/ywbwz/Admission/International_Students/Scholarships.htm",
+            "title": "CSUST International Student Scholarships Index",
+            "publisher": "changsha-university-of-science-and-technology",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "0c20e7872afa44dd8561f2b521de17420d49e06dc0f7c96ee23c1f6782d7da40"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-wave8-2-cuit-chinese-language-culture-2025-2026-spring-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-chengdu-university-of-information-technology",
+      "canonicalRecordSha256": "6f71e0669c5072b284a315046d5c7e70363ac62892d115907692460140c19ab2",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave8-2-cuit-chinese-language-culture"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-wave8-2-cuit-chinese-language-culture-2025-2026-spring-fee-reference",
+        "programId": "prog-gap-wave8-2-cuit-chinese-language-culture",
+        "academicYear": "2025-2026",
+        "intake": "spring",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 6000,
+        "tuitionPeriod": "semester",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave8-2-cuit-chinese-language-culture"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-wave8-2-cuit-chinese-language-culture",
+        "slug": "gap-wave8-2-cuit-chinese-language-culture-language",
+        "universityId": "uni-chengdu-university-of-information-technology",
+        "name": {
+          "en": "Chinese Language and Culture Program",
+          "zh": "汉语言文化进修项目",
+          "ru": "Программа китайского языка и культуры"
+        },
+        "degreeLevel": "language",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 6,
+        "durationMonthsMax": 12,
+        "programUrl": "https://english.cuit.edu.cn/info/1062/1743.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "6029f46bc4c8b56b43b3003e6b0f71adf8873c4cc8036659df21974a98f8cfac",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-2-cuit-chinese-language-culture"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-2-cuit-chinese-language-culture",
+            "slug": "gap-wave8-2-cuit-chinese-language-culture-language",
+            "universityId": "uni-chengdu-university-of-information-technology",
+            "name": {
+              "en": "Chinese Language and Culture Program",
+              "zh": "汉语言文化进修项目",
+              "ru": "Программа китайского языка и культуры"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 6,
+            "durationMonthsMax": 12,
+            "programUrl": "https://english.cuit.edu.cn/info/1062/1743.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "6029f46bc4c8b56b43b3003e6b0f71adf8873c4cc8036659df21974a98f8cfac"
+        }
+      ],
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-wave8-2-university-chengdu-university-of-information-technology"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-11-02",
+            "status": "verified",
+            "id": "uni-chengdu-university-of-information-technology",
+            "slug": "chengdu-university-of-information-technology",
+            "name": {
+              "en": "Chengdu University of Information Technology",
+              "zh": "成都信息工程大学",
+              "ru": "Чэндуский университет информационных технологий"
+            },
+            "cityId": "city-chengdu",
+            "region": "southwest",
+            "officialUrl": "https://www.cuit.edu.cn/",
+            "admissionsUrl": "https://gjjl.cuit.edu.cn/info/1051/2884.htm",
+            "summary": {
+              "en": "CUIT's official international office publishes separate 2026 postgraduate and Chinese-language calls, including personal email submission, fees and scholarships.",
+              "zh": "成都信息工程大学国际处分别公布2026研究生和汉语言项目简章，包含个人邮件申请、费用和奖学金。",
+              "ru": "Международный отдел CUIT публикует отдельные наборы 2026 года на магистерские и языковые программы, включая индивидуальную подачу, стоимость и стипендии."
+            },
+            "featured": false
+          },
+          "sha256": "ce4f5e5b46afc0604db47ce9709abbb044efb4137e98cc5b400f4163da7d86ce"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave8-2-cuit-chinese-language-culture",
+            "url": "https://english.cuit.edu.cn/info/1062/1743.htm",
+            "title": "CUIT 2026 Chinese Language Training Admission Guide",
+            "publisher": "chengdu-university-of-information-technology",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "5764777bd8af127aac58939ff9a857e91bac5f05c31a5876965eaf4a1d3202e1"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-wave8-2-cuit-chinese-language-culture-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-chengdu-university-of-information-technology",
+      "canonicalRecordSha256": "e2c1cb6142518c0fbf8dcc5dc29a69849875a52ad0e42acf9091cba6908053ff",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave8-2-cuit-chinese-language-culture"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-wave8-2-cuit-chinese-language-culture-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave8-2-cuit-chinese-language-culture",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 6000,
+        "tuitionPeriod": "semester",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave8-2-cuit-chinese-language-culture"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-wave8-2-cuit-chinese-language-culture",
+        "slug": "gap-wave8-2-cuit-chinese-language-culture-language",
+        "universityId": "uni-chengdu-university-of-information-technology",
+        "name": {
+          "en": "Chinese Language and Culture Program",
+          "zh": "汉语言文化进修项目",
+          "ru": "Программа китайского языка и культуры"
+        },
+        "degreeLevel": "language",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 6,
+        "durationMonthsMax": 12,
+        "programUrl": "https://english.cuit.edu.cn/info/1062/1743.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "6029f46bc4c8b56b43b3003e6b0f71adf8873c4cc8036659df21974a98f8cfac",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-2-cuit-chinese-language-culture"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-2-cuit-chinese-language-culture",
+            "slug": "gap-wave8-2-cuit-chinese-language-culture-language",
+            "universityId": "uni-chengdu-university-of-information-technology",
+            "name": {
+              "en": "Chinese Language and Culture Program",
+              "zh": "汉语言文化进修项目",
+              "ru": "Программа китайского языка и культуры"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 6,
+            "durationMonthsMax": 12,
+            "programUrl": "https://english.cuit.edu.cn/info/1062/1743.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "6029f46bc4c8b56b43b3003e6b0f71adf8873c4cc8036659df21974a98f8cfac"
+        }
+      ],
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-wave8-2-university-chengdu-university-of-information-technology"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-11-02",
+            "status": "verified",
+            "id": "uni-chengdu-university-of-information-technology",
+            "slug": "chengdu-university-of-information-technology",
+            "name": {
+              "en": "Chengdu University of Information Technology",
+              "zh": "成都信息工程大学",
+              "ru": "Чэндуский университет информационных технологий"
+            },
+            "cityId": "city-chengdu",
+            "region": "southwest",
+            "officialUrl": "https://www.cuit.edu.cn/",
+            "admissionsUrl": "https://gjjl.cuit.edu.cn/info/1051/2884.htm",
+            "summary": {
+              "en": "CUIT's official international office publishes separate 2026 postgraduate and Chinese-language calls, including personal email submission, fees and scholarships.",
+              "zh": "成都信息工程大学国际处分别公布2026研究生和汉语言项目简章，包含个人邮件申请、费用和奖学金。",
+              "ru": "Международный отдел CUIT публикует отдельные наборы 2026 года на магистерские и языковые программы, включая индивидуальную подачу, стоимость и стипендии."
+            },
+            "featured": false
+          },
+          "sha256": "ce4f5e5b46afc0604db47ce9709abbb044efb4137e98cc5b400f4163da7d86ce"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave8-2-cuit-chinese-language-culture",
+            "url": "https://english.cuit.edu.cn/info/1062/1743.htm",
+            "title": "CUIT 2026 Chinese Language Training Admission Guide",
+            "publisher": "chengdu-university-of-information-technology",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "5764777bd8af127aac58939ff9a857e91bac5f05c31a5876965eaf4a1d3202e1"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-wave8-2-cuit-sichuan-government-language-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-chengdu-university-of-information-technology",
+      "canonicalRecordSha256": "d952b9b7795f616e286d17b4d053930051a119bb0c0d64e2742837379a1f53ac",
+      "row": {
+        "id": "sch-gap-wave8-2-cuit-sichuan-government-language-scholarship",
+        "slug": "gap-wave8-2-cuit-sichuan-government-language-scholarship",
+        "name": {
+          "en": "Sichuan Provincial Government Scholarship for CUIT Language Students",
+          "zh": "四川省外国留学生政府奖学金（成都信息工程大学语言生）",
+          "ru": "Стипендия правительства Сычуани для языковых студентов CUIT"
+        },
+        "providerType": "province",
+        "universityIds": [
+          "uni-chengdu-university-of-information-technology"
+        ],
+        "programIds": [
+          "prog-gap-wave8-2-cuit-chinese-language-culture"
+        ],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://english.cuit.edu.cn/info/1062/1743.htm",
+        "summary": {
+          "en": "CUIT's official 2026 language guide states a CNY 10,000 annual Sichuan Provincial Government Scholarship for language students. A separate scholarship deadline is not announced.",
+          "zh": "成都信息工程大学官方2026语言生简章公布四川省政府奖学金语言生标准为每年10000元；未单独公布奖学金截止日期。",
+          "ru": "Официальное руководство CUIT 2026 указывает 10 000 юаней в год для языковых студентов по стипендии правительства Сычуани; отдельный срок не объявлен."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave8-2-cuit-sichuan-government-language-scholarship"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-2-cuit-chinese-language-culture"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-2-cuit-chinese-language-culture",
+            "slug": "gap-wave8-2-cuit-chinese-language-culture-language",
+            "universityId": "uni-chengdu-university-of-information-technology",
+            "name": {
+              "en": "Chinese Language and Culture Program",
+              "zh": "汉语言文化进修项目",
+              "ru": "Программа китайского языка и культуры"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 6,
+            "durationMonthsMax": 12,
+            "programUrl": "https://english.cuit.edu.cn/info/1062/1743.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "6029f46bc4c8b56b43b3003e6b0f71adf8873c4cc8036659df21974a98f8cfac"
+        }
+      ],
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-wave8-2-university-chengdu-university-of-information-technology"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-11-02",
+            "status": "verified",
+            "id": "uni-chengdu-university-of-information-technology",
+            "slug": "chengdu-university-of-information-technology",
+            "name": {
+              "en": "Chengdu University of Information Technology",
+              "zh": "成都信息工程大学",
+              "ru": "Чэндуский университет информационных технологий"
+            },
+            "cityId": "city-chengdu",
+            "region": "southwest",
+            "officialUrl": "https://www.cuit.edu.cn/",
+            "admissionsUrl": "https://gjjl.cuit.edu.cn/info/1051/2884.htm",
+            "summary": {
+              "en": "CUIT's official international office publishes separate 2026 postgraduate and Chinese-language calls, including personal email submission, fees and scholarships.",
+              "zh": "成都信息工程大学国际处分别公布2026研究生和汉语言项目简章，包含个人邮件申请、费用和奖学金。",
+              "ru": "Международный отдел CUIT публикует отдельные наборы 2026 года на магистерские и языковые программы, включая индивидуальную подачу, стоимость и стипендии."
+            },
+            "featured": false
+          },
+          "sha256": "ce4f5e5b46afc0604db47ce9709abbb044efb4137e98cc5b400f4163da7d86ce"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-2-cuit-sichuan-government-language-scholarship",
+            "url": "https://english.cuit.edu.cn/info/1062/1743.htm",
+            "title": "CUIT 2026 Chinese Language Training Admission Guide",
+            "publisher": "chengdu-university-of-information-technology",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "0aa0b5c7afd9bc90513807ae84fd535c2f8b90cdcbfd0e20a1727d9fc915478c"
+        }
+      ]
+    }
+  ]
+}

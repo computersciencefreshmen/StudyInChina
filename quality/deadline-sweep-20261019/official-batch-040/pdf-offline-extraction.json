@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-19T13:12:50.759Z",
+  "networkRequestsForExtractionOrRendering": 0,
+  "method": "bundled-pypdf-after-single-GET-and-offline-Poppler-page-render",
+  "allSevenPagesTextRead": true,
+  "originals": [
+    {
+      "originalCapture": {
+        "name": "bisu-award-pdf",
+        "url": "https://admission.bisu.edu.cn/module/download/downfile.jsp?classid=0&filename=2311091107332343603.pdf",
+        "observedAt": "2026-10-19T13:04:45.584443+00:00",
+        "timeoutSeconds": 25,
+        "maximumBytes": 12000000,
+        "tlsCertificateValidation": true,
+        "status": 200,
+        "finalUrl": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2311091107332343603.pdf?classid=0&filename=2311091107332343603.pdf",
+        "contentType": "application/pdf",
+        "bytes": 96319,
+        "rawPath": "bisu-award-pdf.pdf",
+        "rawSha256": "f3e65cc0e08e503ea39134d5c54474552de616266a98b4c677d17bbcb085eb56",
+        "pageCount": 3,
+        "textPath": "bisu-award-pdf.txt",
+        "textSha256": "fef244b54474abc815a39f07efddaa9630c6b110b52bac00506a265e8c5c3469",
+        "captureSucceeded": true
+      },
+      "text": {
+        "path": "bisu-award-pdf.txt",
+        "sha256": "fef244b54474abc815a39f07efddaa9630c6b110b52bac00506a265e8c5c3469"
+      }
+    },
+    {
+      "originalCapture": {
+        "name": "bisu-guide-pdf",
+        "url": "https://admission.bisu.edu.cn/module/download/downfile.jsp?classid=0&filename=2403220938594699584.pdf",
+        "observedAt": "2026-10-19T13:04:45.585456+00:00",
+        "timeoutSeconds": 25,
+        "maximumBytes": 12000000,
+        "tlsCertificateValidation": true,
+        "status": 200,
+        "finalUrl": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2403220938594699584.pdf?classid=0&filename=2403220938594699584.pdf",
+        "contentType": "application/pdf",
+        "bytes": 138897,
+        "rawPath": "bisu-guide-pdf.pdf",
+        "rawSha256": "f11b61d5696ea80923210e4b67d055b30ca3163671dc9780338ee11793ae0fa7",
+        "pageCount": 4,
+        "textPath": "bisu-guide-pdf.txt",
+        "textSha256": "30a577064607319de0535010f01e28403d6f35e96b079428800aade1b6ce4025",
+        "captureSucceeded": true
+      },
+      "text": {
+        "path": "bisu-guide-pdf.txt",
+        "sha256": "30a577064607319de0535010f01e28403d6f35e96b079428800aade1b6ce4025"
+      }
+    }
+  ],
+  "visualPages": [
+    {
+      "path": "bisu-2023-date-3.png",
+      "sha256": "6993f9934177d2c89daab812888df105eeb6ee7209aa7f0ea9ae30701169da35",
+      "source": "bisu-award-pdf",
+      "page": 3,
+      "observation": "Explicit2023 March1-May30 applicant period; July is results."
+    },
+    {
+      "path": "bisu-2024-date-4.png",
+      "sha256": "43f6379d6138c17f28fc428a3461646dcb25aa8358c09c4b11a3b2ba32a2bff2",
+      "source": "bisu-guide-pdf",
+      "page": 4,
+      "observation": "Explicit2024 March1-May31 applicant period; July is results."
+    }
+  ],
+  "visualReadConfirmed": true,
+  "noCurrentYearDateInferred": true
+}
