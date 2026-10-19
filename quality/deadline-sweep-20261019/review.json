@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "purpose": "code-and-evidence-review-of-date-only-audit",
+  "checkedAt": "2026-10-19T04:36:05.884930+00:00",
+  "reviewer": "deployment_audit agent",
+  "reviewerAuthorshipDisclosure": "Reviewer authored official-batch-002. Code and batches001/003 received independent inspection; batch002 received a second structural/source-binding check, not a second independent semantic approval.",
+  "result": "pass-with-one-nonblocking-hardening-note",
+  "inputs": {
+    "script": {
+      "path": "scripts/quality/audit-catalog-deadlines.ts",
+      "sha256": "b5fa618abfe943eb04518a78376839f0381a9619bb510c008642cf042abe5d52"
+    },
+    "inventory": {
+      "path": "quality/deadline-sweep-20261019/catalog-deadlines.json",
+      "sha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+      "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722"
+    },
+    "reports": [
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-001/report.json",
+        "sha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5",
+        "schools": 10,
+        "records": 22
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-002/report.json",
+        "sha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811",
+        "schools": 10,
+        "records": 18
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-003/report.json",
+        "sha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad",
+        "schools": 10,
+        "records": 20
+      }
+    ]
+  },
+  "verifiedTotals": {
+    "distinctSchoolsAttempted": 30,
+    "distinctRecordDatesAssessed": 60,
+    "recordResults": {
+      "blocked": 7,
+      "unknown": 4,
+      "unchanged": 49
+    },
+    "corrected": 0,
+    "closed": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "newFullRecordsCertified": 0
+  },
+  "checks": [
+    {
+      "name": "date-calendar-self-tests",
+      "result": "pass",
+      "assertions": 11,
+      "command": "node --conditions=react-server --import tsx scripts/quality/audit-catalog-deadlines.ts --self-test"
+    },
+    {
+      "name": "record-school-deadline-bindings",
+      "result": "pass",
+      "detail": "All60IDs exist in pinned inventory, belong to stated school and match stored deadline. Unchanged dates equal official dates; unknown/blocked rows keep officialDeadline null."
+    },
+    {
+      "name": "inventory-pins",
+      "result": "pass",
+      "detail": "All3reports share exact snapshot. Batches001/003 also bind current inventory bytes and all6input hashes."
+    },
+    {
+      "name": "no-whole-school-completion-claim",
+      "result": "pass",
+      "detail": "Each report explicitly limits review to selected intake date clauses. Report completion means finite batch attempt, including held sources, rather than school catalogue completion."
+    },
+    {
+      "name": "no-fact-renewal-or-canonical-mutation",
+      "result": "pass",
+      "detail": "Generator reads6catalogue files and selectPublishedData; writes only audit inventory, Markdown and initially absent progress. Batch reports neither renew verifiedAt/reviewAfter nor authorize publication of held/stale rows."
+    },
+    {
+      "name": "uncertainty-preserved",
+      "result": "pass",
+      "detail": "NUIST month/day and year contradiction stays unknown. Guizhou absent date text stays unknown. Inaccessible official sources stay blocked. Current-window dates do not imply a live applicant portal."
+    },
+    {
+      "name": "source-scope-spot-check",
+      "result": "pass",
+      "detail": "Reviewer reopened NUIST full official notice and Guizhou guide landing page: NUIST deadline paragraph contradicts its March2027 category, while Guizhou rendered page lacks deadline text, agreeing with held outcomes."
+    },
+    {
+      "name": "public-source-and-credential-review",
+      "result": "pass",
+      "detail": "No private-key, GitHub PAT, AWS access-key or long bearer pattern found in evidence text. Captures contain public bodies and allowlisted metadata, not credential headers, cookies or applicant records. Pattern scan is not exhaustive secret certification."
+    },
+    {
+      "name": "copyright-and-publication-boundary",
+      "result": "pass-with-scope",
+      "detail": "Reports use short date excerpts; batches001/003 combined per-source quote/scopeQuote stay below25whitespace words. Batch002 raw official bodies remain local evidence. Both checkout .vercelignore files exclude /quality/ from website upload; no full notices were reproduced in chat."
+    },
+    {
+      "name": "source-byte-bindings-batch002",
+      "result": "pass",
+      "detail": "All10successful source bodies have savedSHA256, full decoded/extracted text and quote binding. FailedSJTUoldPDF404 preserved; alternate full university notice confirms same date. SHU page8 visually checked."
+    }
+  ],
+  "nonblockingFindings": [
+    {
+      "severity": "low",
+      "file": "scripts/quality/audit-catalog-deadlines.ts",
+      "function": "assessDates",
+      "issue": "A not-announced record with otherwise valid stored opening/deadline emits not-announced-with-stored-dates but still receives windowState open. Conflicting evidence should ideally remain unknown/invalid in a future hardening change.",
+      "currentImpact": "Zero such date issues in reviewed snapshot; inventory-only output and real publication gate are separate. No release blocker."
+    }
+  ],
+  "deliveryGuidance": {
+    "copyToCurrentRestoredCheckout": true,
+    "copyMethod": "Explicit audited files only; compare exactSHA256 after copying; do not git add the unrelated dirty workspace.",
+    "auditDeliveryIsWebsitePublication": false,
+    "changesPublished783Program7ScholarshipFacts": false,
+    "existing783CandidateProofRemainsSeparate": true,
+    "sharedProgressModifiedByReviewer": false
+  },
+  "reviewMutations": {
+    "canonicalWrites": 0,
+    "gitMutations": 0,
+    "deploymentMutations": 0,
+    "paidCalls": 0,
+    "outputFilesWritten": [
+      "quality/deadline-sweep-20261019/review.json"
+    ]
+  }
+}
