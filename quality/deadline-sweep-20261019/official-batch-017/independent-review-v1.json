@@ -1,0 +1,1022 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "official-batch-017-independent-review-v1",
+  "reviewedAt": "2026-10-19T05:50:30.334Z",
+  "verdict": "accepted-source-only-scoped-observations-with-explicit-unknowns-and-access-holds",
+  "approvedForCanonicalWrite": false,
+  "reportPath": "report.json",
+  "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueueSha256": "c53dd8358ec2667e6390b2b8b085e50b408854f55c2b20dc8da0f682f3151e6b",
+  "selectionSha256": "dba03eb6520febbec5f86e902b43130d42e2facbe0c033782f1f3381fb362967",
+  "additionalSelectionReceipt": "../heartbeat-0539/additional-same-source-selection-v1.json",
+  "additionalSelectionReceiptSha256": "f138cac45d2650bbb87fc212eb9b8e7b392cf008f46bb2e4d5c39732c7f127f8",
+  "awardQuoteClarification": {
+    "path": "award-quote-clarification-v1.json",
+    "sha256": "5eab5551354d91315310358960b61d40187dac0dbba70f48c355d87c596544fc",
+    "conclusionChanges": 0
+  },
+  "summary": {
+    "universities": 7,
+    "records": 21,
+    "baseQueue": 18,
+    "additionalSameSource": 3,
+    "results": {
+      "closed": 7,
+      "unknown": 10,
+      "blocked": 4
+    },
+    "fullCanonicalCycleRowsChecked": 18,
+    "fullCanonicalProgramRowsCheckedForCycles": 18,
+    "fullCanonicalAwardRowsChecked": 3,
+    "fullCanonicalSourceRowsChecked": 34,
+    "capturedOriginalBodiesHashChecked": 8,
+    "exactOriginalObservedAtCheckedForRecords": 21,
+    "newWebsiteReads": 0,
+    "canonicalWrites": 0,
+    "frozenReportWrites": 0,
+    "sharedStateWrites": 0,
+    "gitActions": 0
+  },
+  "findings": [
+    {
+      "key": "cumt-master-vs-undergraduate-source",
+      "disposition": "accepted-for-date-only",
+      "assessment": "The registered 3-page PDF is expressly an undergraduate catalogue and is not accepted as master identity evidence. The separately captured current English-master catalogue supplies exact codes 080800 电气工程 (English spelling Electronical Engineering) and 083700 安全科学与工程 under master/English headers. The independently captured application-conditions page literally states autumn degree applicants March1–July10,2026. Combined sources support the two expired date candidates; the catalogue is not falsely described as explicitly year-labelled.",
+      "evidence": [
+        "cumt.pdf",
+        "cumt-master-catalogue.html",
+        "cumt-application.html"
+      ]
+    },
+    {
+      "key": "cumt-school-award-separate-scope",
+      "disposition": "accepted-unknown",
+      "assessment": "The school-award row is not verified from the general 2026 degree admission period. The award-specific registered page was not read in this batch, and no July10 award cutoff is asserted."
+    },
+    {
+      "key": "cumtb-image-and-text-limits",
+      "disposition": "accepted-unknown-only",
+      "assessment": "2026 Chinese-taught guide text contains requirements, materials, fees and scholarship links without an observed general bachelor submission cutoff. Its original HTML image tags refer to programme/CSCA information. No independently captured image body is present in this bundle, so this review does not certify image contents or full catalogue/date completeness. Holding all three deadlines unknown is acceptable; a linked CSC postgraduate notice cannot supply bachelor dates.",
+      "embeddedImageReferenceCount": 1,
+      "embeddedImageTagsForProvenanceOnly": [
+        "<img src=\"/virtual_attach_file.vsb?afc=AMNC14nmUsozLsLm47ZMRrVoz7YUzQN7U4CbU49ZnRU4olC0gihFp2hmCIa0LShVn1h2L1yPn77bnznfLm7ZMln7Lll8ozMVL8QkL7-ZnRMFnlr2LNQfoRTFMlUDUYbaptveo4OeQDX/pdTw_tL0qIbtpYyPLRLsg4U8M4LJqdTnx&oid=1385918509&tid=1037&nid=4473&e=.png\" width=\"400\" vsbhref=\"vurl\" vurl=\"/_vsl/1EFF21DA9E4A2185DD1E493E3FB0B8D3/EEF2FA89/5D6C\" vheight=\"\" vwidth=\"400\" alt=\"\" orisrc=\"/virtual_attach_file.vsb?afc=AozL14L4CYLN-snm7laLzT7LzV7L4UNiMllsUmffUNL4MlC0gihFp2hmCIa0LkyZLkyan1hRLRrfL7lsLm6VnzLsMzGiLz-iLNn7nNC8UmMFMNWfMllYMzrFoRGbLkbaptveo4OeQDX/pdTw_tL0qIbtpYyPLRLsg4U8M4LJqdTnx&oid=1385918509&tid=1037&nid=4473&e=.png\" class=\"img_vsb_content\">"
+      ],
+      "noImageContentsCertified": true
+    },
+    {
+      "key": "upc-general-vs-school-award-relative-year",
+      "disposition": "accepted-unknown-with-quote-addendum",
+      "assessment": "General autumn submission ends next-year May31; the separate school-award row ends next-year May15. Neither has an absolute base year. All five records appropriately remain unknown. The award quote addendum replaces no frozen bytes and makes its correct May15 row explicit.",
+      "clarification": "award-quote-clarification-v1.json"
+    },
+    {
+      "key": "ctbu-exact-2026-joint-scholarship-route-only",
+      "disposition": "accepted-with-route-restriction",
+      "assessment": "The full 2026/2027 joint scholarship notice identifies September2026 new entrants, explicitly lists all four exact degree routes and prints applicant deadline March1,2026 in Chinese and English. It supports the named award plus those four scholarship-route cycle observations. Later institutional review, emailed exam notification and registration conditions are distinct. It does not certify a universal self-funded/general degree deadline.",
+      "candidateDate": "2026-03-01",
+      "canonicalNullCandidates": 1,
+      "alreadyStoredExpiredDatesScoped": 4,
+      "generalDegreeDeadlineCertified": false
+    },
+    {
+      "key": "cupl-and-cqmu-finite-access-holds",
+      "disposition": "accepted-blocked",
+      "assessment": "CUPL native capture is a script challenge; a bounded listing fallback followed by the exact notice returned403. CQMU original attachment timed out and a single web fallback was inaccessible. Failure artifacts retain provenance and times; no absent origin bytes/date quote are invented and no retry loop or challenge bypass was performed.",
+      "blockedRecords": 4
+    },
+    {
+      "key": "cuc-preparatory-year-round-qualifier",
+      "disposition": "accepted-unknown",
+      "assessment": "The February4,2026 Q&A distinguishes degree application timing from year-round preparatory/Chinese-language applications and defers exact deadlines to academic-year brochures. Publication year and generic rolling access do not establish the selected generic intake cutoff or current portal acceptance."
+    }
+  ],
+  "canonicalRecordPins": [
+    {
+      "recordId": "cycle-gap-mve-ecs-cumt-electrical-engineering-master-2026-2027-autumn-fee-reference",
+      "result": "closed",
+      "canonicalRowSha256": "7b672cb0e22721bb1f06a1c384f9ad027b71a73de447154518726c7630ad94fe",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mve-ecs-cumt-electrical-engineering-master",
+          "canonicalProgramSha256": "c12706832049367c403eb5839327f4f4f6e0b83dd436c97620e9eaa39b0fe66d"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": "2026-07-10",
+      "evidenceBodySha256": "08e124d7dbf37eafb83270e9938d07d4c180d19a966a380c96418cdd957cfe9f",
+      "evidenceSourceUrl": "https://sac.cumt.edu.cn/zsgl/sqtj.htm",
+      "observedAt": "2026-10-19T05:42:27.986000+00:00"
+    },
+    {
+      "recordId": "cycle-gap-mve-ecs-cumt-safety-science-master-2026-2027-autumn-fee-reference",
+      "result": "closed",
+      "canonicalRowSha256": "0e39bb9a1e303b99a238e9c2b05b5b91d5c683a4679328b6976cf285d21c825a",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mve-ecs-cumt-safety-science-master",
+          "canonicalProgramSha256": "b31f3f8a1a3c9eaa646263411ace74a6135bcfa4876a1071632be25fb9f28d33"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": "2026-07-10",
+      "evidenceBodySha256": "08e124d7dbf37eafb83270e9938d07d4c180d19a966a380c96418cdd957cfe9f",
+      "evidenceSourceUrl": "https://sac.cumt.edu.cn/zsgl/sqtj.htm",
+      "observedAt": "2026-10-19T05:42:27.986000+00:00"
+    },
+    {
+      "recordId": "sch-gap-mve-ecs-cumt-school-scholarship",
+      "result": "unknown",
+      "canonicalRowSha256": "93548d563d2e3928520cbde376cdb4d211d7eab65676a077840fd05e44cd5706",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mve-ecs-cumt-safety-science-master",
+          "canonicalProgramSha256": "b31f3f8a1a3c9eaa646263411ace74a6135bcfa4876a1071632be25fb9f28d33"
+        },
+        {
+          "programId": "prog-gap-mve-ecs-cumt-electrical-engineering-master",
+          "canonicalProgramSha256": "c12706832049367c403eb5839327f4f4f6e0b83dd436c97620e9eaa39b0fe66d"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": null,
+      "evidenceBodySha256": "08e124d7dbf37eafb83270e9938d07d4c180d19a966a380c96418cdd957cfe9f",
+      "evidenceSourceUrl": "https://sac.cumt.edu.cn/zsgl/sqtj.htm",
+      "observedAt": "2026-10-19T05:42:27.986000+00:00"
+    },
+    {
+      "recordId": "cycle-gap-wave5-depth-cumtb-artificial-intelligence-bachelor-2026-2027-other-fee-reference",
+      "result": "unknown",
+      "canonicalRowSha256": "05a69f7c3fb37542efbb37945c09f38b5eaffe00839669d5e9f66127de71ef6c",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave5-depth-cumtb-artificial-intelligence-bachelor",
+          "canonicalProgramSha256": "14f59c09a792b83657620bd46442efe82f549cf0be0211cfb028f49bd9ce46dc"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": null,
+      "evidenceBodySha256": "25405f04a568a48f59b95451a40b06518c7b2ab0ab3e02e7532f73220221492e",
+      "evidenceSourceUrl": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+      "observedAt": "2026-10-19T05:41:00.461714+00:00"
+    },
+    {
+      "recordId": "cycle-gap-wave5-depth-cumtb-computer-science-bachelor-2026-2027-other-fee-reference",
+      "result": "unknown",
+      "canonicalRowSha256": "0c0c47b2dd6fe988bd03bf04f76afb49f283c96c26939b1c7adbc3af27fd2a45",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave5-depth-cumtb-computer-science-bachelor",
+          "canonicalProgramSha256": "f9f516cf10c79f0995f09755c2fd8c44c72ad697ad26dd81c017e058f77150a2"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": null,
+      "evidenceBodySha256": "25405f04a568a48f59b95451a40b06518c7b2ab0ab3e02e7532f73220221492e",
+      "evidenceSourceUrl": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+      "observedAt": "2026-10-19T05:41:00.461714+00:00"
+    },
+    {
+      "recordId": "cycle-gap-wave5-depth-cumtb-mining-engineering-bachelor-2026-2027-other-fee-reference",
+      "result": "unknown",
+      "canonicalRowSha256": "d40b94e0fd1d2ecbbfa50e2ecdb69bfa05dcdc9cd89c7c706ce4d1b10de1e9a3",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave5-depth-cumtb-mining-engineering-bachelor",
+          "canonicalProgramSha256": "99d91953e5ee808aa22d81e2f06268fa83866fb6cabb2ca5368d41e761e51664"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": null,
+      "evidenceBodySha256": "25405f04a568a48f59b95451a40b06518c7b2ab0ab3e02e7532f73220221492e",
+      "evidenceSourceUrl": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+      "observedAt": "2026-10-19T05:41:00.461714+00:00"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-ne-upc-chemical-engineering-master-en-2026-2027-autumn-fee-reference",
+      "result": "unknown",
+      "canonicalRowSha256": "336ee4675165aa2e744e4bf7e585a53285be9a12bcf60809a812866d4bccff42",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-prog-mew-ne-upc-chemical-engineering-master-en",
+          "canonicalProgramSha256": "29438b25dda1fb46d021008d098a1dd700ab0b84d6cc7eaaef8b6b36ecd89df0"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": null,
+      "evidenceBodySha256": "33cf5ec9f77211d3d3d5c5032bbff1d9ede80c7ef4dbc78caa0e52b3211cff68",
+      "evidenceSourceUrl": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+      "observedAt": "2026-10-19T05:41:04.245341+00:00"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-ne-upc-chinese-language-semester-2026-2027-autumn-fee-reference",
+      "result": "unknown",
+      "canonicalRowSha256": "4cc47dc19aee143304f617f789eb95bd3afb7e899996f7a41f086f578fff27b3",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-prog-mew-ne-upc-chinese-language-semester",
+          "canonicalProgramSha256": "f10ae7246c04ea8c28a3be362cae5f9f10cf2f259e4fc1856879032539e48cdb"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": null,
+      "evidenceBodySha256": "33cf5ec9f77211d3d3d5c5032bbff1d9ede80c7ef4dbc78caa0e52b3211cff68",
+      "evidenceSourceUrl": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+      "observedAt": "2026-10-19T05:41:04.245341+00:00"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-ne-upc-foundation-semester-2026-2027-autumn-fee-reference",
+      "result": "unknown",
+      "canonicalRowSha256": "86f5447c2ad0fe852c10584a3672c592790029dd948481297b0328026cf77889",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-prog-mew-ne-upc-foundation-semester",
+          "canonicalProgramSha256": "99ec9c8f0933ad77cd23c9e57015ebc8aaa397ededac2481e690310ebafd20fb"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": null,
+      "evidenceBodySha256": "33cf5ec9f77211d3d3d5c5032bbff1d9ede80c7ef4dbc78caa0e52b3211cff68",
+      "evidenceSourceUrl": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+      "observedAt": "2026-10-19T05:41:04.245341+00:00"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-ne-upc-petroleum-engineering-bachelor-en-2026-2027-autumn-fee-reference",
+      "result": "unknown",
+      "canonicalRowSha256": "0792384a84603229f3541335f82fc73c587458970e58b3f2d52f7a222e072ff4",
+      "canonicalProgramPins": [
+        {
+          "programId": "program-china-university-of-petroleum-east-china-petroleum-engineering-bachelor",
+          "canonicalProgramSha256": "df934e78a3bb8ec5bd9b6e3696b0599823d7d007e313d6fa77425a3307e58126"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": null,
+      "evidenceBodySha256": "33cf5ec9f77211d3d3d5c5032bbff1d9ede80c7ef4dbc78caa0e52b3211cff68",
+      "evidenceSourceUrl": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+      "observedAt": "2026-10-19T05:41:04.245341+00:00"
+    },
+    {
+      "recordId": "sch-gap-sch-mew-ne-upc-university",
+      "result": "unknown",
+      "canonicalRowSha256": "1eb5f5c6c19434380a16106ae4e1abba9263e27d8aad4810847e713f5385f8e8",
+      "canonicalProgramPins": [
+        {
+          "programId": "program-china-university-of-petroleum-east-china-petroleum-engineering-bachelor",
+          "canonicalProgramSha256": "df934e78a3bb8ec5bd9b6e3696b0599823d7d007e313d6fa77425a3307e58126"
+        },
+        {
+          "programId": "prog-gap-prog-mew-ne-upc-chemical-engineering-master-en",
+          "canonicalProgramSha256": "29438b25dda1fb46d021008d098a1dd700ab0b84d6cc7eaaef8b6b36ecd89df0"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": null,
+      "evidenceBodySha256": "33cf5ec9f77211d3d3d5c5032bbff1d9ede80c7ef4dbc78caa0e52b3211cff68",
+      "evidenceSourceUrl": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+      "observedAt": "2026-10-19T05:41:04.245341+00:00"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-cupl-chinese-language-2025-2026-autumn",
+      "result": "blocked",
+      "canonicalRowSha256": "2cd66d12db901413642913976bf53ed072d6dc889439f9df6ff22a80a467a84b",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-prog-mew-nss-cupl-chinese-language",
+          "canonicalProgramSha256": "05c4e00ed91e2db498be588c7b92520b542343238e0ea7d6bb0c453b423abc66"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": null,
+      "evidenceBodySha256": "77c74ff63a04fda7b17b69822735f75c6d8441cf5d14d2ab4ceac24ae4682a94",
+      "evidenceSourceUrl": "https://sis.cupl.edu.cn/lhlx/hydqpx.htm",
+      "observedAt": "2026-10-19T05:41:05.659478+00:00"
+    },
+    {
+      "recordId": "cycle-gap-wave4-cqmu-b-medical-imaging-2026-2027-autumn",
+      "result": "blocked",
+      "canonicalRowSha256": "490fe00aeabd09685f997c9f4deb84ad60f3dc737cc3c36bd22c5f9834248560",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave4-cqmu-b-medical-imaging",
+          "canonicalProgramSha256": "4f3ca1809a981266ee4c5dece6fba3e27d67ef73b72e4d9190122301c9f9b52b"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": null,
+      "evidenceBodySha256": null,
+      "evidenceSourceUrl": "https://english.cqmu.edu.cn/system/_content/download.jsp?owner=1537491113&urltype=news.DownloadAttachUrl&wbfileid=17960706",
+      "observedAt": "2026-10-19T05:41:07.941395+00:00"
+    },
+    {
+      "recordId": "cycle-gap-wave4-cqmu-b-rehabilitation-science-2026-2027-autumn",
+      "result": "blocked",
+      "canonicalRowSha256": "d5047b32cf10090c33360f53400b6937f748ba47835bb60602f6f19acd189c3b",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave4-cqmu-b-rehabilitation-science",
+          "canonicalProgramSha256": "ade3bd8f21b628174f20677b430c66c19b5fe6b2b7f3f162c80c227db58f354f"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": null,
+      "evidenceBodySha256": null,
+      "evidenceSourceUrl": "https://english.cqmu.edu.cn/system/_content/download.jsp?owner=1537491113&urltype=news.DownloadAttachUrl&wbfileid=17960706",
+      "observedAt": "2026-10-19T05:41:07.941395+00:00"
+    },
+    {
+      "recordId": "cycle-gap-wave4-cqmu-b-stomatology-2026-2027-autumn",
+      "result": "blocked",
+      "canonicalRowSha256": "29053fc7a017faefdec48d94ab425abbcb0d49689310cf204181e868e58eacb2",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave4-cqmu-b-stomatology",
+          "canonicalProgramSha256": "97c6e209452f3d0124f7126f8f8eea1a90355d45f3d8876dffcc77a37e37a449"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": null,
+      "evidenceBodySha256": null,
+      "evidenceSourceUrl": "https://english.cqmu.edu.cn/system/_content/download.jsp?owner=1537491113&urltype=news.DownloadAttachUrl&wbfileid=17960706",
+      "observedAt": "2026-10-19T05:41:07.941395+00:00"
+    },
+    {
+      "recordId": "sch-gap-wave3-sch-ctbu-moe-chongqing-joint",
+      "result": "closed",
+      "canonicalRowSha256": "bb8a66f0c812dedc7a90b244d0c4d122a4dfce571d2dc6e554d52e1d1d97f33c",
+      "canonicalProgramPins": [],
+      "storedDeadline": null,
+      "observedOfficialDeadline": "2026-03-01",
+      "evidenceBodySha256": "cb01d2cdb2db1beccf338ffbb7d9fd29abdbe3879261a6492b54c6e907cc23f9",
+      "evidenceSourceUrl": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+      "observedAt": "2026-10-19T05:41:09.568652+00:00"
+    },
+    {
+      "recordId": "cycle-gap-wave3-ctbu-b-international-economics-and-trade-2026-2027-autumn",
+      "result": "closed",
+      "canonicalRowSha256": "b6650b806a303a853db82fbf05c0cab1951296362011496a83ce0c6f2e0ad220",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave3-ctbu-b-international-economics-and-trade",
+          "canonicalProgramSha256": "16e7e23f994288acfea208617b7246d1135f911cba05110f23584a2e214e6e42"
+        }
+      ],
+      "storedDeadline": "2026-03-01",
+      "observedOfficialDeadline": "2026-03-01",
+      "evidenceBodySha256": "cb01d2cdb2db1beccf338ffbb7d9fd29abdbe3879261a6492b54c6e907cc23f9",
+      "evidenceSourceUrl": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+      "observedAt": "2026-10-19T05:41:09.568652+00:00"
+    },
+    {
+      "recordId": "cycle-gap-wave3-ctbu-d-big-data-statistics-intelligent-computing-2026-2027-autumn",
+      "result": "closed",
+      "canonicalRowSha256": "c7f82ea061fb8abc6e8655ae94085ca2910c1bc232d4a0507a4d17be74ededb8",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave3-ctbu-d-big-data-statistics-intelligent-computing",
+          "canonicalProgramSha256": "b7076eafe7bb945ca391efaf3e64be09f0811467f54520027e7c224cc596ff18"
+        }
+      ],
+      "storedDeadline": "2026-03-01",
+      "observedOfficialDeadline": "2026-03-01",
+      "evidenceBodySha256": "cb01d2cdb2db1beccf338ffbb7d9fd29abdbe3879261a6492b54c6e907cc23f9",
+      "evidenceSourceUrl": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+      "observedAt": "2026-10-19T05:41:09.568652+00:00"
+    },
+    {
+      "recordId": "cycle-gap-wave3-ctbu-d-digital-economy-2026-2027-autumn",
+      "result": "closed",
+      "canonicalRowSha256": "491f3a513fc2858fa24f93440e5b2667614ee457c27b9bd47cca8fdf95029d38",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave3-ctbu-d-digital-economy",
+          "canonicalProgramSha256": "2c2fc835477b61d3c99e246444df233b187a53225ea53302e1e94b694ccaff97"
+        }
+      ],
+      "storedDeadline": "2026-03-01",
+      "observedOfficialDeadline": "2026-03-01",
+      "evidenceBodySha256": "cb01d2cdb2db1beccf338ffbb7d9fd29abdbe3879261a6492b54c6e907cc23f9",
+      "evidenceSourceUrl": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+      "observedAt": "2026-10-19T05:41:09.568652+00:00"
+    },
+    {
+      "recordId": "cycle-gap-wave3-ctbu-m-business-administration-en-2026-2027-autumn",
+      "result": "closed",
+      "canonicalRowSha256": "5c5d7fc030e6def2b5207c03ca1a06178e354f2a9a47db9a3785c852a91236a8",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave3-ctbu-m-business-administration-en",
+          "canonicalProgramSha256": "91aec90d0a600c68f0b228f176cdf01ecebf87e2416726ef4d37ec4e8304e104"
+        }
+      ],
+      "storedDeadline": "2026-03-01",
+      "observedOfficialDeadline": "2026-03-01",
+      "evidenceBodySha256": "cb01d2cdb2db1beccf338ffbb7d9fd29abdbe3879261a6492b54c6e907cc23f9",
+      "evidenceSourceUrl": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+      "observedAt": "2026-10-19T05:41:09.568652+00:00"
+    },
+    {
+      "recordId": "cycle-2026-bd683b48bff2",
+      "result": "unknown",
+      "canonicalRowSha256": "3b822e56772c09a2e067da38a536822a8b33be3ebe1d22d0954a5be015699c36",
+      "canonicalProgramPins": [
+        {
+          "programId": "program-communication-university-of-china-chinese-language-preparatory-program-l",
+          "canonicalProgramSha256": "3326694a19a13e519c1fe813b2c1739e891b839f842c3a3b8d2b8ac7828a4110"
+        }
+      ],
+      "storedDeadline": null,
+      "observedOfficialDeadline": null,
+      "evidenceBodySha256": "4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927",
+      "evidenceSourceUrl": "https://icuc.cuc.edu.cn/2026/0204/c7289a266930/page.htm",
+      "observedAt": "2026-10-19T05:41:17.051808+00:00"
+    }
+  ],
+  "canonicalSourcePins": [
+    {
+      "sourceId": "src-gap-program-mve-ecs-cumt-electrical-engineering-master",
+      "canonicalSourceSha256": "7e38412263714f1d1fda55b27a62ee90d85b3a4c655d2ef9a95c2c9b90ed26fa",
+      "sourceFullRecord": {
+        "id": "src-gap-program-mve-ecs-cumt-electrical-engineering-master",
+        "url": "https://sac.cumt.edu.cn/__local/8/0B/3F/BA9E99ADCC96D8B30C103D5F3E1_1CDB0EB7_2B876.pdf",
+        "title": "CUMT 2026 Programs Taught in English",
+        "publisher": "china-university-of-mining-and-technology",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-08-04"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-mve-ecs-cumt-electrical-engineering-master-support-1",
+      "canonicalSourceSha256": "69e0427bfd72ee07be730ebb287ce310b1a0a1506f7414e9fb092c5c749baadc",
+      "sourceFullRecord": {
+        "id": "src-gap-program-mve-ecs-cumt-electrical-engineering-master-support-1",
+        "url": "https://sac.cumt.edu.cn/zsgl/sqtj.htm",
+        "title": "CUMT 2026 Application Conditions and Dates",
+        "publisher": "china-university-of-mining-and-technology",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-08-04"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-mve-ecs-cumt-safety-science-master",
+      "canonicalSourceSha256": "d7fa52c04c98293a0565032a5e837fce986150c9ad8f8df88b9f67371b9bbb1d",
+      "sourceFullRecord": {
+        "id": "src-gap-program-mve-ecs-cumt-safety-science-master",
+        "url": "https://sac.cumt.edu.cn/__local/8/0B/3F/BA9E99ADCC96D8B30C103D5F3E1_1CDB0EB7_2B876.pdf",
+        "title": "CUMT 2026 Programs Taught in English",
+        "publisher": "china-university-of-mining-and-technology",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-08-04"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-mve-ecs-cumt-safety-science-master-support-1",
+      "canonicalSourceSha256": "c14fa848c2671ad985da298cb206c6f83506faca2beccbdc6e0e2bc250688dfe",
+      "sourceFullRecord": {
+        "id": "src-gap-program-mve-ecs-cumt-safety-science-master-support-1",
+        "url": "https://sac.cumt.edu.cn/zsgl/sqtj.htm",
+        "title": "CUMT 2026 Application Conditions and Dates",
+        "publisher": "china-university-of-mining-and-technology",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-08-04"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-mve-ecs-cumt-safety-science-master-support-2",
+      "canonicalSourceSha256": "d4004221d8c8c85e605511aa0efd343965ab6e8d891a0f8b9fa2e6f400ba0116",
+      "sourceFullRecord": {
+        "id": "src-gap-program-mve-ecs-cumt-safety-science-master-support-2",
+        "url": "https://sac.cumt.edu.cn/en/ADMISSION/Fee_Schorlarship.htm",
+        "title": "CUMT Fees and Scholarships",
+        "publisher": "china-university-of-mining-and-technology",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-08-04"
+      }
+    },
+    {
+      "sourceId": "src-gap-scholarship-mve-ecs-cumt-school-scholarship",
+      "canonicalSourceSha256": "f20b9fc9768eb589b2c2075b38790b5aa32204e575c31e63ad6a6098ac26eb74",
+      "sourceFullRecord": {
+        "id": "src-gap-scholarship-mve-ecs-cumt-school-scholarship",
+        "url": "https://sac.cumt.edu.cn/en/ADMISSION/Fee_Schorlarship.htm",
+        "title": "CUMT Fee and Scholarship",
+        "publisher": "china-university-of-mining-and-technology",
+        "kind": "scholarship",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-08-04"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-wave5-depth-cumtb-artificial-intelligence-bachelor",
+      "canonicalSourceSha256": "5ea86c3a741b1e87ec9ef2dc8573d7cc32932adce0e9fa5e7208debcc0c74cf6",
+      "sourceFullRecord": {
+        "id": "src-gap-program-wave5-depth-cumtb-artificial-intelligence-bachelor",
+        "url": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+        "title": "CUMTB 2026 International Student Admissions Guide for Chinese-taught Programs",
+        "publisher": "china-university-of-mining-and-technology-beijing",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-07-31"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-wave5-depth-cumtb-artificial-intelligence-bachelor-support-1",
+      "canonicalSourceSha256": "02aff75577bfe9f1557abf5988e633af6c7632f715f3838338fe6afeb41770af",
+      "sourceFullRecord": {
+        "id": "src-gap-program-wave5-depth-cumtb-artificial-intelligence-bachelor-support-1",
+        "url": "https://international.cumtb.edu.cn/virtual_attach_file.vsb?afc=AMNC14nmUsozLsLm47ZMRrVoz7YUzQN7U4CbU49ZnRU4olC0gihFp2hmCIa0LShVn1h2L1yPn77bnznfLm7ZMln7Lll8ozMVL8QkL7-ZnRMFnlr2LNQfoRTFMlUDUYbaptveo4OeQDX/pdTw_tL0qIbtpYyPLRLsg4U8M4LJqdTnx&oid=1385918509&tid=1037&nid=4473&e=.png",
+        "title": "CUMTB 2026 International Undergraduate Major Catalogue",
+        "publisher": "china-university-of-mining-and-technology-beijing",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-07-31"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-wave5-depth-cumtb-computer-science-bachelor",
+      "canonicalSourceSha256": "478a01ab24f6673399c4c174c10e76498f382578ea8013aa898403043eaa1db1",
+      "sourceFullRecord": {
+        "id": "src-gap-program-wave5-depth-cumtb-computer-science-bachelor",
+        "url": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+        "title": "CUMTB 2026 International Student Admissions Guide for Chinese-taught Programs",
+        "publisher": "china-university-of-mining-and-technology-beijing",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-07-31"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-wave5-depth-cumtb-computer-science-bachelor-support-1",
+      "canonicalSourceSha256": "4d6b092632acf19e25e51caff7625012140f0082757616d19574a0639054a19a",
+      "sourceFullRecord": {
+        "id": "src-gap-program-wave5-depth-cumtb-computer-science-bachelor-support-1",
+        "url": "https://international.cumtb.edu.cn/virtual_attach_file.vsb?afc=AMNC14nmUsozLsLm47ZMRrVoz7YUzQN7U4CbU49ZnRU4olC0gihFp2hmCIa0LShVn1h2L1yPn77bnznfLm7ZMln7Lll8ozMVL8QkL7-ZnRMFnlr2LNQfoRTFMlUDUYbaptveo4OeQDX/pdTw_tL0qIbtpYyPLRLsg4U8M4LJqdTnx&oid=1385918509&tid=1037&nid=4473&e=.png",
+        "title": "CUMTB 2026 International Undergraduate Major Catalogue",
+        "publisher": "china-university-of-mining-and-technology-beijing",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-07-31"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-wave5-depth-cumtb-mining-engineering-bachelor",
+      "canonicalSourceSha256": "1c37d43288fd6b508b75d5ee3b7596ff82e87c9cb6a29bd6799196d919e563c9",
+      "sourceFullRecord": {
+        "id": "src-gap-program-wave5-depth-cumtb-mining-engineering-bachelor",
+        "url": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+        "title": "CUMTB 2026 International Student Admissions Guide for Chinese-taught Programs",
+        "publisher": "china-university-of-mining-and-technology-beijing",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-07-31"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-wave5-depth-cumtb-mining-engineering-bachelor-support-1",
+      "canonicalSourceSha256": "0b4655753026a0bc128ce5cbb1957740737195e25ca0209338b741a51cd4ee8e",
+      "sourceFullRecord": {
+        "id": "src-gap-program-wave5-depth-cumtb-mining-engineering-bachelor-support-1",
+        "url": "https://international.cumtb.edu.cn/virtual_attach_file.vsb?afc=AMNC14nmUsozLsLm47ZMRrVoz7YUzQN7U4CbU49ZnRU4olC0gihFp2hmCIa0LShVn1h2L1yPn77bnznfLm7ZMln7Lll8ozMVL8QkL7-ZnRMFnlr2LNQfoRTFMlUDUYbaptveo4OeQDX/pdTw_tL0qIbtpYyPLRLsg4U8M4LJqdTnx&oid=1385918509&tid=1037&nid=4473&e=.png",
+        "title": "CUMTB 2026 International Undergraduate Major Catalogue",
+        "publisher": "china-university-of-mining-and-technology-beijing",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-07-31"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-prog-mew-ne-upc-chemical-engineering-master-en",
+      "canonicalSourceSha256": "0f4e30a24a5c1b52369150d5af46086cfa0dd2694bbc4e60094f4a5169012ea9",
+      "sourceFullRecord": {
+        "id": "src-gap-program-prog-mew-ne-upc-chemical-engineering-master-en",
+        "url": "https://cie.upc.edu.cn/admission_cn/xxzy/sszy1/ywsk.htm",
+        "title": "中国石油大学（华东）英文授课硕士专业",
+        "publisher": "china-university-of-petroleum-east-china",
+        "kind": "program",
+        "language": "zh",
+        "official": true,
+        "accessedAt": "2026-08-03"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-prog-mew-ne-upc-chemical-engineering-master-en-support-1",
+      "canonicalSourceSha256": "680c93bd9bd046419baa23ea0b0516e98280cca7b504731a00313b88cf44b5b2",
+      "sourceFullRecord": {
+        "id": "src-gap-program-prog-mew-ne-upc-chemical-engineering-master-en-support-1",
+        "url": "https://cie.upc.edu.cn/admission_cn/lxsq/fysm.htm",
+        "title": "中国石油大学（华东）费用说明",
+        "publisher": "china-university-of-petroleum-east-china",
+        "kind": "program",
+        "language": "zh",
+        "official": true,
+        "accessedAt": "2026-08-03"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-prog-mew-ne-upc-chemical-engineering-master-en-support-2",
+      "canonicalSourceSha256": "98ce807eddd75282d7b171723091bcbabbc33fa3961c78c134088e3ced9c0d2f",
+      "sourceFullRecord": {
+        "id": "src-gap-program-prog-mew-ne-upc-chemical-engineering-master-en-support-2",
+        "url": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+        "title": "中国石油大学（华东）申请时间",
+        "publisher": "china-university-of-petroleum-east-china",
+        "kind": "program",
+        "language": "zh",
+        "official": true,
+        "accessedAt": "2026-08-03"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-prog-mew-ne-upc-chinese-language-semester",
+      "canonicalSourceSha256": "f9b81aa3ac5c69fd6d724677776cc69a7be6a7e160567a965b06ad1cd77f1a29",
+      "sourceFullRecord": {
+        "id": "src-gap-program-prog-mew-ne-upc-chinese-language-semester",
+        "url": "https://cie.upc.edu.cn/admission_cn/xxzy/hyykc.htm",
+        "title": "中国石油大学（华东）汉语言课程",
+        "publisher": "china-university-of-petroleum-east-china",
+        "kind": "program",
+        "language": "zh",
+        "official": true,
+        "accessedAt": "2026-08-03"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-prog-mew-ne-upc-chinese-language-semester-support-1",
+      "canonicalSourceSha256": "4cb52c352389726fad194df46fba64edf7aeabf369e309fb812a9ba77af229d2",
+      "sourceFullRecord": {
+        "id": "src-gap-program-prog-mew-ne-upc-chinese-language-semester-support-1",
+        "url": "https://cie.upc.edu.cn/admission_cn/lxsq/fysm.htm",
+        "title": "中国石油大学（华东）费用说明",
+        "publisher": "china-university-of-petroleum-east-china",
+        "kind": "program",
+        "language": "zh",
+        "official": true,
+        "accessedAt": "2026-08-03"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-prog-mew-ne-upc-foundation-semester",
+      "canonicalSourceSha256": "ce151474afdf0f9c5e7a10bd8895a702ce3bfa708b72f7301155edc401c75aff",
+      "sourceFullRecord": {
+        "id": "src-gap-program-prog-mew-ne-upc-foundation-semester",
+        "url": "https://cie.upc.edu.cn/admission_cn/xxzy/ykkc.htm",
+        "title": "中国石油大学（华东）预科课程",
+        "publisher": "china-university-of-petroleum-east-china",
+        "kind": "program",
+        "language": "zh",
+        "official": true,
+        "accessedAt": "2026-08-03"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-prog-mew-ne-upc-foundation-semester-support-1",
+      "canonicalSourceSha256": "7186aaa3d081267f9456cd8556d3fba86b6aa661e942b80e475c5d18f459237a",
+      "sourceFullRecord": {
+        "id": "src-gap-program-prog-mew-ne-upc-foundation-semester-support-1",
+        "url": "https://cie.upc.edu.cn/admission_cn/lxsq/fysm.htm",
+        "title": "中国石油大学（华东）费用说明",
+        "publisher": "china-university-of-petroleum-east-china",
+        "kind": "program",
+        "language": "zh",
+        "official": true,
+        "accessedAt": "2026-08-03"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-prog-mew-ne-upc-petroleum-engineering-bachelor-en",
+      "canonicalSourceSha256": "e93fd69a1f6a7acb677c863cf509b0be84408c03fd813f9c8bc8cdd5c926e118",
+      "sourceFullRecord": {
+        "id": "src-gap-program-prog-mew-ne-upc-petroleum-engineering-bachelor-en",
+        "url": "https://cie.upc.edu.cn/admission_cn/xxzy/bkzy1/ywsk.htm",
+        "title": "中国石油大学（华东）英文授课本科专业",
+        "publisher": "china-university-of-petroleum-east-china",
+        "kind": "program",
+        "language": "zh",
+        "official": true,
+        "accessedAt": "2026-08-03"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-prog-mew-ne-upc-petroleum-engineering-bachelor-en-support-1",
+      "canonicalSourceSha256": "c0d96e7be50b26ea4073d0ffa5f8c8b57c7fac77fc63d80ce983cac3a1d58345",
+      "sourceFullRecord": {
+        "id": "src-gap-program-prog-mew-ne-upc-petroleum-engineering-bachelor-en-support-1",
+        "url": "https://cie.upc.edu.cn/admission_cn/lxsq/fysm.htm",
+        "title": "中国石油大学（华东）费用说明",
+        "publisher": "china-university-of-petroleum-east-china",
+        "kind": "program",
+        "language": "zh",
+        "official": true,
+        "accessedAt": "2026-08-03"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-prog-mew-ne-upc-petroleum-engineering-bachelor-en-support-2",
+      "canonicalSourceSha256": "7934a3fc3f33a0964d34d8cd2c2d73a5a052688d4e6f1ffb139fd18de41c667e",
+      "sourceFullRecord": {
+        "id": "src-gap-program-prog-mew-ne-upc-petroleum-engineering-bachelor-en-support-2",
+        "url": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+        "title": "中国石油大学（华东）申请时间",
+        "publisher": "china-university-of-petroleum-east-china",
+        "kind": "program",
+        "language": "zh",
+        "official": true,
+        "accessedAt": "2026-08-03"
+      }
+    },
+    {
+      "sourceId": "src-gap-scholarship-sch-mew-ne-upc-university",
+      "canonicalSourceSha256": "4b802f3c63512b873c674cf2ca82390581daf3ff8a3a6c57345c36880ad39257",
+      "sourceFullRecord": {
+        "id": "src-gap-scholarship-sch-mew-ne-upc-university",
+        "url": "https://cie.upc.edu.cn/admission_cn/info/1266/1431.htm",
+        "title": "中国石油大学（华东）学校奖学金",
+        "publisher": "china-university-of-petroleum-east-china",
+        "kind": "scholarship",
+        "language": "zh",
+        "official": true,
+        "accessedAt": "2026-08-03"
+      }
+    },
+    {
+      "sourceId": "src-gap-scholarship-sch-mew-ne-upc-university-support-1",
+      "canonicalSourceSha256": "068c56b5c0acc09ffe76cfa1bb1cdc535dd82887fdc25ddedf5bee8729d58042",
+      "sourceFullRecord": {
+        "id": "src-gap-scholarship-sch-mew-ne-upc-university-support-1",
+        "url": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+        "title": "中国石油大学（华东）申请时间",
+        "publisher": "china-university-of-petroleum-east-china",
+        "kind": "scholarship",
+        "language": "zh",
+        "official": true,
+        "accessedAt": "2026-08-03"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-prog-mew-nss-cupl-chinese-language",
+      "canonicalSourceSha256": "fa804553fb1b93d0690a505c4005ae1e11e1e8a7afd794e2138b32ad9f5fe3b4",
+      "sourceFullRecord": {
+        "id": "src-gap-program-prog-mew-nss-cupl-chinese-language",
+        "url": "https://sis.cupl.edu.cn/lhlx/hydqpx.htm",
+        "title": "中国政法大学2025—2026学年汉语进修项目",
+        "publisher": "china-university-of-political-science-and-law",
+        "kind": "program",
+        "language": "zh",
+        "official": true,
+        "accessedAt": "2026-08-04"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-wave4-cqmu-b-medical-imaging",
+      "canonicalSourceSha256": "22b4f450f83f707feaf083dd65971c1f80c198d62958e92f05fff998ad1d2e1f",
+      "sourceFullRecord": {
+        "id": "src-gap-program-wave4-cqmu-b-medical-imaging",
+        "url": "https://english.cqmu.edu.cn/system/_content/download.jsp?owner=1537491113&urltype=news.DownloadAttachUrl&wbfileid=17960706",
+        "title": "Chongqing Medical University 2026 Catalogue of Bachelor's Degree Programmes for International Students",
+        "publisher": "chongqing-medical-university",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-07-30"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-wave4-cqmu-b-rehabilitation-science",
+      "canonicalSourceSha256": "7481471669a2bbe1ae9ea8a0d722056e85e99ad45487b0cac1d34bcac1b25502",
+      "sourceFullRecord": {
+        "id": "src-gap-program-wave4-cqmu-b-rehabilitation-science",
+        "url": "https://english.cqmu.edu.cn/system/_content/download.jsp?owner=1537491113&urltype=news.DownloadAttachUrl&wbfileid=17960706",
+        "title": "Chongqing Medical University 2026 Catalogue of Bachelor's Degree Programmes for International Students",
+        "publisher": "chongqing-medical-university",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-07-30"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-wave4-cqmu-b-stomatology",
+      "canonicalSourceSha256": "b4b3e41d5217d088f0984afdff06348565903a4e9f62f705306c5bccc4221d8c",
+      "sourceFullRecord": {
+        "id": "src-gap-program-wave4-cqmu-b-stomatology",
+        "url": "https://english.cqmu.edu.cn/system/_content/download.jsp?owner=1537491113&urltype=news.DownloadAttachUrl&wbfileid=17960706",
+        "title": "Chongqing Medical University 2026 Catalogue of Bachelor's Degree Programmes for International Students",
+        "publisher": "chongqing-medical-university",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-07-30"
+      }
+    },
+    {
+      "sourceId": "src-gap-scholarship-wave3-sch-ctbu-moe-chongqing-joint",
+      "canonicalSourceSha256": "de4138b970209bc292344df994ab643b9746a9390709d11c4b37daa5b4166c67",
+      "sourceFullRecord": {
+        "id": "src-gap-scholarship-wave3-sch-ctbu-moe-chongqing-joint",
+        "url": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+        "title": "2026/27 CTBU MoE–Chongqing Municipal Government Joint Scholarship Guide",
+        "publisher": "chongqing-technology-and-business-university",
+        "kind": "scholarship",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-07-30"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-wave3-ctbu-b-international-economics-and-trade",
+      "canonicalSourceSha256": "a31c28a8a4d8fdbb094ae95fc2d0221f9f967dbd87029f102f86d1c6e8f414ab",
+      "sourceFullRecord": {
+        "id": "src-gap-program-wave3-ctbu-b-international-economics-and-trade",
+        "url": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+        "title": "2026/27 CTBU MoE–Chongqing Municipal Government Joint Scholarship Guide",
+        "publisher": "chongqing-technology-and-business-university",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-07-30"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-wave3-ctbu-d-big-data-statistics-intelligent-computing",
+      "canonicalSourceSha256": "9f7df20df5271e98168a5513dd8eb6d3e749a2353375cc689a766d2a58ce0cbb",
+      "sourceFullRecord": {
+        "id": "src-gap-program-wave3-ctbu-d-big-data-statistics-intelligent-computing",
+        "url": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+        "title": "2026/27 CTBU MoE–Chongqing Municipal Government Joint Scholarship Guide",
+        "publisher": "chongqing-technology-and-business-university",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-07-30"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-wave3-ctbu-d-digital-economy",
+      "canonicalSourceSha256": "a3386fdb1c57d7a976b4d45b558ae67d19d28adf30970fd4c8f527abae63972b",
+      "sourceFullRecord": {
+        "id": "src-gap-program-wave3-ctbu-d-digital-economy",
+        "url": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+        "title": "2026/27 CTBU MoE–Chongqing Municipal Government Joint Scholarship Guide",
+        "publisher": "chongqing-technology-and-business-university",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-07-30"
+      }
+    },
+    {
+      "sourceId": "src-gap-program-wave3-ctbu-m-business-administration-en",
+      "canonicalSourceSha256": "0cdf356925155c0a42ff313e3912d5560b5a5053516fe4ecfc7874207560d6f8",
+      "sourceFullRecord": {
+        "id": "src-gap-program-wave3-ctbu-m-business-administration-en",
+        "url": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+        "title": "2026/27 CTBU MoE–Chongqing Municipal Government Joint Scholarship Guide",
+        "publisher": "chongqing-technology-and-business-university",
+        "kind": "program",
+        "language": "en",
+        "official": true,
+        "accessedAt": "2026-07-30"
+      }
+    },
+    {
+      "sourceId": "src-program-review-ae01f957a70e",
+      "canonicalSourceSha256": "264685fd99ba5cc053d0a5ba492f6ad9c07e4e23b0b85ac3a3539c2a38b57931",
+      "sourceFullRecord": {
+        "id": "src-program-review-ae01f957a70e",
+        "url": "https://icuc.cuc.edu.cn/2026/0204/c7289a266930/page.htm",
+        "title": "Official program information — Chinese Language Preparatory Program",
+        "publisher": "Communication University of China",
+        "kind": "program",
+        "language": "other",
+        "official": true,
+        "accessedAt": "2026-07-26"
+      }
+    }
+  ],
+  "evidenceArtifactPins": [
+    {
+      "path": "cumt.pdf",
+      "sha256": "bfa5467559ae802b6829e1d7f8cdf9577654a12d38222a3b2a20f0136f1d5631",
+      "bytes": 178294
+    },
+    {
+      "path": "cumt.txt",
+      "sha256": "f898ff8fc71d64e17c2f63b4805adec91cfc4fbbf041cf4cf6d09e8cfa93ae2f",
+      "bytes": 2887
+    },
+    {
+      "path": "cumt-application.html",
+      "sha256": "08e124d7dbf37eafb83270e9938d07d4c180d19a966a380c96418cdd957cfe9f",
+      "bytes": 40438
+    },
+    {
+      "path": "cumt-application.txt",
+      "sha256": "35f7ae7b1c95d9af66bb4271066121e1d807adf4e5da3dc1f27c98536540db89",
+      "bytes": 4595
+    },
+    {
+      "path": "cumt-master-catalogue.html",
+      "sha256": "f34ec91892bca964973d5ca697f04c42bea505247286c7219a054fe357d58c1e",
+      "bytes": 62262
+    },
+    {
+      "path": "cumt-master-catalogue.txt",
+      "sha256": "60ef478b99fd2beb654f4ad6252dd7d92ac1eb07b5702c7ab118dbb9e52ffecb",
+      "bytes": 3797
+    },
+    {
+      "path": "cumtb.html",
+      "sha256": "25405f04a568a48f59b95451a40b06518c7b2ab0ab3e02e7532f73220221492e",
+      "bytes": 20074
+    },
+    {
+      "path": "cumtb.txt",
+      "sha256": "2f821e96e415c9fe3449a2d73d480cd8da2902b68266b6e26a902698a1be6845",
+      "bytes": 4072
+    },
+    {
+      "path": "upc.html",
+      "sha256": "33cf5ec9f77211d3d3d5c5032bbff1d9ede80c7ef4dbc78caa0e52b3211cff68",
+      "bytes": 59437
+    },
+    {
+      "path": "upc.txt",
+      "sha256": "19788451a28a0c2f10b607bc7116f31eff0f1fd8b182c77a02c03d1d654bdce5",
+      "bytes": 2335
+    },
+    {
+      "path": "cupl.html",
+      "sha256": "77c74ff63a04fda7b17b69822735f75c6d8441cf5d14d2ab4ceac24ae4682a94",
+      "bytes": 2329
+    },
+    {
+      "path": "cupl.txt",
+      "sha256": "2d5dcdc06b5975e9794ff5bb4cf263d95e0e334879e530ffe0251496af78eac0",
+      "bytes": 20
+    },
+    {
+      "path": "web-fallback-failures.json",
+      "sha256": "89c5d3c228a151684cf4e1f3382778e3c2c436ad2fe455c674fadf8a7457dde5",
+      "bytes": 981
+    },
+    {
+      "path": "cupl-list-web-observation.json",
+      "sha256": "a5b7c04afa3f8a6596e20213ba2ec3ed180b58c16a431a7eb80d3da9f55377bb",
+      "bytes": 3695
+    },
+    {
+      "path": "ctbu.html",
+      "sha256": "cb01d2cdb2db1beccf338ffbb7d9fd29abdbe3879261a6492b54c6e907cc23f9",
+      "bytes": 77277
+    },
+    {
+      "path": "ctbu.txt",
+      "sha256": "7d5d8d6e3bc49ea4709d7736bc9667ec8babda857b267ad6cca13b020ea9b478",
+      "bytes": 17331
+    },
+    {
+      "path": "cuc.html",
+      "sha256": "4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927",
+      "bytes": 123840
+    },
+    {
+      "path": "cuc.txt",
+      "sha256": "7d57a2907541d7c57833d0399812258b3371e9a4e9ea96dca074f22778044316",
+      "bytes": 28079
+    }
+  ],
+  "controls": {
+    "sourceOnlyApproval": true,
+    "canonicalMutationApproved": false,
+    "noWholeSchoolCertification": true,
+    "noFreshnessRenewal": true,
+    "reportUnchangedBeforeAfter": true,
+    "canonicalSixFileHashesUnchangedBeforeAfter": true,
+    "allNewOpeningsRemainCandidates": true
+  }
+}

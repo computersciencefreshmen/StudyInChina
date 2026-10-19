@@ -1,0 +1,1476 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "official-batch-018-independent-review-v1",
+  "reviewedAt": "2026-10-19T05:49:30.883Z",
+  "reviewer": "deadline_architecture",
+  "reviewType": "source-only-independent-exact-record-and-date-scope-review",
+  "reviewedReport": {
+    "path": "quality/deadline-sweep-20261019/official-batch-018/report.json",
+    "sha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17",
+    "batchId": "official-date-only-018-20261019"
+  },
+  "result": "source-only-pass-with-explicit-unresolved-scopes",
+  "approvalScope": "Retained source observations and exact record bindings only. No permission for canonical date/status mutation, publication or full-fact freshness renewal is issued.",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "basePlanSha256": "c53dd8358ec2667e6390b2b8b085e50b408854f55c2b20dc8da0f682f3151e6b",
+  "additionalSelectionReceiptSha256": "f138cac45d2650bbb87fc212eb9b8e7b392cf008f46bb2e4d5c39732c7f127f8",
+  "summary": {
+    "exactRecordsReviewed": 27,
+    "baseQueueRecords": 20,
+    "additionalSameSourceRecords": 7,
+    "schoolsReviewed": 6,
+    "checksPassed": 27,
+    "checksFailed": 0,
+    "recordChecksPassed": 27,
+    "recordResults": {
+      "closed": 4,
+      "unknown": 20,
+      "conflict": 3
+    },
+    "newOfficialReads": 0,
+    "canonicalWrites": 0,
+    "gitMutations": 0,
+    "sharedStateWrites": 0,
+    "fullFactsCertified": 0
+  },
+  "checks": [
+    {
+      "id": "frozen-final-report-pin",
+      "passed": true,
+      "detail": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "id": "canonical-six-file-byte-and-snapshot-pins",
+      "passed": true,
+      "detail": {
+        "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+        "inputFileSha256": {
+          "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+          "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+          "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+          "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+          "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+          "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+        }
+      }
+    },
+    {
+      "id": "inventory-pin",
+      "passed": true,
+      "detail": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82"
+    },
+    {
+      "id": "base-plan-byte-and-snapshot-pins",
+      "passed": true,
+      "detail": "c53dd8358ec2667e6390b2b8b085e50b408854f55c2b20dc8da0f682f3151e6b"
+    },
+    {
+      "id": "six-exact-schools",
+      "passed": true,
+      "detail": [
+        "uni-communication-university-of-zhejiang",
+        "uni-dalian-maritime-university",
+        "uni-dalian-medical-university",
+        "uni-dalian-university-of-foreign-languages",
+        "uni-dongbei-university-of-finance-and-economics",
+        "uni-dongguan-university-of-technology"
+      ]
+    },
+    {
+      "id": "base20-plus-explicit-additional7-exact27",
+      "passed": true,
+      "detail": {
+        "baseQueueRecordIds": [
+          "cycle-gap-wave8-2-cuz-international-journalism-communication-bachelor-2026-2027-autumn-fee-reference",
+          "cycle-gap-wave8-2-cuz-radio-tv-directing-bachelor-2026-2027-autumn-fee-reference",
+          "sch-gap-wave8-2-cuz-undergraduate-scholarship",
+          "cycle-gap-breadth-dlmu-foundation-college-preparatory-2026-2027-autumn-fee-reference",
+          "cycle-gap-breadth-dlmu-foundation-college-preparatory-2026-2027-other",
+          "cycle-gap-prog-mew-ne-dlmu-chinese-language-semester-2026-2027-other-fee-reference",
+          "cycle-gap-prog-mew-ne-dlmu-marine-engineering-bachelor-2026-2027-other-fee-reference",
+          "cycle-gap-local-dmu-b-clinical-medicine-cn-2026-2027-other-fee-reference",
+          "cycle-gap-local-dmu-b-mbbs-2026-2027-other",
+          "cycle-gap-local-dmu-b-stomatology-2026-2027-other-fee-reference",
+          "cycle-gap-local-dlufl-b-chinese-culture-2026-2027-other-fee-reference",
+          "cycle-gap-local-dlufl-b-chinese-international-trade-2026-2027-other-fee-reference",
+          "cycle-gap-local-dlufl-b-tcsol-2026-2027-other-fee-reference",
+          "cycle-gap-local-dufe-m-financial-management-en-2026-2027-other-fee-reference",
+          "cycle-gap-local-dufe-m-international-trade-en-2026-2027-other-fee-reference",
+          "cycle-gap-local-dufe-m-tourism-management-en-2026-2027-other-fee-reference",
+          "cycle-gap-wave3-dgut-international-business-master-2026-2027-autumn-fee-reference",
+          "cycle-gap-wave3-dgut-software-engineering-master-2026-2027-autumn-fee-reference",
+          "sch-gap-wave3-dgut-international-master-freshman-scholarship",
+          "sch-gap-wave3-dgut-international-master-living-stipend"
+        ],
+        "additionalSameSourceRecordIds": [
+          "sch-gap-mve-jzh-cuz-postgraduate-scholarship",
+          "sch-gap-mve-jzh-cuz-zhejiang-government",
+          "cycle-gap-prog-mew-ne-dlmu-nautical-science-bachelor-2026-2027-other-fee-reference",
+          "cycle-gap-local-dmu-pre-medical-2026-2027-other",
+          "cycle-gap-mew-scws-dgut-food-and-nutrition-master-2026-2027-autumn",
+          "cycle-gap-mew-scws-dgut-integrated-circuit-engineering-master-2026-2027-autumn",
+          "cycle-gap-mew-scws-dgut-social-work-master-2026-2027-autumn"
+        ]
+      }
+    },
+    {
+      "id": "additional-selection-plan-and-exact-row-pins",
+      "passed": true,
+      "detail": {
+        "path": "quality/deadline-sweep-20261019/heartbeat-0539/additional-same-source-selection-v1.json",
+        "sha256": "f138cac45d2650bbb87fc212eb9b8e7b392cf008f46bb2e4d5c39732c7f127f8"
+      }
+    },
+    {
+      "id": "final-builder-extension-path-resolves-correctly",
+      "passed": true,
+      "detail": {
+        "resolvedPath": "D:\\学过的课程\\github_profile_work\\StudyInChina\\quality\\deadline-sweep-20261019\\heartbeat-0539\\additional-same-source-selection-v1.json",
+        "executedBuilder": false,
+        "meaning": "Final builder path is corrected and agrees with the declared repository-relative receipt; no earlier transient path defect is carried forward."
+      }
+    },
+    {
+      "id": "capture-manifest-byte-pin",
+      "passed": true,
+      "detail": "8869d85d4df8c5f4e6b0381e1593e73a66018f661cf6953f776d5bb859bfa968"
+    },
+    {
+      "id": "fifteen-original-and-text-hashes-observed-times",
+      "passed": true,
+      "detail": [
+        {
+          "url": "https://sie.cuz.edu.cn/info/1128/5601.htm",
+          "observedAt": "2026-10-19T05:41:36.054109+00:00",
+          "rawSha256": "1f872e535fe5a63328ef7047df7865f6e65b552a34bb3fbb8d58012065fe16f1",
+          "textSha256": "1cc277082b82427733d3f16fad5f6f99c378387147ca594aff494d69483cac7a",
+          "passed": true
+        },
+        {
+          "url": "https://sie.cuz.edu.cn/English/Application1/Scholarship.htm",
+          "observedAt": "2026-10-19T05:41:36.055109+00:00",
+          "rawSha256": "20fdddb07a0cc73ab2775ae232cbedd04ff9d55204cf739d7d6b359cd161b30f",
+          "textSha256": "0df5ec2f2755118c5fb70d83e0aa6f317194f7c6846090155fbb75c3d4438cb1",
+          "passed": true
+        },
+        {
+          "url": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+          "observedAt": "2026-10-19T05:41:36.055109+00:00",
+          "rawSha256": "aec5bcf72ed2c9c87ff445a9498515af8a0e6ab6a082fb512ec6e2a0cd2e4836",
+          "textSha256": "2c12268d52ee487b9667eae3dbea86ea930f5bf0ac05909ccafd15bda60d1e0d",
+          "passed": true
+        },
+        {
+          "url": "https://iec.dlmu.edu.cn/English/ADMISSION/Admission_Brochure/Admission_Brochure.htm",
+          "observedAt": "2026-10-19T05:41:36.056109+00:00",
+          "rawSha256": "9fca72f8ebb20fda56a47711a76f2b07108f5ac84aba518d88953716584c524a",
+          "textSha256": "d4d87e816825be8cc7b009eb98ccdc6f28acd0b5ef28afff78247e3827e0b9d4",
+          "passed": true
+        },
+        {
+          "url": "https://iec.dlmu.edu.cn/English/ADMISSION/College_Preparatory.htm",
+          "observedAt": "2026-10-19T05:41:38.172825+00:00",
+          "rawSha256": "0d3810654e3d9daf6576d56d25387d25df188765eb14a832b24423cb1a8448a8",
+          "textSha256": "7d19d444b44717e0e5b5610b4a9c3ed7443f699808e09b21f1504b3dd2a14dc2",
+          "passed": true
+        },
+        {
+          "url": "https://iec.dlmu.edu.cn/English/ADMISSION/Bachelor_s_Degree/Chinese_Taught_Programs.htm",
+          "observedAt": "2026-10-19T05:41:38.918575+00:00",
+          "rawSha256": "030457b03561157133cb7a108b5f739625ca36e6a047c6adedfcea46eeb63192",
+          "textSha256": "710025cf88f63ef4042b218544bd5b67ad7cfb094f0565a8f97dc5d05c00b94d",
+          "passed": true
+        },
+        {
+          "url": "https://iec.dmu.edu.cn/rxsq_l/Undergraduate_Programs.htm",
+          "observedAt": "2026-10-19T05:41:38.921326+00:00",
+          "rawSha256": "fb42246ebc062b6a87736b9502d5632b4b588cf4f3f24ce4cf3754b84a43945e",
+          "textSha256": "5edb0110eb2ee63d7a065c4ad3a70290a3b262b0677bb71905b0679c98e6bbb5",
+          "passed": true
+        },
+        {
+          "url": "https://iec.dmu.edu.cn/info/1012/1638.htm",
+          "observedAt": "2026-10-19T05:41:40.441895+00:00",
+          "rawSha256": "bfc632e0ebfe0fd6ba1275d019d04544cc242d5cc43d2fa383a140379015a6c2",
+          "textSha256": "0fa060a88244018c15e58017b1d816212acfcd04be42d6874ff818d154b2a4c2",
+          "passed": true
+        },
+        {
+          "url": "https://scs.dlufl.edu.cn/info/1012/1633.htm",
+          "observedAt": "2026-10-19T05:41:40.499520+00:00",
+          "rawSha256": "65943b7e5414f92c9db51303d411877016857c485842d08a62bfcdfd17bca3f2",
+          "textSha256": "daff49f4f0e59be8966d22628e9a5ab366db64daf66da065d7d472e7f045e7af",
+          "passed": true
+        },
+        {
+          "url": "https://sie.dufe.edu.cn/lxxm/ss/",
+          "observedAt": "2026-10-19T05:41:40.819254+00:00",
+          "rawSha256": "55687dae8ce5f59a178150dd2d2f14c2c558c57e4d6a667a751cf6d3bea9b38f",
+          "textSha256": "f5cacf9ed013a969cd108ccfa6e50a141c5f5a4a50984553aa0aa2bc9025d42c",
+          "passed": true
+        },
+        {
+          "url": "https://sie.dufe.edu.cn/content_95765.html",
+          "observedAt": "2026-10-19T05:41:41.442711+00:00",
+          "rawSha256": "ea227de77ec9f1fee59e3c785ff0127553a5c342c5b01e7894d15f251208eeee",
+          "textSha256": "cd9c1ef2b365ecd4a4fa9fd8ec8576b13ef6fa6cddc33e4b91b2ea5f9a3d6bb8",
+          "passed": true
+        },
+        {
+          "url": "https://yjs.dgut.edu.cn/info/1842/21476.htm",
+          "observedAt": "2026-10-19T05:41:42.527026+00:00",
+          "rawSha256": "6154da99bb09c11f64329819dbbc7d11b1ee503d0fa2c622063c7bde42f1164a",
+          "textSha256": "7ccaecbadafbdab7fba602854ee5e783ce47f303a304f71a007b1902c9de9ca5",
+          "passed": true
+        },
+        {
+          "url": "https://yjs.dgut.edu.cn/info/1842/21696.htm",
+          "observedAt": "2026-10-19T05:41:43.056024+00:00",
+          "rawSha256": "23e61fb4fb3bc12558f26c479ef5a515c73b4e6a6a5909ca727a74d4e6022529",
+          "textSha256": "55ba3b8ce79069eb9c2d21e9863e315f9dcabecc028085f891d1a7eed52fbc1c",
+          "passed": true
+        },
+        {
+          "url": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+          "observedAt": "2026-10-19T05:41:43.317323+00:00",
+          "rawSha256": "72f715aaeea6d13d096162b5f6ce04c889b6b93222984dd1c3812f5c272e6ca1",
+          "textSha256": "5ccfabecfe8e1d2d5dae7a66c1715a6d9e4e1a466eb7f0d27dc822a8add0b1ce",
+          "passed": true
+        },
+        {
+          "url": "https://yjs.dgut.edu.cn/info/1842/22126.htm",
+          "observedAt": "2026-10-19T05:41:43.385144+00:00",
+          "rawSha256": "9158ace61d60b9a42b04b55bbd54285d52778550da5634fa68b00241e8e28453",
+          "textSha256": "5ad9579891aa553a34984bbaafcbc5a55382c0e44304fc1c0c10bc8aacbb8ac6",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "all27-record-program-full-source-row-and-byte-bindings",
+      "passed": true,
+      "detail": {
+        "passed": 27,
+        "failed": []
+      }
+    },
+    {
+      "id": "all-group-evidence-is-exact-manifest-capture",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "id": "cuz-exact-2026-english-programmes-and-rowspan25-date",
+      "passed": true,
+      "detail": {
+        "radioRow": [
+          {
+            "sourceRow": 4,
+            "text": "School of Television and Audiovisual Arts (Documentary School)",
+            "rowspan": 6
+          },
+          {
+            "sourceRow": 9,
+            "text": "Radio & TV Directing",
+            "rowspan": 1
+          },
+          {
+            "sourceRow": 9,
+            "text": "Arts（English-Taught）",
+            "rowspan": 1
+          },
+          {
+            "sourceRow": 1,
+            "text": "Before June 30 of the admission year",
+            "rowspan": 25
+          }
+        ],
+        "journalRow": [
+          {
+            "sourceRow": 13,
+            "text": "School of International Culture and Communication",
+            "rowspan": 3
+          },
+          {
+            "sourceRow": 14,
+            "text": "International Journalism & Communication",
+            "rowspan": 1
+          },
+          {
+            "sourceRow": 14,
+            "text": "General",
+            "rowspan": 1
+          },
+          {
+            "sourceRow": 1,
+            "text": "Before June 30 of the admission year",
+            "rowspan": 25
+          }
+        ],
+        "year": 2026,
+        "meaning": "The same admission-specific2026title resolves admission year; shared date cell applies to both exact programme rows, with English versions explicitly named."
+      }
+    },
+    {
+      "id": "cuz-strict-before-preserved-no-award-borrowing",
+      "passed": true,
+      "detail": {
+        "date": "2026-06-30",
+        "operator": "<",
+        "threeSeparateAwardsRemainUnknown": true
+      }
+    },
+    {
+      "id": "dlmu-recurring-qualified-rules-not-current-year-proof",
+      "passed": true,
+      "detail": {
+        "preparatory": "each July10",
+        "bachelor": "each June30 basically",
+        "meaning": "Recurring dates are unbound to2026; fees and unread embedded brochure images do not supply exact-year programme deadlines."
+      }
+    },
+    {
+      "id": "dlmu-additional-nautical-not-overclaimed",
+      "passed": true,
+      "detail": {
+        "recordId": "cycle-gap-prog-mew-ne-dlmu-nautical-science-bachelor-2026-2027-other-fee-reference",
+        "exactProgrammeCurrentYearDateCertified": false
+      }
+    },
+    {
+      "id": "dmu-spring2026-pre-medical-and-mbbs-opening-only-scope",
+      "passed": true,
+      "detail": {
+        "sourceWindow": "Spring2026",
+        "sourceOpening": "2025-11-05T09:00:00+08:00",
+        "selectedAcademicYear": "2026-2027",
+        "selectedIntake": "other",
+        "closingDatePrinted": false
+      }
+    },
+    {
+      "id": "dmu-additional-premedical-not-rolled-or-opened",
+      "passed": true,
+      "detail": {
+        "recordId": "cycle-gap-local-dmu-pre-medical-2026-2027-other",
+        "meaning": "Source only names spring2026Pre-medical/MBBS; Chinese-mediumClinicalMedicine/BDS are from a2025programme index without closing dates."
+      }
+    },
+    {
+      "id": "dlufl-same2026guide-three-exact-named-bachelor-routes",
+      "passed": true,
+      "detail": [
+        "汉语言（中国文化）",
+        "汉语言（国际贸易）",
+        "汉语国际教育"
+      ]
+    },
+    {
+      "id": "dlufl-april15-versus-endapril-conflict-both-expired-no-single-cutoff",
+      "passed": true,
+      "detail": {
+        "absolute": "申请时间：2025年10月15日至2026年4月15日。",
+        "otherClause": "学历生每年 9 月开学，报名截止时间为 4 月底。",
+        "bothBefore": "2026-10-19",
+        "meaning": "Conflict retained; end-of-April is not invented as an exact timestamp, and opening remains candidate only."
+      }
+    },
+    {
+      "id": "dufe-general-june30-no-year-not-csc-march10",
+      "passed": true,
+      "detail": {
+        "generalDate": "June30, yearnull",
+        "otherRoute": "CSCTypeB2026/2027March10",
+        "noBorrowedCurrentYear": true
+      }
+    },
+    {
+      "id": "dgut-two-exact2026-professional-master-routes-and-june30",
+      "passed": true,
+      "detail": {
+        "internationalBusinessCode": "025400",
+        "softwareCode": "085405",
+        "applicationWindow": "2026-04-30to2026-06-30",
+        "exactProgramme2026Titles": true
+      }
+    },
+    {
+      "id": "dgut-three-additional-programmes-remain-unknown-with-missing-exact-catalogue-proof",
+      "passed": true,
+      "detail": {
+        "records": [
+          "cycle-gap-mew-scws-dgut-food-and-nutrition-master-2026-2027-autumn",
+          "cycle-gap-mew-scws-dgut-integrated-circuit-engineering-master-2026-2027-autumn",
+          "cycle-gap-mew-scws-dgut-social-work-master-2026-2027-autumn"
+        ],
+        "meaning": "The guide window alone and breadcrumb titles do not prove FoodandNutrition,IntegratedCircuitEngineering,SocialWork applicability. Stored dates are preserved but not revalidated."
+      }
+    },
+    {
+      "id": "dgut-freshman-and-living-awards-after-registration-no-admission-cutoff",
+      "passed": true,
+      "detail": {
+        "quote": "答：所有奖学金申请通道仅在学生到校完成正式注册后开放，预录取阶段暂不受理奖学金申请。",
+        "meaning": "No numeric award opening/cutoff and no admissionJune30borrowing; review/JW202 processing estimates are not applicant deadlines."
+      }
+    },
+    {
+      "id": "honest27-result-counts-and24-null-preservation",
+      "passed": true,
+      "detail": {
+        "recordResults": {
+          "closed": 4,
+          "unknown": 20,
+          "conflict": 3
+        },
+        "nullCanonicalDeadlines": 24,
+        "existingDgutDates": 3
+      }
+    },
+    {
+      "id": "records-only-once-under-groups",
+      "passed": true,
+      "detail": "27 record objects only under groups.records; selection arrays contain IDs only."
+    },
+    {
+      "id": "frozen-report-canonical-and-extension-unchanged-through-review",
+      "passed": true,
+      "detail": {
+        "canonicalWrites": 0,
+        "reportWrites": 0,
+        "extensionWrites": 0,
+        "gitMutations": 0,
+        "sharedStateWrites": 0
+      }
+    }
+  ],
+  "recordChecks": [
+    {
+      "recordId": "cycle-gap-wave8-2-cuz-international-journalism-communication-bachelor-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "3b1f282f384ea7dcafcb33fc4d356a9d7536882c36de02bd9ac29c65da9c8ca5",
+      "canonicalProgramSha256": "4ccf99dad3da2292e86773096fc2406a6a18a44fe169deda630a3fb1e6ec2701",
+      "result": "closed",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-wave8-2-cuz-international-journalism-communication-bachelor",
+          "sha256": "34326812bfb20cd3c1b5798ce2b1a9182a717a5703fd22425f69db8a59972078",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "1f872e535fe5a63328ef7047df7865f6e65b552a34bb3fbb8d58012065fe16f1",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-wave8-2-cuz-radio-tv-directing-bachelor-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "fa804a8a89dadc734c05602dcffe33bdb736ed325c34c491c9b7b4ffbc61fbda",
+      "canonicalProgramSha256": "bb7f743190c78523f8f297a3419f4c9e879c9c3206760b5cc89a9253265674c5",
+      "result": "closed",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-wave8-2-cuz-radio-tv-directing-bachelor",
+          "sha256": "4762beaa300843886126d110b2a0bb6c9eded0149b2af87f28510df7481c9579",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "1f872e535fe5a63328ef7047df7865f6e65b552a34bb3fbb8d58012065fe16f1",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "sch-gap-wave8-2-cuz-undergraduate-scholarship",
+      "collection": "scholarships",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "e8cab31b4c9447aabba6e33b7d0a980f15949ecbe4d40e94e1179a099f1521d7",
+      "canonicalProgramSha256": null,
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-scholarship-wave8-2-cuz-undergraduate-scholarship",
+          "sha256": "a0e678a261d3ee06131d22c6b092f7a961b19c5790bcf855d2f812dfe4b357fb",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-scholarship-wave8-2-cuz-undergraduate-scholarship-support-1",
+          "sha256": "d3bd168cc74da56aa60de838378d63206e9eedd998144c9b00a4445eb34c28e3",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "20fdddb07a0cc73ab2775ae232cbedd04ff9d55204cf739d7d6b359cd161b30f",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "sch-gap-mve-jzh-cuz-postgraduate-scholarship",
+      "collection": "scholarships",
+      "selectionOrigin": "additionalSameSource7",
+      "canonicalRowSha256": "1e27385f4a79c219f79015e8cc69b11fdd23eb61fa544bb24919a8543f09e136",
+      "canonicalProgramSha256": null,
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-scholarship-mve-jzh-cuz-postgraduate-scholarship",
+          "sha256": "4f5731b3aaac1c7fe1b3e4cbeafc05fc06e7e28aaff9fc4811d3eab31775fbe2",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "20fdddb07a0cc73ab2775ae232cbedd04ff9d55204cf739d7d6b359cd161b30f",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "sch-gap-mve-jzh-cuz-zhejiang-government",
+      "collection": "scholarships",
+      "selectionOrigin": "additionalSameSource7",
+      "canonicalRowSha256": "cf22d418db81d5a9eb62c203120893ef7fc114ba99c0905ddfb2b531f227bf26",
+      "canonicalProgramSha256": null,
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-scholarship-mve-jzh-cuz-zhejiang-government",
+          "sha256": "8a1d75bf3e5d5a90cf65eeb4cd6f2c17a75c1e9fd7e2ff6b35680123ac83268f",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "20fdddb07a0cc73ab2775ae232cbedd04ff9d55204cf739d7d6b359cd161b30f",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-breadth-dlmu-foundation-college-preparatory-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "f6063f693f75681e2c1dc668d5a61a4385390eaae9bd5ebdb5f25445e3dd0f5d",
+      "canonicalProgramSha256": "b69047f3e37c3525b63c61aee310c75a358b26cec31558e84672961578a9aaca",
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-breadth-dlmu-foundation-college-preparatory",
+          "sha256": "19f24dda7a0794fb8b735c16451422605cb0cc83123c97d526c487d2de23c7be",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-breadth-dlmu-foundation-college-preparatory-support-1",
+          "sha256": "c0536ad432773fa8e4e866f1a15efccbc058643cc1466b41d23db6dd06a216d1",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "0d3810654e3d9daf6576d56d25387d25df188765eb14a832b24423cb1a8448a8",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-breadth-dlmu-foundation-college-preparatory-2026-2027-other",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "e967577f3aab165179af141474959372a770f72f71142b64dc26045afd443206",
+      "canonicalProgramSha256": "b69047f3e37c3525b63c61aee310c75a358b26cec31558e84672961578a9aaca",
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-breadth-dlmu-foundation-college-preparatory",
+          "sha256": "19f24dda7a0794fb8b735c16451422605cb0cc83123c97d526c487d2de23c7be",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-breadth-dlmu-foundation-college-preparatory-support-1",
+          "sha256": "c0536ad432773fa8e4e866f1a15efccbc058643cc1466b41d23db6dd06a216d1",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "0d3810654e3d9daf6576d56d25387d25df188765eb14a832b24423cb1a8448a8",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-ne-dlmu-chinese-language-semester-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "7a906e3204bd592204636c0d7bebc72e03c3a868df1d4ffb4c353b3a28e09b59",
+      "canonicalProgramSha256": "12ddcc3beaef80517f7f42458a6ab5eef6257a5a823c040701b1edc6bbde51d6",
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-prog-mew-ne-dlmu-chinese-language-semester",
+          "sha256": "b0b6ccf341ed5510893b79c4c65936fc16884a3cbfb08266751d984b55714d14",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-prog-mew-ne-dlmu-chinese-language-semester-support-1",
+          "sha256": "777255b86f76ced9e736a50c19dd8087d4157f9de5aed54a3749f4499fd8876a",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "aec5bcf72ed2c9c87ff445a9498515af8a0e6ab6a082fb512ec6e2a0cd2e4836",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-ne-dlmu-marine-engineering-bachelor-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "f1bc052e4580202aa891017f62d68db2ea38fa35acd2f5ff9dff9eefc83e42e1",
+      "canonicalProgramSha256": "84797afc5b54d743ef1e6edafa5cd90a2a96a65417d8ba682210d89480890b6b",
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-prog-mew-ne-dlmu-marine-engineering-bachelor",
+          "sha256": "1035221a77efe4eaa1bdccf936f568444ca2de2d9a9de13bcab0db0314ac105d",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-prog-mew-ne-dlmu-marine-engineering-bachelor-support-1",
+          "sha256": "34ce7ba48f8824f6319acc996a83ab4802f817c516fef03e65e9a2b9b257c26e",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "030457b03561157133cb7a108b5f739625ca36e6a047c6adedfcea46eeb63192",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-ne-dlmu-nautical-science-bachelor-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "additionalSameSource7",
+      "canonicalRowSha256": "aa60c46d540957ebc4e60d7d9ea53ec945bbeaaef408aab0ecfae008e48e0735",
+      "canonicalProgramSha256": "f1ff3d76a609e2297bbf5e63c376dbcc763fdbd9317a25038277d511517ed413",
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-prog-mew-ne-dlmu-nautical-science-bachelor",
+          "sha256": "14beade948d0f29e290e68e816a14ffca2b3c4027713ce4096702ec448320efb",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-prog-mew-ne-dlmu-nautical-science-bachelor-support-1",
+          "sha256": "bd4424ab5b65386239871c628265fee852b855f2a0e36691ef5de23bb8a7800e",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "030457b03561157133cb7a108b5f739625ca36e6a047c6adedfcea46eeb63192",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-local-dmu-b-clinical-medicine-cn-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "9d9faf78f4dabe1be4af9eea2b8b1a41592384f233f8ca5cf3ed8925d525d7ea",
+      "canonicalProgramSha256": "0eb2891e903ad2bdb411054880c1164b9b3704afa0bef2a639c42f3b8d66cc21",
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-local-dmu-b-clinical-medicine-cn",
+          "sha256": "929503ed81b08eb4fd87c1fd18bdc167e429fbbdacdc0b3002df1b74d4502739",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "fb42246ebc062b6a87736b9502d5632b4b588cf4f3f24ce4cf3754b84a43945e",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-local-dmu-b-mbbs-2026-2027-other",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "2248b06fe6344b1db20289dc05466fd390bd42131bcfd5cd37635548e1e9b4ee",
+      "canonicalProgramSha256": "12fb2ca66fae215423ba93639d72098cd309754445791814c777eeb84ddc86e8",
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-local-dmu-b-mbbs",
+          "sha256": "52c7747dc174e68fe7ccd46b8854522317c5f8e870af562dd67ad30f2367d33a",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-local-dmu-b-mbbs-support-1",
+          "sha256": "4bc0a86ac0b902c02daecf3e6ad91385c55f08a65b5d84322414d458c4cb05c0",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "bfc632e0ebfe0fd6ba1275d019d04544cc242d5cc43d2fa383a140379015a6c2",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-local-dmu-b-stomatology-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "eae8f3e28ded934ad110e003a79cd0517f0993600281d59f2896996285c618ad",
+      "canonicalProgramSha256": "bd7fca0d98b7929ca2a951fb219865ac003bc251ba3654d4ad6da1464c38566f",
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-local-dmu-b-stomatology",
+          "sha256": "3f3bde029aecf7081c5ca7e6356ae1bbf94883eddd6b678db37678386788e6fe",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "fb42246ebc062b6a87736b9502d5632b4b588cf4f3f24ce4cf3754b84a43945e",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-local-dmu-pre-medical-2026-2027-other",
+      "collection": "admissionCycles",
+      "selectionOrigin": "additionalSameSource7",
+      "canonicalRowSha256": "326fe08981a52b31092f987f7cca464645f0d65070852630d8d09df4474310f9",
+      "canonicalProgramSha256": "eeb17b2acc172ac95add597a37c76b6fd70b086bc43cb9c55d44d4cd146cd61a",
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-local-dmu-pre-medical",
+          "sha256": "b963a89a34b6b8c994810bae16b540de3d80994f7c095d54f8811d2bfaf08c3b",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-local-dmu-pre-medical-support-1",
+          "sha256": "086ced87a04b4e90f91fcc7f19af64366ade58a93d4da447aa7990f357a81b4e",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "bfc632e0ebfe0fd6ba1275d019d04544cc242d5cc43d2fa383a140379015a6c2",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-local-dlufl-b-chinese-culture-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "e29f02f78ac328628b05f6d8c4799d2b1f239e32352e0fcadcd2433fbc78e5a1",
+      "canonicalProgramSha256": "f8053420b5fedc39990ba56599ff23dc1b7374d780e885c554edbc25f93af311",
+      "result": "conflict",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-local-dlufl-b-chinese-culture",
+          "sha256": "b5c8c867ed90bc39651b6bf8086680c70c95334eacb24d3c850f643b39839b7a",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "65943b7e5414f92c9db51303d411877016857c485842d08a62bfcdfd17bca3f2",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-local-dlufl-b-chinese-international-trade-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "3b8a2ad5aa8022b9c24fe043251ef34504fcfb6b3f2c7f45423535b96f30fd89",
+      "canonicalProgramSha256": "94708429c2283ddf95f27cc89c0530bde36e3fb603dcd48c2cac41405d108623",
+      "result": "conflict",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-local-dlufl-b-chinese-international-trade",
+          "sha256": "ea85c05b677deae1e2b99002b679f72e8697b2406eb3160ff9cf09e1d6083c6f",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "65943b7e5414f92c9db51303d411877016857c485842d08a62bfcdfd17bca3f2",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-local-dlufl-b-tcsol-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "4d0b8c747f96d66305ba875c4ee24dba90bb3445dc9fc66d06fd8b8f20e270f6",
+      "canonicalProgramSha256": "84023c928fc93793ded175b3f0a5b544953804ff22a2b2a4612dad8f6d4ba247",
+      "result": "conflict",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-local-dlufl-b-tcsol",
+          "sha256": "d58a76c689f11cd0d62f978d3f78e190c3e0425155dfc13bddb3da41783320d4",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "65943b7e5414f92c9db51303d411877016857c485842d08a62bfcdfd17bca3f2",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-local-dufe-m-financial-management-en-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "087313c3aa3d2c93e7a9bb5e25f46184ad74dfaf4b8bf9b3ee79f6364f58d870",
+      "canonicalProgramSha256": "fca89b6f3f086ae4607405d58c5fc7efb226f246825f2b9263ed62be6ad6fce7",
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-local-dufe-m-financial-management-en",
+          "sha256": "31b058f40abe7da40bb6b81dd8b2d990fddcc1b4e680d586722d9eb0f3c27713",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-local-dufe-m-financial-management-en-support-1",
+          "sha256": "8b6c3726127b5700776b8efd53b1dff1152b33b8a28eb902ca97db7cff063725",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "55687dae8ce5f59a178150dd2d2f14c2c558c57e4d6a667a751cf6d3bea9b38f",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-local-dufe-m-international-trade-en-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "979e065da139903f04713b04c6ef3a12ee6695913d8b1ebb3f8c248cc7480a68",
+      "canonicalProgramSha256": "17436e0655b073c5697e04d93f0c187bd21934684adceb84a345e13e8eb15e0e",
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-local-dufe-m-international-trade-en",
+          "sha256": "879c671f6d948034a470fc1cca60a9f2abf9850124a584cb00f824ca083136c8",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-local-dufe-m-international-trade-en-support-1",
+          "sha256": "c859b3881ff2dccff10ee8bb74a04994855901011ba1a06e3b06c98fd86ec75c",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "55687dae8ce5f59a178150dd2d2f14c2c558c57e4d6a667a751cf6d3bea9b38f",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-local-dufe-m-tourism-management-en-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "2274bd4dc6587c1a7253374cd8d9f016ed7978764508b0eef44a641b300e2b8f",
+      "canonicalProgramSha256": "e7e56b745c60d078fa834fb5a2070b972c47b3b541a6f3baa18e864534e253cf",
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-local-dufe-m-tourism-management-en",
+          "sha256": "d904e08b9d98e8f3888ead9c6998a3b1e2ce2f8e4956d6c2fbf8b7ee567d271c",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-local-dufe-m-tourism-management-en-support-1",
+          "sha256": "4c97082ef97ca2800a83c0bf8bf7fb975f9df6de9983b5aedb75c2e5b98002ed",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "55687dae8ce5f59a178150dd2d2f14c2c558c57e4d6a667a751cf6d3bea9b38f",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-wave3-dgut-international-business-master-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "a8fa2a838bcd1899ce315f959836d908e702430da8e595f10d875ff2f1180b65",
+      "canonicalProgramSha256": "167cd9febd64df83073f74404a0c91bd203b1ed5233308a6e403e9fc2a825855",
+      "result": "closed",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-wave3-dgut-international-business-master",
+          "sha256": "a93650343a0958b2737e31c7ec493e5fa9aad28034edd382f356dc75d31748aa",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-wave3-dgut-international-business-master-support-1",
+          "sha256": "b0c694eac6a3462ca227e413bdd3181a6fc32f137206796feb53de88232a22d9",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-wave3-dgut-international-business-master-support-2",
+          "sha256": "52bb3bb7be8c7067118ce722394e0c29f6f11289c1359738097d377e65d56bf7",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "72f715aaeea6d13d096162b5f6ce04c889b6b93222984dd1c3812f5c272e6ca1",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-wave3-dgut-software-engineering-master-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "09ca6af87e71bb87b04ac4e47b0fae06a817ae020f0898cf13a3e110a192e86d",
+      "canonicalProgramSha256": "f4f34efce0412449f07009f516cdec7808db2bc0686cb87e39b8ebe352d517e9",
+      "result": "closed",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-wave3-dgut-software-engineering-master",
+          "sha256": "f29f14272fe5c0d806f4201a551a05c71dfdc1337aec23338fa3459f35651ffc",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-wave3-dgut-software-engineering-master-support-1",
+          "sha256": "12486911536c698e707d917e7db6f922b587def82f9f9ab83dbe24f2d4a72462",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-wave3-dgut-software-engineering-master-support-2",
+          "sha256": "bcb8a045d3d74ef227dbedb83c88af8b1a8f6c5087cb01d5c34816b63aecab03",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "72f715aaeea6d13d096162b5f6ce04c889b6b93222984dd1c3812f5c272e6ca1",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "sch-gap-wave3-dgut-international-master-freshman-scholarship",
+      "collection": "scholarships",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "a7a347080885c63b162b4c7af5efbbae603a0e2188ad72444b537acd15aef106",
+      "canonicalProgramSha256": null,
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-scholarship-wave3-dgut-international-master-freshman-scholarship",
+          "sha256": "1c540d929e33abd6d22ad503e50948819d2adad5854f4e744714566679d7bd8b",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "9158ace61d60b9a42b04b55bbd54285d52778550da5634fa68b00241e8e28453",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "sch-gap-wave3-dgut-international-master-living-stipend",
+      "collection": "scholarships",
+      "selectionOrigin": "baseQueue20",
+      "canonicalRowSha256": "36220198a1feba29a2600b7c1acab4a5c5a8e197dae12edb7630d5347deaeb80",
+      "canonicalProgramSha256": null,
+      "result": "unknown",
+      "storedDeadline": null,
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-scholarship-wave3-dgut-international-master-living-stipend",
+          "sha256": "f6f9496c9241b475a6e76b91c5dc6a248f33dda6bab636870ef1e51455ec5d93",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "9158ace61d60b9a42b04b55bbd54285d52778550da5634fa68b00241e8e28453",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-mew-scws-dgut-food-and-nutrition-master-2026-2027-autumn",
+      "collection": "admissionCycles",
+      "selectionOrigin": "additionalSameSource7",
+      "canonicalRowSha256": "e690b16abfbbbec3ff12edc2ade84d44362e238ad2a13f136d7a170fe75a3c7d",
+      "canonicalProgramSha256": "d70288f70bf04b8e11acd3c5a058297c747de9c11222d9b498a4dbc198a3810b",
+      "result": "unknown",
+      "storedDeadline": "2026-06-30",
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-mew-scws-dgut-food-and-nutrition-master",
+          "sha256": "7972bb5d4f9e8f74d8e6794bea4159a96f2a2098c539144a11fcab62253e95ad",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-mew-scws-dgut-food-and-nutrition-master-support-1",
+          "sha256": "3dd09167e228cb54cf379b6c7e95f63b81006adf10955bb7c46f281dfb4a888c",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "72f715aaeea6d13d096162b5f6ce04c889b6b93222984dd1c3812f5c272e6ca1",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-mew-scws-dgut-integrated-circuit-engineering-master-2026-2027-autumn",
+      "collection": "admissionCycles",
+      "selectionOrigin": "additionalSameSource7",
+      "canonicalRowSha256": "33280befb19482d69c6f5588b94f12d999a56e177ceaf0866472a1b0f67d12bd",
+      "canonicalProgramSha256": "a405bbab2a86d2a6805aae3d002e78e220487a1943884cdeee3b1d4af9e8d370",
+      "result": "unknown",
+      "storedDeadline": "2026-06-30",
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-mew-scws-dgut-integrated-circuit-engineering-master",
+          "sha256": "21c80415ce58b29142e1092f74340c73646c583eaea513e1a148cef4df26a9f0",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-mew-scws-dgut-integrated-circuit-engineering-master-support-1",
+          "sha256": "fd5005e65ce5c6485d6d7a648fbaf83599a06993456d4209db540100d0615ac0",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "72f715aaeea6d13d096162b5f6ce04c889b6b93222984dd1c3812f5c272e6ca1",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-mew-scws-dgut-social-work-master-2026-2027-autumn",
+      "collection": "admissionCycles",
+      "selectionOrigin": "additionalSameSource7",
+      "canonicalRowSha256": "d4d15b826cb468d0412950a94710a56ce4827e0e9c7d1de6ae542e37f921139e",
+      "canonicalProgramSha256": "a256d4c5982be957fe58174478257fa029185f70ecf30d64d6de643346e36fd8",
+      "result": "unknown",
+      "storedDeadline": "2026-06-30",
+      "sourcePinResults": [
+        {
+          "sourceId": "src-gap-program-mew-scws-dgut-social-work-master",
+          "sha256": "e836aa401376f4ef34fcd1cf282b95168b3e05ff89f6ea82d9f791a865d2e8b0",
+          "matches": true,
+          "official": true
+        },
+        {
+          "sourceId": "src-gap-program-mew-scws-dgut-social-work-master-support-1",
+          "sha256": "1d4b9f1446059e52f45df9d52c9fe48a540b12d22a38bca094279d8306e7b879",
+          "matches": true,
+          "official": true
+        }
+      ],
+      "evidenceBodySha256": "72f715aaeea6d13d096162b5f6ce04c889b6b93222984dd1c3812f5c272e6ca1",
+      "checks": {
+        "rowSha": true,
+        "programSha": true,
+        "programPins": true,
+        "parentAndDegree": true,
+        "storedFields": true,
+        "sourceRows": true,
+        "sourceIDs": true,
+        "evidenceURLAndBody": true,
+        "evidenceSourceIDs": true,
+        "selectionOrigin": true,
+        "noMutationOrFreshness": true,
+        "resultDatePolicy": true
+      },
+      "passed": true
+    }
+  ],
+  "unresolvedScopes": [
+    {
+      "scope": "DUFL: three 2026 bachelor routes",
+      "state": "conflict",
+      "detail": "April 15 and end of April remain visible in the same 2026 guide. All observed alternatives are past; a single exact deadline remains unresolved."
+    },
+    {
+      "scope": "DGUT: three additional programmes",
+      "state": "unknown",
+      "detail": "The exact programme catalogue images and registered programme directory were not read. A shared source and stored June 30 are not new proof."
+    },
+    {
+      "scope": "DLMU: five routes",
+      "state": "unknown",
+      "detail": "Recurring each/basically dates and unread embedded brochure images do not establish the target year. Additional Nautical Science is not certified."
+    },
+    {
+      "scope": "DMU: four routes including additional Pre-medical",
+      "state": "unknown",
+      "detail": "The Spring 2026 MBBS/Pre-medical opening is not bound to the selected 2026-2027 other intake; no applicant closing date is printed."
+    },
+    {
+      "scope": "CUZ three awards, DGUT two awards, DUFE three general master routes",
+      "state": "unknown",
+      "detail": "Award benefits or post-registration conditions are not deadlines. An unbound general June 30 cannot borrow CSC Type B March 10, 2026."
+    }
+  ],
+  "conclusion": "The final frozen report passes as source-only date evidence. All 27 exact IDs, 20+7 selection receipts, raw/text hashes, observedAt values, full canonical record/program/source pins and result counts match. CUZ strict-before June 30, 2026 and DGUT June 30 for two exact 2026 routes are scoped expired candidates. DUFL conflicts, generic-year dates, unmatched additional programme scopes and separate award conditions remain unresolved. The final builder extension path is correct. No canonical data, shared state, Git or source report was changed."
+}

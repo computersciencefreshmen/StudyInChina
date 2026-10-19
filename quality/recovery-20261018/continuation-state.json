@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-19T05:34:30.859Z",
+  "updatedAt": "2026-10-19T05:51:18.479Z",
   "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
   "canonicalOwner": "released-for-date-first-maintenance",
   "canonicalWritesReleased": true,
@@ -49,13 +49,13 @@
     "readback": "quality/recovery-20261019/release-rapid-0cb2b83/date-first-automation-readback-v1.json"
   },
   "canonicalOwnershipRelease": {
-    "releasedAt": "2026-10-19T05:34:30.859Z",
+    "releasedAt": "2026-10-19T05:51:18.479Z",
     "scope": "Continue pending date-only source groups from the latest summary/progress/nextQueue. No whole-record renewal from date checks; no unguarded release.",
     "handoffCommitMustMatchUpstream": true,
     "requiresFreshCompleteCandidateProof": true,
     "requiresCommonWriterCas": true,
     "doNotReplayConsumedBatchIds": true,
-    "previousOwner": "heartbeat-date-first-20261019T0524",
+    "previousOwner": "heartbeat-date-first-20261019T0539",
     "requiresCommittedUnchangedContinuationState": true
   },
   "cloudDatabaseDiagnostic": {
@@ -195,23 +195,23 @@
     "priority": "date-only official rechecks; other facts deferred",
     "audit": "quality/deadline-sweep-20261019/catalog-deadlines.json",
     "progress": "quality/deadline-sweep-20261019/official-recheck-progress.json",
-    "summary": "quality/deadline-sweep-20261019/official-review-summary-v5.json",
+    "summary": "quality/deadline-sweep-20261019/official-review-summary-v6.json",
     "rawUniversities": 272,
     "rawPrograms": 2057,
     "rawCycles": 1654,
     "rawScholarships": 400,
     "storedExpiredDeadlines": 290,
-    "schoolsAttempted": 84,
-    "selectedRecordDatesAssessed": 956,
+    "schoolsAttempted": 104,
+    "selectedRecordDatesAssessed": 1018,
     "unchanged": 861,
-    "unknown": 43,
-    "blocked": 20,
+    "unknown": 77,
+    "blocked": 25,
     "wholeSchoolCataloguesCertified": 0,
     "dateChangesApplied": 0,
     "preciseTimeRestrictionsRetained": true,
-    "summarySha256": "b7a56103beee076869e5f33372639430fcdc163701bef7c633c582c18e1cef44",
-    "nextQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v3.json",
-    "conflicting": 7,
+    "summarySha256": "4f9e6681081128717edc8b503e8e3d9cd1a7ecdfb6f0e1f25b7f69760de5b8e1",
+    "nextQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v4.json",
+    "conflicting": 10,
     "currentPublicCycleDateReview": {
       "total": 783,
       "dateSupported": 782,
@@ -226,11 +226,23 @@
       "specificDeadline": 4,
       "unknownSeparateDeadline": 3
     },
-    "remainingRawRecordDates": 1079,
+    "remainingRawRecordDates": 1017,
     "remainingUnexpiredRecordDates": 0,
     "heldDateCorrections": 1,
     "heldDateCorrectionReport": "quality/deadline-sweep-20261019/official-batch-012/report.json",
-    "sourceConfirmedPastWindows": 25,
-    "pastDateCandidatesApplied": 0
+    "sourceConfirmedPastWindows": 45,
+    "pastDateCandidatesApplied": 0,
+    "latestSuccessorDateObservations": "quality/deadline-sweep-20261019/heartbeat-0539/successor-date-observations-v1.json",
+    "latestFiniteEvidenceBatch": {
+      "reports": [
+        "quality/deadline-sweep-20261019/official-batch-016/report.json",
+        "quality/deadline-sweep-20261019/official-batch-017/report.json",
+        "quality/deadline-sweep-20261019/official-batch-018/report.json"
+      ],
+      "records": 62,
+      "baseQueueRecords": 51,
+      "additionalSameSourceRecords": 11,
+      "canonicalDatesChanged": 0
+    }
   }
 }

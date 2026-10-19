@@ -1,0 +1,1316 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-016-20261019",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T05:45:07.670Z",
+  "state": "completed-candidates-with-successor-year-source-drift-and-one-source-block",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetPlan": "quality/deadline-sweep-20261019/next-official-date-targets-v3.json",
+  "targetPlanSha256": "c53dd8358ec2667e6390b2b8b085e50b408854f55c2b20dc8da0f682f3151e6b",
+  "selectionSha256": "9980d19aabe396a465ee255b4c4ea2b7a1331faebbff5086c43628835291c497",
+  "selection": {
+    "baseQueueRecordCount": 13,
+    "additionalSameSourceRecordCount": 1,
+    "totalExactRecords": 14,
+    "universityIds": [
+      "uni-china-academy-of-art",
+      "uni-china-conservatory-of-music",
+      "uni-china-foreign-affairs-university",
+      "uni-china-jiliang-university",
+      "uni-china-pharmaceutical-university",
+      "uni-china-university-of-geosciences-beijing",
+      "uni-china-university-of-geosciences-wuhan"
+    ],
+    "baseQueueRecordIds": [
+      "cycle-gap-mve-ecma-caa-art-studies-doctorate-2026-2027-autumn-fee-reference",
+      "cycle-gap-sparse-depth-0808-ccmusic-composition-bachelor-2026-2027-other-fee-reference",
+      "cycle-gap-sparse-depth-0808-ccmusic-conducting-bachelor-2026-2027-other-fee-reference",
+      "cycle-gap-sparse-depth-0808-ccmusic-music-education-vocal-bachelor-2026-2027-other-fee-reference",
+      "sch-gap-sch-mew-nss-cfau-beijing-government",
+      "cycle-gap-remaining-cjlu-b-business-administration-en-2026-2027-other",
+      "sch-gap-mve-ecs-cpu-csc-silk-road-2026",
+      "cycle-gap-wave3-depth-cugb-environmental-science-engineering-doctorate-english-2026-2027-autumn-fee-reference",
+      "sch-gap-wave3-depth-cugb-csc-type-b-2026",
+      "cycle-gap-wave3-depth-cugb-computer-science-bachelor-2026-2027-autumn",
+      "cycle-gap-wave3-depth-cugb-geology-bachelor-2026-2027-autumn",
+      "sch-gap-mew-scws-cug-cgs-high-level-postgraduate-2026",
+      "cycle-2026-cug-business-administration-high-level-postgraduate"
+    ],
+    "additionalSameSourceRecordIds": [
+      "cycle-gap-wave3-depth-cugb-geology-master-english-2026-2027-autumn"
+    ],
+    "additionalBindingScope": "Explicit parent assignment before freeze; no new fetch. Original2026GeologyEnglish-mastertable independently checked, includingTable4English-mastercheckmark."
+  },
+  "acquisition": {
+    "newDistinctOfficialUrlsAttempted": 9,
+    "originalGets": 9,
+    "successfulOriginalUrls": 7,
+    "source412OriginalsRetained": 2,
+    "boundedWebFallbackAttempts": 2,
+    "totalNetworkAttempts": 11,
+    "successfulFallbackSources": 0,
+    "automaticallyRepeatedRequests": 0,
+    "paidModelCalls": 0,
+    "certificateOrChallengeBypasses": 0,
+    "successfulOriginalSchools": 6,
+    "successfulSourcesApplicableToAssigned2026HardDates": 4
+  },
+  "sourceCaptures": [
+    {
+      "key": "source-01",
+      "url": "https://gjjl.ccmusic.edu.cn/docs/2026-01/143de8ad89dd4daf90d199deb54228b0.pdf",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:40:31.048604+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://gjjl.ccmusic.edu.cn/docs/2026-01/143de8ad89dd4daf90d199deb54228b0.pdf",
+      "contentType": "application/pdf",
+      "bytes": 407405,
+      "rawPath": "source-01.pdf",
+      "rawSha256": "a8c1c38f6ad4a9dc6bb94dc813ea3e124c280f65f5c9a13d682b16408372faf2",
+      "pages": 9,
+      "textPath": "source-01.txt",
+      "textSha256": "44bc690316a0c5890f59728b5903ce9c689fc14f8d2c126cc3278e178d9bca29",
+      "observedAt": "2026-10-19T05:40:38.978071+00:00"
+    },
+    {
+      "key": "source-02",
+      "url": "https://bm.cugb.edu.cn/gjhzyjl-en/study-in-cugb/admission/",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:40:31.049899+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://bm.cugb.edu.cn/gjhzyjl-en/study-in-cugb/admission/",
+      "contentType": "text/html",
+      "bytes": 50363,
+      "rawPath": "source-02.html",
+      "rawSha256": "1fb7bbbfecf0da8ef1c8047c1e98299d5141560cd1a8817f96d445f97ea52b2e",
+      "decodedCharset": "utf-8",
+      "textPath": "source-02.txt",
+      "textSha256": "dceebb4269ea271cc9b9d39fcf4d3731053e2fa3343ccfe6dc338a9578f790c0",
+      "observedAt": "2026-10-19T05:40:34.047268+00:00"
+    },
+    {
+      "key": "source-03",
+      "url": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:40:31.051318+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+      "contentType": "application/pdf",
+      "bytes": 298195,
+      "rawPath": "source-03.pdf",
+      "rawSha256": "dc28d54c02a8573b012779af774f8eddd3257dad4a74a293cdef76eb09002bbc",
+      "pages": 15,
+      "textPath": "source-03.txt",
+      "textSha256": "d35c0510b76bd0176ab841b4a557454756743b5429b6aa3f6201525713f2b091",
+      "observedAt": "2026-10-19T05:40:39.392209+00:00"
+    },
+    {
+      "key": "source-04",
+      "url": "https://admission.caa.edu.cn/en/Admissions/CAA_2026_Admissions_Guide_for_International_Stud.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:40:31.051878+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://admission.caa.edu.cn/en/Admissions/CAA_2026_Admissions_Guide_for_International_Stud.htm",
+      "contentType": "text/html",
+      "bytes": 75230,
+      "rawPath": "source-04.html",
+      "rawSha256": "33b0f4564328db0e8c7bf4e931a31ad1f6bac4d5cb4a2dab4f65bfe5a432fe88",
+      "decodedCharset": "utf-8",
+      "textPath": "source-04.txt",
+      "textSha256": "765640bf817f9763ebd1e6009cd18a5f066bd8e7d6b9824790cc2a96301d4b7c",
+      "observedAt": "2026-10-19T05:40:34.053292+00:00"
+    },
+    {
+      "key": "source-05",
+      "url": "https://english.cjlu.edu.cn/info/1023/3080.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:40:34.053292+00:00",
+      "attempt": 1,
+      "httpStatus": 412,
+      "finalUrl": "https://english.cjlu.edu.cn/info/1023/3080.htm",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 30477,
+      "rawPath": "source-05.html",
+      "rawSha256": "a80c94834644fb42ddea2d2e4eadfd1c65a7e63cbaf5adbf751a8ca4275bfaa0",
+      "decodedCharset": "utf-8",
+      "textPath": "source-05.txt",
+      "textSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "error": "HTTP 412 (original response retained)",
+      "observedAt": "2026-10-19T05:40:39.393247+00:00"
+    },
+    {
+      "key": "source-06",
+      "url": "https://english.cjlu.edu.cn/info/1033/3220.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:40:34.054436+00:00",
+      "attempt": 1,
+      "httpStatus": 412,
+      "finalUrl": "https://english.cjlu.edu.cn/info/1033/3220.htm",
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 30382,
+      "rawPath": "source-06.html",
+      "rawSha256": "40ea1e5558274fa1111297e6553d5c4805e88176bf508d24fb799330ec4518df",
+      "decodedCharset": "utf-8",
+      "textPath": "source-06.txt",
+      "textSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "error": "HTTP 412 (original response retained)",
+      "observedAt": "2026-10-19T05:40:39.961396+00:00"
+    },
+    {
+      "key": "source-07",
+      "url": "https://eniec.cug.edu.cn/Scholarships/Chinese_Government_Scholarships/High_Level_Postgraduate_Program.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:40:38.993370+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://eniec.cug.edu.cn/Scholarships/Chinese_Government_Scholarships/High_Level_Postgraduate_Program.htm",
+      "contentType": "text/html",
+      "bytes": 68598,
+      "rawPath": "source-07.html",
+      "rawSha256": "c88b4d104a06677009247662f1866e889567bb0c7fb66b5dfecb5e12ee4eeedc",
+      "decodedCharset": "utf-8",
+      "textPath": "source-07.txt",
+      "textSha256": "cb7e5369d36d306fdb0301e614371048c6d8ea05a701dbc608f905fa994e3a9f",
+      "observedAt": "2026-10-19T05:40:42.023055+00:00"
+    },
+    {
+      "key": "source-08",
+      "url": "https://international.cpu.edu.cn/9f/6e/c362a237422/page.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:40:39.392736+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://international.cpu.edu.cn/9f/6e/c362a237422/page.htm",
+      "contentType": "text/html",
+      "bytes": 51995,
+      "rawPath": "source-08.html",
+      "rawSha256": "6ad48bd84275fdcba0a96872e3b6940360aef38ae0b031ee0776fda3701353f6",
+      "decodedCharset": "utf-8",
+      "textPath": "source-08.txt",
+      "textSha256": "1447339989eb3d3b2678e2bd766a484156a4e118a8d5d82bf49e7a22cc5f3ed1",
+      "observedAt": "2026-10-19T05:40:42.031055+00:00"
+    },
+    {
+      "key": "source-09",
+      "url": "https://iss.cfau.edu.cn/col4185/col4273/24d1b5fa0831489bbca67ee17d5398c6.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:40:39.393892+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://iss.cfau.edu.cn/col4185/col4273/24d1b5fa0831489bbca67ee17d5398c6.htm",
+      "contentType": "text/html",
+      "bytes": 21177,
+      "rawPath": "source-09.html",
+      "rawSha256": "3aa761a69198217ec95d0c2310e8f99517e55b3f19aa1518436234b11f106c91",
+      "decodedCharset": "utf-8",
+      "textPath": "source-09.txt",
+      "textSha256": "a35287cdea0b69fbf1c3ab9c64b224bc3f1544b0e16711138900c979320444d9",
+      "observedAt": "2026-10-19T05:40:41.419531+00:00"
+    }
+  ],
+  "fallbackReceipt": {
+    "path": "cjlu-web-fallback.receipt.json",
+    "sha256": "6004a2343212ec9fbfe814c5cc452d954fa7662d15460b66f999f8508605f551"
+  },
+  "evidence": [
+    {
+      "key": "caa-2026-english-doctoral",
+      "sourceKeys": [
+        "source-04"
+      ],
+      "scope": "2026 English-taught international doctoral admission. Art Studies is explicitly named in the same article; September2026registration fixes the entry year and intake context.",
+      "dateQuotes": [
+        {
+          "quote": "June 20, 2026 (Beijing Time, inclusive).",
+          "locator": "II. Application Deadline",
+          "meaning": "Applicant general admission deadline; inclusive date, no invented clock time."
+        }
+      ],
+      "programmeQuote": "The academic programs include Art Studies and Design Studies",
+      "excludedDates": "Passport validity, diploma completion, July result release and September registration are not application deadlines."
+    },
+    {
+      "key": "ccmusic-2026-bachelor",
+      "sourceKeys": [
+        "source-01"
+      ],
+      "scope": "2026 international full-time bachelor call, with the three exact named directions on PDFp4 and applicant registration window onp5.",
+      "dateQuotes": [
+        {
+          "quote": "2026 年 1 月 13 日——2026 年 1 月 20 日",
+          "locator": "PDF p5 二（二）报名方式与时间1",
+          "meaning": "Student registration/application window, not university notification or test scheduling."
+        }
+      ],
+      "programmeQuotes": [
+        "作曲与作曲技术理论",
+        "音乐表演（指挥）",
+        "音乐教育（声乐特长）"
+      ],
+      "visualPagesInspected": [
+        4,
+        5
+      ]
+    },
+    {
+      "key": "cfau-bgs-no-date",
+      "sourceKeys": [
+        "source-09"
+      ],
+      "scope": "BGS annual application procedure for incoming autumn students and current students. No concrete applicant cutoff is printed.",
+      "dateQuotes": [
+        {
+          "quote": "下一年度的申请时间和办法另行通知。",
+          "locator": "二、BGS奖学金管理规则3",
+          "meaning": "Next-year arrangements require another notice; upload2026-03-10is not an opening or deadline."
+        }
+      ]
+    },
+    {
+      "key": "cjlu-two-412-sources",
+      "sourceKeys": [
+        "source-05",
+        "source-06"
+      ],
+      "scope": "Assigned Business Administration programme-plan and supporting admissions URLs both returned412; no programme text or date was available.",
+      "dateQuotes": [],
+      "fallbackReceipt": "cjlu-web-fallback.receipt.json",
+      "evidenceStatus": "blocked after one reasonable fallback per URL; retained412bytes are not admission evidence."
+    },
+    {
+      "key": "cpu-2026-silk-road",
+      "sourceKeys": [
+        "source-08"
+      ],
+      "scope": "Exact named2026Chinese Government Scholarship Silk Road award at CPU, applicant CPU-platform stage.",
+      "dateQuotes": [
+        {
+          "quote": "Application Deadline: 17th May 2026",
+          "locator": "Part.01 When and Where to Apply",
+          "meaning": "Applicant deadline; later CPU reviewMay18-20, nominated-student CSC stage, July release and September enrolment are distinct actions."
+        }
+      ],
+      "openingQualification": "From now until is relative; no numeric opening date is inferred."
+    },
+    {
+      "key": "cugb-2026-source-with-funding-branches",
+      "sourceKeys": [
+        "source-03",
+        "source-02"
+      ],
+      "scope": "Original2026guide. PDFp5 separates CSCTypeA, CSCTypeB and self-funded applicant deadlines. The portal supports discovery, not date proof.",
+      "dateQuotes": [
+        {
+          "quote": "Deadline for Chinese Government Scholarship (Type B)：March 15, 2026",
+          "locator": "PDF p5 Time for Application2",
+          "meaning": "CSCTypeB only."
+        },
+        {
+          "quote": "Deadline for Self-funded student：June 30, 2026",
+          "locator": "PDF p5 Time for Application3",
+          "meaning": "Self-funded applicants only."
+        },
+        {
+          "quote": "Deadline for Chinese Government Scholarship (Type A)：Refer to the Chinese Embassy in your country",
+          "locator": "PDF p5 Time for Application1",
+          "meaning": "No university-wideTypeAcalendar cutoff is asserted."
+        }
+      ],
+      "programmeScope": "Chinese bachelor table onp8-9includes ComputerScience080901and Geology0709. English postgraduate Table3onp10-11includes Geology0709Master,Doctor and EnvironmentalScienceandEngineering0830Master,Doctor. Table4onp11visually confirms Geology English-master eligibility.",
+      "visualPagesInspected": [
+        5,
+        11
+      ],
+      "feeReferenceQualification": "The new English-doctoral fee-reference row has no funding branch. It remains unknown with separate route-specific candidates instead of being assigned a universalJune30date."
+    },
+    {
+      "key": "cug-wuhan-source-now-2027",
+      "sourceKeys": [
+        "source-07"
+      ],
+      "scope": "The mutable canonical URL now publishes the2027high-level postgraduate scholarship window. Both assigned records belong to the2026route.",
+      "dateQuotes": [
+        {
+          "quote": "October 16th, 2026 – February 28th, 2027",
+          "locator": "IX. Application Period",
+          "meaning": "Successor2027applicant window only; not evidence for a2026deadline."
+        }
+      ],
+      "yearContextQuote": "2027 CUG Chinese Government Scholarship-High Level Postgraduate Program.pdf",
+      "programmeQuote": "Business Administration",
+      "yearBindingResult": "different-year-source-currently-replaced; no date roll-forward and no old2026deadline recertification."
+    }
+  ],
+  "groups": [
+    {
+      "key": "caa-2026-english-doctoral",
+      "universityId": "uni-china-academy-of-art",
+      "evidenceKey": "caa-2026-english-doctoral",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecma-caa-art-studies-doctorate-2026-2027-autumn-fee-reference",
+          "universityId": "uni-china-academy-of-art",
+          "programId": "prog-gap-mve-ecma-caa-art-studies-doctorate",
+          "programNameZh": "艺术学",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionScope": "baseQueue13",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-05",
+          "storedReviewAfter": "2026-08-12",
+          "canonicalRowSha256": "54023245318b2736a26b5a697026843b24b2e5039de4438699a0ce969acfc522",
+          "canonicalCycleSha256": "54023245318b2736a26b5a697026843b24b2e5039de4438699a0ce969acfc522",
+          "canonicalProgramSha256": "4bb56963c2a5b01cdc16db3c71df28f76c9ea903db6e8a854d5e580bc18fd0f6",
+          "sourceIds": [
+            "src-gap-program-mve-ecma-caa-art-studies-doctorate"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecma-caa-art-studies-doctorate",
+              "canonicalSourceSha256": "5f98e9ba5c3585ba2dfda210b779dd91a643cdc860c4e84653a60c42e9d618dc",
+              "url": "https://admission.caa.edu.cn/en/Admissions/CAA_2026_Admissions_Guide_for_International_Stud.htm",
+              "official": true,
+              "role": "official-original-or-attempt"
+            }
+          ],
+          "evidenceKey": "caa-2026-english-doctoral",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": "2026-06-20",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "openingDateEqualityCertified": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-20",
+          "applicableEntryYear": 2026,
+          "applicationScope": "English-taught ArtStudiesdoctoral applicant, September2026entry",
+          "deadlineBoundary": "inclusive-date-as-worded",
+          "officialTimeZone": "Asia/Shanghai",
+          "exactCutoffTime": null,
+          "reason": "Exact programme, degree, English-batch, entry year and applicant deadline match in the same full guide; canonical null retained."
+        }
+      ]
+    },
+    {
+      "key": "ccmusic-2026-bachelor",
+      "universityId": "uni-china-conservatory-of-music",
+      "evidenceKey": "ccmusic-2026-bachelor",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-sparse-depth-0808-ccmusic-composition-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-china-conservatory-of-music",
+          "programId": "prog-gap-sparse-depth-0808-ccmusic-composition-bachelor",
+          "programNameZh": "作曲与作曲技术理论",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "selectionScope": "baseQueue13",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-08",
+          "storedReviewAfter": "2026-08-15",
+          "canonicalRowSha256": "99fa3925f0fbb0ba637dc3a6679ed84cb760e0e6a3ff2c329faa23ee40997285",
+          "canonicalCycleSha256": "99fa3925f0fbb0ba637dc3a6679ed84cb760e0e6a3ff2c329faa23ee40997285",
+          "canonicalProgramSha256": "7f12f6c7e2739ccc50974eb456a55319675f4d4fbb817b03da195e623733f4f5",
+          "sourceIds": [
+            "src-gap-program-sparse-depth-0808-ccmusic-composition-bachelor"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-sparse-depth-0808-ccmusic-composition-bachelor",
+              "canonicalSourceSha256": "4a96f47b987394e33395159240fb336e3c314dea5fd220dd0c748dd5476db4be",
+              "url": "https://gjjl.ccmusic.edu.cn/docs/2026-01/143de8ad89dd4daf90d199deb54228b0.pdf",
+              "official": true,
+              "role": "official-original-or-attempt"
+            }
+          ],
+          "evidenceKey": "ccmusic-2026-bachelor",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": "2026-01-20",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "openingDateEqualityCertified": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-01-20",
+          "candidateOfficialOpensOn": "2026-01-13",
+          "openingDateResult": "new-candidate-canonical-null-retained",
+          "applicableEntryYear": 2026,
+          "programmeScopeMatch": {
+            "originalChineseName": "作曲与作曲技术理论",
+            "degree": "bachelor",
+            "originalCataloguePage": 4
+          },
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicationScope": "2026international bachelor applicant registration",
+          "reason": "Exact programme direction is listed onp4and2026applicant window onp5. The fee-reference row is not bound by year alone."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-sparse-depth-0808-ccmusic-conducting-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-china-conservatory-of-music",
+          "programId": "prog-gap-sparse-depth-0808-ccmusic-conducting-bachelor",
+          "programNameZh": "音乐表演（指挥）",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "selectionScope": "baseQueue13",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-08",
+          "storedReviewAfter": "2026-08-15",
+          "canonicalRowSha256": "45b1fed90d9b86dc4b63506f3f7a6cb7bdee72d7439063b501bd40441d48cd7c",
+          "canonicalCycleSha256": "45b1fed90d9b86dc4b63506f3f7a6cb7bdee72d7439063b501bd40441d48cd7c",
+          "canonicalProgramSha256": "1043b08ab862ac094225c721ecf6fb80f3574263ddc2b919f972a8a1da8dbde7",
+          "sourceIds": [
+            "src-gap-program-sparse-depth-0808-ccmusic-conducting-bachelor"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-sparse-depth-0808-ccmusic-conducting-bachelor",
+              "canonicalSourceSha256": "a77708a31630bc5e24bb0e0292e91c10ee9f6c1264f8ac6e0533131231f8392a",
+              "url": "https://gjjl.ccmusic.edu.cn/docs/2026-01/143de8ad89dd4daf90d199deb54228b0.pdf",
+              "official": true,
+              "role": "official-original-or-attempt"
+            }
+          ],
+          "evidenceKey": "ccmusic-2026-bachelor",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": "2026-01-20",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "openingDateEqualityCertified": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-01-20",
+          "candidateOfficialOpensOn": "2026-01-13",
+          "openingDateResult": "new-candidate-canonical-null-retained",
+          "applicableEntryYear": 2026,
+          "programmeScopeMatch": {
+            "originalChineseName": "音乐表演（指挥）",
+            "degree": "bachelor",
+            "originalCataloguePage": 4
+          },
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicationScope": "2026international bachelor applicant registration",
+          "reason": "Exact programme direction is listed onp4and2026applicant window onp5. The fee-reference row is not bound by year alone."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-sparse-depth-0808-ccmusic-music-education-vocal-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-china-conservatory-of-music",
+          "programId": "prog-gap-sparse-depth-0808-ccmusic-music-education-vocal-bachelor",
+          "programNameZh": "音乐教育（声乐特长）",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "selectionScope": "baseQueue13",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-08",
+          "storedReviewAfter": "2026-08-15",
+          "canonicalRowSha256": "5eef4078d47056b88d4f708023dfc421321135152eea68eff6130a7a0e1fa481",
+          "canonicalCycleSha256": "5eef4078d47056b88d4f708023dfc421321135152eea68eff6130a7a0e1fa481",
+          "canonicalProgramSha256": "a496efbf78afa0f086312da7eeef1c16b0f8223609239df03b26befe478aae05",
+          "sourceIds": [
+            "src-gap-program-sparse-depth-0808-ccmusic-music-education-vocal-bachelor"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-sparse-depth-0808-ccmusic-music-education-vocal-bachelor",
+              "canonicalSourceSha256": "97cd1efa43281491c92112ec24e3f1ad23794869cb14c686bed43f413d120e71",
+              "url": "https://gjjl.ccmusic.edu.cn/docs/2026-01/143de8ad89dd4daf90d199deb54228b0.pdf",
+              "official": true,
+              "role": "official-original-or-attempt"
+            }
+          ],
+          "evidenceKey": "ccmusic-2026-bachelor",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": "2026-01-20",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "openingDateEqualityCertified": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-01-20",
+          "candidateOfficialOpensOn": "2026-01-13",
+          "openingDateResult": "new-candidate-canonical-null-retained",
+          "applicableEntryYear": 2026,
+          "programmeScopeMatch": {
+            "originalChineseName": "音乐教育（声乐特长）",
+            "degree": "bachelor",
+            "originalCataloguePage": 4
+          },
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicationScope": "2026international bachelor applicant registration",
+          "reason": "Exact programme direction is listed onp4and2026applicant window onp5. The fee-reference row is not bound by year alone."
+        }
+      ]
+    },
+    {
+      "key": "cfau-bgs-no-date",
+      "universityId": "uni-china-foreign-affairs-university",
+      "evidenceKey": "cfau-bgs-no-date",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nss-cfau-beijing-government",
+          "universityId": "uni-china-foreign-affairs-university",
+          "programId": null,
+          "programNameZh": "外交学院北京市外国留学生奖学金",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionScope": "baseQueue13",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-04",
+          "storedReviewAfter": "2026-09-03",
+          "canonicalRowSha256": "f9065cd3a00313803f8558f06e954520d28c0d9721db746eaf2ec2e73abb8579",
+          "canonicalScholarshipSha256": "f9065cd3a00313803f8558f06e954520d28c0d9721db746eaf2ec2e73abb8579",
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nss-cfau-beijing-government"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nss-cfau-beijing-government",
+              "canonicalSourceSha256": "8e722b754cd64a387cbdda1f1840b47f3e55bdf3ba0a55c8c22a4cb4cf9bd759",
+              "url": "https://iss.cfau.edu.cn/col4185/col4273/24d1b5fa0831489bbca67ee17d5398c6.htm",
+              "official": true,
+              "role": "official-original-or-attempt"
+            }
+          ],
+          "evidenceKey": "cfau-bgs-no-date",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "openingDateEqualityCertified": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "reason": "The annual BGS procedure has no concrete applicant cutoff;2026upload date is not an application window and next-year timing is separately notified."
+        }
+      ]
+    },
+    {
+      "key": "cjlu-two-412-sources",
+      "universityId": "uni-china-jiliang-university",
+      "evidenceKey": "cjlu-two-412-sources",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-remaining-cjlu-b-business-administration-en-2026-2027-other",
+          "universityId": "uni-china-jiliang-university",
+          "programId": "prog-gap-remaining-cjlu-b-business-administration-en",
+          "programNameZh": "工商管理",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "selectionScope": "baseQueue13",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "canonicalRowSha256": "5dccd9b6d56332b3f25fcdfae0ce8bf078d323d2652b669e8fff3ae3dc8a4b89",
+          "canonicalCycleSha256": "5dccd9b6d56332b3f25fcdfae0ce8bf078d323d2652b669e8fff3ae3dc8a4b89",
+          "canonicalProgramSha256": "ada10429e1001582efda3f15b344133440ef4744e6f119318f53caaa971c0f2f",
+          "sourceIds": [
+            "src-gap-program-remaining-cjlu-b-business-administration-en",
+            "src-gap-program-remaining-cjlu-b-business-administration-en-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-remaining-cjlu-b-business-administration-en",
+              "canonicalSourceSha256": "6d7c9634cc482beb842a5e352ad8e37d99eb773fc7dc950263ce841f03b49243",
+              "url": "https://english.cjlu.edu.cn/info/1023/3080.htm",
+              "official": true,
+              "role": "official-original-or-attempt"
+            },
+            {
+              "sourceId": "src-gap-program-remaining-cjlu-b-business-administration-en-support-1",
+              "canonicalSourceSha256": "24ce180dd5fd9d85b1673a301b0ba92276fd4a0117e985b222d8bdcd2e05c1e3",
+              "url": "https://english.cjlu.edu.cn/info/1033/3220.htm",
+              "official": true,
+              "role": "official-original-or-attempt"
+            }
+          ],
+          "evidenceKey": "cjlu-two-412-sources",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "openingDateEqualityCertified": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "blocked",
+          "officialDeadline": null,
+          "sourceFailureKeys": [
+            "source-05",
+            "source-06"
+          ],
+          "reason": "Both exact official sources returned412and one bounded web fallback each also returned412; programme/date text cannot be certified."
+        }
+      ]
+    },
+    {
+      "key": "cpu-2026-silk-road",
+      "universityId": "uni-china-pharmaceutical-university",
+      "evidenceKey": "cpu-2026-silk-road",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecs-cpu-csc-silk-road-2026",
+          "universityId": "uni-china-pharmaceutical-university",
+          "programId": null,
+          "programNameZh": "中国药科大学2026年中国政府奖学金丝绸之路项目",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionScope": "baseQueue13",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-04",
+          "storedReviewAfter": "2026-09-03",
+          "canonicalRowSha256": "b8e5cb3a72cc299046cb705e92bbce8961627e8121f0dc76b5f18430044e46f4",
+          "canonicalScholarshipSha256": "b8e5cb3a72cc299046cb705e92bbce8961627e8121f0dc76b5f18430044e46f4",
+          "sourceIds": [
+            "src-gap-scholarship-mve-ecs-cpu-csc-silk-road-2026"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecs-cpu-csc-silk-road-2026",
+              "canonicalSourceSha256": "a6c5f0f9e24da80ad33d5561a76b75f52302faf89ab4ee2126b47081c4f22444",
+              "url": "https://international.cpu.edu.cn/9f/6e/c362a237422/page.htm",
+              "official": true,
+              "role": "official-original-or-attempt"
+            }
+          ],
+          "evidenceKey": "cpu-2026-silk-road",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": "2026-05-17",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "openingDateEqualityCertified": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-05-17",
+          "applicableEntryYear": 2026,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicationScope": "2026SilkRoadaward applicant submission to CPUplatform, not later university review or nominated-student CSC stage",
+          "reason": "Exact named2026award and applicant cutoff match the original notice; canonical null retained."
+        }
+      ]
+    },
+    {
+      "key": "cugb-2026-source-with-funding-branches",
+      "universityId": "uni-china-university-of-geosciences-beijing",
+      "evidenceKey": "cugb-2026-source-with-funding-branches",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-depth-cugb-environmental-science-engineering-doctorate-english-2026-2027-autumn-fee-reference",
+          "universityId": "uni-china-university-of-geosciences-beijing",
+          "programId": "prog-gap-wave3-depth-cugb-environmental-science-engineering-doctorate-english",
+          "programNameZh": "环境科学与工程（英文授课博士）",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionScope": "baseQueue13",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "canonicalRowSha256": "e669b0a1fe39667b0e4d1fa59a7e8cfa1cb7735c2587857ce5c4e92dd3fb17d0",
+          "canonicalCycleSha256": "e669b0a1fe39667b0e4d1fa59a7e8cfa1cb7735c2587857ce5c4e92dd3fb17d0",
+          "canonicalProgramSha256": "8ab5fb2eaf50a846e37deabbf660d3e304d913f6db80f646cdeab8a60c32b419",
+          "sourceIds": [
+            "src-gap-program-wave3-depth-cugb-environmental-science-engineering-doctorate-english",
+            "src-gap-program-wave3-depth-cugb-environmental-science-engineering-doctorate-english-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-depth-cugb-environmental-science-engineering-doctorate-english",
+              "canonicalSourceSha256": "7b3b8e21dbc2b8f3ba3c96372d6b10cf178c0e5d246bf70fa123fc207b4ceafd",
+              "url": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+              "official": true,
+              "role": "official-original-or-attempt"
+            },
+            {
+              "sourceId": "src-gap-program-wave3-depth-cugb-environmental-science-engineering-doctorate-english-support-1",
+              "canonicalSourceSha256": "d5f8b620fc8c1a5b255e6e69a81038d7e079b991fdf82c8490e5e21289684228",
+              "url": "https://bm.cugb.edu.cn/gjhzyjl-en/study-in-cugb/admission/",
+              "official": true,
+              "role": "supporting-portal-not-date-proof"
+            }
+          ],
+          "evidenceKey": "cugb-2026-source-with-funding-branches",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "openingDateEqualityCertified": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateDeadlinesByFundingRoute": [
+            {
+              "route": "self-funded",
+              "deadline": "2026-06-30",
+              "explicitApplicantDeadline": true
+            },
+            {
+              "route": "CSCTypeB",
+              "deadline": "2026-03-15",
+              "explicitApplicantDeadline": true
+            },
+            {
+              "route": "CSCTypeA",
+              "deadline": null,
+              "reason": "home-countryChineseEmbassy controls deadline"
+            }
+          ],
+          "exactProgrammeDegreeYearMatched": true,
+          "matchedDisciplineCode": "0830",
+          "matchedCatalogueScope": "English-taught postgraduate, MasterandDoctor, PDFTable3p10-11",
+          "fundingRouteOfStoredRecordResolved": false,
+          "reason": "English doctoral discipline and2026year match, but this null fee-reference row does not specify a funding branch. Neither scoped date is promoted to a universal programme deadline."
+        }
+      ]
+    },
+    {
+      "key": "cugb-2026-source-with-funding-branches",
+      "universityId": "uni-china-university-of-geosciences-beijing",
+      "evidenceKey": "cugb-2026-source-with-funding-branches",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-depth-cugb-csc-type-b-2026",
+          "universityId": "uni-china-university-of-geosciences-beijing",
+          "programId": null,
+          "programNameZh": "中国地质大学（北京）2026年中国政府奖学金Type B",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionScope": "baseQueue13",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "canonicalRowSha256": "e671458545950b137e97a354d0d005cbbac3fafa985179da2744510ed798df64",
+          "canonicalScholarshipSha256": "e671458545950b137e97a354d0d005cbbac3fafa985179da2744510ed798df64",
+          "sourceIds": [
+            "src-gap-scholarship-wave3-depth-cugb-csc-type-b-2026",
+            "src-gap-scholarship-wave3-depth-cugb-csc-type-b-2026-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-depth-cugb-csc-type-b-2026",
+              "canonicalSourceSha256": "c9ca1094c6ade41e94b22f930038be315a15a85d010c4bd37bc48d867dac38c5",
+              "url": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+              "official": true,
+              "role": "official-original-or-attempt"
+            },
+            {
+              "sourceId": "src-gap-scholarship-wave3-depth-cugb-csc-type-b-2026-support-1",
+              "canonicalSourceSha256": "b93bc64aac05ee4164434af434983b2d0c4efddbb5faa5bcec781e614f4a706f",
+              "url": "https://bm.cugb.edu.cn/gjhzyjl-en/study-in-cugb/admission/",
+              "official": true,
+              "role": "supporting-portal-not-date-proof"
+            }
+          ],
+          "evidenceKey": "cugb-2026-source-with-funding-branches",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": "2026-03-15",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "openingDateEqualityCertified": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-03-15",
+          "applicableEntryYear": 2026,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicationScope": "Exact named2026CSCTypeBaward applicant deadline; notTypeAor self-funded admission",
+          "reason": "The exact award route and2026TypeBcutoff are explicit in originalPDFp5. Canonical null retained."
+        }
+      ]
+    },
+    {
+      "key": "cugb-2026-source-with-funding-branches",
+      "universityId": "uni-china-university-of-geosciences-beijing",
+      "evidenceKey": "cugb-2026-source-with-funding-branches",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-depth-cugb-computer-science-bachelor-2026-2027-autumn",
+          "universityId": "uni-china-university-of-geosciences-beijing",
+          "programId": "prog-gap-wave3-depth-cugb-computer-science-bachelor",
+          "programNameZh": "计算机科学与技术（本科）",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionScope": "baseQueue13",
+          "storedOpensOn": null,
+          "storedDeadline": "2026-06-30",
+          "storedDateStatus": "published",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "canonicalRowSha256": "cb083d8391208202f2f934feb63ac02022797c62da5d57a1349dbf120992701d",
+          "canonicalCycleSha256": "cb083d8391208202f2f934feb63ac02022797c62da5d57a1349dbf120992701d",
+          "canonicalProgramSha256": "cbbd30d8e2c8b4288c37e3225c89557fd3718dc9cdc06e500d1ce612f8b5e1a6",
+          "sourceIds": [
+            "src-gap-program-wave3-depth-cugb-computer-science-bachelor",
+            "src-gap-program-wave3-depth-cugb-computer-science-bachelor-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-depth-cugb-computer-science-bachelor",
+              "canonicalSourceSha256": "f90fe19431015b0ce0f4edefa800b8ccc20aa9c0be81e03d5ffbe4a103f43189",
+              "url": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+              "official": true,
+              "role": "official-original-or-attempt"
+            },
+            {
+              "sourceId": "src-gap-program-wave3-depth-cugb-computer-science-bachelor-support-1",
+              "canonicalSourceSha256": "82391ff4ce962ce80e5557208f1b406302f89c07ef6da062410a9a3ca281bf3f",
+              "url": "https://bm.cugb.edu.cn/gjhzyjl-en/study-in-cugb/admission/",
+              "official": true,
+              "role": "supporting-portal-not-date-proof"
+            }
+          ],
+          "evidenceKey": "cugb-2026-source-with-funding-branches",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": "2026-06-30",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "openingDateEqualityCertified": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "applicableEntryYear": 2026,
+          "storedDeadlineMatchesScopedOfficialDay": true,
+          "applicationScope": "2026self-funded student admission only; matching existing storedJune30day is not a universal scholarship deadline",
+          "deadlineBoundary": "date-only-no-time-stated",
+          "programmeScopeMatch": {
+            "originalName": "Computer Science and Technology",
+            "degree": "bachelor",
+            "language": "Chinese",
+            "evidence": "PDFTable1p8-9"
+          },
+          "otherFundingBranchesNotReassigned": true,
+          "reason": "Exact programme, degree, language and2026guide match. Existing storedJune30corresponds to the self-funded branch; retain its scope and do not substitute CSCdates."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-depth-cugb-geology-bachelor-2026-2027-autumn",
+          "universityId": "uni-china-university-of-geosciences-beijing",
+          "programId": "prog-gap-wave3-depth-cugb-geology-bachelor",
+          "programNameZh": "地质学（本科）",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionScope": "baseQueue13",
+          "storedOpensOn": null,
+          "storedDeadline": "2026-06-30",
+          "storedDateStatus": "published",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "canonicalRowSha256": "52916bdb1d28a5c29bced143442c8847fea2e4cfc9465639425c051a75360f8e",
+          "canonicalCycleSha256": "52916bdb1d28a5c29bced143442c8847fea2e4cfc9465639425c051a75360f8e",
+          "canonicalProgramSha256": "efc58c10a7b4878f3393b7ba158788f812f0710881f3b90e5b74755da5503b34",
+          "sourceIds": [
+            "src-gap-program-wave3-depth-cugb-geology-bachelor",
+            "src-gap-program-wave3-depth-cugb-geology-bachelor-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-depth-cugb-geology-bachelor",
+              "canonicalSourceSha256": "719c094b2d3200871a5ad384ef2e64f46d1cc3b48c647a546a9c50ea26ec77ab",
+              "url": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+              "official": true,
+              "role": "official-original-or-attempt"
+            },
+            {
+              "sourceId": "src-gap-program-wave3-depth-cugb-geology-bachelor-support-1",
+              "canonicalSourceSha256": "7f09399b1b6b1a088d776617ec08cc73ca5ca31257d4d1664426d41ae7561023",
+              "url": "https://bm.cugb.edu.cn/gjhzyjl-en/study-in-cugb/admission/",
+              "official": true,
+              "role": "supporting-portal-not-date-proof"
+            }
+          ],
+          "evidenceKey": "cugb-2026-source-with-funding-branches",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": "2026-06-30",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "openingDateEqualityCertified": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "applicableEntryYear": 2026,
+          "storedDeadlineMatchesScopedOfficialDay": true,
+          "applicationScope": "2026self-funded student admission only; matching existing storedJune30day is not a universal scholarship deadline",
+          "deadlineBoundary": "date-only-no-time-stated",
+          "programmeScopeMatch": {
+            "originalName": "Geology",
+            "degree": "bachelor",
+            "language": "Chinese",
+            "evidence": "PDFTable1p8-9"
+          },
+          "otherFundingBranchesNotReassigned": true,
+          "reason": "Exact programme, degree, language and2026guide match. Existing storedJune30corresponds to the self-funded branch; retain its scope and do not substitute CSCdates."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-depth-cugb-geology-master-english-2026-2027-autumn",
+          "universityId": "uni-china-university-of-geosciences-beijing",
+          "programId": "prog-gap-wave3-depth-cugb-geology-master-english",
+          "programNameZh": "地质学（英文授课硕士）",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionScope": "additionalSameSource1",
+          "storedOpensOn": null,
+          "storedDeadline": "2026-06-30",
+          "storedDateStatus": "published",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "canonicalRowSha256": "cf5b3f3932d34bf110e0d7b43fdeb45086b1f1587913a2b6f61235b576ba4196",
+          "canonicalCycleSha256": "cf5b3f3932d34bf110e0d7b43fdeb45086b1f1587913a2b6f61235b576ba4196",
+          "canonicalProgramSha256": "27cb75e59e74a28d0e5746e195bfd3f109554a5f25414fc0d70e56c1b62e6030",
+          "sourceIds": [
+            "src-gap-program-wave3-depth-cugb-geology-master-english",
+            "src-gap-program-wave3-depth-cugb-geology-master-english-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-depth-cugb-geology-master-english",
+              "canonicalSourceSha256": "48a5961450906dd9b0490b5249cea10c83c7de9e39d8f046be4a6ecd62d8bf55",
+              "url": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+              "official": true,
+              "role": "official-original-or-attempt"
+            },
+            {
+              "sourceId": "src-gap-program-wave3-depth-cugb-geology-master-english-support-1",
+              "canonicalSourceSha256": "8f93c35e69aa8abb0413172c324d1c48a5c65364f65a5fd75b004115bea70e4f",
+              "url": "https://bm.cugb.edu.cn/gjhzyjl-en/study-in-cugb/admission/",
+              "official": true,
+              "role": "supporting-portal-not-date-proof"
+            }
+          ],
+          "evidenceKey": "cugb-2026-source-with-funding-branches",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": "2026-06-30",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "openingDateEqualityCertified": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "applicableEntryYear": 2026,
+          "storedDeadlineMatchesScopedOfficialDay": true,
+          "applicationScope": "2026self-funded student admission only; matching existing storedJune30day is not a universal scholarship deadline",
+          "deadlineBoundary": "date-only-no-time-stated",
+          "programmeScopeMatch": {
+            "disciplineCode": "0709",
+            "originalName": "Geology",
+            "degree": "master",
+            "language": "English",
+            "evidence": "PDFTable3p10andTable4p11English-mastercheckmark",
+            "visuallyChecked": true
+          },
+          "otherFundingBranchesNotReassigned": true,
+          "reason": "Exact programme, degree, language and2026guide match. Existing storedJune30corresponds to the self-funded branch; retain its scope and do not substitute CSCdates."
+        }
+      ]
+    },
+    {
+      "key": "cug-wuhan-source-now-2027",
+      "universityId": "uni-china-university-of-geosciences-wuhan",
+      "evidenceKey": "cug-wuhan-source-now-2027",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-scws-cug-cgs-high-level-postgraduate-2026",
+          "universityId": "uni-china-university-of-geosciences-wuhan",
+          "programId": null,
+          "programNameZh": "中国地质大学（武汉）2026年中国政府奖学金高水平研究生项目",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionScope": "baseQueue13",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-04",
+          "storedReviewAfter": "2026-09-03",
+          "canonicalRowSha256": "72759941a4351ce20478241f98aa8fd5dc1116e366ebbec0973683b79375c575",
+          "canonicalScholarshipSha256": "72759941a4351ce20478241f98aa8fd5dc1116e366ebbec0973683b79375c575",
+          "sourceIds": [
+            "src-gap-scholarship-mew-scws-cug-cgs-high-level-postgraduate-2026"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-scws-cug-cgs-high-level-postgraduate-2026",
+              "canonicalSourceSha256": "66ee5b26da49208b666bd3c87d1090ac306ceadc45c04e8783dc7c1a776efaf9",
+              "url": "https://eniec.cug.edu.cn/Scholarships/Chinese_Government_Scholarships/High_Level_Postgraduate_Program.htm",
+              "official": true,
+              "role": "official-original-or-attempt"
+            }
+          ],
+          "evidenceKey": "cug-wuhan-source-now-2027",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "openingDateEqualityCertified": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "storedRouteYear": 2026,
+          "currentSourceRouteYear": 2027,
+          "currentSourceMatchesStoredYear": false,
+          "oldStoredDeadlineRevalidated": false,
+          "successorWindowCandidate": {
+            "applicableEntryYear": 2027,
+            "opensOn": "2026-10-16",
+            "deadline": "2027-02-28",
+            "candidateOnly": true,
+            "appliesToStoredRecord": false,
+            "sourceQuote": "October 16th, 2026 – February 28th, 2027",
+            "attachmentYearContext": "2027 CUG Chinese Government Scholarship-High Level Postgraduate Program.pdf"
+          },
+          "storedWindowContext": "Storedawardnameis2026anddeadlineisnull;source2027cannotcertifyit.",
+          "publicationRiskFlags": [
+            "Mutable source URL now has a different admission year.",
+            "Do not roll the old2026row to the2027successor or renew its freshness."
+          ],
+          "reason": "Current original explicitly describes the2027successor, although the canonical source metadata still labels2026. Need an authentic2026original to recheck the assigned old route."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-cug-business-administration-high-level-postgraduate",
+          "universityId": "uni-china-university-of-geosciences-wuhan",
+          "programId": "program-cug-wuhan-business-administration-high-level-postgraduate-master",
+          "programNameZh": "工商管理（高水平研究生奖学金路线）",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionScope": "baseQueue13",
+          "storedOpensOn": "2025-10-25",
+          "storedDeadline": "2026-02-28",
+          "storedDateStatus": "previous-cycle-reference",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-25",
+          "storedReviewAfter": "2026-08-25",
+          "canonicalRowSha256": "2d857a6b70f7d0136a28c463dfba040a6708a5dee719100427e898bf691ada25",
+          "canonicalCycleSha256": "2d857a6b70f7d0136a28c463dfba040a6708a5dee719100427e898bf691ada25",
+          "canonicalProgramSha256": "d422faf8a0aeeee9766c60ce5938c8a052eed12228537782bbdb717ba1ea394f",
+          "sourceIds": [
+            "source-cug-2026-high-level-postgraduate-programs"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "source-cug-2026-high-level-postgraduate-programs",
+              "canonicalSourceSha256": "55a622644112bc378cb5f8d0f2aab77ebfb1f011b4a77178e2b31f6d0b4c327d",
+              "url": "https://eniec.cug.edu.cn/Scholarships/Chinese_Government_Scholarships/High_Level_Postgraduate_Program.htm",
+              "official": true,
+              "role": "official-original-or-attempt"
+            }
+          ],
+          "evidenceKey": "cug-wuhan-source-now-2027",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "openingDateEqualityCertified": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "storedRouteYear": 2026,
+          "currentSourceRouteYear": 2027,
+          "currentSourceMatchesStoredYear": false,
+          "oldStoredDeadlineRevalidated": false,
+          "successorWindowCandidate": {
+            "applicableEntryYear": 2027,
+            "opensOn": "2026-10-16",
+            "deadline": "2027-02-28",
+            "candidateOnly": true,
+            "appliesToStoredRecord": false,
+            "sourceQuote": "October 16th, 2026 – February 28th, 2027",
+            "attachmentYearContext": "2027 CUG Chinese Government Scholarship-High Level Postgraduate Program.pdf"
+          },
+          "storedWindowContext": "Stored2026-02-28isalreadyexpiredbutnotnewlyreconfirmedfromthisreplacedsource.",
+          "publicationRiskFlags": [
+            "Mutable source URL now has a different admission year.",
+            "Do not roll the old2026row to the2027successor or renew its freshness."
+          ],
+          "reason": "Current original explicitly describes the2027successor, although the canonical source metadata still labels2026. Need an authentic2026original to recheck the assigned old route."
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "schoolsAttempted": 7,
+    "recordsAssessed": 14,
+    "baseQueueRecords": 13,
+    "additionalSameSourceRecords": 1,
+    "recordResults": {
+      "closed": 9,
+      "unknown": 4,
+      "blocked": 1
+    },
+    "newExactExpiredDeadlineCandidatesFromCanonicalNull": 6,
+    "existingExpiredDeadlinesScoped": 3,
+    "newOpeningDateCandidatesFromCanonicalNull": 3,
+    "recordsWithDifferentCurrentSourceYear": 2,
+    "unresolvedFundingRouteRecord": 1,
+    "unknownDatesNotClosedByInference": 4,
+    "canonicalWrites": 0,
+    "freshnessRenewals": 0,
+    "fullFactsCertified": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "gitMutations": 0,
+    "sharedStateWrites": 0,
+    "publicationActions": 0
+  },
+  "cooldowns": [
+    {
+      "universityId": "uni-china-jiliang-university",
+      "sourceKeys": [
+        "source-05",
+        "source-06"
+      ],
+      "reason": "Both originals and one bounded fallback each returned412.",
+      "immediateRetryAllowed": false,
+      "retryCondition": "Changed official source/network condition or an explicit later bounded recovery window."
+    }
+  ],
+  "publicationRiskFlags": [
+    "CUGWuhan same URL now carries2027dates; never copy those into either assigned2026record.",
+    "CUGBTypeBMarch15, self-fundedJune30and embassy-controlledTypeAdeadlines are distinct. The new generic doctoral fee-reference row remains unknown.",
+    "ExistingCUGBJune30programme days are checked only within self-funded scope. Full-factstatus and other funding branches are not renewed.",
+    "Closed means this dated application window expired, not that the degree programme was discontinued.",
+    "All candidate dates require narrow independent approval and compare-and-swap before any canonical consumption."
+  ],
+  "validation": {
+    "exactSelectedBaseAndAdditionalIds": 14,
+    "uniqueRecordIds": 14,
+    "recordsStoredOnlyUnderGroupsRecords": true,
+    "rawAndTextShaVerified": true,
+    "canonicalSixFileHashesUnchangedBeforeAfter": true,
+    "originalDateAndProgrammeQuotesChecked": true,
+    "pdfDatesAndCatalogueVisuallyInspected": true,
+    "nullCanonicalFieldsPreserved": true,
+    "noYearRolledForward": true,
+    "noFullFactFreshnessRenewal": true
+  }
+}

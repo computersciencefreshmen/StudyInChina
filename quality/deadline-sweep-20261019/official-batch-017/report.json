@@ -1,0 +1,1676 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-017-20261019",
+  "state": "completed-candidate-scopes-and-access-holds",
+  "completedAt": "2026-10-19T05:46:05.436Z",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v3.json",
+  "queueSha256": "c53dd8358ec2667e6390b2b8b085e50b408854f55c2b20dc8da0f682f3151e6b",
+  "selectionSha256": "dba03eb6520febbec5f86e902b43130d42e2facbe0c033782f1f3381fb362967",
+  "selectionBasis": {
+    "baseQueueRecordCount": 18,
+    "additionalSameSourceRecordCount": 3,
+    "additionalSameSourceRecordIds": [
+      "sch-gap-mve-ecs-cumt-school-scholarship",
+      "sch-gap-sch-mew-ne-upc-university",
+      "cycle-gap-wave3-ctbu-m-business-administration-en-2026-2027-autumn"
+    ],
+    "authorization": "Root explicitly assigned three unaudited exact rows sharing already read official sources; no additional source fetch required."
+  },
+  "scope": "Seven selected schools, eighteen exact queue records plus three explicit root-assigned same-source additions. Twenty-one records stored once under groups.records; no whole-school certification.",
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    }
+  ],
+  "acquisition": {
+    "nativeRequests": 9,
+    "uniqueNativeRequestedUrls": 9,
+    "rawBodiesCaptured": 8,
+    "webFallbacks": "CUPL registered list actual text, its exact linked notice 403; CQMU exact attachment inaccessible",
+    "webSearchDiscoveryUsedAsDateEvidence": false,
+    "rawOriginBytesClaimedForWebText": false,
+    "maxNativeConcurrency": 2,
+    "automaticRetries": 0,
+    "challengeScriptsExecuted": false,
+    "paidModelCalls": 0,
+    "canonicalWrites": 0
+  },
+  "summary": {
+    "schoolsAttempted": 7,
+    "recordsAssessed": 21,
+    "baseQueueRecords": 18,
+    "additionalSameSourceRecords": 3,
+    "admissionCyclesAssessed": 18,
+    "scholarshipsAssessed": 3,
+    "publishedRecordsAssessed": 0,
+    "recordResults": {
+      "unchanged": 0,
+      "corrected": 0,
+      "closed": 7,
+      "unknown": 10,
+      "blocked": 4,
+      "conflict": 0
+    },
+    "newExactDeadlineCandidatesFromCanonicalNull": 3,
+    "alreadyStoredExpiredDatesScoped": 4,
+    "newOpeningCandidates": 2,
+    "openingDatesAssessed": 0,
+    "fullFactsCertified": 0,
+    "wholeSchoolCataloguesCompleted": 0,
+    "canonicalWrites": 0,
+    "sharedProgressWrites": 0,
+    "gitMutations": 0,
+    "publicationActions": 0,
+    "paidModelCalls": 0
+  },
+  "rules": [
+    "All findings are date-only candidate scopes; canonical dates, status and freshness remain unchanged.",
+    "Unknown means no applicable absolute year/date was verified; it does not imply open or closed.",
+    "A closed old intake does not establish programme discontinuation. General, joint-scholarship and school-award deadlines remain distinct.",
+    "Candidate openings remain separate; no canonical-null opening is called verified or unchanged.",
+    "HTTP 200 challenge bodies, programme lists and landing titles are not date evidence. Failed sources are cooled down after the bounded alternative.",
+    "Full canonical record/programme/source objects and their SHA pins are preserved in selection.json."
+  ],
+  "groups": [
+    {
+      "key": "cumt-2026-masters",
+      "universityId": "uni-china-university-of-mining-and-technology",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "2026 autumn degree applicant window, limited here to exact English masters 080800电气工程 and 083700安全科学与工程.",
+      "yearBasis": "Application-conditions notice explicitly prints 2026 endpoints. Current linked master catalogue independently supplies exact Chinese subject/code and English-medium degree context; catalogue itself does not print an admission year.",
+      "notes": [
+        "Original registered PDF is only an undergraduate programme list and is NOT treated as master/date evidence. The registered application-conditions source independently supplies the 2026 general degree window.",
+        "The linked master catalogue supplies programme identity only; it does not supply a deadline or claim 2026 wording. Electrical Engineering is printed Electronical Engineering in its English translation; Chinese name and code are exact.",
+        "This is the general degree application period, not an independently verified school-scholarship deadline."
+      ],
+      "evidence": [
+        {
+          "key": "cumt",
+          "url": "https://sac.cumt.edu.cn/__local/8/0B/3F/BA9E99ADCC96D8B30C103D5F3E1_1CDB0EB7_2B876.pdf",
+          "observedAt": "2026-10-19T05:41:00.460433+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://sac.cumt.edu.cn/__local/8/0B/3F/BA9E99ADCC96D8B30C103D5F3E1_1CDB0EB7_2B876.pdf",
+          "contentType": "application/pdf",
+          "bodyPath": "cumt.pdf",
+          "bytes": 178294,
+          "bodySha256": "bfa5467559ae802b6829e1d7f8cdf9577654a12d38222a3b2a20f0136f1d5631",
+          "textArtifact": {
+            "path": "cumt.txt",
+            "sha256": "f898ff8fc71d64e17c2f63b4805adec91cfc4fbbf041cf4cf6d09e8cfa93ae2f",
+            "bytes": 2887
+          }
+        },
+        {
+          "key": "cumt-application",
+          "url": "https://sac.cumt.edu.cn/zsgl/sqtj.htm",
+          "observedAt": "2026-10-19T05:42:27.986000+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://sac.cumt.edu.cn/zsgl/sqtj.htm",
+          "contentType": "text/html",
+          "bodyPath": "cumt-application.html",
+          "bytes": 40438,
+          "bodySha256": "08e124d7dbf37eafb83270e9938d07d4c180d19a966a380c96418cdd957cfe9f",
+          "textPath": "cumt-application.txt",
+          "textArtifact": {
+            "path": "cumt-application.txt",
+            "sha256": "35f7ae7b1c95d9af66bb4271066121e1d807adf4e5da3dc1f27c98536540db89",
+            "bytes": 4595
+          }
+        },
+        {
+          "key": "cumt-master-catalogue",
+          "url": "https://sac.cumt.edu.cn/zsgl/zozy/ssywskzy.htm",
+          "observedAt": "2026-10-19T05:44:12.485461+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://sac.cumt.edu.cn/zsgl/zozy/ssywskzy.htm",
+          "contentType": "text/html",
+          "bodyPath": "cumt-master-catalogue.html",
+          "bytes": 62262,
+          "bodySha256": "f34ec91892bca964973d5ca697f04c42bea505247286c7219a054fe357d58c1e",
+          "textPath": "cumt-master-catalogue.txt",
+          "textArtifact": {
+            "path": "cumt-master-catalogue.txt",
+            "sha256": "60ef478b99fd2beb654f4ad6252dd7d92ac1eb07b5702c7ab118dbb9e52ffecb",
+            "bytes": 3797
+          }
+        }
+      ],
+      "failureArtifacts": [],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecs-cumt-electrical-engineering-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-china-university-of-mining-and-technology",
+          "programId": "prog-gap-mve-ecs-cumt-electrical-engineering-master",
+          "degreeLevel": "master",
+          "programmeNameZh": "电气工程",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-07-10",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-03-01",
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "7b672cb0e22721bb1f06a1c384f9ad027b71a73de447154518726c7630ad94fe",
+          "canonicalCycleSha256": "7b672cb0e22721bb1f06a1c384f9ad027b71a73de447154518726c7630ad94fe",
+          "canonicalProgramSha256": "c12706832049367c403eb5839327f4f4f6e0b83dd436c97620e9eaa39b0fe66d",
+          "sourceIds": [
+            "src-gap-program-mve-ecs-cumt-electrical-engineering-master",
+            "src-gap-program-mve-ecs-cumt-electrical-engineering-master-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecs-cumt-electrical-engineering-master",
+              "sourceSha256": "7e38412263714f1d1fda55b27a62ee90d85b3a4c655d2ef9a95c2c9b90ed26fa",
+              "url": "https://sac.cumt.edu.cn/__local/8/0B/3F/BA9E99ADCC96D8B30C103D5F3E1_1CDB0EB7_2B876.pdf",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-mve-ecs-cumt-electrical-engineering-master-support-1",
+              "sourceSha256": "69e0427bfd72ee07be730ebb287ce310b1a0a1506f7414e9fb092c5c749baadc",
+              "url": "https://sac.cumt.edu.cn/zsgl/sqtj.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://sac.cumt.edu.cn/zsgl/sqtj.htm",
+          "evidenceBodySha256": "08e124d7dbf37eafb83270e9938d07d4c180d19a966a380c96418cdd957cfe9f",
+          "observedAt": "2026-10-19T05:42:27.986000+00:00",
+          "quote": "秋季（学历项目、一学年中文培训项目）：2026-3-1至2026-7-10",
+          "evidenceLocator": "Registered 申请条件 page 二、申请时间; programme context comes from its directly linked English master catalogue.",
+          "scope": "2026 autumn degree applicant window, limited here to exact English masters 080800电气工程 and 083700安全科学与工程.",
+          "yearBasis": "Application-conditions notice explicitly prints 2026 endpoints. Current linked master catalogue independently supplies exact Chinese subject/code and English-medium degree context; catalogue itself does not print an admission year.",
+          "crossSourceProgrammeContext": true,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "programmeIdentityEvidence": {
+            "url": "https://sac.cumt.edu.cn/zsgl/zozy/ssywskzy.htm",
+            "bodySha256": "f34ec91892bca964973d5ca697f04c42bea505247286c7219a054fe357d58c1e",
+            "code": "080800",
+            "chineseName": "电气工程",
+            "originalEnglishName": "Electronical Engineering",
+            "explicitCatalogueYear": null
+          }
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecs-cumt-safety-science-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-china-university-of-mining-and-technology",
+          "programId": "prog-gap-mve-ecs-cumt-safety-science-master",
+          "degreeLevel": "master",
+          "programmeNameZh": "安全科学与工程",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-07-10",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-03-01",
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "0e39bb9a1e303b99a238e9c2b05b5b91d5c683a4679328b6976cf285d21c825a",
+          "canonicalCycleSha256": "0e39bb9a1e303b99a238e9c2b05b5b91d5c683a4679328b6976cf285d21c825a",
+          "canonicalProgramSha256": "b31f3f8a1a3c9eaa646263411ace74a6135bcfa4876a1071632be25fb9f28d33",
+          "sourceIds": [
+            "src-gap-program-mve-ecs-cumt-safety-science-master",
+            "src-gap-program-mve-ecs-cumt-safety-science-master-support-1",
+            "src-gap-program-mve-ecs-cumt-safety-science-master-support-2"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecs-cumt-safety-science-master",
+              "sourceSha256": "d7fa52c04c98293a0565032a5e837fce986150c9ad8f8df88b9f67371b9bbb1d",
+              "url": "https://sac.cumt.edu.cn/__local/8/0B/3F/BA9E99ADCC96D8B30C103D5F3E1_1CDB0EB7_2B876.pdf",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-mve-ecs-cumt-safety-science-master-support-1",
+              "sourceSha256": "c14fa848c2671ad985da298cb206c6f83506faca2beccbdc6e0e2bc250688dfe",
+              "url": "https://sac.cumt.edu.cn/zsgl/sqtj.htm",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-mve-ecs-cumt-safety-science-master-support-2",
+              "sourceSha256": "d4004221d8c8c85e605511aa0efd343965ab6e8d891a0f8b9fa2e6f400ba0116",
+              "url": "https://sac.cumt.edu.cn/en/ADMISSION/Fee_Schorlarship.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://sac.cumt.edu.cn/zsgl/sqtj.htm",
+          "evidenceBodySha256": "08e124d7dbf37eafb83270e9938d07d4c180d19a966a380c96418cdd957cfe9f",
+          "observedAt": "2026-10-19T05:42:27.986000+00:00",
+          "quote": "秋季（学历项目、一学年中文培训项目）：2026-3-1至2026-7-10",
+          "evidenceLocator": "Registered 申请条件 page 二、申请时间; programme context comes from its directly linked English master catalogue.",
+          "scope": "2026 autumn degree applicant window, limited here to exact English masters 080800电气工程 and 083700安全科学与工程.",
+          "yearBasis": "Application-conditions notice explicitly prints 2026 endpoints. Current linked master catalogue independently supplies exact Chinese subject/code and English-medium degree context; catalogue itself does not print an admission year.",
+          "crossSourceProgrammeContext": true,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "programmeIdentityEvidence": {
+            "url": "https://sac.cumt.edu.cn/zsgl/zozy/ssywskzy.htm",
+            "bodySha256": "f34ec91892bca964973d5ca697f04c42bea505247286c7219a054fe357d58c1e",
+            "code": "083700",
+            "chineseName": "安全科学与工程",
+            "originalEnglishName": "Safety Science and Engineering",
+            "explicitCatalogueYear": null
+          }
+        }
+      ]
+    },
+    {
+      "key": "cumt-school-award-unresolved",
+      "universityId": "uni-china-university-of-mining-and-technology",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "School scholarship requires its own application deadline; no award cutoff is established by the already-read general admission sources.",
+      "yearBasis": "General admissions 2026 year is not award-deadline evidence.",
+      "notes": [
+        "Added by root as one exact same-source follow-up row. No additional award-page fetch was required or claimed. Official award deadline remains unknown; general July 10 is not copied into it."
+      ],
+      "evidence": [
+        {
+          "key": "cumt-application",
+          "url": "https://sac.cumt.edu.cn/zsgl/sqtj.htm",
+          "observedAt": "2026-10-19T05:42:27.986000+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://sac.cumt.edu.cn/zsgl/sqtj.htm",
+          "contentType": "text/html",
+          "bodyPath": "cumt-application.html",
+          "bytes": 40438,
+          "bodySha256": "08e124d7dbf37eafb83270e9938d07d4c180d19a966a380c96418cdd957cfe9f",
+          "textPath": "cumt-application.txt",
+          "textArtifact": {
+            "path": "cumt-application.txt",
+            "sha256": "35f7ae7b1c95d9af66bb4271066121e1d807adf4e5da3dc1f27c98536540db89",
+            "bytes": 4595
+          }
+        }
+      ],
+      "failureArtifacts": [],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecs-cumt-school-scholarship",
+          "universityId": "uni-china-university-of-mining-and-technology",
+          "programId": null,
+          "degreeLevel": null,
+          "programmeNameZh": "中国矿业大学校级奖学金",
+          "academicYear": null,
+          "intake": null,
+          "selectionReason": "additional-same-source-root-assignment",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-relative-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "93548d563d2e3928520cbde376cdb4d211d7eab65676a077840fd05e44cd5706",
+          "canonicalScholarshipSha256": "93548d563d2e3928520cbde376cdb4d211d7eab65676a077840fd05e44cd5706",
+          "sourceIds": [
+            "src-gap-scholarship-mve-ecs-cumt-school-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecs-cumt-school-scholarship",
+              "sourceSha256": "f20b9fc9768eb589b2c2075b38790b5aa32204e575c31e63ad6a6098ac26eb74",
+              "url": "https://sac.cumt.edu.cn/en/ADMISSION/Fee_Schorlarship.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://sac.cumt.edu.cn/zsgl/sqtj.htm",
+          "evidenceBodySha256": "08e124d7dbf37eafb83270e9938d07d4c180d19a966a380c96418cdd957cfe9f",
+          "observedAt": "2026-10-19T05:42:27.986000+00:00",
+          "quote": null,
+          "evidenceLocator": "Same-school general 申请条件 notice read; separate registered school-award fee notice was not freshly read in this batch.",
+          "scope": "School scholarship requires its own application deadline; no award cutoff is established by the already-read general admission sources.",
+          "yearBasis": "General admissions 2026 year is not award-deadline evidence.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        }
+      ]
+    },
+    {
+      "key": "cumtb-2026-no-deadline",
+      "universityId": "uni-china-university-of-mining-and-technology-beijing",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Existing 2026–2027 Chinese-medium bachelor fee-reference rows; actual guide has requirements, materials, fees and scholarship links, without a general applicant cutoff.",
+      "yearBasis": "2026 is explicit but no applicable general application date is stated.",
+      "notes": [
+        "CSC high-level postgraduate linked notice has a different level/award route and is not substituted for bachelor admission. No webpage publication date or programme-table image is treated as a deadline."
+      ],
+      "evidence": [
+        {
+          "key": "cumtb",
+          "url": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+          "observedAt": "2026-10-19T05:41:00.461714+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+          "contentType": "text/html",
+          "bodyPath": "cumtb.html",
+          "bytes": 20074,
+          "bodySha256": "25405f04a568a48f59b95451a40b06518c7b2ab0ab3e02e7532f73220221492e",
+          "textPath": "cumtb.txt",
+          "textArtifact": {
+            "path": "cumtb.txt",
+            "sha256": "2f821e96e415c9fe3449a2d73d480cd8da2902b68266b6e26a902698a1be6845",
+            "bytes": 4072
+          }
+        }
+      ],
+      "failureArtifacts": [],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave5-depth-cumtb-artificial-intelligence-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-china-university-of-mining-and-technology-beijing",
+          "programId": "prog-gap-wave5-depth-cumtb-artificial-intelligence-bachelor",
+          "degreeLevel": "bachelor",
+          "programmeNameZh": "人工智能（本科）",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-relative-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "05a69f7c3fb37542efbb37945c09f38b5eaffe00839669d5e9f66127de71ef6c",
+          "canonicalCycleSha256": "05a69f7c3fb37542efbb37945c09f38b5eaffe00839669d5e9f66127de71ef6c",
+          "canonicalProgramSha256": "14f59c09a792b83657620bd46442efe82f549cf0be0211cfb028f49bd9ce46dc",
+          "sourceIds": [
+            "src-gap-program-wave5-depth-cumtb-artificial-intelligence-bachelor",
+            "src-gap-program-wave5-depth-cumtb-artificial-intelligence-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave5-depth-cumtb-artificial-intelligence-bachelor",
+              "sourceSha256": "5ea86c3a741b1e87ec9ef2dc8573d7cc32932adce0e9fa5e7208debcc0c74cf6",
+              "url": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-wave5-depth-cumtb-artificial-intelligence-bachelor-support-1",
+              "sourceSha256": "02aff75577bfe9f1557abf5988e633af6c7632f715f3838338fe6afeb41770af",
+              "url": "https://international.cumtb.edu.cn/virtual_attach_file.vsb?afc=AMNC14nmUsozLsLm47ZMRrVoz7YUzQN7U4CbU49ZnRU4olC0gihFp2hmCIa0LShVn1h2L1yPn77bnznfLm7ZMln7Lll8ozMVL8QkL7-ZnRMFnlr2LNQfoRTFMlUDUYbaptveo4OeQDX/pdTw_tL0qIbtpYyPLRLsg4U8M4LJqdTnx&oid=1385918509&tid=1037&nid=4473&e=.png",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+          "evidenceBodySha256": "25405f04a568a48f59b95451a40b06518c7b2ab0ab3e02e7532f73220221492e",
+          "observedAt": "2026-10-19T05:41:00.461714+00:00",
+          "quote": "2026年中国矿业大学（北京）来华留学生招生简章（中文授课）",
+          "evidenceLocator": "Actual complete 2026 guide body sections 一–五.",
+          "scope": "Existing 2026–2027 Chinese-medium bachelor fee-reference rows; actual guide has requirements, materials, fees and scholarship links, without a general applicant cutoff.",
+          "yearBasis": "2026 is explicit but no applicable general application date is stated.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave5-depth-cumtb-computer-science-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-china-university-of-mining-and-technology-beijing",
+          "programId": "prog-gap-wave5-depth-cumtb-computer-science-bachelor",
+          "degreeLevel": "bachelor",
+          "programmeNameZh": "计算机科学与技术（本科）",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-relative-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "0c0c47b2dd6fe988bd03bf04f76afb49f283c96c26939b1c7adbc3af27fd2a45",
+          "canonicalCycleSha256": "0c0c47b2dd6fe988bd03bf04f76afb49f283c96c26939b1c7adbc3af27fd2a45",
+          "canonicalProgramSha256": "f9f516cf10c79f0995f09755c2fd8c44c72ad697ad26dd81c017e058f77150a2",
+          "sourceIds": [
+            "src-gap-program-wave5-depth-cumtb-computer-science-bachelor",
+            "src-gap-program-wave5-depth-cumtb-computer-science-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave5-depth-cumtb-computer-science-bachelor",
+              "sourceSha256": "478a01ab24f6673399c4c174c10e76498f382578ea8013aa898403043eaa1db1",
+              "url": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-wave5-depth-cumtb-computer-science-bachelor-support-1",
+              "sourceSha256": "4d6b092632acf19e25e51caff7625012140f0082757616d19574a0639054a19a",
+              "url": "https://international.cumtb.edu.cn/virtual_attach_file.vsb?afc=AMNC14nmUsozLsLm47ZMRrVoz7YUzQN7U4CbU49ZnRU4olC0gihFp2hmCIa0LShVn1h2L1yPn77bnznfLm7ZMln7Lll8ozMVL8QkL7-ZnRMFnlr2LNQfoRTFMlUDUYbaptveo4OeQDX/pdTw_tL0qIbtpYyPLRLsg4U8M4LJqdTnx&oid=1385918509&tid=1037&nid=4473&e=.png",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+          "evidenceBodySha256": "25405f04a568a48f59b95451a40b06518c7b2ab0ab3e02e7532f73220221492e",
+          "observedAt": "2026-10-19T05:41:00.461714+00:00",
+          "quote": "2026年中国矿业大学（北京）来华留学生招生简章（中文授课）",
+          "evidenceLocator": "Actual complete 2026 guide body sections 一–五.",
+          "scope": "Existing 2026–2027 Chinese-medium bachelor fee-reference rows; actual guide has requirements, materials, fees and scholarship links, without a general applicant cutoff.",
+          "yearBasis": "2026 is explicit but no applicable general application date is stated.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave5-depth-cumtb-mining-engineering-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-china-university-of-mining-and-technology-beijing",
+          "programId": "prog-gap-wave5-depth-cumtb-mining-engineering-bachelor",
+          "degreeLevel": "bachelor",
+          "programmeNameZh": "采矿工程（本科）",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-relative-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "d40b94e0fd1d2ecbbfa50e2ecdb69bfa05dcdc9cd89c7c706ce4d1b10de1e9a3",
+          "canonicalCycleSha256": "d40b94e0fd1d2ecbbfa50e2ecdb69bfa05dcdc9cd89c7c706ce4d1b10de1e9a3",
+          "canonicalProgramSha256": "99d91953e5ee808aa22d81e2f06268fa83866fb6cabb2ca5368d41e761e51664",
+          "sourceIds": [
+            "src-gap-program-wave5-depth-cumtb-mining-engineering-bachelor",
+            "src-gap-program-wave5-depth-cumtb-mining-engineering-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave5-depth-cumtb-mining-engineering-bachelor",
+              "sourceSha256": "1c37d43288fd6b508b75d5ee3b7596ff82e87c9cb6a29bd6799196d919e563c9",
+              "url": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-wave5-depth-cumtb-mining-engineering-bachelor-support-1",
+              "sourceSha256": "0b4655753026a0bc128ce5cbb1957740737195e25ca0209338b741a51cd4ee8e",
+              "url": "https://international.cumtb.edu.cn/virtual_attach_file.vsb?afc=AMNC14nmUsozLsLm47ZMRrVoz7YUzQN7U4CbU49ZnRU4olC0gihFp2hmCIa0LShVn1h2L1yPn77bnznfLm7ZMln7Lll8ozMVL8QkL7-ZnRMFnlr2LNQfoRTFMlUDUYbaptveo4OeQDX/pdTw_tL0qIbtpYyPLRLsg4U8M4LJqdTnx&oid=1385918509&tid=1037&nid=4473&e=.png",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://international.cumtb.edu.cn/info/1037/4473.htm",
+          "evidenceBodySha256": "25405f04a568a48f59b95451a40b06518c7b2ab0ab3e02e7532f73220221492e",
+          "observedAt": "2026-10-19T05:41:00.461714+00:00",
+          "quote": "2026年中国矿业大学（北京）来华留学生招生简章（中文授课）",
+          "evidenceLocator": "Actual complete 2026 guide body sections 一–五.",
+          "scope": "Existing 2026–2027 Chinese-medium bachelor fee-reference rows; actual guide has requirements, materials, fees and scholarship links, without a general applicant cutoff.",
+          "yearBasis": "2026 is explicit but no applicable general application date is stated.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        }
+      ]
+    },
+    {
+      "key": "upc-relative-date-table",
+      "universityId": "uni-china-university-of-petroleum-east-china",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Four existing degree/language/foundation autumn fee-reference cycles and one separately added school award.",
+      "yearBasis": "Source says 次年 / next year without a base year. No absolute 2026 application window is established.",
+      "notes": [
+        "General table ends next-year May 31, while school-award row says next-year May 15. These are different route scopes and not interchangeable.",
+        "ICLT rows in the same table refer to different awards and are not assigned to these five records. Current portal availability and target intake year are unverified."
+      ],
+      "evidence": [
+        {
+          "key": "upc",
+          "url": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+          "observedAt": "2026-10-19T05:41:04.245341+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+          "contentType": "text/html",
+          "bodyPath": "upc.html",
+          "bytes": 59437,
+          "bodySha256": "33cf5ec9f77211d3d3d5c5032bbff1d9ede80c7ef4dbc78caa0e52b3211cff68",
+          "textPath": "upc.txt",
+          "textArtifact": {
+            "path": "upc.txt",
+            "sha256": "19788451a28a0c2f10b607bc7116f31eff0f1fd8b182c77a02c03d1d654bdce5",
+            "bytes": 2335
+          }
+        }
+      ],
+      "failureArtifacts": [],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-upc-chemical-engineering-master-en-2026-2027-autumn-fee-reference",
+          "universityId": "uni-china-university-of-petroleum-east-china",
+          "programId": "prog-gap-prog-mew-ne-upc-chemical-engineering-master-en",
+          "degreeLevel": "master",
+          "programmeNameZh": "化学工程与技术",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-relative-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "336ee4675165aa2e744e4bf7e585a53285be9a12bcf60809a812866d4bccff42",
+          "canonicalCycleSha256": "336ee4675165aa2e744e4bf7e585a53285be9a12bcf60809a812866d4bccff42",
+          "canonicalProgramSha256": "29438b25dda1fb46d021008d098a1dd700ab0b84d6cc7eaaef8b6b36ecd89df0",
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-upc-chemical-engineering-master-en",
+            "src-gap-program-prog-mew-ne-upc-chemical-engineering-master-en-support-1",
+            "src-gap-program-prog-mew-ne-upc-chemical-engineering-master-en-support-2"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-upc-chemical-engineering-master-en",
+              "sourceSha256": "0f4e30a24a5c1b52369150d5af46086cfa0dd2694bbc4e60094f4a5169012ea9",
+              "url": "https://cie.upc.edu.cn/admission_cn/xxzy/sszy1/ywsk.htm",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-upc-chemical-engineering-master-en-support-1",
+              "sourceSha256": "680c93bd9bd046419baa23ea0b0516e98280cca7b504731a00313b88cf44b5b2",
+              "url": "https://cie.upc.edu.cn/admission_cn/lxsq/fysm.htm",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-upc-chemical-engineering-master-en-support-2",
+              "sourceSha256": "98ce807eddd75282d7b171723091bcbabbc33fa3961c78c134088e3ced9c0d2f",
+              "url": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+          "evidenceBodySha256": "33cf5ec9f77211d3d3d5c5032bbff1d9ede80c7ef4dbc78caa0e52b3211cff68",
+          "observedAt": "2026-10-19T05:41:04.245341+00:00",
+          "quote": "秋季学期 次年9月-次年12月 次年3月15日 次年5月31日",
+          "evidenceLocator": "Actual 申请时间 page, first table general application window; second table separate school scholarship row.",
+          "scope": "Four existing degree/language/foundation autumn fee-reference cycles and one separately added school award.",
+          "yearBasis": "Source says 次年 / next year without a base year. No absolute 2026 application window is established.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "candidateRecurringWindow": {
+            "scope": "general autumn applications",
+            "applicationYear": null,
+            "opensOnMonthDay": "03-15",
+            "deadlineMonthDay": "05-31",
+            "wording": "次年3月15日至次年5月31日"
+          }
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-upc-chinese-language-semester-2026-2027-autumn-fee-reference",
+          "universityId": "uni-china-university-of-petroleum-east-china",
+          "programId": "prog-gap-prog-mew-ne-upc-chinese-language-semester",
+          "degreeLevel": "language",
+          "programmeNameZh": "汉语言课程（一学期）",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-relative-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "4cc47dc19aee143304f617f789eb95bd3afb7e899996f7a41f086f578fff27b3",
+          "canonicalCycleSha256": "4cc47dc19aee143304f617f789eb95bd3afb7e899996f7a41f086f578fff27b3",
+          "canonicalProgramSha256": "f10ae7246c04ea8c28a3be362cae5f9f10cf2f259e4fc1856879032539e48cdb",
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-upc-chinese-language-semester",
+            "src-gap-program-prog-mew-ne-upc-chinese-language-semester-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-upc-chinese-language-semester",
+              "sourceSha256": "f9b81aa3ac5c69fd6d724677776cc69a7be6a7e160567a965b06ad1cd77f1a29",
+              "url": "https://cie.upc.edu.cn/admission_cn/xxzy/hyykc.htm",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-upc-chinese-language-semester-support-1",
+              "sourceSha256": "4cb52c352389726fad194df46fba64edf7aeabf369e309fb812a9ba77af229d2",
+              "url": "https://cie.upc.edu.cn/admission_cn/lxsq/fysm.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+          "evidenceBodySha256": "33cf5ec9f77211d3d3d5c5032bbff1d9ede80c7ef4dbc78caa0e52b3211cff68",
+          "observedAt": "2026-10-19T05:41:04.245341+00:00",
+          "quote": "秋季学期 次年9月-次年12月 次年3月15日 次年5月31日",
+          "evidenceLocator": "Actual 申请时间 page, first table general application window; second table separate school scholarship row.",
+          "scope": "Four existing degree/language/foundation autumn fee-reference cycles and one separately added school award.",
+          "yearBasis": "Source says 次年 / next year without a base year. No absolute 2026 application window is established.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "candidateRecurringWindow": {
+            "scope": "general autumn applications",
+            "applicationYear": null,
+            "opensOnMonthDay": "03-15",
+            "deadlineMonthDay": "05-31",
+            "wording": "次年3月15日至次年5月31日"
+          }
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-upc-foundation-semester-2026-2027-autumn-fee-reference",
+          "universityId": "uni-china-university-of-petroleum-east-china",
+          "programId": "prog-gap-prog-mew-ne-upc-foundation-semester",
+          "degreeLevel": "foundation",
+          "programmeNameZh": "大学预科课程",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-relative-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "86f5447c2ad0fe852c10584a3672c592790029dd948481297b0328026cf77889",
+          "canonicalCycleSha256": "86f5447c2ad0fe852c10584a3672c592790029dd948481297b0328026cf77889",
+          "canonicalProgramSha256": "99ec9c8f0933ad77cd23c9e57015ebc8aaa397ededac2481e690310ebafd20fb",
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-upc-foundation-semester",
+            "src-gap-program-prog-mew-ne-upc-foundation-semester-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-upc-foundation-semester",
+              "sourceSha256": "ce151474afdf0f9c5e7a10bd8895a702ce3bfa708b72f7301155edc401c75aff",
+              "url": "https://cie.upc.edu.cn/admission_cn/xxzy/ykkc.htm",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-upc-foundation-semester-support-1",
+              "sourceSha256": "7186aaa3d081267f9456cd8556d3fba86b6aa661e942b80e475c5d18f459237a",
+              "url": "https://cie.upc.edu.cn/admission_cn/lxsq/fysm.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+          "evidenceBodySha256": "33cf5ec9f77211d3d3d5c5032bbff1d9ede80c7ef4dbc78caa0e52b3211cff68",
+          "observedAt": "2026-10-19T05:41:04.245341+00:00",
+          "quote": "秋季学期 次年9月-次年12月 次年3月15日 次年5月31日",
+          "evidenceLocator": "Actual 申请时间 page, first table general application window; second table separate school scholarship row.",
+          "scope": "Four existing degree/language/foundation autumn fee-reference cycles and one separately added school award.",
+          "yearBasis": "Source says 次年 / next year without a base year. No absolute 2026 application window is established.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "candidateRecurringWindow": {
+            "scope": "general autumn applications",
+            "applicationYear": null,
+            "opensOnMonthDay": "03-15",
+            "deadlineMonthDay": "05-31",
+            "wording": "次年3月15日至次年5月31日"
+          }
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-upc-petroleum-engineering-bachelor-en-2026-2027-autumn-fee-reference",
+          "universityId": "uni-china-university-of-petroleum-east-china",
+          "programId": "program-china-university-of-petroleum-east-china-petroleum-engineering-bachelor",
+          "degreeLevel": "bachelor",
+          "programmeNameZh": "石油工程",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-relative-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "0792384a84603229f3541335f82fc73c587458970e58b3f2d52f7a222e072ff4",
+          "canonicalCycleSha256": "0792384a84603229f3541335f82fc73c587458970e58b3f2d52f7a222e072ff4",
+          "canonicalProgramSha256": "df934e78a3bb8ec5bd9b6e3696b0599823d7d007e313d6fa77425a3307e58126",
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-upc-petroleum-engineering-bachelor-en",
+            "src-gap-program-prog-mew-ne-upc-petroleum-engineering-bachelor-en-support-1",
+            "src-gap-program-prog-mew-ne-upc-petroleum-engineering-bachelor-en-support-2"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-upc-petroleum-engineering-bachelor-en",
+              "sourceSha256": "e93fd69a1f6a7acb677c863cf509b0be84408c03fd813f9c8bc8cdd5c926e118",
+              "url": "https://cie.upc.edu.cn/admission_cn/xxzy/bkzy1/ywsk.htm",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-upc-petroleum-engineering-bachelor-en-support-1",
+              "sourceSha256": "c0d96e7be50b26ea4073d0ffa5f8c8b57c7fac77fc63d80ce983cac3a1d58345",
+              "url": "https://cie.upc.edu.cn/admission_cn/lxsq/fysm.htm",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-upc-petroleum-engineering-bachelor-en-support-2",
+              "sourceSha256": "7934a3fc3f33a0964d34d8cd2c2d73a5a052688d4e6f1ffb139fd18de41c667e",
+              "url": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+          "evidenceBodySha256": "33cf5ec9f77211d3d3d5c5032bbff1d9ede80c7ef4dbc78caa0e52b3211cff68",
+          "observedAt": "2026-10-19T05:41:04.245341+00:00",
+          "quote": "秋季学期 次年9月-次年12月 次年3月15日 次年5月31日",
+          "evidenceLocator": "Actual 申请时间 page, first table general application window; second table separate school scholarship row.",
+          "scope": "Four existing degree/language/foundation autumn fee-reference cycles and one separately added school award.",
+          "yearBasis": "Source says 次年 / next year without a base year. No absolute 2026 application window is established.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "candidateRecurringWindow": {
+            "scope": "general autumn applications",
+            "applicationYear": null,
+            "opensOnMonthDay": "03-15",
+            "deadlineMonthDay": "05-31",
+            "wording": "次年3月15日至次年5月31日"
+          }
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-ne-upc-university",
+          "universityId": "uni-china-university-of-petroleum-east-china",
+          "programId": null,
+          "degreeLevel": null,
+          "programmeNameZh": "中国石油大学（华东）奖学金",
+          "academicYear": null,
+          "intake": null,
+          "selectionReason": "additional-same-source-root-assignment",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-relative-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "1eb5f5c6c19434380a16106ae4e1abba9263e27d8aad4810847e713f5385f8e8",
+          "canonicalScholarshipSha256": "1eb5f5c6c19434380a16106ae4e1abba9263e27d8aad4810847e713f5385f8e8",
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-ne-upc-university",
+            "src-gap-scholarship-sch-mew-ne-upc-university-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-ne-upc-university",
+              "sourceSha256": "4b802f3c63512b873c674cf2ca82390581daf3ff8a3a6c57345c36880ad39257",
+              "url": "https://cie.upc.edu.cn/admission_cn/info/1266/1431.htm",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-ne-upc-university-support-1",
+              "sourceSha256": "068c56b5c0acc09ffe76cfa1bb1cdc535dd82887fdc25ddedf5bee8729d58042",
+              "url": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+          "evidenceBodySha256": "33cf5ec9f77211d3d3d5c5032bbff1d9ede80c7ef4dbc78caa0e52b3211cff68",
+          "observedAt": "2026-10-19T05:41:04.245341+00:00",
+          "quote": "秋季学期 次年9月-次年12月 次年3月15日 次年5月31日",
+          "evidenceLocator": "Actual 申请时间 page, first table general application window; second table separate school scholarship row.",
+          "scope": "Four existing degree/language/foundation autumn fee-reference cycles and one separately added school award.",
+          "yearBasis": "Source says 次年 / next year without a base year. No absolute 2026 application window is established.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "candidateRecurringWindow": {
+            "scope": "school-award degree entrants",
+            "applicationYear": null,
+            "opensOnMonthDay": "03-15",
+            "deadlineMonthDay": "05-15",
+            "wording": "次年3月15日至次年5月15日"
+          }
+        }
+      ]
+    },
+    {
+      "key": "cupl-exact-notice-blocked",
+      "universityId": "uni-china-university-of-political-science-and-law",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Exact 2025–2026 autumn Chinese language cycle; no full notice deadline was accessible.",
+      "yearBasis": "A listing title/year is not full guide date evidence.",
+      "notes": [
+        "No challenge script POST was executed or captcha bypassed. Full notice is held and cooled down.",
+        "Web fallback text may be cached and contains only discovery/list evidence, not an actual applicable deadline."
+      ],
+      "evidence": [
+        {
+          "key": "cupl",
+          "url": "https://sis.cupl.edu.cn/lhlx/hydqpx.htm",
+          "observedAt": "2026-10-19T05:41:05.659478+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://sis.cupl.edu.cn/lhlx/hydqpx.htm",
+          "contentType": "text/html; charset=utf-8",
+          "bodyPath": "cupl.html",
+          "bytes": 2329,
+          "bodySha256": "77c74ff63a04fda7b17b69822735f75c6d8441cf5d14d2ab4ceac24ae4682a94",
+          "textPath": "cupl.txt",
+          "textArtifact": {
+            "path": "cupl.txt",
+            "sha256": "2d5dcdc06b5975e9794ff5bb4cf263d95e0e334879e530ffe0251496af78eac0",
+            "bytes": 20
+          }
+        }
+      ],
+      "failureArtifacts": [
+        {
+          "path": "web-fallback-failures.json",
+          "sha256": "89c5d3c228a151684cf4e1f3382778e3c2c436ad2fe455c674fadf8a7457dde5",
+          "bytes": 981
+        },
+        {
+          "path": "cupl-list-web-observation.json",
+          "sha256": "a5b7c04afa3f8a6596e20213ba2ec3ed180b58c16a431a7eb80d3da9f55377bb",
+          "bytes": 3695
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-cupl-chinese-language-2025-2026-autumn",
+          "universityId": "uni-china-university-of-political-science-and-law",
+          "programId": "prog-gap-prog-mew-nss-cupl-chinese-language",
+          "degreeLevel": "language",
+          "programmeNameZh": "汉语进修项目",
+          "academicYear": "2025-2026",
+          "intake": "autumn",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-relative-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "2cd66d12db901413642913976bf53ed072d6dc889439f9df6ff22a80a467a84b",
+          "canonicalCycleSha256": "2cd66d12db901413642913976bf53ed072d6dc889439f9df6ff22a80a467a84b",
+          "canonicalProgramSha256": "05c4e00ed91e2db498be588c7b92520b542343238e0ea7d6bb0c453b423abc66",
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-cupl-chinese-language"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-cupl-chinese-language",
+              "sourceSha256": "fa804553fb1b93d0690a505c4005ae1e11e1e8a7afd794e2138b32ad9f5fe3b4",
+              "url": "https://sis.cupl.edu.cn/lhlx/hydqpx.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://sis.cupl.edu.cn/lhlx/hydqpx.htm",
+          "evidenceBodySha256": "77c74ff63a04fda7b17b69822735f75c6d8441cf5d14d2ab4ceac24ae4682a94",
+          "observedAt": "2026-10-19T05:41:05.659478+00:00",
+          "quote": null,
+          "evidenceLocator": "Native registered page returned only a script challenge; one web fallback displayed a notice list, then exact linked 2025–2026 guide /info/1020/3105.htm returned 403.",
+          "scope": "Exact 2025–2026 autumn Chinese language cycle; no full notice deadline was accessible.",
+          "yearBasis": "A listing title/year is not full guide date evidence.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        }
+      ]
+    },
+    {
+      "key": "cqmu-exact-attachment-blocked",
+      "universityId": "uni-chongqing-medical-university",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Three existing Chinese bachelor routes: Medical Imaging, Rehabilitation Science and Stomatology; exact year/deadline body not read.",
+      "yearBasis": "Neither URL metadata nor third-party results can establish the official deadline.",
+      "notes": [
+        "No third-party reproduced date is used as evidence. No source bytes or date quote are invented for the timed-out attachment.",
+        "Source is cooled down after the bounded failure; no immediate repeated fetch."
+      ],
+      "evidence": [
+        {
+          "key": "cqmu",
+          "url": "https://english.cqmu.edu.cn/system/_content/download.jsp?owner=1537491113&urltype=news.DownloadAttachUrl&wbfileid=17960706",
+          "observedAt": "2026-10-19T05:41:07.941395+00:00",
+          "method": "GET",
+          "error": "TimeoutError:The read operation timed out",
+          "officialDateVerified": false
+        }
+      ],
+      "failureArtifacts": [
+        {
+          "path": "web-fallback-failures.json",
+          "sha256": "89c5d3c228a151684cf4e1f3382778e3c2c436ad2fe455c674fadf8a7457dde5",
+          "bytes": 981
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave4-cqmu-b-medical-imaging-2026-2027-autumn",
+          "universityId": "uni-chongqing-medical-university",
+          "programId": "prog-gap-wave4-cqmu-b-medical-imaging",
+          "degreeLevel": "bachelor",
+          "programmeNameZh": "医学影像学",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-relative-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "490fe00aeabd09685f997c9f4deb84ad60f3dc737cc3c36bd22c5f9834248560",
+          "canonicalCycleSha256": "490fe00aeabd09685f997c9f4deb84ad60f3dc737cc3c36bd22c5f9834248560",
+          "canonicalProgramSha256": "4f3ca1809a981266ee4c5dece6fba3e27d67ef73b72e4d9190122301c9f9b52b",
+          "sourceIds": [
+            "src-gap-program-wave4-cqmu-b-medical-imaging"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave4-cqmu-b-medical-imaging",
+              "sourceSha256": "22b4f450f83f707feaf083dd65971c1f80c198d62958e92f05fff998ad1d2e1f",
+              "url": "https://english.cqmu.edu.cn/system/_content/download.jsp?owner=1537491113&urltype=news.DownloadAttachUrl&wbfileid=17960706",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://english.cqmu.edu.cn/system/_content/download.jsp?owner=1537491113&urltype=news.DownloadAttachUrl&wbfileid=17960706",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T05:41:07.941395+00:00",
+          "quote": null,
+          "evidenceLocator": "Registered original attachment native GET timed out; one bounded web-tool fallback was inaccessible.",
+          "scope": "Three existing Chinese bachelor routes: Medical Imaging, Rehabilitation Science and Stomatology; exact year/deadline body not read.",
+          "yearBasis": "Neither URL metadata nor third-party results can establish the official deadline.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave4-cqmu-b-rehabilitation-science-2026-2027-autumn",
+          "universityId": "uni-chongqing-medical-university",
+          "programId": "prog-gap-wave4-cqmu-b-rehabilitation-science",
+          "degreeLevel": "bachelor",
+          "programmeNameZh": "康复治疗学",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-relative-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "d5047b32cf10090c33360f53400b6937f748ba47835bb60602f6f19acd189c3b",
+          "canonicalCycleSha256": "d5047b32cf10090c33360f53400b6937f748ba47835bb60602f6f19acd189c3b",
+          "canonicalProgramSha256": "ade3bd8f21b628174f20677b430c66c19b5fe6b2b7f3f162c80c227db58f354f",
+          "sourceIds": [
+            "src-gap-program-wave4-cqmu-b-rehabilitation-science"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave4-cqmu-b-rehabilitation-science",
+              "sourceSha256": "7481471669a2bbe1ae9ea8a0d722056e85e99ad45487b0cac1d34bcac1b25502",
+              "url": "https://english.cqmu.edu.cn/system/_content/download.jsp?owner=1537491113&urltype=news.DownloadAttachUrl&wbfileid=17960706",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://english.cqmu.edu.cn/system/_content/download.jsp?owner=1537491113&urltype=news.DownloadAttachUrl&wbfileid=17960706",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T05:41:07.941395+00:00",
+          "quote": null,
+          "evidenceLocator": "Registered original attachment native GET timed out; one bounded web-tool fallback was inaccessible.",
+          "scope": "Three existing Chinese bachelor routes: Medical Imaging, Rehabilitation Science and Stomatology; exact year/deadline body not read.",
+          "yearBasis": "Neither URL metadata nor third-party results can establish the official deadline.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave4-cqmu-b-stomatology-2026-2027-autumn",
+          "universityId": "uni-chongqing-medical-university",
+          "programId": "prog-gap-wave4-cqmu-b-stomatology",
+          "degreeLevel": "bachelor",
+          "programmeNameZh": "口腔医学",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-relative-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "29053fc7a017faefdec48d94ab425abbcb0d49689310cf204181e868e58eacb2",
+          "canonicalCycleSha256": "29053fc7a017faefdec48d94ab425abbcb0d49689310cf204181e868e58eacb2",
+          "canonicalProgramSha256": "97c6e209452f3d0124f7126f8f8eea1a90355d45f3d8876dffcc77a37e37a449",
+          "sourceIds": [
+            "src-gap-program-wave4-cqmu-b-stomatology"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave4-cqmu-b-stomatology",
+              "sourceSha256": "b4b3e41d5217d088f0984afdff06348565903a4e9f62f705306c5bccc4221d8c",
+              "url": "https://english.cqmu.edu.cn/system/_content/download.jsp?owner=1537491113&urltype=news.DownloadAttachUrl&wbfileid=17960706",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://english.cqmu.edu.cn/system/_content/download.jsp?owner=1537491113&urltype=news.DownloadAttachUrl&wbfileid=17960706",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T05:41:07.941395+00:00",
+          "quote": null,
+          "evidenceLocator": "Registered original attachment native GET timed out; one bounded web-tool fallback was inaccessible.",
+          "scope": "Three existing Chinese bachelor routes: Medical Imaging, Rehabilitation Science and Stomatology; exact year/deadline body not read.",
+          "yearBasis": "Neither URL metadata nor third-party results can establish the official deadline.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        }
+      ]
+    },
+    {
+      "key": "ctbu-2026-joint-award-only",
+      "universityId": "uni-chongqing-technology-and-business-university",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "2026 September entrants applying through the MoE–Chongqing Municipal joint scholarship route: named award, Chinese bachelor International Economics and Trade, English master Business Administration, English/bilingual doctoral Big Data Statistics and Intelligent Computing / Digital Economy.",
+      "yearBasis": "2026/2027 guide, explicit 2026 September target entrants and literal March 1, 2026 application deadline in Chinese and English.",
+      "notes": [
+        "The deadline belongs to the joint scholarship applicant route, not universal self-funded or general degree admission. Four stored March 1 cycle dates are confirmed only in that award scope.",
+        "School review, examination email and admission-result release occur after application; no institutional review output date substitutes for the applicant cutoff.",
+        "New named scholarship deadline is candidate-only. English eligibility translation inconsistencies were observed but other facts were not reviewed or renewed."
+      ],
+      "evidence": [
+        {
+          "key": "ctbu",
+          "url": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+          "observedAt": "2026-10-19T05:41:09.568652+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+          "contentType": "text/html",
+          "bodyPath": "ctbu.html",
+          "bytes": 77277,
+          "bodySha256": "cb01d2cdb2db1beccf338ffbb7d9fd29abdbe3879261a6492b54c6e907cc23f9",
+          "textPath": "ctbu.txt",
+          "textArtifact": {
+            "path": "ctbu.txt",
+            "sha256": "7d5d8d6e3bc49ea4709d7736bc9667ec8babda857b267ad6cca13b020ea9b478",
+            "bytes": 17331
+          }
+        }
+      ],
+      "failureArtifacts": [],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-sch-ctbu-moe-chongqing-joint",
+          "universityId": "uni-chongqing-technology-and-business-university",
+          "programId": null,
+          "degreeLevel": null,
+          "programmeNameZh": "重庆工商大学教育部—重庆市人民政府来华留学联合奖学金",
+          "academicYear": null,
+          "intake": null,
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-03-01",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "bb8a66f0c812dedc7a90b244d0c4d122a4dfce571d2dc6e554d52e1d1d97f33c",
+          "canonicalScholarshipSha256": "bb8a66f0c812dedc7a90b244d0c4d122a4dfce571d2dc6e554d52e1d1d97f33c",
+          "sourceIds": [
+            "src-gap-scholarship-wave3-sch-ctbu-moe-chongqing-joint"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-sch-ctbu-moe-chongqing-joint",
+              "sourceSha256": "de4138b970209bc292344df994ab643b9746a9390709d11c4b37daa5b4166c67",
+              "url": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+          "evidenceBodySha256": "cb01d2cdb2db1beccf338ffbb7d9fd29abdbe3879261a6492b54c6e907cc23f9",
+          "observedAt": "2026-10-19T05:41:09.568652+00:00",
+          "quote": "申请截止时间/ Application Deadline 2026年3月1日 / 1st March. 2026",
+          "evidenceLocator": "2026/2027 MoE–Chongqing joint scholarship guide top applicant deadline, 二 招生对象, 三 exact major table and 七 application process.",
+          "scope": "2026 September entrants applying through the MoE–Chongqing Municipal joint scholarship route: named award, Chinese bachelor International Economics and Trade, English master Business Administration, English/bilingual doctoral Big Data Statistics and Intelligent Computing / Digital Economy.",
+          "yearBasis": "2026/2027 guide, explicit 2026 September target entrants and literal March 1, 2026 application deadline in Chinese and English.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "applicationRoute": "MoE–Chongqing joint scholarship only",
+          "storedDateMatchesScopedOfficialDay": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-ctbu-b-international-economics-and-trade-2026-2027-autumn",
+          "universityId": "uni-chongqing-technology-and-business-university",
+          "programId": "prog-gap-wave3-ctbu-b-international-economics-and-trade",
+          "degreeLevel": "bachelor",
+          "programmeNameZh": "国际经济与贸易",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": "2026-03-01",
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-03-01",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "b6650b806a303a853db82fbf05c0cab1951296362011496a83ce0c6f2e0ad220",
+          "canonicalCycleSha256": "b6650b806a303a853db82fbf05c0cab1951296362011496a83ce0c6f2e0ad220",
+          "canonicalProgramSha256": "16e7e23f994288acfea208617b7246d1135f911cba05110f23584a2e214e6e42",
+          "sourceIds": [
+            "src-gap-program-wave3-ctbu-b-international-economics-and-trade"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-ctbu-b-international-economics-and-trade",
+              "sourceSha256": "a31c28a8a4d8fdbb094ae95fc2d0221f9f967dbd87029f102f86d1c6e8f414ab",
+              "url": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+          "evidenceBodySha256": "cb01d2cdb2db1beccf338ffbb7d9fd29abdbe3879261a6492b54c6e907cc23f9",
+          "observedAt": "2026-10-19T05:41:09.568652+00:00",
+          "quote": "申请截止时间/ Application Deadline 2026年3月1日 / 1st March. 2026",
+          "evidenceLocator": "2026/2027 MoE–Chongqing joint scholarship guide top applicant deadline, 二 招生对象, 三 exact major table and 七 application process.",
+          "scope": "2026 September entrants applying through the MoE–Chongqing Municipal joint scholarship route: named award, Chinese bachelor International Economics and Trade, English master Business Administration, English/bilingual doctoral Big Data Statistics and Intelligent Computing / Digital Economy.",
+          "yearBasis": "2026/2027 guide, explicit 2026 September target entrants and literal March 1, 2026 application deadline in Chinese and English.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "applicationRoute": "MoE–Chongqing joint scholarship only",
+          "storedDateMatchesScopedOfficialDay": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-ctbu-d-big-data-statistics-intelligent-computing-2026-2027-autumn",
+          "universityId": "uni-chongqing-technology-and-business-university",
+          "programId": "prog-gap-wave3-ctbu-d-big-data-statistics-intelligent-computing",
+          "degreeLevel": "doctorate",
+          "programmeNameZh": "大数据统计与智能计算",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": "2026-03-01",
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-03-01",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "c7f82ea061fb8abc6e8655ae94085ca2910c1bc232d4a0507a4d17be74ededb8",
+          "canonicalCycleSha256": "c7f82ea061fb8abc6e8655ae94085ca2910c1bc232d4a0507a4d17be74ededb8",
+          "canonicalProgramSha256": "b7076eafe7bb945ca391efaf3e64be09f0811467f54520027e7c224cc596ff18",
+          "sourceIds": [
+            "src-gap-program-wave3-ctbu-d-big-data-statistics-intelligent-computing"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-ctbu-d-big-data-statistics-intelligent-computing",
+              "sourceSha256": "9f7df20df5271e98168a5513dd8eb6d3e749a2353375cc689a766d2a58ce0cbb",
+              "url": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+          "evidenceBodySha256": "cb01d2cdb2db1beccf338ffbb7d9fd29abdbe3879261a6492b54c6e907cc23f9",
+          "observedAt": "2026-10-19T05:41:09.568652+00:00",
+          "quote": "申请截止时间/ Application Deadline 2026年3月1日 / 1st March. 2026",
+          "evidenceLocator": "2026/2027 MoE–Chongqing joint scholarship guide top applicant deadline, 二 招生对象, 三 exact major table and 七 application process.",
+          "scope": "2026 September entrants applying through the MoE–Chongqing Municipal joint scholarship route: named award, Chinese bachelor International Economics and Trade, English master Business Administration, English/bilingual doctoral Big Data Statistics and Intelligent Computing / Digital Economy.",
+          "yearBasis": "2026/2027 guide, explicit 2026 September target entrants and literal March 1, 2026 application deadline in Chinese and English.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "applicationRoute": "MoE–Chongqing joint scholarship only",
+          "storedDateMatchesScopedOfficialDay": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-ctbu-d-digital-economy-2026-2027-autumn",
+          "universityId": "uni-chongqing-technology-and-business-university",
+          "programId": "prog-gap-wave3-ctbu-d-digital-economy",
+          "degreeLevel": "doctorate",
+          "programmeNameZh": "数字经济",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": "2026-03-01",
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-03-01",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "491f3a513fc2858fa24f93440e5b2667614ee457c27b9bd47cca8fdf95029d38",
+          "canonicalCycleSha256": "491f3a513fc2858fa24f93440e5b2667614ee457c27b9bd47cca8fdf95029d38",
+          "canonicalProgramSha256": "2c2fc835477b61d3c99e246444df233b187a53225ea53302e1e94b694ccaff97",
+          "sourceIds": [
+            "src-gap-program-wave3-ctbu-d-digital-economy"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-ctbu-d-digital-economy",
+              "sourceSha256": "a3386fdb1c57d7a976b4d45b558ae67d19d28adf30970fd4c8f527abae63972b",
+              "url": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+          "evidenceBodySha256": "cb01d2cdb2db1beccf338ffbb7d9fd29abdbe3879261a6492b54c6e907cc23f9",
+          "observedAt": "2026-10-19T05:41:09.568652+00:00",
+          "quote": "申请截止时间/ Application Deadline 2026年3月1日 / 1st March. 2026",
+          "evidenceLocator": "2026/2027 MoE–Chongqing joint scholarship guide top applicant deadline, 二 招生对象, 三 exact major table and 七 application process.",
+          "scope": "2026 September entrants applying through the MoE–Chongqing Municipal joint scholarship route: named award, Chinese bachelor International Economics and Trade, English master Business Administration, English/bilingual doctoral Big Data Statistics and Intelligent Computing / Digital Economy.",
+          "yearBasis": "2026/2027 guide, explicit 2026 September target entrants and literal March 1, 2026 application deadline in Chinese and English.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "applicationRoute": "MoE–Chongqing joint scholarship only",
+          "storedDateMatchesScopedOfficialDay": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-ctbu-m-business-administration-en-2026-2027-autumn",
+          "universityId": "uni-chongqing-technology-and-business-university",
+          "programId": "prog-gap-wave3-ctbu-m-business-administration-en",
+          "degreeLevel": "master",
+          "programmeNameZh": "工商管理",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionReason": "additional-same-source-root-assignment",
+          "storedDeadline": "2026-03-01",
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-03-01",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "5c5d7fc030e6def2b5207c03ca1a06178e354f2a9a47db9a3785c852a91236a8",
+          "canonicalCycleSha256": "5c5d7fc030e6def2b5207c03ca1a06178e354f2a9a47db9a3785c852a91236a8",
+          "canonicalProgramSha256": "91aec90d0a600c68f0b228f176cdf01ecebf87e2416726ef4d37ec4e8304e104",
+          "sourceIds": [
+            "src-gap-program-wave3-ctbu-m-business-administration-en"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-ctbu-m-business-administration-en",
+              "sourceSha256": "0cdf356925155c0a42ff313e3912d5560b5a5053516fe4ecfc7874207560d6f8",
+              "url": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://interoffice2014.ctbu.edu.cn/info/1031/4841.htm",
+          "evidenceBodySha256": "cb01d2cdb2db1beccf338ffbb7d9fd29abdbe3879261a6492b54c6e907cc23f9",
+          "observedAt": "2026-10-19T05:41:09.568652+00:00",
+          "quote": "申请截止时间/ Application Deadline 2026年3月1日 / 1st March. 2026",
+          "evidenceLocator": "2026/2027 MoE–Chongqing joint scholarship guide top applicant deadline, 二 招生对象, 三 exact major table and 七 application process.",
+          "scope": "2026 September entrants applying through the MoE–Chongqing Municipal joint scholarship route: named award, Chinese bachelor International Economics and Trade, English master Business Administration, English/bilingual doctoral Big Data Statistics and Intelligent Computing / Digital Economy.",
+          "yearBasis": "2026/2027 guide, explicit 2026 September target entrants and literal March 1, 2026 application deadline in Chinese and English.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "applicationRoute": "MoE–Chongqing joint scholarship only",
+          "storedDateMatchesScopedOfficialDay": true
+        }
+      ]
+    },
+    {
+      "key": "cuc-year-round-not-specific-deadline",
+      "universityId": "uni-communication-university-of-china",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Existing Chinese-language preparatory cycle with generic other intake; FAQ supplies a rolling rule, not a specific intake deadline.",
+      "yearBasis": "FAQ publication date does not establish an absolute cycle deadline. The FAQ itself defers exact dates to each academic-year brochure.",
+      "notes": [
+        "Do not assign degree April/May general timings or ICLT award deadlines to the preparatory programme. A year-round reference is not current portal acceptance proof."
+      ],
+      "evidence": [
+        {
+          "key": "cuc",
+          "url": "https://icuc.cuc.edu.cn/2026/0204/c7289a266930/page.htm",
+          "observedAt": "2026-10-19T05:41:17.051808+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://icuc.cuc.edu.cn/2026/0204/c7289a266930/page.htm",
+          "contentType": "text/html",
+          "bodyPath": "cuc.html",
+          "bytes": 123840,
+          "bodySha256": "4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927",
+          "textPath": "cuc.txt",
+          "textArtifact": {
+            "path": "cuc.txt",
+            "sha256": "7d57a2907541d7c57833d0399812258b3371e9a4e9ea96dca074f22778044316",
+            "bytes": 28079
+          }
+        }
+      ],
+      "failureArtifacts": [],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-bd683b48bff2",
+          "universityId": "uni-communication-university-of-china",
+          "programId": "program-communication-university-of-china-chinese-language-preparatory-program-l",
+          "degreeLevel": "language",
+          "programmeNameZh": "汉语预科项目",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "selectionReason": "base-queue-selected-record",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-relative-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "3b822e56772c09a2e067da38a536822a8b33be3ebe1d22d0954a5be015699c36",
+          "canonicalCycleSha256": "3b822e56772c09a2e067da38a536822a8b33be3ebe1d22d0954a5be015699c36",
+          "canonicalProgramSha256": "3326694a19a13e519c1fe813b2c1739e891b839f842c3a3b8d2b8ac7828a4110",
+          "sourceIds": [
+            "src-program-review-ae01f957a70e"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-program-review-ae01f957a70e",
+              "sourceSha256": "264685fd99ba5cc053d0a5ba492f6ad9c07e4e23b0b85ac3a3539c2a38b57931",
+              "url": "https://icuc.cuc.edu.cn/2026/0204/c7289a266930/page.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://icuc.cuc.edu.cn/2026/0204/c7289a266930/page.htm",
+          "evidenceBodySha256": "4aa3b21bb63c4b71dfa44131854ba3720e00ab601ca95d4d7c19e0c0b94d1927",
+          "observedAt": "2026-10-19T05:41:17.051808+00:00",
+          "quote": "Preparatory programs (Chinese language students) are open for application year-round. Specific deadlines are subject to the official admissions brochure of each academic year.",
+          "evidenceLocator": "Actual International Student Admissions Q&A dated 2026-02-04, Q4.",
+          "scope": "Existing Chinese-language preparatory cycle with generic other intake; FAQ supplies a rolling rule, not a specific intake deadline.",
+          "yearBasis": "FAQ publication date does not establish an absolute cycle deadline. The FAQ itself defers exact dates to each academic-year brochure.",
+          "crossSourceProgrammeContext": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        }
+      ]
+    }
+  ]
+}

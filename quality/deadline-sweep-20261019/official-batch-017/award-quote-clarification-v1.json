@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "clarificationId": "official-batch-017-award-quote-clarification-v1",
+  "createdAt": "2026-10-19T05:50:30.334Z",
+  "frozenReport": "report.json",
+  "frozenReportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6",
+  "recordId": "sch-gap-sch-mew-ne-upc-university",
+  "canonicalScholarshipSha256": "1eb5f5c6c19434380a16106ae4e1abba9263e27d8aad4810847e713f5385f8e8",
+  "resultBeforeAndAfter": "unknown",
+  "officialDeadlineBeforeAndAfter": null,
+  "originalReportGeneralApplicationQuote": "秋季学期 次年9月-次年12月 次年3月15日 次年5月31日",
+  "originalQuoteScope": "First/general autumn application table; its May31 is not the school-award deadline.",
+  "schoolAwardRowFullText": "学校奖 学历生 次年9月入学 次年3月15日 次年5月15日",
+  "schoolAwardRowLocator": "Actual 申请时间 page section 二、奖学金申请时间; final 学校奖 row, columns 奖学金名称 / 入学时间 / 申请开始时间 / 申请截止时间.",
+  "schoolAwardWindow": {
+    "applicantCategory": "学历生",
+    "entry": "次年9月入学",
+    "opensOnMonthDay": "03-15",
+    "deadlineMonthDay": "05-15",
+    "applicationYear": null,
+    "relativeYearWording": "次年",
+    "exactAbsoluteDateApproved": false
+  },
+  "evidence": {
+    "sourceUrl": "https://cie.upc.edu.cn/admission_cn/lxsq/sqsj.htm",
+    "rawPath": "upc.html",
+    "rawSha256": "33cf5ec9f77211d3d3d5c5032bbff1d9ede80c7ef4dbc78caa0e52b3211cff68",
+    "textArtifact": {
+      "path": "upc.txt",
+      "sha256": "19788451a28a0c2f10b607bc7116f31eff0f1fd8b182c77a02c03d1d654bdce5",
+      "bytes": 2335
+    },
+    "observedAt": "2026-10-19T05:41:04.245341+00:00"
+  },
+  "assessment": "The frozen report correctly keeps the award deadline unknown and separately stores the school-award May15 recurring window. Its generic quote points to a different row. This addendum supplies the award-specific original row and does not infer a calendar year, borrow May31, or change any report or canonical bytes.",
+  "noNewOfficialWebsiteReads": true,
+  "canonicalWrites": 0,
+  "frozenReportWrites": 0
+}

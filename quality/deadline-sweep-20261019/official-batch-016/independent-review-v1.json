@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "independent-date-only-016-v1",
+  "reviewedAt": "2026-10-19T05:48:18.251Z",
+  "reviewer": "deployment_audit subagent; did not author batch 016 or capture its originals",
+  "reviewedReportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8",
+  "reviewedSelectionSha256": "9980d19aabe396a465ee255b4c4ea2b7a1331faebbff5086c43628835291c497",
+  "decision": "pass-with-funding-route-and-successor-year-restrictions",
+  "scope": "Independent local review of captured raw HTML/PDF originals, direct pypdf extraction, rendered catalogue/date pages and exact record/programme/source pins. No network rereads.",
+  "counts": {
+    "schools": 7,
+    "records": 14,
+    "baseQueueRecords": 13,
+    "additionalSameSourceRecords": 1,
+    "closedCandidateScopes": 9,
+    "unknown": 4,
+    "blocked": 1,
+    "newExactDeadlinesFromCanonicalNull": 6,
+    "existingScopedExpiredDays": 3,
+    "newOpeningCandidatesCanonicalNullRetained": 3,
+    "canonicalInputHashes": 6,
+    "canonicalRecordHashes": 14,
+    "programmeHashes": 10,
+    "sourceRecordPins": 20,
+    "rawBodies": 9,
+    "textPins": 9,
+    "successfulOriginals": 7,
+    "retained412Bodies": 2,
+    "priorRecordOverlap": 0
+  },
+  "checks": {
+    "exactBase13AndAdditional1SelectionMatch": true,
+    "canonicalInputRecordProgrammeAndSourcePinsMatch": true,
+    "allOriginalBodyTextAndFallbackPinsMatch": true,
+    "singleGroupsRecordsRepresentation": true,
+    "allClosedClassificationsCandidateOnly": true,
+    "noFabricatedOpeningEqualityOrClockTime": true,
+    "oldAndSuccessorYearsKeptSeparate": true,
+    "noWholeSchoolOrFullFactCertification": true,
+    "noCanonicalStatusFreshnessOrDateMutation": true
+  },
+  "sourceFindings": [
+    {
+      "school": "China Academy of Art",
+      "finding": "Actual English-doctoral 2026 full guide names Art Studies and explicitly gives inclusive June 20, 2026 Beijing date, with September 2026 entry. Canonical programme is English. No exact clock time is invented."
+    },
+    {
+      "school": "China Conservatory of Music",
+      "finding": "Original PDF independently extracted; rendered pages 4 and 5 visually confirm exact Composition, Conducting, and Music Education Vocal directions and January 13–20, 2026 applicant window. Three opening dates are candidates only."
+    },
+    {
+      "school": "China Foreign Affairs University",
+      "finding": "Actual BGS procedure has annual assessment/next-year arrangements separately notified, without a concrete application cutoff. Upload date is not converted to deadline."
+    },
+    {
+      "school": "China Jiliang University",
+      "finding": "Both exact registered source raw bodies are retained HTTP 412 with hashes. Fallback receipt records one failed web attempt per URL and cooldown. Neither body is counted as admissions evidence."
+    },
+    {
+      "school": "China Pharmaceutical University",
+      "finding": "Actual 2026 Silk Road award notice gives applicant CPU-platform May 17; school May 18–20 review, later nominated-applicant CSC step and July/September outputs remain separate."
+    },
+    {
+      "school": "China University of Geosciences Beijing",
+      "finding": "Original 2026 PDF independently extracted. Rendered page 5 separates Type B March 15, self-funded June 30 and embassy-controlled Type A. Chinese undergraduate table includes the two exact bachelor majors. English postgraduate table includes Geology and Environmental Science and Engineering; rendered page 11 Geology row has an English-master checkmark. Added Geology master is bound to self-funded June 30. Unlabelled doctoral fee-reference funding scope stays unknown."
+    },
+    {
+      "school": "China University of Geosciences Wuhan",
+      "finding": "Actual captured mutable source now explicitly gives Oct 16, 2026–Feb 28, 2027 with a 2027 attachment and Business Administration. These are successor-only candidates and do not revalidate either assigned old 2026 record."
+    }
+  ],
+  "visualArtifactsReviewed": [
+    "source-01-page-4.png",
+    "source-01-page-5.png",
+    "source-03-page-5.png",
+    "source-03-page-11.png"
+  ],
+  "publicationRestrictions": [
+    "The CUGB stored June 30 days are self-funded only; do not reuse them for CSC Type B/Type A. The doctoral null row remains unknown until its route is resolved.",
+    "Current CUG Wuhan 2027 source must not renew or overwrite the old 2026 records. Successor dates do not apply to those records.",
+    "Closed candidate evidence means only the exact past application scope; no permanent discontinuation or full-fact freshness is established.",
+    "Inclusive CAA deadline preserves the source wording but does not invent a closing time."
+  ],
+  "reviewedRecordIds": [
+    "cycle-gap-mve-ecma-caa-art-studies-doctorate-2026-2027-autumn-fee-reference",
+    "cycle-gap-sparse-depth-0808-ccmusic-composition-bachelor-2026-2027-other-fee-reference",
+    "cycle-gap-sparse-depth-0808-ccmusic-conducting-bachelor-2026-2027-other-fee-reference",
+    "cycle-gap-sparse-depth-0808-ccmusic-music-education-vocal-bachelor-2026-2027-other-fee-reference",
+    "sch-gap-sch-mew-nss-cfau-beijing-government",
+    "cycle-gap-remaining-cjlu-b-business-administration-en-2026-2027-other",
+    "sch-gap-mve-ecs-cpu-csc-silk-road-2026",
+    "cycle-gap-wave3-depth-cugb-environmental-science-engineering-doctorate-english-2026-2027-autumn-fee-reference",
+    "sch-gap-wave3-depth-cugb-csc-type-b-2026",
+    "cycle-gap-wave3-depth-cugb-computer-science-bachelor-2026-2027-autumn",
+    "cycle-gap-wave3-depth-cugb-geology-bachelor-2026-2027-autumn",
+    "cycle-gap-wave3-depth-cugb-geology-master-english-2026-2027-autumn",
+    "sch-gap-mew-scws-cug-cgs-high-level-postgraduate-2026",
+    "cycle-2026-cug-business-administration-high-level-postgraduate"
+  ],
+  "networkRequestsByReviewer": 0,
+  "canonicalWrites": 0,
+  "sharedProgressWrites": 0,
+  "gitMutations": 0,
+  "paidCalls": 0
+}

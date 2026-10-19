@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>中国政法大学</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .loader {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #e0e0e0;
+      border-top: 5px solid #1890ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="loader"></div>
+  <script>
+    (function() {
+      var challengeId = "RC0UmqrNZ4DCanZc42f0rYGHSmQfpKz1";
+      var answer = 204;
+
+      var browserInfo = {
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        platform: navigator.platform,
+        cookieEnabled: navigator.cookieEnabled,
+        hardwareConcurrency: navigator.hardwareConcurrency || 0,
+        deviceMemory: navigator.deviceMemory || 0,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'unknown'
+      };
+
+      function sendChallenge() {
+        fetch('/dynamic_challenge', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            challenge_id: challengeId,
+            answer: answer,
+            browser_info: browserInfo
+          }),
+          credentials: 'same-origin'
+        })
+        .then(function(res) {
+          if (!res.ok) throw new Error('Network error');
+          return res.json();
+        })
+        .then(function(data) {
+          if (data.success) {
+            document.cookie = "client_id=" + data.client_id + "; path=/; max-age=86400; samesite=lax" + (location.protocol === 'https:' ? '; secure' : '');
+            window.location.reload(true);
+          } else {
+            setTimeout(sendChallenge, 2000);
+          }
+        })
+        .catch(function(err) {
+          setTimeout(sendChallenge, 3000);
+        });
+      }
+
+      // 稍微延迟发送，确保页面加载完成
+      setTimeout(sendChallenge, 800);
+    })();
+  </script>
+</body>
+</html>
