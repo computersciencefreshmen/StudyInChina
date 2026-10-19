@@ -1,0 +1,1897 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-035-20261019",
+  "state": "completed-three-past-window-candidates-seventeen-unknown",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T12:26:13.814Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256Before": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256After": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v9.json",
+  "targetQueueSha256": "392e1553863bc090a8b7e536136cfc0887d367915eddc10b3a0673179451d853",
+  "selectionSha256": "7a8b9cc79acb3f8706f4293b4d0b1492070066f8030159006f33379a160575cd",
+  "selectionFile": "selection-with-extensions-v1.json",
+  "baseSelection": {
+    "path": "selection.json",
+    "sha256": "96a801b015bf4e28924344e25cf249e7cae08c48384a0dc6931d8a7cd24e2e08"
+  },
+  "selectedUniversityIds": [
+    "uni-shihezi-university",
+    "uni-southern-medical-university",
+    "uni-taiyuan-university-of-technology",
+    "uni-tiangong-university",
+    "uni-tianjin-university-of-finance-and-economics",
+    "uni-tianjin-university-of-traditional-chinese-medicine",
+    "uni-university-of-chinese-academy-of-sciences"
+  ],
+  "selection": {
+    "baseQueueRecords": 16,
+    "additionalSameSourceRecords": 4,
+    "totalRecords": 20,
+    "baseQueueRecordIds": [
+      "sch-gap-wave8-shzu-bingtuan-government-scholarship",
+      "sch-gap-wave8-shzu-cgs-high-level-postgraduate",
+      "sch-gap-sch-smu-outstanding-international-freshmen",
+      "cycle-gap-prog-mew-nss-tyut-chemical-engineering-doctorate-2026-2027-autumn-fee-reference",
+      "cycle-gap-prog-mew-nss-tyut-foundation-2026-2027-autumn-fee-reference",
+      "cycle-gap-prog-mew-nss-tyut-mechanical-engineering-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-prog-mew-nss-tyut-teaching-chinese-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-prog-mew-nss-tgu-chinese-language-general-scholar-2026-2027-other-fee-reference",
+      "cycle-gap-remaining-tjufe-b-international-economics-trade-china-commerce-2026-2027-other-fee-reference",
+      "cycle-a1e91b1e9746",
+      "cycle-a6fc5bddfff7",
+      "cycle-gap-prog-mew-ne-tjutcm-acupuncture-master-en-2026-2027-autumn-fee-reference",
+      "cycle-gap-prog-mew-ne-tjutcm-chinese-materia-medica-doctorate-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave6-ucas-biology-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave6-ucas-computer-science-engineering-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave6-ucas-environmental-science-engineering-master-2026-2027-autumn-fee-reference"
+    ],
+    "additionalSameSourceRecordIds": [
+      "sch-gap-sch-mew-nss-tyut-shanxi-government",
+      "sch-gap-sch-mew-nss-tyut-university",
+      "cycle-gap-prog-mew-ne-tjutcm-international-chinese-education-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-prog-mew-ne-tjutcm-chinese-medicine-bachelor-2026-2027-autumn-fee-reference"
+    ],
+    "extensionReceipt": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1216/additional-same-source-selection-v1.json",
+      "sha256": "79040f0510aa12547fe2eb37a0cea4bfb946b6d1d5a26a4dde9dfab90d9469ee"
+    },
+    "queueUniversityIndexRangeInclusive": [
+      7,
+      13
+    ]
+  },
+  "acquisition": {
+    "registeredDistinctUrlsAttempted": 9,
+    "supportingAttachmentUrlsAttempted": 1,
+    "nativeOriginRequests": 10,
+    "webFallbackRequests": 1,
+    "rawBodiesSaved": 9,
+    "nativeHtmlBodies": 7,
+    "nativePdfBodies": 2,
+    "nativeTlsFailures": 1,
+    "captureManifestPins": [
+      {
+        "path": "captures.json",
+        "sha256": "4a4cdd5eb90796a855584b2f3b2529c1f7ead67550c22a4a238b64813b54e30d"
+      },
+      {
+        "path": "captures-extra.json",
+        "sha256": "b656260f12215ec9a3095bacd8466507b5302a03f5380bbe810fc5267266e8af"
+      },
+      {
+        "path": "captures-tjufe-attachment.json",
+        "sha256": "72bff4de80d3afced99ad451b681f7e84d10669ca72c256ce98de1a3c5bfbe47"
+      }
+    ],
+    "diagnostics": {
+      "path": "acquisition-diagnostics.json",
+      "sha256": "cead264590f0f91423194b4f1d05ec6a3d9cda6f208de8dd303b49ddd5d50e48"
+    },
+    "webFallback": {
+      "path": "smu-web-fallback-observation.json",
+      "sha256": "a41f124dd7239bfbe74d81239ff5e4a54acc82f731d28f7e96eebebad30414fd"
+    },
+    "pdfOfflineExtraction": {
+      "path": "pdf-offline-extraction.json",
+      "sha256": "907c3dd8ac4aa0c3e595f41a0d252de7ba3150b663534ef14c7dd77a25cb985f"
+    },
+    "pdfVisualObservations": {
+      "path": "pdf-visual-observations.json",
+      "sha256": "cafbcd4cbcec45a7327eeccd245d172601ebec8b32e026d392509cb961bb670a"
+    },
+    "normalTls": true,
+    "paidModelCalls": 0,
+    "bodyInterpretation": "Six official HTML content bodies and one captcha HTML response, two original PDFs recovered offline, one TLS EOF with a single application-form-only web fallback. TYUT image-only PDF was visually read in full. Captcha and HTTP 200 are not date proof."
+  },
+  "summary": {
+    "schoolsAttempted": 7,
+    "recordsAssessed": 20,
+    "baseQueueRecords": 16,
+    "additionalSameSourceRecords": 4,
+    "admissionCyclesAssessed": 15,
+    "scholarshipsAssessed": 5,
+    "recordResults": {
+      "unknown": 17,
+      "closed": 3
+    },
+    "newExactPastDeadlineCandidatesFromStoredNull": 3,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "rules": [
+    "Source-only observations: no canonical dates, status, publication, verifiedAt or reviewAfter changed.",
+    "Unknown and blocked never establish availability; closed applies only to an explicitly bound past window.",
+    "Recurring rules, attachment filenames and separate CSCA dates are not rolled into target-year deadlines.",
+    "General applicant cutoffs are not institution review dates and are not borrowed by independent scholarships.",
+    "One reasonable failed-source fallback ends in cooldown. No captcha bypass or repeated original PDF GET.",
+    "The 2026 window is not a 2027 successor observation and does not prove programme cessation."
+  ],
+  "groups": [
+    {
+      "key": "shzu-interview-news-not-award-applicant-cutoff",
+      "universityId": "uni-shihezi-university",
+      "evidence": [
+        {
+          "name": "shzu-guide",
+          "url": "https://ncxy.shzu.edu.cn/2026/0323/c13505a229944/page.htm",
+          "observedAt": "2026-10-19T12:19:49.239411+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://ncxy.shzu.edu.cn/2026/0323/c13505a229944/page.htm",
+          "contentType": "text/html",
+          "bytes": 24535,
+          "rawPath": "shzu-guide.html",
+          "rawSha256": "fcf7968432a81e41a84ef7e4dd14993557164e40e5c6ec2b42cba3abe0e0f9a5",
+          "textPath": "shzu-guide.txt",
+          "textSha256": "8d6959493ba74ee868ab070237943e9ccf6d39bab6670c4ca55da44d80869050",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-official-interview-news-not-application-guide",
+          "fullFactsCertified": false
+        }
+      ],
+      "title": "能源与材料学院首次开展留学生硕士招生及面试工作",
+      "interviewDateQuote": "3月16日下午",
+      "awardIdentityQuote": "3人申请中国政府奖学金—高水平研究生项目，2人申请新疆生产建设兵团来华留学生政府奖学金。",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-shzu-bingtuan-government-scholarship",
+          "universityId": "uni-shihezi-university",
+          "canonicalUniversitySha256": "e916104b0228ed6ea4c6a4be7c37a3d85ef75f268e09e99cd0b1e78c85c306b7",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "7a3adda25988e40cf4ec03e07c79a6a36d5d0dbca0cb92f012676987405487e1",
+          "canonicalScholarshipSha256": "7a3adda25988e40cf4ec03e07c79a6a36d5d0dbca0cb92f012676987405487e1",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-shzu-energy-power-master",
+              "canonicalProgramSha256": "23260acb04f55e48b0c3fba6d63c26eb9fa187ae6180411ee25e75727ab9822e"
+            },
+            {
+              "programId": "prog-gap-wave8-shzu-energy-storage-technology-master",
+              "canonicalProgramSha256": "0a56e9c21584185d0f4088539e061a1b0d3342b9943959db5345e3603e026843"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-shzu-bingtuan-government-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-shzu-bingtuan-government-scholarship",
+              "canonicalSourceSha256": "755c1ba23964e226c442a3613fbb9d0d578ce830dedf28453e04c886dfe02891",
+              "url": "https://ncxy.shzu.edu.cn/2026/0323/c13505a229944/page.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "official-page-is-march-2026-interview-news-with-no-award-specific-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://ncxy.shzu.edu.cn/2026/0323/c13505a229944/page.htm",
+          "evidenceBodySha256": "fcf7968432a81e41a84ef7e4dd14993557164e40e5c6ec2b42cba3abe0e0f9a5",
+          "observedAt": "2026-10-19T12:19:49.239411+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "interviewDateNotApplicationDeadline": true,
+          "schoolRecommendationNotApplicantCutoff": true,
+          "awardDeadlineNotBorrowed": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-shzu-cgs-high-level-postgraduate",
+          "universityId": "uni-shihezi-university",
+          "canonicalUniversitySha256": "e916104b0228ed6ea4c6a4be7c37a3d85ef75f268e09e99cd0b1e78c85c306b7",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "b1549017ff56c1d2d7ad9fc7bde8e476baf33909c4b2a97698e408076421f2d0",
+          "canonicalScholarshipSha256": "b1549017ff56c1d2d7ad9fc7bde8e476baf33909c4b2a97698e408076421f2d0",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-shzu-energy-power-master",
+              "canonicalProgramSha256": "23260acb04f55e48b0c3fba6d63c26eb9fa187ae6180411ee25e75727ab9822e"
+            },
+            {
+              "programId": "prog-gap-wave8-shzu-energy-storage-technology-master",
+              "canonicalProgramSha256": "0a56e9c21584185d0f4088539e061a1b0d3342b9943959db5345e3603e026843"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-shzu-cgs-high-level-postgraduate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-shzu-cgs-high-level-postgraduate",
+              "canonicalSourceSha256": "4a496ce960400cbf4da8d1a22f06d70b2b5fc273852403a4807d350ec7970798",
+              "url": "https://ncxy.shzu.edu.cn/2026/0323/c13505a229944/page.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "official-page-is-march-2026-interview-news-with-no-award-specific-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://ncxy.shzu.edu.cn/2026/0323/c13505a229944/page.htm",
+          "evidenceBodySha256": "fcf7968432a81e41a84ef7e4dd14993557164e40e5c6ec2b42cba3abe0e0f9a5",
+          "observedAt": "2026-10-19T12:19:49.239411+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "interviewDateNotApplicationDeadline": true,
+          "schoolRecommendationNotApplicantCutoff": true,
+          "awardDeadlineNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "smu-native-tls-failure-and-one-form-only-fallback",
+      "universityId": "uni-southern-medical-university",
+      "evidence": [
+        {
+          "name": "smu-apply",
+          "url": "https://istudy.smu.edu.cn/pc/applyonline.html",
+          "observedAt": "2026-10-19T12:19:49.240417+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-TLS-EOF-no-origin-body",
+          "fullFactsCertified": false
+        }
+      ],
+      "webFallback": {
+        "path": "smu-web-fallback-observation.json",
+        "sha256": "a41f124dd7239bfbe74d81239ff5e4a54acc82f731d28f7e96eebebad30414fd"
+      },
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-smu-outstanding-international-freshmen",
+          "universityId": "uni-southern-medical-university",
+          "canonicalUniversitySha256": "187f32664e898f7cd090e125009af00c98bafc4128cc703acd0d6e8e094ae299",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "8ce76b3f7193f3199e1a6d9e546d915664e15bcf7f61e0457b63e313611290ae",
+          "canonicalScholarshipSha256": "8ce76b3f7193f3199e1a6d9e546d915664e15bcf7f61e0457b63e313611290ae",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-sch-smu-outstanding-international-freshmen"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-smu-outstanding-international-freshmen",
+              "canonicalSourceSha256": "4f6a74321db37c389c47a45765e6b4771fcfa900463369e845fc4ce7a717cac2",
+              "url": "https://istudy.smu.edu.cn/pc/applyonline.html"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "single-web-fallback-is-online-application-form-and-does-not-establish-award-own-year-or-day",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://istudy.smu.edu.cn/pc/applyonline.html",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T12:19:49.240417+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "originServerBodySaved": false,
+          "fallbackObservationOnly": true,
+          "webObservationPin": {
+            "path": "smu-web-fallback-observation.json",
+            "sha256": "a41f124dd7239bfbe74d81239ff5e4a54acc82f731d28f7e96eebebad30414fd"
+          },
+          "retryPolicy": "cooldown-after-one-reasonable-fallback",
+          "applicationFormNotDateProof": true,
+          "awardDeadlineNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "tyut-complete-image-guide-and-independent-award-page-no-cutoff",
+      "universityId": "uni-taiyuan-university-of-technology",
+      "evidence": [
+        {
+          "name": "tyut-guide",
+          "url": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf",
+          "observedAt": "2026-10-19T12:19:49.241416+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf",
+          "contentType": "application/pdf",
+          "bytes": 4445519,
+          "rawPath": "tyut-guide.pdf",
+          "rawSha256": "b55891b816d315158da2567c8781cc815a68a86658b38c515641de9aa6e54388",
+          "captureSucceeded": false,
+          "error": "No module named 'pypdf'",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "textPath": "tyut-guide.txt",
+          "textSha256": "cb00d700e39dbff17b7660dca80de2db321dfaf0883a2e5fbc16043a2a25f1ef",
+          "pageCount": 6,
+          "method": "bundled-runtime-pypdf-offline",
+          "networkRequests": 0,
+          "evidenceRole": "original-image-based-brochure-six-pages-visually-inspected",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "tyut-award",
+          "url": "https://ciee.tyut.edu.cn/info/1016/3436.htm",
+          "observedAt": "2026-10-19T12:22:27.484294+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://ciee.tyut.edu.cn/info/1016/3436.htm",
+          "contentType": "text/html",
+          "bytes": 36711,
+          "rawPath": "tyut-award.html",
+          "rawSha256": "e92754d25ded47e22b5f7a75049f3f95960c522e635fedcb6c88f46b462329ee",
+          "textPath": "tyut-award.txt",
+          "textSha256": "8f7ff3a3a3961d10bc23362a02b006df2fdf0de8630879cc523f9df654d875ce",
+          "captureSucceeded": true,
+          "evidenceRole": "award-overview-no-applicant-cutoff",
+          "fullFactsCertified": false
+        }
+      ],
+      "visualObservation": {
+        "path": "pdf-visual-observations.json",
+        "sha256": "cafbcd4cbcec45a7327eeccd245d172601ebec8b32e026d392509cb961bb670a"
+      },
+      "awardTitle": "太原理工大学国际学生奖学金介绍（太原理工大学2025更新）",
+      "awardNames": [
+        "山西省来晋留学政府奖学金",
+        "太原理工大学国际学生奖学金"
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-tyut-chemical-engineering-doctorate-2026-2027-autumn-fee-reference",
+          "universityId": "uni-taiyuan-university-of-technology",
+          "canonicalUniversitySha256": "b6b220457df3edb88106f1dfb430e6a3b50cdff2ad174858460908eae156fd57",
+          "programId": "prog-gap-prog-mew-nss-tyut-chemical-engineering-doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "doctorate",
+          "teachingLanguages": [],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "53df91093f0b16168e953907eb0bf244e4a2e102da143efbe7a467af92841182",
+          "canonicalCycleSha256": "53df91093f0b16168e953907eb0bf244e4a2e102da143efbe7a467af92841182",
+          "canonicalProgramSha256": "731ecade8919aa23317aae3ca33761772753079948ceeb81ef0a1ccae507b1c3",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-tyut-chemical-engineering-doctorate",
+              "canonicalProgramSha256": "731ecade8919aa23317aae3ca33761772753079948ceeb81ef0a1ccae507b1c3"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-tyut-chemical-engineering-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-tyut-chemical-engineering-doctorate",
+              "canonicalSourceSha256": "28054cd1c825a1f8a07e657e525386cf3c56f7c3c0e0388a545d050cdb5d53c7",
+              "url": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "complete-six-page-image-brochure-has-no-year-specific-application-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf",
+          "evidenceBodySha256": "b55891b816d315158da2567c8781cc815a68a86658b38c515641de9aa6e54388",
+          "observedAt": "2026-10-19T12:19:49.241416+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "pdfVisualObservationPin": {
+            "path": "pdf-visual-observations.json",
+            "sha256": "cafbcd4cbcec45a7327eeccd245d172601ebec8b32e026d392509cb961bb670a"
+          },
+          "pdfTextIsImageOnly": true,
+          "completeOriginalVisualRead": true,
+          "noYearRollover": true,
+          "programmeIdentitySeenInVisual": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-tyut-foundation-2026-2027-autumn-fee-reference",
+          "universityId": "uni-taiyuan-university-of-technology",
+          "canonicalUniversitySha256": "b6b220457df3edb88106f1dfb430e6a3b50cdff2ad174858460908eae156fd57",
+          "programId": "prog-gap-prog-mew-nss-tyut-foundation",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "foundation",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "0a25874c49cbf5c2298576e0e7ea3c256a5f08ba39a709aa02360609edac60c7",
+          "canonicalCycleSha256": "0a25874c49cbf5c2298576e0e7ea3c256a5f08ba39a709aa02360609edac60c7",
+          "canonicalProgramSha256": "ee3e1b390fe8e411b2d03d6f4a497630b01fe86494a06666e6d2688884306194",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-tyut-foundation",
+              "canonicalProgramSha256": "ee3e1b390fe8e411b2d03d6f4a497630b01fe86494a06666e6d2688884306194"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-tyut-foundation"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-tyut-foundation",
+              "canonicalSourceSha256": "c5e224785429efe472f06b7cfeefaf233ceb41c339d5b4527481e5821ec5667c",
+              "url": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "complete-six-page-image-brochure-has-no-year-specific-application-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf",
+          "evidenceBodySha256": "b55891b816d315158da2567c8781cc815a68a86658b38c515641de9aa6e54388",
+          "observedAt": "2026-10-19T12:19:49.241416+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "pdfVisualObservationPin": {
+            "path": "pdf-visual-observations.json",
+            "sha256": "cafbcd4cbcec45a7327eeccd245d172601ebec8b32e026d392509cb961bb670a"
+          },
+          "pdfTextIsImageOnly": true,
+          "completeOriginalVisualRead": true,
+          "noYearRollover": true,
+          "programmeIdentitySeenInVisual": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-tyut-mechanical-engineering-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-taiyuan-university-of-technology",
+          "canonicalUniversitySha256": "b6b220457df3edb88106f1dfb430e6a3b50cdff2ad174858460908eae156fd57",
+          "programId": "prog-gap-prog-mew-nss-tyut-mechanical-engineering-master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "3126e3832dbebf2cde1905e4a4dc71f875f7061be03d281acad0e32c8322d6a9",
+          "canonicalCycleSha256": "3126e3832dbebf2cde1905e4a4dc71f875f7061be03d281acad0e32c8322d6a9",
+          "canonicalProgramSha256": "f03fea819772cb68e9e0f33e48af5d92e0272758578f47b46048b68482731d4e",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-tyut-mechanical-engineering-master",
+              "canonicalProgramSha256": "f03fea819772cb68e9e0f33e48af5d92e0272758578f47b46048b68482731d4e"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-tyut-mechanical-engineering-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-tyut-mechanical-engineering-master",
+              "canonicalSourceSha256": "99d03792f4e6c2d55917a86e83ab7942c7c2942a95ae6f0b13771c71a16ae525",
+              "url": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "complete-six-page-image-brochure-has-no-year-specific-application-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf",
+          "evidenceBodySha256": "b55891b816d315158da2567c8781cc815a68a86658b38c515641de9aa6e54388",
+          "observedAt": "2026-10-19T12:19:49.241416+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "pdfVisualObservationPin": {
+            "path": "pdf-visual-observations.json",
+            "sha256": "cafbcd4cbcec45a7327eeccd245d172601ebec8b32e026d392509cb961bb670a"
+          },
+          "pdfTextIsImageOnly": true,
+          "completeOriginalVisualRead": true,
+          "noYearRollover": true,
+          "programmeIdentitySeenInVisual": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-tyut-teaching-chinese-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-taiyuan-university-of-technology",
+          "canonicalUniversitySha256": "b6b220457df3edb88106f1dfb430e6a3b50cdff2ad174858460908eae156fd57",
+          "programId": "prog-gap-prog-mew-nss-tyut-teaching-chinese-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "975e41ed9ca112f96df50aa45ca16a0ccb471294a435e553a133f0a61c59fea7",
+          "canonicalCycleSha256": "975e41ed9ca112f96df50aa45ca16a0ccb471294a435e553a133f0a61c59fea7",
+          "canonicalProgramSha256": "7ea808093c68d31b9a1da97287ad21e46982d220b2a9f8763f7e5ad05aa7f5d8",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-tyut-teaching-chinese-bachelor",
+              "canonicalProgramSha256": "7ea808093c68d31b9a1da97287ad21e46982d220b2a9f8763f7e5ad05aa7f5d8"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-tyut-teaching-chinese-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-tyut-teaching-chinese-bachelor",
+              "canonicalSourceSha256": "4fd764bd6c81bcfd3921e6ac1325b1073897a01ca182e2f2ce47d9db846aca7f",
+              "url": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "complete-six-page-image-brochure-has-no-year-specific-application-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf",
+          "evidenceBodySha256": "b55891b816d315158da2567c8781cc815a68a86658b38c515641de9aa6e54388",
+          "observedAt": "2026-10-19T12:19:49.241416+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "pdfVisualObservationPin": {
+            "path": "pdf-visual-observations.json",
+            "sha256": "cafbcd4cbcec45a7327eeccd245d172601ebec8b32e026d392509cb961bb670a"
+          },
+          "pdfTextIsImageOnly": true,
+          "completeOriginalVisualRead": true,
+          "noYearRollover": true,
+          "programmeIdentitySeenInVisual": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nss-tyut-shanxi-government",
+          "universityId": "uni-taiyuan-university-of-technology",
+          "canonicalUniversitySha256": "b6b220457df3edb88106f1dfb430e6a3b50cdff2ad174858460908eae156fd57",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "explicit-same-source-extension",
+          "canonicalRecordSha256": "3cfc84c31902267ab559dd703eb0fc5afd8e8c9015771ab8550b8b129784a298",
+          "canonicalScholarshipSha256": "3cfc84c31902267ab559dd703eb0fc5afd8e8c9015771ab8550b8b129784a298",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-tyut-mechanical-engineering-master",
+              "canonicalProgramSha256": "f03fea819772cb68e9e0f33e48af5d92e0272758578f47b46048b68482731d4e"
+            },
+            {
+              "programId": "prog-gap-prog-mew-nss-tyut-chemical-engineering-doctorate",
+              "canonicalProgramSha256": "731ecade8919aa23317aae3ca33761772753079948ceeb81ef0a1ccae507b1c3"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nss-tyut-shanxi-government"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nss-tyut-shanxi-government",
+              "canonicalSourceSha256": "d9367d24d329c9f3ad716f3cdea24c091dd41694d61c62609c1efe0030686ef3",
+              "url": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "independent-award-overview-and-shared-image-brochure-state-no-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://ciee.tyut.edu.cn/info/1016/3436.htm",
+          "evidenceBodySha256": "e92754d25ded47e22b5f7a75049f3f95960c522e635fedcb6c88f46b462329ee",
+          "observedAt": "2026-10-19T12:22:27.484294+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "pdfVisualObservationPin": {
+            "path": "pdf-visual-observations.json",
+            "sha256": "cafbcd4cbcec45a7327eeccd245d172601ebec8b32e026d392509cb961bb670a"
+          },
+          "pdfTextIsImageOnly": true,
+          "completeOriginalVisualRead": true,
+          "noYearRollover": true,
+          "awardDeadlineNotBorrowed": true,
+          "sharedProgrammeDateNotSubstituted": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nss-tyut-university",
+          "universityId": "uni-taiyuan-university-of-technology",
+          "canonicalUniversitySha256": "b6b220457df3edb88106f1dfb430e6a3b50cdff2ad174858460908eae156fd57",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "explicit-same-source-extension",
+          "canonicalRecordSha256": "8125f70b09d1210bbf2c3446603b9576082e96c0173f03ac9369bb324d4226b9",
+          "canonicalScholarshipSha256": "8125f70b09d1210bbf2c3446603b9576082e96c0173f03ac9369bb324d4226b9",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-tyut-teaching-chinese-bachelor",
+              "canonicalProgramSha256": "7ea808093c68d31b9a1da97287ad21e46982d220b2a9f8763f7e5ad05aa7f5d8"
+            },
+            {
+              "programId": "prog-gap-prog-mew-nss-tyut-mechanical-engineering-master",
+              "canonicalProgramSha256": "f03fea819772cb68e9e0f33e48af5d92e0272758578f47b46048b68482731d4e"
+            },
+            {
+              "programId": "prog-gap-prog-mew-nss-tyut-chemical-engineering-doctorate",
+              "canonicalProgramSha256": "731ecade8919aa23317aae3ca33761772753079948ceeb81ef0a1ccae507b1c3"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nss-tyut-university",
+            "src-gap-scholarship-sch-mew-nss-tyut-university-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nss-tyut-university",
+              "canonicalSourceSha256": "c29b0b12431dd0679992eda86473a5f99c3facdd029e3a0176e261fb5b1e9bcb",
+              "url": "https://ciee.tyut.edu.cn/info/1016/3436.htm"
+            },
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nss-tyut-university-support-1",
+              "canonicalSourceSha256": "e760768677333acf3378a1ff2fb0e84767bb7f946cf9642fa82cccdcb62a3504",
+              "url": "https://ciee.tyut.edu.cn/__local/9/89/30/60DC7F3929CE9F4C2FADE523955_C8CEC407_43D54F.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "independent-award-overview-and-shared-image-brochure-state-no-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://ciee.tyut.edu.cn/info/1016/3436.htm",
+          "evidenceBodySha256": "e92754d25ded47e22b5f7a75049f3f95960c522e635fedcb6c88f46b462329ee",
+          "observedAt": "2026-10-19T12:22:27.484294+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "pdfVisualObservationPin": {
+            "path": "pdf-visual-observations.json",
+            "sha256": "cafbcd4cbcec45a7327eeccd245d172601ebec8b32e026d392509cb961bb670a"
+          },
+          "pdfTextIsImageOnly": true,
+          "completeOriginalVisualRead": true,
+          "noYearRollover": true,
+          "awardDeadlineNotBorrowed": true,
+          "sharedProgrammeDateNotSubstituted": true
+        }
+      ]
+    },
+    {
+      "key": "tgu-complete-language-guide-no-year-specific-application-cutoff",
+      "universityId": "uni-tiangong-university",
+      "evidence": [
+        {
+          "name": "tgu-guide",
+          "url": "https://en.tiangong.edu.cn/_upload/article/files/28/64/2300c19c414bbe3a237de2c5dfb8/9a9d6103-0dec-488b-9ece-a25dc841375f.pdf",
+          "observedAt": "2026-10-19T12:19:49.241416+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://en.tiangong.edu.cn/_upload/article/files/28/64/2300c19c414bbe3a237de2c5dfb8/9a9d6103-0dec-488b-9ece-a25dc841375f.pdf",
+          "contentType": "application/pdf",
+          "bytes": 967798,
+          "rawPath": "tgu-guide.pdf",
+          "rawSha256": "b615500210705ced346ffe8ee3d3ab661e257ccf518f95b7ff64caf8557e0a8d",
+          "captureSucceeded": false,
+          "error": "No module named 'pypdf'",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "textPath": "tgu-guide.txt",
+          "textSha256": "6dde944d42e250e25366ca4542273a35c5f5fdb313d53c53d3d53d22aab2240d",
+          "pageCount": 4,
+          "method": "bundled-runtime-pypdf-offline",
+          "networkRequests": 0,
+          "evidenceRole": "complete-four-page-language-original-offline-parsed",
+          "fullFactsCertified": false
+        }
+      ],
+      "programmeIdentityQuote": "Chinese Language General Scholar （Not degree awarded）",
+      "durationQuote": "You can apply for one semester or one academic year.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-tgu-chinese-language-general-scholar-2026-2027-other-fee-reference",
+          "universityId": "uni-tiangong-university",
+          "canonicalUniversitySha256": "7e405a0d7a88af666f5478ff9870c5c4f3b1ccc6137364b3ea904dfa6d20bc90",
+          "programId": "prog-gap-prog-mew-nss-tgu-chinese-language-general-scholar",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "2c268aa894ed996b1a17f7dd4fc4055adf7ec9a43f3136f4dc0f9d4465f78290",
+          "canonicalCycleSha256": "2c268aa894ed996b1a17f7dd4fc4055adf7ec9a43f3136f4dc0f9d4465f78290",
+          "canonicalProgramSha256": "dc40c1cdd6b77c469070a3c3a8c6d92593e227919eb59aa1842aea2608d46458",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-tgu-chinese-language-general-scholar",
+              "canonicalProgramSha256": "dc40c1cdd6b77c469070a3c3a8c6d92593e227919eb59aa1842aea2608d46458"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-tgu-chinese-language-general-scholar"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-tgu-chinese-language-general-scholar",
+              "canonicalSourceSha256": "d1bb372852ff7841a7f5af3b72fa47e1a1cf5e61dfae66d7e050b4dcef31f518",
+              "url": "https://en.tiangong.edu.cn/_upload/article/files/28/64/2300c19c414bbe3a237de2c5dfb8/9a9d6103-0dec-488b-9ece-a25dc841375f.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "complete-language-brochure-describes-duration-and-online-application-but-no-intake-year-or-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://en.tiangong.edu.cn/_upload/article/files/28/64/2300c19c414bbe3a237de2c5dfb8/9a9d6103-0dec-488b-9ece-a25dc841375f.pdf",
+          "evidenceBodySha256": "b615500210705ced346ffe8ee3d3ab661e257ccf518f95b7ff64caf8557e0a8d",
+          "observedAt": "2026-10-19T12:19:49.241416+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "durationNotDeadline": true,
+          "linkedCostPage2025NotApplicationYear": true,
+          "noYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "tjufe-june15-with-2026-named-attachment-blocked-by-captcha",
+      "universityId": "uni-tianjin-university-of-finance-and-economics",
+      "evidence": [
+        {
+          "name": "tjufe-guide",
+          "url": "https://inter.tjufe.edu.cn/info/1065/1663.htm",
+          "observedAt": "2026-10-19T12:19:50.372176+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://inter.tjufe.edu.cn/info/1065/1663.htm",
+          "contentType": "text/html",
+          "bytes": 64467,
+          "rawPath": "tjufe-guide.html",
+          "rawSha256": "c82704d112b61493da567a11bf9324399314373a7ed8b1d1f3069cd32e664f43",
+          "textPath": "tjufe-guide.txt",
+          "textSha256": "a9f3773df67a41282ec480fbd0161a5357b0888b0099079e53e55d24c4029446",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "tjufe-attachment",
+          "url": "https://inter.tjufe.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1959587954&wbfileid=2312574",
+          "observedAt": "2026-10-19T12:23:02.950219+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://inter.tjufe.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1959587954&wbfileid=2312574",
+          "contentType": "text/html;charset=UTF-8",
+          "bytes": 3804,
+          "rawPath": "tjufe-attachment.html",
+          "rawSha256": "3d75f08150b61639935574f7922a97d9de8a24cb18c1a08a043bdd08bf47ca50",
+          "textPath": "tjufe-attachment.txt",
+          "textSha256": "b6e006dd45ea7eb317ff98ff3ccdeb5dae716b075e4ffa6c23d3bdfa0ffba07d",
+          "captureSucceeded": true,
+          "evidenceRole": "captcha-html-not-pdf-not-date-proof",
+          "fullFactsCertified": false
+        }
+      ],
+      "programmeIdentityQuote": "国际经济与贸易（中国经济通商）",
+      "unanchoredDateQuote": "申请通道将于6月15日关闭。",
+      "attachmentFilenameQuote": "天津财经大学国际学生本科生招生简章2026年.pdf",
+      "captchaQuote": "请输入验证码下载附件",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-remaining-tjufe-b-international-economics-trade-china-commerce-2026-2027-other-fee-reference",
+          "universityId": "uni-tianjin-university-of-finance-and-economics",
+          "canonicalUniversitySha256": "fb2ef5c56f9ca6ed2eea557dd1bbbf95076c370cb7aa52b5387d54c3fffd2199",
+          "programId": "prog-gap-remaining-tjufe-b-international-economics-trade-china-commerce",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "9543b5bd347143fdc6a6e2f35bfadc5329bdc7311ef90013989d1221816a94a7",
+          "canonicalCycleSha256": "9543b5bd347143fdc6a6e2f35bfadc5329bdc7311ef90013989d1221816a94a7",
+          "canonicalProgramSha256": "8091c26614ae9319c4ca1e1fe3216c0125d1aad8d6a6a9b4ee563c27fb1a6279",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-remaining-tjufe-b-international-economics-trade-china-commerce",
+              "canonicalProgramSha256": "8091c26614ae9319c4ca1e1fe3216c0125d1aad8d6a6a9b4ee563c27fb1a6279"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-remaining-tjufe-b-international-economics-trade-china-commerce"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-remaining-tjufe-b-international-economics-trade-china-commerce",
+              "canonicalSourceSha256": "c3e810fad16006a07d15fa7792799d12e108747517cee4dac93587f067fcd909",
+              "url": "https://inter.tjufe.edu.cn/info/1065/1663.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "html-applicant-june15-lacks-body-year-anchor-and-2026-named-attachment-returns-captcha-html",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://inter.tjufe.edu.cn/info/1065/1663.htm",
+          "evidenceBodySha256": "c82704d112b61493da567a11bf9324399314373a7ed8b1d1f3069cd32e664f43",
+          "observedAt": "2026-10-19T12:19:50.372176+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "unanchoredMonthDayQuote": "申请通道将于6月15日关闭。",
+          "attachmentFilenameIsNotFullPdfProof": true,
+          "attachmentCapturePin": {
+            "path": "captures-tjufe-attachment.json",
+            "sha256": "72bff4de80d3afced99ad451b681f7e84d10669ca72c256ce98de1a3c5bfbe47"
+          },
+          "retryPolicy": "cooldown-after-one-attachment-fallback",
+          "captchaNotBypassed": true,
+          "noYearRollover": true,
+          "applicantVsReviewDistinguished": true
+        }
+      ]
+    },
+    {
+      "key": "tjutcm-recurring-june30-no-silent-2026-rollover",
+      "universityId": "uni-tianjin-university-of-traditional-chinese-medicine",
+      "evidence": [
+        {
+          "name": "tjutcm-guide",
+          "url": "https://iec.tjutcm.edu.cn/info/1038/4590.htm",
+          "observedAt": "2026-10-19T12:19:51.551652+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iec.tjutcm.edu.cn/info/1038/4590.htm",
+          "contentType": "text/html",
+          "bytes": 103691,
+          "rawPath": "tjutcm-guide.html",
+          "rawSha256": "6001ce33d78834b677716c884171200891ce164955d3d06180e1fcc0af0d7ebb",
+          "textPath": "tjutcm-guide.txt",
+          "textSha256": "efafab59cf268165549ed7871f351049dea886fbe12812f65cc1ade8651f648e",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "title": "天津中医药大学国际学生招生简章",
+      "recurringDateQuote": "报名截止日期：每年6月30日（奖学金截止时间见各自简章）；",
+      "limitedFutureRuleQuote": "自2026/2027学年起",
+      "programmeIdentityQuotes": [
+        "中医学、针灸推拿学",
+        "中药学*",
+        "国际中文教育",
+        "汉语、英语（*专业）"
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-a1e91b1e9746",
+          "universityId": "uni-tianjin-university-of-traditional-chinese-medicine",
+          "canonicalUniversitySha256": "9e36bc1aad15f3066317615b560d3fd67ddadb6892533aa20006ad3e094f9f6a",
+          "programId": "program-tianjin-university-of-traditional-chinese-medicine-traditional-chinese-m",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "e5cf48b66899ec3bc35a0ed4fad72587231f5484403d4c40b704e859b43118a4",
+          "canonicalCycleSha256": "e5cf48b66899ec3bc35a0ed4fad72587231f5484403d4c40b704e859b43118a4",
+          "canonicalProgramSha256": "b8a97912a168388196dc3c1a007ece8109b817bd1527e1baac49c11c60548030",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-tianjin-university-of-traditional-chinese-medicine-traditional-chinese-m",
+              "canonicalProgramSha256": "b8a97912a168388196dc3c1a007ece8109b817bd1527e1baac49c11c60548030"
+            }
+          ],
+          "sourceIds": [
+            "src-program-review-dd3380ed47f3"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-program-review-dd3380ed47f3",
+              "canonicalSourceSha256": "8f40d1b2cd4f349ecaaeb0335ea8809eb83aacb929038c66413cf3d292eac5bd",
+              "url": "https://iec.tjutcm.edu.cn/info/1038/4590.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "general-brochure-states-recurring-each-year-june30-without-exact-target-intake-window",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iec.tjutcm.edu.cn/info/1038/4590.htm",
+          "evidenceBodySha256": "6001ce33d78834b677716c884171200891ce164955d3d06180e1fcc0af0d7ebb",
+          "observedAt": "2026-10-19T12:19:51.551652+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "recurringDateQuote": "报名截止日期：每年6月30日（奖学金截止时间见各自简章）；",
+          "yearAnchorAbsentForApplicationCutoff": true,
+          "csca2026RuleIsNotApplicationYearAnchor": true,
+          "generalAdmissionScholarshipDatesKeptSeparate": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-a6fc5bddfff7",
+          "universityId": "uni-tianjin-university-of-traditional-chinese-medicine",
+          "canonicalUniversitySha256": "9e36bc1aad15f3066317615b560d3fd67ddadb6892533aa20006ad3e094f9f6a",
+          "programId": "program-tianjin-university-of-traditional-chinese-medicine-acupuncture-moxibusti",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "6abe21ccdbc8c034715924451d2337aab0e5b9f7151fb19f77fd3627665ab4c8",
+          "canonicalCycleSha256": "6abe21ccdbc8c034715924451d2337aab0e5b9f7151fb19f77fd3627665ab4c8",
+          "canonicalProgramSha256": "a7c686d050cbf49ba526f05a13e6aa55e329190fc8260dfeb16749e6d12cf679",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-tianjin-university-of-traditional-chinese-medicine-acupuncture-moxibusti",
+              "canonicalProgramSha256": "a7c686d050cbf49ba526f05a13e6aa55e329190fc8260dfeb16749e6d12cf679"
+            }
+          ],
+          "sourceIds": [
+            "src-program-review-dd3380ed47f3"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-program-review-dd3380ed47f3",
+              "canonicalSourceSha256": "8f40d1b2cd4f349ecaaeb0335ea8809eb83aacb929038c66413cf3d292eac5bd",
+              "url": "https://iec.tjutcm.edu.cn/info/1038/4590.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "general-brochure-states-recurring-each-year-june30-without-exact-target-intake-window",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iec.tjutcm.edu.cn/info/1038/4590.htm",
+          "evidenceBodySha256": "6001ce33d78834b677716c884171200891ce164955d3d06180e1fcc0af0d7ebb",
+          "observedAt": "2026-10-19T12:19:51.551652+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "recurringDateQuote": "报名截止日期：每年6月30日（奖学金截止时间见各自简章）；",
+          "yearAnchorAbsentForApplicationCutoff": true,
+          "csca2026RuleIsNotApplicationYearAnchor": true,
+          "generalAdmissionScholarshipDatesKeptSeparate": true,
+          "noYearRollover": true,
+          "canonicalDegreeLanguageScope": "Stored programme is Chinese-taught; adjacent starred English route is not silently substituted."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-tjutcm-acupuncture-master-en-2026-2027-autumn-fee-reference",
+          "universityId": "uni-tianjin-university-of-traditional-chinese-medicine",
+          "canonicalUniversitySha256": "9e36bc1aad15f3066317615b560d3fd67ddadb6892533aa20006ad3e094f9f6a",
+          "programId": "prog-gap-prog-mew-ne-tjutcm-acupuncture-master-en",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "9228a9d3bd428f123090134f590a48a11dad3aaec0a6405eee2e592d13c290eb",
+          "canonicalCycleSha256": "9228a9d3bd428f123090134f590a48a11dad3aaec0a6405eee2e592d13c290eb",
+          "canonicalProgramSha256": "8c6459eeac803b9372b3ac69cee0aa2b41cd123b3fcdd85b631fd9916cb0d614",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-ne-tjutcm-acupuncture-master-en",
+              "canonicalProgramSha256": "8c6459eeac803b9372b3ac69cee0aa2b41cd123b3fcdd85b631fd9916cb0d614"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-tjutcm-acupuncture-master-en"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-tjutcm-acupuncture-master-en",
+              "canonicalSourceSha256": "b27f433ed9b6e48f5a8098d0e2df6c8871637d08fe5bdf9b7bd5a99d26b12b5c",
+              "url": "https://iec.tjutcm.edu.cn/info/1038/4590.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "general-brochure-states-recurring-each-year-june30-without-exact-target-intake-window",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iec.tjutcm.edu.cn/info/1038/4590.htm",
+          "evidenceBodySha256": "6001ce33d78834b677716c884171200891ce164955d3d06180e1fcc0af0d7ebb",
+          "observedAt": "2026-10-19T12:19:51.551652+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "recurringDateQuote": "报名截止日期：每年6月30日（奖学金截止时间见各自简章）；",
+          "yearAnchorAbsentForApplicationCutoff": true,
+          "csca2026RuleIsNotApplicationYearAnchor": true,
+          "generalAdmissionScholarshipDatesKeptSeparate": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-tjutcm-chinese-materia-medica-doctorate-2026-2027-autumn-fee-reference",
+          "universityId": "uni-tianjin-university-of-traditional-chinese-medicine",
+          "canonicalUniversitySha256": "9e36bc1aad15f3066317615b560d3fd67ddadb6892533aa20006ad3e094f9f6a",
+          "programId": "prog-gap-prog-mew-ne-tjutcm-chinese-materia-medica-doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "doctorate",
+          "teachingLanguages": [
+            "Chinese",
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "f80d768991305fb09e4f19f2eff2ec47482936100866db7e1a25ee92d9b8a3d3",
+          "canonicalCycleSha256": "f80d768991305fb09e4f19f2eff2ec47482936100866db7e1a25ee92d9b8a3d3",
+          "canonicalProgramSha256": "5556ffda0f10734e43c18b28ceef9d3ca52cb4ddf79f569709e3ff7110135b09",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-ne-tjutcm-chinese-materia-medica-doctorate",
+              "canonicalProgramSha256": "5556ffda0f10734e43c18b28ceef9d3ca52cb4ddf79f569709e3ff7110135b09"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-tjutcm-chinese-materia-medica-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-tjutcm-chinese-materia-medica-doctorate",
+              "canonicalSourceSha256": "800ad1edcae60f3f5bb8cf388e07a12418b9a20a09dd359cfb67fcd6a967edf8",
+              "url": "https://iec.tjutcm.edu.cn/info/1038/4590.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "general-brochure-states-recurring-each-year-june30-without-exact-target-intake-window",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iec.tjutcm.edu.cn/info/1038/4590.htm",
+          "evidenceBodySha256": "6001ce33d78834b677716c884171200891ce164955d3d06180e1fcc0af0d7ebb",
+          "observedAt": "2026-10-19T12:19:51.551652+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "recurringDateQuote": "报名截止日期：每年6月30日（奖学金截止时间见各自简章）；",
+          "yearAnchorAbsentForApplicationCutoff": true,
+          "csca2026RuleIsNotApplicationYearAnchor": true,
+          "generalAdmissionScholarshipDatesKeptSeparate": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-tjutcm-international-chinese-education-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-tianjin-university-of-traditional-chinese-medicine",
+          "canonicalUniversitySha256": "9e36bc1aad15f3066317615b560d3fd67ddadb6892533aa20006ad3e094f9f6a",
+          "programId": "prog-gap-prog-mew-ne-tjutcm-international-chinese-education-master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "explicit-same-source-extension",
+          "canonicalRecordSha256": "a5cd90d52279f8847eed5ff04292096e0619dad9e984381fb1b6df88909063d1",
+          "canonicalCycleSha256": "a5cd90d52279f8847eed5ff04292096e0619dad9e984381fb1b6df88909063d1",
+          "canonicalProgramSha256": "a870c31325abe507f9fbea44c00d8b7abe91ba57f6524727e9d7e99d9390971c",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-ne-tjutcm-international-chinese-education-master",
+              "canonicalProgramSha256": "a870c31325abe507f9fbea44c00d8b7abe91ba57f6524727e9d7e99d9390971c"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-tjutcm-international-chinese-education-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-tjutcm-international-chinese-education-master",
+              "canonicalSourceSha256": "478a82476d86da55dba4c8434391b0124c6c6afca9bf86d06fac92a6acf33f22",
+              "url": "https://iec.tjutcm.edu.cn/info/1038/4590.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "general-brochure-states-recurring-each-year-june30-without-exact-target-intake-window",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iec.tjutcm.edu.cn/info/1038/4590.htm",
+          "evidenceBodySha256": "6001ce33d78834b677716c884171200891ce164955d3d06180e1fcc0af0d7ebb",
+          "observedAt": "2026-10-19T12:19:51.551652+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "recurringDateQuote": "报名截止日期：每年6月30日（奖学金截止时间见各自简章）；",
+          "yearAnchorAbsentForApplicationCutoff": true,
+          "csca2026RuleIsNotApplicationYearAnchor": true,
+          "generalAdmissionScholarshipDatesKeptSeparate": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-tjutcm-chinese-medicine-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-tianjin-university-of-traditional-chinese-medicine",
+          "canonicalUniversitySha256": "9e36bc1aad15f3066317615b560d3fd67ddadb6892533aa20006ad3e094f9f6a",
+          "programId": "program-tianjin-university-of-traditional-chinese-medicine-traditional-chinese-m",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "explicit-same-source-extension",
+          "canonicalRecordSha256": "cdab91a29d5eed40090956ce070c4c32c4e6b57e759b21922bc61d61f723a88b",
+          "canonicalCycleSha256": "cdab91a29d5eed40090956ce070c4c32c4e6b57e759b21922bc61d61f723a88b",
+          "canonicalProgramSha256": "b8a97912a168388196dc3c1a007ece8109b817bd1527e1baac49c11c60548030",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-tianjin-university-of-traditional-chinese-medicine-traditional-chinese-m",
+              "canonicalProgramSha256": "b8a97912a168388196dc3c1a007ece8109b817bd1527e1baac49c11c60548030"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-tjutcm-chinese-medicine-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-tjutcm-chinese-medicine-bachelor",
+              "canonicalSourceSha256": "51727e014946d9d7b6b01aaf9b0e49e8cd44a5bbdfd20785a64d6fc34afb1f2c",
+              "url": "https://iec.tjutcm.edu.cn/info/1038/4590.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "general-brochure-states-recurring-each-year-june30-without-exact-target-intake-window",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iec.tjutcm.edu.cn/info/1038/4590.htm",
+          "evidenceBodySha256": "6001ce33d78834b677716c884171200891ce164955d3d06180e1fcc0af0d7ebb",
+          "observedAt": "2026-10-19T12:19:51.551652+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "recurringDateQuote": "报名截止日期：每年6月30日（奖学金截止时间见各自简章）；",
+          "yearAnchorAbsentForApplicationCutoff": true,
+          "csca2026RuleIsNotApplicationYearAnchor": true,
+          "generalAdmissionScholarshipDatesKeptSeparate": true,
+          "noYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "ucas-exact-2026-general-postgraduate-applicant-window",
+      "universityId": "uni-university-of-chinese-academy-of-sciences",
+      "evidence": [
+        {
+          "name": "ucas-guide",
+          "url": "https://english.ucas.ac.cn/index.php/admission/international-students/notice/6654-call-for-2026-master-s-doctoral-degree-programs-for-international-students",
+          "observedAt": "2026-10-19T12:19:52.877178+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.ucas.ac.cn/index.php/admission/international-students/notice/6654-call-for-2026-master-s-doctoral-degree-programs-for-international-students",
+          "contentType": "text/html; charset=utf-8",
+          "bytes": 37523,
+          "rawPath": "ucas-guide.html",
+          "rawSha256": "becc112bc169655952fa8a41172e6fdc60162744489a265527a8838521fbb45c",
+          "textPath": "ucas-guide.txt",
+          "textSha256": "267baf1207f50678899fb9906dc713c1053e977b27646cc67971533346e958d1",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "ucas-majors",
+          "url": "https://english.ucas.ac.cn/index.php/admission/international-students/major",
+          "observedAt": "2026-10-19T12:19:52.440487+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.ucas.ac.cn/index.php/admission/international-students/major",
+          "contentType": "text/html; charset=utf-8",
+          "bytes": 79641,
+          "rawPath": "ucas-majors.html",
+          "rawSha256": "22e23e01ee06fbe473c2e9ecb6037c4085caa1d46853940c0ed32447cd2fb558",
+          "textPath": "ucas-majors.txt",
+          "textSha256": "d0ea740fc37f89cb40a57cb472fa17df6d1ab54d6dbec010837e33028af31a5c",
+          "captureSucceeded": true,
+          "evidenceRole": "programme-name-identity-support-not-deadline-source",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "Call for 2026 Master's/Doctoral Degree Programs for International Students",
+      "dateHeading": "Application Deadline",
+      "quotedDate": "October 15th, 2025–April 15th, 2026.",
+      "scholarshipSeparationQuote": "For those who apply to UCAS for scholarship, please submit application before the application deadline of each scholarship (see here).",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave6-ucas-biology-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-university-of-chinese-academy-of-sciences",
+          "canonicalUniversitySha256": "bcf8da99eab3f173beb6d3ba6a6792cc602a23ced7f019975ff9a14d52c28d48",
+          "programId": "prog-gap-wave6-ucas-biology-master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "166f81d637bcb6fb698538df06c76e5f560d0a32c5a6051acedf0d5751f307c8",
+          "canonicalCycleSha256": "166f81d637bcb6fb698538df06c76e5f560d0a32c5a6051acedf0d5751f307c8",
+          "canonicalProgramSha256": "ce5e88c0c33b629d76057b4c20611b22730fa239eb46ce618e0f0684eed3557a",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave6-ucas-biology-master",
+              "canonicalProgramSha256": "ce5e88c0c33b629d76057b4c20611b22730fa239eb46ce618e0f0684eed3557a"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave6-ucas-biology-master",
+            "src-gap-program-wave6-ucas-biology-master-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave6-ucas-biology-master",
+              "canonicalSourceSha256": "44eb58b46a83e4d8b4566344b1f4325f03da350335ca49112f6f4e8f8aafefdf",
+              "url": "https://english.ucas.ac.cn/index.php/admission/international-students/major"
+            },
+            {
+              "sourceId": "src-gap-program-wave6-ucas-biology-master-support-1",
+              "canonicalSourceSha256": "133ec598489a4970ec46481f2f0febd797391e8047d3d805a3de6f45ecb05985",
+              "url": "https://english.ucas.ac.cn/index.php/admission/international-students/notice/6654-call-for-2026-master-s-doctoral-degree-programs-for-international-students"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-04-15",
+          "candidateOfficialDeadline": "2026-04-15",
+          "reason": "exact-2026-general-international-postgraduate-applicant-period-and-matching-canonical-master-major",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-10-15",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://english.ucas.ac.cn/index.php/admission/international-students/notice/6654-call-for-2026-master-s-doctoral-degree-programs-for-international-students",
+          "evidenceBodySha256": "becc112bc169655952fa8a41172e6fdc60162744489a265527a8838521fbb45c",
+          "observedAt": "2026-10-19T12:19:52.877178+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the matched 2026 general postgraduate application window is past; no successor intake or permanent cessation is inferred.",
+          "quotedDate": "October 15th, 2025–April 15th, 2026.",
+          "yearTitle": "Call for 2026 Master's/Doctoral Degree Programs for International Students",
+          "exactMajorQuote": "Biology",
+          "programmeIdentitySourcePin": {
+            "path": "ucas-majors.txt",
+            "sha256": "d0ea740fc37f89cb40a57cb472fa17df6d1ab54d6dbec010837e33028af31a5c"
+          },
+          "fundingRoute": "General 2026 international master admission; each scholarship has its own deadline.",
+          "scholarshipDatesNotInferred": true,
+          "applicantDeadlineNotUniversityReview": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave6-ucas-computer-science-engineering-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-university-of-chinese-academy-of-sciences",
+          "canonicalUniversitySha256": "bcf8da99eab3f173beb6d3ba6a6792cc602a23ced7f019975ff9a14d52c28d48",
+          "programId": "prog-gap-wave6-ucas-computer-science-engineering-master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "c185adba46edbfdca493c2a9a98707d2e82e80fbacb86b0545f6feca439e5b2c",
+          "canonicalCycleSha256": "c185adba46edbfdca493c2a9a98707d2e82e80fbacb86b0545f6feca439e5b2c",
+          "canonicalProgramSha256": "5512064252e75d6d3022d969d07eb5dd05c4bd494b778f3e34df1d3300ef3935",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave6-ucas-computer-science-engineering-master",
+              "canonicalProgramSha256": "5512064252e75d6d3022d969d07eb5dd05c4bd494b778f3e34df1d3300ef3935"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave6-ucas-computer-science-engineering-master",
+            "src-gap-program-wave6-ucas-computer-science-engineering-master-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave6-ucas-computer-science-engineering-master",
+              "canonicalSourceSha256": "8d70ad2b254a823e0e1f725cb67d91b992221634a136bc874c076415cc6a34a7",
+              "url": "https://english.ucas.ac.cn/index.php/admission/international-students/major"
+            },
+            {
+              "sourceId": "src-gap-program-wave6-ucas-computer-science-engineering-master-support-1",
+              "canonicalSourceSha256": "849139ae1887a30828f75710ddc2868850562072b90050402e7f54616c3b5311",
+              "url": "https://english.ucas.ac.cn/index.php/admission/international-students/notice/6654-call-for-2026-master-s-doctoral-degree-programs-for-international-students"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-04-15",
+          "candidateOfficialDeadline": "2026-04-15",
+          "reason": "exact-2026-general-international-postgraduate-applicant-period-and-matching-canonical-master-major",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-10-15",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://english.ucas.ac.cn/index.php/admission/international-students/notice/6654-call-for-2026-master-s-doctoral-degree-programs-for-international-students",
+          "evidenceBodySha256": "becc112bc169655952fa8a41172e6fdc60162744489a265527a8838521fbb45c",
+          "observedAt": "2026-10-19T12:19:52.877178+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the matched 2026 general postgraduate application window is past; no successor intake or permanent cessation is inferred.",
+          "quotedDate": "October 15th, 2025–April 15th, 2026.",
+          "yearTitle": "Call for 2026 Master's/Doctoral Degree Programs for International Students",
+          "exactMajorQuote": "Computer Science and Engineering",
+          "programmeIdentitySourcePin": {
+            "path": "ucas-majors.txt",
+            "sha256": "d0ea740fc37f89cb40a57cb472fa17df6d1ab54d6dbec010837e33028af31a5c"
+          },
+          "fundingRoute": "General 2026 international master admission; each scholarship has its own deadline.",
+          "scholarshipDatesNotInferred": true,
+          "applicantDeadlineNotUniversityReview": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave6-ucas-environmental-science-engineering-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-university-of-chinese-academy-of-sciences",
+          "canonicalUniversitySha256": "bcf8da99eab3f173beb6d3ba6a6792cc602a23ced7f019975ff9a14d52c28d48",
+          "programId": "prog-gap-wave6-ucas-environmental-science-engineering-master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "4ce05e8c8411d8f48e05aa727c9df3ae7dda3e20cb3d8013a53a6b94ebfb836c",
+          "canonicalCycleSha256": "4ce05e8c8411d8f48e05aa727c9df3ae7dda3e20cb3d8013a53a6b94ebfb836c",
+          "canonicalProgramSha256": "0f4e6e6c6d9e4ec45d12dc177f63eced60185a5f56f78685161c95f20e8c1220",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave6-ucas-environmental-science-engineering-master",
+              "canonicalProgramSha256": "0f4e6e6c6d9e4ec45d12dc177f63eced60185a5f56f78685161c95f20e8c1220"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave6-ucas-environmental-science-engineering-master",
+            "src-gap-program-wave6-ucas-environmental-science-engineering-master-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave6-ucas-environmental-science-engineering-master",
+              "canonicalSourceSha256": "83f8cdc1f7ad0d7197a2fc1f243633a35de0dddda76b3ae410d4906ed7884aba",
+              "url": "https://english.ucas.ac.cn/index.php/admission/international-students/major"
+            },
+            {
+              "sourceId": "src-gap-program-wave6-ucas-environmental-science-engineering-master-support-1",
+              "canonicalSourceSha256": "0712c26ea59fcf0ce496051a85af95f05d94a642d7082c7ef9a1031ba958f38f",
+              "url": "https://english.ucas.ac.cn/index.php/admission/international-students/notice/6654-call-for-2026-master-s-doctoral-degree-programs-for-international-students"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-04-15",
+          "candidateOfficialDeadline": "2026-04-15",
+          "reason": "exact-2026-general-international-postgraduate-applicant-period-and-matching-canonical-master-major",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-10-15",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://english.ucas.ac.cn/index.php/admission/international-students/notice/6654-call-for-2026-master-s-doctoral-degree-programs-for-international-students",
+          "evidenceBodySha256": "becc112bc169655952fa8a41172e6fdc60162744489a265527a8838521fbb45c",
+          "observedAt": "2026-10-19T12:19:52.877178+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the matched 2026 general postgraduate application window is past; no successor intake or permanent cessation is inferred.",
+          "quotedDate": "October 15th, 2025–April 15th, 2026.",
+          "yearTitle": "Call for 2026 Master's/Doctoral Degree Programs for International Students",
+          "exactMajorQuote": "Environmental Science and Engineering",
+          "programmeIdentitySourcePin": {
+            "path": "ucas-majors.txt",
+            "sha256": "d0ea740fc37f89cb40a57cb472fa17df6d1ab54d6dbec010837e33028af31a5c"
+          },
+          "fundingRoute": "General 2026 international master admission; each scholarship has its own deadline.",
+          "scholarshipDatesNotInferred": true,
+          "applicantDeadlineNotUniversityReview": true
+        }
+      ]
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "reportSha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "batch": "official-batch-025",
+      "reportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f"
+    },
+    {
+      "batch": "official-batch-026",
+      "reportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9"
+    },
+    {
+      "batch": "official-batch-027",
+      "reportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+    },
+    {
+      "batch": "official-batch-028",
+      "reportSha256": "c1ee48a947ab94feac0f853531921d888b4ce30b24781afe7cb9e422e29f9276"
+    },
+    {
+      "batch": "official-batch-029",
+      "reportSha256": "6fa308e70e7e0ad0a0436ed5103eb067928fc9494ba1e977fdaba85cdd3d2243"
+    },
+    {
+      "batch": "official-batch-030",
+      "reportSha256": "95ae6d26c4de9030e7debe25a19d12f12d23235c3633a3b75aca538996958668"
+    },
+    {
+      "batch": "official-batch-031",
+      "reportSha256": "7f213f09e6f2e397a41ce67e2a81c68c9f4bed5f93f83d60d1cff37a42e5cf59"
+    },
+    {
+      "batch": "official-batch-032",
+      "reportSha256": "7ca2417531ff19ae0b9c7b348bf40be89d9029a48b7930172d876488b663b982"
+    },
+    {
+      "batch": "official-batch-033",
+      "reportSha256": "9087e4d1d7242809498d7f0a9c1b740419da39f52ee863e4d4849bd1aef44698"
+    }
+  ],
+  "validation": {
+    "exactTwentyIdsCoveredOnce": true,
+    "exactQueueUniversitySliceAndBaseIds": true,
+    "noAssessedOrPriorApprovedOverlap": true,
+    "allSixCanonicalInputsUnchanged": true,
+    "canonicalRecordParentLinkedProgrammeSourceAndUniversityPinsSaved": true,
+    "quotedFragmentsMatchSavedOriginalText": true,
+    "visualOnlyPdfScopeExplicit": true,
+    "unknownOpeningNotAssessed": true,
+    "closedDatesAreExplicitPastIsoDays": true,
+    "extensionsMatchRootSelectionReceipt": true,
+    "priorReportsOneThroughThirtyThreePinned": true
+  }
+}

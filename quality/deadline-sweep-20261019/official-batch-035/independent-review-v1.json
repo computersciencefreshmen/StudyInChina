@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "independent-official-date-only-035-review-v1",
+  "reviewedAt": "2026-10-19T12:32:22.840Z",
+  "reviewer": "dates_034 independent agent",
+  "result": "source-only-pass",
+  "scope": "Offline independent review of the exact frozen twenty IDs and saved date-only evidence. No new network requests, canonical/shared-state/Git/deployment writes or full-fact renewal.",
+  "finalReportSha256": "b621c16cdbd0d01ca22059bd83f92e283d43629394ddab64ba7c86486ae7dafb",
+  "sourceReport": {
+    "path": "report.json",
+    "sha256": "b621c16cdbd0d01ca22059bd83f92e283d43629394ddab64ba7c86486ae7dafb"
+  },
+  "selection": {
+    "path": "selection-with-extensions-v1.json",
+    "sha256": "7a8b9cc79acb3f8706f4293b4d0b1492070066f8030159006f33379a160575cd"
+  },
+  "summary": {
+    "recordsReviewed": 20,
+    "baseQueueRecords": 16,
+    "additionalSameSourceRecords": 4,
+    "schoolsReviewed": 7,
+    "recordResults": {
+      "unknown": 17,
+      "closed": 3
+    },
+    "checksPassed": 15,
+    "checksFailed": 0,
+    "newNetworkRequests": 0,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "deploymentActions": 0,
+    "allTwentyUnpublishedInFrozenSnapshot": true
+  },
+  "checks": [
+    {
+      "name": "root-frozen-final-report-hash",
+      "result": "passed"
+    },
+    {
+      "name": "base-selection-and-explicit-four-extension-pins",
+      "result": "passed"
+    },
+    {
+      "name": "six-canonical-inputs-and-before-after-stable",
+      "result": "passed"
+    },
+    {
+      "name": "actual-v9-queue-seven-school-slice-and-sixteen-exact-base-IDs",
+      "result": "passed"
+    },
+    {
+      "name": "twenty-unique-records-no-prior-assessed-or-approved-overlap",
+      "result": "passed"
+    },
+    {
+      "name": "full-canonical-record-parent-program-source-university-hashes",
+      "result": "passed"
+    },
+    {
+      "name": "saved-original-bytes-length-and-SHA-and-extracted-text-pins",
+      "result": "passed"
+    },
+    {
+      "name": "all-local-report-evidence-pins",
+      "result": "passed"
+    },
+    {
+      "name": "actual-prior-report-one-through-thirtythree-hashes",
+      "result": "passed"
+    },
+    {
+      "name": "UCAS-three-exact-2026-master-applicant-periods-and-majors",
+      "result": "passed"
+    },
+    {
+      "name": "seventeen-unknown-remain-null-no-year-rollover-or-award-borrowing",
+      "result": "passed"
+    },
+    {
+      "name": "TYUT-all-six-image-pages-and-TGU-cover-independently-visually-read",
+      "result": "passed"
+    },
+    {
+      "name": "SMU-interval-corrected-pre-finalization-bytes-retained-no-result-change",
+      "result": "passed"
+    },
+    {
+      "name": "twenty-unpublished-in-frozen-snapshot-and-no-canonical-freshness-writes",
+      "result": "passed"
+    },
+    {
+      "name": "final-report-and-six-inputs-stable-after-review",
+      "result": "passed"
+    }
+  ],
+  "visualEvidenceIndependentlyRead": [
+    "tyut-page-1.png",
+    "tyut-page-2.png",
+    "tyut-page-3.png",
+    "tyut-page-4.png",
+    "tyut-page-5.png",
+    "tyut-page-6.png",
+    "tgu-page-1.png"
+  ],
+  "limitations": [
+    "Approval is limited to immutable date-only source observations. The three UCAS past dates remain candidate-only; canonical stored null values remain unchanged.",
+    "Seventeen dates remain unknown. Recurring June30/June15 wording, interviews, forms and attachment filenames do not establish target-year deadlines.",
+    "SMU fallback has no origin raw-body hash and only a bounded observation-time interval; it supports no award date.",
+    "No whole-school catalogue, fee, material, eligibility, successor intake or programme discontinuation is certified."
+  ]
+}

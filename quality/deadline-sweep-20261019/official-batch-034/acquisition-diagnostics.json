@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-19T12:24:20.374Z",
+  "sandboxFailureManifest": {
+    "path": "captures-sandbox-denied.json",
+    "sha256": "73caa7bdb01d10436943c8b6aaa87ac01db1829900d15e9e80e00c1de45f407d"
+  },
+  "classification": "local-WinError10013-socket-denial-before-origin-no-official-request-sent",
+  "escalatedFinitePublicReadsCompleted": true,
+  "normalTls": true,
+  "registeredDistinctUrlsAttempted": 9,
+  "linkedOriginalBodiesRequested": 2,
+  "nativeOriginRequests": 11,
+  "nativeReadableHtmlBodies": 9,
+  "nativePdfBodies": 1,
+  "nativeTlsFailures": 1,
+  "webFallbackRequests": 1,
+  "webFallback": {
+    "path": "stu-web-fallback.json",
+    "sha256": "8e629a9355974d0a26a1ff41ee3c4414b5053d0f7529ab54ee9d88a85de4aea0"
+  },
+  "failedSourceRetryPolicy": "STU native TLS EOF followed by one web timeout, then cooldown with no further retry",
+  "paidCalls": 0
+}

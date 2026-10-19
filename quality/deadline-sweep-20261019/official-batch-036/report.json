@@ -1,0 +1,1731 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-036-20261019",
+  "state": "completed-thirteen-unknown-scoped-date-observations",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T12:24:39.016Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256After": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v9.json",
+  "targetQueueSha256": "392e1553863bc090a8b7e536136cfc0887d367915eddc10b3a0673179451d853",
+  "selectionSha256": "ed380e8c0e696812a46ade37d15d08991c9dc71a6cc811fca1f0b9bda6726db1",
+  "selectedUniversityIds": [
+    "uni-university-of-jinan",
+    "uni-university-of-science-and-technology-of-china",
+    "uni-wenzhou-medical-university",
+    "uni-wenzhou-university",
+    "uni-wuhan-textile-university",
+    "uni-wuhan-university"
+  ],
+  "selection": {
+    "baseQueueRecords": 13,
+    "additionalSameSourceRecords": 0,
+    "totalRecords": 13,
+    "baseQueueRecordIds": [
+      "cycle-gap-prog-ujn-chinese-language-culture-2026-2027-other-fee-reference",
+      "sch-gap-wave8-ustc-youth-excellence-full-scholarship",
+      "cycle-gap-wave8-ustc-scientific-management-leaders-mba-2026-2027-autumn",
+      "cycle-2026-wenzhou-medical-university-bds-autumn",
+      "cycle-2026-wenzhou-medical-university-mbbs-autumn",
+      "cycle-2026-wenzhou-medical-university-pharmaceutical-sciences-autumn",
+      "scholarship-wenzhou-medical-university-undergraduate-freshman",
+      "cycle-wzu-china-link-2026-2027",
+      "scholarship-wzu-china-link-2026-2027",
+      "scholarship-wtu-hubei-provincial-international-students",
+      "scholarship-wtu-university-international-students",
+      "scholarship-wuhan-university-international-student",
+      "scholarship-hubei-provincial-international-student"
+    ],
+    "additionalSameSourceRecordIds": [],
+    "queueUniversityIndexRange": [
+      14,
+      19
+    ],
+    "extensionReceipt": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1216/additional-same-source-selection-v1.json",
+      "sha256": "79040f0510aa12547fe2eb37a0cea4bfb946b6d1d5a26a4dde9dfab90d9469ee",
+      "noExtraRecordsForTheseUniversities": true
+    }
+  },
+  "acquisition": {
+    "registeredDistinctUrlsAttempted": 6,
+    "directLinkedSupportUrlsAttempted": 4,
+    "publicGetOperations": 10,
+    "originalBodiesSaved": 10,
+    "nativeHtmlBodies": 9,
+    "nativePdfBodies": 1,
+    "normalTls": true,
+    "paidModelCalls": 0,
+    "diagnostics": {
+      "path": "acquisition-diagnostics.json",
+      "sha256": "7d7fe120847f3b766025dca7721b2ee001fa852cb0357361d18e2497c1a42b19"
+    },
+    "captureManifestPins": [
+      {
+        "path": "captures.json",
+        "sha256": "cb9ec113236d94812538d1caf08d13585dc9b5a630c26be976311a35f4c90e9e"
+      },
+      {
+        "path": "support-captures.json",
+        "sha256": "f96751db191d09509722ac3bc1fe4caa6c6f9195726925a1dff3a3e99ae0c46f"
+      }
+    ],
+    "pdfOfflineExtraction": {
+      "path": "pdf-extraction.json",
+      "sha256": "47b1cf3e70cd46a5292328ce243efc6f08482001155216fb81412c59389429ae"
+    },
+    "pdfVisualTranscript": {
+      "path": "pdf-visual-transcript.json",
+      "sha256": "d06e687678666b259311d8a51f49e74af172b979a98060829e692a5e4c297efa"
+    },
+    "bodyInterpretation": "Nine complete HTML bodies and one complete image-only PDF saved. USTC legacy route redirects to a news index. WTU PDF has no substantive text layer and was fully rendered offline; relevant award tables were visually inspected. No landing, list, month-only interval, enrollment/start boundary or stored date is treated as exact applicant-cutoff proof."
+  },
+  "summary": {
+    "schoolsAttempted": 6,
+    "recordsAssessed": 13,
+    "baseQueueRecords": 13,
+    "additionalSameSourceRecords": 0,
+    "admissionCyclesAssessed": 6,
+    "scholarshipsAssessed": 7,
+    "recordResults": {
+      "unknown": 13
+    },
+    "rollingPeriodObservations": 2,
+    "exactDeadlineCandidates": 0,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "rules": [
+    "Source-only date evidence; no canonical date, status, publication or whole-record freshness changes.",
+    "Unknown exact dates remain unknown; year-round applications do not produce a synthetic deadline.",
+    "Programme semester dates, latest study-start dates, registration dates and award result dates are not applicant cutoffs.",
+    "Month-only ranges are not expanded into month-end ISO days. Independent award routes keep their own scope.",
+    "USTC stored 2026-02-15 is preserved but not reverified because the registered source now redirects to an unrelated news index.",
+    "WHU multi-school provincial award is assessed only under the queue-attributed university; no other institution is covered.",
+    "Only one direct-linked recovery per incomplete original source; unresolved groups enter cooldown. No permanent programme cessation is inferred."
+  ],
+  "groups": [
+    {
+      "key": "ujn-taught-semesters-not-application-window",
+      "universityId": "uni-university-of-jinan",
+      "evidence": [
+        {
+          "name": "ujn-language",
+          "url": "https://isao.ujn.edu.cn/English/PROGRAMS/Chinese_Language_and_Culture_Programs.htm",
+          "observedAt": "2026-10-19T12:20:11.723823+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://isao.ujn.edu.cn/English/PROGRAMS/Chinese_Language_and_Culture_Programs.htm",
+          "contentType": "text/html",
+          "bytes": 13249,
+          "rawPath": "ujn-language.html",
+          "rawSha256": "e226efb72ed7ec376427cbc86b50ca1f4c09e86bacc467178dafa0137d99ee38",
+          "textPath": "ujn-language.txt",
+          "textSha256": "45e90a4ab0512ceee3ac32f7c2f412c99057865f64cc454b3b8adadb209258db",
+          "captureSucceeded": true,
+          "evidenceRole": "registered-programme-index-not-date-proof",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "ujn-year-programme",
+          "url": "https://isao.ujn.edu.cn/info/1048/1242.htm",
+          "observedAt": "2026-10-19T12:21:53.205672+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://isao.ujn.edu.cn/info/1048/1242.htm",
+          "contentType": "text/html",
+          "bytes": 13156,
+          "rawPath": "ujn-year-programme.html",
+          "rawSha256": "68a25cd1e5700dbefcd68548bac5ea41d7d747ca8f5fcfcd23c790d3438c7c72",
+          "textPath": "ujn-year-programme.txt",
+          "textSha256": "51d5ad5aaf1bb83f8fcddba6dd20eec29881c734f65aad1e7a4ff7807a38fbbe",
+          "captureSucceeded": true,
+          "evidenceRole": "directly-linked-original-programme-body",
+          "fullFactsCertified": false
+        }
+      ],
+      "programmeQuote": "Chinese Language and Culture (One-semester/One-year Program)",
+      "sourcePublicationDate": "2026-06-22",
+      "semesterQuotes": [
+        "Spring Semester: March-July",
+        "Fall Semester: September-January"
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-ujn-chinese-language-culture-2026-2027-other-fee-reference",
+          "universityId": "uni-university-of-jinan",
+          "canonicalUniversitySha256": "338bfc6b7cca1d4a7ea007c8c9f89b835f98b293140002827e497afc07d1a765",
+          "programId": "prog-gap-prog-ujn-chinese-language-culture",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "0fdde77998442fe6afb4ff2cc134e795502b753443b29c50b0a09da7e13af85f",
+          "canonicalCycleSha256": "0fdde77998442fe6afb4ff2cc134e795502b753443b29c50b0a09da7e13af85f",
+          "canonicalProgramSha256": "926f4d04680bbd01baf26f8388b8161b03cb094c73b9fa88c62069e62b7fa921",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-prog-ujn-chinese-language-culture"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-08-09",
+            "status": "stale",
+            "id": "cycle-gap-prog-ujn-chinese-language-culture-2026-2027-other-fee-reference",
+            "programId": "prog-gap-prog-ujn-chinese-language-culture",
+            "academicYear": "2026-2027",
+            "intake": "other",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": 14000,
+            "tuitionPeriod": "academic-year",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "cycle-specific",
+            "factScope": "partial",
+            "applicationFeeCny": null
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-ujn-chinese-language-culture",
+              "canonicalProgramSha256": "926f4d04680bbd01baf26f8388b8161b03cb094c73b9fa88c62069e62b7fa921"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-ujn-chinese-language-culture"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-ujn-chinese-language-culture",
+              "canonicalSourceSha256": "d39df23a80b990a37497b0dc40d4e75a6b599997bbebec6790c2c232a702bf45",
+              "url": "https://isao.ujn.edu.cn/English/PROGRAMS/Chinese_Language_and_Culture_Programs.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "matching-language-programme-body-gives-taught-semesters-but-no-target-application-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://isao.ujn.edu.cn/info/1048/1242.htm",
+          "evidenceBodySha256": "68a25cd1e5700dbefcd68548bac5ea41d7d747ca8f5fcfcd23c790d3438c7c72",
+          "observedAt": "2026-10-19T12:21:53.205672+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "teachingSemesterMonthsNotApplicationDeadline": true,
+          "publicationDateNotApplicationOpening": true,
+          "noMonthEndInferred": true
+        }
+      ]
+    },
+    {
+      "key": "ustc-legacy-youth-url-now-news-index-no-current-date-proof",
+      "universityId": "uni-university-of-science-and-technology-of-china",
+      "evidence": [
+        {
+          "name": "ustc-youth",
+          "url": "https://ic.ustc.edu.cn/en/v7list.php?id=646",
+          "observedAt": "2026-10-19T12:20:11.725823+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://ic.ustc.edu.cn/?page_id=742",
+          "contentType": "text/html; charset=UTF-8",
+          "bytes": 47177,
+          "rawPath": "ustc-youth.html",
+          "rawSha256": "541e0026791773abfc99ba1cbed18d3d0c59babd8b4664e0ed54d35437c7cc6d",
+          "textPath": "ustc-youth.txt",
+          "textSha256": "18461608b12492eb66eb7bc3faddef1f3fcd8b99d17cd590dd08eacc920576d9",
+          "captureSucceeded": true,
+          "evidenceRole": "registered-legacy-source-redirects-to-news-index-not-date-proof",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "ustc-admissions",
+          "url": "https://ic.ustc.edu.cn/?page_id=747",
+          "observedAt": "2026-10-19T12:21:53.205672+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://ic.ustc.edu.cn/?page_id=747",
+          "contentType": "text/html; charset=UTF-8",
+          "bytes": 46768,
+          "rawPath": "ustc-admissions.html",
+          "rawSha256": "bd8310da81a1a6170388146b3423c1112fc25a6f3beed2d1b58cd5fffc89bbfe",
+          "textPath": "ustc-admissions.txt",
+          "textSha256": "d0eecdde97f8631aedad68592a26313596503792de4cfd24f72022a31b033739",
+          "captureSucceeded": true,
+          "evidenceRole": "one-direct-linked-admissions-fallback-not-exact-youth-mba-guide",
+          "fullFactsCertified": false
+        }
+      ],
+      "originalFinalUrl": "https://ic.ustc.edu.cn/?page_id=742",
+      "actualTitle": "News & Notice",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-ustc-youth-excellence-full-scholarship",
+          "universityId": "uni-university-of-science-and-technology-of-china",
+          "canonicalUniversitySha256": "c84590dc23cb4ec71ba3adad36afd5dd7827abd3ad29b4c821105dac9a449257",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "6bf3ac9c81f4f57736607596c25a22f2d960aa2712093d21f9334bb622e03ecf",
+          "canonicalScholarshipSha256": "6bf3ac9c81f4f57736607596c25a22f2d960aa2712093d21f9334bb622e03ecf",
+          "canonicalRow": {
+            "id": "sch-gap-wave8-ustc-youth-excellence-full-scholarship",
+            "slug": "gap-wave8-ustc-youth-excellence-full-scholarship",
+            "name": {
+              "en": "USTC Youth of Excellence Scheme Full Scholarship",
+              "zh": "中国科大青年卓越计划全额奖学金",
+              "ru": "Полная стипендия USTC Youth of Excellence Scheme"
+            },
+            "providerType": "other",
+            "universityIds": [
+              "uni-university-of-science-and-technology-of-china"
+            ],
+            "programIds": [],
+            "coverage": {
+              "tuition": "full",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://ic.ustc.edu.cn/en/v7list.php?id=646",
+            "summary": {
+              "en": "USTC confirms a full scholarship for the designated Scientific Management Leaders MBA. The 2026 university and CSC stages are closed; no later cycle is inferred.",
+              "zh": "中国科大官方确认“科学管理领军人才”MBA配套全额奖学金；2026校内及CSC申请阶段均已结束，不推定下一周期。",
+              "ru": "USTC подтверждает полную стипендию для MBA «Лидеры научного управления»; этапы университета и CSC 2026 года закрыты, следующий цикл не предполагается."
+            },
+            "sourceIds": [
+              "src-gap-scholarship-wave8-ustc-youth-excellence-full-scholarship"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale"
+          },
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-ustc-youth-excellence-full-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-ustc-youth-excellence-full-scholarship",
+              "canonicalSourceSha256": "4b2d2a95c2fd2c67701f08cd8f210495332d59015d94dd699808757a8c3905fa",
+              "url": "https://ic.ustc.edu.cn/en/v7list.php?id=646"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "legacy-youth-excellence-source-redirects-to-news-index-and-bounded-admissions-fallback-does-not-state-exact-2026-youth-mba-university-or-CSC-applicant-dates",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://ic.ustc.edu.cn/en/v7list.php?id=646",
+          "evidenceBodySha256": "541e0026791773abfc99ba1cbed18d3d0c59babd8b4664e0ed54d35437c7cc6d",
+          "observedAt": "2026-10-19T12:20:11.725823+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "storedDateIsNotFreshEvidence": true,
+          "originalExactArticleUnavailable": true,
+          "landingPageNotDateProof": true,
+          "universityStageAndCscStageNotMerged": true,
+          "noNextYearRollover": true,
+          "retryPolicy": "cooldown-after-one-direct-linked-fallback",
+          "separateAwardDeadlineNotBorrowed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-ustc-scientific-management-leaders-mba-2026-2027-autumn",
+          "universityId": "uni-university-of-science-and-technology-of-china",
+          "canonicalUniversitySha256": "c84590dc23cb4ec71ba3adad36afd5dd7827abd3ad29b4c821105dac9a449257",
+          "programId": "prog-gap-wave8-ustc-scientific-management-leaders-mba",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "326d42548052dfd176efe666b9507f53b3182f32f9d13bee360e0dd784d71d5a",
+          "canonicalCycleSha256": "326d42548052dfd176efe666b9507f53b3182f32f9d13bee360e0dd784d71d5a",
+          "canonicalProgramSha256": "d33b27b5783cfa52cc9bd808333a7b2befa86d0984ce683f9fc48c314b6221e7",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-wave8-ustc-scientific-management-leaders-mba"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-08-09",
+            "status": "stale",
+            "id": "cycle-gap-wave8-ustc-scientific-management-leaders-mba-2026-2027-autumn",
+            "programId": "prog-gap-wave8-ustc-scientific-management-leaders-mba",
+            "academicYear": "2026-2027",
+            "intake": "autumn",
+            "opensOn": null,
+            "closesOn": "2026-02-15",
+            "dateStatus": "published",
+            "tuitionCny": null,
+            "tuitionPeriod": null,
+            "tuitionStatus": null,
+            "evidenceBasis": "cycle-specific",
+            "factScope": "dates-only",
+            "applicationFeeCny": null,
+            "notes": {
+              "en": "USTC officially offers this English-taught MBA to eligible non-Chinese professionals through a two-year 1+1 model. The university-stage deadline of 15 February 2026 is closed; the program carries a full scholarship.",
+              "zh": "中国科学技术大学官方面向符合条件的非中国籍职业人士开设该英文MBA，采用两年“1+1”培养模式；校内申请截止2026年2月15日，现已关闭，并配套全额奖学金。",
+              "ru": "USTC официально предлагает эту англоязычную MBA-программу подходящим иностранным специалистам по двухлетней модели 1+1; срок университета 15 февраля 2026 года закрыт, предусмотрена полная стипендия."
+            }
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-ustc-scientific-management-leaders-mba",
+              "canonicalProgramSha256": "d33b27b5783cfa52cc9bd808333a7b2befa86d0984ce683f9fc48c314b6221e7"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave8-ustc-scientific-management-leaders-mba"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-ustc-scientific-management-leaders-mba",
+              "canonicalSourceSha256": "7754f1cf8cdd184213a594ef7de6b56a78c98a8d8bed4920f43f12321079eb99",
+              "url": "https://ic.ustc.edu.cn/en/v7list.php?id=646"
+            }
+          ],
+          "storedDeadline": "2026-02-15",
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "legacy-youth-excellence-source-redirects-to-news-index-and-bounded-admissions-fallback-does-not-state-exact-2026-youth-mba-university-or-CSC-applicant-dates",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://ic.ustc.edu.cn/en/v7list.php?id=646",
+          "evidenceBodySha256": "541e0026791773abfc99ba1cbed18d3d0c59babd8b4664e0ed54d35437c7cc6d",
+          "observedAt": "2026-10-19T12:20:11.725823+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "storedDateIsNotFreshEvidence": true,
+          "originalExactArticleUnavailable": true,
+          "landingPageNotDateProof": true,
+          "universityStageAndCscStageNotMerged": true,
+          "noNextYearRollover": true,
+          "retryPolicy": "cooldown-after-one-direct-linked-fallback",
+          "storedPastDeadlineUnverifiedThisRun": "2026-02-15"
+        }
+      ]
+    },
+    {
+      "key": "wmu-month-only-general-period-and-ranking-based-award-no-exact-day",
+      "universityId": "uni-wenzhou-medical-university",
+      "evidence": [
+        {
+          "name": "wmu-brochure",
+          "url": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+          "observedAt": "2026-10-19T12:20:11.726824+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+          "contentType": "text/html",
+          "bytes": 20363,
+          "rawPath": "wmu-brochure.html",
+          "rawSha256": "22b72186f116c71bfb6427e928def31cdab96b723c9c768ff9fde527c2b8afe8",
+          "textPath": "wmu-brochure.txt",
+          "textSha256": "8037cb1ffdf1f9c796fec46739b66bb7600ce45d08c0b18e5e86b2b1fb924839",
+          "captureSucceeded": true,
+          "evidenceRole": "full-original-brochure-with-month-only-application-period",
+          "fullFactsCertified": false
+        }
+      ],
+      "applicationPeriodHeading": "V. Application Period",
+      "applicationPeriod": "January – July",
+      "awardScopeQuote": "Freshman scholarships are awarded based on entrance examination rankings.",
+      "enrollmentQuote": "Autumn Semester (September)",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-wenzhou-medical-university-bds-autumn",
+          "universityId": "uni-wenzhou-medical-university",
+          "canonicalUniversitySha256": "d1595b9b9b3ed2daa77d9bfca70babe62f83fb6e7f37ca540591c1c780fdd6b7",
+          "programId": "program-wenzhou-medical-university-bds-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "3680cfda8c6251759dda2e6b6467e1c69b06bdcbf71dae66fe1265e69c69acb9",
+          "canonicalCycleSha256": "3680cfda8c6251759dda2e6b6467e1c69b06bdcbf71dae66fe1265e69c69acb9",
+          "canonicalProgramSha256": "d3e5295b782aa674c7f0ba0fcc1f05e11f2b3a0971f60a5901eed0e4a0e40d67",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-wmu-undergraduate-admission"
+            ],
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-04",
+            "status": "stale",
+            "id": "cycle-2026-wenzhou-medical-university-bds-autumn",
+            "programId": "program-wenzhou-medical-university-bds-bachelor",
+            "academicYear": "2026-2027",
+            "intake": "autumn",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": 33000,
+            "tuitionPeriod": "academic-year",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "recurring-official-rule",
+            "factScope": "partial",
+            "applicationFeeCny": null
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "program-wenzhou-medical-university-bds-bachelor",
+              "canonicalProgramSha256": "d3e5295b782aa674c7f0ba0fcc1f05e11f2b3a0971f60a5901eed0e4a0e40d67"
+            }
+          ],
+          "sourceIds": [
+            "src-wmu-undergraduate-admission"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-wmu-undergraduate-admission",
+              "canonicalSourceSha256": "0ac02062b6fa73279f64924b0dd6ab06caafff462d44bb8cf448f51c939fba61",
+              "url": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "brochure-only-gives-January-to-July-no-exact-day-or-explicit-target-year-application-window",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+          "evidenceBodySha256": "22b72186f116c71bfb6427e928def31cdab96b723c9c768ff9fde527c2b8afe8",
+          "observedAt": "2026-10-19T12:20:11.726824+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "periodObservation": "January – July",
+          "periodPrecision": "month-only",
+          "noMonthEndInferred": true,
+          "explicitTargetYearAbsent": true,
+          "reviewTenWorkingDaysNotApplicantDeadline": true,
+          "JulyAugustLetterIssuanceNotApplicantDeadline": true,
+          "programmeNameQuote": "Bachelor of Dental Surgery (BDS)"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-wenzhou-medical-university-mbbs-autumn",
+          "universityId": "uni-wenzhou-medical-university",
+          "canonicalUniversitySha256": "d1595b9b9b3ed2daa77d9bfca70babe62f83fb6e7f37ca540591c1c780fdd6b7",
+          "programId": "program-wenzhou-medical-university-mbbs-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "dc100300e343cfc108a630ba43b2a5415da43893cfdc3b1005e09d6fca6843cd",
+          "canonicalCycleSha256": "dc100300e343cfc108a630ba43b2a5415da43893cfdc3b1005e09d6fca6843cd",
+          "canonicalProgramSha256": "9f08cdc0f4463194f073d9c159f4efb118bf3d33c7587e4563d424343945d4f9",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-wmu-undergraduate-admission"
+            ],
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-04",
+            "status": "stale",
+            "id": "cycle-2026-wenzhou-medical-university-mbbs-autumn",
+            "programId": "program-wenzhou-medical-university-mbbs-bachelor",
+            "academicYear": "2026-2027",
+            "intake": "autumn",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": 33000,
+            "tuitionPeriod": "academic-year",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "recurring-official-rule",
+            "factScope": "partial",
+            "applicationFeeCny": null
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "program-wenzhou-medical-university-mbbs-bachelor",
+              "canonicalProgramSha256": "9f08cdc0f4463194f073d9c159f4efb118bf3d33c7587e4563d424343945d4f9"
+            }
+          ],
+          "sourceIds": [
+            "src-wmu-undergraduate-admission"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-wmu-undergraduate-admission",
+              "canonicalSourceSha256": "0ac02062b6fa73279f64924b0dd6ab06caafff462d44bb8cf448f51c939fba61",
+              "url": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "brochure-only-gives-January-to-July-no-exact-day-or-explicit-target-year-application-window",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+          "evidenceBodySha256": "22b72186f116c71bfb6427e928def31cdab96b723c9c768ff9fde527c2b8afe8",
+          "observedAt": "2026-10-19T12:20:11.726824+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "periodObservation": "January – July",
+          "periodPrecision": "month-only",
+          "noMonthEndInferred": true,
+          "explicitTargetYearAbsent": true,
+          "reviewTenWorkingDaysNotApplicantDeadline": true,
+          "JulyAugustLetterIssuanceNotApplicantDeadline": true,
+          "programmeNameQuote": "Bachelor of Medicine and Bachelor of Surgery (MBBS)"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-wenzhou-medical-university-pharmaceutical-sciences-autumn",
+          "universityId": "uni-wenzhou-medical-university",
+          "canonicalUniversitySha256": "d1595b9b9b3ed2daa77d9bfca70babe62f83fb6e7f37ca540591c1c780fdd6b7",
+          "programId": "program-wenzhou-medical-university-pharmaceutical-sciences-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "c54d533a219482843e3d3cdd91dd7aabc839da2dbada034635ed0e84f3618e2e",
+          "canonicalCycleSha256": "c54d533a219482843e3d3cdd91dd7aabc839da2dbada034635ed0e84f3618e2e",
+          "canonicalProgramSha256": "ebe4e154dac162bd5e66ab71012901667a4f9b7168a09bc647d46145e2ef62a1",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-wmu-undergraduate-admission"
+            ],
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-04",
+            "status": "stale",
+            "id": "cycle-2026-wenzhou-medical-university-pharmaceutical-sciences-autumn",
+            "programId": "program-wenzhou-medical-university-pharmaceutical-sciences-bachelor",
+            "academicYear": "2026-2027",
+            "intake": "autumn",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": 20000,
+            "tuitionPeriod": "academic-year",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "recurring-official-rule",
+            "factScope": "partial",
+            "applicationFeeCny": null
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "program-wenzhou-medical-university-pharmaceutical-sciences-bachelor",
+              "canonicalProgramSha256": "ebe4e154dac162bd5e66ab71012901667a4f9b7168a09bc647d46145e2ef62a1"
+            }
+          ],
+          "sourceIds": [
+            "src-wmu-undergraduate-admission"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-wmu-undergraduate-admission",
+              "canonicalSourceSha256": "0ac02062b6fa73279f64924b0dd6ab06caafff462d44bb8cf448f51c939fba61",
+              "url": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "brochure-only-gives-January-to-July-no-exact-day-or-explicit-target-year-application-window",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+          "evidenceBodySha256": "22b72186f116c71bfb6427e928def31cdab96b723c9c768ff9fde527c2b8afe8",
+          "observedAt": "2026-10-19T12:20:11.726824+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "periodObservation": "January – July",
+          "periodPrecision": "month-only",
+          "noMonthEndInferred": true,
+          "explicitTargetYearAbsent": true,
+          "reviewTenWorkingDaysNotApplicantDeadline": true,
+          "JulyAugustLetterIssuanceNotApplicantDeadline": true,
+          "programmeNameQuote": "Pharmaceutical Sciences"
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-wenzhou-medical-university-undergraduate-freshman",
+          "universityId": "uni-wenzhou-medical-university",
+          "canonicalUniversitySha256": "d1595b9b9b3ed2daa77d9bfca70babe62f83fb6e7f37ca540591c1c780fdd6b7",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "8a12f4e6f1c778a502070e2b2ced948718281d3f02b1b306d09e28a70b0bf173",
+          "canonicalScholarshipSha256": "8a12f4e6f1c778a502070e2b2ced948718281d3f02b1b306d09e28a70b0bf173",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-wmu-undergraduate-admission"
+            ],
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27",
+            "status": "stale",
+            "id": "scholarship-wenzhou-medical-university-undergraduate-freshman",
+            "slug": "wenzhou-medical-university-undergraduate-freshman",
+            "name": {
+              "en": "Wenzhou Medical University MBBS/BDS Freshman Scholarship",
+              "zh": "温州医科大学MBBS/BDS新生奖学金",
+              "ru": "Стипендия первокурсникам MBBS/BDS Вэньчжоуского медицинского университета"
+            },
+            "providerType": "university",
+            "universityIds": [
+              "uni-wenzhou-medical-university"
+            ],
+            "programIds": [
+              "program-wenzhou-medical-university-mbbs-bachelor",
+              "program-wenzhou-medical-university-bds-bachelor"
+            ],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+            "summary": {
+              "en": "MBBS and BDS students first pay the full tuition. Freshman cash awards of CNY 20,000, CNY 10,000 or CNY 5,000 are then granted according to the entrance-examination ranking; the current exact scholarship deadline is not separately announced.",
+              "zh": "MBBS和BDS学生须先缴纳全额学费，再按入学考试排名获得2万元、1万元或5000元新生奖励；当期奖学金具体截止日期未单独公布。",
+              "ru": "Студенты MBBS и BDS сначала оплачивают обучение полностью, после чего по рейтингу вступительного испытания получают выплату 20 000, 10 000 или 5 000 юаней; отдельный актуальный срок не опубликован."
+            }
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "program-wenzhou-medical-university-mbbs-bachelor",
+              "canonicalProgramSha256": "9f08cdc0f4463194f073d9c159f4efb118bf3d33c7587e4563d424343945d4f9"
+            },
+            {
+              "programId": "program-wenzhou-medical-university-bds-bachelor",
+              "canonicalProgramSha256": "d3e5295b782aa674c7f0ba0fcc1f05e11f2b3a0971f60a5901eed0e4a0e40d67"
+            }
+          ],
+          "sourceIds": [
+            "src-wmu-undergraduate-admission"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-wmu-undergraduate-admission",
+              "canonicalSourceSha256": "0ac02062b6fa73279f64924b0dd6ab06caafff462d44bb8cf448f51c939fba61",
+              "url": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "freshman-award-is-after-admission-registration-and-ranking-no-separate-exact-application-deadline",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+          "evidenceBodySha256": "22b72186f116c71bfb6427e928def31cdab96b723c9c768ff9fde527c2b8afe8",
+          "observedAt": "2026-10-19T12:20:11.726824+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "periodObservation": "January – July",
+          "periodPrecision": "month-only",
+          "noMonthEndInferred": true,
+          "explicitTargetYearAbsent": true,
+          "reviewTenWorkingDaysNotApplicantDeadline": true,
+          "JulyAugustLetterIssuanceNotApplicantDeadline": true,
+          "awardOwnDeadlineNotStated": true,
+          "generalAdmissionPeriodNotSubstituted": true
+        }
+      ]
+    },
+    {
+      "key": "wzu-2026-china-link-year-round-no-manufactured-end-day",
+      "universityId": "uni-wenzhou-university",
+      "evidence": [
+        {
+          "name": "wzu-china-link",
+          "url": "https://cic.wzu.edu.cn/info/1718/11956.htm",
+          "observedAt": "2026-10-19T12:20:11.727822+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://cic.wzu.edu.cn/info/1718/11956.htm",
+          "contentType": "text/html",
+          "bytes": 21760,
+          "rawPath": "wzu-china-link.html",
+          "rawSha256": "799fbd2d5ab3a30f90e00e0c3a933c0f7c1f82e5dbeadaa50c0ae2af9a61895e",
+          "textPath": "wzu-china-link.txt",
+          "textSha256": "97ba61e98cb69202ddd3615a5a9932dbeb46e4b78fcd82a3a5b8ad1e1d52c2f6",
+          "captureSucceeded": true,
+          "evidenceRole": "exact-2026-original-china-link-guide",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "China Link Short-term Scientific Exchange Scholarship Program （2026）",
+      "applicantPeriodQuote": "The CSC application portal is open to applicants all year round.",
+      "studyStartQuote": "Start study in China no later than August 31, 2027.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-wzu-china-link-2026-2027",
+          "universityId": "uni-wenzhou-university",
+          "canonicalUniversitySha256": "51040a53862fdd18d47b82e2f947237c1056669a76e9c59f36e97867aafbb6e8",
+          "programId": "program-wzu-china-link-2026-2027",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "other",
+          "teachingLanguages": [
+            "Chinese",
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "f3f89337f433e6a0a8a5fab647c00b6648a0f121ee1a962974762a7d878e1a74",
+          "canonicalCycleSha256": "f3f89337f433e6a0a8a5fab647c00b6648a0f121ee1a962974762a7d878e1a74",
+          "canonicalProgramSha256": "6fd9a8d78aacf84eb27263724e245bdb12aa2a057ff84200f0188bca3f91231c",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-wzu-china-link-2026"
+            ],
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28",
+            "status": "stale",
+            "id": "cycle-wzu-china-link-2026-2027",
+            "programId": "program-wzu-china-link-2026-2027",
+            "academicYear": "2026-2027",
+            "intake": "other",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "rolling",
+            "tuitionCny": null,
+            "tuitionPeriod": null,
+            "tuitionStatus": null,
+            "evidenceBasis": "cycle-specific",
+            "factScope": "dates-only",
+            "applicationFeeCny": null,
+            "notes": {
+              "en": "First email admission@wzu.edu.cn with the subject “China Link + Name + university name” to obtain admission eligibility or pre-admission, then submit CSC Type B (agency number 10351). Applications are rolling and study must begin no later than August 31, 2027.",
+              "zh": "须先邮件联系admission@wzu.edu.cn（主题“China Link + 姓名 + 所在大学”）取得入学资格或预录取，再提交CSC Type B申请（受理机构编号10351）。全年滚动申请，最晚于2027年8月31日前开始学习。",
+              "ru": "Сначала напишите на admission@wzu.edu.cn с темой «China Link + имя + университет» для подтверждения права на приём, затем подайте CSC Type B (код 10351). Начало обучения — не позднее 31 августа 2027 года."
+            }
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "program-wzu-china-link-2026-2027",
+              "canonicalProgramSha256": "6fd9a8d78aacf84eb27263724e245bdb12aa2a057ff84200f0188bca3f91231c"
+            }
+          ],
+          "sourceIds": [
+            "src-wzu-china-link-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-wzu-china-link-2026",
+              "canonicalSourceSha256": "66cac2e5d4ced51598ed9143d25f0c120fde5e558273560067b0bdd10b964085",
+              "url": "https://cic.wzu.edu.cn/info/1718/11956.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "exact-2026-china-link-guide-states-year-round-applications-with-no-exact-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://cic.wzu.edu.cn/info/1718/11956.htm",
+          "evidenceBodySha256": "799fbd2d5ab3a30f90e00e0c3a933c0f7c1f82e5dbeadaa50c0ae2af9a61895e",
+          "observedAt": "2026-10-19T12:20:11.727822+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "officialPeriodObservation": "The CSC application portal is open to applicants all year round.",
+          "periodClassification": "rolling-year-round-no-fixed-day",
+          "candidateDateStatus": null,
+          "rollingKeptWithoutInventedDeadline": true,
+          "latestStudyStartObservation": "2027-08-31",
+          "latestStudyStartIsNotApplicationDeadline": true,
+          "schoolRecommendationBatchesAndMonthlyCscResultsNotApplicantDeadline": true,
+          "noNextYearRollover": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-wzu-china-link-2026-2027",
+          "universityId": "uni-wenzhou-university",
+          "canonicalUniversitySha256": "51040a53862fdd18d47b82e2f947237c1056669a76e9c59f36e97867aafbb6e8",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "b63860e00cadf95a57754c5664a08929af212b84bdbfc7f8b17a8b6b2fb7fe74",
+          "canonicalScholarshipSha256": "b63860e00cadf95a57754c5664a08929af212b84bdbfc7f8b17a8b6b2fb7fe74",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-wzu-china-link-2026"
+            ],
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28",
+            "status": "stale",
+            "id": "scholarship-wzu-china-link-2026-2027",
+            "slug": "wzu-china-link-2026-2027",
+            "name": {
+              "en": "China Link Scholarship at Wenzhou University",
+              "zh": "温州大学中国政府奖学金短期科研交流项目",
+              "ru": "Стипендия China Link в Вэньчжоуский университет"
+            },
+            "providerType": "csc",
+            "universityIds": [
+              "uni-wenzhou-university"
+            ],
+            "programIds": [
+              "program-wzu-china-link-2026-2027"
+            ],
+            "coverage": {
+              "tuition": "full",
+              "accommodation": "full",
+              "insurance": true,
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://studyinchina.csc.edu.cn/#/login",
+            "summary": {
+              "en": "Full funding covers tuition, on-campus accommodation and insurance. The monthly allowance is CNY 3,000 for general scholars and CNY 3,500 for senior scholars. A Wenzhou University pre-admission or invitation is required before the CSC submission.",
+              "zh": "全额资助覆盖学费、校内住宿和保险；普通进修生生活费为每月3,000元，高级进修生为每月3,500元。提交CSC申请前须先取得温州大学预录取或邀请材料。",
+              "ru": "Полное финансирование покрывает обучение, общежитие и страховку; выплата составляет 3 000 юаней для обычных и 3 500 юаней для старших стажёров. До подачи в CSC требуется предварительное зачисление или приглашение Вэньчжоуского университета."
+            }
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "program-wzu-china-link-2026-2027",
+              "canonicalProgramSha256": "6fd9a8d78aacf84eb27263724e245bdb12aa2a057ff84200f0188bca3f91231c"
+            }
+          ],
+          "sourceIds": [
+            "src-wzu-china-link-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-wzu-china-link-2026",
+              "canonicalSourceSha256": "66cac2e5d4ced51598ed9143d25f0c120fde5e558273560067b0bdd10b964085",
+              "url": "https://cic.wzu.edu.cn/info/1718/11956.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "exact-2026-china-link-guide-states-year-round-applications-with-no-exact-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://cic.wzu.edu.cn/info/1718/11956.htm",
+          "evidenceBodySha256": "799fbd2d5ab3a30f90e00e0c3a933c0f7c1f82e5dbeadaa50c0ae2af9a61895e",
+          "observedAt": "2026-10-19T12:20:11.727822+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "officialPeriodObservation": "The CSC application portal is open to applicants all year round.",
+          "periodClassification": "rolling-year-round-no-fixed-day",
+          "candidateDateStatus": null,
+          "rollingKeptWithoutInventedDeadline": true,
+          "latestStudyStartObservation": "2027-08-31",
+          "latestStudyStartIsNotApplicationDeadline": true,
+          "schoolRecommendationBatchesAndMonthlyCscResultsNotApplicantDeadline": true,
+          "noNextYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "wtu-original-image-pdf-award-periods-only-not-september-registration-day",
+      "universityId": "uni-wuhan-textile-university",
+      "evidence": [
+        {
+          "name": "wtu-scholarships",
+          "url": "https://iec.wtu.edu.cn/info/1060/4292.htm",
+          "observedAt": "2026-10-19T12:20:14.557558+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iec.wtu.edu.cn/info/1060/4292.htm",
+          "contentType": "text/html",
+          "bytes": 16969,
+          "rawPath": "wtu-scholarships.html",
+          "rawSha256": "08b9c7e4d18ff2f469b1fa3853955a45081ef11bdd320d2951b5794498c3e76c",
+          "textPath": "wtu-scholarships.txt",
+          "textSha256": "d3b96bf64441215bb666148df6155514e8a00fb0a9e8b9f69e5c8ce7a7f843de",
+          "captureSucceeded": true,
+          "evidenceRole": "registered-2026-article-embeds-original-pdf",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "wtu-guide-pdf",
+          "url": "https://iec.wtu.edu.cn/__local/F/BC/0D/6385D4717C93E79E9E89CAB90CE_278641AD_A7365E.pdf",
+          "observedAt": "2026-10-19T12:21:53.206673+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iec.wtu.edu.cn/__local/F/BC/0D/6385D4717C93E79E9E89CAB90CE_278641AD_A7365E.pdf",
+          "contentType": "application/pdf",
+          "bytes": 10958430,
+          "rawPath": "wtu-guide-pdf.pdf",
+          "rawSha256": "7993ed43e87c5105caaccd7e0fcb99fd315a0a8e90ad1229dd395b59afe4e169",
+          "captureSucceeded": false,
+          "error": "No module named 'pypdf'",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "embedded-original-image-only-pdf-rendered-offline",
+          "fullFactsCertified": false
+        }
+      ],
+      "offlineExtraction": {
+        "path": "pdf-extraction.json",
+        "sha256": "47b1cf3e70cd46a5292328ce243efc6f08482001155216fb81412c59389429ae"
+      },
+      "visualEvidence": {
+        "path": "pdf-visual-transcript.json",
+        "sha256": "d06e687678666b259311d8a51f49e74af172b979a98060829e692a5e4c297efa"
+      },
+      "yearScope": "September 2026 masters and doctoral intake",
+      "sourcePages": [
+        4,
+        5
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-wtu-hubei-provincial-international-students",
+          "universityId": "uni-wuhan-textile-university",
+          "canonicalUniversitySha256": "d8e3d78a2a4002e9f13a99b201927e434b2ea95590ac70c6f45d5bb49e8cb9b6",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "1d9e6e053fa0e740c36bda8dc27f0bb9059bf5c1390e731ae2c07f42278b627b",
+          "canonicalScholarshipSha256": "1d9e6e053fa0e740c36bda8dc27f0bb9059bf5c1390e731ae2c07f42278b627b",
+          "canonicalRow": {
+            "sourceIds": [
+              "source-wtu-2026-international-scholarships"
+            ],
+            "verifiedAt": "2026-08-25",
+            "reviewAfter": "2026-09-24",
+            "status": "stale",
+            "id": "scholarship-wtu-hubei-provincial-international-students",
+            "slug": "wtu-hubei-provincial-international-students",
+            "name": {
+              "en": "Hubei Provincial Scholarship at WTU",
+              "zh": "武汉纺织大学湖北省外国留学生奖学金",
+              "ru": "Провинциальная стипендия Хубэя в WTU",
+              "de": "Hubei-Provinzstipendium an der WTU",
+              "fr": "Bourse provinciale du Hubei à la WTU",
+              "es": "Beca provincial de Hubei en WTU"
+            },
+            "providerType": "province",
+            "universityIds": [
+              "uni-wuhan-textile-university"
+            ],
+            "programIds": [],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": null,
+            "summary": {
+              "en": "WTU’s 2026 official guide confirms full and partial provincial funding routes; exact current tiers and deadline remain unannounced.",
+              "zh": "武汉纺织大学2026年官方简章确认省级全额和部分资助路线；当期具体档位和截止日尚未公布。",
+              "ru": "Официальное руководство WTU 2026 года подтверждает полное и частичное провинциальное финансирование; точные уровни и срок пока не объявлены.",
+              "de": "Der offizielle WTU-Leitfaden 2026 bestätigt vollständige und teilweise Provinzförderung; genaue Stufen und Frist sind noch nicht veröffentlicht.",
+              "fr": "Le guide officiel 2026 de la WTU confirme des voies provinciales intégrales et partielles ; les niveaux exacts et la date limite ne sont pas annoncés.",
+              "es": "La guía oficial 2026 de WTU confirma vías provinciales completas y parciales; los niveles exactos y la fecha límite no se han anunciado."
+            }
+          },
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "source-wtu-2026-international-scholarships"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "source-wtu-2026-international-scholarships",
+              "canonicalSourceSha256": "4939b32b4d42be26f1d6526a594880b5a66b23533bfffef3de7ca852a9e971b7",
+              "url": "https://iec.wtu.edu.cn/info/1060/4292.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "provincial-award-application-period-is-after-enrollment-no-fixed-applicant-day",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iec.wtu.edu.cn/__local/F/BC/0D/6385D4717C93E79E9E89CAB90CE_278641AD_A7365E.pdf",
+          "evidenceBodySha256": "7993ed43e87c5105caaccd7e0fcb99fd315a0a8e90ad1229dd395b59afe4e169",
+          "observedAt": "2026-10-19T12:21:53.206673+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "visualApplicationPeriod": "After enrollment",
+          "sourcePages": [
+            4,
+            5
+          ],
+          "visualTranscriptPin": {
+            "path": "pdf-visual-transcript.json",
+            "sha256": "d06e687678666b259311d8a51f49e74af172b979a98060829e692a5e4c297efa"
+          },
+          "exactDayAbsent": true,
+          "noMonthEndInferred": true,
+          "registrationDayNotApplicationDeadline": "2026-09-30",
+          "registrationDateNotBorrowed": true,
+          "independentAwardScopePreserved": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-wtu-university-international-students",
+          "universityId": "uni-wuhan-textile-university",
+          "canonicalUniversitySha256": "d8e3d78a2a4002e9f13a99b201927e434b2ea95590ac70c6f45d5bb49e8cb9b6",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "500b3a47f136f50989e7eafeeeec56058a83b9d44ff589084abee42109d6254e",
+          "canonicalScholarshipSha256": "500b3a47f136f50989e7eafeeeec56058a83b9d44ff589084abee42109d6254e",
+          "canonicalRow": {
+            "sourceIds": [
+              "source-wtu-2026-international-scholarships"
+            ],
+            "verifiedAt": "2026-08-25",
+            "reviewAfter": "2026-09-24",
+            "status": "stale",
+            "id": "scholarship-wtu-university-international-students",
+            "slug": "wtu-university-international-students",
+            "name": {
+              "en": "WTU International Student Scholarship",
+              "zh": "武汉纺织大学来华留学生校级奖学金",
+              "ru": "Стипендия WTU для иностранных студентов",
+              "de": "WTU-Stipendium für internationale Studierende",
+              "fr": "Bourse WTU pour étudiants internationaux",
+              "es": "Beca WTU para estudiantes internacionales"
+            },
+            "providerType": "university",
+            "universityIds": [
+              "uni-wuhan-textile-university"
+            ],
+            "programIds": [],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": null,
+            "summary": {
+              "en": "WTU’s 2026 official guide confirms a university partial-funding route; the exact award and application deadline are not announced.",
+              "zh": "武汉纺织大学2026年官方简章确认校级部分资助路线；具体金额和申请截止日尚未公布。",
+              "ru": "Официальное руководство WTU 2026 года подтверждает частичную университетскую поддержку; точный размер и срок не объявлены.",
+              "de": "Der offizielle WTU-Leitfaden 2026 bestätigt eine teilweise Hochschulförderung; genaue Höhe und Bewerbungsfrist sind nicht veröffentlicht.",
+              "fr": "Le guide officiel 2026 de la WTU confirme une aide partielle de l'université ; le montant exact et la date limite ne sont pas annoncés.",
+              "es": "La guía oficial 2026 de WTU confirma una ayuda parcial de la universidad; la cuantía exacta y la fecha límite no se anuncian."
+            }
+          },
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "source-wtu-2026-international-scholarships"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "source-wtu-2026-international-scholarships",
+              "canonicalSourceSha256": "4939b32b4d42be26f1d6526a594880b5a66b23533bfffef3de7ca852a9e971b7",
+              "url": "https://iec.wtu.edu.cn/info/1060/4292.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "university-award-period-is-March-to-July-month-only-no-exact-applicant-day",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iec.wtu.edu.cn/__local/F/BC/0D/6385D4717C93E79E9E89CAB90CE_278641AD_A7365E.pdf",
+          "evidenceBodySha256": "7993ed43e87c5105caaccd7e0fcb99fd315a0a8e90ad1229dd395b59afe4e169",
+          "observedAt": "2026-10-19T12:21:53.206673+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "visualApplicationPeriod": "From March to July",
+          "sourcePages": [
+            4,
+            5
+          ],
+          "visualTranscriptPin": {
+            "path": "pdf-visual-transcript.json",
+            "sha256": "d06e687678666b259311d8a51f49e74af172b979a98060829e692a5e4c297efa"
+          },
+          "exactDayAbsent": true,
+          "noMonthEndInferred": true,
+          "registrationDayNotApplicationDeadline": "2026-09-30",
+          "registrationDateNotBorrowed": true,
+          "independentAwardScopePreserved": true
+        }
+      ]
+    },
+    {
+      "key": "whu-landing-and-one-scholarship-index-no-exact-local-award-cutoff",
+      "universityId": "uni-wuhan-university",
+      "evidence": [
+        {
+          "name": "whu-admission",
+          "url": "https://admission.whu.edu.cn/",
+          "observedAt": "2026-10-19T12:20:15.585830+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://admission.whu.edu.cn/",
+          "contentType": "text/html",
+          "bytes": 58389,
+          "rawPath": "whu-admission.html",
+          "rawSha256": "1745c8860ad99caf7c0a0743683127585d7a32523429a2055b0f63e7e213db12",
+          "textPath": "whu-admission.txt",
+          "textSha256": "ac8676ebb97b4d6fc0b730cbcfd36d8031e8c8ba0b88ccaa0f963972bd508e07",
+          "captureSucceeded": true,
+          "evidenceRole": "registered-university-landing-page-not-date-proof",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "whu-scholarships",
+          "url": "https://admission.whu.edu.cn/ADMISSION/SCHOLARSHIPS.htm",
+          "observedAt": "2026-10-19T12:21:53.283463+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://admission.whu.edu.cn/ADMISSION/SCHOLARSHIPS.htm",
+          "contentType": "text/html",
+          "bytes": 32929,
+          "rawPath": "whu-scholarships.html",
+          "rawSha256": "b65236186c32a03ede0b4d1993e280ebb6c7b608094f4ece8247a148d56af522",
+          "textPath": "whu-scholarships.txt",
+          "textSha256": "a5aed8c11f4e45b05efa5067fd01f0c83f7b8dfaa6460163c33955445fba145a",
+          "captureSucceeded": true,
+          "evidenceRole": "one-direct-linked-scholarship-index-with-different-csc-routes",
+          "fullFactsCertified": false
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-wuhan-university-international-student",
+          "universityId": "uni-wuhan-university",
+          "canonicalUniversitySha256": "b46f87a0a4257f4b08f999079d64c692e283044e278f26d2de0ea3fbd6f5e50c",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "8caa1f754551d315d81ef71f50ed6918e4c2184b415d873afcc01060b884cd83",
+          "canonicalScholarshipSha256": "8caa1f754551d315d81ef71f50ed6918e4c2184b415d873afcc01060b884cd83",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-uni-wuhan-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2026-10-01",
+            "status": "draft",
+            "id": "scholarship-wuhan-university-international-student",
+            "slug": "wuhan-university-international-student",
+            "name": {
+              "en": "Wuhan University Scholarship for International Students",
+              "zh": "武汉大学外国留学生奖学金",
+              "ru": "Стипендия Уханьского университета для иностранных студентов"
+            },
+            "providerType": "university",
+            "universityIds": [
+              "uni-wuhan-university"
+            ],
+            "programIds": [],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://admission.whu.edu.cn/",
+            "summary": {
+              "en": "Wuhan University Scholarship for International Students is a potential funding route. Eligibility, participating programs and current-cycle coverage must be confirmed on the official page.",
+              "zh": "武汉大学外国留学生奖学金是一项潜在资助渠道；申请资格、适用项目及当期资助标准须以官方页面为准。",
+              "ru": "Стипендия Уханьского университета для иностранных студентов — возможный источник финансирования. Условия, подходящие программы и покрытие текущего цикла необходимо проверить на официальной странице."
+            }
+          },
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-uni-wuhan-university"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-uni-wuhan-university",
+              "canonicalSourceSha256": "b031a31600dc8bf1e7e72a53349b1baa0d956d8ba2e92391990e3ccb4a4e167e",
+              "url": "https://admission.whu.edu.cn/"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-landing-and-one-linked-scholarship-index-do-not-establish-exact-WHU-university-or-Hubei-provincial-award-applicant-deadline",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://admission.whu.edu.cn/ADMISSION/SCHOLARSHIPS.htm",
+          "evidenceBodySha256": "b65236186c32a03ede0b4d1993e280ebb6c7b608094f4ece8247a148d56af522",
+          "observedAt": "2026-10-19T12:21:53.283463+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "landingAndListNotDateProof": true,
+          "otherCscRoutesNotSubstituted": true,
+          "listArticlePublicationDatesNotApplicationDates": true,
+          "retryPolicy": "cooldown-after-one-direct-linked-fallback"
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-hubei-provincial-international-student",
+          "universityId": "uni-wuhan-university",
+          "canonicalUniversitySha256": "b46f87a0a4257f4b08f999079d64c692e283044e278f26d2de0ea3fbd6f5e50c",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "base-queue-v9",
+          "canonicalRecordSha256": "b66061ad9570f381ac9dab1d41a55d647ef648585a7169181e0ced352275e626",
+          "canonicalScholarshipSha256": "b66061ad9570f381ac9dab1d41a55d647ef648585a7169181e0ced352275e626",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-uni-wuhan-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2026-10-01",
+            "status": "draft",
+            "id": "scholarship-hubei-provincial-international-student",
+            "slug": "hubei-provincial-international-student",
+            "name": {
+              "en": "Hubei Provincial Scholarship for International Students",
+              "zh": "湖北省外国留学生奖学金",
+              "ru": "Стипендия провинции Хубэй для иностранных студентов"
+            },
+            "providerType": "province",
+            "universityIds": [
+              "uni-wuhan-university",
+              "uni-huazhong-university-of-science-and-technology",
+              "uni-central-china-normal-university",
+              "uni-wuhan-university-of-technology"
+            ],
+            "programIds": [],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://admission.whu.edu.cn/",
+            "summary": {
+              "en": "Hubei Provincial Scholarship for International Students is a potential funding route. Eligibility, participating programs and current-cycle coverage must be confirmed on the official page.",
+              "zh": "湖北省外国留学生奖学金是一项潜在资助渠道；申请资格、适用项目及当期资助标准须以官方页面为准。",
+              "ru": "Стипендия провинции Хубэй для иностранных студентов — возможный источник финансирования. Условия, подходящие программы и покрытие текущего цикла необходимо проверить на официальной странице."
+            }
+          },
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-uni-wuhan-university"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-uni-wuhan-university",
+              "canonicalSourceSha256": "b031a31600dc8bf1e7e72a53349b1baa0d956d8ba2e92391990e3ccb4a4e167e",
+              "url": "https://admission.whu.edu.cn/"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-landing-and-one-linked-scholarship-index-do-not-establish-exact-WHU-university-or-Hubei-provincial-award-applicant-deadline",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://admission.whu.edu.cn/ADMISSION/SCHOLARSHIPS.htm",
+          "evidenceBodySha256": "b65236186c32a03ede0b4d1993e280ebb6c7b608094f4ece8247a148d56af522",
+          "observedAt": "2026-10-19T12:21:53.283463+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "landingAndListNotDateProof": true,
+          "otherCscRoutesNotSubstituted": true,
+          "listArticlePublicationDatesNotApplicationDates": true,
+          "multiSchoolScholarshipAttributedOnlyToQueueSchool": "uni-wuhan-university",
+          "otherUniversityDatesNotAssessed": true,
+          "retryPolicy": "cooldown-after-one-direct-linked-fallback"
+        }
+      ]
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "reportSha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "batch": "official-batch-025",
+      "reportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f"
+    },
+    {
+      "batch": "official-batch-026",
+      "reportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9"
+    },
+    {
+      "batch": "official-batch-027",
+      "reportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+    },
+    {
+      "batch": "official-batch-028",
+      "reportSha256": "c1ee48a947ab94feac0f853531921d888b4ce30b24781afe7cb9e422e29f9276"
+    },
+    {
+      "batch": "official-batch-029",
+      "reportSha256": "6fa308e70e7e0ad0a0436ed5103eb067928fc9494ba1e977fdaba85cdd3d2243"
+    },
+    {
+      "batch": "official-batch-030",
+      "reportSha256": "95ae6d26c4de9030e7debe25a19d12f12d23235c3633a3b75aca538996958668"
+    },
+    {
+      "batch": "official-batch-031",
+      "reportSha256": "7f213f09e6f2e397a41ce67e2a81c68c9f4bed5f93f83d60d1cff37a42e5cf59"
+    },
+    {
+      "batch": "official-batch-032",
+      "reportSha256": "7ca2417531ff19ae0b9c7b348bf40be89d9029a48b7930172d876488b663b982"
+    },
+    {
+      "batch": "official-batch-033",
+      "reportSha256": "9087e4d1d7242809498d7f0a9c1b740419da39f52ee863e4d4849bd1aef44698"
+    }
+  ],
+  "validation": {
+    "exactThirteenQueueIdsCoveredOnce": true,
+    "noAssessedOrPriorApprovedOverlap": true,
+    "allSixCanonicalInputsUnchanged": true,
+    "canonicalRowsParentLinkedProgrammeSourceUniversityPinsSaved": true,
+    "htmlQuotesMatchSavedOriginalText": true,
+    "imagePdfPeriodRowsVisuallyReadFromCompletePages": true,
+    "extensionReceiptHasNoAdditionalRecordsForThisGroup": true,
+    "storedDeadlinePreservedForAllRecords": true,
+    "noSyntheticExactDates": true,
+    "noYearRollover": true,
+    "noFreshnessRenewals": true
+  }
+}
