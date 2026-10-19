@@ -1,0 +1,811 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "official-batch-015-independent-review-v1",
+  "reviewedAt": "2026-10-19T05:32:50.707Z",
+  "reviewer": "deadline_architecture",
+  "reviewType": "independent-local-originals-and-canonical-exact-row-date-scope-review",
+  "reviewedReport": {
+    "path": "quality/deadline-sweep-20261019/official-batch-015/report.json",
+    "sha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8",
+    "batchId": "official-date-only-015-20261019"
+  },
+  "result": "pass-with-source-failure-limitations",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "queueSha256": "dfa9f046dfe1a63fe3130c4964c117377913dc97b9577972b95b986d71a9f3f6",
+  "canonicalFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "summary": {
+    "exactRecordsReviewed": 14,
+    "schoolsReviewed": 6,
+    "checksPassed": 25,
+    "checksFailed": 0,
+    "recordChecksPassed": 14,
+    "recordResults": {
+      "closed": 8,
+      "unknown": 4,
+      "blocked": 2
+    },
+    "newNetworkRequests": 0,
+    "canonicalWrites": 0,
+    "gitMutations": 0,
+    "sharedStateWrites": 0,
+    "fullFactsCertified": 0
+  },
+  "checks": [
+    {
+      "id": "reviewed-report-exact-pin",
+      "passed": true,
+      "detail": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "id": "six-canonical-file-byte-pins",
+      "passed": true,
+      "detail": {
+        "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+        "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+        "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+        "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+        "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+        "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+      }
+    },
+    {
+      "id": "canonical-snapshot-pin",
+      "passed": true,
+      "detail": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722"
+    },
+    {
+      "id": "queue-exact-byte-and-snapshot-pin",
+      "passed": true,
+      "detail": "dfa9f046dfe1a63fe3130c4964c117377913dc97b9577972b95b986d71a9f3f6"
+    },
+    {
+      "id": "six-assigned-schools",
+      "passed": true,
+      "detail": [
+        "uni-central-south-university",
+        "uni-changchun-university-of-science-and-technology",
+        "uni-changsha-university-of-science-and-technology",
+        "uni-chengdu-university-of-information-technology",
+        "uni-chengdu-university-of-technology",
+        "uni-chengdu-university-of-traditional-chinese-medicine"
+      ]
+    },
+    {
+      "id": "fourteen-exact-unique-selected-records",
+      "passed": true,
+      "detail": [
+        "cycle-gap-sparse-depth-0808-csu-computing-science-bachelor-2026-2027-other-fee-reference",
+        "cycle-gap-sparse-depth-0808-csu-mechanical-engineering-bachelor-2026-2027-other-fee-reference",
+        "cycle-gap-wave3-cust-b-software-engineering-en-2026-2027-other-fee-reference",
+        "sch-gap-wave3-sch-cust-software-engineering-partial",
+        "sch-gap-mew-scws-csust-silk-road-scholarship-2026",
+        "cycle-gap-mew-scws-cuit-artificial-intelligence-master-2026-2027-autumn-fee-reference",
+        "cycle-gap-mew-scws-cuit-environmental-science-engineering-master-2026-2027-autumn-fee-reference",
+        "cycle-gap-mew-scws-cuit-social-work-master-2026-2027-autumn-fee-reference",
+        "cycle-gap-wave8-2-cuit-atmospheric-science-master-2026-2027-autumn-fee-reference",
+        "cycle-cdut-china-link-2026-2027",
+        "scholarship-cdut-china-link-2026-2027",
+        "cycle-gap-wave8-final-cdutcm-self-funded-international-doctoral-route-2026-2027-autumn-fee-reference",
+        "sch-gap-wave8-final-cdutcm-chengdu-government-freshman-scholarship",
+        "sch-gap-wave8-final-cdutcm-sichuan-government-freshman-scholarship"
+      ]
+    },
+    {
+      "id": "fourteen-row-program-source-binding-checks",
+      "passed": true,
+      "detail": {
+        "passed": 14,
+        "failed": []
+      }
+    },
+    {
+      "id": "capture-manifest-byte-pin",
+      "passed": true,
+      "detail": "cb589042ca80e29ef64f0fe237244b3a13446c2149c9b86147bfb1d47867ef15"
+    },
+    {
+      "id": "six-original-raw-and-text-pins-plus-one-failure",
+      "passed": true,
+      "detail": [
+        {
+          "url": "https://intl.csu.edu.cn/English/Admission/Undergraduate_Programs/English_taught_Programs.htm",
+          "observedAt": "2026-10-19T05:28:13.780707+00:00",
+          "captureSucceeded": true,
+          "passed": true,
+          "rawSha256": "628ac44e071da8cabe4ba394d56c602721435278613ffb29232eb0390a65ac26",
+          "textSha256": "52886dcc601bf11ce281ceb9eb9426091c1e6eb6569770b97a8bf5c22127350c"
+        },
+        {
+          "url": "https://sie.cust.edu.cn/scholarship/52993a71d5524f97a56a8f09828f105a.htm",
+          "observedAt": "2026-10-19T05:28:13.781707+00:00",
+          "captureSucceeded": true,
+          "passed": true,
+          "rawSha256": "362b3329203f395b53cffb638ec053a96870a186b0ff5a00a7c6024bb60ce8ef",
+          "textSha256": "047b6a12a8fc31ca2dee0afff1551539c4756f09d10a358acc37c968edf27e3d"
+        },
+        {
+          "url": "https://www.csust.edu.cn/gjxy/ywbwz/Admission.htm",
+          "observedAt": "2026-10-19T05:28:13.781707+00:00",
+          "captureSucceeded": true,
+          "passed": true,
+          "rawSha256": "8982c28dca0afe80f7d5c0678fffdfd64fb90433d8615dd6aa4d3802625bb9af",
+          "textSha256": "1537213eeb3e803826b4da9224253279b5ed4ef87f3b22352910eeed79481d58"
+        },
+        {
+          "url": "https://www.csust.edu.cn/gjxy/info/1194/8259.htm",
+          "observedAt": "2026-10-19T05:28:13.782707+00:00",
+          "captureSucceeded": true,
+          "passed": true,
+          "rawSha256": "8b694856e90b144e6e3a9c80921492acff7fd5e776761aa6ce959871c00f09a1",
+          "textSha256": "ea0b3baecf7a3e181c9e65a41a8f31ff060e92cf2cda0f2788f4d7de424b581e"
+        },
+        {
+          "url": "https://gjjl.cuit.edu.cn/__local/B/63/09/9593ECA72B1551BDAF3BE3A3CDC_C3F5B058_B8FA5.pdf",
+          "observedAt": "2026-10-19T05:28:16.225666+00:00",
+          "captureSucceeded": true,
+          "passed": true,
+          "rawSha256": "c00093f4fb863d0266ec97d1fee48e25fe044f4d4e611010f209fd4ce547715b",
+          "textSha256": "775f2cf59c02484345f7b7047050e4cb035a89fdb7ec838810c32d46a076020c"
+        },
+        {
+          "url": "https://cie.cdut.edu.cn/info/1048/1761.htm",
+          "observedAt": "2026-10-19T05:28:16.582206+00:00",
+          "captureSucceeded": false,
+          "passed": true,
+          "rawSha256": null,
+          "textSha256": null
+        },
+        {
+          "url": "https://zyd.cdutcm.edu.cn/gjjyxy/zsxx/wjxs/content_113491",
+          "observedAt": "2026-10-19T05:28:17.068434+00:00",
+          "captureSucceeded": true,
+          "passed": true,
+          "rawSha256": "3863164ca3d53f1f1580ea13de762793ea6883a40023e904f992d5fb66ae8289",
+          "textSha256": "102abd6ae12a2e96dfe5ed5361a5e3665746736319f9deb3773ea77ad660e5f3"
+        }
+      ]
+    },
+    {
+      "id": "group-evidence-matches-retained-capture-manifest",
+      "passed": true,
+      "detail": "Every source URL, observedAt and original hash agrees with the timestamped capture manifest."
+    },
+    {
+      "id": "all-literal-date-quotes-in-original-dom-or-pdf-text",
+      "passed": true,
+      "detail": [
+        {
+          "key": "csu-2026-english-undergraduate",
+          "quote": "From now on to May 31, 2026"
+        },
+        {
+          "key": "cust-recurring-partial-scholarship-with-2023-context",
+          "quote": "Deadline of Applicants is December 20th for Spring intake, and May 31st for Autumn intake."
+        },
+        {
+          "key": "csust-2026-2027-silk-road-award",
+          "quote": "May 22, 2026"
+        },
+        {
+          "key": "cuit-2026-autumn-master-guide-and-catalogue",
+          "quote": "2026年3月1日——2026年6月30日"
+        },
+        {
+          "key": "cdutcm-2026-self-funded-doctorate-and-separate-awards",
+          "quote": "即日起- 2026年6月30日，全天24小时"
+        }
+      ]
+    },
+    {
+      "id": "csu-2026-two-named-english-bachelor-routes-and-may31",
+      "passed": true,
+      "detail": {
+        "scope": "The same2026guide names both programmes and English bachelor/Dundee route; fee-reference title alone is not the binding.",
+        "deadline": "2026-05-31",
+        "opening": "From now on remains relative"
+      }
+    },
+    {
+      "id": "cust-unbound-year-2023-context-stays-unknown",
+      "passed": true,
+      "detail": {
+        "recurringQuote": "Deadline of Applicants is December 20th for Spring intake, and May 31st for Autumn intake.",
+        "yearContext": "the test time is approximately June 2023, and the specific time will be notified separately",
+        "meaning": "No currentyear is established; spring/autumn month-day not applied to intakeother2026-2027oraward"
+      }
+    },
+    {
+      "id": "csust-index-to-exact-current-year-detail-discovery",
+      "passed": true,
+      "detail": {
+        "canonicalIndex": "https://www.csust.edu.cn/gjxy/ywbwz/Admission.htm",
+        "detail": "https://www.csust.edu.cn/gjxy/info/1194/8259.htm",
+        "linkText": "Changsha University of Science and Technology 2026/2027 Academic Year “Silk Road..."
+      }
+    },
+    {
+      "id": "csust-award-student-deadline-not-later-institution-or-csc-stage",
+      "passed": true,
+      "detail": {
+        "deadline": "2026-05-22",
+        "sourceHeading": "VI. Application Deadline",
+        "scope": "Named2026/2027SilkRoadaward. Later CSC application for preliminary-approved applicants remains a separate unspecified stage."
+      }
+    },
+    {
+      "id": "cuit-original-2026-title-only-autumn-master-scope",
+      "passed": true,
+      "detail": {
+        "year": 2026,
+        "intake": "autumn",
+        "degree": "master",
+        "evidencePages": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "id": "cuit-four-exact-catalogue-names",
+      "passed": true,
+      "detail": {
+        "programmes": [
+          "人工智能",
+          "环境科学与工程",
+          "大气科学",
+          "社会工作"
+        ],
+        "cataloguePages": [
+          11,
+          12
+        ],
+        "visuallyInspected": true
+      }
+    },
+    {
+      "id": "cuit-bilingual-march1-june30-opening-candidate-only",
+      "passed": true,
+      "detail": {
+        "closedCandidateDeadline": "2026-06-30",
+        "newOpeningCandidate": "2026-03-01",
+        "canonicalOpen": null,
+        "clockTimeAsserted": false
+      }
+    },
+    {
+      "id": "cdut412-hold-and-bounded-cooldown",
+      "passed": true,
+      "detail": {
+        "error": "HTTP Error 412: Precondition Failed",
+        "observedAt": "2026-10-19T05:28:16.582206+00:00",
+        "rawOriginalRetained": false,
+        "meaning": "Recorded native412supportsblockedandcooldown. No unread date is certified."
+      }
+    },
+    {
+      "id": "cdut-latest-study-start-not-an-application-deadline",
+      "passed": true,
+      "detail": {
+        "rollingApplications": true,
+        "latestStudyStartOn": "2027-08-31",
+        "latestStudyStartIsApplicationDeadline": false,
+        "bothUniversityAndCSCSubmissionsRequired": true
+      }
+    },
+    {
+      "id": "cdutcm-2026-self-funded-doctoral-june30",
+      "passed": true,
+      "detail": {
+        "scope": "2026self-fundedforeignpostgraduatecall explicitly includes doctoral applicants",
+        "quote": "即日起- 2026年6月30日，全天24小时",
+        "deadlinePrecision": "date;全天24小时 does not create an explicit24:00timestamp",
+        "opening": "即日起 remains relative"
+      }
+    },
+    {
+      "id": "cdutcm-two-freshman-awards-separate-notice-unknown",
+      "passed": true,
+      "detail": {
+        "quote": "上述奖学金的申请办法请留意成都中医药大学国际教育学院网页相关通知。",
+        "meaning": "AdmissionJune30isnotborrowedbythetwoawards."
+      }
+    },
+    {
+      "id": "honest-counts-null-preservation-and-no-renewal",
+      "passed": true,
+      "detail": {
+        "recordResults": {
+          "closed": 8,
+          "unknown": 4,
+          "blocked": 2
+        },
+        "newOpeningCandidates": 4,
+        "unchangedNullCanonicalDeadlines": 14
+      }
+    },
+    {
+      "id": "records-stored-once-no-alias-arrays",
+      "passed": true,
+      "detail": "groups[].records[] contains each of14recordsonce."
+    },
+    {
+      "id": "report-and-canonical-unchanged-through-review",
+      "passed": true,
+      "detail": {
+        "canonicalWrites": 0,
+        "reportWrites": 0,
+        "gitMutations": 0,
+        "sharedStateWrites": 0
+      }
+    }
+  ],
+  "recordChecks": [
+    {
+      "recordId": "cycle-gap-sparse-depth-0808-csu-computing-science-bachelor-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "canonicalRowSha256": "8ca1cca3d1383b5ce4d285051615b1ecba812c052ae7d69695e9d2f04f0d0a56",
+      "canonicalProgramSha256": "7cdac201eb1d15db95f5a5bcb81b988ef3a881b5662f990e43e535d126bec63b",
+      "evidenceSourcePins": [
+        {
+          "sourceId": "src-gap-program-sparse-depth-0808-csu-computing-science-bachelor",
+          "sha256": "45c8c817ed9a0dd7bcf2d85cbf03ddb09b642c88edd04e5bb162410e83df3362",
+          "url": "https://intl.csu.edu.cn/English/Admission/Undergraduate_Programs/English_taught_Programs.htm",
+          "official": true
+        }
+      ],
+      "result": "closed",
+      "candidateOfficialDeadline": "2026-05-31",
+      "candidateOfficialOpensOn": null,
+      "checks": {
+        "fullRowSha": true,
+        "typedRowSha": true,
+        "fullProgramSha": true,
+        "parentAndDegree": true,
+        "storedDateNull": true,
+        "storedOtherFields": true,
+        "sourceIDs": true,
+        "sourceURLs": true,
+        "officialSourceEvidenceBound": true,
+        "noCanonicalFreshnessCertification": true,
+        "candidateClosedPolicy": true,
+        "unresolvedDeadlineNull": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-sparse-depth-0808-csu-mechanical-engineering-bachelor-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "canonicalRowSha256": "798c062589b7b92c2b9c4b1e54d25a8fcfedcbbb34948a70ce55b0797eecb60b",
+      "canonicalProgramSha256": "331a8dca8ece5a0cbc571ac41016a22654869c676e98104c459bdc73b14721aa",
+      "evidenceSourcePins": [
+        {
+          "sourceId": "src-gap-program-sparse-depth-0808-csu-mechanical-engineering-bachelor",
+          "sha256": "21539e89f6952f222b1b97d16be9a0d95f5e509684caa4c0fe360391746f01ae",
+          "url": "https://intl.csu.edu.cn/English/Admission/Undergraduate_Programs/English_taught_Programs.htm",
+          "official": true
+        }
+      ],
+      "result": "closed",
+      "candidateOfficialDeadline": "2026-05-31",
+      "candidateOfficialOpensOn": null,
+      "checks": {
+        "fullRowSha": true,
+        "typedRowSha": true,
+        "fullProgramSha": true,
+        "parentAndDegree": true,
+        "storedDateNull": true,
+        "storedOtherFields": true,
+        "sourceIDs": true,
+        "sourceURLs": true,
+        "officialSourceEvidenceBound": true,
+        "noCanonicalFreshnessCertification": true,
+        "candidateClosedPolicy": true,
+        "unresolvedDeadlineNull": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-wave3-cust-b-software-engineering-en-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "canonicalRowSha256": "87f526ecc184851dfb58f15e0553c047133b43ca5ec13cfefd3080844661365e",
+      "canonicalProgramSha256": "57bc5a4080e7e0b41e460d7914535bcf64996f2cdbf465e3e6957d5f656966bb",
+      "evidenceSourcePins": [
+        {
+          "sourceId": "src-gap-program-wave3-cust-b-software-engineering-en-support-1",
+          "sha256": "6b2994af5640086a2d584e075ec67dd82771c60794fbe92e3df28abbc882e482",
+          "url": "https://sie.cust.edu.cn/scholarship/52993a71d5524f97a56a8f09828f105a.htm",
+          "official": true
+        }
+      ],
+      "result": "unknown",
+      "candidateOfficialDeadline": null,
+      "candidateOfficialOpensOn": null,
+      "checks": {
+        "fullRowSha": true,
+        "typedRowSha": true,
+        "fullProgramSha": true,
+        "parentAndDegree": true,
+        "storedDateNull": true,
+        "storedOtherFields": true,
+        "sourceIDs": true,
+        "sourceURLs": true,
+        "officialSourceEvidenceBound": true,
+        "noCanonicalFreshnessCertification": true,
+        "candidateClosedPolicy": true,
+        "unresolvedDeadlineNull": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "sch-gap-wave3-sch-cust-software-engineering-partial",
+      "collection": "scholarships",
+      "canonicalRowSha256": "f3ad21bd00835e6a544ea739c56bef6f698d62507f31323b8a48885483fafa2c",
+      "canonicalProgramSha256": null,
+      "evidenceSourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-wave3-sch-cust-software-engineering-partial",
+          "sha256": "2e4512ffd5e16ac175eb9823308ffb623d7664f0b470fa4b8e5381ab14f1e156",
+          "url": "https://sie.cust.edu.cn/scholarship/52993a71d5524f97a56a8f09828f105a.htm",
+          "official": true
+        }
+      ],
+      "result": "unknown",
+      "candidateOfficialDeadline": null,
+      "candidateOfficialOpensOn": null,
+      "checks": {
+        "fullRowSha": true,
+        "typedRowSha": true,
+        "fullProgramSha": true,
+        "parentAndDegree": true,
+        "storedDateNull": true,
+        "storedOtherFields": true,
+        "sourceIDs": true,
+        "sourceURLs": true,
+        "officialSourceEvidenceBound": true,
+        "noCanonicalFreshnessCertification": true,
+        "candidateClosedPolicy": true,
+        "unresolvedDeadlineNull": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "sch-gap-mew-scws-csust-silk-road-scholarship-2026",
+      "collection": "scholarships",
+      "canonicalRowSha256": "75e5bf996b08d65754178c1dd93ac0fc487cab3321c3520931a965fc0aff61cd",
+      "canonicalProgramSha256": null,
+      "evidenceSourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-mew-scws-csust-silk-road-scholarship-2026",
+          "sha256": "458dc610bfaab99ace98740518e826e5beeabac55293f41f456e53428d2bae84",
+          "url": "https://www.csust.edu.cn/gjxy/ywbwz/Admission.htm",
+          "official": true
+        }
+      ],
+      "result": "closed",
+      "candidateOfficialDeadline": "2026-05-22",
+      "candidateOfficialOpensOn": null,
+      "checks": {
+        "fullRowSha": true,
+        "typedRowSha": true,
+        "fullProgramSha": true,
+        "parentAndDegree": true,
+        "storedDateNull": true,
+        "storedOtherFields": true,
+        "sourceIDs": true,
+        "sourceURLs": true,
+        "officialSourceEvidenceBound": true,
+        "noCanonicalFreshnessCertification": true,
+        "candidateClosedPolicy": true,
+        "unresolvedDeadlineNull": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-mew-scws-cuit-artificial-intelligence-master-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "canonicalRowSha256": "b196ca641ae0f1ae7fe7c2c422dc1c70271b83e4d643e7f3a9c0bec40ad79e63",
+      "canonicalProgramSha256": "43b28a31c8c1a2a1a6d0147916ef88d6f5805494d5d331d9126e6aca62ce6980",
+      "evidenceSourcePins": [
+        {
+          "sourceId": "src-gap-program-mew-scws-cuit-artificial-intelligence-master",
+          "sha256": "d059badef2f539f3dc9e93ac33c2ccbb4a7ab78203fa07c510ea01a7f1d73bd9",
+          "url": "https://gjjl.cuit.edu.cn/__local/B/63/09/9593ECA72B1551BDAF3BE3A3CDC_C3F5B058_B8FA5.pdf",
+          "official": true
+        }
+      ],
+      "result": "closed",
+      "candidateOfficialDeadline": "2026-06-30",
+      "candidateOfficialOpensOn": "2026-03-01",
+      "checks": {
+        "fullRowSha": true,
+        "typedRowSha": true,
+        "fullProgramSha": true,
+        "parentAndDegree": true,
+        "storedDateNull": true,
+        "storedOtherFields": true,
+        "sourceIDs": true,
+        "sourceURLs": true,
+        "officialSourceEvidenceBound": true,
+        "noCanonicalFreshnessCertification": true,
+        "candidateClosedPolicy": true,
+        "unresolvedDeadlineNull": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-mew-scws-cuit-environmental-science-engineering-master-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "canonicalRowSha256": "bb8f5fb9e9f8f5c8df290f09fe04df23c11548e240192ae98b63e79f0033b51d",
+      "canonicalProgramSha256": "e4f80affb67b83b5097d9bf648553c19effabbe1ab8343d3e3832ff10dc16d10",
+      "evidenceSourcePins": [
+        {
+          "sourceId": "src-gap-program-mew-scws-cuit-environmental-science-engineering-master",
+          "sha256": "7832135ff1110c3e4952154f5c4a28ea0aaecd259a85198115f44eed34c53b74",
+          "url": "https://gjjl.cuit.edu.cn/__local/B/63/09/9593ECA72B1551BDAF3BE3A3CDC_C3F5B058_B8FA5.pdf",
+          "official": true
+        }
+      ],
+      "result": "closed",
+      "candidateOfficialDeadline": "2026-06-30",
+      "candidateOfficialOpensOn": "2026-03-01",
+      "checks": {
+        "fullRowSha": true,
+        "typedRowSha": true,
+        "fullProgramSha": true,
+        "parentAndDegree": true,
+        "storedDateNull": true,
+        "storedOtherFields": true,
+        "sourceIDs": true,
+        "sourceURLs": true,
+        "officialSourceEvidenceBound": true,
+        "noCanonicalFreshnessCertification": true,
+        "candidateClosedPolicy": true,
+        "unresolvedDeadlineNull": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-mew-scws-cuit-social-work-master-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "canonicalRowSha256": "7b970a126c2702cd6a8b6d9f6268f30a82377b784adb1ed29e256fee65787741",
+      "canonicalProgramSha256": "48103827a76dbf00223ac1d45555c4e0aedd7f30ff930d71642bf9fedebe9ece",
+      "evidenceSourcePins": [
+        {
+          "sourceId": "src-gap-program-mew-scws-cuit-social-work-master",
+          "sha256": "6f654029983add70b01431f9c9a839dd602a4f308fdb500cd97876d598f5c74c",
+          "url": "https://gjjl.cuit.edu.cn/__local/B/63/09/9593ECA72B1551BDAF3BE3A3CDC_C3F5B058_B8FA5.pdf",
+          "official": true
+        }
+      ],
+      "result": "closed",
+      "candidateOfficialDeadline": "2026-06-30",
+      "candidateOfficialOpensOn": "2026-03-01",
+      "checks": {
+        "fullRowSha": true,
+        "typedRowSha": true,
+        "fullProgramSha": true,
+        "parentAndDegree": true,
+        "storedDateNull": true,
+        "storedOtherFields": true,
+        "sourceIDs": true,
+        "sourceURLs": true,
+        "officialSourceEvidenceBound": true,
+        "noCanonicalFreshnessCertification": true,
+        "candidateClosedPolicy": true,
+        "unresolvedDeadlineNull": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-wave8-2-cuit-atmospheric-science-master-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "canonicalRowSha256": "8e6138f587fbc6bcb5889832cf349d4437ca66c6c84d108e992d3c9d69f3e812",
+      "canonicalProgramSha256": "ee3153492526be4e65c639ea389ff44b41824862975d3c04889edf1fb52f11a1",
+      "evidenceSourcePins": [
+        {
+          "sourceId": "src-gap-program-wave8-2-cuit-atmospheric-science-master-support-1",
+          "sha256": "5359754341be95d03efc4c6a82e18fddd79afa4671fdf8314dd6611d802c14f5",
+          "url": "https://gjjl.cuit.edu.cn/__local/B/63/09/9593ECA72B1551BDAF3BE3A3CDC_C3F5B058_B8FA5.pdf",
+          "official": true
+        }
+      ],
+      "result": "closed",
+      "candidateOfficialDeadline": "2026-06-30",
+      "candidateOfficialOpensOn": "2026-03-01",
+      "checks": {
+        "fullRowSha": true,
+        "typedRowSha": true,
+        "fullProgramSha": true,
+        "parentAndDegree": true,
+        "storedDateNull": true,
+        "storedOtherFields": true,
+        "sourceIDs": true,
+        "sourceURLs": true,
+        "officialSourceEvidenceBound": true,
+        "noCanonicalFreshnessCertification": true,
+        "candidateClosedPolicy": true,
+        "unresolvedDeadlineNull": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-cdut-china-link-2026-2027",
+      "collection": "admissionCycles",
+      "canonicalRowSha256": "cd4517bb555901523e800364b5bfdb06c86633cba6f650cff8aa73b8b59eed19",
+      "canonicalProgramSha256": "729eeb0a2c852b83f065a2c22c5d237a18f777bf131bf5f1a6ce28f1b441afbc",
+      "evidenceSourcePins": [
+        {
+          "sourceId": "src-cdut-china-link-2026",
+          "sha256": "ac27be12870b6aa104186bbc26ed34741f75b713482a8f8ba79bf2942eba10c9",
+          "url": "https://cie.cdut.edu.cn/info/1048/1761.htm",
+          "official": true
+        }
+      ],
+      "result": "blocked",
+      "candidateOfficialDeadline": null,
+      "candidateOfficialOpensOn": null,
+      "checks": {
+        "fullRowSha": true,
+        "typedRowSha": true,
+        "fullProgramSha": true,
+        "parentAndDegree": true,
+        "storedDateNull": true,
+        "storedOtherFields": true,
+        "sourceIDs": true,
+        "sourceURLs": true,
+        "officialSourceEvidenceBound": true,
+        "noCanonicalFreshnessCertification": true,
+        "candidateClosedPolicy": true,
+        "unresolvedDeadlineNull": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "scholarship-cdut-china-link-2026-2027",
+      "collection": "scholarships",
+      "canonicalRowSha256": "61c8a0f335138203d5ec15404e9595b8b4b494665889f6ce590635786249f47e",
+      "canonicalProgramSha256": null,
+      "evidenceSourcePins": [
+        {
+          "sourceId": "src-cdut-china-link-2026",
+          "sha256": "ac27be12870b6aa104186bbc26ed34741f75b713482a8f8ba79bf2942eba10c9",
+          "url": "https://cie.cdut.edu.cn/info/1048/1761.htm",
+          "official": true
+        }
+      ],
+      "result": "blocked",
+      "candidateOfficialDeadline": null,
+      "candidateOfficialOpensOn": null,
+      "checks": {
+        "fullRowSha": true,
+        "typedRowSha": true,
+        "fullProgramSha": true,
+        "parentAndDegree": true,
+        "storedDateNull": true,
+        "storedOtherFields": true,
+        "sourceIDs": true,
+        "sourceURLs": true,
+        "officialSourceEvidenceBound": true,
+        "noCanonicalFreshnessCertification": true,
+        "candidateClosedPolicy": true,
+        "unresolvedDeadlineNull": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "cycle-gap-wave8-final-cdutcm-self-funded-international-doctoral-route-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "canonicalRowSha256": "d809556d916d2e1cb3b8ad20eb14a0b3e39031e693ae007d22a2ac615ce2f50a",
+      "canonicalProgramSha256": "a9209f42759a1e5491c39addb3061d249968cf390b0af0198dc1e359dcbc8707",
+      "evidenceSourcePins": [
+        {
+          "sourceId": "src-gap-program-wave8-final-cdutcm-self-funded-international-doctoral-route",
+          "sha256": "674b4761cad0d22db7b5663a5a2bcd0a8cf3f20d572dacb140b22bd62702fa99",
+          "url": "https://zyd.cdutcm.edu.cn/gjjyxy/zsxx/wjxs/content_113491",
+          "official": true
+        }
+      ],
+      "result": "closed",
+      "candidateOfficialDeadline": "2026-06-30",
+      "candidateOfficialOpensOn": null,
+      "checks": {
+        "fullRowSha": true,
+        "typedRowSha": true,
+        "fullProgramSha": true,
+        "parentAndDegree": true,
+        "storedDateNull": true,
+        "storedOtherFields": true,
+        "sourceIDs": true,
+        "sourceURLs": true,
+        "officialSourceEvidenceBound": true,
+        "noCanonicalFreshnessCertification": true,
+        "candidateClosedPolicy": true,
+        "unresolvedDeadlineNull": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "sch-gap-wave8-final-cdutcm-chengdu-government-freshman-scholarship",
+      "collection": "scholarships",
+      "canonicalRowSha256": "e1d4fbbabf04439fea3219ea506d77f1344c79a0072fafb31d7ed1022a9fe37e",
+      "canonicalProgramSha256": null,
+      "evidenceSourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-wave8-final-cdutcm-chengdu-government-freshman-scholarship",
+          "sha256": "3ade33202820df91bfbce085ebd7deb8884a71697e4a99c55bcfb263b5567b48",
+          "url": "https://zyd.cdutcm.edu.cn/gjjyxy/zsxx/wjxs/content_113491",
+          "official": true
+        }
+      ],
+      "result": "unknown",
+      "candidateOfficialDeadline": null,
+      "candidateOfficialOpensOn": null,
+      "checks": {
+        "fullRowSha": true,
+        "typedRowSha": true,
+        "fullProgramSha": true,
+        "parentAndDegree": true,
+        "storedDateNull": true,
+        "storedOtherFields": true,
+        "sourceIDs": true,
+        "sourceURLs": true,
+        "officialSourceEvidenceBound": true,
+        "noCanonicalFreshnessCertification": true,
+        "candidateClosedPolicy": true,
+        "unresolvedDeadlineNull": true
+      },
+      "passed": true
+    },
+    {
+      "recordId": "sch-gap-wave8-final-cdutcm-sichuan-government-freshman-scholarship",
+      "collection": "scholarships",
+      "canonicalRowSha256": "2a5aed48909055a5f4f7125d73e1ee89185705ec580c93064402d97c4ccde0fc",
+      "canonicalProgramSha256": null,
+      "evidenceSourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-wave8-final-cdutcm-sichuan-government-freshman-scholarship",
+          "sha256": "c0e6bf991b24458b21597e4ca60d52ec5cde459d60fb627530c5f51d50333635",
+          "url": "https://zyd.cdutcm.edu.cn/gjjyxy/zsxx/wjxs/content_113491",
+          "official": true
+        }
+      ],
+      "result": "unknown",
+      "candidateOfficialDeadline": null,
+      "candidateOfficialOpensOn": null,
+      "checks": {
+        "fullRowSha": true,
+        "typedRowSha": true,
+        "fullProgramSha": true,
+        "parentAndDegree": true,
+        "storedDateNull": true,
+        "storedOtherFields": true,
+        "sourceIDs": true,
+        "sourceURLs": true,
+        "officialSourceEvidenceBound": true,
+        "noCanonicalFreshnessCertification": true,
+        "candidateClosedPolicy": true,
+        "unresolvedDeadlineNull": true
+      },
+      "passed": true
+    }
+  ],
+  "limitations": [
+    {
+      "type": "blocked-original-unavailable",
+      "source": "CDUT China Link",
+      "detail": "The native HTTP 412 failure is retained in the manifest with a timestamp and bounded TLS settings. No response body exists. The earlier web 412 and one-fallback history are author-reported and have no separate saved machine-readable web receipt. Native 412 alone supports blocked status, but cannot prove dates."
+    },
+    {
+      "type": "no-canonical-date-approval",
+      "detail": "This review validates candidate observations and bindings only. All 14 canonical deadlines remain null, and none of the four new opening candidates is asserted unchanged or written."
+    }
+  ],
+  "conclusion": "All 14 exact record IDs, snapshot and raw hashes, and record/program/source pins are consistent. CSU 2026 May 31, CSUST 2026/27 award May 22, CUIT 2026 autumn master June 30, and CDUTCM 2026 self-funded doctoral June 30 are valid expired date candidates within their specific scopes. CUST with an unbound year and the CDUTCM awards remain unknown; CDUT with HTTP 412 remains blocked. No entry year is rolled forward, programme discontinuation is not inferred, and freshness is not renewed."
+}

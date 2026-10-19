@@ -1,0 +1,9 @@
+{
+  "observedAt": "2026-10-19T05:35:43.980Z",
+  "scope": "Read-only search for a supported narrow deadline consumer; no application attempt",
+  "inspectedDatedImporter": "scripts/quality/apply-official-review-2026-09-29.ts",
+  "finding": "The inspected dated importer performs historical full-record insert/renewal and writes changed JSON collections; it is not a current narrow date CAS consumer. Do not replay it for these candidates.",
+  "heldCorrection": "quality/deadline-sweep-20261019/official-batch-012/report.json",
+  "currentCandidatePolicy": "Only supported narrow updates with exact independent approval, current catalogue CAS and preserved original row/source evidence. Continue nonoverlapping source review when that route is unavailable.",
+  "canonicalWrites": 0
+}

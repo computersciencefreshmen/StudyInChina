@@ -1,0 +1,2139 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-013-20261019",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T05:30:32.667Z",
+  "state": "completed-date-only-candidates-no-canonical-mutation",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v2.json",
+  "queueSha256": "dfa9f046dfe1a63fe3130c4964c117377913dc97b9577972b95b986d71a9f3f6",
+  "selectionSha256": "0fca59509c5888561b4e845a31945f529f6aee67fd1468ab1e194722e14f5c17",
+  "scope": "Exactfirst7schoolsand27selectedrecordsofnext-official-date-targets-v2;notwholecatalogues.",
+  "acquisition": {
+    "newDistinctOfficialUrlsAttempted": 11,
+    "originalGets": 11,
+    "successfulOriginalUrls": 10,
+    "http404OriginalsRetained": 1,
+    "boundedWebFallbackAttempts": 1,
+    "fallbackNewDateEvidenceSources": 0,
+    "totalNetworkAttempts": 12,
+    "paidModelCalls": 0,
+    "tlsBypasses": 0,
+    "automaticRetries": 0
+  },
+  "sourceCaptures": [
+    {
+      "key": "source-01",
+      "url": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:26:17.059987+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+      "contentType": "text/html",
+      "bytes": 70416,
+      "rawPath": "source-01.html",
+      "rawSha256": "fadac703b81b966176e19af5633aca5df61e6cb0c311a67e1719226fc1313647",
+      "decodedCharset": "utf-8",
+      "textPath": "source-01.txt",
+      "textSha256": "3bb7949cd052929b3410da3d3805adfe010a88a67af281f89160dc31b6b74517",
+      "observedAt": "2026-10-19T05:26:22.624579+00:00"
+    },
+    {
+      "key": "source-02",
+      "url": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:26:17.059987+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+      "contentType": "application/pdf",
+      "bytes": 311365,
+      "rawPath": "source-02.pdf",
+      "rawSha256": "95397e8a135c3a67045dceddd10b8e4bbfe652d3ddc02f2eeab1e553c7ae6b98",
+      "pages": 2,
+      "textPath": "source-02.txt",
+      "textSha256": "81bcc9744c5797503f80c906bf381fa2d03e21bbbef4b206e8a0361adedbe166",
+      "observedAt": "2026-10-19T05:26:27.314235+00:00"
+    },
+    {
+      "key": "source-03",
+      "url": "https://en.ahu.edu.cn/_upload/article/files/68/14/341578d446dab23766c307410d49/a0506a46-aea1-4ace-a3b6-82283f8d9088.pdf",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:26:17.061342+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://en.ahu.edu.cn/_upload/article/files/68/14/341578d446dab23766c307410d49/a0506a46-aea1-4ace-a3b6-82283f8d9088.pdf",
+      "contentType": "application/pdf",
+      "bytes": 1447256,
+      "rawPath": "source-03.pdf",
+      "rawSha256": "803d3629f4564e794e26f4d36fcedc029ad50f9e0d1762d972c4e7014ed5c630",
+      "pages": 4,
+      "textPath": "source-03.txt",
+      "textSha256": "427f75938eb6e64602af12f6ff2665f9901f620668297ca8f852d5b04aedbccd",
+      "observedAt": "2026-10-19T05:26:23.182447+00:00"
+    },
+    {
+      "key": "source-04",
+      "url": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:26:17.061342+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+      "contentType": "application/pdf",
+      "bytes": 4012973,
+      "rawPath": "source-04.pdf",
+      "rawSha256": "0f65891ffda216b74665fa004b6ac2a245ad26b7bdee0228200fcb72601408c7",
+      "pages": 11,
+      "textPath": "source-04.txt",
+      "textSha256": "02a836bae02234b69c4870a8e7f3de9475376989e123d10c0b3a31a70900cfc8",
+      "observedAt": "2026-10-19T05:26:38.753056+00:00"
+    },
+    {
+      "key": "source-05",
+      "url": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:26:22.626591+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+      "contentType": "text/html",
+      "bytes": 131058,
+      "rawPath": "source-05.html",
+      "rawSha256": "4c2ca03c91aa658adbeaafc46c253c640541d932348e5a44626e06edeff5aa08",
+      "decodedCharset": "utf-8",
+      "textPath": "source-05.txt",
+      "textSha256": "f0dd59d83b64f4a36a662b813a8311a9cc50bf93ad87486e98e6698fbc51e4d2",
+      "observedAt": "2026-10-19T05:26:29.873242+00:00"
+    },
+    {
+      "key": "source-06",
+      "url": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:26:23.183846+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+      "contentType": "application/pdf",
+      "bytes": 5899768,
+      "rawPath": "source-06.pdf",
+      "rawSha256": "6dcd21ec682f6ab2b7b49d1464ce7e42bb2ba29599994df4b913a802bdaba126",
+      "pages": 23,
+      "textPath": "source-06.txt",
+      "textSha256": "0384f987c9cc913cc5dc3e57e5f32ce8a9426ab59d2d3c6189afa5632f9d7599",
+      "observedAt": "2026-10-19T05:26:28.518689+00:00"
+    },
+    {
+      "key": "source-07",
+      "url": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2403051823033743464.pdf?classid=0&filename=2403051823033743464.pdf",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:26:27.314235+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2403051823033743464.pdf?classid=0&filename=2403051823033743464.pdf",
+      "contentType": "application/pdf",
+      "bytes": 360035,
+      "rawPath": "source-07.pdf",
+      "rawSha256": "d84b37375e3cd09d3a8b1fce6b9fd506260476a9306004596de78ec36662e065",
+      "pages": 15,
+      "textPath": "source-07.txt",
+      "textSha256": "175e39c59d13c2dcd40d08e2adacb591666f1488434a42c8b03198d09749623f",
+      "observedAt": "2026-10-19T05:26:32.414971+00:00"
+    },
+    {
+      "key": "source-08",
+      "url": "https://admission.bisu.edu.cn/attach/0/2411071706042027427.pdf",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:26:28.519689+00:00",
+      "attempt": 1,
+      "httpStatus": 404,
+      "finalUrl": "https://admission.bisu.edu.cn/attach/0/2411071706042027427.pdf",
+      "contentType": "text/html",
+      "bytes": 146,
+      "rawPath": "source-08.html",
+      "rawSha256": "55f7d9e99b8e2d4e0e193b2f0275501e6d9c1ebd29cadbea6a0da48a8587e3e0",
+      "decodedCharset": "utf-8",
+      "textPath": "source-08.txt",
+      "textSha256": "121434ba205e9e1749e9b6591754f4db435b0a9f1faec11f080a1d24debdea50",
+      "error": "HTTP 404 (original response retained)",
+      "observedAt": "2026-10-19T05:26:30.211868+00:00"
+    },
+    {
+      "key": "source-09",
+      "url": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:26:29.873242+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+      "contentType": "text/html",
+      "bytes": 88296,
+      "rawPath": "source-09.html",
+      "rawSha256": "b010ea44f3282daee02acd6e8f2b87a593c6a6186527c2943633cde03fb26f66",
+      "decodedCharset": "utf-8",
+      "textPath": "source-09.txt",
+      "textSha256": "1960a6530477dc267cd2a0649a7056bde0811de1f9e0fbce287d71d9fee6bbe9",
+      "observedAt": "2026-10-19T05:26:32.723542+00:00"
+    },
+    {
+      "key": "source-10",
+      "url": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2311210958564459337.pdf?classid=0&filename=2311210958564459337.pdf",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:26:30.212877+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2311210958564459337.pdf?classid=0&filename=2311210958564459337.pdf",
+      "contentType": "application/pdf",
+      "bytes": 224906,
+      "rawPath": "source-10.pdf",
+      "rawSha256": "33ab35e7b9b708c52ed8482f2054d792b4c8fe66e7806e4aafdc7ae8d8686bad",
+      "pages": 6,
+      "textPath": "source-10.txt",
+      "textSha256": "1ad68ef12ae95a90cbbc75262cd8540918d40581136dce60bf52333a6fcd8bd1",
+      "observedAt": "2026-10-19T05:26:34.580369+00:00"
+    },
+    {
+      "key": "source-11",
+      "url": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/20c48cea06c3422ba70e4c57d8d9b527.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:26:32.415479+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/20c48cea06c3422ba70e4c57d8d9b527.htm",
+      "contentType": "text/html",
+      "bytes": 38452,
+      "rawPath": "source-11.html",
+      "rawSha256": "8aed58cdeefba0c9b5b9804b38ecaea45d1b05dc645114ea944c1bbe1a0f55b6",
+      "decodedCharset": "utf-8",
+      "textPath": "source-11.txt",
+      "textSha256": "8b0e4556933b397cb8666c01be30198ce8fea03576bc991a1b8cb79b0fa9476a",
+      "observedAt": "2026-10-19T05:26:34.296246+00:00"
+    }
+  ],
+  "supplementalFailureReceipts": [
+    {
+      "path": "source-08.web-fallback-receipt.json",
+      "sha256": "68b7cf614f8556568b6db815aad748a306d59b7d0d5361fb3bc26c9b295d412e"
+    }
+  ],
+  "visualChecks": [
+    {
+      "sourceKey": "source-03",
+      "page": 1,
+      "path": "source-03-page-1.png",
+      "finding": "AHUcovercontainsnocalendaryear;no2026inference"
+    },
+    {
+      "sourceKey": "source-04",
+      "page": 7,
+      "path": "source-04-page-7.png",
+      "finding": "BilingualgeneralundergraduateJune15,2026deadline"
+    },
+    {
+      "sourceKey": "source-04",
+      "page": 8,
+      "path": "source-04-page-8.png",
+      "finding": "BGSJune8,2026separatefromCGSTypeAandEBS"
+    },
+    {
+      "sourceKey": "source-06",
+      "page": 1,
+      "path": "source-06-page-1.png",
+      "finding": "Actualbrochurecoverstates2018;URL2024isnotintakeyear"
+    }
+  ],
+  "evidence": [
+    {
+      "key": "ahmu-soft-recommendation",
+      "sourceKeys": [
+        "source-05"
+      ],
+      "title": "安徽医科大学2026/2027学年高水平研究生项目招生简章",
+      "quotes": [
+        {
+          "quote": "为保证申请人顺利完成中国政府奖学金申请流程，建议在2026年2月25日（含）前完成留基委系统网上报名",
+          "locator": "七、注意事项1",
+          "interpretation": "Suggested inclusive submission target; not a mandatory hard deadline."
+        },
+        {
+          "quote": "报到时间为：2026年9月初，具体时间以《录取通知书》为准。",
+          "locator": "六、入学报到1",
+          "interpretation": "Entry date context, not an application deadline."
+        }
+      ],
+      "scope": "CSC Type B high-level postgraduate route; own2026 master table includes100217麻醉学 and own doctoral table includes1007Z1临床药学. The other-intake duplicate is not reclassified as autumn."
+    },
+    {
+      "key": "ahu-undated-general-brochure",
+      "sourceKeys": [
+        "source-02",
+        "source-03"
+      ],
+      "title": "Anhui University international admission brochure and undergraduate major list",
+      "quotes": [
+        {
+          "quote": "The Deadline for application of degree programs is May 15th.",
+          "locator": "source-03 PDF p4 Note2",
+          "interpretation": "Annual month/day only; no admission year is printed on the visual cover or extracted body."
+        }
+      ],
+      "scope": "Four bachelor fee-reference records retain unknown date. CSCA language or current download URL does not establish the applicable intake year."
+    },
+    {
+      "key": "bjfu-2026-undergraduate",
+      "sourceKeys": [
+        "source-04"
+      ],
+      "title": "Beijing Forestry University2026 Undergraduate International Prospectus",
+      "quotes": [
+        {
+          "quote": "2026-2027",
+          "locator": "PDF p4 and p6 programme catalogues",
+          "interpretation": "Explicit academic year."
+        },
+        {
+          "quote": "APPLICATION DEADLINE 申请截止日期 June 15, 2026 2026年6月15日",
+          "locator": "PDF p7, visually inspected",
+          "interpretation": "Student undergraduate admission deadline; not the scholarship date."
+        }
+      ],
+      "scope": "Same original full2026 admissions prospectus names Forestry, International Economics and Trade and Landscape Architecture in its2026-2027 catalogue. Date binding is based on exact degree/programme/year/source, not fee-reference naming alone."
+    },
+    {
+      "key": "bjfu-2026-bgs",
+      "sourceKeys": [
+        "source-04"
+      ],
+      "title": "Beijing Government Scholarship at BFU2026",
+      "quotes": [
+        {
+          "quote": "Beijing Government Scholarship (BGS) - Application Deadline: June 8, 2026",
+          "locator": "PDF p8, visually inspected",
+          "interpretation": "BGS student application cutoff. CGS Type A instead depends on the home-country Embassy/Consulate; EBS is a separate award."
+        }
+      ],
+      "scope": "Exact named2026BGS scholarship, undergraduate eligibility printed in the same section; no annual-review or institution recommendation deadline substituted."
+    },
+    {
+      "key": "bit-2026-undergraduate",
+      "sourceKeys": [
+        "source-01"
+      ],
+      "title": "How to apply for2026 BIT Undergraduate Program",
+      "quotes": [
+        {
+          "quote": "2026 International Students Admission Book",
+          "locator": "HTML article heading",
+          "interpretation": "Entry-year scope2026."
+        },
+        {
+          "quote": "Application Deadline: June 1, 2026",
+          "locator": "VI.Application Procedure",
+          "interpretation": "General student application deadline for the listed undergraduate programmes."
+        }
+      ],
+      "scope": "The same2026 undergraduate admissions article lists all four assigned English-taught Beijing-campus programmes by name. There is one article-wide general application cutoff. Autumn is the stored intake label, not separately printed in this article; binding uses the universal2026undergraduate application scope, exact programme names and degree. May1 scholarship dates and embassy-dependent CSC dates are excluded."
+    },
+    {
+      "key": "bisu-historical-only",
+      "sourceKeys": [
+        "source-07",
+        "source-08",
+        "source-10"
+      ],
+      "title": "BISU historical general guide and2024/2025CSC guide; target spring PDF inaccessible",
+      "quotes": [
+        {
+          "quote": "开放报名时间：2024年3月1日至5月31日（秋季学期）、2024年9月1日至11月30日（春季学期）",
+          "locator": "source-07 PDF p7",
+          "interpretation": "Explicit2024application windows; not target2025/26spring or2026/27other cycles."
+        },
+        {
+          "quote": "时间：即日至2023年12月20日（北京时间）",
+          "locator": "source-10 PDF p4 五、报名时间（一）",
+          "interpretation": "BISU-stage2024/25CSC deadline only."
+        },
+        {
+          "quote": "时间2024年1月5日至2024年1月15日（北京时间）",
+          "locator": "source-10 PDF p4 五、报名时间（二）",
+          "interpretation": "Subsequent applicant CSC portal stage for prior-admitted applicants, not course completion2026/2027."
+        }
+      ],
+      "scope": "The four selected fee-reference records have different target years. General recurring November30/May31 cannot be rolled forward. International Chinese Education naming in the old guide does not prove current programme identity or deadline. Source08 returned404 then one web fallback also failed."
+    },
+    {
+      "key": "bjtu-2018-only",
+      "sourceKeys": [
+        "source-06"
+      ],
+      "title": "北京交通大学2018国际学生招生简章",
+      "quotes": [
+        {
+          "quote": "2018",
+          "locator": "PDF p1 cover, visually inspected; cover is image-only in text extraction",
+          "interpretation": "Actual brochure year;2024-05URL path is not the admission year."
+        },
+        {
+          "quote": "秋季学期一般从9月1日开始，1月15日结束，报名时间不晚于7月15日",
+          "locator": "PDF p7 时间安排",
+          "interpretation": "Recurring historical student admission month/day, not2026proof."
+        },
+        {
+          "quote": "4月10日前将申请材料寄至北京交通大学。",
+          "locator": "PDF p9 scholarship 怎样申请3(2)",
+          "interpretation": "Historical applicant scholarship materials submission, before wording retained."
+        },
+        {
+          "quote": "每年的申请时间略有不同",
+          "locator": "PDF p9 scholarship 注",
+          "interpretation": "The brochure itself warns yearly timing differs; do not roll forward."
+        }
+      ],
+      "scope": "All three programme fee-reference records and one combined CSC/SilkRoad framework scholarship remain unknown;May31pre-admission result notification andJulyformal result dates are institutional output dates, not applicant deadlines."
+    },
+    {
+      "key": "bsu-2026-autumn-nondegree",
+      "sourceKeys": [
+        "source-09"
+      ],
+      "title": "北京体育大学2026年来华留学生招生简章",
+      "quotes": [
+        {
+          "quote": "秋季入学（9月入学）：2025年12月1日至2026年6月1日申请。",
+          "locator": "HTML 二、申请方式和时间",
+          "interpretation": "Autumn2026 general applicant window includes non-degree Chinese language and Wushu programmes listed in the same guide."
+        }
+      ],
+      "scope": "Two exact2026-2027autumn non-degree records. January27deadline is for spring2026only;June1under18age assessment andSeptemberregistration are different actions. New opening2025-12-01is candidate only while canonical opensOn staysnull."
+    },
+    {
+      "key": "bsu-2026-master-funded-scope",
+      "sourceKeys": [
+        "source-09",
+        "source-11"
+      ],
+      "title": "BSU2026International Chinese Education master with separate general and CSC windows",
+      "quotes": [
+        {
+          "quote": "申请人须在2026年3月1日之前登陆北京体育大学外事服务系统",
+          "locator": "source-11 HTML 五、申请流程1",
+          "interpretation": "Applicant BSU-system CSC high-level postgraduate stage, strictly beforeMarch1asworded; not a universal general-admission deadline."
+        },
+        {
+          "quote": "秋季入学（9月入学）：2025年12月1日至2026年6月1日申请。",
+          "locator": "source-09 HTML 二、申请方式和时间",
+          "interpretation": "General programme admission separately runs toJune1. Both2026routes are already expired."
+        }
+      ],
+      "scope": "StoredMarch1comes from the CSC-specific supporting notice and is retained. The same master is named in both2026notices; no same-scope official contradiction is invented. GeneralJune1is a separate candidate scope, not a correction to the funded cutoff."
+    }
+  ],
+  "groups": [
+    {
+      "key": "ahmu-soft-recommendation",
+      "universityId": "uni-anhui-medical-university",
+      "evidenceKey": "ahmu-soft-recommendation",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-breadth-ahmu-d-clinical-pharmacy-2026-2027-autumn",
+          "universityId": "uni-anhui-medical-university",
+          "programId": "prog-gap-breadth-ahmu-d-clinical-pharmacy",
+          "programmeNameZh": "临床药学",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "dates-only",
+          "canonicalRecordSha256": "dc91f2ea806a0cd2da5a9d045f7c995e2cf28aa98fd1de980bf7213f2ef2f294",
+          "canonicalCycleSha256": "dc91f2ea806a0cd2da5a9d045f7c995e2cf28aa98fd1de980bf7213f2ef2f294",
+          "canonicalProgramSha256": "e2b05a4f06fc039a7be82e98820ff699abd619733ea2ea56793e52633ec8945e",
+          "sourceIds": [
+            "src-gap-program-breadth-ahmu-d-clinical-pharmacy"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-breadth-ahmu-d-clinical-pharmacy",
+              "sourceSha256": "695106b7edd8fb9badcae39842c5f779f6b99b8bfaf9c5723af49ab71d4d7935",
+              "url": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+              "official": true
+            }
+          ],
+          "evidenceKey": "ahmu-soft-recommendation",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-breadth-ahmu-d-clinical-pharmacy-2026-2027-autumn]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateRecommendedSubmissionOn": "2026-02-25",
+          "recommendationBoundary": "inclusive-date-as-worded",
+          "recommendationMandatory": false,
+          "reason": "The exact2026/27scholarship route prints a recommendation rather than a mandatory application cutoff. September2026enrolment does not itself prove an exact deadline."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-ahmu-m-anesthesiology-2026-2027-autumn",
+          "universityId": "uni-anhui-medical-university",
+          "programId": "prog-gap-local-strong-ahmu-m-anesthesiology",
+          "programmeNameZh": "麻醉学",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "dates-only",
+          "canonicalRecordSha256": "701d812885ae9a0fb0ab1f0af458bf2eaddb79fa4274bc275ec5900794877077",
+          "canonicalCycleSha256": "701d812885ae9a0fb0ab1f0af458bf2eaddb79fa4274bc275ec5900794877077",
+          "canonicalProgramSha256": "13ab34e7113373c68764bf2d8e37a80e7ca7c533aeb636061f29bf0bb47655bc",
+          "sourceIds": [
+            "src-gap-program-local-strong-ahmu-m-anesthesiology"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-ahmu-m-anesthesiology",
+              "sourceSha256": "732a823edf458b5b3dc1f72343decc371e280acd2a24771571019037adc526fa",
+              "url": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+              "official": true
+            }
+          ],
+          "evidenceKey": "ahmu-soft-recommendation",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-local-strong-ahmu-m-anesthesiology-2026-2027-autumn]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateRecommendedSubmissionOn": "2026-02-25",
+          "recommendationBoundary": "inclusive-date-as-worded",
+          "recommendationMandatory": false,
+          "reason": "The exact2026/27scholarship route prints a recommendation rather than a mandatory application cutoff. September2026enrolment does not itself prove an exact deadline."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-ahmu-m-anesthesiology-2026-2027-other",
+          "universityId": "uni-anhui-medical-university",
+          "programId": "prog-gap-local-strong-ahmu-m-anesthesiology",
+          "programmeNameZh": "麻醉学",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "dates-only",
+          "canonicalRecordSha256": "ced5f09f82e2b0a059ec664542845593ecef4527e2d865010447d55b8066fc34",
+          "canonicalCycleSha256": "ced5f09f82e2b0a059ec664542845593ecef4527e2d865010447d55b8066fc34",
+          "canonicalProgramSha256": "13ab34e7113373c68764bf2d8e37a80e7ca7c533aeb636061f29bf0bb47655bc",
+          "sourceIds": [
+            "src-gap-program-local-strong-ahmu-m-anesthesiology"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-ahmu-m-anesthesiology",
+              "sourceSha256": "732a823edf458b5b3dc1f72343decc371e280acd2a24771571019037adc526fa",
+              "url": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+              "official": true
+            }
+          ],
+          "evidenceKey": "ahmu-soft-recommendation",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-local-strong-ahmu-m-anesthesiology-2026-2027-other]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateRecommendedSubmissionOn": "2026-02-25",
+          "recommendationBoundary": "inclusive-date-as-worded",
+          "recommendationMandatory": false,
+          "reason": "The exact2026/27scholarship route prints a recommendation rather than a mandatory application cutoff. September2026enrolment does not itself prove an exact deadline."
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-breadth-sch-ahmu-high-level-postgraduate",
+          "universityId": "uni-anhui-medical-university",
+          "programId": null,
+          "programmeNameZh": "中国政府奖学金高水平研究生项目",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "storedEvidenceBasis": null,
+          "storedFactScope": null,
+          "canonicalRecordSha256": "bd419ca9f80bdad0e4246b34102a281795ba8d23041b045a1cc23e007bb526ec",
+          "sourceIds": [
+            "src-gap-scholarship-breadth-sch-ahmu-high-level-postgraduate"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-breadth-sch-ahmu-high-level-postgraduate",
+              "sourceSha256": "17052a3c20f8a328899d59064631c8db3fc9d9d30386536dbc59366fe908f2b3",
+              "url": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+              "official": true
+            }
+          ],
+          "evidenceKey": "ahmu-soft-recommendation",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=sch-gap-breadth-sch-ahmu-high-level-postgraduate]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateRecommendedSubmissionOn": "2026-02-25",
+          "recommendationBoundary": "inclusive-date-as-worded",
+          "recommendationMandatory": false,
+          "reason": "The exact2026/27scholarship route prints a recommendation rather than a mandatory application cutoff. September2026enrolment does not itself prove an exact deadline."
+        }
+      ]
+    },
+    {
+      "key": "ahu-undated-general-brochure",
+      "universityId": "uni-anhui-university",
+      "evidenceKey": "ahu-undated-general-brochure",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-ahu-chinese-language-literature-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-anhui-university",
+          "programId": "prog-gap-mew-csw-ahu-chinese-language-literature-bachelor",
+          "programmeNameZh": "汉语言文学",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "1902c2d1d4aa3de9bfaaa93baa4ba522cdff33048b5a15f72e502e089a391c95",
+          "canonicalCycleSha256": "1902c2d1d4aa3de9bfaaa93baa4ba522cdff33048b5a15f72e502e089a391c95",
+          "canonicalProgramSha256": "3ca1501f87fccf1c757aae2392dbdb385aa921502b691201c8d4ced7ee36d3a1",
+          "sourceIds": [
+            "src-gap-program-mew-csw-ahu-chinese-language-literature-bachelor",
+            "src-gap-program-mew-csw-ahu-chinese-language-literature-bachelor-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-ahu-chinese-language-literature-bachelor",
+              "sourceSha256": "bca03ff4c2d83cfafd26c0dbb7aa60d062359caee280fbe6925d7566c6f5136a",
+              "url": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-ahu-chinese-language-literature-bachelor-support-1",
+              "sourceSha256": "4ad3ce0a8acbd552e6172be3ebf9fb79b22fbc7037c982c5563d2b024407e0f9",
+              "url": "https://en.ahu.edu.cn/_upload/article/files/68/14/341578d446dab23766c307410d49/a0506a46-aea1-4ace-a3b6-82283f8d9088.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "ahu-undated-general-brochure",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-mew-csw-ahu-chinese-language-literature-bachelor-2026-2027-other-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateRecurringDeadline": {
+            "month": 5,
+            "day": 15,
+            "year": null,
+            "scope": "degree programmes in an undated brochure"
+          },
+          "reason": "No explicit applicable intake year in the original cover/body; degree month/day cannot be applied to fee-reference2026/27other-intake rows."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-ahu-finance-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-anhui-university",
+          "programId": "prog-gap-mew-csw-ahu-finance-bachelor",
+          "programmeNameZh": "金融学",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "e78271adb9edce61d4cc4f3c4bd66fb53d43abe838dc11d72ae8ecb3fc1ab9fe",
+          "canonicalCycleSha256": "e78271adb9edce61d4cc4f3c4bd66fb53d43abe838dc11d72ae8ecb3fc1ab9fe",
+          "canonicalProgramSha256": "7bd24892bc92e100f1066167e4eb0b0cdd3d90ae6beffff751ee2d417bfa0873",
+          "sourceIds": [
+            "src-gap-program-mew-csw-ahu-finance-bachelor",
+            "src-gap-program-mew-csw-ahu-finance-bachelor-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-ahu-finance-bachelor",
+              "sourceSha256": "af61684eff3dc46b70b925f2bb5f45299d74e9473d07625f76b208a1ce35a547",
+              "url": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-ahu-finance-bachelor-support-1",
+              "sourceSha256": "24ebe0de672e976692b2825e31704a8a7bc437d3f7b95803378edc44c203734f",
+              "url": "https://en.ahu.edu.cn/_upload/article/files/68/14/341578d446dab23766c307410d49/a0506a46-aea1-4ace-a3b6-82283f8d9088.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "ahu-undated-general-brochure",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-mew-csw-ahu-finance-bachelor-2026-2027-other-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateRecurringDeadline": {
+            "month": 5,
+            "day": 15,
+            "year": null,
+            "scope": "degree programmes in an undated brochure"
+          },
+          "reason": "No explicit applicable intake year in the original cover/body; degree month/day cannot be applied to fee-reference2026/27other-intake rows."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-ahu-international-chinese-education-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-anhui-university",
+          "programId": "prog-gap-mew-csw-ahu-international-chinese-education-bachelor",
+          "programmeNameZh": "汉语国际教育",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "dec5490f8d143c62f303f7309c677c150fdedde7dfa34d9e1bdc4e7a5bbc32aa",
+          "canonicalCycleSha256": "dec5490f8d143c62f303f7309c677c150fdedde7dfa34d9e1bdc4e7a5bbc32aa",
+          "canonicalProgramSha256": "9258362d36e4beb6099e40b3484d6c4699ebfe1f74b62db254fd15f1f56cd5ab",
+          "sourceIds": [
+            "src-gap-program-mew-csw-ahu-international-chinese-education-bachelor",
+            "src-gap-program-mew-csw-ahu-international-chinese-education-bachelor-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-ahu-international-chinese-education-bachelor",
+              "sourceSha256": "b049fdad657b76bb88c3a6ab27c60214e2baabd0258b6223fdb7c872e4681b1d",
+              "url": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-ahu-international-chinese-education-bachelor-support-1",
+              "sourceSha256": "ab08d93e2ca42a4e3ebeea56e054586ce41fecac91fc0f5126ae63b1a8d8649e",
+              "url": "https://en.ahu.edu.cn/_upload/article/files/68/14/341578d446dab23766c307410d49/a0506a46-aea1-4ace-a3b6-82283f8d9088.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "ahu-undated-general-brochure",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-mew-csw-ahu-international-chinese-education-bachelor-2026-2027-other-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateRecurringDeadline": {
+            "month": 5,
+            "day": 15,
+            "year": null,
+            "scope": "degree programmes in an undated brochure"
+          },
+          "reason": "No explicit applicable intake year in the original cover/body; degree month/day cannot be applied to fee-reference2026/27other-intake rows."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-ahu-software-engineering-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-anhui-university",
+          "programId": "prog-gap-mew-csw-ahu-software-engineering-bachelor",
+          "programmeNameZh": "软件工程",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "1956f243ea11f6a5647f0e4b7bfd8c35d878fad8923f960a0bc6be1227210004",
+          "canonicalCycleSha256": "1956f243ea11f6a5647f0e4b7bfd8c35d878fad8923f960a0bc6be1227210004",
+          "canonicalProgramSha256": "7eb7876a9f483e27c88c9c939b97357f1e8adbf85046a1cc050c3a8f90aaaedc",
+          "sourceIds": [
+            "src-gap-program-mew-csw-ahu-software-engineering-bachelor",
+            "src-gap-program-mew-csw-ahu-software-engineering-bachelor-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-ahu-software-engineering-bachelor",
+              "sourceSha256": "3a1fd720c8bb2d334f5d0668e86930d9dc84955867f0c99ba12672fcbb6bf0e2",
+              "url": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-ahu-software-engineering-bachelor-support-1",
+              "sourceSha256": "49a794419d97ac9591083a935aab056daca1fcd7ff33e7b5cd2d544534e6a20b",
+              "url": "https://en.ahu.edu.cn/_upload/article/files/68/14/341578d446dab23766c307410d49/a0506a46-aea1-4ace-a3b6-82283f8d9088.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "ahu-undated-general-brochure",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-mew-csw-ahu-software-engineering-bachelor-2026-2027-other-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateRecurringDeadline": {
+            "month": 5,
+            "day": 15,
+            "year": null,
+            "scope": "degree programmes in an undated brochure"
+          },
+          "reason": "No explicit applicable intake year in the original cover/body; degree month/day cannot be applied to fee-reference2026/27other-intake rows."
+        }
+      ]
+    },
+    {
+      "key": "bjfu-2026-undergraduate",
+      "universityId": "uni-beijing-forestry-university",
+      "evidenceKey": "bjfu-2026-undergraduate",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave4-depth-bjfu-forestry-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-beijing-forestry-university",
+          "programId": "prog-gap-wave4-depth-bjfu-forestry-bachelor",
+          "programmeNameZh": "林学（本科）",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "72c23fb79688beed48af2a1aae773a30ed6400aa31417d3a98a4d14ce72b637c",
+          "canonicalCycleSha256": "72c23fb79688beed48af2a1aae773a30ed6400aa31417d3a98a4d14ce72b637c",
+          "canonicalProgramSha256": "5f5f0ec66984472c1319d3609918f4071a78e908d679e35f94b9ecda0ba0420b",
+          "sourceIds": [
+            "src-gap-program-wave4-depth-bjfu-forestry-bachelor"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-wave4-depth-bjfu-forestry-bachelor",
+              "sourceSha256": "6c5a24f5c4d818a9ba6700c7c32c3d883e7d0a45ce1dd2eb4151efd4e7670f6c",
+              "url": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bjfu-2026-undergraduate",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-wave4-depth-bjfu-forestry-bachelor-2026-2027-autumn-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicableEntryYear": 2026,
+          "originalAcademicYear": "2026-2027",
+          "applicationScope": "general international undergraduate student admission",
+          "programmeScopeMatch": {
+            "degree": "bachelor",
+            "originalProgrammeName": "Forestry",
+            "exactCatalogueAndSourceMatched": true
+          },
+          "reason": "Original2026-2027undergraduate catalogue names this exact programme and the same full admissions prospectus printsJune15general deadline; canonical null retained."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave4-depth-bjfu-international-economics-trade-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-beijing-forestry-university",
+          "programId": "prog-gap-wave4-depth-bjfu-international-economics-trade-bachelor",
+          "programmeNameZh": "国际经济与贸易（本科）",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "79935c5c9bfa3f9232b4a4dcc53b777ad738130f5dd36fb08893254fc3233dfc",
+          "canonicalCycleSha256": "79935c5c9bfa3f9232b4a4dcc53b777ad738130f5dd36fb08893254fc3233dfc",
+          "canonicalProgramSha256": "60d9da2818f1756827571b5976f74fcd0e93fe91dddae46a306e663243b36c7d",
+          "sourceIds": [
+            "src-gap-program-wave4-depth-bjfu-international-economics-trade-bachelor"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-wave4-depth-bjfu-international-economics-trade-bachelor",
+              "sourceSha256": "7669ce7e7d7a3b147543b97c55b2e1349f1be658b7a6a4755033da52c3a0ae6c",
+              "url": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bjfu-2026-undergraduate",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-wave4-depth-bjfu-international-economics-trade-bachelor-2026-2027-autumn-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicableEntryYear": 2026,
+          "originalAcademicYear": "2026-2027",
+          "applicationScope": "general international undergraduate student admission",
+          "programmeScopeMatch": {
+            "degree": "bachelor",
+            "originalProgrammeName": "International Economics and Trade",
+            "exactCatalogueAndSourceMatched": true
+          },
+          "reason": "Original2026-2027undergraduate catalogue names this exact programme and the same full admissions prospectus printsJune15general deadline; canonical null retained."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave4-depth-bjfu-landscape-architecture-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-beijing-forestry-university",
+          "programId": "prog-gap-wave4-depth-bjfu-landscape-architecture-bachelor",
+          "programmeNameZh": "风景园林（本科）",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "d73e2e583e9c39db1bc40761d859d77d7c98f7eaa14d2efbeaf9db6249448f2e",
+          "canonicalCycleSha256": "d73e2e583e9c39db1bc40761d859d77d7c98f7eaa14d2efbeaf9db6249448f2e",
+          "canonicalProgramSha256": "36f0dc12b1b744c7812477f9de809ffda12641ef3a55ca207f7c49dd09f5a84d",
+          "sourceIds": [
+            "src-gap-program-wave4-depth-bjfu-landscape-architecture-bachelor"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-wave4-depth-bjfu-landscape-architecture-bachelor",
+              "sourceSha256": "ce052d9f337d5e651dacf135df819605a299e73ce61985232725b23ea066364b",
+              "url": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bjfu-2026-undergraduate",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-wave4-depth-bjfu-landscape-architecture-bachelor-2026-2027-autumn-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicableEntryYear": 2026,
+          "originalAcademicYear": "2026-2027",
+          "applicationScope": "general international undergraduate student admission",
+          "programmeScopeMatch": {
+            "degree": "bachelor",
+            "originalProgrammeName": "Landscape Architecture",
+            "exactCatalogueAndSourceMatched": true
+          },
+          "reason": "Original2026-2027undergraduate catalogue names this exact programme and the same full admissions prospectus printsJune15general deadline; canonical null retained."
+        }
+      ]
+    },
+    {
+      "key": "bjfu-2026-bgs",
+      "universityId": "uni-beijing-forestry-university",
+      "evidenceKey": "bjfu-2026-bgs",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave4-depth-bjfu-beijing-government-scholarship-2026",
+          "universityId": "uni-beijing-forestry-university",
+          "programId": null,
+          "programmeNameZh": "北京林业大学北京市政府奖学金（2026）",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "storedEvidenceBasis": null,
+          "storedFactScope": null,
+          "canonicalRecordSha256": "136f75bb3c02d81ec2551fb798213b4b227042dd36c9b57e667cbf3cda01f63e",
+          "sourceIds": [
+            "src-gap-scholarship-wave4-depth-bjfu-beijing-government-scholarship-2026"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave4-depth-bjfu-beijing-government-scholarship-2026",
+              "sourceSha256": "f150123238cb15d673b82468bc686d03333ed409bc1bbf67c0b55c0cbde82d46",
+              "url": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bjfu-2026-bgs",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=sch-gap-wave4-depth-bjfu-beijing-government-scholarship-2026]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-08",
+          "candidateOfficialDeadline": "2026-06-08",
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicableEntryYear": 2026,
+          "applicationScope": "named Beijing Government Scholarship undergraduate student applicants; not CGS TypeAor EBS",
+          "reason": "Exact named2026BGS applicant cutoff printed on originalp8; canonical deadline null retained."
+        }
+      ]
+    },
+    {
+      "key": "bit-2026-undergraduate",
+      "universityId": "uni-beijing-institute-of-technology",
+      "evidenceKey": "bit-2026-undergraduate",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-bit-aeronautical-astronautical-engineering-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-beijing-institute-of-technology",
+          "programId": "prog-gap-wave8-bit-aeronautical-astronautical-engineering-bachelor",
+          "programmeNameZh": "航空航天工程本科项目",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-02",
+          "storedReviewAfter": "2026-08-09",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "b317ca59a63356d0b6f5379c89144605ef1349e015c7d98910eda497f5d15158",
+          "canonicalCycleSha256": "b317ca59a63356d0b6f5379c89144605ef1349e015c7d98910eda497f5d15158",
+          "canonicalProgramSha256": "0cac0d8146967b15a3aa8de126a277b2c41ded225dd262ffa8d252f55214deeb",
+          "sourceIds": [
+            "src-gap-program-wave8-bit-aeronautical-astronautical-engineering-bachelor"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-bit-aeronautical-astronautical-engineering-bachelor",
+              "sourceSha256": "8bf5b405e310170b442ca8dfda726c60577c6573c4cd1e2b1ff3fff2cd95bb2c",
+              "url": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bit-2026-undergraduate",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-wave8-bit-aeronautical-astronautical-engineering-bachelor-2026-2027-autumn-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-01",
+          "candidateOfficialDeadline": "2026-06-01",
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicableEntryYear": 2026,
+          "programmeScopeMatch": {
+            "degree": "bachelor",
+            "campus": "Beijing",
+            "teachingLanguage": "English",
+            "originalProgrammeName": "Aeronautical and Astronautical Engineering",
+            "exactTableAndSourceMatched": true,
+            "intakeLabelExplicitInSource": false
+          },
+          "applicationScope": "article-wide2026international undergraduate admissions cutoff for all four exact named programmes; no semester-specific exception stated",
+          "excludedScholarshipDates": [
+            {
+              "date": "2026-05-01",
+              "meaning": "Beijing/Guangdong/BIT scholarship applicant dates, separate from general admission"
+            }
+          ],
+          "reason": "Exact programme, degree, campus, language, entry-year and article-wide general-deadline scope match. The original does not separately print autumn; closure is limited to2026entry and not inferred from fee-reference alone. Canonical null retained."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-bit-automation-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-beijing-institute-of-technology",
+          "programId": "prog-gap-wave8-bit-automation-bachelor",
+          "programmeNameZh": "自动化本科项目",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-02",
+          "storedReviewAfter": "2026-08-09",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "d09c06026444db88b68a0f2029fcb28d793f7af56340412dc9cb33512e62dd0c",
+          "canonicalCycleSha256": "d09c06026444db88b68a0f2029fcb28d793f7af56340412dc9cb33512e62dd0c",
+          "canonicalProgramSha256": "4b204d3f1d9e8746960a721105da5296c34d5df89a29e30173d2e6cbc4c50125",
+          "sourceIds": [
+            "src-gap-program-wave8-bit-automation-bachelor"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-bit-automation-bachelor",
+              "sourceSha256": "9e64984a5f4a528311f4f1c7fcdae3477804d56c08aa3e6f998e7970150ce613",
+              "url": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bit-2026-undergraduate",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-wave8-bit-automation-bachelor-2026-2027-autumn-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-01",
+          "candidateOfficialDeadline": "2026-06-01",
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicableEntryYear": 2026,
+          "programmeScopeMatch": {
+            "degree": "bachelor",
+            "campus": "Beijing",
+            "teachingLanguage": "English",
+            "originalProgrammeName": "Automation",
+            "exactTableAndSourceMatched": true,
+            "intakeLabelExplicitInSource": false
+          },
+          "applicationScope": "article-wide2026international undergraduate admissions cutoff for all four exact named programmes; no semester-specific exception stated",
+          "excludedScholarshipDates": [
+            {
+              "date": "2026-05-01",
+              "meaning": "Beijing/Guangdong/BIT scholarship applicant dates, separate from general admission"
+            }
+          ],
+          "reason": "Exact programme, degree, campus, language, entry-year and article-wide general-deadline scope match. The original does not separately print autumn; closure is limited to2026entry and not inferred from fee-reference alone. Canonical null retained."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-bit-electronic-science-technology-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-beijing-institute-of-technology",
+          "programId": "prog-gap-wave8-bit-electronic-science-technology-bachelor",
+          "programmeNameZh": "电子科学与技术本科项目",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-02",
+          "storedReviewAfter": "2026-08-09",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "d06881700cd79d41ed19a40be28ad01ed005f2def7cbe97346b2eeabc214b875",
+          "canonicalCycleSha256": "d06881700cd79d41ed19a40be28ad01ed005f2def7cbe97346b2eeabc214b875",
+          "canonicalProgramSha256": "461aa4bdf3483b137b46c5e6bb034483433b1931d5c332186a812c1eb7c460f9",
+          "sourceIds": [
+            "src-gap-program-wave8-bit-electronic-science-technology-bachelor"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-bit-electronic-science-technology-bachelor",
+              "sourceSha256": "542d181c30ccc40daf793ccd94e5888503385fd1a4bdf7b889c1de550365ccb7",
+              "url": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bit-2026-undergraduate",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-wave8-bit-electronic-science-technology-bachelor-2026-2027-autumn-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-01",
+          "candidateOfficialDeadline": "2026-06-01",
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicableEntryYear": 2026,
+          "programmeScopeMatch": {
+            "degree": "bachelor",
+            "campus": "Beijing",
+            "teachingLanguage": "English",
+            "originalProgrammeName": "Electronics Science and Technology",
+            "exactTableAndSourceMatched": true,
+            "intakeLabelExplicitInSource": false
+          },
+          "applicationScope": "article-wide2026international undergraduate admissions cutoff for all four exact named programmes; no semester-specific exception stated",
+          "excludedScholarshipDates": [
+            {
+              "date": "2026-05-01",
+              "meaning": "Beijing/Guangdong/BIT scholarship applicant dates, separate from general admission"
+            }
+          ],
+          "reason": "Exact programme, degree, campus, language, entry-year and article-wide general-deadline scope match. The original does not separately print autumn; closure is limited to2026entry and not inferred from fee-reference alone. Canonical null retained."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-bit-international-economics-trade-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-beijing-institute-of-technology",
+          "programId": "prog-gap-wave8-bit-international-economics-trade-bachelor",
+          "programmeNameZh": "国际经济与贸易本科项目",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-02",
+          "storedReviewAfter": "2026-08-09",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "ebb1c65ee16d637cf1b052a5a2e5d75fdd845d4bb8809d23f788a78f11591464",
+          "canonicalCycleSha256": "ebb1c65ee16d637cf1b052a5a2e5d75fdd845d4bb8809d23f788a78f11591464",
+          "canonicalProgramSha256": "13d5e218d2d48243b317fe98976526c5c3d06d7e648e770bc98008133c18eba1",
+          "sourceIds": [
+            "src-gap-program-wave8-bit-international-economics-trade-bachelor"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-bit-international-economics-trade-bachelor",
+              "sourceSha256": "7bec4fde15967eae2bc79f74eac9c1067ec8117775e311e193bdb5f0553e8173",
+              "url": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bit-2026-undergraduate",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-wave8-bit-international-economics-trade-bachelor-2026-2027-autumn-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-01",
+          "candidateOfficialDeadline": "2026-06-01",
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicableEntryYear": 2026,
+          "programmeScopeMatch": {
+            "degree": "bachelor",
+            "campus": "Beijing",
+            "teachingLanguage": "English",
+            "originalProgrammeName": "International Economics and Trade",
+            "exactTableAndSourceMatched": true,
+            "intakeLabelExplicitInSource": false
+          },
+          "applicationScope": "article-wide2026international undergraduate admissions cutoff for all four exact named programmes; no semester-specific exception stated",
+          "excludedScholarshipDates": [
+            {
+              "date": "2026-05-01",
+              "meaning": "Beijing/Guangdong/BIT scholarship applicant dates, separate from general admission"
+            }
+          ],
+          "reason": "Exact programme, degree, campus, language, entry-year and article-wide general-deadline scope match. The original does not separately print autumn; closure is limited to2026entry and not inferred from fee-reference alone. Canonical null retained."
+        }
+      ]
+    },
+    {
+      "key": "bisu-historical-only",
+      "universityId": "uni-beijing-international-studies-university",
+      "evidenceKey": "bisu-historical-only",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-bisu-chinese-language-bachelor-2025-2026-spring-fee-reference",
+          "universityId": "uni-beijing-international-studies-university",
+          "programId": "prog-gap-prog-mew-ne-bisu-chinese-language-bachelor",
+          "programmeNameZh": "汉语言",
+          "degreeLevel": "bachelor",
+          "academicYear": "2025-2026",
+          "intake": "spring",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "5e8738b5c6f6bfef3611be59efd525e350359754b6bc6119db2a9a287082b87d",
+          "canonicalCycleSha256": "5e8738b5c6f6bfef3611be59efd525e350359754b6bc6119db2a9a287082b87d",
+          "canonicalProgramSha256": "60800cd6f2aa038311a50a404a79ab10b2c283695a8feaef509cb68779170b75",
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-bisu-chinese-language-bachelor",
+            "src-gap-program-prog-mew-ne-bisu-chinese-language-bachelor-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-bisu-chinese-language-bachelor",
+              "sourceSha256": "d079d04f79f13bd65ab869bb30e5be1802425a8af6e0727397b73c25a1d218ea",
+              "url": "https://admission.bisu.edu.cn/attach/0/2411071706042027427.pdf",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-bisu-chinese-language-bachelor-support-1",
+              "sourceSha256": "b8bf2b63a93a45cbfcafcd2a489a0c4e2f7f0f6bf50be1950f637e0e13cc4fbf",
+              "url": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2403051823033743464.pdf?classid=0&filename=2403051823033743464.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bisu-historical-only",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-prog-mew-ne-bisu-chinese-language-bachelor-2025-2026-spring-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "excludedHistoricalWindows": [
+            {
+              "applicationYear": 2024,
+              "intake": "autumn",
+              "opensOn": "2024-03-01",
+              "deadline": "2024-05-31"
+            },
+            {
+              "applicationYear": 2024,
+              "intake": "spring",
+              "opensOn": "2024-09-01",
+              "deadline": "2024-11-30"
+            },
+            {
+              "academicYear": "2024-2025",
+              "route": "CSC high-level postgraduate, BISU admission-stage",
+              "deadline": "2023-12-20"
+            },
+            {
+              "academicYear": "2024-2025",
+              "route": "CSC portal stage for already preadmitted candidates",
+              "opensOn": "2024-01-05",
+              "deadline": "2024-01-15"
+            }
+          ],
+          "sourceFailureKeys": [
+            "source-08",
+            "source-08-web-fallback"
+          ],
+          "reason": "Readable official sources explicitly belong to earlier application years; the exact linked spring guide failed404and one fallback. Target year/intake is unproven; historicalmonth/dayand course end2026/27are not rolled forward."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-bisu-chinese-language-nondegree-2025-2026-spring-fee-reference",
+          "universityId": "uni-beijing-international-studies-university",
+          "programId": "prog-gap-prog-mew-ne-bisu-chinese-language-nondegree",
+          "programmeNameZh": "长期汉语进修生项目",
+          "degreeLevel": "language",
+          "academicYear": "2025-2026",
+          "intake": "spring",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "1e6a5cf3d51b9a6e181974a7be6fd5d2953f0da4304d6d1feb78099468be52f3",
+          "canonicalCycleSha256": "1e6a5cf3d51b9a6e181974a7be6fd5d2953f0da4304d6d1feb78099468be52f3",
+          "canonicalProgramSha256": "a739d16b21c478e95fd24b261daab4bad39e8fdf6601f42c6834a6008db17c21",
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-bisu-chinese-language-nondegree"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-bisu-chinese-language-nondegree",
+              "sourceSha256": "afd9bdc9a81436ba9ac3716bfdd20a054e54fcd384e753761386be80cd48a167",
+              "url": "https://admission.bisu.edu.cn/attach/0/2411071706042027427.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bisu-historical-only",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-prog-mew-ne-bisu-chinese-language-nondegree-2025-2026-spring-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "excludedHistoricalWindows": [
+            {
+              "applicationYear": 2024,
+              "intake": "autumn",
+              "opensOn": "2024-03-01",
+              "deadline": "2024-05-31"
+            },
+            {
+              "applicationYear": 2024,
+              "intake": "spring",
+              "opensOn": "2024-09-01",
+              "deadline": "2024-11-30"
+            },
+            {
+              "academicYear": "2024-2025",
+              "route": "CSC high-level postgraduate, BISU admission-stage",
+              "deadline": "2023-12-20"
+            },
+            {
+              "academicYear": "2024-2025",
+              "route": "CSC portal stage for already preadmitted candidates",
+              "opensOn": "2024-01-05",
+              "deadline": "2024-01-15"
+            }
+          ],
+          "sourceFailureKeys": [
+            "source-08",
+            "source-08-web-fallback"
+          ],
+          "reason": "Readable official sources explicitly belong to earlier application years; the exact linked spring guide failed404and one fallback. Target year/intake is unproven; historicalmonth/dayand course end2026/27are not rolled forward."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-bisu-foundation-2026-2027-other-fee-reference",
+          "universityId": "uni-beijing-international-studies-university",
+          "programId": "prog-gap-prog-mew-ne-bisu-foundation",
+          "programmeNameZh": "汉语言与专业汉语预科项目",
+          "degreeLevel": "foundation",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "df410dab8f47ae2e8c05f3384bcb76c1dc54eaa419524a553030da7f41041b49",
+          "canonicalCycleSha256": "df410dab8f47ae2e8c05f3384bcb76c1dc54eaa419524a553030da7f41041b49",
+          "canonicalProgramSha256": "a7d8079f57fea52b6524d37e65fa40d65b3923b38b8e865afe27349586ccd9da",
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-bisu-foundation"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-bisu-foundation",
+              "sourceSha256": "13ce73e69a6ad2ec938204ce3bba27fb70fe5710779d5deacc3ea8456f722608",
+              "url": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2403051823033743464.pdf?classid=0&filename=2403051823033743464.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bisu-historical-only",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-prog-mew-ne-bisu-foundation-2026-2027-other-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "excludedHistoricalWindows": [
+            {
+              "applicationYear": 2024,
+              "intake": "autumn",
+              "opensOn": "2024-03-01",
+              "deadline": "2024-05-31"
+            },
+            {
+              "applicationYear": 2024,
+              "intake": "spring",
+              "opensOn": "2024-09-01",
+              "deadline": "2024-11-30"
+            },
+            {
+              "academicYear": "2024-2025",
+              "route": "CSC high-level postgraduate, BISU admission-stage",
+              "deadline": "2023-12-20"
+            },
+            {
+              "academicYear": "2024-2025",
+              "route": "CSC portal stage for already preadmitted candidates",
+              "opensOn": "2024-01-05",
+              "deadline": "2024-01-15"
+            }
+          ],
+          "sourceFailureKeys": [
+            "source-08",
+            "source-08-web-fallback"
+          ],
+          "reason": "Readable official sources explicitly belong to earlier application years; the exact linked spring guide failed404and one fallback. Target year/intake is unproven; historicalmonth/dayand course end2026/27are not rolled forward."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-bisu-international-chinese-education-master-2026-2027-other-fee-reference",
+          "universityId": "uni-beijing-international-studies-university",
+          "programId": "prog-gap-prog-mew-ne-bisu-international-chinese-education-master",
+          "programmeNameZh": "国际中文教育",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "2934858d20690ecfba7bf6511b6c126bd7140d214f3d515c9ea8f28bca375070",
+          "canonicalCycleSha256": "2934858d20690ecfba7bf6511b6c126bd7140d214f3d515c9ea8f28bca375070",
+          "canonicalProgramSha256": "c676b071d5691c9ea33fd1a18a4296e9c0e87528f7ed8a6dd56ff9627579ce41",
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-bisu-international-chinese-education-master",
+            "src-gap-program-prog-mew-ne-bisu-international-chinese-education-master-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-bisu-international-chinese-education-master",
+              "sourceSha256": "107174b78ef85fad84c2b331c60369f0362ec3ef4b3541a025cb2833797bd154",
+              "url": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2403051823033743464.pdf?classid=0&filename=2403051823033743464.pdf",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-bisu-international-chinese-education-master-support-1",
+              "sourceSha256": "2158908dcd6a18ff7e6bf37aed9bb35c3db97864cb82057ea9d4d79aa8d01eca",
+              "url": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2311210958564459337.pdf?classid=0&filename=2311210958564459337.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bisu-historical-only",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-prog-mew-ne-bisu-international-chinese-education-master-2026-2027-other-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "excludedHistoricalWindows": [
+            {
+              "applicationYear": 2024,
+              "intake": "autumn",
+              "opensOn": "2024-03-01",
+              "deadline": "2024-05-31"
+            },
+            {
+              "applicationYear": 2024,
+              "intake": "spring",
+              "opensOn": "2024-09-01",
+              "deadline": "2024-11-30"
+            },
+            {
+              "academicYear": "2024-2025",
+              "route": "CSC high-level postgraduate, BISU admission-stage",
+              "deadline": "2023-12-20"
+            },
+            {
+              "academicYear": "2024-2025",
+              "route": "CSC portal stage for already preadmitted candidates",
+              "opensOn": "2024-01-05",
+              "deadline": "2024-01-15"
+            }
+          ],
+          "sourceFailureKeys": [
+            "source-08",
+            "source-08-web-fallback"
+          ],
+          "reason": "Readable official sources explicitly belong to earlier application years; the exact linked spring guide failed404and one fallback. Target year/intake is unproven; historicalmonth/dayand course end2026/27are not rolled forward."
+        }
+      ]
+    },
+    {
+      "key": "bjtu-2018-only",
+      "universityId": "uni-beijing-jiaotong-university",
+      "evidenceKey": "bjtu-2018-only",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-bjtu-logistics-engineering-master-en-2026-2027-other-fee-reference",
+          "universityId": "uni-beijing-jiaotong-university",
+          "programId": "prog-gap-prog-mew-ne-bjtu-logistics-engineering-master-en",
+          "programmeNameZh": "物流工程",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "48fefe0ab8a3200a19f461bb748bd3cd6660778781cc1a8048fd2129afca58d9",
+          "canonicalCycleSha256": "48fefe0ab8a3200a19f461bb748bd3cd6660778781cc1a8048fd2129afca58d9",
+          "canonicalProgramSha256": "276bcf8b344efc3dd77cc2ed5b1ace4f23470bb80fd92c34e5b894b566552cbe",
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-bjtu-logistics-engineering-master-en"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-bjtu-logistics-engineering-master-en",
+              "sourceSha256": "f152962cc57850698ffba4e85e6cf7ef344dcf3243dd7f1ed119fd6974e1a027",
+              "url": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bjtu-2018-only",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-prog-mew-ne-bjtu-logistics-engineering-master-en-2026-2027-other-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "originalGuideYear": 2018,
+          "originalGuideYearEvidence": "visual coverp1; not2024URLdirectory",
+          "historicalDateCandidates": [
+            {
+              "month": 1,
+              "day": 15,
+              "year": null,
+              "scope": "springhistoricalrecurringadmission"
+            },
+            {
+              "month": 7,
+              "day": 15,
+              "year": null,
+              "scope": "autumnhistoricalrecurringadmission"
+            }
+          ],
+          "reason": "The original handbook cover is2018and warns annual timing varies. Its contents do not certify target2026-2027fee-referencecyclesor a currentyearforcombinedscholarshipframework."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en-2026-2027-other-fee-reference",
+          "universityId": "uni-beijing-jiaotong-university",
+          "programId": "prog-gap-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en",
+          "programmeNameZh": "轨道交通信号与控制",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "faf5c1d07ed86abd24d24c152d5c4d9bc5aa8adac758ab8ceb6715f9787fbebe",
+          "canonicalCycleSha256": "faf5c1d07ed86abd24d24c152d5c4d9bc5aa8adac758ab8ceb6715f9787fbebe",
+          "canonicalProgramSha256": "5d52002db72305d23983b21b8e7d5ac9a2585e9e20a293ee8f489df2b0920c3e",
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en",
+              "sourceSha256": "a44e5df1da2c886cd4c6e3316ae975a1e120acf2c12363afac2809a1cc0ba941",
+              "url": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bjtu-2018-only",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en-2026-2027-other-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "originalGuideYear": 2018,
+          "originalGuideYearEvidence": "visual coverp1; not2024URLdirectory",
+          "historicalDateCandidates": [
+            {
+              "month": 1,
+              "day": 15,
+              "year": null,
+              "scope": "springhistoricalrecurringadmission"
+            },
+            {
+              "month": 7,
+              "day": 15,
+              "year": null,
+              "scope": "autumnhistoricalrecurringadmission"
+            }
+          ],
+          "reason": "The original handbook cover is2018and warns annual timing varies. Its contents do not certify target2026-2027fee-referencecyclesor a currentyearforcombinedscholarshipframework."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-bjtu-transportation-planning-doctorate-2026-2027-other-fee-reference",
+          "universityId": "uni-beijing-jiaotong-university",
+          "programId": "prog-gap-prog-mew-ne-bjtu-transportation-planning-doctorate",
+          "programmeNameZh": "交通运输规划与管理",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "partial",
+          "canonicalRecordSha256": "e3d11928b38cda5bcab0dee8a740e74a074d06ed3af677f193ccda0a416ab2a7",
+          "canonicalCycleSha256": "e3d11928b38cda5bcab0dee8a740e74a074d06ed3af677f193ccda0a416ab2a7",
+          "canonicalProgramSha256": "fae0d6a8c06fe9a140820e25bf71ccc5e976bf20ecd3d23cbc63761626899dfd",
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-bjtu-transportation-planning-doctorate"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-bjtu-transportation-planning-doctorate",
+              "sourceSha256": "67bd1aecd5e2d41671aabe05befc83cb7cdffd1fe0b50dae9752767e02b9e28b",
+              "url": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bjtu-2018-only",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-prog-mew-ne-bjtu-transportation-planning-doctorate-2026-2027-other-fee-reference]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "originalGuideYear": 2018,
+          "originalGuideYearEvidence": "visual coverp1; not2024URLdirectory",
+          "historicalDateCandidates": [
+            {
+              "month": 1,
+              "day": 15,
+              "year": null,
+              "scope": "springhistoricalrecurringadmission"
+            },
+            {
+              "month": 7,
+              "day": 15,
+              "year": null,
+              "scope": "autumnhistoricalrecurringadmission"
+            }
+          ],
+          "reason": "The original handbook cover is2018and warns annual timing varies. Its contents do not certify target2026-2027fee-referencecyclesor a currentyearforcombinedscholarshipframework."
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-ne-bjtu-csc-and-silk-road",
+          "universityId": "uni-beijing-jiaotong-university",
+          "programId": null,
+          "programmeNameZh": "北京交通大学中国政府奖学金及丝绸之路项目",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-09-02",
+          "storedEvidenceBasis": null,
+          "storedFactScope": null,
+          "canonicalRecordSha256": "2926d4afcb398ff528bf67938a9b28a5b16e2c95f9400262e888857a9b19e68a",
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-ne-bjtu-csc-and-silk-road"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-ne-bjtu-csc-and-silk-road",
+              "sourceSha256": "551a7c021c8b097fe09d736237f78729613065b07a702a13368e8b111cc7e84e",
+              "url": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bjtu-2018-only",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=sch-gap-sch-mew-ne-bjtu-csc-and-silk-road]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "originalGuideYear": 2018,
+          "originalGuideYearEvidence": "visual coverp1; not2024URLdirectory",
+          "historicalDateCandidates": [
+            {
+              "month": 4,
+              "day": 10,
+              "year": null,
+              "boundary": "before-date-as-worded",
+              "scope": "2018guideCSC/SilkRoadapplicant materials"
+            }
+          ],
+          "reason": "The original handbook cover is2018and warns annual timing varies. Its contents do not certify target2026-2027fee-referencecyclesor a currentyearforcombinedscholarshipframework."
+        }
+      ]
+    },
+    {
+      "key": "bsu-2026-autumn-nondegree",
+      "universityId": "uni-beijing-sport-university",
+      "evidenceKey": "bsu-2026-autumn-nondegree",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-bsu-chinese-language-2026-2027-autumn",
+          "universityId": "uni-beijing-sport-university",
+          "programId": "prog-gap-prog-mew-nss-bsu-chinese-language",
+          "programmeNameZh": "汉语进修",
+          "degreeLevel": "language",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-04",
+          "storedReviewAfter": "2026-08-11",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "dates-only",
+          "canonicalRecordSha256": "8e5f3b5266a0716cb74fd69d304c2fddcd0a04178e62e36afda6dc00d4206cab",
+          "canonicalCycleSha256": "8e5f3b5266a0716cb74fd69d304c2fddcd0a04178e62e36afda6dc00d4206cab",
+          "canonicalProgramSha256": "e98bc59479265be056d7f94c68736b23a13e8519477b8162c54ec644b6ba8d98",
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-bsu-chinese-language"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-bsu-chinese-language",
+              "sourceSha256": "4a6ca7bb03efa2d12febaa5993c8a6b7b1a6ae838e8cd8fd216e7eb364cb247f",
+              "url": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bsu-2026-autumn-nondegree",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-prog-mew-nss-bsu-chinese-language-2026-2027-autumn]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-01",
+          "candidateOfficialDeadline": "2026-06-01",
+          "candidateOfficialOpensOn": "2025-12-01",
+          "openingDateResult": "new-candidate-canonical-null-retained",
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicableEntryYear": 2026,
+          "applicationScope": "autumn2026non-degree applicant window, exact ChineseLanguageStudyandWushuTrainingcategories explicitly listed",
+          "reason": "Exactyear,Septemberintakeandnon-degreecategorymatch; both new dates are candidates only and canonical fields remainnull."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-bsu-wushu-training-2026-2027-autumn",
+          "universityId": "uni-beijing-sport-university",
+          "programId": "prog-gap-prog-mew-nss-bsu-wushu-training",
+          "programmeNameZh": "武术进修",
+          "degreeLevel": "other",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDeadline": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-04",
+          "storedReviewAfter": "2026-08-11",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "dates-only",
+          "canonicalRecordSha256": "78a5e679a3da64c57aec759cf214b34612bedf78df115677711d4f2476f323fb",
+          "canonicalCycleSha256": "78a5e679a3da64c57aec759cf214b34612bedf78df115677711d4f2476f323fb",
+          "canonicalProgramSha256": "0e380398fdf55cad26457a93837fcb053995ffd798fe96fef1446f4134a4269a",
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-bsu-wushu-training"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-bsu-wushu-training",
+              "sourceSha256": "a95c31b4c546695c8cafc34431b5d92cc6e0260730e550eff1efe9dc7ce9b28b",
+              "url": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bsu-2026-autumn-nondegree",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-prog-mew-nss-bsu-wushu-training-2026-2027-autumn]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-01",
+          "candidateOfficialDeadline": "2026-06-01",
+          "candidateOfficialOpensOn": "2025-12-01",
+          "openingDateResult": "new-candidate-canonical-null-retained",
+          "deadlineBoundary": "date-only-no-time-stated",
+          "applicableEntryYear": 2026,
+          "applicationScope": "autumn2026non-degree applicant window, exact ChineseLanguageStudyandWushuTrainingcategories explicitly listed",
+          "reason": "Exactyear,Septemberintakeandnon-degreecategorymatch; both new dates are candidates only and canonical fields remainnull."
+        }
+      ]
+    },
+    {
+      "key": "bsu-2026-master-funded-scope",
+      "universityId": "uni-beijing-sport-university",
+      "evidenceKey": "bsu-2026-master-funded-scope",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-bsu-international-chinese-education-master-2026-2027-autumn",
+          "universityId": "uni-beijing-sport-university",
+          "programId": "prog-gap-prog-mew-nss-bsu-international-chinese-education-master",
+          "programmeNameZh": "国际中文教育",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDeadline": "2026-03-01",
+          "storedDateStatus": "published",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-04",
+          "storedReviewAfter": "2026-08-11",
+          "storedEvidenceBasis": "cycle-specific",
+          "storedFactScope": "dates-only",
+          "canonicalRecordSha256": "8be23a6ff3c2d9fdf0721992a6f09d39706722da8a6d10448be858cada6f2d2a",
+          "canonicalCycleSha256": "8be23a6ff3c2d9fdf0721992a6f09d39706722da8a6d10448be858cada6f2d2a",
+          "canonicalProgramSha256": "bfdea1042ecf6d62a3906a3804f5e98c861ce395f5c4f2c37758bc1315ae2f51",
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-bsu-international-chinese-education-master",
+            "src-gap-program-prog-mew-nss-bsu-international-chinese-education-master-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-bsu-international-chinese-education-master",
+              "sourceSha256": "8fe76a289abeae1af8844767f11c6e14ea647f6f97542ba85087009f2fbf6eee",
+              "url": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-bsu-international-chinese-education-master-support-1",
+              "sourceSha256": "837ce2bdfa878bcf64ba595c5ceb9ff3dc5d5aa2f58796de40545fc4504793bf",
+              "url": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/20c48cea06c3422ba70e4c57d8d9b527.htm",
+              "official": true
+            }
+          ],
+          "evidenceKey": "bsu-2026-master-funded-scope",
+          "officialOpensOn": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "rawRecordPreservedIn": "selection.json#records[row.id=cycle-gap-prog-mew-nss-bsu-international-chinese-education-master-2026-2027-autumn]",
+          "requiresIndependentApprovalAndCasBeforeCanonicalDateChange": true,
+          "result": "closed",
+          "officialDeadline": "2026-03-01",
+          "candidateOfficialDeadline": "2026-03-01",
+          "deadlineBoundary": "before-date-as-worded",
+          "applicableEntryYear": 2026,
+          "applicationScope": "2026CSCTypeBhigh-level postgraduate applicant BSUsystemstage only; not all self-funded master applications",
+          "storedDeadlineMatchesScopedOfficialDay": true,
+          "separateGeneralAdmissionCandidate": {
+            "officialDeadline": "2026-06-01",
+            "candidateOfficialOpensOn": "2025-12-01",
+            "evidenceSourceKey": "source-09",
+            "scope": "general2026autumnapplicationwindow, separate fromCSCTypeB"
+          },
+          "publicationRiskFlags": [
+            "StoredMarch1deadlineisCSC-route-specific;do-not-present-as-universal-general-programme-deadline",
+            "BeforeMarch1wordingdoesnotestablishfull-dayMarch1availability"
+          ],
+          "reason": "Both fundedMarch1andgeneralJune1windowsareexpired.TheexistingMarch1dayisconfirmedonlywithinCSCscope;noautomaticreplacementorfull-factrenewal."
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "schoolsAttempted": 7,
+    "recordsAssessed": 27,
+    "recordResults": {
+      "unknown": 16,
+      "closed": 11
+    },
+    "newExactDeadlineCandidatesFromCanonicalNull": 10,
+    "alreadyStoredExpiredDeadlineScoped": 1,
+    "newOpeningCandidatesFromCanonicalNull": 2,
+    "unknownDatesNotClosedByInference": 16,
+    "canonicalWrites": 0,
+    "fullFactsCertified": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "freshnessRenewals": 0,
+    "gitMutations": 0,
+    "sharedProgressWrites": 0,
+    "publicationActions": 0,
+    "paidModelCalls": 0
+  },
+  "cooldowns": [
+    {
+      "sourceKey": "source-08",
+      "url": "https://admission.bisu.edu.cn/attach/0/2411071706042027427.pdf",
+      "reason": "HTTP404thenoneboundedwebfallbackunavailable",
+      "immediateRetryAllowed": false,
+      "retryCondition": "Changedofficialattachmentlinkora laterboundedrecoverywindow"
+    }
+  ],
+  "publicationRiskFlags": [
+    "All11closedresultsarecandidate-onlyevidenceanddonotwritecanonicaldatesorrenewstatus.",
+    "Fee-referenceprogrammebindingsrequireoriginaldegree/programme/entry-yearandsource;AHU,BISUandBJTUremainunknown.",
+    "BITusesarticle-wide2026undergraduatescope;autumnlabelisnotseparatelyprintedandmustnotberolledto2027.",
+    "AHMUFeb25isadvice;BFUJune15generaladmissionandJune8BGSaredifferentscopes;BSUMarch1isCSC-specificandbefore-as-worded.",
+    "Noapplicantdeadlineisderivedfromenrolment,coursecompletion,oruniversitynotificationdates."
+  ],
+  "limitations": [
+    "Date-onlyauditonly.All27rawrowsandprogramme/sourcepinsarepreservedinselection.json.",
+    "NewofficialopeningdatesarestoredascandidateOfficialOpensOnwhileofficialOpensOnandcanonicalopensOnremainnull.",
+    "No2018/2024yearorrecurringmonth/dayisrolledforward;unknownisnotopenorclosed.",
+    "Nocanonical/full-factstatus/Git/sharedstate/progress/publicationchanges;futureconsumptionrequiresnarrowreview,independentapproval,andCASagainstpinnedrecords."
+  ]
+}

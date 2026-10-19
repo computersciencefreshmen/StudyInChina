@@ -1,0 +1,488 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "official-batch-014-independent-review-v1",
+  "reviewedAt": "2026-10-19T05:32:43.995Z",
+  "verdict": "accepted-for-scoped-date-only-candidate-observations",
+  "approvedForCanonicalWrite": false,
+  "reportPath": "report.json",
+  "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueueSha256": "dfa9f046dfe1a63fe3130c4964c117377913dc97b9577972b95b986d71a9f3f6",
+  "summary": {
+    "universities": 7,
+    "exactSelectedIds": 18,
+    "closedDateCandidates": 6,
+    "unknownDeadlines": 12,
+    "canonicalCycleFullRowHashesChecked": 18,
+    "canonicalProgramFullRowHashesChecked": 18,
+    "originalBodyFilesHashChecked": 13,
+    "allStoredDeadlineAndOpeningDatesRemainNull": true,
+    "newOfficialWebsiteReads": 0,
+    "canonicalWrites": 0,
+    "reportWrites": 0,
+    "stateWrites": 0,
+    "gitActions": 0
+  },
+  "findings": [
+    {
+      "key": "cad-bachelor-distinct-application-stages",
+      "disposition": "accepted",
+      "evidence": [
+        "cad-bachelor-guide.pdf pages 3,7,8,10",
+        "cad-bachelor-date-page3.png",
+        "independent-cad-stage-page-07.png",
+        "independent-cad-stage-page-08.png"
+      ],
+      "assessment": "2026 international undergraduate first application-material submission runs March 2 at 09:00 to March 6 at 09:00 Beijing time. March 16 at 17:00 applies only to major selection/payment after review, and before April 15 applies only to qualification documents after successful registration. The earliest mandatory first-submission cutoff is the correct scoped candidate for a new applicant; later stages cannot replace it.",
+      "candidateCutoffAt": "2026-03-06T09:00:00+08:00",
+      "relativeOrBeforeQualifiersPreserved": true
+    },
+    {
+      "key": "cad-doctor-foreign-vs-hmt-route",
+      "disposition": "accepted",
+      "evidence": [
+        "cad-doctor-guide.pdf page 1",
+        "cad-doctor-date-page1.png"
+      ],
+      "assessment": "The actual 2026 doctoral guide explicitly exempts foreign applicants from HMT online registration. Its March 2–6 material submission covers foreign applicants, ending March 6 at 17:00 Beijing time. HMT-only February 28 at 24:00 is retained solely as an excluded route; its normalized March 1 midnight is not used as the foreign deadline.",
+      "candidateCutoffAt": "2026-03-06T17:00:00+08:00"
+    },
+    {
+      "key": "btbu-matching-three-majors-finance-unmatched",
+      "disposition": "accepted",
+      "evidence": [
+        "btbu.pdf pages 6–8,11",
+        "btbu-programs-page6.png",
+        "btbu-deadline-page11.png"
+      ],
+      "assessment": "The actual 2026 catalogue includes Business Administration, International Economics and Trade, and Polymer Materials and Engineering; their explicit applicant deadline May 1, 2026 supports three closed candidates. It lists Financial Management, which is not Finance. No Finance/金融学 entry is found across all three catalogue pages; that stored route remains unknown. No permanent discontinuation is inferred."
+    },
+    {
+      "key": "bjut-programme-specific-absolute-window",
+      "disposition": "accepted",
+      "evidence": [
+        "bjut.pdf pages 1–2",
+        "bjut-date-page2.png"
+      ],
+      "assessment": "Exact English-taught International Economics and Trade bachelor programme has an explicitly year-bound November 1, 2025 to June 15, 2026 application period, September entry, and the matching 2026–2027 stored cycle. It supports one closed candidate and a separate numeric opening candidate, without opening-date equality certification."
+    },
+    {
+      "key": "bupt-relative-months-not-hardened",
+      "disposition": "accepted",
+      "evidence": [
+        "bupt.pdf pages 1,6,10",
+        "independent-bupt-date-page-10.png"
+      ],
+      "assessment": "2026 brochure and four route names are present, but its application period states October 20 to April 20 next year without absolute endpoint years. The report conservatively retains four unknown deadlines and does not manufacture a 2025/2026 or 2026/2027 window."
+    },
+    {
+      "key": "ccom-recurring-before-dates",
+      "disposition": "accepted",
+      "evidence": [
+        "ccom.html",
+        "ccom.txt section 五"
+      ],
+      "assessment": "The January 13, 2026 publication date does not establish the application year of generic spring/autumn fee references. Before January 1 and before June 15 remain recurring references with strict before qualifiers; four deadlines stay unknown."
+    },
+    {
+      "key": "bwu-before-class-and-cueb-recurring-rule",
+      "disposition": "accepted",
+      "evidence": [
+        "bwu-guide.html",
+        "cueb-deadline.html"
+      ],
+      "assessment": "BWU any-time-before-class and approximate early-September intake do not provide an exact 2026 deadline. CUEB before June 10 each year is recurring and the stored bachelor intake is other; language-only spring before December 20 is excluded. All three remain unknown."
+    }
+  ],
+  "canonicalRecordPins": [
+    {
+      "recordId": "cycle-gap-prog-mew-ne-btbu-business-administration-bachelor-2026-2027-autumn",
+      "canonicalCycleSha256": "f7edea273acf73e8d1e01cd44ebe92f86e4366f7d4938d423f8fac0153469a27",
+      "programId": "prog-gap-prog-mew-ne-btbu-business-administration-bachelor",
+      "canonicalProgramSha256": "ac08ee0fcd34539bcc325a7a313a01a23c52222115e20ffbe46826e56595f0aa",
+      "result": "closed",
+      "officialDeadlineCandidate": "2026-05-01",
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "fc0ade25dd70cbf7394f4e5c87d87dc21aa6fca0b2ab0d808b3483a82e13b044",
+      "observedAt": "2026-10-19T05:25:52.418032+00:00"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-ne-btbu-finance-bachelor-2026-2027-autumn",
+      "canonicalCycleSha256": "fd38de0a3f8e4edaa6e9f7325729d978a2f36c26ab03401a237d4454916a4ada",
+      "programId": "prog-gap-prog-mew-ne-btbu-finance-bachelor",
+      "canonicalProgramSha256": "9e2c54de16595586642f19d1ae1ac6f52fa2b1c5da6d4fe1059299c0dbdeb004",
+      "result": "unknown",
+      "officialDeadlineCandidate": null,
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "fc0ade25dd70cbf7394f4e5c87d87dc21aa6fca0b2ab0d808b3483a82e13b044",
+      "observedAt": "2026-10-19T05:25:52.418032+00:00"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-ne-btbu-international-economics-trade-bachelor-2026-2027-autumn",
+      "canonicalCycleSha256": "38a6163fe0af1346e4a5f4f4ea8ae688fc5586076cea06da601c7d4ef7d67002",
+      "programId": "prog-gap-prog-mew-ne-btbu-international-economics-trade-bachelor",
+      "canonicalProgramSha256": "37627e9203fd04ca8f0c1232a9266a5de0993ecba8b7d00b88b18914cb17f7df",
+      "result": "closed",
+      "officialDeadlineCandidate": "2026-05-01",
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "fc0ade25dd70cbf7394f4e5c87d87dc21aa6fca0b2ab0d808b3483a82e13b044",
+      "observedAt": "2026-10-19T05:25:52.418032+00:00"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-ne-btbu-polymer-materials-bachelor-2026-2027-autumn",
+      "canonicalCycleSha256": "8ab90e5cd035a99dd57b13ee9be2007b54940b0d93e2cf24c320e6f077b5e9b2",
+      "programId": "prog-gap-prog-mew-ne-btbu-polymer-materials-bachelor",
+      "canonicalProgramSha256": "b0b122ae9c4f8e213f759d13e5dba08d23f6296ae9569a95d49364998ad4ceeb",
+      "result": "closed",
+      "officialDeadlineCandidate": "2026-05-01",
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "fc0ade25dd70cbf7394f4e5c87d87dc21aa6fca0b2ab0d808b3483a82e13b044",
+      "observedAt": "2026-10-19T05:25:52.418032+00:00"
+    },
+    {
+      "recordId": "cycle-2026-bupt-computer-science-and-technology-bachelor-english-autumn",
+      "canonicalCycleSha256": "6e57406dbf375f69307d8a03aa9c0d634f1280adb14288091be124464dfc39d4",
+      "programId": "program-bupt-computer-science-and-technology-bachelor-english",
+      "canonicalProgramSha256": "30557859ac0d3c0966c85dbc3589c2831288a97c880235d18a0156b7fc65cd36",
+      "result": "unknown",
+      "officialDeadlineCandidate": null,
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8",
+      "observedAt": "2026-10-19T05:25:52.418032+00:00"
+    },
+    {
+      "recordId": "cycle-2026-bupt-computer-technology-master-english-autumn",
+      "canonicalCycleSha256": "5f669e873252dbd62ab92eedf45097191f8134e29be42f889835aba804db8b11",
+      "programId": "program-bupt-computer-technology-master-english",
+      "canonicalProgramSha256": "c866e9485d2420217cf8b9d93ccd2e8067085818243e48c3522a9cb017a1e8ac",
+      "result": "unknown",
+      "officialDeadlineCandidate": null,
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8",
+      "observedAt": "2026-10-19T05:25:52.418032+00:00"
+    },
+    {
+      "recordId": "cycle-2026-bupt-information-and-communication-engineering-doctorate-english-autumn",
+      "canonicalCycleSha256": "c377793c38c374a48faf46fdd0929a7a2797e6916313da01bebcc7fbe8ddb6b8",
+      "programId": "program-bupt-information-and-communication-engineering-doctorate-english",
+      "canonicalProgramSha256": "f1edea518fa3f4a13adfbc59b5033daa2a955449fed8050beb877fe79e97059c",
+      "result": "unknown",
+      "officialDeadlineCandidate": null,
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8",
+      "observedAt": "2026-10-19T05:25:52.418032+00:00"
+    },
+    {
+      "recordId": "cycle-2026-bupt-computer-science-and-technology-doctorate-english-autumn",
+      "canonicalCycleSha256": "3a83f2053de8af2bb1bd62cf91df1a70d913c726972cbcdb3e9bc37e04bea66a",
+      "programId": "program-bupt-computer-science-and-technology-doctorate-english",
+      "canonicalProgramSha256": "e9a960cb37639029a9b9cf65a31256e64ac310d60dd910ce577c49e55aa9a9f3",
+      "result": "unknown",
+      "officialDeadlineCandidate": null,
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8",
+      "observedAt": "2026-10-19T05:25:52.418032+00:00"
+    },
+    {
+      "recordId": "cycle-8d38128a96fa",
+      "canonicalCycleSha256": "cf6519ac2f624a3366eefb108d9248ce0fb44f48424f42aa0518e392c52cf7bf",
+      "programId": "program-beijing-university-of-technology-international-economics-and-trade-bache",
+      "canonicalProgramSha256": "590426fe66e00bd5c7a4e29c79c57fe54493108842d8d8b1abdc76abe786f3f6",
+      "result": "closed",
+      "officialDeadlineCandidate": "2026-06-15",
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "7a1da0f1d829cec4cb5712096a84618b99341086a1d8b211c3c551b2242ec155",
+      "observedAt": "2026-10-19T05:25:55.274702+00:00"
+    },
+    {
+      "recordId": "cycle-gap-wave8-2-bwu-international-trade-economics-bachelor-2026-2027-other-fee-reference",
+      "canonicalCycleSha256": "5ff2945916b94a197397d4d3b832de3228b7c87ef9a3635a4e01e1ffb51536f3",
+      "programId": "prog-gap-wave8-2-bwu-international-trade-economics-bachelor",
+      "canonicalProgramSha256": "837cd23b329018852ddb3a30703ced1411a91c445aacd1fcb9fcd9f727b53eb7",
+      "result": "unknown",
+      "officialDeadlineCandidate": null,
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "1cfee5b53df77c7b1b2eee3e75d72b233d5150ae732d1f3f7bbba9b1c6e75032",
+      "observedAt": "2026-10-19T05:26:50.704188+00:00"
+    },
+    {
+      "recordId": "cycle-gap-wave8-2-bwu-logistics-management-bachelor-2026-2027-other-fee-reference",
+      "canonicalCycleSha256": "ad3bb043a54fa095130edb0b0284b4679d411ddc082bd1dc16f20ea078360fc4",
+      "programId": "prog-gap-wave8-2-bwu-logistics-management-bachelor",
+      "canonicalProgramSha256": "f384dbbad41b794e0730b05127addac5bff5a0eb50953f2d29b855c4fd8129df",
+      "result": "unknown",
+      "officialDeadlineCandidate": null,
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "1cfee5b53df77c7b1b2eee3e75d72b233d5150ae732d1f3f7bbba9b1c6e75032",
+      "observedAt": "2026-10-19T05:26:50.704188+00:00"
+    },
+    {
+      "recordId": "cycle-gap-remaining-cueb-b-business-administration-en-2026-2027-other-fee-reference",
+      "canonicalCycleSha256": "b42da4ea6f61c1f70858c2cb082cbf4bfb28f3468e2e74e0200d3b392baa3297",
+      "programId": "prog-gap-remaining-cueb-b-business-administration-en",
+      "canonicalProgramSha256": "222135f2ba6677d4dc3fd4585f365e2d6f6f6f7da31cf070f815034a1fddf9a1",
+      "result": "unknown",
+      "officialDeadlineCandidate": null,
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "8f97efdec9fc2a5e304c0c409efd672c879d6fdd0d267238cf7c9ae8e73f113b",
+      "observedAt": "2026-10-19T05:28:00.044648+00:00"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-cad-acting-bachelor-2026-2027-autumn",
+      "canonicalCycleSha256": "55af42e7b9a277b115df0d444fd2630912ee890236932f8d3e854e3c5a39aced",
+      "programId": "prog-gap-prog-mew-nss-cad-acting-bachelor",
+      "canonicalProgramSha256": "77f1d2014d0fa3813dd070005741f088de41cd9e57cef13b2b72389522dba634",
+      "result": "closed",
+      "officialDeadlineCandidate": "2026-03-06",
+      "officialCutoffAtCandidate": "2026-03-06T09:00:00+08:00",
+      "evidenceBodySha256": "c22d53ddabbacfd9847e9a7946ca7d2ad5bde636180f4da6611b2910612d84f2",
+      "observedAt": "2026-10-19T05:29:25.031953+00:00"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-cad-drama-film-doctorate-2026-2027-autumn",
+      "canonicalCycleSha256": "383b983345f20433d609fa0f68c72c9bf04b1b21674e9033dd745c2fcf300c6b",
+      "programId": "prog-gap-prog-mew-nss-cad-drama-film-doctorate",
+      "canonicalProgramSha256": "e611bdcba0dc6b36e76f3d1fc3778647a13817accd06a134f4af56e6ad82bea5",
+      "result": "closed",
+      "officialDeadlineCandidate": "2026-03-06",
+      "officialCutoffAtCandidate": "2026-03-06T17:00:00+08:00",
+      "evidenceBodySha256": "59adee52139a9981d268b8b4e8f753afb459601a93b49541fcc92cb6c7726206",
+      "observedAt": "2026-10-19T05:29:05.188993+00:00"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-ccom-general-visiting-music-2025-2026-spring-fee-reference",
+      "canonicalCycleSha256": "d1ca1a0d59e62a1deb07da5630f972b767c68556729c1c5147bc851b05229122",
+      "programId": "prog-gap-prog-mew-nss-ccom-general-visiting-music",
+      "canonicalProgramSha256": "cc97b6942dd4d6e461164bf0735cbb2ee747961b1e57514a08fb52ace7a06d65",
+      "result": "unknown",
+      "officialDeadlineCandidate": null,
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "6d1267a6135bcd20107f8ab6aeb2e8b86bcda9e9068306416f2739bc81bdd96c",
+      "observedAt": "2026-10-19T05:26:14.889893+00:00"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-ccom-general-visiting-music-2026-2027-autumn-fee-reference",
+      "canonicalCycleSha256": "1537c3067de216693f851dd00478ef9655179aa8113b7c4c3ed05cc2d35855fa",
+      "programId": "prog-gap-prog-mew-nss-ccom-general-visiting-music",
+      "canonicalProgramSha256": "cc97b6942dd4d6e461164bf0735cbb2ee747961b1e57514a08fb52ace7a06d65",
+      "result": "unknown",
+      "officialDeadlineCandidate": null,
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "6d1267a6135bcd20107f8ab6aeb2e8b86bcda9e9068306416f2739bc81bdd96c",
+      "observedAt": "2026-10-19T05:26:14.889893+00:00"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-ccom-senior-visiting-music-2025-2026-spring-fee-reference",
+      "canonicalCycleSha256": "7c3168dfde22c2215053a15bc00962ec72411c45034fd70d5e9aa2c11a69decb",
+      "programId": "prog-gap-prog-mew-nss-ccom-senior-visiting-music",
+      "canonicalProgramSha256": "abb72434f6109f40688727fe4c1304bdaf374d6c7ba9fe1c65f85cf752cb64e5",
+      "result": "unknown",
+      "officialDeadlineCandidate": null,
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "6d1267a6135bcd20107f8ab6aeb2e8b86bcda9e9068306416f2739bc81bdd96c",
+      "observedAt": "2026-10-19T05:26:14.889893+00:00"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-ccom-senior-visiting-music-2026-2027-autumn-fee-reference",
+      "canonicalCycleSha256": "3985cc0805b1e794823c226782a31f7a4fb930e3c25176f1c26ed1089937a5ac",
+      "programId": "prog-gap-prog-mew-nss-ccom-senior-visiting-music",
+      "canonicalProgramSha256": "abb72434f6109f40688727fe4c1304bdaf374d6c7ba9fe1c65f85cf752cb64e5",
+      "result": "unknown",
+      "officialDeadlineCandidate": null,
+      "officialCutoffAtCandidate": null,
+      "evidenceBodySha256": "6d1267a6135bcd20107f8ab6aeb2e8b86bcda9e9068306416f2739bc81bdd96c",
+      "observedAt": "2026-10-19T05:26:14.889893+00:00"
+    }
+  ],
+  "evidenceArtifactPins": [
+    {
+      "path": "btbu.pdf",
+      "sha256": "fc0ade25dd70cbf7394f4e5c87d87dc21aa6fca0b2ab0d808b3483a82e13b044",
+      "bytes": 4864800
+    },
+    {
+      "path": "btbu.txt",
+      "sha256": "86a019a4903e36c55e2cc0d56e4c7e09543540c770fe4dee459d92c63b4dbeac",
+      "bytes": 7514
+    },
+    {
+      "path": "btbu-deadline-page11.png",
+      "sha256": "cdb90fa29c504807f409844b4de6f419a901954d0afaf29e11cb4cd5951d522b",
+      "bytes": 1050926
+    },
+    {
+      "path": "btbu-programs-page6.png",
+      "sha256": "6bf908d59c1fed0f7b293d2e52e0801a915e5ef612aafe3590f43f5efd70e67d",
+      "bytes": 423439
+    },
+    {
+      "path": "bupt.pdf",
+      "sha256": "60c223830d1e46ab8625daa3060584544ad699bf3c7925a33ce59cc0d32d56a8",
+      "bytes": 185780
+    },
+    {
+      "path": "bupt.txt",
+      "sha256": "269f00a50f2cec0e647c7bbfd8afd97d5866b5dd8c59a2c7f6c8e5d1ff938440",
+      "bytes": 11208
+    },
+    {
+      "path": "bjut.pdf",
+      "sha256": "7a1da0f1d829cec4cb5712096a84618b99341086a1d8b211c3c551b2242ec155",
+      "bytes": 3598746
+    },
+    {
+      "path": "bjut.txt",
+      "sha256": "26ada9df0e8414ca92c86677fd939043c4ce2f15c8a7a4f307389e47cfe804f5",
+      "bytes": 6937
+    },
+    {
+      "path": "bjut-date-page2.png",
+      "sha256": "91d8dcd1913e9c409b8abbfc02d906c4f90d307f337732f427d50d03e91431d5",
+      "bytes": 660553
+    },
+    {
+      "path": "bwu.html",
+      "sha256": "a97dd93ff89ca6d2f0262fdc32d83b3568050beac66db92f5a0836784603e6d6",
+      "bytes": 33470
+    },
+    {
+      "path": "bwu.txt",
+      "sha256": "93d996dc4693bc3ab580143eaf402a2818fff30513338fcc8589004874a7a999",
+      "bytes": 2365
+    },
+    {
+      "path": "bwu-guide.html",
+      "sha256": "1cfee5b53df77c7b1b2eee3e75d72b233d5150ae732d1f3f7bbba9b1c6e75032",
+      "bytes": 21879
+    },
+    {
+      "path": "bwu-guide.txt",
+      "sha256": "d15f683d157e97d02dcdaa25bb79981532a32bcd1bb254b24eff81f4d5b4da34",
+      "bytes": 7345
+    },
+    {
+      "path": "cueb.html",
+      "sha256": "3fe2dc56b863b08a219b02dd822f4d062ec16ce640075bfa2fd48e545bae6841",
+      "bytes": 11392
+    },
+    {
+      "path": "cueb.txt",
+      "sha256": "f23d943a09271a2fa07ed49581ca96105da95d4ae47ccde49f5f62231b54c795",
+      "bytes": 1176
+    },
+    {
+      "path": "cueb-deadline.html",
+      "sha256": "8f97efdec9fc2a5e304c0c409efd672c879d6fdd0d267238cf7c9ae8e73f113b",
+      "bytes": 13413
+    },
+    {
+      "path": "cueb-deadline.txt",
+      "sha256": "6782470eefb32dfa3a4ca92a9db6efc84e5373a44aea5a934fd5deeac823a069",
+      "bytes": 1690
+    },
+    {
+      "path": "cad-fallback.html",
+      "sha256": "dbddee4cec52c6023e636d2c19bcf2768deacc6ded78aab5f4ae8066196abf5c",
+      "bytes": 34058
+    },
+    {
+      "path": "cad-fallback.txt",
+      "sha256": "1a54adbc98e7f88e4a58fa0b497f98337b363f789e3e2ec9881c1bfb9eb4c3e6",
+      "bytes": 3063
+    },
+    {
+      "path": "cad-bachelor-resolved.html",
+      "sha256": "13460b2a48628f2edd124bb64f15a170bc74a5c4f100829d902dd8423e10adaf",
+      "bytes": 5254
+    },
+    {
+      "path": "cad-bachelor-resolved.txt",
+      "sha256": "e6d0475917b0dbaedfb15ff144428540f3eb0b06e32ec61ed9487ab546327447",
+      "bytes": 1064
+    },
+    {
+      "path": "cad-bachelor-guide.pdf",
+      "sha256": "c22d53ddabbacfd9847e9a7946ca7d2ad5bde636180f4da6611b2910612d84f2",
+      "bytes": 724237
+    },
+    {
+      "path": "cad-bachelor-guide.txt",
+      "sha256": "9caeb222354e7f20a10590d2079fad8ebc9c4d3d3285befbaceb85267148ecac",
+      "bytes": 22147
+    },
+    {
+      "path": "cad-doctor-2026.html",
+      "sha256": "5e02bb9c713c3b80dcd35ce8f202917ee9e2bed1bce7a701dc5b18fa18361bdd",
+      "bytes": 29396
+    },
+    {
+      "path": "cad-doctor-2026.txt",
+      "sha256": "22680899fb7920f131a89fc65efc8d9393b2b90c20a64de3a24c479448d207ab",
+      "bytes": 2199
+    },
+    {
+      "path": "cad-doctor-guide.pdf",
+      "sha256": "59adee52139a9981d268b8b4e8f753afb459601a93b49541fcc92cb6c7726206",
+      "bytes": 141206
+    },
+    {
+      "path": "cad-doctor-guide.txt",
+      "sha256": "646906aa5ab691a67f750747d73ff3f0411d9d363100852641120f31d4b18708",
+      "bytes": 6040
+    },
+    {
+      "path": "cad-bachelor-date-page3.png",
+      "sha256": "caff287f9beab20022ab43e2c7682c447d841116a03d758404f585a02689efc7",
+      "bytes": 300210
+    },
+    {
+      "path": "cad-doctor-date-page1.png",
+      "sha256": "b619cbc3292289434948f0f83229d15d54eb7d7e153b94bc2b82a5092adb1af8",
+      "bytes": 208291
+    },
+    {
+      "path": "ccom.html",
+      "sha256": "6d1267a6135bcd20107f8ab6aeb2e8b86bcda9e9068306416f2739bc81bdd96c",
+      "bytes": 21126
+    },
+    {
+      "path": "ccom.txt",
+      "sha256": "34a3b0abae4770e82093d701bae8fb259c68423d677bb5eb5caaba5796b9abc2",
+      "bytes": 8064
+    },
+    {
+      "path": "independent-cad-stage-page-07.png",
+      "sha256": "5530eaa2cf9a951a58422cb373c0743bdc8a03760eaf988490140dc9bc38bb1c",
+      "bytes": 388803
+    },
+    {
+      "path": "independent-cad-stage-page-08.png",
+      "sha256": "972e147464fe80927190ce865484adf5b945eab2cfd4021a6419f37dacf89058",
+      "bytes": 350830
+    },
+    {
+      "path": "independent-bupt-date-page-10.png",
+      "sha256": "82a8d29009df36f2417e1007e2183626ef73c32458e780fb55a44b49b8aa22a2",
+      "bytes": 79066
+    }
+  ],
+  "controls": {
+    "reviewUsesExistingCapturesOnly": true,
+    "originalPdfBytesAndObservationTimesPinned": true,
+    "sourceReportUnchangedBeforeAfter": true,
+    "canonicalSixFilesUnchangedBeforeAfter": true,
+    "candidateOnlyNoApprovedMutation": true,
+    "noWholeSchoolCertification": true,
+    "noFeeOrFullFreshnessRenewal": true
+  }
+}

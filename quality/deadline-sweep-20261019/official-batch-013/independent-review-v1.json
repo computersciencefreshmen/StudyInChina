@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "independent-date-only-013-v1",
+  "reviewedAt": "2026-10-19T05:33:45.313Z",
+  "reviewer": "deployment_audit subagent; did not author batch 013 or its source captures",
+  "reviewedReportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11",
+  "reviewedSelectionSha256": "0fca59509c5888561b4e845a31945f529f6aee67fd1468ab1e194722e14f5c17",
+  "decision": "pass-with-route-and-historical-year-qualifications",
+  "scope": "Independent local original-body/text reads, direct pypdf re-extraction, rendered-page visual inspection and exact record/programme/source binding checks; no website rereads.",
+  "counts": {
+    "schools": 7,
+    "records": 27,
+    "closedCandidateScopes": 11,
+    "unknown": 16,
+    "newExactDeadlinesFromCanonicalNull": 10,
+    "alreadyStoredScopedExpiredDay": 1,
+    "newOpeningCandidatesCanonicalNullRetained": 2,
+    "canonicalInputHashes": 6,
+    "canonicalRecordHashes": 27,
+    "programmeHashes": 24,
+    "sourceRecordPins": 34,
+    "rawBodies": 11,
+    "rawSuccessfulOriginals": 10,
+    "textPins": 11,
+    "priorRecordOverlap": 0
+  },
+  "checks": {
+    "exactQueueSchoolsAnd27IdsMatch": true,
+    "canonicalInputRecordProgrammeAndSourcePinsMatch": true,
+    "allCaptureBodyTextAndFailureReceiptPinsMatch": true,
+    "singleGroupsRecordsRepresentation": true,
+    "allClosedResultsCandidateOnly": true,
+    "unknownYearsNotRolledForward": true,
+    "noImplicitOpeningApproval": true,
+    "noWholeSchoolOrFullFactCompletion": true,
+    "noCanonicalFreshnessOrStatusWrites": true
+  },
+  "sourceFindings": [
+    {
+      "school": "Anhui Medical University",
+      "finding": "The actual 2026/27 source recommends completion by February 25 inclusive. It is not a mandatory deadline. All four assigned rows stay unknown, including the other-intake row."
+    },
+    {
+      "school": "Anhui University",
+      "finding": "Visual cover has no year; extracted full guide gives degree May 15 only. Four fee-reference rows correctly stay unknown."
+    },
+    {
+      "school": "Beijing Forestry University",
+      "finding": "Actual PDF independently re-extracted, with exact 2026–2027 programme catalogue. Visual page 7 confirms general admission June 15, 2026; page 8 confirms BGS June 8, 2026. CGS embassy dates, institutional review and EBS remain distinct."
+    },
+    {
+      "school": "Beijing Institute of Technology",
+      "finding": "Actual HTML lists all four exact named programmes in the English-taught Beijing-campus undergraduate section of its 2026 guide. General June 1 differs from May 1 scholarship deadlines. Source does not separately print autumn; report correctly discloses that limit."
+    },
+    {
+      "school": "Beijing International Studies University",
+      "finding": "Actual PDFs independently re-extracted: general guide gives 2024 application windows; CSC guide is 2024/25 with 2023-12-20 school stage and 2024-01-05–15 later applicant portal stage. None are rolled to the target years. Exact spring PDF 404 and one bounded fallback remain held."
+    },
+    {
+      "school": "Beijing Jiaotong University",
+      "finding": "Visual source-06 cover explicitly says 2018, despite 2024 URL directory. Historical recurring application dates and before-April-10 scholarship materials do not prove 2026 deadlines. Guide itself says annual timing varies; all four rows stay unknown."
+    },
+    {
+      "school": "Beijing Sport University",
+      "finding": "Actual 2026 general guide independently names Chinese language, Wushu and International Chinese Education master. Autumn Dec 1, 2025–June 1, 2026 is separate from the CSC source requiring submission before March 1, 2026. Master stored March 1 is confirmed only within CSC scope; both old periods are past."
+    }
+  ],
+  "visualArtifactsReviewed": [
+    "source-04-page-7.png",
+    "source-04-page-8.png",
+    "source-06-page-1.png",
+    "source-03-page-1.png"
+  ],
+  "publicationRestrictions": [
+    "All 11 closed results are old-intake candidate evidence and do not automatically mutate canonical dates/status or renew full facts.",
+    "BSU master March 1 must retain CSC-only scope and strict-before boundary; general June 1 remains a separate candidate.",
+    "BIT universal 2026 undergraduate cutoff does not separately certify the stored autumn label or any future cycle.",
+    "Two new BSU opening dates remain candidate-only; officialOpensOn and canonical opensOn stay null."
+  ],
+  "reviewedRecordIds": [
+    "cycle-gap-breadth-ahmu-d-clinical-pharmacy-2026-2027-autumn",
+    "cycle-gap-local-strong-ahmu-m-anesthesiology-2026-2027-autumn",
+    "cycle-gap-local-strong-ahmu-m-anesthesiology-2026-2027-other",
+    "sch-gap-breadth-sch-ahmu-high-level-postgraduate",
+    "cycle-gap-mew-csw-ahu-chinese-language-literature-bachelor-2026-2027-other-fee-reference",
+    "cycle-gap-mew-csw-ahu-finance-bachelor-2026-2027-other-fee-reference",
+    "cycle-gap-mew-csw-ahu-international-chinese-education-bachelor-2026-2027-other-fee-reference",
+    "cycle-gap-mew-csw-ahu-software-engineering-bachelor-2026-2027-other-fee-reference",
+    "cycle-gap-wave4-depth-bjfu-forestry-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave4-depth-bjfu-international-economics-trade-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave4-depth-bjfu-landscape-architecture-bachelor-2026-2027-autumn-fee-reference",
+    "sch-gap-wave4-depth-bjfu-beijing-government-scholarship-2026",
+    "cycle-gap-wave8-bit-aeronautical-astronautical-engineering-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave8-bit-automation-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave8-bit-electronic-science-technology-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave8-bit-international-economics-trade-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-prog-mew-ne-bisu-chinese-language-bachelor-2025-2026-spring-fee-reference",
+    "cycle-gap-prog-mew-ne-bisu-chinese-language-nondegree-2025-2026-spring-fee-reference",
+    "cycle-gap-prog-mew-ne-bisu-foundation-2026-2027-other-fee-reference",
+    "cycle-gap-prog-mew-ne-bisu-international-chinese-education-master-2026-2027-other-fee-reference",
+    "cycle-gap-prog-mew-ne-bjtu-logistics-engineering-master-en-2026-2027-other-fee-reference",
+    "cycle-gap-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en-2026-2027-other-fee-reference",
+    "cycle-gap-prog-mew-ne-bjtu-transportation-planning-doctorate-2026-2027-other-fee-reference",
+    "sch-gap-sch-mew-ne-bjtu-csc-and-silk-road",
+    "cycle-gap-prog-mew-nss-bsu-chinese-language-2026-2027-autumn",
+    "cycle-gap-prog-mew-nss-bsu-wushu-training-2026-2027-autumn",
+    "cycle-gap-prog-mew-nss-bsu-international-chinese-education-master-2026-2027-autumn"
+  ],
+  "networkRequestsByReviewer": 0,
+  "paidCalls": 0,
+  "canonicalWrites": 0,
+  "sharedProgressWrites": 0,
+  "gitMutations": 0
+}

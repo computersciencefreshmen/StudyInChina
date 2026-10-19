@@ -1,0 +1,2245 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-013-20261019",
+  "selectedAt": "2026-10-19T05:25:51.707Z",
+  "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v2.json",
+  "queueSha256": "dfa9f046dfe1a63fe3130c4964c117377913dc97b9577972b95b986d71a9f3f6",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "universityIds": [
+    "uni-anhui-medical-university",
+    "uni-anhui-university",
+    "uni-beijing-forestry-university",
+    "uni-beijing-institute-of-technology",
+    "uni-beijing-international-studies-university",
+    "uni-beijing-jiaotong-university",
+    "uni-beijing-sport-university"
+  ],
+  "records": [
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-breadth-ahmu-d-clinical-pharmacy-2026-2027-autumn",
+      "universityId": "uni-anhui-medical-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-breadth-ahmu-d-clinical-pharmacy"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-breadth-ahmu-d-clinical-pharmacy-2026-2027-autumn",
+        "programId": "prog-gap-breadth-ahmu-d-clinical-pharmacy",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official international postgraduate notice lists Clinical Pharmacy as a three-year doctoral route; unsupported language and fee facts remain unannounced.",
+          "zh": "安徽医科大学国际研究生官方通知列明临床药学三年制博士项目；未核实的语言与费用保留为未公布。",
+          "ru": "Официальное объявление для иностранных аспирантов включает трёхлетнюю докторантуру по клинической фармации; неподтверждённые язык и стоимость оставлены не объявленными."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-breadth-ahmu-d-clinical-pharmacy"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-breadth-ahmu-d-clinical-pharmacy",
+        "slug": "gap-breadth-ahmu-d-clinical-pharmacy-doctorate",
+        "universityId": "uni-anhui-medical-university",
+        "name": {
+          "en": "Clinical Pharmacy",
+          "zh": "临床药学",
+          "ru": "Клиническая фармация"
+        },
+        "degreeLevel": "doctorate",
+        "discipline": "medicine",
+        "teachingLanguages": [],
+        "durationMonths": 36,
+        "programUrl": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "dc91f2ea806a0cd2da5a9d045f7c995e2cf28aa98fd1de980bf7213f2ef2f294",
+      "canonicalProgramSha256": "e2b05a4f06fc039a7be82e98820ff699abd619733ea2ea56793e52633ec8945e",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-breadth-ahmu-d-clinical-pharmacy",
+            "url": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+            "title": "Anhui Medical University 2026 High-level Postgraduate International Admissions",
+            "publisher": "anhui-medical-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "695106b7edd8fb9badcae39842c5f779f6b99b8bfaf9c5723af49ab71d4d7935"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-local-strong-ahmu-m-anesthesiology-2026-2027-autumn",
+      "universityId": "uni-anhui-medical-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-local-strong-ahmu-m-anesthesiology"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-local-strong-ahmu-m-anesthesiology-2026-2027-autumn",
+        "programId": "prog-gap-local-strong-ahmu-m-anesthesiology",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official postgraduate source identifies a three-year Anesthesiology master's route. Language and tuition are not inferred.",
+          "zh": "官方研究生招生来源确认麻醉学三年制硕士项目；未明确的授课语言和学费不作推断。",
+          "ru": "Официальный источник подтверждает трёхлетнюю магистратуру по анестезиологии; язык и стоимость не выводятся без данных."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-local-strong-ahmu-m-anesthesiology"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-local-strong-ahmu-m-anesthesiology",
+        "slug": "gap-local-strong-ahmu-m-anesthesiology-master",
+        "universityId": "uni-anhui-medical-university",
+        "name": {
+          "en": "Anesthesiology",
+          "zh": "麻醉学",
+          "ru": "Анестезиология"
+        },
+        "degreeLevel": "master",
+        "discipline": "other",
+        "teachingLanguages": [],
+        "durationMonths": 36,
+        "programUrl": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "701d812885ae9a0fb0ab1f0af458bf2eaddb79fa4274bc275ec5900794877077",
+      "canonicalProgramSha256": "13ab34e7113373c68764bf2d8e37a80e7ca7c533aeb636061f29bf0bb47655bc",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-local-strong-ahmu-m-anesthesiology",
+            "url": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+            "title": "Anhui Medical University International Postgraduate Admission",
+            "publisher": "anhui-medical-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "732a823edf458b5b3dc1f72343decc371e280acd2a24771571019037adc526fa"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-local-strong-ahmu-m-anesthesiology-2026-2027-other",
+      "universityId": "uni-anhui-medical-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-local-strong-ahmu-m-anesthesiology"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-local-strong-ahmu-m-anesthesiology-2026-2027-other",
+        "programId": "prog-gap-local-strong-ahmu-m-anesthesiology",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official postgraduate source identifies a three-year Anesthesiology master's route. Language and tuition are not inferred.",
+          "zh": "官方研究生招生来源确认麻醉学三年制硕士项目；未明确的授课语言和学费不作推断。",
+          "ru": "Официальный источник подтверждает трёхлетнюю магистратуру по анестезиологии; язык и стоимость не выводятся без данных."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-local-strong-ahmu-m-anesthesiology"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-local-strong-ahmu-m-anesthesiology",
+        "slug": "gap-local-strong-ahmu-m-anesthesiology-master",
+        "universityId": "uni-anhui-medical-university",
+        "name": {
+          "en": "Anesthesiology",
+          "zh": "麻醉学",
+          "ru": "Анестезиология"
+        },
+        "degreeLevel": "master",
+        "discipline": "other",
+        "teachingLanguages": [],
+        "durationMonths": 36,
+        "programUrl": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "ced5f09f82e2b0a059ec664542845593ecef4527e2d865010447d55b8066fc34",
+      "canonicalProgramSha256": "13ab34e7113373c68764bf2d8e37a80e7ca7c533aeb636061f29bf0bb47655bc",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-local-strong-ahmu-m-anesthesiology",
+            "url": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+            "title": "Anhui Medical University International Postgraduate Admission",
+            "publisher": "anhui-medical-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "732a823edf458b5b3dc1f72343decc371e280acd2a24771571019037adc526fa"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-breadth-sch-ahmu-high-level-postgraduate",
+      "universityId": "uni-anhui-medical-university",
+      "row": {
+        "id": "sch-gap-breadth-sch-ahmu-high-level-postgraduate",
+        "slug": "gap-breadth-sch-ahmu-high-level-postgraduate",
+        "name": {
+          "en": "Chinese Government Scholarship – High-level Postgraduate Program",
+          "zh": "中国政府奖学金高水平研究生项目",
+          "ru": "Стипендия правительства Китая — программа подготовки аспирантов высокого уровня"
+        },
+        "providerType": "csc",
+        "universityIds": [
+          "uni-anhui-medical-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+        "summary": {
+          "en": "The official international education notice publishes Anhui Medical University's 2026 high-level postgraduate scholarship route for eligible master's and doctoral applicants.",
+          "zh": "安徽医科大学国际教育官方通知公布2026年高水平研究生奖学金渠道，适用于符合条件的硕士和博士申请人。",
+          "ru": "Официальное объявление международного образования публикует маршрут стипендии высокого уровня на 2026 год для подходящих магистрантов и докторантов."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-breadth-sch-ahmu-high-level-postgraduate"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "bd419ca9f80bdad0e4246b34102a281795ba8d23041b045a1cc23e007bb526ec",
+      "canonicalProgramSha256": null,
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-breadth-sch-ahmu-high-level-postgraduate",
+            "url": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+            "title": "Anhui Medical University 2026 High-level Postgraduate Program",
+            "publisher": "anhui-medical-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "17052a3c20f8a328899d59064631c8db3fc9d9d30386536dbc59366fe908f2b3"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-mew-csw-ahu-chinese-language-literature-bachelor-2026-2027-other-fee-reference",
+      "universityId": "uni-anhui-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-mew-csw-ahu-chinese-language-literature-bachelor",
+          "src-gap-program-mew-csw-ahu-chinese-language-literature-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-mew-csw-ahu-chinese-language-literature-bachelor-2026-2027-other-fee-reference",
+        "programId": "prog-gap-mew-csw-ahu-chinese-language-literature-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 15000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-mew-csw-ahu-chinese-language-literature-bachelor",
+          "src-gap-program-mew-csw-ahu-chinese-language-literature-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale",
+        "id": "prog-gap-mew-csw-ahu-chinese-language-literature-bachelor",
+        "slug": "gap-mew-csw-ahu-chinese-language-literature-bachelor-bachelor",
+        "universityId": "uni-anhui-university",
+        "name": {
+          "en": "Chinese Language and Literature",
+          "zh": "汉语言文学",
+          "ru": "Китайский язык и литература"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "1902c2d1d4aa3de9bfaaa93baa4ba522cdff33048b5a15f72e502e089a391c95",
+      "canonicalProgramSha256": "3ca1501f87fccf1c757aae2392dbdb385aa921502b691201c8d4ced7ee36d3a1",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-mew-csw-ahu-chinese-language-literature-bachelor",
+            "url": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+            "title": "Anhui University Undergraduate Programs for International Students",
+            "publisher": "anhui-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "bca03ff4c2d83cfafd26c0dbb7aa60d062359caee280fbe6925d7566c6f5136a"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-mew-csw-ahu-chinese-language-literature-bachelor-support-1",
+            "url": "https://en.ahu.edu.cn/_upload/article/files/68/14/341578d446dab23766c307410d49/a0506a46-aea1-4ace-a3b6-82283f8d9088.pdf",
+            "title": "Anhui University International Student Brochure and Fee Schedule",
+            "publisher": "anhui-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "4ad3ce0a8acbd552e6172be3ebf9fb79b22fbc7037c982c5563d2b024407e0f9"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-mew-csw-ahu-finance-bachelor-2026-2027-other-fee-reference",
+      "universityId": "uni-anhui-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-mew-csw-ahu-finance-bachelor",
+          "src-gap-program-mew-csw-ahu-finance-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-mew-csw-ahu-finance-bachelor-2026-2027-other-fee-reference",
+        "programId": "prog-gap-mew-csw-ahu-finance-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 15000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-mew-csw-ahu-finance-bachelor",
+          "src-gap-program-mew-csw-ahu-finance-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale",
+        "id": "prog-gap-mew-csw-ahu-finance-bachelor",
+        "slug": "gap-mew-csw-ahu-finance-bachelor-bachelor",
+        "universityId": "uni-anhui-university",
+        "name": {
+          "en": "Finance",
+          "zh": "金融学",
+          "ru": "Финансы"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "business",
+        "teachingLanguages": [],
+        "durationMonths": null,
+        "programUrl": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "identity"
+      },
+      "canonicalRecordSha256": "e78271adb9edce61d4cc4f3c4bd66fb53d43abe838dc11d72ae8ecb3fc1ab9fe",
+      "canonicalProgramSha256": "7bd24892bc92e100f1066167e4eb0b0cdd3d90ae6beffff751ee2d417bfa0873",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-mew-csw-ahu-finance-bachelor",
+            "url": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+            "title": "Anhui University Undergraduate Programs for International Students",
+            "publisher": "anhui-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "af61684eff3dc46b70b925f2bb5f45299d74e9473d07625f76b208a1ce35a547"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-mew-csw-ahu-finance-bachelor-support-1",
+            "url": "https://en.ahu.edu.cn/_upload/article/files/68/14/341578d446dab23766c307410d49/a0506a46-aea1-4ace-a3b6-82283f8d9088.pdf",
+            "title": "Anhui University International Student Brochure and Fee Schedule",
+            "publisher": "anhui-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "24ebe0de672e976692b2825e31704a8a7bc437d3f7b95803378edc44c203734f"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-mew-csw-ahu-international-chinese-education-bachelor-2026-2027-other-fee-reference",
+      "universityId": "uni-anhui-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-mew-csw-ahu-international-chinese-education-bachelor",
+          "src-gap-program-mew-csw-ahu-international-chinese-education-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-mew-csw-ahu-international-chinese-education-bachelor-2026-2027-other-fee-reference",
+        "programId": "prog-gap-mew-csw-ahu-international-chinese-education-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 15000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-mew-csw-ahu-international-chinese-education-bachelor",
+          "src-gap-program-mew-csw-ahu-international-chinese-education-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale",
+        "id": "prog-gap-mew-csw-ahu-international-chinese-education-bachelor",
+        "slug": "gap-mew-csw-ahu-international-chinese-education-bachelor-bachelor",
+        "universityId": "uni-anhui-university",
+        "name": {
+          "en": "International Chinese Language Education",
+          "zh": "汉语国际教育",
+          "ru": "Международное преподавание китайского языка"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "dec5490f8d143c62f303f7309c677c150fdedde7dfa34d9e1bdc4e7a5bbc32aa",
+      "canonicalProgramSha256": "9258362d36e4beb6099e40b3484d6c4699ebfe1f74b62db254fd15f1f56cd5ab",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-mew-csw-ahu-international-chinese-education-bachelor",
+            "url": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+            "title": "Anhui University Undergraduate Programs for International Students",
+            "publisher": "anhui-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "b049fdad657b76bb88c3a6ab27c60214e2baabd0258b6223fdb7c872e4681b1d"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-mew-csw-ahu-international-chinese-education-bachelor-support-1",
+            "url": "https://en.ahu.edu.cn/_upload/article/files/68/14/341578d446dab23766c307410d49/a0506a46-aea1-4ace-a3b6-82283f8d9088.pdf",
+            "title": "Anhui University International Student Brochure and Fee Schedule",
+            "publisher": "anhui-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "ab08d93e2ca42a4e3ebeea56e054586ce41fecac91fc0f5126ae63b1a8d8649e"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-mew-csw-ahu-software-engineering-bachelor-2026-2027-other-fee-reference",
+      "universityId": "uni-anhui-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-mew-csw-ahu-software-engineering-bachelor",
+          "src-gap-program-mew-csw-ahu-software-engineering-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-mew-csw-ahu-software-engineering-bachelor-2026-2027-other-fee-reference",
+        "programId": "prog-gap-mew-csw-ahu-software-engineering-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 15000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-mew-csw-ahu-software-engineering-bachelor",
+          "src-gap-program-mew-csw-ahu-software-engineering-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale",
+        "id": "prog-gap-mew-csw-ahu-software-engineering-bachelor",
+        "slug": "gap-mew-csw-ahu-software-engineering-bachelor-bachelor",
+        "universityId": "uni-anhui-university",
+        "name": {
+          "en": "Software Engineering",
+          "zh": "软件工程",
+          "ru": "Программная инженерия"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [],
+        "durationMonths": null,
+        "programUrl": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "identity"
+      },
+      "canonicalRecordSha256": "1956f243ea11f6a5647f0e4b7bfd8c35d878fad8923f960a0bc6be1227210004",
+      "canonicalProgramSha256": "7eb7876a9f483e27c88c9c939b97357f1e8adbf85046a1cc050c3a8f90aaaedc",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-mew-csw-ahu-software-engineering-bachelor",
+            "url": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+            "title": "Anhui University Undergraduate Programs for International Students",
+            "publisher": "anhui-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "3a1fd720c8bb2d334f5d0668e86930d9dc84955867f0c99ba12672fcbb6bf0e2"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-mew-csw-ahu-software-engineering-bachelor-support-1",
+            "url": "https://en.ahu.edu.cn/_upload/article/files/68/14/341578d446dab23766c307410d49/a0506a46-aea1-4ace-a3b6-82283f8d9088.pdf",
+            "title": "Anhui University International Student Brochure and Fee Schedule",
+            "publisher": "anhui-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "49a794419d97ac9591083a935aab056daca1fcd7ff33e7b5cd2d544534e6a20b"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave4-depth-bjfu-forestry-bachelor-2026-2027-autumn-fee-reference",
+      "universityId": "uni-beijing-forestry-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave4-depth-bjfu-forestry-bachelor"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave4-depth-bjfu-forestry-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave4-depth-bjfu-forestry-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 24800,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave4-depth-bjfu-forestry-bachelor"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave4-depth-bjfu-forestry-bachelor",
+        "slug": "gap-wave4-depth-bjfu-forestry-bachelor-bachelor",
+        "universityId": "uni-beijing-forestry-university",
+        "name": {
+          "en": "Forestry (Bachelor)",
+          "zh": "林学（本科）",
+          "ru": "Лесное хозяйство (бакалавриат)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "other",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+        "applyUrl": "https://bjfu.17gz.org/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "72c23fb79688beed48af2a1aae773a30ed6400aa31417d3a98a4d14ce72b637c",
+      "canonicalProgramSha256": "5f5f0ec66984472c1319d3609918f4071a78e908d679e35f94b9ecda0ba0420b",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave4-depth-bjfu-forestry-bachelor",
+            "url": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+            "title": "Beijing Forestry University 2026–2027 International Undergraduate Prospectus",
+            "publisher": "beijing-forestry-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "6c5a24f5c4d818a9ba6700c7c32c3d883e7d0a45ce1dd2eb4151efd4e7670f6c"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave4-depth-bjfu-international-economics-trade-bachelor-2026-2027-autumn-fee-reference",
+      "universityId": "uni-beijing-forestry-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave4-depth-bjfu-international-economics-trade-bachelor"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave4-depth-bjfu-international-economics-trade-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave4-depth-bjfu-international-economics-trade-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 24800,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave4-depth-bjfu-international-economics-trade-bachelor"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave4-depth-bjfu-international-economics-trade-bachelor",
+        "slug": "gap-wave4-depth-bjfu-international-economics-trade-bachelor-bachelor",
+        "universityId": "uni-beijing-forestry-university",
+        "name": {
+          "en": "International Economics and Trade (Bachelor)",
+          "zh": "国际经济与贸易（本科）",
+          "ru": "Международная экономика и торговля (бакалавриат)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "business",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+        "applyUrl": "https://bjfu.17gz.org/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "79935c5c9bfa3f9232b4a4dcc53b777ad738130f5dd36fb08893254fc3233dfc",
+      "canonicalProgramSha256": "60d9da2818f1756827571b5976f74fcd0e93fe91dddae46a306e663243b36c7d",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave4-depth-bjfu-international-economics-trade-bachelor",
+            "url": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+            "title": "Beijing Forestry University 2026–2027 International Undergraduate Prospectus",
+            "publisher": "beijing-forestry-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "7669ce7e7d7a3b147543b97c55b2e1349f1be658b7a6a4755033da52c3a0ae6c"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave4-depth-bjfu-landscape-architecture-bachelor-2026-2027-autumn-fee-reference",
+      "universityId": "uni-beijing-forestry-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave4-depth-bjfu-landscape-architecture-bachelor"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave4-depth-bjfu-landscape-architecture-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave4-depth-bjfu-landscape-architecture-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 24800,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave4-depth-bjfu-landscape-architecture-bachelor"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave4-depth-bjfu-landscape-architecture-bachelor",
+        "slug": "gap-wave4-depth-bjfu-landscape-architecture-bachelor-bachelor",
+        "universityId": "uni-beijing-forestry-university",
+        "name": {
+          "en": "Landscape Architecture (Bachelor)",
+          "zh": "风景园林（本科）",
+          "ru": "Ландшафтная архитектура (бакалавриат)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "other",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+        "applyUrl": "https://bjfu.17gz.org/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "d73e2e583e9c39db1bc40761d859d77d7c98f7eaa14d2efbeaf9db6249448f2e",
+      "canonicalProgramSha256": "36f0dc12b1b744c7812477f9de809ffda12641ef3a55ca207f7c49dd09f5a84d",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave4-depth-bjfu-landscape-architecture-bachelor",
+            "url": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+            "title": "Beijing Forestry University 2026–2027 International Undergraduate Prospectus",
+            "publisher": "beijing-forestry-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "ce052d9f337d5e651dacf135df819605a299e73ce61985232725b23ea066364b"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-wave4-depth-bjfu-beijing-government-scholarship-2026",
+      "universityId": "uni-beijing-forestry-university",
+      "row": {
+        "id": "sch-gap-wave4-depth-bjfu-beijing-government-scholarship-2026",
+        "slug": "gap-wave4-depth-bjfu-beijing-government-scholarship-2026",
+        "name": {
+          "en": "Beijing Government Scholarship at BFU 2026",
+          "zh": "北京林业大学北京市政府奖学金（2026）",
+          "ru": "Стипендия правительства Пекина в BFU 2026"
+        },
+        "providerType": "city",
+        "universityIds": [
+          "uni-beijing-forestry-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+        "summary": {
+          "en": "BFU's official prospectus states that the Beijing Government Scholarship is available to undergraduate candidates and fully or partially covers tuition. The 8 June 2026 deadline has passed.",
+          "zh": "北京林业大学官方简章说明北京市政府奖学金面向本科申请人，可全额或部分覆盖学费；2026年6月8日截止日已过。",
+          "ru": "Официальный проспект BFU указывает, что стипендия правительства Пекина доступна бакалаврам и полностью либо частично покрывает обучение. Срок 8 июня 2026 года истёк."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave4-depth-bjfu-beijing-government-scholarship-2026"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "136f75bb3c02d81ec2551fb798213b4b227042dd36c9b57e667cbf3cda01f63e",
+      "canonicalProgramSha256": null,
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave4-depth-bjfu-beijing-government-scholarship-2026",
+            "url": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+            "title": "Beijing Forestry University 2026–2027 International Undergraduate Prospectus",
+            "publisher": "beijing-forestry-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "f150123238cb15d673b82468bc686d03333ed409bc1bbf67c0b55c0cbde82d46"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave8-bit-aeronautical-astronautical-engineering-bachelor-2026-2027-autumn-fee-reference",
+      "universityId": "uni-beijing-institute-of-technology",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave8-bit-aeronautical-astronautical-engineering-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-wave8-bit-aeronautical-astronautical-engineering-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave8-bit-aeronautical-astronautical-engineering-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 30000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave8-bit-aeronautical-astronautical-engineering-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-wave8-bit-aeronautical-astronautical-engineering-bachelor",
+        "slug": "gap-wave8-bit-aeronautical-astronautical-engineering-bachelor-bachelor",
+        "universityId": "uni-beijing-institute-of-technology",
+        "name": {
+          "en": "Aeronautical and Astronautical Engineering (Bachelor's Program)",
+          "zh": "航空航天工程本科项目",
+          "ru": "Бакалавриат по авиационно-космической технике"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+        "applyUrl": "https://apply.isc.bit.edu.cn/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "b317ca59a63356d0b6f5379c89144605ef1349e015c7d98910eda497f5d15158",
+      "canonicalProgramSha256": "0cac0d8146967b15a3aa8de126a277b2c41ded225dd262ffa8d252f55214deeb",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave8-bit-aeronautical-astronautical-engineering-bachelor",
+            "url": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+            "title": "Beijing Institute of Technology 2026 International Undergraduate Admission Book",
+            "publisher": "beijing-institute-of-technology",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "8bf5b405e310170b442ca8dfda726c60577c6573c4cd1e2b1ff3fff2cd95bb2c"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave8-bit-automation-bachelor-2026-2027-autumn-fee-reference",
+      "universityId": "uni-beijing-institute-of-technology",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave8-bit-automation-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-wave8-bit-automation-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave8-bit-automation-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 30000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave8-bit-automation-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-wave8-bit-automation-bachelor",
+        "slug": "gap-wave8-bit-automation-bachelor-bachelor",
+        "universityId": "uni-beijing-institute-of-technology",
+        "name": {
+          "en": "Automation (Bachelor's Program)",
+          "zh": "自动化本科项目",
+          "ru": "Бакалавриат по автоматизации"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+        "applyUrl": "https://apply.isc.bit.edu.cn/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "d09c06026444db88b68a0f2029fcb28d793f7af56340412dc9cb33512e62dd0c",
+      "canonicalProgramSha256": "4b204d3f1d9e8746960a721105da5296c34d5df89a29e30173d2e6cbc4c50125",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave8-bit-automation-bachelor",
+            "url": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+            "title": "Beijing Institute of Technology 2026 International Undergraduate Admission Book",
+            "publisher": "beijing-institute-of-technology",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "9e64984a5f4a528311f4f1c7fcdae3477804d56c08aa3e6f998e7970150ce613"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave8-bit-electronic-science-technology-bachelor-2026-2027-autumn-fee-reference",
+      "universityId": "uni-beijing-institute-of-technology",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave8-bit-electronic-science-technology-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-wave8-bit-electronic-science-technology-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave8-bit-electronic-science-technology-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 30000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave8-bit-electronic-science-technology-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-wave8-bit-electronic-science-technology-bachelor",
+        "slug": "gap-wave8-bit-electronic-science-technology-bachelor-bachelor",
+        "universityId": "uni-beijing-institute-of-technology",
+        "name": {
+          "en": "Electronic Science and Technology (Bachelor's Program)",
+          "zh": "电子科学与技术本科项目",
+          "ru": "Бакалавриат по электронной науке и технологиям"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+        "applyUrl": "https://apply.isc.bit.edu.cn/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "d06881700cd79d41ed19a40be28ad01ed005f2def7cbe97346b2eeabc214b875",
+      "canonicalProgramSha256": "461aa4bdf3483b137b46c5e6bb034483433b1931d5c332186a812c1eb7c460f9",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave8-bit-electronic-science-technology-bachelor",
+            "url": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+            "title": "Beijing Institute of Technology 2026 International Undergraduate Admission Book",
+            "publisher": "beijing-institute-of-technology",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "542d181c30ccc40daf793ccd94e5888503385fd1a4bdf7b889c1de550365ccb7"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave8-bit-international-economics-trade-bachelor-2026-2027-autumn-fee-reference",
+      "universityId": "uni-beijing-institute-of-technology",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave8-bit-international-economics-trade-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-wave8-bit-international-economics-trade-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave8-bit-international-economics-trade-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 30000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave8-bit-international-economics-trade-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-wave8-bit-international-economics-trade-bachelor",
+        "slug": "gap-wave8-bit-international-economics-trade-bachelor-bachelor",
+        "universityId": "uni-beijing-institute-of-technology",
+        "name": {
+          "en": "International Economics and Trade (Bachelor's Program)",
+          "zh": "国际经济与贸易本科项目",
+          "ru": "Бакалавриат по международной экономике и торговле"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "business",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+        "applyUrl": "https://apply.isc.bit.edu.cn/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "ebb1c65ee16d637cf1b052a5a2e5d75fdd845d4bb8809d23f788a78f11591464",
+      "canonicalProgramSha256": "13d5e218d2d48243b317fe98976526c5c3d06d7e648e770bc98008133c18eba1",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave8-bit-international-economics-trade-bachelor",
+            "url": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+            "title": "Beijing Institute of Technology 2026 International Undergraduate Admission Book",
+            "publisher": "beijing-institute-of-technology",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "7bec4fde15967eae2bc79f74eac9c1067ec8117775e311e193bdb5f0553e8173"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-ne-bisu-chinese-language-bachelor-2025-2026-spring-fee-reference",
+      "universityId": "uni-beijing-international-studies-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-bisu-chinese-language-bachelor",
+          "src-gap-program-prog-mew-ne-bisu-chinese-language-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-ne-bisu-chinese-language-bachelor-2025-2026-spring-fee-reference",
+        "programId": "prog-gap-prog-mew-ne-bisu-chinese-language-bachelor",
+        "academicYear": "2025-2026",
+        "intake": "spring",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 22000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-bisu-chinese-language-bachelor",
+          "src-gap-program-prog-mew-ne-bisu-chinese-language-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-ne-bisu-chinese-language-bachelor",
+        "slug": "gap-prog-mew-ne-bisu-chinese-language-bachelor-bachelor",
+        "universityId": "uni-beijing-international-studies-university",
+        "name": {
+          "en": "Chinese Language",
+          "zh": "汉语言",
+          "ru": "Китайский язык"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://admission.bisu.edu.cn/attach/0/2411071706042027427.pdf",
+        "applyUrl": "https://bisu.17gz.org/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "5e8738b5c6f6bfef3611be59efd525e350359754b6bc6119db2a9a287082b87d",
+      "canonicalProgramSha256": "60800cd6f2aa038311a50a404a79ab10b2c283695a8feaef509cb68779170b75",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-bisu-chinese-language-bachelor",
+            "url": "https://admission.bisu.edu.cn/attach/0/2411071706042027427.pdf",
+            "title": "北京第二外国语学院2025年春季学期来华留学生招生简章",
+            "publisher": "beijing-international-studies-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "d079d04f79f13bd65ab869bb30e5be1802425a8af6e0727397b73c25a1d218ea"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-bisu-chinese-language-bachelor-support-1",
+            "url": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2403051823033743464.pdf?classid=0&filename=2403051823033743464.pdf",
+            "title": "北京第二外国语学院国际学生招生简章",
+            "publisher": "beijing-international-studies-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "b8bf2b63a93a45cbfcafcd2a489a0c4e2f7f0f6bf50be1950f637e0e13cc4fbf"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-ne-bisu-chinese-language-nondegree-2025-2026-spring-fee-reference",
+      "universityId": "uni-beijing-international-studies-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-bisu-chinese-language-nondegree"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-ne-bisu-chinese-language-nondegree-2025-2026-spring-fee-reference",
+        "programId": "prog-gap-prog-mew-ne-bisu-chinese-language-nondegree",
+        "academicYear": "2025-2026",
+        "intake": "spring",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 19400,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-bisu-chinese-language-nondegree"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-ne-bisu-chinese-language-nondegree",
+        "slug": "gap-prog-mew-ne-bisu-chinese-language-nondegree-language",
+        "universityId": "uni-beijing-international-studies-university",
+        "name": {
+          "en": "Long-term Chinese Language Program",
+          "zh": "长期汉语进修生项目",
+          "ru": "Долгосрочная программа китайского языка"
+        },
+        "degreeLevel": "language",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 6,
+        "programUrl": "https://admission.bisu.edu.cn/attach/0/2411071706042027427.pdf",
+        "applyUrl": "https://bisu.17gz.org/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "1e6a5cf3d51b9a6e181974a7be6fd5d2953f0da4304d6d1feb78099468be52f3",
+      "canonicalProgramSha256": "a739d16b21c478e95fd24b261daab4bad39e8fdf6601f42c6834a6008db17c21",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-bisu-chinese-language-nondegree",
+            "url": "https://admission.bisu.edu.cn/attach/0/2411071706042027427.pdf",
+            "title": "北京第二外国语学院2025年春季学期来华留学生招生简章",
+            "publisher": "beijing-international-studies-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "afd9bdc9a81436ba9ac3716bfdd20a054e54fcd384e753761386be80cd48a167"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-ne-bisu-foundation-2026-2027-other-fee-reference",
+      "universityId": "uni-beijing-international-studies-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-bisu-foundation"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-ne-bisu-foundation-2026-2027-other-fee-reference",
+        "programId": "prog-gap-prog-mew-ne-bisu-foundation",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 25600,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-bisu-foundation"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-ne-bisu-foundation",
+        "slug": "gap-prog-mew-ne-bisu-foundation-foundation",
+        "universityId": "uni-beijing-international-studies-university",
+        "name": {
+          "en": "Chinese and Academic Foundation Program",
+          "zh": "汉语言与专业汉语预科项目",
+          "ru": "Подготовительная программа китайского языка и языка специальности"
+        },
+        "degreeLevel": "foundation",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 6,
+        "programUrl": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2403051823033743464.pdf?classid=0&filename=2403051823033743464.pdf",
+        "applyUrl": "https://bisu.17gz.org/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "df410dab8f47ae2e8c05f3384bcb76c1dc54eaa419524a553030da7f41041b49",
+      "canonicalProgramSha256": "a7d8079f57fea52b6524d37e65fa40d65b3923b38b8e865afe27349586ccd9da",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-bisu-foundation",
+            "url": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2403051823033743464.pdf?classid=0&filename=2403051823033743464.pdf",
+            "title": "北京第二外国语学院国际学生招生简章",
+            "publisher": "beijing-international-studies-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "13ce73e69a6ad2ec938204ce3bba27fb70fe5710779d5deacc3ea8456f722608"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-ne-bisu-international-chinese-education-master-2026-2027-other-fee-reference",
+      "universityId": "uni-beijing-international-studies-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-bisu-international-chinese-education-master",
+          "src-gap-program-prog-mew-ne-bisu-international-chinese-education-master-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-ne-bisu-international-chinese-education-master-2026-2027-other-fee-reference",
+        "programId": "prog-gap-prog-mew-ne-bisu-international-chinese-education-master",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 27000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-bisu-international-chinese-education-master",
+          "src-gap-program-prog-mew-ne-bisu-international-chinese-education-master-support-1"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-ne-bisu-international-chinese-education-master",
+        "slug": "gap-prog-mew-ne-bisu-international-chinese-education-master-master",
+        "universityId": "uni-beijing-international-studies-university",
+        "name": {
+          "en": "International Chinese Education",
+          "zh": "国际中文教育",
+          "ru": "Международное преподавание китайского языка"
+        },
+        "degreeLevel": "master",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 36,
+        "programUrl": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2403051823033743464.pdf?classid=0&filename=2403051823033743464.pdf",
+        "applyUrl": "https://bisu.17gz.org/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "2934858d20690ecfba7bf6511b6c126bd7140d214f3d515c9ea8f28bca375070",
+      "canonicalProgramSha256": "c676b071d5691c9ea33fd1a18a4296e9c0e87528f7ed8a6dd56ff9627579ce41",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-bisu-international-chinese-education-master",
+            "url": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2403051823033743464.pdf?classid=0&filename=2403051823033743464.pdf",
+            "title": "北京第二外国语学院国际学生招生简章",
+            "publisher": "beijing-international-studies-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "107174b78ef85fad84c2b331c60369f0362ec3ef4b3541a025cb2833797bd154"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-bisu-international-chinese-education-master-support-1",
+            "url": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2311210958564459337.pdf?classid=0&filename=2311210958564459337.pdf",
+            "title": "北京第二外国语学院中国政府奖学金高水平研究生项目招生简章",
+            "publisher": "beijing-international-studies-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "2158908dcd6a18ff7e6bf37aed9bb35c3db97864cb82057ea9d4d79aa8d01eca"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-ne-bjtu-logistics-engineering-master-en-2026-2027-other-fee-reference",
+      "universityId": "uni-beijing-jiaotong-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-bjtu-logistics-engineering-master-en"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-ne-bjtu-logistics-engineering-master-en-2026-2027-other-fee-reference",
+        "programId": "prog-gap-prog-mew-ne-bjtu-logistics-engineering-master-en",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 35000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-bjtu-logistics-engineering-master-en"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-ne-bjtu-logistics-engineering-master-en",
+        "slug": "gap-prog-mew-ne-bjtu-logistics-engineering-master-en-master",
+        "universityId": "uni-beijing-jiaotong-university",
+        "name": {
+          "en": "Logistics Engineering",
+          "zh": "物流工程",
+          "ru": "Логистическая инженерия"
+        },
+        "degreeLevel": "master",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 24,
+        "programUrl": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "48fefe0ab8a3200a19f461bb748bd3cd6660778781cc1a8048fd2129afca58d9",
+      "canonicalProgramSha256": "276bcf8b344efc3dd77cc2ed5b1ace4f23470bb80fd92c34e5b894b566552cbe",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-bjtu-logistics-engineering-master-en",
+            "url": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+            "title": "北京交通大学国际学生招生手册",
+            "publisher": "beijing-jiaotong-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "f152962cc57850698ffba4e85e6cf7ef344dcf3243dd7f1ed119fd6974e1a027"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en-2026-2027-other-fee-reference",
+      "universityId": "uni-beijing-jiaotong-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en-2026-2027-other-fee-reference",
+        "programId": "prog-gap-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 33800,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en",
+        "slug": "gap-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en-bachelor",
+        "universityId": "uni-beijing-jiaotong-university",
+        "name": {
+          "en": "Rail Transit Signal and Control",
+          "zh": "轨道交通信号与控制",
+          "ru": "Сигнализация и управление на рельсовом транспорте"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "other",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "faf5c1d07ed86abd24d24c152d5c4d9bc5aa8adac758ab8ceb6715f9787fbebe",
+      "canonicalProgramSha256": "5d52002db72305d23983b21b8e7d5ac9a2585e9e20a293ee8f489df2b0920c3e",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en",
+            "url": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+            "title": "北京交通大学国际学生招生手册",
+            "publisher": "beijing-jiaotong-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "a44e5df1da2c886cd4c6e3316ae975a1e120acf2c12363afac2809a1cc0ba941"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-ne-bjtu-transportation-planning-doctorate-2026-2027-other-fee-reference",
+      "universityId": "uni-beijing-jiaotong-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-bjtu-transportation-planning-doctorate"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-ne-bjtu-transportation-planning-doctorate-2026-2027-other-fee-reference",
+        "programId": "prog-gap-prog-mew-ne-bjtu-transportation-planning-doctorate",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 34000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-ne-bjtu-transportation-planning-doctorate"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-ne-bjtu-transportation-planning-doctorate",
+        "slug": "gap-prog-mew-ne-bjtu-transportation-planning-doctorate-doctorate",
+        "universityId": "uni-beijing-jiaotong-university",
+        "name": {
+          "en": "Transportation Planning and Management",
+          "zh": "交通运输规划与管理",
+          "ru": "Планирование и управление транспортом"
+        },
+        "degreeLevel": "doctorate",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "Chinese",
+          "English"
+        ],
+        "durationMonths": 36,
+        "durationMonthsMax": 48,
+        "programUrl": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "e3d11928b38cda5bcab0dee8a740e74a074d06ed3af677f193ccda0a416ab2a7",
+      "canonicalProgramSha256": "fae0d6a8c06fe9a140820e25bf71ccc5e976bf20ecd3d23cbc63761626899dfd",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-ne-bjtu-transportation-planning-doctorate",
+            "url": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+            "title": "北京交通大学国际学生招生手册",
+            "publisher": "beijing-jiaotong-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "67bd1aecd5e2d41671aabe05befc83cb7cdffd1fe0b50dae9752767e02b9e28b"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-sch-mew-ne-bjtu-csc-and-silk-road",
+      "universityId": "uni-beijing-jiaotong-university",
+      "row": {
+        "id": "sch-gap-sch-mew-ne-bjtu-csc-and-silk-road",
+        "slug": "gap-sch-mew-ne-bjtu-csc-and-silk-road",
+        "name": {
+          "en": "Chinese Government Scholarship and Silk Road Program at BJTU",
+          "zh": "北京交通大学中国政府奖学金及丝绸之路项目",
+          "ru": "Стипендия правительства Китая и программа «Шелковый путь» в BJTU"
+        },
+        "providerType": "csc",
+        "universityIds": [
+          "uni-beijing-jiaotong-university"
+        ],
+        "programIds": [
+          "prog-gap-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en",
+          "prog-gap-prog-mew-ne-bjtu-logistics-engineering-master-en",
+          "prog-gap-prog-mew-ne-bjtu-transportation-planning-doctorate"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+        "summary": {
+          "en": "The official handbook documents BJTU participation and funding scope, but is retained as historical framework evidence only.",
+          "zh": "学校官方手册记录该奖学金项目和资助范围，但仅作为历史框架证据保留。",
+          "ru": "Официальный справочник подтверждает участие BJTU и объем финансирования, но используется только как историческое подтверждение."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-mew-ne-bjtu-csc-and-silk-road"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "2926d4afcb398ff528bf67938a9b28a5b16e2c95f9400262e888857a9b19e68a",
+      "canonicalProgramSha256": null,
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-mew-ne-bjtu-csc-and-silk-road",
+            "url": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+            "title": "北京交通大学国际学生招生手册",
+            "publisher": "beijing-jiaotong-university",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "551a7c021c8b097fe09d736237f78729613065b07a702a13368e8b111cc7e84e"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-nss-bsu-chinese-language-2026-2027-autumn",
+      "universityId": "uni-beijing-sport-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-bsu-chinese-language"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-08-11",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-nss-bsu-chinese-language-2026-2027-autumn",
+        "programId": "prog-gap-prog-mew-nss-bsu-chinese-language",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official source explicitly lists Chinese Language Study for international applicants. The same source states teaching language: Chinese; duration: 1 semester or 1 academic year.",
+          "zh": "官方来源明确列出面向国际申请人的汉语进修。同一来源注明授课语言：Chinese；学制：1 semester or 1 academic year。",
+          "ru": "Официальный источник прямо указывает программу «Изучение китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 1 semester or 1 academic year."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-bsu-chinese-language"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-nss-bsu-chinese-language",
+        "slug": "gap-prog-mew-nss-bsu-chinese-language-language",
+        "universityId": "uni-beijing-sport-university",
+        "name": {
+          "en": "Chinese Language Study",
+          "zh": "汉语进修",
+          "ru": "Изучение китайского языка"
+        },
+        "degreeLevel": "language",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 6,
+        "durationMonthsMax": 12,
+        "programUrl": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "8e5f3b5266a0716cb74fd69d304c2fddcd0a04178e62e36afda6dc00d4206cab",
+      "canonicalProgramSha256": "e98bc59479265be056d7f94c68736b23a13e8519477b8162c54ec644b6ba8d98",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nss-bsu-chinese-language",
+            "url": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+            "title": "北京体育大学2026年外国留学生招生简章",
+            "publisher": "beijing-sport-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "4a6ca7bb03efa2d12febaa5993c8a6b7b1a6ae838e8cd8fd216e7eb364cb247f"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-nss-bsu-wushu-training-2026-2027-autumn",
+      "universityId": "uni-beijing-sport-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-bsu-wushu-training"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-08-11",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-nss-bsu-wushu-training-2026-2027-autumn",
+        "programId": "prog-gap-prog-mew-nss-bsu-wushu-training",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official source explicitly lists Wushu Training for international applicants. The same source states teaching language: Chinese; duration: 1 semester or 1 academic year.",
+          "zh": "官方来源明确列出面向国际申请人的武术进修。同一来源注明授课语言：Chinese；学制：1 semester or 1 academic year。",
+          "ru": "Официальный источник прямо указывает программу «Стажировка по ушу» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 1 semester or 1 academic year."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-bsu-wushu-training"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-nss-bsu-wushu-training",
+        "slug": "gap-prog-mew-nss-bsu-wushu-training-other",
+        "universityId": "uni-beijing-sport-university",
+        "name": {
+          "en": "Wushu Training",
+          "zh": "武术进修",
+          "ru": "Стажировка по ушу"
+        },
+        "degreeLevel": "other",
+        "discipline": "other",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 6,
+        "durationMonthsMax": 12,
+        "programUrl": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "78a5e679a3da64c57aec759cf214b34612bedf78df115677711d4f2476f323fb",
+      "canonicalProgramSha256": "0e380398fdf55cad26457a93837fcb053995ffd798fe96fef1446f4134a4269a",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nss-bsu-wushu-training",
+            "url": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+            "title": "北京体育大学2026年外国留学生招生简章",
+            "publisher": "beijing-sport-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "a95c31b4c546695c8cafc34431b5d92cc6e0260730e550eff1efe9dc7ce9b28b"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-mew-nss-bsu-international-chinese-education-master-2026-2027-autumn",
+      "universityId": "uni-beijing-sport-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-bsu-international-chinese-education-master",
+          "src-gap-program-prog-mew-nss-bsu-international-chinese-education-master-support-1"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-08-11",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-nss-bsu-international-chinese-education-master-2026-2027-autumn",
+        "programId": "prog-gap-prog-mew-nss-bsu-international-chinese-education-master",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-03-01",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official source explicitly lists International Chinese Education for international applicants. The same source states teaching language: Chinese; duration: 2 academic years; verified deadline: 2026-03-01.",
+          "zh": "官方来源明确列出面向国际申请人的国际中文教育。同一来源注明授课语言：Chinese；学制：2 academic years；已核实截止日期：2026-03-01。",
+          "ru": "Официальный источник прямо указывает программу «Международное преподавание китайского языка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 2 academic years; подтвержденный срок: 2026-03-01."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-bsu-international-chinese-education-master",
+          "src-gap-program-prog-mew-nss-bsu-international-chinese-education-master-support-1"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-nss-bsu-international-chinese-education-master",
+        "slug": "gap-prog-mew-nss-bsu-international-chinese-education-master-master",
+        "universityId": "uni-beijing-sport-university",
+        "name": {
+          "en": "International Chinese Education",
+          "zh": "国际中文教育",
+          "ru": "Международное преподавание китайского языка"
+        },
+        "degreeLevel": "master",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 24,
+        "programUrl": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "8be23a6ff3c2d9fdf0721992a6f09d39706722da8a6d10448be858cada6f2d2a",
+      "canonicalProgramSha256": "bfdea1042ecf6d62a3906a3804f5e98c861ce395f5c4f2c37758bc1315ae2f51",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nss-bsu-international-chinese-education-master",
+            "url": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+            "title": "北京体育大学2026年外国留学生招生简章",
+            "publisher": "beijing-sport-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "8fe76a289abeae1af8844767f11c6e14ea647f6f97542ba85087009f2fbf6eee"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nss-bsu-international-chinese-education-master-support-1",
+            "url": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/20c48cea06c3422ba70e4c57d8d9b527.htm",
+            "title": "北京体育大学2026年中国政府奖学金高水平研究生项目招生简章",
+            "publisher": "beijing-sport-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "837ce2bdfa878bcf64ba595c5ceb9ff3dc5d5aa2f58796de40545fc4504793bf"
+        }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+      "sourceIds": [
+        "src-gap-program-wave8-bit-aeronautical-astronautical-engineering-bachelor",
+        "src-gap-program-wave8-bit-automation-bachelor",
+        "src-gap-program-wave8-bit-electronic-science-technology-bachelor",
+        "src-gap-program-wave8-bit-international-economics-trade-bachelor",
+        "src-gap-program-wave8-bit-mechatronics-engineering-bachelor"
+      ],
+      "universityIds": [
+        "uni-beijing-institute-of-technology"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-wave8-bit-aeronautical-astronautical-engineering-bachelor-2026-2027-autumn-fee-reference",
+        "cycle-gap-wave8-bit-automation-bachelor-2026-2027-autumn-fee-reference",
+        "cycle-gap-wave8-bit-electronic-science-technology-bachelor-2026-2027-autumn-fee-reference",
+        "cycle-gap-wave8-bit-international-economics-trade-bachelor-2026-2027-autumn-fee-reference"
+      ],
+      "scholarshipIds": [],
+      "windowCounts": {
+        "unknown": 5
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 5,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://en.ahu.edu.cn/_upload/article/files/4a/16/4b61336d455ebb09fc8c0d6fe48f/6ebe828e-06b9-4dc6-9181-cf0ab343cb7a.pdf",
+      "sourceIds": [
+        "src-gap-program-mew-csw-ahu-chinese-language-literature-bachelor",
+        "src-gap-program-mew-csw-ahu-finance-bachelor",
+        "src-gap-program-mew-csw-ahu-international-chinese-education-bachelor",
+        "src-gap-program-mew-csw-ahu-software-engineering-bachelor"
+      ],
+      "universityIds": [
+        "uni-anhui-university"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-mew-csw-ahu-chinese-language-literature-bachelor-2026-2027-other-fee-reference",
+        "cycle-gap-mew-csw-ahu-finance-bachelor-2026-2027-other-fee-reference",
+        "cycle-gap-mew-csw-ahu-international-chinese-education-bachelor-2026-2027-other-fee-reference",
+        "cycle-gap-mew-csw-ahu-software-engineering-bachelor-2026-2027-other-fee-reference"
+      ],
+      "scholarshipIds": [],
+      "windowCounts": {
+        "unknown": 4
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 4,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://en.ahu.edu.cn/_upload/article/files/68/14/341578d446dab23766c307410d49/a0506a46-aea1-4ace-a3b6-82283f8d9088.pdf",
+      "sourceIds": [
+        "src-gap-program-mew-csw-ahu-chinese-language-literature-bachelor-support-1",
+        "src-gap-program-mew-csw-ahu-finance-bachelor-support-1",
+        "src-gap-program-mew-csw-ahu-international-chinese-education-bachelor-support-1",
+        "src-gap-program-mew-csw-ahu-software-engineering-bachelor-support-1"
+      ],
+      "universityIds": [
+        "uni-anhui-university"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-mew-csw-ahu-chinese-language-literature-bachelor-2026-2027-other-fee-reference",
+        "cycle-gap-mew-csw-ahu-finance-bachelor-2026-2027-other-fee-reference",
+        "cycle-gap-mew-csw-ahu-international-chinese-education-bachelor-2026-2027-other-fee-reference",
+        "cycle-gap-mew-csw-ahu-software-engineering-bachelor-2026-2027-other-fee-reference"
+      ],
+      "scholarshipIds": [],
+      "windowCounts": {
+        "unknown": 4
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 4,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://english.bjfu.edu.cn/docs/2025-11/4092e0495fdc4546ab0774035f5ab258.pdf",
+      "sourceIds": [
+        "src-gap-program-wave4-depth-bjfu-forestry-bachelor",
+        "src-gap-program-wave4-depth-bjfu-international-economics-trade-bachelor",
+        "src-gap-program-wave4-depth-bjfu-landscape-architecture-bachelor",
+        "src-gap-scholarship-wave4-depth-bjfu-beijing-government-scholarship-2026"
+      ],
+      "universityIds": [
+        "uni-beijing-forestry-university"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-wave4-depth-bjfu-forestry-bachelor-2026-2027-autumn-fee-reference",
+        "cycle-gap-wave4-depth-bjfu-international-economics-trade-bachelor-2026-2027-autumn-fee-reference",
+        "cycle-gap-wave4-depth-bjfu-landscape-architecture-bachelor-2026-2027-autumn-fee-reference"
+      ],
+      "scholarshipIds": [
+        "sch-gap-wave4-depth-bjfu-beijing-government-scholarship-2026"
+      ],
+      "windowCounts": {
+        "unknown": 4
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 4,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://gjy.ahmu.edu.cn/2025/1126/c6038a193883/page.htm",
+      "sourceIds": [
+        "src-gap-program-breadth-ahmu-d-clinical-pharmacy",
+        "src-gap-program-local-strong-ahmu-m-anesthesiology",
+        "src-gap-scholarship-breadth-sch-ahmu-high-level-postgraduate"
+      ],
+      "universityIds": [
+        "uni-anhui-medical-university"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-breadth-ahmu-d-clinical-pharmacy-2026-2027-autumn",
+        "cycle-gap-local-strong-ahmu-m-anesthesiology-2026-2027-autumn",
+        "cycle-gap-local-strong-ahmu-m-anesthesiology-2026-2027-other"
+      ],
+      "scholarshipIds": [
+        "sch-gap-breadth-sch-ahmu-high-level-postgraduate"
+      ],
+      "windowCounts": {
+        "unknown": 4
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 4,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://www.bjtu.edu.cn/docs/2024-05/37c25c5fe30840559f6ae4c03d861a28.pdf",
+      "sourceIds": [
+        "src-gap-program-prog-mew-ne-bjtu-logistics-engineering-master-en",
+        "src-gap-program-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en",
+        "src-gap-program-prog-mew-ne-bjtu-transportation-planning-doctorate",
+        "src-gap-scholarship-sch-mew-ne-bjtu-csc-and-silk-road"
+      ],
+      "universityIds": [
+        "uni-beijing-jiaotong-university"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-prog-mew-ne-bjtu-logistics-engineering-master-en-2026-2027-other-fee-reference",
+        "cycle-gap-prog-mew-ne-bjtu-rail-transit-signal-bachelor-en-2026-2027-other-fee-reference",
+        "cycle-gap-prog-mew-ne-bjtu-transportation-planning-doctorate-2026-2027-other-fee-reference"
+      ],
+      "scholarshipIds": [
+        "sch-gap-sch-mew-ne-bjtu-csc-and-silk-road"
+      ],
+      "windowCounts": {
+        "unknown": 4
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 4,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2403051823033743464.pdf?classid=0&filename=2403051823033743464.pdf",
+      "sourceIds": [
+        "src-gap-program-prog-mew-ne-bisu-chinese-language-bachelor-support-1",
+        "src-gap-program-prog-mew-ne-bisu-foundation",
+        "src-gap-program-prog-mew-ne-bisu-international-chinese-education-master"
+      ],
+      "universityIds": [
+        "uni-beijing-international-studies-university"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-prog-mew-ne-bisu-chinese-language-bachelor-2025-2026-spring-fee-reference",
+        "cycle-gap-prog-mew-ne-bisu-foundation-2026-2027-other-fee-reference",
+        "cycle-gap-prog-mew-ne-bisu-international-chinese-education-master-2026-2027-other-fee-reference"
+      ],
+      "scholarshipIds": [],
+      "windowCounts": {
+        "unknown": 3
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 3,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://admission.bisu.edu.cn/attach/0/2411071706042027427.pdf",
+      "sourceIds": [
+        "src-gap-program-prog-mew-ne-bisu-chinese-language-bachelor",
+        "src-gap-program-prog-mew-ne-bisu-chinese-language-nondegree"
+      ],
+      "universityIds": [
+        "uni-beijing-international-studies-university"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-prog-mew-ne-bisu-chinese-language-bachelor-2025-2026-spring-fee-reference",
+        "cycle-gap-prog-mew-ne-bisu-chinese-language-nondegree-2025-2026-spring-fee-reference"
+      ],
+      "scholarshipIds": [],
+      "windowCounts": {
+        "unknown": 2
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 2,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/89b17c9ffffa4968af828965e2c70d7d.htm",
+      "sourceIds": [
+        "src-gap-program-prog-mew-nss-bsu-chinese-language",
+        "src-gap-program-prog-mew-nss-bsu-international-chinese-education-master",
+        "src-gap-program-prog-mew-nss-bsu-wushu-training"
+      ],
+      "universityIds": [
+        "uni-beijing-sport-university"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-prog-mew-nss-bsu-chinese-language-2026-2027-autumn",
+        "cycle-gap-prog-mew-nss-bsu-international-chinese-education-master-2026-2027-autumn",
+        "cycle-gap-prog-mew-nss-bsu-wushu-training-2026-2027-autumn"
+      ],
+      "scholarshipIds": [],
+      "windowCounts": {
+        "unknown": 2,
+        "closed": 1
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 2,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2311210958564459337.pdf?classid=0&filename=2311210958564459337.pdf",
+      "sourceIds": [
+        "src-gap-program-prog-mew-ne-bisu-international-chinese-education-master-support-1"
+      ],
+      "universityIds": [
+        "uni-beijing-international-studies-university"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-prog-mew-ne-bisu-international-chinese-education-master-2026-2027-other-fee-reference"
+      ],
+      "scholarshipIds": [],
+      "windowCounts": {
+        "unknown": 1
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 1,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://zs.bsu.edu.cn/lxszsw/lxstzgg/20c48cea06c3422ba70e4c57d8d9b527.htm",
+      "sourceIds": [
+        "src-gap-program-prog-mew-nss-bsu-international-chinese-education-master-support-1",
+        "src-gap-scholarship-sch-mew-nss-bsu-csc-high-level"
+      ],
+      "universityIds": [
+        "uni-beijing-sport-university"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-prog-mew-nss-bsu-international-chinese-education-master-2026-2027-autumn"
+      ],
+      "scholarshipIds": [],
+      "windowCounts": {
+        "closed": 1,
+        "unknown": 1
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 1,
+      "officialWebsiteVerifiedThisRun": false
+    }
+  ]
+}

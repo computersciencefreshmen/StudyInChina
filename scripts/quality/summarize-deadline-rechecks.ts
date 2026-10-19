@@ -90,6 +90,16 @@ function assertStoredDate(row: ObjectRow, canonical: string | null, id: string):
   assert.equal(row.storedDeadline, canonical, 'Stored deadline differs from current canonical row: ' + id)
 }
 
+export function assertPastOfficialDeadline(value: unknown, today: string, id: string): void {
+  assert.ok(typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value), 'Closed outcome needs an explicit official ISO deadline: ' + id)
+  const timestamp = Date.parse(value + 'T00:00:00Z')
+  assert.ok(Number.isFinite(timestamp) && new Date(timestamp).toISOString().slice(0, 10) === value,
+    'Closed outcome has an invalid calendar date: ' + id)
+  // Same-day closure needs separate intraday evidence; a calendar-only report
+  // cannot infer it by extending or shortening the school's precise cutoff.
+  assert.ok(value < today, 'Closed outcome is not an earlier Shanghai calendar day: ' + id)
+}
+
 function option(name: string, fallback: string): string {
   const index = process.argv.indexOf('--' + name)
   if (index === -1) return fallback
@@ -178,6 +188,7 @@ export function buildSummary(primaryRoot: string, reportsDirectory: string, toda
       assert.ok(deadline, 'An unchanged explicit deadline must not be null: ' + binding.id)
       assert.equal(row.officialDeadline ?? binding.context.officialDeadline, deadline, 'Unchanged result lacks a matching official date: ' + binding.id)
     }
+    if (binding.outcome === 'closed') assertPastOfficialDeadline(row.officialDeadline ?? binding.context.officialDeadline, today, binding.id)
     if ('opensOn' in canonical && (row.openingDateAssessed === true || typeof row.officialOpensOn === 'string')) {
       assert.ok('opensOn' in canonical)
       assert.equal(row.officialOpensOn, canonical.opensOn, 'Assessed official opening differs: ' + binding.id)
@@ -339,7 +350,11 @@ function selfTest(): void {
   assert.doesNotThrow(() => assertCurrentAuditDay(AUDIT_DATE, AUDIT_DATE))
   assert.throws(() => assertCurrentAuditDay(AUDIT_DATE, '2026-10-20'), /new Asia\/Shanghai/)
   assert.throws(() => localFile(process.cwd(), '../outside.json'), /escapes/)
-  console.log('17 normalization, duplicate, stale-date, stored-date and evidence-path assertions passed.')
+  assert.doesNotThrow(() => assertPastOfficialDeadline('2026-06-15', AUDIT_DATE, 'past-cycle'))
+  assert.throws(() => assertPastOfficialDeadline(null, AUDIT_DATE, 'missing'), /explicit official/)
+  assert.throws(() => assertPastOfficialDeadline('2026-02-30', AUDIT_DATE, 'invalid'), /invalid calendar/)
+  assert.throws(() => assertPastOfficialDeadline(AUDIT_DATE, AUDIT_DATE, 'today'), /earlier Shanghai/)
+  console.log('21 normalization, duplicate, stale-date, stored-date, past-window and evidence-path assertions passed.')
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
