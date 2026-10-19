@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-19T12:51:08.825Z",
+  "previousObservationReceipt": {
+    "path": "quality/deadline-sweep-20261019/heartbeat-1200/successor-date-observations-v1.json",
+    "sha256": "ea31fb2526c0cb93b3024d28d2d9cd1dd728bd30f594c41475dc07335f25f286"
+  },
+  "sourceReport": {
+    "path": "quality/deadline-sweep-20261019/official-batch-039/report.json",
+    "sha256": "82f000484e1b310f4101e0bf377c1d9ce3da9dd3f05b37159c54acd4c8664380"
+  },
+  "sourceObservation": {
+    "path": "quality/deadline-sweep-20261019/official-batch-039/bfsu-spring-window-observation-v1.json",
+    "sha256": "c271cd27c32cd785abafe5a239d3b0a039d77e2c77510712e0f915ee256621f6"
+  },
+  "newAnnualWindowObservations": [
+    {
+      "kind": "held-application-window-observation-intake-year-ambiguous",
+      "universityId": "uni-beijing-foreign-studies-university",
+      "sourceUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+      "sourceObservedAt": "2026-10-19T12:43:39.311266+00:00",
+      "originalPins": [
+        {
+          "path": "quality/deadline-sweep-20261019/official-batch-039/bfsu-undergraduate.html",
+          "sha256": "2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329"
+        },
+        {
+          "path": "quality/deadline-sweep-20261019/official-batch-039/bfsu-undergraduate.txt",
+          "sha256": "77cd9c23ce19990078c07f1dc9070c2d812590bb588ea1ef898b75347315b20e"
+        },
+        {
+          "path": "quality/deadline-sweep-20261019/official-batch-039/selection.json",
+          "sha256": "350d87d5cc963314b151d6022b4a40aa572b488f4d32b036f27b3634f1487559"
+        }
+      ],
+      "observedApplicationWindow": {
+        "opensOn": "2026-10-15",
+        "closesOn": "2026-12-15",
+        "intakeLabel": "Spring Intake",
+        "explicitApplicationYear": 2026,
+        "clockTimeNotStated": true
+      },
+      "quotes": {
+        "yearTitle": {
+          "text": "2026 BFSU Undergraduate Admissions Prospectus for International Students",
+          "sha256": "ab15923e93eb6fd9ec76b0577655d735613ee7c4678ffad4bfb51b8dd16b591e"
+        },
+        "enrollmentScope": {
+          "text": "international undergraduate applicants intending to enroll in 2026",
+          "sha256": "0ab1c0701a46fbc2170349fb1cf86e2522250b7d27b887425fd80a82cb15a616"
+        },
+        "programmeLanguageHeading": {
+          "text": "English-Taught Majors",
+          "sha256": "532b377eba4a2dada7a50cbf92f6cbfe13125845df8200c9027d3724e20f2ced"
+        },
+        "exactEnglishProgrammeTableRow": {
+          "text": "Economics & Management International Business, Finance, International Trade, Business Administration Mathematics Spring / Autumn 39900 International Business School",
+          "sha256": "5b8c8993525573d2e5148adebeb645dfe650aa1beb00403c409c4149b408d13d"
+        },
+        "applicationWindow": {
+          "text": "Spring Intake: October 15, 2026 — December 15, 2026",
+          "sha256": "3081413d9f6c35f75aa9be55e5feae8a79059d2addbff01e8f21eea82263f590"
+        }
+      },
+      "statedGeneralEnrollmentYear": 2026,
+      "springCommencementYear": null,
+      "candidateAcademicYear": null,
+      "targetIntakeYearCertain": false,
+      "targetSpring2027Established": false,
+      "storedScopes": [
+        {
+          "recordId": "cycle-2026-24d32898799e",
+          "collection": "admissionCycles",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": null,
+          "canonicalRecordSha256": "b121396b0ed7a113149ba2151e62092cc89d7294d2e26023afcfc228c4ebdb18"
+        },
+        {
+          "recordId": "cycle-2026-72c147058578",
+          "collection": "admissionCycles",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": null,
+          "canonicalRecordSha256": "c80f983e809fab7294dc3895d682016a1871a4740b326944f8d2739b066e3ce0"
+        },
+        {
+          "recordId": "cycle-2026-c6f79b90dcfc",
+          "collection": "admissionCycles",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": null,
+          "canonicalRecordSha256": "e5e685018cf6a09d1c24f65ef353aef27bd7947232985461566b2fbf5c72a5eb"
+        }
+      ],
+      "status": "source-only-held-not-canonical-date-candidate",
+      "reason": "The body explicitly labels2026 enrollment overall, gives late2026 spring application dates and lists the three exact English majors for Spring/Autumn. It does not explicitly identify the spring commencement year. Preserve all three facts without converting them into a new2027 cycle or an open-status claim.",
+      "canonicalDateCandidateApproved": false,
+      "appliesToStoredRecord": false,
+      "noYearRollover": true,
+      "canonicalDateChanged": false,
+      "quoteMatching": "Whitespace-normalized against archived extracted text; raw/text, original quotation and full stored-row hashes retained."
+    }
+  ],
+  "canonicalFactsChanged": false,
+  "freshnessRenewed": false,
+  "newCycleOrAwardCreated": false,
+  "applicationsCurrentlyOpenEstablished": false
+}

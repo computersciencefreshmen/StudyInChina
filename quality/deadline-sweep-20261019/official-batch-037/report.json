@@ -1,0 +1,2028 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-037-20261019",
+  "state": "completed-seven-scoped-past-applicant-candidates-five-unknown-five-blocked",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T12:49:08.624Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256Before": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256After": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v10.json",
+  "targetQueueSha256": "c92366918ff347204724332f662e7aef1885e518a82ce5b4b6427edd54b4733d",
+  "selectionFile": "selection.json",
+  "selectionSha256": "3e846a9822387b5b53cd979ac9497e7610729da66e29b05429d867920553cdd5",
+  "selectedUniversityIds": [
+    "uni-wuhan-university-of-technology",
+    "uni-xian-international-studies-university",
+    "uni-xian-university-of-technology",
+    "uni-xiangtan-university",
+    "uni-xinjiang-agricultural-university",
+    "uni-xuzhou-medical-university"
+  ],
+  "selection": {
+    "baseQueueRecords": 15,
+    "additionalSameSourceRecords": 2,
+    "totalRecords": 17,
+    "baseQueueRecordIds": [
+      "cycle-gap-wave8-whut-business-administration-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave8-whut-computer-science-technology-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave8-whut-logistics-management-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave8-whut-mechanical-engineering-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-2027-xisu-regular-chinese-spring",
+      "cycle-gap-wave3-xaut-d-international-doctoral-2026-2027-other-fee-reference",
+      "cycle-gap-mew-csw-xtu-artificial-intelligence-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-mew-csw-xtu-communication-engineering-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-mew-csw-xtu-finance-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-mew-csw-xtu-philosophy-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-breadth-xjau-m-veterinary-medicine-2026-2027-autumn",
+      "cycle-gap-local-strong-xjau-b-animal-medicine-2026-2027-autumn",
+      "cycle-gap-local-strong-xjau-b-animal-medicine-2026-2027-other",
+      "cycle-gap-breadth-xzhmu-b-clinical-medicine-en-2026-2027-autumn",
+      "cycle-gap-local-strong-xzmu-b-mbbs-2026-2027-other"
+    ],
+    "additionalSameSourceRecordIds": [
+      "cycle-gap-wave8-whut-mining-engineering-bachelor-2026-2027-autumn-fee-reference",
+      "sch-gap-mew-csw-xtu-cgs-high-level-postgraduate-2026"
+    ],
+    "baseDispatch": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1236/base-dispatch-v1.json",
+      "sha256": "da801752b913a8ec793ece3e93b015bb2c6d78c9ed224f6c277d78c788165e5c"
+    },
+    "extensionReceipt": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1236/additional-same-source-selection-v1.json",
+      "sha256": "f5232de8826c7ebb4b2ae05b33da90fcac5a8866096c7045db526d9a6b4ad95d"
+    },
+    "queueUniversityIndexRangeInclusive": [
+      0,
+      5
+    ]
+  },
+  "acquisition": {
+    "registeredDistinctUrlsAttempted": 10,
+    "nativeOriginRequests": 13,
+    "linkedOriginalUrlsAttempted": 2,
+    "invalidMobilePageFallbacks": 1,
+    "webFallbackRequests": 1,
+    "rawBodiesSaved": 11,
+    "nativeHtmlBodies": 9,
+    "nativePdfBodies": 2,
+    "nativeFailures": 2,
+    "captureManifestPins": [
+      {
+        "path": "captures.json",
+        "sha256": "0ac383bd7d105686900944815456066a0267e936aa7272324e863d2a64925ffe"
+      },
+      {
+        "path": "support-captures.json",
+        "sha256": "8f7cf7c0cce93a8555dd8f93ea8293cf8f5ae2cbd14c31acc330dc0702646aa7"
+      }
+    ],
+    "diagnostics": {
+      "path": "acquisition-diagnostics.json",
+      "sha256": "98545143cf813c2d77fddd21797963e44b27bf2eaed3c898998e09b7183eba26"
+    },
+    "webFallback": {
+      "path": "whut-web-fallback.json",
+      "sha256": "0f915c0941f0ea3ed6bb8a17beaa611756753fb3df50eab41854f143027d3d19"
+    },
+    "pdfOfflineExtraction": {
+      "path": "pdf-offline-extraction.json",
+      "sha256": "bd19750fd8a396694959768e640262e13f1df2423aa8294511941c5590fe7779"
+    },
+    "normalTls": true,
+    "paidModelCalls": 0,
+    "bodyInterpretation": "Nine saved HTML responses include an invalid-mobile-column response and a catalogue captcha; those are not date evidence. Two original PDFs were fully extracted offline and relevant pages visually inspected. WHUT had one native TLS timeout and one web timeout; XJAU had one invalid-mobile-page recovery endingHTTP410."
+  },
+  "summary": {
+    "schoolsAttempted": 6,
+    "recordsAssessed": 17,
+    "baseQueueRecords": 15,
+    "additionalSameSourceRecords": 2,
+    "admissionCyclesAssessed": 16,
+    "scholarshipsAssessed": 1,
+    "recordResults": {
+      "blocked": 5,
+      "unknown": 5,
+      "closed": 7
+    },
+    "newExactPastDeadlineCandidatesFromStoredNull": 7,
+    "independentAwardPastDeadlineCandidates": 1,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0,
+    "allSelectedRecordsUnpublishedInSnapshot": true
+  },
+  "rules": [
+    "Source-only date candidates; no canonical dates, statuses, publication, verifiedAt or reviewAfter changed.",
+    "The dispatch selects shared awards once; base IDs are taken exactly from root dispatch, not reselected from multi-school mappings.",
+    "Only exact2026 applicant routes support seven past-window observations. Unknown and blocked never prove open/closed availability.",
+    "XTU April30 is self-funded degree admission; its separate TypeB award has its own March1 applicant cutoff.",
+    "XTU current standing degree directory supports major identity only; unavailable2026 catalogue and Artificial Intelligent spelling are explicit limitations, with no programme fact renewal.",
+    "XISU Dec20/Jun20 and XAUT annual March-May remain unanchored. XJAU2026 catalogue alone establishes no date.",
+    "Failed source paths end after one reasonable fallback. Captcha and HTTP200 do not establish a deadline.",
+    "PDF originals were fetched once; extraction and rendering were offline. No successor-year rollover or programme discontinuation is inferred."
+  ],
+  "precisionIssues": [
+    {
+      "universityId": "uni-xian-international-studies-university",
+      "type": "standing-spring-rule-without-target-year",
+      "quotedDate": "3.Deadlines: Dec 20 (Spring semester) / June 20 (Autumn semester)",
+      "explanation": "No December2026 date is invented for a stored spring2027 intake."
+    },
+    {
+      "universityId": "uni-xian-university-of-technology",
+      "type": "annual-month-range-only",
+      "quotedDate": "申请时间：每年3-5月。",
+      "explanation": "May is not converted to May31 and no target intake year is inferred."
+    },
+    {
+      "universityId": "uni-xiangtan-university",
+      "type": "funding-route-separation",
+      "selfFundedDegreeDeadline": "2026-04-30",
+      "independentAwardDeadline": "2026-03-01",
+      "explanation": "These are separate applicant routes; neither deadline is borrowed by the other."
+    },
+    {
+      "universityId": "uni-xuzhou-medical-university",
+      "type": "applicant-date-versus-reporting-and-adjustment-clause",
+      "officialDeadline": "2026-06-30",
+      "quotedDate": "报名时间：2026 年 1 月 26 日至 6 月 30 日（如有调整，请及时关注学院网站和在线申请网页新闻通知以及系统站内信）",
+      "reportingDate": "2026年9月中旬",
+      "explanation": "June30 is the observed2026 applicant deadline; September is reporting time. Adjustment wording is retained and no unobserved extension is assumed."
+    }
+  ],
+  "groups": [
+    {
+      "key": "whut-2026-bachelor-single-source-TLS-timeout-and-single-fallback-timeout",
+      "universityId": "uni-wuhan-university-of-technology",
+      "evidence": [
+        {
+          "name": "whut-guide",
+          "url": "https://sie.whut.edu.cn/english/ist/unde/202602/t20260227_1385160.shtml",
+          "observedAt": "2026-10-19T12:40:57.515105+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "<urlopen error _ssl.c:993: The handshake operation timed out>",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-TLS-handshake-timeout-no-origin-body",
+          "fullFactsCertified": false
+        }
+      ],
+      "webFallback": {
+        "path": "whut-web-fallback.json",
+        "sha256": "0f915c0941f0ea3ed6bb8a17beaa611756753fb3df50eab41854f143027d3d19"
+      },
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-whut-business-administration-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-wuhan-university-of-technology",
+          "canonicalUniversitySha256": "1174edb2a6698698b30a561e4c226185cbae3f9082d3dda33bf1f57b19cb7dd6",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-wuhan-university-of-technology",
+              "canonicalUniversitySha256": "1174edb2a6698698b30a561e4c226185cbae3f9082d3dda33bf1f57b19cb7dd6"
+            }
+          ],
+          "programId": "prog-gap-wave8-whut-business-administration-bachelor",
+          "name": "Business Administration (Bachelor's Program)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "b256ca3d86ed80527124cc1148045189b9a570c246d212a81b8f88b83b73e8d4",
+          "canonicalCycleSha256": "b256ca3d86ed80527124cc1148045189b9a570c246d212a81b8f88b83b73e8d4",
+          "canonicalProgramSha256": "a5d75cfa5dff7f7e80f216301f752a8cbe52a5ac6d00a62ec3e1eb04fc0abad5",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-whut-business-administration-bachelor",
+              "canonicalProgramSha256": "a5d75cfa5dff7f7e80f216301f752a8cbe52a5ac6d00a62ec3e1eb04fc0abad5"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave8-whut-business-administration-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-whut-business-administration-bachelor",
+              "canonicalSourceSha256": "efb7b065e9e95650f0424da6847fff1b6beb9ebaa90a5a4ff3254032696c408c",
+              "url": "https://sie.whut.edu.cn/english/ist/unde/202602/t20260227_1385160.shtml"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "native-TLS-handshake-timeout-and-one-web-open-timeout-no-original-body",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sie.whut.edu.cn/english/ist/unde/202602/t20260227_1385160.shtml",
+          "evidenceBodySha256": null,
+          "evidenceTextSha256": null,
+          "observedAt": "2026-10-19T12:40:57.515105+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "oneSourceFailureServesFiveExactIds": true,
+          "noOpenOrClosedStatusInferred": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-whut-computer-science-technology-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-wuhan-university-of-technology",
+          "canonicalUniversitySha256": "1174edb2a6698698b30a561e4c226185cbae3f9082d3dda33bf1f57b19cb7dd6",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-wuhan-university-of-technology",
+              "canonicalUniversitySha256": "1174edb2a6698698b30a561e4c226185cbae3f9082d3dda33bf1f57b19cb7dd6"
+            }
+          ],
+          "programId": "prog-gap-wave8-whut-computer-science-technology-bachelor",
+          "name": "Computer Science and Technology (Bachelor's Program)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "81660f6426748eb776ce8969c6ca1dedc72f41b15176829d0843ded382fd9aa7",
+          "canonicalCycleSha256": "81660f6426748eb776ce8969c6ca1dedc72f41b15176829d0843ded382fd9aa7",
+          "canonicalProgramSha256": "e845449e47f3f270eefcca9f6fb3c5300c10c30b6383f72c8db50da3677850b4",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-whut-computer-science-technology-bachelor",
+              "canonicalProgramSha256": "e845449e47f3f270eefcca9f6fb3c5300c10c30b6383f72c8db50da3677850b4"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave8-whut-computer-science-technology-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-whut-computer-science-technology-bachelor",
+              "canonicalSourceSha256": "009f1c9aa56f30b7a89ea7bb0c7b67293e1a72ee40b8269827286fb762a7940d",
+              "url": "https://sie.whut.edu.cn/english/ist/unde/202602/t20260227_1385160.shtml"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "native-TLS-handshake-timeout-and-one-web-open-timeout-no-original-body",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sie.whut.edu.cn/english/ist/unde/202602/t20260227_1385160.shtml",
+          "evidenceBodySha256": null,
+          "evidenceTextSha256": null,
+          "observedAt": "2026-10-19T12:40:57.515105+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "oneSourceFailureServesFiveExactIds": true,
+          "noOpenOrClosedStatusInferred": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-whut-logistics-management-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-wuhan-university-of-technology",
+          "canonicalUniversitySha256": "1174edb2a6698698b30a561e4c226185cbae3f9082d3dda33bf1f57b19cb7dd6",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-wuhan-university-of-technology",
+              "canonicalUniversitySha256": "1174edb2a6698698b30a561e4c226185cbae3f9082d3dda33bf1f57b19cb7dd6"
+            }
+          ],
+          "programId": "prog-gap-wave8-whut-logistics-management-bachelor",
+          "name": "Logistics Management (Bachelor's Program)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "f7c33606a5bb98321117614dd962c5e9c38376b7ca7da143b34d4580c7be1935",
+          "canonicalCycleSha256": "f7c33606a5bb98321117614dd962c5e9c38376b7ca7da143b34d4580c7be1935",
+          "canonicalProgramSha256": "4f9effe9bc29c5a4bacadce7b64a6648d6b704698e282979117da1bc9e0ea1a2",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-whut-logistics-management-bachelor",
+              "canonicalProgramSha256": "4f9effe9bc29c5a4bacadce7b64a6648d6b704698e282979117da1bc9e0ea1a2"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave8-whut-logistics-management-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-whut-logistics-management-bachelor",
+              "canonicalSourceSha256": "8e7985ceb83d6dda322984d498fec2dfee92916b6c4e49fd78cf8fb56fb02110",
+              "url": "https://sie.whut.edu.cn/english/ist/unde/202602/t20260227_1385160.shtml"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "native-TLS-handshake-timeout-and-one-web-open-timeout-no-original-body",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sie.whut.edu.cn/english/ist/unde/202602/t20260227_1385160.shtml",
+          "evidenceBodySha256": null,
+          "evidenceTextSha256": null,
+          "observedAt": "2026-10-19T12:40:57.515105+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "oneSourceFailureServesFiveExactIds": true,
+          "noOpenOrClosedStatusInferred": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-whut-mechanical-engineering-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-wuhan-university-of-technology",
+          "canonicalUniversitySha256": "1174edb2a6698698b30a561e4c226185cbae3f9082d3dda33bf1f57b19cb7dd6",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-wuhan-university-of-technology",
+              "canonicalUniversitySha256": "1174edb2a6698698b30a561e4c226185cbae3f9082d3dda33bf1f57b19cb7dd6"
+            }
+          ],
+          "programId": "prog-gap-wave8-whut-mechanical-engineering-bachelor",
+          "name": "Mechanical Engineering (Bachelor's Program)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "f35b71900d86deec52112391767503c0ea694751531c154fec754d4c326fa8d0",
+          "canonicalCycleSha256": "f35b71900d86deec52112391767503c0ea694751531c154fec754d4c326fa8d0",
+          "canonicalProgramSha256": "d26823a074fa296789e0f7304854f990e15d95f69774b22d3639473504348958",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-whut-mechanical-engineering-bachelor",
+              "canonicalProgramSha256": "d26823a074fa296789e0f7304854f990e15d95f69774b22d3639473504348958"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave8-whut-mechanical-engineering-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-whut-mechanical-engineering-bachelor",
+              "canonicalSourceSha256": "794893482ead5d14a604b93150bea82a0768e967733ca920cd3a7a75f547c6ac",
+              "url": "https://sie.whut.edu.cn/english/ist/unde/202602/t20260227_1385160.shtml"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "native-TLS-handshake-timeout-and-one-web-open-timeout-no-original-body",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sie.whut.edu.cn/english/ist/unde/202602/t20260227_1385160.shtml",
+          "evidenceBodySha256": null,
+          "evidenceTextSha256": null,
+          "observedAt": "2026-10-19T12:40:57.515105+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "oneSourceFailureServesFiveExactIds": true,
+          "noOpenOrClosedStatusInferred": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-whut-mining-engineering-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-wuhan-university-of-technology",
+          "canonicalUniversitySha256": "1174edb2a6698698b30a561e4c226185cbae3f9082d3dda33bf1f57b19cb7dd6",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-wuhan-university-of-technology",
+              "canonicalUniversitySha256": "1174edb2a6698698b30a561e4c226185cbae3f9082d3dda33bf1f57b19cb7dd6"
+            }
+          ],
+          "programId": "prog-gap-wave8-whut-mining-engineering-bachelor",
+          "name": "Mining Engineering (Bachelor's Program)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "explicit-same-source-extension",
+          "canonicalRecordSha256": "d18d52313419e5fb4cba498667b5867e5b1409d7e45f6dafe608c1c3bc6310a1",
+          "canonicalCycleSha256": "d18d52313419e5fb4cba498667b5867e5b1409d7e45f6dafe608c1c3bc6310a1",
+          "canonicalProgramSha256": "1a1c36c6ae2b9042e1da9cdc18c762360bde9f7430b6641e95fcb24ebb48bf70",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-whut-mining-engineering-bachelor",
+              "canonicalProgramSha256": "1a1c36c6ae2b9042e1da9cdc18c762360bde9f7430b6641e95fcb24ebb48bf70"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave8-whut-mining-engineering-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-whut-mining-engineering-bachelor",
+              "canonicalSourceSha256": "7379c44b8ca6e4fec05d2d245ed823db73f3b89d21ce3460fb1c7069ae3998f4",
+              "url": "https://sie.whut.edu.cn/english/ist/unde/202602/t20260227_1385160.shtml"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "native-TLS-handshake-timeout-and-one-web-open-timeout-no-original-body",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sie.whut.edu.cn/english/ist/unde/202602/t20260227_1385160.shtml",
+          "evidenceBodySha256": null,
+          "evidenceTextSha256": null,
+          "observedAt": "2026-10-19T12:40:57.515105+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "oneSourceFailureServesFiveExactIds": true,
+          "noOpenOrClosedStatusInferred": true,
+          "noYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "xisu-regular-language-spring-rule-no2027-anchor",
+      "universityId": "uni-xian-international-studies-university",
+      "evidence": [
+        {
+          "name": "xisu-language",
+          "url": "https://six.xisu.edu.cn/lxxwywz/Admissions/Chinese_Programs/Regular_Chinese_Language_Program.htm",
+          "observedAt": "2026-10-19T12:40:57.516116+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://six.xisu.edu.cn/lxxwywz/Admissions/Chinese_Programs/Regular_Chinese_Language_Program.htm",
+          "contentType": "text/html",
+          "bytes": 43281,
+          "rawPath": "xisu-language.html",
+          "rawSha256": "6855077d6f5711a47b19cd198ccb740af4dd6cc0c6f4125c8bc3f2898a2c96bd",
+          "textPath": "xisu-language.txt",
+          "textSha256": "89ec865a4662946221cd3881c87a0cb0c3ee0d055ac1d4affdd2ad22865bab46",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-official-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "recurringDateQuote": "3.Deadlines: Dec 20 (Spring semester) / June 20 (Autumn semester)",
+      "excludedProgrammeTiming": "early March – late June / early July",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-xisu-regular-chinese-spring",
+          "universityId": "uni-xian-international-studies-university",
+          "canonicalUniversitySha256": "c39b1b580960dd89c2aacffdb08e7720ed8dce2dc7073131dfc54ed433fa2574",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-xian-international-studies-university",
+              "canonicalUniversitySha256": "c39b1b580960dd89c2aacffdb08e7720ed8dce2dc7073131dfc54ed433fa2574"
+            }
+          ],
+          "programId": "program-xian-international-studies-university-regular-chinese-language",
+          "name": "Regular Chinese Language Program",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "20ed541de9250b27235846dd57ce977178129f779746015790c7af2e99a9b649",
+          "canonicalCycleSha256": "20ed541de9250b27235846dd57ce977178129f779746015790c7af2e99a9b649",
+          "canonicalProgramSha256": "d419ca53ed6dafe4a174d022513e94775060dd4ec0baddbbaf84b48c6e4f0dfe",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-xian-international-studies-university-regular-chinese-language",
+              "canonicalProgramSha256": "d419ca53ed6dafe4a174d022513e94775060dd4ec0baddbbaf84b48c6e4f0dfe"
+            }
+          ],
+          "sourceIds": [
+            "src-xisu-regular-chinese-language"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-xisu-regular-chinese-language",
+              "canonicalSourceSha256": "05929d2c30b68aa2871de6783b71fc31a60dfa73d3c7521a2cb32f5f8710916c",
+              "url": "https://six.xisu.edu.cn/lxxwywz/Admissions/Chinese_Programs/Regular_Chinese_Language_Program.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-spring-Dec20-rule-does-not-announce-target2027-application-year",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://six.xisu.edu.cn/lxxwywz/Admissions/Chinese_Programs/Regular_Chinese_Language_Program.htm",
+          "evidenceBodySha256": "6855077d6f5711a47b19cd198ccb740af4dd6cc0c6f4125c8bc3f2898a2c96bd",
+          "evidenceTextSha256": "89ec865a4662946221cd3881c87a0cb0c3ee0d055ac1d4affdd2ad22865bab46",
+          "observedAt": "2026-10-19T12:40:57.516116+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "recurringDateQuote": "3.Deadlines: Dec 20 (Spring semester) / June 20 (Autumn semester)",
+          "spring2027DoesNotInferDecember2026": true,
+          "download2026EntryDocumentNotTarget2027DateAnchor": true,
+          "midTermAdmissionNotRollingCycleProof": true,
+          "programmeDatesNotApplicantDeadlines": true,
+          "noYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "xaut-doctoral-standing-March-May-no-exact-day-or-year",
+      "universityId": "uni-xian-university-of-technology",
+      "evidence": [
+        {
+          "name": "xaut-admissions",
+          "url": "https://oice.xaut.edu.cn/lhlxs/zsjz_br_Admissions.htm",
+          "observedAt": "2026-10-19T12:40:57.517115+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://oice.xaut.edu.cn/lhlxs/zsjz_br_Admissions.htm",
+          "contentType": "text/html",
+          "bytes": 24194,
+          "rawPath": "xaut-admissions.html",
+          "rawSha256": "4c546bbd21047e8afda3a0e76badf532780fb14a4d6c1f9556d511f939fa7a58",
+          "textPath": "xaut-admissions.txt",
+          "textSha256": "442c52242213825754623c2f9d36cbad7f3721bbfa43bd65699193739ea405cd",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-official-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "xaut-majors",
+          "url": "https://oice.xaut.edu.cn/lhlxs/zysz_Major_List.htm",
+          "observedAt": "2026-10-19T12:40:57.518114+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://oice.xaut.edu.cn/lhlxs/zysz_Major_List.htm",
+          "contentType": "text/html",
+          "bytes": 13365,
+          "rawPath": "xaut-majors.html",
+          "rawSha256": "1e68aa5a976094fc058e1358e55b97e678028bea2c09974c5a086c2812583467",
+          "textPath": "xaut-majors.txt",
+          "textSha256": "fd2738e86d65ce879b26b7b3426fed9c1f197c4e3988827c7ea9ba16377eabe6",
+          "captureSucceeded": true,
+          "evidenceRole": "major-list-page-image-locator-not-date-proof",
+          "fullFactsCertified": false
+        }
+      ],
+      "recurringDateQuote": "申请时间：每年3-5月。",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-xaut-d-international-doctoral-2026-2027-other-fee-reference",
+          "universityId": "uni-xian-university-of-technology",
+          "canonicalUniversitySha256": "3782d972df8a56616d4a64f477885bab8eab5926cb129d5a6582c03735604576",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-xian-university-of-technology",
+              "canonicalUniversitySha256": "3782d972df8a56616d4a64f477885bab8eab5926cb129d5a6582c03735604576"
+            }
+          ],
+          "programId": "prog-gap-wave3-xaut-d-international-doctoral",
+          "name": "International Doctoral Degree Programs",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "doctorate",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "8f6fa41391beb3fd555192b10473c993cf007a89e278ffedbcdde5a3dc3d20a5",
+          "canonicalCycleSha256": "8f6fa41391beb3fd555192b10473c993cf007a89e278ffedbcdde5a3dc3d20a5",
+          "canonicalProgramSha256": "333cc266acc65bdbfa1366a559a83ea1eed396522d76d23487c9dd1b481cf64e",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-xaut-d-international-doctoral",
+              "canonicalProgramSha256": "333cc266acc65bdbfa1366a559a83ea1eed396522d76d23487c9dd1b481cf64e"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave3-xaut-d-international-doctoral",
+            "src-gap-program-wave3-xaut-d-international-doctoral-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-xaut-d-international-doctoral",
+              "canonicalSourceSha256": "16a0eed631b1268a239805228b8ce2410bc824974a91d1b16f035385ff336503",
+              "url": "https://oice.xaut.edu.cn/lhlxs/zsjz_br_Admissions.htm"
+            },
+            {
+              "sourceId": "src-gap-program-wave3-xaut-d-international-doctoral-support-1",
+              "canonicalSourceSha256": "546af1e0bd9ded38501d6772f727e2508f6e94a4c29022767f4eeed19af88f8f",
+              "url": "https://oice.xaut.edu.cn/lhlxs/zysz_Major_List.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-doctoral-admission-page-has-only-month-range-every-year",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://oice.xaut.edu.cn/lhlxs/zsjz_br_Admissions.htm",
+          "evidenceBodySha256": "4c546bbd21047e8afda3a0e76badf532780fb14a4d6c1f9556d511f939fa7a58",
+          "evidenceTextSha256": "442c52242213825754623c2f9d36cbad7f3721bbfa43bd65699193739ea405cd",
+          "observedAt": "2026-10-19T12:40:57.517115+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "recurringDateQuote": "申请时间：每年3-5月。",
+          "datePrecision": "month-range-only",
+          "MayNotInventedAsMay31": true,
+          "exactTargetYearAbsent": true,
+          "noYearRollover": true,
+          "majorImagesNotUsedAsDeadlineProof": true
+        }
+      ]
+    },
+    {
+      "key": "xtu-four2026-self-funded-bachelor-applicant-cutoffs-and-independent-TypeB-award",
+      "universityId": "uni-xiangtan-university",
+      "evidence": [
+        {
+          "name": "xtu-bachelor",
+          "url": "https://en.xtu.edu.cn/Admissions/International_Programs/Bachelor_Programs.htm",
+          "observedAt": "2026-10-19T12:41:04.164699+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://en.xtu.edu.cn/Admissions/International_Programs/Bachelor_Programs.htm",
+          "contentType": "text/html",
+          "bytes": 40249,
+          "rawPath": "xtu-bachelor.html",
+          "rawSha256": "ee0d60daae009806c7b0482c7070543def6a76745b1b83b6d56ea74d9ff0c43f",
+          "textPath": "xtu-bachelor.txt",
+          "textSha256": "66205e0328f6482683638429343c858ad897e95d1840c1a30cdd1fd39b5fcbcb",
+          "captureSucceeded": true,
+          "evidenceRole": "standing-official-major-and-Chinese-medium-identity-directory",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "xtu-guide",
+          "url": "https://gjjlc.xtu.edu.cn/info/1024/2754.htm",
+          "observedAt": "2026-10-19T12:41:04.177742+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://gjjlc.xtu.edu.cn/info/1024/2754.htm",
+          "contentType": "text/html",
+          "bytes": 28032,
+          "rawPath": "xtu-guide.html",
+          "rawSha256": "4a0e1d8ef194e34bfad1d05b170330b6514e68005baf624686bc79ada844eb0f",
+          "textPath": "xtu-guide.txt",
+          "textSha256": "06cfa20fdcb7b01edb8705f440222ba717821fe2ff23bf4c276401e7e3803cdc",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-official-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "xtu-award",
+          "url": "https://gjjlc.xtu.edu.cn/info/1024/2752.htm",
+          "observedAt": "2026-10-19T12:41:14.879276+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://gjjlc.xtu.edu.cn/info/1024/2752.htm",
+          "contentType": "text/html",
+          "bytes": 24484,
+          "rawPath": "xtu-award.html",
+          "rawSha256": "0edfd8b83247ebcf8b992db115479ea275ef9c08bb9e25f29ce509fb1d1d205f",
+          "textPath": "xtu-award.txt",
+          "textSha256": "3d2b30aeee764a35124db3c5827e660c88f7b635c4080f4c04daf003782fb14f",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-official-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "xtu-2026-bachelor-catalogue",
+          "url": "https://gjjlc.xtu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1699072544&wbfileid=14896243",
+          "observedAt": "2026-10-19T12:43:55.521096+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://gjjlc.xtu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1699072544&wbfileid=14896243",
+          "contentType": "text/html;charset=UTF-8",
+          "bytes": 3769,
+          "rawPath": "xtu-2026-bachelor-catalogue.html",
+          "rawSha256": "c651de7d7f6cf8ae1851fca6635957678433947649793a1564a7847a7f6ec9d6",
+          "textPath": "xtu-2026-bachelor-catalogue.txt",
+          "textSha256": "935404cd011e6d3aeccc94901b7de1dd03f5e898a15a0fe69f67a2df6ec14d05",
+          "captureSucceeded": true,
+          "evidenceRole": "linked2026-attachment-returned-captcha-HTML-not-PDF",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "2026 Xiangtan University Admission Brochure for International Students",
+      "selfFundedDateQuote": "Degree Programs:Self-funded programs are due on April 30, 2026, and scholarship programs are due in the corresponding admissions brochure.",
+      "awardYearTitle": "2026 Xiangtan University Admission Brochure for Chinese Government Scholarship \"High-Level Graduate\" Program",
+      "awardOwnDateQuote": "3.Deadline:March 1st, 2026.",
+      "attachmentLimitation": "请输入验证码下载附件",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-xtu-artificial-intelligence-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-xiangtan-university",
+          "canonicalUniversitySha256": "99c502f5eb7b20d844f53342dba0db136197f27ca79b9a061e4bb2518b99b7b6",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-xiangtan-university",
+              "canonicalUniversitySha256": "99c502f5eb7b20d844f53342dba0db136197f27ca79b9a061e4bb2518b99b7b6"
+            }
+          ],
+          "programId": "prog-gap-mew-csw-xtu-artificial-intelligence-bachelor",
+          "name": "Artificial Intelligence",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "74af87a57c6139d8ebe6344d26b725db250ab48f18f34053367feac2e4f8bf1e",
+          "canonicalCycleSha256": "74af87a57c6139d8ebe6344d26b725db250ab48f18f34053367feac2e4f8bf1e",
+          "canonicalProgramSha256": "a2c4f4db881c41459ee610d7a6a5475bacc81c9f1e31d193feafcd3015b91387",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-csw-xtu-artificial-intelligence-bachelor",
+              "canonicalProgramSha256": "a2c4f4db881c41459ee610d7a6a5475bacc81c9f1e31d193feafcd3015b91387"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-csw-xtu-artificial-intelligence-bachelor",
+            "src-gap-program-mew-csw-xtu-artificial-intelligence-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-xtu-artificial-intelligence-bachelor",
+              "canonicalSourceSha256": "df939e10177b83e36e1bd0d605d14eba90560c1efba9ab324bcb1e9ade70cd28",
+              "url": "https://en.xtu.edu.cn/Admissions/International_Programs/Bachelor_Programs.htm"
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-xtu-artificial-intelligence-bachelor-support-1",
+              "canonicalSourceSha256": "a269801fab5700686ea4888c20ff45c583f632f65cc2cb48867987ef9327a378",
+              "url": "https://gjjlc.xtu.edu.cn/info/1024/2754.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "closed",
+          "officialDeadline": "2026-04-30",
+          "candidateOfficialDeadline": "2026-04-30",
+          "reason": "exact2026-general-degree-guide-self-funded-cutoff-and-current-official-Chinese-bachelor-directory",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://gjjlc.xtu.edu.cn/info/1024/2754.htm",
+          "evidenceBodySha256": "4a0e1d8ef194e34bfad1d05b170330b6514e68005baf624686bc79ada844eb0f",
+          "evidenceTextSha256": "06cfa20fdcb7b01edb8705f440222ba717821fe2ff23bf4c276401e7e3803cdc",
+          "observedAt": "2026-10-19T12:41:04.177742+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched2026 applicant route is past. No successor-year state or permanent programme cessation is inferred.",
+          "quotedDate": "Degree Programs:Self-funded programs are due on April 30, 2026, and scholarship programs are due in the corresponding admissions brochure.",
+          "exactMajorQuote": "Artificial Intelligent",
+          "programmeIdentitySourcePin": {
+            "path": "xtu-bachelor.txt",
+            "sha256": "66205e0328f6482683638429343c858ad897e95d1840c1a30cdd1fd39b5fcbcb"
+          },
+          "fundingRoute": "Self-funded Chinese-taught international bachelor admission only; scholarship routes have separate prospectuses.",
+          "selfFundedOnly": true,
+          "scholarshipDeadlineNotBorrowed": true,
+          "currentMajorDirectoryRead": true,
+          "yearSpecificGeneralAdmissionGuideRead": true,
+          "yearSpecificCatalogueUnavailable": true,
+          "yearSpecificCatalogueFailure": "Linked2026 attachment returned captcha HTML. It is not used as proof; no captcha bypass or retry was performed.",
+          "programmeFactRenewalPerformed": false,
+          "canonicalProgrammeName": "Artificial Intelligence",
+          "officialDirectorySpelling": "Artificial Intelligent",
+          "minorEnglishSpellingDifferenceRetained": true,
+          "canonicalProgrammeNameUnchanged": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-xtu-communication-engineering-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-xiangtan-university",
+          "canonicalUniversitySha256": "99c502f5eb7b20d844f53342dba0db136197f27ca79b9a061e4bb2518b99b7b6",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-xiangtan-university",
+              "canonicalUniversitySha256": "99c502f5eb7b20d844f53342dba0db136197f27ca79b9a061e4bb2518b99b7b6"
+            }
+          ],
+          "programId": "prog-gap-mew-csw-xtu-communication-engineering-bachelor",
+          "name": "Communication Engineering",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "64e02dba1f02877ae66fa8258836bc0a4319620ab3f78e3e12019e416273142d",
+          "canonicalCycleSha256": "64e02dba1f02877ae66fa8258836bc0a4319620ab3f78e3e12019e416273142d",
+          "canonicalProgramSha256": "a4638c11c41656c54bcc8a6c3e45698f9400d6e736d885c5d65dcd4b84477132",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-csw-xtu-communication-engineering-bachelor",
+              "canonicalProgramSha256": "a4638c11c41656c54bcc8a6c3e45698f9400d6e736d885c5d65dcd4b84477132"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-csw-xtu-communication-engineering-bachelor",
+            "src-gap-program-mew-csw-xtu-communication-engineering-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-xtu-communication-engineering-bachelor",
+              "canonicalSourceSha256": "7aafa671715584a0f22c433e870a72ec9297186b1b89d111a6ae10cdec0d8e95",
+              "url": "https://en.xtu.edu.cn/Admissions/International_Programs/Bachelor_Programs.htm"
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-xtu-communication-engineering-bachelor-support-1",
+              "canonicalSourceSha256": "180be649b42ecda67a06dc01214b7505ddddbbe8d81448c51d337a705f34b956",
+              "url": "https://gjjlc.xtu.edu.cn/info/1024/2754.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "closed",
+          "officialDeadline": "2026-04-30",
+          "candidateOfficialDeadline": "2026-04-30",
+          "reason": "exact2026-general-degree-guide-self-funded-cutoff-and-current-official-Chinese-bachelor-directory",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://gjjlc.xtu.edu.cn/info/1024/2754.htm",
+          "evidenceBodySha256": "4a0e1d8ef194e34bfad1d05b170330b6514e68005baf624686bc79ada844eb0f",
+          "evidenceTextSha256": "06cfa20fdcb7b01edb8705f440222ba717821fe2ff23bf4c276401e7e3803cdc",
+          "observedAt": "2026-10-19T12:41:04.177742+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched2026 applicant route is past. No successor-year state or permanent programme cessation is inferred.",
+          "quotedDate": "Degree Programs:Self-funded programs are due on April 30, 2026, and scholarship programs are due in the corresponding admissions brochure.",
+          "exactMajorQuote": "Communication Engineering",
+          "programmeIdentitySourcePin": {
+            "path": "xtu-bachelor.txt",
+            "sha256": "66205e0328f6482683638429343c858ad897e95d1840c1a30cdd1fd39b5fcbcb"
+          },
+          "fundingRoute": "Self-funded Chinese-taught international bachelor admission only; scholarship routes have separate prospectuses.",
+          "selfFundedOnly": true,
+          "scholarshipDeadlineNotBorrowed": true,
+          "currentMajorDirectoryRead": true,
+          "yearSpecificGeneralAdmissionGuideRead": true,
+          "yearSpecificCatalogueUnavailable": true,
+          "yearSpecificCatalogueFailure": "Linked2026 attachment returned captcha HTML. It is not used as proof; no captcha bypass or retry was performed.",
+          "programmeFactRenewalPerformed": false,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-xtu-finance-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-xiangtan-university",
+          "canonicalUniversitySha256": "99c502f5eb7b20d844f53342dba0db136197f27ca79b9a061e4bb2518b99b7b6",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-xiangtan-university",
+              "canonicalUniversitySha256": "99c502f5eb7b20d844f53342dba0db136197f27ca79b9a061e4bb2518b99b7b6"
+            }
+          ],
+          "programId": "prog-gap-mew-csw-xtu-finance-bachelor",
+          "name": "Finance",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "50ba57a6c30c1d62a4de942206c5aae69528ee591607a2d0e056a09d18fbd1e5",
+          "canonicalCycleSha256": "50ba57a6c30c1d62a4de942206c5aae69528ee591607a2d0e056a09d18fbd1e5",
+          "canonicalProgramSha256": "998203fc93f553e67021e790258f4333da6235e7d8412ed2e69c679495c05363",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-csw-xtu-finance-bachelor",
+              "canonicalProgramSha256": "998203fc93f553e67021e790258f4333da6235e7d8412ed2e69c679495c05363"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-csw-xtu-finance-bachelor",
+            "src-gap-program-mew-csw-xtu-finance-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-xtu-finance-bachelor",
+              "canonicalSourceSha256": "a9f0ed2589807cb0c2625aebdb8b83410c419f73e1fc94a811d4815dae450482",
+              "url": "https://en.xtu.edu.cn/Admissions/International_Programs/Bachelor_Programs.htm"
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-xtu-finance-bachelor-support-1",
+              "canonicalSourceSha256": "2a1e5eb944691650d87aa40d80dd44e9e02e1dde5ef2267f1b530587c9e062f7",
+              "url": "https://gjjlc.xtu.edu.cn/info/1024/2754.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "closed",
+          "officialDeadline": "2026-04-30",
+          "candidateOfficialDeadline": "2026-04-30",
+          "reason": "exact2026-general-degree-guide-self-funded-cutoff-and-current-official-Chinese-bachelor-directory",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://gjjlc.xtu.edu.cn/info/1024/2754.htm",
+          "evidenceBodySha256": "4a0e1d8ef194e34bfad1d05b170330b6514e68005baf624686bc79ada844eb0f",
+          "evidenceTextSha256": "06cfa20fdcb7b01edb8705f440222ba717821fe2ff23bf4c276401e7e3803cdc",
+          "observedAt": "2026-10-19T12:41:04.177742+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched2026 applicant route is past. No successor-year state or permanent programme cessation is inferred.",
+          "quotedDate": "Degree Programs:Self-funded programs are due on April 30, 2026, and scholarship programs are due in the corresponding admissions brochure.",
+          "exactMajorQuote": "Finance",
+          "programmeIdentitySourcePin": {
+            "path": "xtu-bachelor.txt",
+            "sha256": "66205e0328f6482683638429343c858ad897e95d1840c1a30cdd1fd39b5fcbcb"
+          },
+          "fundingRoute": "Self-funded Chinese-taught international bachelor admission only; scholarship routes have separate prospectuses.",
+          "selfFundedOnly": true,
+          "scholarshipDeadlineNotBorrowed": true,
+          "currentMajorDirectoryRead": true,
+          "yearSpecificGeneralAdmissionGuideRead": true,
+          "yearSpecificCatalogueUnavailable": true,
+          "yearSpecificCatalogueFailure": "Linked2026 attachment returned captcha HTML. It is not used as proof; no captcha bypass or retry was performed.",
+          "programmeFactRenewalPerformed": false,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-xtu-philosophy-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-xiangtan-university",
+          "canonicalUniversitySha256": "99c502f5eb7b20d844f53342dba0db136197f27ca79b9a061e4bb2518b99b7b6",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-xiangtan-university",
+              "canonicalUniversitySha256": "99c502f5eb7b20d844f53342dba0db136197f27ca79b9a061e4bb2518b99b7b6"
+            }
+          ],
+          "programId": "prog-gap-mew-csw-xtu-philosophy-bachelor",
+          "name": "Philosophy",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "9784899879575a04e36688155e40db76c4325ca3e9b48ec0c5aedcd8994c64f8",
+          "canonicalCycleSha256": "9784899879575a04e36688155e40db76c4325ca3e9b48ec0c5aedcd8994c64f8",
+          "canonicalProgramSha256": "35aeb1e243e2d7acc6bf9abb1fcc2599e612da108eb4e70fe02f97962d79c565",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-csw-xtu-philosophy-bachelor",
+              "canonicalProgramSha256": "35aeb1e243e2d7acc6bf9abb1fcc2599e612da108eb4e70fe02f97962d79c565"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-csw-xtu-philosophy-bachelor",
+            "src-gap-program-mew-csw-xtu-philosophy-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-xtu-philosophy-bachelor",
+              "canonicalSourceSha256": "4d0494d70dadf909c111967d7911aba31d1ffc8c19f914885010d86cfc35dea4",
+              "url": "https://en.xtu.edu.cn/Admissions/International_Programs/Bachelor_Programs.htm"
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-xtu-philosophy-bachelor-support-1",
+              "canonicalSourceSha256": "1cbe8117ca4e17b9bfd6634c6a7785ad93505b48fb9b148c5d532dba7a4271d7",
+              "url": "https://gjjlc.xtu.edu.cn/info/1024/2754.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "closed",
+          "officialDeadline": "2026-04-30",
+          "candidateOfficialDeadline": "2026-04-30",
+          "reason": "exact2026-general-degree-guide-self-funded-cutoff-and-current-official-Chinese-bachelor-directory",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://gjjlc.xtu.edu.cn/info/1024/2754.htm",
+          "evidenceBodySha256": "4a0e1d8ef194e34bfad1d05b170330b6514e68005baf624686bc79ada844eb0f",
+          "evidenceTextSha256": "06cfa20fdcb7b01edb8705f440222ba717821fe2ff23bf4c276401e7e3803cdc",
+          "observedAt": "2026-10-19T12:41:04.177742+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched2026 applicant route is past. No successor-year state or permanent programme cessation is inferred.",
+          "quotedDate": "Degree Programs:Self-funded programs are due on April 30, 2026, and scholarship programs are due in the corresponding admissions brochure.",
+          "exactMajorQuote": "Philosophy",
+          "programmeIdentitySourcePin": {
+            "path": "xtu-bachelor.txt",
+            "sha256": "66205e0328f6482683638429343c858ad897e95d1840c1a30cdd1fd39b5fcbcb"
+          },
+          "fundingRoute": "Self-funded Chinese-taught international bachelor admission only; scholarship routes have separate prospectuses.",
+          "selfFundedOnly": true,
+          "scholarshipDeadlineNotBorrowed": true,
+          "currentMajorDirectoryRead": true,
+          "yearSpecificGeneralAdmissionGuideRead": true,
+          "yearSpecificCatalogueUnavailable": true,
+          "yearSpecificCatalogueFailure": "Linked2026 attachment returned captcha HTML. It is not used as proof; no captcha bypass or retry was performed.",
+          "programmeFactRenewalPerformed": false,
+          "noYearRollover": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-csw-xtu-cgs-high-level-postgraduate-2026",
+          "universityId": "uni-xiangtan-university",
+          "canonicalUniversitySha256": "99c502f5eb7b20d844f53342dba0db136197f27ca79b9a061e4bb2518b99b7b6",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-xiangtan-university",
+              "canonicalUniversitySha256": "99c502f5eb7b20d844f53342dba0db136197f27ca79b9a061e4bb2518b99b7b6"
+            }
+          ],
+          "programId": null,
+          "name": "Xiangtan University Chinese Government Scholarship High-Level Postgraduate Program 2026",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "explicit-same-source-extension",
+          "canonicalRecordSha256": "70caeb9341d4cf4b6326d1d5d2701f659c6978481b3a2dff8cbd8f710f90609f",
+          "canonicalScholarshipSha256": "70caeb9341d4cf4b6326d1d5d2701f659c6978481b3a2dff8cbd8f710f90609f",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-mew-csw-xtu-cgs-high-level-postgraduate-2026",
+            "src-gap-scholarship-mew-csw-xtu-cgs-high-level-postgraduate-2026-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-csw-xtu-cgs-high-level-postgraduate-2026",
+              "canonicalSourceSha256": "65a32623e5661b48f7098f6d05ea2747a38127abff49c17ab95aaf1171e194fd",
+              "url": "https://gjjlc.xtu.edu.cn/info/1024/2752.htm"
+            },
+            {
+              "sourceId": "src-gap-scholarship-mew-csw-xtu-cgs-high-level-postgraduate-2026-support-1",
+              "canonicalSourceSha256": "fa437a609b9c9722d4b25fc43dfc5200300c4927d027911a3a4654f3341ffc36",
+              "url": "https://gjjlc.xtu.edu.cn/info/1024/2754.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "closed",
+          "officialDeadline": "2026-03-01",
+          "candidateOfficialDeadline": "2026-03-01",
+          "reason": "independent-exact2026-TypeB-high-level-graduate-award-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://gjjlc.xtu.edu.cn/info/1024/2752.htm",
+          "evidenceBodySha256": "0edfd8b83247ebcf8b992db115479ea275ef9c08bb9e25f29ce509fb1d1d205f",
+          "evidenceTextSha256": "3d2b30aeee764a35124db3c5827e660c88f7b635c4080f4c04daf003782fb14f",
+          "observedAt": "2026-10-19T12:41:14.879276+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched2026 applicant route is past. No successor-year state or permanent programme cessation is inferred.",
+          "quotedDate": "3.Deadline:March 1st, 2026.",
+          "fundingRoute": "2026 Chinese Government Scholarship High-Level Graduate TypeB at Xiangtan University",
+          "awardOwnDateNotBorrowed": true,
+          "applicantVsInstitutionalStage": "Application-system steps precede the stated March1 deadline; university review and CSC final admission follow the applicant stage.",
+          "undergraduateSelfFundedDeadlineNotBorrowed": "2026-04-30"
+        }
+      ]
+    },
+    {
+      "key": "xjau2026-major-catalogue-only-mobile-invalid-desktop410",
+      "universityId": "uni-xinjiang-agricultural-university",
+      "evidence": [
+        {
+          "name": "xjau-guide-pdf",
+          "url": "https://cie.xjau.edu.cn/_upload/article/files/82/2f/97478cf44d7799e481014ed1192e/57311611-14bb-4339-ad62-fb264298c9ee.pdf",
+          "observedAt": "2026-10-19T12:41:10.408393+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://cie.xjau.edu.cn/_upload/article/files/82/2f/97478cf44d7799e481014ed1192e/57311611-14bb-4339-ad62-fb264298c9ee.pdf",
+          "contentType": "application/pdf",
+          "bytes": 90575,
+          "rawPath": "xjau-guide-pdf.pdf",
+          "rawSha256": "ff390de68f10a08bda69e1fee2c5c30376988a4baf17f2b18f0e08a472312b2f",
+          "pageCount": 3,
+          "textPath": "xjau-guide-pdf.txt",
+          "textSha256": "9a8e58f0577fea09ca4beb5985e8ab1b364c44d752ed9a4563a99d65c6f092ad",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-three-page2026-major-catalogue-identity-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "xjau-guide",
+          "url": "https://cie.xjau.edu.cn/2026/0319/c1288a113905/pagem.htm",
+          "observedAt": "2026-10-19T12:41:14.305253+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://cie.xjau.edu.cn/2026/0319/c1288a113905/pagem.psp",
+          "contentType": "text/html;charset=UTF-8",
+          "bytes": 2023,
+          "rawPath": "xjau-guide.html",
+          "rawSha256": "073b2b828ab7653ad4b5fb5a6052350dc83dc30a714f2630e47d396be099cb24",
+          "textPath": "xjau-guide.txt",
+          "textSha256": "9d9ef9163cd587e9ed835f378aaa76e14ed65efa97611000f5171973bd9dc7eb",
+          "captureSucceeded": true,
+          "evidenceRole": "HTTP200-invalid-mobile-column-message-not-guide",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "xjau-guide-fallback",
+          "url": "https://cie.xjau.edu.cn/2026/0319/c1288a113905/page.htm",
+          "observedAt": "2026-10-19T12:43:55.521096+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "HTTP Error 410: ",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "one-desktop-recovery-returnedHTTP410",
+          "fullFactsCertified": false
+        }
+      ],
+      "offlinePdf": {
+        "path": "pdf-offline-extraction.json",
+        "sha256": "bd19750fd8a396694959768e640262e13f1df2423aa8294511941c5590fe7779"
+      },
+      "yearTitle": "表 1 新疆农业大学 2026 年来华留学生招生专业目录",
+      "invalidColumnQuote": "提示：无效的栏目参数！",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-breadth-xjau-m-veterinary-medicine-2026-2027-autumn",
+          "universityId": "uni-xinjiang-agricultural-university",
+          "canonicalUniversitySha256": "acc9ae89b5baca53a354f427d693f0f5781eeb2c2e579cfa0656e2f90edf561c",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-xinjiang-agricultural-university",
+              "canonicalUniversitySha256": "acc9ae89b5baca53a354f427d693f0f5781eeb2c2e579cfa0656e2f90edf561c"
+            }
+          ],
+          "programId": "prog-gap-breadth-xjau-m-veterinary-medicine",
+          "name": "Veterinary Medicine",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "b1a358538329f0fc392850cbf1d9d9c0ba75fd82d941d7f2d6fb1395213859c5",
+          "canonicalCycleSha256": "b1a358538329f0fc392850cbf1d9d9c0ba75fd82d941d7f2d6fb1395213859c5",
+          "canonicalProgramSha256": "1dfc4aa869ffe5800865c5dff68be0d38a5a883a3a722e2e1786d17c8bbc3825",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-breadth-xjau-m-veterinary-medicine",
+              "canonicalProgramSha256": "1dfc4aa869ffe5800865c5dff68be0d38a5a883a3a722e2e1786d17c8bbc3825"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-breadth-xjau-m-veterinary-medicine"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-breadth-xjau-m-veterinary-medicine",
+              "canonicalSourceSha256": "b25d188ed9822209e10dda4216908d5539abbb40b360a078e51ad4ec2a82e5c3",
+              "url": "https://cie.xjau.edu.cn/_upload/article/files/82/2f/97478cf44d7799e481014ed1192e/57311611-14bb-4339-ad62-fb264298c9ee.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "readable2026-catalogue-has-major-identity-no-applicant-window-and-guide-recovery-failed",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://cie.xjau.edu.cn/_upload/article/files/82/2f/97478cf44d7799e481014ed1192e/57311611-14bb-4339-ad62-fb264298c9ee.pdf",
+          "evidenceBodySha256": "ff390de68f10a08bda69e1fee2c5c30376988a4baf17f2b18f0e08a472312b2f",
+          "evidenceTextSha256": "9a8e58f0577fea09ca4beb5985e8ab1b364c44d752ed9a4563a99d65c6f092ad",
+          "observedAt": "2026-10-19T12:41:10.408393+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "majorQuote": "Veterinary Medicine",
+          "catalogueOnlyNotDeadlineProof": true,
+          "guideInvalidResponseNotDateProof": true,
+          "desktopFallbackHTTP410": true,
+          "retryPolicy": "cooldown-after-one-desktop-URL-fallback",
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-xjau-b-animal-medicine-2026-2027-autumn",
+          "universityId": "uni-xinjiang-agricultural-university",
+          "canonicalUniversitySha256": "acc9ae89b5baca53a354f427d693f0f5781eeb2c2e579cfa0656e2f90edf561c",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-xinjiang-agricultural-university",
+              "canonicalUniversitySha256": "acc9ae89b5baca53a354f427d693f0f5781eeb2c2e579cfa0656e2f90edf561c"
+            }
+          ],
+          "programId": "prog-gap-local-strong-xjau-b-animal-medicine",
+          "name": "Animal Medicine",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "1ab41a4e196bc6be5c740c99af36298b751e1c3b14f2ac5c8b52cd527d97d57a",
+          "canonicalCycleSha256": "1ab41a4e196bc6be5c740c99af36298b751e1c3b14f2ac5c8b52cd527d97d57a",
+          "canonicalProgramSha256": "0436f56efba68acae68ce3a9c0cf26e10d490e8f1b21cee98577f24a221cd6d5",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-xjau-b-animal-medicine",
+              "canonicalProgramSha256": "0436f56efba68acae68ce3a9c0cf26e10d490e8f1b21cee98577f24a221cd6d5"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-strong-xjau-b-animal-medicine",
+            "src-gap-program-local-strong-xjau-b-animal-medicine-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-xjau-b-animal-medicine",
+              "canonicalSourceSha256": "9817d2f692ff5707c6ba90824fe09604f4dbab7b5fe86bb7dcc1793272733dcb",
+              "url": "https://cie.xjau.edu.cn/_upload/article/files/82/2f/97478cf44d7799e481014ed1192e/57311611-14bb-4339-ad62-fb264298c9ee.pdf"
+            },
+            {
+              "sourceId": "src-gap-program-local-strong-xjau-b-animal-medicine-support-1",
+              "canonicalSourceSha256": "275fa760a1e91976bff6e05c05af45fbb22a500d84377557e97cb9780085bba5",
+              "url": "https://cie.xjau.edu.cn/2026/0319/c1288a113905/pagem.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "readable2026-catalogue-has-major-identity-no-applicant-window-and-guide-recovery-failed",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://cie.xjau.edu.cn/_upload/article/files/82/2f/97478cf44d7799e481014ed1192e/57311611-14bb-4339-ad62-fb264298c9ee.pdf",
+          "evidenceBodySha256": "ff390de68f10a08bda69e1fee2c5c30376988a4baf17f2b18f0e08a472312b2f",
+          "evidenceTextSha256": "9a8e58f0577fea09ca4beb5985e8ab1b364c44d752ed9a4563a99d65c6f092ad",
+          "observedAt": "2026-10-19T12:41:10.408393+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "majorQuote": "Animal Medicine",
+          "catalogueOnlyNotDeadlineProof": true,
+          "guideInvalidResponseNotDateProof": true,
+          "desktopFallbackHTTP410": true,
+          "retryPolicy": "cooldown-after-one-desktop-URL-fallback",
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-xjau-b-animal-medicine-2026-2027-other",
+          "universityId": "uni-xinjiang-agricultural-university",
+          "canonicalUniversitySha256": "acc9ae89b5baca53a354f427d693f0f5781eeb2c2e579cfa0656e2f90edf561c",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-xinjiang-agricultural-university",
+              "canonicalUniversitySha256": "acc9ae89b5baca53a354f427d693f0f5781eeb2c2e579cfa0656e2f90edf561c"
+            }
+          ],
+          "programId": "prog-gap-local-strong-xjau-b-animal-medicine",
+          "name": "Animal Medicine",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "6bbaed082d8979b4b7759314b06a6d734b7a2d5dc95440df89cf08a68d75b4e9",
+          "canonicalCycleSha256": "6bbaed082d8979b4b7759314b06a6d734b7a2d5dc95440df89cf08a68d75b4e9",
+          "canonicalProgramSha256": "0436f56efba68acae68ce3a9c0cf26e10d490e8f1b21cee98577f24a221cd6d5",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-xjau-b-animal-medicine",
+              "canonicalProgramSha256": "0436f56efba68acae68ce3a9c0cf26e10d490e8f1b21cee98577f24a221cd6d5"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-strong-xjau-b-animal-medicine",
+            "src-gap-program-local-strong-xjau-b-animal-medicine-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-xjau-b-animal-medicine",
+              "canonicalSourceSha256": "9817d2f692ff5707c6ba90824fe09604f4dbab7b5fe86bb7dcc1793272733dcb",
+              "url": "https://cie.xjau.edu.cn/_upload/article/files/82/2f/97478cf44d7799e481014ed1192e/57311611-14bb-4339-ad62-fb264298c9ee.pdf"
+            },
+            {
+              "sourceId": "src-gap-program-local-strong-xjau-b-animal-medicine-support-1",
+              "canonicalSourceSha256": "275fa760a1e91976bff6e05c05af45fbb22a500d84377557e97cb9780085bba5",
+              "url": "https://cie.xjau.edu.cn/2026/0319/c1288a113905/pagem.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "readable2026-catalogue-has-major-identity-no-applicant-window-and-guide-recovery-failed",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://cie.xjau.edu.cn/_upload/article/files/82/2f/97478cf44d7799e481014ed1192e/57311611-14bb-4339-ad62-fb264298c9ee.pdf",
+          "evidenceBodySha256": "ff390de68f10a08bda69e1fee2c5c30376988a4baf17f2b18f0e08a472312b2f",
+          "evidenceTextSha256": "9a8e58f0577fea09ca4beb5985e8ab1b364c44d752ed9a4563a99d65c6f092ad",
+          "observedAt": "2026-10-19T12:41:10.408393+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "majorQuote": "Animal Medicine",
+          "catalogueOnlyNotDeadlineProof": true,
+          "guideInvalidResponseNotDateProof": true,
+          "desktopFallbackHTTP410": true,
+          "retryPolicy": "cooldown-after-one-desktop-URL-fallback",
+          "noYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "xzhmu2026-English-clinical-MBBS-exact-applicant-period",
+      "universityId": "uni-xuzhou-medical-university",
+      "evidence": [
+        {
+          "name": "xzhmu-guide",
+          "url": "https://gjjy.xzhmu.edu.cn/info/1010/2412.htm",
+          "observedAt": "2026-10-19T12:41:14.865760+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://gjjy.xzhmu.edu.cn/info/1010/2412.htm",
+          "contentType": "text/html",
+          "bytes": 12019,
+          "rawPath": "xzhmu-guide.html",
+          "rawSha256": "f5ea262b0579ac63f71e7ca5903e48e421ad659439b10d6c94fbb638ae01e6ac",
+          "textPath": "xzhmu-guide.txt",
+          "textSha256": "d4d5a9570c717d7e6602f16ba5a93c5e2a27f7bae04ed4e4dbb887effe0863a4",
+          "captureSucceeded": true,
+          "evidenceRole": "2026-HTML-title-and-embedded-original-PDF-locator",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "xzhmu-guide-pdf",
+          "url": "https://gjjy.xzhmu.edu.cn/__local/3/F5/8E/6214DD9FFBE48F60FC6B6711547_773C26F0_34CAF.pdf",
+          "observedAt": "2026-10-19T12:43:55.520084+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://gjjy.xzhmu.edu.cn/__local/3/F5/8E/6214DD9FFBE48F60FC6B6711547_773C26F0_34CAF.pdf",
+          "contentType": "application/pdf",
+          "bytes": 216239,
+          "rawPath": "xzhmu-guide-pdf.pdf",
+          "rawSha256": "e94d7f6b47c483572de64a5ce65757f2d9d5a56882eb73aefdcf8483a1362b59",
+          "pageCount": 6,
+          "textPath": "xzhmu-guide-pdf.txt",
+          "textSha256": "527fd6a5ee23cfe910da2bdeb7d779b86b7d63bf867654f5cc5463b8b71dbc71",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-six-page2026-English-clinical-original",
+          "fullFactsCertified": false
+        }
+      ],
+      "offlinePdf": {
+        "path": "pdf-offline-extraction.json",
+        "sha256": "bd19750fd8a396694959768e640262e13f1df2423aa8294511941c5590fe7779"
+      },
+      "yearTitle": "徐州医科大学 2026 年外国留学生 本科临床医学专业（英语授课）招生简章",
+      "quotedDate": "报名时间：2026 年 1 月 26 日至 6 月 30 日（如有调整，请及时关注学院网站和在线申请网页新闻通知以及系统站内信）",
+      "MBBSIdentityQuote": "Bachelor of Medicine and Bachelor of Surgery",
+      "reportingDateExcluded": "报到时间：2026 年 9 月中旬。",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-breadth-xzhmu-b-clinical-medicine-en-2026-2027-autumn",
+          "universityId": "uni-xuzhou-medical-university",
+          "canonicalUniversitySha256": "225d0f10ef3afb09fcbbc7beb9cd2d31cafc1bc8f2328040208583b27602f298",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-xuzhou-medical-university",
+              "canonicalUniversitySha256": "225d0f10ef3afb09fcbbc7beb9cd2d31cafc1bc8f2328040208583b27602f298"
+            }
+          ],
+          "programId": "prog-gap-breadth-xzhmu-b-clinical-medicine-en",
+          "name": "Clinical Medicine (English-taught)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "eb6c0067ff8c63512d62dff3c4e097c1e47f462cc4875b3305f86fcdc65743f8",
+          "canonicalCycleSha256": "eb6c0067ff8c63512d62dff3c4e097c1e47f462cc4875b3305f86fcdc65743f8",
+          "canonicalProgramSha256": "802f3e1a0ada5162df98874bd79d26fb081e1c60e436628d49375908737966eb",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-breadth-xzhmu-b-clinical-medicine-en",
+              "canonicalProgramSha256": "802f3e1a0ada5162df98874bd79d26fb081e1c60e436628d49375908737966eb"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-breadth-xzhmu-b-clinical-medicine-en"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-breadth-xzhmu-b-clinical-medicine-en",
+              "canonicalSourceSha256": "a1cfc0b46f832f61b7e8cb4ef8196aae8d2bb185691184ed8fd530f6269ca233",
+              "url": "https://gjjy.xzhmu.edu.cn/info/1010/2412.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "reason": "same-explicit2026-English-clinical-medicine-MBBS-bachelor-original-and-applicant-period",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://gjjy.xzhmu.edu.cn/__local/3/F5/8E/6214DD9FFBE48F60FC6B6711547_773C26F0_34CAF.pdf",
+          "evidenceBodySha256": "e94d7f6b47c483572de64a5ce65757f2d9d5a56882eb73aefdcf8483a1362b59",
+          "evidenceTextSha256": "527fd6a5ee23cfe910da2bdeb7d779b86b7d63bf867654f5cc5463b8b71dbc71",
+          "observedAt": "2026-10-19T12:43:55.520084+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched2026 applicant route is past. No successor-year state or permanent programme cessation is inferred.",
+          "quotedDate": "报名时间：2026 年 1 月 26 日至 6 月 30 日（如有调整，请及时关注学院网站和在线申请网页新闻通知以及系统站内信）",
+          "exactProgrammeQuote": "临床医学本科（英语授课）",
+          "MBBSIdentityQuote": "Bachelor of Medicine and Bachelor of Surgery",
+          "sourcePdfDatePage": 2,
+          "sourcePdfIdentityPage": 1,
+          "applicantDeadlineNotSeptemberReportingDate": true,
+          "fundingRoute": "General2026 English-taught clinical-medicine bachelor/MBBS admission; separate award deadlines excluded.",
+          "possibleAdjustmentClauseRetained": true,
+          "observedOriginalNotExhaustiveSubsequentNoticeSearch": true,
+          "noExtensionAssumed": true,
+          "scholarshipDatesNotInferred": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-xzmu-b-mbbs-2026-2027-other",
+          "universityId": "uni-xuzhou-medical-university",
+          "canonicalUniversitySha256": "225d0f10ef3afb09fcbbc7beb9cd2d31cafc1bc8f2328040208583b27602f298",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-xuzhou-medical-university",
+              "canonicalUniversitySha256": "225d0f10ef3afb09fcbbc7beb9cd2d31cafc1bc8f2328040208583b27602f298"
+            }
+          ],
+          "programId": "prog-gap-local-strong-xzmu-b-mbbs",
+          "name": "Clinical Medicine (MBBS)",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "86ead774ba870bf812d0430205956a6ee07b334fee911a7972735a35672643d9",
+          "canonicalCycleSha256": "86ead774ba870bf812d0430205956a6ee07b334fee911a7972735a35672643d9",
+          "canonicalProgramSha256": "15fabf9e7d7e0e4ed7ca8c72618222c33b2b30e0d2a1f5625ec3117b01fe100a",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-xzmu-b-mbbs",
+              "canonicalProgramSha256": "15fabf9e7d7e0e4ed7ca8c72618222c33b2b30e0d2a1f5625ec3117b01fe100a"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-strong-xzmu-b-mbbs"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-xzmu-b-mbbs",
+              "canonicalSourceSha256": "f6054bd8d2cdc2b1723b225851fa3f52b880ac5ac77ad772a755e4a7aa5d4c13",
+              "url": "https://gjjy.xzhmu.edu.cn/info/1010/2412.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "publicationBefore": false,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "This exact raw ID is not published in the frozen input snapshot; date-only candidate evidence neither changes publication nor certifies school coverage.",
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "reason": "same-explicit2026-English-clinical-medicine-MBBS-bachelor-original-and-applicant-period",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://gjjy.xzhmu.edu.cn/__local/3/F5/8E/6214DD9FFBE48F60FC6B6711547_773C26F0_34CAF.pdf",
+          "evidenceBodySha256": "e94d7f6b47c483572de64a5ce65757f2d9d5a56882eb73aefdcf8483a1362b59",
+          "evidenceTextSha256": "527fd6a5ee23cfe910da2bdeb7d779b86b7d63bf867654f5cc5463b8b71dbc71",
+          "observedAt": "2026-10-19T12:43:55.520084+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched2026 applicant route is past. No successor-year state or permanent programme cessation is inferred.",
+          "quotedDate": "报名时间：2026 年 1 月 26 日至 6 月 30 日（如有调整，请及时关注学院网站和在线申请网页新闻通知以及系统站内信）",
+          "exactProgrammeQuote": "临床医学本科（英语授课）",
+          "MBBSIdentityQuote": "Bachelor of Medicine and Bachelor of Surgery",
+          "sourcePdfDatePage": 2,
+          "sourcePdfIdentityPage": 1,
+          "applicantDeadlineNotSeptemberReportingDate": true,
+          "fundingRoute": "General2026 English-taught clinical-medicine bachelor/MBBS admission; separate award deadlines excluded.",
+          "possibleAdjustmentClauseRetained": true,
+          "observedOriginalNotExhaustiveSubsequentNoticeSearch": true,
+          "noExtensionAssumed": true,
+          "scholarshipDatesNotInferred": true,
+          "noYearRollover": true
+        }
+      ]
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "reportSha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "batch": "official-batch-025",
+      "reportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f"
+    },
+    {
+      "batch": "official-batch-026",
+      "reportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9"
+    },
+    {
+      "batch": "official-batch-027",
+      "reportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+    },
+    {
+      "batch": "official-batch-028",
+      "reportSha256": "c1ee48a947ab94feac0f853531921d888b4ce30b24781afe7cb9e422e29f9276"
+    },
+    {
+      "batch": "official-batch-029",
+      "reportSha256": "6fa308e70e7e0ad0a0436ed5103eb067928fc9494ba1e977fdaba85cdd3d2243"
+    },
+    {
+      "batch": "official-batch-030",
+      "reportSha256": "95ae6d26c4de9030e7debe25a19d12f12d23235c3633a3b75aca538996958668"
+    },
+    {
+      "batch": "official-batch-031",
+      "reportSha256": "7f213f09e6f2e397a41ce67e2a81c68c9f4bed5f93f83d60d1cff37a42e5cf59"
+    },
+    {
+      "batch": "official-batch-032",
+      "reportSha256": "7ca2417531ff19ae0b9c7b348bf40be89d9029a48b7930172d876488b663b982"
+    },
+    {
+      "batch": "official-batch-033",
+      "reportSha256": "9087e4d1d7242809498d7f0a9c1b740419da39f52ee863e4d4849bd1aef44698"
+    },
+    {
+      "batch": "official-batch-034",
+      "reportSha256": "3ddc3e1c816b3c4927c13304492b76fd1fc8f5dc6ff90ec1043a770ccd55b9d0"
+    },
+    {
+      "batch": "official-batch-035",
+      "reportSha256": "b621c16cdbd0d01ca22059bd83f92e283d43629394ddab64ba7c86486ae7dafb"
+    },
+    {
+      "batch": "official-batch-036",
+      "reportSha256": "db944c0a39ebdae71e53866c10f70f6d98b60ef77ba034891224afe1c0bf7f50"
+    }
+  ],
+  "validation": {
+    "exactSeventeenIdsCoveredOnce": true,
+    "baseIdsMatchFrozenRootDispatch": true,
+    "noAssessedOrPriorApprovedOverlap": true,
+    "allSixCanonicalInputsUnchanged": true,
+    "canonicalRecordParentLinkedProgrammeSourceAndUniversityPinsSaved": true,
+    "publicationFlagsMatchFrozenInventory": true,
+    "quotedFragmentsMatchSavedOriginalText": true,
+    "relevantPdfPagesVisuallyReadAndPinned": true,
+    "unknownOpeningNotAssessed": true,
+    "closedDatesAreExplicitPastIsoDays": true,
+    "extensionsMatchRootSelectionReceipt": true,
+    "priorReportsOneThroughThirtySixPinned": true,
+    "failedSourcesSingleFallbackThenCooldown": true
+  }
+}

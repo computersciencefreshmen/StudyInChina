@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-19T12:49:08.593Z",
+  "firstCaptureExecution": "direct-escalated-public-official-read-authorized-by-root-to-avoid-known-local-sandbox-socket-denial",
+  "sandboxDeniedRequests": 0,
+  "registeredDistinctUrlsAttempted": 10,
+  "nativeOriginRequests": 13,
+  "linkedOriginalRequests": 2,
+  "invalidMobilePageFallbackRequests": 1,
+  "webFallbackRequests": 1,
+  "normalTls": true,
+  "perRequestTimeoutSeconds": 25,
+  "nativeReadableHtmlBodies": 9,
+  "nativePdfBodies": 2,
+  "nativeFailures": [
+    {
+      "name": "whut-guide",
+      "type": "TLS-handshake-timeout",
+      "fallback": "one-web-open-timeout-then-cooldown"
+    },
+    {
+      "name": "xjau-guide-fallback",
+      "type": "HTTP410-after-original-mobile-invalid-column-page",
+      "fallback": "single-desktop-URL-recovery-then-cooldown"
+    }
+  ],
+  "captchaResponse": "XTU linked2026 catalogue returned captcha HTML; retained as captcha, no bypass and no date proof",
+  "paidCalls": 0,
+  "originalPdfDownloadRetries": 0
+}

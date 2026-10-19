@@ -1,0 +1,1884 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-039-20261019",
+  "state": "completed-eight-unknown-five-blocked-exact-dispatched-records",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T12:47:52.803Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256Before": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256After": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v10.json",
+  "targetQueueSha256": "c92366918ff347204724332f662e7aef1885e518a82ce5b4b6427edd54b4733d",
+  "selectionSha256": "350d87d5cc963314b151d6022b4a40aa572b488f4d32b036f27b3634f1487559",
+  "selectedUniversityIds": [
+    "uni-zhejiang-university",
+    "uni-zhejiang-university-of-finance-and-economics",
+    "uni-zhengzhou-university",
+    "uni-zhongnan-university-of-economics-and-law",
+    "uni-zhejiang-university-of-technology",
+    "uni-anhui-medical-university",
+    "uni-beijing-foreign-studies-university"
+  ],
+  "scope": {
+    "universityScopesAttempted": 7,
+    "newlyCheckedInstitutions": 5,
+    "previouslyCheckedInstitutionsWithNewRecordScope": [
+      "uni-anhui-medical-university",
+      "uni-beijing-foreign-studies-university"
+    ],
+    "notAClaimOfWholeSchoolCompletion": true
+  },
+  "selection": {
+    "baseQueueRecords": 13,
+    "additionalSameSourceRecords": 0,
+    "totalRecords": 13,
+    "baseQueueRecordIds": [
+      "scholarship-zhejiang-provincial-government",
+      "cycle-2027-zhejiang-university-computer-science-bachelor",
+      "scholarship-zhejiang-university-international-student",
+      "cycle-gap-remaining-zufe-b-finance-2025-2026-other",
+      "cycle-gap-sparse-depth-0808-zzu-medical-foundation-2026-2027-other-fee-reference",
+      "cycle-gap-sparse-depth-0808-zuel-chinese-language-2026-2027-other-fee-reference",
+      "cycle-gap-sparse-depth-0808-zuel-imba-master-2026-2027-other-fee-reference",
+      "cycle-gap-sparse-depth-0808-zuel-international-law-english-master-2026-2027-other-fee-reference",
+      "sch-gap-wave8-zjut-freshman-scholarship-2026",
+      "sch-gap-mve-ecs-ahmu-anhui-government-scholarship",
+      "cycle-2026-24d32898799e",
+      "cycle-2026-72c147058578",
+      "cycle-2026-c6f79b90dcfc"
+    ],
+    "additionalSameSourceRecordIds": [],
+    "baseDispatch": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1236/base-dispatch-v1.json",
+      "sha256": "da801752b913a8ec793ece3e93b015bb2c6d78c9ed224f6c277d78c788165e5c",
+      "reportNumber": "039"
+    },
+    "extensionReceipt": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1236/additional-same-source-selection-v1.json",
+      "sha256": "f5232de8826c7ebb4b2ae05b33da90fcac5a8866096c7045db526d9a6b4ad95d",
+      "noExtraRecordsForTheseUniversities": true
+    }
+  },
+  "acquisition": {
+    "registeredDistinctUrlsAttempted": 9,
+    "directLinkedSupportUrlsAttempted": 2,
+    "publicGetOperations": 11,
+    "webFallbackRequests": 3,
+    "rawBodiesSaved": 8,
+    "nativeHtmlBodies": 8,
+    "nativePdfBodies": 0,
+    "normalTls": true,
+    "paidModelCalls": 0,
+    "archiveOriginalsReused": 0,
+    "archiveScopeCheck": {
+      "path": "archive-source-check.json",
+      "sha256": "482f8d0f114cd99f076918842d07563dde20bfcac182e1fca491c1f2da04ad8d"
+    },
+    "diagnostics": {
+      "path": "acquisition-diagnostics.json",
+      "sha256": "5baae197d6aec32e9203ddfd0cfb3bc282de514820b37fbd0e51a88f0b013a37"
+    },
+    "captureManifestPins": [
+      {
+        "path": "captures.json",
+        "sha256": "83d87a1f945a74e3fa8e5aae38b348dd6380805734e966457fa6d3110146c26a"
+      },
+      {
+        "path": "support-captures.json",
+        "sha256": "de7aadaf0951b8a900a35fe999a757bfaecfe9a1c7dfb69ec4e891da771556db"
+      }
+    ],
+    "webFallback": {
+      "path": "web-fallback.json",
+      "sha256": "9bfece88151a6a5449631c175a611c38bb00ff7ee98759dcd50085067c316c9c"
+    },
+    "bodyInterpretation": "Eight HTML bodies saved, including CAPTCHA HTML returned by the linked ZUFE PDF download. No PDF bytes were obtained. ZZU registered pages timed out in native and one web read each; ZUEL PDF404 repeated once through web. BFSU exact7182 undergraduate body was read once after inspecting mismatched prior evidence. No archived observation is represented as a new body or silently reused across routes.",
+    "heldWindowObservation": {
+      "path": "bfsu-spring-window-observation-v1.json",
+      "sha256": "c271cd27c32cd785abafe5a239d3b0a039d77e2c77510712e0f915ee256621f6"
+    }
+  },
+  "summary": {
+    "schoolsAttempted": 7,
+    "newlyScopedSchools": 5,
+    "previouslyCheckedInstitutionsWithNewRecordScope": 2,
+    "recordsAssessed": 13,
+    "baseQueueRecords": 13,
+    "additionalSameSourceRecords": 0,
+    "admissionCyclesAssessed": 9,
+    "scholarshipsAssessed": 4,
+    "recordResults": {
+      "unknown": 8,
+      "blocked": 5
+    },
+    "exactDeadlineCandidates": 0,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "precisionIssues": [
+    {
+      "universityId": "uni-beijing-foreign-studies-university",
+      "recordIds": [
+        "cycle-2026-24d32898799e",
+        "cycle-2026-72c147058578",
+        "cycle-2026-c6f79b90dcfc"
+      ],
+      "type": "explicit2026-application-window-with-ambiguous-spring-commencement-year",
+      "sourceWindow": "Spring Intake: October 15, 2026 — December 15, 2026",
+      "sourceEnrollmentScope": "international undergraduate applicants intending to enroll in 2026",
+      "targetAcademicYear": "2026-2027",
+      "result": "unknown",
+      "explanation": "Keep the explicit application years as observations; do not manufacture a2027 spring commencement statement or substitute the distinct ICLT/non-degree route.",
+      "observationReceipt": {
+        "path": "bfsu-spring-window-observation-v1.json",
+        "sha256": "c271cd27c32cd785abafe5a239d3b0a039d77e2c77510712e0f915ee256621f6"
+      }
+    }
+  ],
+  "rules": [
+    "Date-only source evidence. Canonical dates, status, publication and whole-record freshness remain unchanged.",
+    "Root exact dispatch assigns the shared Zhejiang provincial award once; other institution mappings are not date-certified.",
+    "AHMU and BFSU are new record scopes at previously checked institutions, not new-school completions.",
+    "Unknown and blocked do not establish open or closed availability. No programme cessation is inferred from source failure.",
+    "No successor-year rollover; BFSU explicit late2026 application dates are preserved as observations without inventing a2027 commencement statement.",
+    "Independent awards do not borrow general admission dates or historical CSC dates.",
+    "Each failed official source received at most one reasonable fallback before cooldown. CAPTCHA attachment was not bypassed."
+  ],
+  "groups": [
+    {
+      "key": "zju-2027-bachelor-and-two-independent-awards-no-target-dates",
+      "universityId": "uni-zhejiang-university",
+      "evidence": [
+        {
+          "name": "zju-admissions",
+          "url": "https://iczu.zju.edu.cn/admissionsen/",
+          "observedAt": "2026-10-19T12:41:48.411270+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iczu.zju.edu.cn/admissionsen/",
+          "contentType": "text/html",
+          "bytes": 29999,
+          "rawPath": "zju-admissions.html",
+          "rawSha256": "7ca3d5aec63b608ddf5c1ccfb8c653f381aae325de9a617211f3316c0385da8e",
+          "textPath": "zju-admissions.txt",
+          "textSha256": "95cb8484b989bb735d425a496e6400a9209e7b065f7658d18ad2dfc2dc4ba8dc",
+          "captureSucceeded": true,
+          "evidenceRole": "registered-admissions-landing-not-date-proof",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "zju-scholarships",
+          "url": "https://iczu.zju.edu.cn/admissionsen/wcholarships/list.htm",
+          "observedAt": "2026-10-19T12:43:39.312266+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iczu.zju.edu.cn/admissionsen/wcholarships/list.htm",
+          "contentType": "text/html",
+          "bytes": 23226,
+          "rawPath": "zju-scholarships.html",
+          "rawSha256": "d9df1f8e0c78e7585fdfd92992a23895a5fa4886fbbfb93d2a2fe4efb34415e0",
+          "textPath": "zju-scholarships.txt",
+          "textSha256": "85fa2bbe5547716a7f7985c1ccf649edab95d06345ed1f7a739616614006341f",
+          "captureSucceeded": true,
+          "evidenceRole": "one-direct-linked-scholarship-list-not-date-proof",
+          "fullFactsCertified": false
+        }
+      ],
+      "awardListingQuote": "Zhejiang Government Scholarship",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-zhejiang-provincial-government",
+          "universityId": "uni-zhejiang-university",
+          "canonicalUniversitySha256": "bb8693d32ad7cea34c5b86b0cce20a76dd3af680f4226332c27135c271a9519a",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-zhejiang-university",
+              "canonicalUniversitySha256": "bb8693d32ad7cea34c5b86b0cce20a76dd3af680f4226332c27135c271a9519a"
+            },
+            {
+              "universityId": "uni-zhejiang-gongshang-university",
+              "canonicalUniversitySha256": "b59e8e95635e8cdb4ccc4ecb34e22202334eb084e9276fbff48e28d8a0d78652"
+            },
+            {
+              "universityId": "uni-zhejiang-sci-tech-university",
+              "canonicalUniversitySha256": "624bf39d0eb0d056a8aeebb49fc67946de149013cb905c828c1d1b3d96ea5214"
+            }
+          ],
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "e279eabed65113b7507a3f0c890be8be1a920e4e651b70932343baa4df80c7ff",
+          "canonicalScholarshipSha256": "e279eabed65113b7507a3f0c890be8be1a920e4e651b70932343baa4df80c7ff",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-uni-zhejiang-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2026-10-01",
+            "status": "draft",
+            "id": "scholarship-zhejiang-provincial-government",
+            "slug": "zhejiang-provincial-government",
+            "name": {
+              "en": "Zhejiang Provincial Government Scholarship",
+              "zh": "浙江省政府来华留学生奖学金",
+              "ru": "Стипендия правительства провинции Чжэцзян"
+            },
+            "providerType": "province",
+            "universityIds": [
+              "uni-zhejiang-university",
+              "uni-zhejiang-gongshang-university",
+              "uni-zhejiang-sci-tech-university"
+            ],
+            "programIds": [],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://iczu.zju.edu.cn/admissionsen/",
+            "summary": {
+              "en": "Zhejiang Provincial Government Scholarship is a potential funding route. Eligibility, participating programs and current-cycle coverage must be confirmed on the official page.",
+              "zh": "浙江省政府来华留学生奖学金是一项潜在资助渠道；申请资格、适用项目及当期资助标准须以官方页面为准。",
+              "ru": "Стипендия правительства провинции Чжэцзян — возможный источник финансирования. Условия, подходящие программы и покрытие текущего цикла необходимо проверить на официальной странице."
+            }
+          },
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-uni-zhejiang-university"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-uni-zhejiang-university",
+              "canonicalSourceSha256": "08683c57aa811817608709f07eaefa8aa860f70aa6db29c566568b6dfe3fa64f",
+              "url": "https://iczu.zju.edu.cn/admissionsen/"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "quotedDate": null,
+          "reason": "registered-landing-and-one-scholarship-list-do-not-state-exact-own-award-applicant-period",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iczu.zju.edu.cn/admissionsen/wcholarships/list.htm",
+          "evidenceBodySha256": "d9df1f8e0c78e7585fdfd92992a23895a5fa4886fbbfb93d2a2fe4efb34415e0",
+          "evidenceTextSha256": "85fa2bbe5547716a7f7985c1ccf649edab95d06345ed1f7a739616614006341f",
+          "observedAt": "2026-10-19T12:43:39.312266+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "landingAndListNotDateProof": true,
+          "noYearRollover": true,
+          "independentAwardDeadlineNotBorrowed": true,
+          "sharedAwardAssignedExactlyOnceByRootDispatch": true,
+          "onlySelectedUniversityDateScope": "uni-zhejiang-university",
+          "otherMappedUniversitiesNotCertified": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-zhejiang-university-computer-science-bachelor",
+          "universityId": "uni-zhejiang-university",
+          "canonicalUniversitySha256": "bb8693d32ad7cea34c5b86b0cce20a76dd3af680f4226332c27135c271a9519a",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-zhejiang-university",
+              "canonicalUniversitySha256": "bb8693d32ad7cea34c5b86b0cce20a76dd3af680f4226332c27135c271a9519a"
+            }
+          ],
+          "programId": "program-zhejiang-university-computer-science-bachelor",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "To be confirmed"
+          ],
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "161062cb98d4a1391f81accb0cd75c289210eea1c519477c7498d018e2ea5e1d",
+          "canonicalCycleSha256": "161062cb98d4a1391f81accb0cd75c289210eea1c519477c7498d018e2ea5e1d",
+          "canonicalProgramSha256": "1a438546bf519236b41c665c8e1e9cdea0c87e70de7bc035b53539c18884bd38",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-uni-zhejiang-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2026-10-01",
+            "status": "draft",
+            "id": "cycle-2027-zhejiang-university-computer-science-bachelor",
+            "programId": "program-zhejiang-university-computer-science-bachelor",
+            "academicYear": "2027-2028",
+            "intake": "autumn",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": null,
+            "applicationFeeCny": null
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "program-zhejiang-university-computer-science-bachelor",
+              "canonicalProgramSha256": "1a438546bf519236b41c665c8e1e9cdea0c87e70de7bc035b53539c18884bd38"
+            }
+          ],
+          "sourceIds": [
+            "src-uni-zhejiang-university"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-uni-zhejiang-university",
+              "canonicalSourceSha256": "08683c57aa811817608709f07eaefa8aa860f70aa6db29c566568b6dfe3fa64f",
+              "url": "https://iczu.zju.edu.cn/admissionsen/"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "quotedDate": null,
+          "reason": "registered-landing-and-scholarship-list-do-not-establish-exact-2027-2028-computer-science-bachelor-window",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iczu.zju.edu.cn/admissionsen/wcholarships/list.htm",
+          "evidenceBodySha256": "d9df1f8e0c78e7585fdfd92992a23895a5fa4886fbbfb93d2a2fe4efb34415e0",
+          "evidenceTextSha256": "85fa2bbe5547716a7f7985c1ccf649edab95d06345ed1f7a739616614006341f",
+          "observedAt": "2026-10-19T12:43:39.312266+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "landingAndListNotDateProof": true,
+          "noYearRollover": true,
+          "independentAwardDeadlineNotBorrowed": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-zhejiang-university-international-student",
+          "universityId": "uni-zhejiang-university",
+          "canonicalUniversitySha256": "bb8693d32ad7cea34c5b86b0cce20a76dd3af680f4226332c27135c271a9519a",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-zhejiang-university",
+              "canonicalUniversitySha256": "bb8693d32ad7cea34c5b86b0cce20a76dd3af680f4226332c27135c271a9519a"
+            }
+          ],
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "0faeff36a61853962178ab01ce175f3da11830c62c7e5ec29bbd1bc46cb6339f",
+          "canonicalScholarshipSha256": "0faeff36a61853962178ab01ce175f3da11830c62c7e5ec29bbd1bc46cb6339f",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-uni-zhejiang-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2026-10-01",
+            "status": "draft",
+            "id": "scholarship-zhejiang-university-international-student",
+            "slug": "zhejiang-university-international-student",
+            "name": {
+              "en": "Zhejiang University Scholarship for International Students",
+              "zh": "浙江大学外国留学生奖学金",
+              "ru": "Стипендия Чжэцзянского университета для иностранных студентов"
+            },
+            "providerType": "university",
+            "universityIds": [
+              "uni-zhejiang-university"
+            ],
+            "programIds": [],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://iczu.zju.edu.cn/admissionsen/",
+            "summary": {
+              "en": "Zhejiang University Scholarship for International Students is a potential funding route. Eligibility, participating programs and current-cycle coverage must be confirmed on the official page.",
+              "zh": "浙江大学外国留学生奖学金是一项潜在资助渠道；申请资格、适用项目及当期资助标准须以官方页面为准。",
+              "ru": "Стипендия Чжэцзянского университета для иностранных студентов — возможный источник финансирования. Условия, подходящие программы и покрытие текущего цикла необходимо проверить на официальной странице."
+            }
+          },
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-uni-zhejiang-university"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-uni-zhejiang-university",
+              "canonicalSourceSha256": "08683c57aa811817608709f07eaefa8aa860f70aa6db29c566568b6dfe3fa64f",
+              "url": "https://iczu.zju.edu.cn/admissionsen/"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "quotedDate": null,
+          "reason": "registered-landing-and-one-scholarship-list-do-not-state-exact-own-award-applicant-period",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iczu.zju.edu.cn/admissionsen/wcholarships/list.htm",
+          "evidenceBodySha256": "d9df1f8e0c78e7585fdfd92992a23895a5fa4886fbbfb93d2a2fe4efb34415e0",
+          "evidenceTextSha256": "85fa2bbe5547716a7f7985c1ccf649edab95d06345ed1f7a739616614006341f",
+          "observedAt": "2026-10-19T12:43:39.312266+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "landingAndListNotDateProof": true,
+          "noYearRollover": true,
+          "independentAwardDeadlineNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "zufe-2025-exact-year-bulletin-link-captcha-blocks-full-date-body",
+      "universityId": "uni-zhejiang-university-of-finance-and-economics",
+      "evidence": [
+        {
+          "name": "zufe-programme",
+          "url": "https://english.zufe.edu.cn/Study_at_ZUFE/Admissions_and_Majors/Undergraduate_Program.htm",
+          "observedAt": "2026-10-19T12:41:48.411270+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.zufe.edu.cn/Study_at_ZUFE/Admissions_and_Majors/Undergraduate_Program.htm",
+          "contentType": "text/html",
+          "bytes": 43649,
+          "rawPath": "zufe-programme.html",
+          "rawSha256": "63ec0f62b2cb480b977e25722ac5984758086237a27e1cdbc44f9550132b7f9c",
+          "textPath": "zufe-programme.txt",
+          "textSha256": "7b480b26d9ac69a70b2597919e30ce935a37a666f00763e2ac9b11f0fb0cda90",
+          "captureSucceeded": true,
+          "evidenceRole": "full-programme-description-no-applicant-dates",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "zufe-application",
+          "url": "https://english.zufe.edu.cn/Study_at_ZUFE/Application.htm",
+          "observedAt": "2026-10-19T12:41:48.412270+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.zufe.edu.cn/Study_at_ZUFE/Application.htm",
+          "contentType": "text/html",
+          "bytes": 18915,
+          "rawPath": "zufe-application.html",
+          "rawSha256": "f40ce16422eae01fc1c4380527096949af0313c16132190bdaafb1013f0ee249",
+          "textPath": "zufe-application.txt",
+          "textSha256": "0fa14e091e0553b92f4059f7e48e9b8b82d16b2bd52cac6ca93e7292220c924b",
+          "captureSucceeded": true,
+          "evidenceRole": "registered-application-page-links-explicit2025-bulletin",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "zufe-bulletin-pdf",
+          "url": "https://english.zufe.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1721710842&wbfileid=16478297",
+          "observedAt": "2026-10-19T12:43:39.311266+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.zufe.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1721710842&wbfileid=16478297",
+          "contentType": "text/html;charset=UTF-8",
+          "bytes": 3805,
+          "rawPath": "zufe-bulletin-pdf.html",
+          "rawSha256": "908a81f3738d38fe9d90c15a69c7a830f5de50556240db37cbbb7f2f8fcd1e19",
+          "textPath": "zufe-bulletin-pdf.txt",
+          "textSha256": "b6e006dd45ea7eb317ff98ff3ccdeb5dae716b075e4ffa6c23d3bdfa0ffba07d",
+          "captureSucceeded": true,
+          "evidenceRole": "linked-download-returns-captcha-HTML-not-a-PDF",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "2025 Application Bulletin of Zhejiang University of Finance and Economics",
+      "captchaQuote": "请输入验证码下载附件",
+      "financeIdentityQuote": "4.Finance",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-remaining-zufe-b-finance-2025-2026-other",
+          "universityId": "uni-zhejiang-university-of-finance-and-economics",
+          "canonicalUniversitySha256": "805811635431c5f0ab1581a7915b26cc9994d6fc0afb32399766debfc0cdecd7",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-zhejiang-university-of-finance-and-economics",
+              "canonicalUniversitySha256": "805811635431c5f0ab1581a7915b26cc9994d6fc0afb32399766debfc0cdecd7"
+            }
+          ],
+          "programId": "prog-gap-remaining-zufe-b-finance",
+          "academicYear": "2025-2026",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [],
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "95fe88c3f22b6e39c8fe4d19f223e21864b4a16025893ebfeccb0d19c41bf437",
+          "canonicalCycleSha256": "95fe88c3f22b6e39c8fe4d19f223e21864b4a16025893ebfeccb0d19c41bf437",
+          "canonicalProgramSha256": "9151d4322f851672dc7e9501fa097be46bd0b3a17077a93fdd1d447db64c25dd",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-remaining-zufe-b-finance",
+              "src-gap-program-remaining-zufe-b-finance-support-1"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-06",
+            "status": "stale",
+            "id": "cycle-gap-remaining-zufe-b-finance-2025-2026-other",
+            "programId": "prog-gap-remaining-zufe-b-finance",
+            "academicYear": "2025-2026",
+            "intake": "other",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": null,
+            "tuitionPeriod": null,
+            "tuitionStatus": null,
+            "evidenceBasis": "cycle-specific",
+            "factScope": "dates-only",
+            "applicationFeeCny": null,
+            "notes": {
+              "en": "The official Study at ZUFE page describes Finance as an international undergraduate program recruiting students worldwide. The official application page still exposes the 2025 application bulletin, which is retained only as a closed historical reference; unverified dynamic fields are left unannounced.",
+              "zh": "The official Study at ZUFE page describes Finance as an international undergraduate program recruiting students worldwide. The official application page still exposes the 2025 application bulletin, which is retained only as a closed historical reference; unverified dynamic fields are left unannounced."
+            }
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-remaining-zufe-b-finance",
+              "canonicalProgramSha256": "9151d4322f851672dc7e9501fa097be46bd0b3a17077a93fdd1d447db64c25dd"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-remaining-zufe-b-finance",
+            "src-gap-program-remaining-zufe-b-finance-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-remaining-zufe-b-finance",
+              "canonicalSourceSha256": "1da4b4033c18ee3c32ba6f717612f9708f5d36e1dec5c948af358658136b4e88",
+              "url": "https://english.zufe.edu.cn/Study_at_ZUFE/Admissions_and_Majors/Undergraduate_Program.htm"
+            },
+            {
+              "sourceId": "src-gap-program-remaining-zufe-b-finance-support-1",
+              "canonicalSourceSha256": "1e2af940ee24a26476e0a9bbc8dbf23426326f9778bf5e5468615d816227111e",
+              "url": "https://english.zufe.edu.cn/Study_at_ZUFE/Application.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "quotedDate": null,
+          "reason": "exact2025-bulletin-attachment-is-captcha-HTML-no-readable-original-application-period",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://english.zufe.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1721710842&wbfileid=16478297",
+          "evidenceBodySha256": "908a81f3738d38fe9d90c15a69c7a830f5de50556240db37cbbb7f2f8fcd1e19",
+          "evidenceTextSha256": "b6e006dd45ea7eb317ff98ff3ccdeb5dae716b075e4ffa6c23d3bdfa0ffba07d",
+          "observedAt": "2026-10-19T12:43:39.311266+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "storedAcademicYearPreserved": "2025-2026",
+          "linkedResponseIsNotPdf": true,
+          "attachmentAccessRequiresCaptcha": true,
+          "noCaptchaBypassAttempted": true,
+          "originGuidePdfSaved": false,
+          "programDescriptionNotDateProof": true,
+          "retryPolicy": "cooldown-after-one-direct-linked-attachment-read"
+        }
+      ]
+    },
+    {
+      "key": "zzu-medical-foundation-both-originals-timeout-single-fallback-each",
+      "universityId": "uni-zhengzhou-university",
+      "evidence": [
+        {
+          "name": "zzu-medical-foundation",
+          "url": "https://international.zzu.edu.cn/en/admission/detail?cid=17&detail=612&pid=0&spid=0",
+          "observedAt": "2026-10-19T12:41:48.412270+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "<urlopen error _ssl.c:993: The handshake operation timed out>",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-TLS-timeout-no-body",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "zzu-support",
+          "url": "https://international.zzu.edu.cn/en/article/detail?cid=53&detail=64&pid=53",
+          "observedAt": "2026-10-19T12:41:51.152548+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "<urlopen error _ssl.c:993: The handshake operation timed out>",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-TLS-timeout-no-body",
+          "fullFactsCertified": false
+        }
+      ],
+      "webFallback": {
+        "path": "web-fallback.json",
+        "sha256": "9bfece88151a6a5449631c175a611c38bb00ff7ee98759dcd50085067c316c9c"
+      },
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-sparse-depth-0808-zzu-medical-foundation-2026-2027-other-fee-reference",
+          "universityId": "uni-zhengzhou-university",
+          "canonicalUniversitySha256": "e9e06e21bd1e489198ef65ec594039af88184893ead888fc134a16b03d2cf4ad",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-zhengzhou-university",
+              "canonicalUniversitySha256": "e9e06e21bd1e489198ef65ec594039af88184893ead888fc134a16b03d2cf4ad"
+            }
+          ],
+          "programId": "prog-gap-sparse-depth-0808-zzu-medical-foundation",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "foundation",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "334d76c4ac1db4d8403afe7cc51af4c85f8a21dfb9e31220dfa68ba2213930f2",
+          "canonicalCycleSha256": "334d76c4ac1db4d8403afe7cc51af4c85f8a21dfb9e31220dfa68ba2213930f2",
+          "canonicalProgramSha256": "754f40a3f878bae8864e027f02b86f14a91a14f4ea3bf19a6631c10387c279f8",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-sparse-depth-0808-zzu-medical-foundation",
+              "src-gap-program-sparse-depth-0808-zzu-medical-foundation-support-1"
+            ],
+            "verifiedAt": "2026-08-08",
+            "reviewAfter": "2026-08-15",
+            "status": "stale",
+            "id": "cycle-gap-sparse-depth-0808-zzu-medical-foundation-2026-2027-other-fee-reference",
+            "programId": "prog-gap-sparse-depth-0808-zzu-medical-foundation",
+            "academicYear": "2026-2027",
+            "intake": "other",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": 15000,
+            "tuitionPeriod": "program",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "cycle-specific",
+            "factScope": "partial",
+            "applicationFeeCny": null
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-sparse-depth-0808-zzu-medical-foundation",
+              "canonicalProgramSha256": "754f40a3f878bae8864e027f02b86f14a91a14f4ea3bf19a6631c10387c279f8"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-sparse-depth-0808-zzu-medical-foundation",
+            "src-gap-program-sparse-depth-0808-zzu-medical-foundation-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-sparse-depth-0808-zzu-medical-foundation",
+              "canonicalSourceSha256": "f6d6b8b1904e86a03ffa1479167fdb2c98f2b5b763f235915265a5ad80ce3581",
+              "url": "https://international.zzu.edu.cn/en/admission/detail?cid=17&detail=612&pid=0&spid=0"
+            },
+            {
+              "sourceId": "src-gap-program-sparse-depth-0808-zzu-medical-foundation-support-1",
+              "canonicalSourceSha256": "916d6d780ebf1b7c45990c2444b343e873c2021226a6d87aaf9ba70bbbe95d5b",
+              "url": "https://international.zzu.edu.cn/en/article/detail?cid=53&detail=64&pid=53"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "quotedDate": null,
+          "reason": "both-registered-official-URLs-TLS-timeout-and-one-web-fallback-per-URL-also-timeout-no-original-body",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://international.zzu.edu.cn/en/admission/detail?cid=17&detail=612&pid=0&spid=0",
+          "evidenceBodySha256": null,
+          "evidenceTextSha256": null,
+          "observedAt": "2026-10-19T12:41:48.412270+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "originBodySaved": false,
+          "retryPolicy": "cooldown-no-further-retries",
+          "fallbackOperationsForTwoRegisteredUrls": 2,
+          "noAvailabilityOrCessationInferred": true
+        }
+      ]
+    },
+    {
+      "key": "zuel-three-target-routes-official-guide404-single-web404-fallback",
+      "universityId": "uni-zhongnan-university-of-economics-and-law",
+      "evidence": [
+        {
+          "name": "zuel-guide",
+          "url": "https://ies-en.zuel.edu.cn/_upload/article/files/9e/a1/f493cff64425b1bbf55d031a056b/283f0e72-29f6-4dc8-b85d-4e400c5c50f9.pdf",
+          "observedAt": "2026-10-19T12:41:55.467680+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "HTTP Error 404: Not Found",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-HTTP404-no-original-PDF",
+          "fullFactsCertified": false
+        }
+      ],
+      "webFallback": {
+        "path": "web-fallback.json",
+        "sha256": "9bfece88151a6a5449631c175a611c38bb00ff7ee98759dcd50085067c316c9c"
+      },
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-sparse-depth-0808-zuel-chinese-language-2026-2027-other-fee-reference",
+          "universityId": "uni-zhongnan-university-of-economics-and-law",
+          "canonicalUniversitySha256": "68f8941dde30460412a5e95507a8c6b53e286c28add183dbc7bda9e03befbccf",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-zhongnan-university-of-economics-and-law",
+              "canonicalUniversitySha256": "68f8941dde30460412a5e95507a8c6b53e286c28add183dbc7bda9e03befbccf"
+            }
+          ],
+          "programId": "prog-gap-sparse-depth-0808-zuel-chinese-language",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "language",
+          "teachingLanguages": [],
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "be1f3c51d2b4bbb8a85b49567d91ebcb00d36a7ffcc7b24673ba82f5005a781d",
+          "canonicalCycleSha256": "be1f3c51d2b4bbb8a85b49567d91ebcb00d36a7ffcc7b24673ba82f5005a781d",
+          "canonicalProgramSha256": "8c84a4b49ac83536593022dcf943fe9034ed2df17b65ec61787d17b425166630",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-sparse-depth-0808-zuel-chinese-language"
+            ],
+            "verifiedAt": "2026-08-08",
+            "reviewAfter": "2026-08-15",
+            "status": "stale",
+            "id": "cycle-gap-sparse-depth-0808-zuel-chinese-language-2026-2027-other-fee-reference",
+            "programId": "prog-gap-sparse-depth-0808-zuel-chinese-language",
+            "academicYear": "2026-2027",
+            "intake": "other",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": 16000,
+            "tuitionPeriod": "academic-year",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "cycle-specific",
+            "factScope": "partial",
+            "applicationFeeCny": null
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-sparse-depth-0808-zuel-chinese-language",
+              "canonicalProgramSha256": "8c84a4b49ac83536593022dcf943fe9034ed2df17b65ec61787d17b425166630"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-sparse-depth-0808-zuel-chinese-language"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-sparse-depth-0808-zuel-chinese-language",
+              "canonicalSourceSha256": "a6834503d7d66b927c0e11fb6da6c813dc4928ca0e0827c5625208cc3548472c",
+              "url": "https://ies-en.zuel.edu.cn/_upload/article/files/9e/a1/f493cff64425b1bbf55d031a056b/283f0e72-29f6-4dc8-b85d-4e400c5c50f9.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "quotedDate": null,
+          "reason": "registered-official-brochure-HTTP404-and-one-web-fallback-404-no-original-guide",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://ies-en.zuel.edu.cn/_upload/article/files/9e/a1/f493cff64425b1bbf55d031a056b/283f0e72-29f6-4dc8-b85d-4e400c5c50f9.pdf",
+          "evidenceBodySha256": null,
+          "evidenceTextSha256": null,
+          "observedAt": "2026-10-19T12:41:55.467680+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "originPdfSaved": false,
+          "retryPolicy": "cooldown-no-further-retries",
+          "noApplicationDateFromMissingPdf": true,
+          "noProgrammeCessationInferred": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-sparse-depth-0808-zuel-imba-master-2026-2027-other-fee-reference",
+          "universityId": "uni-zhongnan-university-of-economics-and-law",
+          "canonicalUniversitySha256": "68f8941dde30460412a5e95507a8c6b53e286c28add183dbc7bda9e03befbccf",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-zhongnan-university-of-economics-and-law",
+              "canonicalUniversitySha256": "68f8941dde30460412a5e95507a8c6b53e286c28add183dbc7bda9e03befbccf"
+            }
+          ],
+          "programId": "prog-gap-sparse-depth-0808-zuel-imba-master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "40df0812e311cacc8b8747b804ba76a0043a3c2edac4a43345d9231d424dffa5",
+          "canonicalCycleSha256": "40df0812e311cacc8b8747b804ba76a0043a3c2edac4a43345d9231d424dffa5",
+          "canonicalProgramSha256": "1dbd1ac41e3cca81513a1393d31f96a34becb561051015d412ddbbd5deff2636",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-sparse-depth-0808-zuel-imba-master"
+            ],
+            "verifiedAt": "2026-08-08",
+            "reviewAfter": "2026-08-15",
+            "status": "stale",
+            "id": "cycle-gap-sparse-depth-0808-zuel-imba-master-2026-2027-other-fee-reference",
+            "programId": "prog-gap-sparse-depth-0808-zuel-imba-master",
+            "academicYear": "2026-2027",
+            "intake": "other",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": 30000,
+            "tuitionPeriod": "academic-year",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "cycle-specific",
+            "factScope": "partial",
+            "applicationFeeCny": null
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-sparse-depth-0808-zuel-imba-master",
+              "canonicalProgramSha256": "1dbd1ac41e3cca81513a1393d31f96a34becb561051015d412ddbbd5deff2636"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-sparse-depth-0808-zuel-imba-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-sparse-depth-0808-zuel-imba-master",
+              "canonicalSourceSha256": "967b6c126cd9837989c3c7dd63ebefdc6b486f62e9d64ec9bbd44dad039b7832",
+              "url": "https://ies-en.zuel.edu.cn/_upload/article/files/9e/a1/f493cff64425b1bbf55d031a056b/283f0e72-29f6-4dc8-b85d-4e400c5c50f9.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "quotedDate": null,
+          "reason": "registered-official-brochure-HTTP404-and-one-web-fallback-404-no-original-guide",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://ies-en.zuel.edu.cn/_upload/article/files/9e/a1/f493cff64425b1bbf55d031a056b/283f0e72-29f6-4dc8-b85d-4e400c5c50f9.pdf",
+          "evidenceBodySha256": null,
+          "evidenceTextSha256": null,
+          "observedAt": "2026-10-19T12:41:55.467680+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "originPdfSaved": false,
+          "retryPolicy": "cooldown-no-further-retries",
+          "noApplicationDateFromMissingPdf": true,
+          "noProgrammeCessationInferred": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-sparse-depth-0808-zuel-international-law-english-master-2026-2027-other-fee-reference",
+          "universityId": "uni-zhongnan-university-of-economics-and-law",
+          "canonicalUniversitySha256": "68f8941dde30460412a5e95507a8c6b53e286c28add183dbc7bda9e03befbccf",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-zhongnan-university-of-economics-and-law",
+              "canonicalUniversitySha256": "68f8941dde30460412a5e95507a8c6b53e286c28add183dbc7bda9e03befbccf"
+            }
+          ],
+          "programId": "prog-gap-sparse-depth-0808-zuel-international-law-english-master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "d38db2854e86028bed67a0ffbb3eeca7294b7b6132fcc438d5e38518ace158f3",
+          "canonicalCycleSha256": "d38db2854e86028bed67a0ffbb3eeca7294b7b6132fcc438d5e38518ace158f3",
+          "canonicalProgramSha256": "2edae850fbd5847c325b3c0deec34a53fcc14b16347d606f53c39da70343dcf6",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-sparse-depth-0808-zuel-international-law-english-master"
+            ],
+            "verifiedAt": "2026-08-08",
+            "reviewAfter": "2026-08-15",
+            "status": "stale",
+            "id": "cycle-gap-sparse-depth-0808-zuel-international-law-english-master-2026-2027-other-fee-reference",
+            "programId": "prog-gap-sparse-depth-0808-zuel-international-law-english-master",
+            "academicYear": "2026-2027",
+            "intake": "other",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": 30000,
+            "tuitionPeriod": "academic-year",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "cycle-specific",
+            "factScope": "partial",
+            "applicationFeeCny": null
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-sparse-depth-0808-zuel-international-law-english-master",
+              "canonicalProgramSha256": "2edae850fbd5847c325b3c0deec34a53fcc14b16347d606f53c39da70343dcf6"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-sparse-depth-0808-zuel-international-law-english-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-sparse-depth-0808-zuel-international-law-english-master",
+              "canonicalSourceSha256": "880ef418d4f6cb3a217e016566b3ad07ed8de80ff8514b642e672dfa3138952e",
+              "url": "https://ies-en.zuel.edu.cn/_upload/article/files/9e/a1/f493cff64425b1bbf55d031a056b/283f0e72-29f6-4dc8-b85d-4e400c5c50f9.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "quotedDate": null,
+          "reason": "registered-official-brochure-HTTP404-and-one-web-fallback-404-no-original-guide",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://ies-en.zuel.edu.cn/_upload/article/files/9e/a1/f493cff64425b1bbf55d031a056b/283f0e72-29f6-4dc8-b85d-4e400c5c50f9.pdf",
+          "evidenceBodySha256": null,
+          "evidenceTextSha256": null,
+          "observedAt": "2026-10-19T12:41:55.467680+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "originPdfSaved": false,
+          "retryPolicy": "cooldown-no-further-retries",
+          "noApplicationDateFromMissingPdf": true,
+          "noProgrammeCessationInferred": true
+        }
+      ]
+    },
+    {
+      "key": "zjut-freshman-award-own-day-not-borrowed-from-admissions",
+      "universityId": "uni-zhejiang-university-of-technology",
+      "evidence": [
+        {
+          "name": "zjut-freshman",
+          "url": "https://www.gjxy.zjut.edu.cn/index.php/en/prospectivestudents/undergraduate",
+          "observedAt": "2026-10-19T12:41:58.085097+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.gjxy.zjut.edu.cn/index.php/en/prospectivestudents/undergraduate",
+          "contentType": "text/html; charset=UTF-8",
+          "bytes": 138000,
+          "rawPath": "zjut-freshman.html",
+          "rawSha256": "3c74a66e0e2ac0328bed3936654bdd37a8b0636d5175ceb5df000982cdd90e8d",
+          "textPath": "zjut-freshman.txt",
+          "textSha256": "2b6e659188c3b2e02fd848b623c8211d4fdaf4e9a72c734a20041c91117155c9",
+          "captureSucceeded": true,
+          "evidenceRole": "full2026-undergraduate-guide-distinguishes-general-date-and-freshman-award",
+          "fullFactsCertified": false
+        }
+      ],
+      "generalAdmissionDateQuote": "30th May 2026.",
+      "awardOwnStatement": "Zhejiang University of Technology has established a certain number of freshman scholarships for international students with good academic attitudes and excellent academic results. Please apply on the online application system.",
+      "generalDeadlineQualifier": "Due to enrollment requirements, application deadlines for certain programs are subject to change.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-zjut-freshman-scholarship-2026",
+          "universityId": "uni-zhejiang-university-of-technology",
+          "canonicalUniversitySha256": "704023659c561a5c061cb37b9879ebc1ef543b769a7250c87fb8b38d36b4c17b",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-zhejiang-university-of-technology",
+              "canonicalUniversitySha256": "704023659c561a5c061cb37b9879ebc1ef543b769a7250c87fb8b38d36b4c17b"
+            }
+          ],
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "5a24377240a23163d704b379107a05e9fd7c35d792e018e87d43ae8399a94c01",
+          "canonicalScholarshipSha256": "5a24377240a23163d704b379107a05e9fd7c35d792e018e87d43ae8399a94c01",
+          "canonicalRow": {
+            "id": "sch-gap-wave8-zjut-freshman-scholarship-2026",
+            "slug": "gap-wave8-zjut-freshman-scholarship-2026",
+            "name": {
+              "en": "Zhejiang University of Technology Freshman Scholarship 2026",
+              "zh": "浙江工业大学2026年国际学生新生奖学金",
+              "ru": "Стипендия ZJUT для новых иностранных студентов 2026"
+            },
+            "providerType": "university",
+            "universityIds": [
+              "uni-zhejiang-university-of-technology"
+            ],
+            "programIds": [],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://www.gjxy.zjut.edu.cn/index.php/en/prospectivestudents/undergraduate",
+            "summary": {
+              "en": "ZJUT's current 2026 international undergraduate page explicitly offers a Freshman Scholarship to international students with good academic attitudes and excellent results and directs them to apply through the online admission system. The page does not publish the award amount or an exact scholarship deadline.",
+              "zh": "浙工大当前2026国际本科招生页明确向学习态度良好、成绩优秀的国际新生提供新生奖学金，并要求通过网申系统申请；页面未公布奖金额度或奖学金精确截止日期。",
+              "ru": "Текущая страница международного бакалавриата ZJUT 2026 года прямо предлагает стипендию новым иностранным студентам с высокой успеваемостью и направляет их в онлайн-систему. Размер и точный срок не опубликованы."
+            },
+            "sourceIds": [
+              "src-gap-scholarship-wave8-zjut-freshman-scholarship-2026"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale"
+          },
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-zjut-freshman-scholarship-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-zjut-freshman-scholarship-2026",
+              "canonicalSourceSha256": "19dadf2e46f9b855ea02ddcf9b020cb85b0325c5f93708509eb7118ba370ce37",
+              "url": "https://www.gjxy.zjut.edu.cn/index.php/en/prospectivestudents/undergraduate"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "quotedDate": null,
+          "reason": "freshman-award-description-states-apply-online-but-no-separate-exact-award-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.gjxy.zjut.edu.cn/index.php/en/prospectivestudents/undergraduate",
+          "evidenceBodySha256": "3c74a66e0e2ac0328bed3936654bdd37a8b0636d5175ceb5df000982cdd90e8d",
+          "evidenceTextSha256": "2b6e659188c3b2e02fd848b623c8211d4fdaf4e9a72c734a20041c91117155c9",
+          "observedAt": "2026-10-19T12:41:58.085097+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "generalAdmissionDateNotBorrowed": "2026-05-30",
+          "awardOwnDeadlineNotStated": true,
+          "independentAwardScopePreserved": true
+        }
+      ]
+    },
+    {
+      "key": "ahmu-new-provincial-award-record-old-CSC2018-date-excluded",
+      "universityId": "uni-anhui-medical-university",
+      "institutionPreviouslyChecked": true,
+      "newSchoolClaim": false,
+      "evidence": [
+        {
+          "name": "ahmu-award",
+          "url": "https://english.ahmu.edu.cn/5316/list.htm",
+          "observedAt": "2026-10-19T12:42:02.409243+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.ahmu.edu.cn/5316/list.htm",
+          "contentType": "text/html",
+          "bytes": 119234,
+          "rawPath": "ahmu-award.html",
+          "rawSha256": "31162cdb1d43efbc170e76baf5c342c87ea1fa9a6554d3e6f0eb6109069931aa",
+          "textPath": "ahmu-award.txt",
+          "textSha256": "f157532661f5c370ec308b4b801ca663e1cd9001123973416b9a031bb6ec469a",
+          "captureSucceeded": true,
+          "evidenceRole": "full-standing-admission-guide-separate-provincial-listing-and-historical-CSC-period",
+          "fullFactsCertified": false
+        }
+      ],
+      "provincialAwardQuote": "Anhui Provincial Government Scholarship （uncertain quota）",
+      "historicalDateQuote": "before May 31, 2018",
+      "historicalDateHeading": "V. CSC Scholarship Application",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecs-ahmu-anhui-government-scholarship",
+          "universityId": "uni-anhui-medical-university",
+          "canonicalUniversitySha256": "55ffebf24b6b7313fe941b7561dcee2c56167aa7ac75435cf12a98cd29d33509",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-anhui-medical-university",
+              "canonicalUniversitySha256": "55ffebf24b6b7313fe941b7561dcee2c56167aa7ac75435cf12a98cd29d33509"
+            }
+          ],
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "43486f1dfb90762f2263cec204b3d628134f6b71d9398777c24c08bfe59f651a",
+          "canonicalScholarshipSha256": "43486f1dfb90762f2263cec204b3d628134f6b71d9398777c24c08bfe59f651a",
+          "canonicalRow": {
+            "id": "sch-gap-mve-ecs-ahmu-anhui-government-scholarship",
+            "slug": "gap-mve-ecs-ahmu-anhui-government-scholarship",
+            "name": {
+              "en": "Anhui Provincial Government Scholarship at AHMU",
+              "zh": "安徽医科大学安徽省政府奖学金",
+              "ru": "Стипендия правительства провинции Аньхой в AHMU"
+            },
+            "providerType": "province",
+            "universityIds": [
+              "uni-anhui-medical-university"
+            ],
+            "programIds": [
+              "prog-gap-mve-ecs-ahmu-immunology-master",
+              "prog-gap-mve-ecs-ahmu-epidemiology-master",
+              "prog-gap-mve-ecs-ahmu-pharmacology-master"
+            ],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://english.ahmu.edu.cn/5316/list.htm",
+            "summary": {
+              "en": "AHMU's official English scholarship page confirms the provincial-government route; current funding and deadline values are withheld until a current notice is available.",
+              "zh": "安医大官方英文奖学金页确认省政府奖学金渠道；当期通知可用前不填写金额和截止日期。",
+              "ru": "Официальная страница AHMU подтверждает провинциальную стипендию; текущие суммы и срок не заполняются без актуального объявления."
+            },
+            "sourceIds": [
+              "src-gap-scholarship-mve-ecs-ahmu-anhui-government-scholarship"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale"
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecs-ahmu-immunology-master",
+              "canonicalProgramSha256": "9f9f96da67866c69c562d0a58a59caa55723d62586bc766505b147a83c1ac4d4"
+            },
+            {
+              "programId": "prog-gap-mve-ecs-ahmu-epidemiology-master",
+              "canonicalProgramSha256": "af80c064ae4714af5062d49f0b33a433fdd9446a3f865cb19e2c2a95cacc2f1f"
+            },
+            {
+              "programId": "prog-gap-mve-ecs-ahmu-pharmacology-master",
+              "canonicalProgramSha256": "d7b2a809c2acc5b09f8cf50bcd94daffb5bbbfcaeeb2d1d22a83bda744664169"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mve-ecs-ahmu-anhui-government-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecs-ahmu-anhui-government-scholarship",
+              "canonicalSourceSha256": "622a60283597c49af8df5cc58af4309069a3f72e62076578ac497b413cecd4f9",
+              "url": "https://english.ahmu.edu.cn/5316/list.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "quotedDate": null,
+          "reason": "provincial-award-has-no-exact-current-year-applicant-day-and-May31-2018-is-separate-historical-CSC-route",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://english.ahmu.edu.cn/5316/list.htm",
+          "evidenceBodySha256": "31162cdb1d43efbc170e76baf5c342c87ea1fa9a6554d3e6f0eb6109069931aa",
+          "evidenceTextSha256": "f157532661f5c370ec308b4b801ca663e1cd9001123973416b9a031bb6ec469a",
+          "observedAt": "2026-10-19T12:42:02.409243+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "historicalCscDateNotBorrowed": "2018-05-31",
+          "awardOwnDeadlineNotStated": true,
+          "noYearRollover": true,
+          "newRecordScopeAtPreviouslyCheckedInstitution": true
+        }
+      ]
+    },
+    {
+      "key": "bfsu-three-new-English-bachelor-spring-records-ambiguous-intake-year",
+      "universityId": "uni-beijing-foreign-studies-university",
+      "institutionPreviouslyChecked": true,
+      "newSchoolClaim": false,
+      "evidence": [
+        {
+          "name": "bfsu-undergraduate",
+          "url": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+          "observedAt": "2026-10-19T12:43:39.311266+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+          "contentType": "text/html",
+          "bytes": 40418,
+          "rawPath": "bfsu-undergraduate.html",
+          "rawSha256": "2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329",
+          "textPath": "bfsu-undergraduate.txt",
+          "textSha256": "77cd9c23ce19990078c07f1dc9070c2d812590bb588ea1ef898b75347315b20e",
+          "captureSucceeded": true,
+          "evidenceRole": "new-complete-exact7182-official-undergraduate-body-after-archive-scope-check",
+          "fullFactsCertified": false
+        }
+      ],
+      "archiveCheck": {
+        "path": "archive-source-check.json",
+        "sha256": "482f8d0f114cd99f076918842d07563dde20bfcac182e1fca491c1f2da04ad8d"
+      },
+      "yearTitle": "2026 BFSU Undergraduate Admissions Prospectus for International Students",
+      "enrollmentScopeQuote": "international undergraduate applicants intending to enroll in 2026",
+      "programmeNamesQuote": "International Business, Finance, International Trade, Business Administration",
+      "programmeLanguageHeading": "English-Taught Majors",
+      "programmeIntakeQuote": "Spring / Autumn",
+      "explicitSpringApplicationQuote": "Spring Intake: October 15, 2026 — December 15, 2026",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-24d32898799e",
+          "universityId": "uni-beijing-foreign-studies-university",
+          "canonicalUniversitySha256": "bac3459824577f43ef128e0e83e1482f17b234e1d5955a1b66f1a7c935edee12",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-beijing-foreign-studies-university",
+              "canonicalUniversitySha256": "bac3459824577f43ef128e0e83e1482f17b234e1d5955a1b66f1a7c935edee12"
+            }
+          ],
+          "programId": "program-beijing-foreign-studies-university-finance-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "b121396b0ed7a113149ba2151e62092cc89d7294d2e26023afcfc228c4ebdb18",
+          "canonicalCycleSha256": "b121396b0ed7a113149ba2151e62092cc89d7294d2e26023afcfc228c4ebdb18",
+          "canonicalProgramSha256": "660139be7c4a3ab43b3712e183a3c2c20f4126d3d0bf9fee9f2932f67355dfbf",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-program-review-3f6ff1580cd5",
+              "bfsu-undergraduate-2026"
+            ],
+            "verifiedAt": "2026-08-26",
+            "reviewAfter": "2026-08-26",
+            "status": "stale",
+            "id": "cycle-2026-24d32898799e",
+            "programId": "program-beijing-foreign-studies-university-finance-bachelor",
+            "academicYear": "2026-2027",
+            "intake": "spring",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "previous-cycle-reference",
+            "tuitionCny": 39900,
+            "tuitionPeriod": "academic-year",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "cycle-specific",
+            "factScope": "complete",
+            "applicationFeeCny": 800,
+            "notes": {
+              "en": "Official-source review 2026-08-26. Reference record only: no unambiguous current application window is asserted. Official route requirements: foreign ordinary passport; senior high school completion; CSCA Mathematics; major-specific English proof."
+            }
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "program-beijing-foreign-studies-university-finance-bachelor",
+              "canonicalProgramSha256": "660139be7c4a3ab43b3712e183a3c2c20f4126d3d0bf9fee9f2932f67355dfbf"
+            }
+          ],
+          "sourceIds": [
+            "src-program-review-3f6ff1580cd5",
+            "bfsu-undergraduate-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-program-review-3f6ff1580cd5",
+              "canonicalSourceSha256": "191dae1b1fdcc63226d34e2c29aab96e174e5c1e549d7d3ae5735e61296d3155",
+              "url": "https://osao.bfsu.edu.cn/info/2612/7182.htm"
+            },
+            {
+              "sourceId": "bfsu-undergraduate-2026",
+              "canonicalSourceSha256": "2e4dc39a14b5375c22e2b06d5390cfb37eface04994c2d9e1b5a7ceab7e45ea7",
+              "url": "https://osao.bfsu.edu.cn/info/2612/7182.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "quotedDate": null,
+          "reason": "exact-English-bachelor-spring-row-and2026-applicant-window-are-stated-but-2026-enrollment-prose-does-not-unambiguously-bind-stored2026-2027-spring-intake",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+          "evidenceBodySha256": "2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329",
+          "evidenceTextSha256": "77cd9c23ce19990078c07f1dc9070c2d812590bb588ea1ef898b75347315b20e",
+          "observedAt": "2026-10-19T12:43:39.311266+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "statedSourceApplicationOpeningObservation": "2026-10-15",
+          "statedSourceApplicationDeadlineObservation": "2026-12-15",
+          "statedApplicationWindowQuote": "Spring Intake: October 15, 2026 — December 15, 2026",
+          "statedSourceEnrollmentYear": 2026,
+          "targetSpringCommencementYearExplicit": false,
+          "targetIntakeBindingEstablished": false,
+          "late2026ApplicationWindowNotSilentlyReinterpretedAs2027Enrollment": true,
+          "exactProgrammeLanguageAndSpringIntakeListed": true,
+          "newRecordScopeAtPreviouslyCheckedInstitution": true,
+          "priorCompletedIdsNotReassessed": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-72c147058578",
+          "universityId": "uni-beijing-foreign-studies-university",
+          "canonicalUniversitySha256": "bac3459824577f43ef128e0e83e1482f17b234e1d5955a1b66f1a7c935edee12",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-beijing-foreign-studies-university",
+              "canonicalUniversitySha256": "bac3459824577f43ef128e0e83e1482f17b234e1d5955a1b66f1a7c935edee12"
+            }
+          ],
+          "programId": "program-beijing-foreign-studies-university-international-trade-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "c80f983e809fab7294dc3895d682016a1871a4740b326944f8d2739b066e3ce0",
+          "canonicalCycleSha256": "c80f983e809fab7294dc3895d682016a1871a4740b326944f8d2739b066e3ce0",
+          "canonicalProgramSha256": "13d1f736af8e48b6c07c6c6506794cb68da00c5ad6ac9fc5fb91d3e9aed50df2",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-program-review-3f6ff1580cd5",
+              "bfsu-undergraduate-2026"
+            ],
+            "verifiedAt": "2026-08-26",
+            "reviewAfter": "2026-08-26",
+            "status": "stale",
+            "id": "cycle-2026-72c147058578",
+            "programId": "program-beijing-foreign-studies-university-international-trade-bachelor",
+            "academicYear": "2026-2027",
+            "intake": "spring",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "previous-cycle-reference",
+            "tuitionCny": 39900,
+            "tuitionPeriod": "academic-year",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "cycle-specific",
+            "factScope": "complete",
+            "applicationFeeCny": 800,
+            "notes": {
+              "en": "Official-source review 2026-08-26. Reference record only: no unambiguous current application window is asserted. Official route requirements: foreign ordinary passport; senior high school completion; CSCA Mathematics; major-specific English proof."
+            }
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "program-beijing-foreign-studies-university-international-trade-bachelor",
+              "canonicalProgramSha256": "13d1f736af8e48b6c07c6c6506794cb68da00c5ad6ac9fc5fb91d3e9aed50df2"
+            }
+          ],
+          "sourceIds": [
+            "src-program-review-3f6ff1580cd5",
+            "bfsu-undergraduate-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-program-review-3f6ff1580cd5",
+              "canonicalSourceSha256": "191dae1b1fdcc63226d34e2c29aab96e174e5c1e549d7d3ae5735e61296d3155",
+              "url": "https://osao.bfsu.edu.cn/info/2612/7182.htm"
+            },
+            {
+              "sourceId": "bfsu-undergraduate-2026",
+              "canonicalSourceSha256": "2e4dc39a14b5375c22e2b06d5390cfb37eface04994c2d9e1b5a7ceab7e45ea7",
+              "url": "https://osao.bfsu.edu.cn/info/2612/7182.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "quotedDate": null,
+          "reason": "exact-English-bachelor-spring-row-and2026-applicant-window-are-stated-but-2026-enrollment-prose-does-not-unambiguously-bind-stored2026-2027-spring-intake",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+          "evidenceBodySha256": "2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329",
+          "evidenceTextSha256": "77cd9c23ce19990078c07f1dc9070c2d812590bb588ea1ef898b75347315b20e",
+          "observedAt": "2026-10-19T12:43:39.311266+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "statedSourceApplicationOpeningObservation": "2026-10-15",
+          "statedSourceApplicationDeadlineObservation": "2026-12-15",
+          "statedApplicationWindowQuote": "Spring Intake: October 15, 2026 — December 15, 2026",
+          "statedSourceEnrollmentYear": 2026,
+          "targetSpringCommencementYearExplicit": false,
+          "targetIntakeBindingEstablished": false,
+          "late2026ApplicationWindowNotSilentlyReinterpretedAs2027Enrollment": true,
+          "exactProgrammeLanguageAndSpringIntakeListed": true,
+          "newRecordScopeAtPreviouslyCheckedInstitution": true,
+          "priorCompletedIdsNotReassessed": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-c6f79b90dcfc",
+          "universityId": "uni-beijing-foreign-studies-university",
+          "canonicalUniversitySha256": "bac3459824577f43ef128e0e83e1482f17b234e1d5955a1b66f1a7c935edee12",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-beijing-foreign-studies-university",
+              "canonicalUniversitySha256": "bac3459824577f43ef128e0e83e1482f17b234e1d5955a1b66f1a7c935edee12"
+            }
+          ],
+          "programId": "program-beijing-foreign-studies-university-international-business-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "e5e685018cf6a09d1c24f65ef353aef27bd7947232985461566b2fbf5c72a5eb",
+          "canonicalCycleSha256": "e5e685018cf6a09d1c24f65ef353aef27bd7947232985461566b2fbf5c72a5eb",
+          "canonicalProgramSha256": "a3a2459f52c64acfa37dff657347595da6ae197549a02a681524aba5f8db726e",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-program-review-3f6ff1580cd5",
+              "bfsu-undergraduate-2026"
+            ],
+            "verifiedAt": "2026-08-26",
+            "reviewAfter": "2026-08-26",
+            "status": "stale",
+            "id": "cycle-2026-c6f79b90dcfc",
+            "programId": "program-beijing-foreign-studies-university-international-business-bachelor",
+            "academicYear": "2026-2027",
+            "intake": "spring",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "previous-cycle-reference",
+            "tuitionCny": 39900,
+            "tuitionPeriod": "academic-year",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "cycle-specific",
+            "factScope": "complete",
+            "applicationFeeCny": 800,
+            "notes": {
+              "en": "Official-source review 2026-08-26. Reference record only: no unambiguous current application window is asserted. Official route requirements: foreign ordinary passport; senior high school completion; CSCA Mathematics; major-specific English proof."
+            }
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "program-beijing-foreign-studies-university-international-business-bachelor",
+              "canonicalProgramSha256": "a3a2459f52c64acfa37dff657347595da6ae197549a02a681524aba5f8db726e"
+            }
+          ],
+          "sourceIds": [
+            "src-program-review-3f6ff1580cd5",
+            "bfsu-undergraduate-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-program-review-3f6ff1580cd5",
+              "canonicalSourceSha256": "191dae1b1fdcc63226d34e2c29aab96e174e5c1e549d7d3ae5735e61296d3155",
+              "url": "https://osao.bfsu.edu.cn/info/2612/7182.htm"
+            },
+            {
+              "sourceId": "bfsu-undergraduate-2026",
+              "canonicalSourceSha256": "2e4dc39a14b5375c22e2b06d5390cfb37eface04994c2d9e1b5a7ceab7e45ea7",
+              "url": "https://osao.bfsu.edu.cn/info/2612/7182.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "quotedDate": null,
+          "reason": "exact-English-bachelor-spring-row-and2026-applicant-window-are-stated-but-2026-enrollment-prose-does-not-unambiguously-bind-stored2026-2027-spring-intake",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+          "evidenceBodySha256": "2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329",
+          "evidenceTextSha256": "77cd9c23ce19990078c07f1dc9070c2d812590bb588ea1ef898b75347315b20e",
+          "observedAt": "2026-10-19T12:43:39.311266+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "statedSourceApplicationOpeningObservation": "2026-10-15",
+          "statedSourceApplicationDeadlineObservation": "2026-12-15",
+          "statedApplicationWindowQuote": "Spring Intake: October 15, 2026 — December 15, 2026",
+          "statedSourceEnrollmentYear": 2026,
+          "targetSpringCommencementYearExplicit": false,
+          "targetIntakeBindingEstablished": false,
+          "late2026ApplicationWindowNotSilentlyReinterpretedAs2027Enrollment": true,
+          "exactProgrammeLanguageAndSpringIntakeListed": true,
+          "newRecordScopeAtPreviouslyCheckedInstitution": true,
+          "priorCompletedIdsNotReassessed": true,
+          "noYearRollover": true
+        }
+      ],
+      "heldWindowObservation": {
+        "path": "bfsu-spring-window-observation-v1.json",
+        "sha256": "c271cd27c32cd785abafe5a239d3b0a039d77e2c77510712e0f915ee256621f6"
+      }
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "reportSha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "batch": "official-batch-025",
+      "reportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f"
+    },
+    {
+      "batch": "official-batch-026",
+      "reportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9"
+    },
+    {
+      "batch": "official-batch-027",
+      "reportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+    },
+    {
+      "batch": "official-batch-028",
+      "reportSha256": "c1ee48a947ab94feac0f853531921d888b4ce30b24781afe7cb9e422e29f9276"
+    },
+    {
+      "batch": "official-batch-029",
+      "reportSha256": "6fa308e70e7e0ad0a0436ed5103eb067928fc9494ba1e977fdaba85cdd3d2243"
+    },
+    {
+      "batch": "official-batch-030",
+      "reportSha256": "95ae6d26c4de9030e7debe25a19d12f12d23235c3633a3b75aca538996958668"
+    },
+    {
+      "batch": "official-batch-031",
+      "reportSha256": "7f213f09e6f2e397a41ce67e2a81c68c9f4bed5f93f83d60d1cff37a42e5cf59"
+    },
+    {
+      "batch": "official-batch-032",
+      "reportSha256": "7ca2417531ff19ae0b9c7b348bf40be89d9029a48b7930172d876488b663b982"
+    },
+    {
+      "batch": "official-batch-033",
+      "reportSha256": "9087e4d1d7242809498d7f0a9c1b740419da39f52ee863e4d4849bd1aef44698"
+    },
+    {
+      "batch": "official-batch-034",
+      "reportSha256": "3ddc3e1c816b3c4927c13304492b76fd1fc8f5dc6ff90ec1043a770ccd55b9d0"
+    },
+    {
+      "batch": "official-batch-035",
+      "reportSha256": "b621c16cdbd0d01ca22059bd83f92e283d43629394ddab64ba7c86486ae7dafb"
+    },
+    {
+      "batch": "official-batch-036",
+      "reportSha256": "db944c0a39ebdae71e53866c10f70f6d98b60ef77ba034891224afe1c0bf7f50"
+    }
+  ],
+  "validation": {
+    "exactThirteenRootDispatchedIdsCoveredOnce": true,
+    "zeroExtensionsForThisGroup": true,
+    "sharedZhejiangAwardOnlyOnce": true,
+    "noPriorAssessedOrApprovedOverlap": true,
+    "allSixCanonicalInputsBeforeAfterUnchanged": true,
+    "fullCanonicalRowsParentLinkedProgrammeSourceUniversityPinsSaved": true,
+    "allQuotedHtmlFragmentsMatchSavedOriginalText": true,
+    "noPdfClaimForCaptchaHtml": true,
+    "noImplicitYearRollover": true,
+    "noIndependentAwardDateBorrowed": true,
+    "noCanonicalOrFreshnessChange": true,
+    "ambiguousBfsuWindowPreservedAsSeparatelyPinnedHeldObservation": true
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-039-20261019",
+  "reviewer": "independent-offline-agent-dates-038",
+  "reviewedAt": "2026-10-19T12:52:17.694Z",
+  "result": "source-only-pass",
+  "finalReportSha256": "82f000484e1b310f4101e0bf377c1d9ce3da9dd3f05b37159c54acd4c8664380",
+  "report": {
+    "path": "report.json",
+    "sha256": "82f000484e1b310f4101e0bf377c1d9ce3da9dd3f05b37159c54acd4c8664380"
+  },
+  "reviewScope": "Exactly thirteen dispatched raw date records at seven university scopes; canonical rows and parents/sources, eight original HTML bodies, three bounded failed-source web observations and the held BFSU application window were reviewed offline. Only this receipt is added under batch039.",
+  "summary": {
+    "checksPassed": 23,
+    "checksFailed": 0,
+    "recordsReviewed": 13,
+    "universitiesReviewed": 7,
+    "recordOutcomes": {
+      "unknown": 8,
+      "blocked": 5
+    },
+    "originalBodiesChecked": 8,
+    "pdfOriginalsChecked": 0,
+    "networkRequests": 0,
+    "canonicalWrites": 0
+  },
+  "checks": [
+    {
+      "name": "root-frozen-final-report-sha",
+      "passed": true
+    },
+    {
+      "name": "audit-six-current-canonical-inputs-and-before-after-pins",
+      "passed": true
+    },
+    {
+      "name": "selection-queue-summary-inventory-and-dispatch-pins",
+      "passed": true
+    },
+    {
+      "name": "exact-thirteen-dispatched-ids-once-seven-scopes",
+      "passed": true
+    },
+    {
+      "name": "no-prior-assessed-or-approved-overlap",
+      "passed": true
+    },
+    {
+      "name": "global-shared-provincial-award-only-one-attributed-scope",
+      "passed": true
+    },
+    {
+      "name": "canonical-row-parent-language-source-and-university-pins",
+      "passed": true
+    },
+    {
+      "name": "eleven-finite-native-reads-eight-original-html-bodies-three-failures",
+      "passed": true
+    },
+    {
+      "name": "capture-artifact-and-evidence-hashes",
+      "passed": true
+    },
+    {
+      "name": "bounded-native-failures-one-web-fallback-each-and-cooldown",
+      "passed": true
+    },
+    {
+      "name": "zufe-exact2025-bulletin-link-is-captcha-not-pdf",
+      "passed": true
+    },
+    {
+      "name": "zju-landing-and-award-index-do-not-bind-target2027-or-own-award-days",
+      "passed": true
+    },
+    {
+      "name": "zjut-independent-freshman-award-does-not-borrow-may30-general-date",
+      "passed": true
+    },
+    {
+      "name": "ahmu-provincial-award-does-not-borrow-2018-CSC-day",
+      "passed": true
+    },
+    {
+      "name": "bfsu-held-window-receipt-and-all-original-quotes",
+      "passed": true
+    },
+    {
+      "name": "bfsu-late2026-applicant-window-does-not-invent2027-spring-or-open-status",
+      "passed": true,
+      "detail": "The original explicitly says enroll in 2026 overall and gives late-2026 Spring Intake applications. The report preserves both facts while leaving spring commencement year and target-row date binding unresolved."
+    },
+    {
+      "name": "bfsu-receipt-full-stored-rows-and-parent-source-pins",
+      "passed": true
+    },
+    {
+      "name": "archive-scope-check-does-not-reuse-different-route-as-new-evidence",
+      "passed": true
+    },
+    {
+      "name": "unknown-and-blocked-never-become-open-or-closed",
+      "passed": true
+    },
+    {
+      "name": "source-only-flags-and-unassessed-opening-dates",
+      "passed": true
+    },
+    {
+      "name": "thirty-six-prior-frozen-report-pins",
+      "passed": true
+    },
+    {
+      "name": "thirteen-record-outcomes-nine-cycles-four-awards-zero-side-effects",
+      "passed": true
+    },
+    {
+      "name": "final-frozen-report-and-six-inputs-unchanged-after-review",
+      "passed": true
+    }
+  ],
+  "sourceOriginalPins": [
+    {
+      "path": "zju-admissions.html",
+      "sha256": "7ca3d5aec63b608ddf5c1ccfb8c653f381aae325de9a617211f3316c0385da8e"
+    },
+    {
+      "path": "zufe-programme.html",
+      "sha256": "63ec0f62b2cb480b977e25722ac5984758086237a27e1cdbc44f9550132b7f9c"
+    },
+    {
+      "path": "zufe-application.html",
+      "sha256": "f40ce16422eae01fc1c4380527096949af0313c16132190bdaafb1013f0ee249"
+    },
+    {
+      "path": "zjut-freshman.html",
+      "sha256": "3c74a66e0e2ac0328bed3936654bdd37a8b0636d5175ceb5df000982cdd90e8d"
+    },
+    {
+      "path": "ahmu-award.html",
+      "sha256": "31162cdb1d43efbc170e76baf5c342c87ea1fa9a6554d3e6f0eb6109069931aa"
+    },
+    {
+      "path": "bfsu-undergraduate.html",
+      "sha256": "2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329"
+    },
+    {
+      "path": "zufe-bulletin-pdf.html",
+      "sha256": "908a81f3738d38fe9d90c15a69c7a830f5de50556240db37cbbb7f2f8fcd1e19"
+    },
+    {
+      "path": "zju-scholarships.html",
+      "sha256": "d9df1f8e0c78e7585fdfd92992a23895a5fa4886fbbfb93d2a2fe4efb34415e0"
+    }
+  ],
+  "artifactPins": [
+    {
+      "path": "selection.json",
+      "sha256": "350d87d5cc963314b151d6022b4a40aa572b488f4d32b036f27b3634f1487559"
+    },
+    {
+      "path": "captures.json",
+      "sha256": "83d87a1f945a74e3fa8e5aae38b348dd6380805734e966457fa6d3110146c26a"
+    },
+    {
+      "path": "support-captures.json",
+      "sha256": "de7aadaf0951b8a900a35fe999a757bfaecfe9a1c7dfb69ec4e891da771556db"
+    },
+    {
+      "path": "web-fallback.json",
+      "sha256": "9bfece88151a6a5449631c175a611c38bb00ff7ee98759dcd50085067c316c9c"
+    },
+    {
+      "path": "archive-source-check.json",
+      "sha256": "482f8d0f114cd99f076918842d07563dde20bfcac182e1fca491c1f2da04ad8d"
+    },
+    {
+      "path": "acquisition-diagnostics.json",
+      "sha256": "5baae197d6aec32e9203ddfd0cfb3bc282de514820b37fbd0e51a88f0b013a37"
+    },
+    {
+      "path": "bfsu-spring-window-observation-v1.json",
+      "sha256": "c271cd27c32cd785abafe5a239d3b0a039d77e2c77510712e0f915ee256621f6"
+    }
+  ],
+  "recordSetSha256": "2a3f4f7e6a5a004ef1e523ab12c046212a5c252b74bdfe377ec3d3b24345db5e",
+  "limitations": [
+    "Acceptance is source-only. No canonical date, publication, status or freshness changes are approved.",
+    "Eight unknown and five blocked scopes do not establish availability. A CAPTCHA HTML response and HTTP 200 are not a readable PDF date source.",
+    "BFSU explicit October 15 to December 15, 2026 application dates coexist with general 2026 enrollment wording. The spring commencement year remains unresolved; no 2027 rollover or current open status is certified.",
+    "ZJUT general admission May 30 is not substituted for a separately named freshman award; AHMU May 31, 2018 belongs to historical CSC, not the provincial award.",
+    "The shared Zhejiang award is attributed once to ZJU for this review; other mapped institutions are not date-certified. AHMU and BFSU are new record scopes, not newly completed schools.",
+    "No fees, materials, eligibility, whole-school completeness or permanent programme cessation is certified."
+  ],
+  "finalReportUnchanged": true
+}
