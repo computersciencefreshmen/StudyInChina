@@ -1,0 +1,802 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-010-20261019",
+  "state": "completed-with-two-held-scope-conflicts-and-one-access-block",
+  "completedAt": "2026-10-19T05:16:31.201Z",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "inventoryPath": "C:\\Users\\Henry\\Desktop\\学过的课程\\github_profile_work\\StudyInChina\\quality\\deadline-sweep-20261019\\catalog-deadlines.json",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "planSha256": "1085ae2f3b1cd0a815e62c0764d85751da130b3087f0e9f26f3dff4258ba40f5",
+  "selection": "Exactly six scholarship records and one SISU non-degree cycle at selected school positions 11–16. All seven are unpublished/stale in the pinned input snapshot. No school-wide or full-fact completion.",
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    }
+  ],
+  "acquisition": {
+    "method": "Bounded native official HTML/PDF reads plus actual full-page web-tool text reads for two SISU notices",
+    "nativeRequestReceipts": [
+      {
+        "key": "hainnu-original",
+        "url": "https://webplus.hainnu.edu.cn/_s74/2025/1110/c1345a160838/page.psp",
+        "observedAt": "2026-10-19T05:10:49.923863+00:00",
+        "method": "GET",
+        "httpStatus": 200,
+        "finalUrl": "https://webplus.hainnu.edu.cn/_s74/2025/1110/c1345a160838/page.psp",
+        "contentType": "text/html;charset=UTF-8",
+        "bodyPath": "hainnu-original.html",
+        "bytes": 29929,
+        "bodySha256": "588d6a80e785559fae58b3db47b873cd7c0840b530a9f31c6a06f150f558c0fa",
+        "textPath": "hainnu-original.txt"
+      },
+      {
+        "key": "hainnu-iclt-2026",
+        "url": "https://gjwh.hainnu.edu.cn/2026/0309/c1348a163203/pagem.htm",
+        "observedAt": "2026-10-19T05:10:49.924368+00:00",
+        "method": "GET",
+        "httpStatus": 200,
+        "finalUrl": "https://gjwh.hainnu.edu.cn/2026/0309/c1348a163203/pagem.htm",
+        "contentType": "text/html; charset=UTF-8",
+        "bodyPath": "hainnu-iclt-2026.html",
+        "bytes": 17713,
+        "bodySha256": "54b929c96547badd68982057d8418a583d4f6bba6fc6bd692724a31e087e3560",
+        "textPath": "hainnu-iclt-2026.txt"
+      },
+      {
+        "key": "pku",
+        "url": "https://www.isd.pku.edu.cn/cn/scholarship/detail.php?id=6",
+        "observedAt": "2026-10-19T05:10:58.852889+00:00",
+        "method": "GET",
+        "httpStatus": 200,
+        "finalUrl": "https://www.isd.pku.edu.cn/cn/scholarship/detail.php?id=6",
+        "contentType": "text/html;charset=utf-8",
+        "bodyPath": "pku.html",
+        "bytes": 33200,
+        "bodySha256": "14ce9c31b6b44581ec6af8e11b60a17463c2c39d25c5275740134be0bd490cd0",
+        "textPath": "pku.txt"
+      },
+      {
+        "key": "sisu-scholarship",
+        "url": "https://studyinsisu.sisu.edu.cn/jxj/gjzwjsjxj/5e77e5b50f64418eb76adedd432736f9.htm",
+        "observedAt": "2026-10-19T05:10:58.901736+00:00",
+        "method": "GET",
+        "error": "URLError:<urlopen error _ssl.c:983: The handshake operation timed out>",
+        "officialDateVerified": false
+      },
+      {
+        "key": "sicnu",
+        "url": "https://lxs.sicnu.edu.cn/_wx/_wx_home_news_i.aspx?iid=639081519364042574&said=liu",
+        "observedAt": "2026-10-19T05:11:01.222645+00:00",
+        "method": "GET",
+        "httpStatus": 200,
+        "finalUrl": "https://lxs.sicnu.edu.cn/_wx/_wx_home_news_i.aspx?iid=639081519364042574&said=liu",
+        "contentType": "text/html; charset=utf-8",
+        "bodyPath": "sicnu.html",
+        "bytes": 36449,
+        "bodySha256": "ffdb7b8d5762a79dab45d6261e7e51b21cf8b2fe8713767482eb12d89d1c8454",
+        "textPath": "sicnu.txt"
+      },
+      {
+        "key": "cqu",
+        "url": "https://study.cqu.edu.cn/info/1388/2836.htm",
+        "observedAt": "2026-10-19T05:11:03.162333+00:00",
+        "method": "GET",
+        "httpStatus": 412,
+        "error": "HTTPError:412",
+        "officialDateVerified": false
+      },
+      {
+        "key": "sisu-language",
+        "url": "https://studyinsisu.sisu.edu.cn/zsxx/hyjx/Enzsxx/803062ab33d340748502e1827df80b1a.htm",
+        "observedAt": "2026-10-19T05:11:05.534788+00:00",
+        "method": "GET",
+        "error": "URLError:<urlopen error _ssl.c:983: The handshake operation timed out>",
+        "officialDateVerified": false
+      },
+      {
+        "key": "hainnu-iclt-2026-guide",
+        "url": "https://gjwh.hainnu.edu.cn/_upload/article/files/21/2a/928760264d95b7b2da094afef895/578493a9-f4fd-4ef6-9fc8-7b8415df1f1c.pdf",
+        "observedAt": "2026-10-19T05:12:47.786776+00:00",
+        "method": "GET",
+        "httpStatus": 200,
+        "finalUrl": "https://gjwh.hainnu.edu.cn/_upload/article/files/21/2a/928760264d95b7b2da094afef895/578493a9-f4fd-4ef6-9fc8-7b8415df1f1c.pdf",
+        "contentType": "application/pdf",
+        "bodyPath": "hainnu-iclt-2026-guide.pdf",
+        "bytes": 304596,
+        "bodySha256": "bd51cf7635e2bda37fd7ebe75ae38c3282637559da43b91f4d0d07b64e5c5a9b"
+      },
+      {
+        "key": "ccnu-fallback",
+        "url": "https://dge.ccnu.edu.cn/info/1381/28431.htm",
+        "observedAt": "2026-10-19T05:12:54.896975+00:00",
+        "method": "GET",
+        "httpStatus": 200,
+        "finalUrl": "https://dge.ccnu.edu.cn/info/1381/28431.htm",
+        "contentType": "text/html",
+        "bodyPath": "ccnu-fallback.html",
+        "bytes": 22916,
+        "bodySha256": "46916d7cb65dc34b27235a6fa7eb6a5f0a67c9bf3c539a827319ba22e2d81bbd",
+        "textPath": "ccnu-fallback.txt"
+      },
+      {
+        "key": "cqu-official-partner-copy",
+        "url": "https://www.unistrasi.it/public/articoli/4449/Bando%20borse%20studio%20CQU%202026-2027.pdf",
+        "observedAt": "2026-10-19T05:12:57.511167+00:00",
+        "method": "GET",
+        "httpStatus": 200,
+        "finalUrl": "https://www.unistrasi.it/public/articoli/4449/Bando%20borse%20studio%20CQU%202026-2027.pdf",
+        "contentType": "application/pdf",
+        "bodyPath": "cqu-official-partner-copy.pdf",
+        "bytes": 311157,
+        "bodySha256": "5b43a5a8e5ae69e588da39daaa150c7c4a144ecb5c5899e8f7ccd9c1c6927c70"
+      },
+      {
+        "key": "ccnu-fallback-guide",
+        "url": "https://dge.ccnu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2126757371&wbfileid=7997268BCCF056471E2B5CB9A31DBA0C",
+        "observedAt": "2026-10-19T05:14:43.466271+00:00",
+        "method": "GET",
+        "httpStatus": 200,
+        "finalUrl": "https://dge.ccnu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2126757371&wbfileid=7997268BCCF056471E2B5CB9A31DBA0C",
+        "contentType": "text/html;charset=UTF-8",
+        "bodyPath": "ccnu-fallback-guide.html",
+        "bytes": 3829,
+        "bodySha256": "47e9bc91d325b80e9419c2b3c75c86577cf2dac8f9914ffb932b9f41c0b5bea1",
+        "textPath": "ccnu-fallback-guide.txt"
+      }
+    ],
+    "rawOriginByteCaptures": 8,
+    "officialPartnerMirrorDocuments": 1,
+    "webTextOnlyDateEvidenceDocuments": 2,
+    "priorEvidenceReused": 0,
+    "centralGuideSubstitution": false,
+    "maxNativeConcurrency": 2,
+    "captchaBypassed": false,
+    "searchSnippetsUsedAsDateEvidence": false,
+    "paidCalls": 0,
+    "actualFullDateEvidenceDocumentsRead": 6,
+    "primarySchoolHostDateDocumentsRead": 5
+  },
+  "summary": {
+    "schoolsAttempted": 6,
+    "recordsAssessed": 7,
+    "scholarshipsAssessed": 6,
+    "admissionCyclesAssessed": 1,
+    "publishedRecordsAssessed": 0,
+    "recordResults": {
+      "unchanged": 4,
+      "corrected": 0,
+      "closed": 0,
+      "unknown": 0,
+      "blocked": 1,
+      "conflict": 2
+    },
+    "fullFactsCertified": 0,
+    "wholeSchoolCataloguesCompleted": 0,
+    "canonicalWrites": 0,
+    "paidModelCalls": 0,
+    "publicationActions": 0
+  },
+  "rules": [
+    "Only the listed route/intake dates were checked; all other facts and canonical freshness/status remain untouched.",
+    "A deadline not passed does not prove the portal is accepting applications. Unknown opening dates remain unknown.",
+    "Student application cutoffs and recommending/host institutional review cutoffs are distinct.",
+    "Conflicting year/intake scope remains held with officialDeadline null. No canonical correction is proposed automatically.",
+    "Primary access failures, captcha responses, partner-hosted documents and cached-tool text are explicitly distinguished."
+  ],
+  "groups": [
+    {
+      "universityId": "uni-central-china-normal-university",
+      "sourceUrl": "https://dge.ccnu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2126757371&wbfileid=7997268BCCF056471E2B5CB9A31DBA0C",
+      "result": "blocked",
+      "scope": "Unverified school-specific 2027 spring ICLT student deadline; stored 2026-10-31 retained as unconfirmed.",
+      "quote": null,
+      "officialWebsiteRead": false,
+      "primaryHostRead": false,
+      "officialPartnerHostedSchoolDocument": false,
+      "rawBytesCaptured": true,
+      "evidence": [
+        {
+          "key": "ccnu-fallback",
+          "url": "https://dge.ccnu.edu.cn/info/1381/28431.htm",
+          "observedAt": "2026-10-19T05:12:54.896975+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://dge.ccnu.edu.cn/info/1381/28431.htm",
+          "contentType": "text/html",
+          "bodyPath": "ccnu-fallback.html",
+          "bytes": 22916,
+          "bodySha256": "46916d7cb65dc34b27235a6fa7eb6a5f0a67c9bf3c539a827319ba22e2d81bbd",
+          "textPath": "ccnu-fallback.txt",
+          "rawOriginServerBytes": true,
+          "textArtifact": {
+            "path": "ccnu-fallback.txt",
+            "sha256": "b215fd927e7b8802b2ceca935e410e84ea23f04b94b8616a4bcf2eebfb0f4480",
+            "bytes": 1554
+          }
+        },
+        {
+          "key": "ccnu-fallback-guide",
+          "url": "https://dge.ccnu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2126757371&wbfileid=7997268BCCF056471E2B5CB9A31DBA0C",
+          "observedAt": "2026-10-19T05:14:43.466271+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://dge.ccnu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2126757371&wbfileid=7997268BCCF056471E2B5CB9A31DBA0C",
+          "contentType": "text/html;charset=UTF-8",
+          "bodyPath": "ccnu-fallback-guide.html",
+          "bytes": 3829,
+          "bodySha256": "47e9bc91d325b80e9419c2b3c75c86577cf2dac8f9914ffb932b9f41c0b5bea1",
+          "textPath": "ccnu-fallback-guide.txt",
+          "rawOriginServerBytes": true,
+          "textArtifact": {
+            "path": "ccnu-fallback-guide.txt",
+            "sha256": "014aca607de9655444d493f58af683afeee763af97f97b57815887c33595e9f8",
+            "bytes": 46
+          }
+        }
+      ],
+      "records": [
+        {
+          "recordId": "sch-gap-mew-csw-ccnu-iclt-scholarship-2026",
+          "recordKind": "scholarship",
+          "result": "blocked",
+          "storedDeadline": "2026-10-31",
+          "storedOpensOn": null,
+          "officialDeadline": null,
+          "officialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-of-day-supplied",
+          "publishedInInputSnapshot": false,
+          "canonicalRecordSha256": "4d6de3d34fbea03b51bd34c0c13c1e9cec4e9946352c4cf09f06f8cb58cbfa88",
+          "canonicalScholarshipSha256": "4d6de3d34fbea03b51bd34c0c13c1e9cec4e9946352c4cf09f06f8cb58cbfa88",
+          "sourceIds": [
+            "src-gap-scholarship-mew-csw-ccnu-iclt-scholarship-2026"
+          ],
+          "sourceUrls": [
+            "https://cice.ccnu.edu.cn/lhl_/gjzwjsjxj.htm"
+          ],
+          "observedAt": "2026-10-19T05:14:43.466271+00:00",
+          "quote": null,
+          "secondaryQuote": null,
+          "evidenceLocator": "Original CICE page web read returned 403. Different official department page exposes a 2026 guide attachment, but the attachment response is an HTML verification-code form, not a PDF.",
+          "yearBasis": "No accessible actual guide date body; no deadline verified.",
+          "scope": "Unverified school-specific 2027 spring ICLT student deadline; stored 2026-10-31 retained as unconfirmed.",
+          "caveats": [
+            "HTTP 200 on the attachment is not date evidence. Captcha was not bypassed. Search-index text is discovery only and is not used as verification. No central generic deadline substitutes for a potentially earlier school deadline."
+          ],
+          "requiresDecision": false,
+          "canonicalDateChanged": false,
+          "fullFactsCertified": false,
+          "dateOnly": true
+        }
+      ],
+      "fullFactsCertified": false,
+      "wholeSchoolCatalogueCompleted": false,
+      "dateOnly": true
+    },
+    {
+      "universityId": "uni-hainan-normal-university",
+      "sourceUrl": "https://gjwh.hainnu.edu.cn/_upload/article/files/21/2a/928760264d95b7b2da094afef895/578493a9-f4fd-4ef6-9fc8-7b8415df1f1c.pdf",
+      "result": "unchanged",
+      "scope": "2027 March one-semester ICLT student applications only. September degree/year-study routes have different deadlines.",
+      "quote": "2027年3月入学：学生申请截止日期为10月31日，推荐机构、接收院校审核截止日期为11月10日。",
+      "officialWebsiteRead": true,
+      "primaryHostRead": true,
+      "officialPartnerHostedSchoolDocument": false,
+      "rawBytesCaptured": true,
+      "evidence": [
+        {
+          "key": "hainnu-original",
+          "url": "https://webplus.hainnu.edu.cn/_s74/2025/1110/c1345a160838/page.psp",
+          "observedAt": "2026-10-19T05:10:49.923863+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://webplus.hainnu.edu.cn/_s74/2025/1110/c1345a160838/page.psp",
+          "contentType": "text/html;charset=UTF-8",
+          "bodyPath": "hainnu-original.html",
+          "bytes": 29929,
+          "bodySha256": "588d6a80e785559fae58b3db47b873cd7c0840b530a9f31c6a06f150f558c0fa",
+          "textPath": "hainnu-original.txt",
+          "rawOriginServerBytes": true,
+          "textArtifact": {
+            "path": "hainnu-original.txt",
+            "sha256": "66760e75c29630c37bdbcf8502ff6e7da2c716829b105445b83dc6ce0901d59f",
+            "bytes": 13769
+          }
+        },
+        {
+          "key": "hainnu-iclt-2026",
+          "url": "https://gjwh.hainnu.edu.cn/2026/0309/c1348a163203/pagem.htm",
+          "observedAt": "2026-10-19T05:10:49.924368+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://gjwh.hainnu.edu.cn/2026/0309/c1348a163203/pagem.htm",
+          "contentType": "text/html; charset=UTF-8",
+          "bodyPath": "hainnu-iclt-2026.html",
+          "bytes": 17713,
+          "bodySha256": "54b929c96547badd68982057d8418a583d4f6bba6fc6bd692724a31e087e3560",
+          "textPath": "hainnu-iclt-2026.txt",
+          "rawOriginServerBytes": true,
+          "textArtifact": {
+            "path": "hainnu-iclt-2026.txt",
+            "sha256": "e29a6de3e5e62826f7cb82e32f2d64fa5509aafe5b0934abcf6e249662b00f8a",
+            "bytes": 1112
+          }
+        },
+        {
+          "key": "hainnu-iclt-2026-guide",
+          "url": "https://gjwh.hainnu.edu.cn/_upload/article/files/21/2a/928760264d95b7b2da094afef895/578493a9-f4fd-4ef6-9fc8-7b8415df1f1c.pdf",
+          "observedAt": "2026-10-19T05:12:47.786776+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://gjwh.hainnu.edu.cn/_upload/article/files/21/2a/928760264d95b7b2da094afef895/578493a9-f4fd-4ef6-9fc8-7b8415df1f1c.pdf",
+          "contentType": "application/pdf",
+          "bodyPath": "hainnu-iclt-2026-guide.pdf",
+          "bytes": 304596,
+          "bodySha256": "bd51cf7635e2bda37fd7ebe75ae38c3282637559da43b91f4d0d07b64e5c5a9b",
+          "rawOriginServerBytes": true,
+          "textArtifact": {
+            "path": "hainnu-iclt-2026-guide.txt",
+            "sha256": "60e77883c9cd5bcced6fb19be1ac812e39ed6ef08b2d752cbe1fbfc31a472776",
+            "bytes": 7364
+          }
+        }
+      ],
+      "visualDatePage": {
+        "path": "hainnu-date-page3.png",
+        "sha256": "9313443c2bcdd200f5c0fef343d4c7f2b732eea4031e198bbbdfbd299332abd0",
+        "bytes": 280835
+      },
+      "records": [
+        {
+          "recordId": "sch-gap-mew-scws-hainnu-iclt-scholarship-2026",
+          "recordKind": "scholarship",
+          "result": "unchanged",
+          "storedDeadline": "2026-10-31",
+          "storedOpensOn": null,
+          "officialDeadline": "2026-10-31",
+          "officialOpensOn": "2026-03-01",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-of-day-supplied",
+          "publishedInInputSnapshot": false,
+          "canonicalRecordSha256": "fde4010898629aeee974c67d4a6e51485ff5f2afe298266638e2712cfeadd929",
+          "canonicalScholarshipSha256": "fde4010898629aeee974c67d4a6e51485ff5f2afe298266638e2712cfeadd929",
+          "sourceIds": [
+            "src-gap-scholarship-mew-scws-hainnu-iclt-scholarship-2026"
+          ],
+          "sourceUrls": [
+            "https://webplus.hainnu.edu.cn/_s74/2025/1110/c1345a160838/page.psp"
+          ],
+          "observedAt": "2026-10-19T05:12:47.786776+00:00",
+          "quote": "2027年3月入学：学生申请截止日期为10月31日，推荐机构、接收院校审核截止日期为11月10日。",
+          "secondaryQuote": null,
+          "evidenceLocator": "2026 scholarship guide PDF page 3, section 三; programme and 2027 spring scope page 2; publication March 2026 page 4. Page 3 visually inspected.",
+          "yearBasis": "2026 guide title and March 2026 signature, explicit 2027 March intake, October in the preceding 2026 application round.",
+          "scope": "2027 March one-semester ICLT student applications only. September degree/year-study routes have different deadlines.",
+          "caveats": [
+            "Do not substitute November 10 institutional review for October 31 student deadline. Original general admissions page alone lacks sufficient route/year precision; linked current school scholarship guide is the date evidence."
+          ],
+          "requiresDecision": false,
+          "canonicalDateChanged": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "institutionalReviewDeadline": "2026-11-10"
+        }
+      ],
+      "fullFactsCertified": false,
+      "wholeSchoolCatalogueCompleted": false,
+      "dateOnly": true
+    },
+    {
+      "universityId": "uni-peking-university",
+      "sourceUrl": "https://www.isd.pku.edu.cn/cn/scholarship/detail.php?id=6",
+      "result": "unchanged",
+      "scope": "February 2027 ordinary visiting / preparatory non-degree ICLT intake; both PKU and scholarship systems.",
+      "quote": "2027年2月入学的，在北京大学留学生网上报名系统+国际中文教师奖学金报名网站上的申请时间，截止至2026年10月31日。",
+      "officialWebsiteRead": true,
+      "primaryHostRead": true,
+      "officialPartnerHostedSchoolDocument": false,
+      "rawBytesCaptured": true,
+      "evidence": [
+        {
+          "key": "pku",
+          "url": "https://www.isd.pku.edu.cn/cn/scholarship/detail.php?id=6",
+          "observedAt": "2026-10-19T05:10:58.852889+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://www.isd.pku.edu.cn/cn/scholarship/detail.php?id=6",
+          "contentType": "text/html;charset=utf-8",
+          "bodyPath": "pku.html",
+          "bytes": 33200,
+          "bodySha256": "14ce9c31b6b44581ec6af8e11b60a17463c2c39d25c5275740134be0bd490cd0",
+          "textPath": "pku.txt",
+          "rawOriginServerBytes": true,
+          "textArtifact": {
+            "path": "pku.txt",
+            "sha256": "6fc0bd9524ac19619c989a6329d7452bd865588cd22ba50b4abbadc92fd2c385",
+            "bytes": 5588
+          }
+        }
+      ],
+      "records": [
+        {
+          "recordId": "sch-gap-pku-depth-international-chinese-language-teachers-scholarship",
+          "recordKind": "scholarship",
+          "result": "unchanged",
+          "storedDeadline": "2026-10-31",
+          "storedOpensOn": null,
+          "officialDeadline": "2026-10-31",
+          "officialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "online-until-date; paper-arrival-before-date-as-worded",
+          "publishedInInputSnapshot": false,
+          "canonicalRecordSha256": "bbf07a74d5c0271244e4d55e9ee52292fd170ecb022116258482b991ff1fae00",
+          "canonicalScholarshipSha256": "bbf07a74d5c0271244e4d55e9ee52292fd170ecb022116258482b991ff1fae00",
+          "sourceIds": [
+            "src-gap-scholarship-pku-depth-international-chinese-language-teachers-scholarship",
+            "src-gap-scholarship-pku-depth-international-chinese-language-teachers-scholarship-support-1"
+          ],
+          "sourceUrls": [
+            "https://www.isd.pku.edu.cn/cn/scholarship/detail.php?id=6",
+            "https://www.isd.pku.edu.cn/cn/scholarship/detail.php?id=666"
+          ],
+          "observedAt": "2026-10-19T05:10:58.852889+00:00",
+          "quote": "2027年2月入学的，在北京大学留学生网上报名系统+国际中文教师奖学金报名网站上的申请时间，截止至2026年10月31日。",
+          "secondaryQuote": null,
+          "evidenceLocator": "2026 PKU ICLT notice published 2026-03-05, 申请时间 item 2 and subsequent paper-delivery instruction.",
+          "yearBasis": "Both intake year 2027 and deadline year 2026 are explicit in the actual body.",
+          "scope": "February 2027 ordinary visiting / preparatory non-degree ICLT intake; both PKU and scholarship systems.",
+          "caveats": [
+            "PKU spring intake is February, not a generic March intake. Paper application must arrive before the deadline (请在截止日期前寄达); no inclusive end-of-day arrival promise. The support-id=666 source was not needed/read anew."
+          ],
+          "requiresDecision": false,
+          "canonicalDateChanged": false,
+          "fullFactsCertified": false,
+          "dateOnly": true
+        }
+      ],
+      "fullFactsCertified": false,
+      "wholeSchoolCatalogueCompleted": false,
+      "dateOnly": true
+    },
+    {
+      "universityId": "uni-sichuan-international-studies-university",
+      "sourceUrl": "https://studyinsisu.sisu.edu.cn/jxj/gjzwjsjxj/5e77e5b50f64418eb76adedd432736f9.htm",
+      "result": "unchanged",
+      "scope": "2027 March one-semester International Chinese Language Teachers Scholarship applications only.",
+      "quote": "（4）2027年3月入学：2026年10月31日。",
+      "officialWebsiteRead": true,
+      "primaryHostRead": true,
+      "officialPartnerHostedSchoolDocument": false,
+      "rawBytesCaptured": false,
+      "evidence": [
+        {
+          "sourceUrl": "https://studyinsisu.sisu.edu.cn/jxj/gjzwjsjxj/5e77e5b50f64418eb76adedd432736f9.htm",
+          "observedAt": "2026-10-19T05:12:42.735Z",
+          "rawOriginServerBytes": false,
+          "bodySha256": null,
+          "webTextArtifact": {
+            "path": "sisu-web-observations.json",
+            "sha256": "a8ab04151d477d19ac207697d93424c01e1ed69d3eb4145b4fea184362661267",
+            "bytes": 18450
+          },
+          "provenance": "Actual full-page web-tool reads; returned text may be cached and native HTML capture timed out. Search snippets are not used."
+        }
+      ],
+      "records": [
+        {
+          "recordId": "sch-gap-sch-sisu-iclt-2026",
+          "recordKind": "scholarship",
+          "result": "unchanged",
+          "storedDeadline": "2026-10-31",
+          "storedOpensOn": null,
+          "officialDeadline": "2026-10-31",
+          "officialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-of-day-supplied",
+          "publishedInInputSnapshot": false,
+          "canonicalRecordSha256": "71f40ef73b0890739c34212cb236981c922fa29a8687532174d2d6064e90651c",
+          "canonicalScholarshipSha256": "71f40ef73b0890739c34212cb236981c922fa29a8687532174d2d6064e90651c",
+          "sourceIds": [
+            "src-gap-scholarship-sch-sisu-iclt-2026"
+          ],
+          "sourceUrls": [
+            "https://studyinsisu.sisu.edu.cn/jxj/gjzwjsjxj/5e77e5b50f64418eb76adedd432736f9.htm"
+          ],
+          "observedAt": "2026-10-19T05:12:42.735Z",
+          "quote": "（4）2027年3月入学：2026年10月31日。",
+          "secondaryQuote": null,
+          "evidenceLocator": "Full actual web-tool returned notice, 一学期研修生 2026 September / 2027 March context and 申请截止日期 item (4), web text lines 135 and 159–167.",
+          "yearBasis": "2026 notice and explicit 2027 March / 2026 October 31 applicant deadline.",
+          "scope": "2027 March one-semester International Chinese Language Teachers Scholarship applications only.",
+          "caveats": [
+            "Native HTML capture timed out; actual full-page web text succeeded and is retained with its SHA, without claiming raw origin bytes or uncached freshness."
+          ],
+          "requiresDecision": false,
+          "canonicalDateChanged": false,
+          "fullFactsCertified": false,
+          "dateOnly": true
+        }
+      ],
+      "fullFactsCertified": false,
+      "wholeSchoolCatalogueCompleted": false,
+      "dateOnly": true
+    },
+    {
+      "universityId": "uni-sichuan-normal-university",
+      "sourceUrl": "https://lxs.sicnu.edu.cn/_wx/_wx_home_news_i.aspx?iid=639081519364042574&said=liu",
+      "result": "conflict",
+      "scope": "2027 March ICLT intake candidate, held because the same bilingual notice gives conflicting intake years.",
+      "quote": "2027年3月入学：学生申请截止日期为2026年10月31日",
+      "officialWebsiteRead": true,
+      "primaryHostRead": true,
+      "officialPartnerHostedSchoolDocument": false,
+      "rawBytesCaptured": true,
+      "evidence": [
+        {
+          "key": "sicnu",
+          "url": "https://lxs.sicnu.edu.cn/_wx/_wx_home_news_i.aspx?iid=639081519364042574&said=liu",
+          "observedAt": "2026-10-19T05:11:01.222645+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://lxs.sicnu.edu.cn/_wx/_wx_home_news_i.aspx?iid=639081519364042574&said=liu",
+          "contentType": "text/html; charset=utf-8",
+          "bodyPath": "sicnu.html",
+          "bytes": 36449,
+          "bodySha256": "ffdb7b8d5762a79dab45d6261e7e51b21cf8b2fe8713767482eb12d89d1c8454",
+          "textPath": "sicnu.txt",
+          "rawOriginServerBytes": true,
+          "textArtifact": {
+            "path": "sicnu.txt",
+            "sha256": "b7728c93e64ebdf8e2dccc6a346bd00bbfea82c26abb64d895bcccd1c1cfaf23",
+            "bytes": 11511
+          }
+        }
+      ],
+      "records": [
+        {
+          "recordId": "sch-gap-wave8-sicnu-international-chinese-language-teachers-scholarship-2026",
+          "recordKind": "scholarship",
+          "result": "conflict",
+          "storedDeadline": "2026-10-31",
+          "storedOpensOn": null,
+          "officialDeadline": null,
+          "officialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-of-day-supplied",
+          "publishedInInputSnapshot": false,
+          "canonicalRecordSha256": "7299e8fd22831eae712b3b9e5be16a52c6299a1150003c26af50312b6491190b",
+          "canonicalScholarshipSha256": "7299e8fd22831eae712b3b9e5be16a52c6299a1150003c26af50312b6491190b",
+          "sourceIds": [
+            "src-gap-scholarship-wave8-sicnu-international-chinese-language-teachers-scholarship-2026"
+          ],
+          "sourceUrls": [
+            "https://lxs.sicnu.edu.cn/_wx/_wx_home_news_i.aspx?iid=639081519364042574&said=liu"
+          ],
+          "observedAt": "2026-10-19T05:11:01.222645+00:00",
+          "quote": "2027年3月入学：学生申请截止日期为2026年10月31日",
+          "secondaryQuote": "For programs commencing in March 2025: Applicants must complete their applications by October 31, 2026.",
+          "evidenceLocator": "2026-03-03 bilingual scholarship notice, section 五 / V, applicant deadline item 2 in each language.",
+          "yearBasis": "Chinese says March 2027; English says March 2025. Deadline calendar date agrees, intake-year binding conflicts.",
+          "scope": "2027 March ICLT intake candidate, held because the same bilingual notice gives conflicting intake years.",
+          "caveats": [
+            "Do not silently repair the English intake year or certify the entire scholarship. Existing deadline remains unchanged; no canonical correction or freshness renewal."
+          ],
+          "requiresDecision": true,
+          "canonicalDateChanged": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "candidateDeadlines": [
+            {
+              "intake": "2027-03",
+              "deadline": "2026-10-31",
+              "language": "zh"
+            },
+            {
+              "intake": "2025-03",
+              "deadline": "2026-10-31",
+              "language": "en"
+            }
+          ]
+        }
+      ],
+      "fullFactsCertified": false,
+      "wholeSchoolCatalogueCompleted": false,
+      "dateOnly": true
+    },
+    {
+      "universityId": "uni-chongqing-university",
+      "sourceUrl": "https://www.unistrasi.it/public/articoli/4449/Bando%20borse%20studio%20CQU%202026-2027.pdf",
+      "result": "unchanged",
+      "scope": "March 2027 one-semester ICLT student applications, requiring both scholarship and CQU systems.",
+      "quote": "For programs commencing in March 2027, applications must complete their applications by October 31, 2026.",
+      "officialWebsiteRead": true,
+      "primaryHostRead": false,
+      "officialPartnerHostedSchoolDocument": true,
+      "rawBytesCaptured": true,
+      "evidence": [
+        {
+          "key": "cqu-official-partner-copy",
+          "url": "https://www.unistrasi.it/public/articoli/4449/Bando%20borse%20studio%20CQU%202026-2027.pdf",
+          "observedAt": "2026-10-19T05:12:57.511167+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://www.unistrasi.it/public/articoli/4449/Bando%20borse%20studio%20CQU%202026-2027.pdf",
+          "contentType": "application/pdf",
+          "bodyPath": "cqu-official-partner-copy.pdf",
+          "bytes": 311157,
+          "bodySha256": "5b43a5a8e5ae69e588da39daaa150c7c4a144ecb5c5899e8f7ccd9c1c6927c70",
+          "rawOriginServerBytes": true,
+          "textArtifact": {
+            "path": "cqu-official-partner-copy.txt",
+            "sha256": "ffa8ccbab7c4daef69bdc3a67b3fd138c662af288febb42da93c55cf1b2a4a97",
+            "bytes": 10808
+          }
+        }
+      ],
+      "visualDatePage": {
+        "path": "cqu-date-page3.png",
+        "sha256": "c637c0f5e83402ea1dba8f35d6a0e01301a583a488baf30010560b9cb2dfbae1",
+        "bytes": 212517
+      },
+      "records": [
+        {
+          "recordId": "scholarship-cqu-iclt-2026",
+          "recordKind": "scholarship",
+          "result": "unchanged",
+          "storedDeadline": "2026-10-31",
+          "storedOpensOn": null,
+          "officialDeadline": "2026-10-31",
+          "officialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-of-day-supplied",
+          "publishedInInputSnapshot": false,
+          "canonicalRecordSha256": "7e7318959e0fc3da92a8c4fc4e047bb14f637d90eb9484ef59499ac33c68589f",
+          "canonicalScholarshipSha256": "7e7318959e0fc3da92a8c4fc4e047bb14f637d90eb9484ef59499ac33c68589f",
+          "sourceIds": [
+            "source-cqu-iclt-scholarship-2026"
+          ],
+          "sourceUrls": [
+            "https://study.cqu.edu.cn/info/1388/2836.htm"
+          ],
+          "observedAt": "2026-10-19T05:12:57.511167+00:00",
+          "quote": "For programs commencing in March 2027, applications must complete their applications by October 31, 2026.",
+          "secondaryQuote": null,
+          "evidenceLocator": "CQU-authored 2026 guide PDF page 3 APPLICATION DEADLINES; page 2 explicitly limits March 2027 to one-semester Chinese Language and Literature. Page 3 visually inspected.",
+          "yearBasis": "Explicit 2026 guide title, March 2027 intake and October 31, 2026 deadline.",
+          "scope": "March 2027 one-semester ICLT student applications, requiring both scholarship and CQU systems.",
+          "caveats": [
+            "Primary study.cqu.edu.cn returned HTTP 412 and was cooled down. Evidence is the full CQU-authored guide hosted by official partner university Università per Stranieri di Siena, not a successful fresh read of the CQU host. Source provenance is retained for parent review; no canonical publication approval.",
+            "September 2026 school deadline is May 11, not the central generic May 15; spring deadline must not be generalized to degree routes. No opening date is supplied."
+          ],
+          "requiresDecision": false,
+          "canonicalDateChanged": false,
+          "fullFactsCertified": false,
+          "dateOnly": true
+        }
+      ],
+      "fullFactsCertified": false,
+      "wholeSchoolCatalogueCompleted": false,
+      "dateOnly": true
+    },
+    {
+      "universityId": "uni-sichuan-international-studies-university",
+      "sourceUrl": "https://studyinsisu.sisu.edu.cn/zsxx/hyjx/Enzsxx/803062ab33d340748502e1827df80b1a.htm",
+      "result": "conflict",
+      "scope": "Existing generic spring cycle does not identify whether it means the March or May session; both are described by its canonical notes.",
+      "quote": "March 2027 session: Application deadline: December 15, 2026",
+      "officialWebsiteRead": true,
+      "primaryHostRead": true,
+      "officialPartnerHostedSchoolDocument": false,
+      "rawBytesCaptured": false,
+      "evidence": [
+        {
+          "sourceUrl": "https://studyinsisu.sisu.edu.cn/zsxx/hyjx/Enzsxx/803062ab33d340748502e1827df80b1a.htm",
+          "observedAt": "2026-10-19T05:12:42.735Z",
+          "rawOriginServerBytes": false,
+          "bodySha256": null,
+          "webTextArtifact": {
+            "path": "sisu-web-observations.json",
+            "sha256": "a8ab04151d477d19ac207697d93424c01e1ed69d3eb4145b4fea184362661267",
+            "bytes": 18450
+          },
+          "provenance": "Actual full-page web-tool reads; returned text may be cached and native HTML capture timed out. Search snippets are not used."
+        }
+      ],
+      "records": [
+        {
+          "recordId": "cycle-gap-prog-sisu-chinese-language-2026-2027-2026-2027-spring",
+          "recordKind": "admission-cycle",
+          "result": "conflict",
+          "storedDeadline": "2027-03-30",
+          "storedOpensOn": null,
+          "officialDeadline": null,
+          "officialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-of-day-supplied",
+          "publishedInInputSnapshot": false,
+          "canonicalRecordSha256": "bbfabb98e74b284cc9f0eb376794e32a852f2c9732e02432215c0bc655895ebc",
+          "canonicalCycleSha256": "bbfabb98e74b284cc9f0eb376794e32a852f2c9732e02432215c0bc655895ebc",
+          "programId": "prog-gap-prog-sisu-chinese-language-2026-2027",
+          "canonicalProgramSha256": "3554a04d1f37908c1a31d44fb0f3cc4ebaf195cf9857054c28660d939dc00066",
+          "sourceIds": [
+            "src-gap-program-prog-sisu-chinese-language-2026-2027"
+          ],
+          "sourceUrls": [
+            "https://studyinsisu.sisu.edu.cn/zsxx/hyjx/Enzsxx/803062ab33d340748502e1827df80b1a.htm"
+          ],
+          "observedAt": "2026-10-19T05:12:42.735Z",
+          "quote": "March 2027 session: Application deadline: December 15, 2026",
+          "secondaryQuote": "May 2027 session: Application deadline: March 30, 2027",
+          "evidenceLocator": "Full 2026–2027 Non-degree Chinese Language Programs guide, HOW TO APPLY deadline list, returned web text lines 121 and 123.",
+          "yearBasis": "Actual guide explicitly distinguishes March 2027 and May 2027 sessions with different deadline years/dates.",
+          "scope": "Existing generic spring cycle does not identify whether it means the March or May session; both are described by its canonical notes.",
+          "caveats": [
+            "Stored March 30, 2027 date matches the May intake only; it is not evidence of the March intake deadline. Do not replace it with December 15 automatically. Hold exact scope pending parent decision.",
+            "Native HTML capture timed out; actual full-page web text retained, with no origin-byte claim. Opening date is not supplied."
+          ],
+          "requiresDecision": true,
+          "canonicalDateChanged": false,
+          "fullFactsCertified": false,
+          "dateOnly": true,
+          "candidateDeadlines": [
+            {
+              "intake": "2027-03",
+              "deadline": "2026-12-15"
+            },
+            {
+              "intake": "2027-05",
+              "deadline": "2027-03-30"
+            }
+          ],
+          "proposedDateCorrection": null
+        }
+      ],
+      "fullFactsCertified": false,
+      "wholeSchoolCatalogueCompleted": false,
+      "dateOnly": true
+    }
+  ]
+}

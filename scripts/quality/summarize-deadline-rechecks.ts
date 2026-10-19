@@ -50,11 +50,16 @@ export function normalizeReport(report: ObjectRow, sourceReport: string): Bindin
     const node = object(value)
     const context = { ...inherited, ...node }
     const childKeys = ['schools', 'rows', 'groups', 'records', 'recordResults'].filter(key => Array.isArray(node[key]))
+    // Some frozen receipts expose identical compatibility aliases. Validate
+    // their complete contents before traversing a single copy; differing
+    // arrays still produce duplicate-ID errors rather than hiding conflicts.
+    const distinctChildKeys = childKeys.filter((key, index) => !childKeys.slice(0, index)
+      .some(previous => JSON.stringify(node[previous]) === JSON.stringify(node[key])))
     // Batch 004 also names its selected record at school level; only its
     // explicit child binding is an assessed record, not that descriptive alias.
-    if (typeof node.recordId === 'string' && (node.collection || node.type || childKeys.length === 0)) {
-      const kind = node.collection || node.type
-      const collection = kind === 'admissionCycles' || kind === 'admissionCycle' ? 'admissionCycles'
+    if (typeof node.recordId === 'string' && (node.collection || node.type || node.recordKind || childKeys.length === 0)) {
+      const kind = node.collection || node.type || node.recordKind
+      const collection = kind === 'admissionCycles' || kind === 'admissionCycle' || kind === 'admission-cycle' ? 'admissionCycles'
         : kind === 'scholarships' || kind === 'scholarship' ? 'scholarships' : null
       assert.ok(collection, 'Unknown collection for ' + node.recordId)
       const outcome = string(node.result || node.outcome || inherited.result || inherited.outcome) as Outcome
@@ -64,7 +69,7 @@ export function normalizeReport(report: ObjectRow, sourceReport: string): Bindin
         batchId, sourceReport, row: node, context })
       return
     }
-    for (const key of childKeys) walk(node[key], context)
+    for (const key of distinctChildKeys) walk(node[key], context)
   }
   walk(report, {})
   assert.ok(bindings.length, 'No assessed record bindings in ' + sourceReport)
@@ -93,7 +98,8 @@ function option(name: string, fallback: string): string {
   return value
 }
 
-export function buildSummary(primaryRoot: string, reportsDirectory: string, today = getTodayDate()) {
+export function buildSummary(primaryRoot: string, reportsDirectory: string, today = getTodayDate(), throughBatch = 8) {
+  assert.ok(Number.isInteger(throughBatch) && throughBatch >= 8 && throughBatch <= 999, 'Expected --through-batch in 8..999')
   assertCurrentAuditDay(today)
   const primary = path.resolve(primaryRoot), reportsRoot = path.resolve(reportsDirectory)
   const read = (relative: string): unknown => JSON.parse(readFileSync(localFile(primary, relative), 'utf8'))
@@ -114,7 +120,7 @@ export function buildSummary(primaryRoot: string, reportsDirectory: string, toda
     recordsAssessed: number; universitiesWithScopedChecks: number; recordOutcomes: Record<string, number>; publicCyclesAssessed: number }[] = []
   const precisionIssues: unknown[] = []
   const originalReports: ObjectRow[] = []
-  for (let number = 1; number <= 8; number++) {
+  for (let number = 1; number <= throughBatch; number++) {
     const relative = `official-batch-${String(number).padStart(3, '0')}/report.json`
     const bytes = readFileSync(localFile(reportsRoot, relative))
     const report = object(JSON.parse(bytes.toString('utf8')))
@@ -162,6 +168,7 @@ export function buildSummary(primaryRoot: string, reportsDirectory: string, toda
     } else {
       const universityIds = new Set([...canonical.universityIds, ...canonical.programIds.flatMap(id => programs.get(id)?.universityId || [])])
       assert.ok(universityIds.has(binding.universityId), 'Scholarship school attribution differs: ' + binding.id)
+      if (has(row, 'canonicalScholarshipSha256')) { assert.equal(row.canonicalScholarshipSha256, sha(JSON.stringify(canonical))); checks.completeCanonicalRowHashesMatched++ }
       checks.scholarshipUniversityMappingsMatched++
     }
     for (const key of ['publicationBefore', 'publishedBefore', 'publishedInInputSnapshot']) if (has(row, key)) {
@@ -171,7 +178,7 @@ export function buildSummary(primaryRoot: string, reportsDirectory: string, toda
       assert.ok(deadline, 'An unchanged explicit deadline must not be null: ' + binding.id)
       assert.equal(row.officialDeadline ?? binding.context.officialDeadline, deadline, 'Unchanged result lacks a matching official date: ' + binding.id)
     }
-    if (row.openingDateAssessed === true || typeof row.officialOpensOn === 'string') {
+    if ('opensOn' in canonical && (row.openingDateAssessed === true || typeof row.officialOpensOn === 'string')) {
       assert.ok('opensOn' in canonical)
       assert.equal(row.officialOpensOn, canonical.opensOn, 'Assessed official opening differs: ' + binding.id)
     }
@@ -248,10 +255,11 @@ export function buildSummary(primaryRoot: string, reportsDirectory: string, toda
   const normalized = all.map(row => ({ recordId: row.id, collection: row.collection, universityId: row.universityId,
     batchId: row.batchId, outcome: row.outcome, storedDeadline: row.row.storedDeadline }))
   const recordOutcomes = tally(all, row => row.outcome)
-  assert.deepEqual(reportPins.map(row => row.recordsAssessed), [22, 18, 20, 10, 244, 335, 173, 12])
-  assert.equal(all.length, 834)
-  assert.equal(recordOutcomes.unchanged, 819); assert.equal(recordOutcomes.unknown, 6)
-  assert.equal(recordOutcomes.blocked, 8); assert.equal(recordOutcomes.conflict, 1)
+  assert.deepEqual(reportPins.slice(0, 8).map(row => row.recordsAssessed), [22, 18, 20, 10, 244, 335, 173, 12])
+  const baseline = all.filter(row => reportPins.slice(0, 8).some(report => report.batchId === row.batchId))
+  assert.equal(baseline.length, 834)
+  assert.deepEqual(tally(baseline, row => row.outcome), { blocked: 8, unknown: 6, unchanged: 819, conflict: 1 })
+  assert.equal(reportPins.length, throughBatch)
   assert.equal(dateSupportedPublicCycleIds.length, 782); assert.equal(conflictedPublicCycleIds.length, 1)
   assert.equal(unassessedPublicCycleIds.length, 0); assert.equal(otherUnresolvedPublicCycleIds.length, 0)
   const nullDeadlineAwards = published.scholarships.filter(row => row.deadline === null).map(row => row.id)
@@ -312,6 +320,17 @@ function selfTest(): void {
   ] }] }, 'two.json')
   assert.equal(alternate[0].collection, 'scholarships')
   assert.equal(alternate[0].outcome, 'blocked')
+  const awardContext = normalizeReport({ batchId: 'award', groups: [{ universityId: 'u', records: [
+    { recordKind: 'scholarship', recordId: 'award-1', result: 'unchanged', storedDeadline: '2026-10-31', officialOpensOn: '2026-03-01' },
+  ] }] }, 'award.json')
+  assert.equal(awardContext[0].collection, 'scholarships')
+  assert.equal(awardContext[0].row.officialOpensOn, '2026-03-01', 'Scholarship opening context is not a nonexistent canonical opening field')
+  const aliased = { batchId: 'aliases', schools: report.schools, groups: report.schools }
+  assert.equal(normalizeReport(aliased, 'aliases.json').length, 2, 'Identical frozen aliases are read once')
+  const differing = normalizeReport({ ...aliased, groups: [{ ...report.schools[0], recordResults: [
+    { ...report.schools[0].recordResults[0], result: 'blocked' },
+  ] }] }, 'differing.json')
+  assert.throws(() => assertDistinctBindings(differing), /Duplicate assessed record/, 'Different aliases must not silently hide conflicting bindings')
   assert.equal(normalizeReport({ batchId: 'alias', schools: [{ ...report.schools[0], recordId: 'a' }] }, 'alias.json').length, 2,
     'A descriptive school recordId must not duplicate its child binding')
   assert.throws(() => normalizeReport({ batchId: 'bad', records: [{ recordId: 'x', type: 'nonsense' }] }, 'bad.json'), /Unknown collection/)
@@ -320,7 +339,7 @@ function selfTest(): void {
   assert.doesNotThrow(() => assertCurrentAuditDay(AUDIT_DATE, AUDIT_DATE))
   assert.throws(() => assertCurrentAuditDay(AUDIT_DATE, '2026-10-20'), /new Asia\/Shanghai/)
   assert.throws(() => localFile(process.cwd(), '../outside.json'), /escapes/)
-  console.log('13 normalization, duplicate, stale-date, stored-date and evidence-path assertions passed.')
+  console.log('17 normalization, duplicate, stale-date, stored-date and evidence-path assertions passed.')
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
@@ -328,7 +347,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   else {
     const output = path.resolve(option('output', 'quality/deadline-sweep-20261019/official-review-summary-v3.json'))
     assert.ok(!existsSync(output), 'Immutable summary output already exists; choose a new version path')
-    const summary = buildSummary(option('primary-root', process.cwd()), option('reports-dir', 'quality/deadline-sweep-20261019'), option('today', getTodayDate()))
+    const summary = buildSummary(option('primary-root', process.cwd()), option('reports-dir', 'quality/deadline-sweep-20261019'), option('today', getTodayDate()), Number(option('through-batch', '8')))
     writeFileSync(output, JSON.stringify(summary, null, 2) + '\n', { flag: 'wx' })
     console.log(JSON.stringify({ output, recordsAssessed: summary.recordsAssessed, recordOutcomes: summary.recordOutcomes,
       publicCycles: summary.publicCycleCoverage, publicScholarships: summary.publicScholarshipEvidenceCoverage }, null, 2))

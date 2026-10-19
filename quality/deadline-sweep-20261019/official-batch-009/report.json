@@ -1,0 +1,3328 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-009-20261019",
+  "state": "completed-with-held-source-and-notice-listing",
+  "completedAt": "2026-10-19T05:13:51.086Z",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "selectionSha256": "6bffd5be61db176b12418b3d53202f890fae819017e34b4c0fd7a1b9dfceebb6",
+  "targetQueuePath": "C:\\Users\\Henry\\Desktop\\学过的课程\\github_profile_work\\StudyInChina\\quality\\deadline-sweep-20261019\\next-official-date-targets-v1.json",
+  "targetQueueSha256": "1085ae2f3b1cd0a815e62c0764d85751da130b3087f0e9f26f3dff4258ba40f5",
+  "selection": "Exactly the first ten selected university IDs in next-official-date-targets-v1.json and their twenty exact selected cycle/scholarship IDs. No additional record was certified.",
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    }
+  ],
+  "acquisition": {
+    "initialSandboxAttemptCount": 10,
+    "initialSandboxOutcome": "All immediate native fetch failures; receipts preserved. Not counted as successful website reads or individual university access blocks.",
+    "boundedEnvironmentRecoveryAttempts": 10,
+    "supplementaryPdfFetches": 2,
+    "totalNativeFetchAttempts": 22,
+    "uniqueNewSourceUrls": 12,
+    "newSourceHttp200Responses": 10,
+    "schoolPrimaryHtmlReads": 8,
+    "schoolDateEvidenceSources": 8,
+    "reusedCentralPdfReads": 1,
+    "newCentralNetworkRequests": 0,
+    "automaticRetries": 0,
+    "paidModelCalls": 0,
+    "canonicalWrites": 0
+  },
+  "summary": {
+    "schoolsAttempted": 10,
+    "recordsAssessed": 20,
+    "schoolResults": {
+      "unchanged": 8,
+      "corrected": 0,
+      "closed": 0,
+      "unknown": 1,
+      "blocked": 1,
+      "conflict": 0
+    },
+    "recordResults": {
+      "unchanged": 16,
+      "corrected": 0,
+      "closed": 0,
+      "unknown": 2,
+      "blocked": 2,
+      "conflict": 0
+    },
+    "fullFactsCertified": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "canonicalWrites": 0,
+    "gitMutations": 0,
+    "publicationActions": 0,
+    "paidModelCalls": 0
+  },
+  "reusedSources": [
+    {
+      "role": "Yunnan national intake year context only, not a substitute for school deadline",
+      "reused": true,
+      "newNetworkRequest": false,
+      "receiptPath": "C:\\Users\\Henry\\Desktop\\学过的课程\\github_profile_work\\StudyInChina\\quality\\recovery-20261019\\rapid-expansion\\scholarships\\central\\clec-2026-guide.receipt.json",
+      "receiptSha256": "bd47ee6dcf87a532230c49f951a1d89a8f6c8f99ecbd892deb430c807de870f2",
+      "sourceUrl": "https://pmplatform.chinese.cn/tmp/2026/2/6/94005b2e-f2e9-438e-85e7-12212f0e9968.pdf",
+      "originalObservedAt": "2026-10-18T17:47:49.803504+00:00",
+      "rawPath": "C:\\Users\\Henry\\Desktop\\学过的课程\\github_profile_work\\StudyInChina\\quality\\recovery-20261019\\rapid-expansion\\scholarships\\central\\clec-2026-guide.pdf",
+      "rawSha256": "0157c7fb5962657cc5f58be63cfc8a0898c4279ea8f87e15c40302fe90f981d7",
+      "textPath": "C:\\Users\\Henry\\Desktop\\学过的课程\\github_profile_work\\StudyInChina\\quality\\recovery-20261019\\rapid-expansion\\scholarships\\central\\clec-2026-guide.text.txt",
+      "textSha256": "b336af82cac3cbf9736562be3f3ee2479fc1f8e10be10442df77e06d8da3db60",
+      "scopeQuote": "2026年9月、2027年3月入学，资助期限为5个月",
+      "literal2027YearProvidedBySchool": false,
+      "schoolSpringCategoryAndOwn2026DeadlineProvided": true
+    }
+  ],
+  "groups": [
+    {
+      "universityId": "uni-minnan-normal-university",
+      "universityName": "闽南师范大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "2027年3月入学：学生申请截止日期为2026年10月31日",
+      "evidenceLocator": "四、截止日期 / second item",
+      "notes": "The November 10 institutional review cutoff is a different deadline and was not substituted for the student cutoff.",
+      "schoolIndependentIntakeYearExplicit": true,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-minnan-normal-university",
+        "url": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+        "recordIds": [
+          "cycle-mnnu-iclt-one-semester-spring-2027",
+          "scholarship-mnnu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:56.511Z",
+        "observedAt": "2026-10-19T05:09:57.349Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-01-uni-minnan-normal-university.html",
+        "bodySha256": "6f28bff01f1a2ef5f834cae2001984b78bc01e10c9cf1e44e426f60442eecdab",
+        "bytes": 25679,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-minnan-normal-university",
+        "url": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+        "recordIds": [
+          "cycle-mnnu-iclt-one-semester-spring-2027",
+          "scholarship-mnnu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:56.511Z",
+        "observedAt": "2026-10-19T05:09:57.349Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-01-uni-minnan-normal-university.html",
+        "bodySha256": "6f28bff01f1a2ef5f834cae2001984b78bc01e10c9cf1e44e426f60442eecdab",
+        "bytes": 25679,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "recovery-01-uni-minnan-normal-university.html",
+          "sha256": "6f28bff01f1a2ef5f834cae2001984b78bc01e10c9cf1e44e426f60442eecdab"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-mnnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-minnan-normal-university",
+          "programId": "program-mnnu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "a22e268c83378af38ec2ba658c5fed85a853d378c059b0bbe27c8b390e7e78b8",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-mnnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "primaryRegisteredSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-mnnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-minnan-normal-university",
+          "programId": null,
+          "canonicalRecordSha256": "430eec7a5d6ce01f8a2afa7f1443dc3549490feba1812a747fc111b9041eda54",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-mnnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "primaryRegisteredSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-mnnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-minnan-normal-university",
+          "programId": "program-mnnu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "a22e268c83378af38ec2ba658c5fed85a853d378c059b0bbe27c8b390e7e78b8",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-mnnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "primaryRegisteredSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-mnnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-minnan-normal-university",
+          "programId": null,
+          "canonicalRecordSha256": "430eec7a5d6ce01f8a2afa7f1443dc3549490feba1812a747fc111b9041eda54",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-mnnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "primaryRegisteredSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-northeastern-university-china",
+      "universityName": "东北大学",
+      "result": "blocked",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": null,
+      "evidenceLocator": null,
+      "notes": "Exact university source failed TLS hostname validation. No TLS checks were disabled, no date was inferred from the central guide, and the two records remain held.",
+      "schoolIndependentIntakeYearExplicit": false,
+      "crossSourceYearContext": false,
+      "error": "ERR_TLS_CERT_ALTNAME_INVALID",
+      "schoolPrimaryCapture": {
+        "universityId": "uni-northeastern-university-china",
+        "url": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+        "recordIds": [
+          "cycle-neu-iclt-one-semester-spring-2027",
+          "scholarship-neu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:56.559Z",
+        "observedAt": "2026-10-19T05:09:56.786Z",
+        "method": "GET",
+        "status": null,
+        "outcome": "held-fetch-error",
+        "error": "fetch failed",
+        "errorCode": "ERR_TLS_CERT_ALTNAME_INVALID",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-northeastern-university-china",
+        "url": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+        "recordIds": [
+          "cycle-neu-iclt-one-semester-spring-2027",
+          "scholarship-neu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:56.559Z",
+        "observedAt": "2026-10-19T05:09:56.786Z",
+        "method": "GET",
+        "status": null,
+        "outcome": "held-fetch-error",
+        "error": "fetch failed",
+        "errorCode": "ERR_TLS_CERT_ALTNAME_INVALID",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-neu-iclt-one-semester-spring-2027",
+          "universityId": "uni-northeastern-university-china",
+          "programId": "program-neu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "d92272b147b8f6b49aaa12bdb3acdee296dc285a12ffad1a76b9e28d3452c25b",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "blocked",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-neu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "primaryRegisteredSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-neu-iclt-one-semester-spring-2027",
+          "universityId": "uni-northeastern-university-china",
+          "programId": null,
+          "canonicalRecordSha256": "4be7d14c7683a915b5c9dd6730a32f674b93afa392fd40c970e93955344c1c33",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "blocked",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-neu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "primaryRegisteredSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-neu-iclt-one-semester-spring-2027",
+          "universityId": "uni-northeastern-university-china",
+          "programId": "program-neu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "d92272b147b8f6b49aaa12bdb3acdee296dc285a12ffad1a76b9e28d3452c25b",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "blocked",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-neu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "primaryRegisteredSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-neu-iclt-one-semester-spring-2027",
+          "universityId": "uni-northeastern-university-china",
+          "programId": null,
+          "canonicalRecordSha256": "4be7d14c7683a915b5c9dd6730a32f674b93afa392fd40c970e93955344c1c33",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "blocked",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-neu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "primaryRegisteredSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
+      "universityName": "上海中医药大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "2027年3月入学：2026年10月31日",
+      "evidenceLocator": "报名截止日期 / fourth item",
+      "notes": "The official school page explicitly separates summer, autumn, winter and March 2027 application dates.",
+      "schoolIndependentIntakeYearExplicit": true,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
+        "url": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+        "recordIds": [
+          "cycle-shutcm-iclt-one-semester-spring-2027",
+          "scholarship-shutcm-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:56.789Z",
+        "observedAt": "2026-10-19T05:09:57.510Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-03-uni-shanghai-university-of-traditional-chinese-medicine.html",
+        "bodySha256": "6ac8394eb75463a55c4c1a76c8cf41a433ee48ccce9414aedae01eb9c7034bcd",
+        "bytes": 31329,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
+        "url": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+        "recordIds": [
+          "cycle-shutcm-iclt-one-semester-spring-2027",
+          "scholarship-shutcm-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:56.789Z",
+        "observedAt": "2026-10-19T05:09:57.510Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-03-uni-shanghai-university-of-traditional-chinese-medicine.html",
+        "bodySha256": "6ac8394eb75463a55c4c1a76c8cf41a433ee48ccce9414aedae01eb9c7034bcd",
+        "bytes": 31329,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "recovery-03-uni-shanghai-university-of-traditional-chinese-medicine.html",
+          "sha256": "6ac8394eb75463a55c4c1a76c8cf41a433ee48ccce9414aedae01eb9c7034bcd"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-shutcm-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
+          "programId": "program-shutcm-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "597da9af04d95d61938cddc60cdb75fb47c08b6f21545e2229585f549884c9da",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-shutcm-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "primaryRegisteredSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-shutcm-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
+          "programId": null,
+          "canonicalRecordSha256": "f67b2778618a6bd68724a49ae1554fbad7396a2dfb78726dd497357344981306",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-shutcm-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "primaryRegisteredSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-shutcm-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
+          "programId": "program-shutcm-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "597da9af04d95d61938cddc60cdb75fb47c08b6f21545e2229585f549884c9da",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-shutcm-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "primaryRegisteredSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-shutcm-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
+          "programId": null,
+          "canonicalRecordSha256": "f67b2778618a6bd68724a49ae1554fbad7396a2dfb78726dd497357344981306",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-shutcm-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "primaryRegisteredSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-shanghai-international-studies-university",
+      "universityName": "上海外国语大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "2027年3月入学：截止到2026年10月31日",
+      "evidenceLocator": "Application deadline section / March 2027 line",
+      "notes": "Current school body explicitly names both the application year and March 2027 entry. No structured opening date was inferred from webpage publication.",
+      "schoolIndependentIntakeYearExplicit": true,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-shanghai-international-studies-university",
+        "url": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+        "recordIds": [
+          "cycle-sisu-iclt-one-semester-spring-2027",
+          "scholarship-sisu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:57.351Z",
+        "observedAt": "2026-10-19T05:10:09.352Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+        "contentType": "text/html; charset=utf-8",
+        "bodyPath": "recovery-04-uni-shanghai-international-studies-university.html",
+        "bodySha256": "bbea4f64014b85d747b518a678429d07b8d2b54606b3f0afbffbe78dbadef520",
+        "bytes": 22070,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-shanghai-international-studies-university",
+        "url": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+        "recordIds": [
+          "cycle-sisu-iclt-one-semester-spring-2027",
+          "scholarship-sisu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:57.351Z",
+        "observedAt": "2026-10-19T05:10:09.352Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+        "contentType": "text/html; charset=utf-8",
+        "bodyPath": "recovery-04-uni-shanghai-international-studies-university.html",
+        "bodySha256": "bbea4f64014b85d747b518a678429d07b8d2b54606b3f0afbffbe78dbadef520",
+        "bytes": 22070,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "recovery-04-uni-shanghai-international-studies-university.html",
+          "sha256": "bbea4f64014b85d747b518a678429d07b8d2b54606b3f0afbffbe78dbadef520"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-sisu-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-international-studies-university",
+          "programId": "program-sisu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "ff0661ea5015731100c1b4c877cdb16afea9f3d6accde77d032d048fd3e92bdf",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-sisu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "primaryRegisteredSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-sisu-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-international-studies-university",
+          "programId": null,
+          "canonicalRecordSha256": "02cd24d952751cca5d3ebc491a6dc0205ed4e288259444ab931612fb176b6c59",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-sisu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "primaryRegisteredSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-sisu-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-international-studies-university",
+          "programId": "program-sisu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "ff0661ea5015731100c1b4c877cdb16afea9f3d6accde77d032d048fd3e92bdf",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-sisu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "primaryRegisteredSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-sisu-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-international-studies-university",
+          "programId": null,
+          "canonicalRecordSha256": "02cd24d952751cca5d3ebc491a6dc0205ed4e288259444ab931612fb176b6c59",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-sisu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "primaryRegisteredSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-tianjin-normal-university",
+      "universityName": "天津师范大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "2027年3月 2026年10月31日",
+      "evidenceLocator": "Official linked PDF page 5 / 一学期研修生 table row",
+      "notes": "The school attachment date table was text-extracted and visually inspected. March 2027 entry is paired with October 31, 2026; the landing title alone was not treated as date evidence.",
+      "schoolIndependentIntakeYearExplicit": true,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-tianjin-normal-university",
+        "url": "https://gjjl.tjnu.edu.cn/info/1265/6540.htm",
+        "recordIds": [
+          "cycle-tjnu-iclt-one-semester-spring-2027",
+          "scholarship-tjnu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:57.511Z",
+        "observedAt": "2026-10-19T05:09:57.992Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://gjjl.tjnu.edu.cn/info/1265/6540.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-05-uni-tianjin-normal-university.html",
+        "bodySha256": "22b739cb550941c3d63dad1bb3131e07c249467889a1dd408ba64cdcafdc8386",
+        "bytes": 24971,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "name": "tjnu-official-attachment",
+        "universityId": "uni-tianjin-normal-university",
+        "url": "https://gjjl.tjnu.edu.cn/__local/B/A7/5D/8987B3CA29373A7304436D6D8F5_2D31E3F4_5339D.pdf",
+        "discovery": "PDF URL displayed by the captured exact official landing page.",
+        "startedAt": "2026-10-19T05:11:02.127Z",
+        "observedAt": "2026-10-19T05:11:02.527Z",
+        "method": "GET",
+        "status": 200,
+        "bodyPath": "tjnu-official-attachment.pdf",
+        "bodySha256": "3561d6cec442987ef1c3293c0b7a27e972469be9caebe05ee9951c3588b9d789",
+        "bytes": 340893,
+        "contentType": "application/pdf",
+        "outcome": "captured-pending-date-review",
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "tjnu-official-attachment.pdf",
+          "sha256": "3561d6cec442987ef1c3293c0b7a27e972469be9caebe05ee9951c3588b9d789"
+        },
+        {
+          "path": "tjnu-official-attachment.txt",
+          "sha256": "646816f02a423cfbdadc73e2da3bb20e1f5336ac3408c006390d93394800de99"
+        },
+        {
+          "path": "tjnu-official-attachment-page-5.png",
+          "sha256": "6059580cb9299dc83ef11e2b765ea3776c0bc7fbe19e054b018a53fa7083249d"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-tjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-tianjin-normal-university",
+          "programId": "program-tjnu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "c562e95bebcdf49f7d2c9855af67737d38909124fb291d4cd81000014bd4c0bd",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-tjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://gjjl.tjnu.edu.cn/__local/B/A7/5D/8987B3CA29373A7304436D6D8F5_2D31E3F4_5339D.pdf",
+          "primaryRegisteredSourceUrl": "https://gjjl.tjnu.edu.cn/info/1265/6540.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-tjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-tianjin-normal-university",
+          "programId": null,
+          "canonicalRecordSha256": "cb7fb3125588ad4a8a09b8fd2325c91a504a1b938841af1bc58f67d841665697",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-tjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://gjjl.tjnu.edu.cn/__local/B/A7/5D/8987B3CA29373A7304436D6D8F5_2D31E3F4_5339D.pdf",
+          "primaryRegisteredSourceUrl": "https://gjjl.tjnu.edu.cn/info/1265/6540.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-tjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-tianjin-normal-university",
+          "programId": "program-tjnu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "c562e95bebcdf49f7d2c9855af67737d38909124fb291d4cd81000014bd4c0bd",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-tjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://gjjl.tjnu.edu.cn/__local/B/A7/5D/8987B3CA29373A7304436D6D8F5_2D31E3F4_5339D.pdf",
+          "primaryRegisteredSourceUrl": "https://gjjl.tjnu.edu.cn/info/1265/6540.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-tjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-tianjin-normal-university",
+          "programId": null,
+          "canonicalRecordSha256": "cb7fb3125588ad4a8a09b8fd2325c91a504a1b938841af1bc58f67d841665697",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-tjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://gjjl.tjnu.edu.cn/__local/B/A7/5D/8987B3CA29373A7304436D6D8F5_2D31E3F4_5339D.pdf",
+          "primaryRegisteredSourceUrl": "https://gjjl.tjnu.edu.cn/info/1265/6540.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-yanbian-university",
+      "universityName": "延边大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "2027年3月入学：学生申请截止日期为10月31日",
+      "evidenceLocator": "七、截止日期（以北京时间为准） / second item",
+      "notes": "The school body explicitly offers March 2027 one-semester entry and uses the 2026 programme cycle; the student deadline is October 31, 2026.",
+      "schoolIndependentIntakeYearExplicit": true,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-yanbian-university",
+        "url": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+        "recordIds": [
+          "cycle-ybu-iclt-one-semester-spring-2027",
+          "scholarship-ybu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:57.994Z",
+        "observedAt": "2026-10-19T05:09:58.917Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-06-uni-yanbian-university.html",
+        "bodySha256": "1f0ee66a2b2a51fb61b7dfd0c404533fe1948bd4c64072cda89467d73f42cbb1",
+        "bytes": 51682,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-yanbian-university",
+        "url": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+        "recordIds": [
+          "cycle-ybu-iclt-one-semester-spring-2027",
+          "scholarship-ybu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:57.994Z",
+        "observedAt": "2026-10-19T05:09:58.917Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-06-uni-yanbian-university.html",
+        "bodySha256": "1f0ee66a2b2a51fb61b7dfd0c404533fe1948bd4c64072cda89467d73f42cbb1",
+        "bytes": 51682,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "recovery-06-uni-yanbian-university.html",
+          "sha256": "1f0ee66a2b2a51fb61b7dfd0c404533fe1948bd4c64072cda89467d73f42cbb1"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-ybu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yanbian-university",
+          "programId": "program-ybu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "aff473e9d12d351034085f9e8fe7777c24a47b6229838d41d88245946894ed05",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ybu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "primaryRegisteredSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-ybu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yanbian-university",
+          "programId": null,
+          "canonicalRecordSha256": "f0ba890727c96c7ebf5d5390bf9fbb93bf29cd73acced109c6858a2f48ebd18b",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ybu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "primaryRegisteredSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-ybu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yanbian-university",
+          "programId": "program-ybu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "aff473e9d12d351034085f9e8fe7777c24a47b6229838d41d88245946894ed05",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ybu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "primaryRegisteredSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-ybu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yanbian-university",
+          "programId": null,
+          "canonicalRecordSha256": "f0ba890727c96c7ebf5d5390bf9fbb93bf29cd73acced109c6858a2f48ebd18b",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ybu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "primaryRegisteredSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-yunnan-university",
+      "universityName": "云南大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "一学期研修生（春季学期入学）2026年3月1日至10月31日",
+      "evidenceLocator": "School-authored 2026 guide PDF page 3 / spring one-semester application row",
+      "notes": "The school-authored PDF, already an exact registered canonical source, independently fixes spring one-semester student applications to March 1-October 31, 2026 and five-month International Chinese Education study. It does not literally print 2027 entry. The reused central 2026 ICLT guide explicitly places the same five-month one-semester category in March 2027. Year context is therefore cross-source and disclosed; the central deadline did not replace or override the school date. The school primary HTML TLS failure remains recorded.",
+      "schoolIndependentIntakeYearExplicit": false,
+      "crossSourceYearContext": true,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-yunnan-university",
+        "url": "https://english.ynu.edu.cn/ynuscholarships.html",
+        "recordIds": [
+          "cycle-ynu-iclt-one-semester-spring-2027",
+          "scholarship-ynu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:58.921Z",
+        "observedAt": "2026-10-19T05:09:59.624Z",
+        "method": "GET",
+        "status": null,
+        "outcome": "held-fetch-error",
+        "error": "fetch failed",
+        "errorCode": "ERR_TLS_CERT_ALTNAME_INVALID",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "name": "ynu-existing-school-guide",
+        "universityId": "uni-yunnan-university",
+        "url": "https://www.chinadaily.com.cn/specials/ynu/YunnanUniversityAdmissionsforInternationalChineseLanguageTeachersScholarshipProgram2026.pdf",
+        "discovery": "Exact existing canonical source URL for Yunnan University authored ICLT2026 brochure; separately hosted on its China Daily university page.",
+        "startedAt": "2026-10-19T05:11:02.173Z",
+        "observedAt": "2026-10-19T05:11:02.874Z",
+        "method": "GET",
+        "status": 200,
+        "bodyPath": "ynu-existing-school-guide.pdf",
+        "bodySha256": "6e25580f3caf3d1a692479fff04951d9ae82589045ff1dbfcf15978fc6955d71",
+        "bytes": 240214,
+        "contentType": "application/pdf",
+        "outcome": "captured-pending-date-review",
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "ynu-existing-school-guide.pdf",
+          "sha256": "6e25580f3caf3d1a692479fff04951d9ae82589045ff1dbfcf15978fc6955d71"
+        },
+        {
+          "path": "ynu-existing-school-guide.txt",
+          "sha256": "2b23869936aea0d4e3fb9cc250d2c4063ff1b9f1bd325058da4dfa817525b0a8"
+        },
+        {
+          "path": "ynu-existing-school-guide-page-3.png",
+          "sha256": "2ffbe668f4892f1c919208d282e8b98bd5b89e10a4f10cdd7623d3b8907aaff0"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-ynu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yunnan-university",
+          "programId": "program-ynu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "f0b37163a39c19a607c2f70074acae4e0ff61ed519fcb52a80c7715bb105d63c",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ynu-iclt-2026-index"
+          ],
+          "evidenceSourceUrl": "https://www.chinadaily.com.cn/specials/ynu/YunnanUniversityAdmissionsforInternationalChineseLanguageTeachersScholarshipProgram2026.pdf",
+          "primaryRegisteredSourceUrl": "https://english.ynu.edu.cn/ynuscholarships.html",
+          "yearContext": "school application year and spring category plus reused central explicit March 2027 category",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-ynu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yunnan-university",
+          "programId": null,
+          "canonicalRecordSha256": "733cd8701a03663eca4bbcdec0777ed5d19edf01de4906b7cc13a2dae2691796",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ynu-iclt-2026-index"
+          ],
+          "evidenceSourceUrl": "https://www.chinadaily.com.cn/specials/ynu/YunnanUniversityAdmissionsforInternationalChineseLanguageTeachersScholarshipProgram2026.pdf",
+          "primaryRegisteredSourceUrl": "https://english.ynu.edu.cn/ynuscholarships.html",
+          "yearContext": "school application year and spring category plus reused central explicit March 2027 category",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-ynu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yunnan-university",
+          "programId": "program-ynu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "f0b37163a39c19a607c2f70074acae4e0ff61ed519fcb52a80c7715bb105d63c",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ynu-iclt-2026-index"
+          ],
+          "evidenceSourceUrl": "https://www.chinadaily.com.cn/specials/ynu/YunnanUniversityAdmissionsforInternationalChineseLanguageTeachersScholarshipProgram2026.pdf",
+          "primaryRegisteredSourceUrl": "https://english.ynu.edu.cn/ynuscholarships.html",
+          "yearContext": "school application year and spring category plus reused central explicit March 2027 category",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-ynu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yunnan-university",
+          "programId": null,
+          "canonicalRecordSha256": "733cd8701a03663eca4bbcdec0777ed5d19edf01de4906b7cc13a2dae2691796",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ynu-iclt-2026-index"
+          ],
+          "evidenceSourceUrl": "https://www.chinadaily.com.cn/specials/ynu/YunnanUniversityAdmissionsforInternationalChineseLanguageTeachersScholarshipProgram2026.pdf",
+          "primaryRegisteredSourceUrl": "https://english.ynu.edu.cn/ynuscholarships.html",
+          "yearContext": "school application year and spring category plus reused central explicit March 2027 category",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-zhejiang-af-university",
+      "universityName": "浙江农林大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "2027年3月入学：学生申请截止日期为10月31日",
+      "evidenceLocator": "申请截止日期（以北京时间为准） / March 2027 item",
+      "notes": "The school-authored 2026 guide explicitly names the March 2027 semester; its student cutoff agrees with the stored October 31, 2026 date.",
+      "schoolIndependentIntakeYearExplicit": true,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-zhejiang-af-university",
+        "url": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+        "recordIds": [
+          "cycle-zafu-iclt-one-semester-spring-2027",
+          "scholarship-zafu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:59.625Z",
+        "observedAt": "2026-10-19T05:10:02.124Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-08-uni-zhejiang-af-university.html",
+        "bodySha256": "cb21e58523d1f6dd4ee012e846f0cb1907f1201ec66a7fba8d6976408bf30a8a",
+        "bytes": 22188,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-zhejiang-af-university",
+        "url": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+        "recordIds": [
+          "cycle-zafu-iclt-one-semester-spring-2027",
+          "scholarship-zafu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:59.625Z",
+        "observedAt": "2026-10-19T05:10:02.124Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-08-uni-zhejiang-af-university.html",
+        "bodySha256": "cb21e58523d1f6dd4ee012e846f0cb1907f1201ec66a7fba8d6976408bf30a8a",
+        "bytes": 22188,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "recovery-08-uni-zhejiang-af-university.html",
+          "sha256": "cb21e58523d1f6dd4ee012e846f0cb1907f1201ec66a7fba8d6976408bf30a8a"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-zafu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-af-university",
+          "programId": "program-zafu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "b4e5f352f614376032b5a1f37ed32c5fce988dd1e5b8f98f6167978e7ae2e59a",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zafu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "primaryRegisteredSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-zafu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-af-university",
+          "programId": null,
+          "canonicalRecordSha256": "ddc7a1d61a2cec59f0d4424efd6fe578d2538a2a97e9472c8a3683e317859f6d",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zafu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "primaryRegisteredSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-zafu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-af-university",
+          "programId": "program-zafu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "b4e5f352f614376032b5a1f37ed32c5fce988dd1e5b8f98f6167978e7ae2e59a",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zafu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "primaryRegisteredSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-zafu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-af-university",
+          "programId": null,
+          "canonicalRecordSha256": "ddc7a1d61a2cec59f0d4424efd6fe578d2538a2a97e9472c8a3683e317859f6d",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zafu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "primaryRegisteredSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-zhejiang-chinese-medical-university",
+      "universityName": "浙江中医药大学",
+      "result": "unknown",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": null,
+      "evidenceLocator": null,
+      "notes": "The exact registered URL returned a general notice listing, including already-enrolled-student funding notices, and no date clause for the selected spring 2027 ICLT route. A readable listing is not date confirmation; central dates were not substituted.",
+      "schoolIndependentIntakeYearExplicit": false,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-zhejiang-chinese-medical-university",
+        "url": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+        "recordIds": [
+          "cycle-zcmu-iclt-one-semester-spring-2027",
+          "scholarship-zcmu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:10:02.126Z",
+        "observedAt": "2026-10-19T05:10:05.197Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+        "contentType": "text/html; charset=utf-8",
+        "bodyPath": "recovery-09-uni-zhejiang-chinese-medical-university.html",
+        "bodySha256": "846f0968bae4340bf4ed34f2c73baac35d99ec9c5c2a6a89b28109e48cc35ea7",
+        "bytes": 43011,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-zhejiang-chinese-medical-university",
+        "url": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+        "recordIds": [
+          "cycle-zcmu-iclt-one-semester-spring-2027",
+          "scholarship-zcmu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:10:02.126Z",
+        "observedAt": "2026-10-19T05:10:05.197Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+        "contentType": "text/html; charset=utf-8",
+        "bodyPath": "recovery-09-uni-zhejiang-chinese-medical-university.html",
+        "bodySha256": "846f0968bae4340bf4ed34f2c73baac35d99ec9c5c2a6a89b28109e48cc35ea7",
+        "bytes": 43011,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "recovery-09-uni-zhejiang-chinese-medical-university.html",
+          "sha256": "846f0968bae4340bf4ed34f2c73baac35d99ec9c5c2a6a89b28109e48cc35ea7"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-zcmu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-chinese-medical-university",
+          "programId": "program-zcmu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "545f37ab3db14ad77ed54f0dd9ee94f18fc686d232fbfd44aec6e22080873dcc",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "unknown",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zcmu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "primaryRegisteredSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-zcmu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-chinese-medical-university",
+          "programId": null,
+          "canonicalRecordSha256": "e4139f8c315498fb5f89f21dcd08992e44d727a408a9b06fc781bb6650ef04e5",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "unknown",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zcmu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "primaryRegisteredSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-zcmu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-chinese-medical-university",
+          "programId": "program-zcmu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "545f37ab3db14ad77ed54f0dd9ee94f18fc686d232fbfd44aec6e22080873dcc",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "unknown",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zcmu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "primaryRegisteredSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-zcmu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-chinese-medical-university",
+          "programId": null,
+          "canonicalRecordSha256": "e4139f8c315498fb5f89f21dcd08992e44d727a408a9b06fc781bb6650ef04e5",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "unknown",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zcmu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "primaryRegisteredSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-zhejiang-normal-university",
+      "universityName": "浙江师范大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "10月31日（2027年3月入学）",
+      "evidenceLocator": "申请截止日期为 / second item",
+      "notes": "Although the URL path contains an older publication year, the current school body explicitly states the 2026 programme cycle and March 2027 semester. The URL year was not used to infer an intake.",
+      "schoolIndependentIntakeYearExplicit": true,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-zhejiang-normal-university",
+        "url": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+        "recordIds": [
+          "cycle-zjnu-iclt-one-semester-spring-2027",
+          "scholarship-zjnu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:10:05.198Z",
+        "observedAt": "2026-10-19T05:10:05.978Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-10-uni-zhejiang-normal-university.html",
+        "bodySha256": "28845b00ac5d5e16d34b38bff3618c8cd0ef276ff2f4ce16caf79d061c488b0a",
+        "bytes": 229231,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-zhejiang-normal-university",
+        "url": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+        "recordIds": [
+          "cycle-zjnu-iclt-one-semester-spring-2027",
+          "scholarship-zjnu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:10:05.198Z",
+        "observedAt": "2026-10-19T05:10:05.978Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-10-uni-zhejiang-normal-university.html",
+        "bodySha256": "28845b00ac5d5e16d34b38bff3618c8cd0ef276ff2f4ce16caf79d061c488b0a",
+        "bytes": 229231,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "recovery-10-uni-zhejiang-normal-university.html",
+          "sha256": "28845b00ac5d5e16d34b38bff3618c8cd0ef276ff2f4ce16caf79d061c488b0a"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-zjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-normal-university",
+          "programId": "program-zjnu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "9d9ff3ea83634e24ee0b32bca17eb7a26bdc7b1a4dadd5fcda1fb6f3a3a1d65f",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "primaryRegisteredSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-zjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-normal-university",
+          "programId": null,
+          "canonicalRecordSha256": "e477063a8d0db5a1c2849bb740599d7e3f9802b3652fe888cacaca10e5c974d7",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "primaryRegisteredSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-zjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-normal-university",
+          "programId": "program-zjnu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "9d9ff3ea83634e24ee0b32bca17eb7a26bdc7b1a4dadd5fcda1fb6f3a3a1d65f",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "primaryRegisteredSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-zjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-normal-university",
+          "programId": null,
+          "canonicalRecordSha256": "e477063a8d0db5a1c2849bb740599d7e3f9802b3652fe888cacaca10e5c974d7",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "primaryRegisteredSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    }
+  ],
+  "schools": [
+    {
+      "universityId": "uni-minnan-normal-university",
+      "universityName": "闽南师范大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "2027年3月入学：学生申请截止日期为2026年10月31日",
+      "evidenceLocator": "四、截止日期 / second item",
+      "notes": "The November 10 institutional review cutoff is a different deadline and was not substituted for the student cutoff.",
+      "schoolIndependentIntakeYearExplicit": true,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-minnan-normal-university",
+        "url": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+        "recordIds": [
+          "cycle-mnnu-iclt-one-semester-spring-2027",
+          "scholarship-mnnu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:56.511Z",
+        "observedAt": "2026-10-19T05:09:57.349Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-01-uni-minnan-normal-university.html",
+        "bodySha256": "6f28bff01f1a2ef5f834cae2001984b78bc01e10c9cf1e44e426f60442eecdab",
+        "bytes": 25679,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-minnan-normal-university",
+        "url": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+        "recordIds": [
+          "cycle-mnnu-iclt-one-semester-spring-2027",
+          "scholarship-mnnu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:56.511Z",
+        "observedAt": "2026-10-19T05:09:57.349Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-01-uni-minnan-normal-university.html",
+        "bodySha256": "6f28bff01f1a2ef5f834cae2001984b78bc01e10c9cf1e44e426f60442eecdab",
+        "bytes": 25679,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "recovery-01-uni-minnan-normal-university.html",
+          "sha256": "6f28bff01f1a2ef5f834cae2001984b78bc01e10c9cf1e44e426f60442eecdab"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-mnnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-minnan-normal-university",
+          "programId": "program-mnnu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "a22e268c83378af38ec2ba658c5fed85a853d378c059b0bbe27c8b390e7e78b8",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-mnnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "primaryRegisteredSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-mnnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-minnan-normal-university",
+          "programId": null,
+          "canonicalRecordSha256": "430eec7a5d6ce01f8a2afa7f1443dc3549490feba1812a747fc111b9041eda54",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-mnnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "primaryRegisteredSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-mnnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-minnan-normal-university",
+          "programId": "program-mnnu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "a22e268c83378af38ec2ba658c5fed85a853d378c059b0bbe27c8b390e7e78b8",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-mnnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "primaryRegisteredSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-mnnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-minnan-normal-university",
+          "programId": null,
+          "canonicalRecordSha256": "430eec7a5d6ce01f8a2afa7f1443dc3549490feba1812a747fc111b9041eda54",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-mnnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "primaryRegisteredSourceUrl": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-northeastern-university-china",
+      "universityName": "东北大学",
+      "result": "blocked",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": null,
+      "evidenceLocator": null,
+      "notes": "Exact university source failed TLS hostname validation. No TLS checks were disabled, no date was inferred from the central guide, and the two records remain held.",
+      "schoolIndependentIntakeYearExplicit": false,
+      "crossSourceYearContext": false,
+      "error": "ERR_TLS_CERT_ALTNAME_INVALID",
+      "schoolPrimaryCapture": {
+        "universityId": "uni-northeastern-university-china",
+        "url": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+        "recordIds": [
+          "cycle-neu-iclt-one-semester-spring-2027",
+          "scholarship-neu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:56.559Z",
+        "observedAt": "2026-10-19T05:09:56.786Z",
+        "method": "GET",
+        "status": null,
+        "outcome": "held-fetch-error",
+        "error": "fetch failed",
+        "errorCode": "ERR_TLS_CERT_ALTNAME_INVALID",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-northeastern-university-china",
+        "url": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+        "recordIds": [
+          "cycle-neu-iclt-one-semester-spring-2027",
+          "scholarship-neu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:56.559Z",
+        "observedAt": "2026-10-19T05:09:56.786Z",
+        "method": "GET",
+        "status": null,
+        "outcome": "held-fetch-error",
+        "error": "fetch failed",
+        "errorCode": "ERR_TLS_CERT_ALTNAME_INVALID",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-neu-iclt-one-semester-spring-2027",
+          "universityId": "uni-northeastern-university-china",
+          "programId": "program-neu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "d92272b147b8f6b49aaa12bdb3acdee296dc285a12ffad1a76b9e28d3452c25b",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "blocked",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-neu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "primaryRegisteredSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-neu-iclt-one-semester-spring-2027",
+          "universityId": "uni-northeastern-university-china",
+          "programId": null,
+          "canonicalRecordSha256": "4be7d14c7683a915b5c9dd6730a32f674b93afa392fd40c970e93955344c1c33",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "blocked",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-neu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "primaryRegisteredSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-neu-iclt-one-semester-spring-2027",
+          "universityId": "uni-northeastern-university-china",
+          "programId": "program-neu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "d92272b147b8f6b49aaa12bdb3acdee296dc285a12ffad1a76b9e28d3452c25b",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "blocked",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-neu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "primaryRegisteredSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-neu-iclt-one-semester-spring-2027",
+          "universityId": "uni-northeastern-university-china",
+          "programId": null,
+          "canonicalRecordSha256": "4be7d14c7683a915b5c9dd6730a32f674b93afa392fd40c970e93955344c1c33",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "blocked",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-neu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "primaryRegisteredSourceUrl": "https://studyinneu.neu.edu.cn/html/article_content/202603/C7259436AAA44266BC8D502AA5E58E50.shtml",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
+      "universityName": "上海中医药大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "2027年3月入学：2026年10月31日",
+      "evidenceLocator": "报名截止日期 / fourth item",
+      "notes": "The official school page explicitly separates summer, autumn, winter and March 2027 application dates.",
+      "schoolIndependentIntakeYearExplicit": true,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
+        "url": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+        "recordIds": [
+          "cycle-shutcm-iclt-one-semester-spring-2027",
+          "scholarship-shutcm-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:56.789Z",
+        "observedAt": "2026-10-19T05:09:57.510Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-03-uni-shanghai-university-of-traditional-chinese-medicine.html",
+        "bodySha256": "6ac8394eb75463a55c4c1a76c8cf41a433ee48ccce9414aedae01eb9c7034bcd",
+        "bytes": 31329,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
+        "url": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+        "recordIds": [
+          "cycle-shutcm-iclt-one-semester-spring-2027",
+          "scholarship-shutcm-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:56.789Z",
+        "observedAt": "2026-10-19T05:09:57.510Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-03-uni-shanghai-university-of-traditional-chinese-medicine.html",
+        "bodySha256": "6ac8394eb75463a55c4c1a76c8cf41a433ee48ccce9414aedae01eb9c7034bcd",
+        "bytes": 31329,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "recovery-03-uni-shanghai-university-of-traditional-chinese-medicine.html",
+          "sha256": "6ac8394eb75463a55c4c1a76c8cf41a433ee48ccce9414aedae01eb9c7034bcd"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-shutcm-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
+          "programId": "program-shutcm-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "597da9af04d95d61938cddc60cdb75fb47c08b6f21545e2229585f549884c9da",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-shutcm-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "primaryRegisteredSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-shutcm-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
+          "programId": null,
+          "canonicalRecordSha256": "f67b2778618a6bd68724a49ae1554fbad7396a2dfb78726dd497357344981306",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-shutcm-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "primaryRegisteredSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-shutcm-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
+          "programId": "program-shutcm-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "597da9af04d95d61938cddc60cdb75fb47c08b6f21545e2229585f549884c9da",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-shutcm-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "primaryRegisteredSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-shutcm-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-university-of-traditional-chinese-medicine",
+          "programId": null,
+          "canonicalRecordSha256": "f67b2778618a6bd68724a49ae1554fbad7396a2dfb78726dd497357344981306",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-shutcm-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "primaryRegisteredSourceUrl": "https://iec.shutcm.edu.cn/gjzwjsjxjxm/list.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-shanghai-international-studies-university",
+      "universityName": "上海外国语大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "2027年3月入学：截止到2026年10月31日",
+      "evidenceLocator": "Application deadline section / March 2027 line",
+      "notes": "Current school body explicitly names both the application year and March 2027 entry. No structured opening date was inferred from webpage publication.",
+      "schoolIndependentIntakeYearExplicit": true,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-shanghai-international-studies-university",
+        "url": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+        "recordIds": [
+          "cycle-sisu-iclt-one-semester-spring-2027",
+          "scholarship-sisu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:57.351Z",
+        "observedAt": "2026-10-19T05:10:09.352Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+        "contentType": "text/html; charset=utf-8",
+        "bodyPath": "recovery-04-uni-shanghai-international-studies-university.html",
+        "bodySha256": "bbea4f64014b85d747b518a678429d07b8d2b54606b3f0afbffbe78dbadef520",
+        "bytes": 22070,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-shanghai-international-studies-university",
+        "url": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+        "recordIds": [
+          "cycle-sisu-iclt-one-semester-spring-2027",
+          "scholarship-sisu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:57.351Z",
+        "observedAt": "2026-10-19T05:10:09.352Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+        "contentType": "text/html; charset=utf-8",
+        "bodyPath": "recovery-04-uni-shanghai-international-studies-university.html",
+        "bodySha256": "bbea4f64014b85d747b518a678429d07b8d2b54606b3f0afbffbe78dbadef520",
+        "bytes": 22070,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "recovery-04-uni-shanghai-international-studies-university.html",
+          "sha256": "bbea4f64014b85d747b518a678429d07b8d2b54606b3f0afbffbe78dbadef520"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-sisu-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-international-studies-university",
+          "programId": "program-sisu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "ff0661ea5015731100c1b4c877cdb16afea9f3d6accde77d032d048fd3e92bdf",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-sisu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "primaryRegisteredSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-sisu-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-international-studies-university",
+          "programId": null,
+          "canonicalRecordSha256": "02cd24d952751cca5d3ebc491a6dc0205ed4e288259444ab931612fb176b6c59",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-sisu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "primaryRegisteredSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-sisu-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-international-studies-university",
+          "programId": "program-sisu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "ff0661ea5015731100c1b4c877cdb16afea9f3d6accde77d032d048fd3e92bdf",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-sisu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "primaryRegisteredSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-sisu-iclt-one-semester-spring-2027",
+          "universityId": "uni-shanghai-international-studies-university",
+          "programId": null,
+          "canonicalRecordSha256": "02cd24d952751cca5d3ebc491a6dc0205ed4e288259444ab931612fb176b6c59",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-sisu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "primaryRegisteredSourceUrl": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-tianjin-normal-university",
+      "universityName": "天津师范大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "2027年3月 2026年10月31日",
+      "evidenceLocator": "Official linked PDF page 5 / 一学期研修生 table row",
+      "notes": "The school attachment date table was text-extracted and visually inspected. March 2027 entry is paired with October 31, 2026; the landing title alone was not treated as date evidence.",
+      "schoolIndependentIntakeYearExplicit": true,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-tianjin-normal-university",
+        "url": "https://gjjl.tjnu.edu.cn/info/1265/6540.htm",
+        "recordIds": [
+          "cycle-tjnu-iclt-one-semester-spring-2027",
+          "scholarship-tjnu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:57.511Z",
+        "observedAt": "2026-10-19T05:09:57.992Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://gjjl.tjnu.edu.cn/info/1265/6540.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-05-uni-tianjin-normal-university.html",
+        "bodySha256": "22b739cb550941c3d63dad1bb3131e07c249467889a1dd408ba64cdcafdc8386",
+        "bytes": 24971,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "name": "tjnu-official-attachment",
+        "universityId": "uni-tianjin-normal-university",
+        "url": "https://gjjl.tjnu.edu.cn/__local/B/A7/5D/8987B3CA29373A7304436D6D8F5_2D31E3F4_5339D.pdf",
+        "discovery": "PDF URL displayed by the captured exact official landing page.",
+        "startedAt": "2026-10-19T05:11:02.127Z",
+        "observedAt": "2026-10-19T05:11:02.527Z",
+        "method": "GET",
+        "status": 200,
+        "bodyPath": "tjnu-official-attachment.pdf",
+        "bodySha256": "3561d6cec442987ef1c3293c0b7a27e972469be9caebe05ee9951c3588b9d789",
+        "bytes": 340893,
+        "contentType": "application/pdf",
+        "outcome": "captured-pending-date-review",
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "tjnu-official-attachment.pdf",
+          "sha256": "3561d6cec442987ef1c3293c0b7a27e972469be9caebe05ee9951c3588b9d789"
+        },
+        {
+          "path": "tjnu-official-attachment.txt",
+          "sha256": "646816f02a423cfbdadc73e2da3bb20e1f5336ac3408c006390d93394800de99"
+        },
+        {
+          "path": "tjnu-official-attachment-page-5.png",
+          "sha256": "6059580cb9299dc83ef11e2b765ea3776c0bc7fbe19e054b018a53fa7083249d"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-tjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-tianjin-normal-university",
+          "programId": "program-tjnu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "c562e95bebcdf49f7d2c9855af67737d38909124fb291d4cd81000014bd4c0bd",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-tjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://gjjl.tjnu.edu.cn/__local/B/A7/5D/8987B3CA29373A7304436D6D8F5_2D31E3F4_5339D.pdf",
+          "primaryRegisteredSourceUrl": "https://gjjl.tjnu.edu.cn/info/1265/6540.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-tjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-tianjin-normal-university",
+          "programId": null,
+          "canonicalRecordSha256": "cb7fb3125588ad4a8a09b8fd2325c91a504a1b938841af1bc58f67d841665697",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-tjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://gjjl.tjnu.edu.cn/__local/B/A7/5D/8987B3CA29373A7304436D6D8F5_2D31E3F4_5339D.pdf",
+          "primaryRegisteredSourceUrl": "https://gjjl.tjnu.edu.cn/info/1265/6540.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-tjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-tianjin-normal-university",
+          "programId": "program-tjnu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "c562e95bebcdf49f7d2c9855af67737d38909124fb291d4cd81000014bd4c0bd",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-tjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://gjjl.tjnu.edu.cn/__local/B/A7/5D/8987B3CA29373A7304436D6D8F5_2D31E3F4_5339D.pdf",
+          "primaryRegisteredSourceUrl": "https://gjjl.tjnu.edu.cn/info/1265/6540.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-tjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-tianjin-normal-university",
+          "programId": null,
+          "canonicalRecordSha256": "cb7fb3125588ad4a8a09b8fd2325c91a504a1b938841af1bc58f67d841665697",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-tjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://gjjl.tjnu.edu.cn/__local/B/A7/5D/8987B3CA29373A7304436D6D8F5_2D31E3F4_5339D.pdf",
+          "primaryRegisteredSourceUrl": "https://gjjl.tjnu.edu.cn/info/1265/6540.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-yanbian-university",
+      "universityName": "延边大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "2027年3月入学：学生申请截止日期为10月31日",
+      "evidenceLocator": "七、截止日期（以北京时间为准） / second item",
+      "notes": "The school body explicitly offers March 2027 one-semester entry and uses the 2026 programme cycle; the student deadline is October 31, 2026.",
+      "schoolIndependentIntakeYearExplicit": true,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-yanbian-university",
+        "url": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+        "recordIds": [
+          "cycle-ybu-iclt-one-semester-spring-2027",
+          "scholarship-ybu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:57.994Z",
+        "observedAt": "2026-10-19T05:09:58.917Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-06-uni-yanbian-university.html",
+        "bodySha256": "1f0ee66a2b2a51fb61b7dfd0c404533fe1948bd4c64072cda89467d73f42cbb1",
+        "bytes": 51682,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-yanbian-university",
+        "url": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+        "recordIds": [
+          "cycle-ybu-iclt-one-semester-spring-2027",
+          "scholarship-ybu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:57.994Z",
+        "observedAt": "2026-10-19T05:09:58.917Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-06-uni-yanbian-university.html",
+        "bodySha256": "1f0ee66a2b2a51fb61b7dfd0c404533fe1948bd4c64072cda89467d73f42cbb1",
+        "bytes": 51682,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "recovery-06-uni-yanbian-university.html",
+          "sha256": "1f0ee66a2b2a51fb61b7dfd0c404533fe1948bd4c64072cda89467d73f42cbb1"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-ybu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yanbian-university",
+          "programId": "program-ybu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "aff473e9d12d351034085f9e8fe7777c24a47b6229838d41d88245946894ed05",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ybu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "primaryRegisteredSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-ybu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yanbian-university",
+          "programId": null,
+          "canonicalRecordSha256": "f0ba890727c96c7ebf5d5390bf9fbb93bf29cd73acced109c6858a2f48ebd18b",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ybu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "primaryRegisteredSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-ybu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yanbian-university",
+          "programId": "program-ybu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "aff473e9d12d351034085f9e8fe7777c24a47b6229838d41d88245946894ed05",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ybu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "primaryRegisteredSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-ybu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yanbian-university",
+          "programId": null,
+          "canonicalRecordSha256": "f0ba890727c96c7ebf5d5390bf9fbb93bf29cd73acced109c6858a2f48ebd18b",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ybu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "primaryRegisteredSourceUrl": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-yunnan-university",
+      "universityName": "云南大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "一学期研修生（春季学期入学）2026年3月1日至10月31日",
+      "evidenceLocator": "School-authored 2026 guide PDF page 3 / spring one-semester application row",
+      "notes": "The school-authored PDF, already an exact registered canonical source, independently fixes spring one-semester student applications to March 1-October 31, 2026 and five-month International Chinese Education study. It does not literally print 2027 entry. The reused central 2026 ICLT guide explicitly places the same five-month one-semester category in March 2027. Year context is therefore cross-source and disclosed; the central deadline did not replace or override the school date. The school primary HTML TLS failure remains recorded.",
+      "schoolIndependentIntakeYearExplicit": false,
+      "crossSourceYearContext": true,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-yunnan-university",
+        "url": "https://english.ynu.edu.cn/ynuscholarships.html",
+        "recordIds": [
+          "cycle-ynu-iclt-one-semester-spring-2027",
+          "scholarship-ynu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:58.921Z",
+        "observedAt": "2026-10-19T05:09:59.624Z",
+        "method": "GET",
+        "status": null,
+        "outcome": "held-fetch-error",
+        "error": "fetch failed",
+        "errorCode": "ERR_TLS_CERT_ALTNAME_INVALID",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "name": "ynu-existing-school-guide",
+        "universityId": "uni-yunnan-university",
+        "url": "https://www.chinadaily.com.cn/specials/ynu/YunnanUniversityAdmissionsforInternationalChineseLanguageTeachersScholarshipProgram2026.pdf",
+        "discovery": "Exact existing canonical source URL for Yunnan University authored ICLT2026 brochure; separately hosted on its China Daily university page.",
+        "startedAt": "2026-10-19T05:11:02.173Z",
+        "observedAt": "2026-10-19T05:11:02.874Z",
+        "method": "GET",
+        "status": 200,
+        "bodyPath": "ynu-existing-school-guide.pdf",
+        "bodySha256": "6e25580f3caf3d1a692479fff04951d9ae82589045ff1dbfcf15978fc6955d71",
+        "bytes": 240214,
+        "contentType": "application/pdf",
+        "outcome": "captured-pending-date-review",
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "ynu-existing-school-guide.pdf",
+          "sha256": "6e25580f3caf3d1a692479fff04951d9ae82589045ff1dbfcf15978fc6955d71"
+        },
+        {
+          "path": "ynu-existing-school-guide.txt",
+          "sha256": "2b23869936aea0d4e3fb9cc250d2c4063ff1b9f1bd325058da4dfa817525b0a8"
+        },
+        {
+          "path": "ynu-existing-school-guide-page-3.png",
+          "sha256": "2ffbe668f4892f1c919208d282e8b98bd5b89e10a4f10cdd7623d3b8907aaff0"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-ynu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yunnan-university",
+          "programId": "program-ynu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "f0b37163a39c19a607c2f70074acae4e0ff61ed519fcb52a80c7715bb105d63c",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ynu-iclt-2026-index"
+          ],
+          "evidenceSourceUrl": "https://www.chinadaily.com.cn/specials/ynu/YunnanUniversityAdmissionsforInternationalChineseLanguageTeachersScholarshipProgram2026.pdf",
+          "primaryRegisteredSourceUrl": "https://english.ynu.edu.cn/ynuscholarships.html",
+          "yearContext": "school application year and spring category plus reused central explicit March 2027 category",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-ynu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yunnan-university",
+          "programId": null,
+          "canonicalRecordSha256": "733cd8701a03663eca4bbcdec0777ed5d19edf01de4906b7cc13a2dae2691796",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ynu-iclt-2026-index"
+          ],
+          "evidenceSourceUrl": "https://www.chinadaily.com.cn/specials/ynu/YunnanUniversityAdmissionsforInternationalChineseLanguageTeachersScholarshipProgram2026.pdf",
+          "primaryRegisteredSourceUrl": "https://english.ynu.edu.cn/ynuscholarships.html",
+          "yearContext": "school application year and spring category plus reused central explicit March 2027 category",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-ynu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yunnan-university",
+          "programId": "program-ynu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "f0b37163a39c19a607c2f70074acae4e0ff61ed519fcb52a80c7715bb105d63c",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ynu-iclt-2026-index"
+          ],
+          "evidenceSourceUrl": "https://www.chinadaily.com.cn/specials/ynu/YunnanUniversityAdmissionsforInternationalChineseLanguageTeachersScholarshipProgram2026.pdf",
+          "primaryRegisteredSourceUrl": "https://english.ynu.edu.cn/ynuscholarships.html",
+          "yearContext": "school application year and spring category plus reused central explicit March 2027 category",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-ynu-iclt-one-semester-spring-2027",
+          "universityId": "uni-yunnan-university",
+          "programId": null,
+          "canonicalRecordSha256": "733cd8701a03663eca4bbcdec0777ed5d19edf01de4906b7cc13a2dae2691796",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-ynu-iclt-2026-index"
+          ],
+          "evidenceSourceUrl": "https://www.chinadaily.com.cn/specials/ynu/YunnanUniversityAdmissionsforInternationalChineseLanguageTeachersScholarshipProgram2026.pdf",
+          "primaryRegisteredSourceUrl": "https://english.ynu.edu.cn/ynuscholarships.html",
+          "yearContext": "school application year and spring category plus reused central explicit March 2027 category",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-zhejiang-af-university",
+      "universityName": "浙江农林大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "2027年3月入学：学生申请截止日期为10月31日",
+      "evidenceLocator": "申请截止日期（以北京时间为准） / March 2027 item",
+      "notes": "The school-authored 2026 guide explicitly names the March 2027 semester; its student cutoff agrees with the stored October 31, 2026 date.",
+      "schoolIndependentIntakeYearExplicit": true,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-zhejiang-af-university",
+        "url": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+        "recordIds": [
+          "cycle-zafu-iclt-one-semester-spring-2027",
+          "scholarship-zafu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:59.625Z",
+        "observedAt": "2026-10-19T05:10:02.124Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-08-uni-zhejiang-af-university.html",
+        "bodySha256": "cb21e58523d1f6dd4ee012e846f0cb1907f1201ec66a7fba8d6976408bf30a8a",
+        "bytes": 22188,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-zhejiang-af-university",
+        "url": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+        "recordIds": [
+          "cycle-zafu-iclt-one-semester-spring-2027",
+          "scholarship-zafu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:09:59.625Z",
+        "observedAt": "2026-10-19T05:10:02.124Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-08-uni-zhejiang-af-university.html",
+        "bodySha256": "cb21e58523d1f6dd4ee012e846f0cb1907f1201ec66a7fba8d6976408bf30a8a",
+        "bytes": 22188,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "recovery-08-uni-zhejiang-af-university.html",
+          "sha256": "cb21e58523d1f6dd4ee012e846f0cb1907f1201ec66a7fba8d6976408bf30a8a"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-zafu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-af-university",
+          "programId": "program-zafu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "b4e5f352f614376032b5a1f37ed32c5fce988dd1e5b8f98f6167978e7ae2e59a",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zafu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "primaryRegisteredSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-zafu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-af-university",
+          "programId": null,
+          "canonicalRecordSha256": "ddc7a1d61a2cec59f0d4424efd6fe578d2538a2a97e9472c8a3683e317859f6d",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zafu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "primaryRegisteredSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-zafu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-af-university",
+          "programId": "program-zafu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "b4e5f352f614376032b5a1f37ed32c5fce988dd1e5b8f98f6167978e7ae2e59a",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zafu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "primaryRegisteredSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-zafu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-af-university",
+          "programId": null,
+          "canonicalRecordSha256": "ddc7a1d61a2cec59f0d4424efd6fe578d2538a2a97e9472c8a3683e317859f6d",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zafu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "primaryRegisteredSourceUrl": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-zhejiang-chinese-medical-university",
+      "universityName": "浙江中医药大学",
+      "result": "unknown",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": null,
+      "evidenceLocator": null,
+      "notes": "The exact registered URL returned a general notice listing, including already-enrolled-student funding notices, and no date clause for the selected spring 2027 ICLT route. A readable listing is not date confirmation; central dates were not substituted.",
+      "schoolIndependentIntakeYearExplicit": false,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-zhejiang-chinese-medical-university",
+        "url": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+        "recordIds": [
+          "cycle-zcmu-iclt-one-semester-spring-2027",
+          "scholarship-zcmu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:10:02.126Z",
+        "observedAt": "2026-10-19T05:10:05.197Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+        "contentType": "text/html; charset=utf-8",
+        "bodyPath": "recovery-09-uni-zhejiang-chinese-medical-university.html",
+        "bodySha256": "846f0968bae4340bf4ed34f2c73baac35d99ec9c5c2a6a89b28109e48cc35ea7",
+        "bytes": 43011,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-zhejiang-chinese-medical-university",
+        "url": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+        "recordIds": [
+          "cycle-zcmu-iclt-one-semester-spring-2027",
+          "scholarship-zcmu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:10:02.126Z",
+        "observedAt": "2026-10-19T05:10:05.197Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+        "contentType": "text/html; charset=utf-8",
+        "bodyPath": "recovery-09-uni-zhejiang-chinese-medical-university.html",
+        "bodySha256": "846f0968bae4340bf4ed34f2c73baac35d99ec9c5c2a6a89b28109e48cc35ea7",
+        "bytes": 43011,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "recovery-09-uni-zhejiang-chinese-medical-university.html",
+          "sha256": "846f0968bae4340bf4ed34f2c73baac35d99ec9c5c2a6a89b28109e48cc35ea7"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-zcmu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-chinese-medical-university",
+          "programId": "program-zcmu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "545f37ab3db14ad77ed54f0dd9ee94f18fc686d232fbfd44aec6e22080873dcc",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "unknown",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zcmu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "primaryRegisteredSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-zcmu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-chinese-medical-university",
+          "programId": null,
+          "canonicalRecordSha256": "e4139f8c315498fb5f89f21dcd08992e44d727a408a9b06fc781bb6650ef04e5",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "unknown",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zcmu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "primaryRegisteredSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-zcmu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-chinese-medical-university",
+          "programId": "program-zcmu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "545f37ab3db14ad77ed54f0dd9ee94f18fc686d232fbfd44aec6e22080873dcc",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "unknown",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zcmu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "primaryRegisteredSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-zcmu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-chinese-medical-university",
+          "programId": null,
+          "canonicalRecordSha256": "e4139f8c315498fb5f89f21dcd08992e44d727a408a9b06fc781bb6650ef04e5",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": null,
+          "result": "unknown",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zcmu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "primaryRegisteredSourceUrl": "https://iec.zcmu.edu.cn/index.php/cn/notice",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-zhejiang-normal-university",
+      "universityName": "浙江师范大学",
+      "result": "unchanged",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "evidenceQuote": "10月31日（2027年3月入学）",
+      "evidenceLocator": "申请截止日期为 / second item",
+      "notes": "Although the URL path contains an older publication year, the current school body explicitly states the 2026 programme cycle and March 2027 semester. The URL year was not used to infer an intake.",
+      "schoolIndependentIntakeYearExplicit": true,
+      "crossSourceYearContext": false,
+      "error": null,
+      "schoolPrimaryCapture": {
+        "universityId": "uni-zhejiang-normal-university",
+        "url": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+        "recordIds": [
+          "cycle-zjnu-iclt-one-semester-spring-2027",
+          "scholarship-zjnu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:10:05.198Z",
+        "observedAt": "2026-10-19T05:10:05.978Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-10-uni-zhejiang-normal-university.html",
+        "bodySha256": "28845b00ac5d5e16d34b38bff3618c8cd0ef276ff2f4ce16caf79d061c488b0a",
+        "bytes": 229231,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "dateEvidenceCapture": {
+        "universityId": "uni-zhejiang-normal-university",
+        "url": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+        "recordIds": [
+          "cycle-zjnu-iclt-one-semester-spring-2027",
+          "scholarship-zjnu-iclt-one-semester-spring-2027"
+        ],
+        "startedAt": "2026-10-19T05:10:05.198Z",
+        "observedAt": "2026-10-19T05:10:05.978Z",
+        "method": "GET",
+        "status": 200,
+        "finalUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+        "contentType": "text/html",
+        "bodyPath": "recovery-10-uni-zhejiang-normal-university.html",
+        "bodySha256": "28845b00ac5d5e16d34b38bff3618c8cd0ef276ff2f4ce16caf79d061c488b0a",
+        "bytes": 229231,
+        "outcome": "captured-pending-date-review",
+        "networkRequests": 1,
+        "paidCalls": 0,
+        "canonicalWrites": 0
+      },
+      "evidenceFiles": [
+        {
+          "path": "recovery-10-uni-zhejiang-normal-university.html",
+          "sha256": "28845b00ac5d5e16d34b38bff3618c8cd0ef276ff2f4ce16caf79d061c488b0a"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-zjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-normal-university",
+          "programId": "program-zjnu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "9d9ff3ea83634e24ee0b32bca17eb7a26bdc7b1a4dadd5fcda1fb6f3a3a1d65f",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "primaryRegisteredSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-zjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-normal-university",
+          "programId": null,
+          "canonicalRecordSha256": "e477063a8d0db5a1c2849bb740599d7e3f9802b3652fe888cacaca10e5c974d7",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "primaryRegisteredSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ],
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-zjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-normal-university",
+          "programId": "program-zjnu-iclt-one-semester-spring-2027",
+          "canonicalRecordSha256": "9d9ff3ea83634e24ee0b32bca17eb7a26bdc7b1a4dadd5fcda1fb6f3a3a1d65f",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "primaryRegisteredSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-zjnu-iclt-one-semester-spring-2027",
+          "universityId": "uni-zhejiang-normal-university",
+          "programId": null,
+          "canonicalRecordSha256": "e477063a8d0db5a1c2849bb740599d7e3f9802b3652fe888cacaca10e5c974d7",
+          "storedDeadline": "2026-10-31",
+          "officialDeadline": "2026-10-31",
+          "result": "unchanged",
+          "storedOpensOn": null,
+          "openingDateReviewed": false,
+          "officialCutoffAt": null,
+          "sourceIdsMatched": [
+            "src-zjnu-iclt-2026"
+          ],
+          "evidenceSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "primaryRegisteredSourceUrl": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+          "yearContext": "school explicitly identifies March 2027 within the 2026 ICLT cycle",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false
+        }
+      ]
+    }
+  ],
+  "precisionIssues": [
+    {
+      "universityId": "uni-minnan-normal-university",
+      "studentDeadline": "2026-10-31",
+      "institutionReviewDeadline": "2026-11-10",
+      "cutoffTime": null,
+      "notes": "The later institutional review date is not the student application cutoff."
+    },
+    {
+      "universityId": "uni-yunnan-university",
+      "schoolOwnDeadline": "2026-10-31",
+      "schoolExplicitIntakeYear": null,
+      "centralExplicitIntakeYear": 2027,
+      "notes": "Cross-source year context disclosed. No earlier school deadline was overridden."
+    }
+  ],
+  "continuation": {
+    "completedRecordIds": [
+      "cycle-mnnu-iclt-one-semester-spring-2027",
+      "scholarship-mnnu-iclt-one-semester-spring-2027",
+      "cycle-shutcm-iclt-one-semester-spring-2027",
+      "scholarship-shutcm-iclt-one-semester-spring-2027",
+      "cycle-sisu-iclt-one-semester-spring-2027",
+      "scholarship-sisu-iclt-one-semester-spring-2027",
+      "cycle-tjnu-iclt-one-semester-spring-2027",
+      "scholarship-tjnu-iclt-one-semester-spring-2027",
+      "cycle-ybu-iclt-one-semester-spring-2027",
+      "scholarship-ybu-iclt-one-semester-spring-2027",
+      "cycle-ynu-iclt-one-semester-spring-2027",
+      "scholarship-ynu-iclt-one-semester-spring-2027",
+      "cycle-zafu-iclt-one-semester-spring-2027",
+      "scholarship-zafu-iclt-one-semester-spring-2027",
+      "cycle-zjnu-iclt-one-semester-spring-2027",
+      "scholarship-zjnu-iclt-one-semester-spring-2027"
+    ],
+    "heldRecordIds": [
+      "cycle-neu-iclt-one-semester-spring-2027",
+      "scholarship-neu-iclt-one-semester-spring-2027",
+      "cycle-zcmu-iclt-one-semester-spring-2027",
+      "scholarship-zcmu-iclt-one-semester-spring-2027"
+    ],
+    "heldUniversityIds": [
+      "uni-northeastern-university-china",
+      "uni-zhejiang-chinese-medical-university"
+    ],
+    "retryPolicy": "No automatic repeat. NEU requires a valid TLS endpoint or separately evidenced official alternative; do not disable certificate checks. ZCMU needs a route-specific admissions notice. Future attempts use a distinct immutable batch and respect the shared scheduler cooldown.",
+    "earliestOrdinaryRecheckDate": "2026-10-20"
+  },
+  "limitations": [
+    "Only deadline and intake/application-type scope were reviewed. Record SHA pins do not establish fresh approval of other fields.",
+    "No application portal acceptance was tested. No source supplied a time of day for these selected student deadlines; none was invented.",
+    "No cutoff was renewed, rolled to another year, or copied from the central guide to an unverified school.",
+    "School pages and school-authored PDFs provide their own dates. Reused central evidence is explicitly limited to Yunnan intake-year context.",
+    "Both original sandbox failures and recovered source observations remain preserved, without overwriting their receipts.",
+    "No canonical, Git or shared progress file was changed."
+  ]
+}

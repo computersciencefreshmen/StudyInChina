@@ -1,0 +1,750 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Chinese Language Programs-Chinese International Education College (Overseas Education College)</title><meta name="pageType" content="2">
+<meta name="pageTitle" content="Chinese Language Programs">
+
+
+<META Name="keywords" Content="Chinese International Education College (Overseas Education College),Chinese Language Programs" />
+
+    <link rel="stylesheet" href="../style/public-ny.css">
+    <link rel="stylesheet" href="../style/ny-ny.css">
+        <link rel="stylesheet" href="../style/index.css">
+        <link rel="shortcut icon" href="#" />
+
+
+<!--Announced by Visual SiteBuilder 9-->
+<script language="javascript" src="../_sitegray/_sitegray.js"></script>
+<!-- CustomerNO:77656262657232307778465750545742000400024e5c -->
+<link rel="stylesheet" type="text/css" href="../jjy.vsb.css" />
+<script type="text/javascript" src="/system/resource/js/vsbscreen.min.js" id="_vsbscreen" devices="pc|mobile|pad"></script>
+<script type="text/javascript" src="/system/resource/js/counter.js"></script>
+<script type="text/javascript">_jsq_(3254,'/jjy.jsp',-1,1956186774)</script>
+</head>
+
+<body>
+
+<!--wap-->
+<div class="wap-head ar_web">
+    <div class="logo flex-v-center">
+        
+<a href="../index.htm">
+                        <img src="../images/ab48e232-e5f8-4dd5-b716-861ed9637c5e.png" alt="">
+                    </a>
+    </div>
+    <a href="javascript:;" class="navbtnm">
+        <i></i>
+    </a>
+</div>
+<div class="big-nav">
+
+    <div class="wap_search">
+        <!-- 3.1.3版本 -->
+
+
+
+<script language="javascript" src="/system/resource/js/base64.js"></script><script language="javascript" src="/system/resource/js/jquery/jquery-latest.min.js"></script><script language="javascript" src="/system/resource/vue/vue.js"></script><script language="javascript" src="/system/resource/vue/bluebird.min.js"></script><script language="javascript" src="/system/resource/vue/axios.js"></script><script language="javascript" src="/system/resource/vue/polyfill.js"></script><script language="javascript" src="/system/resource/vue/token.js"></script><LINK href="/system/resource/vue/static/element/index.css" type="text/css" rel="stylesheet"><script language="javascript" src="/system/resource/vue/static/element/index.js"></script><script language="javascript" src="/system/resource/vue/static/public.js"></script><script language="javascript" src="/system/resource/openapp/search/js/containsHtmlTags.js"></script><script language="javascript" src="/system/resource/openapp/search/layui/layui.js"></script><div id="divu1"></div>
+<script type="text/html" id="htmlu1">
+    <div id="appu1">
+        <div v-if="!isError">
+        <form name="search" class="header-search">
+        
+        
+            <input type="text"  class="input" placeholder="请输入搜索关键词"  name="keyword" autocomplete=off v-model=query.keyWord @keyup.enter="onSubmit">
+            <input class="btn_blue" name="submit_button" type="submit" value="" v-on:click="onSubmit()"/>
+            </form>
+        </div>
+        <div v-if="isError" style="color: #b30216; font-size:18px;text-align: center;padding:20px;">
+            应用维护中！
+        </div>
+    </div>
+</script>
+<script>
+    $("#divu1").html($("#htmlu1").text());
+</script>
+<script>
+    var appOwner = "1956186774";
+    var token = 'tourist';
+    var urlPrefix = "/aop_component/";
+
+    jQuery.support.cors = true;
+    $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+    });
+
+    new Vue({
+        el: "#appu1",
+        data: function () {
+            return {
+                query: {
+                    keyWord: "",//搜索关键词
+                    owner: appOwner,
+                    token: token,
+                    urlPrefix: urlPrefix,
+                    lang:"i18n_zh_CN"
+                },
+                isError: false
+            }
+        },
+        mounted: function () {
+            var _this = this;
+            // _this.init();
+        },
+        methods: {
+            init: function(){
+                $.ajax({
+                    url: "/aop_component//webber/search/test",
+                    type: "get",
+                    success: function (response) {
+                        if (response.code == "0000") {
+                        } else if (response.code == "220") {
+                            _this.isError = true;
+                            console.log(response);
+                        } else if (!response.code) {
+                            _this.isError = true;
+                            console.log(response);
+                        }
+                    },
+                    error: function (response) {
+                        _this.isError = true;
+                    }
+                });
+            },
+            onSubmit: function (e) {
+                var url = "/aop_views/search/modules/resultpc/soso.html";
+                if ("10" == "1" || "10" == "2") {
+                    url = "" + url;
+                }
+                var _this = this;
+                var query = _this.query;
+                if (url.indexOf("?") > -1) {
+                    url = url.split("?")[0];
+                }
+                if (query.keyWord) {
+                    var query = new Base64().encode(JSON.stringify(query));
+                    window.open(url + "?query=" + query);
+                } else {
+                    alert("请填写搜索内容")
+                }
+            },
+        }
+    })
+</script>
+
+<script>
+   var appElementu1 = document.querySelector("#appu1");
+   if (appElementu1 && appElementu1.__vue__) {
+
+   } else {
+      $("#divu1").html($("#htmlu1").text());
+      var appOwner = "1956186774";   
+      var urlPrefix = "/aop_component/";
+      var ifLogin="";
+      var token = ifLogin=='true'?gettoken(10, true).trim():'tourist';
+      if (containsHtmlTags(token) || !token) { 
+         token = 'tourist';
+      }
+      jQuery.support.cors = true;
+      $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+      });
+      var queryInfou1 = {
+        query: {
+            keyWord: "",//搜索关键词
+            owner: appOwner,
+            token: token,
+            urlPrefix: urlPrefix,
+            lang:"i18n_zh_CN"
+        },
+        isError: false
+      };
+      function keyUpFunu1(e){
+        var theEvent = e || window.event;
+        var keyCode = theEvent.keyCode || theEvent.which || theEvent.charCode;
+        if(keyCode == 13){
+          onSubmitu1();
+        }
+      };
+
+      function onSubmitu1(e) {
+        queryInfou1.query.keyWord= $("#appu1  .qwss").val();
+        
+        var url = "/aop_views/search/modules/resultpc/soso.html";      
+        if ("10" == "1" || "10" == "2") {
+           url = "" + url;
+        }
+        var query = queryInfou1.query;
+        if (url.indexOf("?") > -1) {
+            url = url.split("?")[0];
+        }
+        if (query.keyWord) {
+            var query = new Base64().encode(JSON.stringify(query));
+            window.open(url + "?query=" + query);
+        } else {
+            alert("请填写搜索内容")
+        }
+      };
+   }
+</script>
+    </div>
+    <ul class="list_box_nav_mobile">
+        <li>
+            <div class="con">
+             <a href="../index.htm" title="Home" class="a">Home</a>
+             
+            </div>
+        </li>
+         
+
+<li>
+            <div class="con">
+             <a href="../About_us1/About_CIEC_OEC_.htm" title="About us" class="a">About us</a>
+             
+            </div>
+           <i></i>
+            <div class="list">
+                <a href="../About_us1/About_CIEC_OEC_.htm">About CIEC/OEC </a>
+                <a href="../About_us1/Staff.htm">Staff</a>
+                <a href="../About_us1/Xiamen_University.htm">Xiamen University</a>
+                <a href="../About_us1/Xiang_an_Campus.htm">Xiang'an Campus</a>
+                <a href="../About_us1/Xiamen_city.htm">Xiamen city</a>
+             
+            </div>
+        </li>
+         
+
+<li>
+            <div class="con">
+             <a href="../Faculty1/Professor.htm" title="Faculty" class="a">Faculty</a>
+             
+            </div>
+           <i></i>
+            <div class="list">
+                <a href="../Faculty1/Professor.htm">Professor</a>
+                <a href="../Faculty1/Associate_Professor.htm">Associate Professor</a>
+                <a href="../Faculty1/Assistant_Professor.htm">Assistant Professor</a>
+                <a href="../Faculty1/Lecturer.htm">Lecturer</a>
+                <a href="../Faculty1/Teaching_Assistant.htm">Teaching Assistant</a>
+             
+            </div>
+        </li>
+         
+
+<li>
+            <div class="con">
+             <a href="../Admissions1/Application_procedures.htm" title="Admissions" class="a">Admissions</a>
+             
+            </div>
+           <i></i>
+            <div class="list">
+                <a href="../Admissions1/Application_procedures.htm">Application procedures</a>
+                <a href="../Admissions1/Application_Documents.htm">Application Documents</a>
+                <a href="../Admissions1/Application_Portal.htm">Application Portal</a>
+                <a href="../Admissions1/Frequently_Asked_Questions.htm">Frequently Asked Questions</a>
+                <a href="../Admissions1/Contact_us.htm">Contact us</a>
+             
+            </div>
+        </li>
+         
+
+<li class="on">
+            <div class="con">
+             <a href="Online_Chinese_Courses.htm" title="Program" class="a">Program</a>
+             
+            </div>
+           <i></i>
+            <div class="list">
+                <a href="Undergraduate_Programs.htm">Undergraduate Programs</a>
+                <a href="Graduate_Masters_Degree_Programs.htm">Graduate/Masters Degree Programs</a>
+                <a href="Chinese_Language_Programs.htm">Chinese Language Programs</a>
+                <a href="Other_non_degreee_programs.htm">Other non-degreee programs</a>
+                <a href="Tuition_and_Costs.htm">Tuition and Costs</a>
+             
+            </div>
+        </li>
+         
+
+<li>
+            <div class="con">
+             <a href="../Scholarship1/All_categories.htm" title="Scholarship" class="a">Scholarship</a>
+             
+            </div>
+           <i></i>
+            <div class="list">
+                <a href="../Scholarship1/All_categories.htm">All categories</a>
+                <a href="../Scholarship1/Chinese_Government.htm">Chinese Government</a>
+                <a href="../Scholarship1/International_Chinese_Language_Teachers_Scholarshi.htm">International Chinese Language Teachers Scholarship</a>
+                <a href="../Scholarship1/Fujian_Provincial_Govt_.htm">Fujian Provincial Govt.</a>
+                <a href="../Scholarship1/Xiamen_University.htm">Xiamen University</a>
+                <a href="../Scholarship1/Xiamen_Tan_Kah_Kee_Scholarships.htm">Xiamen Tan Kah Kee Scholarships</a>
+             
+            </div>
+        </li>
+         
+
+<li>
+            <div class="con">
+             <a href="../Student_Life1/Campus_Facilities.htm" title="Student Life" class="a">Student Life</a>
+             
+            </div>
+           <i></i>
+            <div class="list">
+                <a href="../Student_Life1/Campus_Facilities.htm">Campus Facilities</a>
+                <a href="../Student_Life1/Student_Activities.htm">Student Activities</a>
+                <a href="../Student_Life1/Cultural_Tours_Activities.htm">Cultural Tours/Activities</a>
+             
+            </div>
+        </li>
+         
+
+<li>
+            <div class="con">
+             <a href="https://mcc.xmu.edu.cn/" title="Login" class="a">Login</a>
+             
+            </div>
+        </li>
+         
+
+          
+
+    </ul>
+
+</div>
+<!--wap-->
+
+<div class="head ar_web">
+    <div class="logo">
+        
+<!-- 网站logo图片地址请在本组件"内容配置-网站logo"处填写 -->
+<a href="../index.htm" title="国际中文教育学院/海外教育学院英文网站">
+                <img src="../images/ab48e232-e5f8-4dd5-b716-861ed9637c5e.png" alt="">
+            </a>
+    </div>
+    <nav id="nav" class="ar_web">
+         <ul class="flex">
+
+   <li>
+                <h2><a href="../index.htm" title="Home">Home</a></h2>
+            </li>
+   <li>
+                <h2><a href="../About_us1/About_CIEC_OEC_.htm" title="About us">About us</a></h2>
+                <div class="sub">
+                    <div class="box">
+                    <a href="../About_us1/About_CIEC_OEC_.htm" title="About CIEC/OEC ">About CIEC/OEC </a>
+                    <a href="../About_us1/Staff.htm" title="Staff">Staff</a>
+                    <a href="../About_us1/Xiamen_University.htm" title="Xiamen University">Xiamen University</a>
+                    <a href="../About_us1/Xiang_an_Campus.htm" title="Xiang'an Campus">Xiang'an Campus</a>
+                    <a href="../About_us1/Xiamen_city.htm" title="Xiamen city">Xiamen city</a>
+ 
+                    </div>
+                </div>
+            </li>
+   <li>
+                <h2><a href="../Faculty1/Professor.htm" title="Faculty">Faculty</a></h2>
+                <div class="sub">
+                    <div class="box">
+                    <a href="../Faculty1/Professor.htm" title="Professor">Professor</a>
+                    <a href="../Faculty1/Associate_Professor.htm" title="Associate Professor">Associate Professor</a>
+                    <a href="../Faculty1/Assistant_Professor.htm" title="Assistant Professor">Assistant Professor</a>
+                    <a href="../Faculty1/Lecturer.htm" title="Lecturer">Lecturer</a>
+                    <a href="../Faculty1/Teaching_Assistant.htm" title="Teaching Assistant">Teaching Assistant</a>
+ 
+                    </div>
+                </div>
+            </li>
+   <li>
+                <h2><a href="../Admissions1/Application_procedures.htm" title="Admissions">Admissions</a></h2>
+                <div class="sub">
+                    <div class="box">
+                    <a href="../Admissions1/Application_procedures.htm" title="Application procedures">Application procedures</a>
+                    <a href="../Admissions1/Application_Documents.htm" title="Application Documents">Application Documents</a>
+                    <a href="../Admissions1/Application_Portal.htm" title="Application Portal">Application Portal</a>
+                    <a href="../Admissions1/Frequently_Asked_Questions.htm" title="Frequently Asked Questions">Frequently Asked Questions</a>
+                    <a href="../Admissions1/Contact_us.htm" title="Contact us">Contact us</a>
+ 
+                    </div>
+                </div>
+            </li>
+   <li>
+                <h2><a href="Online_Chinese_Courses.htm" title="Program">Program</a></h2>
+                <div class="sub">
+                    <div class="box">
+                    <a href="Undergraduate_Programs.htm" title="Undergraduate Programs">Undergraduate Programs</a>
+                    <a href="Graduate_Masters_Degree_Programs.htm" title="Graduate/Masters Degree Programs">Graduate/Masters Degree Programs</a>
+                    <a href="Chinese_Language_Programs.htm" title="Chinese Language Programs">Chinese Language Programs</a>
+                    <a href="Other_non_degreee_programs.htm" title="Other non-degreee programs">Other non-degreee programs</a>
+                    <a href="Tuition_and_Costs.htm" title="Tuition and Costs">Tuition and Costs</a>
+ 
+                    </div>
+                </div>
+            </li>
+   <li>
+                <h2><a href="../Scholarship1/All_categories.htm" title="Scholarship">Scholarship</a></h2>
+                <div class="sub">
+                    <div class="box">
+                    <a href="../Scholarship1/All_categories.htm" title="All categories">All categories</a>
+                    <a href="../Scholarship1/Chinese_Government.htm" title="Chinese Government">Chinese Government</a>
+                    <a href="../Scholarship1/International_Chinese_Language_Teachers_Scholarshi.htm" title="International Chinese Language Teachers Scholarship">International Chinese Language Teachers Scholarship</a>
+                    <a href="../Scholarship1/Fujian_Provincial_Govt_.htm" title="Fujian Provincial Govt.">Fujian Provincial Govt.</a>
+                    <a href="../Scholarship1/Xiamen_University.htm" title="Xiamen University">Xiamen University</a>
+                    <a href="../Scholarship1/Xiamen_Tan_Kah_Kee_Scholarships.htm" title="Xiamen Tan Kah Kee Scholarships">Xiamen Tan Kah Kee Scholarships</a>
+ 
+                    </div>
+                </div>
+            </li>
+   <li>
+                <h2><a href="../Student_Life1/Campus_Facilities.htm" title="Student Life">Student Life</a></h2>
+                <div class="sub">
+                    <div class="box">
+                    <a href="../Student_Life1/Campus_Facilities.htm" title="Campus Facilities">Campus Facilities</a>
+                    <a href="../Student_Life1/Student_Activities.htm" title="Student Activities">Student Activities</a>
+                    <a href="../Student_Life1/Cultural_Tours_Activities.htm" title="Cultural Tours/Activities">Cultural Tours/Activities</a>
+ 
+                    </div>
+                </div>
+            </li>
+   <li>
+                <h2><a href="https://mcc.xmu.edu.cn/" title="Login">Login</a></h2>
+            </li>
+ </ul>
+    </nav>
+    <div class="right">
+
+
+
+        <div class="list_box0">
+            <div class="li"><a href="https://oec.xmu.edu.cn/">CH</a></div>
+        </div>
+
+
+        <div class="topser">
+            <a href="javascript:;" class="showSear"><img src="../images/ncssan20250408.png"></a>
+        </div>
+
+
+
+    </div>
+</div>
+<!-- 3.1.3版本 -->
+
+
+
+<div class="ser-layer">
+    <span class="serclose swiper-icons swi-close"></span>
+    <div class="serform">
+        
+
+
+
+
+        <div id="divu5"></div>
+        <script type="text/html" id="htmlu5">
+            <div id="appu5"  class="input-group pore">
+                <div v-if="!isError">
+                    <input  type="text" class="inp" placeholder="search" autocomplete=off v-model=query.keyWord @keyup.enter="onSubmit" placeholder="输入关键词搜索...">
+                    <input type="submit"  class="subm sub" name="submit_button" type="button" value="" v-on:click="onSubmit()"/>
+                </div>
+                <div v-if="isError" style="color: #b30216; font-size:18px;text-align: center;padding:20px;">
+                    应用维护中！
+                </div>
+            </div>
+        </script>
+
+
+
+
+
+    </div>
+</div>
+<script>
+    $("#divu5").html($("#htmlu5").text());
+</script>
+<script>
+    var appOwner = "1956186774";
+    var token = 'tourist';
+    var urlPrefix = "/aop_component/";
+
+    jQuery.support.cors = true;
+    $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+    });
+
+    new Vue({
+        el: "#appu5",
+        data: function () {
+            return {
+                query: {
+                    keyWord: "",//搜索关键词
+                    owner: appOwner,
+                    token: token,
+                    urlPrefix: urlPrefix,
+                    lang:"i18n_en_US"
+                },
+                isError: false
+            }
+        },
+        mounted: function () {
+            var _this = this;
+            // _this.init();
+        },
+        methods: {
+            init: function(){
+                $.ajax({
+                    url: "/aop_component//webber/search/test",
+                    type: "get",
+                    success: function (response) {
+                        if (response.code == "0000") {
+                        } else if (response.code == "220") {
+                            _this.isError = true;
+                            console.log(response);
+                        } else if (!response.code) {
+                            _this.isError = true;
+                            console.log(response);
+                        }
+                    },
+                    error: function (response) {
+                        _this.isError = true;
+                    }
+                });
+            },
+            onSubmit: function (e) {
+                var url = "/aop_views/search/modules/resultpc/soso.html";
+                if ("10" == "1" || "10" == "2") {
+                    url = "" + url;
+                }
+                var _this = this;
+                var query = _this.query;
+                if (url.indexOf("?") > -1) {
+                    url = url.split("?")[0];
+                }
+                if (query.keyWord) {
+                    var query = new Base64().encode(JSON.stringify(query));
+                    window.open(url + "?query=" + query);
+                } else {
+                    alert("请填写搜索内容")
+                }
+            },
+        }
+    })
+</script>
+
+<script>
+    $(".showSear").click(function () {
+        $(".ser-layer").addClass('showdiv');
+        //$('body').removeClass('navShow');
+    })
+    $(".serclose").click(function () {
+        $(".ser-layer").removeClass('showdiv');
+    });
+</script>
+
+<script>
+   var appElementu5 = document.querySelector("#appu5");
+   if (appElementu5 && appElementu5.__vue__) {
+
+   } else {
+      $("#divu5").html($("#htmlu5").text());
+      var appOwner = "1956186774";   
+      var urlPrefix = "/aop_component/";
+      var ifLogin="";
+      var token = ifLogin=='true'?gettoken(10, true).trim():'tourist';
+      if (containsHtmlTags(token) || !token) { 
+         token = 'tourist';
+      }
+      jQuery.support.cors = true;
+      $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+      });
+      var queryInfou5 = {
+        query: {
+            keyWord: "",//搜索关键词
+            owner: appOwner,
+            token: token,
+            urlPrefix: urlPrefix,
+            lang:"i18n_en_US"
+        },
+        isError: false
+      };
+      function keyUpFunu5(e){
+        var theEvent = e || window.event;
+        var keyCode = theEvent.keyCode || theEvent.which || theEvent.charCode;
+        if(keyCode == 13){
+          onSubmitu5();
+        }
+      };
+
+      function onSubmitu5(e) {
+        queryInfou5.query.keyWord= $("#appu5  .qwss").val();
+        
+        var url = "/aop_views/search/modules/resultpc/soso.html";      
+        if ("10" == "1" || "10" == "2") {
+           url = "" + url;
+        }
+        var query = queryInfou5.query;
+        if (url.indexOf("?") > -1) {
+            url = url.split("?")[0];
+        }
+        if (query.keyWord) {
+            var query = new Base64().encode(JSON.stringify(query));
+            window.open(url + "?query=" + query);
+        } else {
+            alert("请填写搜索内容")
+        }
+      };
+   }
+</script>
+    <!-- banner -->
+    <div class="banner"><img src="../images/banner.jpg" /></div>
+
+    <div class="nymain">
+        <div class="wp">
+            <div class="channl-menu leftNav">
+                <h2>
+<b>Program</b><span></span></h2>
+                <ul>  <li>
+                        <a href="Undergraduate_Programs.htm">Undergraduate Programs</a>
+                    </li>
+  <li>
+                        <a href="Graduate_Masters_Degree_Programs.htm">Graduate/Masters Degree Programs</a>
+                    </li>
+  <li class="active  on">
+                        <a href="Chinese_Language_Programs.htm">Chinese Language Programs</a>
+                    </li>
+  <li>
+                        <a href="Other_non_degreee_programs.htm">Other non-degreee programs</a>
+                    </li>
+  <li>
+                        <a href="Tuition_and_Costs.htm">Tuition and Costs</a>
+                    </li>
+</ul>
+            </div>
+            <div class="ny-right">
+                <div class="position d">
+                    <div class="">
+                        <h3>
+</h3>
+                       
+                        <a href="../index.htm">Home</a>
+              <span>-></span>
+                <a href="Online_Chinese_Courses.htm">Program</a>
+              <span>-></span>
+                <a href="Chinese_Language_Programs.htm">Chinese Language Programs</a>
+
+                    </div>
+                </div>
+                <div class="art-main">
+
+<script language="javascript" src="/system/resource/js/dynclicks.js"></script>
+<script language="javascript" src="/system/resource/js/ajax.js"></script><script language="javascript">_getBatchClickTimes('null',1956186774,'wbnews','u11')</script>
+<script>function seeContenta11(contentid,size,displayid){	document.getElementById(contentid).innerHTML = '[';	for(var i=0;i<=size;i++){		var allcontentid = contentid+(i+1);		if(allcontentid==displayid){			document.getElementById(contentid).innerHTML += " <span id='"+allcontentid+"' name='"+allcontentid+"'  >"+(i+1)+"</span> ";			document.getElementById(displayid).style.display = 'block';		}else{			document.getElementById(contentid).innerHTML += " <span style='cursor:pointer' id='"+allcontentid+"' name='"+allcontentid+"' onclick=seeContenta11('"+contentid+"','"+size+"','"+allcontentid+"')  >"+(i+1)+"</span> ";			document.getElementById(allcontentid).style.display = 'none';		}	}	document.getElementById(contentid).innerHTML += ']';}</script>
+<script language="javascript" src="/system/resource/js/news/mp4video.js"></script>
+<script>_addDynClicks('wbnews',1956186774,9502)</script>
+<div class="art-tit cont-tit d">
+                        <h3>Admissions Guide for the Long-Term Chinese Language Program in the 2026-2027 Academic Year</h3></div>
+                         <div class="art-body d">
+    <div id="vsb_content_9502_u111"><div id="vsb_content"><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Program Overview</span></strong></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">This program is open to Chinese language enthusiasts from across the world. International students who are passionate about the Chinese language, have systematic needs for learning the Chinese language, or are interested in Chinese culture, can find a Chinese language course with us that suits them.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Depending on their Chinese proficiency, students will be placed at one of the following three levels: beginning (point zero), intermediate and advanced, and be grouped into different classes in small sizes. The program will focus on the development of listening, speaking, reading, and writing skills, with optional courses such as HSK Tutorial, Chinese Idioms and Their Stories, Learning Chinese by Watching Chinese Movies, Chinese Kung Fu and Chinese Painting as supplements to core courses. The objective is to help learners improve their Chinese language skills for communication purposes and thereby enable them to use the Chinese language in their studies, life and future careers. Certificates of Completion and transcripts will be issued to students upon completion of the study.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Fall semester: </span></strong><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">September 2026 to January 2027</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Spring semester: </span></strong><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">February to June 2027</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Class time: </span></strong><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Monday to Friday</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Different classes have different timetables, about 18-24 class hours per week scheduled from Monday through Friday.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Course Introduction:</span></strong><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif"> Courses are subject to change every semester, and the schedule is to be finalized by way of announcement.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Compulsory Courses</span></strong></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Intensive Chinese (elementary, intermediate and advanced)</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">The course is designed to methodically teach skills and rules of Chinese pronunciation, reading and writing of Chinese characters, Chinese vocabulary and grammar and their usage, and develop the ability to write Chinese compositions. It is designed to help students acquire knowledge about the Chinese language in a comprehensive manner, thus laying a solid foundation for using what they have learned about Chinese.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Oral Chinese: In a very pleasant and relaxing classroom atmosphere with professional teaching and ample exercises, students gradually improve their Chinese communication ability and learn about the communication skills of the Chinese people. With the improvement of their language ability, they can express their personal views on specific topics completely and fluently in standard Chinese. They will also cultivate the habit of thinking in Chinese and the ability to choose proper expressions for different persons they are talking to on different occasions. All in all, they will learn to deal with various communication situations.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Chinese Listening: This course aims at improving students’ listening ability through systematic instruction and plenty of exercises. Students can gradually learn to understand the main intent of the speaker in a conversion, enhance their ability to differentiate words, to analyze, and summarize a speech, as well as to make association and guessing. During their study, they will be trained to understand speeches delivered at a faster pace, news broadcasts on familiar topics, and popular radio and TV programs. Finally, they can understand Chinese spoken in real situation and at the same time, consciously pick up new words, phrases, and usages. In a word, they can improve their sensibility on the Chinese language. The course has 4 class periods per week and is offered at all three levels: elementary, intermediate and advanced.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px">Elective Courses</span></strong></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">HSK tutoring (Level 4, Level 5, and Level 6), Chinese Idioms and Their Stories, Chinese Film and Television Culture Appreciation, Chinese Painting, Chinese Calligraphy, Chinese Kung Fu, Reading and Writing of Chinese Characters, Intermediate Chinese Reading, Intermediate Chinese Writing, Advanced Chinese Reading, Advanced Chinese Writing, Introduction to Chinese Culture, Mandarin Phonetics and Reading, Chinese History, Sino-foreign Cultural Exchanges, Chinese Human Geography, Chinese Folk Culture, Chinese Vocabulary and Culture, English-Chinese Translation</span><span style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 宋体">，</span><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Classical Art Appreciation of Chinese Zither. (The availability of some of the above courses is subject to change based on the number of students in each semester.)</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">(For more information, please visit: http://oec.xmu.edu.cn)<br style="padding: 0px;box-sizing: border-box;outline: none"></span><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px">Credit Hours</span></strong></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Students can choose a suitable course according to their Chinese proficiency level and the suggestions of the office. The maximum credit hours are 24 per semester.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Campus Events</span></strong></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Chinese Corner, “China Day”, Loi Krathong Festival, Songkran Festival, Fun Games, Track and Field Games, Football Games, Xiamen International Marathon, etc.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px">Certificates Awarded</span></strong></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">A Certificate of Completion in Continuing Education will be issued by Xiamen University</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 30px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px">Fees<br style="padding: 0px;box-sizing: border-box;outline: none"></span></strong><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Enrolment Fees: RMB 400 (for new students only, and non-refundable)</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Tuition: RMB 13,000 per semester; RMB 26,000 per academic year</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 30px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Accommodation Fee: This program does not provide on-campus accommodation. Please make arrangements for off-campus accommodation before arriving at the university. The average rent around Xiang’an Campus ranges from approximately 600 to 1,500 yuan per room per month. For specific information, please refer to the “Accommodation Information” section.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 30px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><br style="padding: 0px;box-sizing: border-box;outline: none"></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 30px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Eligibility for Application</span></strong><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif"><br style="padding: 0px;box-sizing: border-box;outline: none">1. Applicants must be non-Chinese citizens (overseas Chinese included) aged between 18 and 55, be mentally and physically healthy, and possess a valid regular passport. Please note that we can assist the applicants with a valid regular passport to apply for an appropriate China visa.<br style="padding: 0px;box-sizing: border-box;outline: none">2.High school diploma or above or equivalent;</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 30px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Application Documents Required</span></strong><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif"><br style="padding: 0px;box-sizing: border-box;outline: none">1.ID photo.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">2.A scanned copy of the first page of the passport (ordinary passport, valid through October 31, 2026).</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">3. Birth Certificate.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">4. Parents’ Identity Documents.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">5.Photocopies of certificates for highest education and transcripts, and notarized copies in English or Chinese.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">6. A photocopy of the HSK certificate (if available).</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">7.Physical Examination Record for Inbound Travellers, including chest X-ray image, electrocardiogram, laboratory exam results and data sheets of some required items, with the lower part of the applicant’s photo stamped by the hospital. Physical examination results are valid for six months.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Link: </span><a href="https://admissions.xmu.edu.cn/cn/info/1136/1999.htm" target="_self" textvalue="https://admissions.xmu.edu.cn/cn/info/1136/1999.htm"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none">https://admissions.xmu.edu.cn/cn/info/1136/1999.htm</span></a></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">8.Financial Support Guarantee Statement and its supporting documents.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Link: </span><a href="https://admissions.xmu.edu.cn/cn/info/1136/2000.htm" target="_self" textvalue="https://admissions.xmu.edu.cn/cn/info/1136/2000.htm"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none">https://admissions.xmu.edu.cn/cn/info/1136/2000.htm</span></a></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">9.Certificate of No Criminal Record. The applicants shall submit a valid No Criminal Record Report issued within six months before the date of submission of the application.<br style="padding: 0px;box-sizing: border-box;outline: none"></span><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px">Application Procedure</span></strong></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Applicants should apply and pay the application fee through the Online Application System for international students at </span><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none"><a href="http://oec.xmu.edu.cn/" style="padding: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);display: inline !important"><span style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">http://oec.xmu.edu.cn</span></a></span><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Application Deadline</span></strong></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 30px;font-family: 微软雅黑;text-wrap-mode: wrap;background: white"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Autumn Semester: June 30, 2026</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 30px;font-family: 微软雅黑;text-wrap-mode: wrap;background: white"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Spring Semester: December 30, 2026</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Late enrollment due to the entry procedure will be accepted if the applicant agrees to be placed in a class in the middle of the semester.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Admission and Notification</span></strong></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 30px;font-family: 微软雅黑;text-wrap-mode: wrap;background: white"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">The university will review the application materials submitted by applicants, select outstanding candidates, and compile a list of pre-admitted students in batches. Pre-admitted students are required to log in to the application system and make the payment for one semester’s tuition fee (13,000 yuan in Chinese currency) within the specified timeframe.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 30px;font-family: 微软雅黑;text-wrap-mode: wrap;background: white"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Upon confirmation of the tuition fee payment, the university will conduct Chinese proficiency tests for students in batches. These tests will be conducted online to accurately assess students’ Chinese proficiency levels and assign them to appropriate classes.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 30px;font-family: 微软雅黑;text-wrap-mode: wrap;background: white"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Our university will provide relevant admission and visa application materials for applicants who have successfully paid the tuition fees and completed the proficiency tests.</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 30px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><br style="padding: 0px;box-sizing: border-box;outline: none"></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><strong style="padding: 0px;box-sizing: border-box;outline: none"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Contact Information</span></strong></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Contact: Ms. Peng, Mr.Zhao</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Phone: 0086-592-2186211,2184916</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">Email: oec@xmu.edu.cn</span></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><br style="padding: 0px;box-sizing: border-box;outline: none"></p><p style="padding: 0px;margin-top: 0px;margin-bottom: 0px;box-sizing: border-box;outline: none;color: rgb(51, 51, 51);text-indent: 2em;font-size: 16px;line-height: 37px;font-family: 微软雅黑;text-wrap-mode: wrap;background-color: rgb(255, 255, 255)"><span lang="EN-US" style="padding: 0px;box-sizing: border-box;outline: none;font-size: 21px;font-family: 'times new roman', serif">The responsibility for interpreting this Program Overview rests with the International Chinese Education College / Overseas Education College of Xiamen University.</span></p><p><br></p></div></div>
+    <span id="vsb_content_9502_u11" name="vsb_content_9502_u11"></span>
+    
+</div>
+</div>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+
+<div class="foot">
+    <div class="wp flex">
+        <div class="ftleft"><!-- 版权内容请在本组件"内容配置-版权"处填写 -->
+<p>Kunluan Building (Building 2, Main Building Group), Xiang&#39;an Campus, Xiamen University, Xiang&#39;an South Road, Xindian Town, Xiang&#39;an</p><p>District, Xiamen City, Fujian Province, China 361102, Chinese International Education College (Overseas Education College), Xiamen University</p><p>Email: oec@xmu.edu.cn (Enrollment) gjzwjy@xmu.edu.cn (Office) Website: http://oec.xmu.edu.cn/</p><p>Tel:+86 (0) 592 2186211 Fax:+86 (0) 592 2093346</p></div>
+        <div class="ftright">       <div class="list_box6">
+    <div class="li">
+                    <a href="javascript:;">
+                        <img src="../images/wx.png" alt="">
+                    </a>
+                    <div class="code">
+                        <img src="../images/ewm.jpg" alt="">
+                    </div>
+                </div>
+
+     </div>  </div>
+    </div>
+</div>
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/public.js"></script>
+
+<script>
+var gund = $('table').parent(); 
+// 前后都可以 
+//$('table').before('<div style="overflow:auto;">'+$('table')[0].outerHTML+'</div>'); 
+$('table').after('<div style="overflow: auto;">'+$('table')[0].outerHTML+'</div>'); 
+$(gund).children('table').remove();
+</script> 
+<script>
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 1) {
+            $(".head").stop().addClass("ons");
+        } else {
+            $(".head").stop().removeClass("ons");
+        }
+    })
+</script>
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
