@@ -1,0 +1,693 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8" />
+<title>人才培养-广州大学</title><meta name="pageType" content="2">
+<meta name="pageTitle" content="人才培养">
+<META Name="keywords" Content="广州大学" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=10">
+<meta name="renderer" content="webkit|ie-comp|ie-stand" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/slick.css">
+<link rel="stylesheet" href="css/aos.css">
+<script src="js/jquery.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/aos.js"></script>
+<!--Announced by Visual SiteBuilder 9-->
+<script language="javascript" src="_sitegray/_sitegray.js"></script>
+<!-- CustomerNO:77656262657232307c78475253545742000400004054 -->
+<link rel="stylesheet" type="text/css" href="rcpy.vsb.css" />
+<script type="text/javascript" src="/system/resource/js/vsbscreen.min.js" id="_vsbscreen" devices="pc|mobile|pad"></script>
+<script type="text/javascript" src="/system/resource/js/counter.js"></script>
+<script type="text/javascript">_jsq_(1089,'/rcpy.jsp',-1,1596814580)</script>
+</head>
+
+<body style="background:#fff;">
+<div class="header">
+    <div class="top">
+         
+<!-- 网站logo图片地址请在本组件"内容配置-网站logo"处填写 -->
+<a href="index.htm" title="广州大学主站_new" class="logo logoh" style="border:0px;display:none;"><img src="images/logo.png" width="245" height="75" border="0" alt="广州大学主站_new" title="广州大学主站_new"></a>
+<a href="http://english.gzhu.edu.cn/"><b></b></a>
+<em></em>
+       
+        <div class="nav">
+            <div class="nav-link">
+                <script language="javascript" src="/system/resource/js/dynclicks.js"></script><script language="javascript" src="/system/resource/js/openlink.js"></script>    <a href="http://news.gzhu.edu.cn/index.htm" target="_blank" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1596814580, 34415)">新闻网</a>|
+    <a href="http://english.gzhu.edu.cn/" target="_blank" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1596814580, 34416)"><img src="images/en.png">ENGLISH</a>
+
+                
+
+
+<script language="javascript" src="/system/resource/js/base64.js"></script><script language="javascript" src="/system/resource/js/jquery/jquery-latest.min.js"></script><script language="javascript" src="/system/resource/vue/vue.js"></script><script language="javascript" src="/system/resource/vue/bluebird.min.js"></script><script language="javascript" src="/system/resource/vue/axios.js"></script><script language="javascript" src="/system/resource/vue/polyfill.js"></script><script language="javascript" src="/system/resource/vue/token.js"></script><LINK href="/system/resource/vue/static/element/index.css" type="text/css" rel="stylesheet"><script language="javascript" src="/system/resource/vue/static/element/index.js"></script><script language="javascript" src="/system/resource/vue/static/public.js"></script><div id="divu2" style="display: inline-block;"></div>
+<script type="text/html" id="htmlu2">
+    <div id="appu2">
+        <div v-if="!isError">
+        
+         <span class="search"  id="search">
+        
+            <input type="text" class="motion_1" autocomplete=off v-model=query.keyWord @keyup.enter="onSubmit">
+            <input class="tj" name="submit_button"  type="hidden" value="提交" v-on:click="onSubmit()"/>
+             <button><i class="icon-search"></i></button>
+                    <i class="icon-search active"></i>
+</span>
+            
+            
+            
+        </div>
+        <div v-if="isError" style="color: #b30216; font-size:18px;text-align: center;padding:20px;">
+            应用维护中！
+        </div>
+    </div>
+</script>
+<script>
+    $("#divu2").html($("#htmlu2").text());
+</script>
+<script>
+    var appOwner = "1596814580";
+    var token = 'tourist';
+    var urlPrefix = "/aop_component/";
+
+    jQuery.support.cors = true;
+    $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+    });
+
+    new Vue({
+        el: "#appu2",
+        data: function () {
+            return {
+                query: {
+                    keyWord: "",//搜索关键词
+                    owner: appOwner,
+                    token: token,
+                    urlPrefix: urlPrefix,
+                    lang:"i18n_zh_CN"
+                },
+                isError: false
+            }
+        },
+        mounted: function () {
+            var _this = this;
+            // _this.init();
+        },
+        methods: {
+            init: function(){
+                $.ajax({
+                    url: "/aop_component//webber/search/test",
+                    type: "get",
+                    success: function (response) {
+                        if (response.code == "0000") {
+                        } else if (response.code == "220") {
+                            _this.isError = true;
+                            console.log(response);
+                        } else if (!response.code) {
+                            _this.isError = true;
+                            console.log(response);
+                        }
+                    },
+                    error: function (response) {
+                        _this.isError = true;
+                    }
+                });
+            },
+            onSubmit: function (e) {
+                var url = "/aop_views/search/modules/resultpc/soso.html";
+                if ("10" == "1" || "10" == "2") {
+                    url = "" + url;
+                }
+                var _this = this;
+                var query = _this.query;
+                if (url.indexOf("?") > -1) {
+                    url = url.split("?")[0];
+                }
+                if (query.keyWord) {
+                    var query = new Base64().encode(JSON.stringify(query));
+                    window.open(url + "?query=" + query);
+                } else {
+                    alert("请填写搜索内容")
+                }
+            },
+        }
+    })
+</script>
+                <script>
+                    $("#search i").bind("click",function(){
+                            if($("#search").is(".active")){
+                            $("#search").removeClass("active");
+                            
+                        }else{
+                            $("#search").addClass("active");
+                        }
+                    }); 
+                </script>
+            </div>
+            <!-----导航开始---->
+            <div class="nav_b"> 
+               <div class="nav_bar"><ul> 
+
+
+
+                 <li class="li3"> <a href="index.htm" title="首    页" target="_self">首    页</a>
+                </li> 
+
+
+
+
+
+                 <li class="li3"> <a href="xxgk/xxjj.htm" title="学校概况" target="_self">学校概况</a>
+                  <div class="xl_nav"> 
+                   <div class="xl_nav_box">
+                    <b></b> 
+                    <div class="cf"> 
+                     <ul> 
+                         <li><a href="xxgk/xxjj.htm" title="学校简介">学校简介</a></li> 
+   
+                         <li><a href="xxgk/xrld.htm" title="现任领导">现任领导</a></li> 
+   
+                         <li><a href="xxgk/xxzc.htm" title="学校章程">学校章程</a></li> 
+   
+                         <li><a href="xxgk/xxxhxg.htm" title="校训校徽校歌">校训校徽校歌</a></li> 
+   
+                         <li><a href="xxgk/xyfj.htm" title="校园风景">校园风景</a></li> 
+   
+                       
+                     </ul> 
+                    </div> 
+                   </div> 
+                  </div>                
+                </li> 
+
+
+
+
+
+                 <li class="li3"> <a href="zzjg/glfwjg.htm" title="组织机构" target="_self">组织机构</a>
+                  <div class="xl_nav"> 
+                   <div class="xl_nav_box">
+                    <b></b> 
+                    <div class="cf"> 
+                     <ul> 
+                         <li><a href="zzjg/xy_b_.htm" title="学院（部）">学院（部）</a></li> 
+   
+                         <li><a href="zzjg/glfwjg.htm" title="管理服务机构">管理服务机构</a></li> 
+   
+                         <li><a href="zzjg/kydw.htm" title="科研单位">科研单位</a></li> 
+   
+                         <li><a href="zzjg/zsdw.htm" title="直属单位">直属单位</a></li> 
+   
+                       
+                     </ul> 
+                    </div> 
+                   </div> 
+                  </div>                
+                </li> 
+
+
+
+
+
+                 <li class="li3"> <a href="szdw1.htm" title="师资队伍" target="_self">师资队伍</a>
+                  <div class="xl_nav"> 
+                   <div class="xl_nav_box">
+                    <b></b> 
+                    <div class="cf"> 
+                     <ul> 
+                         <li><a href="szdw1/dwgk.htm" title="队伍概况">队伍概况</a></li> 
+   
+                         <li><a href="http://rsc.gzhu.edu.cn/" target="_blank" title="人才招聘">人才招聘</a></li> 
+   
+                         <li><a href="szdw1/jcrc1.htm" title="杰出人才">杰出人才</a></li> 
+   
+                       
+                     </ul> 
+                    </div> 
+                   </div> 
+                  </div>                
+                </li> 
+
+
+
+
+
+                 <li class="li3"> <a href="rcpy1.htm" title="人才培养" target="_self">人才培养</a>
+                  <div class="xl_nav"> 
+                   <div class="xl_nav_box">
+                    <b></b> 
+                    <div class="cf"> 
+                     <ul> 
+                         <li><a href="rcpy1/bkspy.htm" title="本科生培养">本科生培养</a></li> 
+   
+                         <li><a href="rcpy1/yjspy.htm" title="研究生培养">研究生培养</a></li> 
+   
+                         <li><a href="rcpy1/lxspy.htm" title="留学生培养">留学生培养</a></li> 
+   
+                         <li><a href="rcpy1/jxjy.htm" title="继续教育">继续教育</a></li> 
+   
+                       
+                     </ul> 
+                    </div> 
+                   </div> 
+                  </div>                
+                </li> 
+
+
+
+
+
+                 <li class="li3"> <a href="zsjy1.htm" title="招生就业" target="_self">招生就业</a>
+                  <div class="xl_nav"> 
+                   <div class="xl_nav_box">
+                    <b></b> 
+                    <div class="cf"> 
+                     <ul> 
+                         <li><a href="http://zsjy.gzhu.edu.cn/" target="_blank" title="本科生招生">本科生招生</a></li> 
+   
+                         <li><a href="http://yjsy.gzhu.edu.cn/" target="_blank" title="研究生招生">研究生招生</a></li> 
+   
+                         <li><a href="http://cj.gzhu.edu.cn/" target="_blank" title="成人教育招生">成人教育招生</a></li> 
+   
+                         <li><a href="http://gjjyxy.gzhu.edu.cn/" target="_blank" title="留学生招生">留学生招生</a></li> 
+   
+                         <li><a href="http://jy.gzhu.edu.cn/" title="就业指导">就业指导</a></li> 
+   
+                       
+                     </ul> 
+                    </div> 
+                   </div> 
+                  </div>                
+                </li> 
+
+
+
+
+
+                 <li class="li3"> <a href="kxyj1.htm" title="科学研究" target="_self">科学研究</a>
+                  <div class="xl_nav"> 
+                   <div class="xl_nav_box">
+                    <b></b> 
+                    <div class="cf"> 
+                     <ul> 
+                         <li><a href="kxyj1/kxyjjk.htm" title="科学研究简况">科学研究简况</a></li> 
+   
+                         <li><a href="kxyj1/zdkypt.htm" title="重点科研平台">重点科研平台</a></li> 
+   
+                         <li><a href="kxyj1/zykyjx.htm" title="重要科研奖项">重要科研奖项</a></li> 
+   
+                         <li><a href="kxyj1/xsqk.htm" title="学术期刊">学术期刊</a></li> 
+   
+                         <li><a href="https://kyc.gzhu.edu.cn/" title="科学研究院官网">科学研究院官网</a></li> 
+   
+                         <li><a href="http://journal.gzhu.edu.cn/" title="期刊中心官网">期刊中心官网</a></li> 
+   
+                       
+                     </ul> 
+                    </div> 
+                   </div> 
+                  </div>                
+                </li> 
+
+
+
+
+
+                 <li class="li3"> <a href="xkjs1.htm" title="学科建设" target="_self">学科建设</a>
+                  <div class="xl_nav"> 
+                   <div class="xl_nav_box">
+                    <b></b> 
+                    <div class="cf"> 
+                     <ul> 
+                         <li><a href="xkjs1/zdxk.htm" title="重点学科">重点学科</a></li> 
+   
+                         <li><a href="xkjs1/bsd.htm" title="博士点">博士点</a></li> 
+   
+                         <li><a href="xkjs1/xsssd.htm" title="学术硕士点">学术硕士点</a></li> 
+   
+                         <li><a href="xkjs1/zyssd.htm" title="专业硕士点">专业硕士点</a></li> 
+   
+                       
+                     </ul> 
+                    </div> 
+                   </div> 
+                  </div>                
+                </li> 
+
+
+
+
+
+                 <li class="li8"> <a href="rczp1.htm" title="人才招聘" target="_self">人才招聘</a>
+                  <div class="xl_nav"> 
+                   <div class="xl_nav_box">
+                    <b></b> 
+                    <div class="cf"> 
+                     <ul> 
+                         <li><a href="rczp1/gccrczpgg.htm" title="高层次人才招聘公告">高层次人才招聘公告</a></li> 
+   
+                         <li><a href="rczp1/bshzpgg.htm" title="博士后招聘公告">博士后招聘公告</a></li> 
+   
+                         <li><a href="rczp1/qtxlzpgg.htm" title="其他系列招聘公告">其他系列招聘公告</a></li> 
+   
+                       
+                     </ul> 
+                    </div> 
+                   </div> 
+                  </div>                
+                </li> 
+
+
+
+
+
+                 <li class="li8"> <a href="hzjl.htm" title="合作交流" target="_self">合作交流</a>
+                </li> 
+
+
+ </ul></div>  </div>   
+              
+            <!-----导航结束---->
+        </div>
+    </div>
+
+    <div class="navShow" style="display: none">
+       <ul id="phonenav">
+        <li>
+            <p><a href="index.htm" title="首    页">首    页</a></p>
+        </li>
+        <li>
+            <p><a href="xxgk/xxjj.htm" title="学校概况">学校概况</a><i class="zkicon"></i></p>
+             <ul class="dropdown-list" style="display: none">
+                 <li><a href="xxgk/xxjj.htm" title="学校简介">学校简介</a></li>
+                 <li><a href="xxgk/xrld.htm" title="现任领导">现任领导</a></li>
+                 <li><a href="xxgk/xxzc.htm" title="学校章程">学校章程</a></li>
+                 <li><a href="xxgk/xxxhxg.htm" title="校训校徽校歌">校训校徽校歌</a></li>
+                 <li><a href="xxgk/xyfj.htm" title="校园风景">校园风景</a></li>
+            </ul>
+        </li>
+        <li>
+            <p><a href="zzjg/glfwjg.htm" title="组织机构">组织机构</a><i class="zkicon"></i></p>
+             <ul class="dropdown-list" style="display: none">
+                 <li><a href="zzjg/xy_b_.htm" title="学院（部）">学院（部）</a></li>
+                 <li><a href="zzjg/glfwjg.htm" title="管理服务机构">管理服务机构</a></li>
+                 <li><a href="zzjg/kydw.htm" title="科研单位">科研单位</a></li>
+                 <li><a href="zzjg/zsdw.htm" title="直属单位">直属单位</a></li>
+            </ul>
+        </li>
+        <li>
+            <p><a href="szdw1.htm" title="师资队伍">师资队伍</a><i class="zkicon"></i></p>
+             <ul class="dropdown-list" style="display: none">
+                 <li><a href="szdw1/dwgk.htm" title="队伍概况">队伍概况</a></li>
+                 <li><a href="http://rsc.gzhu.edu.cn/" target="_blank" title="人才招聘">人才招聘</a></li>
+                 <li><a href="szdw1/jcrc1.htm" title="杰出人才">杰出人才</a></li>
+            </ul>
+        </li>
+        <li>
+            <p><a href="rcpy1.htm" title="人才培养">人才培养</a><i class="zkicon"></i></p>
+             <ul class="dropdown-list" style="display: none">
+                 <li><a href="rcpy1/bkspy.htm" title="本科生培养">本科生培养</a></li>
+                 <li><a href="rcpy1/yjspy.htm" title="研究生培养">研究生培养</a></li>
+                 <li><a href="rcpy1/lxspy.htm" title="留学生培养">留学生培养</a></li>
+                 <li><a href="rcpy1/jxjy.htm" title="继续教育">继续教育</a></li>
+            </ul>
+        </li>
+        <li>
+            <p><a href="zsjy1.htm" title="招生就业">招生就业</a><i class="zkicon"></i></p>
+             <ul class="dropdown-list" style="display: none">
+                 <li><a href="http://zsjy.gzhu.edu.cn/" target="_blank" title="本科生招生">本科生招生</a></li>
+                 <li><a href="http://yjsy.gzhu.edu.cn/" target="_blank" title="研究生招生">研究生招生</a></li>
+                 <li><a href="http://cj.gzhu.edu.cn/" target="_blank" title="成人教育招生">成人教育招生</a></li>
+                 <li><a href="http://gjjyxy.gzhu.edu.cn/" target="_blank" title="留学生招生">留学生招生</a></li>
+                 <li><a href="http://jy.gzhu.edu.cn/" title="就业指导">就业指导</a></li>
+            </ul>
+        </li>
+        <li>
+            <p><a href="kxyj1.htm" title="科学研究">科学研究</a><i class="zkicon"></i></p>
+             <ul class="dropdown-list" style="display: none">
+                 <li><a href="kxyj1/kxyjjk.htm" title="科学研究简况">科学研究简况</a></li>
+                 <li><a href="kxyj1/zdkypt.htm" title="重点科研平台">重点科研平台</a></li>
+                 <li><a href="kxyj1/zykyjx.htm" title="重要科研奖项">重要科研奖项</a></li>
+                 <li><a href="kxyj1/xsqk.htm" title="学术期刊">学术期刊</a></li>
+                 <li><a href="https://kyc.gzhu.edu.cn/" title="科学研究院官网">科学研究院官网</a></li>
+                 <li><a href="http://journal.gzhu.edu.cn/" title="期刊中心官网">期刊中心官网</a></li>
+            </ul>
+        </li>
+        <li>
+            <p><a href="xkjs1.htm" title="学科建设">学科建设</a><i class="zkicon"></i></p>
+             <ul class="dropdown-list" style="display: none">
+                 <li><a href="xkjs1/zdxk.htm" title="重点学科">重点学科</a></li>
+                 <li><a href="xkjs1/bsd.htm" title="博士点">博士点</a></li>
+                 <li><a href="xkjs1/xsssd.htm" title="学术硕士点">学术硕士点</a></li>
+                 <li><a href="xkjs1/zyssd.htm" title="专业硕士点">专业硕士点</a></li>
+            </ul>
+        </li>
+        <li>
+            <p><a href="rczp1.htm" title="人才招聘">人才招聘</a><i class="zkicon"></i></p>
+             <ul class="dropdown-list" style="display: none">
+                 <li><a href="rczp1/gccrczpgg.htm" title="高层次人才招聘公告">高层次人才招聘公告</a></li>
+                 <li><a href="rczp1/bshzpgg.htm" title="博士后招聘公告">博士后招聘公告</a></li>
+                 <li><a href="rczp1/qtxlzpgg.htm" title="其他系列招聘公告">其他系列招聘公告</a></li>
+            </ul>
+        </li>
+        <li>
+            <p><a href="hzjl.htm" title="合作交流">合作交流</a></p>
+        </li>
+</ul>
+        <div class="phone-kjfs">
+            <ul>
+            
+                
+                       <li> <a href="https://webvpn.gzhu.edu.cn" title="数字广大" onclick="_addDynClicks(&#34;wbimage&#34;, 1596814580, 54800)" target="_blank">
+                            <img src="images/phones1s.png" border="0"><br>数字广大
+                        </a>  </li>
+                
+                
+                       <li> <a href="http://mail.gzhu.edu.cn/" title="个人邮箱" onclick="_addDynClicks(&#34;wbimage&#34;, 1596814580, 54801)" target="_blank">
+                            <img src="images/phones2s.png" border="0"><br>个人邮箱
+                        </a>  </li>
+                
+        
+        
+                
+                       <li> <a href="https://lib.gzhu.edu.cn" title="图 书 馆" onclick="_addDynClicks(&#34;wbimage&#34;, 1596814580, 54802)" target="_blank">
+                            <img src="images/phones3s.png" border="0"><br>图 书 馆
+                        </a>  </li>
+                
+                
+                       <li> <a href="https://gdcggl.gzhu.edu.cn/" title="招标信息" onclick="_addDynClicks(&#34;wbimage&#34;, 1596814580, 54804)" target="_blank">
+                            <img src="images/phones5s.png" border="0"><br>招标信息
+                        </a>  </li>
+                
+        
+        
+                
+                       <li> <a href="rmzd.htm" title="热门站点" onclick="_addDynClicks(&#34;wbimage&#34;, 1596814580, 54805)" target="_blank">
+                            <img src="images/phones6s.png" border="0"><br>热门站点
+                        </a>  </li>
+                
+                
+                       <li> <a href="http://xyh.gzhu.edu.cn/" title="校友之窗" onclick="_addDynClicks(&#34;wbimage&#34;, 1596814580, 54806)" target="_blank">
+                            <img src="images/phones7s.png" border="0"><br>校友之窗
+                        </a>  </li>
+                
+        
+        
+                
+                       <li> <a href="xx/sj_xzxx.htm" title="领导信箱" onclick="_addDynClicks(&#34;wbimage&#34;, 1596814580, 54807)" target="_blank">
+                            <img src="images/phones8s.png" border="0"><br>领导信箱
+                        </a>  </li>
+                
+        
+</ul>
+        </div>
+   </div>
+
+    <div class="yjlm">
+        <div class="yjlm1">
+            <h3><strong>
+人才培养</strong>     <div style="display:none">
+                       <p>  <a href="index.htm">首    页</a></p>
+              <p>—</p>
+               <p>  <a href="rcpy1.htm">人才培养</a></p>
+        </div>
+</h3>
+         
+         </div>
+    </div>
+         
+
+ <div class="banner-ny" style="background:url(images/img36.jpg) no-repeat center top;"><img src="images/img36.jpg"></div>
+
+
+</div> 
+<div class="ny-main">
+    <div class="wid1300">
+       <div class="ejdh">
+<ul>
+        <li><a href="rcpy1/bkspy.htm" title="本科生培养">本科生培养</a></li>
+     
+    <li><a href="rcpy1/yjspy.htm" title="研究生培养">研究生培养</a></li>
+     
+    <li><a href="rcpy1/lxspy.htm" title="留学生培养">留学生培养</a></li>
+     
+    <li><a href="rcpy1/jxjy.htm" title="继续教育">继续教育</a></li>
+     
+</ul>
+</div>
+    </div>
+    <div class="rcpy-ny">
+        <div class="wid1300">
+            <h3 class="dwgkbt">人才培养</h3>
+            <div class="dwgk-con"><script language="javascript" src="/system/resource/js/news/mp4video.js"></script>
+<p>现有3个博士后科研流动站，7个一级学科博士授权点，1个博士专业学位授权点，31个一级学科硕士授权点，5个独立二级学科硕士授权点，19个硕士专业学位授权点，其中工程硕士下设7个领域；大力推进与国外高水平大学共同联合培养博士生工作。</p>
+ <p class="dwgk-an"><img src="images/recaipeiyang.jpg"></p>
+</div>
+            <div class="bkspy">
+                <div class="rcpy-img">
+
+<script language="javascript" src="/system/resource/js/centerCutImg.js"></script><script language="javascript" src="/system/resource/js/ajax.js"></script>  <i id="a01"></i><img src="/__local/C/72/7A/C5DECE68E87401BC48567D01ED5_B8AB3798_21331.jpg ">
+<script>_showDynClickBatch(['dynclicks_u11_2812'],[2812],"wbnews", 1596814580)</script>
+</div>
+                <div class="rcpy-txt">
+<h3>本科生培养</h3>
+<p>学校坚持以本为本、推进“四个回归”，深度对接广东广州经济社会重大需求，优化调整学科专业结构，创新人才培养模式，致力于培养“德才兼备、家国情怀、视野开阔，爱体育、懂艺术，能力发展性强”，具有广大底色的创新人才,努力打造有品质的大学教育。学校出台了《广州大学关于加强本科教育 全面提高人才培养质量的若干意见》等本科人才培养“1+13文件”，形成本科人才培养的顶层设计，明确了一流本科建设的思路和举措；按照“做强理工、做优文科、做特教育”的原则，不断深化专业内涵建设，筑牢人才培养的根基。通过修订新版人才培养方案初步搭建起了“1234”本科教育教学模式，即一个以“以学生发展为中心”的开放式育人体系；通识教育与专业教育、课内与课外的“两个结合”；讲台、实验室、科研平台的“三个开放”；“通识必修课+通识选修模块+经典阅读+社会实践”“四年不间断”的思想政治教育体系。全面实施“4321”体育教育工程，即体育教育“四年不间断”，“课程、课外阳光跑（全覆盖）、社团/竞赛”三种体育教育模式并行，引导学生至少掌握两种运动技能，最终养成一生锻炼的习惯；致力于构建“平台、课程、师资”三维一体的艺术教育体系，即教育教学实践平台“教务处、相关院系、团委三位一体”“认知课程、体验课程、创意课程三位一体”，师资队伍“专业教师、校外专家、朋辈小老师三位一体”，全面培养学生的艺术修养与审美能力。</p>
+<div class="clear"></div>
+                    <a href="rcpy1/bkspy.htm" class="ckjcrc fl">详细内容<img src="images/s18.png" class="mr"><img src="images/s19.png" class="hover"></a></div>
+            </div>
+        </div>            
+        <div class="yjspy">
+            <div class="wid1300">
+                <div class="rcpy-img fr">
+
+  <i id="a02"></i><img src="/__local/8/DA/51/B60FEF9BECD1654467027597D7A_6A0406E0_1484B.jpg ">
+<script>_showDynClickBatch(['dynclicks_u13_1080'],[1080],"wbnews", 1596814580)</script>
+</div>
+                <div class="rcpy-txt fl">
+<h3>研究生培养</h3>
+<p>广州大学于1983年获硕士学位授予权，2006年获博士学位授予权。学校研究生教育学科门类比较齐全，涵盖哲学、经济学、法学、教育学、文学、历史学、理学、工学、管理学、艺术学十大学科门类。学校现有3个博士后科研流动站，7个一级学科博士授权点，1个博士专业学位授权点，31个一级学科硕士授权点，5个独立二级学科硕士授权点,13个硕士专业学位授权点（教育硕士、工程硕士、体育硕士、艺术硕士、汉语国际教育硕士、会计硕士、法律硕士、社会工作硕士、应用心理硕士、工商管理硕士、金融硕士、风景园林硕士、旅游管理硕士），其中工程硕士下设建筑与土木工程、电子与通信工程、机械工程、化学工程、环境工程、项目管理、计算机技术等7个领域。2010年8月，学校被教育部确定为新增开展硕士推免生工作高校。同年10月，广州大学列入教育部首批专业学位综合改革试点单位，在艺术硕士和教育硕士两个专业学位类别进行改革试点。2015年，学校被列入教育部首批研究生课程试点改革单位。学校现有博士研究生149人，硕士研究生4141人，其中全日制硕士研究生3243人，在职硕士研究生898人。学校拥有一支强大的研究生导师队伍。研究生导师队伍拥有一大批国内外著名学者：拥有两院院士4人，澳大利亚技术科学与工程院院士1人，双聘院士7人，教育部“ ” 6人，国家自然科学基金杰出青年科学基金获得者12人，“万人计划”教学名师1人、领军人才3人。另外还有“ 特聘教授”、国家杰青为代表的一支高层次人才队伍。2010年，周福霖院士获颁首届“南粤创新奖”。在新的发展征程中，广州大学研究生教育将坚持以科学发展观为统领，加快推进研究生教育改革和发展，着力构建特色鲜明、结构合理，有利于高层次、应用型、复合型人才培养的研究生教育体系，为广州国家中心城市建设提供人才支撑和智力支持。</p>
+<div class="clear"></div>
+                    <a href="rcpy1/yjspy.htm" class="ckjcrc fl">详细内容<img src="images/s18.png" class="mr"><img src="images/s19.png" class="hover"></a></div>                
+                
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="wid1300">
+            <div class="bkspy">
+                <div class="rcpy-img">
+
+  <i id="a03"> </i><img src="/__local/2/00/DC/8289D91CC81DB7EA58E4800813A_9893BED1_14891.jpg ">
+<script>_showDynClickBatch(['dynclicks_u15_1081'],[1081],"wbnews", 1596814580)</script>
+</div>
+                <div class="rcpy-txt">
+<h3>留学生培养</h3>
+<p> 秉承“博学笃行、与时俱进”的校训，广州大学坚持“三个面向”和“三个对接”的办学方向，全面推进高水平大学建设，全面建设与广州城市发展深度融合、与广州城市地位相得益彰、具有学科、城市区域和国际化特色的知名的高水平大学。学校先后与30个国家和地区的200多所大学和科研院所建立了教育与科技合作关系, 2002年创办了全国第一所中法旅游学院，先后与意大利帕多瓦大学和美国卫斯理安学院合作建立了孔子学院。与淡江大学、帕多瓦大学、林雪平大学等知名大学建立科研合作平台或机构。广州大学现有25个学院（部），69个本科专业，其中有5个国家特色专业，18个省市特色专业，3门国家精品课程，45门省市精品课程。同时，学校拥有1个国家级实验教学示范中心，11个省市实验教学示范中心和1个国家级人才培养模式创新实验区。2006年，广州大学取得了教育部本科教学工作水平评估“优秀”的佳绩，被评估专家誉为全国合并地方高校快速发展的典范。广州大学研究生教育学科门类比较齐全，涵盖哲学、经济学、法学、教育学、文学、历史学、理学、工学、管理学、艺术学十大学科门类。学校现有3个博士后科研流动站，7个一级学科博士授权点，1个博士专业学位授权点，31个一级学科硕士授权点，13个硕士专业学位授权点。2015年，学校被列入教育部首批研究生课程试点改革单位。欢迎留学生报读广州大学本科和研究生专业，广州大学国际教育学院是学校负责来华和出国留学生教育和管理的专门机构，提供留学生学历教育和对外汉语教学服务。根据高水平大学建设的要求，学院将以“广州大学来华留学奖学金（一带一路奖学金）”依托，立足开放办学的需要，不断开拓进取，营造国际化氛围，为来华留学生提供优质教育服务。此外，学院积极配合国家汉办和中国（广州）进出口交易会重大活动，为来华留学生提供实践机会。当前，学院积极响应国家“一带一路”倡议，着力打造沿线来华和出国留学项目，为来华留学生提供更加优质的教育服务。 </p>
+<div class="clear"></div>
+                    <a href="rcpy1/lxspy.htm" class="ckjcrc fl">详细内容<img src="images/s18.png" class="mr"><img src="images/s19.png" class="hover"></a></div>
+            </div>
+        </div>    
+        <div class="clear"></div>     
+        <div class="yjspy">
+            <div class="wid1300">
+                <div class="rcpy-img fr">
+
+  <i id="a04"></i><img src="/__local/1/EE/AB/A46AFBE01D9472109E95F2B3BBC_F922E2D6_14C65.jpg ">
+<script>_showDynClickBatch(['dynclicks_u17_1082'],[1082],"wbnews", 1596814580)</script>
+</div>          
+                <div class="rcpy-txt fl">
+<h3>继续教育</h3>
+<p> 广州大学继续教育学院坐落于广州市解放北路广州大学桂花岗校区。从1978年起开办成人高等教育，并于2001年9月成立继续教育学院，学院现已基本形成包括成人学历教育、非学历继续教育等多形式、多层次、多规格、多渠道的办学格局。目前，学院共开设有100多个本、专科专业，涵盖哲学、法学、教育学、文学、历史学、理学、工学、经济学、管理学、艺术学等十大学科门类，并在广州、深圳、珠海、东莞等地设置了22个校外教学点。学院现有教职工共82人，其中专职教师32人；设有8个管理科室和3个教学部。为满足教学需要，学院还常年从校本部各专业学院聘请300余名兼职教师。自2001年至今，成人高等教育毕业生逾8万人。近年来，学院积极推进教学改革与创新，大力加强教风学风建设。2008年、2012年，学院曾先后两次组织专家全面完成了成人高等教育102个本、专科专业人才培养方案的修订工作；2009年，完成了887门课程教学大纲的编撰工作；2009年至2012年，学院主持编写并出版了19部成人高等教育系列教材和5本教学辅导用书。2013年，我院物业管理专业通过英国特许房屋经理学会认证，获得英国特许房屋经理认证资格。学院在学历教育稳定发展的同时，积极面向社会承担各种社会考试任务以及开展多层次的非学历培训工作。近年来，学院与中国建筑业协会、广东省建筑业协会、甘肃省庆阳市中级人民法院、保利物业管理有限公司、中共广州市委组织部、市人力资源和社会保障局、市民族宗教事务局、市食品药品监督管理局、市注册会计师协会等单位保持和发展良好的合作关系。近5年来，开展的各种培训人数超过七万多人次，培训效果良好，受到社会各界的广泛好评。2008、2014年，学院两次被广东省成人教育协会评为广东省成人教育先进单位。2014年，荣获“全国建筑工程专业一级注册建造师继续教育培训先进单位”荣誉称号。 </p>
+<div class="clear"></div>
+                    <a href="rcpy1/jxjy.htm" class="ckjcrc fl">详细内容<img src="images/s18.png" class="mr"><img src="images/s19.png" class="hover"></a></div>                
+             </div>   
+            <div class="clear"></div>
+        </div>    
+            
+    </div>
+
+</div>
+<div class="ny-foot">
+    <div class="wid1300">
+        <div class="foot1">
+               
+            
+               
+                        <a href="index.htm" title="" onclick="_addDynClicks(&#34;wbimage&#34;, 1596814580, 54771)" target="_blank" class="foot-logo">
+                            <img src="images/img26.png" border="0">
+                        </a>  
+                
+       
+
+            <div class="sy-lxfs">
+<p> <img src="/__local/6/4D/49/997729C8961D801DEB855ABB9BD_C883117E_461.png?e=.png" vsbhref="vurl" vurl="/_vsl/64D49997729C8961D801DEB855ABB9BD/C883117E/461?e=.png" vheight="18" vwidth="20" width="20" height="18" border="0" vspace="0" hspace="0" title="" alt="" orisrc="/__local/6/4D/49/997729C8961D801DEB855ABB9BD_C883117E_461.png" class="img_vsb_content">邮编：510006&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="/__local/C/AF/37/2CECBED722BB4240C8FD7009DB5_DDC65351_4EE.png?e=.png" vsbhref="vurl" vurl="/_vsl/CAF372CECBED722BB4240C8FD7009DB5/DDC65351/4EE?e=.png" vheight="18" vwidth="20" width="20" height="18" border="0" vspace="0" hspace="0" title="" alt="" orisrc="/__local/C/AF/37/2CECBED722BB4240C8FD7009DB5_DDC65351_4EE.png" class="img_vsb_content">邮箱：webmaster@gzhu.edu.cn</p> 
+<p> <img src="/__local/3/5F/A9/A53B0615FA71235AC6BD55428D0_39E1CAF5_57B.png?e=.png" vsbhref="vurl" vurl="/_vsl/35FA9A53B0615FA71235AC6BD55428D0/39E1CAF5/57B?e=.png" vheight="18" vwidth="20" width="20" height="18" border="0" vspace="0" hspace="0" title="" alt="" orisrc="/__local/3/5F/A9/A53B0615FA71235AC6BD55428D0_39E1CAF5_57B.png" class="img_vsb_content">通讯地址：广州市大学城外环西路230号</p></div>
+                    <div class="foot-right">
+                        <div class="phone">    
+           
+              
+                        <img src="images/101111.png" alt="" /><br>移动网站<img src="images/er.png" border="0" class="erweim" />
+                
+       
+</div>
+                        <ul>       <li class="sydw"><script type="text/javascript">document.write(unescape("%3Cspan id='_ideConac' %3E%3C/span%3E%3Cscript src='https://dcs.conac.cn/js/20/296/0000/45000963/CA202960000450009630003.js' type='text/javascript'%3E%3C/script%3E"));</script> </li>
+           
+               
+
+                            <li><a href="https://weibo.com/gzhuedu?is_hot=1" title="官方微博" onclick="_addDynClicks(&#34;wbimage&#34;, 1596814580, 54762)" target="_blank" style="color:#ccc"><img src="images/101109.png" alt="" class="weibo" alt="" class="weibo" /><br>官方微博<img src="images/101109.png" alt="" class="erweim" style="display:none" /></a></li>
+
+              
+               
+                       <li><img src="images/101110.png" alt="" class="weixin" alt="" class="weibo" /><br>官方微信<img src="images/wxewm.jpg" alt="" class="erweim" /></li>
+
+              
+        
+</ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="foot2"><!-- 版权内容请在本组件"内容配置-版权"处填写 -->
+<p>广州大学版权所有 &nbsp; &nbsp; COPYRIGHT©1999-2021&nbsp; &nbsp;<span style="color: rgb(255, 255, 255);"> &nbsp;</span><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_self" style="text-decoration: none; color: #ccc"> 粤ICP备 05008855号 </a></p></div>
+    </div>
+</div>
+
+</body>
+
+</html>
+<script>
+$(document).ready(function() {
+$("a").attr("target","_self");
+});
+    $(".top em").click(function(){
+        $(".navShow").slideToggle();
+    })
+    $(".zkicon").click(function(){
+        $(this).parent().next().slideToggle();
+        $(this).toggleClass("sqicon");
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

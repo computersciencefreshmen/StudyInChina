@@ -1,0 +1,1222 @@
+{
+  "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v4.json",
+  "queueSha256": "06b1a66942c4e6866f4ad3c7217eba8bc76ff6ba93aa61ae92d66bade53eaeb7",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "universityIds": [
+    "uni-guangdong-university-of-technology",
+    "uni-guangxi-medical-university",
+    "uni-guangxi-minzu-university",
+    "uni-guangxi-normal-university",
+    "uni-guangxi-university",
+    "uni-guangxi-university-of-chinese-medicine",
+    "uni-guangzhou-academy-of-fine-arts"
+  ],
+  "baseQueueRecordIds": [
+    "cycle-gdut-chinese-language-training-rolling",
+    "sch-gap-local-gxmu-guangxi-government-asean-scholarship",
+    "sch-gap-local-gxmu-president-freshmen-scholarship",
+    "sch-gap-sch-gxmu-guangxi-asean-2026",
+    "cycle-gap-local-gxmu-b-clinical-medicine-cn-2026-2027-other",
+    "sch-gap-mew-scws-gxmzu-cgs-high-level-postgraduate-2026",
+    "cycle-gap-mew-csw-gxnu-chinese-language-literature-doctorate-2026-2027-autumn-fee-reference",
+    "cycle-gap-sparse-depth-0808-gxu-chinese-language-major-bachelor-2026-2027-other-fee-reference",
+    "cycle-gap-sparse-depth-0808-gxu-chinese-language-student-2026-2027-other-fee-reference",
+    "sch-gap-wave3-gxtcmu-guangxi-asean-full-scholarship",
+    "cycle-gap-wave3-gxtcmu-acupuncture-tuina-bachelor-2026-2027-autumn",
+    "cycle-gap-wave3-gxtcmu-chinese-internal-medicine-master-2026-2027-autumn",
+    "cycle-gap-wave3-gxtcmu-chinese-medicine-bachelor-2026-2027-autumn",
+    "cycle-gap-mve-ecma-gafa-art-studies-doctorate-2026-2027-autumn-fee-reference"
+  ],
+  "additionalSameSourceRecordIds": [
+    "cycle-gap-prog-gxmu-clinical-medicine-mbbs-2026-2026-2027-other",
+    "cycle-gap-local-gxmu-b-stomatology-cn-2026-2027-other",
+    "cycle-gap-wave3-gxtcmu-history-literature-chinese-medicine-doctorate-2026-2027-autumn"
+  ],
+  "records": [
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gdut-chinese-language-training-rolling",
+      "universityId": "uni-guangdong-university-of-technology",
+      "row": {
+        "sourceIds": [
+          "src-gdut-2026-international-admissions"
+        ],
+        "verifiedAt": "2026-08-07",
+        "reviewAfter": "2026-08-14",
+        "status": "stale",
+        "id": "cycle-gdut-chinese-language-training-rolling",
+        "programId": "program-guangdong-university-of-technology-chinese-language-training-one-semester-language",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "rolling",
+        "tuitionCny": 8000,
+        "tuitionPeriod": "semester",
+        "tuitionStatus": "confirmed",
+        "evidenceBasis": "recurring-official-rule",
+        "factScope": "partial",
+        "applicationFeeCny": 400
+      },
+      "canonicalRecordSha256": "86614952b834db79933a53bf39d7f48baf8e92e200153c40e652b01b1c86b6a7",
+      "program": {
+        "sourceIds": [
+          "src-gdut-2026-international-admissions"
+        ],
+        "verifiedAt": "2026-07-29",
+        "reviewAfter": "2026-08-28",
+        "status": "stale",
+        "id": "program-guangdong-university-of-technology-chinese-language-training-one-semester-language",
+        "slug": "guangdong-university-of-technology-chinese-language-training-one-semester-language",
+        "universityId": "uni-guangdong-university-of-technology",
+        "name": {
+          "en": "Chinese Language Training — One Semester",
+          "zh": "汉语言培训（一学期）",
+          "ru": "Курс китайского языка — один семестр"
+        },
+        "degreeLevel": "language",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://iec.gdut.edu.cn/info/1005/5323.htm",
+        "applyUrl": "https://apply.gdut.edu.cn/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "2229fd824194082af719d28bc8cf2d28607f7efcda4798c885568371b56597a0",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gdut-2026-international-admissions",
+            "url": "https://iec.gdut.edu.cn/info/1005/5323.htm",
+            "title": "2026 International Student Admissions Guide",
+            "publisher": "Guangdong University of Technology",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-07"
+          },
+          "sha256": "f1ce89ca14d40ad5c0d1633ceada3d7c0e9ccb2f5bdd62a3a9b444a429e496fd"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-local-gxmu-guangxi-government-asean-scholarship",
+      "universityId": "uni-guangxi-medical-university",
+      "row": {
+        "id": "sch-gap-local-gxmu-guangxi-government-asean-scholarship",
+        "slug": "gap-local-gxmu-guangxi-government-asean-scholarship",
+        "name": {
+          "en": "Guangxi Government Full Scholarship for ASEAN Students",
+          "zh": "广西政府东盟国家留学生全额奖学金",
+          "ru": "Guangxi Government Full Стипендия for ASEAN Students"
+        },
+        "providerType": "other",
+        "universityIds": [
+          "uni-guangxi-medical-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://gjy.gxmu.edu.cn/cn/zsxc/jxj/t231826.html",
+        "summary": {
+          "en": "The official current notice identifies a full Guangxi Government scholarship for ASEAN students applying to Chinese-taught study at GXMU; the 2026 window is no longer open.",
+          "zh": "The official current notice identifies a full Guangxi Government scholarship for ASEAN students applying to Chinese-taught study at GXMU; the 2026 window is no longer open."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-local-gxmu-guangxi-government-asean-scholarship",
+          "src-gap-scholarship-local-gxmu-guangxi-government-asean-scholarship-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "a8e6db4860344478b93942b69c0204de7417e3a0e319dada6be532e48d3cf294",
+      "program": null,
+      "canonicalProgramSha256": null,
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-local-gxmu-guangxi-government-asean-scholarship",
+            "url": "https://gjy.gxmu.edu.cn/cn/zsxc/jxj/t231826.html",
+            "title": "GXMU 2026 Guangxi Government Full Scholarship for ASEAN Students",
+            "publisher": "guangxi-medical-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "f5fb055f0a39803006e28e0dc2b08c93c9c03a235645208dc5de3fd9d20182b3"
+        },
+        {
+          "row": {
+            "id": "src-gap-scholarship-local-gxmu-guangxi-government-asean-scholarship-support-1",
+            "url": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+            "title": "Supporting official source",
+            "publisher": "guangxi-medical-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "7bc34d1e1ede822011985bb2b9ce3f8edb7b6df15cd1d01715d8b8ebd362c35c"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-local-gxmu-president-freshmen-scholarship",
+      "universityId": "uni-guangxi-medical-university",
+      "row": {
+        "id": "sch-gap-local-gxmu-president-freshmen-scholarship",
+        "slug": "gap-local-gxmu-president-freshmen-scholarship",
+        "name": {
+          "en": "GXMU President Scholarship for Freshmen",
+          "zh": "广西医科大学校长新生奖学金",
+          "ru": "GXMU President Стипендия for Freshmen"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-guangxi-medical-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+        "summary": {
+          "en": "The current official guide states that admitted self-funded undergraduate freshmen are automatically included and ranked after enrollment. It does not publish an award amount in the verified guide.",
+          "zh": "The current official guide states that admitted self-funded undergraduate freshmen are automatically included and ranked after enrollment. It does not publish an award amount in the verified guide."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-local-gxmu-president-freshmen-scholarship"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "1401d89f98c0e6dd150bd2f86763c44656814531afad752fdb867b874857527e",
+      "program": null,
+      "canonicalProgramSha256": null,
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-local-gxmu-president-freshmen-scholarship",
+            "url": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+            "title": "Guangxi Medical University 2026 International Student Admission Guide",
+            "publisher": "guangxi-medical-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "182e721fe4cd3899080c345e2a572d95bc2c35d1b307e7b8e907c9862e26b6bf"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-sch-gxmu-guangxi-asean-2026",
+      "universityId": "uni-guangxi-medical-university",
+      "row": {
+        "id": "sch-gap-sch-gxmu-guangxi-asean-2026",
+        "slug": "gap-sch-gxmu-guangxi-asean-2026",
+        "name": {
+          "en": "2026 Guangxi Government ASEAN Scholarship at Guangxi Medical University",
+          "zh": "2026年广西医科大学广西政府东盟国家留学奖学金",
+          "ru": "Стипендия правительства Гуанси для студентов стран АСЕАН 2026 в Медицинском университете Гуанси"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-guangxi-medical-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://gjy.gxmu.edu.cn/cn/zsxc/jxj/t231826.html",
+        "summary": {
+          "en": "The 2026 official guide is restricted to citizens of ASEAN countries and covers application fee, tuition, on-campus accommodation, insurance, textbooks and a living allowance.",
+          "zh": "2026官方简章面向东盟国家公民，覆盖报名费、学费、校内住宿、综合医疗保险、课本费并提供生活费。",
+          "ru": "Программа 2026 года предназначена для граждан АСЕАН и включает регистрационный взнос, обучение, проживание, страховку, учебники и стипендию."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-gxmu-guangxi-asean-2026"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "fc251ad1770ef513c0e5f43decd3f7584ae88ad24d8d86093167b21d10a4ef07",
+      "program": null,
+      "canonicalProgramSha256": null,
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-gxmu-guangxi-asean-2026",
+            "url": "https://gjy.gxmu.edu.cn/cn/zsxc/jxj/t231826.html",
+            "title": "2026年广西医科大学“广西政府东盟国家留学奖学金”招生简章",
+            "publisher": "guangxi-medical-university",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "98e314faac2e36a715982cbd9478e9d733e1f219143d2032338346dfd2537c4c"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-local-gxmu-b-clinical-medicine-cn-2026-2027-other",
+      "universityId": "uni-guangxi-medical-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-local-gxmu-b-clinical-medicine-cn"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-local-gxmu-b-clinical-medicine-cn-2026-2027-other",
+        "programId": "prog-gap-local-gxmu-b-clinical-medicine-cn",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": "2026-01-01",
+        "closesOn": "2026-08-15",
+        "dateStatus": "published",
+        "tuitionCny": 28000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "confirmed",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The current official guide lists the Chinese-medium five-year Clinical Medicine bachelor's program at CNY 28,000 per year and an application window of January 1 to August 15, 2026.",
+          "zh": "The current official guide lists the Chinese-medium five-year Clinical Medicine bachelor's program at CNY 28,000 per year and an application window of January 1 to August 15, 2026."
+        }
+      },
+      "canonicalRecordSha256": "0959b26905630ca694ee7e31b4ca35b355d71f40a322982ba0a986994707b9b8",
+      "program": {
+        "sourceIds": [
+          "src-gap-program-local-gxmu-b-clinical-medicine-cn"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-local-gxmu-b-clinical-medicine-cn",
+        "slug": "gap-local-gxmu-b-clinical-medicine-cn-bachelor",
+        "universityId": "uni-guangxi-medical-university",
+        "name": {
+          "en": "Clinical Medicine",
+          "zh": "临床医学",
+          "ru": "Клиническая медицина"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 60,
+        "programUrl": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "ea2d435b1622f6d4265281974a1306b804b952d49335dca29b477c0318c6f0a6",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-local-gxmu-b-clinical-medicine-cn",
+            "url": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+            "title": "Guangxi Medical University 2026 International Student Admission Guide",
+            "publisher": "guangxi-medical-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "234f01c95b22e2db56a742f87ad09b693ea8c94ddc26236a850d511ebc0cc4e4"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-mew-scws-gxmzu-cgs-high-level-postgraduate-2026",
+      "universityId": "uni-guangxi-minzu-university",
+      "row": {
+        "id": "sch-gap-mew-scws-gxmzu-cgs-high-level-postgraduate-2026",
+        "slug": "gap-mew-scws-gxmzu-cgs-high-level-postgraduate-2026",
+        "name": {
+          "en": "Guangxi Minzu University Chinese Government Scholarship High-Level Postgraduate Program 2026",
+          "zh": "广西民族大学2026年中国政府奖学金高水平研究生项目",
+          "ru": "Стипендия правительства Китая для аспирантов высокого уровня Университета национальностей Гуанси 2026"
+        },
+        "providerType": "csc",
+        "universityIds": [
+          "uni-guangxi-minzu-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://gjjy.gxmzu.edu.cn/info/1036/16150.htm",
+        "summary": {
+          "en": "The university's current official page confirms a distinct 2026 high-level graduate scholarship route and an attached eligible-program catalogue; inaccessible benefit and deadline fields are not inferred.",
+          "zh": "学校当前官方页面确认独立的2026高水平研究生奖学金渠道及适用专业附件；无法读取的资助和截止字段未作推断。",
+          "ru": "Текущая официальная страница подтверждает стипендию 2026 года и каталог допустимых программ; недоступные суммы и сроки не выводятся."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-mew-scws-gxmzu-cgs-high-level-postgraduate-2026"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "897d15ec87a468ff102f0890e1928651b2c323ff2d3eb2413852c2e124b565cf",
+      "program": null,
+      "canonicalProgramSha256": null,
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-mew-scws-gxmzu-cgs-high-level-postgraduate-2026",
+            "url": "https://gjjy.gxmzu.edu.cn/info/1036/16150.htm",
+            "title": "Chinese Government Scholarship High-level Graduate Program 2026 — Guangxi Minzu University",
+            "publisher": "guangxi-minzu-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "29dae54b77ba324edd6076a83ccfe1bceeadd3ebe7585a91dd64b964e762dbfd"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-mew-csw-gxnu-chinese-language-literature-doctorate-2026-2027-autumn-fee-reference",
+      "universityId": "uni-guangxi-normal-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-mew-csw-gxnu-chinese-language-literature-doctorate"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-08-10",
+        "status": "stale",
+        "id": "cycle-gap-mew-csw-gxnu-chinese-language-literature-doctorate-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-mew-csw-gxnu-chinese-language-literature-doctorate",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 22000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "canonicalRecordSha256": "3cef521a312aca97dff2c4a7eea157f1ab7e6b38aa34d94227b81f6642784f47",
+      "program": {
+        "sourceIds": [
+          "src-gap-program-mew-csw-gxnu-chinese-language-literature-doctorate"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale",
+        "id": "prog-gap-mew-csw-gxnu-chinese-language-literature-doctorate",
+        "slug": "gap-mew-csw-gxnu-chinese-language-literature-doctorate-doctorate",
+        "universityId": "uni-guangxi-normal-university",
+        "name": {
+          "en": "Chinese Language and Literature",
+          "zh": "中国语言文学",
+          "ru": "Китайский язык и литература"
+        },
+        "degreeLevel": "doctorate",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 36,
+        "programUrl": "https://english.gxnu.edu.cn/_upload/article/files/ec/d1/d2f9b3e14879a8ef3e31b282d8eb/4baf4973-bf5f-4483-8c93-8af3e577e881.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "9a57abdbfe510010391c5d3f56cc8621ca42d643c96dfef1bf5726ebaf2bdf69",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-mew-csw-gxnu-chinese-language-literature-doctorate",
+            "url": "https://english.gxnu.edu.cn/_upload/article/files/ec/d1/d2f9b3e14879a8ef3e31b282d8eb/4baf4973-bf5f-4483-8c93-8af3e577e881.pdf",
+            "title": "Guangxi Normal University Doctoral Degree Programs for International Students",
+            "publisher": "guangxi-normal-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "5d3aaad68b29e00db51038aba43f51ef79a35c8f518c68bf9d522222b1a321e8"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-sparse-depth-0808-gxu-chinese-language-major-bachelor-2026-2027-other-fee-reference",
+      "universityId": "uni-guangxi-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-sparse-depth-0808-gxu-chinese-language-major-bachelor"
+        ],
+        "verifiedAt": "2026-08-08",
+        "reviewAfter": "2026-08-15",
+        "status": "stale",
+        "id": "cycle-gap-sparse-depth-0808-gxu-chinese-language-major-bachelor-2026-2027-other-fee-reference",
+        "programId": "prog-gap-sparse-depth-0808-gxu-chinese-language-major-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 11000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "canonicalRecordSha256": "58c75790a889c994365c74b91cb9f0542c36361be924571c5b778c3ba15f113c",
+      "program": {
+        "sourceIds": [
+          "src-gap-program-sparse-depth-0808-gxu-chinese-language-major-bachelor"
+        ],
+        "verifiedAt": "2026-08-08",
+        "reviewAfter": "2026-09-07",
+        "status": "stale",
+        "id": "prog-gap-sparse-depth-0808-gxu-chinese-language-major-bachelor",
+        "slug": "gap-sparse-depth-0808-gxu-chinese-language-major-bachelor-bachelor",
+        "universityId": "uni-guangxi-university",
+        "name": {
+          "en": "Chinese Language Major",
+          "zh": "汉语言专业",
+          "ru": "Китайский язык"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "chinese-education",
+        "teachingLanguages": [],
+        "durationMonths": null,
+        "programUrl": "https://gjxy.gxu.edu.cn/LXXD/sfbz.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "identity"
+      },
+      "canonicalProgramSha256": "5b510ded7bd48cf9299048475bbb948b070b2e0c6b050078e99ed498c145b3f1",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-sparse-depth-0808-gxu-chinese-language-major-bachelor",
+            "url": "https://gjxy.gxu.edu.cn/LXXD/sfbz.htm",
+            "title": "Guangxi University International Student Fee Standards",
+            "publisher": "guangxi-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-08"
+          },
+          "sha256": "cdae5e7a3fbbe99e9e58aa20821d5568d55d5d288e8fde890d360c488a29bb1a"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-sparse-depth-0808-gxu-chinese-language-student-2026-2027-other-fee-reference",
+      "universityId": "uni-guangxi-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-sparse-depth-0808-gxu-chinese-language-student"
+        ],
+        "verifiedAt": "2026-08-08",
+        "reviewAfter": "2026-08-15",
+        "status": "stale",
+        "id": "cycle-gap-sparse-depth-0808-gxu-chinese-language-student-2026-2027-other-fee-reference",
+        "programId": "prog-gap-sparse-depth-0808-gxu-chinese-language-student",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 10500,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "canonicalRecordSha256": "3de9f131c313244293dbdef428c728c39d54efdec5d55da8a58fdf3ab5b372c6",
+      "program": {
+        "sourceIds": [
+          "src-gap-program-sparse-depth-0808-gxu-chinese-language-student"
+        ],
+        "verifiedAt": "2026-08-08",
+        "reviewAfter": "2026-09-07",
+        "status": "stale",
+        "id": "prog-gap-sparse-depth-0808-gxu-chinese-language-student",
+        "slug": "gap-sparse-depth-0808-gxu-chinese-language-student-language",
+        "universityId": "uni-guangxi-university",
+        "name": {
+          "en": "Chinese Language Program",
+          "zh": "汉语进修生项目",
+          "ru": "Программа китайского языка"
+        },
+        "degreeLevel": "language",
+        "discipline": "chinese-education",
+        "teachingLanguages": [],
+        "durationMonths": null,
+        "programUrl": "https://gjxy.gxu.edu.cn/LXXD/sfbz.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "identity"
+      },
+      "canonicalProgramSha256": "ec4379de8a1f59dc1ef92f01906184ef663755da651414ab7b52e8423f839280",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-sparse-depth-0808-gxu-chinese-language-student",
+            "url": "https://gjxy.gxu.edu.cn/LXXD/sfbz.htm",
+            "title": "Guangxi University International Student Fee Standards",
+            "publisher": "guangxi-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-08"
+          },
+          "sha256": "3975391f317c74e5f3c09c708db9fe641860d29757eea70a765863babcee9f52"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-wave3-gxtcmu-guangxi-asean-full-scholarship",
+      "universityId": "uni-guangxi-university-of-chinese-medicine",
+      "row": {
+        "id": "sch-gap-wave3-gxtcmu-guangxi-asean-full-scholarship",
+        "slug": "gap-wave3-gxtcmu-guangxi-asean-full-scholarship",
+        "name": {
+          "en": "Guangxi Government Full Scholarship for ASEAN Students at GXUCM",
+          "zh": "广西中医药大学广西政府东盟国家留学生全额奖学金",
+          "ru": "Полная стипендия правительства Гуанси для студентов АСЕАН в GXUCM"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-guangxi-university-of-chinese-medicine"
+        ],
+        "programIds": [
+          "prog-gap-wave3-gxtcmu-chinese-medicine-bachelor",
+          "prog-gap-wave3-gxtcmu-acupuncture-tuina-bachelor",
+          "prog-gap-wave3-gxtcmu-chinese-internal-medicine-master",
+          "prog-gap-wave3-gxtcmu-history-literature-chinese-medicine-doctorate"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+        "summary": {
+          "en": "The official 2026 guide confirms direct university application and coverage of registration, tuition, textbooks, laboratory/internship, accommodation, insurance and living allowance.",
+          "zh": "2026官方简章确认可直接向学校申请，资助覆盖报名、学费、教材、实验实习、住宿、保险和生活费。",
+          "ru": "Официальное руководство 2026 года подтверждает прямую подачу и покрытие регистрации, обучения, учебников, практики, жилья, страховки и проживания."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave3-gxtcmu-guangxi-asean-full-scholarship"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "5af2c980b984dcc2f98b02142c10a8ccb4dc32812cbc9c8ab80df1ae5f4fde1a",
+      "program": null,
+      "canonicalProgramSha256": null,
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave3-gxtcmu-guangxi-asean-full-scholarship",
+            "url": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+            "title": "GXUCM 2026 Guangxi Government Full Scholarship for ASEAN Students",
+            "publisher": "guangxi-university-of-chinese-medicine",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "35143a2811ab940a9fbe2de92e142961c38bd56867ee27c1271e611e8627549d"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave3-gxtcmu-acupuncture-tuina-bachelor-2026-2027-autumn",
+      "universityId": "uni-guangxi-university-of-chinese-medicine",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave3-gxtcmu-acupuncture-tuina-bachelor"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave3-gxtcmu-acupuncture-tuina-bachelor-2026-2027-autumn",
+        "programId": "prog-gap-wave3-gxtcmu-acupuncture-tuina-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-25",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official 2026 international scholarship guide explicitly lists Acupuncture, Moxibustion and Tuina, taught in Chinese for 5 years, and allows eligible ASEAN applicants to apply directly to the university.",
+          "zh": "2026国际奖学金官方简章明确列出针灸推拿学，中文授课，学制五年，符合条件的东盟申请人可直接向学校申请。",
+          "ru": "Официальное руководство 2026 года прямо перечисляет программу «Иглоукалывание, прижигание и туйна» на китайском языке сроком пять лет и допускает прямую подачу в университет."
+        }
+      },
+      "canonicalRecordSha256": "119d31957dde2652e57980e7e698503781d1eabbaeffadbc93b58f86438fa75d",
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave3-gxtcmu-acupuncture-tuina-bachelor"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave3-gxtcmu-acupuncture-tuina-bachelor",
+        "slug": "gap-wave3-gxtcmu-acupuncture-tuina-bachelor-bachelor",
+        "universityId": "uni-guangxi-university-of-chinese-medicine",
+        "name": {
+          "en": "Acupuncture, Moxibustion and Tuina",
+          "zh": "针灸推拿学",
+          "ru": "Иглоукалывание, прижигание и туйна"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "other",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 60,
+        "programUrl": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "364433c2e70d8140f3c3f4e69a6c4f6a4749a866179821434f2124c34feb95fc",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave3-gxtcmu-acupuncture-tuina-bachelor",
+            "url": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+            "title": "GXUCM 2026 Guangxi Government Full Scholarship for ASEAN Students",
+            "publisher": "guangxi-university-of-chinese-medicine",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "1cace0ca55c4c7e4e0dfcd45dba678eec50d2656b1d1533464ad80371b006d2d"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave3-gxtcmu-chinese-internal-medicine-master-2026-2027-autumn",
+      "universityId": "uni-guangxi-university-of-chinese-medicine",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave3-gxtcmu-chinese-internal-medicine-master"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave3-gxtcmu-chinese-internal-medicine-master-2026-2027-autumn",
+        "programId": "prog-gap-wave3-gxtcmu-chinese-internal-medicine-master",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-25",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official 2026 international scholarship guide explicitly lists Chinese Internal Medicine, taught in Chinese for 3 years, and allows eligible ASEAN applicants to apply directly to the university.",
+          "zh": "2026国际奖学金官方简章明确列出中医内科学，中文授课，学制三年，符合条件的东盟申请人可直接向学校申请。",
+          "ru": "Официальное руководство 2026 года прямо перечисляет программу «Внутренняя медицина традиционной китайской медицины» на китайском языке сроком три года и допускает прямую подачу в университет."
+        }
+      },
+      "canonicalRecordSha256": "b220f5e6d64e289834852b060557db6572f546f20ab42b5914d898a7c58c9056",
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave3-gxtcmu-chinese-internal-medicine-master"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave3-gxtcmu-chinese-internal-medicine-master",
+        "slug": "gap-wave3-gxtcmu-chinese-internal-medicine-master-master",
+        "universityId": "uni-guangxi-university-of-chinese-medicine",
+        "name": {
+          "en": "Chinese Internal Medicine",
+          "zh": "中医内科学",
+          "ru": "Внутренняя медицина традиционной китайской медицины"
+        },
+        "degreeLevel": "master",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 36,
+        "programUrl": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "50e33eb91effe96564bba1664a6045bf1f851400d15850ac7419a539699e8fe8",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave3-gxtcmu-chinese-internal-medicine-master",
+            "url": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+            "title": "GXUCM 2026 Guangxi Government Full Scholarship for ASEAN Students",
+            "publisher": "guangxi-university-of-chinese-medicine",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "7cd1761036d4d52203143cf1911f8e128e118682a85313ba0036319fe3f50aaa"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave3-gxtcmu-chinese-medicine-bachelor-2026-2027-autumn",
+      "universityId": "uni-guangxi-university-of-chinese-medicine",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave3-gxtcmu-chinese-medicine-bachelor"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave3-gxtcmu-chinese-medicine-bachelor-2026-2027-autumn",
+        "programId": "prog-gap-wave3-gxtcmu-chinese-medicine-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-25",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official 2026 international scholarship guide explicitly lists Chinese Medicine, taught in Chinese for 5 years, and allows eligible ASEAN applicants to apply directly to the university.",
+          "zh": "2026国际奖学金官方简章明确列出中医学，中文授课，学制五年，符合条件的东盟申请人可直接向学校申请。",
+          "ru": "Официальное руководство 2026 года прямо перечисляет программу «Китайская медицина» на китайском языке сроком пять лет и допускает прямую подачу в университет."
+        }
+      },
+      "canonicalRecordSha256": "7fec105f8b88d786b10f51bb633d237176a08b1f57fb77f8c13a1fda8ad510a7",
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave3-gxtcmu-chinese-medicine-bachelor"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave3-gxtcmu-chinese-medicine-bachelor",
+        "slug": "gap-wave3-gxtcmu-chinese-medicine-bachelor-bachelor",
+        "universityId": "uni-guangxi-university-of-chinese-medicine",
+        "name": {
+          "en": "Chinese Medicine",
+          "zh": "中医学",
+          "ru": "Китайская медицина"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 60,
+        "programUrl": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "a7e625c8f11b9f9c9718d2d70d6566e929959f5c5aa12f61e93cbf7c868889b5",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave3-gxtcmu-chinese-medicine-bachelor",
+            "url": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+            "title": "GXUCM 2026 Guangxi Government Full Scholarship for ASEAN Students",
+            "publisher": "guangxi-university-of-chinese-medicine",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "e83eebfa63e964ec51b1cabe894e879478726d2c7bfb8f276123f30b4c168337"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-mve-ecma-gafa-art-studies-doctorate-2026-2027-autumn-fee-reference",
+      "universityId": "uni-guangzhou-academy-of-fine-arts",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-mve-ecma-gafa-art-studies-doctorate"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-08-12",
+        "status": "stale",
+        "id": "cycle-gap-mve-ecma-gafa-art-studies-doctorate-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-mve-ecma-gafa-art-studies-doctorate",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 68000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "canonicalRecordSha256": "fbf93f61e7b0679a215966a211ec4e4f49b4308d9b3262a0ae48a1b10ce39a66",
+      "program": {
+        "sourceIds": [
+          "src-gap-program-mve-ecma-gafa-art-studies-doctorate"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-09-04",
+        "status": "stale",
+        "id": "prog-gap-mve-ecma-gafa-art-studies-doctorate",
+        "slug": "gap-mve-ecma-gafa-art-studies-doctorate-doctorate",
+        "universityId": "uni-guangzhou-academy-of-fine-arts",
+        "name": {
+          "en": "Art Studies",
+          "zh": "艺术学",
+          "ru": "Искусствоведение"
+        },
+        "degreeLevel": "doctorate",
+        "discipline": "art-design",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 36,
+        "programUrl": "https://wsc.gzarts.edu.cn/info/1497/3972.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "724e69bbb4301704551b7a080ef1e3340f96346bb1ea31641f3841de390eb884",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-mve-ecma-gafa-art-studies-doctorate",
+            "url": "https://wsc.gzarts.edu.cn/info/1497/3972.htm",
+            "title": "Guangzhou Academy of Fine Arts 2026 International Doctoral Admissions",
+            "publisher": "guangzhou-academy-of-fine-arts",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "sha256": "cb27b698da554e760160dedd26cc51083175e69ff1b35ad764e9b8f4702b2873"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-prog-gxmu-clinical-medicine-mbbs-2026-2026-2027-other",
+      "universityId": "uni-guangxi-medical-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-gxmu-clinical-medicine-mbbs-2026",
+          "src-gap-program-prog-gxmu-clinical-medicine-mbbs-2026-support-1"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-prog-gxmu-clinical-medicine-mbbs-2026-2026-2027-other",
+        "programId": "prog-gap-prog-gxmu-clinical-medicine-mbbs-2026",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": "2026-01-01",
+        "closesOn": "2026-08-15",
+        "dateStatus": "published",
+        "tuitionCny": 35000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "confirmed",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The 2026 official international undergraduate guide confirms GXMU is authorized to offer English-medium Clinical Medicine and lists tuition at CNY 35,000 per year; its linked 2026 catalog gives a six-year duration.",
+          "zh": "2026国际本科官方简章确认学校获批开展英文临床医学来华留学生教育，学费每年3.5万元；配套2026专业目录列明学制6年。",
+          "ru": "Официальное руководство 2026 года подтверждает англоязычную клиническую медицину: 6 лет, 35 000 юаней в год."
+        }
+      },
+      "canonicalRecordSha256": "a5dc51a5c3de2982ecfaa2acda46ae979894897162e1e53a0dc4fc447b90b8bb",
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-gxmu-clinical-medicine-mbbs-2026",
+          "src-gap-program-prog-gxmu-clinical-medicine-mbbs-2026-support-1"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-prog-gxmu-clinical-medicine-mbbs-2026",
+        "slug": "gap-prog-gxmu-clinical-medicine-mbbs-2026-bachelor",
+        "universityId": "uni-guangxi-medical-university",
+        "name": {
+          "en": "Clinical Medicine (MBBS)",
+          "zh": "临床医学（英语授课）",
+          "ru": "Клиническая медицина (MBBS)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 72,
+        "programUrl": "https://gjy.gxmu.edu.cn/cn/zsxc/bkszs/t224266.html",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "36416696aba2dcd3ce45af8f94d59cf210d50b74a2c41e5a71a7e3727422b8a9",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-gxmu-clinical-medicine-mbbs-2026",
+            "url": "https://gjy.gxmu.edu.cn/cn/zsxc/bkszs/t224266.html",
+            "title": "2026年广西医科大学本科国际学生招生简章",
+            "publisher": "guangxi-medical-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "9c6cb2f9254bf9a55e892d4b3ff7ca877d27b0af76ac0351e66c1a4f450935c0"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-gxmu-clinical-medicine-mbbs-2026-support-1",
+            "url": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+            "title": "Guangxi Medical University 2026 International Student Admission Guide",
+            "publisher": "guangxi-medical-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "352770efc42762b70db35b85f81aad667a3a62c300e98257e266449b4f0af7f8"
+        }
+      ],
+      "additionalSameSourceBinding": true
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-local-gxmu-b-stomatology-cn-2026-2027-other",
+      "universityId": "uni-guangxi-medical-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-local-gxmu-b-stomatology-cn"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-local-gxmu-b-stomatology-cn-2026-2027-other",
+        "programId": "prog-gap-local-gxmu-b-stomatology-cn",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": "2026-01-01",
+        "closesOn": "2026-08-15",
+        "dateStatus": "published",
+        "tuitionCny": 28000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "confirmed",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The current official guide lists Stomatology as a five-year Chinese-taught bachelor's program at CNY 28,000 per year.",
+          "zh": "The current official guide lists Stomatology as a five-year Chinese-taught bachelor's program at CNY 28,000 per year."
+        }
+      },
+      "canonicalRecordSha256": "336ab8a9d2c74602f34d950fd43b5c44b981f84c640cb4e1c4c6f637c5668ffb",
+      "program": {
+        "sourceIds": [
+          "src-gap-program-local-gxmu-b-stomatology-cn"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-local-gxmu-b-stomatology-cn",
+        "slug": "gap-local-gxmu-b-stomatology-cn-bachelor",
+        "universityId": "uni-guangxi-medical-university",
+        "name": {
+          "en": "Stomatology",
+          "zh": "口腔医学",
+          "ru": "Стоматология"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 60,
+        "programUrl": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "4a0d4f50232359d855d3c550416df09984fbb67daad1d1960fda21fa722f3d13",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-local-gxmu-b-stomatology-cn",
+            "url": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+            "title": "Guangxi Medical University 2026 International Student Admission Guide",
+            "publisher": "guangxi-medical-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "ee9aa37d67119ca4746b7fe9e140163aa6273d003265c0a6c8a34cc00992411f"
+        }
+      ],
+      "additionalSameSourceBinding": true
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave3-gxtcmu-history-literature-chinese-medicine-doctorate-2026-2027-autumn",
+      "universityId": "uni-guangxi-university-of-chinese-medicine",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave3-gxtcmu-history-literature-chinese-medicine-doctorate"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave3-gxtcmu-history-literature-chinese-medicine-doctorate-2026-2027-autumn",
+        "programId": "prog-gap-wave3-gxtcmu-history-literature-chinese-medicine-doctorate",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-25",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official 2026 international scholarship guide explicitly lists History and Literature of Chinese Medicine, taught in Chinese for 3 years, and allows eligible ASEAN applicants to apply directly to the university.",
+          "zh": "2026国际奖学金官方简章明确列出中医医史文献，中文授课，学制三年，符合条件的东盟申请人可直接向学校申请。",
+          "ru": "Официальное руководство 2026 года прямо перечисляет программу «История и литература китайской медицины» на китайском языке сроком три года и допускает прямую подачу в университет."
+        }
+      },
+      "canonicalRecordSha256": "de82371f8a18a85a05dd8c14fbfadd1d9e45918afe9fe1655795b64694b944ef",
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave3-gxtcmu-history-literature-chinese-medicine-doctorate"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave3-gxtcmu-history-literature-chinese-medicine-doctorate",
+        "slug": "gap-wave3-gxtcmu-history-literature-chinese-medicine-doctorate-doctorate",
+        "universityId": "uni-guangxi-university-of-chinese-medicine",
+        "name": {
+          "en": "History and Literature of Chinese Medicine",
+          "zh": "中医医史文献",
+          "ru": "История и литература китайской медицины"
+        },
+        "degreeLevel": "doctorate",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 36,
+        "programUrl": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "1891b6d06e5b0f18a958af2c912ed03a2ef258a95b6dd88e99ac6fba8e47ff21",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave3-gxtcmu-history-literature-chinese-medicine-doctorate",
+            "url": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+            "title": "GXUCM 2026 Guangxi Government Full Scholarship for ASEAN Students",
+            "publisher": "guangxi-university-of-chinese-medicine",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "9ef34e3cf9e14f750f19b5acdf47c869823d00aa3e39e38197752430b3094a48"
+        }
+      ],
+      "additionalSameSourceBinding": true
+    }
+  ],
+  "additionalRootSelectionPin": {
+    "path": "D:\\学过的课程\\github_profile_work\\StudyInChina\\quality\\deadline-sweep-20261019\\heartbeat-0554\\additional-same-source-selection-v1.json",
+    "sha256": "3ca8778c34230d3882908d7504941f5e2985a7ff9802fabad38fae5c5fe92489"
+  }
+}

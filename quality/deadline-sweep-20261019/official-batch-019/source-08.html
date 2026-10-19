@@ -1,0 +1,609 @@
+﻿<!DOCTYPE html>
+<HTML><HEAD><TITLE>Enrollment Brochure for International Undergraduate Students of Guangdong Medical University (Chinese Medium)-广东医科大学</TITLE><meta name="pageType" content="3">
+<meta name="pageTitle" content="Enrollment Brochure for International Undergraduate Students of Guangdong Medical University (Chinese Medium)">
+<META Name="keywords" Content="广东医科大学,Enrollment,Brochure" />
+<META Name="description" Content="Enrollment Brochure" />
+
+
+
+
+
+
+<META charset="utf-8">
+<META content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><LINK rel="stylesheet" type="text/css" href="../../xgyw/dfiles/11274/css/common.css"><LINK rel="stylesheet" type="text/css" href="../../xgyw/dfiles/11274/css/style.css">
+
+<STYLE>
+#myrightu0{z-index:99999 !important;}
+
+.sls{background: #1440ad;}
+.titsls{border-bottom: solid 2px #0d318f !important;}
+.subsls{background:#0d318f !important;}
+.subsls dd a:hover{background:#1440ad !important;color:#fff !important;}
+
+</STYLE>
+
+
+<!--Announced by Visual SiteBuilder 9-->
+<script language="javascript" src="../../_sitegray/_sitegray.js"></script>
+<!-- CustomerNO:77656262657232307c78465550515742000400034051 -->
+<link rel="stylesheet" type="text/css" href="../../content.vsb.css" />
+<script type="text/javascript" src="/system/resource/js/counter.js"></script>
+<script type="text/javascript">_jsq_(1025,'/content.jsp',1265,1328563806)</script>
+</HEAD>
+<BODY style="min-width:1300px;">
+<DIV class="c_head" style="background: url(../../xgyw/dfiles/11274/xtp/ltop.jpg) no-repeat top center;">
+<DIV class="c_headbox">
+
+<!-- 网站logo图片地址请在本组件"内容配置-网站logo"处填写 -->
+<a href="../../index.htm" title="广东医科大学英文站" style="float:left;"><img src="../../images/logo.png" class="c_logo" style="width:300px;"></a>
+<DIV class="head_fr fr">
+
+
+<script language="javascript" src="/system/resource/js/base64.js"></script><script language="javascript" src="/system/resource/js/jquery/jquery-latest.min.js"></script><script language="javascript" src="/system/resource/vue/vue.js"></script><script language="javascript" src="/system/resource/vue/bluebird.min.js"></script><script language="javascript" src="/system/resource/vue/axios.js"></script><script language="javascript" src="/system/resource/vue/polyfill.js"></script><script language="javascript" src="/system/resource/vue/token.js"></script><LINK href="/system/resource/vue/static/element/index.css" type="text/css" rel="stylesheet"><script language="javascript" src="/system/resource/vue/static/element/index.js"></script><script language="javascript" src="/system/resource/vue/static/public.js"></script><style>
+   
+  
+input::placeholder {
+  color: #ffffff;}
+
+    #appu1 .qwss{
+        height: 31px;
+        font-size: 12px;
+        min-width: 190px;
+        max-width: 600px;
+        width: 60%;
+        margin-top: -15px;
+        outline: none;
+        padding-left: 10px;
+        border-radius: 2px;
+        border: 1px solid #e4e7ed;}
+    #appu1 .tj{
+        padding-left: 6px;
+        letter-spacing: 5px;
+        color: white;
+        min-width: 53px;
+        max-width: 150px;
+        height: 32px;
+        border: 0;
+        border-radius: 2px;
+        background-color: #1890FF;
+        position: relative;
+        top: 1px;
+        width: 20%;
+        margin-top: -15px;}
+</style>
+<div id="divu1"></div>
+<script type="text/html" id="htmlu1">
+    <div id="appu1">
+        <div v-if="!isError">
+         <div class="c_sousuo fl" style="background: url(../../images/sousuo.png) no-repeat;">
+            <input name="showkeycode" id="showkeycode270636" type="text" placeholder="Search for..."class="ss" autocomplete=off v-model=query.keyWord @keyup.enter="onSubmit">
+             <input type="submit" value=" " class="s_btn" align="absmiddle" style="cursor: hand" v-on:click="onSubmit()">
+         </div>
+        </div>
+        <div v-if="isError" style="color: #b30216; font-size:18px;text-align: center;padding:20px;">
+            应用维护中！
+        </div>
+    </div>
+</script>
+<script>
+    $("#divu1").html($("#htmlu1").text());
+</script>
+<script>
+    var appOwner = "1328563806";
+    var token = 'tourist';
+    var urlPrefix = "/aop_component/";
+
+    jQuery.support.cors = true;
+    $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+    });
+
+    new Vue({
+        el: "#appu1",
+        data: function () {
+            return {
+                query: {
+                    keyWord: "",//搜索关键词
+                    owner: appOwner,
+                    token: token,
+                    urlPrefix: urlPrefix,
+                    lang:"i18n_zh_CN"
+                },
+                isError: false
+            }
+        },
+        mounted: function () {
+            var _this = this;
+            // _this.init();
+        },
+        methods: {
+            init: function(){
+                $.ajax({
+                    url: "/aop_component//webber/search/test",
+                    type: "get",
+                    success: function (response) {
+                        if (response.code == "0000") {
+                        } else if (response.code == "220") {
+                            _this.isError = true;
+                            console.log(response);
+                        } else if (!response.code) {
+                            _this.isError = true;
+                            console.log(response);
+                        }
+                    },
+                    error: function (response) {
+                        _this.isError = true;
+                    }
+                });
+            },
+            onSubmit: function (e) {
+                var url = "/aop_views/search/modules/resultpc/soso.html";
+                if ("10" == "1" || "10" == "2") {
+                    url = "" + url;
+                }
+                var _this = this;
+                var query = _this.query;
+                if (url.indexOf("?") > -1) {
+                    url = url.split("?")[0];
+                }
+                if (query.keyWord) {
+                    var query = new Base64().encode(JSON.stringify(query));
+                    window.open(url + "?query=" + query);
+                } else {
+                    alert("请填写搜索内容")
+                }
+            },
+        }
+    })
+</script></DIV><div class="nav sls"><ul>
+<li><a href="../../index.htm" rel="noreferrer">Home</a></li>
+
+<li class="mainmenu"><a href="../../About_GDMU/Overview.htm" rel="noreferrer">About GDMU</a>
+    <dl class="subsls">
+     <dd><a href="../../About_GDMU/Overview.htm" rel="noreferrer">Overview</a></dd>   
+     <dd><a href="../../About_GDMU/Leadership.htm" rel="noreferrer">Leadership</a></dd>   
+     <dd><a href="../../About_GDMU/Organization.htm" rel="noreferrer">Organization</a></dd>   
+     <dd><a href="../../About_GDMU/Location.htm" rel="noreferrer">Location</a></dd>   
+     <dd><a href="../../About_GDMU/Campus_Scenes.htm" rel="noreferrer">Campus Scenes</a></dd>   
+                        
+    </dl>
+    </li>
+
+<li class="mainmenu"><a href="../../News_Events.htm" rel="noreferrer">News &amp; Events</a>
+    <dl class="subsls">
+     <dd><a href="../../News_Events/News.htm" rel="noreferrer">News</a></dd>   
+     <dd><a href="../../News_Events/Events.htm" rel="noreferrer">Events</a></dd>   
+                        
+    </dl>
+    </li>
+
+<li class="mainmenu"><a href="../../Academics/Schools___Departments.htm" rel="noreferrer">Academics</a>
+    <dl class="subsls">
+     <dd><a href="../../Academics/Schools___Departments.htm" rel="noreferrer">Schools &amp; Departments</a></dd>   
+     <dd><a href="../../Academics/Key_Disciplines.htm" rel="noreferrer">Key Disciplines</a></dd>   
+                        
+    </dl>
+    </li>
+
+<li class="mainmenu"><a href="../../Research/Centers_And_Institutes.htm" rel="noreferrer">Research</a>
+    <dl class="subsls">
+     <dd><a href="../../Research/Centers_And_Institutes.htm" rel="noreferrer">Centers And Institutes</a></dd>   
+                        
+    </dl>
+    </li>
+
+<li class="mainmenu"><a href="../../Hospitals/Overview.htm" rel="noreferrer">Hospitals</a>
+    <dl class="subsls">
+     <dd><a href="../../Hospitals/Overview.htm" rel="noreferrer">Overview</a></dd>   
+     <dd><a href="../../Hospitals/Affiliated.htm" rel="noreferrer">No.1 Affiliated Hospital</a></dd>   
+     <dd><a href="../../Hospitals/Affiliated_Hospital.htm" rel="noreferrer">No.2 Affiliated Hospital</a></dd>   
+                        
+    </dl>
+    </li>
+
+<li class="mainmenu"><a href="../../Admission/Undergraduate.htm" rel="noreferrer">Admission</a>
+    <dl class="subsls">
+     <dd><a href="../../Admission/Undergraduate.htm" rel="noreferrer">Undergraduate</a></dd>   
+     <dd><a href="../../Admission/Graduate.htm" rel="noreferrer">Graduate</a></dd>   
+                        
+    </dl>
+    </li>
+
+<li class="mainmenu"><a href="../../Join_us/Jobs_And_Vacancies.htm" rel="noreferrer">Join us</a>
+    <dl class="subsls">
+     <dd><a href="../../Join_us/Jobs_And_Vacancies.htm" rel="noreferrer">Jobs And Vacancies</a></dd>   
+                        
+    </dl>
+    </li>
+
+</ul></div></DIV></DIV>
+
+
+
+    <div class="l_ban" style="background:url(../../images/banner.jpg) no-repeat top center;"></div>
+
+<div class="l_bt">
+    <div class="l_btbox"><div class="bt_fl fl"><b><span>
+News &amp; Events</span></b><span><span class="windowstyle201985"><span class="windowstyle60501">
+News &amp; Events</span></span></span></div><div class="bt_fr fr">  
+<table class="winstyle201986" cellspacing="0" cellpadding="0"><tr><td nowrap>Location:   
+
+    <a href="../../index.htm">
+    <span class="fontstyle201986">Home</span>
+    </a><span class="splitflagstyle201986">&gt;</span>
+    <a href="../../News_Events.htm">
+    <span class="fontstyle201986">News &amp; Events</span>
+    </a><span class="splitflagstyle201986">&gt;</span>
+            Content
+</td></tr></table></div></div>
+</div>
+<div class="l_con clearfix"><div class="left_nav fl"><dl class="list_dl" style="display:block !important;">
+    
+<dt class="list_dt">
+    <p><a href="../../News_Events/News.htm" title="News" target="_self">News</a></p>
+     
+    </dt>
+    
+<dt class="list_dt">
+    <p><a href="../../News_Events/Events.htm" title="Events" target="_self">Events</a></p>
+     
+    </dt>
+    
+</dl></div>
+
+
+<script language="javascript" src="/system/resource/js/dynclicks.js"></script><script language="javascript" src="../../_dwr/interface/NewsvoteDWR.js"></script><script language="javascript" src="../../_dwr/engine.js"></script><script language="javascript" src="/system/resource/js/news/newscontent.js"></script><link rel="stylesheet" Content-type="text/css" href="/system/resource/style/component/news/content/format6.css"><script language="javascript" src="/system/resource/js/ajax.js"></script><form name="_newscontent_fromname">
+
+<div class="right_nav fr">
+    <h3 align="center" class="l_h3">Enrollment Brochure for International Undergraduate Students of Guangdong Medical University (Chinese Medium)</h3>
+    <div align="center" class="l_zy">author：宋雪洁&nbsp;date：2024-05-13&nbsp;times：<script>_showDynClicks("wbnews", 1328563806, 1265)</script> </div>
+    <div id="vsb_content_1063" class="n_con"><div class="v_news_content"><div id="vsb_content_6"><div class="v_news_content">
+<style>.docx-wrapper { background: gray; padding: 30px; padding-bottom: 0px; display: flex; flex-flow: column; align-items: center;} 
+.docx-wrapper>section.docx { background: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); margin-bottom: 30px;}
+.docx { color: black; hyphens: auto;}
+section.docx { box-sizing: border-box; display: flex; flex-flow: column nowrap; position: relative; overflow: hidden;}
+section.docx>article { margin-bottom: auto; z-index: 1;}
+section.docx>footer { z-index: 1;}
+.docx table { border-collapse: collapse;}
+.docx table td, .docx table th { vertical-align: top;}
+.docx p { margin: 0pt !important; min-height: 1em;}
+.docx span { white-space: pre-wrap; overflow-wrap: break-word;}
+.docx a { color: inherit; text-decoration: inherit;}</style>
+<style>.docx {
+  --docx-majorhansi-font: Calibri Light;
+  --docx-minorhansi-font: Calibri;
+  --docx-dk1-color: #000000;
+  --docx-lt1-color: #FFFFFF;
+  --docx-dk2-color: #44546A;
+  --docx-lt2-color: #E7E6E6;
+  --docx-accent1-color: #5B9BD5;
+  --docx-accent2-color: #ED7D31;
+  --docx-accent3-color: #A5A5A5;
+  --docx-accent4-color: #FFC000;
+  --docx-accent5-color: #4472C4;
+  --docx-accent6-color: #70AD47;
+  --docx-hlink-color: #0563C1;
+  --docx-folhlink-color: #954F72;}</style>
+<style>.docx span {
+  font-family: Times New Roman;}
+.docx p, p.docx_1 {
+  text-align: justify;}
+.docx p, p.docx_1 span {
+  font-family: var(--docx-minorHAnsi-font);
+  min-height: 10.50pt;
+  font-size: 10.50pt;}
+p.docx_2 {
+  margin-top: 0.00pt;
+  margin-bottom: 0.00pt;
+  text-align: left;}
+p.docx_2 span {
+  font-family: 宋体;
+  font-weight: bold;
+  min-height: 13.50pt;
+  font-size: 13.50pt;}
+.docx table, table.docx_4 td {
+  padding-top: 0.00pt;
+  padding-left: 5.40pt;
+  padding-bottom: 0.00pt;
+  padding-right: 5.40pt;}
+p.docx_3 {
+  margin-top: 0.00pt;
+  margin-bottom: 0.00pt;
+  margin-left: 0.00pt;
+  margin-right: 0.00pt;
+  text-align: left;}
+p.docx_3 span {
+  min-height: 12.00pt;
+  font-size: 12.00pt;
+  font-family: var(--docx-minorHAnsi-font);}
+span.docx_6 {
+  font-weight: bold;}
+span.docx_7 {
+  color: #0000FF;
+  text-decoration: underline;}
+span.docx_8 {
+  font-family: Times New Roman;
+  color: #222222;
+  min-height: 12.00pt;
+  font-size: 12.00pt;
+  text-decoration: none;}
+span.docx_9 {
+  font-family: Times New Roman;
+  color: #000000;
+  min-height: 12.00pt;
+  font-size: 12.00pt;
+  text-decoration: none;}</style>
+<style>p.docx-num-1-0:before {
+  content: ""counter(docx-num-1-0, decimal)".\9";
+  counter-increment: docx-num-1-0;}
+p.docx-num-1-0 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;}
+p.docx-num-2-0:before {
+  content: ""counter(docx-num-2-0, decimal)".\a0";
+  counter-increment: docx-num-2-0;}
+p.docx-num-2-0 {
+  display: list-item;
+  list-style-position: inside;
+  list-style-type: none;}
+:root {
+  counter-reset: docx-num-1-0 0 docx-num-2-0 3;}</style>
+<section class="docx">
+ <article>
+  <p style="text-align: center; vertical-align: baseline; text-indent: 0pt;"><br></p>
+  <p style="vertical-align: baseline; text-indent: 0pt;"><br></p>
+  <p style="vertical-align: baseline; text-indent: 0pt;"><span style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">I.&nbsp;Undergraduate programs</span></p>
+  <table class="docx_4" style="width: 414pt; background-color: inherit; table-layout: auto; margin-left: auto; margin-right: auto;">
+   <colgroup>
+    <col style="width: 94.5pt;">
+    <col style="width: 88.45pt;">
+    <col style="width: 67.7pt;">
+    <col style="width: 80.55pt;">
+    <col style="width: 82.8pt;">
+   </colgroup>
+   <tbody>
+    <tr class="firstRow" style="height: 32pt; text-align: center;">
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">School</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Major(Chinese Medium)</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Study Duration</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Degree</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">Physical Basic Requirements</span></p></td>
+    </tr>
+    <tr style="height: 32pt; text-align: center;">
+     <td rowspan="2" style="border-width: 0.5pt 0.5pt 0pt; border-style: solid; border-color: rgb(0, 0, 0) rgb(0, 0, 0) black; background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Second Clinical Medical School</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Clinical Medicine</span></p></td>
+     <td rowspan="2" style="border-width: 0.5pt 0.5pt 0pt; border-style: solid; border-color: rgb(0, 0, 0) rgb(0, 0, 0) black; background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Five years</span></p></td>
+     <td rowspan="2" style="border-width: 0.5pt 0.5pt 0pt; border-style: solid; border-color: rgb(0, 0, 0) rgb(0, 0, 0) black; background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Bachelor of Medicine</span></p></td>
+     <td rowspan="11" style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 11pt; font-size: 11pt; text-decoration: none;">Color blindness and weakness exclusive</span></p></td>
+    </tr>
+    <tr style="height: 32pt; text-align: center;">
+     <td style="display: none; border-width: 0pt 0.5pt 0.5pt; border-style: solid; border-color: black rgb(0, 0, 0) rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><br></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Stomatology</span></p></td>
+     <td style="display: none; border-width: 0pt 0.5pt 0.5pt; border-style: solid; border-color: black rgb(0, 0, 0) rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><br></p></td>
+     <td style="display: none; border-width: 0pt 0.5pt 0.5pt; border-style: solid; border-color: black rgb(0, 0, 0) rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><br></p></td>
+     <td style="display: none; border-width: 0pt 0.5pt; border-style: solid; border-color: black rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><br></p></td>
+    </tr>
+    <tr style="height: 32pt; text-align: center;">
+     <td rowspan="2" style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 11pt; font-size: 11pt; text-decoration: none;">School of Public Health</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Preventive Medicine</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Five years</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Bachelor of Medicine</span></p></td>
+     <td style="display: none; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; text-indent: 0pt;"><br></p></td>
+    </tr>
+    <tr style="height: 32pt; text-align: center;">
+     <td style="display: none; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; text-indent: 0pt;"><br></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Health Inspection and Quarantine</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Four years</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Bachelor of Science</span></p></td>
+     <td style="display: none; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; text-indent: 0pt;"><br></p></td>
+    </tr>
+    <tr style="height: 32pt; text-align: center;">
+     <td rowspan="2" style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 11pt; font-size: 11pt; text-decoration: none;">School of Medical Technology</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Medical Laboratory Technology</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Four years</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Bachelor of Science</span></p></td>
+     <td style="display: none; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; text-indent: 0pt;"><br></p></td>
+    </tr>
+    <tr style="height: 32pt; text-align: center;">
+     <td style="display: none; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; text-indent: 0pt;"><br></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Medical Experimental</span><span class="docx_8" lang="en-US"> </span><span class="docx_9" lang="en-US">Technology</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Four years</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Bachelor of Science</span></p></td>
+     <td style="display: none; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; text-indent: 0pt;"><br></p></td>
+    </tr>
+    <tr style="height: 32pt; text-align: center;">
+     <td rowspan="2" style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 11pt; font-size: 11pt; text-decoration: none;">School of Pharmacy</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Pharmacy</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Four years</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Bachelor of Science</span></p></td>
+     <td style="display: none; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; text-indent: 0pt;"><br></p></td>
+    </tr>
+    <tr style="height: 34.75pt; text-align: center;">
+     <td style="display: none; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; text-indent: 0pt;"><br></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Traditional Chinese Pharmacology</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Four years</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Bachelor of Science</span></p></td>
+     <td style="display: none; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; text-indent: 0pt;"><br></p></td>
+    </tr>
+    <tr style="height: 32pt; text-align: center;">
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">School of Nursing</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Nursing</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Four years</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Bachelor of Science</span></p></td>
+     <td style="display: none; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; text-indent: 0pt;"><br></p></td>
+    </tr>
+    <tr style="height: 32pt; text-align: center;">
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">School of Humanities and Management</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Applied Psychology</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Four years</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Bachelor of Science</span></p></td>
+     <td style="display: none; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; text-indent: 0pt;"><br></p></td>
+    </tr>
+    <tr style="height: 32pt; text-align: center;">
+     <td rowspan="3" style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 11pt; font-size: 11pt; text-decoration: none;">School of Biomedical Engineering</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Biomedical Engineering</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Four years</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Bachelor of Engineering</span></p></td>
+     <td style="display: none; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; text-indent: 0pt;"><br></p></td>
+    </tr>
+    <tr style="height: 32pt; text-align: center;">
+     <td style="display: none; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; text-indent: 0pt;"><br></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Information Management and Information System</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Four years</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Bachelor of Engineering</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">None</span></p></td>
+    </tr>
+    <tr style="height: 32pt; text-align: center;">
+     <td style="display: none; border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; text-indent: 0pt;"><br></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Information Resources Management</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Four years</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(0, 0, 0); min-height: 12pt; font-size: 12pt; text-decoration: none;">Bachelor of</span><span class="docx_8" lang="en-US"> </span><span class="docx_9" lang="en-US">Management</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">None</span></p></td>
+    </tr>
+   </tbody>
+  </table>
+  <p style="text-indent: -84.35pt; margin-left: 84.35pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">II. Language:&nbsp;</span><strong style="font-family: var(--docx-minorHAnsi-font); text-indent: 2em;"><span style="font-family: 'times new roman';font-size: 19px">II. Language: </span></strong><span style="font-family: &quot;times new roman&quot;; font-size: 19px;">Chinese</span><span style="font-size: 14pt;">&nbsp;</span></p>
+  <p style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">III. Enrollment quota: </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: normal; min-height: 14pt; font-size: 14pt;">30</span></p>
+  <p style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">IV. Application requirements</span></p>
+  <table class="docx_4" style="width: 420pt; background-color: inherit; table-layout: auto; margin-left: auto; margin-right: auto;">
+   <colgroup>
+    <col style="width: 83.25pt;">
+    <col style="width: 336.75pt;">
+   </colgroup>
+   <tbody>
+    <tr class="firstRow" style="height: 33pt; text-align: center;">
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">Nationality</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: left; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt;">N</span><span style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt;">on-Chinese citizen</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt;"> with the f</span><span style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt;">oreign passport</span></p></td>
+    </tr>
+    <tr style="height: 32pt; text-align: center;">
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">Age</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: left; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">Age of 18 to 30</span></p></td>
+    </tr>
+    <tr style="height: 34pt; text-align: center;">
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">Educatio</span><span id="_GoBack"></span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">n</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: left; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">Senior high school diploma </span><span style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt;">or </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt;">with </span><span style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt;">equivalent</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt;"> </span><span style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt;">qualification</span></p></td>
+    </tr>
+    <tr style="height: 32pt; text-align: center;">
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">Language</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: left; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">Chinese proficiency must reach HSK Level 4 or above or</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;"> </span><span style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt;">the equivalent</span></p></td>
+    </tr>
+    <tr style="height: 67pt; text-align: center;">
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p style="text-align: center; vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; font-style: normal; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">Others</span></p></td>
+     <td style="border-width: 0.5pt; border-style: solid; border-color: rgb(0, 0, 0); background-color: inherit; vertical-align: middle; padding: 0pt 5.4pt;"><p class="docx-num-1-0" style="border-width: 0pt; border-style: solid; border-color: black; margin: 0pt 0pt 15pt; line-height: calc(100% + 20px); vertical-align: middle; text-indent: 0pt;"><span lang="null" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">Healthy and physically</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;"> </span><span lang="null" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">fit for </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">related </span><span lang="null" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">professional </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">study</span><span lang="null" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">;</span></p><p class="docx-num-1-0" style="border-width: 0pt; border-style: solid; border-color: black; margin: 0pt 0pt 15pt; line-height: calc(100% + 20px); vertical-align: middle; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">Law abiding&amp;</span><span lang="null" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">No criminal record;</span></p><p class="docx-num-1-0" style="text-align: left; vertical-align: middle; text-indent: 0pt;"><span lang="null" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">Enough</span><span lang="null" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">&nbsp;</span><span lang="null" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">financial capacity to pay </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">full </span><span lang="null" style="font-family: &quot;Times New Roman&quot;; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none;">tuition, accommodation, etc.</span></p><p class="docx-num-1-0" style="text-align: left; vertical-align: middle; text-indent: 0pt;"><span lang="null" style="font-family: &quot;Times New Roman&quot;; font-style: normal; text-transform: none; color: rgb(34, 34, 34); min-height: 12pt; font-size: 12pt; text-decoration: none; background-color: inherit;">accept Chinese as the teaching and examination language</span></p></td>
+    </tr>
+   </tbody>
+  </table>
+  <p style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">V. Application&nbsp;Deadline:</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">&nbsp;</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">10</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;"><sup>th </sup></span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">July </span></p>
+  <p style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">VI.&nbsp;</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">Tuition and Fees </span></p>
+  <p style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">1.</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;"> </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Registration fee: 500&nbsp;RMB/&nbsp;person, non-refundable</span></p>
+  <p style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">2. Tuition fee:</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;"> </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">20,000 RMB</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;"> for one </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">academic year</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">; </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; color: rgb(34, 34, 34); min-height: 14pt; font-size: 14pt; background-color: rgb(255, 255, 255);">Pay b</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; text-transform: none; color: rgb(34, 34, 34); min-height: 14pt; font-size: 14pt; background-color: rgb(255, 255, 255);">efore or on arrival</span></p>
+  <p style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">3.</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;"> </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Accommodation fee: 6000 RMB//double room/</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">one </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">academic&nbsp;year；</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; color: rgb(34, 34, 34); min-height: 14pt; font-size: 14pt; background-color: rgb(255, 255, 255);">Pay b</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: normal; font-style: normal; text-transform: none; color: rgb(34, 34, 34); min-height: 14pt; font-size: 14pt; background-color: rgb(255, 255, 255);">efore or on arrival</span></p>
+  <p class="docx-num-2-0" style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Other expenses:&nbsp;</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; text-transform: none; color: rgb(34, 34, 34); min-height: 14pt; font-size: 14pt; background-color: rgb(255, 255, 255);">Fees for&nbsp;</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; text-transform: none; color: rgb(34, 34, 34); min-height: 14pt; font-size: 14pt; background-color: rgb(255, 255, 255);">books</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; text-transform: none; color: rgb(34, 34, 34); min-height: 14pt; font-size: 14pt; background-color: rgb(255, 255, 255);">, physical examination, medical treatment, comprehensive insurance, residence permit, water and electricity, network, etc. shall be paid</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-style: normal; text-transform: none; color: rgb(34, 34, 34); min-height: 14pt; font-size: 14pt; background-color: rgb(255, 255, 255);"> on time as requested.</span></p>
+  <p class="docx-num-0--1" style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">VII</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">. Scholarship</span></p>
+  <p class="docx-num-0--1" style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: normal; color: black; min-height: 14pt; font-size: 14pt;">Guangdong Medical University provides scholarships to support outstanding students to study at GDMU. Please refer to Appendix for more details.</span></p>
+  <p style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">VIII.&nbsp;Contact information</span></p>
+  <p style="text-align: justify; text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">Contact Person</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">: </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Ms.&nbsp;</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">So</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">ng</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">, </span><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Office of International Cooperation and Exchanges</span></p>
+  <p style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">Tel</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">: </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">+86-769-22896369</span></p>
+  <p style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">Address</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">:</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;"> </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Room&nbsp;608,&nbsp;Administration Building, Guangdong Medical University, No.1 Xincheng Blvd, Songshan Lake National High-tech Industrial Development Zone,&nbsp;Dongguan</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;"> City</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">,&nbsp;Guangdong</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;"> Province</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">, P.R.C.&nbsp;Postcode:&nbsp;523808</span></p>
+  <p style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">Email</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; font-weight: bold; min-height: 14pt; font-size: 14pt;">:</span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;"> </span><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">international</span><span class="docx_7" style="font-family: &quot;Times New Roman&quot;; font-style: normal; text-transform: none; color: rgb(17, 17, 17); min-height: 14pt; font-size: 14pt; text-decoration: none; background-color: rgb(255, 255, 255);">@gdmu.edu.cn</span></p>
+  <p style="text-indent: 0pt;"><span lang="en-US" style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">IX. Appendix（1-5）</span></p>
+  <p style="text-indent: 0pt;"><br></p>
+  <p style="text-align: right; text-indent: 0pt;"><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Office of International Cooperation and Exchanges</span></p>
+  <p style="text-align: right; text-indent: 0pt;"><span style="font-family: &quot;Times New Roman&quot;; min-height: 14pt; font-size: 14pt;">Guangdong Medical University</span></p>
+  <p style="line-height: 1; text-align: justify; vertical-align: baseline; text-indent: 0pt;"><br></p>
+ </article>
+</section>
+</div></div>
+</div></div><div id="div_vote_id"></div>
+        <div class="n_fy">
+
+     <div class="fy_1"></div>
+       <div class="fy_1"> next:<a href="1258.htm">Foreign Language Teachers Recruitment (2023)</a></div>
+</p>
+
+      
+    </div>
+</div>
+
+
+
+
+
+<p>
+    <UL style="list-style-type:none;width: 840px;float: right;">
+        <li>附件【<a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1328563806&wbfileid=99E9969D3DDD77F468F3F11C9E1E5296" target="_blank">Annex 1：APPLICATION FORM FOR ADMISSION AS INTERNATIONAL UNDERGRADUATE STUDENT.docx</a>】已下载<span id="nattach11615418"><script language="javascript">getClickTimes(11615418,1328563806,"wbnewsfile","attach")</script></span>次</li>
+        <li>附件【<a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1328563806&wbfileid=36EE82C17181F746A6952E1C211E6D2F" target="_blank">Annex 2：Applicant’s Letter of Integrity.doc</a>】已下载<span id="nattach11615419"><script language="javascript">getClickTimes(11615419,1328563806,"wbnewsfile","attach")</script></span>次</li>
+        <li>附件【<a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1328563806&wbfileid=351EA986A4625889A38648A2F8A209F7" target="_blank">Annex 3：FOREIGNER PHYSICAL EXAMINATION FORM.pdf</a>】已下载<span id="nattach11615420"><script language="javascript">getClickTimes(11615420,1328563806,"wbnewsfile","attach")</script></span>次</li>
+        <li>附件【<a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1328563806&wbfileid=0BF92CA0D6297AA83C0304BC892FD272" target="_blank">Annex 4：Financial Support Guarantee Statement for International Students.docx</a>】已下载<span id="nattach11615421"><script language="javascript">getClickTimes(11615421,1328563806,"wbnewsfile","attach")</script></span>次</li>
+        <li>附件【<a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1328563806&wbfileid=4F95DE69F0D7D707FCEE9B0B78242AE0" target="_blank">Annex 5：Application Form for International Freshmen Scholarship of GDMU.docx</a>】已下载<span id="nattach11615422"><script language="javascript">getClickTimes(11615422,1328563806,"wbnewsfile","attach")</script></span>次</li>
+    </UL>
+</p>
+
+
+</form>
+</div>
+
+
+
+
+
+<DIV class="c_foot" style="padding:10px 0; background: #0b3291;">
+<DIV class="c_footbox" style="background: url(../../xgyw/dfiles/11274/xtp/foot_bg.jpg) no-repeat;">
+<DIV class="c_foot_1" style="height: 142px; padding:0; border:0;">
+<DIV class="foot_1 fl" style="padding-top:20px;width:190px">    
+<img src="../../images/logofoot.png" style="padding-right: 22px; border-right-color: rgb(99, 124, 185); border-right-width: 2px; border-right-style: solid;"> 
+
+</DIV>
+<DIV class="foot_2 bq fl" style="padding-top:34px; padding-left:30px;"><script language="javascript" src="/system/resource/js/news/mp4video.js"></script>
+<p><p>Address: No. 2 Wenming East Road, Xiashan, Zhanjiang, Guangdong</p> 
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Songshan Lake Science and Technology Park, Dongguan, Guangdong</p> 
+<p>Copyright©2014,Guangdong Medical University</p></p></DIV>
+<DIV class="foot_3 fr" style="padding-top:48px;">
+    <a href="https://weibo.com/u/3274792502" onclick="_addDynClicks(&#34;wbimage&#34;, 1580737805, 41450)"><img src="../../xgyw/dfiles/11274/images/f_icon1.png" /></a>
+
+
+    <div class="c_er fl">
+ <img src="../../xgyw/dfiles/11274/images/f_icon2.png" />
+ <div class="er_img">
+  <img src="../../xgyw/dfiles/11274/images/gong.jpg" /> <img src="../../xgyw/dfiles/11274/images/xiaoyou.jpg" />  <img src="../../xgyw/dfiles/11274/images/zhaosheng.jpg" />
+ </div>
+</div>
+</DIV>
+</DIV></DIV></DIV><script type="text/javascript" src="../../xgyw/dfiles/11274/js/newbase.js"></script>
+<script type="text/javascript" src="../../xgyw/dfiles/11274/js/bdtx1.js"></script>
+<script type="text/javascript" src="../../xgyw/dfiles/11274/js/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="../../xgyw/dfiles/11274/js/owl.carousel.js"></script>
+<script type="text/javascript" src="../../xgyw/dfiles/11274/js/jquery.superslide2.js"></script>
+<script type="text/javascript">
+$(function(){
+    $("dl").hide();
+    $("li.mainmenu").hover(function(){
+        $(this).find("dl").stop(true,true);
+        $(this).find("dl").slideDown();
+    },function(){
+        $(this).find("dl").stop(true,true);
+        $(this).find("dl").slideUp();
+    });
+    
+    if($('#index-bxslider').length>0){
+        $('#index-bxslider').bxSlider({
+            auto: true,
+            pagerCustom: '#bx-pager',
+            nextText: ' ',
+            prevText: ' ',
+            speed: 600,
+            pause: 5000
+        });
+    };
+    
+   
+    
+  
+})
+</script>
+</BODY></HTML>
+</html>

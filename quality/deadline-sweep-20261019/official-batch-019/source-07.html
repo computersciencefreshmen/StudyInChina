@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<meta name="description" content="" />
+<script language="javascript" src="../../dfiles/8503/themes/100576/enfzu/js/image_fader.js" type="text/javascript"></script>
+<link href="../../dfiles/8503/themes/100576/enfzu/css/css.css" rel="stylesheet" type="text/css" />
+<title>Tuition Information-Welcome to Fuzhou University!</title><META Name="keywords" Content="Welcome to Fuzhou University!,Tuition,Information" />
+<META Name="description" Content="FUZHOU UNIVERSITYTUITION INFORMATION FOR INTERNATIONAL STUDENTSCategory of StudentsTuition(RMB)Application fee(RMB)Accommodation(RMB)Other expenses(RMB)Chinese Language Students14000 / year8000 / semester500Single Room:Each person 7000 / yearDouble Room: Each person 3500 / yearOther costs, including that for resident permit, medical checkup, daily living, insurance, textbooks, etc. are at the e..." />
+<!--Announced by Visual SiteBuilder 9-->
+<link rel="stylesheet" type="text/css" href="../../_sitegray/_sitegray_d.css" />
+<script language="javascript" src="../../_sitegray/_sitegray.js"></script>
+<!-- CustomerNO:77656262657232307778475050555742000100004f56 -->
+<link rel="stylesheet" type="text/css" href="../../info.vsb.css" />
+<script type="text/javascript" src="/system/resource/js/counter.js"></script>
+<script type="text/javascript">_jsq_(1006,'/info.jsp',1009,1744991591)</script>
+</head>
+
+<body>
+<div id="header">
+      <div id="logo_area">
+        <div id="logo">
+<!-- 网站logo图片地址请在本组件"内容配置-网站logo"处填写 -->
+<a href="../../index.htm" title="福州大学英文版"><img src="../../dfiles/8503/themes/100576/enfzu/images/logo.jpg" width="223" height="78"></a></div>
+         <div class="cleaner"></div>
+</div>
+      
+      <div id="menu">
+      <ul>
+                  <li><a href="../../index.htm" title="Home">Home</a></li>
+    <li><a href="../../About_FZU.htm" title="About FZU">About FZU</a></li>
+    <li><a href="../../School.htm" title="Schools and Departments">Schools and Departments</a></li>
+    <li><a href="../../Academics.htm" title="Academics">Academics</a></li>
+    <li><a href="../../Students.htm" title="International Students">International Students</a></li>
+    <li><a href="https://www.fzu.edu.cn" title="Chinese">Chinese</a></li>
+     
+        </ul>
+      </div>
+ 
+  </div>
+  
+  <div id="image_fader">
+  <style type="text/css">
+ul,li{
+    padding:0;
+    margin:0;
+    list-style:none;}
+#flashBoxu_u2_{
+    width:960px;
+    height:240px;
+    border:0px solid #EEE;
+    position:relative;
+    margin-left: auto;
+    margin-right: auto;}
+#flashBoxu_u2_ img{
+    /*初始不要显示*/
+    display:none;
+    /*用边框来实现空位，因为margin和paading有时会引起些麻烦*/
+    border:0px solid #FFF;}
+#flashBoxu_u2_ ul{
+    display:none;
+    position:absolute;
+    right:7px;
+    bottom:3px;
+    font:9px tahoma;}
+#flashBoxu_u2_ ul li{
+    display:none;
+    float:left;
+    width:12px;
+    height:12px;
+    line-height:12px;
+    margin-right:3px;
+    border:0px solid #999;
+    background:#F0F0F0;
+    text-align:center;
+    cursor:pointer;}
+#flashBoxu_u2_ ul li.hover{
+    border-color:red;
+    background:#FFE1E1;
+    color:red;}
+</style>
+<script type="text/javascript">
+function flashBoxCtrl(o){
+    this.obj=document.getElementById(o);
+    //这个私有方法虽然写了，但暂时没用到
+    function addListener(ele,eventName,functionBody){
+        if (ele.attachEvent){
+            ele.attachEvent("on"+eventName, functionBody);
+        }else if (ele.addEventListener){
+            ele.addEventListener("on"+eventName,functionBody, false);
+        }else{
+            return false;
+        }
+    }
+    //初始化
+    this.init=function(){
+        var objImg=this.obj.getElementsByTagName("img");
+        var tagLength=objImg.length;
+        if (tagLength>0){
+            var oUl=document.createElement("ul");
+            oUl.setAttribute("id",o+"numTag");
+            for (var i=0;i<tagLength;i++){
+                var oLi=oUl.appendChild(document.createElement("li"));
+                if (i==0){
+                    oLi.setAttribute("class","hover"); //初始化时把第一个设置为高亮
+                    oLi.setAttribute("className","hover");
+                }
+                //设置标签的数字
+                oLi.appendChild(document.createTextNode((i+1)));
+            }
+            this.obj.appendChild(oUl);
+            objImg[0].style.display="block";
+            //设置标签事件
+            var oTag=this.obj.getElementsByTagName("li");
+            for (var i=0;i<oTag.length;i++){
+                var flag = 0;
+                var temp = 0;
+                var timeout=null;
+                var step = function(){
+                    for (j=0;j<oTag.length;j++){
+                        oTag[j].className="";
+                        objImg[j].style.display="none";
+                    }
+                    this.className="hover";
+                    flag = flag>=oTag.length-1?0:flag+1;
+                    objImg[flag].style.display="block";
+                    oTag[flag].className = "hover";
+                    timeout = setTimeout(step,4000);
+                };
+                oTag[i].onmouseover=function(){
+                    for (j=0;j<oTag.length;j++){
+                        oTag[j].className="";
+                        objImg[j].style.display="none";
+                        temp = j;
+                    }
+                    this.className="hover";
+                    objImg[this.innerHTML-1].style.display="block";
+                    temp = this.innerHTML-1;
+                    flag = i;
+                    clearInterval(timeout);
+                }
+                oTag[i].onmouseout = function(){
+                    for (j=0;j<oTag.length;j++){
+                        oTag[j].className="";
+                        objImg[j].style.display="none";
+                    }
+                    flag = temp;
+                    objImg[temp].style.display="block";
+                    oTag[temp].className = "hover";
+                    timeout = setTimeout(step,4000);
+                }
+                if(i==0)
+                {
+                    timeout = setTimeout(step,4000);
+                }
+            }
+        }
+    };
+    //自动滚动的方法还没写
+    this.imgRoll=function(){};
+    //生成对象时自动加载init()方法以初始化对象
+    this.init();
+}
+</script>
+<table cellspacing="0" cellpadding="0" border="0"><tr><td><div id="flashBoxu_u2_"><img src="../../images/21/05/26/1myuvagn58/banner3.png" border="0" width="960" height="240" /><img src="../../images/21/05/26/1myuvagn58/banner2.png" border="0" width="960" height="240" /><img src="../../images/21/05/26/1myuvagn58/banner1.png" border="0" width="960" height="240" /><img src="../../images/21/05/26/1myuvagn58/banner4.png" border="0" width="960" height="240" /></div></td></tr></table><SCRIPT language="JavaScript">new flashBoxCtrl("flashBoxu_u2_");</SCRIPT>
+  </div>  <div id="content_area">
+   
+<script language="javascript" src="/system/resource/js/dynclicks.js"></script><script language="javascript" src="../../_dwr/interface/NewsvoteDWR.js"></script><script language="javascript" src="../../_dwr/engine.js"></script><script language="javascript" src="/system/resource/js/news/newscontent.js"></script><script language="javascript" src="/system/resource/js/ajax.js"></script><form name="_newscontent_fromname"><script language="javascript" src="/system/resource/js/jquery/jquery-latest.min.js"></script>
+<div id="sub_content_title"><img src="../../dfiles/8503/themes/100576/enfzu/images/title_ico.jpg" width="19" height="20" align="absmiddle" />&nbsp;Tuition Information</div>
+<div id="sub_content_content">
+<div id="vsb_content"><div class="v_news_content">
+<h2 style="color: rgb(51, 51, 51); font-family: &quot;Trebuchet MS&quot;, Arial, Helvetica, sans-serif; text-align: center; white-space: normal; background-color: rgb(255, 255, 255);">FUZHOU UNIVERSITY<br>TUITION INFORMATION FOR INTERNATIONAL STUDENTS</h2>
+<table width="98%" cellspacing="0" cellpadding="0" bordercolordark="#000000" bordercolorlight="#FFFFFF">
+ <tbody>
+  <tr class="firstRow">
+   <td width="184" colspan="2"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;"><strong>Category of Students</strong></p></td>
+   <td width="140"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Tuition<br><strong>(RMB)</strong></p></td>
+   <td width="99"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Application fee<br><strong>(RMB)</strong></p></td>
+   <td width="105"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Accommodation<br><strong>(RMB)</strong></p></td>
+   <td width="144"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Other expenses<br><strong>(RMB)</strong></p></td>
+  </tr>
+  <tr>
+   <td width="184" colspan="2"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Chinese Language Students</p></td>
+   <td width="140"><p style="color: rgb(102, 102, 102); text-align: justify; margin-bottom: 10px;">14000 / year<br>8000 / semester</p></td>
+   <td width="99" rowspan="10"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">500</p></td>
+   <td width="105" rowspan="10"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Single Room:<br>Each person 7000 / year</p><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;"><br></p><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;"><br></p><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Double Room: Each person 3500 / year</p></td>
+   <td width="144" rowspan="10"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Other costs, including that for resident permit, medical checkup, daily living, insurance, textbooks, etc. are at the expense of the students.</p></td>
+  </tr>
+  <tr>
+   <td width="184" colspan="2"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Short-term Programs</p></td>
+   <td width="140"><p style="color: rgb(102, 102, 102); text-align: justify; margin-bottom: 10px;">One-month = 3000. Over one month, each extra week is 650.<br>Three-month = 8000</p></td>
+  </tr>
+  <tr>
+   <td width="105" rowspan="3"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Undergraduate Students<br>General further-education Students</p></td>
+   <td width="78"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Liberal Arts</p></td>
+   <td width="140"><p style="color: rgb(102, 102, 102); text-align: justify; margin-bottom: 10px;">14000 / year<br>8000 / semester</p></td>
+  </tr>
+  <tr>
+   <td width="78"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Science &amp; Engineering</p></td>
+   <td width="140"><p style="color: rgb(102, 102, 102); text-align: justify; margin-bottom: 10px;">16000 / year<br>9000 / semester</p></td>
+  </tr>
+  <tr>
+   <td width="78"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Fine Arts &amp; Music</p></td>
+   <td width="140"><p style="color: rgb(102, 102, 102); text-align: justify; margin-bottom: 10px;">21000 / year<br>12000 / semester</p></td>
+  </tr>
+  <tr>
+   <td width="105" rowspan="3"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Master’s Programs<br>Advanced further-education Students</p></td>
+   <td width="78"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Liberal Arts</p></td>
+   <td width="140"><p style="color: rgb(102, 102, 102); text-align: justify; margin-bottom: 10px;">20000 / year<br>11000 / semester</p></td>
+  </tr>
+  <tr>
+   <td width="78"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Science &amp; Engineering</p></td>
+   <td width="140"><p style="color: rgb(102, 102, 102); text-align: justify; margin-bottom: 10px;">24000 / year<br>13000 / semester</p></td>
+  </tr>
+  <tr>
+   <td width="78"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Fine Arts &amp; Music</p></td>
+   <td width="140"><p style="color: rgb(102, 102, 102); text-align: justify; margin-bottom: 10px;">30000 / year<br>16500 / semester</p></td>
+  </tr>
+  <tr>
+   <td width="105" rowspan="2"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Ph.D Programs</p><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Senior Scholars</p></td>
+   <td width="78"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Liberal Arts</p></td>
+   <td width="140"><p style="color: rgb(102, 102, 102); text-align: justify; margin-bottom: 10px;">25000 / year<br>13500 / semester</p></td>
+  </tr>
+  <tr>
+   <td width="78"><p style="text-align:center;color: rgb(102, 102, 102); margin-bottom: 10px;">Science &amp; Engineering</p></td>
+   <td width="140"><p style="color: rgb(102, 102, 102); text-align: justify; margin-bottom: 10px;">30000 / year<br>16000 / semester</p></td>
+  </tr>
+ </tbody>
+</table>
+<p style="color: rgb(102, 102, 102); text-align: justify; margin-top: 0px; margin-bottom: 10px; font-family: &quot;Trebuchet MS&quot;, Arial, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);"><strong> </strong></p>
+<p><br></p>
+</div></div>
+</div>
+          
+</form>
+    
+  </div>
+  
+  <div id="footer"><!-- 版权内容请在本组件"内容配置-版权"处填写 -->
+<p style="text-align: center;">Copyright © 2011 Fuzhou University.</p></div>
+</body>
+</html>

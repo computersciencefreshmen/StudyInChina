@@ -1,0 +1,962 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "official-batch-021-independent-review-v1",
+  "reviewedAt": "2026-10-19T06:06:52.844Z",
+  "reviewer": "deadline_architecture",
+  "reviewType": "source-only-independent-exact-record-and-date-scope-review",
+  "reviewedReport": {
+    "path": "quality/deadline-sweep-20261019/official-batch-021/report.json",
+    "sha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440",
+    "batchId": "official-date-only-021-20261019"
+  },
+  "result": "source-only-pass-with-explicit-unresolved-scopes",
+  "approvalScope": "Retained source observations and exact record bindings only. No permission for canonical date/status mutation, publication or full-fact freshness renewal is issued.",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "targetQueueSha256": "06b1a66942c4e6866f4ad3c7217eba8bc76ff6ba93aa61ae92d66bade53eaeb7",
+  "additionalSelectionReceiptSha256": "3ca8778c34230d3882908d7504941f5e2985a7ff9802fabad38fae5c5fe92489",
+  "summary": {
+    "exactRecordsReviewed": 17,
+    "baseQueueRecords": 14,
+    "additionalSameSourceRecords": 3,
+    "schoolsReviewed": 6,
+    "checksPassed": 27,
+    "checksFailed": 0,
+    "recordChecksPassed": 17,
+    "recordResults": {
+      "unknown": 13,
+      "closed": 4
+    },
+    "newOfficialReads": 0,
+    "canonicalWrites": 0,
+    "gitMutations": 0,
+    "sharedStateWrites": 0,
+    "fullFactsCertified": 0
+  },
+  "checks": [
+    {
+      "id": "frozen-final-report-pin",
+      "passed": true,
+      "detail": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "id": "canonical-six-file-byte-and-snapshot-pins",
+      "passed": true,
+      "detail": {
+        "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+        "inputFileSha256": {
+          "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+          "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+          "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+          "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+          "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+          "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+        }
+      }
+    },
+    {
+      "id": "inventory-and-v4-queue-pins",
+      "passed": true,
+      "detail": {
+        "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+        "queueSha256": "06b1a66942c4e6866f4ad3c7217eba8bc76ff6ba93aa61ae92d66bade53eaeb7"
+      }
+    },
+    {
+      "id": "six-exact-schools",
+      "passed": true,
+      "detail": [
+        "uni-guangzhou-medical-university",
+        "uni-guangzhou-university",
+        "uni-guangzhou-university-of-chinese-medicine",
+        "uni-guilin-medical-university",
+        "uni-guilin-university-of-electronic-technology",
+        "uni-guilin-university-of-technology"
+      ]
+    },
+    {
+      "id": "base14-and-explicit-additional3-exact17-once",
+      "passed": true,
+      "detail": {
+        "baseRecordIds": [
+          "sch-gap-sparse-depth-0808-gzhmu-guangdong-government-freshmen",
+          "cycle-2026-gzhmu-medical-fields-academic-doctorate",
+          "sch-gap-clw-sw-gzhu-belt-road-scholarship",
+          "cycle-gap-local-gzucm-b-tcm-cn-2026-2027-other-fee-reference",
+          "cycle-gap-local-strong-glmu-b-clinical-medicine-cn-2026-2027-other",
+          "cycle-gap-local-strong-glmu-b-pharmacy-cn-2026-2027-other",
+          "cycle-gap-wave3-guet-ai-english-bachelor-2026-2027-other-fee-reference",
+          "cycle-gap-wave3-guet-chinese-language-program-2026-2027-other-fee-reference",
+          "cycle-gap-wave3-guet-cs-bilingual-master-2026-2027-other-fee-reference",
+          "cycle-gap-wave3-guet-cs-english-bachelor-2026-2027-other-fee-reference",
+          "cycle-gap-mew-0805-scw-glut-civil-engineering-master-chinese-2026-2027-other-fee-reference",
+          "cycle-gap-mew-0805-scw-glut-cs-bachelor-english-2026-2027-other-fee-reference",
+          "cycle-gap-mew-0805-scw-glut-long-chinese-year-2026-2027-other-fee-reference",
+          "cycle-gap-mew-0805-scw-glut-tcsol-bachelor-2026-2027-other-fee-reference"
+        ],
+        "additionalRecordIds": [
+          "sch-gap-wave3-guet-guangxi-asean-full-scholarship",
+          "sch-gap-mew-0805-scw-glut-guangxi-asean-scholarship",
+          "sch-gap-mew-0805-scw-glut-belt-road-president-scholarship"
+        ]
+      }
+    },
+    {
+      "id": "root-extension-receipt-bytes-and-exact-award-pins",
+      "passed": true,
+      "detail": {
+        "path": "quality/deadline-sweep-20261019/heartbeat-0554/additional-same-source-selection-v1.json",
+        "sha256": "3ca8778c34230d3882908d7504941f5e2985a7ff9802fabad38fae5c5fe92489"
+      }
+    },
+    {
+      "id": "no-prior-exact-record-overlap",
+      "passed": true,
+      "detail": {
+        "reportsScanned": 20,
+        "overlap": []
+      }
+    },
+    {
+      "id": "eleven-original-capture-receipt-pins",
+      "passed": true,
+      "detail": [
+        {
+          "name": "gzhmu-2026-graduate",
+          "url": "https://fao.gzhmu.edu.cn/info/1301/9522.htm",
+          "observedAt": "2026-10-19T05:56:39.830906+00:00",
+          "rawSha256": "820a3c7791bf3e5396263a5c610e4067ce53134fb7bccdfd7da2afaef4c47c03",
+          "textSha256": "c895c03f16a3c2deb18a38e5af9c6d41dbc424e978cdd4734f1b51db33deb988",
+          "bytes": 36586
+        },
+        {
+          "name": "gzhu-international-talent",
+          "url": "https://www.gzhu.edu.cn/rcpy1.htm",
+          "observedAt": "2026-10-19T05:56:39.831911+00:00",
+          "rawSha256": "6c87a8ba7dcc90ab7aba6c7dd0e4d7d7b0a11c99eaf8e577fca3dc83a347da97",
+          "textSha256": "1add5c6bd3bc47be5a8b95eb83889e51c0ba9209dc1e48f62d5176d249e97f74",
+          "bytes": 39659
+        },
+        {
+          "name": "gzhu-handbook",
+          "url": "https://xxgk.gzhu.edu.cn/GJJYXSSC.pdf",
+          "observedAt": "2026-10-19T05:56:39.832910+00:00",
+          "rawSha256": "754b1c9a0440dc694e7f77bdbcf141c4e33d2dda60ae49e9ddffe7833e25a730",
+          "textSha256": "2e8afb00d018151cb45171d3ea2091e5a55ea796f9fe69eaebd1f12caff32bbb",
+          "bytes": 915504
+        },
+        {
+          "name": "gzucm-2026-undergraduate",
+          "url": "https://studyoverseas.gzucm.edu.cn/info/1171/2081.htm",
+          "observedAt": "2026-10-19T05:56:39.833911+00:00",
+          "rawSha256": "554dbb1c5114833f2ec3a6e932782ba6860852b9569db82df6edb5531222022f",
+          "textSha256": "893846ca8c6cf08d4c1b3b95400bd50a256c9e712a3a19cbe5abf635e6310f80",
+          "bytes": 9494
+        },
+        {
+          "name": "gzucm-support",
+          "url": "https://studyoverseas.gzucm.edu.cn/__local/B/8A/53/9D531B3B0DC40045B0E47DFD76C_FC43920B_48C18.pdf",
+          "observedAt": "2026-10-19T05:56:43.140223+00:00",
+          "rawSha256": "b953c50382a61b9e1d0658de0410ba65aa12e4756b865a166df1af501b0c996a",
+          "textSha256": "0d5f6f2f79760cac5079db954d1dd99c9d762aaad9dbb36b4ed614863db6630b",
+          "bytes": 298008
+        },
+        {
+          "name": "glmu-2026-programmes",
+          "url": "https://www.glmu.edu.cn/gjjyjlzx/info/1044/2405.htm",
+          "observedAt": "2026-10-19T05:56:44.995649+00:00",
+          "rawSha256": "051796e2da0398da26c8759e4f37b3a80e2ba9fefa1cc786ff99b1dc4f6ba93c",
+          "textSha256": "b64500f5ace32869aa3ca80109a27633fd9ec73581f48caeaa62eed638b6e646",
+          "bytes": 40911
+        },
+        {
+          "name": "guet-guide",
+          "url": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+          "observedAt": "2026-10-19T05:56:46.110251+00:00",
+          "rawSha256": "64775effd6594177b04fc9a8e807ee34047a2d3fb8b008110dd8e71ce36a9641",
+          "textSha256": "643337f522678aec4fbea429e9a844595478b8ebc6571fac5dae94f83664fa38",
+          "bytes": 1573497
+        },
+        {
+          "name": "glut-directory",
+          "url": "https://gj.glut.edu.cn/info/1072/2751.htm",
+          "observedAt": "2026-10-19T05:56:52.107856+00:00",
+          "rawSha256": "a641d342187a673344017ef3f21b7b796179f0623ff6227f040658317efa6ba9",
+          "textSha256": "6eb2d5077a6c1683e2ebda75963d29c8a14ab7055a1c826c3032b50e1a953f83",
+          "bytes": 80816
+        },
+        {
+          "name": "glut-2026-guide",
+          "url": "https://gj.glut.edu.cn/info/1072/3787.htm",
+          "observedAt": "2026-10-19T05:56:54.883481+00:00",
+          "rawSha256": "9c281cab4641fa0d39119ea3d6ba200b0a91c77f9d6f5ca2fe3ea4e6d77a1429",
+          "textSha256": "eefce846dc2f16d496feaa050109beeeffe6acc7ab851d268bc3081abf773816",
+          "bytes": 147925
+        },
+        {
+          "name": "glmu-admission-guide-index",
+          "url": "https://www.glmu.edu.cn/gjjyjlzx/zszl/lhlxszsjz.htm",
+          "observedAt": "2026-10-19T06:00:10.759105+00:00",
+          "rawSha256": "3cbca0bc60925c553594c299317da0ae3f9e82d5911ba68cc4531afe24131391",
+          "textSha256": "d99ef143c999f5b496c4d86fb8c9530d79df308c47eeddcb21d38b7f4986e5dd",
+          "bytes": 16457
+        },
+        {
+          "name": "glmu-2026-undergraduate-guide",
+          "url": "https://www.glmu.edu.cn/gjjyjlzx/info/1161/2514.htm",
+          "observedAt": "2026-10-19T06:00:10.760106+00:00",
+          "rawSha256": "0ffa8d1657ced310d4f81344a7e0803a0c4c3b04f4e7030aa59c2692fa19befa",
+          "textSha256": "af8916418c569b93a9da79f8c33daefd2be8c51c44a9434ab1a6ab20fc809178",
+          "bytes": 22128
+        }
+      ]
+    },
+    {
+      "id": "evidence-group-and-record-pins-use-captured-originals",
+      "passed": true,
+      "detail": "Each group evidence and record original/date is bound to its exact retained capture receipt."
+    },
+    {
+      "id": "all-seventeen-full-row-program-source-and-state-checks",
+      "passed": true,
+      "detail": {
+        "records": 17,
+        "cycles": 12,
+        "awards": 5
+      }
+    },
+    {
+      "id": "all-quoted-date-fragments-in-captured-body",
+      "passed": true,
+      "detail": "Date fragments independently matched whitespace-normalized retained original text; PDF date/programme pages separately re-extracted from PDF bytes and visually inspected."
+    },
+    {
+      "id": "gzhmu-2026-academic-degree-applicant-window",
+      "passed": true,
+      "detail": "2026 academic doctorate online application March1–June30; later September registration is not a new window."
+    },
+    {
+      "id": "gzhmu-postregistration-award-separate-from-admission",
+      "passed": true,
+      "detail": "2026 graduate general admission June30 is not used for the independent freshman award."
+    },
+    {
+      "id": "gzhu-2021-handbook-year-and-registered-student-stage",
+      "passed": true,
+      "detail": "PDFpages1,13,14 independently extracted; autumn selection and five-working-day institutional publication do not date a2026 application."
+    },
+    {
+      "id": "gzucm-primary-guide-embeds-exact-original-pdf",
+      "passed": true,
+      "detail": "Raw official HTML embeds the same exact canonical supporting PDF; year, degree and Chinese-language programme match."
+    },
+    {
+      "id": "gzucm-two-rounds-and-second-opening-preserved",
+      "passed": true,
+      "detail": "Candidate final closing day isJune1; first relative opening staysunknown and second-roundApril16 is not full-cycle opening."
+    },
+    {
+      "id": "gzucm-general-vs-csc-route-not-borrowed",
+      "passed": true,
+      "detail": "General bachelor applicant rounds do not establish CSCTypeA/B award deadlines; not assessed as independent awards."
+    },
+    {
+      "id": "glmu-programme-to-index-to-exact-guide-navigation",
+      "passed": true,
+      "detail": "Two retained official navigation edges verified by parsing raw HTML hrefs."
+    },
+    {
+      "id": "glmu-2026-exact-clinical-and-pharmacy-routes",
+      "passed": true,
+      "detail": "2026 guide itself names the two exact bachelor routes and online applicantJune30; registration/review is separate."
+    },
+    {
+      "id": "guet-june15-no-year-and-no-passport-date-inference",
+      "passed": true,
+      "detail": {
+        "assessment": "All16 PDFpage text has no application/entry year. The only20xx-shaped number is a2000CNY dorm fee, not a year; cover separately inspected. June15 stays undated and not marked recurring.",
+        "yearLikeNumberContexts": [
+          "四人间：2000元/年"
+        ]
+      }
+    },
+    {
+      "id": "guet-added-asean-award-not-general-or-specialised-date",
+      "passed": true,
+      "detail": "A specialised-scholarship submission instruction and university-hosting statement do not prove the exactASEANaward deadline."
+    },
+    {
+      "id": "glut-current-guide-retains-directory-year-provenance",
+      "passed": true,
+      "detail": {
+        "assessment": "2026 original guide explicitly cites the exact2023programme-directory URL as visible plain text. This reference is not an HTMLanchor; publication/year/fees are not applicant dates.",
+        "referencedDirectoryUrl": "https://gj.glut.edu.cn/info/1072/2751.htm",
+        "referenceType": "literal-visible-official-url-not-anchor"
+      }
+    },
+    {
+      "id": "glut-four-programmes-two-independent-awards-remain-unknown",
+      "passed": true,
+      "detail": "Fullcaptured guide has materials and application procedure but no applicant window; twoaddedawards retain separate unknown dates."
+    },
+    {
+      "id": "time-and-boundary-precision-not-invented",
+      "passed": true,
+      "detail": "Reviewed deadlines state calendar days only; no23:59/24:00,timezone or before/inclusive operator is invented. Office hours and financial timing are not cutoff clocks."
+    },
+    {
+      "id": "summary-four-closed-thirteen-unknown-and-null-preservation",
+      "passed": true,
+      "detail": {
+        "recordResults": {
+          "unknown": 13,
+          "closed": 4
+        },
+        "newClosedCandidates": 3,
+        "existingExpiredDay": 1,
+        "storedNullPreserved": 16
+      }
+    },
+    {
+      "id": "candidate-only-no-full-freshness-or-publication",
+      "passed": true,
+      "detail": "Source-only observations authorize no canonical/status/freshness/publication write."
+    },
+    {
+      "id": "final-report-and-canonical-bytes-unchanged-through-review",
+      "passed": true,
+      "detail": "Review accessed existing original files only; no network requests or shared mutations."
+    }
+  ],
+  "recordChecks": [
+    {
+      "recordId": "sch-gap-sparse-depth-0808-gzhmu-guangdong-government-freshmen",
+      "universityId": "uni-guangzhou-medical-university",
+      "selectionOrigin": "baseQueue14",
+      "collection": "scholarships",
+      "passed": true,
+      "result": "unknown",
+      "canonicalRecordSha256": "94af1e6b00d5fb694a5690b814bc6c85891a078b58f9afdb9ad452951bd1ace9",
+      "canonicalProgramPins": [],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-sparse-depth-0808-gzhmu-guangdong-government-freshmen",
+          "canonicalSourceSha256": "dc63a954e8070e4b4b95d3f02f9ac37fc4f92250e68fd166c64184f002744617"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://fao.gzhmu.edu.cn/info/1301/9522.htm",
+      "evidenceBodySha256": "820a3c7791bf3e5396263a5c610e4067ce53134fb7bccdfd7da2afaef4c47c03",
+      "observedAt": "2026-10-19T05:56:39.830906+00:00",
+      "semanticReview": "Freshman Guangdong award is paid after registration; general programme June30 does not establish its independent deadline.",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-2026-gzhmu-medical-fields-academic-doctorate",
+      "universityId": "uni-guangzhou-medical-university",
+      "selectionOrigin": "baseQueue14",
+      "collection": "admissionCycles",
+      "passed": true,
+      "result": "closed",
+      "canonicalRecordSha256": "d6239f49640225a2f51b0e6baa1329e931ad9d9464eb49268ad8852190f28cad",
+      "canonicalProgramPins": [
+        {
+          "programId": "program-guangzhou-medical-university-medical-fields-academic-doctorate",
+          "canonicalProgramSha256": "72b47f42d3e16ea2b22f6470e7981181b0f001087cf102fe8e68bef40bd48007"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "source-gzhmu-2026-international-graduate-admission",
+          "canonicalSourceSha256": "5ffc6322a0fab2e36a7667974ce105e29c4ea6249371205d8b5f5914d67314cd"
+        }
+      ],
+      "storedDeadline": "2026-06-30",
+      "officialDeadline": "2026-06-30",
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://fao.gzhmu.edu.cn/info/1301/9522.htm",
+      "evidenceBodySha256": "820a3c7791bf3e5396263a5c610e4067ce53134fb7bccdfd7da2afaef4c47c03",
+      "observedAt": "2026-10-19T05:56:39.830906+00:00",
+      "semanticReview": "2026 academic doctorate online application March1–June30; later September registration is not a new window.",
+      "errors": []
+    },
+    {
+      "recordId": "sch-gap-clw-sw-gzhu-belt-road-scholarship",
+      "universityId": "uni-guangzhou-university",
+      "selectionOrigin": "baseQueue14",
+      "collection": "scholarships",
+      "passed": true,
+      "result": "unknown",
+      "canonicalRecordSha256": "250ea69e1790da6950b01bb3a3cef7612a4b6984f7ed3732559bb00b29b26b56",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-clw-sw-gzhu-icl-master",
+          "canonicalProgramSha256": "9f1daa165ce215315c838f57ce87ede96f46ae1c1a55bc367ed833d83ac743e1"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-clw-sw-gzhu-belt-road-scholarship",
+          "canonicalSourceSha256": "7fcf602a234f508abc9e5075b99f8cd6dc8684294f7073894e081a09ed4dd31b"
+        },
+        {
+          "sourceId": "src-gap-scholarship-clw-sw-gzhu-belt-road-scholarship-support-1",
+          "canonicalSourceSha256": "5a240f5362bf5ae2306ab8ee2bdd4d33f6150b7b0e26de172293ff4c113db11d"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://xxgk.gzhu.edu.cn/GJJYXSSC.pdf",
+      "evidenceBodySha256": "754b1c9a0440dc694e7f77bdbcf141c4e33d2dda60ae49e9ddffe7833e25a730",
+      "observedAt": "2026-10-19T05:56:39.832910+00:00",
+      "semanticReview": "March2021 trial handbook annually selects awards during autumn for already registered students; no fixed2026 applicant cutoff.",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-local-gzucm-b-tcm-cn-2026-2027-other-fee-reference",
+      "universityId": "uni-guangzhou-university-of-chinese-medicine",
+      "selectionOrigin": "baseQueue14",
+      "collection": "admissionCycles",
+      "passed": true,
+      "result": "closed",
+      "canonicalRecordSha256": "b5616135556ebe420005ec01533c5b5e983a599da83e073e9487f4d63183f009",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-local-gzucm-b-tcm-cn",
+          "canonicalProgramSha256": "fa5083bf982b40244ebeb1a6e3a1f8a421fad9a3f723cb568ecdfe16af87153a"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-local-gzucm-b-tcm-cn",
+          "canonicalSourceSha256": "10c47f32513358b587f422b3e4052733ec88a5748ccec90082cb18c7ffc44489"
+        },
+        {
+          "sourceId": "src-gap-program-local-gzucm-b-tcm-cn-support-1",
+          "canonicalSourceSha256": "441d60e03c95833e4059f550743616f1848bad16e31b7ec6572aa803f7ac0ca8"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": "2026-06-01",
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://studyoverseas.gzucm.edu.cn/__local/B/8A/53/9D531B3B0DC40045B0E47DFD76C_FC43920B_48C18.pdf",
+      "evidenceBodySha256": "b953c50382a61b9e1d0658de0410ba65aa12e4756b865a166df1af501b0c996a",
+      "observedAt": "2026-10-19T05:56:43.140223+00:00",
+      "semanticReview": "2026 Chinese TCM five-year bachelor: first round ends April15, second April16–June1. June1 latest applicant deadline; April16 is only second-round opening.",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-local-strong-glmu-b-clinical-medicine-cn-2026-2027-other",
+      "universityId": "uni-guilin-medical-university",
+      "selectionOrigin": "baseQueue14",
+      "collection": "admissionCycles",
+      "passed": true,
+      "result": "closed",
+      "canonicalRecordSha256": "c79b1195527d110e837a047154e241dae04dab78be68e5ec46e597574fec3b13",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-local-strong-glmu-b-clinical-medicine-cn",
+          "canonicalProgramSha256": "88a628a42daa865d92260e1c55481dd477d4ca432d4451372ddec65ebd0858a9"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-local-strong-glmu-b-clinical-medicine-cn",
+          "canonicalSourceSha256": "a80d3650b2d58396c818e35a54a181dca82cf47fdf2eec9fd233a00a49a324f4"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": "2026-06-30",
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://www.glmu.edu.cn/gjjyjlzx/info/1161/2514.htm",
+      "evidenceBodySha256": "0ffa8d1657ced310d4f81344a7e0803a0c4c3b04f4e7030aa59c2692fa19befa",
+      "observedAt": "2026-10-19T06:00:10.760106+00:00",
+      "semanticReview": "Derived exact2026 undergraduate guide explicitly names this bachelor and June30 applicant cutoff; programme catalogue alone is not date evidence.",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-local-strong-glmu-b-pharmacy-cn-2026-2027-other",
+      "universityId": "uni-guilin-medical-university",
+      "selectionOrigin": "baseQueue14",
+      "collection": "admissionCycles",
+      "passed": true,
+      "result": "closed",
+      "canonicalRecordSha256": "bea57944c4cec4caf2e95ab1d2ac2128185b4e7e8f255e8aeb49802efeb51686",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-local-strong-glmu-b-pharmacy-cn",
+          "canonicalProgramSha256": "df2686767077a2b83780bd3754f4eeb8f27eef5d1f5d86a3a7317d9502832c27"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-local-strong-glmu-b-pharmacy-cn",
+          "canonicalSourceSha256": "c0bc5a7fb50002603a1d0596e8deb0da5ce78c4f97fa1f19aa7622d159025041"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": "2026-06-30",
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://www.glmu.edu.cn/gjjyjlzx/info/1161/2514.htm",
+      "evidenceBodySha256": "0ffa8d1657ced310d4f81344a7e0803a0c4c3b04f4e7030aa59c2692fa19befa",
+      "observedAt": "2026-10-19T06:00:10.760106+00:00",
+      "semanticReview": "Derived exact2026 undergraduate guide explicitly names this bachelor and June30 applicant cutoff; programme catalogue alone is not date evidence.",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-wave3-guet-ai-english-bachelor-2026-2027-other-fee-reference",
+      "universityId": "uni-guilin-university-of-electronic-technology",
+      "selectionOrigin": "baseQueue14",
+      "collection": "admissionCycles",
+      "passed": true,
+      "result": "unknown",
+      "canonicalRecordSha256": "d7e713156e023e9d7a8fbad1729577bc973d3a6ee4d9ce597b3450dd4ae8f412",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave3-guet-ai-english-bachelor",
+          "canonicalProgramSha256": "068f768181de3749415606a04f7384a1ef75b266ef91e59052bf4cd62a0581b0"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-wave3-guet-ai-english-bachelor",
+          "canonicalSourceSha256": "961b71ca37b6528e2b1f1e20bcc8b105e2349612c618c739c892e8422d217fc6"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+      "evidenceBodySha256": "64775effd6594177b04fc9a8e807ee34047a2d3fb8b008110dd8e71ce36a9641",
+      "observedAt": "2026-10-19T05:56:46.110251+00:00",
+      "semanticReview": "PDF lists matching programme/scholarship context and June15 but no applicable entry year; passport next-June30 is not deadline/year. Specialized scholarship wording does not identify ASEAN cutoff.",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-wave3-guet-chinese-language-program-2026-2027-other-fee-reference",
+      "universityId": "uni-guilin-university-of-electronic-technology",
+      "selectionOrigin": "baseQueue14",
+      "collection": "admissionCycles",
+      "passed": true,
+      "result": "unknown",
+      "canonicalRecordSha256": "bac4ad4a6ff3ff7227ccedbae7c4320f276ba70bf1b90df63898dcb74daf61ac",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave3-guet-chinese-language-program",
+          "canonicalProgramSha256": "45ca0ab1adb2dfc8efa14e4f36885266d384f7b3820265e80c0a6c0374948164"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-wave3-guet-chinese-language-program",
+          "canonicalSourceSha256": "7feb79389d1ab97f950e472a26fa2c3547b49868e94906a1b6767fa5399d8773"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+      "evidenceBodySha256": "64775effd6594177b04fc9a8e807ee34047a2d3fb8b008110dd8e71ce36a9641",
+      "observedAt": "2026-10-19T05:56:46.110251+00:00",
+      "semanticReview": "PDF lists matching programme/scholarship context and June15 but no applicable entry year; passport next-June30 is not deadline/year. Specialized scholarship wording does not identify ASEAN cutoff.",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-wave3-guet-cs-bilingual-master-2026-2027-other-fee-reference",
+      "universityId": "uni-guilin-university-of-electronic-technology",
+      "selectionOrigin": "baseQueue14",
+      "collection": "admissionCycles",
+      "passed": true,
+      "result": "unknown",
+      "canonicalRecordSha256": "9cbadedeff52bb06c4557f3ea873a894b134e499690ea3cea91df41d9f757071",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave3-guet-cs-bilingual-master",
+          "canonicalProgramSha256": "2d1a5d6e13ce4f76ddd1dfd950fb14500610e0f6cf6f70487aed23f008424a74"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-wave3-guet-cs-bilingual-master",
+          "canonicalSourceSha256": "7c21a5edb19dbef0af2552e5b285be8dd0ae20f95c478a2099e615155d922e64"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+      "evidenceBodySha256": "64775effd6594177b04fc9a8e807ee34047a2d3fb8b008110dd8e71ce36a9641",
+      "observedAt": "2026-10-19T05:56:46.110251+00:00",
+      "semanticReview": "PDF lists matching programme/scholarship context and June15 but no applicable entry year; passport next-June30 is not deadline/year. Specialized scholarship wording does not identify ASEAN cutoff.",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-wave3-guet-cs-english-bachelor-2026-2027-other-fee-reference",
+      "universityId": "uni-guilin-university-of-electronic-technology",
+      "selectionOrigin": "baseQueue14",
+      "collection": "admissionCycles",
+      "passed": true,
+      "result": "unknown",
+      "canonicalRecordSha256": "369d275635281bd739ef13d45b58c5e57069322a8dea99ec605b1b5d8751719a",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-wave3-guet-cs-english-bachelor",
+          "canonicalProgramSha256": "cdd31ee9785e8c754e06819f9cb70a264459e16966c3cbab86733817d9deef1a"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-wave3-guet-cs-english-bachelor",
+          "canonicalSourceSha256": "5a367472197ad575bc2be48e91140667a2f4452db84c65c6d6daf9ce48ec60fb"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+      "evidenceBodySha256": "64775effd6594177b04fc9a8e807ee34047a2d3fb8b008110dd8e71ce36a9641",
+      "observedAt": "2026-10-19T05:56:46.110251+00:00",
+      "semanticReview": "PDF lists matching programme/scholarship context and June15 but no applicable entry year; passport next-June30 is not deadline/year. Specialized scholarship wording does not identify ASEAN cutoff.",
+      "errors": []
+    },
+    {
+      "recordId": "sch-gap-wave3-guet-guangxi-asean-full-scholarship",
+      "universityId": "uni-guilin-university-of-electronic-technology",
+      "selectionOrigin": "additionalSameSource3",
+      "collection": "scholarships",
+      "passed": true,
+      "result": "unknown",
+      "canonicalRecordSha256": "c5ec12ce4766bbfb48e5ef593cc6a362fcb830ef16cdcaa692c64c2af466c1eb",
+      "canonicalProgramPins": [],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-wave3-guet-guangxi-asean-full-scholarship",
+          "canonicalSourceSha256": "cfa6b0067d77ac004ca492ff85b356f1c922e5720763536c2e55478ae1de7ec0"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+      "evidenceBodySha256": "64775effd6594177b04fc9a8e807ee34047a2d3fb8b008110dd8e71ce36a9641",
+      "observedAt": "2026-10-19T05:56:46.110251+00:00",
+      "semanticReview": "PDF lists matching programme/scholarship context and June15 but no applicable entry year; passport next-June30 is not deadline/year. Specialized scholarship wording does not identify ASEAN cutoff.",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-mew-0805-scw-glut-civil-engineering-master-chinese-2026-2027-other-fee-reference",
+      "universityId": "uni-guilin-university-of-technology",
+      "selectionOrigin": "baseQueue14",
+      "collection": "admissionCycles",
+      "passed": true,
+      "result": "unknown",
+      "canonicalRecordSha256": "47530eea7a1d40905f3b966f4dc8d0908d05f05f04dd81113bc5f9d1a020452a",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mew-0805-scw-glut-civil-engineering-master-chinese",
+          "canonicalProgramSha256": "8512f3e6d57f3ebb80f633a7489255e58fed0a7ebfe9793cbd4406b92b70217f"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-mew-0805-scw-glut-civil-engineering-master-chinese",
+          "canonicalSourceSha256": "19202392492abf6f2487b975d06a9dcfc5cd1bcfe0301d42f999e7f3f653d4d1"
+        },
+        {
+          "sourceId": "src-gap-program-mew-0805-scw-glut-civil-engineering-master-chinese-support-1",
+          "canonicalSourceSha256": "d51c49b8f9971ee40ae39a700e936aa96c7e9c0f7d94c163322f474d7e25dfde"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+      "evidenceBodySha256": "9c281cab4641fa0d39119ea3d6ba200b0a91c77f9d6f5ca2fe3ea4e6d77a1429",
+      "observedAt": "2026-10-19T05:56:54.883481+00:00",
+      "semanticReview": "2026 guide and linked2023 programme directory name routes/awards but have no fixed applicant or independent award deadlines; no date borrowed from fees.",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-mew-0805-scw-glut-cs-bachelor-english-2026-2027-other-fee-reference",
+      "universityId": "uni-guilin-university-of-technology",
+      "selectionOrigin": "baseQueue14",
+      "collection": "admissionCycles",
+      "passed": true,
+      "result": "unknown",
+      "canonicalRecordSha256": "ff577fd6bf014467d9a7664fda60d88aaab5aaad2acee57529f7ddd666240b87",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mew-0805-scw-glut-cs-bachelor-english",
+          "canonicalProgramSha256": "ca0aec44a8bd111fde8dd3d635c5bf568394235e4cfe7002451a9235443cb6c2"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-mew-0805-scw-glut-cs-bachelor-english",
+          "canonicalSourceSha256": "4468db40a2b0289fbab2bb25f201bc76c879b00f668286f971959f3a395e6ba1"
+        },
+        {
+          "sourceId": "src-gap-program-mew-0805-scw-glut-cs-bachelor-english-support-1",
+          "canonicalSourceSha256": "18a0b6abd03035325cd37d43c06e9ccb553ce49f5578ddd82b70b24cdd534ae1"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+      "evidenceBodySha256": "9c281cab4641fa0d39119ea3d6ba200b0a91c77f9d6f5ca2fe3ea4e6d77a1429",
+      "observedAt": "2026-10-19T05:56:54.883481+00:00",
+      "semanticReview": "2026 guide and linked2023 programme directory name routes/awards but have no fixed applicant or independent award deadlines; no date borrowed from fees.",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-mew-0805-scw-glut-long-chinese-year-2026-2027-other-fee-reference",
+      "universityId": "uni-guilin-university-of-technology",
+      "selectionOrigin": "baseQueue14",
+      "collection": "admissionCycles",
+      "passed": true,
+      "result": "unknown",
+      "canonicalRecordSha256": "e822cb9f4a7f9b56ece9f4d6230e048332627fdab7b320401e5ebcd90b1992d4",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mew-0805-scw-glut-long-chinese-year",
+          "canonicalProgramSha256": "3c21770836bc8ae6e0798be33575be692447f0481b3a1ee81fa3b1446da455c1"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-mew-0805-scw-glut-long-chinese-year",
+          "canonicalSourceSha256": "90821a1d7b505543f6b239256d08c1604a93bdeda9b454400c852ef14465b74d"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+      "evidenceBodySha256": "9c281cab4641fa0d39119ea3d6ba200b0a91c77f9d6f5ca2fe3ea4e6d77a1429",
+      "observedAt": "2026-10-19T05:56:54.883481+00:00",
+      "semanticReview": "2026 guide and linked2023 programme directory name routes/awards but have no fixed applicant or independent award deadlines; no date borrowed from fees.",
+      "errors": []
+    },
+    {
+      "recordId": "cycle-gap-mew-0805-scw-glut-tcsol-bachelor-2026-2027-other-fee-reference",
+      "universityId": "uni-guilin-university-of-technology",
+      "selectionOrigin": "baseQueue14",
+      "collection": "admissionCycles",
+      "passed": true,
+      "result": "unknown",
+      "canonicalRecordSha256": "de69ca468dfa6a34546e187e4c4b284d8d718a47d22f0dfe4a49c4a9f8ba6c2d",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mew-0805-scw-glut-tcsol-bachelor",
+          "canonicalProgramSha256": "7703d857b425a6610c52106acecd07455fe9976853a57ed8b38353a03406ae74"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-program-mew-0805-scw-glut-tcsol-bachelor",
+          "canonicalSourceSha256": "87fcdb1fcb7924c5d3b0be9151d3869cf4c9cf37d803cf8e8612e7e6a3b380c9"
+        },
+        {
+          "sourceId": "src-gap-program-mew-0805-scw-glut-tcsol-bachelor-support-1",
+          "canonicalSourceSha256": "b1385bb77d620bf388ad0a518a25097ff076cbd16f29faa202057f1252a81346"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+      "evidenceBodySha256": "9c281cab4641fa0d39119ea3d6ba200b0a91c77f9d6f5ca2fe3ea4e6d77a1429",
+      "observedAt": "2026-10-19T05:56:54.883481+00:00",
+      "semanticReview": "2026 guide and linked2023 programme directory name routes/awards but have no fixed applicant or independent award deadlines; no date borrowed from fees.",
+      "errors": []
+    },
+    {
+      "recordId": "sch-gap-mew-0805-scw-glut-guangxi-asean-scholarship",
+      "universityId": "uni-guilin-university-of-technology",
+      "selectionOrigin": "additionalSameSource3",
+      "collection": "scholarships",
+      "passed": true,
+      "result": "unknown",
+      "canonicalRecordSha256": "ac7a8559579a84a115bf848dd564e306ddf4b571e3fb8f6c4eae162fa173186d",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mew-0805-scw-glut-tcsol-bachelor",
+          "canonicalProgramSha256": "7703d857b425a6610c52106acecd07455fe9976853a57ed8b38353a03406ae74"
+        },
+        {
+          "programId": "prog-gap-mew-0805-scw-glut-cs-bachelor-english",
+          "canonicalProgramSha256": "ca0aec44a8bd111fde8dd3d635c5bf568394235e4cfe7002451a9235443cb6c2"
+        },
+        {
+          "programId": "prog-gap-mew-0805-scw-glut-civil-engineering-master-chinese",
+          "canonicalProgramSha256": "8512f3e6d57f3ebb80f633a7489255e58fed0a7ebfe9793cbd4406b92b70217f"
+        },
+        {
+          "programId": "prog-gap-mew-0805-scw-glut-environmental-doctorate",
+          "canonicalProgramSha256": "7bea657f4c2fb0e08947977b1d8b03f79baa9f71dc1ed9e1ffb6857e286237d5"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-mew-0805-scw-glut-guangxi-asean-scholarship",
+          "canonicalSourceSha256": "9bad6cc3425ae47198a436a4fc62009aa529a031181e44f7119fecbe4fee558a"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+      "evidenceBodySha256": "9c281cab4641fa0d39119ea3d6ba200b0a91c77f9d6f5ca2fe3ea4e6d77a1429",
+      "observedAt": "2026-10-19T05:56:54.883481+00:00",
+      "semanticReview": "2026 guide and linked2023 programme directory name routes/awards but have no fixed applicant or independent award deadlines; no date borrowed from fees.",
+      "errors": []
+    },
+    {
+      "recordId": "sch-gap-mew-0805-scw-glut-belt-road-president-scholarship",
+      "universityId": "uni-guilin-university-of-technology",
+      "selectionOrigin": "additionalSameSource3",
+      "collection": "scholarships",
+      "passed": true,
+      "result": "unknown",
+      "canonicalRecordSha256": "968e9e50dc67b23f847f79832c3075271db4ac4b396e47229da5550e63adc42e",
+      "canonicalProgramPins": [
+        {
+          "programId": "prog-gap-mew-0805-scw-glut-tcsol-bachelor",
+          "canonicalProgramSha256": "7703d857b425a6610c52106acecd07455fe9976853a57ed8b38353a03406ae74"
+        },
+        {
+          "programId": "prog-gap-mew-0805-scw-glut-cs-bachelor-english",
+          "canonicalProgramSha256": "ca0aec44a8bd111fde8dd3d635c5bf568394235e4cfe7002451a9235443cb6c2"
+        },
+        {
+          "programId": "prog-gap-mew-0805-scw-glut-civil-engineering-master-chinese",
+          "canonicalProgramSha256": "8512f3e6d57f3ebb80f633a7489255e58fed0a7ebfe9793cbd4406b92b70217f"
+        },
+        {
+          "programId": "prog-gap-mew-0805-scw-glut-environmental-doctorate",
+          "canonicalProgramSha256": "7bea657f4c2fb0e08947977b1d8b03f79baa9f71dc1ed9e1ffb6857e286237d5"
+        }
+      ],
+      "sourcePins": [
+        {
+          "sourceId": "src-gap-scholarship-mew-0805-scw-glut-belt-road-president-scholarship",
+          "canonicalSourceSha256": "65ee94b213a6132e878b8e011c67e1629aad60d5e7372a1d0adb10ef313b4dd5"
+        }
+      ],
+      "storedDeadline": null,
+      "officialDeadline": null,
+      "candidateOnly": true,
+      "evidenceSourceUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+      "evidenceBodySha256": "9c281cab4641fa0d39119ea3d6ba200b0a91c77f9d6f5ca2fe3ea4e6d77a1429",
+      "observedAt": "2026-10-19T05:56:54.883481+00:00",
+      "semanticReview": "2026 guide and linked2023 programme directory name routes/awards but have no fixed applicant or independent award deadlines; no date borrowed from fees.",
+      "errors": []
+    }
+  ],
+  "priorReportsPinned": [
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-001/report.json",
+      "sha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-002/report.json",
+      "sha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-003/report.json",
+      "sha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-004/report.json",
+      "sha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-005/report.json",
+      "sha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-006/report.json",
+      "sha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-007/report.json",
+      "sha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-008/report.json",
+      "sha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-009/report.json",
+      "sha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-010/report.json",
+      "sha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-011/report.json",
+      "sha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-012/report.json",
+      "sha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-013/report.json",
+      "sha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-014/report.json",
+      "sha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-015/report.json",
+      "sha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-016/report.json",
+      "sha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-017/report.json",
+      "sha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-018/report.json",
+      "sha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-019/report.json",
+      "sha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-020/report.json",
+      "sha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    }
+  ],
+  "limitations": [
+    "Sixteen original stored deadlines remain null; the three newly found past deadlines are candidates only. Existing GZHMU June30 is scoped to the2026academic doctorate.",
+    "Thirteen unknown records are unresolved dates, not proof that admission/scholarships are open or closed. No school discontinuation is inferred.",
+    "GZHU March2021 policy, GUET undated June15 and GLUT no-date guide retain explicit year/route limitations; no dates are rolled into2027.",
+    "GLMU derived current-guide originals support these two exact routes only; unrelated majors/awards are not certified.",
+    "Only relevant handbook date/policy pages were independently reviewed; unrelated123-page handbook policies are outside the date-only scope."
+  ],
+  "reviewMutations": {
+    "writtenFiles": [
+      "quality/deadline-sweep-20261019/official-batch-021/independent-review-v1.json"
+    ],
+    "networkCalls": 0,
+    "canonicalWrites": 0,
+    "freshnessWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0
+  },
+  "methodPrecisionNotes": [
+    "Numeric year detection distinguishes a2000CNY dorm fee from an application year.",
+    "GLUT exact-directory provenance is a visible plain-textURL reference; GLMU two-step discovery is actual HTMLanchor navigation."
+  ]
+}

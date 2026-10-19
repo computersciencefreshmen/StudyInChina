@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "independent-date-only-019-v1",
+  "reviewedAt": "2026-10-19T06:03:53.597Z",
+  "reviewer": "deployment_audit subagent; did not author batch 019 or its originals",
+  "reviewedReportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517",
+  "reviewedSelectionSha256": "7d34d1a3a4e1b357f7eab604a6c477a8585abe38516dbc1fdaca9ffa9b049954",
+  "reviewedRootExtensionSha256": "3ca8778c34230d3882908d7504941f5e2985a7ff9802fabad38fae5c5fe92489",
+  "decision": "pass-with-degree-award-and-legacy-programme-restrictions",
+  "scope": "Independent local original HTML/PDF reads, direct pypdf re-extraction and visual programme/deadline inspection; exact canonical/parent/source/extension pins checked. No website rereads.",
+  "counts": {
+    "schools": 7,
+    "records": 15,
+    "baseQueueRecords": 12,
+    "additionalSameSourceRecords": 3,
+    "closedCandidateScopes": 5,
+    "unknown": 9,
+    "blocked": 1,
+    "canonicalInputHashes": 6,
+    "canonicalRecordHashes": 15,
+    "programmeHashes": 9,
+    "sourceRecordPins": 20,
+    "rawBodies": 10,
+    "textPins": 10,
+    "sourceFailureReceipts": 1,
+    "priorRecordOverlap": 0,
+    "canonicalNullDeadlinesPreserved": 15
+  },
+  "checks": {
+    "exact12BaseAnd3AdditionalIdsMatch": true,
+    "rootExtensionExactHashesMatch": true,
+    "allCanonicalInputRowParentAndSourcePinsMatch": true,
+    "allOriginalBodyTextAndFailurePinsMatch": true,
+    "derivedPdfUrlMatchesActualParentPdfsrc": true,
+    "singleGroupsRecordsRepresentation": true,
+    "allClosedResultsCandidateOnly": true,
+    "noOpeningOrCanonicalDateEqualityCertified": true,
+    "noUnknownYearRolledForward": true,
+    "noDiscontinuationInferred": true,
+    "noCanonicalStatusFreshnessOrDateMutation": true
+  },
+  "sourceFindings": [
+    {
+      "school": "East China University of Political Science and Law",
+      "finding": "Captured body explicitly says 2026–2027, despite old wrapper date. Semester/course dates do not publish an application deadline or rolling rule; unknown is correct."
+    },
+    {
+      "school": "East China University of Science and Technology",
+      "finding": "Original normal-TLS fetch fails unexpected EOF with a receipt; one web 502 fallback also fails and is pinned. Cooldown is explicit, no date or source body fabricated."
+    },
+    {
+      "school": "Fujian Medical University",
+      "finding": "Original one-page graduate fee/scholarship schedule independently read and visually inspected. School freshman awards are automatic consideration; provincial co-funded award requires application. Neither has a numeric cutoff or calendar year."
+    },
+    {
+      "school": "Fuzhou University",
+      "finding": "Actual 2026 Chinese Language bachelor call says May 30. Actual 2026 graduate call puts Geotechnical/Municipal Engineering in the English master section and Electrical Theory/New Technology in the English doctoral section. General admission/paper-material submission is May 15; CSC applicants must separately complete online CSC and send paper materials by February 20. Broad provincial/university awards span those routes and correctly retain unknown single cutoff. The contradictory June 2025 result-release line is institutional output and excluded."
+    },
+    {
+      "school": "Guangdong Medical University",
+      "finding": "Old 2024 undergraduate notice gives July 10 general admission month/day and a freshman-award form; it does not bind a current-year award deadline. Unknown is correct."
+    },
+    {
+      "school": "Guangdong Ocean University",
+      "finding": "Old 2022 programme/fee catalogue has no current applicant period; no rolling or open status is inferred."
+    },
+    {
+      "school": "Guangdong University of Finance and Economics",
+      "finding": "Full official 2026 bilingual PDF independently extracted. Parent HTML pdfsrc exactly matches captured document. Rendered p12 lists English International Business and Chinese Business Chinese only; p14 gives June 1, 2026. That deadline binds International Business, while legacy International Economics and Trade remains unknown. Absence is not a discontinuation notice."
+    }
+  ],
+  "visualArtifactsReviewed": [
+    "gdufe-2026-original-guide-page-12.png",
+    "gdufe-2026-original-guide-page-14.png",
+    "source-06-page-1.png"
+  ],
+  "publicationRestrictions": [
+    "FZU May 15 general admission cannot replace the earlier CSC February 20 branch; bachelor May 30 is separate. Broad award records have no single deadline.",
+    "GDUFE June 1 must not be assigned to International Economics and Trade or used to renew that legacy programme.",
+    "All five past scopes are candidate evidence only; canonical null dates and all freshness/status fields remain unchanged.",
+    "No deadline is inferred from semester completion, annual benefit periods, platform links or old publication dates."
+  ],
+  "reviewedRecordIds": [
+    "cycle-gap-wave8-ecupl-chinese-language-training-2026-2027-other-fee-reference",
+    "sch-gap-mve-ecs-ecust-shanghai-government-scholarship",
+    "sch-gap-wave3-fjmu-fujian-government-scholarship-graduate",
+    "sch-gap-wave3-fjmu-international-graduate-freshman-scholarship",
+    "cycle-gap-mew-csw-fzu-chinese-language-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-mew-csw-fzu-electrical-theory-new-technology-doctorate-2026-2027-autumn-fee-reference",
+    "cycle-gap-mew-csw-fzu-geotechnical-engineering-master-2026-2027-autumn-fee-reference",
+    "cycle-gap-mew-csw-fzu-municipal-engineering-master-2026-2027-autumn-fee-reference",
+    "sch-gap-mew-csw-fzu-fujian-government-scholarship",
+    "sch-gap-mew-csw-fzu-university-scholarship",
+    "sch-gap-wave3-gdmu-international-freshman-scholarship",
+    "cycle-gap-mew-0805-scw-gdou-aquaculture-bachelor-2026-2027-other-fee-reference",
+    "cycle-gap-mew-0805-scw-gdou-tcsol-bachelor-2026-2027-other-fee-reference",
+    "cycle-gap-local-strong-gdufe-b-international-business-en-2026-2027-other",
+    "cycle-gap-local-strong-gdufe-b-international-economics-trade-en-2026-2027-other"
+  ],
+  "networkRequestsByReviewer": 0,
+  "canonicalWrites": 0,
+  "sharedProgressWrites": 0,
+  "gitMutations": 0,
+  "paidCalls": 0
+}

@@ -1,0 +1,1564 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-019-20261019",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T06:01:16.693Z",
+  "state": "completed-with-five-expired-route-candidates-nine-unknown-one-source-block",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetPlan": "quality/deadline-sweep-20261019/next-official-date-targets-v4.json",
+  "targetPlanSha256": "06b1a66942c4e6866f4ad3c7217eba8bc76ff6ba93aa61ae92d66bade53eaeb7",
+  "selectionSha256": "7d34d1a3a4e1b357f7eab604a6c477a8585abe38516dbc1fdaca9ffa9b049954",
+  "selection": {
+    "baseQueueRecordIds": [
+      "cycle-gap-wave8-ecupl-chinese-language-training-2026-2027-other-fee-reference",
+      "sch-gap-mve-ecs-ecust-shanghai-government-scholarship",
+      "sch-gap-wave3-fjmu-fujian-government-scholarship-graduate",
+      "sch-gap-wave3-fjmu-international-graduate-freshman-scholarship",
+      "cycle-gap-mew-csw-fzu-chinese-language-bachelor-2026-2027-autumn-fee-reference",
+      "sch-gap-mew-csw-fzu-fujian-government-scholarship",
+      "sch-gap-mew-csw-fzu-university-scholarship",
+      "sch-gap-wave3-gdmu-international-freshman-scholarship",
+      "cycle-gap-mew-0805-scw-gdou-aquaculture-bachelor-2026-2027-other-fee-reference",
+      "cycle-gap-mew-0805-scw-gdou-tcsol-bachelor-2026-2027-other-fee-reference",
+      "cycle-gap-local-strong-gdufe-b-international-business-en-2026-2027-other",
+      "cycle-gap-local-strong-gdufe-b-international-economics-trade-en-2026-2027-other"
+    ],
+    "additionalSameSourceRecordIds": [
+      "cycle-gap-mew-csw-fzu-electrical-theory-new-technology-doctorate-2026-2027-autumn-fee-reference",
+      "cycle-gap-mew-csw-fzu-geotechnical-engineering-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-mew-csw-fzu-municipal-engineering-master-2026-2027-autumn-fee-reference"
+    ],
+    "baseQueueRecordCount": 12,
+    "additionalSameSourceRecordCount": 3,
+    "totalRecords": 15,
+    "additionalSelectionReceipt": "quality/deadline-sweep-20261019/heartbeat-0554/additional-same-source-selection-v1.json",
+    "additionalSelectionReceiptSha256": "3ca8778c34230d3882908d7504941f5e2985a7ff9802fabad38fae5c5fe92489",
+    "newSourceReadsForAdditional3": 0
+  },
+  "acquisition": {
+    "newDistinctOfficialUrlsAttempted": 11,
+    "baseNativeGets": 10,
+    "derivedPdfGets": 1,
+    "successfulOriginalSources": 10,
+    "failedOriginalSources": 1,
+    "boundedWebFallbackAttempts": 1,
+    "totalNetworkRequests": 12,
+    "successfulFallbackSources": 0,
+    "automaticRetries": 0,
+    "noTlsOrChallengeBypass": true,
+    "paidModelCalls": 0,
+    "successfulOriginalSchools": 6,
+    "currentHardDateSourcesApplicableToAssignedRecords": 3
+  },
+  "sourceCaptures": [
+    {
+      "key": "source-01",
+      "url": "https://oce.fzu.edu.cn/info/1025/7987.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:55:39.226935+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://oce.fzu.edu.cn/info/1025/7987.htm",
+      "contentType": "text/html",
+      "bytes": 70380,
+      "rawPath": "source-01.html",
+      "rawSha256": "e00580b706a4fe7e5e7b076bbe8c84070101d07ae710a72bb9804e3ee241b35a",
+      "decodedCharset": "utf-8",
+      "textPath": "source-01.txt",
+      "textSha256": "71bddc3dcb9807bdce603ac6d920e6fe85973ee96300af378df84806ef7742a4",
+      "observedAt": "2026-10-19T05:55:46.466241+00:00"
+    },
+    {
+      "key": "source-02",
+      "url": "https://oce.fzu.edu.cn/info/1025/8036.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:55:39.226935+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://oce.fzu.edu.cn/info/1025/8036.htm",
+      "contentType": "text/html",
+      "bytes": 87050,
+      "rawPath": "source-02.html",
+      "rawSha256": "0f590729b3e6baaecfc5593707ef7e30508d0fafec10af6ab637c18a59d994de",
+      "decodedCharset": "utf-8",
+      "textPath": "source-02.txt",
+      "textSha256": "d8b0866b54a9950e19648e1a230375583123db0f8cc6b361f8e7a08b257abbc3",
+      "observedAt": "2026-10-19T05:55:46.561596+00:00"
+    },
+    {
+      "key": "source-03",
+      "url": "https://english.gdufe.edu.cn/1834/list.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:55:39.228576+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://english.gdufe.edu.cn/1834/list.htm",
+      "contentType": "text/html",
+      "bytes": 14191,
+      "rawPath": "source-03.html",
+      "rawSha256": "7d12467a535f297d6455a604792b52e0cfb147e0282a1363e82e8e998aff91ef",
+      "decodedCharset": "utf-8",
+      "textPath": "source-03.txt",
+      "textSha256": "040524d5d3e1afe163523b207bc0077c8d14665f65a7fc12ddc3aa0a95548e32",
+      "observedAt": "2026-10-19T05:55:42.637310+00:00"
+    },
+    {
+      "key": "source-04",
+      "url": "https://fao.gdufe.edu.cn/2026/0228/c9112a233408/page.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:55:39.228576+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://fao.gdufe.edu.cn/2026/0228/c9112a233408/page.htm",
+      "contentType": "text/html",
+      "bytes": 26934,
+      "rawPath": "source-04.html",
+      "rawSha256": "e9b56336905cc74245ef193cbd03091fa5f670a54c597b234b13de826bb84ca5",
+      "decodedCharset": "utf-8",
+      "textPath": "source-04.txt",
+      "textSha256": "6966fa16714977a550fbbd65aa9ba3617c1e71a0429939c2aacf1842043b53a7",
+      "observedAt": "2026-10-19T05:55:42.598919+00:00"
+    },
+    {
+      "key": "source-05",
+      "url": "https://iecd.gdou.edu.cn/info/1022/1050.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:55:42.598919+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://iecd.gdou.edu.cn/info/1022/1050.htm",
+      "contentType": "text/html",
+      "bytes": 73568,
+      "rawPath": "source-05.html",
+      "rawSha256": "a705efed08da8b14e2a66e68f4eb2c4ba59ba2b5e904e0c3ef39c628e14057a6",
+      "decodedCharset": "utf-8",
+      "textPath": "source-05.txt",
+      "textSha256": "a9859d93d3600acfdff3987f8783180d3a1610bd3a17a249d4fb4d587a57e3d8",
+      "observedAt": "2026-10-19T05:55:48.008663+00:00"
+    },
+    {
+      "key": "source-06",
+      "url": "https://oec.fjmu.edu.cn/_upload/article/files/9e/1c/84672d884f0694be1c23d42133c1/aac86c15-4bf3-4752-8b5a-4bdd8173c4c7.pdf",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:55:42.637310+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://oec.fjmu.edu.cn/_upload/article/files/9e/1c/84672d884f0694be1c23d42133c1/aac86c15-4bf3-4752-8b5a-4bdd8173c4c7.pdf",
+      "contentType": "application/pdf",
+      "bytes": 85397,
+      "rawPath": "source-06.pdf",
+      "rawSha256": "3a79784d43130090e9e33bfe76d57d557f5358bef6a2458ef095c9cbd8499d99",
+      "pages": 1,
+      "textPath": "source-06.txt",
+      "textSha256": "847b8faf166f75cc0486bdd5184eb222ec85c1f806ac3c5843c2138678444ed1",
+      "observedAt": "2026-10-19T05:55:48.139761+00:00"
+    },
+    {
+      "key": "source-07",
+      "url": "https://en.fzu.edu.cn/info/1006/1009.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:55:46.466888+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://en.fzu.edu.cn/info/1006/1009.htm",
+      "contentType": "text/html",
+      "bytes": 14161,
+      "rawPath": "source-07.html",
+      "rawSha256": "2981c28c19eb8b5a31175958e8a240797dd39c27687152eb5b36434bf4691fc1",
+      "decodedCharset": "utf-8",
+      "textPath": "source-07.txt",
+      "textSha256": "ce00130024937a28d5a2248e6f76358449e01805cf038ab6705591dabf165c73",
+      "observedAt": "2026-10-19T05:55:50.727000+00:00"
+    },
+    {
+      "key": "source-08",
+      "url": "https://en.gdmu.edu.cn/info/1025/1265.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:55:46.562598+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://en.gdmu.edu.cn/info/1025/1265.htm",
+      "contentType": "text/html",
+      "bytes": 69368,
+      "rawPath": "source-08.html",
+      "rawSha256": "76158d50b7a0c90a51e71039611a7b54ec49c00cefa4a008c2b96722e5ffa952",
+      "decodedCharset": "utf-8",
+      "textPath": "source-08.txt",
+      "textSha256": "5adba91fdc556448522d497cb91f7852e5da8393b262906075cffd9d3305b998",
+      "observedAt": "2026-10-19T05:55:51.179983+00:00"
+    },
+    {
+      "key": "source-09",
+      "url": "https://ies.ecust.edu.cn/en/msg.php?id=74",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:55:48.008663+00:00",
+      "attempt": 1,
+      "error": "URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+      "observedAt": "2026-10-19T05:55:50.031247+00:00"
+    },
+    {
+      "key": "source-10",
+      "url": "https://study.ecupl.edu.cn/2024/1217/c10778a217907/page.htm",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:55:48.139761+00:00",
+      "attempt": 1,
+      "httpStatus": 200,
+      "finalUrl": "https://study.ecupl.edu.cn/2024/1217/c10778a217907/page.htm",
+      "contentType": "text/html",
+      "bytes": 75022,
+      "rawPath": "source-10.html",
+      "rawSha256": "d472ee75c8989584920960d610b859211b53b1ae66f407f139814388182e4b0a",
+      "decodedCharset": "utf-8",
+      "textPath": "source-10.txt",
+      "textSha256": "85921684caff3596de69bc05edb3983fde46077715c59d10d259aed6f3b10e33",
+      "observedAt": "2026-10-19T05:55:52.909851+00:00"
+    },
+    {
+      "key": "gdufe-2026-original-guide",
+      "url": "https://fao.gdufe.edu.cn/_upload/article/files/47/ac/477000b044748885bb2fd03666da/20ec765e-9e99-4edc-97a7-d2d8d38f6e49.pdf",
+      "discoveredFrom": "https://fao.gdufe.edu.cn/2026/0228/c9112a233408/page.htm",
+      "discoveryAttribute": "div.pdfsrc",
+      "sourceRawSha256": "e9b56336905cc74245ef193cbd03091fa5f670a54c597b234b13de826bb84ca5",
+      "method": "GET",
+      "startedAt": "2026-10-19T05:57:40.075206+00:00",
+      "timeoutSeconds": 20,
+      "maximumBytes": 10485760,
+      "httpStatus": 200,
+      "finalUrl": "https://fao.gdufe.edu.cn/_upload/article/files/47/ac/477000b044748885bb2fd03666da/20ec765e-9e99-4edc-97a7-d2d8d38f6e49.pdf",
+      "contentType": "application/pdf",
+      "bytes": 1088354,
+      "rawPath": "gdufe-2026-original-guide.pdf",
+      "rawSha256": "89b09365c72afe87ffc06065566d1e74ffcebdd4e9f6719140061a8c8457977b",
+      "pages": 19,
+      "textPath": "gdufe-2026-original-guide.txt",
+      "textSha256": "df49afa5a73af3c79be6fbb7f919e7951274ea52cf7d8aebda000fc0c9f9b0e2",
+      "observedAt": "2026-10-19T05:57:45.465122+00:00"
+    }
+  ],
+  "fallbackReceipt": {
+    "path": "ecust-web-fallback.receipt.json",
+    "sha256": "2c770d0a0fae9dd2a383bd81d19ef235b09442203db2fc01fb601300a82cdab3"
+  },
+  "evidence": [
+    {
+      "key": "ecupl-language-no-deadline",
+      "sourceKeys": [
+        "source-10"
+      ],
+      "dateQuotes": [],
+      "scope": "The visible body explicitly identifies academic year2026-2027, despite the2024wrapper/date. The programme outline only describes classes, semesters and study timetable.",
+      "programmeQuote": "2026-2027 Academic Year",
+      "nonDeadlineQuote": "Usually starts in early Septemberand ends at the end of June of the following year.",
+      "interpretation": "No application cutoff or official rolling-application statement is printed. Course finish is not an application deadline."
+    },
+    {
+      "key": "ecust-tls-source-blocked",
+      "sourceKeys": [
+        "source-09"
+      ],
+      "dateQuotes": [],
+      "scope": "Exact stored Shanghai Government Scholarship source could not be read with normal trusted TLS; web fallback502also failed.",
+      "interpretation": "No award dates, year or open/closed status is certified from source metadata or the failed response."
+    },
+    {
+      "key": "fjmu-award-table-no-deadline",
+      "sourceKeys": [
+        "source-06"
+      ],
+      "dateQuotes": [],
+      "scope": "One-page graduate fees and scholarship schedule; no admission/award calendar dates appear.",
+      "programmeQuotes": [
+        "Automatic Consideration for School Scholarships",
+        "Additional Scholarship Opportunities (Application Required)"
+      ],
+      "interpretation": "Freshman school awards are automatic consideration; Fujian provincial co-funding requires application. Neither receives a numeric cutoff from annual benefit amounts or the application-platform link.",
+      "visualPageInspected": 1
+    },
+    {
+      "key": "fzu-2026-chinese-bachelor",
+      "sourceKeys": [
+        "source-02",
+        "source-07"
+      ],
+      "dateQuotes": [
+        {
+          "quote": "From now until May 30, 2026. Applications submitted after the deadline will not be accepted.",
+          "locator": "source-02 II. Application Time",
+          "meaning": "General applicant deadline for the exact2026BachelorofChineseLanguagecall."
+        }
+      ],
+      "scope": "2026 Chinese Language bachelor admission. The old tuition page supports fees only; it supplies no application deadline.",
+      "openingQualifier": "From now is relative and does not establish a numeric opening date."
+    },
+    {
+      "key": "fzu-2026-postgraduate-general",
+      "sourceKeys": [
+        "source-01"
+      ],
+      "dateQuotes": [
+        {
+          "quote": "From now until May 15, 2026. Applications submitted after the deadline will not be accepted.",
+          "locator": "II. Application Time",
+          "meaning": "General programme application period and paper-materials submission endpoint."
+        },
+        {
+          "quote": "Applicants for the Chinese Government Scholarship must complete the online application on the China Scholarship Council website and send all paper application materials to Fuzhou University by February 20, 2026.",
+          "locator": "II. Application Time / Please note",
+          "meaning": "Earlier applicant CSC-specific branch, not the deadline of every provincial/university award or general programme route."
+        }
+      ],
+      "scope": "Exact English-taught master programmes GeotechnicalEngineeringandMunicipalEngineeringare listed underIII(I);ElectricalTheoryandNewTechnologyis underIII(II)English-taughtdoctoralprogrammes in the same2026guide.",
+      "fundingQualification": "The May15observation concerns the general programme admission route only. It does not give a CSC applicant permission to wait past the earlierFebruary20requirement.",
+      "excludedInstitutionDate": "The result-release paragraph contains endofJune2025inside a2026guide; it is not used as an applicant date or year anchor."
+    },
+    {
+      "key": "fzu-broad-awards-no-single-date",
+      "sourceKeys": [
+        "source-01",
+        "source-02"
+      ],
+      "dateQuotes": [],
+      "scope": "Generic Fujian provincial and Fuzhou University scholarships span undergraduate/master/doctoral admission categories.",
+      "applicationRuleQuote": "Applicants may simultaneously apply for the Fujian Provincial Government Scholarship for International Students and the Fuzhou University Scholarship for International Students. No additional materials are needed.",
+      "interpretation": "Guides allow simultaneous award consideration but have different degree-route deadlines (bachelorMay30, postgraduateMay15; CSCearlierFebruary20is a different award). No single independent award cutoff is selected for these broad award records."
+    },
+    {
+      "key": "gdmu-historical-admission-not-award-date",
+      "sourceKeys": [
+        "source-08"
+      ],
+      "dateQuotes": [
+        {
+          "quote": "V. Application Deadline: 10th July",
+          "locator": "V. Application Deadline",
+          "meaning": "Month/day in a2024published undergraduate admission brochure, not an exact current scholarship cutoff."
+        }
+      ],
+      "scope": "The page links an International Freshmen Scholarship form. It does not publish a separately bound current scholarship application year or deadline.",
+      "interpretation": "Do not transfer an old general-admission month/day to this scholarship."
+    },
+    {
+      "key": "gdou-old-programme-list-no-dates",
+      "sourceKeys": [
+        "source-05"
+      ],
+      "dateQuotes": [],
+      "scope": "2022published undergraduate catalogue names AquacultureandTCSoLwith fees. No application dates or current2026entry window are stated.",
+      "interpretation": "Programme existence and fees alone are not deadline evidence; no rolling or open status is inferred."
+    },
+    {
+      "key": "gdufe-2026-original-pdf",
+      "sourceKeys": [
+        "source-03",
+        "source-04",
+        "gdufe-2026-original-guide"
+      ],
+      "dateQuotes": [
+        {
+          "quote": "VII. Application Deadlines: June 1, 2026",
+          "locator": "Embedded official PDF p14; Chinese equivalentp5",
+          "meaning": "2026undergraduate general applicant deadline, verified in the actual original rather than the landing page."
+        }
+      ],
+      "scope": "The current bilingual2026PDFenrollment tablep2/p12 lists only InternationalBusiness(English,BachelorofManagement,4years) and ChineseLanguageLiterature(BusinessChinese).",
+      "exactProgrammeVisualObservation": {
+        "page": 12,
+        "rows": [
+          {
+            "programme": "International Business",
+            "degree": "Bachelor of Management",
+            "language": "English",
+            "duration": "4 Years"
+          },
+          {
+            "programme": "Chinese Language Literature(Business Chinese)",
+            "degree": "Bachelor of Arts",
+            "language": "Chinese",
+            "duration": "4 Years"
+          }
+        ]
+      },
+      "unboundLegacyProgramme": "International Economics and Trade is not in this captured2026enrollment table. Absence is not a formal discontinuation notice, and the June1cutoff is not bound to that legacy row.",
+      "discovery": {
+        "parentSourceKey": "source-04",
+        "parentRawSha256": "e9b56336905cc74245ef193cbd03091fa5f670a54c597b234b13de826bb84ca5",
+        "attribute": "div.pdfsrc",
+        "originalPdfUrl": "https://fao.gdufe.edu.cn/_upload/article/files/47/ac/477000b044748885bb2fd03666da/20ec765e-9e99-4edc-97a7-d2d8d38f6e49.pdf",
+        "originalPdfRawSha256": "89b09365c72afe87ffc06065566d1e74ffcebdd4e9f6719140061a8c8457977b"
+      },
+      "visualPagesInspected": [
+        12,
+        14
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "key": "ecupl-language",
+      "universityId": "uni-east-china-university-of-political-science-and-law",
+      "evidenceKey": "ecupl-language-no-deadline",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-ecupl-chinese-language-training-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue12",
+          "universityId": "uni-east-china-university-of-political-science-and-law",
+          "programId": "prog-gap-wave8-ecupl-chinese-language-training",
+          "programName": "Chinese Language Training Program",
+          "degreeLevel": "language",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "canonicalCycleSha256": "53f971db8a8ba3427150ca21e4e990fd7610740ae6cf9248467de79d0b870f3d",
+          "canonicalProgramSha256": "5ec483509f5fa00dcf88e1d26d2ab966e529574b3e57c32c525088c099593eed",
+          "canonicalRowSha256": "53f971db8a8ba3427150ca21e4e990fd7610740ae6cf9248467de79d0b870f3d",
+          "canonicalRecordSha256": "53f971db8a8ba3427150ca21e4e990fd7610740ae6cf9248467de79d0b870f3d",
+          "sourceIds": [
+            "src-gap-program-wave8-ecupl-chinese-language-training"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-ecupl-chinese-language-training",
+              "url": "https://study.ecupl.edu.cn/2024/1217/c10778a217907/page.htm",
+              "canonicalSourceSha256": "2979db22d18bd90ddd22825ddff7086e11b7fb995b2a043228780cd26b41ab18",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave8-ecupl-chinese-language-training",
+                "url": "https://study.ecupl.edu.cn/2024/1217/c10778a217907/page.htm",
+                "title": "ECUPL Chinese Language Training Program",
+                "publisher": "east-china-university-of-political-science-and-law",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            }
+          ],
+          "evidenceKey": "ecupl-language-no-deadline",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-02",
+          "storedReviewAfter": "2026-08-09",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "reason": "Actual2026-2027body has course semester dates but no applicant cutoff or explicit rolling rule. Wrapper2024is not the admission year."
+        }
+      ]
+    },
+    {
+      "key": "ecust-award-source-blocked",
+      "universityId": "uni-east-china-university-of-science-and-technology",
+      "evidenceKey": "ecust-tls-source-blocked",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecs-ecust-shanghai-government-scholarship",
+          "selectionOrigin": "baseQueue12",
+          "universityId": "uni-east-china-university-of-science-and-technology",
+          "name": "Shanghai Government Scholarship at ECUST",
+          "programIds": [],
+          "canonicalScholarshipSha256": "845efa3ab335cfd2be94738633e9cbacb6f50d4fd6b7106efff80e5aa5a52c40",
+          "canonicalRowSha256": "845efa3ab335cfd2be94738633e9cbacb6f50d4fd6b7106efff80e5aa5a52c40",
+          "canonicalRecordSha256": "845efa3ab335cfd2be94738633e9cbacb6f50d4fd6b7106efff80e5aa5a52c40",
+          "sourceIds": [
+            "src-gap-scholarship-mve-ecs-ecust-shanghai-government-scholarship"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecs-ecust-shanghai-government-scholarship",
+              "url": "https://ies.ecust.edu.cn/en/msg.php?id=74",
+              "canonicalSourceSha256": "076c66638473ec475932f6db96a8ffec8192d4307ec9876ae65128a9e502618f",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mve-ecs-ecust-shanghai-government-scholarship",
+                "url": "https://ies.ecust.edu.cn/en/msg.php?id=74",
+                "title": "ECUST Shanghai Government Scholarship",
+                "publisher": "east-china-university-of-science-and-technology",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-04"
+              }
+            }
+          ],
+          "evidenceKey": "ecust-tls-source-blocked",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-04",
+          "storedReviewAfter": "2026-09-03",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "blocked",
+          "officialDeadline": null,
+          "reason": "Normal-TLS original failed with unexpectedEOFand one boundedwebfallbackfailed502; no scholarship date or open status revalidated."
+        }
+      ]
+    },
+    {
+      "key": "fjmu-two-awards",
+      "universityId": "uni-fujian-medical-university",
+      "evidenceKey": "fjmu-award-table-no-deadline",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-fjmu-fujian-government-scholarship-graduate",
+          "selectionOrigin": "baseQueue12",
+          "universityId": "uni-fujian-medical-university",
+          "name": "Fujian Provincial Government Scholarship at FJMU",
+          "programIds": [],
+          "canonicalScholarshipSha256": "dc2664aa4c82b8f5eb9ae200eff38d361a47d227a5cf62e37414edaac67173b8",
+          "canonicalRowSha256": "dc2664aa4c82b8f5eb9ae200eff38d361a47d227a5cf62e37414edaac67173b8",
+          "canonicalRecordSha256": "dc2664aa4c82b8f5eb9ae200eff38d361a47d227a5cf62e37414edaac67173b8",
+          "sourceIds": [
+            "src-gap-scholarship-wave3-fjmu-fujian-government-scholarship-graduate"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-fjmu-fujian-government-scholarship-graduate",
+              "url": "https://oec.fjmu.edu.cn/_upload/article/files/9e/1c/84672d884f0694be1c23d42133c1/aac86c15-4bf3-4752-8b5a-4bdd8173c4c7.pdf",
+              "canonicalSourceSha256": "79769245bf0c9b4d48b9e593f5f96d4240e47e384f89133bb8b6ac816770ca79",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave3-fjmu-fujian-government-scholarship-graduate",
+                "url": "https://oec.fjmu.edu.cn/_upload/article/files/9e/1c/84672d884f0694be1c23d42133c1/aac86c15-4bf3-4752-8b5a-4bdd8173c4c7.pdf",
+                "title": "FJMU International Graduate Student Fees and Scholarships",
+                "publisher": "fujian-medical-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceKey": "fjmu-award-table-no-deadline",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "dateRelatedApplicationRule": "additional provincial scholarship requires application; no numeric cutoff published",
+          "reason": "The one-pagefees/scholarshipschedule has no applicant date or applicablecalendar year; benefit duration and platform URL do not establish a deadline."
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-fjmu-international-graduate-freshman-scholarship",
+          "selectionOrigin": "baseQueue12",
+          "universityId": "uni-fujian-medical-university",
+          "name": "FJMU International Graduate Freshman Scholarship",
+          "programIds": [],
+          "canonicalScholarshipSha256": "8c9cb86245db171657fa4a1da8f042366a924a1f5c8ecdb46cdf2beda9179ef3",
+          "canonicalRowSha256": "8c9cb86245db171657fa4a1da8f042366a924a1f5c8ecdb46cdf2beda9179ef3",
+          "canonicalRecordSha256": "8c9cb86245db171657fa4a1da8f042366a924a1f5c8ecdb46cdf2beda9179ef3",
+          "sourceIds": [
+            "src-gap-scholarship-wave3-fjmu-international-graduate-freshman-scholarship"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-fjmu-international-graduate-freshman-scholarship",
+              "url": "https://oec.fjmu.edu.cn/_upload/article/files/9e/1c/84672d884f0694be1c23d42133c1/aac86c15-4bf3-4752-8b5a-4bdd8173c4c7.pdf",
+              "canonicalSourceSha256": "993b193b150f607e15ceb1865db911496937de602fc10b5b04a5fa3b03e383e7",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave3-fjmu-international-graduate-freshman-scholarship",
+                "url": "https://oec.fjmu.edu.cn/_upload/article/files/9e/1c/84672d884f0694be1c23d42133c1/aac86c15-4bf3-4752-8b5a-4bdd8173c4c7.pdf",
+                "title": "FJMU International Graduate Student Fees and Scholarships",
+                "publisher": "fujian-medical-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceKey": "fjmu-award-table-no-deadline",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "dateRelatedApplicationRule": "automatic school scholarship consideration; no separate numeric award cutoff published",
+          "reason": "The one-pagefees/scholarshipschedule has no applicant date or applicablecalendar year; benefit duration and platform URL do not establish a deadline."
+        }
+      ]
+    },
+    {
+      "key": "fzu-chinese-bachelor-general",
+      "universityId": "uni-fuzhou-university",
+      "evidenceKey": "fzu-2026-chinese-bachelor",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-fzu-chinese-language-bachelor-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "baseQueue12",
+          "universityId": "uni-fuzhou-university",
+          "programId": "prog-gap-mew-csw-fzu-chinese-language-bachelor",
+          "programName": "Chinese Language",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "04442d25a8b9483d70e270f6525ec4f933f2fc3c9cef34c11c87fb6adff08342",
+          "canonicalProgramSha256": "373e5e57856a48675be38d8e863ed54137c4eca0265acf1d2041f3f788be4c53",
+          "canonicalRowSha256": "04442d25a8b9483d70e270f6525ec4f933f2fc3c9cef34c11c87fb6adff08342",
+          "canonicalRecordSha256": "04442d25a8b9483d70e270f6525ec4f933f2fc3c9cef34c11c87fb6adff08342",
+          "sourceIds": [
+            "src-gap-program-mew-csw-fzu-chinese-language-bachelor",
+            "src-gap-program-mew-csw-fzu-chinese-language-bachelor-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-fzu-chinese-language-bachelor",
+              "url": "https://oce.fzu.edu.cn/info/1025/8036.htm",
+              "canonicalSourceSha256": "5cea27fc3858285422422e205104e15e3c9539fefbf8a096acbaaa7b8b9b6f4c",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-csw-fzu-chinese-language-bachelor",
+                "url": "https://oce.fzu.edu.cn/info/1025/8036.htm",
+                "title": "Fuzhou University 2026 Admission Brochure for International Students — Bachelor of Chinese Language",
+                "publisher": "fuzhou-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-fzu-chinese-language-bachelor-support-1",
+              "url": "https://en.fzu.edu.cn/info/1006/1009.htm",
+              "canonicalSourceSha256": "7316ee35ebb60ee7887b02c307ded9e864aec68971c2c726b4f152b62e480c20",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-csw-fzu-chinese-language-bachelor-support-1",
+                "url": "https://en.fzu.edu.cn/info/1006/1009.htm",
+                "title": "Fuzhou University Tuition Information for International Students",
+                "publisher": "fuzhou-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "evidenceKey": "fzu-2026-chinese-bachelor",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": "2026-05-30",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "closed",
+          "officialDeadline": "2026-05-30",
+          "applicableEntryYear": 2026,
+          "deadlineBoundary": "date-only-no-cutoff-clock-stated",
+          "applicationScope": "Exact2026BachelorofChineseLanguagegeneralapplicant route, including required paper materials",
+          "reason": "Exact degree/programme/year admission guide givesMay30; canonical null remains unchanged and scholarship deadlines are not borrowed."
+        }
+      ]
+    },
+    {
+      "key": "fzu-three-additional-postgraduate-general",
+      "universityId": "uni-fuzhou-university",
+      "evidenceKey": "fzu-2026-postgraduate-general",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-fzu-electrical-theory-new-technology-doctorate-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "additionalSameSource3",
+          "universityId": "uni-fuzhou-university",
+          "programId": "prog-gap-mew-csw-fzu-electrical-theory-new-technology-doctorate",
+          "programName": "Electrical Theory and New Technology",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "42e16fe0c8350237372ffec862c10fa489ace381db8cbba13a5f820f2058a50a",
+          "canonicalProgramSha256": "1986e1256f2f2f30fba57702f52c89750e1854a003c565a63e78553d9ba1e2c7",
+          "canonicalRowSha256": "42e16fe0c8350237372ffec862c10fa489ace381db8cbba13a5f820f2058a50a",
+          "canonicalRecordSha256": "42e16fe0c8350237372ffec862c10fa489ace381db8cbba13a5f820f2058a50a",
+          "sourceIds": [
+            "src-gap-program-mew-csw-fzu-electrical-theory-new-technology-doctorate"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-fzu-electrical-theory-new-technology-doctorate",
+              "url": "https://oce.fzu.edu.cn/info/1025/7987.htm",
+              "canonicalSourceSha256": "0fd7523fae21326958e84088dfb4c9c9a479f73e6e32b113ebf07b634cce2306",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-csw-fzu-electrical-theory-new-technology-doctorate",
+                "url": "https://oce.fzu.edu.cn/info/1025/7987.htm",
+                "title": "Fuzhou University 2026 International Master's and Doctoral Admission Brochure",
+                "publisher": "fuzhou-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "evidenceKey": "fzu-2026-postgraduate-general",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": "2026-05-15",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "closed",
+          "officialDeadline": "2026-05-15",
+          "applicableEntryYear": 2026,
+          "programmeScopeMatch": {
+            "name": "Electrical Theory and New Technology",
+            "degree": "doctorate",
+            "language": "English",
+            "originalSection": "III(II)DoctorEnglish-taught"
+          },
+          "applicationScope": "General programme admission deadline only; applicants using CSCmust separately meet the earlierFebruary20branch",
+          "excludedEarlierFundingBranch": {
+            "route": "Chinese Government Scholarship applicant",
+            "deadline": "2026-02-20",
+            "obligation": "CSCportalcompletionandsubmissionofallpapermaterialstouniversity",
+            "adoptedAsGenericProgrammeDeadline": false
+          },
+          "deadlineBoundary": "date-only-no-cutoff-clock-stated",
+          "reason": "Exact2026Englishprogrammeandcorrectdegreeareexplicitinthesameguide. May15isgeneraladmission; it is not permissionforCSCapplicants to ignoreFebruary20. Fee-reference naming alone was not used."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-fzu-geotechnical-engineering-master-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "additionalSameSource3",
+          "universityId": "uni-fuzhou-university",
+          "programId": "prog-gap-mew-csw-fzu-geotechnical-engineering-master",
+          "programName": "Geotechnical Engineering",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "d956a8a57784e4346b9ae5706d37190a996e48f048dfc7c9c51dcb334a25a658",
+          "canonicalProgramSha256": "1fcc322454dfde06fc73ad8822b8b1b9fff72b7b0e1db669cbecf5a99a40b51b",
+          "canonicalRowSha256": "d956a8a57784e4346b9ae5706d37190a996e48f048dfc7c9c51dcb334a25a658",
+          "canonicalRecordSha256": "d956a8a57784e4346b9ae5706d37190a996e48f048dfc7c9c51dcb334a25a658",
+          "sourceIds": [
+            "src-gap-program-mew-csw-fzu-geotechnical-engineering-master"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-fzu-geotechnical-engineering-master",
+              "url": "https://oce.fzu.edu.cn/info/1025/7987.htm",
+              "canonicalSourceSha256": "fbff0ab967364883f72a325abe510ed98a8559a2e0afd1a9e1a63dae3a03275f",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-csw-fzu-geotechnical-engineering-master",
+                "url": "https://oce.fzu.edu.cn/info/1025/7987.htm",
+                "title": "Fuzhou University 2026 International Master's and Doctoral Admission Brochure",
+                "publisher": "fuzhou-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "evidenceKey": "fzu-2026-postgraduate-general",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": "2026-05-15",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "closed",
+          "officialDeadline": "2026-05-15",
+          "applicableEntryYear": 2026,
+          "programmeScopeMatch": {
+            "name": "Geotechnical Engineering",
+            "degree": "master",
+            "language": "English",
+            "originalSection": "III(I)MasterEnglish-taught"
+          },
+          "applicationScope": "General programme admission deadline only; applicants using CSCmust separately meet the earlierFebruary20branch",
+          "excludedEarlierFundingBranch": {
+            "route": "Chinese Government Scholarship applicant",
+            "deadline": "2026-02-20",
+            "obligation": "CSCportalcompletionandsubmissionofallpapermaterialstouniversity",
+            "adoptedAsGenericProgrammeDeadline": false
+          },
+          "deadlineBoundary": "date-only-no-cutoff-clock-stated",
+          "reason": "Exact2026Englishprogrammeandcorrectdegreeareexplicitinthesameguide. May15isgeneraladmission; it is not permissionforCSCapplicants to ignoreFebruary20. Fee-reference naming alone was not used."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-fzu-municipal-engineering-master-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "additionalSameSource3",
+          "universityId": "uni-fuzhou-university",
+          "programId": "prog-gap-mew-csw-fzu-municipal-engineering-master",
+          "programName": "Municipal Engineering",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "5a195aa2e7f583941430151d94cf8fac4ef6c10c81bd38f9800e3a569e773ed5",
+          "canonicalProgramSha256": "1f940e216cba6f4d1d42763d6a01b37010bb1b0981f8187a970ca07614657468",
+          "canonicalRowSha256": "5a195aa2e7f583941430151d94cf8fac4ef6c10c81bd38f9800e3a569e773ed5",
+          "canonicalRecordSha256": "5a195aa2e7f583941430151d94cf8fac4ef6c10c81bd38f9800e3a569e773ed5",
+          "sourceIds": [
+            "src-gap-program-mew-csw-fzu-municipal-engineering-master"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-fzu-municipal-engineering-master",
+              "url": "https://oce.fzu.edu.cn/info/1025/7987.htm",
+              "canonicalSourceSha256": "24ce3b2e2539fa3e8d96ce3333c655bceb90ec19de89b71941cf884b2b301401",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-csw-fzu-municipal-engineering-master",
+                "url": "https://oce.fzu.edu.cn/info/1025/7987.htm",
+                "title": "Fuzhou University 2026 International Master's and Doctoral Admission Brochure",
+                "publisher": "fuzhou-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "evidenceKey": "fzu-2026-postgraduate-general",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-08-10",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": "2026-05-15",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "closed",
+          "officialDeadline": "2026-05-15",
+          "applicableEntryYear": 2026,
+          "programmeScopeMatch": {
+            "name": "Municipal Engineering",
+            "degree": "master",
+            "language": "English",
+            "originalSection": "III(I)MasterEnglish-taught"
+          },
+          "applicationScope": "General programme admission deadline only; applicants using CSCmust separately meet the earlierFebruary20branch",
+          "excludedEarlierFundingBranch": {
+            "route": "Chinese Government Scholarship applicant",
+            "deadline": "2026-02-20",
+            "obligation": "CSCportalcompletionandsubmissionofallpapermaterialstouniversity",
+            "adoptedAsGenericProgrammeDeadline": false
+          },
+          "deadlineBoundary": "date-only-no-cutoff-clock-stated",
+          "reason": "Exact2026Englishprogrammeandcorrectdegreeareexplicitinthesameguide. May15isgeneraladmission; it is not permissionforCSCapplicants to ignoreFebruary20. Fee-reference naming alone was not used."
+        }
+      ]
+    },
+    {
+      "key": "fzu-two-broad-awards",
+      "universityId": "uni-fuzhou-university",
+      "evidenceKey": "fzu-broad-awards-no-single-date",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-csw-fzu-fujian-government-scholarship",
+          "selectionOrigin": "baseQueue12",
+          "universityId": "uni-fuzhou-university",
+          "name": "Fujian Provincial Government Scholarship for International Students",
+          "programIds": [
+            "prog-gap-mew-csw-fzu-chinese-language-bachelor",
+            "prog-gap-mew-csw-fzu-geotechnical-engineering-master",
+            "prog-gap-mew-csw-fzu-municipal-engineering-master",
+            "prog-gap-mew-csw-fzu-electrical-theory-new-technology-doctorate"
+          ],
+          "canonicalScholarshipSha256": "0bf3a9790a8a3cdf11e432d76167f0dc17c4444869f03c93ac0773cb81c63a45",
+          "canonicalRowSha256": "0bf3a9790a8a3cdf11e432d76167f0dc17c4444869f03c93ac0773cb81c63a45",
+          "canonicalRecordSha256": "0bf3a9790a8a3cdf11e432d76167f0dc17c4444869f03c93ac0773cb81c63a45",
+          "sourceIds": [
+            "src-gap-scholarship-mew-csw-fzu-fujian-government-scholarship",
+            "src-gap-scholarship-mew-csw-fzu-fujian-government-scholarship-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-csw-fzu-fujian-government-scholarship",
+              "url": "https://oce.fzu.edu.cn/info/1025/7987.htm",
+              "canonicalSourceSha256": "b946a13d58b88c2de198df7270804b8e52b6093eec8db5fa55a7af1f1770237b",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mew-csw-fzu-fujian-government-scholarship",
+                "url": "https://oce.fzu.edu.cn/info/1025/7987.htm",
+                "title": "Fuzhou University 2026 International Master's and Doctoral Admission Brochure",
+                "publisher": "fuzhou-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            },
+            {
+              "sourceId": "src-gap-scholarship-mew-csw-fzu-fujian-government-scholarship-support-1",
+              "url": "https://oce.fzu.edu.cn/info/1025/8036.htm",
+              "canonicalSourceSha256": "74ea79f5eab8b625ff6360707f50e1c6ad231607d776d7d089b138c38d23c244",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mew-csw-fzu-fujian-government-scholarship-support-1",
+                "url": "https://oce.fzu.edu.cn/info/1025/8036.htm",
+                "title": "Fuzhou University 2026 Bachelor of Chinese Language Admission Brochure",
+                "publisher": "fuzhou-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "evidenceKey": "fzu-broad-awards-no-single-date",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-09-02",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateAdmissionWindowsNotSingleAwardCutoff": [
+            {
+              "degreeRoute": "BachelorofChineseLanguage2026",
+              "admissionDeadline": "2026-05-30"
+            },
+            {
+              "degreeRoute": "2026master/doctoral general admission",
+              "admissionDeadline": "2026-05-15"
+            }
+          ],
+          "excludedCscDeadline": "2026-02-20",
+          "applicationConstraint": "may apply simultaneously with admission; no additionalmaterials;degree-routewindowvaries",
+          "reason": "Broadprovincial/universityawards span degree routes with different deadlines. No independent single award cutoff is printed, and the CSCdatebelongs to another award."
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-csw-fzu-university-scholarship",
+          "selectionOrigin": "baseQueue12",
+          "universityId": "uni-fuzhou-university",
+          "name": "Fuzhou University Scholarship for International Students",
+          "programIds": [
+            "prog-gap-mew-csw-fzu-chinese-language-bachelor",
+            "prog-gap-mew-csw-fzu-geotechnical-engineering-master",
+            "prog-gap-mew-csw-fzu-municipal-engineering-master",
+            "prog-gap-mew-csw-fzu-electrical-theory-new-technology-doctorate"
+          ],
+          "canonicalScholarshipSha256": "2d20dc5679c0b18264367446f411fe529b6bed9df2ce2daf7b5a7e232d52d4e8",
+          "canonicalRowSha256": "2d20dc5679c0b18264367446f411fe529b6bed9df2ce2daf7b5a7e232d52d4e8",
+          "canonicalRecordSha256": "2d20dc5679c0b18264367446f411fe529b6bed9df2ce2daf7b5a7e232d52d4e8",
+          "sourceIds": [
+            "src-gap-scholarship-mew-csw-fzu-university-scholarship",
+            "src-gap-scholarship-mew-csw-fzu-university-scholarship-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-csw-fzu-university-scholarship",
+              "url": "https://oce.fzu.edu.cn/info/1025/7987.htm",
+              "canonicalSourceSha256": "c4b31ccfbad93c13bbd3208fdc663495ef1013b8bf2ebb5ae902bcbf71d34dee",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mew-csw-fzu-university-scholarship",
+                "url": "https://oce.fzu.edu.cn/info/1025/7987.htm",
+                "title": "Fuzhou University 2026 International Master's and Doctoral Admission Brochure",
+                "publisher": "fuzhou-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            },
+            {
+              "sourceId": "src-gap-scholarship-mew-csw-fzu-university-scholarship-support-1",
+              "url": "https://oce.fzu.edu.cn/info/1025/8036.htm",
+              "canonicalSourceSha256": "795f600598bf1345512312828246a5dd90b612358e6e1658f6c7cb61a9bdf886",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mew-csw-fzu-university-scholarship-support-1",
+                "url": "https://oce.fzu.edu.cn/info/1025/8036.htm",
+                "title": "Fuzhou University 2026 Bachelor of Chinese Language Admission Brochure",
+                "publisher": "fuzhou-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "evidenceKey": "fzu-broad-awards-no-single-date",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-03",
+          "storedReviewAfter": "2026-09-02",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateAdmissionWindowsNotSingleAwardCutoff": [
+            {
+              "degreeRoute": "BachelorofChineseLanguage2026",
+              "admissionDeadline": "2026-05-30"
+            },
+            {
+              "degreeRoute": "2026master/doctoral general admission",
+              "admissionDeadline": "2026-05-15"
+            }
+          ],
+          "excludedCscDeadline": "2026-02-20",
+          "applicationConstraint": "may apply simultaneously with admission; no additionalmaterials;degree-routewindowvaries",
+          "reason": "Broadprovincial/universityawards span degree routes with different deadlines. No independent single award cutoff is printed, and the CSCdatebelongs to another award."
+        }
+      ]
+    },
+    {
+      "key": "gdmu-historical-freshman-award",
+      "universityId": "uni-guangdong-medical-university",
+      "evidenceKey": "gdmu-historical-admission-not-award-date",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-gdmu-international-freshman-scholarship",
+          "selectionOrigin": "baseQueue12",
+          "universityId": "uni-guangdong-medical-university",
+          "name": "GDMU International Freshman Scholarship",
+          "programIds": [
+            "prog-gap-wave3-gdmu-clinical-medicine-bachelor",
+            "prog-gap-wave3-gdmu-stomatology-bachelor",
+            "prog-gap-wave3-gdmu-pharmacy-bachelor",
+            "prog-gap-wave3-gdmu-biomedical-engineering-bachelor"
+          ],
+          "canonicalScholarshipSha256": "ead54c1a30ff4c82c3ecd0663e3522b554c6d04c12b9991a377c363975438efb",
+          "canonicalRowSha256": "ead54c1a30ff4c82c3ecd0663e3522b554c6d04c12b9991a377c363975438efb",
+          "canonicalRecordSha256": "ead54c1a30ff4c82c3ecd0663e3522b554c6d04c12b9991a377c363975438efb",
+          "sourceIds": [
+            "src-gap-scholarship-wave3-gdmu-international-freshman-scholarship"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-gdmu-international-freshman-scholarship",
+              "url": "https://en.gdmu.edu.cn/info/1025/1265.htm",
+              "canonicalSourceSha256": "00b8480f3b92314fcec723e39ad5a3fc8d494ca6ac2f47378e882618bc36518e",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave3-gdmu-international-freshman-scholarship",
+                "url": "https://en.gdmu.edu.cn/info/1025/1265.htm",
+                "title": "GDMU International Undergraduate Enrollment Brochure and Freshman Scholarship Form",
+                "publisher": "guangdong-medical-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceKey": "gdmu-historical-admission-not-award-date",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "excludedHistoricalGeneralAdmissionMonthDay": {
+            "month": 7,
+            "day": 10,
+            "year": null,
+            "sourcePublishedAt": "2024-05-13",
+            "appliesToScholarship": false
+          },
+          "reason": "The2024page has a general-admissionJuly10month/day and a scholarship form, but no exactcurrentawardyear or separate deadline."
+        }
+      ]
+    },
+    {
+      "key": "gdou-old-catalogue",
+      "universityId": "uni-guangdong-ocean-university",
+      "evidenceKey": "gdou-old-programme-list-no-dates",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-0805-scw-gdou-aquaculture-bachelor-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue12",
+          "universityId": "uni-guangdong-ocean-university",
+          "programId": "prog-gap-mew-0805-scw-gdou-aquaculture-bachelor",
+          "programName": "Aquaculture",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "canonicalCycleSha256": "54a9f2b033fb895400e0b196dd74fc9a8f131b129538e36e8070cb5435cc689e",
+          "canonicalProgramSha256": "bb98aeec846a59b1527c5b254113184aa828d301dee9f9b8b75d4c8e06b3a084",
+          "canonicalRowSha256": "54a9f2b033fb895400e0b196dd74fc9a8f131b129538e36e8070cb5435cc689e",
+          "canonicalRecordSha256": "54a9f2b033fb895400e0b196dd74fc9a8f131b129538e36e8070cb5435cc689e",
+          "sourceIds": [
+            "src-gap-program-mew-0805-scw-gdou-aquaculture-bachelor"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-0805-scw-gdou-aquaculture-bachelor",
+              "url": "https://iecd.gdou.edu.cn/info/1022/1050.htm",
+              "canonicalSourceSha256": "452a8e36138e067cba7b541502543ad5b69374c9a4cfd15ee5a88c878d1bb5de",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-0805-scw-gdou-aquaculture-bachelor",
+                "url": "https://iecd.gdou.edu.cn/info/1022/1050.htm",
+                "title": "Guangdong Ocean University International Undergraduate Programs",
+                "publisher": "guangdong-ocean-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            }
+          ],
+          "evidenceKey": "gdou-old-programme-list-no-dates",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-05",
+          "storedReviewAfter": "2026-08-12",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "reason": "2022programme/fee catalogue has no applicant deadline or current2026entry window; no rolling or open status inferred."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-0805-scw-gdou-tcsol-bachelor-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue12",
+          "universityId": "uni-guangdong-ocean-university",
+          "programId": "prog-gap-mew-0805-scw-gdou-tcsol-bachelor",
+          "programName": "Teaching Chinese to Speakers of Other Languages",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "canonicalCycleSha256": "89f937459c7d118ca89a67cd4d05dd5567505843dac1c8faf15c5f6f82d8b412",
+          "canonicalProgramSha256": "7ce2d69c2a39175bcd0afb7c6a87d32baa0f4479334dcb07491f8c4d9a02507b",
+          "canonicalRowSha256": "89f937459c7d118ca89a67cd4d05dd5567505843dac1c8faf15c5f6f82d8b412",
+          "canonicalRecordSha256": "89f937459c7d118ca89a67cd4d05dd5567505843dac1c8faf15c5f6f82d8b412",
+          "sourceIds": [
+            "src-gap-program-mew-0805-scw-gdou-tcsol-bachelor"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-0805-scw-gdou-tcsol-bachelor",
+              "url": "https://iecd.gdou.edu.cn/info/1022/1050.htm",
+              "canonicalSourceSha256": "906e35e3a2949cdf5edc79251c5edb04d7952ffacd85ae05a6306483265fa4ba",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-0805-scw-gdou-tcsol-bachelor",
+                "url": "https://iecd.gdou.edu.cn/info/1022/1050.htm",
+                "title": "Guangdong Ocean University International Undergraduate Programs",
+                "publisher": "guangdong-ocean-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            }
+          ],
+          "evidenceKey": "gdou-old-programme-list-no-dates",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-05",
+          "storedReviewAfter": "2026-08-12",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "reason": "2022programme/fee catalogue has no applicant deadline or current2026entry window; no rolling or open status inferred."
+        }
+      ]
+    },
+    {
+      "key": "gdufe-international-business-2026",
+      "universityId": "uni-guangdong-university-of-finance-and-economics",
+      "evidenceKey": "gdufe-2026-original-pdf",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-gdufe-b-international-business-en-2026-2027-other",
+          "selectionOrigin": "baseQueue12",
+          "universityId": "uni-guangdong-university-of-finance-and-economics",
+          "programId": "prog-gap-local-strong-gdufe-b-international-business-en",
+          "programName": "International Business",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "canonicalCycleSha256": "8b4820cf4420a03cd963ba56cf16ed22d26e6c3a20a34e04d625a0792118cc11",
+          "canonicalProgramSha256": "c1a8004062d87dfacb7e0fd6d3ffabf221475fb2320336ff00f1e401a0051733",
+          "canonicalRowSha256": "8b4820cf4420a03cd963ba56cf16ed22d26e6c3a20a34e04d625a0792118cc11",
+          "canonicalRecordSha256": "8b4820cf4420a03cd963ba56cf16ed22d26e6c3a20a34e04d625a0792118cc11",
+          "sourceIds": [
+            "src-gap-program-local-strong-gdufe-b-international-business-en",
+            "src-gap-program-local-strong-gdufe-b-international-business-en-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-gdufe-b-international-business-en",
+              "url": "https://english.gdufe.edu.cn/1834/list.htm",
+              "canonicalSourceSha256": "841d365dfc34c64c1763bcf34633aa49dacd8511e2b1c16a5e8b7802d9fc8ef7",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-strong-gdufe-b-international-business-en",
+                "url": "https://english.gdufe.edu.cn/1834/list.htm",
+                "title": "GDUFE International Program Catalog",
+                "publisher": "guangdong-university-of-finance-and-economics",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-local-strong-gdufe-b-international-business-en-support-1",
+              "url": "https://fao.gdufe.edu.cn/2026/0228/c9112a233408/page.htm",
+              "canonicalSourceSha256": "f2fa8211c076c8ec845a21d478af4e7b99d3f554f3f76691fc3bd4d5837ba9a4",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-strong-gdufe-b-international-business-en-support-1",
+                "url": "https://fao.gdufe.edu.cn/2026/0228/c9112a233408/page.htm",
+                "title": "Supporting official source",
+                "publisher": "guangdong-university-of-finance-and-economics",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceKey": "gdufe-2026-original-pdf",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": "2026-06-01",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "closed",
+          "officialDeadline": "2026-06-01",
+          "applicableEntryYear": 2026,
+          "applicationScope": "Exact2026English-taught InternationalBusinessbachelor applicant route",
+          "deadlineBoundary": "date-only-no-cutoff-clock-stated",
+          "dateEvidenceSourceUrl": "https://fao.gdufe.edu.cn/_upload/article/files/47/ac/477000b044748885bb2fd03666da/20ec765e-9e99-4edc-97a7-d2d8d38f6e49.pdf",
+          "dateEvidenceRawSha256": "89b09365c72afe87ffc06065566d1e74ffcebdd4e9f6719140061a8c8457977b",
+          "dateEvidenceObservedAt": "2026-10-19T05:57:45.465122+00:00",
+          "programmeScopeMatch": {
+            "page": 12,
+            "programme": "InternationalBusiness",
+            "degree": "BachelorofManagement",
+            "language": "English",
+            "duration": "4Years",
+            "visuallyInspected": true
+          },
+          "reason": "ActualbilingualPDForiginalp12tableandp14deadline support exactprogramme/year/degree. Landingpage200alone was not date proof."
+        }
+      ]
+    },
+    {
+      "key": "gdufe-legacy-international-economics-trade-unbound",
+      "universityId": "uni-guangdong-university-of-finance-and-economics",
+      "evidenceKey": "gdufe-2026-original-pdf",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-gdufe-b-international-economics-trade-en-2026-2027-other",
+          "selectionOrigin": "baseQueue12",
+          "universityId": "uni-guangdong-university-of-finance-and-economics",
+          "programId": "prog-gap-local-strong-gdufe-b-international-economics-trade-en",
+          "programName": "International Economics and Trade",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "canonicalCycleSha256": "cc664579d1085205b529d5cf6a12a137d8dd1c878e49ee53c8c7973a974b6fd5",
+          "canonicalProgramSha256": "b9597774dc762685705ab7028da38d1129ed217713bdf1ffc222a931551f44e3",
+          "canonicalRowSha256": "cc664579d1085205b529d5cf6a12a137d8dd1c878e49ee53c8c7973a974b6fd5",
+          "canonicalRecordSha256": "cc664579d1085205b529d5cf6a12a137d8dd1c878e49ee53c8c7973a974b6fd5",
+          "sourceIds": [
+            "src-gap-program-local-strong-gdufe-b-international-economics-trade-en",
+            "src-gap-program-local-strong-gdufe-b-international-economics-trade-en-support-1"
+          ],
+          "evidenceSourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-gdufe-b-international-economics-trade-en",
+              "url": "https://english.gdufe.edu.cn/1834/list.htm",
+              "canonicalSourceSha256": "c35949d02f5796d7b77acc2e84260318d6c9ee52d92c6fb62ae2a8b626cd12f5",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-strong-gdufe-b-international-economics-trade-en",
+                "url": "https://english.gdufe.edu.cn/1834/list.htm",
+                "title": "GDUFE International Program Catalog",
+                "publisher": "guangdong-university-of-finance-and-economics",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-local-strong-gdufe-b-international-economics-trade-en-support-1",
+              "url": "https://fao.gdufe.edu.cn/2026/0228/c9112a233408/page.htm",
+              "canonicalSourceSha256": "0980d61b32241217344621e21a0ae69bacb1b5e836a14dfa66dfa73fd4f7e1d7",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-strong-gdufe-b-international-economics-trade-en-support-1",
+                "url": "https://fao.gdufe.edu.cn/2026/0228/c9112a233408/page.htm",
+                "title": "Supporting official source",
+                "publisher": "guangdong-university-of-finance-and-economics",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceKey": "gdufe-2026-original-pdf",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "officialOpensOn": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "programmeDiscontinuedConfirmed": false,
+          "rawRecordPreservedIn": "selection.json",
+          "requiresIndependentApprovalAndCasBeforeMutation": true,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateDeadlineNotBoundToExactProgramme": "2026-06-01",
+          "current2026EnrollmentTableContainsSelectedProgramme": false,
+          "programmeDiscontinuationInferred": false,
+          "reason": "Thecurrent2026PDFenrollmenttablelistsInternationalBusinessandChineseLanguageonly, notInternationalEconomicsandTrade. Sharedsourcesandoldmetadata do not bind its deadline; absence is not a formaldiscontinuationnotice."
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "schoolsAttempted": 7,
+    "recordsAssessed": 15,
+    "baseQueueRecords": 12,
+    "additionalSameSourceRecords": 3,
+    "recordResults": {
+      "unknown": 9,
+      "blocked": 1,
+      "closed": 5
+    },
+    "newExpiredDeadlineCandidatesFromCanonicalNull": 5,
+    "allCanonicalDeadlinesStillNull": 15,
+    "newOpeningDateCandidates": 0,
+    "canonicalWrites": 0,
+    "canonicalDateEqualitiesCertified": 0,
+    "freshnessRenewals": 0,
+    "fullFactsCertified": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "gitMutations": 0,
+    "sharedStateWrites": 0,
+    "publicationActions": 0
+  },
+  "publicationRiskFlags": [
+    "GDUFE2026original does not list the legacyInternationalEconomicsandTradeprogramme; do not renew it from the sharedJune1deadline or infer discontinuation.",
+    "FZUgeneralpostgraduateMay15doesnotreplaceCSCFeb20. BachelorMay30andbroadprovincial/universityawardsaredistinctscopes.",
+    "FZUgraduate notice has an institutionalresult-releaseJune2025line; it was excluded from date/year proof.",
+    "ECUPLcoursefinish/semesterhours,FJMUbenefitdurations,GDOUfeeamountsandGDMUoldadmissionmonth/dayarenotaward/applicantcutoffs.",
+    "All observations remain candidates only; no full facts or freshness are renewed."
+  ],
+  "cooldowns": [
+    {
+      "sourceKey": "source-09",
+      "reason": "TrustedTLSunexpectedEOFfollowedbyoneweb502fallback",
+      "immediateRetryAllowed": false,
+      "retryCondition": "Changedsource/networkconditionorlaterboundedrecoverywindow"
+    }
+  ],
+  "validation": {
+    "exactBase12PlusAdditional3": true,
+    "uniqueRecordIds": 15,
+    "recordObjectsStoredOnlyInGroupsRecords": true,
+    "rawTextShaAndObservedAtPinned": true,
+    "fullCanonicalRowProgramSourcePinsPreserved": true,
+    "canonicalSixFileHashesUnchangedBeforeAfter": true,
+    "additionalSelectionReceiptPinned": true,
+    "pdfDateAndProgrammeTableVisuallyInspected": true,
+    "noYearRolledForward": true,
+    "noCanonicalOrGitOrSharedStateWrites": true
+  }
+}
