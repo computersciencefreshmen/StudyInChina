@@ -1,0 +1,719 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-023-20261019",
+  "reviewer": "/root/fast_date_inventory",
+  "reviewedAt": "2026-10-19T06:48:58.033Z",
+  "mode": "offline-independent-source-only-review",
+  "decision": "approved-for-source-only-date-observations-with-preserved-scope-limitations",
+  "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7",
+  "selectionSha256": "a18b20f108e52661c0b72d39581804aa434e4a9a4c1c21f26edf9ce9713a7f2e",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "queueSha256": "01719171d2d61977e8c62adfe3e323750f30b40a2396685c962f56d71bfa34d4",
+  "additionalSelectionReceiptSha256": "19b484eb2df8aaefa97d74c9a2eb78962b4b5fc9f0e374d6a6d619b73f566b2b",
+  "exactRecordIds": [
+    "sch-gap-sch-mew-nnw-hebtu-csc-high-level-postgraduate",
+    "sch-gap-sch-mew-nss-hebut-csc",
+    "sch-gap-mve-ecs-hfut-undergraduate-scholarship",
+    "cycle-gap-mve-ecs-hfut-biomedical-engineering-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-mve-ecs-hfut-civil-engineering-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-mve-ecs-hfut-international-economics-bachelor-2026-2027-autumn-fee-reference",
+    "sch-gap-mew-csw-henu-cgs-high-level-postgraduate-2026",
+    "cycle-gap-mew-csw-henu-finance-master-2026-2027-autumn",
+    "cycle-gap-mew-csw-henu-mathematics-doctorate-2026-2027-autumn",
+    "cycle-gap-mew-csw-henu-software-engineering-master-2026-2027-autumn",
+    "sch-gap-wave3-sch-haut-freshman",
+    "sch-gap-wave3-sch-haut-promotion",
+    "cycle-gap-wave3-haut-b-food-science-and-engineering-2026-2027-autumn",
+    "cycle-gap-wave3-haut-m-applied-economics-2026-2027-autumn",
+    "sch-gap-mve-ecs-hhu-csc-high-level-2026",
+    "sch-gap-wave8-hqu-international-chinese-language-teachers-scholarship-2026",
+    "cycle-gap-mew-csw-henu-traditional-chinese-sports-doctorate-2026-2027-autumn",
+    "cycle-gap-wave3-haut-nondegree-chinese-language-2026-2027-autumn",
+    "cycle-gap-wave3-haut-m-computer-science-and-technology-2026-2027-autumn"
+  ],
+  "summary": {
+    "universities": 7,
+    "exactRecords": 19,
+    "baseQueueRecords": 16,
+    "additionalSameSourceRecords": 3,
+    "recordResults": {
+      "closed": 8,
+      "unknown": 11
+    },
+    "rawBodiesHashVerified": 9,
+    "sourceRowsPinned": 24,
+    "canonicalLinkedProgramRowsPinned": 17,
+    "exactRecordOverlapsOtherBatches": 0,
+    "newWebsiteReads": 0,
+    "canonicalWrites": 0,
+    "freshnessRenewals": 0,
+    "gitMutations": 0,
+    "sharedStateWrites": 0
+  },
+  "findings": [
+    {
+      "school": "Hebei Normal University",
+      "accepted": "2026/27 named CSC postgraduate award closes February28,2026; relative announcement opening is not converted into an ISO date. July–August document mailing is not the applicant deadline."
+    },
+    {
+      "school": "Hebei University of Technology",
+      "accepted": "2026 Type B only, November27,2025–February10,2026. Both bilingual clauses agree. Type A route not borrowed; opening remains candidate-only."
+    },
+    {
+      "school": "Hefei University of Technology",
+      "accepted": "2026 guide June15 deadline and directly linked current XLSX programme/language rows3/10/18 match selected bachelor programmes. Independently read original XLSX with Python openpyxl: Biomedical Engineering Chinese; Civil Engineering English; International Economics and Trade Chinese. Generic award remains unknown because programme-linked awards use separate scholarship branches and no independent award deadline is published."
+    },
+    {
+      "school": "Henan University",
+      "accepted": "2026/27 exact high-level postgraduate scholarship before January16,2026 retained. Four specific English programme cycles remain unknown: 2022-path catalogue has exact names/degrees but no applicable intake year; actual current Annex5 returns verification-code HTML. Old stored dates are not revalidated and no programme discontinuation is inferred."
+    },
+    {
+      "school": "Henan University of Technology",
+      "accepted": "Native exact source403 then one actual full-page web-text fallback, honestly labelled potentially cached and not raw origin bytes. 2026 April–July application range is month precision only. Four programme and two award rows remain unknown; general month range is context only for awards. Promotion award concerns later academic years, no initial admission deadline borrowed."
+    },
+    {
+      "school": "Hohai University",
+      "accepted": "Initial school application strictly before December30,2025, with candidate November10 opening. School reviews and March27,2026 nominated-applicant CSC stage stay distinct; no late-stage extension is inferred."
+    },
+    {
+      "school": "Huaqiao University",
+      "accepted": "This 2026 ICLT university notice offers September-only bachelor/year/semester routes. Student May15 differs from institutional May25; no March2027 route invented. Candidate openingMarch1 remains separate."
+    }
+  ],
+  "sourceOnlyScope": "Approval applies only to these19 original-source date observations and their stated limitations. No new canonical dates, overall freshness, whole-school catalogue completeness, linked programme eligibility from award dates, publication, or website certification is approved. Canonical mutation would require the supported narrow consumer, separate independent approval and exact-row CAS.",
+  "recordPins": [
+    {
+      "recordId": "sch-gap-sch-mew-nnw-hebtu-csc-high-level-postgraduate",
+      "canonicalRecordSha256": "554fd425276937ad64bf5487c28801005e516f59b0e09b2d56e5da8fb3aed668",
+      "programId": null,
+      "canonicalProgramSha256": null,
+      "result": "closed",
+      "officialDeadline": "2026-02-28",
+      "deadlineBoundary": "date-only-no-time-stated",
+      "evidenceSourceUrl": "https://cice.hebtu.edu.cn/a/2025/11/27/6EFE88E38B8F41739568513CC10C148A.html",
+      "evidenceBodySha256": "cf59daa3a5540a3ebf8fa43ed5e8957b126d71680dbcd3bd03c17dbdbdb83528",
+      "observedAt": "2026-10-19T06:15:13.825217+00:00"
+    },
+    {
+      "recordId": "sch-gap-sch-mew-nss-hebut-csc",
+      "canonicalRecordSha256": "3fdfc3d805e686f03a6fcfb0cec50894f8af8eca8ff5e75c0868c70d63c76726",
+      "programId": null,
+      "canonicalProgramSha256": null,
+      "result": "closed",
+      "officialDeadline": "2026-02-10",
+      "deadlineBoundary": "date-only-no-time-stated",
+      "evidenceSourceUrl": "https://eweb.hebut.edu.cn/admission/InternationalStudents/prospectus/4f0f206db54b4d67984fdd9b9b483394.htm",
+      "evidenceBodySha256": "eac3d7b81307a5a24919aa712a93345987f631081efdecc3e22e9983c2ba7f0d",
+      "observedAt": "2026-10-19T06:15:13.826222+00:00"
+    },
+    {
+      "recordId": "cycle-gap-mve-ecs-hfut-biomedical-engineering-bachelor-2026-2027-autumn-fee-reference",
+      "canonicalRecordSha256": "b02cac6c0104b5dec979c7861b2a991506528b31fb4fd7e9d31a791c58aa642b",
+      "programId": "prog-gap-mve-ecs-hfut-biomedical-engineering-bachelor",
+      "canonicalProgramSha256": "1381374681b0405d224b090b070245a3b42dc53301d49658323e5235162a96df",
+      "result": "closed",
+      "officialDeadline": "2026-06-15",
+      "deadlineBoundary": "date-only-no-time-stated",
+      "evidenceSourceUrl": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+      "evidenceBodySha256": "f304ddd5ca1239e8dfc0d716772b6c46001505535a58f820deb6f97d2f56355b",
+      "observedAt": "2026-10-19T06:15:17.146670+00:00"
+    },
+    {
+      "recordId": "cycle-gap-mve-ecs-hfut-civil-engineering-bachelor-2026-2027-autumn-fee-reference",
+      "canonicalRecordSha256": "deed970da9abc0245caa6d99d7765107ed6b210c39ea59387bc00a05535e17fb",
+      "programId": "prog-gap-mve-ecs-hfut-civil-engineering-bachelor",
+      "canonicalProgramSha256": "ecf3d2ae57d83c1e180cf192ae7524aec417ec4c280b8c4cd9a90247cb5fa3ba",
+      "result": "closed",
+      "officialDeadline": "2026-06-15",
+      "deadlineBoundary": "date-only-no-time-stated",
+      "evidenceSourceUrl": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+      "evidenceBodySha256": "f304ddd5ca1239e8dfc0d716772b6c46001505535a58f820deb6f97d2f56355b",
+      "observedAt": "2026-10-19T06:15:17.146670+00:00"
+    },
+    {
+      "recordId": "cycle-gap-mve-ecs-hfut-international-economics-bachelor-2026-2027-autumn-fee-reference",
+      "canonicalRecordSha256": "3bbcc6f826f4f583ece830ad3904a95627c98a3053d5c6799979d2fb9a5819e7",
+      "programId": "prog-gap-mve-ecs-hfut-international-economics-bachelor",
+      "canonicalProgramSha256": "dc755eaa419e15061db2189a46f98574d94518646148ae78e4a40e0c39a67ff3",
+      "result": "closed",
+      "officialDeadline": "2026-06-15",
+      "deadlineBoundary": "date-only-no-time-stated",
+      "evidenceSourceUrl": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+      "evidenceBodySha256": "f304ddd5ca1239e8dfc0d716772b6c46001505535a58f820deb6f97d2f56355b",
+      "observedAt": "2026-10-19T06:15:17.146670+00:00"
+    },
+    {
+      "recordId": "sch-gap-mve-ecs-hfut-undergraduate-scholarship",
+      "canonicalRecordSha256": "14f55a1630d98f15c745b6f0810d791e70ea0ff5b1327e24d5bf6b87f264f6e9",
+      "programId": null,
+      "canonicalProgramSha256": null,
+      "result": "unknown",
+      "officialDeadline": null,
+      "deadlineBoundary": "unresolved-or-month-only",
+      "evidenceSourceUrl": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+      "evidenceBodySha256": "f304ddd5ca1239e8dfc0d716772b6c46001505535a58f820deb6f97d2f56355b",
+      "observedAt": "2026-10-19T06:15:17.146670+00:00"
+    },
+    {
+      "recordId": "sch-gap-mew-csw-henu-cgs-high-level-postgraduate-2026",
+      "canonicalRecordSha256": "46c33d4f75cc94a67c66f5e40f5a4529f147fad35abf30eddcd4b9b6ae1d20fb",
+      "programId": null,
+      "canonicalProgramSha256": null,
+      "result": "closed",
+      "officialDeadline": "2026-01-16",
+      "deadlineBoundary": "before-date-as-worded",
+      "evidenceSourceUrl": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+      "evidenceBodySha256": "7cb43c19a6de061570d49d0407a3b31ad6e483069fbd78afe2840c5bf9b4776c",
+      "observedAt": "2026-10-19T06:15:17.951357+00:00"
+    },
+    {
+      "recordId": "cycle-gap-mew-csw-henu-finance-master-2026-2027-autumn",
+      "canonicalRecordSha256": "536ca450b48727c14df63634f89370963a1fa23b419829f95efb7241318dbba0",
+      "programId": "prog-gap-mew-csw-henu-finance-master",
+      "canonicalProgramSha256": "b2c7e3c816d69a0a936eb97560412fc7e5874621f3cd4415af7c775eba1921ea",
+      "result": "unknown",
+      "officialDeadline": null,
+      "deadlineBoundary": "unresolved-or-month-only",
+      "evidenceSourceUrl": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+      "evidenceBodySha256": "7cb43c19a6de061570d49d0407a3b31ad6e483069fbd78afe2840c5bf9b4776c",
+      "observedAt": "2026-10-19T06:15:17.951357+00:00"
+    },
+    {
+      "recordId": "cycle-gap-mew-csw-henu-mathematics-doctorate-2026-2027-autumn",
+      "canonicalRecordSha256": "fbc10e03dba9cc2373f29d96443b6c5a7a3e8220d28237f7947bf314bce01788",
+      "programId": "prog-gap-mew-csw-henu-mathematics-doctorate",
+      "canonicalProgramSha256": "a761c0d5b59ddf130e0c256cca04b3c9ff38199fe186cb9a5f0473fce39ba153",
+      "result": "unknown",
+      "officialDeadline": null,
+      "deadlineBoundary": "unresolved-or-month-only",
+      "evidenceSourceUrl": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+      "evidenceBodySha256": "7cb43c19a6de061570d49d0407a3b31ad6e483069fbd78afe2840c5bf9b4776c",
+      "observedAt": "2026-10-19T06:15:17.951357+00:00"
+    },
+    {
+      "recordId": "cycle-gap-mew-csw-henu-software-engineering-master-2026-2027-autumn",
+      "canonicalRecordSha256": "c5167b1420de941525185a14efcacbdcce8ec8ed6e9ccb260e4514b970a3688c",
+      "programId": "prog-gap-mew-csw-henu-software-engineering-master",
+      "canonicalProgramSha256": "0e1688f5996e0255cf6f603d7828eec3fd8824192c18d6938675c76af4fdfdc2",
+      "result": "unknown",
+      "officialDeadline": null,
+      "deadlineBoundary": "unresolved-or-month-only",
+      "evidenceSourceUrl": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+      "evidenceBodySha256": "7cb43c19a6de061570d49d0407a3b31ad6e483069fbd78afe2840c5bf9b4776c",
+      "observedAt": "2026-10-19T06:15:17.951357+00:00"
+    },
+    {
+      "recordId": "cycle-gap-mew-csw-henu-traditional-chinese-sports-doctorate-2026-2027-autumn",
+      "canonicalRecordSha256": "76d36a592f1cea6653df90b9ea5a075f8c98e4292d93eec27c3d1c7d9a73b972",
+      "programId": "prog-gap-mew-csw-henu-traditional-chinese-sports-doctorate",
+      "canonicalProgramSha256": "79479a3ccbe57b854c4ae07376e6504a57113f219d81dbce893f1575ab5a425f",
+      "result": "unknown",
+      "officialDeadline": null,
+      "deadlineBoundary": "unresolved-or-month-only",
+      "evidenceSourceUrl": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+      "evidenceBodySha256": "7cb43c19a6de061570d49d0407a3b31ad6e483069fbd78afe2840c5bf9b4776c",
+      "observedAt": "2026-10-19T06:15:17.951357+00:00"
+    },
+    {
+      "recordId": "sch-gap-wave3-sch-haut-freshman",
+      "canonicalRecordSha256": "e5e2dbfff80cb64832ba3366fd0b38a8e10d56fb2d46a8f9ac77e4d27651148f",
+      "programId": null,
+      "canonicalProgramSha256": null,
+      "result": "unknown",
+      "officialDeadline": null,
+      "deadlineBoundary": "unresolved-or-month-only",
+      "evidenceSourceUrl": "https://sie.haut.edu.cn/info/1298/17096.htm",
+      "evidenceBodySha256": null,
+      "observedAt": "2026-10-19T06:16:41.742Z"
+    },
+    {
+      "recordId": "sch-gap-wave3-sch-haut-promotion",
+      "canonicalRecordSha256": "2e3f0d19dbfaee8f56cca61a3c8740b61c73ba55f645d13b56c14cf9363d5739",
+      "programId": null,
+      "canonicalProgramSha256": null,
+      "result": "unknown",
+      "officialDeadline": null,
+      "deadlineBoundary": "unresolved-or-month-only",
+      "evidenceSourceUrl": "https://sie.haut.edu.cn/info/1298/17096.htm",
+      "evidenceBodySha256": null,
+      "observedAt": "2026-10-19T06:16:41.742Z"
+    },
+    {
+      "recordId": "cycle-gap-wave3-haut-b-food-science-and-engineering-2026-2027-autumn",
+      "canonicalRecordSha256": "c2efd42e601769842639dfd8207f1cdff7a1eeb936100b9c1e4669c32c33439b",
+      "programId": "prog-gap-wave3-haut-b-food-science-and-engineering",
+      "canonicalProgramSha256": "cf7fa9055c1cd7e844910b33b3873303960157557eff90d1c1e0402518a458ba",
+      "result": "unknown",
+      "officialDeadline": null,
+      "deadlineBoundary": "unresolved-or-month-only",
+      "evidenceSourceUrl": "https://sie.haut.edu.cn/info/1298/17096.htm",
+      "evidenceBodySha256": null,
+      "observedAt": "2026-10-19T06:16:41.742Z"
+    },
+    {
+      "recordId": "cycle-gap-wave3-haut-m-applied-economics-2026-2027-autumn",
+      "canonicalRecordSha256": "2e5b785bd3c22956fd3908ac06d486e86e2e647ffaa51c8e1be114e489df1723",
+      "programId": "prog-gap-wave3-haut-m-applied-economics",
+      "canonicalProgramSha256": "a065c760b6bb3863ea9e0a29f0f49ab04085dcf11694a9b73764914dccb4298c",
+      "result": "unknown",
+      "officialDeadline": null,
+      "deadlineBoundary": "unresolved-or-month-only",
+      "evidenceSourceUrl": "https://sie.haut.edu.cn/info/1298/17096.htm",
+      "evidenceBodySha256": null,
+      "observedAt": "2026-10-19T06:16:41.742Z"
+    },
+    {
+      "recordId": "cycle-gap-wave3-haut-nondegree-chinese-language-2026-2027-autumn",
+      "canonicalRecordSha256": "fba3be58e14cb1d3a3069938d1c5dd39d145be7348028162f5596625a02acfaf",
+      "programId": "prog-gap-wave3-haut-nondegree-chinese-language",
+      "canonicalProgramSha256": "1a6e980f28f8e87b7badd5caa516bbaa0fcb5de19ad94038402c1b7984521e7d",
+      "result": "unknown",
+      "officialDeadline": null,
+      "deadlineBoundary": "unresolved-or-month-only",
+      "evidenceSourceUrl": "https://sie.haut.edu.cn/info/1298/17096.htm",
+      "evidenceBodySha256": null,
+      "observedAt": "2026-10-19T06:16:41.742Z"
+    },
+    {
+      "recordId": "cycle-gap-wave3-haut-m-computer-science-and-technology-2026-2027-autumn",
+      "canonicalRecordSha256": "d775ee629dc36a60bcbb1bf6fec2512e66624b6a170b31a68bfea5eb33ea196b",
+      "programId": "prog-gap-wave3-haut-m-computer-science-and-technology",
+      "canonicalProgramSha256": "5eb3a2ed98bc9ab49921c1fca04cecc10d36eabb7ba92102b0f4ab145a707b3e",
+      "result": "unknown",
+      "officialDeadline": null,
+      "deadlineBoundary": "unresolved-or-month-only",
+      "evidenceSourceUrl": "https://sie.haut.edu.cn/info/1298/17096.htm",
+      "evidenceBodySha256": null,
+      "observedAt": "2026-10-19T06:16:41.742Z"
+    },
+    {
+      "recordId": "sch-gap-mve-ecs-hhu-csc-high-level-2026",
+      "canonicalRecordSha256": "69325ffd6813720160dae4ca38b9c22cb5923694cde47b4b8667f737653ce110",
+      "programId": null,
+      "canonicalProgramSha256": null,
+      "result": "closed",
+      "officialDeadline": "2025-12-30",
+      "deadlineBoundary": "before-date-as-worded",
+      "evidenceSourceUrl": "https://cie.hhu.edu.cn/2025/1030/c14608a309299/pagem.htm",
+      "evidenceBodySha256": "df5794a3121ddb4a7b0ae31babbfe673295d8d97c3c152f470a00f081da3ff63",
+      "observedAt": "2026-10-19T06:15:24.210263+00:00"
+    },
+    {
+      "recordId": "sch-gap-wave8-hqu-international-chinese-language-teachers-scholarship-2026",
+      "canonicalRecordSha256": "2861835a4aacdf12d65d3f96a08da34df5ee9816a0429be8b369a2bbc03d77a5",
+      "programId": null,
+      "canonicalProgramSha256": null,
+      "result": "closed",
+      "officialDeadline": "2026-05-15",
+      "deadlineBoundary": "date-only-no-time-stated",
+      "evidenceSourceUrl": "https://zsc.hqu.edu.cn/info/1081/8892.htm",
+      "evidenceBodySha256": "87f1fb656e16526290eed6cd95a5c8f3771a8e62817dbc2040b8d04107c390fb",
+      "observedAt": "2026-10-19T06:15:24.317845+00:00"
+    }
+  ],
+  "canonicalSourcePins": [
+    {
+      "sourceId": "src-gap-scholarship-sch-mew-nnw-hebtu-csc-high-level-postgraduate",
+      "canonicalSourceSha256": "5e3a638003055b872f02619d5cc582f31e3aeb475ef6ba19989592944e7718e1",
+      "url": "https://cice.hebtu.edu.cn/a/2025/11/27/6EFE88E38B8F41739568513CC10C148A.html"
+    },
+    {
+      "sourceId": "src-gap-scholarship-sch-mew-nss-hebut-csc",
+      "canonicalSourceSha256": "fb44873b3e3ffa45472524caa08cd3575a272d49691f85df6e190de249e06187",
+      "url": "https://eweb.hebut.edu.cn/admission/InternationalStudents/prospectus/4f0f206db54b4d67984fdd9b9b483394.htm"
+    },
+    {
+      "sourceId": "src-gap-program-mve-ecs-hfut-biomedical-engineering-bachelor",
+      "canonicalSourceSha256": "cbe7ac94809e125995549411ae6461f9fe4089f5958c4e9b932294d4d7f86527",
+      "url": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm"
+    },
+    {
+      "sourceId": "src-gap-program-mve-ecs-hfut-civil-engineering-bachelor",
+      "canonicalSourceSha256": "5373a0171102abc914ebf2ea8083bd556a4848ec9dfcd20c52be027238be4b42",
+      "url": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm"
+    },
+    {
+      "sourceId": "src-gap-program-mve-ecs-hfut-international-economics-bachelor",
+      "canonicalSourceSha256": "9529154fdd410a94502a3ad8e79198819f59eca680b85ab32175d34bdb4ead6e",
+      "url": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm"
+    },
+    {
+      "sourceId": "src-gap-scholarship-mve-ecs-hfut-undergraduate-scholarship",
+      "canonicalSourceSha256": "4a6f5f4209f357eb747084489d0cc1488c20bb5421e5eae857a8a50a64302e5c",
+      "url": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm"
+    },
+    {
+      "sourceId": "src-gap-scholarship-mew-csw-henu-cgs-high-level-postgraduate-2026",
+      "canonicalSourceSha256": "782c9a7089a3af2f9a85c395148b1ea302ef01906c1da4da4b9424ceaf33624c",
+      "url": "https://isclc.henu.edu.cn/info/1021/1500.htm"
+    },
+    {
+      "sourceId": "src-gap-program-mew-csw-henu-finance-master",
+      "canonicalSourceSha256": "3e83da9f338af2cf413c065688d90fbc9c34d83001384a87defd8e5795691a65",
+      "url": "https://isclc.henu.edu.cn/dfiles/fujian/202211/5.henandaxueyingwenshoukezhuanyemulu%20English%20Taught%20Programs%20of%20Henan%20University.pdf"
+    },
+    {
+      "sourceId": "src-gap-program-mew-csw-henu-finance-master-support-1",
+      "canonicalSourceSha256": "c226849168aec0426dfe015ff60039412655b2dcbf5a38d9839c81124450aeb8",
+      "url": "https://isclc.henu.edu.cn/info/1021/1500.htm"
+    },
+    {
+      "sourceId": "src-gap-program-mew-csw-henu-mathematics-doctorate",
+      "canonicalSourceSha256": "b57ba618368991f1550ffcf49a6262aec5c9b388476c1b360e9b33a80e2d67f6",
+      "url": "https://isclc.henu.edu.cn/dfiles/fujian/202211/5.henandaxueyingwenshoukezhuanyemulu%20English%20Taught%20Programs%20of%20Henan%20University.pdf"
+    },
+    {
+      "sourceId": "src-gap-program-mew-csw-henu-mathematics-doctorate-support-1",
+      "canonicalSourceSha256": "7ccf37058c74759ba753804c500eacee3f402bd1ea0ccf50862d8b4159153e22",
+      "url": "https://isclc.henu.edu.cn/info/1021/1500.htm"
+    },
+    {
+      "sourceId": "src-gap-program-mew-csw-henu-software-engineering-master",
+      "canonicalSourceSha256": "46bac758d7c8539098764d9bd93069995eaa3b4e23f1982007e8b9b323bc137b",
+      "url": "https://isclc.henu.edu.cn/dfiles/fujian/202211/5.henandaxueyingwenshoukezhuanyemulu%20English%20Taught%20Programs%20of%20Henan%20University.pdf"
+    },
+    {
+      "sourceId": "src-gap-program-mew-csw-henu-software-engineering-master-support-1",
+      "canonicalSourceSha256": "05391404a77f7e2d87580c9f1985902715cb0611793a898de8b74a6978a637fb",
+      "url": "https://isclc.henu.edu.cn/info/1021/1500.htm"
+    },
+    {
+      "sourceId": "src-gap-program-mew-csw-henu-traditional-chinese-sports-doctorate",
+      "canonicalSourceSha256": "3f4c059861438d10e789f603d1c75434d7f6753e14e40bfc81a4e03b795dad41",
+      "url": "https://isclc.henu.edu.cn/dfiles/fujian/202211/5.henandaxueyingwenshoukezhuanyemulu%20English%20Taught%20Programs%20of%20Henan%20University.pdf"
+    },
+    {
+      "sourceId": "src-gap-program-mew-csw-henu-traditional-chinese-sports-doctorate-support-1",
+      "canonicalSourceSha256": "9d0599445fe2716c82b6697a84cad9d4511f95d4169b15fffe44b85f5dae3f7c",
+      "url": "https://isclc.henu.edu.cn/info/1021/1500.htm"
+    },
+    {
+      "sourceId": "src-gap-scholarship-wave3-sch-haut-freshman",
+      "canonicalSourceSha256": "8d5b5d9f53b4d4cd10194a843bfc052db67ad1701a5ce46156d4aed270a3f699",
+      "url": "https://sie.haut.edu.cn/info/1298/17096.htm"
+    },
+    {
+      "sourceId": "src-gap-scholarship-wave3-sch-haut-promotion",
+      "canonicalSourceSha256": "0a1b70c748c04114d7ac9667e24534f55fb334e8476221d14c30edf6861db469",
+      "url": "https://sie.haut.edu.cn/info/1298/17096.htm"
+    },
+    {
+      "sourceId": "src-gap-program-wave3-haut-b-food-science-and-engineering",
+      "canonicalSourceSha256": "a23a8ee5b017bbbde31ca09d19133a4ebd74111fa81f9280d1e8fa4e43287f69",
+      "url": "https://sie.haut.edu.cn/info/1298/17096.htm"
+    },
+    {
+      "sourceId": "src-gap-program-wave3-haut-b-food-science-and-engineering-support-1",
+      "canonicalSourceSha256": "04b68f570288daa8c95add32039711238382fe638506625c1e707594b73b8339",
+      "url": "https://sie.haut.edu.cn/info/1159/6103.htm"
+    },
+    {
+      "sourceId": "src-gap-program-wave3-haut-m-applied-economics",
+      "canonicalSourceSha256": "15aecfb264214d0088d6184e5a9924b47bc5d246f3147d3fdac447f2df5083b6",
+      "url": "https://sie.haut.edu.cn/info/1298/17096.htm"
+    },
+    {
+      "sourceId": "src-gap-program-wave3-haut-nondegree-chinese-language",
+      "canonicalSourceSha256": "b77b4034e4d0e5bbb76c4b74d6c91c50ad344937bef83caf4d954a38bb2d124e",
+      "url": "https://sie.haut.edu.cn/info/1298/17096.htm"
+    },
+    {
+      "sourceId": "src-gap-program-wave3-haut-m-computer-science-and-technology",
+      "canonicalSourceSha256": "224385e884222dcd50fd40dc35f37aa9d77d656d5921d4e9f08baf2077b0e861",
+      "url": "https://sie.haut.edu.cn/info/1298/17096.htm"
+    },
+    {
+      "sourceId": "src-gap-scholarship-mve-ecs-hhu-csc-high-level-2026",
+      "canonicalSourceSha256": "63ad74853aa9f5cc1e1e06bf5da1d33e43287d317dedcba20cceeaccc687408e",
+      "url": "https://cie.hhu.edu.cn/2025/1030/c14608a309299/pagem.htm"
+    },
+    {
+      "sourceId": "src-gap-scholarship-wave8-hqu-international-chinese-language-teachers-scholarship-2026",
+      "canonicalSourceSha256": "16ad501059d485eeea32f302948b0179c9e345d749028f223eb9cf71694db2a1",
+      "url": "https://zsc.hqu.edu.cn/info/1081/8892.htm"
+    }
+  ],
+  "canonicalLinkedProgramPins": [
+    {
+      "programId": "prog-gap-prog-mew-nnw-hebtu-international-chinese-education-doctorate",
+      "canonicalProgramSha256": "5cd5b5d70106f0f53c585b1bd4ab81364ca533fa4b8ba6efaf83d021ad157ec1",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-prog-mew-nnw-hebtu-international-chinese-education-master",
+      "canonicalProgramSha256": "37708362c0aeb9b51eb35fd16e81215d4b459890a98aa4f3a435fcad76868ba5",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-prog-mew-nss-hebut-electrical-engineering-doctorate",
+      "canonicalProgramSha256": "6d716d79e57de847d973728c6806959616b49a6624f4c4ad90ea97f840709d96",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-mve-ecs-hfut-biomedical-engineering-bachelor",
+      "canonicalProgramSha256": "1381374681b0405d224b090b070245a3b42dc53301d49658323e5235162a96df",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-mve-ecs-hfut-civil-engineering-bachelor",
+      "canonicalProgramSha256": "ecf3d2ae57d83c1e180cf192ae7524aec417ec4c280b8c4cd9a90247cb5fa3ba",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-mve-ecs-hfut-international-economics-bachelor",
+      "canonicalProgramSha256": "dc755eaa419e15061db2189a46f98574d94518646148ae78e4a40e0c39a67ff3",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-mew-csw-henu-finance-master",
+      "canonicalProgramSha256": "b2c7e3c816d69a0a936eb97560412fc7e5874621f3cd4415af7c775eba1921ea",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-mew-csw-henu-software-engineering-master",
+      "canonicalProgramSha256": "0e1688f5996e0255cf6f603d7828eec3fd8824192c18d6938675c76af4fdfdc2",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-mew-csw-henu-traditional-chinese-sports-doctorate",
+      "canonicalProgramSha256": "79479a3ccbe57b854c4ae07376e6504a57113f219d81dbce893f1575ab5a425f",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-mew-csw-henu-mathematics-doctorate",
+      "canonicalProgramSha256": "a761c0d5b59ddf130e0c256cca04b3c9ff38199fe186cb9a5f0473fce39ba153",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-wave3-haut-b-food-science-and-engineering",
+      "canonicalProgramSha256": "cf7fa9055c1cd7e844910b33b3873303960157557eff90d1c1e0402518a458ba",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-wave3-haut-m-applied-economics",
+      "canonicalProgramSha256": "a065c760b6bb3863ea9e0a29f0f49ab04085dcf11694a9b73764914dccb4298c",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-wave3-haut-nondegree-chinese-language",
+      "canonicalProgramSha256": "1a6e980f28f8e87b7badd5caa516bbaa0fcb5de19ad94038402c1b7984521e7d",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-wave3-haut-m-computer-science-and-technology",
+      "canonicalProgramSha256": "5eb3a2ed98bc9ab49921c1fca04cecc10d36eabb7ba92102b0f4ab145a707b3e",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-mve-ecs-hhu-hydrology-doctorate",
+      "canonicalProgramSha256": "ecaa44216225cd05d62b44722324dce96266d12d0d8abb650029138f9492a1aa",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-mve-ecs-hhu-hydraulics-doctorate",
+      "canonicalProgramSha256": "2e77788345156f14c789295939dd990fe8e8abd18fd6be7cb269fcfd2c0a8b2e",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    },
+    {
+      "programId": "prog-gap-mve-ecs-hhu-computer-science-doctorate",
+      "canonicalProgramSha256": "eeebe637ebacdd8087ab8402fc08966d1e03e1a81f3f5d03ba565605e69d823a",
+      "scope": "Join/hash pin only; linked programme eligibility is not independently certified by an award finding."
+    }
+  ],
+  "rawEvidencePins": [
+    {
+      "path": "hebtu.html",
+      "rawSha256": "cf59daa3a5540a3ebf8fa43ed5e8957b126d71680dbcd3bd03c17dbdbdb83528",
+      "bytes": 23919,
+      "url": "https://cice.hebtu.edu.cn/a/2025/11/27/6EFE88E38B8F41739568513CC10C148A.html",
+      "observedAt": "2026-10-19T06:15:13.825217+00:00",
+      "contentType": "text/html"
+    },
+    {
+      "path": "hebut.html",
+      "rawSha256": "eac3d7b81307a5a24919aa712a93345987f631081efdecc3e22e9983c2ba7f0d",
+      "bytes": 39728,
+      "url": "https://eweb.hebut.edu.cn/admission/InternationalStudents/prospectus/4f0f206db54b4d67984fdd9b9b483394.htm",
+      "observedAt": "2026-10-19T06:15:13.826222+00:00",
+      "contentType": "text/html"
+    },
+    {
+      "path": "hfut.html",
+      "rawSha256": "f304ddd5ca1239e8dfc0d716772b6c46001505535a58f820deb6f97d2f56355b",
+      "bytes": 89431,
+      "url": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+      "observedAt": "2026-10-19T06:15:17.146670+00:00",
+      "contentType": "text/html"
+    },
+    {
+      "path": "henu.html",
+      "rawSha256": "7cb43c19a6de061570d49d0407a3b31ad6e483069fbd78afe2840c5bf9b4776c",
+      "bytes": 61744,
+      "url": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+      "observedAt": "2026-10-19T06:15:17.951357+00:00",
+      "contentType": "text/html"
+    },
+    {
+      "path": "hhu.html",
+      "rawSha256": "df5794a3121ddb4a7b0ae31babbfe673295d8d97c3c152f470a00f081da3ff63",
+      "bytes": 87037,
+      "url": "https://cie.hhu.edu.cn/2025/1030/c14608a309299/pagem.htm",
+      "observedAt": "2026-10-19T06:15:24.210263+00:00",
+      "contentType": "text/html"
+    },
+    {
+      "path": "hqu.html",
+      "rawSha256": "87f1fb656e16526290eed6cd95a5c8f3771a8e62817dbc2040b8d04107c390fb",
+      "bytes": 79970,
+      "url": "https://zsc.hqu.edu.cn/info/1081/8892.htm",
+      "observedAt": "2026-10-19T06:15:24.317845+00:00",
+      "contentType": "text/html"
+    },
+    {
+      "path": "henu-programmes.pdf",
+      "rawSha256": "5f7110a96835b3d9ef33987079e9aca656a15fd2293efe791f6849f6be08d1b3",
+      "bytes": 39574,
+      "url": "https://isclc.henu.edu.cn/dfiles/fujian/202211/5.henandaxueyingwenshoukezhuanyemulu%20English%20Taught%20Programs%20of%20Henan%20University.pdf",
+      "observedAt": "2026-10-19T06:15:26.619506+00:00",
+      "contentType": "application/pdf"
+    },
+    {
+      "path": "hfut-current-majors.xlsx",
+      "rawSha256": "a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c",
+      "bytes": 11480,
+      "url": "https://iec.hfut.edu.cn/_upload/article/files/9e/9f/67156a3c45c59a9de855ea78e4b4/9f36bb18-2f2c-4f99-ad5d-dc7fa9fbc369.xlsx",
+      "observedAt": "2026-10-19T06:41:27.191239+00:00",
+      "contentType": "application/vnd.ms-excel;charset=UTF-8"
+    },
+    {
+      "path": "henu-current-annex5.html",
+      "rawSha256": "abf898ae56e09b2fb5349b23c22cb480361e0cd81d19e1bd7bbbec782c995008",
+      "bytes": 3871,
+      "url": "https://isclc.henu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1366217631&wbfileid=E6DF8C5841EE16D174F6A645EF1E2206",
+      "observedAt": "2026-10-19T06:41:27.192238+00:00",
+      "contentType": "text/html;charset=UTF-8"
+    }
+  ],
+  "webOnlyEvidencePin": {
+    "path": "haut-web-observation.json",
+    "sha256": "cfec74241672047ebc3a80463ee0c4301775c1d5a75174952b83ec22872bb664",
+    "observedAt": "2026-10-19T06:16:41.742Z",
+    "sourceUrl": "https://sie.haut.edu.cn/info/1298/17096.htm",
+    "rawOriginServerBytes": false,
+    "provenance": "Native exact URL returned 403 once; actual web-tool full-page text succeeded. Returned text may be cached; no raw origin bytes or uncached freshness claimed."
+  },
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "sha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "sha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "sha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "sha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "sha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "sha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "sha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "sha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "sha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "sha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "sha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "sha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "sha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "sha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "sha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "sha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "sha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "sha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "sha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "sha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "sha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "sha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-024",
+      "sha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    }
+  ],
+  "validation": {
+    "fullCanonicalRowsParentsAndRegisteredSourcesMatch": true,
+    "exactlyNineteenIdsOnce": true,
+    "allDateAndScopeQuotesMatchedCapturedText": true,
+    "originalBytesHashAndObservedAtVerified": true,
+    "hfutCurrentOriginalXlsxIndependentlyReadWithOpenpyxl": true,
+    "henuCaptchaNotMisrepresentedAsCatalogue": true,
+    "strictBeforeAndApplicantVsReviewDistinctionsRetained": true,
+    "unknownAwardDeadlinesNotBorrowed": true,
+    "reportAndCanonicalInputsUnchangedBeforeAfter": true
+  }
+}

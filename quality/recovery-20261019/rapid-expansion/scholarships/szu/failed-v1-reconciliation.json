@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "reconciledAt": "2026-10-18T17:56:49.650Z",
+  "reviewer": "codex-root",
+  "originalApprovedPath": "quality/recovery-20261019/rapid-expansion/scholarships/szu/full-scholarship-batch-approved-v1.json",
+  "originalApprovedSha256": "23e3c4a5c6855aeb0e4f6cc8964fdcca99a0499017936d651fc8c1fd60463b63",
+  "failedReceipt": "quality/scholarship-expansion-20261019/applied-szu-doctoral-scholarships-spring2027-20261019-v1.json",
+  "failedReceiptSha256": "1e0e656fac120b59d83e233b6e5a284615fc254e18b2adbbece5fc17b85eb3bb",
+  "originalCatalogSha256": "29dc1135fcde4e55b8d9c66abf19d9eca210388534532888facff0dd014c9efb",
+  "actualCatalogSha256": "29dc1135fcde4e55b8d9c66abf19d9eca210388534532888facff0dd014c9efb",
+  "normalizedSixFileFactsExactlyRestored": true,
+  "newAwardRowsAbsent": 3,
+  "newSourceRowsAbsent": 1,
+  "files": [
+    {
+      "key": "universities",
+      "sha256": "192c67035dcbfdda25efb7fa6bf4e558e4f903f8dd180a59bdc0feb574e4518b",
+      "bytes": 355070
+    },
+    {
+      "key": "programs",
+      "sha256": "98a0d34fa3f773889a488210d9df7971e6d30c1b66fc169b9d7306167de1376a",
+      "bytes": 7334578
+    },
+    {
+      "key": "admissionCycles",
+      "sha256": "32d0020a4c194de57143eb71e2872dee6d2eca8f758a1f6cef92f4decc95061f",
+      "bytes": 2322978
+    },
+    {
+      "key": "scholarships",
+      "sha256": "9b24efe621e4c59986564ff15b13588144aa1b5627e76425660f3aaeb4feaf5c",
+      "bytes": 738017
+    },
+    {
+      "key": "cities",
+      "sha256": "50e70c4d3daeb872ccec74f9e18ffd2f235e0b51ffd6d657292ff51e59dc9756",
+      "bytes": 61094
+    },
+    {
+      "key": "sources",
+      "sha256": "2141640b6511d34f1f31396423471cb24c137763f968e1906ace08ebdc008022",
+      "bytes": 978485
+    }
+  ],
+  "failure": "Windows sandbox EPERM during rename; snapshot writer reported no external files preserved and no rollback failures",
+  "disposition": "Retain failed v1 and permanent receipt unchanged. Explicit root reconciliation qualifies a new unpaid local v2 batch; no same-identity replay, reservation reset, paid call or cloud action.",
+  "newBatchId": "szu-doctoral-scholarships-spring2027-20261019-v2"
+}

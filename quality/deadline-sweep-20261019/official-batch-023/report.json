@@ -1,0 +1,1646 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-023-20261019",
+  "state": "completed-with-current-programme-annex-and-month-precision-holds",
+  "completedAt": "2026-10-19T06:45:47.444Z",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v5.json",
+  "queueSha256": "01719171d2d61977e8c62adfe3e323750f30b40a2396685c962f56d71bfa34d4",
+  "selectionSha256": "a18b20f108e52661c0b72d39581804aa434e4a9a4c1c21f26edf9ce9713a7f2e",
+  "selection": {
+    "baseQueueRecords": 16,
+    "additionalSameSourceRecords": 3,
+    "totalExactRecords": 19,
+    "universityIds": [
+      "uni-hebei-normal-university",
+      "uni-hebei-university-of-technology",
+      "uni-hefei-university-of-technology",
+      "uni-henan-university",
+      "uni-henan-university-of-technology",
+      "uni-hohai-university",
+      "uni-huaqiao-university"
+    ],
+    "baseQueueRecordIds": [
+      "sch-gap-sch-mew-nnw-hebtu-csc-high-level-postgraduate",
+      "sch-gap-sch-mew-nss-hebut-csc",
+      "sch-gap-mve-ecs-hfut-undergraduate-scholarship",
+      "cycle-gap-mve-ecs-hfut-biomedical-engineering-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-ecs-hfut-civil-engineering-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-ecs-hfut-international-economics-bachelor-2026-2027-autumn-fee-reference",
+      "sch-gap-mew-csw-henu-cgs-high-level-postgraduate-2026",
+      "cycle-gap-mew-csw-henu-finance-master-2026-2027-autumn",
+      "cycle-gap-mew-csw-henu-mathematics-doctorate-2026-2027-autumn",
+      "cycle-gap-mew-csw-henu-software-engineering-master-2026-2027-autumn",
+      "sch-gap-wave3-sch-haut-freshman",
+      "sch-gap-wave3-sch-haut-promotion",
+      "cycle-gap-wave3-haut-b-food-science-and-engineering-2026-2027-autumn",
+      "cycle-gap-wave3-haut-m-applied-economics-2026-2027-autumn",
+      "sch-gap-mve-ecs-hhu-csc-high-level-2026",
+      "sch-gap-wave8-hqu-international-chinese-language-teachers-scholarship-2026"
+    ],
+    "additionalSameSourceRecordIds": [
+      "cycle-gap-mew-csw-henu-traditional-chinese-sports-doctorate-2026-2027-autumn",
+      "cycle-gap-wave3-haut-nondegree-chinese-language-2026-2027-autumn",
+      "cycle-gap-wave3-haut-m-computer-science-and-technology-2026-2027-autumn"
+    ],
+    "additionalRootSelectionPin": {
+      "path": "D:\\学过的课程\\github_profile_work\\StudyInChina\\quality\\deadline-sweep-20261019\\heartbeat-0610\\additional-same-source-selection-v1.json",
+      "sha256": "19b484eb2df8aaefa97d74c9a2eb78962b4b5fc9f0e374d6a6d619b73f566b2b"
+    }
+  },
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    }
+  ],
+  "acquisition": {
+    "nativeRequests": 10,
+    "rawBodiesCaptured": 9,
+    "boundedWebFallbacks": 1,
+    "successfulActualFullPageWebReads": 1,
+    "rawOriginBytesClaimedForWebText": false,
+    "currentProgrammeAppendixSuccesses": 1,
+    "currentAnnexCaptchaResponses": 1,
+    "automaticRetries": 0,
+    "challengeBypasses": 0,
+    "maxNativeConcurrency": 2,
+    "paidModelCalls": 0,
+    "canonicalWrites": 0
+  },
+  "summary": {
+    "schoolsAttempted": 7,
+    "recordsAssessed": 19,
+    "baseQueueRecords": 16,
+    "additionalSameSourceRecords": 3,
+    "recordResults": {
+      "unchanged": 0,
+      "corrected": 0,
+      "closed": 8,
+      "unknown": 11,
+      "blocked": 0,
+      "conflict": 0
+    },
+    "publishedRecordsAssessed": 0,
+    "newExpiredDeadlineCandidatesFromCanonicalNull": 8,
+    "alreadyStoredExpiredProgrammeDatesNotRevalidated": 4,
+    "newOpeningCandidatesFromCanonicalNull": 3,
+    "openingDatesAssessed": 0,
+    "fullFactsCertified": 0,
+    "wholeSchoolCataloguesCompleted": 0,
+    "canonicalWrites": 0,
+    "sharedProgressWrites": 0,
+    "gitMutations": 0,
+    "publicationActions": 0,
+    "paidModelCalls": 0
+  },
+  "rules": [
+    "Only scoped dates were reviewed; no canonical date/status/freshness mutation or whole-school certification.",
+    "Unknown does not mean currently open or closed. Month-only windows do not become exact ISO days.",
+    "Current eligible programme source and actual intake year must match; legacy exact-name catalogues do not alone establish current eligibility.",
+    "Awards are separate from general admission; institutional review and later nominated-applicant steps do not replace initial application cutoff.",
+    "Strict-before wording is preserved without clock-time or inclusive-day inventions. Candidate openings remain separate from canonical equality.",
+    "Full canonical records, parent programmes and registered-source objects/SHA pins are preserved in selection.json; source bytes or honest web-only text are retained."
+  ],
+  "groups": [
+    {
+      "key": "hebtu-2026-high-level",
+      "universityId": "uni-hebei-normal-university",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Exact Hebei Normal 2026/27 CSC Type B high-level postgraduate student application; not later school/CSC selection or July–August admission-document output.",
+      "notes": [
+        "Opening is relative to announcement; no numerical opening date is certified."
+      ],
+      "evidence": [
+        {
+          "key": "hebtu",
+          "url": "https://cice.hebtu.edu.cn/a/2025/11/27/6EFE88E38B8F41739568513CC10C148A.html",
+          "observedAt": "2026-10-19T06:15:13.825217+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://cice.hebtu.edu.cn/a/2025/11/27/6EFE88E38B8F41739568513CC10C148A.html",
+          "contentType": "text/html",
+          "bodyPath": "hebtu.html",
+          "bytes": 23919,
+          "bodySha256": "cf59daa3a5540a3ebf8fa43ed5e8957b126d71680dbcd3bd03c17dbdbdb83528",
+          "textPath": "hebtu.txt",
+          "textArtifact": {
+            "path": "hebtu.txt",
+            "sha256": "e9e55e48d0865ad1fbfa67940cf198dd5cbdc28de7b3ccd4e80e1e68c5f6b5d0",
+            "bytes": 7720
+          }
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nnw-hebtu-csc-high-level-postgraduate",
+          "universityId": "uni-hebei-normal-university",
+          "programId": null,
+          "programmeNameZh": "河北师范大学中国政府奖学金高水平研究生项目",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-02-28",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "554fd425276937ad64bf5487c28801005e516f59b0e09b2d56e5da8fb3aed668",
+          "canonicalScholarshipSha256": "554fd425276937ad64bf5487c28801005e516f59b0e09b2d56e5da8fb3aed668",
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nnw-hebtu-csc-high-level-postgraduate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nnw-hebtu-csc-high-level-postgraduate",
+              "sourceSha256": "5e3a638003055b872f02619d5cc582f31e3aeb475ef6ba19989592944e7718e1",
+              "url": "https://cice.hebtu.edu.cn/a/2025/11/27/6EFE88E38B8F41739568513CC10C148A.html",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://cice.hebtu.edu.cn/a/2025/11/27/6EFE88E38B8F41739568513CC10C148A.html",
+          "evidenceBodySha256": "cf59daa3a5540a3ebf8fa43ed5e8957b126d71680dbcd3bd03c17dbdbdb83528",
+          "observedAt": "2026-10-19T06:15:13.825217+00:00",
+          "quote": "公告发出之日起至2026年2月28日。逾期不再接受申请。",
+          "evidenceLocator": "2026/2027 high-level postgraduate scholarship guide 六、申请起止时间.",
+          "applicationScope": "Exact Hebei Normal 2026/27 CSC Type B high-level postgraduate student application; not later school/CSC selection or July–August admission-document output.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true
+        }
+      ]
+    },
+    {
+      "key": "hebut-2026-type-b-only",
+      "universityId": "uni-hebei-university-of-technology",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "2026 HEBUT CSC Type B master/doctoral applicant route, including linked English Electrical Engineering doctorate; Type A bilateral route is separately linked and not assigned this date.",
+      "notes": [
+        "Institution recommendation and subsequent CSC review are later stages, not the applicant deadline. New opening is candidate-only."
+      ],
+      "evidence": [
+        {
+          "key": "hebut",
+          "url": "https://eweb.hebut.edu.cn/admission/InternationalStudents/prospectus/4f0f206db54b4d67984fdd9b9b483394.htm",
+          "observedAt": "2026-10-19T06:15:13.826222+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://eweb.hebut.edu.cn/admission/InternationalStudents/prospectus/4f0f206db54b4d67984fdd9b9b483394.htm",
+          "contentType": "text/html",
+          "bodyPath": "hebut.html",
+          "bytes": 39728,
+          "bodySha256": "eac3d7b81307a5a24919aa712a93345987f631081efdecc3e22e9983c2ba7f0d",
+          "textPath": "hebut.txt",
+          "textArtifact": {
+            "path": "hebut.txt",
+            "sha256": "19b498c20f160da03bd989b3627a65f41b8eedf47f3bb903faf1db82f35fd3ea",
+            "bytes": 13518
+          }
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nss-hebut-csc",
+          "universityId": "uni-hebei-university-of-technology",
+          "programId": null,
+          "programmeNameZh": "河北工业大学中国政府奖学金项目",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-02-10",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-11-27",
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "3fdfc3d805e686f03a6fcfb0cec50894f8af8eca8ff5e75c0868c70d63c76726",
+          "canonicalScholarshipSha256": "3fdfc3d805e686f03a6fcfb0cec50894f8af8eca8ff5e75c0868c70d63c76726",
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nss-hebut-csc"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nss-hebut-csc",
+              "sourceSha256": "fb44873b3e3ffa45472524caa08cd3575a272d49691f85df6e190de249e06187",
+              "url": "https://eweb.hebut.edu.cn/admission/InternationalStudents/prospectus/4f0f206db54b4d67984fdd9b9b483394.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://eweb.hebut.edu.cn/admission/InternationalStudents/prospectus/4f0f206db54b4d67984fdd9b9b483394.htm",
+          "evidenceBodySha256": "eac3d7b81307a5a24919aa712a93345987f631081efdecc3e22e9983c2ba7f0d",
+          "observedAt": "2026-10-19T06:15:13.826222+00:00",
+          "quote": "Application time: 27th November 2025 – 10th February 2026",
+          "evidenceLocator": "Actual bilingual 2026 Prospectus of Chinese Government Scholarship (Type B), section 1 / Chinese 一.",
+          "applicationScope": "2026 HEBUT CSC Type B master/doctoral applicant route, including linked English Electrical Engineering doctorate; Type A bilateral route is separately linked and not assigned this date.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true
+        }
+      ]
+    },
+    {
+      "key": "hfut-2026-three-bachelor-routes",
+      "universityId": "uni-hefei-university-of-technology",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Exact 2026 bachelor routes: Biomedical Engineering Chinese, Civil Engineering English, International Economics and Trade Chinese. General programme admission only; CSC Type A deadline belongs to home-country dispatching authority.",
+      "notes": [
+        "Current major appendix explicitly prints 2026 and exact programmes/languages. The deadline is not inferred from fee-reference IDs or old metadata.",
+        "The article gives separate scholarship branches; the general date is not a stand-alone award-date certification. From-now opening remains relative."
+      ],
+      "evidence": [
+        {
+          "key": "hfut",
+          "url": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+          "observedAt": "2026-10-19T06:15:17.146670+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+          "contentType": "text/html",
+          "bodyPath": "hfut.html",
+          "bytes": 89431,
+          "bodySha256": "f304ddd5ca1239e8dfc0d716772b6c46001505535a58f820deb6f97d2f56355b",
+          "textPath": "hfut.txt",
+          "textArtifact": {
+            "path": "hfut.txt",
+            "sha256": "3b7e7744964fe7e74063636ddef702d159c2f2072797d7823c82cd95345cb76e",
+            "bytes": 13554
+          }
+        },
+        {
+          "key": "hfut-current-majors",
+          "url": "https://iec.hfut.edu.cn/_upload/article/files/9e/9f/67156a3c45c59a9de855ea78e4b4/9f36bb18-2f2c-4f99-ad5d-dc7fa9fbc369.xlsx",
+          "observedAt": "2026-10-19T06:41:27.191239+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://iec.hfut.edu.cn/_upload/article/files/9e/9f/67156a3c45c59a9de855ea78e4b4/9f36bb18-2f2c-4f99-ad5d-dc7fa9fbc369.xlsx",
+          "contentType": "application/vnd.ms-excel;charset=UTF-8",
+          "bodyPath": "hfut-current-majors.xlsx",
+          "bytes": 11480,
+          "bodySha256": "a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecs-hfut-biomedical-engineering-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-hefei-university-of-technology",
+          "programId": "prog-gap-mve-ecs-hfut-biomedical-engineering-bachelor",
+          "programmeNameZh": "生物医学工程",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "b02cac6c0104b5dec979c7861b2a991506528b31fb4fd7e9d31a791c58aa642b",
+          "canonicalCycleSha256": "b02cac6c0104b5dec979c7861b2a991506528b31fb4fd7e9d31a791c58aa642b",
+          "canonicalProgramSha256": "1381374681b0405d224b090b070245a3b42dc53301d49658323e5235162a96df",
+          "sourceIds": [
+            "src-gap-program-mve-ecs-hfut-biomedical-engineering-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecs-hfut-biomedical-engineering-bachelor",
+              "sourceSha256": "cbe7ac94809e125995549411ae6461f9fe4089f5958c4e9b932294d4d7f86527",
+              "url": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+          "evidenceBodySha256": "f304ddd5ca1239e8dfc0d716772b6c46001505535a58f820deb6f97d2f56355b",
+          "observedAt": "2026-10-19T06:15:17.146670+00:00",
+          "quote": "From now till June 15, 2026",
+          "evidenceLocator": "Actual 2026 HFUT international undergraduate guide VII Application Time; directly linked Appendix 1 current XLSX Sheet3 rows 3,10,18.",
+          "applicationScope": "Exact 2026 bachelor routes: Biomedical Engineering Chinese, Civil Engineering English, International Economics and Trade Chinese. General programme admission only; CSC Type A deadline belongs to home-country dispatching authority.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "programmeAppendixEvidence": {
+            "path": "hfut-current-majors.xlsx",
+            "sha256": "a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c",
+            "bytes": 11480,
+            "extractedRows": {
+              "path": "hfut-current-majors.json",
+              "sha256": "5356f94f4667127811cafc03e877860f48c321373cc269577484b0838015caa7",
+              "bytes": 4190
+            },
+            "sourceUrl": "https://iec.hfut.edu.cn/_upload/article/files/9e/9f/67156a3c45c59a9de855ea78e4b4/9f36bb18-2f2c-4f99-ad5d-dc7fa9fbc369.xlsx",
+            "sheet": "Sheet3",
+            "row": 3,
+            "exactValues": [
+              1,
+              "Biomedical Engineering",
+              "Chinese",
+              4,
+              "School of Instrment Science and Opto-electronics Engineering",
+              "Professional Chinese (STEM), \nMathematics, Physics"
+            ],
+            "yearTitle": "2026 HFUT Undergraduate Majors for International Students"
+          }
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecs-hfut-civil-engineering-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-hefei-university-of-technology",
+          "programId": "prog-gap-mve-ecs-hfut-civil-engineering-bachelor",
+          "programmeNameZh": "土木工程",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "deed970da9abc0245caa6d99d7765107ed6b210c39ea59387bc00a05535e17fb",
+          "canonicalCycleSha256": "deed970da9abc0245caa6d99d7765107ed6b210c39ea59387bc00a05535e17fb",
+          "canonicalProgramSha256": "ecf3d2ae57d83c1e180cf192ae7524aec417ec4c280b8c4cd9a90247cb5fa3ba",
+          "sourceIds": [
+            "src-gap-program-mve-ecs-hfut-civil-engineering-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecs-hfut-civil-engineering-bachelor",
+              "sourceSha256": "5373a0171102abc914ebf2ea8083bd556a4848ec9dfcd20c52be027238be4b42",
+              "url": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+          "evidenceBodySha256": "f304ddd5ca1239e8dfc0d716772b6c46001505535a58f820deb6f97d2f56355b",
+          "observedAt": "2026-10-19T06:15:17.146670+00:00",
+          "quote": "From now till June 15, 2026",
+          "evidenceLocator": "Actual 2026 HFUT international undergraduate guide VII Application Time; directly linked Appendix 1 current XLSX Sheet3 rows 3,10,18.",
+          "applicationScope": "Exact 2026 bachelor routes: Biomedical Engineering Chinese, Civil Engineering English, International Economics and Trade Chinese. General programme admission only; CSC Type A deadline belongs to home-country dispatching authority.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "programmeAppendixEvidence": {
+            "path": "hfut-current-majors.xlsx",
+            "sha256": "a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c",
+            "bytes": 11480,
+            "extractedRows": {
+              "path": "hfut-current-majors.json",
+              "sha256": "5356f94f4667127811cafc03e877860f48c321373cc269577484b0838015caa7",
+              "bytes": 4190
+            },
+            "sourceUrl": "https://iec.hfut.edu.cn/_upload/article/files/9e/9f/67156a3c45c59a9de855ea78e4b4/9f36bb18-2f2c-4f99-ad5d-dc7fa9fbc369.xlsx",
+            "sheet": "Sheet3",
+            "row": 10,
+            "exactValues": [
+              8,
+              "Civil Engineering",
+              "English",
+              4,
+              null,
+              "Mathematics, Physics"
+            ],
+            "yearTitle": "2026 HFUT Undergraduate Majors for International Students"
+          }
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecs-hfut-international-economics-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-hefei-university-of-technology",
+          "programId": "prog-gap-mve-ecs-hfut-international-economics-bachelor",
+          "programmeNameZh": "国际经济与贸易",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "3bbcc6f826f4f583ece830ad3904a95627c98a3053d5c6799979d2fb9a5819e7",
+          "canonicalCycleSha256": "3bbcc6f826f4f583ece830ad3904a95627c98a3053d5c6799979d2fb9a5819e7",
+          "canonicalProgramSha256": "dc755eaa419e15061db2189a46f98574d94518646148ae78e4a40e0c39a67ff3",
+          "sourceIds": [
+            "src-gap-program-mve-ecs-hfut-international-economics-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecs-hfut-international-economics-bachelor",
+              "sourceSha256": "9529154fdd410a94502a3ad8e79198819f59eca680b85ab32175d34bdb4ead6e",
+              "url": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+          "evidenceBodySha256": "f304ddd5ca1239e8dfc0d716772b6c46001505535a58f820deb6f97d2f56355b",
+          "observedAt": "2026-10-19T06:15:17.146670+00:00",
+          "quote": "From now till June 15, 2026",
+          "evidenceLocator": "Actual 2026 HFUT international undergraduate guide VII Application Time; directly linked Appendix 1 current XLSX Sheet3 rows 3,10,18.",
+          "applicationScope": "Exact 2026 bachelor routes: Biomedical Engineering Chinese, Civil Engineering English, International Economics and Trade Chinese. General programme admission only; CSC Type A deadline belongs to home-country dispatching authority.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "programmeAppendixEvidence": {
+            "path": "hfut-current-majors.xlsx",
+            "sha256": "a288ccc61141f0161eff4dace9314ec1495fe3cf89131a06843f8a24525efd2c",
+            "bytes": 11480,
+            "extractedRows": {
+              "path": "hfut-current-majors.json",
+              "sha256": "5356f94f4667127811cafc03e877860f48c321373cc269577484b0838015caa7",
+              "bytes": 4190
+            },
+            "sourceUrl": "https://iec.hfut.edu.cn/_upload/article/files/9e/9f/67156a3c45c59a9de855ea78e4b4/9f36bb18-2f2c-4f99-ad5d-dc7fa9fbc369.xlsx",
+            "sheet": "Sheet3",
+            "row": 18,
+            "exactValues": [
+              16,
+              "International Economics and Trade ",
+              "Chinese",
+              4,
+              "School of Economics",
+              "Professional Chinese (Humanities), \nMathematics"
+            ],
+            "yearTitle": "2026 HFUT Undergraduate Majors for International Students"
+          }
+        }
+      ]
+    },
+    {
+      "key": "hfut-award-scope-no-independent-date",
+      "universityId": "uni-hefei-university-of-technology",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Existing generic undergraduate-award row spans programme links under different award branches; no independent single applicant award cutoff is stated.",
+      "notes": [
+        "HFUT Undergraduate Scholarship is labelled Chinese-taught/English-major programmes; Civil Engineering English falls under the separate English-taught Program Scholarship. Do not borrow the general June 15 date or embassy-controlled CSC deadline for this award row.",
+        "Annual May–July review is for scholarship continuation and is not a new applicant cutoff."
+      ],
+      "evidence": [
+        {
+          "key": "hfut",
+          "url": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+          "observedAt": "2026-10-19T06:15:17.146670+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+          "contentType": "text/html",
+          "bodyPath": "hfut.html",
+          "bytes": 89431,
+          "bodySha256": "f304ddd5ca1239e8dfc0d716772b6c46001505535a58f820deb6f97d2f56355b",
+          "textPath": "hfut.txt",
+          "textArtifact": {
+            "path": "hfut.txt",
+            "sha256": "3b7e7744964fe7e74063636ddef702d159c2f2072797d7823c82cd95345cb76e",
+            "bytes": 13554
+          }
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecs-hfut-undergraduate-scholarship",
+          "universityId": "uni-hefei-university-of-technology",
+          "programId": null,
+          "programmeNameZh": "合肥工业大学国际本科生奖学金",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-month-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "14f55a1630d98f15c745b6f0810d791e70ea0ff5b1327e24d5bf6b87f264f6e9",
+          "canonicalScholarshipSha256": "14f55a1630d98f15c745b6f0810d791e70ea0ff5b1327e24d5bf6b87f264f6e9",
+          "sourceIds": [
+            "src-gap-scholarship-mve-ecs-hfut-undergraduate-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecs-hfut-undergraduate-scholarship",
+              "sourceSha256": "4a6f5f4209f357eb747084489d0cc1488c20bb5421e5eae857a8a50a64302e5c",
+              "url": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://iec.hfut.edu.cn/2025/1128/c11677a316558/page.htm",
+          "evidenceBodySha256": "f304ddd5ca1239e8dfc0d716772b6c46001505535a58f820deb6f97d2f56355b",
+          "observedAt": "2026-10-19T06:15:17.146670+00:00",
+          "quote": "There is no need to select the scholarship type when applying. HFUT will allocate scholarships based on the comprehensive review results.",
+          "evidenceLocator": "Guide VI Scholarships, HFUT Undergraduate Scholarship and HFUT English-taught Program Scholarship subsections.",
+          "applicationScope": "Existing generic undergraduate-award row spans programme links under different award branches; no independent single applicant award cutoff is stated.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true
+        }
+      ]
+    },
+    {
+      "key": "henu-2026-type-b-award",
+      "universityId": "uni-henan-university",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Exact named 2026/27 CSC Type B high-level postgraduate scholarship applicant stage. School review, pre-admission and July results are separate.",
+      "notes": [
+        "Top section says January 16 deadline, but Step 1 says before January 16; preserve strict-before wording and no full-day availability promise."
+      ],
+      "evidence": [
+        {
+          "key": "henu",
+          "url": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+          "observedAt": "2026-10-19T06:15:17.951357+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+          "contentType": "text/html",
+          "bodyPath": "henu.html",
+          "bytes": 61744,
+          "bodySha256": "7cb43c19a6de061570d49d0407a3b31ad6e483069fbd78afe2840c5bf9b4776c",
+          "textPath": "henu.txt",
+          "textArtifact": {
+            "path": "henu.txt",
+            "sha256": "6b00993491e49bd2a81e80f258b5174d37166579c25740fd1ba5f3944d6654e4",
+            "bytes": 8820
+          }
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-csw-henu-cgs-high-level-postgraduate-2026",
+          "universityId": "uni-henan-university",
+          "programId": null,
+          "programmeNameZh": "河南大学2026/2027中国政府奖学金高水平研究生项目",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-01-16",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "before-date-as-worded",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "46c33d4f75cc94a67c66f5e40f5a4529f147fad35abf30eddcd4b9b6ae1d20fb",
+          "canonicalScholarshipSha256": "46c33d4f75cc94a67c66f5e40f5a4529f147fad35abf30eddcd4b9b6ae1d20fb",
+          "sourceIds": [
+            "src-gap-scholarship-mew-csw-henu-cgs-high-level-postgraduate-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-csw-henu-cgs-high-level-postgraduate-2026",
+              "sourceSha256": "782c9a7089a3af2f9a85c395148b1ea302ef01906c1da4da4b9424ceaf33624c",
+              "url": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+          "evidenceBodySha256": "7cb43c19a6de061570d49d0407a3b31ad6e483069fbd78afe2840c5bf9b4776c",
+          "observedAt": "2026-10-19T06:15:17.951357+00:00",
+          "quote": "Applicants must submit materials before January 16th, 2026.",
+          "evidenceLocator": "Actual 2026/2027 Henan University High-Level Postgraduate guide III and V Step 1; both Henan and CSC systems.",
+          "applicationScope": "Exact named 2026/27 CSC Type B high-level postgraduate scholarship applicant stage. School review, pre-admission and July results are separate.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true
+        }
+      ]
+    },
+    {
+      "key": "henu-four-programmes-current-eligibility-unresolved",
+      "universityId": "uni-henan-university",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Existing four English master/doctoral programme cycles: Finance master, Software Engineering master, Mathematics doctorate, Traditional Chinese Sports doctorate.",
+      "notes": [
+        "Old registered PDF at a 2022 path has the exact degree/language/name combinations, but contains no applicable intake year and is not the actual Annex 5 link in the 2026 guide.",
+        "Current Annex 5 GET returned only 请填写/请输入验证码 download form. No bypass attempted. Shared university/old catalogue and a scholarship deadline do not alone establish current programme eligibility.",
+        "Stored 2026-01-16 days are retained but not revalidated for these exact programme records. The deadline is candidate context only; this is not proof of discontinuation."
+      ],
+      "evidence": [
+        {
+          "key": "henu",
+          "url": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+          "observedAt": "2026-10-19T06:15:17.951357+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+          "contentType": "text/html",
+          "bodyPath": "henu.html",
+          "bytes": 61744,
+          "bodySha256": "7cb43c19a6de061570d49d0407a3b31ad6e483069fbd78afe2840c5bf9b4776c",
+          "textPath": "henu.txt",
+          "textArtifact": {
+            "path": "henu.txt",
+            "sha256": "6b00993491e49bd2a81e80f258b5174d37166579c25740fd1ba5f3944d6654e4",
+            "bytes": 8820
+          }
+        },
+        {
+          "key": "henu-programmes",
+          "url": "https://isclc.henu.edu.cn/dfiles/fujian/202211/5.henandaxueyingwenshoukezhuanyemulu%20English%20Taught%20Programs%20of%20Henan%20University.pdf",
+          "observedAt": "2026-10-19T06:15:26.619506+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://isclc.henu.edu.cn/dfiles/fujian/202211/5.henandaxueyingwenshoukezhuanyemulu%20English%20Taught%20Programs%20of%20Henan%20University.pdf",
+          "contentType": "application/pdf",
+          "bodyPath": "henu-programmes.pdf",
+          "bytes": 39574,
+          "bodySha256": "5f7110a96835b3d9ef33987079e9aca656a15fd2293efe791f6849f6be08d1b3",
+          "textArtifact": {
+            "path": "henu-programmes.txt",
+            "sha256": "3039fe962798ab6684984c71d5985eb50eb0b85f244111a246ff34070206e47a",
+            "bytes": 3300
+          }
+        },
+        {
+          "key": "henu-current-annex5",
+          "url": "https://isclc.henu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1366217631&wbfileid=E6DF8C5841EE16D174F6A645EF1E2206",
+          "observedAt": "2026-10-19T06:41:27.192238+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://isclc.henu.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1366217631&wbfileid=E6DF8C5841EE16D174F6A645EF1E2206",
+          "contentType": "text/html;charset=UTF-8",
+          "bodyPath": "henu-current-annex5.html",
+          "bytes": 3871,
+          "bodySha256": "abf898ae56e09b2fb5349b23c22cb480361e0cd81d19e1bd7bbbec782c995008",
+          "textPath": "henu-current-annex5.txt",
+          "textArtifact": {
+            "path": "henu-current-annex5.txt",
+            "sha256": "014aca607de9655444d493f58af683afeee763af97f97b57815887c33595e9f8",
+            "bytes": 46
+          }
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-henu-finance-master-2026-2027-autumn",
+          "universityId": "uni-henan-university",
+          "programId": "prog-gap-mew-csw-henu-finance-master",
+          "programmeNameZh": "金融学",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": "2026-01-16",
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-month-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "536ca450b48727c14df63634f89370963a1fa23b419829f95efb7241318dbba0",
+          "canonicalCycleSha256": "536ca450b48727c14df63634f89370963a1fa23b419829f95efb7241318dbba0",
+          "canonicalProgramSha256": "b2c7e3c816d69a0a936eb97560412fc7e5874621f3cd4415af7c775eba1921ea",
+          "sourceIds": [
+            "src-gap-program-mew-csw-henu-finance-master",
+            "src-gap-program-mew-csw-henu-finance-master-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-henu-finance-master",
+              "sourceSha256": "3e83da9f338af2cf413c065688d90fbc9c34d83001384a87defd8e5795691a65",
+              "url": "https://isclc.henu.edu.cn/dfiles/fujian/202211/5.henandaxueyingwenshoukezhuanyemulu%20English%20Taught%20Programs%20of%20Henan%20University.pdf",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-henu-finance-master-support-1",
+              "sourceSha256": "c226849168aec0426dfe015ff60039412655b2dcbf5a38d9839c81124450aeb8",
+              "url": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+          "evidenceBodySha256": "7cb43c19a6de061570d49d0407a3b31ad6e483069fbd78afe2840c5bf9b4776c",
+          "observedAt": "2026-10-19T06:15:17.951357+00:00",
+          "quote": "Admission majors: Please refer to Annex 5 (English Taught Programs) and Annex 6 (Chinese Taught Programs) for details.",
+          "evidenceLocator": "2026/27 guide I explicitly defers eligible majors to current Annex 5; current attachment returned a verification-code HTML form.",
+          "applicationScope": "Existing four English master/doctoral programme cycles: Finance master, Software Engineering master, Mathematics doctorate, Traditional Chinese Sports doctorate.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "candidateDeadlineNotBoundToCurrentProgramme": "2026-01-16",
+          "candidateBoundary": "before-date-as-worded",
+          "currentAnnexStatus": "verification-code-html-not-xls",
+          "oldStoredDeadlineRevalidated": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-henu-mathematics-doctorate-2026-2027-autumn",
+          "universityId": "uni-henan-university",
+          "programId": "prog-gap-mew-csw-henu-mathematics-doctorate",
+          "programmeNameZh": "数学",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": "2026-01-16",
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-month-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "fbc10e03dba9cc2373f29d96443b6c5a7a3e8220d28237f7947bf314bce01788",
+          "canonicalCycleSha256": "fbc10e03dba9cc2373f29d96443b6c5a7a3e8220d28237f7947bf314bce01788",
+          "canonicalProgramSha256": "a761c0d5b59ddf130e0c256cca04b3c9ff38199fe186cb9a5f0473fce39ba153",
+          "sourceIds": [
+            "src-gap-program-mew-csw-henu-mathematics-doctorate",
+            "src-gap-program-mew-csw-henu-mathematics-doctorate-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-henu-mathematics-doctorate",
+              "sourceSha256": "b57ba618368991f1550ffcf49a6262aec5c9b388476c1b360e9b33a80e2d67f6",
+              "url": "https://isclc.henu.edu.cn/dfiles/fujian/202211/5.henandaxueyingwenshoukezhuanyemulu%20English%20Taught%20Programs%20of%20Henan%20University.pdf",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-henu-mathematics-doctorate-support-1",
+              "sourceSha256": "7ccf37058c74759ba753804c500eacee3f402bd1ea0ccf50862d8b4159153e22",
+              "url": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+          "evidenceBodySha256": "7cb43c19a6de061570d49d0407a3b31ad6e483069fbd78afe2840c5bf9b4776c",
+          "observedAt": "2026-10-19T06:15:17.951357+00:00",
+          "quote": "Admission majors: Please refer to Annex 5 (English Taught Programs) and Annex 6 (Chinese Taught Programs) for details.",
+          "evidenceLocator": "2026/27 guide I explicitly defers eligible majors to current Annex 5; current attachment returned a verification-code HTML form.",
+          "applicationScope": "Existing four English master/doctoral programme cycles: Finance master, Software Engineering master, Mathematics doctorate, Traditional Chinese Sports doctorate.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "candidateDeadlineNotBoundToCurrentProgramme": "2026-01-16",
+          "candidateBoundary": "before-date-as-worded",
+          "currentAnnexStatus": "verification-code-html-not-xls",
+          "oldStoredDeadlineRevalidated": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-henu-software-engineering-master-2026-2027-autumn",
+          "universityId": "uni-henan-university",
+          "programId": "prog-gap-mew-csw-henu-software-engineering-master",
+          "programmeNameZh": "软件工程",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": "2026-01-16",
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-month-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "c5167b1420de941525185a14efcacbdcce8ec8ed6e9ccb260e4514b970a3688c",
+          "canonicalCycleSha256": "c5167b1420de941525185a14efcacbdcce8ec8ed6e9ccb260e4514b970a3688c",
+          "canonicalProgramSha256": "0e1688f5996e0255cf6f603d7828eec3fd8824192c18d6938675c76af4fdfdc2",
+          "sourceIds": [
+            "src-gap-program-mew-csw-henu-software-engineering-master",
+            "src-gap-program-mew-csw-henu-software-engineering-master-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-henu-software-engineering-master",
+              "sourceSha256": "46bac758d7c8539098764d9bd93069995eaa3b4e23f1982007e8b9b323bc137b",
+              "url": "https://isclc.henu.edu.cn/dfiles/fujian/202211/5.henandaxueyingwenshoukezhuanyemulu%20English%20Taught%20Programs%20of%20Henan%20University.pdf",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-henu-software-engineering-master-support-1",
+              "sourceSha256": "05391404a77f7e2d87580c9f1985902715cb0611793a898de8b74a6978a637fb",
+              "url": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+          "evidenceBodySha256": "7cb43c19a6de061570d49d0407a3b31ad6e483069fbd78afe2840c5bf9b4776c",
+          "observedAt": "2026-10-19T06:15:17.951357+00:00",
+          "quote": "Admission majors: Please refer to Annex 5 (English Taught Programs) and Annex 6 (Chinese Taught Programs) for details.",
+          "evidenceLocator": "2026/27 guide I explicitly defers eligible majors to current Annex 5; current attachment returned a verification-code HTML form.",
+          "applicationScope": "Existing four English master/doctoral programme cycles: Finance master, Software Engineering master, Mathematics doctorate, Traditional Chinese Sports doctorate.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "candidateDeadlineNotBoundToCurrentProgramme": "2026-01-16",
+          "candidateBoundary": "before-date-as-worded",
+          "currentAnnexStatus": "verification-code-html-not-xls",
+          "oldStoredDeadlineRevalidated": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-henu-traditional-chinese-sports-doctorate-2026-2027-autumn",
+          "universityId": "uni-henan-university",
+          "programId": "prog-gap-mew-csw-henu-traditional-chinese-sports-doctorate",
+          "programmeNameZh": "民族传统体育学",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionOrigin": "additional-same-source-3",
+          "storedDeadline": "2026-01-16",
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-month-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "76d36a592f1cea6653df90b9ea5a075f8c98e4292d93eec27c3d1c7d9a73b972",
+          "canonicalCycleSha256": "76d36a592f1cea6653df90b9ea5a075f8c98e4292d93eec27c3d1c7d9a73b972",
+          "canonicalProgramSha256": "79479a3ccbe57b854c4ae07376e6504a57113f219d81dbce893f1575ab5a425f",
+          "sourceIds": [
+            "src-gap-program-mew-csw-henu-traditional-chinese-sports-doctorate",
+            "src-gap-program-mew-csw-henu-traditional-chinese-sports-doctorate-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-henu-traditional-chinese-sports-doctorate",
+              "sourceSha256": "3f4c059861438d10e789f603d1c75434d7f6753e14e40bfc81a4e03b795dad41",
+              "url": "https://isclc.henu.edu.cn/dfiles/fujian/202211/5.henandaxueyingwenshoukezhuanyemulu%20English%20Taught%20Programs%20of%20Henan%20University.pdf",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-henu-traditional-chinese-sports-doctorate-support-1",
+              "sourceSha256": "9d0599445fe2716c82b6697a84cad9d4511f95d4169b15fffe44b85f5dae3f7c",
+              "url": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://isclc.henu.edu.cn/info/1021/1500.htm",
+          "evidenceBodySha256": "7cb43c19a6de061570d49d0407a3b31ad6e483069fbd78afe2840c5bf9b4776c",
+          "observedAt": "2026-10-19T06:15:17.951357+00:00",
+          "quote": "Admission majors: Please refer to Annex 5 (English Taught Programs) and Annex 6 (Chinese Taught Programs) for details.",
+          "evidenceLocator": "2026/27 guide I explicitly defers eligible majors to current Annex 5; current attachment returned a verification-code HTML form.",
+          "applicationScope": "Existing four English master/doctoral programme cycles: Finance master, Software Engineering master, Mathematics doctorate, Traditional Chinese Sports doctorate.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "candidateDeadlineNotBoundToCurrentProgramme": "2026-01-16",
+          "candidateBoundary": "before-date-as-worded",
+          "currentAnnexStatus": "verification-code-html-not-xls",
+          "oldStoredDeadlineRevalidated": false
+        }
+      ]
+    },
+    {
+      "key": "haut-month-only-window-and-awards",
+      "universityId": "uni-henan-university-of-technology",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Four exact programme records and two awards: Food Science bachelor, Applied Economics master, Chinese-language nondegree, Computer Science master, freshman award and promotion award.",
+      "notes": [
+        "Native source 403; bounded actual web full-page read succeeded. Stored text may be cached and is not raw origin bytes.",
+        "April–July is month precision, not a day-level opening/closing date. Stored April 1 openings are not certified or extended.",
+        "Freshman awards have no separate day-level cutoff; promotion awards evaluate later academic years. No university-review date or admission-month end is turned into an applicant deadline."
+      ],
+      "evidence": [
+        {
+          "key": "haut",
+          "url": "https://sie.haut.edu.cn/info/1298/17096.htm",
+          "observedAt": "2026-10-19T06:15:20.784016+00:00",
+          "method": "GET",
+          "httpStatus": 403,
+          "error": "HTTPError:403",
+          "officialDateVerified": false
+        }
+      ],
+      "actualWebTextEvidence": {
+        "path": "haut-web-observation.json",
+        "sha256": "cfec74241672047ebc3a80463ee0c4301775c1d5a75174952b83ec22872bb664",
+        "bytes": 33364,
+        "observedAt": "2026-10-19T06:16:41.742Z",
+        "rawOriginServerBytes": false,
+        "sourceUrl": "https://sie.haut.edu.cn/info/1298/17096.htm",
+        "provenance": "Native exact URL returned 403 once; actual web-tool full-page text succeeded. Returned text may be cached; no raw origin bytes or uncached freshness claimed."
+      },
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-sch-haut-freshman",
+          "universityId": "uni-henan-university-of-technology",
+          "programId": null,
+          "programmeNameZh": "河南工业大学2026年国际学生入学奖学金",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-month-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "e5e2dbfff80cb64832ba3366fd0b38a8e10d56fb2d46a8f9ac77e4d27651148f",
+          "canonicalScholarshipSha256": "e5e2dbfff80cb64832ba3366fd0b38a8e10d56fb2d46a8f9ac77e4d27651148f",
+          "sourceIds": [
+            "src-gap-scholarship-wave3-sch-haut-freshman"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-sch-haut-freshman",
+              "sourceSha256": "8d5b5d9f53b4d4cd10194a843bfc052db67ad1701a5ce46156d4aed270a3f699",
+              "url": "https://sie.haut.edu.cn/info/1298/17096.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://sie.haut.edu.cn/info/1298/17096.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T06:16:41.742Z",
+          "quote": "开放报名时间：2026年4月至7月，申请语言为中文或英文；",
+          "evidenceLocator": "Actual full 2026 autumn HAUT guide, Application and Admission Process / 申请说明 item (二); scholarships in later separate sections.",
+          "applicationScope": "Four exact programme records and two awards: Food Science bachelor, Applied Economics master, Chinese-language nondegree, Computer Science master, freshman award and promotion award.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "candidateMonthPrecisionApplicationWindow": {
+            "year": 2026,
+            "opensMonth": 4,
+            "endsMonth": 7,
+            "openingDay": null,
+            "deadlineDay": null
+          },
+          "noExactIsoDeadlineFromMonthRange": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-sch-haut-promotion",
+          "universityId": "uni-henan-university-of-technology",
+          "programId": null,
+          "programmeNameZh": "河南工业大学国际学生晋级奖学金",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-month-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "2e3f0d19dbfaee8f56cca61a3c8740b61c73ba55f645d13b56c14cf9363d5739",
+          "canonicalScholarshipSha256": "2e3f0d19dbfaee8f56cca61a3c8740b61c73ba55f645d13b56c14cf9363d5739",
+          "sourceIds": [
+            "src-gap-scholarship-wave3-sch-haut-promotion"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-sch-haut-promotion",
+              "sourceSha256": "0a1b70c748c04114d7ac9667e24534f55fb334e8476221d14c30edf6861db469",
+              "url": "https://sie.haut.edu.cn/info/1298/17096.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://sie.haut.edu.cn/info/1298/17096.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T06:16:41.742Z",
+          "quote": "开放报名时间：2026年4月至7月，申请语言为中文或英文；",
+          "evidenceLocator": "Actual full 2026 autumn HAUT guide, Application and Admission Process / 申请说明 item (二); scholarships in later separate sections.",
+          "applicationScope": "Four exact programme records and two awards: Food Science bachelor, Applied Economics master, Chinese-language nondegree, Computer Science master, freshman award and promotion award.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "candidateMonthPrecisionApplicationWindow": {
+            "year": 2026,
+            "opensMonth": 4,
+            "endsMonth": 7,
+            "openingDay": null,
+            "deadlineDay": null
+          },
+          "noExactIsoDeadlineFromMonthRange": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-haut-b-food-science-and-engineering-2026-2027-autumn",
+          "universityId": "uni-henan-university-of-technology",
+          "programId": "prog-gap-wave3-haut-b-food-science-and-engineering",
+          "programmeNameZh": "食品科学与工程",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": null,
+          "storedOpensOn": "2026-04-01",
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-month-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "c2efd42e601769842639dfd8207f1cdff7a1eeb936100b9c1e4669c32c33439b",
+          "canonicalCycleSha256": "c2efd42e601769842639dfd8207f1cdff7a1eeb936100b9c1e4669c32c33439b",
+          "canonicalProgramSha256": "cf7fa9055c1cd7e844910b33b3873303960157557eff90d1c1e0402518a458ba",
+          "sourceIds": [
+            "src-gap-program-wave3-haut-b-food-science-and-engineering",
+            "src-gap-program-wave3-haut-b-food-science-and-engineering-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-haut-b-food-science-and-engineering",
+              "sourceSha256": "a23a8ee5b017bbbde31ca09d19133a4ebd74111fa81f9280d1e8fa4e43287f69",
+              "url": "https://sie.haut.edu.cn/info/1298/17096.htm",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-wave3-haut-b-food-science-and-engineering-support-1",
+              "sourceSha256": "04b68f570288daa8c95add32039711238382fe638506625c1e707594b73b8339",
+              "url": "https://sie.haut.edu.cn/info/1159/6103.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://sie.haut.edu.cn/info/1298/17096.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T06:16:41.742Z",
+          "quote": "开放报名时间：2026年4月至7月，申请语言为中文或英文；",
+          "evidenceLocator": "Actual full 2026 autumn HAUT guide, Application and Admission Process / 申请说明 item (二); scholarships in later separate sections.",
+          "applicationScope": "Four exact programme records and two awards: Food Science bachelor, Applied Economics master, Chinese-language nondegree, Computer Science master, freshman award and promotion award.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "candidateMonthPrecisionApplicationWindow": {
+            "year": 2026,
+            "opensMonth": 4,
+            "endsMonth": 7,
+            "openingDay": null,
+            "deadlineDay": null
+          },
+          "noExactIsoDeadlineFromMonthRange": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-haut-m-applied-economics-2026-2027-autumn",
+          "universityId": "uni-henan-university-of-technology",
+          "programId": "prog-gap-wave3-haut-m-applied-economics",
+          "programmeNameZh": "应用经济学",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": null,
+          "storedOpensOn": "2026-04-01",
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-month-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "2e5b785bd3c22956fd3908ac06d486e86e2e647ffaa51c8e1be114e489df1723",
+          "canonicalCycleSha256": "2e5b785bd3c22956fd3908ac06d486e86e2e647ffaa51c8e1be114e489df1723",
+          "canonicalProgramSha256": "a065c760b6bb3863ea9e0a29f0f49ab04085dcf11694a9b73764914dccb4298c",
+          "sourceIds": [
+            "src-gap-program-wave3-haut-m-applied-economics"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-haut-m-applied-economics",
+              "sourceSha256": "15aecfb264214d0088d6184e5a9924b47bc5d246f3147d3fdac447f2df5083b6",
+              "url": "https://sie.haut.edu.cn/info/1298/17096.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://sie.haut.edu.cn/info/1298/17096.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T06:16:41.742Z",
+          "quote": "开放报名时间：2026年4月至7月，申请语言为中文或英文；",
+          "evidenceLocator": "Actual full 2026 autumn HAUT guide, Application and Admission Process / 申请说明 item (二); scholarships in later separate sections.",
+          "applicationScope": "Four exact programme records and two awards: Food Science bachelor, Applied Economics master, Chinese-language nondegree, Computer Science master, freshman award and promotion award.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "candidateMonthPrecisionApplicationWindow": {
+            "year": 2026,
+            "opensMonth": 4,
+            "endsMonth": 7,
+            "openingDay": null,
+            "deadlineDay": null
+          },
+          "noExactIsoDeadlineFromMonthRange": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-haut-nondegree-chinese-language-2026-2027-autumn",
+          "universityId": "uni-henan-university-of-technology",
+          "programId": "prog-gap-wave3-haut-nondegree-chinese-language",
+          "programmeNameZh": "汉语进修项目",
+          "degreeLevel": "language",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionOrigin": "additional-same-source-3",
+          "storedDeadline": null,
+          "storedOpensOn": "2026-04-01",
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-month-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "fba3be58e14cb1d3a3069938d1c5dd39d145be7348028162f5596625a02acfaf",
+          "canonicalCycleSha256": "fba3be58e14cb1d3a3069938d1c5dd39d145be7348028162f5596625a02acfaf",
+          "canonicalProgramSha256": "1a6e980f28f8e87b7badd5caa516bbaa0fcb5de19ad94038402c1b7984521e7d",
+          "sourceIds": [
+            "src-gap-program-wave3-haut-nondegree-chinese-language"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-haut-nondegree-chinese-language",
+              "sourceSha256": "b77b4034e4d0e5bbb76c4b74d6c91c50ad344937bef83caf4d954a38bb2d124e",
+              "url": "https://sie.haut.edu.cn/info/1298/17096.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://sie.haut.edu.cn/info/1298/17096.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T06:16:41.742Z",
+          "quote": "开放报名时间：2026年4月至7月，申请语言为中文或英文；",
+          "evidenceLocator": "Actual full 2026 autumn HAUT guide, Application and Admission Process / 申请说明 item (二); scholarships in later separate sections.",
+          "applicationScope": "Four exact programme records and two awards: Food Science bachelor, Applied Economics master, Chinese-language nondegree, Computer Science master, freshman award and promotion award.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "candidateMonthPrecisionApplicationWindow": {
+            "year": 2026,
+            "opensMonth": 4,
+            "endsMonth": 7,
+            "openingDay": null,
+            "deadlineDay": null
+          },
+          "noExactIsoDeadlineFromMonthRange": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-haut-m-computer-science-and-technology-2026-2027-autumn",
+          "universityId": "uni-henan-university-of-technology",
+          "programId": "prog-gap-wave3-haut-m-computer-science-and-technology",
+          "programmeNameZh": "计算机科学与技术",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionOrigin": "additional-same-source-3",
+          "storedDeadline": null,
+          "storedOpensOn": "2026-04-01",
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-month-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "d775ee629dc36a60bcbb1bf6fec2512e66624b6a170b31a68bfea5eb33ea196b",
+          "canonicalCycleSha256": "d775ee629dc36a60bcbb1bf6fec2512e66624b6a170b31a68bfea5eb33ea196b",
+          "canonicalProgramSha256": "5eb3a2ed98bc9ab49921c1fca04cecc10d36eabb7ba92102b0f4ab145a707b3e",
+          "sourceIds": [
+            "src-gap-program-wave3-haut-m-computer-science-and-technology"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-haut-m-computer-science-and-technology",
+              "sourceSha256": "224385e884222dcd50fd40dc35f37aa9d77d656d5921d4e9f08baf2077b0e861",
+              "url": "https://sie.haut.edu.cn/info/1298/17096.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://sie.haut.edu.cn/info/1298/17096.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T06:16:41.742Z",
+          "quote": "开放报名时间：2026年4月至7月，申请语言为中文或英文；",
+          "evidenceLocator": "Actual full 2026 autumn HAUT guide, Application and Admission Process / 申请说明 item (二); scholarships in later separate sections.",
+          "applicationScope": "Four exact programme records and two awards: Food Science bachelor, Applied Economics master, Chinese-language nondegree, Computer Science master, freshman award and promotion award.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "candidateMonthPrecisionApplicationWindow": {
+            "year": 2026,
+            "opensMonth": 4,
+            "endsMonth": 7,
+            "openingDay": null,
+            "deadlineDay": null
+          },
+          "noExactIsoDeadlineFromMonthRange": true
+        }
+      ]
+    },
+    {
+      "key": "hhu-2026-initial-school-stage",
+      "universityId": "uni-hohai-university",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Initial Hohai school-system application including complete materials and application fee for the 2026 CSC Type B high-level route.",
+      "notes": [
+        "School preliminary review Jan 9, faculty review Jan 16, interview Mar 13 and pre-admission Mar 20 are institutional stages. March 27, 2026 is only the later CSC submission for already recommended students, not the initial deadline.",
+        "Window heading gives Nov 10–Dec 30, 2025; step 1 says before Dec 30, retained as strict-before."
+      ],
+      "evidence": [
+        {
+          "key": "hhu",
+          "url": "https://cie.hhu.edu.cn/2025/1030/c14608a309299/pagem.htm",
+          "observedAt": "2026-10-19T06:15:24.210263+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://cie.hhu.edu.cn/2025/1030/c14608a309299/pagem.htm",
+          "contentType": "text/html",
+          "bodyPath": "hhu.html",
+          "bytes": 87037,
+          "bodySha256": "df5794a3121ddb4a7b0ae31babbfe673295d8d97c3c152f470a00f081da3ff63",
+          "textPath": "hhu.txt",
+          "textArtifact": {
+            "path": "hhu.txt",
+            "sha256": "a9075997c8d7801e9e333489ba828f9dd5953ddc866cb9f3edced46327bce872",
+            "bytes": 9291
+          }
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecs-hhu-csc-high-level-2026",
+          "universityId": "uni-hohai-university",
+          "programId": null,
+          "programmeNameZh": "河海大学2026年中国政府奖学金高水平研究生项目",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2025-12-30",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "before-date-as-worded",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-11-10",
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "69325ffd6813720160dae4ca38b9c22cb5923694cde47b4b8667f737653ce110",
+          "canonicalScholarshipSha256": "69325ffd6813720160dae4ca38b9c22cb5923694cde47b4b8667f737653ce110",
+          "sourceIds": [
+            "src-gap-scholarship-mve-ecs-hhu-csc-high-level-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecs-hhu-csc-high-level-2026",
+              "sourceSha256": "63ad74853aa9f5cc1e1e06bf5da1d33e43287d317dedcba20cceeaccc687408e",
+              "url": "https://cie.hhu.edu.cn/2025/1030/c14608a309299/pagem.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://cie.hhu.edu.cn/2025/1030/c14608a309299/pagem.htm",
+          "evidenceBodySha256": "df5794a3121ddb4a7b0ae31babbfe673295d8d97c3c152f470a00f081da3ff63",
+          "observedAt": "2026-10-19T06:15:24.210263+00:00",
+          "quote": "2025年12月30日之前，申请者登录河海大学在线申请系统",
+          "evidenceLocator": "Actual 2026 CSC high-level graduate guide 七 application window and 八 step 1; nominated-student CSC step 6 is separate.",
+          "applicationScope": "Initial Hohai school-system application including complete materials and application fee for the 2026 CSC Type B high-level route.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "subsequentNominatedApplicantCscStage": {
+            "deadline": "2026-03-27",
+            "boundary": "before-date-as-worded",
+            "appliesOnlyAfterSchoolRecommendation": true
+          }
+        }
+      ]
+    },
+    {
+      "key": "hqu-2026-september-student-deadline",
+      "universityId": "uni-huaqiao-university",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "September 2026 undergraduate/year/semester ICLT applicant routes actually offered by this university notice; no March 2027 intake is stated in this source.",
+      "notes": [
+        "Student May 15 is distinct from recommending/host institution May 25 review. No generic central spring deadline is supplied to the school. New opening is candidate-only."
+      ],
+      "evidence": [
+        {
+          "key": "hqu",
+          "url": "https://zsc.hqu.edu.cn/info/1081/8892.htm",
+          "observedAt": "2026-10-19T06:15:24.317845+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://zsc.hqu.edu.cn/info/1081/8892.htm",
+          "contentType": "text/html",
+          "bodyPath": "hqu.html",
+          "bytes": 79970,
+          "bodySha256": "87f1fb656e16526290eed6cd95a5c8f3771a8e62817dbc2040b8d04107c390fb",
+          "textPath": "hqu.txt",
+          "textArtifact": {
+            "path": "hqu.txt",
+            "sha256": "0406bdeeda20e5e9abc2a031305d0a5344ec20f31af519c48b245a5a3c090a32",
+            "bytes": 13877
+          }
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-hqu-international-chinese-language-teachers-scholarship-2026",
+          "universityId": "uni-huaqiao-university",
+          "programId": null,
+          "programmeNameZh": "华侨大学2026年国际中文教师奖学金",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionOrigin": "base-queue-16",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-15",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-03-01",
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "canonicalRecordSha256": "2861835a4aacdf12d65d3f96a08da34df5ee9816a0429be8b369a2bbc03d77a5",
+          "canonicalScholarshipSha256": "2861835a4aacdf12d65d3f96a08da34df5ee9816a0429be8b369a2bbc03d77a5",
+          "sourceIds": [
+            "src-gap-scholarship-wave8-hqu-international-chinese-language-teachers-scholarship-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-hqu-international-chinese-language-teachers-scholarship-2026",
+              "sourceSha256": "16ad501059d485eeea32f302948b0179c9e345d749028f223eb9cf71694db2a1",
+              "url": "https://zsc.hqu.edu.cn/info/1081/8892.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://zsc.hqu.edu.cn/info/1081/8892.htm",
+          "evidenceBodySha256": "87f1fb656e16526290eed6cd95a5c8f3771a8e62817dbc2040b8d04107c390fb",
+          "observedAt": "2026-10-19T06:15:24.317845+00:00",
+          "quote": "2026年9月入学：学生申请截止日期为5月15日，推荐机构、接收院校（华侨大学）审核截止日期为5月25日；",
+          "evidenceLocator": "Actual 2026 Huaqiao ICLT undergraduate/Chinese-study guide 四、办理流程 / 截止日期; English corresponding section.",
+          "applicationScope": "September 2026 undergraduate/year/semester ICLT applicant routes actually offered by this university notice; no March 2027 intake is stated in this source.",
+          "dateOnly": true,
+          "requiresIndependentReviewAndCasBeforeCanonicalMutation": true,
+          "institutionalReviewDeadline": "2026-05-25"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "reconciledAt": "2026-10-18T18:04:01.830Z",
+  "failedIntentSha256": "090fa9d68ec5c7ac2f1c52044beae5bb463e7669852b1616da6c174fa6adf9fb",
+  "originalCatalogSha256": "874b0be0053bb6ef0388a6b5f26183f3234c6bd027f43ff8338f82416b2001d5",
+  "actualCatalogSha256": "874b0be0053bb6ef0388a6b5f26183f3234c6bd027f43ff8338f82416b2001d5",
+  "allSixNormalizedFactsUnchanged": true,
+  "failure": "Windows EPERM; shared writer confirmed no external changes preserved and no rollback failures",
+  "disposition": "Preserve failed intent. Root explicitly executes successor hold-v2 under original CAS and new bounded atomic Windows sharing-lock handling; no paid/cloud operation."
+}

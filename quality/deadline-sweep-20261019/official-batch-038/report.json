@@ -1,0 +1,1262 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-038-20261019",
+  "state": "completed-four-scoped-historical-cutoffs-seven-unknown",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T12:48:01.980Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256Before": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256After": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v10.json",
+  "targetQueueSha256": "c92366918ff347204724332f662e7aef1885e518a82ce5b4b6427edd54b4733d",
+  "selectionSha256": "1c1701b56767102d947a0b2476f64bfeea701e2633b1784b8f287d8a9ec8c5b7",
+  "selectedUniversityIds": [
+    "uni-yangtze-university",
+    "uni-yangzhou-university",
+    "uni-yantai-university",
+    "uni-yunnan-normal-university",
+    "uni-yunnan-university-of-finance-and-economics",
+    "uni-zhejiang-gongshang-university"
+  ],
+  "selection": {
+    "baseQueueRecords": 10,
+    "additionalSameSourceRecords": 1,
+    "totalRecords": 11,
+    "baseQueueRecordIds": [
+      "cycle-gap-local-strong-yangtzeu-b-clinical-medicine-cn-2026-2027-other-fee-reference",
+      "cycle-gap-local-strong-yangtzeu-m-oil-gas-well-engineering-en-2026-2027-other-fee-reference",
+      "cycle-gap-mew-scws-yangtze-computer-science-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-mew-scws-yangtze-crop-science-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-local-strong-yzu-b-software-engineering-en-2026-2027-other",
+      "cycle-gap-remaining-ytu-nondegree-chinese-language-spring-2026-2026-2027-other",
+      "cycle-gap-chinese-degree-ynnu-international-chinese-education-master-2026-2027-other-fee-reference",
+      "cycle-gap-local-strong-ynufe-language-chinese-2026-2027-other",
+      "cycle-2027-zhejiang-gongshang-university-chinese-language-program-language",
+      "cycle-2027-zhejiang-gongshang-university-finance-master"
+    ],
+    "additionalSameSourceRecordIds": [
+      "cycle-gap-mew-scws-yangtze-mechanical-engineering-master-2026-2027-autumn-fee-reference"
+    ],
+    "baseDispatch": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1236/base-dispatch-v1.json",
+      "sha256": "da801752b913a8ec793ece3e93b015bb2c6d78c9ed224f6c277d78c788165e5c"
+    },
+    "extensionReceipt": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1236/additional-same-source-selection-v1.json",
+      "sha256": "f5232de8826c7ebb4b2ae05b33da90fcac5a8866096c7045db526d9a6b4ad95d"
+    },
+    "candidateUniversityIds": [
+      "uni-yangtze-university",
+      "uni-yangzhou-university",
+      "uni-yantai-university",
+      "uni-yunnan-normal-university",
+      "uni-yunnan-university-of-finance-and-economics",
+      "uni-zhejiang-gongshang-university",
+      "uni-zhejiang-sci-tech-university"
+    ],
+    "zeroRowUniversityIds": [
+      "uni-zhejiang-sci-tech-university"
+    ],
+    "zeroRowSchoolsNotCounted": true,
+    "globalZhejiangProvincialAwardAssignedToBatch039AndNotReadOrCountedHere": true
+  },
+  "acquisition": {
+    "registeredDistinctUrlsAttempted": 7,
+    "directLinkedSupportUrlsAttempted": 1,
+    "publicGetOperations": 8,
+    "originalBodiesSaved": 8,
+    "nativeHtmlBodies": 3,
+    "nativePdfBodies": 5,
+    "normalTls": true,
+    "paidModelCalls": 0,
+    "captureManifestPins": [
+      {
+        "path": "captures.json",
+        "sha256": "34e474097f14998189b2d4fd4506cbb303d7d218762116ef547d4d23b091c543"
+      },
+      {
+        "path": "support-captures.json",
+        "sha256": "ade0632b8ae6e99b85ab19ea188084d44948228ad13deaad5c4a055e16aca521"
+      }
+    ],
+    "diagnostics": {
+      "path": "acquisition-diagnostics.json",
+      "sha256": "edec2939b023a72c746068e6968e16125f60439cbfbcac7d67cf3f442e523b69"
+    },
+    "pdfOfflineExtraction": {
+      "path": "pdf-extraction.json",
+      "sha256": "fcd150fe2d07164741ad2e097d7de2880ea91a15e68c33286e2e3fcf3aa53455"
+    },
+    "pdfVisualTranscript": {
+      "path": "pdf-visual-transcript.json",
+      "sha256": "ecbcbd57ee1c72a4ef00066690debe1b6e9b93b2ae43a2175ba130af9042f48c"
+    },
+    "pdfRenderManifest": {
+      "path": "pdf-render-manifest.json",
+      "sha256": "a38463a0dbb072e48b0978548e1a2e0b1a3368a1c6391e69cc8778e1c113a1da"
+    },
+    "bodyInterpretation": "Five complete original PDFs and three HTML bodies saved by eight bounded reads. Yangtze large original captured once with 40 MB bound; relevant date and programme pages visually checked offline. No repeated GET or paid tool."
+  },
+  "summary": {
+    "schoolsAttempted": 6,
+    "recordsAssessed": 11,
+    "baseQueueRecords": 10,
+    "additionalSameSourceRecords": 1,
+    "admissionCyclesAssessed": 11,
+    "scholarshipsAssessed": 0,
+    "recordResults": {
+      "unknown": 7,
+      "closed": 4
+    },
+    "newExactPastDeadlineCandidatesFromStoredNull": 4,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "rules": [
+    "Source-only date candidates; no canonical dates/status/publication/verifiedAt/reviewAfter changed.",
+    "Unknown dates never establish open or closed. Intake other is not silently chosen as spring or autumn.",
+    "Yangtze exact autumn rows bind the 2026 brochure window only; its platform caveat is preserved. Oil and Gas Well Engineering is not relabelled as the broader listed major.",
+    "YTU January 15 is explicitly historical spring 2026, matched by canonical notes; stored academicYear and intake labels remain untouched.",
+    "Language-specific month-only periods are not expanded or overwritten by an unbound general funding-route date.",
+    "Independent scholarship dates are not borrowed; global shared awards are assigned only once.",
+    "No successor-year rollover, full-school catalogue completion, new non-date fact or programme cessation is certified."
+  ],
+  "groups": [
+    {
+      "key": "yangtze-exact-autumn-routes-versus-other-intake-and-major-mismatch",
+      "universityId": "uni-yangtze-university",
+      "evidence": [
+        {
+          "name": "yangtze-guide",
+          "url": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+          "observedAt": "2026-10-19T12:41:58.862587+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 40000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+          "contentType": "application/pdf",
+          "bytes": 24524757,
+          "rawPath": "yangtze-guide.pdf",
+          "rawSha256": "c441d37b95e0e04d09c575c5f71cae16d65953dde27394ce5cf20d6e15ccdec0",
+          "pageCount": 26,
+          "textPath": "yangtze-guide.txt",
+          "textSha256": "7f1d062ba8243b706667b352543d0f84a807338804577055db9915c8bcf63d67",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "sourceYear": 2026,
+      "springApplicantQuote": "春季学期：2025年10月20日——2026年1月18日",
+      "autumnApplicantQuote": "秋季学期：2026年5月1日——2026年6月28日",
+      "programmeAndOpeningCaveat": "备注：以上仅列举部分专业，申请及其开放时间以国际学生服务平台显示为准。",
+      "visualEvidence": {
+        "path": "pdf-visual-transcript.json",
+        "sha256": "ecbcbd57ee1c72a4ef00066690debe1b6e9b93b2ae43a2175ba130af9042f48c"
+      },
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-yangtzeu-b-clinical-medicine-cn-2026-2027-other-fee-reference",
+          "universityId": "uni-yangtze-university",
+          "canonicalUniversitySha256": "a77d3b598eb6b93805da06a178acbd6141e3a38e624716200fcefd01fe5b2e73",
+          "programId": "prog-gap-local-strong-yangtzeu-b-clinical-medicine-cn",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "9aa41e7ee6cc8b30bb29e53cfd54b86aba192ba09c9244e31c9f32f0608e7312",
+          "canonicalCycleSha256": "9aa41e7ee6cc8b30bb29e53cfd54b86aba192ba09c9244e31c9f32f0608e7312",
+          "canonicalProgramSha256": "bd5203de4fea87f3b7e28a5085ee53023f1cec5d385031af8314fb379f555404",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-yangtzeu-b-clinical-medicine-cn",
+              "canonicalProgramSha256": "bd5203de4fea87f3b7e28a5085ee53023f1cec5d385031af8314fb379f555404"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-strong-yangtzeu-b-clinical-medicine-cn"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-yangtzeu-b-clinical-medicine-cn",
+              "canonicalSourceSha256": "cd9afc2591670e850c53c7384873369e43b8ff177099829c049954ef60c6c9b1",
+              "url": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "Chinese-clinical-bachelor-identity-matches-but-stored-other-intake-does-not-select-one-of-two-distinct-2026-windows",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+          "evidenceBodySha256": "c441d37b95e0e04d09c575c5f71cae16d65953dde27394ce5cf20d6e15ccdec0",
+          "observedAt": "2026-10-19T12:41:58.862587+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "exactMajorQuote": "Clinical Medicine",
+          "unboundSpringDeadlineObservation": "2026-01-18",
+          "unboundAutumnDeadlineObservation": "2026-06-28",
+          "sourceHasTwoExplicit2026Windows": true,
+          "intakeNotSilentlyRelabelled": true,
+          "programmePlatformCaveat": "备注：以上仅列举部分专业，申请及其开放时间以国际学生服务平台显示为准。"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-yangtzeu-m-oil-gas-well-engineering-en-2026-2027-other-fee-reference",
+          "universityId": "uni-yangtze-university",
+          "canonicalUniversitySha256": "a77d3b598eb6b93805da06a178acbd6141e3a38e624716200fcefd01fe5b2e73",
+          "programId": "prog-gap-local-strong-yangtzeu-m-oil-gas-well-engineering-en",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "65216a0778544b4ace135d4bfe66ec2d0003210cd0f106b17301e0db0b114c8c",
+          "canonicalCycleSha256": "65216a0778544b4ace135d4bfe66ec2d0003210cd0f106b17301e0db0b114c8c",
+          "canonicalProgramSha256": "12c07ed32205aea8c60e68d0d0122846a8ae09dd1b29e959486af61583998b27",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-yangtzeu-m-oil-gas-well-engineering-en",
+              "canonicalProgramSha256": "12c07ed32205aea8c60e68d0d0122846a8ae09dd1b29e959486af61583998b27"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-strong-yangtzeu-m-oil-gas-well-engineering-en"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-yangtzeu-m-oil-gas-well-engineering-en",
+              "canonicalSourceSha256": "a7addb9f5e5acfdf5999017abe01a2e7e8358dd9514337e0b8242e43cde7e901",
+              "url": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "brochure-lists-Petroleum-and-Natural-Gas-Engineering-not-exact-Oil-and-Gas-Well-Engineering-and-stored-intake-is-other",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+          "evidenceBodySha256": "c441d37b95e0e04d09c575c5f71cae16d65953dde27394ce5cf20d6e15ccdec0",
+          "observedAt": "2026-10-19T12:41:58.862587+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "canonicalProgrammeName": "Oil and Gas Well Engineering",
+          "sourceProgrammeName": "Petroleum and Natural Gas Engineering",
+          "programmeNameNotSilentlyRelabelled": true,
+          "unbound2026AutumnDeadlineObservation": "2026-06-28",
+          "programmePlatformCaveat": "备注：以上仅列举部分专业，申请及其开放时间以国际学生服务平台显示为准。"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-scws-yangtze-computer-science-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-yangtze-university",
+          "canonicalUniversitySha256": "a77d3b598eb6b93805da06a178acbd6141e3a38e624716200fcefd01fe5b2e73",
+          "programId": "prog-gap-mew-scws-yangtze-computer-science-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "41cb5bdf1668de17454a066a291a1508e1ea3969c98c62f8b64aae96acc2dbcb",
+          "canonicalCycleSha256": "41cb5bdf1668de17454a066a291a1508e1ea3969c98c62f8b64aae96acc2dbcb",
+          "canonicalProgramSha256": "5427f05d0e2e44f47a2769433f6e3704223afced2542102b3e7c2a5afe625b29",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-scws-yangtze-computer-science-bachelor",
+              "canonicalProgramSha256": "5427f05d0e2e44f47a2769433f6e3704223afced2542102b3e7c2a5afe625b29"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-scws-yangtze-computer-science-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-scws-yangtze-computer-science-bachelor",
+              "canonicalSourceSha256": "8f6faf37e6c148279a400c9862e6611a9f02afb05c28e4d57abc2b15791d0dff",
+              "url": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-28",
+          "candidateOfficialDeadline": "2026-06-28",
+          "reason": "exact-2026-autumn-applicant-window-and-matching-English-programme-level-in-brochure",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-05-01",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+          "evidenceBodySha256": "c441d37b95e0e04d09c575c5f71cae16d65953dde27394ce5cf20d6e15ccdec0",
+          "observedAt": "2026-10-19T12:41:58.862587+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the expressly bound historical applicant route is past; no successor intake, whole-school status or permanent cessation is inferred.",
+          "quotedDate": "秋季学期：2026年5月1日——2026年6月28日",
+          "exactMajorQuote": "Computer Science and Technology",
+          "sourceYear": 2026,
+          "sourceIntake": "autumn",
+          "fundingRoute": "General 2026 autumn international admission; independent scholarships excluded.",
+          "programmeCataloguePages": [
+            18
+          ],
+          "yearAndApplicantDatePage": 13,
+          "programmePlatformCaveat": "备注：以上仅列举部分专业，申请及其开放时间以国际学生服务平台显示为准。",
+          "platformAvailabilityNotIndependentlyCertified": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-scws-yangtze-crop-science-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-yangtze-university",
+          "canonicalUniversitySha256": "a77d3b598eb6b93805da06a178acbd6141e3a38e624716200fcefd01fe5b2e73",
+          "programId": "prog-gap-mew-scws-yangtze-crop-science-master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "b94b1f59c3b478ac1bfed4ce08a989bf8ef2539f4d378e476a129376f1c8ae70",
+          "canonicalCycleSha256": "b94b1f59c3b478ac1bfed4ce08a989bf8ef2539f4d378e476a129376f1c8ae70",
+          "canonicalProgramSha256": "f488c70c30be5180b280f9de1d8fbdc7445fa8c568fda9ba80e78015080fe898",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-scws-yangtze-crop-science-master",
+              "canonicalProgramSha256": "f488c70c30be5180b280f9de1d8fbdc7445fa8c568fda9ba80e78015080fe898"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-scws-yangtze-crop-science-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-scws-yangtze-crop-science-master",
+              "canonicalSourceSha256": "f34c68d1ebd0a420fa2905a8c740326acc66caf3e97ee86215c6c0dcce461f7a",
+              "url": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-28",
+          "candidateOfficialDeadline": "2026-06-28",
+          "reason": "exact-2026-autumn-applicant-window-and-matching-English-programme-level-in-brochure",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-05-01",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+          "evidenceBodySha256": "c441d37b95e0e04d09c575c5f71cae16d65953dde27394ce5cf20d6e15ccdec0",
+          "observedAt": "2026-10-19T12:41:58.862587+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the expressly bound historical applicant route is past; no successor intake, whole-school status or permanent cessation is inferred.",
+          "quotedDate": "秋季学期：2026年5月1日——2026年6月28日",
+          "exactMajorQuote": "Crop Science",
+          "sourceYear": 2026,
+          "sourceIntake": "autumn",
+          "fundingRoute": "General 2026 autumn international admission; independent scholarships excluded.",
+          "programmeCataloguePages": [
+            19
+          ],
+          "yearAndApplicantDatePage": 13,
+          "programmePlatformCaveat": "备注：以上仅列举部分专业，申请及其开放时间以国际学生服务平台显示为准。",
+          "platformAvailabilityNotIndependentlyCertified": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-scws-yangtze-mechanical-engineering-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-yangtze-university",
+          "canonicalUniversitySha256": "a77d3b598eb6b93805da06a178acbd6141e3a38e624716200fcefd01fe5b2e73",
+          "programId": "prog-gap-mew-scws-yangtze-mechanical-engineering-master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "explicit-same-source-extension",
+          "canonicalRecordSha256": "aa47e1b7d7743cfce6be1ab2d45c92ea31603bbb84c07d1b51b9ebe7724b5c1e",
+          "canonicalCycleSha256": "aa47e1b7d7743cfce6be1ab2d45c92ea31603bbb84c07d1b51b9ebe7724b5c1e",
+          "canonicalProgramSha256": "428ca797a4c76058d1c0eada8b250364516b97932542fa4f48138e2f7a7c56af",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-scws-yangtze-mechanical-engineering-master",
+              "canonicalProgramSha256": "428ca797a4c76058d1c0eada8b250364516b97932542fa4f48138e2f7a7c56af"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-scws-yangtze-mechanical-engineering-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-scws-yangtze-mechanical-engineering-master",
+              "canonicalSourceSha256": "6a20e42f565333b73309af180abcbb102b8d8fd1050b5ac8074eb6c45712dd7e",
+              "url": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-28",
+          "candidateOfficialDeadline": "2026-06-28",
+          "reason": "exact-2026-autumn-applicant-window-and-matching-English-programme-level-in-brochure",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-05-01",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+          "evidenceBodySha256": "c441d37b95e0e04d09c575c5f71cae16d65953dde27394ce5cf20d6e15ccdec0",
+          "observedAt": "2026-10-19T12:41:58.862587+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the expressly bound historical applicant route is past; no successor intake, whole-school status or permanent cessation is inferred.",
+          "quotedDate": "秋季学期：2026年5月1日——2026年6月28日",
+          "exactMajorQuote": "Mechanical Engineering",
+          "sourceYear": 2026,
+          "sourceIntake": "autumn",
+          "fundingRoute": "General 2026 autumn international admission; independent scholarships excluded.",
+          "programmeCataloguePages": [
+            19
+          ],
+          "yearAndApplicantDatePage": 13,
+          "programmePlatformCaveat": "备注：以上仅列举部分专业，申请及其开放时间以国际学生服务平台显示为准。",
+          "platformAvailabilityNotIndependentlyCertified": true
+        }
+      ]
+    },
+    {
+      "key": "yzu-software-curriculum-only-no-year-specific-cutoff",
+      "universityId": "uni-yangzhou-university",
+      "evidence": [
+        {
+          "name": "yzu-software",
+          "url": "https://coe.yzu.edu.cn/__local/3/48/9C/C8365844700F1C231B229D9A08A_36C980A7_2E6EF.pdf",
+          "observedAt": "2026-10-19T12:41:58.863587+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 40000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://coe.yzu.edu.cn/__local/3/48/9C/C8365844700F1C231B229D9A08A_36C980A7_2E6EF.pdf",
+          "contentType": "application/pdf",
+          "bytes": 190191,
+          "rawPath": "yzu-software.pdf",
+          "rawSha256": "5b8262c697b5752339647f97b3190923dd3316c5b6ab4ea1a18cd3314e19cdc0",
+          "pageCount": 6,
+          "textPath": "yzu-software.txt",
+          "textSha256": "d3143261dcebb650cf0306eed5b1063775e0cd9d8ecd2eefe18af51f6fdc2f27",
+          "captureSucceeded": true,
+          "evidenceRole": "English-bachelor-curriculum-not-application-guide",
+          "fullFactsCertified": false
+        }
+      ],
+      "identityQuote": "Bachelor of Engineering in Software Engineering",
+      "typeQuote": "Program Description and Curriculum Guide",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-yzu-b-software-engineering-en-2026-2027-other",
+          "universityId": "uni-yangzhou-university",
+          "canonicalUniversitySha256": "ccbf2f74bdbed32de52ab4d548303eca04dd9eeda3cbbeb3867437655366f9bf",
+          "programId": "prog-gap-local-strong-yzu-b-software-engineering-en",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "1b49becd6c7f12812fc97edcd3181b24fa07cace31b3542141446bd5197645e2",
+          "canonicalCycleSha256": "1b49becd6c7f12812fc97edcd3181b24fa07cace31b3542141446bd5197645e2",
+          "canonicalProgramSha256": "210c2efc9aa8e2b753b9895832ad75c7bea1e488ef4a61e02713b4646c6294b7",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-yzu-b-software-engineering-en",
+              "canonicalProgramSha256": "210c2efc9aa8e2b753b9895832ad75c7bea1e488ef4a61e02713b4646c6294b7"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-strong-yzu-b-software-engineering-en"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-yzu-b-software-engineering-en",
+              "canonicalSourceSha256": "3d413c99c501410b2467ef0be79a96135e092108512791fd35a59a94a7c58001",
+              "url": "https://coe.yzu.edu.cn/__local/3/48/9C/C8365844700F1C231B229D9A08A_36C980A7_2E6EF.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "six-page-programme-curriculum-has-no-target-year-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://coe.yzu.edu.cn/__local/3/48/9C/C8365844700F1C231B229D9A08A_36C980A7_2E6EF.pdf",
+          "evidenceBodySha256": "5b8262c697b5752339647f97b3190923dd3316c5b6ab4ea1a18cd3314e19cdc0",
+          "observedAt": "2026-10-19T12:41:58.863587+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "curriculumNotApplicationDeadline": true,
+          "noYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "ytu-explicit-historical-spring2026-language-applicant-cutoff",
+      "universityId": "uni-yantai-university",
+      "evidence": [
+        {
+          "name": "ytu-language",
+          "url": "https://isc.ytu.edu.cn/chi.pdf",
+          "observedAt": "2026-10-19T12:41:58.864587+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 40000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://isc.ytu.edu.cn/chi.pdf",
+          "contentType": "application/pdf",
+          "bytes": 1040793,
+          "rawPath": "ytu-language.pdf",
+          "rawSha256": "4301002f3c68020f03cf87850cc37f47e1a1db2bc4395d16f1139f8c1fc9cacb",
+          "pageCount": 9,
+          "textPath": "ytu-language.txt",
+          "textSha256": "a0e543777b1523501517c31d761b459bc4656acda0723489e4825c7daea52e22",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "（2026 年春季）",
+      "identityQuote": "汉语语言进修（非学历）",
+      "dateQuote": "申请截止日期：2026 年 1 月 15 日",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-remaining-ytu-nondegree-chinese-language-spring-2026-2026-2027-other",
+          "universityId": "uni-yantai-university",
+          "canonicalUniversitySha256": "31daf2cd52481977fb76ba49cd4a088c0c326e358b55198b34662732c83dca9c",
+          "programId": "prog-gap-remaining-ytu-nondegree-chinese-language-spring-2026",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "b0077dd6f03a3f011c63b74abe9e69625f025cdcba6306cace1b71f2d255ddfd",
+          "canonicalCycleSha256": "b0077dd6f03a3f011c63b74abe9e69625f025cdcba6306cace1b71f2d255ddfd",
+          "canonicalProgramSha256": "dd89be091c2a3475bee14800fc7232fcc889f2f098ebbd4b3a9b1213120a0005",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-remaining-ytu-nondegree-chinese-language-spring-2026",
+              "canonicalProgramSha256": "dd89be091c2a3475bee14800fc7232fcc889f2f098ebbd4b3a9b1213120a0005"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-remaining-ytu-nondegree-chinese-language-spring-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-remaining-ytu-nondegree-chinese-language-spring-2026",
+              "canonicalSourceSha256": "4822ede3195ed168c3f62fc79ea7db3186e064aa4502c8fc6cecde7671ffd94a",
+              "url": "https://isc.ytu.edu.cn/chi.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-01-15",
+          "candidateOfficialDeadline": "2026-01-15",
+          "reason": "canonical-notes-explicitly-preserve-Spring2026-historical-route-and-original-gives-its-own-applicant-day",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://isc.ytu.edu.cn/chi.pdf",
+          "evidenceBodySha256": "4301002f3c68020f03cf87850cc37f47e1a1db2bc4395d16f1139f8c1fc9cacb",
+          "observedAt": "2026-10-19T12:41:58.864587+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the expressly bound historical applicant route is past; no successor intake, whole-school status or permanent cessation is inferred.",
+          "quotedDate": "申请截止日期：2026 年 1 月 15 日",
+          "sourceYear": 2026,
+          "sourceIntake": "spring",
+          "historicalReferenceOnly": true,
+          "canonicalNotesExplicitlyBindHistoricalSpring2026": true,
+          "academicYearLabelMismatchRetained": true,
+          "storedAcademicYearNotRelabelled": "2026-2027",
+          "storedOtherIntakeNotMutated": true,
+          "sourceYearNotRolledForward": true,
+          "registrationAndTeachingDatesExcluded": true,
+          "yearPage": 1,
+          "programmePage": 4,
+          "applicantDeadlinePage": 8
+        }
+      ]
+    },
+    {
+      "key": "ynnu-2026-master-catalogue-and-recruitment-news-no-cutoff",
+      "universityId": "uni-yunnan-normal-university",
+      "evidence": [
+        {
+          "name": "ynnu-majors",
+          "url": "https://lx.ynnu.edu.cn/shuoshizhuanyeyingwen2026.pdf",
+          "observedAt": "2026-10-19T12:41:58.865587+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 40000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://lx.ynnu.edu.cn/shuoshizhuanyeyingwen2026.pdf",
+          "contentType": "application/pdf",
+          "bytes": 114052,
+          "rawPath": "ynnu-majors.pdf",
+          "rawSha256": "78348c8c64cc5eb9a7f5a0d1149e95756f11bfd14d34a9cdad645d6646d24a50",
+          "pageCount": 2,
+          "textPath": "ynnu-majors.txt",
+          "textSha256": "39af4b777e1dfc1d3a24a4715479ad5cff7dfe677eb25f01efa0f4f12ed7dad7",
+          "captureSucceeded": true,
+          "evidenceRole": "exact-2026-master-programme-catalogue-no-applicant-window",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "ynnu-guide",
+          "url": "https://lx.ynnu.edu.cn/info/1286/1335.htm",
+          "observedAt": "2026-10-19T12:42:04.312638+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 40000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://lx.ynnu.edu.cn/info/1286/1335.htm",
+          "contentType": "text/html",
+          "bytes": 16733,
+          "rawPath": "ynnu-guide.html",
+          "rawSha256": "c802469de13c64e9fbaa4a794d3c567a3966cef1be35856b8abb7b57617e5dc5",
+          "textPath": "ynnu-guide.txt",
+          "textSha256": "1084779e167a4d8ad7bba0cb88424b5629d65a012bbebed06744a253c19049d1",
+          "captureSucceeded": true,
+          "evidenceRole": "recruitment-news-not-admissions-guide",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "云南师范大学国际学生硕士专业目录(2026年)",
+      "identityQuote": "国际中文教育 汉语",
+      "newsTitle": "云端相约越南！云南华文学院开展2026年来华留学直播宣讲",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-chinese-degree-ynnu-international-chinese-education-master-2026-2027-other-fee-reference",
+          "universityId": "uni-yunnan-normal-university",
+          "canonicalUniversitySha256": "21055c209113e5a8e121c7d8bae4c02fbbf7397aafa743735ea607a50d076eb3",
+          "programId": "prog-gap-chinese-degree-ynnu-international-chinese-education-master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "71ef8dbb97c13f67b10bdab7ca83ec50110f51ff893cbef94462b3004216ece0",
+          "canonicalCycleSha256": "71ef8dbb97c13f67b10bdab7ca83ec50110f51ff893cbef94462b3004216ece0",
+          "canonicalProgramSha256": "77a4536e687f7b45481074c38dd80981c52eccc8721e82e911f10ac6c267bb65",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-chinese-degree-ynnu-international-chinese-education-master",
+              "canonicalProgramSha256": "77a4536e687f7b45481074c38dd80981c52eccc8721e82e911f10ac6c267bb65"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-chinese-degree-ynnu-international-chinese-education-master",
+            "src-gap-program-chinese-degree-ynnu-international-chinese-education-master-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-chinese-degree-ynnu-international-chinese-education-master",
+              "canonicalSourceSha256": "cff6064732d46330e318362b75d3f6572b7e909bc27c1a1104c087f66512b693",
+              "url": "https://lx.ynnu.edu.cn/shuoshizhuanyeyingwen2026.pdf"
+            },
+            {
+              "sourceId": "src-gap-program-chinese-degree-ynnu-international-chinese-education-master-support-1",
+              "canonicalSourceSha256": "795451e9d18b36b13c0ecc420c108efe84421dfcddb4b07b186b4c8b10f9310a",
+              "url": "https://lx.ynnu.edu.cn/info/1286/1335.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "matching-2026-Chinese-taught-master-catalogue-has-no-date-and-support-page-is-June-recruitment-news",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://lx.ynnu.edu.cn/shuoshizhuanyeyingwen2026.pdf",
+          "evidenceBodySha256": "78348c8c64cc5eb9a7f5a0d1149e95756f11bfd14d34a9cdad645d6646d24a50",
+          "observedAt": "2026-10-19T12:41:58.865587+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "newsPublicationDayNotApplicantCutoff": true,
+          "catalogueIdentityOnly": true,
+          "awardDeadlineNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "ynufe-language-own-month-only-periods-versus-general-funding-dates",
+      "universityId": "uni-yunnan-university-of-finance-and-economics",
+      "evidence": [
+        {
+          "name": "ynufe-language",
+          "url": "https://www.ynufe.edu.cn/__local/4/E5/12/54FC29EDC7F61029118F35ACD24_ED2591FF_2EEB4.pdf",
+          "observedAt": "2026-10-19T12:42:04.314808+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 40000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.ynufe.edu.cn/__local/4/E5/12/54FC29EDC7F61029118F35ACD24_ED2591FF_2EEB4.pdf",
+          "contentType": "application/pdf",
+          "bytes": 192180,
+          "rawPath": "ynufe-language.pdf",
+          "rawSha256": "07da49714122a3905cc245d950261ae931e9946f993a2912738bfcabddff589b",
+          "pageCount": 8,
+          "textPath": "ynufe-language.txt",
+          "textSha256": "0c98717a4f55d05e24b483d42fa574ed2c22e15269c8cad6bb01398ab9177548",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "sourceYear": 2026,
+      "languagePeriodQuote": "Application periods: Spring semester—November to December each year; Fall semester—May to June each year.",
+      "separateGeneralSelfFundedQuote": "Self-funded Program：June 15, 2026",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-ynufe-language-chinese-2026-2027-other",
+          "universityId": "uni-yunnan-university-of-finance-and-economics",
+          "canonicalUniversitySha256": "388aaa42f2ead2e50df237a2c0bab941101453659371ae1a89b9c6fbb5049d95",
+          "programId": "prog-gap-local-strong-ynufe-language-chinese",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "25b4ff3b0f202dd89430ce52405d597995f7ed9d0ebf703f03264a23a8e04ed0",
+          "canonicalCycleSha256": "25b4ff3b0f202dd89430ce52405d597995f7ed9d0ebf703f03264a23a8e04ed0",
+          "canonicalProgramSha256": "c2c32729f5d690c4a5a9f08477352c70a06dc8738340a5b8babea392bfead1bf",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-ynufe-language-chinese",
+              "canonicalProgramSha256": "c2c32729f5d690c4a5a9f08477352c70a06dc8738340a5b8babea392bfead1bf"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-strong-ynufe-language-chinese"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-ynufe-language-chinese",
+              "canonicalSourceSha256": "82234ae957f504a8123e2d169658100bcffc2801ceedb4c013200644cde6112c",
+              "url": "https://www.ynufe.edu.cn/__local/4/E5/12/54FC29EDC7F61029118F35ACD24_ED2591FF_2EEB4.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "language-own-periods-are-month-only-recurring-and-canonical-other-intake-ten-month-route-does-not-bind-general-funding-deadline",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.ynufe.edu.cn/__local/4/E5/12/54FC29EDC7F61029118F35ACD24_ED2591FF_2EEB4.pdf",
+          "evidenceBodySha256": "07da49714122a3905cc245d950261ae931e9946f993a2912738bfcabddff589b",
+          "observedAt": "2026-10-19T12:42:04.314808+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "languageOwnPeriodQuote": "Application periods: Spring semester—November to December each year; Fall semester—May to June each year.",
+          "separateGeneralSelfFundedDateObservation": "2026-06-15",
+          "generalSelfFundedDateNotAutomaticallySubstituted": true,
+          "independentScholarshipDatesNotBorrowed": true,
+          "storedOtherIntakeNotSilentlyChosen": true,
+          "canonicalTenMonthDurationNotRevalidated": true,
+          "languagePages": [
+            4,
+            5
+          ],
+          "broaderFundingRouteDatePage": 8,
+          "noMonthEndManufactured": true
+        }
+      ]
+    },
+    {
+      "key": "zjgsu-2027-landing-and-one-admissions-list-no-exact-date",
+      "universityId": "uni-zhejiang-gongshang-university",
+      "evidence": [
+        {
+          "name": "zjgsu-home",
+          "url": "https://sie.zjgsu.edu.cn/",
+          "observedAt": "2026-10-19T12:42:08.386765+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 40000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sie.zjgsu.edu.cn/main.htm",
+          "contentType": "text/html",
+          "bytes": 28198,
+          "rawPath": "zjgsu-home.html",
+          "rawSha256": "98794a5a5b8468765b118dcd801cc63d774324c3b0031b8b9f2c7d98a90de213",
+          "textPath": "zjgsu-home.txt",
+          "textSha256": "b9a98b06d7e1dae69b80fbdf52887dad1d236aea05531ab0bad3b51e79f8ecde",
+          "captureSucceeded": true,
+          "evidenceRole": "landing-not-date-proof",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "zjgsu-admissions",
+          "url": "https://sie.zjgsu.edu.cn/389/list.htm",
+          "observedAt": "2026-10-19T12:45:05.227808+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sie.zjgsu.edu.cn/389/list.htm",
+          "contentType": "text/html",
+          "bytes": 18356,
+          "rawPath": "zjgsu-admissions.html",
+          "rawSha256": "cd1e37faef17a85ca457dc8cbe3fc77b8e9d41142d01d0c30cf56e6ec9445404",
+          "textPath": "zjgsu-admissions.txt",
+          "textSha256": "735b6d09ac8b2f2811723a5f83e2ad946c232570cec27f22fca2eaaa6414f60e",
+          "captureSucceeded": true,
+          "evidenceRole": "one-direct-linked-admissions-index-no-2027-body",
+          "fullFactsCertified": false
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-zhejiang-gongshang-university-chinese-language-program-language",
+          "universityId": "uni-zhejiang-gongshang-university",
+          "canonicalUniversitySha256": "b59e8e95635e8cdb4ccc4ecb34e22202334eb084e9276fbff48e28d8a0d78652",
+          "programId": "program-zhejiang-gongshang-university-chinese-language-program-language",
+          "academicYear": "2027-2028",
+          "intake": "other",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "To be confirmed"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "de1578efec0481528a8d83e2cbde1b7205456595db1b4b46ce72cbd4e2f6dc33",
+          "canonicalCycleSha256": "de1578efec0481528a8d83e2cbde1b7205456595db1b4b46ce72cbd4e2f6dc33",
+          "canonicalProgramSha256": "d48ad8d98b4d8cc878d204fee4e6e96e56de5670d715d893c46ef245f60e245c",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-zhejiang-gongshang-university-chinese-language-program-language",
+              "canonicalProgramSha256": "d48ad8d98b4d8cc878d204fee4e6e96e56de5670d715d893c46ef245f60e245c"
+            }
+          ],
+          "sourceIds": [
+            "src-uni-zhejiang-gongshang-university"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-uni-zhejiang-gongshang-university",
+              "canonicalSourceSha256": "8c57c2a1e04e9fc452d68c27cde7093daa93f28d788c404ebda43db428873e91",
+              "url": "https://sie.zjgsu.edu.cn/"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-home-and-one-linked-admission-list-provide-no-exact-2027-programme-applicant-window",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sie.zjgsu.edu.cn/",
+          "evidenceBodySha256": "98794a5a5b8468765b118dcd801cc63d774324c3b0031b8b9f2c7d98a90de213",
+          "observedAt": "2026-10-19T12:42:08.386765+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "sourceYearNotEstablishedForTarget2027": true,
+          "no2026To2027Rollover": true,
+          "landingAndIndexNotDateProof": true,
+          "retryPolicy": "cooldown-after-one-direct-linked-fallback"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-zhejiang-gongshang-university-finance-master",
+          "universityId": "uni-zhejiang-gongshang-university",
+          "canonicalUniversitySha256": "b59e8e95635e8cdb4ccc4ecb34e22202334eb084e9276fbff48e28d8a0d78652",
+          "programId": "program-zhejiang-gongshang-university-finance-master",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "To be confirmed"
+          ],
+          "selectionOrigin": "explicit-base-dispatch-v10",
+          "canonicalRecordSha256": "1201f6d201550ed1d4a7f2c8b0e7c8162f305f4072c52ecb9d2963da49a28854",
+          "canonicalCycleSha256": "1201f6d201550ed1d4a7f2c8b0e7c8162f305f4072c52ecb9d2963da49a28854",
+          "canonicalProgramSha256": "1515f860a9abc4f506ecfcb9cdbcdf19e64becb22da8b5048a4808df05c0674d",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-zhejiang-gongshang-university-finance-master",
+              "canonicalProgramSha256": "1515f860a9abc4f506ecfcb9cdbcdf19e64becb22da8b5048a4808df05c0674d"
+            }
+          ],
+          "sourceIds": [
+            "src-uni-zhejiang-gongshang-university"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-uni-zhejiang-gongshang-university",
+              "canonicalSourceSha256": "8c57c2a1e04e9fc452d68c27cde7093daa93f28d788c404ebda43db428873e91",
+              "url": "https://sie.zjgsu.edu.cn/"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-home-and-one-linked-admission-list-provide-no-exact-2027-programme-applicant-window",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sie.zjgsu.edu.cn/",
+          "evidenceBodySha256": "98794a5a5b8468765b118dcd801cc63d774324c3b0031b8b9f2c7d98a90de213",
+          "observedAt": "2026-10-19T12:42:08.386765+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "sourceYearNotEstablishedForTarget2027": true,
+          "no2026To2027Rollover": true,
+          "landingAndIndexNotDateProof": true,
+          "retryPolicy": "cooldown-after-one-direct-linked-fallback"
+        }
+      ]
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "reportSha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "batch": "official-batch-025",
+      "reportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f"
+    },
+    {
+      "batch": "official-batch-026",
+      "reportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9"
+    },
+    {
+      "batch": "official-batch-027",
+      "reportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+    },
+    {
+      "batch": "official-batch-028",
+      "reportSha256": "c1ee48a947ab94feac0f853531921d888b4ce30b24781afe7cb9e422e29f9276"
+    },
+    {
+      "batch": "official-batch-029",
+      "reportSha256": "6fa308e70e7e0ad0a0436ed5103eb067928fc9494ba1e977fdaba85cdd3d2243"
+    },
+    {
+      "batch": "official-batch-030",
+      "reportSha256": "95ae6d26c4de9030e7debe25a19d12f12d23235c3633a3b75aca538996958668"
+    },
+    {
+      "batch": "official-batch-031",
+      "reportSha256": "7f213f09e6f2e397a41ce67e2a81c68c9f4bed5f93f83d60d1cff37a42e5cf59"
+    },
+    {
+      "batch": "official-batch-032",
+      "reportSha256": "7ca2417531ff19ae0b9c7b348bf40be89d9029a48b7930172d876488b663b982"
+    },
+    {
+      "batch": "official-batch-033",
+      "reportSha256": "9087e4d1d7242809498d7f0a9c1b740419da39f52ee863e4d4849bd1aef44698"
+    },
+    {
+      "batch": "official-batch-034",
+      "reportSha256": "3ddc3e1c816b3c4927c13304492b76fd1fc8f5dc6ff90ec1043a770ccd55b9d0"
+    },
+    {
+      "batch": "official-batch-035",
+      "reportSha256": "b621c16cdbd0d01ca22059bd83f92e283d43629394ddab64ba7c86486ae7dafb"
+    },
+    {
+      "batch": "official-batch-036",
+      "reportSha256": "db944c0a39ebdae71e53866c10f70f6d98b60ef77ba034891224afe1c0bf7f50"
+    }
+  ],
+  "validation": {
+    "exactElevenIdsOnce": true,
+    "baseIdsMatchFrozenDispatch": true,
+    "oneExtensionMatchesReceipt": true,
+    "globalSharedAwardExcluded": true,
+    "zeroRowSchoolNotCounted": true,
+    "noAssessedOrApprovedOverlap": true,
+    "sixInputsUnchanged": true,
+    "canonicalRowParentSourceUniversityPinsSaved": true,
+    "quotedFragmentsMatchSavedText": true,
+    "pdfRelevantPagesVisuallyRead": true,
+    "closedDatesAreExplicitPastIsoDays": true,
+    "openingDatesNotAssessed": true
+  }
+}

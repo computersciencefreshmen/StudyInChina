@@ -1,0 +1,1199 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-038-20261019",
+  "createdAt": "2026-10-19T12:41:26.843Z",
+  "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "statePath": "quality/recovery-20261018/continuation-state.json",
+  "stateSha256": "334399cac6081f6e803d89f3d6de05ed29ea8ecc26371e0ba0c01df3d9846b9f",
+  "summaryPath": "quality/deadline-sweep-20261019/official-review-summary-v12.json",
+  "summarySha256": "f8f77140d9495d302924209a3b654ddb164adceae554c6d0cde5441b638a0270",
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v10.json",
+  "queueSha256": "c92366918ff347204724332f662e7aef1885e518a82ce5b4b6427edd54b4733d",
+  "inventoryPath": "quality/deadline-sweep-20261019/catalog-deadlines.json",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "baseDispatch": {
+    "path": "quality/deadline-sweep-20261019/heartbeat-1236/base-dispatch-v1.json",
+    "sha256": "da801752b913a8ec793ece3e93b015bb2c6d78c9ed224f6c277d78c788165e5c"
+  },
+  "extensionReceipt": {
+    "path": "quality/deadline-sweep-20261019/heartbeat-1236/additional-same-source-selection-v1.json",
+    "sha256": "f5232de8826c7ebb4b2ae05b33da90fcac5a8866096c7045db526d9a6b4ad95d"
+  },
+  "candidateUniversityIds": [
+    "uni-yangtze-university",
+    "uni-yangzhou-university",
+    "uni-yantai-university",
+    "uni-yunnan-normal-university",
+    "uni-yunnan-university-of-finance-and-economics",
+    "uni-zhejiang-gongshang-university",
+    "uni-zhejiang-sci-tech-university"
+  ],
+  "selectedUniversityIds": [
+    "uni-yangtze-university",
+    "uni-yangzhou-university",
+    "uni-yantai-university",
+    "uni-yunnan-normal-university",
+    "uni-yunnan-university-of-finance-and-economics",
+    "uni-zhejiang-gongshang-university"
+  ],
+  "zeroRowUniversityIds": [
+    "uni-zhejiang-sci-tech-university"
+  ],
+  "baseQueueRecordIds": [
+    "cycle-gap-local-strong-yangtzeu-b-clinical-medicine-cn-2026-2027-other-fee-reference",
+    "cycle-gap-local-strong-yangtzeu-m-oil-gas-well-engineering-en-2026-2027-other-fee-reference",
+    "cycle-gap-mew-scws-yangtze-computer-science-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-mew-scws-yangtze-crop-science-master-2026-2027-autumn-fee-reference",
+    "cycle-gap-local-strong-yzu-b-software-engineering-en-2026-2027-other",
+    "cycle-gap-remaining-ytu-nondegree-chinese-language-spring-2026-2026-2027-other",
+    "cycle-gap-chinese-degree-ynnu-international-chinese-education-master-2026-2027-other-fee-reference",
+    "cycle-gap-local-strong-ynufe-language-chinese-2026-2027-other",
+    "cycle-2027-zhejiang-gongshang-university-chinese-language-program-language",
+    "cycle-2027-zhejiang-gongshang-university-finance-master"
+  ],
+  "additionalSameSourceRecordIds": [
+    "cycle-gap-mew-scws-yangtze-mechanical-engineering-master-2026-2027-autumn-fee-reference"
+  ],
+  "selectedRecordIds": [
+    "cycle-gap-local-strong-yangtzeu-b-clinical-medicine-cn-2026-2027-other-fee-reference",
+    "cycle-gap-local-strong-yangtzeu-m-oil-gas-well-engineering-en-2026-2027-other-fee-reference",
+    "cycle-gap-mew-scws-yangtze-computer-science-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-mew-scws-yangtze-crop-science-master-2026-2027-autumn-fee-reference",
+    "cycle-gap-local-strong-yzu-b-software-engineering-en-2026-2027-other",
+    "cycle-gap-remaining-ytu-nondegree-chinese-language-spring-2026-2026-2027-other",
+    "cycle-gap-chinese-degree-ynnu-international-chinese-education-master-2026-2027-other-fee-reference",
+    "cycle-gap-local-strong-ynufe-language-chinese-2026-2027-other",
+    "cycle-2027-zhejiang-gongshang-university-chinese-language-program-language",
+    "cycle-2027-zhejiang-gongshang-university-finance-master",
+    "cycle-gap-mew-scws-yangtze-mechanical-engineering-master-2026-2027-autumn-fee-reference"
+  ],
+  "records": [
+    {
+      "recordId": "cycle-gap-local-strong-yangtzeu-b-clinical-medicine-cn-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-yangtze-university",
+      "canonicalRecordSha256": "9aa41e7ee6cc8b30bb29e53cfd54b86aba192ba09c9244e31c9f32f0608e7312",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-local-strong-yangtzeu-b-clinical-medicine-cn"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-local-strong-yangtzeu-b-clinical-medicine-cn-2026-2027-other-fee-reference",
+        "programId": "prog-gap-local-strong-yangtzeu-b-clinical-medicine-cn",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 20000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-local-strong-yangtzeu-b-clinical-medicine-cn"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-local-strong-yangtzeu-b-clinical-medicine-cn",
+        "slug": "gap-local-strong-yangtzeu-b-clinical-medicine-cn-bachelor",
+        "universityId": "uni-yangtze-university",
+        "name": {
+          "en": "Clinical Medicine",
+          "zh": "临床医学",
+          "ru": "Клиническая медицина"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 60,
+        "programUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "bd5203de4fea87f3b7e28a5085ee53023f1cec5d385031af8314fb379f555404",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-local-strong-yangtzeu-b-clinical-medicine-cn"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-local-strong-yangtzeu-b-clinical-medicine-cn",
+            "slug": "gap-local-strong-yangtzeu-b-clinical-medicine-cn-bachelor",
+            "universityId": "uni-yangtze-university",
+            "name": {
+              "en": "Clinical Medicine",
+              "zh": "临床医学",
+              "ru": "Клиническая медицина"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "medicine",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 60,
+            "programUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "bd5203de4fea87f3b7e28a5085ee53023f1cec5d385031af8314fb379f555404"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-local-strong-yangtzeu-b-clinical-medicine-cn",
+            "url": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+            "title": "Yangtze University 2026 International Student Guide",
+            "publisher": "yangtze-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "cd9afc2591670e850c53c7384873369e43b8ff177099829c049954ef60c6c9b1"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-local-strong-yangtzeu-m-oil-gas-well-engineering-en-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-yangtze-university",
+      "canonicalRecordSha256": "65216a0778544b4ace135d4bfe66ec2d0003210cd0f106b17301e0db0b114c8c",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-local-strong-yangtzeu-m-oil-gas-well-engineering-en"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-local-strong-yangtzeu-m-oil-gas-well-engineering-en-2026-2027-other-fee-reference",
+        "programId": "prog-gap-local-strong-yangtzeu-m-oil-gas-well-engineering-en",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 22000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-local-strong-yangtzeu-m-oil-gas-well-engineering-en"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-local-strong-yangtzeu-m-oil-gas-well-engineering-en",
+        "slug": "gap-local-strong-yangtzeu-m-oil-gas-well-engineering-en-master",
+        "universityId": "uni-yangtze-university",
+        "name": {
+          "en": "Oil and Gas Well Engineering",
+          "zh": "油气井工程",
+          "ru": "Проектирование нефтяных и газовых скважин"
+        },
+        "degreeLevel": "master",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 36,
+        "programUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "12c07ed32205aea8c60e68d0d0122846a8ae09dd1b29e959486af61583998b27",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-local-strong-yangtzeu-m-oil-gas-well-engineering-en"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-local-strong-yangtzeu-m-oil-gas-well-engineering-en",
+            "slug": "gap-local-strong-yangtzeu-m-oil-gas-well-engineering-en-master",
+            "universityId": "uni-yangtze-university",
+            "name": {
+              "en": "Oil and Gas Well Engineering",
+              "zh": "油气井工程",
+              "ru": "Проектирование нефтяных и газовых скважин"
+            },
+            "degreeLevel": "master",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 36,
+            "programUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "12c07ed32205aea8c60e68d0d0122846a8ae09dd1b29e959486af61583998b27"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-local-strong-yangtzeu-m-oil-gas-well-engineering-en",
+            "url": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+            "title": "Yangtze University 2026 International Student Guide",
+            "publisher": "yangtze-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "a7addb9f5e5acfdf5999017abe01a2e7e8358dd9514337e0b8242e43cde7e901"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-mew-scws-yangtze-computer-science-bachelor-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-yangtze-university",
+      "canonicalRecordSha256": "41cb5bdf1668de17454a066a291a1508e1ea3969c98c62f8b64aae96acc2dbcb",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-mew-scws-yangtze-computer-science-bachelor"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-08-11",
+        "status": "stale",
+        "id": "cycle-gap-mew-scws-yangtze-computer-science-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-mew-scws-yangtze-computer-science-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 20000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-mew-scws-yangtze-computer-science-bachelor"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale",
+        "id": "prog-gap-mew-scws-yangtze-computer-science-bachelor",
+        "slug": "gap-mew-scws-yangtze-computer-science-bachelor-bachelor",
+        "universityId": "uni-yangtze-university",
+        "name": {
+          "en": "Computer Science and Technology",
+          "zh": "计算机科学与技术",
+          "ru": "Компьютерные науки и технологии"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "5427f05d0e2e44f47a2769433f6e3704223afced2542102b3e7c2a5afe625b29",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-mew-scws-yangtze-computer-science-bachelor"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-mew-scws-yangtze-computer-science-bachelor",
+            "slug": "gap-mew-scws-yangtze-computer-science-bachelor-bachelor",
+            "universityId": "uni-yangtze-university",
+            "name": {
+              "en": "Computer Science and Technology",
+              "zh": "计算机科学与技术",
+              "ru": "Компьютерные науки и технологии"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "5427f05d0e2e44f47a2769433f6e3704223afced2542102b3e7c2a5afe625b29"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-mew-scws-yangtze-computer-science-bachelor",
+            "url": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+            "title": "Yangtze University 2026 Application Guide for International Students",
+            "publisher": "yangtze-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "8f6faf37e6c148279a400c9862e6611a9f02afb05c28e4d57abc2b15791d0dff"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-mew-scws-yangtze-crop-science-master-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-yangtze-university",
+      "canonicalRecordSha256": "b94b1f59c3b478ac1bfed4ce08a989bf8ef2539f4d378e476a129376f1c8ae70",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-mew-scws-yangtze-crop-science-master"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-08-11",
+        "status": "stale",
+        "id": "cycle-gap-mew-scws-yangtze-crop-science-master-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-mew-scws-yangtze-crop-science-master",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 22000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-mew-scws-yangtze-crop-science-master"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale",
+        "id": "prog-gap-mew-scws-yangtze-crop-science-master",
+        "slug": "gap-mew-scws-yangtze-crop-science-master-master",
+        "universityId": "uni-yangtze-university",
+        "name": {
+          "en": "Crop Science",
+          "zh": "作物学",
+          "ru": "Растениеводство"
+        },
+        "degreeLevel": "master",
+        "discipline": "other",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 36,
+        "programUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "f488c70c30be5180b280f9de1d8fbdc7445fa8c568fda9ba80e78015080fe898",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-mew-scws-yangtze-crop-science-master"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-mew-scws-yangtze-crop-science-master",
+            "slug": "gap-mew-scws-yangtze-crop-science-master-master",
+            "universityId": "uni-yangtze-university",
+            "name": {
+              "en": "Crop Science",
+              "zh": "作物学",
+              "ru": "Растениеводство"
+            },
+            "degreeLevel": "master",
+            "discipline": "other",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 36,
+            "programUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "f488c70c30be5180b280f9de1d8fbdc7445fa8c568fda9ba80e78015080fe898"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-mew-scws-yangtze-crop-science-master",
+            "url": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+            "title": "Yangtze University 2026 Application Guide for International Students",
+            "publisher": "yangtze-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "f34c68d1ebd0a420fa2905a8c740326acc66caf3e97ee86215c6c0dcce461f7a"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-local-strong-yzu-b-software-engineering-en-2026-2027-other",
+      "collection": "admissionCycles",
+      "universityId": "uni-yangzhou-university",
+      "canonicalRecordSha256": "1b49becd6c7f12812fc97edcd3181b24fa07cace31b3542141446bd5197645e2",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-local-strong-yzu-b-software-engineering-en"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-local-strong-yzu-b-software-engineering-en-2026-2027-other",
+        "programId": "prog-gap-local-strong-yzu-b-software-engineering-en",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official program PDF identifies a four-year English-taught Software Engineering bachelor's program.",
+          "zh": "官方项目PDF确认软件工程为四年制英文授课本科项目。",
+          "ru": "Официальный PDF подтверждает четырёхлетнюю англоязычную программу бакалавриата по программной инженерии."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-local-strong-yzu-b-software-engineering-en"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-local-strong-yzu-b-software-engineering-en",
+        "slug": "gap-local-strong-yzu-b-software-engineering-en-bachelor",
+        "universityId": "uni-yangzhou-university",
+        "name": {
+          "en": "Software Engineering",
+          "zh": "软件工程",
+          "ru": "Программная инженерия"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://coe.yzu.edu.cn/__local/3/48/9C/C8365844700F1C231B229D9A08A_36C980A7_2E6EF.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "210c2efc9aa8e2b753b9895832ad75c7bea1e488ef4a61e02713b4646c6294b7",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-local-strong-yzu-b-software-engineering-en"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-local-strong-yzu-b-software-engineering-en",
+            "slug": "gap-local-strong-yzu-b-software-engineering-en-bachelor",
+            "universityId": "uni-yangzhou-university",
+            "name": {
+              "en": "Software Engineering",
+              "zh": "软件工程",
+              "ru": "Программная инженерия"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://coe.yzu.edu.cn/__local/3/48/9C/C8365844700F1C231B229D9A08A_36C980A7_2E6EF.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "210c2efc9aa8e2b753b9895832ad75c7bea1e488ef4a61e02713b4646c6294b7"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-local-strong-yzu-b-software-engineering-en",
+            "url": "https://coe.yzu.edu.cn/__local/3/48/9C/C8365844700F1C231B229D9A08A_36C980A7_2E6EF.pdf",
+            "title": "Yangzhou University Software Engineering Bachelor Program",
+            "publisher": "yangzhou-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "3d413c99c501410b2467ef0be79a96135e092108512791fd35a59a94a7c58001"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-remaining-ytu-nondegree-chinese-language-spring-2026-2026-2027-other",
+      "collection": "admissionCycles",
+      "universityId": "uni-yantai-university",
+      "canonicalRecordSha256": "b0077dd6f03a3f011c63b74abe9e69625f025cdcba6306cace1b71f2d255ddfd",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-remaining-ytu-nondegree-chinese-language-spring-2026"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-remaining-ytu-nondegree-chinese-language-spring-2026-2026-2027-other",
+        "programId": "prog-gap-remaining-ytu-nondegree-chinese-language-spring-2026",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official Spring 2026 guide explicitly includes a non-degree Chinese language program for international applicants with a high-school-level qualification and no language prerequisite. The spring intake is retained only as a closed historical reference.",
+          "zh": "The official Spring 2026 guide explicitly includes a non-degree Chinese language program for international applicants with a high-school-level qualification and no language prerequisite. The spring intake is retained only as a closed historical reference."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-remaining-ytu-nondegree-chinese-language-spring-2026"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-remaining-ytu-nondegree-chinese-language-spring-2026",
+        "slug": "gap-remaining-ytu-nondegree-chinese-language-spring-2026-language",
+        "universityId": "uni-yantai-university",
+        "name": {
+          "en": "Non-degree Chinese Language Program",
+          "zh": "非学历汉语言项目",
+          "ru": "Non-degree Китайский язык Программа"
+        },
+        "degreeLevel": "language",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://isc.ytu.edu.cn/chi.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "dd89be091c2a3475bee14800fc7232fcc889f2f098ebbd4b3a9b1213120a0005",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-remaining-ytu-nondegree-chinese-language-spring-2026"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-remaining-ytu-nondegree-chinese-language-spring-2026",
+            "slug": "gap-remaining-ytu-nondegree-chinese-language-spring-2026-language",
+            "universityId": "uni-yantai-university",
+            "name": {
+              "en": "Non-degree Chinese Language Program",
+              "zh": "非学历汉语言项目",
+              "ru": "Non-degree Китайский язык Программа"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://isc.ytu.edu.cn/chi.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "dd89be091c2a3475bee14800fc7232fcc889f2f098ebbd4b3a9b1213120a0005"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-remaining-ytu-nondegree-chinese-language-spring-2026",
+            "url": "https://isc.ytu.edu.cn/chi.pdf",
+            "title": "Yantai University International Student Admission Guide (Spring 2026)",
+            "publisher": "yantai-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "4822ede3195ed168c3f62fc79ea7db3186e064aa4502c8fc6cecde7671ffd94a"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-chinese-degree-ynnu-international-chinese-education-master-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-yunnan-normal-university",
+      "canonicalRecordSha256": "71ef8dbb97c13f67b10bdab7ca83ec50110f51ff893cbef94462b3004216ece0",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-chinese-degree-ynnu-international-chinese-education-master",
+          "src-gap-program-chinese-degree-ynnu-international-chinese-education-master-support-1"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-chinese-degree-ynnu-international-chinese-education-master-2026-2027-other-fee-reference",
+        "programId": "prog-gap-chinese-degree-ynnu-international-chinese-education-master",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 17000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-chinese-degree-ynnu-international-chinese-education-master",
+          "src-gap-program-chinese-degree-ynnu-international-chinese-education-master-support-1"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-chinese-degree-ynnu-international-chinese-education-master",
+        "slug": "gap-chinese-degree-ynnu-international-chinese-education-master-master",
+        "universityId": "uni-yunnan-normal-university",
+        "name": {
+          "en": "International Chinese Language Education (Master)",
+          "zh": "国际中文教育硕士",
+          "ru": "Международное преподавание китайского языка (магистратура)"
+        },
+        "degreeLevel": "master",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 24,
+        "programUrl": "https://lx.ynnu.edu.cn/shuoshizhuanyeyingwen2026.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "77a4536e687f7b45481074c38dd80981c52eccc8721e82e911f10ac6c267bb65",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-chinese-degree-ynnu-international-chinese-education-master",
+              "src-gap-program-chinese-degree-ynnu-international-chinese-education-master-support-1"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-chinese-degree-ynnu-international-chinese-education-master",
+            "slug": "gap-chinese-degree-ynnu-international-chinese-education-master-master",
+            "universityId": "uni-yunnan-normal-university",
+            "name": {
+              "en": "International Chinese Language Education (Master)",
+              "zh": "国际中文教育硕士",
+              "ru": "Международное преподавание китайского языка (магистратура)"
+            },
+            "degreeLevel": "master",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 24,
+            "programUrl": "https://lx.ynnu.edu.cn/shuoshizhuanyeyingwen2026.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "77a4536e687f7b45481074c38dd80981c52eccc8721e82e911f10ac6c267bb65"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-chinese-degree-ynnu-international-chinese-education-master",
+            "url": "https://lx.ynnu.edu.cn/shuoshizhuanyeyingwen2026.pdf",
+            "title": "Yunnan Normal University 2026 International Master Program Catalogue",
+            "publisher": "yunnan-normal-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "cff6064732d46330e318362b75d3f6572b7e909bc27c1a1104c087f66512b693"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-chinese-degree-ynnu-international-chinese-education-master-support-1",
+            "url": "https://lx.ynnu.edu.cn/info/1286/1335.htm",
+            "title": "YNNU 2026 International Chinese Education Bachelor and Master Recruitment Briefing",
+            "publisher": "yunnan-normal-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "795451e9d18b36b13c0ecc420c108efe84421dfcddb4b07b186b4c8b10f9310a"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-local-strong-ynufe-language-chinese-2026-2027-other",
+      "collection": "admissionCycles",
+      "universityId": "uni-yunnan-university-of-finance-and-economics",
+      "canonicalRecordSha256": "25b4ff3b0f202dd89430ce52405d597995f7ed9d0ebf703f03264a23a8e04ed0",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-local-strong-ynufe-language-chinese"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-local-strong-ynufe-language-chinese-2026-2027-other",
+        "programId": "prog-gap-local-strong-ynufe-language-chinese",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official PDF identifies a ten-month Chinese Language program. Uncaptured tuition and deadline facts remain unannounced.",
+          "zh": "官方PDF确认十个月汉语进修项目；未获取的学费和截止日期保持未公布。",
+          "ru": "Официальный PDF подтверждает десятимесячную программу китайского языка; не зафиксированные стоимость и срок отмечены как не объявленные."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-local-strong-ynufe-language-chinese"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-local-strong-ynufe-language-chinese",
+        "slug": "gap-local-strong-ynufe-language-chinese-language",
+        "universityId": "uni-yunnan-university-of-finance-and-economics",
+        "name": {
+          "en": "Chinese Language Program",
+          "zh": "汉语进修项目",
+          "ru": "Программа китайского языка"
+        },
+        "degreeLevel": "language",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 10,
+        "programUrl": "https://www.ynufe.edu.cn/__local/4/E5/12/54FC29EDC7F61029118F35ACD24_ED2591FF_2EEB4.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "c2c32729f5d690c4a5a9f08477352c70a06dc8738340a5b8babea392bfead1bf",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-local-strong-ynufe-language-chinese"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-local-strong-ynufe-language-chinese",
+            "slug": "gap-local-strong-ynufe-language-chinese-language",
+            "universityId": "uni-yunnan-university-of-finance-and-economics",
+            "name": {
+              "en": "Chinese Language Program",
+              "zh": "汉语进修项目",
+              "ru": "Программа китайского языка"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 10,
+            "programUrl": "https://www.ynufe.edu.cn/__local/4/E5/12/54FC29EDC7F61029118F35ACD24_ED2591FF_2EEB4.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "c2c32729f5d690c4a5a9f08477352c70a06dc8738340a5b8babea392bfead1bf"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-local-strong-ynufe-language-chinese",
+            "url": "https://www.ynufe.edu.cn/__local/4/E5/12/54FC29EDC7F61029118F35ACD24_ED2591FF_2EEB4.pdf",
+            "title": "Yunnan University of Finance and Economics International Admission",
+            "publisher": "yunnan-university-of-finance-and-economics",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "82234ae957f504a8123e2d169658100bcffc2801ceedb4c013200644cde6112c"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-2027-zhejiang-gongshang-university-chinese-language-program-language",
+      "collection": "admissionCycles",
+      "universityId": "uni-zhejiang-gongshang-university",
+      "canonicalRecordSha256": "de1578efec0481528a8d83e2cbde1b7205456595db1b4b46ce72cbd4e2f6dc33",
+      "row": {
+        "sourceIds": [
+          "src-uni-zhejiang-gongshang-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "cycle-2027-zhejiang-gongshang-university-chinese-language-program-language",
+        "programId": "program-zhejiang-gongshang-university-chinese-language-program-language",
+        "academicYear": "2027-2028",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-uni-zhejiang-gongshang-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "program-zhejiang-gongshang-university-chinese-language-program-language",
+        "slug": "zhejiang-gongshang-university-chinese-language-program-language",
+        "universityId": "uni-zhejiang-gongshang-university",
+        "name": {
+          "en": "Chinese Language Program",
+          "zh": "汉语进修项目",
+          "ru": "Программа китайского языка"
+        },
+        "degreeLevel": "language",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "To be confirmed"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://sie.zjgsu.edu.cn/",
+        "applyUrl": "https://sie.zjgsu.edu.cn/",
+        "languageRequirements": []
+      },
+      "canonicalProgramSha256": "d48ad8d98b4d8cc878d204fee4e6e96e56de5670d715d893c46ef245f60e245c",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-zhejiang-gongshang-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2026-10-01",
+            "status": "draft",
+            "id": "program-zhejiang-gongshang-university-chinese-language-program-language",
+            "slug": "zhejiang-gongshang-university-chinese-language-program-language",
+            "universityId": "uni-zhejiang-gongshang-university",
+            "name": {
+              "en": "Chinese Language Program",
+              "zh": "汉语进修项目",
+              "ru": "Программа китайского языка"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "To be confirmed"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://sie.zjgsu.edu.cn/",
+            "applyUrl": "https://sie.zjgsu.edu.cn/",
+            "languageRequirements": []
+          },
+          "sha256": "d48ad8d98b4d8cc878d204fee4e6e96e56de5670d715d893c46ef245f60e245c"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-uni-zhejiang-gongshang-university",
+            "url": "https://sie.zjgsu.edu.cn/",
+            "title": "Official international information — Zhejiang Gongshang University",
+            "publisher": "Zhejiang Gongshang University",
+            "kind": "admissions",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-16"
+          },
+          "sha256": "8c57c2a1e04e9fc452d68c27cde7093daa93f28d788c404ebda43db428873e91"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-2027-zhejiang-gongshang-university-finance-master",
+      "collection": "admissionCycles",
+      "universityId": "uni-zhejiang-gongshang-university",
+      "canonicalRecordSha256": "1201f6d201550ed1d4a7f2c8b0e7c8162f305f4072c52ecb9d2963da49a28854",
+      "row": {
+        "sourceIds": [
+          "src-uni-zhejiang-gongshang-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "cycle-2027-zhejiang-gongshang-university-finance-master",
+        "programId": "program-zhejiang-gongshang-university-finance-master",
+        "academicYear": "2027-2028",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-uni-zhejiang-gongshang-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "program-zhejiang-gongshang-university-finance-master",
+        "slug": "zhejiang-gongshang-university-finance-master",
+        "universityId": "uni-zhejiang-gongshang-university",
+        "name": {
+          "en": "Finance",
+          "zh": "金融学",
+          "ru": "Финансы"
+        },
+        "degreeLevel": "master",
+        "discipline": "business",
+        "teachingLanguages": [
+          "To be confirmed"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://sie.zjgsu.edu.cn/",
+        "applyUrl": "https://sie.zjgsu.edu.cn/",
+        "languageRequirements": []
+      },
+      "canonicalProgramSha256": "1515f860a9abc4f506ecfcb9cdbcdf19e64becb22da8b5048a4808df05c0674d",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-zhejiang-gongshang-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2026-10-01",
+            "status": "draft",
+            "id": "program-zhejiang-gongshang-university-finance-master",
+            "slug": "zhejiang-gongshang-university-finance-master",
+            "universityId": "uni-zhejiang-gongshang-university",
+            "name": {
+              "en": "Finance",
+              "zh": "金融学",
+              "ru": "Финансы"
+            },
+            "degreeLevel": "master",
+            "discipline": "business",
+            "teachingLanguages": [
+              "To be confirmed"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://sie.zjgsu.edu.cn/",
+            "applyUrl": "https://sie.zjgsu.edu.cn/",
+            "languageRequirements": []
+          },
+          "sha256": "1515f860a9abc4f506ecfcb9cdbcdf19e64becb22da8b5048a4808df05c0674d"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-uni-zhejiang-gongshang-university",
+            "url": "https://sie.zjgsu.edu.cn/",
+            "title": "Official international information — Zhejiang Gongshang University",
+            "publisher": "Zhejiang Gongshang University",
+            "kind": "admissions",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-16"
+          },
+          "sha256": "8c57c2a1e04e9fc452d68c27cde7093daa93f28d788c404ebda43db428873e91"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-mew-scws-yangtze-mechanical-engineering-master-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-yangtze-university",
+      "canonicalRecordSha256": "aa47e1b7d7743cfce6be1ab2d45c92ea31603bbb84c07d1b51b9ebe7724b5c1e",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-mew-scws-yangtze-mechanical-engineering-master"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-08-11",
+        "status": "stale",
+        "id": "cycle-gap-mew-scws-yangtze-mechanical-engineering-master-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-mew-scws-yangtze-mechanical-engineering-master",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 22000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-mew-scws-yangtze-mechanical-engineering-master"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale",
+        "id": "prog-gap-mew-scws-yangtze-mechanical-engineering-master",
+        "slug": "gap-mew-scws-yangtze-mechanical-engineering-master-master",
+        "universityId": "uni-yangtze-university",
+        "name": {
+          "en": "Mechanical Engineering",
+          "zh": "机械工程",
+          "ru": "Машиностроение"
+        },
+        "degreeLevel": "master",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 36,
+        "programUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "428ca797a4c76058d1c0eada8b250364516b97932542fa4f48138e2f7a7c56af",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-mew-scws-yangtze-mechanical-engineering-master"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-mew-scws-yangtze-mechanical-engineering-master",
+            "slug": "gap-mew-scws-yangtze-mechanical-engineering-master-master",
+            "universityId": "uni-yangtze-university",
+            "name": {
+              "en": "Mechanical Engineering",
+              "zh": "机械工程",
+              "ru": "Машиностроение"
+            },
+            "degreeLevel": "master",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 36,
+            "programUrl": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "428ca797a4c76058d1c0eada8b250364516b97932542fa4f48138e2f7a7c56af"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-mew-scws-yangtze-mechanical-engineering-master",
+            "url": "https://english.yangtzeu.edu.cn/__local/B/51/C0/856061AE5D14793B86CB5604ADF_AFA65F71_17637D5.pdf",
+            "title": "Yangtze University 2026 Application Guide for International Students",
+            "publisher": "yangtze-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "6a20e42f565333b73309af180abcbb102b8d8fd1050b5ac8074eb6c45712dd7e"
+        }
+      ]
+    }
+  ]
+}

@@ -34,8 +34,9 @@ describe('ReleaseAnnouncement', () => {
       .toHaveAttribute('href', '/zh/programs?applicationState=open')
     expect(screen.getByRole('link', { name: announcement.copy.fullUpdate }))
       .toHaveAttribute('href', '/zh/updates')
-    expect(window.localStorage.getItem(DISMISSED_RELEASE_ANNOUNCEMENT_KEY))
-      .toBe(announcement.id)
+    // The dialog is rendered before its presentation effect persists the ID.
+    await waitFor(() => expect(window.localStorage.getItem(DISMISSED_RELEASE_ANNOUNCEMENT_KEY))
+      .toBe(announcement.id))
   })
 
   it('does not reappear after leaving before dismissing the first presentation', async () => {

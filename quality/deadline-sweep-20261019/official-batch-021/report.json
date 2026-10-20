@@ -1,0 +1,1741 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-021-20261019",
+  "state": "completed-three-new-expired-date-candidates-one-existing-expired-date-thirteen-unknown",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T06:02:24.262Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v4.json",
+  "targetQueueSha256": "06b1a66942c4e6866f4ad3c7217eba8bc76ff6ba93aa61ae92d66bade53eaeb7",
+  "selectedUniversityIds": [
+    "uni-guangzhou-medical-university",
+    "uni-guangzhou-university",
+    "uni-guangzhou-university-of-chinese-medicine",
+    "uni-guilin-medical-university",
+    "uni-guilin-university-of-electronic-technology",
+    "uni-guilin-university-of-technology"
+  ],
+  "selection": {
+    "baseQueueRecordIds": [
+      "sch-gap-sparse-depth-0808-gzhmu-guangdong-government-freshmen",
+      "cycle-2026-gzhmu-medical-fields-academic-doctorate",
+      "sch-gap-clw-sw-gzhu-belt-road-scholarship",
+      "cycle-gap-local-gzucm-b-tcm-cn-2026-2027-other-fee-reference",
+      "cycle-gap-local-strong-glmu-b-clinical-medicine-cn-2026-2027-other",
+      "cycle-gap-local-strong-glmu-b-pharmacy-cn-2026-2027-other",
+      "cycle-gap-wave3-guet-ai-english-bachelor-2026-2027-other-fee-reference",
+      "cycle-gap-wave3-guet-chinese-language-program-2026-2027-other-fee-reference",
+      "cycle-gap-wave3-guet-cs-bilingual-master-2026-2027-other-fee-reference",
+      "cycle-gap-wave3-guet-cs-english-bachelor-2026-2027-other-fee-reference",
+      "cycle-gap-mew-0805-scw-glut-civil-engineering-master-chinese-2026-2027-other-fee-reference",
+      "cycle-gap-mew-0805-scw-glut-cs-bachelor-english-2026-2027-other-fee-reference",
+      "cycle-gap-mew-0805-scw-glut-long-chinese-year-2026-2027-other-fee-reference",
+      "cycle-gap-mew-0805-scw-glut-tcsol-bachelor-2026-2027-other-fee-reference"
+    ],
+    "additionalSameSourceRecordIds": [
+      "sch-gap-wave3-guet-guangxi-asean-full-scholarship",
+      "sch-gap-mew-0805-scw-glut-guangxi-asean-scholarship",
+      "sch-gap-mew-0805-scw-glut-belt-road-president-scholarship"
+    ],
+    "baseQueueRecords": 14,
+    "additionalSameSourceRecords": 3,
+    "totalRecords": 17,
+    "additionalSelectionReceipt": "quality/deadline-sweep-20261019/heartbeat-0554/additional-same-source-selection-v1.json",
+    "additionalSelectionReceiptSha256": "3ca8778c34230d3882908d7504941f5e2985a7ff9802fabad38fae5c5fe92489"
+  },
+  "acquisition": {
+    "newDistinctOfficialUrlsAttempted": 11,
+    "newDistinctOfficialUrlsCapturedSuccessfully": 11,
+    "originalSourcesCaptured": 9,
+    "derivedCurrentGlmuGuideNavigationPagesCaptured": 2,
+    "newWebsiteReadsForAdditionalAwards": 0,
+    "reusedPriorEvidence": 0,
+    "nativeFallbacks": 0,
+    "captureManifestSha256": "aa4a9d91858c3a17f8d9d715289ebe22701645c19b201b6eccb71b51c4ac3b0e",
+    "derivedGuideCapturesSha256": "01bc95cd489de3ed4b5d1aee1a8c1ee23527e310d15e8040d1b8096ed608a137",
+    "rawAndTextCaptureHashesVerified": true,
+    "pdfPagesExtracted": {
+      "gzhu-handbook.pdf": 123,
+      "gzucm-support.pdf": 7,
+      "guet-guide.pdf": 16
+    },
+    "noFullHandbookPolicyCertification": true,
+    "normalTLSCertificateValidation": true,
+    "paidModelCalls": 0
+  },
+  "summary": {
+    "universitiesWithScopedChecks": 6,
+    "recordsAssessed": 17,
+    "baseQueueRecords": 14,
+    "additionalSameSourceRecords": 3,
+    "admissionCyclesAssessed": 12,
+    "scholarshipsAssessed": 5,
+    "recordResults": {
+      "unknown": 13,
+      "closed": 4
+    },
+    "newExactExpiredDeadlineCandidatesFromCanonicalNull": 3,
+    "existingExpiredDatesScoped": 1,
+    "independentAwardDeadlinesEstablished": 0,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "publicationActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "policy": "All findings are date-only observations; new dates stay candidate-only. Original null/stored dates, status and freshness stay untouched. Same-2026 application closure does not mean discontinued programme. A month/day without year and a historical recurring policy cannot certify the target year. Every award keeps its own scope and no degree deadline is borrowed. Any future write requires a supported narrow consumer, independent review and exact-row compare-and-swap.",
+  "groups": [
+    {
+      "key": "gzhmu-2026-academic-doctorate-and-independent-freshman-award",
+      "universityId": "uni-guangzhou-medical-university",
+      "evidence": [
+        {
+          "name": "gzhmu-2026-graduate",
+          "url": "https://fao.gzhmu.edu.cn/info/1301/9522.htm",
+          "observedAt": "2026-10-19T05:56:39.830906+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://fao.gzhmu.edu.cn/info/1301/9522.htm",
+          "contentType": "text/html",
+          "bytes": 36586,
+          "rawPath": "gzhmu-2026-graduate.html",
+          "rawSha256": "820a3c7791bf3e5396263a5c610e4067ce53134fb7bccdfd7da2afaef4c47c03",
+          "textPath": "gzhmu-2026-graduate.txt",
+          "textSha256": "c895c03f16a3c2deb18a38e5af9c6d41dbc424e978cdd4734f1b51db33deb988",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-visible-text-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "2026 international academic PhD admission and the separately scoped Guangdong-government freshman award.",
+      "officialTitle": "Guangzhou Medical University 2026 Admission Guide for International Master's/Doctoral Students",
+      "quotedDate": "Application Dates: March 1, 2026 — June 30, 2026",
+      "intakeQuote": "Students should register in September 2026",
+      "applicantVsReview": "The applicant online submission period is March1–June30. The later interview notification, pre-admission result within one month and tuition confirmation dates are different stages, not application extensions.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sparse-depth-0808-gzhmu-guangdong-government-freshmen",
+          "selectionOrigin": "baseQueue14",
+          "universityId": "uni-guangzhou-medical-university",
+          "name": "Guangdong Government Outstanding International Students Scholarship for Freshmen",
+          "programIds": [],
+          "canonicalScholarshipSha256": "94af1e6b00d5fb694a5690b814bc6c85891a078b58f9afdb9ad452951bd1ace9",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "94af1e6b00d5fb694a5690b814bc6c85891a078b58f9afdb9ad452951bd1ace9",
+          "canonicalRowSha256": "94af1e6b00d5fb694a5690b814bc6c85891a078b58f9afdb9ad452951bd1ace9",
+          "canonicalProgramPins": [],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-scholarship-sparse-depth-0808-gzhmu-guangdong-government-freshmen"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sparse-depth-0808-gzhmu-guangdong-government-freshmen",
+              "canonicalSourceSha256": "dc63a954e8070e4b4b95d3f02f9ac37fc4f92250e68fd166c64184f002744617",
+              "url": "https://fao.gzhmu.edu.cn/info/1301/9522.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-sparse-depth-0808-gzhmu-guangdong-government-freshmen",
+                "url": "https://fao.gzhmu.edu.cn/info/1301/9522.htm",
+                "title": "Guangzhou Medical University 2026 International Master and Doctoral Admission Guide",
+                "publisher": "guangzhou-medical-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-08"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://fao.gzhmu.edu.cn/info/1301/9522.htm",
+          "evidenceBodySha256": "820a3c7791bf3e5396263a5c610e4067ce53134fb7bccdfd7da2afaef4c47c03",
+          "observedAt": "2026-10-19T05:56:39.830906+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-sparse-depth-0808-gzhmu-guangdong-government-freshmen"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "freshman-award-has-postregistration-payment-no-independent-application-deadline",
+          "quotedDate": null,
+          "awardEligibilityAndPaymentQuote": "The one-off scholarship will be sent to the personal bank account of the winner after registration.",
+          "admissionDeadlineNotBorrowed": "2026-06-30",
+          "admissionDeadlineAppliesToAward": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-gzhmu-medical-fields-academic-doctorate",
+          "selectionOrigin": "baseQueue14",
+          "universityId": "uni-guangzhou-medical-university",
+          "programId": "program-guangzhou-medical-university-medical-fields-academic-doctorate",
+          "programName": "Academic Doctorate in Medicine and Medical-related Fields",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": "2026-03-01",
+          "storedDateStatus": "previous-cycle-reference",
+          "canonicalCycleSha256": "d6239f49640225a2f51b0e6baa1329e931ad9d9464eb49268ad8852190f28cad",
+          "canonicalProgramSha256": "72b47f42d3e16ea2b22f6470e7981181b0f001087cf102fe8e68bef40bd48007",
+          "canonicalRecordSha256": "d6239f49640225a2f51b0e6baa1329e931ad9d9464eb49268ad8852190f28cad",
+          "canonicalRowSha256": "d6239f49640225a2f51b0e6baa1329e931ad9d9464eb49268ad8852190f28cad",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-guangzhou-medical-university-medical-fields-academic-doctorate",
+              "canonicalProgramSha256": "72b47f42d3e16ea2b22f6470e7981181b0f001087cf102fe8e68bef40bd48007"
+            }
+          ],
+          "storedDeadline": "2026-06-30",
+          "sourceIds": [
+            "source-gzhmu-2026-international-graduate-admission"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "source-gzhmu-2026-international-graduate-admission",
+              "canonicalSourceSha256": "5ffc6322a0fab2e36a7667974ce105e29c4ea6249371205d8b5f5914d67314cd",
+              "url": "https://fao.gzhmu.edu.cn/info/1301/9522.htm",
+              "sourceFullRecord": {
+                "id": "source-gzhmu-2026-international-graduate-admission",
+                "url": "https://fao.gzhmu.edu.cn/info/1301/9522.htm",
+                "title": "Guangzhou Medical University 2026 Admission Guide for International Master's/Doctoral Students",
+                "publisher": "Guangzhou Medical University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://fao.gzhmu.edu.cn/info/1301/9522.htm",
+          "evidenceBodySha256": "820a3c7791bf3e5396263a5c610e4067ce53134fb7bccdfd7da2afaef4c47c03",
+          "observedAt": "2026-10-19T05:56:39.830906+00:00",
+          "evidenceSourceIds": [
+            "source-gzhmu-2026-international-graduate-admission"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "candidateDeadlineChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "same-2026-academic-doctorate-applicant-period-expired-stored-day-matches",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only this same-2026 application window is past; programme discontinuation is not inferred.",
+          "quotedDate": "Application Dates: March 1, 2026 — June 30, 2026",
+          "sourceWindowOpensOn": "2026-03-01",
+          "sourceWindowOpeningNotIndependentlyCertifiedAsCanonicalEquality": true
+        }
+      ]
+    },
+    {
+      "key": "gzhu-belt-road-award-2021-policy-not-current-window",
+      "universityId": "uni-guangzhou-university",
+      "evidence": [
+        {
+          "name": "gzhu-international-talent",
+          "url": "https://www.gzhu.edu.cn/rcpy1.htm",
+          "observedAt": "2026-10-19T05:56:39.831911+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.gzhu.edu.cn/rcpy1.htm",
+          "contentType": "text/html",
+          "bytes": 39659,
+          "rawPath": "gzhu-international-talent.html",
+          "rawSha256": "6c87a8ba7dcc90ab7aba6c7dd0e4d7d7b0a11c99eaf8e577fca3dc83a347da97",
+          "textPath": "gzhu-international-talent.txt",
+          "textSha256": "1add5c6bd3bc47be5a8b95eb83889e51c0ba9209dc1e48f62d5176d249e97f74",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-visible-text-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "gzhu-handbook",
+          "url": "https://xxgk.gzhu.edu.cn/GJJYXSSC.pdf",
+          "observedAt": "2026-10-19T05:56:39.832910+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://xxgk.gzhu.edu.cn/GJJYXSSC.pdf",
+          "contentType": "application/pdf",
+          "bytes": 915504,
+          "rawPath": "gzhu-handbook.pdf",
+          "rawSha256": "754b1c9a0440dc694e7f77bdbcf141c4e33d2dda60ae49e9ddffe7833e25a730",
+          "pageCount": 123,
+          "textPath": "gzhu-handbook.txt",
+          "textSha256": "2e8afb00d018151cb45171d3ea2091e5a55ea796f9fe69eaebd1f12caff32bbb",
+          "captureSucceeded": true,
+          "readScope": "Full PDF text extracted; handbook cover and scholarship chapter PDF pages12–15 read for date scope; pages1,13,14 rendered and visually inspected. Other unrelated handbook policies not certified.",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "Only the existing Guangzhou University Belt and Road scholarship date, with a standing talent page and historical handbook policy.",
+      "handbookOriginalDate": "March, 2021",
+      "quotedDate": "广州大学留学生奖助学金每年评选时间为每个秋季学期。",
+      "yearAndStageQualification": "The March2021 trial handbook sets yearly autumn selection, not a dated 2026 applicant deadline. It requires admitted/registered students and annual information issued by the international school; a five-working-day result publication period is institutional review, not an application cutoff.",
+      "visualEvidence": [
+        {
+          "path": "gzhu-handbook-intro-001.png",
+          "sha256": "ceb0521cfeeeb68df8fd7094196104c6484adceb05dbe07428a23b9e42d3b27d"
+        },
+        {
+          "path": "gzhu-scholarship-013.png",
+          "sha256": "40cd37a9353c129496b73d9d63ac2ddc9d99a8740ee876cec010702484a38654"
+        },
+        {
+          "path": "gzhu-scholarship-014.png",
+          "sha256": "b5bc811557a4fcbd308c1397ef74330ebab57e9d444a762da06e4da63d8a1403"
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-clw-sw-gzhu-belt-road-scholarship",
+          "selectionOrigin": "baseQueue14",
+          "universityId": "uni-guangzhou-university",
+          "name": "Guangzhou University Belt and Road Scholarship",
+          "programIds": [
+            "prog-gap-clw-sw-gzhu-icl-master"
+          ],
+          "canonicalScholarshipSha256": "250ea69e1790da6950b01bb3a3cef7612a4b6984f7ed3732559bb00b29b26b56",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "250ea69e1790da6950b01bb3a3cef7612a4b6984f7ed3732559bb00b29b26b56",
+          "canonicalRowSha256": "250ea69e1790da6950b01bb3a3cef7612a4b6984f7ed3732559bb00b29b26b56",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-clw-sw-gzhu-icl-master",
+              "canonicalProgramSha256": "9f1daa165ce215315c838f57ce87ede96f46ae1c1a55bc367ed833d83ac743e1"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-scholarship-clw-sw-gzhu-belt-road-scholarship",
+            "src-gap-scholarship-clw-sw-gzhu-belt-road-scholarship-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-clw-sw-gzhu-belt-road-scholarship",
+              "canonicalSourceSha256": "7fcf602a234f508abc9e5075b99f8cd6dc8684294f7073894e081a09ed4dd31b",
+              "url": "https://www.gzhu.edu.cn/rcpy1.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-clw-sw-gzhu-belt-road-scholarship",
+                "url": "https://www.gzhu.edu.cn/rcpy1.htm",
+                "title": "Guangzhou University International Talent Development",
+                "publisher": "guangzhou-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            },
+            {
+              "sourceId": "src-gap-scholarship-clw-sw-gzhu-belt-road-scholarship-support-1",
+              "canonicalSourceSha256": "5a240f5362bf5ae2306ab8ee2bdd4d33f6150b7b0e26de172293ff4c113db11d",
+              "url": "https://xxgk.gzhu.edu.cn/GJJYXSSC.pdf",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-clw-sw-gzhu-belt-road-scholarship-support-1",
+                "url": "https://xxgk.gzhu.edu.cn/GJJYXSSC.pdf",
+                "title": "Guangzhou University International Student Handbook",
+                "publisher": "guangzhou-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://xxgk.gzhu.edu.cn/GJJYXSSC.pdf",
+          "evidenceBodySha256": "754b1c9a0440dc694e7f77bdbcf141c4e33d2dda60ae49e9ddffe7833e25a730",
+          "observedAt": "2026-10-19T05:56:39.832910+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-clw-sw-gzhu-belt-road-scholarship-support-1"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "2021-standing-policy-annual-autumn-selection-no-current-award-window",
+          "quotedDate": "广州大学留学生奖助学金每年评选时间为每个秋季学期。",
+          "registeredStudentCondition": "申请人为广州大学已录取，本人已报到的在读外国留学生。",
+          "currentYearBound": false
+        }
+      ]
+    },
+    {
+      "key": "gzucm-2026-chinese-tcm-bachelor-two-application-rounds",
+      "universityId": "uni-guangzhou-university-of-chinese-medicine",
+      "evidence": [
+        {
+          "name": "gzucm-2026-undergraduate",
+          "url": "https://studyoverseas.gzucm.edu.cn/info/1171/2081.htm",
+          "observedAt": "2026-10-19T05:56:39.833911+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://studyoverseas.gzucm.edu.cn/info/1171/2081.htm",
+          "contentType": "text/html",
+          "bytes": 9494,
+          "rawPath": "gzucm-2026-undergraduate.html",
+          "rawSha256": "554dbb1c5114833f2ec3a6e932782ba6860852b9569db82df6edb5531222022f",
+          "textPath": "gzucm-2026-undergraduate.txt",
+          "textSha256": "893846ca8c6cf08d4c1b3b95400bd50a256c9e712a3a19cbe5abf635e6310f80",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-visible-text-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "gzucm-support",
+          "url": "https://studyoverseas.gzucm.edu.cn/__local/B/8A/53/9D531B3B0DC40045B0E47DFD76C_FC43920B_48C18.pdf",
+          "observedAt": "2026-10-19T05:56:43.140223+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://studyoverseas.gzucm.edu.cn/__local/B/8A/53/9D531B3B0DC40045B0E47DFD76C_FC43920B_48C18.pdf",
+          "contentType": "application/pdf",
+          "bytes": 298008,
+          "rawPath": "gzucm-support.pdf",
+          "rawSha256": "b953c50382a61b9e1d0658de0410ba65aa12e4756b865a166df1af501b0c996a",
+          "pageCount": 7,
+          "textPath": "gzucm-support.txt",
+          "textSha256": "0d5f6f2f79760cac5079db954d1dd99c9d762aaad9dbb36b4ed614863db6630b",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-visible-text-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "2026 international Chinese-taught Traditional Chinese Medicine bachelor, exact five-year programme on PDFpage5.",
+      "originalYear": 2026,
+      "quotedDates": [
+        "第一批次：即日起至 2026 年 4 月 15 日",
+        "第二批次：2026 年 4 月 16 日至 2026 年 6 月 1 日"
+      ],
+      "evidencePages": {
+        "title": 1,
+        "applicantRounds": 2,
+        "exactProgrammeAndChineseLanguage": 5
+      },
+      "visualEvidence": [
+        {
+          "path": "gzucm-date-2.png",
+          "sha256": "c028867d66b63770b0468d4263f56a9fa7907de863f49ef425bdf5b19d00cd88"
+        },
+        {
+          "path": "gzucm-programme-5.png",
+          "sha256": "65c088a81ce5bb89abf3687df578b11011756175fbbb30c1aa45bb01b6e2d980"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-gzucm-b-tcm-cn-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue14",
+          "universityId": "uni-guangzhou-university-of-chinese-medicine",
+          "programId": "prog-gap-local-gzucm-b-tcm-cn",
+          "programName": "Traditional Chinese Medicine",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "b5616135556ebe420005ec01533c5b5e983a599da83e073e9487f4d63183f009",
+          "canonicalProgramSha256": "fa5083bf982b40244ebeb1a6e3a1f8a421fad9a3f723cb568ecdfe16af87153a",
+          "canonicalRecordSha256": "b5616135556ebe420005ec01533c5b5e983a599da83e073e9487f4d63183f009",
+          "canonicalRowSha256": "b5616135556ebe420005ec01533c5b5e983a599da83e073e9487f4d63183f009",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-gzucm-b-tcm-cn",
+              "canonicalProgramSha256": "fa5083bf982b40244ebeb1a6e3a1f8a421fad9a3f723cb568ecdfe16af87153a"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-local-gzucm-b-tcm-cn",
+            "src-gap-program-local-gzucm-b-tcm-cn-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-gzucm-b-tcm-cn",
+              "canonicalSourceSha256": "10c47f32513358b587f422b3e4052733ec88a5748ccec90082cb18c7ffc44489",
+              "url": "https://studyoverseas.gzucm.edu.cn/info/1171/2081.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-gzucm-b-tcm-cn",
+                "url": "https://studyoverseas.gzucm.edu.cn/info/1171/2081.htm",
+                "title": "2026 GZUCM International Undergraduate Admission",
+                "publisher": "guangzhou-university-of-chinese-medicine",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-local-gzucm-b-tcm-cn-support-1",
+              "canonicalSourceSha256": "441d60e03c95833e4059f550743616f1848bad16e31b7ec6572aa803f7ac0ca8",
+              "url": "https://studyoverseas.gzucm.edu.cn/__local/B/8A/53/9D531B3B0DC40045B0E47DFD76C_FC43920B_48C18.pdf",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-gzucm-b-tcm-cn-support-1",
+                "url": "https://studyoverseas.gzucm.edu.cn/__local/B/8A/53/9D531B3B0DC40045B0E47DFD76C_FC43920B_48C18.pdf",
+                "title": "Supporting official source",
+                "publisher": "guangzhou-university-of-chinese-medicine",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://studyoverseas.gzucm.edu.cn/__local/B/8A/53/9D531B3B0DC40045B0E47DFD76C_FC43920B_48C18.pdf",
+          "evidenceBodySha256": "b953c50382a61b9e1d0658de0410ba65aa12e4756b865a166df1af501b0c996a",
+          "observedAt": "2026-10-19T05:56:43.140223+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-local-gzucm-b-tcm-cn-support-1"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-06-01",
+          "candidateOfficialDeadline": "2026-06-01",
+          "candidateDeadlineChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "canonicalDeadlineAssessed": false,
+          "reason": "same-2026-tcm-bachelor-latest-of-two-explicit-applicant-rounds-is-past",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only this same-2026 application window is past; programme discontinuation is not inferred.",
+          "quotedDate": "第二批次：2026 年 4 月 16 日至 2026 年 6 月 1 日",
+          "applicationRounds": [
+            {
+              "opensOn": null,
+              "openingRelativeWording": "即日起",
+              "closesOn": "2026-04-15"
+            },
+            {
+              "opensOn": "2026-04-16",
+              "closesOn": "2026-06-01"
+            }
+          ],
+          "finalRoundDoesNotReplaceFirstRoundOpening": true,
+          "applicantDeadlineNotReviewDate": true
+        }
+      ]
+    },
+    {
+      "key": "glmu-2026-exact-bachelor-guide-from-registered-programme-navigation",
+      "universityId": "uni-guilin-medical-university",
+      "evidence": [
+        {
+          "name": "glmu-2026-programmes",
+          "url": "https://www.glmu.edu.cn/gjjyjlzx/info/1044/2405.htm",
+          "observedAt": "2026-10-19T05:56:44.995649+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.glmu.edu.cn/gjjyjlzx/info/1044/2405.htm",
+          "contentType": "text/html",
+          "bytes": 40911,
+          "rawPath": "glmu-2026-programmes.html",
+          "rawSha256": "051796e2da0398da26c8759e4f37b3a80e2ba9fefa1cc786ff99b1dc4f6ba93c",
+          "textPath": "glmu-2026-programmes.txt",
+          "textSha256": "b64500f5ace32869aa3ca80109a27633fd9ec73581f48caeaa62eed638b6e646",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-visible-text-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "glmu-admission-guide-index",
+          "url": "https://www.glmu.edu.cn/gjjyjlzx/zszl/lhlxszsjz.htm",
+          "observedAt": "2026-10-19T06:00:10.759105+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.glmu.edu.cn/gjjyjlzx/zszl/lhlxszsjz.htm",
+          "contentType": "text/html",
+          "bytes": 16457,
+          "rawPath": "glmu-admission-guide-index.html",
+          "rawSha256": "3cbca0bc60925c553594c299317da0ae3f9e82d5911ba68cc4531afe24131391",
+          "textPath": "glmu-admission-guide-index.txt",
+          "textSha256": "d99ef143c999f5b496c4d86fb8c9530d79df308c47eeddcb21d38b7f4986e5dd",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-visible-text-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "glmu-2026-undergraduate-guide",
+          "url": "https://www.glmu.edu.cn/gjjyjlzx/info/1161/2514.htm",
+          "observedAt": "2026-10-19T06:00:10.760106+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.glmu.edu.cn/gjjyjlzx/info/1161/2514.htm",
+          "contentType": "text/html",
+          "bytes": 22128,
+          "rawPath": "glmu-2026-undergraduate-guide.html",
+          "rawSha256": "0ffa8d1657ced310d4f81344a7e0803a0c4c3b04f4e7030aa59c2692fa19befa",
+          "textPath": "glmu-2026-undergraduate-guide.txt",
+          "textSha256": "af8916418c569b93a9da79f8c33daefd2be8c51c44a9434ab1a6ab20fc809178",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-visible-text-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "Only Clinical Medicine (Chinese) and Pharmacy (Chinese route of Chinese/English programme) bachelors in the current 2026 international undergraduate guide.",
+      "navigationProvenance": "Registered programme page links 来华留学生招生简章 index /zszl/lhlxszsjz.htm; that index links exact 2026 undergraduate guide /info/1161/2514.htm. Both derived official pages captured; title/list alone not used as deadline evidence.",
+      "officialTitle": "桂林医科大学2026年来华留学生（本科生）招生简章",
+      "quotedDate": "（二）报名截止时间：2026年6月30日。",
+      "applicantVsReview": "Section五 gives application submission cutoff; section六 later describes institutional review and notification, no applicant extension is inferred.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-glmu-b-clinical-medicine-cn-2026-2027-other",
+          "selectionOrigin": "baseQueue14",
+          "universityId": "uni-guilin-medical-university",
+          "programId": "prog-gap-local-strong-glmu-b-clinical-medicine-cn",
+          "programName": "Clinical Medicine",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "c79b1195527d110e837a047154e241dae04dab78be68e5ec46e597574fec3b13",
+          "canonicalProgramSha256": "88a628a42daa865d92260e1c55481dd477d4ca432d4451372ddec65ebd0858a9",
+          "canonicalRecordSha256": "c79b1195527d110e837a047154e241dae04dab78be68e5ec46e597574fec3b13",
+          "canonicalRowSha256": "c79b1195527d110e837a047154e241dae04dab78be68e5ec46e597574fec3b13",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-glmu-b-clinical-medicine-cn",
+              "canonicalProgramSha256": "88a628a42daa865d92260e1c55481dd477d4ca432d4451372ddec65ebd0858a9"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-local-strong-glmu-b-clinical-medicine-cn"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-glmu-b-clinical-medicine-cn",
+              "canonicalSourceSha256": "a80d3650b2d58396c818e35a54a181dca82cf47fdf2eec9fd233a00a49a324f4",
+              "url": "https://www.glmu.edu.cn/gjjyjlzx/info/1044/2405.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-strong-glmu-b-clinical-medicine-cn",
+                "url": "https://www.glmu.edu.cn/gjjyjlzx/info/1044/2405.htm",
+                "title": "Guilin Medical University 2026 International Programs",
+                "publisher": "guilin-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://www.glmu.edu.cn/gjjyjlzx/info/1161/2514.htm",
+          "evidenceBodySha256": "0ffa8d1657ced310d4f81344a7e0803a0c4c3b04f4e7030aa59c2692fa19befa",
+          "observedAt": "2026-10-19T06:00:10.760106+00:00",
+          "evidenceSourceIds": [],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "candidateDeadlineChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "canonicalDeadlineAssessed": false,
+          "reason": "exact-2026-international-undergraduate-guide-names-selected-major-and-applicant-deadline",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only this same-2026 application window is past; programme discontinuation is not inferred.",
+          "quotedDate": "（二）报名截止时间：2026年6月30日。",
+          "evidenceDiscovery": "direct-official-programme-page-navigation-to-current-guide",
+          "exactMajorQuote": "临床医学"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-glmu-b-pharmacy-cn-2026-2027-other",
+          "selectionOrigin": "baseQueue14",
+          "universityId": "uni-guilin-medical-university",
+          "programId": "prog-gap-local-strong-glmu-b-pharmacy-cn",
+          "programName": "Pharmacy",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "bea57944c4cec4caf2e95ab1d2ac2128185b4e7e8f255e8aeb49802efeb51686",
+          "canonicalProgramSha256": "df2686767077a2b83780bd3754f4eeb8f27eef5d1f5d86a3a7317d9502832c27",
+          "canonicalRecordSha256": "bea57944c4cec4caf2e95ab1d2ac2128185b4e7e8f255e8aeb49802efeb51686",
+          "canonicalRowSha256": "bea57944c4cec4caf2e95ab1d2ac2128185b4e7e8f255e8aeb49802efeb51686",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-glmu-b-pharmacy-cn",
+              "canonicalProgramSha256": "df2686767077a2b83780bd3754f4eeb8f27eef5d1f5d86a3a7317d9502832c27"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-local-strong-glmu-b-pharmacy-cn"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-glmu-b-pharmacy-cn",
+              "canonicalSourceSha256": "c0bc5a7fb50002603a1d0596e8deb0da5ce78c4f97fa1f19aa7622d159025041",
+              "url": "https://www.glmu.edu.cn/gjjyjlzx/info/1044/2405.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-strong-glmu-b-pharmacy-cn",
+                "url": "https://www.glmu.edu.cn/gjjyjlzx/info/1044/2405.htm",
+                "title": "Guilin Medical University 2026 International Programs",
+                "publisher": "guilin-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://www.glmu.edu.cn/gjjyjlzx/info/1161/2514.htm",
+          "evidenceBodySha256": "0ffa8d1657ced310d4f81344a7e0803a0c4c3b04f4e7030aa59c2692fa19befa",
+          "observedAt": "2026-10-19T06:00:10.760106+00:00",
+          "evidenceSourceIds": [],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "candidateDeadlineChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "canonicalDeadlineAssessed": false,
+          "reason": "exact-2026-international-undergraduate-guide-names-selected-major-and-applicant-deadline",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only this same-2026 application window is past; programme discontinuation is not inferred.",
+          "quotedDate": "（二）报名截止时间：2026年6月30日。",
+          "evidenceDiscovery": "direct-official-programme-page-navigation-to-current-guide",
+          "exactMajorQuote": "药学"
+        }
+      ]
+    },
+    {
+      "key": "guet-undated-guide-month-day-with-specialised-scholarship-route",
+      "universityId": "uni-guilin-university-of-electronic-technology",
+      "evidence": [
+        {
+          "name": "guet-guide",
+          "url": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+          "observedAt": "2026-10-19T05:56:46.110251+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+          "contentType": "application/pdf;charset=UTF-8",
+          "bytes": 1573497,
+          "rawPath": "guet-guide.pdf",
+          "rawSha256": "64775effd6594177b04fc9a8e807ee34047a2d3fb8b008110dd8e71ce36a9641",
+          "pageCount": 16,
+          "textPath": "guet-guide.txt",
+          "textSha256": "643337f522678aec4fbea429e9a844595478b8ebc6571fac5dae94f83664fa38",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-visible-text-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "English AI and Computer Science bachelors, Chinese/English Computer Science master, Chinese language course and separately added Guangxi ASEAN full scholarship.",
+      "quotedDate": "15th June",
+      "evidencePages": {
+        "englishBachelors": 6,
+        "master": 8,
+        "languageCourse": 11,
+        "chineseDate": 13,
+        "englishDate": 14,
+        "hostScholarshipMention": 4
+      },
+      "yearQualification": "The actual PDF and date clause do not identify an applicable entry/application year. Passport validity until next June30 is not an application-year anchor. June15 is retained as undated reference only.",
+      "routeQualification": "Submission instructions name a Specialized Scholarship Application. The guide also mentions several government scholarship schemes, so no independent exact ASEAN-award cutoff is inferred from a generic date line.",
+      "visualEvidence": [
+        {
+          "path": "guet-cover-01.png",
+          "sha256": "000bb17270ed20e9adb258a24e43934649d9b86bb7fbf6ac80922e438f1ee8d6"
+        },
+        {
+          "path": "guet-date-13.png",
+          "sha256": "45ab69e418dbd022d9cd0cbc387ae8b2ce2a24c483cb60529a7f2a9708217119"
+        },
+        {
+          "path": "guet-date-14.png",
+          "sha256": "7798f9a3099fe0a82f974cfd455354a8070801ecb210cc4d225eab26fe628b0e"
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-guet-ai-english-bachelor-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue14",
+          "universityId": "uni-guilin-university-of-electronic-technology",
+          "programId": "prog-gap-wave3-guet-ai-english-bachelor",
+          "programName": "Artificial Intelligence (English-taught Bachelor)",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "d7e713156e023e9d7a8fbad1729577bc973d3a6ee4d9ce597b3450dd4ae8f412",
+          "canonicalProgramSha256": "068f768181de3749415606a04f7384a1ef75b266ef91e59052bf4cd62a0581b0",
+          "canonicalRecordSha256": "d7e713156e023e9d7a8fbad1729577bc973d3a6ee4d9ce597b3450dd4ae8f412",
+          "canonicalRowSha256": "d7e713156e023e9d7a8fbad1729577bc973d3a6ee4d9ce597b3450dd4ae8f412",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-guet-ai-english-bachelor",
+              "canonicalProgramSha256": "068f768181de3749415606a04f7384a1ef75b266ef91e59052bf4cd62a0581b0"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-wave3-guet-ai-english-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-guet-ai-english-bachelor",
+              "canonicalSourceSha256": "961b71ca37b6528e2b1f1e20bcc8b105e2349612c618c739c892e8422d217fc6",
+              "url": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-guet-ai-english-bachelor",
+                "url": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+                "title": "GUET Application Guide for International Applicants",
+                "publisher": "guilin-university-of-electronic-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+          "evidenceBodySha256": "64775effd6594177b04fc9a8e807ee34047a2d3fb8b008110dd8e71ce36a9641",
+          "observedAt": "2026-10-19T05:56:46.110251+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-wave3-guet-ai-english-bachelor"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "undated-june15-application-reference-not-bound-to-selected-2026-2027-cycle",
+          "quotedDate": "15th June",
+          "recurringOrUndatedDeadlineReference": {
+            "monthDay": "06-15",
+            "year": null,
+            "recurrenceExplicit": false
+          },
+          "targetYearNotInferredFromSourceMetadata": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-guet-chinese-language-program-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue14",
+          "universityId": "uni-guilin-university-of-electronic-technology",
+          "programId": "prog-gap-wave3-guet-chinese-language-program",
+          "programName": "Chinese Language Program",
+          "degreeLevel": "language",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "bac4ad4a6ff3ff7227ccedbae7c4320f276ba70bf1b90df63898dcb74daf61ac",
+          "canonicalProgramSha256": "45ca0ab1adb2dfc8efa14e4f36885266d384f7b3820265e80c0a6c0374948164",
+          "canonicalRecordSha256": "bac4ad4a6ff3ff7227ccedbae7c4320f276ba70bf1b90df63898dcb74daf61ac",
+          "canonicalRowSha256": "bac4ad4a6ff3ff7227ccedbae7c4320f276ba70bf1b90df63898dcb74daf61ac",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-guet-chinese-language-program",
+              "canonicalProgramSha256": "45ca0ab1adb2dfc8efa14e4f36885266d384f7b3820265e80c0a6c0374948164"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-wave3-guet-chinese-language-program"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-guet-chinese-language-program",
+              "canonicalSourceSha256": "7feb79389d1ab97f950e472a26fa2c3547b49868e94906a1b6767fa5399d8773",
+              "url": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-guet-chinese-language-program",
+                "url": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+                "title": "GUET Application Guide for International Applicants",
+                "publisher": "guilin-university-of-electronic-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+          "evidenceBodySha256": "64775effd6594177b04fc9a8e807ee34047a2d3fb8b008110dd8e71ce36a9641",
+          "observedAt": "2026-10-19T05:56:46.110251+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-wave3-guet-chinese-language-program"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "undated-june15-application-reference-not-bound-to-selected-2026-2027-cycle",
+          "quotedDate": "15th June",
+          "recurringOrUndatedDeadlineReference": {
+            "monthDay": "06-15",
+            "year": null,
+            "recurrenceExplicit": false
+          },
+          "targetYearNotInferredFromSourceMetadata": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-guet-cs-bilingual-master-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue14",
+          "universityId": "uni-guilin-university-of-electronic-technology",
+          "programId": "prog-gap-wave3-guet-cs-bilingual-master",
+          "programName": "Computer Science and Technology (Chinese/English-taught Master)",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "9cbadedeff52bb06c4557f3ea873a894b134e499690ea3cea91df41d9f757071",
+          "canonicalProgramSha256": "2d1a5d6e13ce4f76ddd1dfd950fb14500610e0f6cf6f70487aed23f008424a74",
+          "canonicalRecordSha256": "9cbadedeff52bb06c4557f3ea873a894b134e499690ea3cea91df41d9f757071",
+          "canonicalRowSha256": "9cbadedeff52bb06c4557f3ea873a894b134e499690ea3cea91df41d9f757071",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-guet-cs-bilingual-master",
+              "canonicalProgramSha256": "2d1a5d6e13ce4f76ddd1dfd950fb14500610e0f6cf6f70487aed23f008424a74"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-wave3-guet-cs-bilingual-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-guet-cs-bilingual-master",
+              "canonicalSourceSha256": "7c21a5edb19dbef0af2552e5b285be8dd0ae20f95c478a2099e615155d922e64",
+              "url": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-guet-cs-bilingual-master",
+                "url": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+                "title": "GUET Application Guide for International Applicants",
+                "publisher": "guilin-university-of-electronic-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+          "evidenceBodySha256": "64775effd6594177b04fc9a8e807ee34047a2d3fb8b008110dd8e71ce36a9641",
+          "observedAt": "2026-10-19T05:56:46.110251+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-wave3-guet-cs-bilingual-master"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "undated-june15-application-reference-not-bound-to-selected-2026-2027-cycle",
+          "quotedDate": "15th June",
+          "recurringOrUndatedDeadlineReference": {
+            "monthDay": "06-15",
+            "year": null,
+            "recurrenceExplicit": false
+          },
+          "targetYearNotInferredFromSourceMetadata": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-guet-cs-english-bachelor-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue14",
+          "universityId": "uni-guilin-university-of-electronic-technology",
+          "programId": "prog-gap-wave3-guet-cs-english-bachelor",
+          "programName": "Computer Science and Technology (English-taught Bachelor)",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "369d275635281bd739ef13d45b58c5e57069322a8dea99ec605b1b5d8751719a",
+          "canonicalProgramSha256": "cdd31ee9785e8c754e06819f9cb70a264459e16966c3cbab86733817d9deef1a",
+          "canonicalRecordSha256": "369d275635281bd739ef13d45b58c5e57069322a8dea99ec605b1b5d8751719a",
+          "canonicalRowSha256": "369d275635281bd739ef13d45b58c5e57069322a8dea99ec605b1b5d8751719a",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-guet-cs-english-bachelor",
+              "canonicalProgramSha256": "cdd31ee9785e8c754e06819f9cb70a264459e16966c3cbab86733817d9deef1a"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-wave3-guet-cs-english-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-guet-cs-english-bachelor",
+              "canonicalSourceSha256": "5a367472197ad575bc2be48e91140667a2f4452db84c65c6d6daf9ce48ec60fb",
+              "url": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-guet-cs-english-bachelor",
+                "url": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+                "title": "GUET Application Guide for International Applicants",
+                "publisher": "guilin-university-of-electronic-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+          "evidenceBodySha256": "64775effd6594177b04fc9a8e807ee34047a2d3fb8b008110dd8e71ce36a9641",
+          "observedAt": "2026-10-19T05:56:46.110251+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-wave3-guet-cs-english-bachelor"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "undated-june15-application-reference-not-bound-to-selected-2026-2027-cycle",
+          "quotedDate": "15th June",
+          "recurringOrUndatedDeadlineReference": {
+            "monthDay": "06-15",
+            "year": null,
+            "recurrenceExplicit": false
+          },
+          "targetYearNotInferredFromSourceMetadata": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-guet-guangxi-asean-full-scholarship",
+          "selectionOrigin": "additionalSameSource3",
+          "universityId": "uni-guilin-university-of-electronic-technology",
+          "name": "Guangxi Government Full Scholarship for ASEAN Students at GUET",
+          "programIds": [],
+          "canonicalScholarshipSha256": "c5ec12ce4766bbfb48e5ef593cc6a362fcb830ef16cdcaa692c64c2af466c1eb",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "c5ec12ce4766bbfb48e5ef593cc6a362fcb830ef16cdcaa692c64c2af466c1eb",
+          "canonicalRowSha256": "c5ec12ce4766bbfb48e5ef593cc6a362fcb830ef16cdcaa692c64c2af466c1eb",
+          "canonicalProgramPins": [],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-scholarship-wave3-guet-guangxi-asean-full-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-guet-guangxi-asean-full-scholarship",
+              "canonicalSourceSha256": "cfa6b0067d77ac004ca492ff85b356f1c922e5720763536c2e55478ae1de7ec0",
+              "url": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave3-guet-guangxi-asean-full-scholarship",
+                "url": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+                "title": "GUET Application Guide for International Applicants",
+                "publisher": "guilin-university-of-electronic-technology",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://www.guet.edu.cn/_upload/article/files/53/8a/404dd4d949fd8139bd70861f7dd3/bc7bd8b8-55d6-426a-b4b8-1a2ee168941e.pdf",
+          "evidenceBodySha256": "64775effd6594177b04fc9a8e807ee34047a2d3fb8b008110dd8e71ce36a9641",
+          "observedAt": "2026-10-19T05:56:46.110251+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-wave3-guet-guangxi-asean-full-scholarship"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "no-year-or-independent-asean-award-deadline-in-generic-guide",
+          "quotedDate": "15th June",
+          "recurringOrUndatedDeadlineReference": {
+            "monthDay": "06-15",
+            "year": null,
+            "recurrenceExplicit": false
+          },
+          "targetYearNotInferredFromSourceMetadata": true,
+          "generalDeadlineNotBorrowedAsAwardDate": true
+        }
+      ]
+    },
+    {
+      "key": "glut-2026-guide-no-published-applicant-or-award-dates",
+      "universityId": "uni-guilin-university-of-technology",
+      "evidence": [
+        {
+          "name": "glut-directory",
+          "url": "https://gj.glut.edu.cn/info/1072/2751.htm",
+          "observedAt": "2026-10-19T05:56:52.107856+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://gj.glut.edu.cn/info/1072/2751.htm",
+          "contentType": "text/html",
+          "bytes": 80816,
+          "rawPath": "glut-directory.html",
+          "rawSha256": "a641d342187a673344017ef3f21b7b796179f0623ff6227f040658317efa6ba9",
+          "textPath": "glut-directory.txt",
+          "textSha256": "6eb2d5077a6c1683e2ebda75963d29c8a14ab7055a1c826c3032b50e1a953f83",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-visible-text-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "glut-2026-guide",
+          "url": "https://gj.glut.edu.cn/info/1072/3787.htm",
+          "observedAt": "2026-10-19T05:56:54.883481+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+          "contentType": "text/html",
+          "bytes": 147925,
+          "rawPath": "glut-2026-guide.html",
+          "rawSha256": "9c281cab4641fa0d39119ea3d6ba200b0a91c77f9d6f5ca2fe3ea4e6d77a1429",
+          "textPath": "glut-2026-guide.txt",
+          "textSha256": "eefce846dc2f16d496feaa050109beeeffe6acc7ab851d268bc3081abf773816",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-visible-text-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "Four existing programme fee-reference cycles and two distinct award records; dates only.",
+      "officialTitle": "2026年桂林理工大学 国际学生招生指南",
+      "sourceYearQualification": "The 2026 guide directly links the department/major directory originally published2023. The catalogue and current programme categories establish programme context, not a 2026 deadline.",
+      "awardNames": [
+        "广西政府东盟国家留学生奖学金",
+        "桂林理工大学“一带一路”校长奖学金"
+      ],
+      "limitations": "Full captured guide text gives application materials and online-application procedure but no fixed opening/closing dates. Named scholarship listings have no independent application windows. No fee, programme-list publication, office time or enrollment step is treated as a deadline.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-0805-scw-glut-civil-engineering-master-chinese-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue14",
+          "universityId": "uni-guilin-university-of-technology",
+          "programId": "prog-gap-mew-0805-scw-glut-civil-engineering-master-chinese",
+          "programName": "Civil Engineering (Chinese-taught)",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "47530eea7a1d40905f3b966f4dc8d0908d05f05f04dd81113bc5f9d1a020452a",
+          "canonicalProgramSha256": "8512f3e6d57f3ebb80f633a7489255e58fed0a7ebfe9793cbd4406b92b70217f",
+          "canonicalRecordSha256": "47530eea7a1d40905f3b966f4dc8d0908d05f05f04dd81113bc5f9d1a020452a",
+          "canonicalRowSha256": "47530eea7a1d40905f3b966f4dc8d0908d05f05f04dd81113bc5f9d1a020452a",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-0805-scw-glut-civil-engineering-master-chinese",
+              "canonicalProgramSha256": "8512f3e6d57f3ebb80f633a7489255e58fed0a7ebfe9793cbd4406b92b70217f"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-mew-0805-scw-glut-civil-engineering-master-chinese",
+            "src-gap-program-mew-0805-scw-glut-civil-engineering-master-chinese-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-0805-scw-glut-civil-engineering-master-chinese",
+              "canonicalSourceSha256": "19202392492abf6f2487b975d06a9dcfc5cd1bcfe0301d42f999e7f3f653d4d1",
+              "url": "https://gj.glut.edu.cn/info/1072/2751.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-0805-scw-glut-civil-engineering-master-chinese",
+                "url": "https://gj.glut.edu.cn/info/1072/2751.htm",
+                "title": "Guilin University of Technology International College and Major Directory",
+                "publisher": "guilin-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-mew-0805-scw-glut-civil-engineering-master-chinese-support-1",
+              "canonicalSourceSha256": "d51c49b8f9971ee40ae39a700e936aa96c7e9c0f7d94c163322f474d7e25dfde",
+              "url": "https://gj.glut.edu.cn/info/1072/3787.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-0805-scw-glut-civil-engineering-master-chinese-support-1",
+                "url": "https://gj.glut.edu.cn/info/1072/3787.htm",
+                "title": "Guilin University of Technology 2026 International Students Admissions Guide",
+                "publisher": "guilin-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+          "evidenceBodySha256": "9c281cab4641fa0d39119ea3d6ba200b0a91c77f9d6f5ca2fe3ea4e6d77a1429",
+          "observedAt": "2026-10-19T05:56:54.883481+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-mew-0805-scw-glut-civil-engineering-master-chinese-support-1"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "2026-programme-guide-and-directory-publish-no-fixed-application-window",
+          "quotedDate": null,
+          "feeReferenceNotRolledForward": true,
+          "admissionDeadlineNotBorrowed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-0805-scw-glut-cs-bachelor-english-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue14",
+          "universityId": "uni-guilin-university-of-technology",
+          "programId": "prog-gap-mew-0805-scw-glut-cs-bachelor-english",
+          "programName": "Computer Science and Technology (English-taught)",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "ff577fd6bf014467d9a7664fda60d88aaab5aaad2acee57529f7ddd666240b87",
+          "canonicalProgramSha256": "ca0aec44a8bd111fde8dd3d635c5bf568394235e4cfe7002451a9235443cb6c2",
+          "canonicalRecordSha256": "ff577fd6bf014467d9a7664fda60d88aaab5aaad2acee57529f7ddd666240b87",
+          "canonicalRowSha256": "ff577fd6bf014467d9a7664fda60d88aaab5aaad2acee57529f7ddd666240b87",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-0805-scw-glut-cs-bachelor-english",
+              "canonicalProgramSha256": "ca0aec44a8bd111fde8dd3d635c5bf568394235e4cfe7002451a9235443cb6c2"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-mew-0805-scw-glut-cs-bachelor-english",
+            "src-gap-program-mew-0805-scw-glut-cs-bachelor-english-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-0805-scw-glut-cs-bachelor-english",
+              "canonicalSourceSha256": "4468db40a2b0289fbab2bb25f201bc76c879b00f668286f971959f3a395e6ba1",
+              "url": "https://gj.glut.edu.cn/info/1072/2751.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-0805-scw-glut-cs-bachelor-english",
+                "url": "https://gj.glut.edu.cn/info/1072/2751.htm",
+                "title": "Guilin University of Technology International College and Major Directory",
+                "publisher": "guilin-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-mew-0805-scw-glut-cs-bachelor-english-support-1",
+              "canonicalSourceSha256": "18a0b6abd03035325cd37d43c06e9ccb553ce49f5578ddd82b70b24cdd534ae1",
+              "url": "https://gj.glut.edu.cn/info/1072/3787.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-0805-scw-glut-cs-bachelor-english-support-1",
+                "url": "https://gj.glut.edu.cn/info/1072/3787.htm",
+                "title": "Guilin University of Technology 2026 International Students Admissions Guide",
+                "publisher": "guilin-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+          "evidenceBodySha256": "9c281cab4641fa0d39119ea3d6ba200b0a91c77f9d6f5ca2fe3ea4e6d77a1429",
+          "observedAt": "2026-10-19T05:56:54.883481+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-mew-0805-scw-glut-cs-bachelor-english-support-1"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "2026-programme-guide-and-directory-publish-no-fixed-application-window",
+          "quotedDate": null,
+          "feeReferenceNotRolledForward": true,
+          "admissionDeadlineNotBorrowed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-0805-scw-glut-long-chinese-year-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue14",
+          "universityId": "uni-guilin-university-of-technology",
+          "programId": "prog-gap-mew-0805-scw-glut-long-chinese-year",
+          "programName": "Long-term Chinese Language Course — One Academic Year",
+          "degreeLevel": "language",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "e822cb9f4a7f9b56ece9f4d6230e048332627fdab7b320401e5ebcd90b1992d4",
+          "canonicalProgramSha256": "3c21770836bc8ae6e0798be33575be692447f0481b3a1ee81fa3b1446da455c1",
+          "canonicalRecordSha256": "e822cb9f4a7f9b56ece9f4d6230e048332627fdab7b320401e5ebcd90b1992d4",
+          "canonicalRowSha256": "e822cb9f4a7f9b56ece9f4d6230e048332627fdab7b320401e5ebcd90b1992d4",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-0805-scw-glut-long-chinese-year",
+              "canonicalProgramSha256": "3c21770836bc8ae6e0798be33575be692447f0481b3a1ee81fa3b1446da455c1"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-mew-0805-scw-glut-long-chinese-year"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-0805-scw-glut-long-chinese-year",
+              "canonicalSourceSha256": "90821a1d7b505543f6b239256d08c1604a93bdeda9b454400c852ef14465b74d",
+              "url": "https://gj.glut.edu.cn/info/1072/3787.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-0805-scw-glut-long-chinese-year",
+                "url": "https://gj.glut.edu.cn/info/1072/3787.htm",
+                "title": "Guilin University of Technology 2026 International Students Admissions Guide",
+                "publisher": "guilin-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+          "evidenceBodySha256": "9c281cab4641fa0d39119ea3d6ba200b0a91c77f9d6f5ca2fe3ea4e6d77a1429",
+          "observedAt": "2026-10-19T05:56:54.883481+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-mew-0805-scw-glut-long-chinese-year"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "2026-programme-guide-and-directory-publish-no-fixed-application-window",
+          "quotedDate": null,
+          "feeReferenceNotRolledForward": true,
+          "admissionDeadlineNotBorrowed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-0805-scw-glut-tcsol-bachelor-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue14",
+          "universityId": "uni-guilin-university-of-technology",
+          "programId": "prog-gap-mew-0805-scw-glut-tcsol-bachelor",
+          "programName": "Teaching Chinese to Speakers of Other Languages",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "de69ca468dfa6a34546e187e4c4b284d8d718a47d22f0dfe4a49c4a9f8ba6c2d",
+          "canonicalProgramSha256": "7703d857b425a6610c52106acecd07455fe9976853a57ed8b38353a03406ae74",
+          "canonicalRecordSha256": "de69ca468dfa6a34546e187e4c4b284d8d718a47d22f0dfe4a49c4a9f8ba6c2d",
+          "canonicalRowSha256": "de69ca468dfa6a34546e187e4c4b284d8d718a47d22f0dfe4a49c4a9f8ba6c2d",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-0805-scw-glut-tcsol-bachelor",
+              "canonicalProgramSha256": "7703d857b425a6610c52106acecd07455fe9976853a57ed8b38353a03406ae74"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-mew-0805-scw-glut-tcsol-bachelor",
+            "src-gap-program-mew-0805-scw-glut-tcsol-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-0805-scw-glut-tcsol-bachelor",
+              "canonicalSourceSha256": "87fcdb1fcb7924c5d3b0be9151d3869cf4c9cf37d803cf8e8612e7e6a3b380c9",
+              "url": "https://gj.glut.edu.cn/info/1072/2751.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-0805-scw-glut-tcsol-bachelor",
+                "url": "https://gj.glut.edu.cn/info/1072/2751.htm",
+                "title": "Guilin University of Technology International College and Major Directory",
+                "publisher": "guilin-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-mew-0805-scw-glut-tcsol-bachelor-support-1",
+              "canonicalSourceSha256": "b1385bb77d620bf388ad0a518a25097ff076cbd16f29faa202057f1252a81346",
+              "url": "https://gj.glut.edu.cn/info/1072/3787.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-0805-scw-glut-tcsol-bachelor-support-1",
+                "url": "https://gj.glut.edu.cn/info/1072/3787.htm",
+                "title": "Guilin University of Technology 2026 International Students Admissions Guide",
+                "publisher": "guilin-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+          "evidenceBodySha256": "9c281cab4641fa0d39119ea3d6ba200b0a91c77f9d6f5ca2fe3ea4e6d77a1429",
+          "observedAt": "2026-10-19T05:56:54.883481+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-mew-0805-scw-glut-tcsol-bachelor-support-1"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "2026-programme-guide-and-directory-publish-no-fixed-application-window",
+          "quotedDate": null,
+          "feeReferenceNotRolledForward": true,
+          "admissionDeadlineNotBorrowed": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-0805-scw-glut-guangxi-asean-scholarship",
+          "selectionOrigin": "additionalSameSource3",
+          "universityId": "uni-guilin-university-of-technology",
+          "name": "Guangxi Government Scholarship for ASEAN Students",
+          "programIds": [
+            "prog-gap-mew-0805-scw-glut-tcsol-bachelor",
+            "prog-gap-mew-0805-scw-glut-cs-bachelor-english",
+            "prog-gap-mew-0805-scw-glut-civil-engineering-master-chinese",
+            "prog-gap-mew-0805-scw-glut-environmental-doctorate"
+          ],
+          "canonicalScholarshipSha256": "ac7a8559579a84a115bf848dd564e306ddf4b571e3fb8f6c4eae162fa173186d",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "ac7a8559579a84a115bf848dd564e306ddf4b571e3fb8f6c4eae162fa173186d",
+          "canonicalRowSha256": "ac7a8559579a84a115bf848dd564e306ddf4b571e3fb8f6c4eae162fa173186d",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-0805-scw-glut-tcsol-bachelor",
+              "canonicalProgramSha256": "7703d857b425a6610c52106acecd07455fe9976853a57ed8b38353a03406ae74"
+            },
+            {
+              "programId": "prog-gap-mew-0805-scw-glut-cs-bachelor-english",
+              "canonicalProgramSha256": "ca0aec44a8bd111fde8dd3d635c5bf568394235e4cfe7002451a9235443cb6c2"
+            },
+            {
+              "programId": "prog-gap-mew-0805-scw-glut-civil-engineering-master-chinese",
+              "canonicalProgramSha256": "8512f3e6d57f3ebb80f633a7489255e58fed0a7ebfe9793cbd4406b92b70217f"
+            },
+            {
+              "programId": "prog-gap-mew-0805-scw-glut-environmental-doctorate",
+              "canonicalProgramSha256": "7bea657f4c2fb0e08947977b1d8b03f79baa9f71dc1ed9e1ffb6857e286237d5"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-scholarship-mew-0805-scw-glut-guangxi-asean-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-0805-scw-glut-guangxi-asean-scholarship",
+              "canonicalSourceSha256": "9bad6cc3425ae47198a436a4fc62009aa529a031181e44f7119fecbe4fee558a",
+              "url": "https://gj.glut.edu.cn/info/1072/3787.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mew-0805-scw-glut-guangxi-asean-scholarship",
+                "url": "https://gj.glut.edu.cn/info/1072/3787.htm",
+                "title": "Guilin University of Technology 2026 International Students Admissions Guide",
+                "publisher": "guilin-university-of-technology",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+          "evidenceBodySha256": "9c281cab4641fa0d39119ea3d6ba200b0a91c77f9d6f5ca2fe3ea4e6d77a1429",
+          "observedAt": "2026-10-19T05:56:54.883481+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-mew-0805-scw-glut-guangxi-asean-scholarship"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "named-award-listed-without-independent-current-application-dates",
+          "quotedDate": null,
+          "feeReferenceNotRolledForward": true,
+          "admissionDeadlineNotBorrowed": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-0805-scw-glut-belt-road-president-scholarship",
+          "selectionOrigin": "additionalSameSource3",
+          "universityId": "uni-guilin-university-of-technology",
+          "name": "GUT Belt and Road President Scholarship",
+          "programIds": [
+            "prog-gap-mew-0805-scw-glut-tcsol-bachelor",
+            "prog-gap-mew-0805-scw-glut-cs-bachelor-english",
+            "prog-gap-mew-0805-scw-glut-civil-engineering-master-chinese",
+            "prog-gap-mew-0805-scw-glut-environmental-doctorate"
+          ],
+          "canonicalScholarshipSha256": "968e9e50dc67b23f847f79832c3075271db4ac4b396e47229da5550e63adc42e",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "968e9e50dc67b23f847f79832c3075271db4ac4b396e47229da5550e63adc42e",
+          "canonicalRowSha256": "968e9e50dc67b23f847f79832c3075271db4ac4b396e47229da5550e63adc42e",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-0805-scw-glut-tcsol-bachelor",
+              "canonicalProgramSha256": "7703d857b425a6610c52106acecd07455fe9976853a57ed8b38353a03406ae74"
+            },
+            {
+              "programId": "prog-gap-mew-0805-scw-glut-cs-bachelor-english",
+              "canonicalProgramSha256": "ca0aec44a8bd111fde8dd3d635c5bf568394235e4cfe7002451a9235443cb6c2"
+            },
+            {
+              "programId": "prog-gap-mew-0805-scw-glut-civil-engineering-master-chinese",
+              "canonicalProgramSha256": "8512f3e6d57f3ebb80f633a7489255e58fed0a7ebfe9793cbd4406b92b70217f"
+            },
+            {
+              "programId": "prog-gap-mew-0805-scw-glut-environmental-doctorate",
+              "canonicalProgramSha256": "7bea657f4c2fb0e08947977b1d8b03f79baa9f71dc1ed9e1ffb6857e286237d5"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-scholarship-mew-0805-scw-glut-belt-road-president-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-0805-scw-glut-belt-road-president-scholarship",
+              "canonicalSourceSha256": "65ee94b213a6132e878b8e011c67e1629aad60d5e7372a1d0adb10ef313b4dd5",
+              "url": "https://gj.glut.edu.cn/info/1072/3787.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mew-0805-scw-glut-belt-road-president-scholarship",
+                "url": "https://gj.glut.edu.cn/info/1072/3787.htm",
+                "title": "Guilin University of Technology 2026 International Students Admissions Guide",
+                "publisher": "guilin-university-of-technology",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-05"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://gj.glut.edu.cn/info/1072/3787.htm",
+          "evidenceBodySha256": "9c281cab4641fa0d39119ea3d6ba200b0a91c77f9d6f5ca2fe3ea4e6d77a1429",
+          "observedAt": "2026-10-19T05:56:54.883481+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-mew-0805-scw-glut-belt-road-president-scholarship"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "named-award-listed-without-independent-current-application-dates",
+          "quotedDate": null,
+          "feeReferenceNotRolledForward": true,
+          "admissionDeadlineNotBorrowed": true
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "exactBase14AndAdditional3IdsCoveredOnce": true,
+    "fullCanonicalCycleRowPins": 12,
+    "fullCanonicalProgramRowPinsForCycles": 12,
+    "fullCanonicalAwardRowPins": 5,
+    "fullCanonicalSourceRowsPinned": true,
+    "quotedDateFragmentsMatchedAfterWhitespaceNormalization": true,
+    "rawAndTextBytesHashVerified": true,
+    "selectedPdfDateAndPolicyPagesRenderedAndVisuallyRead": true,
+    "canonicalSixFilesUnchangedBeforeAfter": true
+  }
+}

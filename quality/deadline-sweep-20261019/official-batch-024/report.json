@@ -1,0 +1,2233 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-024-20261019",
+  "state": "completed-fifteen-scoped-expired-windows-seven-unknown",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T06:45:37.045Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v5.json",
+  "targetQueueSha256": "01719171d2d61977e8c62adfe3e323750f30b40a2396685c962f56d71bfa34d4",
+  "selectedUniversityIds": [
+    "uni-huazhong-agricultural-university",
+    "uni-hunan-university",
+    "uni-hunan-university-of-technology-and-business",
+    "uni-jiangsu-university",
+    "uni-jiangsu-university-of-science-and-technology",
+    "uni-jiangxi-normal-university"
+  ],
+  "selection": {
+    "baseQueueRecordIds": [
+      "sch-gap-mew-scws-hzau-university-scholarship",
+      "sch-gap-wave8-hnu-csc-high-level-postgraduate",
+      "cycle-gap-wave8-hnu-chemistry-doctorate-2026-2027-autumn",
+      "cycle-gap-wave8-hnu-computer-science-technology-master-2026-2027-autumn",
+      "cycle-gap-wave8-hnu-mechanical-engineering-doctorate-2026-2027-autumn",
+      "sch-gap-mew-csw-hutb-hunan-provincial-scholarship",
+      "sch-gap-wave8-2-hutb-belt-road-language-scholarship",
+      "scholarship-hutb-international-students-inclusive",
+      "cycle-gap-wave8-2-hutb-chinese-language-2026-2027-autumn-fee-reference",
+      "sch-gap-wave8-jsu-presidential-scholarship",
+      "sch-gap-local-strong-just-university-scholarship",
+      "sch-gap-mve-jzh-just-jiangsu-provincial",
+      "cycle-gap-local-strong-just-b-business-administration-en-2026-2027-other",
+      "cycle-gap-local-strong-just-b-computer-science-en-2026-2027-other",
+      "sch-gap-mve-ecs-jxnu-iclt-scholarship-2026"
+    ],
+    "additionalSameSourceRecordIds": [
+      "cycle-wave4-program-hunan-university-applied-economics-master-2026-2027-other-evidence",
+      "cycle-wave4-program-hunan-university-business-administration-master-2026-2027-other-evidence",
+      "cycle-gap-wave8-2-hutb-international-business-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-jzh-just-energy-power-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-jzh-just-management-science-doctorate-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-jzh-just-mba-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-jzh-just-naval-architecture-master-2026-2027-autumn-fee-reference"
+    ],
+    "baseQueueRecords": 15,
+    "additionalSameSourceRecords": 7,
+    "totalRecords": 22,
+    "additionalSelectionReceipt": "quality/deadline-sweep-20261019/heartbeat-0610/additional-same-source-selection-v1.json",
+    "additionalSelectionReceiptSha256": "19b484eb2df8aaefa97d74c9a2eb78962b4b5fc9f0e374d6a6d619b73f566b2b"
+  },
+  "acquisition": {
+    "newDistinctOfficialUrlsAttempted": 9,
+    "newDistinctOfficialUrlsCapturedSuccessfully": 9,
+    "originalSourcesCaptured": 8,
+    "derivedEmbeddedOriginalPdfCaptured": 1,
+    "newWebsiteReadsForAdditionalRecords": 0,
+    "reusedPriorEvidence": 0,
+    "initialNativeTLSFailures": 2,
+    "singleNormalTLSWindowsCurlRecoveries": 2,
+    "captureManifestSha256": "5857f33cc9afa7900cc270d0f3d35163bf332228d0f0aed9551f706d4a13aa26",
+    "recoveryAndOriginalManifestSha256": "636afa6a8900318bc3f737f92fd1fad206d4bc113a4fe4850b4a1756343cb77a",
+    "rawAndTextCaptureHashesVerified": true,
+    "pdfPagesExtracted": {
+      "hnu-csc-2026.pdf": 4,
+      "hnu-self-financed.pdf": 4,
+      "jxnu-2026-iclt-original.pdf": 10
+    },
+    "normalTLSCertificateValidation": true,
+    "paidModelCalls": 0
+  },
+  "summary": {
+    "universitiesWithScopedChecks": 6,
+    "recordsAssessed": 22,
+    "baseQueueRecords": 15,
+    "additionalSameSourceRecords": 7,
+    "admissionCyclesAssessed": 13,
+    "scholarshipsAssessed": 9,
+    "recordResults": {
+      "closed": 15,
+      "unknown": 7
+    },
+    "newExactExpiredDeadlineCandidatesFromCanonicalNull": 8,
+    "existingExpiredDatesScoped": 7,
+    "independentAwardDeadlinesEstablished": 2,
+    "additionalAwardScopedSeptemberDeadlineNotWholeAwardClosure": 1,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "publicationActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "policy": "Date-only candidate observations. No canonical dates, statuses or freshness changed. Same-route past application windows do not imply programme discontinuation or closure of other routes. No historical self-financed year is rolled into the target year. Every award retains its own deadline scope. Any future date write requires a supported narrow consumer, independent approval and exact-row compare-and-swap.",
+  "groups": [
+    {
+      "key": "hzau-separately-named-university-scholarship-2026",
+      "universityId": "uni-huazhong-agricultural-university",
+      "evidence": [
+        {
+          "name": "hzau-scholarship-recovery",
+          "url": "https://ic.hzau.edu.cn/ADMISSIONS1/SCHOLARSHIPS/Huazhong_Agricultural_University_Scholarship.htm",
+          "observedAt": "2026-10-19T06:40:23.547185+00:00",
+          "method": "one-bounded-Windows-curl-normal-TLS-recovery",
+          "tlsCertificateValidation": true,
+          "exitCode": 0,
+          "responseMetadata": "200\ntext/html\nhttps://ic.hzau.edu.cn/ADMISSIONS1/SCHOLARSHIPS/Huazhong_Agricultural_University_Scholarship.htm",
+          "rawPath": "hzau-scholarship-recovery.html",
+          "rawSha256": "660f1627d8d1c929256a1a1fa94cf8686d8eca1c9f2887e385412d6709a99eb9",
+          "bytes": 15344,
+          "textPath": "hzau-scholarship-recovery.txt",
+          "textSha256": "8f1f1e8a926631ca4030f01faeece3e6b6e4c448a4a5061d4639269c40ea4136",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-extracted-text-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "hzau-application-recovery",
+          "url": "https://ic.hzau.edu.cn/ADMISSIONS1/APPLICATION/How_to_Apply.htm",
+          "observedAt": "2026-10-19T06:40:23.548202+00:00",
+          "method": "one-bounded-Windows-curl-normal-TLS-recovery",
+          "tlsCertificateValidation": true,
+          "exitCode": 0,
+          "responseMetadata": "200\ntext/html\nhttps://ic.hzau.edu.cn/ADMISSIONS1/APPLICATION/How_to_Apply.htm",
+          "rawPath": "hzau-application-recovery.html",
+          "rawSha256": "6c4c7fe342fff1f48c4d0a74260d4457b4d70fd45bf7ad81b75666a9f9d5c5f5",
+          "bytes": 53198,
+          "textPath": "hzau-application-recovery.txt",
+          "textSha256": "d57d5bad5c0cedb7ada92d422a252f030dca576646930b03af1d6ce7843706f2",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-extracted-text-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "Exact separately named HZAU university postgraduate scholarship application period, not a borrowed CSC date.",
+      "quotedDate": "Huazhong Agricultural University Scholarship: November 1, 2025 to February 27, 2026",
+      "acquisitionQualification": "Each of two normal Python TLS requests failed with SSL EOF; each was recovered exactly once with bounded Windows curl and normal TLS certificate validation. Original failures remain in the initial manifest.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-scws-hzau-university-scholarship",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-huazhong-agricultural-university",
+          "name": "Huazhong Agricultural University Scholarship",
+          "programIds": [
+            "prog-gap-mew-scws-hzau-food-science-engineering-master",
+            "prog-gap-mew-scws-hzau-agricultural-economic-management-doctorate",
+            "prog-gap-mew-scws-hzau-bioinformatics-doctorate"
+          ],
+          "canonicalScholarshipSha256": "7ee7dfe86c12fc31f3e5941013e5434c71d078abd04420ff3eacd5952e93b326",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "7ee7dfe86c12fc31f3e5941013e5434c71d078abd04420ff3eacd5952e93b326",
+          "canonicalRowSha256": "7ee7dfe86c12fc31f3e5941013e5434c71d078abd04420ff3eacd5952e93b326",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-scws-hzau-food-science-engineering-master",
+              "canonicalProgramSha256": "526682161595db5919a5e708dc7e853f6f07f0176c67df45a4197e34ec974915"
+            },
+            {
+              "programId": "prog-gap-mew-scws-hzau-agricultural-economic-management-doctorate",
+              "canonicalProgramSha256": "b5fd3437e549fa65bb6f7577aa71144303f2e6bb4f506ec6a0955b6ac3599071"
+            },
+            {
+              "programId": "prog-gap-mew-scws-hzau-bioinformatics-doctorate",
+              "canonicalProgramSha256": "020982511ba24f50ee0f9581e5d9b742c258544809ac598d736992eb53646075"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-scholarship-mew-scws-hzau-university-scholarship",
+            "src-gap-scholarship-mew-scws-hzau-university-scholarship-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-scws-hzau-university-scholarship",
+              "canonicalSourceSha256": "af7771588e2e88eaa93324a757654039bb81ca26f9506ac8b58f2f5fc0f2bf02",
+              "url": "https://ic.hzau.edu.cn/ADMISSIONS1/SCHOLARSHIPS/Huazhong_Agricultural_University_Scholarship.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mew-scws-hzau-university-scholarship",
+                "url": "https://ic.hzau.edu.cn/ADMISSIONS1/SCHOLARSHIPS/Huazhong_Agricultural_University_Scholarship.htm",
+                "title": "Huazhong Agricultural University Scholarship",
+                "publisher": "huazhong-agricultural-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-04"
+              }
+            },
+            {
+              "sourceId": "src-gap-scholarship-mew-scws-hzau-university-scholarship-support-1",
+              "canonicalSourceSha256": "858d658e701d1de6f595ceb4a395244bcc9a659d30e1bc0747f9794fd66d50c2",
+              "url": "https://ic.hzau.edu.cn/ADMISSIONS1/APPLICATION/How_to_Apply.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mew-scws-hzau-university-scholarship-support-1",
+                "url": "https://ic.hzau.edu.cn/ADMISSIONS1/APPLICATION/How_to_Apply.htm",
+                "title": "HZAU Application Period and Scholarship Values",
+                "publisher": "huazhong-agricultural-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-04"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://ic.hzau.edu.cn/ADMISSIONS1/APPLICATION/How_to_Apply.htm",
+          "evidenceBodySha256": "6c4c7fe342fff1f48c4d0a74260d4457b4d70fd45bf7ad81b75666a9f9d5c5f5",
+          "observedAt": "2026-10-19T06:40:23.548202+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-mew-scws-hzau-university-scholarship-support-1"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-11-01",
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-02-27",
+          "candidateOfficialDeadline": "2026-02-27",
+          "candidateDeadlineChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "canonicalDeadlineAssessed": false,
+          "reason": "application-page-separately-names-this-university-award-and-exact-2025-2026-applicant-period",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "Huazhong Agricultural University Scholarship: November 1, 2025 to February 27, 2026",
+          "awardOwnDateNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "hnu-2026-csc-type-b-distinct-from-self-financed-2025",
+      "universityId": "uni-hunan-university",
+      "evidence": [
+        {
+          "name": "hnu-csc-2026",
+          "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+          "observedAt": "2026-10-19T06:15:19.520972+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+          "contentType": "application/pdf",
+          "bytes": 296218,
+          "rawPath": "hnu-csc-2026.pdf",
+          "rawSha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+          "pageCount": 4,
+          "textPath": "hnu-csc-2026.txt",
+          "textSha256": "825d348d77a21e005650c55b3cc973d57576b0da66901bdb27218144fa0c3a36",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-extracted-text-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "hnu-self-financed",
+          "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+          "observedAt": "2026-10-19T06:15:19.522976+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+          "contentType": "application/pdf",
+          "bytes": 340044,
+          "rawPath": "hnu-self-financed.pdf",
+          "rawSha256": "1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6",
+          "pageCount": 4,
+          "textPath": "hnu-self-financed.txt",
+          "textSha256": "cccddf72acbdf636cac2f39b153f9f8c2299829c2f4adb5d244d95336083ef9c",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-extracted-text-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "officialTitle": "Chinese Government Scholarship Application Notices for High-level Postgraduate Program of Hunan University in 2026",
+      "quotedDate": "The deadline of application for High-level Postgraduate Program is March 1st, 2026.",
+      "historicalSelfFinancedReference": {
+        "originalYear": 2025,
+        "deadline": "2025-07-18",
+        "quotedDate": "The application deadline is July 18, 2025 Beijing time.",
+        "targetYearRolledForward": false
+      },
+      "visualEvidence": [
+        {
+          "path": "hnu-csc-programme-1.png",
+          "sha256": "a9aaff50931c56b1b1e9014bd3991a668db802e1b44c7d6a8f3297a1d1576515"
+        },
+        {
+          "path": "hnu-csc-deadline-4.png",
+          "sha256": "d771286f2bb55ad24df988c6cf8452e2aa43a61868a0e0428e08fadbe9a6a5a9"
+        },
+        {
+          "path": "hnu-self-title-1.png",
+          "sha256": "0858be47f20de73bb0460350f0bf42e942e3e6bd50e214703bb9f2d8e407c50e"
+        },
+        {
+          "path": "hnu-self-deadline-4.png",
+          "sha256": "44667901c7714c4b03c148be5b9479753984cfd327ba875a3570a782dd6cd82a"
+        }
+      ],
+      "scope": "Five exact majors/degree levels plus the separately named high-level postgraduate scholarship, only under the 2026 CSC Type B route. General self-financed 2026 admissions are not certified.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-hnu-csc-high-level-postgraduate",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-hunan-university",
+          "name": "Hunan University CSC High-level Postgraduate Program",
+          "programIds": [],
+          "canonicalScholarshipSha256": "7cb746ac38b19fc8dd3c79ee3022f0e1860ea6aa519123efd4604809a65fb548",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "7cb746ac38b19fc8dd3c79ee3022f0e1860ea6aa519123efd4604809a65fb548",
+          "canonicalRowSha256": "7cb746ac38b19fc8dd3c79ee3022f0e1860ea6aa519123efd4604809a65fb548",
+          "canonicalProgramPins": [],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-scholarship-wave8-hnu-csc-high-level-postgraduate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-hnu-csc-high-level-postgraduate",
+              "canonicalSourceSha256": "0d423cfe85494a653c7e41aef974f663bb79a63ab0d5c0688ba79f83c88218f0",
+              "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave8-hnu-csc-high-level-postgraduate",
+                "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+                "title": "Hunan University 2026 CSC High-level Postgraduate Program",
+                "publisher": "hunan-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+          "evidenceBodySha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+          "observedAt": "2026-10-19T06:15:19.520972+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-wave8-hnu-csc-high-level-postgraduate"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-03-01",
+          "candidateOfficialDeadline": "2026-03-01",
+          "candidateDeadlineChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "canonicalDeadlineAssessed": false,
+          "reason": "exact-2026-high-level-postgraduate-csc-award-has-own-applicant-cutoff",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "The deadline of application for High-level Postgraduate Program is March 1st, 2026.",
+          "fundingRoute": "2026 CSC High-level Postgraduate Program, Type B",
+          "awardOwnDateNotBorrowed": true,
+          "selfFinancedLimitation": "Stored programme URL may point to the historical 2025 self-financed PDF. Its July18,2025 deadline is preserved as historical reference only; this row finding applies solely to the explicitly stored 2026 CSC route.",
+          "historicalSelfFinancedReference": {
+            "year": 2025,
+            "deadline": "2025-07-18",
+            "quotedDate": "The application deadline is July 18, 2025 Beijing time.",
+            "evidenceBodySha256": "1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6"
+          }
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-hnu-chemistry-doctorate-2026-2027-autumn",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-hunan-university",
+          "programId": "prog-gap-wave8-hnu-chemistry-doctorate",
+          "programName": "Chemistry (Doctoral Program)",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDateStatus": "previous-cycle-reference",
+          "canonicalCycleSha256": "1b787d39d1e731c232b20406ca340c2ad19551fae41a13b1f82fc11e4a67f47d",
+          "canonicalProgramSha256": "d8435aedf26fb098974947c8a6ab405b98033153b99b5c62aa0c5dab9d938e72",
+          "canonicalRecordSha256": "1b787d39d1e731c232b20406ca340c2ad19551fae41a13b1f82fc11e4a67f47d",
+          "canonicalRowSha256": "1b787d39d1e731c232b20406ca340c2ad19551fae41a13b1f82fc11e4a67f47d",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-hnu-chemistry-doctorate",
+              "canonicalProgramSha256": "d8435aedf26fb098974947c8a6ab405b98033153b99b5c62aa0c5dab9d938e72"
+            }
+          ],
+          "storedDeadline": "2026-03-01",
+          "sourceIds": [
+            "src-gap-program-wave8-hnu-chemistry-doctorate",
+            "hnu-csc-postgraduate-2026",
+            "hnu-self-financed-2025"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-hnu-chemistry-doctorate",
+              "canonicalSourceSha256": "3537194404571c4587e84bd51eab47a93d5ccf42d9ba886bb2684890e7abb5d8",
+              "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave8-hnu-chemistry-doctorate",
+                "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+                "title": "Hunan University 2026 CSC High-level Postgraduate Program",
+                "publisher": "hunan-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            },
+            {
+              "sourceId": "hnu-csc-postgraduate-2026",
+              "canonicalSourceSha256": "f5c3a782830172749e617289a2c0fed54e7bb72e4a01e5fbe0991dec157b9d96",
+              "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+              "sourceFullRecord": {
+                "id": "hnu-csc-postgraduate-2026",
+                "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+                "title": "Hunan University — Majors Offered",
+                "publisher": "Hunan University",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-26"
+              }
+            },
+            {
+              "sourceId": "hnu-self-financed-2025",
+              "canonicalSourceSha256": "81e99aba212da09b4e0ec3c2d8b3f11b2f3ce4b231dced65e7fcaeb0497a4715",
+              "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+              "sourceFullRecord": {
+                "id": "hnu-self-financed-2025",
+                "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+                "title": "Hunan University — English-taught programs",
+                "publisher": "Hunan University",
+                "kind": "admissions",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-26"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+          "evidenceBodySha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+          "observedAt": "2026-10-19T06:15:19.520972+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-wave8-hnu-chemistry-doctorate",
+            "hnu-csc-postgraduate-2026"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-03-01",
+          "candidateOfficialDeadline": "2026-03-01",
+          "candidateDeadlineChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "exact-2026-csc-programme-and-degree-explicitly-listed-with-canonical-cycle-route-note",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "The deadline of application for High-level Postgraduate Program is March 1st, 2026.",
+          "fundingRoute": "2026 CSC High-level Postgraduate Program, Type B",
+          "exactProgrammeDegreeQuote": "Chemistry (Ph.D)",
+          "canonicalRouteBinding": {
+            "sourceId": "hnu-csc-postgraduate-2026",
+            "canonicalNoteFragment": "Funding note: full tuition under 2026 CSC route.",
+            "canonicalNotes": {
+              "en": "Hunan University's official 2026 high-level postgraduate notice lists Chemistry at the doctorate level among majors taught in both English and Chinese. The Type B deadline of 1 March 2026 is closed. Official-source review 2026-08-26. Historical cycle only: the deadline has passed and no later deadline is inferred. Funding note: full tuition under 2026 CSC route. Official route requirements: Master's degree; under age 40; HSK 4 or IELTS 6.0/TOEFL 80 by teaching language.",
+              "zh": "湖南大学2026高水平研究生项目官方通知将化学列为可中英文授课的博士专业；B类申请于2026年3月1日截止，当前已关闭。",
+              "ru": "Официальное объявление HNU 2026 включает «Chemistry» уровня докторантуры среди программ на китайском и английском языках; срок Type B 1 марта 2026 года закрыт."
+            }
+          },
+          "programmeIdentityAndFundingDateScopesDistinct": true,
+          "selfFinancedLimitation": "Stored programme URL may point to the historical 2025 self-financed PDF. Its July18,2025 deadline is preserved as historical reference only; this row finding applies solely to the explicitly stored 2026 CSC route.",
+          "historicalSelfFinancedReference": {
+            "year": 2025,
+            "deadline": "2025-07-18",
+            "quotedDate": "The application deadline is July 18, 2025 Beijing time.",
+            "evidenceBodySha256": "1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6"
+          }
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-hnu-computer-science-technology-master-2026-2027-autumn",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-hunan-university",
+          "programId": "prog-gap-wave8-hnu-computer-science-technology-master",
+          "programName": "Computer Science and Technology (Master's Program)",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDateStatus": "previous-cycle-reference",
+          "canonicalCycleSha256": "e94f46140430e11853806a7c23fef4903c9f66b0678351caf827634e1252f7c9",
+          "canonicalProgramSha256": "0e5be8ba14424b6a463fd891d85032c9f15c2b867a585d8a669c62a7e91a1e5a",
+          "canonicalRecordSha256": "e94f46140430e11853806a7c23fef4903c9f66b0678351caf827634e1252f7c9",
+          "canonicalRowSha256": "e94f46140430e11853806a7c23fef4903c9f66b0678351caf827634e1252f7c9",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-hnu-computer-science-technology-master",
+              "canonicalProgramSha256": "0e5be8ba14424b6a463fd891d85032c9f15c2b867a585d8a669c62a7e91a1e5a"
+            }
+          ],
+          "storedDeadline": "2026-03-01",
+          "sourceIds": [
+            "src-gap-program-wave8-hnu-computer-science-technology-master",
+            "hnu-csc-postgraduate-2026",
+            "hnu-self-financed-2025"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-hnu-computer-science-technology-master",
+              "canonicalSourceSha256": "4c668742f4dc9c4d2477f8ced5b3576e8777de6b74c056b1dcb408a0caede1c3",
+              "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave8-hnu-computer-science-technology-master",
+                "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+                "title": "Hunan University 2026 CSC High-level Postgraduate Program",
+                "publisher": "hunan-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            },
+            {
+              "sourceId": "hnu-csc-postgraduate-2026",
+              "canonicalSourceSha256": "f5c3a782830172749e617289a2c0fed54e7bb72e4a01e5fbe0991dec157b9d96",
+              "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+              "sourceFullRecord": {
+                "id": "hnu-csc-postgraduate-2026",
+                "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+                "title": "Hunan University — Majors Offered",
+                "publisher": "Hunan University",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-26"
+              }
+            },
+            {
+              "sourceId": "hnu-self-financed-2025",
+              "canonicalSourceSha256": "81e99aba212da09b4e0ec3c2d8b3f11b2f3ce4b231dced65e7fcaeb0497a4715",
+              "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+              "sourceFullRecord": {
+                "id": "hnu-self-financed-2025",
+                "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+                "title": "Hunan University — English-taught programs",
+                "publisher": "Hunan University",
+                "kind": "admissions",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-26"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+          "evidenceBodySha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+          "observedAt": "2026-10-19T06:15:19.520972+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-wave8-hnu-computer-science-technology-master",
+            "hnu-csc-postgraduate-2026"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-03-01",
+          "candidateOfficialDeadline": "2026-03-01",
+          "candidateDeadlineChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "exact-2026-csc-programme-and-degree-explicitly-listed-with-canonical-cycle-route-note",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "The deadline of application for High-level Postgraduate Program is March 1st, 2026.",
+          "fundingRoute": "2026 CSC High-level Postgraduate Program, Type B",
+          "exactProgrammeDegreeQuote": "Computer Science and Technology (Master or Ph.D)",
+          "canonicalRouteBinding": {
+            "sourceId": "hnu-csc-postgraduate-2026",
+            "canonicalNoteFragment": "Funding note: full tuition under 2026 CSC route.",
+            "canonicalNotes": {
+              "en": "Hunan University's official 2026 high-level postgraduate notice lists Computer Science and Technology at the master level among majors taught in both English and Chinese. The Type B deadline of 1 March 2026 is closed. Official-source review 2026-08-26. Historical cycle only: the deadline has passed and no later deadline is inferred. Funding note: full tuition under 2026 CSC route. Official route requirements: Bachelor's degree; under age 35; HSK 4 or IELTS 6.0/TOEFL 80 by teaching language.",
+              "zh": "湖南大学2026高水平研究生项目官方通知将计算机科学与技术列为可中英文授课的硕士专业；B类申请于2026年3月1日截止，当前已关闭。",
+              "ru": "Официальное объявление HNU 2026 включает «Computer Science and Technology» уровня магистратуры среди программ на китайском и английском языках; срок Type B 1 марта 2026 года закрыт."
+            }
+          },
+          "programmeIdentityAndFundingDateScopesDistinct": true,
+          "selfFinancedLimitation": "Stored programme URL may point to the historical 2025 self-financed PDF. Its July18,2025 deadline is preserved as historical reference only; this row finding applies solely to the explicitly stored 2026 CSC route.",
+          "historicalSelfFinancedReference": {
+            "year": 2025,
+            "deadline": "2025-07-18",
+            "quotedDate": "The application deadline is July 18, 2025 Beijing time.",
+            "evidenceBodySha256": "1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6"
+          }
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-hnu-mechanical-engineering-doctorate-2026-2027-autumn",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-hunan-university",
+          "programId": "prog-gap-wave8-hnu-mechanical-engineering-doctorate",
+          "programName": "Mechanical Engineering (Doctoral Program)",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDateStatus": "previous-cycle-reference",
+          "canonicalCycleSha256": "48d6c462a414a56c509243f97892d3950c6c1c2271363c940da69e69c4a5896f",
+          "canonicalProgramSha256": "d0a24a33fbd08cd6d5a150de5f0df9b4bcb25cefa4565a712d5a56ae36927232",
+          "canonicalRecordSha256": "48d6c462a414a56c509243f97892d3950c6c1c2271363c940da69e69c4a5896f",
+          "canonicalRowSha256": "48d6c462a414a56c509243f97892d3950c6c1c2271363c940da69e69c4a5896f",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-hnu-mechanical-engineering-doctorate",
+              "canonicalProgramSha256": "d0a24a33fbd08cd6d5a150de5f0df9b4bcb25cefa4565a712d5a56ae36927232"
+            }
+          ],
+          "storedDeadline": "2026-03-01",
+          "sourceIds": [
+            "src-gap-program-wave8-hnu-mechanical-engineering-doctorate",
+            "hnu-csc-postgraduate-2026",
+            "hnu-self-financed-2025"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-hnu-mechanical-engineering-doctorate",
+              "canonicalSourceSha256": "96dc66f7d9011d95e22992673060ae042dd601a0cc35139f1da705c9aa3c1de6",
+              "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave8-hnu-mechanical-engineering-doctorate",
+                "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+                "title": "Hunan University 2026 CSC High-level Postgraduate Program",
+                "publisher": "hunan-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            },
+            {
+              "sourceId": "hnu-csc-postgraduate-2026",
+              "canonicalSourceSha256": "f5c3a782830172749e617289a2c0fed54e7bb72e4a01e5fbe0991dec157b9d96",
+              "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+              "sourceFullRecord": {
+                "id": "hnu-csc-postgraduate-2026",
+                "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+                "title": "Hunan University — Majors Offered",
+                "publisher": "Hunan University",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-26"
+              }
+            },
+            {
+              "sourceId": "hnu-self-financed-2025",
+              "canonicalSourceSha256": "81e99aba212da09b4e0ec3c2d8b3f11b2f3ce4b231dced65e7fcaeb0497a4715",
+              "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+              "sourceFullRecord": {
+                "id": "hnu-self-financed-2025",
+                "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+                "title": "Hunan University — English-taught programs",
+                "publisher": "Hunan University",
+                "kind": "admissions",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-26"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+          "evidenceBodySha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+          "observedAt": "2026-10-19T06:15:19.520972+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-wave8-hnu-mechanical-engineering-doctorate",
+            "hnu-csc-postgraduate-2026"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-03-01",
+          "candidateOfficialDeadline": "2026-03-01",
+          "candidateDeadlineChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "exact-2026-csc-programme-and-degree-explicitly-listed-with-canonical-cycle-route-note",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "The deadline of application for High-level Postgraduate Program is March 1st, 2026.",
+          "fundingRoute": "2026 CSC High-level Postgraduate Program, Type B",
+          "exactProgrammeDegreeQuote": "Mechanical Engineering (Ph.D)",
+          "canonicalRouteBinding": {
+            "sourceId": "hnu-csc-postgraduate-2026",
+            "canonicalNoteFragment": "Funding note: full tuition under 2026 CSC route.",
+            "canonicalNotes": {
+              "en": "Hunan University's official 2026 high-level postgraduate notice lists Mechanical Engineering at the doctorate level among majors taught in both English and Chinese. The Type B deadline of 1 March 2026 is closed. Official-source review 2026-08-26. Historical cycle only: the deadline has passed and no later deadline is inferred. Funding note: full tuition under 2026 CSC route. Official route requirements: Master's degree; under age 40; HSK 4 or IELTS 6.0/TOEFL 80 by teaching language.",
+              "zh": "湖南大学2026高水平研究生项目官方通知将机械工程列为可中英文授课的博士专业；B类申请于2026年3月1日截止，当前已关闭。",
+              "ru": "Официальное объявление HNU 2026 включает «Mechanical Engineering» уровня докторантуры среди программ на китайском и английском языках; срок Type B 1 марта 2026 года закрыт."
+            }
+          },
+          "programmeIdentityAndFundingDateScopesDistinct": true,
+          "selfFinancedLimitation": "Stored programme URL may point to the historical 2025 self-financed PDF. Its July18,2025 deadline is preserved as historical reference only; this row finding applies solely to the explicitly stored 2026 CSC route.",
+          "historicalSelfFinancedReference": {
+            "year": 2025,
+            "deadline": "2025-07-18",
+            "quotedDate": "The application deadline is July 18, 2025 Beijing time.",
+            "evidenceBodySha256": "1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6"
+          }
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-wave4-program-hunan-university-applied-economics-master-2026-2027-other-evidence",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-hunan-university",
+          "programId": "program-hunan-university-applied-economics-master",
+          "programName": "Applied Economics",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "previous-cycle-reference",
+          "canonicalCycleSha256": "e2d7e51e1ad8c09dbc8349e40adfa3f7dba9aeba27c583495104779b724e6a7c",
+          "canonicalProgramSha256": "9c41cd518ff10d0e574e5b25f111ac9d7258a4ac245179cdbc022702d9083b9a",
+          "canonicalRecordSha256": "e2d7e51e1ad8c09dbc8349e40adfa3f7dba9aeba27c583495104779b724e6a7c",
+          "canonicalRowSha256": "e2d7e51e1ad8c09dbc8349e40adfa3f7dba9aeba27c583495104779b724e6a7c",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-hunan-university-applied-economics-master",
+              "canonicalProgramSha256": "9c41cd518ff10d0e574e5b25f111ac9d7258a4ac245179cdbc022702d9083b9a"
+            }
+          ],
+          "storedDeadline": "2026-03-01",
+          "sourceIds": [
+            "hnu-csc-postgraduate-2026",
+            "hnu-self-financed-2025"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "hnu-csc-postgraduate-2026",
+              "canonicalSourceSha256": "f5c3a782830172749e617289a2c0fed54e7bb72e4a01e5fbe0991dec157b9d96",
+              "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+              "sourceFullRecord": {
+                "id": "hnu-csc-postgraduate-2026",
+                "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+                "title": "Hunan University — Majors Offered",
+                "publisher": "Hunan University",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-26"
+              }
+            },
+            {
+              "sourceId": "hnu-self-financed-2025",
+              "canonicalSourceSha256": "81e99aba212da09b4e0ec3c2d8b3f11b2f3ce4b231dced65e7fcaeb0497a4715",
+              "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+              "sourceFullRecord": {
+                "id": "hnu-self-financed-2025",
+                "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+                "title": "Hunan University — English-taught programs",
+                "publisher": "Hunan University",
+                "kind": "admissions",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-26"
+              }
+            },
+            {
+              "sourceId": "src-program-review-626c7c1ccf2a",
+              "canonicalSourceSha256": "100d569b7ccb939bdd7b3776db54aae14672dc5d57519f2c95048ceaf998d1c9",
+              "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+              "sourceFullRecord": {
+                "id": "src-program-review-626c7c1ccf2a",
+                "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+                "title": "Official program information — Applied Economics",
+                "publisher": "Hunan University",
+                "kind": "program",
+                "language": "other",
+                "official": true,
+                "accessedAt": "2026-07-27"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+          "evidenceBodySha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+          "observedAt": "2026-10-19T06:15:19.520972+00:00",
+          "evidenceSourceIds": [
+            "hnu-csc-postgraduate-2026"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-03-01",
+          "candidateOfficialDeadline": "2026-03-01",
+          "candidateDeadlineChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "exact-2026-csc-programme-and-degree-explicitly-listed-with-canonical-cycle-route-note",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "The deadline of application for High-level Postgraduate Program is March 1st, 2026.",
+          "fundingRoute": "2026 CSC High-level Postgraduate Program, Type B",
+          "exactProgrammeDegreeQuote": "Applied Economics (Master or Ph.D)",
+          "canonicalRouteBinding": {
+            "sourceId": "hnu-csc-postgraduate-2026",
+            "canonicalNoteFragment": "Funding note: full tuition under 2026 CSC route.",
+            "canonicalNotes": {
+              "en": "Official-source review 2026-08-26. Historical cycle only: the deadline has passed and no later deadline is inferred. Funding note: full tuition under 2026 CSC route. Official route requirements: Bachelor's degree; under age 35; HSK 4 or IELTS 6.0/TOEFL 80 by teaching language."
+            }
+          },
+          "programmeIdentityAndFundingDateScopesDistinct": true,
+          "selfFinancedLimitation": "Stored programme URL may point to the historical 2025 self-financed PDF. Its July18,2025 deadline is preserved as historical reference only; this row finding applies solely to the explicitly stored 2026 CSC route.",
+          "historicalSelfFinancedReference": {
+            "year": 2025,
+            "deadline": "2025-07-18",
+            "quotedDate": "The application deadline is July 18, 2025 Beijing time.",
+            "evidenceBodySha256": "1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6"
+          }
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-wave4-program-hunan-university-business-administration-master-2026-2027-other-evidence",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-hunan-university",
+          "programId": "program-hunan-university-business-administration-master",
+          "programName": "Business Administration",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "previous-cycle-reference",
+          "canonicalCycleSha256": "bf04fda025ea8cf0f1057eddf715be67dab023a8a37eed4ff364b5a636f2ca4b",
+          "canonicalProgramSha256": "3d61fb8505d7b367fbf88ff6441277394077dcb8765105c796a15ab85d913ea7",
+          "canonicalRecordSha256": "bf04fda025ea8cf0f1057eddf715be67dab023a8a37eed4ff364b5a636f2ca4b",
+          "canonicalRowSha256": "bf04fda025ea8cf0f1057eddf715be67dab023a8a37eed4ff364b5a636f2ca4b",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-hunan-university-business-administration-master",
+              "canonicalProgramSha256": "3d61fb8505d7b367fbf88ff6441277394077dcb8765105c796a15ab85d913ea7"
+            }
+          ],
+          "storedDeadline": "2026-03-01",
+          "sourceIds": [
+            "hnu-csc-postgraduate-2026",
+            "hnu-self-financed-2025"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "hnu-csc-postgraduate-2026",
+              "canonicalSourceSha256": "f5c3a782830172749e617289a2c0fed54e7bb72e4a01e5fbe0991dec157b9d96",
+              "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+              "sourceFullRecord": {
+                "id": "hnu-csc-postgraduate-2026",
+                "url": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+                "title": "Hunan University — Majors Offered",
+                "publisher": "Hunan University",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-26"
+              }
+            },
+            {
+              "sourceId": "hnu-self-financed-2025",
+              "canonicalSourceSha256": "81e99aba212da09b4e0ec3c2d8b3f11b2f3ce4b231dced65e7fcaeb0497a4715",
+              "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+              "sourceFullRecord": {
+                "id": "hnu-self-financed-2025",
+                "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+                "title": "Hunan University — English-taught programs",
+                "publisher": "Hunan University",
+                "kind": "admissions",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-26"
+              }
+            },
+            {
+              "sourceId": "src-program-review-626c7c1ccf2a",
+              "canonicalSourceSha256": "100d569b7ccb939bdd7b3776db54aae14672dc5d57519f2c95048ceaf998d1c9",
+              "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+              "sourceFullRecord": {
+                "id": "src-program-review-626c7c1ccf2a",
+                "url": "https://www-en.hnu.edu.cn/__local/1/D4/C0/0A6AC6A418F491ADEC7EE62655D_437210C1_5304C.pdf",
+                "title": "Official program information — Applied Economics",
+                "publisher": "Hunan University",
+                "kind": "program",
+                "language": "other",
+                "official": true,
+                "accessedAt": "2026-07-27"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://www-en.hnu.edu.cn/__local/E/41/32/CBDFCD7B49E885A62AA9BE4753B_27BDAE72_4851A.pdf",
+          "evidenceBodySha256": "ed3bc35be9e17f4120d3b57aba1f83a51a044e4963fe7f17905a82b04aca2efd",
+          "observedAt": "2026-10-19T06:15:19.520972+00:00",
+          "evidenceSourceIds": [
+            "hnu-csc-postgraduate-2026"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-03-01",
+          "candidateOfficialDeadline": "2026-03-01",
+          "candidateDeadlineChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "exact-2026-csc-programme-and-degree-explicitly-listed-with-canonical-cycle-route-note",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "The deadline of application for High-level Postgraduate Program is March 1st, 2026.",
+          "fundingRoute": "2026 CSC High-level Postgraduate Program, Type B",
+          "exactProgrammeDegreeQuote": "Business Administration (Master or Ph.D)",
+          "canonicalRouteBinding": {
+            "sourceId": "hnu-csc-postgraduate-2026",
+            "canonicalNoteFragment": "Funding note: full tuition under 2026 CSC route.",
+            "canonicalNotes": {
+              "en": "Official-source review 2026-08-26. Historical cycle only: the deadline has passed and no later deadline is inferred. Funding note: full tuition under 2026 CSC route. Official route requirements: Bachelor's degree; under age 35; HSK 4 for Chinese-taught or IELTS 6.0/TOEFL 80 for English-taught; study plan; two recommendations."
+            }
+          },
+          "programmeIdentityAndFundingDateScopesDistinct": true,
+          "selfFinancedLimitation": "Stored programme URL may point to the historical 2025 self-financed PDF. Its July18,2025 deadline is preserved as historical reference only; this row finding applies solely to the explicitly stored 2026 CSC route.",
+          "historicalSelfFinancedReference": {
+            "year": 2025,
+            "deadline": "2025-07-18",
+            "quotedDate": "The application deadline is July 18, 2025 Beijing time.",
+            "evidenceBodySha256": "1341320aec0070d2a07d85db3d368c85514e9801fc2c8c56972ce82ed7a442e6"
+          }
+        }
+      ]
+    },
+    {
+      "key": "hutb-two-exact-2026-autumn-programmes-three-independently-undated-awards",
+      "universityId": "uni-hunan-university-of-technology-and-business",
+      "evidence": [
+        {
+          "name": "hutb-2026-guide",
+          "url": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+          "observedAt": "2026-10-19T06:15:21.022494+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+          "contentType": "text/html; charset=utf-8",
+          "bytes": 75511,
+          "rawPath": "hutb-2026-guide.html",
+          "rawSha256": "d4321d95b87b1cd3c4f6bc0dd2de3faf02502b27fa82bcce028d3138582013d5",
+          "textPath": "hutb-2026-guide.txt",
+          "textSha256": "219adaef206a93c0e726a3642bf53c398117c063d253a0cedc97055bf4e957e3",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-extracted-text-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "quotedDate": "截止时间：2026年6月30日（秋季入学）",
+      "englishDate": "Deadline: June 30, 2026 (fall semester admission)",
+      "scope": "Chinese-language nondegree and International Business master explicitly listed in the 2026 bilingual table; three independently scoped award rows.",
+      "unrelatedTranslationIssue": "Applicant age paragraph has English June1,2025 versus Chinese June1,2026. Both application deadline clauses agree on June30,2026. Other eligibility facts are not certified.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-csw-hutb-hunan-provincial-scholarship",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-hunan-university-of-technology-and-business",
+          "name": "Hunan Provincial Scholarship for International Students at HUTB",
+          "programIds": [],
+          "canonicalScholarshipSha256": "67f553b42c5a01ccc836883b7b0f4f883893619ef0721fb14c4788fe6332a990",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "67f553b42c5a01ccc836883b7b0f4f883893619ef0721fb14c4788fe6332a990",
+          "canonicalRowSha256": "67f553b42c5a01ccc836883b7b0f4f883893619ef0721fb14c4788fe6332a990",
+          "canonicalProgramPins": [],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-scholarship-mew-csw-hutb-hunan-provincial-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-csw-hutb-hunan-provincial-scholarship",
+              "canonicalSourceSha256": "3932d46d9e85abb64121f6cb915dbb01e663aa6cbb89924c8d2e1801527f8f4b",
+              "url": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mew-csw-hutb-hunan-provincial-scholarship",
+                "url": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+                "title": "HUTB 2026 International Student Admission Guide",
+                "publisher": "hunan-university-of-technology-and-business",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+          "evidenceBodySha256": "d4321d95b87b1cd3c4f6bc0dd2de3faf02502b27fa82bcce028d3138582013d5",
+          "observedAt": "2026-10-19T06:15:21.022494+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-mew-csw-hutb-hunan-provincial-scholarship"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "award-listing-has-no-independent-application-period",
+          "quotedDate": null,
+          "admissionDeadlineNotBorrowed": "2026-06-30",
+          "admissionDeadlineAppliesToAward": false,
+          "awardScopeQualification": "Named provincial or Belt and Road language award has no independent applicant cutoff in this guide."
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-2-hutb-belt-road-language-scholarship",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-hunan-university-of-technology-and-business",
+          "name": "Hunan Belt and Road Language Student Scholarship at HUTB",
+          "programIds": [
+            "prog-gap-wave8-2-hutb-chinese-language"
+          ],
+          "canonicalScholarshipSha256": "facdd50c811d6c98372d5ad2e14c8a28ebffc18a978aa87d106129a171f88619",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "facdd50c811d6c98372d5ad2e14c8a28ebffc18a978aa87d106129a171f88619",
+          "canonicalRowSha256": "facdd50c811d6c98372d5ad2e14c8a28ebffc18a978aa87d106129a171f88619",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-hutb-chinese-language",
+              "canonicalProgramSha256": "6b0fd34a22d2b8f94d237ae1ad5d11e73d4e0b1e3cf1d1558dd5c09e169b058c"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-scholarship-wave8-2-hutb-belt-road-language-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-2-hutb-belt-road-language-scholarship",
+              "canonicalSourceSha256": "23cbe7498a1d89951fadeee083261bf8098c4f1fb0c1b8352f5b0f652a5472d0",
+              "url": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave8-2-hutb-belt-road-language-scholarship",
+                "url": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+                "title": "HUTB 2026 International Student Enrollment Guide",
+                "publisher": "hunan-university-of-technology-and-business",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+          "evidenceBodySha256": "d4321d95b87b1cd3c4f6bc0dd2de3faf02502b27fa82bcce028d3138582013d5",
+          "observedAt": "2026-10-19T06:15:21.022494+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-wave8-2-hutb-belt-road-language-scholarship"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "award-listing-has-no-independent-application-period",
+          "quotedDate": null,
+          "admissionDeadlineNotBorrowed": "2026-06-30",
+          "admissionDeadlineAppliesToAward": false,
+          "awardScopeQualification": "Named provincial or Belt and Road language award has no independent applicant cutoff in this guide."
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-hutb-international-students-inclusive",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-hunan-university-of-technology-and-business",
+          "name": "HUTB International Students Inclusive Scholarship",
+          "programIds": [
+            "prog-gap-wave8-2-hutb-chinese-language",
+            "prog-gap-wave8-2-hutb-international-business-master"
+          ],
+          "canonicalScholarshipSha256": "535be7d2c0378b481dd3f96775b3750ca5b03b37b9972245c0400cbf96c79f4f",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "535be7d2c0378b481dd3f96775b3750ca5b03b37b9972245c0400cbf96c79f4f",
+          "canonicalRowSha256": "535be7d2c0378b481dd3f96775b3750ca5b03b37b9972245c0400cbf96c79f4f",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-hutb-chinese-language",
+              "canonicalProgramSha256": "6b0fd34a22d2b8f94d237ae1ad5d11e73d4e0b1e3cf1d1558dd5c09e169b058c"
+            },
+            {
+              "programId": "prog-gap-wave8-2-hutb-international-business-master",
+              "canonicalProgramSha256": "91630c956e4aa6c57aa1560fe7c576c1354783c3a6f93fb4d0d3320f537d803e"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "source-hutb-2026-inclusive-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "source-hutb-2026-inclusive-scholarship",
+              "canonicalSourceSha256": "416fccf096c9156c5492d99927cc21e9f5e926e149275b67251afdc54f32c097",
+              "url": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+              "sourceFullRecord": {
+                "id": "source-hutb-2026-inclusive-scholarship",
+                "url": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+                "title": "HUTB 2026 International Student Enrollment Guide — Scholarships",
+                "publisher": "Hunan University of Technology and Business",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+          "evidenceBodySha256": "d4321d95b87b1cd3c4f6bc0dd2de3faf02502b27fa82bcce028d3138582013d5",
+          "observedAt": "2026-10-19T06:15:21.022494+00:00",
+          "evidenceSourceIds": [
+            "source-hutb-2026-inclusive-scholarship"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "award-listing-has-no-independent-application-period",
+          "quotedDate": null,
+          "admissionDeadlineNotBorrowed": "2026-06-30",
+          "admissionDeadlineAppliesToAward": false,
+          "awardScopeQualification": "Performance-based awards for outstanding students already studying at HUTB; not an independently dated freshman award application."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-2-hutb-chinese-language-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-hunan-university-of-technology-and-business",
+          "programId": "prog-gap-wave8-2-hutb-chinese-language",
+          "programName": "Chinese Language Program",
+          "degreeLevel": "language",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "540e7a4f2e398f8da67a35abee1498433d18d9b755403ab7d2824f66440550ba",
+          "canonicalProgramSha256": "6b0fd34a22d2b8f94d237ae1ad5d11e73d4e0b1e3cf1d1558dd5c09e169b058c",
+          "canonicalRecordSha256": "540e7a4f2e398f8da67a35abee1498433d18d9b755403ab7d2824f66440550ba",
+          "canonicalRowSha256": "540e7a4f2e398f8da67a35abee1498433d18d9b755403ab7d2824f66440550ba",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-hutb-chinese-language",
+              "canonicalProgramSha256": "6b0fd34a22d2b8f94d237ae1ad5d11e73d4e0b1e3cf1d1558dd5c09e169b058c"
+            }
+          ],
+          "storedDeadline": "2026-06-30",
+          "sourceIds": [
+            "src-gap-program-wave8-2-hutb-chinese-language"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-2-hutb-chinese-language",
+              "canonicalSourceSha256": "16c00ee857456eb3388761938edfaa5ebea96cb62cce2423d47e42d28ba3c321",
+              "url": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave8-2-hutb-chinese-language",
+                "url": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+                "title": "HUTB 2026 International Student Enrollment Guide",
+                "publisher": "hunan-university-of-technology-and-business",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+          "evidenceBodySha256": "d4321d95b87b1cd3c4f6bc0dd2de3faf02502b27fa82bcce028d3138582013d5",
+          "observedAt": "2026-10-19T06:15:21.022494+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-wave8-2-hutb-chinese-language"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "candidateDeadlineChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "exact-2026-autumn-guide-lists-selected-language-or-international-business-programme",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "截止时间：2026年6月30日（秋季入学）",
+          "exactProgrammeQuote": "汉语言进修",
+          "feeReferenceNotUsedAsYearAnchor": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-2-hutb-international-business-master-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-hunan-university-of-technology-and-business",
+          "programId": "prog-gap-wave8-2-hutb-international-business-master",
+          "programName": "International Business (English-taught Master's Program)",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "08aecb472f53418618ddef0de3712c1c7050b33c7507094cb745af03fe8c0b43",
+          "canonicalProgramSha256": "91630c956e4aa6c57aa1560fe7c576c1354783c3a6f93fb4d0d3320f537d803e",
+          "canonicalRecordSha256": "08aecb472f53418618ddef0de3712c1c7050b33c7507094cb745af03fe8c0b43",
+          "canonicalRowSha256": "08aecb472f53418618ddef0de3712c1c7050b33c7507094cb745af03fe8c0b43",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-hutb-international-business-master",
+              "canonicalProgramSha256": "91630c956e4aa6c57aa1560fe7c576c1354783c3a6f93fb4d0d3320f537d803e"
+            }
+          ],
+          "storedDeadline": "2026-06-30",
+          "sourceIds": [
+            "src-gap-program-wave8-2-hutb-international-business-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-2-hutb-international-business-master",
+              "canonicalSourceSha256": "a6f24ad67d96638fd02ebf2dd11e06c42c8c2f6051281aaab0e282e1dc7cb611",
+              "url": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave8-2-hutb-international-business-master",
+                "url": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+                "title": "HUTB 2026 International Student Enrollment Guide",
+                "publisher": "hunan-university-of-technology-and-business",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://iec.hutb.edu.cn/xwzx/tzgg/content_90133",
+          "evidenceBodySha256": "d4321d95b87b1cd3c4f6bc0dd2de3faf02502b27fa82bcce028d3138582013d5",
+          "observedAt": "2026-10-19T06:15:21.022494+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-wave8-2-hutb-international-business-master"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "candidateDeadlineChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "exact-2026-autumn-guide-lists-selected-language-or-international-business-programme",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "截止时间：2026年6月30日（秋季入学）",
+          "exactProgrammeQuote": "国际商务",
+          "feeReferenceNotUsedAsYearAnchor": true
+        }
+      ]
+    },
+    {
+      "key": "jsu-presidential-scholarship-no-independent-dated-window",
+      "universityId": "uni-jiangsu-university",
+      "evidence": [
+        {
+          "name": "jsu-president",
+          "url": "https://oec.ujs.edu.cn/en/SCHOLARSHIPS/JSU_Presidential_Scholarship.htm",
+          "observedAt": "2026-10-19T06:15:21.607313+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://oec.ujs.edu.cn/en/SCHOLARSHIPS/JSU_Presidential_Scholarship.htm",
+          "contentType": "text/html",
+          "bytes": 29996,
+          "rawPath": "jsu-president.html",
+          "rawSha256": "5601a711343244ca4671befb963d09500cb979235034059e2cedb532362aeb20",
+          "textPath": "jsu-president.txt",
+          "textSha256": "9198b16171a4b97f2543e6840a0a894d4a1f4092d25244a3df1d744172eb8164",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-extracted-text-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "Only exact JSU Presidential Scholarship award; annual renewal, registration and office hours are not new-applicant cutoffs.",
+      "applicationInstruction": "Please download and fill the above application form, upload to the section of Presidential Scholarship Application Form when making online application through admission.ujs.edu.cn",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-jsu-presidential-scholarship",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-jiangsu-university",
+          "name": "Jiangsu University Presidential Scholarship",
+          "programIds": [],
+          "canonicalScholarshipSha256": "8bb2776a895bf814f98b9be0603fb13bcf0a28cff39f67a3085668eb455c0bef",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "8bb2776a895bf814f98b9be0603fb13bcf0a28cff39f67a3085668eb455c0bef",
+          "canonicalRowSha256": "8bb2776a895bf814f98b9be0603fb13bcf0a28cff39f67a3085668eb455c0bef",
+          "canonicalProgramPins": [],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-scholarship-wave8-jsu-presidential-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-jsu-presidential-scholarship",
+              "canonicalSourceSha256": "76bd4d6a415bd5664b213eeac60f1ed4f4e5aaca27196dd31c7efb4664f1bb98",
+              "url": "https://oec.ujs.edu.cn/en/SCHOLARSHIPS/JSU_Presidential_Scholarship.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave8-jsu-presidential-scholarship",
+                "url": "https://oec.ujs.edu.cn/en/SCHOLARSHIPS/JSU_Presidential_Scholarship.htm",
+                "title": "Jiangsu University Presidential Scholarship",
+                "publisher": "jiangsu-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://oec.ujs.edu.cn/en/SCHOLARSHIPS/JSU_Presidential_Scholarship.htm",
+          "evidenceBodySha256": "5601a711343244ca4671befb963d09500cb979235034059e2cedb532362aeb20",
+          "observedAt": "2026-10-19T06:15:21.607313+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-wave8-jsu-presidential-scholarship"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "current-award-page-provides-upload-procedure-but-no-independent-year-specific-deadline",
+          "quotedDate": null,
+          "admissionDeadlineNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "just-six-exact-2026-degree-catalogue-matches-and-two-separate-awards",
+      "universityId": "uni-jiangsu-university-of-science-and-technology",
+      "evidence": [
+        {
+          "name": "just-2026-guide",
+          "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+          "observedAt": "2026-10-19T06:15:24.124123+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+          "contentType": "text/html",
+          "bytes": 84572,
+          "rawPath": "just-2026-guide.html",
+          "rawSha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+          "textPath": "just-2026-guide.txt",
+          "textSha256": "a3ef83b2d77d9f891673a1d966a25f0ffc6610c8ebc3e83bafab6165b38b9dc6",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-extracted-text-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "quotedDate": "April 10, 2026 to June 10, 2026.",
+      "scope": "Six exact programmes with degree-level matches in the 2026 table. Provincial and university scholarships retain their independent undated status.",
+      "degreeBinding": "First two selected programmes are Bachelor table rows, Energy and Power / MBA / Naval Architecture and Ocean Engineering are Master rows, Management Science and Engineering is a PhD row. MBA and Management Science are marked bilingual with HSK preferred; no independent language eligibility certification.",
+      "applicantVsInstitutionDates": "Admission documents will be sent before August 15, 2026.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-local-strong-just-university-scholarship",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-jiangsu-university-of-science-and-technology",
+          "name": "JUST Scholarship for International Students",
+          "programIds": [],
+          "canonicalScholarshipSha256": "0bbd8699755332022348a0764c8963813be1e49885e6202792e7093424f94c4f",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "0bbd8699755332022348a0764c8963813be1e49885e6202792e7093424f94c4f",
+          "canonicalRowSha256": "0bbd8699755332022348a0764c8963813be1e49885e6202792e7093424f94c4f",
+          "canonicalProgramPins": [],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-scholarship-local-strong-just-university-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-local-strong-just-university-scholarship",
+              "canonicalSourceSha256": "4491d311ebae9f4057e72199fbcf442b7d06ee9e7bd65c198b905f1b4da71c8b",
+              "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-local-strong-just-university-scholarship",
+                "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+                "title": "JUST 2026 International Admission Guide",
+                "publisher": "jiangsu-university-of-science-and-technology",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+          "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+          "observedAt": "2026-10-19T06:15:24.124123+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-local-strong-just-university-scholarship"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "university-scholarship-listing-and-registered-student-excellence-have-no-independent-application-date",
+          "quotedDate": null,
+          "admissionDeadlineNotBorrowed": "2026-06-10",
+          "admissionDeadlineAppliesToAward": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-jzh-just-jiangsu-provincial",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-jiangsu-university-of-science-and-technology",
+          "name": "Jiangsu Provincial Scholarship at JUST",
+          "programIds": [
+            "prog-gap-mve-jzh-just-naval-architecture-master",
+            "prog-gap-mve-jzh-just-energy-power-master",
+            "prog-gap-mve-jzh-just-mba-master",
+            "prog-gap-mve-jzh-just-management-science-doctorate"
+          ],
+          "canonicalScholarshipSha256": "0d55f9286b8d0dd930f1a77404e1619a4a847769df27efe4249e1824d5253528",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "0d55f9286b8d0dd930f1a77404e1619a4a847769df27efe4249e1824d5253528",
+          "canonicalRowSha256": "0d55f9286b8d0dd930f1a77404e1619a4a847769df27efe4249e1824d5253528",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-just-naval-architecture-master",
+              "canonicalProgramSha256": "84dc4dd5aee0cf077bf08506e01304da948ec742a77e2440ace00410d4c86328"
+            },
+            {
+              "programId": "prog-gap-mve-jzh-just-energy-power-master",
+              "canonicalProgramSha256": "107666864d88832244a47ef860bc16aaeda41efd76486df15c5ac35bc6da8bee"
+            },
+            {
+              "programId": "prog-gap-mve-jzh-just-mba-master",
+              "canonicalProgramSha256": "4117e1b7042c83c5ca2f7d7946077abeaae17130d5572d09a9a81b45cab8ecf5"
+            },
+            {
+              "programId": "prog-gap-mve-jzh-just-management-science-doctorate",
+              "canonicalProgramSha256": "d8fbd81de4099f7070115725fcafa331d7a6b06df795eb46c0022a623e0da247"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-scholarship-mve-jzh-just-jiangsu-provincial"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-jzh-just-jiangsu-provincial",
+              "canonicalSourceSha256": "dc44374e5f6ab3cc3cb44d606786e79357de2b3bcf9baf41de639eb276749331",
+              "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mve-jzh-just-jiangsu-provincial",
+                "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+                "title": "JUST 2026 Enrollment Guideline for International Students",
+                "publisher": "jiangsu-university-of-science-and-technology",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+          "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+          "observedAt": "2026-10-19T06:15:24.124123+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-mve-jzh-just-jiangsu-provincial"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "provincial-award-managed-externally-no-independent-award-date-in-current-guide",
+          "quotedDate": null,
+          "admissionDeadlineNotBorrowed": "2026-06-10",
+          "admissionDeadlineAppliesToAward": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-just-b-business-administration-en-2026-2027-other",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-jiangsu-university-of-science-and-technology",
+          "programId": "prog-gap-local-strong-just-b-business-administration-en",
+          "programName": "Business Administration",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "017d304629a16421c59e08138a8bd8b5c98954d5c2382948bd89c2df510717fe",
+          "canonicalProgramSha256": "99951e1f97d35ca4c0bab2c6f61095293311e13a489ef88fe5d4b8291704c803",
+          "canonicalRecordSha256": "017d304629a16421c59e08138a8bd8b5c98954d5c2382948bd89c2df510717fe",
+          "canonicalRowSha256": "017d304629a16421c59e08138a8bd8b5c98954d5c2382948bd89c2df510717fe",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-just-b-business-administration-en",
+              "canonicalProgramSha256": "99951e1f97d35ca4c0bab2c6f61095293311e13a489ef88fe5d4b8291704c803"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-local-strong-just-b-business-administration-en"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-just-b-business-administration-en",
+              "canonicalSourceSha256": "b33c00cb77c08796c6ff0a7c7e1b6bee788cc3512240c983517cef6ceb7f6512",
+              "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-strong-just-b-business-administration-en",
+                "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+                "title": "JUST 2026 International Admission Guide",
+                "publisher": "jiangsu-university-of-science-and-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+          "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+          "observedAt": "2026-10-19T06:15:24.124123+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-local-strong-just-b-business-administration-en"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-04-10",
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-06-10",
+          "candidateOfficialDeadline": "2026-06-10",
+          "candidateDeadlineChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "canonicalDeadlineAssessed": false,
+          "reason": "2026-applicant-period-plus-exact-programme-and-degree-table-match",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "April 10, 2026 to June 10, 2026.",
+          "exactProgrammeQuote": "Bachelor of Business Administration (BBA)",
+          "catalogueDegreeBinding": "bachelor",
+          "feeReferenceNotUsedAsYearAnchor": true,
+          "mailingAndInstitutionReviewDatesNotBorrowed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-just-b-computer-science-en-2026-2027-other",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-jiangsu-university-of-science-and-technology",
+          "programId": "prog-gap-local-strong-just-b-computer-science-en",
+          "programName": "Computer Science and Technology",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "af56c11ad94bfe659be517d30ae934300c34878da4ada9d244402e0893721eef",
+          "canonicalProgramSha256": "a45cddb2f4a56ef2161281506a993f6149dbb08c00ac0d2422141d908a599d0c",
+          "canonicalRecordSha256": "af56c11ad94bfe659be517d30ae934300c34878da4ada9d244402e0893721eef",
+          "canonicalRowSha256": "af56c11ad94bfe659be517d30ae934300c34878da4ada9d244402e0893721eef",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-just-b-computer-science-en",
+              "canonicalProgramSha256": "a45cddb2f4a56ef2161281506a993f6149dbb08c00ac0d2422141d908a599d0c"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-local-strong-just-b-computer-science-en"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-just-b-computer-science-en",
+              "canonicalSourceSha256": "b972500031870fcadf61861aab8fdbb3ed9880ca8842451108d72ed7daaecc5b",
+              "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-strong-just-b-computer-science-en",
+                "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+                "title": "JUST 2026 International Admission Guide",
+                "publisher": "jiangsu-university-of-science-and-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+          "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+          "observedAt": "2026-10-19T06:15:24.124123+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-local-strong-just-b-computer-science-en"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-04-10",
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-06-10",
+          "candidateOfficialDeadline": "2026-06-10",
+          "candidateDeadlineChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "canonicalDeadlineAssessed": false,
+          "reason": "2026-applicant-period-plus-exact-programme-and-degree-table-match",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "April 10, 2026 to June 10, 2026.",
+          "exactProgrammeQuote": "Computer Science and Technology",
+          "catalogueDegreeBinding": "bachelor",
+          "feeReferenceNotUsedAsYearAnchor": true,
+          "mailingAndInstitutionReviewDatesNotBorrowed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-jzh-just-energy-power-master-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-jiangsu-university-of-science-and-technology",
+          "programId": "prog-gap-mve-jzh-just-energy-power-master",
+          "programName": "Energy and Power",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "dbd5e511671b75c8b8fb2fba54ba85f2c9e7a1fe16b83ba5af0afb6d683c2b7c",
+          "canonicalProgramSha256": "107666864d88832244a47ef860bc16aaeda41efd76486df15c5ac35bc6da8bee",
+          "canonicalRecordSha256": "dbd5e511671b75c8b8fb2fba54ba85f2c9e7a1fe16b83ba5af0afb6d683c2b7c",
+          "canonicalRowSha256": "dbd5e511671b75c8b8fb2fba54ba85f2c9e7a1fe16b83ba5af0afb6d683c2b7c",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-just-energy-power-master",
+              "canonicalProgramSha256": "107666864d88832244a47ef860bc16aaeda41efd76486df15c5ac35bc6da8bee"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-mve-jzh-just-energy-power-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-jzh-just-energy-power-master",
+              "canonicalSourceSha256": "6f397fa70a9200368a5f7fb9508fead86274bf9a01cc1048483ba8bfb6d12eb3",
+              "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mve-jzh-just-energy-power-master",
+                "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+                "title": "JUST 2026 Enrollment Guideline for International Students",
+                "publisher": "jiangsu-university-of-science-and-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+          "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+          "observedAt": "2026-10-19T06:15:24.124123+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-mve-jzh-just-energy-power-master"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-04-10",
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-06-10",
+          "candidateOfficialDeadline": "2026-06-10",
+          "candidateDeadlineChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "canonicalDeadlineAssessed": false,
+          "reason": "2026-applicant-period-plus-exact-programme-and-degree-table-match",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "April 10, 2026 to June 10, 2026.",
+          "exactProgrammeQuote": "Energy and Power",
+          "catalogueDegreeBinding": "master",
+          "feeReferenceNotUsedAsYearAnchor": true,
+          "mailingAndInstitutionReviewDatesNotBorrowed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-jzh-just-management-science-doctorate-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-jiangsu-university-of-science-and-technology",
+          "programId": "prog-gap-mve-jzh-just-management-science-doctorate",
+          "programName": "Management Science and Engineering",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "01979e1942fc224ded2f87060742ed489e1dc28a8dac4c410c3813061de5a253",
+          "canonicalProgramSha256": "d8fbd81de4099f7070115725fcafa331d7a6b06df795eb46c0022a623e0da247",
+          "canonicalRecordSha256": "01979e1942fc224ded2f87060742ed489e1dc28a8dac4c410c3813061de5a253",
+          "canonicalRowSha256": "01979e1942fc224ded2f87060742ed489e1dc28a8dac4c410c3813061de5a253",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-just-management-science-doctorate",
+              "canonicalProgramSha256": "d8fbd81de4099f7070115725fcafa331d7a6b06df795eb46c0022a623e0da247"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-mve-jzh-just-management-science-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-jzh-just-management-science-doctorate",
+              "canonicalSourceSha256": "a3ae07fec770907c1a332493c971afd2b9175d37c5a18768ba25ffda632de40b",
+              "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mve-jzh-just-management-science-doctorate",
+                "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+                "title": "JUST 2026 Enrollment Guideline for International Students",
+                "publisher": "jiangsu-university-of-science-and-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+          "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+          "observedAt": "2026-10-19T06:15:24.124123+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-mve-jzh-just-management-science-doctorate"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-04-10",
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-06-10",
+          "candidateOfficialDeadline": "2026-06-10",
+          "candidateDeadlineChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "canonicalDeadlineAssessed": false,
+          "reason": "2026-applicant-period-plus-exact-programme-and-degree-table-match",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "April 10, 2026 to June 10, 2026.",
+          "exactProgrammeQuote": "Management Science and Engineering",
+          "catalogueDegreeBinding": "doctorate",
+          "feeReferenceNotUsedAsYearAnchor": true,
+          "mailingAndInstitutionReviewDatesNotBorrowed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-jzh-just-mba-master-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-jiangsu-university-of-science-and-technology",
+          "programId": "prog-gap-mve-jzh-just-mba-master",
+          "programName": "Master of Business Administration",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "31bbc16d072fa0e9abb36ca0c44b440890146e88f5bc2bdcd89af2632f19501a",
+          "canonicalProgramSha256": "4117e1b7042c83c5ca2f7d7946077abeaae17130d5572d09a9a81b45cab8ecf5",
+          "canonicalRecordSha256": "31bbc16d072fa0e9abb36ca0c44b440890146e88f5bc2bdcd89af2632f19501a",
+          "canonicalRowSha256": "31bbc16d072fa0e9abb36ca0c44b440890146e88f5bc2bdcd89af2632f19501a",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-just-mba-master",
+              "canonicalProgramSha256": "4117e1b7042c83c5ca2f7d7946077abeaae17130d5572d09a9a81b45cab8ecf5"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-mve-jzh-just-mba-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-jzh-just-mba-master",
+              "canonicalSourceSha256": "751543aea67902b8378d1e20c26e50ced77f8dcb93002730f11c98916424da74",
+              "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mve-jzh-just-mba-master",
+                "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+                "title": "JUST 2026 Enrollment Guideline for International Students",
+                "publisher": "jiangsu-university-of-science-and-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+          "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+          "observedAt": "2026-10-19T06:15:24.124123+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-mve-jzh-just-mba-master"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-04-10",
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-06-10",
+          "candidateOfficialDeadline": "2026-06-10",
+          "candidateDeadlineChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "canonicalDeadlineAssessed": false,
+          "reason": "2026-applicant-period-plus-exact-programme-and-degree-table-match",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "April 10, 2026 to June 10, 2026.",
+          "exactProgrammeQuote": "Master of Business Administration (MBA)",
+          "catalogueDegreeBinding": "master",
+          "feeReferenceNotUsedAsYearAnchor": true,
+          "mailingAndInstitutionReviewDatesNotBorrowed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-jzh-just-naval-architecture-master-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-jiangsu-university-of-science-and-technology",
+          "programId": "prog-gap-mve-jzh-just-naval-architecture-master",
+          "programName": "Naval Architecture and Ocean Engineering",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "82b10a2996026feacbcf4045660e5888f138c589e43a24de38fa76b0d6791bab",
+          "canonicalProgramSha256": "84dc4dd5aee0cf077bf08506e01304da948ec742a77e2440ace00410d4c86328",
+          "canonicalRecordSha256": "82b10a2996026feacbcf4045660e5888f138c589e43a24de38fa76b0d6791bab",
+          "canonicalRowSha256": "82b10a2996026feacbcf4045660e5888f138c589e43a24de38fa76b0d6791bab",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-just-naval-architecture-master",
+              "canonicalProgramSha256": "84dc4dd5aee0cf077bf08506e01304da948ec742a77e2440ace00410d4c86328"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-program-mve-jzh-just-naval-architecture-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-jzh-just-naval-architecture-master",
+              "canonicalSourceSha256": "14adb03b2c1b4d7e8285df87688b232734fe94ac86e8330c2b41a8d33c76f494",
+              "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mve-jzh-just-naval-architecture-master",
+                "url": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+                "title": "JUST 2026 Enrollment Guideline for International Students",
+                "publisher": "jiangsu-university-of-science-and-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://admission.just.edu.cn/admissionen/2026/0409/c10152a372095/page.htm",
+          "evidenceBodySha256": "44eec966f49695c778106d317315e371265d8c78833a9d29d5ce5e9ac02288ec",
+          "observedAt": "2026-10-19T06:15:24.124123+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-mve-jzh-just-naval-architecture-master"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-04-10",
+          "openingDateAssessed": false,
+          "result": "closed",
+          "officialDeadline": "2026-06-10",
+          "candidateOfficialDeadline": "2026-06-10",
+          "candidateDeadlineChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "canonicalDeadlineAssessed": false,
+          "reason": "2026-applicant-period-plus-exact-programme-and-degree-table-match",
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "exactCutoffAt": null,
+          "closureScope": "Only the explicitly matched applicant year and route are past; no programme discontinuation or closure of other routes is inferred.",
+          "quotedDate": "April 10, 2026 to June 10, 2026.",
+          "exactProgrammeQuote": "Naval Architecture and Ocean Engineering",
+          "catalogueDegreeBinding": "master",
+          "feeReferenceNotUsedAsYearAnchor": true,
+          "mailingAndInstitutionReviewDatesNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "jxnu-2026-iclt-september-deadline-and-undated-march2027-route",
+      "universityId": "uni-jiangxi-normal-university",
+      "evidence": [
+        {
+          "name": "jxnu-2026-iclt",
+          "url": "https://laihua.jxnu.edu.cn/2026/0313/c5944a290528/page.htm",
+          "observedAt": "2026-10-19T06:15:24.791460+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://laihua.jxnu.edu.cn/2026/0313/c5944a290528/page.htm",
+          "contentType": "text/html",
+          "bytes": 21652,
+          "rawPath": "jxnu-2026-iclt.html",
+          "rawSha256": "89c37024e23ec43c79fe3be51061463681b8eb636ae9a872a9b46f051a767192",
+          "textPath": "jxnu-2026-iclt.txt",
+          "textSha256": "650b453ddfd0025c87e098d473ff1132905bc5f14789f18e255aeec658676bb6",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-extracted-text-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "jxnu-2026-iclt-original",
+          "url": "https://laihua.jxnu.edu.cn/_upload/article/files/a7/45/bf7d0b9e4322b89bc8781f2065b2/1aa93a0b-61e9-46f5-9588-1e8a15aead47.pdf",
+          "observedAt": "2026-10-19T06:40:23.548202+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://laihua.jxnu.edu.cn/_upload/article/files/a7/45/bf7d0b9e4322b89bc8781f2065b2/1aa93a0b-61e9-46f5-9588-1e8a15aead47.pdf",
+          "contentType": "application/pdf",
+          "bytes": 465658,
+          "rawPath": "jxnu-2026-iclt-original.pdf",
+          "rawSha256": "e1cc43259f46d13f28a850c72497a172fea34e12cf17cffa4645dc991d41aced",
+          "pageCount": 10,
+          "textPath": "jxnu-2026-iclt-original.txt",
+          "textSha256": "b2bdae2da7afe046debb562faf9790d31b6c36e8dd4468eb76b4a53157232a62",
+          "captureSucceeded": true,
+          "readScope": "complete-captured-extracted-text-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "navigationProvenance": "Registered official wrapper embeds wp_pdf_player pdfsrc; exact PDF original captured and all ten pages extracted. Wrapper HTTP200 alone is not treated as full-guide verification.",
+      "scope": "Whole award row covers the 2026 ICLT scheme; same original also offers a March2027 one-semester intake whose deadline is not stated. September-only closure is kept as scoped evidence, not the entire award deadline.",
+      "visualEvidence": [
+        {
+          "path": "jxnu-date-04.png",
+          "sha256": "9a2761cb90b3d624b85049bc37c6185ec0fdbfeed8cf7828ab4866c4941f3dcb"
+        },
+        {
+          "path": "jxnu-date-05.png",
+          "sha256": "2cbbcf1e2df24ae8b0a132745431fdc78492c2a9608c9a00707dc18ef2402e5f"
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecs-jxnu-iclt-scholarship-2026",
+          "selectionOrigin": "baseQueue15",
+          "universityId": "uni-jiangxi-normal-university",
+          "name": "JXNU 2026 International Chinese Language Teachers Scholarship",
+          "programIds": [
+            "prog-gap-mve-ecs-jxnu-iclt-bachelor",
+            "prog-gap-mve-ecs-jxnu-iclt-master"
+          ],
+          "canonicalScholarshipSha256": "b0f03a1d47a95e5839816411ce71eddeec0bb6d7bfe04eafdd3fa256c07e7ef3",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "b0f03a1d47a95e5839816411ce71eddeec0bb6d7bfe04eafdd3fa256c07e7ef3",
+          "canonicalRowSha256": "b0f03a1d47a95e5839816411ce71eddeec0bb6d7bfe04eafdd3fa256c07e7ef3",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecs-jxnu-iclt-bachelor",
+              "canonicalProgramSha256": "b84056d230086918475299440114f656ddb9d1bdf640b96509e8ef56ec3800ac"
+            },
+            {
+              "programId": "prog-gap-mve-ecs-jxnu-iclt-master",
+              "canonicalProgramSha256": "60558ab9911dd13d213364fabc71e204f2a8ff37d973f377cbf59d3d0b40f861"
+            }
+          ],
+          "storedDeadline": null,
+          "sourceIds": [
+            "src-gap-scholarship-mve-ecs-jxnu-iclt-scholarship-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecs-jxnu-iclt-scholarship-2026",
+              "canonicalSourceSha256": "168839f49443152426f816339e3163857181995733aa00fd4cd63334d874780e",
+              "url": "https://laihua.jxnu.edu.cn/2026/0313/c5944a290528/page.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mve-ecs-jxnu-iclt-scholarship-2026",
+                "url": "https://laihua.jxnu.edu.cn/2026/0313/c5944a290528/page.htm",
+                "title": "JXNU 2026 International Chinese Language Teachers Scholarship Application Guide",
+                "publisher": "jiangxi-normal-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-04"
+              }
+            }
+          ],
+          "evidenceSourceUrl": "https://laihua.jxnu.edu.cn/_upload/article/files/a7/45/bf7d0b9e4322b89bc8781f2065b2/1aa93a0b-61e9-46f5-9588-1e8a15aead47.pdf",
+          "evidenceBodySha256": "e1cc43259f46d13f28a850c72497a172fea34e12cf17cffa4645dc991d41aced",
+          "observedAt": "2026-10-19T06:40:23.548202+00:00",
+          "evidenceSourceIds": [],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-03-01",
+          "openingDateAssessed": false,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "canonicalDeadlineAssessed": false,
+          "reason": "wide-award-includes-september2026-and-march2027-routes-but-publishes-only-september-applicant-cutoff",
+          "quotedDate": "2026 年 5 月 15 日（2026 年 9 月入学）",
+          "openingQuote": "2026 年 3 月 1 日起",
+          "candidateScopedWindows": [
+            {
+              "route": "2026 September intake only",
+              "applicantDeadline": "2026-05-15",
+              "timeZone": "Asia/Shanghai",
+              "exactCutoffAt": null,
+              "result": "closed",
+              "quotedDate": "2026 年 5 月 15 日（2026 年 9 月入学）",
+              "deadlineBoundary": "date-only-no-clock-time-stated"
+            },
+            {
+              "route": "2027 March one-semester intake",
+              "applicantDeadline": null,
+              "result": "unknown",
+              "intakeQuote": "2026 年 9 月、2027 年 3 月入学，资助期限为 5 个月。"
+            }
+          ],
+          "noWholeAwardDeadlineInferred": true,
+          "institutionReviewNotApplicantDeadline": "Review about three months before enrollment is an institutional stage, not a student application cutoff."
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "exactBase15AndAdditional7IdsCoveredOnce": true,
+    "fullCanonicalCycleRowPins": 13,
+    "fullCanonicalProgramRowPinsForCycles": 13,
+    "fullCanonicalAwardRowPins": 9,
+    "fullCanonicalSourceRowsPinned": true,
+    "quotedDateFragmentsMatchedAfterWhitespaceNormalization": true,
+    "rawAndTextBytesHashVerified": true,
+    "selectedPdfDateProgrammeAndScopePagesRenderedAndVisuallyRead": true,
+    "canonicalSixFilesUnchangedBeforeAfter": true
+  }
+}

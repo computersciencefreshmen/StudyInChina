@@ -1,0 +1,1446 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-036-20261019",
+  "createdAt": "2026-10-19T12:19:41.875Z",
+  "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "statePath": "quality/recovery-20261018/continuation-state.json",
+  "stateSha256": "a72609693d501d944f5df8dad7c03240d8baea9bedae402c0b292c381a1c3fe0",
+  "summaryPath": "quality/deadline-sweep-20261019/official-review-summary-v11.json",
+  "summarySha256": "80040f1d93db778190728439025c143137f7b1779a15f83f3b5a1fe294f22ab5",
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v9.json",
+  "queueSha256": "392e1553863bc090a8b7e536136cfc0887d367915eddc10b3a0673179451d853",
+  "inventoryPath": "quality/deadline-sweep-20261019/catalog-deadlines.json",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "selectedUniversityIds": [
+    "uni-university-of-jinan",
+    "uni-university-of-science-and-technology-of-china",
+    "uni-wenzhou-medical-university",
+    "uni-wenzhou-university",
+    "uni-wuhan-textile-university",
+    "uni-wuhan-university"
+  ],
+  "queueUniversityIndexRange": [
+    14,
+    19
+  ],
+  "baseQueueRecordIds": [
+    "cycle-gap-prog-ujn-chinese-language-culture-2026-2027-other-fee-reference",
+    "sch-gap-wave8-ustc-youth-excellence-full-scholarship",
+    "cycle-gap-wave8-ustc-scientific-management-leaders-mba-2026-2027-autumn",
+    "cycle-2026-wenzhou-medical-university-bds-autumn",
+    "cycle-2026-wenzhou-medical-university-mbbs-autumn",
+    "cycle-2026-wenzhou-medical-university-pharmaceutical-sciences-autumn",
+    "scholarship-wenzhou-medical-university-undergraduate-freshman",
+    "cycle-wzu-china-link-2026-2027",
+    "scholarship-wzu-china-link-2026-2027",
+    "scholarship-wtu-hubei-provincial-international-students",
+    "scholarship-wtu-university-international-students",
+    "scholarship-wuhan-university-international-student",
+    "scholarship-hubei-provincial-international-student"
+  ],
+  "additionalSameSourceRecordIds": [],
+  "selectedRecordIds": [
+    "cycle-gap-prog-ujn-chinese-language-culture-2026-2027-other-fee-reference",
+    "sch-gap-wave8-ustc-youth-excellence-full-scholarship",
+    "cycle-gap-wave8-ustc-scientific-management-leaders-mba-2026-2027-autumn",
+    "cycle-2026-wenzhou-medical-university-bds-autumn",
+    "cycle-2026-wenzhou-medical-university-mbbs-autumn",
+    "cycle-2026-wenzhou-medical-university-pharmaceutical-sciences-autumn",
+    "scholarship-wenzhou-medical-university-undergraduate-freshman",
+    "cycle-wzu-china-link-2026-2027",
+    "scholarship-wzu-china-link-2026-2027",
+    "scholarship-wtu-hubei-provincial-international-students",
+    "scholarship-wtu-university-international-students",
+    "scholarship-wuhan-university-international-student",
+    "scholarship-hubei-provincial-international-student"
+  ],
+  "records": [
+    {
+      "recordId": "cycle-gap-prog-ujn-chinese-language-culture-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-university-of-jinan",
+      "canonicalRecordSha256": "0fdde77998442fe6afb4ff2cc134e795502b753443b29c50b0a09da7e13af85f",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-ujn-chinese-language-culture"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-prog-ujn-chinese-language-culture-2026-2027-other-fee-reference",
+        "programId": "prog-gap-prog-ujn-chinese-language-culture",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 14000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-ujn-chinese-language-culture"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-prog-ujn-chinese-language-culture",
+        "slug": "gap-prog-ujn-chinese-language-culture-language",
+        "universityId": "uni-university-of-jinan",
+        "name": {
+          "en": "Chinese Language and Culture Program",
+          "zh": "汉语语言文化项目",
+          "ru": "Программа китайского языка и культуры"
+        },
+        "degreeLevel": "language",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 6,
+        "durationMonthsMax": 12,
+        "programUrl": "https://isao.ujn.edu.cn/English/PROGRAMS/Chinese_Language_and_Culture_Programs.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "926f4d04680bbd01baf26f8388b8161b03cb094c73b9fa88c62069e62b7fa921",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-ujn-chinese-language-culture"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-prog-ujn-chinese-language-culture",
+            "slug": "gap-prog-ujn-chinese-language-culture-language",
+            "universityId": "uni-university-of-jinan",
+            "name": {
+              "en": "Chinese Language and Culture Program",
+              "zh": "汉语语言文化项目",
+              "ru": "Программа китайского языка и культуры"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 6,
+            "durationMonthsMax": 12,
+            "programUrl": "https://isao.ujn.edu.cn/English/PROGRAMS/Chinese_Language_and_Culture_Programs.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "926f4d04680bbd01baf26f8388b8161b03cb094c73b9fa88c62069e62b7fa921"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-ujn-chinese-language-culture",
+            "url": "https://isao.ujn.edu.cn/English/PROGRAMS/Chinese_Language_and_Culture_Programs.htm",
+            "title": "Chinese Language and Culture Programs",
+            "publisher": "university-of-jinan",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "d39df23a80b990a37497b0dc40d4e75a6b599997bbebec6790c2c232a702bf45"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-wave8-ustc-youth-excellence-full-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-university-of-science-and-technology-of-china",
+      "canonicalRecordSha256": "6bf3ac9c81f4f57736607596c25a22f2d960aa2712093d21f9334bb622e03ecf",
+      "row": {
+        "id": "sch-gap-wave8-ustc-youth-excellence-full-scholarship",
+        "slug": "gap-wave8-ustc-youth-excellence-full-scholarship",
+        "name": {
+          "en": "USTC Youth of Excellence Scheme Full Scholarship",
+          "zh": "中国科大青年卓越计划全额奖学金",
+          "ru": "Полная стипендия USTC Youth of Excellence Scheme"
+        },
+        "providerType": "other",
+        "universityIds": [
+          "uni-university-of-science-and-technology-of-china"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://ic.ustc.edu.cn/en/v7list.php?id=646",
+        "summary": {
+          "en": "USTC confirms a full scholarship for the designated Scientific Management Leaders MBA. The 2026 university and CSC stages are closed; no later cycle is inferred.",
+          "zh": "中国科大官方确认“科学管理领军人才”MBA配套全额奖学金；2026校内及CSC申请阶段均已结束，不推定下一周期。",
+          "ru": "USTC подтверждает полную стипендию для MBA «Лидеры научного управления»; этапы университета и CSC 2026 года закрыты, следующий цикл не предполагается."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave8-ustc-youth-excellence-full-scholarship"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-ustc-youth-excellence-full-scholarship",
+            "url": "https://ic.ustc.edu.cn/en/v7list.php?id=646",
+            "title": "USTC 2026 Youth of Excellence Scheme of China Program",
+            "publisher": "university-of-science-and-technology-of-china",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "4b2d2a95c2fd2c67701f08cd8f210495332d59015d94dd699808757a8c3905fa"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-wave8-ustc-scientific-management-leaders-mba-2026-2027-autumn",
+      "collection": "admissionCycles",
+      "universityId": "uni-university-of-science-and-technology-of-china",
+      "canonicalRecordSha256": "326d42548052dfd176efe666b9507f53b3182f32f9d13bee360e0dd784d71d5a",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave8-ustc-scientific-management-leaders-mba"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-wave8-ustc-scientific-management-leaders-mba-2026-2027-autumn",
+        "programId": "prog-gap-wave8-ustc-scientific-management-leaders-mba",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-02-15",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "USTC officially offers this English-taught MBA to eligible non-Chinese professionals through a two-year 1+1 model. The university-stage deadline of 15 February 2026 is closed; the program carries a full scholarship.",
+          "zh": "中国科学技术大学官方面向符合条件的非中国籍职业人士开设该英文MBA，采用两年“1+1”培养模式；校内申请截止2026年2月15日，现已关闭，并配套全额奖学金。",
+          "ru": "USTC официально предлагает эту англоязычную MBA-программу подходящим иностранным специалистам по двухлетней модели 1+1; срок университета 15 февраля 2026 года закрыт, предусмотрена полная стипендия."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave8-ustc-scientific-management-leaders-mba"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-wave8-ustc-scientific-management-leaders-mba",
+        "slug": "gap-wave8-ustc-scientific-management-leaders-mba-master",
+        "universityId": "uni-university-of-science-and-technology-of-china",
+        "name": {
+          "en": "Scientific Management Leaders MBA (Youth of Excellence Scheme)",
+          "zh": "科学管理领军人才MBA（青年卓越计划）",
+          "ru": "MBA «Лидеры научного управления» (Youth of Excellence Scheme)"
+        },
+        "degreeLevel": "master",
+        "discipline": "business",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 24,
+        "programUrl": "https://ic.ustc.edu.cn/en/v7list.php?id=646",
+        "applyUrl": "https://ic.ustc.edu.cn/en/v7list.php?id=646",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "d33b27b5783cfa52cc9bd808333a7b2befa86d0984ce683f9fc48c314b6221e7",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-ustc-scientific-management-leaders-mba"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-ustc-scientific-management-leaders-mba",
+            "slug": "gap-wave8-ustc-scientific-management-leaders-mba-master",
+            "universityId": "uni-university-of-science-and-technology-of-china",
+            "name": {
+              "en": "Scientific Management Leaders MBA (Youth of Excellence Scheme)",
+              "zh": "科学管理领军人才MBA（青年卓越计划）",
+              "ru": "MBA «Лидеры научного управления» (Youth of Excellence Scheme)"
+            },
+            "degreeLevel": "master",
+            "discipline": "business",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 24,
+            "programUrl": "https://ic.ustc.edu.cn/en/v7list.php?id=646",
+            "applyUrl": "https://ic.ustc.edu.cn/en/v7list.php?id=646",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "d33b27b5783cfa52cc9bd808333a7b2befa86d0984ce683f9fc48c314b6221e7"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave8-ustc-scientific-management-leaders-mba",
+            "url": "https://ic.ustc.edu.cn/en/v7list.php?id=646",
+            "title": "USTC 2026 Youth of Excellence Scheme of China Program",
+            "publisher": "university-of-science-and-technology-of-china",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "7754f1cf8cdd184213a594ef7de6b56a78c98a8d8bed4920f43f12321079eb99"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-2026-wenzhou-medical-university-bds-autumn",
+      "collection": "admissionCycles",
+      "universityId": "uni-wenzhou-medical-university",
+      "canonicalRecordSha256": "3680cfda8c6251759dda2e6b6467e1c69b06bdcbf71dae66fe1265e69c69acb9",
+      "row": {
+        "sourceIds": [
+          "src-wmu-undergraduate-admission"
+        ],
+        "verifiedAt": "2026-07-28",
+        "reviewAfter": "2026-08-04",
+        "status": "stale",
+        "id": "cycle-2026-wenzhou-medical-university-bds-autumn",
+        "programId": "program-wenzhou-medical-university-bds-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 33000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "recurring-official-rule",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-wmu-undergraduate-admission"
+        ],
+        "verifiedAt": "2026-07-28",
+        "reviewAfter": "2026-08-27",
+        "status": "stale",
+        "id": "program-wenzhou-medical-university-bds-bachelor",
+        "slug": "wenzhou-medical-university-bds-bachelor",
+        "universityId": "uni-wenzhou-medical-university",
+        "name": {
+          "en": "Bachelor of Dental Surgery (BDS)",
+          "zh": "口腔医学（BDS）",
+          "ru": "Бакалавр стоматологической хирургии (BDS)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 60,
+        "programUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+        "applyUrl": "https://wmu.at0086.cn/student",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "d3e5295b782aa674c7f0ba0fcc1f05e11f2b3a0971f60a5901eed0e4a0e40d67",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-wmu-undergraduate-admission"
+            ],
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27",
+            "status": "stale",
+            "id": "program-wenzhou-medical-university-bds-bachelor",
+            "slug": "wenzhou-medical-university-bds-bachelor",
+            "universityId": "uni-wenzhou-medical-university",
+            "name": {
+              "en": "Bachelor of Dental Surgery (BDS)",
+              "zh": "口腔医学（BDS）",
+              "ru": "Бакалавр стоматологической хирургии (BDS)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "medicine",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 60,
+            "programUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+            "applyUrl": "https://wmu.at0086.cn/student",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "d3e5295b782aa674c7f0ba0fcc1f05e11f2b3a0971f60a5901eed0e4a0e40d67"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-wmu-undergraduate-admission",
+            "url": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+            "title": "Admission Brochure",
+            "publisher": "Wenzhou Medical University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-28"
+          },
+          "sha256": "0ac02062b6fa73279f64924b0dd6ab06caafff462d44bb8cf448f51c939fba61"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-2026-wenzhou-medical-university-mbbs-autumn",
+      "collection": "admissionCycles",
+      "universityId": "uni-wenzhou-medical-university",
+      "canonicalRecordSha256": "dc100300e343cfc108a630ba43b2a5415da43893cfdc3b1005e09d6fca6843cd",
+      "row": {
+        "sourceIds": [
+          "src-wmu-undergraduate-admission"
+        ],
+        "verifiedAt": "2026-07-28",
+        "reviewAfter": "2026-08-04",
+        "status": "stale",
+        "id": "cycle-2026-wenzhou-medical-university-mbbs-autumn",
+        "programId": "program-wenzhou-medical-university-mbbs-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 33000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "recurring-official-rule",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-wmu-undergraduate-admission"
+        ],
+        "verifiedAt": "2026-07-28",
+        "reviewAfter": "2026-08-27",
+        "status": "stale",
+        "id": "program-wenzhou-medical-university-mbbs-bachelor",
+        "slug": "wenzhou-medical-university-mbbs-bachelor",
+        "universityId": "uni-wenzhou-medical-university",
+        "name": {
+          "en": "Bachelor of Medicine and Bachelor of Surgery (MBBS)",
+          "zh": "临床医学（MBBS）",
+          "ru": "Бакалавр медицины и хирургии (MBBS)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 72,
+        "programUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+        "applyUrl": "https://wmu.at0086.cn/student",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "9f08cdc0f4463194f073d9c159f4efb118bf3d33c7587e4563d424343945d4f9",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-wmu-undergraduate-admission"
+            ],
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27",
+            "status": "stale",
+            "id": "program-wenzhou-medical-university-mbbs-bachelor",
+            "slug": "wenzhou-medical-university-mbbs-bachelor",
+            "universityId": "uni-wenzhou-medical-university",
+            "name": {
+              "en": "Bachelor of Medicine and Bachelor of Surgery (MBBS)",
+              "zh": "临床医学（MBBS）",
+              "ru": "Бакалавр медицины и хирургии (MBBS)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "medicine",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 72,
+            "programUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+            "applyUrl": "https://wmu.at0086.cn/student",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "9f08cdc0f4463194f073d9c159f4efb118bf3d33c7587e4563d424343945d4f9"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-wmu-undergraduate-admission",
+            "url": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+            "title": "Admission Brochure",
+            "publisher": "Wenzhou Medical University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-28"
+          },
+          "sha256": "0ac02062b6fa73279f64924b0dd6ab06caafff462d44bb8cf448f51c939fba61"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-2026-wenzhou-medical-university-pharmaceutical-sciences-autumn",
+      "collection": "admissionCycles",
+      "universityId": "uni-wenzhou-medical-university",
+      "canonicalRecordSha256": "c54d533a219482843e3d3cdd91dd7aabc839da2dbada034635ed0e84f3618e2e",
+      "row": {
+        "sourceIds": [
+          "src-wmu-undergraduate-admission"
+        ],
+        "verifiedAt": "2026-07-28",
+        "reviewAfter": "2026-08-04",
+        "status": "stale",
+        "id": "cycle-2026-wenzhou-medical-university-pharmaceutical-sciences-autumn",
+        "programId": "program-wenzhou-medical-university-pharmaceutical-sciences-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 20000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "recurring-official-rule",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-wmu-undergraduate-admission"
+        ],
+        "verifiedAt": "2026-07-28",
+        "reviewAfter": "2026-08-27",
+        "status": "stale",
+        "id": "program-wenzhou-medical-university-pharmaceutical-sciences-bachelor",
+        "slug": "wenzhou-medical-university-pharmaceutical-sciences-bachelor",
+        "universityId": "uni-wenzhou-medical-university",
+        "name": {
+          "en": "Pharmaceutical Sciences",
+          "zh": "药学",
+          "ru": "Фармацевтические науки"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+        "applyUrl": "https://wmu.at0086.cn/student",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "ebe4e154dac162bd5e66ab71012901667a4f9b7168a09bc647d46145e2ef62a1",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-wmu-undergraduate-admission"
+            ],
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27",
+            "status": "stale",
+            "id": "program-wenzhou-medical-university-pharmaceutical-sciences-bachelor",
+            "slug": "wenzhou-medical-university-pharmaceutical-sciences-bachelor",
+            "universityId": "uni-wenzhou-medical-university",
+            "name": {
+              "en": "Pharmaceutical Sciences",
+              "zh": "药学",
+              "ru": "Фармацевтические науки"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "medicine",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+            "applyUrl": "https://wmu.at0086.cn/student",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "ebe4e154dac162bd5e66ab71012901667a4f9b7168a09bc647d46145e2ef62a1"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-wmu-undergraduate-admission",
+            "url": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+            "title": "Admission Brochure",
+            "publisher": "Wenzhou Medical University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-28"
+          },
+          "sha256": "0ac02062b6fa73279f64924b0dd6ab06caafff462d44bb8cf448f51c939fba61"
+        }
+      ]
+    },
+    {
+      "recordId": "scholarship-wenzhou-medical-university-undergraduate-freshman",
+      "collection": "scholarships",
+      "universityId": "uni-wenzhou-medical-university",
+      "canonicalRecordSha256": "8a12f4e6f1c778a502070e2b2ced948718281d3f02b1b306d09e28a70b0bf173",
+      "row": {
+        "sourceIds": [
+          "src-wmu-undergraduate-admission"
+        ],
+        "verifiedAt": "2026-07-28",
+        "reviewAfter": "2026-08-27",
+        "status": "stale",
+        "id": "scholarship-wenzhou-medical-university-undergraduate-freshman",
+        "slug": "wenzhou-medical-university-undergraduate-freshman",
+        "name": {
+          "en": "Wenzhou Medical University MBBS/BDS Freshman Scholarship",
+          "zh": "温州医科大学MBBS/BDS新生奖学金",
+          "ru": "Стипендия первокурсникам MBBS/BDS Вэньчжоуского медицинского университета"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-wenzhou-medical-university"
+        ],
+        "programIds": [
+          "program-wenzhou-medical-university-mbbs-bachelor",
+          "program-wenzhou-medical-university-bds-bachelor"
+        ],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+        "summary": {
+          "en": "MBBS and BDS students first pay the full tuition. Freshman cash awards of CNY 20,000, CNY 10,000 or CNY 5,000 are then granted according to the entrance-examination ranking; the current exact scholarship deadline is not separately announced.",
+          "zh": "MBBS和BDS学生须先缴纳全额学费，再按入学考试排名获得2万元、1万元或5000元新生奖励；当期奖学金具体截止日期未单独公布。",
+          "ru": "Студенты MBBS и BDS сначала оплачивают обучение полностью, после чего по рейтингу вступительного испытания получают выплату 20 000, 10 000 или 5 000 юаней; отдельный актуальный срок не опубликован."
+        }
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-wmu-undergraduate-admission"
+            ],
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27",
+            "status": "stale",
+            "id": "program-wenzhou-medical-university-mbbs-bachelor",
+            "slug": "wenzhou-medical-university-mbbs-bachelor",
+            "universityId": "uni-wenzhou-medical-university",
+            "name": {
+              "en": "Bachelor of Medicine and Bachelor of Surgery (MBBS)",
+              "zh": "临床医学（MBBS）",
+              "ru": "Бакалавр медицины и хирургии (MBBS)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "medicine",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 72,
+            "programUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+            "applyUrl": "https://wmu.at0086.cn/student",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "9f08cdc0f4463194f073d9c159f4efb118bf3d33c7587e4563d424343945d4f9"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-wmu-undergraduate-admission"
+            ],
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27",
+            "status": "stale",
+            "id": "program-wenzhou-medical-university-bds-bachelor",
+            "slug": "wenzhou-medical-university-bds-bachelor",
+            "universityId": "uni-wenzhou-medical-university",
+            "name": {
+              "en": "Bachelor of Dental Surgery (BDS)",
+              "zh": "口腔医学（BDS）",
+              "ru": "Бакалавр стоматологической хирургии (BDS)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "medicine",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 60,
+            "programUrl": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+            "applyUrl": "https://wmu.at0086.cn/student",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "d3e5295b782aa674c7f0ba0fcc1f05e11f2b3a0971f60a5901eed0e4a0e40d67"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-wmu-undergraduate-admission",
+            "url": "https://sis.wmu.edu.cn/en/Admission/Undergraduate_Program/Admission_Brochure.htm",
+            "title": "Admission Brochure",
+            "publisher": "Wenzhou Medical University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-28"
+          },
+          "sha256": "0ac02062b6fa73279f64924b0dd6ab06caafff462d44bb8cf448f51c939fba61"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-wzu-china-link-2026-2027",
+      "collection": "admissionCycles",
+      "universityId": "uni-wenzhou-university",
+      "canonicalRecordSha256": "f3f89337f433e6a0a8a5fab647c00b6648a0f121ee1a962974762a7d878e1a74",
+      "row": {
+        "sourceIds": [
+          "src-wzu-china-link-2026"
+        ],
+        "verifiedAt": "2026-07-29",
+        "reviewAfter": "2026-08-28",
+        "status": "stale",
+        "id": "cycle-wzu-china-link-2026-2027",
+        "programId": "program-wzu-china-link-2026-2027",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "rolling",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "First email admission@wzu.edu.cn with the subject “China Link + Name + university name” to obtain admission eligibility or pre-admission, then submit CSC Type B (agency number 10351). Applications are rolling and study must begin no later than August 31, 2027.",
+          "zh": "须先邮件联系admission@wzu.edu.cn（主题“China Link + 姓名 + 所在大学”）取得入学资格或预录取，再提交CSC Type B申请（受理机构编号10351）。全年滚动申请，最晚于2027年8月31日前开始学习。",
+          "ru": "Сначала напишите на admission@wzu.edu.cn с темой «China Link + имя + университет» для подтверждения права на приём, затем подайте CSC Type B (код 10351). Начало обучения — не позднее 31 августа 2027 года."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-wzu-china-link-2026"
+        ],
+        "verifiedAt": "2026-07-29",
+        "reviewAfter": "2026-08-28",
+        "status": "stale",
+        "id": "program-wzu-china-link-2026-2027",
+        "slug": "wzu-china-link-2026-2027",
+        "universityId": "uni-wenzhou-university",
+        "name": {
+          "en": "China Link Short-Term Scientific Exchange Program (2026–2027)",
+          "zh": "中国政府奖学金短期科研交流项目（2026—2027）",
+          "ru": "Краткосрочная научно-исследовательская программа China Link (2026–2027)"
+        },
+        "degreeLevel": "other",
+        "discipline": "other",
+        "teachingLanguages": [
+          "Chinese",
+          "English"
+        ],
+        "durationMonths": 1,
+        "durationMonthsMax": 12,
+        "programUrl": "https://cic.wzu.edu.cn/info/1718/11956.htm",
+        "applyUrl": "https://studyinchina.csc.edu.cn/#/login",
+        "languageRequirements": [
+          {
+            "test": "other",
+            "minimum": "The working language is Chinese or English according to the host field; language proof is optional in the published guide."
+          }
+        ],
+        "verificationScope": "complete",
+        "details": {
+          "faculty": {
+            "en": "College of International Education, Wenzhou University",
+            "zh": "温州大学国际教育学院",
+            "ru": "Институт международного образования Вэньчжоуского университета"
+          },
+          "overview": {
+            "en": "A fully funded, non-degree academic and scientific exchange for general or senior scholars. The official call permits 1–12 months of study, with the start date no later than August 31, 2027.",
+            "zh": "面向普通进修生或高级进修生的全额资助非学历学术科研交流。官方简章允许1至12个月研修，来华学习开始时间不得晚于2027年8月31日。",
+            "ru": "Полностью финансируемый академический и научный обмен без присуждения степени для обычных и старших стажёров. Срок обучения — 1–12 месяцев, начало не позднее 31 августа 2027 года."
+          },
+          "qualification": {
+            "en": "Non-degree General Scholar or Senior Scholar",
+            "zh": "非学历普通进修生或高级进修生",
+            "ru": "Обычный или старший стажёр без присуждения степени"
+          },
+          "studyMode": "full-time",
+          "languagePolicy": {
+            "en": "The working language is Chinese or English according to the host discipline. The official guide does not publish one universal score threshold.",
+            "zh": "工作语言按接收学科采用中文或英文；官方简章未设置统一语言分数线。",
+            "ru": "Рабочий язык — китайский или английский в зависимости от специальности; единый минимальный балл не опубликован."
+          },
+          "curriculumHighlights": [
+            {
+              "en": "Academic or scientific work under an approved host-university study or research plan",
+              "zh": "按照获批学习或研究计划在接收高校开展学术或科研活动",
+              "ru": "Академическая или исследовательская работа по утверждённому плану принимающего вуза"
+            },
+            {
+              "en": "A flexible 1–12 month exchange in an available host field other than Chinese-language study",
+              "zh": "在接收高校可提供的非汉语言专业领域开展1至12个月灵活研修",
+              "ru": "Обмен продолжительностью 1–12 месяцев по доступной специальности, кроме изучения китайского языка"
+            }
+          ],
+          "eligibility": [
+            {
+              "en": "A non-Chinese citizen in good physical and mental health",
+              "zh": "非中国籍人士，身心健康",
+              "ru": "Иностранный гражданин с хорошим физическим и психическим здоровьем"
+            },
+            {
+              "en": "A full-time student or full-time academic employee at an eligible overseas partner institution throughout the application and study period",
+              "zh": "申请及研修期间须为符合条件的海外合作院校全日制学生或全职教职工",
+              "ru": "На всём протяжении подачи и обучения — студент очной формы или штатный сотрудник подходящего зарубежного партнёрского вуза"
+            },
+            {
+              "en": "General scholars must normally be no older than 45; senior scholars no older than 50",
+              "zh": "普通进修生原则上不超过45周岁，高级进修生原则上不超过50周岁",
+              "ru": "Обычные стажёры — не старше 45 лет; старшие стажёры — не старше 50 лет"
+            },
+            {
+              "en": "Obtain the host university pre-admission notice or invitation before the final scholarship submission",
+              "zh": "最终提交奖学金申请前须取得接收高校预录取通知或邀请函",
+              "ru": "До окончательной подачи необходимо получить предварительное зачисление или приглашение принимающего вуза"
+            }
+          ],
+          "applicationMaterials": [
+            {
+              "en": "CSC online application form and valid passport information page",
+              "zh": "国家留学基金委在线申请表及有效护照信息页",
+              "ru": "Онлайн-заявление CSC и информационная страница действующего паспорта"
+            },
+            {
+              "en": "Proof of current enrollment or employment, highest diploma and academic transcript",
+              "zh": "在读或在职证明、最高学历证明及成绩单",
+              "ru": "Подтверждение обучения или работы, документ об образовании и выписка оценок"
+            },
+            {
+              "en": "A Chinese- or English-language study/research plan and host pre-admission notice or invitation",
+              "zh": "中文或英文学习／研究计划，以及接收高校预录取通知或邀请函",
+              "ru": "План обучения или исследования на китайском либо английском и предварительное зачисление или приглашение"
+            },
+            {
+              "en": "For stays longer than six months, the physical examination and no-criminal-record documents required by the guide",
+              "zh": "研修超过6个月时，须按简章提交体检和无犯罪记录材料",
+              "ru": "При сроке свыше шести месяцев — медицинская форма и справка об отсутствии судимости"
+            }
+          ]
+        }
+      },
+      "canonicalProgramSha256": "6fd9a8d78aacf84eb27263724e245bdb12aa2a057ff84200f0188bca3f91231c",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-wzu-china-link-2026"
+            ],
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28",
+            "status": "stale",
+            "id": "program-wzu-china-link-2026-2027",
+            "slug": "wzu-china-link-2026-2027",
+            "universityId": "uni-wenzhou-university",
+            "name": {
+              "en": "China Link Short-Term Scientific Exchange Program (2026–2027)",
+              "zh": "中国政府奖学金短期科研交流项目（2026—2027）",
+              "ru": "Краткосрочная научно-исследовательская программа China Link (2026–2027)"
+            },
+            "degreeLevel": "other",
+            "discipline": "other",
+            "teachingLanguages": [
+              "Chinese",
+              "English"
+            ],
+            "durationMonths": 1,
+            "durationMonthsMax": 12,
+            "programUrl": "https://cic.wzu.edu.cn/info/1718/11956.htm",
+            "applyUrl": "https://studyinchina.csc.edu.cn/#/login",
+            "languageRequirements": [
+              {
+                "test": "other",
+                "minimum": "The working language is Chinese or English according to the host field; language proof is optional in the published guide."
+              }
+            ],
+            "verificationScope": "complete",
+            "details": {
+              "faculty": {
+                "en": "College of International Education, Wenzhou University",
+                "zh": "温州大学国际教育学院",
+                "ru": "Институт международного образования Вэньчжоуского университета"
+              },
+              "overview": {
+                "en": "A fully funded, non-degree academic and scientific exchange for general or senior scholars. The official call permits 1–12 months of study, with the start date no later than August 31, 2027.",
+                "zh": "面向普通进修生或高级进修生的全额资助非学历学术科研交流。官方简章允许1至12个月研修，来华学习开始时间不得晚于2027年8月31日。",
+                "ru": "Полностью финансируемый академический и научный обмен без присуждения степени для обычных и старших стажёров. Срок обучения — 1–12 месяцев, начало не позднее 31 августа 2027 года."
+              },
+              "qualification": {
+                "en": "Non-degree General Scholar or Senior Scholar",
+                "zh": "非学历普通进修生或高级进修生",
+                "ru": "Обычный или старший стажёр без присуждения степени"
+              },
+              "studyMode": "full-time",
+              "languagePolicy": {
+                "en": "The working language is Chinese or English according to the host discipline. The official guide does not publish one universal score threshold.",
+                "zh": "工作语言按接收学科采用中文或英文；官方简章未设置统一语言分数线。",
+                "ru": "Рабочий язык — китайский или английский в зависимости от специальности; единый минимальный балл не опубликован."
+              },
+              "curriculumHighlights": [
+                {
+                  "en": "Academic or scientific work under an approved host-university study or research plan",
+                  "zh": "按照获批学习或研究计划在接收高校开展学术或科研活动",
+                  "ru": "Академическая или исследовательская работа по утверждённому плану принимающего вуза"
+                },
+                {
+                  "en": "A flexible 1–12 month exchange in an available host field other than Chinese-language study",
+                  "zh": "在接收高校可提供的非汉语言专业领域开展1至12个月灵活研修",
+                  "ru": "Обмен продолжительностью 1–12 месяцев по доступной специальности, кроме изучения китайского языка"
+                }
+              ],
+              "eligibility": [
+                {
+                  "en": "A non-Chinese citizen in good physical and mental health",
+                  "zh": "非中国籍人士，身心健康",
+                  "ru": "Иностранный гражданин с хорошим физическим и психическим здоровьем"
+                },
+                {
+                  "en": "A full-time student or full-time academic employee at an eligible overseas partner institution throughout the application and study period",
+                  "zh": "申请及研修期间须为符合条件的海外合作院校全日制学生或全职教职工",
+                  "ru": "На всём протяжении подачи и обучения — студент очной формы или штатный сотрудник подходящего зарубежного партнёрского вуза"
+                },
+                {
+                  "en": "General scholars must normally be no older than 45; senior scholars no older than 50",
+                  "zh": "普通进修生原则上不超过45周岁，高级进修生原则上不超过50周岁",
+                  "ru": "Обычные стажёры — не старше 45 лет; старшие стажёры — не старше 50 лет"
+                },
+                {
+                  "en": "Obtain the host university pre-admission notice or invitation before the final scholarship submission",
+                  "zh": "最终提交奖学金申请前须取得接收高校预录取通知或邀请函",
+                  "ru": "До окончательной подачи необходимо получить предварительное зачисление или приглашение принимающего вуза"
+                }
+              ],
+              "applicationMaterials": [
+                {
+                  "en": "CSC online application form and valid passport information page",
+                  "zh": "国家留学基金委在线申请表及有效护照信息页",
+                  "ru": "Онлайн-заявление CSC и информационная страница действующего паспорта"
+                },
+                {
+                  "en": "Proof of current enrollment or employment, highest diploma and academic transcript",
+                  "zh": "在读或在职证明、最高学历证明及成绩单",
+                  "ru": "Подтверждение обучения или работы, документ об образовании и выписка оценок"
+                },
+                {
+                  "en": "A Chinese- or English-language study/research plan and host pre-admission notice or invitation",
+                  "zh": "中文或英文学习／研究计划，以及接收高校预录取通知或邀请函",
+                  "ru": "План обучения или исследования на китайском либо английском и предварительное зачисление или приглашение"
+                },
+                {
+                  "en": "For stays longer than six months, the physical examination and no-criminal-record documents required by the guide",
+                  "zh": "研修超过6个月时，须按简章提交体检和无犯罪记录材料",
+                  "ru": "При сроке свыше шести месяцев — медицинская форма и справка об отсутствии судимости"
+                }
+              ]
+            }
+          },
+          "sha256": "6fd9a8d78aacf84eb27263724e245bdb12aa2a057ff84200f0188bca3f91231c"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-wzu-china-link-2026",
+            "url": "https://cic.wzu.edu.cn/info/1718/11956.htm",
+            "title": "Wenzhou University 2026 China Link Scholarship Program",
+            "publisher": "Wenzhou University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-29"
+          },
+          "sha256": "66cac2e5d4ced51598ed9143d25f0c120fde5e558273560067b0bdd10b964085"
+        }
+      ]
+    },
+    {
+      "recordId": "scholarship-wzu-china-link-2026-2027",
+      "collection": "scholarships",
+      "universityId": "uni-wenzhou-university",
+      "canonicalRecordSha256": "b63860e00cadf95a57754c5664a08929af212b84bdbfc7f8b17a8b6b2fb7fe74",
+      "row": {
+        "sourceIds": [
+          "src-wzu-china-link-2026"
+        ],
+        "verifiedAt": "2026-07-29",
+        "reviewAfter": "2026-08-28",
+        "status": "stale",
+        "id": "scholarship-wzu-china-link-2026-2027",
+        "slug": "wzu-china-link-2026-2027",
+        "name": {
+          "en": "China Link Scholarship at Wenzhou University",
+          "zh": "温州大学中国政府奖学金短期科研交流项目",
+          "ru": "Стипендия China Link в Вэньчжоуский университет"
+        },
+        "providerType": "csc",
+        "universityIds": [
+          "uni-wenzhou-university"
+        ],
+        "programIds": [
+          "program-wzu-china-link-2026-2027"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://studyinchina.csc.edu.cn/#/login",
+        "summary": {
+          "en": "Full funding covers tuition, on-campus accommodation and insurance. The monthly allowance is CNY 3,000 for general scholars and CNY 3,500 for senior scholars. A Wenzhou University pre-admission or invitation is required before the CSC submission.",
+          "zh": "全额资助覆盖学费、校内住宿和保险；普通进修生生活费为每月3,000元，高级进修生为每月3,500元。提交CSC申请前须先取得温州大学预录取或邀请材料。",
+          "ru": "Полное финансирование покрывает обучение, общежитие и страховку; выплата составляет 3 000 юаней для обычных и 3 500 юаней для старших стажёров. До подачи в CSC требуется предварительное зачисление или приглашение Вэньчжоуского университета."
+        }
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-wzu-china-link-2026"
+            ],
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28",
+            "status": "stale",
+            "id": "program-wzu-china-link-2026-2027",
+            "slug": "wzu-china-link-2026-2027",
+            "universityId": "uni-wenzhou-university",
+            "name": {
+              "en": "China Link Short-Term Scientific Exchange Program (2026–2027)",
+              "zh": "中国政府奖学金短期科研交流项目（2026—2027）",
+              "ru": "Краткосрочная научно-исследовательская программа China Link (2026–2027)"
+            },
+            "degreeLevel": "other",
+            "discipline": "other",
+            "teachingLanguages": [
+              "Chinese",
+              "English"
+            ],
+            "durationMonths": 1,
+            "durationMonthsMax": 12,
+            "programUrl": "https://cic.wzu.edu.cn/info/1718/11956.htm",
+            "applyUrl": "https://studyinchina.csc.edu.cn/#/login",
+            "languageRequirements": [
+              {
+                "test": "other",
+                "minimum": "The working language is Chinese or English according to the host field; language proof is optional in the published guide."
+              }
+            ],
+            "verificationScope": "complete",
+            "details": {
+              "faculty": {
+                "en": "College of International Education, Wenzhou University",
+                "zh": "温州大学国际教育学院",
+                "ru": "Институт международного образования Вэньчжоуского университета"
+              },
+              "overview": {
+                "en": "A fully funded, non-degree academic and scientific exchange for general or senior scholars. The official call permits 1–12 months of study, with the start date no later than August 31, 2027.",
+                "zh": "面向普通进修生或高级进修生的全额资助非学历学术科研交流。官方简章允许1至12个月研修，来华学习开始时间不得晚于2027年8月31日。",
+                "ru": "Полностью финансируемый академический и научный обмен без присуждения степени для обычных и старших стажёров. Срок обучения — 1–12 месяцев, начало не позднее 31 августа 2027 года."
+              },
+              "qualification": {
+                "en": "Non-degree General Scholar or Senior Scholar",
+                "zh": "非学历普通进修生或高级进修生",
+                "ru": "Обычный или старший стажёр без присуждения степени"
+              },
+              "studyMode": "full-time",
+              "languagePolicy": {
+                "en": "The working language is Chinese or English according to the host discipline. The official guide does not publish one universal score threshold.",
+                "zh": "工作语言按接收学科采用中文或英文；官方简章未设置统一语言分数线。",
+                "ru": "Рабочий язык — китайский или английский в зависимости от специальности; единый минимальный балл не опубликован."
+              },
+              "curriculumHighlights": [
+                {
+                  "en": "Academic or scientific work under an approved host-university study or research plan",
+                  "zh": "按照获批学习或研究计划在接收高校开展学术或科研活动",
+                  "ru": "Академическая или исследовательская работа по утверждённому плану принимающего вуза"
+                },
+                {
+                  "en": "A flexible 1–12 month exchange in an available host field other than Chinese-language study",
+                  "zh": "在接收高校可提供的非汉语言专业领域开展1至12个月灵活研修",
+                  "ru": "Обмен продолжительностью 1–12 месяцев по доступной специальности, кроме изучения китайского языка"
+                }
+              ],
+              "eligibility": [
+                {
+                  "en": "A non-Chinese citizen in good physical and mental health",
+                  "zh": "非中国籍人士，身心健康",
+                  "ru": "Иностранный гражданин с хорошим физическим и психическим здоровьем"
+                },
+                {
+                  "en": "A full-time student or full-time academic employee at an eligible overseas partner institution throughout the application and study period",
+                  "zh": "申请及研修期间须为符合条件的海外合作院校全日制学生或全职教职工",
+                  "ru": "На всём протяжении подачи и обучения — студент очной формы или штатный сотрудник подходящего зарубежного партнёрского вуза"
+                },
+                {
+                  "en": "General scholars must normally be no older than 45; senior scholars no older than 50",
+                  "zh": "普通进修生原则上不超过45周岁，高级进修生原则上不超过50周岁",
+                  "ru": "Обычные стажёры — не старше 45 лет; старшие стажёры — не старше 50 лет"
+                },
+                {
+                  "en": "Obtain the host university pre-admission notice or invitation before the final scholarship submission",
+                  "zh": "最终提交奖学金申请前须取得接收高校预录取通知或邀请函",
+                  "ru": "До окончательной подачи необходимо получить предварительное зачисление или приглашение принимающего вуза"
+                }
+              ],
+              "applicationMaterials": [
+                {
+                  "en": "CSC online application form and valid passport information page",
+                  "zh": "国家留学基金委在线申请表及有效护照信息页",
+                  "ru": "Онлайн-заявление CSC и информационная страница действующего паспорта"
+                },
+                {
+                  "en": "Proof of current enrollment or employment, highest diploma and academic transcript",
+                  "zh": "在读或在职证明、最高学历证明及成绩单",
+                  "ru": "Подтверждение обучения или работы, документ об образовании и выписка оценок"
+                },
+                {
+                  "en": "A Chinese- or English-language study/research plan and host pre-admission notice or invitation",
+                  "zh": "中文或英文学习／研究计划，以及接收高校预录取通知或邀请函",
+                  "ru": "План обучения или исследования на китайском либо английском и предварительное зачисление или приглашение"
+                },
+                {
+                  "en": "For stays longer than six months, the physical examination and no-criminal-record documents required by the guide",
+                  "zh": "研修超过6个月时，须按简章提交体检和无犯罪记录材料",
+                  "ru": "При сроке свыше шести месяцев — медицинская форма и справка об отсутствии судимости"
+                }
+              ]
+            }
+          },
+          "sha256": "6fd9a8d78aacf84eb27263724e245bdb12aa2a057ff84200f0188bca3f91231c"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-wzu-china-link-2026",
+            "url": "https://cic.wzu.edu.cn/info/1718/11956.htm",
+            "title": "Wenzhou University 2026 China Link Scholarship Program",
+            "publisher": "Wenzhou University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-29"
+          },
+          "sha256": "66cac2e5d4ced51598ed9143d25f0c120fde5e558273560067b0bdd10b964085"
+        }
+      ]
+    },
+    {
+      "recordId": "scholarship-wtu-hubei-provincial-international-students",
+      "collection": "scholarships",
+      "universityId": "uni-wuhan-textile-university",
+      "canonicalRecordSha256": "1d9e6e053fa0e740c36bda8dc27f0bb9059bf5c1390e731ae2c07f42278b627b",
+      "row": {
+        "sourceIds": [
+          "source-wtu-2026-international-scholarships"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-09-24",
+        "status": "stale",
+        "id": "scholarship-wtu-hubei-provincial-international-students",
+        "slug": "wtu-hubei-provincial-international-students",
+        "name": {
+          "en": "Hubei Provincial Scholarship at WTU",
+          "zh": "武汉纺织大学湖北省外国留学生奖学金",
+          "ru": "Провинциальная стипендия Хубэя в WTU",
+          "de": "Hubei-Provinzstipendium an der WTU",
+          "fr": "Bourse provinciale du Hubei à la WTU",
+          "es": "Beca provincial de Hubei en WTU"
+        },
+        "providerType": "province",
+        "universityIds": [
+          "uni-wuhan-textile-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": null,
+        "summary": {
+          "en": "WTU’s 2026 official guide confirms full and partial provincial funding routes; exact current tiers and deadline remain unannounced.",
+          "zh": "武汉纺织大学2026年官方简章确认省级全额和部分资助路线；当期具体档位和截止日尚未公布。",
+          "ru": "Официальное руководство WTU 2026 года подтверждает полное и частичное провинциальное финансирование; точные уровни и срок пока не объявлены.",
+          "de": "Der offizielle WTU-Leitfaden 2026 bestätigt vollständige und teilweise Provinzförderung; genaue Stufen und Frist sind noch nicht veröffentlicht.",
+          "fr": "Le guide officiel 2026 de la WTU confirme des voies provinciales intégrales et partielles ; les niveaux exacts et la date limite ne sont pas annoncés.",
+          "es": "La guía oficial 2026 de WTU confirma vías provinciales completas y parciales; los niveles exactos y la fecha límite no se han anunciado."
+        }
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "source-wtu-2026-international-scholarships",
+            "url": "https://iec.wtu.edu.cn/info/1060/4292.htm",
+            "title": "Wuhan Textile University 2026 International Student Scholarship Routes",
+            "publisher": "Wuhan Textile University",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "sha256": "4939b32b4d42be26f1d6526a594880b5a66b23533bfffef3de7ca852a9e971b7"
+        }
+      ]
+    },
+    {
+      "recordId": "scholarship-wtu-university-international-students",
+      "collection": "scholarships",
+      "universityId": "uni-wuhan-textile-university",
+      "canonicalRecordSha256": "500b3a47f136f50989e7eafeeeec56058a83b9d44ff589084abee42109d6254e",
+      "row": {
+        "sourceIds": [
+          "source-wtu-2026-international-scholarships"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-09-24",
+        "status": "stale",
+        "id": "scholarship-wtu-university-international-students",
+        "slug": "wtu-university-international-students",
+        "name": {
+          "en": "WTU International Student Scholarship",
+          "zh": "武汉纺织大学来华留学生校级奖学金",
+          "ru": "Стипендия WTU для иностранных студентов",
+          "de": "WTU-Stipendium für internationale Studierende",
+          "fr": "Bourse WTU pour étudiants internationaux",
+          "es": "Beca WTU para estudiantes internacionales"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-wuhan-textile-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": null,
+        "summary": {
+          "en": "WTU’s 2026 official guide confirms a university partial-funding route; the exact award and application deadline are not announced.",
+          "zh": "武汉纺织大学2026年官方简章确认校级部分资助路线；具体金额和申请截止日尚未公布。",
+          "ru": "Официальное руководство WTU 2026 года подтверждает частичную университетскую поддержку; точный размер и срок не объявлены.",
+          "de": "Der offizielle WTU-Leitfaden 2026 bestätigt eine teilweise Hochschulförderung; genaue Höhe und Bewerbungsfrist sind nicht veröffentlicht.",
+          "fr": "Le guide officiel 2026 de la WTU confirme une aide partielle de l'université ; le montant exact et la date limite ne sont pas annoncés.",
+          "es": "La guía oficial 2026 de WTU confirma una ayuda parcial de la universidad; la cuantía exacta y la fecha límite no se anuncian."
+        }
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "source-wtu-2026-international-scholarships",
+            "url": "https://iec.wtu.edu.cn/info/1060/4292.htm",
+            "title": "Wuhan Textile University 2026 International Student Scholarship Routes",
+            "publisher": "Wuhan Textile University",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "sha256": "4939b32b4d42be26f1d6526a594880b5a66b23533bfffef3de7ca852a9e971b7"
+        }
+      ]
+    },
+    {
+      "recordId": "scholarship-wuhan-university-international-student",
+      "collection": "scholarships",
+      "universityId": "uni-wuhan-university",
+      "canonicalRecordSha256": "8caa1f754551d315d81ef71f50ed6918e4c2184b415d873afcc01060b884cd83",
+      "row": {
+        "sourceIds": [
+          "src-uni-wuhan-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "scholarship-wuhan-university-international-student",
+        "slug": "wuhan-university-international-student",
+        "name": {
+          "en": "Wuhan University Scholarship for International Students",
+          "zh": "武汉大学外国留学生奖学金",
+          "ru": "Стипендия Уханьского университета для иностранных студентов"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-wuhan-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://admission.whu.edu.cn/",
+        "summary": {
+          "en": "Wuhan University Scholarship for International Students is a potential funding route. Eligibility, participating programs and current-cycle coverage must be confirmed on the official page.",
+          "zh": "武汉大学外国留学生奖学金是一项潜在资助渠道；申请资格、适用项目及当期资助标准须以官方页面为准。",
+          "ru": "Стипендия Уханьского университета для иностранных студентов — возможный источник финансирования. Условия, подходящие программы и покрытие текущего цикла необходимо проверить на официальной странице."
+        }
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-uni-wuhan-university",
+            "url": "https://admission.whu.edu.cn/",
+            "title": "Official international information — Wuhan University",
+            "publisher": "Wuhan University",
+            "kind": "admissions",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-16"
+          },
+          "sha256": "b031a31600dc8bf1e7e72a53349b1baa0d956d8ba2e92391990e3ccb4a4e167e"
+        }
+      ]
+    },
+    {
+      "recordId": "scholarship-hubei-provincial-international-student",
+      "collection": "scholarships",
+      "universityId": "uni-wuhan-university",
+      "canonicalRecordSha256": "b66061ad9570f381ac9dab1d41a55d647ef648585a7169181e0ced352275e626",
+      "row": {
+        "sourceIds": [
+          "src-uni-wuhan-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "scholarship-hubei-provincial-international-student",
+        "slug": "hubei-provincial-international-student",
+        "name": {
+          "en": "Hubei Provincial Scholarship for International Students",
+          "zh": "湖北省外国留学生奖学金",
+          "ru": "Стипендия провинции Хубэй для иностранных студентов"
+        },
+        "providerType": "province",
+        "universityIds": [
+          "uni-wuhan-university",
+          "uni-huazhong-university-of-science-and-technology",
+          "uni-central-china-normal-university",
+          "uni-wuhan-university-of-technology"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://admission.whu.edu.cn/",
+        "summary": {
+          "en": "Hubei Provincial Scholarship for International Students is a potential funding route. Eligibility, participating programs and current-cycle coverage must be confirmed on the official page.",
+          "zh": "湖北省外国留学生奖学金是一项潜在资助渠道；申请资格、适用项目及当期资助标准须以官方页面为准。",
+          "ru": "Стипендия провинции Хубэй для иностранных студентов — возможный источник финансирования. Условия, подходящие программы и покрытие текущего цикла необходимо проверить на официальной странице."
+        }
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-uni-wuhan-university",
+            "url": "https://admission.whu.edu.cn/",
+            "title": "Official international information — Wuhan University",
+            "publisher": "Wuhan University",
+            "kind": "admissions",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-16"
+          },
+          "sha256": "b031a31600dc8bf1e7e72a53349b1baa0d956d8ba2e92391990e3ccb4a4e167e"
+        }
+      ]
+    }
+  ]
+}

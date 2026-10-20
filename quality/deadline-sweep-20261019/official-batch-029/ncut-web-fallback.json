@@ -1,0 +1,21 @@
+{
+  "name": "source-01-web-fallback",
+  "url": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm",
+  "observedAt": "2026-10-19T11:45:45.652Z",
+  "observationTimePrecision": "local recording time of the returned web-fallback result; exact HTTP attempt time was not provided by web tool",
+  "method": "one-web-open-after-native-404",
+  "toolCall": {
+    "open": [
+      {
+        "ref_id": "https://en.ncut.edu.cn/Admissions1/Undergraduate.htm"
+      }
+    ],
+    "response_length": "short"
+  },
+  "toolResultText": "Internal Error ()\nciteturn73view0 [wordlim: 200] Source: open({\"ref_id\":\"https://en.ncut.edu.cn/Admissions1/Undergraduate.htm\",\"lineno\":null}); Total lines: 1\nL0: Failed to fetch https://en.ncut.edu.cn/Admissions1/Undergraduate.htm: (400) Timeout fetching\n",
+  "captureSucceeded": false,
+  "originalOriginBytesObtained": false,
+  "dateEvidence": false,
+  "retryPolicy": "cooldown-no-further-retries",
+  "exactHttpAttemptedAt": null
+}

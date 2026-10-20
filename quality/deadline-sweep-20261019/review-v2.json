@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "purpose": "additive-structural-review-batches001-through004",
+  "checkedAt": "2026-10-19T04:37:03.507675+00:00",
+  "result": "pass",
+  "reviewScope": "Read-only structural extension of previous review. No new official-source network reads or full-fact semantic recertification.",
+  "previousReview": {
+    "path": "quality/deadline-sweep-20261019/review.json",
+    "sha256": "81556c564e945e61662cc814e7906dca9508372cd36499fa5853d8131325c97d",
+    "preservedUnchanged": true
+  },
+  "inventory": {
+    "path": "quality/deadline-sweep-20261019/catalog-deadlines.json",
+    "sha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+    "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722"
+  },
+  "reports": [
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-001/report.json",
+      "sha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5",
+      "schools": 10,
+      "records": 22
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-002/report.json",
+      "sha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811",
+      "schools": 10,
+      "records": 18
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-003/report.json",
+      "sha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad",
+      "schools": 10,
+      "records": 20
+    },
+    {
+      "path": "quality/deadline-sweep-20261019/official-batch-004/report.json",
+      "sha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043",
+      "schools": 10,
+      "records": 10
+    }
+  ],
+  "verifiedTotals": {
+    "distinctSchoolAttempts": 40,
+    "distinctRecordDatesAssessed": 70,
+    "unchanged": 56,
+    "unknown": 6,
+    "blocked": 8,
+    "corrected": 0,
+    "closed": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullRecordsRecertified": 0
+  },
+  "batch004": {
+    "schoolAttempts": 10,
+    "scopedRecords": 10,
+    "unchanged": 7,
+    "unknown": 2,
+    "blocked": 1,
+    "recordIdsParentsAndStoredDates": "All10match pinned inventory; no cross-batch duplicate school or record ID.",
+    "reportObservationCompletionPins": "pass",
+    "coreHashes": "Exact shared snapshot,6input hashes and current inventory bytes match.",
+    "timePrecisionPreserved": [
+      {
+        "recordId": "cycle-thu-chinese-language-spring-2027",
+        "officialCutoffAt": "2026-11-03T11:00:00+08:00",
+        "calendarDateOnlyConclusion": "date agrees; 11:00 cutoff remains explicit and cannot become end-of-day availability"
+      },
+      {
+        "recordId": "cycle-qdu-chinese-language-2027-spring",
+        "deadlineBoundary": "before-date-as-worded",
+        "calendarDateOnlyConclusion": "date agrees; beforeDecember11 boundary remains unresolved and cannot become an inclusive full-day claim"
+      }
+    ],
+    "recurringPoliciesNotRolledForward": [
+      "uni-beijing-foreign-studies-university",
+      "uni-university-of-shanghai-for-science-and-technology"
+    ],
+    "noWholeSchoolCompleteClaim": true
+  },
+  "carriedForwardLimits": [
+    "Date-only unchanged conclusions do not approve all record facts or entire school catalogues.",
+    "Unknown/blocked observations do not establish discontinuation or authorize deleting historical rows.",
+    "Previous low-prioritynot-announced conflict hardening note remains; reviewed snapshot has0such issues.",
+    "Reviewer authored batch002, as disclosed in previous review; no claim of a second independent semantic approval for that batch."
+  ],
+  "delivery": "Copy exact audited files into current restored checkout and hash-compare before explicit staging; audit delivery remains separate from candidate/stable website publication.",
+  "mutations": {
+    "canonicalWrites": 0,
+    "sharedProgressWrites": 0,
+    "gitMutations": 0,
+    "deploymentMutations": 0,
+    "outputFiles": [
+      "quality/deadline-sweep-20261019/review-v2.json"
+    ]
+  }
+}

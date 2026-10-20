@@ -1,0 +1,1140 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-012-20261019",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T05:15:57.617Z",
+  "state": "source-only-finite-review-with-held-differences",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "selection": {
+    "basis": "Remaining unassessed explicit unexpired raw record dates after v3 and exact next41 IDs",
+    "recordIds": [
+      "cycle-2027-sjtu-long-term-chinese-spring",
+      "cycle-2026-e4d822684a6f",
+      "cycle-2027-bf053c085767",
+      "cycle-2026-a57df6c71eea",
+      "cycle-2027-5df1a1f1218d",
+      "cycle-2026-767e75c27f6e",
+      "cycle-xmu-long-term-chinese-language-spring-2027",
+      "cycle-uibe-international-foundation-spring-2027",
+      "cycle-bfsu-iclt-one-semester-spring-2027",
+      "cycle-cqnu-chinese-language-spring-2027",
+      "cycle-gap-wave7-bipt-chinese-language-program-2026-2027-spring",
+      "cycle-gap-clw-sw-hainanu-chinese-culture-semester-2026-2027-spring",
+      "cycle-tju-foundation-one-year-autumn-2027",
+      "cycle-2027-nanjing-university-information-management-information-system-bachelor",
+      "cycle-2027-nanjing-university-editing-publishing-science-bachelor",
+      "cycle-2027-nanjing-university-applied-psychology-bachelor",
+      "cycle-2027-xiamen-university-international-relations-master-english",
+      "cycle-2027-xiamen-university-marine-affairs-0707j3-master-english",
+      "cycle-2027-xiamen-university-marine-affairs-0830j3-master-english",
+      "scholarship-blcu-beijing-international-students-2027",
+      "scholarship-bfsu-iclt-one-semester-spring-2027",
+      "sch-gap-local-tjfsu-china-link-scholarship"
+    ]
+  },
+  "summary": {
+    "records": 22,
+    "schools": 12,
+    "outcomes": {
+      "unchanged": 17,
+      "unknown": 2,
+      "conflict": 3
+    },
+    "newOfficialHtmlReads": 14,
+    "reusedGuideScopes": 3,
+    "canonicalWrites": 0,
+    "dateChangesApplied": 0
+  },
+  "groups": [
+    {
+      "universityId": "uni-shanghai-jiao-tong-university",
+      "evidence": [
+        {
+          "key": "sjtu",
+          "url": "https://ichinese.sjtu.edu.cn/en/programs/74/detail",
+          "observedAt": "2026-10-19T05:13:07.522Z",
+          "status": 200,
+          "finalUrl": "https://ichinese.sjtu.edu.cn/en/programs/74/detail",
+          "contentType": "text/html; charset=UTF-8",
+          "rawPath": "sjtu.html",
+          "rawSha256": "c49ddde03b39c78fd43ff93f48f5560e41cb022f583deafbc0be7e2596bae854",
+          "bytes": 29072,
+          "textPath": "sjtu.txt",
+          "textSha256": "ba4956552a2415d71ee172922c09d2eb68778e58576b0ad7c274f87197511ad9",
+          "evidenceMode": "new-full-official-html",
+          "countsAsNewWebsiteRead": true
+        }
+      ],
+      "dateQuote": "Spring: Sep. 15 - Dec. 15",
+      "dateScope": "Recurring spring language application window; the same current page links the 2027 Spring full-time course and schedule. Exact registration dates are not assessed.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-sjtu-long-term-chinese-spring",
+          "universityId": "uni-shanghai-jiao-tong-university",
+          "programId": "program-shanghai-jiao-tong-university-chinese-language-program-language",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": "2026-09-15",
+          "canonicalCycleSha256": "fd594dee0006311b6346996c47d989f61341f6baa1d546c73d517f9e04ffa010",
+          "canonicalProgramSha256": "78c31fb900dcc4e51b95dacd2323ae064d7d6317ecce64756011312d58945a50",
+          "storedDeadline": "2026-12-15",
+          "officialDeadline": "2026-12-15",
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-program-sjtu-long-term-chinese-2026-2027",
+            "src-program-sjtu-spring-2027-full-time-guide",
+            "src-program-sjtu-spring-2027-calendar"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-university-of-international-business-and-economics",
+      "evidence": [
+        {
+          "key": "uibe-degree",
+          "url": "https://sie.uibe.edu.cn/en/Prgr/BacDegPro/OfEn/index.htm",
+          "observedAt": "2026-10-19T05:13:07.570Z",
+          "status": 200,
+          "finalUrl": "https://sie.uibe.edu.cn/en/Prgr/BacDegPro/OfEn/index.htm",
+          "contentType": "text/html",
+          "rawPath": "uibe-degree.html",
+          "rawSha256": "b77856a6ce97b5493fba22f07a8faa2248cfb843ff2d01ad9081ee716eaee2f2",
+          "bytes": 47030,
+          "textPath": "uibe-degree.txt",
+          "textSha256": "76daf9a73fc937a55fdaf18d9920ce2095a9b53b4f68801e8819589e1173cf37",
+          "evidenceMode": "new-full-official-html",
+          "countsAsNewWebsiteRead": true
+        }
+      ],
+      "dateQuote": "Spring Semester: October 20 - December 31 each year",
+      "dateScope": "Explicit recurring annual spring window; economics, finance and international economics and trade appear in the same English-medium undergraduate list.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-e4d822684a6f",
+          "universityId": "uni-university-of-international-business-and-economics",
+          "programId": "program-university-of-international-business-and-economics-economics-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": "2026-10-20",
+          "canonicalCycleSha256": "830d9487d7ac00e9a0b6128485c488baa1ba8059864702c252786179efd87f15",
+          "canonicalProgramSha256": "36d929888f0686c6313ba6844b6596ca5f391e137e3a54ac82fe18c11b41383e",
+          "storedDeadline": "2026-12-31",
+          "officialDeadline": "2026-12-31",
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-program-review-5e00097dda79"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-a57df6c71eea",
+          "universityId": "uni-university-of-international-business-and-economics",
+          "programId": "program-university-of-international-business-and-economics-finance-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": "2026-10-20",
+          "canonicalCycleSha256": "772ef5ddafd1c9ed8119533fd7dcbc509d612134ff789f9efec2080375335a8f",
+          "canonicalProgramSha256": "1f4fc894613a2c9833e2fe1660d9bd7c903bdb912d67af93e96062ee412c1d3b",
+          "storedDeadline": "2026-12-31",
+          "officialDeadline": "2026-12-31",
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-program-review-5e00097dda79"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-767e75c27f6e",
+          "universityId": "uni-university-of-international-business-and-economics",
+          "programId": "program-university-of-international-business-and-economics-international-economi",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": "2026-10-20",
+          "canonicalCycleSha256": "05655ec747da2c96a5d241bb4f077977f77b7fd57d1b8fb14d54498e942e1c81",
+          "canonicalProgramSha256": "d4f5f55403dbe64e5c0f77e466635d4ae4e52f1e52d7050449c37c3e9af118b5",
+          "storedDeadline": "2026-12-31",
+          "officialDeadline": "2026-12-31",
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-program-review-5e00097dda79"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-university-of-international-business-and-economics",
+      "evidence": [
+        {
+          "key": "uibe-foundation",
+          "url": "https://sie.uibe.edu.cn/en/Prgr/FouCouBacProCh/FouCouBacProChiSelf/cf60f17e393347278a43068323179bd3.htm",
+          "observedAt": "2026-10-19T05:13:08.124Z",
+          "status": 200,
+          "finalUrl": "https://sie.uibe.edu.cn/en/Prgr/FouCouBacProCh/FouCouBacProChiSelf/cf60f17e393347278a43068323179bd3.htm",
+          "contentType": "text/html",
+          "rawPath": "uibe-foundation.html",
+          "rawSha256": "2578e3f520163ad3f046a3857eeddd53003b615f89e2ae8251decd46a7d7f3fe",
+          "bytes": 67920,
+          "textPath": "uibe-foundation.txt",
+          "textSha256": "07858d8623e1763d0f6d44b2eb71082c5ebbfe3ec7f0743561008030fe1f72ae",
+          "evidenceMode": "new-full-official-html",
+          "countsAsNewWebsiteRead": true
+        }
+      ],
+      "dateQuote": "Spring Semester : October 1 to December 31 (closes when seats are filled)",
+      "dateScope": "Existing recurring-official-rule for February-June spring foundation programme; December31 is a latest calendar boundary, earlier capacity closure remains possible.",
+      "precisionQualification": "Unknown current seat availability; do not infer availability solely from the calendar maximum.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-uibe-international-foundation-spring-2027",
+          "universityId": "uni-university-of-international-business-and-economics",
+          "programId": "program-uibe-international-foundation-spring-2027",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": "2026-10-01",
+          "canonicalCycleSha256": "61566f2b43886d311059378e6e6c4d87ef34b869c58faf07ae16d5bcf1109332",
+          "canonicalProgramSha256": "ea58b6a80ff23e7bb4f8e0b39be5c6d3d86c27324186a2f526cde8d24d68b236",
+          "storedDeadline": "2026-12-31",
+          "officialDeadline": "2026-12-31",
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-uibe-international-foundation"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-dalian-university-of-technology",
+      "evidence": [
+        {
+          "key": "dlut-a",
+          "url": "https://sie.dlut.edu.cn/info/1179/2481.htm",
+          "observedAt": "2026-10-19T05:13:07.571Z",
+          "status": 200,
+          "finalUrl": "https://sie.dlut.edu.cn/info/1179/2481.htm",
+          "contentType": "text/html",
+          "rawPath": "dlut-a.html",
+          "rawSha256": "b88c42892e307a067b9731b07f0ab0d8acc9c7fe5a6070a5f3a08ce21b992949",
+          "bytes": 44107,
+          "textPath": "dlut-a.txt",
+          "textSha256": "db8e4f004bc8f03ca21838695fefbfdd639056400cde92dcd83c7a357b32fb47",
+          "evidenceMode": "new-full-official-html",
+          "countsAsNewWebsiteRead": true
+        }
+      ],
+      "dateQuote": "Starts from first of November 2026, applicants are recommend to complete the application by before the end of June.",
+      "dateScope": "Current 2027 undergraduate guide body. It recommends completion before end of June; this is insufficient to certify a hard June30 inclusive cutoff or an exact clock time.",
+      "candidateCalendarBoundary": "2027-06-30",
+      "hardDeadlineNotEstablished": true,
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-bf053c085767",
+          "universityId": "uni-dalian-university-of-technology",
+          "programId": "program-dalian-university-of-technology-chinese-language-business-bachelor-progr",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "storedOpensOn": "2026-11-01",
+          "canonicalCycleSha256": "d2fa7c816f2778a63d3850b3e4a105a532bad188202dab9d36e9ab4ca35517c5",
+          "canonicalProgramSha256": "e6a7145d6d6a4476d789d21548184be8346c99abc838c47d9dbc0e403de7f793",
+          "storedDeadline": "2027-06-30",
+          "officialDeadline": null,
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-program-review-b1c8f6686741"
+          ],
+          "result": "unknown",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-dalian-university-of-technology",
+      "evidence": [
+        {
+          "key": "dlut-b",
+          "url": "https://sie.dlut.edu.cn/info/1179/24291.htm",
+          "observedAt": "2026-10-19T05:13:07.964Z",
+          "status": 200,
+          "finalUrl": "https://sie.dlut.edu.cn/info/1179/24291.htm",
+          "contentType": "text/html",
+          "rawPath": "dlut-b.html",
+          "rawSha256": "02ad4090e9847aaf7747aa5d283683b2af6cb5cc9bf1f1d5689b05040bfc7795",
+          "bytes": 35312,
+          "textPath": "dlut-b.txt",
+          "textSha256": "6b9058db358c0d05eaf1d27f4dafe5796d11135484b3f294dd494903c3fc2835",
+          "evidenceMode": "new-full-official-html",
+          "countsAsNewWebsiteRead": true
+        }
+      ],
+      "dateQuote": "Starts from first of November 2026, applicants are recommend to complete the application by before the end of June.",
+      "dateScope": "Current 2027 undergraduate guide body. It recommends completion before end of June; this is insufficient to certify a hard June30 inclusive cutoff or an exact clock time.",
+      "candidateCalendarBoundary": "2027-06-30",
+      "hardDeadlineNotEstablished": true,
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-5df1a1f1218d",
+          "universityId": "uni-dalian-university-of-technology",
+          "programId": "program-dalian-university-of-technology-chinese-language-international-chinese-l",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "storedOpensOn": "2026-11-01",
+          "canonicalCycleSha256": "9ce5e6dab09cecd4fd9f34dec2cd1ed4e22138f41b4fea7f9f529dba97de766b",
+          "canonicalProgramSha256": "f773cd5e78628ae18aa0a84e9d849d2a8b378a5703036c2c51c0133ac4bb7fc2",
+          "storedDeadline": "2027-06-30",
+          "officialDeadline": null,
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-program-review-0f2dc2c02d7b"
+          ],
+          "result": "unknown",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-xiamen-university",
+      "evidence": [
+        {
+          "key": "xmu-language",
+          "url": "https://oec.xmu.edu.cn/en/Program1/Chinese_Language_Programs.htm",
+          "observedAt": "2026-10-19T05:13:08.002Z",
+          "status": 200,
+          "finalUrl": "https://oec.xmu.edu.cn/en/Program1/Chinese_Language_Programs.htm",
+          "contentType": "text/html",
+          "rawPath": "xmu-language.html",
+          "rawSha256": "d37af527d320cd7dc2f38a2b43f0fca9871c92781f9e8733d8166bef7b7557c2",
+          "bytes": 61385,
+          "textPath": "xmu-language.txt",
+          "textSha256": "23eaaec94a839a7fb3d0b1a40e5451b7a6d181f9d6c5f5d157df840cfd22f6bc",
+          "evidenceMode": "new-full-official-html",
+          "countsAsNewWebsiteRead": true
+        }
+      ],
+      "dateQuote": "Spring semester: February to June 2027; Spring Semester: December 30, 2026",
+      "dateScope": "2026-2027 long-term Chinese language guide, spring2027 route.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-xmu-long-term-chinese-language-spring-2027",
+          "universityId": "uni-xiamen-university",
+          "programId": "program-xmu-long-term-chinese-language-spring-2027",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": null,
+          "canonicalCycleSha256": "069b3088559ad6dca7d395629a8e787e8811a4aa2b193a88a19c114a99f9de0e",
+          "canonicalProgramSha256": "502537fbd732819c1977b6786078a4729028f5351d3e1a130e4f27dd2cd2a123",
+          "storedDeadline": "2026-12-30",
+          "officialDeadline": "2026-12-30",
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-xmu-long-term-chinese-2026-2027",
+            "xmu-chinese-program-live",
+            "xmu-costs-live"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-beijing-foreign-studies-university",
+      "evidence": [
+        {
+          "key": "bfsu",
+          "url": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+          "observedAt": "2026-10-19T05:13:08.194Z",
+          "status": 200,
+          "finalUrl": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+          "contentType": "text/html",
+          "rawPath": "bfsu.html",
+          "rawSha256": "076811329c4922ed1d1177452da5deff36c6d52dca39f2e2b3b54f56cb1ebc8c",
+          "bytes": 35588,
+          "textPath": "bfsu.txt",
+          "textSha256": "544969047d9802653df0d62e138eef0c3e8d1dbea3d1599a32860602ee4ce499",
+          "evidenceMode": "new-full-official-html",
+          "countsAsNewWebsiteRead": true
+        },
+        {
+          "evidenceMode": "prior-approved-central-guide-reuse",
+          "countsAsNewWebsiteRead": false,
+          "receiptPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.receipt.json",
+          "receipt": {
+            "requestedUrl": "https://pmplatform.chinese.cn/tmp/2026/2/6/94005b2e-f2e9-438e-85e7-12212f0e9968.pdf",
+            "url": "https://pmplatform.chinese.cn/tmp/2026/2/6/94005b2e-f2e9-438e-85e7-12212f0e9968.pdf",
+            "httpStatus": 200,
+            "retrievedAt": "2026-10-18T17:47:49.803504+00:00",
+            "redirects": [],
+            "headers": {
+              "Content-Type": "application/pdf",
+              "ETag": "\"69857f67-5eac4\"",
+              "Last-Modified": "Fri, 06 Feb 2026 05:43:03 GMT",
+              "Content-Length": "387780",
+              "Date": "Sun, 18 Oct 2026 17:47:47 GMT"
+            },
+            "sourceName": "clec-2026-guide",
+            "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.pdf",
+            "rawBytes": 387780,
+            "rawSha256": "0157c7fb5962657cc5f58be63cfc8a0898c4279ea8f87e15c40302fe90f981d7",
+            "textPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.text.txt",
+            "textSha256": "b336af82cac3cbf9736562be3f3ee2479fc1f8e10be10442df77e06d8da3db60",
+            "robots": {
+              "requestedUrl": "https://pmplatform.chinese.cn/robots.txt",
+              "url": "https://pmplatform.chinese.cn/robots.txt",
+              "httpStatus": 404,
+              "retrievedAt": "2026-10-18T17:47:46.782461+00:00",
+              "redirects": [],
+              "headers": {
+                "Content-Type": "application/json;charset=UTF-8",
+                "Content-Length": "113",
+                "Date": "Sun, 18 Oct 2026 17:47:46 GMT"
+              },
+              "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.robots.txt",
+              "sha256": "07e0ed8bde3e14c4a6d8d6ae4c87f067b824aa1efdb41f405916d532f5e6894f",
+              "allowed": true
+            },
+            "links": [],
+            "captureMethod": "normal verified HTTPS; exact host; bounded bytes; no auth/identity/WAF changes"
+          }
+        }
+      ],
+      "dateQuote": "One-Semester Study Program: December 30th, 2026 | March 2027",
+      "dateScope": "School table supports stored December30 but CLEC2026 guidance gives October31 for March2027; school prose also says January2027. Preserve all wording pending authority/intake clarification.",
+      "conflictingDateCandidates": [
+        "2026-10-31",
+        "2026-12-30"
+      ],
+      "noAutomaticPrecedence": true,
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-bfsu-iclt-one-semester-spring-2027",
+          "universityId": "uni-beijing-foreign-studies-university",
+          "programId": "program-bfsu-iclt-one-semester-spring-2027",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": null,
+          "canonicalCycleSha256": "f839a1138b183c0b819f16cfe0a548a2d89c26565bd08d5ff8f72297ffeadb60",
+          "canonicalProgramSha256": "8164f920cad5954cb7f79b80d9d577ad5969a6f44917ba32f5075a970426f7a4",
+          "storedDeadline": "2026-12-30",
+          "officialDeadline": null,
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-bfsu-iclt-2026",
+            "src-clec-iclt-2026-standard",
+            "bfsu-icl-scholarship-2026"
+          ],
+          "result": "conflict",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-bfsu-iclt-one-semester-spring-2027",
+          "universityId": "uni-beijing-foreign-studies-university",
+          "canonicalScholarshipSha256": "30e5da1cc50d55ffae250e8d77a0b14506364c08d2215fc3b96d9c143aff9dd6",
+          "storedDeadline": "2026-12-30",
+          "officialDeadline": null,
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-bfsu-iclt-2026",
+            "src-clec-iclt-2026-standard"
+          ],
+          "result": "conflict",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-chongqing-normal-university",
+      "evidence": [
+        {
+          "key": "cqnu-cn",
+          "url": "https://international.cqnu.edu.cn/info/1386/5186.htm",
+          "observedAt": "2026-10-19T05:13:08.207Z",
+          "status": 200,
+          "finalUrl": "https://international.cqnu.edu.cn/info/1386/5186.htm",
+          "contentType": "text/html",
+          "rawPath": "cqnu-cn.html",
+          "rawSha256": "543152f041d0c6eabecd303ce92952e89a35540731e1a4b3a8c7afe9c717aee4",
+          "bytes": 36013,
+          "textPath": "cqnu-cn.txt",
+          "textSha256": "f5abd84d73184aecb377545b67675804d5953fde29529ed4cbd8ebd18f6f89dd",
+          "evidenceMode": "new-full-official-html",
+          "countsAsNewWebsiteRead": true
+        },
+        {
+          "key": "cqnu-en",
+          "url": "https://international.cqnu.edu.cn/ywb/info/1376/1302.htm",
+          "observedAt": "2026-10-19T05:13:08.417Z",
+          "status": 200,
+          "finalUrl": "https://international.cqnu.edu.cn/ywb/info/1376/1302.htm",
+          "contentType": "text/html",
+          "rawPath": "cqnu-en.html",
+          "rawSha256": "37ef550c7160e8e880b478c3d064e0b8212131e3591d106b82dde4301321b26e",
+          "bytes": 41514,
+          "textPath": "cqnu-en.txt",
+          "textSha256": "79b9dd90690a7215679674a05841dc09b5acd1bce2b518d3bdc5e83256586355",
+          "evidenceMode": "new-full-official-html",
+          "countsAsNewWebsiteRead": true
+        }
+      ],
+      "dateQuote": "春季学期（3月-7月）报名时间：9月1日-12月25日; Spring Semester (March - June) application period: September 1, 2026-December 25, 2026.",
+      "dateScope": "Both current school language guides give December25; stored December30 and its date-related note no longer match. Record remains unpublished. This is a held narrow date-correction candidate, not an applied change.",
+      "heldDateCorrection": {
+        "recordId": "cycle-cqnu-chinese-language-spring-2027",
+        "field": "closesOn",
+        "oldValue": "2026-12-30",
+        "proposedValue": "2026-12-25",
+        "requiresIndependentReview": true,
+        "applied": false,
+        "reason": "Only use a supported narrow date consumer with current catalogue CAS, preserve original row/history and replace only stale date wording. Do not replay the previous full-record consumer."
+      },
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-cqnu-chinese-language-spring-2027",
+          "universityId": "uni-chongqing-normal-university",
+          "programId": "program-cqnu-chinese-language-spring-2027",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": "2026-09-01",
+          "canonicalCycleSha256": "7e442473033c97a915832d8664ef2c33ac25c31e6d264ae11f838ecfbe8bed71",
+          "canonicalProgramSha256": "b6eee1fbf65be514e7b9ffb8e1a7245e96ea9eeb0564be756aa8038755fe499d",
+          "storedDeadline": "2026-12-30",
+          "officialDeadline": null,
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-cqnu-chinese-language-2027",
+            "src-cqnu-chinese-language-2027-zh"
+          ],
+          "result": "conflict",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-beijing-institute-of-petrochemical-technology",
+      "evidence": [
+        {
+          "key": "bipt",
+          "url": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+          "observedAt": "2026-10-19T05:13:08.453Z",
+          "status": 200,
+          "finalUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+          "contentType": "text/html",
+          "rawPath": "bipt.html",
+          "rawSha256": "2f6c66a275e120b01ac26964b00c00ef49f6462359b2ce68e08359bac4b65010",
+          "bytes": 234923,
+          "textPath": "bipt.txt",
+          "textSha256": "c8eb5f363caa536859924fbc93112327350548fed13515a4f2924942b6ac1b14",
+          "evidenceMode": "new-full-official-html",
+          "countsAsNewWebsiteRead": true
+        }
+      ],
+      "dateQuote": "2026年来华留学生招生简章; 语言生 汉语语言; 报名时间 5月1日-6月30日 11月1日-12月30日",
+      "dateScope": "Official 2026 guide, language-student column, second application window. The guide is effective immediately and dated April7,2026; no new intake-month certainty is inferred from that window.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave7-bipt-chinese-language-program-2026-2027-spring",
+          "universityId": "uni-beijing-institute-of-petrochemical-technology",
+          "programId": "prog-gap-wave7-bipt-chinese-language-program",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": "2026-11-01",
+          "canonicalCycleSha256": "e9add4f8a4d9c0592a0d6e508ea8b5d0af774fcdb5c1bf7fac11526554a587de",
+          "canonicalProgramSha256": "caad8efcd419d645ab119a89d2ebbd3a6d7d6497814f825039040728991d903c",
+          "storedDeadline": "2026-12-30",
+          "officialDeadline": "2026-12-30",
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-gap-program-wave7-bipt-chinese-language-program"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-hainan-university",
+      "evidence": [
+        {
+          "key": "hainanu",
+          "url": "https://sie.hainanu.edu.cn/info/1539/7914.htm",
+          "observedAt": "2026-10-19T05:13:08.523Z",
+          "status": 200,
+          "finalUrl": "https://sie.hainanu.edu.cn/info/1539/7914.htm",
+          "contentType": "text/html",
+          "rawPath": "hainanu.html",
+          "rawSha256": "0d80e854554755ad8c6cd6edd7c8ffa6970a66ba164c085542a3bcdd01b546e1",
+          "bytes": 85029,
+          "textPath": "hainanu.txt",
+          "textSha256": "14a6d3389e31e93cfb5e8d480e873959ee01c9ab32088849f66a10dd8a8d1fe6",
+          "evidenceMode": "new-full-official-html",
+          "countsAsNewWebsiteRead": true
+        }
+      ],
+      "dateQuote": "Spring semester: December 31, 2026 (Semester starts from the beginning of March 2027)",
+      "dateScope": "2026-2027 Chinese Language and Culture programme.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-clw-sw-hainanu-chinese-culture-semester-2026-2027-spring",
+          "universityId": "uni-hainan-university",
+          "programId": "prog-gap-clw-sw-hainanu-chinese-culture-semester",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": null,
+          "canonicalCycleSha256": "25ca0545389ff7280b52c350c86d459d046af970567c797ab496e8ec7dc9cb9d",
+          "canonicalProgramSha256": "42754236f3e65e36c143cf98fd3591a7314a22dc9ddf0625aa99891391dba4fa",
+          "storedDeadline": "2026-12-31",
+          "officialDeadline": "2026-12-31",
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-gap-program-clw-sw-hainanu-chinese-culture-semester"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-tianjin-university",
+      "evidence": [
+        {
+          "key": "tju",
+          "url": "https://sie.tju.edu.cn/en/xwxm/FOUNDATIONPROGRAM/202609/t20260920_324704.html",
+          "observedAt": "2026-10-19T05:13:08.639Z",
+          "status": 200,
+          "finalUrl": "https://sie.tju.edu.cn/en/xwxm/FOUNDATIONPROGRAM/202609/t20260920_324704.html",
+          "contentType": "text/html",
+          "rawPath": "tju.html",
+          "rawSha256": "1126b57e57cca4b3aa831ffe18a4f50799a5f3cb2efa0f663553b5fa551bce0d",
+          "bytes": 104886,
+          "textPath": "tju.txt",
+          "textSha256": "758cc93d304aebe2301c665526fb71b5ebc5a1bd29a40e0fb407d0487d14aad7",
+          "evidenceMode": "new-full-official-html",
+          "countsAsNewWebsiteRead": true
+        }
+      ],
+      "dateQuote": "Program 2 | 1 Year | Fall & Spring Semester | 2027.03.15-2027.07.15 | 2027.09",
+      "dateScope": "2027 autumn-entry one-year foundation route; separate spring one-semester row is not substituted.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-tju-foundation-one-year-autumn-2027",
+          "universityId": "uni-tianjin-university",
+          "programId": "prog-gap-breadth-tju-foundation-one-year",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "storedOpensOn": "2027-03-15",
+          "canonicalCycleSha256": "72618ace0096d5f56324d1dbbd1cd998ad71ead69e2da2ef5991938a2aa15778",
+          "canonicalProgramSha256": "e48a14c4e44a7cfc9d2cf67877dea4e396023915a1a7b7993f772049281af53f",
+          "storedDeadline": "2027-07-15",
+          "officialDeadline": "2027-07-15",
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-tju-foundation-2027-review"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-nanjing-university",
+      "evidence": [
+        {
+          "evidenceMode": "same-day-prior-official-guide-reuse",
+          "countsAsNewWebsiteRead": false,
+          "reportPath": "quality/deadline-sweep-20261019/official-batch-007/report.json",
+          "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977",
+          "rawPath": "quality/deadline-sweep-20261019/official-batch-007/nju-bachelor.html",
+          "rawSha256": "1483c3a275ea6ed0e83b5c1d9113956e1f69d6250266a3478faf0fb0aaa1d520",
+          "originalObservedAt": "2026-10-19T04:48:40.256Z",
+          "guide": {
+            "key": "nju-bachelor",
+            "source": {
+              "name": "nju-bachelor",
+              "url": "https://hwxy.nju.edu.cn/lxnd/zsxx/bkxm/sbzn/index.html",
+              "method": "GET",
+              "startedAt": "2026-10-19T04:48:39.892Z",
+              "completedAt": "2026-10-19T04:48:40.256Z",
+              "status": 200,
+              "contentType": "text/html; charset=utf-8",
+              "bodyPath": "nju-bachelor.html",
+              "bodySha256": "1483c3a275ea6ed0e83b5c1d9113956e1f69d6250266a3478faf0fb0aaa1d520",
+              "bytes": 87187,
+              "requestPurpose": "Read public official admissions dates only",
+              "requestBody": null,
+              "canonicalWrites": 0,
+              "paidCalls": 0,
+              "receiptPath": "nju-bachelor.receipt.json",
+              "receiptSha256": "597f7d67d3077c10511878185b48a856388dcf3a63929ec29718415eec5641b9"
+            },
+            "title": "申报指南",
+            "dateQuote": "3月1日至5月15日",
+            "evidenceLocator": "自费申报指南 / 申请时间",
+            "yearContext": [
+              "Published September 16, 2026.",
+              "Body explicitly refers to the 2027 undergraduate catalogue and autumn 2027 enrolment."
+            ],
+            "officialOpensOn": "2027-03-01",
+            "officialDeadline": "2027-05-15",
+            "applicationScope": "self-funded bachelor route only; no scholarship deadline certified"
+          }
+        }
+      ],
+      "dateQuote": "3月1日至5月15日",
+      "dateScope": "Exact additional existing autumn2027 self-funded bachelor record dates. Programme offerings, fees and scholarship deadlines are outside this binding.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-nanjing-university-information-management-information-system-bachelor",
+          "universityId": "uni-nanjing-university",
+          "programId": "program-nanjing-university-information-management-information-system-bachelor",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "storedOpensOn": "2027-03-01",
+          "canonicalCycleSha256": "c694bae592275031658dc2890199f6848adc131e3234bffc221c108661e8da7b",
+          "canonicalProgramSha256": "bc147c7fbc89bb6f24f548ed69a8ecac6aa6d19149126132ca0ca7e76874b55b",
+          "storedDeadline": "2027-05-15",
+          "officialDeadline": "2027-05-15",
+          "publicationBefore": false,
+          "sourceIds": [
+            "source-nju-undergraduate-international-catalog-2027-oct13",
+            "source-nju-undergraduate-self-funded-guide-2027-oct13",
+            "source-nju-official-current-tuition-oct13"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-nanjing-university-editing-publishing-science-bachelor",
+          "universityId": "uni-nanjing-university",
+          "programId": "program-nanjing-university-editing-publishing-science-bachelor",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "storedOpensOn": "2027-03-01",
+          "canonicalCycleSha256": "3345abb669fb2d5698781f3c6ea6b4fe056c9a4da74a970c406757b65316be14",
+          "canonicalProgramSha256": "ffe158d1ecb4a88ddbacf1f3c515cd7d0384e5de4e023fffa50236445dced175",
+          "storedDeadline": "2027-05-15",
+          "officialDeadline": "2027-05-15",
+          "publicationBefore": false,
+          "sourceIds": [
+            "source-nju-undergraduate-international-catalog-2027-oct13",
+            "source-nju-undergraduate-self-funded-guide-2027-oct13",
+            "source-nju-official-current-tuition-oct13"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-nanjing-university-applied-psychology-bachelor",
+          "universityId": "uni-nanjing-university",
+          "programId": "program-nanjing-university-applied-psychology-bachelor",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "storedOpensOn": "2027-03-01",
+          "canonicalCycleSha256": "f4dd0f46601ab3f3a8f9aae9becfa6c343079f33fae6145b9c21494ebae0dcc7",
+          "canonicalProgramSha256": "cc6a4283732fac84e5ccd993b4af9fdf5f9c02d937763c290dbefbfd2231833f",
+          "storedDeadline": "2027-05-15",
+          "officialDeadline": "2027-05-15",
+          "publicationBefore": false,
+          "sourceIds": [
+            "source-nju-undergraduate-international-catalog-2027-oct13",
+            "source-nju-undergraduate-self-funded-guide-2027-oct13",
+            "source-nju-official-current-tuition-oct13"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-xiamen-university",
+      "evidence": [
+        {
+          "evidenceMode": "same-day-prior-official-guide-reuse",
+          "countsAsNewWebsiteRead": false,
+          "reportPath": "quality/deadline-sweep-20261019/official-batch-006/report.json",
+          "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa",
+          "rawPath": "quality/deadline-sweep-20261019/official-batch-006/master.html",
+          "rawSha256": "d9b75f2174b01ff4e78d4c15b9fe1b9224e9b72a5b8b25b85fbdba727c1af04f",
+          "originalObservedAt": "2026-10-19T04:45:47.794380+00:00",
+          "guide": {
+            "guideEvidenceKey": "master",
+            "degreeLevel": "master",
+            "noticeTitle": "厦门大学2027年国际学生（硕士）招生简章",
+            "noticeYear": 2027,
+            "source": {
+              "degreeLevel": "master",
+              "url": "https://admissions.xmu.edu.cn/cn/info/1063/10743.htm",
+              "observedAt": "2026-10-19T04:45:47.794380+00:00",
+              "method": "GET",
+              "httpStatus": 200,
+              "finalUrl": "https://admissions.xmu.edu.cn/cn/info/1063/10743.htm",
+              "bodyPath": "master.html",
+              "bodySha256": "d9b75f2174b01ff4e78d4c15b9fe1b9224e9b72a5b8b25b85fbdba727c1af04f",
+              "bytes": 119953,
+              "textPath": "master.txt",
+              "dateTablePath": "master-date-table.json",
+              "dateTableSha256": "df7c625f1b411d5bab06d2dc1bfb5d89b23c75c2c9129658d0f3aa4e5605e79a"
+            },
+            "matchedExistingSourceIds": [
+              "source-xmu-master-guide-cn-2027-oct13"
+            ],
+            "applicationTableLocator": "二、申请时间 / 开始时间-截止时间-申请类型",
+            "selfFundedDateQuote": "2026年12月1日 | 2027年5月31日 | 自费生",
+            "tableRowspanProof": {
+              "openingCellText": "2026年12月1日",
+              "openingCellRowspan": 5,
+              "applicationRowsCovered": 5,
+              "rowspanCoversSelfFundedRow": true,
+              "dateTablePath": "master-date-table.json",
+              "dateTableSha256": "df7c625f1b411d5bab06d2dc1bfb5d89b23c75c2c9129658d0f3aa4e5605e79a"
+            },
+            "selfFundedWindow": {
+              "opensOn": "2026-12-01",
+              "closesOn": "2027-05-31",
+              "timeZone": "Asia/Shanghai",
+              "stateOnAuditDate": "future"
+            },
+            "separateApplicationTypeWindows": [
+              {
+                "applicationType": "中国政府奖学金B类",
+                "opensOn": "2026-12-01",
+                "closesOn": "2027-02-20",
+                "scope": "Date table context only; no scholarship record approved or updated."
+              },
+              {
+                "applicationType": "福建省政府外国留学生奖学金",
+                "opensOn": "2026-12-01",
+                "closesOn": "2027-04-30",
+                "scope": "Date table context only; no scholarship record approved or updated."
+              },
+              {
+                "applicationType": "厦门大学国际学生新生奖学金",
+                "opensOn": "2026-12-01",
+                "closesOn": "2027-04-30",
+                "scope": "Date table context only; no scholarship record approved or updated."
+              },
+              {
+                "applicationType": "厦门大学海岸带可持续发展奖学金",
+                "opensOn": "2026-12-01",
+                "closesOn": "2027-04-30",
+                "scope": "Date table context only; no scholarship record approved or updated."
+              },
+              {
+                "applicationType": "自费生",
+                "opensOn": "2026-12-01",
+                "closesOn": "2027-05-31",
+                "scope": "Date table context only; no scholarship record approved or updated."
+              }
+            ],
+            "excludedFundingRoutes": [
+              "Chinese Government ScholarshipTypeA: follow CSC or country/embassy receiving authority dates, not this table.",
+              "International Chinese Language Teachers Scholarship: follow CLEC dates, not self-funded or scholarshipTypeB dates."
+            ],
+            "boundAdmissionCycles": 143,
+            "boundScholarshipRecords": 0,
+            "scope": "Only existing published autumn2027 cycles of this degree level, with exact existing official guide association, and only self-funded application opening/deadline."
+          }
+        }
+      ],
+      "dateQuote": "2026年12月1日 | 2027年5月31日 | 自费生",
+      "dateScope": "Exact additional existing autumn2027 self-funded master record dates. Programme offerings, fees and scholarship deadlines are outside this binding.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-xiamen-university-international-relations-master-english",
+          "universityId": "uni-xiamen-university",
+          "programId": "program-xiamen-university-international-relations-master-english",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "storedOpensOn": "2026-12-01",
+          "canonicalCycleSha256": "bce73f8136fc4623048a2c9a0d58d6fc452bc6f82021538f9300d82fe99dd3c1",
+          "canonicalProgramSha256": "925fe20058efbeb1ffc4b47de98dd74c0f1776f0f7179baf625c8b0094d1aed4",
+          "storedDeadline": "2027-05-31",
+          "officialDeadline": "2027-05-31",
+          "publicationBefore": false,
+          "sourceIds": [
+            "source-xmu-master-guide-cn-2027-oct13",
+            "source-xmu-master-english-catalog-cn-2027-oct13",
+            "source-xmu-master-english-catalog-2027-oct13"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-xiamen-university-marine-affairs-0707j3-master-english",
+          "universityId": "uni-xiamen-university",
+          "programId": "program-xiamen-university-marine-affairs-0707j3-master-english",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "storedOpensOn": "2026-12-01",
+          "canonicalCycleSha256": "4a1335ed3185cdfdfa5c46108a1e3d4d0605b84be99f4663e40a2a6919912808",
+          "canonicalProgramSha256": "b54d469287d8b2f9f345071e12f18e385b665aa74e09f4ac3ac198f65675a8da",
+          "storedDeadline": "2027-05-31",
+          "officialDeadline": "2027-05-31",
+          "publicationBefore": false,
+          "sourceIds": [
+            "source-xmu-master-guide-cn-2027-oct13",
+            "source-xmu-master-english-catalog-cn-2027-oct13",
+            "source-xmu-master-english-catalog-2027-oct13"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-xiamen-university-marine-affairs-0830j3-master-english",
+          "universityId": "uni-xiamen-university",
+          "programId": "program-xiamen-university-marine-affairs-0830j3-master-english",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "storedOpensOn": "2026-12-01",
+          "canonicalCycleSha256": "18ea59ffbe2f52fce5b7c86bbc598b6866e9c3d8c7e0affed4d2db47e40139e7",
+          "canonicalProgramSha256": "923f5a4b34d4965a4fe7eb86d3e91c0128472db5a7b5461c6a1da035a092e023",
+          "storedDeadline": "2027-05-31",
+          "officialDeadline": "2027-05-31",
+          "publicationBefore": false,
+          "sourceIds": [
+            "source-xmu-master-guide-cn-2027-oct13",
+            "source-xmu-master-english-catalog-cn-2027-oct13",
+            "source-xmu-master-english-catalog-2027-oct13"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-beijing-language-and-culture-university",
+      "evidence": [
+        {
+          "key": "blcu",
+          "url": "https://admission.blcu.edu.cn/en/98/list.htm",
+          "observedAt": "2026-10-19T05:13:08.646Z",
+          "status": 200,
+          "finalUrl": "https://admission.blcu.edu.cn/en/98/list.htm",
+          "contentType": "text/html",
+          "rawPath": "blcu.html",
+          "rawSha256": "e33725d5fdaacb1a37b353c55a6fe6ba5ccca26352d2fbf751f3e492bd311e4b",
+          "bytes": 50641,
+          "textPath": "blcu.txt",
+          "textSha256": "5dac74e95f5cbe9254e669c67e180a4a80edc78bbd75a5c3cb21b82a7b1d5608",
+          "evidenceMode": "new-full-official-html",
+          "countsAsNewWebsiteRead": true
+        }
+      ],
+      "dateQuote": "If enrolled in March 2027: Please submit your application before January 12, 2027",
+      "dateScope": "School Beijing International Students Scholarship, March2027 entry.",
+      "precisionQualification": "The word before is retained. Calendar-date equality does not authorize extending applications through January12 end-of-day.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-blcu-beijing-international-students-2027",
+          "universityId": "uni-beijing-language-and-culture-university",
+          "canonicalScholarshipSha256": "6bd3983f0db50bbfa23b3dfc48047c705aa238c4433b9b8ee0acf008479b1b9f",
+          "storedDeadline": "2027-01-12",
+          "officialDeadline": "2027-01-12",
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-blcu-beijing-scholarship"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-tianjin-foreign-studies-university",
+      "evidence": [
+        {
+          "key": "tjfsu",
+          "url": "https://isa.tjfsu.edu.cn/info/1040/1874.htm",
+          "observedAt": "2026-10-19T05:13:08.790Z",
+          "status": 200,
+          "finalUrl": "https://isa.tjfsu.edu.cn/info/1040/1874.htm",
+          "contentType": "text/html",
+          "rawPath": "tjfsu.html",
+          "rawSha256": "8ffcd5ec78fb1e7e411a17bb2471b0e0f52ad514bcbfbcd43ca35040c3d07f81",
+          "bytes": 50013,
+          "textPath": "tjfsu.txt",
+          "textSha256": "cd6e32cbc8c837e4cfa0ce608690068e002316263cf4c8b120898df17fd86f8b",
+          "evidenceMode": "new-full-official-html",
+          "countsAsNewWebsiteRead": true
+        }
+      ],
+      "dateQuote": "申请人于2026年12月30日前; before 30 December 2026",
+      "dateScope": "2026 China Link scholarship, student university-platform submission first; subsequent CSC submission follows university review.",
+      "precisionQualification": "Before December30 is preserved; this does not certify availability throughout December30.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-local-tjfsu-china-link-scholarship",
+          "universityId": "uni-tianjin-foreign-studies-university",
+          "canonicalScholarshipSha256": "2ab13f7d397607f22dbd83d5d1656b482ae437ff6b7adb68e57c5654e89260ac",
+          "storedDeadline": "2026-12-30",
+          "officialDeadline": "2026-12-30",
+          "publicationBefore": false,
+          "sourceIds": [
+            "src-gap-scholarship-local-tjfsu-china-link-scholarship"
+          ],
+          "result": "unchanged",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false
+        }
+      ]
+    }
+  ],
+  "precisionIssues": [
+    {
+      "universityId": "uni-university-of-international-business-and-economics",
+      "recordIds": [
+        "cycle-uibe-international-foundation-spring-2027"
+      ],
+      "qualification": "Unknown current seat availability; do not infer availability solely from the calendar maximum."
+    },
+    {
+      "universityId": "uni-dalian-university-of-technology",
+      "recordIds": [
+        "cycle-2027-bf053c085767"
+      ],
+      "qualification": "Current 2027 undergraduate guide body. It recommends completion before end of June; this is insufficient to certify a hard June30 inclusive cutoff or an exact clock time."
+    },
+    {
+      "universityId": "uni-dalian-university-of-technology",
+      "recordIds": [
+        "cycle-2027-5df1a1f1218d"
+      ],
+      "qualification": "Current 2027 undergraduate guide body. It recommends completion before end of June; this is insufficient to certify a hard June30 inclusive cutoff or an exact clock time."
+    },
+    {
+      "universityId": "uni-beijing-foreign-studies-university",
+      "recordIds": [
+        "cycle-bfsu-iclt-one-semester-spring-2027",
+        "scholarship-bfsu-iclt-one-semester-spring-2027"
+      ],
+      "qualification": "School table supports stored December30 but CLEC2026 guidance gives October31 for March2027; school prose also says January2027. Preserve all wording pending authority/intake clarification."
+    },
+    {
+      "universityId": "uni-chongqing-normal-university",
+      "recordIds": [
+        "cycle-cqnu-chinese-language-spring-2027"
+      ],
+      "qualification": "Both current school language guides give December25; stored December30 and its date-related note no longer match. Record remains unpublished. This is a held narrow date-correction candidate, not an applied change."
+    },
+    {
+      "universityId": "uni-beijing-language-and-culture-university",
+      "recordIds": [
+        "scholarship-blcu-beijing-international-students-2027"
+      ],
+      "qualification": "The word before is retained. Calendar-date equality does not authorize extending applications through January12 end-of-day."
+    },
+    {
+      "universityId": "uni-tianjin-foreign-studies-university",
+      "recordIds": [
+        "sch-gap-local-tjfsu-china-link-scholarship"
+      ],
+      "qualification": "Before December30 is preserved; this does not certify availability throughout December30."
+    }
+  ],
+  "limitations": [
+    "Selected record dates only; no full-school catalogue completed and no complete fact renewal.",
+    "Raw record discrepancies and imprecise qualifiers remain held/unpublished; a supported narrow consumer and independent review are required before a factual change.",
+    "Six same-day guide date rebindings reuse prior bytes, not fresh official website reads."
+  ]
+}

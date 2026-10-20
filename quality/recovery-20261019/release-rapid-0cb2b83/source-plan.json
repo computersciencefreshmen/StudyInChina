@@ -1,0 +1,4519 @@
+{
+  "schemaVersion": 1,
+  "preparedAt": "2026-10-18T18:15:50.062Z",
+  "purpose": "rapid-reviewed-programmes-and-scholarships-exact-commit",
+  "candidate": ".tmp/rapid-0cb2b83-source",
+  "sourceCommit": "0cb2b83dde6116907752ec60a165fedc6f3f203f",
+  "sourceTree": "15cbcefaead4233dfd5dbdfd35592962d1c1eefd",
+  "sourceFiles": 637,
+  "inventoryPolicy": "All regular files accepted by the exact commit .vercelignore; no working-tree overlays.",
+  "overlays": [],
+  "deploymentEnvironment": {
+    "credentialValuesIncluded": false,
+    "sourceEnvironmentFilesIncluded": false,
+    "publicExampleTemplateOnly": true
+  },
+  "metadataOnlyProjectLink": "Fixed non-sensitive .vercel/project.json metadata excluded by the committed .vercelignore.",
+  "manifestPin": {
+    "path": "quality/recovery-20261019/rapid-expansion/release-manifest-v1.json",
+    "sha256": "e0d8d56c7436a8e8c1e2f7ca0d4df3ff3904322bfb1fb563fc70b254f548767e"
+  },
+  "approvedEvidencePins": [
+    {
+      "path": "quality/recovery-20261019/rapid-expansion/tongji-szu/dhu/full-program-batch-approved-v2.json",
+      "bytes": 20252,
+      "sha256": "b1028fac473ca72658db5481fb9cac34413a1a9bafaeb548aeab6197bca9ed7d",
+      "gitBlobSha1": "82497174c72884fd95bae6c1b5490e57a5e84534",
+      "kind": "exact-commit-approved-evidence"
+    },
+    {
+      "path": "quality/recovery-20261019/rapid-expansion/tongji-szu/szu/full-program-batch-approved-v1.json",
+      "bytes": 340523,
+      "sha256": "25232dafda96744f124065cb7a15ccb30ec3abe6b6d1588cbe53402be5919f09",
+      "gitBlobSha1": "9b1f33866126b6b17789670398a78d34da05c112",
+      "kind": "exact-commit-approved-evidence"
+    },
+    {
+      "path": "quality/recovery-20261019/rapid-expansion/scholarships/szu/full-scholarship-batch-approved-v2.json",
+      "bytes": 48014,
+      "sha256": "3c49683f123f245bcaea4551ecf65f281e605f91c8ecf8a790c5766647a4e110",
+      "gitBlobSha1": "5368d20a0a6fbd1cb3ef7e6e9d592f66c1a59711",
+      "kind": "exact-commit-approved-evidence"
+    },
+    {
+      "path": "quality/recovery-20261019/rapid-expansion/scholarships/iclt-first-three/full-scholarship-batch-approved-v1.json",
+      "bytes": 46337,
+      "sha256": "7614d5c02f47ef78901ce0c91df740bcfe2ab44feab9ede97c18648739f210f8",
+      "gitBlobSha1": "b1a69dcf972e1d6fc2118a42897e077ae0e19473",
+      "kind": "exact-commit-approved-evidence"
+    },
+    {
+      "path": "quality/recovery-20261019/rapid-expansion/scholarships/tongji/full-scholarship-batch-approved-v1.json",
+      "bytes": 14783,
+      "sha256": "1df2204807d95b89006c49db7b06214cd9012ed2f91e40f895b3679a9250dd73",
+      "gitBlobSha1": "e760b59f7e923fd6ec3b4d66110a93541b6b33e0",
+      "kind": "exact-commit-approved-evidence"
+    }
+  ],
+  "pins": [
+    {
+      "path": ".env.example",
+      "bytes": 1621,
+      "sha256": "a16b430852a3d979678f92b9ed81e7ed1b81a2325c94fa88b163dcdaba44d8bf",
+      "gitBlobSha1": "23bcdbddd7a2d010015e39ab6a2112d10662be2d",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".gitattributes",
+      "bytes": 334,
+      "sha256": "4b1675cfa51690927cb2a273253306f7772f9ed249ba28519fecd14b7b3dcdeb",
+      "gitBlobSha1": "7981d13e1ef29754f005b84b54d548f014c11221",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/data-correction.yml",
+      "bytes": 2874,
+      "sha256": "c222ed2f6ac1705f36c6ae573506f8438f593284505d7f0cad91a78f95306214",
+      "gitBlobSha1": "45c534ae36c24e2199060b7bc725056ff141745d",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "bytes": 1518,
+      "sha256": "aa849f611a1857ec9f6638f9063cc058721bd87b4d4f73a99052c0872754671b",
+      "gitBlobSha1": "2f8d5b955ecb9127b410c1b557f8fdd63abe21e8",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".github/workflows/automation-health.yml",
+      "bytes": 1288,
+      "sha256": "891d0eb26844158b29187bbd3128e9de7b4ed4d26bb1e7710a0c935e6645990c",
+      "gitBlobSha1": "388d91ded3a6073139ce0808113e9f2f4d0f0ce3",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".github/workflows/autonomous-catalog.yml",
+      "bytes": 7045,
+      "sha256": "6eb6ebaa8a8ef69035164fbe91c400b5b69f283627440b4826a8c056c38f6273",
+      "gitBlobSha1": "a2bd7b8ea1b78e326ce7ba367c4f6c3212d839ba",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "bytes": 2719,
+      "sha256": "0d3c1fdc98ca6a5bc499fc898d70894d130a96d3f25ea1eab65f30c3758b1589",
+      "gitBlobSha1": "acf30cc0d1b30035a9f52884abba6bf006953a01",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".github/workflows/cloudflare-backup.yml",
+      "bytes": 9151,
+      "sha256": "03f2f740b80c02d39f1977e0dc3373351acbb9662f494ebdc625f162c96110b6",
+      "gitBlobSha1": "ff2698f880a3f8e6119ba8234361b7464919b152",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".github/workflows/cloudflare-restore-drill.yml",
+      "bytes": 3402,
+      "sha256": "4eafa203c56b3485a76543669874652a08d1b5f73c95e71d0d7f49cd9bb2c472",
+      "gitBlobSha1": "7c59e32636277db7028af7352784717474f0a5c4",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".github/workflows/data-health.yml",
+      "bytes": 7740,
+      "sha256": "125440440b2cb40bc90b692bc097139078e00969f0db89ecda457da2219a4476",
+      "gitBlobSha1": "237b54797d3940ed0e23b9926061aa6abde80a29",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".github/workflows/official-catalog-harvest.yml",
+      "bytes": 25363,
+      "sha256": "239aeb1e913ac5ec38dbbcb557b41a74f535305287939018db37b741d2e8f9cb",
+      "gitBlobSha1": "28fc51a638e78fcf7c2805740bd8257c478f11ee",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".github/workflows/program-fact-refresh.yml",
+      "bytes": 9681,
+      "sha256": "ab7c9916fd6949d9932176b1c0edc0b257f044a778008f7420f7075c3209f0d9",
+      "gitBlobSha1": "924692df927a79a4d2c0127b05ee60d4b5e9d3ab",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".github/workflows/publishing-authentication-check.yml",
+      "bytes": 860,
+      "sha256": "39deeb0271e6ff03d59cd743e5fa14aa9809a657704d7f1a7a42a1c537d8fef7",
+      "gitBlobSha1": "69369c681c428774d69cff90241daa62da4c1414",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".github/workflows/source-manifest-cohort-candidates.yml",
+      "bytes": 1860,
+      "sha256": "f597de29f71a2e5209b5bb0f36a8cba916da54fbaad97209b2002a7ea4a9d4f9",
+      "gitBlobSha1": "1ee05c79853179c0f2921c3196403549b92dbf63",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".github/workflows/university-program-maintenance.yml",
+      "bytes": 13857,
+      "sha256": "9a633dcb7314d49246232d4e3a5806efa9b16c948fbaf3fc7a4ee33db4880561",
+      "gitBlobSha1": "afface6935bb36c1c5101833f4c2ace680cda220",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".github/workflows/vercel-production-alias.yml",
+      "bytes": 18809,
+      "sha256": "61a3e273c6ef34bd1cca78be5223cc03d1d5a7eca2df53da29de60a9ebf07485",
+      "gitBlobSha1": "a2d6660ba3d1df6871cd131d411bd852c4da90c2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 413,
+      "sha256": "4cbe91e4a7126550a79a207416ec34821e213e6f2f1127324543f77be09170af",
+      "gitBlobSha1": "692fd379607ab18aacb4da755161d763d836c1fc",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".node-version",
+      "bytes": 3,
+      "sha256": "68ca3fba3b7e864770cb61aeb306d4bd4354b68ab4dd38450860c5d823e42a53",
+      "gitBlobSha1": "a45fd52cc5891570d6299fab38643103c3955474",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".nvmrc",
+      "bytes": 3,
+      "sha256": "68ca3fba3b7e864770cb61aeb306d4bd4354b68ab4dd38450860c5d823e42a53",
+      "gitBlobSha1": "a45fd52cc5891570d6299fab38643103c3955474",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": ".vercelignore",
+      "bytes": 394,
+      "sha256": "74cbc13a4727645dda422be53c7517a4532d52980b09218e42c65003d448b128",
+      "gitBlobSha1": "76e73236c8bb3cc1f1058ead60e8dfc5850e5227",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 678,
+      "sha256": "63f2c50380ed6303237cce215ce27af1d620d094c215e28d1b1538a3c070e3bb",
+      "gitBlobSha1": "643577dfaef36ee8032915ef80a0f0638f7beda0",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "MINIMAX_AGENT_TEAMS_CONTINUE_PROMPT.md",
+      "bytes": 8384,
+      "sha256": "98c51f6b9b3c7f30c7a6758bdf40171e0c88005e088bb6da5ac2cadf518d70e0",
+      "gitBlobSha1": "14f7f8c621aa422233b5996768c0af37094407e9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "MINIMAX_CONTINUOUS_HARVEST_PROMPT.md",
+      "bytes": 1713,
+      "sha256": "248741fa89c68bef87d65ffd8ae536f5b64c1751d0a6dd4e0b6bbc9f38390d3e",
+      "gitBlobSha1": "230d59cdfcb2d630808e25d893f236ebd0695c0e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "MINIMAX_DATA_COLLECTION_PROMPT.md",
+      "bytes": 12843,
+      "sha256": "74aa2bd1c450ea6385055dc48d1c661e30c5196a4e2825382b1aad5f5c14ef4d",
+      "gitBlobSha1": "b591c9c867420331242cddbc7ed21b2e1d7e8503",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "MINIMAX_EXPAND_SCHOOLS_AND_PROGRAMS_PROMPT.md",
+      "bytes": 15618,
+      "sha256": "abe2a05e91b2608213298db3e1ae12329147cceee7a007ff0ff3b32b103fee56",
+      "gitBlobSha1": "a3981dc3bf67584e66931363c41e86d3494bc6ae",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "MINIMAX_V3_EXTRACTION_RECOVERY_PROMPT.md",
+      "bytes": 11689,
+      "sha256": "21704c99784f6c0a9bd5888fe0253d862d71097c6fd444d8c5dd489fa77b37c1",
+      "gitBlobSha1": "b0a04937380c5b7826cce42f072831b51d593316",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "README.md",
+      "bytes": 31926,
+      "sha256": "14c8f4d96d0c7713faba456a9511b388314aa950fa50663b841854318627df5c",
+      "gitBlobSha1": "ac72d60a8d5530b1b819c3b7a8a17d9922625e4b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "README.zh-CN.md",
+      "bytes": 29996,
+      "sha256": "89f53e461180a8067cfd7e2093879e27d720490dd43d07d16b587e3823c1e6ae",
+      "gitBlobSha1": "573e72017463ceb439dd870c0c80142be66ae04e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/data/admission-cycles.json",
+      "bytes": 2325560,
+      "sha256": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+      "gitBlobSha1": "f98cebff29fb611c4f65f0783accd1ea4024fc85",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/data/cities.json",
+      "bytes": 58897,
+      "sha256": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+      "gitBlobSha1": "fba8e2894bf999da221af38907a82b0bf975900d",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/data/program-localizations.json",
+      "bytes": 932449,
+      "sha256": "df7db79ec503d14cb6c28fd8eb59918b49054abf15e2efeb208dbf2de25205f8",
+      "gitBlobSha1": "e711c9c4a20cee564ef011d8e5d96e3e1a5a8902",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/data/programs.json",
+      "bytes": 7340694,
+      "sha256": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+      "gitBlobSha1": "074cb9482504201cab8793efe8ec8919dac16265",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/data/scholarships.json",
+      "bytes": 778660,
+      "sha256": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83",
+      "gitBlobSha1": "1d36c3145cbf1784538603694edc0bd5fcd1dbf4",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/data/sources.json",
+      "bytes": 982063,
+      "sha256": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+      "gitBlobSha1": "77ae8d4a14f5a6d62394e98f6763d6918d0e9bda",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/data/universities.json",
+      "bytes": 348043,
+      "sha256": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+      "gitBlobSha1": "4812173b20f8e1b90305806cc3208262f30e3de5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-manifests/double-first-class/targets.v1.json",
+      "bytes": 26803,
+      "sha256": "24bb2c9b28cf43b076eb38dddb546b5521e5d78ab19ee2c5a508223181fa1c48",
+      "gitBlobSha1": "d71527263609d3f5232edc2fce67b733b06bbd73",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-manifests/pilot/fudan-university.json",
+      "bytes": 12650,
+      "sha256": "9d8db6ebc3aaaf3a36380cb147d9d7403e775bf40194c515091a3d49fb08f569",
+      "gitBlobSha1": "b660fd385d813955f3519982cad125bbe6517093",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-manifests/pilot/harbin-institute-of-technology.json",
+      "bytes": 12969,
+      "sha256": "6d13900fcf0ab5038fe4acd4d60923cd70ae1677ee4847806418cecca719b089",
+      "gitBlobSha1": "bb013851663fe91a6d3478abed76d5e303bb6145",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-manifests/pilot/nanjing-university.json",
+      "bytes": 12379,
+      "sha256": "c886b3abcc547db9fb5c13d5e23626fdcc9d2770e6e23cdda71aa524b5ecc03b",
+      "gitBlobSha1": "75047d726d3ce64fc941b9719763f97d521f465f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-manifests/pilot/peking-university.json",
+      "bytes": 18155,
+      "sha256": "1423406af138e1a6677e5dd11136317d43248f207b99a0f03b32962efaa21f76",
+      "gitBlobSha1": "d923e860a40a00c796e02f317fd88dcec9e447e7",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-manifests/pilot/shanghai-jiao-tong-university.json",
+      "bytes": 11359,
+      "sha256": "613581496ad874cd85740a2d2ddec3e7a62178dfc11e850a642028b847d8dd39",
+      "gitBlobSha1": "0a99f817e87b1cb27036e4e580627fbfa91dac6a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-manifests/pilot/sun-yat-sen-university.json",
+      "bytes": 13017,
+      "sha256": "6a2b1cd44bfc4a98067b3e7d5dd44b46fac704776ac57bbab5780e837913b519",
+      "gitBlobSha1": "0a150c80845b0fe6b68e3f6d9ae39ee675f27861",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-manifests/pilot/tsinghua-university.json",
+      "bytes": 17861,
+      "sha256": "ca217ba46b39e7aa38b4a732ae96d57408011fb374b39b215f7ee7c8c35f8e7f",
+      "gitBlobSha1": "085c8c9ba42a18de7b8b9425ed75cadbd05928f9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-manifests/pilot/ustc.json",
+      "bytes": 13862,
+      "sha256": "eae73e4ed3eeedfa7dedc517fa92c68bc9c373f3ad27cf25b7afc90a4a64994a",
+      "gitBlobSha1": "e482dcec74aa61e5876966498d69fec0ade820d9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-manifests/pilot/wuhan-university.json",
+      "bytes": 8547,
+      "sha256": "621d31c07a40df2de52b44cfa1422693f427cd67378707329070ca3b03b0a6a9",
+      "gitBlobSha1": "334365f22d57ac910fd1e60525d8d248db6d70ce",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-manifests/pilot/zhejiang-university.json",
+      "bytes": 14154,
+      "sha256": "04be1b04205399fcba94ba296b518145a545573cca32e303a5c9e11b087f7f9f",
+      "gitBlobSha1": "e1ba1527fabca2198add053d9da94e3e5ce7523c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-manifests/regional-priority/targets.v1.json",
+      "bytes": 8719,
+      "sha256": "9345b6dcda4ad004d290d2dbe16feb3107fc3ed8c0eb5309223f5267f51c4c79",
+      "gitBlobSha1": "f29910c7e4000316b7036928b39425065eef36e5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/central-north.official-sources.v1.json",
+      "bytes": 15517,
+      "sha256": "46fdabf52879618b961481bf0133ef90f7009b22710601b76aafad46638f1fa0",
+      "gitBlobSha1": "fec4dc92253e06bb75def06343ca2a156118e90f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/east-second.official-sources.v1.json",
+      "bytes": 16895,
+      "sha256": "54c60f439e169ed5e8789709956fbf018c44e04998dded3f1b8d446251074ef7",
+      "gitBlobSha1": "9fc7a2f9dfb15c391827a28d7e86a6c543c814b4",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/east-south.official-sources.v1.json",
+      "bytes": 15666,
+      "sha256": "ae21798003c522498a389b7724f7c1d3955284eeb6f20f423911a30086d1012f",
+      "gitBlobSha1": "48480609427d0af3b1a99c32e1c6acbb12c64474",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/eighth-expansion.official-sources.v1.json",
+      "bytes": 21471,
+      "sha256": "21b138e8d913fbb1b205c8b64125cd9027dd9db37cfac0822c6dd62ab043352d",
+      "gitBlobSha1": "9abc1b7c56062f320234cddfb00e46abc68c0ba8",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/fifth-expansion.official-sources.v1.json",
+      "bytes": 22236,
+      "sha256": "f0f46339876e62f3a18b9d4ee6f27ccad370b82f0ea224c84c2955062c769a8a",
+      "gitBlobSha1": "6d026a4f677cae9a60ec071bf8fab1c6081fe35c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/fourth-expansion.official-sources.v1.json",
+      "bytes": 20823,
+      "sha256": "c4c79baa1c4a9fb98e8280f779e1e8daa2491f1ec6422880ae047e3fd43113d8",
+      "gitBlobSha1": "00326bcf99aa379e1616d94554f720f9727078b2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/ninth-expansion.official-sources.v1.json",
+      "bytes": 20580,
+      "sha256": "4ebb767d85fcf40c49b830feecd16913521d01e72bf74e9f2707e1763dc1eb68",
+      "gitBlobSha1": "1fa2f1ef01b5b9e8d9ac1391267d7fdc1da9f5e6",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/north-northeast-second.official-sources.v1.json",
+      "bytes": 17074,
+      "sha256": "618febd34116858a52f6e4ab14f93b15b4212b036d831cc19fa00731b3dc47a7",
+      "gitBlobSha1": "d400a45951bbcd2091e4a051923d0962418d9fc8",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/north-northeast.official-sources.v1.json",
+      "bytes": 11646,
+      "sha256": "53af15aa96e77eed505099b40859ddfb5f571e94ec15c4bd8f651d18ef0f583a",
+      "gitBlobSha1": "714fca8d1738f2287e53dd4090c8ebf6e764e3d7",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/seventh-expansion.official-sources.v1.json",
+      "bytes": 20830,
+      "sha256": "dc346c8f5390459a51bdcb14b32a2ed0b5b31e550a77245e61bb342db7fad699",
+      "gitBlobSha1": "785da6777276b35779818a99477e32e456a49052",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/sixth-expansion.official-sources.v1.json",
+      "bytes": 20913,
+      "sha256": "4d2a5fc0c3c39234fd234fd1b364af8c8874a9a3b22ac5ff106abaa5798041ce",
+      "gitBlobSha1": "ac639f17aad65b9c489443cf322ab3462d153ca9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/south-central-second.official-sources.v1.json",
+      "bytes": 16523,
+      "sha256": "4c4de9a82c4b1b7478db521203231d0de01596ab166ab8969592403b68d053c1",
+      "gitBlobSha1": "86fc3a41db1d2337719a29b0eec2ff7193ecfcae",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/third-expansion.official-sources.v1.json",
+      "bytes": 20237,
+      "sha256": "c9e66c34c584e272140b4644c00f3bf4d03a9b986cf852c102efa804d4459082",
+      "gitBlobSha1": "f74237385cc80c07f557f78da83fc7a0b8558f8e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/west-south-second.official-sources.v1.json",
+      "bytes": 15624,
+      "sha256": "45e93cba14a1b9395432a9dfeeb9d47302dcd6f324942792c2f96fc8555d2faf",
+      "gitBlobSha1": "afdef81ff99441aecae102f7925d45fd08038062",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/cohorts/west-southwest.official-sources.v1.json",
+      "bytes": 11701,
+      "sha256": "4873f04418d5f81e325cb8698f8025a91db2b80a2ee1cf35087cf33a8c83fa56",
+      "gitBlobSha1": "af676183d59c9f8d07337bb899e645074ad14ea1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/reconciliation/final-group-a-medical-refresh.v1.json",
+      "bytes": 3668,
+      "sha256": "d849efa78380d84201447a15a35cc8aa3694817405762d735d1315edb7570882",
+      "gitBlobSha1": "34405e2bdc02df4bae9c511a439bfe0399414ea4",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/reconciliation/final-group-a.v1.json",
+      "bytes": 6712,
+      "sha256": "a1effdb0d8cd4f0d6a0742837bd69f9e3c1e922234edb4f5b5d8f753614e5773",
+      "gitBlobSha1": "2bc0feae2792fc4ba687f53b5e51646a762e608d",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/reconciliation/final-group-b.v1.json",
+      "bytes": 9936,
+      "sha256": "ad08e1da3fdab0285aaa166aa174feb4b015d8dfa96a83587620389ee4e296ba",
+      "gitBlobSha1": "92e7458094f6fcac47acb8fe9c8c49d2dd2c6212",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/source-registry/reconciliation/final-group-c.v1.json",
+      "bytes": 7643,
+      "sha256": "696b5e0895a18bf034959a3721c6d5d5994a0a896f1f0ef3686cb12132e8173b",
+      "gitBlobSha1": "54dd804588633eca6f69079aad1f682e79fbc56e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/targets/.gitattributes",
+      "bytes": 19,
+      "sha256": "5c0ccd4346d40a9a257042b8a485544d843749688aee93ed1bcf52679a9a2441",
+      "gitBlobSha1": "4ee01478dc02fb11454c5a3045376047ff65c756",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/targets/national-university-registry.json",
+      "bytes": 3812554,
+      "sha256": "53d8d773ed333d3dc82bd352d060f32dbb2a1ad1bd6d11d51d1843bdb8ebd7af",
+      "gitBlobSha1": "42d1a6bf9a0eb2cd27c9ecc5672795bb738dfabd",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/targets/national-university-registry.sources.json",
+      "bytes": 2720,
+      "sha256": "827418c3d1e942aa75ceaed4e54dc7f69ad278c10468dcc5fc77ad165f2b04b1",
+      "gitBlobSha1": "36f866b29270b8f5406b6f7862c23d4db112c631",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/targets/sources/moe-2026/.gitattributes",
+      "bytes": 99,
+      "sha256": "d50ffeff6e6dee037b181d28eaea3de3d647d7bb65c9c49612727d4885280707",
+      "gitBlobSha1": "2123ecbcca0a18d36b58e18d3d7eed97a4edda22",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/targets/sources/moe-2026/adult-institutions.xls",
+      "bytes": 56832,
+      "sha256": "34765edba0ceda935ca7d4455bc2eb105b94eee8d8d4d7c9150fba327cf11bbf",
+      "gitBlobSha1": "7518af77749ef2494647223d1a183ca835d6f154",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/targets/sources/moe-2026/general-institutions.xls",
+      "bytes": 464896,
+      "sha256": "29c40f083b639888e429cf40b68f9a75782d1ce81131c99aabca65b65b36eaea",
+      "gitBlobSha1": "4609ce2d12978e112cb19605cffb77c378796eb2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/targets/sources/moe-2026/moe-list-page.html",
+      "bytes": 13439,
+      "sha256": "ebd5e7a3d3a595f458a8d9f598a0277f70ea2ea4912df53ac9084f9be46ad617",
+      "gitBlobSha1": "c31d44fd2196fee84d1eb2afa4a261b3e4d70123",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/targets/sources/moe-2026/shanghai-sport-rename.html",
+      "bytes": 16299,
+      "sha256": "91b9d1d6164c36d4781a4a6ada180f94fa48c32cd5925d62a343aa7f6e496622",
+      "gitBlobSha1": "ec05f99ec8fe70d98a6de915d9f219d07d7c08b8",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "content/verification/minimax.json",
+      "bytes": 2629839,
+      "sha256": "f047f114aafded3e66b9a2e576944117ceeee22c156432168328bf1e7b8b76e3",
+      "gitBlobSha1": "56992c486fa5f8c0a60ec32b4940619b06670598",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/admin-workbench.md",
+      "bytes": 7065,
+      "sha256": "77a20c804c47ee87f84784230ae626bb7516c56408b225245472035c2d3fe418",
+      "gitBlobSha1": "d62ef68f4282952a22eaa6a578b61e96ccba3e22",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/audits/2026-09-16-automatic-source-bindings.md",
+      "bytes": 2998,
+      "sha256": "129d8ad59547307f05776f9252ff069f5f2d0a536982997935e4b3ed47fba4b1",
+      "gitBlobSha1": "c7e1b0c76480b7791533435f7a4b64b523174897",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/audits/2026-09-16-automation-cross-review.md",
+      "bytes": 2099,
+      "sha256": "6bc7c04e12b802a07a885083741e10f8faad367f5f959a3e7ecc2d1f20e1aa67",
+      "gitBlobSha1": "88c4a7dc10d5292f9f5839c89d2b946ef9bc7b7f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/audits/2026-09-16-automation-discovery.md",
+      "bytes": 4877,
+      "sha256": "b5894e4b83a1a697f53c5a6bf7aba376234e8e64f63d48acf8c84b7c8c2f5685",
+      "gitBlobSha1": "4c61946b9ed70015be4d828f354506e50e85ad77",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/audits/2026-09-16-automation-publication.md",
+      "bytes": 6666,
+      "sha256": "7fa49687664df04572f4c8332055cf228c2122337e97ec540cd4a3c1a20e674b",
+      "gitBlobSha1": "0887939fff1d2e53b3e6cb11f34d281e589f751a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/audits/2026-09-16-backend.md",
+      "bytes": 8315,
+      "sha256": "040d572811b8b28bd7ae0c374df8495ff7b7433643010e4d64d60787f1e07263",
+      "gitBlobSha1": "ddb294c5d1e845e31d0aae3fe64e3d44197b89af",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/audits/2026-09-16-frontend.md",
+      "bytes": 7116,
+      "sha256": "d3a549ad6303964fcc76682bf4db22859b5f6d6bee07ffd10e200f438e4113d4",
+      "gitBlobSha1": "71fc9b8969ec67889b9d5fbaaf05a4d46003f570",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/audits/2026-09-16-project-review.md",
+      "bytes": 9831,
+      "sha256": "a16d033c7ea329c1f96cb98a9d9b93b272a1492ea7093d2d8e445e3d037d4382",
+      "gitBlobSha1": "7ace77a6d9f9208d786bc87aef6ce793ed149a5a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/audits/2026-09-16-source-revalidation.md",
+      "bytes": 9844,
+      "sha256": "388a36e26ce7a8d5e07a51579a8fd499715579c1387fa3adb5478a91fe1c7444",
+      "gitBlobSha1": "b9cd8f00f59d1768e76a2dd2882e105bea32510d",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/audits/2026-09-16-unattended-automation.md",
+      "bytes": 8508,
+      "sha256": "8b441d13052b835db4af646eaebdc1314dd7bbd0d74e8dca340e234333ea13cd",
+      "gitBlobSha1": "88595f2cd8da2fbdff5d5313c17837f27dac0504",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/audits/2026-09-28-vercel-release-inputs.md",
+      "bytes": 4003,
+      "sha256": "0142a2f4cbdb9e99b955ba9d05c8bebf08681287033e48fed808c4a07d2dc9a2",
+      "gitBlobSha1": "6adbd9497a02230411451ca4bbf9985c00506b18",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/audits/2026-09-29-data-release.md",
+      "bytes": 7928,
+      "sha256": "98fac0110b3311ff97b18cc5e019441d06bc89fba00f5e9a076d450227e11099",
+      "gitBlobSha1": "df69a859c431a15860eee4886690765982b48ea1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/automatic-updates-and-subscriptions.md",
+      "bytes": 4221,
+      "sha256": "e47c7bb260722bc5eaba2c1db7b3181c737ed65b5cdc2a2b01e757d40eff2004",
+      "gitBlobSha1": "5712c382f1966071178c5acf8423b5b65b456035",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/backup-and-restore.md",
+      "bytes": 7521,
+      "sha256": "a89069b8ec4c20105c8ab8f81d0d56dec4e19aa85b519c2bf669419b28733881",
+      "gitBlobSha1": "e3230663d09b9a1e5b72bb6b7f36ed80eab3d674",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/catalog-performance-benchmark.md",
+      "bytes": 1694,
+      "sha256": "302550d5a8b65e2507875cef1fb5035cf0beb6db9c5592e97f195263066375d4",
+      "gitBlobSha1": "317a92291b6a8ae9d88fbbfb3a7f4bda8db666e1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/content-maintenance.md",
+      "bytes": 7029,
+      "sha256": "1cd64df65d933f6be0762f20cde8e5e3e23a5aeab081ac471ae2d2d815874c00",
+      "gitBlobSha1": "09e202ab4c8bfad949750a70815c59fd5e3a040f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/database-schema.md",
+      "bytes": 15578,
+      "sha256": "e866c03133f58e28c4ab7df3d2bced2908a126f063541f8e213ac480d3889491",
+      "gitBlobSha1": "695c1187cb0a68d485d1491e8ab0ac26699c8514",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/entity-candidate-materializer.md",
+      "bytes": 5396,
+      "sha256": "41e698a0df3876dbf7c8993757c05a1b1071d0d1c4a7184f0d31ce2516456a82",
+      "gitBlobSha1": "de586399f70d45cc1332b94840d3d66b8b6df0d2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/growth/commercialization-roadmap.md",
+      "bytes": 19024,
+      "sha256": "4b7a1d110ab655eb74585648a8b9e21c6514308125ddaeea50c2b074258773d7",
+      "gitBlobSha1": "c1d508b6909f086e3c199f6283db89dc2535b00f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/growth/first-cohort-playbook.md",
+      "bytes": 22730,
+      "sha256": "563362d073921aa50484576ed7536f33080a53da27aff3ef9bf31336ca464f19",
+      "gitBlobSha1": "93b075048178cab021291e85cd3158976c60b891",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/growth/matching-readiness-2026-10-17.md",
+      "bytes": 16072,
+      "sha256": "4f7f1b43c1f59fb4979cb9e6c29ef0211be6f34818b44fcc2f68935e91d577bd",
+      "gitBlobSha1": "125fea88cf330928bec8210f223f701f44be01ea",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/ingestion-operations.md",
+      "bytes": 14115,
+      "sha256": "07835b19e7232225046ca34fcd42397f0df07e54c42b0e82d28f191ecda5a4b2",
+      "gitBlobSha1": "a87d3513daba62dda877fa7a904e304a5ffc9913",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/map-compliance.md",
+      "bytes": 6122,
+      "sha256": "e485f600447ee15759bbe28074ccb02f272215212f772544b2c1a3c12a4949ea",
+      "gitBlobSha1": "0bf2f2ca47b732b1c81b27677b3b973cb0e4168e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/minimax-catalog-verification.md",
+      "bytes": 15253,
+      "sha256": "553be36a59c895b05001230e119ad1b20979edff8d47e4547a04d64bc9adb770",
+      "gitBlobSha1": "7b298823e3f9c4270e272ad3b685a2ecdb9663e2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/official-dependency-materializer.md",
+      "bytes": 4698,
+      "sha256": "cf2849c65ff374fb5cd8d25c82dfc6d1b1cf68f3b3c1849778ed19d12a001b08",
+      "gitBlobSha1": "b084e4178b49785e48d14b8661a1639776ec6a09",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/official-entity-import.md",
+      "bytes": 7058,
+      "sha256": "d3014759ec5661d02226847d46732bcd5b3831cc089758f0730635797dd5f197",
+      "gitBlobSha1": "8b7c9e65b97758ce044437875c30ecb5dc48c85b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/official-entity-materializer.md",
+      "bytes": 11404,
+      "sha256": "700008eceafdb35888f1f7cab31fc0042dad4c0c3f0bcf28fa0d3597ebfe9f27",
+      "gitBlobSha1": "b8665575b158de907107452f0f1aa5d5095c92cc",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/admin-executor-bridge.md",
+      "bytes": 9045,
+      "sha256": "da22059cd3edae426ef18225ee9038af0e3dc54b3482cbbb670ac21616aafaa9",
+      "gitBlobSha1": "381fe9279cf021777aca8d22182b985cd68179d3",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/admin-release-control.md",
+      "bytes": 11840,
+      "sha256": "cf6e0ae367ec70887c9989d29e4a1cf9fc7ce2753b754b27639f97ac045c43ef",
+      "gitBlobSha1": "2e2bb96e9b3a34ef8bb0eb88b2673837d56244e0",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/all-map-source-sweep-2026-10-17.md",
+      "bytes": 11668,
+      "sha256": "50c1450fcbd2dd191a576b2573697b0eda8ff9dfc0e98dc273e2a956154b2619",
+      "gitBlobSha1": "3afa36a456af89f5c7ca7556609955d2a8301712",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/backup-restore-drill-2026-08-10.md",
+      "bytes": 3203,
+      "sha256": "7ea46f0f14829c0b780a64d04e010c2e98fe0424660f1acfcd137100b9d90e27",
+      "gitBlobSha1": "c9476aee59f19b814d322acbbe41f19b6a27d7fb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/data-expansion-audit-2026-08-08.md",
+      "bytes": 6133,
+      "sha256": "8f61ef0e51bb6d6fc076ce300f1daf5fcd1c5b210d88ffc0d7fbbbb508ba41f5",
+      "gitBlobSha1": "529cc45f4ab73cfa5c654c899ac3d913baa87215",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/data-maintenance.md",
+      "bytes": 10361,
+      "sha256": "ef11c9ecae863174b18fa767133e9315569e083a22c7d03cee5e29756603c0c2",
+      "gitBlobSha1": "8cd6abb512d34d99ff3f753bd0ad42f5523d7f83",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/decision-facts-wave-2026-08-25.md",
+      "bytes": 4718,
+      "sha256": "7cf02f91666e5ca1874dad48a4172ce52da211cee30325c21a7e848bb8c8fab1",
+      "gitBlobSha1": "04b72512eaf51c20d9319d4a3ba571e2d5fdc85a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/freshness-reverification-2026-08-10-wave-1.md",
+      "bytes": 3177,
+      "sha256": "21bd89facdc34cfa03b2c1bd9098549dd85f068c45d6767578582d9a43411c1e",
+      "gitBlobSha1": "30799744c4594dd2c826d8338bf0da23551fa6b2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/freshness-reverification-2026-08-10-wave-2.md",
+      "bytes": 3941,
+      "sha256": "b217abda0c5a2be08ba208820802c340d16515b477f427394ef4229ab6b5382e",
+      "gitBlobSha1": "2695413f833238384ca3b95a8f01ab766d476c7b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/map-program-ecnu-continuation-2026-10-19.md",
+      "bytes": 4892,
+      "sha256": "3355e3d8f7c934de5960b2d3b4d698f03b8e82cff3b7f5e018ebe347d60c166d",
+      "gitBlobSha1": "a9c5a19c07b0e83379f47be9aa019fd4efeec198",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/map-program-fill-2026-10-17.md",
+      "bytes": 4148,
+      "sha256": "ab7c8ef2ca59ca00d105ea9d3c1ed9e9a6db1efb35d93b4b7005cca57e27e9ac",
+      "gitBlobSha1": "27f69a35a3345ea8e751f18bedd0853ff52ab254",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/map-program-recovery-2026-10-18.md",
+      "bytes": 15209,
+      "sha256": "83689c18fce40002ca6235d62b85759d003be95d741b225d1abe194a68f26c83",
+      "gitBlobSha1": "71ae06f0b5755e89d97efc4fd0c30f042a367315",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/national-maintenance-heartbeat-2026-10-17T0628Z.md",
+      "bytes": 7302,
+      "sha256": "891089eb56597659f2676ce8acf2508f57a3c27324e43746b8874e7969bbcfc4",
+      "gitBlobSha1": "70250b611b46a78f63d93f3434b1618b6350c350",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/national-program-maintenance-2026-10-17.md",
+      "bytes": 19787,
+      "sha256": "5782934cc1acfdb83ca8bcffbe04bd7b51f9000a1aea422f9387d3a8d87c3596",
+      "gitBlobSha1": "9e38afd04f1287f706f3c5917239160274a5a5fd",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/national-university-registry.md",
+      "bytes": 15841,
+      "sha256": "8661988fef482a1600a449d2b97bcbcf8fc64d460001853d52c43b05dfc6236e",
+      "gitBlobSha1": "71f3be12d7d338b012bebeee2e5197d78f6bceba",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/official-depth-expansion-2026-08-25.md",
+      "bytes": 7728,
+      "sha256": "a639378daf814f86d63fdc8a1efbf980d762a82a8c754e6edf332ec6ecda2fcb",
+      "gitBlobSha1": "aabc648aab38999ef78a8cd7237ca022304d9830",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/official-depth-wave-2-2026-08-25.md",
+      "bytes": 10141,
+      "sha256": "8d072e4f2b5b5e14f1b8c20c1be61a405cbfebd0619c4b38c1b4457c61300fb8",
+      "gitBlobSha1": "485dd2fcc3287b724c71f356a4a6a5ffff00b14a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/pilot-source-manifest-v2-audit.md",
+      "bytes": 2837,
+      "sha256": "f6b7fbc65be5858a7af3d1836e0d5e57a76fc11a69ca4498ea8148a3b10b3211",
+      "gitBlobSha1": "c5a625055667b91dc8f4802d184f6f47f537af0c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/production-verification-2026-08-30.md",
+      "bytes": 3540,
+      "sha256": "5cbf4ccefbf50d696c350d2d622f4d1a269fd97f9cace24a0521d9009c64e71e",
+      "gitBlobSha1": "18a05ed831d45811084681636a33b3ee101919f7",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/publishing-authentication-reset-2026-10-19.md",
+      "bytes": 9956,
+      "sha256": "48bbc6b76775d216c262c9944328bf23faca395edc910bc09eaf37ff0a2c8681",
+      "gitBlobSha1": "8e9a5ae1d83d7bd08a54ae793cd20066853081f3",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/rapid-official-expansion-2026-10-19.md",
+      "bytes": 6592,
+      "sha256": "d0ebdd8f238506d27ce2ff5cbe5782ade7c21e2e13888427c6646e357c5d107b",
+      "gitBlobSha1": "05fa1e51e0a26e4cb0b2eaa7a4bcd9ef657eecfc",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/sparse-depth-expansion-audit-2026-08-08.md",
+      "bytes": 6564,
+      "sha256": "dd152e702cc3f57828952669a3dc9853d417a7dab87d67a26cc315c264fa7079",
+      "gitBlobSha1": "62d0edd8a92c3dd6603fd5384557a4eb87ca4840",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/operations/university-maintenance-planner.md",
+      "bytes": 12903,
+      "sha256": "a5f14526d68b7216db548281856358572b586dc15cdf41a082abe6d57f6aa8e7",
+      "gitBlobSha1": "2f1ee87299e94f4e4197448790c1d34ac0ac7012",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/pipeline-bootstrap.md",
+      "bytes": 2636,
+      "sha256": "fb0d13c220529b9e7e561548ffac43522c850e6f2bd06c9dc7c997e1c56ffd8b",
+      "gitBlobSha1": "a53ee971ace8267f96536c249d01bc84dfa9e4e1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-07-19-growth-freshness-i18n.md",
+      "bytes": 5800,
+      "sha256": "79fd2769d486aa54f3d53a5f7ca4412de8589b628b5e995355551e813de1c522",
+      "gitBlobSha1": "f84cbdd29fc520381d9c5679aa767762bbee860c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-08-07-site-experience-readme-design.md",
+      "bytes": 2750,
+      "sha256": "e2baa1a83a9ec299b8213674d54459bbb1d38470f6a522a21e49133169048c62",
+      "gitBlobSha1": "dde6e2f8d5c883d5db6009d714a19c8817ffb93b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-08-08-catalog-depth-experience-v3-design.md",
+      "bytes": 6774,
+      "sha256": "a965b37211f406df052bb2d633a6ba83922519e20de707eddffecbdca0982161",
+      "gitBlobSha1": "6ec495a7e9bc80eb1b07be04c913fc3f91ad2b99",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-08-08-decision-workspace-data-depth-design.md",
+      "bytes": 3589,
+      "sha256": "48882efe405b11fa7fceb5d0a2ab7505e488684ad65f2b8b0a60626c7e8b72e7",
+      "gitBlobSha1": "b11a9179838b4f779bfe39f8fc6df37d41472607",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-08-25-explainable-facts-and-depth-wave-design.md",
+      "bytes": 4376,
+      "sha256": "828afae24ac181116429cc4b8f531de2b8fd5493b8ef842b77fb8f1d95dffc08",
+      "gitBlobSha1": "9b8a940b4b7110461b387eeba7e31a5c1c102482",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-08-26-release-announcement-design.md",
+      "bytes": 1888,
+      "sha256": "121a962c3b2466944654b49a2d904d5def6254c32e960462bfb8fcef32e1ef78",
+      "gitBlobSha1": "245001e5a9742b17e6a72c032429d37760250e98",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-08-26-release-announcement-implementation.md",
+      "bytes": 2710,
+      "sha256": "a707df32acc023e9ed20589ace227bab30f966db34945760e4883f120bd0d45d",
+      "gitBlobSha1": "0eb9a4088ebc93c97c917e71f96b4b832ed43e4c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-09-16-decision-platform-upgrade.md",
+      "bytes": 3668,
+      "sha256": "92e8902660437ad760e17b138ddc40c0d3a53f7a687deecc37fc020e960142a4",
+      "gitBlobSha1": "8eaa8f38a65f30c3f12270ae139bc7b26d6edb28",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-09-16-unattended-automation.md",
+      "bytes": 2344,
+      "sha256": "67a40fec9896dee6436689362d2113f0890b9de0e53fcf7a6b3fea10384b2bc6",
+      "gitBlobSha1": "6f7293ef93aa8e55e45c010fe15b78c5c260301a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-09-29-city-map-design.md",
+      "bytes": 3431,
+      "sha256": "4a7e4a8250e68f3deac2a153a991af737e2dc2c075ffb8a12454bf8523218664",
+      "gitBlobSha1": "7d4a69b6943c0dad85f033a887f7d342ac153f8e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-09-30-ranking-verification-release.md",
+      "bytes": 2874,
+      "sha256": "91c8cd28d185c3e3285896000ae712126971ca2451e3f673e575168ee91b309e",
+      "gitBlobSha1": "8b61690f2559ef51282dde22c60ca6c976c84d60",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-10-02-admin-live-usage.md",
+      "bytes": 2666,
+      "sha256": "21fd21343e02fdf1d3a87b45a940b16f76c72d0629863ddf6a160a9bc8ae6990",
+      "gitBlobSha1": "53718158fbd3a0ae847522a0e642494e5ad73b65",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-10-02-minimax-admin-execution.md",
+      "bytes": 1882,
+      "sha256": "66c1b3aa11aedf6eb600da3b8eb300a3f148f3480895b004161ae2eaaa9198e9",
+      "gitBlobSha1": "f950738063a2e3a34a043fa08d2080906004b63c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-10-18-release-public-smoke.md",
+      "bytes": 2543,
+      "sha256": "2b89dd216306d23219ddc2647266727e8fb9bd4eaec6c4b6e78c53b8c4fcba74",
+      "gitBlobSha1": "f85b7b6c807691044814a2da95f77c7efe1a73ac",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/plans/2026-10-19-official-scholarship-batches.md",
+      "bytes": 1854,
+      "sha256": "b0777deba038447d6623584e2218ca8f203dd220961401a004e0bc781b29bcff",
+      "gitBlobSha1": "7c8caca4476899645ba98643b57661089f77f201",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/platform-rollout.md",
+      "bytes": 6938,
+      "sha256": "d11d7049272997aba2be60656137e6344f8d043361cb221ea9ad4ac4a2d6d0f8",
+      "gitBlobSha1": "9529e70e22df857248660d2efdebe2a84574f28b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/priority-official-harvest.md",
+      "bytes": 9863,
+      "sha256": "34b8eb551298bc94607d32b2f1b0a86784249721822ec97bbaa0e76e61ef55a2",
+      "gitBlobSha1": "8c9b97b7aecaaea795d60c0762e456e5219b8f98",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/publisher-operations.md",
+      "bytes": 7144,
+      "sha256": "b8acf2eeed4a1d98a77075a32aed3e274981781ac5182092e0c4b8e5044dbf85",
+      "gitBlobSha1": "053c8f0378f0690bbb92bcb8e0de2aa828d68968",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/ranking-filters.md",
+      "bytes": 5400,
+      "sha256": "d0921bdd785d268a7a5d26c75346b6f4b0c3717799f5864610fa8d7525436035",
+      "gitBlobSha1": "9027641e0eb5ce8fee0d055a538f36db9ec931a3",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/scholarship-index-harvester.md",
+      "bytes": 6104,
+      "sha256": "d2544513e502d5692d1cb58aad81ef30698348de8a55c01bd058f301c8610db8",
+      "gitBlobSha1": "a83c80180af4ef93d9c05cd78aa5ad5f481b4487",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "docs/source-manifest-cohort-candidates.md",
+      "bytes": 3703,
+      "sha256": "7512286d8057e4c914b119d1229ade005a771a95725640ae5361fe7be38c4d80",
+      "gitBlobSha1": "6a258e040b6d16e7d70f55b6186e3931966c0641",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "eslint.config.mjs",
+      "bytes": 713,
+      "sha256": "39bb8a9c181fe370acdd63a93da87e379e3ea383d33c00dcc311fa42bbc651d0",
+      "gitBlobSha1": "b510845f92672b2da110dc6181c7f82f8ac2cc43",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/catalog/migrations/0001_release_core.sql",
+      "bytes": 12726,
+      "sha256": "3d0c66a1e468bc57e6fd7469cac5faa358bf3d147f116aa687ebb0558728719f",
+      "gitBlobSha1": "a5ec2cc36c9f7bff624c29e0c5cb0ed43b379976",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/catalog/migrations/0002_programs_scholarships.sql",
+      "bytes": 18677,
+      "sha256": "648f4d51492b4102ed410827a0769dd3e6c87f6608b1e37e8c23d1315f933eef",
+      "gitBlobSha1": "869a9ee304bcb39bd89438046c97b161416d5f27",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/catalog/migrations/0003_search_views.sql",
+      "bytes": 16205,
+      "sha256": "19f5fb62256de6533dc056831e151e23e15146f974876e8b5dc0ba4af54ac06c",
+      "gitBlobSha1": "1083e197602f14707769b728af07655fb0db88cc",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/catalog/migrations/0004_atomic_release_cutover.sql",
+      "bytes": 6266,
+      "sha256": "668232b6e38c54a161042c772fddffc905e7587024dfeeeafbef9c8ee042ea40",
+      "gitBlobSha1": "e9dae9e2ed608923b36cff7b9512f99b09d7659a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/catalog/migrations/0005_public_projection_hardening.sql",
+      "bytes": 10726,
+      "sha256": "3bbed6d5f79cdb2209e0c343fb11920bd845229e371734ffac85ad3513a8d3d6",
+      "gitBlobSha1": "f0fafbe29bf67e70efa6e127fdf02d063710b8ea",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/catalog/migrations/0006_field_meta_projection.sql",
+      "bytes": 1597,
+      "sha256": "a334626651fed7a570e1284301974fbaabb356f1d2bd737d67dee52d444340b4",
+      "gitBlobSha1": "54aff167590ced60c5faafde92ea1d3450d720fc",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/catalog/migrations/0007_deadline_grace_publication.sql",
+      "bytes": 19102,
+      "sha256": "c0142548cc190ea971b4c4e0a8d4581289dbb9c9f38e075fc40ec834d6088936",
+      "gitBlobSha1": "195a76f1224b6f74f84ed312cf2389b03aab90fb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/catalog/migrations/0008_identity_only_program_visibility.sql",
+      "bytes": 3232,
+      "sha256": "8df0a69ee07334a462ef611545c6a5f8b4534eaae2b2a9fffe87c6bb361ff4e5",
+      "gitBlobSha1": "6c85e9495d30bd1b483bdd28aa68e6ff53159739",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/catalog/migrations/0009_release_compatibility_artifacts.sql",
+      "bytes": 1858,
+      "sha256": "b352fd4405780accb69220dbde3871582dacdb26a7ff3a61f928a751557bdba2",
+      "gitBlobSha1": "1e924fcdfa5514b131c54f231d693581043af0f4",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/catalog/migrations/0010_release_retention.sql",
+      "bytes": 3802,
+      "sha256": "faa1040f920d697615fdec27c6b01c547516c755fcd96c02a8d3f1cf39591265",
+      "gitBlobSha1": "2700f08497a384173a116c1648ee9096ef2b971a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/catalog/migrations/0011_application_state_calendar.sql",
+      "bytes": 2303,
+      "sha256": "5900f2839977f1edf3d3d88202a078ac4035803fe93ffba8abdad23824affa7f",
+      "gitBlobSha1": "9dda30b461193540c31f364aaf3c18ebf415b1de",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/catalog/migrations/0012_admin_release_rollback.sql",
+      "bytes": 5038,
+      "sha256": "76888ee8b1643477b3ae4129e83a31a46b4c329a78ba83636724188c93f7c8ab",
+      "gitBlobSha1": "589ca662f7e797873af761f03c136b41e9629b3b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0001_domain.sql",
+      "bytes": 19754,
+      "sha256": "b62a086a4da458c460904c20268b7c5bbd495a68832104dac8c080d846f1f51c",
+      "gitBlobSha1": "3293be469dd996457d16bea8f775ae0aab32f8e0",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0002_evidence_workflow.sql",
+      "bytes": 14336,
+      "sha256": "fda86c9324e12bc021f218f724ee9570b0ed92ae32965574ff45d9d014c4a591",
+      "gitBlobSha1": "3385d3c184d96006959bf17911137f13ddd7a74b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0003_indexes_guards.sql",
+      "bytes": 6453,
+      "sha256": "c358135c77ee761f404c5fb0621d6abb3f73f0df273f09ba456657c998d962b7",
+      "gitBlobSha1": "ec712eff53fd74fb8e11ea676f7ffb3aa65e2fea",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0004_worker_runtime.sql",
+      "bytes": 6706,
+      "sha256": "cdd4c2b7fb794987ac834521491c6f01262ee406afbe639712a85d982ee1cf83",
+      "gitBlobSha1": "e1024d46c8241fe584dc1b097bbee023d8872511",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0005_domain_throttle.sql",
+      "bytes": 871,
+      "sha256": "9f398c87503ee82013d35ecdf103233749d75bf77eceeba59d5493f4ee8e40e8",
+      "gitBlobSha1": "bec960ccfdb27b257e3c34e459f25e896869c6a9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0006_candidate_provenance_promotion.sql",
+      "bytes": 9026,
+      "sha256": "1a9567e203c1fc28db9d56b708f9d43098fa28d86f2443b25a878df301c57479",
+      "gitBlobSha1": "ff6c765f12f37098312bfb7e040fa921d89b374a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0007_snapshot_derivatives.sql",
+      "bytes": 788,
+      "sha256": "4f6aaee87271b43c196b6d2423f417ed49bc8f3001f56d4dccfbe3b7b50a6692",
+      "gitBlobSha1": "8eee15ed029b10baa16a1e7fae10de3d4bfe06ee",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0008_release_builder_contract.sql",
+      "bytes": 2808,
+      "sha256": "3120c8ebaa8c9530d70e35f641ac7f29682d921600e03e040e09d12da7411da9",
+      "gitBlobSha1": "e5bcf2980088af864e8d0845054a745ebe643c1f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0009_entity_discovery_registry.sql",
+      "bytes": 16514,
+      "sha256": "4cf4274690773f4fd0b9c9ffee615c463ae5d2892dd65086f3ef75c6e3693cf5",
+      "gitBlobSha1": "1636c552e36f86489580ad40cc9597fe63e6f6fc",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0010_materialization_batches.sql",
+      "bytes": 32601,
+      "sha256": "6c81561b1279279e8617660fa8a2ec784b899370d132f2c6ad2fc2e64eb8643e",
+      "gitBlobSha1": "b3a38ca949d7ac27cf03b2befb12a17fbfa2c4a5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0011_materialization_release_requests.sql",
+      "bytes": 12275,
+      "sha256": "499cfcec1db0a264c7a7e79569a2bb08f39782f13b1c938b1f4bd057d5c8c666",
+      "gitBlobSha1": "84fb375736ce781a48ad6c7ea0af56640756a7fb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0012_localization_pipeline.sql",
+      "bytes": 6604,
+      "sha256": "2b7b17a1cb275a2b0458b89762107270a0c34b3e132ed3a7f7c85ae0948849a0",
+      "gitBlobSha1": "195a7365191e59b0908aa96b2ce1a0488f0955ae",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0013_institution_target_coverage.sql",
+      "bytes": 5032,
+      "sha256": "504a51cb291031b6f208920a101c64a8b19f6947eed04be9b6d6724c35b25f2c",
+      "gitBlobSha1": "205110c399658a3b27a7d038fa2f23e95eebc90f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0014_entity_candidate_materialization.sql",
+      "bytes": 11084,
+      "sha256": "373486ac90cb466058300ab6c9918f5ab179971a19e47cd0b5f6fe515e85dd63",
+      "gitBlobSha1": "2825397f6c3f925fca213bf587d8343f8e258f2f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0015_promotion_mapping_transforms.sql",
+      "bytes": 1253,
+      "sha256": "db27aa9f275e121cc3fbd4e13250756ea60f72b36027656f99e5ddcbd6e301aa",
+      "gitBlobSha1": "a9a70965cad52e4b477cfb2f51e1fa399f9bc2b2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0016_ingestion_candidate_replay_index.sql",
+      "bytes": 292,
+      "sha256": "f2359cea0c4fdea01f2dac57bbc1a09c66bd5473834734041fbe60630cb6490a",
+      "gitBlobSha1": "ea9cb47abc7e1d83d3dae34d4e25aaee411989b7",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0017_automation_retry_state.sql",
+      "bytes": 1155,
+      "sha256": "80ef315e8de77d7484b6c291ee8d4d67c3d2df894a20906d08a46cc102c92e72",
+      "gitBlobSha1": "c2ecd6c834064568a64286c415eb0d8868fe9677",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "infra/d1/pipeline/migrations/0018_source_revalidation_observations.sql",
+      "bytes": 4758,
+      "sha256": "c9932d021695a7fafb335954b4322879ce1084b3701cec3772262c614bfe4e32",
+      "gitBlobSha1": "f5d123b8551e53a6b20429e50fb5fd11ee8cb01e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "next.config.ts",
+      "bytes": 1752,
+      "sha256": "9072992ae57904bdaea85e1e8e80dfcc22c7ce0bb48886ba286cc90e09d6d37d",
+      "gitBlobSha1": "aa7772909b2ba1ad55544ca8d7e0cda0151e9bf1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 332411,
+      "sha256": "887c19499d6b8ff069621ff001f2acd6ea0c35b4e122976419ec26329746706c",
+      "gitBlobSha1": "79796b776fe3bcf2c0370bac0fdbc5674683f8db",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "package.json",
+      "bytes": 7342,
+      "sha256": "2f1bc31adb53d6e686bf2e17df96c4bd6e7a701c4f7011a0a521dbc1a5cfac54",
+      "gitBlobSha1": "a3ee1f04f14669dfd3262b56dbbe1e3cffeeeab1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "playwright.config.ts",
+      "bytes": 655,
+      "sha256": "b0a49a59b19bedf4c741b834aa0bd64d40cf33e9f29f29218acc42f179064883",
+      "gitBlobSha1": "2c3a92eaac00b9ca8a890f55ac0f8ed7298111b1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "postcss.config.js",
+      "bytes": 83,
+      "sha256": "684efb794edca3c66080bdd62f2b702600432380116a0cc32547dcf98c30b458",
+      "gitBlobSha1": "2ce518bbc9b90a8409650f914eb8677e720d8aa6",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "public/atlas-apple-icon.png",
+      "bytes": 4968,
+      "sha256": "ab3c2acebab94e6bda114c68a60931e1dd2a2a81b59c35db78c2b54b01df1fd7",
+      "gitBlobSha1": "8b49b67e0804b56c311214c7bbb6d55ed3bc0ef2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "public/atlas-icon.svg",
+      "bytes": 628,
+      "sha256": "6a03dd6a46833a3f7a298c65b5bdf199072188bce24012f2659c9bedaf7631c3",
+      "gitBlobSha1": "d7665b3caedfe1d0df66fdf2e7b69735cb20da71",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "public/craft-icon.svg",
+      "bytes": 628,
+      "sha256": "6a03dd6a46833a3f7a298c65b5bdf199072188bce24012f2659c9bedaf7631c3",
+      "gitBlobSha1": "d7665b3caedfe1d0df66fdf2e7b69735cb20da71",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "public/fonts/SOURCE-SANS-3-OFL.txt",
+      "bytes": 4486,
+      "sha256": "ed86f375d70bd39238d13b2ba5bd3bed20b3fe4847fa1356a63f380d2b26a8a5",
+      "gitBlobSha1": "80b9a8b6e7ef0a0a9e8e41525e933e48542c8b1b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "public/fonts/SOURCE-SERIF-4-OFL.txt",
+      "bytes": 4400,
+      "sha256": "5f94c3fd3a23131a417ab5a0c8452de57e70c3cfb9f604d88241f7065ebf9fd9",
+      "gitBlobSha1": "318074ec9d43c936a56ee1dae92999f4df073ce8",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "public/fonts/source-sans-3.woff2",
+      "bytes": 169568,
+      "sha256": "2949d55b74c221a47c35f49e015d700b3bf97435038c87d50995be1c94a69f6d",
+      "gitBlobSha1": "fbea18424c81d32800e6d3e065c7bffc4911360e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "public/fonts/source-serif-4.woff2",
+      "bytes": 427908,
+      "sha256": "36ceb69bb2d6af572dbb8f77b43f9cde7a2fed8d08cb8af5dafd2c4b4cc9573e",
+      "gitBlobSha1": "55426014902742810d497ecacb79e67440b1c2d9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "public/icon.svg",
+      "bytes": 628,
+      "sha256": "6a03dd6a46833a3f7a298c65b5bdf199072188bce24012f2659c9bedaf7631c3",
+      "gitBlobSha1": "d7665b3caedfe1d0df66fdf2e7b69735cb20da71",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "public/maps/china-google-maps-2026-09-29.jpg",
+      "bytes": 418924,
+      "sha256": "3ba3012dfabb434a1e24b7f4b37f3cbff6db467096956a342a7b344fbf5945f3",
+      "gitBlobSha1": "b571147625227b8e8b2001876893643942969267",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/automation/apply-catalog-snapshot.ts",
+      "bytes": 8446,
+      "sha256": "8e8668ff50b8fc6f2f2dbc6e32ce0283b970a598c7d8e3b958a3ba119adc578b",
+      "gitBlobSha1": "3904e7818496059e72d4e5bc49f82dec4509d3d2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/automation/assess-catalog-snapshot.ts",
+      "bytes": 6929,
+      "sha256": "9ea6700cd1ccf36bfa6ff02f27881cdb2fe53963f4e53b639848779867729d4c",
+      "gitBlobSha1": "d364513c775db954291503cbe34ce16c6ada4fe8",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/automation/build-catalog-seeds.ts",
+      "bytes": 7108,
+      "sha256": "6688d746a33bbc29663b23facbef3e5490ccea7f7dd7589850e826ee8f9fa3d5",
+      "gitBlobSha1": "7ee26f8b734023a0db041661736239b2d80f215f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/automation/build-national-university-registry.ts",
+      "bytes": 25061,
+      "sha256": "d368d92ba5aa4d63995c9b73444c34965f680b3d18dadb1cc82d7bd41c7eeb73",
+      "gitBlobSha1": "1da87ae8f2aad468eeea1d4e4735aff15f85b160",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/automation/build-university-maintenance-plan.ts",
+      "bytes": 7171,
+      "sha256": "a013f638e868d6f33a428fb62557f80754bdca570088e3d12e5f64a6c4f41642",
+      "gitBlobSha1": "422f29131deb0664666280bdf5d6deedf1da188b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/automation/capture-university-maintenance-sources.ts",
+      "bytes": 27130,
+      "sha256": "ba2b997006f1ed5a5d47631a17eaef082ec5cebe1c800f2f2eee5dbd6848132b",
+      "gitBlobSha1": "97bba6bc78a08fbd61ce5c34fde0366ad421b391",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/automation/operations-health.ts",
+      "bytes": 25802,
+      "sha256": "cf513a1fd43df59c8003644c7c41213ec73846b3256721da3c4fd89a75acf444",
+      "gitBlobSha1": "1db087f2d591929486992a96135f79027217b165",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/automation/pull-catalog-snapshot.ts",
+      "bytes": 3719,
+      "sha256": "739c8b2dc4c687149fa8bc13f1e4319f0d8ed4514e0fae876e9b881ec59b3535",
+      "gitBlobSha1": "b44f50c78ed20411df9e97d140690df2a56512ec",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/automation/sync-university-maintenance-db.ts",
+      "bytes": 23198,
+      "sha256": "73f245d8e86391fa138339c29bc907081bad9e16171867a56e631351188bca72",
+      "gitBlobSha1": "eac12aa7133c755ffe70fcdbdbf6d622b5d0836b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/catalog/benchmark-catalog.ts",
+      "bytes": 22886,
+      "sha256": "02e5b16d5d92ca49593cc0d0e24eff22739a0ddce0fe63c0538bf0671ca98f5d",
+      "gitBlobSha1": "0b28a2e02f932bc0a69650eb729742bbafb90fe2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/catalog/build-local-mirror.ts",
+      "bytes": 11835,
+      "sha256": "a44746ec4e0d1e3768c1355cbabb34ef5f75c412035f9a01d7b99fa2500477b7",
+      "gitBlobSha1": "ea61e414bd36f31ba454ecb0201b7a943fb8a360",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/catalog/build-pipeline-release.ts",
+      "bytes": 27046,
+      "sha256": "e66225b2df555375abb96fe52f14a5349c160f43d0c4025c29857793c4ceab72",
+      "gitBlobSha1": "0364c62ec306115078086d34020045feeec973f5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/catalog/build-release.ts",
+      "bytes": 26482,
+      "sha256": "5c1693c006f8bbbd5d116eb78ae7a7181d67e8ff663448201be5fda016ece9ac",
+      "gitBlobSha1": "c01d14a12cecd381b53905e117f81c0eeb9ad3f3",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/catalog/deploy-release.ps1",
+      "bytes": 2242,
+      "sha256": "d0b10ce3626597505a3f37328cd5c949c9eea356aba4278847acf3f6dd0db7a4",
+      "gitBlobSha1": "a4ef82d8744da2b28bcfb00a8cb4fb8cccd6c928",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/check-links.mjs",
+      "bytes": 15008,
+      "sha256": "959fdbfbfd6289c212aa124c6ecd075316213278ee999d180b4632ea287515ec",
+      "gitBlobSha1": "7c9da3ad0428828da812639f73256c462f0eee0e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/cloudflare/backup-preflight.ts",
+      "bytes": 6822,
+      "sha256": "20328bb613621d87a7bf6455b608ea339b41080c39989346a3fdf59109871edc",
+      "gitBlobSha1": "981b8e94d69294a4d3489704c2d08d89f007e892",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/cloudflare/configure-retention.ps1",
+      "bytes": 725,
+      "sha256": "22ba6a7bb136e82cfe92ce6acc6cb7ed9f69e543fff96b7f6ac6842e56192f1f",
+      "gitBlobSha1": "f09d4bd5d5e23f7041f3fe8f46aafa91ac265ceb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/cloudflare/execute-d1-command-file.mjs",
+      "bytes": 1719,
+      "sha256": "f6275057b1c055d64939e782e5e64cbc3ea0b19f6f60c222bb77d171d069f81e",
+      "gitBlobSha1": "1c6a9f76f527f0fd99deee2058496b7d8b70a5fd",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/cloudflare/import-restored-d1.mjs",
+      "bytes": 4102,
+      "sha256": "b86665098eb68d73c3e961d9a2deaa48726107d79167fa782967df829b600974",
+      "gitBlobSha1": "ec4bcdc34156a943f07aa5aff9140e530ed97fda",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/cloudflare/restore-drill.ps1",
+      "bytes": 19224,
+      "sha256": "2846d1b531790238e4267638ec1c026aa13a061ab023c1ffba2e80f9491878d5",
+      "gitBlobSha1": "76e0e5fe5249a7dc5fbdfe2e3b7ba8a97af1056e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/cloudflare/verify-restored-d1.mjs",
+      "bytes": 7080,
+      "sha256": "2442a84947dbcd4db909ff1d7e11ce40bfa0e84ee68fc5edc91d35ef76eac2e2",
+      "gitBlobSha1": "5e6be2f22e95433a1569276cfea6d54ff6b9bf0b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/data-health.mjs",
+      "bytes": 18469,
+      "sha256": "25d156de1d84b682d0975ac5c642a9b30893f491404856276f3bbd21abd11124",
+      "gitBlobSha1": "80f432d72ee9878f86eb4f7871b8d80476af68a2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/admin-catalog-maintenance-collector.ts",
+      "bytes": 8278,
+      "sha256": "709783e0518f16dcf4228afe93d4312105ab642d9f93dbfa48febdebdc6d1882",
+      "gitBlobSha1": "4ee20fae8da1807f115c3aea6b2ccb2edc056bbe",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/admin-executor-bridge.ts",
+      "bytes": 19945,
+      "sha256": "fed16c6f08f8ecf1da0937eb890b7e3a7fa922a2f2fd293e179ea9c48a0c6f29",
+      "gitBlobSha1": "c82330e4be738207343b2a1a249822f90bb5cad5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-beijing-official-depth-wave-3-2026-08-26.cjs",
+      "bytes": 24477,
+      "sha256": "e2701f14c163d01ec821d389b4a573f34941ad4ee118214e29b4a76b9a194303",
+      "gitBlobSha1": "6c30d11f206e2dadef273938875773a02db4a7bf",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-bupt-official-expansion-2026-07-28.cjs",
+      "bytes": 13345,
+      "sha256": "333e572e679d54c232a2e6de689b4891b5f0377c34c46e6d5cae1aa232392585",
+      "gitBlobSha1": "08ad8f2456eb0102a557158fe4afbcd5234b5920",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-catalog-expansion-2026-07-29.cjs",
+      "bytes": 47237,
+      "sha256": "5aaa75b060334d45bb25b6096a8c423ab225ac24157f7a28627dd0a5f42b2686",
+      "gitBlobSha1": "e944be8bffb10c0b83244de75cc270caed5a0766",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-current-future-programs-2026-07-28.cjs",
+      "bytes": 46066,
+      "sha256": "e52205086a3aedc6b12cd965b6cd3e8551c54de0a85a46965889dd963f4395cc",
+      "gitBlobSha1": "e57b590e4a703d9a4f7698a46a89fd993263ff4c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-decision-facts-wave-2026-08-25.cjs",
+      "bytes": 40247,
+      "sha256": "ff134f168a6996af92bf2e86ffb1061b51245d94901822724498905b2a1c5f03",
+      "gitBlobSha1": "57b23eda4bb09ca2e66fa4fcfc5dc6e8cfadf3ef",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-dynamic-source-recheck-2026-08-02.cjs",
+      "bytes": 2792,
+      "sha256": "9f1314381d75d974ac60bf440a814fad0202134d321c7e06c105572900cd7029",
+      "gitBlobSha1": "4bb161ec3deef40f4c6966a2dce1e7380dc13c5d",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-gdufs-official-depth-2026-08-25.cjs",
+      "bytes": 31064,
+      "sha256": "9b5b88c4e604000b33aacdde924eb5a13279ea8c7d51d2e6df89317f37cc36bf",
+      "gitBlobSha1": "47b715c6642129bf2a4df6a935b7afcbe82dbddc",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-guangdong-official-depth-wave-3-2026-08-25.cjs",
+      "bytes": 32609,
+      "sha256": "78309fcab4b5c64e2e07df6d66944b531e05886d1fbd58da52ca568616b0cc87",
+      "gitBlobSha1": "ab782550413277633a83db50d211b16f9e72fc94",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-hit-xjtu-official-depth-2026-08-25.cjs",
+      "bytes": 40304,
+      "sha256": "bfc8ea3438fe2be3920fbbe97530d6c21b1cda2c7e7789e8daca4fbbbf299525",
+      "gitBlobSha1": "54abcaaf4e37193a5fee2138b3981bf839cabc96",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-international-coverage-wave-2026-07-30.cjs",
+      "bytes": 36220,
+      "sha256": "d9e281ccc5da208040ea00c63c4c2184b4a1812a1d8c1d45b4b4d06f469a9140",
+      "gitBlobSha1": "7299b8c973916940b3e47b1dfa32ed5182dcab17",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-official-depth-wave-2-2026-08-25.cjs",
+      "bytes": 36850,
+      "sha256": "0c98b98816c7db6726b5159b95eaa797ac609d7cee46f1e82636c787eedabc3e",
+      "gitBlobSha1": "e21b55fa748eb515d13d97472a42575b1d8992fb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-official-depth-wave-2026-08-25.cjs",
+      "bytes": 21002,
+      "sha256": "bddd900172013b7bf5a31d88fb97bbbaaa4ccb72918cbceb10101b1645439701",
+      "gitBlobSha1": "1d03fb7c33cb12f55b9f8a20ad68ddd7f09663a1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-official-expansion-2026-07-28.cjs",
+      "bytes": 56318,
+      "sha256": "379348814e5918ead4dc5a5d59ea5982e62f37e2e5f8af82a5f73e09cb04379a",
+      "gitBlobSha1": "0e077fae7bc40f2c1292c034526b50f3b4241f8c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-official-iclt-wave-2-2026-07-28.cjs",
+      "bytes": 21921,
+      "sha256": "a1395f359ffc2755faea1b73e70e3f52f94b22d49d4d1f8eb1fcc2a2fcdcdba0",
+      "gitBlobSha1": "f7c26529f2fb74d6bc3125d06c5a23becc89e5fa",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-official-iclt-wave-2026-07-28.cjs",
+      "bytes": 18876,
+      "sha256": "ec7b71c8761a95ec510ca1cff58e86435098d0e70680cb93282c6e4042ebe5e2",
+      "gitBlobSha1": "14d255c94640a1afab2e5a488d4b30ddc9a3f1f2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-official-iclt-wave-3-2026-07-28.cjs",
+      "bytes": 20040,
+      "sha256": "b1e5144ffd5e04b92f41c1acbfc454a0ab68c5838c9d64318b65679253db8b10",
+      "gitBlobSha1": "45aa2e6e147e64ae854c10ce7ee27a51389a0fba",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-shnu-current-program-2026-07-28.cjs",
+      "bytes": 2564,
+      "sha256": "6da8e40ff6cb065503e09c8692a788f45de4b8d6bd1652ec7514d87fb6ea5d0e",
+      "gitBlobSha1": "57df30adfa3f067c88291a382bb8214741732909",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-verified-expansion-2026-07-29.cjs",
+      "bytes": 47888,
+      "sha256": "10852ebc66c919338f4d1024032cb6bae373f0878e4d799a6f19f289a1ce9860",
+      "gitBlobSha1": "575724140b7549d3e78aa6c19e71fd0fb3f28b20",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-wave4-priority-promotions-2026-08-26.cjs",
+      "bytes": 10212,
+      "sha256": "dd6b873b25dc8995cbe0c23b2aca95a0dc92458d6b7c7194226b7ecbe8a2bf82",
+      "gitBlobSha1": "6aadd521b4b6ea2b88326d90d0896f850599ba2a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-wave4-r2-verified-release-2026-08-26.cjs",
+      "bytes": 30801,
+      "sha256": "1dc6d6cfc75b878dc982b98bb58bc82bdcf9596a233f5a52d9aa049ab80d5823",
+      "gitBlobSha1": "35c640c8a9283901a0018be6759264a68c970430",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/apply-wku-official-expansion-2026-07-28.cjs",
+      "bytes": 10238,
+      "sha256": "0857b9e7e223c08c5f5278672042b354a41b1108807db45a000f5f20ea528a91",
+      "gitBlobSha1": "71bd71c859a758a0411224f18cb5dde5fb060578",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/atomic-json.ts",
+      "bytes": 1633,
+      "sha256": "b9490347d5ef13a6a5c28ad18c9f6143c3fa5621cb7baf47a2ad0b5ae2216608",
+      "gitBlobSha1": "42c6c19f803e1b4af81692a5440f264fb2d36f1a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-chinese-language-degree-wave-2026-08-02.cjs",
+      "bytes": 37068,
+      "sha256": "c6b3ebfcc662879ec65b890ee4e475667d923d00ba43db07e91fb4b6b896c97a",
+      "gitBlobSha1": "abbf600661bdbab60a97a5333963ba857a2be6c7",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-current-program-review.ts",
+      "bytes": 4498,
+      "sha256": "3e47811585c1d533e1f4996fcd8e8822a605d02be1c0cde15e347e2aa6a39e32",
+      "gitBlobSha1": "d299d08ffcd0beae13a2db1a9eff8056e8847df4",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-double-first-class-target-import.ts",
+      "bytes": 5840,
+      "sha256": "c860f6f676eb2459c09bb349810b80ce8f06a4f8423ea0c40738996465b79763",
+      "gitBlobSha1": "9da66c9f5fdddd9a9d40e9873c800c44c6dd6251",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-international-program-review.ts",
+      "bytes": 21118,
+      "sha256": "3eda8696bf1fc9a880b4aba0d539a65be1c5e040d9080b0ba3312abbf78c08af",
+      "gitBlobSha1": "1dc9f0085c2d86ce1d7b9d2cc0d476b2f963fcf5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-merged-official-candidates-2026-07-30.cjs",
+      "bytes": 39809,
+      "sha256": "640e4edc35001a8d865829ff842630d2f2ccf867120ac9c64f6d7d76b80a3707",
+      "gitBlobSha1": "551bf443872cb53460f0dca7da6763aa97f1474b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-minimax-harvest-queue.ts",
+      "bytes": 10644,
+      "sha256": "cf06dde97ba55190a33bc6e53dbbec034386e1199f2bb2c162a4eea6c92f89e6",
+      "gitBlobSha1": "068aec039e51290189451ffa810fccba8f3fde62",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-minimax-recovery-ledger.ts",
+      "bytes": 28145,
+      "sha256": "8b5e86cbae873a4f5653a485ee028ce6eb84f8028e6b2d25fa0832edae1b976f",
+      "gitBlobSha1": "a41f78e44a21e75ccbe358dc949d0c6f0343249a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-official-source-cohort-import.ts",
+      "bytes": 8885,
+      "sha256": "1883dd22498b154f9dd88b78c72a0e999a8d3b213186113ff94fc272cb915c5a",
+      "gitBlobSha1": "f8f005889abfa3f33813d54dde162cec87cfb0b8",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-pipeline-bootstrap.ts",
+      "bytes": 37444,
+      "sha256": "10e3f26403d833aa68c791d19fb45672cc777e98ef056f2c8ebcb6fb6788cee2",
+      "gitBlobSha1": "3833db6635e10d56f587f7ab18ca9b2da2396780",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-program-fact-pipeline-handoff.ts",
+      "bytes": 7926,
+      "sha256": "2b196678f026cda7f6583242ef986a006dec0cd156c42b4ac18c229d52740115",
+      "gitBlobSha1": "2b1abdb8d60c3594e493fcd63509a4e6ab0e27a1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-public-double-first-class-coverage.ts",
+      "bytes": 1570,
+      "sha256": "68f660af151e68f9affdeb9e2372587f522a09ab1584e635ee22aee79d8ad3da",
+      "gitBlobSha1": "0951f11cb0feef02891aba09af4ee8a24fb7c464",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-source-import.ts",
+      "bytes": 5274,
+      "sha256": "28056da5bf54700bb06c012c27c218ca2552b3e9018798265a8552624316f0f0",
+      "gitBlobSha1": "d574d18ca504a4e57efe5c09558c51f4d69d0044",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-source-manifest-cohort.ts",
+      "bytes": 49762,
+      "sha256": "4dc4fa97a14409c45c81c01bd3ac997cfd488d51d6782a7bfb57d6a9a9acc0ff",
+      "gitBlobSha1": "9ea90512308e2e50380d3e1a0eb9909eecf54f6d",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-source-manifest-trust-ledger.ts",
+      "bytes": 17664,
+      "sha256": "c5ca9154ac37ce9b784f3e88d207ef842366f51421fff0b9570cc3a1e287456a",
+      "gitBlobSha1": "e93132117fed568b1157668d00adc5dc3ad61213",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-source-reconciliation-import.ts",
+      "bytes": 4620,
+      "sha256": "8f4f7187c4b9372d88bc92478101449b99a2fe9cf57a8239d703f3574c89e3fb",
+      "gitBlobSha1": "b0e95c3af41b59a4879bb54c599a1374d2191b7f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-sparse-depth-wave-2026-08-08.cjs",
+      "bytes": 40439,
+      "sha256": "1e70e63cd8f9d1b31c62916273dff2f6cc8f9994a2661469a37d8719da3b3ef5",
+      "gitBlobSha1": "4cc9f7c7e1a21f82ab20ab9f4bde3220c3aa9bb2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/build-wave8-flagship-pack.cjs",
+      "bytes": 45638,
+      "sha256": "4210f5f316acc202c35c499275ce555979791872adb109f2b3aa93456d443193",
+      "gitBlobSha1": "b20a5e3adaa07421813d3598a6d67b2a9d2a4fed",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/claim-minimax-expansion-task.ts",
+      "bytes": 2866,
+      "sha256": "30fd6a8f0bf382796f8619cb1ee45089b856df9646cecdc6942b7e55bd4caa67",
+      "gitBlobSha1": "3a022034455cbaa1e696945dc54b385f0c7b713e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/claim-minimax-harvest-task.ts",
+      "bytes": 2318,
+      "sha256": "5212e9b47456d2cd65ddfef8d73c81dd7946a136e3b3b9349add53585c424f40",
+      "gitBlobSha1": "b682c8e76741c2a16935e8b27e0d70e49e31cf5e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/classify-candidate-discipline.cjs",
+      "bytes": 3965,
+      "sha256": "09cb06d19a57b7bf6845c02dad2c74b4858be6acd3c2f2ad67cc15faa7ccc2ff",
+      "gitBlobSha1": "e1d1b266b5d17987707222f70e097de24adaaaa3",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/double-first-class-registry.ts",
+      "bytes": 7131,
+      "sha256": "534f6bab35dde00115efd1d12a6453b4a59f4056dae21de75f2936194df68170",
+      "gitBlobSha1": "dbb892c660ae408646cd7e4d83b086251e45f982",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/enrich-catalog-expansion-2026-07-29.cjs",
+      "bytes": 47617,
+      "sha256": "8d30561ecb51e25675e0212476432760af64ad6f9b3a2a6245c25245517907de",
+      "gitBlobSha1": "5942c0c2d4864a960320447c08685686446bb0df",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/enrich-international-program-facts.ts",
+      "bytes": 21424,
+      "sha256": "2fa3aa9a4607c0d09b800918fc7ac9b7301cf18c7b3c4a5db70d20605d8260e6",
+      "gitBlobSha1": "3feb19a7546145012d78a3497f671b3d53e56a61",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/generate-v2-repair-batches.cjs",
+      "bytes": 15862,
+      "sha256": "dd1062c64f60c7cf1ec7f58026e210ff40ea75e4cc0e4b06dc0ce20c2865bf75",
+      "gitBlobSha1": "105856eab15d5b94c8c3fc2dfdface9fde465f4b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/import-official-entities.ps1",
+      "bytes": 21247,
+      "sha256": "62a9f2a86ffd3b25e966b5d1ad34ac8fc0d2a765dee3f61205e3dcc0beb042b5",
+      "gitBlobSha1": "17f140b5a31fb4431837d58f0fa01609bda48698",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/import-pipeline-bootstrap.ps1",
+      "bytes": 4509,
+      "sha256": "d0b9cc6b6e1b744468c3c84252e617489063316e2683792cf7fea756969e406e",
+      "gitBlobSha1": "53ce23f2a0cdc74d06beeea4761eedc5f719ba31",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/import-source-manifests.ps1",
+      "bytes": 2172,
+      "sha256": "e5044be3c53832f9592962831efe6576de0bbe0757cd21f2a6d27f4880574b04",
+      "gitBlobSha1": "45dd6f22c472b064f763ec7450da4db7c8a0667e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/integrate-chinese-language-wave-2026-08-02.cjs",
+      "bytes": 12219,
+      "sha256": "e87a062f3c418717d52836b04352add37c70871799df7b2644485814e7be850b",
+      "gitBlobSha1": "ca953e02654702b062c1f02f69b83e82ef767440",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/integrate-multiversity-expansion-wave-2026-08-03.cjs",
+      "bytes": 21193,
+      "sha256": "98eeecbff55e7434cafc20b83f99dea7d09c1ef2f7bbd81086a27b6267330ce3",
+      "gitBlobSha1": "266944b3f97a9cded277524330d685ed22186daa",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/materialize-international-program-review.ts",
+      "bytes": 16798,
+      "sha256": "c9206d6b9c34da37612f20c26171e2fa1dc40b8862d0142bc4ca49093c84e602",
+      "gitBlobSha1": "0c6815e4d86cbc8df0a2526a6f0c7c0c3544ff07",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/materialize-official-dependencies.ts",
+      "bytes": 50461,
+      "sha256": "8abd64de6e64e7113ee1491287a80e7aecc57bf5c9160d36fca1d156d30128df",
+      "gitBlobSha1": "b76e5dffcdadbcea6ac8674694bd33ca591b56d9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/materialize-official-entities.ts",
+      "bytes": 66026,
+      "sha256": "a98ea5448ee6abe23d52466028bcb15fd15f9edc499cc98d7922c67437f02b6e",
+      "gitBlobSha1": "d23ad7b51c08d7f7e6da76b88b921feeedf345fb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/minimax-admin-control.ts",
+      "bytes": 23163,
+      "sha256": "5422ef4a65827de508716d2289d886f2d80cb387adea46437288ad1031ba996b",
+      "gitBlobSha1": "577973152dfcacf2815f0205e2fe6c55741bb4e4",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/minimax-billing-safety.ts",
+      "bytes": 3638,
+      "sha256": "5892f3a931984fa9f8cc56a88c2e3681aedd7d961144023cd2de9fa7de885c73",
+      "gitBlobSha1": "2fd86b6f52b7a1c034e8b74ce725f25cb0aaea79",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/minimax-manual-control.ts",
+      "bytes": 1515,
+      "sha256": "182c18df9d001b6ae918a05a76e3ed1953e8936a497216eed1fe73b932d4c18f",
+      "gitBlobSha1": "df3ac1b63bda3aa9cb1699f01e64f5e9e44a8c04",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/minimax-quota-supervisor.ts",
+      "bytes": 46257,
+      "sha256": "8f46b558bc741792ae1794abf7355f9a3e6e7da2c8ce0813721753809c2abdfe",
+      "gitBlobSha1": "50372a8db53076f6f45283b5cdc5612647ece0b2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/minimax-quota-window.ts",
+      "bytes": 1001,
+      "sha256": "892e4000f7ba6168868614a54b4ff2e27632893e33a30e45674ace1080656d48",
+      "gitBlobSha1": "a692a12ccc7f4f1f762f43fb6ade6e0adef0bb9e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/minimax-quota.ts",
+      "bytes": 9794,
+      "sha256": "55cac627dd020fd02bd3068ada281895f37b116da42ab98ac6248756742c475d",
+      "gitBlobSha1": "34af4f4a5421180ee34d2dafc874102e746c97e2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/minimax-usage-ledger.ts",
+      "bytes": 24255,
+      "sha256": "0282a88360b6b8c2580aa447070f7606ea1eb968a3407989b0839272cd06d7e5",
+      "gitBlobSha1": "c6020a3f8a2ee6549cc852a59a88fb091a19d617",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/minimax-workload-runner.ts",
+      "bytes": 51317,
+      "sha256": "83d4afe34e50a95c21ec1170609df21ac00898380e7ff88959a843e57f522c04",
+      "gitBlobSha1": "946ba439ce98ae33bb927469c0db3162e2dfa455",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/official-entity-input-adapters.ts",
+      "bytes": 33040,
+      "sha256": "483e7458497b6c56bfe429dc290950335638ac422d17877c6e76f0e1f0ecaf5f",
+      "gitBlobSha1": "646b7f2663475fa281a5a1e8fc02cadb6d9d9ec0",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/package-official-entity-import.ts",
+      "bytes": 55322,
+      "sha256": "6de514c9b40764ed920a03f7b1928dd26e9629c8ed0c3accffb7c4483cf51741",
+      "gitBlobSha1": "69be56835b8fcebcb7928299ee61b26c7990c6bb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/pku-graduate-guide-harvester.ts",
+      "bytes": 17386,
+      "sha256": "d25efd9de7176debe05e9d3517e626b9853186963aa751c2c8881eee2e1eec3c",
+      "gitBlobSha1": "5ad232e5de80891cabc86424541af4f64fec31c9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/pku-pdf-catalog-harvester.ts",
+      "bytes": 37864,
+      "sha256": "6751c7255fe92b284d004b4e1fe3daf445cf56fb92eff0b67c023fedf6436d57",
+      "gitBlobSha1": "7b74cea2710adda42a2290f25d292a69f65a3142",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/prepare-wave4-priority-promotion-2026-08-26.cjs",
+      "bytes": 23850,
+      "sha256": "af2c80755c63cecd5754db88a13e75f4e6731569d88eca69f08e7c0632ec953b",
+      "gitBlobSha1": "5af7a28ffe14fe41247dbeae7b66257506537dee",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/promote-source-manifest-candidate.ts",
+      "bytes": 13020,
+      "sha256": "e7675581261bcc606af12187b4ff8696fe0525706e1adc38258c1fe8fae61376",
+      "gitBlobSha1": "185993b20d1af3b42fc08134dcdcd3c7637b52db",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/public-double-first-class-coverage.ts",
+      "bytes": 9380,
+      "sha256": "0d9edf2356742d82efa6fe635f18277b75fc1a59feb6c46fbb8cc731a756e8f9",
+      "gitBlobSha1": "32c4b52af9eee51b642cef389a2ddd3f88fe2833",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/remediate-official-expansion-audit-2026-07-28.cjs",
+      "bytes": 13363,
+      "sha256": "c35fff417cc7eaf38dd50f36d6b74b8ba244ca2cac29453b802ada374b43a6d9",
+      "gitBlobSha1": "affbc63702e36cf19b6a44a5988b90625a93620a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/request-materialization-release.ps1",
+      "bytes": 7108,
+      "sha256": "a100e7d0a9ac9fa2021f5632bfe5e6ccd28afd891af97fd7caab8a0d345e2c79",
+      "gitBlobSha1": "3852e1b7dbf89884515c6c6f4461b6bfe11bb54f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/request-materialization-release.ts",
+      "bytes": 12796,
+      "sha256": "447ecdfcc73e2897087bf4775a3a7da3b51da7966da2d5a771159faf4a5a4484",
+      "gitBlobSha1": "44ccfd0f307bbfc9205e9cd54bf77c5e385fa177",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/run-priority-official-harvest.ts",
+      "bytes": 66052,
+      "sha256": "c7476f92ba21ee0cfe42e5a0f8f2ccebdbd4f1d90a597859af9a8f6a131a64f5",
+      "gitBlobSha1": "53dda0abb855ca78d1ec9e09ae846c9c80a7d747",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/scholarship-index-harvester.ts",
+      "bytes": 37455,
+      "sha256": "e652fade510af72f7dd319aaa25289f808adf667baf69185811a42f98f2a3e5f",
+      "gitBlobSha1": "ee01fea52be34be7f87ed2392e5bda2585094ae0",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/source-reconciliation.ts",
+      "bytes": 6781,
+      "sha256": "47b92fb8d49be949e48c4d569662776e9a78ad9f119fadc1c9e945b94d24322a",
+      "gitBlobSha1": "e7de2e2592413e1aad62c02f1c1ee051c9e62678",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/sync-source-manifest-bindings.ts",
+      "bytes": 2871,
+      "sha256": "2382eae55d9cd75f5c6fcf47a13b19676b98ea8e3b1827c75c8c74069b0e87cd",
+      "gitBlobSha1": "9d4baa092d3161ed4d7a917e9fbc994481a5a8a3",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/tsinghua-catalog-harvester.ts",
+      "bytes": 20842,
+      "sha256": "116c65ef85c04fc64f36a631bf4dc658dafed4e7cb7ba85ad163045e54fd516a",
+      "gitBlobSha1": "a1aedea33de06b2b65fd2daa5af946dd5476bbd4",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/tsinghua-jsdom.d.ts",
+      "bytes": 148,
+      "sha256": "0f94488d316ca8829f0a764baf53ee928857169f54dfc285e57a70495ec151ed",
+      "gitBlobSha1": "fe75a6d1fb09b11fc32d1dcf762c58404ebc64c2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/tsinghua-official-entity-adapter.ts",
+      "bytes": 18565,
+      "sha256": "d5084a82642b2c9c5a7d62018d8afa04fe51641873742f4eb5e9c9fc66d4c06e",
+      "gitBlobSha1": "2711c47606a504e0dd7843874209c92964f11903",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/tsinghua-program-detail-adapter.ts",
+      "bytes": 26541,
+      "sha256": "0b6b99cc5f73333a385c4709a9f5ac98bcd4edaf531ae952b13fcd1df405c9e4",
+      "gitBlobSha1": "21031ae79b6cce68727e6faa163acebdf5a13c1e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/tsinghua-tuition-adapter.ts",
+      "bytes": 7193,
+      "sha256": "91e0ad5d5464a3fde6f9143ec9cb71ee09f30637448dde2824b8e3c0862095f8",
+      "gitBlobSha1": "991d3ff895094368ab99146234fec646af069c7e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/validate-minimax-expansion.ts",
+      "bytes": 20603,
+      "sha256": "ad407b4a40287896e6de607b40e0edcc7bb014b040029ae2874fc7a3886baaab",
+      "gitBlobSha1": "689ae30c54078776018ee626d0afe7f712f96bdf",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/validate-minimax-harvest.ts",
+      "bytes": 8074,
+      "sha256": "b00d232c83d2fc7ec92bcb4a21ab4447e88966361671f64a9ae09cf1bf9b648e",
+      "gitBlobSha1": "eae12e4a2a720d77a137df758eebd8766909c297",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/validate-minimax-recapture.ts",
+      "bytes": 16307,
+      "sha256": "151ecbe71a5604a78ff850a703d006a9422f5251a8ba2fcee458ff1a02c3e1d8",
+      "gitBlobSha1": "c61f1d089142a0dc635ae0c11fff281eeb14792c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/verify-catalog-minimax.ts",
+      "bytes": 66576,
+      "sha256": "dd1ad5b332b622fd56fe04909d88b28f3bbb343f19e8bdf04897ed25a9c98d1b",
+      "gitBlobSha1": "3c6d35ce7955c5862f03a6e59d1b58aa55237c78",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/ingestion/zju-pdf-catalog-harvester.ts",
+      "bytes": 45515,
+      "sha256": "0e40ec86808fde4e3921dd31937e5375b65d7f2b5f36b678197b027bea62fd63",
+      "gitBlobSha1": "d0953d9859f7bd0acce738c0a1dee68c32f827a1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/localization/run-batch.ts",
+      "bytes": 2388,
+      "sha256": "fab734d463b775f52da7619ca15d92f7ae6916ef210de468d838800a7e321a3c",
+      "gitBlobSha1": "f22ecfa49a5bb474a0eefeced6c0dfb8590ee5eb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/operations/check-publishing-auth.d.mts",
+      "bytes": 451,
+      "sha256": "5862b95dd75e0159796c55da530c1f5864d45f9435d93ade4ceda61ffe5a1cf3",
+      "gitBlobSha1": "21460c299cb11b65b92bd6eae54ea2fdeb53c0fb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/operations/check-publishing-auth.mjs",
+      "bytes": 3486,
+      "sha256": "511839624fc53f05bc32a7369700e7bdb3df6ff21e41dfdd67f51fc8942f513a",
+      "gitBlobSha1": "626b81c7a438694aec602abf685caccd32e32c01",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/operations/evaluate-p0-reliability.d.mts",
+      "bytes": 1174,
+      "sha256": "7cd7b706008599ed78f7d1a6df028c4eda0b13109818fd3f274f774c2826e8cb",
+      "gitBlobSha1": "011909119669a89dc870b2fe759ee1ab0b6e8dd9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/operations/evaluate-p0-reliability.mjs",
+      "bytes": 10922,
+      "sha256": "0563cb460ca4e431aa23362d338157a947118b03fcf9c81e9fa03b2eaa621119",
+      "gitBlobSha1": "bc6372e32ce181c4ef804998a96743269678a64c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/operations/github-release-writer.ts",
+      "bytes": 13884,
+      "sha256": "ba0c5639e1e5c04fd8aaba4ba819c1b75bbfc8588488086411b7a7632ad024a8",
+      "gitBlobSha1": "c35fede44ad7fbe742fcfc4e3b377555465fffbd",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/apply-confirmed-link-remediation-2026-09-16.ts",
+      "bytes": 5429,
+      "sha256": "7dcf671ba4cc69d60eb6a306d320e5851c89e71332efda1771abd84a576061cb",
+      "gitBlobSha1": "f28809342275c0009b88d4bd0368067bce4d2408",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/apply-official-review-2026-09-16.ts",
+      "bytes": 14026,
+      "sha256": "05a71a9aa3558eaedab7500c5f9f0dc8b58affcc5fd8b425a18d97a59a5a4bc4",
+      "gitBlobSha1": "49647b99dc02f21084e4fa47c955a78af5cc8302",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/apply-official-review-2026-09-28.ts",
+      "bytes": 15177,
+      "sha256": "c8d3d84bfd3ba7be81bc920190f399f5ba5f0308997a8f6436d91c19d367d4ac",
+      "gitBlobSha1": "0ab54a17abdec5fc2d62a4699eb951ac0cca8f99",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/apply-official-review-2026-09-29.ts",
+      "bytes": 8930,
+      "sha256": "f05efda69adf92f959eca88c795d7a52d28ea0e32b5f027044595f96f30aa360",
+      "gitBlobSha1": "6c5ee81565e3b0388e985e9065228f5d76a0f3fd",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/approve-full-program-batch.ts",
+      "bytes": 12887,
+      "sha256": "2812980aa4283c95cc72a3f93600b6c602d5a53b8438fd9dc0212c36b8015a1f",
+      "gitBlobSha1": "828e3abb19e7ba58c6a235f51efa6ddbf25356a5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/approve-full-scholarship-batch.ts",
+      "bytes": 9023,
+      "sha256": "c34e8dd8df5d94865938e35871e6cd5b18cc16e605ae4b636385adb2fe6ed4a3",
+      "gitBlobSha1": "6ee27c0e82c60bbade3809875f3ecb51aab149a1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/build-decision-gap-report.ts",
+      "bytes": 20326,
+      "sha256": "9ddb8b1495e88be9e8ab7171c4f673b760fc10341070d26f94fd1b3ff8199cc0",
+      "gitBlobSha1": "94547afcad9cdf65b2352bd9879f0e01ca906f23",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/capture-priority-source-receipts.mjs",
+      "bytes": 2844,
+      "sha256": "1f25a3bb5053d08f82c7c9b27a07c5ba19fe4048779fb85827a3833384406ce1",
+      "gitBlobSha1": "d6dfc1a9678b582bcc368a1157658bb1c82a7dfd",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/check-program-coverage.ts",
+      "bytes": 16416,
+      "sha256": "66a567549bc2195126bf93aa25ead4bca6b96760234be46695c8c0e4a9e39b4a",
+      "gitBlobSha1": "1cb086cdb9bf5f055b709990efe0b585e1c1b28c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/comprehensive-data-audit.test.ts",
+      "bytes": 4366,
+      "sha256": "a18f829a50b821987c766d28b335ca7011b5151a68bac54476b16a4bd02e3f1d",
+      "gitBlobSha1": "01067ae32f7d64b8d1bbaaf02f2fc14a49e5a12c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/comprehensive-data-audit.ts",
+      "bytes": 15220,
+      "sha256": "fa2aec480ff370d7aacea3c9145695143768d7fa98faf743612bdfece579af96",
+      "gitBlobSha1": "f1cb56b20d13e67f6456933108d68d7157d65dfb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/evaluate-gold-regression.ts",
+      "bytes": 1394,
+      "sha256": "3298b0ccdf5812bca18215a54fd2010e162e127bc335f7c7c10361125f8434c0",
+      "gitBlobSha1": "f4c76f13cfbe4e645cb8b2254028d7c63e01d283",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/gold-gate.ts",
+      "bytes": 25778,
+      "sha256": "572b9833e48af95517c009ee91f0706523f2e055cc6045d3f7b4f41ba6bec080",
+      "gitBlobSha1": "a046eec68794ad52d6ecd110e6c785b9ef785cbe",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/inventory-untracked-assets.ts",
+      "bytes": 13913,
+      "sha256": "3463d64bdb00bff31f93704c855790d5f15cf59b9c50a946e8137ef10ba06a91",
+      "gitBlobSha1": "c597f077ccb890fe1512ce3a663d6dc57728bc24",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/platform-data-quality.ts",
+      "bytes": 18303,
+      "sha256": "fcf22d2cd38c15e0e32c4f4caefacb99464f34efee1950dd2209ac9fa667b515",
+      "gitBlobSha1": "abd352ef765fa20ce23581a492826e1898e335cf",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/release-public-smoke.ts",
+      "bytes": 41291,
+      "sha256": "c491bbd4c3651d6313efd28022907693bd4cf4e37087a2faa49345d1f3ba07f8",
+      "gitBlobSha1": "e995684361f3e1944f12e0ef97a4388842f8e59c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/rollover-overdue-data.ts",
+      "bytes": 3122,
+      "sha256": "b603b043e4e4d449a9d7c1a986c7655ae6233776a3377c3ac61d818bb37e3f9f",
+      "gitBlobSha1": "d062af0b01ce2860855497e16c95cb17433d3852",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/run-synthetic-regression.ts",
+      "bytes": 348,
+      "sha256": "60e3171c1095aea118fc7c173f279a8dd77bf5080ed91dd72b19dbc498c37eb4",
+      "gitBlobSha1": "1b3efee838015080d36bdd6a14a8e5c1417b4c78",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/sync-gold-registry.ts",
+      "bytes": 2360,
+      "sha256": "cb8d34dea84f0e9fa1901941e51118feeb337cedfa17fd4b6002e84e7d1a2831",
+      "gitBlobSha1": "f349854e3fe5fd3d50df930b49600a30b2d77a9f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/synthetic-regression.ts",
+      "bytes": 7735,
+      "sha256": "df1f8720047c535e1e5e7d80ba1bf21e467db6e0f2618c62e109bc4849ec6e8d",
+      "gitBlobSha1": "6d8e0bb9e29968ad54745d4a159d24b647fddc03",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/validate-gold-registry.ts",
+      "bytes": 618,
+      "sha256": "7e44b59552910fe8de5050dfbd8cb2d5f6bff82aeb9da0215f9735115c7c30ca",
+      "gitBlobSha1": "89ee1c62baa44e1ad84390ebdd8a77fc8ff575ff",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/quality/verify-vercel-package.ps1",
+      "bytes": 3351,
+      "sha256": "06dd00b947746d4cfb71cd757583ab49f0003ffc8599c123af7f8049b8d897c1",
+      "gitBlobSha1": "d893ffc6b35af86720d8324656edb5146bf0af0c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/source-manifest-contract.ts",
+      "bytes": 7007,
+      "sha256": "8d7126f36ad2cb4afdbc22b3dd993f539841fcc4a3d498d220be08dd95c94bfe",
+      "gitBlobSha1": "dba5ad51bdc3eb4554a1b96fe1a2f00cfafc92d0",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/source-manifest-registry.ts",
+      "bytes": 13800,
+      "sha256": "46fa58ea3a5d045eae69028ba6cb52e38d23c6fab7b19a6fa8a0cf90b30cfe87",
+      "gitBlobSha1": "415973657b1bd569e50e507b46ea94cc1299ce45",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/validate-d1-migrations.ts",
+      "bytes": 3236,
+      "sha256": "22bf4150ac382fb1eeba4dcbcc8152f485950201f6eb5e4f76766ded16cb50c7",
+      "gitBlobSha1": "c905491c5bdcb5e3a8a9cdeee62eac083f04ea0c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/validate-data.ts",
+      "bytes": 1405,
+      "sha256": "3496e8958ae896679d0c4e4227f7f0bcda259cbe2e1822ad297d0a289ba62db6",
+      "gitBlobSha1": "925cecd6ccbc5db02323376f467377a4995feb11",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/validate-maintenance.mjs",
+      "bytes": 10353,
+      "sha256": "a08ef8fc0612aa451065a1cd677b530e0d0732bfc5dfc11cf528a5dc7196a393",
+      "gitBlobSha1": "cacf2a52886f8783fa0ac25bbf9f2c4487435a93",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "scripts/validate-source-manifests.ts",
+      "bytes": 16109,
+      "sha256": "153db615e3151065de301553a6ae71cb71c6f11553593193b90dcff631e4567e",
+      "gitBlobSha1": "6e48878d6684f29eb82acbf4ba2b51e01da52fc6",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/about/page.tsx",
+      "bytes": 2183,
+      "sha256": "21aec6b6ba240ecacbd7c845ec34c8c02403eeaeab3188a4cad4e8f806ae1720",
+      "gitBlobSha1": "4c9a7dad1dd01c76945f96d5abdc1213853524c3",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/cities/[slug]/page.tsx",
+      "bytes": 5801,
+      "sha256": "1f387e186c7538fda42956aec80af8b441ebfdc6e2a75a83f9eaf465a0552b5f",
+      "gitBlobSha1": "c2e4014fb589da0006d9051bdc20da5978293e77",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/cities/page.tsx",
+      "bytes": 3490,
+      "sha256": "e22c19529ab50422f3d837b97fc188f06068e98d58c9cf03d9e7126b1e1287dd",
+      "gitBlobSha1": "45e15a93cf93ecd572094ca065fb773f797908d9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/contact/page.tsx",
+      "bytes": 1573,
+      "sha256": "55d2c4d7450f2cfa111b9065440cc002803be18a3d91d07945254d6ad77854db",
+      "gitBlobSha1": "8c47f2d5d68ca5d228fba5097f42b5abf16b7869",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/data-policy/page.tsx",
+      "bytes": 849,
+      "sha256": "6a1716f9c2df741d54b8d0d3c9f01feba89c3d66d553a2a546157e5489868274",
+      "gitBlobSha1": "247e077d6bc06ff2d5c750e7300bba4204f58b7a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/disclaimer/page.tsx",
+      "bytes": 848,
+      "sha256": "c65dbbc2dd1190a30ab1dad04d827567af68ca5f169ea6855be5d647b655b46f",
+      "gitBlobSha1": "9770cce8d7e8e342e9aca739522d9b0f59151358",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/double-first-class/page.tsx",
+      "bytes": 10834,
+      "sha256": "2da6b312aebe5e105b6b4d5b8a997304d308f9154b77e5e4e8a27ef348968ee3",
+      "gitBlobSha1": "b14626691365679e8c5d3ff9c0c3f77577930edf",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/favorites/page.tsx",
+      "bytes": 1153,
+      "sha256": "31f24993a1b1c5426c40b88f80f8634d2911c7f46ad4f5039aca1b2bd44aabe4",
+      "gitBlobSha1": "0b9094a13b5a7ef003f80d6b70882e064cfcf25e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/guides/[slug]/page.tsx",
+      "bytes": 7038,
+      "sha256": "bfd1d207069e3c36f814f456a54706c3c947bff754078ebf72ac2cbc93a293fa",
+      "gitBlobSha1": "b62b1ffd414e0099ce489cf99e0eeda55405d682",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/guides/page.tsx",
+      "bytes": 3415,
+      "sha256": "26ff6a90bde9d088d4149c8d158cd26a7145b0ffc128f6159af6e03ab1a266d7",
+      "gitBlobSha1": "37d0ef8b0464f0d6572d5a415b0d3efaf867ed8b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/layout.tsx",
+      "bytes": 4720,
+      "sha256": "bda71dd1c7d52bee3414e29adb92db4ef6b9a229f4b48b2fb2766626a650438d",
+      "gitBlobSha1": "376d0762c3dd450b6d29d6758b01b6b1f15a3888",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/not-found.tsx",
+      "bytes": 636,
+      "sha256": "dbf801e2bf7d52847661498fca87754527c14eaa41a628886ae25bd20f8c1605",
+      "gitBlobSha1": "021bf975baff8eab90d4992a7c6eff03fe025f84",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/notifications/page.tsx",
+      "bytes": 1061,
+      "sha256": "5a940b301fccdaaf4e4fee232b2e68034d2b653ecfc9e460e346661b147ae4eb",
+      "gitBlobSha1": "880d81577658110db4851ada4a63165a733abbce",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/opengraph-image.tsx",
+      "bytes": 3398,
+      "sha256": "4652b2ba64673351822705b652ee7bf1dd491447784086cfc750306c8c83f62f",
+      "gitBlobSha1": "102bed649b9fc72c6e249b02b90c99440daef4e5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/page.tsx",
+      "bytes": 7405,
+      "sha256": "1d3007327afb2478e5ecbb008a9ee7520f7aa6b078a6d9e3c4b4c84a72c4baa7",
+      "gitBlobSha1": "e7f50c6cf8dbfe65035f99205d2d3bef91f289a5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/privacy/page.tsx",
+      "bytes": 1018,
+      "sha256": "ffc4d206af40d9c4f4be05538060fc3493d63d4f525c473b33965c9e4400e145",
+      "gitBlobSha1": "a5b9c846f98726994e73b52420b28e1f97ba95e8",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/programs/[slug]/ProgramDetail.module.css",
+      "bytes": 2839,
+      "sha256": "5854e2aa83f7ad720657dc532866bc796937a7a23ab479628422d5d3bd30a5e0",
+      "gitBlobSha1": "58ecac81957a4f7d1765cc383ade2320a1fb67e7",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/programs/[slug]/page.tsx",
+      "bytes": 29004,
+      "sha256": "a41e34004c4b519b397b25bfd21ada95aa6df85519595806715f206f785d4191",
+      "gitBlobSha1": "ae72132518e3c40db3af2bc3a171f359a130a6da",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/programs/page.tsx",
+      "bytes": 2080,
+      "sha256": "d7bf9b02ccdc2d92a9205b804f89afe4ed4f029f17510f83633b3983729aceb2",
+      "gitBlobSha1": "ea642d6fde8e5d7e2287ffaccc1b4fc810e76b2d",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/scholarships/[slug]/page.tsx",
+      "bytes": 10501,
+      "sha256": "a766158cbfc43e99d188e72ea22399e16adfbd2e36ac25ffb5cfe81077a4aa4c",
+      "gitBlobSha1": "f6197666a88ab41827144c6d716cd435d62469fa",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/scholarships/page.tsx",
+      "bytes": 2105,
+      "sha256": "08e33d6b6b1a1882a07c6b1f2a6539aaa5ff74740ce1b25713e8aedcbf85edfe",
+      "gitBlobSha1": "12cc6fe6088f8c0c57d3ae91f15bc2d1ae886bf2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/universities/[slug]/page.tsx",
+      "bytes": 9726,
+      "sha256": "59965519e123058dcd949fcf5ecc9f95c701dd0fbbe68818dadc05a0bcaf0b9c",
+      "gitBlobSha1": "dd47a6e75b7eb7ef67bb78b977ee107059383d1f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/universities/page.tsx",
+      "bytes": 2540,
+      "sha256": "4a552cc2e754fb80242d92e412b9d12b422225a5f4fef7ec7bab9eb948f47b42",
+      "gitBlobSha1": "78636086b4e4200ee21fee549732200c36c3db65",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/[locale]/updates/page.tsx",
+      "bytes": 1801,
+      "sha256": "789d5bb8a372c345257df2595c57faf8fc3824e23b88c9705050a1e0e36b7f66",
+      "gitBlobSha1": "302eff0ee638c4f1e7b6e2b8854078baeb7dcfce",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/admin/admin.css",
+      "bytes": 672,
+      "sha256": "b22b7abd2fd4806b74049db5657d3c75314caeefbdfcf3cbf70090afd5eeb5a5",
+      "gitBlobSha1": "e0115453a6bea8f27593958e5dc71241f90e5595",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/admin/layout.tsx",
+      "bytes": 661,
+      "sha256": "e9bbcea5e103aff514f356ce7f62ab17aebe1fccd5dddb6af41012c29a287015",
+      "gitBlobSha1": "6e1bfd47170317ccf592abaaa3393a52079444c9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/admin/page.tsx",
+      "bytes": 133,
+      "sha256": "05b79a13d0f2cfbbac0ced3162536263552478e0feebe269eb94d700b9d49de2",
+      "gitBlobSha1": "914c9bae024dc88829df02cf3f8d8cc8823040c6",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/admin/automation/route.ts",
+      "bytes": 3014,
+      "sha256": "2516dd1a75ff96a6382dffa7de58812b8a06cc974d9462ef9f1eb4fabe79db6c",
+      "gitBlobSha1": "1ad543886c1064d8433fc0c1d786b198bdfae149",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/admin/events/route.ts",
+      "bytes": 2036,
+      "sha256": "a5063b1978d52db6c8ec642c44a243a18d2df2b3e81028a7defe4c0a9b6cb41e",
+      "gitBlobSha1": "b9922e630ed1375daeac89bf517cf92a24170600",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/admin/releases/route.ts",
+      "bytes": 1571,
+      "sha256": "e030948b68db9b45dbd5473fcf816793b6fb5ee13b5eb0e15168ccea58759396",
+      "gitBlobSha1": "273278d2faa4f0d84056a1a8cdffc80f5fcbe91e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/admin/session/route.ts",
+      "bytes": 2394,
+      "sha256": "ce81ea5779ab76372826483132ea3bfa4cbc30bca5f829742becaba037c852f2",
+      "gitBlobSha1": "b52ac9203bdf19f30eb12d01a0f15d559f9e7bf2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/admin/status/route.ts",
+      "bytes": 615,
+      "sha256": "af29fdb2841769c570c4b64fd11095aac419e8fb58db9c4f5bb246240f8933d6",
+      "gitBlobSha1": "281f2235b32de0bc4800439f255e949a959b4bff",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/admin/verification/route.ts",
+      "bytes": 1854,
+      "sha256": "5aa3fb67be7800d635db76c289c8f0d760940d5ae7d751e6403a4f6318177f00",
+      "gitBlobSha1": "3d2c3320be40892a5c08b818f4dc09f43c71ee18",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/feedback/route.ts",
+      "bytes": 2505,
+      "sha256": "b492360dcc181ffaa497b872ad8653d93fe37619c3520baafe1ee9e4999be2f9",
+      "gitBlobSha1": "f80b9aea54febaa89e2849d9a2ea9058f39a13b4",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/notifications/route.ts",
+      "bytes": 996,
+      "sha256": "3c197208e66a1732bac3539fe59902aa0854d1684b65b1a54bfb719bd38b8d87",
+      "gitBlobSha1": "39737057c6956b1c2feb172be24029466f2aa194",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/v1/double-first-class/route.ts",
+      "bytes": 319,
+      "sha256": "1243ea7ddd5600a249daec25cba390585d99bb03e740ee821c570ec0ec214c44",
+      "gitBlobSha1": "c9e64f854cea4739f81683dc7317315896c0001a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/v1/institutions/[slug]/route.ts",
+      "bytes": 524,
+      "sha256": "d4c6eb981d1820923bb97270335862e597aaac1f06cff2eaa73aa46c288a3afe",
+      "gitBlobSha1": "7c42c8f1f5692fb676e4fd8fadee0fcbe4432a14",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/v1/institutions/route.ts",
+      "bytes": 5903,
+      "sha256": "2be088e5d9ecb94e65f63b340b6162dedda4c963186145f14bb55a416d044290",
+      "gitBlobSha1": "e90468463efaf83c0cf5a24cfc6a9b8bbaa4635c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/v1/minimax-verification/route.ts",
+      "bytes": 2639,
+      "sha256": "c915c82a377b44e0c2ecf1428be1ce32493d555e9a322f359186ec40cf977407",
+      "gitBlobSha1": "5ae210e3a4065835cf067f712656a1dc54124bd5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/v1/programs/[slug]/cycles/route.ts",
+      "bytes": 522,
+      "sha256": "662157b4ac13ae83c3703814541eeeae6c61e03f3f19fe9926294ef426d87ebe",
+      "gitBlobSha1": "205a6df76cb185e95453c9e4bb39f2c5f0a3fd02",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/v1/programs/[slug]/route.ts",
+      "bytes": 516,
+      "sha256": "380cbf15ccef3cf27fc61f87c2cc25316da9bd909632a31b2f8fc1272bbfb03f",
+      "gitBlobSha1": "7f6d1f9385d96243d150668402016811a21d6c94",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/v1/programs/compare/route.ts",
+      "bytes": 1137,
+      "sha256": "ca087f1830c48dda35855ed3c277ed89b1429d22846d78ce63e6c2768511375f",
+      "gitBlobSha1": "a5097d54c514ed746dbd285fa1192dd315bedbd5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/v1/programs/route.ts",
+      "bytes": 1332,
+      "sha256": "49e1d449de89958afb68be8bc703dddb1cb81ce4af51eb6b8758efabea4e829e",
+      "gitBlobSha1": "0cad08d5fbeeacd53dc14d724c54fb41a8cbeeb0",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/v1/releases/current/route.ts",
+      "bytes": 314,
+      "sha256": "1bb6d0814a4a94cf724faa81f374df5dcfa529fa76b0a6883104fa817155d438",
+      "gitBlobSha1": "9b8fd795aa755cd1b37897c55bebc163e21d6103",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/v1/scholarships/[slug]/cycles/route.ts",
+      "bytes": 530,
+      "sha256": "9664b3a16691b9de391b2732bd2fc89ff1c5075520cb6b8e82aacdb321c7e3b0",
+      "gitBlobSha1": "7ca00f93d008abae0de827c014e584ef4f5a0fd1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/api/v1/scholarships/route.ts",
+      "bytes": 838,
+      "sha256": "b73983e1fe051c80e5e665e3adfd82e20ce05f46a01697c58d3019f94f3cd98c",
+      "gitBlobSha1": "165cbc732ccd6bf72048d416286de662a9b987d3",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/city-map.css",
+      "bytes": 9804,
+      "sha256": "ba15dd4714cb0f75ce8bcb51bbdc44bb1c761f3889677593f18ca71f89a0e3fc",
+      "gitBlobSha1": "3b7a5fd226b3eb511dfb4f0486b822228c76d895",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/craft.css",
+      "bytes": 15998,
+      "sha256": "0d32f9a76f802d52ee2db4f8be9686bc04380810fabeee16aa61cbbf7eb22808",
+      "gitBlobSha1": "d7f9133f128c92a1d94f667ad13f0e3407b02bd5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/feature-styles.css",
+      "bytes": 27329,
+      "sha256": "cfbc8dd8061ac622947c64699681b21317c4417317e2d88bda8f3f671a58744c",
+      "gitBlobSha1": "361b544556830ea68369a27e993d7e76c37f1b4b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/global-not-found.tsx",
+      "bytes": 1480,
+      "sha256": "c6b2d0f5b802c977651109b2e46b5bae2374c867e4329c4941ca2b400d4e5d22",
+      "gitBlobSha1": "8008a0f50c29fe457748d541e3eff9e95ffe4b49",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/globals.css",
+      "bytes": 58115,
+      "sha256": "0704749616b3dff1009bd01ec55b18fa2b1c3547375817ec3c4cd6c1d97ab581",
+      "gitBlobSha1": "4fac78402f55a6248a110ab43e53a9a143ab1513",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/robots.ts",
+      "bytes": 308,
+      "sha256": "1d384b3956277e594a142f7cf6281163e3cc5d9248c87355c623346474ccce09",
+      "gitBlobSha1": "0ff49ea673c96d54ba7e91e510e6e67590388b8a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/sitemap.ts",
+      "bytes": 2226,
+      "sha256": "f90b10a2ec4a76d25d5a41220f4f8b2fbc8a316baa4923150022db18a1a0c932",
+      "gitBlobSha1": "2ec203121a07dc83598aacc5d322162d17a7fdd3",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/themes.css",
+      "bytes": 3502,
+      "sha256": "1d5b2b22956606a96b11462f4fd4f34d16839aa58f29fe7dfa8d8fae38699388",
+      "gitBlobSha1": "d9c572534a60bff607633d1d3d8dbbfca4891175",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/themes/layout.tsx",
+      "bytes": 478,
+      "sha256": "7710a618830d8e2d771f46b8bf288e9082d585febc3835b9cfceb574985bc907",
+      "gitBlobSha1": "5ec962cc321bf6e9703ecb1c9293ff82ff1c19b6",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/app/themes/page.tsx",
+      "bytes": 892,
+      "sha256": "80c7d9c9d1e3432b0ea1ee27b03d224480c98b6f8361c5f7e489ece7bbab3cfd",
+      "gitBlobSha1": "d0b88566a14214bb256c9fd7df8eb5c36bc35030",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/admin/AdminDashboard.tsx",
+      "bytes": 27327,
+      "sha256": "be3f3b8b4c88fbec2e68a9529471c09e5455a7ecd2479135626ec69f8ac8a177",
+      "gitBlobSha1": "5f3c4abb9241797e51eb472ac8b41b6ca13a207a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/admin/AdminThemeSwitcher.tsx",
+      "bytes": 1546,
+      "sha256": "d2fba4f60cefc6df8ad225efed6406ea3a51edf1c422d368c75c72ab3bffa163",
+      "gitBlobSha1": "52a5b4c2c61af8e9bd0ab6d89ec57d46f248423a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/admin/AdminWorkbench.tsx",
+      "bytes": 22136,
+      "sha256": "38855de963fb9118024bbab2f59c65caff83fae86e712757eba18814f5353b5c",
+      "gitBlobSha1": "ce9f4a2820f8505355a4e7c5cdf2f1b34b6da8ee",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/admin/CatalogMaintenancePanel.tsx",
+      "bytes": 3882,
+      "sha256": "1801e8f3f2a53170de1255a2f959cc141ad7cb36fbf32d246816f949c1425091",
+      "gitBlobSha1": "b1a88a6b1004b7b76c9d2951310370452bedf65b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/admin/MiniMaxAutomationPanel.tsx",
+      "bytes": 7291,
+      "sha256": "e41edf6d89ebb152ca02e4e42e57914db2d771411181e0c3b08b7d6d3d227201",
+      "gitBlobSha1": "3659958ad21f11d091f83d6de21ad05fa80d0575",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/admin/MiniMaxContinuousPanel.tsx",
+      "bytes": 3658,
+      "sha256": "c640c2013cf9e50634d24df6d413ea6d20b4e04df904abd6662c2857bf7a00ac",
+      "gitBlobSha1": "434ac4a72212442937ffefe7a382ec6be883993b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/admin/MiniMaxPanels.module.css",
+      "bytes": 4547,
+      "sha256": "207d42b100edab457d02165834f73de7e85e22f35bfc8c72967efb965e73c560",
+      "gitBlobSha1": "e812b48ccfd6648b5e9f60327bbb7fba372b9744",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/admin/MiniMaxUsagePanel.tsx",
+      "bytes": 5155,
+      "sha256": "520c8b7a59e9019ba6f2dfd603511fee05ffb9c29bb0cb1ee1509c8d9b8e1786",
+      "gitBlobSha1": "838ed7f9c8938195a65b61a412a9001afac4ef83",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/admin/ReleaseHistoryPanel.module.css",
+      "bytes": 5692,
+      "sha256": "815807ecd3b248b930240faee83948438e82232d9ccfa86772d6f41d4df40563",
+      "gitBlobSha1": "b5b502142413d12237b69a61311d4a72c4e92849",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/admin/ReleaseHistoryPanel.tsx",
+      "bytes": 12264,
+      "sha256": "be82a87491135bedd779b2ad5abab3b892298295808df8f6a20415bc1d99ea12",
+      "gitBlobSha1": "c47a72bd1a28d50deefde1a4460a12e039e33bd2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/admin/ThemeStudio.module.css",
+      "bytes": 13959,
+      "sha256": "4e3ce78bbdbac2abd84d17d8019a3310e0fc36e738c7a19616f927bf740112c7",
+      "gitBlobSha1": "a50c78ab9b466b88056cb09f8fcfbc2d60996d73",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/admin/ThemeStudio.tsx",
+      "bytes": 12296,
+      "sha256": "af486408fef08ec11cc2c216d659b705aa12e31257a6ef2242f12f14932b9c28",
+      "gitBlobSha1": "273dfa20ff88793a97a4c78cdca58607d6fe358f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/admin/Workbench.module.css",
+      "bytes": 29482,
+      "sha256": "883ebf406c88971f50ac39f84da44294c64fbbd3afef29d7b076d5ce1f9f43fa",
+      "gitBlobSha1": "5bf68ebba8a37e14c1a92099c493014b18e1f645",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/admin/WorkbenchIcon.tsx",
+      "bytes": 1512,
+      "sha256": "0b89c4bad1bea7297317c11bedca89bcfe0519dbae42c07472a122b31154ec0a",
+      "gitBlobSha1": "f23f47c49e3b7d5d32a643c085b047647aae177a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/ApplicationSummaryCard.module.css",
+      "bytes": 5357,
+      "sha256": "df5d49e646031c28bd5290abff5ae1dbfc23f13b3e3e2f7ba5486a6fe3bf1d5e",
+      "gitBlobSha1": "c5d2eefda38bb2bb369777d104690ee6737c6cdc",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/ApplicationSummaryCard.tsx",
+      "bytes": 1343,
+      "sha256": "6aebb719661e929c78da7a73342349a80dc73cc487d00ffe764aeda905fff009",
+      "gitBlobSha1": "da058654a5410f9f286517efa9edf3b4f2726eee",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/CatalogExplorerControls.module.css",
+      "bytes": 4729,
+      "sha256": "5b10c97b6ec8a321865c9eeda6d76f9e47601639ee950785c5f75ecc11508679",
+      "gitBlobSha1": "7107366d3184ed13cd853e85b104c0c6adf59077",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/CatalogFilterSummary.tsx",
+      "bytes": 3708,
+      "sha256": "e0a64959299ba5e1ccf7037ae78fd5ccef1a258d9f0d0ed2c849e541017c9603",
+      "gitBlobSha1": "b65b09e130556fb11315d0c164993104b38494ab",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/CatalogPagination.tsx",
+      "bytes": 1256,
+      "sha256": "e9411a093183cbd6d976ca529089d4e1c719d6badefe4e9e95a499b60a02aa0d",
+      "gitBlobSha1": "743f23786efc6cd3677b614afd12e45baff2e166",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/CityConstellation.tsx",
+      "bytes": 3787,
+      "sha256": "1d006ce4dc86ad2eac0ed7faac64bcf7db7cde67fd78fbc705ad0f3bf3491d89",
+      "gitBlobSha1": "78006b52589f4a6e3c4242a0099dfaa1ccbc84fa",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/CityExplorer.tsx",
+      "bytes": 8610,
+      "sha256": "cc56528b8882c7d4dee9725a9f4639bd6c76fa0b04190d36c333f1b5e8508d27",
+      "gitBlobSha1": "3b8bc3ff7cda2994155460c1a6f1353870a43567",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/CityMapCanvas.tsx",
+      "bytes": 10656,
+      "sha256": "acd49f58940c7dae0e150c04a134e179a56d4e8561e6a22e7838484f9f3e8f6a",
+      "gitBlobSha1": "eb986e812f235b4cf76f2e27e2e3ecd75e1f06ff",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/CityMapWorkspace.tsx",
+      "bytes": 4884,
+      "sha256": "0c3bbadd8d98c15e742f8f18118db887e195f6a0b673aee1465642d9b7041ae6",
+      "gitBlobSha1": "01407d70bb38ce0a36d705394f783fa0a6210610",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/ContactForm.tsx",
+      "bytes": 3456,
+      "sha256": "735baea37b126498401e8fafcb46922ad860ec6937861cca3313fccc4b4e4c6e",
+      "gitBlobSha1": "1846579a1f07ef4c95d895ba7fb05527420ef1ba",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/CraftHomeVisual.module.css",
+      "bytes": 12312,
+      "sha256": "a0e8235d95eeb0bf2e791960dabc8616b1bf534985d38d31dfdf074404a72b1c",
+      "gitBlobSha1": "610f628284d34d87f8a861753b0485e51b9c7f32",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/CraftHomeVisual.tsx",
+      "bytes": 4915,
+      "sha256": "4292efda88103968c142315b877bf49fab7c3fe119e0fde246f6f74a688f5e32",
+      "gitBlobSha1": "4901832490bd7ba79776a75cb1a2d5fbd6d4f9b7",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/DataFreshnessPanel.module.css",
+      "bytes": 2075,
+      "sha256": "1216929ef201a5fca3b5fd2b583f65aaeb4a7881baac17f0a38a586c1813de2a",
+      "gitBlobSha1": "40f7fbffe3dec60c087644b3cdcabff4a1d9afc1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/DataFreshnessPanel.tsx",
+      "bytes": 2809,
+      "sha256": "2b280c2dd59b31b10bd4f5d03e1f20f45950834f6ce785fb260f404ed0498d06",
+      "gitBlobSha1": "fb1deebe0c73e66592ee5da7c09c0e5fe6acf6ea",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/DecisionRecordCards.module.css",
+      "bytes": 5857,
+      "sha256": "6fe9a47b1c9c401def72535439be385278358d54b1480e46fe9e94e09715a861",
+      "gitBlobSha1": "b1d88ab2e1883defe720c9815e486227dbf892bd",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/DoubleFirstClassCoverageTable.module.css",
+      "bytes": 2583,
+      "sha256": "8de2a6446381a1ea455a91687cfe7e6d1996c9c2ec5e2f658809adb496022f11",
+      "gitBlobSha1": "1d35f93fcb2d8dcdad306a69b5af3ec30083983a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/DoubleFirstClassCoverageTable.tsx",
+      "bytes": 12067,
+      "sha256": "9a44e3a96bb42640a2acca204d49b3ebf4a67da7bd019b4ffd04252325a143ce",
+      "gitBlobSha1": "2c623f4e0fa42bfd44df29f2d16ef854fb4a9db4",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/FavoriteButton.tsx",
+      "bytes": 540,
+      "sha256": "53575bead35dddad60c941d6dd09525b9d2f67ca1c4dca8a4f1f230cfb031a80",
+      "gitBlobSha1": "5ca2a453f5353eb84a8ad8c38ff7fc3834e94758",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/FavoritesView.tsx",
+      "bytes": 17993,
+      "sha256": "e3fac0d8070f118c71e0e04a78f522f8c78f7c07dd559432e8b649384f5c14dd",
+      "gitBlobSha1": "246d5e64b48c8d1d5a2ff0a319d0e76fa3845949",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/FollowUpdates.module.css",
+      "bytes": 2254,
+      "sha256": "a1e5a10d6d6fd3782794727897681bb0258accb30b91b55c897c7c41511a19c6",
+      "gitBlobSha1": "cfdef0b13b2c2087e93ca1385fbee693f623a6d6",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/FollowUpdates.tsx",
+      "bytes": 4982,
+      "sha256": "525a9a8a648ae3ac8cb4a51e2ecaddcc08aa841cf04ec7b5c76ec9d0a2a0b15d",
+      "gitBlobSha1": "f88e35e9c1553e237268486b475397cd939fbe96",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/NotificationCenter.module.css",
+      "bytes": 3700,
+      "sha256": "f2f65d6f1daaab7db8850903f29c903ad7399e214664068a8ce92a6c20605918",
+      "gitBlobSha1": "6556851dae4ca21b3a7236889b4208e67ad55f3e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/NotificationCenter.tsx",
+      "bytes": 6035,
+      "sha256": "5927c9fa5d485ad9763a078729ab1efa5af117199c1679fd9ff3687c5e673d7f",
+      "gitBlobSha1": "30e87d6f776f04b5e4a4c8f103a59de6e91652d1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/PolicyPage.tsx",
+      "bytes": 852,
+      "sha256": "136b93f5b446d75a4ca76853fb945bf5e58b815764f6ca2ef13549d29d71aa72",
+      "gitBlobSha1": "b10424ba1c3d041776c73ae4eab0ec2d1b1ce380",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/ProgramExplorer.tsx",
+      "bytes": 4631,
+      "sha256": "549020fef0672a0a50f77391b46d5cd2a4e9df85c08d79e32ec8422bc3b4d840",
+      "gitBlobSha1": "3a4cd520267ccbdb4dbef5392547c4bf23221133",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/ProgramExplorerV2.module.css",
+      "bytes": 4940,
+      "sha256": "d740af9d8d7ef67cea6754994c956dca2af7fba48fb247c4f502f85caf45f52c",
+      "gitBlobSha1": "836bcf96e34343a193ecd28b0d85931e6a3f2f5f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/ProgramExplorerV2.tsx",
+      "bytes": 16226,
+      "sha256": "102a868900c4a2559f5eb2ff4cd6824dec9c7ae2464864ab887fb0fec55a1667",
+      "gitBlobSha1": "3c0b7d1493ecf38ea43a2027ab5cc5c9606dc3fb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/RankingFilterFields.tsx",
+      "bytes": 2402,
+      "sha256": "f39293fee0ec922532548b6b8919f10d40e386f8c0f563de48eef611c03e0c88",
+      "gitBlobSha1": "e30fdbe8f6f829b057de574c636f22c904da7656",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/RecordCards.tsx",
+      "bytes": 9706,
+      "sha256": "9dfcc0cc7da51fafedbac87d0ab461f71b95a6f652e796b6b4685a614c2176ec",
+      "gitBlobSha1": "f40b0a07ade2569f86968bc7793dddd8eb899a24",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/ReleaseAnnouncement.module.css",
+      "bytes": 6928,
+      "sha256": "4fcab1fa6f9d2b974ee2628d4c47dd76210875549d2cf9f06a1d6e0d5c59c7f0",
+      "gitBlobSha1": "d56516cae74354e605613bebd8b554fe762d757b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/ReleaseAnnouncement.tsx",
+      "bytes": 6402,
+      "sha256": "0a6881355dce5492cdc92b0961820f4302b51000bd9f14ac914f92b44bbbcb19",
+      "gitBlobSha1": "5360d718f6b8095de05245eea65a5c53319f3cc9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/ScholarshipCard.tsx",
+      "bytes": 4302,
+      "sha256": "674e230c1e65dca02d25b9f7e9113027fb16a931549959da75c199ce4c817153",
+      "gitBlobSha1": "5665b4a2d2080116be7110a95bc7e60a4fa5d8aa",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/ScholarshipExplorerV2.module.css",
+      "bytes": 2689,
+      "sha256": "3592897559affe980ac22842137d336a993c6e9f3a355f4c351fa7a977edf99a",
+      "gitBlobSha1": "2e400f45dee7bbb6d520803240ae5e490910e448",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/ScholarshipExplorerV2.tsx",
+      "bytes": 16036,
+      "sha256": "3bab7b49da53d8bcdb46a64f1ad0480787edd4851399e9ee0669acd5321eb095",
+      "gitBlobSha1": "3c70f31caa3737d8661b4a63dc4972cd5ee26ee6",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/SourceTransparency.tsx",
+      "bytes": 1288,
+      "sha256": "0c052e6a6d63a53342a2d7fc83319979076162b73c50014623a95191d1ad1d1b",
+      "gitBlobSha1": "b8c0ee132d6d42ca4adf8079cceb4be5c83e17c0",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/UniversityExplorer.tsx",
+      "bytes": 3557,
+      "sha256": "6aa5148e63166ef2e7f17bdeda1fbc84ce223a8cb38070d1f378b8f17f2eb087",
+      "gitBlobSha1": "4a8024589b99b2fce681f0a27009f2d598d2ca8c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/UniversityExplorerV2.tsx",
+      "bytes": 12560,
+      "sha256": "69f821b21a3e10d44f0717cf109fa8fece56110dd06b07a2714b10af80d8425e",
+      "gitBlobSha1": "8cd52f75ce7fc10d8fedd868f65c8574136e8257",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/UniversityProgramsPending.tsx",
+      "bytes": 4032,
+      "sha256": "cba939844c7b70b93e013b124e73ddfe821ffcbd14ad1e105d8df62e36b5a475",
+      "gitBlobSha1": "3d2174644500ba4130b4e099bc06917d6ba0ef83",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/useFavorites.ts",
+      "bytes": 1224,
+      "sha256": "4e0b4d49086b63c26680739cdc904655a7c7feb468985aa4e793db05aae2df6d",
+      "gitBlobSha1": "e0043120cd524175f80ecb20913b6963812490a1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/features/useSiteNotifications.ts",
+      "bytes": 5806,
+      "sha256": "6cb5b65c813d57ab95be2c24ff8fbf6c419498366c1e8d9b2bac4a6fffb76f1c",
+      "gitBlobSha1": "adce51215b76693c0e3b833ba89776afb558de1e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/layout/AppHeader.tsx",
+      "bytes": 5026,
+      "sha256": "a42f0fd4b8a10c7c59346d9c8e38e24494a60603469194911a6f16b56dbb6307",
+      "gitBlobSha1": "b0b1c6b5c6570062a1f768b192b81b86d058a645",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/layout/SiteFooter.tsx",
+      "bytes": 3698,
+      "sha256": "dca2cbd6983eacb4a63ee16069129008c9732f6f1694128fcab9f61474556aa2",
+      "gitBlobSha1": "1c6270fa1ddb8abda7938035252401c23338b9cc",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/layout/SiteHeader.tsx",
+      "bytes": 3700,
+      "sha256": "233e56eea290f365d62ffaf9c863f1496a33c84a571a1136d8f3e9815ac53b90",
+      "gitBlobSha1": "7a7983f2980f08b00e780cfb57fc36d2be4d2063",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/layout/index.ts",
+      "bytes": 58,
+      "sha256": "8bcd27d74b725d394dd36196ee7359ce694eb3c341e183e59e030a4de4e1010c",
+      "gitBlobSha1": "a87cb9c32746e577471cf842d4bf3c45acf7ac14",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/Badge.tsx",
+      "bytes": 782,
+      "sha256": "c862d2079f74fc0f27edd93185af495a9c273aa5b2a4f9c2e19ebd24f4c438ea",
+      "gitBlobSha1": "33a4ba56e41a20ea661e89f13e85c990ac416dad",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/Button.tsx",
+      "bytes": 2473,
+      "sha256": "7cb203b9c715ff7cf86954b38570af2cffb9374f66b135834ef3f3feeb9fee84",
+      "gitBlobSha1": "3ed688b6927b78367bf512912f472d713e5a79e7",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/Card.tsx",
+      "bytes": 773,
+      "sha256": "8f43243b8b67532b2ede3b7c7b4e39bc7778b5dcea13f3f4567d8d010f8b4ea5",
+      "gitBlobSha1": "ad13c8f9ae9546f90450aafe4af521143ba3f9da",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/CraftBrandMark.tsx",
+      "bytes": 687,
+      "sha256": "1a25fa44d84b4b11205dc5bc652b3fa568978538c8c0387b0b8e40f6fad7cb2b",
+      "gitBlobSha1": "4597a3a5c8b5827f95eb79781c1dba0741b920c4",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/EmptyState.tsx",
+      "bytes": 853,
+      "sha256": "03d13095a654da9e5265d7049657ff884b25d98b117d585e0c2678c8bc3a17c3",
+      "gitBlobSha1": "c1d5dd8cbf59ea22e2c7999248744b6db8de0c56",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/FactValue.module.css",
+      "bytes": 874,
+      "sha256": "5e06f7dbba4f22e8c36e852c24a5c32ca0c7b3c2cf60636102e75c71958d59ff",
+      "gitBlobSha1": "5dc047802e99ff8e03c6b7e4bb16fa188032ebe1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/FactValue.tsx",
+      "bytes": 1424,
+      "sha256": "66190c3d32826d8186d71164c5dfedfbf948f8e9529712978043625d06518c0d",
+      "gitBlobSha1": "1c91c4e8c97eaea865abbebf8687f9ef3263634e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/LanguageSwitcher.tsx",
+      "bytes": 1901,
+      "sha256": "d7ca28ec0c9f55d1cbe58826ea42cecedb4e832772e136a32bd81d6acb7b7fa6",
+      "gitBlobSha1": "d99e44c76d67903e1eba63f3c6935e27c4264ab8",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/MiniMaxVerificationBadge.tsx",
+      "bytes": 220,
+      "sha256": "65289f6f12bfde83d80903a7b1589d8aba096eb39fce9b443643008976ef9caf",
+      "gitBlobSha1": "779e0726efa066920da05d79495da28f96847b66",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/PageHero.tsx",
+      "bytes": 1231,
+      "sha256": "b6b9edf2827fece4b5894d3bf29c96be0383e8d63fc5331751bb6601f308a7ac",
+      "gitBlobSha1": "85ec4bcb2ba9d66af8f1a9e29bec8273df74514b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/RoundedSelect.module.css",
+      "bytes": 3334,
+      "sha256": "9cd6ce1e7f4ea8df8803575881acf040851397b93dab11224eddeb7a1abecd8f",
+      "gitBlobSha1": "04285654837d13952eb8a05fa109b0867b298687",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/RoundedSelect.tsx",
+      "bytes": 11774,
+      "sha256": "92cbf6956ce7a4d7ae74fcf6c0f2e6b4b098aec4330bc69bf8787ad8affac5b8",
+      "gitBlobSha1": "8ee0657aa4e6075cf73c29a61cab9b6df4d23bfe",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/SectionHeading.tsx",
+      "bytes": 1006,
+      "sha256": "bd860e81cea89e9e170aa61936377edde19285cd21286b5cbc57c2b53f6fa2d2",
+      "gitBlobSha1": "302d368c954959efcdaf6b11e356d58120516f32",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/ThemePreference.tsx",
+      "bytes": 1993,
+      "sha256": "9a69edf5d25cbb50371e190a9b4df5507f4590328bf28eb9e04b34b7f4a9068e",
+      "gitBlobSha1": "93e79903176e2788eef1ad5595b00b79a46aaece",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/VerificationBadge.tsx",
+      "bytes": 1790,
+      "sha256": "14b669267460bd7189c40ad81d0b5f27cd1b45610dad8b5a52b1378e31c73358",
+      "gitBlobSha1": "4a8b5b09f6c1e433a92e0071929dca9970a8ca0a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/cx.ts",
+      "bytes": 126,
+      "sha256": "464c3458798b94283d1435406a59209781769e1ade8d786f6cba7032f28ba4f7",
+      "gitBlobSha1": "f27a8de9e1140c140944cf7c61b2f21f33059f04",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/components/ui/index.ts",
+      "bytes": 264,
+      "sha256": "f8cf37f25ef849ba269119614d8431da843b7489fa51ced19ce7ff84feb384ed",
+      "gitBlobSha1": "9c85128bbcec5771835be5a7c365f28d284a7efe",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/data/generated/double-first-class-coverage.json",
+      "bytes": 318307,
+      "sha256": "220416dc236a50dab5392eadb8462dcfaa29dd46a0134af6bca456ef2d402852",
+      "gitBlobSha1": "4f9a204d23cc1304db579cb555eb3378a5234262",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/i18n/city-guide-experience.ts",
+      "bytes": 7173,
+      "sha256": "1f4b65500a0b84afef875589f1457344ebc9b1342b7abc549917dfe520f86d9a",
+      "gitBlobSha1": "703153afe75a50c2499e16b6abde3ad51978068f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/i18n/city-map.ts",
+      "bytes": 9981,
+      "sha256": "59f18b3227b2e42f921d9c7e01fd53d2e68467739e0c56a7e747fc2f5b0ff908",
+      "gitBlobSha1": "3c428ccd2421b94ba54688e5dd467dd135fc6abe",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/i18n/config.ts",
+      "bytes": 5810,
+      "sha256": "64b46e23f4ec6c6f933cdee506b31e6da6ff2540c33ae68e11f8569c566f22ad",
+      "gitBlobSha1": "8307414209a57ff98033a5d62504f23f53489bfe",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/i18n/data-trust.ts",
+      "bytes": 6879,
+      "sha256": "08f7497109fb446fd0758fbb2799a3c87ff86a52de2c7ef77a900227a0e72e73",
+      "gitBlobSha1": "d88c65a89d2966c60e482a54d0887e54da5badcd",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/i18n/decision-experience.ts",
+      "bytes": 4743,
+      "sha256": "766dd5dba2ec5af35054d38982deadeadbd9b8f4c9cdafb017b65d7b14055e0c",
+      "gitBlobSha1": "e83077acba3c90f429a43489a9c75b1d334b0e35",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/i18n/fact-status.ts",
+      "bytes": 5959,
+      "sha256": "c2c785b308073f953642c4a5910d33131ee413475566ce8cdc294d58b443fd14",
+      "gitBlobSha1": "4b5a554d6ec9d048dbed08511a7e2ef52806d96a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/i18n/home-experience.ts",
+      "bytes": 10342,
+      "sha256": "6cb0b7f30091af31c54d46f4d7b71d114a01789cdd65f615035da73a90a52567",
+      "gitBlobSha1": "5996ed92118de8f98007822a0ed283124fddf73c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/i18n/messages.ts",
+      "bytes": 94396,
+      "sha256": "a50fe32474485df8a6af823ba2d0cc72f4061c4082fed320c869c52b1b0eea65",
+      "gitBlobSha1": "5b685a4a3377562cffe9085fbd1b28d1365762a5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/i18n/navigation-experience.ts",
+      "bytes": 775,
+      "sha256": "685d26e5e4ccfb9667b8c5c06184c701090910974863257fb8224506b567e0de",
+      "gitBlobSha1": "1f88ba4262e5dd1d7da1ac9594a60caac960bed5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/i18n/release-announcement.ts",
+      "bytes": 9153,
+      "sha256": "33de964de03d8b412c240c075eb78f5b1bd1214b30d27834d9c16bb1c576a50b",
+      "gitBlobSha1": "f6009fa4920f5c8852f885f73313e5a3876b651b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/i18n/tuition-reference.ts",
+      "bytes": 1266,
+      "sha256": "202eaed07bc30de9e9e40ce7a2f958e166eafd1079d6dde95e9a70693824574f",
+      "gitBlobSha1": "f0d9f16add44c848a99c5a843243cd550dc1d956",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/admin/auth.ts",
+      "bytes": 5135,
+      "sha256": "bc58844c3055d1c3faf1192a645565eed85169243dc1838b44eb73eac261e911",
+      "gitBlobSha1": "d1704286781828d4d2a57628e60f52514351ad94",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/admin/catalog-maintenance-contract.ts",
+      "bytes": 3836,
+      "sha256": "1d5f1cc79be70123457f3817288ad6f058b776915201ed7faa93889ab05363b6",
+      "gitBlobSha1": "9f05d07870141a0132c6f85d45661a271c20995a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/admin/deployment-release-contract.ts",
+      "bytes": 3810,
+      "sha256": "6b154a4c71e417574f2e46c192176d2a42699a4944fc7aa0a699990fbbde83a3",
+      "gitBlobSha1": "2fa58c775f6e00d1a43864e86b5b70446ff89d29",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/admin/executor-contract.ts",
+      "bytes": 6545,
+      "sha256": "a9e3e668ea4eb6eef48f35c7ad24266ef31905580cbae1ab9f40ab490a245c21",
+      "gitBlobSha1": "0ccfca41c732710e7bcca05ea19e0a7afb31ab7a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/admin/minimax-continuous-contract.ts",
+      "bytes": 2049,
+      "sha256": "2881abb17c58379f1b66ad44dc6a421ff272f816b3266023a8df66631eb18e34",
+      "gitBlobSha1": "80cbb7729994317212974b6029f356c3934a0a18",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/admin/rate-limit.ts",
+      "bytes": 1183,
+      "sha256": "16dfc52421706dad926e21e60bc966b1daa31522710210b6d2aaeb159967c43b",
+      "gitBlobSha1": "e960edd6256059ea9a7fe2885bf643f1962fa588",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/admin/release-contract.ts",
+      "bytes": 2809,
+      "sha256": "1c6d44a53170b9b59a1172bea6892781bf671250c7c22f93adc98bf7260a6726",
+      "gitBlobSha1": "08ba07e375af04c4a9f9eaefa1404f97fe268d37",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/admin/releases.ts",
+      "bytes": 4675,
+      "sha256": "bcceb14d5617cf9818bbda3fefe6fcafacbc2fcbdd8c8b99b442ecd3faf8a805",
+      "gitBlobSha1": "5966428d4f5a936e054709f49d82394dbfd42c1c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/admin/remote-executor.ts",
+      "bytes": 5854,
+      "sha256": "997e16356ed5c6e8320eb47574ac0f4989664b05422bf810fd945a7b2bd5d1bc",
+      "gitBlobSha1": "ebf2f7e7fe23d1910b6859d511e84ecf060161ec",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/admin/snapshot.ts",
+      "bytes": 17062,
+      "sha256": "d2e467476695375436a1f33c68b08d15e438d6e0cc139568925790cc5613fada",
+      "gitBlobSha1": "fa3e1ae30d6947580cbd21bcd0158bb9ba94d2dc",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/admin/telemetry-contract.ts",
+      "bytes": 5688,
+      "sha256": "b4c45e3752e68157208764b347183ebc772a86622560b44705bd93ec8fc8f45b",
+      "gitBlobSha1": "452a5da163cb18c5e55b6056e47537a556f32612",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/admin/types.ts",
+      "bytes": 4156,
+      "sha256": "9e13caab5cd323348c73a3e0253df7eef2ad2a60305227fdb8a7dad1c748a84b",
+      "gitBlobSha1": "35276d4864a5d93d9b670dbbbe14925fcc880b61",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/admin/verification-options.ts",
+      "bytes": 1231,
+      "sha256": "5a66a136694002c6252a796b4d650ddec8e4dbbb4c8a2e41620fd5d9b128d737",
+      "gitBlobSha1": "c9ddf9799438a77ddeaecd1088737ce0ac69acf3",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/admin/verification.ts",
+      "bytes": 2925,
+      "sha256": "0691730c0a1696ff785e90d25438a4e9f965f5aca8390e061122661fa8d90b4e",
+      "gitBlobSha1": "3513c275de2090ad0753944c94a5c35a848e9360",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog-api/cache-policy.ts",
+      "bytes": 787,
+      "sha256": "683f9eb1750c969a394ff3c349c4795f936ea3278620faeaf116c51d4f1e7fb5",
+      "gitBlobSha1": "012d7163a1eb4760017ebb93a9d31e1f86b7f69c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog-api/cursor.ts",
+      "bytes": 4793,
+      "sha256": "0b4d3a132faefac9698518ac8fe7288f5de1b344ed6cabb648d22f7630ef5ed0",
+      "gitBlobSha1": "e603409de2e3b0dde12c8870b65d9a0c8e75bbd6",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog-api/field-meta.ts",
+      "bytes": 2114,
+      "sha256": "2262237664be32b8c160d40fa29ca1e4e1aec7310b9b987bbaf3b5928396f005",
+      "gitBlobSha1": "b4475bf46b4cee25ce6281aa7ff9cb1e98726cf3",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog-api/http.ts",
+      "bytes": 4129,
+      "sha256": "3bb2f4c81c051ee318c7fb359126ec10642a711c6e55307fdf8780e0cbb7a8b4",
+      "gitBlobSha1": "f87aa348eb874959986d463c475e8a9fcd1a1ef2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog-api/projection.ts",
+      "bytes": 328,
+      "sha256": "7755df58cffc49085443c08ba4ae67237702b4384ddd93f08024d13f23e69e94",
+      "gitBlobSha1": "ef817b1b54c75fd51434a74c3510a7d5b998e704",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog-api/runtime.ts",
+      "bytes": 3192,
+      "sha256": "c244fff3eda659cbfc69785968644e82334afa3622ddad138e7c3d642a3abb30",
+      "gitBlobSha1": "a9d91460a73285291794051d912f806fadfaf474",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog-api/service.ts",
+      "bytes": 27925,
+      "sha256": "0348bb775b3c7c21e949e6eaca3e930f0b5cd12d27c7518801863e3cbe2838b8",
+      "gitBlobSha1": "839d126e849153f4da6bfd180dce0983a2ecbb74",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog-api/types.ts",
+      "bytes": 4567,
+      "sha256": "592b08f8ef9379564a901188585bec923aab6dc20caeb50cfb7086acf3970332",
+      "gitBlobSha1": "642942bd1da0d160dc3195c627df745c42c1747d",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog/d1-compare.ts",
+      "bytes": 13979,
+      "sha256": "052f4bf517b3a933ea1539ba76b125a263a9338b92cae718a0ab2afa679edab7",
+      "gitBlobSha1": "91060da2c11ae6d21f630880c8d377deafe0fa85",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog/d1-list.ts",
+      "bytes": 22757,
+      "sha256": "a6a9ab26f299fa5f63baa72003fc5c7eb0689f7fbff42f739de08658c12ef405",
+      "gitBlobSha1": "fa0e6ba59a3c030699fe9e3941a6fb9456f640cd",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog/d1.ts",
+      "bytes": 17428,
+      "sha256": "b50b8aee6c2db3a91f62f5f97889ce9d0f28406aa036e1143336edc5db37c9f5",
+      "gitBlobSha1": "1d9c763a56c8c95c60db16bf73a527836ca1cd37",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog/index.ts",
+      "bytes": 1715,
+      "sha256": "0940e9b100a70d54e642172e46ab920f17faf01784434c05a8611e6b47d8c707",
+      "gitBlobSha1": "3843366e082b8bcadb79cb43c15902f03afe733e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog/json.ts",
+      "bytes": 13841,
+      "sha256": "3a6ef7bcd2a4fd3fbccdbecf494af1418cbcbc26ff8dbeffcd5097831b889be5",
+      "gitBlobSha1": "11c2fb69fc6bd72fda3956dc91f9a870c69c7fa9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog/list-cursor.ts",
+      "bytes": 4391,
+      "sha256": "c12264ecdba88c635660db201c3b38c9672a4669a43d97b1d74cace8ef9bbd39",
+      "gitBlobSha1": "30bc36d95f66135813aa0be03af43220c408246e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog/release.ts",
+      "bytes": 5706,
+      "sha256": "d19e1bed213cf522fa2175f7783ceecba120306b904167f840821a7ad3e637df",
+      "gitBlobSha1": "50ca27bc1ad2e4d70af30dd78ee54580af52d1de",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog/repository.ts",
+      "bytes": 2137,
+      "sha256": "5749f15f73e1120fc3400e9599ef6c4b92c5ce5cd7363cd0173b4b4052e8b52f",
+      "gitBlobSha1": "d2210ea600c18634a327cec486d15e4f02457680",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog/runtime.ts",
+      "bytes": 484,
+      "sha256": "5e147feda20d558f0ae92383b43c67c23535a189d180651789e1c1d045db84c0",
+      "gitBlobSha1": "876854ddb0a160e5cb3b096986d9f27cbb1beb42",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog/shadow.ts",
+      "bytes": 17951,
+      "sha256": "12da94d9d87ac322ea90a350c981c2863f65bba43d28b29956f01a7891102b81",
+      "gitBlobSha1": "dca0d63afe68ccd1cc2ec3cc1340111f24f684ce",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/catalog/types.ts",
+      "bytes": 4908,
+      "sha256": "487d9bc7ca0f7dff3f4002986ca808f0019bc9662fce2f02750dc8568647130e",
+      "gitBlobSha1": "16592e734e44443c15de817f87afcfd81991e84e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/city-explorer.ts",
+      "bytes": 2478,
+      "sha256": "e14dddc5f0a8832cc96e5997bcca2ae670ae9965df224c07c8a3370112ba6e73",
+      "gitBlobSha1": "e5b810329598b1a5a770742a25da815a4555680f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/city-map.ts",
+      "bytes": 924,
+      "sha256": "0202eb2dc31b21c9ba033db394784ec0873caa09d77f4de90866d497cfdfc1f4",
+      "gitBlobSha1": "eeba4437fe2db328fddb1396d854239d6c907b81",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/admission.ts",
+      "bytes": 3217,
+      "sha256": "da7f729cfdd85a974dece0f1fb73426d48d4be14d07eb06f70785e556d703fb6",
+      "gitBlobSha1": "64e9b9e23b0edfc35f0185502f4548ff1444df57",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/detail-prebuild.ts",
+      "bytes": 3558,
+      "sha256": "3be57af4de92d7cb830da55db70bf5851886d40fe989459599be77f401fbacc8",
+      "gitBlobSha1": "2194a199cb9153a48bd244412c7701c8b8266f74",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/duration.ts",
+      "bytes": 1422,
+      "sha256": "b4afcecb39421c6066c50d46e8cae076d283a3122b3c487fd102db78c6adbe3b",
+      "gitBlobSha1": "1974379db7aea19503ed02029845df8f7f019379",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/fields.ts",
+      "bytes": 25706,
+      "sha256": "49b70e3c304388d9cf3f910bfbbfbd841ea4947af54682e85bb4479aaec44d82",
+      "gitBlobSha1": "e6b557ed12a6d83825702840180848eabf373e03",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/format.ts",
+      "bytes": 3199,
+      "sha256": "01bc48529c86692c816f823ea51a456eda153247823ef70b0a26741494aa3e9f",
+      "gitBlobSha1": "7783fa5161f83f0ffd54093ac7b5a09facd1cc55",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/freshness.ts",
+      "bytes": 2028,
+      "sha256": "3aa801dc733e1f1a1e39783794681a2d28d8e5d1cc183e49497d09d04f9b3cf3",
+      "gitBlobSha1": "775863359d1d11d48472a83e18520789a081128d",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/labels.ts",
+      "bytes": 4750,
+      "sha256": "d2124d7d55f007781431a4cf8db9722b4139cde0533c34a4f54bc6b7ec068d89",
+      "gitBlobSha1": "eabdb5130b9553ec1a712aa12b5f0bb86c7f5e83",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/load.ts",
+      "bytes": 3066,
+      "sha256": "c2853a04fc2c813c8326ed8ee58a93681d81000a0a95bb9ca32de27c9eba15f6",
+      "gitBlobSha1": "156e638daa94723846cba31a613964ba869b9035",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/preview.ts",
+      "bytes": 503,
+      "sha256": "ab8868d49984fdd8169e99ff9aca98b9e3e29ef10de3ba9dad3d8446fa049033",
+      "gitBlobSha1": "7c591d2776eca72e16e9c743bd7fc31196ffa9c1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/program-details.ts",
+      "bytes": 932,
+      "sha256": "9b7e287bac0108f6335c347a341cae3b39156667bdd10e365b4bfd0f2afcfe56",
+      "gitBlobSha1": "3d320a6dcd0456811a4c4f6cf201c2b9e68dbb78",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/program-source-labels.ts",
+      "bytes": 3049,
+      "sha256": "d6be2519f505f8689ebe1defc764f40c3bfa423963f4730b360caa1df19b0d8d",
+      "gitBlobSha1": "8bc7d48d00828c5cf9ebfd4f4bc34e373896617a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/publication.ts",
+      "bytes": 2739,
+      "sha256": "86aa129778c490cb1b2742ebb1f66557b94310b5040aebc348cc3221f336f832",
+      "gitBlobSha1": "bf0f419a24c4ffddfadd712e02927e247558b89e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/rankings.ts",
+      "bytes": 6154,
+      "sha256": "54e26bf034e8d659fa6d270a56362fd2b70dd2935d783d1ffc85af582e962de4",
+      "gitBlobSha1": "358f90c9e40de36be8a0dbc773212e2d17288561",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/regions.ts",
+      "bytes": 1562,
+      "sha256": "832f51909b8c1b25c36896724b684760a3d4ff8e4038bc25a220265776495870",
+      "gitBlobSha1": "c934c158ac5ebd1bdb2be572fda35457e29e45da",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/release.ts",
+      "bytes": 554,
+      "sha256": "e5bc6dad5a211ac9623a5bb1ee3c5e6c93da0b6b27bebf2b52e42aaf0f833230",
+      "gitBlobSha1": "90c48f875d013186f7447abeab3fb8566b4718c7",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/schema.ts",
+      "bytes": 16578,
+      "sha256": "33fdd08f4c83f23ac91f9113dd456e6ec6b86888ddc0de8113dc19d11dc29976",
+      "gitBlobSha1": "b8d68c4f95f82c65e95eea9f760115bd136bd955",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/scholarship-scope.ts",
+      "bytes": 774,
+      "sha256": "30c408d4a9c3b12aea206ce2a0d3e97fb2ab84e290d027c13c8e64924e8ddc4e",
+      "gitBlobSha1": "5847a7200dfe2b9bcc0794dce3fec32a688fa448",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/scholarship.ts",
+      "bytes": 1731,
+      "sha256": "9310e039dc67c21a02e4894a25de71d989109e7052d246e28cffe00636e4518f",
+      "gitBlobSha1": "a00027d377296f87932d645b8b3ff2980c06110c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/slug-aliases.ts",
+      "bytes": 256,
+      "sha256": "73e82effaf6e5c7e1bbf21670d5b99d09e88bdcce777e88f3dc249149b5aafe2",
+      "gitBlobSha1": "4d8b41b8027aeaa38b628bcbfe78740f48bc2075",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/data/types.ts",
+      "bytes": 4270,
+      "sha256": "e6511c29319926e5cbaf19e919c4ac824f3fa2047314ac951be76d035cff65e1",
+      "gitBlobSha1": "58370ad8308030c2d5263a645901e5b6c0fd20e6",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/favorites.ts",
+      "bytes": 427,
+      "sha256": "af3186aa3fafe9bdbf4cf2223395735103b16aa2e06ec588f64fb8853f2049be",
+      "gitBlobSha1": "6dd635e0a654935a104dad18b5943e168b5c6a96",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/feedback/email.ts",
+      "bytes": 3102,
+      "sha256": "3525b26b57ccde555cd2d8ab7b0f484c395a23bdf217c1b7be9f8dc8edf1dba6",
+      "gitBlobSha1": "a025261629ea32e070b44260033bf9e320e04c92",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/feedback/index.ts",
+      "bytes": 133,
+      "sha256": "163353ddda128aca46a7694119f98076635d1da91a0f582c38ac5057f58ea355",
+      "gitBlobSha1": "63b0e375090ce01eab66539029361dfb493e9308",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/feedback/rate-limit.ts",
+      "bytes": 3903,
+      "sha256": "6d158dcb69fac6bb40489620fd95490e629895f984bac99c59224092f38dad4b",
+      "gitBlobSha1": "b3c2826e8984af313ffd95c41b31ab87eee3b7d6",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/feedback/schema.ts",
+      "bytes": 2422,
+      "sha256": "4adda323efe0f9088f21ff07bc48c83e396b1a55ec7525969c96e484f50c31f0",
+      "gitBlobSha1": "65e53b8ceb0abfc587d07eead45bd9981a075a05",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/feedback/security.ts",
+      "bytes": 2219,
+      "sha256": "69d53c7dc908110a5fdeb4cdb81da15ae9e05e3dc41d142afc8a1d9e773406ca",
+      "gitBlobSha1": "096b20fefd4246b94ff2eebf9bdcd4d2d1dea9d0",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/feedback/turnstile.ts",
+      "bytes": 997,
+      "sha256": "965a45467b2f9d63356ad77f333b92f1114802ac0e4988078cb1475e3cc2b57b",
+      "gitBlobSha1": "5e0c3a06529dd66798c421b79d1ba31817ca09bc",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/guide-experience.ts",
+      "bytes": 35600,
+      "sha256": "17f0dae074b9b7268367413a650c1ef2ca86e65ff2e1198369093ee8e8713734",
+      "gitBlobSha1": "e671b39a78c81273319bf1ede19c2b95568db64f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/guides.ts",
+      "bytes": 10294,
+      "sha256": "96d56073e6ce5921a601c038e7d0edec2c15a713d0e6e6eea92a9d34693eaf05",
+      "gitBlobSha1": "b1cc362b4c8ab0300fa30cd617cf156f905a8d04",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/maintenance/university-coverage.ts",
+      "bytes": 14817,
+      "sha256": "f6be07fcde5a14b67eac3b711cba1ea3d3875d93f36d9144dba9690b974ff870",
+      "gitBlobSha1": "ff2f76b34ebf86da5a6beb71c9df98f4e32b7597",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/notifications/catalog.ts",
+      "bytes": 3076,
+      "sha256": "eb56fc390fa69cca634879f015868cef4c67ed3e202f1cadc6a39c653cf04db9",
+      "gitBlobSha1": "b234d1c7ad3b57591a3d12e01f31e5724196838e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/notifications/changes.ts",
+      "bytes": 2737,
+      "sha256": "fab117f3a5ece4ae5c6fe046e258f06f00eb73e9a1b7a3a999dd1bb2a1e89af0",
+      "gitBlobSha1": "31d3095b540624690d1850af9233908f2c836467",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/program-catalog.ts",
+      "bytes": 15016,
+      "sha256": "7588c5e8fb44b94c3f1d7b2227b433256ac2b8769cb7f227c8640635c3c4ae11",
+      "gitBlobSha1": "033c0a07c44da860575c8749a186a2606725bd32",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/scholarship-catalog.ts",
+      "bytes": 14958,
+      "sha256": "763a41d328df0ea1a3e4f3ca64ed6ee3f855bdcb0720a47fd6ee3ea355cc4670",
+      "gitBlobSha1": "337ff08169bda93ad8ac3b819cb82e543a6f7708",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/search.ts",
+      "bytes": 3071,
+      "sha256": "5933dcff24cba7a0c461d21276cdbebc03fa45c2e1e5076c3a82e213aeb4e00c",
+      "gitBlobSha1": "20103557e08913381a3432f6c16b493af49d480a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/seo/indexability.ts",
+      "bytes": 1731,
+      "sha256": "e7c63cd9a99dbe58e2ca5e97a3465a39c7f61cb1af200b005c7eb51e91eb2f1b",
+      "gitBlobSha1": "231c0db080d6ee3158772c793f684741eed8dbfe",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/seo/json-ld.ts",
+      "bytes": 278,
+      "sha256": "9eb36b1a38b628ceb90e1a3f114464d5bc636276324ecf274de1e9d7d9f2c963",
+      "gitBlobSha1": "895c009c8faf9fdb69ae2688280c7865a2be6194",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/site-notifications.ts",
+      "bytes": 19204,
+      "sha256": "3b6799b9a6b97c8b618848b490f8ea6cdd9ebb083638a22a98880fdceee77833",
+      "gitBlobSha1": "ba9d2c25ced1afaf573c381f3d6991c1f72e71eb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/site-themes.ts",
+      "bytes": 3122,
+      "sha256": "8c1a2f6c7ebba4a1b0b45f38b4f6708cfc2a8929cb30c7f9412f0dd132438f8f",
+      "gitBlobSha1": "9f92081155eea68d7ed387cd440e39af335ff368",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/site.ts",
+      "bytes": 2600,
+      "sha256": "b498d1295325666082860535a207055d62a734a071e54a7c2cb151f6c8431ef9",
+      "gitBlobSha1": "0f04d5d7694821e4d2c6eac64995b05e0793128b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/university-catalog.ts",
+      "bytes": 6849,
+      "sha256": "c01f575a89ffe6ac743b9bcb6a978c76cd2354011fcf9fa08982e42d983c4493",
+      "gitBlobSha1": "68b669d3822539198b77648fad1759336f21ccf1",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/verification/minimax-contract.ts",
+      "bytes": 3168,
+      "sha256": "334b43a92bcc6147db6168a1e16ea87b1e186377580c45d2861f289aa3e58856",
+      "gitBlobSha1": "923b992b925679819974c4218edca585dd010b2d",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/verification/publication.ts",
+      "bytes": 2013,
+      "sha256": "f4cbe0ebea0528b83670377659a8b89a7166881ac58845ba0c69bc09d6f98714",
+      "gitBlobSha1": "abcbddf42bd7500c513cd39c6955c772bf2b4ff9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/lib/verification/record-fingerprint.ts",
+      "bytes": 1098,
+      "sha256": "70f3f7e0a72853ea06c473f9e4e268eab2692d8abc34db9354b36510779935bc",
+      "gitBlobSha1": "fc7814a3522fe14a5babdfab8c3bcb3dac119e70",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "src/proxy.ts",
+      "bytes": 1560,
+      "sha256": "4025968f28f0d8c0d341630a729d1a37fca9c1b563bad662c09699d38904bb07",
+      "gitBlobSha1": "6bbfdb063e48d67501be5231e6fce3d526a35934",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "tailwind.config.js",
+      "bytes": 438,
+      "sha256": "36fc998018c8fb86e4f83a8ddf5b0633afa64fec79d42021381a6f8d2fa9c03b",
+      "gitBlobSha1": "cafa107e553e6b12de693ad2714c06f859fa849d",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 726,
+      "sha256": "424cc271f13381820e570e2ae91d27108c9aa7186f4e262832d6bb2d6adc061b",
+      "gitBlobSha1": "0b335318f0bd96337ef6b88df56395e99ce46f04",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "vercel.json",
+      "bytes": 154,
+      "sha256": "f6681fb6d308cb4628ad05b735fb2ccad9a7eda4c05c72c79fddc1e67c194b4a",
+      "gitBlobSha1": "27682d84931d4fbd893e8e04e6eb627ed6650c47",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "vitest.config.mts",
+      "bytes": 555,
+      "sha256": "752ff4a5e9b52e87aa354a4444a806dfe6d283adfc89e3d44e52433425ea0c32",
+      "gitBlobSha1": "45e2b8f608411e35af647336c037521727a6a61c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/catalog-api/src/admin-executor.ts",
+      "bytes": 13039,
+      "sha256": "8753a537402730d9551a526a53bb46569f57d53c02c865aaa36e37c0bf86af50",
+      "gitBlobSha1": "982046b30e3cd464543a5754e5890e4e2f0be242",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/catalog-api/src/admin-release-writer.ts",
+      "bytes": 10986,
+      "sha256": "467adccfb224206c6536e64449e4e266ca3623e38b64f58d1ce23ebc9c6265b6",
+      "gitBlobSha1": "9049af8c1b5b76cec90aef1df62d90fa74f33da9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/catalog-api/src/admin-releases.ts",
+      "bytes": 12401,
+      "sha256": "c761ac62290487508a487aef3e456a09b3782dd42d49b9b593dc26598a283779",
+      "gitBlobSha1": "83101ca8635d0d248d4b1f36d6cb000a187895ec",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/catalog-api/src/admin-telemetry.ts",
+      "bytes": 4198,
+      "sha256": "0c7ae697e5461f54aba3eb71406da1c10ea5c184702b1a9357d1c078ad373eaf",
+      "gitBlobSha1": "d7c981a68c29c1c2b1d876d417e855b69285dfed",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/catalog-api/src/index.ts",
+      "bytes": 17302,
+      "sha256": "bb54cec9938ffd04463fd8722e97d11c23d748d64b6fb50fa0085c277087b666",
+      "gitBlobSha1": "bb172bde9bbab97f902d66ff4b53fd1775ce1831",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/catalog-api/src/sql-api.ts",
+      "bytes": 98993,
+      "sha256": "6ebab3288fd84c13b972091a8730de6a900b3638782d0765589a4b1161fdd70c",
+      "gitBlobSha1": "0d753965711ea80aef0ec4d2fe833f9081b2ab66",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/catalog-api/src/sql-cursor.ts",
+      "bytes": 3161,
+      "sha256": "eb8c412aa6b9ef136421f0fe41716213505da8d11646bdb34e8c522ef392b80a",
+      "gitBlobSha1": "3f4f8c29da40cc2752360bea963de2b1fa3bda77",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/catalog-api/src/sql-data.ts",
+      "bytes": 8623,
+      "sha256": "ad36fb20a53212fc51e7386683d9af57853e00da291226b8d98a2a6a279247d1",
+      "gitBlobSha1": "9c6e612b767105541cbbeff71495734e84a3d549",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/catalog-api/src/sql-types.ts",
+      "bytes": 6608,
+      "sha256": "d6a27afbbffc3521211a27c4e93744793c96d21dc28b39bb56276d5b1c4fac2f",
+      "gitBlobSha1": "6e77c1dccf89caa51053d860c287676fbf0aaac8",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/catalog-api/src/types.ts",
+      "bytes": 1382,
+      "sha256": "70bd7eb263c1ff604575ad7e3fe7e75105bc16913f5259d5c6ccc99e95260a50",
+      "gitBlobSha1": "b7c91b4d4df979162b7f51a519d6c045f8520cda",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/catalog-api/wrangler.jsonc",
+      "bytes": 710,
+      "sha256": "9f5a0fb2a77c286b7576e6fd8e30779ca225c708aa787a15cb10296cf15b8989",
+      "gitBlobSha1": "8c821a3185d34b915304e84960c58a9bf1ba49fd",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/entity-materializer/src/index.ts",
+      "bytes": 3015,
+      "sha256": "b929c0778efceb9048ce1d206fdf51414302b813ff2a987afb991a91f9054337",
+      "gitBlobSha1": "1eab95f13dcdab3bbb07ad8fd13b29814ae11239",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/entity-materializer/src/runtime-retry.ts",
+      "bytes": 1960,
+      "sha256": "8fd5b5ec21115fdfa3161bf6399f3076e997d13e1ea1fa8eeb417f507e5ed896",
+      "gitBlobSha1": "2dcc83b68957c5359613f0c5377592bfab5c83bb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/entity-materializer/tsconfig.json",
+      "bytes": 339,
+      "sha256": "c6c81008df2defe7d290293fd8f82818f01bd4ff7ae36eaf5bb64aa0aab370d3",
+      "gitBlobSha1": "0d5161e80c07cc34bcc15a30738197ec10c50ba5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/entity-materializer/wrangler.jsonc",
+      "bytes": 670,
+      "sha256": "e03018d59e244cbbaf25cfffc6ccf24dc109b697357f0229b90065e0c4cee6b2",
+      "gitBlobSha1": "deb59aa3387110de424f177153b36d7c080ddfae",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/source-manifest.example.json",
+      "bytes": 1523,
+      "sha256": "2d014ea6be9bc030b6ee8f9680a70c5fa15590cc58b994ac0da6bf0824f1074d",
+      "gitBlobSha1": "63541d482d45e3a32f6033eacec32024262aa11b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/automatic-source-bindings.ts",
+      "bytes": 12244,
+      "sha256": "9ef0982ddaf79c4832cbe642ba2ba47d420b9855b305ea74eadbe74d464b8bae",
+      "gitBlobSha1": "e5aa5020f7c4cb17f24d85a6ba3df3d1a7f45c39",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/body.ts",
+      "bytes": 2032,
+      "sha256": "ad960f87a01f74c844ef06604a9170856c40e2b6495081129542d8ce9d381786",
+      "gitBlobSha1": "6d400c20c606bb98620dc8c411d2bcc8dd0f07aa",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/catalog-parser.ts",
+      "bytes": 23496,
+      "sha256": "de1d91c1ea24bf7845c4b387702f5fd36906fe75cc6850279db3c05ffe167ba8",
+      "gitBlobSha1": "eaf44be2756661df18913c9babd904b01ddd425f",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/cost-policy.ts",
+      "bytes": 2915,
+      "sha256": "f4de683b0fd6786dca22b36f916fe9301d144b7651e8f78050e4abeb3540e939",
+      "gitBlobSha1": "0e31f20ffe28ed6aaa1e09bb1ad6c578dc7e960d",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/entity-materializer-scheduler.ts",
+      "bytes": 5279,
+      "sha256": "c41de1227e6a5654bc1c447a731fe66d9721b254d1482c9114d45ea718604264",
+      "gitBlobSha1": "1bcd3fea82823d63842657d260bf246b7decb7e9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/entity-materializer.ts",
+      "bytes": 43680,
+      "sha256": "b2529bbaeadef8ae9b6858a47c87ad773081ddb7b4bd699df285ae44615b81fb",
+      "gitBlobSha1": "e7cb6983c517a4a1ddbab18f39167a5fbe5d2c17",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/entity-promotion-mappings.ts",
+      "bytes": 19628,
+      "sha256": "06636adf699832027d9e65418c085ad44af6608abf5dafdb1517b5c23093bfe1",
+      "gitBlobSha1": "e8cf1a12f7f3d11822d25b6822e1a398516e93cd",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/errors.ts",
+      "bytes": 503,
+      "sha256": "ed193e8f6de0c756a7e713d67771638da582974c9667115d132a532d9eda6116",
+      "gitBlobSha1": "b3cb6240a5262bdac406de729d70ceb34756909c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/hash.ts",
+      "bytes": 3325,
+      "sha256": "c6eb59bf457b69ac7fd43e7c9c6b7f8c6ce01ab418e5d19a1671b2ac9b7ef9fd",
+      "gitBlobSha1": "37831280d18481befd78c6dd35e1b534a64551ed",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/index.ts",
+      "bytes": 10734,
+      "sha256": "e75364f35291309b81fd6edc4bbb85748aeae1c08781e56eba50669651e80a7a",
+      "gitBlobSha1": "2d30dfea67b70882942f8f5bf761fb3a5efa08c4",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/manifest-schema.ts",
+      "bytes": 3118,
+      "sha256": "ea4e8bcb9aee0c9ca378b675a37e17e284811905efe2a26214dc4569eb541c13",
+      "gitBlobSha1": "2222f5cdfd486028e72536ec77f66613f26410eb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/minimax.ts",
+      "bytes": 13953,
+      "sha256": "822859c544bbd73bcd4e1b08feb36209180ffdc22fba4e7dd1e3bc7976a46f38",
+      "gitBlobSha1": "8c19820b63fa3ad4c445a07b9a1c799f98ec7fe5",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/operations.ts",
+      "bytes": 1441,
+      "sha256": "022ebb2ed6c25946e3d83a315208f3eeeb66fc42f9f283c94e03aafd0cb1bf7e",
+      "gitBlobSha1": "3fdd75fbf60dda20765efb9d365cfe3d4dbcb23a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/pipeline.ts",
+      "bytes": 25700,
+      "sha256": "0af36b3ce807d5c38becd0622b919f6136a8fed3f72db3094009571aac05e647",
+      "gitBlobSha1": "547c8ad641be9fdbae51aec49e3b4711338b1d9c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/provenance.ts",
+      "bytes": 4613,
+      "sha256": "6835849a25540de32161b95864625da9f7755311fc483b274eae31ccfcfe3403",
+      "gitBlobSha1": "1509ac7ca65b429ea4441f1f4002114c4c0b4558",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/repository.ts",
+      "bytes": 25831,
+      "sha256": "433cdccf91c3dae3f0444fc95dcc5ff04e11305b34d35c4ae719bcbbe5ae8cc0",
+      "gitBlobSha1": "37e070423036566db399a19d5da396f158696622",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/retry.ts",
+      "bytes": 2121,
+      "sha256": "2d13087c44d6449ed0a13f5f2dc45e6021f2c5bf5681e25d65ecf3a7d826f9af",
+      "gitBlobSha1": "b74202d6e604f1fb093ceeb93376f3bebadb7f23",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/rich-content.ts",
+      "bytes": 7046,
+      "sha256": "0661f3fa851e9bf692adbe10f2154ca9aea9670af6ffff1306f11ff58cc6bc67",
+      "gitBlobSha1": "7beeda6be9685bb4355b19295a8c062eac923bd9",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/robots.ts",
+      "bytes": 3054,
+      "sha256": "01a78d946dab1081b9e4293385903d79d4d5f9ef39528aa8ff944850aa44a642",
+      "gitBlobSha1": "e75080a89085054e21ce7deb9efd782eb6edaee3",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/rules.ts",
+      "bytes": 8842,
+      "sha256": "ab011d4940792348c4485edd8428757a1470eed2b9a790baf136ce283878d750",
+      "gitBlobSha1": "77fb183d5074f1d9b0b2448282b623ef80965823",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/security.ts",
+      "bytes": 11135,
+      "sha256": "26a883fc9f43e4f56ef2a503a35cea0e721353f232e2350cde19f7bfbbf23d6e",
+      "gitBlobSha1": "65b50f010422130463cc471218ee12ada63dac29",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/source-discovery.ts",
+      "bytes": 13370,
+      "sha256": "ab601ff3a00967799f8a157f32e102cf1ba80e2898f4c88ec047b8272daa700c",
+      "gitBlobSha1": "64c8e32a1fdf320835c088802e2408347e8fb0ed",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/source-observations.ts",
+      "bytes": 7865,
+      "sha256": "b90c4f4c8f981c608009f6584f8f3b0fbaf0fd6d935bddf17f42b988ea8dc218",
+      "gitBlobSha1": "0612f3cc0e624e2e47591e7d1d46b1f736f251a2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/src/types.ts",
+      "bytes": 7661,
+      "sha256": "ac274d188ad70f17e322d9a69df0565b57f1fd74bcfd43c8391423fa89687eb4",
+      "gitBlobSha1": "4b29431b86e9dabf4bd79a5f7704ff413b699e7e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/tsconfig.json",
+      "bytes": 295,
+      "sha256": "fbd13d479b87b63e00e7af2781571ace36f3debb8f13c4662f3a1e681988c5f0",
+      "gitBlobSha1": "155662c8fc2bd4219a2f0a2e493d4d80ad0991cb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/wrangler.example.toml",
+      "bytes": 1617,
+      "sha256": "1397d147f938efb6b0ef001d7e224df7125062d54073a043955aeb389f87e9ae",
+      "gitBlobSha1": "6c3314cf50ed42c9590052010a8876c64e23cb2d",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/ingestion/wrangler.jsonc",
+      "bytes": 1956,
+      "sha256": "f9cf4b04bfd4afd3070a430e86ddee5e36caf1243312d24c4143b1c872e909c4",
+      "gitBlobSha1": "2fb8a4355240c6ac41ae0f04e09a0d410261dd9b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/localization/src/config.ts",
+      "bytes": 2135,
+      "sha256": "91dcf1b757789fce440cc8eb7ac8abc786454c716ab5cd27ee556ac6ef0cadc7",
+      "gitBlobSha1": "31fa3f6bb8a6998048441001fc985c53a76e091b",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/localization/src/errors.ts",
+      "bytes": 553,
+      "sha256": "9cd81ba281b603afa739798ebcc842343d23703bdd2199f0498dbe7f55b1f818",
+      "gitBlobSha1": "4779c43bc2c6eac21ca81fb32615026476222c24",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/localization/src/hash.ts",
+      "bytes": 828,
+      "sha256": "12612f4825d45d3e67a07157d781d14763519abc6658fad1bcb08b3fc56672c0",
+      "gitBlobSha1": "fa1980a62bc62e0035459944b83915f3cbf59bd0",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/localization/src/index.ts",
+      "bytes": 4582,
+      "sha256": "03ed10721afe37c0419ff482d68e009e1f0862c5f702e14a625ee0c7ce203785",
+      "gitBlobSha1": "62d976876b922e031e113f881a68ebff358d16de",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/localization/src/minimax.ts",
+      "bytes": 9584,
+      "sha256": "bce99df501ea65a06571490c83c0f1c66064a07c9a35cebaac73c48adcdc7b7c",
+      "gitBlobSha1": "48c85b51146c1eaf24191b118f53c7e7e7185988",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/localization/src/pipeline.ts",
+      "bytes": 14953,
+      "sha256": "99b06107e310cf7864d027aba5c63be8d6b1875411c38c1d1b5c6b88d8b34bb6",
+      "gitBlobSha1": "728dd047c7da204f05623df304c43f34f67f63d0",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/localization/src/protection.ts",
+      "bytes": 2819,
+      "sha256": "c43eb28912b78e6d5831198cb111503e06a5e90bf19945e69ec67630995c5c09",
+      "gitBlobSha1": "0e380c7a6fe66beedbf25e069372d57489f8060e",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/localization/src/release-projection.ts",
+      "bytes": 526,
+      "sha256": "578bfd0ba08fdb2c4e324c0c6c50f0196e56b85e9dea1cd77566791f012f6f12",
+      "gitBlobSha1": "b103e0f23fe6073c27f08ff7a54ad5f4794a7651",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/localization/src/repository.ts",
+      "bytes": 23577,
+      "sha256": "265a0d12c8152690e016678b6e52dc40a7c3f464c2feee2af8bbf251fe864902",
+      "gitBlobSha1": "6f43c05c95c40fdeea1c20aaad8295dec77bd488",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/localization/src/schema.ts",
+      "bytes": 5635,
+      "sha256": "39e07aabeedafe548de563909bd76081838cfcb9785513cb7762ea799a2b527a",
+      "gitBlobSha1": "c145c54e9a7dcfbf945fdbf8b43ba7ccbb808af2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/localization/src/types.ts",
+      "bytes": 5379,
+      "sha256": "cf3eb6d3414a3cbbd10531489f8f82995d02959d138a4637195e878a6abd4717",
+      "gitBlobSha1": "1b4bc6c2bcd03a344d8610e1826869e137342b79",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/localization/tsconfig.json",
+      "bytes": 296,
+      "sha256": "714810ca4e477315fb579efefc9f773e9c6a5c1245b2e19fac5bd7af2cd531df",
+      "gitBlobSha1": "46b0ec951ea6370ae9bb82478e945078c6fb5205",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/localization/wrangler.jsonc",
+      "bytes": 1444,
+      "sha256": "6eef56cb61da2eab733f027c0ef8d9d91e735ffa7972c963d6d5869dccda5ec6",
+      "gitBlobSha1": "240a539506a7757fd1f107619bc31294de577fa6",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/publisher/src/index.ts",
+      "bytes": 6618,
+      "sha256": "404ba49cd7bee4174cba444797a5aae7fbe2a6ad272999b26091f1bc37b02eb7",
+      "gitBlobSha1": "716d1313b2dc70350076d5376bfb1463e0d0e18a",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/publisher/src/promoter.ts",
+      "bytes": 46981,
+      "sha256": "59a8d6ccab4e9e98a293e8fa6e361207fcaa3b073e20c6c0b44e4edd8376e2a8",
+      "gitBlobSha1": "65c02ffef68f16e474fb54b4eb8aa057c5f4f929",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/publisher/src/types.ts",
+      "bytes": 1645,
+      "sha256": "794a0dc96c4a812de6155d2a0010f5903694a7e72b89c2802e7913b062f49e30",
+      "gitBlobSha1": "292177593a4aa60415e3d62e045fcbbfadc3288c",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/publisher/tsconfig.json",
+      "bytes": 323,
+      "sha256": "bd9c06dab77b8117ce8d0965f39d6d12d6478e54aa17655500ace35ad69193c4",
+      "gitBlobSha1": "a1ccf3f5ebab341b20904f0f30dd8c35ba3731cb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/publisher/wrangler.example.toml",
+      "bytes": 809,
+      "sha256": "c66900efcc1e2df2b36412de2329a75bc78990f010823949092de56d8944abb2",
+      "gitBlobSha1": "47bedece1bc0f9f29e0a8d9684058c985d3ba5ee",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/publisher/wrangler.jsonc",
+      "bytes": 1150,
+      "sha256": "498d7f2155406e8641ad34c4a102970eaafd9ea912f868947d02627c6d4b7745",
+      "gitBlobSha1": "966b59ee65638a025043b8b721e9c5271b6c5deb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/release-builder/src/artifact.ts",
+      "bytes": 5292,
+      "sha256": "3ca649c6f8f2c3c9f83bfe8629142e705156020f31c18189ad851136ad91ade6",
+      "gitBlobSha1": "93d4dcadc2488eee74ecaa4af9751820b16326e6",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/release-builder/src/catalog-schema.ts",
+      "bytes": 5072,
+      "sha256": "fd64a0f67812e7f01a0328ee630bec1f827fe8cfe16a88f9aa791a02ccb10ea5",
+      "gitBlobSha1": "99e79762e82a2e027c51b1a2fc6f4a96bc78d262",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/release-builder/src/compatibility.ts",
+      "bytes": 16009,
+      "sha256": "cf2635541a58b862fc3f47ff2a12aa2d1598fec37cec1c31eaaf5fcf32583025",
+      "gitBlobSha1": "b300583262d9ac1e6ddde4ea826fc86910277b32",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/release-builder/src/health-gate.ts",
+      "bytes": 3869,
+      "sha256": "373c8062b61c8a25ac5180774b24b69048176074d82c29119ce6b48ddbb1041b",
+      "gitBlobSha1": "a7da057b96c92d634aad8488ceea59d3567d1d11",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/release-builder/src/index.ts",
+      "bytes": 26209,
+      "sha256": "7735d4d637731e3bee4f35991c441fe4cc1cbe3f91aefb004ebe50e5175e0bed",
+      "gitBlobSha1": "ed7259aad4da993ff0463ec077b1402da1477c66",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/release-builder/src/retention.ts",
+      "bytes": 5965,
+      "sha256": "62b04b6821064c19416f44af6526c292049d9148ed32739651dd4d326bb00861",
+      "gitBlobSha1": "a97bc546c6f8ac481cd77ecb02b1d395fc6a0862",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/release-builder/src/snapshot.ts",
+      "bytes": 42127,
+      "sha256": "44e6ff3053f34908abf9a7769cf9ff37367ddd38bf71923facb05bcac4e2da0f",
+      "gitBlobSha1": "f2f3a00ec059be4da4433801d1ec66ceaf7786d2",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/release-builder/src/types.ts",
+      "bytes": 3855,
+      "sha256": "96273aa7b2fc206d10601a77aabd044389ac74f871ad4e7f982da32c38aaa17e",
+      "gitBlobSha1": "ddf7c483c3a79eb6a70085df75c1478a317481fc",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/release-builder/tsconfig.json",
+      "bytes": 295,
+      "sha256": "fbd13d479b87b63e00e7af2781571ace36f3debb8f13c4662f3a1e681988c5f0",
+      "gitBlobSha1": "155662c8fc2bd4219a2f0a2e493d4d80ad0991cb",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/release-builder/wrangler.jsonc",
+      "bytes": 1661,
+      "sha256": "961216c80d2e56ed54e6779f9cb6a3f025e4d04821ebf7315b19d4d36ccce3f0",
+      "gitBlobSha1": "4e3abd3a8788619cecb3afd99b2970da24430447",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/shared/automation-heartbeat.ts",
+      "bytes": 2025,
+      "sha256": "588fac293018fe8800741808a93a8f4e93afcb5a1bd5416c5917849ebd797fd4",
+      "gitBlobSha1": "ec7dfc2f12496ee8db2f38059e47a2e301b00d63",
+      "kind": "exact-commit-git-blob"
+    },
+    {
+      "path": "workers/shared/operations-queries.ts",
+      "bytes": 2943,
+      "sha256": "47c84eb33357d6cc3b5865b8f8422ac42b6d89f1d5f7b38abc848a9ed1860606",
+      "gitBlobSha1": "88caaf63aca20ed9d5f280804c468e49d74ec017",
+      "kind": "exact-commit-git-blob"
+    }
+  ]
+}

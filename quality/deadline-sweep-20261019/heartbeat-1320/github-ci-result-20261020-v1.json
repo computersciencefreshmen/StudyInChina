@@ -1,0 +1,260 @@
+{
+  "observedAt": "2026-10-20T08:46:13.290Z",
+  "conclusion": "failure",
+  "headSha": "2260e61a23fbd9f67c4218a1b10974306a91dab1",
+  "jobs": [
+    {
+      "completedAt": "2026-10-20T08:26:51Z",
+      "conclusion": "failure",
+      "databaseId": 118529249851,
+      "name": "Lint, test, validate, and build",
+      "startedAt": "2026-10-20T08:24:15Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-20T08:24:16Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-20T08:24:16Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:24:28Z",
+          "conclusion": "success",
+          "name": "Check out repository",
+          "number": 2,
+          "startedAt": "2026-10-20T08:24:16Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:24:31Z",
+          "conclusion": "success",
+          "name": "Use Node.js 24",
+          "number": 3,
+          "startedAt": "2026-10-20T08:24:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:24:44Z",
+          "conclusion": "success",
+          "name": "Install dependencies",
+          "number": 4,
+          "startedAt": "2026-10-20T08:24:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:24:44Z",
+          "conclusion": "success",
+          "name": "Audit production dependencies",
+          "number": 5,
+          "startedAt": "2026-10-20T08:24:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:24:57Z",
+          "conclusion": "success",
+          "name": "Lint",
+          "number": 6,
+          "startedAt": "2026-10-20T08:24:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:25:11Z",
+          "conclusion": "success",
+          "name": "Type-check",
+          "number": 7,
+          "startedAt": "2026-10-20T08:24:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:48Z",
+          "conclusion": "success",
+          "name": "Run unit tests",
+          "number": 8,
+          "startedAt": "2026-10-20T08:25:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:48Z",
+          "conclusion": "success",
+          "name": "Test full record audit",
+          "number": 9,
+          "startedAt": "2026-10-20T08:26:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "success",
+          "name": "Validate content data",
+          "number": 10,
+          "startedAt": "2026-10-20T08:26:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "failure",
+          "name": "Enforce one public program per university",
+          "number": 11,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Validate D1 migrations and database integrity",
+          "number": 12,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Validate recursive source manifests",
+          "number": 13,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Run isolated extraction and prompt-injection regressions",
+          "number": 14,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Validate scheduled maintenance capacity",
+          "number": 15,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Run ingestion Worker tests",
+          "number": 16,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Run Entity Materializer tests",
+          "number": 17,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Run publisher Worker tests",
+          "number": 18,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Run release builder Worker tests",
+          "number": 19,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Validate ingestion Worker bundle and bindings",
+          "number": 20,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Validate Entity Materializer Worker bundle and bindings",
+          "number": 21,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Validate publisher Worker bundle and bindings",
+          "number": 22,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Validate release builder Worker bundle and bindings",
+          "number": 23,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Validate Catalog API Worker bundle and bindings",
+          "number": 24,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Build production application",
+          "number": 25,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Install Playwright Chromium",
+          "number": 26,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Run end-to-end tests against the production build",
+          "number": 27,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "skipped",
+          "name": "Post Use Node.js 24",
+          "number": 53,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "success",
+          "name": "Post Check out repository",
+          "number": 54,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-20T08:26:49Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 55,
+          "startedAt": "2026-10-20T08:26:49Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/computersciencefreshmen/StudyInChina/actions/runs/39393140793/job/118529249851"
+    }
+  ],
+  "url": "https://github.com/computersciencefreshmen/StudyInChina/actions/runs/39393140793",
+  "interpretation": "Lint, typecheck, unit tests, full record audit and content validation passed on exact 2260e61. Required CI fails at strict coverage; subsequent checks were skipped, not passed. No branch protection or coverage threshold was changed."
+}

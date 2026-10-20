@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "prepared": true,
+  "preparedAt": "2026-10-20T08:30:24.313Z",
+  "today": "2026-10-20",
+  "sourceCommit": "2260e61a23fbd9f67c4218a1b10974306a91dab1",
+  "sourceTree": "a73127966785aa2f59e586b32872fc401a0d720a",
+  "candidate": ".tmp/rapid-2260e61-20261020-source",
+  "sourceFiles": 643,
+  "sourcePlanPath": "quality/recovery-20261020/release-rapid-2260e61-20261020/source-plan.json",
+  "sourcePlanSha256": "6d073909b0b0643d3dfbb97891b5ead484716590e85e7bf235dd263378090c13",
+  "expectedInputPath": "quality/recovery-20261020/release-rapid-2260e61-20261020/expected-input.json",
+  "expectedInputSha256": "92a1e82a4fc36d542454a3625385e297d0ed8b94cc7578f6ad2bc900d63ee931",
+  "inputSha256": "150decfdf472944e0e3759a38d6cd5516f35f0270b8735cd73de20ad2b91ab17",
+  "normalizedCatalogSha256": "3122c3ad8e1f5086d7dc14c1c20a0c8de57905bd0e17c65ec326b6ebff96312b",
+  "publicCounts": {
+    "sources": 728,
+    "cities": 62,
+    "universities": 255,
+    "programs": 783,
+    "admissionCycles": 783,
+    "scholarships": 7
+  },
+  "changedPrograms": 16,
+  "changedUniversities": 2,
+  "changedScholarships": 7,
+  "programmeLocaleDetails": 96,
+  "scholarshipLocaleDetails": 42,
+  "supportDifferences": [],
+  "approvedEvidencePins": [
+    {
+      "path": "quality/recovery-20261019/rapid-expansion/tongji-szu/dhu/full-program-batch-approved-v2.json",
+      "bytes": 20252,
+      "sha256": "b1028fac473ca72658db5481fb9cac34413a1a9bafaeb548aeab6197bca9ed7d",
+      "gitBlobSha1": "82497174c72884fd95bae6c1b5490e57a5e84534",
+      "kind": "exact-commit-approved-evidence"
+    },
+    {
+      "path": "quality/recovery-20261019/rapid-expansion/tongji-szu/szu/full-program-batch-approved-v1.json",
+      "bytes": 340523,
+      "sha256": "25232dafda96744f124065cb7a15ccb30ec3abe6b6d1588cbe53402be5919f09",
+      "gitBlobSha1": "9b1f33866126b6b17789670398a78d34da05c112",
+      "kind": "exact-commit-approved-evidence"
+    },
+    {
+      "path": "quality/recovery-20261019/rapid-expansion/scholarships/szu/full-scholarship-batch-approved-v2.json",
+      "bytes": 48014,
+      "sha256": "3c49683f123f245bcaea4551ecf65f281e605f91c8ecf8a790c5766647a4e110",
+      "gitBlobSha1": "5368d20a0a6fbd1cb3ef7e6e9d592f66c1a59711",
+      "kind": "exact-commit-approved-evidence"
+    },
+    {
+      "path": "quality/recovery-20261019/rapid-expansion/scholarships/iclt-first-three/full-scholarship-batch-approved-v1.json",
+      "bytes": 46337,
+      "sha256": "7614d5c02f47ef78901ce0c91df740bcfe2ab44feab9ede97c18648739f210f8",
+      "gitBlobSha1": "b1a69dcf972e1d6fc2118a42897e077ae0e19473",
+      "kind": "exact-commit-approved-evidence"
+    },
+    {
+      "path": "quality/recovery-20261019/rapid-expansion/scholarships/tongji/full-scholarship-batch-approved-v1.json",
+      "bytes": 14783,
+      "sha256": "1df2204807d95b89006c49db7b06214cd9012ed2f91e40f895b3679a9250dd73",
+      "gitBlobSha1": "e760b59f7e923fd6ec3b4d66110a93541b6b33e0",
+      "kind": "exact-commit-approved-evidence"
+    }
+  ],
+  "sourceCredentialsRead": false,
+  "cloudRequests": 0,
+  "cloudWrites": 0,
+  "gitMutations": 0,
+  "buildStarted": false,
+  "smokeStarted": false,
+  "disposition": "Preparation only. Root must build/deploy this exact frozen source, qualify metadata, and run fresh full candidate smoke before any guarded promotion."
+}

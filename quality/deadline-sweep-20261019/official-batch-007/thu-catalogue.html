@@ -1,0 +1,1135 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>招生目录</title>
+		<meta charset="utf-8">
+		<meta content="webkit" name="renderer">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+		<meta content="no-cache" http-equiv="Pragma">
+		<meta http-equiv="Expires" content="0">
+		<meta content="width=device-width, initial-scale=1, user-scalable=1" name="viewport">
+		<link rel="stylesheet" href="/static/xxpt/lib/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/login/fontawesome/css/all.css">
+		<link rel="stylesheet" href="/static/login/css/style.css">
+		<link rel="stylesheet" href="/static/login/css/en/global.css">
+		<script src="/static/xxpt/js/jquery-1.12.4.min.js"></script>
+		<script src="/static/xxpt/js/jquery.tmpl.min.js"></script> 
+		<script src="/static/login/js/jquery.cookie.js"></script> 
+		<style>
+	        .side-nav {
+			    list-style: none;
+			    padding: 0;
+			    margin: 1rem;
+			}
+			.side-nav li {
+			    display: flex;
+			    justify-content: flex-start;
+			    align-items: center;
+			    margin-right: 1rem;
+			}
+			.side-nav li.active a {
+			    color: #fff;
+			    background-color: #5f4a72;
+			}
+			.side-nav li a {
+			    display: block;
+			    color: #697B8C;
+			   	margin: 5px;
+    			padding: 5px;
+			    text-decoration: none;
+			    border-radius: 0.25rem;
+			    font-size: 0.875rem;
+			}
+			.side-nav li a:hover {
+			    background-color: #AA6AFF;
+			    color: #fff;
+			}
+			.side-nav li.active a:hover {
+			    background-color: #AA6AFF;
+			    color: #fff;
+			}
+			.table-jzml h5, .table-jzml h6 { margin: 0;}
+			.table-jzml a { color: #AA6AFF;}
+			.table-jzml a:hover { color: #873BF4;}
+			
+			#zsml-table td textarea{
+				width: 100%;
+			    border: 0;
+			    color: #3A5064;
+			    background-color: #FFF;
+			    vertical-align: top;
+			    font-size: 14px;
+			    font-family: '微软雅黑';
+			    resize: none;
+				outline: none;
+				overflow: auto;
+			}
+			
+			.container-results {
+				width: 100%;
+			    margin-right: auto;
+			    margin-left: auto;
+			    display: table;
+			    margin-top: 10px;
+			}
+			
+			.right-container {
+			    /* float:left; */
+			    width: calc(100vw - 350px);
+			}
+			
+			#left-container {
+			   /*  float:left; */
+				position: sticky;
+			    width: 300px;
+			    padding-left: 20px;
+			    align-self: flex-start;
+			    top: 100px;
+			    height: calc(100vh - 300px);
+    			overflow-y: auto;
+			}
+			
+			/* #left-container #inner-sidebar.fixed {
+			    position:fixed;
+			    top: 0;
+			} */
+			
+			/** 查询区div **/
+			.search-zsml {
+			    height: auto;
+    			overflow: hidden;
+			}
+			
+			.search-zsml-input {
+			    height:50px;
+			    border: 1px solid lightgrey;
+			    display: unset;
+			}
+			
+			.btn-search {
+			    color: #fff;
+			    background-color: #5f4a72;
+			    border-color: #6c757d;
+			    margin-left: 10px;
+			    padding-top: 4px;
+			    width: 115px;
+			}
+			
+			.btn-search:hover {
+			    color: #fff;
+			}
+			
+			.search-zsml-zsyx-label{
+			    font-weight: bold;
+			    font-size: 14px;
+    			margin-bottom: 1px;
+			}
+			
+			.search-zsml-zsyx-option {
+			    display: inline-flex; 
+			}
+			
+			.search-zsml-zsyx-div {
+			    float:left;
+			    margin-top: 5px;
+			    margin-left: 3px;
+			}
+			
+			.search-zsml-hysp-div {
+			    float:left;
+			    margin-top: 5px;
+			    margin-left: 3px;
+			}
+			
+			.search-property {
+			   margin: 0 20px;
+			}
+			
+			.search-xz-input{
+			    color: grey;
+			}
+			
+			.search-main-container {
+				padding: 10px 0;
+    			text-align: center;
+			}
+			.sub-banner-extend {
+				height:150px;
+			}
+			.main-content {
+				margin: 15px;
+			}
+			.search-container {
+				/* margin: 15px; */
+			    background-color: #f5f5f5;
+			    padding: 5px;
+			    position: sticky;
+			    top: 0;
+			    z-index: 99999;
+			    border-radius: 10px;
+			}
+			.search-more-btn {
+				text-align: right;
+				padding-top: 5px;
+				position: absolute;
+			    top: 0;
+			    right: 5px;
+			    display: grid;
+			}
+			.content-results {
+				display: flex;
+			}
+			
+			.more-row {
+				margin: 5px 0;
+			    width: 100%;
+			    display: flex;
+			}
+			.more-item {
+				width: 33%;
+			}
+			.more-item select,input {
+				width: 450px;
+			}
+			.newmore {
+				position: fixed;
+				top: 140px;
+				z-index:-1;
+			}
+			
+			.fixed-btn-item {
+				width: 55px;
+				margin-bottom: 10px;
+			}
+			.totop-btn {
+				position: fixed;
+				bottom: 50px;
+				right: 20px;
+				width: 55px;
+			}
+			.container-lang {
+				position: relative;
+			}
+			.content-lang {
+				position: absolute;
+				top:0;
+				left:-100px;
+				list-style: none;
+				width:100px;
+			}
+			.content-lang li {
+			    text-align: center;
+			    padding: 0 2px;
+			    cursor: pointer;
+			    background-color: #fff;
+			}
+			.content-lang li:hover {
+				background: #5f4a72;
+			    color: #fff;
+			}
+			*[lang=zh_CN] {
+				display:none;
+			}
+			.search-input-content {
+				position: relative;
+			}
+			.search-tips {
+				font-size: 13px;
+			    font-style: italic;
+			    position: absolute;
+			    left: 0;
+			    bottom: -20px;
+			    width: max-content;
+			}
+			
+   			.search-btn-select {
+			    background: #fff;
+			    width: 450px;
+			    text-align: left;
+			    position: relative;
+			}
+   			.search-btn-select .caret:after {
+	            position: absolute;
+   				right: 5px;
+	            top: 50%;
+   			}
+   			.search-btn-select ul {
+   				display: block;
+	            width: 450px;
+	            display:block;
+   			}
+   			
+   			
+   			.selectBox{
+				width: 450px;
+				height: 36px;
+				line-height: 36px;
+				background: #fff;
+				cursor: pointer;
+			}
+			input::-ms-clear, input::-ms-reveal{
+				/*clear去掉叉  reveal去掉眼睛;但是只能去掉ie10及以上，ie9及以下去不掉*/
+			    display: none;  
+			}
+			
+			.inputCase{
+				position: relative;
+				width: 100%;
+				height: 100%;
+				box-sizing: border-box;
+				background: #fff;
+    			border: 1px solid #ced4da;
+			}
+			.inputCase .imitationSelect{
+				padding-left: 15px;
+			}
+			.inputCase i.fa{
+				position: absolute;
+				right: 0;
+				top: 8px;
+				font-size: 20px;
+				width: 20px;
+			    height: 20px;
+			    background: #fff;
+			}
+			.fa{
+				cursor: pointer;
+			}
+			.selectUl{
+				display: none;
+				padding: 0;
+				margin: 0;
+				border-bottom: 1px solid #ccc;
+				border-left: 1px solid #ccc;
+				border-right: 1px solid #ccc;
+				position: absolute;
+    			min-width: 450px;
+				background: #fff;
+				z-index: 9;
+				max-height: 400px;
+    			overflow-y: auto;
+			}
+			.selectUl li{
+				height: 36px;
+				line-height: 36px;
+				list-style: none;
+				padding: 0 15px;
+				border-bottom: 1px solid #ccc;
+			}
+			.selectUl li:hover{
+				background: #ddd;
+			}
+			.selectUl li.actived_li {
+				background: #ddd;
+			}
+			.selectUl li:last-child{
+				border-bottom: 0 none;
+			}
+			.content-nodata {
+				text-align: center;
+			}		
+    	</style>
+    </head>
+    <body>
+	    <div id="sub-banner" class="sub-banner sub-banner-extend">
+	        <div class="container h-100  align-items-center justify-content-center" style="display:flex;">
+		        	
+		        	    <h2 class="text-white" style="text-align: center;">
+		        	    	<div lang="en">The Catalog of Master's Programs for International Students 2027</div>
+		        	    	<div lang="zh_CN">2027年清华大学招收国际硕士研究生专业目录</div>
+		        	    </h2>
+		            
+		        	
+	        </div>
+	    </div>
+	    <div class="main-content">
+	    	<div class="search-container">
+	    		
+			    <div class="search-zsml">
+				     <div class="search-property">
+				      	<div class="search-main-container">
+					        <div class="search-input-content">
+					        	<span style="display: inline-block;width: 51%;position: relative;">
+						        	<input type="text" id="gjz" name="gzj" placeholder="Enter keywords to search for Major/Research Field." class="form-control search-zsml-input"/>
+						      		<span class="search-tips"><i class="fas fa-exclamation-circle"></i><span lang="en">If you need to enter more than one phrase, please separate them with commas. For example, architecture,garden.</span><span lang="zh_CN">如需输入多个词组，请用逗号分割。例如建筑，园林</span></span>
+				      			</span>
+								<button type="button" class="btn btn-search" onclick="executeQuery()"><span lang="en">Search</span> <span lang="zh_CN">查询</span></button>
+								<button type="button" class="btn btn-search" onclick="reSet()"><span lang="en">Reset</span> <span lang="zh_CN">重置</span></button>
+				      		</div>
+				      	</div>
+				      	<div class="search-more-container">
+				      		<div class="more-row">
+				      			<div class="more-item">
+				      				
+				      				<div class="search-zsml-zsyx-div">
+									    <div class="search-zsml-zsyx-label"><span lang="en">Dept./School</span> <span lang="zh_CN">院系</span>：</div>
+									    <div class="search-zsml-zsyx-option">
+									        <div class="selectBox">
+									        	<div class="inputCase">
+													<div class="imitationSelect"></div>
+													<i class="fa fa-caret-down"></i>
+												</div>
+												<ul id="zsyx" class="selectUl">
+													<li data-value=""><span lang="en">Please Select...</span><span lang="zh_CN">请选择...</span></li>
+													
+										       			<li data-value="000">000&nbsp;<span lang="en">School of Architecture</span> <span lang="zh_CN">建筑学院</span></li>
+										       		
+										       			<li data-value="003">003&nbsp;<span lang="en">Department of Civil Engineering</span> <span lang="zh_CN">土木工程系</span></li>
+										       		
+										       			<li data-value="004">004&nbsp;<span lang="en">Department of Hydraulic Engineering</span> <span lang="zh_CN">水利水电工程系</span></li>
+										       		
+										       			<li data-value="005">005&nbsp;<span lang="en">School of Environment</span> <span lang="zh_CN">环境学院</span></li>
+										       		
+										       			<li data-value="012">012&nbsp;<span lang="en">Department of Mechanical Engineering</span> <span lang="zh_CN">机械工程系</span></li>
+										       		
+										       			<li data-value="013">013&nbsp;<span lang="en">Department of Precision Instrument</span> <span lang="zh_CN">精密仪器系</span></li>
+										       		
+										       			<li data-value="014">014&nbsp;<span lang="en">Department of Energy and Power Engineering</span> <span lang="zh_CN">能源与动力工程系</span></li>
+										       		
+										       			<li data-value="015">015&nbsp;<span lang="en">School of Vehicle and Mobility</span> <span lang="zh_CN">车辆与运载学院</span></li>
+										       		
+										       			<li data-value="016">016&nbsp;<span lang="en">Department of Industrial Engineering</span> <span lang="zh_CN">工业工程系</span></li>
+										       		
+										       			<li data-value="022">022&nbsp;<span lang="en">Department of Electrical Engineering</span> <span lang="zh_CN">电机工程与应用电子技术系</span></li>
+										       		
+										       			<li data-value="023">023&nbsp;<span lang="en">Department of Electronic Engineering</span> <span lang="zh_CN">电子工程系</span></li>
+										       		
+										       			<li data-value="024">024&nbsp;<span lang="en">Department of Computer Science and Technology</span> <span lang="zh_CN">计算机科学与技术系</span></li>
+										       		
+										       			<li data-value="025">025&nbsp;<span lang="en">Department of Automation</span> <span lang="zh_CN">自动化系</span></li>
+										       		
+										       			<li data-value="026">026&nbsp;<span lang="en">School of Integrated Circuits</span> <span lang="zh_CN">集成电路学院</span></li>
+										       		
+										       			<li data-value="031">031&nbsp;<span lang="en">School of Aerospace Engineering</span> <span lang="zh_CN">航天航空学院</span></li>
+										       		
+										       			<li data-value="032">032&nbsp;<span lang="en">Department of Engineering Physics</span> <span lang="zh_CN">工程物理系</span></li>
+										       		
+										       			<li data-value="034">034&nbsp;<span lang="en">Department of Chemical Engineering</span> <span lang="zh_CN">化学工程系</span></li>
+										       		
+										       			<li data-value="035">035&nbsp;<span lang="en">School of Materials Science and Engineering</span> <span lang="zh_CN">材料学院</span></li>
+										       		
+										       			<li data-value="042">042&nbsp;<span lang="en">Department of Mathematical Sciences</span> <span lang="zh_CN">数学科学系</span></li>
+										       		
+										       			<li data-value="043">043&nbsp;<span lang="en">Department of Physics</span> <span lang="zh_CN">物理系</span></li>
+										       		
+										       			<li data-value="044">044&nbsp;<span lang="en">Department of Chemistry</span> <span lang="zh_CN">化学系</span></li>
+										       		
+										       			<li data-value="045">045&nbsp;<span lang="en">School of Life Sciences</span> <span lang="zh_CN">生命科学学院</span></li>
+										       		
+										       			<li data-value="046">046&nbsp;<span lang="en">Department of Earth System Science</span> <span lang="zh_CN">地球系统科学系</span></li>
+										       		
+										       			<li data-value="047">047&nbsp;<span lang="en">Institute for Interdisciplinary Information Sciences</span> <span lang="zh_CN">交叉信息研究院</span></li>
+										       		
+										       			<li data-value="051">051&nbsp;<span lang="en">School of Economics and Management</span> <span lang="zh_CN">经济管理学院</span></li>
+										       		
+										       			<li data-value="059">059&nbsp;<span lang="en">School of Public Policy and Management</span> <span lang="zh_CN">公共管理学院</span></li>
+										       		
+										       			<li data-value="064">064&nbsp;<span lang="en">Department of Foreign Languages and Literatures</span> <span lang="zh_CN">外国语言文学系</span></li>
+										       		
+										       			<li data-value="066">066&nbsp;<span lang="en">School of Law</span> <span lang="zh_CN">法学院</span></li>
+										       		
+										       			<li data-value="067">067&nbsp;<span lang="en">School of Journalism and Communication</span> <span lang="zh_CN">新闻与传播学院</span></li>
+										       		
+										       			<li data-value="068">068&nbsp;<span lang="en">School of Marxism</span> <span lang="zh_CN">马克思主义学院</span></li>
+										       		
+										       			<li data-value="069">069&nbsp;<span lang="en">School of Humanities</span> <span lang="zh_CN">人文学院</span></li>
+										       		
+										       			<li data-value="070">070&nbsp;<span lang="en">School of Social Sciences</span> <span lang="zh_CN">社会科学学院</span></li>
+										       		
+										       			<li data-value="080">080&nbsp;<span lang="en">Academy of Arts &amp; Design</span> <span lang="zh_CN">美术学院</span></li>
+										       		
+										       			<li data-value="092">092&nbsp;<span lang="en">Department of Astronomy</span> <span lang="zh_CN">天文系</span></li>
+										       		
+										       			<li data-value="093">093&nbsp;<span lang="en">School of Safety Science</span> <span lang="zh_CN">安全科学学院</span></li>
+										       		
+										       			<li data-value="094">094&nbsp;<span lang="en">College of AI</span> <span lang="zh_CN">人工智能学院</span></li>
+										       		
+										       			<li data-value="095">095&nbsp;<span lang="en">Department of Psychological and Cognitive Sciences</span> <span lang="zh_CN">心理与认知科学系</span></li>
+										       		
+										       			<li data-value="096">096&nbsp;<span lang="en">Vanke School of Public Health</span> <span lang="zh_CN">万科公共卫生与健康学院</span></li>
+										       		
+										       			<li data-value="097">097&nbsp;<span lang="en">Schwarzman College，Tsinghua University</span> <span lang="zh_CN">苏世民书院</span></li>
+										       		
+										       			<li data-value="101">101&nbsp;<span lang="en">Institute of Nuclear and New Energy Technology</span> <span lang="zh_CN">核能与新能源技术研究院</span></li>
+										       		
+										       			<li data-value="103">103&nbsp;<span lang="en">School of Education</span> <span lang="zh_CN">教育学院</span></li>
+										       		
+										       			<li data-value="402">402&nbsp;<span lang="en">School of Pharmaceutical Sciences</span> <span lang="zh_CN">药学院</span></li>
+										       		
+										       			<li data-value="405">405&nbsp;<span lang="en">School of Clinical Medicine</span> <span lang="zh_CN">临床医学院</span></li>
+										       		
+										       			<li data-value="410">410&nbsp;<span lang="en">School of Software</span> <span lang="zh_CN">软件学院</span></li>
+										       		
+										       			<li data-value="412">412&nbsp;<span lang="en">Institute for Network Sciences and Cyberspace</span> <span lang="zh_CN">网络科学与网络空间研究院</span></li>
+										       		
+										       			<li data-value="413">413&nbsp;<span lang="en">Institute for International and Area Studies</span> <span lang="zh_CN">国际与地区研究院</span></li>
+										       		
+										       			<li data-value="415">415&nbsp;<span lang="en"> Institute for Aero Engine</span> <span lang="zh_CN">航空发动机研究院</span></li>
+										       		
+										       			<li data-value="476">476&nbsp;<span lang="en">Qiuzhen College</span> <span lang="zh_CN">求真书院</span></li>
+										       		
+										       			<li data-value="500">500&nbsp;<span lang="en">Tsinghua Medicine</span> <span lang="zh_CN">医学院</span></li>
+										       		
+										       			<li data-value="501">501&nbsp;<span lang="en">School of Basic Medical Sciences</span> <span lang="zh_CN">基础医学院</span></li>
+										       		
+										       			<li data-value="502">502&nbsp;<span lang="en">School of Biomedical Engineering</span> <span lang="zh_CN">生物医学工程学院</span></li>
+										       		
+										       			<li data-value="599">599&nbsp;<span lang="en">Tsinghua Shenzhen International Graduate School</span> <span lang="zh_CN">清华大学深圳国际研究生院</span></li>
+										       		
+										       			<li data-value="601">601&nbsp;<span lang="en">Global Innovation eXchange Institute，Tsinghua University</span> <span lang="zh_CN">清华大学全球创新学院</span></li>
+										       		
+												</ul>
+									        </div>
+									    </div>
+									</div>
+				      			</div>
+				      			<div class="more-item">
+				      				 
+									<div class="search-zsml-zsyx-div">
+									    <div class="search-zsml-zsyx-label"><span lang="en">Study Mode</span> <span lang="zh_CN">学习方式</span>：</div>
+									    <div class="search-zsml-zsyx-option">
+									        <div class="selectBox">
+									        	<div class="inputCase">
+													<div class="imitationSelect"></div>
+													<i class="fa fa-caret-down"></i>
+												</div>
+												<ul id="xxfs" class="selectUl">
+													<li data-value=""><span lang="en">Please Select...</span><span lang="zh_CN">请选择...</span></li>
+										       		<li data-value="1"><span lang="en">Full Time</span> <span lang="zh_CN">全日制</span></li>
+										       		<li data-value="2"><span lang="en">Part Time</span> <span lang="zh_CN">非全日制</span></li>
+												</ul>
+									        </div>
+									    </div>
+									</div>
+				      			</div>
+				      			<div class="more-item">
+				      				
+									<div class="search-zsml-zsyx-div">
+									    <div class="search-zsml-zsyx-label"><span lang="en">Chinese Proficiency Requirement</span> <span lang="zh_CN">汉语水平要求</span>：</div>
+									    <div class="search-zsml-zsyx-option">
+									        <div class="selectBox">
+									        	<div class="inputCase">
+													<div class="imitationSelect"></div>
+													<i class="fa fa-caret-down"></i>
+												</div>
+												<ul id="hysp" class="selectUl">
+													<li data-value=""><span lang="en">Please Select...</span><span lang="zh_CN">请选择...</span></li>
+<!-- 										       		<li data-value="0"><span lang="en">Not Required</span> <span lang="zh_CN">无要求</span></li> -->
+										       		<li data-value="1"><span lang="en">Level 1</span> <span lang="zh_CN">一级</span></li>
+										       		<li data-value="2"><span lang="en">Level 2</span> <span lang="zh_CN">二级</span></li>
+										       		<li data-value="3"><span lang="en">Level 3</span> <span lang="zh_CN">三级</span></li>
+										       		<li data-value="4"><span lang="en">Level 4</span> <span lang="zh_CN">四级</span></li>
+										       		<li data-value="5"><span lang="en">Level 5</span> <span lang="zh_CN">五级</span></li>
+										       		<li data-value="6"><span lang="en">Level 6</span> <span lang="zh_CN">六级</span></li>
+										       		<li data-value="7"><span lang="en">Level 7</span> <span lang="zh_CN">七级</span></li>
+										       		<li data-value="8"><span lang="en">Level 8</span> <span lang="zh_CN">八级</span></li>
+										       		<li data-value="9"><span lang="en">Level 9</span> <span lang="zh_CN">九级</span></li>
+												</ul>
+									        </div>
+									    </div>
+									</div>
+				      			</div>
+				      		</div>
+				      		<div class="more-row">
+				      			<div class="more-item">
+				      				
+									<div class="search-zsml-zsyx-div">
+									    <div class="search-zsml-zsyx-label"><span lang="en">English Proficiency Requirement</span> <span lang="zh_CN">外语水平要求</span>：</div>
+									    <div class="search-zsml-zsyx-option">
+									        <div class="selectBox">
+									        	<div class="inputCase">
+													<div class="imitationSelect"></div>
+													<i class="fa fa-caret-down"></i>
+												</div>
+												<ul id="yysp" class="selectUl">
+													<li data-value=""><span lang="en">Please Select...</span><span lang="zh_CN">请选择...</span></li>
+<!-- 										       		<li data-value="0"><span lang="en">Not Required</span> <span lang="zh_CN">无要求</span></li> -->
+										       		<li data-value="1"><span lang="en">TOEFL</span> <span lang="zh_CN">托福</span></li>
+										       		<li data-value="2"><span lang="en">IELTS</span> <span lang="zh_CN">雅思</span></li>
+												</ul>
+									        </div>
+									    </div>
+									</div>
+				      			</div>
+				      			<div class="more-item">
+				      				
+									<div class="search-zsml-zsyx-div">
+									    <div class="search-zsml-zsyx-label"><span lang="en">Application Portal Status</span> <span lang="zh_CN">申请开放状态</span>：</div>
+									    <div class="search-zsml-zsyx-option">
+									        <div class="selectBox">
+									        	<div class="inputCase">
+													<div class="imitationSelect"></div>
+													<i class="fa fa-caret-down"></i>
+												</div>
+												<ul id="kfzt" class="selectUl">
+													<li data-value=""><span lang="en">Please Select...</span><span lang="zh_CN">请选择...</span></li>
+										       		<li data-value="1"><span lang="en">Open</span> <span lang="zh_CN">开放</span></li>
+										       		<li data-value="0"><span lang="en">Closed</span> <span lang="zh_CN">关闭</span></li>
+												</ul>
+									        </div>
+									    </div>
+									</div>
+				      			</div>
+				      			<div class="more-item">
+					      			
+									<div class="search-zsml-zsyx-div">
+									    <div class="search-zsml-zsyx-label"><span lang="en">Graduate Programs in English</span> <span lang="zh_CN">全英文项目</span>：</div>
+									    <div class="search-zsml-zsyx-option">
+									        <div class="selectBox">
+									        	<div class="inputCase">
+													<div class="imitationSelect"></div>
+													<i class="fa fa-caret-down"></i>
+												</div>
+												<ul id="sfqywxm" class="selectUl">
+													<li data-value=""><span lang="en">Please Select...</span><span lang="zh_CN">请选择...</span></li>
+										       		<li data-value="1"><span lang="en">YES</span> <span lang="zh_CN">是</span></li>
+										       		<li data-value="0"><span lang="en">NO</span> <span lang="zh_CN">否</span></li>
+												</ul>
+									        </div>
+									    </div>
+									</div>
+				      			</div>
+				      		</div>
+				      		<div class="more-row">
+				      			<div class="more-item">
+					      			
+									<div class="search-zsml-zsyx-div">
+									    <div class="search-zsml-zsyx-label"><span lang="en">Joint Programs</span> <span lang="zh_CN">联合培养双授联授学位项目</span>：</div>
+									    <div class="search-zsml-zsyx-option">
+									        <div class="selectBox">
+									        	<div class="inputCase">
+													<div class="imitationSelect"></div>
+													<i class="fa fa-caret-down"></i>
+												</div>
+												<ul id="sflslpxm" class="selectUl">
+													<li data-value=""><span lang="en">Please Select...</span><span lang="zh_CN">请选择...</span></li>
+													<li data-value="1"><span lang="en">YES</span> <span lang="zh_CN">是</span></li>
+													<li data-value="0"><span lang="en">NO</span> <span lang="zh_CN">否</span></li>
+												</ul>
+									        </div>
+									    </div>
+									</div>
+				      			</div>
+				      			
+				      		</div>
+				      		
+				      	</div>
+					
+				  </div>	
+				</div>
+				<div class="search-more-btn">
+					<div class="container-lang">
+						<button id="btn-lang" class="btn btn-outline-primary btn-sm fixed-btn-item"></button>
+						<ul class="content-lang" style="display:none;">
+							<li data-lang="en" style="border-bottom: 1px solid #ceb4d3;">EN</li>
+							<li data-lang="zh_CN" style="border-bottom: 1px solid #ceb4d3;">中</li>
+							<li data-lang="enZh_CN">EN中</li>
+						</ul>						
+					</div>
+					<button id="btn-more" type="button" class="btn btn-outline-primary btn-sm fixed-btn-item"><i class="fas fa-angle-double-up"></i></button>
+				</div>
+	    	</div>
+			
+		    <div class="container-results">
+	        	<div id="content-results" class="content-results">
+		            <div id="left-container" class="left-container">
+		            	<div id="inner-sidebar" class="inner-sidebar"></div>
+		            </div>
+				    <div class="right-container">
+			            <div class="process-content">
+			                <div class="card">
+			                    <div class="card-body">
+			                        <div class="mb-1" style="margin-bottom: 100px;">
+			                        	<table id="zsml-table" class="table table-bordered table-jzml mb-0" style="font-size: 14px;font-size: 20px;background-color: floralwhite;">
+			                        	</table>
+			                        </div>
+			                        <div id="usage" class="content-usage" style="display:none;background-color: #f5f5f5; padding: 26px 20px;">
+										<div style="font-size: 20px;">
+											<div lang="en">
+												<p>
+													Click on the language bar in the upper right corner to choose English, Chinese, or bilingual (Chinese and English) pages.
+												</p>
+												<p>
+													Clicking on the list of dept./school names on the left side will allow you to view the major/field/program catalog of each dept./school.
+												</p>
+												<p>	
+													The search bar at the top of this page allows for various combinations of searches based on your needs.
+												</p>
+											</div>
+											<div lang="zh_CN">
+												<p>
+													点击右上角语言栏，可选择英文、中文、中英双语页面。
+												</p>
+												<p>
+													点击左侧院系名称，可查看各院系的招生专业目录。
+												</p>
+												<p>	
+													本页面上方的搜索栏可根据需求进行各种组合的搜索。
+												</p>
+											</div>
+										</div>
+									</div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+		        </div>
+		        <div id="content-nodata" class="content-nodata" style="display:none;">
+					<img src="/static/login/images/empty-02.png" alt="">
+					<div style="font-size: 30px;">
+						<div lang="en">No data available</div>
+						<div lang="zh_CN">暂无数据</div>
+					</div>
+				</div>
+	        </div>
+	        <button id="btn-totop" type="button" class="btn btn-outline-primary btn-sm totop-btn" style="display:none;"><i class="fas fa-arrow-up"></i></button>
+	    </div>
+        
+    <script id="zsml-template" type="text/x-jquery-tmpl">
+	<table id="zsml-table"  class="table table-bordered table-jzml mb-0" style="font-size: 14px;">
+     <tbody>	
+          <tr>
+		     {{if zslx == '2' }}
+				<th style="width: 28%;text-align:center;"><span><div lang="en">School/Department/Major/Research Field</div><div lang="zh_CN">院系/专业/研究方向</div></span></th>
+				<th style="width: 22%;text-align:center;"><span><div lang="en">Supervisor</div><div lang="zh_CN">导师</div></span></th>
+				<th style="width: 40%;text-align:center;"><span><div lang="en">Remarks of Application</div><div lang="zh_CN">招生说明</div></span></th> 
+			 {{/if}}
+			 {{if zslx == '1' }}
+			    <th style="width: 35%;text-align:center;"><span><div lang="en">School/Department/Major/Research Field</div><div lang="zh_CN">院系/专业/研究方向</div></span></th>           
+				<th style="width: 35%;text-align:center;"><span><div lang="en">Remarks of Application</div><div lang="zh_CN">招生说明</div></span></th> 
+			 {{/if}}
+		  </tr>
+         {{if zsmlYxs == null || zsmlYxs.length == 0 }}		     
+		  <tr>
+		    <td colspan="5"><span><div lang="en">No Data</div><div lang="zh_CN">暂无数据</div></span></td>
+		  </tr>
+		 {{/if}}    
+         
+         {{each(i,zsmlYx) zsmlYxs}}
+			<tr>
+				<td {{if zslx == '2' }} colspan="2"{{/if}} >
+					<h5>
+					  <span>
+						<span>
+							{{= zsmlYx.zsyxsdm}}<span lang="en">&nbsp;{{= zsmlYx.zsyxsywmc}}</span><span lang="zh_CN">&nbsp;{{= zsmlYx.zsyxsmc}}</span>
+                            {{if zsmlYx.lxfs != '' && zsmlYx.lxfs != null}}
+                               &nbsp;( {{= zsmlYx.lxfs}} )
+                            {{/if}}
+						</span>
+					   </span>
+					 </h5>
+				</td>
+				<td>
+					<span lang="en"><textarea readonly="readonly">{{= zsmlYx.yxywbz}}</textarea></span>
+					<span lang="zh_CN"><textarea readonly="readonly">{{= zsmlYx.yxbz}}</textarea></span>
+					{{if zslx == '2' }}
+						{{if zsmlYx.sfzsgjbkzb == 0}}
+							<span>
+								<div lang="en">This dept./school does not accept bachelor degree holders to apply for doctoral programs.</div>
+								<div lang="zh_CN">本院系不招收本科学历国际学生攻读博士学位。</div>
+							</span>
+						{{/if}}
+						{{if zsmlYx.sfzsgjbkzb == 1}}
+							<textarea readonly="readonly">{{= zsmlYx.zbzsyq}}</textarea>
+						{{/if}}
+					{{/if}}
+				</td>
+			 </tr> 
+          
+          {{each(i,zsmlYxZy) zsmlYx.exportZsmlYxZys}}
+			 <tr>
+				 <td style="padding-left: 20px;" {{if zslx == '2' }} colspan="2" {{/if}}>
+					<h6 style="font-weight: bold;">
+						<span>
+								{{= zsmlYxZy.zszydm}}
+								{{if zsmlYxZy.xwlx == '1'}}
+									(<span lang="en">Academic Degree</span><span lang="zh_CN">学术学位</span>)
+								{{/if}} 
+								{{if zsmlYxZy.xwlx == '2'}}
+									(<span lang="en">Professional Degree</span><span lang="zh_CN">专业学位</span>)
+								{{/if}}		
+								<span lang="en">&nbsp;{{= zsmlYxZy.zszyywmc}}</span><span lang="zh_CN">&nbsp;{{= zsmlYxZy.zszymc}}</span>								
+						</span>
+					</h6>
+				 </td>
+				 <td>
+					 <textarea readonly="readonly">{{= zsmlYxZy.zybz}}</textarea>
+				 </td>
+			 </tr>
+			
+			{{each(i,zsmlYxZyYjfx) zsmlYxZy.exportZsmlYxZyYjfxs}}
+			 <tr>
+				<td style="padding-left: 40px;vertical-align: middle;" {{if zslx == '2' }} rowspan="{{= zsmlYxZyYjfx.rowspan}}" {{/if}}>
+                <span style="display:flex;"><span>{{= zsmlYxZyYjfx.yjfxdm}}&nbsp;</span><span><div lang="en">( {{= zsmlYxZyYjfx.xxfsywmc}} )&nbsp;{{= zsmlYxZyYjfx.yjfxywmc}}</div><div lang="zh_CN">( {{= zsmlYxZyYjfx.xxfsmc}} )&nbsp;{{= zsmlYxZyYjfx.yjfxmc}}</div></span></span>
+                
+                {{if zslx == '2' && zsmlYxZyYjfx.tdsZyyjfxs.length > 0 }}
+                   {{each(i,tdsZyyjfx) zsmlYxZyYjfx.tdsZyyjfxs}}     
+					  </br>{{= tdsZyyjfx.yjfxdm}} ( {{= zsmlYxZyYjfx.xxfsywmc}} ){{= zsmlYxZyYjfx.yjfxywmc}} 
+					  
+					  <br/>&nbsp;&nbsp;
+                      {{if tdsZyyjfx.xxfsm == '1'}}（全日制）{{/if}}{{if tdsZyyjfx.xxfsm == '2'}}（非全日制）{{/if}}{{= tdsZyyjfx.yjfxmc}}
+					{{/each}}
+				{{/if}}
+				</td>
+				 {{if zslx == '2'}}
+					{{each(idx,zsmlYxZyYjfxDsxx) zsmlYxZyYjfx.exportZsmlYxZyYjfxDsxxes}}
+                          {{if idx == 0}}
+							<td style="text-align: center;vertical-align: middle;">
+								<span>
+								<div>
+							   {{if zsmlYxZyYjfxDsxx.xxbm == null}}
+								  	<span lang="en">{{= zsmlYxZyYjfxDsxx.dsywxm}}&nbsp;</span>
+									<span lang="zh_CN">{{= zsmlYxZyYjfxDsxx.dsxm}}</span>
+                               {{else}}
+									<a href="/publish/infors/view/dsfc/{{= zsmlYxZyYjfxDsxx.xxbm }}" class="dsinfo" target="_blank" rel="noopener">
+									    <span lang="en">{{= zsmlYxZyYjfxDsxx.dsywxm}}&nbsp;</span>
+									    <span lang="zh_CN">{{= zsmlYxZyYjfxDsxx.dsxm}}</span>
+									</a>
+							   {{/if}}
+								</div>
+								{{if zsmlYxZyYjfxDsxx.sfzsbkzb != 1 && zsmlYx.sfzsgjbkzb == 1}}
+									<div style="text-align: left;font-style: italic;color: gray; width:104%;margin-top: 5px;padding-top: 0px;padding-left: 4px;">
+                     			        <div lang="en">Not accept bachelor degree holders to apply for doctoral programs. </div>        
+                     					<div lang="zh_CN">不招收直博生。</div>
+                     				</div>
+								{{/if}}
+								<div style="text-align: left;">{{= zsmlYxZyYjfxDsxx.dsbz}}</div>
+								</span>
+							   </td>
+						 {{/if}}
+					  {{/each}}
+				 {{/if}}
+				 <td {{if zslx == '2' }} rowspan="{{= zsmlYxZyYjfx.rowspan}}" {{/if}}>
+				 	{{if zsmlYxZyYjfx.sfqywxmyw != null}}
+				 		<span>
+				 			<div lang="en">{{= zsmlYxZyYjfx.sfqywxmyw}}</div>
+				 			<div lang="zh_CN">{{= zsmlYxZyYjfx.sfqywxmzw}}</div>
+				 		</span>
+				 	{{/if}}
+				 	{{if zsmlYxZyYjfx.sflslpxmyw != null}}
+				 		<span>
+				 			<div lang="en">{{= zsmlYxZyYjfx.sflslpxmyw}}</div>
+				 			<div lang="zh_CN">{{= zsmlYxZyYjfx.sflslpxmzw}}</div>
+				 		</span>
+				 	{{/if}}
+				 	{{if zsmlYxZyYjfx.zwhyyq != null}}
+				 		<span>
+				 			<div lang="en">{{= zsmlYxZyYjfx.ywhyyq}}</div>
+				 			<div lang="zh_CN">{{= zsmlYxZyYjfx.zwhyyq}}</div>
+				 		</span>
+				 	{{/if}}
+				 	{{if zsmlYxZyYjfx.ywyyyq != null}}
+				 		<span>
+				 			<div lang="en">{{= zsmlYxZyYjfx.ywyyyq}}</div>
+				 			<div lang="zh_CN">{{= zsmlYxZyYjfx.zwyyyq}}</div>
+				 		</span>
+				 	{{/if}}
+				 	{{if zsmlYxZyYjfx.yjfxbz != null}}
+				 		<span>
+				 			<textarea readonly="readonly">{{= zsmlYxZyYjfx.yjfxbz}}</textarea>
+				 		</span>
+				 	{{/if}}
+				 	{{if zsmlYxZyYjfx.bmjssjyw != null}}
+				 		<span>
+				 			<div lang="en">{{= zsmlYxZyYjfx.bmjssjyw}} (Beijing time)</div>
+				 			<div lang="zh_CN">{{= zsmlYxZyYjfx.bmjssjzw}}（北京时间）</div>
+				 		</span>
+				 	{{/if}}
+				 	{{if zsmlYxZyYjfx.bmsjms != null}}
+				 		<span>
+				 			<textarea readonly="readonly">{{= zsmlYxZyYjfx.bmsjms}}</textarea>
+				 		</span>
+				 	{{/if}}
+				 </td>
+				 </tr>
+				 {{if zslx == '2' }}
+				 		
+					{{each(idx,zsmlYxZyYjfxDsxx) zsmlYxZyYjfx.exportZsmlYxZyYjfxDsxxes}}
+						{{if idx > 0}}
+							<tr>
+					           <td style="text-align: center;vertical-align: middle;">
+					           <span>
+								<div>
+							   {{if zsmlYxZyYjfxDsxx.xxbm == null}}
+								  	<span lang="en">{{= zsmlYxZyYjfxDsxx.dsywxm}}&nbsp;</span>
+									<span lang="zh_CN">{{= zsmlYxZyYjfxDsxx.dsxm}}</span>
+                               {{else}}
+									<a href="/publish/infors/view/dsfc/{{= zsmlYxZyYjfxDsxx.xxbm }}" class="dsinfo" target="_blank" rel="noopener">
+									    <span lang="en">{{= zsmlYxZyYjfxDsxx.dsywxm}}&nbsp;</span>
+									    <span lang="zh_CN">{{= zsmlYxZyYjfxDsxx.dsxm}}</span>
+									</a>
+							   {{/if}}
+								</div>
+								{{if zsmlYxZyYjfxDsxx.sfzsbkzb != 1 && zsmlYx.sfzsgjbkzb == 1}}
+									<div style="text-align: left;font-style: italic;color: gray; width:104%;margin-top: 5px;padding-top: 0px;padding-left: 4px;">
+                     			        <div lang="en">Not accept bachelor degree holders to apply for doctoral programs. </div>        
+                     					<div lang="zh_CN">不招收直博生。</div>
+                     				</div>
+								{{/if}}
+								<div style="text-align: left;">{{= zsmlYxZyYjfxDsxx.dsbz}}</div>
+								</span>
+							   </td>
+						 	</tr>
+						 {{/if}}
+					  {{/each}}
+				 {{/if}}
+				{{/each}}
+				{{/each}}             
+				{{/each}}
+      </tbody>
+	</table>
+	</script>
+	<script id="yxsxx-template" type="text/x-jquery-tmpl">
+		<div id="inner-sidebar" class="inner-sidebar">
+   			<ul class="side-nav" style="margin: 1rem 0;">
+   				{{each(i,yxsxx) yxsxxs}}
+   					<li class="{{if yxsdm == yxsxx.zsyxsdm}}active{{/if}}"><a href="javaScript:void(0);" onclick=searchByYxsdm('{{= yxsxx.zsyxsdm}}')><span style="display:flex;"><span>{{= yxsxx.zsyxsdm}}&nbsp;</span><span><div lang="en">{{= yxsxx.zsyxsywmc}}</div><div lang="zh_CN">{{= yxsxx.zsyxsmc}}</div></span></span></a></li>
+   				{{/each}}
+            </ul>
+   		</div>
+	</script>
+        
+   		<script>
+	    	(function($) {
+	    		$(document).ready(function() {
+    			    var height;
+    			    var subHeight = $('#sub-banner').height();
+    			    $(window).scroll(function(){
+    			    	height = $(this).scrollTop();  
+    			        
+    			        if(parseFloat(height) > subHeight){
+    			        	$("#inner-sidebar").addClass("fixed");
+    			        }else{
+    			        	$("#inner-sidebar").removeClass("fixed");
+    			        }
+    			    });
+    			    //取cookie中语言类型展示在右上角
+	   				let lang = $.cookie('language');
+	   				if(!lang || lang == "null"){
+	   					lang = "en";
+	   				}
+	   				$('#btn-lang').text($("li[data-lang='"+lang+"']").text());
+    			    // 如果是院系进来直接显示所有？
+    			   
+    			   
+    			   $(window).scroll(function() { //当窗口滚动时执行以下操作
+    				    if ($(this).scrollTop() > 100) { //当滚动高度超过100时，显示回到顶部按钮
+    				      $('#btn-totop').fadeIn();
+    				    } else {   //否则隐藏
+    				      $('#btn-totop').fadeOut();
+    				    }
+    			   });
+    			   
+    			   $('#btn-totop').click(function() { //当点击回到顶部按钮时执行以下操作
+    				    $('html, body').animate({scrollTop : 0},800); //动画效果，在800ms内平滑滚动到顶部
+    				    return false;
+    				});
+    			   
+	   				$(".selectBox").on("click",function(event){
+	   					$(".selectBox").not(this).find(".inputCase .fa").removeClass("fa-caret-up").addClass("fa-caret-down")//当点隐藏ul弹窗时候，把小图标恢复原状
+	   					$(".selectBox").not(this).find(".selectUl").hide();//当点击空白处，隐藏ul弹窗
+	   					
+	   					let fa = $(this).find('.fa');
+	   					$(fa).parent().next().toggle();//ul弹窗展开
+	   					if($(fa).hasClass("fa-caret-down")){
+	   						$(fa).removeClass("fa-caret-down").addClass("fa-caret-up")//点击input选择适合，小图标动态切换
+	   					}else{
+	   						$(fa).addClass("fa-caret-down").removeClass("fa-caret-up")//点击input选择适合，小图标动态切换
+	   					}
+	   					if (event.stopPropagation) {   
+	   			        	// 针对 Mozilla 和 Opera   
+	   			        	event.stopPropagation();   
+	   			        }else if (window.event) {   
+	   			        	// 针对 IE   
+	   			        	window.event.cancelBubble = true;   
+	   			        }  
+	   				});
+   				
+	   				$(".selectUl li").click(function(event){
+	   					event=event||window.event; 
+	   					$(this).addClass("actived_li").siblings().removeClass("actived_li");//点击当前的添加。actived_li这个类；其他的移除这个类名
+	   					var oliName = $(this).attr("oliName");//定义一个name属性，获取点击的元素属性赋值到当前，方便动态化传值
+	   					var oliId = $(this).attr("oliId");//定义一个id属性，获取点击的元素属性赋值到当前，方便数据交互传值
+	   					$(this).parent().prev().find('.imitationSelect').html($(this).html()); //把当前点击的name赋值到显示的input的val里面
+	   				});
+   				
+	   				//点击任意地方隐藏下拉
+	   				$(document).click(function(event){
+	   					event=event||window.event; 
+	   					$(".inputCase .fa").removeClass("fa-caret-up").addClass("fa-caret-down")//当点隐藏ul弹窗时候，把小图标恢复原状
+	   					$(".selectUl").hide();//当点击空白处，隐藏ul弹窗
+	   				});
+	   				
+	   				initSelect();
+	   				
+	   				executeQuery('', true);
+	    		});
+	    	})(jQuery);
+	    	
+	    	function initSelect() {
+				$(".selectBox").each(function(i,e) {
+					let html = $(e).find('ul li:eq(0)').html();
+					$(e).find('.imitationSelect').html(html);
+				});
+			}
+	    	
+	    	$('#btn-more').click(function() {
+	    		var height = $('.search-zsml').height();
+	    		if (height > 80) {
+	    			$('.search-zsml').animate({height:80},500);
+	    			$(this).html('<i class="fas fa-angle-double-down"></i>');
+	    		} else {
+	    			var autoHeight = $('.search-zsml').css('height', 'auto').height();
+	    			$('.search-zsml').animate({height:autoHeight},500);
+	    			$(this).html('<i class="fas fa-angle-double-up"></i>');
+	    		}
+	    	});
+	    	
+	    	function setLeftPosition() {
+	    		var height = $('.search-zsml').height();
+	    		if (height > 80) {
+	    			$('#left-container').css({'top': '100px'});
+	    		} else {
+	    			$('#left-container').css({'top': '200px'});
+	    		}
+	    	}
+	    	
+	    	$('#btn-lang').mouseover(function() {
+	    		$(this).next().show();
+	    	}).mouseout(function() {
+	    		$(this).next().hide();
+	    	});
+	    	
+	    	$('.content-lang').mouseover(function() {
+	    		$(this).show();
+	    	}).mouseout(function() {
+	    		$(this).hide();
+	    	});
+	    	
+	    	//点击切换语言，将切换后的语言存入至cookie中，有效期30天
+	    	$('.content-lang li').click(function() {
+	    		let lang = $(this).data('lang');
+	    		$('#btn-lang').text($(this).text());
+	    		$.cookie('language',lang,{expires: 30,path:'/'});
+	    		changeLang(lang);
+	    	});
+	    	
+			function changeLang(lang) {
+				initLang(lang);
+				initContent(lang);
+			}
+			
+			function initLang(lang) {
+				if (lang == 'zh_CN') {
+					$('*[lang=zh_CN]').show();
+					$('*[lang=en]').hide();
+				} else if (lang == 'enZh_CN') {
+					$('*[lang=zh_CN]').show();
+					$('*[lang=en]').show();
+				} else {
+					$('*[lang=zh_CN]').hide();
+					$('*[lang=en]').show();
+				}
+				$.each($("textarea"), function(i, n){
+    				$(n).css("height", n.scrollHeight + "px");
+    			});
+			}
+	    	
+	    	function initContent(lang) {
+	    		if('1'=='2'){//博士
+	    			if (lang == 'zh_CN') {
+						$('#gjz').attr("placeholder", "输入关键词查询专业/研究方向/导师");
+					} else if (lang == 'enZh_CN') {
+						$('#gjz').attr("placeholder", "Enter keywords to search for Major/Research Field/Supervisor. 输入关键词查询专业/研究方向/导师");
+					} else {
+						$('#gjz').attr("placeholder", "Enter keywords to search for Major/Research Field/Supervisor.");
+					}
+	    		}else{//硕士
+	    			if (lang == 'zh_CN') {
+						$('#gjz').attr("placeholder", "输入关键词查询专业/研究方向");
+					} else if (lang == 'enZh_CN') {
+						$('#gjz').attr("placeholder", "Enter keywords to search for Major/Research Field. 输入关键词查询专业/研究方向");
+					} else {
+						$('#gjz').attr("placeholder", "Enter keywords to search for Major/Research Field.");
+					}
+	    		}
+	    	}
+	    	
+	    	function initResultsLang() {
+	    		//获取cookie中语言类型
+	    		if((!($.cookie("language"))) || $.cookie("language") == 'null'){//首次访问，cookie中没有值，则默认为英文存入
+	    			$.cookie('language','en',{expires:30,path:'/'});
+	    		}
+	    		changeLang($.cookie('language'));
+	    	}
+	    	
+	    	
+			$('.dsinfo').click(function() {
+				var newWindow = window.open('/publish/infors/view/dsfc/'+$(this).data('val'));
+				newWindow.opener = null;
+			});
+			
+	    	function reSet(){
+	    		$('.selectUl').find('li.actived_li').removeClass('actived_li');
+	    		initSelect();
+	    		$('#gjz').val('');
+   				executeQuery(null, true);
+	    	}
+			
+	    	// 执行查询
+	    	function executeQuery(yxsdm, showUsage) {
+				let xxbm = '84682384-10d4-4eb6-9d49-356299983813';
+				let zslx = '1';
+				let gjz = $('#gjz').val();
+				let zsyx = $("#zsyx li.actived_li").data('value');
+				let xxfs = $("#xxfs li.actived_li").data('value');
+				let hysp = $("#hysp li.actived_li").data('value');
+				let yysp = $("#yysp li.actived_li").data('value');
+				let kfzt = $("#kfzt li.actived_li").data('value');
+				let sfqywxm = $("#sfqywxm li.actived_li").data('value');
+				let sflslpxm = $("#sflslpxm li.actived_li").data('value');
+				let sfzsbkzb = $("#sfzsbkzb li.actived_li").data('value');
+				
+				$.ajax({
+		     		url: "/publish/s05/s0503/querydetail",
+		     		type:"post",
+		     		dataType:"json",
+		     		async:false,
+		     		data:{gjz:gjz,xxbm:xxbm,zslx:zslx,zsyx:zsyx,xxfs:xxfs,hysp:hysp,yysp:yysp,sfkfzs:kfzt,sfqywxm:sfqywxm,sflslpxm:sflslpxm,sfzsbkzb:sfzsbkzb,yxsdm:yxsdm,showUsage:showUsage},
+		     		success:function(webResult){
+		     			$('#content-nodata').hide();
+		     			var firstEnter = webResult.datas.firstEnter;
+		     			if(firstEnter) {
+		     				$('#content-results').show();
+		     				$('#zsml-table').html('');
+		     				$('#usage').show();
+							$("#yxsxx-template").tmpl(webResult.datas).replaceAll('#inner-sidebar');
+		     			} else {
+		     				$('#usage').hide();
+							var zsmlYxs = webResult.datas.zsmlYxs;
+							$("#yxsxx-template").tmpl(webResult.datas).replaceAll('#inner-sidebar');
+			     			if(zsmlYxs && zsmlYxs.length > 0) {
+			     				$('#content-results').show();
+								$("#zsml-template").tmpl(webResult.datas).replaceAll('#zsml-table');
+			     			} else {
+								$('#content-results').hide();
+								$('#content-nodata').show();
+							}
+		     			}
+		     			initResultsLang();
+		     		}
+		     	}); 
+	    	}
+	    	
+	    	function searchByYxsdm(yxsdm) {
+	    		executeQuery(yxsdm);
+	    	}
+	    </script>
+    </body>
+</html>

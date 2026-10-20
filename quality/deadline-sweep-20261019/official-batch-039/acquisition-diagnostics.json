@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-19T12:46:39.213Z",
+  "publicGetOperations": 11,
+  "registeredSourceUrlsAttempted": 9,
+  "directLinkedSupportUrlsAttempted": 2,
+  "webFallbackOperations": 3,
+  "rawBodiesSaved": 8,
+  "normalTls": true,
+  "paidCalls": 0,
+  "initialSandboxDeniedAttempts": 0,
+  "nativeTlsTimeouts": 2,
+  "nativeHttp404": 1,
+  "linkedAttachmentCaptchaHtml": 1,
+  "linkedAttachmentCaptchaBypassAttempted": false,
+  "pdfBytesSaved": 0,
+  "pdfExtractionRequests": 0,
+  "archiveCheck": {
+    "path": "archive-source-check.json",
+    "sha256": "482f8d0f114cd99f076918842d07563dde20bfcac182e1fca491c1f2da04ad8d"
+  },
+  "webFallback": {
+    "path": "web-fallback.json",
+    "sha256": "9bfece88151a6a5449631c175a611c38bb00ff7ee98759dcd50085067c316c9c"
+  },
+  "retryPolicy": "Each failed registered URL received at most one web fallback, then cooldown. ZUFE linked attachment returns CAPTCHA HTML; no bypass or further retry."
+}

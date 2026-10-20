@@ -69,6 +69,7 @@
     "quality:decision-gap": "tsx scripts/quality/build-decision-gap-report.ts",
     "quality:comprehensive-audit": "tsx scripts/quality/comprehensive-data-audit.ts",
     "test:audit": "tsx --test scripts/quality/comprehensive-data-audit.test.ts",
+    "test:deadline-review": "tsx --test scripts/quality/audit-catalog-deadlines.preservation.test.ts scripts/quality/summarize-deadline-rechecks.pins.test.ts scripts/quality/summarize-deadline-rechecks.history.test.ts",
     "automation:seeds": "tsx scripts/automation/build-catalog-seeds.ts",
     "automation:sync": "tsx scripts/automation/pull-catalog-snapshot.ts",
     "automation:health": "tsx scripts/automation/operations-health.ts",

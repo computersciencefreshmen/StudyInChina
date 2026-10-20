@@ -1,0 +1,548 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <title>Regular Chinese Language Program-XISU</title><meta name="pageType" content="2">
+<meta name="pageTitle" content="Regular Chinese Language Program">
+<META Name="keywords" Content="XISU,普通汉语进修生" />
+
+    <link rel="stylesheet" type="text/css" href="../../css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/swiper.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/layout.css" />
+    <script src="../../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../js/respond.min.js"></script>
+    <script type="text/javascript" src="../../js/swiper.min.js"></script>
+    <script type="text/javascript" src="../../js/wow.min.js"></script>
+    <script type="text/javascript" src="../../js/set.js"></script>
+    <script type="text/javascript" src="../../js/base.js"></script>
+
+<!--Announced by Visual SiteBuilder 9-->
+<script language="javascript" src="../../_sitegray/_sitegray.js"></script>
+<!-- CustomerNO:77656262657232306975465550565742000400034053 -->
+<link rel="stylesheet" type="text/css" href="../../xlxm.vsb.css" />
+<script type="text/javascript" src="/system/resource/js/counter.js"></script>
+<script type="text/javascript">_jsq_(1019,'/xlxm.jsp',-1,2132262273)</script>
+</head>
+
+<body>
+  <!--header-->
+    <div class="header">
+        <div class="container head flex flex-pack-justify p_r">
+            
+                
+<!-- 网站logo图片地址请在本组件"内容配置-网站logo"处填写 -->
+<a href="../../index.htm" class="logo flex flex-align-center"><img src="../../images/logo.png" class="di_bl" alt=""></a>
+          
+            <div class="flex flex-align-center">
+                <div class="lang-con flex te_c"><script language="javascript" src="/system/resource/js/dynclicks.js"></script><script language="javascript" src="/system/resource/js/openlink.js"></script><a href="http://six.xisu.edu.cn" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113095)">中</a>
+                    
+<a href="../../index.htm" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113096)">EN</a>
+                    
+<a href="https://six.xisu.edu.cn/lxxwrwz/" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113097)">日</a>
+                    
+<a href="https://six.xisu.edu.cn/lxxwhwz/" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113098)">한</a>
+                    
+<a href="https://six.xisu.edu.cn/lxxwewz/" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113099)">Rus</a>
+                    
+</div>
+              <div class="search-box">
+                    <div class="search-btn"></div>
+                   
+
+
+<script language="javascript" src="/system/resource/js/base64.js"></script><script language="javascript" src="/system/resource/js/jquery/jquery-latest.min.js"></script><script language="javascript" src="/system/resource/vue/vue.js"></script><script language="javascript" src="/system/resource/vue/bluebird.min.js"></script><script language="javascript" src="/system/resource/vue/axios.js"></script><script language="javascript" src="/system/resource/vue/polyfill.js"></script><script language="javascript" src="/system/resource/vue/token.js"></script><LINK href="/system/resource/vue/static/element/index.css" type="text/css" rel="stylesheet"><script language="javascript" src="/system/resource/vue/static/element/index.js"></script><script language="javascript" src="/system/resource/vue/static/public.js"></script><style>
+    #appu2 .qwss{}
+    #appu2 .tj{}
+</style>
+ <div class="close"></div>
+        <div class="content flex">
+<div id="divu2"></div>
+<script type="text/html" id="htmlu2">
+    <div id="appu2" >
+        <div v-if="!isError" class="search-cont">
+       
+            <input type="text" class="qwss flex-1" placeholder="Please enter search keywords" autocomplete=off v-model=query.keyWord @keyup.enter="onSubmit">
+        
+             <button class="tj" type="submit"  v-on:click="onSubmit()"></button>
+             
+        </div>
+        <div v-if="isError" style="color: #b30216; font-size:18px;text-align: center;padding:20px;">
+           Application Under Maintenance！
+        </div>
+    </div>
+</script>
+<script>
+    $("#divu2").html($("#htmlu2").text());
+</script>
+<script>
+    var appOwner = "2132262273";
+    var token = gettoken(10);
+    var urlPrefix = "/aop_component/";
+
+    jQuery.support.cors = true;
+    $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+    });
+
+    new Vue({
+        el: "#appu2",
+        data: function () {
+            return {
+                query: {
+                    keyWord: "",//搜索关键词
+                    owner: appOwner,
+                    token: token,
+                    urlPrefix: urlPrefix,
+                    lang:"i18n_en_US"
+                },
+                isError: false
+            }
+        },
+        mounted: function () {
+            var _this = this;
+            // _this.init();
+        },
+        methods: {
+            init: function(){
+                $.ajax({
+                    url: "/aop_component//webber/search/test",
+                    type: "get",
+                    success: function (response) {
+                        if (response.code == "0000") {
+                        } else if (response.code == "220") {
+                            _this.isError = true;
+                            console.log(response);
+                        } else if (!response.code) {
+                            _this.isError = true;
+                            console.log(response);
+                        }
+                    },
+                    error: function (response) {
+                        _this.isError = true;
+                    }
+                });
+            },
+            onSubmit: function (e) {
+                var url = "/aop_views/search/modules/resultpc/soso.html";
+                if ("10" == "1" || "10" == "2") {
+                    url = "" + url;
+                }
+                var _this = this;
+                var query = _this.query;
+                if (url.indexOf("?") > -1) {
+                    url = url.split("?")[0];
+                }
+                if (query.keyWord) {
+                    var query = new Base64().encode(JSON.stringify(query));
+                    window.open(url + "?query=" + query);
+                } else {
+                    alert("Enter your search query")
+                }
+            },
+        }
+    })
+</script> </div>
+                </div>
+              
+  <a href="../../index.htm" class="home" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113124)"> 
+                    <img src="../../images/icon-home.svg" alt="">
+                    <span class="txt">XISU</span>
+                </a>
+            
+
+
+            </div>
+            <div class="menu-btn"></div>
+        </div>
+        <div class="nav">
+         <div class="lang-con flex te_c"><a href="http://six.xisu.edu.cn" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113095)">中</a>
+                    
+<a href="../../index.htm" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113096)">EN</a>
+                    
+<a href="https://six.xisu.edu.cn/lxxwrwz/" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113097)">日</a>
+                    
+<a href="https://six.xisu.edu.cn/lxxwhwz/" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113098)">한</a>
+                    
+<a href="https://six.xisu.edu.cn/lxxwewz/" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113099)">Rus</a>
+                    
+</div>
+        <ul class="container flex flex-warp flex-pack-center">
+                
+              
+                
+<li class="p_r">
+    <a href="../../index.htm" class=" di_bl">Home</a>
+</li>               
+<li class="p_r">
+    <a href="../../About_Us.htm" class=" di_bl">About Us</a>
+    <span class=" arrow"></span>
+    <div class="te_c drop">
+        <a href="../../About_Us/About_XISU.htm" class=" di_bl">About XISU</a>
+        <a href="../../About_Us/President_s_Message.htm" class=" di_bl">President's Message</a>
+        <a href="../../About_Us/International_Student_Education.htm" class=" di_bl">International Student Education</a>
+        <a href="../../About_Us/Contact_Us.htm" class=" di_bl">Contact Us</a>
+        <a href="../../About_Us/About_Xi_an/Xi_an_Overview_.htm" class=" di_bl">About Xi'an</a>
+    </div>
+</li>               
+<li class="p_r">
+    <a href="../../Admissions.htm" class=" di_bl">Admissions</a>
+    <span class=" arrow"></span>
+    <div class="te_c drop">
+        <a href="Regular_Chinese_Language_Program.htm" class=" di_bl">Chinese Programs</a>
+        <a href="../Degree_Programs/Undergraduate_Programs.htm" class=" di_bl">Degree Programs</a>
+        <a href="../Non_degree_Programs/Preparatory_Program.htm" class=" di_bl">Non-degree Programs</a>
+        <a href="../Short_term_Programs/Summer_Program.htm" class=" di_bl">Short-term Programs</a>
+        <a href="../Exchange_Programs/Chinese_Language_Study_Program.htm" class=" di_bl">Exchange Programs</a>
+    </div>
+</li>               
+<li class="p_r">
+    <a href="../../Scholarships.htm" class=" di_bl">Scholarships</a>
+    <span class=" arrow"></span>
+    <div class="te_c drop">
+        <a href="../../Scholarships/Chinese_Government_Scholarship/Chinese_Government_Scholarship___Bilateral_Program.htm" class=" di_bl">Chinese Government Scholarship</a>
+        <a href="../../Scholarships/International_Chinese_Language_Teacher_Scholarship/International_Chinese_Language_Teacher_Scholarship.htm" class=" di_bl">International Chinese Language Teacher Scholarship</a>
+        <a href="../../Scholarships/Shaanxi_Provincial_Government_Scholarship/Shaanxi_Sanqin_International_Student_Scholarship__.htm" class=" di_bl">Shaanxi Provincial Government Scholarship</a>
+        <a href="../../Scholarships/Xi_an_Municipal_Government_Scholarship/Xi_an_Municipal_Government_Scholarship__Belt_and_R.htm" class=" di_bl">Xi'an Municipal Government Scholarship</a>
+        <a href="../../Scholarships/Xi_an_International_Studies_University_Scholarship/Xi_an_International_Studies_University_Scholarship.htm" class=" di_bl">Xi'an International Studies University Scholarship</a>
+    </div>
+</li>               
+<li class="p_r">
+    <a href="../../Campus_Life.htm" class=" di_bl">Campus Life</a>
+    <span class=" arrow"></span>
+    <div class="te_c drop">
+        <a href="../../Campus_Life/XISU_Guide.htm" class=" di_bl">XISU Guide</a>
+        <a href="../../Campus_Life/Student_Affairs.htm" class=" di_bl">Student Affairs</a>
+        <a href="../../Campus_Life/Student_Organizations.htm" class=" di_bl">Student Organizations</a>
+        <a href="../../Campus_Life/Student_Affairs/Frequently_Used_Downloads.htm" class=" di_bl">Frequently Used Downloads</a>
+    </div>
+</li>               
+<li class="p_r">
+    <a href="../../My_XISU.htm" class=" di_bl">My XISU</a>
+    <span class=" arrow"></span>
+    <div class="te_c drop">
+        <a href="../../My_XISU/Gallery.htm" class=" di_bl">Gallery</a>
+        <a href="../../My_XISU/Videos.htm" class=" di_bl">Videos</a>
+        <a href="../../My_XISU/My_Story.htm" class=" di_bl">My Story</a>
+    </div>
+</li>               
+<li class="p_r">
+    <a href="../../Alumni.htm" class=" di_bl">Alumni</a>
+    <span class=" arrow"></span>
+    <div class="te_c drop">
+        <a href="../../Alumni/Alumni_News.htm" class=" di_bl">Alumni News</a>
+        <a href="../../Alumni/Alumni_Stories.htm" class=" di_bl">Alumni Stories</a>
+        <a href="../../Alumni/Alumni_Association.htm" class=" di_bl">Alumni Association</a>
+    </div>
+</li>               
+</ul></div>
+    </div>
+   
+    <!--header end-->
+
+    <div class="n-banner p_r">
+        <img src="../../images/banner318.png" />
+        <div class="text-con te_c">
+            <div class="title">
+Chinese Programs</div>
+            <div class="des">Xi'an International Studies University (XISU), located in the ancient capital of Xi’an, was the first institution of higher learning in Northwest China to offer Chinese language programs for international students, admitting its first cohort in 1979. Over the years, we have educated more than 20,000 students from 45 countries and regions. Currently, XISU offers a comprehensive range of academic programs spanning from bachelor's to doctoral degrees, as well as non-degree programs including Chinese language courses, short-term exchange programs, and customized courses tailored to the Belt and Road Initiative. Leveraging our strengths in multilingual education, we nurture cross-cultural ambassadors with global perspectives, blending rich historical heritage with modern educational approaches. We warmly invite young talents from around the world to join the XISU family and write our shared story of growth together!</div>
+        </div>
+    </div>
+
+
+    <div class="container project">
+      <div class="tab-box">
+            <div class="tabs">
+<a class="on" href="Regular_Chinese_Language_Program.htm">Regular Chinese Language Program</a>
+<a href="Business_Chinese.htm">Business Chinese</a>
+<a href="Chinese_Intensive_Class.htm">Chinese Intensive Class</a>
+<a href="HSK_Intensive_Class.htm">HSK Intensive Class</a>
+</div>
+
+
+  <div class="all" style="width: 3.6rem;">Expand All</div></div>
+        
+        <div class="list">
+
+
+
+
+
+<script language="javascript" src="/system/resource/js/ajax.js"></script><script language="javascript">_getBatchClickTimes('null,null,null,null,null,null,null,null,null,null',2132262273,'wbnews','u10')</script>
+<link rel="stylesheet" Content-type="text/css" href="/system/resource/style/component/news/content/format2.css"><script>function seeContenta10(contentid,size,displayid){	document.getElementById(contentid).innerHTML = '[';	for(var i=0;i<=size;i++){		var allcontentid = contentid+(i+1);		if(allcontentid==displayid){			document.getElementById(contentid).innerHTML += " <span id='"+allcontentid+"' name='"+allcontentid+"'  >"+(i+1)+"</span> ";			document.getElementById(displayid).style.display = 'block';		}else{			document.getElementById(contentid).innerHTML += " <span style='cursor:pointer' id='"+allcontentid+"' name='"+allcontentid+"' onclick=seeContenta10('"+contentid+"','"+size+"','"+allcontentid+"')  >"+(i+1)+"</span> ";			document.getElementById(allcontentid).style.display = 'none';		}	}	document.getElementById(contentid).innerHTML += ']';}</script>
+<script language="javascript" src="/system/resource/js/news/mp4video.js"></script>
+<script>_addDynClicks('wbnews',2132262273,3051)</script>
+
+<script>_addDynClicks('wbnews',2132262273,3041)</script>
+
+<script>_addDynClicks('wbnews',2132262273,3031)</script>
+
+<script>_addDynClicks('wbnews',2132262273,3021)</script>
+
+<script>_addDynClicks('wbnews',2132262273,3011)</script>
+
+<script>_addDynClicks('wbnews',2132262273,3001)</script>
+
+<script>_addDynClicks('wbnews',2132262273,2991)</script>
+
+<script>_addDynClicks('wbnews',2132262273,2981)</script>
+
+<script>_addDynClicks('wbnews',2132262273,2971)</script>
+
+<script>_addDynClicks('wbnews',2132262273,2961)</script>
+<div class="li">
+    <div class="tit">
+        <i></i><span>Course Introduction</span>
+    </div>
+    <div class="cont">
+    <div id="vsb_content_2_3051_u101"><div id="vsb_content_2"><p style="text-indent: 0em; text-align: left;"><strong>Spring semester:</strong></p><p style="text-indent: 0em; text-align: left;">early March&nbsp; – late June / early July</p><p style="text-indent: 0em; text-align: left;"><strong>Autumn semester: </strong></p><p style="text-indent: 0em; text-align: left;">early September&nbsp; – late December</p><p>*The exact start date will be provided in the Registration Notice.</p><p style="text-indent: 0em;"><strong>Duration:</strong></p><p style="text-indent: 0em;">One semester or longer</p><p style="text-indent: 0em;">*Students may apply for mid-term admission. The minimum duration for mid-term study is one week.</p><p style="text-indent: 0em;"><strong>Study schedule:</strong></p><p style="text-indent: 0em;">Monday to Friday; 20 class periods per week (1 class period = 45 minutes)</p><p style="text-indent: 0em;"><strong>Fees:</strong></p><table align="center"><tbody><tr class="firstRow"><td width="122"><p>Duration</p></td><td width="149"><p>Registration Fee</p></td><td width="148"><p>Insurance Fee</p></td><td width="148"><p>Tuition Fee</p></td></tr><tr><td width="122"><p>1 semester</p></td><td width="149"><p>400</p></td><td width="148"><p>500</p></td><td width="148"><p>7300</p></td></tr><tr><td width="122"><p>1 academic year</p></td><td width="149"><p>600</p></td><td width="148"><p>1000</p></td><td width="148"><p>14600</p></td></tr></tbody></table><p><strong> </strong></p><p style="text-indent: 0em;"><strong>Mid-term Admission</strong></p><table align="center"><tbody><tr class="firstRow"><td width="122"><p>Duration</p></td><td width="149"><p>Registration Fee</p></td><td width="148"><p>Insurance Fee</p></td><td width="148"><p>Tuition Fee</p></td></tr><tr><td width="122"><p>1 week</p></td><td width="149" rowspan="6"><p>400</p></td><td width="148" rowspan="6"><p>160</p><p>~</p><p>500</p></td><td width="148"><p>1200</p></td></tr><tr><td width="122"><p>2 weeks</p></td><td width="148"><p>1800</p></td></tr><tr><td width="122"><p>3 weeks</p></td><td width="148"><p>2200</p></td></tr><tr><td width="122"><p>1 month</p></td><td width="148"><p>2500</p></td></tr><tr><td width="122"><p>2 months</p></td><td width="148"><p>4200</p></td></tr><tr><td width="122"><p>3 months</p></td><td width="148"><p>5800</p></td></tr></tbody></table><p><strong> </strong></p><p style="text-indent: 0em;"><strong>Textbooks:</strong></p><p style="text-indent: 0em;"><strong> Developing Chinese Series, New Era Spoken Chinese Series, etc.</strong></p><p style="text-indent: 0em;">Teachers will provide a textbook list at the beginning of the semester. Students may purchase the required textbooks according to their list.</p></div></div>
+   <div style="display: none;"> </div>
+</div>
+            </div>
+<div class="li">
+    <div class="tit">
+        <i></i><span>Program Features</span>
+    </div>
+    <div class="cont">
+    <div id="vsb_content_3041_u101"><div id="vsb_content_2"><p class="vsbcontent_start">Small class teaching: No more than 25 students per class.</p><p>Diverse course formats: An excellent team of Chinese teachers provides face-to-face instruction, improving students'listening, speaking, reading, and writing skills.</p><p>Well-structured levels: Courses are divided into different Chinese proficiency levels to accurately match students' language ability.</p><p>Wide range of courses: Optional courses such as HSK exam preparation and Chinese ink painting are available free of charge.</p><p>Cultural tours: Organized once every semester to eastern routes such as the Terracotta Warriors and Huaqing Palace, allowing students to explore Shaanxi's history and culture (participation is voluntary; entrance fees are at students' own expense; transportation and accompanying teachers are arranged by XISU).</p><p class="vsbcontent_end">Academic records: All students will receive a transcript at the end of the semester. Students who meet the completion requirements will be awarded a certificate of completion.</p></div></div>
+   <div style="display: none;"> </div>
+</div>
+            </div>
+<div class="li">
+    <div class="tit">
+        <i></i><span>Course Examples</span>
+    </div>
+    <div class="cont">
+    <div id="vsb_content_2_3031_u101"><div id="vsb_content_2"><p class="vsbcontent_start"><strong>Beginner Class </strong></p><div><table align="center" style="border-collapse: collapse;"><tbody><tr class="firstRow"><td width="108" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><br></td><td width="111" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p><strong>Monday</strong></p></td><td width="115" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p><strong>Tuesday</strong></p></td><td width="127" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p><strong>Wednesday</strong></p></td><td width="128" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p><strong>Thursday</strong></p></td><td width="127" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p><strong>Friday</strong></p></td></tr><tr><td width="108" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>8:00—9:50</p></td><td width="111" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Intensive Reading</p></td><td width="115" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Communication</p></td><td width="127" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Communication</p></td><td width="128" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Listening</p></td><td width="127" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Intensive Reading</p></td></tr><tr><td width="108" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>10:10—12:00</p></td><td width="111" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Listening</p></td><td width="115" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Intensive Reading</p></td><td width="127" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Intensive Reading</p></td><td width="128" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Intensive Reading</p></td><td width="127" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Oral Communication</p></td></tr></tbody></table></div><p><strong> </strong></p><p><strong>Intermediate and Advanced Class </strong></p><div><table align="center" style="border-collapse: collapse;"><tbody><tr class="firstRow"><td width="101" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><br></td><td width="118" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p><strong>Monday</strong></p></td><td width="115" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p><strong>Tuesday</strong></p></td><td width="127" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p><strong>Wednesday</strong></p></td><td width="128" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p><strong>Wednesday</strong></p></td><td width="127" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p><strong>Wednesday</strong></p></td></tr><tr><td width="101" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>8:00—9:50</p></td><td width="118" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Audio-Visual and Speaking</p></td><td width="115" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Reading and Writing</p></td><td width="127" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Audio-Visual and Speaking</p></td><td width="128" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Reading and Writing</p></td><td width="127" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Comprehensive Chinese</p></td></tr><tr><td width="101" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>10:10—12:00</p></td><td width="118" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Comprehensive Chinese</p></td><td width="115" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Comprehensive Chinese</p></td><td width="127" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Reading and Writing</p></td><td width="128" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Comprehensive Chinese</p></td><td width="127" style="border-color: rgb(0, 0, 0); border-style: solid; border-width: 1px; padding: 5px 10px;"><p>Audio-Visual and Speaking</p></td></tr></tbody></table></div><p><strong> </strong></p></div></div>
+   <div style="display: none;"> </div>
+</div>
+            </div>
+<div class="li">
+    <div class="tit">
+        <i></i><span>Application Materials</span>
+    </div>
+    <div class="cont">
+    <div id="vsb_content_3021_u101"><div id="vsb_content_2"><p class="vsbcontent_start">1.Copy of passport</p><p>2.Proof of enrollment / highest academic qualification (Chinese/English version)</p><p>3.Relevant academic transcripts</p><p>4.Digital photo</p><p>5.Applicants under 18 must provide legal guardianship documents in China; for applicants over 55, need to provide health certificate and guarantee letter.</p><p><span id="6400" retain="true"><img src="/system/resource/images/fileTypeImages/icon_doc.gif" data_ue_src="/system/resource/images/fileTypeImages/icon_doc.gif" border="0" vsbhref="vurl" vurl="/system/resource/images/fileTypeImages/icon_doc.gif" vheight="" vwidth="" orisrc="/system/resource/images/fileTypeImages/icon_doc.gif"><a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2132262273&wbfileid=73E93B8014EEFC36F41AA9268E15AA0C">Guarantor's Certificate.doc</a></span></p><p>6.Valid medical examination report (issued within 6 months)</p><p><span id="269D2" retain="true"><img src="/system/resource/images/fileTypeImages/icon_pdf.gif" data_ue_src="/system/resource/images/fileTypeImages/icon_pdf.gif" border="0" vsbhref="vurl" vurl="/system/resource/images/fileTypeImages/icon_pdf.gif" vheight="" vwidth="" orisrc="/system/resource/images/fileTypeImages/icon_pdf.gif"><a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2132262273&wbfileid=320ED8E7D316DBC9EAED831557E4DAB2">Foreigners' Physical Examination Form.pdf</a></span></p><p>Applicants must complete Foreigners' Physical Examination Form as required; incomplete or improperly signed/photographed forms are invalid.</p><p>7.No Criminal Record Certificate (if required by the applicant's home country). If not in Chinese or English, a notarized translation must be included.</p><p class="vsbcontent_end">8.Other system-required documents</p></div></div>
+   <div style="display: none;"> <span>附件【<a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2132262273&wbfileid=73E93B8014EEFC36F41AA9268E15AA0C"><span>担保人证明.doc</span></a>】</span><br><span>附件【<a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2132262273&wbfileid=320ED8E7D316DBC9EAED831557E4DAB2"><span>外国人体格检查表.pdf</span></a>】</span><br></div>
+</div>
+            </div>
+<div class="li">
+    <div class="tit">
+        <i></i><span>Application Procedures</span>
+    </div>
+    <div class="cont">
+    <div id="vsb_content_3011_u101"><div id="vsb_content_2"><p class="vsbcontent_start">1.Online: &nbsp;<a href="http://xisu.chiwest.cn/">http://xisu.chiwest.cn/</a></p><p>2.On-site: International Student Admission Office</p><p>3.Deadlines: Dec 20 (Spring semester) / June 20 (Autumn semester)</p><p>4.Age: 16-55 (applicants under 18 need to provide legal guardianship document; 55+: health certificate and guarantor letter)</p><p class="vsbcontent_end"><span id="6400" retain="true"><img src="/system/resource/images/fileTypeImages/icon_doc.gif" data_ue_src="/system/resource/images/fileTypeImages/icon_doc.gif" border="0" vsbhref="vurl" vurl="/system/resource/images/fileTypeImages/icon_doc.gif" vheight="" vwidth="" orisrc="/system/resource/images/fileTypeImages/icon_doc.gif"><a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2132262273&wbfileid=D9F655773AEE66C02DFC1CD953FE2A90">Guarantor's Certificate.doc</a></span></p></div></div>
+   <div style="display: none;"> <span>附件【<a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2132262273&wbfileid=D9F655773AEE66C02DFC1CD953FE2A90"><span>担保人证明.doc</span></a>】</span><br></div>
+</div>
+            </div>
+<div class="li">
+    <div class="tit">
+        <i></i><span>Payment and Refunds:</span>
+    </div>
+    <div class="cont">
+    <div id="vsb_content_3001_u101"><div id="vsb_content_2"><p class="vsbcontent_start">1.Remittance</p><p>2.Online payment (Alipay, WeChat)</p><p>3.Pay on campus registration (cash, UnionPay card, Alipay, WeChat)</p><p>Please contact us to confirm the remittance account</p><p class="vsbcontent_end">*Note: When making a transfer or remittance, please indicate the tuition fee and the applicant's passport name. After the remittance is completed, please keep the remittance voucher and present it for verification during the campus registration.</p></div></div>
+   <div style="display: none;"> </div>
+</div>
+            </div>
+<div class="li">
+    <div class="tit">
+        <i></i><span>About Refunds</span>
+    </div>
+    <div class="cont">
+    <div id="vsb_content_2991_u101"><div id="vsb_content_2"><p class="vsbcontent_start">1.Students who withdraw before the official registration date of each semester (with valid reason or proof) will receive a full refund of the tuition fee for that semester.</p><p>2.Students who withdraw within the first two weeks after the semester starts will receive a 70% refund of the tuition fee; no refund will be given after the first two weeks.</p><p>Registration fees, insurance fees, and textbook fees are non-refundable.</p><p>4.No fees shall be refunded to students who have been ordered to withdraw or expelled from school.</p><p class="vsbcontent_end">5.Students who suspend their studies and leave school may carry forward their tuition and accommodation fees for use upon resumption of studies.</p></div></div>
+   <div style="display: none;"> </div>
+</div>
+            </div>
+<div class="li">
+    <div class="tit">
+        <i></i><span>Visa and On-campus Accommodation</span>
+    </div>
+    <div class="cont">
+    <div id="vsb_content_2981_u101"><div id="vsb_content_2"><p class="vsbcontent_start">1.The university provides visa application documents for Non-degree Program students.</p><p class="vsbcontent_end">2.On-campus accommodation applications must be submitted online by the deadline specified in the Enrollment Guide.</p></div></div>
+   <div style="display: none;"> </div>
+</div>
+            </div>
+<div class="li">
+    <div class="tit">
+        <i></i><span>Contact Us</span>
+    </div>
+    <div class="cont">
+    <div id="vsb_content_2971_u101"><div id="vsb_content_2"><p class="vsbcontent_start"><strong>International Student Admission Office</strong></p><p>Yanta Campus: No. 437 South Chang'an Road, Chinese Culture Experience Centre, Xi'an</p><p>Phone: +86-29-85309431</p><p>Chang'an Campus: Room B204, University Administration Building, South Wenyuan Road, Guodu Education &amp; Technology Development Zone, Chang'an District, Xi'an, Shaanxi Province, P.R. China</p><p>Phone: +86-29-85319331</p><p class="vsbcontent_end">Email: <a href="mailto:admission@xisu.edu.cn">admission@xisu.edu.cn</a></p></div></div>
+   <div style="display: none;"> </div>
+</div>
+            </div>
+<div class="li">
+    <div class="tit">
+        <i></i><span>Downloadable Materials</span>
+    </div>
+    <div class="cont">
+    <div id="vsb_content_2961_u101"><div id="vsb_content_2"><p class="vsbcontent_start"><img src="/system/resource/images/fileTypeImages/icon_pdf.gif" data_ue_src="/system/resource/images/fileTypeImages/icon_pdf.gif" border="0" vsbhref="vurl" vurl="/system/resource/images/fileTypeImages/icon_pdf.gif" vheight="" vwidth="" orisrc="/system/resource/images/fileTypeImages/icon_pdf.gif"><a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2132262273&wbfileid=C20AAD2358F42515B140A1DD408F9E47">Foreigners' Physical Examination Form.pdf</a></p><p class="vsbcontent_end"><span id="30B6" retain="true"><img src="/system/resource/images/fileTypeImages/icon_doc.gif" data_ue_src="/system/resource/images/fileTypeImages/icon_doc.gif" border="0" vsbhref="vurl" vurl="/system/resource/images/fileTypeImages/icon_doc.gif" vheight="" vwidth="" orisrc="/system/resource/images/fileTypeImages/icon_doc.gif"><a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2132262273&wbfileid=CB1C4BE082F8A1F936E6F59821646104">Entry and Exit Information Commitment (2026 Entry).docx</a></span></p><p class="vsbcontent_end">&nbsp;<span id="23E00" retain="true"><img src="/system/resource/images/fileTypeImages/icon_pdf.gif" data_ue_src="/system/resource/images/fileTypeImages/icon_pdf.gif" border="0" vsbhref="vurl" vurl="/system/resource/images/fileTypeImages/icon_pdf.gif" vheight="" vwidth="" orisrc="/system/resource/images/fileTypeImages/icon_pdf.gif"><a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2132262273&wbfileid=F2324619ABB1A16A9A351448CC91288F">Guardian Guarantee Letter.pdf</a></span></p></div></div>
+   <div style="display: none;"> <span>附件【<a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2132262273&wbfileid=C20AAD2358F42515B140A1DD408F9E47"><span>外国人体格检查表.pdf</span></a>】</span><br><span>附件【<a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2132262273&wbfileid=CB1C4BE082F8A1F936E6F59821646104"><span>出入境信息承诺书（2026年入学）.docx</span></a>】</span><br><span>附件【<a href="/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=2132262273&wbfileid=F2324619ABB1A16A9A351448CC91288F"><span>监护人保证书GUARANTOR STATEMENT.pdf</span></a>】</span><br></div>
+</div>
+            </div>
+<div class="box">
+               
+
+
+
+
+
+<script language="javascript" src="/system/resource/js/centerCutImg.js"></script>
+
+               
+
+
+
+
+
+                        
+
+
+            </div></div>
+       <div class="related"><div class="tit">Related Articles</div>
+            <div class="links">
+                
+<a class="item" href="http://xisu.chiwest.cn/" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113127)" target="_blank">
+    <img class="off" src="../../images/icon-write.png" alt="">
+    <img class="on" src="../../images/icon-write-on.png" alt="">
+    <span class="txt">Application</span>
+</a>
+                
+<a class="item" href="../../Scholarships.htm" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113128)" target="_blank">
+    <img class="off" src="../../images/icon-money.png" alt="">
+    <img class="on" src="../../images/icon-money-on.png" alt="">
+    <span class="txt">Scholarships</span>
+</a>
+                
+<a class="item" href="../../Campus_Life/XISU_Guide/Accommodation.htm" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113129)" target="_blank">
+    <img class="off" src="../../images/icon-build.png" alt="">
+    <img class="on" src="../../images/icon-build-on.png" alt="">
+    <span class="txt">Accommodation</span>
+</a>
+                
+<a class="item" href="../../Campus_Life.htm" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113130)" target="_blank">
+    <img class="off" src="../../images/icon-hat.png" alt="">
+    <img class="on" src="../../images/icon-hat-on.png" alt="">
+    <span class="txt">Campus Life</span>
+</a>
+                
+</div></div>
+    </div>
+
+
+     <!--footer-->
+    <div class="f-us flex flex-align-center flex-pack-justify flex-warp container">
+        <div class="title">Contact Xi'an International Studies University</div>
+        <div class="sns flex">    <a class="p_r" title="" target="_self" onclick="_addDynClicks(&#34;wbimage&#34;, 2132262273, 1024025)"><img src="../.././images/s1.png" class="di_bl" alt="">
+                <div class="erwma"><img src="../../images/wx-ewm.png" class="di_bl" alt=""></div>
+            </a>
+            
+<a class="p_r" title="" target="_self" onclick="_addDynClicks(&#34;wbimage&#34;, 2132262273, 1024024)"><img src="../.././images/s2.png" class="di_bl" alt="">
+                <div class="erwma"><img src="../../images/wx-ewm.png" class="di_bl" alt=""></div>
+            </a>
+            
+<a class="p_r" title="" target="_self" onclick="_addDynClicks(&#34;wbimage&#34;, 2132262273, 1024023)"><img src="../.././images/s3.png" class="di_bl" alt="">
+                <div class="erwma"><img src="../../images/wx-ewm.png" class="di_bl" alt=""></div>
+            </a>
+            
+<a class="p_r" title="" target="_self" onclick="_addDynClicks(&#34;wbimage&#34;, 2132262273, 1024022)"><img src="../.././images/s4.png" class="di_bl" alt="">
+                <div class="erwma"><img src="../../images/wx-ewm.png" class="di_bl" alt=""></div>
+            </a>
+            
+<a class="p_r" title="" target="_self" onclick="_addDynClicks(&#34;wbimage&#34;, 2132262273, 1023985)"><img src="../.././images/s5.png" class="di_bl" alt="">
+                <div class="erwma"><img src="../../images/wx-ewm.png" class="di_bl" alt=""></div>
+            </a>
+            
+</div>
+    </div>
+    <div class="footer">
+        <div class="link flex flex-align-start flex-warp container">
+            <div class="tit">Links:</div>
+            <div class="flex-1 flex flex-warp"><a href="https://www.xisu.edu.cn/" title="西安外国语大学" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113100)">Xi'an International Studies University</a>
+<a href="http://iceo.xisu.edu.cn/?cs=cbafa106" title="XISU International Cooperation and Exchange Office ·Hong Kong, Macao and Taiwan Affairs Office /（Confucius Institute Office)" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113103)">XISU International Cooperation and Exchange Office ·Hong Kong, Macao and Taiwan Affairs Office /（Confucius Institute Office)</a>
+<a href="https://www.csc.edu.cn" title="" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113131)">China Scholarship Council</a>
+<a href="https://www.chinese.cn/page/#/pcpage/mainpage" title="中外语言交流合作中心" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113101)">Language Education and Cooperation Center</a>
+<a href="https://www.chinesetest.cn/" title="Chinese Test Service Website" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 2132262273, 113102)">Chinese Test Service Website</a>
+</div>
+        </div>
+        <div class="container">
+            <div class="flex flex-align-center flex-pack-justify flex-warp con">
+                <div class="logo flex">
+<!-- 网站logo图片地址请在本组件"内容配置-网站logo"处填写 -->
+<a href="../../index.htm" class="logo flex flex-align-center"><img src="../../images/logo.png" class="di_bl" alt=""></a></div>
+                <div class="info">
+                    <div class="tit">International Student Office</div>
+                    <div class="text">
+<p>Chang'an Campus: Room B204, Administration Building, South Wenyuan Road, Guodu Education and Technology Industrial Development Zone, Xi'an (710128)</p>
+<p>Yanta Campus: No. 437 &nbsp;South Chang'an Road, Yanta District, Xi'an (710061)</p>
+<p><span>Tel: +86-29-85309431 / 85319331</span></p>
+<p><span>Email: admission@xisu.edu.cn</span></p></div>
+                </div>
+            </div>
+            <div class="copyright"><!-- 版权内容请在本组件"内容配置-版权"处填写 -->
+<p>Copyright © 西安外国语大学留学西外 ICP备：<a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">陕ICP备05001583号-1</a></p></div>
+    </div>
+
+    <div class="kefu">    <a href="../../About_Us/Contact_Us.htm" class="flex flex-column flex-align-center flex-pack-center" onclick="_addDynClicks(&#34;wbimage&#34;, 2132262273, 1023986)" target="_blank">
+            <div class="icon">
+                <img src="../../images/k-icon1.png" class="di_bl" alt="">
+            </div>
+            <div class="tit ">Consultation</div>
+        </a>
+                
+<a href="http://xisu.chiwest.cn/" class="flex flex-column flex-align-center flex-pack-center" onclick="_addDynClicks(&#34;wbimage&#34;, 2132262273, 1023987)" target="_blank">
+            <div class="icon">
+                <img src="../../images/k-icon2.png" class="di_bl" alt="">
+            </div>
+            <div class="tit ">Application Portal</div>
+        </a>
+                
+</div>
+
+
+
+    <!--本页面用的js文件位置 -->
+    <script>
+        $(".list .li").eq(0).addClass("on").children(".cont").show();
+
+        $(".list .li .tit").click(function () {
+            $(this).parent().toggleClass("on").children(".cont").slideToggle();
+        });
+        $(".project .all").click(function () {
+            if($(this).hasClass("active")) {
+                $(this).text("Collapse All");
+                $(this).removeClass("active");
+                $(".list .li").removeClass("on").children(".cont").slideUp();
+            } else {
+                $(this).text("Expand All");
+                $(this).addClass("active");
+                $(".list .li").addClass("on").children(".cont").slideDown();
+            }
+        });
+    </script>
+    <!--本页面用的js文件位置 end-->
+
+
+<style>
+.cont  table{min-width:6rem;     margin: 0px auto;}
+.table-wapper{overflow-x: auto;}
+</style>
+
+ <script>
+        $(function () {
+         
+            $('.cont table').wrap('<div class="table-wapper"></div>');
+        })
+</script>
+
+
+</body>
+
+</html>

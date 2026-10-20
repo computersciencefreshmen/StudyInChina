@@ -1,0 +1,660 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admission Requirement-Shenyang Pharmaceutical University</title><meta name="pageType" content="2">
+<meta name="pageTitle" content="Admission Requirement">
+<META Name="keywords" Content="Shenyang Pharmaceutical University,Admission Requirement" />
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <link rel="stylesheet" type="text/css" href="../dfiles/13631/public/static/home/css/head.css">
+    <link rel="stylesheet" type="text/css" href="../dfiles/13631/public/static/home/css/list.css">
+    <script type="text/javascript" src="../dfiles/13631/public/static/home/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../dfiles/13631/public/static/home/js/common.js"></script>
+<!--Announced by Visual SiteBuilder 9-->
+<script language="javascript" src="../_sitegray/_sitegray.js"></script>
+<!-- CustomerNO:77656262657232307973465553505742000400034352 -->
+<link rel="stylesheet" type="text/css" href="../jianj.vsb.css" />
+<script type="text/javascript" src="/system/resource/js/counter.js"></script>
+<script type="text/javascript">_jsq_(1014,'/jianj.jsp',-1,1779830775)</script>
+</head>
+<body>  
+    
+    <!-- head -->
+    <div class="head">
+        <script src="../dfiles/13631/public/static/admin/layui/layui.js" charset="utf-8"></script>
+       
+        <div class="head-top">
+            <div class="w-1200 clear">
+                <div class="logo fl">
+<!-- 网站logo图片地址请在本组件"内容配置-网站logo"处填写 -->
+<a href="../index.htm" title="英文网站"><img src="../images/loos.png"></a></div><!-- 图片尺寸:506x91 -->
+                <div class="search-box fr">
+                    <div>
+                        <p><script language="javascript" src="/system/resource/js/dynclicks.js"></script><script language="javascript" src="/system/resource/js/openlink.js"></script>
+<a href="https://www.syphu.edu.cn/" target="_blank">Chinese Version</a>
+
+</p>
+                          <!-- 3.1.3版本 -->
+
+
+
+<script language="javascript" src="/system/resource/js/base64.js"></script><script language="javascript" src="/system/resource/js/jquery/jquery-latest.min.js"></script><script language="javascript" src="/system/resource/vue/vue.js"></script><script language="javascript" src="/system/resource/vue/bluebird.min.js"></script><script language="javascript" src="/system/resource/vue/axios.js"></script><script language="javascript" src="/system/resource/vue/polyfill.js"></script><script language="javascript" src="/system/resource/vue/token.js"></script><LINK href="/system/resource/vue/static/element/index.css" type="text/css" rel="stylesheet"><script language="javascript" src="/system/resource/vue/static/element/index.js"></script><script language="javascript" src="/system/resource/vue/static/public.js"></script><script language="javascript" src="/system/resource/openapp/search/js/containsHtmlTags.js"></script><script language="javascript" src="/system/resource/openapp/search/layui/layui.js"></script><style>
+    #appu2 .qwss{
+        height: 31px;
+        font-size: 12px;
+        min-width: 190px;
+        max-width: 600px;
+        width: 60%;
+        margin-top: -15px;
+        outline: none;
+        padding-left: 10px;
+        border-radius: 2px;
+        border: 1px solid #e4e7ed;}
+    #appu2 .tj{
+        padding-left: 6px;
+        letter-spacing: 5px;
+        color: white;
+        min-width: 53px;
+        max-width: 150px;
+        height: 32px;
+        border: 0;
+        border-radius: 2px;
+        background-color: #1890FF;
+        position: relative;
+        top: 1px;
+        width: 20%;
+        margin-top: -15px;}
+</style>
+<div id="divu2"></div>
+<script type="text/html" id="htmlu2">
+    <div id="appu2">
+        <div v-if="!isError">
+          
+             <div class="search">
+ <input type="text" autocomplete=off v-model=query.keyWord @keyup.enter="onSubmit">
+<input type="image" src="../images/ww.png" align="absmiddle"  value="" v-on:click="onSubmit()" style="cursor: hand ;width: 54px !important;padding: 0px !important;
+    height: auto;
+    border: 0px;
+    flex: inherit;">             
+                                 
+ </div>
+            
+          
+        <div v-if="isError" style="color: #b30216; font-size:18px;text-align: center;padding:20px;">
+            应用维护中！
+        </div>
+    </div>
+</script>
+<script>
+    $("#divu2").html($("#htmlu2").text());
+</script>
+<script>
+    var appOwner = "1779830775";
+    var token = gettoken(10);
+    var urlPrefix = "/aop_component/";
+
+    jQuery.support.cors = true;
+    $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+    });
+
+    new Vue({
+        el: "#appu2",
+        data: function () {
+            return {
+                query: {
+                    keyWord: "",//搜索关键词
+                    owner: appOwner,
+                    token: token,
+                    urlPrefix: urlPrefix,
+                    lang:"i18n_zh_CN"
+                },
+                isError: false
+            }
+        },
+        mounted: function () {
+            var _this = this;
+            // _this.init();
+        },
+        methods: {
+            init: function(){
+                $.ajax({
+                    url: "/aop_component//webber/search/test",
+                    type: "get",
+                    success: function (response) {
+                        if (response.code == "0000") {
+                        } else if (response.code == "220") {
+                            _this.isError = true;
+                            console.log(response);
+                        } else if (!response.code) {
+                            _this.isError = true;
+                            console.log(response);
+                        }
+                    },
+                    error: function (response) {
+                        _this.isError = true;
+                    }
+                });
+            },
+            onSubmit: function (e) {
+                var url = "/aop_views/search/modules/resultpc/soso.html";
+                if ("10" == "1" || "10" == "2") {
+                    url = "" + url;
+                }
+                var _this = this;
+                var query = _this.query;
+                if (url.indexOf("?") > -1) {
+                    url = url.split("?")[0];
+                }
+                if (query.keyWord) {
+                    var query = new Base64().encode(JSON.stringify(query));
+                    window.open(url + "?query=" + query);
+                } else {
+                    alert("请填写搜索内容")
+                }
+            },
+        }
+    })
+</script>
+
+<script>
+   var appElementu2 = document.querySelector("#appu2");
+   if (appElementu2 && appElementu2.__vue__) {
+
+   } else {
+      $("#divu2").html($("#htmlu2").text());
+      var appOwner = "1779830775";   
+      var urlPrefix = "/aop_component/";
+      var ifLogin="";
+      var token = ifLogin=='true'?gettoken(10, true).trim():'tourist';
+      if (containsHtmlTags(token) || !token) { 
+         token = 'tourist';
+      }
+      jQuery.support.cors = true;
+      $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+      });
+      var queryInfou2 = {
+        query: {
+            keyWord: "",//搜索关键词
+            owner: appOwner,
+            token: token,
+            urlPrefix: urlPrefix,
+            lang:"i18n_zh_CN"
+        },
+        isError: false
+      };
+      function keyUpFunu2(e){
+        var theEvent = e || window.event;
+        var keyCode = theEvent.keyCode || theEvent.which || theEvent.charCode;
+        if(keyCode == 13){
+          onSubmitu2();
+        }
+      };
+
+      function onSubmitu2(e) {
+        queryInfou2.query.keyWord= $("#appu2  .qwss").val();
+        
+        var url = "/aop_views/search/modules/resultpc/soso.html";      
+        if ("10" == "1" || "10" == "2") {
+           url = "" + url;
+        }
+        var query = queryInfou2.query;
+        if (url.indexOf("?") > -1) {
+            url = url.split("?")[0];
+        }
+        if (query.keyWord) {
+            var query = new Base64().encode(JSON.stringify(query));
+            window.open(url + "?query=" + query);
+        } else {
+            alert("请填写搜索内容")
+        }
+      };
+   }
+</script>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        <div class="head-nav"><div class="w-1200">
+                <ul class="nav-ul">
+ 
+   
+   
+   <li class=" nav-li">
+                        <a href="../index.htm" class="nav-name">Home</a>
+                        
+                    </li>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+ 
+   
+   
+   <li class=" nav-li">
+                        <a href="javascript:;" class="nav-name">About Us</a>
+                        <div class="nav-list">
+                            <div>
+                                <span class="bubbleTop"></span>
+                                <span class="bubbleBottom"></span>
+                            </div>
+                            
+                               <a href="../About/Introduction.htm" title="Introduction">Introduction</a>
+   
+                            
+                               <a href="../About/Advertise_Videos.htm" title="Advertise Videos">Advertise Videos</a>
+   
+                            
+                               <a href="../About/Campus.htm" title="Campus">Campus</a>
+   
+                            
+                               <a href="../About/Staff.htm" title="Staff">Staff</a>
+   
+                            
+                               <a href="../About/Map.htm" title="Map">Map</a>
+   
+                            
+                               <a href="../About/International_Exchange__Cooperation.htm" title="International Exchange&amp; Cooperation">International Exchange&amp; Cooperation</a>
+   
+                            
+                               <a href="../About/News1.htm" title="News">News</a>
+   
+                            
+                               <a href="../About/School_Views.htm" title="School Views">School Views</a>
+   
+                           
+                          
+                            
+                            
+                        </div>
+                        
+                    </li>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+ 
+   
+   
+   <li class="active nav-li" class=" nav-li">
+                        <a href="javascript:;" class="nav-name">Admissions</a>
+                        <div class="nav-list">
+                            <div>
+                                <span class="bubbleTop"></span>
+                                <span class="bubbleBottom"></span>
+                            </div>
+                            
+                               <a href="Admission_Requirement.htm" title="Admission Requirement">Admission Requirement</a>
+   
+                            
+                               <a href="Application_Procedure.htm" title="Application Procedure">Application Procedure</a>
+   
+                            
+                               <a href="Scholarship.htm" title="Scholarship">Scholarship</a>
+   
+                            
+                               <a href="Tuition_Fees.htm" title="Tuition&amp;Fees">Tuition&amp;Fees</a>
+   
+                            
+                               <a href="Degree_Programs.htm" title="Degree Programs">Degree Programs</a>
+   
+                            
+                               <a href="Apply.htm" title="Apply">Apply</a>
+   
+                            
+                               <a href="Downloadable_Forms.htm" title="Downloadable Forms">Downloadable Forms</a>
+   
+                           
+                          
+                            
+                            
+                        </div>
+                        
+                    </li>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+ 
+   
+   
+   <li class=" nav-li">
+                        <a href="javascript:;" class="nav-name">Academics</a>
+                        <div class="nav-list">
+                            <div>
+                                <span class="bubbleTop"></span>
+                                <span class="bubbleBottom"></span>
+                            </div>
+                            
+                               <a href="../Academics/School.htm" title="School">School</a>
+   
+                            
+                               <a href="../Academics/Professor.htm" title="Professor">Professor</a>
+   
+                            
+                               <a href="../Academics/SPU_Calendar.htm" title="SPU Calendar">SPU Calendar</a>
+   
+                            
+                               <a href="../Academics/Timetable.htm" title="Timetable">Timetable</a>
+   
+                            
+                               <a href="../Academics/HSK.htm" title="HSK">HSK</a>
+   
+                            
+                               <a href="../Academics/Rules_Regulations.htm" title="Rules&amp;Regulations">Rules&amp;Regulations</a>
+   
+                            
+                               <a href="http://ykdx.ijuying.com/index/member/login" target="_blank" title="Exam Results">Exam Results</a>
+   
+                            
+                               <a href="../Academics/Downloadable_Forms.htm" title="Downloadable Forms">Downloadable Forms</a>
+   
+                           
+                          
+                            
+                            
+                        </div>
+                        
+                    </li>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+ 
+   
+   
+   <li class=" nav-li">
+                        <a href="javascript:;" class="nav-name">Student Life</a>
+                        <div class="nav-list">
+                            <div>
+                                <span class="bubbleTop"></span>
+                                <span class="bubbleBottom"></span>
+                            </div>
+                            
+                               <a href="../Studen/Dormitory.htm" title="Dormitory">Dormitory</a>
+   
+                            
+                               <a href="../Studen/Activities_Union.htm" title="Activities&amp;Union">Activities&amp;Union</a>
+   
+                            
+                               <a href="../Studen/Life/Introduction.htm" title="Life in Shenyang">Life in Shenyang</a>
+   
+                            
+                               <a href="../Studen/Downloadable_Forms.htm" title="Downloadable Forms">Downloadable Forms</a>
+   
+                           
+                          
+                            
+                            
+                        </div>
+                        
+                    </li>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+ 
+   
+   
+   <li class=" nav-li">
+                        <a href="../Alumni.htm" class="nav-name">Alumni</a>
+                        
+                    </li>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+ 
+   
+   
+   <li class=" nav-li">
+                        <a href="../Contact_Us.htm" class="nav-name">Contact Us</a>
+                        
+                    </li>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+ </ul>
+            </div></div>
+    </div>
+
+    <div class="page-content">
+        <div class="w-1200">
+            <div>    
+<img src="../images/5.png">
+
+</div>
+
+            <div class="clear list">
+                <!-- 左 -->
+                 <div class="fl list-left">
+                    <div class="title center">
+Admissions</div>
+                    <div class="list-links"><ul>
+
+
+<a href="Admission_Requirement.htm" title="Admission Requirement"><li class="active">Admission Requirement</li></a>
+   
+  
+
+
+<a href="Application_Procedure.htm" title="Application Procedure"><li>Application Procedure</li></a>
+   
+  
+
+
+<a href="Scholarship.htm" title="Scholarship"><li>Scholarship</li></a>
+   
+  
+
+
+<a href="Tuition_Fees.htm" title="Tuition&amp;Fees"><li>Tuition&amp;Fees</li></a>
+   
+  
+
+
+<a href="Degree_Programs.htm" title="Degree Programs"><li>Degree Programs</li></a>
+   
+  
+
+
+<a href="Apply.htm" title="Apply"><li>Apply</li></a>
+   
+  
+
+
+<a href="Downloadable_Forms.htm" title="Downloadable Forms"><li>Downloadable Forms</li></a>
+   
+  
+  </ul></div>
+                </div>
+                <!-- 右 -->
+                <div class="fr list-right">
+                    <div class="list-title clear">
+                        <div class="fl title">
+Admission Requirement</div>
+                        <div class="fr location">    Current Location：
+                        <a href="../index.htm">Home</a>
+                >
+                <a href="#">Admissions</a>
+                >
+                <a href="Admission_Requirement.htm">Admission Requirement</a>
+</div>
+                    </div>
+                    
+                  
+                    <div class="edit-text">
+
+
+
+
+
+<script language="javascript" src="/system/resource/js/ajax.js"></script><script language="javascript">_getBatchClickTimes('null',1779830775,'wbnews','u9')</script>
+<script>function seeContenta9(contentid,size,displayid){	document.getElementById(contentid).innerHTML = '[';	for(var i=0;i<=size;i++){		var allcontentid = contentid+(i+1);		if(allcontentid==displayid){			document.getElementById(contentid).innerHTML += " <span id='"+allcontentid+"' name='"+allcontentid+"'  >"+(i+1)+"</span> ";			document.getElementById(displayid).style.display = 'block';		}else{			document.getElementById(contentid).innerHTML += " <span style='cursor:pointer' id='"+allcontentid+"' name='"+allcontentid+"' onclick=seeContenta9('"+contentid+"','"+size+"','"+allcontentid+"')  >"+(i+1)+"</span> ";			document.getElementById(allcontentid).style.display = 'none';		}	}	document.getElementById(contentid).innerHTML += ']';}</script>
+<script language="javascript" src="/system/resource/js/news/mp4video.js"></script>
+<script>_addDynClicks('wbnews',1779830775,1024)</script>
+<p>
+   
+    <div id="vsb_content_1024_u91"><div id="vsb_content"><h1 class="ue_t" name="tc" label="Title center" style="box-sizing: border-box; padding: 0px 4px 0px 0px; margin: 0px 0px 20px; font-weight: normal; border-bottom: 2px solid rgb(204, 204, 204); text-align: center;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; font-family: sans-serif; font-size: 16px; font-variant-numeric: normal; font-variant-east-asian: normal; font-weight: 700; text-align: left; text-indent: 120px;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; color: rgb(75, 75, 75);">Application Requirements</span></span></h1>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; text-indent: 32px; line-height: 21px;"><strong style="box-sizing: border-box; padding: 0px; margin: 0px;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; font-family: &quot;Times New Roman&quot;; line-height: 24px; font-size: 16px;"></span></strong></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; font-size: 18px;"><strong style="box-sizing: border-box; padding: 0px; margin: 0px;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;;">Education:</span></strong><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;;"> Undergraduate — diploma of high school or above</span></span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;; font-size: 18px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Master — bachelor degree or above</span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;; font-size: 18px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Doctor — master degree or above</span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; font-size: 18px;"><strong style="box-sizing: border-box; padding: 0px; margin: 0px;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;;">Age:</span></strong><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;;"> &nbsp;Undergraduate — under 35-year-old</span></span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;; font-size: 18px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Postgraduate — under 45-year-old</span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; font-size: 18px;"><strong style="box-sizing: border-box; padding: 0px; margin: 0px;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;;">Language:</span></strong><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;;"> </span></span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;; font-size: 18px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;HSK Level 4 or above (Major of Traditional Chinese Medicine Level 6 or above)</span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; font-size: 18px;"><strong style="box-sizing: border-box; padding: 0px; margin: 0px;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;;">Health<span style="box-sizing: border-box; padding: 0px; margin: 0px; font-family: 宋体;">：</span></span></strong><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;;">no disease in color discernment &amp; scent</span></span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; font-size: 18px;"><strong style="box-sizing: border-box; padding: 0px; margin: 0px;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; color: rgb(192, 0, 0); line-height: 27px; font-family: &quot;Times New Roman&quot;;">Application Deadline:</span></strong><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;;"> </span></span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; text-indent: 32px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;; font-size: 18px;"> &nbsp; Fall Semester — July 15</span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; text-indent: 32px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;; font-size: 18px;"> &nbsp; Spring Semester — Jan 15</span><br style="box-sizing: border-box; padding: 0px; margin: 0px;"></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; text-indent: 32px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; line-height: 27px; font-family: &quot;Times New Roman&quot;; font-size: 18px;"><br style="box-sizing: border-box; padding: 0px; margin: 0px;"></span></p>
+<hr style="box-sizing: border-box; padding: 0px; margin: 0px;">
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; font-size: 18px;"><strong style="box-sizing: border-box; padding: 0px; margin: 0px;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; color: rgb(75, 75, 75); font-family: &quot;Times New Roman&quot;;"><br style="box-sizing: border-box; padding: 0px; margin: 0px;"></span></strong></span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; font-size: 18px;"><strong style="box-sizing: border-box; padding: 0px; margin: 0px;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; color: rgb(75, 75, 75); font-family: &quot;Times New Roman&quot;;">Contacts:</span></strong></span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; color: rgb(75, 75, 75); font-family: &quot;Times New Roman&quot;; font-size: 18px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Ms. Zhang / Ms.Ge / Ms.Lin</span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; color: rgb(75, 75, 75); font-family: &quot;Times New Roman&quot;; font-size: 18px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;103 Wenhua Road, Shenyang, P. R. China, 110016</span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; color: rgb(75, 75, 75); font-family: &quot;Times New Roman&quot;; font-size: 18px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;International Students Office, Department of International Relations</span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; color: rgb(75, 75, 75); font-family: &quot;Times New Roman&quot;; font-size: 18px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Shenyang Pharmaceutical University</span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; color: rgb(75, 75, 75); font-family: &quot;Times New Roman&quot;; font-size: 18px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Tel：+86-24-43520133 / +86-24-43520136</span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; color: rgb(75, 75, 75); font-family: &quot;Times New Roman&quot;; font-size: 18px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Website: </span><a href="http://www.syphu.edu.cn/" target="_blank" style="box-sizing: border-box; padding: 0px; margin: 0px; outline: 0px; color: rgb(75, 75, 75); font-family: &quot;Times New Roman&quot;; font-size: 18px;"><span style="box-sizing: border-box; padding: 0px; margin: 0px;">http://www.syphu.edu.cn</span></a></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px; line-height: 1.75em;"><span style="box-sizing: border-box; padding: 0px; margin: 0px; color: rgb(75, 75, 75); font-family: &quot;Times New Roman&quot;; font-size: 18px;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Email: &nbsp;international@syphu.edu.cn</span></p>
+<p style="box-sizing: border-box; padding: 0px; margin-top: 0px; margin-bottom: 0px;"><br style="box-sizing: border-box; padding: 0px; margin: 0px; color: rgb(75, 75, 75); font-family: &quot;Microsoft YaHei&quot;, 微软雅黑; white-space: normal; background-color: rgb(255, 255, 255);"></p>
+<p><br></p></div></div>
+    <span id="vsb_content_1024_u9" name="vsb_content_1024_u9"></span><br /><br />
+    
+</p>
+</div>
+                    <!-- 分页 -->
+                    <div class="page"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- foot -->
+    <div class="foot">
+        <div class="w-1200">
+            <div class="foot-1 fl">
+                <div class="title">Quick Links</div>
+                <div class="links clear"><ul>
+                                                
+<li><a href="https://en.syphu.edu.cn/Admissions/Apply.htm" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1779830775, 75331)">Admission</a></li>
+                                                
+<li><a href="https://en.syphu.edu.cn/Alumni.htm" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1779830775, 75332)">Alumni</a></li>
+                                                
+<li><a href="https://www.syphu.edu.cn/" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1779830775, 75333)">ChineseVersion</a></li>
+                                                
+<li><a href="http://27.hslm5688.cn/index/about_us/staffdetail/id/2" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1779830775, 75334)">Careers</a></li>
+                                                
+<li><a href="https://en.syphu.edu.cn/About/Map.htm" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1779830775, 75335)">Map</a></li>
+                                                
+<li><a href="https://lib.syphu.edu.cn/" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1779830775, 75336)">Library</a></li>
+                                                
+<li><a href="https://en.syphu.edu.cn/Contact.jsp?urltype=tree.TreeTempUrl&amp;wbtreeid=1041" title="" onclick="_addDynClicks(&#34;wburl&#34;, 1779830775, 75337)">Contact Us</a></li>
+                                                
+</ul></div>
+            </div>
+            <div class="foot-2 fl">
+                <div class="title">Contact Us</div>
+                <div class="address clear"><!-- 版权内容请在本组件"内容配置-版权"处填写 -->
+<p>No. 103, Wenhua Rd,Shenhe Dist,Shenyang,Liaoning,P.R.China Postcode 110016 <br />No.26 Huatuo Rd, High &amp; New Tech Development Zone,Benxi,Liaoning,P.R.China Postcode 117004</p></div>
+            </div>
+            <div class="tx clear">    
+<div class="wx code fl">
+                    <img src="../dfiles/13631/public/static/home/images/wx.jpg">
+                    <div class="code-box">
+                        <div class="arrow"></div>
+                        <img src="../images/5f7fc6977c223.jpg" width="100" height="100">
+                        关注官方微信
+                    </div>
+                </div>
+
+
+  <div class="wb code fr">
+                    <img src="../dfiles/13631/public/static/home/images/wb.jpg">
+                    <div class="code-box">
+                        <div class="arrow"></div>
+                        <img src="../images/5f7fc6907746f.jpg" width="100" height="100">
+                        关注官方微博
+                    </div>
+                </div>
+
+
+
+</div>
+        </div>
+    </div>
+
+    <!-- 悬浮二维码 -->
+    <div class="suspen-code">    
+<img src="../images/ppp9.jpg">
+
+</div>
+
+
+
+</body> 
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

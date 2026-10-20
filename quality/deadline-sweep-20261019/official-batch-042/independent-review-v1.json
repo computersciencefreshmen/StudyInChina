@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-042-20261019",
+  "reviewer": "independent-offline-agent-dates-041",
+  "reviewedAt": "2026-10-19T13:12:42.328Z",
+  "result": "source-only-pass",
+  "finalReportSha256": "aac4c679eff569d3e6aee3b97c78b2b79a968cff2c0f4f7097fb628dc9120662",
+  "report": {
+    "path": "report.json",
+    "sha256": "aac4c679eff569d3e6aee3b97c78b2b79a968cff2c0f4f7097fb628dc9120662"
+  },
+  "reviewScope": "Exactly eleven dispatched records at seven previously checked institution scopes; ten origin bodies, canonical rows/parents/sources and exact date/clock boundaries reviewed offline. Relevant CUST PDF pages 2 and 6 independently visually inspected. Only this receipt is added under batch042.",
+  "summary": {
+    "checksPassed": 21,
+    "checksFailed": 0,
+    "recordsReviewed": 11,
+    "universitiesReviewed": 7,
+    "recordOutcomes": {
+      "unknown": 5,
+      "blocked": 1,
+      "closed": 5
+    },
+    "originalBodiesChecked": 10,
+    "pdfOriginalsChecked": 1,
+    "pdfVisualPagesRead": 2,
+    "networkRequests": 0,
+    "canonicalWrites": 0
+  },
+  "checks": [
+    {
+      "name": "root-frozen-final-report-sha",
+      "passed": true
+    },
+    {
+      "name": "six-current-canonical-inputs-and-before-after-hashes",
+      "passed": true
+    },
+    {
+      "name": "selection-summary-queue-inventory-dispatch-and-extension-pins",
+      "passed": true
+    },
+    {
+      "name": "exact-eleven-dispatched-records-once-seven-institution-scopes",
+      "passed": true
+    },
+    {
+      "name": "no-prior-assessed-or-approved-id-overlap",
+      "passed": true
+    },
+    {
+      "name": "canonical-full-rows-parents-linked-programs-sources-universities",
+      "passed": true
+    },
+    {
+      "name": "eleven-public-reads-ten-origin-bodies-one-native-failure",
+      "passed": true
+    },
+    {
+      "name": "all-capture-diagnostics-archive-web-and-pdf-pins",
+      "passed": true
+    },
+    {
+      "name": "ccnu-single403-fallback-then-cooldown-no-origin-body",
+      "passed": true
+    },
+    {
+      "name": "cust-original-pdf-text-and-two-complete-visual-page-pins",
+      "passed": true,
+      "detail": "Independently inspected complete original English page 2 and Chinese page 6. Both identify the 2026 graduate scholarship; the differing February 28 boundary wording is retained."
+    },
+    {
+      "name": "cust-english-before-versus-chinese-Feb28-boundary-preserved",
+      "passed": true,
+      "detail": "The English says before February 28 while Chinese names February 28 as the deadline. No clock time, inclusive end of day or inferred February 27 replacement is asserted."
+    },
+    {
+      "name": "csu-only-2026-masters-doctoral-university-award-May31",
+      "passed": true,
+      "detail": "The exact university scholarship guide binds graduate applicants. Undergraduate contact information in the footer is not an undergraduate award-date scope."
+    },
+    {
+      "name": "ccom-master-exact-16-local-clock-with-no-invented-timezone",
+      "passed": true,
+      "detail": "The report preserves the exact 16:00 literal and does not invent UTC+08:00 or extend it to the end of the day."
+    },
+    {
+      "name": "ccom-doctoral-date-not-borrowed-from-master-guide",
+      "passed": true
+    },
+    {
+      "name": "cuit-separate-spring2026-and-autumn2026-language-days",
+      "passed": true
+    },
+    {
+      "name": "cad-and-csust-independent-awards-remain-unknown",
+      "passed": true
+    },
+    {
+      "name": "closed-dates-past-and-matching-original-text-unknowns-null",
+      "passed": true
+    },
+    {
+      "name": "all-source-only-flags-and-unassessed-openings",
+      "passed": true
+    },
+    {
+      "name": "thirty-nine-prior-frozen-report-pins",
+      "passed": true
+    },
+    {
+      "name": "eleven-outcomes-four-cycles-seven-awards-zero-side-effects",
+      "passed": true
+    },
+    {
+      "name": "final-report-and-six-inputs-unchanged-after-review",
+      "passed": true
+    }
+  ],
+  "sourceOriginalPins": [
+    {
+      "path": "cad-awards.html",
+      "sha256": "d67ca2d044c1db397874d5c0c036464433fe13b141f842c7b63ad6700ca79669"
+    },
+    {
+      "path": "ccom-graduate.html",
+      "sha256": "7ed686c77ecbfc80646db30cd078d408e1df0db42ca84b0fc26b0b11286a87f2"
+    },
+    {
+      "path": "csu-award.html",
+      "sha256": "d409f36d3c07a60f9d446f19016b28b2205445749b5184f8b37d4c9a78761465"
+    },
+    {
+      "path": "cust-award.html",
+      "sha256": "d7489ce1b32b04f672fc59e95ac57670ffa376cc92d77f79a92d906ab867b99a"
+    },
+    {
+      "path": "cust-guide-pdf.pdf",
+      "sha256": "8f60055ee0c334595b7598a0a3c5cc105c94d397a83a6dc9c617a5a079b8b4f4"
+    },
+    {
+      "path": "csust-award.html",
+      "sha256": "45edd92bb7f03912df55264ffbc576e73d3b61c308fcf3c4509f992e9b9ba372"
+    },
+    {
+      "path": "csust-awards.html",
+      "sha256": "61ea74649dee52962f362ab7b3bb17e40dd90e172bd84e148b0eae47116e1623"
+    },
+    {
+      "path": "cuit-language.html",
+      "sha256": "c8da6efd79948fd4e398e3f11644dc6a1a2a5b2e1328978c114086dcc02a16c7"
+    },
+    {
+      "path": "ccom-master.html",
+      "sha256": "2bbbe7ca31452aa486f61aba4f5a61c76395d73ae0be7b1e3bb9bc904eff4565"
+    },
+    {
+      "path": "ccom-master-original.html",
+      "sha256": "02d2e00496ae04dfe3f0ec9f5051f7c540b2361b492b13f8c5e663a2f364b701"
+    }
+  ],
+  "artifactPins": [
+    {
+      "path": "selection.json",
+      "sha256": "aa04fd2d467513e8c213d83963fba698b799b257de03faf19429d63bc0e6f9cc"
+    },
+    {
+      "path": "captures.json",
+      "sha256": "a3a0c4d7b1877143e77f3a7323e4762bc9f4e3de995071084ffa8d42c59e3a5b"
+    },
+    {
+      "path": "support-captures.json",
+      "sha256": "d7b9231becbfb20d58b5f2aa8647717da0990521e37443905a80e3a7545630b3"
+    },
+    {
+      "path": "ccom-original-capture.json",
+      "sha256": "3044f12555b3f8dcef6137a5cc3fa1c1605973efbd82b15b46183417cb37e9f1"
+    },
+    {
+      "path": "pdf-offline-extraction.json",
+      "sha256": "bc70b39f034aa41ac491368290c58f56a2da11a7595998061a5a42441b0d8dc3"
+    },
+    {
+      "path": "ccnu-web-fallback.json",
+      "sha256": "659f0d3e4d0434a2663c9036f64bfaf859f3afb295f3397bb3ccb0bc41ca8ba4"
+    },
+    {
+      "path": "archive-source-check.json",
+      "sha256": "6cdb941958105de51792d1af2ad83fa96121f18db821423d3f770f9389fa7ef4"
+    },
+    {
+      "path": "acquisition-diagnostics.json",
+      "sha256": "891dc586d8e942dd22399c9acc6bd0c1cb20414db4cf4f9c2d6f6b763fb3ff87"
+    }
+  ],
+  "recordSetSha256": "47990554175a887e13719068b0206683ffb361c1c54b2353755de630013643b7",
+  "limitations": [
+    "Acceptance is source-only. Five closed observations remain narrow historical candidates; five unknown and one blocked do not establish availability.",
+    "CUST English before February 28 and Chinese February 28 cutoff are both retained. No inclusivity or clock time is resolved.",
+    "CCOM master March 2 at 16:00 is preserved as an explicit local literal without invented timezone; doctoral route remains unknown.",
+    "CSU May 31 applies only to its 2026 master/doctoral university-scholarship route. CUIT spring and autumn language cycles retain separate dates; Sichuan award does not borrow them.",
+    "No whole-school completion, non-date fact renewal, successor-year availability or programme cessation is certified."
+  ],
+  "finalReportUnchanged": true
+}

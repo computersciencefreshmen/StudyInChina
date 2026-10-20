@@ -1,0 +1,696 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-011-20261019",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "state": "completed-with-source-cooldowns-one-unknown-one-conflict",
+  "completedAt": "2026-10-19T05:13:38.060Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "selection": "Exactly selectedUniversityIds17–20 from the pinned next-official-date-targets-v1.json: WKU4,Fudan1,RUC3,Tsinghua6.",
+  "targetPlan": "quality/deadline-sweep-20261019/next-official-date-targets-v1.json",
+  "targetPlanSha256": "1085ae2f3b1cd0a815e62c0764d85751da130b3087f0e9f26f3dff4258ba40f5",
+  "acquisition": {
+    "newDistinctOfficialUrlsAttempted": 4,
+    "newDistinctOfficialUrlsReadSuccessfully": 2,
+    "newDateEvidenceSourcesRead": 2,
+    "reusedPriorSuccessfulCaptureSources": 2,
+    "reusedPriorFailureSourceUrls": 1,
+    "noNewWkuRequests": true,
+    "noNewSigsRequests": true,
+    "noCertificateBypass": true,
+    "toolParserFailureAndNativeFallbackRequestsAreNotDistinctOfficialSources": true,
+    "rawCurrentCaptures": [
+      {
+        "url": "https://iss.fudan.edu.cn/Winter/Application.htm",
+        "rawPath": "fudan-winter.html",
+        "rawSha256": "d159a8310ac7da271d60327d452cbed1a1f00e4f71202856998af319606a5c52"
+      },
+      {
+        "url": "https://intl-nondegree.tsinghua.edu.cn/f/yzlxs/yz_lxs_kstzb/view?id=264627",
+        "rawPath": "thu-visiting.html",
+        "rawSha256": "698034977aa11f4960abda730fe6079e9cb32283c41b45a0d999a3476ea7d211"
+      }
+    ]
+  },
+  "priorReportPins": [
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    }
+  ],
+  "summary": {
+    "universitiesWithScopedChecks": 4,
+    "recordsAssessed": 14,
+    "recordResults": {
+      "blocked": 7,
+      "unchanged": 5,
+      "unknown": 1,
+      "conflict": 1
+    },
+    "canonicalWrites": 0,
+    "fullFactsCertified": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "paidModelCalls": 0,
+    "publicationActions": 0
+  },
+  "groups": [
+    {
+      "key": "wku-identical-source-cooldown",
+      "universityId": "uni-wenzhou-kean-university",
+      "sourceUrl": "https://admission.wku.edu.cn/en/internationalstudents",
+      "evidenceMode": "reused-prior-failure-cooldown",
+      "newOfficialWebsiteRead": false,
+      "originalObservedAt": "2026-10-19T04:34:54.000Z",
+      "priorReportPin": {
+        "batch": "official-batch-004",
+        "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+      },
+      "originalFailure": "web_open_timeout",
+      "priorFailureScope": "The same URL timed out for the architecture transfer route in batch004; no new site or network condition is available.",
+      "scope": "Four additional stored spring2027 transfer routes. Shared URL failure is reused, not their deadline verification.",
+      "retryPolicy": "Do not immediately repeat an unchanged failed URL. Reattempt only after source/network conditions change or an explicit later bounded recovery window.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-wenzhou-kean-university-biology-cell-molecular-bs-spring-transfer",
+          "programId": "program-wenzhou-kean-university-biology-cell-molecular-bs",
+          "universityId": "uni-wenzhou-kean-university",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": null,
+          "storedDeadline": "2026-11-01",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "3989c16151a504e80af0afbfd0ad7a19c1e7d6c64f25a5b37df76f26a0342ed7",
+          "canonicalProgramSha256": "d50af961890aa35988ff64a49f3f7bf1e7e0566b0989660d3d2c0bc225176ea4",
+          "evidenceSourceIds": [
+            "src-wku-international-admissions-2027"
+          ],
+          "sourceIds": [
+            "src-wku-international-admissions-2027"
+          ],
+          "publicationBefore": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "result": "blocked",
+          "officialDeadline": null,
+          "officialOpensOn": null,
+          "reason": "reused-source-timeout-cooldown-no-new-date-evidence"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-wenzhou-kean-university-computer-science-bs-spring-transfer",
+          "programId": "program-wenzhou-kean-university-computer-science-bs",
+          "universityId": "uni-wenzhou-kean-university",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": null,
+          "storedDeadline": "2026-11-01",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "5bec74be1b0aac1b39448a6e35453c78303713a8247e535858e98c2410ea25b5",
+          "canonicalProgramSha256": "1b0b3324e161afbe4afe9228f7f6f89155aaa0b3d4014e58d71f74a70918693f",
+          "evidenceSourceIds": [
+            "src-wku-international-admissions-2027"
+          ],
+          "sourceIds": [
+            "src-wku-international-admissions-2027"
+          ],
+          "publicationBefore": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "result": "blocked",
+          "officialDeadline": null,
+          "officialOpensOn": null,
+          "reason": "reused-source-timeout-cooldown-no-new-date-evidence"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-wenzhou-kean-university-finance-bs-spring-transfer",
+          "programId": "program-wenzhou-kean-university-finance-bs",
+          "universityId": "uni-wenzhou-kean-university",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": null,
+          "storedDeadline": "2026-11-01",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "5c16610857d7a915f43a23eff0bcf01f3138a6b5b1aabfebf29ec729ab738f11",
+          "canonicalProgramSha256": "1f287eea327a7f2eb98b12abe126cbb0c75197e1837fbef4aa839294c3c55fb9",
+          "evidenceSourceIds": [
+            "src-wku-international-admissions-2027"
+          ],
+          "sourceIds": [
+            "src-wku-international-admissions-2027"
+          ],
+          "publicationBefore": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "result": "blocked",
+          "officialDeadline": null,
+          "officialOpensOn": null,
+          "reason": "reused-source-timeout-cooldown-no-new-date-evidence"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-wenzhou-kean-university-global-business-bs-spring-transfer",
+          "programId": "program-wenzhou-kean-university-global-business-bs",
+          "universityId": "uni-wenzhou-kean-university",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": null,
+          "storedDeadline": "2026-11-01",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "7cc8a3fba70d86b7eab4fb587d79c3b50acbb33abfc293ee05156ce25ac465de",
+          "canonicalProgramSha256": "0c411efe06bfe7ca5cdb38867c8684aa582ee62d802a31189515fa1101893805",
+          "evidenceSourceIds": [
+            "src-wku-international-admissions-2027"
+          ],
+          "sourceIds": [
+            "src-wku-international-admissions-2027"
+          ],
+          "publicationBefore": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "result": "blocked",
+          "officialDeadline": null,
+          "officialOpensOn": null,
+          "reason": "reused-source-timeout-cooldown-no-new-date-evidence"
+        }
+      ]
+    },
+    {
+      "key": "fudan-winter-non-chinese-applicants",
+      "universityId": "uni-fudan-university",
+      "sourceUrl": "https://iss.fudan.edu.cn/Winter/Application.htm",
+      "evidenceMode": "new-official-read",
+      "newOfficialWebsiteRead": true,
+      "capture": {
+        "key": "fudan-winter",
+        "url": "https://iss.fudan.edu.cn/Winter/Application.htm",
+        "method": "GET",
+        "startedAt": "2026-10-19T05:10:47.049967+00:00",
+        "httpStatus": 200,
+        "finalUrl": "https://iss.fudan.edu.cn/Winter/Application.htm",
+        "contentType": "text/html",
+        "bytes": 33940,
+        "rawPath": "fudan-winter.html",
+        "rawSha256": "d159a8310ac7da271d60327d452cbed1a1f00e4f71202856998af319606a5c52",
+        "textPath": "fudan-winter.txt",
+        "textSha256": "12d2aab984fe271261e540763fe5ce312e52530bd4a63babbb32f77eaec638e4",
+        "completedAt": "2026-10-19T05:10:49.159640+00:00"
+      },
+      "observedAt": "2026-10-19T05:10:49.159640+00:00",
+      "scope": "Fudan International Winter Session2026, Dec21,2026–Jan8,2027; non-Chinese student deadline only.",
+      "dateQuote": "Application Deadline for Non-Chinese: 11:00am, November 9, 2026 (Beijing time)",
+      "evidenceLocator": "Important Deadline / non-Chinese application deadline",
+      "excludedDates": "Early-bird August31, Chinese-applicant November23, and payment December7 are different routes or actions.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-0d906c14602b",
+          "programId": "program-fudan-university-fudan-international-winter-session-2026-other",
+          "universityId": "uni-fudan-university",
+          "degreeLevel": "other",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDeadline": "2026-11-09",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "cbaa5edab37cab494ac1bd4e057ca6cbe3268b08b1baead0aceee865747cdb0d",
+          "canonicalProgramSha256": "aff060b77ebba35c8b384132c9c1d154b687e25ba660435eac58eccd7f8fe305",
+          "evidenceSourceIds": [
+            "src-program-review-bb96b24dcc05"
+          ],
+          "sourceIds": [
+            "src-program-review-bb96b24dcc05"
+          ],
+          "publicationBefore": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "result": "unchanged",
+          "officialDeadline": "2026-11-09",
+          "officialCutoffAt": "2026-11-09T11:00:00+08:00",
+          "officialOpensOn": null,
+          "deadlineBoundary": "exact-time",
+          "openingDateResult": "not-assessed",
+          "precisionNote": "The full deadline day is not available after11:00Beijing time."
+        }
+      ]
+    },
+    {
+      "key": "ruc-pdf-certificate-failure",
+      "universityId": "uni-renmin-university-of-china",
+      "sourceUrl": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+      "evidenceMode": "new-attempt-blocked",
+      "newOfficialWebsiteRead": false,
+      "failure": {
+        "key": "ruc-nondegree",
+        "url": "https://iso.ruc.edu.cn/docs/2025-12/b911becc69294e3ebd5b337c5fbe70e4.pdf",
+        "method": "GET",
+        "startedAt": "2026-10-19T05:10:47.054316+00:00",
+        "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate (_ssl.c:1010)>",
+        "completedAt": "2026-10-19T05:10:48.453660+00:00"
+      },
+      "scope": "Three stored non-degree routes sharing the same exact RUC brochure. Neither original year nor October15–November15 dates could be read.",
+      "acquisitionFailures": [
+        "Web PDF parser timed out.",
+        "Python TLS: CERTIFICATE_VERIFY_FAILED self-signed certificate.",
+        "Windows curl/Schannel: SEC_E_UNTRUSTED_ROOT; no certificate validation bypass."
+      ],
+      "requiresChangedCondition": "A trusted TLS route or newly accessible official source; no repeated immediate attempts.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-5e89297bb85f",
+          "programId": "program-renmin-university-of-china-chinese-language-program-language",
+          "universityId": "uni-renmin-university-of-china",
+          "degreeLevel": "language",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": "2026-10-15",
+          "storedDeadline": "2026-11-15",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "b37e5d5e2b7a1f109c64b1adbb08566b65b974304c0e4ffdbe854f791cf253f9",
+          "canonicalProgramSha256": "d59bba81bdacb838dc001996dc93e1b3ba4f5055969687aeb96d4dd25d053423",
+          "evidenceSourceIds": [
+            "src-program-review-d80b5ba390d3"
+          ],
+          "sourceIds": [
+            "src-program-review-d80b5ba390d3"
+          ],
+          "publicationBefore": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "result": "blocked",
+          "officialDeadline": null,
+          "officialOpensOn": null,
+          "reason": "official-pdf-unreadable-with-trusted-tls"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-d4f907d22a04",
+          "programId": "program-renmin-university-of-china-finance-junior-visiting-program-other",
+          "universityId": "uni-renmin-university-of-china",
+          "degreeLevel": "other",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": "2026-10-15",
+          "storedDeadline": "2026-11-15",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "27a4d8b88187e919c61ee20ed77a1e45bc95895fc41908e03c48b07a5c2fda82",
+          "canonicalProgramSha256": "4d27aa142cca9185d8355910c47aa319b79c181e494c73abadbc7eda09f6df2c",
+          "evidenceSourceIds": [
+            "src-program-review-d80b5ba390d3"
+          ],
+          "sourceIds": [
+            "src-program-review-d80b5ba390d3"
+          ],
+          "publicationBefore": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "result": "blocked",
+          "officialDeadline": null,
+          "officialOpensOn": null,
+          "reason": "official-pdf-unreadable-with-trusted-tls"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-fba0e9f1f48a",
+          "programId": "program-renmin-university-of-china-international-communication-senior-visiting-p",
+          "universityId": "uni-renmin-university-of-china",
+          "degreeLevel": "other",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": "2026-10-15",
+          "storedDeadline": "2026-11-15",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "f1ff8a6ee07492219cafc0dbdd1fa694d34c81b25488abc7704eb98b30891bc6",
+          "canonicalProgramSha256": "4b21227db6c2a58ad80a00ddeb64b1301c16574369850cae2edd582f669b26ad",
+          "evidenceSourceIds": [
+            "src-program-review-d80b5ba390d3"
+          ],
+          "sourceIds": [
+            "src-program-review-d80b5ba390d3"
+          ],
+          "publicationBefore": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "result": "blocked",
+          "officialDeadline": null,
+          "officialOpensOn": null,
+          "reason": "official-pdf-unreadable-with-trusted-tls"
+        }
+      ]
+    },
+    {
+      "key": "thu-visiting-current-2026-2027-guide",
+      "universityId": "uni-tsinghua-university",
+      "sourceUrl": "https://intl-nondegree.tsinghua.edu.cn/f/yzlxs/yz_lxs_kstzb/view?id=264627",
+      "evidenceMode": "new-official-read",
+      "newOfficialWebsiteRead": true,
+      "capture": {
+        "key": "thu-visiting",
+        "url": "https://intl-nondegree.tsinghua.edu.cn/f/yzlxs/yz_lxs_kstzb/view?id=264627",
+        "method": "GET",
+        "startedAt": "2026-10-19T05:10:47.056065+00:00",
+        "httpStatus": 200,
+        "finalUrl": "https://intl-nondegree.tsinghua.edu.cn/f/yzlxs/yz_lxs_kstzb/view?id=264627",
+        "contentType": "text/html; charset=UTF-8",
+        "bytes": 25169,
+        "rawPath": "thu-visiting.html",
+        "rawSha256": "698034977aa11f4960abda730fe6079e9cb32283c41b45a0d999a3476ea7d211",
+        "textPath": "thu-visiting.txt",
+        "textSha256": "de5faedfe7cda2faf8fea34e8ba97e19606bd0760e39648a886299fa5d83d44e",
+        "completedAt": "2026-10-19T05:10:50.731576+00:00"
+      },
+      "observedAt": "2026-10-19T05:10:50.731576+00:00",
+      "scope": "Full current Admission to Visiting Student Program2026/2027 page, with separately printed Fall2026 and Spring2027 schedules.",
+      "springQuote": "2027 Spring Semester Enrolment: 15th Oct. 2026 - 30th Nov. 2026",
+      "previousAutumnSchedule": {
+        "intakeYear": 2026,
+        "opensOn": "2026-03-15",
+        "closesOn": "2026-05-30"
+      },
+      "handbookAttempt": {
+        "url": "https://intl-nondegree.tsinghua.edu.cn/b/yzlxs/yz_sys_xxfjb/download/file?id=536584",
+        "method": "GET",
+        "discoveredAt": "thu-visiting.html Program Handbook anchor, file id 536584",
+        "startedAt": "2026-10-19T05:11:47.659403+00:00",
+        "httpStatus": 200,
+        "finalUrl": "https://intl-nondegree.tsinghua.edu.cn/b/yzlxs/yz_sys_xxfjb/download/file?id=536584",
+        "error": "AssertionError: ",
+        "completedAt": "2026-10-19T05:12:04.770091+00:00"
+      },
+      "handbookUsedAsEvidence": false,
+      "relativeRecommendation": "One-to-two-weeks-early submission is advice, not a replacement deadline.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-thu-visiting-student-spring-2027",
+          "programId": "program-tsinghua-university-visiting-student-program-other",
+          "universityId": "uni-tsinghua-university",
+          "degreeLevel": "other",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedOpensOn": "2026-10-15",
+          "storedDeadline": "2026-11-30",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "2a6989938a3049b24a50c052040addef0a69b2f296d4e7af4804716f3f2fd975",
+          "canonicalProgramSha256": "66a5ebc60e3f492b30167d3ff20390048b6b104252c1d5d61c8d6d0c5b7bb0af",
+          "evidenceSourceIds": [
+            "src-thu-visiting-student-current"
+          ],
+          "sourceIds": [
+            "src-thu-visiting-student-current",
+            "source-thu-visiting-fees-schedule"
+          ],
+          "publicationBefore": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "result": "unchanged",
+          "officialOpensOn": "2026-10-15",
+          "officialDeadline": "2026-11-30",
+          "deadlineBoundary": "date-only-no-time-stated"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-thu-visiting-student-autumn-2027",
+          "programId": "program-tsinghua-university-visiting-student-program-other",
+          "universityId": "uni-tsinghua-university",
+          "degreeLevel": "other",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "storedOpensOn": "2027-03-15",
+          "storedDeadline": "2027-05-15",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "30a70a4971bef97b225ca8a3ea653b4c651d177952d080592e9e8305c9575b29",
+          "canonicalProgramSha256": "66a5ebc60e3f492b30167d3ff20390048b6b104252c1d5d61c8d6d0c5b7bb0af",
+          "evidenceSourceIds": [
+            "src-thu-visiting-student-current"
+          ],
+          "sourceIds": [
+            "src-thu-visiting-student-current",
+            "source-thu-visiting-fees-schedule"
+          ],
+          "publicationBefore": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "result": "unknown",
+          "officialOpensOn": null,
+          "officialDeadline": null,
+          "reason": "No2027autumn schedule in the current2026/2027guide. Its2026fallMay30must not roll into2027or certify the storedMay15."
+        }
+      ]
+    },
+    {
+      "key": "thu-sigs-raw-routes-prior-007-evidence",
+      "universityId": "uni-tsinghua-university",
+      "sourceUrl": "https://www.sigs.tsinghua.edu.cn/_t195/2026/0918/c7769a293366/page.psp",
+      "evidenceMode": "reused-prior-official-capture",
+      "newOfficialWebsiteRead": false,
+      "priorReportPin": {
+        "batch": "official-batch-007",
+        "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+      },
+      "originalObservedAt": "2026-10-19T04:48:42.007Z",
+      "priorCapturedSources": [
+        {
+          "name": "thu-sigs-guide",
+          "url": "https://www.sigs.tsinghua.edu.cn/_t195/2026/0918/c7769a293366/page.psp",
+          "method": "GET",
+          "startedAt": "2026-10-19T04:48:41.273Z",
+          "completedAt": "2026-10-19T04:48:42.007Z",
+          "status": 200,
+          "contentType": "text/html;charset=UTF-8",
+          "bodyPath": "thu-sigs-guide.html",
+          "bodySha256": "ad0a7b8bfb2355a775b07c50844640c881fe9785eff5e408adb4f7d725c1e38d",
+          "bytes": 197525,
+          "requestPurpose": "Read public official admissions dates only",
+          "requestBody": null,
+          "canonicalWrites": 0,
+          "paidCalls": 0,
+          "receiptPath": "thu-sigs-guide.receipt.json",
+          "receiptSha256": "383f4166ea95900b949f47d45459fcd38b2d3e2fbaa4f07cf1473fda318878e2"
+        },
+        {
+          "name": "thu-sigs-public-query",
+          "url": "https://yzbm.tsinghua.edu.cn/publish/s05/s0503/querydetail",
+          "method": "POST",
+          "startedAt": "2026-10-19T04:48:45.523Z",
+          "completedAt": "2026-10-19T04:48:45.597Z",
+          "status": 200,
+          "contentType": "application/json;charset=UTF-8",
+          "bodyPath": "thu-sigs-public-query.json",
+          "bodySha256": "525aa60b8c7b8629e1f243488ea4706e2fb3542c621cb3b64e7da492fa741588",
+          "bytes": 98609,
+          "requestPurpose": "Read public official admissions dates only",
+          "requestBody": "xxbm=84682384-10d4-4eb6-9d49-356299983813&zslx=1&yxsdm=599&showUsage=false",
+          "canonicalWrites": 0,
+          "paidCalls": 0,
+          "receiptPath": "thu-sigs-public-query.receipt.json",
+          "receiptSha256": "6837449b54da0971a67f1a61afd0462096aa4a3a14d61d8be37eac33f37db52b"
+        }
+      ],
+      "priorEvidenceBaseDirectory": "quality/deadline-sweep-20261019/official-batch-007",
+      "dateQuote": "申请报名起止时间（北京时间）：即日起至2027年05月15日17:00",
+      "generalDeadline": "2027-05-15",
+      "generalCutoffAt": "2027-05-15T17:00:00+08:00",
+      "scope": "General2027internationalgraduate application deadline for four held raw master/doctoral routes; no programme-identity or full-fact renewal.",
+      "openingDateQualification": "即日起 is relative wording. The stored2026-09-18opening is not newly confirmed as an explicit calendar date.",
+      "fundingQualification": "Funding advice to apply early is not a separate student scholarship cutoff.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-thu-sigs-0812j3-autumn-2027",
+          "programId": "program-tsinghua-university-doctoral-program-in-data-science-and-information-technology-doctorate",
+          "universityId": "uni-tsinghua-university",
+          "degreeLevel": "doctorate",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "storedOpensOn": "2026-09-18",
+          "storedDeadline": "2027-05-15",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "c6ba546c6525723a100a983ab9176ae004446866e8f867858ebadf63cc6b5ca1",
+          "canonicalProgramSha256": "6953e18ade2e883cd1752648cc25a65fa577d79e9c6ed31c19954ffdaf6018b3",
+          "evidenceSourceIds": [
+            "src-thu-sigs-international-graduate-2027"
+          ],
+          "sourceIds": [
+            "src-thu-sigs-international-graduate-2027"
+          ],
+          "publicationBefore": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "result": "unchanged",
+          "officialDeadline": "2027-05-15",
+          "officialCutoffAt": "2027-05-15T17:00:00+08:00",
+          "officialOpensOn": null,
+          "deadlineBoundary": "exact-time",
+          "openingDateResult": "unknown-relative-wording"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-thu-sigs-0830j2-autumn-2027",
+          "programId": "program-tsinghua-university-doctoral-program-in-environmental-science-and-new-energy-technology-doctorate",
+          "universityId": "uni-tsinghua-university",
+          "degreeLevel": "doctorate",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "storedOpensOn": "2026-09-18",
+          "storedDeadline": "2027-05-15",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "a347e09382f2473d417bca9a2410fb570a3835e6810e601ebf298472b7e82306",
+          "canonicalProgramSha256": "f453656de0e2806afb7d24d769503c31eecd9f9169da467e2e472d5e0b78628e",
+          "evidenceSourceIds": [
+            "src-thu-sigs-international-graduate-2027"
+          ],
+          "sourceIds": [
+            "src-thu-sigs-international-graduate-2027"
+          ],
+          "publicationBefore": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "result": "unchanged",
+          "officialDeadline": "2027-05-15",
+          "officialCutoffAt": "2027-05-15T17:00:00+08:00",
+          "officialOpensOn": null,
+          "deadlineBoundary": "exact-time",
+          "openingDateResult": "unknown-relative-wording"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-thu-sigs-085700-autumn-2027",
+          "programId": "program-tsinghua-university-masters-program-in-green-environmental-infrastructure-master",
+          "universityId": "uni-tsinghua-university",
+          "degreeLevel": "master",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "storedOpensOn": "2026-09-18",
+          "storedDeadline": "2027-05-15",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "8d6e866ae75a714a6d9142c9b9bf809d53f6ce5350914666cea287eefbe86b7d",
+          "canonicalProgramSha256": "f5e5aa2a52e894c1d0d4657c34bcb47733e878f856b092ceb7e534c5b8baa9ac",
+          "evidenceSourceIds": [
+            "src-thu-sigs-international-graduate-2027"
+          ],
+          "sourceIds": [
+            "src-thu-sigs-international-graduate-2027"
+          ],
+          "publicationBefore": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "result": "conflict",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "officialOpensOn": null,
+          "openingDateResult": "unknown-relative-wording",
+          "generalGuideDeadline": "2027-05-15",
+          "generalGuideCutoffAt": "2027-05-15T17:00:00+08:00",
+          "specificProgrammeCatalogueDeadline": "2027-05-17",
+          "specificProgrammeCatalogueCutoffAt": "2027-05-17T17:00:00+08:00",
+          "specificProgramme": {
+            "majorCode": "085700",
+            "directionCode": "02",
+            "chineseName": "绿色环境基础设施"
+          },
+          "reason": "Same named Green Environmental Infrastructure route has the007specific catalogue May17/general guide May15 conflict; no automatic precedence or change."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-thu-sigs-125604-autumn-2027",
+          "programId": "program-tsinghua-university-logistics-engineering-and-management-master",
+          "universityId": "uni-tsinghua-university",
+          "degreeLevel": "master",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "storedOpensOn": "2026-09-18",
+          "storedDeadline": "2027-05-15",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "ddc388039c39abe31df0b97cc7f5ace177f1c337998b5524d0754bda10104a0c",
+          "canonicalProgramSha256": "f66f2dfb94ae2d2d2c5d9ce125b0e98cde1648a8e69b56765e73e079bc0e1ff5",
+          "evidenceSourceIds": [
+            "src-thu-sigs-international-graduate-2027"
+          ],
+          "sourceIds": [
+            "src-thu-sigs-international-graduate-2027"
+          ],
+          "publicationBefore": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "result": "unchanged",
+          "officialDeadline": "2027-05-15",
+          "officialCutoffAt": "2027-05-15T17:00:00+08:00",
+          "officialOpensOn": null,
+          "deadlineBoundary": "exact-time",
+          "openingDateResult": "unknown-relative-wording"
+        }
+      ]
+    }
+  ],
+  "dateCheckedRecordIds": [
+    "cycle-2026-0d906c14602b",
+    "cycle-thu-visiting-student-spring-2027",
+    "cycle-thu-sigs-0812j3-autumn-2027",
+    "cycle-thu-sigs-0830j2-autumn-2027",
+    "cycle-thu-sigs-125604-autumn-2027"
+  ],
+  "unresolvedDateRecordIds": [
+    "cycle-2027-wenzhou-kean-university-biology-cell-molecular-bs-spring-transfer",
+    "cycle-2027-wenzhou-kean-university-computer-science-bs-spring-transfer",
+    "cycle-2027-wenzhou-kean-university-finance-bs-spring-transfer",
+    "cycle-2027-wenzhou-kean-university-global-business-bs-spring-transfer",
+    "cycle-2026-5e89297bb85f",
+    "cycle-2026-d4f907d22a04",
+    "cycle-2026-fba0e9f1f48a",
+    "cycle-thu-visiting-student-autumn-2027",
+    "cycle-thu-sigs-085700-autumn-2027"
+  ],
+  "limitations": [
+    "No canonical, shared progress, Git or publication changes.",
+    "Prior source reads retain their original timestamps/hashes and do not count as new official website reads.",
+    "A matched deadline does not confirm a stored opening date based on relative wording, other facts, or the complete programme catalogue.",
+    "Blocked PDFs, missing2027autumn schedules and conflicting programme deadlines remain unresolved. No year or date is rolled forward."
+  ]
+}

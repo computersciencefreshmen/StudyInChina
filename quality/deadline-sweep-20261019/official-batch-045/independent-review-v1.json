@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-20T08:38:26.178Z",
+  "reviewer": "dates_034-independent",
+  "reviewType": "offline-final-source-only",
+  "result": "source-only-pass",
+  "finalReportSha256": "f3ebbddc05a1efe890d41d7f0f0d7eab1fb506eec26f48b4f9dc4e639da24d92",
+  "finalReportPath": "report.json",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "selectionSha256": "961ddad85ea1326ae76dc7ba07f97901b06c0dfb344b971838892d444ce6d940",
+  "checks": [
+    {
+      "name": "final-report-sha-matches-root-frozen-receipt",
+      "result": "passed",
+      "details": "The exact root-supplied final SHA is verified before interpretation."
+    },
+    {
+      "name": "exact-eight-base-records-seven-institutions-no-extra",
+      "result": "passed",
+      "details": "Only dispatch batch045 eight IDs are assessed; previously checked institutions do not imply school completion."
+    },
+    {
+      "name": "six-current-canonical-inputs-and-before-after-pins-match",
+      "result": "passed",
+      "details": "All six data inputs remain byte-identical to the pinned inventory and the report before/after hashes."
+    },
+    {
+      "name": "full-canonical-rows-program-parents-and-official-sources-bound",
+      "result": "passed",
+      "details": "Every assessed record matches its complete canonical row, linked programmes and official source rows."
+    },
+    {
+      "name": "report-file-pins-capture-originals-and-extracted-text-match",
+      "result": "passed",
+      "details": "Saved original bytes, extracted text, extraction metadata, visual pages and evidence file pins are intact; reused originals=0."
+    },
+    {
+      "name": "actual-prior-reports-one-through-forty-two-match",
+      "result": "passed",
+      "details": "All42 priorReportPins match the existing canonical report bytes."
+    },
+    {
+      "name": "result-counts-and-two-scoped-past-days-match",
+      "result": "passed",
+      "details": "8 records =2closed/5unknown/1blocked, with6cycles and2awards; unknown/blocked do not establish availability."
+    },
+    {
+      "name": "cupb-general-language-route-separated-from-iclts-and-review-dates",
+      "result": "passed",
+      "details": "Complete PDF text and offline page1/2/3/6 visuals confirm the one-academic-year general autumn route; ICLT May15 and institution May25 are separate. No new PDF GET."
+    },
+    {
+      "name": "dmu-exact-award-year-strict-before-may28-preserved",
+      "result": "passed",
+      "details": "The matching2025-2026spring registered-undergraduate award has a dated2026notice and strict-before May28 submission; eligibility, publicity and June disbursement are distinct."
+    },
+    {
+      "name": "cqnu-other-intake-remains-unknown-and-web-time-precision-honest",
+      "result": "passed",
+      "details": "Both language windows remain source observations; the old held Spring2027 record is excluded. Fallback uses saved tool text and a bounded interval, never a fabricated origin hash or exact fetch-start time."
+    },
+    {
+      "name": "independent-award-months-and-recurring-dufe-days-not-year-rolled",
+      "result": "passed",
+      "details": "DLMU has month-only periods, DUFE standing month-days have no target year; no year or month-end day is manufactured."
+    },
+    {
+      "name": "loader-and-captcha-not-promoted-to-date-evidence",
+      "result": "passed",
+      "details": "CUPL loader remains blocked; DUT enrolment months, advisory late-June and attachment CAPTCHA are not hard deadline evidence. Single bounded fallbacks/cooldown are retained."
+    },
+    {
+      "name": "candidate-only-no-canonical-freshness-or-whole-school-assertions",
+      "result": "passed",
+      "details": "The frozen report remains source-only and byte-identical; review performs no network, canonical, Git, freshness or publication writes."
+    }
+  ],
+  "summary": {
+    "checksPassed": 13,
+    "checksFailed": 0,
+    "recordsReviewed": 8,
+    "schoolsReviewed": 7,
+    "recordResults": {
+      "closed": 2,
+      "blocked": 1,
+      "unknown": 5
+    },
+    "networkRequests": 0,
+    "canonicalWrites": 0,
+    "gitMutations": 0,
+    "testsRerun": 0
+  },
+  "limitations": [
+    "Date-only independent review of exact8IDs; no whole-school completion, non-date fact renewal, successor-year inference or canonical changes.",
+    "CQNU has tool-text evidence and bounded observation time without origin bytes; CUPL loader and DUT CAPTCHA retain their report limitations.",
+    "Original2026-10-19 observations and original final report completion time remain unchanged; independent review completed2026-10-20."
+  ]
+}

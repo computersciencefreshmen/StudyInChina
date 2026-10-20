@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-19T12:06:59.181Z",
+  "method": "one-web-open-per-registered-url-after-native-TLS-handshake-timeout",
+  "originServerBodySaved": false,
+  "originalBodySha256": null,
+  "paidCalls": 0,
+  "retryPolicy": "cooldown-no-further-retries",
+  "observations": [
+    {
+      "name": "scfai-doctoral",
+      "url": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm",
+      "webReference": "turn74view0",
+      "result": "official-web-text-returned",
+      "originBodyUnavailable": true,
+      "retainedExactProgrammeAndDateProof": false,
+      "retainedQuote": "All international students applying for doctorate degrees at SCFAI are eligible to apply for the Mayor’s Scholarship and the President’s Scholarship.",
+      "recordOutcome": "blocked-no-original-or-retained-exact-programme-period-proof"
+    },
+    {
+      "name": "scfai-master",
+      "url": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+      "webReference": "turn74view1",
+      "result": "official-web-text-returned",
+      "totalLines": 250,
+      "originBodyUnavailable": true,
+      "fullPageOfflineCopySaved": false,
+      "retainedExcerpts": [
+        {
+          "lines": "17-21",
+          "quote": "Sichuan Fine Arts Institute 2026 Admission Prospectus for International Students (Master’s Programs)",
+          "publishedDate": "2026-04-30"
+        },
+        {
+          "lines": "23-32",
+          "quote": "The university currently offers doctoral and master’s degree programs in two first-level disciplines (Art Studies and Design Studies)",
+          "yearAndLevelQuote": "In 2026, the institute will accept full-time master’s degree candidates for both academic and professional degrees, with a study duration of three years."
+        },
+        {
+          "lines": "128-134",
+          "section": "IV. Application Periods",
+          "quote": "From the date of publication of this Admissions Guide until May 31, 2026.",
+          "originalChinese": "自招生简章发布之日起至2026年5月31日。"
+        },
+        {
+          "lines": "140-144",
+          "quote": "Applicants are required to submit all application materials within the application period.",
+          "concurrentAwardsChinese": "如需申请重庆市政府外国留学生市长奖学金和四川美术学院国际学生校长奖学金者，须一并提交《重庆市人民政府外国留学生市长奖学金申请表》和《四川美术学院国际学生校长奖学金申请表》。"
+        }
+      ],
+      "limitation": "Retained web-observation excerpts support only the matching 2026 academic-master and concurrent named-award route. Observation bytes/hash are not original server bytes/hash; no independent offline-original certification."
+    },
+    {
+      "name": "scfai-bachelor",
+      "url": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
+      "webReference": "turn74view2",
+      "result": "official-web-text-returned",
+      "totalLines": 329,
+      "originBodyUnavailable": true,
+      "retainedExactProgrammeAndDateProof": false,
+      "title": "四川美术学院2026年国际学生本科生招生简章",
+      "recordOutcome": "blocked-no-original-or-retained-exact-programme-period-proof"
+    }
+  ],
+  "observedAtMeaning": "Receipt persistence time after the earlier same-session web read; exact web-call start was not separately timestamped."
+}

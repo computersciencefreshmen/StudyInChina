@@ -1,0 +1,1443 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-045-20261019",
+  "state": "completed-two-scoped-past-candidates-five-unknown-one-blocked",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T13:31:06.696Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256Before": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256After": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v12.json",
+  "targetQueueSha256": "8ddc230da6211fd2c5d29ddeb32c95505fd82a1873beccab3ad7f3f552607a67",
+  "selectionSha256": "961ddad85ea1326ae76dc7ba07f97901b06c0dfb344b971838892d444ce6d940",
+  "selectedUniversityIds": [
+    "uni-china-university-of-petroleum-beijing",
+    "uni-china-university-of-political-science-and-law",
+    "uni-chongqing-normal-university",
+    "uni-dalian-maritime-university",
+    "uni-dalian-medical-university",
+    "uni-dalian-university-of-technology",
+    "uni-dongbei-university-of-finance-and-economics"
+  ],
+  "scope": {
+    "universityScopesAttempted": 7,
+    "newlyCheckedInstitutions": 0,
+    "previouslyCheckedInstitutionsWithNewRecordScope": [
+      "uni-china-university-of-petroleum-beijing",
+      "uni-china-university-of-political-science-and-law",
+      "uni-chongqing-normal-university",
+      "uni-dalian-maritime-university",
+      "uni-dalian-medical-university",
+      "uni-dalian-university-of-technology",
+      "uni-dongbei-university-of-finance-and-economics"
+    ],
+    "notAClaimOfWholeSchoolCompletion": true
+  },
+  "selection": {
+    "baseQueueRecords": 8,
+    "additionalSameSourceRecords": 0,
+    "totalRecords": 8,
+    "baseQueueRecordIds": [
+      "cycle-gap-wave5-depth-cupb-chinese-language-one-year-2026-2026-2027-autumn-fee-reference",
+      "cycle-gap-prog-mew-nss-cupl-law-bachelor-2026-2027-autumn",
+      "cycle-gap-local-strong-cqnu-language-chinese-2026-2027-other",
+      "sch-gap-sch-mew-ne-dlmu-excellent-international-students",
+      "sch-gap-sch-dmu-international-student-merit-2025-2026",
+      "cycle-gap-prog-mew-nss-dut-foundation-2026-2027-other-fee-reference",
+      "cycle-gap-prog-dufe-chinese-language-2026-2027-autumn",
+      "cycle-gap-prog-dufe-chinese-language-2026-2027-spring"
+    ],
+    "additionalSameSourceRecordIds": [],
+    "baseDispatch": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1320/base-dispatch-v1.json",
+      "sha256": "9868844feb233e063f474335931a74a2fa58d4c7e6941118704e3580d2e30b4e"
+    },
+    "extensionReceipt": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1320/additional-same-source-selection-v1.json",
+      "sha256": "dbc7df2011233d04ed129a07620c104fb0b13f5a8700cb0ed7fa9338650b2263"
+    }
+  },
+  "acquisition": {
+    "registeredDistinctUrlScopes": 8,
+    "newNativePublicGetOperations": 9,
+    "directLinkedOriginalUrlsAttempted": 1,
+    "webFallbackRequests": 3,
+    "archivedOriginalsReused": 0,
+    "originalBodiesAvailable": 7,
+    "newOriginalBodiesSaved": 7,
+    "newNativeHtmlBodies": 6,
+    "newNativePdfBodies": 1,
+    "nativeTlsFailures": 2,
+    "completeRelevantWebToolSectionsWithoutOriginBytes": 1,
+    "normalTls": true,
+    "paidModelCalls": 0,
+    "captureManifestPins": [
+      {
+        "path": "captures.json",
+        "sha256": "dd21f1122d70ab9a0289336608307b594e0bf955b009126ca4d082e0a57bb113"
+      },
+      {
+        "path": "support-captures.json",
+        "sha256": "5546a1baf8814379c291e4b9f66e94ec62682e0fd89706c93ab1e3d09d0a153b"
+      },
+      {
+        "path": "reused-captures.json",
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      }
+    ],
+    "archiveScopeCheck": {
+      "path": "archive-source-check.json",
+      "sha256": "85c90f958543a2f917d1e77b6e6010243aaf15a7bd2e50313b25d307676113f7"
+    },
+    "diagnostics": {
+      "path": "acquisition-diagnostics.json",
+      "sha256": "2ff4ca7bdc9cdad32a788b3d36e81cf3401f4870209f3f105ef45d1d37d21fb8"
+    },
+    "webFallback": {
+      "path": "web-fallback.json",
+      "sha256": "68a17017421960c271b3b5c09245e89de6da03f50ca3dd5f69a0a2936ba121a8"
+    },
+    "cqnuWebToolText": {
+      "path": "cqnu-web-text.txt",
+      "sha256": "e2ed88462ac2b62082f5f107bca7a013a6780995230100b9fb22529da327ac9d"
+    },
+    "pdfVisualTranscript": {
+      "path": "pdf-visual-transcript.json",
+      "sha256": "7ba3b17fe23acfc7c08b35ac2f2ccd3fbbcb4fd12fd7c80885bf0f07da20f0f4"
+    },
+    "pdfOfflineExtraction": {
+      "path": "pdf-offline-extraction.json",
+      "sha256": "69a0775f391f9dbac3b20d14aff04fba6cac1fb3ed6eedb41ff07f74ccc9f29b"
+    },
+    "bodyInterpretation": "Seven original bodies saved including one complete6-page CUPB PDF and sixHTML responses. CUPL loader and DUT attachmentCAPTCHA are not date bodies. CQNU nativeTLS timed out; one official web-tool fallback supplies its complete relevant application section, with textSHA and a bounded observation interval but no invented origin-byte hash. Existing001-042 exactURL archive scan yielded no sameURL originals, so reuse=0. All failed paths entered cooldown."
+  },
+  "summary": {
+    "schoolsAttempted": 7,
+    "newlyScopedSchools": 0,
+    "previouslyCheckedInstitutionsWithNewRecordScope": 7,
+    "recordsAssessed": 8,
+    "baseQueueRecords": 8,
+    "additionalSameSourceRecords": 0,
+    "admissionCyclesAssessed": 6,
+    "scholarshipsAssessed": 2,
+    "recordResults": {
+      "closed": 2,
+      "blocked": 1,
+      "unknown": 5
+    },
+    "newExactPastDeadlineCandidatesFromStoredNull": 2,
+    "independentAwardPastDeadlineCandidates": 1,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "precisionIssues": [
+    {
+      "universityId": "uni-dalian-medical-university",
+      "recordIds": [
+        "sch-gap-sch-dmu-international-student-merit-2025-2026"
+      ],
+      "type": "strict-before-day-anchored-by-exact-academic-year-and-dated-notice",
+      "officialDeadline": "2026-05-28",
+      "quotedDate": "请于5月28日前，将填写好的《大连医科大学国际学生综合素质评定手册》和相关证明材料提交给各自辅导员老师。",
+      "deadlineBoundary": "strict-before-stated-day-no-clock-time",
+      "sourceDate": "2026-05-21",
+      "excludedDates": "2026February28 is eligibility period; June end is disbursement, five working days is publication."
+    },
+    {
+      "universityId": "uni-chongqing-normal-university",
+      "recordIds": [
+        "cycle-gap-local-strong-cqnu-language-chinese-2026-2027-other"
+      ],
+      "type": "legacy-other-intake-with-two-language-periods",
+      "languageWindowsQuote": "March 1, 2026-June 30, 2026 for Autumn Semester; September 1, 2026-December 25, 2026 for Spring Semester.",
+      "singleApplicableTermEstablished": false,
+      "priorHeldSpring2027CandidateUntouched": true
+    },
+    {
+      "universityId": "uni-dongbei-university-of-finance-and-economics",
+      "recordIds": [
+        "cycle-gap-prog-dufe-chinese-language-2026-2027-autumn",
+        "cycle-gap-prog-dufe-chinese-language-2026-2027-spring"
+      ],
+      "type": "recurring-term-month-day-with-no-target-year",
+      "springMonthDay": "03-31",
+      "autumnMonthDay": "09-30",
+      "noYearRollover": true
+    }
+  ],
+  "rules": [
+    "Date-only source candidates. Canonical dates/status/publication/verifiedAt/reviewAfter and all shared state remain unchanged.",
+    "All seven university scopes are new raw-record scopes at previously checked institutions. No whole-school completion is certified.",
+    "CUPB general autumn one-academic-year deadline is June30; its distinct ICLT applicantMay15 and institutionalMay25 review are excluded.",
+    "DMU target2025-2026 spring award is for registered undergraduate applicants beforeMay28; eligibility period, institutional review, publicity and disbursement are distinct stages.",
+    "CQNU legacyother row is not the earlier heldspring2027 ID. Its two original language windows remain observations with no selected single deadline and no replay of old correction/consumer.",
+    "DUT enrollment months or recommended lateJune are not hard application days. DUFE recurring term endpoints are not assigned2026/2027 application years.",
+    "Unknown and blocked do not establish open/closed availability or programme cessation. Single bounded fallback per failed source, no CAPTCHA bypass, no paid tools."
+  ],
+  "groups": [
+    {
+      "key": "cupb2026-general-one-academic-year-autumn-language-own-June30",
+      "universityId": "uni-china-university-of-petroleum-beijing",
+      "institutionPreviouslyChecked": true,
+      "evidence": [
+        {
+          "name": "cupb-language",
+          "url": "https://www.cup.edu.cn/overseas/docs/2025-10/8aa73688ac704349918f6cbdfe65b0bf.pdf",
+          "observedAt": "2026-10-19T13:25:46.906396+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.cup.edu.cn/overseas/docs/2025-10/8aa73688ac704349918f6cbdfe65b0bf.pdf",
+          "contentType": "application/pdf",
+          "bytes": 219249,
+          "rawPath": "cupb-language.pdf",
+          "rawSha256": "83f380529f52d8f23d9c12157842f5970e3560ea9fe7c7eb2ed4aab7bf4055ea",
+          "pageCount": 6,
+          "textPath": "cupb-language.txt",
+          "textSha256": "1099993bb0c7381e7618946526c5ad1e03f613e7e260ed4d395fbfca48173091",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "offlinePdf": {
+        "path": "pdf-offline-extraction.json",
+        "sha256": "69a0775f391f9dbac3b20d14aff04fba6cac1fb3ed6eedb41ff07f74ccc9f29b"
+      },
+      "yearTitle": "2026 Enrolment Guidelines for International students Applying for Chinese language at China University of Petroleum (Beijing)",
+      "longTermProgrammeQuote": "Chinese Class (long term): The long-term class (more than half a year) enrolls students twice a year",
+      "oneYearIdentityQuote": "Chinese Language（1 academic year）",
+      "dateQuote": "Autumn semester: Online application ends June 30, 2026.",
+      "separateAwardDateQuote": "student application must complete before May 15th",
+      "separateInstitutionReviewQuote": "review before May 25th",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave5-depth-cupb-chinese-language-one-year-2026-2026-2027-autumn-fee-reference",
+          "universityId": "uni-china-university-of-petroleum-beijing",
+          "canonicalUniversitySha256": "c23cf4070f97a49bd9f3a864d4b8b6bb364c48b49c0eff6f55ea4dec8f814f3a",
+          "programId": "prog-gap-wave5-depth-cupb-chinese-language-one-year-2026",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "8a7e75accf8ad9c2fe01d87961011b3360f59c1d85a80fbdc40096069097aba3",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-wave5-depth-cupb-chinese-language-one-year-2026"
+            ],
+            "verifiedAt": "2026-07-31",
+            "reviewAfter": "2026-08-07",
+            "status": "stale",
+            "id": "cycle-gap-wave5-depth-cupb-chinese-language-one-year-2026-2026-2027-autumn-fee-reference",
+            "programId": "prog-gap-wave5-depth-cupb-chinese-language-one-year-2026",
+            "academicYear": "2026-2027",
+            "intake": "autumn",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": 21000,
+            "tuitionPeriod": "academic-year",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "cycle-specific",
+            "factScope": "partial",
+            "applicationFeeCny": null
+          },
+          "canonicalCycleSha256": "8a7e75accf8ad9c2fe01d87961011b3360f59c1d85a80fbdc40096069097aba3",
+          "canonicalProgramSha256": "4d63d11b59655739d16a66f9342169b12f11d9fb41ddc61208d454f12268f87d",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave5-depth-cupb-chinese-language-one-year-2026",
+              "canonicalProgramSha256": "4d63d11b59655739d16a66f9342169b12f11d9fb41ddc61208d454f12268f87d"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave5-depth-cupb-chinese-language-one-year-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave5-depth-cupb-chinese-language-one-year-2026",
+              "canonicalSourceSha256": "f4840f0a62c4ed46a9250626c57b03270125f42c73d7e2dfdd430c400858b801",
+              "url": "https://www.cup.edu.cn/overseas/docs/2025-10/8aa73688ac704349918f6cbdfe65b0bf.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "reason": "explicit2026-general-long-term-one-academic-year-autumn-language-applicant-deadline",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://www.cup.edu.cn/overseas/docs/2025-10/8aa73688ac704349918f6cbdfe65b0bf.pdf",
+          "evidenceBodySha256": "83f380529f52d8f23d9c12157842f5970e3560ea9fe7c7eb2ed4aab7bf4055ea",
+          "observedAt": "2026-10-19T13:25:46.906396+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the matched explicit historical 2026 applicant route is past; no successor availability or cessation is inferred.",
+          "quotedDate": "Autumn semester: Online application ends June 30, 2026.",
+          "fundingRoute": "General long-term Chinese language admission, one academic year, autumn2026; separate ICLT funding route excluded.",
+          "identityPages": [
+            1,
+            2,
+            3
+          ],
+          "applicantDatePage": 3,
+          "separateAwardDatesNotBorrowed": true,
+          "separateSpring2026DayNotBorrowed": "2026-01-01",
+          "institutionReviewNotApplicantDeadline": true,
+          "noYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "cupl-bachelor-loader-and-one-web-timeout-no-original-date-body",
+      "universityId": "uni-china-university-of-political-science-and-law",
+      "institutionPreviouslyChecked": true,
+      "evidence": [
+        {
+          "name": "cupl-bachelor",
+          "url": "https://sis.cupl.edu.cn/lhlx/bk.htm",
+          "observedAt": "2026-10-19T13:25:46.906396+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sis.cupl.edu.cn/lhlx/bk.htm",
+          "contentType": "text/html; charset=utf-8",
+          "bytes": 2329,
+          "rawPath": "cupl-bachelor.html",
+          "rawSha256": "a8cf145540f9999bbe4a1a76807187c7eac2367b095aca4b9fa600c68f6f5704",
+          "textPath": "cupl-bachelor.txt",
+          "textSha256": "d41ed0640de3f457c2fd8fbe2242669bfd55009fc2f65913a28ccb51a156810d",
+          "captureSucceeded": true,
+          "evidenceRole": "loader-HTML-not-admissions-body-or-date-proof",
+          "fullFactsCertified": false
+        }
+      ],
+      "webFallback": {
+        "path": "web-fallback.json",
+        "sha256": "68a17017421960c271b3b5c09245e89de6da03f50ca3dd5f69a0a2936ba121a8"
+      },
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-cupl-law-bachelor-2026-2027-autumn",
+          "universityId": "uni-china-university-of-political-science-and-law",
+          "canonicalUniversitySha256": "d6e1df6688a7551e97621f27f1bc9233ab595d6548fec336a4cd0bafbafe691d",
+          "programId": "prog-gap-prog-mew-nss-cupl-law-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "79035c3e168687ba4256c553e6acbb599418f219c0a083494805875a1b227fd6",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-cupl-law-bachelor"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-08-11",
+            "status": "stale",
+            "id": "cycle-gap-prog-mew-nss-cupl-law-bachelor-2026-2027-autumn",
+            "programId": "prog-gap-prog-mew-nss-cupl-law-bachelor",
+            "academicYear": "2026-2027",
+            "intake": "autumn",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": null,
+            "tuitionPeriod": null,
+            "tuitionStatus": null,
+            "evidenceBasis": "cycle-specific",
+            "factScope": "dates-only",
+            "applicationFeeCny": null,
+            "notes": {
+              "en": "The official source explicitly lists Law for international applicants. The same source states teaching language: Chinese; duration: 4 academic years.",
+              "zh": "官方来源明确列出面向国际申请人的法学。同一来源注明授课语言：Chinese；学制：4 academic years。",
+              "ru": "Официальный источник прямо указывает программу «Право» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 4 academic years."
+            }
+          },
+          "canonicalCycleSha256": "79035c3e168687ba4256c553e6acbb599418f219c0a083494805875a1b227fd6",
+          "canonicalProgramSha256": "1fd222d16d5a6d45a0e950ddc0e1be4e794f3d345e27919e28004c801e337f9b",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-cupl-law-bachelor",
+              "canonicalProgramSha256": "1fd222d16d5a6d45a0e950ddc0e1be4e794f3d345e27919e28004c801e337f9b"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-cupl-law-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-cupl-law-bachelor",
+              "canonicalSourceSha256": "da209fed2411b9bf9c8ce376b7304161c46f5cad3e6b1cf438399481e1d6eb3e",
+              "url": "https://sis.cupl.edu.cn/lhlx/bk.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-bachelor-URL-returns-loader-shell-and-one-web-fallback-times-out-no-original-admissions-body",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sis.cupl.edu.cn/lhlx/bk.htm",
+          "evidenceBodySha256": "a8cf145540f9999bbe4a1a76807187c7eac2367b095aca4b9fa600c68f6f5704",
+          "observedAt": "2026-10-19T13:25:46.906396+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "loaderHttp200NotDateProof": true,
+          "retryPolicy": "cooldown-no-further-retries",
+          "priorShortTermLanguageRouteNotSubstituted": true,
+          "noOpenOrClosedStatusInferred": true
+        }
+      ]
+    },
+    {
+      "key": "cqnu-new-legacy-other-ID-two-exact-windows-no-single-intake-binding",
+      "universityId": "uni-chongqing-normal-university",
+      "institutionPreviouslyChecked": true,
+      "evidence": [
+        {
+          "name": "cqnu-legacy-language",
+          "url": "https://international.cqnu.edu.cn/ywb/info/1373/1303.htm",
+          "observedAt": "2026-10-19T13:25:46.906396+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "<urlopen error _ssl.c:993: The handshake operation timed out>",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-TLS-timeout-no-origin-body",
+          "fullFactsCertified": false
+        }
+      ],
+      "webFallback": {
+        "path": "web-fallback.json",
+        "sha256": "68a17017421960c271b3b5c09245e89de6da03f50ca3dd5f69a0a2936ba121a8"
+      },
+      "webToolText": {
+        "path": "cqnu-web-text.txt",
+        "sha256": "e2ed88462ac2b62082f5f107bca7a013a6780995230100b9fb22529da327ac9d"
+      },
+      "yearTitle": "Admission Brochures of Chongqing Normal University,2026",
+      "programmeQuote": "Chinese Language Program: one semester to two semesters.",
+      "languageWindowsQuote": "March 1, 2026-June 30, 2026 for Autumn Semester; September 1, 2026-December 25, 2026 for Spring Semester.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-cqnu-language-chinese-2026-2027-other",
+          "universityId": "uni-chongqing-normal-university",
+          "canonicalUniversitySha256": "c950385102c77aa853ef4839bf38b35d8bd33a827b99929cd2c0d73dd2c13163",
+          "programId": "prog-gap-local-strong-cqnu-language-chinese",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "bed169279dfbc7910519206ca0d1dcfa24a01e3a2c1e8f1d60db7e442a9340e1",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-local-strong-cqnu-language-chinese"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-06",
+            "status": "stale",
+            "id": "cycle-gap-local-strong-cqnu-language-chinese-2026-2027-other",
+            "programId": "prog-gap-local-strong-cqnu-language-chinese",
+            "academicYear": "2026-2027",
+            "intake": "other",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": null,
+            "tuitionPeriod": null,
+            "tuitionStatus": null,
+            "evidenceBasis": "cycle-specific",
+            "factScope": "dates-only",
+            "applicationFeeCny": null,
+            "notes": {
+              "en": "The official international-office page confirms a Chinese Language Program for international students. Uncaptured dynamic facts remain unannounced.",
+              "zh": "学校国际处官方页面确认面向国际学生的汉语进修项目；未获取的动态事实保持未公布。",
+              "ru": "Официальная страница международного отдела подтверждает программу китайского языка для иностранных студентов; не зафиксированные динамические сведения отмечены как не объявленные."
+            }
+          },
+          "canonicalCycleSha256": "bed169279dfbc7910519206ca0d1dcfa24a01e3a2c1e8f1d60db7e442a9340e1",
+          "canonicalProgramSha256": "c7bdc49eec5e74a48627802016d17a5d931ff02bf37c2ffe2f20038814066f87",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-cqnu-language-chinese",
+              "canonicalProgramSha256": "c7bdc49eec5e74a48627802016d17a5d931ff02bf37c2ffe2f20038814066f87"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-strong-cqnu-language-chinese"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-cqnu-language-chinese",
+              "canonicalSourceSha256": "40150aa984f0ec9c0ae72f4489ed09959c50f31da36a540e97843d8ec104e02b",
+              "url": "https://international.cqnu.edu.cn/ywb/info/1373/1303.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "new-legacy-other-record-has-no-single-term-binding-between-original-autumn-and-spring-language-application-windows",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://international.cqnu.edu.cn/ywb/info/1373/1303.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T13:27:32.537Z",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "sourceWindowQuote": "March 1, 2026-June 30, 2026 for Autumn Semester; September 1, 2026-December 25, 2026 for Spring Semester.",
+          "autumnApplicationWindowObservation": {
+            "opensOn": "2026-03-01",
+            "closesOn": "2026-06-30",
+            "sourceIntakeLabel": "Autumn Semester"
+          },
+          "springApplicationWindowObservation": {
+            "opensOn": "2026-09-01",
+            "closesOn": "2026-12-25",
+            "sourceIntakeLabel": "Spring Semester"
+          },
+          "selectedStoredIntake": "other",
+          "singleApplicableTermEstablished": false,
+          "evidenceObservationKind": "official-web-tool-text-no-origin-raw-bytes",
+          "originRawBytesAvailable": false,
+          "webToolTextPin": {
+            "path": "cqnu-web-text.txt",
+            "sha256": "e2ed88462ac2b62082f5f107bca7a013a6780995230100b9fb22529da327ac9d"
+          },
+          "webObservationPin": {
+            "path": "web-fallback.json",
+            "sha256": "68a17017421960c271b3b5c09245e89de6da03f50ca3dd5f69a0a2936ba121a8"
+          },
+          "webTextSha256": "e2ed88462ac2b62082f5f107bca7a013a6780995230100b9fb22529da327ac9d",
+          "observedAtInterval": {
+            "from": "2026-10-19T13:26:15.606Z",
+            "to": "2026-10-19T13:27:32.537Z"
+          },
+          "observationTimestampKind": "fallback-receipt-recorded-upper-bound-not-exact-fetch-start",
+          "nativeFailureObservedAt": "2026-10-19T13:25:46.906396+00:00",
+          "oldHeldSpring2027IDNotReassessed": true,
+          "oldDecember30ToDecember25CandidateNotMutated": true,
+          "oldDateCorrectionConsumerNotReplayed": true,
+          "degreeAndScholarshipCutoffsNotBorrowed": true,
+          "noYearRollover": true,
+          "retryPolicy": "cooldown-after-single-reasonable-web-fallback"
+        }
+      ]
+    },
+    {
+      "key": "dlmu-standing-excellent-student-award-months-only",
+      "universityId": "uni-dalian-maritime-university",
+      "institutionPreviouslyChecked": true,
+      "evidence": [
+        {
+          "name": "dlmu-award",
+          "url": "https://iec.dlmu.edu.cn/English/Scholarship/DMU_Scholarships_.htm",
+          "observedAt": "2026-10-19T13:25:46.906396+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iec.dlmu.edu.cn/English/Scholarship/DMU_Scholarships_.htm",
+          "contentType": "text/html",
+          "bytes": 24245,
+          "rawPath": "dlmu-award.html",
+          "rawSha256": "cbe8ad0e8d1ff537931ab3eb64c1dddfd70509a3f7228545b13673a7ecf7bf40",
+          "textPath": "dlmu-award.txt",
+          "textSha256": "4f932e06c0a6406947baa1e87877e5be4d08f49f5863e55966374b8c338d8163",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "awardTitle": "DMU Scholarships for Excellent International Students",
+      "applicationHeading": "Ⅳ Application & Selection Period",
+      "periodQuote": "May (in Spring semester) and November (in Autumn semester).",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-ne-dlmu-excellent-international-students",
+          "universityId": "uni-dalian-maritime-university",
+          "canonicalUniversitySha256": "737ee33b4695e7221531fe8eb9846b461b18f4d09f1753e101e1a819d85b4267",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "598fc1e4ee3dde4f5060458daa2571e47fc3d75cdb12ccd0b99e55aa9b0eaa72",
+          "canonicalRow": {
+            "id": "sch-gap-sch-mew-ne-dlmu-excellent-international-students",
+            "slug": "gap-sch-mew-ne-dlmu-excellent-international-students",
+            "name": {
+              "en": "DMU Scholarships for Excellent International Students",
+              "zh": "大连海事大学优秀留学生奖学金",
+              "ru": "Стипендия ДМУ для отличившихся иностранных студентов"
+            },
+            "providerType": "university",
+            "universityIds": [
+              "uni-dalian-maritime-university"
+            ],
+            "programIds": [
+              "prog-gap-prog-mew-ne-dlmu-nautical-science-bachelor",
+              "prog-gap-prog-mew-ne-dlmu-marine-engineering-bachelor",
+              "prog-gap-breadth-dlmu-foundation-college-preparatory",
+              "prog-gap-prog-mew-ne-dlmu-chinese-language-semester"
+            ],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://iec.dlmu.edu.cn/English/Scholarship/DMU_Scholarships_.htm",
+            "summary": {
+              "en": "The official scholarship page lists awards for new language, preparatory, bachelor and master students, with selection periods in May and November.",
+              "zh": "官方奖学金页面列出新语言生、预科生、本科生和硕士生等奖项，评选期为每年5月和11月。",
+              "ru": "Официальная страница перечисляет награды для новых языковых, подготовительных, бакалаврских и магистерских студентов; отбор проходит в мае и ноябре."
+            },
+            "sourceIds": [
+              "src-gap-scholarship-sch-mew-ne-dlmu-excellent-international-students"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale"
+          },
+          "canonicalScholarshipSha256": "598fc1e4ee3dde4f5060458daa2571e47fc3d75cdb12ccd0b99e55aa9b0eaa72",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-ne-dlmu-nautical-science-bachelor",
+              "canonicalProgramSha256": "f1ff3d76a609e2297bbf5e63c376dbcc763fdbd9317a25038277d511517ed413"
+            },
+            {
+              "programId": "prog-gap-prog-mew-ne-dlmu-marine-engineering-bachelor",
+              "canonicalProgramSha256": "84797afc5b54d743ef1e6edafa5cd90a2a96a65417d8ba682210d89480890b6b"
+            },
+            {
+              "programId": "prog-gap-breadth-dlmu-foundation-college-preparatory",
+              "canonicalProgramSha256": "b69047f3e37c3525b63c61aee310c75a358b26cec31558e84672961578a9aaca"
+            },
+            {
+              "programId": "prog-gap-prog-mew-ne-dlmu-chinese-language-semester",
+              "canonicalProgramSha256": "12ddcc3beaef80517f7f42458a6ab5eef6257a5a823c040701b1edc6bbde51d6"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-ne-dlmu-excellent-international-students"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-ne-dlmu-excellent-international-students",
+              "canonicalSourceSha256": "5c471891502349fe467567f878846ba6518de180caa1851eb169dd563e8e5e47",
+              "url": "https://iec.dlmu.edu.cn/English/Scholarship/DMU_Scholarships_.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-excellent-student-award-has-May-and-November-month-only-periods-without-exact-target-year-day",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iec.dlmu.edu.cn/English/Scholarship/DMU_Scholarships_.htm",
+          "evidenceBodySha256": "cbe8ad0e8d1ff537931ab3eb64c1dddfd70509a3f7228545b13673a7ecf7bf40",
+          "observedAt": "2026-10-19T13:25:46.906396+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "periodObservation": "May (in Spring semester) and November (in Autumn semester).",
+          "noMonthEndManufactured": true,
+          "currentAwardYearNotExplicit": true,
+          "independentAwardScopePreserved": true,
+          "noYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "dmu-exact2025-2026-spring-registered-undergraduate-award-before-May28",
+      "universityId": "uni-dalian-medical-university",
+      "institutionPreviouslyChecked": true,
+      "evidence": [
+        {
+          "name": "dmu-award",
+          "url": "https://gjy.dmu.edu.cn/info/1012/1710.htm",
+          "observedAt": "2026-10-19T13:25:49.020541+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://gjy.dmu.edu.cn/info/1012/1710.htm",
+          "contentType": "text/html",
+          "bytes": 21441,
+          "rawPath": "dmu-award.html",
+          "rawSha256": "e5fc0c293576ab8159ed7133c74f2e2c7bc6251a306354f3290b4fcff13863b7",
+          "textPath": "dmu-award.txt",
+          "textSha256": "b48ffe01f5569d28927fac81927f9c1f40357ec98530ab3c6675d1bd55422b9e",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "关于开展2025-2026学年春季国际学生奖学金评选工作的通知",
+      "publishedDate": "2026年05月21日",
+      "signedYearQuote": "2026年5月21日",
+      "eligibilityScope": "本科生：已完成学籍注册的春季学历生（不含实习阶段学生）",
+      "applicantQuote": "请于5月28日前，将填写好的《大连医科大学国际学生综合素质评定手册》和相关证明材料提交给各自辅导员老师。",
+      "disbursementQuote": "6月底前完成奖学金发放。",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-dmu-international-student-merit-2025-2026",
+          "universityId": "uni-dalian-medical-university",
+          "canonicalUniversitySha256": "3ff747c50b44f17f891e82119091fc130ba16b07547580c0ff6060975b79066a",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "7a66551b07ac107e8fcebec93ad7c73beaee8bd707b7b3a68838919de4a2ba9d",
+          "canonicalRow": {
+            "id": "sch-gap-sch-dmu-international-student-merit-2025-2026",
+            "slug": "gap-sch-dmu-international-student-merit-2025-2026",
+            "name": {
+              "en": "2025–2026 Dalian Medical University International Student Merit Scholarships",
+              "zh": "大连医科大学2025-2026学年国际学生综合素质奖学金和单项奖学金",
+              "ru": "Стипендии за достижения для иностранных студентов Даляньского медицинского университета 2025–2026"
+            },
+            "providerType": "university",
+            "universityIds": [
+              "uni-dalian-medical-university"
+            ],
+            "programIds": [],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://gjy.dmu.edu.cn/info/1012/1710.htm",
+            "summary": {
+              "en": "The international education college's May 2026 notice confirms two university awards—comprehensive merit and single-category scholarships—for registered spring-entry international undergraduates not in internship.",
+              "zh": "国际教育学院2026年5月通知确认综合素质奖学金和单项奖学金两类，面向已注册的春季国际本科生（实习阶段除外）。",
+              "ru": "Уведомление международного факультета подтверждает две университетские награды для зарегистрированных иностранных бакалавров весеннего набора."
+            },
+            "sourceIds": [
+              "src-gap-scholarship-sch-dmu-international-student-merit-2025-2026"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale"
+          },
+          "canonicalScholarshipSha256": "7a66551b07ac107e8fcebec93ad7c73beaee8bd707b7b3a68838919de4a2ba9d",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-sch-dmu-international-student-merit-2025-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-dmu-international-student-merit-2025-2026",
+              "canonicalSourceSha256": "f391c2ad4ff40451bb44a99f76834c872740d6fc65cd33183d224e6d3ba12098",
+              "url": "https://gjy.dmu.edu.cn/info/1012/1710.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-28",
+          "candidateOfficialDeadline": "2026-05-28",
+          "reason": "exact2025-2026-spring-award-notice-signedMay21-2026-requires-registered-bachelor-applicant-materials-before-May28",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "strict-before-May28-day-no-clock-time-stated",
+          "evidenceSourceUrl": "https://gjy.dmu.edu.cn/info/1012/1710.htm",
+          "evidenceBodySha256": "e5fc0c293576ab8159ed7133c74f2e2c7bc6251a306354f3290b4fcff13863b7",
+          "observedAt": "2026-10-19T13:25:49.020541+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the matched explicit historical 2026 applicant route is past; no successor availability or cessation is inferred.",
+          "quotedDate": "请于5月28日前，将填写好的《大连医科大学国际学生综合素质评定手册》和相关证明材料提交给各自辅导员老师。",
+          "sourceYearAnchor": "2026-05-21 dated and signed notice for2025-2026 spring awards",
+          "fundingRoute": "2025-2026 academic-year spring international-student merit awards for registered degree undergraduates excluding internship-stage students",
+          "applicantStage": "Students submit assessment handbook and supporting materials to their counsellors before the stated day.",
+          "schoolReviewAndFiveWorkingDayPublicityNotApplicantCutoff": true,
+          "JuneEndDisbursementNotApplicantCutoff": true,
+          "achievementEligibilityIntervalNotApplicantWindow": {
+            "from": "2025-03-01",
+            "to": "2026-02-28"
+          },
+          "awardOwnDateNotBorrowed": true,
+          "noYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "dlut-foundation-general-body-no-hard-day-support-timeout-linked-captcha",
+      "universityId": "uni-dalian-university-of-technology",
+      "institutionPreviouslyChecked": true,
+      "evidence": [
+        {
+          "name": "dlut-foundation",
+          "url": "https://sie.dlut.edu.cn/info/3731/21141.htm",
+          "observedAt": "2026-10-19T13:25:49.550252+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sie.dlut.edu.cn/info/3731/21141.htm",
+          "contentType": "text/html",
+          "bytes": 64342,
+          "rawPath": "dlut-foundation.html",
+          "rawSha256": "885484848895c89115edc17068b9cef4125fce766fc28c144ad686e8e9b8291d",
+          "textPath": "dlut-foundation.txt",
+          "textSha256": "60d853792a9ceb400bfee713677bd650464c3240324f522b4d466367c14e3b14",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "dlut-support",
+          "url": "https://iso.dlut.edu.cn/html/article_content/202511/89A38338906B4A999612DFE1C4653F97.shtml",
+          "observedAt": "2026-10-19T13:25:50.588014+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "<urlopen error _ssl.c:993: The handshake operation timed out>",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-TLS-timeout-no-original-body",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "dlut-foundation-pdf",
+          "url": "https://sie.dlut.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1894224773&wbfileid=9BF4EE65F024B44DE291C86D0176EAF8",
+          "observedAt": "2026-10-19T13:27:38.655881+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sie.dlut.edu.cn/system/_content/download.jsp?urltype=news.DownloadAttachUrl&owner=1894224773&wbfileid=9BF4EE65F024B44DE291C86D0176EAF8",
+          "contentType": "text/html;charset=UTF-8",
+          "bytes": 3829,
+          "rawPath": "dlut-foundation-pdf.html",
+          "rawSha256": "d54045821dbc182097f6db0d68a081fc7ab573d128ee50da8283f78b86920583",
+          "textPath": "dlut-foundation-pdf.txt",
+          "textSha256": "b6e006dd45ea7eb317ff98ff3ccdeb5dae716b075e4ffa6c23d3bdfa0ffba07d",
+          "captureSucceeded": true,
+          "evidenceRole": "linked2026-PDF-download-returned-CAPTCHA-HTML-not-PDF",
+          "fullFactsCertified": false
+        }
+      ],
+      "webFallback": {
+        "path": "web-fallback.json",
+        "sha256": "68a17017421960c271b3b5c09245e89de6da03f50ca3dd5f69a0a2936ba121a8"
+      },
+      "programmeQuote": "As a non-degree program for undergraduate preparation",
+      "semesterQuotes": [
+        "Fall semester (one year) : September intake",
+        "Spring semester (one semester) : March intake"
+      ],
+      "captchaQuote": "请输入验证码下载附件",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-dut-foundation-2026-2027-other-fee-reference",
+          "universityId": "uni-dalian-university-of-technology",
+          "canonicalUniversitySha256": "ef5d44f2b2777b456ff0dad981826a5decbec5d8e03ee8f2051c4445419b2c65",
+          "programId": "prog-gap-prog-mew-nss-dut-foundation",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "foundation",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "130cd4f1bef9c5a8a62171cc5e08cde47e16c74c53e52af344e1f2f5e1fa7087",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-dut-foundation",
+              "src-gap-program-prog-mew-nss-dut-foundation-support-1"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-08-11",
+            "status": "stale",
+            "id": "cycle-gap-prog-mew-nss-dut-foundation-2026-2027-other-fee-reference",
+            "programId": "prog-gap-prog-mew-nss-dut-foundation",
+            "academicYear": "2026-2027",
+            "intake": "other",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": 28000,
+            "tuitionPeriod": "academic-year",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "cycle-specific",
+            "factScope": "partial",
+            "applicationFeeCny": null
+          },
+          "canonicalCycleSha256": "130cd4f1bef9c5a8a62171cc5e08cde47e16c74c53e52af344e1f2f5e1fa7087",
+          "canonicalProgramSha256": "996ef976ef4d507db29fa32b75fc50b0a5c0e85c6fcbed4dd4047f00b539185a",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-dut-foundation",
+              "canonicalProgramSha256": "996ef976ef4d507db29fa32b75fc50b0a5c0e85c6fcbed4dd4047f00b539185a"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-dut-foundation",
+            "src-gap-program-prog-mew-nss-dut-foundation-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-dut-foundation",
+              "canonicalSourceSha256": "9656b3b6106b75a617d0411e49da74e231b8cc6f1cad7cd8ebd75156e991458a",
+              "url": "https://sie.dlut.edu.cn/info/3731/21141.htm"
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-dut-foundation-support-1",
+              "canonicalSourceSha256": "3fa0e2f013051ce3a759aa05363a7b24608d8d3d381a92f1c2db79c0aa507f06",
+              "url": "https://iso.dlut.edu.cn/html/article_content/202511/89A38338906B4A999612DFE1C4653F97.shtml"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "readable-foundation-programme-body-has-enrollment-months-no-hard-applicant-day-secondary-route-timeout-and-linked2026-attachment-is-captcha",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sie.dlut.edu.cn/info/3731/21141.htm",
+          "evidenceBodySha256": "885484848895c89115edc17068b9cef4125fce766fc28c144ad686e8e9b8291d",
+          "observedAt": "2026-10-19T13:25:49.550252+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "semesterStartMonthsNotApplicantDeadlines": true,
+          "recommendedJuneEndNotInventedAsHardJune30": true,
+          "linked2026PdfBytesUnavailable": true,
+          "captchaHtmlNotDateProof": true,
+          "noCaptchaBypassAttempted": true,
+          "retryPolicy": "cooldown-after-one-support-web-fallback-and-one-direct-attachment-read",
+          "storedIntakeOtherRetained": true,
+          "noYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "dufe-two-language-intakes-standing-month-days-without-year-binding",
+      "universityId": "uni-dongbei-university-of-finance-and-economics",
+      "institutionPreviouslyChecked": true,
+      "evidence": [
+        {
+          "name": "dufe-language",
+          "url": "https://sie.dufe.edu.cn/en/studyad/clp/",
+          "observedAt": "2026-10-19T13:25:52.286347+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sie.dufe.edu.cn/en/studyad/clp/",
+          "contentType": "text/html; charset=utf-8",
+          "bytes": 33791,
+          "rawPath": "dufe-language.html",
+          "rawSha256": "ecd8b4206643bd01ce2fecb1625606524b2a9b219c7d624c650b919c0e47fc67",
+          "textPath": "dufe-language.txt",
+          "textSha256": "dd2ccaef13da904bc75ead8acecdc69834521fada05c69c8a08204e655b57c15",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "programmeQuote": "Long-term Chinese Language & Business Chinese Program",
+      "springQuote": "Spring semester: March 31",
+      "autumnQuote": "Fall semester: September 30",
+      "flexibleClassQuote": "Students having Chinese basis can be placed in appropriate classes anytime.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-dufe-chinese-language-2026-2027-autumn",
+          "universityId": "uni-dongbei-university-of-finance-and-economics",
+          "canonicalUniversitySha256": "2c810415312dda29862a89383ed85affa810df08933e6b9500f211b4808ebf7c",
+          "programId": "prog-gap-prog-dufe-chinese-language",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "905245690f462e21484fe198be49e9ec2aba1ea65d7b3f5496e85ec22c048422",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-prog-dufe-chinese-language"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-08-09",
+            "status": "stale",
+            "id": "cycle-gap-prog-dufe-chinese-language-2026-2027-autumn",
+            "programId": "prog-gap-prog-dufe-chinese-language",
+            "academicYear": "2026-2027",
+            "intake": "autumn",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": null,
+            "tuitionPeriod": null,
+            "tuitionStatus": null,
+            "evidenceBasis": "cycle-specific",
+            "factScope": "dates-only",
+            "applicationFeeCny": null,
+            "notes": {
+              "en": "DUFE's official international education site lists long-term Chinese study at CNY 8,800 per semester or CNY 16,500 per year, with recurring spring and autumn deadlines.",
+              "zh": "东财国际教育学院官网列出长期汉语项目，每学期8800元或每年16500元，并提供春秋季固定申请节点。",
+              "ru": "Официальный сайт: 8 800 юаней за семестр или 16 500 в год, весенний и осенний набор."
+            }
+          },
+          "canonicalCycleSha256": "905245690f462e21484fe198be49e9ec2aba1ea65d7b3f5496e85ec22c048422",
+          "canonicalProgramSha256": "84e4e583a428862a4663ae9cda1810f85109ad0f4256170843474413b3cb017a",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-dufe-chinese-language",
+              "canonicalProgramSha256": "84e4e583a428862a4663ae9cda1810f85109ad0f4256170843474413b3cb017a"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-dufe-chinese-language"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-dufe-chinese-language",
+              "canonicalSourceSha256": "17bea02f99c4b835fc855ca16c91915cfee75662c74deefffaaec7026683afd2",
+              "url": "https://sie.dufe.edu.cn/en/studyad/clp/"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-language-page-gives-term-month-day-but-no-explicit-target-application-or-entry-year",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sie.dufe.edu.cn/en/studyad/clp/",
+          "evidenceBodySha256": "ecd8b4206643bd01ce2fecb1625606524b2a9b219c7d624c650b919c0e47fc67",
+          "observedAt": "2026-10-19T13:25:52.286347+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "sourceRecurringMonthDay": "09-30",
+          "matchedStoredIntake": "autumn",
+          "targetEntryYear": 2026,
+          "targetEntryYearIsCanonicalContextOnly": true,
+          "sourceTargetEntryYearExplicit": false,
+          "unanchoredMonthDayNotAssignedAnIsoYear": true,
+          "flexibleClassPlacementNotRollingApplicationGuarantee": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-dufe-chinese-language-2026-2027-spring",
+          "universityId": "uni-dongbei-university-of-finance-and-economics",
+          "canonicalUniversitySha256": "2c810415312dda29862a89383ed85affa810df08933e6b9500f211b4808ebf7c",
+          "programId": "prog-gap-prog-dufe-chinese-language",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "116d400e81a819a5b7fe111060fd3ab7376994aae402347e552143f25bf18598",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-prog-dufe-chinese-language"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-08-09",
+            "status": "stale",
+            "id": "cycle-gap-prog-dufe-chinese-language-2026-2027-spring",
+            "programId": "prog-gap-prog-dufe-chinese-language",
+            "academicYear": "2026-2027",
+            "intake": "spring",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": null,
+            "tuitionPeriod": null,
+            "tuitionStatus": null,
+            "evidenceBasis": "cycle-specific",
+            "factScope": "dates-only",
+            "applicationFeeCny": null,
+            "notes": {
+              "en": "DUFE's official international education site lists long-term Chinese study at CNY 8,800 per semester or CNY 16,500 per year, with recurring spring and autumn deadlines.",
+              "zh": "东财国际教育学院官网列出长期汉语项目，每学期8800元或每年16500元，并提供春秋季固定申请节点。",
+              "ru": "Официальный сайт: 8 800 юаней за семестр или 16 500 в год, весенний и осенний набор."
+            }
+          },
+          "canonicalCycleSha256": "116d400e81a819a5b7fe111060fd3ab7376994aae402347e552143f25bf18598",
+          "canonicalProgramSha256": "84e4e583a428862a4663ae9cda1810f85109ad0f4256170843474413b3cb017a",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-dufe-chinese-language",
+              "canonicalProgramSha256": "84e4e583a428862a4663ae9cda1810f85109ad0f4256170843474413b3cb017a"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-dufe-chinese-language"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-dufe-chinese-language",
+              "canonicalSourceSha256": "17bea02f99c4b835fc855ca16c91915cfee75662c74deefffaaec7026683afd2",
+              "url": "https://sie.dufe.edu.cn/en/studyad/clp/"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-language-page-gives-term-month-day-but-no-explicit-target-application-or-entry-year",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sie.dufe.edu.cn/en/studyad/clp/",
+          "evidenceBodySha256": "ecd8b4206643bd01ce2fecb1625606524b2a9b219c7d624c650b919c0e47fc67",
+          "observedAt": "2026-10-19T13:25:52.286347+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "sourceRecurringMonthDay": "03-31",
+          "matchedStoredIntake": "spring",
+          "targetEntryYear": 2027,
+          "targetEntryYearIsCanonicalContextOnly": true,
+          "sourceTargetEntryYearExplicit": false,
+          "unanchoredMonthDayNotAssignedAnIsoYear": true,
+          "flexibleClassPlacementNotRollingApplicationGuarantee": true,
+          "noYearRollover": true
+        }
+      ]
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "reportSha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "batch": "official-batch-025",
+      "reportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f"
+    },
+    {
+      "batch": "official-batch-026",
+      "reportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9"
+    },
+    {
+      "batch": "official-batch-027",
+      "reportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+    },
+    {
+      "batch": "official-batch-028",
+      "reportSha256": "c1ee48a947ab94feac0f853531921d888b4ce30b24781afe7cb9e422e29f9276"
+    },
+    {
+      "batch": "official-batch-029",
+      "reportSha256": "6fa308e70e7e0ad0a0436ed5103eb067928fc9494ba1e977fdaba85cdd3d2243"
+    },
+    {
+      "batch": "official-batch-030",
+      "reportSha256": "95ae6d26c4de9030e7debe25a19d12f12d23235c3633a3b75aca538996958668"
+    },
+    {
+      "batch": "official-batch-031",
+      "reportSha256": "7f213f09e6f2e397a41ce67e2a81c68c9f4bed5f93f83d60d1cff37a42e5cf59"
+    },
+    {
+      "batch": "official-batch-032",
+      "reportSha256": "7ca2417531ff19ae0b9c7b348bf40be89d9029a48b7930172d876488b663b982"
+    },
+    {
+      "batch": "official-batch-033",
+      "reportSha256": "9087e4d1d7242809498d7f0a9c1b740419da39f52ee863e4d4849bd1aef44698"
+    },
+    {
+      "batch": "official-batch-034",
+      "reportSha256": "3ddc3e1c816b3c4927c13304492b76fd1fc8f5dc6ff90ec1043a770ccd55b9d0"
+    },
+    {
+      "batch": "official-batch-035",
+      "reportSha256": "b621c16cdbd0d01ca22059bd83f92e283d43629394ddab64ba7c86486ae7dafb"
+    },
+    {
+      "batch": "official-batch-036",
+      "reportSha256": "db944c0a39ebdae71e53866c10f70f6d98b60ef77ba034891224afe1c0bf7f50"
+    },
+    {
+      "batch": "official-batch-037",
+      "reportSha256": "97b3e53d8746d184d35408b19bff73b599781a934213b06ef23084b996e7ecc1"
+    },
+    {
+      "batch": "official-batch-038",
+      "reportSha256": "8df4ef3e1f25bf4165f9c5252e4226038bcc0d782f891d76d9506c53be143fb9"
+    },
+    {
+      "batch": "official-batch-039",
+      "reportSha256": "82f000484e1b310f4101e0bf377c1d9ce3da9dd3f05b37159c54acd4c8664380"
+    },
+    {
+      "batch": "official-batch-040",
+      "reportSha256": "c9e2856bd9c2436246d487f8a617767d59045dbdcb6e2e12029ef65938a16e2b"
+    },
+    {
+      "batch": "official-batch-041",
+      "reportSha256": "1836c4128bcf52a2aaa373fe3a78554913d602102d90c2d9106de0ef77cb5888"
+    },
+    {
+      "batch": "official-batch-042",
+      "reportSha256": "aac4c679eff569d3e6aee3b97c78b2b79a968cff2c0f4f7097fb628dc9120662"
+    }
+  ],
+  "validation": {
+    "exactEightIdsOnce": true,
+    "exactDispatchAndNoExtensionScopeMatched": true,
+    "noAssessedOrPriorApprovedOverlap": true,
+    "allSevenArePreviouslyCheckedInstitutionNewRecordScopes": true,
+    "sixInputsBeforeAfterUnchanged": true,
+    "canonicalFullRowsParentsAndSourcesSaved": true,
+    "quotedFragmentsMatchOriginalOrOfficialWebToolText": true,
+    "relevantCupbPdfPagesVisuallyRead": true,
+    "cqnuWebObservationDoesNotInventOriginBytes": true,
+    "cqnuPriorHeldSpringIDAndConsumerNotReplayed": true,
+    "dufeSourceYearsNotInvented": true,
+    "closedDatesExplicitPastIsoDays": true,
+    "strictBeforeAndFundingStagesPreserved": true,
+    "openingDatesNotAssessed": true
+  }
+}

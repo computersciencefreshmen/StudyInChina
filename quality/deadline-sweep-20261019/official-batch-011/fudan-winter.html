@@ -1,0 +1,396 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Application-International Summer Session，Fudan University</title><meta name="pageType" content="2">
+<meta name="pageTitle" content="Application">
+<META Name="keywords" Content="复旦国际夏令营,International Summer Session，Fudan University,Application" />
+
+    <link rel="stylesheet" href="../new/style/public.css">
+    <link rel="stylesheet" href="../new/style/ny.css">
+   
+<!--Announced by Visual SiteBuilder 9-->
+<script language="javascript" src="../_sitegray/_sitegray.js"></script>
+<!-- CustomerNO:776562626572323074684754525a554100000207475d5052 -->
+<link rel="stylesheet" type="text/css" href="../copy_1_danpian.vsb.css" />
+<script type="text/javascript" src="/system/resource/js/counter.js"></script>
+<script type="text/javascript">_jsq_(1166,'/copy_1_danpian.jsp',-1,1981380035)</script>
+</head>
+
+<body>
+    <div class="main-top">
+        <div class="header">
+            <div class="head wp">
+                <div class="head-l">
+<!-- 网站logo图片地址请在本组件"内容配置-网站logo"处填写 -->
+<a href="../index.htm"><img src="../new/images/logo.png" alt=""></a></div>
+                <div class="head-r">
+                    <div class="head-top"><script language="javascript" src="/system/resource/js/dynclicks.js"></script><script language="javascript" src="/system/resource/js/openlink.js"></script></div>
+                    <div class="search"><!-- 3.1.3版本 -->
+
+
+
+<script language="javascript" src="/system/resource/js/base64.js"></script><script language="javascript" src="/system/resource/js/jquery/jquery-latest.min.js"></script><script language="javascript" src="/system/resource/vue/vue.js"></script><script language="javascript" src="/system/resource/vue/bluebird.min.js"></script><script language="javascript" src="/system/resource/vue/axios.js"></script><script language="javascript" src="/system/resource/vue/polyfill.js"></script><script language="javascript" src="/system/resource/vue/token.js"></script><LINK href="/system/resource/vue/static/element/index.css" type="text/css" rel="stylesheet"><script language="javascript" src="/system/resource/vue/static/element/index.js"></script><script language="javascript" src="/system/resource/vue/static/public.js"></script><script language="javascript" src="/system/resource/openapp/search/js/containsHtmlTags.js"></script><script language="javascript" src="/system/resource/openapp/search/layui/layui.js"></script><style>
+    #appu2 .qwss{}
+    #appu2 .tj{}
+</style>
+<div id="divu2"></div>
+<script type="text/html" id="htmlu2">
+    <div id="appu2">
+        <div v-if="!isError">
+            <input type="text" class="qwss" placeholder="search" autocomplete=off v-model=query.keyWord @keyup.enter="onSubmit">
+            <input class="tj" name="submit_button" type="image" value="" src="../images/search.png" v-on:click="onSubmit()"/>
+        </div>
+        <div v-if="isError" style="color: #b30216; font-size:18px;text-align: center;padding:20px;">
+            应用维护中！
+        </div>
+    </div>
+</script>
+<script>
+    $("#divu2").html($("#htmlu2").text());
+</script>
+<script>
+    var appOwner = "1981380035";
+    var token = gettoken(10);
+    var urlPrefix = "/aop_component/";
+
+    jQuery.support.cors = true;
+    $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+    });
+
+    new Vue({
+        el: "#appu2",
+        data: function () {
+            return {
+                query: {
+                    keyWord: "",//搜索关键词
+                    owner: appOwner,
+                    token: token,
+                    urlPrefix: urlPrefix,
+                    lang:"i18n_en_US"
+                },
+                isError: false
+            }
+        },
+        mounted: function () {
+            var _this = this;
+            // _this.init();
+        },
+        methods: {
+            init: function(){
+                $.ajax({
+                    url: "/aop_component//webber/search/test",
+                    type: "get",
+                    success: function (response) {
+                        if (response.code == "0000") {
+                        } else if (response.code == "220") {
+                            _this.isError = true;
+                            console.log(response);
+                        } else if (!response.code) {
+                            _this.isError = true;
+                            console.log(response);
+                        }
+                    },
+                    error: function (response) {
+                        _this.isError = true;
+                    }
+                });
+            },
+            onSubmit: function (e) {
+                var url = "/aop_views/search/modules/resultpc/soso.html";
+                if ("10" == "1" || "10" == "2") {
+                    url = "" + url;
+                }
+                var _this = this;
+                var query = _this.query;
+                if (url.indexOf("?") > -1) {
+                    url = url.split("?")[0];
+                }
+                if (query.keyWord) {
+                    var query = new Base64().encode(JSON.stringify(query));
+                    window.open(url + "?query=" + query);
+                } else {
+                    alert("请填写搜索内容")
+                }
+            },
+        }
+    })
+</script>
+
+<script>
+   var appElementu2 = document.querySelector("#appu2");
+   if (appElementu2 && appElementu2.__vue__) {
+
+   } else {
+      $("#divu2").html($("#htmlu2").text());
+      var appOwner = "1981380035";   
+      var urlPrefix = "/aop_component/";
+      var ifLogin="";
+      var token = ifLogin=='true'?gettoken(10, true).trim():'tourist';
+      if (containsHtmlTags(token) || !token) { 
+         token = 'tourist';
+      }
+      jQuery.support.cors = true;
+      $.ajaxSetup({
+        beforeSend: function (request, settings) {
+            request.setRequestHeader("Authorization", token);
+            request.setRequestHeader("owner", appOwner);
+        }
+      });
+      var queryInfou2 = {
+        query: {
+            keyWord: "",//搜索关键词
+            owner: appOwner,
+            token: token,
+            urlPrefix: urlPrefix,
+            lang:"i18n_en_US"
+        },
+        isError: false
+      };
+      function keyUpFunu2(e){
+        var theEvent = e || window.event;
+        var keyCode = theEvent.keyCode || theEvent.which || theEvent.charCode;
+        if(keyCode == 13){
+          onSubmitu2();
+        }
+      };
+
+      function onSubmitu2(e) {
+        queryInfou2.query.keyWord= $("#appu2  .qwss").val();
+        
+        var url = "/aop_views/search/modules/resultpc/soso.html";      
+        if ("10" == "1" || "10" == "2") {
+           url = "" + url;
+        }
+        var query = queryInfou2.query;
+        if (url.indexOf("?") > -1) {
+            url = url.split("?")[0];
+        }
+        if (query.keyWord) {
+            var query = new Base64().encode(JSON.stringify(query));
+            window.open(url + "?query=" + query);
+        } else {
+            alert("请填写搜索内容")
+        }
+      };
+   }
+</script></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div id="nav"><div class="nav wp">
+    <ul>
+        <li>
+            <a href="../Why_FISS/About_FISS.htm">Why FISS</a>
+            <ul>
+                <li><a href="../Why_FISS/About_FISS.htm">About FISS</a></li>
+                <li><a href="../Why_FISS/About_Fudan.htm">About Fudan</a></li>
+                <li><a href="../Why_FISS/Students_Feedback.htm">Students Feedback</a></li>
+                <li><a href="../Why_FISS/Teaching_Assistants___Buddies.htm">Teaching Assistants &amp; Buddies</a></li>
+                <li><a href="../Why_FISS/Q___A.htm">Q &amp; A</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="../Courses/Course_List.htm">Courses</a>
+            <ul>
+                <li><a href="../Courses/Course_List.htm">Course List</a></li>
+                <li><a href="../Courses/Agenda.htm">Agenda</a></li>
+                <li><a href="../Courses/Transcript___Credit_Transfer.htm">Transcript &amp; Credit Transfer</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="../Activities___Events/Opening_Ceremony.htm">Activities &amp; Events</a>
+            <ul>
+                <li><a href="../Activities___Events/Opening_Ceremony.htm">Opening Ceremony</a></li>
+                <li><a href="../Activities___Events/Campus_Tour___Ice_Breaking.htm">Campus Tour &amp; Ice Breaking</a></li>
+                <li><a href="../Activities___Events/Field_Trips.htm">Field Trips</a></li>
+                <li><a href="../Activities___Events/Company_Visit.htm" target="_blank">Company Visit</a></li>
+                <li><a href="../Activities___Events/Cultural_Activities.htm">Cultural Activities</a></li>
+                <li><a href="../Activities___Events/Farewell_Party.htm">Farewell Party</a></li>
+                <li><a href="../Activities___Events/Shanghai_City_Exploration.htm">Shanghai City Exploration</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="../Application/Eligibility.htm">Application</a>
+            <ul>
+                <li><a href="../Application/Eligibility.htm">Eligibility</a></li>
+                <li><a href="../Application/Application_Materials.htm">Application Materials</a></li>
+                <li><a href="../Application/Application_Timeline.htm">Application Timeline</a></li>
+                <li><a href="../Application/HowtoApply/How_to_apply.htm">How to Apply</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="../Tuition_Fees/Tuition___Fees.htm">Tuition &amp; Fees</a>
+            <ul>
+                <li><a href="../Tuition_Fees/Tuition___Fees.htm">Tuition &amp; Fees</a></li>
+                <li><a href="../Tuition_Fees/Refund_Policy.htm">Refund Policy</a></li>
+                <li><a href="../Tuition_Fees/Scholarship_Opportunity.htm">Scholarship Opportunity</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="../Admitted_Students/Visa.htm" target="_blank">Admitted Students</a>
+            <ul>
+                <li><a href="../Admitted_Students/Visa.htm">Visa</a></li>
+                <li><a href="../Admitted_Students/Insurance.htm">Insurance</a></li>
+                <li><a href="../Admitted_Students/Registration.htm">Registration</a></li>
+                <li><a href="../Admitted_Students/Accommodation.htm">Accommodation</a></li>
+                <li><a href="../Admitted_Students/Campus_Life.htm">Campus Life</a></li>
+                <li><a href="../Admitted_Students/Eat_at_Fudan.htm">Eat at Fudan</a></li>
+                <li><a href="../Admitted_Students/Payment_in_China/AliPay.htm">Payment in China</a></li>
+                <li><a href="../Admitted_Students/Shanghai_Life_Highlights.htm">Shanghai Life Highlights</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="../Announcements.htm">Announcements</a>
+        </li>
+        <li>
+            <a href="About_FIWS.htm" class="winter">Winter</a>
+            <ul>
+                <li><a href="About_FIWS.htm">About FIWS</a></li>
+                <li><a href="Course_list.htm">Course list</a></li>
+                <li><a href="Eligibility.htm">Eligibility</a></li>
+                <li><a href="Application.htm">Application</a></li>
+                <li><a href="Tuition___Fees.htm">Tuition &amp; Fees</a></li>
+                <li><a href="Agenda.htm">Agenda</a></li>
+            </ul>
+        </li>
+    </ul>
+</div></div>
+    </div>
+    <div class="banner"><a><img src="../new/images/banner.png" /></a></div>
+    <div id="ny-main">
+        <div class="ny-main">
+            <div id="position"><div class="position wow fadeInUp wp">
+    <span><img src="../new/images/postion.png" alt=""></span>
+    <a href="../index.htm">Home</a><span>&gt;</span>
+            <a href="About_FIWS.htm">Winter</a>
+            <span>&gt;</span>
+            <a href="Application.htm">Application</a>
+</div></div>
+            <div class="ny wp">
+                <div class="ny-left">
+
+                    <p>
+Winter <span></span></p>
+
+                    <ul>    <li class="">
+        <a href="About_FIWS.htm" title="About FIWS">About FIWS</a>
+    </li>
+    <li class="">
+        <a href="Course_list.htm" title="Course list">Course list</a>
+    </li>
+    <li class="">
+        <a href="Eligibility.htm" title="Eligibility">Eligibility</a>
+    </li>
+    <li class="on active">
+        <a href="Application.htm" title="Application">Application</a>
+    </li>
+    <li class="">
+        <a href="Tuition___Fees.htm" title="Tuition &amp; Fees">Tuition &amp; Fees</a>
+    </li>
+    <li class="">
+        <a href="Agenda.htm" title="Agenda">Agenda</a>
+    </li>
+</ul>
+                    
+                </div>
+                <div class="ny-right">
+                    <div class="ny-title">
+<h2>Application</h2></div>
+                    <div class="art-main">
+
+
+<script language="javascript" src="/system/resource/js/ajax.js"></script><script language="javascript">_getBatchClickTimes('null',1981380035,'wbnews','u9')</script>
+<script>function seeContenta9(contentid,size,displayid){	document.getElementById(contentid).innerHTML = '[';	for(var i=0;i<=size;i++){		var allcontentid = contentid+(i+1);		if(allcontentid==displayid){			document.getElementById(contentid).innerHTML += " <span id='"+allcontentid+"' name='"+allcontentid+"'  >"+(i+1)+"</span> ";			document.getElementById(displayid).style.display = 'block';		}else{			document.getElementById(contentid).innerHTML += " <span style='cursor:pointer' id='"+allcontentid+"' name='"+allcontentid+"' onclick=seeContenta9('"+contentid+"','"+size+"','"+allcontentid+"')  >"+(i+1)+"</span> ";			document.getElementById(allcontentid).style.display = 'none';		}	}	document.getElementById(contentid).innerHTML += ']';}</script>
+<script language="javascript" src="/system/resource/js/news/mp4video.js"></script>
+<script>_addDynClicks('wbnews',1981380035,1796)</script>
+<div class="art-body">
+<br>
+    <div id="vsb_content_1796_u91"><div id="vsb_content"><p style="text-align:left;"><strong>Fudan International Winter Session 2026 (Dec. 21, 2026 - Jan. 8, 2027)</strong></p><p style="text-wrap-mode: wrap"><span style="font-family: arial, helvetica, sans-serif; font-size: 20px; color: rgb(227, 108, 9);"><strong>How to Apply</strong></span></p><p style="text-wrap-mode: wrap"><span style="font-family: arial, helvetica, sans-serif; font-size: 16px; background-color: rgb(183, 221, 232);"><strong>Self-paying Students</strong></span></p><p style="text-wrap-mode: wrap;margin-bottom: 8px"><span style="font-family: arial, helvetica, sans-serif;font-size: 16px"></span></p><p style="text-wrap-mode: wrap;margin: 0px 0px 10px;background: white"><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;"><strong>1. <span style="font-size: 16px; font-family: arial, helvetica, sans-serif; background-color: rgb(255, 255, 0);">International student holding a non-Chinese passport</span></strong>, please apply at&nbsp;<a href="https://istudent.fudan.edu.cn/apply/#/user/login" target="_self"><span style="color: rgb(26, 69, 152); border: 1px windowtext; padding: 0px;">https://istudent.fudan.edu.cn/apply/#/user/login</span></a> with<strong>&nbsp;Admission Code:</strong>&nbsp;082451.&nbsp;</span></p><p style="text-wrap-mode: wrap;margin: 0px 0px 10px;background: white"><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">Please complete your application by following the</span><a href="../ApplicationGuidelinesforFIWS2026.pdf" target="_blank"><span style="color: rgb(0, 112, 192);"><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">&nbsp;</span><strong><span style="font-size: 16px; font-family: arial, helvetica, sans-serif; text-decoration: underline;">Application&nbsp;</span></strong><strong><span style="font-size: 16px; font-family: arial, helvetica, sans-serif; text-decoration: underline;">Instruction</span></strong></span></a><span style="color: rgb(0, 112, 192);"><strong><span style="font-size: 16px; font-family: arial, helvetica, sans-serif; text-decoration: underline;">s&nbsp;</span></strong></span><span style="font-size: 16px; font-family: arial, helvetica, sans-serif;">here.&nbsp;</span></p><p style="text-wrap-mode: wrap;margin: 0px 0px 10px;background: white"><span style="color: rgb(227, 108, 9); background-color: rgb(255, 255, 255); font-family: arial, helvetica, sans-serif; font-size: 14px;">*If you haven't deactivated your Chinese hukou/nationality yet, your application as a non-Chinese citizen would be rejected and you will be asked to apply as a Chinese student with your valid Chinese ID or Chinese passport. And the application fee will not be refunded.</span></p><p style="text-wrap-mode: wrap;margin: 0px 0px 10px;background: white"><span style="color: rgb(227, 108, 9); background-color: rgb(255, 255, 255); font-family: arial, helvetica, sans-serif; font-size: 14px;"><span style="color: rgb(227, 108, 9); font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 14px; background-color: rgb(255, 255, 255);">中国籍学生（含中国大陆、香港、澳门、台湾籍和户口未注销的学生）请勿在此链接提交申请，在此链接申请会被拒！！！报名费不退！</span></span></p><p style="text-wrap-mode: wrap;margin: 0px 0px 10px;background: white"><span style="color: rgb(227, 108, 9); font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 16px; background-color: rgb(255, 255, 255);"><br></span></p><p style="text-wrap-mode: wrap;margin: 0px 0px 10px;background: white"><span style="font-family: arial, helvetica, sans-serif;font-size: 16px"><strong>2. <span style="font-family: arial, helvetica, sans-serif; font-size: 16px; background-color: rgb(255, 255, 0);">Students who are citizens of China's mainland, Hong Kong, Macau and Taiwan</span></strong>, </span><span style="padding: 0px; margin: 0px; box-sizing: border-box; font-family: arial, helvetica, sans-serif;">please apply by following the steps below:</span></p><p class="vsbcontent_start" style="padding: 0px; margin: 0px 0px 18px; box-sizing: border-box; font-family: Arial; font-size: 18px; white-space: normal; background-color: rgb(255, 255, 255);"><span style="font-size: 16px;"><strong style="padding: 0px; margin: 0px; box-sizing: border-box;"><span style="padding: 0px; margin: 0px; box-sizing: border-box; font-family: arial, helvetica, sans-serif; color: rgb(192, 0, 0);">Step 1:&nbsp;</span></strong></span><span style="padding: 0px; margin: 0px; box-sizing: border-box; font-family: arial, helvetica, sans-serif; font-size: 16px;">Create an off-campus account on </span><a href="http://register.fudan.edu.cn/" target="_self" style="outline: none; border: 0px; color: rgb(0, 112, 192); font-family: arial, helvetica, sans-serif; padding: 0px; margin: 0px; box-sizing: border-box; font-size: 16px; text-decoration: underline;"><span style="padding: 0px; margin: 0px; box-sizing: border-box; font-size: 16px;">http://register.fudan.edu.cn/</span></a><span style="padding: 0px; margin: 0px; box-sizing: border-box; font-family: arial, helvetica, sans-serif; font-size: 16px;">, set the site language in English by clicking the small earth in the upper right corner, search program “2026 Fudan International Winter Session(for self-paying students)”, submit your application.</span></p><p class="vsbcontent_start" style="padding: 0px; margin: 0px 0px 18px; box-sizing: border-box; font-family: Arial; font-size: 18px; white-space: normal; background-color: rgb(255, 255, 255);"><span style="font-size: 14px;"><span style="padding: 0px; margin: 0px; box-sizing: border-box; font-family: arial, helvetica, sans-serif; color: rgb(227, 108, 9);"><span style="color: rgb(227, 108, 9); font-family: arial, helvetica, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">直接点击或复制该网址可能会出现无法进入或页面空白的情况，试着在浏览器中手动输入网址，然后双击网站，手动删除https中的s（如有）</span></span></span></p><p class="vsbcontent_start" style="padding: 0px; margin: 0px 0px 18px; box-sizing: border-box; font-family: Arial; font-size: 18px; white-space: normal; background-color: rgb(255, 255, 255);"><span style="font-size: 14px;"><span style="padding: 0px; margin: 0px; box-sizing: border-box; font-family: arial, helvetica, sans-serif; color: rgb(227, 108, 9);">Please note that the website starts with "http", not "https". If the website shows blank, try to double click the website and delete the "s". Please&nbsp;<span style="color: rgb(227, 108, 9); font-family: arial, helvetica, sans-serif; background-color: rgb(255, 255, 255);">do not click the link but to type the website in your browser letter by letter.&nbsp;</span></span></span></p><p class="vsbcontent_start" style="padding: 0px; margin: 0px 0px 18px; box-sizing: border-box; font-family: Arial; font-size: 18px; white-space: normal; background-color: rgb(255, 255, 255);"><span style="font-size: 16px;"><span style="padding: 0px; margin: 0px; box-sizing: border-box; color: rgb(192, 0, 0);"><strong style="padding: 0px; margin: 0px; box-sizing: border-box;"><span style="padding: 0px; margin: 0px; box-sizing: border-box; font-family: arial, helvetica, sans-serif;">Step 2: </span></strong></span><span style="padding: 0px; margin: 0px; box-sizing: border-box; font-family: arial, helvetica, sans-serif;"> Pay the application fee (400 CNY) by scanning the </span></span><a href="../CHINESEPAYMENT.pdf" target="_blank" style="padding: 0px; margin: 0px; box-sizing: border-box; font-family: arial, helvetica, sans-serif; font-size: 16px; text-decoration: underline; color: rgb(0, 112, 192);"><strong><span style="padding: 0px; margin: 0px; box-sizing: border-box; font-family: arial, helvetica, sans-serif; font-size: 16px; text-decoration: underline; color: rgb(0, 112, 192);">Payment QR Code for Chinese Students</span></strong></a><span style="font-size: 16px; padding: 0px; margin: 0px; box-sizing: border-box; font-family: arial, helvetica, sans-serif;">. Please note that the application fee is non-refundable. Only pay after making sure that your application is submitted successfully on <span style="padding: 0px; margin: 0px; box-sizing: border-box;"> </span><a href="http://register.fudan.edu.cn/" target="_self" style="padding: 0px; margin: 0px; box-sizing: border-box; text-decoration: none; outline: none; border: 0px; color: rgb(26, 69, 152);">http://register.fudan.edu.cn/</a>. Your status should be Under Review if you submit successfully.</span></p><p class="vsbcontent_start" style="padding: 0px; margin: 0px 0px 18px; box-sizing: border-box; white-space: normal; background-color: rgb(255, 255, 255);"><span style="font-family:arial, helvetica, sans-serif">We will start to review your application materials after receiving the application fee.</span></p><p style="text-wrap-mode: wrap;margin: 0px 0px 10px;background: white"><span style="font-family: arial, helvetica, sans-serif;font-size: 16px"></span></p><p style="text-wrap-mode: wrap;margin-bottom: 0px;background: white"><span style="background-color: rgb(183, 221, 232);"><span style="font-family: arial, helvetica, sans-serif; font-size: 16px;"><strong style="font-family: arial, helvetica, sans-serif; font-size: 16px; text-wrap-mode: wrap;">Nominated Tuition-waived Exchange Students:</strong></span><span style="background-color: rgb(183, 221, 232); font-family: arial, helvetica, sans-serif; font-size: 16px;"><strong style="font-family: arial, helvetica, sans-serif; font-size: 16px; text-wrap-mode: wrap;">&nbsp;&nbsp;</strong></span></span><span style="font-family: arial, helvetica, sans-serif; font-size: 16px;">we will email you the Admission Code after receiving the official nomination from your home university.</span></p><p style="text-align:left;"><span style="font-family: arial, helvetica, sans-serif; font-size: 20px; color: rgb(227, 108, 9);"><strong>Important Deadline:</strong></span></p><ul type="disc" class=" list-paddingleft-2" style="width: 1092.5px; white-space: normal;"><li><p style="line-height: normal;"><span style="font-family: arial, helvetica, sans-serif; font-size: 16px;">Early-bird Application Deadline: 11:00am, Aug. 31, 2026 (Beijing time)</span></p></li><li><p style="line-height: normal;"><span style="font-family: arial, helvetica, sans-serif; font-size: 16px;">Early-bird Tuition Payment Deadline: 11:00am, Sep. 4, 2026 (Beijing time)</span></p></li></ul><p style="white-space: normal; line-height: normal;"><span style="font-family: arial, helvetica, sans-serif; font-size: 16px;"></span></p><ul type="disc" class=" list-paddingleft-2" style="width: 1092.5px; white-space: normal;"><li><p style="line-height: normal;"><span style="font-family: arial, helvetica, sans-serif; font-size: 16px;">Application Deadline for Non-Chinese: 11:00am, November 9, 2026 (Beijing time)</span></p></li><li><p style="line-height: normal;"><span style="font-family: arial, helvetica, sans-serif; font-size: 16px;">Application Deadline for Chinese: 11:00am, November 23, 2026 &nbsp;(Beijing time)</span></p></li><li><p style="line-height: normal;"><span style="font-family: arial, helvetica, sans-serif; font-size: 16px;">All Payment Deadline: 11:00am, Dec. 7, 2026 (Beijing time)</span></p></li></ul><p style="line-height: normal;"><span style="font-family: arial, helvetica, sans-serif; font-size: 16px;"></span><strong style="color: rgb(227, 108, 9); font-family: arial, helvetica, sans-serif; font-size: 20px;">Application Materials</strong></p><p style="text-align:left;"><span style="color: rgb(51, 51, 51); font-family: arial, helvetica, sans-serif; font-size: 16px;">1. <strong>One copy of ID document*:&nbsp;</strong></span><span style="color: rgb(51, 51, 51); font-family: &quot;times new roman&quot;;">Passport info page or&nbsp;Chinese ID info page (身份证正反面扫描件) or&nbsp;Mainland Travel Permit for Hong Kong, Macau, Taiwan Residents (回乡证/台胞证)</span></p><p style="text-align: left; line-height: normal;"><span style="color: rgb(51, 51, 51); font-family: arial, helvetica, sans-serif; font-size: 16px;">2. <strong>Enrollment certificate </strong>or documents proving student status at current university, such as <strong>student card, admission letter</strong>, etc. Documents in languages other than Chinese or English must be translated.</span></p><p style="text-align:left;"><span style="color: rgb(51, 51, 51); font-family: arial, helvetica, sans-serif; font-size: 16px;">3. <strong>Transcripts of academic records</strong>. Transcripts in languages other than Chinese or English must be translated.</span></p><p style="text-align:left;"><span style="color: rgb(51, 51, 51); font-family: arial, helvetica, sans-serif; font-size: 16px;">4. <strong>Proof of English proficiency: </strong>TOEFL, IELTS, Duolingo, or other materials proving a corresponding level of English. Native English-speakers or college students taking an English-taught program are exempted from this requirement.</span></p><p style="text-align:left;"><span style="color: rgb(51, 51, 51); font-family: arial, helvetica, sans-serif; font-size: 14px;">*If necessary, the university will require applicants to submit extra materials.</span></p><p style="margin-top:0;margin-right:0;margin-bottom: 10px;margin-left:0;background:white"><span style="font-family: arial, helvetica, sans-serif; font-size: 16px; color: rgb(0, 0, 0);">Note:&nbsp;</span></p><p style="margin-top:0;margin-right:0;margin-bottom: 10px;margin-left:0;background:white"><span style="font-family: arial, helvetica, sans-serif; font-size: 16px; color: rgb(0, 0, 0);">1.&nbsp;<strong style="font-family: arial, helvetica, sans-serif;font-size: 16px;white-space: normal;background-color: rgb(255, 255, 255)">Nominated Tuition-waived Exchange Students: </strong><span lang="EN-US" style="font-family: arial, helvetica, sans-serif;font-size: 16px;background-color: rgb(255, 255, 255)">we will email you the code after receiving the official nomination from your home university.</span></span></p><p style="margin-top:0;margin-right:0;margin-bottom: 10px;margin-left:0;background:white"><span style="font-family: arial, helvetica, sans-serif; font-size: 16px; color: rgb(0, 0, 0);">2.&nbsp;</span><span style="font-family: arial, helvetica, sans-serif; font-size: 16px;">All students including the nominated students should complete the application process on Fudan's portal. Otherwise it will be regarded as an invalid application, even you have completed the internal application at your home university.</span></p><p style="margin-top:0;margin-right:0;margin-bottom: 10px;margin-left:0;background:white"><span style="font-size: 16px; color: rgb(192, 80, 77); font-family: arial, helvetica, sans-serif; text-wrap-mode: wrap;"></span></p><p style="text-wrap-mode: wrap;"><span style="font-family: arial, helvetica, sans-serif; font-size: 20px; color: rgb(227, 108, 9);"><strong>Contact us</strong></span></p><p style="text-wrap-mode: wrap;">Tel: 86-21-65641016</p><p style="text-wrap-mode: wrap;">E-mail<span style="color: rgb(0, 0, 0);">: iws@fudan.edu.cn</span></p><p style="text-wrap-mode: wrap;"><br></p><p style="text-align: center"><img src="/virtual_attach_file.vsb?afc=eUmTy2olnkolLiLhRlbozAfLmA2UmL3sMmTfnzUsMm7bnRG0gihFp2hmCIa0LShfnSh7MYhfnzGiUm9PolrVM7LYMzvYozWfLRUaMN7Do7QFUNLZnNVVLRnFLlLPLmGJqjfjo4OeoDQXvsLYLR-4gDTJQty0Lz7DM1yPM4NDgtA8pUBcc&oid=1981380035&tid=1166&nid=1796&e=.jpg" width="312" height="317" vsbhref="vurl" vurl vheight=" 317px" vwidth=" 312px" alt="" orisrc="/virtual_attach_file.vsb?afc=eLm-yDn7Q7M7U4Mhzr2LR7soR-bMzG3iUmv8ozLZLRCYMRv0gihFp2hmCIa0LkyDMSyinkh2MzliUNQfnN7iLzLDU4LbUmT2UmLZozTko7rFLR7DMz9bM4AFLl-YM4GJqjfjo4OeoDQXvsLYLR-4gDTJQty0Lz7DM1yPM4NDgtA8pUBcc&oid=1981380035&tid=1166&nid=1796&e=.jpg" class="img_vsb_content" style="width: 312px; height: 317px;"></p><p style="text-align: center;"><span style="font-size: 14px;"><span style="font-family: Arial; text-align: center; background-color: rgb(255, 255, 255);">Please scan the QR code to join the </span><span style="padding: 0px; margin: 0px; box-sizing: border-box; font-family: Arial; text-align: center; background-color: rgb(255, 255, 255);">WeChat group</span><span style="font-family: Arial; text-align: center; background-color: rgb(255, 255, 255);"> for application Q&amp;A. 👆</span></span></p></div></div>
+    <span id="vsb_content_1796_u9" name="vsb_content_1796_u9"></span>
+    
+</div>
+</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="foot wp">
+            <div class="ft-l">
+                <ul>
+                    <li>
+<h2>Contact  </h2>
+<p>Ms. Shuang ZHANG</p>
+<p>International Summer Session, Fudan University</p>
+<p>Tel: 86-21-65641016</p>
+<p>Email: iss@fudan.edu.cn</p></li>
+                    <li><h2>Quick links </h2>
+<a href="https://iso.fudan.edu.cn/isoenglish/" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 1981380035, 94623)" style="display: block;"><p>International Students Office</p></a>
+<a href="https://istudent.fudan.edu.cn/apply/#/user/login" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 1981380035, 94624)" style="display: block;"><p>Online Application System for International Students</p></a>
+<a href="http://register.fudan.edu.cn/" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 1981380035, 94628)" style="display: block;"><p>Online Application System for Chinese students</p></a>
+<a href="https://payment.fudan.edu.cn/" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 1981380035, 94625)" style="display: block;"><p>Online Payment System</p></a>
+<a href="http://www.fudan.edu.cn/en/" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 1981380035, 94626)" style="display: block;"><p>Fudan University Home Page</p></a>
+<a href="http://www.meet-in-shanghai.net/" target="_blank" onclick="_addDynClicks(&#34;wburl&#34;, 1981380035, 94627)" style="display: block;"><p>Shanghai Tourism Bureau</p></a>
+</li>
+                </ul>
+            </div>
+            <div class="ft-r">
+                <ul>
+                    <li>
+    <a href="https://www.facebook.com/fudaniss" onclick="_addDynClicks(&#34;wbimage&#34;, 1981380035, 80298)">
+        <div class="icon"><img src="../new/images/ft-icon5.png" alt=""></div>
+    </a>
+</li>
+<li>
+    <a href="https://www.instagram.com/fudaniss/" onclick="_addDynClicks(&#34;wbimage&#34;, 1981380035, 80299)">
+        <div class="icon"><img src="../new/images/ft-icon3.png" alt=""></div>
+    </a>
+</li>
+
+                    
+    <li>
+        <a onclick="_addDynClicks(&#34;wbimage&#34;, 1981380035, 80215)">
+            <div class="icon"><img src="../images/ft-icon1.png" alt=""></div>
+            <div class="ewm"><img src="../dfiles/12723/o/img/wechat.jpg" alt=""></div>
+        </a>
+    <li>  
+</ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    
+    <script src="../new/js/jquery.min.js"></script>
+     <script src="../new/js/jquery-migrate.min.js"></script>
+     <script src="../new/js/public.js"></script>
+     
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

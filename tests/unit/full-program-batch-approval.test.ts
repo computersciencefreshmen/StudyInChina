@@ -1,8 +1,10 @@
 import { createHash } from 'node:crypto'
+import { renameSync } from 'node:fs'
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import { join, resolve, sep } from 'node:path'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { applyFullProgramBatch, assessFullProgramBatch, type FullProgramBatch } from '../../scripts/quality/approve-full-program-batch'
+import * as snapshotWriter from '../../scripts/automation/apply-catalog-snapshot'
 import { bundleSchema } from '../../src/lib/data/schema'
 import type { AdmissionCycle, DataBundle, Program, Source } from '../../src/lib/data/types'
 
@@ -34,6 +36,7 @@ beforeEach(() => {
 afterEach(async () => {
   vi.useRealTimers()
   vi.unstubAllGlobals()
+  vi.restoreAllMocks()
   for (const root of roots.splice(0)) {
     if (!resolve(root).startsWith(resolve('.tmp') + sep)) throw new Error('Unsafe full-program fixture cleanup')
     await rm(root, { recursive: true, force: true })
@@ -153,8 +156,46 @@ describe('full admissions approval from immutable official captures', () => {
     const after = await snapshot()
     for (const index of [0, 1, 2, 5]) expect(after[index]).toBe(before[index])
     const receipt = JSON.parse(await readFile(join(root, 'quality/program-expansion-20261013/applied-' + batch.batchId + '.json'), 'utf8'))
-    expect(receipt).toMatchObject({ originalCatalogSha256: catalogSha, appliedPrograms: 1, newPrograms: 1, before: [{ program: null, cycle: null }], after: [{ program, cycle }] })
+    expect(receipt).toMatchObject({ status: 'local-snapshot-applied-awaiting-publication', originalCatalogSha256: catalogSha, appliedPrograms: 1, newPrograms: 1, before: [{ program: null, cycle: null }], after: [{ program, cycle }], snapshot: { filesReplaced: 6, atomicity: 'per-file-only' } })
+    expect(receipt.baselineFileSha256.programs).toBe(sha(before[3]))
     expect(fetch).not.toHaveBeenCalled()
+  })
+
+  it('keeps the existing partial-eligibility selection while reserving only approved rows', async () => {
+    const { root, batch, catalogSha, program, cycle } = await fixture()
+    const held = structuredClone(batch.entries[0])
+    held.program.id = 'held-program'; held.program.slug = 'held-program'
+    held.cycle.id = 'held-cycle'; held.cycle.programId = held.program.id; held.reviewedAt = ''
+    batch.entries.push(held)
+    expect(applyFullProgramBatch(root, batch, catalogSha, today)).toMatchObject({ appliedPrograms: 1, assessment: { ready: 1, held: 1 } })
+    expect(JSON.parse(await readFile(join(root, 'content/data/programs.json'), 'utf8'))).toEqual([program])
+    expect(JSON.parse(await readFile(join(root, 'content/data/admission-cycles.json'), 'utf8'))).toEqual([cycle])
+    const receipt = JSON.parse(await readFile(join(root, 'quality/program-expansion-20261013/applied-' + batch.batchId + '.json'), 'utf8'))
+    expect(receipt.before).toHaveLength(1); expect(receipt.after).toHaveLength(1)
+  })
+
+  it('rolls back a real mid-snapshot rename failure and permanently rejects replay of the failed batch', async () => {
+    const { root, batch, catalogSha, snapshot } = await fixture(), before = await snapshot()
+    const original = snapshotWriter.applyCatalogSnapshotFiles
+    let failedAttempts = 0
+    const waitForRetry = vi.fn()
+    const injected = vi.spyOn(snapshotWriter, 'applyCatalogSnapshotFiles').mockImplementation((baseline, next) => original(baseline, next, {
+      platform: 'win32', waitForRetry, replaceFile: (source, target) => {
+        if (source.endsWith('.snapshot-tmp') && target.endsWith('admission-cycles.json')) { failedAttempts++; throw Object.assign(Error('synthetic-cycle-sharing-lock'), { code: 'EPERM' }) }
+        renameSync(source, target)
+      },
+    }))
+    expect(() => applyFullProgramBatch(root, batch, catalogSha, today)).toThrow('synthetic-cycle-sharing-lock; external_changes_preserved=none; rollback_failures=none')
+    injected.mockRestore()
+    expect(failedAttempts).toBe(5); expect(waitForRetry.mock.calls).toEqual([[25], [50], [100], [150]])
+    expect(await snapshot()).toEqual(before)
+    const receiptPath = join(root, 'quality/program-expansion-20261013/applied-' + batch.batchId + '.json')
+    const receiptBytes = await readFile(receiptPath), receipt = JSON.parse(receiptBytes.toString('utf8'))
+    expect(receipt).toMatchObject({ status: 'snapshot-failed-reconciliation-required', originalCatalogSha256: catalogSha, before: [{ program: null, cycle: null }] })
+    expect(receipt).not.toHaveProperty('appliedAt')
+    expect(() => applyFullProgramBatch(root, batch, catalogSha, today)).toThrow('batch_already_applied')
+    expect(await readFile(receiptPath)).toEqual(receiptBytes)
+    expect(await snapshot()).toEqual(before)
   })
 
   it('rejects an applied batch with the latest catalogue hash without changing data or its receipt', async () => {

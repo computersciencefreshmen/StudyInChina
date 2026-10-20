@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "url": "https://istudy.smu.edu.cn/pc/applyonline.html",
+  "nativeCapture": {
+    "name": "smu-apply",
+    "url": "https://istudy.smu.edu.cn/pc/applyonline.html",
+    "observedAt": "2026-10-19T12:19:49.240417+00:00",
+    "timeoutSeconds": 25,
+    "maximumBytes": 12000000,
+    "tlsCertificateValidation": true,
+    "captureSucceeded": false,
+    "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>",
+    "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown"
+  },
+  "fallback": {
+    "tool": "web.run open",
+    "requests": 1,
+    "reference": "turn76view0",
+    "reportedCrawled": "today",
+    "reportedContentType": "text/html",
+    "reportedTotalLines": 609,
+    "title": "南方医科大学国际教育学院",
+    "fullToolReadOccurred": true,
+    "rawOriginBytesAvailable": false,
+    "rawSha256": null,
+    "textSha256": null,
+    "observationOnly": true,
+    "observedFragments": [
+      {
+        "lines": "19-21",
+        "text": "南方医科大学来华留学生入学申请表 / APPLICATION FORM FOR INTERNATIONAL STUDENT"
+      },
+      {
+        "lines": "394-401",
+        "text": "是否拟申请奖学金 Scholarship; 广东政府来粤留学生新生奖学金 Guangdong Government Outstanding International Students Scholarship For Freshmen"
+      }
+    ],
+    "dateConclusion": "The fallback exposes an application form, not an outstanding-international-freshmen award guide or its own applicant cutoff."
+  },
+  "retryPolicy": "cooldown-after-one-reasonable-fallback",
+  "awardDateNotInferred": true,
+  "observedAtInterval": {
+    "notBefore": "2026-10-19T12:19:49.240417+00:00",
+    "notAfter": "2026-10-19T12:22:27.484294+00:00",
+    "basis": "The fallback tool read occurred after the native SMU TLS failure and before the following successful TYUT page capture. The web tool did not return its own exact timestamp; no exact timestamp is invented."
+  }
+}

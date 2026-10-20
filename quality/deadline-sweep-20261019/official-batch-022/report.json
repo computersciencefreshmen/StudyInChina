@@ -1,0 +1,3177 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-022-20261019",
+  "state": "completed-date-only-with-explicit-held-routes",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T06:48:12.339Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v5.json",
+  "targetQueueSha256": "01719171d2d61977e8c62adfe3e323750f30b40a2396685c962f56d71bfa34d4",
+  "selectedUniversityIds": [
+    "uni-guizhou-medical-university",
+    "uni-guizhou-normal-university",
+    "uni-hainan-medical-university",
+    "uni-hangzhou-dianzi-university",
+    "uni-harbin-medical-university",
+    "uni-harbin-normal-university",
+    "uni-hebei-medical-university"
+  ],
+  "selection": {
+    "path": "selection.json",
+    "sha256": "f98e6c3fef6bdf41f42c748cbe607161f8d08d7ce48a87f616fe9f2888f524a3",
+    "baseQueueRecordIds": [
+      "cycle-gap-breadth-gzmu-b-stomatology-2026-2027-other",
+      "cycle-gap-local-strong-gmu-b-clinical-medicine-cn-2026-2027-other",
+      "cycle-gap-wave8-gznu-chinese-language-one-semester-fall-2026-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave8-gznu-chinese-language-one-year-fall-2026-2026-2027-autumn-fee-reference",
+      "sch-gap-wave8-gznu-chinese-language-scholarship-fall-2026",
+      "cycle-gap-local-strong-muhn-b-clinical-medicine-cn-2026-2027-other-fee-reference",
+      "sch-gap-local-strong-muhn-asean-scholarship",
+      "sch-gap-local-strong-muhn-hainan-government-scholarship",
+      "sch-gap-wave8-hdu-sonis-scholarship-2026",
+      "cycle-2026-hangzhou-dianzi-university-chinese-language-program-language",
+      "cycle-2026-hangzhou-dianzi-university-international-chinese-language-education-master",
+      "cycle-2026-hangzhou-dianzi-university-mechanical-engineering-master",
+      "sch-gap-wave3-sch-hmu-csc-high-level-graduate",
+      "sch-gap-wave3-sch-hmu-csc-silk-road",
+      "sch-gap-wave3-sch-hmu-moe-heilongjiang-eurasia",
+      "cycle-gap-wave3-hmu-d-international-postgraduate-programs-2026-2027-autumn",
+      "sch-gap-wave8-hrbnu-chinese-government-scholarship",
+      "sch-gap-wave8-hrbnu-heilongjiang-government-scholarship",
+      "sch-gap-wave3-sch-hebmu-chinese-government",
+      "cycle-gap-wave3-hebmu-b-international-undergraduate-2026-2027-autumn",
+      "cycle-gap-wave3-hebmu-d-doctoral-2026-2027-autumn",
+      "cycle-gap-wave3-hebmu-m-academic-masters-2026-2027-autumn"
+    ],
+    "additionalSameSourceRecordIds": [
+      "cycle-gap-prog-hdu-artificial-intelligence-bachelor-2026-2026-2027-other-fee-reference",
+      "cycle-gap-prog-hdu-business-management-bachelor-2026-2026-2027-other-fee-reference",
+      "cycle-gap-prog-hdu-computer-science-bachelor-2026-2026-2027-other-fee-reference",
+      "cycle-gap-prog-hdu-digital-economy-bachelor-2026-2026-2027-other-fee-reference",
+      "cycle-gap-prog-hdu-mechanical-bachelor-2026-2026-2027-other-fee-reference",
+      "cycle-2026-hangzhou-dianzi-university-software-engineering-bachelor",
+      "cycle-gap-wave3-hmu-m-international-postgraduate-programs-2026-2027-autumn"
+    ],
+    "baseQueueRecords": 22,
+    "additionalSameSourceRecords": 7,
+    "totalRecords": 29,
+    "additionalSelectionReceipt": "quality/deadline-sweep-20261019/heartbeat-0610/additional-same-source-selection-v1.json",
+    "additionalSelectionReceiptSha256": "19b484eb2df8aaefa97d74c9a2eb78962b4b5fc9f0e374d6a6d619b73f566b2b"
+  },
+  "acquisition": {
+    "nativeRequests": 13,
+    "originalFullSuccessfulResponses": 8,
+    "failedHTTPResponseBodiesRetained": 3,
+    "failedTLSWithoutBody": 1,
+    "oversizedPDFAttemptsStopped": 1,
+    "webFallbackExactUrls": 3,
+    "successfulWebFullNoticeReads": 1,
+    "successfulWebLandingReadsWithoutDateProof": 1,
+    "webFallbackFailures": 1,
+    "attachmentCaptchaLandingReads": 1,
+    "totalNetworkRequests": 17,
+    "distinctOfficialUrlsAttempted": 14,
+    "newUrlRequestsForAdditional7Records": 0,
+    "rawAndTextHashesVerified": true,
+    "originalNativeCaptureManifestSha256": "ff6ed6615546b00c964bb281ec32d3b7f7358223c1622b7359ba8e5c0b2f8c72",
+    "derivedNativeCaptureManifestSha256": "92514ec330baa444d3b6279a747c810dc61b220324482ae60698514cecf35fc8",
+    "webFallbackObservationReceiptSha256": "1541f6d2f62c242c938984011cc3eb3d5e2f51883a5fa322bcd32d7217285c83",
+    "visualReceiptSha256": "fd15c1387eef05b6e21747e12a4bae06b62a69a513e6191ebffcd47070432df0",
+    "paidModelCalls": 0,
+    "normalTLSCertificateValidation": true,
+    "sourceOriginalBytesAndWebObservationHashesNeverConflated": true
+  },
+  "summary": {
+    "universitiesWithScopedChecks": 7,
+    "recordsAssessed": 29,
+    "baseQueueRecords": 22,
+    "additionalSameSourceRecords": 7,
+    "admissionCyclesAssessed": 19,
+    "scholarshipsAssessed": 10,
+    "recordResults": {
+      "unknown": 11,
+      "closed": 16,
+      "blocked": 2
+    },
+    "newExactExpiredDeadlineCandidatesFromCanonicalNull": 7,
+    "existingExpiredDatesScoped": 9,
+    "unresolvedCandidateBindings": 5,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "publicationActions": 0,
+    "fullFactsCertified": 0,
+    "wholeSchoolCataloguesCertified": 0
+  },
+  "policy": "Date-only source observations. Newdates remain candidates, oldnulls and all storedrowmetadata/freshness remain unchanged. No programme is declared discontinued. Calendar closure applies only to explicit sameyear/route. Broadcourse dates never automatically become independentaward dates. Unsupported programme/year/funding scopes remain unknown; heldsources retain bounded cooldown. Any future narrow consumer needs independent review and exactrowCAS.",
+  "groups": [
+    {
+      "key": "gmc-2026-original-scanned-guide-route-mismatch-held",
+      "universityId": "uni-guizhou-medical-university",
+      "evidence": [
+        {
+          "key": "source-01",
+          "url": "https://soe.gmc.edu.cn/info/1008/1702.htm",
+          "method": "GET",
+          "startedAt": "2026-10-19T06:15:16.048997+00:00",
+          "attempt": 1,
+          "httpStatus": 200,
+          "finalUrl": "https://soe.gmc.edu.cn/info/1008/1702.htm",
+          "contentType": "text/html",
+          "bytes": 20156,
+          "rawPath": "source-01.html",
+          "rawSha256": "6d11acc0cf35e4afb7f2132d0d694b0b5ef95b3a404c1baee2f00c713b5401bb",
+          "decodedCharset": "utf-8",
+          "textPath": "source-01.txt",
+          "textSha256": "0014c5a25558b1abb3bbadc4e4fda85df608f2d2d12b7474a7f4d5555928c221",
+          "observedAt": "2026-10-19T06:15:19.126935+00:00",
+          "sourceType": "origin-original-bytes",
+          "readScope": "Landing title/navigation only; no deadline certified from landing.",
+          "fullFactsCertified": false
+        },
+        {
+          "key": "source-12",
+          "url": "https://soe.gmc.edu.cn/__local/3/FC/52/1F9D6DB546BAA1A51B10844BA6E_E1AEE628_91911C.pdf",
+          "method": "GET",
+          "startedAt": "2026-10-19T06:40:37.715733+00:00",
+          "attempt": 1,
+          "httpStatus": 200,
+          "finalUrl": "https://soe.gmc.edu.cn/__local/3/FC/52/1F9D6DB546BAA1A51B10844BA6E_E1AEE628_91911C.pdf",
+          "contentType": "application/pdf",
+          "bytes": 9539868,
+          "rawPath": "source-12.pdf",
+          "rawSha256": "63ce26468c55164de9ecf534322a3972910fba4cba035e886067c143247cc798",
+          "pages": 6,
+          "textPath": "source-12.txt",
+          "textSha256": "5bd9525a6986f32b7494f15af6240dc834c11cc50aebc46c090b95edec0a44c1",
+          "observedAt": "2026-10-19T06:40:43.533250+00:00",
+          "sourceType": "origin-original-bytes",
+          "readScope": "All six scanned originalPDF pages rendered and visually read; no text layer exists.",
+          "fullFactsCertified": false
+        }
+      ],
+      "rawPdfVisualReadingReceipt": {
+        "path": "gmc-visual-reading.json",
+        "sha256": "fd15c1387eef05b6e21747e12a4bae06b62a69a513e6191ebffcd47070432df0"
+      },
+      "quotedDate": "Fall Semester: till 30 September, 2026",
+      "originalYear": 2026,
+      "sourceDeadlineCandidate": "2026-09-30",
+      "applicantVsInstitution": "ThePDF ApplicationTime box is applicant submission; later interviews, result publication and registration are separate steps.",
+      "unresolvedScope": "The exact2026PDF names ClinicalMedicine with1+5years and BDS with5years. Canonical selected rows claim five-year Chinese-taught routes; clinical duration differs and BDS Chinese teaching language is not explicit. A shared sourceURL is insufficient to certify those exact routes.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-breadth-gzmu-b-stomatology-2026-2027-other",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-guizhou-medical-university",
+          "programId": "prog-gap-breadth-gzmu-b-stomatology",
+          "programName": "Stomatology",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "canonicalCycleSha256": "6c355951113f01b9e5b6087e850eedc7e645b2ab5c321de8420247925a024900",
+          "canonicalProgramSha256": "6ce5765eef30e724f883e7f133cc6c6e65c319c94e3e0624ef93e94f02b41036",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalRecordSha256": "6c355951113f01b9e5b6087e850eedc7e645b2ab5c321de8420247925a024900",
+          "canonicalRowSha256": "6c355951113f01b9e5b6087e850eedc7e645b2ab5c321de8420247925a024900",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-breadth-gzmu-b-stomatology",
+              "canonicalProgramSha256": "6ce5765eef30e724f883e7f133cc6c6e65c319c94e3e0624ef93e94f02b41036"
+            }
+          ],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "sourceIds": [
+            "src-gap-program-breadth-gzmu-b-stomatology"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-breadth-gzmu-b-stomatology",
+              "canonicalSourceSha256": "739e9dff98f47c8fb1a928610a3bda85f4515b0331f8bd23227903a892a2670f",
+              "url": "https://soe.gmc.edu.cn/info/1008/1702.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-breadth-gzmu-b-stomatology",
+                "url": "https://soe.gmc.edu.cn/info/1008/1702.htm",
+                "title": "Guizhou Medical University International Admissions",
+                "publisher": "guizhou-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-12",
+          "evidenceSourceUrl": "https://soe.gmc.edu.cn/__local/3/FC/52/1F9D6DB546BAA1A51B10844BA6E_E1AEE628_91911C.pdf",
+          "observedAt": "2026-10-19T06:40:43.533250+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "63ce26468c55164de9ecf534322a3972910fba4cba035e886067c143247cc798",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": "2026-09-30",
+          "reason": "dated-2026-original-found-but-selected-five-year-chinese-route-not-fully-matched",
+          "quotedDate": "Fall Semester: till 30 September, 2026",
+          "candidateBindingState": "unresolved-exact-route-not-approved",
+          "officialDeadlineNotBoundToExactProgramme": true,
+          "evidencePage": 5,
+          "evidencePrintedPage": 6,
+          "deadlineBoundary": "till2026-09-30-no-clock-time",
+          "publishRiskFlags": [
+            "originalBDS-five-years-Chinese-teaching-language-not-explicit"
+          ]
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-gmu-b-clinical-medicine-cn-2026-2027-other",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-guizhou-medical-university",
+          "programId": "prog-gap-local-strong-gmu-b-clinical-medicine-cn",
+          "programName": "Clinical Medicine",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "canonicalCycleSha256": "027ea8084cc37feeb34a4e2fe88471ba0b709617835dc6e5e2fcbde7b84451c1",
+          "canonicalProgramSha256": "aadf2a4343e3c7a0ffd571a1c71e92db4d30c6814ec20dd7a39652c3dd31227e",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalRecordSha256": "027ea8084cc37feeb34a4e2fe88471ba0b709617835dc6e5e2fcbde7b84451c1",
+          "canonicalRowSha256": "027ea8084cc37feeb34a4e2fe88471ba0b709617835dc6e5e2fcbde7b84451c1",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-gmu-b-clinical-medicine-cn",
+              "canonicalProgramSha256": "aadf2a4343e3c7a0ffd571a1c71e92db4d30c6814ec20dd7a39652c3dd31227e"
+            }
+          ],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "sourceIds": [
+            "src-gap-program-local-strong-gmu-b-clinical-medicine-cn"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-gmu-b-clinical-medicine-cn",
+              "canonicalSourceSha256": "34159b766677adfed464ab2117077b641801a58cb6f3c7b54d8d3baad4884ecb",
+              "url": "https://soe.gmc.edu.cn/info/1008/1702.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-strong-gmu-b-clinical-medicine-cn",
+                "url": "https://soe.gmc.edu.cn/info/1008/1702.htm",
+                "title": "Guizhou Medical University International Programs",
+                "publisher": "guizhou-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-12",
+          "evidenceSourceUrl": "https://soe.gmc.edu.cn/__local/3/FC/52/1F9D6DB546BAA1A51B10844BA6E_E1AEE628_91911C.pdf",
+          "observedAt": "2026-10-19T06:40:43.533250+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "63ce26468c55164de9ecf534322a3972910fba4cba035e886067c143247cc798",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": "2026-09-30",
+          "reason": "dated-2026-original-found-but-selected-five-year-chinese-route-not-fully-matched",
+          "quotedDate": "Fall Semester: till 30 September, 2026",
+          "candidateBindingState": "unresolved-exact-route-not-approved",
+          "officialDeadlineNotBoundToExactProgramme": true,
+          "evidencePage": 5,
+          "evidencePrintedPage": 6,
+          "deadlineBoundary": "till2026-09-30-no-clock-time",
+          "publishRiskFlags": [
+            "originalPDFClinicalMedicine1+5years-versus-canonical60months",
+            "direct-five-year-Chinese-route-not-explicit"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "gznu-2026-fall-language-admission-versus-scholarship",
+      "universityId": "uni-guizhou-normal-university",
+      "evidence": [
+        {
+          "key": "source-02",
+          "url": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+          "method": "GET",
+          "startedAt": "2026-10-19T06:15:16.050008+00:00",
+          "attempt": 1,
+          "httpStatus": 200,
+          "finalUrl": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+          "contentType": "text/html",
+          "bytes": 71184,
+          "rawPath": "source-02.html",
+          "rawSha256": "968fc6de6acc9daa51ff944956228879c6f319b6e647978e87d2e63ebdd136f7",
+          "decodedCharset": "utf-8",
+          "textPath": "source-02.txt",
+          "textSha256": "ac109f6043f0b7447bfdf814268ad08648855f120d33eabb5f0487702553b2c9",
+          "observedAt": "2026-10-19T06:15:20.893394+00:00",
+          "sourceType": "origin-original-bytes",
+          "readScope": "complete-visible-body-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "officialTitle": "2026年贵州师范大学秋季学期国际学生汉语进修项目",
+      "quotedDate": "报名应在2026年5月30日前申请，可选择申请学习一学期或一学年",
+      "courseDurationNotDeadline": {
+        "semester": "September–December2026",
+        "academicYear": "September2026–July2027",
+        "applicantDeadline": "2026-05-30"
+      },
+      "boundaryQualification": "Chinese says beforeMay30; English says byMay30. Both original formulations are retained; no precise clock/inclusion boundary is invented.",
+      "englishDateQuote": "Application Deadline: Applications must be submitted by May 30, 2026.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-gznu-chinese-language-one-semester-fall-2026-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-guizhou-normal-university",
+          "programId": "prog-gap-wave8-gznu-chinese-language-one-semester-fall-2026",
+          "programName": "Chinese Language Program — One Semester",
+          "degreeLevel": "language",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "123d24d1fd46004e624988fc3ead3045e233d9612f99e9ac62ce33508c045e16",
+          "canonicalProgramSha256": "899b52b508130055c168cb161906f0dbe31fa43899f5e89d2de660697bd29a3d",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalRecordSha256": "123d24d1fd46004e624988fc3ead3045e233d9612f99e9ac62ce33508c045e16",
+          "canonicalRowSha256": "123d24d1fd46004e624988fc3ead3045e233d9612f99e9ac62ce33508c045e16",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-gznu-chinese-language-one-semester-fall-2026",
+              "canonicalProgramSha256": "899b52b508130055c168cb161906f0dbe31fa43899f5e89d2de660697bd29a3d"
+            }
+          ],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-02",
+          "storedReviewAfter": "2026-08-09",
+          "sourceIds": [
+            "src-gap-program-wave8-gznu-chinese-language-one-semester-fall-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-gznu-chinese-language-one-semester-fall-2026",
+              "canonicalSourceSha256": "f6fbf8e2f9598c0701dc69b582ff91dddd261140d7743489829187eca21a7001",
+              "url": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave8-gznu-chinese-language-one-semester-fall-2026",
+                "url": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+                "title": "Guizhou Normal University Fall 2026 Chinese Language Program",
+                "publisher": "guizhou-normal-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-02",
+          "evidenceSourceUrl": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+          "observedAt": "2026-10-19T06:15:20.893394+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "968fc6de6acc9daa51ff944956228879c6f319b6e647978e87d2e63ebdd136f7",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "src-gap-program-wave8-gznu-chinese-language-one-semester-fall-2026"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-30",
+          "candidateOfficialDeadline": "2026-05-30",
+          "reason": "same-2026-fall-language-semester-or-year-explicit-applicant-cutoff-is-past",
+          "storedDateMatchesScopedOfficialDay": false,
+          "candidateDeadlineChangesStoredNull": true,
+          "deadlineBoundary": "Chinese-beforeMay30-English-byMay30-no-clock-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "报名应在2026年5月30日前申请，可选择申请学习一学期或一学年",
+          "boundaryLanguageDifferenceRetained": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-gznu-chinese-language-one-year-fall-2026-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-guizhou-normal-university",
+          "programId": "prog-gap-wave8-gznu-chinese-language-one-year-fall-2026",
+          "programName": "Chinese Language Program — One Academic Year",
+          "degreeLevel": "language",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "75223a9982e837cf2b8f4a180cf6bd54ef1daa2942b4a72d5fe0b1199eeb54e5",
+          "canonicalProgramSha256": "50b78fa18b03196edf81b5d01f89db9aa25743ac5ae538ee0fa40e30000aa422",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalRecordSha256": "75223a9982e837cf2b8f4a180cf6bd54ef1daa2942b4a72d5fe0b1199eeb54e5",
+          "canonicalRowSha256": "75223a9982e837cf2b8f4a180cf6bd54ef1daa2942b4a72d5fe0b1199eeb54e5",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-gznu-chinese-language-one-year-fall-2026",
+              "canonicalProgramSha256": "50b78fa18b03196edf81b5d01f89db9aa25743ac5ae538ee0fa40e30000aa422"
+            }
+          ],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-02",
+          "storedReviewAfter": "2026-08-09",
+          "sourceIds": [
+            "src-gap-program-wave8-gznu-chinese-language-one-year-fall-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-gznu-chinese-language-one-year-fall-2026",
+              "canonicalSourceSha256": "893359e65ebcb8262f499bff70ec7c92ad7edf601d40c5ac07c27a4b312ca7c3",
+              "url": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave8-gznu-chinese-language-one-year-fall-2026",
+                "url": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+                "title": "Guizhou Normal University Fall 2026 Chinese Language Program",
+                "publisher": "guizhou-normal-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-02",
+          "evidenceSourceUrl": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+          "observedAt": "2026-10-19T06:15:20.893394+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "968fc6de6acc9daa51ff944956228879c6f319b6e647978e87d2e63ebdd136f7",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "src-gap-program-wave8-gznu-chinese-language-one-year-fall-2026"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-30",
+          "candidateOfficialDeadline": "2026-05-30",
+          "reason": "same-2026-fall-language-semester-or-year-explicit-applicant-cutoff-is-past",
+          "storedDateMatchesScopedOfficialDay": false,
+          "candidateDeadlineChangesStoredNull": true,
+          "deadlineBoundary": "Chinese-beforeMay30-English-byMay30-no-clock-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "报名应在2026年5月30日前申请，可选择申请学习一学期或一学年",
+          "boundaryLanguageDifferenceRetained": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-gznu-chinese-language-scholarship-fall-2026",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-guizhou-normal-university",
+          "name": "GZNU International Student Scholarship for Chinese Language Study",
+          "programIds": [
+            "prog-gap-wave8-gznu-chinese-language-one-semester-fall-2026",
+            "prog-gap-wave8-gznu-chinese-language-one-year-fall-2026"
+          ],
+          "canonicalScholarshipSha256": "b688b7508702ac5dbda9f241d9f04b3855358a8225fe675c5316b245c0430691",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "b688b7508702ac5dbda9f241d9f04b3855358a8225fe675c5316b245c0430691",
+          "canonicalRowSha256": "b688b7508702ac5dbda9f241d9f04b3855358a8225fe675c5316b245c0430691",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-gznu-chinese-language-one-semester-fall-2026",
+              "canonicalProgramSha256": "899b52b508130055c168cb161906f0dbe31fa43899f5e89d2de660697bd29a3d"
+            },
+            {
+              "programId": "prog-gap-wave8-gznu-chinese-language-one-year-fall-2026",
+              "canonicalProgramSha256": "50b78fa18b03196edf81b5d01f89db9aa25743ac5ae538ee0fa40e30000aa422"
+            }
+          ],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-02",
+          "storedReviewAfter": "2026-09-01",
+          "sourceIds": [
+            "src-gap-scholarship-wave8-gznu-chinese-language-scholarship-fall-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-gznu-chinese-language-scholarship-fall-2026",
+              "canonicalSourceSha256": "5fd43d95511e37c00b9df3f1adae1c1164894e6298d6d31e5b301c9e139f3124",
+              "url": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave8-gznu-chinese-language-scholarship-fall-2026",
+                "url": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+                "title": "Guizhou Normal University Fall 2026 Chinese Language Program",
+                "publisher": "guizhou-normal-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-wave8-gznu-chinese-language-one-semester-fall-2026",
+              "canonicalSourceSha256": "f6fbf8e2f9598c0701dc69b582ff91dddd261140d7743489829187eca21a7001",
+              "url": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave8-gznu-chinese-language-one-semester-fall-2026",
+                "url": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+                "title": "Guizhou Normal University Fall 2026 Chinese Language Program",
+                "publisher": "guizhou-normal-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-wave8-gznu-chinese-language-one-year-fall-2026",
+              "canonicalSourceSha256": "893359e65ebcb8262f499bff70ec7c92ad7edf601d40c5ac07c27a4b312ca7c3",
+              "url": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave8-gznu-chinese-language-one-year-fall-2026",
+                "url": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+                "title": "Guizhou Normal University Fall 2026 Chinese Language Program",
+                "publisher": "guizhou-normal-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-02",
+          "evidenceSourceUrl": "https://sie.gznu.edu.cn/info/1771/89595.htm",
+          "observedAt": "2026-10-19T06:15:20.893394+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "968fc6de6acc9daa51ff944956228879c6f319b6e647978e87d2e63ebdd136f7",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "src-gap-scholarship-wave8-gznu-chinese-language-scholarship-fall-2026"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "language-programme-scholarship-listed-without-independent-applicant-cutoff",
+          "quotedDate": null,
+          "awardQuote": "特别优秀的学生可申请我校奖学金",
+          "generalProgrammeDeadlineNotBorrowed": "2026-05-30"
+        }
+      ]
+    },
+    {
+      "key": "hainan-2026-self-funded-and-independent-scholarship-dates",
+      "universityId": "uni-hainan-medical-university",
+      "evidence": [
+        {
+          "key": "source-03",
+          "url": "https://www.muhn.edu.cn/gjxy/info/1432/19674.htm",
+          "method": "GET",
+          "startedAt": "2026-10-19T06:15:16.050008+00:00",
+          "attempt": 1,
+          "httpStatus": 404,
+          "finalUrl": "https://www.muhn.edu.cn/gjxy/info/1432/19674.htm",
+          "contentType": "text/html",
+          "bytes": 1693,
+          "rawPath": "source-03.html",
+          "rawSha256": "29c0b0a5db57af93122bca27d4c301f5d1b7d34e5f410a85b4c1af2e747a1407",
+          "decodedCharset": "utf-8",
+          "textPath": "source-03.txt",
+          "textSha256": "59a075250948e7657504223d81da3b3531ec97294f740de32c26a6175104466a",
+          "error": "HTTP 404 (original response retained)",
+          "observedAt": "2026-10-19T06:15:23.093197+00:00",
+          "sourceType": "failed-origin-response-not-date-proof",
+          "readScope": "Old registeredURL404 body retained only; no date proof.",
+          "fullFactsCertified": false
+        },
+        {
+          "key": "source-04",
+          "url": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+          "method": "GET",
+          "startedAt": "2026-10-19T06:15:16.051006+00:00",
+          "attempt": 1,
+          "httpStatus": 200,
+          "finalUrl": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+          "contentType": "text/html",
+          "bytes": 119868,
+          "rawPath": "source-04.html",
+          "rawSha256": "81d4cdb47283cf31f3065cb332ce2da4d1d8abf0b73ac95f6206293a5d82d800",
+          "decodedCharset": "utf-8",
+          "textPath": "source-04.txt",
+          "textSha256": "1e6dbc0bbb787acc46b733e77717ae8742f3ecbba3318794b771ace9535527ef",
+          "observedAt": "2026-10-19T06:15:23.104381+00:00",
+          "sourceType": "origin-original-bytes",
+          "readScope": "complete-visible-body-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "officialTitle": "海南医科大学国际学生学历生招生简章 (2026)",
+      "exactProgrammeQuote": "临床医学\nClinical Medicine\n汉语\nChinese\n5\n年",
+      "quotedDates": [
+        "July 15, 2026: Deadline for self-funded student applications;",
+        "May 20, 2026: Deadline for applications for Hainan Government Scholarships for international students;",
+        "Those applying for scholarships must finish their applications before May 20."
+      ],
+      "notApplicantCutoff": {
+        "registration": "September 15, 2026: Deadline for registration.",
+        "generalFebruaryToJulyReference": "General annual advice is superseded for exact2026 self-funded applications by the explicitJuly15 clause; September15 is registration only."
+      },
+      "awardScopeQualification": "The guide names both provincial-government and ASEAN awards. The specifically dated2026May20 clause names HainanGovernmentScholarships. A broader undated-year May20-before instruction is not silently promoted to an independent exact ASEAN award cutoff.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-strong-muhn-b-clinical-medicine-cn-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-hainan-medical-university",
+          "programId": "prog-gap-local-strong-muhn-b-clinical-medicine-cn",
+          "programName": "Clinical Medicine",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "canonicalCycleSha256": "c2ccd8d8920701dfc9c570063905fa4ee5ed607f02572a4314b4d5892e38450b",
+          "canonicalProgramSha256": "f594ee77dac4536474a85d614c3ea995272be6cdde123be6bea8b206767d987f",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalRecordSha256": "c2ccd8d8920701dfc9c570063905fa4ee5ed607f02572a4314b4d5892e38450b",
+          "canonicalRowSha256": "c2ccd8d8920701dfc9c570063905fa4ee5ed607f02572a4314b4d5892e38450b",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-strong-muhn-b-clinical-medicine-cn",
+              "canonicalProgramSha256": "f594ee77dac4536474a85d614c3ea995272be6cdde123be6bea8b206767d987f"
+            }
+          ],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "sourceIds": [
+            "src-gap-program-local-strong-muhn-b-clinical-medicine-cn"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-strong-muhn-b-clinical-medicine-cn",
+              "canonicalSourceSha256": "4aa44ab24d58f805fbf4fcec6587324889131dec20bcbbc2671712dbcb6132e9",
+              "url": "https://www.muhn.edu.cn/gjxy/info/1432/19674.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-strong-muhn-b-clinical-medicine-cn",
+                "url": "https://www.muhn.edu.cn/gjxy/info/1432/19674.htm",
+                "title": "Hainan Medical University International Admission",
+                "publisher": "hainan-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-hainan-degree-2026-review",
+              "canonicalSourceSha256": "38bb7472cecd2c7170740e5dc5576d945092aa36dc4f9e1523d77ed2a75cddee",
+              "url": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+              "sourceFullRecord": {
+                "id": "src-hainan-degree-2026-review",
+                "url": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+                "title": "Hainan Medical University International Student Degree Program Admission Brochure 2026",
+                "publisher": "Hainan Medical University",
+                "kind": "program",
+                "language": "zh",
+                "official": true,
+                "accessedAt": "2026-09-29"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-04",
+          "evidenceSourceUrl": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+          "observedAt": "2026-10-19T06:15:23.104381+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "81d4cdb47283cf31f3065cb332ce2da4d1d8abf0b73ac95f6206293a5d82d800",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-07-15",
+          "candidateOfficialDeadline": "2026-07-15",
+          "reason": "same-2026-Chinese-clinical-bachelor-explicit-self-funded-applicant-deadline-past",
+          "storedDateMatchesScopedOfficialDay": false,
+          "candidateDeadlineChangesStoredNull": true,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "July 15, 2026: Deadline for self-funded student applications;",
+          "fundingScope": "self-funded applications only; scholarship routes have separate earlier dates",
+          "scholarshipDeadlineNotSubstituted": "2026-05-20",
+          "registrationNotSubstituted": "2026-09-15"
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-local-strong-muhn-asean-scholarship",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-hainan-medical-university",
+          "name": "ASEAN Scholarship",
+          "programIds": [],
+          "canonicalScholarshipSha256": "ddf1b0c4742150890c45c66eac0d88523d15a1f4125d18b3570e93197eef0cdd",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "ddf1b0c4742150890c45c66eac0d88523d15a1f4125d18b3570e93197eef0cdd",
+          "canonicalRowSha256": "ddf1b0c4742150890c45c66eac0d88523d15a1f4125d18b3570e93197eef0cdd",
+          "canonicalProgramPins": [],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "sourceIds": [
+            "src-gap-scholarship-local-strong-muhn-asean-scholarship",
+            "src-hainan-degree-2026-review"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-local-strong-muhn-asean-scholarship",
+              "canonicalSourceSha256": "24408496a648f2d248e6d15786abf3a55e7a9f0c18d36a07fdba0387561b4700",
+              "url": "https://www.muhn.edu.cn/gjxy/info/1432/19674.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-local-strong-muhn-asean-scholarship",
+                "url": "https://www.muhn.edu.cn/gjxy/info/1432/19674.htm",
+                "title": "Hainan Medical University International Admission",
+                "publisher": "hainan-medical-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-hainan-degree-2026-review",
+              "canonicalSourceSha256": "38bb7472cecd2c7170740e5dc5576d945092aa36dc4f9e1523d77ed2a75cddee",
+              "url": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+              "sourceFullRecord": {
+                "id": "src-hainan-degree-2026-review",
+                "url": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+                "title": "Hainan Medical University International Student Degree Program Admission Brochure 2026",
+                "publisher": "Hainan Medical University",
+                "kind": "program",
+                "language": "zh",
+                "official": true,
+                "accessedAt": "2026-09-29"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-04",
+          "evidenceSourceUrl": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+          "observedAt": "2026-10-19T06:15:23.104381+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "81d4cdb47283cf31f3065cb332ce2da4d1d8abf0b73ac95f6206293a5d82d800",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "src-hainan-degree-2026-review"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": "2026-05-20",
+          "reason": "ASEAN-award-present-but-only-shared-May20-before-instruction-not-independent-exact-dated-ASEAN-cutoff",
+          "quotedDate": "Those applying for scholarships must finish their applications before May 20.",
+          "candidateBindingState": "shared-scholarship-instruction-requires-exact-award-scope-review",
+          "candidateDeadlineYearContext": "2026guide title and datedgovernmentaward clause; shared instruction itself omits year",
+          "deadlineBoundary": "beforeMay20-no-clock-stated",
+          "namedAwardQuote": "Hainan Provincial Government Scholarship for International Students and ASEAN Scholarship."
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-local-strong-muhn-hainan-government-scholarship",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-hainan-medical-university",
+          "name": "Hainan Provincial Government Scholarship",
+          "programIds": [],
+          "canonicalScholarshipSha256": "9e1663145ce596a43c0224f60bfba3d0a09dbee4cbf96bbe68d05176bab62c7d",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "9e1663145ce596a43c0224f60bfba3d0a09dbee4cbf96bbe68d05176bab62c7d",
+          "canonicalRowSha256": "9e1663145ce596a43c0224f60bfba3d0a09dbee4cbf96bbe68d05176bab62c7d",
+          "canonicalProgramPins": [],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "sourceIds": [
+            "src-gap-scholarship-local-strong-muhn-hainan-government-scholarship",
+            "src-hainan-degree-2026-review"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-local-strong-muhn-hainan-government-scholarship",
+              "canonicalSourceSha256": "407f71270ebcdba3793ddd2fdc0eaed2beda2eb8626f9ca8f311966856c27894",
+              "url": "https://www.muhn.edu.cn/gjxy/info/1432/19674.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-local-strong-muhn-hainan-government-scholarship",
+                "url": "https://www.muhn.edu.cn/gjxy/info/1432/19674.htm",
+                "title": "Hainan Medical University International Admission",
+                "publisher": "hainan-medical-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-hainan-degree-2026-review",
+              "canonicalSourceSha256": "38bb7472cecd2c7170740e5dc5576d945092aa36dc4f9e1523d77ed2a75cddee",
+              "url": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+              "sourceFullRecord": {
+                "id": "src-hainan-degree-2026-review",
+                "url": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+                "title": "Hainan Medical University International Student Degree Program Admission Brochure 2026",
+                "publisher": "Hainan Medical University",
+                "kind": "program",
+                "language": "zh",
+                "official": true,
+                "accessedAt": "2026-09-29"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-04",
+          "evidenceSourceUrl": "https://muhn.edu.cn/gjxy/info/1432/30314.htm",
+          "observedAt": "2026-10-19T06:15:23.104381+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "81d4cdb47283cf31f3065cb332ce2da4d1d8abf0b73ac95f6206293a5d82d800",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "src-hainan-degree-2026-review"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-20",
+          "candidateOfficialDeadline": "2026-05-20",
+          "reason": "explicit-2026-HainanGovernment-scholarship-application-deadline-past",
+          "storedDateMatchesScopedOfficialDay": false,
+          "candidateDeadlineChangesStoredNull": true,
+          "deadlineBoundary": "datedMay20deadline-plus-general-scholarship-beforeMay20-wording-no-clock-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "May 20, 2026: Deadline for applications for Hainan Government Scholarships for international students;",
+          "beforeWordingAlsoRetained": "Those applying for scholarships must finish their applications before May 20.",
+          "generalAdmissionDeadlineNotBorrowed": "2026-07-15"
+        }
+      ]
+    },
+    {
+      "key": "hdu-2026-nine-exact-programme-rows-and-separate-SONIS-award",
+      "universityId": "uni-hangzhou-dianzi-university",
+      "evidence": [
+        {
+          "key": "source-05",
+          "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+          "method": "GET",
+          "startedAt": "2026-10-19T06:15:19.127938+00:00",
+          "attempt": 1,
+          "httpStatus": 200,
+          "finalUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+          "contentType": "text/html",
+          "bytes": 184990,
+          "rawPath": "source-05.html",
+          "rawSha256": "2fd837a8c21b56dfbb0050068dc9041229b7981ce2480ef3a621560ce0113662",
+          "decodedCharset": "utf-8",
+          "textPath": "source-05.txt",
+          "textSha256": "1efc31e83c354f08e77e767550e0531146b54a6d6d7abdd4c6799243bf621854",
+          "observedAt": "2026-10-19T06:15:27.987417+00:00",
+          "sourceType": "origin-original-bytes",
+          "readScope": "complete-visible-body-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "key": "source-06",
+          "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+          "method": "GET",
+          "startedAt": "2026-10-19T06:15:20.893394+00:00",
+          "attempt": 1,
+          "httpStatus": 200,
+          "finalUrl": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+          "contentType": "text/html",
+          "bytes": 48705,
+          "rawPath": "source-06.html",
+          "rawSha256": "882f6e16e8da53c29427d22e8ae7f39a2b218e243fe670e9fac6fb9211491d5a",
+          "decodedCharset": "utf-8",
+          "textPath": "source-06.txt",
+          "textSha256": "e1c074369e52d31b18b7d1c2c91e345a1e9ccab6e9788fe63cce7f5e1117a846",
+          "observedAt": "2026-10-19T06:15:24.121602+00:00",
+          "sourceType": "origin-original-bytes",
+          "readScope": "Studentregulationsread for sourcecontext only; registration/payment/annualreview timing not treated as2026 application evidence.",
+          "fullFactsCertified": false
+        }
+      ],
+      "officialTitle": "2026杭州电子科技大学国际学生申请指南",
+      "quotedDate": "Application Procedure (Deadline: June 15th/When seats are full):",
+      "exactYearContexts": [
+        "Undergraduate Programs in 2026",
+        "Master Degree Programs in 2026",
+        "Chinese Language Programs for International Students in 2026"
+      ],
+      "capacityCondition": "June15 is the nominal final calendar day. Applications can end earlier when seats are full; no actual capacity-ending day is known or fabricated.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-hdu-sonis-scholarship-2026",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-hangzhou-dianzi-university",
+          "name": "HDU Scholarship for Outstanding New International Students (SONIS) 2026",
+          "programIds": [
+            "prog-gap-prog-hdu-artificial-intelligence-bachelor-2026",
+            "prog-gap-prog-hdu-business-management-bachelor-2026",
+            "prog-gap-prog-hdu-computer-science-bachelor-2026",
+            "prog-gap-prog-hdu-digital-economy-bachelor-2026",
+            "prog-gap-prog-hdu-mechanical-bachelor-2026",
+            "program-hangzhou-dianzi-university-software-engineering-bachelor",
+            "program-hangzhou-dianzi-university-mechanical-engineering-master",
+            "program-hangzhou-dianzi-university-international-chinese-language-education-master"
+          ],
+          "canonicalScholarshipSha256": "4094df2fb86ca477d8f12c0471d32d9ba3dc4a7ec69d5baaee3b947a5f816501",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "4094df2fb86ca477d8f12c0471d32d9ba3dc4a7ec69d5baaee3b947a5f816501",
+          "canonicalRowSha256": "4094df2fb86ca477d8f12c0471d32d9ba3dc4a7ec69d5baaee3b947a5f816501",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-hdu-artificial-intelligence-bachelor-2026",
+              "canonicalProgramSha256": "d9c162002efd0178791a063eed5db3dcc24b47c54d6d5f34e0c6dc602abd762c"
+            },
+            {
+              "programId": "prog-gap-prog-hdu-business-management-bachelor-2026",
+              "canonicalProgramSha256": "e718215b8ae2628978cb33dceaebebb4843294948bf02acf95921b39204bf34a"
+            },
+            {
+              "programId": "prog-gap-prog-hdu-computer-science-bachelor-2026",
+              "canonicalProgramSha256": "10f46a327039511f7fe1ffcaf82d0974d39086d95a2c94ebf2cf898568637f69"
+            },
+            {
+              "programId": "prog-gap-prog-hdu-digital-economy-bachelor-2026",
+              "canonicalProgramSha256": "c5d05178b6ca12d6a384d57afc22491ba990bc27ba5bead0b22da3b2e478396a"
+            },
+            {
+              "programId": "prog-gap-prog-hdu-mechanical-bachelor-2026",
+              "canonicalProgramSha256": "88cebb1563460351765ff46886af9413cd8194f4c11718a528e916793466f851"
+            },
+            {
+              "programId": "program-hangzhou-dianzi-university-software-engineering-bachelor",
+              "canonicalProgramSha256": "d52776f3cefae840e352a76461979c96fd4a5e682ce55ca90022db98ae5c3ce5"
+            },
+            {
+              "programId": "program-hangzhou-dianzi-university-mechanical-engineering-master",
+              "canonicalProgramSha256": "1f43403fb15577eec088e9576af8fb8f5882932115bc57f71e16b928d86dc8ed"
+            },
+            {
+              "programId": "program-hangzhou-dianzi-university-international-chinese-language-education-master",
+              "canonicalProgramSha256": "126c61a4b6715e747cbade8c7f51a4a8e480cff9badee65d22bae0f3efbc6660"
+            }
+          ],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-25",
+          "storedReviewAfter": "2026-09-24",
+          "sourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "source-hdu-2026-international-admission-guide",
+              "canonicalSourceSha256": "1cb29499b4f05f351562b8f58e0568d68423102f66e69d54b914ad7eb3c2dc82",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-2026-international-admission-guide",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+                "title": "HDU 2026 Application Guideline",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            },
+            {
+              "sourceId": "source-hdu-international-student-regulations",
+              "canonicalSourceSha256": "3ec8c9ff2508037df58edfaeb502c9ba9bd4e872db697f1ed3bfb1662f1a7f46",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-international-student-regulations",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+                "title": "HDU International Student Regulations",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-05",
+          "evidenceSourceUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+          "observedAt": "2026-10-19T06:15:27.987417+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "2fd837a8c21b56dfbb0050068dc9041229b7981ce2480ef3a621560ce0113662",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "SONIS-first-academic-year-award-listed-no-independent-scholarship-cutoff",
+          "quotedDate": null,
+          "generalProgrammeDeadlineNotBorrowed": "2026-06-15",
+          "scholarshipQualificationQuote": "优秀新国际学生奖学金",
+          "degreeOnlyAwardQuote": "For Degree Students"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-hangzhou-dianzi-university-chinese-language-program-language",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-hangzhou-dianzi-university",
+          "programId": "program-hangzhou-dianzi-university-chinese-language-program-language",
+          "programName": "Chinese Language Program",
+          "degreeLevel": "language",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "66d40e9e677dd73c1d2c07884e432c67bd51660acfcb068d68cff17e709d8cc6",
+          "canonicalProgramSha256": "782313c9ea8a244e980a10a3994c4b22d9caa84555f54f699b033c4fdaed28e3",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "canonicalRecordSha256": "66d40e9e677dd73c1d2c07884e432c67bd51660acfcb068d68cff17e709d8cc6",
+          "canonicalRowSha256": "66d40e9e677dd73c1d2c07884e432c67bd51660acfcb068d68cff17e709d8cc6",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-hangzhou-dianzi-university-chinese-language-program-language",
+              "canonicalProgramSha256": "782313c9ea8a244e980a10a3994c4b22d9caa84555f54f699b033c4fdaed28e3"
+            }
+          ],
+          "storedDeadline": "2026-06-15",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-25",
+          "storedReviewAfter": "2026-09-24",
+          "sourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "source-hdu-2026-international-admission-guide",
+              "canonicalSourceSha256": "1cb29499b4f05f351562b8f58e0568d68423102f66e69d54b914ad7eb3c2dc82",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-2026-international-admission-guide",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+                "title": "HDU 2026 Application Guideline",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-05",
+          "evidenceSourceUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+          "observedAt": "2026-10-19T06:15:27.987417+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "2fd837a8c21b56dfbb0050068dc9041229b7981ce2480ef3a621560ce0113662",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "reason": "exact-programme-named-in-2026-degree-or-language-table-and-shared-applicant-cutoff-past",
+          "storedDateMatchesScopedOfficialDay": true,
+          "candidateDeadlineChangesStoredNull": false,
+          "deadlineBoundary": "June15-or-earlier-when-seats-full-no-clock-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "Application Procedure (Deadline: June 15th/When seats are full):",
+          "exactProgrammeChineseQuote": "汉语言进修生",
+          "scopedProgrammeYear": 2026,
+          "capacityMayCloseEarlier": true,
+          "capacityClosureDateUnknown": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-hangzhou-dianzi-university-international-chinese-language-education-master",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-hangzhou-dianzi-university",
+          "programId": "program-hangzhou-dianzi-university-international-chinese-language-education-master",
+          "programName": "International Chinese Language Education",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "ce128faad1a4bd573c1e5ae7ec1d738d3c1ba6c03707a2eb5dfcf3da126191f9",
+          "canonicalProgramSha256": "126c61a4b6715e747cbade8c7f51a4a8e480cff9badee65d22bae0f3efbc6660",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "canonicalRecordSha256": "ce128faad1a4bd573c1e5ae7ec1d738d3c1ba6c03707a2eb5dfcf3da126191f9",
+          "canonicalRowSha256": "ce128faad1a4bd573c1e5ae7ec1d738d3c1ba6c03707a2eb5dfcf3da126191f9",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-hangzhou-dianzi-university-international-chinese-language-education-master",
+              "canonicalProgramSha256": "126c61a4b6715e747cbade8c7f51a4a8e480cff9badee65d22bae0f3efbc6660"
+            }
+          ],
+          "storedDeadline": "2026-06-15",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-25",
+          "storedReviewAfter": "2026-09-24",
+          "sourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "source-hdu-2026-international-admission-guide",
+              "canonicalSourceSha256": "1cb29499b4f05f351562b8f58e0568d68423102f66e69d54b914ad7eb3c2dc82",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-2026-international-admission-guide",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+                "title": "HDU 2026 Application Guideline",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-05",
+          "evidenceSourceUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+          "observedAt": "2026-10-19T06:15:27.987417+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "2fd837a8c21b56dfbb0050068dc9041229b7981ce2480ef3a621560ce0113662",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "reason": "exact-programme-named-in-2026-degree-or-language-table-and-shared-applicant-cutoff-past",
+          "storedDateMatchesScopedOfficialDay": true,
+          "candidateDeadlineChangesStoredNull": false,
+          "deadlineBoundary": "June15-or-earlier-when-seats-full-no-clock-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "Application Procedure (Deadline: June 15th/When seats are full):",
+          "exactProgrammeChineseQuote": "国际中文教育",
+          "scopedProgrammeYear": 2026,
+          "capacityMayCloseEarlier": true,
+          "capacityClosureDateUnknown": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-hangzhou-dianzi-university-mechanical-engineering-master",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-hangzhou-dianzi-university",
+          "programId": "program-hangzhou-dianzi-university-mechanical-engineering-master",
+          "programName": "Mechanical Engineering",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "727e7bea074cb6dba12064ef2b017b71c4183c113ee9f54214c61bd40a3f774f",
+          "canonicalProgramSha256": "1f43403fb15577eec088e9576af8fb8f5882932115bc57f71e16b928d86dc8ed",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "canonicalRecordSha256": "727e7bea074cb6dba12064ef2b017b71c4183c113ee9f54214c61bd40a3f774f",
+          "canonicalRowSha256": "727e7bea074cb6dba12064ef2b017b71c4183c113ee9f54214c61bd40a3f774f",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-hangzhou-dianzi-university-mechanical-engineering-master",
+              "canonicalProgramSha256": "1f43403fb15577eec088e9576af8fb8f5882932115bc57f71e16b928d86dc8ed"
+            }
+          ],
+          "storedDeadline": "2026-06-15",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-25",
+          "storedReviewAfter": "2026-09-24",
+          "sourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "source-hdu-2026-international-admission-guide",
+              "canonicalSourceSha256": "1cb29499b4f05f351562b8f58e0568d68423102f66e69d54b914ad7eb3c2dc82",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-2026-international-admission-guide",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+                "title": "HDU 2026 Application Guideline",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-05",
+          "evidenceSourceUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+          "observedAt": "2026-10-19T06:15:27.987417+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "2fd837a8c21b56dfbb0050068dc9041229b7981ce2480ef3a621560ce0113662",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "reason": "exact-programme-named-in-2026-degree-or-language-table-and-shared-applicant-cutoff-past",
+          "storedDateMatchesScopedOfficialDay": true,
+          "candidateDeadlineChangesStoredNull": false,
+          "deadlineBoundary": "June15-or-earlier-when-seats-full-no-clock-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "Application Procedure (Deadline: June 15th/When seats are full):",
+          "exactProgrammeChineseQuote": "机械工程",
+          "scopedProgrammeYear": 2026,
+          "capacityMayCloseEarlier": true,
+          "capacityClosureDateUnknown": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-hdu-artificial-intelligence-bachelor-2026-2026-2027-other-fee-reference",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-hangzhou-dianzi-university",
+          "programId": "prog-gap-prog-hdu-artificial-intelligence-bachelor-2026",
+          "programName": "Artificial Intelligence",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "2b385a763506bdf76897eae0698c0289c7f59bada9d1c38ccefbcc605cb573dd",
+          "canonicalProgramSha256": "d9c162002efd0178791a063eed5db3dcc24b47c54d6d5f34e0c6dc602abd762c",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "canonicalRecordSha256": "2b385a763506bdf76897eae0698c0289c7f59bada9d1c38ccefbcc605cb573dd",
+          "canonicalRowSha256": "2b385a763506bdf76897eae0698c0289c7f59bada9d1c38ccefbcc605cb573dd",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-hdu-artificial-intelligence-bachelor-2026",
+              "canonicalProgramSha256": "d9c162002efd0178791a063eed5db3dcc24b47c54d6d5f34e0c6dc602abd762c"
+            }
+          ],
+          "storedDeadline": "2026-06-15",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-25",
+          "storedReviewAfter": "2026-09-24",
+          "sourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "source-hdu-2026-international-admission-guide",
+              "canonicalSourceSha256": "1cb29499b4f05f351562b8f58e0568d68423102f66e69d54b914ad7eb3c2dc82",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-2026-international-admission-guide",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+                "title": "HDU 2026 Application Guideline",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            },
+            {
+              "sourceId": "source-hdu-international-student-regulations",
+              "canonicalSourceSha256": "3ec8c9ff2508037df58edfaeb502c9ba9bd4e872db697f1ed3bfb1662f1a7f46",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-international-student-regulations",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+                "title": "HDU International Student Regulations",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-05",
+          "evidenceSourceUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+          "observedAt": "2026-10-19T06:15:27.987417+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "2fd837a8c21b56dfbb0050068dc9041229b7981ce2480ef3a621560ce0113662",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "reason": "exact-programme-named-in-2026-degree-or-language-table-and-shared-applicant-cutoff-past",
+          "storedDateMatchesScopedOfficialDay": true,
+          "candidateDeadlineChangesStoredNull": false,
+          "deadlineBoundary": "June15-or-earlier-when-seats-full-no-clock-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "Application Procedure (Deadline: June 15th/When seats are full):",
+          "exactProgrammeChineseQuote": "人工智能",
+          "scopedProgrammeYear": 2026,
+          "capacityMayCloseEarlier": true,
+          "capacityClosureDateUnknown": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-hdu-business-management-bachelor-2026-2026-2027-other-fee-reference",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-hangzhou-dianzi-university",
+          "programId": "prog-gap-prog-hdu-business-management-bachelor-2026",
+          "programName": "Business Management",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "64d087173e70ad85d1d0c2a10cd5cefa004b8f7e4dea0c3aa2d1d831e7fd5b75",
+          "canonicalProgramSha256": "e718215b8ae2628978cb33dceaebebb4843294948bf02acf95921b39204bf34a",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "canonicalRecordSha256": "64d087173e70ad85d1d0c2a10cd5cefa004b8f7e4dea0c3aa2d1d831e7fd5b75",
+          "canonicalRowSha256": "64d087173e70ad85d1d0c2a10cd5cefa004b8f7e4dea0c3aa2d1d831e7fd5b75",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-hdu-business-management-bachelor-2026",
+              "canonicalProgramSha256": "e718215b8ae2628978cb33dceaebebb4843294948bf02acf95921b39204bf34a"
+            }
+          ],
+          "storedDeadline": "2026-06-15",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-25",
+          "storedReviewAfter": "2026-09-24",
+          "sourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "source-hdu-2026-international-admission-guide",
+              "canonicalSourceSha256": "1cb29499b4f05f351562b8f58e0568d68423102f66e69d54b914ad7eb3c2dc82",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-2026-international-admission-guide",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+                "title": "HDU 2026 Application Guideline",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            },
+            {
+              "sourceId": "source-hdu-international-student-regulations",
+              "canonicalSourceSha256": "3ec8c9ff2508037df58edfaeb502c9ba9bd4e872db697f1ed3bfb1662f1a7f46",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-international-student-regulations",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+                "title": "HDU International Student Regulations",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-05",
+          "evidenceSourceUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+          "observedAt": "2026-10-19T06:15:27.987417+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "2fd837a8c21b56dfbb0050068dc9041229b7981ce2480ef3a621560ce0113662",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "reason": "exact-programme-named-in-2026-degree-or-language-table-and-shared-applicant-cutoff-past",
+          "storedDateMatchesScopedOfficialDay": true,
+          "candidateDeadlineChangesStoredNull": false,
+          "deadlineBoundary": "June15-or-earlier-when-seats-full-no-clock-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "Application Procedure (Deadline: June 15th/When seats are full):",
+          "exactProgrammeChineseQuote": "工商管理",
+          "scopedProgrammeYear": 2026,
+          "capacityMayCloseEarlier": true,
+          "capacityClosureDateUnknown": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-hdu-computer-science-bachelor-2026-2026-2027-other-fee-reference",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-hangzhou-dianzi-university",
+          "programId": "prog-gap-prog-hdu-computer-science-bachelor-2026",
+          "programName": "Computer Science and Technology",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "c0a8c3a744d4e3dfee55406632008aa3265da2722b78714d3d1cac7b8c6ed5ad",
+          "canonicalProgramSha256": "10f46a327039511f7fe1ffcaf82d0974d39086d95a2c94ebf2cf898568637f69",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "canonicalRecordSha256": "c0a8c3a744d4e3dfee55406632008aa3265da2722b78714d3d1cac7b8c6ed5ad",
+          "canonicalRowSha256": "c0a8c3a744d4e3dfee55406632008aa3265da2722b78714d3d1cac7b8c6ed5ad",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-hdu-computer-science-bachelor-2026",
+              "canonicalProgramSha256": "10f46a327039511f7fe1ffcaf82d0974d39086d95a2c94ebf2cf898568637f69"
+            }
+          ],
+          "storedDeadline": "2026-06-15",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-25",
+          "storedReviewAfter": "2026-09-24",
+          "sourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "source-hdu-2026-international-admission-guide",
+              "canonicalSourceSha256": "1cb29499b4f05f351562b8f58e0568d68423102f66e69d54b914ad7eb3c2dc82",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-2026-international-admission-guide",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+                "title": "HDU 2026 Application Guideline",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            },
+            {
+              "sourceId": "source-hdu-international-student-regulations",
+              "canonicalSourceSha256": "3ec8c9ff2508037df58edfaeb502c9ba9bd4e872db697f1ed3bfb1662f1a7f46",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-international-student-regulations",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+                "title": "HDU International Student Regulations",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-05",
+          "evidenceSourceUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+          "observedAt": "2026-10-19T06:15:27.987417+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "2fd837a8c21b56dfbb0050068dc9041229b7981ce2480ef3a621560ce0113662",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "reason": "exact-programme-named-in-2026-degree-or-language-table-and-shared-applicant-cutoff-past",
+          "storedDateMatchesScopedOfficialDay": true,
+          "candidateDeadlineChangesStoredNull": false,
+          "deadlineBoundary": "June15-or-earlier-when-seats-full-no-clock-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "Application Procedure (Deadline: June 15th/When seats are full):",
+          "exactProgrammeChineseQuote": "计算机科学与技术",
+          "scopedProgrammeYear": 2026,
+          "capacityMayCloseEarlier": true,
+          "capacityClosureDateUnknown": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-hdu-digital-economy-bachelor-2026-2026-2027-other-fee-reference",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-hangzhou-dianzi-university",
+          "programId": "prog-gap-prog-hdu-digital-economy-bachelor-2026",
+          "programName": "Digital Economy (Digital Trade)",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "84d342a2996fe3ae04cca5263f655377c3781e5e78761b0ca6e667795e144752",
+          "canonicalProgramSha256": "c5d05178b6ca12d6a384d57afc22491ba990bc27ba5bead0b22da3b2e478396a",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "canonicalRecordSha256": "84d342a2996fe3ae04cca5263f655377c3781e5e78761b0ca6e667795e144752",
+          "canonicalRowSha256": "84d342a2996fe3ae04cca5263f655377c3781e5e78761b0ca6e667795e144752",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-hdu-digital-economy-bachelor-2026",
+              "canonicalProgramSha256": "c5d05178b6ca12d6a384d57afc22491ba990bc27ba5bead0b22da3b2e478396a"
+            }
+          ],
+          "storedDeadline": "2026-06-15",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-25",
+          "storedReviewAfter": "2026-09-24",
+          "sourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "source-hdu-2026-international-admission-guide",
+              "canonicalSourceSha256": "1cb29499b4f05f351562b8f58e0568d68423102f66e69d54b914ad7eb3c2dc82",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-2026-international-admission-guide",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+                "title": "HDU 2026 Application Guideline",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            },
+            {
+              "sourceId": "source-hdu-international-student-regulations",
+              "canonicalSourceSha256": "3ec8c9ff2508037df58edfaeb502c9ba9bd4e872db697f1ed3bfb1662f1a7f46",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-international-student-regulations",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+                "title": "HDU International Student Regulations",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-05",
+          "evidenceSourceUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+          "observedAt": "2026-10-19T06:15:27.987417+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "2fd837a8c21b56dfbb0050068dc9041229b7981ce2480ef3a621560ce0113662",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "reason": "exact-programme-named-in-2026-degree-or-language-table-and-shared-applicant-cutoff-past",
+          "storedDateMatchesScopedOfficialDay": true,
+          "candidateDeadlineChangesStoredNull": false,
+          "deadlineBoundary": "June15-or-earlier-when-seats-full-no-clock-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "Application Procedure (Deadline: June 15th/When seats are full):",
+          "exactProgrammeChineseQuote": "数字经济（数字贸易方向）",
+          "scopedProgrammeYear": 2026,
+          "capacityMayCloseEarlier": true,
+          "capacityClosureDateUnknown": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-hdu-mechanical-bachelor-2026-2026-2027-other-fee-reference",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-hangzhou-dianzi-university",
+          "programId": "prog-gap-prog-hdu-mechanical-bachelor-2026",
+          "programName": "Mechanical Design, Manufacturing and Automation",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "98b71e268eb9ce9987b764587552d412c97ed2037b710a34b4adbf973cf7e0d4",
+          "canonicalProgramSha256": "88cebb1563460351765ff46886af9413cd8194f4c11718a528e916793466f851",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "canonicalRecordSha256": "98b71e268eb9ce9987b764587552d412c97ed2037b710a34b4adbf973cf7e0d4",
+          "canonicalRowSha256": "98b71e268eb9ce9987b764587552d412c97ed2037b710a34b4adbf973cf7e0d4",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-hdu-mechanical-bachelor-2026",
+              "canonicalProgramSha256": "88cebb1563460351765ff46886af9413cd8194f4c11718a528e916793466f851"
+            }
+          ],
+          "storedDeadline": "2026-06-15",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-25",
+          "storedReviewAfter": "2026-09-24",
+          "sourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "source-hdu-2026-international-admission-guide",
+              "canonicalSourceSha256": "1cb29499b4f05f351562b8f58e0568d68423102f66e69d54b914ad7eb3c2dc82",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-2026-international-admission-guide",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+                "title": "HDU 2026 Application Guideline",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            },
+            {
+              "sourceId": "source-hdu-international-student-regulations",
+              "canonicalSourceSha256": "3ec8c9ff2508037df58edfaeb502c9ba9bd4e872db697f1ed3bfb1662f1a7f46",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-international-student-regulations",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+                "title": "HDU International Student Regulations",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-05",
+          "evidenceSourceUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+          "observedAt": "2026-10-19T06:15:27.987417+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "2fd837a8c21b56dfbb0050068dc9041229b7981ce2480ef3a621560ce0113662",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "reason": "exact-programme-named-in-2026-degree-or-language-table-and-shared-applicant-cutoff-past",
+          "storedDateMatchesScopedOfficialDay": true,
+          "candidateDeadlineChangesStoredNull": false,
+          "deadlineBoundary": "June15-or-earlier-when-seats-full-no-clock-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "Application Procedure (Deadline: June 15th/When seats are full):",
+          "exactProgrammeChineseQuote": "机械设计制造及其自动化",
+          "scopedProgrammeYear": 2026,
+          "capacityMayCloseEarlier": true,
+          "capacityClosureDateUnknown": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2026-hangzhou-dianzi-university-software-engineering-bachelor",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-hangzhou-dianzi-university",
+          "programId": "program-hangzhou-dianzi-university-software-engineering-bachelor",
+          "programName": "Software Engineering",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "e661a3033041ef31d070967af7db6117817b47a3d6f4062652a3acc2ac1ec1cb",
+          "canonicalProgramSha256": "d52776f3cefae840e352a76461979c96fd4a5e682ce55ca90022db98ae5c3ce5",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "canonicalRecordSha256": "e661a3033041ef31d070967af7db6117817b47a3d6f4062652a3acc2ac1ec1cb",
+          "canonicalRowSha256": "e661a3033041ef31d070967af7db6117817b47a3d6f4062652a3acc2ac1ec1cb",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-hangzhou-dianzi-university-software-engineering-bachelor",
+              "canonicalProgramSha256": "d52776f3cefae840e352a76461979c96fd4a5e682ce55ca90022db98ae5c3ce5"
+            }
+          ],
+          "storedDeadline": "2026-06-15",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-25",
+          "storedReviewAfter": "2026-09-24",
+          "sourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "source-hdu-2026-international-admission-guide",
+              "canonicalSourceSha256": "1cb29499b4f05f351562b8f58e0568d68423102f66e69d54b914ad7eb3c2dc82",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-2026-international-admission-guide",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+                "title": "HDU 2026 Application Guideline",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            },
+            {
+              "sourceId": "source-hdu-international-student-regulations",
+              "canonicalSourceSha256": "3ec8c9ff2508037df58edfaeb502c9ba9bd4e872db697f1ed3bfb1662f1a7f46",
+              "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+              "sourceFullRecord": {
+                "id": "source-hdu-international-student-regulations",
+                "url": "https://intedu.hdu.edu.cn/intedu_en/13986/list.htm",
+                "title": "HDU International Student Regulations",
+                "publisher": "Hangzhou Dianzi University",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-25"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-05",
+          "evidenceSourceUrl": "https://intedu.hdu.edu.cn/intedu_en/2026/0317/c13972a290327/page.htm",
+          "observedAt": "2026-10-19T06:15:27.987417+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "2fd837a8c21b56dfbb0050068dc9041229b7981ce2480ef3a621560ce0113662",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "source-hdu-2026-international-admission-guide"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "reason": "exact-programme-named-in-2026-degree-or-language-table-and-shared-applicant-cutoff-past",
+          "storedDateMatchesScopedOfficialDay": true,
+          "candidateDeadlineChangesStoredNull": false,
+          "deadlineBoundary": "June15-or-earlier-when-seats-full-no-clock-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "Application Procedure (Deadline: June 15th/When seats are full):",
+          "exactProgrammeChineseQuote": "软件工程",
+          "scopedProgrammeYear": 2026,
+          "capacityMayCloseEarlier": true,
+          "capacityClosureDateUnknown": true
+        }
+      ]
+    },
+    {
+      "key": "hmu-2026-three-scholarship-branches-vs-unread-general-postgraduate-brochure",
+      "universityId": "uni-harbin-medical-university",
+      "evidence": [
+        {
+          "key": "source-07",
+          "url": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+          "method": "GET",
+          "startedAt": "2026-10-19T06:15:23.093197+00:00",
+          "attempt": 1,
+          "httpStatus": 403,
+          "finalUrl": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+          "contentType": "text/html",
+          "bytes": 47498,
+          "rawPath": "source-07.html",
+          "rawSha256": "ee55ba5e48c0cc00cefd51cfc2489d5a16b1a4ad8370ee739282af9ade020594",
+          "decodedCharset": "utf-8",
+          "textPath": "source-07.txt",
+          "textSha256": "41ece67c1de58a4c2f2dbaaa6f1730ac17f955abb70673ee74c0e2856613ddcd",
+          "error": "HTTP 403 (original response retained)",
+          "observedAt": "2026-10-19T06:15:25.865203+00:00",
+          "sourceType": "failed-origin-response-not-date-proof",
+          "readScope": "Origin403 challenge body retained, no date certified from it.",
+          "fullFactsCertified": false
+        },
+        {
+          "key": "source-08",
+          "url": "https://cie.hrbmu.edu.cn/info/1020/1921.htm",
+          "method": "GET",
+          "startedAt": "2026-10-19T06:15:23.105381+00:00",
+          "attempt": 1,
+          "httpStatus": 403,
+          "finalUrl": "https://cie.hrbmu.edu.cn/info/1020/1921.htm",
+          "contentType": "text/html",
+          "bytes": 47498,
+          "rawPath": "source-08.html",
+          "rawSha256": "edecc55b89c1cdf2f2f563d9da535e052fc1c2d64ced66f92c9754c8924824be",
+          "decodedCharset": "utf-8",
+          "textPath": "source-08.txt",
+          "textSha256": "18f81f000be5e884c5e3b933ece911b21bb3dbd59df17cf677e33dfa9198a23e",
+          "error": "HTTP 403 (original response retained)",
+          "observedAt": "2026-10-19T06:15:25.798917+00:00",
+          "sourceType": "failed-origin-response-not-date-proof",
+          "readScope": "Origin403 challenge body retained, no date certified from it.",
+          "fullFactsCertified": false
+        },
+        {
+          "key": "web-07",
+          "url": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+          "method": "web.open-exact-url-single-fallback",
+          "observedAt": "2026-10-19T06:44:16.117Z",
+          "observedAtMeaning": "Time this retained observation receipt was written after reading the web tool response; not an origin server timestamp.",
+          "captureSucceeded": true,
+          "sourceType": "web-tool-parsed-official-page-not-origin-raw-bytes",
+          "originRawSha256": null,
+          "readScope": "Full parsed official notice read; date-only evidence retained. Retrieval indicated a recent cached crawl, not a fresh origin-byte capture.",
+          "quote": "November 1, 2025 – March 5, 2026",
+          "paraphrase": "A2026 graduate scholarship notice names three funding schemes: CSC highlevel graduate, CSC SilkRoad for Russian citizens and joint MOE Heilongjiang Eurasian funding. Both masters and doctoral applicants are covered. One shared application period is followed by CSCTypeB application instructions. September30,2026 is campus registration, not an application extension.",
+          "applicantOpensOn": "2025-11-01",
+          "applicantDeadline": "2026-03-05",
+          "clockTime": null,
+          "originalSourceCaptureFailedKey": "source-07",
+          "fullFactsCertified": false,
+          "retainedObservationPath": "web-07-observation.txt",
+          "retainedObservationSha256": "aa18d10fa3754bf5901759ab20fcb5b02082a0bbcea25975f4f3169b4e76a646"
+        },
+        {
+          "key": "web-08",
+          "url": "https://cie.hrbmu.edu.cn/info/1020/1921.htm",
+          "method": "web.open-exact-url-single-fallback",
+          "observedAt": "2026-10-19T06:44:16.117Z",
+          "captureSucceeded": true,
+          "sourceType": "web-tool-parsed-landing-not-date-proof",
+          "originRawSha256": null,
+          "paraphrase": "The2026 postgraduate brochure landing directs applicants to an attachedPDF for actual procedures. The landing provides no application period. The one attachment click returned a captcha page; attachment contents were not read.",
+          "attachmentUrl": "https://cie.hrbmu.edu.cn/system/_content/download.jsp?owner=1836813706&urltype=news.DownloadAttachUrl&wbfileid=17797588",
+          "attachmentRead": false,
+          "deadlineCertified": false,
+          "cooldown": true,
+          "retainedObservationPath": "web-08-observation.txt",
+          "retainedObservationSha256": "3d2d11aaa32cbae13eb9a1fa2a76c9413df6bbcecc89da71a727f2bffbf41380",
+          "fullFactsCertified": false
+        }
+      ],
+      "quotedDate": "November 1, 2025 – March 5, 2026",
+      "dateEvidenceProvenance": "Full parsed official scholarship notice read through the one web fallback after origin403. OriginHTML bytes were unavailable; retained observation receipt hash is not represented as original-page-body SHA.",
+      "scholarshipScope": "The same2026notice explicitly lists three schemes and then one applicant period for master and doctoral scholarship applicants. Broad highlevelgraduate and Eurasia routes cover postgraduateprogrammes; SilkRoad is restricted toRussian citizens and specifiedmedicalmajors. Nofunding/eligibilityfacts are renewed.",
+      "broaderProgrammeScopeUnresolved": "The separate2026 general postgraduate brochure requires its actualPDF; attachment retrieval requested a captcha and was stopped. The canonical generic master/doctoralMarch5 closesOn is therefore not certified for all self-funded or general routes merely because it matches the scholarshipperiod.",
+      "notApplicantCutoff": "September30,2026 is scholarship-student campus registration only.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-sch-hmu-csc-high-level-graduate",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-harbin-medical-university",
+          "name": "Chinese Government Scholarship — High-Level Graduate Program at HMU",
+          "programIds": [],
+          "canonicalScholarshipSha256": "d58a4d16c8ba31381a108d60ba7ca2ca843aab907c3b625b3f4901b4b34b7a18",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "d58a4d16c8ba31381a108d60ba7ca2ca843aab907c3b625b3f4901b4b34b7a18",
+          "canonicalRowSha256": "d58a4d16c8ba31381a108d60ba7ca2ca843aab907c3b625b3f4901b4b34b7a18",
+          "canonicalProgramPins": [],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "sourceIds": [
+            "src-gap-scholarship-wave3-sch-hmu-csc-high-level-graduate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-sch-hmu-csc-high-level-graduate",
+              "canonicalSourceSha256": "1ff63f05a0b1f53e14591216c6b6961cc067381b1e9b838f449ddd3bdd1dabd3",
+              "url": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave3-sch-hmu-csc-high-level-graduate",
+                "url": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+                "title": "Harbin Medical University Admission Notice for the 2026 Graduate Scholarship Programs",
+                "publisher": "harbin-medical-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceKey": "web-07",
+          "evidenceSourceUrl": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+          "observedAt": "2026-10-19T06:44:16.117Z",
+          "evidenceSourceType": "web-tool-parsed-official-page-not-origin-raw-bytes",
+          "evidenceBodySha256": null,
+          "retainedObservationSha256": "aa18d10fa3754bf5901759ab20fcb5b02082a0bbcea25975f4f3169b4e76a646",
+          "originRawBytesAvailableForDateEvidence": false,
+          "evidenceSourceIds": [
+            "src-gap-scholarship-wave3-sch-hmu-csc-high-level-graduate"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-11-01",
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-03-05",
+          "candidateOfficialDeadline": "2026-03-05",
+          "reason": "three-named-2026-scholarship-schemes-share-explicit-applicant-period-past",
+          "storedDateMatchesScopedOfficialDay": false,
+          "candidateDeadlineChangesStoredNull": true,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "November 1, 2025 – March 5, 2026",
+          "candidateOpeningOnly": true,
+          "structuredCanonicalOpeningStillAbsent": true,
+          "noLateApplicationsAccepted": true,
+          "scope": "Only the named2026scholarshipprogramme; not all general/self-fundedpostgraduateadmission.",
+          "origin403ReceiptKey": "source-07",
+          "applicantVsInstitution": "CSCTypeB applicant submission period; subsequent interviews, nomination and campusregistration are separate."
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-sch-hmu-csc-silk-road",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-harbin-medical-university",
+          "name": "Chinese Government Scholarship — Silk Road Program at HMU",
+          "programIds": [],
+          "canonicalScholarshipSha256": "f8c2196d5f4feaa8631fef8f964bfe7a429fcee0e11020d83dc66f9aa4c2d187",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "f8c2196d5f4feaa8631fef8f964bfe7a429fcee0e11020d83dc66f9aa4c2d187",
+          "canonicalRowSha256": "f8c2196d5f4feaa8631fef8f964bfe7a429fcee0e11020d83dc66f9aa4c2d187",
+          "canonicalProgramPins": [],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "sourceIds": [
+            "src-gap-scholarship-wave3-sch-hmu-csc-silk-road"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-sch-hmu-csc-silk-road",
+              "canonicalSourceSha256": "cff8012b462ea4a5470f898c05f8fb43dc4cde684db49b703d4f1ef6aa3fa001",
+              "url": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave3-sch-hmu-csc-silk-road",
+                "url": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+                "title": "Harbin Medical University Admission Notice for the 2026 Graduate Scholarship Programs",
+                "publisher": "harbin-medical-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceKey": "web-07",
+          "evidenceSourceUrl": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+          "observedAt": "2026-10-19T06:44:16.117Z",
+          "evidenceSourceType": "web-tool-parsed-official-page-not-origin-raw-bytes",
+          "evidenceBodySha256": null,
+          "retainedObservationSha256": "aa18d10fa3754bf5901759ab20fcb5b02082a0bbcea25975f4f3169b4e76a646",
+          "originRawBytesAvailableForDateEvidence": false,
+          "evidenceSourceIds": [
+            "src-gap-scholarship-wave3-sch-hmu-csc-silk-road"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-11-01",
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-03-05",
+          "candidateOfficialDeadline": "2026-03-05",
+          "reason": "three-named-2026-scholarship-schemes-share-explicit-applicant-period-past",
+          "storedDateMatchesScopedOfficialDay": false,
+          "candidateDeadlineChangesStoredNull": true,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "November 1, 2025 – March 5, 2026",
+          "candidateOpeningOnly": true,
+          "structuredCanonicalOpeningStillAbsent": true,
+          "noLateApplicationsAccepted": true,
+          "scope": "Only the named2026scholarshipprogramme; not all general/self-fundedpostgraduateadmission.",
+          "origin403ReceiptKey": "source-07",
+          "applicantVsInstitution": "CSCTypeB applicant submission period; subsequent interviews, nomination and campusregistration are separate."
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-sch-hmu-moe-heilongjiang-eurasia",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-harbin-medical-university",
+          "name": "MOE–Heilongjiang Joint Scholarship for Eurasian Countries at HMU",
+          "programIds": [],
+          "canonicalScholarshipSha256": "07cbd78788a28d609b2a9cafb07b9e69a12520f99d5e5337bc7ad35325210a32",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "07cbd78788a28d609b2a9cafb07b9e69a12520f99d5e5337bc7ad35325210a32",
+          "canonicalRowSha256": "07cbd78788a28d609b2a9cafb07b9e69a12520f99d5e5337bc7ad35325210a32",
+          "canonicalProgramPins": [],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "sourceIds": [
+            "src-gap-scholarship-wave3-sch-hmu-moe-heilongjiang-eurasia"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-sch-hmu-moe-heilongjiang-eurasia",
+              "canonicalSourceSha256": "b5ce9b79a419bc768f9b39a4957415eff5cbdf1ff7ccbce36e7fdf6b1d917a8a",
+              "url": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave3-sch-hmu-moe-heilongjiang-eurasia",
+                "url": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+                "title": "Harbin Medical University Admission Notice for the 2026 Graduate Scholarship Programs",
+                "publisher": "harbin-medical-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceKey": "web-07",
+          "evidenceSourceUrl": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+          "observedAt": "2026-10-19T06:44:16.117Z",
+          "evidenceSourceType": "web-tool-parsed-official-page-not-origin-raw-bytes",
+          "evidenceBodySha256": null,
+          "retainedObservationSha256": "aa18d10fa3754bf5901759ab20fcb5b02082a0bbcea25975f4f3169b4e76a646",
+          "originRawBytesAvailableForDateEvidence": false,
+          "evidenceSourceIds": [
+            "src-gap-scholarship-wave3-sch-hmu-moe-heilongjiang-eurasia"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-11-01",
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "closed",
+          "officialDeadline": "2026-03-05",
+          "candidateOfficialDeadline": "2026-03-05",
+          "reason": "three-named-2026-scholarship-schemes-share-explicit-applicant-period-past",
+          "storedDateMatchesScopedOfficialDay": false,
+          "candidateDeadlineChangesStoredNull": true,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "closureScope": "Only the explicitly matched2026 application window is past; discontinuation is not inferred.",
+          "quotedDate": "November 1, 2025 – March 5, 2026",
+          "candidateOpeningOnly": true,
+          "structuredCanonicalOpeningStillAbsent": true,
+          "noLateApplicationsAccepted": true,
+          "scope": "Only the named2026scholarshipprogramme; not all general/self-fundedpostgraduateadmission.",
+          "origin403ReceiptKey": "source-07",
+          "applicantVsInstitution": "CSCTypeB applicant submission period; subsequent interviews, nomination and campusregistration are separate."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-hmu-d-international-postgraduate-programs-2026-2027-autumn",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-harbin-medical-university",
+          "programId": "prog-gap-wave3-hmu-d-international-postgraduate-programs",
+          "programName": "International Doctoral Degree Programs",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "f5702cd09012cf4ba8ead4702c1a799487804e7f62aac3ac81f5b07a85d4280c",
+          "canonicalProgramSha256": "7177a0cedb01012b9de3970dfc38352050ac3fa4fa533d8c2fb06ac455e4d778",
+          "storedOpensOn": "2025-11-01",
+          "storedDateStatus": "published",
+          "canonicalRecordSha256": "f5702cd09012cf4ba8ead4702c1a799487804e7f62aac3ac81f5b07a85d4280c",
+          "canonicalRowSha256": "f5702cd09012cf4ba8ead4702c1a799487804e7f62aac3ac81f5b07a85d4280c",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-hmu-d-international-postgraduate-programs",
+              "canonicalProgramSha256": "7177a0cedb01012b9de3970dfc38352050ac3fa4fa533d8c2fb06ac455e4d778"
+            }
+          ],
+          "storedDeadline": "2026-03-05",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "sourceIds": [
+            "src-gap-program-wave3-hmu-d-international-postgraduate-programs",
+            "src-gap-program-wave3-hmu-d-international-postgraduate-programs-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-hmu-d-international-postgraduate-programs",
+              "canonicalSourceSha256": "8b9cf9727cadd6d6e40852cec40ced2b2e6b593a6a76e022b7e4404e700dc5d7",
+              "url": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-hmu-d-international-postgraduate-programs",
+                "url": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+                "title": "Harbin Medical University Admission Notice for the 2026 Graduate Scholarship Programs",
+                "publisher": "harbin-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-wave3-hmu-d-international-postgraduate-programs-support-1",
+              "canonicalSourceSha256": "85ebd6fd82883e3ae6c156890127c6ef31014379d5bef949d2a3af5dca813b00",
+              "url": "https://cie.hrbmu.edu.cn/info/1020/1921.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-hmu-d-international-postgraduate-programs-support-1",
+                "url": "https://cie.hrbmu.edu.cn/info/1020/1921.htm",
+                "title": "2026 Harbin Medical University Enrollment Brochure for Postgraduate Students",
+                "publisher": "harbin-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceKey": "web-07",
+          "evidenceSourceUrl": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+          "observedAt": "2026-10-19T06:44:16.117Z",
+          "evidenceSourceType": "web-tool-parsed-official-page-not-origin-raw-bytes",
+          "evidenceBodySha256": null,
+          "retainedObservationSha256": "aa18d10fa3754bf5901759ab20fcb5b02082a0bbcea25975f4f3169b4e76a646",
+          "originRawBytesAvailableForDateEvidence": false,
+          "evidenceSourceIds": [
+            "src-gap-program-wave3-hmu-d-international-postgraduate-programs"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": "2026-03-05",
+          "reason": "stored-March5-only-matched-scholarship-branch-general-postgraduate-original-PDF-unread",
+          "quotedDate": "November 1, 2025 – March 5, 2026",
+          "candidateBindingState": "scholarship-branch-only-not-general-cycle",
+          "scopedCandidateWindow": {
+            "opensOn": "2025-11-01",
+            "closesOn": "2026-03-05",
+            "funding": "2026graduate-scholarshiproutes-only"
+          },
+          "storedDayEqualityNotFullRouteCertification": true,
+          "generalBrochureAttachmentHeld": true,
+          "publishRiskFlags": [
+            "do-not-certify-generic-cycle-as-entirely-closed-from-scholarship-only-date",
+            "general-PDF-not-read-captcha-cooldown"
+          ]
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-hmu-m-international-postgraduate-programs-2026-2027-autumn",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-harbin-medical-university",
+          "programId": "prog-gap-wave3-hmu-m-international-postgraduate-programs",
+          "programName": "International Master's Degree Programs",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "7586facd2c78ef48dad2287a51f789d7fa1e28aa95bd4eb0d3448d8480da7cbc",
+          "canonicalProgramSha256": "79d85b12f2e9d5a61e37e7485c5d805c01d4557bdfa11831b325ccc717b37f85",
+          "storedOpensOn": "2025-11-01",
+          "storedDateStatus": "published",
+          "canonicalRecordSha256": "7586facd2c78ef48dad2287a51f789d7fa1e28aa95bd4eb0d3448d8480da7cbc",
+          "canonicalRowSha256": "7586facd2c78ef48dad2287a51f789d7fa1e28aa95bd4eb0d3448d8480da7cbc",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-hmu-m-international-postgraduate-programs",
+              "canonicalProgramSha256": "79d85b12f2e9d5a61e37e7485c5d805c01d4557bdfa11831b325ccc717b37f85"
+            }
+          ],
+          "storedDeadline": "2026-03-05",
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "sourceIds": [
+            "src-gap-program-wave3-hmu-m-international-postgraduate-programs",
+            "src-gap-program-wave3-hmu-m-international-postgraduate-programs-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-hmu-m-international-postgraduate-programs",
+              "canonicalSourceSha256": "196e94d11484f7912d98444f45f1411dfc15be54a7c9b2b7b21ce7e4e08cfb6d",
+              "url": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-hmu-m-international-postgraduate-programs",
+                "url": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+                "title": "Harbin Medical University Admission Notice for the 2026 Graduate Scholarship Programs",
+                "publisher": "harbin-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-wave3-hmu-m-international-postgraduate-programs-support-1",
+              "canonicalSourceSha256": "becafc7f1e3fa977b95a37e5dd7caea5839c2eea259ad7f0b0a6e59faa645d4a",
+              "url": "https://cie.hrbmu.edu.cn/info/1020/1921.htm",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-hmu-m-international-postgraduate-programs-support-1",
+                "url": "https://cie.hrbmu.edu.cn/info/1020/1921.htm",
+                "title": "2026 Harbin Medical University Enrollment Brochure for Postgraduate Students",
+                "publisher": "harbin-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceKey": "web-07",
+          "evidenceSourceUrl": "https://cie.hrbmu.edu.cn/info/1081/1854.htm",
+          "observedAt": "2026-10-19T06:44:16.117Z",
+          "evidenceSourceType": "web-tool-parsed-official-page-not-origin-raw-bytes",
+          "evidenceBodySha256": null,
+          "retainedObservationSha256": "aa18d10fa3754bf5901759ab20fcb5b02082a0bbcea25975f4f3169b4e76a646",
+          "originRawBytesAvailableForDateEvidence": false,
+          "evidenceSourceIds": [
+            "src-gap-program-wave3-hmu-m-international-postgraduate-programs"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": "2026-03-05",
+          "reason": "stored-March5-only-matched-scholarship-branch-general-postgraduate-original-PDF-unread",
+          "quotedDate": "November 1, 2025 – March 5, 2026",
+          "candidateBindingState": "scholarship-branch-only-not-general-cycle",
+          "scopedCandidateWindow": {
+            "opensOn": "2025-11-01",
+            "closesOn": "2026-03-05",
+            "funding": "2026graduate-scholarshiproutes-only"
+          },
+          "storedDayEqualityNotFullRouteCertification": true,
+          "generalBrochureAttachmentHeld": true,
+          "publishRiskFlags": [
+            "do-not-certify-generic-cycle-as-entirely-closed-from-scholarship-only-date",
+            "general-PDF-not-read-captcha-cooldown"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "hrbnu-two-awards-source-unavailable-bounded-cooldown",
+      "universityId": "uni-harbin-normal-university",
+      "evidence": [
+        {
+          "key": "source-09",
+          "url": "https://iic.hrbnu.edu.cn/ru/?a=list&c=content&catid=49",
+          "method": "GET",
+          "startedAt": "2026-10-19T06:15:24.121602+00:00",
+          "attempt": 1,
+          "error": "URLError: <urlopen error _ssl.c:993: The handshake operation timed out>",
+          "observedAt": "2026-10-19T06:15:44.126778+00:00",
+          "sourceType": "failed-origin-response-not-date-proof",
+          "readScope": "NativeTLS handshake timedout; no bodycaptured.",
+          "fullFactsCertified": false
+        },
+        {
+          "key": "web-09",
+          "url": "https://iic.hrbnu.edu.cn/ru/?a=list&c=content&catid=49",
+          "method": "web.open-exact-url-single-fallback",
+          "observedAt": "2026-10-19T06:44:16.117Z",
+          "captureSucceeded": false,
+          "originRawSha256": null,
+          "error": "Timeout fetching; no content returned.",
+          "cooldown": true,
+          "retainedObservationPath": "web-09-observation.txt",
+          "retainedObservationSha256": "efae7edb40887b69564684ad96aaef7f41b91119fd0a90cced55cc0400cd4416",
+          "fullFactsCertified": false
+        }
+      ],
+      "acquisitionLimitation": "One nativeGET and one webfallback timedout; no further attempts or TLS/captcha workaround. No exact applicant year/date was read.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-hrbnu-chinese-government-scholarship",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-harbin-normal-university",
+          "name": "Chinese Government Scholarship at Harbin Normal University",
+          "programIds": [],
+          "canonicalScholarshipSha256": "a17d060836e9ec083a47f54f040c41546a87dac203d4c0364d98302db21af535",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "a17d060836e9ec083a47f54f040c41546a87dac203d4c0364d98302db21af535",
+          "canonicalRowSha256": "a17d060836e9ec083a47f54f040c41546a87dac203d4c0364d98302db21af535",
+          "canonicalProgramPins": [],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-02",
+          "storedReviewAfter": "2026-09-01",
+          "sourceIds": [
+            "src-gap-scholarship-wave8-hrbnu-chinese-government-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-hrbnu-chinese-government-scholarship",
+              "canonicalSourceSha256": "2ba989679bfb57704d07973bce0ba7b07ba68e81c665bd56fc4a47f0ecb4f36c",
+              "url": "https://iic.hrbnu.edu.cn/ru/?a=list&c=content&catid=49",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave8-hrbnu-chinese-government-scholarship",
+                "url": "https://iic.hrbnu.edu.cn/ru/?a=list&c=content&catid=49",
+                "title": "Harbin Normal University Chinese Government Scholarship Enrollment Prospectus",
+                "publisher": "harbin-normal-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-09",
+          "evidenceSourceUrl": "https://iic.hrbnu.edu.cn/ru/?a=list&c=content&catid=49",
+          "observedAt": "2026-10-19T06:15:44.126778+00:00",
+          "evidenceSourceType": "failed-origin-and-web-requests-no-date-proof",
+          "evidenceBodySha256": null,
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": false,
+          "evidenceSourceIds": [
+            "src-gap-scholarship-wave8-hrbnu-chinese-government-scholarship"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "official-source-native-and-single-web-fallback-timeout-no-date-body",
+          "cooldown": true,
+          "deadlineCertified": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-hrbnu-heilongjiang-government-scholarship",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-harbin-normal-university",
+          "name": "Heilongjiang Provincial Government Scholarship at HRBNU",
+          "programIds": [],
+          "canonicalScholarshipSha256": "3ddb0fca4aa377c0ea9efe1939a6c1c6ff751b1439c50d74cfcff41d7fe82331",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "3ddb0fca4aa377c0ea9efe1939a6c1c6ff751b1439c50d74cfcff41d7fe82331",
+          "canonicalRowSha256": "3ddb0fca4aa377c0ea9efe1939a6c1c6ff751b1439c50d74cfcff41d7fe82331",
+          "canonicalProgramPins": [],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-08-02",
+          "storedReviewAfter": "2026-09-01",
+          "sourceIds": [
+            "src-gap-scholarship-wave8-hrbnu-heilongjiang-government-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-hrbnu-heilongjiang-government-scholarship",
+              "canonicalSourceSha256": "c3947bb7474ad9ea95f3e7ee644685081e8273e8979b8f3301a0a2563b56ba1d",
+              "url": "https://iic.hrbnu.edu.cn/ru/?a=list&c=content&catid=49",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave8-hrbnu-heilongjiang-government-scholarship",
+                "url": "https://iic.hrbnu.edu.cn/ru/?a=list&c=content&catid=49",
+                "title": "Harbin Normal University Scholarship Directory",
+                "publisher": "harbin-normal-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-09",
+          "evidenceSourceUrl": "https://iic.hrbnu.edu.cn/ru/?a=list&c=content&catid=49",
+          "observedAt": "2026-10-19T06:15:44.126778+00:00",
+          "evidenceSourceType": "failed-origin-and-web-requests-no-date-proof",
+          "evidenceBodySha256": null,
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": false,
+          "evidenceSourceIds": [
+            "src-gap-scholarship-wave8-hrbnu-heilongjiang-government-scholarship"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "official-source-native-and-single-web-fallback-timeout-no-date-body",
+          "cooldown": true,
+          "deadlineCertified": false
+        }
+      ]
+    },
+    {
+      "key": "hebmu-current-degree-brochure-too-large-and-recurring-CSC-process",
+      "universityId": "uni-hebei-medical-university",
+      "evidence": [
+        {
+          "key": "source-10",
+          "url": "https://iec.hebmu.edu.cn/a/2025/12/17/03B6CFD18240437EB1D39E95CC8C9577.html",
+          "method": "GET",
+          "startedAt": "2026-10-19T06:15:25.799926+00:00",
+          "attempt": 1,
+          "httpStatus": 200,
+          "finalUrl": "https://iec.hebmu.edu.cn/a/2025/12/17/03B6CFD18240437EB1D39E95CC8C9577.html",
+          "contentType": "text/html",
+          "bytes": 27464,
+          "rawPath": "source-10.html",
+          "rawSha256": "5a91e5f3874d600eb6667ec96623abad68d8f4c41f7648403c32fbeffa558577",
+          "decodedCharset": "utf-8",
+          "textPath": "source-10.txt",
+          "textSha256": "0f49bccc6b6f951033ecc4b74fe254c33d9faa58be465887c4f6f27235ffac7a",
+          "observedAt": "2026-10-19T06:15:29.082344+00:00",
+          "sourceType": "origin-original-bytes",
+          "readScope": "complete-visible-body-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "key": "source-11",
+          "url": "https://iec.hebmu.edu.cn/a/2026/01/14/947C4F29558A4E94BFE84686CB048026.html",
+          "method": "GET",
+          "startedAt": "2026-10-19T06:15:25.865203+00:00",
+          "attempt": 1,
+          "httpStatus": 200,
+          "finalUrl": "https://iec.hebmu.edu.cn/a/2026/01/14/947C4F29558A4E94BFE84686CB048026.html",
+          "contentType": "text/html",
+          "bytes": 10995,
+          "rawPath": "source-11.html",
+          "rawSha256": "87f5831667fcfe4474d8d979e57c27cb321196ba935b2d9c7f5db33154d995bb",
+          "decodedCharset": "utf-8",
+          "textPath": "source-11.txt",
+          "textSha256": "52f6511cd16c155a399a826b03e3aebf0da46bf18c8eaec6b0f1f9fd7ca73314",
+          "observedAt": "2026-10-19T06:15:29.009098+00:00",
+          "sourceType": "origin-original-bytes",
+          "readScope": "2026guide landing confirms categories and attachmentURL only; not deadlineproof.",
+          "fullFactsCertified": false
+        },
+        {
+          "key": "source-13",
+          "url": "https://iec.hebmu.edu.cn/resources/43/202601/1768359942704048065.pdf",
+          "method": "GET",
+          "startedAt": "2026-10-19T06:40:37.717082+00:00",
+          "attempt": 1,
+          "httpStatus": 200,
+          "finalUrl": "https://iec.hebmu.edu.cn/resources/43/202601/1768359942704048065.pdf",
+          "contentType": "application/pdf",
+          "bytes": 10485761,
+          "error": "ValueError: Body exceeds 10MiB bounded capture",
+          "observedAt": "2026-10-19T06:41:23.390123+00:00",
+          "sourceType": "failed-origin-response-not-date-proof",
+          "readScope": "OriginalPDF exceeded10MiBboundedtransfer; capturestopped without retaining a false complete body/hash.",
+          "fullFactsCertified": false
+        }
+      ],
+      "brochureDiscovery": "Retained raw2026landing directly links the exactPDF; nativeGET exceeded the predetermined10MiBlimit. No exact dates are extracted from the landing, filename, or partialtransfer.",
+      "recurringScholarshipQuote": "申请人须于每年\n9\n月初至\n次年\n2\n月",
+      "recurrenceQualification": "Annual earlySeptember→followingFebruary is a month-level recurring process. It supplies no exact upcoming day/year and cannot be rolled into2026or2027exact dates. Bilateral and autonomousuniversityroutes are distinct.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-sch-hebmu-chinese-government",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-hebei-medical-university",
+          "name": "Chinese Government Scholarship at Hebei Medical University",
+          "programIds": [],
+          "canonicalScholarshipSha256": "89d904153473ed7f572ebbde6368e1c1b117aa176ca2abd2bf056c29c44989e8",
+          "storedOpensOn": null,
+          "canonicalRecordSha256": "89d904153473ed7f572ebbde6368e1c1b117aa176ca2abd2bf056c29c44989e8",
+          "canonicalRowSha256": "89d904153473ed7f572ebbde6368e1c1b117aa176ca2abd2bf056c29c44989e8",
+          "canonicalProgramPins": [],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-29",
+          "sourceIds": [
+            "src-gap-scholarship-wave3-sch-hebmu-chinese-government"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-sch-hebmu-chinese-government",
+              "canonicalSourceSha256": "d2ccf2c8a535b0f56faa8cf70cbc481eb828e326802f02802334351407f90dc7",
+              "url": "https://iec.hebmu.edu.cn/a/2025/12/17/03B6CFD18240437EB1D39E95CC8C9577.html",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave3-sch-hebmu-chinese-government",
+                "url": "https://iec.hebmu.edu.cn/a/2025/12/17/03B6CFD18240437EB1D39E95CC8C9577.html",
+                "title": "Application Process for Chinese Government Scholarship Students at Hebei Medical University",
+                "publisher": "hebei-medical-university",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-10",
+          "evidenceSourceUrl": "https://iec.hebmu.edu.cn/a/2025/12/17/03B6CFD18240437EB1D39E95CC8C9577.html",
+          "observedAt": "2026-10-19T06:15:29.082344+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "5a91e5f3874d600eb6667ec96623abad68d8f4c41f7648403c32fbeffa558577",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "src-gap-scholarship-wave3-sch-hebmu-chinese-government"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "annual-early-September-to-next-February-process-no-exact-dated-CSC-application-cutoff",
+          "quotedDate": "申请人须于每年\n9\n月初至\n次年\n2\n月",
+          "recurringReference": {
+            "opens": "earlySeptember",
+            "closes": "followingFebruary",
+            "exactYears": null,
+            "exactDay": null
+          },
+          "nextCycleNotInvented": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-hebmu-b-international-undergraduate-2026-2027-autumn",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-hebei-medical-university",
+          "programId": "prog-gap-wave3-hebmu-b-international-undergraduate",
+          "programName": "International Undergraduate Medical Programs",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "cdfabcbdace00cc8fdaeb7c887081a475a98433504c6f0ee196ec49d3179f90c",
+          "canonicalProgramSha256": "398e757d9cb2cc6476697f155d97e35181bf3e26b20daedfeeff1c5efa0b3181",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalRecordSha256": "cdfabcbdace00cc8fdaeb7c887081a475a98433504c6f0ee196ec49d3179f90c",
+          "canonicalRowSha256": "cdfabcbdace00cc8fdaeb7c887081a475a98433504c6f0ee196ec49d3179f90c",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-hebmu-b-international-undergraduate",
+              "canonicalProgramSha256": "398e757d9cb2cc6476697f155d97e35181bf3e26b20daedfeeff1c5efa0b3181"
+            }
+          ],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "sourceIds": [
+            "src-gap-program-wave3-hebmu-b-international-undergraduate",
+            "src-gap-program-wave3-hebmu-b-international-undergraduate-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-hebmu-b-international-undergraduate",
+              "canonicalSourceSha256": "dff71a2c3ffc8f4bd63c80cf7d167b845baf73eb6f1712853cab20f3243984d4",
+              "url": "https://iec.hebmu.edu.cn/a/2026/01/14/947C4F29558A4E94BFE84686CB048026.html",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-hebmu-b-international-undergraduate",
+                "url": "https://iec.hebmu.edu.cn/a/2026/01/14/947C4F29558A4E94BFE84686CB048026.html",
+                "title": "2026 Hebei Medical University International Student Admissions Guide — Undergraduate, Academic Master's and Doctoral",
+                "publisher": "hebei-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-wave3-hebmu-b-international-undergraduate-support-1",
+              "canonicalSourceSha256": "a332393845ccb405dc7ac1727653a5d260c56f016b91c123e6a9ca7272c2ada3",
+              "url": "https://iec.hebmu.edu.cn/a/2025/12/17/03B6CFD18240437EB1D39E95CC8C9577.html",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-hebmu-b-international-undergraduate-support-1",
+                "url": "https://iec.hebmu.edu.cn/a/2025/12/17/03B6CFD18240437EB1D39E95CC8C9577.html",
+                "title": "Application Process for Chinese Government Scholarship Students at Hebei Medical University",
+                "publisher": "hebei-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-11",
+          "evidenceSourceUrl": "https://iec.hebmu.edu.cn/a/2026/01/14/947C4F29558A4E94BFE84686CB048026.html",
+          "observedAt": "2026-10-19T06:15:29.009098+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "87f5831667fcfe4474d8d979e57c27cb321196ba935b2d9c7f5db33154d995bb",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "src-gap-program-wave3-hebmu-b-international-undergraduate"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "exact2026-bachelor-academic-master-doctorate-guide-attachment-too-large-no-date-body-read",
+          "quotedDate": null,
+          "landingNotDateEvidence": true,
+          "originalPdfCaptureHeld": true,
+          "originalPdfCaptureKey": "source-13",
+          "exact2026CategoriesNamedButNoDeadlineCertified": true,
+          "scholarshipRecurrenceNotBorrowedAsDegreeDeadline": true,
+          "cooldown": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-hebmu-d-doctoral-2026-2027-autumn",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-hebei-medical-university",
+          "programId": "prog-gap-wave3-hebmu-d-doctoral",
+          "programName": "Doctoral Programs for International Students",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "4bf5ce7c024c3dd6d4f1f1df23b6ffbd6a468653fdb82ddcb1ef0141119f3c04",
+          "canonicalProgramSha256": "7eb88bbbdf1d53ee8d8fc90bf13246ecf40cc9b4ce37aecdeaa7240d2f1db706",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalRecordSha256": "4bf5ce7c024c3dd6d4f1f1df23b6ffbd6a468653fdb82ddcb1ef0141119f3c04",
+          "canonicalRowSha256": "4bf5ce7c024c3dd6d4f1f1df23b6ffbd6a468653fdb82ddcb1ef0141119f3c04",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-hebmu-d-doctoral",
+              "canonicalProgramSha256": "7eb88bbbdf1d53ee8d8fc90bf13246ecf40cc9b4ce37aecdeaa7240d2f1db706"
+            }
+          ],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "sourceIds": [
+            "src-gap-program-wave3-hebmu-d-doctoral",
+            "src-gap-program-wave3-hebmu-d-doctoral-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-hebmu-d-doctoral",
+              "canonicalSourceSha256": "1d88c6d591c065549de58e1657a3cc3e26b37018204f76890af28176c3b3d53c",
+              "url": "https://iec.hebmu.edu.cn/a/2026/01/14/947C4F29558A4E94BFE84686CB048026.html",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-hebmu-d-doctoral",
+                "url": "https://iec.hebmu.edu.cn/a/2026/01/14/947C4F29558A4E94BFE84686CB048026.html",
+                "title": "2026 Hebei Medical University International Student Admissions Guide — Undergraduate, Academic Master's and Doctoral",
+                "publisher": "hebei-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-wave3-hebmu-d-doctoral-support-1",
+              "canonicalSourceSha256": "bdbb68effb1af97d870ecd1fecc94bf6162c088bd708819afe0dd8acd9dfcb7a",
+              "url": "https://iec.hebmu.edu.cn/a/2025/12/17/03B6CFD18240437EB1D39E95CC8C9577.html",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-hebmu-d-doctoral-support-1",
+                "url": "https://iec.hebmu.edu.cn/a/2025/12/17/03B6CFD18240437EB1D39E95CC8C9577.html",
+                "title": "Application Process for Chinese Government Scholarship Students at Hebei Medical University",
+                "publisher": "hebei-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-11",
+          "evidenceSourceUrl": "https://iec.hebmu.edu.cn/a/2026/01/14/947C4F29558A4E94BFE84686CB048026.html",
+          "observedAt": "2026-10-19T06:15:29.009098+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "87f5831667fcfe4474d8d979e57c27cb321196ba935b2d9c7f5db33154d995bb",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "src-gap-program-wave3-hebmu-d-doctoral"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "exact2026-bachelor-academic-master-doctorate-guide-attachment-too-large-no-date-body-read",
+          "quotedDate": null,
+          "landingNotDateEvidence": true,
+          "originalPdfCaptureHeld": true,
+          "originalPdfCaptureKey": "source-13",
+          "exact2026CategoriesNamedButNoDeadlineCertified": true,
+          "scholarshipRecurrenceNotBorrowedAsDegreeDeadline": true,
+          "cooldown": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-hebmu-m-academic-masters-2026-2027-autumn",
+          "selectionOrigin": "baseQueue22",
+          "universityId": "uni-hebei-medical-university",
+          "programId": "prog-gap-wave3-hebmu-m-academic-masters",
+          "programName": "Academic Master's Programs for International Students",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "canonicalCycleSha256": "6f93fc1dba57f924a63fb72b5037f7f40b18ec02a6d59612be5d93a67d3493ce",
+          "canonicalProgramSha256": "17f77df9321c9a686e254058fdec51c6b57847f430eb31a1b9b47576aa754ec5",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalRecordSha256": "6f93fc1dba57f924a63fb72b5037f7f40b18ec02a6d59612be5d93a67d3493ce",
+          "canonicalRowSha256": "6f93fc1dba57f924a63fb72b5037f7f40b18ec02a6d59612be5d93a67d3493ce",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-hebmu-m-academic-masters",
+              "canonicalProgramSha256": "17f77df9321c9a686e254058fdec51c6b57847f430eb31a1b9b47576aa754ec5"
+            }
+          ],
+          "storedDeadline": null,
+          "storedStatus": "stale",
+          "storedVerifiedAt": "2026-07-30",
+          "storedReviewAfter": "2026-08-06",
+          "sourceIds": [
+            "src-gap-program-wave3-hebmu-m-academic-masters",
+            "src-gap-program-wave3-hebmu-m-academic-masters-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-hebmu-m-academic-masters",
+              "canonicalSourceSha256": "a90f8cd3fff393eb779f18ed1330ae5b0f2f601f29dd1dd6aa418eb0fcde927f",
+              "url": "https://iec.hebmu.edu.cn/a/2026/01/14/947C4F29558A4E94BFE84686CB048026.html",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-hebmu-m-academic-masters",
+                "url": "https://iec.hebmu.edu.cn/a/2026/01/14/947C4F29558A4E94BFE84686CB048026.html",
+                "title": "2026 Hebei Medical University International Student Admissions Guide — Undergraduate, Academic Master's and Doctoral",
+                "publisher": "hebei-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-wave3-hebmu-m-academic-masters-support-1",
+              "canonicalSourceSha256": "e4a6da8d6e6db48d566a96da40e412686e99f5734dd5178d586dd9fafd58cd90",
+              "url": "https://iec.hebmu.edu.cn/a/2025/12/17/03B6CFD18240437EB1D39E95CC8C9577.html",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-hebmu-m-academic-masters-support-1",
+                "url": "https://iec.hebmu.edu.cn/a/2025/12/17/03B6CFD18240437EB1D39E95CC8C9577.html",
+                "title": "Application Process for Chinese Government Scholarship Students at Hebei Medical University",
+                "publisher": "hebei-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "evidenceSourceKey": "source-11",
+          "evidenceSourceUrl": "https://iec.hebmu.edu.cn/a/2026/01/14/947C4F29558A4E94BFE84686CB048026.html",
+          "observedAt": "2026-10-19T06:15:29.009098+00:00",
+          "evidenceSourceType": "origin-original-bytes",
+          "evidenceBodySha256": "87f5831667fcfe4474d8d979e57c27cb321196ba935b2d9c7f5db33154d995bb",
+          "retainedObservationSha256": null,
+          "originRawBytesAvailableForDateEvidence": true,
+          "evidenceSourceIds": [
+            "src-gap-program-wave3-hebmu-m-academic-masters"
+          ],
+          "candidateOnly": true,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalDeadlineAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "exactCutoffAt": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "exact2026-bachelor-academic-master-doctorate-guide-attachment-too-large-no-date-body-read",
+          "quotedDate": null,
+          "landingNotDateEvidence": true,
+          "originalPdfCaptureHeld": true,
+          "originalPdfCaptureKey": "source-13",
+          "exact2026CategoriesNamedButNoDeadlineCertified": true,
+          "scholarshipRecurrenceNotBorrowedAsDegreeDeadline": true,
+          "cooldown": true
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "exactBase22PlusAdditional7CoveredOnce": true,
+    "fullCanonicalRowsAndProgramAndSourceUnionsPinned": true,
+    "originalSixFilesUnchanged": true,
+    "originalByteHashesAndObservedAtPinned": true,
+    "webObservationNotPretendedOriginBody": true,
+    "PDFImageOnlyPagesAllSixVisuallyRead": true,
+    "noPriorExactRecordOverlap": true,
+    "priorReportPins": [
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-001/report.json",
+        "sha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-002/report.json",
+        "sha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-003/report.json",
+        "sha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-004/report.json",
+        "sha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-005/report.json",
+        "sha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-006/report.json",
+        "sha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-007/report.json",
+        "sha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-008/report.json",
+        "sha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-009/report.json",
+        "sha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-010/report.json",
+        "sha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-011/report.json",
+        "sha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-012/report.json",
+        "sha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-013/report.json",
+        "sha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-014/report.json",
+        "sha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-015/report.json",
+        "sha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-016/report.json",
+        "sha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-017/report.json",
+        "sha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-018/report.json",
+        "sha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-019/report.json",
+        "sha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-020/report.json",
+        "sha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+      },
+      {
+        "path": "quality/deadline-sweep-20261019/official-batch-021/report.json",
+        "sha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+      }
+    ]
+  }
+}

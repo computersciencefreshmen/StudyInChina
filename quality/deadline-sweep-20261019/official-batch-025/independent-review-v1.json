@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "official-batch-025-independent-review-v1",
+  "reviewedAt": "2026-10-19T08:45:45.028Z",
+  "reviewer": "/root/fast_date_inventory",
+  "result": "source-only-pass",
+  "reviewedReportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f",
+  "reviewedSelectionSha256": "7b4e8b400f14c7fd2c27086db06671ce0357fdf93962b394817663254da8c131",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "queueSha256": "245ac3f58bf85e9f328d04a513e60d7a9fa7b1ab86a8b52ab70e2824ab7b75a0",
+  "additionalSelectionReceiptSha256": "3c781bc6ec7ba4bbc7c3a40a4028619e29803a78fe002527fde27f2b996dab48",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "summary": {
+    "exactRecords": 19,
+    "baseQueueRecords": 11,
+    "additionalSameSourceRecords": 8,
+    "schools": 5,
+    "recordResults": {
+      "closed": 10,
+      "unknown": 6,
+      "blocked": 3
+    },
+    "checksPassed": 10,
+    "checksFailed": 0,
+    "programmeRowsPinned": 16,
+    "registeredSourcesPinned": 9,
+    "rawOriginalBodiesPinned": 5,
+    "newWebsiteReads": 0,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "freshnessWrites": 0,
+    "gitMutations": 0
+  },
+  "scope": "Only these19 source-date observations with their funding/route/year limitations. No canonical mutation approval, publication, current open-window claim, full-fact programme certification or whole-school freshness renewal. Frozen selection retains complete canonical records, parents and registered-source rows.",
+  "canonicalRecordPins": {
+    "cycle-2027-heilongjiang-university-law-master": "eb9b4c0a1244ff1b85b0b19ce36d199e794a686d0bd3778e221fc8532167470e",
+    "cycle-2027-heilongjiang-university-translation-bachelor": "06e2a7babe4ab5c1e511caae87d267d39e464be119ead63f434a6c726b138b1a",
+    "cycle-gap-wave8-hubu-international-economics-trade-bachelor-2026-2027-other-fee-reference": "4df16d918c2ceba0ed0daee97f2b92c2e3f0a88dd77c4fdb0ce5e9033ade2184",
+    "cycle-gap-wave8-hubu-management-philosophy-master-2026-2027-other-fee-reference": "5daef6266480be57b9ea0ed2670bc94af0056d1e7421fe40a2b0a6a0d850f2a7",
+    "cycle-gap-wave8-hubu-nanomaterials-devices-master-2026-2027-other-fee-reference": "dfa1f94eaad3454c72c8db33e3dbbe10688dad414cb091a7ee1482b5122c50a8",
+    "sch-gap-mew-csw-jufe-university-scholarship": "acb93b00a31b13708ee8d2490da3f034ee992ab3e8d10cc05d297a43f2068217",
+    "sch-gap-wave8-jlu-csc-bilateral-type-a": "bacdebd2063a91c7bbc66c5a6984e5a23d97010b1d79f85976d863c6dfef5a43",
+    "scholarship-jnu-guangdong-government-international-students": "5848d2801b5d801ef358f1a1ec77824a83eedb7af8e962504e434b12e151849e",
+    "cycle-gap-clw-sw-jnu-chinese-culture-education-bachelor-2026-2027-autumn-fee-reference": "5b04617b3f9b79b48fc4f163a86e96b0a6355aa450c1e42c5db977c117fe480e",
+    "cycle-gap-clw-sw-jnu-chinese-language-bachelor-2026-2027-autumn-fee-reference": "d15bc1f738f3ff1d9c68a5949a5f793c679833e8dbbbf6b0f4826f1385494cff",
+    "cycle-gap-clw-sw-jnu-tcsol-bachelor-2026-2027-autumn-fee-reference": "e5c67bff185c2fdb341283f239f97b7ef6dae77c09a13111bcdc06d2c36a0161",
+    "cycle-wave3-program-jinan-university-international-economics-and-trade-bachelor-autumn-2026-historical": "ad9afb2483e1f4e4d508735354eaa8e3b07d3f579bb8597fb580a62e0fd5b0c0",
+    "cycle-wave3-program-jinan-university-computer-science-and-technology-bachelor-autumn-2026-historical": "6fdaa34bdf92abcf77e8f200eab1701bbd93898c1e7cabbbfe1dae5f322a3c34",
+    "cycle-wave3-program-jinan-university-accounting-bachelor-autumn-2026-historical": "ea0ba1152ad157d96a3be26d22f3ee52ca51f0c5bddf546c5c0e6bf1fb643243",
+    "cycle-wave3-program-jinan-university-finance-bachelor-autumn-2026-historical": "b7b1411ece3e4aa852ef04c41d209362aec98208ed0f237481f81b52733167ed",
+    "cycle-wave3-program-jinan-university-pharmacy-bachelor-autumn-2026-historical": "ccc46b76e262308ba54061fba37c6775fc2ff3602d6af1573139b1033610091b",
+    "cycle-wave3-program-jinan-university-international-journalism-and-communication-bachelor-autumn-2026-historical": "9836311faa4dab332207132d44364a38503550d42507fa95e431d62e9f4a4f5b",
+    "cycle-wave3-program-jinan-university-food-nutrition-and-health-bachelor-autumn-2026-historical": "995574d25c2ba24d564257d34014ec1aefe40087b64a128aa157b4553aff804a",
+    "cycle-wave3-program-jinan-university-clinical-medicine-bachelor-autumn-2026-historical": "d71f8e309023fe52e3149416095f63fd301b350dc9fe3fbe8c2ed28a6b75356e"
+  },
+  "canonicalProgrammeBindingSetSha256": "ed38b65f7e889b0f25ffce19b81be13f85c9a3174726e0bd89b8f90c1edc32f1",
+  "canonicalRegisteredSourceBindingSetSha256": "173d099d0d49108fe074167ef2fddfb195a16211625f735a3cb3d32dec401276",
+  "rawOriginalPins": [
+    {
+      "path": "source-02.html",
+      "sha256": "6d787807b19849289b966c8ee227a39158558490c9259410d633189fc034403d",
+      "observedAt": "2026-10-19T08:10:48.906781+00:00"
+    },
+    {
+      "path": "source-03.html",
+      "sha256": "1f478668f809accab133781154f1b07b0317aa3468c528a38028a48496ad74a9",
+      "observedAt": "2026-10-19T08:10:39.839359+00:00"
+    },
+    {
+      "path": "source-04.html",
+      "sha256": "16d6b9acfa33209b94d9a1b7d2264a21c862267ec6a4c507053438f48aa7d5bc",
+      "observedAt": "2026-10-19T08:10:41.671693+00:00"
+    },
+    {
+      "path": "source-05.html",
+      "sha256": "68b94dfc3f1069da4b777cd34b47e9460c2cd361c2cf8025eeaba24de67f908a",
+      "observedAt": "2026-10-19T08:10:43.837424+00:00"
+    },
+    {
+      "path": "source-06.html",
+      "sha256": "b4dae9852fe092214f5c44bd65bc36d5d89554b22eacc681840254bf769776ef",
+      "observedAt": "2026-10-19T08:10:46.942907+00:00"
+    }
+  ],
+  "failureManifestPin": {
+    "path": "fallback-manifest.json",
+    "sha256": "ee92545b8b5ca98ab9cbb9f0c1304cedcd27ca1f3c54e54eca56a329cb492525"
+  },
+  "checks": [
+    {
+      "id": "frozen-report-selection-six-inputs-and-inventory",
+      "passed": true
+    },
+    {
+      "id": "exact-base11-plus-root-additional8",
+      "passed": true
+    },
+    {
+      "id": "all-canonical-record-parent-and-source-pins",
+      "passed": true
+    },
+    {
+      "id": "five-raw-originals-text-hashes-and-observation-times",
+      "passed": true
+    },
+    {
+      "id": "positive-date-and-exact-programme-quotes-in-original-bodies",
+      "passed": true,
+      "detail": "Positive source clauses verified, not whole-page keyword-absence assumptions."
+    },
+    {
+      "id": "jnu-rowspan-language-degree-duration-bindings",
+      "passed": true,
+      "detail": "Original HTML rowspans independently expanded: English Panyu6 + Shipai2; ClinicalMedicine6years, other seven4years. CLLC ChineseLanguage/TCSOL remain college-specific."
+    },
+    {
+      "id": "jnu-two-applicant-windows-route-restrictions-and-award-separation",
+      "passed": true,
+      "detail": "Online applicant registration is not institutional review; March gap retained. Joint-exam registration/exams and Aug15 diploma supplement separate. Exclusive ChineseLanguageEducation route needs own brochure; Guangdong award does not borrow May31."
+    },
+    {
+      "id": "hlju2027-homepage-hubu-failures-jufe-shells-jlu-typea",
+      "passed": true,
+      "detail": "2026 homepage news do not support2027. HUBU one native+normalTLS failure preserved without revocation bypass. JUFE directory200 is not full award-date evidence. JLU TypeA generally earlyJan–April is home-country dispatch scope, no exact fixed day or TypeB borrowing."
+    },
+    {
+      "id": "candidate-only-counts-no-canonical-or-freshness-change",
+      "passed": true
+    },
+    {
+      "id": "exact-id-no-overlap-and-input-report-preservation",
+      "passed": true
+    }
+  ],
+  "checksScript": "independent-review-checks.cjs",
+  "checksScriptSha256": "e289d10cad7be9f33d5ac850d52ddb7af2785d0dd7997e7467f73b9375b52d0a"
+}

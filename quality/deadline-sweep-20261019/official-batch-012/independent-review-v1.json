@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-19T05:18:51.201Z",
+  "reviewer": "independent fast_date_inventory agent",
+  "targetReport": "quality/deadline-sweep-20261019/official-batch-012/report.json",
+  "targetReportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2",
+  "decision": "approved-source-only-audit-with-held-dates",
+  "newWebsiteReadsByReviewer": 0,
+  "canonicalWrites": 0,
+  "publicationApproval": false,
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "captureManifestSha256": "15993a904f55c1e2ce1e57cd16e0bb06c033f94fc5fcf5b26332b9c341854298",
+  "checks": {
+    "exactDistinctRecords": 22,
+    "canonicalCycleProgramScholarshipRowHashes": 41,
+    "sourceHtmlHashes": 14,
+    "sourceTextHashes": 14,
+    "rawIntakeDegreeParentScopeMatches": true,
+    "reportAndSixCanonicalFilesUnchangedDuringReview": true,
+    "reusedDateBindings": 6
+  },
+  "recordOutcomes": {
+    "unchanged": 17,
+    "unknown": 2,
+    "conflict": 3
+  },
+  "reviewedRecordIds": [
+    "cycle-2027-sjtu-long-term-chinese-spring",
+    "cycle-2026-e4d822684a6f",
+    "cycle-2026-a57df6c71eea",
+    "cycle-2026-767e75c27f6e",
+    "cycle-uibe-international-foundation-spring-2027",
+    "cycle-2027-bf053c085767",
+    "cycle-2027-5df1a1f1218d",
+    "cycle-xmu-long-term-chinese-language-spring-2027",
+    "cycle-bfsu-iclt-one-semester-spring-2027",
+    "scholarship-bfsu-iclt-one-semester-spring-2027",
+    "cycle-cqnu-chinese-language-spring-2027",
+    "cycle-gap-wave7-bipt-chinese-language-program-2026-2027-spring",
+    "cycle-gap-clw-sw-hainanu-chinese-culture-semester-2026-2027-spring",
+    "cycle-tju-foundation-one-year-autumn-2027",
+    "cycle-2027-nanjing-university-information-management-information-system-bachelor",
+    "cycle-2027-nanjing-university-editing-publishing-science-bachelor",
+    "cycle-2027-nanjing-university-applied-psychology-bachelor",
+    "cycle-2027-xiamen-university-international-relations-master-english",
+    "cycle-2027-xiamen-university-marine-affairs-0707j3-master-english",
+    "cycle-2027-xiamen-university-marine-affairs-0830j3-master-english",
+    "scholarship-blcu-beijing-international-students-2027",
+    "sch-gap-local-tjfsu-china-link-scholarship"
+  ],
+  "newSourcePins": [
+    {
+      "key": "uibe-degree",
+      "url": "https://sie.uibe.edu.cn/en/Prgr/BacDegPro/OfEn/index.htm",
+      "rawSha256": "b77856a6ce97b5493fba22f07a8faa2248cfb843ff2d01ad9081ee716eaee2f2",
+      "textSha256": "76daf9a73fc937a55fdaf18d9920ce2095a9b53b4f68801e8819589e1173cf37"
+    },
+    {
+      "key": "dlut-a",
+      "url": "https://sie.dlut.edu.cn/info/1179/2481.htm",
+      "rawSha256": "b88c42892e307a067b9731b07f0ab0d8acc9c7fe5a6070a5f3a08ce21b992949",
+      "textSha256": "db8e4f004bc8f03ca21838695fefbfdd639056400cde92dcd83c7a357b32fb47"
+    },
+    {
+      "key": "sjtu",
+      "url": "https://ichinese.sjtu.edu.cn/en/programs/74/detail",
+      "rawSha256": "c49ddde03b39c78fd43ff93f48f5560e41cb022f583deafbc0be7e2596bae854",
+      "textSha256": "ba4956552a2415d71ee172922c09d2eb68778e58576b0ad7c274f87197511ad9"
+    },
+    {
+      "key": "dlut-b",
+      "url": "https://sie.dlut.edu.cn/info/1179/24291.htm",
+      "rawSha256": "02ad4090e9847aaf7747aa5d283683b2af6cb5cc9bf1f1d5689b05040bfc7795",
+      "textSha256": "6b9058db358c0d05eaf1d27f4dafe5796d11135484b3f294dd494903c3fc2835"
+    },
+    {
+      "key": "uibe-foundation",
+      "url": "https://sie.uibe.edu.cn/en/Prgr/FouCouBacProCh/FouCouBacProChiSelf/cf60f17e393347278a43068323179bd3.htm",
+      "rawSha256": "2578e3f520163ad3f046a3857eeddd53003b615f89e2ae8251decd46a7d7f3fe",
+      "textSha256": "07858d8623e1763d0f6d44b2eb71082c5ebbfe3ec7f0743561008030fe1f72ae"
+    },
+    {
+      "key": "xmu-language",
+      "url": "https://oec.xmu.edu.cn/en/Program1/Chinese_Language_Programs.htm",
+      "rawSha256": "d37af527d320cd7dc2f38a2b43f0fca9871c92781f9e8733d8166bef7b7557c2",
+      "textSha256": "23eaaec94a839a7fb3d0b1a40e5451b7a6d181f9d6c5f5d157df840cfd22f6bc"
+    },
+    {
+      "key": "bfsu",
+      "url": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+      "rawSha256": "076811329c4922ed1d1177452da5deff36c6d52dca39f2e2b3b54f56cb1ebc8c",
+      "textSha256": "544969047d9802653df0d62e138eef0c3e8d1dbea3d1599a32860602ee4ce499"
+    },
+    {
+      "key": "cqnu-cn",
+      "url": "https://international.cqnu.edu.cn/info/1386/5186.htm",
+      "rawSha256": "543152f041d0c6eabecd303ce92952e89a35540731e1a4b3a8c7afe9c717aee4",
+      "textSha256": "f5abd84d73184aecb377545b67675804d5953fde29529ed4cbd8ebd18f6f89dd"
+    },
+    {
+      "key": "hainanu",
+      "url": "https://sie.hainanu.edu.cn/info/1539/7914.htm",
+      "rawSha256": "0d80e854554755ad8c6cd6edd7c8ffa6970a66ba164c085542a3bcdd01b546e1",
+      "textSha256": "14a6d3389e31e93cfb5e8d480e873959ee01c9ab32088849f66a10dd8a8d1fe6"
+    },
+    {
+      "key": "cqnu-en",
+      "url": "https://international.cqnu.edu.cn/ywb/info/1376/1302.htm",
+      "rawSha256": "37ef550c7160e8e880b478c3d064e0b8212131e3591d106b82dde4301321b26e",
+      "textSha256": "79b9dd90690a7215679674a05841dc09b5acd1bce2b518d3bdc5e83256586355"
+    },
+    {
+      "key": "bipt",
+      "url": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+      "rawSha256": "2f6c66a275e120b01ac26964b00c00ef49f6462359b2ce68e08359bac4b65010",
+      "textSha256": "c8eb5f363caa536859924fbc93112327350548fed13515a4f2924942b6ac1b14"
+    },
+    {
+      "key": "blcu",
+      "url": "https://admission.blcu.edu.cn/en/98/list.htm",
+      "rawSha256": "e33725d5fdaacb1a37b353c55a6fe6ba5ccca26352d2fbf751f3e492bd311e4b",
+      "textSha256": "5dac74e95f5cbe9254e669c67e180a4a80edc78bbd75a5c3cb21b82a7b1d5608"
+    },
+    {
+      "key": "tjfsu",
+      "url": "https://isa.tjfsu.edu.cn/info/1040/1874.htm",
+      "rawSha256": "8ffcd5ec78fb1e7e411a17bb2471b0e0f52ad514bcbfbcd43ca35040c3d07f81",
+      "textSha256": "cd6e32cbc8c837e4cfa0ce608690068e002316263cf4c8b120898df17fd86f8b"
+    },
+    {
+      "key": "tju",
+      "url": "https://sie.tju.edu.cn/en/xwxm/FOUNDATIONPROGRAM/202609/t20260920_324704.html",
+      "rawSha256": "1126b57e57cca4b3aa831ffe18a4f50799a5f3cb2efa0f663553b5fa551bce0d",
+      "textSha256": "758cc93d304aebe2301c665526fb71b5ebc5a1bd29a40e0fb407d0487d14aad7"
+    }
+  ],
+  "reusedEvidencePins": [
+    {
+      "mode": "prior-approved-central-guide-reuse",
+      "rawSha256": "0157c7fb5962657cc5f58be63cfc8a0898c4279ea8f87e15c40302fe90f981d7",
+      "originalObservedAt": "2026-10-18T17:47:49.803504+00:00",
+      "newWebsiteRead": false
+    },
+    {
+      "mode": "same-day-prior-official-guide-reuse",
+      "reportPath": "quality/deadline-sweep-20261019/official-batch-007/report.json",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977",
+      "rawSha256": "1483c3a275ea6ed0e83b5c1d9113956e1f69d6250266a3478faf0fb0aaa1d520",
+      "originalObservedAt": "2026-10-19T04:48:40.256Z",
+      "boundRecordIds": [
+        "cycle-2027-nanjing-university-information-management-information-system-bachelor",
+        "cycle-2027-nanjing-university-editing-publishing-science-bachelor",
+        "cycle-2027-nanjing-university-applied-psychology-bachelor"
+      ],
+      "newWebsiteRead": false
+    },
+    {
+      "mode": "same-day-prior-official-guide-reuse",
+      "reportPath": "quality/deadline-sweep-20261019/official-batch-006/report.json",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa",
+      "rawSha256": "d9b75f2174b01ff4e78d4c15b9fe1b9224e9b72a5b8b25b85fbdba727c1af04f",
+      "originalObservedAt": "2026-10-19T04:45:47.794380+00:00",
+      "boundRecordIds": [
+        "cycle-2027-xiamen-university-international-relations-master-english",
+        "cycle-2027-xiamen-university-marine-affairs-0707j3-master-english",
+        "cycle-2027-xiamen-university-marine-affairs-0830j3-master-english"
+      ],
+      "newWebsiteRead": false
+    }
+  ],
+  "biptColumnProof": {
+    "headerColumns": [
+      "申请事项",
+      "语言生",
+      "本科生 （中文授课）",
+      "硕士研究生 （中英文授课）"
+    ],
+    "timeRow": [
+      {
+        "text": "报名时间",
+        "colspan": "1"
+      },
+      {
+        "text": "5月1日-6月30日 11月1日-12月30日",
+        "colspan": "1"
+      },
+      {
+        "text": "每年3月1日-6月30日",
+        "colspan": "2"
+      }
+    ],
+    "conclusion": "November1–December30 belongs to the language-student column; March1–June30 spans the two degree columns. No explicit spring-intake month is inferred."
+  },
+  "findings": [
+    {
+      "item": "DLUT two bachelor deadlines",
+      "decision": "Keep both unknown",
+      "reason": "Recommended completion before end of June is not a strict admission cutoff; the scholarship paragraph is a separate deadline scope. OpeningNovember1,2026 may be retained as independently supported evidence."
+    },
+    {
+      "item": "BFSU two ICLT records",
+      "decision": "Keep both conflict",
+      "reason": "School table December30/March2027 conflicts with central October31; school prose also says January2027. Do not infer authority precedence or change dates."
+    },
+    {
+      "item": "CQNU language cycle",
+      "decision": "December25 correction proposal is source-supported; retain held classification and original row",
+      "reason": "CN and EN agree; EN explicitly gives2026. This review does not authorize or implement a canonical change; no supported narrow date consumer is established."
+    },
+    {
+      "item": "BIPT language column",
+      "decision": "December30 language-window binding accepted",
+      "reason": "November1–December30 belongs to the language-student column; March1–June30 spans the two degree columns. No explicit spring-intake month is inferred."
+    },
+    {
+      "item": "NJU3 / XMU3 raw cycles",
+      "decision": "Same-day prior date-guide reuse accepted, zero new website reads",
+      "reason": "Exact snapshot/guide hashes, university, own degree, academicYear2027-2028, autumn intake and source URL match. These are self-funded dates, not programme-offering or scholarship approval."
+    },
+    {
+      "item": "Before-date and capacity qualifications",
+      "decision": "Retain all qualifications",
+      "reason": "BLCU beforeJanuary12 and TFSU beforeDecember30 do not prove full-day inclusion; UIBE foundation may close when full. No admission-portal acceptance claim is made."
+    }
+  ],
+  "limitations": [
+    "Independent review of stored originals only; no fresh official fetches.",
+    "No report, canonical, Git, shared progress or deployment state changed."
+  ]
+}

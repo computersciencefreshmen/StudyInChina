@@ -1,0 +1,1725 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-027-20261019",
+  "state": "completed-nine-scoped-past-windows-five-unknown-four-blocked",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T08:16:06.474Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v6.json",
+  "targetQueueSha256": "245ac3f58bf85e9f328d04a513e60d7a9fa7b1ab86a8b52ab70e2824ab7b75a0",
+  "selectionSha256": "42f9d4e22d9b31f94eec3926cbe00c9c960e0b37387df7b4e28373127b79fe52",
+  "selectedUniversityIds": [
+    "uni-nanjing-medical-university",
+    "uni-nanjing-tech-university",
+    "uni-nanjing-university-of-aeronautics-and-astronautics",
+    "uni-nanjing-university-of-chinese-medicine",
+    "uni-nanjing-university-of-finance-and-economics",
+    "uni-nanjing-university-of-posts-and-telecommunications",
+    "uni-nanjing-university-of-science-and-technology",
+    "uni-nantong-university"
+  ],
+  "selection": {
+    "baseQueueRecords": 18,
+    "additionalSameSourceRecords": 0,
+    "totalRecords": 18,
+    "baseQueueRecordIds": [
+      "sch-gap-mve-ecma-njmu-tuition-scholarships-2026",
+      "cycle-d94f3eb3b8a1",
+      "cycle-gap-mve-ecma-njmu-clinical-medicine-chinese-bachelor-2026-2027-autumn-fee-reference",
+      "sch-gap-mve-ecs-njtech-freshman-scholarship",
+      "sch-gap-mve-ecs-nuaa-csc-silk-road-2026",
+      "cycle-gap-mve-ecs-nuaa-mechanical-engineering-master-2026-2027-autumn",
+      "cycle-gap-mve-ecs-nuaa-software-engineering-master-2026-2027-autumn",
+      "cycle-gap-mve-ecs-nuaa-transportation-engineering-master-2026-2027-autumn",
+      "sch-gap-mve-ecma-njucm-study-in-jiangsu-2026",
+      "cycle-gap-mve-ecma-njucm-health-preservation-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-ecma-njucm-materia-medica-pharmacy-bachelor-2026-2027-autumn-fee-reference",
+      "sch-gap-wave8-nufe-international-student-scholarship",
+      "cycle-gap-mve-jzh-nufe-accounting-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-mve-jzh-nufe-chinese-literature-bachelor-2026-2027-autumn-fee-reference",
+      "sch-gap-mve-jzh-njupt-csc-high-level-2026",
+      "sch-gap-wave8-njust-jasmine-jiangsu-government-scholarship",
+      "sch-gap-wave8-njust-nanjing-municipal-government-joint-scholarship",
+      "sch-gap-mve-ecs-ntu-university-scholarship"
+    ],
+    "additionalSameSourceRecordIds": []
+  },
+  "acquisition": {
+    "registeredDistinctUrlsAttempted": 10,
+    "derivedExactEmbeddedPdfUrlsAttempted": 1,
+    "nativeRequests": 13,
+    "singleNativeTlsRecoveries": 2,
+    "webFallbackRequests": 1,
+    "rawBodiesSaved": 10,
+    "completeDateScopeSourceBodiesRead": 7,
+    "transportCapturedButNotFullGuide": [
+      "njupt-2026-recovery",
+      "njust-graduate-guide",
+      "ntu-scholarship"
+    ],
+    "paidModelCalls": 0,
+    "normalTlsValidation": true,
+    "captureManifestPins": [
+      {
+        "path": "captures.json",
+        "sha256": "4c549241aa3967da0d8b6a90c4352565a8786925c82ee80ce600927adf34a417"
+      },
+      {
+        "path": "tls-recoveries.json",
+        "sha256": "7dc53529469b23dc9834682d8bc52ad617522343c52860560179c5dcec74011b"
+      },
+      {
+        "path": "embedded-original-capture.json",
+        "sha256": "d9e525a8c9644ee29bbfcfd854598e7778e6081d69e914d134dee17c1614f366"
+      }
+    ],
+    "boundedWebFallbackPin": {
+      "path": "ntu-web-fallback.json",
+      "sha256": "389862da81551e613319020c7101aecf04ede3147e569c4aa920da92eb60b5d3"
+    }
+  },
+  "summary": {
+    "schoolsAttempted": 8,
+    "recordsAssessed": 18,
+    "baseQueueRecords": 18,
+    "additionalSameSourceRecords": 0,
+    "admissionCyclesAssessed": 9,
+    "scholarshipsAssessed": 9,
+    "recordResults": {
+      "blocked": 4,
+      "unknown": 5,
+      "closed": 9
+    },
+    "newExactPastDeadlineCandidatesFromStoredNull": 6,
+    "existingExpiredDatesScoped": 3,
+    "independentAwardPastDeadlineCandidates": 2,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "rules": [
+    "Candidate-only source observations; no canonical dates/status/freshness changed.",
+    "A past explicitly matched 2026 window is not proof of programme discontinuation or a later cycle.",
+    "Independent awards do not borrow general admission deadlines. Advisory May10 is not a hard award cutoff.",
+    "NUFE June15 is the originally scheduled final deadline; actual unspecified early-closure day is not invented.",
+    "HTTP200/landing, hidden example comments, failed TLS and redirected HTML404 are not full-guide date evidence.",
+    "Any later canonical mutation requires a supported narrow consumer, separate independent approval and exact-row compare-and-swap."
+  ],
+  "groups": [
+    {
+      "key": "njmu-two-finite-source-attempts-blocked",
+      "universityId": "uni-nanjing-medical-university",
+      "scope": "Exact two Clinical Medicine cycles and tuition-scholarship row; no readable guide body was obtained.",
+      "evidence": [
+        {
+          "name": "njmu-2026",
+          "url": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm",
+          "observedAt": "2026-10-19T08:08:48.578479+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "failed-native-Python-TLS",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "njmu-2026-recovery",
+          "url": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm",
+          "observedAt": "2026-10-19T08:10:44.624084+00:00",
+          "method": "one-bounded-Windows-curl-normal-TLS-recovery",
+          "tlsCertificateValidation": true,
+          "exitCode": 28,
+          "responseMetadata": "000\n\nhttps://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm",
+          "captureSucceeded": false,
+          "error": "curl: (28) Connection timed out after 13718 milliseconds\n",
+          "retryPolicy": "cooldown-no-further-retries",
+          "evidenceRole": "failed-single-Windows-TLS-recovery",
+          "fullFactsCertified": false
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecma-njmu-tuition-scholarships-2026",
+          "universityId": "uni-nanjing-medical-university",
+          "selectionOrigin": "baseQueue18",
+          "programId": null,
+          "name": "Nanjing Medical University Tuition Scholarships",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "12d5813dc9aed274b0de7a88cc0bf469172f8108d53c42023c69784b07a16c31",
+          "canonicalScholarshipSha256": "12d5813dc9aed274b0de7a88cc0bf469172f8108d53c42023c69784b07a16c31",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecma-njmu-clinical-medicine-chinese-bachelor",
+              "canonicalProgramSha256": "3fae6b1dbe660820af0eade3c057cf28add486f76ae8fec6355f83f4146f86e5"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mve-ecma-njmu-tuition-scholarships-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecma-njmu-tuition-scholarships-2026",
+              "canonicalSourceSha256": "96570fa0be41a0d8e8ab47df650b333c1bbc1299c0e4281e61c4caee2025b405",
+              "url": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "native-tls-eof-then-one-bounded-windows-curl-timeout-no-original-body",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T08:10:44.624084+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "noLandingOrMetadataDateCertification": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-d94f3eb3b8a1",
+          "universityId": "uni-nanjing-medical-university",
+          "selectionOrigin": "baseQueue18",
+          "programId": "program-nanjing-medical-university-clinical-medicine-mbbs-bachelor",
+          "name": "Clinical Medicine (MBBS)",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "d629cc597c60b50b17d4adda3a1f765b0592ac0011a9cc343d94bd114239b9d1",
+          "canonicalCycleSha256": "d629cc597c60b50b17d4adda3a1f765b0592ac0011a9cc343d94bd114239b9d1",
+          "canonicalProgramSha256": "8bc40fa2b9aba5d1c1ea56a7e1620d3479afa4c962ffc95c02084a4d938893d8",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-nanjing-medical-university-clinical-medicine-mbbs-bachelor",
+              "canonicalProgramSha256": "8bc40fa2b9aba5d1c1ea56a7e1620d3479afa4c962ffc95c02084a4d938893d8"
+            }
+          ],
+          "sourceIds": [
+            "src-program-review-549544754978"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-program-review-549544754978",
+              "canonicalSourceSha256": "3a86f2a7e86896ed5f4eba7c07778f84ca8f3e12bcf7fcc6a13209dcd00095a0",
+              "url": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "native-tls-eof-then-one-bounded-windows-curl-timeout-no-original-body",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T08:10:44.624084+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "noLandingOrMetadataDateCertification": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecma-njmu-clinical-medicine-chinese-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-nanjing-medical-university",
+          "selectionOrigin": "baseQueue18",
+          "programId": "prog-gap-mve-ecma-njmu-clinical-medicine-chinese-bachelor",
+          "name": "Clinical Medicine (Chinese-taught)",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "0587dec7f1566dfb88c3d80e8c5b12df184a8308c1844b45a86f5b2d1944193e",
+          "canonicalCycleSha256": "0587dec7f1566dfb88c3d80e8c5b12df184a8308c1844b45a86f5b2d1944193e",
+          "canonicalProgramSha256": "3fae6b1dbe660820af0eade3c057cf28add486f76ae8fec6355f83f4146f86e5",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecma-njmu-clinical-medicine-chinese-bachelor",
+              "canonicalProgramSha256": "3fae6b1dbe660820af0eade3c057cf28add486f76ae8fec6355f83f4146f86e5"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-ecma-njmu-clinical-medicine-chinese-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecma-njmu-clinical-medicine-chinese-bachelor",
+              "canonicalSourceSha256": "241d55cc668ab06606da3f9d1ba4c3fd2ce81d3051a0d4f60d59ea4730847b29",
+              "url": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "native-tls-eof-then-one-bounded-windows-curl-timeout-no-original-body",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://xxgk.njmu.edu.cn/2026/0115/c20186a296924/page.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T08:10:44.624084+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "noLandingOrMetadataDateCertification": true
+        }
+      ]
+    },
+    {
+      "key": "njtech-standing-freshman-scholarship-no-current-dated-window",
+      "universityId": "uni-nanjing-tech-university",
+      "evidence": [
+        {
+          "name": "njtech-scholarship",
+          "url": "https://coe.njtech.edu.cn/info/1034/1406.htm",
+          "observedAt": "2026-10-19T08:08:48.578479+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://coe.njtech.edu.cn/info/1034/1406.htm",
+          "contentType": "text/html",
+          "bytes": 24651,
+          "rawPath": "njtech-scholarship.html",
+          "rawSha256": "4670ca360fcfbed35a2177abee9f96514743656446f106402ab720a6cf9bf08a",
+          "textPath": "njtech-scholarship.txt",
+          "textSha256": "4ccf1a4ed87ad732664657d9b673db0cbcf18144c639192cf5763980964f8474",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "Exact university freshman scholarship; 2022 publication/2024 update does not establish a 2026 application period.",
+      "applicationQuote": "留学生新生在招生申请系统中，勾选校级奖学金，并提交有关材料。",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecs-njtech-freshman-scholarship",
+          "universityId": "uni-nanjing-tech-university",
+          "selectionOrigin": "baseQueue18",
+          "programId": null,
+          "name": "Nanjing Tech University International Freshman Scholarship",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "5363d3387aff2ab4ccff84afe43a33b7c0d9a14acaca5afdd27b61fd39177b92",
+          "canonicalScholarshipSha256": "5363d3387aff2ab4ccff84afe43a33b7c0d9a14acaca5afdd27b61fd39177b92",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecs-njtech-chemical-engineering-bachelor",
+              "canonicalProgramSha256": "3fbd8c36765dee7b7128f8fb08125067749dc250f083708fcf44d6182fb849c3"
+            },
+            {
+              "programId": "prog-gap-mve-ecs-njtech-iclt-bachelor",
+              "canonicalProgramSha256": "3232d1b9239ee69020cb2208f200dc7def3f55ef1478363fc2b3a0e84d182717"
+            },
+            {
+              "programId": "prog-gap-mve-ecs-njtech-pharmacology-master",
+              "canonicalProgramSha256": "50fb9cc250297dc335ae3399e6d6f37125dc3ba8570bce3c989b9011f1403d9f"
+            },
+            {
+              "programId": "prog-gap-mve-ecs-njtech-chemical-engineering-doctorate",
+              "canonicalProgramSha256": "e16b48822915f2d4fbf04f5b051560f348d7170c5bb28c8e7f40821e9de572b3"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mve-ecs-njtech-freshman-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecs-njtech-freshman-scholarship",
+              "canonicalSourceSha256": "f18f9a3d4b339b46bcecfa633b74c95a0ba8998a27a13da05801ebb7f3a84d77",
+              "url": "https://coe.njtech.edu.cn/info/1034/1406.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-award-policy-has-submission-procedure-but-no-independent-current-application-window",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://coe.njtech.edu.cn/info/1034/1406.htm",
+          "evidenceBodySha256": "4670ca360fcfbed35a2177abee9f96514743656446f106402ab720a6cf9bf08a",
+          "observedAt": "2026-10-19T08:08:48.578479+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "originalPublication": "2022-03-30",
+          "statedUpdate": "2024-01-26",
+          "awardDeadlineNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "nuaa-exact-2026-csc-silkroad-english-graduate-route",
+      "universityId": "uni-nanjing-university-of-aeronautics-and-astronautics",
+      "evidence": [
+        {
+          "name": "nuaa-silkroad-2026",
+          "url": "https://cie.nuaa.edu.cn/2026/0317/c16510a394633/page.htm",
+          "observedAt": "2026-10-19T08:08:48.580847+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://cie.nuaa.edu.cn/2026/0317/c16510a394633/page.htm",
+          "contentType": "text/html",
+          "bytes": 59154,
+          "rawPath": "nuaa-silkroad-2026.html",
+          "rawSha256": "60c783bd9fac70b70d250a18249c53a7d40016135702cd94cdd6509585571241",
+          "textPath": "nuaa-silkroad-2026.txt",
+          "textSha256": "3432b35a9713ea6c9e6e466a7c8d38ec1cd5c35444c3d29682ca8108dc09a338",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "Three explicitly listed English master programmes and the independently named 2026 CSC Silk Road award, only this Type B route.",
+      "yearTitle": "2026 NUAA CSC Scholarship – Silk Road Program",
+      "quotedDate": "I. Application Time：From now to May 18, 2026 .",
+      "eligibilityRouteRestriction": "Silk Road countries: Pakistan, Indonesia, Bangladesh, Nepal, Thailand, Morocco, Kenya, Tanzania",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecs-nuaa-csc-silk-road-2026",
+          "universityId": "uni-nanjing-university-of-aeronautics-and-astronautics",
+          "selectionOrigin": "baseQueue18",
+          "programId": null,
+          "name": "NUAA 2026 Chinese Government Scholarship — Silk Road Program",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "72586e2624a0bf93150d9a63398a4e302932dc6405f581037e8ad3b377d3a4e6",
+          "canonicalScholarshipSha256": "72586e2624a0bf93150d9a63398a4e302932dc6405f581037e8ad3b377d3a4e6",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecs-nuaa-mechanical-engineering-master",
+              "canonicalProgramSha256": "dad818f8643ae61c20b0863c27b11ec20b3e5d198d0dfcd8e61765f558c92951"
+            },
+            {
+              "programId": "prog-gap-mve-ecs-nuaa-software-engineering-master",
+              "canonicalProgramSha256": "c0992ea0007725a099b253ca138b4ae1e123a80a8ba93695cfd62706bab9d5ff"
+            },
+            {
+              "programId": "prog-gap-mve-ecs-nuaa-transportation-engineering-master",
+              "canonicalProgramSha256": "49b61de1b39b7cf7d85a4efb1fcb74783cda38d22a76141a8899104d4cf586c9"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mve-ecs-nuaa-csc-silk-road-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecs-nuaa-csc-silk-road-2026",
+              "canonicalSourceSha256": "97178978a8abe3c6d95b8ca7ad75ee16cd43695a5dc3d25a5ffc25b9ac33f199",
+              "url": "https://cie.nuaa.edu.cn/2026/0317/c16510a394633/page.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-18",
+          "candidateOfficialDeadline": "2026-05-18",
+          "reason": "same-2026-type-b-silkroad-award-and-exact-english-graduate-programme-route-expired",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://cie.nuaa.edu.cn/2026/0317/c16510a394633/page.htm",
+          "evidenceBodySha256": "60c783bd9fac70b70d250a18249c53a7d40016135702cd94cdd6509585571241",
+          "observedAt": "2026-10-19T08:08:48.580847+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the stated matching 2026 route is past; no continuing discontinuation or closure of other routes is inferred.",
+          "quotedDate": "I. Application Time：From now to May 18, 2026 .",
+          "fundingRoute": "Chinese Government Scholarship Type B Silk Road Program 2026",
+          "openingRelativeWording": "From now",
+          "exactMajorQuote": null,
+          "applicantVsInstitutionalStage": "July31 admission-document dispatch, September registration and annual May reviews are separate from the May18 applicant cutoff.",
+          "awardOwnDateNotBorrowed": true,
+          "geographicEligibilityRestrictionRetained": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecs-nuaa-mechanical-engineering-master-2026-2027-autumn",
+          "universityId": "uni-nanjing-university-of-aeronautics-and-astronautics",
+          "selectionOrigin": "baseQueue18",
+          "programId": "prog-gap-mve-ecs-nuaa-mechanical-engineering-master",
+          "name": "Mechanical Engineering",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "5bd386838cad73e8b1daaae4bdded4d8de1273c5471dbb6f844561e69e640055",
+          "canonicalCycleSha256": "5bd386838cad73e8b1daaae4bdded4d8de1273c5471dbb6f844561e69e640055",
+          "canonicalProgramSha256": "dad818f8643ae61c20b0863c27b11ec20b3e5d198d0dfcd8e61765f558c92951",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecs-nuaa-mechanical-engineering-master",
+              "canonicalProgramSha256": "dad818f8643ae61c20b0863c27b11ec20b3e5d198d0dfcd8e61765f558c92951"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-ecs-nuaa-mechanical-engineering-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecs-nuaa-mechanical-engineering-master",
+              "canonicalSourceSha256": "dc6d16e538b00e4e786b3f6c98d270f86d02fdcfb58e6392a97536292e8e9994",
+              "url": "https://cie.nuaa.edu.cn/2026/0317/c16510a394633/page.htm"
+            }
+          ],
+          "storedDeadline": "2026-05-18",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "result": "closed",
+          "officialDeadline": "2026-05-18",
+          "candidateOfficialDeadline": "2026-05-18",
+          "reason": "same-2026-type-b-silkroad-award-and-exact-english-graduate-programme-route-expired",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://cie.nuaa.edu.cn/2026/0317/c16510a394633/page.htm",
+          "evidenceBodySha256": "60c783bd9fac70b70d250a18249c53a7d40016135702cd94cdd6509585571241",
+          "observedAt": "2026-10-19T08:08:48.580847+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "closureScope": "Only the stated matching 2026 route is past; no continuing discontinuation or closure of other routes is inferred.",
+          "quotedDate": "I. Application Time：From now to May 18, 2026 .",
+          "fundingRoute": "Chinese Government Scholarship Type B Silk Road Program 2026",
+          "openingRelativeWording": "From now",
+          "exactMajorQuote": "Mechanical Engineering",
+          "applicantVsInstitutionalStage": "July31 admission-document dispatch, September registration and annual May reviews are separate from the May18 applicant cutoff.",
+          "awardOwnDateNotBorrowed": false,
+          "geographicEligibilityRestrictionRetained": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecs-nuaa-software-engineering-master-2026-2027-autumn",
+          "universityId": "uni-nanjing-university-of-aeronautics-and-astronautics",
+          "selectionOrigin": "baseQueue18",
+          "programId": "prog-gap-mve-ecs-nuaa-software-engineering-master",
+          "name": "Software Engineering",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "2dd3bddd7eb03e804d608c1bb44771c6152dcd01cbc990040dfb8e132148a7d0",
+          "canonicalCycleSha256": "2dd3bddd7eb03e804d608c1bb44771c6152dcd01cbc990040dfb8e132148a7d0",
+          "canonicalProgramSha256": "c0992ea0007725a099b253ca138b4ae1e123a80a8ba93695cfd62706bab9d5ff",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecs-nuaa-software-engineering-master",
+              "canonicalProgramSha256": "c0992ea0007725a099b253ca138b4ae1e123a80a8ba93695cfd62706bab9d5ff"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-ecs-nuaa-software-engineering-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecs-nuaa-software-engineering-master",
+              "canonicalSourceSha256": "ef0ff2907375a9f97685719ab593f1226634d3a18fe4633f1c940984fdb60a2f",
+              "url": "https://cie.nuaa.edu.cn/2026/0317/c16510a394633/page.htm"
+            }
+          ],
+          "storedDeadline": "2026-05-18",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "result": "closed",
+          "officialDeadline": "2026-05-18",
+          "candidateOfficialDeadline": "2026-05-18",
+          "reason": "same-2026-type-b-silkroad-award-and-exact-english-graduate-programme-route-expired",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://cie.nuaa.edu.cn/2026/0317/c16510a394633/page.htm",
+          "evidenceBodySha256": "60c783bd9fac70b70d250a18249c53a7d40016135702cd94cdd6509585571241",
+          "observedAt": "2026-10-19T08:08:48.580847+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "closureScope": "Only the stated matching 2026 route is past; no continuing discontinuation or closure of other routes is inferred.",
+          "quotedDate": "I. Application Time：From now to May 18, 2026 .",
+          "fundingRoute": "Chinese Government Scholarship Type B Silk Road Program 2026",
+          "openingRelativeWording": "From now",
+          "exactMajorQuote": "Software Engineering",
+          "applicantVsInstitutionalStage": "July31 admission-document dispatch, September registration and annual May reviews are separate from the May18 applicant cutoff.",
+          "awardOwnDateNotBorrowed": false,
+          "geographicEligibilityRestrictionRetained": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecs-nuaa-transportation-engineering-master-2026-2027-autumn",
+          "universityId": "uni-nanjing-university-of-aeronautics-and-astronautics",
+          "selectionOrigin": "baseQueue18",
+          "programId": "prog-gap-mve-ecs-nuaa-transportation-engineering-master",
+          "name": "Transportation Engineering",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "canonicalRecordSha256": "fd96711153cc0becb31a1efcbaa7d79f8f1c7cf0478a9ca7a7b2c5373355c999",
+          "canonicalCycleSha256": "fd96711153cc0becb31a1efcbaa7d79f8f1c7cf0478a9ca7a7b2c5373355c999",
+          "canonicalProgramSha256": "49b61de1b39b7cf7d85a4efb1fcb74783cda38d22a76141a8899104d4cf586c9",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecs-nuaa-transportation-engineering-master",
+              "canonicalProgramSha256": "49b61de1b39b7cf7d85a4efb1fcb74783cda38d22a76141a8899104d4cf586c9"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-ecs-nuaa-transportation-engineering-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecs-nuaa-transportation-engineering-master",
+              "canonicalSourceSha256": "07032b27fef50a098d2d256c2490572cf6479400a0a2db209001f362f7a0bd9d",
+              "url": "https://cie.nuaa.edu.cn/2026/0317/c16510a394633/page.htm"
+            }
+          ],
+          "storedDeadline": "2026-05-18",
+          "storedOpensOn": null,
+          "storedDateStatus": "published",
+          "result": "closed",
+          "officialDeadline": "2026-05-18",
+          "candidateOfficialDeadline": "2026-05-18",
+          "reason": "same-2026-type-b-silkroad-award-and-exact-english-graduate-programme-route-expired",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://cie.nuaa.edu.cn/2026/0317/c16510a394633/page.htm",
+          "evidenceBodySha256": "60c783bd9fac70b70d250a18249c53a7d40016135702cd94cdd6509585571241",
+          "observedAt": "2026-10-19T08:08:48.580847+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "closureScope": "Only the stated matching 2026 route is past; no continuing discontinuation or closure of other routes is inferred.",
+          "quotedDate": "I. Application Time：From now to May 18, 2026 .",
+          "fundingRoute": "Chinese Government Scholarship Type B Silk Road Program 2026",
+          "openingRelativeWording": "From now",
+          "exactMajorQuote": "Transportation Engineering",
+          "applicantVsInstitutionalStage": "July31 admission-document dispatch, September registration and annual May reviews are separate from the May18 applicant cutoff.",
+          "awardOwnDateNotBorrowed": false,
+          "geographicEligibilityRestrictionRetained": true
+        }
+      ]
+    },
+    {
+      "key": "njucm-2026-two-exact-undergraduates-and-independent-provincial-award",
+      "universityId": "uni-nanjing-university-of-chinese-medicine",
+      "evidence": [
+        {
+          "name": "njucm-undergraduate",
+          "url": "https://iec.njucm.edu.cn/en/detail/1375.html",
+          "observedAt": "2026-10-19T08:08:50.418930+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iec.njucm.edu.cn/en/detail/1375.html",
+          "contentType": "text/html; charset=utf-8",
+          "bytes": 112520,
+          "rawPath": "njucm-undergraduate.html",
+          "rawSha256": "097b9e4e98fad97a5d779da854d23daccdffa679d24327d31191244853d048f9",
+          "textPath": "njucm-undergraduate.txt",
+          "textSha256": "106abeac9b540436a99dbfaf01296e2710f04e753f754870b15d57ba18fe4392",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "Exact Science of TCM Health Preservation and Pharmacy of Chinese Meteria Medica in the embedded 2026 undergraduate table, plus separately scoped Study in Jiangsu award.",
+      "quotedDate": "December 1, 2025 to May 15, 2026.",
+      "advisoryScholarshipQuote": "Due to limited scholarship quotas, applicants for scholarships are advised to submit their applications by May 10, 2026.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecma-njucm-study-in-jiangsu-2026",
+          "universityId": "uni-nanjing-university-of-chinese-medicine",
+          "selectionOrigin": "baseQueue18",
+          "programId": null,
+          "name": "Study in Jiangsu Provincial Government Scholarship at NJUCM",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "9933f03d9acbb5a81af0bd5b88ad8dd9027a897d5da7bff6f3abb344299ab643",
+          "canonicalScholarshipSha256": "9933f03d9acbb5a81af0bd5b88ad8dd9027a897d5da7bff6f3abb344299ab643",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecma-njucm-health-preservation-bachelor",
+              "canonicalProgramSha256": "15a1f7b9957bcd65f4174b19a62bc04f4e3315a3940829533f7978e90705d11b"
+            },
+            {
+              "programId": "prog-gap-mve-ecma-njucm-materia-medica-pharmacy-bachelor",
+              "canonicalProgramSha256": "5df7a5aee2c4d7dab3c214ecc785b40945f1f6f602536a12f52e02c0b1e4f6e0"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mve-ecma-njucm-study-in-jiangsu-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecma-njucm-study-in-jiangsu-2026",
+              "canonicalSourceSha256": "8752cf1569df22a596a168666c28e6ba9ca59c95197cc2aa39cf65e2b63d26d0",
+              "url": "https://iec.njucm.edu.cn/en/detail/1375.html"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "provincial-award-listed-without-independent-hard-cutoff-may10-is-advisory-only",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://iec.njucm.edu.cn/en/detail/1375.html",
+          "evidenceBodySha256": "097b9e4e98fad97a5d779da854d23daccdffa679d24327d31191244853d048f9",
+          "observedAt": "2026-10-19T08:08:50.418930+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "advisoryDate": "2026-05-10",
+          "advisoryDateQuote": "Due to limited scholarship quotas, applicants for scholarships are advised to submit their applications by May 10, 2026.",
+          "advisoryDateIsNotHardDeadline": true,
+          "generalAdmissionDeadlineNotBorrowed": "2026-05-15",
+          "awardListingQuote": "Study in Jiangsu Provincial Government Scholarship"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecma-njucm-health-preservation-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-nanjing-university-of-chinese-medicine",
+          "selectionOrigin": "baseQueue18",
+          "programId": "prog-gap-mve-ecma-njucm-health-preservation-bachelor",
+          "name": "Traditional Chinese Medicine Health Preservation",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "121e084900be7548bd9af1293fe01c730c5bec4aef15966bf98808d90a60f13b",
+          "canonicalCycleSha256": "121e084900be7548bd9af1293fe01c730c5bec4aef15966bf98808d90a60f13b",
+          "canonicalProgramSha256": "15a1f7b9957bcd65f4174b19a62bc04f4e3315a3940829533f7978e90705d11b",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecma-njucm-health-preservation-bachelor",
+              "canonicalProgramSha256": "15a1f7b9957bcd65f4174b19a62bc04f4e3315a3940829533f7978e90705d11b"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-ecma-njucm-health-preservation-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecma-njucm-health-preservation-bachelor",
+              "canonicalSourceSha256": "c04702cd45728be03c0bbea134c62c833d94ea3f4472d4ddbf48179f1a7661d9",
+              "url": "https://iec.njucm.edu.cn/en/detail/1375.html"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-05-15",
+          "candidateOfficialDeadline": "2026-05-15",
+          "reason": "2026-undergraduate-guide-exact-programme-table-and-applicant-period-match",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-12-01",
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://iec.njucm.edu.cn/en/detail/1375.html",
+          "evidenceBodySha256": "097b9e4e98fad97a5d779da854d23daccdffa679d24327d31191244853d048f9",
+          "observedAt": "2026-10-19T08:08:50.418930+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the stated matching 2026 route is past; no continuing discontinuation or closure of other routes is inferred.",
+          "quotedDate": "December 1, 2025 to May 15, 2026.",
+          "exactMajorQuote": "Science of TCM Health Preservation",
+          "sourceLanguageScope": "Chinese-taught undergraduate applicants; HSK Level4 requirement in same guide.",
+          "feeReferenceNotUsedAsYearAnchor": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecma-njucm-materia-medica-pharmacy-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-nanjing-university-of-chinese-medicine",
+          "selectionOrigin": "baseQueue18",
+          "programId": "prog-gap-mve-ecma-njucm-materia-medica-pharmacy-bachelor",
+          "name": "Chinese Materia Medica Pharmacy",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "56b2f2eb3acaf5233afdb1ea385fbd67c18b4466cd2c6bfb97ea72c8b870423f",
+          "canonicalCycleSha256": "56b2f2eb3acaf5233afdb1ea385fbd67c18b4466cd2c6bfb97ea72c8b870423f",
+          "canonicalProgramSha256": "5df7a5aee2c4d7dab3c214ecc785b40945f1f6f602536a12f52e02c0b1e4f6e0",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecma-njucm-materia-medica-pharmacy-bachelor",
+              "canonicalProgramSha256": "5df7a5aee2c4d7dab3c214ecc785b40945f1f6f602536a12f52e02c0b1e4f6e0"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-ecma-njucm-materia-medica-pharmacy-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecma-njucm-materia-medica-pharmacy-bachelor",
+              "canonicalSourceSha256": "91368179cb4ed76016249ed1332e9701b4c31591fd0a897cac285a0136015fbf",
+              "url": "https://iec.njucm.edu.cn/en/detail/1375.html"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-05-15",
+          "candidateOfficialDeadline": "2026-05-15",
+          "reason": "2026-undergraduate-guide-exact-programme-table-and-applicant-period-match",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2025-12-01",
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://iec.njucm.edu.cn/en/detail/1375.html",
+          "evidenceBodySha256": "097b9e4e98fad97a5d779da854d23daccdffa679d24327d31191244853d048f9",
+          "observedAt": "2026-10-19T08:08:50.418930+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the stated matching 2026 route is past; no continuing discontinuation or closure of other routes is inferred.",
+          "quotedDate": "December 1, 2025 to May 15, 2026.",
+          "exactMajorQuote": "Pharmacy of Chinese Meteria Medica",
+          "sourceLanguageScope": "Chinese-taught undergraduate applicants; HSK Level4 requirement in same guide.",
+          "feeReferenceNotUsedAsYearAnchor": true
+        }
+      ]
+    },
+    {
+      "key": "nufe-current-2026-chinese-undergraduate-notice-early-ended-and-independent-award",
+      "universityId": "uni-nanjing-university-of-finance-and-economics",
+      "evidence": [
+        {
+          "name": "nufe-programmes",
+          "url": "https://english.nufe.edu.cn/info/1017/2200.htm",
+          "observedAt": "2026-10-19T08:08:52.689274+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.nufe.edu.cn/info/1017/2200.htm",
+          "contentType": "text/html",
+          "bytes": 341285,
+          "rawPath": "nufe-programmes.html",
+          "rawSha256": "83f6e0d19407ef0a77aab9d90fe3da08f3194d31c8b59f3d446a6c499168fc08",
+          "textPath": "nufe-programmes.txt",
+          "textSha256": "d5d0ba3f3829d7d10788dd574d2aa84af4abde910d02badef49ac435c9185f67",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "nufe-scholarship",
+          "url": "https://english.nufe.edu.cn/info/1105/1478.htm",
+          "observedAt": "2026-10-19T08:08:52.519874+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.nufe.edu.cn/info/1105/1478.htm",
+          "contentType": "text/html",
+          "bytes": 63189,
+          "rawPath": "nufe-scholarship.html",
+          "rawSha256": "0a87fb863e336f015d66dd32af409a729abb5ac2cee39fc7e16e1d61b44a307a",
+          "textPath": "nufe-scholarship.txt",
+          "textSha256": "1642a56b45931c11e59407fda3f1bdc3c6f6f2df37701f83390704b291a83615",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "Accounting and Chinese Language and Literature Chinese bachelors in the 2026 programme table. University award competition is separately scoped to eligible enrolled students.",
+      "titleQuote": "2026年外国留学生本科项目招生简章（中文授课）（招生已提前结束）",
+      "applicationRoundQuotes": [
+        "第一批次：2025年11月21日——2026年3月1日",
+        "第二批次：2026年3月2日——2026年6月15日"
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-nufe-international-student-scholarship",
+          "universityId": "uni-nanjing-university-of-finance-and-economics",
+          "selectionOrigin": "baseQueue18",
+          "programId": null,
+          "name": "NUFE International Student Scholarship",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "9ff13ead730402456aca80249d7da68f051ac89cb471421804d5f910579ee36a",
+          "canonicalScholarshipSha256": "9ff13ead730402456aca80249d7da68f051ac89cb471421804d5f910579ee36a",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-nufe-business-administration-bachelor",
+              "canonicalProgramSha256": "660fb9151943a75fa35292ced65839d8527194c559863d91265c657ee71ae049"
+            },
+            {
+              "programId": "prog-gap-wave8-nufe-applied-economics-master",
+              "canonicalProgramSha256": "63ac567e35bae192f7b20d156379786da3c3d03fbb005719541de469cf6d588d"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-nufe-international-student-scholarship",
+            "src-gap-scholarship-wave8-nufe-international-student-scholarship-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-nufe-international-student-scholarship",
+              "canonicalSourceSha256": "85cc57afbeb139092dba8502e0bea5c0c60047e08e9b2787ba1634b4ca0b55b8",
+              "url": "https://english.nufe.edu.cn/info/1105/1478.htm"
+            },
+            {
+              "sourceId": "src-gap-scholarship-wave8-nufe-international-student-scholarship-support-1",
+              "canonicalSourceSha256": "2f5d61af2b85ff15c6209136509ef823a1af76a5f037f7f504869c29942afd44",
+              "url": "https://english.nufe.edu.cn/info/1017/2200.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-performance-based-university-awards-have-no-independent-current-exact-deadline",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://english.nufe.edu.cn/info/1105/1478.htm",
+          "evidenceBodySha256": "0a87fb863e336f015d66dd32af409a729abb5ac2cee39fc7e16e1d61b44a307a",
+          "observedAt": "2026-10-19T08:08:52.519874+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "governmentCompetitionQuote": "NUFE announces the scholarship competition notice every fall semester to all eligible international students on campus.",
+          "yearQualification": "Standing policy lists annual competitions and enrolment/performance conditions, not a dated 2026 new-applicant award deadline.",
+          "generalAdmissionDeadlineNotBorrowed": "2026-06-15"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-jzh-nufe-accounting-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-nanjing-university-of-finance-and-economics",
+          "selectionOrigin": "baseQueue18",
+          "programId": "prog-gap-mve-jzh-nufe-accounting-bachelor",
+          "name": "Accounting",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "b50f41908a89a262642573de1c6f124b0fb705a633cc97361e2923ce165d3940",
+          "canonicalCycleSha256": "b50f41908a89a262642573de1c6f124b0fb705a633cc97361e2923ce165d3940",
+          "canonicalProgramSha256": "b277b4b4b3f5f82a4bef6bd95753f9ea4f32c426af79434807b6b5c60726a6fc",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-nufe-accounting-bachelor",
+              "canonicalProgramSha256": "b277b4b4b3f5f82a4bef6bd95753f9ea4f32c426af79434807b6b5c60726a6fc"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-jzh-nufe-accounting-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-jzh-nufe-accounting-bachelor",
+              "canonicalSourceSha256": "e2bb610b2bdcc3a647bc22a25939b3f81129c36a00bfc5f10f1e0786230db83f",
+              "url": "https://english.nufe.edu.cn/info/1017/2200.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "reason": "exact-2026-chinese-bachelor-programme-is-listed-and-notice-explicitly-says-admission-ended-early",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://english.nufe.edu.cn/info/1017/2200.htm",
+          "evidenceBodySha256": "83f6e0d19407ef0a77aab9d90fe3da08f3194d31c8b59f3d446a6c499168fc08",
+          "observedAt": "2026-10-19T08:08:52.689274+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the stated matching 2026 route is past; no continuing discontinuation or closure of other routes is inferred.",
+          "quotedDate": "第二批次：2026年3月2日——2026年6月15日",
+          "exactMajorQuote": "会计学",
+          "admissionEndedEarly": true,
+          "earlyClosureQuote": "招生已提前结束",
+          "actualEarlyClosureDate": null,
+          "officialDeadlineSemantics": "Published originally scheduled final applicant cutoff; NOT an assertion that the actual earlier closure occurred on June15.",
+          "applicationRounds": [
+            {
+              "candidateOpensOn": "2025-11-21",
+              "scheduledClosesOn": "2026-03-01"
+            },
+            {
+              "candidateOpensOn": "2026-03-02",
+              "scheduledClosesOn": "2026-06-15"
+            }
+          ],
+          "openingDatesRemainRoundScopedCandidates": true,
+          "institutionReviewNotApplicantDeadline": "March30/June30 are result announcements; not application cutoffs.",
+          "feeReferenceNotUsedAsYearAnchor": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-jzh-nufe-chinese-literature-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-nanjing-university-of-finance-and-economics",
+          "selectionOrigin": "baseQueue18",
+          "programId": "prog-gap-mve-jzh-nufe-chinese-literature-bachelor",
+          "name": "Chinese Language and Literature",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "canonicalRecordSha256": "61f2d8a6212288ded9bed5c1fdebbbb9bada609831717880ff1e40221162432f",
+          "canonicalCycleSha256": "61f2d8a6212288ded9bed5c1fdebbbb9bada609831717880ff1e40221162432f",
+          "canonicalProgramSha256": "a2cb3a2b909d4d6fabad1ed6a1053bc27c3d665ebacdae38e1570513d583f95d",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-nufe-chinese-literature-bachelor",
+              "canonicalProgramSha256": "a2cb3a2b909d4d6fabad1ed6a1053bc27c3d665ebacdae38e1570513d583f95d"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mve-jzh-nufe-chinese-literature-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-jzh-nufe-chinese-literature-bachelor",
+              "canonicalSourceSha256": "11e2fb2604c302c25428a3f0b9fd4d4fb30b6dbce103022d22eb47f474764ea8",
+              "url": "https://english.nufe.edu.cn/info/1017/2200.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "result": "closed",
+          "officialDeadline": "2026-06-15",
+          "candidateOfficialDeadline": "2026-06-15",
+          "reason": "exact-2026-chinese-bachelor-programme-is-listed-and-notice-explicitly-says-admission-ended-early",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://english.nufe.edu.cn/info/1017/2200.htm",
+          "evidenceBodySha256": "83f6e0d19407ef0a77aab9d90fe3da08f3194d31c8b59f3d446a6c499168fc08",
+          "observedAt": "2026-10-19T08:08:52.689274+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the stated matching 2026 route is past; no continuing discontinuation or closure of other routes is inferred.",
+          "quotedDate": "第二批次：2026年3月2日——2026年6月15日",
+          "exactMajorQuote": "汉语言文学",
+          "admissionEndedEarly": true,
+          "earlyClosureQuote": "招生已提前结束",
+          "actualEarlyClosureDate": null,
+          "officialDeadlineSemantics": "Published originally scheduled final applicant cutoff; NOT an assertion that the actual earlier closure occurred on June15.",
+          "applicationRounds": [
+            {
+              "candidateOpensOn": "2025-11-21",
+              "scheduledClosesOn": "2026-03-01"
+            },
+            {
+              "candidateOpensOn": "2026-03-02",
+              "scheduledClosesOn": "2026-06-15"
+            }
+          ],
+          "openingDatesRemainRoundScopedCandidates": true,
+          "institutionReviewNotApplicantDeadline": "March30/June30 are result announcements; not application cutoffs.",
+          "feeReferenceNotUsedAsYearAnchor": true
+        }
+      ]
+    },
+    {
+      "key": "njupt-2026-high-level-postgraduate-original-pdf",
+      "universityId": "uni-nanjing-university-of-posts-and-telecommunications",
+      "evidence": [
+        {
+          "name": "njupt-2026-recovery",
+          "url": "https://overseas.njupt.edu.cn/2025/1027/c4601a290722/page.htm",
+          "observedAt": "2026-10-19T08:10:44.624084+00:00",
+          "method": "one-bounded-Windows-curl-normal-TLS-recovery",
+          "tlsCertificateValidation": true,
+          "exitCode": 0,
+          "responseMetadata": "200\ntext/html\nhttps://overseas.njupt.edu.cn/2025/1027/c4601a290722/page.htm",
+          "rawPath": "njupt-2026-recovery.html",
+          "rawSha256": "d76417f88aa8b87229a90133f512924ce2e9ec2569598038bf0b8bada237c5bb",
+          "bytes": 18073,
+          "textPath": "njupt-2026-recovery.txt",
+          "textSha256": "564858deb36105b522f8c46aa6e03728b22ce158a9dbe7cf582c168521cf1ce6",
+          "captureSucceeded": true,
+          "evidenceRole": "wrapper-only-links-exact-original-PDF",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "njupt-2026-original",
+          "url": "https://overseas.njupt.edu.cn/_upload/article/files/44/be/f04e5ed04e42949be96cfc698968/eb7d1a62-d705-4fd3-bfd7-12e155a3305e.pdf",
+          "observedAt": "2026-10-19T08:12:36.377715+00:00",
+          "method": "bounded-native-Windows-curl-normal-TLS-original-PDF",
+          "tlsCertificateValidation": true,
+          "parentPage": "njupt-2026-recovery.html",
+          "exitCode": 0,
+          "responseMetadata": "200\napplication/pdf\nhttps://overseas.njupt.edu.cn/_upload/article/files/44/be/f04e5ed04e42949be96cfc698968/eb7d1a62-d705-4fd3-bfd7-12e155a3305e.pdf",
+          "rawPath": "njupt-2026-original.pdf",
+          "rawSha256": "ef3b552b3faec24cf67a52ebd187e090c2bb8837c5e94db24b37f21fa184adec",
+          "bytes": 250770,
+          "textPath": "njupt-2026-original.txt",
+          "textSha256": "e92f9526aa176291e08e5715ee9e6ab54cf148ba477d60a121ecfbaa9902029c",
+          "pageCount": 10,
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "Exact 2026 CSC high-level postgraduate award; ten-page embedded original read, not wrapper/title-only verification.",
+      "quotedDate": "即日起至 2026 年 2 月 28 日",
+      "visualEvidence": [
+        {
+          "path": "njupt-title-1.png",
+          "sha256": "cfbe1abbaf1725304d9536f31635b41cbb697712b9da616c9623e7c33d66e437"
+        },
+        {
+          "path": "njupt-deadline-10.png",
+          "sha256": "5641a2714d770ce501933b71f74454760b3cbd98f338ad6c0946c20ebdb09390"
+        }
+      ],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-jzh-njupt-csc-high-level-2026",
+          "universityId": "uni-nanjing-university-of-posts-and-telecommunications",
+          "selectionOrigin": "baseQueue18",
+          "programId": null,
+          "name": "NJUPT 2026 Chinese Government Scholarship — High-level Postgraduate Program",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "55e662138a7f1037bbbb18f12e76c61ad8ddd86065f55a0b78eae810da7dc2d5",
+          "canonicalScholarshipSha256": "55e662138a7f1037bbbb18f12e76c61ad8ddd86065f55a0b78eae810da7dc2d5",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-njupt-business-administration-master",
+              "canonicalProgramSha256": "43e3e611ec89ddfcefba48c2207000adfd94730d883928bddaf4882a64f924c6"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mve-jzh-njupt-csc-high-level-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-jzh-njupt-csc-high-level-2026",
+              "canonicalSourceSha256": "53397aa3e35194889557637ce25260ac8ad5d8cece7e9b46f7c10bcae2fc237e",
+              "url": "https://overseas.njupt.edu.cn/2025/1027/c4601a290722/page.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "closed",
+          "officialDeadline": "2026-02-28",
+          "candidateOfficialDeadline": "2026-02-28",
+          "reason": "same-2026-csc-high-level-award-original-pdf-explicit-applicant-cutoff",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://overseas.njupt.edu.cn/_upload/article/files/44/be/f04e5ed04e42949be96cfc698968/eb7d1a62-d705-4fd3-bfd7-12e155a3305e.pdf",
+          "evidenceBodySha256": "ef3b552b3faec24cf67a52ebd187e090c2bb8837c5e94db24b37f21fa184adec",
+          "observedAt": "2026-10-19T08:12:36.377715+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only the stated matching 2026 route is past; no continuing discontinuation or closure of other routes is inferred.",
+          "quotedDate": "即日起至 2026 年 2 月 28 日",
+          "fundingRoute": "2026 CSC high-level postgraduate Type B; agency10293",
+          "openingRelativeWording": "即日起 / From now",
+          "evidenceLocator": "Original PDF page10 Application Time; page1 year/title; pages3–4 application process.",
+          "applicantVsInterview": "March2026 academic interviews follow application; no March application extension is inferred.",
+          "awardOwnDateNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "njust-two-distinct-awards-residence-policy-not-application-dates",
+      "universityId": "uni-nanjing-university-of-science-and-technology",
+      "evidence": [
+        {
+          "name": "njust-bachelor-guide",
+          "url": "https://study.njust.edu.cn/_upload/article/files/e8/3f/c3c7e97048e3b11aee364e1366c5/9865a722-5e5b-409d-b92c-0ea2360b2666.pdf",
+          "observedAt": "2026-10-19T08:08:56.788171+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://study.njust.edu.cn/_upload/article/files/e8/3f/c3c7e97048e3b11aee364e1366c5/9865a722-5e5b-409d-b92c-0ea2360b2666.pdf",
+          "contentType": "application/pdf",
+          "bytes": 353876,
+          "rawPath": "njust-bachelor-guide.pdf",
+          "rawSha256": "54ba91d28f01d516a11f01e6c1983d49c1abae73b91c0191f20d11a991878d45",
+          "pageCount": 6,
+          "textPath": "njust-bachelor-guide.txt",
+          "textSha256": "86cdf41ae44bc9c5d8ae5cec916a63e3ae94b733d08cfddb105b0706a7785099",
+          "captureSucceeded": true,
+          "evidenceRole": "actual-complete-six-page-residence-policy-not-admission-guide",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "njust-graduate-guide",
+          "url": "https://study.njust.edu.cn/_upload/article/files/e0/b9/df4bf6c14cebaa710fd90cabe480/76b028a3-74e6-48d1-a677-c8fce2e0f6b0.pdf",
+          "observedAt": "2026-10-19T08:08:56.971795+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://error.njust.edu.cn/errorpage/errorTips404.html",
+          "contentType": "text/html",
+          "bytes": 4492,
+          "rawPath": "njust-graduate-guide.html",
+          "rawSha256": "6651e3e6fc29bbcd1c2dd9753e49470b5d6bc812cf2845aa116d8920e9df32a2",
+          "textPath": "njust-graduate-guide.txt",
+          "textSha256": "70cab87a64387f38109539a8fc3649416385b1cf03c07f26bee60df882abc256",
+          "captureSucceeded": true,
+          "evidenceRole": "registered-PDF-redirected-to-HTML-404-not-a-PDF-success",
+          "fullFactsCertified": false
+        }
+      ],
+      "scope": "Two separately named awards recognized by residence/visa rules; no applicant award window is announced.",
+      "quotedPolicy": "江苏省政府茉莉花奖学金生、南京市政府—南京理工大学合作奖学金生的居留许可按照学年每年办理",
+      "visualEvidence": [
+        {
+          "path": "njust-residence-1.png",
+          "sha256": "8201b1ba7d82106d3493b314501096c1c155aa66306c5deabdf42dfe2be1c0a9"
+        }
+      ],
+      "filenameQualification": "Capture names bachelor-guide/graduate-guide were acquisition labels only. First actual original is NJUST Rules on Residence and Visa for International Students; second registered PDF returns error.njust.edu.cn/errorpage/errorTips404.html as HTML200.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-njust-jasmine-jiangsu-government-scholarship",
+          "universityId": "uni-nanjing-university-of-science-and-technology",
+          "selectionOrigin": "baseQueue18",
+          "programId": null,
+          "name": "Jasmine Jiangsu Government Scholarship at NJUST",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "1b8abf8519be494eeeb0323feca47b031e39078ea50aee6b42a56612101296f9",
+          "canonicalScholarshipSha256": "1b8abf8519be494eeeb0323feca47b031e39078ea50aee6b42a56612101296f9",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-njust-jasmine-jiangsu-government-scholarship",
+            "src-gap-scholarship-wave8-njust-jasmine-jiangsu-government-scholarship-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-njust-jasmine-jiangsu-government-scholarship",
+              "canonicalSourceSha256": "96d349a03723088f6bf845fb96acbaf7cd6c93dbb449a8b3356a3a3d293d8b2f",
+              "url": "https://study.njust.edu.cn/_upload/article/files/e8/3f/c3c7e97048e3b11aee364e1366c5/9865a722-5e5b-409d-b92c-0ea2360b2666.pdf"
+            },
+            {
+              "sourceId": "src-gap-scholarship-wave8-njust-jasmine-jiangsu-government-scholarship-support-1",
+              "canonicalSourceSha256": "1bd3f1b4170cab30696ea7be90d82bce6054f70fa12a483d94d06c4537885b0e",
+              "url": "https://study.njust.edu.cn/_upload/article/files/e0/b9/df4bf6c14cebaa710fd90cabe480/76b028a3-74e6-48d1-a677-c8fce2e0f6b0.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "award-identity-in-residence-policy-without-independent-application-window",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://study.njust.edu.cn/_upload/article/files/e8/3f/c3c7e97048e3b11aee364e1366c5/9865a722-5e5b-409d-b92c-0ea2360b2666.pdf",
+          "evidenceBodySha256": "54ba91d28f01d516a11f01e6c1983d49c1abae73b91c0191f20d11a991878d45",
+          "observedAt": "2026-10-19T08:08:56.788171+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "residencePolicyQuote": "江苏省政府茉莉花奖学金生、南京市政府—南京理工大学合作奖学金生的居留许可按照学年每年办理",
+          "recurringResidencePermitNotScholarshipApplicationDate": true,
+          "unavailableSupportingPdf": {
+            "requestedUrl": "https://study.njust.edu.cn/_upload/article/files/e0/b9/df4bf6c14cebaa710fd90cabe480/76b028a3-74e6-48d1-a677-c8fce2e0f6b0.pdf",
+            "finalUrl": "https://error.njust.edu.cn/errorpage/errorTips404.html",
+            "rawBodySha256": "6651e3e6fc29bbcd1c2dd9753e49470b5d6bc812cf2845aa116d8920e9df32a2",
+            "fullSourceRead": false
+          },
+          "noAwardDateFromVisaExpiry": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-njust-nanjing-municipal-government-joint-scholarship",
+          "universityId": "uni-nanjing-university-of-science-and-technology",
+          "selectionOrigin": "baseQueue18",
+          "programId": null,
+          "name": "Nanjing Municipal Government–NJUST Joint Scholarship",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "9bf8187260e087ea31ce5f3a20d9286c60946c5b4bbed258ba98edd9d2ead7d3",
+          "canonicalScholarshipSha256": "9bf8187260e087ea31ce5f3a20d9286c60946c5b4bbed258ba98edd9d2ead7d3",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-njust-nanjing-municipal-government-joint-scholarship",
+            "src-gap-scholarship-wave8-njust-nanjing-municipal-government-joint-scholarship-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-njust-nanjing-municipal-government-joint-scholarship",
+              "canonicalSourceSha256": "89a5626dd2e314190825aeeb3c0ae8698243c34905decd1e4ea1bdec8c538510",
+              "url": "https://study.njust.edu.cn/_upload/article/files/e8/3f/c3c7e97048e3b11aee364e1366c5/9865a722-5e5b-409d-b92c-0ea2360b2666.pdf"
+            },
+            {
+              "sourceId": "src-gap-scholarship-wave8-njust-nanjing-municipal-government-joint-scholarship-support-1",
+              "canonicalSourceSha256": "1441d26ae66b436bc335f7440ed46c1eb62f159c3086ff9d98712a43e5f5f690",
+              "url": "https://study.njust.edu.cn/_upload/article/files/e0/b9/df4bf6c14cebaa710fd90cabe480/76b028a3-74e6-48d1-a677-c8fce2e0f6b0.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "award-identity-in-residence-policy-without-independent-application-window",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://study.njust.edu.cn/_upload/article/files/e8/3f/c3c7e97048e3b11aee364e1366c5/9865a722-5e5b-409d-b92c-0ea2360b2666.pdf",
+          "evidenceBodySha256": "54ba91d28f01d516a11f01e6c1983d49c1abae73b91c0191f20d11a991878d45",
+          "observedAt": "2026-10-19T08:08:56.788171+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "residencePolicyQuote": "江苏省政府茉莉花奖学金生、南京市政府—南京理工大学合作奖学金生的居留许可按照学年每年办理",
+          "recurringResidencePermitNotScholarshipApplicationDate": true,
+          "unavailableSupportingPdf": {
+            "requestedUrl": "https://study.njust.edu.cn/_upload/article/files/e0/b9/df4bf6c14cebaa710fd90cabe480/76b028a3-74e6-48d1-a677-c8fce2e0f6b0.pdf",
+            "finalUrl": "https://error.njust.edu.cn/errorpage/errorTips404.html",
+            "rawBodySha256": "6651e3e6fc29bbcd1c2dd9753e49470b5d6bc812cf2845aa116d8920e9df32a2",
+            "fullSourceRead": false
+          },
+          "noAwardDateFromVisaExpiry": true
+        }
+      ]
+    },
+    {
+      "key": "ntu-dynamic-shell-not-university-award-body",
+      "universityId": "uni-nantong-university",
+      "evidence": [
+        {
+          "name": "ntu-scholarship",
+          "url": "https://sie.ntu.edu.cn/ntu_web/html/scholarship/scholarship.html?Hid=scholarship&lang=en&timid=70",
+          "observedAt": "2026-10-19T08:08:57.087635+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sie.ntu.edu.cn/ntu_web/html/scholarship/scholarship.html?Hid=scholarship&lang=en&timid=70",
+          "contentType": "text/html",
+          "bytes": 12619,
+          "rawPath": "ntu-scholarship.html",
+          "rawSha256": "c06b0789e962dc4e8ff2e9460bd315475925a2407b9a2593b87ca042ea90e612",
+          "textPath": "ntu-scholarship.txt",
+          "textSha256": "8c5c688525e3cb03770a4328fffc40ec9ba17e9a515aeeea3b9847f8a12f32f8",
+          "captureSucceeded": true,
+          "evidenceRole": "dynamic-default-shell-no-selected-award-body",
+          "fullFactsCertified": false
+        }
+      ],
+      "webFallbackEvidence": {
+        "path": "ntu-web-fallback.json",
+        "sha256": "389862da81551e613319020c7101aecf04ede3147e569c4aa920da92eb60b5d3",
+        "observedAt": "2026-10-19T08:12:39.260Z",
+        "url": "https://sie.ntu.edu.cn/ntu_web/html/scholarship/scholarship.html?Hid=scholarship&lang=en&timid=70",
+        "method": "single-bounded-actual-web-tool-fallback",
+        "nativeSource": "ntu-scholarship.html",
+        "rawOriginServerBytes": false,
+        "cached": true,
+        "crawlAge": "2 weeks ago",
+        "visibleText": "●\n主页 > 奖助学金 > 中国政府奖学金\n中国政府奖学金\n奖助学金\n联系我们",
+        "outcome": "same-default-shell-no-university-award-body",
+        "retryPolicy": "cooldown-no-further-retries"
+      },
+      "scope": "Exact university award cannot be assessed from the default Chinese Government Scholarship navigation shell.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-ecs-ntu-university-scholarship",
+          "universityId": "uni-nantong-university",
+          "selectionOrigin": "baseQueue18",
+          "programId": null,
+          "name": "Nantong University Scholarship for International Students",
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "canonicalRecordSha256": "a0c90581831fff5b1109511bcf967c3509b3bfce38947cb0979a64b37d091fb1",
+          "canonicalScholarshipSha256": "a0c90581831fff5b1109511bcf967c3509b3bfce38947cb0979a64b37d091fb1",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-ecs-ntu-iclt-bachelor",
+              "canonicalProgramSha256": "667519be63d569a578c8faa69b657fbdd93597274f22e047e514ebb337eacc23"
+            },
+            {
+              "programId": "prog-gap-mve-ecs-ntu-stomatology-bachelor",
+              "canonicalProgramSha256": "e5297278fbc277b1ce43929005d9c6d2c6cde08ba86790f7c28fc03e59920ee0"
+            },
+            {
+              "programId": "prog-gap-mve-ecs-ntu-pharmacy-bachelor",
+              "canonicalProgramSha256": "2ee9e0d249c0ca79ec14228c519733628d3b30294f1fed009d2f7a61bd34c08c"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mve-ecs-ntu-university-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-ecs-ntu-university-scholarship",
+              "canonicalSourceSha256": "484fb65de923eff3f468ee2860456574c68102030a4770de733cf5c8b0d73163",
+              "url": "https://sie.ntu.edu.cn/ntu_web/html/scholarship/scholarship.html?Hid=scholarship&lang=en&timid=70"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedDateStatus": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "native-and-one-web-fallback-both-show-default-shell-no-university-award-body",
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "openingDateAssessed": false,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sie.ntu.edu.cn/ntu_web/html/scholarship/scholarship.html?Hid=scholarship&lang=en&timid=70",
+          "evidenceBodySha256": "c06b0789e962dc4e8ff2e9460bd315475925a2407b9a2593b87ca042ea90e612",
+          "observedAt": "2026-10-19T08:08:57.087635+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "hiddenHtmlCommentExamplesNotOfficialVisibleAwardEvidence": true,
+          "webFallbackRawOriginServerBytes": false,
+          "noHttp200OrNavigationCertification": true
+        }
+      ]
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "sha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "sha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "sha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "sha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "sha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "sha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "sha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "sha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "sha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "sha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "sha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "sha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "sha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "sha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "sha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "sha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "sha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "sha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "sha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "sha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "sha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "sha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "sha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "sha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    }
+  ],
+  "validation": {
+    "exactEighteenIdsCoveredOnce": true,
+    "allSixCanonicalInputsUnchanged": true,
+    "fullCanonicalRecordParentLinkedProgrammeAndSourceRowsPinnedInSelection": true,
+    "quotedDateAndScopeFragmentsMatchOriginalText": true,
+    "rawTextBytesAndObservedAtPinned": true,
+    "pdfKeyPagesRenderedAndVisuallyInspected": true,
+    "noExactIdOverlapWithOtherFrozenReports": true
+  }
+}

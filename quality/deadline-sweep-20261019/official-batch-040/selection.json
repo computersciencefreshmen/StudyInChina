@@ -1,0 +1,2497 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-040-20261019",
+  "createdAt": "2026-10-19T13:01:19.612Z",
+  "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "statePath": "quality/recovery-20261018/continuation-state.json",
+  "stateSha256": "147f2c31d24e1f2c7c7a36695e0a5b0bbc4aa81e2ece6b0148735ccce1b4b2d8",
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v11.json",
+  "queueSha256": "a96da9b4352f7db30ba660a206f0ecdc29458d6301a62d7c3e107298840c1c59",
+  "summaryPath": "quality/deadline-sweep-20261019/official-review-summary-v13.json",
+  "summarySha256": "1e9198fab441148a82bef921030a5668c4576704a923a0c60ad06f94d23fbaf5",
+  "inventoryPath": "quality/deadline-sweep-20261019/catalog-deadlines.json",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "baseDispatch": {
+    "path": "quality/deadline-sweep-20261019/heartbeat-1257/base-dispatch-v1.json",
+    "sha256": "f853a30e74fd95f6a2965b4130e01784dd8ea60afd87d058a3afdbc6d8420b96"
+  },
+  "extensionReceipt": {
+    "path": "quality/deadline-sweep-20261019/heartbeat-1257/additional-same-source-selection-v1.json",
+    "sha256": "1442831c48df5cc15f6acd90f8303b2e7d4a9a1f03d8b90705d6ad2491c15aa5"
+  },
+  "selectedUniversityIds": [
+    "uni-zhejiang-sci-tech-university",
+    "uni-beijing-foreign-studies-university",
+    "uni-beijing-institute-of-petrochemical-technology",
+    "uni-beijing-institute-of-technology",
+    "uni-beijing-international-studies-university",
+    "uni-beijing-language-and-culture-university"
+  ],
+  "baseQueueRecordIds": [
+    "cycle-2027-zhejiang-sci-tech-university-design-master",
+    "cycle-2027-zhejiang-sci-tech-university-textile-engineering-bachelor",
+    "sch-gap-chinese-scholarship-bfsu-iclt-degree-programs-2026",
+    "cycle-gap-chinese-degree-bfsu-international-chinese-education-bachelor-2026-2027-autumn",
+    "cycle-gap-chinese-degree-bfsu-international-chinese-education-master-2026-2027-autumn",
+    "cycle-gap-local-strong-bipt-b-chemical-engineering-cn-2026-2027-other-fee-reference",
+    "cycle-gap-wave7-bipt-biological-pharmacy-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave7-bipt-robotics-engineering-bachelor-2026-2027-autumn-fee-reference",
+    "sch-gap-local-strong-bipt-beijing-government-scholarship",
+    "cycle-gap-wave8-bit-mechatronics-engineering-bachelor-2026-2027-autumn-fee-reference",
+    "sch-gap-wave8-bisu-beijing-government-scholarship",
+    "scholarship-beijing-government",
+    "cycle-2027-beijing-language-and-culture-university-international-foundation-foundation",
+    "cycle-2027-beijing-language-and-culture-university-teaching-chinese-bachelor",
+    "cycle-2027-beijing-language-and-culture-university-translation-master"
+  ],
+  "additionalSameSourceRecordIds": [
+    "sch-gap-wave7-bipt-beijing-government-scholarship"
+  ],
+  "selectedRecordIds": [
+    "cycle-2027-zhejiang-sci-tech-university-design-master",
+    "cycle-2027-zhejiang-sci-tech-university-textile-engineering-bachelor",
+    "sch-gap-chinese-scholarship-bfsu-iclt-degree-programs-2026",
+    "cycle-gap-chinese-degree-bfsu-international-chinese-education-bachelor-2026-2027-autumn",
+    "cycle-gap-chinese-degree-bfsu-international-chinese-education-master-2026-2027-autumn",
+    "cycle-gap-local-strong-bipt-b-chemical-engineering-cn-2026-2027-other-fee-reference",
+    "cycle-gap-wave7-bipt-biological-pharmacy-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave7-bipt-robotics-engineering-bachelor-2026-2027-autumn-fee-reference",
+    "sch-gap-local-strong-bipt-beijing-government-scholarship",
+    "cycle-gap-wave8-bit-mechatronics-engineering-bachelor-2026-2027-autumn-fee-reference",
+    "sch-gap-wave8-bisu-beijing-government-scholarship",
+    "scholarship-beijing-government",
+    "cycle-2027-beijing-language-and-culture-university-international-foundation-foundation",
+    "cycle-2027-beijing-language-and-culture-university-teaching-chinese-bachelor",
+    "cycle-2027-beijing-language-and-culture-university-translation-master",
+    "sch-gap-wave7-bipt-beijing-government-scholarship"
+  ],
+  "records": [
+    {
+      "recordId": "cycle-2027-zhejiang-sci-tech-university-design-master",
+      "collection": "admissionCycles",
+      "universityId": "uni-zhejiang-sci-tech-university",
+      "canonicalRecordSha256": "442c9231f90886f2d3e53d20eaf4cb31f14643a5181588c5900d59bbda55c691",
+      "row": {
+        "sourceIds": [
+          "src-uni-zhejiang-sci-tech-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "cycle-2027-zhejiang-sci-tech-university-design-master",
+        "programId": "program-zhejiang-sci-tech-university-design-master",
+        "academicYear": "2027-2028",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-uni-zhejiang-sci-tech-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "program-zhejiang-sci-tech-university-design-master",
+        "slug": "zhejiang-sci-tech-university-design-master",
+        "universityId": "uni-zhejiang-sci-tech-university",
+        "name": {
+          "en": "Design",
+          "zh": "设计学",
+          "ru": "Дизайн"
+        },
+        "degreeLevel": "master",
+        "discipline": "art-design",
+        "teachingLanguages": [
+          "To be confirmed"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://admission.zstu.edu.cn/",
+        "applyUrl": "https://admission.zstu.edu.cn/",
+        "languageRequirements": []
+      },
+      "canonicalProgramSha256": "41f7a56a70ec7f5834a5af61ccca506bf86eeb30249537629a0a8f9bbfc5a066",
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-zhejiang-sci-tech-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-zhejiang-sci-tech-university",
+            "slug": "zhejiang-sci-tech-university",
+            "name": {
+              "en": "Zhejiang Sci-Tech University",
+              "zh": "浙江理工大学",
+              "ru": "Чжэцзянский научно-технический университет"
+            },
+            "cityId": "city-hangzhou",
+            "region": "east",
+            "officialUrl": "https://www.zstu.edu.cn/",
+            "admissionsUrl": "https://admission.zstu.edu.cn/en",
+            "summary": {
+              "en": "Zhejiang Sci-Tech University is based in Hangzhou and is known for textile engineering, materials and design.",
+              "zh": "浙江理工大学位于杭州，以纺织工程、材料与设计等领域见长。",
+              "ru": "Чжэцзянский научно-технический университет находится в городе Ханчжоу; сильные направления: текстильная инженерия, материаловедение и дизайн."
+            },
+            "featured": false
+          },
+          "sha256": "624bf39d0eb0d056a8aeebb49fc67946de149013cb905c828c1d1b3d96ea5214"
+        }
+      ],
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-zhejiang-sci-tech-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2026-10-01",
+            "status": "draft",
+            "id": "program-zhejiang-sci-tech-university-design-master",
+            "slug": "zhejiang-sci-tech-university-design-master",
+            "universityId": "uni-zhejiang-sci-tech-university",
+            "name": {
+              "en": "Design",
+              "zh": "设计学",
+              "ru": "Дизайн"
+            },
+            "degreeLevel": "master",
+            "discipline": "art-design",
+            "teachingLanguages": [
+              "To be confirmed"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://admission.zstu.edu.cn/",
+            "applyUrl": "https://admission.zstu.edu.cn/",
+            "languageRequirements": []
+          },
+          "sha256": "41f7a56a70ec7f5834a5af61ccca506bf86eeb30249537629a0a8f9bbfc5a066"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-uni-zhejiang-sci-tech-university",
+            "url": "https://admission.zstu.edu.cn/",
+            "title": "Official international information — Zhejiang Sci-Tech University",
+            "publisher": "Zhejiang Sci-Tech University",
+            "kind": "admissions",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-16"
+          },
+          "sha256": "c55173a2827d09a23b61bc26405f994ae657dc244ac561b57113f8b3bdde56a1"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-2027-zhejiang-sci-tech-university-textile-engineering-bachelor",
+      "collection": "admissionCycles",
+      "universityId": "uni-zhejiang-sci-tech-university",
+      "canonicalRecordSha256": "8ffc8d75ce29bb173077e98e55d2d5bac294270af3d7dd727f8e046088556264",
+      "row": {
+        "sourceIds": [
+          "src-uni-zhejiang-sci-tech-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "cycle-2027-zhejiang-sci-tech-university-textile-engineering-bachelor",
+        "programId": "program-zhejiang-sci-tech-university-textile-engineering-bachelor",
+        "academicYear": "2027-2028",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-uni-zhejiang-sci-tech-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "program-zhejiang-sci-tech-university-textile-engineering-bachelor",
+        "slug": "zhejiang-sci-tech-university-textile-engineering-bachelor",
+        "universityId": "uni-zhejiang-sci-tech-university",
+        "name": {
+          "en": "Textile Engineering",
+          "zh": "纺织工程",
+          "ru": "Текстильная инженерия"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "To be confirmed"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://admission.zstu.edu.cn/",
+        "applyUrl": "https://admission.zstu.edu.cn/",
+        "languageRequirements": []
+      },
+      "canonicalProgramSha256": "42d0492f03c89924ec7995b7c72044a9d2550afb051644a0d08e546fff07cfe4",
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-zhejiang-sci-tech-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-zhejiang-sci-tech-university",
+            "slug": "zhejiang-sci-tech-university",
+            "name": {
+              "en": "Zhejiang Sci-Tech University",
+              "zh": "浙江理工大学",
+              "ru": "Чжэцзянский научно-технический университет"
+            },
+            "cityId": "city-hangzhou",
+            "region": "east",
+            "officialUrl": "https://www.zstu.edu.cn/",
+            "admissionsUrl": "https://admission.zstu.edu.cn/en",
+            "summary": {
+              "en": "Zhejiang Sci-Tech University is based in Hangzhou and is known for textile engineering, materials and design.",
+              "zh": "浙江理工大学位于杭州，以纺织工程、材料与设计等领域见长。",
+              "ru": "Чжэцзянский научно-технический университет находится в городе Ханчжоу; сильные направления: текстильная инженерия, материаловедение и дизайн."
+            },
+            "featured": false
+          },
+          "sha256": "624bf39d0eb0d056a8aeebb49fc67946de149013cb905c828c1d1b3d96ea5214"
+        }
+      ],
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-zhejiang-sci-tech-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2026-10-01",
+            "status": "draft",
+            "id": "program-zhejiang-sci-tech-university-textile-engineering-bachelor",
+            "slug": "zhejiang-sci-tech-university-textile-engineering-bachelor",
+            "universityId": "uni-zhejiang-sci-tech-university",
+            "name": {
+              "en": "Textile Engineering",
+              "zh": "纺织工程",
+              "ru": "Текстильная инженерия"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "To be confirmed"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://admission.zstu.edu.cn/",
+            "applyUrl": "https://admission.zstu.edu.cn/",
+            "languageRequirements": []
+          },
+          "sha256": "42d0492f03c89924ec7995b7c72044a9d2550afb051644a0d08e546fff07cfe4"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-uni-zhejiang-sci-tech-university",
+            "url": "https://admission.zstu.edu.cn/",
+            "title": "Official international information — Zhejiang Sci-Tech University",
+            "publisher": "Zhejiang Sci-Tech University",
+            "kind": "admissions",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-16"
+          },
+          "sha256": "c55173a2827d09a23b61bc26405f994ae657dc244ac561b57113f8b3bdde56a1"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-chinese-scholarship-bfsu-iclt-degree-programs-2026",
+      "collection": "scholarships",
+      "universityId": "uni-beijing-foreign-studies-university",
+      "canonicalRecordSha256": "4bfa3f3f75e098885841c2ec56725e10e5b0d2c9cdcb3bf984a524da0e5d5848",
+      "row": {
+        "id": "sch-gap-chinese-scholarship-bfsu-iclt-degree-programs-2026",
+        "slug": "gap-chinese-scholarship-bfsu-iclt-degree-programs-2026",
+        "name": {
+          "en": "BFSU 2026 International Chinese Language Teachers Scholarship — Degree Programs",
+          "zh": "北京外国语大学2026国际中文教师奖学金（学历项目）",
+          "ru": "Стипендия BFSU 2026 для преподавателей китайского языка — программы с дипломом"
+        },
+        "providerType": "other",
+        "universityIds": [
+          "uni-beijing-foreign-studies-university"
+        ],
+        "programIds": [
+          "prog-gap-chinese-degree-bfsu-international-chinese-education-bachelor",
+          "prog-gap-chinese-degree-bfsu-international-chinese-education-master"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+        "summary": {
+          "en": "BFSU explicitly lists bachelor and master degree routes in International Chinese Language Education with full ICLT coverage. Their May 2026 degree deadline is closed.",
+          "zh": "北外明确列出国际中文教育本科和硕士学历路线及全额国际中文教师奖学金；2026年5月学历项目截止期已结束。",
+          "ru": "BFSU прямо указывает бакалавриат и магистратуру по международному преподаванию китайского с полным финансированием; срок мая 2026 года закрыт."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-chinese-scholarship-bfsu-iclt-degree-programs-2026"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-beijing-foreign-studies-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-beijing-foreign-studies-university",
+            "slug": "beijing-foreign-studies-university",
+            "name": {
+              "en": "Beijing Foreign Studies University",
+              "zh": "北京外国语大学",
+              "ru": "Пекинский университет иностранных языков"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://en.bfsu.edu.cn/",
+            "admissionsUrl": "https://osao.bfsu.edu.cn/",
+            "summary": {
+              "en": "Beijing Foreign Studies University is based in Beijing and is known for languages, translation and international studies.",
+              "zh": "北京外国语大学位于北京，以语言、翻译与国际研究等领域见长。",
+              "ru": "Пекинский университет иностранных языков находится в городе Пекин; сильные направления: языки, перевод и международные исследования."
+            },
+            "featured": false
+          },
+          "sha256": "bac3459824577f43ef128e0e83e1482f17b234e1d5955a1b66f1a7c935edee12"
+        }
+      ],
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-chinese-degree-bfsu-international-chinese-education-bachelor"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-chinese-degree-bfsu-international-chinese-education-bachelor",
+            "slug": "gap-chinese-degree-bfsu-international-chinese-education-bachelor-bachelor",
+            "universityId": "uni-beijing-foreign-studies-university",
+            "name": {
+              "en": "International Chinese Language Education (Bachelor)",
+              "zh": "国际中文教育本科",
+              "ru": "Международное преподавание китайского языка (бакалавриат)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "2135f9bcd47818933ec1e27d31fa5fce56e27c562ff2826af1a6e37dd1940b4d"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-chinese-degree-bfsu-international-chinese-education-master"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-chinese-degree-bfsu-international-chinese-education-master",
+            "slug": "gap-chinese-degree-bfsu-international-chinese-education-master-master",
+            "universityId": "uni-beijing-foreign-studies-university",
+            "name": {
+              "en": "International Chinese Language Education (Master)",
+              "zh": "国际中文教育硕士",
+              "ru": "Международное преподавание китайского языка (магистратура)"
+            },
+            "degreeLevel": "master",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 24,
+            "programUrl": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "6eb003fc97a5a0f50a2eedbe052c97db07c14e9bc9147f6e1fcd6813e0062767"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-chinese-scholarship-bfsu-iclt-degree-programs-2026",
+            "url": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+            "title": "BFSU 2026 International Chinese Language Teachers Scholarship",
+            "publisher": "beijing-foreign-studies-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-09-28"
+          },
+          "sha256": "d3eabf9271809bf1b1c42c4704745de8eda1138a4c0972f645cdc8c52f04be03"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-chinese-degree-bfsu-international-chinese-education-bachelor-2026-2027-autumn",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-foreign-studies-university",
+      "canonicalRecordSha256": "87caa1195ea5ca9ea1087817bd5062b7b6500bd83b40f2a6eb08ec7789c2b125",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-chinese-degree-bfsu-international-chinese-education-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-chinese-degree-bfsu-international-chinese-education-bachelor-2026-2027-autumn",
+        "programId": "prog-gap-chinese-degree-bfsu-international-chinese-education-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-30",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official source explicitly offers International Chinese Language Education (Bachelor) to international applicants. The 2026 application deadline of 2026-05-30 is closed; no later cycle is inferred.",
+          "zh": "官方来源明确面向国际申请人开设国际中文教育本科。2026年截止日为2026-05-30，当前已结束；不推定下一周期。",
+          "ru": "Официальный источник прямо предлагает иностранным абитуриентам программу «Международное преподавание китайского языка (бакалавриат)». Срок подачи в 2026 году (2026-05-30) закрыт; следующий цикл не предполагается."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-chinese-degree-bfsu-international-chinese-education-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-chinese-degree-bfsu-international-chinese-education-bachelor",
+        "slug": "gap-chinese-degree-bfsu-international-chinese-education-bachelor-bachelor",
+        "universityId": "uni-beijing-foreign-studies-university",
+        "name": {
+          "en": "International Chinese Language Education (Bachelor)",
+          "zh": "国际中文教育本科",
+          "ru": "Международное преподавание китайского языка (бакалавриат)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "2135f9bcd47818933ec1e27d31fa5fce56e27c562ff2826af1a6e37dd1940b4d",
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-beijing-foreign-studies-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-beijing-foreign-studies-university",
+            "slug": "beijing-foreign-studies-university",
+            "name": {
+              "en": "Beijing Foreign Studies University",
+              "zh": "北京外国语大学",
+              "ru": "Пекинский университет иностранных языков"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://en.bfsu.edu.cn/",
+            "admissionsUrl": "https://osao.bfsu.edu.cn/",
+            "summary": {
+              "en": "Beijing Foreign Studies University is based in Beijing and is known for languages, translation and international studies.",
+              "zh": "北京外国语大学位于北京，以语言、翻译与国际研究等领域见长。",
+              "ru": "Пекинский университет иностранных языков находится в городе Пекин; сильные направления: языки, перевод и международные исследования."
+            },
+            "featured": false
+          },
+          "sha256": "bac3459824577f43ef128e0e83e1482f17b234e1d5955a1b66f1a7c935edee12"
+        }
+      ],
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-chinese-degree-bfsu-international-chinese-education-bachelor"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-chinese-degree-bfsu-international-chinese-education-bachelor",
+            "slug": "gap-chinese-degree-bfsu-international-chinese-education-bachelor-bachelor",
+            "universityId": "uni-beijing-foreign-studies-university",
+            "name": {
+              "en": "International Chinese Language Education (Bachelor)",
+              "zh": "国际中文教育本科",
+              "ru": "Международное преподавание китайского языка (бакалавриат)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "2135f9bcd47818933ec1e27d31fa5fce56e27c562ff2826af1a6e37dd1940b4d"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-chinese-degree-bfsu-international-chinese-education-bachelor",
+            "url": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+            "title": "BFSU 2026 International Chinese Language Teachers Scholarship",
+            "publisher": "beijing-foreign-studies-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-09-28"
+          },
+          "sha256": "f7d077a7ec3dfd6e823569ef845885f066e3e1fb037e32da830ca26d9229573c"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-chinese-degree-bfsu-international-chinese-education-master-2026-2027-autumn",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-foreign-studies-university",
+      "canonicalRecordSha256": "76269f040ed110fa187134a0bb4d20fda1e29e6ced16199be7d21bb32835eb71",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-chinese-degree-bfsu-international-chinese-education-master"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-chinese-degree-bfsu-international-chinese-education-master-2026-2027-autumn",
+        "programId": "prog-gap-chinese-degree-bfsu-international-chinese-education-master",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-30",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official source explicitly offers International Chinese Language Education (Master) to international applicants. The 2026 application deadline of 2026-05-30 is closed; no later cycle is inferred.",
+          "zh": "官方来源明确面向国际申请人开设国际中文教育硕士。2026年截止日为2026-05-30，当前已结束；不推定下一周期。",
+          "ru": "Официальный источник прямо предлагает иностранным абитуриентам программу «Международное преподавание китайского языка (магистратура)». Срок подачи в 2026 году (2026-05-30) закрыт; следующий цикл не предполагается."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-chinese-degree-bfsu-international-chinese-education-master"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-chinese-degree-bfsu-international-chinese-education-master",
+        "slug": "gap-chinese-degree-bfsu-international-chinese-education-master-master",
+        "universityId": "uni-beijing-foreign-studies-university",
+        "name": {
+          "en": "International Chinese Language Education (Master)",
+          "zh": "国际中文教育硕士",
+          "ru": "Международное преподавание китайского языка (магистратура)"
+        },
+        "degreeLevel": "master",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 24,
+        "programUrl": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "6eb003fc97a5a0f50a2eedbe052c97db07c14e9bc9147f6e1fcd6813e0062767",
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-beijing-foreign-studies-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-beijing-foreign-studies-university",
+            "slug": "beijing-foreign-studies-university",
+            "name": {
+              "en": "Beijing Foreign Studies University",
+              "zh": "北京外国语大学",
+              "ru": "Пекинский университет иностранных языков"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://en.bfsu.edu.cn/",
+            "admissionsUrl": "https://osao.bfsu.edu.cn/",
+            "summary": {
+              "en": "Beijing Foreign Studies University is based in Beijing and is known for languages, translation and international studies.",
+              "zh": "北京外国语大学位于北京，以语言、翻译与国际研究等领域见长。",
+              "ru": "Пекинский университет иностранных языков находится в городе Пекин; сильные направления: языки, перевод и международные исследования."
+            },
+            "featured": false
+          },
+          "sha256": "bac3459824577f43ef128e0e83e1482f17b234e1d5955a1b66f1a7c935edee12"
+        }
+      ],
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-chinese-degree-bfsu-international-chinese-education-master"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-chinese-degree-bfsu-international-chinese-education-master",
+            "slug": "gap-chinese-degree-bfsu-international-chinese-education-master-master",
+            "universityId": "uni-beijing-foreign-studies-university",
+            "name": {
+              "en": "International Chinese Language Education (Master)",
+              "zh": "国际中文教育硕士",
+              "ru": "Международное преподавание китайского языка (магистратура)"
+            },
+            "degreeLevel": "master",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 24,
+            "programUrl": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "6eb003fc97a5a0f50a2eedbe052c97db07c14e9bc9147f6e1fcd6813e0062767"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-chinese-degree-bfsu-international-chinese-education-master",
+            "url": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+            "title": "BFSU 2026 International Chinese Language Teachers Scholarship",
+            "publisher": "beijing-foreign-studies-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-09-28"
+          },
+          "sha256": "f23097c47ae1cd6d5865777e8ef70d973d50e384f7155d0703740084dff05e5d"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-local-strong-bipt-b-chemical-engineering-cn-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-institute-of-petrochemical-technology",
+      "canonicalRecordSha256": "a9d5a4c206ab1d7da7e3233a9bcc6d6a754c4eb91ef54e4c97cb54a4462b1846",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-local-strong-bipt-b-chemical-engineering-cn"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-local-strong-bipt-b-chemical-engineering-cn-2026-2027-other-fee-reference",
+        "programId": "prog-gap-local-strong-bipt-b-chemical-engineering-cn",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 20000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-local-strong-bipt-b-chemical-engineering-cn"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-local-strong-bipt-b-chemical-engineering-cn",
+        "slug": "gap-local-strong-bipt-b-chemical-engineering-cn-bachelor",
+        "universityId": "uni-beijing-institute-of-petrochemical-technology",
+        "name": {
+          "en": "Chemical Engineering and Technology",
+          "zh": "化学工程与工艺",
+          "ru": "Химическая инженерия и технология"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "ddd50756059dac112ec8410b97bd53f1960be132bf0df9991002c4639416808c",
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-university-beijing-institute-of-petrochemical-technology"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2027-01-30",
+            "status": "verified",
+            "id": "uni-beijing-institute-of-petrochemical-technology",
+            "slug": "beijing-institute-of-petrochemical-technology",
+            "name": {
+              "en": "Beijing Institute of Petrochemical Technology",
+              "zh": "北京石油化工学院",
+              "ru": "Пекинский институт нефтехимической технологии"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "admissionsUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "summary": {
+              "en": "The official international-exchange source publishes programs for international applicants and scholarship references.",
+              "zh": "学校国际交流官方来源公布了面向国际申请人的项目和奖学金信息。",
+              "ru": "Официальный источник международного обмена публикует программы для иностранных абитуриентов и сведения о стипендиях."
+            },
+            "featured": false
+          },
+          "sha256": "224a5d74ee58b4580df4bf867d2c87d4929e207ad0ffabc5b3ab9981f28d1530"
+        }
+      ],
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-local-strong-bipt-b-chemical-engineering-cn"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-local-strong-bipt-b-chemical-engineering-cn",
+            "slug": "gap-local-strong-bipt-b-chemical-engineering-cn-bachelor",
+            "universityId": "uni-beijing-institute-of-petrochemical-technology",
+            "name": {
+              "en": "Chemical Engineering and Technology",
+              "zh": "化学工程与工艺",
+              "ru": "Химическая инженерия и технология"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "ddd50756059dac112ec8410b97bd53f1960be132bf0df9991002c4639416808c"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-local-strong-bipt-b-chemical-engineering-cn",
+            "url": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "title": "BIPT International Student Program Information",
+            "publisher": "beijing-institute-of-petrochemical-technology",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "ff127fbd4fcac83ea3c9ca2549bec1b4202fc028434d2e3f06f0add35e75e44e"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-wave7-bipt-biological-pharmacy-bachelor-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-institute-of-petrochemical-technology",
+      "canonicalRecordSha256": "c1151c18da671deedb503ac0b01655b996b99929179051a1bda8d4e5f0ff582e",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave7-bipt-biological-pharmacy-bachelor"
+        ],
+        "verifiedAt": "2026-08-01",
+        "reviewAfter": "2026-08-08",
+        "status": "stale",
+        "id": "cycle-gap-wave7-bipt-biological-pharmacy-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave7-bipt-biological-pharmacy-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 20000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave7-bipt-biological-pharmacy-bachelor"
+        ],
+        "verifiedAt": "2026-08-01",
+        "reviewAfter": "2026-08-31",
+        "status": "stale",
+        "id": "prog-gap-wave7-bipt-biological-pharmacy-bachelor",
+        "slug": "gap-wave7-bipt-biological-pharmacy-bachelor-bachelor",
+        "universityId": "uni-beijing-institute-of-petrochemical-technology",
+        "name": {
+          "en": "Biological Pharmacy (Bachelor's Program)",
+          "zh": "生物制药本科项目",
+          "ru": "Бакалавриат по биофармацевтике"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "6d51aaa04f24c225caa4492037d4683152c494fdb7b41d9e04bc0b0fa9ee655f",
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-university-beijing-institute-of-petrochemical-technology"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2027-01-30",
+            "status": "verified",
+            "id": "uni-beijing-institute-of-petrochemical-technology",
+            "slug": "beijing-institute-of-petrochemical-technology",
+            "name": {
+              "en": "Beijing Institute of Petrochemical Technology",
+              "zh": "北京石油化工学院",
+              "ru": "Пекинский институт нефтехимической технологии"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "admissionsUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "summary": {
+              "en": "The official international-exchange source publishes programs for international applicants and scholarship references.",
+              "zh": "学校国际交流官方来源公布了面向国际申请人的项目和奖学金信息。",
+              "ru": "Официальный источник международного обмена публикует программы для иностранных абитуриентов и сведения о стипендиях."
+            },
+            "featured": false
+          },
+          "sha256": "224a5d74ee58b4580df4bf867d2c87d4929e207ad0ffabc5b3ab9981f28d1530"
+        }
+      ],
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave7-bipt-biological-pharmacy-bachelor"
+            ],
+            "verifiedAt": "2026-08-01",
+            "reviewAfter": "2026-08-31",
+            "status": "stale",
+            "id": "prog-gap-wave7-bipt-biological-pharmacy-bachelor",
+            "slug": "gap-wave7-bipt-biological-pharmacy-bachelor-bachelor",
+            "universityId": "uni-beijing-institute-of-petrochemical-technology",
+            "name": {
+              "en": "Biological Pharmacy (Bachelor's Program)",
+              "zh": "生物制药本科项目",
+              "ru": "Бакалавриат по биофармацевтике"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "medicine",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "6d51aaa04f24c225caa4492037d4683152c494fdb7b41d9e04bc0b0fa9ee655f"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave7-bipt-biological-pharmacy-bachelor",
+            "url": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "title": "Beijing Institute of Petrochemical Technology 2026 International Student Admission Guide",
+            "publisher": "beijing-institute-of-petrochemical-technology",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-01"
+          },
+          "sha256": "205beca3a8b505756d26a621533e978f8207cd1865d2e1527a06db4fa673cb23"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-wave7-bipt-robotics-engineering-bachelor-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-institute-of-petrochemical-technology",
+      "canonicalRecordSha256": "df1a25a2637b1f00260b99ac92dc35cc073239ec111380e7cc86d3e6831252a6",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave7-bipt-robotics-engineering-bachelor"
+        ],
+        "verifiedAt": "2026-08-01",
+        "reviewAfter": "2026-08-08",
+        "status": "stale",
+        "id": "cycle-gap-wave7-bipt-robotics-engineering-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave7-bipt-robotics-engineering-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 20000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave7-bipt-robotics-engineering-bachelor"
+        ],
+        "verifiedAt": "2026-08-01",
+        "reviewAfter": "2026-08-31",
+        "status": "stale",
+        "id": "prog-gap-wave7-bipt-robotics-engineering-bachelor",
+        "slug": "gap-wave7-bipt-robotics-engineering-bachelor-bachelor",
+        "universityId": "uni-beijing-institute-of-petrochemical-technology",
+        "name": {
+          "en": "Robotics Engineering (Bachelor's Program)",
+          "zh": "机器人工程本科项目",
+          "ru": "Бакалавриат по робототехнике"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "225dedf5c8cb601dc60ded7fada8b0ba264d663745e2eb13a7aafa482949d83c",
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-university-beijing-institute-of-petrochemical-technology"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2027-01-30",
+            "status": "verified",
+            "id": "uni-beijing-institute-of-petrochemical-technology",
+            "slug": "beijing-institute-of-petrochemical-technology",
+            "name": {
+              "en": "Beijing Institute of Petrochemical Technology",
+              "zh": "北京石油化工学院",
+              "ru": "Пекинский институт нефтехимической технологии"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "admissionsUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "summary": {
+              "en": "The official international-exchange source publishes programs for international applicants and scholarship references.",
+              "zh": "学校国际交流官方来源公布了面向国际申请人的项目和奖学金信息。",
+              "ru": "Официальный источник международного обмена публикует программы для иностранных абитуриентов и сведения о стипендиях."
+            },
+            "featured": false
+          },
+          "sha256": "224a5d74ee58b4580df4bf867d2c87d4929e207ad0ffabc5b3ab9981f28d1530"
+        }
+      ],
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave7-bipt-robotics-engineering-bachelor"
+            ],
+            "verifiedAt": "2026-08-01",
+            "reviewAfter": "2026-08-31",
+            "status": "stale",
+            "id": "prog-gap-wave7-bipt-robotics-engineering-bachelor",
+            "slug": "gap-wave7-bipt-robotics-engineering-bachelor-bachelor",
+            "universityId": "uni-beijing-institute-of-petrochemical-technology",
+            "name": {
+              "en": "Robotics Engineering (Bachelor's Program)",
+              "zh": "机器人工程本科项目",
+              "ru": "Бакалавриат по робототехнике"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "225dedf5c8cb601dc60ded7fada8b0ba264d663745e2eb13a7aafa482949d83c"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave7-bipt-robotics-engineering-bachelor",
+            "url": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "title": "Beijing Institute of Petrochemical Technology 2026 International Student Admission Guide",
+            "publisher": "beijing-institute-of-petrochemical-technology",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-01"
+          },
+          "sha256": "cc0d4280ee14d75ea13ace8b2b2c4170ba36f292e9f1ac12b1b73838c178fdd2"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-local-strong-bipt-beijing-government-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-beijing-institute-of-petrochemical-technology",
+      "canonicalRecordSha256": "6ab2a3e1a46b2e61ec3147ad2af1f2f0d615bab77e3e4800f76264721a524d72",
+      "row": {
+        "id": "sch-gap-local-strong-bipt-beijing-government-scholarship",
+        "slug": "gap-local-strong-bipt-beijing-government-scholarship",
+        "name": {
+          "en": "Beijing Government Scholarship",
+          "zh": "北京市外国留学生奖学金",
+          "ru": "Стипендия правительства Пекина"
+        },
+        "providerType": "city",
+        "universityIds": [
+          "uni-beijing-institute-of-petrochemical-technology"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+        "summary": {
+          "en": "The official university source confirms Beijing scholarship routes at BIPT; uncaptured funding and dates remain unannounced.",
+          "zh": "学校官方来源确认北京奖学金渠道；未获取的资助和日期保持未公布。",
+          "ru": "Официальный источник подтверждает пекинскую стипендиальную возможность в BIPT; не зафиксированные финансирование и даты отмечены как не объявленные."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-local-strong-bipt-beijing-government-scholarship"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-university-beijing-institute-of-petrochemical-technology"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2027-01-30",
+            "status": "verified",
+            "id": "uni-beijing-institute-of-petrochemical-technology",
+            "slug": "beijing-institute-of-petrochemical-technology",
+            "name": {
+              "en": "Beijing Institute of Petrochemical Technology",
+              "zh": "北京石油化工学院",
+              "ru": "Пекинский институт нефтехимической технологии"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "admissionsUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "summary": {
+              "en": "The official international-exchange source publishes programs for international applicants and scholarship references.",
+              "zh": "学校国际交流官方来源公布了面向国际申请人的项目和奖学金信息。",
+              "ru": "Официальный источник международного обмена публикует программы для иностранных абитуриентов и сведения о стипендиях."
+            },
+            "featured": false
+          },
+          "sha256": "224a5d74ee58b4580df4bf867d2c87d4929e207ad0ffabc5b3ab9981f28d1530"
+        }
+      ],
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-local-strong-bipt-beijing-government-scholarship",
+            "url": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "title": "BIPT International Student Program Information",
+            "publisher": "beijing-institute-of-petrochemical-technology",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "9380e5dc3cde0ea042c721bee794c87b6ac34ec6fc7f9df8234fb770c93a2825"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-wave8-bit-mechatronics-engineering-bachelor-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-institute-of-technology",
+      "canonicalRecordSha256": "b47221ce0f6d68bff12b40f7546ef8d8d59263d8af33ae85db4ade8c17f13eae",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave8-bit-mechatronics-engineering-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-wave8-bit-mechatronics-engineering-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave8-bit-mechatronics-engineering-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 30000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave8-bit-mechatronics-engineering-bachelor"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-wave8-bit-mechatronics-engineering-bachelor",
+        "slug": "gap-wave8-bit-mechatronics-engineering-bachelor-bachelor",
+        "universityId": "uni-beijing-institute-of-technology",
+        "name": {
+          "en": "Mechatronics Engineering (Bachelor's Program)",
+          "zh": "机电工程本科项目",
+          "ru": "Бакалавриат по мехатронике"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+        "applyUrl": "https://apply.isc.bit.edu.cn/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "293c1159bcd0d0b603e8e3a9a376aae4c0f9d975f9616a80eeb587184d8fcfcc",
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-beijing-institute-of-technology"
+            ],
+            "verifiedAt": "2026-07-27",
+            "reviewAfter": "2027-01-23",
+            "status": "verified",
+            "id": "uni-beijing-institute-of-technology",
+            "slug": "beijing-institute-of-technology",
+            "name": {
+              "en": "Beijing Institute of Technology",
+              "zh": "北京理工大学",
+              "ru": "Пекинский технологический институт"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://isc.bit.edu.cn/",
+            "admissionsUrl": "https://isc.bit.edu.cn/",
+            "summary": {
+              "en": "Beijing Institute of Technology is located in Beijing. Current international programs and requirements are published on the official admissions website.",
+              "zh": "北京理工大学位于北京市。当前国际学生项目和申请要求以学校官方招生网站为准。",
+              "ru": "Пекинский технологический институт находится в городе Пекин. Актуальные программы и требования опубликованы на официальном сайте приёма."
+            },
+            "featured": false
+          },
+          "sha256": "98dea611bfeb774098c4b3acd8011b25457dd6055660e468424080ff40381c1d"
+        }
+      ],
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-bit-mechatronics-engineering-bachelor"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-bit-mechatronics-engineering-bachelor",
+            "slug": "gap-wave8-bit-mechatronics-engineering-bachelor-bachelor",
+            "universityId": "uni-beijing-institute-of-technology",
+            "name": {
+              "en": "Mechatronics Engineering (Bachelor's Program)",
+              "zh": "机电工程本科项目",
+              "ru": "Бакалавриат по мехатронике"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+            "applyUrl": "https://apply.isc.bit.edu.cn/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "293c1159bcd0d0b603e8e3a9a376aae4c0f9d975f9616a80eeb587184d8fcfcc"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave8-bit-mechatronics-engineering-bachelor",
+            "url": "https://isc.bit.edu.cn/aboutbit/faq/70fe36ccf5f64defb9ecda409efd2b71.htm",
+            "title": "Beijing Institute of Technology 2026 International Undergraduate Admission Book",
+            "publisher": "beijing-institute-of-technology",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "073696e50a9ff9674a46da7a7221a350975406041ad500c106535ebe6f2b02a6"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-wave8-bisu-beijing-government-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-beijing-international-studies-university",
+      "canonicalRecordSha256": "0281190233cfcadc2b3fc2c9db1d04ee62d8621aaf2a0f70027c309d5762e2ec",
+      "row": {
+        "id": "sch-gap-wave8-bisu-beijing-government-scholarship",
+        "slug": "gap-wave8-bisu-beijing-government-scholarship",
+        "name": {
+          "en": "Beijing Government Scholarship for International Students at BISU",
+          "zh": "北京第二外国语学院北京市外国留学生奖学金",
+          "ru": "Пекинская правительственная стипендия для иностранных студентов BISU"
+        },
+        "providerType": "city",
+        "universityIds": [
+          "uni-beijing-international-studies-university"
+        ],
+        "programIds": [
+          "prog-gap-prog-mew-ne-bisu-chinese-language-bachelor",
+          "prog-gap-prog-mew-ne-bisu-international-chinese-education-master",
+          "prog-gap-prog-mew-ne-bisu-chinese-language-nondegree",
+          "prog-gap-wave8-bisu-international-business-master",
+          "prog-gap-wave8-bisu-english-translation-master"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://admission.bisu.edu.cn/module/download/downfile.jsp?classid=0&filename=2311091107332343603.pdf",
+        "summary": {
+          "en": "The official BISU rules cover new international bachelor, master, advanced scholar and long-term Chinese students, generally with one-semester tuition waivers.",
+          "zh": "学校官方办法覆盖国际本科、硕士、高级进修和长期汉语新生，主要资助为减免一学期学费。",
+          "ru": "Официальные правила BISU охватывают новых иностранных бакалавров, магистрантов и слушателей китайского языка; основная льгота — освобождение от платы за один семестр."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave8-bisu-beijing-government-scholarship",
+          "src-gap-scholarship-wave8-bisu-beijing-government-scholarship-support-1",
+          "src-gap-scholarship-wave8-bisu-beijing-government-scholarship-support-2"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-wave8-university-beijing-international-studies-university"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-11-02",
+            "status": "verified",
+            "id": "uni-beijing-international-studies-university",
+            "slug": "beijing-international-studies-university",
+            "name": {
+              "en": "Beijing International Studies University",
+              "zh": "北京第二外国语学院",
+              "ru": "Пекинский университет международных исследований"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://www.bisu.edu.cn/",
+            "admissionsUrl": "https://admission.bisu.edu.cn/",
+            "summary": {
+              "en": "BISU's official international-admission portal publishes degree, English-taught and non-degree application categories for overseas applicants.",
+              "zh": "北京第二外国语学院国际招生官网公布面向海外申请人的学历、英文授课及非学历项目类别。",
+              "ru": "Официальный портал международного приёма BISU публикует программы степени, англоязычные и неакадемические программы для зарубежных кандидатов."
+            },
+            "featured": false
+          },
+          "sha256": "00b2b6d01af3a9c46b2b65f223fe84b64b1e89392e7966a4b115329741e6202e"
+        }
+      ],
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-ne-bisu-chinese-language-bachelor",
+              "src-gap-program-prog-mew-ne-bisu-chinese-language-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-ne-bisu-chinese-language-bachelor",
+            "slug": "gap-prog-mew-ne-bisu-chinese-language-bachelor-bachelor",
+            "universityId": "uni-beijing-international-studies-university",
+            "name": {
+              "en": "Chinese Language",
+              "zh": "汉语言",
+              "ru": "Китайский язык"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://admission.bisu.edu.cn/attach/0/2411071706042027427.pdf",
+            "applyUrl": "https://bisu.17gz.org/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "60800cd6f2aa038311a50a404a79ab10b2c283695a8feaef509cb68779170b75"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-ne-bisu-international-chinese-education-master",
+              "src-gap-program-prog-mew-ne-bisu-international-chinese-education-master-support-1"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-ne-bisu-international-chinese-education-master",
+            "slug": "gap-prog-mew-ne-bisu-international-chinese-education-master-master",
+            "universityId": "uni-beijing-international-studies-university",
+            "name": {
+              "en": "International Chinese Education",
+              "zh": "国际中文教育",
+              "ru": "Международное преподавание китайского языка"
+            },
+            "degreeLevel": "master",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 36,
+            "programUrl": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2403051823033743464.pdf?classid=0&filename=2403051823033743464.pdf",
+            "applyUrl": "https://bisu.17gz.org/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "c676b071d5691c9ea33fd1a18a4296e9c0e87528f7ed8a6dd56ff9627579ce41"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-ne-bisu-chinese-language-nondegree"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-ne-bisu-chinese-language-nondegree",
+            "slug": "gap-prog-mew-ne-bisu-chinese-language-nondegree-language",
+            "universityId": "uni-beijing-international-studies-university",
+            "name": {
+              "en": "Long-term Chinese Language Program",
+              "zh": "长期汉语进修生项目",
+              "ru": "Долгосрочная программа китайского языка"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 6,
+            "programUrl": "https://admission.bisu.edu.cn/attach/0/2411071706042027427.pdf",
+            "applyUrl": "https://bisu.17gz.org/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "a739d16b21c478e95fd24b261daab4bad39e8fdf6601f42c6834a6008db17c21"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-bisu-international-business-master",
+              "src-gap-program-wave8-bisu-international-business-master-support-1"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-bisu-international-business-master",
+            "slug": "gap-wave8-bisu-international-business-master-master",
+            "universityId": "uni-beijing-international-studies-university",
+            "name": {
+              "en": "International Business (Master's Program)",
+              "zh": "国际商务硕士项目",
+              "ru": "Магистратура по международному бизнесу"
+            },
+            "degreeLevel": "master",
+            "discipline": "business",
+            "teachingLanguages": [],
+            "durationMonths": 24,
+            "programUrl": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2311211044103672318.pdf?classid=0&filename=2311211044103672318.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "058d76b252c4aeb046fe679007a0680329805190585c9a03a0cb9f2e047b5cd2"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-bisu-english-translation-master",
+              "src-gap-program-wave8-bisu-english-translation-master-support-1"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-bisu-english-translation-master",
+            "slug": "gap-wave8-bisu-english-translation-master-master",
+            "universityId": "uni-beijing-international-studies-university",
+            "name": {
+              "en": "English Translation (Master's Program)",
+              "zh": "英语笔译硕士项目",
+              "ru": "Магистратура по письменному переводу с английского языка"
+            },
+            "degreeLevel": "master",
+            "discipline": "other",
+            "teachingLanguages": [],
+            "durationMonths": 24,
+            "programUrl": "https://admission.bisu.edu.cn/jcms/jcms_files/jcms1/web62/site/attach/0/2311211044103672318.pdf?classid=0&filename=2311211044103672318.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "39421a78662b4692ec59c4c783526a87702deaadac8bf5b5cac2ca704b660d02"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-bisu-beijing-government-scholarship",
+            "url": "https://admission.bisu.edu.cn/module/download/downfile.jsp?classid=0&filename=2311091107332343603.pdf",
+            "title": "北京第二外国语学院北京市外国留学生奖学金申请说明（新生）",
+            "publisher": "beijing-international-studies-university",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "dd7792b9340e9539969aeef25d9489ac21430eeaaab1c885c9f415868d575b74"
+        },
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-bisu-beijing-government-scholarship-support-1",
+            "url": "https://admission.bisu.edu.cn/module/download/downfile.jsp?classid=0&filename=2403220938594699584.pdf",
+            "title": "BISU Beijing Government Scholarship for International Students",
+            "publisher": "beijing-international-studies-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "ff5b6cdd26e61b59943e9c88f135e9613e072e077e448d13ab67b74ffeb2edb3"
+        },
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-bisu-beijing-government-scholarship-support-2",
+            "url": "https://admission.bisu.edu.cn/",
+            "title": "BISU International Admission Portal",
+            "publisher": "beijing-international-studies-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "f1062ae17834282c3d56b0b92f6988007215ca067cf21b3973d996ba92473030"
+        }
+      ]
+    },
+    {
+      "recordId": "scholarship-beijing-government",
+      "collection": "scholarships",
+      "universityId": "uni-beijing-foreign-studies-university",
+      "canonicalRecordSha256": "4c98d258b77b373ca2a34f673a6956cf386b612dbe3e2dbdd7ed18b138f43bdc",
+      "row": {
+        "sourceIds": [
+          "src-uni-beijing-language-and-culture-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "scholarship-beijing-government",
+        "slug": "beijing-government",
+        "name": {
+          "en": "Beijing Government Scholarship",
+          "zh": "北京市外国留学生奖学金",
+          "ru": "Стипендия правительства Пекина"
+        },
+        "providerType": "city",
+        "universityIds": [
+          "uni-tsinghua-university",
+          "uni-peking-university",
+          "uni-beijing-foreign-studies-university",
+          "uni-beijing-language-and-culture-university",
+          "uni-university-of-international-business-and-economics",
+          "uni-beijing-normal-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://admission.blcu.edu.cn/",
+        "summary": {
+          "en": "Beijing Government Scholarship is a potential funding route. Eligibility, participating programs and current-cycle coverage must be confirmed on the official page.",
+          "zh": "北京市外国留学生奖学金是一项潜在资助渠道；申请资格、适用项目及当期资助标准须以官方页面为准。",
+          "ru": "Стипендия правительства Пекина — возможный источник финансирования. Условия, подходящие программы и покрытие текущего цикла необходимо проверить на официальной странице."
+        }
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-tsinghua-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-tsinghua-university",
+            "slug": "tsinghua-university",
+            "name": {
+              "en": "Tsinghua University",
+              "zh": "清华大学",
+              "ru": "Университет Цинхуа"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://www.tsinghua.edu.cn/en/",
+            "admissionsUrl": "https://international.join-tsinghua.edu.cn/",
+            "summary": {
+              "en": "Tsinghua University is based in Beijing and is known for engineering, computing and management.",
+              "zh": "清华大学位于北京，以工程、计算机与管理等领域见长。",
+              "ru": "Университет Цинхуа находится в городе Пекин; сильные направления: инженерия, информатика и менеджмент."
+            },
+            "featured": true,
+            "rankings": [
+              {
+                "system": "qs",
+                "year": 2027,
+                "rankMin": 14,
+                "rankMax": 14,
+                "rankLabel": "14",
+                "sourceUrl": "https://www.topuniversities.com/qs-top-uni-wur",
+                "checkedAt": "2026-09-30",
+                "reviewAfter": "2026-10-30"
+              },
+              {
+                "system": "the",
+                "year": 2027,
+                "rankMin": 11,
+                "rankMax": 11,
+                "rankLabel": "11",
+                "sourceUrl": "https://www.timeshighereducation.com/world-university-rankings/tsinghua-university",
+                "checkedAt": "2026-09-30",
+                "reviewAfter": "2026-10-30"
+              },
+              {
+                "system": "arwu",
+                "year": 2026,
+                "rankMin": 18,
+                "rankMax": 18,
+                "rankLabel": "18",
+                "sourceUrl": "https://www.shanghairanking.com/rankings/arwu/2026",
+                "checkedAt": "2026-09-30",
+                "reviewAfter": "2026-10-30"
+              }
+            ]
+          },
+          "sha256": "b60bb4699fbf43ce38957d454a6bfa2064140c0f8630060394a56e8134740180"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-peking-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-peking-university",
+            "slug": "peking-university",
+            "name": {
+              "en": "Peking University",
+              "zh": "北京大学",
+              "ru": "Пекинский университет"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://english.pku.edu.cn/",
+            "admissionsUrl": "https://www.isd.pku.edu.cn/",
+            "summary": {
+              "en": "Peking University is based in Beijing and is known for humanities, sciences, medicine and international studies.",
+              "zh": "北京大学位于北京，以人文、理科、医学与国际研究等领域见长。",
+              "ru": "Пекинский университет находится в городе Пекин; сильные направления: гуманитарные и естественные науки, медицина и международные исследования."
+            },
+            "featured": false,
+            "rankings": [
+              {
+                "system": "qs",
+                "year": 2027,
+                "rankMin": 13,
+                "rankMax": 13,
+                "rankLabel": "13",
+                "sourceUrl": "https://www.topuniversities.com/qs-top-uni-wur",
+                "checkedAt": "2026-09-30",
+                "reviewAfter": "2026-10-30"
+              },
+              {
+                "system": "the",
+                "year": 2027,
+                "rankMin": 13,
+                "rankMax": 13,
+                "rankLabel": "13",
+                "sourceUrl": "https://www.timeshighereducation.com/world-university-rankings/peking-university",
+                "checkedAt": "2026-09-30",
+                "reviewAfter": "2026-10-30"
+              },
+              {
+                "system": "arwu",
+                "year": 2026,
+                "rankMin": 22,
+                "rankMax": 22,
+                "rankLabel": "22",
+                "sourceUrl": "https://www.shanghairanking.com/rankings/arwu/2026",
+                "checkedAt": "2026-09-30",
+                "reviewAfter": "2026-10-30"
+              }
+            ]
+          },
+          "sha256": "9fbbb9859c042c2f6f773adf6efedf1f44f7096b58728c4dd801cbb58e80e0fc"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-beijing-foreign-studies-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-beijing-foreign-studies-university",
+            "slug": "beijing-foreign-studies-university",
+            "name": {
+              "en": "Beijing Foreign Studies University",
+              "zh": "北京外国语大学",
+              "ru": "Пекинский университет иностранных языков"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://en.bfsu.edu.cn/",
+            "admissionsUrl": "https://osao.bfsu.edu.cn/",
+            "summary": {
+              "en": "Beijing Foreign Studies University is based in Beijing and is known for languages, translation and international studies.",
+              "zh": "北京外国语大学位于北京，以语言、翻译与国际研究等领域见长。",
+              "ru": "Пекинский университет иностранных языков находится в городе Пекин; сильные направления: языки, перевод и международные исследования."
+            },
+            "featured": false
+          },
+          "sha256": "bac3459824577f43ef128e0e83e1482f17b234e1d5955a1b66f1a7c935edee12"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-beijing-language-and-culture-university",
+              "src-blcu-university",
+              "src-blcu-iclt-2026"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-beijing-language-and-culture-university",
+            "slug": "beijing-language-and-culture-university",
+            "name": {
+              "en": "Beijing Language and Culture University",
+              "zh": "北京语言大学",
+              "ru": "Пекинский университет языка и культуры"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://www.blcu.edu.cn/",
+            "admissionsUrl": "https://admission.blcu.edu.cn/",
+            "summary": {
+              "en": "Beijing Language and Culture University is based in Beijing and is known for Chinese language education, linguistics and intercultural studies.",
+              "zh": "北京语言大学位于北京，以汉语教育、语言学与跨文化研究等领域见长。",
+              "ru": "Пекинский университет языка и культуры находится в городе Пекин; сильные направления: преподавание китайского языка, лингвистика и межкультурные исследования."
+            },
+            "featured": false
+          },
+          "sha256": "e2d9bddad74e30405b1ae7d41aff7157d53bd23b3c339ad4c2ba0ca4534d9cba"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-university-of-international-business-and-economics"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-university-of-international-business-and-economics",
+            "slug": "university-of-international-business-and-economics",
+            "name": {
+              "en": "University of International Business and Economics",
+              "zh": "对外经济贸易大学",
+              "ru": "Университет международного бизнеса и экономики"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://english.uibe.edu.cn/",
+            "admissionsUrl": "https://sie.uibe.edu.cn/",
+            "summary": {
+              "en": "University of International Business and Economics is based in Beijing and is known for international business, economics and law.",
+              "zh": "对外经济贸易大学位于北京，以国际商务、经济与法律等领域见长。",
+              "ru": "Университет международного бизнеса и экономики находится в городе Пекин; сильные направления: международный бизнес, экономика и право."
+            },
+            "featured": false
+          },
+          "sha256": "abd253aee224a765e0719ff53e1d6a61827c9f2807fad5c0c2cce063c9d8a2eb"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-beijing-normal-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-beijing-normal-university",
+            "slug": "beijing-normal-university",
+            "name": {
+              "en": "Beijing Normal University",
+              "zh": "北京师范大学",
+              "ru": "Пекинский педагогический университет"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://english.bnu.edu.cn/",
+            "admissionsUrl": "https://admission-is.bnu.edu.cn/english/index.html",
+            "summary": {
+              "en": "Beijing Normal University is based in Beijing and is known for education, psychology and the humanities.",
+              "zh": "北京师范大学位于北京，以教育、心理与人文等领域见长。",
+              "ru": "Пекинский педагогический университет находится в городе Пекин; сильные направления: образование, психология и гуманитарные науки."
+            },
+            "featured": false
+          },
+          "sha256": "8d585716d3907f87015583a418548226f3595887326170942f322687ec323e80"
+        }
+      ],
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-uni-beijing-language-and-culture-university",
+            "url": "https://admission.blcu.edu.cn/",
+            "title": "Official international information — Beijing Language and Culture University",
+            "publisher": "Beijing Language and Culture University",
+            "kind": "admissions",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-16"
+          },
+          "sha256": "9835a86d11346a9f7fb734c8bc8e20deb553a512b2d21011f3c4142129b3bfec"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-2027-beijing-language-and-culture-university-international-foundation-foundation",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-language-and-culture-university",
+      "canonicalRecordSha256": "b65601a0660adeaf2b8758260b68724d30e10442d2bfc22e1127ee26cf9bf774",
+      "row": {
+        "sourceIds": [
+          "src-uni-beijing-language-and-culture-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "cycle-2027-beijing-language-and-culture-university-international-foundation-foundation",
+        "programId": "program-beijing-language-and-culture-university-international-foundation-foundation",
+        "academicYear": "2027-2028",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-uni-beijing-language-and-culture-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "program-beijing-language-and-culture-university-international-foundation-foundation",
+        "slug": "beijing-language-and-culture-university-international-foundation-foundation",
+        "universityId": "uni-beijing-language-and-culture-university",
+        "name": {
+          "en": "International Foundation Program",
+          "zh": "国际预科项目",
+          "ru": "Международная подготовительная программа"
+        },
+        "degreeLevel": "foundation",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "To be confirmed"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://admission.blcu.edu.cn/",
+        "applyUrl": "https://admission.blcu.edu.cn/",
+        "languageRequirements": []
+      },
+      "canonicalProgramSha256": "28813b272dc93d34984d289c11f9efe5ae0077726ff3383bc8425049ef5864c1",
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-beijing-language-and-culture-university",
+              "src-blcu-university",
+              "src-blcu-iclt-2026"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-beijing-language-and-culture-university",
+            "slug": "beijing-language-and-culture-university",
+            "name": {
+              "en": "Beijing Language and Culture University",
+              "zh": "北京语言大学",
+              "ru": "Пекинский университет языка и культуры"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://www.blcu.edu.cn/",
+            "admissionsUrl": "https://admission.blcu.edu.cn/",
+            "summary": {
+              "en": "Beijing Language and Culture University is based in Beijing and is known for Chinese language education, linguistics and intercultural studies.",
+              "zh": "北京语言大学位于北京，以汉语教育、语言学与跨文化研究等领域见长。",
+              "ru": "Пекинский университет языка и культуры находится в городе Пекин; сильные направления: преподавание китайского языка, лингвистика и межкультурные исследования."
+            },
+            "featured": false
+          },
+          "sha256": "e2d9bddad74e30405b1ae7d41aff7157d53bd23b3c339ad4c2ba0ca4534d9cba"
+        }
+      ],
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-beijing-language-and-culture-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2026-10-01",
+            "status": "draft",
+            "id": "program-beijing-language-and-culture-university-international-foundation-foundation",
+            "slug": "beijing-language-and-culture-university-international-foundation-foundation",
+            "universityId": "uni-beijing-language-and-culture-university",
+            "name": {
+              "en": "International Foundation Program",
+              "zh": "国际预科项目",
+              "ru": "Международная подготовительная программа"
+            },
+            "degreeLevel": "foundation",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "To be confirmed"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://admission.blcu.edu.cn/",
+            "applyUrl": "https://admission.blcu.edu.cn/",
+            "languageRequirements": []
+          },
+          "sha256": "28813b272dc93d34984d289c11f9efe5ae0077726ff3383bc8425049ef5864c1"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-uni-beijing-language-and-culture-university",
+            "url": "https://admission.blcu.edu.cn/",
+            "title": "Official international information — Beijing Language and Culture University",
+            "publisher": "Beijing Language and Culture University",
+            "kind": "admissions",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-16"
+          },
+          "sha256": "9835a86d11346a9f7fb734c8bc8e20deb553a512b2d21011f3c4142129b3bfec"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-2027-beijing-language-and-culture-university-teaching-chinese-bachelor",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-language-and-culture-university",
+      "canonicalRecordSha256": "33655c9149f5aed537918b071105ca2105bc383ea72d2f1d56d6aa3d5e82f5e8",
+      "row": {
+        "sourceIds": [
+          "src-uni-beijing-language-and-culture-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "cycle-2027-beijing-language-and-culture-university-teaching-chinese-bachelor",
+        "programId": "program-beijing-language-and-culture-university-teaching-chinese-bachelor",
+        "academicYear": "2027-2028",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "source-blcu-map-undergraduate-2027-20261017",
+          "source-blcu-map-undergraduate-2027-catalogue-v2-20261017",
+          "source-blcu-map-undergraduate-entry-20261017",
+          "source-blcu-map-chinese-programmes-list-official-20261017",
+          "source-blcu-map-teaching-chinese-bachelor-profile-20261017",
+          "source-blcu-map-application-portal-20261017"
+        ],
+        "verifiedAt": "2026-10-18",
+        "reviewAfter": "2026-10-25",
+        "status": "verified",
+        "id": "program-beijing-language-and-culture-university-teaching-chinese-bachelor",
+        "slug": "beijing-language-and-culture-university-teaching-chinese-bachelor",
+        "universityId": "uni-beijing-language-and-culture-university",
+        "name": {
+          "en": "Teaching Chinese to Speakers of Other Languages",
+          "zh": "汉语国际教育",
+          "ru": "Преподавание китайского как иностранного"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://admission.blcu.edu.cn/2023/1219/c1250a2683/page.htm",
+        "applyUrl": "https://apply.blcu.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "HSK",
+            "minimum": "Level4, total score180 or above; valid CSCA results are separately required."
+          }
+        ],
+        "verificationScope": "facts",
+        "supplementaryDetails": {
+          "languagePolicy": {
+            "en": "Chinese-taught undergraduate route; HSK4≥180 is the application threshold.",
+            "zh": "中文授课本科项目；申请须达到HSK4级总分180分。"
+          },
+          "eligibility": [
+            {
+              "en": "High-school graduation or an equivalent/higher qualification; non-Chinese citizenship with a foreign ordinary passport.",
+              "zh": "具有高中毕业或同等以上学历，持外国普通护照的非中国籍公民。"
+            },
+            {
+              "en": "Age18–55. Applicants under18 require university consent, a notarized guardianship document and other required legal documents.",
+              "zh": "年龄18–55岁；未满18周岁须经学校同意，并提供监护人公证书等相关文件。"
+            },
+            {
+              "en": "Two groups must meet the additional nationality/residence requirements: (1) applicants born with foreign nationality and without Chinese nationality whose parent(s), one or both Chinese citizens, had settled abroad; (2) former residents of mainland China, Hong Kong, Macao or Taiwan who emigrated and acquired foreign nationality. They must have held a valid foreign passport or nationality certificate for at least 4 years and have actually resided abroad for at least 2 years within the last 4 years, counted up to April 30 of the admission year. At least 9 months of actual residence abroad in a year counts as one year, based on entry/exit stamps.",
+              "zh": "以下两类申请人须满足额外国籍与居住要求：①父母双方或一方为中国公民并定居外国、本人出生时即具有外国国籍且不具有中国国籍者；②祖国大陆（内地）、香港、澳门和台湾居民移民并获得外国国籍后，以国际学生身份申请本科者。须持有有效外国护照或国籍证明文件4年（含）以上，且最近4年（截至入学年度4月30日前）内在外国实际居住2年以上；一年中实际境外居住满9个月可按一年计算，以入境和出境签章为准。"
+            },
+            {
+              "en": "HSK4 with a total score of180 or above; valid CSCA results are required for all undergraduate applicants from autumn2026 onward.",
+              "zh": "HSK4级总分180分及以上；自2026年秋季起，所有本科申请人须提交有效CSCA成绩。"
+            }
+          ],
+          "applicationMaterials": [
+            {
+              "en": "Passport information page; high-school diploma and complete transcripts for every term, with notarized Chinese/English translations where needed. Prospective graduates submit an original pre-graduation certificate and must provide the final diploma before enrollment.",
+              "zh": "护照信息页；高中学历证明及所有学期完整成绩单，必要时提供中文或英文公证翻译件。应届生须提交预毕业证明原件，并于入学前补交正式毕业证。"
+            },
+            {
+              "en": "HSK certificate; valid CSCA results; a signed recommendation letter in Chinese/English with the recommender’s contact details.",
+              "zh": "HSK等级证书、有效CSCA成绩；中文或英文推荐信，推荐人亲笔签名并附有效联系方式。"
+            },
+            {
+              "en": "Pay the CNY800 application fee through the official online system. The 2027 catalogue states that it cannot be refunded for reasons not attributable to the university. Provide a guarantor’s valid ID and, for a foreign guarantor in China, a valid Chinese visa.",
+              "zh": "通过官方报名系统线上支付800元报名费；2027目录注明“非校方原因无法退还”。提交担保人有效证件，在华外籍担保人另需有效在华签证。"
+            },
+            {
+              "en": "Personal ID photo, a non-criminal-record certificate, and any further materials required by the chosen programme.",
+              "zh": "个人证件照、无犯罪记录，以及所报专业另行要求的其他材料。"
+            }
+          ],
+          "campus": {
+            "en": "Study takes place at the Hainan or Beijing campus according to the programme training plan; the specific arrangement follows the university’s published information. Years 1–2 use broad-category study emphasizing Chinese and general education; years 3–4 specialize in the chosen major.",
+            "zh": "根据相应培养方案在海南或北京校区就读，具体安排以学校公布信息为准。第1–2年实行大类培养，强化汉语能力并修读通识课程；第3–4年进入所选专业方向的分流培养。"
+          }
+        }
+      },
+      "canonicalProgramSha256": "547a1019ca7adf046097728128e32bef0bc7f64bcbb1a64aefc7829cbba9afbc",
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-beijing-language-and-culture-university",
+              "src-blcu-university",
+              "src-blcu-iclt-2026"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-beijing-language-and-culture-university",
+            "slug": "beijing-language-and-culture-university",
+            "name": {
+              "en": "Beijing Language and Culture University",
+              "zh": "北京语言大学",
+              "ru": "Пекинский университет языка и культуры"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://www.blcu.edu.cn/",
+            "admissionsUrl": "https://admission.blcu.edu.cn/",
+            "summary": {
+              "en": "Beijing Language and Culture University is based in Beijing and is known for Chinese language education, linguistics and intercultural studies.",
+              "zh": "北京语言大学位于北京，以汉语教育、语言学与跨文化研究等领域见长。",
+              "ru": "Пекинский университет языка и культуры находится в городе Пекин; сильные направления: преподавание китайского языка, лингвистика и межкультурные исследования."
+            },
+            "featured": false
+          },
+          "sha256": "e2d9bddad74e30405b1ae7d41aff7157d53bd23b3c339ad4c2ba0ca4534d9cba"
+        }
+      ],
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "source-blcu-map-undergraduate-2027-20261017",
+              "source-blcu-map-undergraduate-2027-catalogue-v2-20261017",
+              "source-blcu-map-undergraduate-entry-20261017",
+              "source-blcu-map-chinese-programmes-list-official-20261017",
+              "source-blcu-map-teaching-chinese-bachelor-profile-20261017",
+              "source-blcu-map-application-portal-20261017"
+            ],
+            "verifiedAt": "2026-10-18",
+            "reviewAfter": "2026-10-25",
+            "status": "verified",
+            "id": "program-beijing-language-and-culture-university-teaching-chinese-bachelor",
+            "slug": "beijing-language-and-culture-university-teaching-chinese-bachelor",
+            "universityId": "uni-beijing-language-and-culture-university",
+            "name": {
+              "en": "Teaching Chinese to Speakers of Other Languages",
+              "zh": "汉语国际教育",
+              "ru": "Преподавание китайского как иностранного"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://admission.blcu.edu.cn/2023/1219/c1250a2683/page.htm",
+            "applyUrl": "https://apply.blcu.edu.cn/",
+            "languageRequirements": [
+              {
+                "test": "HSK",
+                "minimum": "Level4, total score180 or above; valid CSCA results are separately required."
+              }
+            ],
+            "verificationScope": "facts",
+            "supplementaryDetails": {
+              "languagePolicy": {
+                "en": "Chinese-taught undergraduate route; HSK4≥180 is the application threshold.",
+                "zh": "中文授课本科项目；申请须达到HSK4级总分180分。"
+              },
+              "eligibility": [
+                {
+                  "en": "High-school graduation or an equivalent/higher qualification; non-Chinese citizenship with a foreign ordinary passport.",
+                  "zh": "具有高中毕业或同等以上学历，持外国普通护照的非中国籍公民。"
+                },
+                {
+                  "en": "Age18–55. Applicants under18 require university consent, a notarized guardianship document and other required legal documents.",
+                  "zh": "年龄18–55岁；未满18周岁须经学校同意，并提供监护人公证书等相关文件。"
+                },
+                {
+                  "en": "Two groups must meet the additional nationality/residence requirements: (1) applicants born with foreign nationality and without Chinese nationality whose parent(s), one or both Chinese citizens, had settled abroad; (2) former residents of mainland China, Hong Kong, Macao or Taiwan who emigrated and acquired foreign nationality. They must have held a valid foreign passport or nationality certificate for at least 4 years and have actually resided abroad for at least 2 years within the last 4 years, counted up to April 30 of the admission year. At least 9 months of actual residence abroad in a year counts as one year, based on entry/exit stamps.",
+                  "zh": "以下两类申请人须满足额外国籍与居住要求：①父母双方或一方为中国公民并定居外国、本人出生时即具有外国国籍且不具有中国国籍者；②祖国大陆（内地）、香港、澳门和台湾居民移民并获得外国国籍后，以国际学生身份申请本科者。须持有有效外国护照或国籍证明文件4年（含）以上，且最近4年（截至入学年度4月30日前）内在外国实际居住2年以上；一年中实际境外居住满9个月可按一年计算，以入境和出境签章为准。"
+                },
+                {
+                  "en": "HSK4 with a total score of180 or above; valid CSCA results are required for all undergraduate applicants from autumn2026 onward.",
+                  "zh": "HSK4级总分180分及以上；自2026年秋季起，所有本科申请人须提交有效CSCA成绩。"
+                }
+              ],
+              "applicationMaterials": [
+                {
+                  "en": "Passport information page; high-school diploma and complete transcripts for every term, with notarized Chinese/English translations where needed. Prospective graduates submit an original pre-graduation certificate and must provide the final diploma before enrollment.",
+                  "zh": "护照信息页；高中学历证明及所有学期完整成绩单，必要时提供中文或英文公证翻译件。应届生须提交预毕业证明原件，并于入学前补交正式毕业证。"
+                },
+                {
+                  "en": "HSK certificate; valid CSCA results; a signed recommendation letter in Chinese/English with the recommender’s contact details.",
+                  "zh": "HSK等级证书、有效CSCA成绩；中文或英文推荐信，推荐人亲笔签名并附有效联系方式。"
+                },
+                {
+                  "en": "Pay the CNY800 application fee through the official online system. The 2027 catalogue states that it cannot be refunded for reasons not attributable to the university. Provide a guarantor’s valid ID and, for a foreign guarantor in China, a valid Chinese visa.",
+                  "zh": "通过官方报名系统线上支付800元报名费；2027目录注明“非校方原因无法退还”。提交担保人有效证件，在华外籍担保人另需有效在华签证。"
+                },
+                {
+                  "en": "Personal ID photo, a non-criminal-record certificate, and any further materials required by the chosen programme.",
+                  "zh": "个人证件照、无犯罪记录，以及所报专业另行要求的其他材料。"
+                }
+              ],
+              "campus": {
+                "en": "Study takes place at the Hainan or Beijing campus according to the programme training plan; the specific arrangement follows the university’s published information. Years 1–2 use broad-category study emphasizing Chinese and general education; years 3–4 specialize in the chosen major.",
+                "zh": "根据相应培养方案在海南或北京校区就读，具体安排以学校公布信息为准。第1–2年实行大类培养，强化汉语能力并修读通识课程；第3–4年进入所选专业方向的分流培养。"
+              }
+            }
+          },
+          "sha256": "547a1019ca7adf046097728128e32bef0bc7f64bcbb1a64aefc7829cbba9afbc"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-uni-beijing-language-and-culture-university",
+            "url": "https://admission.blcu.edu.cn/",
+            "title": "Official international information — Beijing Language and Culture University",
+            "publisher": "Beijing Language and Culture University",
+            "kind": "admissions",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-16"
+          },
+          "sha256": "9835a86d11346a9f7fb734c8bc8e20deb553a512b2d21011f3c4142129b3bfec"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-2027-beijing-language-and-culture-university-translation-master",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-language-and-culture-university",
+      "canonicalRecordSha256": "11fc2a6ad30cb0a7edfab70672100a376bdada3e53b58fe5db31959f2a42a28c",
+      "row": {
+        "sourceIds": [
+          "src-uni-beijing-language-and-culture-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "cycle-2027-beijing-language-and-culture-university-translation-master",
+        "programId": "program-beijing-language-and-culture-university-translation-master",
+        "academicYear": "2027-2028",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-uni-beijing-language-and-culture-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "program-beijing-language-and-culture-university-translation-master",
+        "slug": "beijing-language-and-culture-university-translation-master",
+        "universityId": "uni-beijing-language-and-culture-university",
+        "name": {
+          "en": "Translation and Interpreting",
+          "zh": "翻译",
+          "ru": "Перевод и устный перевод"
+        },
+        "degreeLevel": "master",
+        "discipline": "humanities",
+        "teachingLanguages": [
+          "To be confirmed"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://admission.blcu.edu.cn/",
+        "applyUrl": "https://admission.blcu.edu.cn/",
+        "languageRequirements": []
+      },
+      "canonicalProgramSha256": "03be3b2e3e2734703c7171bb18dc494d6e71f956c55d06de354f8731a26926e8",
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-beijing-language-and-culture-university",
+              "src-blcu-university",
+              "src-blcu-iclt-2026"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2027-01-16",
+            "status": "verified",
+            "id": "uni-beijing-language-and-culture-university",
+            "slug": "beijing-language-and-culture-university",
+            "name": {
+              "en": "Beijing Language and Culture University",
+              "zh": "北京语言大学",
+              "ru": "Пекинский университет языка и культуры"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://www.blcu.edu.cn/",
+            "admissionsUrl": "https://admission.blcu.edu.cn/",
+            "summary": {
+              "en": "Beijing Language and Culture University is based in Beijing and is known for Chinese language education, linguistics and intercultural studies.",
+              "zh": "北京语言大学位于北京，以汉语教育、语言学与跨文化研究等领域见长。",
+              "ru": "Пекинский университет языка и культуры находится в городе Пекин; сильные направления: преподавание китайского языка, лингвистика и межкультурные исследования."
+            },
+            "featured": false
+          },
+          "sha256": "e2d9bddad74e30405b1ae7d41aff7157d53bd23b3c339ad4c2ba0ca4534d9cba"
+        }
+      ],
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-uni-beijing-language-and-culture-university"
+            ],
+            "verifiedAt": "2026-07-16",
+            "reviewAfter": "2026-10-01",
+            "status": "draft",
+            "id": "program-beijing-language-and-culture-university-translation-master",
+            "slug": "beijing-language-and-culture-university-translation-master",
+            "universityId": "uni-beijing-language-and-culture-university",
+            "name": {
+              "en": "Translation and Interpreting",
+              "zh": "翻译",
+              "ru": "Перевод и устный перевод"
+            },
+            "degreeLevel": "master",
+            "discipline": "humanities",
+            "teachingLanguages": [
+              "To be confirmed"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://admission.blcu.edu.cn/",
+            "applyUrl": "https://admission.blcu.edu.cn/",
+            "languageRequirements": []
+          },
+          "sha256": "03be3b2e3e2734703c7171bb18dc494d6e71f956c55d06de354f8731a26926e8"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-uni-beijing-language-and-culture-university",
+            "url": "https://admission.blcu.edu.cn/",
+            "title": "Official international information — Beijing Language and Culture University",
+            "publisher": "Beijing Language and Culture University",
+            "kind": "admissions",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-16"
+          },
+          "sha256": "9835a86d11346a9f7fb734c8bc8e20deb553a512b2d21011f3c4142129b3bfec"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-wave7-bipt-beijing-government-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-beijing-institute-of-petrochemical-technology",
+      "canonicalRecordSha256": "e1e043a58a743020de10c572db99279edcaea75d77e4b174835d968a8479b653",
+      "row": {
+        "id": "sch-gap-wave7-bipt-beijing-government-scholarship",
+        "slug": "gap-wave7-bipt-beijing-government-scholarship",
+        "name": {
+          "en": "BIPT Beijing Government Scholarship for International Students",
+          "zh": "北京石油化工学院北京来华留学生政府奖学金",
+          "ru": "Пекинская правительственная стипендия BIPT для иностранных студентов"
+        },
+        "providerType": "city",
+        "universityIds": [
+          "uni-beijing-institute-of-petrochemical-technology"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+        "summary": {
+          "en": "BIPT's official 2026 guide publishes three award tiers for international students and requires annual application. Exact cash amounts and the next scholarship-specific deadline are not announced.",
+          "zh": "北石化2026官方简章公布面向来华留学生的A、B、C三档资助，并要求逐年申请；具体现金标准和下一轮奖学金专项截止日期未公布。",
+          "ru": "Официальное руководство BIPT 2026 устанавливает три уровня поддержки A, B и C и ежегодную подачу. Точные суммы и следующий отдельный срок не объявлены."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave7-bipt-beijing-government-scholarship"
+        ],
+        "verifiedAt": "2026-08-01",
+        "reviewAfter": "2026-08-31",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "universityPins": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-university-beijing-institute-of-petrochemical-technology"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2027-01-30",
+            "status": "verified",
+            "id": "uni-beijing-institute-of-petrochemical-technology",
+            "slug": "beijing-institute-of-petrochemical-technology",
+            "name": {
+              "en": "Beijing Institute of Petrochemical Technology",
+              "zh": "北京石油化工学院",
+              "ru": "Пекинский институт нефтехимической технологии"
+            },
+            "cityId": "city-beijing",
+            "region": "north",
+            "officialUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "admissionsUrl": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "summary": {
+              "en": "The official international-exchange source publishes programs for international applicants and scholarship references.",
+              "zh": "学校国际交流官方来源公布了面向国际申请人的项目和奖学金信息。",
+              "ru": "Официальный источник международного обмена публикует программы для иностранных абитуриентов и сведения о стипендиях."
+            },
+            "featured": false
+          },
+          "sha256": "224a5d74ee58b4580df4bf867d2c87d4929e207ad0ffabc5b3ab9981f28d1530"
+        }
+      ],
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave7-bipt-beijing-government-scholarship",
+            "url": "https://www.bipt.edu.cn/pub/gjjl/gg/6ae59c2994f14fec8828e3cc0ae496c4.htm",
+            "title": "Beijing Institute of Petrochemical Technology 2026 International Student Admission Guide",
+            "publisher": "beijing-institute-of-petrochemical-technology",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-01"
+          },
+          "sha256": "5329b18941967462b45ec3f6bf5b2fdfe83e93f9f31aecebeeb2328f4a4c7b2a"
+        }
+      ]
+    }
+  ]
+}

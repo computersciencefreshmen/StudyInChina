@@ -1,0 +1,1283 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-016-20261019",
+  "selectedAt": "2026-10-19T05:40:12.594Z",
+  "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v3.json",
+  "queueSha256": "c53dd8358ec2667e6390b2b8b085e50b408854f55c2b20dc8da0f682f3151e6b",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "universityIds": [
+    "uni-china-academy-of-art",
+    "uni-china-conservatory-of-music",
+    "uni-china-foreign-affairs-university",
+    "uni-china-jiliang-university",
+    "uni-china-pharmaceutical-university",
+    "uni-china-university-of-geosciences-beijing",
+    "uni-china-university-of-geosciences-wuhan"
+  ],
+  "records": [
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-mve-ecma-caa-art-studies-doctorate-2026-2027-autumn-fee-reference",
+      "universityId": "uni-china-academy-of-art",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-mve-ecma-caa-art-studies-doctorate"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-08-12",
+        "status": "stale",
+        "id": "cycle-gap-mve-ecma-caa-art-studies-doctorate-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-mve-ecma-caa-art-studies-doctorate",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 68000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-mve-ecma-caa-art-studies-doctorate"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-09-04",
+        "status": "stale",
+        "id": "prog-gap-mve-ecma-caa-art-studies-doctorate",
+        "slug": "gap-mve-ecma-caa-art-studies-doctorate-doctorate",
+        "universityId": "uni-china-academy-of-art",
+        "name": {
+          "en": "Art Studies",
+          "zh": "艺术学",
+          "ru": "Искусствоведение"
+        },
+        "degreeLevel": "doctorate",
+        "discipline": "art-design",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 36,
+        "programUrl": "https://admission.caa.edu.cn/en/Admissions/CAA_2026_Admissions_Guide_for_International_Stud.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "54023245318b2736a26b5a697026843b24b2e5039de4438699a0ce969acfc522",
+      "canonicalProgramSha256": "4bb56963c2a5b01cdc16db3c71df28f76c9ea903db6e8a854d5e580bc18fd0f6",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-mve-ecma-caa-art-studies-doctorate",
+            "url": "https://admission.caa.edu.cn/en/Admissions/CAA_2026_Admissions_Guide_for_International_Stud.htm",
+            "title": "China Academy of Art 2026 English-taught International Doctoral Admissions",
+            "publisher": "china-academy-of-art",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "sha256": "5f98e9ba5c3585ba2dfda210b779dd91a643cdc860c4e84653a60c42e9d618dc"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-sparse-depth-0808-ccmusic-composition-bachelor-2026-2027-other-fee-reference",
+      "universityId": "uni-china-conservatory-of-music",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-sparse-depth-0808-ccmusic-composition-bachelor"
+        ],
+        "verifiedAt": "2026-08-08",
+        "reviewAfter": "2026-08-15",
+        "status": "stale",
+        "id": "cycle-gap-sparse-depth-0808-ccmusic-composition-bachelor-2026-2027-other-fee-reference",
+        "programId": "prog-gap-sparse-depth-0808-ccmusic-composition-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 32000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-sparse-depth-0808-ccmusic-composition-bachelor"
+        ],
+        "verifiedAt": "2026-08-08",
+        "reviewAfter": "2026-09-07",
+        "status": "stale",
+        "id": "prog-gap-sparse-depth-0808-ccmusic-composition-bachelor",
+        "slug": "gap-sparse-depth-0808-ccmusic-composition-bachelor-bachelor",
+        "universityId": "uni-china-conservatory-of-music",
+        "name": {
+          "en": "Composition and Composition Theory",
+          "zh": "作曲与作曲技术理论",
+          "ru": "Композиция и теория композиции"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "art-design",
+        "teachingLanguages": [],
+        "durationMonths": 60,
+        "programUrl": "https://gjjl.ccmusic.edu.cn/docs/2026-01/143de8ad89dd4daf90d199deb54228b0.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "99fa3925f0fbb0ba637dc3a6679ed84cb760e0e6a3ff2c329faa23ee40997285",
+      "canonicalProgramSha256": "7f12f6c7e2739ccc50974eb456a55319675f4d4fbb817b03da195e623733f4f5",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-sparse-depth-0808-ccmusic-composition-bachelor",
+            "url": "https://gjjl.ccmusic.edu.cn/docs/2026-01/143de8ad89dd4daf90d199deb54228b0.pdf",
+            "title": "China Conservatory of Music 2026 International Undergraduate Admission Guide",
+            "publisher": "china-conservatory-of-music",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-08"
+          },
+          "sha256": "4a96f47b987394e33395159240fb336e3c314dea5fd220dd0c748dd5476db4be"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-sparse-depth-0808-ccmusic-conducting-bachelor-2026-2027-other-fee-reference",
+      "universityId": "uni-china-conservatory-of-music",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-sparse-depth-0808-ccmusic-conducting-bachelor"
+        ],
+        "verifiedAt": "2026-08-08",
+        "reviewAfter": "2026-08-15",
+        "status": "stale",
+        "id": "cycle-gap-sparse-depth-0808-ccmusic-conducting-bachelor-2026-2027-other-fee-reference",
+        "programId": "prog-gap-sparse-depth-0808-ccmusic-conducting-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 32000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-sparse-depth-0808-ccmusic-conducting-bachelor"
+        ],
+        "verifiedAt": "2026-08-08",
+        "reviewAfter": "2026-09-07",
+        "status": "stale",
+        "id": "prog-gap-sparse-depth-0808-ccmusic-conducting-bachelor",
+        "slug": "gap-sparse-depth-0808-ccmusic-conducting-bachelor-bachelor",
+        "universityId": "uni-china-conservatory-of-music",
+        "name": {
+          "en": "Music Performance (Conducting)",
+          "zh": "音乐表演（指挥）",
+          "ru": "Музыкальное исполнительство (дирижирование)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "art-design",
+        "teachingLanguages": [],
+        "durationMonths": 60,
+        "programUrl": "https://gjjl.ccmusic.edu.cn/docs/2026-01/143de8ad89dd4daf90d199deb54228b0.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "45b1fed90d9b86dc4b63506f3f7a6cb7bdee72d7439063b501bd40441d48cd7c",
+      "canonicalProgramSha256": "1043b08ab862ac094225c721ecf6fb80f3574263ddc2b919f972a8a1da8dbde7",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-sparse-depth-0808-ccmusic-conducting-bachelor",
+            "url": "https://gjjl.ccmusic.edu.cn/docs/2026-01/143de8ad89dd4daf90d199deb54228b0.pdf",
+            "title": "China Conservatory of Music 2026 International Undergraduate Admission Guide",
+            "publisher": "china-conservatory-of-music",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-08"
+          },
+          "sha256": "a77708a31630bc5e24bb0e0292e91c10ee9f6c1264f8ac6e0533131231f8392a"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-sparse-depth-0808-ccmusic-music-education-vocal-bachelor-2026-2027-other-fee-reference",
+      "universityId": "uni-china-conservatory-of-music",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-sparse-depth-0808-ccmusic-music-education-vocal-bachelor"
+        ],
+        "verifiedAt": "2026-08-08",
+        "reviewAfter": "2026-08-15",
+        "status": "stale",
+        "id": "cycle-gap-sparse-depth-0808-ccmusic-music-education-vocal-bachelor-2026-2027-other-fee-reference",
+        "programId": "prog-gap-sparse-depth-0808-ccmusic-music-education-vocal-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 32000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-sparse-depth-0808-ccmusic-music-education-vocal-bachelor"
+        ],
+        "verifiedAt": "2026-08-08",
+        "reviewAfter": "2026-09-07",
+        "status": "stale",
+        "id": "prog-gap-sparse-depth-0808-ccmusic-music-education-vocal-bachelor",
+        "slug": "gap-sparse-depth-0808-ccmusic-music-education-vocal-bachelor-bachelor",
+        "universityId": "uni-china-conservatory-of-music",
+        "name": {
+          "en": "Music Education (Vocal Specialty)",
+          "zh": "音乐教育（声乐特长）",
+          "ru": "Музыкальное образование (вокальная специализация)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "humanities",
+        "teachingLanguages": [],
+        "durationMonths": 48,
+        "programUrl": "https://gjjl.ccmusic.edu.cn/docs/2026-01/143de8ad89dd4daf90d199deb54228b0.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "5eef4078d47056b88d4f708023dfc421321135152eea68eff6130a7a0e1fa481",
+      "canonicalProgramSha256": "a496efbf78afa0f086312da7eeef1c16b0f8223609239df03b26befe478aae05",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-sparse-depth-0808-ccmusic-music-education-vocal-bachelor",
+            "url": "https://gjjl.ccmusic.edu.cn/docs/2026-01/143de8ad89dd4daf90d199deb54228b0.pdf",
+            "title": "China Conservatory of Music 2026 International Undergraduate Admission Guide",
+            "publisher": "china-conservatory-of-music",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-08"
+          },
+          "sha256": "97cd1efa43281491c92112ec24e3f1ad23794869cb14c686bed43f413d120e71"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-sch-mew-nss-cfau-beijing-government",
+      "universityId": "uni-china-foreign-affairs-university",
+      "row": {
+        "id": "sch-gap-sch-mew-nss-cfau-beijing-government",
+        "slug": "gap-sch-mew-nss-cfau-beijing-government",
+        "name": {
+          "en": "Beijing Government Scholarship at CFAU",
+          "zh": "外交学院北京市外国留学生奖学金",
+          "ru": "Пекинская правительственная стипендия в Китайском университете иностранных дел"
+        },
+        "providerType": "city",
+        "universityIds": [
+          "uni-china-foreign-affairs-university"
+        ],
+        "programIds": [
+          "prog-gap-prog-mew-nss-cfau-international-law-bachelor",
+          "prog-gap-prog-mew-nss-cfau-international-economics-trade-bachelor"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://iss.cfau.edu.cn/col4185/col4273/24d1b5fa0831489bbca67ee17d5398c6.htm",
+        "summary": {
+          "en": "The official CFAU page confirms the 2026 Beijing Government Scholarship for international degree applicants, covering tuition and accommodation under the published award.",
+          "zh": "外交学院官方页面确认2026年北京市外国留学生奖学金面向国际学历生，并按公布档位资助学费和住宿。",
+          "ru": "Официальная страница CFAU подтверждает пекинскую правительственную стипендию 2026 года для иностранных студентов с поддержкой обучения и проживания."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-mew-nss-cfau-beijing-government"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "f9065cd3a00313803f8558f06e954520d28c0d9721db746eaf2ec2e73abb8579",
+      "canonicalProgramSha256": null,
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-mew-nss-cfau-beijing-government",
+            "url": "https://iss.cfau.edu.cn/col4185/col4273/24d1b5fa0831489bbca67ee17d5398c6.htm",
+            "title": "外交学院2026年北京市外国留学生奖学金",
+            "publisher": "china-foreign-affairs-university",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "8e722b754cd64a387cbdda1f1840b47f3e55bdf3ba0a55c8c22a4cb4cf9bd759"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-remaining-cjlu-b-business-administration-en-2026-2027-other",
+      "universityId": "uni-china-jiliang-university",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-remaining-cjlu-b-business-administration-en",
+          "src-gap-program-remaining-cjlu-b-business-administration-en-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-remaining-cjlu-b-business-administration-en-2026-2027-other",
+        "programId": "prog-gap-remaining-cjlu-b-business-administration-en",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official program plan is explicitly for international undergraduates, identifies Business Administration as a four-year English-medium bachelor's program, and states the awarded degree. CJLU's official admissions page provides the individual international-student online application system.",
+          "zh": "The official program plan is explicitly for international undergraduates, identifies Business Administration as a four-year English-medium bachelor's program, and states the awarded degree. CJLU's official admissions page provides the individual international-student online application system."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-remaining-cjlu-b-business-administration-en",
+          "src-gap-program-remaining-cjlu-b-business-administration-en-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-remaining-cjlu-b-business-administration-en",
+        "slug": "gap-remaining-cjlu-b-business-administration-en-bachelor",
+        "universityId": "uni-china-jiliang-university",
+        "name": {
+          "en": "Business Administration",
+          "zh": "工商管理",
+          "ru": "Управление бизнесом"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "business",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://english.cjlu.edu.cn/info/1023/3080.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "5dccd9b6d56332b3f25fcdfae0ce8bf078d323d2652b669e8fff3ae3dc8a4b89",
+      "canonicalProgramSha256": "ada10429e1001582efda3f15b344133440ef4744e6f119318f53caaa971c0f2f",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-remaining-cjlu-b-business-administration-en",
+            "url": "https://english.cjlu.edu.cn/info/1023/3080.htm",
+            "title": "Education Plan of Business Administration for International Undergraduates",
+            "publisher": "china-jiliang-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "6d7c9634cc482beb842a5e352ad8e37d99eb773fc7dc950263ce841f03b49243"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-remaining-cjlu-b-business-administration-en-support-1",
+            "url": "https://english.cjlu.edu.cn/info/1033/3220.htm",
+            "title": "Supporting official source",
+            "publisher": "china-jiliang-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "24ce180dd5fd9d85b1673a301b0ba92276fd4a0117e985b222d8bdcd2e05c1e3"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-mve-ecs-cpu-csc-silk-road-2026",
+      "universityId": "uni-china-pharmaceutical-university",
+      "row": {
+        "id": "sch-gap-mve-ecs-cpu-csc-silk-road-2026",
+        "slug": "gap-mve-ecs-cpu-csc-silk-road-2026",
+        "name": {
+          "en": "CPU 2026 Chinese Government Scholarship — Silk Road Program",
+          "zh": "中国药科大学2026年中国政府奖学金丝绸之路项目",
+          "ru": "Стипендия Правительства Китая CPU — программа «Шёлковый путь» 2026"
+        },
+        "providerType": "csc",
+        "universityIds": [
+          "uni-china-pharmaceutical-university"
+        ],
+        "programIds": [
+          "prog-gap-mve-ecs-cpu-pharmaceutical-engineering-master",
+          "prog-gap-mve-ecs-cpu-pharmaceutics-master",
+          "prog-gap-mve-ecs-cpu-pharmacology-doctorate"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://international.cpu.edu.cn/9f/6e/c362a237422/page.htm",
+        "summary": {
+          "en": "CPU's current official notice publishes eligible categories, full coverage, monthly stipends and the closed May 17 deadline.",
+          "zh": "中国药科大学当期官方通知公布适用层次、全额资助内容、月生活费及已截止的5月17日日期。",
+          "ru": "Текущее официальное объявление CPU публикует категории, полное покрытие, ежемесячные выплаты и закрытый срок 17 мая."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-mve-ecs-cpu-csc-silk-road-2026"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "b8e5cb3a72cc299046cb705e92bbce8961627e8121f0dc76b5f18430044e46f4",
+      "canonicalProgramSha256": null,
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-mve-ecs-cpu-csc-silk-road-2026",
+            "url": "https://international.cpu.edu.cn/9f/6e/c362a237422/page.htm",
+            "title": "2026 CPU Chinese Government Scholarship Silk Road Program",
+            "publisher": "china-pharmaceutical-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "a6c5f0f9e24da80ad33d5561a76b75f52302faf89ab4ee2126b47081c4f22444"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave3-depth-cugb-environmental-science-engineering-doctorate-english-2026-2027-autumn-fee-reference",
+      "universityId": "uni-china-university-of-geosciences-beijing",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave3-depth-cugb-environmental-science-engineering-doctorate-english",
+          "src-gap-program-wave3-depth-cugb-environmental-science-engineering-doctorate-english-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave3-depth-cugb-environmental-science-engineering-doctorate-english-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave3-depth-cugb-environmental-science-engineering-doctorate-english",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 35000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave3-depth-cugb-environmental-science-engineering-doctorate-english",
+          "src-gap-program-wave3-depth-cugb-environmental-science-engineering-doctorate-english-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave3-depth-cugb-environmental-science-engineering-doctorate-english",
+        "slug": "gap-wave3-depth-cugb-environmental-science-engineering-doctorate-english-doctorate",
+        "universityId": "uni-china-university-of-geosciences-beijing",
+        "name": {
+          "en": "Environmental Science and Engineering (English-taught Doctorate)",
+          "zh": "环境科学与工程（英文授课博士）",
+          "ru": "Экологические науки и инженерия (докторантура на английском)"
+        },
+        "degreeLevel": "doctorate",
+        "discipline": "other",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+        "applyUrl": "https://cugb.17gz.org/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "e669b0a1fe39667b0e4d1fa59a7e8cfa1cb7735c2587857ce5c4e92dd3fb17d0",
+      "canonicalProgramSha256": "8ab5fb2eaf50a846e37deabbf660d3e304d913f6db80f646cdeab8a60c32b419",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave3-depth-cugb-environmental-science-engineering-doctorate-english",
+            "url": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+            "title": "CUGB Admission Guide for International Students 2026",
+            "publisher": "china-university-of-geosciences-beijing",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "7b3b8e21dbc2b8f3ba3c96372d6b10cf178c0e5d246bf70fa123fc207b4ceafd"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-wave3-depth-cugb-environmental-science-engineering-doctorate-english-support-1",
+            "url": "https://bm.cugb.edu.cn/gjhzyjl-en/study-in-cugb/admission/",
+            "title": "CUGB Official International Admissions Portal",
+            "publisher": "china-university-of-geosciences-beijing",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "d5f8b620fc8c1a5b255e6e69a81038d7e079b991fdf82c8490e5e21289684228"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-wave3-depth-cugb-csc-type-b-2026",
+      "universityId": "uni-china-university-of-geosciences-beijing",
+      "row": {
+        "id": "sch-gap-wave3-depth-cugb-csc-type-b-2026",
+        "slug": "gap-wave3-depth-cugb-csc-type-b-2026",
+        "name": {
+          "en": "Chinese Government Scholarship Type B at CUGB 2026",
+          "zh": "中国地质大学（北京）2026年中国政府奖学金Type B",
+          "ru": "Стипендия правительства Китая Type B в CUGB 2026"
+        },
+        "providerType": "csc",
+        "universityIds": [
+          "uni-china-university-of-geosciences-beijing"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "unknown",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+        "summary": {
+          "en": "CUGB's official guide itemizes fee waivers, degree-level monthly stipends, outpatient care and insurance for Type B. The 15 March 2026 deadline is closed.",
+          "zh": "中国地质大学（北京）官方简章逐项列明Type B的费用减免、按学历层次发放的月生活费、门诊服务和保险；2026年3月15日截止日已过。",
+          "ru": "Официальное руководство CUGB перечисляет освобождение от сборов, ежемесячные выплаты по уровню, амбулаторную помощь и страховку. Срок 15 марта 2026 года истёк."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave3-depth-cugb-csc-type-b-2026",
+          "src-gap-scholarship-wave3-depth-cugb-csc-type-b-2026-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "e671458545950b137e97a354d0d005cbbac3fafa985179da2744510ed798df64",
+      "canonicalProgramSha256": null,
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave3-depth-cugb-csc-type-b-2026",
+            "url": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+            "title": "CUGB Admission Guide for International Students 2026",
+            "publisher": "china-university-of-geosciences-beijing",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "c9ca1094c6ade41e94b22f930038be315a15a85d010c4bd37bc48d867dac38c5"
+        },
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave3-depth-cugb-csc-type-b-2026-support-1",
+            "url": "https://bm.cugb.edu.cn/gjhzyjl-en/study-in-cugb/admission/",
+            "title": "CUGB Official International Admissions Portal",
+            "publisher": "china-university-of-geosciences-beijing",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "b93bc64aac05ee4164434af434983b2d0c4efddbb5faa5bcec781e614f4a706f"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave3-depth-cugb-computer-science-bachelor-2026-2027-autumn",
+      "universityId": "uni-china-university-of-geosciences-beijing",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave3-depth-cugb-computer-science-bachelor",
+          "src-gap-program-wave3-depth-cugb-computer-science-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave3-depth-cugb-computer-science-bachelor-2026-2027-autumn",
+        "programId": "prog-gap-wave3-depth-cugb-computer-science-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-06-30",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official 2026 guide lists Computer Science and Technology in the Chinese-taught international bachelor table and gives the bachelor duration as four years. Only a degree-wide tuition range is published, so the exact amount remains unannounced.",
+          "zh": "2026官方简章在中文授课国际本科表中列出计算机科学与技术，并明确本科学制4年；仅公布学历层级学费区间，专业精确金额未公布。",
+          "ru": "Официальное руководство 2026 включает компьютерные науки и технологии в китайский список международного бакалавриата и указывает 4 года. Точная стоимость специальности не опубликована, есть только общий диапазон."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave3-depth-cugb-computer-science-bachelor",
+          "src-gap-program-wave3-depth-cugb-computer-science-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave3-depth-cugb-computer-science-bachelor",
+        "slug": "gap-wave3-depth-cugb-computer-science-bachelor-bachelor",
+        "universityId": "uni-china-university-of-geosciences-beijing",
+        "name": {
+          "en": "Computer Science and Technology (Bachelor)",
+          "zh": "计算机科学与技术（本科）",
+          "ru": "Компьютерные науки и технологии (бакалавриат)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+        "applyUrl": "https://cugb.17gz.org/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "cb083d8391208202f2f934feb63ac02022797c62da5d57a1349dbf120992701d",
+      "canonicalProgramSha256": "cbbd30d8e2c8b4288c37e3225c89557fd3718dc9cdc06e500d1ce612f8b5e1a6",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave3-depth-cugb-computer-science-bachelor",
+            "url": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+            "title": "CUGB Admission Guide for International Students 2026",
+            "publisher": "china-university-of-geosciences-beijing",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "f90fe19431015b0ce0f4edefa800b8ccc20aa9c0be81e03d5ffbe4a103f43189"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-wave3-depth-cugb-computer-science-bachelor-support-1",
+            "url": "https://bm.cugb.edu.cn/gjhzyjl-en/study-in-cugb/admission/",
+            "title": "CUGB Official International Admissions Portal",
+            "publisher": "china-university-of-geosciences-beijing",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "82391ff4ce962ce80e5557208f1b406302f89c07ef6da062410a9a3ca281bf3f"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave3-depth-cugb-geology-bachelor-2026-2027-autumn",
+      "universityId": "uni-china-university-of-geosciences-beijing",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave3-depth-cugb-geology-bachelor",
+          "src-gap-program-wave3-depth-cugb-geology-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave3-depth-cugb-geology-bachelor-2026-2027-autumn",
+        "programId": "prog-gap-wave3-depth-cugb-geology-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-06-30",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "CUGB's official 2026 guide lists Geology among Chinese-taught international bachelor majors and states a four-year duration. It publishes only a bachelor-wide tuition range of RMB 26,000–39,000, so no major-specific amount is exposed. The deadline was 30 June.",
+          "zh": "中国地质大学（北京）2026官方简章将地质学列入中文授课国际本科专业并明确学制4年。简章仅公布本科统一区间26000–39000元，故不展示专业精确学费；截止日为6月30日。",
+          "ru": "Официальное руководство CUGB 2026 включает геологию в китайские программы бакалавриата и указывает срок 4 года. Опубликован лишь общий диапазон 26 000–39 000 юаней, поэтому точная сумма не показывается. Срок — 30 июня."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave3-depth-cugb-geology-bachelor",
+          "src-gap-program-wave3-depth-cugb-geology-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave3-depth-cugb-geology-bachelor",
+        "slug": "gap-wave3-depth-cugb-geology-bachelor-bachelor",
+        "universityId": "uni-china-university-of-geosciences-beijing",
+        "name": {
+          "en": "Geology (Bachelor)",
+          "zh": "地质学（本科）",
+          "ru": "Геология (бакалавриат)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "other",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+        "applyUrl": "https://cugb.17gz.org/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "52916bdb1d28a5c29bced143442c8847fea2e4cfc9465639425c051a75360f8e",
+      "canonicalProgramSha256": "efc58c10a7b4878f3393b7ba158788f812f0710881f3b90e5b74755da5503b34",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave3-depth-cugb-geology-bachelor",
+            "url": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+            "title": "CUGB Admission Guide for International Students 2026",
+            "publisher": "china-university-of-geosciences-beijing",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "719c094b2d3200871a5ad384ef2e64f46d1cc3b48c647a546a9c50ea26ec77ab"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-wave3-depth-cugb-geology-bachelor-support-1",
+            "url": "https://bm.cugb.edu.cn/gjhzyjl-en/study-in-cugb/admission/",
+            "title": "CUGB Official International Admissions Portal",
+            "publisher": "china-university-of-geosciences-beijing",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "7f09399b1b6b1a088d776617ec08cc73ca5ca31257d4d1664426d41ae7561023"
+        }
+      ]
+    },
+    {
+      "collection": "scholarships",
+      "recordId": "sch-gap-mew-scws-cug-cgs-high-level-postgraduate-2026",
+      "universityId": "uni-china-university-of-geosciences-wuhan",
+      "row": {
+        "id": "sch-gap-mew-scws-cug-cgs-high-level-postgraduate-2026",
+        "slug": "gap-mew-scws-cug-cgs-high-level-postgraduate-2026",
+        "name": {
+          "en": "CUG Chinese Government Scholarship High-Level Postgraduate Program 2026",
+          "zh": "中国地质大学（武汉）2026年中国政府奖学金高水平研究生项目",
+          "ru": "Стипендия правительства Китая для аспирантов высокого уровня CUG 2026"
+        },
+        "providerType": "csc",
+        "universityIds": [
+          "uni-china-university-of-geosciences-wuhan"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://eniec.cug.edu.cn/Scholarships/Chinese_Government_Scholarships/High_Level_Postgraduate_Program.htm",
+        "summary": {
+          "en": "CUG's current official guide confirms the high-level postgraduate scholarship route and the October 25, 2025 to February 28, 2026 application period.",
+          "zh": "中国地质大学（武汉）当前官方指南确认高水平研究生奖学金路线，申请期为2025年10月25日至2026年2月28日。",
+          "ru": "Текущее руководство CUG подтверждает стипендию для магистров и докторантов и период подачи с 25 октября 2025 по 28 февраля 2026."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-mew-scws-cug-cgs-high-level-postgraduate-2026"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale"
+      },
+      "canonicalRecordSha256": "72759941a4351ce20478241f98aa8fd5dc1116e366ebbec0973683b79375c575",
+      "canonicalProgramSha256": null,
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-mew-scws-cug-cgs-high-level-postgraduate-2026",
+            "url": "https://eniec.cug.edu.cn/Scholarships/Chinese_Government_Scholarships/High_Level_Postgraduate_Program.htm",
+            "title": "2026 CUG Chinese Government Scholarship — High Level Postgraduate Program",
+            "publisher": "china-university-of-geosciences-wuhan",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "66ee5b26da49208b666bd3c87d1090ac306ceadc45c04e8783dc7c1a776efaf9"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-2026-cug-business-administration-high-level-postgraduate",
+      "universityId": "uni-china-university-of-geosciences-wuhan",
+      "row": {
+        "sourceIds": [
+          "source-cug-2026-high-level-postgraduate-programs"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-08-25",
+        "status": "stale",
+        "id": "cycle-2026-cug-business-administration-high-level-postgraduate",
+        "programId": "program-cug-wuhan-business-administration-high-level-postgraduate-master",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": "2025-10-25",
+        "closesOn": "2026-02-28",
+        "dateStatus": "previous-cycle-reference",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "source-cug-2026-high-level-postgraduate-programs"
+        ],
+        "verifiedAt": "2026-08-25",
+        "reviewAfter": "2026-09-24",
+        "status": "stale",
+        "id": "program-cug-wuhan-business-administration-high-level-postgraduate-master",
+        "slug": "cug-wuhan-business-administration-high-level-postgraduate-master",
+        "universityId": "uni-china-university-of-geosciences-wuhan",
+        "name": {
+          "en": "Business Administration — High-Level Postgraduate Scholarship Route",
+          "zh": "工商管理（高水平研究生奖学金路线）",
+          "ru": "Деловое администрирование — стипендиальная программа высокого уровня",
+          "de": "Betriebswirtschaftslehre — High-Level-Postgraduate-Stipendienweg",
+          "es": "Administración de Empresas — vía de beca de posgrado de alto nivel",
+          "fr": "Administration des affaires — parcours de bourse de haut niveau"
+        },
+        "degreeLevel": "master",
+        "discipline": "business",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://eniec.cug.edu.cn/Scholarships/Chinese_Government_Scholarships/High_Level_Postgraduate_Program.htm",
+        "applyUrl": "https://studyinchina.csc.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "IELTS",
+            "minimum": "6.0"
+          },
+          {
+            "test": "TOEFL",
+            "minimum": "80 (iBT)"
+          }
+        ],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "2d857a6b70f7d0136a28c463dfba040a6708a5dee719100427e898bf691ada25",
+      "canonicalProgramSha256": "d422faf8a0aeeee9766c60ce5938c8a052eed12228537782bbdb717ba1ea394f",
+      "sources": [
+        {
+          "row": {
+            "id": "source-cug-2026-high-level-postgraduate-programs",
+            "url": "https://eniec.cug.edu.cn/Scholarships/Chinese_Government_Scholarships/High_Level_Postgraduate_Program.htm",
+            "title": "CUG 2026 Chinese Government Scholarship — High-Level Postgraduate Program",
+            "publisher": "China University of Geosciences (Wuhan)",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-25"
+          },
+          "sha256": "55a622644112bc378cb5f8d0f2aab77ebfb1f011b4a77178e2b31f6d0b4c327d"
+        }
+      ]
+    },
+    {
+      "collection": "admissionCycles",
+      "recordId": "cycle-gap-wave3-depth-cugb-geology-master-english-2026-2027-autumn",
+      "universityId": "uni-china-university-of-geosciences-beijing",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave3-depth-cugb-geology-master-english",
+          "src-gap-program-wave3-depth-cugb-geology-master-english-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave3-depth-cugb-geology-master-english-2026-2027-autumn",
+        "programId": "prog-gap-wave3-depth-cugb-geology-master-english",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-06-30",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official guide marks Geology as available for an English-taught master's degree and gives a three-year duration. It publishes only a master's tuition range of RMB 28,000–42,000, not a program-specific amount; the 2026 deadline has passed.",
+          "zh": "官方简章明确地质学可申请英文授课硕士，学制3年；仅公布硕士层级28000–42000元区间，未给专业精确金额，2026截止日已过。",
+          "ru": "Официальное руководство подтверждает магистратуру по геологии на английском языке сроком 3 года. Указан лишь диапазон 28 000–42 000 юаней, а не точная стоимость; приём 2026 года закрыт."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave3-depth-cugb-geology-master-english",
+          "src-gap-program-wave3-depth-cugb-geology-master-english-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave3-depth-cugb-geology-master-english",
+        "slug": "gap-wave3-depth-cugb-geology-master-english-master",
+        "universityId": "uni-china-university-of-geosciences-beijing",
+        "name": {
+          "en": "Geology (English-taught Master)",
+          "zh": "地质学（英文授课硕士）",
+          "ru": "Геология (магистратура на английском)"
+        },
+        "degreeLevel": "master",
+        "discipline": "other",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 36,
+        "programUrl": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+        "applyUrl": "https://cugb.17gz.org/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalRecordSha256": "cf5b3f3932d34bf110e0d7b43fdeb45086b1f1587913a2b6f61235b576ba4196",
+      "canonicalProgramSha256": "27cb75e59e74a28d0e5746e195bfd3f109554a5f25414fc0d70e56c1b62e6030",
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave3-depth-cugb-geology-master-english",
+            "url": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+            "title": "CUGB Admission Guide for International Students 2026",
+            "publisher": "china-university-of-geosciences-beijing",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "48a5961450906dd9b0490b5249cea10c83c7de9e39d8f046be4a6ecd62d8bf55"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-wave3-depth-cugb-geology-master-english-support-1",
+            "url": "https://bm.cugb.edu.cn/gjhzyjl-en/study-in-cugb/admission/",
+            "title": "CUGB Official International Admissions Portal",
+            "publisher": "china-university-of-geosciences-beijing",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "8f93c35e69aa8abb0413172c324d1c48a5c65364f65a5fd75b004115bea70e4f"
+        }
+      ],
+      "additionalSameSourceBinding": true
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://gjjl.ccmusic.edu.cn/docs/2026-01/143de8ad89dd4daf90d199deb54228b0.pdf",
+      "sourceIds": [
+        "src-gap-program-sparse-depth-0808-ccmusic-composition-bachelor",
+        "src-gap-program-sparse-depth-0808-ccmusic-conducting-bachelor",
+        "src-gap-program-sparse-depth-0808-ccmusic-music-education-vocal-bachelor"
+      ],
+      "universityIds": [
+        "uni-china-conservatory-of-music"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-sparse-depth-0808-ccmusic-composition-bachelor-2026-2027-other-fee-reference",
+        "cycle-gap-sparse-depth-0808-ccmusic-conducting-bachelor-2026-2027-other-fee-reference",
+        "cycle-gap-sparse-depth-0808-ccmusic-music-education-vocal-bachelor-2026-2027-other-fee-reference"
+      ],
+      "scholarshipIds": [],
+      "windowCounts": {
+        "unknown": 3
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 3,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://bm.cugb.edu.cn/gjhzyjl-en/study-in-cugb/admission/",
+      "sourceIds": [
+        "src-gap-program-wave3-depth-cugb-computer-science-bachelor-support-1",
+        "src-gap-program-wave3-depth-cugb-environmental-science-engineering-doctorate-english-support-1",
+        "src-gap-program-wave3-depth-cugb-geology-bachelor-support-1",
+        "src-gap-program-wave3-depth-cugb-geology-master-english-support-1",
+        "src-gap-scholarship-wave3-depth-cugb-csc-type-b-2026-support-1"
+      ],
+      "universityIds": [
+        "uni-china-university-of-geosciences-beijing"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-wave3-depth-cugb-computer-science-bachelor-2026-2027-autumn",
+        "cycle-gap-wave3-depth-cugb-environmental-science-engineering-doctorate-english-2026-2027-autumn-fee-reference",
+        "cycle-gap-wave3-depth-cugb-geology-bachelor-2026-2027-autumn"
+      ],
+      "scholarshipIds": [
+        "sch-gap-wave3-depth-cugb-csc-type-b-2026"
+      ],
+      "windowCounts": {
+        "closed": 3,
+        "unknown": 2
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 2,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://bm.cugb.edu.cn/gjhzyjl-en/upload/resources/file/2025/10/12/274996.pdf",
+      "sourceIds": [
+        "src-gap-program-wave3-depth-cugb-computer-science-bachelor",
+        "src-gap-program-wave3-depth-cugb-environmental-science-engineering-doctorate-english",
+        "src-gap-program-wave3-depth-cugb-geology-bachelor",
+        "src-gap-program-wave3-depth-cugb-geology-master-english",
+        "src-gap-scholarship-wave3-depth-cugb-csc-type-b-2026"
+      ],
+      "universityIds": [
+        "uni-china-university-of-geosciences-beijing"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-wave3-depth-cugb-computer-science-bachelor-2026-2027-autumn",
+        "cycle-gap-wave3-depth-cugb-environmental-science-engineering-doctorate-english-2026-2027-autumn-fee-reference",
+        "cycle-gap-wave3-depth-cugb-geology-bachelor-2026-2027-autumn"
+      ],
+      "scholarshipIds": [
+        "sch-gap-wave3-depth-cugb-csc-type-b-2026"
+      ],
+      "windowCounts": {
+        "closed": 3,
+        "unknown": 2
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 2,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://admission.caa.edu.cn/en/Admissions/CAA_2026_Admissions_Guide_for_International_Stud.htm",
+      "sourceIds": [
+        "src-gap-program-mve-ecma-caa-art-studies-doctorate"
+      ],
+      "universityIds": [
+        "uni-china-academy-of-art"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-mve-ecma-caa-art-studies-doctorate-2026-2027-autumn-fee-reference"
+      ],
+      "scholarshipIds": [],
+      "windowCounts": {
+        "unknown": 1
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 1,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://english.cjlu.edu.cn/info/1023/3080.htm",
+      "sourceIds": [
+        "src-gap-program-remaining-cjlu-b-business-administration-en"
+      ],
+      "universityIds": [
+        "uni-china-jiliang-university"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-remaining-cjlu-b-business-administration-en-2026-2027-other"
+      ],
+      "scholarshipIds": [],
+      "windowCounts": {
+        "unknown": 1
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 1,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://english.cjlu.edu.cn/info/1033/3220.htm",
+      "sourceIds": [
+        "src-gap-program-remaining-cjlu-b-business-administration-en-support-1"
+      ],
+      "universityIds": [
+        "uni-china-jiliang-university"
+      ],
+      "admissionCycleIds": [
+        "cycle-gap-remaining-cjlu-b-business-administration-en-2026-2027-other"
+      ],
+      "scholarshipIds": [],
+      "windowCounts": {
+        "unknown": 1
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 1,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://eniec.cug.edu.cn/Scholarships/Chinese_Government_Scholarships/High_Level_Postgraduate_Program.htm",
+      "sourceIds": [
+        "source-cug-2026-high-level-postgraduate-programs",
+        "src-gap-scholarship-mew-scws-cug-cgs-high-level-postgraduate-2026"
+      ],
+      "universityIds": [
+        "uni-china-university-of-geosciences-wuhan"
+      ],
+      "admissionCycleIds": [
+        "cycle-2026-cug-business-administration-high-level-postgraduate"
+      ],
+      "scholarshipIds": [
+        "sch-gap-mew-scws-cug-cgs-high-level-postgraduate-2026"
+      ],
+      "windowCounts": {
+        "closed": 1,
+        "unknown": 1
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 1,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://international.cpu.edu.cn/9f/6e/c362a237422/page.htm",
+      "sourceIds": [
+        "src-gap-scholarship-mve-ecs-cpu-csc-silk-road-2026"
+      ],
+      "universityIds": [
+        "uni-china-pharmaceutical-university"
+      ],
+      "admissionCycleIds": [],
+      "scholarshipIds": [
+        "sch-gap-mve-ecs-cpu-csc-silk-road-2026"
+      ],
+      "windowCounts": {
+        "unknown": 1
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 1,
+      "officialWebsiteVerifiedThisRun": false
+    },
+    {
+      "url": "https://iss.cfau.edu.cn/col4185/col4273/24d1b5fa0831489bbca67ee17d5398c6.htm",
+      "sourceIds": [
+        "src-gap-scholarship-sch-mew-nss-cfau-beijing-government"
+      ],
+      "universityIds": [
+        "uni-china-foreign-affairs-university"
+      ],
+      "admissionCycleIds": [],
+      "scholarshipIds": [
+        "sch-gap-sch-mew-nss-cfau-beijing-government"
+      ],
+      "windowCounts": {
+        "unknown": 1
+      },
+      "currentWindowCount": 0,
+      "unknownOrRollingCount": 1,
+      "officialWebsiteVerifiedThisRun": false
+    }
+  ],
+  "baseQueueRecordIds": [
+    "cycle-gap-mve-ecma-caa-art-studies-doctorate-2026-2027-autumn-fee-reference",
+    "cycle-gap-sparse-depth-0808-ccmusic-composition-bachelor-2026-2027-other-fee-reference",
+    "cycle-gap-sparse-depth-0808-ccmusic-conducting-bachelor-2026-2027-other-fee-reference",
+    "cycle-gap-sparse-depth-0808-ccmusic-music-education-vocal-bachelor-2026-2027-other-fee-reference",
+    "sch-gap-sch-mew-nss-cfau-beijing-government",
+    "cycle-gap-remaining-cjlu-b-business-administration-en-2026-2027-other",
+    "sch-gap-mve-ecs-cpu-csc-silk-road-2026",
+    "cycle-gap-wave3-depth-cugb-environmental-science-engineering-doctorate-english-2026-2027-autumn-fee-reference",
+    "sch-gap-wave3-depth-cugb-csc-type-b-2026",
+    "cycle-gap-wave3-depth-cugb-computer-science-bachelor-2026-2027-autumn",
+    "cycle-gap-wave3-depth-cugb-geology-bachelor-2026-2027-autumn",
+    "sch-gap-mew-scws-cug-cgs-high-level-postgraduate-2026",
+    "cycle-2026-cug-business-administration-high-level-postgraduate"
+  ],
+  "additionalSameSourceRecordIds": [
+    "cycle-gap-wave3-depth-cugb-geology-master-english-2026-2027-autumn"
+  ],
+  "additionalBindingAuthorization": {
+    "assignedBy": "root",
+    "reason": "Explicit additional exact ID before report freeze; same captured original still requires independent programme/degree/year/funding-scope check",
+    "assignedAt": "2026-10-19T05:43:13.224Z",
+    "newNetworkRequests": 0
+  }
+}

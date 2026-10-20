@@ -1,0 +1,1810 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-033-20261019",
+  "state": "completed-eight-scoped-past-windows-nine-unknown-one-blocked",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T12:06:40.484Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v8.json",
+  "targetQueueSha256": "cd24ea5c2c2df6b38b04ff7b85ea85ab298134f8e1caa333938016e720860d2d",
+  "selectionSha256": "054c6bef535f35d21e9df7bcdc4f2bacbe668978abbd63fe8ddde3308e01672a",
+  "selectedUniversityIds": [
+    "uni-south-china-agricultural-university",
+    "uni-south-china-normal-university",
+    "uni-south-china-university-of-technology",
+    "uni-southeast-university",
+    "uni-southern-university-of-science-and-technology",
+    "uni-southwest-petroleum-university",
+    "uni-southwest-university",
+    "uni-sun-yat-sen-university"
+  ],
+  "selection": {
+    "baseQueueRecords": 15,
+    "additionalSameSourceRecords": 3,
+    "totalRecords": 18,
+    "baseQueueRecordIds": [
+      "cycle-gap-mew-csw-scau-plant-protection-professional-master-2026-2027-autumn-fee-reference",
+      "sch-gap-mew-csw-scau-guangdong-government-scholarship-2026",
+      "cycle-gap-chinese-degree-scnu-chinese-language-bachelor-2026-2027-autumn-fee-reference",
+      "sch-gap-chinese-scholarship-scnu-iclt-degree-programs-2026",
+      "cycle-807baacccf2f",
+      "cycle-8509838c238f",
+      "cycle-2027-southern-university-of-science-and-technology-chinese-language-program-language",
+      "cycle-gap-wave4-swpu-b-computer-science-and-technology-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave4-swpu-b-mechanical-engineering-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave4-swpu-m-petroleum-and-natural-gas-engineering-2026-2027-autumn-fee-reference",
+      "sch-gap-wave4-sch-swpu-chengdu-belt-and-road",
+      "cycle-2027-southwest-university-chinese-language-program-language",
+      "cycle-2027-southwest-university-education-bachelor",
+      "cycle-2027-southwest-university-environmental-science-master",
+      "cycle-gap-clw-sw-sysu-chinese-literature-bachelor-2026-2027-autumn-fee-reference"
+    ],
+    "additionalSameSourceRecordIds": [
+      "cycle-gap-chinese-degree-scnu-international-chinese-education-doctorate-2026-2027-autumn-fee-reference",
+      "cycle-gap-chinese-degree-scnu-international-chinese-education-master-2026-2027-autumn-fee-reference",
+      "sch-gap-wave4-sch-swpu-sichuan-government"
+    ],
+    "extensionReceipt": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1200/additional-same-source-selection-v1.json",
+      "sha256": "78d33a7b306a9e6ff28285eff969e52d192600dca341e548ed4c4613b00eaa4c"
+    }
+  },
+  "acquisition": {
+    "registeredDistinctUrlsAttempted": 16,
+    "nativeOriginRequests": 16,
+    "webFallbackRequests": 3,
+    "rawBodiesSaved": 13,
+    "nativeHtmlBodies": 12,
+    "nativePdfBodies": 1,
+    "nativeTlsFailures": 3,
+    "captureManifestPins": [
+      {
+        "path": "captures.json",
+        "sha256": "31a7cdfd6a899502e4f680e91685b968e1d1af2c634bb3f66e5a774374de491c"
+      }
+    ],
+    "diagnostics": {
+      "path": "acquisition-diagnostics.json",
+      "sha256": "1ba3de6c552668092441e35508f5887cc5d67b6e6602fabe0399defceb0a67d5"
+    },
+    "webFallback": {
+      "path": "swu-web-fallback.json",
+      "sha256": "039e163e2ff9a8f25c01b1aeeab2eb633d235736ed35eb07d98a0947f7c518fa"
+    },
+    "pdfOfflineExtraction": {
+      "path": "pdf-offline-extraction.json",
+      "sha256": "d3b29929d2a1d55d641430540f2d35eee1f00ab479467730c3d4830de62b681a"
+    },
+    "normalTls": true,
+    "paidModelCalls": 0,
+    "bodyInterpretation": "Twelve readable original HTML bodies, one original PDF recovered with offline parsing, three TLS timeouts. Two bounded SWU web observations preserve unknown dates; no origin body hash is claimed for them."
+  },
+  "summary": {
+    "schoolsAttempted": 8,
+    "recordsAssessed": 18,
+    "baseQueueRecords": 15,
+    "additionalSameSourceRecords": 3,
+    "admissionCyclesAssessed": 14,
+    "scholarshipsAssessed": 4,
+    "recordResults": {
+      "unknown": 9,
+      "closed": 8,
+      "blocked": 1
+    },
+    "newExactPastDeadlineCandidatesFromStoredNull": 7,
+    "existingExpiredDatesScoped": 1,
+    "independentAwardPastDeadlineCandidates": 1,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "rules": [
+    "Source-only candidates; no canonical dates, status, publication or whole-record freshness changed.",
+    "Unknown and blocked do not establish availability. Failed sources enter cooldown after one fallback.",
+    "Only exact year, programme level/language and funding identities bind a past-window observation; no successor-year rollover.",
+    "Independent awards do not borrow general admission cutoffs. Relative, month-only and recurring unanchored periods remain unresolved.",
+    "SCAU September 1 is a strict-before boundary. SCNU registered award URL is now a master brochure, not an ICLT-specific cutoff.",
+    "Any later canonical mutation needs supported narrow processing, independent approval and exact-row comparison."
+  ],
+  "groups": [
+    {
+      "key": "scau-exact-2026-award-versus-unanchored-master-rule",
+      "universityId": "uni-south-china-agricultural-university",
+      "evidence": [
+        {
+          "name": "scau-guide",
+          "url": "https://gdic.scau.edu.cn/2026/0421/c11155a432798/page.htm",
+          "observedAt": "2026-10-19T12:03:15.536980+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://gdic.scau.edu.cn/2026/0421/c11155a432798/page.htm",
+          "contentType": "text/html",
+          "bytes": 29500,
+          "rawPath": "scau-guide.html",
+          "rawSha256": "c674b0313799ad3cf51e4c20f853accd18031e08f3ef062da3ca65842a43a411",
+          "textPath": "scau-guide.txt",
+          "textSha256": "0aa16c50297ff08af29564b8c6f423a8da62cc7c99e19d80dfffa6951817f79c",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "scau-english",
+          "url": "https://cie.scau.edu.cn/cie_english/17431/list.htm",
+          "observedAt": "2026-10-19T12:03:15.538978+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://cie.scau.edu.cn/cie_english/17431/list.htm",
+          "contentType": "text/html",
+          "bytes": 23929,
+          "rawPath": "scau-english.html",
+          "rawSha256": "d5cc3c042bbdf929c1ccb691222ced80eae29d29060ba361384dffeedd4aae39",
+          "textPath": "scau-english.txt",
+          "textSha256": "bf36cd1682866910d16562b9b52ab0f0794aa2418af5f77de157e64c136d5fce",
+          "captureSucceeded": true,
+          "evidenceRole": "programme-identity-only-no-year-specific-date",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "scau-admissions",
+          "url": "https://cie.scau.edu.cn/zxsqjlc/list.htm",
+          "observedAt": "2026-10-19T12:03:15.539978+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://cie.scau.edu.cn/zxsqjlc/list.htm",
+          "contentType": "text/html",
+          "bytes": 76531,
+          "rawPath": "scau-admissions.html",
+          "rawSha256": "90b00e7f410f66c3f8eac8e36e3d5fb0360ab1c2141858aaf35f64fd69d6fe06",
+          "textPath": "scau-admissions.txt",
+          "textSha256": "bf50d3194822ad6d935e266fff1e78583d893d52770e310640b9fd192c3a8c55",
+          "captureSucceeded": true,
+          "evidenceRole": "recurring-unanchored-general-admission-rule",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "2026年度华南农业大学“广东省政府来粤留学生奖学金”项目新生申请指南",
+      "awardDateQuote": "申请时间：2026年9月1日前",
+      "awardRouteQuote": "申请人必须是已被我校录取的自费生",
+      "recurringMasterQuote": "申请时间：3月1日—6月30日",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-scau-plant-protection-professional-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-south-china-agricultural-university",
+          "canonicalUniversitySha256": "5b087e019967ceac877106cbf1220bbb1bdd27e6cb8f50c4e6e15ad307e746dc",
+          "programId": "prog-gap-mew-csw-scau-plant-protection-professional-master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "50d63c03e80752d807181ee85b1442a64508545b643deca7080a9be6efd07546",
+          "canonicalCycleSha256": "50d63c03e80752d807181ee85b1442a64508545b643deca7080a9be6efd07546",
+          "canonicalProgramSha256": "7919a247ef157aac9b190d925a63251eebc7ca8266f4e34867b1c455e950ba3e",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-csw-scau-plant-protection-professional-master",
+              "canonicalProgramSha256": "7919a247ef157aac9b190d925a63251eebc7ca8266f4e34867b1c455e950ba3e"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-csw-scau-plant-protection-professional-master",
+            "src-gap-program-mew-csw-scau-plant-protection-professional-master-support-1",
+            "src-gap-program-mew-csw-scau-plant-protection-professional-master-support-2"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-scau-plant-protection-professional-master",
+              "canonicalSourceSha256": "34c83906d746bfc1cf71d917c591a631d6edbd5f2f9243dfc0315e22fe0546ec",
+              "url": "https://gdic.scau.edu.cn/2026/0421/c11155a432798/page.htm"
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-scau-plant-protection-professional-master-support-1",
+              "canonicalSourceSha256": "92bc07ff07f38668973493cfafec9c608909fa393c26752226810db273ad3268",
+              "url": "https://cie.scau.edu.cn/cie_english/17431/list.htm"
+            },
+            {
+              "sourceId": "src-gap-program-mew-csw-scau-plant-protection-professional-master-support-2",
+              "canonicalSourceSha256": "bf885f5c58f534762c705fa6232bf62ff36ec648531db301b2899a7d3e9d1a4f",
+              "url": "https://cie.scau.edu.cn/zxsqjlc/list.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "recurring-general-master-period-lacks-target-year-and-exact-professional-route-binding",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://cie.scau.edu.cn/zxsqjlc/list.htm",
+          "evidenceBodySha256": "90b00e7f410f66c3f8eac8e36e3d5fb0360ab1c2141858aaf35f64fd69d6fe06",
+          "observedAt": "2026-10-19T12:03:15.539978+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "recurringDateQuote": "申请时间：3月1日—6月30日",
+          "yearAnchorAbsent": true,
+          "awardSeptemberBoundaryNotAdmissionDate": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-csw-scau-guangdong-government-scholarship-2026",
+          "universityId": "uni-south-china-agricultural-university",
+          "canonicalUniversitySha256": "5b087e019967ceac877106cbf1220bbb1bdd27e6cb8f50c4e6e15ad307e746dc",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "d1becef0f7e3584b087033f2073e36cdd629108f3a087bcfbbaffc68d433dc6b",
+          "canonicalScholarshipSha256": "d1becef0f7e3584b087033f2073e36cdd629108f3a087bcfbbaffc68d433dc6b",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-csw-scau-plant-protection-professional-master",
+              "canonicalProgramSha256": "7919a247ef157aac9b190d925a63251eebc7ca8266f4e34867b1c455e950ba3e"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mew-csw-scau-guangdong-government-scholarship-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-csw-scau-guangdong-government-scholarship-2026",
+              "canonicalSourceSha256": "d3e3e9db3a7ba96ff0945a2b8aec9fdc8066d81c5af29ba825eb45f8b8f58bdb",
+              "url": "https://gdic.scau.edu.cn/2026/0421/c11155a432798/page.htm"
+            }
+          ],
+          "storedDeadline": "2026-09-01",
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-09-01",
+          "candidateOfficialDeadline": "2026-09-01",
+          "reason": "exact-2026-provincial-award-own-strict-before-boundary",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "strict-before-stated-day-no-clock-time",
+          "evidenceSourceUrl": "https://gdic.scau.edu.cn/2026/0421/c11155a432798/page.htm",
+          "evidenceBodySha256": "c674b0313799ad3cf51e4c20f853accd18031e08f3ef062da3ca65842a43a411",
+          "observedAt": "2026-10-19T12:03:15.536980+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "closureScope": "Only this explicitly matched 2026 route is past; no successor-year availability or permanent cessation is inferred.",
+          "quotedDate": "申请时间：2026年9月1日前",
+          "awardOwnDateNotBorrowed": true,
+          "fundingRoute": "2026 Guangdong Government Outstanding International Student Scholarship for newly admitted self-funded degree students",
+          "enrolmentIsPrerequisiteNotOpening": true
+        }
+      ]
+    },
+    {
+      "key": "scnu-three-exact-2026-degree-windows-and-independent-award-unknown",
+      "universityId": "uni-south-china-normal-university",
+      "evidence": [
+        {
+          "name": "scnu-bachelor",
+          "url": "https://english.scnu.edu.cn/a/20260105/1597.html",
+          "observedAt": "2026-10-19T12:03:15.540976+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.scnu.edu.cn/a/20260105/1597.html",
+          "contentType": "text/html",
+          "bytes": 48081,
+          "rawPath": "scnu-bachelor.html",
+          "rawSha256": "232cd05536d29650639caba7c9736603d83a05e105fd77945ea5147a8ab2f707",
+          "textPath": "scnu-bachelor.txt",
+          "textSha256": "10b38b65531e2c4d6433e850eb1cd17d59ca46e2a846b3df3bfea57ad1190029",
+          "captureSucceeded": true,
+          "evidenceRole": "exact-2026-degree-original",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "scnu-master",
+          "url": "https://english.scnu.edu.cn/a/20260105/1598.html",
+          "observedAt": "2026-10-19T12:03:18.373044+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.scnu.edu.cn/a/20260105/1598.html",
+          "contentType": "text/html",
+          "bytes": 46774,
+          "rawPath": "scnu-master.html",
+          "rawSha256": "eca1357c1d9ed57173fa7bea84e877ac3d3f43a3e63d987448475409c0e9298a",
+          "textPath": "scnu-master.txt",
+          "textSha256": "7531d7326d8db7e695fc7477b68a2b3804c9815c26046b59c02da3f8f9f4f129",
+          "captureSucceeded": true,
+          "evidenceRole": "exact-2026-degree-original",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "scnu-doctorate",
+          "url": "https://english.scnu.edu.cn/a/20260105/1599.html",
+          "observedAt": "2026-10-19T12:03:18.774743+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.scnu.edu.cn/a/20260105/1599.html",
+          "contentType": "text/html",
+          "bytes": 47674,
+          "rawPath": "scnu-doctorate.html",
+          "rawSha256": "9b15e0758442a9ffab5eaa459e218c740f95dd7cf7b0e323ffee9bcc2917106c",
+          "textPath": "scnu-doctorate.txt",
+          "textSha256": "a699362d30506b227d40b7f6e652cbe6dd191d8ee3c04a706857c3f54a57bf91",
+          "captureSucceeded": true,
+          "evidenceRole": "exact-2026-degree-original",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "scnu-award",
+          "url": "https://english.scnu.edu.cn/a/20260508/1634.html",
+          "observedAt": "2026-10-19T12:03:19.507060+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.scnu.edu.cn/a/20260508/1634.html",
+          "contentType": "text/html",
+          "bytes": 78498,
+          "rawPath": "scnu-award.html",
+          "rawSha256": "dcd8b100bb5f0b2f3b7909678e5cbd385cb6a11c4443d673114e7f55bbcd48ac",
+          "textPath": "scnu-award.txt",
+          "textSha256": "87bb8617d641a7e10f190730fbae5fcf68722d463c228e8d26517b2e0853bf99",
+          "captureSucceeded": true,
+          "evidenceRole": "registered-award-url-now-serves-general-master-brochure",
+          "fullFactsCertified": false
+        }
+      ],
+      "degreeDateQuote": "Jan 1st - June 10th, 2026",
+      "awardUrlActualTitle": "SCNU 2026 Admission Brochure Master’s Programs for International Students",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-chinese-degree-scnu-chinese-language-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-south-china-normal-university",
+          "canonicalUniversitySha256": "0c5b01a272f3719f0aa63387d0467d56ea976f354c77e8e69920764cd8fe314b",
+          "programId": "prog-gap-chinese-degree-scnu-chinese-language-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "18f8d1a394d8b1af7be70fe3c63f2147263f77d323f0c1d5e22137dab7e6c2ed",
+          "canonicalCycleSha256": "18f8d1a394d8b1af7be70fe3c63f2147263f77d323f0c1d5e22137dab7e6c2ed",
+          "canonicalProgramSha256": "706883b080a31d40f34cba216a9e89f9241daf9318e6b239cafc554705821c7d",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-chinese-degree-scnu-chinese-language-bachelor",
+              "canonicalProgramSha256": "706883b080a31d40f34cba216a9e89f9241daf9318e6b239cafc554705821c7d"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-chinese-degree-scnu-chinese-language-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-chinese-degree-scnu-chinese-language-bachelor",
+              "canonicalSourceSha256": "245eec0436fa7a9b6bc393c0d4cbe72e0fdb82e4a4a8bad78a624d40a9570a80",
+              "url": "https://english.scnu.edu.cn/a/20260105/1597.html"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-10",
+          "candidateOfficialDeadline": "2026-06-10",
+          "reason": "exact-2026-programme-level-language-prospectus-states-application-duration",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-01-01",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://english.scnu.edu.cn/a/20260105/1597.html",
+          "evidenceBodySha256": "232cd05536d29650639caba7c9736603d83a05e105fd77945ea5147a8ab2f707",
+          "observedAt": "2026-10-19T12:03:15.540976+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only this explicitly matched 2026 route is past; no successor-year availability or permanent cessation is inferred.",
+          "quotedDate": "Jan 1st - June 10th, 2026",
+          "yearTitle": "2026 Prospectus for Undergraduate of Chinese Language at SIC, SCNU - Chinese Language Programs - South China Normal University",
+          "fundingRoute": "General degree admission; separate scholarship application dates excluded",
+          "exactProgrammeLevelConfirmed": true,
+          "scholarshipDatesNotInferred": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-chinese-scholarship-scnu-iclt-degree-programs-2026",
+          "universityId": "uni-south-china-normal-university",
+          "canonicalUniversitySha256": "0c5b01a272f3719f0aa63387d0467d56ea976f354c77e8e69920764cd8fe314b",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "d52dcfd89a973b18a32dcb3866354cb95923e1513942c3467da49e98470fdb37",
+          "canonicalScholarshipSha256": "d52dcfd89a973b18a32dcb3866354cb95923e1513942c3467da49e98470fdb37",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-chinese-degree-scnu-chinese-language-bachelor",
+              "canonicalProgramSha256": "706883b080a31d40f34cba216a9e89f9241daf9318e6b239cafc554705821c7d"
+            },
+            {
+              "programId": "prog-gap-chinese-degree-scnu-international-chinese-education-master",
+              "canonicalProgramSha256": "1112c117fcc6f747798446eae49b509a8440ec70e3d1d5e79d15ad85f70d8f57"
+            },
+            {
+              "programId": "prog-gap-chinese-degree-scnu-international-chinese-education-doctorate",
+              "canonicalProgramSha256": "48a8af65b878648667abf9a08af30cd68ed70ce7183a2eab99366d613242ef67"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-chinese-scholarship-scnu-iclt-degree-programs-2026",
+            "src-gap-scholarship-chinese-scholarship-scnu-iclt-degree-programs-2026-support-1",
+            "src-gap-scholarship-chinese-scholarship-scnu-iclt-degree-programs-2026-support-2",
+            "src-gap-scholarship-chinese-scholarship-scnu-iclt-degree-programs-2026-support-3"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-chinese-scholarship-scnu-iclt-degree-programs-2026",
+              "canonicalSourceSha256": "16414364029317c829090efa124022a3b0b4eb881f8638e29c63f79a15d927cf",
+              "url": "https://english.scnu.edu.cn/a/20260508/1634.html"
+            },
+            {
+              "sourceId": "src-gap-scholarship-chinese-scholarship-scnu-iclt-degree-programs-2026-support-1",
+              "canonicalSourceSha256": "ea9a94d1f184ae6fc288d5cd499bdc3ab169233724a655ba5018aa3671f6ce0d",
+              "url": "https://english.scnu.edu.cn/a/20260105/1597.html"
+            },
+            {
+              "sourceId": "src-gap-scholarship-chinese-scholarship-scnu-iclt-degree-programs-2026-support-2",
+              "canonicalSourceSha256": "1a969fdec491c78fd524fda4d8b3df8de9a61f85c89e00209110c580a4f51f2b",
+              "url": "https://english.scnu.edu.cn/a/20260105/1598.html"
+            },
+            {
+              "sourceId": "src-gap-scholarship-chinese-scholarship-scnu-iclt-degree-programs-2026-support-3",
+              "canonicalSourceSha256": "d0d02c22bbcf8a62d7a76dae012886fc8e0e280b638cbfefc75024eec0b7a445",
+              "url": "https://english.scnu.edu.cn/a/20260105/1599.html"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-award-url-is-general-master-brochure-and-supporting-degree-guides-do-not-state-a-separate-iclt-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://english.scnu.edu.cn/a/20260508/1634.html",
+          "evidenceBodySha256": "dcd8b100bb5f0b2f3b7909678e5cbd385cb6a11c4443d673114e7f55bbcd48ac",
+          "observedAt": "2026-10-19T12:03:19.507060+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "awardDeadlineNotBorrowed": true,
+          "generalDegreeDeadlineNotSubstituted": "2026-06-10",
+          "supportingDegreeUrlsChecked": true,
+          "awardRoute": "2026 International Chinese Language Teachers Scholarship for listed degree programmes",
+          "actualSourceIsNotIcltGuide": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-chinese-degree-scnu-international-chinese-education-doctorate-2026-2027-autumn-fee-reference",
+          "universityId": "uni-south-china-normal-university",
+          "canonicalUniversitySha256": "0c5b01a272f3719f0aa63387d0467d56ea976f354c77e8e69920764cd8fe314b",
+          "programId": "prog-gap-chinese-degree-scnu-international-chinese-education-doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "doctorate",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "explicit-same-source-extension",
+          "canonicalRecordSha256": "e5593d382ce68216699fd710dd27dcdd56a47f7c8a3d63f2204977031faf261f",
+          "canonicalCycleSha256": "e5593d382ce68216699fd710dd27dcdd56a47f7c8a3d63f2204977031faf261f",
+          "canonicalProgramSha256": "48a8af65b878648667abf9a08af30cd68ed70ce7183a2eab99366d613242ef67",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-chinese-degree-scnu-international-chinese-education-doctorate",
+              "canonicalProgramSha256": "48a8af65b878648667abf9a08af30cd68ed70ce7183a2eab99366d613242ef67"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-chinese-degree-scnu-international-chinese-education-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-chinese-degree-scnu-international-chinese-education-doctorate",
+              "canonicalSourceSha256": "3ae5155202fd99ed799b093b6901253c24161d491c62f71402e501cd810797cd",
+              "url": "https://english.scnu.edu.cn/a/20260105/1599.html"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-10",
+          "candidateOfficialDeadline": "2026-06-10",
+          "reason": "exact-2026-programme-level-language-prospectus-states-application-duration",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-01-01",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://english.scnu.edu.cn/a/20260105/1599.html",
+          "evidenceBodySha256": "9b15e0758442a9ffab5eaa459e218c740f95dd7cf7b0e323ffee9bcc2917106c",
+          "observedAt": "2026-10-19T12:03:18.774743+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only this explicitly matched 2026 route is past; no successor-year availability or permanent cessation is inferred.",
+          "quotedDate": "Jan 1st - June 10th, 2026",
+          "yearTitle": "2026 Prospectus for Doctor's Degree in International Chinese Language Education - Chinese Language Programs - South China Normal University",
+          "fundingRoute": "General degree admission; separate scholarship application dates excluded",
+          "exactProgrammeLevelConfirmed": true,
+          "scholarshipDatesNotInferred": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-chinese-degree-scnu-international-chinese-education-master-2026-2027-autumn-fee-reference",
+          "universityId": "uni-south-china-normal-university",
+          "canonicalUniversitySha256": "0c5b01a272f3719f0aa63387d0467d56ea976f354c77e8e69920764cd8fe314b",
+          "programId": "prog-gap-chinese-degree-scnu-international-chinese-education-master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "explicit-same-source-extension",
+          "canonicalRecordSha256": "3dd685d3f1dce458cf035b452a088046699b02577156fd7885dee476d42c7847",
+          "canonicalCycleSha256": "3dd685d3f1dce458cf035b452a088046699b02577156fd7885dee476d42c7847",
+          "canonicalProgramSha256": "1112c117fcc6f747798446eae49b509a8440ec70e3d1d5e79d15ad85f70d8f57",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-chinese-degree-scnu-international-chinese-education-master",
+              "canonicalProgramSha256": "1112c117fcc6f747798446eae49b509a8440ec70e3d1d5e79d15ad85f70d8f57"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-chinese-degree-scnu-international-chinese-education-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-chinese-degree-scnu-international-chinese-education-master",
+              "canonicalSourceSha256": "a8c2f9793988a0c8342eccc0fc7b706269470984838358a299bba868888f9865",
+              "url": "https://english.scnu.edu.cn/a/20260105/1598.html"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-10",
+          "candidateOfficialDeadline": "2026-06-10",
+          "reason": "exact-2026-programme-level-language-prospectus-states-application-duration",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-01-01",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://english.scnu.edu.cn/a/20260105/1598.html",
+          "evidenceBodySha256": "eca1357c1d9ed57173fa7bea84e877ac3d3f43a3e63d987448475409c0e9298a",
+          "observedAt": "2026-10-19T12:03:18.373044+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only this explicitly matched 2026 route is past; no successor-year availability or permanent cessation is inferred.",
+          "quotedDate": "Jan 1st - June 10th, 2026",
+          "yearTitle": "2026 Prospectus for Master's Degree in International Chinese Language Education - Chinese Language Programs - South China Normal University",
+          "fundingRoute": "General degree admission; separate scholarship application dates excluded",
+          "exactProgrammeLevelConfirmed": true,
+          "scholarshipDatesNotInferred": true
+        }
+      ]
+    },
+    {
+      "key": "scut-intensive-separate-section-no-target-year-date",
+      "universityId": "uni-south-china-university-of-technology",
+      "evidence": [
+        {
+          "name": "scut-intensive",
+          "url": "https://sie.scut.edu.cn/p1242c1132/list.htm",
+          "observedAt": "2026-10-19T12:03:19.626949+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sie.scut.edu.cn/p1242c1132/list.htm",
+          "contentType": "text/html",
+          "bytes": 55784,
+          "rawPath": "scut-intensive.html",
+          "rawSha256": "8fd9e933efbddf38c2c20e7215705e73ef92e5226fe846d616bb812564676ff6",
+          "textPath": "scut-intensive.txt",
+          "textSha256": "e204432996be24ebd571054441ac7faba65878518836221590534feecde434ac",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "intensiveProgrammeQuote": "The Intensive Chinese Language Program is a one-year program, consists of two semesters.",
+      "startMonthQuote": "The Autumn semester starts in the beginning of September, and the Spring semester starts in late February each year.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-807baacccf2f",
+          "universityId": "uni-south-china-university-of-technology",
+          "canonicalUniversitySha256": "aca15c01c42ab6043006bc698e50611c0accf347c952284a80435382c6665c95",
+          "programId": "program-south-china-university-of-technology-intensive-chinese-program-language",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "7fa9d06b35d73957816e3b9c9b2a54cd09ca3d1adbf51593a8ef8c7aa51ab972",
+          "canonicalCycleSha256": "7fa9d06b35d73957816e3b9c9b2a54cd09ca3d1adbf51593a8ef8c7aa51ab972",
+          "canonicalProgramSha256": "63b1e6aa86ce90ff0f60335e6331348741c6db4ac9b6d0d1ba936553dc7b41c1",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-south-china-university-of-technology-intensive-chinese-program-language",
+              "canonicalProgramSha256": "63b1e6aa86ce90ff0f60335e6331348741c6db4ac9b6d0d1ba936553dc7b41c1"
+            }
+          ],
+          "sourceIds": [
+            "src-program-review-aaae8fe355a1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-program-review-aaae8fe355a1",
+              "canonicalSourceSha256": "939c86b903652f91c96b8b90873f9f1fda8e237c664ef3246a4a7d9a76aba0d7",
+              "url": "https://sie.scut.edu.cn/p1242c1132/list.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "intensive-section-gives-recurring-start-months-but-no-2026-2027-application-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://sie.scut.edu.cn/p1242c1132/list.htm",
+          "evidenceBodySha256": "8fd9e933efbddf38c2c20e7215705e73ef92e5226fe846d616bb812564676ff6",
+          "observedAt": "2026-10-19T12:03:19.626949+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "neighbouringGeneralProgrammeCutoffExcluded": true,
+          "summerCamp2017CutoffExcluded": true,
+          "programmeStartNotApplicationDeadline": true,
+          "conditionalCohortMinimumOnly": true
+        }
+      ]
+    },
+    {
+      "key": "seu-architecture-2015-source-no-current-rollover",
+      "universityId": "uni-southeast-university",
+      "evidence": [
+        {
+          "name": "seu-architecture",
+          "url": "https://cis.seu.edu.cn/hwenglish/2009/1222/c2855a30510/page.htm",
+          "observedAt": "2026-10-19T12:03:21.264597+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://cis.seu.edu.cn/hwenglish/2009/1222/c2855a30510/page.htm",
+          "contentType": "text/html",
+          "bytes": 24679,
+          "rawPath": "seu-architecture.html",
+          "rawSha256": "eb2349afb71192755303a52ec2928f69b07711ab37a8fbb84ac15b31bfa62dde",
+          "textPath": "seu-architecture.txt",
+          "textSha256": "b23c71e7d4eea536bb8702fcf6ab3fe8876b937f810822caa1f2c3a084cbe6f2",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "historicalDateQuote": "Application Period: Jan. 1, 2015 - Jun. 30, 2015",
+      "otherHistoricalWordingQuote": "before September 10",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-8509838c238f",
+          "universityId": "uni-southeast-university",
+          "canonicalUniversitySha256": "1e14da11050582a30d024d01d6b058a9c4fb6524cb26b5afbd411b27d6658348",
+          "programId": "program-southeast-university-english-taught-undergraduate-program-in-architectur",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "c794ed58846e9c3acfcaddedf727d87615a9bc5a86119d60f1d8cdfa952d0dc0",
+          "canonicalCycleSha256": "c794ed58846e9c3acfcaddedf727d87615a9bc5a86119d60f1d8cdfa952d0dc0",
+          "canonicalProgramSha256": "7fe81434bb0789bcead93a58ccf5945b4a87728130ab1ff935146d95476a17e2",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-southeast-university-english-taught-undergraduate-program-in-architectur",
+              "canonicalProgramSha256": "7fe81434bb0789bcead93a58ccf5945b4a87728130ab1ff935146d95476a17e2"
+            }
+          ],
+          "sourceIds": [
+            "src-program-review-162280c8f1e9"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-program-review-162280c8f1e9",
+              "canonicalSourceSha256": "e3572ce5c63f13ea87059137f2836af49cff4cc118ea89e5a923d92a28e09c5c",
+              "url": "https://cis.seu.edu.cn/hwenglish/2009/1222/c2855a30510/page.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "official-body-explicitly-describes-2015-and-does-not-establish-stored-2026-2027-date",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://cis.seu.edu.cn/hwenglish/2009/1222/c2855a30510/page.htm",
+          "evidenceBodySha256": "eb2349afb71192755303a52ec2928f69b07711ab37a8fbb84ac15b31bfa62dde",
+          "observedAt": "2026-10-19T12:03:21.264597+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "historicalSourceDeadline": "2015-06-30",
+          "historicalSourceWindowAppliesToStoredCurrentRecord": false,
+          "noYearRollover": true,
+          "sourceAlsoContainsUnanchoredSeptember10Procedure": true
+        }
+      ]
+    },
+    {
+      "key": "sustech-landing-no-exact-2027-language-period",
+      "universityId": "uni-southern-university-of-science-and-technology",
+      "evidence": [
+        {
+          "name": "sustech-global",
+          "url": "https://global.sustech.edu.cn/",
+          "observedAt": "2026-10-19T12:03:21.697360+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://global.sustech.edu.cn/",
+          "contentType": "text/html; charset=utf-8",
+          "bytes": 115451,
+          "rawPath": "sustech-global.html",
+          "rawSha256": "405e142225cfe6793efe372b2de28920db3ff83577683087afc0e973182d0beb",
+          "textPath": "sustech-global.txt",
+          "textSha256": "79c977ae801a3e4913fdebea458153451a58d52d24fd435ebcee94c9124da0d7",
+          "captureSucceeded": true,
+          "evidenceRole": "landing-page-only-not-date-proof",
+          "fullFactsCertified": false
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-southern-university-of-science-and-technology-chinese-language-program-language",
+          "universityId": "uni-southern-university-of-science-and-technology",
+          "canonicalUniversitySha256": "533a129e0401c4638e8fe79150613df66b1c020d736c2cec6e4f7f3cc528aebe",
+          "programId": "program-southern-university-of-science-and-technology-chinese-language-program-language",
+          "academicYear": "2027-2028",
+          "intake": "other",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "To be confirmed"
+          ],
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "18b8ecf4aade51bcec0d4a197c387d1e101b8bd2c84bba93e79e9ff58c40b760",
+          "canonicalCycleSha256": "18b8ecf4aade51bcec0d4a197c387d1e101b8bd2c84bba93e79e9ff58c40b760",
+          "canonicalProgramSha256": "e50ded3c1e68b5a919d44f825a4c3a8c968f2d7498e4561a08c9f5e858815546",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-southern-university-of-science-and-technology-chinese-language-program-language",
+              "canonicalProgramSha256": "e50ded3c1e68b5a919d44f825a4c3a8c968f2d7498e4561a08c9f5e858815546"
+            }
+          ],
+          "sourceIds": [
+            "src-uni-southern-university-of-science-and-technology"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-uni-southern-university-of-science-and-technology",
+              "canonicalSourceSha256": "2cb61fa743ee9637dc53e175b5714e0166b43dc258a18b22304a7044c2845757",
+              "url": "https://global.sustech.edu.cn/"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "global-landing-page-does-not-establish-exact-2027-chinese-language-applicant-period",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://global.sustech.edu.cn/",
+          "evidenceBodySha256": "405e142225cfe6793efe372b2de28920db3ff83577683087afc0e973182d0beb",
+          "observedAt": "2026-10-19T12:03:21.697360+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "landingPageNotDateProof": true,
+          "noProgrammeDiscontinuationInferred": true,
+          "noYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "swpu-three-2026-degree-cutoffs-two-independent-awards-unknown",
+      "universityId": "uni-southwest-petroleum-university",
+      "evidence": [
+        {
+          "name": "swpu-guide",
+          "url": "https://www.swpu.edu.cn/oice/info/1214/4095.htm",
+          "observedAt": "2026-10-19T12:03:22.989396+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.swpu.edu.cn/oice/info/1214/4095.htm",
+          "contentType": "text/html",
+          "bytes": 101545,
+          "rawPath": "swpu-guide.html",
+          "rawSha256": "cb9b290408a2a2f7653a58967b1c2f0216b3b0c922d9ac905b4ae0f50962b860",
+          "textPath": "swpu-guide.txt",
+          "textSha256": "69cead128ccdd23c60068d98bf71ce4c177c97499c6d56143cbd2d5878e7e469",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "西南石油大学2026年国际学生招生简章",
+      "applicantDeadlineHeading": "三、申请截止时间 Application Deadline",
+      "quotedDate": "2026年5月30日 May 30th, 2026",
+      "englishProgrammeHeading": "1、英文授课专业目录 English Teaching Program",
+      "awardListings": [
+        "四川省外国留学生政府奖学金",
+        "成都市“一带一路”外国留学生政府奖学金"
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave4-swpu-b-computer-science-and-technology-2026-2027-autumn-fee-reference",
+          "universityId": "uni-southwest-petroleum-university",
+          "canonicalUniversitySha256": "ba02e1ecd3c2a8b288e33e3a986b03b6517ae727dab1ecacb7241087632dd616",
+          "programId": "prog-gap-wave4-swpu-b-computer-science-and-technology",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "1b334d5a4c0bef0a276a6b2967da60d41d21f5e7b4911ab26dfe5fca10a8a452",
+          "canonicalCycleSha256": "1b334d5a4c0bef0a276a6b2967da60d41d21f5e7b4911ab26dfe5fca10a8a452",
+          "canonicalProgramSha256": "cf584c56dbec62f6662ace0db7ec00b85ef6f1a0009077676134fbb0e7cb5592",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave4-swpu-b-computer-science-and-technology",
+              "canonicalProgramSha256": "cf584c56dbec62f6662ace0db7ec00b85ef6f1a0009077676134fbb0e7cb5592"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave4-swpu-b-computer-science-and-technology"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave4-swpu-b-computer-science-and-technology",
+              "canonicalSourceSha256": "0823052d477a123c2c2a67f9bdd2e156045f58f3010a89042d91c1087586dd29",
+              "url": "https://www.swpu.edu.cn/oice/info/1214/4095.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-30",
+          "candidateOfficialDeadline": "2026-05-30",
+          "reason": "matching-2026-english-degree-programme-in-explicit-level-section-under-general-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://www.swpu.edu.cn/oice/info/1214/4095.htm",
+          "evidenceBodySha256": "cb9b290408a2a2f7653a58967b1c2f0216b3b0c922d9ac905b4ae0f50962b860",
+          "observedAt": "2026-10-19T12:03:22.989396+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only this explicitly matched 2026 route is past; no successor-year availability or permanent cessation is inferred.",
+          "quotedDate": "2026年5月30日 May 30th, 2026",
+          "exactMajorQuote": "Computer Science and Technology",
+          "programmeSection": "Bachelor Program (Four-year academic program)",
+          "fundingRoute": "General international degree admission; independently named awards excluded",
+          "transcriptDeadlineNotSoleEvidence": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave4-swpu-b-mechanical-engineering-2026-2027-autumn-fee-reference",
+          "universityId": "uni-southwest-petroleum-university",
+          "canonicalUniversitySha256": "ba02e1ecd3c2a8b288e33e3a986b03b6517ae727dab1ecacb7241087632dd616",
+          "programId": "prog-gap-wave4-swpu-b-mechanical-engineering",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "c3627dd82bec6b389d80db08d33931d686b0de8c22ea72e17d642b078274a0ab",
+          "canonicalCycleSha256": "c3627dd82bec6b389d80db08d33931d686b0de8c22ea72e17d642b078274a0ab",
+          "canonicalProgramSha256": "03a9f5c112e0daa006f50c1c492928691cb7b0f238d57f9ba73ea79161881552",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave4-swpu-b-mechanical-engineering",
+              "canonicalProgramSha256": "03a9f5c112e0daa006f50c1c492928691cb7b0f238d57f9ba73ea79161881552"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave4-swpu-b-mechanical-engineering"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave4-swpu-b-mechanical-engineering",
+              "canonicalSourceSha256": "dff2b1b300a97a3d6959d8037850be449ed00e75467d45e7826528f0d7207ab4",
+              "url": "https://www.swpu.edu.cn/oice/info/1214/4095.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-30",
+          "candidateOfficialDeadline": "2026-05-30",
+          "reason": "matching-2026-english-degree-programme-in-explicit-level-section-under-general-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://www.swpu.edu.cn/oice/info/1214/4095.htm",
+          "evidenceBodySha256": "cb9b290408a2a2f7653a58967b1c2f0216b3b0c922d9ac905b4ae0f50962b860",
+          "observedAt": "2026-10-19T12:03:22.989396+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only this explicitly matched 2026 route is past; no successor-year availability or permanent cessation is inferred.",
+          "quotedDate": "2026年5月30日 May 30th, 2026",
+          "exactMajorQuote": "Mechanical Engineering",
+          "programmeSection": "Bachelor Program (Four-year academic program)",
+          "fundingRoute": "General international degree admission; independently named awards excluded",
+          "transcriptDeadlineNotSoleEvidence": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave4-swpu-m-petroleum-and-natural-gas-engineering-2026-2027-autumn-fee-reference",
+          "universityId": "uni-southwest-petroleum-university",
+          "canonicalUniversitySha256": "ba02e1ecd3c2a8b288e33e3a986b03b6517ae727dab1ecacb7241087632dd616",
+          "programId": "prog-gap-wave4-swpu-m-petroleum-and-natural-gas-engineering",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "3d336459d678a98674160c781901bf490e41e69a9bdb847d32cd5df06c4bc806",
+          "canonicalCycleSha256": "3d336459d678a98674160c781901bf490e41e69a9bdb847d32cd5df06c4bc806",
+          "canonicalProgramSha256": "50f883bf444adfeb35045e0da9959e5c98dd2214317e7fb250e43db7324c4b52",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave4-swpu-m-petroleum-and-natural-gas-engineering",
+              "canonicalProgramSha256": "50f883bf444adfeb35045e0da9959e5c98dd2214317e7fb250e43db7324c4b52"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave4-swpu-m-petroleum-and-natural-gas-engineering"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave4-swpu-m-petroleum-and-natural-gas-engineering",
+              "canonicalSourceSha256": "39a7c51d07959d42af9acdffa68c6d0e1616cab48e01251a278013be4bf08317",
+              "url": "https://www.swpu.edu.cn/oice/info/1214/4095.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-30",
+          "candidateOfficialDeadline": "2026-05-30",
+          "reason": "matching-2026-english-degree-programme-in-explicit-level-section-under-general-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://www.swpu.edu.cn/oice/info/1214/4095.htm",
+          "evidenceBodySha256": "cb9b290408a2a2f7653a58967b1c2f0216b3b0c922d9ac905b4ae0f50962b860",
+          "observedAt": "2026-10-19T12:03:22.989396+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only this explicitly matched 2026 route is past; no successor-year availability or permanent cessation is inferred.",
+          "quotedDate": "2026年5月30日 May 30th, 2026",
+          "exactMajorQuote": "Petroleum and Natural Gas Engineering",
+          "programmeSection": "Master Program (Three-year academic program)",
+          "fundingRoute": "General international degree admission; independently named awards excluded",
+          "transcriptDeadlineNotSoleEvidence": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave4-sch-swpu-chengdu-belt-and-road",
+          "universityId": "uni-southwest-petroleum-university",
+          "canonicalUniversitySha256": "ba02e1ecd3c2a8b288e33e3a986b03b6517ae727dab1ecacb7241087632dd616",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "15ff3806ed901c955edd630fbf3b19b7524157fdae342841f6b7c839a611cf6b",
+          "canonicalScholarshipSha256": "15ff3806ed901c955edd630fbf3b19b7524157fdae342841f6b7c839a611cf6b",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-wave4-sch-swpu-chengdu-belt-and-road"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave4-sch-swpu-chengdu-belt-and-road",
+              "canonicalSourceSha256": "1b1cb4f20a0b5143ace6797b947812972d1909505e8194547d903656126ff8a9",
+              "url": "https://www.swpu.edu.cn/oice/info/1214/4095.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "independently-named-award-has-no-separate-announced-exact-applicant-day",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.swpu.edu.cn/oice/info/1214/4095.htm",
+          "evidenceBodySha256": "cb9b290408a2a2f7653a58967b1c2f0216b3b0c922d9ac905b4ae0f50962b860",
+          "observedAt": "2026-10-19T12:03:22.989396+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "generalAdmissionDeadlineNotBorrowed": "2026-05-30",
+          "awardDeadlineNotBorrowed": true,
+          "awardOwnYearNotSeparatelyAnnounced": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave4-sch-swpu-sichuan-government",
+          "universityId": "uni-southwest-petroleum-university",
+          "canonicalUniversitySha256": "ba02e1ecd3c2a8b288e33e3a986b03b6517ae727dab1ecacb7241087632dd616",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "explicit-same-source-extension",
+          "canonicalRecordSha256": "6110f691f2dbb858b9b21d2300fad00137b771cd57f564ca782815ebbb44adb9",
+          "canonicalScholarshipSha256": "6110f691f2dbb858b9b21d2300fad00137b771cd57f564ca782815ebbb44adb9",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-wave4-sch-swpu-sichuan-government"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave4-sch-swpu-sichuan-government",
+              "canonicalSourceSha256": "85258e5a7a18ff49091f9c26f2b04187981bdf2ee0a5fecb618e94cbce10024d",
+              "url": "https://www.swpu.edu.cn/oice/info/1214/4095.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "independently-named-award-has-no-separate-announced-exact-applicant-day",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.swpu.edu.cn/oice/info/1214/4095.htm",
+          "evidenceBodySha256": "cb9b290408a2a2f7653a58967b1c2f0216b3b0c922d9ac905b4ae0f50962b860",
+          "observedAt": "2026-10-19T12:03:22.989396+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "generalAdmissionDeadlineNotBorrowed": "2026-05-30",
+          "awardDeadlineNotBorrowed": true,
+          "awardOwnYearNotSeparatelyAnnounced": true
+        }
+      ]
+    },
+    {
+      "key": "swu-2027-native-failures-bounded-web-observations",
+      "universityId": "uni-southwest-university",
+      "evidence": [
+        {
+          "name": "swu-admissions",
+          "url": "https://admissions.swu.edu.cn/",
+          "observedAt": "2026-10-19T12:03:24.469219+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "<urlopen error _ssl.c:983: The handshake operation timed out>",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-TLS-timeout-no-origin-body",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "swu-education",
+          "url": "https://admissions.swu.edu.cn/Degree_Programs/Undergraduate/Education.htm",
+          "observedAt": "2026-10-19T12:03:24.543084+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "<urlopen error _ssl.c:983: The handshake operation timed out>",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-TLS-timeout-no-origin-body",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "swu-engineering",
+          "url": "https://admissions.swu.edu.cn/Degree_Programs/Postgraduate/Engineering.htm",
+          "observedAt": "2026-10-19T12:03:25.560603+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "<urlopen error _ssl.c:983: The handshake operation timed out>",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-TLS-timeout-no-origin-body",
+          "fullFactsCertified": false
+        }
+      ],
+      "webFallback": {
+        "path": "swu-web-fallback.json",
+        "sha256": "039e163e2ff9a8f25c01b1aeeab2eb633d235736ed35eb07d98a0947f7c518fa"
+      },
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-southwest-university-chinese-language-program-language",
+          "universityId": "uni-southwest-university",
+          "canonicalUniversitySha256": "c5f3300f7d579997833b7ada76cc7431c88c8b9f48e394b9b03c6e87fa89d66c",
+          "programId": "program-southwest-university-chinese-language-program-language",
+          "academicYear": "2027-2028",
+          "intake": "other",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "To be confirmed"
+          ],
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "8003a8e6057828d040b7a4a12f5bce99b064d15f3052b3d0f0b6c919a91903d4",
+          "canonicalCycleSha256": "8003a8e6057828d040b7a4a12f5bce99b064d15f3052b3d0f0b6c919a91903d4",
+          "canonicalProgramSha256": "796c4e9713fcb62f028425f6a9106d97a68750f6f2347208125ca1747122eb3c",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-southwest-university-chinese-language-program-language",
+              "canonicalProgramSha256": "796c4e9713fcb62f028425f6a9106d97a68750f6f2347208125ca1747122eb3c"
+            }
+          ],
+          "sourceIds": [
+            "src-uni-southwest-university"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-uni-southwest-university",
+              "canonicalSourceSha256": "4643135ce460e25835a180930f29bb7d6c0d1a1bf7ef2c9b9b207215cff1c0d3",
+              "url": "https://admissions.swu.edu.cn/"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "native-TLS-handshake-timeout-and-one-web-open-timeout-no-original-body",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://admissions.swu.edu.cn/",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T12:03:24.469219+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "landingPageNotDateProof": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-southwest-university-education-bachelor",
+          "universityId": "uni-southwest-university",
+          "canonicalUniversitySha256": "c5f3300f7d579997833b7ada76cc7431c88c8b9f48e394b9b03c6e87fa89d66c",
+          "programId": "program-southwest-university-education-bachelor",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "ec4532815819f273e4608d18e8e1d1c78347b390b54f8266eb86604abd471c93",
+          "canonicalCycleSha256": "ec4532815819f273e4608d18e8e1d1c78347b390b54f8266eb86604abd471c93",
+          "canonicalProgramSha256": "2f2c361f70916ac1cd7e25e453f48a5e5149c0f73375dd7e5bc9ad44294376ed",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-southwest-university-education-bachelor",
+              "canonicalProgramSha256": "2f2c361f70916ac1cd7e25e453f48a5e5149c0f73375dd7e5bc9ad44294376ed"
+            }
+          ],
+          "sourceIds": [
+            "src-uni-southwest-university",
+            "swu-education-live"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-uni-southwest-university",
+              "canonicalSourceSha256": "4643135ce460e25835a180930f29bb7d6c0d1a1bf7ef2c9b9b207215cff1c0d3",
+              "url": "https://admissions.swu.edu.cn/"
+            },
+            {
+              "sourceId": "swu-education-live",
+              "canonicalSourceSha256": "fd288938ee55029140b4a42b011074226131c351a63f8c3ef287763b9d63f5e6",
+              "url": "https://admissions.swu.edu.cn/Degree_Programs/Undergraduate/Education.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "single-web-fallback-table-has-no-target-2027-application-date-and-native-original-body-unavailable",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://admissions.swu.edu.cn/Degree_Programs/Undergraduate/Education.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T12:03:24.543084+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-native-retries",
+          "fallbackObservationOnly": true,
+          "originServerBodySaved": false,
+          "webObservationPin": {
+            "path": "swu-web-fallback.json",
+            "sha256": "039e163e2ff9a8f25c01b1aeeab2eb633d235736ed35eb07d98a0947f7c518fa"
+          },
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-southwest-university-environmental-science-master",
+          "universityId": "uni-southwest-university",
+          "canonicalUniversitySha256": "c5f3300f7d579997833b7ada76cc7431c88c8b9f48e394b9b03c6e87fa89d66c",
+          "programId": "program-southwest-university-environmental-science-master",
+          "academicYear": "2027-2028",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "Chinese",
+            "English"
+          ],
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "8043ab455f86b438f53621e213ea6fadd6bbdfbd31dab94b1a60bb5b2acdfd6a",
+          "canonicalCycleSha256": "8043ab455f86b438f53621e213ea6fadd6bbdfbd31dab94b1a60bb5b2acdfd6a",
+          "canonicalProgramSha256": "ea505e732c0a954b8f0c83751c601f1a917887b3baf74edc75755283d4570f6a",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-southwest-university-environmental-science-master",
+              "canonicalProgramSha256": "ea505e732c0a954b8f0c83751c601f1a917887b3baf74edc75755283d4570f6a"
+            }
+          ],
+          "sourceIds": [
+            "src-uni-southwest-university",
+            "swu-engineering-live"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-uni-southwest-university",
+              "canonicalSourceSha256": "4643135ce460e25835a180930f29bb7d6c0d1a1bf7ef2c9b9b207215cff1c0d3",
+              "url": "https://admissions.swu.edu.cn/"
+            },
+            {
+              "sourceId": "swu-engineering-live",
+              "canonicalSourceSha256": "6266a0e8f66194bb348aaf9161fb7a910d96da987480454fff980bef31b8473c",
+              "url": "https://admissions.swu.edu.cn/Degree_Programs/Postgraduate/Engineering.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "single-web-fallback-table-has-no-target-2027-application-date-and-native-original-body-unavailable",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://admissions.swu.edu.cn/Degree_Programs/Postgraduate/Engineering.htm",
+          "evidenceBodySha256": null,
+          "observedAt": "2026-10-19T12:03:25.560603+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-native-retries",
+          "fallbackObservationOnly": true,
+          "originServerBodySaved": false,
+          "webObservationPin": {
+            "path": "swu-web-fallback.json",
+            "sha256": "039e163e2ff9a8f25c01b1aeeab2eb633d235736ed35eb07d98a0947f7c518fa"
+          },
+          "noYearRollover": true,
+          "tableProgrammeName": "Environmental Science and Engineering",
+          "storedProgrammeName": "Environmental Science",
+          "exactProgrammeNameNotSilentlyRelabelled": true
+        }
+      ]
+    },
+    {
+      "key": "sysu-2026-catalogue-identity-and-general-applicant-rounds",
+      "universityId": "uni-sun-yat-sen-university",
+      "evidence": [
+        {
+          "name": "sysu-guide",
+          "url": "https://iso.sysu.edu.cn/en/application/guide/1420575.htm",
+          "observedAt": "2026-10-19T12:03:37.073477+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iso.sysu.edu.cn/en/application/guide/1420575.htm",
+          "contentType": "text/html",
+          "bytes": 48963,
+          "rawPath": "sysu-guide.html",
+          "rawSha256": "e34c17821f3c6c4d19668199e0b3081b7f68cb836c6792a0bb234147f1c3b1a9",
+          "textPath": "sysu-guide.txt",
+          "textSha256": "760b43562de0d837bad5dc1be69b28f871c34c9435b3a4addb9544d7c24767fe",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "sysu-guide-pdf",
+          "url": "https://iso.sysu.edu.cn/docs/2025-12/20251209183332399352.pdf",
+          "observedAt": "2026-10-19T12:03:26.411638+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iso.sysu.edu.cn/docs/2025-12/20251209183332399352.pdf",
+          "contentType": "application/pdf",
+          "bytes": 352371,
+          "rawPath": "sysu-guide-pdf.pdf",
+          "rawSha256": "f65fb02364a43950bd2144cd13b630308e3f9c6fc56b748dfb91fe3b729b0dd3",
+          "captureSucceeded": false,
+          "error": "No module named 'pypdf'",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "registered-2026-programme-catalogue-original-offline-extraction-recovered",
+          "fullFactsCertified": false
+        }
+      ],
+      "offlinePdfPin": {
+        "path": "pdf-offline-extraction.json",
+        "sha256": "d3b29929d2a1d55d641430540f2d35eee1f00ab479467730c3d4830de62b681a"
+      },
+      "yearTitle": "2026 Enrollment Guidelines for International Students at Sun Yat-sen University (Bachelor's Degree)",
+      "firstRoundQuote": "First Round: January 1-February 28, 2026",
+      "finalRoundQuote": "Second Round: March 1-April 30, 2026",
+      "catalogueIdentityQuote": "汉语言文学Chinese Language & Literature4中文Chinese",
+      "catalogueLinkLimitation": "Guide currently links a January 2026 catalogue; registered December 2025 catalogue original independently states 2026 and matches this Chinese Language & Literature bachelor row. Its saved original is identity evidence, not the date source.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-clw-sw-sysu-chinese-literature-bachelor-2026-2027-autumn-fee-reference",
+          "universityId": "uni-sun-yat-sen-university",
+          "canonicalUniversitySha256": "795a0fa58bb9d0032475b0b212eced1e1760d1c10abac1012e4b58912bf1863c",
+          "programId": "prog-gap-clw-sw-sysu-chinese-literature-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "base-queue-v8",
+          "canonicalRecordSha256": "aeaaf30108af4ba18d7a2c7f34d007c6e544e089b0362ee86ddd229c7e31bab9",
+          "canonicalCycleSha256": "aeaaf30108af4ba18d7a2c7f34d007c6e544e089b0362ee86ddd229c7e31bab9",
+          "canonicalProgramSha256": "e6462cc07a5730cb3722368884033dac2526e6e915660afd0445fbcf4505ab12",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-clw-sw-sysu-chinese-literature-bachelor",
+              "canonicalProgramSha256": "e6462cc07a5730cb3722368884033dac2526e6e915660afd0445fbcf4505ab12"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-clw-sw-sysu-chinese-literature-bachelor",
+            "src-gap-program-clw-sw-sysu-chinese-literature-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-clw-sw-sysu-chinese-literature-bachelor",
+              "canonicalSourceSha256": "e2d96a26240791081a3715d9183ceec24df431e063ba18cfc69ecbfac26d1fb3",
+              "url": "https://iso.sysu.edu.cn/docs/2025-12/20251209183332399352.pdf"
+            },
+            {
+              "sourceId": "src-gap-program-clw-sw-sysu-chinese-literature-bachelor-support-1",
+              "canonicalSourceSha256": "b67287e785992c8481ee8254188a316c1e21607ae848067e701c5361e07c2521",
+              "url": "https://iso.sysu.edu.cn/en/application/guide/1420575.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-04-30",
+          "candidateOfficialDeadline": "2026-04-30",
+          "reason": "matching-2026-chinese-language-literature-bachelor-catalogue-and-general-second-final-applicant-round",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": "2026-01-01",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://iso.sysu.edu.cn/en/application/guide/1420575.htm",
+          "evidenceBodySha256": "e34c17821f3c6c4d19668199e0b3081b7f68cb836c6792a0bb234147f1c3b1a9",
+          "observedAt": "2026-10-19T12:03:37.073477+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "closureScope": "Only this explicitly matched 2026 route is past; no successor-year availability or permanent cessation is inferred.",
+          "quotedDate": "Second Round: March 1-April 30, 2026",
+          "fundingRoute": "2026 general international bachelor admission; separate scholarship dates excluded",
+          "earlierRoundDeadline": "2026-02-28",
+          "scholarshipGuidelinesSeparate": true,
+          "cataloguePage": 1,
+          "catalogueBodySha256": "f65fb02364a43950bd2144cd13b630308e3f9c6fc56b748dfb91fe3b729b0dd3",
+          "catalogueTextPin": {
+            "path": "sysu-guide-pdf.txt",
+            "sha256": "cdcd3a2ab4162d360997eca8ecb7f8d79c2b5cf6c33533da7cc49c87c1441e07"
+          },
+          "catalogueVisualPin": {
+            "path": "sysu-catalog-page1.png",
+            "sha256": "adb0c41d23aeb365a35fb5cbffc5f981417805b49550e7c2d462e8bd0884ab2b"
+          }
+        }
+      ]
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "reportSha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "batch": "official-batch-025",
+      "reportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f"
+    },
+    {
+      "batch": "official-batch-026",
+      "reportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9"
+    },
+    {
+      "batch": "official-batch-027",
+      "reportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+    },
+    {
+      "batch": "official-batch-028",
+      "reportSha256": "c1ee48a947ab94feac0f853531921d888b4ce30b24781afe7cb9e422e29f9276"
+    },
+    {
+      "batch": "official-batch-029",
+      "reportSha256": "6fa308e70e7e0ad0a0436ed5103eb067928fc9494ba1e977fdaba85cdd3d2243"
+    },
+    {
+      "batch": "official-batch-030",
+      "reportSha256": "95ae6d26c4de9030e7debe25a19d12f12d23235c3633a3b75aca538996958668"
+    }
+  ],
+  "validation": {
+    "exactEighteenIdsCoveredOnce": true,
+    "noAssessedOrPriorApprovedOverlap": true,
+    "allSixCanonicalInputsUnchanged": true,
+    "canonicalRecordParentLinkedProgrammeSourceAndUniversityPinsSaved": true,
+    "quotedFragmentsMatchSavedOriginalText": true,
+    "unknownOpeningNotAssessed": true,
+    "closedDatesAreExplicitPastIsoDays": true,
+    "extensionsMatchRootSelectionReceipt": true
+  }
+}

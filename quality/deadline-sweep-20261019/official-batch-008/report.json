@@ -1,0 +1,623 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-008-20261019",
+  "state": "completed-with-precision-caveats",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T04:51:48.291187+00:00",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "planSha256": "3f8bbba636ddebd602a4dd01068d008249c5aa0f3081012121eb44982a0a22bc",
+  "selection": "Exactly 12 not-previously-assessed public cycles across seven schools, excluding prior 70 records and fresh release approved 16 programs / 7 scholarships.",
+  "acquisition": {
+    "method": "Actual web reads of official HTML plus native HTTPS PDF fetch, local pypdf extraction and rendered-page inspection",
+    "uniqueOfficialUrlsOpened": 9,
+    "officialUrlsSuccessfullyRead": 9,
+    "dateEvidenceSourcesRead": 7,
+    "freshNativePdfSources": 3,
+    "priorApprovedEvidenceReused": 0,
+    "initialPdfWebParserFailures": 3,
+    "initialSandboxNetworkFailure": true,
+    "recoveredBy": "Authorized bounded native fetch, then pypdf and Poppler; no PDF failures remain unresolved",
+    "htmlRawBytesCaptured": false,
+    "webResultFreshness": "Tool results may be cached; observed reads are not origin-server capture timestamps."
+  },
+  "summary": {
+    "schoolsAttempted": 7,
+    "recordsAssessed": 12,
+    "recordResults": {
+      "unchanged": 12,
+      "corrected": 0,
+      "closed": 0,
+      "unknown": 0,
+      "blocked": 0
+    },
+    "fullFactsCertified": 0,
+    "wholeSchoolCataloguesCompleted": 0,
+    "canonicalWrites": 0,
+    "paidModelCalls": 0,
+    "publicationActions": 0
+  },
+  "precisionIssues": [
+    {
+      "universityId": "uni-southwest-jiaotong-university",
+      "recordId": "cycle-swjtu-chinese-elementary-2027-spring",
+      "deadlineBoundary": "before-date-as-worded",
+      "officialCutoffAt": null,
+      "notes": "Heading says until 2027-01-01, but application-site note says before 2027-01-01. Do not claim a full inclusive day on January 1. No time of day is supplied. Opening is 即日起, not a calendar date."
+    },
+    {
+      "universityId": "uni-southwest-jiaotong-university",
+      "recordId": "cycle-swjtu-chinese-intermediate-2027-spring",
+      "deadlineBoundary": "before-date-as-worded",
+      "officialCutoffAt": null,
+      "notes": "Heading says until 2027-01-01, but application-site note says before 2027-01-01. Do not claim a full inclusive day on January 1. No time of day is supplied. Opening is 即日起, not a calendar date."
+    }
+  ],
+  "rules": [
+    "Only dates and route/intake scope were reviewed; no other facts or whole-school catalogues are certified.",
+    "Fudan year is contextual, not explicitly repeated alongside the application month/day; raw source wording is retained.",
+    "SWJTU before-date wording overrides any assumption of a full inclusive deadline day.",
+    "No opening date is invented where the guide only states a deadline or says 即日起.",
+    "A closed intake does not mean a discontinued programme. No canonical status, verifiedAt or reviewAfter was changed.",
+    "No current portal acceptance test was performed."
+  ],
+  "schools": [
+    {
+      "universityId": "uni-beijing-language-and-culture-university",
+      "universityName": "北京语言大学",
+      "sourceUrl": "https://admission.blcu.edu.cn/_upload/article/files/39/74/e89e82e5490687d93679a0c4b3c4/206c8a45-4a29-45e6-9870-cfd697dd5c60.pdf",
+      "result": "unchanged",
+      "scope": "2027 international undergraduate table: Chinese Language and International Chinese Education, spring entry",
+      "quote": "春季学期报名截止日期：2027年2月1日",
+      "evidenceLocator": "PDF page 1 programme rows and page 2 报名信息 final deadline line; both pages visually inspected",
+      "yearBasis": "explicit deadline year 2027",
+      "officialWebsiteRead": true,
+      "rawBytesCaptured": true,
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "applicationsOpenNow": "portal-acceptance-not-assessed",
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-2027-blcu-chinese-language-spring",
+          "programId": "program-beijing-language-and-culture-university-chinese-language-bachelor",
+          "programName": {
+            "en": "Chinese Language",
+            "zh": "汉语言",
+            "ru": "Китайский язык"
+          },
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": "2027-02-01",
+          "officialDeadline": "2027-02-01",
+          "storedOpensOn": null,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unchanged",
+          "publicationBefore": true,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialCutoffAt": null,
+          "sourceIds": [
+            "source-blcu-map-undergraduate-2027-20261017",
+            "source-blcu-map-undergraduate-2027-catalogue-v2-20261017",
+            "source-blcu-map-undergraduate-entry-20261017",
+            "source-blcu-map-chinese-programmes-list-official-20261017",
+            "source-blcu-map-chinese-bachelor-profile-20261017",
+            "source-blcu-map-application-portal-20261017"
+          ],
+          "evidenceSourceIds": [
+            "source-blcu-map-undergraduate-2027-catalogue-v2-20261017"
+          ],
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "fullFactsCertified": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-blcu-teaching-chinese-2027-spring",
+          "programId": "program-beijing-language-and-culture-university-teaching-chinese-bachelor",
+          "programName": {
+            "en": "Teaching Chinese to Speakers of Other Languages",
+            "zh": "汉语国际教育",
+            "ru": "Преподавание китайского как иностранного"
+          },
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": "2027-02-01",
+          "officialDeadline": "2027-02-01",
+          "storedOpensOn": null,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unchanged",
+          "publicationBefore": true,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialCutoffAt": null,
+          "sourceIds": [
+            "source-blcu-map-undergraduate-2027-20261017",
+            "source-blcu-map-undergraduate-2027-catalogue-v2-20261017",
+            "source-blcu-map-undergraduate-entry-20261017",
+            "source-blcu-map-chinese-programmes-list-official-20261017",
+            "source-blcu-map-teaching-chinese-bachelor-profile-20261017",
+            "source-blcu-map-application-portal-20261017"
+          ],
+          "evidenceSourceIds": [
+            "source-blcu-map-undergraduate-2027-catalogue-v2-20261017"
+          ],
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "fullFactsCertified": false
+        }
+      ],
+      "capture": {
+        "key": "blcu",
+        "url": "https://admission.blcu.edu.cn/_upload/article/files/39/74/e89e82e5490687d93679a0c4b3c4/206c8a45-4a29-45e6-9870-cfd697dd5c60.pdf",
+        "attemptedAt": "2026-10-19T04:49:15.382671+00:00",
+        "httpStatus": 200,
+        "finalUrl": "https://admission.blcu.edu.cn/_upload/article/files/39/74/e89e82e5490687d93679a0c4b3c4/206c8a45-4a29-45e6-9870-cfd697dd5c60.pdf",
+        "bytes": 9135868,
+        "rawPath": "blcu.pdf",
+        "rawSha256": "17c8a4e898f89b233917269b5353b3110d63ebd5e62c568672d8fbc43d864993",
+        "error": "ModuleNotFoundError: No module named 'pymupdf'",
+        "extractionErrorResolvedWith": "pypdf",
+        "textPath": "blcu.txt",
+        "textSha256": "92659fa9a6d755b1183ae55c486db763ced8689a633b15016f38198d6f85ae4e",
+        "pages": 2
+      }
+    },
+    {
+      "universityId": "uni-shanghai-jiao-tong-university",
+      "universityName": "上海交通大学",
+      "sourceUrl": "https://www.oec.sjtu.edu.cn/en/pressreleases/info.aspx?itemid=6157",
+      "result": "unchanged",
+      "scope": "Chinese and English half-year pre-university transfer routes for February 2027; not fall scholarship deadline",
+      "quote": "TheSpring intake programs: 2027 January 15",
+      "evidenceLocator": "Application Deadline, web lines 228-231; Chinese/English half-year spring registration scope lines 68/97",
+      "yearBasis": "explicit deadline year 2027; page title retains original 2026 programme year",
+      "officialWebsiteRead": true,
+      "rawBytesCaptured": false,
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "applicationsOpenNow": "portal-acceptance-not-assessed",
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-sjtu-pre-university-chinese-spring-2027",
+          "programId": "program-sjtu-pre-university-chinese-half-year-spring-2027",
+          "programName": {
+            "en": "Pre-University Chinese Program (0.5 year)"
+          },
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": "2027-01-15",
+          "officialDeadline": "2027-01-15",
+          "storedOpensOn": null,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unchanged",
+          "publicationBefore": true,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialCutoffAt": null,
+          "sourceIds": [
+            "source-sjtu-pre-university-spring-2027-en-20261017"
+          ],
+          "evidenceSourceIds": [
+            "source-sjtu-pre-university-spring-2027-en-20261017"
+          ],
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "fullFactsCertified": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-sjtu-pre-university-english-spring-2027",
+          "programId": "program-sjtu-pre-university-english-half-year-spring-2027",
+          "programName": {
+            "en": "Pre-University English Program (0.5 year)"
+          },
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": "2027-01-15",
+          "officialDeadline": "2027-01-15",
+          "storedOpensOn": null,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unchanged",
+          "publicationBefore": true,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialCutoffAt": null,
+          "sourceIds": [
+            "source-sjtu-pre-university-spring-2027-en-20261017"
+          ],
+          "evidenceSourceIds": [
+            "source-sjtu-pre-university-spring-2027-en-20261017"
+          ],
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "fullFactsCertified": false
+        }
+      ],
+      "quoteNormalization": "Superscript ordinal marker omitted; spacing otherwise retained from returned web text"
+    },
+    {
+      "universityId": "uni-xian-jiaotong-university",
+      "universityName": "西安交通大学",
+      "sourceUrl": "https://sie.xjtu.edu.cn/en/info/1165/3212.htm",
+      "result": "unchanged",
+      "scope": "Advanced 18-week February 2027 and Intensive 11-week April 2027 IFP routes; basic September route excluded",
+      "quote": "Advanced Program | February, 2027 | October 1, 2026-January 15, 2027",
+      "evidenceLocator": "Start Time & Application Deadline table, web lines 117-121",
+      "yearBasis": "both application years explicitly printed in the table",
+      "officialWebsiteRead": true,
+      "rawBytesCaptured": false,
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "applicationsOpenNow": "portal-acceptance-not-assessed",
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-xjtu-ifp-advanced-2027-spring",
+          "programId": "program-xjtu-ifp-advanced-chinese-taught-18-weeks",
+          "programName": {
+            "en": "International Foundation Program — Advanced Program (18 weeks, Chinese-taught)"
+          },
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": "2027-01-15",
+          "officialDeadline": "2027-01-15",
+          "storedOpensOn": "2026-10-01",
+          "officialOpensOn": "2026-10-01",
+          "openingDateAssessed": true,
+          "result": "unchanged",
+          "publicationBefore": true,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialCutoffAt": null,
+          "sourceIds": [
+            "source-xjtu-2027-foundation-full-guide-official-20261017",
+            "source-xjtu-2027-foundation-brochure-official-20261017",
+            "source-xjtu-official-application-route-official-20261017"
+          ],
+          "evidenceSourceIds": [
+            "source-xjtu-2027-foundation-full-guide-official-20261017"
+          ],
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "fullFactsCertified": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-xjtu-ifp-intensive-2027-spring",
+          "programId": "program-xjtu-ifp-intensive-chinese-taught-11-weeks",
+          "programName": {
+            "en": "International Foundation Program — Intensive Program (11 weeks, Chinese-taught)"
+          },
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": "2027-03-12",
+          "officialDeadline": "2027-03-12",
+          "storedOpensOn": "2026-10-01",
+          "officialOpensOn": "2026-10-01",
+          "openingDateAssessed": true,
+          "result": "unchanged",
+          "publicationBefore": true,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialCutoffAt": null,
+          "sourceIds": [
+            "source-xjtu-2027-foundation-full-guide-official-20261017",
+            "source-xjtu-2027-foundation-brochure-official-20261017",
+            "source-xjtu-official-application-route-official-20261017"
+          ],
+          "evidenceSourceIds": [
+            "source-xjtu-2027-foundation-full-guide-official-20261017"
+          ],
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "fullFactsCertified": false
+        }
+      ],
+      "secondRouteQuote": "Intensive Program | April, 2027 | October 1, 2026-March 12, 2027"
+    },
+    {
+      "universityId": "uni-southwest-jiaotong-university",
+      "universityName": "西南交通大学",
+      "sourceUrl": "https://sie.swjtu.edu.cn/info/1014/3352.htm",
+      "result": "unchanged",
+      "scope": "2027 spring language learner programme, elementary and intermediate classes",
+      "quote": "申请春季入学的申请人应在2027年1月1日前完成网上申请",
+      "evidenceLocator": "一、申请日期 (line 71); 四、申请网站 note (line 110)",
+      "yearBasis": "explicit deadline year 2027",
+      "officialWebsiteRead": true,
+      "rawBytesCaptured": false,
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "applicationsOpenNow": "portal-acceptance-not-assessed",
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-swjtu-chinese-elementary-2027-spring",
+          "programId": "program-southwest-jiaotong-university-chinese-language-elementary",
+          "programName": {
+            "en": "Elementary Chinese Language Programme",
+            "zh": "汉语进修（初级班）"
+          },
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": "2027-01-01",
+          "officialDeadline": "2027-01-01",
+          "storedOpensOn": null,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unchanged",
+          "publicationBefore": true,
+          "deadlineBoundary": "before-date-as-worded",
+          "officialCutoffAt": null,
+          "sourceIds": [
+            "source-swjtu-language-2027-official-20261017"
+          ],
+          "evidenceSourceIds": [
+            "source-swjtu-language-2027-official-20261017"
+          ],
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "fullFactsCertified": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-swjtu-chinese-intermediate-2027-spring",
+          "programId": "program-southwest-jiaotong-university-chinese-language-intermediate",
+          "programName": {
+            "en": "Intermediate Chinese Language Programme",
+            "zh": "汉语进修（中级班）"
+          },
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": "2027-01-01",
+          "officialDeadline": "2027-01-01",
+          "storedOpensOn": null,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "result": "unchanged",
+          "publicationBefore": true,
+          "deadlineBoundary": "before-date-as-worded",
+          "officialCutoffAt": null,
+          "sourceIds": [
+            "source-swjtu-language-2027-official-20261017"
+          ],
+          "evidenceSourceIds": [
+            "source-swjtu-language-2027-official-20261017"
+          ],
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "fullFactsCertified": false
+        }
+      ],
+      "deadlineBoundary": "before-date-as-worded",
+      "precisionNote": "Heading says until 2027-01-01, but application-site note says before 2027-01-01. Do not claim a full inclusive day on January 1. No time of day is supplied. Opening is 即日起, not a calendar date."
+    },
+    {
+      "universityId": "uni-guangdong-university-of-foreign-studies",
+      "universityName": "广东外语外贸大学",
+      "sourceUrl": "https://iie-en.gdufs.edu.cn/info/1174/2795.htm",
+      "result": "unchanged",
+      "scope": "Degree programme spring 2027 admissions; Chinese BA and Chinese (Business Chinese); ICLT routes excluded",
+      "quote": "From September 30 to December 10, 2026",
+      "evidenceLocator": "Application Period, web line 46; named Chinese BA and Business Chinese routes line 48",
+      "yearBasis": "explicit application year 2026; Spring Enrollment 2027 notice",
+      "officialWebsiteRead": true,
+      "rawBytesCaptured": false,
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "applicationsOpenNow": "portal-acceptance-not-assessed",
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gdufs-chinese-language-2027-spring",
+          "programId": "program-guangdong-university-of-foreign-studies-chinese-language-bachelor",
+          "programName": {
+            "en": "Chinese Language",
+            "zh": "汉语言",
+            "ru": "Китайский язык",
+            "de": "Chinesische Sprache",
+            "es": "Lengua china",
+            "fr": "Langue chinoise"
+          },
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": "2026-12-10",
+          "officialDeadline": "2026-12-10",
+          "storedOpensOn": "2026-09-30",
+          "officialOpensOn": "2026-09-30",
+          "openingDateAssessed": true,
+          "result": "unchanged",
+          "publicationBefore": true,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialCutoffAt": null,
+          "sourceIds": [
+            "source-gdufs-degree-2027-spring-zh-20261017",
+            "source-gdufs-degree-2027-spring-en-20261017",
+            "source-gdufs-chinese-undergraduate-en-20261017",
+            "source-gdufs-degree-2027-tuition-zh-20261017",
+            "source-gdufs-degree-2027-csca-zh-20261017",
+            "source-gdufs-application-portal-https-20261017"
+          ],
+          "evidenceSourceIds": [
+            "source-gdufs-degree-2027-spring-en-20261017"
+          ],
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "fullFactsCertified": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gdufs-chinese-business-2027-spring",
+          "programId": "prog-gap-prog-gdufs-chinese-business-bachelor",
+          "programName": {
+            "en": "Chinese Language (Business Chinese)",
+            "zh": "汉语言（商务汉语）",
+            "ru": "Китайский язык (деловой китайский)",
+            "de": "Chinesische Sprache (Wirtschaftschinesisch)",
+            "es": "Lengua china (chino de negocios)",
+            "fr": "Langue chinoise (chinois des affaires)"
+          },
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": "2026-12-10",
+          "officialDeadline": "2026-12-10",
+          "storedOpensOn": "2026-09-30",
+          "officialOpensOn": "2026-09-30",
+          "openingDateAssessed": true,
+          "result": "unchanged",
+          "publicationBefore": true,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialCutoffAt": null,
+          "sourceIds": [
+            "source-gdufs-degree-2027-spring-zh-20261017",
+            "source-gdufs-degree-2027-spring-en-20261017",
+            "source-gdufs-chinese-undergraduate-en-20261017",
+            "source-gdufs-degree-2027-tuition-zh-20261017",
+            "source-gdufs-degree-2027-csca-zh-20261017",
+            "source-gdufs-application-portal-https-20261017"
+          ],
+          "evidenceSourceIds": [
+            "source-gdufs-degree-2027-spring-en-20261017"
+          ],
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "fullFactsCertified": false
+        }
+      ]
+    },
+    {
+      "universityId": "uni-fudan-university",
+      "universityName": "复旦大学",
+      "sourceUrl": "https://ices.fudan.edu.cn/_upload/article/files/9e/6d/2ced2d9b44efbf4f18ad73e0e179/7cb8d8f0-d3cb-436c-87e6-4ffb406b5737.pdf",
+      "result": "unchanged",
+      "scope": "2027 spring semester non-degree Chinese Language intake; one-semester public route only",
+      "quote": "Applications begin on October16. Deadline of submitting application is December 13.",
+      "evidenceLocator": "PDF page 11 Application periods, visually inspected; official landing notice published 2026-10-13",
+      "yearBasis": "Month/day wording contains no year. 2026 is contextual: October 13, 2026 official publication and spring 2027 intake. Preserve this distinction; not a quote of an explicitly printed 2026 deadline.",
+      "officialWebsiteRead": true,
+      "rawBytesCaptured": true,
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "applicationsOpenNow": "portal-acceptance-not-assessed",
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-fudan-chinese-language-one-semester-spring-2027",
+          "programId": "program-fudan-university-chinese-language-program-language",
+          "programName": {
+            "en": "Chinese Language Program — Spring 2027 (One Semester)",
+            "zh": "2027年春季汉语进修项目（一学期）"
+          },
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": "2026-12-13",
+          "officialDeadline": "2026-12-13",
+          "storedOpensOn": "2026-10-16",
+          "officialOpensOn": "2026-10-16",
+          "openingDateAssessed": true,
+          "result": "unchanged",
+          "publicationBefore": true,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialCutoffAt": null,
+          "sourceIds": [
+            "source-fdu-ices-index-official-20261018",
+            "source-fdu-spring-2027-en-official-20261018",
+            "source-fdu-spring-2027-zh-official-20261018",
+            "source-fdu-iso-index-official-20261018"
+          ],
+          "evidenceSourceIds": [
+            "source-fdu-spring-2027-en-official-20261018"
+          ],
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "fullFactsCertified": false
+        }
+      ],
+      "capture": {
+        "key": "fudan",
+        "url": "https://ices.fudan.edu.cn/_upload/article/files/9e/6d/2ced2d9b44efbf4f18ad73e0e179/7cb8d8f0-d3cb-436c-87e6-4ffb406b5737.pdf",
+        "attemptedAt": "2026-10-19T04:49:15.383759+00:00",
+        "httpStatus": 200,
+        "finalUrl": "https://ices.fudan.edu.cn/_upload/article/files/9e/6d/2ced2d9b44efbf4f18ad73e0e179/7cb8d8f0-d3cb-436c-87e6-4ffb406b5737.pdf",
+        "bytes": 1023174,
+        "rawPath": "fudan.pdf",
+        "rawSha256": "79590e27e8a092013db2c208718c00b1af2ba6e9cdec2d29b6d5be9ffac68351",
+        "error": "ModuleNotFoundError: No module named 'pymupdf'",
+        "extractionErrorResolvedWith": "pypdf",
+        "textPath": "fudan.txt",
+        "textSha256": "32e3c644b41164e1370174f77cbcd65b5fb4f6a03d60db39cd1564c864657ca2",
+        "pages": 15
+      }
+    },
+    {
+      "universityId": "uni-shanghai-university",
+      "universityName": "上海大学",
+      "sourceUrl": "https://apply.shu.edu.cn/upload/shangda/7/b/e/%E4%B8%8A%E6%B5%B7%E5%A4%A7%E5%AD%A6%E5%9B%BD%E9%99%85%E9%A2%84%E7%A7%91%E9%A1%B9%E7%9B%AE2027%E5%B9%B4%E6%98%A5%E5%AD%A3%E6%8B%9B%E7%94%9F%E7%AE%80%E7%AB%A0.pdf",
+      "result": "unchanged",
+      "scope": "International Foundation Programme, spring 2027",
+      "quote": "2026 年 9 月 30 日至 2026 年 12 月 30 日",
+      "evidenceLocator": "PDF physical page 3 (printed page 2), 二、网上申请（一）申请时间; visually inspected",
+      "yearBasis": "explicit application year 2026, 2027 spring guide",
+      "officialWebsiteRead": true,
+      "rawBytesCaptured": true,
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "applicationsOpenNow": "portal-acceptance-not-assessed",
+      "recordResults": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-shu-international-foundation-spring-2027",
+          "programId": "program-shu-international-foundation-one-semester-spring-2027",
+          "programName": {
+            "en": "International Foundation Programme (One Semester)",
+            "zh": "国际预科项目（一学期）"
+          },
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "storedDeadline": "2026-12-30",
+          "officialDeadline": "2026-12-30",
+          "storedOpensOn": "2026-09-30",
+          "officialOpensOn": "2026-09-30",
+          "openingDateAssessed": true,
+          "result": "unchanged",
+          "publicationBefore": true,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialCutoffAt": null,
+          "sourceIds": [
+            "source-shu-foundation-2027-spring-official-20261017"
+          ],
+          "evidenceSourceIds": [
+            "source-shu-foundation-2027-spring-official-20261017"
+          ],
+          "dateOnly": true,
+          "canonicalWritePerformed": false,
+          "fullFactsCertified": false
+        }
+      ],
+      "capture": {
+        "key": "shu",
+        "url": "https://apply.shu.edu.cn/upload/shangda/7/b/e/%E4%B8%8A%E6%B5%B7%E5%A4%A7%E5%AD%A6%E5%9B%BD%E9%99%85%E9%A2%84%E7%A7%91%E9%A1%B9%E7%9B%AE2027%E5%B9%B4%E6%98%A5%E5%AD%A3%E6%8B%9B%E7%94%9F%E7%AE%80%E7%AB%A0.pdf",
+        "attemptedAt": "2026-10-19T04:49:15.384758+00:00",
+        "httpStatus": 200,
+        "finalUrl": "https://apply.shu.edu.cn/upload/shangda/7/b/e/%E4%B8%8A%E6%B5%B7%E5%A4%A7%E5%AD%A6%E5%9B%BD%E9%99%85%E9%A2%84%E7%A7%91%E9%A1%B9%E7%9B%AE2027%E5%B9%B4%E6%98%A5%E5%AD%A3%E6%8B%9B%E7%94%9F%E7%AE%80%E7%AB%A0.pdf",
+        "bytes": 2542917,
+        "rawPath": "shu.pdf",
+        "rawSha256": "924785d97f72deae12a57ff775fb9e69625f684aef92e75bbf17eff4556d2aa6",
+        "error": "ModuleNotFoundError: No module named 'pymupdf'",
+        "extractionErrorResolvedWith": "pypdf",
+        "textPath": "shu.txt",
+        "textSha256": "946a037f6fd7d618424104b8f21a87f6c55eeb39de45a5ad80c90a2b690ddcd3",
+        "pages": 6
+      }
+    }
+  ]
+}

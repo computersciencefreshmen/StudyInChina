@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "independent-date-only-009-v1",
+  "reviewedAt": "2026-10-19T05:18:14.664Z",
+  "reviewer": "deployment_audit subagent; did not author batch 009 or its source captures",
+  "reviewedReportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83",
+  "decision": "pass-with-explicit-cross-source-year-and-route-caveats",
+  "scope": "Read-only independent local review of original source bytes, PDF text/pages, canonical record bindings and counts. No new website or application-portal requests.",
+  "counts": {
+    "schools": 10,
+    "records": 20,
+    "unchanged": 16,
+    "blocked": 2,
+    "unknown": 2,
+    "conflict": 0,
+    "publishedInPinnedInventory": 0,
+    "unpublishedInPinnedInventory": 20,
+    "priorRecordOverlap": 0,
+    "canonicalInputHashesChecked": 6,
+    "canonicalRecordHashesChecked": 20,
+    "rawBodiesHashChecked": 10,
+    "evidenceArtifactPinsChecked": 13
+  },
+  "checks": {
+    "reportHashAndQueueSelectionMatch": true,
+    "allPriorReportPinsMatch": true,
+    "allCanonicalInputAndRecordHashesMatch": true,
+    "degreeAndCycleRouteIntakeBindingsMatch": true,
+    "studentDeadlinesNotInstitutionalReviewDates": true,
+    "heldRowsHaveNullOfficialDeadline": true,
+    "noFabricatedCutoffTimeOrOpeningReview": true,
+    "noWholeSchoolOrFullFactCompletion": true,
+    "noCanonicalOrFreshnessWrites": true,
+    "networkRequestsByReviewer": 0,
+    "paidCalls": 0
+  },
+  "sourceReview": {
+    "htmlSources": "Six successful school HTML date notices were independently read from captured bodies; their actual deadline clauses and March 2027 context match the report. ZCMU readable listing contains no selected intake-date proof. NEU TLS failure remains blocked without bypass.",
+    "tjnu": "Original PDF independently extracted with pypdf; page 5 rendered image visually inspected. One-semester March 2027 pairs with October 31, 2026. No degree or four-week cutoff generalized.",
+    "ynu": "Original school-authored 2026 PDF hosted on chinadaily.com.cn independently extracted; rendered Chinese page 3 and English page 7 visually inspected. Both independently give spring-semester applications March 1 to October 31, 2026, but no literal 2027 entry year. Pinned reused central original PDF was independently read and explicitly supplies the same five-month one-semester March 2027 category. Cross-source inference is disclosed and does not replace an earlier school date. Current YNU primary-host TLS failure remains disclosed.",
+    "reusedCentralEvidence": "Receipt/raw/text hashes match original; original observation 2026-10-18T17:47:49.803504+00:00, no new network request. Both canonical YNU records explicitly bind the central URL and school PDF URL.",
+    "mnnu": "Student October 31 vs institution November 10 are distinct; later review deadline is not used as application deadline."
+  },
+  "caveats": [
+    {
+      "severity": "precision",
+      "universityId": "uni-yunnan-university",
+      "note": "Unchanged classification confirms the scoped deadline with explicit cross-source intake-year context. It must not be presented as a literal school-printed 2027 intake year or successful YNU-host read."
+    },
+    {
+      "severity": "precision",
+      "universityId": "uni-shanghai-international-studies-university",
+      "note": "Specific deadline section explicitly gives March 2027 / October 31, 2026. A later procedural sentence says March 1-May 15 without route qualification. Report reviews no opening date and proves no portal acceptance; preserve that limit rather than treating the procedural range as a new spring deadline."
+    },
+    {
+      "severity": "metadata",
+      "note": "Held record-level yearContext uses a generic school-explicit phrase even for NEU/ZCMU. Group status, null officialDeadline and notes correctly keep these rows unverified; do not use that generic field as evidence."
+    }
+  ],
+  "canonicalWrites": 0,
+  "sharedProgressWrites": 0,
+  "publicationActions": 0
+}

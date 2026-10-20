@@ -1,0 +1,16 @@
+[
+  {
+    "key": "source-01-recovery",
+    "url": "https://eng.hubu.edu.cn/index/Admission/Online_Application1.htm",
+    "method": "one-bounded-Windows-curl-normal-TLS-recovery",
+    "startedAt": "2026-10-19T08:15:31.707453+00:00",
+    "tlsCertificateValidation": true,
+    "maximumBytes": 10485760,
+    "exitCode": 35,
+    "responseMetadata": "000\n\nhttps://eng.hubu.edu.cn/index/Admission/Online_Application1.htm",
+    "captureSucceeded": false,
+    "error": "curl: (35) schannel: next InitializeSecurityContext failed: CRYPT_E_REVOCATION_OFFLINE (0x80092013) - 由于吊销服务器已脱机，吊销功能无法检查吊销。\n",
+    "cooldown": true,
+    "observedAt": "2026-10-19T08:15:42.270230+00:00"
+  }
+]

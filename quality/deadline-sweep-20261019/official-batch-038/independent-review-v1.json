@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "independent-official-date-only-038-review-v1",
+  "reviewedAt": "2026-10-19T12:52:21.426Z",
+  "reviewer": "dates_034 independent agent",
+  "result": "source-only-pass",
+  "finalReportSha256": "8df4ef3e1f25bf4165f9c5252e4226038bcc0d782f891d76d9506c53be143fb9",
+  "sourceReport": {
+    "path": "report.json",
+    "sha256": "8df4ef3e1f25bf4165f9c5252e4226038bcc0d782f891d76d9506c53be143fb9"
+  },
+  "selection": {
+    "path": "selection.json",
+    "sha256": "1c1701b56767102d947a0b2476f64bfeea701e2633b1784b8f287d8a9ec8c5b7"
+  },
+  "scope": "Offline independent review of exact eleven cycles, ten dispatched base IDs plus one authorized extension, six actual schools. No new network or frozen-report mutation.",
+  "summary": {
+    "recordsReviewed": 11,
+    "baseQueueRecords": 10,
+    "additionalSameSourceRecords": 1,
+    "schoolsReviewed": 6,
+    "recordResults": {
+      "unknown": 7,
+      "closed": 4
+    },
+    "checksPassed": 12,
+    "checksFailed": 0,
+    "newNetworkRequests": 0,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "deploymentActions": 0,
+    "allElevenUnpublishedInFrozenSnapshot": true
+  },
+  "checks": [
+    {
+      "name": "root-frozen-final-report-selection-and-dispatch-receipt-shas",
+      "result": "passed"
+    },
+    {
+      "name": "six-canonical-inputs-snapshot-and-before-after-pins-stable",
+      "result": "passed"
+    },
+    {
+      "name": "ten-exact-dispatched-base-plus-one-receipt-extension-and-six-actual-schools",
+      "result": "passed"
+    },
+    {
+      "name": "full-canonical-row-parent-source-university-and-stored-year-intake-bindings",
+      "result": "passed"
+    },
+    {
+      "name": "all-prior-one-through-thirtysix-hashes-and-no-ID-overlap",
+      "result": "passed"
+    },
+    {
+      "name": "eight-original-byte-length-sha-and-text-sha-pins-and-recursive-report-pins",
+      "result": "passed"
+    },
+    {
+      "name": "Yangtze-three-exact-autumn-English-routes-closed-and-two-unbound-routes-unknown",
+      "result": "passed"
+    },
+    {
+      "name": "YTU-historical-spring2026-Jan15-explicit-binding-with-stored-academic-year-mismatch-retained",
+      "result": "passed"
+    },
+    {
+      "name": "seven-unknown-no-borrowed-general-date-annual-rule-news-date-or-2027-rollover",
+      "result": "passed"
+    },
+    {
+      "name": "relevant-original-PDF-pages-independently-visually-inspected",
+      "result": "passed"
+    },
+    {
+      "name": "all-eleven-unpublished-candidate-only-with-no-canonical-date-or-freshness-write",
+      "result": "passed"
+    },
+    {
+      "name": "final-report-and-six-canonical-inputs-stable-at-review-end",
+      "result": "passed"
+    }
+  ],
+  "visualEvidenceIndependentlyRead": [
+    "yangtze-guide-page-1.png",
+    "yangtze-guide-page-13.png",
+    "yangtze-guide-page-18.png",
+    "yangtze-guide-page-19.png",
+    "ytu-language-page-1.png",
+    "ytu-language-page-4.png",
+    "ytu-language-page-8.png",
+    "ynufe-language-page-5.png",
+    "ynufe-language-page-8.png"
+  ],
+  "limitations": [
+    "Pass is limited to date-only source candidates; four past dates do not mutate canonical stored nulls or freshness.",
+    "Yangtze programme/platform caveat remains explicit. Clinical other-intake and Oil and Gas Well Engineering remain unknown rather than borrowing June28.",
+    "YTU January15 refers only to the explicitly recorded historical spring2026 route; the stored2026-2027 label anomaly and other intake are preserved.",
+    "Seven unknown dates remain unknown. No independent award date, general June15 language deadline, news date, month-end or successor2027 year is inferred.",
+    "Zero-row Zhejiang Sci-Tech school and the globally shared provincial award are excluded from this report scope. No whole-school or non-date facts are certified."
+  ]
+}

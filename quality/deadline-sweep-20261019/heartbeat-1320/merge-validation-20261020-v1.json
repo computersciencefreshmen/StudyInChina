@@ -1,0 +1,83 @@
+{
+  "observedAt": "2026-10-20T08:38:24.187Z",
+  "sourceCommit": "2260e61a23fbd9f67c4218a1b10974306a91dab1",
+  "pr": {
+    "autoMergeRequest": null,
+    "headRefOid": "2260e61a23fbd9f67c4218a1b10974306a91dab1",
+    "isDraft": false,
+    "mergeStateStatus": "BLOCKED",
+    "state": "OPEN",
+    "url": "https://github.com/computersciencefreshmen/StudyInChina/pull/40"
+  },
+  "lint": {
+    "trackedSourceFiles": 654,
+    "errors": 0,
+    "warnings": 0,
+    "method": "Exact tracked maintainable source file list, existing config; ignored files produce no lint findings. A full dirty-tree invocation also encountered untracked local recovery files, which remain unstaged."
+  },
+  "typecheck": {
+    "passed": true
+  },
+  "unit": {
+    "report": "merge-unit-20261020-v1.json",
+    "sha256": "31e8236fc044f659dd431b436ec3fda3c610affc465eee08d67e51032d620fc6",
+    "total": 1594,
+    "passed": 1592,
+    "failed": 1,
+    "pending": 1,
+    "isolatedRerun": {
+      "file": "tests/unit/catalog-release-builder.test.ts",
+      "tests": 2,
+      "passed": 2,
+      "failed": 0,
+      "scope": "Previously failing file only; full-suite result is retained as failed."
+    }
+  },
+  "strictCoverage": {
+    "report": "merge-coverage-20261020-v1.json",
+    "sha256": "cf017fe022241a39b933c7d54e14f2adeb4a5d0e2eb2a92ae7842ed828f52358",
+    "mode": "strict",
+    "minimum": 1,
+    "summary": {
+      "publicUniversities": 255,
+      "publishedPrograms": 783,
+      "meetingMinimum": 17,
+      "belowMinimum": 238,
+      "duplicateProgramIdentities": 170,
+      "distribution": {
+        "zero": 238,
+        "one": 6,
+        "two": 5,
+        "threeOrMore": 6
+      },
+      "belowMinimumByReason": {
+        "draft": 9,
+        "expired": 238,
+        "no_identity": 0
+      }
+    },
+    "passed": false
+  },
+  "merge": {
+    "completed": false,
+    "requiredCheck": "Lint, test, validate, and build",
+    "branchChecksUnchanged": true,
+    "coverageThresholdUnchanged": true,
+    "readyForReview": true,
+    "autoMergeEnabled": false,
+    "autoMergeAttempt": "Repository feature disabled; no autoMergeRequest created.",
+    "repositorySettingChange": {
+      "executed": false,
+      "autoReviewRejected": true,
+      "setting": "allow_auto_merge",
+      "reason": "Repository-wide persistent setting requires explicit authorization beyond PR40 merge request.",
+      "approvalRequested": true
+    }
+  },
+  "publication": {
+    "newExactSourceCandidatePrepared": true,
+    "fullFreshSmokeRequired": true,
+    "oldFactsNotRenewed": true,
+    "noCanonicalDataMutations": true
+  }
+}

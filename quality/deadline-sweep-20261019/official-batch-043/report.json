@@ -1,0 +1,1129 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-043-20261019",
+  "state": "completed-three-past-candidates-two-stored-dates-unchanged-three-unknown-one-blocked",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-20T08:13:46.481Z",
+  "completionTimeDistinctFromOriginalObservationTime": true,
+  "resumedCompletionDate": "2026-10-20",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256Before": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256After": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v12.json",
+  "targetQueueSha256": "8ddc230da6211fd2c5d29ddeb32c95505fd82a1873beccab3ad7f3f552607a67",
+  "selectionSha256": "a1711166ed7bb76f411d1b9aaa0fa43d9b921600c3900ce1e70458e120da567b",
+  "selectionPin": {
+    "path": "selection.json",
+    "sha256": "a1711166ed7bb76f411d1b9aaa0fa43d9b921600c3900ce1e70458e120da567b"
+  },
+  "canonicalUniversityPins": {
+    "path": "canonical-university-pins.json",
+    "sha256": "c781713916116f47b6310589eedf424461732bb68105d0b8021bc1152ddf3027"
+  },
+  "selectedUniversityIds": [
+    "uni-beijing-foreign-studies-university",
+    "uni-beijing-institute-of-technology",
+    "uni-beijing-language-and-culture-university",
+    "uni-beijing-normal-university",
+    "uni-beijing-sport-university",
+    "uni-beijing-university-of-posts-and-telecommunications"
+  ],
+  "selection": {
+    "baseQueueRecords": 9,
+    "additionalSameSourceRecords": 0,
+    "totalRecords": 9,
+    "baseQueueRecordIds": [
+      "scholarship-bfsu-beijing-government-annual",
+      "sch-gap-wave8-bit-beijing-government-scholarship",
+      "sch-gap-wave8-bit-international-student-scholarship",
+      "cycle-wave4-program-beijing-language-and-culture-university-finance-english-bachelor-2026-2027-other-evidence",
+      "sch-gap-bnu-2026-iclts-degree-coverage",
+      "cycle-gap-bnu-2026-bachelor-tcsol-2026-2027-autumn",
+      "cycle-gap-bnu-2026-master-icle-2026-2027-autumn",
+      "sch-gap-sch-mew-nss-bsu-beijing-government",
+      "scholarship-bupt-chinese-government"
+    ],
+    "additionalSameSourceRecordIds": [],
+    "baseDispatch": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1320/base-dispatch-v1.json",
+      "sha256": "9868844feb233e063f474335931a74a2fa58d4c7e6941118704e3580d2e30b4e"
+    },
+    "extensionReceipt": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1320/additional-same-source-selection-v1.json",
+      "sha256": "dbc7df2011233d04ed129a07620c104fb0b13f5a8700cb0ed7fa9338650b2263"
+    },
+    "zeroRowUniversityIds": []
+  },
+  "acquisition": {
+    "registeredDistinctUrlScopes": 6,
+    "newNativePublicGetOperations": 6,
+    "webFallbackRequests": 1,
+    "archivedOriginalsReused": 0,
+    "originalBodiesAvailable": 5,
+    "newOriginalBodiesSaved": 5,
+    "newNativeHtmlBodies": 5,
+    "newNativePdfBodies": 0,
+    "nativeHttp412Failures": 1,
+    "webHttp412Failures": 1,
+    "normalTls": true,
+    "paidModelCalls": 0,
+    "captureManifestPins": [
+      {
+        "path": "captures.json",
+        "sha256": "c037ec7171f811167b82f7a9e801bb15ad5639a5fc0b01f2c3de87012d9c26bd"
+      }
+    ],
+    "archiveSearch": {
+      "path": "archive-search.json",
+      "sha256": "7996cf9773c311a4ff0cdfcb2083d55046d03bfbfc77ba09f935f16736877b0a"
+    },
+    "webFallback": {
+      "path": "bupt-web-fallback.json",
+      "sha256": "e1c5edd00c23f0392fd7b9be16fdb716fdc8ffaa31eda0c7efe5db57276f0428"
+    },
+    "networkRequestsDuringResumedCompletion": 0,
+    "observationTimesPreserved": true,
+    "bodyInterpretation": "Five complete official HTML originals were read and hashed on 2026-10-19. BUPT native and the sole web fallback both returned412; no origin bytes or dates are invented. Completion resumed2026-10-20 entirely offline."
+  },
+  "summary": {
+    "schoolsAttempted": 6,
+    "recordsAssessed": 9,
+    "baseQueueRecords": 9,
+    "additionalSameSourceRecords": 0,
+    "admissionCyclesAssessed": 3,
+    "scholarshipsAssessed": 6,
+    "recordResults": {
+      "unknown": 3,
+      "closed": 3,
+      "unchanged": 2,
+      "blocked": 1
+    },
+    "newExactPastDeadlineCandidatesFromStoredNull": 3,
+    "storedExactDatesUnchanged": 2,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "rules": [
+    "Date-only source candidates; no canonical date/status/publication/verifiedAt/reviewAfter changes.",
+    "Unknown dates never establish open or closed; no next-year rollover or programme cessation is inferred.",
+    "BFSU freshman scope and unanchored November30/June5 month-days remain unknown; no generic degree or separate senior-award substitution.",
+    "BIT Beijing Government and BIT International Student awards each have their own explicit May1,2026 deadline; other awards and institutional annual review are separate.",
+    "BLCU source explicitly pairs September2025 enrollment with June30,2026; this inconsistency is preserved without silent year repair or assigning March dates to the unstarred Finance route.",
+    "BNU September2026 applicants must finish strictly before May15 Beijing Time; May25 institutional review is separate. Stored May15 cycle dates are unchanged and null award date remains a candidate only.",
+    "BSU historical rule defers the applicant cutoff to a separate notice; publicity and annual review are not deadlines.",
+    "All original2026-10-19 observation timestamps survive2026-10-20 offline completion. No freshness, whole-school or non-date facts are renewed."
+  ],
+  "groups": [
+    {
+      "key": "bfsu-current-freshman-rule-recurring-dates-without-application-year",
+      "universityId": "uni-beijing-foreign-studies-university",
+      "evidence": [
+        {
+          "name": "bfsu-annual",
+          "url": "https://osao.bfsu.edu.cn/info/2472/6842.htm",
+          "observedAt": "2026-10-19T13:26:15.971970+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://osao.bfsu.edu.cn/info/2472/6842.htm",
+          "contentType": "text/html",
+          "bytes": 27216,
+          "rawPath": "bfsu-annual.html",
+          "rawSha256": "e2f7969432bf91718214004bb4c8988dd14355958b57f2fa2ac2eb68f2983565",
+          "textPath": "bfsu-annual.txt",
+          "textSha256": "24751eeb5ee36ac3dcccac436c1a7157be08784894b56f37dd91bbaca1afb9c0",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "title": "Beijing Government Scholarship for International Students (for Freshman)",
+      "publicationTimestamp": "2026-05-18 17:28:42",
+      "springDateQuote": "Spring intake: November 30",
+      "autumnDateQuote": "Autumn intake: June 5",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-bfsu-beijing-government-annual",
+          "universityId": "uni-beijing-foreign-studies-university",
+          "canonicalUniversitySha256": "bac3459824577f43ef128e0e83e1482f17b234e1d5955a1b66f1a7c935edee12",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "b76f2809c2a888813715ab5a64f5531390a156f51fb62b83dfe38b34eda5fd04",
+          "canonicalScholarshipSha256": "b76f2809c2a888813715ab5a64f5531390a156f51fb62b83dfe38b34eda5fd04",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-bfsu-beijing-government-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-bfsu-beijing-government-scholarship",
+              "canonicalSourceSha256": "246d10a6fee55b82042fa15a183ddd690d995cd59b5cc66bb1b45dc87587cb69",
+              "url": "https://osao.bfsu.edu.cn/info/2472/6842.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedDateStatus": null,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "source-only-candidate-no-publication-write",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-award-page-currently-describes-freshman-award-and-month-day-only-rules-without-explicit-application-year",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://osao.bfsu.edu.cn/info/2472/6842.htm",
+          "evidenceBodySha256": "e2f7969432bf91718214004bb4c8988dd14355958b57f2fa2ac2eb68f2983565",
+          "evidenceTextSha256": "24751eeb5ee36ac3dcccac436c1a7157be08784894b56f37dd91bbaca1afb9c0",
+          "observedAt": "2026-10-19T13:26:15.971970+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "recurringMonthDays": {
+            "spring": "November 30",
+            "autumn": "June 5"
+          },
+          "yearNotInferredFromPublication": true,
+          "sourceTitleFreshmanScopePreserved": true,
+          "seniorAwardNotSubstituted": true,
+          "genericDegreeDatesNotBorrowed": true,
+          "noYearRollover": true,
+          "schoolPublicityPeriodNotApplicantDeadline": true
+        }
+      ]
+    },
+    {
+      "key": "bit-two-independent-awards-own-2026-cutoffs",
+      "universityId": "uni-beijing-institute-of-technology",
+      "evidence": [
+        {
+          "name": "bit-awards",
+          "url": "https://isc.bit.edu.cn/aboutbit/faq/3714638c555d436b815ec089176975e4.htm",
+          "observedAt": "2026-10-19T13:26:15.971970+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://isc.bit.edu.cn/aboutbit/faq/3714638c555d436b815ec089176975e4.htm",
+          "contentType": "text/html",
+          "bytes": 57635,
+          "rawPath": "bit-awards.html",
+          "rawSha256": "6d9620b0b612e08d04ab2651348cfa646c2fede7d266272b876db7eeb134b640",
+          "textPath": "bit-awards.txt",
+          "textSha256": "c3b4e220c2d3b1b90ae7705038eacfb7c0ec795696100d1c89262fb914089b77",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "2026 BIT Scholarships",
+      "beijingSection": "C. Beijing Government Scholarship (Beijing Campus Only)",
+      "beijingDateQuote": "2. Application Deadline\nMay 1st, 2026",
+      "studentSection": "E. BIT International Student Scholarship",
+      "studentDateQuote": "Application Deadline: May 1st, 2026",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-bit-beijing-government-scholarship",
+          "universityId": "uni-beijing-institute-of-technology",
+          "canonicalUniversitySha256": "98dea611bfeb774098c4b3acd8011b25457dd6055660e468424080ff40381c1d",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "3359e1058332fe541614621cf59e6c275cac0c38aceda00f0518acd1157281ca",
+          "canonicalScholarshipSha256": "3359e1058332fe541614621cf59e6c275cac0c38aceda00f0518acd1157281ca",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-bit-beijing-government-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-bit-beijing-government-scholarship",
+              "canonicalSourceSha256": "9de60465c268d54b1fd8421e654d82fef4d6371dfa250546e000fe6790f750af",
+              "url": "https://isc.bit.edu.cn/aboutbit/faq/3714638c555d436b815ec089176975e4.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedDateStatus": null,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "source-only-candidate-no-publication-write",
+          "result": "closed",
+          "officialDeadline": "2026-05-01",
+          "candidateOfficialDeadline": "2026-05-01",
+          "reason": "own-Beijing-Government-Scholarship-section-C-explicit2026-application-deadline",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://isc.bit.edu.cn/aboutbit/faq/3714638c555d436b815ec089176975e4.htm",
+          "evidenceBodySha256": "6d9620b0b612e08d04ab2651348cfa646c2fede7d266272b876db7eeb134b640",
+          "evidenceTextSha256": "c3b4e220c2d3b1b90ae7705038eacfb7c0ec795696100d1c89262fb914089b77",
+          "observedAt": "2026-10-19T13:26:15.971970+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "sourceConfirmedPastWindow": true,
+          "closureScope": "Only the matched explicit historical 2026 applicant route is past; no successor availability or cessation is inferred.",
+          "quotedDate": "2. Application Deadline\nMay 1st, 2026",
+          "awardOwnDateNotBorrowed": true,
+          "campusScope": "Beijing Campus Only",
+          "otherAwardDatesNotBorrowed": true,
+          "genericDegreeDatesNotBorrowed": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-bit-international-student-scholarship",
+          "universityId": "uni-beijing-institute-of-technology",
+          "canonicalUniversitySha256": "98dea611bfeb774098c4b3acd8011b25457dd6055660e468424080ff40381c1d",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "40270a51bb703897f54ae619350ad001b89157e4bddfd43f680275f13c9d3510",
+          "canonicalScholarshipSha256": "40270a51bb703897f54ae619350ad001b89157e4bddfd43f680275f13c9d3510",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-bit-international-student-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-bit-international-student-scholarship",
+              "canonicalSourceSha256": "0115e5f905de1d30eb8f600e9201eeb7770dd889a8039d05274ce43ac5f74483",
+              "url": "https://isc.bit.edu.cn/aboutbit/faq/3714638c555d436b815ec089176975e4.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedDateStatus": null,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "source-only-candidate-no-publication-write",
+          "result": "closed",
+          "officialDeadline": "2026-05-01",
+          "candidateOfficialDeadline": "2026-05-01",
+          "reason": "own-BIT-International-Student-Scholarship-section-E-explicit2026-application-deadline",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://isc.bit.edu.cn/aboutbit/faq/3714638c555d436b815ec089176975e4.htm",
+          "evidenceBodySha256": "6d9620b0b612e08d04ab2651348cfa646c2fede7d266272b876db7eeb134b640",
+          "evidenceTextSha256": "c3b4e220c2d3b1b90ae7705038eacfb7c0ec795696100d1c89262fb914089b77",
+          "observedAt": "2026-10-19T13:26:15.971970+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "sourceConfirmedPastWindow": true,
+          "closureScope": "Only the matched explicit historical 2026 applicant route is past; no successor availability or cessation is inferred.",
+          "quotedDate": "Application Deadline: May 1st, 2026",
+          "awardOwnDateNotBorrowed": true,
+          "annualReviewNotApplicantDeadline": true,
+          "otherAwardDatesNotBorrowed": true,
+          "genericDegreeDatesNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "blcu-finance-english-source-year-inconsistency-held-unknown",
+      "universityId": "uni-beijing-language-and-culture-university",
+      "evidence": [
+        {
+          "name": "blcu-finance",
+          "url": "https://admission.blcu.edu.cn/en/384/list.htm",
+          "observedAt": "2026-10-19T13:26:15.972969+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://admission.blcu.edu.cn/en/384/list.htm",
+          "contentType": "text/html",
+          "bytes": 126612,
+          "rawPath": "blcu-finance.html",
+          "rawSha256": "016d37595e985e9e5c33d4d9825a80753e8461857cc3ac4e3aab3f5ca2ed2f96",
+          "textPath": "blcu-finance.txt",
+          "textSha256": "bbc16a1c84755b5159035d15c42a724a405cd6b6ed321a0e00f978f1fb1645a6",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "programmeQuote": "Finance (Taught in English)",
+      "routeRule": "Majors with * symbol enrollment available in March and September; other majors enrollment available in September.",
+      "marchDateQuote": "If enrolled in March 2026, deadline of application: January 12, 2026.",
+      "inconsistentSeptemberQuote": "If enrolled in September 2025, deadline of application: JUNE 30, 2026.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-wave4-program-beijing-language-and-culture-university-finance-english-bachelor-2026-2027-other-evidence",
+          "universityId": "uni-beijing-language-and-culture-university",
+          "canonicalUniversitySha256": "e2d9bddad74e30405b1ae7d41aff7157d53bd23b3c339ad4c2ba0ca4534d9cba",
+          "programId": "program-beijing-language-and-culture-university-finance-english-bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "English"
+          ],
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "81b55fae846fde74fcc088b05e05ef0313c2698530c75af7511032d0e7cfe0c4",
+          "canonicalCycleSha256": "81b55fae846fde74fcc088b05e05ef0313c2698530c75af7511032d0e7cfe0c4",
+          "canonicalProgramSha256": "7e629a931d47b3cfc5e4f7c2024c08210053a538b721a0a50830dbf4e233ee7b",
+          "canonicalProgramPins": [
+            {
+              "programId": "program-beijing-language-and-culture-university-finance-english-bachelor",
+              "canonicalProgramSha256": "7e629a931d47b3cfc5e4f7c2024c08210053a538b721a0a50830dbf4e233ee7b"
+            }
+          ],
+          "sourceIds": [
+            "blcu-undergraduate-live-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "blcu-undergraduate-live-2026",
+              "canonicalSourceSha256": "ee5448823de9dca529149f5cf2bb6fe8d6e60af7657ce0c09b2bdf6935a3c35a",
+              "url": "https://admission.blcu.edu.cn/en/384/list.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedDateStatus": "previous-cycle-reference",
+          "publishedInInputSnapshot": false,
+          "publicationScope": "source-only-candidate-no-publication-write",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "exact-English-Finance-route-listed-but-September2025-enrolment-line-carries-June30-2026-deadline-and-does-not-unambiguously-bind-canonical2026-2027",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://admission.blcu.edu.cn/en/384/list.htm",
+          "evidenceBodySha256": "016d37595e985e9e5c33d4d9825a80753e8461857cc3ac4e3aab3f5ca2ed2f96",
+          "evidenceTextSha256": "bbc16a1c84755b5159035d15c42a724a405cd6b6ed321a0e00f978f1fb1645a6",
+          "observedAt": "2026-10-19T13:26:15.972969+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "sourceChronologyInconsistent": true,
+          "sourceSeptemberEnrollmentVerbatim": "September 2025",
+          "sourceSeptemberDeadlineVerbatim": "JUNE 30, 2026",
+          "sourceMarchEnrollmentVerbatim": "March 2026",
+          "sourceMarchDeadlineVerbatim": "January 12, 2026",
+          "sourceStarredRouteNotAssignedToUnstarredFinance": true,
+          "storedIntakeOtherRetained": true,
+          "noSilentSourceYearRepair": true,
+          "noYearRollover": true,
+          "noExactCurrentYearCandidateManufactured": true
+        }
+      ]
+    },
+    {
+      "key": "bnu-2026-September-degree-award-and-two-stored-dates",
+      "universityId": "uni-beijing-normal-university",
+      "evidence": [
+        {
+          "name": "bnu-iclt",
+          "url": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+          "observedAt": "2026-10-19T13:26:15.972969+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+          "contentType": "text/html",
+          "bytes": 57465,
+          "rawPath": "bnu-iclt.html",
+          "rawSha256": "dec901aeee2ba3d66a738fb7e75db625c16bb9aad1e3bcfd7cbbf917ffb30314",
+          "textPath": "bnu-iclt.txt",
+          "textSha256": "636bac8795927d0bd5e0ad13d040a96cbe8a1954e25e73c0d29ea248b47ab517",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "title": "International Chinese Language Teachers Scholarship",
+      "enrollment2026Quote": "As the host institution, Beijing Normal University's enrollment categories in 2026 academic year include Bachelor’s degree in Teaching Chinese to Speakers of Other Languages (taught at Zhuhai Campus), Master’s degree in Teaching Chinese to Speakers of Other Languages, one-academic-year study and one-semester study",
+      "masterTitle": "Scholarship for Master’s Degree in Teaching Chinese to Speakers of Other Languages (MTCSOL)",
+      "bachelorTitle": "Scholarship for Bachelor’s Degree in Teaching Chinese to Speakers of Other Languages (BTCSOL)",
+      "commencementQuote": "The programme commences in September 2026",
+      "dateHeading": "APPLICATION DEADLINES (Beijing Time)",
+      "applicantAndReviewQuote": "b) For programmes commencing in September, applicants must complete their applications before May 15, and recommending institutions and host institutions must complete reviewing before May 25.",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-bnu-2026-iclts-degree-coverage",
+          "universityId": "uni-beijing-normal-university",
+          "canonicalUniversitySha256": "8d585716d3907f87015583a418548226f3595887326170942f322687ec323e80",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "ab745edb3dc64afa6a29bb8d9f168f9674d087782bf2c762e3528847591daf4a",
+          "canonicalScholarshipSha256": "ab745edb3dc64afa6a29bb8d9f168f9674d087782bf2c762e3528847591daf4a",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-bnu-2026-master-icle",
+              "canonicalProgramSha256": "41e24e9dc56bd2a7b79a731da368dc89257a6734c008c78ee7d0d8e907e7c45a"
+            },
+            {
+              "programId": "prog-gap-bnu-2026-bachelor-tcsol",
+              "canonicalProgramSha256": "c976dd1db6761927eef14824b99f9dd193bba5e5462ce5ae8a3fb388bc96e1dd"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-bnu-2026-iclts-degree-coverage"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-bnu-2026-iclts-degree-coverage",
+              "canonicalSourceSha256": "6b98b52ed62178b479f0b1dcab6d2649962d88d79dfc3de5143b8b2603fe6468",
+              "url": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedDateStatus": null,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "source-only-candidate-no-publication-write",
+          "result": "closed",
+          "officialDeadline": "2026-05-15",
+          "candidateOfficialDeadline": "2026-05-15",
+          "reason": "award-own2026-September-bachelor-and-master-applicant-day-strict-before-May15",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "strict-before-stated-day-no-clock-time",
+          "evidenceSourceUrl": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+          "evidenceBodySha256": "dec901aeee2ba3d66a738fb7e75db625c16bb9aad1e3bcfd7cbbf917ffb30314",
+          "evidenceTextSha256": "636bac8795927d0bd5e0ad13d040a96cbe8a1954e25e73c0d29ea248b47ab517",
+          "observedAt": "2026-10-19T13:26:15.972969+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "storedDateMatchesScopedOfficialDay": false,
+          "sourceConfirmedPastWindow": true,
+          "closureScope": "Only the matched explicit historical 2026 applicant route is past; no successor availability or cessation is inferred.",
+          "quotedDate": "b) For programmes commencing in September, applicants must complete their applications before May 15, and recommending institutions and host institutions must complete reviewing before May 25.",
+          "sourceTimeZone": "Beijing Time",
+          "sourceApplicationDay": "May 15",
+          "explicitCommencement": "September 2026",
+          "institutionalReviewDayNotApplicantDeadline": "May 25",
+          "awardOwnDateNotBorrowed": true,
+          "otherIntakeDatesNotBorrowed": true,
+          "noClockTimeManufactured": true,
+          "canonicalDegreeNamesRetained": true,
+          "sourceDegreeNamesPreserved": true,
+          "awardScope": "Only the two linked 2026 September degree routes; no unrelated language intake or future cycle is inferred."
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-bnu-2026-bachelor-tcsol-2026-2027-autumn",
+          "universityId": "uni-beijing-normal-university",
+          "canonicalUniversitySha256": "8d585716d3907f87015583a418548226f3595887326170942f322687ec323e80",
+          "programId": "prog-gap-bnu-2026-bachelor-tcsol",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "bachelor",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "4229a57311dc295f9d080de2f68bcc4b1a3695a6c71d4e859db6f31198137e3c",
+          "canonicalCycleSha256": "4229a57311dc295f9d080de2f68bcc4b1a3695a6c71d4e859db6f31198137e3c",
+          "canonicalProgramSha256": "c976dd1db6761927eef14824b99f9dd193bba5e5462ce5ae8a3fb388bc96e1dd",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-bnu-2026-bachelor-tcsol",
+              "canonicalProgramSha256": "c976dd1db6761927eef14824b99f9dd193bba5e5462ce5ae8a3fb388bc96e1dd"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-bnu-2026-bachelor-tcsol"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-bnu-2026-bachelor-tcsol",
+              "canonicalSourceSha256": "3e795b0053d351bdf02e6c4598b109afb63d927136d8350520a8cad05c10b8ca",
+              "url": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html"
+            }
+          ],
+          "storedDeadline": "2026-05-15",
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedDateStatus": "published",
+          "publishedInInputSnapshot": false,
+          "publicationScope": "source-only-candidate-no-publication-write",
+          "result": "unchanged",
+          "officialDeadline": "2026-05-15",
+          "candidateOfficialDeadline": "2026-05-15",
+          "reason": "stored-May15-matches-own2026-September-degree-applicant-day-strict-before-boundary-preserved",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "strict-before-stated-day-no-clock-time",
+          "evidenceSourceUrl": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+          "evidenceBodySha256": "dec901aeee2ba3d66a738fb7e75db625c16bb9aad1e3bcfd7cbbf917ffb30314",
+          "evidenceTextSha256": "636bac8795927d0bd5e0ad13d040a96cbe8a1954e25e73c0d29ea248b47ab517",
+          "observedAt": "2026-10-19T13:26:15.972969+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": true,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "sourceConfirmedPastWindow": true,
+          "closureScope": "Only the matched explicit historical 2026 applicant route is past; no successor availability or cessation is inferred.",
+          "quotedDate": "b) For programmes commencing in September, applicants must complete their applications before May 15, and recommending institutions and host institutions must complete reviewing before May 25.",
+          "sourceTimeZone": "Beijing Time",
+          "sourceApplicationDay": "May 15",
+          "explicitCommencement": "September 2026",
+          "institutionalReviewDayNotApplicantDeadline": "May 25",
+          "awardOwnDateNotBorrowed": true,
+          "otherIntakeDatesNotBorrowed": true,
+          "noClockTimeManufactured": true,
+          "canonicalDegreeNamesRetained": true,
+          "sourceDegreeNamesPreserved": true,
+          "campusScope": "Zhuhai Campus",
+          "existingDateRetained": true,
+          "alreadyPastObservationOnly": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-bnu-2026-master-icle-2026-2027-autumn",
+          "universityId": "uni-beijing-normal-university",
+          "canonicalUniversitySha256": "8d585716d3907f87015583a418548226f3595887326170942f322687ec323e80",
+          "programId": "prog-gap-bnu-2026-master-icle",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "3c3f85720f4b84a32f093d047e74d888d167b8559b2283a5d6ade73358ba6a1b",
+          "canonicalCycleSha256": "3c3f85720f4b84a32f093d047e74d888d167b8559b2283a5d6ade73358ba6a1b",
+          "canonicalProgramSha256": "41e24e9dc56bd2a7b79a731da368dc89257a6734c008c78ee7d0d8e907e7c45a",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-bnu-2026-master-icle",
+              "canonicalProgramSha256": "41e24e9dc56bd2a7b79a731da368dc89257a6734c008c78ee7d0d8e907e7c45a"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-bnu-2026-master-icle"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-bnu-2026-master-icle",
+              "canonicalSourceSha256": "2796025d8f1503cc172c8ac2eb775e93c31dc667555002f30e7c48c4387e461b",
+              "url": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html"
+            }
+          ],
+          "storedDeadline": "2026-05-15",
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedDateStatus": "published",
+          "publishedInInputSnapshot": false,
+          "publicationScope": "source-only-candidate-no-publication-write",
+          "result": "unchanged",
+          "officialDeadline": "2026-05-15",
+          "candidateOfficialDeadline": "2026-05-15",
+          "reason": "stored-May15-matches-own2026-September-degree-applicant-day-strict-before-boundary-preserved",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "strict-before-stated-day-no-clock-time",
+          "evidenceSourceUrl": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+          "evidenceBodySha256": "dec901aeee2ba3d66a738fb7e75db625c16bb9aad1e3bcfd7cbbf917ffb30314",
+          "evidenceTextSha256": "636bac8795927d0bd5e0ad13d040a96cbe8a1954e25e73c0d29ea248b47ab517",
+          "observedAt": "2026-10-19T13:26:15.972969+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": true,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": false,
+          "storedDateMatchesScopedOfficialDay": true,
+          "sourceConfirmedPastWindow": true,
+          "closureScope": "Only the matched explicit historical 2026 applicant route is past; no successor availability or cessation is inferred.",
+          "quotedDate": "b) For programmes commencing in September, applicants must complete their applications before May 15, and recommending institutions and host institutions must complete reviewing before May 25.",
+          "sourceTimeZone": "Beijing Time",
+          "sourceApplicationDay": "May 15",
+          "explicitCommencement": "September 2026",
+          "institutionalReviewDayNotApplicantDeadline": "May 25",
+          "awardOwnDateNotBorrowed": true,
+          "otherIntakeDatesNotBorrowed": true,
+          "noClockTimeManufactured": true,
+          "canonicalDegreeNamesRetained": true,
+          "sourceDegreeNamesPreserved": true,
+          "existingDateRetained": true,
+          "alreadyPastObservationOnly": true
+        }
+      ]
+    },
+    {
+      "key": "bsu-historical-annual-rule-cutoff-separately-announced",
+      "universityId": "uni-beijing-sport-university",
+      "evidence": [
+        {
+          "name": "bsu-award",
+          "url": "https://wsc.bsu.edu.cn/jxj/bjszfjxj/17609.htm",
+          "observedAt": "2026-10-19T13:26:18.496989+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://wsc.bsu.edu.cn/jxj/bjszfjxj/17609.htm",
+          "contentType": "text/html",
+          "bytes": 23729,
+          "rawPath": "bsu-award.html",
+          "rawSha256": "0fd8155c1f09bd664da3dc6f5383e4f0b722909867a80a01830a46124e3483ae",
+          "textPath": "bsu-award.txt",
+          "textSha256": "6f24f3bf56654ba1a40bd1b352eeb3fc0e142a06dbe59c9cceeabdba6a0543e0",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-original-date-scope-only",
+          "fullFactsCertified": false
+        }
+      ],
+      "title": "北京体育大学北京市外国留学生奖学金实施细则",
+      "publicationDate": "2015-03-23",
+      "ruleSignatureDate": "2014年5月9日",
+      "deadlineQuote": "在申请截至日期（截止日期另行通知）前向国际教育学院提出书面申请。",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nss-bsu-beijing-government",
+          "universityId": "uni-beijing-sport-university",
+          "canonicalUniversitySha256": "114bec5e3fb1a9c9fe7f2b17079bcf41b36a1557e954c80d050c512b2a628e1e",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "45de10384951374fe4e1ec9ed45c6c2e101827f2c8215b236b3401674391790b",
+          "canonicalScholarshipSha256": "45de10384951374fe4e1ec9ed45c6c2e101827f2c8215b236b3401674391790b",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nss-bsu-beijing-government"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nss-bsu-beijing-government",
+              "canonicalSourceSha256": "045b14e7ba33b7cea8ee291e27ea1af412d39699350d9fa5ac4425bb99e75956",
+              "url": "https://wsc.bsu.edu.cn/jxj/bjszfjxj/17609.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedDateStatus": null,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "source-only-candidate-no-publication-write",
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "historical2014-rule-published2015-says-application-cutoff-will-be-announced-separately",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://wsc.bsu.edu.cn/jxj/bjszfjxj/17609.htm",
+          "evidenceBodySha256": "0fd8155c1f09bd664da3dc6f5383e4f0b722909867a80a01830a46124e3483ae",
+          "evidenceTextSha256": "6f24f3bf56654ba1a40bd1b352eeb3fc0e142a06dbe59c9cceeabdba6a0543e0",
+          "observedAt": "2026-10-19T13:26:18.496989+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": "在申请截至日期（截止日期另行通知）前向国际教育学院提出书面申请。",
+          "applicationDaySeparatelyAnnounced": true,
+          "annualReviewNotApplicationDate": true,
+          "sevenDayPublicityNotApplicationDeadline": true,
+          "genericDegreeDatesNotBorrowed": true,
+          "noYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "bupt-independent-CSC-award-both-reads-412-cooldown",
+      "universityId": "uni-beijing-university-of-posts-and-telecommunications",
+      "evidence": [
+        {
+          "name": "bupt-award",
+          "url": "https://ois.bupt.edu.cn/Scholarships/Chinese_government_scholarship.htm",
+          "observedAt": "2026-10-19T13:26:22.924727+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "HTTP Error 412: Precondition Failed",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native-HTTP412-no-origin-bytes",
+          "fullFactsCertified": false
+        }
+      ],
+      "webFallback": {
+        "path": "bupt-web-fallback.json",
+        "sha256": "e1c5edd00c23f0392fd7b9be16fdb716fdc8ffaa31eda0c7efe5db57276f0428"
+      },
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "scholarship-bupt-chinese-government",
+          "universityId": "uni-beijing-university-of-posts-and-telecommunications",
+          "canonicalUniversitySha256": "68c78773eca1bd90e9aa3409ec31ce5c68b70daf0591ee088fdc84bceb17c239",
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-base-dispatch-v12",
+          "canonicalRecordSha256": "41305fda1c3155a5a76ddcb6b320d0df8f3f10f95d7b4a159da4da96320dca1e",
+          "canonicalScholarshipSha256": "41305fda1c3155a5a76ddcb6b320d0df8f3f10f95d7b4a159da4da96320dca1e",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-bupt-chinese-government-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-bupt-chinese-government-scholarship",
+              "canonicalSourceSha256": "fa79048916436c05b0c3ca5fc10a3bddb1b88a46b32325f48d55d8eb9f918849",
+              "url": "https://ois.bupt.edu.cn/Scholarships/Chinese_government_scholarship.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "storedStatus": "stale",
+          "storedDateStatus": null,
+          "publishedInInputSnapshot": false,
+          "publicationScope": "source-only-candidate-no-publication-write",
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-independent-CSC-award-page-returned-HTTP412-native-and-single-web-fallback-no-body-no-date-proof",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://ois.bupt.edu.cn/Scholarships/Chinese_government_scholarship.htm",
+          "evidenceBodySha256": null,
+          "evidenceTextSha256": null,
+          "observedAt": "2026-10-19T13:26:22.924727+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "originRawBytesAvailable": false,
+          "webFallback": {
+            "path": "bupt-web-fallback.json",
+            "sha256": "e1c5edd00c23f0392fd7b9be16fdb716fdc8ffaa31eda0c7efe5db57276f0428"
+          },
+          "retryPolicy": "cooldown-after-one-reasonable-fallback",
+          "genericDegreeDatesNotBorrowed": true,
+          "otherAwardDatesNotBorrowed": true,
+          "unknownDateDoesNotEstablishOpenOrClosed": true
+        }
+      ]
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "reportSha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "batch": "official-batch-025",
+      "reportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f"
+    },
+    {
+      "batch": "official-batch-026",
+      "reportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9"
+    },
+    {
+      "batch": "official-batch-027",
+      "reportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+    },
+    {
+      "batch": "official-batch-028",
+      "reportSha256": "c1ee48a947ab94feac0f853531921d888b4ce30b24781afe7cb9e422e29f9276"
+    },
+    {
+      "batch": "official-batch-029",
+      "reportSha256": "6fa308e70e7e0ad0a0436ed5103eb067928fc9494ba1e977fdaba85cdd3d2243"
+    },
+    {
+      "batch": "official-batch-030",
+      "reportSha256": "95ae6d26c4de9030e7debe25a19d12f12d23235c3633a3b75aca538996958668"
+    },
+    {
+      "batch": "official-batch-031",
+      "reportSha256": "7f213f09e6f2e397a41ce67e2a81c68c9f4bed5f93f83d60d1cff37a42e5cf59"
+    },
+    {
+      "batch": "official-batch-032",
+      "reportSha256": "7ca2417531ff19ae0b9c7b348bf40be89d9029a48b7930172d876488b663b982"
+    },
+    {
+      "batch": "official-batch-033",
+      "reportSha256": "9087e4d1d7242809498d7f0a9c1b740419da39f52ee863e4d4849bd1aef44698"
+    },
+    {
+      "batch": "official-batch-034",
+      "reportSha256": "3ddc3e1c816b3c4927c13304492b76fd1fc8f5dc6ff90ec1043a770ccd55b9d0"
+    },
+    {
+      "batch": "official-batch-035",
+      "reportSha256": "b621c16cdbd0d01ca22059bd83f92e283d43629394ddab64ba7c86486ae7dafb"
+    },
+    {
+      "batch": "official-batch-036",
+      "reportSha256": "db944c0a39ebdae71e53866c10f70f6d98b60ef77ba034891224afe1c0bf7f50"
+    },
+    {
+      "batch": "official-batch-037",
+      "reportSha256": "97b3e53d8746d184d35408b19bff73b599781a934213b06ef23084b996e7ecc1"
+    },
+    {
+      "batch": "official-batch-038",
+      "reportSha256": "8df4ef3e1f25bf4165f9c5252e4226038bcc0d782f891d76d9506c53be143fb9"
+    },
+    {
+      "batch": "official-batch-039",
+      "reportSha256": "82f000484e1b310f4101e0bf377c1d9ce3da9dd3f05b37159c54acd4c8664380"
+    },
+    {
+      "batch": "official-batch-040",
+      "reportSha256": "c9e2856bd9c2436246d487f8a617767d59045dbdcb6e2e12029ef65938a16e2b"
+    },
+    {
+      "batch": "official-batch-041",
+      "reportSha256": "1836c4128bcf52a2aaa373fe3a78554913d602102d90c2d9106de0ef77cb5888"
+    },
+    {
+      "batch": "official-batch-042",
+      "reportSha256": "aac4c679eff569d3e6aee3b97c78b2b79a968cff2c0f4f7097fb628dc9120662"
+    }
+  ],
+  "validation": {
+    "exactNineIdsOnce": true,
+    "dispatchAndZeroExtensionScopeMatched": true,
+    "noAssessedOrPriorApprovedOverlap": true,
+    "sixInputsUnchanged": true,
+    "canonicalFullRowsParentsAndSourcesSaved": true,
+    "canonicalUniversityFullRowsSaved": true,
+    "quotedFragmentsMatchSavedOriginal": true,
+    "closedDatesExplicitPastIsoDays": true,
+    "unchangedStoredDatesMatchOfficialDay": true,
+    "strictBeforeBoundaryPreserved": true,
+    "openingDatesNotAssessed": true,
+    "noNewNetworkDuringResumedCompletion": true
+  }
+}

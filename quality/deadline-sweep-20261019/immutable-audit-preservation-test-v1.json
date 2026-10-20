@@ -1,0 +1,95 @@
+{
+  "input": "C:\\Users\\Henry\\Desktop\\学过的课程\\github_profile_work\\StudyInChina\\content\\data",
+  "auditDate": "2026-10-19",
+  "checks": [
+    {
+      "check": "identical-rerun-preserves-edited-progress-json-markdown-and-mtimes",
+      "passed": true,
+      "before": {
+        "catalog-deadlines.json": {
+          "sha256": "c7f2c02f19c67628523d895eec6470ad7a2f6c1454b186da1c45b6addda93dfd",
+          "mtimeMs": 1767225600000,
+          "bytes": 7163073
+        },
+        "catalog-deadlines.md": {
+          "sha256": "06de08726a7ad24b7778c0a4bf3b30177db6a5dff6d9f1004eebca2e6478cd32",
+          "mtimeMs": 1767225600000,
+          "bytes": 2958
+        },
+        "official-recheck-progress.json": {
+          "sha256": "e1765f37a32838e0ec2b6994c4b0a260eec2a73a5287020a1ba0d2e9eaa13c39",
+          "mtimeMs": 1767225600000,
+          "bytes": 3263
+        }
+      },
+      "after": {
+        "catalog-deadlines.json": {
+          "sha256": "c7f2c02f19c67628523d895eec6470ad7a2f6c1454b186da1c45b6addda93dfd",
+          "mtimeMs": 1767225600000,
+          "bytes": 7163073
+        },
+        "catalog-deadlines.md": {
+          "sha256": "06de08726a7ad24b7778c0a4bf3b30177db6a5dff6d9f1004eebca2e6478cd32",
+          "mtimeMs": 1767225600000,
+          "bytes": 2958
+        },
+        "official-recheck-progress.json": {
+          "sha256": "e1765f37a32838e0ec2b6994c4b0a260eec2a73a5287020a1ba0d2e9eaa13c39",
+          "mtimeMs": 1767225600000,
+          "bytes": 3263
+        }
+      }
+    },
+    {
+      "check": "changed-day-and-options-refuse-with-identical-hashes-and-mtimes",
+      "passed": true
+    },
+    {
+      "check": "changed-canonical-bytes-at-same-input-path-refuse-without-output-writes",
+      "passed": true
+    },
+    {
+      "check": "partial-json-markdown-progress-bundles-refuse-without-reconstruction",
+      "passed": true
+    },
+    {
+      "check": "existing-pinned-audit-json-markdown-and-progress-reused-byte-for-byte",
+      "passed": true,
+      "before": {
+        "catalog-deadlines.json": {
+          "sha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+          "mtimeMs": 1792384205685.2166,
+          "bytes": 7163054
+        },
+        "catalog-deadlines.md": {
+          "sha256": "06de08726a7ad24b7778c0a4bf3b30177db6a5dff6d9f1004eebca2e6478cd32",
+          "mtimeMs": 1792384205686.2234,
+          "bytes": 2958
+        },
+        "official-recheck-progress.json": {
+          "sha256": "545595b97a049033178212620b67bb5976547d0972db7a40d40a0dc4c54701ee",
+          "mtimeMs": 1792385988351.5215,
+          "bytes": 91544
+        }
+      },
+      "after": {
+        "catalog-deadlines.json": {
+          "sha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+          "mtimeMs": 1792384205685.2166,
+          "bytes": 7163054
+        },
+        "catalog-deadlines.md": {
+          "sha256": "06de08726a7ad24b7778c0a4bf3b30177db6a5dff6d9f1004eebca2e6478cd32",
+          "mtimeMs": 1792384205686.2234,
+          "bytes": 2958
+        },
+        "official-recheck-progress.json": {
+          "sha256": "545595b97a049033178212620b67bb5976547d0972db7a40d40a0dc4c54701ee",
+          "mtimeMs": 1792385988351.5215,
+          "bytes": 91544
+        }
+      }
+    }
+  ],
+  "completedAt": "2026-10-19T05:00:14.103Z"
+}

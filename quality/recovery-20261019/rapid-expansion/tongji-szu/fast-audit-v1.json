@@ -1,0 +1,2593 @@
+{
+  "schemaVersion": 1,
+  "auditId": "fast-existing-window-audit-20261019-v1",
+  "createdAt": "2026-10-18T17:58:05.157Z",
+  "evaluatedForDate": "2026-10-19",
+  "scope": "One bounded read-only audit, maximum 20 empty map schools detailed; only quality output written.",
+  "counts": {
+    "rawProgrammes": 2057,
+    "rawCycles": 1654,
+    "currentCanonicalPublicProgrammes": 784,
+    "mapUniversities": 255,
+    "coveredMapSchools": 18,
+    "emptyMapSchools": 237,
+    "storedWindowCandidateCycles": 58,
+    "storedWindowCandidateSchools": 42,
+    "detailedSchools": 20
+  },
+  "earlierBeforeRoot17ProgrammeBatch": {
+    "rawProgrammes": 2044,
+    "rawCycles": 1637,
+    "stablePublicProgrammes": 767,
+    "coveredMapSchools": 15,
+    "emptyMapSchools": 240,
+    "storedWindowCandidateCycles": 59,
+    "storedWindowCandidateSchools": 43
+  },
+  "inputSha256": {
+    "programs": "98a0d34fa3f773889a488210d9df7971e6d30c1b66fc169b9d7306167de1376a",
+    "admission-cycles": "32d0020a4c194de57143eb71e2872dee6d2eca8f758a1f6cef92f4decc95061f",
+    "sources": "22a0cd145750f7a96b674d47c7ce7c94b0cc75f36d03dc331212dcda6dc1fb63",
+    "universities": "993ecaa2e21541567242b15e2317ebdf98d42b93c09a46d3885e8205b5c604bd",
+    "cities": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "scholarships": "754977918f0811b469ed040fbf3c56be73d52e5530ce0f03d7e44a12c006560d"
+  },
+  "method": {
+    "windowPredicate": "dateStatus === rolling OR closesOn >= 2026-10-19; requires subsequent actual official current-window check",
+    "emptySchoolPredicate": "Public universities without a public programme according to production selectPublishedData",
+    "ranking": "fewest missing mandatory structural fields, then most stored-window candidates; ranking is not factual approval",
+    "rawOriginalLookup": "Bounded quality receipt filename scan; exact URL + raw path + SHA required. Canonical/harvest/audit JSON alone is not an official original.",
+    "receiptFilesExamined": 82
+  },
+  "topFive": [
+    {
+      "universityId": "uni-chongqing-normal-university",
+      "candidateCycles": 2,
+      "bestProgramId": "program-cqnu-chinese-language-spring-2027",
+      "structuralMissing": [],
+      "closesOn": "2026-12-30"
+    },
+    {
+      "universityId": "uni-wenzhou-kean-university",
+      "candidateCycles": 5,
+      "bestProgramId": "program-wenzhou-kean-university-architecture-bfa",
+      "structuralMissing": [
+        "eligibility",
+        "applicationMaterials"
+      ],
+      "closesOn": "2026-11-01"
+    },
+    {
+      "universityId": "uni-donghua-university",
+      "candidateCycles": 2,
+      "bestProgramId": "program-dhu-winter-chinese-2027",
+      "structuralMissing": [
+        "eligibility",
+        "applicationMaterials"
+      ],
+      "closesOn": "2026-11-30"
+    },
+    {
+      "universityId": "uni-harbin-institute-of-technology",
+      "candidateCycles": 1,
+      "bestProgramId": "prog-gap-wave8-hit-winter-short-term-chinese-2026",
+      "structuralMissing": [
+        "eligibility",
+        "applicationMaterials"
+      ],
+      "closesOn": "2026-11-30"
+    },
+    {
+      "universityId": "uni-university-of-international-business-and-economics",
+      "candidateCycles": 4,
+      "bestProgramId": "program-uibe-international-foundation-spring-2027",
+      "structuralMissing": [
+        "teaching_medium",
+        "eligibility",
+        "applicationMaterials"
+      ],
+      "closesOn": "2026-12-31"
+    }
+  ],
+  "freshSpecificFinding": {
+    "programId": "program-cqnu-chinese-language-spring-2027",
+    "actualCurrentOfficialDeadline": "2026-12-25",
+    "storedDeadlineWas": "2026-12-30",
+    "languageMaterials": "HSK and HSKK requested by both current official pages; optionality not stated despite zero-level classes.",
+    "durationTension": "EN application prose March-June; ZH prose and both programme tables March-July. Retain original semester wording and note conflict, never convert to guessed months.",
+    "teachingMedium": "Not explicitly established in the two current programme brochures; held until sufficient official evidence."
+  },
+  "schools": [
+    {
+      "universityId": "uni-chongqing-normal-university",
+      "name": {
+        "en": "Chongqing Normal University",
+        "zh": "重庆师范大学",
+        "ru": "Чунцинский педагогический университет"
+      },
+      "candidateCycles": 2,
+      "bestStructuralMissing": [],
+      "programmes": [
+        {
+          "programId": "program-cqnu-chinese-language-spring-2027",
+          "programName": {
+            "en": "Chinese Language Program — Spring 2027",
+            "zh": "汉语进修项目（2027年春季）",
+            "ru": "Программа китайского языка — весна 2027"
+          },
+          "programLocation": "content/data/programs.json#/345",
+          "cycleId": "cycle-cqnu-chinese-language-spring-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/137",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": "2026-09-01",
+          "closesOn": "2026-12-30",
+          "structuralMissing": [],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28",
+            "factScope": "complete",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 4,
+          "durationMonthsMax": 5,
+          "durationText": null,
+          "tuitionCny": 7000,
+          "tuitionPeriod": "semester",
+          "tuitionStatus": "confirmed",
+          "applicationFeeCny": 400,
+          "applyUrl": "https://foreignstudent.cqnu.edu.cn/",
+          "sourceRecords": [
+            {
+              "id": "src-cqnu-chinese-language-2027",
+              "recordLocation": "content/data/sources.json#/458",
+              "url": "https://international.cqnu.edu.cn/ywb/info/1376/1302.htm",
+              "official": true,
+              "accessedAt": "2026-07-29",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/tongji-szu/cqnu/cqnu-current-en-native.receipt.json",
+                  "rawPath": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina/quality/recovery-20261019/rapid-expansion/tongji-szu/cqnu/cqnu-current-en-native.html",
+                  "rawSha256": "37ef550c7160e8e880b478c3d064e0b8212131e3591d106b82dde4301321b26e",
+                  "textPath": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina/quality/recovery-20261019/rapid-expansion/tongji-szu/cqnu/cqnu-current-en-native.text.txt",
+                  "textSha256": "607c8f0f2071ac917c353f1f2dc03db6eb782e7f54c5ec38aea56f30e53748d0",
+                  "retrievedAt": "2026-10-18T17:57:12.503507+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            },
+            {
+              "id": "src-cqnu-chinese-language-2027-zh",
+              "recordLocation": "content/data/sources.json#/459",
+              "url": "https://international.cqnu.edu.cn/info/1386/5186.htm",
+              "official": true,
+              "accessedAt": "2026-07-29",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/tongji-szu/cqnu/cqnu-current-zh-native.receipt.json",
+                  "rawPath": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina/quality/recovery-20261019/rapid-expansion/tongji-szu/cqnu/cqnu-current-zh-native.html",
+                  "rawSha256": "543152f041d0c6eabecd303ce92952e89a35540731e1a4b3a8c7afe9c717aee4",
+                  "textPath": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina/quality/recovery-20261019/rapid-expansion/tongji-szu/cqnu/cqnu-current-zh-native.text.txt",
+                  "textSha256": "ee98f0d557b1d207043a6d34bb7cf1fc4e8061848ccdd4a4302aef8f1823183d",
+                  "retrievedAt": "2026-10-18T17:57:13.269994+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        },
+        {
+          "programId": "program-cqnu-iclt-one-semester-spring-2027",
+          "programName": {
+            "en": "International Chinese Language Teachers Scholarship — One-Semester Study (Spring 2027)",
+            "zh": "国际中文教师奖学金一学期研修项目（2027年春季）",
+            "ru": "Семестровая программа стипендии для преподавателей китайского языка (весна 2027)"
+          },
+          "programLocation": "content/data/programs.json#/337",
+          "cycleId": "cycle-cqnu-iclt-one-semester-spring-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/129",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-10-31",
+          "structuralMissing": [
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28",
+            "factScope": "dates-only",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 5,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": null,
+          "applyUrl": "https://foreignstudent.cqnu.edu.cn/",
+          "sourceRecords": [
+            {
+              "id": "src-cqnu-iclt-2026",
+              "recordLocation": "content/data/sources.json#/450",
+              "url": "https://international.cqnu.edu.cn/info/1331/5225.htm",
+              "official": true,
+              "accessedAt": "2026-07-29",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-clec-iclt-2026-standard",
+              "recordLocation": "content/data/sources.json#/339",
+              "url": "https://pmplatform.chinese.cn/tmp/2026/2/6/94005b2e-f2e9-438e-85e7-12212f0e9968.pdf",
+              "official": true,
+              "accessedAt": "2026-10-13",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.receipt.json",
+                  "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.pdf",
+                  "rawSha256": "0157c7fb5962657cc5f58be63cfc8a0898c4279ea8f87e15c40302fe90f981d7",
+                  "textPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.text.txt",
+                  "textSha256": "b336af82cac3cbf9736562be3f3ee2479fc1f8e10be10442df77e06d8da3db60",
+                  "retrievedAt": "2026-10-18T17:47:49.803504+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-wenzhou-kean-university",
+      "name": {
+        "en": "Wenzhou-Kean University",
+        "zh": "温州肯恩大学",
+        "ru": "Вэньчжоуский университет Кин"
+      },
+      "candidateCycles": 5,
+      "bestStructuralMissing": [
+        "eligibility",
+        "applicationMaterials"
+      ],
+      "programmes": [
+        {
+          "programId": "program-wenzhou-kean-university-architecture-bfa",
+          "programName": {
+            "en": "Bachelor of Fine Arts in Architecture",
+            "zh": "建筑学艺术学士",
+            "ru": "Бакалавр изящных искусств по архитектуре"
+          },
+          "programLocation": "content/data/programs.json#/303",
+          "cycleId": "cycle-2027-wenzhou-kean-university-architecture-bfa-spring-transfer",
+          "cycleLocation": "content/data/admission-cycles.json#/96",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-11-01",
+          "structuralMissing": [
+            "eligibility",
+            "applicationMaterials"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-10",
+            "reviewAfter": "2026-08-17",
+            "factScope": "complete",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "durationMonths": 48,
+          "durationText": null,
+          "tuitionCny": 68000,
+          "tuitionPeriod": "academic-year",
+          "tuitionStatus": "confirmed",
+          "applicationFeeCny": 400,
+          "applyUrl": "https://intlapply.wku.edu.cn/",
+          "sourceRecords": [
+            {
+              "id": "src-wku-architecture-bfa",
+              "recordLocation": "content/data/sources.json#/329",
+              "url": "https://design.wku.edu.cn/zh-hans/node/1846",
+              "official": true,
+              "accessedAt": "2026-07-28",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-wku-international-admissions-2027",
+              "recordLocation": "content/data/sources.json#/324",
+              "url": "https://admission.wku.edu.cn/en/internationalstudents",
+              "official": true,
+              "accessedAt": "2026-08-10",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        },
+        {
+          "programId": "program-wenzhou-kean-university-biology-cell-molecular-bs",
+          "programName": {
+            "en": "Bachelor of Science in Biology (Cell and Molecular Biology Option)",
+            "zh": "生物学理学学士（细胞与分子生物学方向）",
+            "ru": "Бакалавр наук по биологии (клеточная и молекулярная биология)"
+          },
+          "programLocation": "content/data/programs.json#/302",
+          "cycleId": "cycle-2027-wenzhou-kean-university-biology-cell-molecular-bs-spring-transfer",
+          "cycleLocation": "content/data/admission-cycles.json#/95",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-11-01",
+          "structuralMissing": [
+            "eligibility",
+            "applicationMaterials"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-10",
+            "reviewAfter": "2026-08-17",
+            "factScope": "complete",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "durationMonths": 48,
+          "durationText": null,
+          "tuitionCny": 68000,
+          "tuitionPeriod": "academic-year",
+          "tuitionStatus": "confirmed",
+          "applicationFeeCny": 400,
+          "applyUrl": "https://intlapply.wku.edu.cn/",
+          "sourceRecords": [
+            {
+              "id": "src-wku-biology-cell-molecular-bs",
+              "recordLocation": "content/data/sources.json#/328",
+              "url": "https://csmt.wku.edu.cn/en/node/1809",
+              "official": true,
+              "accessedAt": "2026-07-28",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-wku-international-admissions-2027",
+              "recordLocation": "content/data/sources.json#/324",
+              "url": "https://admission.wku.edu.cn/en/internationalstudents",
+              "official": true,
+              "accessedAt": "2026-08-10",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        },
+        {
+          "programId": "program-wenzhou-kean-university-computer-science-bs",
+          "programName": {
+            "en": "Bachelor of Science in Computer Science",
+            "zh": "计算机科学理学学士",
+            "ru": "Бакалавр наук по компьютерным наукам"
+          },
+          "programLocation": "content/data/programs.json#/301",
+          "cycleId": "cycle-2027-wenzhou-kean-university-computer-science-bs-spring-transfer",
+          "cycleLocation": "content/data/admission-cycles.json#/94",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-11-01",
+          "structuralMissing": [
+            "eligibility",
+            "applicationMaterials"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-10",
+            "reviewAfter": "2026-08-17",
+            "factScope": "complete",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "durationMonths": 48,
+          "durationText": null,
+          "tuitionCny": 68000,
+          "tuitionPeriod": "academic-year",
+          "tuitionStatus": "confirmed",
+          "applicationFeeCny": 400,
+          "applyUrl": "https://intlapply.wku.edu.cn/",
+          "sourceRecords": [
+            {
+              "id": "src-wku-computer-science-bs",
+              "recordLocation": "content/data/sources.json#/327",
+              "url": "https://csmt.wku.edu.cn/en/node/1794",
+              "official": true,
+              "accessedAt": "2026-07-28",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-wku-international-admissions-2027",
+              "recordLocation": "content/data/sources.json#/324",
+              "url": "https://admission.wku.edu.cn/en/internationalstudents",
+              "official": true,
+              "accessedAt": "2026-08-10",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        },
+        {
+          "programId": "program-wenzhou-kean-university-finance-bs",
+          "programName": {
+            "en": "Bachelor of Science in Finance",
+            "zh": "金融学理学学士",
+            "ru": "Бакалавр наук по финансам"
+          },
+          "programLocation": "content/data/programs.json#/299",
+          "cycleId": "cycle-2027-wenzhou-kean-university-finance-bs-spring-transfer",
+          "cycleLocation": "content/data/admission-cycles.json#/92",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-11-01",
+          "structuralMissing": [
+            "eligibility",
+            "applicationMaterials"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-10",
+            "reviewAfter": "2026-08-17",
+            "factScope": "complete",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "durationMonths": 48,
+          "durationText": null,
+          "tuitionCny": 68000,
+          "tuitionPeriod": "academic-year",
+          "tuitionStatus": "confirmed",
+          "applicationFeeCny": 400,
+          "applyUrl": "https://intlapply.wku.edu.cn/",
+          "sourceRecords": [
+            {
+              "id": "src-wku-finance-bs",
+              "recordLocation": "content/data/sources.json#/325",
+              "url": "https://cbpm.wku.edu.cn/en/node/1839",
+              "official": true,
+              "accessedAt": "2026-07-28",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-wku-international-admissions-2027",
+              "recordLocation": "content/data/sources.json#/324",
+              "url": "https://admission.wku.edu.cn/en/internationalstudents",
+              "official": true,
+              "accessedAt": "2026-08-10",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        },
+        {
+          "programId": "program-wenzhou-kean-university-global-business-bs",
+          "programName": {
+            "en": "Bachelor of Science in Global Business",
+            "zh": "全球商务理学学士",
+            "ru": "Бакалавр наук по глобальному бизнесу"
+          },
+          "programLocation": "content/data/programs.json#/300",
+          "cycleId": "cycle-2027-wenzhou-kean-university-global-business-bs-spring-transfer",
+          "cycleLocation": "content/data/admission-cycles.json#/93",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-11-01",
+          "structuralMissing": [
+            "eligibility",
+            "applicationMaterials"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-10",
+            "reviewAfter": "2026-08-17",
+            "factScope": "complete",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "durationMonths": 48,
+          "durationText": null,
+          "tuitionCny": 68000,
+          "tuitionPeriod": "academic-year",
+          "tuitionStatus": "confirmed",
+          "applicationFeeCny": 400,
+          "applyUrl": "https://intlapply.wku.edu.cn/",
+          "sourceRecords": [
+            {
+              "id": "src-wku-global-business-bs",
+              "recordLocation": "content/data/sources.json#/326",
+              "url": "https://cbpm.wku.edu.cn/en/node/1845",
+              "official": true,
+              "accessedAt": "2026-07-28",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-wku-international-admissions-2027",
+              "recordLocation": "content/data/sources.json#/324",
+              "url": "https://admission.wku.edu.cn/en/internationalstudents",
+              "official": true,
+              "accessedAt": "2026-08-10",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-donghua-university",
+      "name": {
+        "en": "Donghua University",
+        "zh": "东华大学",
+        "ru": "Университет Дунхуа"
+      },
+      "candidateCycles": 2,
+      "bestStructuralMissing": [
+        "eligibility",
+        "applicationMaterials"
+      ],
+      "programmes": [
+        {
+          "programId": "program-dhu-winter-chinese-2027",
+          "programName": {
+            "en": "2027 Winter Chinese Program",
+            "zh": "2027年冬季汉语项目",
+            "ru": "Зимняя программа китайского языка 2027"
+          },
+          "programLocation": "content/data/programs.json#/311",
+          "cycleId": "cycle-dhu-winter-chinese-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/103",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "dateStatus": "published",
+          "opensOn": "2026-07-10",
+          "closesOn": "2026-11-30",
+          "structuralMissing": [
+            "eligibility",
+            "applicationMaterials"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27",
+            "factScope": "complete",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 1,
+          "durationText": null,
+          "tuitionCny": 3600,
+          "tuitionPeriod": "program",
+          "tuitionStatus": "confirmed",
+          "applicationFeeCny": 600,
+          "applyUrl": "https://admissions.dhu.edu.cn/index",
+          "sourceRecords": [
+            {
+              "id": "src-dhu-winter-chinese-2027",
+              "recordLocation": "content/data/sources.json#/342",
+              "url": "https://english.dhu.edu.cn/_t1264/2021/0702/c5220a369798/page.psp",
+              "official": true,
+              "accessedAt": "2026-07-28",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        },
+        {
+          "programId": "program-dhu-iclt-one-semester-spring-2027",
+          "programName": {
+            "en": "International Chinese Language Teachers Scholarship — One-Semester Study (Spring 2027)",
+            "zh": "国际中文教师奖学金一学期研修项目（2027年春季）",
+            "ru": "Семестровая программа стипендии для преподавателей китайского языка (весна 2027)"
+          },
+          "programLocation": "content/data/programs.json#/317",
+          "cycleId": "cycle-dhu-iclt-one-semester-spring-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/109",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-10-31",
+          "structuralMissing": [
+            "eligibility",
+            "applicationMaterials",
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27",
+            "factScope": "dates-only",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 5,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": null,
+          "applyUrl": "https://pmplatform.chinese.cn/ui/start/#/login",
+          "sourceRecords": [
+            {
+              "id": "src-dhu-iclt-2026",
+              "recordLocation": "content/data/sources.json#/343",
+              "url": "https://english.dhu.edu.cn/_t1264/2021/0119/c5221a273256/page.psp",
+              "official": true,
+              "accessedAt": "2026-07-28",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-clec-iclt-2026-standard",
+              "recordLocation": "content/data/sources.json#/339",
+              "url": "https://pmplatform.chinese.cn/tmp/2026/2/6/94005b2e-f2e9-438e-85e7-12212f0e9968.pdf",
+              "official": true,
+              "accessedAt": "2026-10-13",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.receipt.json",
+                  "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.pdf",
+                  "rawSha256": "0157c7fb5962657cc5f58be63cfc8a0898c4279ea8f87e15c40302fe90f981d7",
+                  "textPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.text.txt",
+                  "textSha256": "b336af82cac3cbf9736562be3f3ee2479fc1f8e10be10442df77e06d8da3db60",
+                  "retrievedAt": "2026-10-18T17:47:49.803504+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-harbin-institute-of-technology",
+      "name": {
+        "en": "Harbin Institute of Technology",
+        "zh": "哈尔滨工业大学",
+        "ru": "Харбинский политехнический университет"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "eligibility",
+        "applicationMaterials"
+      ],
+      "programmes": [
+        {
+          "programId": "prog-gap-wave8-hit-winter-short-term-chinese-2026",
+          "programName": {
+            "en": "2026–2027 Winter Short-Term Chinese Language Program",
+            "zh": "2026—2027冬季短期汉语项目",
+            "ru": "Зимняя краткосрочная программа китайского языка 2026–2027",
+            "de": "Winter-Kurzprogramm Chinesisch 2026–2027",
+            "es": "Programa breve de invierno de lengua china 2026–2027",
+            "fr": "Programme court d’hiver de langue chinoise 2026–2027"
+          },
+          "programLocation": "content/data/programs.json#/726",
+          "cycleId": "cycle-gap-wave8-hit-winter-short-term-chinese-2026-2026-2027-other",
+          "cycleLocation": "content/data/admission-cycles.json#/362",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-11-30",
+          "structuralMissing": [
+            "eligibility",
+            "applicationMaterials"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-09-28",
+            "reviewAfter": "2026-10-05"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-09-28",
+            "reviewAfter": "2026-10-05",
+            "factScope": "complete",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 1,
+          "durationMonthsMax": null,
+          "durationText": null,
+          "tuitionCny": 3500,
+          "tuitionPeriod": "program",
+          "tuitionStatus": "confirmed",
+          "applicationFeeCny": 500,
+          "applyUrl": "https://apply.hit.edu.cn/",
+          "sourceRecords": [
+            {
+              "id": "src-gap-program-wave8-hit-winter-short-term-chinese-2026",
+              "recordLocation": "content/data/sources.json#/982",
+              "url": "https://studyathit.hit.edu.cn/ShortwTermPrograms/list.htm",
+              "official": true,
+              "accessedAt": "2026-09-28",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-university-of-international-business-and-economics",
+      "name": {
+        "en": "University of International Business and Economics",
+        "zh": "对外经济贸易大学",
+        "ru": "Университет международного бизнеса и экономики"
+      },
+      "candidateCycles": 4,
+      "bestStructuralMissing": [
+        "teaching_medium",
+        "eligibility",
+        "applicationMaterials"
+      ],
+      "programmes": [
+        {
+          "programId": "program-uibe-international-foundation-spring-2027",
+          "programName": {
+            "en": "International Foundation Program — Spring 2027",
+            "zh": "国际学生预科项目（2027年春季）",
+            "ru": "Международная подготовительная программа — весна 2027"
+          },
+          "programLocation": "content/data/programs.json#/313",
+          "cycleId": "cycle-uibe-international-foundation-spring-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/105",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": "2026-10-01",
+          "closesOn": "2026-12-31",
+          "structuralMissing": [
+            "teaching_medium",
+            "eligibility",
+            "applicationMaterials"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27",
+            "factScope": "complete",
+            "evidenceBasis": "recurring-official-rule"
+          },
+          "teachingLanguages": [],
+          "durationMonths": 4,
+          "durationText": null,
+          "tuitionCny": 15600,
+          "tuitionPeriod": "semester",
+          "tuitionStatus": "confirmed",
+          "applicationFeeCny": 660,
+          "applyUrl": "https://isa.uibe.edu.cn/",
+          "sourceRecords": [
+            {
+              "id": "src-uibe-international-foundation",
+              "recordLocation": "content/data/sources.json#/350",
+              "url": "https://sie.uibe.edu.cn/en/Prgr/FouCouBacProCh/FouCouBacProChiSelf/cf60f17e393347278a43068323179bd3.htm",
+              "official": true,
+              "accessedAt": "2026-07-28",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": "Existing heartbeat-1736 source-preparation owner; no duplicate capture."
+        },
+        {
+          "programId": "program-university-of-international-business-and-economics-economics-bachelor",
+          "programName": {
+            "en": "Economics",
+            "zh": "Economics",
+            "ru": "Экономика"
+          },
+          "programLocation": "content/data/programs.json#/45",
+          "cycleId": "cycle-2026-e4d822684a6f",
+          "cycleLocation": "content/data/admission-cycles.json#/30",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": "2026-10-20",
+          "closesOn": "2026-12-31",
+          "structuralMissing": [
+            "identity_only_program",
+            "original_duration",
+            "language_requirements",
+            "eligibility",
+            "applicationMaterials",
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-26",
+            "reviewAfter": "2026-08-25"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-27",
+            "reviewAfter": "2026-08-03",
+            "factScope": "partial",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "durationMonths": null,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": 660,
+          "applyUrl": "https://sie.uibe.edu.cn/en/Prgr/index.htm",
+          "sourceRecords": [
+            {
+              "id": "src-program-review-5e00097dda79",
+              "recordLocation": "content/data/sources.json#/88",
+              "url": "https://sie.uibe.edu.cn/en/Prgr/BacDegPro/OfEn/index.htm",
+              "official": true,
+              "accessedAt": "2026-07-26",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": "Existing heartbeat-1736 source-preparation owner; no duplicate capture."
+        },
+        {
+          "programId": "program-university-of-international-business-and-economics-finance-bachelor",
+          "programName": {
+            "en": "Finance",
+            "zh": "Finance",
+            "ru": "Финансы"
+          },
+          "programLocation": "content/data/programs.json#/153",
+          "cycleId": "cycle-2026-a57df6c71eea",
+          "cycleLocation": "content/data/admission-cycles.json#/43",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": "2026-10-20",
+          "closesOn": "2026-12-31",
+          "structuralMissing": [
+            "identity_only_program",
+            "original_duration",
+            "language_requirements",
+            "eligibility",
+            "applicationMaterials",
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-26",
+            "reviewAfter": "2026-08-25"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-27",
+            "reviewAfter": "2026-08-03",
+            "factScope": "partial",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "durationMonths": null,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": 660,
+          "applyUrl": "https://sie.uibe.edu.cn/en/Prgr/index.htm",
+          "sourceRecords": [
+            {
+              "id": "src-program-review-5e00097dda79",
+              "recordLocation": "content/data/sources.json#/88",
+              "url": "https://sie.uibe.edu.cn/en/Prgr/BacDegPro/OfEn/index.htm",
+              "official": true,
+              "accessedAt": "2026-07-26",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": "Existing heartbeat-1736 source-preparation owner; no duplicate capture."
+        },
+        {
+          "programId": "program-university-of-international-business-and-economics-international-economi",
+          "programName": {
+            "en": "International Economics and Trade",
+            "zh": "International Economics and Trade",
+            "ru": "Международная экономика и торговля"
+          },
+          "programLocation": "content/data/programs.json#/255",
+          "cycleId": "cycle-2026-767e75c27f6e",
+          "cycleLocation": "content/data/admission-cycles.json#/54",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": "2026-10-20",
+          "closesOn": "2026-12-31",
+          "structuralMissing": [
+            "identity_only_program",
+            "original_duration",
+            "language_requirements",
+            "eligibility",
+            "applicationMaterials",
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-26",
+            "reviewAfter": "2026-08-25"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-27",
+            "reviewAfter": "2026-08-03",
+            "factScope": "partial",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "English"
+          ],
+          "durationMonths": null,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": 660,
+          "applyUrl": "https://sie.uibe.edu.cn/en/Prgr/index.htm",
+          "sourceRecords": [
+            {
+              "id": "src-program-review-5e00097dda79",
+              "recordLocation": "content/data/sources.json#/88",
+              "url": "https://sie.uibe.edu.cn/en/Prgr/BacDegPro/OfEn/index.htm",
+              "official": true,
+              "accessedAt": "2026-07-26",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": "Existing heartbeat-1736 source-preparation owner; no duplicate capture."
+        }
+      ]
+    },
+    {
+      "universityId": "uni-zhejiang-af-university",
+      "name": {
+        "en": "Zhejiang A&F University",
+        "zh": "浙江农林大学",
+        "ru": "Чжэцзянский университет сельского и лесного хозяйства"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "tuition_and_period",
+        "tuition_confidence_or_explicit_reference_opt_in",
+        "complete_cycle_facts"
+      ],
+      "programmes": [
+        {
+          "programId": "program-zafu-iclt-one-semester-spring-2027",
+          "programName": {
+            "en": "International Chinese Language Teachers Scholarship — One-Semester Chinese Language and Literature Program (Spring 2027)",
+            "zh": "国际中文教师奖学金一学期汉语言文学研修项目（2027年春季）",
+            "ru": "Стипендия для преподавателей китайского языка — семестровая программа китайского языка и литературы (весна 2027)"
+          },
+          "programLocation": "content/data/programs.json#/339",
+          "cycleId": "cycle-zafu-iclt-one-semester-spring-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/131",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-10-31",
+          "structuralMissing": [
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28",
+            "factScope": "partial",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 5,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": 600,
+          "applyUrl": "https://pmplatform.chinese.cn/ui/start/#/login",
+          "sourceRecords": [
+            {
+              "id": "src-zafu-iclt-2026",
+              "recordLocation": "content/data/sources.json#/452",
+              "url": "https://iec.zafu.edu.cn/info/1038/6702.htm",
+              "official": true,
+              "accessedAt": "2026-07-29",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-clec-iclt-2026-standard",
+              "recordLocation": "content/data/sources.json#/339",
+              "url": "https://pmplatform.chinese.cn/tmp/2026/2/6/94005b2e-f2e9-438e-85e7-12212f0e9968.pdf",
+              "official": true,
+              "accessedAt": "2026-10-13",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.receipt.json",
+                  "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.pdf",
+                  "rawSha256": "0157c7fb5962657cc5f58be63cfc8a0898c4279ea8f87e15c40302fe90f981d7",
+                  "textPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.text.txt",
+                  "textSha256": "b336af82cac3cbf9736562be3f3ee2479fc1f8e10be10442df77e06d8da3db60",
+                  "retrievedAt": "2026-10-18T17:47:49.803504+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-beijing-foreign-studies-university",
+      "name": {
+        "en": "Beijing Foreign Studies University",
+        "zh": "北京外国语大学",
+        "ru": "Пекинский университет иностранных языков"
+      },
+      "candidateCycles": 2,
+      "bestStructuralMissing": [
+        "teaching_medium",
+        "eligibility",
+        "applicationMaterials",
+        "tuition_confidence_or_explicit_reference_opt_in"
+      ],
+      "programmes": [
+        {
+          "programId": "program-bfsu-general-chinese-training-spring-2027",
+          "programName": {
+            "en": "General Chinese Training Program — Spring 2027",
+            "zh": "普通汉语进修项目（2027年春季）",
+            "ru": "Общая программа китайского языка — весна 2027"
+          },
+          "programLocation": "content/data/programs.json#/312",
+          "cycleId": "cycle-bfsu-general-chinese-training-spring-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/104",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-12-15",
+          "structuralMissing": [
+            "teaching_medium",
+            "eligibility",
+            "applicationMaterials",
+            "tuition_confidence_or_explicit_reference_opt_in"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-26",
+            "reviewAfter": "2026-09-25"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-26",
+            "reviewAfter": "2026-09-02",
+            "factScope": "complete",
+            "evidenceBasis": "recurring-official-rule"
+          },
+          "teachingLanguages": [],
+          "durationMonths": 4,
+          "durationText": null,
+          "tuitionCny": 12000,
+          "tuitionPeriod": "semester",
+          "tuitionStatus": "reference",
+          "applicationFeeCny": 800,
+          "applyUrl": "https://study.bfsu.edu.cn/",
+          "sourceRecords": [
+            {
+              "id": "src-bfsu-chinese-training",
+              "recordLocation": "content/data/sources.json#/348",
+              "url": "https://osao.bfsu.edu.cn/info/2832/5592.htm",
+              "official": true,
+              "accessedAt": "2026-07-28",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "bfsu-scll-live",
+              "recordLocation": "content/data/sources.json#/2131",
+              "url": "https://osao.bfsu.edu.cn/info/2832/5592.htm",
+              "official": true,
+              "accessedAt": "2026-08-26",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "bfsu-undergraduate-2026",
+              "recordLocation": "content/data/sources.json#/2132",
+              "url": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+              "official": true,
+              "accessedAt": "2026-08-26",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        },
+        {
+          "programId": "program-bfsu-iclt-one-semester-spring-2027",
+          "programName": {
+            "en": "International Chinese Language Teachers Scholarship — One-Semester Study (Spring 2027)",
+            "zh": "国际中文教师奖学金一学期研修项目（2027年春季）",
+            "ru": "Семестровая программа стипендии для преподавателей китайского языка (весна 2027)"
+          },
+          "programLocation": "content/data/programs.json#/320",
+          "cycleId": "cycle-bfsu-iclt-one-semester-spring-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/112",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-12-30",
+          "structuralMissing": [
+            "teaching_medium",
+            "eligibility",
+            "applicationMaterials",
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-26",
+            "reviewAfter": "2026-09-25"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-26",
+            "reviewAfter": "2026-09-02",
+            "factScope": "dates-only",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [],
+          "durationMonths": 5,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": null,
+          "applyUrl": "https://pmplatform.chinese.cn/ui/start/#/login",
+          "sourceRecords": [
+            {
+              "id": "src-bfsu-iclt-2026",
+              "recordLocation": "content/data/sources.json#/349",
+              "url": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+              "official": true,
+              "accessedAt": "2026-09-28",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-clec-iclt-2026-standard",
+              "recordLocation": "content/data/sources.json#/339",
+              "url": "https://pmplatform.chinese.cn/tmp/2026/2/6/94005b2e-f2e9-438e-85e7-12212f0e9968.pdf",
+              "official": true,
+              "accessedAt": "2026-10-13",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.receipt.json",
+                  "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.pdf",
+                  "rawSha256": "0157c7fb5962657cc5f58be63cfc8a0898c4279ea8f87e15c40302fe90f981d7",
+                  "textPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.text.txt",
+                  "textSha256": "b336af82cac3cbf9736562be3f3ee2479fc1f8e10be10442df77e06d8da3db60",
+                  "retrievedAt": "2026-10-18T17:47:49.803504+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            },
+            {
+              "id": "bfsu-icl-scholarship-2026",
+              "recordLocation": "content/data/sources.json#/2130",
+              "url": "https://osao.bfsu.edu.cn/info/2462/6812.htm",
+              "official": true,
+              "accessedAt": "2026-09-28",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-chengdu-university-of-technology",
+      "name": {
+        "en": "Chengdu University of Technology",
+        "zh": "成都理工大学",
+        "ru": "Чэндуский технологический университет"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "tuition_and_period",
+        "tuition_confidence_or_explicit_reference_opt_in",
+        "application_fee",
+        "complete_cycle_facts"
+      ],
+      "programmes": [
+        {
+          "programId": "program-cdut-china-link-2026-2027",
+          "programName": {
+            "en": "China Link Short-Term Scientific Exchange Program (2026–2027)",
+            "zh": "中国政府奖学金短期科研交流项目（2026—2027）",
+            "ru": "Краткосрочная научно-исследовательская программа China Link (2026–2027)"
+          },
+          "programLocation": "content/data/programs.json#/334",
+          "cycleId": "cycle-cdut-china-link-2026-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/126",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "dateStatus": "rolling",
+          "opensOn": null,
+          "closesOn": null,
+          "structuralMissing": [
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28",
+            "factScope": "dates-only",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese",
+            "English"
+          ],
+          "durationMonths": 1,
+          "durationMonthsMax": 12,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": null,
+          "applyUrl": "https://cdut.at0086.cn/student",
+          "sourceRecords": [
+            {
+              "id": "src-cdut-china-link-2026",
+              "recordLocation": "content/data/sources.json#/447",
+              "url": "https://cie.cdut.edu.cn/info/1048/1761.htm",
+              "official": true,
+              "accessedAt": "2026-07-29",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-fujian-normal-university",
+      "name": {
+        "en": "Fujian Normal University",
+        "zh": "福建师范大学",
+        "ru": "Фуцзяньский педагогический университет"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "tuition_and_period",
+        "tuition_confidence_or_explicit_reference_opt_in",
+        "application_fee",
+        "complete_cycle_facts"
+      ],
+      "programmes": [
+        {
+          "programId": "program-fjnu-iclt-one-semester-spring-2027",
+          "programName": {
+            "en": "International Chinese Language Teachers Scholarship — One-Semester Study (Spring 2027)",
+            "zh": "国际中文教师奖学金一学期研修项目（2027年春季）",
+            "ru": "Семестровая программа стипендии для преподавателей китайского языка (весна 2027)"
+          },
+          "programLocation": "content/data/programs.json#/340",
+          "cycleId": "cycle-fjnu-iclt-one-semester-spring-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/132",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-10-31",
+          "structuralMissing": [
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28",
+            "factScope": "dates-only",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 5,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": null,
+          "applyUrl": "https://pmplatform.chinese.cn/ui/start/#/login",
+          "sourceRecords": [
+            {
+              "id": "src-fjnu-iclt-2026",
+              "recordLocation": "content/data/sources.json#/453",
+              "url": "https://iccs.fjnu.edu.cn/a6/21/c6596a435745/page.htm",
+              "official": true,
+              "accessedAt": "2026-07-29",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-clec-iclt-2026-standard",
+              "recordLocation": "content/data/sources.json#/339",
+              "url": "https://pmplatform.chinese.cn/tmp/2026/2/6/94005b2e-f2e9-438e-85e7-12212f0e9968.pdf",
+              "official": true,
+              "accessedAt": "2026-10-13",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.receipt.json",
+                  "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.pdf",
+                  "rawSha256": "0157c7fb5962657cc5f58be63cfc8a0898c4279ea8f87e15c40302fe90f981d7",
+                  "textPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.text.txt",
+                  "textSha256": "b336af82cac3cbf9736562be3f3ee2479fc1f8e10be10442df77e06d8da3db60",
+                  "retrievedAt": "2026-10-18T17:47:49.803504+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-jiangnan-university",
+      "name": {
+        "en": "Jiangnan University",
+        "zh": "江南大学",
+        "ru": "Университет Цзяннань"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "tuition_and_period",
+        "tuition_confidence_or_explicit_reference_opt_in",
+        "application_fee",
+        "complete_cycle_facts"
+      ],
+      "programmes": [
+        {
+          "programId": "program-jiangnan-iclt-one-semester-spring-2027",
+          "programName": {
+            "en": "International Chinese Language Teachers Scholarship — One-Semester Chinese Language and Literature Program (Spring 2027)",
+            "zh": "国际中文教师奖学金一学期汉语言文学研修项目（2027年春季）",
+            "ru": "Стипендия для преподавателей китайского языка — семестровая программа китайского языка и литературы (весна 2027)"
+          },
+          "programLocation": "content/data/programs.json#/342",
+          "cycleId": "cycle-jiangnan-iclt-one-semester-spring-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/134",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-10-31",
+          "structuralMissing": [
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28",
+            "factScope": "dates-only",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 5,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": null,
+          "applyUrl": "https://pmplatform.chinese.cn/ui/start/#/login",
+          "sourceRecords": [
+            {
+              "id": "src-jiangnan-iclt-2026",
+              "recordLocation": "content/data/sources.json#/455",
+              "url": "https://studyabroad.jiangnan.edu.cn/jxj/gjzwjsjxj.htm",
+              "official": true,
+              "accessedAt": "2026-07-29",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-clec-iclt-2026-standard",
+              "recordLocation": "content/data/sources.json#/339",
+              "url": "https://pmplatform.chinese.cn/tmp/2026/2/6/94005b2e-f2e9-438e-85e7-12212f0e9968.pdf",
+              "official": true,
+              "accessedAt": "2026-10-13",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.receipt.json",
+                  "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.pdf",
+                  "rawSha256": "0157c7fb5962657cc5f58be63cfc8a0898c4279ea8f87e15c40302fe90f981d7",
+                  "textPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.text.txt",
+                  "textSha256": "b336af82cac3cbf9736562be3f3ee2479fc1f8e10be10442df77e06d8da3db60",
+                  "retrievedAt": "2026-10-18T17:47:49.803504+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-minnan-normal-university",
+      "name": {
+        "en": "Minnan Normal University",
+        "zh": "闽南师范大学",
+        "ru": "Миньнаньский педагогический университет"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "tuition_and_period",
+        "tuition_confidence_or_explicit_reference_opt_in",
+        "application_fee",
+        "complete_cycle_facts"
+      ],
+      "programmes": [
+        {
+          "programId": "program-mnnu-iclt-one-semester-spring-2027",
+          "programName": {
+            "en": "International Chinese Language Teachers Scholarship — One-Semester Study (Spring 2027)",
+            "zh": "国际中文教师奖学金一学期研修项目（2027年春季）",
+            "ru": "Семестровая программа стипендии для преподавателей китайского языка (весна 2027)"
+          },
+          "programLocation": "content/data/programs.json#/338",
+          "cycleId": "cycle-mnnu-iclt-one-semester-spring-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/130",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-10-31",
+          "structuralMissing": [
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28",
+            "factScope": "dates-only",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 5,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": null,
+          "applyUrl": "https://admission.mnnu.edu.cn/",
+          "sourceRecords": [
+            {
+              "id": "src-mnnu-iclt-2026",
+              "recordLocation": "content/data/sources.json#/451",
+              "url": "https://oes.mnnu.edu.cn/info/1024/5947.htm",
+              "official": true,
+              "accessedAt": "2026-07-29",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-clec-iclt-2026-standard",
+              "recordLocation": "content/data/sources.json#/339",
+              "url": "https://pmplatform.chinese.cn/tmp/2026/2/6/94005b2e-f2e9-438e-85e7-12212f0e9968.pdf",
+              "official": true,
+              "accessedAt": "2026-10-13",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.receipt.json",
+                  "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.pdf",
+                  "rawSha256": "0157c7fb5962657cc5f58be63cfc8a0898c4279ea8f87e15c40302fe90f981d7",
+                  "textPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.text.txt",
+                  "textSha256": "b336af82cac3cbf9736562be3f3ee2479fc1f8e10be10442df77e06d8da3db60",
+                  "retrievedAt": "2026-10-18T17:47:49.803504+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-wenzhou-university",
+      "name": {
+        "en": "Wenzhou University",
+        "zh": "温州大学",
+        "ru": "Вэньчжоуский университет"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "tuition_and_period",
+        "tuition_confidence_or_explicit_reference_opt_in",
+        "application_fee",
+        "complete_cycle_facts"
+      ],
+      "programmes": [
+        {
+          "programId": "program-wzu-china-link-2026-2027",
+          "programName": {
+            "en": "China Link Short-Term Scientific Exchange Program (2026–2027)",
+            "zh": "中国政府奖学金短期科研交流项目（2026—2027）",
+            "ru": "Краткосрочная научно-исследовательская программа China Link (2026–2027)"
+          },
+          "programLocation": "content/data/programs.json#/335",
+          "cycleId": "cycle-wzu-china-link-2026-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/127",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "dateStatus": "rolling",
+          "opensOn": null,
+          "closesOn": null,
+          "structuralMissing": [
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28",
+            "factScope": "dates-only",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese",
+            "English"
+          ],
+          "durationMonths": 1,
+          "durationMonthsMax": 12,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": null,
+          "applyUrl": "https://studyinchina.csc.edu.cn/#/login",
+          "sourceRecords": [
+            {
+              "id": "src-wzu-china-link-2026",
+              "recordLocation": "content/data/sources.json#/448",
+              "url": "https://cic.wzu.edu.cn/info/1718/11956.htm",
+              "official": true,
+              "accessedAt": "2026-07-29",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-yanbian-university",
+      "name": {
+        "en": "Yanbian University",
+        "zh": "延边大学",
+        "ru": "Яньбяньский университет"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "tuition_and_period",
+        "tuition_confidence_or_explicit_reference_opt_in",
+        "application_fee",
+        "complete_cycle_facts"
+      ],
+      "programmes": [
+        {
+          "programId": "program-ybu-iclt-one-semester-spring-2027",
+          "programName": {
+            "en": "International Chinese Language Teachers Scholarship — One-Semester Study (Spring 2027)",
+            "zh": "国际中文教师奖学金一学期研修项目（2027年春季）",
+            "ru": "Семестровая программа стипендии для преподавателей китайского языка (весна 2027)"
+          },
+          "programLocation": "content/data/programs.json#/341",
+          "cycleId": "cycle-ybu-iclt-one-semester-spring-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/133",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-10-31",
+          "structuralMissing": [
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28",
+            "factScope": "dates-only",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 5,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": null,
+          "applyUrl": "https://pmplatform.chinese.cn/ui/start/#/login",
+          "sourceRecords": [
+            {
+              "id": "src-ybu-iclt-2026",
+              "recordLocation": "content/data/sources.json#/454",
+              "url": "https://liuxue.ybu.edu.cn/jxj/gjzwjsjxj.htm",
+              "official": true,
+              "accessedAt": "2026-07-29",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-clec-iclt-2026-standard",
+              "recordLocation": "content/data/sources.json#/339",
+              "url": "https://pmplatform.chinese.cn/tmp/2026/2/6/94005b2e-f2e9-438e-85e7-12212f0e9968.pdf",
+              "official": true,
+              "accessedAt": "2026-10-13",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.receipt.json",
+                  "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.pdf",
+                  "rawSha256": "0157c7fb5962657cc5f58be63cfc8a0898c4279ea8f87e15c40302fe90f981d7",
+                  "textPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.text.txt",
+                  "textSha256": "b336af82cac3cbf9736562be3f3ee2479fc1f8e10be10442df77e06d8da3db60",
+                  "retrievedAt": "2026-10-18T17:47:49.803504+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-zhejiang-normal-university",
+      "name": {
+        "en": "Zhejiang Normal University",
+        "zh": "浙江师范大学",
+        "ru": "Чжэцзянский педагогический университет"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "tuition_and_period",
+        "tuition_confidence_or_explicit_reference_opt_in",
+        "application_fee",
+        "complete_cycle_facts"
+      ],
+      "programmes": [
+        {
+          "programId": "program-zjnu-iclt-one-semester-spring-2027",
+          "programName": {
+            "en": "International Chinese Language Teachers Scholarship — One-Semester Study (Spring 2027)",
+            "zh": "国际中文教师奖学金一学期研修项目（2027年春季）",
+            "ru": "Семестровая программа стипендии для преподавателей китайского языка (весна 2027)"
+          },
+          "programLocation": "content/data/programs.json#/344",
+          "cycleId": "cycle-zjnu-iclt-one-semester-spring-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/136",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-10-31",
+          "structuralMissing": [
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-29",
+            "reviewAfter": "2026-08-28",
+            "factScope": "dates-only",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 5,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": null,
+          "applyUrl": "https://pmplatform.chinese.cn/ui/start/#/login",
+          "sourceRecords": [
+            {
+              "id": "src-zjnu-iclt-2026",
+              "recordLocation": "content/data/sources.json#/457",
+              "url": "https://iso.zjnu.edu.cn/2018/0517/c19165a517272/page.htm",
+              "official": true,
+              "accessedAt": "2026-07-29",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-clec-iclt-2026-standard",
+              "recordLocation": "content/data/sources.json#/339",
+              "url": "https://pmplatform.chinese.cn/tmp/2026/2/6/94005b2e-f2e9-438e-85e7-12212f0e9968.pdf",
+              "official": true,
+              "accessedAt": "2026-10-13",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.receipt.json",
+                  "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.pdf",
+                  "rawSha256": "0157c7fb5962657cc5f58be63cfc8a0898c4279ea8f87e15c40302fe90f981d7",
+                  "textPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.text.txt",
+                  "textSha256": "b336af82cac3cbf9736562be3f3ee2479fc1f8e10be10442df77e06d8da3db60",
+                  "retrievedAt": "2026-10-18T17:47:49.803504+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-hainan-university",
+      "name": {
+        "en": "Hainan University",
+        "zh": "海南大学",
+        "ru": "Хайнаньский университет"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "application_entry",
+        "language_requirements",
+        "eligibility",
+        "applicationMaterials",
+        "application_fee",
+        "complete_cycle_facts"
+      ],
+      "programmes": [
+        {
+          "programId": "prog-gap-clw-sw-hainanu-chinese-culture-semester",
+          "programName": {
+            "en": "Chinese Language and Culture — One Semester",
+            "zh": "汉语言文化一学期项目",
+            "ru": "Семестровая программа китайского языка и культуры"
+          },
+          "programLocation": "content/data/programs.json#/716",
+          "cycleId": "cycle-gap-clw-sw-hainanu-chinese-culture-semester-2026-2027-spring",
+          "cycleLocation": "content/data/admission-cycles.json#/354",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-12-31",
+          "structuralMissing": [
+            "application_entry",
+            "language_requirements",
+            "eligibility",
+            "applicationMaterials",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-08-09",
+            "factScope": "partial",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 6,
+          "durationText": null,
+          "tuitionCny": 8050,
+          "tuitionPeriod": "semester",
+          "tuitionStatus": "confirmed",
+          "applicationFeeCny": null,
+          "applyUrl": null,
+          "sourceRecords": [
+            {
+              "id": "src-gap-program-clw-sw-hainanu-chinese-culture-semester",
+              "recordLocation": "content/data/sources.json#/970",
+              "url": "https://sie.hainanu.edu.cn/info/1539/7914.htm",
+              "official": true,
+              "accessedAt": "2026-08-02",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-nankai-university",
+      "name": {
+        "en": "Nankai University",
+        "zh": "南开大学",
+        "ru": "Университет Нанкай"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "teaching_medium",
+        "eligibility",
+        "applicationMaterials",
+        "tuition_and_period",
+        "tuition_confidence_or_explicit_reference_opt_in",
+        "complete_cycle_facts"
+      ],
+      "programmes": [
+        {
+          "programId": "program-nankai-iclt-one-semester-spring-2027",
+          "programName": {
+            "en": "International Chinese Language Teachers Scholarship — One-Semester Study (Spring 2027)",
+            "zh": "国际中文教师奖学金一学期研修项目（2027年春季）",
+            "ru": "Семестровая программа стипендии для преподавателей китайского языка (весна 2027)"
+          },
+          "programLocation": "content/data/programs.json#/319",
+          "cycleId": "cycle-nankai-iclt-one-semester-spring-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/111",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-10-31",
+          "structuralMissing": [
+            "teaching_medium",
+            "eligibility",
+            "applicationMaterials",
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27",
+            "factScope": "partial",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [],
+          "durationMonths": 5,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": 400,
+          "applyUrl": "https://nankai.at0086.cn/StuApplication/Login.aspx",
+          "sourceRecords": [
+            {
+              "id": "src-nankai-iclt-2026",
+              "recordLocation": "content/data/sources.json#/352",
+              "url": "https://ensie.nankai.edu.cn/info/1043/1317.htm",
+              "official": true,
+              "accessedAt": "2026-07-28",
+              "locatedRawOriginalReceipts": []
+            },
+            {
+              "id": "src-clec-iclt-2026-standard",
+              "recordLocation": "content/data/sources.json#/339",
+              "url": "https://pmplatform.chinese.cn/tmp/2026/2/6/94005b2e-f2e9-438e-85e7-12212f0e9968.pdf",
+              "official": true,
+              "accessedAt": "2026-10-13",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.receipt.json",
+                  "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.pdf",
+                  "rawSha256": "0157c7fb5962657cc5f58be63cfc8a0898c4279ea8f87e15c40302fe90f981d7",
+                  "textPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.text.txt",
+                  "textSha256": "b336af82cac3cbf9736562be3f3ee2479fc1f8e10be10442df77e06d8da3db60",
+                  "retrievedAt": "2026-10-18T17:47:49.803504+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-shanghai-international-studies-university",
+      "name": {
+        "en": "Shanghai International Studies University",
+        "zh": "上海外国语大学",
+        "ru": "Шанхайский университет иностранных языков"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "eligibility",
+        "applicationMaterials",
+        "tuition_and_period",
+        "tuition_confidence_or_explicit_reference_opt_in",
+        "application_fee",
+        "complete_cycle_facts"
+      ],
+      "programmes": [
+        {
+          "programId": "program-sisu-iclt-one-semester-spring-2027",
+          "programName": {
+            "en": "International Chinese Language Teachers Scholarship — One-Semester Study (Spring 2027)",
+            "zh": "国际中文教师奖学金一学期研修项目（2027年春季）",
+            "ru": "Семестровая программа стипендии для преподавателей китайского языка (весна 2027)",
+            "de": "Internationales Chinesischlehrkräfte-Stipendium — ein Semester (Frühjahr 2027)",
+            "es": "Beca para profesores internacionales de chino — un semestre (primavera de 2027)",
+            "fr": "Bourse pour enseignants internationaux de chinois — un semestre (printemps 2027)"
+          },
+          "programLocation": "content/data/programs.json#/325",
+          "cycleId": "cycle-sisu-iclt-one-semester-spring-2027",
+          "cycleLocation": "content/data/admission-cycles.json#/117",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-10-31",
+          "structuralMissing": [
+            "eligibility",
+            "applicationMaterials",
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-09-28",
+            "reviewAfter": "2026-10-05"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-09-28",
+            "reviewAfter": "2026-10-01",
+            "factScope": "dates-only",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 5,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": null,
+          "applyUrl": "https://pmplatform.chinese.cn/ui/start/#/login",
+          "sourceRecords": [
+            {
+              "id": "src-sisu-iclt-2026",
+              "recordLocation": "content/data/sources.json#/358",
+              "url": "https://www.oisa.shisu.edu.cn/index.php/index/newscontent/cid/39/id/666.html",
+              "official": true,
+              "accessedAt": "2026-09-28",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/scholarships/sisu/sisu-iclt-2026.receipt.json",
+                  "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/sisu/sisu-iclt-2026.html",
+                  "rawSha256": "bbea4f64014b85d747b518a678429d07b8d2b54606b3f0afbffbe78dbadef520",
+                  "textPath": "quality/recovery-20261019/rapid-expansion/scholarships/sisu/sisu-iclt-2026.text.txt",
+                  "textSha256": "68c0528643b20337095ec16b3341779bf036e67697b76c0a2a9bf25a950e034c",
+                  "retrievedAt": "2026-10-18T17:47:59.878596+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            },
+            {
+              "id": "src-clec-iclt-2026-standard",
+              "recordLocation": "content/data/sources.json#/339",
+              "url": "https://pmplatform.chinese.cn/tmp/2026/2/6/94005b2e-f2e9-438e-85e7-12212f0e9968.pdf",
+              "official": true,
+              "accessedAt": "2026-10-13",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.receipt.json",
+                  "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.pdf",
+                  "rawSha256": "0157c7fb5962657cc5f58be63cfc8a0898c4279ea8f87e15c40302fe90f981d7",
+                  "textPath": "quality/recovery-20261019/rapid-expansion/scholarships/central/clec-2026-guide.text.txt",
+                  "textSha256": "b336af82cac3cbf9736562be3f3ee2479fc1f8e10be10442df77e06d8da3db60",
+                  "retrievedAt": "2026-10-18T17:47:49.803504+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-shanghai-normal-university",
+      "name": {
+        "en": "Shanghai Normal University",
+        "zh": "上海师范大学",
+        "ru": "Шанхайский педагогический университет"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "eligibility",
+        "applicationMaterials",
+        "tuition_and_period",
+        "tuition_confidence_or_explicit_reference_opt_in",
+        "application_fee",
+        "complete_cycle_facts"
+      ],
+      "programmes": [
+        {
+          "programId": "program-shanghai-normal-university-iclt-one-semester-language",
+          "programName": {
+            "en": "International Chinese Language Teachers Scholarship One-Semester Study",
+            "zh": "国际中文教师奖学金一学期研修",
+            "ru": "Семестровая программа Международной стипендии преподавателей китайского языка"
+          },
+          "programLocation": "content/data/programs.json#/285",
+          "cycleId": "cycle-2027-shnu-iclt-one-semester-spring",
+          "cycleLocation": "content/data/admission-cycles.json#/82",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-10-31",
+          "structuralMissing": [
+            "eligibility",
+            "applicationMaterials",
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-10",
+            "reviewAfter": "2026-08-17",
+            "factScope": "dates-only",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 5,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": null,
+          "applyUrl": "https://apply.shnu.edu.cn/",
+          "sourceRecords": [
+            {
+              "id": "src-shnu-iclt-2026",
+              "recordLocation": "content/data/sources.json#/303",
+              "url": "https://iao.shnu.edu.cn/ec/35/c20435a846901/page.htm",
+              "official": true,
+              "accessedAt": "2026-08-10",
+              "locatedRawOriginalReceipts": [
+                {
+                  "receiptPath": "quality/recovery-20261019/rapid-expansion/scholarships/shnu/shnu-iclt-2026.receipt.json",
+                  "rawPath": "quality/recovery-20261019/rapid-expansion/scholarships/shnu/shnu-iclt-2026.html",
+                  "rawSha256": "bd1a68d8cf07bf4e064203e6028d98046614b8675baffe75fe4b2028ab153436",
+                  "textPath": "quality/recovery-20261019/rapid-expansion/scholarships/shnu/shnu-iclt-2026.text.txt",
+                  "textSha256": "5ba44af11ef6192194e339ec8e451d9b0d3ee0468de19365965bf2cb726851de",
+                  "retrievedAt": "2026-10-18T17:47:46.863296+00:00",
+                  "httpStatus": 200
+                }
+              ]
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-soochow-university",
+      "name": {
+        "en": "Soochow University",
+        "zh": "苏州大学",
+        "ru": "Университет Сучжоу"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "eligibility",
+        "applicationMaterials",
+        "tuition_and_period",
+        "tuition_confidence_or_explicit_reference_opt_in",
+        "application_fee",
+        "complete_cycle_facts"
+      ],
+      "programmes": [
+        {
+          "programId": "program-soochow-university-international-chinese-language-teachers-scholarship-o",
+          "programName": {
+            "en": "International Chinese Language Teachers Scholarship — One-Semester Chinese Language Education and Literature",
+            "zh": "国际中文教师奖学金一学期研修生：国际中文教育、汉语言文学",
+            "ru": "Семестровая программа преподавания китайского языка и китайской литературы по стипендии для преподавателей"
+          },
+          "programLocation": "content/data/programs.json#/84",
+          "cycleId": "cycle-2026-a6e5661b86ff",
+          "cycleLocation": "content/data/admission-cycles.json#/37",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": "2026-03-01",
+          "closesOn": "2026-10-31",
+          "structuralMissing": [
+            "eligibility",
+            "applicationMaterials",
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-10",
+            "reviewAfter": "2026-09-09"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-10",
+            "reviewAfter": "2026-08-17",
+            "factScope": "dates-only",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 5,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": null,
+          "applyUrl": "https://oversea.suda.edu.cn/oversea_en/11341/list.htm",
+          "sourceRecords": [
+            {
+              "id": "src-program-review-88495cf206e1",
+              "recordLocation": "content/data/sources.json#/158",
+              "url": "https://oversea.suda.edu.cn/oversea_en/bb/fd/c11345a441341/page.htm",
+              "official": true,
+              "accessedAt": "2026-08-10",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    },
+    {
+      "universityId": "uni-zhejiang-university-of-science-and-technology",
+      "name": {
+        "en": "Zhejiang University of Science and Technology",
+        "zh": "浙江科技大学",
+        "ru": "Чжэцзянский университет науки и технологий"
+      },
+      "candidateCycles": 1,
+      "bestStructuralMissing": [
+        "eligibility",
+        "applicationMaterials",
+        "tuition_and_period",
+        "tuition_confidence_or_explicit_reference_opt_in",
+        "application_fee",
+        "complete_cycle_facts"
+      ],
+      "programmes": [
+        {
+          "programId": "prog-gap-mve-jzh-zust-iclt-semester",
+          "programName": {
+            "en": "International Chinese Language Education — One-Semester Study",
+            "zh": "国际中文教育一学期研修",
+            "ru": "Семестровая программа международного преподавания китайского языка"
+          },
+          "programLocation": "content/data/programs.json#/1247",
+          "cycleId": "cycle-gap-mve-jzh-zust-iclt-semester-2026-2027-spring",
+          "cycleLocation": "content/data/admission-cycles.json#/770",
+          "academicYear": "2026-2027",
+          "intake": "spring",
+          "dateStatus": "published",
+          "opensOn": null,
+          "closesOn": "2026-10-31",
+          "structuralMissing": [
+            "eligibility",
+            "applicationMaterials",
+            "tuition_and_period",
+            "tuition_confidence_or_explicit_reference_opt_in",
+            "application_fee",
+            "complete_cycle_facts"
+          ],
+          "storedProgramReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-10",
+            "reviewAfter": "2026-09-09"
+          },
+          "storedCycleReview": {
+            "status": "stale",
+            "verifiedAt": "2026-08-10",
+            "reviewAfter": "2026-08-17",
+            "factScope": "dates-only",
+            "evidenceBasis": "cycle-specific"
+          },
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "durationMonths": 5,
+          "durationText": null,
+          "tuitionCny": null,
+          "tuitionPeriod": null,
+          "tuitionStatus": null,
+          "applicationFeeCny": null,
+          "applyUrl": "https://isam.zust.edu.cn/",
+          "sourceRecords": [
+            {
+              "id": "src-gap-program-mve-jzh-zust-iclt-semester",
+              "recordLocation": "content/data/sources.json#/1698",
+              "url": "https://ies.zust.edu.cn/info/1271/4219.htm",
+              "official": true,
+              "accessedAt": "2026-08-10",
+              "locatedRawOriginalReceipts": []
+            }
+          ],
+          "publicationBlockers": [
+            "Fresh complete official facts must be semantically reviewed; valid stored dates are discovery metadata only.",
+            "Expired review dates require re-verification, never date-only renewal.",
+            "Every programme source must have a fresh immutable raw/text/hash capture.",
+            "Independent review receipt and consumer assessment are still required."
+          ],
+          "workflowHold": null
+        }
+      ]
+    }
+  ]
+}

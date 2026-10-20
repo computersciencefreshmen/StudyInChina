@@ -1,0 +1,57 @@
+{
+  "reviewedAt": "2026-10-18T17:54:50.511702+00:00",
+  "scope": [
+    {
+      "path": "scripts/quality/approve-full-scholarship-batch.ts",
+      "sha256": "c34e8dd8df5d94865938e35871e6cd5b18cc16e605ae4b636385adb2fe6ed4a3"
+    },
+    {
+      "path": "scripts/quality/release-public-smoke.ts",
+      "sha256": "c491bbd4c3651d6313efd28022907693bd4cf4e37087a2faa49345d1f3ba07f8"
+    },
+    {
+      "path": "src/app/[locale]/scholarships/[slug]/page.tsx",
+      "sha256": "695f9afee83be2cc1b193925998738c13014c1414ecba64b46531c9c938e66db"
+    },
+    {
+      "path": "tests/unit/full-scholarship-batch-approval.test.ts",
+      "sha256": "a2461b2b23c8f3382111e16d0b630eb4c509e2bc019428be3055ac94f62892eb"
+    },
+    {
+      "path": "tests/unit/release-public-smoke.test.ts",
+      "sha256": "772d3d25bc80474f617437661ef9adffe7dd321ad8dfb39f40bb5501303ce7e9"
+    },
+    {
+      "path": "tests/unit/detail-seo-locale-hardening.test.tsx",
+      "sha256": "2b5c421ed3e2c1971ce53ca20cf5b2a98a9045fece2ebad911e079bb7e497cc2"
+    }
+  ],
+  "findingsFixed": [
+    "Reject partial scholarship expectation configuration rather than silently omit checks.",
+    "Roundtrip scholarship provider and school/program/source scopes through JSON API.",
+    "Assert visible tuition/accommodation/insurance values within the corresponding detail rows.",
+    "Bind scholarship label helper to frozen support pins only for changed scholarship scopes."
+  ],
+  "consumerChanges": 0,
+  "verification": {
+    "newApprovalSmokeDetailTests": 35,
+    "existingSnapshotApiScholarshipTests": 37,
+    "failures": 0,
+    "scopedEslint": "pass:6 files,0warnings",
+    "typescript": "pass:tsc --noEmit --incremental false"
+  },
+  "regressions": [
+    "Whole held mixed batch makes no writes or reservation.",
+    "Failed snapshot permanently reserves batch and cannot automatically replay.",
+    "Reused canonical source mutation rejected before writes.",
+    "Legacy programme-only smoke manifest shape and source support list preserved.",
+    "Positive pinned scholarship expectation succeeds; modified award rejected.",
+    "Partial and inconsistent scholarship expectations rejected.",
+    "All public locales display eligibility and exact coverage rows."
+  ],
+  "limitations": [
+    "Evidence consumer verifies capture integrity and quote presence; independent reviewer remains responsible for semantic entailment of every amount, scope and eligibility claim.",
+    "Local snapshot writer is per-file atomic with guarded rollback, not a cross-file database transaction; failed operations require reconciliation.",
+    "No website smoke, deploy, canonical write, Git operation, authentication access or cloud write performed in this review."
+  ]
+}

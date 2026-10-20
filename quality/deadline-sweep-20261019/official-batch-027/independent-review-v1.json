@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "independent-date-only-027-v1",
+  "reviewedAt": "2026-10-19T08:55:44.782Z",
+  "reviewer": "deployment_audit; independent of027 report author",
+  "result": "source-only-pass-with-route-and-scheduled-date-restrictions",
+  "reviewedReportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff",
+  "reviewedSelectionSha256": "42f9d4e22d9b31f94eec3926cbe00c9c960e0b37387df7b4e28373127b79fe52",
+  "summary": {
+    "checksFailed": 0,
+    "checksPassed": 10,
+    "schools": 8,
+    "records": 18,
+    "baseQueueRecords": 18,
+    "additionalSameSourceRecords": 0,
+    "closedCandidateScopes": 9,
+    "unknown": 5,
+    "blocked": 4,
+    "canonicalInputHashes": 6,
+    "recordPins": 18,
+    "programmePins": 25,
+    "sourcePins": 21,
+    "rawAndTextBodies": 10,
+    "sourceFailureReceipts": 3,
+    "priorExactIdOverlap": 0
+  },
+  "checks": [
+    {
+      "id": "frozen-report-and-exact-selection",
+      "passed": true,
+      "note": "Final report and linked selection SHA pinned. Eighteen exact base IDs covered once across eight queue-v6 schools; no extra/alias record representation."
+    },
+    {
+      "id": "six-inputs-and-record-parent-source-pins",
+      "passed": true,
+      "note": "All six C-primary file hashes, inventory snapshot and queue hash match. Selected full rows, linked programmes and source rows match current canonical bytes/object SHA; report record and parent/source pins agree."
+    },
+    {
+      "id": "original-bodies-observation-times-and-failures",
+      "passed": true,
+      "note": "All capture-manifest hashes and ten raw/text body hashes verified. Failure receipts have valid observedAt and no fabricated body SHA. NTU web fallback is explicitly parsed cached shell evidence, not raw origin bytes."
+    },
+    {
+      "id": "nuaa-exact2026-typeB-silkroad-only",
+      "passed": true,
+      "note": "Actual full official body names the three English master programmes, targeted Silk Road countries, CSC Type B and May18 2026 applicant submission. Independently named award shares this explicit route. July31 dispatch and September registration do not replace May18. No general/self-funded route certified."
+    },
+    {
+      "id": "njucm-general-versus-advisory-award-date",
+      "passed": true,
+      "note": "Actual2026 guide table lists Science of TCM Health Preservation and Pharmacy of Chinese Meteria Medica. Applicant period Dec1 2025–May15 2026 binds these degree rows. May10 scholarship wording is advised, so Study in Jiangsu award retains unknown hard cutoff."
+    },
+    {
+      "id": "nufe-planned-final-date-and-early-closure",
+      "passed": true,
+      "note": "Actual2026 Chinese bachelor table names Accounting and Chinese Language and Literature. Two applicant rounds end March1 and June15. Title expressly says admissions ended early; report retains actualEarlyClosureDate:null and June15 as originally scheduled final cutoff only. March30/June30 are result announcements. Standing performance-award page supplies no independent current date."
+    },
+    {
+      "id": "njupt-actual-embedded2026-award-pdf",
+      "passed": true,
+      "note": "Original ten-page PDF independently re-extracted with pypdf; title p1 and application period p10 visually checked. Exact2026 CSC High Level Postgraduate award cutoff is February28 2026. Relative from-now opening is not invented as an ISO day."
+    },
+    {
+      "id": "njust-residence-policy-and-html404",
+      "passed": true,
+      "note": "Actual six-page PDF independently read/re-extracted and p1 visually checked. The two named scholarships occur in residence/visa duration rules; these establish identity, not award application dates. Other registered PDF redirects to an HTML404 page despite status200. Both awards correctly remain unknown."
+    },
+    {
+      "id": "remaining-held-sources",
+      "passed": true,
+      "note": "NJTech standing freshman policy has online submission procedure but no current cutoff. NJMU native TLS plus single fallback fail: three rows blocked. NTU native and one web fallback show only default CSC navigation, not selected university award body: one row blocked. No unknown/blocked row treated open or closed."
+    },
+    {
+      "id": "no-overlap-no-canonical-approval",
+      "passed": true,
+      "note": "Prior frozen report pins verified and no exact ID overlap, including025/026 where available. All18 inventory rows unpublished. Candidate/date-only flags and no mutation/freshness/full-school certification flags remain explicit. This source evidence pass does not approve canonical or public changes."
+    }
+  ],
+  "publicationRestrictions": [
+    "NUAA May18 binds only the specified2026 English CSC Silk Road TypeB route and country restrictions.",
+    "NJUCM May10 is advice; May15 general admission must not become an independent provincial-award cutoff.",
+    "NUFE June15 is the published planned final date. Actual earlier closure occurred on an unstated day. Preserve both applicant rounds and do not present June15 as the actual early stop.",
+    "Annual/performance/visa rules and HTTP200 shells cannot establish current applicant dates. No old year is rolled forward.",
+    "All conclusions are source-only candidates. No freshness, full facts, whole-school completion, discontinuation, canonical mutation or deployment approval is granted."
+  ],
+  "reviewedRecordIds": [
+    "sch-gap-mve-ecma-njmu-tuition-scholarships-2026",
+    "cycle-d94f3eb3b8a1",
+    "cycle-gap-mve-ecma-njmu-clinical-medicine-chinese-bachelor-2026-2027-autumn-fee-reference",
+    "sch-gap-mve-ecs-njtech-freshman-scholarship",
+    "sch-gap-mve-ecs-nuaa-csc-silk-road-2026",
+    "cycle-gap-mve-ecs-nuaa-mechanical-engineering-master-2026-2027-autumn",
+    "cycle-gap-mve-ecs-nuaa-software-engineering-master-2026-2027-autumn",
+    "cycle-gap-mve-ecs-nuaa-transportation-engineering-master-2026-2027-autumn",
+    "sch-gap-mve-ecma-njucm-study-in-jiangsu-2026",
+    "cycle-gap-mve-ecma-njucm-health-preservation-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-mve-ecma-njucm-materia-medica-pharmacy-bachelor-2026-2027-autumn-fee-reference",
+    "sch-gap-wave8-nufe-international-student-scholarship",
+    "cycle-gap-mve-jzh-nufe-accounting-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-mve-jzh-nufe-chinese-literature-bachelor-2026-2027-autumn-fee-reference",
+    "sch-gap-mve-jzh-njupt-csc-high-level-2026",
+    "sch-gap-wave8-njust-jasmine-jiangsu-government-scholarship",
+    "sch-gap-wave8-njust-nanjing-municipal-government-joint-scholarship",
+    "sch-gap-mve-ecs-ntu-university-scholarship"
+  ],
+  "visualArtifactsReviewed": [
+    "njupt-title-1.png",
+    "njupt-deadline-10.png",
+    "njust-residence-1.png"
+  ],
+  "machineCheckScript": "independent-review-check.cjs",
+  "machineCheckScriptSha256": "ce274b7269d43ae92b04e95dc60e8cadba50a9742fc9d2268c084b052c0e68c7",
+  "networkRequestsByReviewer": 0,
+  "canonicalWrites": 0,
+  "sharedProgressWrites": 0,
+  "gitMutations": 0,
+  "paidCalls": 0
+}

@@ -125,7 +125,7 @@ export default async function ScholarshipDetail({
     <div className="atlas-container">
       <DataFreshnessPanel record={item} locale={locale} today={today} />
     </div>
-    <section className="atlas-container atlas-section detail-layout">
+    <section className="atlas-container atlas-section detail-layout" data-scholarship-detail>
       <div className="detail-main">
         {item.coverage.tuition !== 'unknown' || item.coverage.accommodation !== 'unknown' || item.coverage.insurance !== 'unknown' || item.coverage.stipendCnyPerMonth !== null || currentCycle.deadline ? <div className="prose-panel">
           <h2>{copy.coverage}</h2>
@@ -150,6 +150,10 @@ export default async function ScholarshipDetail({
             </div> : null}
           </dl>
         </div> : null}
+        {item.eligibility?.length ? <section className="prose-panel" data-scholarship-eligibility>
+          <h2>{messages.programs.eligibility}</h2>
+          <ul>{item.eligibility.map((condition, index) => <li key={index}>{localize(condition, locale)}</li>)}</ul>
+        </section> : null}
         <div className="prose-panel">
           <h2>{copy.scope}</h2>
           {universities.length ? (

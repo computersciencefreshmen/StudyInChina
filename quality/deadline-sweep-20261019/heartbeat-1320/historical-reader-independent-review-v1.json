@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-20T09:09:02.638Z",
+  "reviewer": "dates_034-independent",
+  "reviewType": "read-only-historical-aggregation-code-and-test-review",
+  "result": "pass",
+  "canonicalRoot": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "baseCommitForUnchangedCore": "2260e61a23fbd9f67c4218a1b10974306a91dab1",
+  "method": {
+    "path": "scripts/quality/summarize-deadline-rechecks.ts",
+    "sha256": "ea443e9e5c02026ab1607520d28fa0c6df053998966e7c82ed36b96b436cf87a",
+    "entrypoints": [
+      "assertHistoricalSnapshotContext",
+      "buildHistoricalSummary"
+    ],
+    "strictEntryRetained": "buildSummary/assertCurrentAuditDay"
+  },
+  "methodFileSha256": "ea443e9e5c02026ab1607520d28fa0c6df053998966e7c82ed36b96b436cf87a",
+  "testFileSha256": "c1e45f282059b889c45b1bed278ec0f228710c5350fff3b4fe7da34e15bcb7a4",
+  "testPins": [
+    {
+      "path": "scripts/quality/summarize-deadline-rechecks.history.test.ts",
+      "sha256": "c1e45f282059b889c45b1bed278ec0f228710c5350fff3b4fe7da34e15bcb7a4",
+      "testCases": 8
+    },
+    {
+      "path": "scripts/quality/summarize-deadline-rechecks.pins.test.ts",
+      "sha256": "03530821439d79380e93cb64722fc682de1dfabb1795ae1099739e839e05fb59",
+      "testCases": 8
+    }
+  ],
+  "publicationSelector": {
+    "path": "src/lib/data/publication.ts",
+    "sha256": "86aa129778c490cb1b2742ebb1f66557b94310b5040aebc348cc3221f336f832"
+  },
+  "chinaDateHelper": {
+    "path": "src/lib/data/freshness.ts",
+    "sha256": "3b62bc28c9670e07754ea068436da069a6affb992a795b3626c14d7f656aebf3"
+  },
+  "currentInventory": {
+    "path": "quality/deadline-sweep-20261020/inventory-20261020T0835/catalog-deadlines.json",
+    "sha256": "3fd8e0177f9e7aece3a9efd501bcc303f9970557a8c4d2beaab923c109f68c58",
+    "today": "2026-10-20",
+    "generatedAt": "2026-10-20T08:33:56.943Z",
+    "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+    "inputFileSha256": {
+      "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+      "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+      "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+      "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+      "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+      "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+    }
+  },
+  "checks": [
+    {
+      "name": "strict-default-audit-day-guard-unchanged",
+      "result": "passed",
+      "details": "The original China-calendar guard is byte-identical. The default builder invokes it before delegating; old-day CLI/default calls remain rejected."
+    },
+    {
+      "name": "original-aggregation-core-exactly-preserved",
+      "result": "passed",
+      "details": "The former aggregation body, from canonical file hashing through the returned historical summary, is text-identical to commit2260e61 after line-ending normalization."
+    },
+    {
+      "name": "explicit-historical-entry-cannot-auto-fallback-from-default",
+      "result": "passed",
+      "details": "Only the explicit exported historical entry bypasses the same-day wrapper; it always evaluates original receipts with AUDIT_DATE2026-10-19."
+    },
+    {
+      "name": "current-inventory-real-china-day-and-generation-time-gated",
+      "result": "passed",
+      "details": "The supplied inventory is dated2026-10-20, generated2026-10-20T08:33:56.943Z, under the real canonical data directory. Code rejects stale-day, wrong-generation-day and non-finite/future timestamps."
+    },
+    {
+      "name": "same-six-hashes-and-snapshot-prove-same-canonical-inputs",
+      "result": "passed",
+      "details": "Actual bytes of all six canonical inputs match the fresh inventory and recomputed snapshot, rather than relying on summary counts."
+    },
+    {
+      "name": "six-public-projections-compared-by-sorted-exact-ids",
+      "result": "passed",
+      "details": "IDs are derived from the real publication selector for both dates and all six DataBundle collections. Equal counts with substituted IDs are rejected."
+    },
+    {
+      "name": "original-report-rows-and-publication-validation-not-relaxed",
+      "result": "passed",
+      "details": "Report date/snapshot/prior pins, full row and parent hashes, stored deadlines/openings and original publication bindings retain the unchanged core validation."
+    },
+    {
+      "name": "past-date-classification-and-existing-date-matches-preserved",
+      "result": "passed",
+      "details": "Historical closed outcomes are still checked as strictly past the original audit day, and unchanged outcomes still require the original stored official date. Evaluation day20 is not substituted into these checks."
+    },
+    {
+      "name": "concurrent-input-inventory-or-day-change-rejected",
+      "result": "passed",
+      "details": "Canonical bytes are rechecked after the projection gate; inventory bytes and China calendar day are also rechecked before returning."
+    },
+    {
+      "name": "output-separates-historical-observations-from-evaluation-date",
+      "result": "passed",
+      "details": "Output today remains2026-10-19 with evaluatedForDate2026-10-20 and explicit no-new-website/no-whole-record-renewal metadata. Source receipt bytes and observation dates are only read."
+    },
+    {
+      "name": "new-negative-tests-cover-date-snapshot-input-and-id-substitution",
+      "result": "passed",
+      "details": "Eight new helper tests exercise positive and negative historical gates; the existing eight prior-report hash tests are retained. Root reports21/21 across preservation5/pins8/history8 and scoped lint passing; this review does not rerun them."
+    },
+    {
+      "name": "read-only-review-and-stable-source-pins",
+      "result": "passed",
+      "details": "Independent work only reads C/Git and writes this D receipt. No source data, reports, dates, CI/configuration or tests are modified; tests and network are not rerun."
+    },
+    {
+      "name": "combined-regressions-added-without-changing-existing-package-commands",
+      "result": "passed",
+      "details": "The only package change adds the21-case regression command. All pre-existing scripts and strict program coverage --minimum1 remain exact; preservation tests check original bytes and mtimes."
+    },
+    {
+      "name": "ci-only-adds-new-regression-step-before-content-validation",
+      "result": "passed",
+      "details": "Removing exactly the single added deadline-review step reproduces the old CI byte-for-byte after line-ending normalization. No prior step or threshold is removed or relaxed."
+    }
+  ],
+  "summary": {
+    "checksPassed": 14,
+    "checksFailed": 0,
+    "canonicalWrites": 0,
+    "gitMutations": 0,
+    "networkRequests": 0,
+    "testsRerun": 0,
+    "rootReportedTestCasesPassed": 21
+  },
+  "limitations": [
+    "This is independent source/diff/test-content review with actual artifact and input hash verification. Root-reported test execution and scoped lint were not repeated.",
+    "No new official source read or whole-record freshness review is implied; existing2026-10-19 reports and date-only caveats remain authoritative."
+  ],
+  "integrationPins": [
+    {
+      "path": "package.json",
+      "sha256": "ef632cc79013cc42b08f57badb88cfc86d81cbff831e15466e199155f5d3c3fd"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "ebcdfc5cdec52e8a5e2a66d04f86adf6c0d94db7117ba7844c6b60a0534d4ead"
+    },
+    {
+      "path": "scripts/quality/audit-catalog-deadlines.preservation.test.ts",
+      "sha256": "1db9ef19b89d01800674da9b874090dfcbbe5fb42dbb99e8cdec53ffc97ac7c8",
+      "testCases": 5
+    }
+  ],
+  "rootReportedValidation": {
+    "combinedTestsPassed": 21,
+    "combinedTestsFailed": 0,
+    "scopedLintPassed": true,
+    "independentlyRerun": false
+  }
+}

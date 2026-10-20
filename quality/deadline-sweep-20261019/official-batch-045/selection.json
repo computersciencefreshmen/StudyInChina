@@ -1,0 +1,954 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-045-20261019",
+  "createdAt": "2026-10-19T13:24:52.751Z",
+  "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "statePath": "quality/recovery-20261018/continuation-state.json",
+  "stateSha256": "049571473a08bee3d5182d881170772cce59be52347727a1ced978bdd1e4c898",
+  "summaryPath": "quality/deadline-sweep-20261019/official-review-summary-v14.json",
+  "summarySha256": "68cade65ae43c5f0e48fe57265fb4bc1b0cf372bb6547438ea5738b71ab4c9d3",
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v12.json",
+  "queueSha256": "8ddc230da6211fd2c5d29ddeb32c95505fd82a1873beccab3ad7f3f552607a67",
+  "inventoryPath": "quality/deadline-sweep-20261019/catalog-deadlines.json",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "baseDispatch": {
+    "path": "quality/deadline-sweep-20261019/heartbeat-1320/base-dispatch-v1.json",
+    "sha256": "9868844feb233e063f474335931a74a2fa58d4c7e6941118704e3580d2e30b4e"
+  },
+  "extensionReceipt": {
+    "path": "quality/deadline-sweep-20261019/heartbeat-1320/additional-same-source-selection-v1.json",
+    "sha256": "dbc7df2011233d04ed129a07620c104fb0b13f5a8700cb0ed7fa9338650b2263"
+  },
+  "candidateUniversityIds": [
+    "uni-china-university-of-petroleum-beijing",
+    "uni-china-university-of-political-science-and-law",
+    "uni-chongqing-normal-university",
+    "uni-dalian-maritime-university",
+    "uni-dalian-medical-university",
+    "uni-dalian-university-of-technology",
+    "uni-dongbei-university-of-finance-and-economics"
+  ],
+  "selectedUniversityIds": [
+    "uni-china-university-of-petroleum-beijing",
+    "uni-china-university-of-political-science-and-law",
+    "uni-chongqing-normal-university",
+    "uni-dalian-maritime-university",
+    "uni-dalian-medical-university",
+    "uni-dalian-university-of-technology",
+    "uni-dongbei-university-of-finance-and-economics"
+  ],
+  "zeroRowUniversityIds": [],
+  "baseQueueRecordIds": [
+    "cycle-gap-wave5-depth-cupb-chinese-language-one-year-2026-2026-2027-autumn-fee-reference",
+    "cycle-gap-prog-mew-nss-cupl-law-bachelor-2026-2027-autumn",
+    "cycle-gap-local-strong-cqnu-language-chinese-2026-2027-other",
+    "sch-gap-sch-mew-ne-dlmu-excellent-international-students",
+    "sch-gap-sch-dmu-international-student-merit-2025-2026",
+    "cycle-gap-prog-mew-nss-dut-foundation-2026-2027-other-fee-reference",
+    "cycle-gap-prog-dufe-chinese-language-2026-2027-autumn",
+    "cycle-gap-prog-dufe-chinese-language-2026-2027-spring"
+  ],
+  "additionalSameSourceRecordIds": [],
+  "selectedRecordIds": [
+    "cycle-gap-wave5-depth-cupb-chinese-language-one-year-2026-2026-2027-autumn-fee-reference",
+    "cycle-gap-prog-mew-nss-cupl-law-bachelor-2026-2027-autumn",
+    "cycle-gap-local-strong-cqnu-language-chinese-2026-2027-other",
+    "sch-gap-sch-mew-ne-dlmu-excellent-international-students",
+    "sch-gap-sch-dmu-international-student-merit-2025-2026",
+    "cycle-gap-prog-mew-nss-dut-foundation-2026-2027-other-fee-reference",
+    "cycle-gap-prog-dufe-chinese-language-2026-2027-autumn",
+    "cycle-gap-prog-dufe-chinese-language-2026-2027-spring"
+  ],
+  "records": [
+    {
+      "recordId": "cycle-gap-wave5-depth-cupb-chinese-language-one-year-2026-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-china-university-of-petroleum-beijing",
+      "canonicalRecordSha256": "8a7e75accf8ad9c2fe01d87961011b3360f59c1d85a80fbdc40096069097aba3",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave5-depth-cupb-chinese-language-one-year-2026"
+        ],
+        "verifiedAt": "2026-07-31",
+        "reviewAfter": "2026-08-07",
+        "status": "stale",
+        "id": "cycle-gap-wave5-depth-cupb-chinese-language-one-year-2026-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave5-depth-cupb-chinese-language-one-year-2026",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 21000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave5-depth-cupb-chinese-language-one-year-2026"
+        ],
+        "verifiedAt": "2026-07-31",
+        "reviewAfter": "2026-08-30",
+        "status": "stale",
+        "id": "prog-gap-wave5-depth-cupb-chinese-language-one-year-2026",
+        "slug": "gap-wave5-depth-cupb-chinese-language-one-year-2026-language",
+        "universityId": "uni-china-university-of-petroleum-beijing",
+        "name": {
+          "en": "Chinese Language Program — One Academic Year",
+          "zh": "汉语进修项目（一学年）",
+          "ru": "Программа китайского языка — один учебный год"
+        },
+        "degreeLevel": "language",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 12,
+        "programUrl": "https://www.cup.edu.cn/overseas/docs/2025-10/8aa73688ac704349918f6cbdfe65b0bf.pdf",
+        "applyUrl": "https://cie-registration.cup.edu.cn/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "4d63d11b59655739d16a66f9342169b12f11d9fb41ddc61208d454f12268f87d",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave5-depth-cupb-chinese-language-one-year-2026"
+            ],
+            "verifiedAt": "2026-07-31",
+            "reviewAfter": "2026-08-30",
+            "status": "stale",
+            "id": "prog-gap-wave5-depth-cupb-chinese-language-one-year-2026",
+            "slug": "gap-wave5-depth-cupb-chinese-language-one-year-2026-language",
+            "universityId": "uni-china-university-of-petroleum-beijing",
+            "name": {
+              "en": "Chinese Language Program — One Academic Year",
+              "zh": "汉语进修项目（一学年）",
+              "ru": "Программа китайского языка — один учебный год"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 12,
+            "programUrl": "https://www.cup.edu.cn/overseas/docs/2025-10/8aa73688ac704349918f6cbdfe65b0bf.pdf",
+            "applyUrl": "https://cie-registration.cup.edu.cn/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "4d63d11b59655739d16a66f9342169b12f11d9fb41ddc61208d454f12268f87d"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave5-depth-cupb-chinese-language-one-year-2026",
+            "url": "https://www.cup.edu.cn/overseas/docs/2025-10/8aa73688ac704349918f6cbdfe65b0bf.pdf",
+            "title": "CUPB 2026 Chinese Language Program Application Guide",
+            "publisher": "china-university-of-petroleum-beijing",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-31"
+          },
+          "sha256": "f4840f0a62c4ed46a9250626c57b03270125f42c73d7e2dfdd430c400858b801"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-cupl-law-bachelor-2026-2027-autumn",
+      "collection": "admissionCycles",
+      "universityId": "uni-china-university-of-political-science-and-law",
+      "canonicalRecordSha256": "79035c3e168687ba4256c553e6acbb599418f219c0a083494805875a1b227fd6",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-cupl-law-bachelor"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-08-11",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-nss-cupl-law-bachelor-2026-2027-autumn",
+        "programId": "prog-gap-prog-mew-nss-cupl-law-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official source explicitly lists Law for international applicants. The same source states teaching language: Chinese; duration: 4 academic years.",
+          "zh": "官方来源明确列出面向国际申请人的法学。同一来源注明授课语言：Chinese；学制：4 academic years。",
+          "ru": "Официальный источник прямо указывает программу «Право» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese; продолжительность: 4 academic years."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-cupl-law-bachelor"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-nss-cupl-law-bachelor",
+        "slug": "gap-prog-mew-nss-cupl-law-bachelor-bachelor",
+        "universityId": "uni-china-university-of-political-science-and-law",
+        "name": {
+          "en": "Law",
+          "zh": "法学",
+          "ru": "Право"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "law-ir",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://sis.cupl.edu.cn/lhlx/bk.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "1fd222d16d5a6d45a0e950ddc0e1be4e794f3d345e27919e28004c801e337f9b",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-cupl-law-bachelor"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-cupl-law-bachelor",
+            "slug": "gap-prog-mew-nss-cupl-law-bachelor-bachelor",
+            "universityId": "uni-china-university-of-political-science-and-law",
+            "name": {
+              "en": "Law",
+              "zh": "法学",
+              "ru": "Право"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "law-ir",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://sis.cupl.edu.cn/lhlx/bk.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "1fd222d16d5a6d45a0e950ddc0e1be4e794f3d345e27919e28004c801e337f9b"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nss-cupl-law-bachelor",
+            "url": "https://sis.cupl.edu.cn/lhlx/bk.htm",
+            "title": "中国政法大学2026年外国留学生本科生招生信息",
+            "publisher": "china-university-of-political-science-and-law",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "da209fed2411b9bf9c8ce376b7304161c46f5cad3e6b1cf438399481e1d6eb3e"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-local-strong-cqnu-language-chinese-2026-2027-other",
+      "collection": "admissionCycles",
+      "universityId": "uni-chongqing-normal-university",
+      "canonicalRecordSha256": "bed169279dfbc7910519206ca0d1dcfa24a01e3a2c1e8f1d60db7e442a9340e1",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-local-strong-cqnu-language-chinese"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-local-strong-cqnu-language-chinese-2026-2027-other",
+        "programId": "prog-gap-local-strong-cqnu-language-chinese",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "The official international-office page confirms a Chinese Language Program for international students. Uncaptured dynamic facts remain unannounced.",
+          "zh": "学校国际处官方页面确认面向国际学生的汉语进修项目；未获取的动态事实保持未公布。",
+          "ru": "Официальная страница международного отдела подтверждает программу китайского языка для иностранных студентов; не зафиксированные динамические сведения отмечены как не объявленные."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-local-strong-cqnu-language-chinese"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-local-strong-cqnu-language-chinese",
+        "slug": "gap-local-strong-cqnu-language-chinese-language",
+        "universityId": "uni-chongqing-normal-university",
+        "name": {
+          "en": "Chinese Language Program",
+          "zh": "汉语进修项目",
+          "ru": "Программа китайского языка"
+        },
+        "degreeLevel": "language",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://international.cqnu.edu.cn/ywb/info/1373/1303.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "c7bdc49eec5e74a48627802016d17a5d931ff02bf37c2ffe2f20038814066f87",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-local-strong-cqnu-language-chinese"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-local-strong-cqnu-language-chinese",
+            "slug": "gap-local-strong-cqnu-language-chinese-language",
+            "universityId": "uni-chongqing-normal-university",
+            "name": {
+              "en": "Chinese Language Program",
+              "zh": "汉语进修项目",
+              "ru": "Программа китайского языка"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://international.cqnu.edu.cn/ywb/info/1373/1303.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "c7bdc49eec5e74a48627802016d17a5d931ff02bf37c2ffe2f20038814066f87"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-local-strong-cqnu-language-chinese",
+            "url": "https://international.cqnu.edu.cn/ywb/info/1373/1303.htm",
+            "title": "Chongqing Normal University Chinese Language Program",
+            "publisher": "chongqing-normal-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "40150aa984f0ec9c0ae72f4489ed09959c50f31da36a540e97843d8ec104e02b"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-sch-mew-ne-dlmu-excellent-international-students",
+      "collection": "scholarships",
+      "universityId": "uni-dalian-maritime-university",
+      "canonicalRecordSha256": "598fc1e4ee3dde4f5060458daa2571e47fc3d75cdb12ccd0b99e55aa9b0eaa72",
+      "row": {
+        "id": "sch-gap-sch-mew-ne-dlmu-excellent-international-students",
+        "slug": "gap-sch-mew-ne-dlmu-excellent-international-students",
+        "name": {
+          "en": "DMU Scholarships for Excellent International Students",
+          "zh": "大连海事大学优秀留学生奖学金",
+          "ru": "Стипендия ДМУ для отличившихся иностранных студентов"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-dalian-maritime-university"
+        ],
+        "programIds": [
+          "prog-gap-prog-mew-ne-dlmu-nautical-science-bachelor",
+          "prog-gap-prog-mew-ne-dlmu-marine-engineering-bachelor",
+          "prog-gap-breadth-dlmu-foundation-college-preparatory",
+          "prog-gap-prog-mew-ne-dlmu-chinese-language-semester"
+        ],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://iec.dlmu.edu.cn/English/Scholarship/DMU_Scholarships_.htm",
+        "summary": {
+          "en": "The official scholarship page lists awards for new language, preparatory, bachelor and master students, with selection periods in May and November.",
+          "zh": "官方奖学金页面列出新语言生、预科生、本科生和硕士生等奖项，评选期为每年5月和11月。",
+          "ru": "Официальная страница перечисляет награды для новых языковых, подготовительных, бакалаврских и магистерских студентов; отбор проходит в мае и ноябре."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-mew-ne-dlmu-excellent-international-students"
+        ],
+        "verifiedAt": "2026-08-03",
+        "reviewAfter": "2026-09-02",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-ne-dlmu-nautical-science-bachelor",
+              "src-gap-program-prog-mew-ne-dlmu-nautical-science-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-ne-dlmu-nautical-science-bachelor",
+            "slug": "gap-prog-mew-ne-dlmu-nautical-science-bachelor-bachelor",
+            "universityId": "uni-dalian-maritime-university",
+            "name": {
+              "en": "Nautical Science",
+              "zh": "航海技术",
+              "ru": "Судовождение"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://iec.dlmu.edu.cn/English/ADMISSION/Bachelor_s_Degree/Chinese_Taught_Programs.htm",
+            "applyUrl": "https://dlmu.17gz.org/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "f1ff3d76a609e2297bbf5e63c376dbcc763fdbd9317a25038277d511517ed413"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-ne-dlmu-marine-engineering-bachelor",
+              "src-gap-program-prog-mew-ne-dlmu-marine-engineering-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-ne-dlmu-marine-engineering-bachelor",
+            "slug": "gap-prog-mew-ne-dlmu-marine-engineering-bachelor-bachelor",
+            "universityId": "uni-dalian-maritime-university",
+            "name": {
+              "en": "Marine Engineering",
+              "zh": "轮机工程",
+              "ru": "Судовая энергетика"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://iec.dlmu.edu.cn/English/ADMISSION/Bachelor_s_Degree/Chinese_Taught_Programs.htm",
+            "applyUrl": "https://dlmu.17gz.org/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "84797afc5b54d743ef1e6edafa5cd90a2a96a65417d8ba682210d89480890b6b"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-breadth-dlmu-foundation-college-preparatory",
+              "src-gap-program-breadth-dlmu-foundation-college-preparatory-support-1"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale",
+            "id": "prog-gap-breadth-dlmu-foundation-college-preparatory",
+            "slug": "gap-breadth-dlmu-foundation-college-preparatory-foundation",
+            "universityId": "uni-dalian-maritime-university",
+            "name": {
+              "en": "College Preparatory Program",
+              "zh": "本科预科项目",
+              "ru": "Подготовительная программа к бакалавриату"
+            },
+            "degreeLevel": "foundation",
+            "discipline": "other",
+            "teachingLanguages": [
+              "Chinese",
+              "English"
+            ],
+            "durationMonths": 12,
+            "programUrl": "https://iec.dlmu.edu.cn/English/ADMISSION/College_Preparatory.htm",
+            "applyUrl": "https://dlmu.17gz.org/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "b69047f3e37c3525b63c61aee310c75a358b26cec31558e84672961578a9aaca"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-ne-dlmu-chinese-language-semester",
+              "src-gap-program-prog-mew-ne-dlmu-chinese-language-semester-support-1"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-ne-dlmu-chinese-language-semester",
+            "slug": "gap-prog-mew-ne-dlmu-chinese-language-semester-language",
+            "universityId": "uni-dalian-maritime-university",
+            "name": {
+              "en": "Chinese Language Program — One Semester",
+              "zh": "汉语培训项目（一学期）",
+              "ru": "Программа китайского языка — один семестр"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 6,
+            "programUrl": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+            "applyUrl": "https://dlmu.17gz.org/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "12ddcc3beaef80517f7f42458a6ab5eef6257a5a823c040701b1edc6bbde51d6"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-mew-ne-dlmu-excellent-international-students",
+            "url": "https://iec.dlmu.edu.cn/English/Scholarship/DMU_Scholarships_.htm",
+            "title": "DMU Scholarships",
+            "publisher": "dalian-maritime-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-03"
+          },
+          "sha256": "5c471891502349fe467567f878846ba6518de180caa1851eb169dd563e8e5e47"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-sch-dmu-international-student-merit-2025-2026",
+      "collection": "scholarships",
+      "universityId": "uni-dalian-medical-university",
+      "canonicalRecordSha256": "7a66551b07ac107e8fcebec93ad7c73beaee8bd707b7b3a68838919de4a2ba9d",
+      "row": {
+        "id": "sch-gap-sch-dmu-international-student-merit-2025-2026",
+        "slug": "gap-sch-dmu-international-student-merit-2025-2026",
+        "name": {
+          "en": "2025–2026 Dalian Medical University International Student Merit Scholarships",
+          "zh": "大连医科大学2025-2026学年国际学生综合素质奖学金和单项奖学金",
+          "ru": "Стипендии за достижения для иностранных студентов Даляньского медицинского университета 2025–2026"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-dalian-medical-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://gjy.dmu.edu.cn/info/1012/1710.htm",
+        "summary": {
+          "en": "The international education college's May 2026 notice confirms two university awards—comprehensive merit and single-category scholarships—for registered spring-entry international undergraduates not in internship.",
+          "zh": "国际教育学院2026年5月通知确认综合素质奖学金和单项奖学金两类，面向已注册的春季国际本科生（实习阶段除外）。",
+          "ru": "Уведомление международного факультета подтверждает две университетские награды для зарегистрированных иностранных бакалавров весеннего набора."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-dmu-international-student-merit-2025-2026"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-dmu-international-student-merit-2025-2026",
+            "url": "https://gjy.dmu.edu.cn/info/1012/1710.htm",
+            "title": "关于开展2025-2026学年春季国际学生奖学金评选工作的通知",
+            "publisher": "dalian-medical-university",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "f391c2ad4ff40451bb44a99f76834c872740d6fc65cd33183d224e6d3ba12098"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nss-dut-foundation-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-dalian-university-of-technology",
+      "canonicalRecordSha256": "130cd4f1bef9c5a8a62171cc5e08cde47e16c74c53e52af344e1f2f5e1fa7087",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-dut-foundation",
+          "src-gap-program-prog-mew-nss-dut-foundation-support-1"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-08-11",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-nss-dut-foundation-2026-2027-other-fee-reference",
+        "programId": "prog-gap-prog-mew-nss-dut-foundation",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 28000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-dut-foundation",
+          "src-gap-program-prog-mew-nss-dut-foundation-support-1"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-nss-dut-foundation",
+        "slug": "gap-prog-mew-nss-dut-foundation-foundation",
+        "universityId": "uni-dalian-university-of-technology",
+        "name": {
+          "en": "International Student Foundation Program",
+          "zh": "国际学生预科项目",
+          "ru": "Подготовительная программа для иностранных студентов"
+        },
+        "degreeLevel": "foundation",
+        "discipline": "other",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 12,
+        "programUrl": "https://sie.dlut.edu.cn/info/3731/21141.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "996ef976ef4d507db29fa32b75fc50b0a5c0e85c6fcbed4dd4047f00b539185a",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-dut-foundation",
+              "src-gap-program-prog-mew-nss-dut-foundation-support-1"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-dut-foundation",
+            "slug": "gap-prog-mew-nss-dut-foundation-foundation",
+            "universityId": "uni-dalian-university-of-technology",
+            "name": {
+              "en": "International Student Foundation Program",
+              "zh": "国际学生预科项目",
+              "ru": "Подготовительная программа для иностранных студентов"
+            },
+            "degreeLevel": "foundation",
+            "discipline": "other",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 12,
+            "programUrl": "https://sie.dlut.edu.cn/info/3731/21141.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "996ef976ef4d507db29fa32b75fc50b0a5c0e85c6fcbed4dd4047f00b539185a"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nss-dut-foundation",
+            "url": "https://sie.dlut.edu.cn/info/3731/21141.htm",
+            "title": "大连理工大学国际学生预科项目",
+            "publisher": "dalian-university-of-technology",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "9656b3b6106b75a617d0411e49da74e231b8cc6f1cad7cd8ebd75156e991458a"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nss-dut-foundation-support-1",
+            "url": "https://iso.dlut.edu.cn/html/article_content/202511/89A38338906B4A999612DFE1C4653F97.shtml",
+            "title": "大连理工大学2026年国际学生招生简章",
+            "publisher": "dalian-university-of-technology",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "3fa0e2f013051ce3a759aa05363a7b24608d8d3d381a92f1c2db79c0aa507f06"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-prog-dufe-chinese-language-2026-2027-autumn",
+      "collection": "admissionCycles",
+      "universityId": "uni-dongbei-university-of-finance-and-economics",
+      "canonicalRecordSha256": "905245690f462e21484fe198be49e9ec2aba1ea65d7b3f5496e85ec22c048422",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-dufe-chinese-language"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-prog-dufe-chinese-language-2026-2027-autumn",
+        "programId": "prog-gap-prog-dufe-chinese-language",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "DUFE's official international education site lists long-term Chinese study at CNY 8,800 per semester or CNY 16,500 per year, with recurring spring and autumn deadlines.",
+          "zh": "东财国际教育学院官网列出长期汉语项目，每学期8800元或每年16500元，并提供春秋季固定申请节点。",
+          "ru": "Официальный сайт: 8 800 юаней за семестр или 16 500 в год, весенний и осенний набор."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-dufe-chinese-language"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-prog-dufe-chinese-language",
+        "slug": "gap-prog-dufe-chinese-language-language",
+        "universityId": "uni-dongbei-university-of-finance-and-economics",
+        "name": {
+          "en": "Chinese Language Program",
+          "zh": "汉语进修项目",
+          "ru": "Программа китайского языка"
+        },
+        "degreeLevel": "language",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 6,
+        "durationMonthsMax": 12,
+        "programUrl": "https://sie.dufe.edu.cn/en/studyad/clp/",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "84e4e583a428862a4663ae9cda1810f85109ad0f4256170843474413b3cb017a",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-dufe-chinese-language"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-prog-dufe-chinese-language",
+            "slug": "gap-prog-dufe-chinese-language-language",
+            "universityId": "uni-dongbei-university-of-finance-and-economics",
+            "name": {
+              "en": "Chinese Language Program",
+              "zh": "汉语进修项目",
+              "ru": "Программа китайского языка"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 6,
+            "durationMonthsMax": 12,
+            "programUrl": "https://sie.dufe.edu.cn/en/studyad/clp/",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "84e4e583a428862a4663ae9cda1810f85109ad0f4256170843474413b3cb017a"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-dufe-chinese-language",
+            "url": "https://sie.dufe.edu.cn/en/studyad/clp/",
+            "title": "Chinese Language Program",
+            "publisher": "dongbei-university-of-finance-and-economics",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "17bea02f99c4b835fc855ca16c91915cfee75662c74deefffaaec7026683afd2"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-prog-dufe-chinese-language-2026-2027-spring",
+      "collection": "admissionCycles",
+      "universityId": "uni-dongbei-university-of-finance-and-economics",
+      "canonicalRecordSha256": "116d400e81a819a5b7fe111060fd3ab7376994aae402347e552143f25bf18598",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-dufe-chinese-language"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-prog-dufe-chinese-language-2026-2027-spring",
+        "programId": "prog-gap-prog-dufe-chinese-language",
+        "academicYear": "2026-2027",
+        "intake": "spring",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "DUFE's official international education site lists long-term Chinese study at CNY 8,800 per semester or CNY 16,500 per year, with recurring spring and autumn deadlines.",
+          "zh": "东财国际教育学院官网列出长期汉语项目，每学期8800元或每年16500元，并提供春秋季固定申请节点。",
+          "ru": "Официальный сайт: 8 800 юаней за семестр или 16 500 в год, весенний и осенний набор."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-dufe-chinese-language"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-prog-dufe-chinese-language",
+        "slug": "gap-prog-dufe-chinese-language-language",
+        "universityId": "uni-dongbei-university-of-finance-and-economics",
+        "name": {
+          "en": "Chinese Language Program",
+          "zh": "汉语进修项目",
+          "ru": "Программа китайского языка"
+        },
+        "degreeLevel": "language",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 6,
+        "durationMonthsMax": 12,
+        "programUrl": "https://sie.dufe.edu.cn/en/studyad/clp/",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "84e4e583a428862a4663ae9cda1810f85109ad0f4256170843474413b3cb017a",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-dufe-chinese-language"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-prog-dufe-chinese-language",
+            "slug": "gap-prog-dufe-chinese-language-language",
+            "universityId": "uni-dongbei-university-of-finance-and-economics",
+            "name": {
+              "en": "Chinese Language Program",
+              "zh": "汉语进修项目",
+              "ru": "Программа китайского языка"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 6,
+            "durationMonthsMax": 12,
+            "programUrl": "https://sie.dufe.edu.cn/en/studyad/clp/",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "84e4e583a428862a4663ae9cda1810f85109ad0f4256170843474413b3cb017a"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-dufe-chinese-language",
+            "url": "https://sie.dufe.edu.cn/en/studyad/clp/",
+            "title": "Chinese Language Program",
+            "publisher": "dongbei-university-of-finance-and-economics",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "17bea02f99c4b835fc855ca16c91915cfee75662c74deefffaaec7026683afd2"
+        }
+      ]
+    }
+  ]
+}

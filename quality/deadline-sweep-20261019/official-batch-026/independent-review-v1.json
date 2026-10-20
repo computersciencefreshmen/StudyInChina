@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "official-batch-026-independent-review-v1",
+  "reviewedAt": "2026-10-19T08:36:55.867Z",
+  "reviewer": "/root/fast_date_inventory",
+  "result": "source-only-pass",
+  "reviewedReportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9",
+  "reviewedSelectionSha256": "b58c9a139167d7d30f966973801c8b4c17234c6a509f7c0ddc13e5763cc62b1c",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "queueSha256": "245ac3f58bf85e9f328d04a513e60d7a9fa7b1ab86a8b52ab70e2824ab7b75a0",
+  "additionalSelectionReceiptSha256": "3c781bc6ec7ba4bbc7c3a40a4028619e29803a78fe002527fde27f2b996dab48",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "summary": {
+    "exactRecords": 16,
+    "baseQueueRecords": 13,
+    "additionalSameSourceRecords": 3,
+    "schools": 7,
+    "recordResults": {
+      "unknown": 15,
+      "blocked": 1
+    },
+    "checksPassed": 10,
+    "checksFailed": 0,
+    "programmeRowsPinned": 12,
+    "registeredSourcesPinned": 23,
+    "rawOriginalBodiesPinned": 6,
+    "retainedWebResponseArtifactsPinned": 2,
+    "newWebsiteReads": 0,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "freshnessWrites": 0,
+    "gitMutations": 0
+  },
+  "scope": "Only these16 date-source observations accepted with stated limitations. No canonical mutation approval, current applicant availability, publication, linked programme full-fact eligibility or whole-school freshness certification. Frozen selection retains complete canonical rows, parents and source objects.",
+  "canonicalRecordPins": {
+    "sch-gap-breadth-sch-jnmc-shandong-government": "ca9bb30a88f4de2f66aa08630d2c9b10cd792d5f6228c74ec382aa6851708485",
+    "sch-gap-breadth-sch-jnmc-university-international": "1d534c47d84e0ab9371eb0f8e162a2a50921933952efcf192b32dced56afed94",
+    "cycle-gap-breadth-jnmc-m-clinical-medicine-2026-2027-autumn-fee-reference": "0467a38b8d9565b9cd1c10a902d075f644f3a50702cfc2e897a6d063f68dcf00",
+    "cycle-gap-breadth-jnmc-m-pharmacy-2026-2027-autumn-fee-reference": "e2b56b1308bf15938610661c6de50e81873085d6d37242f79ebf85be3b7e433e",
+    "cycle-gap-local-strong-jnmc-m-clinical-medicine-cn-2026-2027-other-fee-reference": "27630ee2bac712cce2f7ef2cff0902a9ec5ba184f64fa6fc00c359f881971720",
+    "cycle-gap-breadth-jnmc-m-public-health-2026-2027-autumn-fee-reference": "0ec6d8a8e91f84308c88c20458687eacbf242e365052154b00f767746c8b8bc1",
+    "sch-gap-local-kmmu-academic-scholarship": "a8218430a2ec7abd2c915f71e68e40dfb5e97841d275825ae189c292f6343518",
+    "sch-gap-local-kmmu-freshmen-aid": "dc9df4eb08f6cbfbe95b25926670e078f8aa64322c53f809ad1c1665514ab4cb",
+    "cycle-gap-local-kmmu-chinese-language-2026-2027-other": "a303daf91a8004da2db7babf85186dc8ba7bd9f83e3f3b1eb4da82df624482e0",
+    "cycle-gap-local-kmmu-mbbs-preparatory-2026-2027-other": "754d1278d3ad6adabcd42183a848ccf16f31cd4f1389964aaba6ae22513417dd",
+    "cycle-gap-local-kmmu-medical-advanced-training-2026-2027-other": "7c9c0ac31f86c6c8735ed812267524ab0b37bc9af2668f5cdbcc07afd3bc19bd",
+    "sch-gap-local-strong-kust-scholarship-information": "37c2473874a0a864be9569e900214731c80282ca20b03ee908943dae3af435a6",
+    "sch-gap-sch-mew-nnw-lnnu-international-chinese-language-teachers": "a6b00e7067bb68ae2da3f07259d2260f108809510b394ce1d70f65f1cb7de0d9",
+    "sch-gap-mew-scws-ncu-president-scholarship": "80e6c6949691d80e81d3793dbb3f8df882662e15a899d008620a126ac0b2c0bb",
+    "sch-gap-mve-ecma-njau-international-student-scholarship": "d11970428b0d40ef7ffad2a7e2c7c7b7504a2a8a8508c541a07ffb86610026ce",
+    "sch-gap-wave7-nau-international-student-scholarship": "53fbbb8c83a1fcdb9ce97dcef9691667336a26a3068beb28cb60a798be1aaf62"
+  },
+  "canonicalProgrammeBindingSetSha256": "014bc62617035073fd22223aacfeeaa33a273d0c7b07ea4e1e69fd4034aa7ed7",
+  "canonicalRegisteredSourceBindingSetSha256": "73b2059b3e0051a903ad178f9d8e8629a53919a2a39c77ecde489fdeaee28e40",
+  "originalAndObservationPins": [
+    {
+      "path": "source-01.pdf",
+      "sha256": "1f1f9819676d148caef3a9c07d4b7983a24753969bfbc962e48ddb94ed237e78",
+      "observedAt": "2026-10-19T08:16:26.510655+00:00"
+    },
+    {
+      "path": "source-13.html",
+      "sha256": "4dcd70690fe63e37ee93d722a6e9953c7de19da83f90977cf31a6182840293d4",
+      "observedAt": "2026-10-19T08:16:49.761926+00:00"
+    },
+    {
+      "path": "source-02.pdf",
+      "sha256": "4735a8b4afb010b413142fc3bd6b954c54239cd6bbef605d418fda0aaccc05f3",
+      "observedAt": "2026-10-19T08:16:28.499525+00:00"
+    },
+    {
+      "path": "source-03.html",
+      "sha256": "23f9e0b2721ab80cd7f45b433b626f121cc6316155d0f403dcd49a354075cd4a",
+      "observedAt": "2026-10-19T08:16:30.160516+00:00"
+    },
+    {
+      "path": "source-04.html",
+      "sha256": "8a7e93bae6d2109d00751dda240f94506f63462bcc2ef115a8e6194d1c762dcf",
+      "observedAt": "2026-10-19T08:16:32.322149+00:00"
+    },
+    {
+      "path": "web-fallback-full-response.txt",
+      "sha256": "54469effde4a60471057fb77e451c9de697b73d851f24c388668fcac60ee3f14",
+      "observedAt": "2026-10-19T08:30:19.840Z",
+      "originRawBytes": false
+    },
+    {
+      "path": "web-njau-pdf-tail-response.txt",
+      "sha256": "1549d07ba7308ad35b3df128e15f745a60ea8ae1e4d0b5b354449cdbc13fb73a",
+      "observedAt": "2026-10-19T08:30:19.840Z",
+      "originRawBytes": false
+    },
+    {
+      "path": "source-12.pdf",
+      "sha256": "bcb729061bf42ffa99e4431b4f313128749aebe27a570d5a6dcdb0e417195c85",
+      "observedAt": "2026-10-19T08:16:43.256225+00:00"
+    }
+  ],
+  "checks": [
+    {
+      "id": "frozen-report-selection-and-six-canonical-inputs",
+      "passed": true
+    },
+    {
+      "id": "exact-base13-plus-root-additional3-no-duplicates",
+      "passed": true
+    },
+    {
+      "id": "all-row-programme-and-full-registered-source-pins",
+      "passed": true
+    },
+    {
+      "id": "original-and-web-observation-bytes-hashes-and-times",
+      "passed": true
+    },
+    {
+      "id": "positive-date-and-scope-quotes-match-read-bodies",
+      "passed": true,
+      "detail": "Positive body clauses checked; no whole-page keyword-absence assertions."
+    },
+    {
+      "id": "jnmc-month-only-window-and-independent-awards",
+      "passed": true,
+      "detail": "PDFp2 visually read: March–June2026 application, June–July reporting; no invented ISO day. Two awards have no independent date."
+    },
+    {
+      "id": "kmmu-nondegree-and-awards-do-not-borrow-degree-july31",
+      "passed": true,
+      "detail": "Original PDFpp3–4 visually read: self-funded DEGREE only, nondegree explicitly redirected; preparatory page title shell insufficient. Monthly aid and annual academic awards have no own cutoff."
+    },
+    {
+      "id": "lnnu2025-ncu-upload-kust-landing-njau-partial-and-nau2015",
+      "passed": true,
+      "detail": "LNNU2025/Mar2026 not rolled to2026/27; bilingual openings differ. NCU upload link has no current cutoff. KUST provincial landing cannot bind generic award. NJAU only first51/101lines; tail fails, blocked. NAU recurring Sep1–Oct10 vs Oct15 documents from2015, PDFpp8–9 visually read, not hardified to2026."
+    },
+    {
+      "id": "no-canonical-freshness-or-unjustified-window-claims",
+      "passed": true
+    },
+    {
+      "id": "no-exact-id-overlap-and-frozen-report-inputs-preserved",
+      "passed": true
+    }
+  ],
+  "checksScript": "independent-review-checks.cjs",
+  "checksScriptSha256": "6edc61e808742c075d6216e94ad72568f91f979c3daaae866bd29fc52c3c8664"
+}

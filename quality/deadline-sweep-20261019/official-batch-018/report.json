@@ -1,0 +1,2824 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-018-20261019",
+  "state": "completed-four-expired-date-candidates-twenty-unknown-three-same-guide-conflicts",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T05:47:17.772Z",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetPlan": "quality/deadline-sweep-20261019/next-official-date-targets-v3.json",
+  "targetPlanSha256": "c53dd8358ec2667e6390b2b8b085e50b408854f55c2b20dc8da0f682f3151e6b",
+  "selectedUniversityIds": [
+    "uni-communication-university-of-zhejiang",
+    "uni-dalian-maritime-university",
+    "uni-dalian-medical-university",
+    "uni-dalian-university-of-foreign-languages",
+    "uni-dongbei-university-of-finance-and-economics",
+    "uni-dongguan-university-of-technology"
+  ],
+  "selection": {
+    "baseQueue": "Exact selectedUniversityIds15–20 and their20 selected IDs from next-official-date-targets-v3.json",
+    "baseQueueRecordIds": [
+      "cycle-gap-wave8-2-cuz-international-journalism-communication-bachelor-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave8-2-cuz-radio-tv-directing-bachelor-2026-2027-autumn-fee-reference",
+      "sch-gap-wave8-2-cuz-undergraduate-scholarship",
+      "cycle-gap-breadth-dlmu-foundation-college-preparatory-2026-2027-autumn-fee-reference",
+      "cycle-gap-breadth-dlmu-foundation-college-preparatory-2026-2027-other",
+      "cycle-gap-prog-mew-ne-dlmu-chinese-language-semester-2026-2027-other-fee-reference",
+      "cycle-gap-prog-mew-ne-dlmu-marine-engineering-bachelor-2026-2027-other-fee-reference",
+      "cycle-gap-local-dmu-b-clinical-medicine-cn-2026-2027-other-fee-reference",
+      "cycle-gap-local-dmu-b-mbbs-2026-2027-other",
+      "cycle-gap-local-dmu-b-stomatology-2026-2027-other-fee-reference",
+      "cycle-gap-local-dlufl-b-chinese-culture-2026-2027-other-fee-reference",
+      "cycle-gap-local-dlufl-b-chinese-international-trade-2026-2027-other-fee-reference",
+      "cycle-gap-local-dlufl-b-tcsol-2026-2027-other-fee-reference",
+      "cycle-gap-local-dufe-m-financial-management-en-2026-2027-other-fee-reference",
+      "cycle-gap-local-dufe-m-international-trade-en-2026-2027-other-fee-reference",
+      "cycle-gap-local-dufe-m-tourism-management-en-2026-2027-other-fee-reference",
+      "cycle-gap-wave3-dgut-international-business-master-2026-2027-autumn-fee-reference",
+      "cycle-gap-wave3-dgut-software-engineering-master-2026-2027-autumn-fee-reference",
+      "sch-gap-wave3-dgut-international-master-freshman-scholarship",
+      "sch-gap-wave3-dgut-international-master-living-stipend"
+    ],
+    "additionalSameSourceRecordIds": [
+      "sch-gap-mve-jzh-cuz-postgraduate-scholarship",
+      "sch-gap-mve-jzh-cuz-zhejiang-government",
+      "cycle-gap-prog-mew-ne-dlmu-nautical-science-bachelor-2026-2027-other-fee-reference",
+      "cycle-gap-local-dmu-pre-medical-2026-2027-other",
+      "cycle-gap-mew-scws-dgut-food-and-nutrition-master-2026-2027-autumn",
+      "cycle-gap-mew-scws-dgut-integrated-circuit-engineering-master-2026-2027-autumn",
+      "cycle-gap-mew-scws-dgut-social-work-master-2026-2027-autumn"
+    ],
+    "totalRecords": 27,
+    "additionalAuthorization": "Parent explicitly requested seven exact unassessed records sharing captured official sources before report freeze; no new website read for these additions.",
+    "additionalSelectionReceipt": "quality/deadline-sweep-20261019/heartbeat-0539/additional-same-source-selection-v1.json",
+    "additionalSelectionReceiptSha256": "f138cac45d2650bbb87fc212eb9b8e7b392cf008f46bb2e4d5c39732c7f127f8"
+  },
+  "acquisition": {
+    "newDistinctOfficialUrlsAttempted": 15,
+    "newDistinctOfficialUrlsCapturedSuccessfully": 15,
+    "failedCaptures": 0,
+    "nativeFallbacks": 0,
+    "noEndlessRetries": true,
+    "newReadsForAdditional7Records": 0,
+    "reusedPriorEvidenceSources": 0,
+    "captureManifest": "capture-manifest.json",
+    "captureManifestSha256": "8869d85d4df8c5f4e6b0381e1593e73a66018f661cf6953f776d5bb859bfa968",
+    "rawAndTextHashesVerified": true,
+    "normalTLSCertificateValidation": true,
+    "embeddedImagesNotRead": [
+      "DLMU brochure body image pages",
+      "DGUT general guide programme-table images"
+    ],
+    "sourceScopeIsStatedPerGroup": true,
+    "paidModelCalls": 0
+  },
+  "summary": {
+    "universitiesWithScopedChecks": 6,
+    "recordsAssessed": 27,
+    "baseQueueRecords": 20,
+    "additionalSameSourceRecords": 7,
+    "admissionCyclesAssessed": 22,
+    "scholarshipsAssessed": 5,
+    "recordResults": {
+      "closed": 4,
+      "unknown": 20,
+      "conflict": 3
+    },
+    "newExplicitExpiredDeadlineCandidates": 4,
+    "storedNullDeadlinesNotChanged": 24,
+    "canonicalDateEqualitiesCertified": 0,
+    "openingDatesAssessed": 0,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "freshnessRenewals": 0,
+    "publicationActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "policy": "Official dates are candidate observations only. Four expired windows concern exactly the same 2026 routes, preserve strict before where stated, and do not mean programme discontinuation. Unknown year, unmatched route, image-only catalogue binding, scholarship-only restrictions and unexplained source conflicts remain unresolved. New openings are separate candidates and do not certify stored opening equality. Any eventual mutation needs a supported narrow consumer, independent approval and exact-row compare-and-swap; none performed here.",
+  "groups": [
+    {
+      "key": "cuz-2026-undergraduate-and-three-separate-awards",
+      "universityId": "uni-communication-university-of-zhejiang",
+      "scope": "2026 undergraduate admission for the two exact English-taught programmes; university undergraduate, university postgraduate, and provincial awards each assessed separately.",
+      "evidence": [
+        {
+          "name": "cuz-2026-undergraduate",
+          "url": "https://sie.cuz.edu.cn/info/1128/5601.htm",
+          "observedAt": "2026-10-19T05:41:36.054109+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sie.cuz.edu.cn/info/1128/5601.htm",
+          "contentType": "text/html",
+          "bytes": 124283,
+          "rawPath": "cuz-2026-undergraduate.html",
+          "rawSha256": "1f872e535fe5a63328ef7047df7865f6e65b552a34bb3fbb8d58012065fe16f1",
+          "textPath": "cuz-2026-undergraduate.txt",
+          "textSha256": "1cc277082b82427733d3f16fad5f6f99c378387147ca594aff494d69483cac7a",
+          "captureSucceeded": true,
+          "evidenceReadScope": "complete-captured-visible-text",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "cuz-scholarship",
+          "url": "https://sie.cuz.edu.cn/English/Application1/Scholarship.htm",
+          "observedAt": "2026-10-19T05:41:36.055109+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sie.cuz.edu.cn/English/Application1/Scholarship.htm",
+          "contentType": "text/html",
+          "bytes": 33600,
+          "rawPath": "cuz-scholarship.html",
+          "rawSha256": "20fdddb07a0cc73ab2775ae232cbedd04ff9d55204cf739d7d6b359cd161b30f",
+          "textPath": "cuz-scholarship.txt",
+          "textSha256": "0df5ec2f2755118c5fb70d83e0aa6f317194f7c6846090155fbb75c3d4438cb1",
+          "captureSucceeded": true,
+          "evidenceReadScope": "complete-captured-visible-text",
+          "fullFactsCertified": false
+        }
+      ],
+      "officialTitle": "2026 Communication University of Zhejiang Enrollment Brochure (Bachelor）",
+      "quotedDate": "Before June 30 of the admission year",
+      "yearBasis": "2026 entry is explicit in this admission-specific title. The phrase of the admission year resolves to that 2026 entry, rather than projecting a standing annual rule into a new year.",
+      "deadlineTableBinding": "The Application Time cell has rowspan=25 in the Hangzhou Qiantang undergraduate catalogue, including both named rows. The language-requirement clause explicitly identifies the English-taught versions of both routes.",
+      "routeNameQuotes": [
+        "Radio & TV Directing",
+        "International Journalism & Communication"
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-2-cuz-international-journalism-communication-bachelor-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-communication-university-of-zhejiang",
+          "programId": "prog-gap-wave8-2-cuz-international-journalism-communication-bachelor",
+          "programName": "International Journalism and Communication (English-taught Bachelor's Program)",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "3b1f282f384ea7dcafcb33fc4d356a9d7536882c36de02bd9ac29c65da9c8ca5",
+          "canonicalProgramSha256": "4ccf99dad3da2292e86773096fc2406a6a18a44fe169deda630a3fb1e6ec2701",
+          "canonicalRecordSha256": "3b1f282f384ea7dcafcb33fc4d356a9d7536882c36de02bd9ac29c65da9c8ca5",
+          "canonicalRowSha256": "3b1f282f384ea7dcafcb33fc4d356a9d7536882c36de02bd9ac29c65da9c8ca5",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-cuz-international-journalism-communication-bachelor",
+              "canonicalProgramSha256": "4ccf99dad3da2292e86773096fc2406a6a18a44fe169deda630a3fb1e6ec2701"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave8-2-cuz-international-journalism-communication-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-2-cuz-international-journalism-communication-bachelor",
+              "url": "https://sie.cuz.edu.cn/info/1128/5601.htm",
+              "canonicalSourceSha256": "34326812bfb20cd3c1b5798ce2b1a9182a717a5703fd22425f69db8a59972078",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave8-2-cuz-international-journalism-communication-bachelor",
+                "url": "https://sie.cuz.edu.cn/info/1128/5601.htm",
+                "title": "CUZ 2026 International Undergraduate Enrollment Brochure",
+                "publisher": "communication-university-of-zhejiang",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://sie.cuz.edu.cn/info/1128/5601.htm",
+          "evidenceBodySha256": "1f872e535fe5a63328ef7047df7865f6e65b552a34bb3fbb8d58012065fe16f1",
+          "observedAt": "2026-10-19T05:41:36.054109+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-wave8-2-cuz-international-journalism-communication-bachelor"
+          ],
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "closureAssessment": {
+            "asOfDate": "2026-10-19",
+            "timeZone": "Asia/Shanghai",
+            "sameRouteAndEntryYear": true,
+            "programmeDiscontinued": false
+          },
+          "reason": "same-2026-specific-undergraduate-entry-window-is-expired",
+          "quotedDate": "Before June 30 of the admission year",
+          "deadlineBoundary": "before-date-as-worded",
+          "boundaryOperator": "<",
+          "exactCutoffAt": null,
+          "candidateOfficialOpensOn": null,
+          "admissionYearResolvedFromExplicit2026Title": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-2-cuz-radio-tv-directing-bachelor-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-communication-university-of-zhejiang",
+          "programId": "prog-gap-wave8-2-cuz-radio-tv-directing-bachelor",
+          "programName": "Radio and Television Directing (English-taught Bachelor's Program)",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "fa804a8a89dadc734c05602dcffe33bdb736ed325c34c491c9b7b4ffbc61fbda",
+          "canonicalProgramSha256": "bb7f743190c78523f8f297a3419f4c9e879c9c3206760b5cc89a9253265674c5",
+          "canonicalRecordSha256": "fa804a8a89dadc734c05602dcffe33bdb736ed325c34c491c9b7b4ffbc61fbda",
+          "canonicalRowSha256": "fa804a8a89dadc734c05602dcffe33bdb736ed325c34c491c9b7b4ffbc61fbda",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-cuz-radio-tv-directing-bachelor",
+              "canonicalProgramSha256": "bb7f743190c78523f8f297a3419f4c9e879c9c3206760b5cc89a9253265674c5"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave8-2-cuz-radio-tv-directing-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-2-cuz-radio-tv-directing-bachelor",
+              "url": "https://sie.cuz.edu.cn/info/1128/5601.htm",
+              "canonicalSourceSha256": "4762beaa300843886126d110b2a0bb6c9eded0149b2af87f28510df7481c9579",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave8-2-cuz-radio-tv-directing-bachelor",
+                "url": "https://sie.cuz.edu.cn/info/1128/5601.htm",
+                "title": "CUZ 2026 International Undergraduate Enrollment Brochure",
+                "publisher": "communication-university-of-zhejiang",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://sie.cuz.edu.cn/info/1128/5601.htm",
+          "evidenceBodySha256": "1f872e535fe5a63328ef7047df7865f6e65b552a34bb3fbb8d58012065fe16f1",
+          "observedAt": "2026-10-19T05:41:36.054109+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-wave8-2-cuz-radio-tv-directing-bachelor"
+          ],
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "closureAssessment": {
+            "asOfDate": "2026-10-19",
+            "timeZone": "Asia/Shanghai",
+            "sameRouteAndEntryYear": true,
+            "programmeDiscontinued": false
+          },
+          "reason": "same-2026-specific-undergraduate-entry-window-is-expired",
+          "quotedDate": "Before June 30 of the admission year",
+          "deadlineBoundary": "before-date-as-worded",
+          "boundaryOperator": "<",
+          "exactCutoffAt": null,
+          "candidateOfficialOpensOn": null,
+          "admissionYearResolvedFromExplicit2026Title": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-2-cuz-undergraduate-scholarship",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-communication-university-of-zhejiang",
+          "name": "Communication University of Zhejiang Scholarship for Undergraduate Students",
+          "programIds": [
+            "prog-gap-wave8-2-cuz-international-journalism-communication-bachelor",
+            "prog-gap-wave8-2-cuz-radio-tv-directing-bachelor"
+          ],
+          "canonicalScholarshipSha256": "e8cab31b4c9447aabba6e33b7d0a980f15949ecbe4d40e94e1179a099f1521d7",
+          "canonicalRecordSha256": "e8cab31b4c9447aabba6e33b7d0a980f15949ecbe4d40e94e1179a099f1521d7",
+          "canonicalRowSha256": "e8cab31b4c9447aabba6e33b7d0a980f15949ecbe4d40e94e1179a099f1521d7",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-cuz-international-journalism-communication-bachelor",
+              "canonicalProgramSha256": "4ccf99dad3da2292e86773096fc2406a6a18a44fe169deda630a3fb1e6ec2701"
+            },
+            {
+              "programId": "prog-gap-wave8-2-cuz-radio-tv-directing-bachelor",
+              "canonicalProgramSha256": "bb7f743190c78523f8f297a3419f4c9e879c9c3206760b5cc89a9253265674c5"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-2-cuz-undergraduate-scholarship",
+            "src-gap-scholarship-wave8-2-cuz-undergraduate-scholarship-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-2-cuz-undergraduate-scholarship",
+              "url": "https://sie.cuz.edu.cn/English/Application1/Scholarship.htm",
+              "canonicalSourceSha256": "a0e678a261d3ee06131d22c6b092f7a961b19c5790bcf855d2f812dfe4b357fb",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave8-2-cuz-undergraduate-scholarship",
+                "url": "https://sie.cuz.edu.cn/English/Application1/Scholarship.htm",
+                "title": "CUZ Scholarship Information",
+                "publisher": "communication-university-of-zhejiang",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            },
+            {
+              "sourceId": "src-gap-scholarship-wave8-2-cuz-undergraduate-scholarship-support-1",
+              "url": "https://sie.cuz.edu.cn/info/1128/5601.htm",
+              "canonicalSourceSha256": "d3bd168cc74da56aa60de838378d63206e9eedd998144c9b00a4445eb34c28e3",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave8-2-cuz-undergraduate-scholarship-support-1",
+                "url": "https://sie.cuz.edu.cn/info/1128/5601.htm",
+                "title": "CUZ 2026 International Undergraduate Enrollment Brochure",
+                "publisher": "communication-university-of-zhejiang",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-02"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://sie.cuz.edu.cn/English/Application1/Scholarship.htm",
+          "evidenceBodySha256": "20fdddb07a0cc73ab2775ae232cbedd04ff9d55204cf739d7d6b359cd161b30f",
+          "observedAt": "2026-10-19T05:41:36.055109+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-wave8-2-cuz-undergraduate-scholarship"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "separate-scholarship-page-has-benefits-no-current-award-application-dates",
+          "quotedDate": null,
+          "admissionDeadlineNotBorrowed": "2026-06-30",
+          "admissionDeadlineAppliesToAward": false,
+          "awardRouteNameConfirmed": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-jzh-cuz-postgraduate-scholarship",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-communication-university-of-zhejiang",
+          "name": "Communication University of Zhejiang Scholarship for Postgraduate Students",
+          "programIds": [
+            "prog-gap-mve-jzh-cuz-iclt-master"
+          ],
+          "canonicalScholarshipSha256": "1e27385f4a79c219f79015e8cc69b11fdd23eb61fa544bb24919a8543f09e136",
+          "canonicalRecordSha256": "1e27385f4a79c219f79015e8cc69b11fdd23eb61fa544bb24919a8543f09e136",
+          "canonicalRowSha256": "1e27385f4a79c219f79015e8cc69b11fdd23eb61fa544bb24919a8543f09e136",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mve-jzh-cuz-iclt-master",
+              "canonicalProgramSha256": "1fd837db79a6bba3b57118498fa4074570fe4b98af8fb59b4cc1b3feba6385e7"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-mve-jzh-cuz-postgraduate-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-jzh-cuz-postgraduate-scholarship",
+              "url": "https://sie.cuz.edu.cn/English/Application1/Scholarship.htm",
+              "canonicalSourceSha256": "4f5731b3aaac1c7fe1b3e4cbeafc05fc06e7e28aaff9fc4811d3eab31775fbe2",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mve-jzh-cuz-postgraduate-scholarship",
+                "url": "https://sie.cuz.edu.cn/English/Application1/Scholarship.htm",
+                "title": "CUZ Scholarships for International Students",
+                "publisher": "communication-university-of-zhejiang",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://sie.cuz.edu.cn/English/Application1/Scholarship.htm",
+          "evidenceBodySha256": "20fdddb07a0cc73ab2775ae232cbedd04ff9d55204cf739d7d6b359cd161b30f",
+          "observedAt": "2026-10-19T05:41:36.055109+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-mve-jzh-cuz-postgraduate-scholarship"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "separate-scholarship-page-has-benefits-no-current-award-application-dates",
+          "quotedDate": null,
+          "admissionDeadlineNotBorrowed": "2026-06-30",
+          "admissionDeadlineAppliesToAward": false,
+          "awardRouteNameConfirmed": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mve-jzh-cuz-zhejiang-government",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-communication-university-of-zhejiang",
+          "name": "Zhejiang Provincial Government Scholarship at CUZ",
+          "programIds": [],
+          "canonicalScholarshipSha256": "cf22d418db81d5a9eb62c203120893ef7fc114ba99c0905ddfb2b531f227bf26",
+          "canonicalRecordSha256": "cf22d418db81d5a9eb62c203120893ef7fc114ba99c0905ddfb2b531f227bf26",
+          "canonicalRowSha256": "cf22d418db81d5a9eb62c203120893ef7fc114ba99c0905ddfb2b531f227bf26",
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-mve-jzh-cuz-zhejiang-government"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mve-jzh-cuz-zhejiang-government",
+              "url": "https://sie.cuz.edu.cn/English/Application1/Scholarship.htm",
+              "canonicalSourceSha256": "8a1d75bf3e5d5a90cf65eeb4cd6f2c17a75c1e9fd7e2ff6b35680123ac83268f",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-mve-jzh-cuz-zhejiang-government",
+                "url": "https://sie.cuz.edu.cn/English/Application1/Scholarship.htm",
+                "title": "CUZ Scholarships for International Students",
+                "publisher": "communication-university-of-zhejiang",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://sie.cuz.edu.cn/English/Application1/Scholarship.htm",
+          "evidenceBodySha256": "20fdddb07a0cc73ab2775ae232cbedd04ff9d55204cf739d7d6b359cd161b30f",
+          "observedAt": "2026-10-19T05:41:36.055109+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-mve-jzh-cuz-zhejiang-government"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "separate-scholarship-page-has-benefits-no-current-award-application-dates",
+          "quotedDate": null,
+          "admissionDeadlineNotBorrowed": "2026-06-30",
+          "admissionDeadlineAppliesToAward": false,
+          "awardRouteNameConfirmed": true
+        }
+      ]
+    },
+    {
+      "key": "dlmu-annual-or-missing-year-dates",
+      "universityId": "uni-dalian-maritime-university",
+      "scope": "Five exact existing records: language semester, two preparatory cycles, Chinese-taught Marine Engineering, and additional Nautical Science.",
+      "evidence": [
+        {
+          "name": "dlmu-fees",
+          "url": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+          "observedAt": "2026-10-19T05:41:36.055109+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+          "contentType": "text/html",
+          "bytes": 146183,
+          "rawPath": "dlmu-fees.html",
+          "rawSha256": "aec5bcf72ed2c9c87ff445a9498515af8a0e6ab6a082fb512ec6e2a0cd2e4836",
+          "textPath": "dlmu-fees.txt",
+          "textSha256": "2c12268d52ee487b9667eae3dbea86ea930f5bf0ac05909ccafd15bda60d1e0d",
+          "captureSucceeded": true,
+          "evidenceReadScope": "complete-captured-visible-text",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "dlmu-brochure",
+          "url": "https://iec.dlmu.edu.cn/English/ADMISSION/Admission_Brochure/Admission_Brochure.htm",
+          "observedAt": "2026-10-19T05:41:36.056109+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iec.dlmu.edu.cn/English/ADMISSION/Admission_Brochure/Admission_Brochure.htm",
+          "contentType": "text/html",
+          "bytes": 38780,
+          "rawPath": "dlmu-brochure.html",
+          "rawSha256": "9fca72f8ebb20fda56a47711a76f2b07108f5ac84aba518d88953716584c524a",
+          "textPath": "dlmu-brochure.txt",
+          "textSha256": "d4d87e816825be8cc7b009eb98ccdc6f28acd0b5ef28afff78247e3827e0b9d4",
+          "captureSucceeded": true,
+          "evidenceReadScope": "captured-HTML-and-visible-text-only; embedded-brochure-page-images-not-acquired-or-read",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "dlmu-preparatory",
+          "url": "https://iec.dlmu.edu.cn/English/ADMISSION/College_Preparatory.htm",
+          "observedAt": "2026-10-19T05:41:38.172825+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iec.dlmu.edu.cn/English/ADMISSION/College_Preparatory.htm",
+          "contentType": "text/html",
+          "bytes": 46536,
+          "rawPath": "dlmu-preparatory.html",
+          "rawSha256": "0d3810654e3d9daf6576d56d25387d25df188765eb14a832b24423cb1a8448a8",
+          "textPath": "dlmu-preparatory.txt",
+          "textSha256": "7d19d444b44717e0e5b5610b4a9c3ed7443f699808e09b21f1504b3dd2a14dc2",
+          "captureSucceeded": true,
+          "evidenceReadScope": "complete-captured-visible-text",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "dlmu-chinese-bachelor",
+          "url": "https://iec.dlmu.edu.cn/English/ADMISSION/Bachelor_s_Degree/Chinese_Taught_Programs.htm",
+          "observedAt": "2026-10-19T05:41:38.918575+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iec.dlmu.edu.cn/English/ADMISSION/Bachelor_s_Degree/Chinese_Taught_Programs.htm",
+          "contentType": "text/html",
+          "bytes": 38922,
+          "rawPath": "dlmu-chinese-bachelor.html",
+          "rawSha256": "030457b03561157133cb7a108b5f739625ca36e6a047c6adedfcea46eeb63192",
+          "textPath": "dlmu-chinese-bachelor.txt",
+          "textSha256": "710025cf88f63ef4042b218544bd5b67ad7cfb094f0565a8f97dc5d05c00b94d",
+          "captureSucceeded": true,
+          "evidenceReadScope": "complete-captured-visible-text",
+          "fullFactsCertified": false
+        }
+      ],
+      "annualPreparatoryQuote": "Application Deadline: each July 10th.",
+      "annualBachelorQuote": "The application deadline for applying for a degree program is each June 30th basically",
+      "limitations": [
+        "No absolute 2026 entry/application year is provided in these textual deadline clauses.",
+        "Each July 10th is recurring; each June 30th basically is recurring and qualified, not a firm dated 2026 cutoff.",
+        "Fees alone establish no application window. The admission-brochure body embeds image pages not read in this bounded date pass, so no claim is made to date verification of that full image brochure."
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-breadth-dlmu-foundation-college-preparatory-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dalian-maritime-university",
+          "programId": "prog-gap-breadth-dlmu-foundation-college-preparatory",
+          "programName": "College Preparatory Program",
+          "degreeLevel": "foundation",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "f6063f693f75681e2c1dc668d5a61a4385390eaae9bd5ebdb5f25445e3dd0f5d",
+          "canonicalProgramSha256": "b69047f3e37c3525b63c61aee310c75a358b26cec31558e84672961578a9aaca",
+          "canonicalRecordSha256": "f6063f693f75681e2c1dc668d5a61a4385390eaae9bd5ebdb5f25445e3dd0f5d",
+          "canonicalRowSha256": "f6063f693f75681e2c1dc668d5a61a4385390eaae9bd5ebdb5f25445e3dd0f5d",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-breadth-dlmu-foundation-college-preparatory",
+              "canonicalProgramSha256": "b69047f3e37c3525b63c61aee310c75a358b26cec31558e84672961578a9aaca"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-breadth-dlmu-foundation-college-preparatory",
+            "src-gap-program-breadth-dlmu-foundation-college-preparatory-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-breadth-dlmu-foundation-college-preparatory",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/College_Preparatory.htm",
+              "canonicalSourceSha256": "19f24dda7a0794fb8b735c16451422605cb0cc83123c97d526c487d2de23c7be",
+              "sourceFullRecord": {
+                "id": "src-gap-program-breadth-dlmu-foundation-college-preparatory",
+                "url": "https://iec.dlmu.edu.cn/English/ADMISSION/College_Preparatory.htm",
+                "title": "DMU College Preparatory Program",
+                "publisher": "dalian-maritime-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-breadth-dlmu-foundation-college-preparatory-support-1",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+              "canonicalSourceSha256": "c0536ad432773fa8e4e866f1a15efccbc058643cc1466b41d23db6dd06a216d1",
+              "sourceFullRecord": {
+                "id": "src-gap-program-breadth-dlmu-foundation-college-preparatory-support-1",
+                "url": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+                "title": "DMU Fees",
+                "publisher": "dalian-maritime-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://iec.dlmu.edu.cn/English/ADMISSION/College_Preparatory.htm",
+          "evidenceBodySha256": "0d3810654e3d9daf6576d56d25387d25df188765eb14a832b24423cb1a8448a8",
+          "observedAt": "2026-10-19T05:41:38.172825+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-breadth-dlmu-foundation-college-preparatory"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "yearly-july10-rule-not-bound-to-current-2026-cycle",
+          "quotedDate": "Application Deadline: each July 10th.",
+          "recurringDeadlineReference": {
+            "monthDay": "07-10",
+            "qualifier": "each",
+            "year": null
+          },
+          "feeReferenceNotRolledForward": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-breadth-dlmu-foundation-college-preparatory-2026-2027-other",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dalian-maritime-university",
+          "programId": "prog-gap-breadth-dlmu-foundation-college-preparatory",
+          "programName": "College Preparatory Program",
+          "degreeLevel": "foundation",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "e967577f3aab165179af141474959372a770f72f71142b64dc26045afd443206",
+          "canonicalProgramSha256": "b69047f3e37c3525b63c61aee310c75a358b26cec31558e84672961578a9aaca",
+          "canonicalRecordSha256": "e967577f3aab165179af141474959372a770f72f71142b64dc26045afd443206",
+          "canonicalRowSha256": "e967577f3aab165179af141474959372a770f72f71142b64dc26045afd443206",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-breadth-dlmu-foundation-college-preparatory",
+              "canonicalProgramSha256": "b69047f3e37c3525b63c61aee310c75a358b26cec31558e84672961578a9aaca"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-breadth-dlmu-foundation-college-preparatory",
+            "src-gap-program-breadth-dlmu-foundation-college-preparatory-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-breadth-dlmu-foundation-college-preparatory",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/College_Preparatory.htm",
+              "canonicalSourceSha256": "19f24dda7a0794fb8b735c16451422605cb0cc83123c97d526c487d2de23c7be",
+              "sourceFullRecord": {
+                "id": "src-gap-program-breadth-dlmu-foundation-college-preparatory",
+                "url": "https://iec.dlmu.edu.cn/English/ADMISSION/College_Preparatory.htm",
+                "title": "DMU College Preparatory Program",
+                "publisher": "dalian-maritime-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-breadth-dlmu-foundation-college-preparatory-support-1",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+              "canonicalSourceSha256": "c0536ad432773fa8e4e866f1a15efccbc058643cc1466b41d23db6dd06a216d1",
+              "sourceFullRecord": {
+                "id": "src-gap-program-breadth-dlmu-foundation-college-preparatory-support-1",
+                "url": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+                "title": "DMU Fees",
+                "publisher": "dalian-maritime-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://iec.dlmu.edu.cn/English/ADMISSION/College_Preparatory.htm",
+          "evidenceBodySha256": "0d3810654e3d9daf6576d56d25387d25df188765eb14a832b24423cb1a8448a8",
+          "observedAt": "2026-10-19T05:41:38.172825+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-breadth-dlmu-foundation-college-preparatory"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "yearly-july10-rule-not-bound-to-current-2026-cycle",
+          "quotedDate": "Application Deadline: each July 10th.",
+          "recurringDeadlineReference": {
+            "monthDay": "07-10",
+            "qualifier": "each",
+            "year": null
+          },
+          "feeReferenceNotRolledForward": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-dlmu-chinese-language-semester-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dalian-maritime-university",
+          "programId": "prog-gap-prog-mew-ne-dlmu-chinese-language-semester",
+          "programName": "Chinese Language Program — One Semester",
+          "degreeLevel": "language",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "7a906e3204bd592204636c0d7bebc72e03c3a868df1d4ffb4c353b3a28e09b59",
+          "canonicalProgramSha256": "12ddcc3beaef80517f7f42458a6ab5eef6257a5a823c040701b1edc6bbde51d6",
+          "canonicalRecordSha256": "7a906e3204bd592204636c0d7bebc72e03c3a868df1d4ffb4c353b3a28e09b59",
+          "canonicalRowSha256": "7a906e3204bd592204636c0d7bebc72e03c3a868df1d4ffb4c353b3a28e09b59",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-ne-dlmu-chinese-language-semester",
+              "canonicalProgramSha256": "12ddcc3beaef80517f7f42458a6ab5eef6257a5a823c040701b1edc6bbde51d6"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-dlmu-chinese-language-semester",
+            "src-gap-program-prog-mew-ne-dlmu-chinese-language-semester-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-dlmu-chinese-language-semester",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+              "canonicalSourceSha256": "b0b6ccf341ed5510893b79c4c65936fc16884a3cbfb08266751d984b55714d14",
+              "sourceFullRecord": {
+                "id": "src-gap-program-prog-mew-ne-dlmu-chinese-language-semester",
+                "url": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+                "title": "DMU Fees",
+                "publisher": "dalian-maritime-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-dlmu-chinese-language-semester-support-1",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/Admission_Brochure/Admission_Brochure.htm",
+              "canonicalSourceSha256": "777255b86f76ced9e736a50c19dd8087d4157f9de5aed54a3749f4499fd8876a",
+              "sourceFullRecord": {
+                "id": "src-gap-program-prog-mew-ne-dlmu-chinese-language-semester-support-1",
+                "url": "https://iec.dlmu.edu.cn/English/ADMISSION/Admission_Brochure/Admission_Brochure.htm",
+                "title": "DMU Admission Brochure",
+                "publisher": "dalian-maritime-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+          "evidenceBodySha256": "aec5bcf72ed2c9c87ff445a9498515af8a0e6ab6a082fb512ec6e2a0cd2e4836",
+          "observedAt": "2026-10-19T05:41:36.055109+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-prog-mew-ne-dlmu-chinese-language-semester"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "fees-and-brochure-visible-text-do-not-establish-a-dated-language-window",
+          "quotedDate": null,
+          "recurringDeadlineReference": null,
+          "feeReferenceNotRolledForward": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-dlmu-marine-engineering-bachelor-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dalian-maritime-university",
+          "programId": "prog-gap-prog-mew-ne-dlmu-marine-engineering-bachelor",
+          "programName": "Marine Engineering",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "f1bc052e4580202aa891017f62d68db2ea38fa35acd2f5ff9dff9eefc83e42e1",
+          "canonicalProgramSha256": "84797afc5b54d743ef1e6edafa5cd90a2a96a65417d8ba682210d89480890b6b",
+          "canonicalRecordSha256": "f1bc052e4580202aa891017f62d68db2ea38fa35acd2f5ff9dff9eefc83e42e1",
+          "canonicalRowSha256": "f1bc052e4580202aa891017f62d68db2ea38fa35acd2f5ff9dff9eefc83e42e1",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-ne-dlmu-marine-engineering-bachelor",
+              "canonicalProgramSha256": "84797afc5b54d743ef1e6edafa5cd90a2a96a65417d8ba682210d89480890b6b"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-dlmu-marine-engineering-bachelor",
+            "src-gap-program-prog-mew-ne-dlmu-marine-engineering-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-dlmu-marine-engineering-bachelor",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/Bachelor_s_Degree/Chinese_Taught_Programs.htm",
+              "canonicalSourceSha256": "1035221a77efe4eaa1bdccf936f568444ca2de2d9a9de13bcab0db0314ac105d",
+              "sourceFullRecord": {
+                "id": "src-gap-program-prog-mew-ne-dlmu-marine-engineering-bachelor",
+                "url": "https://iec.dlmu.edu.cn/English/ADMISSION/Bachelor_s_Degree/Chinese_Taught_Programs.htm",
+                "title": "DMU Chinese-Taught Bachelor's Programs",
+                "publisher": "dalian-maritime-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-dlmu-marine-engineering-bachelor-support-1",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+              "canonicalSourceSha256": "34ce7ba48f8824f6319acc996a83ab4802f817c516fef03e65e9a2b9b257c26e",
+              "sourceFullRecord": {
+                "id": "src-gap-program-prog-mew-ne-dlmu-marine-engineering-bachelor-support-1",
+                "url": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+                "title": "DMU Fees",
+                "publisher": "dalian-maritime-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://iec.dlmu.edu.cn/English/ADMISSION/Bachelor_s_Degree/Chinese_Taught_Programs.htm",
+          "evidenceBodySha256": "030457b03561157133cb7a108b5f739625ca36e6a047c6adedfcea46eeb63192",
+          "observedAt": "2026-10-19T05:41:38.918575+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-prog-mew-ne-dlmu-marine-engineering-bachelor"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "qualified-yearly-june30-rule-not-bound-to-current-2026-cycle",
+          "quotedDate": "The application deadline for applying for a degree program is each June 30th basically",
+          "recurringDeadlineReference": {
+            "monthDay": "06-30",
+            "qualifier": "each; basically",
+            "year": null
+          },
+          "feeReferenceNotRolledForward": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-ne-dlmu-nautical-science-bachelor-2026-2027-other-fee-reference",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-dalian-maritime-university",
+          "programId": "prog-gap-prog-mew-ne-dlmu-nautical-science-bachelor",
+          "programName": "Nautical Science",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "aa60c46d540957ebc4e60d7d9ea53ec945bbeaaef408aab0ecfae008e48e0735",
+          "canonicalProgramSha256": "f1ff3d76a609e2297bbf5e63c376dbcc763fdbd9317a25038277d511517ed413",
+          "canonicalRecordSha256": "aa60c46d540957ebc4e60d7d9ea53ec945bbeaaef408aab0ecfae008e48e0735",
+          "canonicalRowSha256": "aa60c46d540957ebc4e60d7d9ea53ec945bbeaaef408aab0ecfae008e48e0735",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-ne-dlmu-nautical-science-bachelor",
+              "canonicalProgramSha256": "f1ff3d76a609e2297bbf5e63c376dbcc763fdbd9317a25038277d511517ed413"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-ne-dlmu-nautical-science-bachelor",
+            "src-gap-program-prog-mew-ne-dlmu-nautical-science-bachelor-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-dlmu-nautical-science-bachelor",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/Bachelor_s_Degree/Chinese_Taught_Programs.htm",
+              "canonicalSourceSha256": "14beade948d0f29e290e68e816a14ffca2b3c4027713ce4096702ec448320efb",
+              "sourceFullRecord": {
+                "id": "src-gap-program-prog-mew-ne-dlmu-nautical-science-bachelor",
+                "url": "https://iec.dlmu.edu.cn/English/ADMISSION/Bachelor_s_Degree/Chinese_Taught_Programs.htm",
+                "title": "DMU Chinese-Taught Bachelor's Programs",
+                "publisher": "dalian-maritime-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-prog-mew-ne-dlmu-nautical-science-bachelor-support-1",
+              "url": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+              "canonicalSourceSha256": "bd4424ab5b65386239871c628265fee852b855f2a0e36691ef5de23bb8a7800e",
+              "sourceFullRecord": {
+                "id": "src-gap-program-prog-mew-ne-dlmu-nautical-science-bachelor-support-1",
+                "url": "https://iec.dlmu.edu.cn/English/ADMISSION/FEES.htm",
+                "title": "DMU Fees",
+                "publisher": "dalian-maritime-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-03"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://iec.dlmu.edu.cn/English/ADMISSION/Bachelor_s_Degree/Chinese_Taught_Programs.htm",
+          "evidenceBodySha256": "030457b03561157133cb7a108b5f739625ca36e6a047c6adedfcea46eeb63192",
+          "observedAt": "2026-10-19T05:41:38.918575+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-prog-mew-ne-dlmu-nautical-science-bachelor"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "qualified-yearly-june30-rule-not-bound-to-current-2026-cycle",
+          "quotedDate": "The application deadline for applying for a degree program is each June 30th basically",
+          "recurringDeadlineReference": {
+            "monthDay": "06-30",
+            "qualifier": "each; basically",
+            "year": null
+          },
+          "feeReferenceNotRolledForward": true
+        }
+      ]
+    },
+    {
+      "key": "dmu-programmes-no-closing-date-and-spring2026-opening-scope",
+      "universityId": "uni-dalian-medical-university",
+      "scope": "Chinese-medium Clinical Medicine, MBBS, BDS, and additional Pre-medical; current records use 2026-2027 / intake other, whereas the opening-only support notice is explicitly Spring 2026.",
+      "evidence": [
+        {
+          "name": "dmu-undergraduate",
+          "url": "https://iec.dmu.edu.cn/rxsq_l/Undergraduate_Programs.htm",
+          "observedAt": "2026-10-19T05:41:38.921326+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iec.dmu.edu.cn/rxsq_l/Undergraduate_Programs.htm",
+          "contentType": "text/html",
+          "bytes": 19274,
+          "rawPath": "dmu-undergraduate.html",
+          "rawSha256": "fb42246ebc062b6a87736b9502d5632b4b588cf4f3f24ce4cf3754b84a43945e",
+          "textPath": "dmu-undergraduate.txt",
+          "textSha256": "5edb0110eb2ee63d7a065c4ad3a70290a3b262b0677bb71905b0679c98e6bbb5",
+          "captureSucceeded": true,
+          "evidenceReadScope": "complete-captured-visible-text",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "dmu-spring-guide",
+          "url": "https://iec.dmu.edu.cn/info/1012/1638.htm",
+          "observedAt": "2026-10-19T05:41:40.441895+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://iec.dmu.edu.cn/info/1012/1638.htm",
+          "contentType": "text/html",
+          "bytes": 20444,
+          "rawPath": "dmu-spring-guide.html",
+          "rawSha256": "bfc632e0ebfe0fd6ba1275d019d04544cc242d5cc43d2fa383a140379015a6c2",
+          "textPath": "dmu-spring-guide.txt",
+          "textSha256": "0fa060a88244018c15e58017b1d816212acfcd04be42d6874ff818d154b2a4c2",
+          "captureSucceeded": true,
+          "evidenceReadScope": "complete-captured-visible-text",
+          "fullFactsCertified": false
+        }
+      ],
+      "openingOnlySourceTitle": "Admission Guide for DMU 2026 (Spring) International Student Programs",
+      "openingOnlyQuote": "The system will be open on November 5, 2025 at 09:00 Beijing time.",
+      "routeQualification": "That Spring 2026 notice names only Pre-medical and MBBS. It states no closing date, does not bind Chinese-medium Clinical Medicine or BDS, and is not rolled into Spring 2027 or an unspecified 2026-2027 intake.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-dmu-b-clinical-medicine-cn-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dalian-medical-university",
+          "programId": "prog-gap-local-dmu-b-clinical-medicine-cn",
+          "programName": "Clinical Medicine (Chinese Medium)",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "9d9faf78f4dabe1be4af9eea2b8b1a41592384f233f8ca5cf3ed8925d525d7ea",
+          "canonicalProgramSha256": "0eb2891e903ad2bdb411054880c1164b9b3704afa0bef2a639c42f3b8d66cc21",
+          "canonicalRecordSha256": "9d9faf78f4dabe1be4af9eea2b8b1a41592384f233f8ca5cf3ed8925d525d7ea",
+          "canonicalRowSha256": "9d9faf78f4dabe1be4af9eea2b8b1a41592384f233f8ca5cf3ed8925d525d7ea",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-dmu-b-clinical-medicine-cn",
+              "canonicalProgramSha256": "0eb2891e903ad2bdb411054880c1164b9b3704afa0bef2a639c42f3b8d66cc21"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-dmu-b-clinical-medicine-cn"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-dmu-b-clinical-medicine-cn",
+              "url": "https://iec.dmu.edu.cn/rxsq_l/Undergraduate_Programs.htm",
+              "canonicalSourceSha256": "929503ed81b08eb4fd87c1fd18bdc167e429fbbdacdc0b3002df1b74d4502739",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dmu-b-clinical-medicine-cn",
+                "url": "https://iec.dmu.edu.cn/rxsq_l/Undergraduate_Programs.htm",
+                "title": "Dalian Medical University Undergraduate Programs",
+                "publisher": "dalian-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://iec.dmu.edu.cn/rxsq_l/Undergraduate_Programs.htm",
+          "evidenceBodySha256": "fb42246ebc062b6a87736b9502d5632b4b588cf4f3f24ce4cf3754b84a43945e",
+          "observedAt": "2026-10-19T05:41:38.921326+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-local-dmu-b-clinical-medicine-cn"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "2025-programme-index-has-start-semesters-no-application-closing-date",
+          "quotedDate": null,
+          "sourceScopeOpening": null,
+          "candidateOfficialOpensOn": null,
+          "storedOpeningNotNewlyConfirmed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-dmu-b-mbbs-2026-2027-other",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dalian-medical-university",
+          "programId": "prog-gap-local-dmu-b-mbbs",
+          "programName": "Clinical Medicine (MBBS)",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": "2025-11-05",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "2248b06fe6344b1db20289dc05466fd390bd42131bcfd5cd37635548e1e9b4ee",
+          "canonicalProgramSha256": "12fb2ca66fae215423ba93639d72098cd309754445791814c777eeb84ddc86e8",
+          "canonicalRecordSha256": "2248b06fe6344b1db20289dc05466fd390bd42131bcfd5cd37635548e1e9b4ee",
+          "canonicalRowSha256": "2248b06fe6344b1db20289dc05466fd390bd42131bcfd5cd37635548e1e9b4ee",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-dmu-b-mbbs",
+              "canonicalProgramSha256": "12fb2ca66fae215423ba93639d72098cd309754445791814c777eeb84ddc86e8"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-dmu-b-mbbs",
+            "src-gap-program-local-dmu-b-mbbs-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-dmu-b-mbbs",
+              "url": "https://iec.dmu.edu.cn/rxsq_l/Undergraduate_Programs.htm",
+              "canonicalSourceSha256": "52c7747dc174e68fe7ccd46b8854522317c5f8e870af562dd67ad30f2367d33a",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dmu-b-mbbs",
+                "url": "https://iec.dmu.edu.cn/rxsq_l/Undergraduate_Programs.htm",
+                "title": "Dalian Medical University Undergraduate Programs",
+                "publisher": "dalian-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-local-dmu-b-mbbs-support-1",
+              "url": "https://iec.dmu.edu.cn/info/1012/1638.htm",
+              "canonicalSourceSha256": "4bc0a86ac0b902c02daecf3e6ad91385c55f08a65b5d84322414d458c4cb05c0",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dmu-b-mbbs-support-1",
+                "url": "https://iec.dmu.edu.cn/info/1012/1638.htm",
+                "title": "Supporting official source",
+                "publisher": "dalian-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://iec.dmu.edu.cn/info/1012/1638.htm",
+          "evidenceBodySha256": "bfc632e0ebfe0fd6ba1275d019d04544cc242d5cc43d2fa383a140379015a6c2",
+          "observedAt": "2026-10-19T05:41:40.441895+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-local-dmu-b-mbbs-support-1"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "spring2026-source-publishes-opening-only-no-deadline-and-does-not-establish-selected-2026-2027-intake",
+          "quotedDate": "The system will be open on November 5, 2025 at 09:00 Beijing time.",
+          "sourceScopeOpening": {
+            "appliesTo": "Spring 2026 MBBS / Pre-medical only",
+            "date": "2025-11-05",
+            "exactTime": "2025-11-05T09:00:00+08:00",
+            "bindingToSelectedCycleConfirmed": false
+          },
+          "candidateOfficialOpensOn": null,
+          "storedOpeningNotNewlyConfirmed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-dmu-b-stomatology-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dalian-medical-university",
+          "programId": "prog-gap-local-dmu-b-stomatology",
+          "programName": "Stomatology (BDS)",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "eae8f3e28ded934ad110e003a79cd0517f0993600281d59f2896996285c618ad",
+          "canonicalProgramSha256": "bd7fca0d98b7929ca2a951fb219865ac003bc251ba3654d4ad6da1464c38566f",
+          "canonicalRecordSha256": "eae8f3e28ded934ad110e003a79cd0517f0993600281d59f2896996285c618ad",
+          "canonicalRowSha256": "eae8f3e28ded934ad110e003a79cd0517f0993600281d59f2896996285c618ad",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-dmu-b-stomatology",
+              "canonicalProgramSha256": "bd7fca0d98b7929ca2a951fb219865ac003bc251ba3654d4ad6da1464c38566f"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-dmu-b-stomatology"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-dmu-b-stomatology",
+              "url": "https://iec.dmu.edu.cn/rxsq_l/Undergraduate_Programs.htm",
+              "canonicalSourceSha256": "3f3bde029aecf7081c5ca7e6356ae1bbf94883eddd6b678db37678386788e6fe",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dmu-b-stomatology",
+                "url": "https://iec.dmu.edu.cn/rxsq_l/Undergraduate_Programs.htm",
+                "title": "Dalian Medical University Undergraduate Programs",
+                "publisher": "dalian-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://iec.dmu.edu.cn/rxsq_l/Undergraduate_Programs.htm",
+          "evidenceBodySha256": "fb42246ebc062b6a87736b9502d5632b4b588cf4f3f24ce4cf3754b84a43945e",
+          "observedAt": "2026-10-19T05:41:38.921326+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-local-dmu-b-stomatology"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "2025-programme-index-has-start-semesters-no-application-closing-date",
+          "quotedDate": null,
+          "sourceScopeOpening": null,
+          "candidateOfficialOpensOn": null,
+          "storedOpeningNotNewlyConfirmed": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-dmu-pre-medical-2026-2027-other",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-dalian-medical-university",
+          "programId": "prog-gap-local-dmu-pre-medical",
+          "programName": "Pre-medical Program",
+          "degreeLevel": "foundation",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": "2025-11-05",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "326fe08981a52b31092f987f7cca464645f0d65070852630d8d09df4474310f9",
+          "canonicalProgramSha256": "eeb17b2acc172ac95add597a37c76b6fd70b086bc43cb9c55d44d4cd146cd61a",
+          "canonicalRecordSha256": "326fe08981a52b31092f987f7cca464645f0d65070852630d8d09df4474310f9",
+          "canonicalRowSha256": "326fe08981a52b31092f987f7cca464645f0d65070852630d8d09df4474310f9",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-dmu-pre-medical",
+              "canonicalProgramSha256": "eeb17b2acc172ac95add597a37c76b6fd70b086bc43cb9c55d44d4cd146cd61a"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-dmu-pre-medical",
+            "src-gap-program-local-dmu-pre-medical-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-dmu-pre-medical",
+              "url": "https://iec.dmu.edu.cn/rxsq_l/Premedical_Programs.htm",
+              "canonicalSourceSha256": "b963a89a34b6b8c994810bae16b540de3d80994f7c095d54f8811d2bfaf08c3b",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dmu-pre-medical",
+                "url": "https://iec.dmu.edu.cn/rxsq_l/Premedical_Programs.htm",
+                "title": "Dalian Medical University Premedical Programs",
+                "publisher": "dalian-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-local-dmu-pre-medical-support-1",
+              "url": "https://iec.dmu.edu.cn/info/1012/1638.htm",
+              "canonicalSourceSha256": "086ced87a04b4e90f91fcc7f19af64366ade58a93d4da447aa7990f357a81b4e",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dmu-pre-medical-support-1",
+                "url": "https://iec.dmu.edu.cn/info/1012/1638.htm",
+                "title": "Supporting official source",
+                "publisher": "dalian-medical-university",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://iec.dmu.edu.cn/info/1012/1638.htm",
+          "evidenceBodySha256": "bfc632e0ebfe0fd6ba1275d019d04544cc242d5cc43d2fa383a140379015a6c2",
+          "observedAt": "2026-10-19T05:41:40.441895+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-local-dmu-pre-medical-support-1"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "spring2026-source-publishes-opening-only-no-deadline-and-does-not-establish-selected-2026-2027-intake",
+          "quotedDate": "The system will be open on November 5, 2025 at 09:00 Beijing time.",
+          "sourceScopeOpening": {
+            "appliesTo": "Spring 2026 MBBS / Pre-medical only",
+            "date": "2025-11-05",
+            "exactTime": "2025-11-05T09:00:00+08:00",
+            "bindingToSelectedCycleConfirmed": false
+          },
+          "candidateOfficialOpensOn": null,
+          "storedOpeningNotNewlyConfirmed": true
+        }
+      ]
+    },
+    {
+      "key": "dlufl-conflicting-cutoffs-within-same-2026-guide",
+      "universityId": "uni-dalian-university-of-foreign-languages",
+      "scope": "Three exact Chinese bachelor routes: Chinese Culture, International Trade, and Teaching Chinese to Speakers of Other Languages.",
+      "evidence": [
+        {
+          "name": "dlufl-2026-undergraduate",
+          "url": "https://scs.dlufl.edu.cn/info/1012/1633.htm",
+          "observedAt": "2026-10-19T05:41:40.499520+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://scs.dlufl.edu.cn/info/1012/1633.htm",
+          "contentType": "text/html",
+          "bytes": 158431,
+          "rawPath": "dlufl-2026-undergraduate.html",
+          "rawSha256": "65943b7e5414f92c9db51303d411877016857c485842d08a62bfcdfd17bca3f2",
+          "textPath": "dlufl-2026-undergraduate.txt",
+          "textSha256": "daff49f4f0e59be8966d22628e9a5ab366db64daf66da065d7d472e7f045e7af",
+          "captureSucceeded": true,
+          "evidenceReadScope": "complete-captured-visible-text",
+          "fullFactsCertified": false
+        }
+      ],
+      "officialTitle": "大连外国语大学 2026年来华留学本科招生简章",
+      "routeNameQuotes": [
+        "汉语言（中国文化）",
+        "汉语言（国际贸易）",
+        "汉语国际教育"
+      ],
+      "quotedAbsoluteWindow": "申请时间：2025年10月15日至2026年4月15日。",
+      "quotedConflictingStandingRule": "学历生每年 9 月开学，报名截止时间为 4 月底。",
+      "assessment": "The current guide gives an absolute April 15, 2026 application endpoint and an end-of-April yearly registration deadline for degree students, without explaining the difference. Both are retained. No exact single deadline is approved, and month-end is not invented as a timestamp.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-dlufl-b-chinese-culture-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dalian-university-of-foreign-languages",
+          "programId": "prog-gap-local-dlufl-b-chinese-culture",
+          "programName": "Chinese (Chinese Culture)",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "e29f02f78ac328628b05f6d8c4799d2b1f239e32352e0fcadcd2433fbc78e5a1",
+          "canonicalProgramSha256": "f8053420b5fedc39990ba56599ff23dc1b7374d780e885c554edbc25f93af311",
+          "canonicalRecordSha256": "e29f02f78ac328628b05f6d8c4799d2b1f239e32352e0fcadcd2433fbc78e5a1",
+          "canonicalRowSha256": "e29f02f78ac328628b05f6d8c4799d2b1f239e32352e0fcadcd2433fbc78e5a1",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-dlufl-b-chinese-culture",
+              "canonicalProgramSha256": "f8053420b5fedc39990ba56599ff23dc1b7374d780e885c554edbc25f93af311"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-dlufl-b-chinese-culture"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-dlufl-b-chinese-culture",
+              "url": "https://scs.dlufl.edu.cn/info/1012/1633.htm",
+              "canonicalSourceSha256": "b5c8c867ed90bc39651b6bf8086680c70c95334eacb24d3c850f643b39839b7a",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dlufl-b-chinese-culture",
+                "url": "https://scs.dlufl.edu.cn/info/1012/1633.htm",
+                "title": "Dalian University of Foreign Languages 2026 Undergraduate Admission",
+                "publisher": "dalian-university-of-foreign-languages",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://scs.dlufl.edu.cn/info/1012/1633.htm",
+          "evidenceBodySha256": "65943b7e5414f92c9db51303d411877016857c485842d08a62bfcdfd17bca3f2",
+          "observedAt": "2026-10-19T05:41:40.499520+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-local-dlufl-b-chinese-culture"
+          ],
+          "result": "conflict",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "candidateOfficialOpensOn": "2025-10-15",
+          "openingCandidateOnly": true,
+          "reason": "same-guide-specific-april15-window-and-unexplained-end-of-april-degree-deadline",
+          "allObservedDeadlineAlternativesBeforeAuditDate": true,
+          "alternativesExpiryScope": "For the same 2026 entry, both explicitly dated April15 and the alternative end-of-April interpretation precede October19; exact cutoff remains unresolved.",
+          "officialDateVariants": [
+            {
+              "date": "2026-04-15",
+              "precision": "date",
+              "scope": "explicit-absolute-application-period",
+              "quotedDate": "申请时间：2025年10月15日至2026年4月15日。"
+            },
+            {
+              "date": null,
+              "recurringMonthEnd": "April",
+              "scope": "degree-student-enrollment-time-section",
+              "quotedDate": "学历生每年 9 月开学，报名截止时间为 4 月底。"
+            }
+          ],
+          "exactCutoffAt": null
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-dlufl-b-chinese-international-trade-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dalian-university-of-foreign-languages",
+          "programId": "prog-gap-local-dlufl-b-chinese-international-trade",
+          "programName": "Chinese (International Trade)",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "3b8a2ad5aa8022b9c24fe043251ef34504fcfb6b3f2c7f45423535b96f30fd89",
+          "canonicalProgramSha256": "94708429c2283ddf95f27cc89c0530bde36e3fb603dcd48c2cac41405d108623",
+          "canonicalRecordSha256": "3b8a2ad5aa8022b9c24fe043251ef34504fcfb6b3f2c7f45423535b96f30fd89",
+          "canonicalRowSha256": "3b8a2ad5aa8022b9c24fe043251ef34504fcfb6b3f2c7f45423535b96f30fd89",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-dlufl-b-chinese-international-trade",
+              "canonicalProgramSha256": "94708429c2283ddf95f27cc89c0530bde36e3fb603dcd48c2cac41405d108623"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-dlufl-b-chinese-international-trade"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-dlufl-b-chinese-international-trade",
+              "url": "https://scs.dlufl.edu.cn/info/1012/1633.htm",
+              "canonicalSourceSha256": "ea85c05b677deae1e2b99002b679f72e8697b2406eb3160ff9cf09e1d6083c6f",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dlufl-b-chinese-international-trade",
+                "url": "https://scs.dlufl.edu.cn/info/1012/1633.htm",
+                "title": "Dalian University of Foreign Languages 2026 Undergraduate Admission",
+                "publisher": "dalian-university-of-foreign-languages",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://scs.dlufl.edu.cn/info/1012/1633.htm",
+          "evidenceBodySha256": "65943b7e5414f92c9db51303d411877016857c485842d08a62bfcdfd17bca3f2",
+          "observedAt": "2026-10-19T05:41:40.499520+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-local-dlufl-b-chinese-international-trade"
+          ],
+          "result": "conflict",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "candidateOfficialOpensOn": "2025-10-15",
+          "openingCandidateOnly": true,
+          "reason": "same-guide-specific-april15-window-and-unexplained-end-of-april-degree-deadline",
+          "allObservedDeadlineAlternativesBeforeAuditDate": true,
+          "alternativesExpiryScope": "For the same 2026 entry, both explicitly dated April15 and the alternative end-of-April interpretation precede October19; exact cutoff remains unresolved.",
+          "officialDateVariants": [
+            {
+              "date": "2026-04-15",
+              "precision": "date",
+              "scope": "explicit-absolute-application-period",
+              "quotedDate": "申请时间：2025年10月15日至2026年4月15日。"
+            },
+            {
+              "date": null,
+              "recurringMonthEnd": "April",
+              "scope": "degree-student-enrollment-time-section",
+              "quotedDate": "学历生每年 9 月开学，报名截止时间为 4 月底。"
+            }
+          ],
+          "exactCutoffAt": null
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-dlufl-b-tcsol-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dalian-university-of-foreign-languages",
+          "programId": "prog-gap-local-dlufl-b-tcsol",
+          "programName": "Teaching Chinese to Speakers of Other Languages",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "4d0b8c747f96d66305ba875c4ee24dba90bb3445dc9fc66d06fd8b8f20e270f6",
+          "canonicalProgramSha256": "84023c928fc93793ded175b3f0a5b544953804ff22a2b2a4612dad8f6d4ba247",
+          "canonicalRecordSha256": "4d0b8c747f96d66305ba875c4ee24dba90bb3445dc9fc66d06fd8b8f20e270f6",
+          "canonicalRowSha256": "4d0b8c747f96d66305ba875c4ee24dba90bb3445dc9fc66d06fd8b8f20e270f6",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-dlufl-b-tcsol",
+              "canonicalProgramSha256": "84023c928fc93793ded175b3f0a5b544953804ff22a2b2a4612dad8f6d4ba247"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-dlufl-b-tcsol"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-dlufl-b-tcsol",
+              "url": "https://scs.dlufl.edu.cn/info/1012/1633.htm",
+              "canonicalSourceSha256": "d58a76c689f11cd0d62f978d3f78e190c3e0425155dfc13bddb3da41783320d4",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dlufl-b-tcsol",
+                "url": "https://scs.dlufl.edu.cn/info/1012/1633.htm",
+                "title": "Dalian University of Foreign Languages 2026 Undergraduate Admission",
+                "publisher": "dalian-university-of-foreign-languages",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://scs.dlufl.edu.cn/info/1012/1633.htm",
+          "evidenceBodySha256": "65943b7e5414f92c9db51303d411877016857c485842d08a62bfcdfd17bca3f2",
+          "observedAt": "2026-10-19T05:41:40.499520+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-local-dlufl-b-tcsol"
+          ],
+          "result": "conflict",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "candidateOfficialOpensOn": "2025-10-15",
+          "openingCandidateOnly": true,
+          "reason": "same-guide-specific-april15-window-and-unexplained-end-of-april-degree-deadline",
+          "allObservedDeadlineAlternativesBeforeAuditDate": true,
+          "alternativesExpiryScope": "For the same 2026 entry, both explicitly dated April15 and the alternative end-of-April interpretation precede October19; exact cutoff remains unresolved.",
+          "officialDateVariants": [
+            {
+              "date": "2026-04-15",
+              "precision": "date",
+              "scope": "explicit-absolute-application-period",
+              "quotedDate": "申请时间：2025年10月15日至2026年4月15日。"
+            },
+            {
+              "date": null,
+              "recurringMonthEnd": "April",
+              "scope": "degree-student-enrollment-time-section",
+              "quotedDate": "学历生每年 9 月开学，报名截止时间为 4 月底。"
+            }
+          ],
+          "exactCutoffAt": null
+        }
+      ]
+    },
+    {
+      "key": "dufe-general-master-vs-csc-typeb-cutoffs",
+      "universityId": "uni-dongbei-university-of-finance-and-economics",
+      "scope": "Three English master fee-reference cycles: Financial Management, International Trade, Tourism Management; generic entry route is not a CSC Type B scholarship application.",
+      "evidence": [
+        {
+          "name": "dufe-master-programmes",
+          "url": "https://sie.dufe.edu.cn/lxxm/ss/",
+          "observedAt": "2026-10-19T05:41:40.819254+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sie.dufe.edu.cn/lxxm/ss/",
+          "contentType": "text/html; charset=utf-8",
+          "bytes": 57580,
+          "rawPath": "dufe-master-programmes.html",
+          "rawSha256": "55687dae8ce5f59a178150dd2d2f14c2c558c57e4d6a667a751cf6d3bea9b38f",
+          "textPath": "dufe-master-programmes.txt",
+          "textSha256": "f5cacf9ed013a969cd108ccfa6e50a141c5f5a4a50984553aa0aa2bc9025d42c",
+          "captureSucceeded": true,
+          "evidenceReadScope": "complete-captured-visible-text",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "dufe-support-guide",
+          "url": "https://sie.dufe.edu.cn/content_95765.html",
+          "observedAt": "2026-10-19T05:41:41.442711+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sie.dufe.edu.cn/content_95765.html",
+          "contentType": "text/html; charset=utf-8",
+          "bytes": 33977,
+          "rawPath": "dufe-support-guide.html",
+          "rawSha256": "ea227de77ec9f1fee59e3c785ff0127553a5c342c5b01e7894d15f251208eeee",
+          "textPath": "dufe-support-guide.txt",
+          "textSha256": "cd9c1ef2b365ecd4a4fa9fd8ec8576b13ef6fa6cddc33e4b91b2ea5f9a3d6bb8",
+          "captureSucceeded": true,
+          "evidenceReadScope": "complete-captured-visible-text",
+          "fullFactsCertified": false
+        }
+      ],
+      "generalDeadlineQuote": "报名截止日期\n6月30日",
+      "restrictedRouteTitle": "CSC Scholarship Application Information 2026/2027",
+      "restrictedRouteDeadlineQuote": "March 10th, 2026",
+      "scopeQualification": "The generic master page lists each named major and a June 30 month/day without an application year. The absolute March 10, 2026 belongs to the Chinese Government Scholarship Chinese University Program Type B and is not adopted as a universal degree-program deadline.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-dufe-m-financial-management-en-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dongbei-university-of-finance-and-economics",
+          "programId": "prog-gap-local-dufe-m-financial-management-en",
+          "programName": "Financial Management",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "087313c3aa3d2c93e7a9bb5e25f46184ad74dfaf4b8bf9b3ee79f6364f58d870",
+          "canonicalProgramSha256": "fca89b6f3f086ae4607405d58c5fc7efb226f246825f2b9263ed62be6ad6fce7",
+          "canonicalRecordSha256": "087313c3aa3d2c93e7a9bb5e25f46184ad74dfaf4b8bf9b3ee79f6364f58d870",
+          "canonicalRowSha256": "087313c3aa3d2c93e7a9bb5e25f46184ad74dfaf4b8bf9b3ee79f6364f58d870",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-dufe-m-financial-management-en",
+              "canonicalProgramSha256": "fca89b6f3f086ae4607405d58c5fc7efb226f246825f2b9263ed62be6ad6fce7"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-dufe-m-financial-management-en",
+            "src-gap-program-local-dufe-m-financial-management-en-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-dufe-m-financial-management-en",
+              "url": "https://sie.dufe.edu.cn/lxxm/ss/",
+              "canonicalSourceSha256": "31b058f40abe7da40bb6b81dd8b2d990fddcc1b4e680d586722d9eb0f3c27713",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dufe-m-financial-management-en",
+                "url": "https://sie.dufe.edu.cn/lxxm/ss/",
+                "title": "DUFE International Master's Programs",
+                "publisher": "dongbei-university-of-finance-and-economics",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-local-dufe-m-financial-management-en-support-1",
+              "url": "https://sie.dufe.edu.cn/content_95765.html",
+              "canonicalSourceSha256": "8b6c3726127b5700776b8efd53b1dff1152b33b8a28eb902ca97db7cff063725",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dufe-m-financial-management-en-support-1",
+                "url": "https://sie.dufe.edu.cn/content_95765.html",
+                "title": "Supporting official source",
+                "publisher": "dongbei-university-of-finance-and-economics",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://sie.dufe.edu.cn/lxxm/ss/",
+          "evidenceBodySha256": "55687dae8ce5f59a178150dd2d2f14c2c558c57e4d6a667a751cf6d3bea9b38f",
+          "observedAt": "2026-10-19T05:41:40.819254+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-local-dufe-m-financial-management-en"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "generic-master-june30-has-no-year-csc-typeb-march10-cannot-be-borrowed",
+          "quotedDate": "报名截止日期\n6月30日",
+          "recurringDeadlineReference": {
+            "monthDay": "06-30",
+            "year": null
+          },
+          "excludedOtherRouteDeadline": {
+            "route": "CSC Chinese University Program Type B 2026/2027",
+            "deadline": "2026-03-10",
+            "appliesToSelectedGeneralDegreeCycle": false,
+            "evidenceBodySha256": "ea227de77ec9f1fee59e3c785ff0127553a5c342c5b01e7894d15f251208eeee"
+          }
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-dufe-m-international-trade-en-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dongbei-university-of-finance-and-economics",
+          "programId": "prog-gap-local-dufe-m-international-trade-en",
+          "programName": "International Trade",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "979e065da139903f04713b04c6ef3a12ee6695913d8b1ebb3f8c248cc7480a68",
+          "canonicalProgramSha256": "17436e0655b073c5697e04d93f0c187bd21934684adceb84a345e13e8eb15e0e",
+          "canonicalRecordSha256": "979e065da139903f04713b04c6ef3a12ee6695913d8b1ebb3f8c248cc7480a68",
+          "canonicalRowSha256": "979e065da139903f04713b04c6ef3a12ee6695913d8b1ebb3f8c248cc7480a68",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-dufe-m-international-trade-en",
+              "canonicalProgramSha256": "17436e0655b073c5697e04d93f0c187bd21934684adceb84a345e13e8eb15e0e"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-dufe-m-international-trade-en",
+            "src-gap-program-local-dufe-m-international-trade-en-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-dufe-m-international-trade-en",
+              "url": "https://sie.dufe.edu.cn/lxxm/ss/",
+              "canonicalSourceSha256": "879c671f6d948034a470fc1cca60a9f2abf9850124a584cb00f824ca083136c8",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dufe-m-international-trade-en",
+                "url": "https://sie.dufe.edu.cn/lxxm/ss/",
+                "title": "DUFE International Master's Programs",
+                "publisher": "dongbei-university-of-finance-and-economics",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-local-dufe-m-international-trade-en-support-1",
+              "url": "https://sie.dufe.edu.cn/content_95765.html",
+              "canonicalSourceSha256": "c859b3881ff2dccff10ee8bb74a04994855901011ba1a06e3b06c98fd86ec75c",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dufe-m-international-trade-en-support-1",
+                "url": "https://sie.dufe.edu.cn/content_95765.html",
+                "title": "Supporting official source",
+                "publisher": "dongbei-university-of-finance-and-economics",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://sie.dufe.edu.cn/lxxm/ss/",
+          "evidenceBodySha256": "55687dae8ce5f59a178150dd2d2f14c2c558c57e4d6a667a751cf6d3bea9b38f",
+          "observedAt": "2026-10-19T05:41:40.819254+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-local-dufe-m-international-trade-en"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "generic-master-june30-has-no-year-csc-typeb-march10-cannot-be-borrowed",
+          "quotedDate": "报名截止日期\n6月30日",
+          "recurringDeadlineReference": {
+            "monthDay": "06-30",
+            "year": null
+          },
+          "excludedOtherRouteDeadline": {
+            "route": "CSC Chinese University Program Type B 2026/2027",
+            "deadline": "2026-03-10",
+            "appliesToSelectedGeneralDegreeCycle": false,
+            "evidenceBodySha256": "ea227de77ec9f1fee59e3c785ff0127553a5c342c5b01e7894d15f251208eeee"
+          }
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-dufe-m-tourism-management-en-2026-2027-other-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dongbei-university-of-finance-and-economics",
+          "programId": "prog-gap-local-dufe-m-tourism-management-en",
+          "programName": "Tourism Management",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "2274bd4dc6587c1a7253374cd8d9f016ed7978764508b0eef44a641b300e2b8f",
+          "canonicalProgramSha256": "e7e56b745c60d078fa834fb5a2070b972c47b3b541a6f3baa18e864534e253cf",
+          "canonicalRecordSha256": "2274bd4dc6587c1a7253374cd8d9f016ed7978764508b0eef44a641b300e2b8f",
+          "canonicalRowSha256": "2274bd4dc6587c1a7253374cd8d9f016ed7978764508b0eef44a641b300e2b8f",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-local-dufe-m-tourism-management-en",
+              "canonicalProgramSha256": "e7e56b745c60d078fa834fb5a2070b972c47b3b541a6f3baa18e864534e253cf"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-local-dufe-m-tourism-management-en",
+            "src-gap-program-local-dufe-m-tourism-management-en-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-dufe-m-tourism-management-en",
+              "url": "https://sie.dufe.edu.cn/lxxm/ss/",
+              "canonicalSourceSha256": "d904e08b9d98e8f3888ead9c6998a3b1e2ce2f8e4956d6c2fbf8b7ee567d271c",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dufe-m-tourism-management-en",
+                "url": "https://sie.dufe.edu.cn/lxxm/ss/",
+                "title": "DUFE International Master's Programs",
+                "publisher": "dongbei-university-of-finance-and-economics",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-local-dufe-m-tourism-management-en-support-1",
+              "url": "https://sie.dufe.edu.cn/content_95765.html",
+              "canonicalSourceSha256": "4c97082ef97ca2800a83c0bf8bf7fb975f9df6de9983b5aedb75c2e5b98002ed",
+              "sourceFullRecord": {
+                "id": "src-gap-program-local-dufe-m-tourism-management-en-support-1",
+                "url": "https://sie.dufe.edu.cn/content_95765.html",
+                "title": "Supporting official source",
+                "publisher": "dongbei-university-of-finance-and-economics",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://sie.dufe.edu.cn/lxxm/ss/",
+          "evidenceBodySha256": "55687dae8ce5f59a178150dd2d2f14c2c558c57e4d6a667a751cf6d3bea9b38f",
+          "observedAt": "2026-10-19T05:41:40.819254+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-local-dufe-m-tourism-management-en"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "generic-master-june30-has-no-year-csc-typeb-march10-cannot-be-borrowed",
+          "quotedDate": "报名截止日期\n6月30日",
+          "recurringDeadlineReference": {
+            "monthDay": "06-30",
+            "year": null
+          },
+          "excludedOtherRouteDeadline": {
+            "route": "CSC Chinese University Program Type B 2026/2027",
+            "deadline": "2026-03-10",
+            "appliesToSelectedGeneralDegreeCycle": false,
+            "evidenceBodySha256": "ea227de77ec9f1fee59e3c785ff0127553a5c342c5b01e7894d15f251208eeee"
+          }
+        }
+      ]
+    },
+    {
+      "key": "dgut-2026-two-proven-routes-plus-three-unbound-routes-and-two-postregistration-awards",
+      "universityId": "uni-dongguan-university-of-technology",
+      "scope": "Original International Business and Software Engineering professional masters; three additional existing dated master rows; two separate freshman/living awards.",
+      "evidence": [
+        {
+          "name": "dgut-business",
+          "url": "https://yjs.dgut.edu.cn/info/1842/21476.htm",
+          "observedAt": "2026-10-19T05:41:42.527026+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://yjs.dgut.edu.cn/info/1842/21476.htm",
+          "contentType": "text/html",
+          "bytes": 50419,
+          "rawPath": "dgut-business.html",
+          "rawSha256": "6154da99bb09c11f64329819dbbc7d11b1ee503d0fa2c622063c7bde42f1164a",
+          "textPath": "dgut-business.txt",
+          "textSha256": "7ccaecbadafbdab7fba602854ee5e783ce47f303a304f71a007b1902c9de9ca5",
+          "captureSucceeded": true,
+          "evidenceReadScope": "complete-captured-visible-text",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "dgut-software",
+          "url": "https://yjs.dgut.edu.cn/info/1842/21696.htm",
+          "observedAt": "2026-10-19T05:41:43.056024+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://yjs.dgut.edu.cn/info/1842/21696.htm",
+          "contentType": "text/html",
+          "bytes": 47654,
+          "rawPath": "dgut-software.html",
+          "rawSha256": "23e61fb4fb3bc12558f26c479ef5a515c73b4e6a6a5909ca727a74d4e6022529",
+          "textPath": "dgut-software.txt",
+          "textSha256": "55ba3b8ce79069eb9c2d21e9863e315f9dcabecc028085f891d1a7eed52fbc1c",
+          "captureSucceeded": true,
+          "evidenceReadScope": "complete-captured-visible-text",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "dgut-2026-master-guide",
+          "url": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+          "observedAt": "2026-10-19T05:41:43.317323+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+          "contentType": "text/html",
+          "bytes": 106824,
+          "rawPath": "dgut-2026-master-guide.html",
+          "rawSha256": "72f715aaeea6d13d096162b5f6ce04c889b6b93222984dd1c3812f5c272e6ca1",
+          "textPath": "dgut-2026-master-guide.txt",
+          "textSha256": "5ccfabecfe8e1d2d5dae7a66c1715a6d9e4e1a466eb7f0d27dc822a8add0b1ce",
+          "captureSucceeded": true,
+          "evidenceReadScope": "complete-captured-visible-text",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "dgut-2026-faq",
+          "url": "https://yjs.dgut.edu.cn/info/1842/22126.htm",
+          "observedAt": "2026-10-19T05:41:43.385144+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://yjs.dgut.edu.cn/info/1842/22126.htm",
+          "contentType": "text/html",
+          "bytes": 98509,
+          "rawPath": "dgut-2026-faq.html",
+          "rawSha256": "9158ace61d60b9a42b04b55bbd54285d52778550da5634fa68b00241e8e28453",
+          "textPath": "dgut-2026-faq.txt",
+          "textSha256": "5ad9579891aa553a34984bbaafcbc5a55382c0e44304fc1c0c10bc8aacbb8ac6",
+          "captureSucceeded": true,
+          "evidenceReadScope": "complete-captured-visible-text",
+          "fullFactsCertified": false
+        }
+      ],
+      "quotedDate": "2026年4月30日至2026年6月30日",
+      "exactProgrammeTitles": [
+        "025400 国际商务专业介绍（仅面向2026年国际硕士）",
+        "085405 软件工程专业介绍（仅面向2026年国际硕士）"
+      ],
+      "applicantVsReviewQualification": "The April 30–June 30, 2026 period is applicant submission. FAQ estimates of 1–2 weeks for preliminary review, 7–15 working days for JW202 and 6–7 month peak processing are not applicant extensions or deadlines.",
+      "awardOpeningRule": "答：所有奖学金申请通道仅在学生到校完成正式注册后开放，预录取阶段暂不受理奖学金申请。",
+      "additionalRouteLimitation": "Three additional rows share the 2026 general guide and already store June 30. Their registered programme-directory page was not read in this run and the guide catalogue is embedded as image tables. Breadcrumb titles for Food and Nutrition / Social Work are discovery context only; the three exact catalogue bindings are not independently certified here. They remain unknown, rather than receiving a date solely from a shared guide URL.",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-dgut-international-business-master-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dongguan-university-of-technology",
+          "programId": "prog-gap-wave3-dgut-international-business-master",
+          "programName": "International Business (Professional Master)",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "a8fa2a838bcd1899ce315f959836d908e702430da8e595f10d875ff2f1180b65",
+          "canonicalProgramSha256": "167cd9febd64df83073f74404a0c91bd203b1ed5233308a6e403e9fc2a825855",
+          "canonicalRecordSha256": "a8fa2a838bcd1899ce315f959836d908e702430da8e595f10d875ff2f1180b65",
+          "canonicalRowSha256": "a8fa2a838bcd1899ce315f959836d908e702430da8e595f10d875ff2f1180b65",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-dgut-international-business-master",
+              "canonicalProgramSha256": "167cd9febd64df83073f74404a0c91bd203b1ed5233308a6e403e9fc2a825855"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave3-dgut-international-business-master",
+            "src-gap-program-wave3-dgut-international-business-master-support-1",
+            "src-gap-program-wave3-dgut-international-business-master-support-2"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-dgut-international-business-master",
+              "url": "https://yjs.dgut.edu.cn/info/1842/21476.htm",
+              "canonicalSourceSha256": "a93650343a0958b2737e31c7ec493e5fa9aad28034edd382f356dc75d31748aa",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-dgut-international-business-master",
+                "url": "https://yjs.dgut.edu.cn/info/1842/21476.htm",
+                "title": "DGUT 2026 Introduction to International Business",
+                "publisher": "dongguan-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-wave3-dgut-international-business-master-support-1",
+              "url": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+              "canonicalSourceSha256": "b0c694eac6a3462ca227e413bdd3181a6fc32f137206796feb53de88232a22d9",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-dgut-international-business-master-support-1",
+                "url": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+                "title": "DGUT 2026 International Master Admission Brochure",
+                "publisher": "dongguan-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-wave3-dgut-international-business-master-support-2",
+              "url": "https://yjs.dgut.edu.cn/info/1842/22126.htm",
+              "canonicalSourceSha256": "52bb3bb7be8c7067118ce722394e0c29f6f11289c1359738097d377e65d56bf7",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-dgut-international-business-master-support-2",
+                "url": "https://yjs.dgut.edu.cn/info/1842/22126.htm",
+                "title": "DGUT 2026 International Master FAQ",
+                "publisher": "dongguan-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+          "evidenceBodySha256": "72f715aaeea6d13d096162b5f6ce04c889b6b93222984dd1c3812f5c272e6ca1",
+          "observedAt": "2026-10-19T05:41:43.317323+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-wave3-dgut-international-business-master-support-1"
+          ],
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "closureAssessment": {
+            "asOfDate": "2026-10-19",
+            "timeZone": "Asia/Shanghai",
+            "sameRouteAndEntryYear": true,
+            "programmeDiscontinued": false
+          },
+          "reason": "exact-2026-international-professional-master-title-and-guide-applicant-window-expired",
+          "quotedDate": "2026年4月30日至2026年6月30日",
+          "candidateOfficialOpensOn": "2026-04-30",
+          "openingCandidateOnly": true,
+          "deadlineBoundary": "date-only-no-cutoff-clock-supplied",
+          "exactCutoffAt": null,
+          "exactProgrammeEvidence": {
+            "name": "dgut-business",
+            "url": "https://yjs.dgut.edu.cn/info/1842/21476.htm",
+            "observedAt": "2026-10-19T05:41:42.527026+00:00",
+            "timeoutSeconds": 25,
+            "maximumBytes": 12000000,
+            "tlsCertificateValidation": true,
+            "status": 200,
+            "finalUrl": "https://yjs.dgut.edu.cn/info/1842/21476.htm",
+            "contentType": "text/html",
+            "bytes": 50419,
+            "rawPath": "dgut-business.html",
+            "rawSha256": "6154da99bb09c11f64329819dbbc7d11b1ee503d0fa2c622063c7bde42f1164a",
+            "textPath": "dgut-business.txt",
+            "textSha256": "7ccaecbadafbdab7fba602854ee5e783ce47f303a304f71a007b1902c9de9ca5",
+            "captureSucceeded": true,
+            "evidenceReadScope": "complete-captured-visible-text",
+            "fullFactsCertified": false
+          }
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-dgut-software-engineering-master-2026-2027-autumn-fee-reference",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dongguan-university-of-technology",
+          "programId": "prog-gap-wave3-dgut-software-engineering-master",
+          "programName": "Software Engineering (Professional Master)",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": null,
+          "storedDateStatus": "not-announced",
+          "canonicalCycleSha256": "09ca6af87e71bb87b04ac4e47b0fae06a817ae020f0898cf13a3e110a192e86d",
+          "canonicalProgramSha256": "f4f34efce0412449f07009f516cdec7808db2bc0686cb87e39b8ebe352d517e9",
+          "canonicalRecordSha256": "09ca6af87e71bb87b04ac4e47b0fae06a817ae020f0898cf13a3e110a192e86d",
+          "canonicalRowSha256": "09ca6af87e71bb87b04ac4e47b0fae06a817ae020f0898cf13a3e110a192e86d",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-dgut-software-engineering-master",
+              "canonicalProgramSha256": "f4f34efce0412449f07009f516cdec7808db2bc0686cb87e39b8ebe352d517e9"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave3-dgut-software-engineering-master",
+            "src-gap-program-wave3-dgut-software-engineering-master-support-1",
+            "src-gap-program-wave3-dgut-software-engineering-master-support-2"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-dgut-software-engineering-master",
+              "url": "https://yjs.dgut.edu.cn/info/1842/21696.htm",
+              "canonicalSourceSha256": "f29f14272fe5c0d806f4201a551a05c71dfdc1337aec23338fa3459f35651ffc",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-dgut-software-engineering-master",
+                "url": "https://yjs.dgut.edu.cn/info/1842/21696.htm",
+                "title": "DGUT 2026 Introduction to Software Engineering",
+                "publisher": "dongguan-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-wave3-dgut-software-engineering-master-support-1",
+              "url": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+              "canonicalSourceSha256": "12486911536c698e707d917e7db6f922b587def82f9f9ab83dbe24f2d4a72462",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-dgut-software-engineering-master-support-1",
+                "url": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+                "title": "DGUT 2026 International Master Admission Brochure",
+                "publisher": "dongguan-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-wave3-dgut-software-engineering-master-support-2",
+              "url": "https://yjs.dgut.edu.cn/info/1842/22126.htm",
+              "canonicalSourceSha256": "bcb8a045d3d74ef227dbedb83c88af8b1a8f6c5087cb01d5c34816b63aecab03",
+              "sourceFullRecord": {
+                "id": "src-gap-program-wave3-dgut-software-engineering-master-support-2",
+                "url": "https://yjs.dgut.edu.cn/info/1842/22126.htm",
+                "title": "DGUT 2026 International Master FAQ",
+                "publisher": "dongguan-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+          "evidenceBodySha256": "72f715aaeea6d13d096162b5f6ce04c889b6b93222984dd1c3812f5c272e6ca1",
+          "observedAt": "2026-10-19T05:41:43.317323+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-wave3-dgut-software-engineering-master-support-1"
+          ],
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "closureAssessment": {
+            "asOfDate": "2026-10-19",
+            "timeZone": "Asia/Shanghai",
+            "sameRouteAndEntryYear": true,
+            "programmeDiscontinued": false
+          },
+          "reason": "exact-2026-international-professional-master-title-and-guide-applicant-window-expired",
+          "quotedDate": "2026年4月30日至2026年6月30日",
+          "candidateOfficialOpensOn": "2026-04-30",
+          "openingCandidateOnly": true,
+          "deadlineBoundary": "date-only-no-cutoff-clock-supplied",
+          "exactCutoffAt": null,
+          "exactProgrammeEvidence": {
+            "name": "dgut-software",
+            "url": "https://yjs.dgut.edu.cn/info/1842/21696.htm",
+            "observedAt": "2026-10-19T05:41:43.056024+00:00",
+            "timeoutSeconds": 25,
+            "maximumBytes": 12000000,
+            "tlsCertificateValidation": true,
+            "status": 200,
+            "finalUrl": "https://yjs.dgut.edu.cn/info/1842/21696.htm",
+            "contentType": "text/html",
+            "bytes": 47654,
+            "rawPath": "dgut-software.html",
+            "rawSha256": "23e61fb4fb3bc12558f26c479ef5a515c73b4e6a6a5909ca727a74d4e6022529",
+            "textPath": "dgut-software.txt",
+            "textSha256": "55ba3b8ce79069eb9c2d21e9863e315f9dcabecc028085f891d1a7eed52fbc1c",
+            "captureSucceeded": true,
+            "evidenceReadScope": "complete-captured-visible-text",
+            "fullFactsCertified": false
+          }
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-dgut-international-master-freshman-scholarship",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dongguan-university-of-technology",
+          "name": "DGUT International Master Freshman Scholarship",
+          "programIds": [
+            "prog-gap-wave3-dgut-software-engineering-master",
+            "prog-gap-wave3-dgut-international-business-master"
+          ],
+          "canonicalScholarshipSha256": "a7a347080885c63b162b4c7af5efbbae603a0e2188ad72444b537acd15aef106",
+          "canonicalRecordSha256": "a7a347080885c63b162b4c7af5efbbae603a0e2188ad72444b537acd15aef106",
+          "canonicalRowSha256": "a7a347080885c63b162b4c7af5efbbae603a0e2188ad72444b537acd15aef106",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-dgut-software-engineering-master",
+              "canonicalProgramSha256": "f4f34efce0412449f07009f516cdec7808db2bc0686cb87e39b8ebe352d517e9"
+            },
+            {
+              "programId": "prog-gap-wave3-dgut-international-business-master",
+              "canonicalProgramSha256": "167cd9febd64df83073f74404a0c91bd203b1ed5233308a6e403e9fc2a825855"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave3-dgut-international-master-freshman-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-dgut-international-master-freshman-scholarship",
+              "url": "https://yjs.dgut.edu.cn/info/1842/22126.htm",
+              "canonicalSourceSha256": "1c540d929e33abd6d22ad503e50948819d2adad5854f4e744714566679d7bd8b",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave3-dgut-international-master-freshman-scholarship",
+                "url": "https://yjs.dgut.edu.cn/info/1842/22126.htm",
+                "title": "DGUT 2026 International Master Admissions FAQ",
+                "publisher": "dongguan-university-of-technology",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://yjs.dgut.edu.cn/info/1842/22126.htm",
+          "evidenceBodySha256": "9158ace61d60b9a42b04b55bbd54285d52778550da5634fa68b00241e8e28453",
+          "observedAt": "2026-10-19T05:41:43.385144+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-wave3-dgut-international-master-freshman-scholarship"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "award-applications-open-only-after-formal-on-campus-registration-no-exact-award-cutoff",
+          "quotedDate": "答：所有奖学金申请通道仅在学生到校完成正式注册后开放，预录取阶段暂不受理奖学金申请。",
+          "awardApplicationConstraint": "only-after-official-on-campus-registration; not-at-pre-admission",
+          "admissionDeadlineNotBorrowed": "2026-06-30",
+          "admissionDeadlineAppliesToAward": false
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-dgut-international-master-living-stipend",
+          "selectionOrigin": "baseQueue20",
+          "universityId": "uni-dongguan-university-of-technology",
+          "name": "DGUT International Master Living Stipend",
+          "programIds": [
+            "prog-gap-wave3-dgut-software-engineering-master",
+            "prog-gap-wave3-dgut-international-business-master"
+          ],
+          "canonicalScholarshipSha256": "36220198a1feba29a2600b7c1acab4a5c5a8e197dae12edb7630d5347deaeb80",
+          "canonicalRecordSha256": "36220198a1feba29a2600b7c1acab4a5c5a8e197dae12edb7630d5347deaeb80",
+          "canonicalRowSha256": "36220198a1feba29a2600b7c1acab4a5c5a8e197dae12edb7630d5347deaeb80",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave3-dgut-software-engineering-master",
+              "canonicalProgramSha256": "f4f34efce0412449f07009f516cdec7808db2bc0686cb87e39b8ebe352d517e9"
+            },
+            {
+              "programId": "prog-gap-wave3-dgut-international-business-master",
+              "canonicalProgramSha256": "167cd9febd64df83073f74404a0c91bd203b1ed5233308a6e403e9fc2a825855"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave3-dgut-international-master-living-stipend"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-dgut-international-master-living-stipend",
+              "url": "https://yjs.dgut.edu.cn/info/1842/22126.htm",
+              "canonicalSourceSha256": "f6f9496c9241b475a6e76b91c5dc6a248f33dda6bab636870ef1e51455ec5d93",
+              "sourceFullRecord": {
+                "id": "src-gap-scholarship-wave3-dgut-international-master-living-stipend",
+                "url": "https://yjs.dgut.edu.cn/info/1842/22126.htm",
+                "title": "DGUT 2026 International Master Admissions FAQ",
+                "publisher": "dongguan-university-of-technology",
+                "kind": "scholarship",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-07-30"
+              }
+            }
+          ],
+          "storedDeadline": null,
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://yjs.dgut.edu.cn/info/1842/22126.htm",
+          "evidenceBodySha256": "9158ace61d60b9a42b04b55bbd54285d52778550da5634fa68b00241e8e28453",
+          "observedAt": "2026-10-19T05:41:43.385144+00:00",
+          "evidenceSourceIds": [
+            "src-gap-scholarship-wave3-dgut-international-master-living-stipend"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "award-applications-open-only-after-formal-on-campus-registration-no-exact-award-cutoff",
+          "quotedDate": "答：所有奖学金申请通道仅在学生到校完成正式注册后开放，预录取阶段暂不受理奖学金申请。",
+          "awardApplicationConstraint": "only-after-official-on-campus-registration; not-at-pre-admission",
+          "admissionDeadlineNotBorrowed": "2026-06-30",
+          "admissionDeadlineAppliesToAward": false
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-scws-dgut-food-and-nutrition-master-2026-2027-autumn",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-dongguan-university-of-technology",
+          "programId": "prog-gap-mew-scws-dgut-food-and-nutrition-master",
+          "programName": "Food and Nutrition",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": "2026-04-30",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "e690b16abfbbbec3ff12edc2ade84d44362e238ad2a13f136d7a170fe75a3c7d",
+          "canonicalProgramSha256": "d70288f70bf04b8e11acd3c5a058297c747de9c11222d9b498a4dbc198a3810b",
+          "canonicalRecordSha256": "e690b16abfbbbec3ff12edc2ade84d44362e238ad2a13f136d7a170fe75a3c7d",
+          "canonicalRowSha256": "e690b16abfbbbec3ff12edc2ade84d44362e238ad2a13f136d7a170fe75a3c7d",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-scws-dgut-food-and-nutrition-master",
+              "canonicalProgramSha256": "d70288f70bf04b8e11acd3c5a058297c747de9c11222d9b498a4dbc198a3810b"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-scws-dgut-food-and-nutrition-master",
+            "src-gap-program-mew-scws-dgut-food-and-nutrition-master-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-scws-dgut-food-and-nutrition-master",
+              "url": "https://yjs.dgut.edu.cn/English_Version/Programs_of_Study/Master_Programs.htm",
+              "canonicalSourceSha256": "7972bb5d4f9e8f74d8e6794bea4159a96f2a2098c539144a11fcab62253e95ad",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-scws-dgut-food-and-nutrition-master",
+                "url": "https://yjs.dgut.edu.cn/English_Version/Programs_of_Study/Master_Programs.htm",
+                "title": "DGUT 2026 International Master's Programs",
+                "publisher": "dongguan-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-04"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-mew-scws-dgut-food-and-nutrition-master-support-1",
+              "url": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+              "canonicalSourceSha256": "3dd09167e228cb54cf379b6c7e95f63b81006adf10955bb7c46f281dfb4a888c",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-scws-dgut-food-and-nutrition-master-support-1",
+                "url": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+                "title": "DGUT 2026 International Master's Admission Brochure",
+                "publisher": "dongguan-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-04"
+              }
+            }
+          ],
+          "storedDeadline": "2026-06-30",
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+          "evidenceBodySha256": "72f715aaeea6d13d096162b5f6ce04c889b6b93222984dd1c3812f5c272e6ca1",
+          "observedAt": "2026-10-19T05:41:43.317323+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-mew-scws-dgut-food-and-nutrition-master-support-1"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "general-guide-window-known-but-exact-additional-programme-catalogue-binding-not-certified",
+          "quotedDate": "2026年4月30日至2026年6月30日",
+          "candidateDeadlineNotBoundToExactProgramme": "2026-06-30",
+          "storedDeadlinePreserved": true,
+          "matchedSharedGuideDoesNotProveExactProgrammeScope": true,
+          "candidateOfficialOpensOn": null
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-scws-dgut-integrated-circuit-engineering-master-2026-2027-autumn",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-dongguan-university-of-technology",
+          "programId": "prog-gap-mew-scws-dgut-integrated-circuit-engineering-master",
+          "programName": "Integrated Circuit Engineering",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": "2026-04-30",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "33280befb19482d69c6f5588b94f12d999a56e177ceaf0866472a1b0f67d12bd",
+          "canonicalProgramSha256": "a405bbab2a86d2a6805aae3d002e78e220487a1943884cdeee3b1d4af9e8d370",
+          "canonicalRecordSha256": "33280befb19482d69c6f5588b94f12d999a56e177ceaf0866472a1b0f67d12bd",
+          "canonicalRowSha256": "33280befb19482d69c6f5588b94f12d999a56e177ceaf0866472a1b0f67d12bd",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-scws-dgut-integrated-circuit-engineering-master",
+              "canonicalProgramSha256": "a405bbab2a86d2a6805aae3d002e78e220487a1943884cdeee3b1d4af9e8d370"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-scws-dgut-integrated-circuit-engineering-master",
+            "src-gap-program-mew-scws-dgut-integrated-circuit-engineering-master-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-scws-dgut-integrated-circuit-engineering-master",
+              "url": "https://yjs.dgut.edu.cn/English_Version/Programs_of_Study/Master_Programs.htm",
+              "canonicalSourceSha256": "21c80415ce58b29142e1092f74340c73646c583eaea513e1a148cef4df26a9f0",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-scws-dgut-integrated-circuit-engineering-master",
+                "url": "https://yjs.dgut.edu.cn/English_Version/Programs_of_Study/Master_Programs.htm",
+                "title": "DGUT 2026 International Master's Programs",
+                "publisher": "dongguan-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-04"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-mew-scws-dgut-integrated-circuit-engineering-master-support-1",
+              "url": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+              "canonicalSourceSha256": "fd5005e65ce5c6485d6d7a648fbaf83599a06993456d4209db540100d0615ac0",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-scws-dgut-integrated-circuit-engineering-master-support-1",
+                "url": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+                "title": "DGUT 2026 International Master's Admission Brochure",
+                "publisher": "dongguan-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-04"
+              }
+            }
+          ],
+          "storedDeadline": "2026-06-30",
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+          "evidenceBodySha256": "72f715aaeea6d13d096162b5f6ce04c889b6b93222984dd1c3812f5c272e6ca1",
+          "observedAt": "2026-10-19T05:41:43.317323+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-mew-scws-dgut-integrated-circuit-engineering-master-support-1"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "general-guide-window-known-but-exact-additional-programme-catalogue-binding-not-certified",
+          "quotedDate": "2026年4月30日至2026年6月30日",
+          "candidateDeadlineNotBoundToExactProgramme": "2026-06-30",
+          "storedDeadlinePreserved": true,
+          "matchedSharedGuideDoesNotProveExactProgrammeScope": true,
+          "candidateOfficialOpensOn": null
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-scws-dgut-social-work-master-2026-2027-autumn",
+          "selectionOrigin": "additionalSameSource7",
+          "universityId": "uni-dongguan-university-of-technology",
+          "programId": "prog-gap-mew-scws-dgut-social-work-master",
+          "programName": "Social Work",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "storedOpensOn": "2026-04-30",
+          "storedDateStatus": "published",
+          "canonicalCycleSha256": "d4d15b826cb468d0412950a94710a56ce4827e0e9c7d1de6ae542e37f921139e",
+          "canonicalProgramSha256": "a256d4c5982be957fe58174478257fa029185f70ecf30d64d6de643346e36fd8",
+          "canonicalRecordSha256": "d4d15b826cb468d0412950a94710a56ce4827e0e9c7d1de6ae542e37f921139e",
+          "canonicalRowSha256": "d4d15b826cb468d0412950a94710a56ce4827e0e9c7d1de6ae542e37f921139e",
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-mew-scws-dgut-social-work-master",
+              "canonicalProgramSha256": "a256d4c5982be957fe58174478257fa029185f70ecf30d64d6de643346e36fd8"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-mew-scws-dgut-social-work-master",
+            "src-gap-program-mew-scws-dgut-social-work-master-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-scws-dgut-social-work-master",
+              "url": "https://yjs.dgut.edu.cn/English_Version/Programs_of_Study/Master_Programs.htm",
+              "canonicalSourceSha256": "e836aa401376f4ef34fcd1cf282b95168b3e05ff89f6ea82d9f791a865d2e8b0",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-scws-dgut-social-work-master",
+                "url": "https://yjs.dgut.edu.cn/English_Version/Programs_of_Study/Master_Programs.htm",
+                "title": "DGUT 2026 International Master's Programs",
+                "publisher": "dongguan-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-04"
+              }
+            },
+            {
+              "sourceId": "src-gap-program-mew-scws-dgut-social-work-master-support-1",
+              "url": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+              "canonicalSourceSha256": "1d4b9f1446059e52f45df9d52c9fe48a540b12d22a38bca094279d8306e7b879",
+              "sourceFullRecord": {
+                "id": "src-gap-program-mew-scws-dgut-social-work-master-support-1",
+                "url": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+                "title": "DGUT 2026 International Master's Admission Brochure",
+                "publisher": "dongguan-university-of-technology",
+                "kind": "program",
+                "language": "en",
+                "official": true,
+                "accessedAt": "2026-08-04"
+              }
+            }
+          ],
+          "storedDeadline": "2026-06-30",
+          "publishedInInputSnapshot": false,
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "canonicalWritePerformed": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "canonicalDateEqualityConfirmed": false,
+          "evidenceSourceUrl": "https://yjs.dgut.edu.cn/info/1862/21506.htm",
+          "evidenceBodySha256": "72f715aaeea6d13d096162b5f6ce04c889b6b93222984dd1c3812f5c272e6ca1",
+          "observedAt": "2026-10-19T05:41:43.317323+00:00",
+          "evidenceSourceIds": [
+            "src-gap-program-mew-scws-dgut-social-work-master-support-1"
+          ],
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "candidateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "reason": "general-guide-window-known-but-exact-additional-programme-catalogue-binding-not-certified",
+          "quotedDate": "2026年4月30日至2026年6月30日",
+          "candidateDeadlineNotBoundToExactProgramme": "2026-06-30",
+          "storedDeadlinePreserved": true,
+          "matchedSharedGuideDoesNotProveExactProgrammeScope": true,
+          "candidateOfficialOpensOn": null
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "exactBase20AndAdditional7IdsCoveredOnce": true,
+    "canonicalFullCycleRowPins": 22,
+    "canonicalFullProgramRowPinsForCycles": 22,
+    "canonicalFullAwardRowPins": 5,
+    "allReferencedSourceFullRowsPinned": true,
+    "canonicalSixFilesUnchangedBeforeAfter": true,
+    "captureRawAndTextBytesHashesVerified": true,
+    "quotedLiteralDateFragmentsChecked": true,
+    "noCanonicalOrStateOrGitWrites": true
+  }
+}

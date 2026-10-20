@@ -1,0 +1,1757 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-042-20261019",
+  "state": "completed-five-scoped-past-candidates-five-unknown-one-blocked",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "completedAt": "2026-10-19T13:07:33.094Z",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256Before": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "inputFileSha256After": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "targetQueue": "quality/deadline-sweep-20261019/next-official-date-targets-v11.json",
+  "targetQueueSha256": "a96da9b4352f7db30ba660a206f0ecdc29458d6301a62d7c3e107298840c1c59",
+  "selectionSha256": "aa04fd2d467513e8c213d83963fba698b799b257de03faf19429d63bc0e6f9cc",
+  "selectedUniversityIds": [
+    "uni-central-academy-of-drama",
+    "uni-central-china-normal-university",
+    "uni-central-conservatory-of-music",
+    "uni-central-south-university",
+    "uni-changchun-university-of-science-and-technology",
+    "uni-changsha-university-of-science-and-technology",
+    "uni-chengdu-university-of-information-technology"
+  ],
+  "scope": {
+    "universityScopesAttempted": 7,
+    "newlyCheckedInstitutions": 0,
+    "previouslyCheckedInstitutionsWithNewRecordScope": [
+      "uni-central-academy-of-drama",
+      "uni-central-china-normal-university",
+      "uni-central-conservatory-of-music",
+      "uni-central-south-university",
+      "uni-changchun-university-of-science-and-technology",
+      "uni-changsha-university-of-science-and-technology",
+      "uni-chengdu-university-of-information-technology"
+    ],
+    "notAClaimOfWholeSchoolCompletion": true
+  },
+  "selection": {
+    "baseQueueRecords": 11,
+    "additionalSameSourceRecords": 0,
+    "totalRecords": 11,
+    "baseQueueRecordIds": [
+      "sch-gap-sch-mew-nss-cad-beijing-government",
+      "sch-gap-sch-mew-nss-cad-csc",
+      "sch-gap-mew-csw-ccnu-cgs-silk-road-2026",
+      "cycle-gap-prog-mew-nss-ccom-music-doctorate-2026-2027-autumn",
+      "cycle-gap-prog-mew-nss-ccom-music-master-2026-2027-autumn",
+      "sch-gap-sparse-depth-0808-csu-university-scholarship",
+      "sch-gap-wave3-sch-cust-csc-graduate",
+      "sch-gap-wave8-csust-outstanding-international-student-scholarship",
+      "cycle-gap-wave8-2-cuit-chinese-language-culture-2025-2026-spring-fee-reference",
+      "cycle-gap-wave8-2-cuit-chinese-language-culture-2026-2027-autumn-fee-reference",
+      "sch-gap-wave8-2-cuit-sichuan-government-language-scholarship"
+    ],
+    "additionalSameSourceRecordIds": [],
+    "baseDispatch": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1257/base-dispatch-v1.json",
+      "sha256": "f853a30e74fd95f6a2965b4130e01784dd8ea60afd87d058a3afdbc6d8420b96",
+      "reportNumber": "042"
+    },
+    "extensionReceipt": {
+      "path": "quality/deadline-sweep-20261019/heartbeat-1257/additional-same-source-selection-v1.json",
+      "sha256": "1442831c48df5cc15f6acd90f8303b2e7d4a9a1f03d8b90705d6ad2491c15aa5",
+      "noExtraRecordsForTheseUniversities": true
+    }
+  },
+  "acquisition": {
+    "registeredDistinctUrlsAttempted": 9,
+    "linkedWrapperAndOriginalUrlsAttempted": 2,
+    "publicGetOperations": 11,
+    "webFallbackRequests": 1,
+    "rawBodiesSaved": 10,
+    "nativeHtmlBodies": 9,
+    "nativePdfBodies": 1,
+    "normalTls": true,
+    "paidModelCalls": 0,
+    "archiveOriginalsReused": 0,
+    "archiveScopeCheck": {
+      "path": "archive-source-check.json",
+      "sha256": "6cdb941958105de51792d1af2ad83fa96121f18db821423d3f770f9389fa7ef4"
+    },
+    "diagnostics": {
+      "path": "acquisition-diagnostics.json",
+      "sha256": "891dc586d8e942dd22399c9acc6bd0c1cb20414db4cf4f9c2d6f6b763fb3ff87"
+    },
+    "captureManifestPins": [
+      {
+        "path": "captures.json",
+        "sha256": "a3a0c4d7b1877143e77f3a7323e4762bc9f4e3de995071084ffa8d42c59e3a5b"
+      },
+      {
+        "path": "support-captures.json",
+        "sha256": "d7b9231becbfb20d58b5f2aa8647717da0990521e37443905a80e3a7545630b3"
+      },
+      {
+        "path": "ccom-original-capture.json",
+        "sha256": "3044f12555b3f8dcef6137a5cc3fa1c1605973efbd82b15b46183417cb37e9f1"
+      }
+    ],
+    "webFallback": {
+      "path": "ccnu-web-fallback.json",
+      "sha256": "659f0d3e4d0434a2663c9036f64bfaf859f3afb295f3397bb3ccb0bc41ca8ba4"
+    },
+    "pdfOfflineExtraction": {
+      "path": "pdf-offline-extraction.json",
+      "sha256": "bc70b39f034aa41ac491368290c58f56a2da11a7595998061a5a42441b0d8dc3"
+    },
+    "bodyInterpretation": "Nine HTML bodies and one8-page PDF saved. Relevant complete CUST pages2 and6 visually read after offline rendering. CCNU403 remained403 after one web fallback. Earlier institution archives were examined but their exact URLs/routes differ, so no new record borrows their dates. CCOM master original is reached through its registered index and exact official wrapper links; doctoral timing remains independent."
+  },
+  "summary": {
+    "schoolsAttempted": 7,
+    "newlyScopedSchools": 0,
+    "previouslyCheckedInstitutionsWithNewRecordScope": 7,
+    "recordsAssessed": 11,
+    "baseQueueRecords": 11,
+    "additionalSameSourceRecords": 0,
+    "admissionCyclesAssessed": 4,
+    "scholarshipsAssessed": 7,
+    "recordResults": {
+      "unknown": 5,
+      "blocked": 1,
+      "closed": 5
+    },
+    "newExactPastDeadlineCandidatesFromStoredNull": 5,
+    "independentAwardPastDeadlineCandidates": 2,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "freshnessRenewals": 0,
+    "deploymentActions": 0,
+    "wholeSchoolCataloguesCertified": 0,
+    "fullFactsCertified": 0
+  },
+  "precisionIssues": [
+    {
+      "universityId": "uni-central-conservatory-of-music",
+      "recordIds": [
+        "cycle-gap-prog-mew-nss-ccom-music-master-2026-2027-autumn"
+      ],
+      "type": "exact-local-clock-without-explicit-zone",
+      "officialDeadline": "2026-03-02",
+      "officialCutoffLocalLiteral": "2026-03-02 16:00",
+      "quotedDate": "考生须于2026年2月20日上午10:00至3月2日下午16:00之间登录中央音乐学院外籍留学生研究生招生系统",
+      "clockTimeZoneExplicitlyStated": false,
+      "explanation": "Original afternoon16:00 retained; no end-of-day approximation or invented UTC offset. Doctoral route is not assigned this master-only date."
+    },
+    {
+      "universityId": "uni-changchun-university-of-science-and-technology",
+      "recordIds": [
+        "sch-gap-wave3-sch-cust-csc-graduate"
+      ],
+      "type": "English-before-day-and-Chinese-calendar-cutoff",
+      "officialDeadline": "2026-02-28",
+      "englishDateQuote": "Applicants should apply for this scholarship via Chinese Government Scholarship Information System (http://www.campuschina.org ) before February 28, 2026.",
+      "chineseDateQuote": "申请人应通过 CSC 网络申请系统申请，申请截止日期为 2026 年 2 月 28 日。",
+      "explanation": "English beforeFebruary28 and Chinese February28 cutoff both retained, without choosing an unstated clock or resolving same-day inclusivity."
+    }
+  ],
+  "rules": [
+    "Date-only source candidates; canonical dates/status/publication/verifiedAt/reviewAfter remain unchanged.",
+    "All seven institutions were previously checked; these are exact new raw-record scopes, not new school completions.",
+    "Unknown and blocked do not prove availability or cessation. No year rollover is inferred.",
+    "CUIT spring2026 and autumn2026 have separate explicit language applicant windows. The independent Sichuan language award borrows neither date nor a neighbouring award fall-only clause.",
+    "CSU own graduate-awardMay31 and CUST own CSC-applicantFebruary28 are separate from institutional review, nomination or results.",
+    "CCOM music-master applicant cutoff preserves afternoon16:00; doctoral date remains unknown and no UTC offset is invented.",
+    "Earlier same-institution source archives with different exact URL/route were excluded. Failed CCNU source entered cooldown after one fallback."
+  ],
+  "groups": [
+    {
+      "key": "cad-two-independent-awards-standing-overview-no-current-applicant-day",
+      "universityId": "uni-central-academy-of-drama",
+      "institutionPreviouslyChecked": true,
+      "evidence": [
+        {
+          "name": "cad-awards",
+          "url": "https://chntheatre.edu.cn/cn/liuxue/zhuanye/detail/11795.html",
+          "observedAt": "2026-10-19T13:02:09.495628+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.chntheatre.edu.cn/cn/liuxue/zhuanye/detail/11795.html",
+          "contentType": "text/html; charset=utf-8",
+          "bytes": 29637,
+          "rawPath": "cad-awards.html",
+          "rawSha256": "d67ca2d044c1db397874d5c0c036464433fe13b141f842c7b63ad6700ca79669",
+          "textPath": "cad-awards.txt",
+          "textSha256": "9248398ae5b791f462a43ae12f1b70148b3ba25e03cfc0fe4ad0b2f55fe2a7c8",
+          "captureSucceeded": true,
+          "evidenceRole": "standing-award-overview-full-body-no-exact-applicant-cutoff",
+          "fullFactsCertified": false
+        }
+      ],
+      "publicationDateQuote": "时间：2025-04-02",
+      "provincialRouteQuote": "在我院学习期间表现优异的学生还有机会获得各类奖学金，例如：北京市外国留学生奖学金等。",
+      "cscReferralQuote": "请访问国家留学基金委（CSC）网站",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nss-cad-beijing-government",
+          "universityId": "uni-central-academy-of-drama",
+          "canonicalUniversitySha256": "b76010472aa034ab2ca685069efbad626cce8ba54683254010cce45c5a17bd65",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-central-academy-of-drama",
+              "canonicalUniversitySha256": "b76010472aa034ab2ca685069efbad626cce8ba54683254010cce45c5a17bd65"
+            }
+          ],
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "28a82fef568467ea8085d3c6e7528f29b6446b9b81a2a98e694441e44b8dbc09",
+          "canonicalScholarshipSha256": "28a82fef568467ea8085d3c6e7528f29b6446b9b81a2a98e694441e44b8dbc09",
+          "canonicalRow": {
+            "id": "sch-gap-sch-mew-nss-cad-beijing-government",
+            "slug": "gap-sch-mew-nss-cad-beijing-government",
+            "name": {
+              "en": "Beijing Government Scholarship at the Central Academy of Drama",
+              "zh": "中央戏剧学院北京市外国留学生奖学金",
+              "ru": "Пекинская правительственная стипендия в Центральной академии драмы"
+            },
+            "providerType": "city",
+            "universityIds": [
+              "uni-central-academy-of-drama"
+            ],
+            "programIds": [
+              "prog-gap-prog-mew-nss-cad-acting-bachelor",
+              "prog-gap-prog-mew-nss-cad-drama-film-doctorate"
+            ],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://chntheatre.edu.cn/cn/liuxue/zhuanye/detail/11795.html",
+            "summary": {
+              "en": "The official academy page confirms the Beijing Government Scholarship for international students; a current application cycle and verified funding tier remain unannounced.",
+              "zh": "中央戏剧学院官方页面确认面向国际学生的北京市外国留学生奖学金；当前申请周期和可核实资助档位尚未公布。",
+              "ru": "Официальная страница академии подтверждает пекинскую правительственную стипендию; текущий цикл и подтвержденный размер пока не объявлены."
+            },
+            "sourceIds": [
+              "src-gap-scholarship-sch-mew-nss-cad-beijing-government"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale"
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-cad-acting-bachelor",
+              "canonicalProgramSha256": "77f1d2014d0fa3813dd070005741f088de41cd9e57cef13b2b72389522dba634"
+            },
+            {
+              "programId": "prog-gap-prog-mew-nss-cad-drama-film-doctorate",
+              "canonicalProgramSha256": "e611bdcba0dc6b36e76f3d1fc3778647a13817accd06a134f4af56e6ad82bea5"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nss-cad-beijing-government"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nss-cad-beijing-government",
+              "canonicalSourceSha256": "e7b7ac2bb7718b48137a708b7c2e9a57c59d327fd4898605569e6bb506bc5c1e",
+              "url": "https://chntheatre.edu.cn/cn/liuxue/zhuanye/detail/11795.html"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-award-overview-lists-distinct-CSC-and-Beijing-routes-without-exact-target-applicant-day",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://chntheatre.edu.cn/cn/liuxue/zhuanye/detail/11795.html",
+          "evidenceBodySha256": "d67ca2d044c1db397874d5c0c036464433fe13b141f842c7b63ad6700ca79669",
+          "evidenceTextSha256": "9248398ae5b791f462a43ae12f1b70148b3ba25e03cfc0fe4ad0b2f55fe2a7c8",
+          "observedAt": "2026-10-19T13:02:09.495628+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "awardDeadlineNotBorrowed": true,
+          "publicationDateNotApplicationDate": true,
+          "genericCscReferenceNotCurrentCycleDateProof": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-mew-nss-cad-csc",
+          "universityId": "uni-central-academy-of-drama",
+          "canonicalUniversitySha256": "b76010472aa034ab2ca685069efbad626cce8ba54683254010cce45c5a17bd65",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-central-academy-of-drama",
+              "canonicalUniversitySha256": "b76010472aa034ab2ca685069efbad626cce8ba54683254010cce45c5a17bd65"
+            }
+          ],
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "2400e940c86a1e61591d6bd078ea444a4307d0b1762937d127c1b974a7739961",
+          "canonicalScholarshipSha256": "2400e940c86a1e61591d6bd078ea444a4307d0b1762937d127c1b974a7739961",
+          "canonicalRow": {
+            "id": "sch-gap-sch-mew-nss-cad-csc",
+            "slug": "gap-sch-mew-nss-cad-csc",
+            "name": {
+              "en": "Chinese Government Scholarship at the Central Academy of Drama",
+              "zh": "中央戏剧学院中国政府奖学金",
+              "ru": "Стипендия правительства КНР в Центральной академии драмы"
+            },
+            "providerType": "csc",
+            "universityIds": [
+              "uni-central-academy-of-drama"
+            ],
+            "programIds": [
+              "prog-gap-prog-mew-nss-cad-acting-bachelor",
+              "prog-gap-prog-mew-nss-cad-drama-film-doctorate"
+            ],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://chntheatre.edu.cn/cn/liuxue/zhuanye/detail/11795.html",
+            "summary": {
+              "en": "The official academy page confirms the Chinese Government Scholarship as an available international-student funding route; a future deadline and complete tier table are not published.",
+              "zh": "中央戏剧学院官方页面确认中国政府奖学金是国际学生可用资助渠道；下一轮截止日期和完整资助档位未公布。",
+              "ru": "Официальная страница академии подтверждает государственную стипендию КНР для иностранных студентов; будущий срок и полные уровни не опубликованы."
+            },
+            "sourceIds": [
+              "src-gap-scholarship-sch-mew-nss-cad-csc"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale"
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-cad-acting-bachelor",
+              "canonicalProgramSha256": "77f1d2014d0fa3813dd070005741f088de41cd9e57cef13b2b72389522dba634"
+            },
+            {
+              "programId": "prog-gap-prog-mew-nss-cad-drama-film-doctorate",
+              "canonicalProgramSha256": "e611bdcba0dc6b36e76f3d1fc3778647a13817accd06a134f4af56e6ad82bea5"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-sch-mew-nss-cad-csc"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-mew-nss-cad-csc",
+              "canonicalSourceSha256": "f24e9e7ff6db83c55068b28f6b11ae3596d8c92e419c6e7aaa6255c865f7df40",
+              "url": "https://chntheatre.edu.cn/cn/liuxue/zhuanye/detail/11795.html"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-award-overview-lists-distinct-CSC-and-Beijing-routes-without-exact-target-applicant-day",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://chntheatre.edu.cn/cn/liuxue/zhuanye/detail/11795.html",
+          "evidenceBodySha256": "d67ca2d044c1db397874d5c0c036464433fe13b141f842c7b63ad6700ca79669",
+          "evidenceTextSha256": "9248398ae5b791f462a43ae12f1b70148b3ba25e03cfc0fe4ad0b2f55fe2a7c8",
+          "observedAt": "2026-10-19T13:02:09.495628+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "awardDeadlineNotBorrowed": true,
+          "publicationDateNotApplicationDate": true,
+          "genericCscReferenceNotCurrentCycleDateProof": true
+        }
+      ]
+    },
+    {
+      "key": "ccnu-silk-road-single-native403-and-single-web403-cooldown",
+      "universityId": "uni-central-china-normal-university",
+      "institutionPreviouslyChecked": true,
+      "evidence": [
+        {
+          "name": "ccnu-silk-road",
+          "url": "https://cice.ccnu.edu.cn/info/1235/7411.htm",
+          "observedAt": "2026-10-19T13:02:09.497265+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "captureSucceeded": false,
+          "error": "HTTP Error 403: Forbidden",
+          "retryPolicy": "at-most-one-reasonable-recovery-then-cooldown",
+          "evidenceRole": "native403-no-original-body",
+          "fullFactsCertified": false
+        }
+      ],
+      "webFallback": {
+        "path": "ccnu-web-fallback.json",
+        "sha256": "659f0d3e4d0434a2663c9036f64bfaf859f3afb295f3397bb3ccb0bc41ca8ba4"
+      },
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-csw-ccnu-cgs-silk-road-2026",
+          "universityId": "uni-central-china-normal-university",
+          "canonicalUniversitySha256": "9b594e21b2ab07073bb3c8a8a33a64060a846380aa8926f2890a07c26bc11f75",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-central-china-normal-university",
+              "canonicalUniversitySha256": "9b594e21b2ab07073bb3c8a8a33a64060a846380aa8926f2890a07c26bc11f75"
+            }
+          ],
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "4aee009404541846bd3204d46c70f2e67343f3bffc53b84c26b32c5b22cc2236",
+          "canonicalScholarshipSha256": "4aee009404541846bd3204d46c70f2e67343f3bffc53b84c26b32c5b22cc2236",
+          "canonicalRow": {
+            "id": "sch-gap-mew-csw-ccnu-cgs-silk-road-2026",
+            "slug": "gap-mew-csw-ccnu-cgs-silk-road-2026",
+            "name": {
+              "en": "CCNU Chinese Government Scholarship Silk Road Program 2026",
+              "zh": "华中师范大学2026年中国政府奖学金丝绸之路项目",
+              "ru": "Стипендия правительства Китая «Шелковый путь» CCNU 2026"
+            },
+            "providerType": "csc",
+            "universityIds": [
+              "uni-central-china-normal-university"
+            ],
+            "programIds": [],
+            "coverage": {
+              "tuition": "full",
+              "accommodation": "full",
+              "insurance": true,
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://cice.ccnu.edu.cn/info/1235/7411.htm",
+            "summary": {
+              "en": "CCNU's 2026 Silk Road guide publishes full support, degree-level stipends, country restrictions and a May 20 deadline; image-only designated majors are not inferred.",
+              "zh": "华中师范大学2026年丝绸之路指南公布全额资助、硕博生活费、国籍限制和5月20日截止；图片形式的指定专业未作推断。",
+              "ru": "Руководство CCNU 2026 публикует полное финансирование, стипендии, страновые ограничения и срок 20 мая; специальности из изображения не выводятся."
+            },
+            "sourceIds": [
+              "src-gap-scholarship-mew-csw-ccnu-cgs-silk-road-2026"
+            ],
+            "verifiedAt": "2026-08-03",
+            "reviewAfter": "2026-09-02",
+            "status": "stale"
+          },
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-mew-csw-ccnu-cgs-silk-road-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-csw-ccnu-cgs-silk-road-2026",
+              "canonicalSourceSha256": "e3fbe3a4b50f1331395e99412b97866e4c4a4746c65c466392e8ab5c9e32b840",
+              "url": "https://cice.ccnu.edu.cn/info/1235/7411.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "native403-and-one-web403-no-original-Silk-Road-award-body",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://cice.ccnu.edu.cn/info/1235/7411.htm",
+          "evidenceBodySha256": null,
+          "evidenceTextSha256": null,
+          "observedAt": "2026-10-19T13:02:09.497265+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "retryPolicy": "cooldown-no-further-retries",
+          "originRawBodySaved": false,
+          "priorIcltRouteNotSubstituted": true,
+          "noProgrammeCessationInferred": true
+        }
+      ]
+    },
+    {
+      "key": "ccom2026-master-exact16-clock-and-doctoral-independent-unknown",
+      "universityId": "uni-central-conservatory-of-music",
+      "institutionPreviouslyChecked": true,
+      "evidence": [
+        {
+          "name": "ccom-graduate",
+          "url": "https://liuxue.ccom.edu.cn/cn/article?cid=167",
+          "observedAt": "2026-10-19T13:02:09.498635+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://liuxue.ccom.edu.cn/cn/article?cid=167",
+          "contentType": "text/html; charset=utf-8",
+          "bytes": 11422,
+          "rawPath": "ccom-graduate.html",
+          "rawSha256": "7ed686c77ecbfc80646db30cd078d408e1df0db42ca84b0fc26b0b11286a87f2",
+          "textPath": "ccom-graduate.txt",
+          "textSha256": "6ee7ff16a9fed2b97d109263dbd282e5f285787b45c1d49dc5e0e571c06defd9",
+          "captureSucceeded": true,
+          "evidenceRole": "registered-admissions-index-only",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "ccom-master",
+          "url": "https://liuxue.ccom.edu.cn/cn/article/detail?cid=167&id=246",
+          "observedAt": "2026-10-19T13:04:44.609285+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://liuxue.ccom.edu.cn/cn/article/detail?cid=167&id=246",
+          "contentType": "text/html; charset=utf-8",
+          "bytes": 10372,
+          "rawPath": "ccom-master.html",
+          "rawSha256": "2bbbe7ca31452aa486f61aba4f5a61c76395d73ae0be7b1e3bb9bc904eff4565",
+          "textPath": "ccom-master.txt",
+          "textSha256": "e6ecdde1707cb0a831400e7ae7666addac1d45eb6a64e20a7a8246c0c0959d35",
+          "captureSucceeded": true,
+          "evidenceRole": "directly-linked2026-master-wrapper",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "ccom-master-original",
+          "url": "https://www.ccom.edu.cn/info/10711/261321.htm",
+          "observedAt": "2026-10-19T13:05:24.972915+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.ccom.edu.cn/info/10711/261321.htm",
+          "contentType": "text/html",
+          "bytes": 94735,
+          "rawPath": "ccom-master-original.html",
+          "rawSha256": "02d2e00496ae04dfe3f0ec9f5051f7c540b2361b492b13f8c5e663a2f364b701",
+          "textPath": "ccom-master-original.txt",
+          "textSha256": "cfa6c3fa49d7c369d8befd4df1ada5988115250b8b102cbdfbaf430708a7e5c7",
+          "captureSucceeded": true,
+          "evidenceRole": "exact2026-foreign-master-original",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "中央音乐学院2026年接收外籍人士报考硕士研究生招生简章",
+      "applicantDateQuote": "考生须于2026年2月20日上午10:00至3月2日下午16:00之间登录中央音乐学院外籍留学生研究生招生系统",
+      "programmeLevelQuote": "全日制硕士生学制为三年。",
+      "musicScopeQuote": "音乐学系各方向",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-ccom-music-doctorate-2026-2027-autumn",
+          "universityId": "uni-central-conservatory-of-music",
+          "canonicalUniversitySha256": "a8c35fc29b2e29b2703876ff218ef756a9047bfc0c4a76a46e4f08c43ca34e50",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-central-conservatory-of-music",
+              "canonicalUniversitySha256": "a8c35fc29b2e29b2703876ff218ef756a9047bfc0c4a76a46e4f08c43ca34e50"
+            }
+          ],
+          "programId": "prog-gap-prog-mew-nss-ccom-music-doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "doctorate",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "f47f38b1882c303dd5da092caab1fc2707b4f998b37f35eb86e656d0e56ce6a5",
+          "canonicalCycleSha256": "f47f38b1882c303dd5da092caab1fc2707b4f998b37f35eb86e656d0e56ce6a5",
+          "canonicalProgramSha256": "7bdc25285bb7a78eace31665bd46c0bc1aef4f94ba56bdad36c85e7ebfdc3cf8",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-ccom-music-doctorate"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-08-11",
+            "status": "stale",
+            "id": "cycle-gap-prog-mew-nss-ccom-music-doctorate-2026-2027-autumn",
+            "programId": "prog-gap-prog-mew-nss-ccom-music-doctorate",
+            "academicYear": "2026-2027",
+            "intake": "autumn",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": null,
+            "tuitionPeriod": null,
+            "tuitionStatus": null,
+            "evidenceBasis": "cycle-specific",
+            "factScope": "dates-only",
+            "applicationFeeCny": null,
+            "notes": {
+              "en": "The official source explicitly lists Music for international applicants. The same source states teaching language: Chinese.",
+              "zh": "官方来源明确列出面向国际申请人的音乐。同一来源注明授课语言：Chinese。",
+              "ru": "Официальный источник прямо указывает программу «Музыка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese."
+            }
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-ccom-music-doctorate",
+              "canonicalProgramSha256": "7bdc25285bb7a78eace31665bd46c0bc1aef4f94ba56bdad36c85e7ebfdc3cf8"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-ccom-music-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-ccom-music-doctorate",
+              "canonicalSourceSha256": "356b9e2b6015c69d4bf58b9c94b1c562337c70057062a710681b28c18151868d",
+              "url": "https://liuxue.ccom.edu.cn/cn/article?cid=167"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "registered-index-and-linked2026-master-guide-do-not-establish-an-exact-foreign-doctoral-applicant-period",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://liuxue.ccom.edu.cn/cn/article?cid=167",
+          "evidenceBodySha256": "7ed686c77ecbfc80646db30cd078d408e1df0db42ca84b0fc26b0b11286a87f2",
+          "evidenceTextSha256": "6ee7ff16a9fed2b97d109263dbd282e5f285787b45c1d49dc5e0e571c06defd9",
+          "observedAt": "2026-10-19T13:02:09.498635+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "masterDeadlineNotSubstituted": "2026-03-02 16:00",
+          "doctoralRouteKeptIndependent": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-mew-nss-ccom-music-master-2026-2027-autumn",
+          "universityId": "uni-central-conservatory-of-music",
+          "canonicalUniversitySha256": "a8c35fc29b2e29b2703876ff218ef756a9047bfc0c4a76a46e4f08c43ca34e50",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-central-conservatory-of-music",
+              "canonicalUniversitySha256": "a8c35fc29b2e29b2703876ff218ef756a9047bfc0c4a76a46e4f08c43ca34e50"
+            }
+          ],
+          "programId": "prog-gap-prog-mew-nss-ccom-music-master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "master",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "f0db5a992828dbcb132fb5f313246c77f9f94a58affe8cd2c0292e229194d953",
+          "canonicalCycleSha256": "f0db5a992828dbcb132fb5f313246c77f9f94a58affe8cd2c0292e229194d953",
+          "canonicalProgramSha256": "6455b3ba4819cd4225c83017ddb65f0514574b6cbefb4bf6be95db27b87a0040",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-ccom-music-master"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-08-11",
+            "status": "stale",
+            "id": "cycle-gap-prog-mew-nss-ccom-music-master-2026-2027-autumn",
+            "programId": "prog-gap-prog-mew-nss-ccom-music-master",
+            "academicYear": "2026-2027",
+            "intake": "autumn",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": null,
+            "tuitionPeriod": null,
+            "tuitionStatus": null,
+            "evidenceBasis": "cycle-specific",
+            "factScope": "dates-only",
+            "applicationFeeCny": null,
+            "notes": {
+              "en": "The official source explicitly lists Music for international applicants. The same source states teaching language: Chinese.",
+              "zh": "官方来源明确列出面向国际申请人的音乐。同一来源注明授课语言：Chinese。",
+              "ru": "Официальный источник прямо указывает программу «Музыка» для иностранных абитуриентов. В том же источнике указано: язык обучения: Chinese."
+            }
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-prog-mew-nss-ccom-music-master",
+              "canonicalProgramSha256": "6455b3ba4819cd4225c83017ddb65f0514574b6cbefb4bf6be95db27b87a0040"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-prog-mew-nss-ccom-music-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-mew-nss-ccom-music-master",
+              "canonicalSourceSha256": "099bae81684f6f9d420031cd0b3742a5b1c57a1b682849b7f3638f3ec593c9f1",
+              "url": "https://liuxue.ccom.edu.cn/cn/article?cid=167"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-03-02",
+          "candidateOfficialDeadline": "2026-03-02",
+          "reason": "exact2026-foreign-full-time-music-master-general-applicant-information-and-electronic-materials-window",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "explicit-March2-afternoon16:00-local-literal-no-end-of-day-substitution",
+          "evidenceSourceUrl": "https://www.ccom.edu.cn/info/10711/261321.htm",
+          "evidenceBodySha256": "02d2e00496ae04dfe3f0ec9f5051f7c540b2361b492b13f8c5e663a2f364b701",
+          "evidenceTextSha256": "cfa6c3fa49d7c369d8befd4df1ada5988115250b8b102cbdfbaf430708a7e5c7",
+          "observedAt": "2026-10-19T13:05:24.972915+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched original2026 applicant route is past; no later year, status mutation, whole-school completion or permanent programme cessation is inferred.",
+          "quotedDate": "考生须于2026年2月20日上午10:00至3月2日下午16:00之间登录中央音乐学院外籍留学生研究生招生系统",
+          "officialCutoffLocalLiteral": "2026-03-02 16:00",
+          "officialOpeningLocalObservation": "2026-02-20 10:00",
+          "clockTimeZoneExplicitlyStated": false,
+          "noInventedUtcOffset": true,
+          "applicantStage": "Applicants enter information and submit electronic materials in the foreign-graduate admissions system.",
+          "laterMarchExamAndJulyAdmissionNotApplicantDeadline": true,
+          "doctoralDateNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "csu2026-own-university-graduate-award-exact-May31",
+      "universityId": "uni-central-south-university",
+      "institutionPreviouslyChecked": true,
+      "evidence": [
+        {
+          "name": "csu-award",
+          "url": "https://intl.csu.edu.cn/English/Scholarship/University_Scholarship.htm",
+          "observedAt": "2026-10-19T13:02:09.499641+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://intl.csu.edu.cn/English/Scholarship/University_Scholarship.htm",
+          "contentType": "text/html",
+          "bytes": 46707,
+          "rawPath": "csu-award.html",
+          "rawSha256": "d409f36d3c07a60f9d446f19016b28b2205445749b5184f8b37d4c9a78761465",
+          "textPath": "csu-award.txt",
+          "textSha256": "652a86ea7255abb5ce5c41dbd89ae69f5b2ffb840f0bbb42e661cfda061aef70",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-own2026-university-scholarship-guide",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "2026 Application Guide to Central South University Scholarship for International Students",
+      "dateQuote": "4. Application Time: From now on to May 31, 2026.",
+      "degreeScopeQuote": "Master: 3 years, Doctorate: 4 years",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sparse-depth-0808-csu-university-scholarship",
+          "universityId": "uni-central-south-university",
+          "canonicalUniversitySha256": "a64ac1c567cd39ef80a27b0379e725274e5c34a56669f765fc9e4511a5bd329f",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-central-south-university",
+              "canonicalUniversitySha256": "a64ac1c567cd39ef80a27b0379e725274e5c34a56669f765fc9e4511a5bd329f"
+            }
+          ],
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "00490f1642284e6e84b25f9ffd0c344bc89ab3912a4cfc6e84f1f108d7da0835",
+          "canonicalScholarshipSha256": "00490f1642284e6e84b25f9ffd0c344bc89ab3912a4cfc6e84f1f108d7da0835",
+          "canonicalRow": {
+            "id": "sch-gap-sparse-depth-0808-csu-university-scholarship",
+            "slug": "gap-sparse-depth-0808-csu-university-scholarship",
+            "name": {
+              "en": "Central South University Scholarship for International Students",
+              "zh": "中南大学国际学生奖学金",
+              "ru": "Стипендия Центрально-Южного университета для иностранных студентов"
+            },
+            "providerType": "university",
+            "universityIds": [
+              "uni-central-south-university"
+            ],
+            "programIds": [],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": null,
+            "summary": {
+              "en": "The official 2026 guide defines full and partial CSU scholarship tiers for international master and doctoral applicants and a direct CSU online application route. The May 31 deadline is closed and is not published as current.",
+              "zh": "2026年官方简章定义了面向国际硕士和博士申请者的中南大学全额与部分奖学金及校方在线申请路线；5月31日截止期已关闭，不展示为当前。",
+              "ru": "Официальное руководство 2026 года определяет полную и частичную стипендии CSU для иностранных магистров и докторантов; дедлайн 31 мая закрыт и не показывается как текущий."
+            },
+            "sourceIds": [
+              "src-gap-scholarship-sparse-depth-0808-csu-university-scholarship"
+            ],
+            "verifiedAt": "2026-08-08",
+            "reviewAfter": "2026-09-07",
+            "status": "stale"
+          },
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-sparse-depth-0808-csu-university-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sparse-depth-0808-csu-university-scholarship",
+              "canonicalSourceSha256": "359347503da8de3a9f8f19be4700e1c85ecf5ab2c45c8e650498b14f7250a62d",
+              "url": "https://intl.csu.edu.cn/English/Scholarship/University_Scholarship.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-31",
+          "candidateOfficialDeadline": "2026-05-31",
+          "reason": "own2026-university-scholarship-guide-explicitly-states-international-master-and-doctoral-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://intl.csu.edu.cn/English/Scholarship/University_Scholarship.htm",
+          "evidenceBodySha256": "d409f36d3c07a60f9d446f19016b28b2205445749b5184f8b37d4c9a78761465",
+          "evidenceTextSha256": "652a86ea7255abb5ce5c41dbd89ae69f5b2ffb840f0bbb42e661cfda061aef70",
+          "observedAt": "2026-10-19T13:02:09.499641+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched original2026 applicant route is past; no later year, status mutation, whole-school completion or permanent programme cessation is inferred.",
+          "quotedDate": "4. Application Time: From now on to May 31, 2026.",
+          "fundingRoute": "Central South University2026 full/partial university scholarship for international master/doctoral applicants",
+          "universityOnlineSubmissionStageConfirmed": true,
+          "relativeOpeningNotExpandedToDate": true,
+          "annualReviewNotApplicationDeadline": true,
+          "awardOwnDateNotBorrowed": true
+        }
+      ]
+    },
+    {
+      "key": "cust2026-CSC-graduate-applicant-system-day-before-wording-preserved",
+      "universityId": "uni-changchun-university-of-science-and-technology",
+      "institutionPreviouslyChecked": true,
+      "evidence": [
+        {
+          "name": "cust-award",
+          "url": "https://sie.cust.edu.cn/scholarship_pages/74616.htm",
+          "observedAt": "2026-10-19T13:02:11.377386+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sie.cust.edu.cn/scholarship_pages/74616.htm",
+          "contentType": "text/html",
+          "bytes": 18351,
+          "rawPath": "cust-award.html",
+          "rawSha256": "d7489ce1b32b04f672fc59e95ac57670ffa376cc92d77f79a92d906ab867b99a",
+          "textPath": "cust-award.txt",
+          "textSha256": "e73b6d73fd2080d3578cda7704b9fbda70ee00b4ef6aec28eaa9596e73ba226a",
+          "captureSucceeded": true,
+          "evidenceRole": "registered2026-award-wrapper",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "cust-guide-pdf",
+          "url": "https://sie.cust.edu.cn/docs/2025-12/4c82fe64bd1e4c75a02b0d4bae45e0b6.pdf",
+          "observedAt": "2026-10-19T13:02:11.861483+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://sie.cust.edu.cn/docs/2025-12/4c82fe64bd1e4c75a02b0d4bae45e0b6.pdf",
+          "contentType": "application/pdf",
+          "bytes": 1557990,
+          "rawPath": "cust-guide-pdf.pdf",
+          "rawSha256": "8f60055ee0c334595b7598a0a3c5cc105c94d397a83a6dc9c617a5a079b8b4f4",
+          "pageCount": 8,
+          "textPath": "cust-guide-pdf.txt",
+          "textSha256": "7fb14401cb65bc02b49e9c0e582bf8bfb03363f501a7f658d769bf57f011e14a",
+          "captureSucceeded": true,
+          "evidenceRole": "registered-own2026-original-PDF",
+          "fullFactsCertified": false
+        }
+      ],
+      "offlinePdf": {
+        "path": "pdf-offline-extraction.json",
+        "sha256": "bc70b39f034aa41ac491368290c58f56a2da11a7595998061a5a42441b0d8dc3"
+      },
+      "yearTitle": "2026 Chinese Government Scholarship-Changchun University of Science and Technology Graduate Program",
+      "englishDateQuote": "Applicants should apply for this scholarship via Chinese Government Scholarship Information System (http://www.campuschina.org ) before February 28, 2026.",
+      "chineseDateQuote": "申请人应通过 CSC 网络申请系统申请，申请截止日期为 2026 年 2 月 28 日。",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-sch-cust-csc-graduate",
+          "universityId": "uni-changchun-university-of-science-and-technology",
+          "canonicalUniversitySha256": "6a33bc6bd100d3fd7bd27bd631727c47c12aa04443bb3e1f5dc00ba826e4761a",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-changchun-university-of-science-and-technology",
+              "canonicalUniversitySha256": "6a33bc6bd100d3fd7bd27bd631727c47c12aa04443bb3e1f5dc00ba826e4761a"
+            }
+          ],
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "9c19280c7e82be34649fb3ffb3ce3c16fdf9f74001bb1689ff4e5e64c9dacfaa",
+          "canonicalScholarshipSha256": "9c19280c7e82be34649fb3ffb3ce3c16fdf9f74001bb1689ff4e5e64c9dacfaa",
+          "canonicalRow": {
+            "id": "sch-gap-wave3-sch-cust-csc-graduate",
+            "slug": "gap-wave3-sch-cust-csc-graduate",
+            "name": {
+              "en": "2026 Chinese Government Scholarship Graduate Program at CUST",
+              "zh": "2026年长春理工大学中国政府奖学金研究生项目",
+              "ru": "Программа стипендии правительства Китая для магистров и докторантов CUST 2026"
+            },
+            "providerType": "csc",
+            "universityIds": [
+              "uni-changchun-university-of-science-and-technology"
+            ],
+            "programIds": [],
+            "coverage": {
+              "tuition": "full",
+              "accommodation": "full",
+              "insurance": true,
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://sie.cust.edu.cn/scholarship_pages/74616.htm",
+            "summary": {
+              "en": "CUST's official page and guide describe a full scholarship for international graduate study; the 2026 application deadline was 28 February.",
+              "zh": "长春理工大学官方页面和指南公布国际研究生全额奖学金；2026年申请已于2月28日截止。",
+              "ru": "Официальная страница и руководство CUST описывают полную стипендию для последипломного обучения; прием 2026 года завершился 28 февраля."
+            },
+            "sourceIds": [
+              "src-gap-scholarship-wave3-sch-cust-csc-graduate",
+              "src-gap-scholarship-wave3-sch-cust-csc-graduate-support-1"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale"
+          },
+          "canonicalProgramPins": [],
+          "sourceIds": [
+            "src-gap-scholarship-wave3-sch-cust-csc-graduate",
+            "src-gap-scholarship-wave3-sch-cust-csc-graduate-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-sch-cust-csc-graduate",
+              "canonicalSourceSha256": "d92e523634f87d8353335c681534c26ef5ecd60b9bd14a4e5048cd93b6bf3479",
+              "url": "https://sie.cust.edu.cn/scholarship_pages/74616.htm"
+            },
+            {
+              "sourceId": "src-gap-scholarship-wave3-sch-cust-csc-graduate-support-1",
+              "canonicalSourceSha256": "fa77327287a58964164a3f271ddd85fdd7423162304f45c806b1f124153395b0",
+              "url": "https://sie.cust.edu.cn/docs/2025-12/4c82fe64bd1e4c75a02b0d4bae45e0b6.pdf"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-02-28",
+          "candidateOfficialDeadline": "2026-02-28",
+          "reason": "own2026-Chinese-Government-Scholarship-graduate-guide-states-applicant-CSC-system-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "English-before-February28-retained-Chinese-states-February28-cutoff-no-clock-time-or-inclusivity-resolved",
+          "evidenceSourceUrl": "https://sie.cust.edu.cn/docs/2025-12/4c82fe64bd1e4c75a02b0d4bae45e0b6.pdf",
+          "evidenceBodySha256": "8f60055ee0c334595b7598a0a3c5cc105c94d397a83a6dc9c617a5a079b8b4f4",
+          "evidenceTextSha256": "7fb14401cb65bc02b49e9c0e582bf8bfb03363f501a7f658d769bf57f011e14a",
+          "observedAt": "2026-10-19T13:02:11.861483+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched original2026 applicant route is past; no later year, status mutation, whole-school completion or permanent programme cessation is inferred.",
+          "quotedDate": "Applicants should apply for this scholarship via Chinese Government Scholarship Information System (http://www.campuschina.org ) before February 28, 2026.",
+          "chineseDateQuote": "申请人应通过 CSC 网络申请系统申请，申请截止日期为 2026 年 2 月 28 日。",
+          "strictBeforeWordingRetained": true,
+          "englishBeforeVersusChineseCalendarDayBothPreserved": true,
+          "applicantStage": "Applicants submit via CSC system; TypeB agency10186. Later school review, pre-admission and CSC recommendation are institutional stages.",
+          "sourcePdfYearAndDatePages": [
+            2,
+            6
+          ],
+          "awardOwnDateNotBorrowed": true,
+          "clockTimeNotStated": true
+        }
+      ]
+    },
+    {
+      "key": "csust-standing-outstanding-student-assessment-no-own-exact-day",
+      "universityId": "uni-changsha-university-of-science-and-technology",
+      "institutionPreviouslyChecked": true,
+      "evidence": [
+        {
+          "name": "csust-award",
+          "url": "https://www.csust.edu.cn/gjxy/info/1190/2346.htm",
+          "observedAt": "2026-10-19T13:02:12.021368+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.csust.edu.cn/gjxy/info/1190/2346.htm",
+          "contentType": "text/html",
+          "bytes": 22953,
+          "rawPath": "csust-award.html",
+          "rawSha256": "45edd92bb7f03912df55264ffbc576e73d3b61c308fcf3c4509f992e9b9ba372",
+          "textPath": "csust-award.txt",
+          "textSha256": "c2bd7298b81dc28b63a56069035f0898ed2fba57dd044d240d270b509094f9c0",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-standing2019-outstanding-student-assessment-rules",
+          "fullFactsCertified": false
+        },
+        {
+          "name": "csust-awards",
+          "url": "https://www.csust.edu.cn/gjxy/ywbwz/Admission/International_Students/Scholarships.htm",
+          "observedAt": "2026-10-19T13:02:13.901992+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://www.csust.edu.cn/gjxy/ywbwz/Admission/International_Students/Scholarships.htm",
+          "contentType": "text/html",
+          "bytes": 20941,
+          "rawPath": "csust-awards.html",
+          "rawSha256": "61ea74649dee52962f362ab7b3bb17e40dd90e172bd84e148b0eae47116e1623",
+          "textPath": "csust-awards.txt",
+          "textSha256": "95cf4f39dcdd738849b8bcc1850ad3a2c8b92288a7b7c0fe8715fbec5c925690",
+          "captureSucceeded": true,
+          "evidenceRole": "registered-scholarship-list-with-other-routes",
+          "fullFactsCertified": false
+        }
+      ],
+      "publicationDate": "Date:2019-05-05",
+      "exactAwardTitle": "Detailed Rules and Regulations to Assess Scholarship of Outstanding International Student",
+      "assessmentEligibilityQuote": "These procedures shall apply to officially registered full—time Undergraduates, master students and doctoral students",
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-csust-outstanding-international-student-scholarship",
+          "universityId": "uni-changsha-university-of-science-and-technology",
+          "canonicalUniversitySha256": "6fad6d13ab8f1f7a2ad8f8594724c198b5d67d109fcbcd1595f2462e144e5da3",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-changsha-university-of-science-and-technology",
+              "canonicalUniversitySha256": "6fad6d13ab8f1f7a2ad8f8594724c198b5d67d109fcbcd1595f2462e144e5da3"
+            }
+          ],
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "eb9ce07cf28e9490c7685009b008256c9f6a147688cfb0cb40e89da356a7f76c",
+          "canonicalScholarshipSha256": "eb9ce07cf28e9490c7685009b008256c9f6a147688cfb0cb40e89da356a7f76c",
+          "canonicalRow": {
+            "id": "sch-gap-wave8-csust-outstanding-international-student-scholarship",
+            "slug": "gap-wave8-csust-outstanding-international-student-scholarship",
+            "name": {
+              "en": "CSUST Outstanding International Student Scholarship",
+              "zh": "长沙理工大学优秀来华留学生奖学金",
+              "ru": "Стипендия CSUST для выдающихся иностранных студентов"
+            },
+            "providerType": "university",
+            "universityIds": [
+              "uni-changsha-university-of-science-and-technology"
+            ],
+            "programIds": [
+              "prog-gap-wave8-csust-computer-science-technology-bachelor",
+              "prog-gap-wave8-csust-road-bridge-river-engineering-bachelor"
+            ],
+            "coverage": {
+              "tuition": "partial",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://www.csust.edu.cn/gjxy/info/1190/2346.htm",
+            "summary": {
+              "en": "The official rules establish first, second, third and individual awards for eligible full-time international students. Current amounts and the next application cycle are not announced, so only the scholarship identity and scope are retained.",
+              "zh": "官方办法面向符合条件的全日制国际学生设置一、二、三等奖及单项奖；当前金额和下一轮申请周期未公布，因此仅保留奖学金身份与适用范围。",
+              "ru": "Официальные правила учреждают первую, вторую, третью и индивидуальную награды для подходящих иностранных студентов; текущие суммы и следующий цикл не объявлены."
+            },
+            "sourceIds": [
+              "src-gap-scholarship-wave8-csust-outstanding-international-student-scholarship",
+              "src-gap-scholarship-wave8-csust-outstanding-international-student-scholarship-support-1"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale"
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-csust-computer-science-technology-bachelor",
+              "canonicalProgramSha256": "22f7125eab5f2570ab6c5b131127ea0d62786514505498d6f72c7691d7505452"
+            },
+            {
+              "programId": "prog-gap-wave8-csust-road-bridge-river-engineering-bachelor",
+              "canonicalProgramSha256": "c111f06a8a5df9bfdcda2c198dc289691e0f3cd947f8d807f0981196d1010431"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-csust-outstanding-international-student-scholarship",
+            "src-gap-scholarship-wave8-csust-outstanding-international-student-scholarship-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-csust-outstanding-international-student-scholarship",
+              "canonicalSourceSha256": "a617969cf447afc78100d68c509912cb306e3b8dee28272e63c89ac746aeb25e",
+              "url": "https://www.csust.edu.cn/gjxy/info/1190/2346.htm"
+            },
+            {
+              "sourceId": "src-gap-scholarship-wave8-csust-outstanding-international-student-scholarship-support-1",
+              "canonicalSourceSha256": "0c20e7872afa44dd8561f2b521de17420d49e06dc0f7c96ee23c1f6782d7da40",
+              "url": "https://www.csust.edu.cn/gjxy/ywbwz/Admission/International_Students/Scholarships.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "standing-outstanding-enrolled-student-assessment-rules-have-no-exact-target-year-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://www.csust.edu.cn/gjxy/info/1190/2346.htm",
+          "evidenceBodySha256": "45edd92bb7f03912df55264ffbc576e73d3b61c308fcf3c4509f992e9b9ba372",
+          "evidenceTextSha256": "c2bd7298b81dc28b63a56069035f0898ed2fba57dd044d240d270b509094f9c0",
+          "observedAt": "2026-10-19T13:02:12.021368+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "annualAcademicAssessmentNotCurrentApplicationWindow": true,
+          "objectionWithinWeekAndSettlementThreeDaysNotApplicantDeadline": true,
+          "separateSilkRoadAndCscDatesNotBorrowed": true,
+          "listPublicationDatesNotApplicationDates": true,
+          "noYearRollover": true
+        }
+      ]
+    },
+    {
+      "key": "cuit2026-language-spring-and-autumn-separate-days-independent-award-unknown",
+      "universityId": "uni-chengdu-university-of-information-technology",
+      "institutionPreviouslyChecked": true,
+      "evidence": [
+        {
+          "name": "cuit-language",
+          "url": "https://english.cuit.edu.cn/info/1062/1743.htm",
+          "observedAt": "2026-10-19T13:02:15.413868+00:00",
+          "timeoutSeconds": 25,
+          "maximumBytes": 12000000,
+          "tlsCertificateValidation": true,
+          "status": 200,
+          "finalUrl": "https://english.cuit.edu.cn/info/1062/1743.htm",
+          "contentType": "text/html",
+          "bytes": 83070,
+          "rawPath": "cuit-language.html",
+          "rawSha256": "c8da6efd79948fd4e398e3f11644dc6a1a2a5b2e1328978c114086dcc02a16c7",
+          "textPath": "cuit-language.txt",
+          "textSha256": "e7e21790465a94b9293f54ac5d3fb07fa52e8dd046af601615b8c3d3e772c178",
+          "captureSucceeded": true,
+          "evidenceRole": "complete-exact2026-Chinese-language-training-guide",
+          "fullFactsCertified": false
+        }
+      ],
+      "yearTitle": "2026 Admission Guide for International Students (Chinese Language Training Programs)",
+      "programmeQuote": "This program is designed for Chinese Language and Culture.",
+      "springApplicantWindow": "Spring Semester Intake: December 1, 2025 – January 15, 2026",
+      "autumnApplicantWindow": "Autumn Semester Intake: May 15, 2026 – June 30, 2026",
+      "independentAwardQuote": "Sichuan Provincial Government Scholarship for International Students",
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-2-cuit-chinese-language-culture-2025-2026-spring-fee-reference",
+          "universityId": "uni-chengdu-university-of-information-technology",
+          "canonicalUniversitySha256": "ce4f5e5b46afc0604db47ce9709abbb044efb4137e98cc5b400f4163da7d86ce",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-chengdu-university-of-information-technology",
+              "canonicalUniversitySha256": "ce4f5e5b46afc0604db47ce9709abbb044efb4137e98cc5b400f4163da7d86ce"
+            }
+          ],
+          "programId": "prog-gap-wave8-2-cuit-chinese-language-culture",
+          "academicYear": "2025-2026",
+          "intake": "spring",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "6f71e0669c5072b284a315046d5c7e70363ac62892d115907692460140c19ab2",
+          "canonicalCycleSha256": "6f71e0669c5072b284a315046d5c7e70363ac62892d115907692460140c19ab2",
+          "canonicalProgramSha256": "6029f46bc4c8b56b43b3003e6b0f71adf8873c4cc8036659df21974a98f8cfac",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-wave8-2-cuit-chinese-language-culture"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-08-09",
+            "status": "stale",
+            "id": "cycle-gap-wave8-2-cuit-chinese-language-culture-2025-2026-spring-fee-reference",
+            "programId": "prog-gap-wave8-2-cuit-chinese-language-culture",
+            "academicYear": "2025-2026",
+            "intake": "spring",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": 6000,
+            "tuitionPeriod": "semester",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "cycle-specific",
+            "factScope": "partial",
+            "applicationFeeCny": null
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-cuit-chinese-language-culture",
+              "canonicalProgramSha256": "6029f46bc4c8b56b43b3003e6b0f71adf8873c4cc8036659df21974a98f8cfac"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave8-2-cuit-chinese-language-culture"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-2-cuit-chinese-language-culture",
+              "canonicalSourceSha256": "5764777bd8af127aac58939ff9a857e91bac5f05c31a5876965eaf4a1d3202e1",
+              "url": "https://english.cuit.edu.cn/info/1062/1743.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-01-15",
+          "candidateOfficialDeadline": "2026-01-15",
+          "reason": "exact2026-language-guide-separately-states-matching-spring-or-autumn-applicant-period",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://english.cuit.edu.cn/info/1062/1743.htm",
+          "evidenceBodySha256": "c8da6efd79948fd4e398e3f11644dc6a1a2a5b2e1328978c114086dcc02a16c7",
+          "evidenceTextSha256": "e7e21790465a94b9293f54ac5d3fb07fa52e8dd046af601615b8c3d3e772c178",
+          "observedAt": "2026-10-19T13:02:15.413868+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched original2026 applicant route is past; no later year, status mutation, whole-school completion or permanent programme cessation is inferred.",
+          "quotedDate": "Spring Semester Intake: December 1, 2025 – January 15, 2026",
+          "matchedIntake": "spring2026",
+          "statedSourceOpeningObservation": "2025-12-01",
+          "semesterTeachingDatesNotApplicantDeadline": true,
+          "postgraduateDeadlineNotBorrowed": true,
+          "independentAwardDatesNotInferred": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave8-2-cuit-chinese-language-culture-2026-2027-autumn-fee-reference",
+          "universityId": "uni-chengdu-university-of-information-technology",
+          "canonicalUniversitySha256": "ce4f5e5b46afc0604db47ce9709abbb044efb4137e98cc5b400f4163da7d86ce",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-chengdu-university-of-information-technology",
+              "canonicalUniversitySha256": "ce4f5e5b46afc0604db47ce9709abbb044efb4137e98cc5b400f4163da7d86ce"
+            }
+          ],
+          "programId": "prog-gap-wave8-2-cuit-chinese-language-culture",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "degreeLevel": "language",
+          "teachingLanguages": [
+            "Chinese"
+          ],
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "e2c1cb6142518c0fbf8dcc5dc29a69849875a52ad0e42acf9091cba6908053ff",
+          "canonicalCycleSha256": "e2c1cb6142518c0fbf8dcc5dc29a69849875a52ad0e42acf9091cba6908053ff",
+          "canonicalProgramSha256": "6029f46bc4c8b56b43b3003e6b0f71adf8873c4cc8036659df21974a98f8cfac",
+          "canonicalRow": {
+            "sourceIds": [
+              "src-gap-program-wave8-2-cuit-chinese-language-culture"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-08-09",
+            "status": "stale",
+            "id": "cycle-gap-wave8-2-cuit-chinese-language-culture-2026-2027-autumn-fee-reference",
+            "programId": "prog-gap-wave8-2-cuit-chinese-language-culture",
+            "academicYear": "2026-2027",
+            "intake": "autumn",
+            "opensOn": null,
+            "closesOn": null,
+            "dateStatus": "not-announced",
+            "tuitionCny": 6000,
+            "tuitionPeriod": "semester",
+            "tuitionStatus": "reference",
+            "evidenceBasis": "cycle-specific",
+            "factScope": "partial",
+            "applicationFeeCny": null
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-cuit-chinese-language-culture",
+              "canonicalProgramSha256": "6029f46bc4c8b56b43b3003e6b0f71adf8873c4cc8036659df21974a98f8cfac"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-program-wave8-2-cuit-chinese-language-culture"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave8-2-cuit-chinese-language-culture",
+              "canonicalSourceSha256": "5764777bd8af127aac58939ff9a857e91bac5f05c31a5876965eaf4a1d3202e1",
+              "url": "https://english.cuit.edu.cn/info/1062/1743.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-06-30",
+          "candidateOfficialDeadline": "2026-06-30",
+          "reason": "exact2026-language-guide-separately-states-matching-spring-or-autumn-applicant-period",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "calendar-date-only-no-clock-time-stated",
+          "evidenceSourceUrl": "https://english.cuit.edu.cn/info/1062/1743.htm",
+          "evidenceBodySha256": "c8da6efd79948fd4e398e3f11644dc6a1a2a5b2e1328978c114086dcc02a16c7",
+          "evidenceTextSha256": "e7e21790465a94b9293f54ac5d3fb07fa52e8dd046af601615b8c3d3e772c178",
+          "observedAt": "2026-10-19T13:02:15.413868+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "candidateChangesStoredNull": true,
+          "closureScope": "Only the explicitly matched original2026 applicant route is past; no later year, status mutation, whole-school completion or permanent programme cessation is inferred.",
+          "quotedDate": "Autumn Semester Intake: May 15, 2026 – June 30, 2026",
+          "matchedIntake": "autumn2026",
+          "statedSourceOpeningObservation": "2026-05-15",
+          "semesterTeachingDatesNotApplicantDeadline": true,
+          "postgraduateDeadlineNotBorrowed": true,
+          "independentAwardDatesNotInferred": true,
+          "noYearRollover": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave8-2-cuit-sichuan-government-language-scholarship",
+          "universityId": "uni-chengdu-university-of-information-technology",
+          "canonicalUniversitySha256": "ce4f5e5b46afc0604db47ce9709abbb044efb4137e98cc5b400f4163da7d86ce",
+          "allCanonicalUniversityPins": [
+            {
+              "universityId": "uni-chengdu-university-of-information-technology",
+              "canonicalUniversitySha256": "ce4f5e5b46afc0604db47ce9709abbb044efb4137e98cc5b400f4163da7d86ce"
+            }
+          ],
+          "programId": null,
+          "academicYear": null,
+          "intake": null,
+          "degreeLevel": null,
+          "teachingLanguages": null,
+          "selectionOrigin": "exact-root-base-dispatch-v1",
+          "canonicalRecordSha256": "d952b9b7795f616e286d17b4d053930051a119bb0c0d64e2742837379a1f53ac",
+          "canonicalScholarshipSha256": "d952b9b7795f616e286d17b4d053930051a119bb0c0d64e2742837379a1f53ac",
+          "canonicalRow": {
+            "id": "sch-gap-wave8-2-cuit-sichuan-government-language-scholarship",
+            "slug": "gap-wave8-2-cuit-sichuan-government-language-scholarship",
+            "name": {
+              "en": "Sichuan Provincial Government Scholarship for CUIT Language Students",
+              "zh": "四川省外国留学生政府奖学金（成都信息工程大学语言生）",
+              "ru": "Стипендия правительства Сычуани для языковых студентов CUIT"
+            },
+            "providerType": "province",
+            "universityIds": [
+              "uni-chengdu-university-of-information-technology"
+            ],
+            "programIds": [
+              "prog-gap-wave8-2-cuit-chinese-language-culture"
+            ],
+            "coverage": {
+              "tuition": "unknown",
+              "accommodation": "unknown",
+              "insurance": "unknown",
+              "stipendCnyPerMonth": null
+            },
+            "deadline": null,
+            "applicationUrl": "https://english.cuit.edu.cn/info/1062/1743.htm",
+            "summary": {
+              "en": "CUIT's official 2026 language guide states a CNY 10,000 annual Sichuan Provincial Government Scholarship for language students. A separate scholarship deadline is not announced.",
+              "zh": "成都信息工程大学官方2026语言生简章公布四川省政府奖学金语言生标准为每年10000元；未单独公布奖学金截止日期。",
+              "ru": "Официальное руководство CUIT 2026 указывает 10 000 юаней в год для языковых студентов по стипендии правительства Сычуани; отдельный срок не объявлен."
+            },
+            "sourceIds": [
+              "src-gap-scholarship-wave8-2-cuit-sichuan-government-language-scholarship"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale"
+          },
+          "canonicalProgramPins": [
+            {
+              "programId": "prog-gap-wave8-2-cuit-chinese-language-culture",
+              "canonicalProgramSha256": "6029f46bc4c8b56b43b3003e6b0f71adf8873c4cc8036659df21974a98f8cfac"
+            }
+          ],
+          "sourceIds": [
+            "src-gap-scholarship-wave8-2-cuit-sichuan-government-language-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave8-2-cuit-sichuan-government-language-scholarship",
+              "canonicalSourceSha256": "0aa0b5c7afd9bc90513807ae84fd535c2f8b90cdcbfd0e20a1727d9fc915478c",
+              "url": "https://english.cuit.edu.cn/info/1062/1743.htm"
+            }
+          ],
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "candidateOfficialDeadline": null,
+          "reason": "independently-listed-Sichuan-government-language-award-has-no-own-exact-applicant-cutoff",
+          "openingDateAssessed": false,
+          "officialOpensOn": null,
+          "candidateOfficialOpensOn": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "not-established",
+          "evidenceSourceUrl": "https://english.cuit.edu.cn/info/1062/1743.htm",
+          "evidenceBodySha256": "c8da6efd79948fd4e398e3f11644dc6a1a2a5b2e1328978c114086dcc02a16c7",
+          "evidenceTextSha256": "e7e21790465a94b9293f54ac5d3fb07fa52e8dd046af601615b8c3d3e772c178",
+          "observedAt": "2026-10-19T13:02:15.413868+00:00",
+          "candidateOnly": true,
+          "dateOnly": true,
+          "canonicalDeadlineAssessed": false,
+          "canonicalDateChanged": false,
+          "canonicalWritePerformed": false,
+          "freshnessRenewed": false,
+          "wholeSchoolCatalogueCompleted": false,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "quotedDate": null,
+          "generalLanguageAdmissionDatesNotBorrowed": true,
+          "neighbouringChengduAwardsFallOnlyClauseNotBorrowed": true,
+          "awardOwnDeadlineNotStated": true
+        }
+      ]
+    }
+  ],
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    },
+    {
+      "batch": "official-batch-020",
+      "reportSha256": "c66c6eea7f50eed684f555e7b9fee60fc896e9d83ab1f266ec277853fac466dc"
+    },
+    {
+      "batch": "official-batch-021",
+      "reportSha256": "2622406189327d1d0078b7f071ee04cc818c85e34f4d8c69d2927ae4faa57440"
+    },
+    {
+      "batch": "official-batch-022",
+      "reportSha256": "2d53347f63edde1efc6817ddccd2b5e6ebd7e72fca45582688fb313aa65ddab8"
+    },
+    {
+      "batch": "official-batch-023",
+      "reportSha256": "b504152e56895373d74231d5a430c694cf55d07ba2d0c29652052a8598306af7"
+    },
+    {
+      "batch": "official-batch-024",
+      "reportSha256": "47d83ddc17d6103b3fd89aa1385a412cc602c70071872fbc59ea5522f62bfc1f"
+    },
+    {
+      "batch": "official-batch-025",
+      "reportSha256": "b7675df7e02f1868f6f35050905d3be4e0b4f014ebd1256dff21a2612120fd2f"
+    },
+    {
+      "batch": "official-batch-026",
+      "reportSha256": "30e6a423c567a9d99cf2724b9786f8154ca94e831ef3852e36534899412b00c9"
+    },
+    {
+      "batch": "official-batch-027",
+      "reportSha256": "ed64100b4c5aca63e81b04829f377eca7b494f4b346ea8d78a8c62671656a3ff"
+    },
+    {
+      "batch": "official-batch-028",
+      "reportSha256": "c1ee48a947ab94feac0f853531921d888b4ce30b24781afe7cb9e422e29f9276"
+    },
+    {
+      "batch": "official-batch-029",
+      "reportSha256": "6fa308e70e7e0ad0a0436ed5103eb067928fc9494ba1e977fdaba85cdd3d2243"
+    },
+    {
+      "batch": "official-batch-030",
+      "reportSha256": "95ae6d26c4de9030e7debe25a19d12f12d23235c3633a3b75aca538996958668"
+    },
+    {
+      "batch": "official-batch-031",
+      "reportSha256": "7f213f09e6f2e397a41ce67e2a81c68c9f4bed5f93f83d60d1cff37a42e5cf59"
+    },
+    {
+      "batch": "official-batch-032",
+      "reportSha256": "7ca2417531ff19ae0b9c7b348bf40be89d9029a48b7930172d876488b663b982"
+    },
+    {
+      "batch": "official-batch-033",
+      "reportSha256": "9087e4d1d7242809498d7f0a9c1b740419da39f52ee863e4d4849bd1aef44698"
+    },
+    {
+      "batch": "official-batch-034",
+      "reportSha256": "3ddc3e1c816b3c4927c13304492b76fd1fc8f5dc6ff90ec1043a770ccd55b9d0"
+    },
+    {
+      "batch": "official-batch-035",
+      "reportSha256": "b621c16cdbd0d01ca22059bd83f92e283d43629394ddab64ba7c86486ae7dafb"
+    },
+    {
+      "batch": "official-batch-036",
+      "reportSha256": "db944c0a39ebdae71e53866c10f70f6d98b60ef77ba034891224afe1c0bf7f50"
+    },
+    {
+      "batch": "official-batch-037",
+      "reportSha256": "97b3e53d8746d184d35408b19bff73b599781a934213b06ef23084b996e7ecc1"
+    },
+    {
+      "batch": "official-batch-038",
+      "reportSha256": "8df4ef3e1f25bf4165f9c5252e4226038bcc0d782f891d76d9506c53be143fb9"
+    },
+    {
+      "batch": "official-batch-039",
+      "reportSha256": "82f000484e1b310f4101e0bf377c1d9ce3da9dd3f05b37159c54acd4c8664380"
+    }
+  ],
+  "validation": {
+    "exactElevenRootDispatchedIdsCoveredOnce": true,
+    "zeroExtensionsForThisGroup": true,
+    "noPriorAssessedOrApprovedOverlap": true,
+    "allSevenScopesAreNewRecordScopesAtPreviouslyCheckedInstitutions": true,
+    "allSixCanonicalInputsBeforeAfterUnchanged": true,
+    "fullCanonicalRowsParentLinkedProgrammeSourceUniversityPinsSaved": true,
+    "allQuotedFragmentsMatchSavedOriginalText": true,
+    "relevantCustPdfCompletePagesVisuallyRead": true,
+    "closedDatesAreExplicitPastIsoDays": true,
+    "unknownOpeningNotAssessed": true,
+    "noImplicitYearRollover": true,
+    "noIndependentAwardDateBorrowed": true,
+    "preciseClockAndBeforeWordingPreserved": true,
+    "noCanonicalOrFreshnessChange": true
+  }
+}

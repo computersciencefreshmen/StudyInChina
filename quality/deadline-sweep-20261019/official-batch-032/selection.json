@@ -1,0 +1,2276 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-032-20261019",
+  "createdAt": "2026-10-19T12:02:39.402Z",
+  "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "statePath": "quality/recovery-20261018/continuation-state.json",
+  "stateSha256": "0a91ff6f3ebd8220a1f7e38f5f2b817f9ab43950eff343bc59f804c60d30fb7f",
+  "summaryPath": "quality/deadline-sweep-20261019/official-review-summary-v10.json",
+  "summarySha256": "5e622d1b21c962e0c28ba3666c5306af9dd67dc4bdbfacf0b7807a00e9abecaa",
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v8.json",
+  "queueSha256": "cd24ea5c2c2df6b38b04ff7b85ea85ab298134f8e1caa333938016e720860d2d",
+  "inventoryPath": "quality/deadline-sweep-20261019/catalog-deadlines.json",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "selectedUniversityIds": [
+    "uni-shanxi-university",
+    "uni-shenyang-pharmaceutical-university",
+    "uni-shenzhen-technology-university",
+    "uni-sichuan-agricultural-university",
+    "uni-sichuan-fine-arts-institute",
+    "uni-sichuan-university"
+  ],
+  "baseQueueRecordIds": [
+    "cycle-gap-prog-mew-nss-sxu-foundation-2026-2027-autumn-fee-reference",
+    "sch-gap-sch-mew-nss-sxu-undergraduate-ab",
+    "cycle-gap-remaining-syphu-b-pharmacy-2026-2027-other-fee-reference",
+    "cycle-gap-wave4-medicine-syphu-medicinal-chemistry-master-2026-2027-other-fee-reference",
+    "cycle-gap-wave4-medicine-syphu-pharmaceutics-master-2026-2027-other-fee-reference",
+    "cycle-gap-wave3-sztu-ai-english-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave3-sztu-cs-chinese-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave3-sztu-international-business-english-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave3-sztu-pharmacy-english-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave3-depth-sicau-chinese-language-literature-bachelor-2026-2027-autumn-fee-reference",
+    "sch-gap-wave3-depth-sicau-undergraduate-university-scholarship-2026",
+    "cycle-gap-mew-0805-scw-scfai-art-studies-doctorate-2026-2027-other-fee-reference",
+    "sch-gap-mew-0805-scw-scfai-chongqing-mayor-scholarship",
+    "sch-gap-mew-0805-scw-scfai-president-scholarship",
+    "scholarship-sichuan-university-international-student",
+    "scholarship-sichuan-government"
+  ],
+  "additionalSameSourceRecordIds": [
+    "sch-gap-wave3-sztu-guangdong-government-scholarship",
+    "sch-gap-wave3-sztu-freshman-scholarship",
+    "cycle-gap-mew-0805-scw-scfai-art-studies-master-2026-2027-other-fee-reference",
+    "cycle-gap-mew-0805-scw-scfai-painting-bachelor-2026-2027-other-fee-reference"
+  ],
+  "additionalSameSourceRecords": 4,
+  "selectedRecordIds": [
+    "cycle-gap-prog-mew-nss-sxu-foundation-2026-2027-autumn-fee-reference",
+    "sch-gap-sch-mew-nss-sxu-undergraduate-ab",
+    "cycle-gap-remaining-syphu-b-pharmacy-2026-2027-other-fee-reference",
+    "cycle-gap-wave4-medicine-syphu-medicinal-chemistry-master-2026-2027-other-fee-reference",
+    "cycle-gap-wave4-medicine-syphu-pharmaceutics-master-2026-2027-other-fee-reference",
+    "cycle-gap-wave3-sztu-ai-english-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave3-sztu-cs-chinese-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave3-sztu-international-business-english-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave3-sztu-pharmacy-english-bachelor-2026-2027-autumn-fee-reference",
+    "cycle-gap-wave3-depth-sicau-chinese-language-literature-bachelor-2026-2027-autumn-fee-reference",
+    "sch-gap-wave3-depth-sicau-undergraduate-university-scholarship-2026",
+    "cycle-gap-mew-0805-scw-scfai-art-studies-doctorate-2026-2027-other-fee-reference",
+    "sch-gap-mew-0805-scw-scfai-chongqing-mayor-scholarship",
+    "sch-gap-mew-0805-scw-scfai-president-scholarship",
+    "scholarship-sichuan-university-international-student",
+    "scholarship-sichuan-government",
+    "sch-gap-wave3-sztu-guangdong-government-scholarship",
+    "sch-gap-wave3-sztu-freshman-scholarship",
+    "cycle-gap-mew-0805-scw-scfai-art-studies-master-2026-2027-other-fee-reference",
+    "cycle-gap-mew-0805-scw-scfai-painting-bachelor-2026-2027-other-fee-reference"
+  ],
+  "records": [
+    {
+      "recordId": "cycle-gap-prog-mew-nss-sxu-foundation-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-shanxi-university",
+      "canonicalRecordSha256": "606c0b4f543c7eccd4f56ee3652c0885c2ab64572acb5269ba6740d26d33ada4",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-sxu-foundation"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-08-11",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-nss-sxu-foundation-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-prog-mew-nss-sxu-foundation",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 5000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-sxu-foundation"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-nss-sxu-foundation",
+        "slug": "gap-prog-mew-nss-sxu-foundation-foundation",
+        "universityId": "uni-shanxi-university",
+        "name": {
+          "en": "1+4 International Student Foundation Program",
+          "zh": "1+4国际学生预科项目",
+          "ru": "Подготовительная программа 1+4 для иностранных студентов"
+        },
+        "degreeLevel": "foundation",
+        "discipline": "other",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 12,
+        "programUrl": "https://siee.sxu.edu.cn/docs/2026-04/9e9a1838ee3e49c3aabd942d05cd4e32.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "d883a2df07d9a61b38bbd91b8c4f09c4714ba82654e1a8b2dc35a270e191f8e0",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-sxu-foundation"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-sxu-foundation",
+            "slug": "gap-prog-mew-nss-sxu-foundation-foundation",
+            "universityId": "uni-shanxi-university",
+            "name": {
+              "en": "1+4 International Student Foundation Program",
+              "zh": "1+4国际学生预科项目",
+              "ru": "Подготовительная программа 1+4 для иностранных студентов"
+            },
+            "degreeLevel": "foundation",
+            "discipline": "other",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 12,
+            "programUrl": "https://siee.sxu.edu.cn/docs/2026-04/9e9a1838ee3e49c3aabd942d05cd4e32.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "d883a2df07d9a61b38bbd91b8c4f09c4714ba82654e1a8b2dc35a270e191f8e0"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nss-sxu-foundation",
+            "url": "https://siee.sxu.edu.cn/docs/2026-04/9e9a1838ee3e49c3aabd942d05cd4e32.pdf",
+            "title": "山西大学2026年国际学生1+4预科项目招生简章",
+            "publisher": "shanxi-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "c76467471e0156737c97cbdfe41d2b45a92d14167450df8909a5898ce30041f9"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-sch-mew-nss-sxu-undergraduate-ab",
+      "collection": "scholarships",
+      "universityId": "uni-shanxi-university",
+      "canonicalRecordSha256": "d2b72a4ab2b8acaee2b972d069c25f61f27601eb6e2bbe4b2e3bcc5673d6fdda",
+      "row": {
+        "id": "sch-gap-sch-mew-nss-sxu-undergraduate-ab",
+        "slug": "gap-sch-mew-nss-sxu-undergraduate-ab",
+        "name": {
+          "en": "Shanxi University International Undergraduate Scholarship (Types A and B)",
+          "zh": "山西大学国际本科生奖学金（A类、B类）",
+          "ru": "Стипендия Шаньсийского университета для иностранных бакалавров (A и B)"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-shanxi-university"
+        ],
+        "programIds": [
+          "prog-gap-prog-mew-nss-sxu-foundation"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://siee.sxu.edu.cn/docs/2026-04/9e9a1838ee3e49c3aabd942d05cd4e32.pdf",
+        "summary": {
+          "en": "The official 2026 foundation guide publishes Type A and B undergraduate awards, including tuition, accommodation and the stated Type A living allowance.",
+          "zh": "山西大学2026年官方预科简章公布本科A类、B类奖学金，包括学费、住宿及A类明确的生活费资助。",
+          "ru": "Официальный справочник 2026 года публикует стипендии типов A и B для бакалавров, включая обучение, проживание и указанное пособие типа A."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-mew-nss-sxu-undergraduate-ab"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-sxu-foundation"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-sxu-foundation",
+            "slug": "gap-prog-mew-nss-sxu-foundation-foundation",
+            "universityId": "uni-shanxi-university",
+            "name": {
+              "en": "1+4 International Student Foundation Program",
+              "zh": "1+4国际学生预科项目",
+              "ru": "Подготовительная программа 1+4 для иностранных студентов"
+            },
+            "degreeLevel": "foundation",
+            "discipline": "other",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 12,
+            "programUrl": "https://siee.sxu.edu.cn/docs/2026-04/9e9a1838ee3e49c3aabd942d05cd4e32.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "d883a2df07d9a61b38bbd91b8c4f09c4714ba82654e1a8b2dc35a270e191f8e0"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-mew-nss-sxu-undergraduate-ab",
+            "url": "https://siee.sxu.edu.cn/docs/2026-04/9e9a1838ee3e49c3aabd942d05cd4e32.pdf",
+            "title": "山西大学2026年国际学生1+4预科项目招生简章",
+            "publisher": "shanxi-university",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "7cbb12fb96d2af5aaaa318a07466291d074b59d5645215f841df38e62191e471"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-remaining-syphu-b-pharmacy-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-shenyang-pharmaceutical-university",
+      "canonicalRecordSha256": "2b6844275fe73fe56e76813bbc964eff85b1dad8135847ef2e72c3e6e03f4923",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-remaining-syphu-b-pharmacy",
+          "src-gap-program-remaining-syphu-b-pharmacy-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-remaining-syphu-b-pharmacy-2026-2027-other-fee-reference",
+        "programId": "prog-gap-remaining-syphu-b-pharmacy",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 25000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-remaining-syphu-b-pharmacy",
+          "src-gap-program-remaining-syphu-b-pharmacy-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-remaining-syphu-b-pharmacy",
+        "slug": "gap-remaining-syphu-b-pharmacy-bachelor",
+        "universityId": "uni-shenyang-pharmaceutical-university",
+        "name": {
+          "en": "Pharmacy",
+          "zh": "药学",
+          "ru": "Фармация"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "medicine",
+        "teachingLanguages": [],
+        "durationMonths": 48,
+        "programUrl": "https://en.syphu.edu.cn/Admissions/Tuition_Fees.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "0a09d8788f33b4b37ce0c65e2eecae28a6377111467f32b5491b4852c857b4d5",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-remaining-syphu-b-pharmacy",
+              "src-gap-program-remaining-syphu-b-pharmacy-support-1"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-remaining-syphu-b-pharmacy",
+            "slug": "gap-remaining-syphu-b-pharmacy-bachelor",
+            "universityId": "uni-shenyang-pharmaceutical-university",
+            "name": {
+              "en": "Pharmacy",
+              "zh": "药学",
+              "ru": "Фармация"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "medicine",
+            "teachingLanguages": [],
+            "durationMonths": 48,
+            "programUrl": "https://en.syphu.edu.cn/Admissions/Tuition_Fees.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "0a09d8788f33b4b37ce0c65e2eecae28a6377111467f32b5491b4852c857b4d5"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-remaining-syphu-b-pharmacy",
+            "url": "https://en.syphu.edu.cn/Admissions/Tuition_Fees.htm",
+            "title": "Shenyang Pharmaceutical University Tuition & Fees",
+            "publisher": "shenyang-pharmaceutical-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "ac812cd1132bb0b627a4f86d8ccd5bb5720f6019383ada33b3355f7f704933c5"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-remaining-syphu-b-pharmacy-support-1",
+            "url": "https://en.syphu.edu.cn/Admissions/Admission_Requirement.htm",
+            "title": "Supporting official source",
+            "publisher": "shenyang-pharmaceutical-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "a4c288a145af054842596da1b2ae605f55b2014dcd424df4b3c50280a4f877b9"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-wave4-medicine-syphu-medicinal-chemistry-master-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-shenyang-pharmaceutical-university",
+      "canonicalRecordSha256": "1bfcd585e184e0bc0e8cfe17decd7f650f0af83876ec6451a177ad1ebbcbfff0",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master",
+          "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master-support-1",
+          "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master-support-2"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave4-medicine-syphu-medicinal-chemistry-master-2026-2027-other-fee-reference",
+        "programId": "prog-gap-wave4-medicine-syphu-medicinal-chemistry-master",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 33000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master",
+          "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master-support-1",
+          "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master-support-2"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave4-medicine-syphu-medicinal-chemistry-master",
+        "slug": "gap-wave4-medicine-syphu-medicinal-chemistry-master-master",
+        "universityId": "uni-shenyang-pharmaceutical-university",
+        "name": {
+          "en": "Medicinal Chemistry (Master)",
+          "zh": "药物化学（硕士）",
+          "ru": "Медицинская химия (магистратура)"
+        },
+        "degreeLevel": "master",
+        "discipline": "science",
+        "teachingLanguages": [],
+        "durationMonths": 36,
+        "programUrl": "https://en.syphu.edu.cn/Admissions/Degree_Programs.htm",
+        "applyUrl": "https://en.syphu.edu.cn/info/1019/1031.htm",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "9c5a072637da453271ef6528b27eb143b727f451ad6fe80a4b2db64f503fdee3",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master",
+              "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master-support-1",
+              "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master-support-2"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-wave4-medicine-syphu-medicinal-chemistry-master",
+            "slug": "gap-wave4-medicine-syphu-medicinal-chemistry-master-master",
+            "universityId": "uni-shenyang-pharmaceutical-university",
+            "name": {
+              "en": "Medicinal Chemistry (Master)",
+              "zh": "药物化学（硕士）",
+              "ru": "Медицинская химия (магистратура)"
+            },
+            "degreeLevel": "master",
+            "discipline": "science",
+            "teachingLanguages": [],
+            "durationMonths": 36,
+            "programUrl": "https://en.syphu.edu.cn/Admissions/Degree_Programs.htm",
+            "applyUrl": "https://en.syphu.edu.cn/info/1019/1031.htm",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "9c5a072637da453271ef6528b27eb143b727f451ad6fe80a4b2db64f503fdee3"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master",
+            "url": "https://en.syphu.edu.cn/Admissions/Degree_Programs.htm",
+            "title": "Shenyang Pharmaceutical University — Degree Programs for International Students",
+            "publisher": "shenyang-pharmaceutical-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "5089a3d12eec0fde99ea49fd36b0ca9c607fca44e689a3d22dcb7fdf0ad6c772"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master-support-1",
+            "url": "https://en.syphu.edu.cn/Admissions/Tuition_Fees.htm",
+            "title": "Shenyang Pharmaceutical University — Tuition & Fees for International Students",
+            "publisher": "shenyang-pharmaceutical-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "1be8614a0340e04e0b52163ceed13be78e0130c44e3c023d5c7d0d3aafe3433d"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-wave4-medicine-syphu-medicinal-chemistry-master-support-2",
+            "url": "https://en.syphu.edu.cn/Admissions/Admission_Requirement.htm",
+            "title": "Shenyang Pharmaceutical University — International Student Admission Requirements",
+            "publisher": "shenyang-pharmaceutical-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "8bf50eeabbae9762debc1aa8bb24a6dc79b9d6c0337a2036487d7b6c7bb43b63"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-wave4-medicine-syphu-pharmaceutics-master-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-shenyang-pharmaceutical-university",
+      "canonicalRecordSha256": "f0dcecd0ebbb5b60b12a6144acf2927c834f5bc74eaf6b5d07bf92a5092d23b0",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave4-medicine-syphu-pharmaceutics-master",
+          "src-gap-program-wave4-medicine-syphu-pharmaceutics-master-support-1",
+          "src-gap-program-wave4-medicine-syphu-pharmaceutics-master-support-2"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave4-medicine-syphu-pharmaceutics-master-2026-2027-other-fee-reference",
+        "programId": "prog-gap-wave4-medicine-syphu-pharmaceutics-master",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 33000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave4-medicine-syphu-pharmaceutics-master",
+          "src-gap-program-wave4-medicine-syphu-pharmaceutics-master-support-1",
+          "src-gap-program-wave4-medicine-syphu-pharmaceutics-master-support-2"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave4-medicine-syphu-pharmaceutics-master",
+        "slug": "gap-wave4-medicine-syphu-pharmaceutics-master-master",
+        "universityId": "uni-shenyang-pharmaceutical-university",
+        "name": {
+          "en": "Pharmaceutics (Master)",
+          "zh": "药剂学（硕士）",
+          "ru": "Фармацевтическая технология (магистратура)"
+        },
+        "degreeLevel": "master",
+        "discipline": "other",
+        "teachingLanguages": [],
+        "durationMonths": 36,
+        "programUrl": "https://en.syphu.edu.cn/Admissions/Degree_Programs.htm",
+        "applyUrl": "https://en.syphu.edu.cn/info/1019/1031.htm",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "9716f02479643d1fdc1def6980d57cd6e567f37c7e27774d0afe117e21739b89",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave4-medicine-syphu-pharmaceutics-master",
+              "src-gap-program-wave4-medicine-syphu-pharmaceutics-master-support-1",
+              "src-gap-program-wave4-medicine-syphu-pharmaceutics-master-support-2"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-wave4-medicine-syphu-pharmaceutics-master",
+            "slug": "gap-wave4-medicine-syphu-pharmaceutics-master-master",
+            "universityId": "uni-shenyang-pharmaceutical-university",
+            "name": {
+              "en": "Pharmaceutics (Master)",
+              "zh": "药剂学（硕士）",
+              "ru": "Фармацевтическая технология (магистратура)"
+            },
+            "degreeLevel": "master",
+            "discipline": "other",
+            "teachingLanguages": [],
+            "durationMonths": 36,
+            "programUrl": "https://en.syphu.edu.cn/Admissions/Degree_Programs.htm",
+            "applyUrl": "https://en.syphu.edu.cn/info/1019/1031.htm",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "9716f02479643d1fdc1def6980d57cd6e567f37c7e27774d0afe117e21739b89"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave4-medicine-syphu-pharmaceutics-master",
+            "url": "https://en.syphu.edu.cn/Admissions/Degree_Programs.htm",
+            "title": "Shenyang Pharmaceutical University — Degree Programs for International Students",
+            "publisher": "shenyang-pharmaceutical-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "762dc4d7549916e0dd4457bd7d44288ebd5baf690090e30d75da81a350e9cc92"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-wave4-medicine-syphu-pharmaceutics-master-support-1",
+            "url": "https://en.syphu.edu.cn/Admissions/Tuition_Fees.htm",
+            "title": "Shenyang Pharmaceutical University — Tuition & Fees for International Students",
+            "publisher": "shenyang-pharmaceutical-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "d401a9eeffaab475f7ab96ced882d1fb3375a28e9192124e7be7c6e807d5f2d2"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-wave4-medicine-syphu-pharmaceutics-master-support-2",
+            "url": "https://en.syphu.edu.cn/Admissions/Admission_Requirement.htm",
+            "title": "Shenyang Pharmaceutical University — International Student Admission Requirements",
+            "publisher": "shenyang-pharmaceutical-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "d25ad0e503240eb7edb861ffae521f877eefb864b231d8b970edb61cddb9cdfc"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-wave3-sztu-ai-english-bachelor-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-shenzhen-technology-university",
+      "canonicalRecordSha256": "c2335e62f1488e691ca905721913d4704f436f58753b1a0bb161df179a137807",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave3-sztu-ai-english-bachelor",
+          "src-gap-program-wave3-sztu-ai-english-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave3-sztu-ai-english-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave3-sztu-ai-english-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 28000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave3-sztu-ai-english-bachelor",
+          "src-gap-program-wave3-sztu-ai-english-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave3-sztu-ai-english-bachelor",
+        "slug": "gap-wave3-sztu-ai-english-bachelor-bachelor",
+        "universityId": "uni-shenzhen-technology-university",
+        "name": {
+          "en": "Artificial Intelligence (English-taught Bachelor)",
+          "zh": "人工智能（英文授课本科）",
+          "ru": "Искусственный интеллект (бакалавриат на английском)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+        "applyUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "1c2ca749eb9b2facd142ef38c15b485368882ce723df7909621e9b7a753c07d8",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave3-sztu-ai-english-bachelor",
+              "src-gap-program-wave3-sztu-ai-english-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-wave3-sztu-ai-english-bachelor",
+            "slug": "gap-wave3-sztu-ai-english-bachelor-bachelor",
+            "universityId": "uni-shenzhen-technology-university",
+            "name": {
+              "en": "Artificial Intelligence (English-taught Bachelor)",
+              "zh": "人工智能（英文授课本科）",
+              "ru": "Искусственный интеллект (бакалавриат на английском)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+            "applyUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "1c2ca749eb9b2facd142ef38c15b485368882ce723df7909621e9b7a753c07d8"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave3-sztu-ai-english-bachelor",
+            "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+            "title": "2026 SZTU Admission Brochure of Bachelor Programs for International Students",
+            "publisher": "shenzhen-technology-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "019fd0ae8a30c90e1749ff501746224b61bf735891c5d2ec66666432a4e52d37"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-wave3-sztu-ai-english-bachelor-support-1",
+            "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+            "title": "SZTU 2026 Application Procedure and Materials",
+            "publisher": "shenzhen-technology-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "e38b44cc92e9eb16c14983a49c01f50638630ac6de3a86424b4866188b8f6f7c"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-wave3-sztu-cs-chinese-bachelor-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-shenzhen-technology-university",
+      "canonicalRecordSha256": "22e72652d532e974c41537cd89c7cf92bd4e77a1a25cc3a5a81b165642013499",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave3-sztu-cs-chinese-bachelor",
+          "src-gap-program-wave3-sztu-cs-chinese-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave3-sztu-cs-chinese-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave3-sztu-cs-chinese-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 28000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave3-sztu-cs-chinese-bachelor",
+          "src-gap-program-wave3-sztu-cs-chinese-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave3-sztu-cs-chinese-bachelor",
+        "slug": "gap-wave3-sztu-cs-chinese-bachelor-bachelor",
+        "universityId": "uni-shenzhen-technology-university",
+        "name": {
+          "en": "Computer Science and Technology (Chinese-taught Bachelor)",
+          "zh": "计算机科学与技术（中文授课本科）",
+          "ru": "Компьютерные науки и технологии (бакалавриат на китайском)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+        "applyUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "ee4ae6bee5a9171ffd6e79380732c7c18b67f5572929fb5425a86916f8007147",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave3-sztu-cs-chinese-bachelor",
+              "src-gap-program-wave3-sztu-cs-chinese-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-wave3-sztu-cs-chinese-bachelor",
+            "slug": "gap-wave3-sztu-cs-chinese-bachelor-bachelor",
+            "universityId": "uni-shenzhen-technology-university",
+            "name": {
+              "en": "Computer Science and Technology (Chinese-taught Bachelor)",
+              "zh": "计算机科学与技术（中文授课本科）",
+              "ru": "Компьютерные науки и технологии (бакалавриат на китайском)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+            "applyUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "ee4ae6bee5a9171ffd6e79380732c7c18b67f5572929fb5425a86916f8007147"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave3-sztu-cs-chinese-bachelor",
+            "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+            "title": "2026 SZTU Admission Brochure of Bachelor Programs for International Students",
+            "publisher": "shenzhen-technology-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "27fc02d0b8f44b49e2888c50b413fd7843168ef24afcc85b75ba6976307e8778"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-wave3-sztu-cs-chinese-bachelor-support-1",
+            "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+            "title": "SZTU 2026 Application Procedure and Materials",
+            "publisher": "shenzhen-technology-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "8a7745a8a51c536a25b91ac7a3e7f955ea0a8ff69589f3616088a3f1ed2ec61e"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-wave3-sztu-international-business-english-bachelor-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-shenzhen-technology-university",
+      "canonicalRecordSha256": "5b891322f663fc971d4825bb6a3c66711f3af2116e1e9557be0d8ddb860b704d",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave3-sztu-international-business-english-bachelor",
+          "src-gap-program-wave3-sztu-international-business-english-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave3-sztu-international-business-english-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave3-sztu-international-business-english-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 24000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave3-sztu-international-business-english-bachelor",
+          "src-gap-program-wave3-sztu-international-business-english-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave3-sztu-international-business-english-bachelor",
+        "slug": "gap-wave3-sztu-international-business-english-bachelor-bachelor",
+        "universityId": "uni-shenzhen-technology-university",
+        "name": {
+          "en": "International Business (English-taught Bachelor)",
+          "zh": "国际商务（英文授课本科）",
+          "ru": "Международный бизнес (бакалавриат на английском)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "business",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+        "applyUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "e58ea9c9b73da98336ef31e931cfbd2a2303317a2650b7e3476943096d796d40",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave3-sztu-international-business-english-bachelor",
+              "src-gap-program-wave3-sztu-international-business-english-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-wave3-sztu-international-business-english-bachelor",
+            "slug": "gap-wave3-sztu-international-business-english-bachelor-bachelor",
+            "universityId": "uni-shenzhen-technology-university",
+            "name": {
+              "en": "International Business (English-taught Bachelor)",
+              "zh": "国际商务（英文授课本科）",
+              "ru": "Международный бизнес (бакалавриат на английском)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "business",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+            "applyUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "e58ea9c9b73da98336ef31e931cfbd2a2303317a2650b7e3476943096d796d40"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave3-sztu-international-business-english-bachelor",
+            "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+            "title": "2026 SZTU Admission Brochure of Bachelor Programs for International Students",
+            "publisher": "shenzhen-technology-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "bae81eb03f98bd8ffdb025621cd609e69aed791e3de583a8f87020efbef88e29"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-wave3-sztu-international-business-english-bachelor-support-1",
+            "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+            "title": "SZTU 2026 Application Procedure and Materials",
+            "publisher": "shenzhen-technology-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "26864f7e108fccae4223146e595a6d74e5bc25f146ef1995ba1b7095a20e7dc5"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-wave3-sztu-pharmacy-english-bachelor-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-shenzhen-technology-university",
+      "canonicalRecordSha256": "5ba304eada3e2e493c7fd33579908eb44f3c526486eb86a2fd3c68a685307aa4",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave3-sztu-pharmacy-english-bachelor",
+          "src-gap-program-wave3-sztu-pharmacy-english-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave3-sztu-pharmacy-english-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave3-sztu-pharmacy-english-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 28000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave3-sztu-pharmacy-english-bachelor",
+          "src-gap-program-wave3-sztu-pharmacy-english-bachelor-support-1"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave3-sztu-pharmacy-english-bachelor",
+        "slug": "gap-wave3-sztu-pharmacy-english-bachelor-bachelor",
+        "universityId": "uni-shenzhen-technology-university",
+        "name": {
+          "en": "Pharmacy (English-taught Bachelor)",
+          "zh": "药学（英文授课本科）",
+          "ru": "Фармация (бакалавриат на английском)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "medicine",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+        "applyUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "de6bbb96fcf0f18c05f495deff420d07a3321626a3c50a113701963fff0c9b60",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave3-sztu-pharmacy-english-bachelor",
+              "src-gap-program-wave3-sztu-pharmacy-english-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-wave3-sztu-pharmacy-english-bachelor",
+            "slug": "gap-wave3-sztu-pharmacy-english-bachelor-bachelor",
+            "universityId": "uni-shenzhen-technology-university",
+            "name": {
+              "en": "Pharmacy (English-taught Bachelor)",
+              "zh": "药学（英文授课本科）",
+              "ru": "Фармация (бакалавриат на английском)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "medicine",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+            "applyUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "de6bbb96fcf0f18c05f495deff420d07a3321626a3c50a113701963fff0c9b60"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave3-sztu-pharmacy-english-bachelor",
+            "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+            "title": "2026 SZTU Admission Brochure of Bachelor Programs for International Students",
+            "publisher": "shenzhen-technology-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "5939b56ceecc2f232bd1f0aca41bb57736c3d51a25be2ceeb4898e27825863a3"
+        },
+        {
+          "row": {
+            "id": "src-gap-program-wave3-sztu-pharmacy-english-bachelor-support-1",
+            "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+            "title": "SZTU 2026 Application Procedure and Materials",
+            "publisher": "shenzhen-technology-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "8a289e399d24bbc45b458ecb214651b48642503ac55a8220e0322093a155f993"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-wave3-depth-sicau-chinese-language-literature-bachelor-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-sichuan-agricultural-university",
+      "canonicalRecordSha256": "11e18c1e16041965a1f0767262fd42ddd5f64110b81d665801b811378ead9f63",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-wave3-depth-sicau-chinese-language-literature-bachelor"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-06",
+        "status": "stale",
+        "id": "cycle-gap-wave3-depth-sicau-chinese-language-literature-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-wave3-depth-sicau-chinese-language-literature-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 12000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-wave3-depth-sicau-chinese-language-literature-bachelor"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale",
+        "id": "prog-gap-wave3-depth-sicau-chinese-language-literature-bachelor",
+        "slug": "gap-wave3-depth-sicau-chinese-language-literature-bachelor-bachelor",
+        "universityId": "uni-sichuan-agricultural-university",
+        "name": {
+          "en": "Chinese Language and Literature (Bachelor)",
+          "zh": "汉语言文学（本科）",
+          "ru": "Китайский язык и литература (бакалавриат)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://ic.sicau.edu.cn/info/1082/1461.htm",
+        "applyUrl": "https://appghc.sicau.edu.cn/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "93341a0550d047c7a852552b522ec1fbacc79fab00fcdfff2fe0ae2c5ebd241f",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave3-depth-sicau-chinese-language-literature-bachelor"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-wave3-depth-sicau-chinese-language-literature-bachelor",
+            "slug": "gap-wave3-depth-sicau-chinese-language-literature-bachelor-bachelor",
+            "universityId": "uni-sichuan-agricultural-university",
+            "name": {
+              "en": "Chinese Language and Literature (Bachelor)",
+              "zh": "汉语言文学（本科）",
+              "ru": "Китайский язык и литература (бакалавриат)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://ic.sicau.edu.cn/info/1082/1461.htm",
+            "applyUrl": "https://appghc.sicau.edu.cn/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "93341a0550d047c7a852552b522ec1fbacc79fab00fcdfff2fe0ae2c5ebd241f"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-wave3-depth-sicau-chinese-language-literature-bachelor",
+            "url": "https://ic.sicau.edu.cn/info/1082/1461.htm",
+            "title": "Admissions to Undergraduate Programs 2026",
+            "publisher": "sichuan-agricultural-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "814eb544b7acb05e60aba0ecb5d2a6c8157481ac8d492209f64f59c1151aa567"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-wave3-depth-sicau-undergraduate-university-scholarship-2026",
+      "collection": "scholarships",
+      "universityId": "uni-sichuan-agricultural-university",
+      "canonicalRecordSha256": "1715ee35a63710cce967854300433ac522978bc848b4795a989177da92f79afb",
+      "row": {
+        "id": "sch-gap-wave3-depth-sicau-undergraduate-university-scholarship-2026",
+        "slug": "gap-wave3-depth-sicau-undergraduate-university-scholarship-2026",
+        "name": {
+          "en": "SICAU University Scholarship for International Undergraduates 2026",
+          "zh": "四川农业大学2026年国际本科生校级奖学金",
+          "ru": "Университетская стипендия SICAU для иностранных бакалавров 2026"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-sichuan-agricultural-university"
+        ],
+        "programIds": [
+          "prog-gap-wave3-depth-sicau-chinese-language-literature-bachelor"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://ic.sicau.edu.cn/info/1082/1461.htm",
+        "summary": {
+          "en": "The official 2026 undergraduate page states a university tuition-waiver scholarship plus RMB 6,000 annual first-class awards for 10 outstanding freshmen and RMB 2,000 annual third-class awards for the remaining freshmen. The admission window is closed.",
+          "zh": "2026本科官方页面列明校级奖学金可免学费，另评选10名优秀新生获每年6000元一等奖学金，其余新生获每年2000元三等奖学金；当年申请已关闭。",
+          "ru": "Официальная страница 2026 указывает освобождение от платы за обучение, 6 000 юаней в год десяти лучшим первокурсникам и 2 000 юаней остальным. Приём закрыт."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave3-depth-sicau-undergraduate-university-scholarship-2026"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave3-depth-sicau-chinese-language-literature-bachelor"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-wave3-depth-sicau-chinese-language-literature-bachelor",
+            "slug": "gap-wave3-depth-sicau-chinese-language-literature-bachelor-bachelor",
+            "universityId": "uni-sichuan-agricultural-university",
+            "name": {
+              "en": "Chinese Language and Literature (Bachelor)",
+              "zh": "汉语言文学（本科）",
+              "ru": "Китайский язык и литература (бакалавриат)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://ic.sicau.edu.cn/info/1082/1461.htm",
+            "applyUrl": "https://appghc.sicau.edu.cn/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "93341a0550d047c7a852552b522ec1fbacc79fab00fcdfff2fe0ae2c5ebd241f"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave3-depth-sicau-undergraduate-university-scholarship-2026",
+            "url": "https://ic.sicau.edu.cn/info/1082/1461.htm",
+            "title": "Admissions to Undergraduate Programs 2026",
+            "publisher": "sichuan-agricultural-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "dad0650d317d7349001a8c2ff9275d0337f8f9d42b6f0ed7f5ed272836a9f110"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-mew-0805-scw-scfai-art-studies-doctorate-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-sichuan-fine-arts-institute",
+      "canonicalRecordSha256": "ced5d66b1d9c1417d3f4ba562ff731f0d86050187073f5b29821d479525af92b",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-mew-0805-scw-scfai-art-studies-doctorate"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-08-12",
+        "status": "stale",
+        "id": "cycle-gap-mew-0805-scw-scfai-art-studies-doctorate-2026-2027-other-fee-reference",
+        "programId": "prog-gap-mew-0805-scw-scfai-art-studies-doctorate",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 35000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-mew-0805-scw-scfai-art-studies-doctorate"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-09-04",
+        "status": "stale",
+        "id": "prog-gap-mew-0805-scw-scfai-art-studies-doctorate",
+        "slug": "gap-mew-0805-scw-scfai-art-studies-doctorate-doctorate",
+        "universityId": "uni-sichuan-fine-arts-institute",
+        "name": {
+          "en": "Art Studies (Academic Doctorate)",
+          "zh": "艺术学（学术博士）",
+          "ru": "Искусствоведение (академическая докторантура)"
+        },
+        "degreeLevel": "doctorate",
+        "discipline": "art-design",
+        "teachingLanguages": [],
+        "durationMonths": 48,
+        "programUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "385ef7b51473c1479e2a3d88ffbd2f7be1bff6171386d0a1874818d495928c07",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-mew-0805-scw-scfai-art-studies-doctorate"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-mew-0805-scw-scfai-art-studies-doctorate",
+            "slug": "gap-mew-0805-scw-scfai-art-studies-doctorate-doctorate",
+            "universityId": "uni-sichuan-fine-arts-institute",
+            "name": {
+              "en": "Art Studies (Academic Doctorate)",
+              "zh": "艺术学（学术博士）",
+              "ru": "Искусствоведение (академическая докторантура)"
+            },
+            "degreeLevel": "doctorate",
+            "discipline": "art-design",
+            "teachingLanguages": [],
+            "durationMonths": 48,
+            "programUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "385ef7b51473c1479e2a3d88ffbd2f7be1bff6171386d0a1874818d495928c07"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-mew-0805-scw-scfai-art-studies-doctorate",
+            "url": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm",
+            "title": "Sichuan Fine Arts Institute 2026 International Doctoral Admissions Guide",
+            "publisher": "sichuan-fine-arts-institute",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "sha256": "75ad01093ec75f5ceff8ecbe3cd35a383bfb0c790435b712ce3b1206a5ccf181"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-mew-0805-scw-scfai-chongqing-mayor-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-sichuan-fine-arts-institute",
+      "canonicalRecordSha256": "03c3a22b644b855ba45f1f86e860b22fc9e725aa39e5aa0f33b6dc3cd756f270",
+      "row": {
+        "id": "sch-gap-mew-0805-scw-scfai-chongqing-mayor-scholarship",
+        "slug": "gap-mew-0805-scw-scfai-chongqing-mayor-scholarship",
+        "name": {
+          "en": "Chongqing Municipal Government Mayor's Scholarship for International Students",
+          "zh": "重庆市人民政府外国留学生市长奖学金",
+          "ru": "Стипендия мэра муниципалитета Чунцин для иностранных студентов"
+        },
+        "providerType": "city",
+        "universityIds": [
+          "uni-sichuan-fine-arts-institute"
+        ],
+        "programIds": [
+          "prog-gap-mew-0805-scw-scfai-painting-bachelor",
+          "prog-gap-mew-0805-scw-scfai-art-studies-master",
+          "prog-gap-mew-0805-scw-scfai-art-studies-doctorate"
+        ],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+        "summary": {
+          "en": "The 2026 bachelor, master's and doctoral guides confirm the Mayor's Scholarship route and prohibit stacking with the President's Scholarship; the linked application cycle closed May 31.",
+          "zh": "2026本硕博简章确认市长奖学金渠道且不可与校长奖学金重复获得；关联申请期已于5月31日结束。",
+          "ru": "Руководства 2026 подтверждают стипендию мэра и запрет совмещения с Президентской стипендией; прием завершен 31 мая."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-mew-0805-scw-scfai-chongqing-mayor-scholarship",
+          "src-gap-scholarship-mew-0805-scw-scfai-chongqing-mayor-scholarship-support-1",
+          "src-gap-scholarship-mew-0805-scw-scfai-chongqing-mayor-scholarship-support-2"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-09-04",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-mew-0805-scw-scfai-painting-bachelor"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-mew-0805-scw-scfai-painting-bachelor",
+            "slug": "gap-mew-0805-scw-scfai-painting-bachelor-bachelor",
+            "universityId": "uni-sichuan-fine-arts-institute",
+            "name": {
+              "en": "Painting",
+              "zh": "绘画",
+              "ru": "Живопись"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "other",
+            "teachingLanguages": [],
+            "durationMonths": 48,
+            "programUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "3d52dfd4c1f92220da2d7b9605df8f12790b1e47775548fb96394ef9ec66d727"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-mew-0805-scw-scfai-art-studies-master"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-mew-0805-scw-scfai-art-studies-master",
+            "slug": "gap-mew-0805-scw-scfai-art-studies-master-master",
+            "universityId": "uni-sichuan-fine-arts-institute",
+            "name": {
+              "en": "Art Studies (Academic Master)",
+              "zh": "艺术学（学术硕士）",
+              "ru": "Искусствоведение (академическая магистратура)"
+            },
+            "degreeLevel": "master",
+            "discipline": "art-design",
+            "teachingLanguages": [],
+            "durationMonths": 36,
+            "programUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "6dc82bd4113d3828b7d308fef4eb964c291941dce4766ce204e46d18431ebe1f"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-mew-0805-scw-scfai-art-studies-doctorate"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-mew-0805-scw-scfai-art-studies-doctorate",
+            "slug": "gap-mew-0805-scw-scfai-art-studies-doctorate-doctorate",
+            "universityId": "uni-sichuan-fine-arts-institute",
+            "name": {
+              "en": "Art Studies (Academic Doctorate)",
+              "zh": "艺术学（学术博士）",
+              "ru": "Искусствоведение (академическая докторантура)"
+            },
+            "degreeLevel": "doctorate",
+            "discipline": "art-design",
+            "teachingLanguages": [],
+            "durationMonths": 48,
+            "programUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "385ef7b51473c1479e2a3d88ffbd2f7be1bff6171386d0a1874818d495928c07"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-mew-0805-scw-scfai-chongqing-mayor-scholarship",
+            "url": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+            "title": "Sichuan Fine Arts Institute 2026 International Master's Admissions Guide",
+            "publisher": "sichuan-fine-arts-institute",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "sha256": "d1b6851c3d1736d2c7b9d6cbc29b5c11369d8cc7e6938df455a4a0592674c479"
+        },
+        {
+          "row": {
+            "id": "src-gap-scholarship-mew-0805-scw-scfai-chongqing-mayor-scholarship-support-1",
+            "url": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
+            "title": "SCFAI 2026 International Bachelor Admissions Guide",
+            "publisher": "sichuan-fine-arts-institute",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "sha256": "7514c19edafcf17827f5e6d529efd75b19629ee84d0f8d0595166fbec86e2a4f"
+        },
+        {
+          "row": {
+            "id": "src-gap-scholarship-mew-0805-scw-scfai-chongqing-mayor-scholarship-support-2",
+            "url": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm",
+            "title": "SCFAI 2026 International Doctoral Admissions Guide",
+            "publisher": "sichuan-fine-arts-institute",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "sha256": "a1fef9ca334076151e6dfdd9524c5dffb2a12488779115016b12fd59fc441e9b"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-mew-0805-scw-scfai-president-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-sichuan-fine-arts-institute",
+      "canonicalRecordSha256": "516b9e972507afa75d0517bcd410338f0ebd9f260f4ec3c4a82d4a102c68fc15",
+      "row": {
+        "id": "sch-gap-mew-0805-scw-scfai-president-scholarship",
+        "slug": "gap-mew-0805-scw-scfai-president-scholarship",
+        "name": {
+          "en": "Sichuan Fine Arts Institute President's Scholarship for International Students",
+          "zh": "四川美术学院国际学生校长奖学金",
+          "ru": "Президентская стипендия Сычуаньского института изящных искусств для иностранных студентов"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-sichuan-fine-arts-institute"
+        ],
+        "programIds": [
+          "prog-gap-mew-0805-scw-scfai-painting-bachelor",
+          "prog-gap-mew-0805-scw-scfai-art-studies-master",
+          "prog-gap-mew-0805-scw-scfai-art-studies-doctorate"
+        ],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm",
+        "summary": {
+          "en": "The 2026 guides confirm the institute President's Scholarship and prohibit stacking with the Mayor's Scholarship; funding is in a captcha-protected appendix and the linked cycle is closed.",
+          "zh": "2026简章确认国际学生校长奖学金且不可与市长奖学金重复获得；资助细则附件受验证码保护，关联申请期已关闭。",
+          "ru": "Руководства 2026 подтверждают Президентскую стипендию и запрет совмещения; детали в защищенном приложении, прием закрыт."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-mew-0805-scw-scfai-president-scholarship",
+          "src-gap-scholarship-mew-0805-scw-scfai-president-scholarship-support-1",
+          "src-gap-scholarship-mew-0805-scw-scfai-president-scholarship-support-2"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-09-04",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-mew-0805-scw-scfai-painting-bachelor"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-mew-0805-scw-scfai-painting-bachelor",
+            "slug": "gap-mew-0805-scw-scfai-painting-bachelor-bachelor",
+            "universityId": "uni-sichuan-fine-arts-institute",
+            "name": {
+              "en": "Painting",
+              "zh": "绘画",
+              "ru": "Живопись"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "other",
+            "teachingLanguages": [],
+            "durationMonths": 48,
+            "programUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "3d52dfd4c1f92220da2d7b9605df8f12790b1e47775548fb96394ef9ec66d727"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-mew-0805-scw-scfai-art-studies-master"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-mew-0805-scw-scfai-art-studies-master",
+            "slug": "gap-mew-0805-scw-scfai-art-studies-master-master",
+            "universityId": "uni-sichuan-fine-arts-institute",
+            "name": {
+              "en": "Art Studies (Academic Master)",
+              "zh": "艺术学（学术硕士）",
+              "ru": "Искусствоведение (академическая магистратура)"
+            },
+            "degreeLevel": "master",
+            "discipline": "art-design",
+            "teachingLanguages": [],
+            "durationMonths": 36,
+            "programUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "6dc82bd4113d3828b7d308fef4eb964c291941dce4766ce204e46d18431ebe1f"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-mew-0805-scw-scfai-art-studies-doctorate"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-mew-0805-scw-scfai-art-studies-doctorate",
+            "slug": "gap-mew-0805-scw-scfai-art-studies-doctorate-doctorate",
+            "universityId": "uni-sichuan-fine-arts-institute",
+            "name": {
+              "en": "Art Studies (Academic Doctorate)",
+              "zh": "艺术学（学术博士）",
+              "ru": "Искусствоведение (академическая докторантура)"
+            },
+            "degreeLevel": "doctorate",
+            "discipline": "art-design",
+            "teachingLanguages": [],
+            "durationMonths": 48,
+            "programUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "385ef7b51473c1479e2a3d88ffbd2f7be1bff6171386d0a1874818d495928c07"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-mew-0805-scw-scfai-president-scholarship",
+            "url": "https://www.scfai.edu.cn/gjjl/info/1013/2402.htm",
+            "title": "Sichuan Fine Arts Institute 2026 International Doctoral Admissions Guide",
+            "publisher": "sichuan-fine-arts-institute",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "sha256": "22efa4e64a9bec6635726d4397d09af293ffcca989b14b0322a5092e1f70e5bf"
+        },
+        {
+          "row": {
+            "id": "src-gap-scholarship-mew-0805-scw-scfai-president-scholarship-support-1",
+            "url": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
+            "title": "SCFAI 2026 International Bachelor Admissions Guide",
+            "publisher": "sichuan-fine-arts-institute",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "sha256": "dead61401698642922282424bcacd00f080ac2fb286967992b16735e7fdec5e3"
+        },
+        {
+          "row": {
+            "id": "src-gap-scholarship-mew-0805-scw-scfai-president-scholarship-support-2",
+            "url": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+            "title": "SCFAI 2026 International Master's Admissions Guide",
+            "publisher": "sichuan-fine-arts-institute",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "sha256": "c78350d218dfa82414ab7b0ce6416189f7502a8a50fbef2daddee99917eb0f0b"
+        }
+      ]
+    },
+    {
+      "recordId": "scholarship-sichuan-university-international-student",
+      "collection": "scholarships",
+      "universityId": "uni-sichuan-university",
+      "canonicalRecordSha256": "eaaa4ad15866115fa6e2c4ca2e82164e0e09f11dbfe3871de27bee67a7efa03f",
+      "row": {
+        "sourceIds": [
+          "src-uni-sichuan-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "scholarship-sichuan-university-international-student",
+        "slug": "sichuan-university-international-student",
+        "name": {
+          "en": "Sichuan University Scholarship for International Students",
+          "zh": "四川大学外国留学生奖学金",
+          "ru": "Стипендия Сычуаньского университета для иностранных студентов"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-sichuan-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://global.scu.edu.cn/",
+        "summary": {
+          "en": "Sichuan University Scholarship for International Students is a potential funding route. Eligibility, participating programs and current-cycle coverage must be confirmed on the official page.",
+          "zh": "四川大学外国留学生奖学金是一项潜在资助渠道；申请资格、适用项目及当期资助标准须以官方页面为准。",
+          "ru": "Стипендия Сычуаньского университета для иностранных студентов — возможный источник финансирования. Условия, подходящие программы и покрытие текущего цикла необходимо проверить на официальной странице."
+        }
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-uni-sichuan-university",
+            "url": "https://global.scu.edu.cn/",
+            "title": "Official international information — Sichuan University",
+            "publisher": "Sichuan University",
+            "kind": "admissions",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-16"
+          },
+          "sha256": "ee6c684383019562b266a7c98634d89f2629311e70910af2e6df90f511db7697"
+        }
+      ]
+    },
+    {
+      "recordId": "scholarship-sichuan-government",
+      "collection": "scholarships",
+      "universityId": "uni-sichuan-university",
+      "canonicalRecordSha256": "50d710caeb8169c771413f6e1fd2e89a0ab147381322953369a3da3ca468cfdc",
+      "row": {
+        "sourceIds": [
+          "src-uni-sichuan-university"
+        ],
+        "verifiedAt": "2026-07-16",
+        "reviewAfter": "2026-10-01",
+        "status": "draft",
+        "id": "scholarship-sichuan-government",
+        "slug": "sichuan-government",
+        "name": {
+          "en": "Sichuan Government Scholarship",
+          "zh": "四川省外国留学生政府奖学金",
+          "ru": "Стипендия правительства провинции Сычуань"
+        },
+        "providerType": "province",
+        "universityIds": [
+          "uni-sichuan-university",
+          "uni-university-of-electronic-science-and-technology-of-china",
+          "uni-southwestern-university-of-finance-and-economics"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://global.scu.edu.cn/",
+        "summary": {
+          "en": "Sichuan Government Scholarship is a potential funding route. Eligibility, participating programs and current-cycle coverage must be confirmed on the official page.",
+          "zh": "四川省外国留学生政府奖学金是一项潜在资助渠道；申请资格、适用项目及当期资助标准须以官方页面为准。",
+          "ru": "Стипендия правительства провинции Сычуань — возможный источник финансирования. Условия, подходящие программы и покрытие текущего цикла необходимо проверить на официальной странице."
+        }
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-uni-sichuan-university",
+            "url": "https://global.scu.edu.cn/",
+            "title": "Official international information — Sichuan University",
+            "publisher": "Sichuan University",
+            "kind": "admissions",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-16"
+          },
+          "sha256": "ee6c684383019562b266a7c98634d89f2629311e70910af2e6df90f511db7697"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-wave3-sztu-guangdong-government-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-shenzhen-technology-university",
+      "canonicalRecordSha256": "d49bfe79ef98f952167f44d7945e16aabe463816e43f88443168083cf7498ef3",
+      "row": {
+        "id": "sch-gap-wave3-sztu-guangdong-government-scholarship",
+        "slug": "gap-wave3-sztu-guangdong-government-scholarship",
+        "name": {
+          "en": "Guangdong Government Outstanding International Student Scholarship at SZTU",
+          "zh": "广东省政府来粤留学生奖学金（深圳技术大学）",
+          "ru": "Стипендия правительства Гуандуна для иностранных студентов в SZTU"
+        },
+        "providerType": "province",
+        "universityIds": [
+          "uni-shenzhen-technology-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+        "summary": {
+          "en": "The official 2026 brochure explicitly lists this provincial scholarship. Quotas and amounts are governed by the applicable annual policy, so no fixed amount is inferred.",
+          "zh": "2026官方简章明确列出广东省政府来粤留学生奖学金；名额和金额以当年政策为准，因此不推断固定金额。",
+          "ru": "Официальная брошюра 2026 года прямо перечисляет эту стипендию; квоты и суммы зависят от ежегодной политики и не выводятся."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave3-sztu-guangdong-government-scholarship"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave3-sztu-guangdong-government-scholarship",
+            "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+            "title": "2026 SZTU Admission Brochure of Bachelor Programs for International Students",
+            "publisher": "shenzhen-technology-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "02a363436a49ac5e77d0abd2caa73cf483cae627ba98451b11944ee5989c9890"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-wave3-sztu-freshman-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-shenzhen-technology-university",
+      "canonicalRecordSha256": "81fb0739650d0015eaa00a3764d68d6294e830cdb5eceaf353fea7a0466a6224",
+      "row": {
+        "id": "sch-gap-wave3-sztu-freshman-scholarship",
+        "slug": "gap-wave3-sztu-freshman-scholarship",
+        "name": {
+          "en": "SZTU Freshman Scholarship for International Students",
+          "zh": "深圳技术大学国际学生新生奖学金",
+          "ru": "Стипендия SZTU для иностранных первокурсников"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-shenzhen-technology-university"
+        ],
+        "programIds": [
+          "prog-gap-wave3-sztu-international-business-english-bachelor",
+          "prog-gap-wave3-sztu-ai-english-bachelor",
+          "prog-gap-wave3-sztu-pharmacy-english-bachelor",
+          "prog-gap-wave3-sztu-cs-chinese-bachelor"
+        ],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+        "summary": {
+          "en": "The official 2026 brochure explicitly lists the Freshman Scholarship. The university states that quotas and award amounts follow the annual policy, so no value is guessed.",
+          "zh": "2026官方简章明确列出新生奖学金；学校说明名额与金额以当年政策为准，因此不猜测数值。",
+          "ru": "Официальная брошюра 2026 года перечисляет стипендию первокурсника; квоты и суммы определяются ежегодной политикой, поэтому значения не угадываются."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave3-sztu-freshman-scholarship"
+        ],
+        "verifiedAt": "2026-07-30",
+        "reviewAfter": "2026-08-29",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave3-sztu-international-business-english-bachelor",
+              "src-gap-program-wave3-sztu-international-business-english-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-wave3-sztu-international-business-english-bachelor",
+            "slug": "gap-wave3-sztu-international-business-english-bachelor-bachelor",
+            "universityId": "uni-shenzhen-technology-university",
+            "name": {
+              "en": "International Business (English-taught Bachelor)",
+              "zh": "国际商务（英文授课本科）",
+              "ru": "Международный бизнес (бакалавриат на английском)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "business",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+            "applyUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "e58ea9c9b73da98336ef31e931cfbd2a2303317a2650b7e3476943096d796d40"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave3-sztu-ai-english-bachelor",
+              "src-gap-program-wave3-sztu-ai-english-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-wave3-sztu-ai-english-bachelor",
+            "slug": "gap-wave3-sztu-ai-english-bachelor-bachelor",
+            "universityId": "uni-shenzhen-technology-university",
+            "name": {
+              "en": "Artificial Intelligence (English-taught Bachelor)",
+              "zh": "人工智能（英文授课本科）",
+              "ru": "Искусственный интеллект (бакалавриат на английском)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+            "applyUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "1c2ca749eb9b2facd142ef38c15b485368882ce723df7909621e9b7a753c07d8"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave3-sztu-pharmacy-english-bachelor",
+              "src-gap-program-wave3-sztu-pharmacy-english-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-wave3-sztu-pharmacy-english-bachelor",
+            "slug": "gap-wave3-sztu-pharmacy-english-bachelor-bachelor",
+            "universityId": "uni-shenzhen-technology-university",
+            "name": {
+              "en": "Pharmacy (English-taught Bachelor)",
+              "zh": "药学（英文授课本科）",
+              "ru": "Фармация (бакалавриат на английском)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "medicine",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+            "applyUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "de6bbb96fcf0f18c05f495deff420d07a3321626a3c50a113701963fff0c9b60"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave3-sztu-cs-chinese-bachelor",
+              "src-gap-program-wave3-sztu-cs-chinese-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-07-30",
+            "reviewAfter": "2026-08-29",
+            "status": "stale",
+            "id": "prog-gap-wave3-sztu-cs-chinese-bachelor",
+            "slug": "gap-wave3-sztu-cs-chinese-bachelor-bachelor",
+            "universityId": "uni-shenzhen-technology-university",
+            "name": {
+              "en": "Computer Science and Technology (Chinese-taught Bachelor)",
+              "zh": "计算机科学与技术（中文授课本科）",
+              "ru": "Компьютерные науки и технологии (бакалавриат на китайском)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+            "applyUrl": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Application_Procedure.htm",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "ee4ae6bee5a9171ffd6e79380732c7c18b67f5572929fb5425a86916f8007147"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave3-sztu-freshman-scholarship",
+            "url": "https://english.sztu.edu.cn/INTERNATIONAL_STUDENTS/Degree_Program1/Admission.htm",
+            "title": "2026 SZTU Admission Brochure of Bachelor Programs for International Students",
+            "publisher": "shenzhen-technology-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-30"
+          },
+          "sha256": "4bd2f1dc2ab663870942bb11a0e3771f7d2f0b8449249af1ed41016f0281dcbe"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-mew-0805-scw-scfai-art-studies-master-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-sichuan-fine-arts-institute",
+      "canonicalRecordSha256": "044bbbc1037ad8053b85770afaa20267cf78f3971c1862d3d892cb926037f531",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-mew-0805-scw-scfai-art-studies-master"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-08-12",
+        "status": "stale",
+        "id": "cycle-gap-mew-0805-scw-scfai-art-studies-master-2026-2027-other-fee-reference",
+        "programId": "prog-gap-mew-0805-scw-scfai-art-studies-master",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 30000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-mew-0805-scw-scfai-art-studies-master"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-09-04",
+        "status": "stale",
+        "id": "prog-gap-mew-0805-scw-scfai-art-studies-master",
+        "slug": "gap-mew-0805-scw-scfai-art-studies-master-master",
+        "universityId": "uni-sichuan-fine-arts-institute",
+        "name": {
+          "en": "Art Studies (Academic Master)",
+          "zh": "艺术学（学术硕士）",
+          "ru": "Искусствоведение (академическая магистратура)"
+        },
+        "degreeLevel": "master",
+        "discipline": "art-design",
+        "teachingLanguages": [],
+        "durationMonths": 36,
+        "programUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "6dc82bd4113d3828b7d308fef4eb964c291941dce4766ce204e46d18431ebe1f",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-mew-0805-scw-scfai-art-studies-master"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-mew-0805-scw-scfai-art-studies-master",
+            "slug": "gap-mew-0805-scw-scfai-art-studies-master-master",
+            "universityId": "uni-sichuan-fine-arts-institute",
+            "name": {
+              "en": "Art Studies (Academic Master)",
+              "zh": "艺术学（学术硕士）",
+              "ru": "Искусствоведение (академическая магистратура)"
+            },
+            "degreeLevel": "master",
+            "discipline": "art-design",
+            "teachingLanguages": [],
+            "durationMonths": 36,
+            "programUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "6dc82bd4113d3828b7d308fef4eb964c291941dce4766ce204e46d18431ebe1f"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-mew-0805-scw-scfai-art-studies-master",
+            "url": "https://www.scfai.edu.cn/gjjl/info/1013/2392.htm",
+            "title": "Sichuan Fine Arts Institute 2026 International Master's Admissions Guide",
+            "publisher": "sichuan-fine-arts-institute",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "sha256": "36987fe3c08d04d7b5039383f37f6989fa2c8b3df960c72f29067e6377647566"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-mew-0805-scw-scfai-painting-bachelor-2026-2027-other-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-sichuan-fine-arts-institute",
+      "canonicalRecordSha256": "6b878c30f1e6ef8859d8adff8a167bd02243cca5eb7859a0c208c991badd7c96",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-mew-0805-scw-scfai-painting-bachelor"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-08-12",
+        "status": "stale",
+        "id": "cycle-gap-mew-0805-scw-scfai-painting-bachelor-2026-2027-other-fee-reference",
+        "programId": "prog-gap-mew-0805-scw-scfai-painting-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 25000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-mew-0805-scw-scfai-painting-bachelor"
+        ],
+        "verifiedAt": "2026-08-05",
+        "reviewAfter": "2026-09-04",
+        "status": "stale",
+        "id": "prog-gap-mew-0805-scw-scfai-painting-bachelor",
+        "slug": "gap-mew-0805-scw-scfai-painting-bachelor-bachelor",
+        "universityId": "uni-sichuan-fine-arts-institute",
+        "name": {
+          "en": "Painting",
+          "zh": "绘画",
+          "ru": "Живопись"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "other",
+        "teachingLanguages": [],
+        "durationMonths": 48,
+        "programUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "3d52dfd4c1f92220da2d7b9605df8f12790b1e47775548fb96394ef9ec66d727",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-mew-0805-scw-scfai-painting-bachelor"
+            ],
+            "verifiedAt": "2026-08-05",
+            "reviewAfter": "2026-09-04",
+            "status": "stale",
+            "id": "prog-gap-mew-0805-scw-scfai-painting-bachelor",
+            "slug": "gap-mew-0805-scw-scfai-painting-bachelor-bachelor",
+            "universityId": "uni-sichuan-fine-arts-institute",
+            "name": {
+              "en": "Painting",
+              "zh": "绘画",
+              "ru": "Живопись"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "other",
+            "teachingLanguages": [],
+            "durationMonths": 48,
+            "programUrl": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "3d52dfd4c1f92220da2d7b9605df8f12790b1e47775548fb96394ef9ec66d727"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-mew-0805-scw-scfai-painting-bachelor",
+            "url": "https://www.scfai.edu.cn/gjjl/info/1013/2382.htm",
+            "title": "Sichuan Fine Arts Institute 2026 International Bachelor Admissions Guide",
+            "publisher": "sichuan-fine-arts-institute",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-05"
+          },
+          "sha256": "a701c4e0abe033a91b284033e482214761e05f06e6c55c6c59eb09e54fd2c20a"
+        }
+      ]
+    }
+  ]
+}

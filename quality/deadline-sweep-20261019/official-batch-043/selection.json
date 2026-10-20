@@ -1,0 +1,818 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-043-20261019",
+  "createdAt": "2026-10-19T13:23:43.025Z",
+  "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "statePath": "quality/recovery-20261018/continuation-state.json",
+  "stateSha256": "049571473a08bee3d5182d881170772cce59be52347727a1ced978bdd1e4c898",
+  "summaryPath": "quality/deadline-sweep-20261019/official-review-summary-v14.json",
+  "summarySha256": "68cade65ae43c5f0e48fe57265fb4bc1b0cf372bb6547438ea5738b71ab4c9d3",
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v12.json",
+  "queueSha256": "8ddc230da6211fd2c5d29ddeb32c95505fd82a1873beccab3ad7f3f552607a67",
+  "inventoryPath": "quality/deadline-sweep-20261019/catalog-deadlines.json",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "baseDispatch": {
+    "path": "quality/deadline-sweep-20261019/heartbeat-1320/base-dispatch-v1.json",
+    "sha256": "9868844feb233e063f474335931a74a2fa58d4c7e6941118704e3580d2e30b4e"
+  },
+  "extensionReceipt": {
+    "path": "quality/deadline-sweep-20261019/heartbeat-1320/additional-same-source-selection-v1.json",
+    "sha256": "dbc7df2011233d04ed129a07620c104fb0b13f5a8700cb0ed7fa9338650b2263"
+  },
+  "candidateUniversityIds": [
+    "uni-beijing-foreign-studies-university",
+    "uni-beijing-institute-of-technology",
+    "uni-beijing-language-and-culture-university",
+    "uni-beijing-normal-university",
+    "uni-beijing-sport-university",
+    "uni-beijing-university-of-posts-and-telecommunications"
+  ],
+  "selectedUniversityIds": [
+    "uni-beijing-foreign-studies-university",
+    "uni-beijing-institute-of-technology",
+    "uni-beijing-language-and-culture-university",
+    "uni-beijing-normal-university",
+    "uni-beijing-sport-university",
+    "uni-beijing-university-of-posts-and-telecommunications"
+  ],
+  "zeroRowUniversityIds": [],
+  "baseQueueRecordIds": [
+    "scholarship-bfsu-beijing-government-annual",
+    "sch-gap-wave8-bit-beijing-government-scholarship",
+    "sch-gap-wave8-bit-international-student-scholarship",
+    "cycle-wave4-program-beijing-language-and-culture-university-finance-english-bachelor-2026-2027-other-evidence",
+    "sch-gap-bnu-2026-iclts-degree-coverage",
+    "cycle-gap-bnu-2026-bachelor-tcsol-2026-2027-autumn",
+    "cycle-gap-bnu-2026-master-icle-2026-2027-autumn",
+    "sch-gap-sch-mew-nss-bsu-beijing-government",
+    "scholarship-bupt-chinese-government"
+  ],
+  "additionalSameSourceRecordIds": [],
+  "selectedRecordIds": [
+    "scholarship-bfsu-beijing-government-annual",
+    "sch-gap-wave8-bit-beijing-government-scholarship",
+    "sch-gap-wave8-bit-international-student-scholarship",
+    "cycle-wave4-program-beijing-language-and-culture-university-finance-english-bachelor-2026-2027-other-evidence",
+    "sch-gap-bnu-2026-iclts-degree-coverage",
+    "cycle-gap-bnu-2026-bachelor-tcsol-2026-2027-autumn",
+    "cycle-gap-bnu-2026-master-icle-2026-2027-autumn",
+    "sch-gap-sch-mew-nss-bsu-beijing-government",
+    "scholarship-bupt-chinese-government"
+  ],
+  "records": [
+    {
+      "recordId": "scholarship-bfsu-beijing-government-annual",
+      "collection": "scholarships",
+      "universityId": "uni-beijing-foreign-studies-university",
+      "canonicalRecordSha256": "b76f2809c2a888813715ab5a64f5531390a156f51fb62b83dfe38b34eda5fd04",
+      "row": {
+        "sourceIds": [
+          "src-bfsu-beijing-government-scholarship"
+        ],
+        "verifiedAt": "2026-07-28",
+        "reviewAfter": "2026-08-27",
+        "status": "stale",
+        "id": "scholarship-bfsu-beijing-government-annual",
+        "slug": "bfsu-beijing-government-annual",
+        "name": {
+          "en": "Beijing Government Scholarship for International Students at BFSU",
+          "zh": "北京外国语大学北京市外国留学生奖学金",
+          "ru": "Стипендия правительства Пекина для иностранных студентов в BFSU"
+        },
+        "providerType": "city",
+        "universityIds": [
+          "uni-beijing-foreign-studies-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://study.bfsu.edu.cn/",
+        "summary": {
+          "en": "The official recurring rule sets November 30 as the spring-intake deadline. Award A covers tuition, accommodation, living allowance and insurance; B omits living allowance; C covers tuition and insurance. Bachelor’s, master’s and non-degree recipients are normally limited to C, so no single tier is promised here.",
+          "zh": "官方年度规则规定春季入学截止日期为11月30日。A类覆盖学费、住宿、生活费和保险，B类不含生活费，C类覆盖学费和保险；本科、硕士及非学历获奖者原则上仅授予C类，因此本记录不承诺单一资助档位。",
+          "ru": "Ежегодное правило устанавливает 30 ноября как срок для весеннего набора. Категория A покрывает обучение, проживание, пособие и страховку; B — без пособия; C — обучение и страховку. Бакалавры, магистры и слушатели обычно получают только C, поэтому конкретная категория не обещается."
+        }
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-bfsu-beijing-government-scholarship",
+            "url": "https://osao.bfsu.edu.cn/info/2472/6842.htm",
+            "title": "Beijing Government Scholarship for International Students at BFSU",
+            "publisher": "Beijing Foreign Studies University",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-28"
+          },
+          "sha256": "246d10a6fee55b82042fa15a183ddd690d995cd59b5cc66bb1b45dc87587cb69"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-wave8-bit-beijing-government-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-beijing-institute-of-technology",
+      "canonicalRecordSha256": "3359e1058332fe541614621cf59e6c275cac0c38aceda00f0518acd1157281ca",
+      "row": {
+        "id": "sch-gap-wave8-bit-beijing-government-scholarship",
+        "slug": "gap-wave8-bit-beijing-government-scholarship",
+        "name": {
+          "en": "Beijing Government Scholarship at BIT",
+          "zh": "北京理工大学北京市外国留学生奖学金",
+          "ru": "Стипендия правительства Пекина в BIT"
+        },
+        "providerType": "city",
+        "universityIds": [
+          "uni-beijing-institute-of-technology"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://isc.bit.edu.cn/aboutbit/faq/3714638c555d436b815ec089176975e4.htm",
+        "summary": {
+          "en": "BIT lists three Beijing Government Scholarship tiers for international applicants at its Beijing campus. The 2026 deadline is closed and no next-cycle date is inferred.",
+          "zh": "北理工官方列出面向北京校区国际申请人的北京市政府奖学金A、B、C三档；2026截止日已过，不推定下一周期。",
+          "ru": "BIT указывает три категории Пекинской правительственной стипендии для международных заявителей пекинского кампуса; срок 2026 года закрыт."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave8-bit-beijing-government-scholarship"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-bit-beijing-government-scholarship",
+            "url": "https://isc.bit.edu.cn/aboutbit/faq/3714638c555d436b815ec089176975e4.htm",
+            "title": "Beijing Institute of Technology 2026 Scholarships",
+            "publisher": "beijing-institute-of-technology",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "9de60465c268d54b1fd8421e654d82fef4d6371dfa250546e000fe6790f750af"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-wave8-bit-international-student-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-beijing-institute-of-technology",
+      "canonicalRecordSha256": "40270a51bb703897f54ae619350ad001b89157e4bddfd43f680275f13c9d3510",
+      "row": {
+        "id": "sch-gap-wave8-bit-international-student-scholarship",
+        "slug": "gap-wave8-bit-international-student-scholarship",
+        "name": {
+          "en": "BIT International Student Scholarship",
+          "zh": "北京理工大学国际学生奖学金",
+          "ru": "Стипендия BIT для иностранных студентов"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-beijing-institute-of-technology"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://isc.bit.edu.cn/aboutbit/faq/3714638c555d436b815ec089176975e4.htm",
+        "summary": {
+          "en": "BIT publishes multi-tier international student awards ranging from partial tuition to tuition, accommodation, stipend and insurance. The 2026 deadline has closed; the next cycle is not announced.",
+          "zh": "北理工公布多档国际学生奖学金，覆盖从部分学费到学费、住宿、生活费和保险；2026截止日已过，下一周期尚未公布。",
+          "ru": "BIT публикует несколько уровней поддержки — от частичной оплаты обучения до обучения, проживания, стипендии и страхования; срок 2026 года закрыт."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave8-bit-international-student-scholarship"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-bit-international-student-scholarship",
+            "url": "https://isc.bit.edu.cn/aboutbit/faq/3714638c555d436b815ec089176975e4.htm",
+            "title": "Beijing Institute of Technology 2026 Scholarships",
+            "publisher": "beijing-institute-of-technology",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "0115e5f905de1d30eb8f600e9201eeb7770dd889a8039d05274ce43ac5f74483"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-wave4-program-beijing-language-and-culture-university-finance-english-bachelor-2026-2027-other-evidence",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-language-and-culture-university",
+      "canonicalRecordSha256": "81b55fae846fde74fcc088b05e05ef0313c2698530c75af7511032d0e7cfe0c4",
+      "row": {
+        "sourceIds": [
+          "blcu-undergraduate-live-2026"
+        ],
+        "verifiedAt": "2026-08-26",
+        "reviewAfter": "2026-08-26",
+        "status": "stale",
+        "id": "cycle-wave4-program-beijing-language-and-culture-university-finance-english-bachelor-2026-2027-other-evidence",
+        "programId": "program-beijing-language-and-culture-university-finance-english-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "previous-cycle-reference",
+        "tuitionCny": 39000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "Official-source review 2026-08-26. Reference record only: no unambiguous current application window is asserted. Official route requirements: high school diploma; IELTS 5.5 with no component below 5.5 or TOEFL 80 or TOEIC 650; interview; CSCA."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-blcu-entry-requirements",
+          "blcu-undergraduate-live-2026"
+        ],
+        "verifiedAt": "2026-08-26",
+        "reviewAfter": "2026-09-25",
+        "status": "stale",
+        "id": "program-beijing-language-and-culture-university-finance-english-bachelor",
+        "slug": "beijing-language-and-culture-university-finance-english-bachelor",
+        "universityId": "uni-beijing-language-and-culture-university",
+        "name": {
+          "en": "Finance (English-taught)",
+          "zh": "金融学（英文授课）",
+          "ru": "Финансы (на английском языке)"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "business",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://admission.blcu.edu.cn/en/384/list.htm",
+        "applyUrl": "https://apply.blcu.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "IELTS",
+            "minimum": "5.5 overall and in every component"
+          },
+          {
+            "test": "TOEFL",
+            "minimum": "80"
+          },
+          {
+            "test": "other",
+            "minimum": "TOEIC 650"
+          }
+        ],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "7e629a931d47b3cfc5e4f7c2024c08210053a538b721a0a50830dbf4e233ee7b",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-blcu-entry-requirements",
+              "blcu-undergraduate-live-2026"
+            ],
+            "verifiedAt": "2026-08-26",
+            "reviewAfter": "2026-09-25",
+            "status": "stale",
+            "id": "program-beijing-language-and-culture-university-finance-english-bachelor",
+            "slug": "beijing-language-and-culture-university-finance-english-bachelor",
+            "universityId": "uni-beijing-language-and-culture-university",
+            "name": {
+              "en": "Finance (English-taught)",
+              "zh": "金融学（英文授课）",
+              "ru": "Финансы (на английском языке)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "business",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://admission.blcu.edu.cn/en/384/list.htm",
+            "applyUrl": "https://apply.blcu.edu.cn/",
+            "languageRequirements": [
+              {
+                "test": "IELTS",
+                "minimum": "5.5 overall and in every component"
+              },
+              {
+                "test": "TOEFL",
+                "minimum": "80"
+              },
+              {
+                "test": "other",
+                "minimum": "TOEIC 650"
+              }
+            ],
+            "verificationScope": "facts"
+          },
+          "sha256": "7e629a931d47b3cfc5e4f7c2024c08210053a538b721a0a50830dbf4e233ee7b"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "blcu-undergraduate-live-2026",
+            "url": "https://admission.blcu.edu.cn/en/384/list.htm",
+            "title": "Beijing Language and Culture University — blcu-undergraduate-live-2026",
+            "publisher": "Beijing Language and Culture University",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-26"
+          },
+          "sha256": "ee5448823de9dca529149f5cf2bb6fe8d6e60af7657ce0c09b2bdf6935a3c35a"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-bnu-2026-iclts-degree-coverage",
+      "collection": "scholarships",
+      "universityId": "uni-beijing-normal-university",
+      "canonicalRecordSha256": "ab745edb3dc64afa6a29bb8d9f168f9674d087782bf2c762e3528847591daf4a",
+      "row": {
+        "id": "sch-gap-bnu-2026-iclts-degree-coverage",
+        "slug": "gap-bnu-2026-iclts-degree-coverage",
+        "name": {
+          "en": "International Chinese Language Teachers Scholarship — BNU",
+          "zh": "国际中文教师奖学金—北京师范大学",
+          "ru": "Стипендия для преподавателей китайского языка — Пекинский педагогический университет"
+        },
+        "providerType": "other",
+        "universityIds": [
+          "uni-beijing-normal-university"
+        ],
+        "programIds": [
+          "prog-gap-bnu-2026-master-icle",
+          "prog-gap-bnu-2026-bachelor-tcsol"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+        "summary": {
+          "en": "BNU's official 2026 guide confirms International Chinese Language Teachers Scholarship support for its TCSOL bachelor and International Chinese Language Education master. It covers tuition, accommodation, a monthly allowance and medical insurance; the 2026 degree cycle is closed.",
+          "zh": "北京师范大学官方2026年简章确认，国际中文教师奖学金适用于汉语国际教育本科和国际中文教育硕士，覆盖学费、住宿、生活费和医疗保险；2026学历项目申请期已关闭。",
+          "ru": "Официальное руководство BNU 2026 подтверждает стипендию для бакалавриата TCSOL и магистратуры по международному преподаванию китайского языка. Она покрывает обучение, проживание, ежемесячное пособие и медицинскую страховку; приём 2026 закрыт."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-bnu-2026-iclts-degree-coverage"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-bnu-2026-master-icle"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-bnu-2026-master-icle",
+            "slug": "gap-bnu-2026-master-icle-master",
+            "universityId": "uni-beijing-normal-university",
+            "name": {
+              "en": "Master of International Chinese Language Education",
+              "zh": "国际中文教育硕士",
+              "ru": "Магистратура по международному преподаванию китайского языка"
+            },
+            "degreeLevel": "master",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 24,
+            "programUrl": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+            "applyUrl": "https://international.bnu.edu.cn/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "41e24e9dc56bd2a7b79a731da368dc89257a6734c008c78ee7d0d8e907e7c45a"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-bnu-2026-bachelor-tcsol"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-bnu-2026-bachelor-tcsol",
+            "slug": "gap-bnu-2026-bachelor-tcsol-bachelor",
+            "universityId": "uni-beijing-normal-university",
+            "name": {
+              "en": "Bachelor of Teaching Chinese to Speakers of Other Languages",
+              "zh": "汉语国际教育本科",
+              "ru": "Бакалавриат по преподаванию китайского языка как иностранного"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+            "applyUrl": "https://international.bnu.edu.cn/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "c976dd1db6761927eef14824b99f9dd193bba5e5462ce5ae8a3fb388bc96e1dd"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-bnu-2026-iclts-degree-coverage",
+            "url": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+            "title": "2026 International Chinese Language Teachers Scholarship",
+            "publisher": "beijing-normal-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "6b98b52ed62178b479f0b1dcab6d2649962d88d79dfc3de5143b8b2603fe6468"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-bnu-2026-bachelor-tcsol-2026-2027-autumn",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-normal-university",
+      "canonicalRecordSha256": "4229a57311dc295f9d080de2f68bcc4b1a3695a6c71d4e859db6f31198137e3c",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-bnu-2026-bachelor-tcsol"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-bnu-2026-bachelor-tcsol-2026-2027-autumn",
+        "programId": "prog-gap-bnu-2026-bachelor-tcsol",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-15",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "A four-year undergraduate TCSOL route offered at BNU's Zhuhai campus for international applicants.",
+          "zh": "北京师范大学珠海校区面向国际申请人的四年制汉语国际教育本科项目。",
+          "ru": "Четырёхлетняя бакалаврская программа TCSOL для иностранных студентов в кампусе Чжухай."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-bnu-2026-bachelor-tcsol"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-bnu-2026-bachelor-tcsol",
+        "slug": "gap-bnu-2026-bachelor-tcsol-bachelor",
+        "universityId": "uni-beijing-normal-university",
+        "name": {
+          "en": "Bachelor of Teaching Chinese to Speakers of Other Languages",
+          "zh": "汉语国际教育本科",
+          "ru": "Бакалавриат по преподаванию китайского языка как иностранного"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+        "applyUrl": "https://international.bnu.edu.cn/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "c976dd1db6761927eef14824b99f9dd193bba5e5462ce5ae8a3fb388bc96e1dd",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-bnu-2026-bachelor-tcsol"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-bnu-2026-bachelor-tcsol",
+            "slug": "gap-bnu-2026-bachelor-tcsol-bachelor",
+            "universityId": "uni-beijing-normal-university",
+            "name": {
+              "en": "Bachelor of Teaching Chinese to Speakers of Other Languages",
+              "zh": "汉语国际教育本科",
+              "ru": "Бакалавриат по преподаванию китайского языка как иностранного"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+            "applyUrl": "https://international.bnu.edu.cn/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "c976dd1db6761927eef14824b99f9dd193bba5e5462ce5ae8a3fb388bc96e1dd"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-bnu-2026-bachelor-tcsol",
+            "url": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+            "title": "2026 International Chinese Language Teachers Scholarship",
+            "publisher": "beijing-normal-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "3e795b0053d351bdf02e6c4598b109afb63d927136d8350520a8cad05c10b8ca"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-gap-bnu-2026-master-icle-2026-2027-autumn",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-normal-university",
+      "canonicalRecordSha256": "3c3f85720f4b84a32f093d047e74d888d167b8559b2283a5d6ade73358ba6a1b",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-bnu-2026-master-icle"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-08-09",
+        "status": "stale",
+        "id": "cycle-gap-bnu-2026-master-icle-2026-2027-autumn",
+        "programId": "prog-gap-bnu-2026-master-icle",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": "2026-05-15",
+        "dateStatus": "published",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "dates-only",
+        "applicationFeeCny": null,
+        "notes": {
+          "en": "BNU's two-year master's program in international Chinese-language education for international scholarship applicants.",
+          "zh": "北京师范大学面向国际奖学金申请人的两年制国际中文教育硕士项目。",
+          "ru": "Двухлетняя магистратура Пекинского педагогического университета по международному преподаванию китайского языка."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-bnu-2026-master-icle"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale",
+        "id": "prog-gap-bnu-2026-master-icle",
+        "slug": "gap-bnu-2026-master-icle-master",
+        "universityId": "uni-beijing-normal-university",
+        "name": {
+          "en": "Master of International Chinese Language Education",
+          "zh": "国际中文教育硕士",
+          "ru": "Магистратура по международному преподаванию китайского языка"
+        },
+        "degreeLevel": "master",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 24,
+        "programUrl": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+        "applyUrl": "https://international.bnu.edu.cn/",
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "41e24e9dc56bd2a7b79a731da368dc89257a6734c008c78ee7d0d8e907e7c45a",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-bnu-2026-master-icle"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-bnu-2026-master-icle",
+            "slug": "gap-bnu-2026-master-icle-master",
+            "universityId": "uni-beijing-normal-university",
+            "name": {
+              "en": "Master of International Chinese Language Education",
+              "zh": "国际中文教育硕士",
+              "ru": "Магистратура по международному преподаванию китайского языка"
+            },
+            "degreeLevel": "master",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 24,
+            "programUrl": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+            "applyUrl": "https://international.bnu.edu.cn/",
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "41e24e9dc56bd2a7b79a731da368dc89257a6734c008c78ee7d0d8e907e7c45a"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-bnu-2026-master-icle",
+            "url": "https://admission-is.bnu.edu.cn/english/international/internationalchinese/index.html",
+            "title": "2026 International Chinese Language Teachers Scholarship",
+            "publisher": "beijing-normal-university",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "2796025d8f1503cc172c8ac2eb775e93c31dc667555002f30e7c48c4387e461b"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-sch-mew-nss-bsu-beijing-government",
+      "collection": "scholarships",
+      "universityId": "uni-beijing-sport-university",
+      "canonicalRecordSha256": "45de10384951374fe4e1ec9ed45c6c2e101827f2c8215b236b3401674391790b",
+      "row": {
+        "id": "sch-gap-sch-mew-nss-bsu-beijing-government",
+        "slug": "gap-sch-mew-nss-bsu-beijing-government",
+        "name": {
+          "en": "Beijing Government Scholarship at BSU",
+          "zh": "北京体育大学北京市外国留学生奖学金",
+          "ru": "Пекинская правительственная стипендия в BSU"
+        },
+        "providerType": "city",
+        "universityIds": [
+          "uni-beijing-sport-university"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://wsc.bsu.edu.cn/jxj/bjszfjxj/17609.htm",
+        "summary": {
+          "en": "The official BSU scholarship page confirms the Beijing Government Scholarship identity; a current application cycle and funding tier were not announced on the accessible page.",
+          "zh": "北京体育大学官方页面确认北京市外国留学生奖学金项目身份；可访问页面未公布当前申请周期和具体资助档位。",
+          "ru": "Официальная страница BSU подтверждает пекинскую правительственную стипендию; текущий цикл и размер финансирования на доступной странице не опубликованы."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-mew-nss-bsu-beijing-government"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-mew-nss-bsu-beijing-government",
+            "url": "https://wsc.bsu.edu.cn/jxj/bjszfjxj/17609.htm",
+            "title": "北京体育大学北京市外国留学生奖学金",
+            "publisher": "beijing-sport-university",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "045b14e7ba33b7cea8ee291e27ea1af412d39699350d9fa5ac4425bb99e75956"
+        }
+      ]
+    },
+    {
+      "recordId": "scholarship-bupt-chinese-government",
+      "collection": "scholarships",
+      "universityId": "uni-beijing-university-of-posts-and-telecommunications",
+      "canonicalRecordSha256": "41305fda1c3155a5a76ddcb6b320d0df8f3f10f95d7b4a159da4da96320dca1e",
+      "row": {
+        "sourceIds": [
+          "src-bupt-chinese-government-scholarship"
+        ],
+        "verifiedAt": "2026-07-28",
+        "reviewAfter": "2026-08-27",
+        "status": "stale",
+        "id": "scholarship-bupt-chinese-government",
+        "slug": "bupt-chinese-government",
+        "name": {
+          "en": "Chinese Government Scholarship at BUPT",
+          "zh": "北京邮电大学中国政府奖学金",
+          "ru": "Стипендия правительства Китая в BUPT"
+        },
+        "providerType": "csc",
+        "universityIds": [
+          "uni-beijing-university-of-posts-and-telecommunications"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://ois.bupt.edu.cn/Scholarships/Chinese_government_scholarship.htm",
+        "summary": {
+          "en": "The official BUPT scholarship portal confirms this application route. The current BUPT-specific deadline and benefit package have not been separately confirmed, so applicants must use the official portal for the active notice.",
+          "zh": "北京邮电大学官方奖学金入口确认了该申请路线；当前校级截止日期和资助方案尚未单独核实，申请人须通过官方入口查看当期通知。",
+          "ru": "Официальный портал BUPT подтверждает этот маршрут подачи. Актуальные университетские сроки и состав финансирования отдельно не подтверждены; следует проверить действующее объявление на официальном портале."
+        }
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-bupt-chinese-government-scholarship",
+            "url": "https://ois.bupt.edu.cn/Scholarships/Chinese_government_scholarship.htm",
+            "title": "Chinese Government Scholarship",
+            "publisher": "Beijing University of Posts and Telecommunications",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-28"
+          },
+          "sha256": "fa79048916436c05b0c3ca5fc10a3bddb1b88a46b32325f48d55d8eb9f918849"
+        }
+      ]
+    }
+  ]
+}

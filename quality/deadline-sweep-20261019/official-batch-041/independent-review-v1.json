@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "reviewId": "independent-official-date-only-041-review-v1",
+  "reviewedAt": "2026-10-19T13:16:30.329Z",
+  "reviewer": "dates_034 independent agent",
+  "result": "source-only-pass",
+  "finalReportSha256": "1836c4128bcf52a2aaa373fe3a78554913d602102d90c2d9106de0ef77cb5888",
+  "sourceReport": {
+    "path": "report.json",
+    "sha256": "1836c4128bcf52a2aaa373fe3a78554913d602102d90c2d9106de0ef77cb5888"
+  },
+  "selection": {
+    "path": "selection.json",
+    "sha256": "ae6daa6751396968f1b2c7f5b6d24163f8b2fea8af72593fe748a77d118f3bf8"
+  },
+  "scope": "Offline independent review of seven exact dispatched records at six actual institutions; no extra IDs, network requests or frozen report edits.",
+  "summary": {
+    "recordsReviewed": 7,
+    "baseQueueRecords": 7,
+    "additionalSameSourceRecords": 0,
+    "schoolsReviewed": 6,
+    "admissionCyclesReviewed": 3,
+    "scholarshipsReviewed": 4,
+    "recordResults": {
+      "unknown": 5,
+      "closed": 2
+    },
+    "checksPassed": 13,
+    "checksFailed": 0,
+    "newNetworkRequests": 0,
+    "canonicalWrites": 0,
+    "sharedStateWrites": 0,
+    "gitMutations": 0,
+    "deploymentActions": 0,
+    "allSevenUnpublishedInFrozenSnapshot": true
+  },
+  "checks": [
+    {
+      "name": "final-root-frozen-report-sha-selection-dispatch-and-extension-pins",
+      "result": "passed"
+    },
+    {
+      "name": "all-six-canonical-inputs-and-snapshot-before-after-stable",
+      "result": "passed"
+    },
+    {
+      "name": "seven-exact-base-IDs-no-extension-three-cycles-four-awards-six-actual-schools",
+      "result": "passed"
+    },
+    {
+      "name": "full-canonical-row-parent-linked-program-source-university-and-stored-date-pins",
+      "result": "passed"
+    },
+    {
+      "name": "actual-prior-one-through-thirtynine-report-hashes-and-no-old-record-ID-overlap",
+      "result": "passed"
+    },
+    {
+      "name": "saved-six-originals-raw-length-sha-text-sha-and-reused-BUPT-origin-pins",
+      "result": "passed"
+    },
+    {
+      "name": "all-nested-report-and-render-pins-match",
+      "result": "passed"
+    },
+    {
+      "name": "BTBU-full-web-text-clock-interval-no-origin-bytes-and-three-procedure-stages-kept-distinct",
+      "result": "passed"
+    },
+    {
+      "name": "BJUT-exact2026-Chinese-mechanical-bachelor-final-applicant-round-May31",
+      "result": "passed"
+    },
+    {
+      "name": "five-unknown-retain-null-no-relative-year-expansion-or-independent-award-borrowing",
+      "result": "passed"
+    },
+    {
+      "name": "relevant-PDF-date-and-programme-pages-independently-visually-inspected",
+      "result": "passed"
+    },
+    {
+      "name": "all-seven-unpublished-candidate-only-no-canonical-freshness-status-or-publishing-mutation",
+      "result": "passed"
+    },
+    {
+      "name": "final-report-and-six-inputs-stable-after-independent-review",
+      "result": "passed"
+    }
+  ],
+  "visualEvidenceIndependentlyRead": [
+    "bjut-page-1.png",
+    "bjut-page-2.png",
+    "bjut-page-5.png",
+    "bupt-date-page10.png",
+    "bupt-page-6.png",
+    "bsu-page-1.png",
+    "bsu-page-4.png",
+    "bwu-rule-page-1.png",
+    "bwu-rule-page-2.png"
+  ],
+  "limitations": [
+    "This pass certifies saved date-only source observations. The two closed results remain candidate-only and canonical null dates are unchanged.",
+    "BTBU date evidence is a complete official web-tool text with its SHA and real clock-bracketed interval, without origin bytes. Row observedAt/nativeFailureObservedAt refer to the failed native capture; the actual web evidence has the separately preserved13:06:04–13:06:07UTC interval.",
+    "BTBU initial applicant boundary remains strictly before February28. March10 university review and March15 nominated-candidate CSC submission are distinct later stages.",
+    "BUPT archived original retains its old observedAt and counts as zero new GETs; relative-year endpoints remain unresolved.",
+    "Five unknown records do not prove availability. Zero-row BNU and the shared Beijing provincial award assigned to040 are not counted. No full-school or non-date facts are certified."
+  ]
+}

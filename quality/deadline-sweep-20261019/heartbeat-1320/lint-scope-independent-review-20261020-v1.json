@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-20T08:31:04.999Z",
+  "reviewer": "dates_034-independent",
+  "result": "pass",
+  "reviewType": "offline-read-only-eslint-archive-scope",
+  "canonicalRoot": "C:\\Users\\Henry\\Desktop\\学过的课程\\github_profile_work\\StudyInChina",
+  "pinnedCommit": "2260e61a23fbd9f67c4218a1b10974306a91dab1",
+  "eslintConfigSha256": "9b84cb19bae4160d6b432ebf108587607a318ac3e50cfd369c2acc0cb93a097c",
+  "filePins": [
+    {
+      "sha256": "9b84cb19bae4160d6b432ebf108587607a318ac3e50cfd369c2acc0cb93a097c",
+      "path": "eslint.config.mjs"
+    },
+    {
+      "sha256": "62e5b73eb28d94619f18557ffa4fb8994aee7b08c15b215cb1398829ae05d775",
+      "path": "vitest.config.mts"
+    },
+    {
+      "sha256": "025841e1a3b2279972b744e83a49c6bb979698500ab925fb9555b3b1b8d86aca",
+      "path": "package.json"
+    },
+    {
+      "sha256": "2e66ab5086a2e2cbb197a6f277210abd33fd4c77e85f563d6d0d62e3a3764834",
+      "path": ".github/workflows/ci.yml"
+    }
+  ],
+  "checks": [
+    {
+      "name": "only-archive-global-ignore-added",
+      "result": "passed",
+      "details": "The reviewed diff adds only quality/deadline-sweep-20261019/** plus its explanatory comments inside the existing globalIgnores array."
+    },
+    {
+      "name": "maintainable-source-and-tests-remain-in-lint-scope",
+      "result": "passed",
+      "details": "The anchored archive glob does not cover scripts/quality, src, tests, workers, or other quality directories."
+    },
+    {
+      "name": "matches-pinned-commit",
+      "result": "passed",
+      "details": "Read-only git diff --quiet against 2260e61a23fbd9f67c4218a1b10974306a91dab1 passed for eslint.config.mjs, vitest.config.mts, package.json and .github/workflows/ci.yml."
+    },
+    {
+      "name": "coverage-and-test-configuration-unchanged",
+      "result": "passed",
+      "details": "vitest.config.mts and package.json had no diff; the strict program-coverage command remains --mode strict --minimum 1. No test include or coverage setting was changed."
+    },
+    {
+      "name": "ci-steps-and-zero-warning-lint-preserved",
+      "result": "passed",
+      "details": "CI workflow had no diff. Lint remains eslint . --max-warnings=0; typecheck, unit, test:audit, validate:data and strict program coverage remain present."
+    },
+    {
+      "name": "read-only-independent-review-no-test-rerun",
+      "result": "passed",
+      "details": "No canonical, configuration, CI, test, coverage or Git mutation was performed. Existing root verification was not rerun."
+    }
+  ],
+  "summary": {
+    "checksPassed": 6,
+    "checksFailed": 0,
+    "canonicalWrites": 0,
+    "gitMutations": 0,
+    "testsRerun": 0,
+    "coverageConfigurationChanges": 0,
+    "ciStepChanges": 0
+  },
+  "limitations": [
+    "This receipt verifies the configuration scope and unchanged guardrails; it does not replace the root-run lint/typecheck/unit results."
+  ]
+}

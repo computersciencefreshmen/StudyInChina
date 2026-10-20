@@ -1,0 +1,570 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-batch-002",
+  "auditType": "independent-official-date-only-recheck",
+  "completedAt": "2026-10-19T04:33:15.971043+00:00",
+  "today": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "inputSnapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputGeneratedAt": "2026-10-19T04:30:05.644Z",
+  "selection": "Ten schools with explicit unexpired ICLT deadlines, excluding all first10 schools reserved by official-batch-001 owner.",
+  "excludedUniversityIds": [
+    "uni-tongji-university",
+    "uni-nanjing-university-of-information-science-and-technology",
+    "uni-minzu-university-of-china",
+    "uni-fudan-university",
+    "uni-inner-mongolia-university",
+    "uni-soochow-university",
+    "uni-tianjin-university",
+    "uni-changan-university",
+    "uni-guangdong-university-of-foreign-studies",
+    "uni-shenzhen-university"
+  ],
+  "summary": {
+    "schoolsReviewed": 10,
+    "scopedAdmissionCycles": 8,
+    "scopedScholarships": 10,
+    "unchangedSchools": 10,
+    "correctedDeadlineSchools": 0,
+    "closedScopedWindows": 0,
+    "unknownSchools": 0,
+    "blockedSchools": 0,
+    "sourceFailuresPreserved": 1,
+    "sourceFailuresRecoveredViaAlternateOfficialNotice": 1,
+    "deduplicatedCapturedSourceRequests": 11,
+    "canonicalWrites": 0,
+    "gitMutations": 0,
+    "deploymentMutations": 0,
+    "paidCalls": 0,
+    "newVerifiedRecords": 0
+  },
+  "rules": [
+    "Unchanged means the selected deadline matches its official full notice; it does not approve a whole record or entire school.",
+    "No absence of discontinuation is inferred. A missing source or closed intake does not mean a programme has ceased.",
+    "Official date rechecks do not renew fact verification or review dates and do not publish stale/held records.",
+    "Application opening and actual portal acceptance are not assessed. Student deadlines are kept separate from institutional review deadlines.",
+    "2026 contextual years and source metadata/wording conflicts remain explicit; unknown dates are never guessed.",
+    "Canonical histories, shared progress, Git and deployments are untouched."
+  ],
+  "rows": [
+    {
+      "universityId": "uni-shanghai-jiao-tong-university",
+      "universityName": "上海交通大学",
+      "outcome": "unchanged",
+      "observedAt": "2026-10-19T04:32:06.879222+00:00",
+      "officialWebsiteRead": true,
+      "scope": "2027-March one-semester International Chinese Language Teachers Scholarship application deadline only",
+      "officialDeadline": "2026-10-31",
+      "deadlineStateOnAuditDate": "not-expired",
+      "applicationsOpenNow": "not-assessed",
+      "noticeTitle": "2026 Application Guide for SJTU International Chinese Language Teachers Scholarship",
+      "noticeYearBasis": "2026 notice and explicit 2026 deadline / March 2027 intake",
+      "source": {
+        "url": "https://en.sjtu.edu.cn/news-events/notice/2477",
+        "finalUrl": "https://en.sjtu.edu.cn/news-events/notice/2477",
+        "httpStatus": 200,
+        "bodyPath": "sjtu-current.html",
+        "bodySha256": "91f0801c97b843c0be3a968d3a3d35f629fdd7c4e3141ac338648a61569cd7d4",
+        "bytes": 160841,
+        "textPath": "sjtu-current.txt"
+      },
+      "dateQuote": "October 31, 2026, for programs starting in March 2027",
+      "quoteNormalization": "Whitespace removed only for substring binding; raw saved text and original bytes preserved.",
+      "records": [
+        {
+          "type": "admissionCycle",
+          "recordId": "cycle-sjtu-iclt-one-semester-spring-2027",
+          "programId": "program-sjtu-iclt-one-semester-spring-2027",
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        },
+        {
+          "type": "scholarship",
+          "recordId": "scholarship-sjtu-iclt-one-semester-spring-2027",
+          "programId": null,
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        }
+      ],
+      "caveats": [
+        "Saved source PDF returned HTTP404. Current full university-hosted English notice proves the same deadline. Candidate source-URL replacement only; no canonical source changed."
+      ],
+      "allSchoolProjectsVerified": false,
+      "allRecordFactsVerified": false,
+      "dateChangeNeeded": false,
+      "mayRenewVerifiedAtOrReviewAfter": false,
+      "mayAutoPublishHeldRecords": false
+    },
+    {
+      "universityId": "uni-dalian-university-of-technology",
+      "universityName": "大连理工大学",
+      "outcome": "unchanged",
+      "observedAt": "2026-10-19T04:31:10.683448+00:00",
+      "officialWebsiteRead": true,
+      "scope": "2027-March one-semester International Chinese Language Teachers Scholarship application deadline only",
+      "officialDeadline": "2026-10-31",
+      "deadlineStateOnAuditDate": "not-expired",
+      "applicationsOpenNow": "not-assessed",
+      "noticeTitle": "Application Guidelines for DUT International Chinese Language Teachers Scholarship 2026",
+      "noticeYearBasis": "2026 scheme; paragraph explicitly scopes this deadline to 2027 March",
+      "source": {
+        "url": "https://sie.dlut.edu.cn/English/Scholarship1/CIS_Scholarship/CIS_Scholarship.htm",
+        "finalUrl": "https://sie.dlut.edu.cn/English/Scholarship1/CIS_Scholarship/CIS_Scholarship.htm",
+        "httpStatus": 200,
+        "bodyPath": "dut.html",
+        "bodySha256": "564d8c31118bbd1eb2304b5fa5b24ac1313ee45df50f82a7cd8a328ac61d2a7e",
+        "bytes": 60563,
+        "textPath": "dut.txt"
+      },
+      "dateQuote": "applicants must complete their applications by October 31",
+      "quoteNormalization": "Whitespace removed only for substring binding; raw saved text and original bytes preserved.",
+      "records": [
+        {
+          "type": "scholarship",
+          "recordId": "sch-gap-sch-mew-nss-dut-iclts",
+          "programId": null,
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        }
+      ],
+      "caveats": [
+        "Student deadline is October31; institutional review November10 is a separate event."
+      ],
+      "allSchoolProjectsVerified": false,
+      "allRecordFactsVerified": false,
+      "dateChangeNeeded": false,
+      "mayRenewVerifiedAtOrReviewAfter": false,
+      "mayAutoPublishHeldRecords": false
+    },
+    {
+      "universityId": "uni-shanghai-normal-university",
+      "universityName": "上海师范大学",
+      "outcome": "unchanged",
+      "observedAt": "2026-10-19T04:31:12.720875+00:00",
+      "officialWebsiteRead": true,
+      "scope": "2027-March one-semester International Chinese Language Teachers Scholarship application deadline only",
+      "officialDeadline": "2026-10-31",
+      "deadlineStateOnAuditDate": "not-expired",
+      "applicationsOpenNow": "not-assessed",
+      "noticeTitle": "2026年上海师范大学国际学生“国际中文教师奖学金”招生简章",
+      "noticeYearBasis": "2026 deadline explicitly printed under March2027 spring category",
+      "source": {
+        "url": "https://iao.shnu.edu.cn/ec/35/c20435a846901/page.htm",
+        "finalUrl": "https://iao.shnu.edu.cn/ec/35/c20435a846901/page.htm",
+        "httpStatus": 200,
+        "bodyPath": "shnu.html",
+        "bodySha256": "bd1a68d8cf07bf4e064203e6028d98046614b8675baffe75fe4b2028ab153436",
+        "bytes": 49930,
+        "textPath": "shnu.txt"
+      },
+      "dateQuote": "申请截止日期： 2026 年 10 月 31 日",
+      "quoteNormalization": "Whitespace removed only for substring binding; raw saved text and original bytes preserved.",
+      "records": [
+        {
+          "type": "admissionCycle",
+          "recordId": "cycle-2027-shnu-iclt-one-semester-spring",
+          "programId": "program-shanghai-normal-university-iclt-one-semester-language",
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        },
+        {
+          "type": "scholarship",
+          "recordId": "scholarship-shanghai-normal-iclt-spring-2027",
+          "programId": null,
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": true,
+          "previousVerificationStatus": "verified",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        }
+      ],
+      "caveats": [],
+      "allSchoolProjectsVerified": false,
+      "allRecordFactsVerified": false,
+      "dateChangeNeeded": false,
+      "mayRenewVerifiedAtOrReviewAfter": false,
+      "mayAutoPublishHeldRecords": false
+    },
+    {
+      "universityId": "uni-beijing-language-and-culture-university",
+      "universityName": "北京语言大学",
+      "outcome": "unchanged",
+      "observedAt": "2026-10-19T04:31:13.162170+00:00",
+      "officialWebsiteRead": true,
+      "scope": "2027-March one-semester International Chinese Language Teachers Scholarship application deadline only",
+      "officialDeadline": "2026-10-31",
+      "deadlineStateOnAuditDate": "not-expired",
+      "applicationsOpenNow": "not-assessed",
+      "noticeTitle": "2026 BLCU International Chinese Language Teachers Scholarship Application Guide",
+      "noticeYearBasis": "Explicit2026 deadline and March2027 intake; embedded text splits 2027 with whitespace",
+      "source": {
+        "url": "https://admission.blcu.edu.cn/en/2026/0303/c1148a3044/page.htm",
+        "finalUrl": "https://admission.blcu.edu.cn/en/2026/0303/c1148a3044/page.htm",
+        "httpStatus": 200,
+        "bodyPath": "blcu.html",
+        "bodySha256": "e4f81b6ecd4a07ba04ac429a79783dd8c8497bcee263b8ebdf1428f5ec687323",
+        "bytes": 171117,
+        "textPath": "blcu.txt"
+      },
+      "dateQuote": "Oct 31, 2026 (for programs commencing in March 202 7 )",
+      "quoteNormalization": "Whitespace removed only for substring binding; raw saved text and original bytes preserved.",
+      "records": [
+        {
+          "type": "admissionCycle",
+          "recordId": "cycle-blcu-iclt-one-semester-spring-2027",
+          "programId": "program-blcu-iclt-one-semester-spring-2027",
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        },
+        {
+          "type": "scholarship",
+          "recordId": "scholarship-blcu-iclt-one-semester-spring-2027",
+          "programId": null,
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": true,
+          "previousVerificationStatus": "verified",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        }
+      ],
+      "caveats": [],
+      "allSchoolProjectsVerified": false,
+      "allRecordFactsVerified": false,
+      "dateChangeNeeded": false,
+      "mayRenewVerifiedAtOrReviewAfter": false,
+      "mayAutoPublishHeldRecords": false
+    },
+    {
+      "universityId": "uni-xiamen-university",
+      "universityName": "厦门大学",
+      "outcome": "unchanged",
+      "observedAt": "2026-10-19T04:31:15.178478+00:00",
+      "officialWebsiteRead": true,
+      "scope": "2027-March one-semester International Chinese Language Teachers Scholarship application deadline only",
+      "officialDeadline": "2026-10-31",
+      "deadlineStateOnAuditDate": "not-expired",
+      "applicationsOpenNow": "not-assessed",
+      "noticeTitle": "International Chinese Language Teachers Scholarship 2026, Xiamen University",
+      "noticeYearBasis": "Explicit2026 deadline in March2027 one-semester paragraph",
+      "source": {
+        "url": "https://admissions.xmu.edu.cn/info/1061/4020.htm",
+        "finalUrl": "https://admissions.xmu.edu.cn/info/1061/4020.htm",
+        "httpStatus": 200,
+        "bodyPath": "xmu.html",
+        "bodySha256": "e499172d0306cca8ca8849826619370143a422525ef0d12ea89bfefb6f18b2aa",
+        "bytes": 53331,
+        "textPath": "xmu.txt"
+      },
+      "dateQuote": "student application must complete before October 31th, 2026",
+      "quoteNormalization": "Whitespace removed only for substring binding; raw saved text and original bytes preserved.",
+      "records": [
+        {
+          "type": "scholarship",
+          "recordId": "scholarship-xmu-iclt-one-semester-spring-2027",
+          "programId": null,
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        }
+      ],
+      "caveats": [
+        "The source says before October31th; exact end-of-day inclusivity is not independently clarified. Preserve wording."
+      ],
+      "allSchoolProjectsVerified": false,
+      "allRecordFactsVerified": false,
+      "dateChangeNeeded": false,
+      "mayRenewVerifiedAtOrReviewAfter": false,
+      "mayAutoPublishHeldRecords": false
+    },
+    {
+      "universityId": "uni-donghua-university",
+      "universityName": "东华大学",
+      "outcome": "unchanged",
+      "observedAt": "2026-10-19T04:31:15.348541+00:00",
+      "officialWebsiteRead": true,
+      "scope": "2027-March one-semester International Chinese Language Teachers Scholarship application deadline only",
+      "officialDeadline": "2026-10-31",
+      "deadlineStateOnAuditDate": "not-expired",
+      "applicationsOpenNow": "not-assessed",
+      "noticeTitle": "Application Guide for International Chinese Language Teachers Scholarship",
+      "noticeYearBasis": "2026 online-registration year plus explicit March2027 intake; deadline year contextually2026",
+      "source": {
+        "url": "https://english.dhu.edu.cn/_t1264/2021/0119/c5221a273256/page.psp",
+        "finalUrl": "https://english.dhu.edu.cn/_t1264/2021/0119/c5221a273256/page.psp",
+        "httpStatus": 200,
+        "bodyPath": "dhu.html",
+        "bodySha256": "865b93cdf0e420968ddcce148e7e3e8fce99f659c722efc15a016baf4581d6e1",
+        "bytes": 37818,
+        "textPath": "dhu.txt"
+      },
+      "dateQuote": "For programs commencing in March 2027, student application must complete before October 31 st",
+      "quoteNormalization": "Whitespace removed only for substring binding; raw saved text and original bytes preserved.",
+      "records": [
+        {
+          "type": "admissionCycle",
+          "recordId": "cycle-dhu-iclt-one-semester-spring-2027",
+          "programId": "program-dhu-iclt-one-semester-spring-2027",
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        },
+        {
+          "type": "scholarship",
+          "recordId": "scholarship-dhu-iclt-one-semester-spring-2027",
+          "programId": null,
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        }
+      ],
+      "caveats": [
+        "Old-looking2021 URL currently contains2026/2027 body; URL path year is not intake evidence.",
+        "The source says before October31st; exact end-of-day inclusivity is not independently clarified. Preserve wording."
+      ],
+      "allSchoolProjectsVerified": false,
+      "allRecordFactsVerified": false,
+      "dateChangeNeeded": false,
+      "mayRenewVerifiedAtOrReviewAfter": false,
+      "mayAutoPublishHeldRecords": false
+    },
+    {
+      "universityId": "uni-xinjiang-university",
+      "universityName": "新疆大学",
+      "outcome": "unchanged",
+      "observedAt": "2026-10-19T04:31:17.394152+00:00",
+      "officialWebsiteRead": true,
+      "scope": "2027-March one-semester International Chinese Language Teachers Scholarship application deadline only",
+      "officialDeadline": "2026-10-31",
+      "deadlineStateOnAuditDate": "not-expired",
+      "applicationsOpenNow": "not-assessed",
+      "noticeTitle": "新疆大学国际中文教师奖学金招生简章（2026年）",
+      "noticeYearBasis": "2026 notice,2026 opening and March2027 intake; deadline year contextually2026",
+      "source": {
+        "url": "https://gjjl.xju.edu.cn/info/1015/2558.htm",
+        "finalUrl": "https://gjjl.xju.edu.cn/info/1015/2558.htm",
+        "httpStatus": 200,
+        "bodyPath": "xju.html",
+        "bodySha256": "09b3cd7f595c389de652b249f97a379be1f95fb324fcff08564376e93db76752",
+        "bytes": 150997,
+        "textPath": "xju.txt"
+      },
+      "dateQuote": "202 7 年3月入学：截止日期为10月31日",
+      "quoteNormalization": "Whitespace removed only for substring binding; raw saved text and original bytes preserved.",
+      "records": [
+        {
+          "type": "admissionCycle",
+          "recordId": "cycle-xju-iclt-one-semester-spring-2027",
+          "programId": "program-xju-iclt-one-semester-spring-2027",
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        },
+        {
+          "type": "scholarship",
+          "recordId": "scholarship-xju-iclt-one-semester-spring-2027",
+          "programId": null,
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        }
+      ],
+      "caveats": [
+        "The school explicitly defers to final CLEC dates. No live applicant account or portal availability was tested."
+      ],
+      "allSchoolProjectsVerified": false,
+      "allRecordFactsVerified": false,
+      "dateChangeNeeded": false,
+      "mayRenewVerifiedAtOrReviewAfter": false,
+      "mayAutoPublishHeldRecords": false
+    },
+    {
+      "universityId": "uni-shaanxi-normal-university",
+      "universityName": "陕西师范大学",
+      "outcome": "unchanged",
+      "observedAt": "2026-10-19T04:31:17.810293+00:00",
+      "officialWebsiteRead": true,
+      "scope": "2027-March one-semester International Chinese Language Teachers Scholarship application deadline only",
+      "officialDeadline": "2026-10-31",
+      "deadlineStateOnAuditDate": "not-expired",
+      "applicationsOpenNow": "not-assessed",
+      "noticeTitle": "国际中文教师奖学金2026年申请办法",
+      "noticeYearBasis": "2026 title / body,March2027 intake; deadline year contextually2026",
+      "source": {
+        "url": "https://study.snnu.edu.cn/info/1066/1238.htm",
+        "finalUrl": "https://study.snnu.edu.cn/info/1066/1238.htm",
+        "httpStatus": 200,
+        "bodyPath": "snnu.html",
+        "bodySha256": "8a97d339e74bc7f582976a0787923bd65112bfe4151e9ff39c6ddd17580a3ed4",
+        "bytes": 22871,
+        "textPath": "snnu.txt"
+      },
+      "dateQuote": "2027年3月入学：学生申请截止日期为10月31日",
+      "quoteNormalization": "Whitespace removed only for substring binding; raw saved text and original bytes preserved.",
+      "records": [
+        {
+          "type": "admissionCycle",
+          "recordId": "cycle-snnu-iclt-one-semester-spring-2027",
+          "programId": "program-snnu-iclt-one-semester-spring-2027",
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        },
+        {
+          "type": "scholarship",
+          "recordId": "scholarship-snnu-iclt-one-semester-spring-2027",
+          "programId": null,
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": true,
+          "previousVerificationStatus": "verified",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        }
+      ],
+      "caveats": [
+        "Page publication metadata says2025-04-15 while title/body describe2026/2027. This conflict remains disclosed; no metadata year is rewritten.",
+        "Students must apply through both systems; November10 is institutional review, not student deadline."
+      ],
+      "allSchoolProjectsVerified": false,
+      "allRecordFactsVerified": false,
+      "dateChangeNeeded": false,
+      "mayRenewVerifiedAtOrReviewAfter": false,
+      "mayAutoPublishHeldRecords": false
+    },
+    {
+      "universityId": "uni-shanghai-university",
+      "universityName": "上海大学",
+      "outcome": "unchanged",
+      "observedAt": "2026-10-19T04:31:19.567489+00:00",
+      "officialWebsiteRead": true,
+      "scope": "2027-March one-semester International Chinese Language Teachers Scholarship application deadline only",
+      "officialDeadline": "2026-10-31",
+      "deadlineStateOnAuditDate": "not-expired",
+      "applicationsOpenNow": "not-assessed",
+      "noticeTitle": "Application Guide for International Chinese Language Teachers Scholarship of Shanghai University2026",
+      "noticeYearBasis": "2026 bilingual guide and explicit March2027 intake; deadline year contextually2026",
+      "source": {
+        "url": "https://apply.shu.edu.cn/upload/shangda/2/c/0/Application%20Guide%20for%20International%20Chinese%20Language%20Teachers%20Scholarship%20of%20Shanghai%20University%202026.pdf",
+        "finalUrl": "https://apply.shu.edu.cn/upload/shangda/2/c/0/Application%20Guide%20for%20International%20Chinese%20Language%20Teachers%20Scholarship%20of%20Shanghai%20University%202026.pdf",
+        "httpStatus": 200,
+        "bodyPath": "shu.pdf",
+        "bodySha256": "cb9703d6835e09db3391b4d8beedb5ab820a8484b9000a3277a48334731951c4",
+        "bytes": 1691575,
+        "textPath": "shu.txt"
+      },
+      "dateQuote": "2027 年 3 月入学：学生申请截止日期为 10 月 31 日",
+      "quoteNormalization": "Whitespace removed only for substring binding; raw saved text and original bytes preserved.",
+      "records": [
+        {
+          "type": "admissionCycle",
+          "recordId": "cycle-shu-iclt-one-semester-spring-2027",
+          "programId": "program-shu-iclt-one-semester-spring-2027",
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        },
+        {
+          "type": "scholarship",
+          "recordId": "scholarship-shu-iclt-one-semester-spring-2027",
+          "programId": null,
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        }
+      ],
+      "caveats": [
+        "Downloaded full13-page official PDF. Deadline row on physical page8 was text-extracted and visually inspected.",
+        "November10 is institutional review, not student deadline."
+      ],
+      "allSchoolProjectsVerified": false,
+      "allRecordFactsVerified": false,
+      "dateChangeNeeded": false,
+      "mayRenewVerifiedAtOrReviewAfter": false,
+      "mayAutoPublishHeldRecords": false
+    },
+    {
+      "universityId": "uni-nankai-university",
+      "universityName": "南开大学",
+      "outcome": "unchanged",
+      "observedAt": "2026-10-19T04:31:20.338102+00:00",
+      "officialWebsiteRead": true,
+      "scope": "2027-March one-semester International Chinese Language Teachers Scholarship application deadline only",
+      "officialDeadline": "2026-10-31",
+      "deadlineStateOnAuditDate": "not-expired",
+      "applicationsOpenNow": "not-assessed",
+      "noticeTitle": "International Chinese Language Teachers Scholarship of Nankai University (2026)",
+      "noticeYearBasis": "Explicit2026 deadline and March2027 deadline-column intake",
+      "source": {
+        "url": "https://ensie.nankai.edu.cn/info/1043/1317.htm",
+        "finalUrl": "https://ensie.nankai.edu.cn/info/1043/1317.htm",
+        "httpStatus": 200,
+        "bodyPath": "nankai.html",
+        "bodySha256": "c5cabf4274f0c565dea463e84107fbf5b9cfe364a942cac18736bcccc39f4096",
+        "bytes": 60647,
+        "textPath": "nankai.txt"
+      },
+      "dateQuote": "October 31, 2026 (March 2027Admission)",
+      "quoteNormalization": "Whitespace removed only for substring binding; raw saved text and original bytes preserved.",
+      "records": [
+        {
+          "type": "admissionCycle",
+          "recordId": "cycle-nankai-iclt-one-semester-spring-2027",
+          "programId": "program-nankai-iclt-one-semester-spring-2027",
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        },
+        {
+          "type": "scholarship",
+          "recordId": "scholarship-nankai-iclt-one-semester-spring-2027",
+          "programId": null,
+          "storedDeadline": "2026-10-31",
+          "publishedInInputSnapshot": false,
+          "previousVerificationStatus": "stale",
+          "outcome": "unchanged",
+          "officialDeadline": "2026-10-31"
+        }
+      ],
+      "caveats": [
+        "Funding-duration cell has a March20267 typographical error; the separate application-deadline cell explicitly says March2027. This source error is retained."
+      ],
+      "allSchoolProjectsVerified": false,
+      "allRecordFactsVerified": false,
+      "dateChangeNeeded": false,
+      "mayRenewVerifiedAtOrReviewAfter": false,
+      "mayAutoPublishHeldRecords": false
+    }
+  ]
+}

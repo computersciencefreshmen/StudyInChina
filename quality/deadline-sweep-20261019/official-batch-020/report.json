@@ -1,0 +1,1441 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-020-20261019",
+  "state": "completed-candidates-with-one-full-source-body-block",
+  "completedAt": "2026-10-19T06:01:31.780Z",
+  "auditDate": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v4.json",
+  "queueSha256": "06b1a66942c4e6866f4ad3c7217eba8bc76ff6ba93aa61ae92d66bade53eaeb7",
+  "selectionSha256": "4bf28ec706ec9dda716a82b85e3afeef2b5b1608aebca9d7c666e3e4767eac7c",
+  "selection": {
+    "baseQueueRecords": 14,
+    "additionalSameSourceRecords": 3,
+    "totalExactRecords": 17,
+    "universityIds": [
+      "uni-guangdong-university-of-technology",
+      "uni-guangxi-medical-university",
+      "uni-guangxi-minzu-university",
+      "uni-guangxi-normal-university",
+      "uni-guangxi-university",
+      "uni-guangxi-university-of-chinese-medicine",
+      "uni-guangzhou-academy-of-fine-arts"
+    ],
+    "baseQueueRecordIds": [
+      "cycle-gdut-chinese-language-training-rolling",
+      "sch-gap-local-gxmu-guangxi-government-asean-scholarship",
+      "sch-gap-local-gxmu-president-freshmen-scholarship",
+      "sch-gap-sch-gxmu-guangxi-asean-2026",
+      "cycle-gap-local-gxmu-b-clinical-medicine-cn-2026-2027-other",
+      "sch-gap-mew-scws-gxmzu-cgs-high-level-postgraduate-2026",
+      "cycle-gap-mew-csw-gxnu-chinese-language-literature-doctorate-2026-2027-autumn-fee-reference",
+      "cycle-gap-sparse-depth-0808-gxu-chinese-language-major-bachelor-2026-2027-other-fee-reference",
+      "cycle-gap-sparse-depth-0808-gxu-chinese-language-student-2026-2027-other-fee-reference",
+      "sch-gap-wave3-gxtcmu-guangxi-asean-full-scholarship",
+      "cycle-gap-wave3-gxtcmu-acupuncture-tuina-bachelor-2026-2027-autumn",
+      "cycle-gap-wave3-gxtcmu-chinese-internal-medicine-master-2026-2027-autumn",
+      "cycle-gap-wave3-gxtcmu-chinese-medicine-bachelor-2026-2027-autumn",
+      "cycle-gap-mve-ecma-gafa-art-studies-doctorate-2026-2027-autumn-fee-reference"
+    ],
+    "additionalSameSourceRecordIds": [
+      "cycle-gap-prog-gxmu-clinical-medicine-mbbs-2026-2026-2027-other",
+      "cycle-gap-local-gxmu-b-stomatology-cn-2026-2027-other",
+      "cycle-gap-wave3-gxtcmu-history-literature-chinese-medicine-doctorate-2026-2027-autumn"
+    ],
+    "additionalRootSelectionPin": {
+      "path": "D:\\学过的课程\\github_profile_work\\StudyInChina\\quality\\deadline-sweep-20261019\\heartbeat-0554\\additional-same-source-selection-v1.json",
+      "sha256": "3ca8778c34230d3882908d7504941f5e2985a7ff9802fabad38fae5c5fe92489"
+    }
+  },
+  "scope": "Seven selected schools. Exact seventeen rows appear once under groups.records. This date-only audit does not certify whole-school catalogues.",
+  "priorReportPins": [
+    {
+      "batch": "official-batch-001",
+      "reportSha256": "851a55ddac8307be9c5c40ecffa68aa0c23deeeac1891c190578d0c153e05cb5"
+    },
+    {
+      "batch": "official-batch-002",
+      "reportSha256": "16eb68262a5eaf46b875725580272a38be89f4cbe543d9e01706a0fa03d80811"
+    },
+    {
+      "batch": "official-batch-003",
+      "reportSha256": "136b820e68d551fbbbc0e4eabfb520ea7f4bdd1f636ba67cf04e473a5ea07bad"
+    },
+    {
+      "batch": "official-batch-004",
+      "reportSha256": "e7ce19e68fded87ac71fc801279204be4066f0eb7ff80691ea847e47f4959043"
+    },
+    {
+      "batch": "official-batch-005",
+      "reportSha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+    },
+    {
+      "batch": "official-batch-006",
+      "reportSha256": "3ad2262bccbd0a20f00b2a2bc8a90abad96827f9b205a5de08c16546099ec0aa"
+    },
+    {
+      "batch": "official-batch-007",
+      "reportSha256": "d3b1aeb2cbff65197b123a26e154dcb3aab936cc320454aa6332d6251a5a4977"
+    },
+    {
+      "batch": "official-batch-008",
+      "reportSha256": "f7b357b769a2af9473b50817799d3843584c8480833909b42b2f14c18a84ae8c"
+    },
+    {
+      "batch": "official-batch-009",
+      "reportSha256": "2d89cc5bcab9a4f94b1f93bb771766e6dc20e8ee98ff91fc2c0533804f697c83"
+    },
+    {
+      "batch": "official-batch-010",
+      "reportSha256": "06abd822cb829cbc97bc5832905259ff91173c1bbf6bf23149b8bd8f366889b1"
+    },
+    {
+      "batch": "official-batch-011",
+      "reportSha256": "043555d7cd896890e89100819ab1020b34e461d299f148d91ddc650dfb90bf6d"
+    },
+    {
+      "batch": "official-batch-012",
+      "reportSha256": "ada983b2997608c749abdc6908a486c5d294e56a2d059309932f403be224ebe2"
+    },
+    {
+      "batch": "official-batch-013",
+      "reportSha256": "48bba3b30989f3ab6fd041a54bd715d780e4d3d819203e0d2fa8180b3b8cdb11"
+    },
+    {
+      "batch": "official-batch-014",
+      "reportSha256": "cc2f8ac9d81c50ab9d62653ce9c2572febbb918036a4c077533fc18f341fbe19"
+    },
+    {
+      "batch": "official-batch-015",
+      "reportSha256": "e778bf45b8af58bca4a0a305898d68af4d142377ab3a6af0adcc993ba24f26a8"
+    },
+    {
+      "batch": "official-batch-016",
+      "reportSha256": "086cdc144cda05c11944db8770692a6aeebd768dd48d108b9d95f2855aef84e8"
+    },
+    {
+      "batch": "official-batch-017",
+      "reportSha256": "43d5e6c10253da9f0fe071b57884abc4d9c8af1b29408bb9e23017a088aa9ff6"
+    },
+    {
+      "batch": "official-batch-018",
+      "reportSha256": "26f4c64c425b1535d1f6386dd5849a30a4734b406ba0bea29ce39a7e88027d17"
+    },
+    {
+      "batch": "official-batch-019",
+      "reportSha256": "d8ee8d11cebaf250dafe6c80cdb4e82362b69cf990de5e9c4cce21146aee6517"
+    }
+  ],
+  "acquisition": {
+    "nativeRequests": 10,
+    "uniqueNativeRequestedUrls": 10,
+    "rawBodiesCaptured": 9,
+    "failedFullPdfRead": 1,
+    "boundedPdfWebFallbacks": 1,
+    "webFallbackDateEvidenceObtained": false,
+    "maxNativeConcurrency": 2,
+    "automaticRetries": 0,
+    "challengeBypasses": 0,
+    "paidModelCalls": 0,
+    "canonicalWrites": 0
+  },
+  "summary": {
+    "schoolsAttempted": 7,
+    "recordsAssessed": 17,
+    "baseQueueRecords": 14,
+    "additionalSameSourceRecords": 3,
+    "admissionCyclesAssessed": 12,
+    "scholarshipsAssessed": 5,
+    "publishedRecordsAssessed": 0,
+    "recordResults": {
+      "unchanged": 0,
+      "corrected": 0,
+      "closed": 11,
+      "unknown": 5,
+      "blocked": 1,
+      "conflict": 0
+    },
+    "newExactDeadlineCandidatesFromCanonicalNull": 4,
+    "alreadyStoredExpiredDatesScoped": 7,
+    "openingDatesAssessed": 0,
+    "fullFactsCertified": 0,
+    "wholeSchoolCataloguesCompleted": 0,
+    "canonicalWrites": 0,
+    "sharedProgressWrites": 0,
+    "gitMutations": 0,
+    "publicationActions": 0,
+    "paidModelCalls": 0
+  },
+  "rules": [
+    "All findings are date-only candidate scopes; canonical date/status/freshness fields remain unchanged.",
+    "Unknown or perennial recruitment does not mean an intake is currently open. No portal acceptance was tested.",
+    "Award and general admission cutoffs remain separate. Before-date and inclusive-date wording is preserved without invented clock times.",
+    "URL path year alone is not guide year: GXTMC actual full body is explicitly 2026, whereas GXNU recurring table has no applicable absolute year.",
+    "A past intake date does not establish programme discontinuation. No closing date is copied from institutional review or visa/document delivery.",
+    "HTTP 200 wrappers and PDF headers do not count as full deadline evidence; GXMZU remains blocked and cooled down."
+  ],
+  "groups": [
+    {
+      "key": "gdut-language-rolling-reference",
+      "universityId": "uni-guangdong-university-of-technology",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Chinese-language training only; existing rolling generic 2026–2027 cycle.",
+      "yearBasis": "Actual notice title says spring 2026 while its later registration paragraph describes August–September 2026 degree entry. Language training has only a perennial rule, no exact intake deadline.",
+      "notes": [
+        "The June 30, 2026 deadline belongs to bachelor/master/doctoral degree applicants, not this language record.",
+        "Perennial recruitment wording is retained as a reference; exact current intake availability and portal acceptance are not verified. No unconditional open classification is asserted."
+      ],
+      "evidence": [
+        {
+          "key": "gdut",
+          "url": "https://iec.gdut.edu.cn/info/1005/5323.htm",
+          "observedAt": "2026-10-19T05:55:59.866136+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://iec.gdut.edu.cn/info/1005/5323.htm",
+          "contentType": "text/html",
+          "bodyPath": "gdut.html",
+          "bytes": 42353,
+          "bodySha256": "73cbbd3bb49e1c047ea9b782682841f485e57d84051c4479d3c1e6c287a11a48",
+          "textPath": "gdut.txt",
+          "textArtifact": {
+            "path": "gdut.txt",
+            "sha256": "92ef4588f5bfb172c1eea7a03f8426bcc1e2bf957165443e0c8eff9713310671",
+            "bytes": 18869
+          }
+        }
+      ],
+      "failureArtifacts": [],
+      "visualEvidence": [],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gdut-chinese-language-training-rolling",
+          "universityId": "uni-guangdong-university-of-technology",
+          "programId": "program-guangdong-university-of-technology-chinese-language-training-one-semester-language",
+          "programmeNameZh": "汉语言培训（一学期）",
+          "degreeLevel": "language",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "selectionScope": "base-queue-14",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-recurring-only",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "86614952b834db79933a53bf39d7f48baf8e92e200153c40e652b01b1c86b6a7",
+          "canonicalCycleSha256": "86614952b834db79933a53bf39d7f48baf8e92e200153c40e652b01b1c86b6a7",
+          "canonicalProgramSha256": "2229fd824194082af719d28bc8cf2d28607f7efcda4798c885568371b56597a0",
+          "sourceIds": [
+            "src-gdut-2026-international-admissions"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gdut-2026-international-admissions",
+              "sourceSha256": "f1ce89ca14d40ad5c0d1633ceada3d7c0e9ccb2f5bdd62a3a9b444a429e496fd",
+              "url": "https://iec.gdut.edu.cn/info/1005/5323.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://iec.gdut.edu.cn/info/1005/5323.htm",
+          "evidenceBodySha256": "73cbbd3bb49e1c047ea9b782682841f485e57d84051c4479d3c1e6c287a11a48",
+          "observedAt": "2026-10-19T05:55:59.866136+00:00",
+          "quote": "2. 汉语言培训生 常年开放招生。",
+          "evidenceLocator": "2026 notice 八、申请、录取和报到时间 / 一、申请时间 item 2.",
+          "scope": "Chinese-language training only; existing rolling generic 2026–2027 cycle.",
+          "yearBasis": "Actual notice title says spring 2026 while its later registration paragraph describes August–September 2026 degree entry. Language training has only a perennial rule, no exact intake deadline.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "rollingRuleObservedWithoutCurrentPortalAcceptance": true
+        }
+      ]
+    },
+    {
+      "key": "gxmu-2026-asean-award",
+      "universityId": "uni-guangxi-medical-university",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Two existing canonical scholarship rows refer to the same named 2026 Guangxi Government ASEAN award at GXMU. Applicant online submission, not general degree admission or later provincial review.",
+      "yearBasis": "2026 award title and literal applicant cutoff year/day; 2027 July HSK completion is a later study requirement, not the application deadline.",
+      "notes": [
+        "Both exact IDs are assessed as records, not two different real-world award rounds. The general brochure only gives March–May recurring context; the dedicated award notice supplies the exact deadline.",
+        "Before-May-10 wording is preserved; no full inclusive May 10 day or clock time is invented. Subsequent school interviews and provincial nomination are not applicant cutoffs."
+      ],
+      "evidence": [
+        {
+          "key": "gxmu-award",
+          "url": "https://gjy.gxmu.edu.cn/cn/zsxc/jxj/t231826.html",
+          "observedAt": "2026-10-19T05:55:59.867147+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://gjy.gxmu.edu.cn/cn/zsxc/jxj/t231826.html",
+          "contentType": "text/html",
+          "bodyPath": "gxmu-award.html",
+          "bytes": 89663,
+          "bodySha256": "ecd5fcd34690b8d7e25e3685bf38c351db80be7f30db9c0277b875bd726cfad9",
+          "textPath": "gxmu-award.txt",
+          "textArtifact": {
+            "path": "gxmu-award.txt",
+            "sha256": "646989744f369d44774df7f768eb41f7da81d31f057fcbde43b4bfae1b555fc8",
+            "bytes": 11561
+          }
+        },
+        {
+          "key": "gxmu-admission",
+          "url": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+          "observedAt": "2026-10-19T05:56:04.439210+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+          "contentType": "text/html",
+          "bodyPath": "gxmu-admission.html",
+          "bytes": 113602,
+          "bodySha256": "8fe09f32b70210fee64ab4f0c9bc982803914adcbd00a31a42ed4136e3b9c138",
+          "textPath": "gxmu-admission.txt",
+          "textArtifact": {
+            "path": "gxmu-admission.txt",
+            "sha256": "8befafb57930dd0f58da9609fb8f8438e0a60e678d70f60fb89fcbb524d4fe8e",
+            "bytes": 14476
+          }
+        }
+      ],
+      "failureArtifacts": [],
+      "visualEvidence": [],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-local-gxmu-guangxi-government-asean-scholarship",
+          "universityId": "uni-guangxi-medical-university",
+          "programId": null,
+          "programmeNameZh": "广西政府东盟国家留学生全额奖学金",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionScope": "base-queue-14",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-10",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "before-date-as-worded",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "a8e6db4860344478b93942b69c0204de7417e3a0e319dada6be532e48d3cf294",
+          "canonicalScholarshipSha256": "a8e6db4860344478b93942b69c0204de7417e3a0e319dada6be532e48d3cf294",
+          "sourceIds": [
+            "src-gap-scholarship-local-gxmu-guangxi-government-asean-scholarship",
+            "src-gap-scholarship-local-gxmu-guangxi-government-asean-scholarship-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-local-gxmu-guangxi-government-asean-scholarship",
+              "sourceSha256": "f5fb055f0a39803006e28e0dc2b08c93c9c03a235645208dc5de3fd9d20182b3",
+              "url": "https://gjy.gxmu.edu.cn/cn/zsxc/jxj/t231826.html",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-scholarship-local-gxmu-guangxi-government-asean-scholarship-support-1",
+              "sourceSha256": "7bc34d1e1ede822011985bb2b9ce3f8edb7b6df15cd1d01715d8b8ebd362c35c",
+              "url": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://gjy.gxmu.edu.cn/cn/zsxc/jxj/t231826.html",
+          "evidenceBodySha256": "ecd5fcd34690b8d7e25e3685bf38c351db80be7f30db9c0277b875bd726cfad9",
+          "observedAt": "2026-10-19T05:55:59.867147+00:00",
+          "quote": "请于2026年5月10日之前提交申请。逾期不再接受申请。",
+          "evidenceLocator": "Actual 2026 Guangxi Government ASEAN scholarship notice 四、申请流程 item (二).",
+          "scope": "Two existing canonical scholarship rows refer to the same named 2026 Guangxi Government ASEAN award at GXMU. Applicant online submission, not general degree admission or later provincial review.",
+          "yearBasis": "2026 award title and literal applicant cutoff year/day; 2027 July HSK completion is a later study requirement, not the application deadline.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        },
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-sch-gxmu-guangxi-asean-2026",
+          "universityId": "uni-guangxi-medical-university",
+          "programId": null,
+          "programmeNameZh": "2026年广西医科大学广西政府东盟国家留学奖学金",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionScope": "base-queue-14",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-10",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "before-date-as-worded",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "fc251ad1770ef513c0e5f43decd3f7584ae88ad24d8d86093167b21d10a4ef07",
+          "canonicalScholarshipSha256": "fc251ad1770ef513c0e5f43decd3f7584ae88ad24d8d86093167b21d10a4ef07",
+          "sourceIds": [
+            "src-gap-scholarship-sch-gxmu-guangxi-asean-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-sch-gxmu-guangxi-asean-2026",
+              "sourceSha256": "98e314faac2e36a715982cbd9478e9d733e1f219143d2032338346dfd2537c4c",
+              "url": "https://gjy.gxmu.edu.cn/cn/zsxc/jxj/t231826.html",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://gjy.gxmu.edu.cn/cn/zsxc/jxj/t231826.html",
+          "evidenceBodySha256": "ecd5fcd34690b8d7e25e3685bf38c351db80be7f30db9c0277b875bd726cfad9",
+          "observedAt": "2026-10-19T05:55:59.867147+00:00",
+          "quote": "请于2026年5月10日之前提交申请。逾期不再接受申请。",
+          "evidenceLocator": "Actual 2026 Guangxi Government ASEAN scholarship notice 四、申请流程 item (二).",
+          "scope": "Two existing canonical scholarship rows refer to the same named 2026 Guangxi Government ASEAN award at GXMU. Applicant online submission, not general degree admission or later provincial review.",
+          "yearBasis": "2026 award title and literal applicant cutoff year/day; 2027 July HSK completion is a later study requirement, not the application deadline.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        }
+      ]
+    },
+    {
+      "key": "gxmu-president-after-enrolment",
+      "universityId": "uni-guangxi-medical-university",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Admitted self-funded undergraduate students after completed registration and payment; automatically included and ranked.",
+      "yearBasis": "No calendar application cutoff is printed for this post-enrolment award.",
+      "notes": [
+        "General August 15 admission date and ASEAN May 10 cutoff are not copied into this award. Registration/payment triggers are not a deadline."
+      ],
+      "evidence": [
+        {
+          "key": "gxmu-admission",
+          "url": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+          "observedAt": "2026-10-19T05:56:04.439210+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+          "contentType": "text/html",
+          "bodyPath": "gxmu-admission.html",
+          "bytes": 113602,
+          "bodySha256": "8fe09f32b70210fee64ab4f0c9bc982803914adcbd00a31a42ed4136e3b9c138",
+          "textPath": "gxmu-admission.txt",
+          "textArtifact": {
+            "path": "gxmu-admission.txt",
+            "sha256": "8befafb57930dd0f58da9609fb8f8438e0a60e678d70f60fb89fcbb524d4fe8e",
+            "bytes": 14476
+          }
+        }
+      ],
+      "failureArtifacts": [],
+      "visualEvidence": [],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-local-gxmu-president-freshmen-scholarship",
+          "universityId": "uni-guangxi-medical-university",
+          "programId": null,
+          "programmeNameZh": "广西医科大学校长新生奖学金",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionScope": "base-queue-14",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-recurring-only",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "1401d89f98c0e6dd150bd2f86763c44656814531afad752fdb867b874857527e",
+          "canonicalScholarshipSha256": "1401d89f98c0e6dd150bd2f86763c44656814531afad752fdb867b874857527e",
+          "sourceIds": [
+            "src-gap-scholarship-local-gxmu-president-freshmen-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-local-gxmu-president-freshmen-scholarship",
+              "sourceSha256": "182e721fe4cd3899080c345e2a572d95bc2c35d1b307e7b8e907c9862e26b6bf",
+              "url": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+          "evidenceBodySha256": "8fe09f32b70210fee64ab4f0c9bc982803914adcbd00a31a42ed4136e3b9c138",
+          "observedAt": "2026-10-19T05:56:04.439210+00:00",
+          "quote": "APPLICATION PERIOD: After enrolling every year",
+          "evidenceLocator": "2026 international undergraduate brochure, scholarship item 3 GXMU PRESIDENT SCHOLARSHIP FOR FRESHMEN.",
+          "scope": "Admitted self-funded undergraduate students after completed registration and payment; automatically included and ranked.",
+          "yearBasis": "No calendar application cutoff is printed for this post-enrolment award.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        }
+      ]
+    },
+    {
+      "key": "gxmu-2026-general-undergraduate",
+      "universityId": "uni-guangxi-medical-university",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "General 2026 fall undergraduate admission for the three exact named/language routes. No universal scholarship deadline is asserted.",
+      "yearBasis": "Body and title explicitly identify 2026 international undergraduate admission and 2026 programme catalogue. Month/day window is in that same year-specific guide; years are contextual rather than repeated beside the range.",
+      "notes": [
+        "All three stored August 15 days are confirmed only for the general undergraduate route. Source opening wording is observed but this run does not certify opening-date equality.",
+        "July 30 CSCA submission and scholarship-specific deadlines are separate requirements; deposit dates in provisional notices are separate stages."
+      ],
+      "evidence": [
+        {
+          "key": "gxmu-admission",
+          "url": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+          "observedAt": "2026-10-19T05:56:04.439210+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+          "contentType": "text/html",
+          "bodyPath": "gxmu-admission.html",
+          "bytes": 113602,
+          "bodySha256": "8fe09f32b70210fee64ab4f0c9bc982803914adcbd00a31a42ed4136e3b9c138",
+          "textPath": "gxmu-admission.txt",
+          "textArtifact": {
+            "path": "gxmu-admission.txt",
+            "sha256": "8befafb57930dd0f58da9609fb8f8438e0a60e678d70f60fb89fcbb524d4fe8e",
+            "bytes": 14476
+          }
+        }
+      ],
+      "failureArtifacts": [],
+      "visualEvidence": [],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-gxmu-b-clinical-medicine-cn-2026-2027-other",
+          "universityId": "uni-guangxi-medical-university",
+          "programId": "prog-gap-local-gxmu-b-clinical-medicine-cn",
+          "programmeNameZh": "临床医学",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "selectionScope": "base-queue-14",
+          "storedDeadline": "2026-08-15",
+          "storedOpensOn": "2026-01-01",
+          "result": "closed",
+          "officialDeadline": "2026-08-15",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "0959b26905630ca694ee7e31b4ca35b355d71f40a322982ba0a986994707b9b8",
+          "canonicalCycleSha256": "0959b26905630ca694ee7e31b4ca35b355d71f40a322982ba0a986994707b9b8",
+          "canonicalProgramSha256": "ea2d435b1622f6d4265281974a1306b804b952d49335dca29b477c0318c6f0a6",
+          "sourceIds": [
+            "src-gap-program-local-gxmu-b-clinical-medicine-cn"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-gxmu-b-clinical-medicine-cn",
+              "sourceSha256": "234f01c95b22e2db56a742f87ad09b693ea8c94ddc26236a850d511ebc0cc4e4",
+              "url": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+          "evidenceBodySha256": "8fe09f32b70210fee64ab4f0c9bc982803914adcbd00a31a42ed4136e3b9c138",
+          "observedAt": "2026-10-19T05:56:04.439210+00:00",
+          "quote": "APPLICATION OPENS: Fall term: Jan 1st to August 15th",
+          "evidenceLocator": "Actual 2026 international undergraduate brochure, IV Application / APPLICATION OPENS; exact Chinese clinical medicine, English MBBS and Stomatology rows in 2026 BACHELORS PROGRAMS CATALOG.",
+          "scope": "General 2026 fall undergraduate admission for the three exact named/language routes. No universal scholarship deadline is asserted.",
+          "yearBasis": "Body and title explicitly identify 2026 international undergraduate admission and 2026 programme catalogue. Month/day window is in that same year-specific guide; years are contextual rather than repeated beside the range.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "storedDayMatchesScopedOfficialDay": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-prog-gxmu-clinical-medicine-mbbs-2026-2026-2027-other",
+          "universityId": "uni-guangxi-medical-university",
+          "programId": "prog-gap-prog-gxmu-clinical-medicine-mbbs-2026",
+          "programmeNameZh": "临床医学（英语授课）",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "selectionScope": "additional-same-source-3",
+          "storedDeadline": "2026-08-15",
+          "storedOpensOn": "2026-01-01",
+          "result": "closed",
+          "officialDeadline": "2026-08-15",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "a5dc51a5c3de2982ecfaa2acda46ae979894897162e1e53a0dc4fc447b90b8bb",
+          "canonicalCycleSha256": "a5dc51a5c3de2982ecfaa2acda46ae979894897162e1e53a0dc4fc447b90b8bb",
+          "canonicalProgramSha256": "36416696aba2dcd3ce45af8f94d59cf210d50b74a2c41e5a71a7e3727422b8a9",
+          "sourceIds": [
+            "src-gap-program-prog-gxmu-clinical-medicine-mbbs-2026",
+            "src-gap-program-prog-gxmu-clinical-medicine-mbbs-2026-support-1"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-prog-gxmu-clinical-medicine-mbbs-2026",
+              "sourceSha256": "9c6cb2f9254bf9a55e892d4b3ff7ca877d27b0af76ac0351e66c1a4f450935c0",
+              "url": "https://gjy.gxmu.edu.cn/cn/zsxc/bkszs/t224266.html",
+              "official": true
+            },
+            {
+              "sourceId": "src-gap-program-prog-gxmu-clinical-medicine-mbbs-2026-support-1",
+              "sourceSha256": "352770efc42762b70db35b85f81aad667a3a62c300e98257e266449b4f0af7f8",
+              "url": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+          "evidenceBodySha256": "8fe09f32b70210fee64ab4f0c9bc982803914adcbd00a31a42ed4136e3b9c138",
+          "observedAt": "2026-10-19T05:56:04.439210+00:00",
+          "quote": "APPLICATION OPENS: Fall term: Jan 1st to August 15th",
+          "evidenceLocator": "Actual 2026 international undergraduate brochure, IV Application / APPLICATION OPENS; exact Chinese clinical medicine, English MBBS and Stomatology rows in 2026 BACHELORS PROGRAMS CATALOG.",
+          "scope": "General 2026 fall undergraduate admission for the three exact named/language routes. No universal scholarship deadline is asserted.",
+          "yearBasis": "Body and title explicitly identify 2026 international undergraduate admission and 2026 programme catalogue. Month/day window is in that same year-specific guide; years are contextual rather than repeated beside the range.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "storedDayMatchesScopedOfficialDay": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-local-gxmu-b-stomatology-cn-2026-2027-other",
+          "universityId": "uni-guangxi-medical-university",
+          "programId": "prog-gap-local-gxmu-b-stomatology-cn",
+          "programmeNameZh": "口腔医学",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "selectionScope": "additional-same-source-3",
+          "storedDeadline": "2026-08-15",
+          "storedOpensOn": "2026-01-01",
+          "result": "closed",
+          "officialDeadline": "2026-08-15",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "336ab8a9d2c74602f34d950fd43b5c44b981f84c640cb4e1c4c6f637c5668ffb",
+          "canonicalCycleSha256": "336ab8a9d2c74602f34d950fd43b5c44b981f84c640cb4e1c4c6f637c5668ffb",
+          "canonicalProgramSha256": "4a0d4f50232359d855d3c550416df09984fbb67daad1d1960fda21fa722f3d13",
+          "sourceIds": [
+            "src-gap-program-local-gxmu-b-stomatology-cn"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-local-gxmu-b-stomatology-cn",
+              "sourceSha256": "ee9aa37d67119ca4746b7fe9e140163aa6273d003265c0a6c8a34cc00992411f",
+              "url": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://gjy.gxmu.edu.cn/en/NN/Notice/t224270.html",
+          "evidenceBodySha256": "8fe09f32b70210fee64ab4f0c9bc982803914adcbd00a31a42ed4136e3b9c138",
+          "observedAt": "2026-10-19T05:56:04.439210+00:00",
+          "quote": "APPLICATION OPENS: Fall term: Jan 1st to August 15th",
+          "evidenceLocator": "Actual 2026 international undergraduate brochure, IV Application / APPLICATION OPENS; exact Chinese clinical medicine, English MBBS and Stomatology rows in 2026 BACHELORS PROGRAMS CATALOG.",
+          "scope": "General 2026 fall undergraduate admission for the three exact named/language routes. No universal scholarship deadline is asserted.",
+          "yearBasis": "Body and title explicitly identify 2026 international undergraduate admission and 2026 programme catalogue. Month/day window is in that same year-specific guide; years are contextual rather than repeated beside the range.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "storedDayMatchesScopedOfficialDay": true
+        }
+      ]
+    },
+    {
+      "key": "gxmzu-full-guide-inaccessible",
+      "universityId": "uni-guangxi-minzu-university",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Exact 2026 CSC high-level postgraduate award; no actual complete notice date body was obtained.",
+      "yearBasis": "2026 titles and catalogue attachment labels alone are not deadline proof.",
+      "notes": [
+        "Wrapper bytes and embedded original PDF URL are retained. HTTP 200 response headers without full bytes are not a successful full-guide read.",
+        "A neighbouring wrapper is discovery evidence only. No date is inferred from publication, attachment name or earlier generic CSC rules. Source is cooled down."
+      ],
+      "evidence": [
+        {
+          "key": "gxmzu",
+          "url": "https://gjjy.gxmzu.edu.cn/info/1036/16150.htm",
+          "observedAt": "2026-10-19T05:56:07.409533+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://gjjy.gxmzu.edu.cn/info/1036/16150.htm",
+          "contentType": "text/html",
+          "bodyPath": "gxmzu.html",
+          "bytes": 17517,
+          "bodySha256": "e435fb6e384023c9ebf81c96706fefbad6ed8e5c75774b88bba8f4aeb235a32c",
+          "textPath": "gxmzu.txt",
+          "textArtifact": {
+            "path": "gxmzu.txt",
+            "sha256": "37947294725f962317df286da1a260c5117ba9bd824209256ce8b336909d00be",
+            "bytes": 1892
+          }
+        },
+        {
+          "key": "gxmzu-full-guide",
+          "url": "https://gjjy.gxmzu.edu.cn/info/1036/16140.htm",
+          "observedAt": "2026-10-19T05:57:34.048313+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://gjjy.gxmzu.edu.cn/info/1036/16140.htm",
+          "contentType": "text/html",
+          "bodyPath": "gxmzu-full-guide.html",
+          "bytes": 17207,
+          "bodySha256": "3d5b6d084ced8b9c486b10f80380f1aef50ceebf1bd0b258674f715cb9e485ca",
+          "textPath": "gxmzu-full-guide.txt",
+          "textArtifact": {
+            "path": "gxmzu-full-guide.txt",
+            "sha256": "974feff119237adfc364b998ad41e1d68199d806d8505b9158d06b018c7952d9",
+            "bytes": 1890
+          }
+        },
+        {
+          "key": "gxmzu-official-guide",
+          "url": "https://gjjy.gxmzu.edu.cn/__local/C/E5/43/9E237CBB8FF64A6489BD8C7D4A4_9A5DEBB9_5A1ABB.pdf",
+          "observedAt": "2026-10-19T05:58:16.901002+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://gjjy.gxmzu.edu.cn/__local/C/E5/43/9E237CBB8FF64A6489BD8C7D4A4_9A5DEBB9_5A1ABB.pdf",
+          "contentType": "application/pdf",
+          "error": "TimeoutError:The read operation timed out",
+          "officialDateVerified": false
+        }
+      ],
+      "failureArtifacts": [
+        {
+          "path": "gxmzu-pdf-web-fallback.json",
+          "sha256": "7459c62ddc5219b1a00cf6714ae5d4c7bce39ba27bf1c22a302be7a7b66a0692",
+          "bytes": 804
+        }
+      ],
+      "visualEvidence": [],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-mew-scws-gxmzu-cgs-high-level-postgraduate-2026",
+          "universityId": "uni-guangxi-minzu-university",
+          "programId": null,
+          "programmeNameZh": "广西民族大学2026年中国政府奖学金高水平研究生项目",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionScope": "base-queue-14",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "blocked",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-recurring-only",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "897d15ec87a468ff102f0890e1928651b2c323ff2d3eb2413852c2e124b565cf",
+          "canonicalScholarshipSha256": "897d15ec87a468ff102f0890e1928651b2c323ff2d3eb2413852c2e124b565cf",
+          "sourceIds": [
+            "src-gap-scholarship-mew-scws-gxmzu-cgs-high-level-postgraduate-2026"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-mew-scws-gxmzu-cgs-high-level-postgraduate-2026",
+              "sourceSha256": "29dae54b77ba324edd6076a83ccfe1bceeadd3ebe7585a91dd64b964e762dbfd",
+              "url": "https://gjjy.gxmzu.edu.cn/info/1036/16150.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://gjjy.gxmzu.edu.cn/info/1036/16150.htm",
+          "evidenceBodySha256": "e435fb6e384023c9ebf81c96706fefbad6ed8e5c75774b88bba8f4aeb235a32c",
+          "observedAt": "2026-10-19T05:56:07.409533+00:00",
+          "quote": null,
+          "evidenceLocator": "Registered English wrapper and adjacent Chinese 2026–2027 wrapper contain embedded PDF scripts. Direct full English PDF body timed out after HTTP 200 headers; one web PDF fallback failed.",
+          "scope": "Exact 2026 CSC high-level postgraduate award; no actual complete notice date body was obtained.",
+          "yearBasis": "2026 titles and catalogue attachment labels alone are not deadline proof.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        }
+      ]
+    },
+    {
+      "key": "gxnu-undated-recurring-doctoral-list",
+      "universityId": "uni-guangxi-normal-university",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Chinese-medium Chinese Language and Literature doctoral programme; recurring June 30 rule.",
+      "yearBasis": "No applicable 2026 intake year is printed in the full two-page list. September and Each Year are recurring labels only.",
+      "notes": [
+        "No 2026 or 2027 deadline is synthesized from the fee-reference record year or download URL. The source is a programme list with a recurring date rule, not a year-specific intake notice."
+      ],
+      "evidence": [
+        {
+          "key": "gxnu",
+          "url": "https://english.gxnu.edu.cn/_upload/article/files/ec/d1/d2f9b3e14879a8ef3e31b282d8eb/4baf4973-bf5f-4483-8c93-8af3e577e881.pdf",
+          "observedAt": "2026-10-19T05:56:09.266323+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://english.gxnu.edu.cn/_upload/article/files/ec/d1/d2f9b3e14879a8ef3e31b282d8eb/4baf4973-bf5f-4483-8c93-8af3e577e881.pdf",
+          "contentType": "application/pdf",
+          "bodyPath": "gxnu.pdf",
+          "bytes": 1582771,
+          "bodySha256": "b13aea7c608ed1db7807bc7cec29b8a1d7175c812440ea8c56a013e619b1c0eb",
+          "textArtifact": {
+            "path": "gxnu.txt",
+            "sha256": "edefda26b13821e1e6a63926620da66d63b65d6a9eb2b146628a025535f6b0b7",
+            "bytes": 2018
+          }
+        }
+      ],
+      "failureArtifacts": [],
+      "visualEvidence": [
+        {
+          "path": "gxnu-rule-page1.png",
+          "sha256": "ae5dde8448947b3c38d8ef94e37ba23b35c9a1ffade23afe389f10088ce1b7cd",
+          "bytes": 228496
+        }
+      ],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mew-csw-gxnu-chinese-language-literature-doctorate-2026-2027-autumn-fee-reference",
+          "universityId": "uni-guangxi-normal-university",
+          "programId": "prog-gap-mew-csw-gxnu-chinese-language-literature-doctorate",
+          "programmeNameZh": "中国语言文学",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionScope": "base-queue-14",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-recurring-only",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "3cef521a312aca97dff2c4a7eea157f1ab7e6b38aa34d94227b81f6642784f47",
+          "canonicalCycleSha256": "3cef521a312aca97dff2c4a7eea157f1ab7e6b38aa34d94227b81f6642784f47",
+          "canonicalProgramSha256": "9a57abdbfe510010391c5d3f56cc8621ca42d643c96dfef1bf5726ebaf2bdf69",
+          "sourceIds": [
+            "src-gap-program-mew-csw-gxnu-chinese-language-literature-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mew-csw-gxnu-chinese-language-literature-doctorate",
+              "sourceSha256": "5d3aaad68b29e00db51038aba43f51ef79a35c8f518c68bf9d522222b1a321e8",
+              "url": "https://english.gxnu.edu.cn/_upload/article/files/ec/d1/d2f9b3e14879a8ef3e31b282d8eb/4baf4973-bf5f-4483-8c93-8af3e577e881.pdf",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://english.gxnu.edu.cn/_upload/article/files/ec/d1/d2f9b3e14879a8ef3e31b282d8eb/4baf4973-bf5f-4483-8c93-8af3e577e881.pdf",
+          "evidenceBodySha256": "b13aea7c608ed1db7807bc7cec29b8a1d7175c812440ea8c56a013e619b1c0eb",
+          "observedAt": "2026-10-19T05:56:09.266323+00:00",
+          "quote": "June 30, Each Year",
+          "evidenceLocator": "Full doctoral programme-list PDF page 1 exact programme row; rendered page visually inspected.",
+          "scope": "Chinese-medium Chinese Language and Literature doctoral programme; recurring June 30 rule.",
+          "yearBasis": "No applicable 2026 intake year is printed in the full two-page list. September and Each Year are recurring labels only.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "candidateRecurringDeadline": {
+            "month": 6,
+            "day": 30,
+            "year": null
+          }
+        }
+      ]
+    },
+    {
+      "key": "gxu-fees-only",
+      "universityId": "uni-guangxi-university",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "Two existing fee-reference records, language degree and non-degree language study.",
+      "yearBasis": "No intake year or application deadline appears in the actual full fee page.",
+      "notes": [
+        "Fee payment amounts/semester units are not application timing. No year or cutoff is derived from these categories."
+      ],
+      "evidence": [
+        {
+          "key": "gxu",
+          "url": "https://gjxy.gxu.edu.cn/LXXD/sfbz.htm",
+          "observedAt": "2026-10-19T05:56:11.039406+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://gjxy.gxu.edu.cn/LXXD/sfbz.htm",
+          "contentType": "text/html",
+          "bodyPath": "gxu.html",
+          "bytes": 16467,
+          "bodySha256": "dc29e460a8fabd9182fd7673bf9d554a48e2c557912b2349e021a4cc7cc5195a",
+          "textPath": "gxu.txt",
+          "textArtifact": {
+            "path": "gxu.txt",
+            "sha256": "67ada647d62fc90014780cdc65dda86adfae28f441636a6432b50754018b56df",
+            "bytes": 2756
+          }
+        }
+      ],
+      "failureArtifacts": [],
+      "visualEvidence": [],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-sparse-depth-0808-gxu-chinese-language-major-bachelor-2026-2027-other-fee-reference",
+          "universityId": "uni-guangxi-university",
+          "programId": "prog-gap-sparse-depth-0808-gxu-chinese-language-major-bachelor",
+          "programmeNameZh": "汉语言专业",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "selectionScope": "base-queue-14",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-recurring-only",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "58c75790a889c994365c74b91cb9f0542c36361be924571c5b778c3ba15f113c",
+          "canonicalCycleSha256": "58c75790a889c994365c74b91cb9f0542c36361be924571c5b778c3ba15f113c",
+          "canonicalProgramSha256": "5b510ded7bd48cf9299048475bbb948b070b2e0c6b050078e99ed498c145b3f1",
+          "sourceIds": [
+            "src-gap-program-sparse-depth-0808-gxu-chinese-language-major-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-sparse-depth-0808-gxu-chinese-language-major-bachelor",
+              "sourceSha256": "cdae5e7a3fbbe99e9e58aa20821d5568d55d5d288e8fde890d360c488a29bb1a",
+              "url": "https://gjxy.gxu.edu.cn/LXXD/sfbz.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://gjxy.gxu.edu.cn/LXXD/sfbz.htm",
+          "evidenceBodySha256": "dc29e460a8fabd9182fd7673bf9d554a48e2c557912b2349e021a4cc7cc5195a",
+          "observedAt": "2026-10-19T05:56:11.039406+00:00",
+          "quote": "收费标准",
+          "evidenceLocator": "Actual fee-standard page: Chinese language student and Chinese language major fee categories.",
+          "scope": "Two existing fee-reference records, language degree and non-degree language study.",
+          "yearBasis": "No intake year or application deadline appears in the actual full fee page.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-sparse-depth-0808-gxu-chinese-language-student-2026-2027-other-fee-reference",
+          "universityId": "uni-guangxi-university",
+          "programId": "prog-gap-sparse-depth-0808-gxu-chinese-language-student",
+          "programmeNameZh": "汉语进修生项目",
+          "degreeLevel": "language",
+          "academicYear": "2026-2027",
+          "intake": "other",
+          "selectionScope": "base-queue-14",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "unknown",
+          "officialDeadline": null,
+          "officialCutoffAt": null,
+          "deadlineBoundary": "unresolved-or-recurring-only",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "3de9f131c313244293dbdef428c728c39d54efdec5d55da8a58fdf3ab5b372c6",
+          "canonicalCycleSha256": "3de9f131c313244293dbdef428c728c39d54efdec5d55da8a58fdf3ab5b372c6",
+          "canonicalProgramSha256": "ec4379de8a1f59dc1ef92f01906184ef663755da651414ab7b52e8423f839280",
+          "sourceIds": [
+            "src-gap-program-sparse-depth-0808-gxu-chinese-language-student"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-sparse-depth-0808-gxu-chinese-language-student",
+              "sourceSha256": "3975391f317c74e5f3c09c708db9fe641860d29757eea70a765863babcee9f52",
+              "url": "https://gjxy.gxu.edu.cn/LXXD/sfbz.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://gjxy.gxu.edu.cn/LXXD/sfbz.htm",
+          "evidenceBodySha256": "dc29e460a8fabd9182fd7673bf9d554a48e2c557912b2349e021a4cc7cc5195a",
+          "observedAt": "2026-10-19T05:56:11.039406+00:00",
+          "quote": "收费标准",
+          "evidenceLocator": "Actual fee-standard page: Chinese language student and Chinese language major fee categories.",
+          "scope": "Two existing fee-reference records, language degree and non-degree language study.",
+          "yearBasis": "No intake year or application deadline appears in the actual full fee page.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        }
+      ]
+    },
+    {
+      "key": "gxtcmu-2026-asean-award-only",
+      "universityId": "uni-guangxi-university-of-chinese-medicine",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "2026 September Guangxi Government ASEAN full-scholarship applicant route only: named award, Chinese Medicine bachelor, Acupuncture/Tuina bachelor, Chinese Internal Medicine master, History/Literature of Chinese Medicine doctorate.",
+      "yearBasis": "Despite 2023 in the URL path, actual title/body, application email subject, literal deadline and September 2026 entry all independently say 2026.",
+      "notes": [
+        "All four degree/Chinese-language programme identities are matched to their exact degree tables; identical major names at other levels are not treated interchangeably.",
+        "The four stored May 25 days are confirmed only within this award route. This is not a general self-funded cutoff. Later school review, provincial approval and July–August admission documents are not application deadlines."
+      ],
+      "evidence": [
+        {
+          "key": "gxtcmu",
+          "url": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+          "observedAt": "2026-10-19T05:56:14.780330+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+          "contentType": "text/html; charset=utf-8",
+          "bodyPath": "gxtcmu.html",
+          "bytes": 197371,
+          "bodySha256": "8f9be21d49be48c2e2f2a9c13097084fbe3b9979a1e38e6b8cb5d63a26d4419d",
+          "textPath": "gxtcmu.txt",
+          "textArtifact": {
+            "path": "gxtcmu.txt",
+            "sha256": "4b550bb98dd4797073371072b89ef082a60fb6a185b4f0f1b8b8f247e7b803e7",
+            "bytes": 15749
+          }
+        }
+      ],
+      "failureArtifacts": [],
+      "visualEvidence": [],
+      "records": [
+        {
+          "collection": "scholarships",
+          "recordId": "sch-gap-wave3-gxtcmu-guangxi-asean-full-scholarship",
+          "universityId": "uni-guangxi-university-of-chinese-medicine",
+          "programId": null,
+          "programmeNameZh": "广西中医药大学广西政府东盟国家留学生全额奖学金",
+          "degreeLevel": null,
+          "academicYear": null,
+          "intake": null,
+          "selectionScope": "base-queue-14",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-25",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "5af2c980b984dcc2f98b02142c10a8ccb4dc32812cbc9c8ab80df1ae5f4fde1a",
+          "canonicalScholarshipSha256": "5af2c980b984dcc2f98b02142c10a8ccb4dc32812cbc9c8ab80df1ae5f4fde1a",
+          "sourceIds": [
+            "src-gap-scholarship-wave3-gxtcmu-guangxi-asean-full-scholarship"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-scholarship-wave3-gxtcmu-guangxi-asean-full-scholarship",
+              "sourceSha256": "35143a2811ab940a9fbe2de92e142961c38bd56867ee27c1271e611e8627549d",
+              "url": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+          "evidenceBodySha256": "8f9be21d49be48c2e2f2a9c13097084fbe3b9979a1e38e6b8cb5d63a26d4419d",
+          "observedAt": "2026-10-19T05:56:14.780330+00:00",
+          "quote": "申请截止时间为2026年5月25日。",
+          "evidenceLocator": "Actual bilingual 2026 ASEAN full-scholarship guide section 6; exact bachelor/master/doctoral programme tables in 3.1/3.2/3.3.",
+          "scope": "2026 September Guangxi Government ASEAN full-scholarship applicant route only: named award, Chinese Medicine bachelor, Acupuncture/Tuina bachelor, Chinese Internal Medicine master, History/Literature of Chinese Medicine doctorate.",
+          "yearBasis": "Despite 2023 in the URL path, actual title/body, application email subject, literal deadline and September 2026 entry all independently say 2026.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "applicationRoute": "2026 Guangxi Government ASEAN full scholarship only",
+          "storedDayMatchesScopedOfficialDay": false,
+          "programmeDegreeTable": null
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-gxtcmu-acupuncture-tuina-bachelor-2026-2027-autumn",
+          "universityId": "uni-guangxi-university-of-chinese-medicine",
+          "programId": "prog-gap-wave3-gxtcmu-acupuncture-tuina-bachelor",
+          "programmeNameZh": "针灸推拿学",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionScope": "base-queue-14",
+          "storedDeadline": "2026-05-25",
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-25",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "119d31957dde2652e57980e7e698503781d1eabbaeffadbc93b58f86438fa75d",
+          "canonicalCycleSha256": "119d31957dde2652e57980e7e698503781d1eabbaeffadbc93b58f86438fa75d",
+          "canonicalProgramSha256": "364433c2e70d8140f3c3f4e69a6c4f6a4749a866179821434f2124c34feb95fc",
+          "sourceIds": [
+            "src-gap-program-wave3-gxtcmu-acupuncture-tuina-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-gxtcmu-acupuncture-tuina-bachelor",
+              "sourceSha256": "1cace0ca55c4c7e4e0dfcd45dba678eec50d2656b1d1533464ad80371b006d2d",
+              "url": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+          "evidenceBodySha256": "8f9be21d49be48c2e2f2a9c13097084fbe3b9979a1e38e6b8cb5d63a26d4419d",
+          "observedAt": "2026-10-19T05:56:14.780330+00:00",
+          "quote": "申请截止时间为2026年5月25日。",
+          "evidenceLocator": "Actual bilingual 2026 ASEAN full-scholarship guide section 6; exact bachelor/master/doctoral programme tables in 3.1/3.2/3.3.",
+          "scope": "2026 September Guangxi Government ASEAN full-scholarship applicant route only: named award, Chinese Medicine bachelor, Acupuncture/Tuina bachelor, Chinese Internal Medicine master, History/Literature of Chinese Medicine doctorate.",
+          "yearBasis": "Despite 2023 in the URL path, actual title/body, application email subject, literal deadline and September 2026 entry all independently say 2026.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "applicationRoute": "2026 Guangxi Government ASEAN full scholarship only",
+          "storedDayMatchesScopedOfficialDay": true,
+          "programmeDegreeTable": "3.1"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-gxtcmu-chinese-internal-medicine-master-2026-2027-autumn",
+          "universityId": "uni-guangxi-university-of-chinese-medicine",
+          "programId": "prog-gap-wave3-gxtcmu-chinese-internal-medicine-master",
+          "programmeNameZh": "中医内科学",
+          "degreeLevel": "master",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionScope": "base-queue-14",
+          "storedDeadline": "2026-05-25",
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-25",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "b220f5e6d64e289834852b060557db6572f546f20ab42b5914d898a7c58c9056",
+          "canonicalCycleSha256": "b220f5e6d64e289834852b060557db6572f546f20ab42b5914d898a7c58c9056",
+          "canonicalProgramSha256": "50e33eb91effe96564bba1664a6045bf1f851400d15850ac7419a539699e8fe8",
+          "sourceIds": [
+            "src-gap-program-wave3-gxtcmu-chinese-internal-medicine-master"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-gxtcmu-chinese-internal-medicine-master",
+              "sourceSha256": "7cd1761036d4d52203143cf1911f8e128e118682a85313ba0036319fe3f50aaa",
+              "url": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+          "evidenceBodySha256": "8f9be21d49be48c2e2f2a9c13097084fbe3b9979a1e38e6b8cb5d63a26d4419d",
+          "observedAt": "2026-10-19T05:56:14.780330+00:00",
+          "quote": "申请截止时间为2026年5月25日。",
+          "evidenceLocator": "Actual bilingual 2026 ASEAN full-scholarship guide section 6; exact bachelor/master/doctoral programme tables in 3.1/3.2/3.3.",
+          "scope": "2026 September Guangxi Government ASEAN full-scholarship applicant route only: named award, Chinese Medicine bachelor, Acupuncture/Tuina bachelor, Chinese Internal Medicine master, History/Literature of Chinese Medicine doctorate.",
+          "yearBasis": "Despite 2023 in the URL path, actual title/body, application email subject, literal deadline and September 2026 entry all independently say 2026.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "applicationRoute": "2026 Guangxi Government ASEAN full scholarship only",
+          "storedDayMatchesScopedOfficialDay": true,
+          "programmeDegreeTable": "3.2"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-gxtcmu-chinese-medicine-bachelor-2026-2027-autumn",
+          "universityId": "uni-guangxi-university-of-chinese-medicine",
+          "programId": "prog-gap-wave3-gxtcmu-chinese-medicine-bachelor",
+          "programmeNameZh": "中医学",
+          "degreeLevel": "bachelor",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionScope": "base-queue-14",
+          "storedDeadline": "2026-05-25",
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-25",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "7fec105f8b88d786b10f51bb633d237176a08b1f57fb77f8c13a1fda8ad510a7",
+          "canonicalCycleSha256": "7fec105f8b88d786b10f51bb633d237176a08b1f57fb77f8c13a1fda8ad510a7",
+          "canonicalProgramSha256": "a7e625c8f11b9f9c9718d2d70d6566e929959f5c5aa12f61e93cbf7c868889b5",
+          "sourceIds": [
+            "src-gap-program-wave3-gxtcmu-chinese-medicine-bachelor"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-gxtcmu-chinese-medicine-bachelor",
+              "sourceSha256": "e83eebfa63e964ec51b1cabe894e879478726d2c7bfb8f276123f30b4c168337",
+              "url": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+          "evidenceBodySha256": "8f9be21d49be48c2e2f2a9c13097084fbe3b9979a1e38e6b8cb5d63a26d4419d",
+          "observedAt": "2026-10-19T05:56:14.780330+00:00",
+          "quote": "申请截止时间为2026年5月25日。",
+          "evidenceLocator": "Actual bilingual 2026 ASEAN full-scholarship guide section 6; exact bachelor/master/doctoral programme tables in 3.1/3.2/3.3.",
+          "scope": "2026 September Guangxi Government ASEAN full-scholarship applicant route only: named award, Chinese Medicine bachelor, Acupuncture/Tuina bachelor, Chinese Internal Medicine master, History/Literature of Chinese Medicine doctorate.",
+          "yearBasis": "Despite 2023 in the URL path, actual title/body, application email subject, literal deadline and September 2026 entry all independently say 2026.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "applicationRoute": "2026 Guangxi Government ASEAN full scholarship only",
+          "storedDayMatchesScopedOfficialDay": true,
+          "programmeDegreeTable": "3.1"
+        },
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-wave3-gxtcmu-history-literature-chinese-medicine-doctorate-2026-2027-autumn",
+          "universityId": "uni-guangxi-university-of-chinese-medicine",
+          "programId": "prog-gap-wave3-gxtcmu-history-literature-chinese-medicine-doctorate",
+          "programmeNameZh": "中医医史文献",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionScope": "additional-same-source-3",
+          "storedDeadline": "2026-05-25",
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-05-25",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "date-only-no-time-stated",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "de82371f8a18a85a05dd8c14fbfadd1d9e45918afe9fe1655795b64694b944ef",
+          "canonicalCycleSha256": "de82371f8a18a85a05dd8c14fbfadd1d9e45918afe9fe1655795b64694b944ef",
+          "canonicalProgramSha256": "1891b6d06e5b0f18a958af2c912ed03a2ef258a95b6dd88e99ac6fba8e47ff21",
+          "sourceIds": [
+            "src-gap-program-wave3-gxtcmu-history-literature-chinese-medicine-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-wave3-gxtcmu-history-literature-chinese-medicine-doctorate",
+              "sourceSha256": "9ef34e3cf9e14f750f19b5acdf47c869823d00aa3e39e38197752430b3094a48",
+              "url": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://www.gxtcmu.edu.cn/fie/zsjz/gxzyydx2023nlxszsjz/content_85510",
+          "evidenceBodySha256": "8f9be21d49be48c2e2f2a9c13097084fbe3b9979a1e38e6b8cb5d63a26d4419d",
+          "observedAt": "2026-10-19T05:56:14.780330+00:00",
+          "quote": "申请截止时间为2026年5月25日。",
+          "evidenceLocator": "Actual bilingual 2026 ASEAN full-scholarship guide section 6; exact bachelor/master/doctoral programme tables in 3.1/3.2/3.3.",
+          "scope": "2026 September Guangxi Government ASEAN full-scholarship applicant route only: named award, Chinese Medicine bachelor, Acupuncture/Tuina bachelor, Chinese Internal Medicine master, History/Literature of Chinese Medicine doctorate.",
+          "yearBasis": "Despite 2023 in the URL path, actual title/body, application email subject, literal deadline and September 2026 entry all independently say 2026.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true,
+          "applicationRoute": "2026 Guangxi Government ASEAN full scholarship only",
+          "storedDayMatchesScopedOfficialDay": true,
+          "programmeDegreeTable": "3.3"
+        }
+      ]
+    },
+    {
+      "key": "gafa-2026-art-studies-doctoral",
+      "universityId": "uni-guangzhou-academy-of-fine-arts",
+      "dateOnly": true,
+      "fullFactsCertified": false,
+      "allSchoolProjectsVerified": false,
+      "scope": "2026 international Chinese-taught Art Studies doctoral application by email.",
+      "yearBasis": "Year-specific guide and explicit 2026 applicant cutoff; Art Studies is named in the same doctoral call.",
+      "notes": [
+        "Opening says from guide publication; no numeric opening or exact closing time is invented. Passport validity, qualification completion and September registration are not deadlines."
+      ],
+      "evidence": [
+        {
+          "key": "gafa",
+          "url": "https://wsc.gzarts.edu.cn/info/1497/3972.htm",
+          "observedAt": "2026-10-19T05:56:20.347673+00:00",
+          "method": "GET",
+          "httpStatus": 200,
+          "finalUrl": "https://wsc.gzarts.edu.cn/info/1497/3972.htm",
+          "contentType": "text/html",
+          "bodyPath": "gafa.html",
+          "bytes": 82461,
+          "bodySha256": "fb53843558de0321a1949abb454391ec2e60b1d106548a9511dfb7ed6cf46eca",
+          "textPath": "gafa.txt",
+          "textArtifact": {
+            "path": "gafa.txt",
+            "sha256": "7fc89de81d1617329d386e9adfd66a67bbedf95fec4c56df42cdc01a8efa4afb",
+            "bytes": 11347
+          }
+        }
+      ],
+      "failureArtifacts": [],
+      "visualEvidence": [],
+      "records": [
+        {
+          "collection": "admissionCycles",
+          "recordId": "cycle-gap-mve-ecma-gafa-art-studies-doctorate-2026-2027-autumn-fee-reference",
+          "universityId": "uni-guangzhou-academy-of-fine-arts",
+          "programId": "prog-gap-mve-ecma-gafa-art-studies-doctorate",
+          "programmeNameZh": "艺术学",
+          "degreeLevel": "doctorate",
+          "academicYear": "2026-2027",
+          "intake": "autumn",
+          "selectionScope": "base-queue-14",
+          "storedDeadline": null,
+          "storedOpensOn": null,
+          "result": "closed",
+          "officialDeadline": "2026-04-17",
+          "officialCutoffAt": null,
+          "deadlineBoundary": "inclusive-date-as-worded",
+          "officialOpensOn": null,
+          "openingDateAssessed": false,
+          "candidateOnly": true,
+          "publishedInInputSnapshot": false,
+          "canonicalDateChanged": false,
+          "freshnessRenewed": false,
+          "canonicalWritePerformed": false,
+          "canonicalRecordSha256": "fbf93f61e7b0679a215966a211ec4e4f49b4308d9b3262a0ae48a1b10ce39a66",
+          "canonicalCycleSha256": "fbf93f61e7b0679a215966a211ec4e4f49b4308d9b3262a0ae48a1b10ce39a66",
+          "canonicalProgramSha256": "724e69bbb4301704551b7a080ef1e3340f96346bb1ea31641f3841de390eb884",
+          "sourceIds": [
+            "src-gap-program-mve-ecma-gafa-art-studies-doctorate"
+          ],
+          "sourcePins": [
+            {
+              "sourceId": "src-gap-program-mve-ecma-gafa-art-studies-doctorate",
+              "sourceSha256": "cb27b698da554e760160dedd26cc51083175e69ff1b35ad764e9b8f4702b2873",
+              "url": "https://wsc.gzarts.edu.cn/info/1497/3972.htm",
+              "official": true
+            }
+          ],
+          "evidenceSourceUrl": "https://wsc.gzarts.edu.cn/info/1497/3972.htm",
+          "evidenceBodySha256": "fb53843558de0321a1949abb454391ec2e60b1d106548a9511dfb7ed6cf46eca",
+          "observedAt": "2026-10-19T05:56:20.347673+00:00",
+          "quote": "申请时间：自简章发布之日起，截至2026年4月17日（含当天）。",
+          "evidenceLocator": "Actual 2026 international doctoral guide 五、申请方式 item 1; body names Art Studies and states full-time Chinese-medium 2026 doctoral admission.",
+          "scope": "2026 international Chinese-taught Art Studies doctoral application by email.",
+          "yearBasis": "Year-specific guide and explicit 2026 applicant cutoff; Art Studies is named in the same doctoral call.",
+          "dateOnly": true,
+          "fullFactsCertified": false,
+          "programmeDiscontinuedConfirmed": false,
+          "requiresIndependentReviewAndCasBeforeCanonicalChange": true
+        }
+      ]
+    }
+  ]
+}

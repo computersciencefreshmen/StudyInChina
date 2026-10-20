@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-029-20261019",
+  "reviewedAt": "2026-10-19T11:51:53.614Z",
+  "reviewer": "independent-agent-dates028",
+  "result": "source-only-pass",
+  "sourceReport": "quality/deadline-sweep-20261019/official-batch-029/report.json",
+  "sourceReportSha256": "6fa308e70e7e0ad0a0436ed5103eb067928fc9494ba1e977fdaba85cdd3d2243",
+  "finalReportPinned": true,
+  "inputSnapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "summary": {
+    "checksPassed": 15,
+    "checksFailed": 0,
+    "recordChecksPassed": 21,
+    "recordChecksFailed": 0,
+    "recordsAssessed": 21,
+    "recordResults": {
+      "blocked": 4,
+      "closed": 14,
+      "unknown": 3
+    }
+  },
+  "checks": [
+    {
+      "id": "frozen-report-identity",
+      "pass": true,
+      "note": "Exact final report bytes and selected input are pinned; reviewed report was not rewritten."
+    },
+    {
+      "id": "six-live-canonical-hashes",
+      "pass": true,
+      "note": "All six current canonical inputs match the immutable snapshot."
+    },
+    {
+      "id": "inventory-queue-summary-pins",
+      "pass": true,
+      "note": "Queue v7 school indices6–11, inventory and summary v9 match."
+    },
+    {
+      "id": "exact-base-extra-set",
+      "pass": true,
+      "note": "17 queue IDs plus four explicitly selected same-source NWUPL IDs occur exactly once."
+    },
+    {
+      "id": "no-prior-or-peer-replay",
+      "pass": true,
+      "note": "No overlap with assessed/prior-approved IDs or batch028; all27 frozen prior reports still match."
+    },
+    {
+      "id": "original-and-text-byte-integrity",
+      "pass": true,
+      "note": "Eight saved original bodies, extracted text and capture/fallback/denial receipts match their pins and observation times."
+    },
+    {
+      "id": "all-record-row-parent-source-and-date-bindings",
+      "pass": true,
+      "note": "Every record matches complete canonical row, programme parent/linked rows, official source hashes, stored dates and saved observation identity; every closed quote matches saved body text."
+    },
+    {
+      "id": "ncut-access-hold",
+      "pass": true,
+      "note": "Native404 plus one failed fallback supports only four blocked outcomes, with cooldown."
+    },
+    {
+      "id": "neau-2026-funding-majors-and-stage",
+      "pass": true,
+      "note": "2026 TypeB HTML supplies four matched outcomes; visual inspection confirms the supporting PDF is an unrelated2025 bachelor-award list, explicitly excluded."
+    },
+    {
+      "id": "neepu-successor-held-without-invented-old-year",
+      "pass": true,
+      "note": "2027-06-01 is separately held on a generic award identity; no invented original2026 cohort or current-open assertion."
+    },
+    {
+      "id": "nefu-no-year-rollover",
+      "pass": true,
+      "note": "Unanchored April30 policy remains unknown rather than an invented2026 date."
+    },
+    {
+      "id": "nenu-distinct-host-central-review-stages",
+      "pass": true,
+      "note": "Three September2026 ICLTS bindings preserve strict-before host April30, central applicant May15 and institutional review May25 as separate stages."
+    },
+    {
+      "id": "nwupl-municipal-concurrency-and-separate-university-award",
+      "pass": true,
+      "note": "Five2026 programme routes plus two explicitly concurrent named municipal awards support June20; university award remains unknown with conflicting stage rules preserved."
+    },
+    {
+      "id": "summary-and-source-only-boundaries",
+      "pass": true,
+      "note": "21 records =14 past/3unknown/4blocked;13cycles/8awards; all publication/canonical/freshness actions remain zero."
+    },
+    {
+      "id": "frozen-report-and-canonical-postcheck",
+      "pass": true,
+      "note": "Review performed no report/canonical writes and no network reads."
+    }
+  ],
+  "recordChecks": [
+    {
+      "recordId": "sch-gap-breadth-sch-ncut-beijing-government",
+      "pass": true,
+      "result": "blocked"
+    },
+    {
+      "recordId": "cycle-gap-breadth-ncut-b-electronic-information-engineering-en-2026-2027-other",
+      "pass": true,
+      "result": "blocked"
+    },
+    {
+      "recordId": "cycle-gap-breadth-ncut-b-mechatronics-engineering-en-2026-2027-other",
+      "pass": true,
+      "result": "blocked"
+    },
+    {
+      "recordId": "cycle-gap-local-strong-ncut-b-architecture-en-2026-2027-other",
+      "pass": true,
+      "result": "blocked"
+    },
+    {
+      "recordId": "sch-gap-sch-mew-ne-neau-csc-high-level-postgraduate",
+      "pass": true,
+      "result": "closed"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-ne-neau-animal-husbandry-doctorate-2026-2027-autumn",
+      "pass": true,
+      "result": "closed"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-ne-neau-food-science-doctorate-2026-2027-autumn",
+      "pass": true,
+      "result": "closed"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-ne-neau-international-chinese-education-master-2026-2027-autumn",
+      "pass": true,
+      "result": "closed"
+    },
+    {
+      "recordId": "sch-gap-sch-mew-nnw-neepu-changbaishan",
+      "pass": true,
+      "result": "unknown"
+    },
+    {
+      "recordId": "sch-gap-sch-mew-ne-nefu-president",
+      "pass": true,
+      "result": "unknown"
+    },
+    {
+      "recordId": "sch-gap-nenu-2026-iclts-bachelor-language-coverage",
+      "pass": true,
+      "result": "closed"
+    },
+    {
+      "recordId": "cycle-gap-nenu-2026-bachelor-tcsol-2026-2027-autumn",
+      "pass": true,
+      "result": "closed"
+    },
+    {
+      "recordId": "cycle-gap-nenu-2026-one-year-chinese-literature-2026-2027-autumn",
+      "pass": true,
+      "result": "closed"
+    },
+    {
+      "recordId": "sch-gap-sch-mew-nnw-nwupl-central-asian-five-countries",
+      "pass": true,
+      "result": "closed"
+    },
+    {
+      "recordId": "sch-gap-sch-mew-nnw-nwupl-xian-belt-road",
+      "pass": true,
+      "result": "closed"
+    },
+    {
+      "recordId": "sch-gap-wave8-2-nwupl-belt-road-scholarship",
+      "pass": true,
+      "result": "unknown"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nnw-nwupl-chinese-language-2026-2027-autumn-fee-reference",
+      "pass": true,
+      "result": "closed"
+    },
+    {
+      "recordId": "cycle-gap-wave8-2-nwupl-cross-border-ecommerce-bachelor-2026-2027-autumn",
+      "pass": true,
+      "result": "closed"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nnw-nwupl-law-master-2026-2027-autumn-fee-reference",
+      "pass": true,
+      "result": "closed"
+    },
+    {
+      "recordId": "cycle-gap-prog-mew-nnw-nwupl-law-doctorate-2026-2027-autumn-fee-reference",
+      "pass": true,
+      "result": "closed"
+    },
+    {
+      "recordId": "cycle-gap-wave8-2-nwupl-law-bachelor-2026-2027-autumn",
+      "pass": true,
+      "result": "closed"
+    }
+  ],
+  "evidencePins": [
+    {
+      "path": "selection.json",
+      "sha256": "7037d32b77e95e18c72cfa936d7d219e5075ca5fb1640f67fa9a116883d27fb2"
+    },
+    {
+      "path": "captures.json",
+      "sha256": "1dd4cd8e415f0456a9164631e1a76f798cb74bad2367c8841e6082ce9de616aa"
+    },
+    {
+      "path": "pdf-extraction.json",
+      "sha256": "a08a9f5cd241624a01c1f8a8770486c3c0b827a42a27eba065c9b289c4a1c1aa"
+    },
+    {
+      "path": "ncut-web-fallback.json",
+      "sha256": "c37220bf54392b77ea9beddb695b70bb73664422555d7f48294e29da827a07f8"
+    },
+    {
+      "path": "source-03-page1.png",
+      "sha256": "71e9c2230c22e8d60ad14609b13a5130cac9eef120b36d4878a18bfd6c421d47"
+    }
+  ],
+  "scope": "Only date/source/identity evidence is accepted; no approval for canonical promotion, whole-record freshness, full-school completeness, publication or paid work.",
+  "retainedLimitations": [
+    "NCUT remains blocked after finite404/fallback-timeout attempts.",
+    "NEEPU2027 is a held successor observation on an unanchored standing award; old-year membership is not invented.",
+    "NEFU has no explicit year.",
+    "NENU school/central/review stages and NWUPL until/before wording remain explicit.",
+    "NWUPL institutional award has distinct stage wording and remains unknown.",
+    "NEAU historical PDF is unrelated; current HTML supplies date and programme proof."
+  ],
+  "reviewWritesCanonical": false,
+  "reviewWritesSourceReport": false,
+  "networkRequestsDuringReview": 0
+}

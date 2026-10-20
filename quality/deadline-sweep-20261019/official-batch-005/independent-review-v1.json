@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent-review-of-TJU244-degree-date-bindings",
+  "reviewedAt": "2026-10-19T04:48:32.389Z",
+  "reviewer": "deployment_audit agent; did not author batch005",
+  "result": "pass",
+  "report": {
+    "path": "quality/deadline-sweep-20261019/official-batch-005/report.json",
+    "sha256": "f114ab23c2bc4564acbe4d01829054d167d4839a00c297070d9801cb2ea50e1f"
+  },
+  "inventory": {
+    "path": "quality/deadline-sweep-20261019/catalog-deadlines.json",
+    "sha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+    "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722"
+  },
+  "guideObservations": {
+    "path": "quality/deadline-sweep-20261019/official-batch-005/guide-observations.json",
+    "sha256": "47e5fa7ee62a094b9f718e3ec45b907bdd1baae314f80171470d0ca2bf306a56"
+  },
+  "currentCanonicalInputHashes": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "verifiedCounts": {
+    "masterCycles": 119,
+    "doctorateCycles": 125,
+    "totalDistinctCurrentPublicCycles": 244,
+    "unchangedOpeningDates": 244,
+    "unchangedDeadlines": 244,
+    "priorBatchDuplicateRecordIds": 0,
+    "scholarshipRecordsCertified": 0,
+    "fullRecordsRecertified": 0,
+    "wholeSchoolCataloguesCertified": 0
+  },
+  "independentOfficialReads": [
+    {
+      "degreeLevel": "master",
+      "url": "https://sie.tju.edu.cn/lxtd/ss/202609/t20260930_324730.html",
+      "readMethod": "Full official guide web text reopened independently during this review; not a raw origin-byte capture.",
+      "dateLocator": "二、申请办法 / 申请时间",
+      "dateExcerpt": "202 6年9月30日至202 7年5月31日",
+      "conclusion": "General application window matches. The same paragraph requires CSC TypeB applicants to await the2027 scholarship notice; TypeA embassy and TypeB annual-notice dates remain separate."
+    },
+    {
+      "degreeLevel": "doctorate",
+      "url": "https://sie.tju.edu.cn/lxtd/bs/202609/t20260930_324732.html",
+      "readMethod": "Full official guide web text reopened independently during this review; not a raw origin-byte capture.",
+      "dateLocator": "二、申请办法 / 申请时间",
+      "dateExcerpt": "2026年9月30日至2027年5月31日",
+      "conclusion": "Own doctoral guide confirms same general window and2027 autumn context. Doctoral date proof does not come from the master guide. CSC TypeB notice requirement is preserved; BeiyangFutureScholars May31 date is separate award context, not a newly approved scholarship record."
+    }
+  ],
+  "checks": [
+    {
+      "name": "own-degree-primary-guide",
+      "result": "pass",
+      "detail": "Every master programme URL and evidence source points to324730; every doctoral programme URL and evidence source points to324732, regardless of additional source-list overlap."
+    },
+    {
+      "name": "per-record-canonical-hashes",
+      "result": "pass",
+      "detail": "All244cycle and244programme object hashes independently recomputed using the original JSON.stringify serialization; all match report."
+    },
+    {
+      "name": "exact-date-parent-intake-year",
+      "result": "pass",
+      "detail": "Every binding matches current parent,degree,2027-2028year,autumn intake,published date status and Sept30,2026–May31,2027 dates."
+    },
+    {
+      "name": "scholarship-qualifier-preserved",
+      "result": "pass",
+      "qualifiedCurrentCycleNotes": 244,
+      "detail": "All244current cycles contain a2027CSC TypeB wait/separate-notice qualification. No generic May31 date is certified as a universal scholarship deadline."
+    },
+    {
+      "name": "current-public-coverage-of-selected-set",
+      "result": "pass",
+      "detail": "The exact244selected current-public master/doctoral cycle IDs are bound once each; earlier ICLT date observations have zero record overlap."
+    },
+    {
+      "name": "scope-and-mutations",
+      "result": "pass",
+      "detail": "Dates only; zero new programmes,award approvals,full-record renewal or whole-school completeness assertions. Review reads actual current6canonical files before/after and changes no canonical/progress/Git/deployment state."
+    }
+  ],
+  "findings": [],
+  "limits": [
+    "Successful general application dates do not prove an applicant portal accepts every scholarship route now.",
+    "The report and review remain bound to this exact snapshot; future input/source changes require reconciliation.",
+    "The source observations honestly disclose web-tool text provenance and absence of raw capture."
+  ],
+  "reviewMutations": {
+    "canonicalWrites": 0,
+    "sharedProgressWrites": 0,
+    "gitMutations": 0,
+    "deploymentMutations": 0,
+    "paidCalls": 0,
+    "filesWritten": [
+      "quality/deadline-sweep-20261019/official-batch-005/independent-review-v1.json"
+    ]
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "result": "source-only-pass",
+  "reviewedAt": "2026-10-19T11:50:44.602Z",
+  "reviewer": "dates_029 independent offline reviewer; author dates_030",
+  "auditDate": "2026-10-19",
+  "reviewScope": "Date and exact programme/year/funding bindings only; original report, canonical facts and shared state are unchanged.",
+  "report": {
+    "path": "report.json",
+    "sha256": "95ae6d26c4de9030e7debe25a19d12f12d23235c3633a3b75aca538996958668",
+    "bytes": 83240
+  },
+  "selection": {
+    "path": "selection.json",
+    "sha256": "6d320157f4c1f945aa9cdbf3c5911a5c94d9f6e3c633c74e30ce82311bf329db"
+  },
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "evidencePins": [
+    {
+      "path": "captures.json",
+      "sha256": "ca9c1b8121bb44bf36f8f0287ca6ea39df16b702f2f0e2302370ba8f5a3e8fd6"
+    },
+    {
+      "path": "derived-captures.json",
+      "sha256": "a80768616fd289ec6b0617c1a4273a9f7d144e25dfbbb2ea4414f9d2da91625a"
+    },
+    {
+      "path": "sdu-csc-original.jpg",
+      "sha256": "7716a6daae6c94ddb2bcf6af273cb9b696e707c13c33ece436eceaf76b9b840a"
+    },
+    {
+      "path": "sdu-csc-title.png",
+      "sha256": "29d21b834872eee01e570fd8e22d8180dbaa081805bc48a0018012380a5a1478"
+    },
+    {
+      "path": "sdu-csc-application-time.png",
+      "sha256": "962e51bd5a33c456c723c91121dbaf80e10b3ee657d05ecf16aea0bfd7c7057d"
+    },
+    {
+      "path": "sdu-csc-visual-transcript.json",
+      "sha256": "cac359a553576f1eb402c92de4c4295306ed7a5b8c864c91232ba4ec33cb14a8"
+    },
+    {
+      "path": "sdjzu-2026-original.html",
+      "sha256": "68a663ed3f1459d86f66bfc7cd8d5be1d3c688bf9d01fcb7f355eb92859934eb"
+    },
+    {
+      "path": "sdnu-web-fallback.json",
+      "sha256": "3bfe3f6c3295df9cf2fbe666e7d0a2ebf96d1a681953d1d00e0b09a4ea72fe03"
+    }
+  ],
+  "summary": {
+    "checksPassed": 18,
+    "checksFailed": 0,
+    "recordChecksPassed": 17,
+    "recordChecksFailed": 0,
+    "rawBodiesVerified": 11,
+    "textDerivativesVerified": 10,
+    "recordsAssessed": 17,
+    "recordResults": {
+      "unknown": 4,
+      "blocked": 3,
+      "closed": 10
+    },
+    "canonicalWrites": 0,
+    "networkRequests": 0,
+    "reportMutations": 0
+  },
+  "checks": [
+    {
+      "name": "Frozen final report matches root dispatch SHA256",
+      "result": "pass"
+    },
+    {
+      "name": "All captured original bodies, text derivatives and observation times match manifests",
+      "result": "pass"
+    },
+    {
+      "name": "Report evidence entries exactly preserve the native and derived capture rows",
+      "result": "pass"
+    },
+    {
+      "name": "Six canonical input hashes and snapshot equal the pinned immutable inventory",
+      "result": "pass"
+    },
+    {
+      "name": "Exact queue selection is fifteen base IDs and two explicitly selected same-source IDs",
+      "result": "pass"
+    },
+    {
+      "name": "No already assessed or approved record was replayed and all prior report pins remain exact",
+      "result": "pass"
+    },
+    {
+      "name": "All seventeen complete canonical rows, parents, programmes, sources, dates and source-only flags match",
+      "result": "pass"
+    },
+    {
+      "name": "SDJZU awards have no independent applicant cutoff and captcha is retained as two programme holds",
+      "result": "pass"
+    },
+    {
+      "name": "SDNU hostname failure and sole fallback timeout support a bounded access hold",
+      "result": "pass"
+    },
+    {
+      "name": "SDU exact original image is linked in the registered wrapper and its crop pixels match the original",
+      "result": "pass"
+    },
+    {
+      "name": "Independent visual read confirms SDU2026 TypeB February6 is ISO2026-02-06",
+      "result": "pass"
+    },
+    {
+      "name": "SDUFE2026 special award and named English bachelor explicitly share June20 with cohort condition",
+      "result": "pass"
+    },
+    {
+      "name": "SDUTCM2026 degree table matches exact language and level while award stays post-enrolment unknown",
+      "result": "pass"
+    },
+    {
+      "name": "Lixin2020 bilingual window stays historical and is never rolled into the current row",
+      "result": "pass"
+    },
+    {
+      "name": "SHMTU2026 award has its own December2025-April2026 application period",
+      "result": "pass"
+    },
+    {
+      "name": "SHOU2026 TypeB February1 is the individual stage and exact master/doctoral sections match",
+      "result": "pass"
+    },
+    {
+      "name": "Final outcomes are ten past dates, four unknowns and three holds with no canonical mutation",
+      "result": "pass"
+    },
+    {
+      "name": "Current canonical summary normalizer accepts seventeen unique bindings and all closed ISO days",
+      "result": "pass"
+    }
+  ],
+  "recordChecks": [
+    {
+      "recordId": "sch-gap-breadth-sch-sdjzu-shandong-provincial",
+      "result": "pass"
+    },
+    {
+      "recordId": "sch-gap-breadth-sch-sdjzu-university",
+      "result": "pass"
+    },
+    {
+      "recordId": "cycle-gap-local-strong-sdjzu-b-civil-engineering-en-2026-2027-other-fee-reference",
+      "result": "pass"
+    },
+    {
+      "recordId": "cycle-gap-local-strong-sdjzu-b-civil-engineering-en-2026-2027-autumn",
+      "result": "pass"
+    },
+    {
+      "recordId": "sch-gap-wave8-sdnu-international-chinese-language-teachers-scholarship-2026",
+      "result": "pass"
+    },
+    {
+      "recordId": "sch-gap-wave8-sdu-csc-type-b",
+      "result": "pass"
+    },
+    {
+      "recordId": "sch-gap-wave3-sdufe-english-undergraduate-special-scholarship",
+      "result": "pass"
+    },
+    {
+      "recordId": "cycle-gap-wave3-sdufe-international-economics-trade-english-bachelor-2026-2027-autumn",
+      "result": "pass"
+    },
+    {
+      "recordId": "sch-gap-mve-ecma-sdutcm-president-scholarship-2026",
+      "result": "pass"
+    },
+    {
+      "recordId": "cycle-gap-mve-ecma-sdutcm-acupuncture-master-2026-2027-autumn-fee-reference",
+      "result": "pass"
+    },
+    {
+      "recordId": "cycle-gap-mve-ecma-sdutcm-materia-medica-doctorate-2026-2027-autumn-fee-reference",
+      "result": "pass"
+    },
+    {
+      "recordId": "cycle-gap-mve-ecma-sdutcm-tcm-bachelor-2026-2027-autumn-fee-reference",
+      "result": "pass"
+    },
+    {
+      "recordId": "sch-gap-wave8-lixin-shanghai-government-scholarship",
+      "result": "pass"
+    },
+    {
+      "recordId": "sch-gap-sch-shmtu-shanghai-government-2026",
+      "result": "pass"
+    },
+    {
+      "recordId": "sch-gap-mve-jzh-shou-csc-high-level-2026",
+      "result": "pass"
+    },
+    {
+      "recordId": "cycle-gap-mve-jzh-shou-food-science-master-2026-2027-autumn",
+      "result": "pass"
+    },
+    {
+      "recordId": "cycle-gap-mve-jzh-shou-marine-science-doctorate-2026-2027-autumn",
+      "result": "pass"
+    }
+  ],
+  "retainedLimits": [
+    "SDJZU image programme tables remain unread and the linked PDF is captcha HTML. The two civil-engineering cycles stay blocked; two independent awards stay unknown.",
+    "SDNU has no readable source body. Lixin has a historical2020 date. Both remain unresolved without date rollover.",
+    "SDU February6 was visually read from the saved2026 TypeB original; two crops are pixel-identical to that original. Two-week-early advice is not a second cutoff.",
+    "SDUFE June20 is scoped to the named2026 special-scholarship programme with the minimum20 cohort condition. SDUTCM general degree June30 is not borrowed for its post-registration award.",
+    "SHOU February1 is the applicant stage; later institutional recommendations/reviews are separate. No result certifies a whole-school catalogue or permanent programme discontinuation."
+  ]
+}

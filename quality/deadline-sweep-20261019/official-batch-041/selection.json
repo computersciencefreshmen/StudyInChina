@@ -1,0 +1,887 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-041-20261019",
+  "createdAt": "2026-10-19T13:01:57.315Z",
+  "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
+  "statePath": "quality/recovery-20261018/continuation-state.json",
+  "stateSha256": "147f2c31d24e1f2c7c7a36695e0a5b0bbc4aa81e2ece6b0148735ccce1b4b2d8",
+  "summaryPath": "quality/deadline-sweep-20261019/official-review-summary-v13.json",
+  "summarySha256": "1e9198fab441148a82bef921030a5668c4576704a923a0c60ad06f94d23fbaf5",
+  "queuePath": "quality/deadline-sweep-20261019/next-official-date-targets-v11.json",
+  "queueSha256": "a96da9b4352f7db30ba660a206f0ecdc29458d6301a62d7c3e107298840c1c59",
+  "inventoryPath": "quality/deadline-sweep-20261019/catalog-deadlines.json",
+  "inventorySha256": "a70ed9101ad3d1dfebfc800a45eebfba8bc37d5a5170e3408d3d784e703adf82",
+  "snapshotSha256": "ae492658e03f2aaf768cbde6ba3d80a3c8cb24d33b17f88a9743bd67b1f85722",
+  "inputFileSha256": {
+    "sources.json": "740180e8e5c4fb25b0f73b3068a2e7a2bf7dbf50ce6ae0380ab3f911b5a82822",
+    "cities.json": "ffd7cf3265324ed09015e91b920b507c5b6502e08e3bec2e0ec7847243d6aea2",
+    "universities.json": "1c389cf8646f84de3d15217392d795bf2d34656e2523731b923b1685aad114b2",
+    "programs.json": "4c86a9eae9950956270e675eb5f33c029c99da6766c399ee9ca2b6abcb9b885a",
+    "admission-cycles.json": "c6b2cafe5ba932257c7eb2561ac58b5fd22fc64b4a01d5650f2ab9a7a6306409",
+    "scholarships.json": "91ab40d0aa58bf65afe2807ee9ba6826e65ac29622ef34b0af0c33687ab4aa83"
+  },
+  "baseDispatch": {
+    "path": "quality/deadline-sweep-20261019/heartbeat-1257/base-dispatch-v1.json",
+    "sha256": "f853a30e74fd95f6a2965b4130e01784dd8ea60afd87d058a3afdbc6d8420b96"
+  },
+  "extensionReceipt": {
+    "path": "quality/deadline-sweep-20261019/heartbeat-1257/additional-same-source-selection-v1.json",
+    "sha256": "1442831c48df5cc15f6acd90f8303b2e7d4a9a1f03d8b90705d6ad2491c15aa5"
+  },
+  "candidateUniversityIds": [
+    "uni-beijing-normal-university",
+    "uni-beijing-sport-university",
+    "uni-beijing-technology-and-business-university",
+    "uni-beijing-university-of-posts-and-telecommunications",
+    "uni-beijing-university-of-technology",
+    "uni-beijing-wuzi-university",
+    "uni-capital-university-of-economics-and-business"
+  ],
+  "selectedUniversityIds": [
+    "uni-beijing-sport-university",
+    "uni-beijing-technology-and-business-university",
+    "uni-beijing-university-of-posts-and-telecommunications",
+    "uni-beijing-university-of-technology",
+    "uni-beijing-wuzi-university",
+    "uni-capital-university-of-economics-and-business"
+  ],
+  "zeroRowUniversityIds": [
+    "uni-beijing-normal-university"
+  ],
+  "baseQueueRecordIds": [
+    "cycle-gap-prog-mew-nss-bsu-international-chinese-education-bachelor-2026-2027-autumn-fee-reference",
+    "sch-gap-wave8-btbu-high-level-postgraduate-scholarship",
+    "cycle-2026-bupt-international-business-master-english-autumn",
+    "cycle-ac100d738ea5",
+    "sch-gap-sch-mew-nss-bwu-beijing-government",
+    "sch-gap-wave8-2-bwu-international-student-scholarship",
+    "sch-gap-wave6-cueb-new-foreign-student-scholarship"
+  ],
+  "additionalSameSourceRecordIds": [],
+  "selectedRecordIds": [
+    "cycle-gap-prog-mew-nss-bsu-international-chinese-education-bachelor-2026-2027-autumn-fee-reference",
+    "sch-gap-wave8-btbu-high-level-postgraduate-scholarship",
+    "cycle-2026-bupt-international-business-master-english-autumn",
+    "cycle-ac100d738ea5",
+    "sch-gap-sch-mew-nss-bwu-beijing-government",
+    "sch-gap-wave8-2-bwu-international-student-scholarship",
+    "sch-gap-wave6-cueb-new-foreign-student-scholarship"
+  ],
+  "records": [
+    {
+      "recordId": "cycle-gap-prog-mew-nss-bsu-international-chinese-education-bachelor-2026-2027-autumn-fee-reference",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-sport-university",
+      "canonicalRecordSha256": "04500bd484877db99685d2ff67bf0159ef7828a4425c00d32e666476f60a402f",
+      "row": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-bsu-international-chinese-education-bachelor"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-08-11",
+        "status": "stale",
+        "id": "cycle-gap-prog-mew-nss-bsu-international-chinese-education-bachelor-2026-2027-autumn-fee-reference",
+        "programId": "prog-gap-prog-mew-nss-bsu-international-chinese-education-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 25000,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "reference",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": null
+      },
+      "program": {
+        "sourceIds": [
+          "src-gap-program-prog-mew-nss-bsu-international-chinese-education-bachelor"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale",
+        "id": "prog-gap-prog-mew-nss-bsu-international-chinese-education-bachelor",
+        "slug": "gap-prog-mew-nss-bsu-international-chinese-education-bachelor-bachelor",
+        "universityId": "uni-beijing-sport-university",
+        "name": {
+          "en": "International Chinese Education",
+          "zh": "汉语国际教育",
+          "ru": "Международное преподавание китайского языка"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "chinese-education",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": 48,
+        "programUrl": "https://zs.bsu.edu.cn/docs/2025-11/42eac512d5c34329afba9e0b37abad2b.pdf",
+        "applyUrl": null,
+        "languageRequirements": [],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "56a101260781e6e63e54836abafba4a7a75b9281b208a2141c054fc95476fcb5",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-bsu-international-chinese-education-bachelor"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-bsu-international-chinese-education-bachelor",
+            "slug": "gap-prog-mew-nss-bsu-international-chinese-education-bachelor-bachelor",
+            "universityId": "uni-beijing-sport-university",
+            "name": {
+              "en": "International Chinese Education",
+              "zh": "汉语国际教育",
+              "ru": "Международное преподавание китайского языка"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://zs.bsu.edu.cn/docs/2025-11/42eac512d5c34329afba9e0b37abad2b.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "56a101260781e6e63e54836abafba4a7a75b9281b208a2141c054fc95476fcb5"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-program-prog-mew-nss-bsu-international-chinese-education-bachelor",
+            "url": "https://zs.bsu.edu.cn/docs/2025-11/42eac512d5c34329afba9e0b37abad2b.pdf",
+            "title": "北京体育大学2026年外国留学生本科生专业目录",
+            "publisher": "beijing-sport-university",
+            "kind": "program",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "1db4bfcca160ca6e2484cd6a7135e7c69b6b53a9a40edcd271f3358d7fccc64c"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-wave8-btbu-high-level-postgraduate-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-beijing-technology-and-business-university",
+      "canonicalRecordSha256": "c990fb684c37ed9bb23b089a75e8a1fb22e880ded657fb1f8d741b3c936ec5ce",
+      "row": {
+        "id": "sch-gap-wave8-btbu-high-level-postgraduate-scholarship",
+        "slug": "gap-wave8-btbu-high-level-postgraduate-scholarship",
+        "name": {
+          "en": "Chinese Government Scholarship — High-Level Postgraduate Program at BTBU",
+          "zh": "中国政府奖学金—北京工商大学高水平研究生项目",
+          "ru": "Стипендия правительства Китая — программа подготовки аспирантов высокого уровня в BTBU"
+        },
+        "providerType": "csc",
+        "universityIds": [
+          "uni-beijing-technology-and-business-university"
+        ],
+        "programIds": [
+          "prog-gap-wave8-btbu-international-business-master",
+          "prog-gap-wave8-btbu-business-administration-master"
+        ],
+        "coverage": {
+          "tuition": "full",
+          "accommodation": "full",
+          "insurance": true,
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://gjjy.btbu.edu.cn/lhlxs/lhlxszsxx/8ad1beb8499844b4b89a7bdcc41b1e18.htm",
+        "summary": {
+          "en": "BTBU's official 2026/2027 notice describes full Chinese Government Scholarship support for postgraduate applicants. The university deadline of 28 February 2026 is closed.",
+          "zh": "北京工商大学官方2026/2027通知公布高水平研究生中国政府奖学金全额资助；校内2026年2月28日截止，当前已关闭。",
+          "ru": "Официальное объявление BTBU 2026/2027 описывает полное финансирование по государственной стипендии Китая; срок университета 28 февраля 2026 года закрыт."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave8-btbu-high-level-postgraduate-scholarship"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-btbu-international-business-master"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-btbu-international-business-master",
+            "slug": "gap-wave8-btbu-international-business-master-master",
+            "universityId": "uni-beijing-technology-and-business-university",
+            "name": {
+              "en": "International Business (Master's Program)",
+              "zh": "国际商务硕士项目",
+              "ru": "Магистратура по международному бизнесу"
+            },
+            "degreeLevel": "master",
+            "discipline": "business",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 24,
+            "programUrl": "https://gjjy.btbu.edu.cn/docs/2026-03/83c62e89b7684de8b5c71873ab5ba1ac.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "52608b71a483a31844d45ffe8e0259739b0a9a85c4b3197fcd4a09a1465494c2"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-btbu-business-administration-master"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-btbu-business-administration-master",
+            "slug": "gap-wave8-btbu-business-administration-master-master",
+            "universityId": "uni-beijing-technology-and-business-university",
+            "name": {
+              "en": "Business Administration (Master's Program)",
+              "zh": "工商管理硕士项目",
+              "ru": "Магистратура по деловому администрированию"
+            },
+            "degreeLevel": "master",
+            "discipline": "business",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 24,
+            "programUrl": "https://gjjy.btbu.edu.cn/docs/2026-03/83c62e89b7684de8b5c71873ab5ba1ac.pdf",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "825caabd9dc10a31790ec54fe0fa30c208ab198b48f1b362b4d48cf3d407b00c"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-btbu-high-level-postgraduate-scholarship",
+            "url": "https://gjjy.btbu.edu.cn/lhlxs/lhlxszsxx/8ad1beb8499844b4b89a7bdcc41b1e18.htm",
+            "title": "BTBU 2026/2027 Chinese Government Scholarship High-Level Postgraduate Program",
+            "publisher": "beijing-technology-and-business-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "f41a1fecf11597be8e1a61a6150b9eb454fa34f1d9a5ac105e28834c91de731f"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-2026-bupt-international-business-master-english-autumn",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-university-of-posts-and-telecommunications",
+      "canonicalRecordSha256": "4141324cdc1de1b142c1cacfdbe23845d4d9e85f23618b1b146c340dab258d16",
+      "row": {
+        "sourceIds": [
+          "src-bupt-2026-international-brochure"
+        ],
+        "verifiedAt": "2026-07-28",
+        "reviewAfter": "2026-08-04",
+        "status": "stale",
+        "id": "cycle-2026-bupt-international-business-master-english-autumn",
+        "programId": "program-bupt-international-business-master-english",
+        "academicYear": "2026-2027",
+        "intake": "autumn",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": 32800,
+        "tuitionPeriod": "academic-year",
+        "tuitionStatus": "confirmed",
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": 500,
+        "notes": {
+          "en": "The 2026 brochure requires a bachelor’s degree, age 35 or below, and TOEFL 80 or IELTS 6. It gives no absolute current-cycle deadline; confirm dates in the official system.",
+          "zh": "2026简章要求具有学士学位、年龄不超过35岁，并达到TOEFL 80或IELTS 6；简章未给出当期绝对截止日期，请在官方系统确认。",
+          "ru": "Справочник 2026 года требует степень бакалавра, возраст не старше 35 лет и TOEFL 80 или IELTS 6. Абсолютный срок текущего цикла не указан; проверьте даты в официальной системе."
+        }
+      },
+      "program": {
+        "sourceIds": [
+          "src-bupt-2026-international-brochure"
+        ],
+        "verifiedAt": "2026-07-28",
+        "reviewAfter": "2026-08-27",
+        "status": "stale",
+        "id": "program-bupt-international-business-master-english",
+        "slug": "bupt-international-business-master-english",
+        "universityId": "uni-beijing-university-of-posts-and-telecommunications",
+        "name": {
+          "en": "International Business",
+          "zh": "国际商务",
+          "ru": "Международный бизнес"
+        },
+        "degreeLevel": "master",
+        "discipline": "business",
+        "teachingLanguages": [
+          "English"
+        ],
+        "durationMonths": 24,
+        "programUrl": "https://xxgk.bupt.edu.cn/__local/4/9D/6D/1EB441EB8B730D5E91D1635D888_A9DEF37C_2D5B4.pdf",
+        "applyUrl": "https://ois.bupt.edu.cn/",
+        "languageRequirements": [
+          {
+            "test": "TOEFL",
+            "minimum": "80"
+          },
+          {
+            "test": "IELTS",
+            "minimum": "6.0"
+          }
+        ],
+        "verificationScope": "facts"
+      },
+      "canonicalProgramSha256": "0408ca8b9f397cba03e178f657632193b7986f4a0d5127344c4bebb9eefe45de",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-bupt-2026-international-brochure"
+            ],
+            "verifiedAt": "2026-07-28",
+            "reviewAfter": "2026-08-27",
+            "status": "stale",
+            "id": "program-bupt-international-business-master-english",
+            "slug": "bupt-international-business-master-english",
+            "universityId": "uni-beijing-university-of-posts-and-telecommunications",
+            "name": {
+              "en": "International Business",
+              "zh": "国际商务",
+              "ru": "Международный бизнес"
+            },
+            "degreeLevel": "master",
+            "discipline": "business",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 24,
+            "programUrl": "https://xxgk.bupt.edu.cn/__local/4/9D/6D/1EB441EB8B730D5E91D1635D888_A9DEF37C_2D5B4.pdf",
+            "applyUrl": "https://ois.bupt.edu.cn/",
+            "languageRequirements": [
+              {
+                "test": "TOEFL",
+                "minimum": "80"
+              },
+              {
+                "test": "IELTS",
+                "minimum": "6.0"
+              }
+            ],
+            "verificationScope": "facts"
+          },
+          "sha256": "0408ca8b9f397cba03e178f657632193b7986f4a0d5127344c4bebb9eefe45de"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-bupt-2026-international-brochure",
+            "url": "https://xxgk.bupt.edu.cn/__local/4/9D/6D/1EB441EB8B730D5E91D1635D888_A9DEF37C_2D5B4.pdf",
+            "title": "2026 Admission Brochure for International Students",
+            "publisher": "Beijing University of Posts and Telecommunications",
+            "kind": "program",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-28"
+          },
+          "sha256": "76211e05541536075ef2bea50bc56d9d50e2a7c90641e8ee20302bcce42dcd64"
+        }
+      ]
+    },
+    {
+      "recordId": "cycle-ac100d738ea5",
+      "collection": "admissionCycles",
+      "universityId": "uni-beijing-university-of-technology",
+      "canonicalRecordSha256": "9f87fe25514651559ed9b0fe7354f67854dcf4b252dcafa45ca43585ddb71b5d",
+      "row": {
+        "sourceIds": [
+          "src-program-review-124290f5acd5"
+        ],
+        "verifiedAt": "2026-07-27",
+        "reviewAfter": "2026-08-03",
+        "status": "stale",
+        "id": "cycle-ac100d738ea5",
+        "programId": "program-beijing-university-of-technology-mechanical-engineering-bachelor",
+        "academicYear": "2026-2027",
+        "intake": "other",
+        "opensOn": null,
+        "closesOn": null,
+        "dateStatus": "not-announced",
+        "tuitionCny": null,
+        "tuitionPeriod": null,
+        "tuitionStatus": null,
+        "evidenceBasis": "cycle-specific",
+        "factScope": "partial",
+        "applicationFeeCny": 500
+      },
+      "program": {
+        "sourceIds": [
+          "src-program-review-124290f5acd5"
+        ],
+        "verifiedAt": "2026-07-26",
+        "reviewAfter": "2026-08-25",
+        "status": "stale",
+        "id": "program-beijing-university-of-technology-mechanical-engineering-bachelor",
+        "slug": "beijing-university-of-technology-mechanical-engineering-bachelor",
+        "universityId": "uni-beijing-university-of-technology",
+        "name": {
+          "en": "Mechanical Engineering",
+          "zh": "Mechanical Engineering",
+          "ru": "Машиностроение"
+        },
+        "degreeLevel": "bachelor",
+        "discipline": "engineering",
+        "teachingLanguages": [
+          "Chinese"
+        ],
+        "durationMonths": null,
+        "programUrl": "https://isa.bjut.edu.cn/__local/C/5B/8A/281F6B1C10341C2FF785EEFE956_1A4C4532_5675A.pdf",
+        "applyUrl": "https://isa.bjut.edu.cn/en/ADMISSION/Bachelor_s_Degree_Programs.htm",
+        "languageRequirements": [],
+        "verificationScope": "identity"
+      },
+      "canonicalProgramSha256": "cc3ec88422c6086357e1ae404c2e6a4f3eed2add1f628e48f5a6dc08fb296c2a",
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-program-review-124290f5acd5"
+            ],
+            "verifiedAt": "2026-07-26",
+            "reviewAfter": "2026-08-25",
+            "status": "stale",
+            "id": "program-beijing-university-of-technology-mechanical-engineering-bachelor",
+            "slug": "beijing-university-of-technology-mechanical-engineering-bachelor",
+            "universityId": "uni-beijing-university-of-technology",
+            "name": {
+              "en": "Mechanical Engineering",
+              "zh": "Mechanical Engineering",
+              "ru": "Машиностроение"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": null,
+            "programUrl": "https://isa.bjut.edu.cn/__local/C/5B/8A/281F6B1C10341C2FF785EEFE956_1A4C4532_5675A.pdf",
+            "applyUrl": "https://isa.bjut.edu.cn/en/ADMISSION/Bachelor_s_Degree_Programs.htm",
+            "languageRequirements": [],
+            "verificationScope": "identity"
+          },
+          "sha256": "cc3ec88422c6086357e1ae404c2e6a4f3eed2add1f628e48f5a6dc08fb296c2a"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-program-review-124290f5acd5",
+            "url": "https://isa.bjut.edu.cn/__local/C/5B/8A/281F6B1C10341C2FF785EEFE956_1A4C4532_5675A.pdf",
+            "title": "Official program information — Mechanical Engineering",
+            "publisher": "Beijing University of Technology",
+            "kind": "program",
+            "language": "other",
+            "official": true,
+            "accessedAt": "2026-07-26"
+          },
+          "sha256": "98abbbc749b948f0dd1121f87de9d685d6f0fc31c6448d76fff5de75829f3b67"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-sch-mew-nss-bwu-beijing-government",
+      "collection": "scholarships",
+      "universityId": "uni-beijing-wuzi-university",
+      "canonicalRecordSha256": "1b920b0da8e2e0508049b407f3d4e0fb06615d1f0b4fb22f714277897a7772cc",
+      "row": {
+        "id": "sch-gap-sch-mew-nss-bwu-beijing-government",
+        "slug": "gap-sch-mew-nss-bwu-beijing-government",
+        "name": {
+          "en": "Beijing Government Scholarship at BWU",
+          "zh": "北京物资学院北京市外国留学生奖学金",
+          "ru": "Пекинская правительственная стипендия в Пекинском университете материальных ресурсов"
+        },
+        "providerType": "city",
+        "universityIds": [
+          "uni-beijing-wuzi-university"
+        ],
+        "programIds": [
+          "prog-gap-prog-mew-nss-bwu-supply-chain-management-bachelor",
+          "prog-gap-prog-mew-nss-bwu-international-trade-master",
+          "prog-gap-prog-mew-nss-bwu-logistics-engineering-management-master",
+          "prog-gap-prog-mew-nss-bwu-long-term-chinese-language"
+        ],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://is.bwu.edu.cn/info/1189/2933.htm",
+        "summary": {
+          "en": "The official BWU page confirms a Beijing Government Scholarship route for international students; no current deadline or verified funding tier is exposed on the accessible page.",
+          "zh": "北京物资学院官方页面确认面向国际学生的北京市外国留学生奖学金渠道；可访问页面未提供当前截止日期或可核实资助档位。",
+          "ru": "Официальная страница BWU подтверждает пекинскую правительственную стипендию для иностранных студентов; текущий срок и размер финансирования не опубликованы."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-sch-mew-nss-bwu-beijing-government"
+        ],
+        "verifiedAt": "2026-08-04",
+        "reviewAfter": "2026-09-03",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-bwu-supply-chain-management-bachelor"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-bwu-supply-chain-management-bachelor",
+            "slug": "gap-prog-mew-nss-bwu-supply-chain-management-bachelor-bachelor",
+            "universityId": "uni-beijing-wuzi-university",
+            "name": {
+              "en": "Supply Chain Management",
+              "zh": "供应链管理",
+              "ru": "Управление цепями поставок"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "business",
+            "teachingLanguages": [
+              "Chinese",
+              "English"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://is.bwu.edu.cn/info/1174/2816.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "73c304fc0e998807ecd16c5febc10f5552eba7c5cc63af006d9b473c9614dc40"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-bwu-international-trade-master"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-bwu-international-trade-master",
+            "slug": "gap-prog-mew-nss-bwu-international-trade-master-master",
+            "universityId": "uni-beijing-wuzi-university",
+            "name": {
+              "en": "International Trade",
+              "zh": "国际贸易学",
+              "ru": "Международная торговля"
+            },
+            "degreeLevel": "master",
+            "discipline": "business",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 36,
+            "programUrl": "https://is.bwu.edu.cn/info/1175/2817.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "197159be972aa7a0f94560bb44a43de67a6dffa8625ef1237275de153b9fa056"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-bwu-logistics-engineering-management-master"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-bwu-logistics-engineering-management-master",
+            "slug": "gap-prog-mew-nss-bwu-logistics-engineering-management-master-master",
+            "universityId": "uni-beijing-wuzi-university",
+            "name": {
+              "en": "Logistics Engineering and Management",
+              "zh": "物流工程与管理",
+              "ru": "Логистическая инженерия и управление"
+            },
+            "degreeLevel": "master",
+            "discipline": "engineering",
+            "teachingLanguages": [
+              "English"
+            ],
+            "durationMonths": 36,
+            "programUrl": "https://is.bwu.edu.cn/info/1175/2817.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "e4567c6f4d183acfd70032a8ae760d378708f20cb37b1bcc97321f098328b615"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-prog-mew-nss-bwu-long-term-chinese-language"
+            ],
+            "verifiedAt": "2026-08-04",
+            "reviewAfter": "2026-09-03",
+            "status": "stale",
+            "id": "prog-gap-prog-mew-nss-bwu-long-term-chinese-language",
+            "slug": "gap-prog-mew-nss-bwu-long-term-chinese-language-language",
+            "universityId": "uni-beijing-wuzi-university",
+            "name": {
+              "en": "Long-term Chinese Language Study",
+              "zh": "长期汉语进修",
+              "ru": "Долгосрочное изучение китайского языка"
+            },
+            "degreeLevel": "language",
+            "discipline": "chinese-education",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 6,
+            "programUrl": "https://www.bwu.edu.cn/info/1278/5945.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "6db47a239e69d562254f85117c2ce859af92c7e83140d4f60b978fc1ac66fa16"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-sch-mew-nss-bwu-beijing-government",
+            "url": "https://is.bwu.edu.cn/info/1189/2933.htm",
+            "title": "北京物资学院北京市外国留学生奖学金",
+            "publisher": "beijing-wuzi-university",
+            "kind": "scholarship",
+            "language": "zh",
+            "official": true,
+            "accessedAt": "2026-08-04"
+          },
+          "sha256": "c78b2d490cad7a38ffa90646870db8db84c3f2f547aaab4f7ec202664e2f8c40"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-wave8-2-bwu-international-student-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-beijing-wuzi-university",
+      "canonicalRecordSha256": "0b2b58b4c342307638c2195425bc0a1fea419d40d44ba9684e264001752f8d40",
+      "row": {
+        "id": "sch-gap-wave8-2-bwu-international-student-scholarship",
+        "slug": "gap-wave8-2-bwu-international-student-scholarship",
+        "name": {
+          "en": "Beijing Wuzi University Scholarship for International Students",
+          "zh": "北京物资学院外国留学生奖学金",
+          "ru": "Стипендия Beijing Wuzi University для иностранных студентов"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-beijing-wuzi-university"
+        ],
+        "programIds": [
+          "prog-gap-wave8-2-bwu-logistics-management-bachelor",
+          "prog-gap-wave8-2-bwu-international-trade-economics-bachelor"
+        ],
+        "coverage": {
+          "tuition": "unknown",
+          "accommodation": "unknown",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://is.bwu.edu.cn/beijingwuzixueyuanwaiguoliuxueshengjiangxuejinguanlibanfa.pdf",
+        "summary": {
+          "en": "The official regulations establish first- and second-class scholarships funded through Beijing municipal and university resources. A current intake-specific deadline is not published in the retained rules.",
+          "zh": "官方办法依托北京市及校级经费设置一、二等奖学金；所保留办法未公布当前招生季的具体截止日期。",
+          "ru": "Официальные правила учреждают стипендии первого и второго класса за счёт муниципальных и университетских средств; текущий срок набора не опубликован."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave8-2-bwu-international-student-scholarship",
+          "src-gap-scholarship-wave8-2-bwu-international-student-scholarship-support-1"
+        ],
+        "verifiedAt": "2026-08-02",
+        "reviewAfter": "2026-09-01",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-2-bwu-logistics-management-bachelor",
+              "src-gap-program-wave8-2-bwu-logistics-management-bachelor-support-1",
+              "src-gap-program-wave8-2-bwu-logistics-management-bachelor-support-2"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-2-bwu-logistics-management-bachelor",
+            "slug": "gap-wave8-2-bwu-logistics-management-bachelor-bachelor",
+            "universityId": "uni-beijing-wuzi-university",
+            "name": {
+              "en": "Logistics Management (Bachelor's Program)",
+              "zh": "物流管理本科项目",
+              "ru": "Управление логистикой (бакалавриат)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "business",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://www.bwu.edu.cn/info/1278/5945.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "f384dbbad41b794e0730b05127addac5bff5a0eb50953f2d29b855c4fd8129df"
+        },
+        {
+          "row": {
+            "sourceIds": [
+              "src-gap-program-wave8-2-bwu-international-trade-economics-bachelor",
+              "src-gap-program-wave8-2-bwu-international-trade-economics-bachelor-support-1"
+            ],
+            "verifiedAt": "2026-08-02",
+            "reviewAfter": "2026-09-01",
+            "status": "stale",
+            "id": "prog-gap-wave8-2-bwu-international-trade-economics-bachelor",
+            "slug": "gap-wave8-2-bwu-international-trade-economics-bachelor-bachelor",
+            "universityId": "uni-beijing-wuzi-university",
+            "name": {
+              "en": "International Trade and Economics (Bachelor's Program)",
+              "zh": "国际经济与贸易本科项目",
+              "ru": "Международная торговля и экономика (бакалавриат)"
+            },
+            "degreeLevel": "bachelor",
+            "discipline": "business",
+            "teachingLanguages": [
+              "Chinese"
+            ],
+            "durationMonths": 48,
+            "programUrl": "https://www.bwu.edu.cn/info/1278/5945.htm",
+            "applyUrl": null,
+            "languageRequirements": [],
+            "verificationScope": "facts"
+          },
+          "sha256": "837cd23b329018852ddb3a30703ced1411a91c445aacd1fcb9fcd9f727b53eb7"
+        }
+      ],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-2-bwu-international-student-scholarship",
+            "url": "https://is.bwu.edu.cn/beijingwuzixueyuanwaiguoliuxueshengjiangxuejinguanlibanfa.pdf",
+            "title": "BWU Scholarship Regulations for International Students",
+            "publisher": "beijing-wuzi-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "c090a56af3ea15afcab12ca16d7c36f0f6e0856b3ec4bdc42ca63e7702254bb8"
+        },
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave8-2-bwu-international-student-scholarship-support-1",
+            "url": "https://is.bwu.edu.cn/info/1189/2933.htm",
+            "title": "BWU Beijing Municipal Scholarship",
+            "publisher": "beijing-wuzi-university",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-08-02"
+          },
+          "sha256": "8ed42bfe10a76ec3047687fe7aa8cffd3d8b80317bc8471533d0a475cde06562"
+        }
+      ]
+    },
+    {
+      "recordId": "sch-gap-wave6-cueb-new-foreign-student-scholarship",
+      "collection": "scholarships",
+      "universityId": "uni-capital-university-of-economics-and-business",
+      "canonicalRecordSha256": "bc6c01284de5934628dbcc8843949263dd7c434736d5199fe1d93dc310de21b2",
+      "row": {
+        "id": "sch-gap-wave6-cueb-new-foreign-student-scholarship",
+        "slug": "gap-wave6-cueb-new-foreign-student-scholarship",
+        "name": {
+          "en": "CUEB New Foreign Student Scholarship",
+          "zh": "首都经济贸易大学新生外国留学生奖学金",
+          "ru": "Стипендия CUEB для новых иностранных студентов"
+        },
+        "providerType": "university",
+        "universityIds": [
+          "uni-capital-university-of-economics-and-business"
+        ],
+        "programIds": [],
+        "coverage": {
+          "tuition": "partial",
+          "accommodation": "full",
+          "insurance": "unknown",
+          "stipendCnyPerMonth": null
+        },
+        "deadline": null,
+        "applicationUrl": "https://sie.cueb.edu.cn/Eng/scholarships/cuebscholarship/index.htm",
+        "summary": {
+          "en": "CUEB's official scholarship page provides a first-year scholarship for new outstanding international students in degree and language programs. It partially supports tuition, accommodation and living expenses; exact amounts and the next cycle are not announced.",
+          "zh": "首都经济贸易大学官方奖学金页面面向新入学的优秀国际学历生和语言生提供第一学年奖学金，部分资助学费、住宿费和生活费；具体金额和下一轮周期未公布。",
+          "ru": "Официальная страница CUEB предусматривает стипендию первого года для новых иностранных студентов программ степени и языка. Она частично покрывает обучение, проживание и расходы на жизнь; точные суммы и следующий цикл не объявлены."
+        },
+        "sourceIds": [
+          "src-gap-scholarship-wave6-cueb-new-foreign-student-scholarship"
+        ],
+        "verifiedAt": "2026-07-31",
+        "reviewAfter": "2026-08-30",
+        "status": "stale"
+      },
+      "program": null,
+      "canonicalProgramSha256": null,
+      "linkedPrograms": [],
+      "sources": [
+        {
+          "row": {
+            "id": "src-gap-scholarship-wave6-cueb-new-foreign-student-scholarship",
+            "url": "https://sie.cueb.edu.cn/Eng/scholarships/cuebscholarship/index.htm",
+            "title": "CUEB Scholarship",
+            "publisher": "capital-university-of-economics-and-business",
+            "kind": "scholarship",
+            "language": "en",
+            "official": true,
+            "accessedAt": "2026-07-31"
+          },
+          "sha256": "390d347c77c75b7f1a423ce2a8e12e95ba621473a6b362b15bf44841329bdb53"
+        }
+      ]
+    }
+  ]
+}

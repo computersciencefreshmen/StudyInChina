@@ -51,6 +51,9 @@ jobs:
       - name: Test full record audit
         run: npm run test:audit
 
+      - name: Validate deadline evidence preservation and historical summaries
+        run: npm run test:deadline-review
+
       - name: Validate content data
         run: npm run validate:data
 
