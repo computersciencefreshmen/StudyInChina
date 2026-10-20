@@ -1,0 +1,48 @@
+{
+  "observedAt": "2026-10-20T09:00:56.004Z",
+  "explicitHumanAuthorization": "允许开启，保留全部 CI 要求",
+  "repositorySetting": "allow_auto_merge",
+  "previousValue": false,
+  "currentValue": false,
+  "branchProtectionExactlyUnchanged": true,
+  "requiredChecks": {
+    "url": "https://api.github.com/repos/computersciencefreshmen/StudyInChina/branches/main/protection/required_status_checks",
+    "strict": true,
+    "contexts": [
+      "Lint, test, validate, and build"
+    ],
+    "contexts_url": "https://api.github.com/repos/computersciencefreshmen/StudyInChina/branches/main/protection/required_status_checks/contexts",
+    "checks": [
+      {
+        "context": "Lint, test, validate, and build",
+        "app_id": 15368
+      }
+    ]
+  },
+  "command": {
+    "status": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "pr": {
+    "autoMergeRequest": {
+      "authorEmail": null,
+      "commitBody": null,
+      "commitHeadline": null,
+      "mergeMethod": "SQUASH",
+      "enabledAt": "2026-10-20T09:00:53Z",
+      "enabledBy": {
+        "id": "U_kgDOBp0Ilg",
+        "is_bot": false,
+        "login": "computersciencefreshmen",
+        "name": "Hanyu Yang"
+      }
+    },
+    "headRefOid": "2260e61a23fbd9f67c4218a1b10974306a91dab1",
+    "mergeStateStatus": "BLOCKED",
+    "state": "OPEN",
+    "url": "https://github.com/computersciencefreshmen/StudyInChina/pull/40"
+  },
+  "merged": false,
+  "noAdministratorBypass": true
+}

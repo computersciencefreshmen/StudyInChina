@@ -118,8 +118,12 @@ function option(name: string, fallback: string): string {
 }
 
 export function buildSummary(primaryRoot: string, reportsDirectory: string, today = getTodayDate(), throughBatch = 8) {
-  assert.ok(Number.isInteger(throughBatch) && throughBatch >= 8 && throughBatch <= 999, 'Expected --through-batch in 8..999')
   assertCurrentAuditDay(today)
+  return buildSummaryForAudit(primaryRoot, reportsDirectory, today, throughBatch)
+}
+
+function buildSummaryForAudit(primaryRoot: string, reportsDirectory: string, today: string, throughBatch: number) {
+  assert.ok(Number.isInteger(throughBatch) && throughBatch >= 8 && throughBatch <= 999, 'Expected --through-batch in 8..999')
   const primary = path.resolve(primaryRoot), reportsRoot = path.resolve(reportsDirectory)
   const read = (relative: string): unknown => JSON.parse(readFileSync(localFile(primary, relative), 'utf8'))
   const hashes = Object.fromEntries(FILE_NAMES.map(name => [name, sha(readFileSync(localFile(primary, 'content/data/' + name)))]))
@@ -323,6 +327,46 @@ export function buildSummary(primaryRoot: string, reportsDirectory: string, toda
       'The summary is specific to 2026-10-19 and refuses generation on another China calendar date.',
     ],
   }
+}
+
+type HistoricalContext = {
+  auditDate: string; evaluatedForDate: string; snapshotSha256: string; inputFileSha256: Record<string, string>
+  auditedPublicIds: Record<string, string[]>; currentPublicIds: Record<string, string[]>
+}
+
+/** Carry exact historical observations only when a fresh machine inventory proves identical inputs and public IDs. */
+export function assertHistoricalSnapshotContext(inventory: ObjectRow, context: HistoricalContext, actualToday = getTodayDate()): void {
+  assert.equal(context.auditDate, AUDIT_DATE, 'Unsupported historical receipt date')
+  assert.equal(context.evaluatedForDate, actualToday, 'Historical aggregation must evaluate the actual China calendar day')
+  assert.ok(actualToday > context.auditDate, 'Use the strict same-day builder on the original audit date')
+  assert.equal(inventory.today, actualToday, 'Current inventory is stale')
+  const generatedAt = Date.parse(string(inventory.generatedAt))
+  assert.ok(Number.isFinite(generatedAt) && generatedAt <= Date.now() + 5000 && getTodayDate(new Date(generatedAt)) === actualToday, 'Inventory was not generated on the evaluation day')
+  assert.equal(inventory.snapshotSha256, context.snapshotSha256, 'Current inventory input snapshot changed')
+  for (const name of FILE_NAMES) assert.equal(object(inventory.inputFileSha256)[name], context.inputFileSha256[name], 'Historical input changed: ' + name)
+  assert.deepEqual(context.currentPublicIds, context.auditedPublicIds, 'Public projection changed; a new dated coverage plan is required')
+}
+
+export function buildHistoricalSummary(primaryRoot: string, reportsDirectory: string, currentInventoryPath: string, throughBatch = 8) {
+  const actualToday = getTodayDate(), inventoryFile = localFile(primaryRoot, currentInventoryPath)
+  const inventoryBytes = readFileSync(inventoryFile), inventory = object(JSON.parse(inventoryBytes.toString('utf8')))
+  const summary = buildSummaryForAudit(primaryRoot, reportsDirectory, AUDIT_DATE, throughBatch)
+  const read = (name: string) => JSON.parse(readFileSync(localFile(primaryRoot, 'content/data/' + name), 'utf8'))
+  const raw = { sources: read('sources.json'), cities: read('cities.json'), universities: read('universities.json'),
+    programs: read('programs.json'), admissionCycles: read('admission-cycles.json'), scholarships: read('scholarships.json') } as DataBundle
+  const ids = (bundle: DataBundle) => Object.fromEntries(Object.entries(bundle).map(([key, rows]) => [key, rows.map((row: { id: string }) => row.id).sort()]))
+  assertHistoricalSnapshotContext(inventory, { auditDate: AUDIT_DATE, evaluatedForDate: actualToday, snapshotSha256: summary.snapshotSha256,
+    inputFileSha256: summary.inputFileSha256, auditedPublicIds: ids(selectPublishedData(raw, AUDIT_DATE)), currentPublicIds: ids(selectPublishedData(raw, actualToday)) })
+  for (const name of FILE_NAMES) assert.equal(sha(readFileSync(localFile(primaryRoot, 'content/data/' + name))), summary.inputFileSha256[name])
+  assert.equal(sha(readFileSync(inventoryFile)), sha(inventoryBytes), 'Current inventory changed during aggregation')
+  assert.equal(getTodayDate(), actualToday, 'China calendar changed during aggregation')
+  return { ...summary, evaluatedForDate: actualToday, historicalAggregation: {
+    originalAuditDate: AUDIT_DATE, currentInventory: currentInventoryPath, currentInventorySha256: sha(inventoryBytes),
+    identicalSixInputHashes: true, identicalPublicRecordIds: true, newOfficialWebsiteReads: 0, wholeRecordFreshnessRenewals: 0,
+  }, limitations: [...summary.limitations.filter(value => !value.startsWith('The summary is specific to')),
+    'Historical source observations retain 2026-10-19. Aggregation on a later day does not renew their observation dates or whole-record freshness.',
+    'Current-day reuse requires a freshly generated machine inventory, identical six input hashes and exactly unchanged public record IDs. The default same-day builder remains strict.',
+  ] }
 }
 
 function selfTest(): void {

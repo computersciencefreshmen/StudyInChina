@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "batchId": "official-date-only-043-20261019",
+  "reviewer": "independent-offline-agent-dates-045",
+  "reviewedAt": "2026-10-20T08:19:22.727Z",
+  "result": "source-only-pass",
+  "finalReportSha256": "ac65ab76ba6284a6fc58332a8d4ed18d8951fdd2f37bc766fe8691c97e274a3c",
+  "report": {
+    "path": "report.json",
+    "sha256": "ac65ab76ba6284a6fc58332a8d4ed18d8951fdd2f37bc766fe8691c97e274a3c"
+  },
+  "reviewScope": "IndependentOctober20 offline review of the frozenOctober19 exact9 date records at6 university scopes. Original body/text/time pins, full canonical row/parent/source/university pins, funding and applicant/review stages and ambiguous-year limitations checked. No new sourceGETs; only this review receipt is written in043.",
+  "summary": {
+    "checksPassed": 20,
+    "checksFailed": 0,
+    "recordsReviewed": 9,
+    "universitiesReviewed": 6,
+    "recordOutcomes": {
+      "unknown": 3,
+      "closed": 3,
+      "unchanged": 2,
+      "blocked": 1
+    },
+    "originalBodiesChecked": 5,
+    "sourceObservationDate": "2026-10-19",
+    "reviewPerformedOfflineOn": "2026-10-20",
+    "networkRequests": 0,
+    "canonicalWrites": 0
+  },
+  "checks": [
+    {
+      "name": "exact-root-final-report-selection-audit-observation-date",
+      "passed": true
+    },
+    {
+      "name": "six-canonical-input-sha-before-after-and-snapshot",
+      "passed": true
+    },
+    {
+      "name": "queue-summary-inventory-and-root-exact-dispatch-pins",
+      "passed": true
+    },
+    {
+      "name": "nine-exact-unique-IDs-six-scopes-zero-extension-no-prior-overlap",
+      "passed": true
+    },
+    {
+      "name": "full-canonical-university-rows-and-hashes",
+      "passed": true
+    },
+    {
+      "name": "canonical-full-record-parent-linked-program-and-source-pins",
+      "passed": true
+    },
+    {
+      "name": "six-original-operations-five-HTML-body-hash-length-text-tls-pins",
+      "passed": true
+    },
+    {
+      "name": "record-evidence-original-body-text-and-old-observedAt-preserved",
+      "passed": true,
+      "detail": "Review and completion onOctober20 are distinguished from the savedOctober19 source reads. No source freshness is renewed."
+    },
+    {
+      "name": "unchanged-past-candidate-unknown-blocked-semantics",
+      "passed": true
+    },
+    {
+      "name": "BFSU-freshman-current-page-and-unanchored-month-days-unknown",
+      "passed": true,
+      "detail": "A2026 publication timestamp does not assign application years to November30/June5. Current freshman scope is not silently treated as a senior-student annual-award deadline."
+    },
+    {
+      "name": "BIT-two-independent-own2026-award-sections-May1",
+      "passed": true,
+      "detail": "SectionC BeijingGovernmentScholarship is Beijing-campus-only and has its ownMay1 deadline. SectionE BITInternationalStudentScholarship separately statesMay1. CSC rounds and annual review are separate routes/stages."
+    },
+    {
+      "name": "BLCU-English-Finance-unstarred-route-and-explicit-year-conflict-held",
+      "passed": true,
+      "detail": "Original pairs September2025 enrollment with June30,2026 application date. Neither enrollment year nor deadline year is silently repaired. March2026 window is not transferred to unstarred EnglishFinance."
+    },
+    {
+      "name": "BNU-exact2026-bachelor-master-September-and-Zhuhai-scope",
+      "passed": true,
+      "detail": "Two matching degree levels explicitly commenceSeptember2026; original bachelorZhuhai campus wording is preserved, without renewing programme facts."
+    },
+    {
+      "name": "BNU-strict-beforeMay15-applicants-versus-May25-institution-review",
+      "passed": true,
+      "detail": "BeforeMay15 BeijingTime is the applicant boundary. May25 belongs to recommending/host institution review. No24:00 cutoff or unrelated intake date is substituted."
+    },
+    {
+      "name": "BSU-historical-rule-refers-to-separately-announced-cutoff",
+      "passed": true,
+      "detail": "2014 signed rule published2015 supplies no current exact applicant day. Publicity periods and annual review are not applicant deadlines."
+    },
+    {
+      "name": "BUPT-native412-and-one-web412-no-body-cooldown",
+      "passed": true
+    },
+    {
+      "name": "source-only-no-canonical-publication-freshness-or-whole-school-action",
+      "passed": true
+    },
+    {
+      "name": "prior-frozen-one-through-fortytwo-report-hashes",
+      "passed": true
+    },
+    {
+      "name": "nine-outcomes-three-closed-two-unchanged-three-unknown-one-blocked",
+      "passed": true
+    },
+    {
+      "name": "final-report-and-six-canonical-inputs-still-unchanged",
+      "passed": true
+    }
+  ],
+  "sourceOriginalPins": [
+    {
+      "path": "bfsu-annual.html",
+      "sha256": "e2f7969432bf91718214004bb4c8988dd14355958b57f2fa2ac2eb68f2983565"
+    },
+    {
+      "path": "bit-awards.html",
+      "sha256": "6d9620b0b612e08d04ab2651348cfa646c2fede7d266272b876db7eeb134b640"
+    },
+    {
+      "path": "blcu-finance.html",
+      "sha256": "016d37595e985e9e5c33d4d9825a80753e8461857cc3ac4e3aab3f5ca2ed2f96"
+    },
+    {
+      "path": "bnu-iclt.html",
+      "sha256": "dec901aeee2ba3d66a738fb7e75db625c16bb9aad1e3bcfd7cbbf917ffb30314"
+    },
+    {
+      "path": "bsu-award.html",
+      "sha256": "0fd8155c1f09bd664da3dc6f5383e4f0b722909867a80a01830a46124e3483ae"
+    }
+  ],
+  "artifactPins": [
+    {
+      "path": "selection.json",
+      "sha256": "a1711166ed7bb76f411d1b9aaa0fa43d9b921600c3900ce1e70458e120da567b"
+    },
+    {
+      "path": "captures.json",
+      "sha256": "c037ec7171f811167b82f7a9e801bb15ad5639a5fc0b01f2c3de87012d9c26bd"
+    },
+    {
+      "path": "canonical-university-pins.json",
+      "sha256": "c781713916116f47b6310589eedf424461732bb68105d0b8021bc1152ddf3027"
+    },
+    {
+      "path": "archive-search.json",
+      "sha256": "7996cf9773c311a4ff0cdfcb2083d55046d03bfbfc77ba09f935f16736877b0a"
+    },
+    {
+      "path": "bupt-web-fallback.json",
+      "sha256": "e1c5edd00c23f0392fd7b9be16fdb716fdc8ffaa31eda0c7efe5db57276f0428"
+    }
+  ],
+  "recordSetSha256": "c069e2fb2f9b427b963dd476de9e1528437b4bd7b5e0c922c486d8c9b37a899a",
+  "limitations": [
+    "Acceptance is source-only. Three null-to-date past observations remain candidates; two storedMay15 dates remain unchanged. No canonical changes or freshness/publication approval.",
+    "OriginalOctober19 sourceobservedAt values are retained. October20 completion/review is entirely offline and is not a new source verification.",
+    "BFSU freshman overview month-days have no explicit application year. BLCU originalSeptember2025/June2026 conflict is preserved; March timing is not borrowed by unstarredFinance.",
+    "BIT two award sections independently stateMay1,2026. BNU degree applicant deadline is strictly beforeMay15 BeijingTime, withMay25 institutional review kept separate and no fabricated clock time.",
+    "BSU historical rule defers the cutoff to another notice; BUPT failed native and singleweb412 and remains blocked/cooldown. Unknown/blocked establish no availability or cessation.",
+    "No complete-school catalogue, other-year rollover, fees, materials, funding amount or programme-fact renewal is certified."
+  ],
+  "finalReportUnchanged": true
+}
