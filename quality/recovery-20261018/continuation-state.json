@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-20T09:10:40.953Z",
+  "updatedAt": "2026-10-20T10:10:51.674Z",
   "primaryWorkspace": "C:/Users/Henry/Desktop/学过的课程/github_profile_work/StudyInChina",
-  "canonicalOwner": "heartbeat-date-first-20261019T1320",
-  "canonicalWritesReleased": false,
+  "canonicalOwner": "released-for-date-first-maintenance",
+  "canonicalWritesReleased": true,
   "handoff": "docs/operations/deadline-fast-sweep-2026-10-19.md",
   "catalogSha256": "3122c3ad8e1f5086d7dc14c1c20a0c8de57905bd0e17c65ec326b6ebff96312b",
-  "sourceCommit": "0cb2b83dde6116907752ec60a165fedc6f3f203f",
+  "sourceCommit": "2260e61a23fbd9f67c4218a1b10974306a91dab1",
   "publicProjection": {
     "programs": 783,
     "scholarships": 7,
@@ -14,28 +14,31 @@
     "universitiesWithoutPrograms": 238
   },
   "lastStableReadback": {
-    "deploymentId": "dpl_H3ySH4TmzdEP1JFmec4jxsJuQgwn",
-    "previousDeploymentId": "dpl_EUkxVddCJFkt2KvLso15TdCEDCht",
+    "deploymentId": "dpl_4hjorx4uJUaK78PvLGTD6kMLCR2h",
+    "previousDeploymentId": "dpl_H3ySH4TmzdEP1JFmec4jxsJuQgwn",
+    "sourceCommit": "2260e61a23fbd9f67c4218a1b10974306a91dab1",
     "programs": 783,
     "scholarships": 7,
     "universities": 255,
     "universitiesWithPrograms": 17,
     "universitiesWithoutPrograms": 238,
-    "evaluatedForDate": "2026-10-19",
+    "evaluatedForDate": "2026-10-20",
     "catalogBackend": "json",
-    "proof": "quality/recovery-20261019/release-rapid-0cb2b83/stable-smoke-v2/stable-public-smoke.json",
-    "proofSha256": "c9fc2c4689ffcea38fea8844f6f7ef3fa9028ffc2c36b4fc8bb1f7eee5b8a218",
-    "completedAt": "2026-10-19T04:39:18.238Z"
+    "proof": "quality/recovery-20261020/release-rapid-2260e61-20261020/stable-smoke-v3/stable-public-smoke.json",
+    "proofSha256": "8900a7de0265a4431b59ee369b3bc23edb97e776c0fbd286acf60163d134a66b",
+    "completedAt": "2026-10-20T10:07:01.630Z",
+    "mode": "public-without-protection-credential"
   },
   "candidate": {
-    "deploymentId": "dpl_H3ySH4TmzdEP1JFmec4jxsJuQgwn",
-    "url": "https://studyinchina-1c6n5o9bu-henry-yangs-projects-c9706eac.vercel.app",
-    "sourcePlan": "quality/recovery-20261019/release-rapid-0cb2b83/source-plan.json",
-    "qualification": "READY-owner-project-commit-qualified; complete candidate and stable smoke passed",
+    "deploymentId": "dpl_4hjorx4uJUaK78PvLGTD6kMLCR2h",
+    "url": "https://studyinchina-o6w4600e0-henry-yangs-projects-c9706eac.vercel.app",
+    "sourcePlan": "quality/recovery-20261020/release-rapid-2260e61-20261020/source-plan.json",
+    "qualification": "READY exact source; fresh complete candidate proof passed before shared promotion; complete stable public proof passed",
     "promoted": true,
-    "smokeProof": "quality/recovery-20261019/release-rapid-0cb2b83/candidate-smoke-v2/candidate-public-smoke.json",
-    "smokeProofSha256": "219d6b30a1ea2cd5472e37d9cc4204e01cc3e3de40436ba0c8146c891817f1b6",
-    "sourceCommit": "0cb2b83dde6116907752ec60a165fedc6f3f203f",
+    "mayPromote": false,
+    "smokeProof": "quality/recovery-20261020/release-rapid-2260e61-20261020/candidate-smoke-v2/candidate-public-smoke.json",
+    "smokeProofSha256": "7031d189ce8359ca5be921278640ea5ebb53bd5bc78f1c80dd1e6ab258f46f0b",
+    "sourceCommit": "2260e61a23fbd9f67c4218a1b10974306a91dab1",
     "promotionProofMaxAgeMinutes": 15
   },
   "publicationAuthentication": "coordinated ADMIN reset completed; GitHub authenticated project/owner/alias/common-writer GETs verified; no further reset required",
@@ -46,11 +49,11 @@
     "status": "ACTIVE",
     "intervalMinutes": 15,
     "targetThreadId": "01a15268-0d77-7c20-ac9a-c86a890d6a64",
-    "readback": "quality/recovery-20261019/release-rapid-0cb2b83/date-first-automation-readback-v1.json"
+    "readback": "quality/recovery-20261020/release-rapid-2260e61-20261020/automation-resume-readback-v1.json"
   },
   "canonicalOwnershipRelease": {
-    "releasedAt": "2026-10-20T09:10:40.953Z",
-    "scope": "Continue pending date-only source groups from the latest summary/progress/nextQueue. No whole-record renewal from date checks; no unguarded release.",
+    "releasedAt": "2026-10-20T10:10:51.674Z",
+    "scope": "Continue exact unassessed date scopes from current pointers; preserve real source dates and per-day projection bindings. No paid lane resume, whole-record renewal or unguarded release.",
     "handoffCommitMustMatchUpstream": true,
     "requiresFreshCompleteCandidateProof": true,
     "requiresCommonWriterCas": true,
@@ -249,13 +252,21 @@
     "evaluatedForDate": "2026-10-20",
     "currentCalendarAudit": "quality/deadline-sweep-20261020/inventory-20261020T0835/catalog-deadlines.json",
     "currentCalendarAuditSha256": "3fd8e0177f9e7aece3a9efd501bcc303f9970557a8c4d2beaab923c109f68c58",
-    "latestSourceObservationDate": "2026-10-19"
+    "latestSourceObservationDate": "2026-10-19",
+    "historicalReaderScope": "Explicit finalization of pinned 2026-10-19 receipts using the current-day identical snapshot; new-day reports must keep their real date and need explicit mixed-date reader binding, never backdating."
   },
-  "pendingWebsiteRefresh": {
-    "sourceCommit": "2260e61a23fbd9f67c4218a1b10974306a91dab1",
-    "deploymentId": "dpl_4hjorx4uJUaK78PvLGTD6kMLCR2h",
-    "previousDeploymentId": "dpl_H3ySH4TmzdEP1JFmec4jxsJuQgwn",
-    "state": "promoted-awaiting-complete-stable-readback",
-    "guardedPromotion": "quality/recovery-20261020/release-rapid-2260e61-20261020/guarded-promotion-v2.json"
+  "previousStableReadback": {
+    "deploymentId": "dpl_H3ySH4TmzdEP1JFmec4jxsJuQgwn",
+    "previousDeploymentId": "dpl_EUkxVddCJFkt2KvLso15TdCEDCht",
+    "programs": 783,
+    "scholarships": 7,
+    "universities": 255,
+    "universitiesWithPrograms": 17,
+    "universitiesWithoutPrograms": 238,
+    "evaluatedForDate": "2026-10-19",
+    "catalogBackend": "json",
+    "proof": "quality/recovery-20261019/release-rapid-0cb2b83/stable-smoke-v2/stable-public-smoke.json",
+    "proofSha256": "c9fc2c4689ffcea38fea8844f6f7ef3fa9028ffc2c36b4fc8bb1f7eee5b8a218",
+    "completedAt": "2026-10-19T04:39:18.238Z"
   }
 }
