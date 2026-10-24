@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
   },
   // These files belong to the local executor and must never enter website bundles.
   outputFileTracingExcludes: {
-    '/*': ['./.official-harvest/**/*', './.tmp/**/*', './.env*', './.vercel/**/*'],
+    '/*': ['./.official-harvest/**/*', './.pipeline-build/**/*', './.tmp/**/*', './.env*', './.vercel/**/*'],
   },
   experimental: {
     globalNotFound: true,

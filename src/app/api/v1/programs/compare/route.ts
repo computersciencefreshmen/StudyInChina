@@ -1,4 +1,4 @@
-import { compareCatalogPrograms } from '@/lib/catalog-api/runtime'
+import { compareCatalogPrograms, getCatalogDirectoryService } from '@/lib/catalog-api/runtime'
 import {
   handleCatalogRequest,
   InvalidQueryError,
@@ -29,7 +29,11 @@ function programIds(params: URLSearchParams): string[] {
 
 export function GET(request: Request) {
   return handleCatalogRequest(async () => {
-    const ids = programIds(new URL(request.url).searchParams)
+    const params = new URL(request.url).searchParams
+    const ids = programIds(params)
+    const view = stringParam(params, 'view')
+    if (view && view !== 'directory') throw new InvalidQueryError('view is invalid.')
+    if (view === 'directory') return ok((await getCatalogDirectoryService()).comparePrograms(ids))
     return ok(await compareCatalogPrograms(ids))
   })
 }

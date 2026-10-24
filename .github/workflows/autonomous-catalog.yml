@@ -15,6 +15,7 @@ concurrency:
 
 jobs:
   maintain:
+    if: vars.CATALOG_MAINTENANCE_MODE != 'cloud'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:

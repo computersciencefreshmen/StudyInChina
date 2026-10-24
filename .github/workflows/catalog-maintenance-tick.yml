@@ -1,0 +1,85 @@
+name: Cloud catalog scheduler and durable health
+
+# GitHub schedules run from the default branch and may be delayed. The Worker
+# needs no additional Cloudflare Cron slot; its existing account crons stay intact.
+on:
+  schedule:
+    - cron: '11,26,41,56 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-maintenance-cloud-tick-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  tick:
+    if: vars.CATALOG_MAINTENANCE_MODE == 'cloud' && vars.CATALOG_MAINTENANCE_TICK_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Tick the bounded scheduler and retain actual runtime observations
+        env:
+          CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+          CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/catalog-maintenance-tick"
+          node --import tsx scripts/automation/catalog-maintenance-client.ts tick > "$RUNNER_TEMP/catalog-maintenance-tick/tick.json"
+          node --import tsx scripts/automation/catalog-maintenance-client.ts status > "$RUNNER_TEMP/catalog-maintenance-tick/status.json"
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync, appendFileSync } from 'node:fs';
+          import { join } from 'node:path';
+          const directory = join(process.env.RUNNER_TEMP, 'catalog-maintenance-tick');
+          const tick = JSON.parse(readFileSync(join(directory, 'tick.json'), 'utf8'));
+          const status = JSON.parse(readFileSync(join(directory, 'status.json'), 'utf8'));
+          if (tick.format !== 'studyinchina.cloud-maintenance-tick'
+              || status.format !== 'studyinchina.cloud-maintenance-status'
+              || !/^[a-f0-9]{64}$/.test(tick.receiptSha256 ?? '')) {
+            throw new Error('maintenance_tick_receipt_invalid');
+          }
+          const receipt = { format: 'studyinchina.github-cloud-tick', version: 1,
+            observedAt: new Date().toISOString(), runId: process.env.GITHUB_RUN_ID,
+            runAttempt: process.env.GITHUB_RUN_ATTEMPT, sourceCommit: process.env.GITHUB_SHA,
+            tick, status };
+          writeFileSync(join(directory, 'receipt.json'), JSON.stringify(receipt, null, 2) + '\n');
+          const soak = status.soak ?? {};
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY, [
+            '### Cloud catalogue maintenance',
+            '- Actual tick: ' + tick.state + ' (' + tick.code + ').',
+            '- Durable Worker receipt: `' + tick.receiptKey + '`.',
+            '- D1 state: ' + (status.backend?.state ?? 'unobserved') + '.',
+            '- Seed ready: ' + (status.control?.seed_complete === 1) + '; targets ready: ' + (status.control?.targets_complete === 1) + '.',
+            '- Seven-day observation: ' + (soak.assessment ?? 'unobserved') + '; ' + (soak.observedHours ?? 0) + ' of 168 real elapsed hours.',
+            '- Recorded/eligible ticks: ' + (soak.recordedTicksLastSevenDays ?? 0) + '/' + (soak.eligibleTicksLastSevenDays ?? 0) + '.',
+            '- A passing workflow is not proof that seven days have elapsed or that every school is complete.',
+            '',
+          ].join('\n'));
+          console.log(JSON.stringify({ state: tick.state, code: tick.code,
+            soakAssessment: soak.assessment ?? 'unobserved', soakPassed: soak.passed === true }));
+          // A known shared daily-quota wait is a persisted waiting state. It
+          // does not trigger model requests or an automatic account upgrade.
+          if (tick.state === 'error' || status.backend?.state === 'backend_unavailable') process.exitCode = 1;
+          NODE
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: catalog-maintenance-tick-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/catalog-maintenance-tick/tick.json
+            ${{ runner.temp }}/catalog-maintenance-tick/status.json
+            ${{ runner.temp }}/catalog-maintenance-tick/receipt.json
+          if-no-files-found: warn
+          retention-days: 35

@@ -10,7 +10,7 @@ import UniversityDetailPage, {
 import ScholarshipDetail from '@/app/[locale]/scholarships/[slug]/page'
 import { indexedLocales, launchLocales } from '@/i18n/config'
 import { getMessages } from '@/i18n/messages'
-import { providerLabel } from '@/lib/data/scholarship'
+import { coverageLabel, providerLabel } from '@/lib/data/scholarship'
 import { getCatalogData } from '@/lib/data/load'
 import * as freshness from '@/lib/data/freshness'
 import type { DataBundle } from '@/lib/data/types'
@@ -39,6 +39,28 @@ afterEach(() => {
 })
 
 describe('detail-page canonical and locale hardening', () => {
+  it('shows reviewed scholarship eligibility and restrictions in every public locale', async () => {
+    const data = localeFixture()
+    data.scholarships[0].coverage = { tuition: 'full', accommodation: 'partial', insurance: false, stipendCnyPerMonth: null }
+    data.scholarships[0].eligibility = [{ en: 'New doctoral applicants only; competitive selection, no automatic award.', zh: '仅限博士新生申请；择优评选，不保证获奖。' }]
+    vi.mocked(getCatalogData).mockResolvedValue(data)
+    for (const locale of launchLocales) {
+      const { container, unmount } = render(await ScholarshipDetail({ params: Promise.resolve({ locale, slug: SCHOLARSHIP_SLUG }) }))
+      const section = container.querySelector('[data-scholarship-eligibility]')
+      expect(section?.textContent).toContain(getMessages(locale).programs.eligibility)
+      expect(section?.textContent).toContain(locale === 'zh' ? '仅限博士新生申请' : 'New doctoral applicants only')
+      const facts = [...container.querySelectorAll('[data-scholarship-detail] .detail-facts > div')]
+        .map(row => [row.querySelector('dt')?.textContent, row.querySelector('dd')?.textContent])
+      const copy = getMessages(locale).scholarships
+      expect(facts).toEqual(expect.arrayContaining([
+        [copy.tuition, coverageLabel('full', locale)],
+        [copy.accommodation, coverageLabel('partial', locale)],
+        [copy.insurance, copy.notIncluded],
+      ]))
+      unmount()
+    }
+  })
+
   it('uses the canonical university slug for canonical, hreflang and x-default metadata', async () => {
     const metadata = await generateUniversityMetadata({
       params: Promise.resolve({ locale: 'zh', slug: ALIAS_SLUG }),

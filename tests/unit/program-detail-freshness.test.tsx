@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { connection } from 'next/server'
 import ProgramDetailPage, { generateMetadata as programMetadata } from '@/app/[locale]/programs/[slug]/page'
 import UniversityDetailPage, { generateMetadata as universityMetadata } from '@/app/[locale]/universities/[slug]/page'
-import ScholarshipDetailPage, { generateMetadata as scholarshipMetadata } from '@/app/[locale]/scholarships/[slug]/page'
+import ScholarshipDetailPage, { dynamic as scholarshipRendering, generateMetadata as scholarshipMetadata } from '@/app/[locale]/scholarships/[slug]/page'
 import { getCatalogData } from '@/lib/data/load'
 import * as freshness from '@/lib/data/freshness'
 import type { DataBundle, ProgramDetails } from '@/lib/data/types'
@@ -39,6 +39,22 @@ beforeEach(() => {
 afterEach(() => { vi.restoreAllMocks() })
 
 describe('program detail evidence and freshness', () => {
+  it('renders an accepted award identity at request time when there are no current awards', async () => {
+    expect(scholarshipRendering).toBe('force-dynamic')
+    const data = bundle(false)
+    data.scholarships[0] = {
+      ...data.scholarships[0], status: 'stale', deadline: null, applicationUrl: null,
+      coverage: { tuition: 'unknown', accommodation: 'unknown', insurance: 'unknown', stipendCnyPerMonth: null },
+      summary: null,
+    }
+    vi.mocked(getCatalogData).mockResolvedValue(data)
+    const { container } = render(await ScholarshipDetailPage({ params: Promise.resolve({ locale: 'en', slug: 'scholarship' }) }))
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Merit scholarship')
+    expect(container.querySelector('[data-discovery-notice]')).toBeInTheDocument()
+    expect(container).not.toHaveTextContent('Aug 30, 2026')
+    expect((await scholarshipMetadata({ params: Promise.resolve({ locale: 'en', slug: 'scholarship' }) })).robots).toEqual({ index: false, follow: true })
+  })
+
   it.each([false, true])('renders official weeks in the %s complete detail branch without an invented ISO duration', async complete => {
     const data = bundle(complete)
     data.programs[0].durationMonths = null

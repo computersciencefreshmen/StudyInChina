@@ -59,6 +59,14 @@ function parseCounts(value: unknown, field: string): CatalogRecordCounts {
   return parsed
 }
 
+function optionalProjectionCounts<K extends string>(value: unknown, fields: K[], field: string): Record<K, number> | undefined {
+  if (value === undefined) return undefined
+  if (!isObject(value) || fields.some(key => !Number.isSafeInteger(value[key]) || (value[key] as number) < 0)) {
+    throw new CatalogRepositoryError('INVALID_RELEASE', `Catalog release ${field} counts must be non-negative integers.`)
+  }
+  return Object.fromEntries(fields.map(key => [key, value[key]])) as Record<K, number>
+}
+
 function releaseDate(value: unknown, fallback: string, field: string): string {
   if (value === undefined) return fallback
   if (typeof value !== 'string' || !DATE_PATTERN.test(value)) {
@@ -115,6 +123,14 @@ export function parseCatalogReleaseInfo(value: unknown): CatalogRelease {
   if (deploymentSha !== null && (typeof deploymentSha !== 'string' || !DEPLOYMENT_SHA_PATTERN.test(deploymentSha))) {
     throw new CatalogRepositoryError('INVALID_RELEASE', 'Catalog release deploymentSha must be null or a 40-character lowercase hexadecimal SHA.')
   }
+  const directoryCounts = optionalProjectionCounts(value.directoryCounts, ['universities', 'programs', 'scholarships'], 'directoryCounts')
+  const directoryRevision = value.directoryRevision
+  if (directoryRevision !== undefined && (typeof directoryRevision !== 'string' || !/^[a-f0-9]{64}$/u.test(directoryRevision))) {
+    throw new CatalogRepositoryError('INVALID_RELEASE', 'Catalog release directoryRevision must be a SHA-256 digest.')
+  }
+  const currentFactsCounts = optionalProjectionCounts(value.currentFactsCounts, ['universities', 'programs', 'admissionCycles', 'scholarships'], 'currentFactsCounts')
+  const currentOpportunityCounts = optionalProjectionCounts(value.currentOpportunityCounts, ['programs', 'admissionCycles', 'scholarships'], 'currentOpportunityCounts')
+  const schoolCoverageCounts = optionalProjectionCounts(value.schoolCoverageCounts, ['cohort', 'directory', 'withDirectoryPrograms', 'withCurrentOpportunities'], 'schoolCoverageCounts')
 
   return {
     id,
@@ -128,6 +144,11 @@ export function parseCatalogReleaseInfo(value: unknown): CatalogRelease {
     activatedAt: releaseTimestamp(value.activatedAt, generatedAt, 'activatedAt'),
     catalogBackend: catalogBackend as CatalogRelease['catalogBackend'],
     deploymentSha,
+    ...(directoryCounts ? { directoryCounts } : {}),
+    ...(directoryRevision ? { directoryRevision } : {}),
+    ...(currentFactsCounts ? { currentFactsCounts } : {}),
+    ...(currentOpportunityCounts ? { currentOpportunityCounts } : {}),
+    ...(schoolCoverageCounts ? { schoolCoverageCounts } : {}),
   }
 }
 

@@ -1,4 +1,5 @@
 import { normalizeProgramField } from '@/lib/data/fields'
+import { getTodayDate } from '@/lib/data/freshness'
 import { parseRankingFilters, rankingFilterKeys, type RankingFilters } from '@/lib/data/rankings'
 import type { Region } from '@/lib/data/types'
 import {
@@ -118,6 +119,8 @@ function repositoryInstitutionQuery(
   cursor: string | undefined,
 ): CatalogInstitutionListQuery {
   return {
+    view: 'directory',
+    today: getTodayDate(),
     ...Object.fromEntries(rankingFilterKeys.map((key) => [key, filters[key] || undefined])),
     q: filters.query || undefined,
     city: filters.city || undefined,

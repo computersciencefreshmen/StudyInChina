@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path'
 import { pathToFileURL } from 'node:url'
+import { applyCatalogSnapshotFiles, readCatalogSnapshotBaseline } from '../automation/apply-catalog-snapshot'
 import { bundleSchema, programSchema, admissionCycleSchema, sourceSchema } from '../../src/lib/data/schema'
 import { getTodayDate } from '../../src/lib/data/freshness'
 import { hasConfirmedProgramDuration } from '../../src/lib/data/duration'
@@ -90,8 +91,8 @@ export function applyFullProgramBatch(root: string, batch: FullProgramBatch, exp
   if (!/^[a-z0-9-]{1,80}$/.test(batch.batchId)) throw Error('batch_contract_invalid')
   const receiptPath = resolve(root, 'quality/program-expansion-20261013/applied-' + batch.batchId + '.json')
   if (existsSync(receiptPath)) throw Error('batch_already_applied')
-  const read = (name: string) => JSON.parse(readFileSync(resolve(root, 'content/data/' + name + '.json'), 'utf8'))
-  const catalog = bundleSchema.parse({ sources: read('sources'), cities: read('cities'), universities: read('universities'), programs: read('programs'), admissionCycles: read('admission-cycles'), scholarships: read('scholarships') })
+  const baseline = readCatalogSnapshotBaseline(resolve(root, 'content/data'))
+  const catalog = baseline.bundle
   const originalSha = digest(JSON.stringify(catalog))
   if (originalSha !== expectedCatalogSha256) throw Error('canonical_catalog_changed')
   const assessment = assessFullProgramBatch(root, batch, catalog, today), approved = assessment.entries.filter(item => item.ready)
@@ -102,13 +103,23 @@ export function applyFullProgramBatch(root: string, batch: FullProgramBatch, exp
   const needed = new Set(approved.flatMap(entry => [...entry.program.sourceIds, ...entry.cycle.sourceIds]))
   for (const source of batch.sources) if (needed.has(source.id)) sources.set(source.id, source)
   const next = bundleSchema.parse({ ...catalog, programs: [...programs.values()], admissionCycles: [...cycles.values()], sources: [...sources.values()] })
-  const changes = { sources: next.sources, programs: next.programs, 'admission-cycles': next.admissionCycles }
-  // All validation precedes writes. Preserve exact before/after rows in the receipt.
-  const receipt = { batchId: batch.batchId, appliedAt: new Date().toISOString(), originalCatalogSha256: originalSha, nextCatalogSha256: digest(JSON.stringify(next)), assessment, appliedPrograms: approved.length, newPrograms,
+  // All validation precedes the permanent reservation and shared snapshot apply.
+  // Preserve the original normalized hashes and exact approved before/after rows.
+  const receipt = { batchId: batch.batchId, reservedAt: new Date().toISOString(), status: 'reserved-awaiting-local-snapshot',
+    batchSha256: digest(JSON.stringify(batch)), baselineFileSha256: Object.fromEntries(baseline.files.map(file => [file.key, file.sha256])),
+    originalCatalogSha256: originalSha, nextCatalogSha256: digest(JSON.stringify(next)), assessment, appliedPrograms: approved.length, newPrograms,
     before: approved.map(entry => ({ program: catalog.programs.find(p => p.id === entry.program.id) ?? null, cycle: catalog.admissionCycles.find(c => c.id === entry.cycle.id) ?? null })), after: approved.map(entry => ({ program: entry.program, cycle: entry.cycle })) }
   mkdirSync(dirname(receiptPath), { recursive: true })
-  for (const [name, values] of Object.entries(changes)) writeFileSync(resolve(root, 'content/data/' + name + '.json'), JSON.stringify(values, null, 2) + '\n')
-  writeFileSync(receiptPath, JSON.stringify(receipt, null, 2) + '\n')
+  writeFileSync(receiptPath, JSON.stringify(receipt, null, 2) + '\n', { flag: 'wx' })
+  try {
+    const snapshot = applyCatalogSnapshotFiles(baseline, next)
+    writeFileSync(receiptPath, JSON.stringify({ ...receipt, status: 'local-snapshot-applied-awaiting-publication', appliedAt: new Date().toISOString(), snapshot }, null, 2) + '\n')
+  } catch (error) {
+    // Keep the marker even after rollback: failures require explicit reconciliation
+    // and a separately authorized successor, never replay of this batch identity.
+    writeFileSync(receiptPath, JSON.stringify({ ...receipt, status: 'snapshot-failed-reconciliation-required' }, null, 2) + '\n')
+    throw error
+  }
   return { assessment, appliedPrograms: approved.length, newPrograms }
 }
 

@@ -6,6 +6,7 @@ import type {
   Scholarship,
   University,
 } from '@/lib/data/types'
+import { hasCurrentDirectoryField } from '@/lib/data/discovery-state'
 import { hasRankingFilters, matchesUniversityRankings, parseRankingFilters, rankingFilterKeys, type RankingFilters } from '@/lib/data/rankings'
 import {
   readCatalogListCursorPageIndex,
@@ -309,10 +310,12 @@ export function queryScholarshipCatalog(
       )))
       && (!filters.degree || programs.some((item) => item.degreeLevel === filters.degree))
       && (!filters.funding || (
-        scholarship.status === 'verified' && matchesFunding(scholarship, filters.funding)
+        hasCurrentDirectoryField(scholarship, filters.funding === 'full-tuition' || filters.funding === 'partial-tuition' ? 'coverage.tuition'
+          : filters.funding === 'stipend' ? 'coverage.stipendCnyPerMonth' : `coverage.${filters.funding}`, today)
+        && matchesFunding(scholarship, filters.funding)
       ))
       && (!filters.deadline || (
-        scholarship.status === 'verified' && matchesDeadline(currentCycle, filters.deadline, today)
+        hasCurrentDirectoryField(scholarship, 'deadline', today) && matchesDeadline(currentCycle, filters.deadline, today)
       ))
 
     const matchesRankings = !hasRankingFilters(filters) || rankingUniversities.some((university) => (
@@ -346,6 +349,7 @@ function repositoryScholarshipQuery(
   cursor: string | undefined,
 ): CatalogScholarshipListQuery {
   return {
+    view: 'directory',
     ...Object.fromEntries(rankingFilterKeys.map((key) => [key, filters[key] || undefined])),
     q: filters.query || undefined,
     institution: filters.institution || undefined,

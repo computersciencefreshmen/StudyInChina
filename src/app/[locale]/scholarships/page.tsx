@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import { ScholarshipExplorerV2 } from '@/components/features/ScholarshipExplorerV2'
+import { DiscoveryNotice } from '@/components/features/DiscoveryNotice'
 import { PageHero } from '@/components/ui'
 import { getMessages } from '@/i18n/messages'
 import { getTodayDate } from '@/lib/data/freshness'
@@ -48,6 +49,7 @@ export default async function ScholarshipsPage({
       meta={<><span>{messages.common.authoritativeNotice}</span></>}
     />
     <section className="atlas-container atlas-section">
+      <DiscoveryNotice locale={locale} />
       <div className="notice scholarship-notice">{messages.scholarships.catalogueNotice}</div>
       <ScholarshipExplorerV2 result={result} locale={locale} messages={messages} today={today} />
     </section>

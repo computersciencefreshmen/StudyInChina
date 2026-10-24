@@ -86,7 +86,9 @@ describe('repository-backed university catalogue', () => {
     const result = await queryUniversityCatalogRepository(repository, filters)
 
     expect(listInstitutions).toHaveBeenCalledTimes(1)
-    expect(listInstitutions).toHaveBeenLastCalledWith({
+    expect(listInstitutions).toHaveBeenLastCalledWith(expect.objectContaining({
+      view: 'directory',
+      today: expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/u),
       q: 'medicine',
       city: 'guangzhou',
       region: 'south',
@@ -94,7 +96,7 @@ describe('repository-backed university catalogue', () => {
       sort: 'scholarships-desc',
       cursor,
       limit: UNIVERSITY_CATALOG_PAGE_SIZE,
-    })
+    }))
     expect(result.page).toBe(3)
     expect(result.filters.cursorHistory).toEqual(['~', 'cursor-page-2'])
   })
@@ -107,7 +109,8 @@ describe('repository-backed university catalogue', () => {
     )
 
     expect(listInstitutions).toHaveBeenCalledTimes(1)
-    expect(listInstitutions).toHaveBeenCalledWith({ limit: UNIVERSITY_CATALOG_PAGE_SIZE })
+    expect(listInstitutions).toHaveBeenCalledWith(expect.objectContaining({ limit: UNIVERSITY_CATALOG_PAGE_SIZE,
+      view: 'directory', today: expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/u) }))
     expect(result.page).toBe(1)
     expect(result.filters.cursorHistory).toEqual([])
   })

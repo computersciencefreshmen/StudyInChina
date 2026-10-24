@@ -155,6 +155,17 @@ type R2AuditReceipt = {
 }
 
 const ledger = JSON.parse(readFileSync(LEDGER, 'utf8')) as Ledger
+const WAVE_SOURCE_ID_SET = new Set(ledger.sources.map((source) => source.sourceId))
+// These stable identities have a separate, independently reviewed March 2027 route.
+// Its facts must not be mistaken for a renewal of the August 2026 wave.
+const REVERIFIED_SZU_PROGRAM_IDS = new Set([
+  'program-shenzhen-university-chemistry-doctorate',
+  'program-shenzhen-university-biology-doctorate',
+])
+const REVERIFIED_SZU_SOURCE_IDS = [
+  'source-szu-doctoral-spring-2027-guide-20261019',
+  'source-szu-doctoral-spring-2027-catalogue-20261019',
+]
 const r2AuditReceiptRaw = readFileSync(R2_AUDIT_RECEIPT, 'utf8')
 const r2AuditReceipt = JSON.parse(r2AuditReceiptRaw) as R2AuditReceipt
 
@@ -214,7 +225,14 @@ describe('Guangdong official depth wave 3 on 2026-08-25', () => {
       const item = program(id)
       expect(['verified', 'stale'], id).toContain(item.status)
       if (item.reviewAfter < getTodayDate()) expect(item.status, id).toBe('stale')
-      expect(item.verifiedAt, id).toBe(TODAY)
+      if (REVERIFIED_SZU_PROGRAM_IDS.has(id)) {
+        expect(item.verifiedAt, id).toBe('2026-10-19')
+        expect(item.reviewAfter, id).toBe('2026-10-26')
+        expect(item.sourceIds, id).toEqual(REVERIFIED_SZU_SOURCE_IDS)
+        expect(item.teachingLanguages, id).toEqual(['English'])
+      } else {
+        expect(item.verifiedAt, id).toBe(TODAY)
+      }
       expect(item.durationMonths, id).toBe(durationMonths)
       expect(item.verificationScope, id).toBe('facts')
       expect(item.slug, id).toMatch(/^[a-z0-9-]+$/)
@@ -362,6 +380,7 @@ describe('Guangdong official depth wave 3 on 2026-08-25', () => {
   it('retains the SZU spring 2027 deadline evidence and withholds the overdue public dates', () => {
     const futureWaveCycles = data.admissionCycles.filter((cycle) => (
       WAVE_PROGRAM_ID_SET.has(cycle.programId) && cycle.intake === 'spring'
+        && cycle.sourceIds.some((sourceId) => WAVE_SOURCE_ID_SET.has(sourceId))
     ))
     expect(futureWaveCycles).toHaveLength(1)
 
@@ -459,6 +478,15 @@ describe('Guangdong official depth wave 3 importer', () => {
     ]) {
       copyFileSync(join(DATA_DIR, file), join(tempDir, file))
     }
+    // Reproduce only the importer's historical cycle scope. Later independently
+    // verified routes do not depend on this wave's R2 confirmation ledger.
+    const historicalFixtureCycles = data.admissionCycles.filter((cycle) => (
+      !WAVE_PROGRAM_ID_SET.has(cycle.programId)
+        || cycle.sourceIds.some((sourceId) => WAVE_SOURCE_ID_SET.has(sourceId))
+    ))
+    expect(historicalFixtureCycles.filter((cycle) => WAVE_PROGRAM_ID_SET.has(cycle.programId)))
+      .toHaveLength(37)
+    writeFileSync(join(tempDir, 'admission-cycles.json'), JSON.stringify(historicalFixtureCycles), 'utf8')
   })
 
   afterAll(() => {

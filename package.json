@@ -20,6 +20,7 @@
     "test:entity-materializer": "tsx --test workers/entity-materializer/tests/*.test.ts workers/ingestion/tests/entity-materializer.test.ts",
     "test:e2e": "playwright test",
     "validate:data": "tsx scripts/validate-data.ts",
+    "validate:directory": "tsx scripts/quality/validate-directory.ts",
     "validate:d1": "tsx scripts/validate-d1-migrations.ts",
     "validate:manifests": "tsx scripts/source-manifest-registry.ts",
     "validate:double-first-class": "tsx scripts/ingestion/double-first-class-registry.ts --validate content/source-manifests/double-first-class/targets.v1.json",
@@ -69,24 +70,31 @@
     "quality:decision-gap": "tsx scripts/quality/build-decision-gap-report.ts",
     "quality:comprehensive-audit": "tsx scripts/quality/comprehensive-data-audit.ts",
     "test:audit": "tsx --test scripts/quality/comprehensive-data-audit.test.ts",
+    "test:deadline-review": "tsx --test scripts/quality/audit-catalog-deadlines.preservation.test.ts scripts/quality/summarize-deadline-rechecks.pins.test.ts scripts/quality/summarize-deadline-rechecks.history.test.ts",
     "automation:seeds": "tsx scripts/automation/build-catalog-seeds.ts",
     "automation:sync": "tsx scripts/automation/pull-catalog-snapshot.ts",
     "automation:health": "tsx scripts/automation/operations-health.ts",
     "maintenance:universities": "tsx scripts/automation/build-university-maintenance-plan.ts",
     "maintenance:capture": "tsx scripts/automation/capture-university-maintenance-sources.ts",
     "maintenance:ledger": "tsx scripts/automation/sync-university-maintenance-db.ts",
+    "maintenance:scope": "tsx scripts/maintenance/build-scope.ts",
+    "maintenance:bootstrap": "tsx scripts/automation/build-maintenance-bootstrap.ts",
+    "maintenance:cloud": "tsx scripts/automation/catalog-maintenance-client.ts",
+    "maintenance:prepare": "tsx scripts/automation/prepare-maintenance-catalog.ts",
+    "test:catalog-maintenance": "tsx --test workers/catalog-maintenance/tests/*.test.ts",
+    "check:worker:maintenance": "wrangler deploy --dry-run --config workers/catalog-maintenance/wrangler.jsonc",
     "test:automation": "vitest run tests/unit/automation-"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "leaflet": "1.9.4",
-    "next": "16.3.8",
+    "next": "16.4.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "server-only": "0.0.1",
-    "undici": "7.29.1",
-    "zod": "^4.0.0"
+    "undici": "7.30.1",
+    "zod": "4.6.6"
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0",
@@ -100,7 +108,7 @@
     "@types/react-dom": "^19.0.0",
     "autoprefixer": "^10.4.0",
     "eslint": "^9.0.0",
-    "eslint-config-next": "16.3.8",
+    "eslint-config-next": "16.4.3",
     "jsdom": "^26.0.0",
     "postcss": "8.5.25",
     "tailwindcss": "^3.4.0",
@@ -111,7 +119,7 @@
   },
   "overrides": {
     "miniflare": {
-      "undici": "7.29.1",
+      "undici": "7.30.1",
       "sharp": "0.35.5"
     },
     "nanoid": "3.3.18",

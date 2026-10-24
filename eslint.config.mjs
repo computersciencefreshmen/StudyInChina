@@ -10,6 +10,9 @@ export default defineConfig([
     '.pipeline-build/**', // Isolated build exports and generated pipeline artifacts.
     '**/.tmp/**', // Worker dry-run output; generated bundles are not source files.
     'coverage/**',
+    // Immutable date-audit captures and one-off CommonJS receipts are evidence.
+    // Maintainable audit tools and their tests remain linted under scripts/quality.
+    'quality/deadline-sweep-20261019/**',
     'playwright-report/**',
     'test-results/**',
     // One-off, idempotent data migrations are validated through schema and

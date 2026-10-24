@@ -1,0 +1,9 @@
+# Official scholarship batch expansion
+
+The owner requested rapid, continuous expansion of real public university projects and scholarships. Parallel official-source collection feeds a single canonical writer. A record counts as delivered only after independent review, candidate checks, protected publication and stable-site readback.
+
+Scholarships already have a public schema, pages and API. Reuse those and the existing six-file snapshot CAS writer. Add a bounded scholarship approval consumer, rather than hand-editing JSON or broadening the programme consumer into unrelated responsibilities. Amounts, annual versus monthly funding, exclusions, entry-stage conditions and competitive selection remain literal in summary/eligibility; an unknown component stays unknown.
+
+The consumer checks fresh captured source bytes and quotes for every required field, current parents/deadline/review, independently reviewed entries, unique IDs and unchanged catalogue bytes. Apply a fully approved batch only; reserve its immutable receipt before snapshot replacement so interrupted or consumed scopes cannot silently replay. A reservation with unknown outcome requires reconciliation, not deletion and retry. The snapshot writer provides a common lock and per-file atomic replacement with compare-and-swap; it does not claim database-wide transactional atomicity.
+
+Verification uses synthetic offline cases for corrupted/stale/nonofficial captures, missing field evidence, expired/future review, parent mismatch, unchanged snapshots on rejection, stale CAS, and consumed-batch rejection. Candidate and stable checks must compare exact scholarship IDs/values and render new detail pages, official application/source links and eligibility, alongside the existing programme/university release proof. Strict map coverage and all paid STOP scopes remain unchanged.
