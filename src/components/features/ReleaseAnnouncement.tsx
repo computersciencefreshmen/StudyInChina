@@ -8,6 +8,7 @@ import {
   type ReleaseAnnouncementContent,
 } from '@/i18n/release-announcement'
 import styles from './ReleaseAnnouncement.module.css'
+import { DiscoveryNotice } from './DiscoveryNotice'
 
 export const DISMISSED_RELEASE_ANNOUNCEMENT_KEY = RELEASE_ANNOUNCEMENT_STORAGE_KEY
 
@@ -170,6 +171,7 @@ export function ReleaseAnnouncement({
         <div><dt>{copy.programsLabel}</dt><dd>{number.format(stats.programs)}</dd></div>
         <div><dt>{copy.scholarshipsLabel}</dt><dd>{number.format(stats.scholarships)}</dd></div>
       </dl>
+      <DiscoveryNotice locale={locale} />
 
       <div className={styles.details}>
         <div>

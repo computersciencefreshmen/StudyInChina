@@ -1,0 +1,31 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "studyinchina-catalog-maintenance",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-24",
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": { "enabled": true },
+  "vars": {
+    "MAINTENANCE_ENABLED": "false",
+    "SCOPE_REGISTRY_SHA256": "c1703d2dd6b70ae533e7817e1e11393dbc6319672ba6ab97b01f0d2e66f53316",
+    "MINIMAX_MODEL": "MiniMax-M3",
+    "MINIMAX_ANTHROPIC_BASE": "https://api.minimaxi.com/anthropic",
+    "MINIMAX_CREDIT_FALLBACK_DISABLED": "false",
+    "MODEL_CONCURRENCY": "4",
+    "FETCH_CONCURRENCY": "8",
+    "USER_AGENT": "StudyInChinaDataBot/1.0 (+https://studyinchina.vercel.app/contact)"
+  },
+  "d1_databases": [{
+    "binding": "PIPELINE_DB", "database_name": "studyinchina-pipeline",
+    "database_id": "bb68098a-1429-44ad-869a-de9c3a5e478c",
+    "migrations_dir": "../../infra/d1/pipeline/migrations"
+  }],
+  "r2_buckets": [{ "binding": "SNAPSHOTS_BUCKET", "bucket_name": "studyinchina-source-snapshots" }],
+  "queues": {
+    "producers": [{ "binding": "MAINTENANCE_QUEUE", "queue": "studyinchina-catalog-maintenance" }],
+    "consumers": [{ "queue": "studyinchina-catalog-maintenance", "max_batch_size": 1, "max_retries": 3, "max_concurrency": 8, "dead_letter_queue": "studyinchina-catalog-maintenance-dlq" }]
+  },
+  "durable_objects": { "bindings": [{ "name": "MODEL_ADMISSION", "class_name": "ModelAdmission" }] },
+  "migrations": [{ "tag": "catalog-maintenance-v1", "new_sqlite_classes": ["ModelAdmission"] }]
+}

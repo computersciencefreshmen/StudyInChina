@@ -1,4 +1,5 @@
 import { getApplicationState, selectAdmissionCycle } from '@/lib/data/admission'
+import { hasCurrentDirectoryCycleDates, hasCurrentDirectoryField, hasCurrentDirectoryTuition } from '@/lib/data/discovery-state'
 import { classifyProgramField, normalizeProgramField, programSearchKeywords } from '@/lib/data/fields'
 import { matchesUniversityRankings, parseRankingFilters, rankingFilterKeys, type RankingFilters } from '@/lib/data/rankings'
 import type {
@@ -269,17 +270,18 @@ export function queryProgramCatalog(
       city?.name,
     ], filters.query)
       && (!filters.degree || program.degreeLevel === filters.degree)
-      && (!filters.discipline || classifyProgramField(program) === filters.discipline)
-      && (!filters.language || program.teachingLanguages.includes(filters.language))
+      && (!filters.discipline || ((!('discovery' in program) || hasCurrentDirectoryField(program, 'discipline', today)) && classifyProgramField(program) === filters.discipline))
+      && (!filters.language || ((!('discovery' in program) || hasCurrentDirectoryField(program, 'teachingLanguages', today)) && program.teachingLanguages.includes(filters.language)))
       && (!filters.institution
         || university.slug === filters.institution
         || university.id === filters.institution)
       && (!filters.city || city?.slug === filters.city || city?.id === filters.city)
       && (!filters.intake || cycle?.intake === filters.intake)
       && (!filters.applicationState || (
-        program.status === 'verified' && matchesApplicationState(cycle, filters.applicationState, today)
+        (program.status === 'verified' || 'discovery' in program && hasCurrentDirectoryCycleDates(cycle, today))
+        && matchesApplicationState(cycle, filters.applicationState, today)
       ))
-      && (!filters.tuition || (program.status === 'verified' && matchesTuition(cycle, filters.tuition)))
+      && (!filters.tuition || ((program.status === 'verified' || 'discovery' in program && hasCurrentDirectoryTuition(cycle, today)) && matchesTuition(cycle, filters.tuition)))
 
     return matches && matchesUniversityRankings(university, filters, today) ? [{ program, university, cycle }] : []
   })
@@ -308,6 +310,7 @@ function repositoryProgramQuery(
   cursor: string | undefined,
 ): CatalogProgramListQuery {
   return {
+    view: 'directory',
     ...Object.fromEntries(rankingFilterKeys.map((key) => [key, filters[key] || undefined])),
     q: filters.query || undefined,
     degree: filters.degree || undefined,

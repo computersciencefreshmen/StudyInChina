@@ -73,7 +73,7 @@ function safeHttpsUrl(value: string | null | undefined): string | null {
 
 async function fetchComparison(ids: string[], signal: AbortSignal): Promise<ComparisonResponse> {
   const response = await fetch(
-    `/api/v1/programs/compare?ids=${encodeURIComponent(ids.join(','))}`,
+    `/api/v1/programs/compare?view=directory&ids=${encodeURIComponent(ids.join(','))}`,
     { headers: { Accept: 'application/json' }, cache: 'no-store', signal },
   )
   if (!response.ok) throw new Error(`Comparison request failed with ${response.status}`)

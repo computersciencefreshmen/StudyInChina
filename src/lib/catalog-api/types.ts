@@ -37,6 +37,11 @@ export type ReleaseRecordCounts = {
 }
 
 export type ReleaseInfo = {
+  directoryRevision?: string
+  directoryCounts?: { universities: number; programs: number; scholarships: number }
+  currentFactsCounts?: { universities: number; programs: number; admissionCycles: number; scholarships: number }
+  currentOpportunityCounts?: { programs: number; admissionCycles: number; scholarships: number }
+  schoolCoverageCounts?: { cohort: number; directory: number; withDirectoryPrograms: number; withCurrentOpportunities: number }
   id: string
   dataDate: string
   generatedAt: string

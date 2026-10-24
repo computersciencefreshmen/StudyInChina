@@ -1,5 +1,6 @@
 import type { AdmissionCycle } from './types'
 import { getTodayDate, isCurrentVerifiedRecord } from './freshness'
+import { hasCurrentDirectoryCycleDates } from './discovery-state'
 
 export function isCurrentOfficialReferenceTuition(cycle: AdmissionCycle | undefined, today = getTodayDate()): boolean {
   return Boolean(cycle && isCurrentVerifiedRecord(cycle, today) && cycle.verifiedAt <= today
@@ -19,6 +20,7 @@ export type ApplicationState =
   | 'previous-cycle'
 
 export function getApplicationState(cycle: AdmissionCycle | undefined, today: string): ApplicationState {
+  if (cycle && 'discovery' in cycle && !hasCurrentDirectoryCycleDates(cycle, today)) return 'not-announced'
   if (!cycle || cycle.dateStatus === 'not-announced') return 'not-announced'
   if (cycle.dateStatus === 'previous-cycle-reference') return 'previous-cycle'
   if (cycle.closesOn && cycle.closesOn < today) return 'closed'

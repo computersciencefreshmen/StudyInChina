@@ -47,6 +47,8 @@ export type CatalogInstitutionListSort =
   | 'scholarships-desc'
 
 export type CatalogInstitutionListQuery = RankingFilters & {
+  view?: 'directory'
+  directoryRevision?: string
   q?: string
   city?: string
   region?: string
@@ -80,6 +82,8 @@ export type CatalogInstitutionListPage = CatalogListPage<
 >
 
 export type CatalogProgramListQuery = RankingFilters & {
+  view?: 'directory'
+  directoryRevision?: string
   q?: string
   institution?: string
   city?: string
@@ -118,6 +122,8 @@ export type CatalogProgramListPage = CatalogListPage<
 >
 
 export type CatalogScholarshipListQuery = RankingFilters & {
+  view?: 'directory'
+  directoryRevision?: string
   q?: string
   provider?: string
   institution?: string
@@ -160,6 +166,11 @@ export type CatalogScholarshipListPage = CatalogListPage<
 >
 
 export type CatalogRelease = {
+  directoryRevision?: string
+  directoryCounts?: { universities: number; programs: number; scholarships: number }
+  currentFactsCounts?: { universities: number; programs: number; admissionCycles: number; scholarships: number }
+  currentOpportunityCounts?: { programs: number; admissionCycles: number; scholarships: number }
+  schoolCoverageCounts?: { cohort: number; directory: number; withDirectoryPrograms: number; withCurrentOpportunities: number }
   id: string
   dataDate: string
   generatedAt: string

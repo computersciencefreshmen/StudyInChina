@@ -16,6 +16,16 @@ const stats = {
 }
 
 describe('ReleaseAnnouncement', () => {
+  it('identifies catalogue counts separately from current application and funding availability', async () => {
+    const announcement = getReleaseAnnouncement('en')
+    render(<ReleaseAnnouncement locale="en" announcement={announcement} dataReleaseDate="October 19, 2026"
+      stats={{ universities: 255, programs: 783, scholarships: 7 }} />)
+    const dialog = await screen.findByRole('dialog', { name: announcement.copy.title })
+    expect(dialog.querySelector('dl')).toHaveTextContent('7')
+    expect(dialog).toHaveTextContent('A catalogue entry does not mean applications are open.')
+    expect(dialog).toHaveTextContent('funding conditions require current official verification')
+  })
+
   it('shows the current localized release once with dynamic public counts', async () => {
     const announcement = getReleaseAnnouncement('zh')
     render(<ReleaseAnnouncement
@@ -34,8 +44,9 @@ describe('ReleaseAnnouncement', () => {
       .toHaveAttribute('href', '/zh/programs?applicationState=open')
     expect(screen.getByRole('link', { name: announcement.copy.fullUpdate }))
       .toHaveAttribute('href', '/zh/updates')
-    expect(window.localStorage.getItem(DISMISSED_RELEASE_ANNOUNCEMENT_KEY))
-      .toBe(announcement.id)
+    // The dialog is rendered before its presentation effect persists the ID.
+    await waitFor(() => expect(window.localStorage.getItem(DISMISSED_RELEASE_ANNOUNCEMENT_KEY))
+      .toBe(announcement.id))
   })
 
   it('does not reappear after leaving before dismissing the first presentation', async () => {

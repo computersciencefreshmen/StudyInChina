@@ -1,28 +1,25 @@
 import { notFound } from 'next/navigation'
 import { connection } from 'next/server'
 import { ApplicationSummaryCard } from '@/components/features/ApplicationSummaryCard'
+import { DiscoveryNotice } from '@/components/features/DiscoveryNotice'
 import { DataFreshnessPanel } from '@/components/features/DataFreshnessPanel'
 import { SourceTransparency } from '@/components/features/SourceTransparency'
 import { Badge, Card, PageHero, VerificationBadge } from '@/components/ui'
-import { indexedLocales } from '@/i18n/config'
 import { formatUniversityCoverage, getDecisionExperienceCopy } from '@/i18n/decision-experience'
 import { getMessages } from '@/i18n/messages'
-import { selectScholarshipPrebuildSlugs } from '@/lib/data/detail-prebuild'
 import { formatCny, formatDate, localize } from '@/lib/data/format'
 import { getTodayDate } from '@/lib/data/freshness'
-import { getCatalogData, getData } from '@/lib/data/load'
+import { getCatalogData } from '@/lib/data/load'
 import { coverageLabel, providerLabel } from '@/lib/data/scholarship'
 import { isIndexableScholarship } from '@/lib/seo/indexability'
 import { selectScholarshipCurrentCycle } from '@/lib/scholarship-catalog'
 import { pageMetadata, requireLocale } from '@/lib/site'
 
 export const dynamicParams = true
-
-export function generateStaticParams() {
-  const data = getData()
-  const slugs = selectScholarshipPrebuildSlugs(data, getTodayDate())
-  return indexedLocales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })))
-}
+// Directory identities remain addressable when no award has current facts.
+// An empty static-params list otherwise creates an ISR fallback, where the
+// request-time freshness check cannot safely become a static render.
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({
   params,
@@ -123,9 +120,10 @@ export default async function ScholarshipDetail({
       )}
     />
     <div className="atlas-container">
+      <DiscoveryNotice locale={locale} />
       <DataFreshnessPanel record={item} locale={locale} today={today} />
     </div>
-    <section className="atlas-container atlas-section detail-layout">
+    <section className="atlas-container atlas-section detail-layout" data-scholarship-detail>
       <div className="detail-main">
         {item.coverage.tuition !== 'unknown' || item.coverage.accommodation !== 'unknown' || item.coverage.insurance !== 'unknown' || item.coverage.stipendCnyPerMonth !== null || currentCycle.deadline ? <div className="prose-panel">
           <h2>{copy.coverage}</h2>
@@ -150,8 +148,12 @@ export default async function ScholarshipDetail({
             </div> : null}
           </dl>
         </div> : null}
+        {item.eligibility?.length ? <section className="prose-panel" data-scholarship-eligibility>
+          <h2>{messages.programs.eligibility}</h2>
+          <ul>{item.eligibility.map((condition, index) => <li key={index}>{localize(condition, locale)}</li>)}</ul>
+        </section> : null}
         <div className="prose-panel">
-          <h2>{copy.scope}</h2>
+          <h2>{isStaleIdentity ? (locale === 'zh' ? '关联学校（本期适用范围待核对）' : 'Associated institutions — current eligibility unconfirmed') : copy.scope}</h2>
           {universities.length ? (
             <ul className="link-list">
               {universities.map((university) => (
@@ -162,7 +164,7 @@ export default async function ScholarshipDetail({
                 </li>
               ))}
             </ul>
-          ) : <p>{messages.common.all}</p>}
+          ) : <p>{messages.common.unknown}</p>}
         </div>
       </div>
       <aside className="detail-aside">

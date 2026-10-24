@@ -1,0 +1,38 @@
+name: Extract immutable official catalog documents
+
+on:
+  schedule:
+    - cron: '2,17,32,47 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-maintenance-documents-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  documents:
+    if: vars.CATALOG_MAINTENANCE_MODE == 'cloud'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      CATALOG_MAINTENANCE_URL: ${{ vars.CATALOG_MAINTENANCE_URL }}
+      CATALOG_MAINTENANCE_TOKEN: ${{ secrets.CATALOG_MAINTENANCE_TOKEN }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Install deterministic PDF and OCR tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-chi-sim
+      - name: Process at most five checksum-bound official documents
+        run: node --import tsx scripts/automation/process-maintenance-documents.ts --limit 5

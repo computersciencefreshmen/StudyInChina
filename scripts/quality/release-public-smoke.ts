@@ -10,20 +10,23 @@ import { officialReferenceTuitionCopy } from '../../src/i18n/tuition-reference'
 import { getMessages } from '../../src/i18n/messages'
 import { getApplicationState, selectAdmissionCycle } from '../../src/lib/data/admission'
 import { formatProgramDuration } from '../../src/lib/data/duration'
-import { formatCny, localize, localizeProgramText } from '../../src/lib/data/format'
+import { formatCny, formatDate, localize, localizeProgramText } from '../../src/lib/data/format'
 import { getTodayDate } from '../../src/lib/data/freshness'
 import { languageLabel } from '../../src/lib/data/labels'
+import { coverageLabel } from '../../src/lib/data/scholarship'
 import { selectPublishedData } from '../../src/lib/data/publication'
 import { bundleSchema } from '../../src/lib/data/schema'
-import type { DataBundle, Program } from '../../src/lib/data/types'
-import type { ApiEnvelope, AdmissionCycleRecord, InstitutionRecord, ProgramRecord, ReleaseInfo } from '../../src/lib/catalog-api/types'
+import type { DataBundle, Program, Scholarship } from '../../src/lib/data/types'
+import type { ApiEnvelope, AdmissionCycleRecord, InstitutionRecord, ProgramRecord, ReleaseInfo, ScholarshipRecord } from '../../src/lib/catalog-api/types'
 import type { FullProgramBatch } from './approve-full-program-batch'
+import type { FullScholarshipBatch } from './approve-full-scholarship-batch'
 
 type Pin = { path: string; sha256: string; bytes?: number }
 export type SmokeInput = {
   schemaVersion: 1; today: string; dataDirectory: string; sourcePlan: string; batches: string[]
   expectedPrograms: number; expectedUniversities: number; expectedChangedPrograms: number; expectedChangedUniversities: number
   staleSlugs: string[]
+  scholarshipBatches?: string[]; expectedChangedScholarships?: number; expectedScholarships?: number
 }
 type Options = { root: string; base: string; input: string; output: string; prefix: 'candidate' | 'stable'; proxy?: string; channel?: string; bypassEnvironment: string }
 type Check = { route: string; pass: boolean; [key: string]: unknown }
@@ -74,6 +77,11 @@ export function loadSmokeExpectation(root: string, inputFile: string) {
   invariant(input.today === getTodayDate(), 'smoke_input_date_is_not_current_china_calendar')
   invariant(Array.isArray(input.batches) && input.batches.length > 0 && Array.isArray(input.staleSlugs) && input.staleSlugs.length > 0, 'smoke_input_batches_and_stale_sentinels_required')
   for (const count of [input.expectedPrograms, input.expectedUniversities, input.expectedChangedPrograms, input.expectedChangedUniversities]) invariant(Number.isSafeInteger(count) && count > 0, 'explicit_positive_expected_counts_required')
+  const scholarshipExpectation = input.scholarshipBatches !== undefined || input.expectedChangedScholarships !== undefined || input.expectedScholarships !== undefined
+  if (scholarshipExpectation) invariant(Array.isArray(input.scholarshipBatches)
+    && Number.isSafeInteger(input.expectedChangedScholarships) && input.expectedChangedScholarships! >= 0
+    && Number.isSafeInteger(input.expectedScholarships) && input.expectedScholarships! >= 0
+    && input.expectedChangedScholarships! <= input.expectedScholarships!, 'scholarship_expectation_contract_invalid')
   const sourcePlanPath = workspacePath(root, input.sourcePlan), sourcePlanBytes = readFileSync(sourcePlanPath)
   const sourcePlan = JSON.parse(sourcePlanBytes.toString('utf8')) as { pins: Pin[] }
   invariant(Array.isArray(sourcePlan.pins) && sourcePlan.pins.length > 0, 'source_plan_pins_required')
@@ -103,15 +111,31 @@ export function loadSmokeExpectation(root: string, inputFile: string) {
     return { path: relative(root, path).replaceAll('\\', '/'), sha256: sha(bytes), bytes: bytes.length, batchId: batch.batchId }
   })
   invariant(changed.size === input.expectedChangedPrograms && new Set([...changed.values()].map(p => p.universityId)).size === input.expectedChangedUniversities, 'expected_changed_scope_mismatch')
+  const changedScholarships = new Map<string, Scholarship>()
+  const scholarshipBatches = (input.scholarshipBatches ?? []).map(name => {
+    const path = workspacePath(root, name), bytes = readFileSync(path), batch = JSON.parse(bytes.toString('utf8')) as FullScholarshipBatch
+    invariant(batch.schemaVersion === 1 && batch.entries?.length > 0, 'approved_scholarship_batch_contract_invalid')
+    for (const entry of batch.entries) {
+      invariant(entry.reviewer === 'codex' && Number.isFinite(Date.parse(entry.reviewedAt)), 'scholarship_not_independently_approved')
+      invariant(!changedScholarships.has(entry.scholarship.id), 'duplicate_changed_scholarship')
+      const value = published.scholarships.find(s => s.id === entry.scholarship.id)
+      invariant(value && stable(value) === stable(entry.scholarship), 'approved_scholarship_differs_from_frozen_catalog')
+      changedScholarships.set(value.id, value)
+    }
+    return { path: relative(root, path).replaceAll('\\', '/'), sha256: sha(bytes), bytes: bytes.length, batchId: batch.batchId }
+  })
+  if (scholarshipExpectation) invariant(changedScholarships.size === input.expectedChangedScholarships
+    && published.scholarships.length === input.expectedScholarships, 'expected_scholarship_scope_mismatch')
   for (const slug of input.staleSlugs) invariant(/^[a-z0-9-]+$/u.test(slug) && !published.programs.some(p => p.slug === slug), `stale_sentinel_is_public_or_invalid:${slug}`)
   const supportPaths = ['src/lib/data/schema.ts', 'src/lib/data/publication.ts', 'src/lib/data/format.ts', 'src/lib/data/duration.ts', 'src/lib/data/admission.ts', 'src/lib/data/labels.ts', 'src/i18n/config.ts', 'src/i18n/messages.ts', 'src/i18n/tuition-reference.ts', 'src/i18n/release-announcement.ts', 'content/data/program-localizations.json']
+  if (changedScholarships.size) supportPaths.push('src/lib/data/scholarship.ts')
   const supportPins = supportPaths.map(path => {
     const bytes = readFileSync(workspacePath(root, path)), digest = sha(bytes)
     invariant(pins.get(path)?.sha256 === digest, `expectation_support_code_differs_from_frozen_plan:${path}`)
     return { path, sha256: digest, bytes: bytes.length }
   })
-  const expectedInputManifest = { inputFile: relative(root, inputPath).replaceAll('\\', '/'), inputSha256: sha(inputBytes), sourcePlanSha256: sha(sourcePlanBytes), files, batches, supportPins, normalizedCatalogSha256: sha(stable(catalog)) }
-  return { input, catalog, published, changed: [...changed.values()], expectedInputManifest, expectedInputSha256: sha(stable(expectedInputManifest)), sourcePlanSha256: sha(sourcePlanBytes) }
+  const expectedInputManifest = { inputFile: relative(root, inputPath).replaceAll('\\', '/'), inputSha256: sha(inputBytes), sourcePlanSha256: sha(sourcePlanBytes), files, batches, ...(scholarshipBatches.length ? { scholarshipBatches } : {}), supportPins, normalizedCatalogSha256: sha(stable(catalog)) }
+  return { input, catalog, published, changed: [...changed.values()], changedScholarships: [...changedScholarships.values()], expectedInputManifest, expectedInputSha256: sha(stable(expectedInputManifest)), sourcePlanSha256: sha(sourcePlanBytes) }
 }
 
 async function getJson<T>(client: APIRequestContext, base: string, route: string): Promise<T> {
@@ -150,11 +174,12 @@ export async function runReleasePublicSmoke(options: Options) {
   mkdirSync(dirname(output), { recursive: true }); mkdirSync(output)
   const secret = process.env[options.bypassEnvironment] ?? '', clean = (value: unknown) => redactSmokeError(value, secret)
   const proof: Record<string, unknown> = { pass: false, checkedAt: new Date().toISOString(), base, prefix: options.prefix, today: expected.input.today, sourcePlanSha256: expected.sourcePlanSha256, smokeRunnerSha256: sha(readFileSync(fileURLToPath(import.meta.url))), expectedInputSha256: expected.expectedInputSha256, publicCounts: counts(expected.published), expectedInputManifest: expected.expectedInputManifest }
-  const checks: Check[] = [], universities: Check[] = [], details: Check[] = [], errors: string[] = [], consoleErrors: string[] = []
+  const checks: Check[] = [], universities: Check[] = [], details: Check[] = [], scholarshipDetails: Check[] = [], errors: string[] = [], consoleErrors: string[] = []
   const cleanup: Record<string, unknown>[] = [], pendingRoutes = new Map<Page | undefined, Set<Promise<void>>>(), closingPages = new Set<Page>()
   let closingContext = false
   proof.checks = checks; proof.universities = universities; proof.details = details; proof.errors = errors; proof.consoleErrors = consoleErrors
   proof.cleanup = cleanup
+  proof.scholarshipDetails = scholarshipDetails
   const record = async (route: string, operation: () => Promise<Record<string, unknown> | void>, sink = checks) => {
     try { const result = await operation(); sink.push({ route, pass: true, ...result }) }
     catch (error) { sink.push({ route, pass: false, error: clean(error) }); errors.push(`${route}: ${clean(error)}`) }
@@ -184,6 +209,17 @@ export async function runReleasePublicSmoke(options: Options) {
       assertIds(records, expected.published.universities, 'universities')
       for (const u of records) invariant(u.programCount === expected.published.programs.filter(p => p.universityId === u.id).length, `institution_program_count_mismatch:${u.id}`)
       return { records: records.length, exactIds: true }
+    })
+    await record('/api/v1/scholarships', async () => {
+      const records = await allRecords<ScholarshipRecord>(client, base, '/api/v1/scholarships')
+      assertIds(records, expected.published.scholarships, 'scholarships')
+      for (const s of expected.changedScholarships) {
+        const actual = records.find(value => value.id === s.id)!
+        const coverage = Object.fromEntries(Object.entries(s.coverage).map(([key, value]) => [key, value === 'unknown' ? null : value]))
+        invariant(stable(actual.coverage) === stable(coverage), `scholarship_coverage_roundtrip_failed:${s.id}`)
+        for (const key of ['slug', 'providerType', 'universityIds', 'programIds', 'sourceIds', 'name', 'deadline', 'applicationUrl', 'summary', 'eligibility'] as const) invariant(stable(actual[key] ?? null) === stable(s[key] ?? null), `scholarship_fact_roundtrip_failed:${s.id}:${key}`)
+      }
+      return { records: records.length, exactIds: true, reviewedFactsRoundtrip: true }
     })
     await concurrent(expected.published.universities, 6, async university => {
       const route = `/en/universities/${university.slug}`
@@ -314,6 +350,40 @@ export async function runReleasePublicSmoke(options: Options) {
         }
       } finally { await closePageSafely(page) }
     })
+    await concurrent(expected.changedScholarships, 3, async s => {
+      const page = await context.newPage()
+      try {
+        for (const locale of publicLocales) {
+          const route = `/${locale}/scholarships/${s.slug}`
+          await record(route, async () => {
+            await loadedPage(page, base + route)
+            await page.locator('[data-scholarship-detail]').waitFor({ state: 'visible' })
+            invariant(await page.locator('html').getAttribute('lang') === locale, 'scholarship_locale_shell_mismatch')
+            const content = normalize(await page.locator('main#main-content').innerText())
+            for (const value of [s.name, ...(s.summary ? [s.summary] : []), ...(s.eligibility ?? [])]) invariant(content.includes(normalize(localize(value, locale))), `scholarship_reviewed_text_not_visible:${s.id}:${locale}`)
+            if (s.deadline) invariant(content.includes(normalize(formatDate(s.deadline, locale, ''))), 'scholarship_deadline_not_visible')
+            if (s.coverage.stipendCnyPerMonth !== null) invariant(content.includes(normalize(formatCny(s.coverage.stipendCnyPerMonth, locale, ''))), 'scholarship_stipend_not_visible')
+            const copy = getMessages(locale).scholarships
+            const coverage: [string, string][] = []
+            if (s.coverage.tuition !== 'unknown') coverage.push([copy.tuition, coverageLabel(s.coverage.tuition, locale)])
+            if (s.coverage.accommodation !== 'unknown') coverage.push([copy.accommodation, coverageLabel(s.coverage.accommodation, locale)])
+            if (s.coverage.insurance !== 'unknown') coverage.push([copy.insurance, s.coverage.insurance ? copy.included : copy.notIncluded])
+            const visibleFacts = await page.locator('[data-scholarship-detail] .detail-facts > div').evaluateAll(rows => rows.map(row => [row.querySelector('dt')?.textContent ?? '', row.querySelector('dd')?.textContent ?? '']))
+            for (const [label, value] of coverage) invariant(visibleFacts.some(([term, fact]) => normalize(term) === normalize(label) && normalize(fact) === normalize(value)), `scholarship_coverage_not_visible:${s.id}:${locale}:${label}`)
+            invariant(await page.locator('.atlas-hero__actions a').first().getAttribute('href') === s.applicationUrl, 'scholarship_application_cta_mismatch')
+            for (const id of s.sourceIds) {
+              const source = expected.published.sources.find(value => value.id === id)!
+              invariant(await page.locator('#official-evidence a').evaluateAll((anchors, href) => anchors.some(a => a.getAttribute('href') === href), source.url), 'scholarship_official_source_link_missing')
+            }
+            return { scholarshipId: s.id, locale, completeReviewedTextVisible: true, eligibility: s.eligibility?.length ?? 0, officialApplication: s.applicationUrl }
+          }, scholarshipDetails)
+        }
+        await page.setViewportSize({ width: 390, height: 844 })
+        const geometry = await page.evaluate(() => ({ viewport: innerWidth, document: document.documentElement.scrollWidth }))
+        invariant(geometry.document <= geometry.viewport + 1, 'scholarship_mobile_horizontal_overflow')
+      } finally { await closePageSafely(page) }
+      process.stdout.write(JSON.stringify({ stage: 'scholarship-details', checked: scholarshipDetails.length, total: expected.changedScholarships.length * publicLocales.length }) + '\n')
+    })
     const navigation = expected.changed.map(p => ({ p, u: expected.published.universities.find(u => u.id === p.universityId)! })).map(({ p, u }) => ({ p, u, city: expected.published.cities.find(c => c.id === u.cityId)! })).find(value => value.city)
     invariant(navigation, 'navigation_fixture_missing')
     const page = await context.newPage()
@@ -356,6 +426,7 @@ export async function runReleasePublicSmoke(options: Options) {
     await client.dispose().catch(error => errors.push(clean(error)))
     proof.completedAt = new Date().toISOString()
     proof.pass = errors.length === 0 && consoleErrors.length === 0 && checks.every(check => check.pass) && universities.length === expected.input.expectedUniversities && details.length === expected.changed.length * publicLocales.length && details.every(check => check.pass)
+      && scholarshipDetails.length === expected.changedScholarships.length * publicLocales.length && scholarshipDetails.every(check => check.pass)
     writeFileSync(resolve(output, `${options.prefix}-public-smoke.json`), JSON.stringify(proof, null, 2) + '\n', { flag: 'wx' })
   }
   return proof
