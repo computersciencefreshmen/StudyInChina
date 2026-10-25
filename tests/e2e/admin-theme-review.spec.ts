@@ -1,18 +1,19 @@
 import { expect, test } from '@playwright/test'
 import { adminSession, adminSnapshot } from '../fixtures/admin-workbench'
+import { siteThemes } from '../../src/lib/site-themes'
 
-const themes = [['cloud', '云白淡紫'], ['jade', '雾绿玉色'], ['ocean', '冰川蓝'], ['sand', '暖白陶色'], ['night', '深夜墨绿']] as const
+const themes = siteThemes.map(theme => [theme.id, theme.name] as const)
 
-test('five theme previews retain responsive layout, readable dropdown portals, and admin navigation', async ({ page }, testInfo) => {
+test('all registered theme previews retain responsive layout, readable dropdown portals, and admin navigation', async ({ page }, testInfo) => {
   if (testInfo.project.name === 'chromium') await page.setViewportSize({ width: 1440, height: 1080 })
   await page.goto('/themes', { waitUntil: 'networkidle' })
   const website = page.getByRole('group', { name: '预览界面' }).getByRole('button', { name: '学生网站' })
   const admin = page.getByRole('group', { name: '预览界面' }).getByRole('button', { name: '管理员工作台' })
-  await expect(page.getByRole('group', { name: '网站主题' }).getByRole('button')).toHaveCount(5)
+  await expect(page.getByRole('group', { name: '网站主题' }).getByRole('button')).toHaveCount(themes.length)
   for (const [id, name] of themes) {
     await website.click()
     await page.getByRole('group', { name: '网站主题' }).getByRole('button', { name: new RegExp(name) }).click()
-    const frame = page.locator(`[data-theme="${id}"]`)
+    const frame = page.getByRole('main').locator(`div[data-theme="${id}"]`)
     await expect(frame).toBeVisible()
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
     await frame.screenshot({ path: `.tmp/theme-${id}-website-${testInfo.project.name}.png` })
@@ -163,8 +164,8 @@ test('remote telemetry displays saved response totals and freshness without loca
   await expect(usage).toContainText('执行器同步记录 · 记录待更新')
   await expect(usage).toContainText('采集时间：9/30 17:00')
   await expect(page.getByText('150 次已保存响应')).toBeVisible()
-  const switcher = page.getByRole('group', { name: '管理员五主题切换' })
-  await expect(switcher.getByRole('button')).toHaveCount(5)
+  const switcher = page.getByRole('group', { name: '管理员主题切换' })
+  await expect(switcher.getByRole('button')).toHaveCount(themes.length)
   for (const [id, name] of themes) {
     const choice = switcher.getByRole('button', { name: new RegExp(name) })
     await choice.click()

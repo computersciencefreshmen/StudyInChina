@@ -1,6 +1,7 @@
 import { control,enqueueDue,seed,setControls,status,validateSeed,type Seed } from './repository'
 import type { BucketObject,MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
+import { backendState as backendCode,backendErrorKind } from './backend-errors'
 import { canonical,digest,HASH,nowIso,record } from './util'
 
 const POINTER='maintenance/bootstrap-pending/initial.v1.json'
@@ -76,7 +77,6 @@ async function bootstrapPointer(env:MaintenanceEnv):Promise<BootstrapPointer|nul
 async function bootstrapEnvelope(env:MaintenanceEnv,pointer:BootstrapPointer):Promise<{seed:Seed;activation:Activation}>{const saved=await readObject(env,pointer.envelopeKey,8*1024*1024);if(!saved||await digest(saved.text)!==pointer.envelopeSha256)throw new MaintenanceError('pending_bootstrap_checksum_mismatch');const value=JSON.parse(saved.text)as {seed:Seed;activation:Activation};if(await digest(canonical(value.seed))!==pointer.seedSha256||canonical(value.activation)!==canonical(pointer.activation))throw new MaintenanceError('pending_bootstrap_binding_mismatch');return value}
 export async function resumeBootstrapSeed(env:MaintenanceEnv,hash:string){const pointer=await bootstrapPointer(env);if(!pointer||pointer.seedSha256!==hash)throw new MaintenanceError('bootstrap_seed_pointer_mismatch');const cfg=await control(env);if(cfg){if(cfg.seed_sha256!==hash)throw new MaintenanceError('bootstrap_existing_seed_conflict');return enqueueDue(env)}const envelope=await bootstrapEnvelope(env,pointer);return seed(env,envelope.seed,Date.now(),true)}
 export function nextD1Reset(now=Date.now()):string{const date=new Date(now);return new Date(Date.UTC(date.getUTCFullYear(),date.getUTCMonth(),date.getUTCDate()+1)).toISOString()}
-function backendCode(error:unknown):'quota_wait'|'backend_unavailable'{const message=error instanceof Error?error.message:'';return /7500|daily.*(?:read|write|quota|limit)|(?:D1|database).*(?:daily|quota)/iu.test(message)?'quota_wait':'backend_unavailable'}
 async function saveTick(env:MaintenanceEnv,tick:RuntimeTick){
   const day=getTodayDate(new Date(tick.observedAt)),key=`maintenance/runtime/ticks/${day}/${tick.tickId}.json`
   await immutable(env,key,canonical(tick))
@@ -135,6 +135,16 @@ async function soak(env:MaintenanceEnv,now=Date.now()){
 export async function runtimeStatus(env:MaintenanceEnv){
   const [latest,observation,pointer,uploaded]=await Promise.all([readObject(env,LATEST),soak(env),bootstrapPointer(env),readObject(env,UPLOAD_POINTER)])
   const runtime={lastRuntimeTick:latest?JSON.parse(latest.text)as RuntimeTick:null,soak:observation,bootstrapUploadPending:uploaded?JSON.parse(uploaded.text)as UploadPointer:null,bootstrapPending:pointer?{bootstrapSha256:pointer.envelopeSha256,seedSha256:pointer.seedSha256,scopeRegistrySha256:pointer.scopeRegistrySha256,activation:pointer.activation}:null}
-  try{return{...await status(env),...runtime,backend:{state:'ready',retryAt:null}}}
-  catch(error){const state=backendCode(error);return{format:'studyinchina.cloud-maintenance-status',version:1,observedAt:nowIso(),enabled:false,modelEnabled:false,scopeCount:null,control:null,jobs:null,proposals:null,sources:null,modelAttempts:null,coverage:null,websiteBackendChanged:false,...runtime,backend:{state,retryAt:state==='quota_wait'?nextD1Reset():null},productionRunningClaim:false}}
+  try{return{...await status(env),...runtime,backend:{state:'ready',retryAt:null,errorKind:null,diagnosticKey:null,diagnosticSha256:null}}}
+  catch(error){
+    const state=backendCode(error),errorKind=backendErrorKind(error),observedAt=nowIso()
+    // This catch covers only our fixed static status SQL, never model payloads
+    // or arbitrary client SQL. Keep raw failure text private and bounded.
+    let message=error instanceof Error?error.message:String(error)
+    for(const secret of [env.MAINTENANCE_ADMIN_TOKEN,env.MINIMAX_SUBSCRIPTION_KEY])if(secret)message=message.replaceAll(secret,'[redacted]')
+    message=message.replace(/Bearer\s+[^\s"']+/giu,'Bearer [redacted]').slice(0,1200)
+    let diagnosticKey:string|null=null,diagnosticSha256:string|null=null
+    try{const text=canonical({format:'studyinchina.private-status-diagnostic',version:1,observedAt,operation:'fixed-status-sql',errorKind,message});diagnosticSha256=await digest(text);const key=`maintenance/diagnostics/status/${diagnosticSha256}.json`;await env.SNAPSHOTS_BUCKET.put(key,text,{onlyIf:{etagDoesNotMatch:'*'},httpMetadata:{contentType:'application/json'}});diagnosticKey=key}catch{diagnosticSha256=null}
+    return{format:'studyinchina.cloud-maintenance-status',version:1,observedAt,enabled:false,modelEnabled:false,scopeCount:null,control:null,jobs:null,proposals:null,sources:null,modelAttempts:null,coverage:null,websiteBackendChanged:false,...runtime,backend:{state,retryAt:state==='quota_wait'?nextD1Reset():null,errorKind,diagnosticKey,diagnosticSha256},productionRunningClaim:false}
+  }
 }

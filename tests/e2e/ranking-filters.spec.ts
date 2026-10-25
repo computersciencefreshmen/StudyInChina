@@ -25,7 +25,16 @@ for (const route of ['universities', 'programs', 'scholarships']) {
     }
     await form.getByRole('button', { name: 'Apply filters', exact: true }).click()
     await page.waitForURL((url) => rankingKeys.every((key) => url.searchParams.get(key) === '100'))
-    expect(await page.locator('.record-card').count()).toBeGreaterThan(0)
+    const apiRoute = route === 'universities' ? 'institutions' : route
+    const response = await page.request.get(`/api/v1/directory/${apiRoute}?${rankingKeys.map(key => `${key}=100`).join('&')}`)
+    expect(response.ok()).toBe(true)
+    const filtered = await response.json()
+    if (filtered.data.length === 0) {
+      await expect(page.locator('.record-card')).toHaveCount(0)
+      await expect(page.getByText(`No ${route} match these filters.`, { exact: true })).toBeVisible()
+    } else {
+      await expect(page.locator('.record-card').first()).toBeVisible()
+    }
     if (route === 'universities') {
       await form.locator('[role="combobox"][name="qsRankMax"]').scrollIntoViewIfNeeded()
       await page.screenshot({ path: `.tmp/ranking-filters-${testInfo.project.name}.png`, fullPage: false })
@@ -42,7 +51,7 @@ for (const route of ['universities', 'programs', 'scholarships']) {
 }
 
 test('institution API returns linked evidence for all four combined ranking filters', async ({ request }) => {
-  const response = await request.get('/api/v1/institutions?qsRankMax=100&theRankMax=100&usNewsRankMax=100&arwuRankMax=100')
+  const response = await request.get('/api/v1/directory/institutions?qsRankMax=100&theRankMax=100&usNewsRankMax=100&arwuRankMax=100')
   expect(response.ok()).toBe(true)
   const body = await response.json()
   expect(body.data.length).toBeGreaterThan(0)

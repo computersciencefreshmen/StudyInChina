@@ -1,25 +1,13 @@
 import { expect, test } from '@playwright/test'
-import sources from '../../content/data/sources.json'
-import cities from '../../content/data/cities.json'
-import universities from '../../content/data/universities.json'
-import programs from '../../content/data/programs.json'
-import scholarships from '../../content/data/scholarships.json'
-import admissionCycles from '../../content/data/admission-cycles.json'
-import { bundleSchema } from '../../src/lib/data/schema'
-import { selectPublishedData } from '../../src/lib/data/publication'
-import { getTodayDate } from '../../src/lib/data/freshness'
+import { directoryData as data } from './catalog-fixture'
 import { LATEST_RELEASE_ANNOUNCEMENT_ID, RELEASE_ANNOUNCEMENT_STORAGE_KEY } from '../../src/i18n/release-announcement'
-
-const data = selectPublishedData(bundleSchema.parse({
-  sources, cities, universities, programs, scholarships, admissionCycles,
-}), getTodayDate())
 
 for (const collection of ['universities', 'programs', 'scholarships'] as const) {
   test(`${collection} detail separates evidence review from application deadlines`, async ({ page }) => {
     await page.addInitScript(({ key, id }) => localStorage.setItem(key, id), {
       key: RELEASE_ANNOUNCEMENT_STORAGE_KEY, id: LATEST_RELEASE_ANNOUNCEMENT_ID,
     })
-    const record = data[collection].find(item => item.status === 'verified') ?? data[collection][0]
+    const record = [...data[collection]].find(item => item.status === 'verified') ?? data[collection][0]
     expect(record).toBeDefined()
     const response = await page.goto(`/zh/${collection}/${record.slug}`, { waitUntil: 'networkidle' })
     expect(response?.status()).toBe(200)

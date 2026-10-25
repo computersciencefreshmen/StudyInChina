@@ -2,6 +2,7 @@ import { z } from 'zod'
 import { schoolReconciliationSchema, evaluateSchoolReconciliation, type SchoolReconciliation } from '../../../scripts/maintenance/reconciliation'
 import { maintenanceRecordTargetSchema } from '../../../scripts/maintenance/field-contracts'
 import { control } from './repository'
+import { isDailyD1QuotaError } from './backend-errors'
 import type { MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
 import { canonical, digest, HASH, ID, nowIso, record } from './util'
@@ -203,7 +204,7 @@ export async function listSchoolProgress(env: MaintenanceEnv, now = Date.now()) 
     summaries = (await env.PIPELINE_DB.prepare("SELECT details_json FROM maintenance_events WHERE kind='school_reconciliation_report' ORDER BY observed_at DESC,event_id DESC").all<{ details_json: string }>()).results ?? []
   } catch (error) {
     if (error instanceof MaintenanceError) throw error
-    backendState = /7500|daily.*(?:read|write|quota|limit)|(?:D1|database).*(?:daily|quota)/iu.test(String(error)) ? 'quota_wait' : 'unavailable'
+    backendState = isDailyD1QuotaError(error) ? 'quota_wait' : 'unavailable'
     // Partial reads must not become evidence of absence when the backend fails.
     schools = []; sources = []; observations = []; summaries = []; catalogSha256 = null
   }

@@ -1,6 +1,7 @@
 import { control,event } from './repository'
 import type { MaintenanceEnv } from './types'
 import { MaintenanceError } from './types'
+import { backendState as backend } from './backend-errors'
 import { canonical,digest,HASH,nowIso,record } from './util'
 
 type School={university_id:string;last_attempt_at:string|null}
@@ -9,7 +10,6 @@ type Published={batch_id:string;acknowledgement_sha256:string;acknowledgement_js
 type Advance={scopeRegistrySha256:string;currentCanaryIds:string[];nextCanaryIds:string[];inspectedSchoolIds:string[]}
 export type RolloutState={format:'studyinchina.maintenance-rollout';version:1;observedAt:string;backendState:'ready'|'quota_wait'|'backend_unavailable';expectedRevision:number|null;scopeRegistrySha256:string|null;state:'holding'|'eligible'|'full_scope';reasons:string[];currentCanaryIds:string[];currentBatchIds:string[];nextCanaryIds:string[];addedSchoolIds:string[];inspectedSchoolIds:string[];inspections:Inspection[];publication:{batchId:string;sourceCommit:string;deploymentId:string;stableProofSha256:string;acknowledgementSha256:string}|null}
 const timestamp=(value:unknown,now:number)=>typeof value==='string'&&Number.isFinite(Date.parse(value))&&Date.parse(value)<=now
-const backend=(error:unknown)=>/7500|daily.*(?:read|write|quota|limit)|(?:D1|database).*(?:daily|quota)/iu.test(String(error))?'quota_wait' as const:'backend_unavailable' as const
 // First inspection is a real successful observation OR an explicit completed
 // blocking capture attempt. It is deliberately weaker than school reconciliation.
 const inspectedSource=`s.last_attempt_at IS NOT NULL AND (EXISTS(SELECT 1 FROM maintenance_observations o WHERE o.source_id=s.source_id AND o.http_status BETWEEN 200 AND 299 AND o.raw_sha256 IS NOT NULL AND o.snapshot_key IS NOT NULL) OR (s.failures>0 AND (s.error_code IN('robots_disallowed','robots_fetch_failed','source_fetch_failed','empty_official_text') OR s.error_code GLOB 'robots_http_[0-9][0-9][0-9]' OR s.error_code GLOB 'source_http_[0-9][0-9][0-9]') AND EXISTS(SELECT 1 FROM maintenance_jobs j WHERE j.source_id=s.source_id AND j.stage='capture' AND j.attempt>0 AND j.status IN('held','retry') AND j.error_code=s.error_code)))`

@@ -2040,7 +2040,18 @@ body::before {
 .atlas-public .discipline-tile:hover { transform: none; background: var(--atlas-jade-pale); }
 
 /* A quiet colophon closes the public reading experience. */
-.atlas-public .atlas-footer { padding-top: 0; background: var(--atlas-paper-muted); border-top: 1px solid var(--atlas-line); }
+.atlas-public .atlas-footer { padding-top: 0; color: var(--atlas-ink); background: var(--atlas-paper-muted); border-top: 1px solid var(--atlas-line); }
+.atlas-public .atlas-footer__brand,
+.atlas-public .atlas-footer__creator a { color: var(--atlas-ink); }
+.atlas-public .atlas-footer__intro > p,
+.atlas-public .atlas-footer__column a,
+.atlas-public .atlas-footer__base,
+.atlas-public .atlas-footer__base a,
+.atlas-public .atlas-footer__notice p { color: var(--atlas-ink-soft); }
+.atlas-public .atlas-footer__column a:hover,
+.atlas-public .atlas-footer__base a:hover { color: var(--atlas-ink); }
+.atlas-public .atlas-footer__external,
+.atlas-public .atlas-footer__notice-mark { color: var(--atlas-jade-dark); }
 .atlas-public .atlas-footer__horizon { display: none; }
 .atlas-public .atlas-footer__grid { padding-top: 4rem; padding-bottom: 2rem; gap: 3rem; }
 .atlas-public .atlas-footer__brand strong { font-weight: 500; font-size: 1.7rem; }

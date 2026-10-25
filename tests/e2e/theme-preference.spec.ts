@@ -12,7 +12,7 @@ test.beforeEach(async ({ page }) => {
 })
 
 async function openMobileMenu(page: import('@playwright/test').Page, project: string) {
-  if (project === 'mobile') await page.locator('.atlas-site-header__mobile-menu > summary').click()
+  if (project === 'mobile') await page.getByRole('banner').locator('.atlas-site-header__mobile-menu > summary').click()
 }
 
 test('the user can apply a studio theme, change it in the header, and retain it across reloads', async ({ page }, testInfo) => {
@@ -22,11 +22,12 @@ test('the user can apply a studio theme, change it in the header, and retain it 
   expect(await page.evaluate(() => localStorage.getItem('studycn-theme'))).toBe('night')
   await page.goto('/en/universities', { waitUntil: 'domcontentloaded' })
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'night')
-  await expect(page.locator('.atlas-hero')).toHaveCSS('background-image', /rgb\(32, 41, 41\)/)
+  await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(21, 28, 28)')
+  await expect(page.getByRole('heading', { level: 1 })).toHaveCSS('color', 'rgb(233, 240, 235)')
   await page.reload({ waitUntil: 'domcontentloaded' })
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'night')
   await openMobileMenu(page, testInfo.project.name)
-  const theme = page.getByRole('combobox', { name: 'Theme', exact: true })
+  const theme = page.getByRole('banner').getByRole('combobox', { name: 'Theme', exact: true })
   await expect(theme).toHaveAttribute('value', 'night')
   await theme.click()
   await page.getByRole('option', { name: 'Ocean Studio', exact: true }).click()
@@ -40,10 +41,15 @@ test('the user can apply a studio theme, change it in the header, and retain it 
 test('public headers fit all six languages on desktop and mobile', async ({ page }, testInfo) => {
   for (const locale of ['zh', 'en', 'ru', 'de', 'fr', 'es']) {
     await page.goto(`/${locale}/universities`, { waitUntil: 'domcontentloaded' })
-    await expect(page.locator('.atlas-site-header__brand')).toBeVisible()
+    // Retained Activity trees are hidden from the accessibility tree. Still
+    // require one visible banner so an actual duplicate header cannot pass.
+    const header = page.getByRole('banner')
+    await expect(header).toHaveCount(1)
+    await expect(page.locator('.atlas-site-header:visible')).toHaveCount(1)
+    await expect(header.locator('.atlas-site-header__brand')).toBeVisible()
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
     for (const selector of ['.atlas-site-header__brand', '.atlas-site-header__tools', '.atlas-site-header__nav', '.atlas-site-header__mobile-menu > summary']) {
-      const element = page.locator(selector)
+      const element = header.locator(selector)
       if (await element.isVisible()) {
         const rect = await element.boundingBox()
         expect(rect!.x).toBeGreaterThanOrEqual(0)

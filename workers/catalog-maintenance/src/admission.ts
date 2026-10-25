@@ -1,6 +1,7 @@
 import { readBoundedBody } from '../../ingestion/src/body'
 import { isCurrentQuotaWindow } from '../../../scripts/ingestion/minimax-quota-window'
 import { control } from './repository'
+import { isDailyD1QuotaError } from './backend-errors'
 import type { DurableState, MaintenanceEnv, ModelRequest, ModelResult } from './types'
 import { authorized, canonical, digest, HASH, json, nowIso, record, requestJson } from './util'
 
@@ -76,7 +77,7 @@ export class ModelAdmission {
     } catch(error) {
       // A database quota failure before admission has not executed a model.
       // Preserve it as bounded waiting work instead of permanently holding it.
-      if(/7500|daily.{0,40}(?:read|quota|limit)|(?:read|quota).{0,40}daily/iu.test(String(error))){
+      if(isDailyD1QuotaError(error)){
         const next=new Date();next.setUTCHours(24,0,0,0)
         return json({ok:false,error:'quota_backend_wait',retryAfter:Math.max(60,Math.ceil((next.getTime()-Date.now())/1000))},429)
       }

@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { mockMapTiles } from './map-fixture'
+import { siteThemes } from '../../src/lib/site-themes'
 
 test.beforeEach(async ({ page }) => { await mockMapTiles(page) })
 
@@ -62,6 +63,23 @@ test('city and flagship guide pages pass scoped WCAG A/AA checks', async ({ page
     expect(blocking, path + ' accessibility violations').toEqual([])
   }
 })
+
+for (const theme of siteThemes) {
+  test(`the public footer retains WCAG AA contrast in the ${theme.id} theme`, async ({ page }) => {
+    await page.addInitScript(themeId => localStorage.setItem('studycn-theme', themeId), theme.id)
+    await page.goto('/en/guides/visa-and-arrival', { waitUntil: 'networkidle' })
+    await expect(page.locator('html')).toHaveAttribute('data-theme', theme.id)
+    await page.addScriptTag({ path: require.resolve('axe-core/axe.min.js') })
+    const result = await page.evaluate(async () => {
+      const footer = document.querySelector('.atlas-footer')
+      if (!footer) throw new Error('Public footer is missing')
+      const axe = (window as unknown as { axe: { run: (root: Element, options: object) => Promise<AxeResult> } }).axe
+      return axe.run(footer, { runOnly: { type: 'rule', values: ['color-contrast'] } })
+    })
+    expect(result.violations.map(violation => ({ id: violation.id, targets: violation.nodes.flatMap(node => node.target) })))
+      .toEqual([])
+  })
+}
 
 test('city markers expose 44px targets and mobile defaults to the overlap-safe directory', async ({ page }) => {
   await page.goto('/en/cities?view=constellation', { waitUntil: 'domcontentloaded' })
