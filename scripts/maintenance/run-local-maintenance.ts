@@ -17,10 +17,11 @@ import { openLocalRuntime } from './local-runtime'
 /** Temporary, durable execution staging. Canonical acceptance/publication stays in the cloud writer. */
 export async function runLocalMaintenance(options: {
   directory: string; seedFile: string; sourceFile: string; workerUrl: string; adminToken: string;
-  execute: boolean; maxJobs?: number; reparseCompletedPrograms?: boolean;
+  execute: boolean; maxJobs?: number; reparseCompletedPrograms?: boolean; reparseUniversityIds?: string[];
 }) {
   const directory = resolve(options.directory)
   if (!options.execute) throw new Error('explicit_execute_required')
+  if (existsSync(join(directory, 'continuation-incomplete.json'))) throw new Error('offline_continuation_clone_incomplete')
   if (!Number.isSafeInteger(options.maxJobs ?? 40) || (options.maxJobs ?? 40) < 1 || (options.maxJobs ?? 40) > 200) throw new Error('invalid_local_job_limit')
   if (existsSync(join(directory, 'handoff.json'))) throw new Error('offline_batch_frozen_for_handoff')
   const remote = new URL(options.workerUrl)
@@ -72,7 +73,10 @@ export async function runLocalMaintenance(options: {
       const response = await fetch(new URL(path, remote), { method: body === undefined ? 'GET' : 'POST', redirect: 'error',
         headers: { authorization: `Bearer ${options.adminToken}`, 'content-type': 'application/json' },
         body: body === undefined ? undefined : JSON.stringify(body), signal: AbortSignal.timeout(30000) })
-      if (!response.ok) throw new Error(`offline_cloud_coordination_http_${response.status}`)
+      if (!response.ok) {
+        const rejected = record(await response.json().catch(() => null)), code = String(rejected?.error ?? '')
+        throw new Error(`offline_cloud_coordination_http_${response.status}${/^[a-z_]{1,80}$/.test(code) ? ':' + code : ''}`)
+      }
       return response.json() as Promise<Record<string, unknown>>
     }
     const assertFence = async () => {
@@ -80,12 +84,17 @@ export async function runLocalMaintenance(options: {
       if (!observed || observed.batchId !== fence.batchId || observed.phase !== 'active'
         || observed.tokenSha256 !== await digest(fence.token) || observed.scopeRegistrySha256 !== scope.sha256
         || observed.inputCatalogSha256 !== cfg.input_catalog_sha256) throw new Error('offline_cloud_fence_not_owned')
+      for (const field of ['sourceManifestSha256', 'seedSha256', 'legacyGuardSha256'] as const)
+        if (observed[field] !== undefined && observed[field] !== fenceInput[field]) throw new Error('offline_cloud_intent_pin_mismatch')
     }
     const bootstrap = await remoteJson('/artifacts?key=maintenance/bootstrap-pending/initial.v1.json')
     if (bootstrap.seedSha256 !== cfg.seed_sha256 || bootstrap.scopeRegistrySha256 !== scope.sha256)
       throw new Error('offline_seed_does_not_match_immutable_cloud_history')
+    const existingFence = record((await remoteJson('/offline-fence')).fence)
+    const optionalPins = Object.fromEntries((['sourceManifestSha256', 'seedSha256', 'legacyGuardSha256'] as const)
+      .filter(field => !existingFence || existingFence[field] !== undefined).map(field => [field, fenceInput[field]]))
     await remoteJson('/offline-fence/acquire', { batchId: fence.batchId, token: fence.token,
-      scopeRegistrySha256: fence.scopeRegistrySha256, inputCatalogSha256: fence.inputCatalogSha256 })
+      scopeRegistrySha256: fence.scopeRegistrySha256, inputCatalogSha256: fence.inputCatalogSha256, ...optionalPins })
     await assertFence()
     const admission = new ModelAdmission({ storage: runtime.storage }, env, async (input, init) => {
       // The final cloud lease check is immediately before a paid POST. The production
@@ -94,8 +103,11 @@ export async function runLocalMaintenance(options: {
       return fetch(input, init)
     })
     env.MODEL_ADMISSION = { idFromName: name => name, get: () => ({ fetch: request => admission.fetch(request) }) }
-    if (!cfg.enabled) await setControls(env, { expectedRevision: cfg.revision, enabled: true, modelsEnabled: true,
-      legacyGuardSha256: cfg.legacy_guard_sha256, canaryUniversityIds: [...new Set(sources.map((source: { universityId: string }) => source.universityId))] })
+    const intendedSchools = [...new Set(sources.map((source: { universityId: string }) => source.universityId))].sort()
+    const currentSchools = JSON.parse(cfg.canary_json) as string[]
+    if (!cfg.enabled || !cfg.models_enabled || canonical([...currentSchools].sort()) !== canonical(intendedSchools))
+      await setControls(env, { expectedRevision: cfg.revision, enabled: true, modelsEnabled: true,
+        legacyGuardSha256: cfg.legacy_guard_sha256, canaryUniversityIds: intendedSchools })
     const selectedIds: string[] = []
     for (const source of sources) {
       const id = await digest(source.url), host = new URL(source.url).hostname
@@ -114,12 +126,16 @@ export async function runLocalMaintenance(options: {
         .bind(jobId, id, nowIso(), nowIso(), nowIso()).run()
     }
     if (options.reparseCompletedPrograms) {
+      if (options.reparseUniversityIds?.some(id => !intendedSchools.includes(id))) throw new Error('reparse_school_outside_intent')
+      const reparseIds = options.reparseUniversityIds?.length
+        ? [...new Set(await Promise.all(sources.filter((source: { universityId: string }) => options.reparseUniversityIds!.includes(source.universityId))
+          .map((source: { url: string }) => digest(source.url))))] : selectedIds
       // Re-run deterministic validation over completed saved responses. Request keys
       // and payloads remain unchanged; unknown/in-flight jobs are never reopened.
       await runtime.db.batch([
-        runtime.db.prepare('INSERT INTO maintenance_events VALUES(?,?,?,?)').bind(crypto.randomUUID(), 'offline_completed_program_reparse', nowIso(), canonical({ parserVersion: 2, sourceIds: selectedIds })),
-        runtime.db.prepare(`UPDATE maintenance_jobs SET status='queued',due_at=?,updated_at=? WHERE source_id IN(${selectedIds.map(() => '?').join(',')}) AND stage='extract' AND status='done' AND lease_token IS NULL`)
-          .bind(nowIso(), nowIso(), ...selectedIds),
+        runtime.db.prepare('INSERT INTO maintenance_events VALUES(?,?,?,?)').bind(crypto.randomUUID(), 'offline_completed_program_reparse', nowIso(), canonical({ parserVersion: 2, sourceIds: reparseIds })),
+        runtime.db.prepare(`UPDATE maintenance_jobs SET status='queued',due_at=?,updated_at=? WHERE source_id IN(${reparseIds.map(() => '?').join(',')}) AND stage='extract' AND status='done' AND lease_token IS NULL`)
+          .bind(nowIso(), nowIso(), ...reparseIds),
       ])
     }
     let processed = 0

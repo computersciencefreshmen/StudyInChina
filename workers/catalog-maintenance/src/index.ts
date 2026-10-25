@@ -16,7 +16,7 @@ import type { MaintenanceBatch, MaintenanceEnv, MaintenanceMessage } from './typ
 import { MaintenanceError } from './types'
 import { preparePendingBootstrap,registerBootstrapRequest,resumeBootstrapSeed,runCloudTick,runtimeStatus } from './runtime'
 import { after, authorized, gateRequest, HASH, json, nowIso, requestJson } from './util'
-import { uploadOfflineArtifact,uploadOfflineManifest,processOfflineHandoff,offlineHandoffMessage,offlineHandoffStatus } from './offline-handoff'
+import { uploadOfflineArtifact,uploadOfflineManifest,processOfflineHandoff,offlineHandoffMessage,offlineHandoffStatus,reopenOfflineHandoff } from './offline-handoff'
 
 export { ModelAdmission }
 export async function processMessage(env:MaintenanceEnv,message:MaintenanceMessage):Promise<void> {
@@ -83,6 +83,7 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
   try {
     if(url.pathname==='/offline-fence'&&request.method==='GET')return gateRequest(env,'/offline-fence/status',{})
     if(['/offline-fence/acquire','/offline-fence/release'].includes(url.pathname)&&request.method==='POST')return gateRequest(env,url.pathname,await requestJson(request,4096))
+    if(url.pathname==='/offline-fence/reopen'&&request.method==='POST')return json(await reopenOfflineHandoff(env,await requestJson(request,4096)))
     if(url.pathname==='/offline-handoff/artifact'&&request.method==='POST')return json(await uploadOfflineArtifact(env,request))
     if(url.pathname==='/offline-handoff/manifest'&&request.method==='POST')return json(await uploadOfflineManifest(env,request))
     if(url.pathname==='/offline-handoff'&&request.method==='GET')return json(await offlineHandoffStatus(env,url.searchParams.get('batchId')??''))
@@ -111,7 +112,7 @@ export async function handleFetch(request:Request,env:MaintenanceEnv):Promise<Re
     if(url.pathname==='/ack'&&request.method==='POST')return json(await acknowledge(env,await requestJson(request,65536)))
     if(url.pathname==='/artifacts'&&request.method==='GET') {
       const key=url.searchParams.get('key')??''
-      if(!/^maintenance\/[a-zA-Z0-9/_-]+(?:\.[a-zA-Z0-9]+)?$/.test(key)||key.includes('..'))throw new MaintenanceError('artifact_key_invalid')
+      if(!/^maintenance\/[a-zA-Z0-9/_-]+(?:\.[a-zA-Z0-9]+)*$/.test(key)||key.includes('..'))throw new MaintenanceError('artifact_key_invalid')
       const object=await env.SNAPSHOTS_BUCKET.get(key)
       if(!object)return json({ok:false,error:'artifact_not_found'},404)
       if(object.size!==undefined&&object.size>10*1024*1024)throw new MaintenanceError('artifact_too_large')

@@ -36,7 +36,7 @@ async function fixture(includeUnknown=true,withExport=false){
   const post=async(path:string,body:string,sha:string)=>handleFetch(new Request(`https://worker${path}`,{method:'POST',headers:{authorization:`Bearer ${f.env.MAINTENANCE_ADMIN_TOKEN}`,'x-offline-token':token,[path.includes('/artifact?')?'x-artifact-sha256':'x-manifest-sha256']:sha,'content-type':'application/octet-stream','content-length':String(new TextEncoder().encode(body).length)},body}),f.env)
   const stage=async(value:OfflineHandoff=manifest,corrupt=false)=>{for(const artifact of value.artifacts){const response=await post(`/offline-handoff/artifact?batchId=${batchId}&key=${encodeURIComponent(artifact.objectKey)}`,corrupt&&artifact.objectKey===rawKey?'corrupted bytes':bodies.get(artifact.objectKey)!,artifact.sha256);assert.equal(response.status,200)}const text=canonical(value),sha=await digest(text),response=await post(`/offline-handoff/manifest?batchId=${batchId}`,text,sha);assert.equal(response.status,200);return sha}
   const drain=async()=>{let count=0;while(f.messages.length){assert.ok(count++<100,'bounded handoff');await processMessage(f.env,f.messages.shift()!)}return count}
-  return{...f,manifest,stage,drain,sourceId,rawSha,checkedAt,network:()=>network,modelInput:{reservationKey,sourceId,snapshotSha256:rawSha,pass:'primary',lane:'maintenance',payload,universityIds:['uni-000']},unknownInput:{reservationKey:unknownKey,sourceId,snapshotSha256:rawSha,pass:'primary',lane:'maintenance',payload:unknownPayload,universityIds:['uni-000']}}
+  return{...f,manifest,stage,drain,post,sourceId,rawSha,checkedAt,network:()=>network,modelInput:{reservationKey,sourceId,snapshotSha256:rawSha,pass:'primary',lane:'maintenance',payload,universityIds:['uni-000']},unknownInput:{reservationKey:unknownKey,sourceId,snapshotSha256:rawSha,pass:'primary',lane:'maintenance',payload:unknownPayload,universityIds:['uni-000']}}
 }
 test('full staged handoff imports exact rows, preserves done/unknown, adopts cached models, acknowledges D1 then releases fence',async()=>{
   const f=await fixture(false)
@@ -99,4 +99,49 @@ test('corrupt raw artifacts or conflicting existing attempts hold the fence and 
 test('source hosts inherited only from disabled/candidate registrations cannot be activated by a handoff',async()=>{
   const f=await fixture()
   try{const school=JSON.parse(String(f.db.sqlite.prepare("SELECT seed_json FROM maintenance_schools WHERE university_id='uni-000'").get()?.seed_json));school.sourceSeeds.forEach((entry:Record<string,unknown>)=>{entry.enabled=false;entry.registration='candidate'});f.db.sqlite.prepare("UPDATE maintenance_schools SET seed_json=? WHERE university_id='uni-000'").run(JSON.stringify(school));await f.stage();await assert.rejects(f.drain(),/source_host_not_registered/);assert.ok((await(await gateRequest(f.env,'/offline-fence/status',{})).json()).fence)}finally{f.db.sqlite.close()}
+})
+async function reopen(f:Awaited<ReturnType<typeof fixture>>,sha:string,intent='5'.repeat(64)){
+  return handleFetch(new Request('https://worker/offline-fence/reopen',{method:'POST',headers:{authorization:`Bearer ${f.env.MAINTENANCE_ADMIN_TOKEN}`,'content-type':'application/json'},body:JSON.stringify({batchId,token,expectedManifestSha256:sha,sourceManifestSha256:intent})}),f.env)
+}
+test('unstarted handoff reopens without unfencing and a union successor preserves old history while retiring stale queue messages',async()=>{
+  const f=await fixture(false,true)
+  try{
+    const oldSha=await f.stage(),response=await reopen(f,oldSha);assert.equal(response.status,200);const opened=await response.json();assert.equal(opened.fence.phase,'active');assert.equal(opened.fence.epoch,1);assert.equal(opened.fence.manifestSha256,null);assert.ok(opened.fence.retiredManifests.includes(oldSha))
+    assert.ok(await f.bucket.get(`maintenance/offline-handoffs/${batchId}/retired/${oldSha}/pointer.json`));assert.ok(await f.bucket.get(`maintenance/offline-handoffs/${batchId}/manifests/${oldSha}.json`))
+    assert.equal((await gateRequest(f.env,'/fetch/acquire',{host:'test.edu.cn'})).status,429)
+    await assert.rejects(processOfflineHandoff(f.env,batchId,oldSha),/fence_mismatch/)
+    const oldBody=canonical(f.manifest);assert.equal((await f.post(`/offline-handoff/manifest?batchId=${batchId}`,oldBody,oldSha)).status,409)
+    const next=JSON.parse(canonical(f.manifest))as OfflineHandoff;next.tableRows.maintenance_jobs.push({...next.tableRows.maintenance_jobs[0],job_id:'continued-job'})
+    const nextSha=await f.stage(next);assert.notEqual(nextSha,oldSha)
+    assert.deepEqual(await processOfflineHandoff(f.env,batchId,oldSha),{complete:true,retired:true})
+    await f.drain();assert.equal((await(await gateRequest(f.env,'/offline-fence/status',{})).json()).fence,null);assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) count FROM maintenance_jobs').get()?.count,2);assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) count FROM maintenance_model_attempts').get()?.count,1);assert.equal(f.network(),0)
+  }finally{f.db.sqlite.close()}
+})
+test('reopen cannot race an import operation, auto-expire an unknown lease or pass an already attempted row phase',async()=>{
+  const f=await fixture(false)
+  try{
+    const sha=await f.stage(),tokenSha256=await digest(token),lease=await(await gateRequest(f.env,'/offline-fence/handoff-acquire',{batchId,tokenSha256,manifestSha256:sha})).json();assert.ok(lease.permitToken)
+    assert.equal((await reopen(f,sha)).status,409)
+    await gateRequest(f.env,'/fetch/acquire',{host:'blocked.test.edu.cn'});assert.equal((await reopen(f,sha)).status,409)
+    await gateRequest(f.env,'/offline-fence/handoff-rows',{batchId,tokenSha256,manifestSha256:sha,permitToken:lease.permitToken})
+    await gateRequest(f.env,'/offline-fence/handoff-release',{batchId,tokenSha256,manifestSha256:sha,permitToken:lease.permitToken})
+    assert.equal((await reopen(f,sha)).status,409);assert.equal((await source(f.env,f.sourceId))!.raw_sha256,null)
+  }finally{f.db.sqlite.close()}
+})
+test('a lost reopen archive write holds reopening and the exact retry resumes once without repeating retirement',async()=>{
+  const f=await fixture(false),put=f.bucket.put.bind(f.bucket);let fail=true
+  try{
+    const sha=await f.stage();f.bucket.put=async(key,body,options)=>{if(fail&&key.includes('/retired/')&&key.includes('/reopen-')){fail=false;throw new Error('lost archive write')}return put(key,body,options)}
+    assert.equal((await reopen(f,sha)).status,409);assert.equal((await(await gateRequest(f.env,'/offline-fence/status',{})).json()).fence.phase,'reopening')
+    const retry=await reopen(f,sha);assert.equal(retry.status,200);assert.equal((await retry.json()).fence.epoch,1)
+    const repeated=await reopen(f,sha);assert.equal(repeated.status,200);const value=await repeated.json();assert.equal(value.reused,true);assert.equal(value.fence.epoch,1)
+  }finally{f.db.sqlite.close()}
+})
+test('a successor cannot omit an old unknown attempt or reservation even when its own schema remains valid',async()=>{
+  const f=await fixture()
+  try{
+    const sha=await f.stage();assert.equal((await reopen(f,sha)).status,200)
+    const next=JSON.parse(canonical(f.manifest))as OfflineHandoff;next.tableRows.maintenance_model_attempts=next.tableRows.maintenance_model_attempts.filter(row=>row.status!=='unknown');next.requestReservations=next.requestReservations.filter(row=>row.state!=='unknown')
+    await f.stage(next);await assert.rejects(f.drain(),/offline_handoff_superset_invalid/);assert.ok((await(await gateRequest(f.env,'/offline-fence/status',{})).json()).fence);assert.equal((await source(f.env,f.sourceId))!.raw_sha256,null);assert.equal(f.network(),0)
+  }finally{f.db.sqlite.close()}
 })

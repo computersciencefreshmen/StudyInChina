@@ -6,8 +6,9 @@ import type { DurableState, MaintenanceEnv, ModelRequest, ModelResult } from './
 import { authorized, canonical, digest, HASH, json, nowIso, record, requestJson } from './util'
 
 export type PlanQuota = { checkedAt: string; fiveHourRemaining: number; weeklyRemaining: number; fiveHourStart: string; fiveHourReset: string; weeklyStart: string; weeklyReset: string }
-type Permit = { token: string; host?: string; lane?: string; expiresAt: number }
-export type OfflineFence={batchId:string;phase:'active'|'held_for_handoff'|'completed';tokenSha256:string;scopeRegistrySha256:string;inputCatalogSha256:string;acquiredAt:string;manifestSha256:string|null;releaseRequestedAt:string|null;seedSha256?:string;legacyGuardSha256?:string;sourceManifestSha256?:string;handoffAckSha256?:string}
+type Permit = { token: string; host?: string; lane?: string; expiresAt: number;kind?:'handoff'|'export';batchId?:string;manifestSha256?:string }
+type ReopenOperation={operationId:string;expectedManifestSha256:string;sourceManifestSha256:string;startedAt:string}
+export type OfflineFence={batchId:string;phase:'active'|'held_for_handoff'|'reopening'|'completed';tokenSha256:string;scopeRegistrySha256:string;inputCatalogSha256:string;acquiredAt:string;manifestSha256:string|null;releaseRequestedAt:string|null;seedSha256?:string;legacyGuardSha256?:string;sourceManifestSha256?:string;handoffAckSha256?:string;epoch?:number;retiredManifests?:string[];sourceManifestHistory?:string[];rowsStarted?:boolean;reopenOperation?:ReopenOperation}
 type GateState = { fetches: Permit[]; models: Permit[]; nextHost: Record<string,number>; successes: number; cooldownUntil: number;modelLimit:number;offlineFence?:OfflineFence }
 type Reservation = { state: 'send_started'|'completed'|'unknown'|'known_failed'; attemptId: string; requestSha256: string; result?: ModelResult;retryable?:boolean;notBefore?:number;attemptCount?:number }
 const initial = (): GateState => ({fetches:[],models:[],nextHost:{},successes:0,cooldownUntil:0,modelLimit:2})
@@ -55,7 +56,7 @@ function modelRequest(value:unknown):ModelRequest {
 export class ModelAdmission {
   constructor(private readonly state:DurableState,private readonly env:MaintenanceEnv,private readonly fetcher:typeof fetch=fetch) {}
   private async mutate<T>(fn:(state:GateState)=>T):Promise<T> {
-    return this.state.storage.transaction(async txn=>{const state=await txn.get<GateState>('gate')??initial(); const now=Date.now();state.fetches=state.fetches.filter(p=>p.expiresAt>now);state.models=state.models.filter(p=>p.expiresAt>now);for(const [host,next]of Object.entries(state.nextHost))if(next<now-60000)delete state.nextHost[host];const result=fn(state);await txn.put('gate',state);return result})
+    return this.state.storage.transaction(async txn=>{const state=await txn.get<GateState>('gate')??initial(); const now=Date.now();state.fetches=state.fetches.filter(p=>p.kind==='export'||p.kind==='handoff'||p.expiresAt>now);state.models=state.models.filter(p=>p.expiresAt>now);for(const [host,next]of Object.entries(state.nextHost))if(next<now-60000)delete state.nextHost[host];const result=fn(state);await txn.put('gate',state);return result})
   }
   async fetch(request:Request):Promise<Response> {
     if(!authorized(request,this.env)) return json({ok:false,error:'unauthorized'},401)
@@ -67,7 +68,19 @@ export class ModelAdmission {
         return json({ok:true,fence:gate.offlineFence??null,activeFetches:gate.fetches.length,activeModels:gate.models.length})
       }
       if(path==='/offline-fence/acquire'||path==='/offline-fence/release')return await this.offlineFence(path,raw)
+      if(['/offline-fence/handoff-acquire','/offline-fence/handoff-release','/offline-fence/handoff-rows','/offline-fence/reopen-begin','/offline-fence/reopen-finish','/offline-fence/reopen-abort'].includes(path))return await this.offlineCoordination(path,raw)
       if(path==='/offline-fence/adopt'||path==='/offline-fence/complete-handoff')return await this.offlineHandoff(path,raw)
+      if(path==='/export/acquire'){
+        if(Object.keys(raw).length)return json({ok:false,error:'export_request_invalid'},400)
+        const permit=await this.mutate(state=>{if(state.offlineFence)return'offline-fenced' as const;if(state.fetches.length>=8)return null;const next:Permit={token:crypto.randomUUID(),kind:'export',expiresAt:Number.MAX_SAFE_INTEGER};state.fetches.push(next);return next})
+        if(permit==='offline-fenced')return json({ok:false,error:'export_capacity_offline_fenced',retryAfter:300},429)
+        return permit?json({ok:true,token:permit.token}):json({ok:false,error:'export_capacity',retryAfter:30},429)
+      }
+      if(path==='/export/release'){
+        if(Object.keys(raw).some(key=>key!=='token')||typeof raw.token!=='string'||raw.token.length<16||raw.token.length>128)return json({ok:false,error:'export_request_invalid'},400)
+        await this.mutate(state=>{state.fetches=state.fetches.filter(permit=>permit.kind!=='export'||permit.token!==raw.token)})
+        return json({ok:true})
+      }
       if(path==='/fetch/acquire') {
         const host=String(raw.host??'')
         if(!/^[a-z0-9.-]{3,253}$/.test(host)||!host.includes('.')||host.includes('..')) return json({ok:false,error:'invalid_host'},400)
@@ -76,7 +89,7 @@ export class ModelAdmission {
         return permit?json({ok:true,token:permit.token}):json({ok:false,error:'fetch_capacity_or_host_cooldown',retryAfter:30},429)
       }
       if(path==='/fetch/release') {
-        await this.mutate(state=>{const permit=state.fetches.find(p=>p.token===raw.token);if(permit?.host)state.nextHost[permit.host]=Date.now()+5000;state.fetches=state.fetches.filter(p=>p.token!==raw.token)})
+        await this.mutate(state=>{const permit=state.fetches.find(p=>p.token===raw.token&&!p.kind);if(permit?.host)state.nextHost[permit.host]=Date.now()+5000;state.fetches=state.fetches.filter(p=>p.token!==raw.token||Boolean(p.kind))})
         return json({ok:true})
       }
       if(path==='/model/run') return await this.run(modelRequest(raw))
@@ -91,6 +104,43 @@ export class ModelAdmission {
       }
       return json({ok:false,error:'invalid_or_unavailable_admission'},400)
     }
+  }
+  private async offlineCoordination(path:string,raw:Record<string,unknown>):Promise<Response>{
+    if(typeof raw.batchId!=='string'||!/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,100}$/.test(raw.batchId)||!HASH.test(String(raw.tokenSha256)))return json({ok:false,error:'offline_coordination_invalid'},400)
+    if(path.endsWith('/reopen-finish')){
+      const state=await this.state.storage.get<GateState>('gate'),held=state?.offlineFence,operation=held?.reopenOperation
+      if(!held||held.batchId!==raw.batchId||held.tokenSha256!==raw.tokenSha256||held.phase!=='reopening'||!operation||operation.operationId!==raw.operationId||raw.archiveKey!==`maintenance/offline-handoffs/${raw.batchId}/retired/${operation.expectedManifestSha256}/reopen-${operation.operationId}.json`||!HASH.test(String(raw.archiveSha256)))return json({ok:false,error:'offline_reopen_conflict'},409)
+      const object=await this.env.SNAPSHOTS_BUCKET.get(String(raw.archiveKey));if(!object||object.size!==undefined&&object.size>65536)return json({ok:false,error:'offline_reopen_archive_invalid'},409)
+      const text=await object.text(),archive=record(JSON.parse(text));if(await digest(text)!==raw.archiveSha256||archive?.batchId!==held.batchId||archive.retiredManifestSha256!==operation.expectedManifestSha256||archive.sourceManifestSha256!==operation.sourceManifestSha256||archive.operationId!==operation.operationId||archive.previousEpoch!==(held.epoch??0)||archive.scopeRegistrySha256!==held.scopeRegistrySha256||archive.inputCatalogSha256!==held.inputCatalogSha256)return json({ok:false,error:'offline_reopen_archive_invalid'},409)
+    }
+    const result=await this.state.storage.transaction(async txn=>{
+      const gate=await txn.get<GateState>('gate')??initial(),held=gate.offlineFence,historyKey=`offline-fence:${raw.batchId}`
+      if(path.endsWith('/handoff-acquire')){const closed=await txn.get<OfflineFence>(historyKey);if(closed?.phase==='completed'&&closed.tokenSha256===raw.tokenSha256&&closed.manifestSha256===raw.manifestSha256)return{ok:true,completed:true}}
+      if(path.endsWith('/handoff-release')){const permit=gate.fetches.find(value=>value.token===raw.permitToken);if(!permit)return{ok:true,released:true};if(permit.kind!=='handoff'||permit.batchId!==raw.batchId||permit.manifestSha256!==raw.manifestSha256||held&&held.tokenSha256!==raw.tokenSha256)return{ok:false,error:'offline_handoff_permit_invalid'};gate.fetches=gate.fetches.filter(value=>value.token!==raw.permitToken);await txn.put('gate',gate);return{ok:true,released:true}}
+      if(!held||held.batchId!==raw.batchId||held.tokenSha256!==raw.tokenSha256)return{ok:false,error:'offline_fence_ownership_invalid'}
+      if(path.endsWith('/handoff-acquire')){
+        if(!HASH.test(String(raw.manifestSha256))||held.phase!=='held_for_handoff'||held.manifestSha256!==raw.manifestSha256||held.retiredManifests?.includes(String(raw.manifestSha256)))return{ok:false,error:'offline_handoff_fence_mismatch'}
+        if(gate.fetches.length||gate.models.length)return{ok:false,error:'offline_handoff_operation_busy'}
+        const permit:Permit={token:crypto.randomUUID(),kind:'handoff',batchId:held.batchId,manifestSha256:String(raw.manifestSha256),expiresAt:Number.MAX_SAFE_INTEGER};gate.fetches.push(permit);await txn.put('gate',gate);return{ok:true,permitToken:permit.token,epoch:held.epoch??0}
+      }
+      if(path.endsWith('/handoff-rows')){
+        if(held.phase!=='held_for_handoff'||held.manifestSha256!==raw.manifestSha256||!gate.fetches.some(value=>value.kind==='handoff'&&value.token===raw.permitToken&&value.batchId===held.batchId&&value.manifestSha256===held.manifestSha256))return{ok:false,error:'offline_handoff_permit_invalid'}
+        held.rowsStarted=true;await txn.put('gate',gate);await txn.put(historyKey,held);return{ok:true,rowsStarted:true}
+      }
+      if(path.endsWith('/reopen-begin')){
+        if(!HASH.test(String(raw.expectedManifestSha256))||!HASH.test(String(raw.sourceManifestSha256)))return{ok:false,error:'offline_reopen_request_invalid'}
+        if(held.phase==='active'&&held.retiredManifests?.includes(String(raw.expectedManifestSha256))&&held.sourceManifestSha256===raw.sourceManifestSha256)return{ok:true,reopened:true,reused:true,fence:held}
+        if(held.phase==='reopening'&&held.reopenOperation?.expectedManifestSha256===raw.expectedManifestSha256&&held.reopenOperation?.sourceManifestSha256===raw.sourceManifestSha256)return{ok:true,reopened:false,reused:true,fence:held}
+        if(held.phase!=='held_for_handoff'||held.manifestSha256!==raw.expectedManifestSha256||held.rowsStarted||gate.fetches.length||gate.models.length||held.sourceManifestSha256===raw.sourceManifestSha256||held.sourceManifestHistory?.includes(String(raw.sourceManifestSha256)))return{ok:false,error:'offline_reopen_not_safe'}
+        held.phase='reopening';held.reopenOperation={operationId:crypto.randomUUID(),expectedManifestSha256:String(raw.expectedManifestSha256),sourceManifestSha256:String(raw.sourceManifestSha256),startedAt:nowIso()};await txn.put('gate',gate);await txn.put(historyKey,held);return{ok:true,reopened:false,reused:false,fence:held}
+      }
+      const operation=held.reopenOperation
+      if(held.phase!=='reopening'||!operation||operation.operationId!==raw.operationId||gate.fetches.length||gate.models.length)return{ok:false,error:'offline_reopen_conflict'}
+      if(path.endsWith('/reopen-abort')){held.phase='held_for_handoff';delete held.reopenOperation;await txn.put('gate',gate);await txn.put(historyKey,held);return{ok:true,reopened:false}}
+      if(path.endsWith('/reopen-finish')){held.phase='active';held.retiredManifests=[...(held.retiredManifests??[]),operation.expectedManifestSha256];held.sourceManifestHistory=[...(held.sourceManifestHistory??[]),...(held.sourceManifestSha256?[held.sourceManifestSha256]:[])];held.sourceManifestSha256=operation.sourceManifestSha256;held.epoch=(held.epoch??0)+1;held.manifestSha256=null;held.releaseRequestedAt=null;held.rowsStarted=false;delete held.reopenOperation;await txn.put('gate',gate);await txn.put(historyKey,held);return{ok:true,reopened:true,reused:false,fence:held}}
+      return{ok:false,error:'offline_coordination_invalid'}
+    })
+    return json(result,result.ok?200:409)
   }
   private async offlineHandoff(path:string,raw:Record<string,unknown>):Promise<Response>{
     if(typeof raw.batchId!=='string'||!/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,100}$/.test(raw.batchId)||!HASH.test(String(raw.tokenSha256))||!HASH.test(String(raw.manifestSha256)))return json({ok:false,error:'offline_handoff_request_invalid'},400)
@@ -132,7 +182,7 @@ export class ModelAdmission {
     if(!ack||await digest(ack.details_json)!==raw.acknowledgementSha256)return json({ok:false,error:'offline_handoff_ack_missing'},409)
     const proof=record(JSON.parse(ack.details_json)),adopted=await this.state.storage.get<Record<string,Record<string,unknown>>>(adoptionKey)??{},requests=Object.values(adopted).sort((a,b)=>String(a.reservationKey).localeCompare(String(b.reservationKey)))
     if(!proof||proof.batchId!==raw.batchId||proof.manifestSha256!==raw.manifestSha256||proof.tokenSha256!==raw.tokenSha256||proof.requestReservationsSha256!==await digest(canonical(requests))||proof.requestReservationCount!==requests.length)return json({ok:false,error:'offline_handoff_ack_invalid'},409)
-    await this.state.storage.transaction(async txn=>{const current=await txn.get<GateState>('gate')??initial(),held=current.offlineFence;if(!held||held.batchId!==raw.batchId||held.manifestSha256!==raw.manifestSha256||current.models.length||current.fetches.length)throw new Error('offline_handoff_fence_mismatch');await txn.put(historyKey,{...held,phase:'completed',handoffAckSha256:raw.acknowledgementSha256});delete current.offlineFence;await txn.put('gate',current)})
+    await this.state.storage.transaction(async txn=>{const current=await txn.get<GateState>('gate')??initial(),held=current.offlineFence,own=current.fetches.find(value=>value.kind==='handoff'&&value.token===raw.permitToken&&value.batchId===raw.batchId&&value.manifestSha256===raw.manifestSha256);if(!held||held.batchId!==raw.batchId||held.manifestSha256!==raw.manifestSha256||current.models.length||!own||current.fetches.length!==1)throw new Error('offline_handoff_fence_mismatch');await txn.put(historyKey,{...held,phase:'completed',handoffAckSha256:raw.acknowledgementSha256});delete current.offlineFence;current.fetches=[];await txn.put('gate',current)})
     return json({ok:true,released:true,reused:false})
   }
   private async offlineFence(path:string,raw:Record<string,unknown>):Promise<Response>{
@@ -145,7 +195,7 @@ export class ModelAdmission {
     const result=await this.state.storage.transaction(async txn=>{
       const gate=await txn.get<GateState>('gate')??initial(),history=await txn.get<OfflineFence>(key),old=gate.offlineFence
       if(acquire){
-        if(old){if(old.batchId===raw.batchId&&old.tokenSha256===tokenSha256&&old.scopeRegistrySha256===raw.scopeRegistrySha256&&old.inputCatalogSha256===raw.inputCatalogSha256&&['seedSha256','legacyGuardSha256','sourceManifestSha256'].every(field=>old[field as keyof OfflineFence]===raw[field]))return{ok:true,fence:old,reused:true};return{ok:false,error:'offline_fence_already_held'}}
+        if(old){if(old.batchId===raw.batchId&&old.tokenSha256===tokenSha256&&old.scopeRegistrySha256===raw.scopeRegistrySha256&&old.inputCatalogSha256===raw.inputCatalogSha256&&['seedSha256','legacyGuardSha256','sourceManifestSha256'].every(field=>raw[field]===undefined||old[field as keyof OfflineFence]===raw[field]))return{ok:true,fence:old,reused:true};return{ok:false,error:'offline_fence_already_held'}}
         if(history)return{ok:false,error:'offline_fence_batch_closed'}
         // Retain even expired permits until normal reconciliation drains them;
         // expiry alone cannot prove a model request was never sent.
@@ -155,6 +205,7 @@ export class ModelAdmission {
         gate.offlineFence=fence;await txn.put('gate',gate);await txn.put(key,fence);return{ok:true,fence,reused:false}
       }
       if(!old||!history||old.batchId!==raw.batchId||old.tokenSha256!==tokenSha256||history.tokenSha256!==tokenSha256)return{ok:false,error:'offline_fence_ownership_invalid'}
+      if(!['active','held_for_handoff'].includes(old.phase)||old.retiredManifests?.includes(String(raw.manifestSha256)))return{ok:false,error:'offline_fence_manifest_retired'}
       if(old.manifestSha256&&old.manifestSha256!==raw.manifestSha256)return{ok:false,error:'offline_fence_manifest_conflict'}
       const fence:OfflineFence={...old,phase:'held_for_handoff',manifestSha256:raw.manifestSha256 as string,releaseRequestedAt:old.releaseRequestedAt??nowIso()}
       gate.offlineFence=fence;await txn.put('gate',gate);await txn.put(key,fence);return{ok:true,fence,released:false,handoffRequired:true}

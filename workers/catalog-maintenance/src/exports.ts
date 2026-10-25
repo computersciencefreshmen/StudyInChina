@@ -5,17 +5,17 @@ import { MaintenanceError } from './types'
 import { canonical, digest, gateRequest, HASH, ID, nowIso, record } from './util'
 
 type ExportRow={batch_id:string;input_catalog_sha256:string;scope_sha256:string;object_key:string;sha256:string;created_at:string;status:'prepared'|'applied'|'published'|'rejected';acknowledgement_sha256:string|null;acknowledgement_json:string|null}
-/** A writer operation holds an existing global fetch permit, without fetching
- * this internal host. Offline acquisition requires zero permits, so it cannot
- * slip between an export's admission and its D1 claim/acknowledgement CAS. */
+/** A writer operation holds a non-expiring internal permit until finally.
+ * Offline acquisition requires zero permits, so elapsed time cannot admit a
+ * fence during a slow D1 claim/acknowledgement. Unknown crashes stay blocked. */
 async function withExportPermit<T>(env:MaintenanceEnv,operation:()=>Promise<T>):Promise<T>{
   let permit:Record<string,unknown>|null=null
   try{
-    const response=await gateRequest(env,'/fetch/acquire',{host:`export-${crypto.randomUUID()}.maintenance.internal`})
+    const response=await gateRequest(env,'/export/acquire',{})
     permit=record(await response.json())
-    if(!response.ok||permit?.ok!==true||typeof permit.token!=='string')throw new MaintenanceError(permit?.error==='fetch_capacity_offline_fenced'?'offline_handoff_wait':'export_capacity_wait',300)
+    if(!response.ok||permit?.ok!==true||typeof permit.token!=='string')throw new MaintenanceError(permit?.error==='export_capacity_offline_fenced'?'offline_handoff_wait':'export_capacity_wait',300)
   }catch(error){if(error instanceof MaintenanceError)throw error;throw new MaintenanceError('offline_handoff_wait',300)}
-  try{return await operation()}finally{await gateRequest(env,'/fetch/release',{token:permit.token})}
+  try{return await operation()}finally{await gateRequest(env,'/export/release',{token:permit.token})}
 }
 export function readExport(env:MaintenanceEnv,id:string):Promise<CandidateExport>{return withExportPermit(env,()=>readExportData(env,id))}
 async function readExportData(env:MaintenanceEnv,id:string):Promise<CandidateExport> {

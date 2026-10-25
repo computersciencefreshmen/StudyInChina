@@ -1,0 +1,138 @@
+{
+  "format": "studyinchina.minimax-school-expansion-continuation-receipt",
+  "version": 1,
+  "observedAt": "2026-10-25T12:54:03.275Z",
+  "fixedSchoolScope": 272,
+  "parentManifestSha256": "691edeb2d46c0e34fd998e34981bd03c16a63d6c417e9c0f69c2396296f6e8de",
+  "sourceManifestSha256": "42d0b7aee25626f3c8c6d9e8e9294c505ef51c6fdc03ffcc28acd96a7cb6c286",
+  "newRequests": 12,
+  "totalRequests": 18,
+  "priorRequestsRepeated": 0,
+  "unknownRequests": 0,
+  "newRequestTokens": {
+    "input": 29111,
+    "output": 7064
+  },
+  "newProgrammeIdentities": [
+    {
+      "universityId": "uni-beijing-foreign-studies-university",
+      "proposalId": "maintenance-dc1a676a88b1b92faa35701c532d9d71259acf4a51430f8ae1386dd59fff9c05",
+      "name": {
+        "en": "Computer Science & Technology (Language Intelligence)"
+      },
+      "degreeLevel": "bachelor",
+      "sourceUrl": "https://osao.bfsu.edu.cn/info/2612/7182.htm",
+      "sourceSha256": "2077792799a8271076340e715dc50be8835cb60a0b03e714492aa25733ad0329",
+      "scope": {
+        "intake": null,
+        "year": null
+      }
+    },
+    {
+      "universityId": "uni-zhejiang-gongshang-university",
+      "proposalId": "maintenance-4178343ca4f97fec4971c06a7ac0d323c21dcc11bbdd590624da53a85739d334",
+      "name": {
+        "zh": "金融学院CFA项目"
+      },
+      "degreeLevel": "bachelor",
+      "sourceUrl": "https://sie.zjgsu.edu.cn/main.htm",
+      "sourceSha256": "98794a5a5b8468765b118dcd801cc63d774324c3b0031b8b9f2c7d98a90de213",
+      "scope": {
+        "intake": null,
+        "year": null
+      }
+    }
+  ],
+  "independentCanonicalPreview": {
+    "accepted": 14,
+    "held": 0,
+    "receiptSha256": "335919b9d871b72ea78a139a105c10fb5d69c66c0e3862bb8c82e4aee75ab63e",
+    "currentCanonicalCoverage": {
+      "cohort": 272,
+      "directory": 255,
+      "withDirectoryPrograms": 17,
+      "withCurrentOpportunities": 9,
+      "withoutDirectoryPrograms": 255,
+      "parentIdentityPending": 17,
+      "directoryProgrammes": 783,
+      "directoryScholarships": 7,
+      "programs": 738,
+      "admissionCycles": 738,
+      "scholarships": 0
+    },
+    "candidateCoverage": {
+      "cohort": 272,
+      "directory": 255,
+      "withDirectoryPrograms": 20,
+      "withCurrentOpportunities": 9,
+      "withoutDirectoryPrograms": 252,
+      "parentIdentityPending": 17,
+      "directoryProgrammes": 797,
+      "directoryScholarships": 7,
+      "programs": 738,
+      "admissionCycles": 738,
+      "scholarships": 0
+    },
+    "applied": false,
+    "published": false
+  },
+  "cloud": {
+    "batchId": "offline-d341d867-61fa-4c8b-8dfb-7e712c09c5ee",
+    "manifestSha256": "599c2b72a7518c25cfc7e41c85df4eae53e327f17b8d21bc89fd74daf2b80c95",
+    "artifactCount": 94,
+    "rowCount": 113,
+    "requestReservationCount": 18,
+    "transportUploaded": true,
+    "manifestReadBack": true,
+    "supersetValidatedLocally": true,
+    "importedIntoD1": false,
+    "backendState": "quota_wait",
+    "retryAt": "2026-10-26T00:00:00Z"
+  },
+  "newSchoolsOutsideFixedScope": {
+    "status": "discovery_only",
+    "rawBytesCaptured": false,
+    "programmeAcceptance": false,
+    "schools": [
+      {
+        "registryId": "moe-4111010012",
+        "nameZh": "北京服装学院",
+        "nameEn": "Beijing Institute of Fashion Technology",
+        "officialUrl": "https://gjy.bift.edu.cn/zsxx/6e3639c5d7b04bb080a6cd4f9e1e1dcf.htm",
+        "catalogueUrls": [],
+        "nextAction": "Capture the official page and programme-table images using robots/public-HTTPS checks; obtain national-registry school identity proof before adding a new explicit scope."
+      },
+      {
+        "registryId": "moe-4111010015",
+        "nameZh": "北京印刷学院",
+        "nameEn": "Beijing Institute of Graphic Communication",
+        "officialUrl": "https://sie.bigc.edu.cn/docs/2025-12/89bfa29ba40049dba2d9665a4313f6ce.pdf",
+        "catalogueUrls": [],
+        "nextAction": "Capture exact PDF bytes and checksum-bound Poppler text; add only after the new school's identity and an explicitly widened scope are approved."
+      },
+      {
+        "registryId": "moe-4111010025",
+        "nameZh": "首都医科大学",
+        "nameEn": "Capital Medical University",
+        "officialUrl": "https://yjsh.ccmu.edu.cn/zsgz/zsjz/d5881bc0228c49408af914609f5996eb.htm",
+        "catalogueUrls": [
+          "https://yjsh.ccmu.edu.cn/docs//2025-12/3c2e84c10f6f475e80fcbe30e22fc2cd.pdf",
+          "https://yjsh.ccmu.edu.cn/docs//2025-12/19c82285814c4de1b902f078f1eb7900.pdf"
+        ],
+        "nextAction": "Capture both official PDF catalogues and prospectus with hashes; keep programme code plus degree as identity key and separate annual cycles."
+      },
+      {
+        "registryId": "moe-4111010049",
+        "nameZh": "中国戏曲学院",
+        "nameEn": "The National Academy of Chinese Theatre Arts",
+        "officialUrl": "https://www.nacta.edu.cn/xwgg/zsxx/lxszs/11f444989cf341169e6ff5155b79c33d.htm",
+        "catalogueUrls": [
+          "https://www.nacta.edu.cn/docs//2025-12/f1ad331eeb154131ab9d6e6aa470a86a.docx"
+        ],
+        "nextAction": "Capture the official DOCX safely and parse its Office XML deterministically; defer programme extraction until that attachment is read."
+      }
+    ]
+  },
+  "full272DirectoryReconciled": false,
+  "sha256": "cad6283cea4d58d7ecd87ecfb58bcea878f3c3eb7aea84a15bf4b17e52bc310c"
+}

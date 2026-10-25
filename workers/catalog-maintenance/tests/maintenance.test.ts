@@ -12,6 +12,16 @@ import { makeEnv, quotaResponse, seedInput, TEST_CATALOG, TEST_GUARDS } from './
 async function enabled(fixture:ReturnType<typeof makeEnv>,models=true){await seed(fixture.env,seedInput());await setControls(fixture.env,{expectedRevision:0,legacyGuardSha256:TEST_GUARDS,enabled:true,modelsEnabled:models,canaryUniversityIds:['uni-000']})}
 const modelRequest=async():Promise<ModelRequest>=>({reservationKey:await digest('request-one'),sourceId:await digest('https://test.edu.cn/catalog'),universityIds:['uni-000'],snapshotSha256:'d'.repeat(64),pass:'primary',payload:'explicit test payload',lane:'expansion',recordIds:[]})
 
+test('authenticated versioned bootstrap evidence is readable while traversal stays rejected',async()=>{
+  const f=makeEnv(),key='maintenance/bootstrap-pending/initial.v1.json',headers={authorization:`Bearer ${f.env.MAINTENANCE_ADMIN_TOKEN}`}
+  await f.bucket.put(key,'{"seedSha256":"pinned-history"}')
+  const response=await handleFetch(new Request(`https://worker/artifacts?key=${encodeURIComponent(key)}`,{headers}),f.env)
+  assert.equal(response.status,200);assert.equal(await response.text(),'{"seedSha256":"pinned-history"}')
+  assert.equal((await handleFetch(new Request(`https://worker/artifacts?key=${encodeURIComponent(key)}`),f.env)).status,401)
+  assert.equal((await handleFetch(new Request('https://worker/artifacts?key=maintenance/a/../secret',{headers}),f.env)).status,409)
+  f.db.sqlite.close()
+})
+
 test('seed is fixed to272, initially disabled, immutable and complete before canary activation',async()=>{
   const fixture=makeEnv();await seed(fixture.env,seedInput());assert.equal((await control(fixture.env))?.enabled,0);assert.equal((await control(fixture.env))?.seed_complete,1)
   assert.equal((await seed(fixture.env,seedInput())).reused,true)
